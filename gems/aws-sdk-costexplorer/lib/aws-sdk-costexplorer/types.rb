@@ -26,8 +26,8 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] dimension_value
-    #   The dimension for the anomaly (for example, an Amazon Web Services
-    #   service in a service monitor).
+    #   The dimension for the anomaly (for example, an Amazon Web Service in
+    #   a service monitor).
     #   @return [String]
     #
     # @!attribute [rw] root_causes
@@ -346,6 +346,63 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
+    # The cost allocation tag structure. This includes detailed metadata for
+    # the `CostAllocationTag` object.
+    #
+    # @!attribute [rw] tag_key
+    #   The key for the cost allocation tag.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of cost allocation tag. You can use `AWSGenerated` or
+    #   `UserDefined` type tags. `AWSGenerated` type tags are tags that
+    #   Amazon Web Services defines and applies to support Amazon Web
+    #   Services resources for cost allocation purposes. `UserDefined` type
+    #   tags are tags that you define, create, and apply to resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of a cost allocation tag.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CostAllocationTag AWS API Documentation
+    #
+    class CostAllocationTag < Struct.new(
+      :tag_key,
+      :type,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The cost allocation tag status. The status of a key can either be
+    # active or inactive.
+    #
+    # @note When making an API call, you may pass CostAllocationTagStatusEntry
+    #   data as a hash:
+    #
+    #       {
+    #         tag_key: "TagKey", # required
+    #         status: "Active", # required, accepts Active, Inactive
+    #       }
+    #
+    # @!attribute [rw] tag_key
+    #   The key for the cost allocation tag.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of a cost allocation tag.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CostAllocationTagStatusEntry AWS API Documentation
+    #
+    class CostAllocationTagStatusEntry < Struct.new(
+      :tag_key,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The structure of Cost Categories. This includes detailed metadata and
     # the set of rules for the `CostCategory` object.
     #
@@ -405,14 +462,14 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # When creating or updating a cost category, you can define the
+    # When you create or update a cost category, you can define the
     # `CostCategoryRule` rule type as `INHERITED_VALUE`. This rule type adds
-    # the flexibility of defining a rule that dynamically inherits the cost
-    # category value from the dimension value defined by
-    # `CostCategoryInheritedValueDimension`. For example, if you want to
-    # dynamically group costs that are based on the value of a specific tag
-    # key, first choose an inherited value rule type, then choose the tag
-    # dimension and specify the tag key to use.
+    # the flexibility to define a rule that dynamically inherits the cost
+    # category value from the dimension value that's defined by
+    # `CostCategoryInheritedValueDimension`. For example, suppose that you
+    # want to dynamically group costs that are based on the value of a
+    # specific tag key. First, choose an inherited value rule type, and then
+    # choose the tag dimension and specify the tag key to use.
     #
     # @note When making an API call, you may pass CostCategoryInheritedValueDimension
     #   data as a hash:
@@ -427,7 +484,7 @@ module Aws::CostExplorer
     #
     #   If you specify `LINKED_ACCOUNT_NAME`, the cost category value is
     #   based on account name. If you specify `TAG`, the cost category value
-    #   will be based on the value of the specified tag key.
+    #   is based on the value of the specified tag key.
     #   @return [String]
     #
     # @!attribute [rw] dimension_key
@@ -597,12 +654,13 @@ module Aws::CostExplorer
     # @!attribute [rw] type
     #   You can define the `CostCategoryRule` rule type as either `REGULAR`
     #   or `INHERITED_VALUE`. The `INHERITED_VALUE` rule type adds the
-    #   flexibility of defining a rule that dynamically inherits the cost
-    #   category value from the dimension value defined by
-    #   `CostCategoryInheritedValueDimension`. For example, if you want to
-    #   dynamically group costs based on the value of a specific tag key,
-    #   first choose an inherited value rule type, then choose the tag
-    #   dimension and specify the tag key to use.
+    #   flexibility to define a rule that dynamically inherits the cost
+    #   category value. This value is from the dimension value that's
+    #   defined by `CostCategoryInheritedValueDimension`. For example,
+    #   suppose that you want to costs to be dynamically grouped based on
+    #   the value of a specific tag key. First, choose an inherited value
+    #   rule type, and then choose the tag dimension and specify the tag key
+    #   to use.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CostCategoryRule AWS API Documentation
@@ -945,7 +1003,7 @@ module Aws::CostExplorer
     # @!attribute [rw] resource_tags
     #   An optional list of tags to associate with the specified [
     #   `AnomalyMonitor` ][1]. You can use resource tags to control access
-    #   to your monitor using IAM policies.
+    #   to your `monitor` using IAM policies.
     #
     #   Each tag consists of a key and a value, and each key must be unique
     #   for the resource. The following restrictions apply to resource tags:
@@ -958,8 +1016,8 @@ module Aws::CostExplorer
     #
     #   * The maximum length of a value is 256 characters
     #
-    #   * Valid characters for keys and values are: `A-Z`, `a-z`, spaces,
-    #     `_.:/=+-`
+    #   * Keys and values can only contain alphanumeric characters, spaces,
+    #     and any of the following: `_.:/=+@-`
     #
     #   * Keys and values are case sensitive
     #
@@ -1043,8 +1101,8 @@ module Aws::CostExplorer
     #
     #   * The maximum length of a value is 256 characters
     #
-    #   * Valid characters for keys and values are: `A-Z`, `a-z`, spaces,
-    #     `_.:/=+-`
+    #   * Keys and values can only contain alphanumeric characters, spaces,
+    #     and any of the following: `_.:/=+@-`
     #
     #   * Keys and values are case sensitive
     #
@@ -1191,8 +1249,8 @@ module Aws::CostExplorer
     #
     #   * The maximum length of a value is 256 characters
     #
-    #   * Valid characters for keys and values are: `A-Z`, `a-z`, spaces,
-    #     `_.:/=+-`
+    #   * Keys and values can only contain alphanumeric characters, spaces,
+    #     and any of the following: `_.:/=+@-`
     #
     #   * Keys and values are case sensitive
     #
@@ -1429,7 +1487,7 @@ module Aws::CostExplorer
     #
     # @!attribute [rw] effective_end
     #   The effective end date of the Cost Category as a result of deleting
-    #   it. No costs after this date will be categorized by the deleted Cost
+    #   it. No costs after this date is categorized by the deleted Cost
     #   Category.
     #   @return [String]
     #
@@ -1713,7 +1771,7 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # Utilization metrics of the instance.
+    # Utilization metrics for the instance.
     #
     # @!attribute [rw] max_cpu_utilization_percentage
     #   The maximum observed or expected CPU utilization of the instance.
@@ -2552,8 +2610,8 @@ module Aws::CostExplorer
     #   usage numbers without taking the units into account. For example, if
     #   you aggregate `usageQuantity` across all of Amazon EC2, the results
     #   aren't meaningful because Amazon EC2 compute hours and data
-    #   transfer are measured in different units (for example, hours vs.
-    #   GB). To get more meaningful `UsageQuantity` metrics, filter by
+    #   transfer are measured in different units (for example, hour or GB).
+    #   To get more meaningful `UsageQuantity` metrics, filter by
     #   `UsageType` or `UsageTypeGroups`.
     #
     #    </note>
@@ -2601,7 +2659,7 @@ module Aws::CostExplorer
     #   @return [Array<Types::GroupDefinition>]
     #
     # @!attribute [rw] results_by_time
-    #   The time period that is covered by the results in the response.
+    #   The time period that's covered by the results in the response.
     #   @return [Array<Types::ResultByTime>]
     #
     # @!attribute [rw] dimension_value_attributes
@@ -2674,11 +2732,10 @@ module Aws::CostExplorer
     # @!attribute [rw] search_string
     #   The value that you want to search the filter values for.
     #
-    #   If you do not specify a `CostCategoryName`, `SearchString` will be
-    #   used to filter Cost Category names that match the `SearchString`
-    #   pattern. If you do specifiy a `CostCategoryName`, `SearchString`
-    #   will be used to filter Cost Category values that match the
-    #   `SearchString` pattern.
+    #   If you don't specify a `CostCategoryName`, `SearchString` is used
+    #   to filter Cost Category names that match the `SearchString` pattern.
+    #   If you specify a `CostCategoryName`, `SearchString` is used to
+    #   filter Cost Category values that match the `SearchString` pattern.
     #   @return [String]
     #
     # @!attribute [rw] time_period
@@ -2745,10 +2802,10 @@ module Aws::CostExplorer
     #   @return [Types::Expression]
     #
     # @!attribute [rw] sort_by
-    #   The value by which you want to sort the data.
+    #   The value that you sort the data by.
     #
-    #   The key represents cost and usage metrics. The following values are
-    #   supported:
+    #   The key represents the cost and usage metrics. The following values
+    #   are supported:
     #
     #   * `BlendedCost`
     #
@@ -2764,27 +2821,29 @@ module Aws::CostExplorer
     #
     #   * `NormalizedUsageAmount`
     #
-    #   Supported values for `SortOrder` are `ASCENDING` or `DESCENDING`.
+    #   The supported key values for the `SortOrder` value are `ASCENDING`
+    #   and `DESCENDING`.
     #
-    #   When using `SortBy`, `NextPageToken` and `SearchString` are not
-    #   supported.
+    #   When you use the `SortBy` value, the `NextPageToken` and
+    #   `SearchString` key values aren't supported.
     #   @return [Array<Types::SortDefinition>]
     #
     # @!attribute [rw] max_results
-    #   This field is only used when `SortBy` is provided in the request.
+    #   This field is only used when the `SortBy` value is provided in the
+    #   request.
     #
-    #   The maximum number of objects that to be returned for this request.
-    #   If `MaxResults` is not specified with `SortBy`, the request will
-    #   return 1000 results as the default value for this parameter.
+    #   The maximum number of objects that are returned for this request. If
+    #   `MaxResults` isn't specified with the `SortBy` value, the request
+    #   returns 1000 results as the default value for this parameter.
     #
-    #   For `GetCostCategories`, MaxResults has an upper limit of 1000.
+    #   For `GetCostCategories`, MaxResults has an upper quota of 1000.
     #   @return [Integer]
     #
     # @!attribute [rw] next_page_token
     #   If the number of objects that are still available for retrieval
-    #   exceeds the limit, Amazon Web Services returns a NextPageToken value
+    #   exceeds the quota, Amazon Web Services returns a NextPageToken value
     #   in the response. To retrieve the next batch of objects, provide the
-    #   NextPageToken from the prior call in your next request.
+    #   NextPageToken from the previous call in your next request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetCostCategoriesRequest AWS API Documentation
@@ -2803,7 +2862,7 @@ module Aws::CostExplorer
 
     # @!attribute [rw] next_page_token
     #   If the number of objects that are still available for retrieval
-    #   exceeds the limit, Amazon Web Services returns a NextPageToken value
+    #   exceeds the quota, Amazon Web Services returns a NextPageToken value
     #   in the response. To retrieve the next batch of objects, provide the
     #   marker from the prior call in your next request.
     #   @return [String]
@@ -2815,12 +2874,12 @@ module Aws::CostExplorer
     # @!attribute [rw] cost_category_values
     #   The Cost Category values.
     #
-    #   `CostCategoryValues` are not returned if `CostCategoryName` is not
-    #   specified in the request.
+    #   If the `CostCategoryName` key isn't specified in the request, the
+    #   `CostCategoryValues` fields aren't returned.
     #   @return [Array<String>]
     #
     # @!attribute [rw] return_size
-    #   The number of objects returned.
+    #   The number of objects that are returned.
     #   @return [Integer]
     #
     # @!attribute [rw] total_size
@@ -3097,15 +3156,15 @@ module Aws::CostExplorer
     #     is with. Possible values are the following:
     #
     #     \- Amazon Web Services(Amazon Web Services): The entity that sells
-    #     Amazon Web Services services.
+    #     Amazon Web Services.
     #
     #     \- AISPL (Amazon Internet Services Pvt. Ltd.): The local Indian
-    #     entity that is an acting reseller for Amazon Web Services services
-    #     in India.
+    #     entity that's an acting reseller for Amazon Web Services in
+    #     India.
     #
     #     \- Amazon Web Services Marketplace: The entity that supports the
-    #     sale of solutions built on Amazon Web Services by third-party
-    #     software providers.
+    #     sale of solutions that are built on Amazon Web Services by
+    #     third-party software providers.
     #
     #   * CACHE\_ENGINE - The Amazon ElastiCache operating system. Examples
     #     are Windows or Linux.
@@ -3120,12 +3179,12 @@ module Aws::CostExplorer
     #     `m4.xlarge`.
     #
     #   * INSTANCE\_TYPE\_FAMILY - A family of instance types optimized to
-    #     fit different use cases. Examples are `Compute Optimized` (`C4`,
-    #     `C5`, `C6g`, `C7g` etc.), `Memory Optimization` (`R4`, `R5n`,
-    #     `R5b`, `R6g` etc).
+    #     fit different use cases. Examples are `Compute Optimized` (for
+    #     example, `C4`, `C5`, `C6g`, and `C7g`), `Memory Optimization` (for
+    #     example, `R4`, `R5n`, `R5b`, and `R6g`).
     #
-    #   * INVOICING\_ENTITY - The name of the entity issuing the Amazon Web
-    #     Services invoice.
+    #   * INVOICING\_ENTITY - The name of the entity that issues the Amazon
+    #     Web Services invoice.
     #
     #   * LEGAL\_ENTITY\_NAME - The name of the organization that sells you
     #     Amazon Web Services services, such as Amazon Web Services.
@@ -3143,8 +3202,8 @@ module Aws::CostExplorer
     #   * PLATFORM - The Amazon EC2 operating system. Examples are Windows
     #     or Linux.
     #
-    #   * PURCHASE\_TYPE - The reservation type of the purchase to which
-    #     this usage is related. Examples include On-Demand Instances and
+    #   * PURCHASE\_TYPE - The reservation type of the purchase that this
+    #     usage is related to. Examples include On-Demand Instances and
     #     Standard Reserved Instances.
     #
     #   * RESERVATION\_ID - The unique identifier for an Amazon Web Services
@@ -3170,8 +3229,8 @@ module Aws::CostExplorer
     #
     #   * REGION - The Amazon Web Services Region.
     #
-    #   * RECORD\_TYPE - The different types of charges such as RI fees,
-    #     usage costs, tax refunds, and credits.
+    #   * RECORD\_TYPE - The different types of charges such as Reserved
+    #     Instance (RI) fees, usage costs, tax refunds, and credits.
     #
     #   * RESOURCE\_ID - The unique identifier of the resource. ResourceId
     #     is an opt-in feature only available for last 14 days for
@@ -3215,8 +3274,8 @@ module Aws::CostExplorer
     #   * SAVINGS\_PLANS\_TYPE - Type of Savings Plans (EC2 Instance or
     #     Compute)
     #
-    #   * PAYMENT\_OPTION - Payment option for the given Savings Plans (for
-    #     example, All Upfront)
+    #   * PAYMENT\_OPTION - The payment option for the given Savings Plans
+    #     (for example, All Upfront)
     #
     #   * REGION - The Amazon Web Services Region.
     #
@@ -3286,7 +3345,7 @@ module Aws::CostExplorer
     #   @return [Types::Expression]
     #
     # @!attribute [rw] sort_by
-    #   The value by which you want to sort the data.
+    #   The value that you want to sort the data by.
     #
     #   The key represents cost and usage metrics. The following values are
     #   supported:
@@ -3305,18 +3364,19 @@ module Aws::CostExplorer
     #
     #   * `NormalizedUsageAmount`
     #
-    #   Supported values for `SortOrder` are `ASCENDING` or `DESCENDING`.
+    #   The supported values for the `SortOrder` key are `ASCENDING` or
+    #   `DESCENDING`.
     #
     #   When you specify a `SortBy` paramater, the context must be
     #   `COST_AND_USAGE`. Further, when using `SortBy`, `NextPageToken` and
-    #   `SearchString` are not supported.
+    #   `SearchString` aren't supported.
     #   @return [Array<Types::SortDefinition>]
     #
     # @!attribute [rw] max_results
     #   This field is only used when SortBy is provided in the request. The
-    #   maximum number of objects that to be returned for this request. If
-    #   MaxResults is not specified with SortBy, the request will return
-    #   1000 results as the default value for this parameter.
+    #   maximum number of objects that are returned for this request. If
+    #   MaxResults isn't specified with SortBy, the request returns 1000
+    #   results as the default value for this parameter.
     #
     #   For `GetDimensionValues`, MaxResults has an upper limit of 1000.
     #   @return [Integer]
@@ -3757,7 +3817,7 @@ module Aws::CostExplorer
     #       }
     #
     # @!attribute [rw] account_id
-    #   The account ID that is associated with the recommendation.
+    #   The account ID that's associated with the recommendation.
     #   @return [String]
     #
     # @!attribute [rw] service
@@ -3950,11 +4010,12 @@ module Aws::CostExplorer
     #       }
     #
     # @!attribute [rw] time_period
-    #   Sets the start and end dates for retrieving RI utilization. The
-    #   start date is inclusive, but the end date is exclusive. For example,
-    #   if `start` is `2017-01-01` and `end` is `2017-05-01`, then the cost
-    #   and usage data is retrieved from `2017-01-01` up to and including
-    #   `2017-04-30` but not including `2017-05-01`.
+    #   Sets the start and end dates for retrieving Reserved Instance (RI)
+    #   utilization. The start date is inclusive, but the end date is
+    #   exclusive. For example, if `start` is `2017-01-01` and `end` is
+    #   `2017-05-01`, then the cost and usage data is retrieved from
+    #   `2017-01-01` up to and including `2017-04-30` but not including
+    #   `2017-05-01`.
     #   @return [Types::DateInterval]
     #
     # @!attribute [rw] group_by
@@ -4008,7 +4069,7 @@ module Aws::CostExplorer
     #   @return [Types::Expression]
     #
     # @!attribute [rw] sort_by
-    #   The value by which you want to sort the data.
+    #   The value that you want to sort the data by.
     #
     #   The following values are supported for `Key`\:
     #
@@ -4046,7 +4107,8 @@ module Aws::CostExplorer
     #
     #   * `UnrealizedSavings`
     #
-    #   Supported values for `SortOrder` are `ASCENDING` or `DESCENDING`.
+    #   The supported values for `SortOrder` are `ASCENDING` and
+    #   `DESCENDING`.
     #   @return [Types::SortDefinition]
     #
     # @!attribute [rw] next_page_token
@@ -4077,11 +4139,12 @@ module Aws::CostExplorer
     end
 
     # @!attribute [rw] utilizations_by_time
-    #   The amount of time that you used your RIs.
+    #   The amount of time that you used your Reserved Instances (RIs).
     #   @return [Array<Types::UtilizationByTime>]
     #
     # @!attribute [rw] total
-    #   The total amount of time that you used your RIs.
+    #   The total amount of time that you used your Reserved Instances
+    #   (RIs).
     #   @return [Types::ReservationAggregates]
     #
     # @!attribute [rw] next_page_token
@@ -4199,12 +4262,12 @@ module Aws::CostExplorer
     #   @return [Types::Expression]
     #
     # @!attribute [rw] configuration
-    #   Enables you to customize recommendations across two attributes. You
-    #   can choose to view recommendations for instances within the same
-    #   instance families or across different instance families. You can
-    #   also choose to view your estimated savings associated with
-    #   recommendations with consideration of existing Savings Plans or RI
-    #   benefits, or neither.
+    #   You can use Configuration to customize recommendations across two
+    #   attributes. You can choose to view recommendations for instances
+    #   within the same instance families or across different instance
+    #   families. You can also choose to view your estimated savings that
+    #   are associated with recommendations with consideration of existing
+    #   Savings Plans or RI benefits, or neither.
     #   @return [Types::RightsizingRecommendationConfiguration]
     #
     # @!attribute [rw] service
@@ -4251,12 +4314,12 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] configuration
-    #   Enables you to customize recommendations across two attributes. You
-    #   can choose to view recommendations for instances within the same
-    #   instance families or across different instance families. You can
-    #   also choose to view your estimated savings associated with
-    #   recommendations with consideration of existing Savings Plans or RI
-    #   benefits, or neither.
+    #   You can use Configuration to customize recommendations across two
+    #   attributes. You can choose to view recommendations for instances
+    #   within the same instance families or across different instance
+    #   families. You can also choose to view your estimated savings that
+    #   are associated with recommendations with consideration of existing
+    #   Savings Plans or RI benefits, or neither.
     #   @return [Types::RightsizingRecommendationConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetRightsizingRecommendationResponse AWS API Documentation
@@ -4386,7 +4449,7 @@ module Aws::CostExplorer
     #   @return [Integer]
     #
     # @!attribute [rw] sort_by
-    #   The value by which you want to sort the data.
+    #   The value that you want to sort the data by.
     #
     #   The following values are supported for `Key`\:
     #
@@ -4404,7 +4467,8 @@ module Aws::CostExplorer
     #
     #   * `Service`
     #
-    #   Supported values for `SortOrder` are `ASCENDING` or `DESCENDING`.
+    #   The supported values for `SortOrder` are `ASCENDING` and
+    #   `DESCENDING`.
     #   @return [Types::SortDefinition]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetSavingsPlansCoverageRequest AWS API Documentation
@@ -4485,16 +4549,16 @@ module Aws::CostExplorer
     #       }
     #
     # @!attribute [rw] savings_plans_type
-    #   The Savings Plans recommendation type requested.
+    #   The Savings Plans recommendation type that's requested.
     #   @return [String]
     #
     # @!attribute [rw] term_in_years
-    #   The savings plan recommendation term used to generate these
+    #   The savings plan recommendation term that's used to generate these
     #   recommendations.
     #   @return [String]
     #
     # @!attribute [rw] payment_option
-    #   The payment option used to generate these recommendations.
+    #   The payment option that's used to generate these recommendations.
     #   @return [String]
     #
     # @!attribute [rw] account_scope
@@ -4517,22 +4581,22 @@ module Aws::CostExplorer
     #   @return [Integer]
     #
     # @!attribute [rw] lookback_period_in_days
-    #   The lookback period used to generate the recommendation.
+    #   The lookback period that's used to generate the recommendation.
     #   @return [String]
     #
     # @!attribute [rw] filter
     #   You can filter your recommendations by Account ID with the
     #   `LINKED_ACCOUNT` dimension. To filter your recommendations by
     #   Account ID, specify `Key` as `LINKED_ACCOUNT` and `Value` as the
-    #   comma-separated Acount ID(s) for which you want to see Savings Plans
-    #   purchase recommendations.
+    #   comma-separated Acount ID(s) that you want to see Savings Plans
+    #   purchase recommendations for.
     #
-    #   For GetSavingsPlansPurchaseRecommendation, the `Filter` does not
+    #   For GetSavingsPlansPurchaseRecommendation, the `Filter` doesn't
     #   include `CostCategories` or `Tags`. It only includes `Dimensions`.
     #   With `Dimensions`, `Key` must be `LINKED_ACCOUNT` and `Value` can be
-    #   a single Account ID or multiple comma-separated Account IDs for
-    #   which you want to see Savings Plans Purchase Recommendations. `AND`
-    #   and `OR` operators are not supported.
+    #   a single Account ID or multiple comma-separated Account IDs that you
+    #   want to see Savings Plans Purchase Recommendations for. `AND` and
+    #   `OR` operators are not supported.
     #   @return [Types::Expression]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetSavingsPlansPurchaseRecommendationRequest AWS API Documentation
@@ -4551,7 +4615,7 @@ module Aws::CostExplorer
     end
 
     # @!attribute [rw] metadata
-    #   Information regarding this specific recommendation set.
+    #   Information that regards this specific recommendation set.
     #   @return [Types::SavingsPlansPurchaseRecommendationMetadata]
     #
     # @!attribute [rw] savings_plans_purchase_recommendation
@@ -4668,7 +4732,7 @@ module Aws::CostExplorer
     #   @return [Integer]
     #
     # @!attribute [rw] sort_by
-    #   The value by which you want to sort the data.
+    #   The value that you want to sort the data by.
     #
     #   The following values are supported for `Key`\:
     #
@@ -4686,7 +4750,8 @@ module Aws::CostExplorer
     #
     #   * `AmortizedUpfrontCommitment`
     #
-    #   Supported values for `SortOrder` are `ASCENDING` or `DESCENDING`.
+    #   The supported values for `SortOrder` are `ASCENDING` and
+    #   `DESCENDING`.
     #   @return [Types::SortDefinition]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetSavingsPlansUtilizationDetailsRequest AWS API Documentation
@@ -4818,7 +4883,7 @@ module Aws::CostExplorer
     #   @return [Types::Expression]
     #
     # @!attribute [rw] sort_by
-    #   The value by which you want to sort the data.
+    #   The value that you want to sort the data by.
     #
     #   The following values are supported for `Key`\:
     #
@@ -4832,7 +4897,8 @@ module Aws::CostExplorer
     #
     #   * `NetSavings`
     #
-    #   Supported values for `SortOrder` are `ASCENDING` or `DESCENDING`.
+    #   The supported values for `SortOrder` are `ASCENDING` and
+    #   `DESCENDING`.
     #   @return [Types::SortDefinition]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetSavingsPlansUtilizationRequest AWS API Documentation
@@ -4847,8 +4913,8 @@ module Aws::CostExplorer
     end
 
     # @!attribute [rw] savings_plans_utilizations_by_time
-    #   The amount of cost/commitment you used your Savings Plans. This
-    #   allows you to specify date ranges.
+    #   The amount of cost/commitment that you used your Savings Plans. You
+    #   can use it to specify date ranges.
     #   @return [Array<Types::SavingsPlansUtilizationByTime>]
     #
     # @!attribute [rw] total
@@ -4987,7 +5053,7 @@ module Aws::CostExplorer
     #   @return [Types::Expression]
     #
     # @!attribute [rw] sort_by
-    #   The value by which you want to sort the data.
+    #   The value that you want to sort the data by.
     #
     #   The key represents cost and usage metrics. The following values are
     #   supported:
@@ -5006,19 +5072,20 @@ module Aws::CostExplorer
     #
     #   * `NormalizedUsageAmount`
     #
-    #   Supported values for `SortOrder` are `ASCENDING` or `DESCENDING`.
+    #   The supported values for `SortOrder` are `ASCENDING` and
+    #   `DESCENDING`.
     #
-    #   When using `SortBy`, `NextPageToken` and `SearchString` are not
+    #   When you use `SortBy`, `NextPageToken` and `SearchString` aren't
     #   supported.
     #   @return [Array<Types::SortDefinition>]
     #
     # @!attribute [rw] max_results
     #   This field is only used when SortBy is provided in the request. The
-    #   maximum number of objects that to be returned for this request. If
-    #   MaxResults is not specified with SortBy, the request will return
-    #   1000 results as the default value for this parameter.
+    #   maximum number of objects that are returned for this request. If
+    #   MaxResults isn't specified with SortBy, the request returns 1000
+    #   results as the default value for this parameter.
     #
-    #   For `GetTags`, MaxResults has an upper limit of 1000.
+    #   For `GetTags`, MaxResults has an upper quota of 1000.
     #   @return [Integer]
     #
     # @!attribute [rw] next_page_token
@@ -5116,12 +5183,12 @@ module Aws::CostExplorer
     #
     # @!attribute [rw] time_period
     #   The start and end dates of the period that you want to retrieve
-    #   usage forecast for. The start date is inclusive, but the end date is
-    #   exclusive. For example, if `start` is `2017-01-01` and `end` is
-    #   `2017-05-01`, then the cost and usage data is retrieved from
-    #   `2017-01-01` up to and including `2017-04-30` but not including
-    #   `2017-05-01`. The start date must be equal to or later than the
-    #   current date to avoid a validation error.
+    #   usage forecast for. The start date is included in the period, but
+    #   the end date isn't included in the period. For example, if `start`
+    #   is `2017-01-01` and `end` is `2017-05-01`, then the cost and usage
+    #   data is retrieved from `2017-01-01` up to and including `2017-04-30`
+    #   but not including `2017-05-01`. The start date must be equal to or
+    #   later than the current date to avoid a validation error.
     #   @return [Types::DateInterval]
     #
     # @!attribute [rw] metric
@@ -5195,12 +5262,12 @@ module Aws::CostExplorer
     #   @return [Types::Expression]
     #
     # @!attribute [rw] prediction_interval_level
-    #   Cost Explorer always returns the mean forecast as a single point.
-    #   You can request a prediction interval around the mean by specifying
-    #   a confidence level. The higher the confidence level, the more
-    #   confident Cost Explorer is about the actual value falling in the
-    #   prediction interval. Higher confidence levels result in wider
-    #   prediction intervals.
+    #   Amazon Web Services Cost Explorer always returns the mean forecast
+    #   as a single point. You can request a prediction interval around the
+    #   mean by specifying a confidence level. The higher the confidence
+    #   level, the more confident Cost Explorer is about the actual value
+    #   falling in the prediction interval. Higher confidence levels result
+    #   in wider prediction intervals.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetUsageForecastRequest AWS API Documentation
@@ -5366,6 +5433,78 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListCostAllocationTagsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         status: "Active", # accepts Active, Inactive
+    #         tag_keys: ["TagKey"],
+    #         type: "AWSGenerated", # accepts AWSGenerated, UserDefined
+    #         next_token: "NextPageToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] status
+    #   The status of cost allocation tag keys that are returned for this
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The list of cost allocation tag keys that are returned for this
+    #   request.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] type
+    #   The type of `CostAllocationTag` object that are returned for this
+    #   request. The `AWSGenerated` type tags are tags that Amazon Web
+    #   Services defines and applies to support Amazon Web Services
+    #   resources for cost allocation purposes. The `UserDefined` type tags
+    #   are tags that you define, create, and apply to resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next set of results. Amazon Web Services
+    #   provides the token when the response from a previous call has more
+    #   results than the maximum page size.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of objects that are returned for this request. By
+    #   default, the request returns 100 results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ListCostAllocationTagsRequest AWS API Documentation
+    #
+    class ListCostAllocationTagsRequest < Struct.new(
+      :status,
+      :tag_keys,
+      :type,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cost_allocation_tags
+    #   A list of cost allocation tags that includes the detailed metadata
+    #   for each one.
+    #   @return [Array<Types::CostAllocationTag>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next set of results. Amazon Web Services
+    #   provides the token when the response from a previous call has more
+    #   results than the maximum page size.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ListCostAllocationTagsResponse AWS API Documentation
+    #
+    class ListCostAllocationTagsResponse < Struct.new(
+      :cost_allocation_tags,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListCostCategoryDefinitionsRequest
     #   data as a hash:
     #
@@ -5400,7 +5539,7 @@ module Aws::CostExplorer
     end
 
     # @!attribute [rw] cost_category_references
-    #   A reference to a Cost Category containing enough information to
+    #   A reference to a Cost Category that contains enough information to
     #   identify the Cost Category.
     #   @return [Array<Types::CostCategoryReference>]
     #
@@ -5444,7 +5583,7 @@ module Aws::CostExplorer
     end
 
     # @!attribute [rw] resource_tags
-    #   A list of tag key value pairs that are associated with the response.
+    #   A list of tag key value pairs that are associated with the resource.
     #   @return [Array<Types::ResourceTag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ListTagsForResourceResponse AWS API Documentation
@@ -5474,7 +5613,7 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # Details on the modification recommendation.
+    # Details for the modification recommendation.
     #
     # @!attribute [rw] target_instances
     #   Determines whether this instance type is the Amazon Web Services
@@ -5494,20 +5633,20 @@ module Aws::CostExplorer
     #
     # @!attribute [rw] network_in_bytes_per_second
     #   The network inbound throughput utilization measured in Bytes per
-    #   second.
+    #   second (Bps).
     #   @return [String]
     #
     # @!attribute [rw] network_out_bytes_per_second
     #   The network outbound throughput utilization measured in Bytes per
-    #   second.
+    #   second (Bps).
     #   @return [String]
     #
     # @!attribute [rw] network_packets_in_per_second
-    #   The network ingress packets that are measured in packets per second.
+    #   The network inbound packets that are measured in packets per second.
     #   @return [String]
     #
     # @!attribute [rw] network_packets_out_per_second
-    #   The network outgress packets that are measured in packets per
+    #   The network outbound packets that are measured in packets per
     #   second.
     #   @return [String]
     #
@@ -5850,7 +5989,7 @@ module Aws::CostExplorer
     # Details about your recommended reservation purchase.
     #
     # @!attribute [rw] account_id
-    #   The account that this RI recommendation is for.
+    #   The account that this Reserved Instance (RI) recommendation is for.
     #   @return [String]
     #
     # @!attribute [rw] instance_details
@@ -5921,12 +6060,12 @@ module Aws::CostExplorer
     #
     # @!attribute [rw] estimated_monthly_savings_amount
     #   How much Amazon Web Services estimates that this specific
-    #   recommendation could save you in a month.
+    #   recommendation might save you in a month.
     #   @return [String]
     #
     # @!attribute [rw] estimated_monthly_savings_percentage
     #   How much Amazon Web Services estimates that this specific
-    #   recommendation could save you in a month, as a percentage of your
+    #   recommendation might save you in a month, as a percentage of your
     #   overall costs.
     #   @return [String]
     #
@@ -5936,8 +6075,8 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] estimated_reservation_cost_for_lookback_period
-    #   How much Amazon Web Services estimates that you would have spent for
-    #   all usage during the specified historical period if you had a
+    #   How much Amazon Web Services estimates that you might spend for all
+    #   usage during the specified historical period if you had a
     #   reservation.
     #   @return [String]
     #
@@ -6053,10 +6192,10 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # Details on the resource.
+    # Details for the resource.
     #
     # @!attribute [rw] ec2_resource_details
-    #   Details on the Amazon EC2 resource.
+    #   Details for the Amazon EC2 resource.
     #   @return [Types::EC2ResourceDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ResourceDetails AWS API Documentation
@@ -6107,11 +6246,11 @@ module Aws::CostExplorer
     #       }
     #
     # @!attribute [rw] key
-    #   The key that is associated with the tag.
+    #   The key that's associated with the tag.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The value that is associated with the tag.
+    #   The value that's associated with the tag.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ResourceTag AWS API Documentation
@@ -6189,8 +6328,8 @@ module Aws::CostExplorer
     #   @return [Types::TerminateRecommendationDetail]
     #
     # @!attribute [rw] finding_reason_codes
-    #   The list of possible reasons why the recommendation is generated
-    #   such as under or over utilization of specific metrics (for example,
+    #   The list of possible reasons why the recommendation is generated,
+    #   such as under- or over-utilization of specific metrics (for example,
     #   CPU, Memory, Network).
     #   @return [Array<String>]
     #
@@ -6212,7 +6351,8 @@ module Aws::CostExplorer
     # recommendations for instances within the same instance families or
     # across different instance families. You can also choose to view your
     # estimated savings that are associated with recommendations with
-    # consideration of existing Savings Plans or RI benefits, or neither.
+    # consideration of existing Savings Plans or Reserved Instance (RI)
+    # benefits, or neither.
     #
     # @note When making an API call, you may pass RightsizingRecommendationConfiguration
     #   data as a hash:
@@ -6305,12 +6445,12 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # The combination of Amazon Web Services service, linked account,
-    # Region, and usage type where a cost anomaly is observed.
+    # The combination of Amazon Web Service, linked account, Region, and
+    # usage type where a cost anomaly is observed.
     #
     # @!attribute [rw] service
-    #   The Amazon Web Services service name that's associated with the
-    #   cost anomaly.
+    #   The Amazon Web Service name that's associated with the cost
+    #   anomaly.
     #   @return [String]
     #
     # @!attribute [rw] region
@@ -6365,7 +6505,7 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # The amount of Savings Plans eligible usage that is covered by Savings
+    # The amount of Savings Plans eligible usage that's covered by Savings
     # Plans. All calculations consider the On-Demand equivalent of your
     # Savings Plans usage.
     #
@@ -6396,7 +6536,7 @@ module Aws::CostExplorer
     # Savings Plans, and total Savings Plans costs for an account.
     #
     # @!attribute [rw] spend_covered_by_savings_plans
-    #   The amount of your Amazon Web Services usage that is covered by a
+    #   The amount of your Amazon Web Services usage that's covered by a
     #   Savings Plans.
     #   @return [String]
     #
@@ -6475,15 +6615,16 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] payment_option
-    #   The payment option used to generate the recommendation.
+    #   The payment option that's used to generate the recommendation.
     #   @return [String]
     #
     # @!attribute [rw] lookback_period_in_days
-    #   The lookback period in days, used to generate the recommendation.
+    #   The lookback period in days that's used to generate the
+    #   recommendation.
     #   @return [String]
     #
     # @!attribute [rw] savings_plans_purchase_recommendation_details
-    #   Details for the Savings Plans we recommend that you purchase to
+    #   Details for the Savings Plans that we recommend that you purchase to
     #   cover existing Savings Plans eligible workloads.
     #   @return [Array<Types::SavingsPlansPurchaseRecommendationDetail>]
     #
@@ -6542,7 +6683,7 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] estimated_on_demand_cost_with_current_commitment
-    #   The estimated On-Demand costs you would expect with no additional
+    #   The estimated On-Demand costs you expect with no additional
     #   commitment, based on your usage of the selected time period and the
     #   Savings Plans you own.
     #   @return [String]
@@ -6617,7 +6758,7 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] generation_timestamp
-    #   The timestamp showing when the recommendations were generated.
+    #   The timestamp that shows when the recommendations were generated.
     #   @return [String]
     #
     # @!attribute [rw] additional_metadata
@@ -6688,7 +6829,7 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] estimated_on_demand_cost_with_current_commitment
-    #   The estimated On-Demand costs you would expect with no additional
+    #   The estimated On-Demand costs you expect with no additional
     #   commitment. It's based on your usage of the selected time period
     #   and the Savings Plans you own.
     #   @return [String]
@@ -6775,8 +6916,8 @@ module Aws::CostExplorer
     #   @return [Types::SavingsPlansUtilization]
     #
     # @!attribute [rw] savings
-    #   The amount saved by using existing Savings Plans. Savings returns
-    #   both net savings from Savings Plans, as well as the
+    #   The amount that's saved by using existing Savings Plans. Savings
+    #   returns both net savings from Savings Plans and also the
     #   `onDemandCostEquivalent` of the Savings Plans when considering the
     #   utilization rate.
     #   @return [Types::SavingsPlansSavings]
@@ -6796,7 +6937,7 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # The amount of Savings Plans utilization, in hours.
+    # The amount of Savings Plans utilization (in hours).
     #
     # @!attribute [rw] time_period
     #   The time period of the request.
@@ -6808,8 +6949,8 @@ module Aws::CostExplorer
     #   @return [Types::SavingsPlansUtilization]
     #
     # @!attribute [rw] savings
-    #   The amount saved by using existing Savings Plans. Savings returns
-    #   both net savings from Savings Plans as well as the
+    #   The amount that's saved by using existing Savings Plans. Savings
+    #   returns both net savings from Savings Plans and also the
     #   `onDemandCostEquivalent` of the Savings Plans when considering the
     #   utilization rate.
     #   @return [Types::SavingsPlansSavings]
@@ -6830,7 +6971,7 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # A single daily or monthly Savings Plans utilization rate, and details
+    # A single daily or monthly Savings Plans utilization rate and details
     # for your account. A management account in an organization have access
     # to member accounts. You can use `GetDimensionValues` to determine the
     # possible dimension values.
@@ -6850,7 +6991,7 @@ module Aws::CostExplorer
     #
     # @!attribute [rw] savings
     #   The amount saved by using existing Savings Plans. Savings returns
-    #   both net savings from savings plans as well as the
+    #   both net savings from savings plans and also the
     #   `onDemandCostEquivalent` of the Savings Plans when considering the
     #   utilization rate.
     #   @return [Types::SavingsPlansSavings]
@@ -6911,7 +7052,7 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # The details of how to sort the data.
+    # The details for how to sort the data.
     #
     # @note When making an API call, you may pass SortDefinition
     #   data as a hash:
@@ -7008,8 +7149,8 @@ module Aws::CostExplorer
     #
     #   * The maximum length of a value is 256 characters
     #
-    #   * Valid characters for keys and values are: `A-Z`, `a-z`, spaces,
-    #     `_.:/=+-`
+    #   * Keys and values can only contain alphanumeric characters, spaces,
+    #     and any of the following: `_.:/=+@-`
     #
     #   * Keys and values are case sensitive
     #
@@ -7107,7 +7248,7 @@ module Aws::CostExplorer
     #   @return [Types::ResourceUtilization]
     #
     # @!attribute [rw] platform_differences
-    #   Explains the actions you might need to take in order to successfully
+    #   Explains the actions that you might need to take to successfully
     #   migrate your workloads from the current instance type to the
     #   recommended instance type.
     #   @return [Array<String>]
@@ -7258,7 +7399,7 @@ module Aws::CostExplorer
     #
     # @!attribute [rw] resource_tag_keys
     #   A list of tag keys associated with tags that need to be removed from
-    #   the resource. If you specify a tag key that does not exist, it is
+    #   the resource. If you specify a tag key that doesn't exist, it's
     #   ignored. Although the maximum number of array members is 200,
     #   user-tag maximum is 50. The remaining are reserved for Amazon Web
     #   Services use.
@@ -7378,6 +7519,70 @@ module Aws::CostExplorer
     #
     class UpdateAnomalySubscriptionResponse < Struct.new(
       :subscription_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Gives a detailed description of the result of an action. It's on each
+    # cost allocation tag entry in the request.
+    #
+    # @!attribute [rw] tag_key
+    #   The key for the cost allocation tag.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   An error code representing why the action failed on this entry.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message explaining why the action failed on this entry.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/UpdateCostAllocationTagsStatusError AWS API Documentation
+    #
+    class UpdateCostAllocationTagsStatusError < Struct.new(
+      :tag_key,
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateCostAllocationTagsStatusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cost_allocation_tags_status: [ # required
+    #           {
+    #             tag_key: "TagKey", # required
+    #             status: "Active", # required, accepts Active, Inactive
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] cost_allocation_tags_status
+    #   The list of `CostAllocationTagStatusEntry` objects that are used to
+    #   update cost allocation tags status for this request.
+    #   @return [Array<Types::CostAllocationTagStatusEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/UpdateCostAllocationTagsStatusRequest AWS API Documentation
+    #
+    class UpdateCostAllocationTagsStatusRequest < Struct.new(
+      :cost_allocation_tags_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] errors
+    #   A list of `UpdateCostAllocationTagsStatusError` objects with error
+    #   details about each cost allocation tag that can't be updated. If
+    #   there's no failure, an empty array returns.
+    #   @return [Array<Types::UpdateCostAllocationTagsStatusError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/UpdateCostAllocationTagsStatusResponse AWS API Documentation
+    #
+    class UpdateCostAllocationTagsStatusResponse < Struct.new(
+      :errors)
       SENSITIVE = []
       include Aws::Structure
     end

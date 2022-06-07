@@ -370,7 +370,7 @@ module Aws::CostExplorer
     # @option params [Array<Types::ResourceTag>] :resource_tags
     #   An optional list of tags to associate with the specified [
     #   `AnomalyMonitor` ][1]. You can use resource tags to control access to
-    #   your monitor using IAM policies.
+    #   your `monitor` using IAM policies.
     #
     #   Each tag consists of a key and a value, and each key must be unique
     #   for the resource. The following restrictions apply to resource tags:
@@ -383,8 +383,8 @@ module Aws::CostExplorer
     #
     #   * The maximum length of a value is 256 characters
     #
-    #   * Valid characters for keys and values are: `A-Z`, `a-z`, spaces,
-    #     `_.:/=+-`
+    #   * Keys and values can only contain alphanumeric characters, spaces,
+    #     and any of the following: `_.:/=+@-`
     #
     #   * Keys and values are case sensitive
     #
@@ -489,8 +489,8 @@ module Aws::CostExplorer
     #
     #   * The maximum length of a value is 256 characters
     #
-    #   * Valid characters for keys and values are: `A-Z`, `a-z`, spaces,
-    #     `_.:/=+-`
+    #   * Keys and values can only contain alphanumeric characters, spaces,
+    #     and any of the following: `_.:/=+@-`
     #
     #   * Keys and values are case sensitive
     #
@@ -585,8 +585,8 @@ module Aws::CostExplorer
     #
     #   * The maximum length of a value is 256 characters
     #
-    #   * Valid characters for keys and values are: `A-Z`, `a-z`, spaces,
-    #     `_.:/=+-`
+    #   * Keys and values can only contain alphanumeric characters, spaces,
+    #     and any of the following: `_.:/=+@-`
     #
     #   * Keys and values are case sensitive
     #
@@ -762,12 +762,12 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
-    # Returns the name, ARN, rules, definition, and effective dates of a
-    # Cost Category that's defined in the account.
+    # Returns the name, Amazon Resource Name (ARN), rules, definition, and
+    # effective dates of a Cost Category that's defined in the account.
     #
     # You have the option to use `EffectiveOn` to return a Cost Category
-    # that is active on a specific date. If there is no `EffectiveOn`
-    # specified, you’ll see a Cost Category that is effective on the current
+    # that's active on a specific date. If there's no `EffectiveOn`
+    # specified, you see a Cost Category that's effective on the current
     # date. If Cost Category is still effective, `EffectiveEnd` is omitted
     # in the response.
     #
@@ -1239,7 +1239,7 @@ module Aws::CostExplorer
     # Elastic Compute Cloud – Compute service only.
     #
     # <note markdown="1"> This is an opt-in only feature. You can enable this feature from the
-    # Cost Explorer Settings page. For information on how to access the
+    # Cost Explorer Settings page. For information about how to access the
     # Settings page, see [Controlling Access for Cost Explorer][2] in the
     # *Billing and Cost Management User Guide*.
     #
@@ -1299,8 +1299,8 @@ module Aws::CostExplorer
     #   usage numbers without taking the units into account. For example, if
     #   you aggregate `usageQuantity` across all of Amazon EC2, the results
     #   aren't meaningful because Amazon EC2 compute hours and data transfer
-    #   are measured in different units (for example, hours vs. GB). To get
-    #   more meaningful `UsageQuantity` metrics, filter by `UsageType` or
+    #   are measured in different units (for example, hour or GB). To get more
+    #   meaningful `UsageQuantity` metrics, filter by `UsageType` or
     #   `UsageTypeGroups`.
     #
     #    </note>
@@ -1418,11 +1418,10 @@ module Aws::CostExplorer
     # @option params [String] :search_string
     #   The value that you want to search the filter values for.
     #
-    #   If you do not specify a `CostCategoryName`, `SearchString` will be
-    #   used to filter Cost Category names that match the `SearchString`
-    #   pattern. If you do specifiy a `CostCategoryName`, `SearchString` will
-    #   be used to filter Cost Category values that match the `SearchString`
-    #   pattern.
+    #   If you don't specify a `CostCategoryName`, `SearchString` is used to
+    #   filter Cost Category names that match the `SearchString` pattern. If
+    #   you specify a `CostCategoryName`, `SearchString` is used to filter
+    #   Cost Category values that match the `SearchString` pattern.
     #
     # @option params [required, Types::DateInterval] :time_period
     #   The time period of the request.
@@ -1484,10 +1483,10 @@ module Aws::CostExplorer
     #    </note>
     #
     # @option params [Array<Types::SortDefinition>] :sort_by
-    #   The value by which you want to sort the data.
+    #   The value that you sort the data by.
     #
-    #   The key represents cost and usage metrics. The following values are
-    #   supported:
+    #   The key represents the cost and usage metrics. The following values
+    #   are supported:
     #
     #   * `BlendedCost`
     #
@@ -1503,25 +1502,27 @@ module Aws::CostExplorer
     #
     #   * `NormalizedUsageAmount`
     #
-    #   Supported values for `SortOrder` are `ASCENDING` or `DESCENDING`.
+    #   The supported key values for the `SortOrder` value are `ASCENDING` and
+    #   `DESCENDING`.
     #
-    #   When using `SortBy`, `NextPageToken` and `SearchString` are not
-    #   supported.
+    #   When you use the `SortBy` value, the `NextPageToken` and
+    #   `SearchString` key values aren't supported.
     #
     # @option params [Integer] :max_results
-    #   This field is only used when `SortBy` is provided in the request.
+    #   This field is only used when the `SortBy` value is provided in the
+    #   request.
     #
-    #   The maximum number of objects that to be returned for this request. If
-    #   `MaxResults` is not specified with `SortBy`, the request will return
-    #   1000 results as the default value for this parameter.
+    #   The maximum number of objects that are returned for this request. If
+    #   `MaxResults` isn't specified with the `SortBy` value, the request
+    #   returns 1000 results as the default value for this parameter.
     #
-    #   For `GetCostCategories`, MaxResults has an upper limit of 1000.
+    #   For `GetCostCategories`, MaxResults has an upper quota of 1000.
     #
     # @option params [String] :next_page_token
     #   If the number of objects that are still available for retrieval
-    #   exceeds the limit, Amazon Web Services returns a NextPageToken value
+    #   exceeds the quota, Amazon Web Services returns a NextPageToken value
     #   in the response. To retrieve the next batch of objects, provide the
-    #   NextPageToken from the prior call in your next request.
+    #   NextPageToken from the previous call in your next request.
     #
     # @return [Types::GetCostCategoriesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1797,15 +1798,14 @@ module Aws::CostExplorer
     #     is with. Possible values are the following:
     #
     #     \- Amazon Web Services(Amazon Web Services): The entity that sells
-    #     Amazon Web Services services.
+    #     Amazon Web Services.
     #
     #     \- AISPL (Amazon Internet Services Pvt. Ltd.): The local Indian
-    #     entity that is an acting reseller for Amazon Web Services services
-    #     in India.
+    #     entity that's an acting reseller for Amazon Web Services in India.
     #
     #     \- Amazon Web Services Marketplace: The entity that supports the sale
-    #     of solutions built on Amazon Web Services by third-party software
-    #     providers.
+    #     of solutions that are built on Amazon Web Services by third-party
+    #     software providers.
     #
     #   * CACHE\_ENGINE - The Amazon ElastiCache operating system. Examples
     #     are Windows or Linux.
@@ -1820,12 +1820,12 @@ module Aws::CostExplorer
     #     `m4.xlarge`.
     #
     #   * INSTANCE\_TYPE\_FAMILY - A family of instance types optimized to fit
-    #     different use cases. Examples are `Compute Optimized` (`C4`, `C5`,
-    #     `C6g`, `C7g` etc.), `Memory Optimization` (`R4`, `R5n`, `R5b`, `R6g`
-    #     etc).
+    #     different use cases. Examples are `Compute Optimized` (for example,
+    #     `C4`, `C5`, `C6g`, and `C7g`), `Memory Optimization` (for example,
+    #     `R4`, `R5n`, `R5b`, and `R6g`).
     #
-    #   * INVOICING\_ENTITY - The name of the entity issuing the Amazon Web
-    #     Services invoice.
+    #   * INVOICING\_ENTITY - The name of the entity that issues the Amazon
+    #     Web Services invoice.
     #
     #   * LEGAL\_ENTITY\_NAME - The name of the organization that sells you
     #     Amazon Web Services services, such as Amazon Web Services.
@@ -1843,9 +1843,9 @@ module Aws::CostExplorer
     #   * PLATFORM - The Amazon EC2 operating system. Examples are Windows or
     #     Linux.
     #
-    #   * PURCHASE\_TYPE - The reservation type of the purchase to which this
-    #     usage is related. Examples include On-Demand Instances and Standard
-    #     Reserved Instances.
+    #   * PURCHASE\_TYPE - The reservation type of the purchase that this
+    #     usage is related to. Examples include On-Demand Instances and
+    #     Standard Reserved Instances.
     #
     #   * RESERVATION\_ID - The unique identifier for an Amazon Web Services
     #     Reservation Instance.
@@ -1870,8 +1870,8 @@ module Aws::CostExplorer
     #
     #   * REGION - The Amazon Web Services Region.
     #
-    #   * RECORD\_TYPE - The different types of charges such as RI fees, usage
-    #     costs, tax refunds, and credits.
+    #   * RECORD\_TYPE - The different types of charges such as Reserved
+    #     Instance (RI) fees, usage costs, tax refunds, and credits.
     #
     #   * RESOURCE\_ID - The unique identifier of the resource. ResourceId is
     #     an opt-in feature only available for last 14 days for EC2-Compute
@@ -1915,8 +1915,8 @@ module Aws::CostExplorer
     #   * SAVINGS\_PLANS\_TYPE - Type of Savings Plans (EC2 Instance or
     #     Compute)
     #
-    #   * PAYMENT\_OPTION - Payment option for the given Savings Plans (for
-    #     example, All Upfront)
+    #   * PAYMENT\_OPTION - The payment option for the given Savings Plans
+    #     (for example, All Upfront)
     #
     #   * REGION - The Amazon Web Services Region.
     #
@@ -1982,7 +1982,7 @@ module Aws::CostExplorer
     #    </note>
     #
     # @option params [Array<Types::SortDefinition>] :sort_by
-    #   The value by which you want to sort the data.
+    #   The value that you want to sort the data by.
     #
     #   The key represents cost and usage metrics. The following values are
     #   supported:
@@ -2001,16 +2001,17 @@ module Aws::CostExplorer
     #
     #   * `NormalizedUsageAmount`
     #
-    #   Supported values for `SortOrder` are `ASCENDING` or `DESCENDING`.
+    #   The supported values for the `SortOrder` key are `ASCENDING` or
+    #   `DESCENDING`.
     #
     #   When you specify a `SortBy` paramater, the context must be
     #   `COST_AND_USAGE`. Further, when using `SortBy`, `NextPageToken` and
-    #   `SearchString` are not supported.
+    #   `SearchString` aren't supported.
     #
     # @option params [Integer] :max_results
     #   This field is only used when SortBy is provided in the request. The
-    #   maximum number of objects that to be returned for this request. If
-    #   MaxResults is not specified with SortBy, the request will return 1000
+    #   maximum number of objects that are returned for this request. If
+    #   MaxResults isn't specified with SortBy, the request returns 1000
     #   results as the default value for this parameter.
     #
     #   For `GetDimensionValues`, MaxResults has an upper limit of 1000.
@@ -2096,7 +2097,7 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
-    # Retrieves the reservation coverage for your account. This enables you
+    # Retrieves the reservation coverage for your account, which you can use
     # to see how much of your Amazon Elastic Compute Cloud, Amazon
     # ElastiCache, Amazon Relational Database Service, or Amazon Redshift
     # usage is covered by a reservation. An organization's management
@@ -2368,31 +2369,31 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
-    # Gets recommendations for which reservations to purchase. These
-    # recommendations could help you reduce your costs. Reservations provide
-    # a discounted hourly rate (up to 75%) compared to On-Demand pricing.
+    # Gets recommendations for reservation purchases. These recommendations
+    # might help you to reduce your costs. Reservations provide a discounted
+    # hourly rate (up to 75%) compared to On-Demand pricing.
     #
     # Amazon Web Services generates your recommendations by identifying your
     # On-Demand usage during a specific time period and collecting your
     # usage into categories that are eligible for a reservation. After
     # Amazon Web Services has these categories, it simulates every
     # combination of reservations in each category of usage to identify the
-    # best number of each type of RI to purchase to maximize your estimated
-    # savings.
+    # best number of each type of Reserved Instance (RI) to purchase to
+    # maximize your estimated savings.
     #
     # For example, Amazon Web Services automatically aggregates your Amazon
     # EC2 Linux, shared tenancy, and c4 family usage in the US West (Oregon)
     # Region and recommends that you buy size-flexible regional reservations
     # to apply to the c4 family usage. Amazon Web Services recommends the
     # smallest size instance in an instance family. This makes it easier to
-    # purchase a size-flexible RI. Amazon Web Services also shows the equal
-    # number of normalized units so that you can purchase any instance size
-    # that you want. For this example, your RI recommendation would be for
-    # `c4.large` because that is the smallest size instance in the c4
-    # instance family.
+    # purchase a size-flexible Reserved Instance (RI). Amazon Web Services
+    # also shows the equal number of normalized units. This way, you can
+    # purchase any instance size that you want. For this example, your RI
+    # recommendation is for `c4.large` because that is the smallest size
+    # instance in the c4 instance family.
     #
     # @option params [String] :account_id
-    #   The account ID that is associated with the recommendation.
+    #   The account ID that's associated with the recommendation.
     #
     # @option params [required, String] :service
     #   The specific service that you want recommendations for.
@@ -2617,11 +2618,12 @@ module Aws::CostExplorer
     # Currently, you can group only by `SUBSCRIPTION_ID`.
     #
     # @option params [required, Types::DateInterval] :time_period
-    #   Sets the start and end dates for retrieving RI utilization. The start
-    #   date is inclusive, but the end date is exclusive. For example, if
-    #   `start` is `2017-01-01` and `end` is `2017-05-01`, then the cost and
-    #   usage data is retrieved from `2017-01-01` up to and including
-    #   `2017-04-30` but not including `2017-05-01`.
+    #   Sets the start and end dates for retrieving Reserved Instance (RI)
+    #   utilization. The start date is inclusive, but the end date is
+    #   exclusive. For example, if `start` is `2017-01-01` and `end` is
+    #   `2017-05-01`, then the cost and usage data is retrieved from
+    #   `2017-01-01` up to and including `2017-04-30` but not including
+    #   `2017-05-01`.
     #
     # @option params [Array<Types::GroupDefinition>] :group_by
     #   Groups only by `SUBSCRIPTION_ID`. Metadata is included.
@@ -2671,7 +2673,7 @@ module Aws::CostExplorer
     #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
     #
     # @option params [Types::SortDefinition] :sort_by
-    #   The value by which you want to sort the data.
+    #   The value that you want to sort the data by.
     #
     #   The following values are supported for `Key`\:
     #
@@ -2709,7 +2711,7 @@ module Aws::CostExplorer
     #
     #   * `UnrealizedSavings`
     #
-    #   Supported values for `SortOrder` are `ASCENDING` or `DESCENDING`.
+    #   The supported values for `SortOrder` are `ASCENDING` and `DESCENDING`.
     #
     # @option params [String] :next_page_token
     #   The token to retrieve the next set of results. Amazon Web Services
@@ -2856,10 +2858,10 @@ module Aws::CostExplorer
     # and underutilized Amazon EC2 instances.
     #
     # Recommendations are generated to either downsize or terminate
-    # instances, along with providing savings detail and metrics. For
-    # details on calculation and function, see [Optimizing Your Cost with
-    # Rightsizing Recommendations][1] in the *Billing and Cost Management
-    # User Guide*.
+    # instances, along with providing savings detail and metrics. For more
+    # information about calculation and function, see [Optimizing Your Cost
+    # with Rightsizing Recommendations][1] in the *Billing and Cost
+    # Management User Guide*.
     #
     #
     #
@@ -2919,12 +2921,12 @@ module Aws::CostExplorer
     #    </note>
     #
     # @option params [Types::RightsizingRecommendationConfiguration] :configuration
-    #   Enables you to customize recommendations across two attributes. You
-    #   can choose to view recommendations for instances within the same
-    #   instance families or across different instance families. You can also
-    #   choose to view your estimated savings associated with recommendations
-    #   with consideration of existing Savings Plans or RI benefits, or
-    #   neither.
+    #   You can use Configuration to customize recommendations across two
+    #   attributes. You can choose to view recommendations for instances
+    #   within the same instance families or across different instance
+    #   families. You can also choose to view your estimated savings that are
+    #   associated with recommendations with consideration of existing Savings
+    #   Plans or RI benefits, or neither.
     #
     # @option params [required, String] :service
     #   The specific service that you want recommendations for. The only valid
@@ -3158,7 +3160,7 @@ module Aws::CostExplorer
     #   with a minimum value of `1`.
     #
     # @option params [Types::SortDefinition] :sort_by
-    #   The value by which you want to sort the data.
+    #   The value that you want to sort the data by.
     #
     #   The following values are supported for `Key`\:
     #
@@ -3176,7 +3178,7 @@ module Aws::CostExplorer
     #
     #   * `Service`
     #
-    #   Supported values for `SortOrder` are `ASCENDING` or `DESCENDING`.
+    #   The supported values for `SortOrder` are `ASCENDING` and `DESCENDING`.
     #
     # @return [Types::GetSavingsPlansCoverageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3264,14 +3266,14 @@ module Aws::CostExplorer
     # Summary and Details.
     #
     # @option params [required, String] :savings_plans_type
-    #   The Savings Plans recommendation type requested.
+    #   The Savings Plans recommendation type that's requested.
     #
     # @option params [required, String] :term_in_years
-    #   The savings plan recommendation term used to generate these
+    #   The savings plan recommendation term that's used to generate these
     #   recommendations.
     #
     # @option params [required, String] :payment_option
-    #   The payment option used to generate these recommendations.
+    #   The payment option that's used to generate these recommendations.
     #
     # @option params [String] :account_scope
     #   The account scope that you want your recommendations for. Amazon Web
@@ -3290,20 +3292,20 @@ module Aws::CostExplorer
     #   response object.
     #
     # @option params [required, String] :lookback_period_in_days
-    #   The lookback period used to generate the recommendation.
+    #   The lookback period that's used to generate the recommendation.
     #
     # @option params [Types::Expression] :filter
     #   You can filter your recommendations by Account ID with the
     #   `LINKED_ACCOUNT` dimension. To filter your recommendations by Account
     #   ID, specify `Key` as `LINKED_ACCOUNT` and `Value` as the
-    #   comma-separated Acount ID(s) for which you want to see Savings Plans
-    #   purchase recommendations.
+    #   comma-separated Acount ID(s) that you want to see Savings Plans
+    #   purchase recommendations for.
     #
-    #   For GetSavingsPlansPurchaseRecommendation, the `Filter` does not
+    #   For GetSavingsPlansPurchaseRecommendation, the `Filter` doesn't
     #   include `CostCategories` or `Tags`. It only includes `Dimensions`.
     #   With `Dimensions`, `Key` must be `LINKED_ACCOUNT` and `Value` can be a
-    #   single Account ID or multiple comma-separated Account IDs for which
-    #   you want to see Savings Plans Purchase Recommendations. `AND` and `OR`
+    #   single Account ID or multiple comma-separated Account IDs that you
+    #   want to see Savings Plans Purchase Recommendations for. `AND` and `OR`
     #   operators are not supported.
     #
     # @return [Types::GetSavingsPlansPurchaseRecommendationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -3411,7 +3413,7 @@ module Aws::CostExplorer
     # `GetDimensionValues` in `SAVINGS_PLANS` to determine the possible
     # dimension values.
     #
-    # <note markdown="1"> You cannot group by any dimension values for
+    # <note markdown="1"> You can't group by any dimension values for
     # `GetSavingsPlansUtilization`.
     #
     #  </note>
@@ -3454,7 +3456,7 @@ module Aws::CostExplorer
     #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
     #
     # @option params [Types::SortDefinition] :sort_by
-    #   The value by which you want to sort the data.
+    #   The value that you want to sort the data by.
     #
     #   The following values are supported for `Key`\:
     #
@@ -3468,7 +3470,7 @@ module Aws::CostExplorer
     #
     #   * `NetSavings`
     #
-    #   Supported values for `SortOrder` are `ASCENDING` or `DESCENDING`.
+    #   The supported values for `SortOrder` are `ASCENDING` and `DESCENDING`.
     #
     # @return [Types::GetSavingsPlansUtilizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3607,7 +3609,7 @@ module Aws::CostExplorer
     #   with a minimum value of `1`.
     #
     # @option params [Types::SortDefinition] :sort_by
-    #   The value by which you want to sort the data.
+    #   The value that you want to sort the data by.
     #
     #   The following values are supported for `Key`\:
     #
@@ -3625,7 +3627,7 @@ module Aws::CostExplorer
     #
     #   * `AmortizedUpfrontCommitment`
     #
-    #   Supported values for `SortOrder` are `ASCENDING` or `DESCENDING`.
+    #   The supported values for `SortOrder` are `ASCENDING` and `DESCENDING`.
     #
     # @return [Types::GetSavingsPlansUtilizationDetailsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3789,7 +3791,7 @@ module Aws::CostExplorer
     #    </note>
     #
     # @option params [Array<Types::SortDefinition>] :sort_by
-    #   The value by which you want to sort the data.
+    #   The value that you want to sort the data by.
     #
     #   The key represents cost and usage metrics. The following values are
     #   supported:
@@ -3808,18 +3810,18 @@ module Aws::CostExplorer
     #
     #   * `NormalizedUsageAmount`
     #
-    #   Supported values for `SortOrder` are `ASCENDING` or `DESCENDING`.
+    #   The supported values for `SortOrder` are `ASCENDING` and `DESCENDING`.
     #
-    #   When using `SortBy`, `NextPageToken` and `SearchString` are not
+    #   When you use `SortBy`, `NextPageToken` and `SearchString` aren't
     #   supported.
     #
     # @option params [Integer] :max_results
     #   This field is only used when SortBy is provided in the request. The
-    #   maximum number of objects that to be returned for this request. If
-    #   MaxResults is not specified with SortBy, the request will return 1000
+    #   maximum number of objects that are returned for this request. If
+    #   MaxResults isn't specified with SortBy, the request returns 1000
     #   results as the default value for this parameter.
     #
-    #   For `GetTags`, MaxResults has an upper limit of 1000.
+    #   For `GetTags`, MaxResults has an upper quota of 1000.
     #
     # @option params [String] :next_page_token
     #   The token to retrieve the next set of results. Amazon Web Services
@@ -3905,12 +3907,12 @@ module Aws::CostExplorer
     #
     # @option params [required, Types::DateInterval] :time_period
     #   The start and end dates of the period that you want to retrieve usage
-    #   forecast for. The start date is inclusive, but the end date is
-    #   exclusive. For example, if `start` is `2017-01-01` and `end` is
-    #   `2017-05-01`, then the cost and usage data is retrieved from
-    #   `2017-01-01` up to and including `2017-04-30` but not including
-    #   `2017-05-01`. The start date must be equal to or later than the
-    #   current date to avoid a validation error.
+    #   forecast for. The start date is included in the period, but the end
+    #   date isn't included in the period. For example, if `start` is
+    #   `2017-01-01` and `end` is `2017-05-01`, then the cost and usage data
+    #   is retrieved from `2017-01-01` up to and including `2017-04-30` but
+    #   not including `2017-05-01`. The start date must be equal to or later
+    #   than the current date to avoid a validation error.
     #
     # @option params [required, String] :metric
     #   Which metric Cost Explorer uses to create your forecast.
@@ -3979,12 +3981,12 @@ module Aws::CostExplorer
     #   * `SAVINGS_PLAN_ARN`
     #
     # @option params [Integer] :prediction_interval_level
-    #   Cost Explorer always returns the mean forecast as a single point. You
-    #   can request a prediction interval around the mean by specifying a
-    #   confidence level. The higher the confidence level, the more confident
-    #   Cost Explorer is about the actual value falling in the prediction
-    #   interval. Higher confidence levels result in wider prediction
-    #   intervals.
+    #   Amazon Web Services Cost Explorer always returns the mean forecast as
+    #   a single point. You can request a prediction interval around the mean
+    #   by specifying a confidence level. The higher the confidence level, the
+    #   more confident Cost Explorer is about the actual value falling in the
+    #   prediction interval. Higher confidence levels result in wider
+    #   prediction intervals.
     #
     # @return [Types::GetUsageForecastResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4053,14 +4055,77 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
-    # Returns the name, ARN, `NumberOfRules` and effective dates of all Cost
-    # Categories defined in the account. You have the option to use
-    # `EffectiveOn` to return a list of Cost Categories that were active on
-    # a specific date. If there is no `EffectiveOn` specified, you’ll see
-    # Cost Categories that are effective on the current date. If Cost
-    # Category is still effective, `EffectiveEnd` is omitted in the
-    # response. `ListCostCategoryDefinitions` supports pagination. The
-    # request can have a `MaxResults` range up to 100.
+    # Get a list of cost allocation tags. All inputs in the API are optional
+    # and serve as filters. By default, all cost allocation tags are
+    # returned.
+    #
+    # @option params [String] :status
+    #   The status of cost allocation tag keys that are returned for this
+    #   request.
+    #
+    # @option params [Array<String>] :tag_keys
+    #   The list of cost allocation tag keys that are returned for this
+    #   request.
+    #
+    # @option params [String] :type
+    #   The type of `CostAllocationTag` object that are returned for this
+    #   request. The `AWSGenerated` type tags are tags that Amazon Web
+    #   Services defines and applies to support Amazon Web Services resources
+    #   for cost allocation purposes. The `UserDefined` type tags are tags
+    #   that you define, create, and apply to resources.
+    #
+    # @option params [String] :next_token
+    #   The token to retrieve the next set of results. Amazon Web Services
+    #   provides the token when the response from a previous call has more
+    #   results than the maximum page size.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects that are returned for this request. By
+    #   default, the request returns 100 results.
+    #
+    # @return [Types::ListCostAllocationTagsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCostAllocationTagsResponse#cost_allocation_tags #cost_allocation_tags} => Array&lt;Types::CostAllocationTag&gt;
+    #   * {Types::ListCostAllocationTagsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_cost_allocation_tags({
+    #     status: "Active", # accepts Active, Inactive
+    #     tag_keys: ["TagKey"],
+    #     type: "AWSGenerated", # accepts AWSGenerated, UserDefined
+    #     next_token: "NextPageToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cost_allocation_tags #=> Array
+    #   resp.cost_allocation_tags[0].tag_key #=> String
+    #   resp.cost_allocation_tags[0].type #=> String, one of "AWSGenerated", "UserDefined"
+    #   resp.cost_allocation_tags[0].status #=> String, one of "Active", "Inactive"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ListCostAllocationTags AWS API Documentation
+    #
+    # @overload list_cost_allocation_tags(params = {})
+    # @param [Hash] params ({})
+    def list_cost_allocation_tags(params = {}, options = {})
+      req = build_request(:list_cost_allocation_tags, params)
+      req.send_request(options)
+    end
+
+    # Returns the name, Amazon Resource Name (ARN), `NumberOfRules` and
+    # effective dates of all Cost Categories defined in the account. You
+    # have the option to use `EffectiveOn` to return a list of Cost
+    # Categories that were active on a specific date. If there is no
+    # `EffectiveOn` specified, you’ll see Cost Categories that are effective
+    # on the current date. If Cost Category is still effective,
+    # `EffectiveEnd` is omitted in the response.
+    # `ListCostCategoryDefinitions` supports pagination. The request can
+    # have a `MaxResults` range up to 100.
     #
     # @option params [String] :effective_on
     #   The date when the Cost Category was effective.
@@ -4216,8 +4281,8 @@ module Aws::CostExplorer
     #
     #   * The maximum length of a value is 256 characters
     #
-    #   * Valid characters for keys and values are: `A-Z`, `a-z`, spaces,
-    #     `_.:/=+-`
+    #   * Keys and values can only contain alphanumeric characters, spaces,
+    #     and any of the following: `_.:/=+@-`
     #
     #   * Keys and values are case sensitive
     #
@@ -4249,8 +4314,8 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
-    # Removes one or more tags from a resource. Specify only tag key(s) in
-    # your request. Do not specify the value.
+    # Removes one or more tags from a resource. Specify only tag keys in
+    # your request. Don't specify the value.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource. For a list of
@@ -4262,7 +4327,7 @@ module Aws::CostExplorer
     #
     # @option params [required, Array<String>] :resource_tag_keys
     #   A list of tag keys associated with tags that need to be removed from
-    #   the resource. If you specify a tag key that does not exist, it is
+    #   the resource. If you specify a tag key that doesn't exist, it's
     #   ignored. Although the maximum number of array members is 200, user-tag
     #   maximum is 50. The remaining are reserved for Amazon Web Services use.
     #
@@ -4369,6 +4434,47 @@ module Aws::CostExplorer
     # @param [Hash] params ({})
     def update_anomaly_subscription(params = {}, options = {})
       req = build_request(:update_anomaly_subscription, params)
+      req.send_request(options)
+    end
+
+    # Updates status for cost allocation tags in bulk, with maximum batch
+    # size of 20. If the tag status that's updated is the same as the
+    # existing tag status, the request doesn't fail. Instead, it doesn't
+    # have any effect on the tag status (for example, activating the active
+    # tag).
+    #
+    # @option params [required, Array<Types::CostAllocationTagStatusEntry>] :cost_allocation_tags_status
+    #   The list of `CostAllocationTagStatusEntry` objects that are used to
+    #   update cost allocation tags status for this request.
+    #
+    # @return [Types::UpdateCostAllocationTagsStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateCostAllocationTagsStatusResponse#errors #errors} => Array&lt;Types::UpdateCostAllocationTagsStatusError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_cost_allocation_tags_status({
+    #     cost_allocation_tags_status: [ # required
+    #       {
+    #         tag_key: "TagKey", # required
+    #         status: "Active", # required, accepts Active, Inactive
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.errors #=> Array
+    #   resp.errors[0].tag_key #=> String
+    #   resp.errors[0].code #=> String
+    #   resp.errors[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/UpdateCostAllocationTagsStatus AWS API Documentation
+    #
+    # @overload update_cost_allocation_tags_status(params = {})
+    # @param [Hash] params ({})
+    def update_cost_allocation_tags_status(params = {}, options = {})
+      req = build_request(:update_cost_allocation_tags_status, params)
       req.send_request(options)
     end
 
@@ -4491,7 +4597,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.76.0'
+      context[:gem_version] = '1.77.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

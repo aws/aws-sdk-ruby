@@ -278,8 +278,7 @@ module Aws::AuditManager
     # @!attribute [rw] evidence_by_type_configuration_data_count
     #   The number of evidence that falls under the configuration data
     #   category. This evidence is collected from configuration snapshots of
-    #   other Amazon Web Services services such as Amazon EC2, Amazon S3, or
-    #   IAM.
+    #   other Amazon Web Services such as Amazon EC2, Amazon S3, or IAM.
     #   @return [Integer]
     #
     # @!attribute [rw] evidence_by_type_manual_count
@@ -1747,8 +1746,8 @@ module Aws::AuditManager
     #         },
     #         roles: [ # required
     #           {
-    #             role_type: "PROCESS_OWNER", # accepts PROCESS_OWNER, RESOURCE_OWNER
-    #             role_arn: "IamArn",
+    #             role_type: "PROCESS_OWNER", # required, accepts PROCESS_OWNER, RESOURCE_OWNER
+    #             role_arn: "IamArn", # required
     #           },
     #         ],
     #         framework_id: "UUID", # required
@@ -4174,8 +4173,8 @@ module Aws::AuditManager
     #   data as a hash:
     #
     #       {
-    #         role_type: "PROCESS_OWNER", # accepts PROCESS_OWNER, RESOURCE_OWNER
-    #         role_arn: "IamArn",
+    #         role_type: "PROCESS_OWNER", # required, accepts PROCESS_OWNER, RESOURCE_OWNER
+    #         role_arn: "IamArn", # required
     #       }
     #
     # @!attribute [rw] role_type
@@ -4467,6 +4466,19 @@ module Aws::AuditManager
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/TagResourceResponse AWS API Documentation
     #
     class TagResourceResponse < Aws::EmptyStructure; end
+
+    # The request was denied due to request throttling.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Short for uniform resource locator. A URL is used as a unique
     # identifier to locate a resource on the internet.
@@ -4799,8 +4811,8 @@ module Aws::AuditManager
     #         },
     #         roles: [
     #           {
-    #             role_type: "PROCESS_OWNER", # accepts PROCESS_OWNER, RESOURCE_OWNER
-    #             role_arn: "IamArn",
+    #             role_type: "PROCESS_OWNER", # required, accepts PROCESS_OWNER, RESOURCE_OWNER
+    #             role_arn: "IamArn", # required
     #           },
     #         ],
     #       }
@@ -4988,8 +5000,8 @@ module Aws::AuditManager
     #         },
     #         default_process_owners: [
     #           {
-    #             role_type: "PROCESS_OWNER", # accepts PROCESS_OWNER, RESOURCE_OWNER
-    #             role_arn: "IamArn",
+    #             role_type: "PROCESS_OWNER", # required, accepts PROCESS_OWNER, RESOURCE_OWNER
+    #             role_arn: "IamArn", # required
     #           },
     #         ],
     #         kms_key: "KmsKey",

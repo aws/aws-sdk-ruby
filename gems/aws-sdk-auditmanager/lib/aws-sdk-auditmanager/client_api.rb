@@ -281,6 +281,7 @@ module Aws::AuditManager
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TestingInformation = Shapes::StringShape.new(name: 'TestingInformation')
+    ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TimestampUUID = Shapes::StringShape.new(name: 'TimestampUUID')
     Token = Shapes::StringShape.new(name: 'Token')
@@ -1135,8 +1136,8 @@ module Aws::AuditManager
 
     Resources.member = Shapes::ShapeRef.new(shape: Resource)
 
-    Role.add_member(:role_type, Shapes::ShapeRef.new(shape: RoleType, location_name: "roleType"))
-    Role.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamArn, location_name: "roleArn"))
+    Role.add_member(:role_type, Shapes::ShapeRef.new(shape: RoleType, required: true, location_name: "roleType"))
+    Role.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamArn, required: true, location_name: "roleArn"))
     Role.struct_class = Types::Role
 
     Roles.member = Shapes::ShapeRef.new(shape: Role)
@@ -1183,6 +1184,9 @@ module Aws::AuditManager
     TagResourceRequest.struct_class = Types::TagResourceRequest
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
+
+    ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    ThrottlingException.struct_class = Types::ThrottlingException
 
     URL.add_member(:hyperlink_name, Shapes::ShapeRef.new(shape: HyperlinkName, location_name: "hyperlinkName"))
     URL.add_member(:link, Shapes::ShapeRef.new(shape: UrlLink, location_name: "link"))
@@ -1971,6 +1975,7 @@ module Aws::AuditManager
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:register_organization_admin_account, Seahorse::Model::Operation.new.tap do |o|
