@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.83.0 (2022-06-08)
+------------------
+
+* Feature - Adds new API GetClusterCredentialsWithIAM to return temporary credentials.
+
 1.82.0 (2022-05-06)
 ------------------
 

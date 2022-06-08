@@ -1077,6 +1077,37 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # @!attribute [rw] db_user
+    #   A database user name that you provide when you connect to a
+    #   database. The database user is mapped 1:1 to the source IAM
+    #   identity.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_password
+    #   A temporary password that you provide when you connect to a
+    #   database.
+    #   @return [String]
+    #
+    # @!attribute [rw] expiration
+    #   The time (UTC) when the temporary password expires. After this
+    #   timestamp, a log in with the temporary password fails.
+    #   @return [Time]
+    #
+    # @!attribute [rw] next_refresh_time
+    #   Reserved for future use.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterExtendedCredentials AWS API Documentation
+    #
+    class ClusterExtendedCredentials < Struct.new(
+      :db_user,
+      :db_password,
+      :expiration,
+      :next_refresh_time)
+      SENSITIVE = [:db_password]
+      include Aws::Structure
+    end
+
     # An Identity and Access Management (IAM) role that can be used by the
     # associated Amazon Redshift cluster to access other Amazon Web Services
     # services.
@@ -1992,8 +2023,8 @@ module Aws::Redshift
     #
     #   * Must contain one number.
     #
-    #   * Can be any printable ASCII character (ASCII code 33-126) except '
-    #     (single quote), " (double quote), \\, /, or @.
+    #   * Can be any printable ASCII character (ASCII code 33-126) except
+    #     `'` (single quote), `"` (double quote), ``, `/`, or `@`.
     #   @return [String]
     #
     # @!attribute [rw] cluster_security_groups
@@ -7038,7 +7069,7 @@ module Aws::Redshift
     #
     # @!attribute [rw] cluster_identifier
     #   The unique identifier of the cluster that contains the database for
-    #   which your are requesting credentials. This parameter is case
+    #   which you are requesting credentials. This parameter is case
     #   sensitive.
     #   @return [String]
     #
@@ -7090,6 +7121,43 @@ module Aws::Redshift
       :duration_seconds,
       :auto_create,
       :db_groups)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetClusterCredentialsWithIAMMessage
+    #   data as a hash:
+    #
+    #       {
+    #         db_name: "String",
+    #         cluster_identifier: "String", # required
+    #         duration_seconds: 1,
+    #       }
+    #
+    # @!attribute [rw] db_name
+    #   The name of the database for which you are requesting credentials.
+    #   If the database name is specified, the IAM policy must allow access
+    #   to the resource `dbname` for the specified database name. If the
+    #   database name is not specified, access to all databases is allowed.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The unique identifier of the cluster that contains the database for
+    #   which you are requesting credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] duration_seconds
+    #   The number of seconds until the returned temporary password expires.
+    #
+    #   Range: 900-3600. Default: 900.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/GetClusterCredentialsWithIAMMessage AWS API Documentation
+    #
+    class GetClusterCredentialsWithIAMMessage < Struct.new(
+      :db_name,
+      :cluster_identifier,
+      :duration_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8145,8 +8213,8 @@ module Aws::Redshift
     #
     #   * Must contain one number.
     #
-    #   * Can be any printable ASCII character (ASCII code 33-126) except '
-    #     (single quote), " (double quote), \\, /, or @.
+    #   * Can be any printable ASCII character (ASCII code 33-126) except
+    #     `'` (single quote), `"` (double quote), ``, `/`, or `@`.
     #   @return [String]
     #
     # @!attribute [rw] cluster_parameter_group_name

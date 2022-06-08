@@ -1223,8 +1223,8 @@ module Aws::Redshift
     #
     #   * Must contain one number.
     #
-    #   * Can be any printable ASCII character (ASCII code 33-126) except '
-    #     (single quote), " (double quote), \\, /, or @.
+    #   * Can be any printable ASCII character (ASCII code 33-126) except `'`
+    #     (single quote), `"` (double quote), ``, `/`, or `@`.
     #
     # @option params [Array<String>] :cluster_security_groups
     #   A list of security groups to be associated with this cluster.
@@ -7265,7 +7265,7 @@ module Aws::Redshift
     #
     # @option params [required, String] :cluster_identifier
     #   The unique identifier of the cluster that contains the database for
-    #   which your are requesting credentials. This parameter is case
+    #   which you are requesting credentials. This parameter is case
     #   sensitive.
     #
     # @option params [Integer] :duration_seconds
@@ -7332,6 +7332,70 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def get_cluster_credentials(params = {}, options = {})
       req = build_request(:get_cluster_credentials, params)
+      req.send_request(options)
+    end
+
+    # Returns a database user name and temporary password with temporary
+    # authorization to log in to an Amazon Redshift database. The database
+    # user is mapped 1:1 to the source Identity and Access Management (IAM)
+    # identity. For more information about IAM identities, see [IAM
+    # Identities (users, user groups, and roles)][1] in the Amazon Web
+    # Services Identity and Access Management User Guide.
+    #
+    # The Identity and Access Management (IAM) identity that runs this
+    # operation must have an IAM policy attached that allows access to all
+    # necessary actions and resources. For more information about
+    # permissions, see [Using identity-based policies (IAM policies)][2] in
+    # the Amazon Redshift Cluster Management Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html
+    # [2]: https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html
+    #
+    # @option params [String] :db_name
+    #   The name of the database for which you are requesting credentials. If
+    #   the database name is specified, the IAM policy must allow access to
+    #   the resource `dbname` for the specified database name. If the database
+    #   name is not specified, access to all databases is allowed.
+    #
+    # @option params [required, String] :cluster_identifier
+    #   The unique identifier of the cluster that contains the database for
+    #   which you are requesting credentials.
+    #
+    # @option params [Integer] :duration_seconds
+    #   The number of seconds until the returned temporary password expires.
+    #
+    #   Range: 900-3600. Default: 900.
+    #
+    # @return [Types::ClusterExtendedCredentials] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ClusterExtendedCredentials#db_user #db_user} => String
+    #   * {Types::ClusterExtendedCredentials#db_password #db_password} => String
+    #   * {Types::ClusterExtendedCredentials#expiration #expiration} => Time
+    #   * {Types::ClusterExtendedCredentials#next_refresh_time #next_refresh_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_cluster_credentials_with_iam({
+    #     db_name: "String",
+    #     cluster_identifier: "String", # required
+    #     duration_seconds: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_user #=> String
+    #   resp.db_password #=> String
+    #   resp.expiration #=> Time
+    #   resp.next_refresh_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/GetClusterCredentialsWithIAM AWS API Documentation
+    #
+    # @overload get_cluster_credentials_with_iam(params = {})
+    # @param [Hash] params ({})
+    def get_cluster_credentials_with_iam(params = {}, options = {})
+      req = build_request(:get_cluster_credentials_with_iam, params)
       req.send_request(options)
     end
 
@@ -7669,8 +7733,8 @@ module Aws::Redshift
     #
     #   * Must contain one number.
     #
-    #   * Can be any printable ASCII character (ASCII code 33-126) except '
-    #     (single quote), " (double quote), \\, /, or @.
+    #   * Can be any printable ASCII character (ASCII code 33-126) except `'`
+    #     (single quote), `"` (double quote), ``, `/`, or `@`.
     #
     # @option params [String] :cluster_parameter_group_name
     #   The name of the cluster parameter group to apply to this cluster. This
@@ -11073,7 +11137,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.82.0'
+      context[:gem_version] = '1.83.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

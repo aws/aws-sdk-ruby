@@ -616,6 +616,9 @@
   "Macie2": {
     "models": "macie2/2020-01-01"
   },
+  "MainframeModernization": {
+    "models": "m2/2021-04-28"
+  },
   "ManagedBlockchain": {
     "models": "managedblockchain/2018-09-24"
   },
@@ -780,6 +783,9 @@
   },
   "RedshiftDataAPIService": {
     "models": "redshift-data/2019-12-20"
+  },
+  "RedshiftServerless": {
+    "models": "redshift-serverless/2021-04-21"
   },
   "Rekognition": {
     "models": "rekognition/2016-06-27"

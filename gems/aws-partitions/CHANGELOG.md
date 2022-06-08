@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+1.598.0 (2022-06-08)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::RedshiftServerless`.
+
+* Feature - Added support for enumerating regions for `Aws::MainframeModernization`.
+
 1.597.0 (2022-06-07)
 ------------------
 
