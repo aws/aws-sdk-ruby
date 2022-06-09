@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2022-06-09)
+------------------
+
+* Feature - Adds support for live transcription in AWS GovCloud (US) Regions.
+
 1.11.0 (2022-06-01)
 ------------------
 

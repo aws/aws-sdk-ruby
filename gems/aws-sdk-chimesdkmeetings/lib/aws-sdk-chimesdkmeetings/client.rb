@@ -955,7 +955,7 @@ module Aws::ChimeSDKMeetings
     #         vocabulary_filter_method: "remove", # accepts remove, mask, tag
     #         vocabulary_filter_name: "String",
     #         vocabulary_name: "String",
-    #         region: "us-east-2", # accepts us-east-2, us-east-1, us-west-2, ap-northeast-2, ap-southeast-2, ap-northeast-1, ca-central-1, eu-central-1, eu-west-1, eu-west-2, sa-east-1, auto
+    #         region: "us-east-2", # accepts us-east-2, us-east-1, us-west-2, ap-northeast-2, ap-southeast-2, ap-northeast-1, ca-central-1, eu-central-1, eu-west-1, eu-west-2, sa-east-1, auto, us-gov-west-1
     #         enable_partial_results_stabilization: false,
     #         partial_results_stability: "low", # accepts low, medium, high
     #         content_identification_type: "PII", # accepts PII
@@ -1066,7 +1066,7 @@ module Aws::ChimeSDKMeetings
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chimesdkmeetings'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
