@@ -247,7 +247,6 @@ module Aws
   autoload :RecycleBin, 'aws-sdk-recyclebin'
   autoload :Redshift, 'aws-sdk-redshift'
   autoload :RedshiftDataAPIService, 'aws-sdk-redshiftdataapiservice'
-  autoload :RedshiftServerless, 'aws-sdk-redshiftserverless'
   autoload :Rekognition, 'aws-sdk-rekognition'
   autoload :ResilienceHub, 'aws-sdk-resiliencehub'
   autoload :ResourceGroups, 'aws-sdk-resourcegroups'
