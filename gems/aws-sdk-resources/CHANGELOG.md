@@ -4,7 +4,7 @@ Unreleased Changes
 3.133.1 (2020-06-09)
 ------------------
 
-* Issue - Remove dependency on the `aws-sdk-redshiftserverless` gem. This gem will be republished under a different name.
+* Issue - Remove dependency on the `aws-sdk-redshiftserverless` gem. This gem will be republished at a later date.
 
 3.133.0 (2022-06-08)
 ------------------
