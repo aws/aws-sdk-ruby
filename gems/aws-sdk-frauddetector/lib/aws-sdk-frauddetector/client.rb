@@ -943,7 +943,8 @@ module Aws::FraudDetector
       req.send_request(options)
     end
 
-    # Deletes data that was batch imported to Amazon Fraud Detector.
+    # Deletes the specified batch import job ID record. This action does not
+    # delete the data that was batch imported.
     #
     # @option params [required, String] :job_id
     #   The ID of the batch import job to delete.
@@ -2004,7 +2005,16 @@ module Aws::FraudDetector
     #   The detector version ID.
     #
     # @option params [required, String] :prediction_timestamp
-    #   The timestamp that defines when the prediction was generated.
+    #   The timestamp that defines when the prediction was generated. The
+    #   timestamp must be specified using ISO 8601 standard in UTC.
+    #
+    #   We recommend calling [ListEventPredictions][1] first, and using the
+    #   `predictionTimestamp` value in the response to provide an accurate
+    #   prediction timestamp value.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/frauddetector/latest/api/API_ListEventPredictions.html
     #
     # @return [Types::GetEventPredictionMetadataResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3409,9 +3419,11 @@ module Aws::FraudDetector
     #
     # You can perform the following status updates:
     #
-    # 1.  Change the `TRAINING_COMPLETE` status to `ACTIVE`.
+    # 1.  Change the `TRAINING_IN_PROGRESS` status to `TRAINING_CANCELLED`.
     #
-    # 2.  Change `ACTIVE` to `INACTIVE`.
+    # 2.  Change the `TRAINING_COMPLETE` status to `ACTIVE`.
+    #
+    # 3.  Change `ACTIVE` to `INACTIVE`.
     #
     # @option params [required, String] :model_id
     #   The model ID of the model version to update.
@@ -3586,7 +3598,7 @@ module Aws::FraudDetector
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-frauddetector'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

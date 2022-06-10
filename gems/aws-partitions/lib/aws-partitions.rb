@@ -464,7 +464,6 @@ module Aws
             'RecycleBin' => 'rbin',
             'Redshift' => 'redshift',
             'RedshiftDataAPIService' => 'redshift-data',
-            'RedshiftServerless' => 'redshift-serverless',
             'Rekognition' => 'rekognition',
             'ResilienceHub' => 'resiliencehub',
             'ResourceGroups' => 'resource-groups',

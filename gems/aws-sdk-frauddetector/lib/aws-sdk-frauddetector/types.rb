@@ -2433,7 +2433,16 @@ module Aws::FraudDetector
     #   @return [String]
     #
     # @!attribute [rw] prediction_timestamp
-    #   The timestamp that defines when the prediction was generated.
+    #   The timestamp that defines when the prediction was generated. The
+    #   timestamp must be specified using ISO 8601 standard in UTC.
+    #
+    #   We recommend calling [ListEventPredictions][1] first, and using the
+    #   `predictionTimestamp` value in the response to provide an accurate
+    #   prediction timestamp value.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/frauddetector/latest/api/API_ListEventPredictions.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/GetEventPredictionMetadataRequest AWS API Documentation
