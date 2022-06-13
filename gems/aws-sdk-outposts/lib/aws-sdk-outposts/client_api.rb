@@ -29,6 +29,8 @@ module Aws::Outposts
     AvailabilityZoneId = Shapes::StringShape.new(name: 'AvailabilityZoneId')
     AvailabilityZoneIdList = Shapes::ListShape.new(name: 'AvailabilityZoneIdList')
     AvailabilityZoneList = Shapes::ListShape.new(name: 'AvailabilityZoneList')
+    CIDR = Shapes::StringShape.new(name: 'CIDR')
+    CIDRList = Shapes::ListShape.new(name: 'CIDRList')
     CancelOrderInput = Shapes::StructureShape.new(name: 'CancelOrderInput')
     CancelOrderOutput = Shapes::StructureShape.new(name: 'CancelOrderOutput')
     CatalogItem = Shapes::StructureShape.new(name: 'CatalogItem')
@@ -42,6 +44,8 @@ module Aws::Outposts
     CityList = Shapes::ListShape.new(name: 'CityList')
     ComputeAttributes = Shapes::StructureShape.new(name: 'ComputeAttributes')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    ConnectionDetails = Shapes::StructureShape.new(name: 'ConnectionDetails')
+    ConnectionId = Shapes::StringShape.new(name: 'ConnectionId')
     ContactName = Shapes::StringShape.new(name: 'ContactName')
     ContactPhoneNumber = Shapes::StringShape.new(name: 'ContactPhoneNumber')
     CountryCode = Shapes::StringShape.new(name: 'CountryCode')
@@ -56,6 +60,7 @@ module Aws::Outposts
     DeleteOutpostOutput = Shapes::StructureShape.new(name: 'DeleteOutpostOutput')
     DeleteSiteInput = Shapes::StructureShape.new(name: 'DeleteSiteInput')
     DeleteSiteOutput = Shapes::StructureShape.new(name: 'DeleteSiteOutput')
+    DeviceSerialNumber = Shapes::StringShape.new(name: 'DeviceSerialNumber')
     DistrictOrCounty = Shapes::StringShape.new(name: 'DistrictOrCounty')
     EC2Capacity = Shapes::StructureShape.new(name: 'EC2Capacity')
     EC2CapacityListDefinition = Shapes::ListShape.new(name: 'EC2CapacityListDefinition')
@@ -65,6 +70,8 @@ module Aws::Outposts
     FiberOpticCableType = Shapes::StringShape.new(name: 'FiberOpticCableType')
     GetCatalogItemInput = Shapes::StructureShape.new(name: 'GetCatalogItemInput')
     GetCatalogItemOutput = Shapes::StructureShape.new(name: 'GetCatalogItemOutput')
+    GetConnectionRequest = Shapes::StructureShape.new(name: 'GetConnectionRequest')
+    GetConnectionResponse = Shapes::StructureShape.new(name: 'GetConnectionResponse')
     GetOrderInput = Shapes::StructureShape.new(name: 'GetOrderInput')
     GetOrderOutput = Shapes::StructureShape.new(name: 'GetOrderOutput')
     GetOutpostInput = Shapes::StructureShape.new(name: 'GetOutpostInput')
@@ -108,6 +115,7 @@ module Aws::Outposts
     MaxSize = Shapes::StringShape.new(name: 'MaxSize')
     MaximumSupportedWeightLbs = Shapes::StringShape.new(name: 'MaximumSupportedWeightLbs')
     Municipality = Shapes::StringShape.new(name: 'Municipality')
+    NetworkInterfaceDeviceIndex = Shapes::IntegerShape.new(name: 'NetworkInterfaceDeviceIndex')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     OpticalStandard = Shapes::StringShape.new(name: 'OpticalStandard')
     Order = Shapes::StructureShape.new(name: 'Order')
@@ -135,6 +143,7 @@ module Aws::Outposts
     RackId = Shapes::StringShape.new(name: 'RackId')
     RackPhysicalProperties = Shapes::StructureShape.new(name: 'RackPhysicalProperties')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
+    ServerEndpoint = Shapes::StringShape.new(name: 'ServerEndpoint')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     Site = Shapes::StructureShape.new(name: 'Site')
     SiteArn = Shapes::StringShape.new(name: 'SiteArn')
@@ -143,6 +152,8 @@ module Aws::Outposts
     SiteName = Shapes::StringShape.new(name: 'SiteName')
     SiteNotes = Shapes::StringShape.new(name: 'SiteNotes')
     SkuCode = Shapes::StringShape.new(name: 'SkuCode')
+    StartConnectionRequest = Shapes::StructureShape.new(name: 'StartConnectionRequest')
+    StartConnectionResponse = Shapes::StructureShape.new(name: 'StartConnectionResponse')
     StateOrRegion = Shapes::StringShape.new(name: 'StateOrRegion')
     StateOrRegionList = Shapes::ListShape.new(name: 'StateOrRegionList')
     String = Shapes::StringShape.new(name: 'String')
@@ -158,6 +169,7 @@ module Aws::Outposts
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Token = Shapes::StringShape.new(name: 'Token')
+    UnderlayIpAddress = Shapes::StringShape.new(name: 'UnderlayIpAddress')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateOutpostInput = Shapes::StructureShape.new(name: 'UpdateOutpostInput')
@@ -171,6 +183,7 @@ module Aws::Outposts
     UplinkCount = Shapes::StringShape.new(name: 'UplinkCount')
     UplinkGbps = Shapes::StringShape.new(name: 'UplinkGbps')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
+    WireGuardPublicKey = Shapes::StringShape.new(name: 'WireGuardPublicKey')
     outpostListDefinition = Shapes::ListShape.new(name: 'outpostListDefinition')
     siteListDefinition = Shapes::ListShape.new(name: 'siteListDefinition')
 
@@ -202,6 +215,8 @@ module Aws::Outposts
 
     AvailabilityZoneList.member = Shapes::ShapeRef.new(shape: AvailabilityZone)
 
+    CIDRList.member = Shapes::ShapeRef.new(shape: CIDR)
+
     CancelOrderInput.add_member(:order_id, Shapes::ShapeRef.new(shape: OrderId, required: true, location: "uri", location_name: "OrderId"))
     CancelOrderInput.struct_class = Types::CancelOrderInput
 
@@ -229,6 +244,14 @@ module Aws::Outposts
     ConflictException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "ResourceId"))
     ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     ConflictException.struct_class = Types::ConflictException
+
+    ConnectionDetails.add_member(:client_public_key, Shapes::ShapeRef.new(shape: WireGuardPublicKey, location_name: "ClientPublicKey"))
+    ConnectionDetails.add_member(:server_public_key, Shapes::ShapeRef.new(shape: WireGuardPublicKey, location_name: "ServerPublicKey"))
+    ConnectionDetails.add_member(:server_endpoint, Shapes::ShapeRef.new(shape: ServerEndpoint, location_name: "ServerEndpoint"))
+    ConnectionDetails.add_member(:client_tunnel_address, Shapes::ShapeRef.new(shape: CIDR, location_name: "ClientTunnelAddress"))
+    ConnectionDetails.add_member(:server_tunnel_address, Shapes::ShapeRef.new(shape: CIDR, location_name: "ServerTunnelAddress"))
+    ConnectionDetails.add_member(:allowed_ips, Shapes::ShapeRef.new(shape: CIDRList, location_name: "AllowedIps"))
+    ConnectionDetails.struct_class = Types::ConnectionDetails
 
     CountryCodeList.member = Shapes::ShapeRef.new(shape: CountryCode)
 
@@ -289,6 +312,13 @@ module Aws::Outposts
 
     GetCatalogItemOutput.add_member(:catalog_item, Shapes::ShapeRef.new(shape: CatalogItem, location_name: "CatalogItem"))
     GetCatalogItemOutput.struct_class = Types::GetCatalogItemOutput
+
+    GetConnectionRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location: "uri", location_name: "ConnectionId"))
+    GetConnectionRequest.struct_class = Types::GetConnectionRequest
+
+    GetConnectionResponse.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, location_name: "ConnectionId"))
+    GetConnectionResponse.add_member(:connection_details, Shapes::ShapeRef.new(shape: ConnectionDetails, location_name: "ConnectionDetails"))
+    GetConnectionResponse.struct_class = Types::GetConnectionResponse
 
     GetOrderInput.add_member(:order_id, Shapes::ShapeRef.new(shape: OrderId, required: true, location: "uri", location_name: "OrderId"))
     GetOrderInput.struct_class = Types::GetOrderInput
@@ -479,6 +509,16 @@ module Aws::Outposts
     Site.add_member(:rack_physical_properties, Shapes::ShapeRef.new(shape: RackPhysicalProperties, location_name: "RackPhysicalProperties"))
     Site.struct_class = Types::Site
 
+    StartConnectionRequest.add_member(:device_serial_number, Shapes::ShapeRef.new(shape: DeviceSerialNumber, required: true, location_name: "DeviceSerialNumber"))
+    StartConnectionRequest.add_member(:asset_id, Shapes::ShapeRef.new(shape: AssetId, required: true, location_name: "AssetId"))
+    StartConnectionRequest.add_member(:client_public_key, Shapes::ShapeRef.new(shape: WireGuardPublicKey, required: true, location_name: "ClientPublicKey"))
+    StartConnectionRequest.add_member(:network_interface_device_index, Shapes::ShapeRef.new(shape: NetworkInterfaceDeviceIndex, required: true, location_name: "NetworkInterfaceDeviceIndex"))
+    StartConnectionRequest.struct_class = Types::StartConnectionRequest
+
+    StartConnectionResponse.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, location_name: "ConnectionId"))
+    StartConnectionResponse.add_member(:underlay_ip_address, Shapes::ShapeRef.new(shape: UnderlayIpAddress, location_name: "UnderlayIpAddress"))
+    StartConnectionResponse.struct_class = Types::StartConnectionResponse
+
     StateOrRegionList.member = Shapes::ShapeRef.new(shape: StateOrRegion)
 
     SupportedStorageList.member = Shapes::ShapeRef.new(shape: SupportedStorageEnum)
@@ -661,6 +701,18 @@ module Aws::Outposts
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:get_connection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetConnection"
+        o.http_method = "GET"
+        o.http_request_uri = "/connections/{ConnectionId}"
+        o.input = Shapes::ShapeRef.new(shape: GetConnectionRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetConnectionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:get_order, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetOrder"
         o.http_method = "GET"
@@ -822,6 +874,18 @@ module Aws::Outposts
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
+      api.add_operation(:start_connection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartConnection"
+        o.http_method = "POST"
+        o.http_request_uri = "/connections"
+        o.input = Shapes::ShapeRef.new(shape: StartConnectionRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartConnectionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

@@ -722,6 +722,58 @@ module Aws::Outposts
       req.send_request(options)
     end
 
+    # <note markdown="1"> Amazon Web Services uses this action to install Outpost servers.
+    #
+    #  </note>
+    #
+    # Gets information about a specified connection.
+    #
+    # Use CloudTrail to monitor this action or Amazon Web Services managed
+    # policy for Amazon Web Services Outposts to secure it. For more
+    # information, see [ Amazon Web Services managed policies for Amazon Web
+    # Services Outposts][1] and [ Logging Amazon Web Services Outposts API
+    # calls with Amazon Web Services CloudTrail][2] in the *Amazon Web
+    # Services Outposts User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/outposts/latest/userguide/security-iam-awsmanpol.html
+    # [2]: https://docs.aws.amazon.com/outposts/latest/userguide/logging-using-cloudtrail.html
+    #
+    # @option params [required, String] :connection_id
+    #   The ID of the connection you request.
+    #
+    # @return [Types::GetConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetConnectionResponse#connection_id #connection_id} => String
+    #   * {Types::GetConnectionResponse#connection_details #connection_details} => Types::ConnectionDetails
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_connection({
+    #     connection_id: "ConnectionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connection_id #=> String
+    #   resp.connection_details.client_public_key #=> String
+    #   resp.connection_details.server_public_key #=> String
+    #   resp.connection_details.server_endpoint #=> String
+    #   resp.connection_details.client_tunnel_address #=> String
+    #   resp.connection_details.server_tunnel_address #=> String
+    #   resp.connection_details.allowed_ips #=> Array
+    #   resp.connection_details.allowed_ips[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetConnection AWS API Documentation
+    #
+    # @overload get_connection(params = {})
+    # @param [Hash] params ({})
+    def get_connection(params = {}, options = {})
+      req = build_request(:get_connection, params)
+      req.send_request(options)
+    end
+
     # Gets an order.
     #
     # @option params [required, String] :order_id
@@ -1349,6 +1401,64 @@ module Aws::Outposts
       req.send_request(options)
     end
 
+    # <note markdown="1"> Amazon Web Services uses this action to install Outpost servers.
+    #
+    #  </note>
+    #
+    # Starts the connection required for Outpost server installation.
+    #
+    # Use CloudTrail to monitor this action or Amazon Web Services managed
+    # policy for Amazon Web Services Outposts to secure it. For more
+    # information, see [ Amazon Web Services managed policies for Amazon Web
+    # Services Outposts][1] and [ Logging Amazon Web Services Outposts API
+    # calls with Amazon Web Services CloudTrail][2] in the *Amazon Web
+    # Services Outposts User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/outposts/latest/userguide/security-iam-awsmanpol.html
+    # [2]: https://docs.aws.amazon.com/outposts/latest/userguide/logging-using-cloudtrail.html
+    #
+    # @option params [required, String] :device_serial_number
+    #   The serial number of the dongle.
+    #
+    # @option params [required, String] :asset_id
+    #   The ID of the Outpost server.
+    #
+    # @option params [required, String] :client_public_key
+    #   The public key of the client.
+    #
+    # @option params [required, Integer] :network_interface_device_index
+    #   The device index of the network interface on the Outpost server.
+    #
+    # @return [Types::StartConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartConnectionResponse#connection_id #connection_id} => String
+    #   * {Types::StartConnectionResponse#underlay_ip_address #underlay_ip_address} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_connection({
+    #     device_serial_number: "DeviceSerialNumber", # required
+    #     asset_id: "AssetId", # required
+    #     client_public_key: "WireGuardPublicKey", # required
+    #     network_interface_device_index: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connection_id #=> String
+    #   resp.underlay_ip_address #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/StartConnection AWS API Documentation
+    #
+    # @overload start_connection(params = {})
+    # @param [Hash] params ({})
+    def start_connection(params = {}, options = {})
+      req = build_request(:start_connection, params)
+      req.send_request(options)
+    end
+
     # Adds tags to the specified resource.
     #
     # @option params [required, String] :resource_arn
@@ -1786,7 +1896,7 @@ module Aws::Outposts
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-outposts'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -238,6 +238,45 @@ module Aws::Outposts
       include Aws::Structure
     end
 
+    # Information about a connection.
+    #
+    # @!attribute [rw] client_public_key
+    #   The public key of the client.
+    #   @return [String]
+    #
+    # @!attribute [rw] server_public_key
+    #   The public key of the server.
+    #   @return [String]
+    #
+    # @!attribute [rw] server_endpoint
+    #   The endpoint for the server.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_tunnel_address
+    #   The client tunnel address.
+    #   @return [String]
+    #
+    # @!attribute [rw] server_tunnel_address
+    #   The server tunnel address.
+    #   @return [String]
+    #
+    # @!attribute [rw] allowed_ips
+    #   The allowed IP addresses.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ConnectionDetails AWS API Documentation
+    #
+    class ConnectionDetails < Struct.new(
+      :client_public_key,
+      :server_public_key,
+      :server_endpoint,
+      :client_tunnel_address,
+      :server_tunnel_address,
+      :allowed_ips)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateOrderInput
     #   data as a hash:
     #
@@ -597,6 +636,42 @@ module Aws::Outposts
     #
     class GetCatalogItemOutput < Struct.new(
       :catalog_item)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetConnectionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         connection_id: "ConnectionId", # required
+    #       }
+    #
+    # @!attribute [rw] connection_id
+    #   The ID of the connection you request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetConnectionRequest AWS API Documentation
+    #
+    class GetConnectionRequest < Struct.new(
+      :connection_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connection_id
+    #   The ID of the connection you receive.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_details
+    #   Information about a connection.
+    #   @return [Types::ConnectionDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetConnectionResponse AWS API Documentation
+    #
+    class GetConnectionResponse < Struct.new(
+      :connection_id,
+      :connection_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1638,6 +1713,60 @@ module Aws::Outposts
       :operating_address_state_or_region,
       :operating_address_city,
       :rack_physical_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartConnectionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         device_serial_number: "DeviceSerialNumber", # required
+    #         asset_id: "AssetId", # required
+    #         client_public_key: "WireGuardPublicKey", # required
+    #         network_interface_device_index: 1, # required
+    #       }
+    #
+    # @!attribute [rw] device_serial_number
+    #   The serial number of the dongle.
+    #   @return [String]
+    #
+    # @!attribute [rw] asset_id
+    #   The ID of the Outpost server.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_public_key
+    #   The public key of the client.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_interface_device_index
+    #   The device index of the network interface on the Outpost server.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/StartConnectionRequest AWS API Documentation
+    #
+    class StartConnectionRequest < Struct.new(
+      :device_serial_number,
+      :asset_id,
+      :client_public_key,
+      :network_interface_device_index)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connection_id
+    #   The ID of the connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] underlay_ip_address
+    #   The underlay IP address.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/StartConnectionResponse AWS API Documentation
+    #
+    class StartConnectionResponse < Struct.new(
+      :connection_id,
+      :underlay_ip_address)
       SENSITIVE = []
       include Aws::Structure
     end

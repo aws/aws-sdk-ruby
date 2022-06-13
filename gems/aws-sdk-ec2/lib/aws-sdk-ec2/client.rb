@@ -22067,7 +22067,7 @@ module Aws::EC2
     #   ec2.describe_instances(filters:[{ name: 'tag-value', values: ['value1', 'value2'] }])
     #
     #   # filtering by key and value, key equals "key1" and value equals "value1" or "value2"
-    #   ec2.describe_instances(filters:[{ name: "tag:key1", values: ['value1'] }])
+    #   ec2.describe_instances(filters:[{ name: "tag:key1", values: ['value1', 'value2'] }])
     #
     # @example Request syntax with placeholder values
     #
@@ -49695,7 +49695,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.317.0'
+      context[:gem_version] = '1.318.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

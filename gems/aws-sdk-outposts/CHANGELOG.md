@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2022-06-13)
+------------------
+
+* Feature - This release adds API operations AWS uses to install Outpost servers.
+
 1.32.0 (2022-05-12)
 ------------------
 
