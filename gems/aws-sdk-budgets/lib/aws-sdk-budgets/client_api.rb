@@ -80,6 +80,7 @@ module Aws::Budgets
     DescribeNotificationsForBudgetResponse = Shapes::StructureShape.new(name: 'DescribeNotificationsForBudgetResponse')
     DescribeSubscribersForNotificationRequest = Shapes::StructureShape.new(name: 'DescribeSubscribersForNotificationRequest')
     DescribeSubscribersForNotificationResponse = Shapes::StructureShape.new(name: 'DescribeSubscribersForNotificationResponse')
+    DimensionValue = Shapes::StringShape.new(name: 'DimensionValue')
     DimensionValues = Shapes::ListShape.new(name: 'DimensionValues')
     DuplicateRecordException = Shapes::StructureShape.new(name: 'DuplicateRecordException')
     EventType = Shapes::StringShape.new(name: 'EventType')
@@ -128,6 +129,7 @@ module Aws::Budgets
     TargetId = Shapes::StringShape.new(name: 'TargetId')
     TargetIds = Shapes::ListShape.new(name: 'TargetIds')
     ThresholdType = Shapes::StringShape.new(name: 'ThresholdType')
+    ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TimePeriod = Shapes::StructureShape.new(name: 'TimePeriod')
     TimeUnit = Shapes::StringShape.new(name: 'TimeUnit')
     UnitValue = Shapes::StringShape.new(name: 'UnitValue')
@@ -413,7 +415,7 @@ module Aws::Budgets
     DescribeSubscribersForNotificationResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
     DescribeSubscribersForNotificationResponse.struct_class = Types::DescribeSubscribersForNotificationResponse
 
-    DimensionValues.member = Shapes::ShapeRef.new(shape: GenericString)
+    DimensionValues.member = Shapes::ShapeRef.new(shape: DimensionValue)
 
     DuplicateRecordException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
     DuplicateRecordException.struct_class = Types::DuplicateRecordException
@@ -503,6 +505,9 @@ module Aws::Budgets
 
     TargetIds.member = Shapes::ShapeRef.new(shape: TargetId)
 
+    ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
+    ThrottlingException.struct_class = Types::ThrottlingException
+
     TimePeriod.add_member(:start, Shapes::ShapeRef.new(shape: GenericTimestamp, location_name: "Start"))
     TimePeriod.add_member(:end, Shapes::ShapeRef.new(shape: GenericTimestamp, location_name: "End"))
     TimePeriod.struct_class = Types::TimePeriod
@@ -579,6 +584,7 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: CreationLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateRecordException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:create_budget_action, Seahorse::Model::Operation.new.tap do |o|
@@ -593,6 +599,7 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: DuplicateRecordException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:create_notification, Seahorse::Model::Operation.new.tap do |o|
@@ -607,6 +614,7 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: CreationLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateRecordException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:create_subscriber, Seahorse::Model::Operation.new.tap do |o|
@@ -621,6 +629,7 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: DuplicateRecordException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:delete_budget, Seahorse::Model::Operation.new.tap do |o|
@@ -633,6 +642,7 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:delete_budget_action, Seahorse::Model::Operation.new.tap do |o|
@@ -646,6 +656,7 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceLockedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:delete_notification, Seahorse::Model::Operation.new.tap do |o|
@@ -658,6 +669,7 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:delete_subscriber, Seahorse::Model::Operation.new.tap do |o|
@@ -670,6 +682,7 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:describe_budget, Seahorse::Model::Operation.new.tap do |o|
@@ -682,6 +695,7 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:describe_budget_action, Seahorse::Model::Operation.new.tap do |o|
@@ -694,6 +708,7 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:describe_budget_action_histories, Seahorse::Model::Operation.new.tap do |o|
@@ -707,6 +722,7 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -725,6 +741,7 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -744,6 +761,7 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -764,6 +782,7 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: ExpiredNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -784,6 +803,7 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: ExpiredNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -804,6 +824,7 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: ExpiredNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -824,6 +845,7 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: ExpiredNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -844,6 +866,7 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: ExpiredNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -863,6 +886,7 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceLockedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:update_budget, Seahorse::Model::Operation.new.tap do |o|
@@ -875,6 +899,7 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:update_budget_action, Seahorse::Model::Operation.new.tap do |o|
@@ -888,6 +913,7 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceLockedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:update_notification, Seahorse::Model::Operation.new.tap do |o|
@@ -901,6 +927,7 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateRecordException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:update_subscriber, Seahorse::Model::Operation.new.tap do |o|
@@ -914,6 +941,7 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateRecordException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
     end
 

@@ -123,6 +123,11 @@ module Aws::LookoutMetrics
     #   The time at which the alert was created.
     #   @return [Time]
     #
+    # @!attribute [rw] alert_filters
+    #   The configuration of the alert filters, containing MetricList and
+    #   DimensionFilter.
+    #   @return [Types::AlertFilters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/Alert AWS API Documentation
     #
     class Alert < Struct.new(
@@ -135,7 +140,41 @@ module Aws::LookoutMetrics
       :alert_type,
       :alert_status,
       :last_modification_time,
-      :creation_time)
+      :creation_time,
+      :alert_filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration of the alert filters.
+    #
+    # @note When making an API call, you may pass AlertFilters
+    #   data as a hash:
+    #
+    #       {
+    #         metric_list: ["MetricName"],
+    #         dimension_filter_list: [
+    #           {
+    #             dimension_name: "ColumnName",
+    #             dimension_value_list: ["DimensionValue"],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] metric_list
+    #   The list of measures that you want to get alerts for.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dimension_filter_list
+    #   The list of DimensionFilter objects that are used for
+    #   dimension-based filtering.
+    #   @return [Array<Types::DimensionFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/AlertFilters AWS API Documentation
+    #
+    class AlertFilters < Struct.new(
+      :metric_list,
+      :dimension_filter_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -732,7 +771,7 @@ module Aws::LookoutMetrics
     #
     #       {
     #         alert_name: "AlertName", # required
-    #         alert_sensitivity_threshold: 1, # required
+    #         alert_sensitivity_threshold: 1,
     #         alert_description: "AlertDescription",
     #         anomaly_detector_arn: "Arn", # required
     #         action: { # required
@@ -748,6 +787,15 @@ module Aws::LookoutMetrics
     #         },
     #         tags: {
     #           "TagKey" => "TagValue",
+    #         },
+    #         alert_filters: {
+    #           metric_list: ["MetricName"],
+    #           dimension_filter_list: [
+    #             {
+    #               dimension_name: "ColumnName",
+    #               dimension_value_list: ["DimensionValue"],
+    #             },
+    #           ],
     #         },
     #       }
     #
@@ -779,6 +827,11 @@ module Aws::LookoutMetrics
     #   [1]: https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] alert_filters
+    #   The configuration of the alert filters, containing MetricList and
+    #   DimensionFilterList.
+    #   @return [Types::AlertFilters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/CreateAlertRequest AWS API Documentation
     #
     class CreateAlertRequest < Struct.new(
@@ -787,7 +840,8 @@ module Aws::LookoutMetrics
       :alert_description,
       :anomaly_detector_arn,
       :action,
-      :tags)
+      :tags,
+      :alert_filters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1632,6 +1686,34 @@ module Aws::LookoutMetrics
     class DimensionContribution < Struct.new(
       :dimension_name,
       :dimension_value_contribution_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The dimension filter, containing DimensionName and DimensionValueList.
+    #
+    # @note When making an API call, you may pass DimensionFilter
+    #   data as a hash:
+    #
+    #       {
+    #         dimension_name: "ColumnName",
+    #         dimension_value_list: ["DimensionValue"],
+    #       }
+    #
+    # @!attribute [rw] dimension_name
+    #   The name of the dimension to filter on.
+    #   @return [String]
+    #
+    # @!attribute [rw] dimension_value_list
+    #   The list of values for the dimension specified in DimensionName that
+    #   you want to filter on.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/DimensionFilter AWS API Documentation
+    #
+    class DimensionFilter < Struct.new(
+      :dimension_name,
+      :dimension_value_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2877,6 +2959,16 @@ module Aws::LookoutMetrics
     #
     # @!attribute [rw] sns_format
     #   The format of the SNS topic.
+    #
+    #   * `JSON` – Send JSON alerts with an anomaly ID and a link to the
+    #     anomaly detail page. This is the default.
+    #
+    #   * `LONG_TEXT` – Send human-readable alerts with information about
+    #     the impacted timeseries and a link to the anomaly detail page. We
+    #     recommend this for email.
+    #
+    #   * `SHORT_TEXT` – Send human-readable alerts with a link to the
+    #     anomaly detail page. We recommend this for SMS.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/SNSConfiguration AWS API Documentation
@@ -3122,6 +3214,80 @@ module Aws::LookoutMetrics
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateAlertRequest
+    #   data as a hash:
+    #
+    #       {
+    #         alert_arn: "Arn", # required
+    #         alert_description: "AlertDescription",
+    #         alert_sensitivity_threshold: 1,
+    #         action: {
+    #           sns_configuration: {
+    #             role_arn: "Arn", # required
+    #             sns_topic_arn: "Arn", # required
+    #             sns_format: "LONG_TEXT", # accepts LONG_TEXT, SHORT_TEXT, JSON
+    #           },
+    #           lambda_configuration: {
+    #             role_arn: "Arn", # required
+    #             lambda_arn: "Arn", # required
+    #           },
+    #         },
+    #         alert_filters: {
+    #           metric_list: ["MetricName"],
+    #           dimension_filter_list: [
+    #             {
+    #               dimension_name: "ColumnName",
+    #               dimension_value_list: ["DimensionValue"],
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] alert_arn
+    #   The ARN of the alert to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] alert_description
+    #   A description of the alert.
+    #   @return [String]
+    #
+    # @!attribute [rw] alert_sensitivity_threshold
+    #   An integer from 0 to 100 specifying the alert sensitivity threshold.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] action
+    #   Action that will be triggered when there is an alert.
+    #   @return [Types::Action]
+    #
+    # @!attribute [rw] alert_filters
+    #   The configuration of the alert filters, containing MetricList and
+    #   DimensionFilterList.
+    #   @return [Types::AlertFilters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/UpdateAlertRequest AWS API Documentation
+    #
+    class UpdateAlertRequest < Struct.new(
+      :alert_arn,
+      :alert_description,
+      :alert_sensitivity_threshold,
+      :action,
+      :alert_filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] alert_arn
+    #   The ARN of the updated alert.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/UpdateAlertResponse AWS API Documentation
+    #
+    class UpdateAlertResponse < Struct.new(
+      :alert_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass UpdateAnomalyDetectorRequest
     #   data as a hash:

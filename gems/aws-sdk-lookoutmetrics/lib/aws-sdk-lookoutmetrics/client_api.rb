@@ -20,6 +20,7 @@ module Aws::LookoutMetrics
     AggregationFunction = Shapes::StringShape.new(name: 'AggregationFunction')
     Alert = Shapes::StructureShape.new(name: 'Alert')
     AlertDescription = Shapes::StringShape.new(name: 'AlertDescription')
+    AlertFilters = Shapes::StructureShape.new(name: 'AlertFilters')
     AlertName = Shapes::StringShape.new(name: 'AlertName')
     AlertStatus = Shapes::StringShape.new(name: 'AlertStatus')
     AlertSummary = Shapes::StructureShape.new(name: 'AlertSummary')
@@ -102,12 +103,15 @@ module Aws::LookoutMetrics
     DetectedS3SourceConfig = Shapes::StructureShape.new(name: 'DetectedS3SourceConfig')
     DimensionContribution = Shapes::StructureShape.new(name: 'DimensionContribution')
     DimensionContributionList = Shapes::ListShape.new(name: 'DimensionContributionList')
+    DimensionFilter = Shapes::StructureShape.new(name: 'DimensionFilter')
+    DimensionFilterList = Shapes::ListShape.new(name: 'DimensionFilterList')
     DimensionList = Shapes::ListShape.new(name: 'DimensionList')
     DimensionNameValue = Shapes::StructureShape.new(name: 'DimensionNameValue')
     DimensionNameValueList = Shapes::ListShape.new(name: 'DimensionNameValueList')
     DimensionValue = Shapes::StringShape.new(name: 'DimensionValue')
     DimensionValueContribution = Shapes::StructureShape.new(name: 'DimensionValueContribution')
     DimensionValueContributionList = Shapes::ListShape.new(name: 'DimensionValueContributionList')
+    DimensionValueList = Shapes::ListShape.new(name: 'DimensionValueList')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExecutionList = Shapes::ListShape.new(name: 'ExecutionList')
     ExecutionStatus = Shapes::StructureShape.new(name: 'ExecutionStatus')
@@ -158,6 +162,7 @@ module Aws::LookoutMetrics
     MetricLevelImpactList = Shapes::ListShape.new(name: 'MetricLevelImpactList')
     MetricList = Shapes::ListShape.new(name: 'MetricList')
     MetricName = Shapes::StringShape.new(name: 'MetricName')
+    MetricNameList = Shapes::ListShape.new(name: 'MetricNameList')
     MetricSetDescription = Shapes::StringShape.new(name: 'MetricSetDescription')
     MetricSetName = Shapes::StringShape.new(name: 'MetricSetName')
     MetricSetSummary = Shapes::StructureShape.new(name: 'MetricSetSummary')
@@ -224,6 +229,8 @@ module Aws::LookoutMetrics
     UUID = Shapes::StringShape.new(name: 'UUID')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateAlertRequest = Shapes::StructureShape.new(name: 'UpdateAlertRequest')
+    UpdateAlertResponse = Shapes::StructureShape.new(name: 'UpdateAlertResponse')
     UpdateAnomalyDetectorRequest = Shapes::StructureShape.new(name: 'UpdateAnomalyDetectorRequest')
     UpdateAnomalyDetectorResponse = Shapes::StructureShape.new(name: 'UpdateAnomalyDetectorResponse')
     UpdateMetricSetRequest = Shapes::StructureShape.new(name: 'UpdateMetricSetRequest')
@@ -256,7 +263,12 @@ module Aws::LookoutMetrics
     Alert.add_member(:alert_status, Shapes::ShapeRef.new(shape: AlertStatus, location_name: "AlertStatus"))
     Alert.add_member(:last_modification_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModificationTime"))
     Alert.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    Alert.add_member(:alert_filters, Shapes::ShapeRef.new(shape: AlertFilters, location_name: "AlertFilters"))
     Alert.struct_class = Types::Alert
+
+    AlertFilters.add_member(:metric_list, Shapes::ShapeRef.new(shape: MetricNameList, location_name: "MetricList"))
+    AlertFilters.add_member(:dimension_filter_list, Shapes::ShapeRef.new(shape: DimensionFilterList, location_name: "DimensionFilterList"))
+    AlertFilters.struct_class = Types::AlertFilters
 
     AlertSummary.add_member(:alert_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AlertArn"))
     AlertSummary.add_member(:anomaly_detector_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AnomalyDetectorArn"))
@@ -370,11 +382,12 @@ module Aws::LookoutMetrics
     ContributionMatrix.struct_class = Types::ContributionMatrix
 
     CreateAlertRequest.add_member(:alert_name, Shapes::ShapeRef.new(shape: AlertName, required: true, location_name: "AlertName"))
-    CreateAlertRequest.add_member(:alert_sensitivity_threshold, Shapes::ShapeRef.new(shape: SensitivityThreshold, required: true, location_name: "AlertSensitivityThreshold"))
+    CreateAlertRequest.add_member(:alert_sensitivity_threshold, Shapes::ShapeRef.new(shape: SensitivityThreshold, location_name: "AlertSensitivityThreshold"))
     CreateAlertRequest.add_member(:alert_description, Shapes::ShapeRef.new(shape: AlertDescription, location_name: "AlertDescription"))
     CreateAlertRequest.add_member(:anomaly_detector_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "AnomalyDetectorArn"))
     CreateAlertRequest.add_member(:action, Shapes::ShapeRef.new(shape: Action, required: true, location_name: "Action"))
     CreateAlertRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateAlertRequest.add_member(:alert_filters, Shapes::ShapeRef.new(shape: AlertFilters, location_name: "AlertFilters"))
     CreateAlertRequest.struct_class = Types::CreateAlertRequest
 
     CreateAlertResponse.add_member(:alert_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AlertArn"))
@@ -523,6 +536,12 @@ module Aws::LookoutMetrics
 
     DimensionContributionList.member = Shapes::ShapeRef.new(shape: DimensionContribution)
 
+    DimensionFilter.add_member(:dimension_name, Shapes::ShapeRef.new(shape: ColumnName, location_name: "DimensionName"))
+    DimensionFilter.add_member(:dimension_value_list, Shapes::ShapeRef.new(shape: DimensionValueList, location_name: "DimensionValueList"))
+    DimensionFilter.struct_class = Types::DimensionFilter
+
+    DimensionFilterList.member = Shapes::ShapeRef.new(shape: DimensionFilter)
+
     DimensionList.member = Shapes::ShapeRef.new(shape: ColumnName)
 
     DimensionNameValue.add_member(:dimension_name, Shapes::ShapeRef.new(shape: ColumnName, required: true, location_name: "DimensionName"))
@@ -536,6 +555,8 @@ module Aws::LookoutMetrics
     DimensionValueContribution.struct_class = Types::DimensionValueContribution
 
     DimensionValueContributionList.member = Shapes::ShapeRef.new(shape: DimensionValueContribution)
+
+    DimensionValueList.member = Shapes::ShapeRef.new(shape: DimensionValue)
 
     ExecutionList.member = Shapes::ShapeRef.new(shape: ExecutionStatus)
 
@@ -685,6 +706,8 @@ module Aws::LookoutMetrics
 
     MetricList.member = Shapes::ShapeRef.new(shape: Metric)
 
+    MetricNameList.member = Shapes::ShapeRef.new(shape: MetricName)
+
     MetricSetSummary.add_member(:metric_set_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "MetricSetArn"))
     MetricSetSummary.add_member(:anomaly_detector_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AnomalyDetectorArn"))
     MetricSetSummary.add_member(:metric_set_description, Shapes::ShapeRef.new(shape: MetricSetDescription, location_name: "MetricSetDescription"))
@@ -813,6 +836,16 @@ module Aws::LookoutMetrics
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
+    UpdateAlertRequest.add_member(:alert_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "AlertArn"))
+    UpdateAlertRequest.add_member(:alert_description, Shapes::ShapeRef.new(shape: AlertDescription, location_name: "AlertDescription"))
+    UpdateAlertRequest.add_member(:alert_sensitivity_threshold, Shapes::ShapeRef.new(shape: SensitivityThreshold, location_name: "AlertSensitivityThreshold"))
+    UpdateAlertRequest.add_member(:action, Shapes::ShapeRef.new(shape: Action, location_name: "Action"))
+    UpdateAlertRequest.add_member(:alert_filters, Shapes::ShapeRef.new(shape: AlertFilters, location_name: "AlertFilters"))
+    UpdateAlertRequest.struct_class = Types::UpdateAlertRequest
+
+    UpdateAlertResponse.add_member(:alert_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AlertArn"))
+    UpdateAlertResponse.struct_class = Types::UpdateAlertResponse
 
     UpdateAnomalyDetectorRequest.add_member(:anomaly_detector_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "AnomalyDetectorArn"))
     UpdateAnomalyDetectorRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
@@ -1257,6 +1290,19 @@ module Aws::LookoutMetrics
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_alert, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAlert"
+        o.http_method = "POST"
+        o.http_request_uri = "/UpdateAlert"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAlertRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAlertResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:update_anomaly_detector, Seahorse::Model::Operation.new.tap do |o|

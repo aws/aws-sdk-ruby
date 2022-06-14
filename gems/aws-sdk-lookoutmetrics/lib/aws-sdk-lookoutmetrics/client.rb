@@ -400,7 +400,7 @@ module Aws::LookoutMetrics
     # @option params [required, String] :alert_name
     #   The name of the alert.
     #
-    # @option params [required, Integer] :alert_sensitivity_threshold
+    # @option params [Integer] :alert_sensitivity_threshold
     #   An integer from 0 to 100 specifying the alert sensitivity threshold.
     #
     # @option params [String] :alert_description
@@ -419,6 +419,10 @@ module Aws::LookoutMetrics
     #
     #   [1]: https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html
     #
+    # @option params [Types::AlertFilters] :alert_filters
+    #   The configuration of the alert filters, containing MetricList and
+    #   DimensionFilterList.
+    #
     # @return [Types::CreateAlertResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAlertResponse#alert_arn #alert_arn} => String
@@ -427,7 +431,7 @@ module Aws::LookoutMetrics
     #
     #   resp = client.create_alert({
     #     alert_name: "AlertName", # required
-    #     alert_sensitivity_threshold: 1, # required
+    #     alert_sensitivity_threshold: 1,
     #     alert_description: "AlertDescription",
     #     anomaly_detector_arn: "Arn", # required
     #     action: { # required
@@ -443,6 +447,15 @@ module Aws::LookoutMetrics
     #     },
     #     tags: {
     #       "TagKey" => "TagValue",
+    #     },
+    #     alert_filters: {
+    #       metric_list: ["MetricName"],
+    #       dimension_filter_list: [
+    #         {
+    #           dimension_name: "ColumnName",
+    #           dimension_value_list: ["DimensionValue"],
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -769,6 +782,12 @@ module Aws::LookoutMetrics
     #   resp.alert.alert_status #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.alert.last_modification_time #=> Time
     #   resp.alert.creation_time #=> Time
+    #   resp.alert.alert_filters.metric_list #=> Array
+    #   resp.alert.alert_filters.metric_list[0] #=> String
+    #   resp.alert.alert_filters.dimension_filter_list #=> Array
+    #   resp.alert.alert_filters.dimension_filter_list[0].dimension_name #=> String
+    #   resp.alert.alert_filters.dimension_filter_list[0].dimension_value_list #=> Array
+    #   resp.alert.alert_filters.dimension_filter_list[0].dimension_value_list[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/DescribeAlert AWS API Documentation
     #
@@ -1661,6 +1680,69 @@ module Aws::LookoutMetrics
       req.send_request(options)
     end
 
+    # Make changes to an existing alert.
+    #
+    # @option params [required, String] :alert_arn
+    #   The ARN of the alert to update.
+    #
+    # @option params [String] :alert_description
+    #   A description of the alert.
+    #
+    # @option params [Integer] :alert_sensitivity_threshold
+    #   An integer from 0 to 100 specifying the alert sensitivity threshold.
+    #
+    # @option params [Types::Action] :action
+    #   Action that will be triggered when there is an alert.
+    #
+    # @option params [Types::AlertFilters] :alert_filters
+    #   The configuration of the alert filters, containing MetricList and
+    #   DimensionFilterList.
+    #
+    # @return [Types::UpdateAlertResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAlertResponse#alert_arn #alert_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_alert({
+    #     alert_arn: "Arn", # required
+    #     alert_description: "AlertDescription",
+    #     alert_sensitivity_threshold: 1,
+    #     action: {
+    #       sns_configuration: {
+    #         role_arn: "Arn", # required
+    #         sns_topic_arn: "Arn", # required
+    #         sns_format: "LONG_TEXT", # accepts LONG_TEXT, SHORT_TEXT, JSON
+    #       },
+    #       lambda_configuration: {
+    #         role_arn: "Arn", # required
+    #         lambda_arn: "Arn", # required
+    #       },
+    #     },
+    #     alert_filters: {
+    #       metric_list: ["MetricName"],
+    #       dimension_filter_list: [
+    #         {
+    #           dimension_name: "ColumnName",
+    #           dimension_value_list: ["DimensionValue"],
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.alert_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/UpdateAlert AWS API Documentation
+    #
+    # @overload update_alert(params = {})
+    # @param [Hash] params ({})
+    def update_alert(params = {}, options = {})
+      req = build_request(:update_alert, params)
+      req.send_request(options)
+    end
+
     # Updates a detector. After activation, you can only change a
     # detector's ingestion delay and description.
     #
@@ -1852,7 +1934,7 @@ module Aws::LookoutMetrics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lookoutmetrics'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

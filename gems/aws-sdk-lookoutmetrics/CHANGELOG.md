@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2022-06-14)
+------------------
+
+* Feature - Adding filters to Alert and adding new UpdateAlert API.
+
 1.19.0 (2022-05-31)
 ------------------
 

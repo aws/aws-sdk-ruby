@@ -528,6 +528,7 @@ module Aws::MediaConvert
     #           },
     #           audio_selectors: {
     #             "__string" => {
+    #               audio_duration_correction: "DISABLED", # accepts DISABLED, AUTO, TRACK, FRAME
     #               custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #               default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
     #               external_audio_file_input: "__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSOOGGGGaAHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSOOGGGGaA",
@@ -1836,6 +1837,7 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names #=> Array
     #   resp.job.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names[0] #=> String
     #   resp.job.settings.inputs[0].audio_selectors #=> Hash
+    #   resp.job.settings.inputs[0].audio_selectors["__string"].audio_duration_correction #=> String, one of "DISABLED", "AUTO", "TRACK", "FRAME"
     #   resp.job.settings.inputs[0].audio_selectors["__string"].custom_language_code #=> String
     #   resp.job.settings.inputs[0].audio_selectors["__string"].default_selection #=> String, one of "DEFAULT", "NOT_DEFAULT"
     #   resp.job.settings.inputs[0].audio_selectors["__string"].external_audio_file_input #=> String
@@ -2866,6 +2868,7 @@ module Aws::MediaConvert
     #           },
     #           audio_selectors: {
     #             "__string" => {
+    #               audio_duration_correction: "DISABLED", # accepts DISABLED, AUTO, TRACK, FRAME
     #               custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #               default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
     #               external_audio_file_input: "__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSOOGGGGaAHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSOOGGGGaA",
@@ -4140,6 +4143,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names #=> Array
     #   resp.job_template.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names[0] #=> String
     #   resp.job_template.settings.inputs[0].audio_selectors #=> Hash
+    #   resp.job_template.settings.inputs[0].audio_selectors["__string"].audio_duration_correction #=> String, one of "DISABLED", "AUTO", "TRACK", "FRAME"
     #   resp.job_template.settings.inputs[0].audio_selectors["__string"].custom_language_code #=> String
     #   resp.job_template.settings.inputs[0].audio_selectors["__string"].default_selection #=> String, one of "DEFAULT", "NOT_DEFAULT"
     #   resp.job_template.settings.inputs[0].audio_selectors["__string"].external_audio_file_input #=> String
@@ -6697,6 +6701,7 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names #=> Array
     #   resp.job.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names[0] #=> String
     #   resp.job.settings.inputs[0].audio_selectors #=> Hash
+    #   resp.job.settings.inputs[0].audio_selectors["__string"].audio_duration_correction #=> String, one of "DISABLED", "AUTO", "TRACK", "FRAME"
     #   resp.job.settings.inputs[0].audio_selectors["__string"].custom_language_code #=> String
     #   resp.job.settings.inputs[0].audio_selectors["__string"].default_selection #=> String, one of "DEFAULT", "NOT_DEFAULT"
     #   resp.job.settings.inputs[0].audio_selectors["__string"].external_audio_file_input #=> String
@@ -7668,6 +7673,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names #=> Array
     #   resp.job_template.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names[0] #=> String
     #   resp.job_template.settings.inputs[0].audio_selectors #=> Hash
+    #   resp.job_template.settings.inputs[0].audio_selectors["__string"].audio_duration_correction #=> String, one of "DISABLED", "AUTO", "TRACK", "FRAME"
     #   resp.job_template.settings.inputs[0].audio_selectors["__string"].custom_language_code #=> String
     #   resp.job_template.settings.inputs[0].audio_selectors["__string"].default_selection #=> String, one of "DEFAULT", "NOT_DEFAULT"
     #   resp.job_template.settings.inputs[0].audio_selectors["__string"].external_audio_file_input #=> String
@@ -9319,6 +9325,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.inputs[0].audio_selector_groups["__string"].audio_selector_names #=> Array
     #   resp.job_templates[0].settings.inputs[0].audio_selector_groups["__string"].audio_selector_names[0] #=> String
     #   resp.job_templates[0].settings.inputs[0].audio_selectors #=> Hash
+    #   resp.job_templates[0].settings.inputs[0].audio_selectors["__string"].audio_duration_correction #=> String, one of "DISABLED", "AUTO", "TRACK", "FRAME"
     #   resp.job_templates[0].settings.inputs[0].audio_selectors["__string"].custom_language_code #=> String
     #   resp.job_templates[0].settings.inputs[0].audio_selectors["__string"].default_selection #=> String, one of "DEFAULT", "NOT_DEFAULT"
     #   resp.job_templates[0].settings.inputs[0].audio_selectors["__string"].external_audio_file_input #=> String
@@ -10325,6 +10332,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.inputs[0].audio_selector_groups["__string"].audio_selector_names #=> Array
     #   resp.jobs[0].settings.inputs[0].audio_selector_groups["__string"].audio_selector_names[0] #=> String
     #   resp.jobs[0].settings.inputs[0].audio_selectors #=> Hash
+    #   resp.jobs[0].settings.inputs[0].audio_selectors["__string"].audio_duration_correction #=> String, one of "DISABLED", "AUTO", "TRACK", "FRAME"
     #   resp.jobs[0].settings.inputs[0].audio_selectors["__string"].custom_language_code #=> String
     #   resp.jobs[0].settings.inputs[0].audio_selectors["__string"].default_selection #=> String, one of "DEFAULT", "NOT_DEFAULT"
     #   resp.jobs[0].settings.inputs[0].audio_selectors["__string"].external_audio_file_input #=> String
@@ -12175,6 +12183,7 @@ module Aws::MediaConvert
     #           },
     #           audio_selectors: {
     #             "__string" => {
+    #               audio_duration_correction: "DISABLED", # accepts DISABLED, AUTO, TRACK, FRAME
     #               custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #               default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
     #               external_audio_file_input: "__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSOOGGGGaAHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSOOGGGGaA",
@@ -13446,6 +13455,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names #=> Array
     #   resp.job_template.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names[0] #=> String
     #   resp.job_template.settings.inputs[0].audio_selectors #=> Hash
+    #   resp.job_template.settings.inputs[0].audio_selectors["__string"].audio_duration_correction #=> String, one of "DISABLED", "AUTO", "TRACK", "FRAME"
     #   resp.job_template.settings.inputs[0].audio_selectors["__string"].custom_language_code #=> String
     #   resp.job_template.settings.inputs[0].audio_selectors["__string"].default_selection #=> String, one of "DEFAULT", "NOT_DEFAULT"
     #   resp.job_template.settings.inputs[0].audio_selectors["__string"].external_audio_file_input #=> String
@@ -15782,7 +15792,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.90.0'
+      context[:gem_version] = '1.91.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2022-06-14)
+------------------
+
+* Feature - Add a budgets ThrottlingException. Update the CostFilters value pattern.
+
 1.49.0 (2022-02-24)
 ------------------
 
