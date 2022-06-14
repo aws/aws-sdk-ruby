@@ -83,7 +83,9 @@ module AwsSdkCodeGenerator
         'checksumFormat' => true,
         'globalEndpoint' => true,
         'serviceAbbreviation' => true,
-        'uid' => true
+        'uid' => true,
+        # ignore
+        'ripServiceName' => true
       }
 
       # @option options [required, Service] :service
