@@ -121,6 +121,11 @@ module Aws::WorkSpaces
       def message
         @message || @data[:message]
       end
+
+      # @return [String]
+      def reason
+        @data[:reason]
+      end
     end
 
     class ResourceAlreadyExistsException < ServiceError

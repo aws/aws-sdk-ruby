@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2022-06-15)
+------------------
+
+* Feature - This release adds a new API ListAttributeGroupsForApplication that returns associated attribute groups of an application. In addition, the UpdateApplication and UpdateAttributeGroup APIs will not allow users to update the 'Name' attribute.
+
 1.15.0 (2022-02-28)
 ------------------
 

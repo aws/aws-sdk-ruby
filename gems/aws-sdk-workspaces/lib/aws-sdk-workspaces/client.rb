@@ -2276,14 +2276,9 @@ module Aws::WorkSpaces
     #   specify a value that ends in `_WSP`. To use PCoIP, specify a value
     #   that does not end in `_WSP`.
     #
-    #   For non-GPU-enabled images (bundles other than Graphics.g4dn,
-    #   GraphicsPro.g4dn, Graphics, or GraphicsPro), specify `BYOL_REGULAR` or
-    #   `BYOL_REGULAR_WSP`, depending on the protocol.
-    #
-    #   <note markdown="1"> Use `BYOL_GRAPHICS_G4DN` ingestion for both Graphics.g4dn and
-    #   GraphicsPro.g4dn.
-    #
-    #    </note>
+    #   For non-GPU-enabled bundles (bundles other than Graphics or
+    #   GraphicsPro), specify `BYOL_REGULAR` or `BYOL_REGULAR_WSP`, depending
+    #   on the protocol.
     #
     # @option params [required, String] :image_name
     #   The name of the WorkSpace image.
@@ -2300,12 +2295,8 @@ module Aws::WorkSpaces
     #   subscribing to Office for BYOL images, see [ Bring Your Own Windows
     #   Desktop Licenses][1].
     #
-    #   <note markdown="1"> * Although this parameter is an array, only one item is allowed at
-    #     this time
-    #
-    #   * Microsoft Office 2016 application subscription through AWS is
-    #     currently not supported for Graphics.g4dn Bring Your Own License
-    #     (BYOL) images
+    #   <note markdown="1"> Although this parameter is an array, only one item is allowed at this
+    #   time.
     #
     #    </note>
     #
@@ -3305,7 +3296,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

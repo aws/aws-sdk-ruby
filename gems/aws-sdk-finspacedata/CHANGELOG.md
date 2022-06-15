@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2022-06-15)
+------------------
+
+* Feature - This release adds a new set of APIs, GetPermissionGroup, DisassociateUserFromPermissionGroup, AssociateUserToPermissionGroup, ListPermissionGroupsByUser, ListUsersByPermissionGroup.
+
 1.15.0 (2022-05-12)
 ------------------
 

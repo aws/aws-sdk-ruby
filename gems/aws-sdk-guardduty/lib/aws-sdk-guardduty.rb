@@ -28,7 +28,7 @@ require_relative 'aws-sdk-guardduty/customizations'
 # structure.
 #
 #     guard_duty = Aws::GuardDuty::Client.new
-#     resp = guard_duty.accept_invitation(params)
+#     resp = guard_duty.accept_administrator_invitation(params)
 #
 # See {Client} for more information.
 #
@@ -48,6 +48,6 @@ require_relative 'aws-sdk-guardduty/customizations'
 # @!group service
 module Aws::GuardDuty
 
-  GEM_VERSION = '1.57.0'
+  GEM_VERSION = '1.58.0'
 
 end

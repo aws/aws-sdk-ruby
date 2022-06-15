@@ -27,6 +27,8 @@ module Aws::AppRegistry
     AssociationCount = Shapes::IntegerShape.new(name: 'AssociationCount')
     AttributeGroup = Shapes::StructureShape.new(name: 'AttributeGroup')
     AttributeGroupArn = Shapes::StringShape.new(name: 'AttributeGroupArn')
+    AttributeGroupDetails = Shapes::StructureShape.new(name: 'AttributeGroupDetails')
+    AttributeGroupDetailsList = Shapes::ListShape.new(name: 'AttributeGroupDetailsList')
     AttributeGroupId = Shapes::StringShape.new(name: 'AttributeGroupId')
     AttributeGroupIds = Shapes::ListShape.new(name: 'AttributeGroupIds')
     AttributeGroupSpecifier = Shapes::StringShape.new(name: 'AttributeGroupSpecifier')
@@ -62,6 +64,8 @@ module Aws::AppRegistry
     ListAssociatedAttributeGroupsResponse = Shapes::StructureShape.new(name: 'ListAssociatedAttributeGroupsResponse')
     ListAssociatedResourcesRequest = Shapes::StructureShape.new(name: 'ListAssociatedResourcesRequest')
     ListAssociatedResourcesResponse = Shapes::StructureShape.new(name: 'ListAssociatedResourcesResponse')
+    ListAttributeGroupsForApplicationRequest = Shapes::StructureShape.new(name: 'ListAttributeGroupsForApplicationRequest')
+    ListAttributeGroupsForApplicationResponse = Shapes::StructureShape.new(name: 'ListAttributeGroupsForApplicationResponse')
     ListAttributeGroupsRequest = Shapes::StructureShape.new(name: 'ListAttributeGroupsRequest')
     ListAttributeGroupsResponse = Shapes::StructureShape.new(name: 'ListAttributeGroupsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
@@ -143,6 +147,13 @@ module Aws::AppRegistry
     AttributeGroup.add_member(:last_update_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateTime"))
     AttributeGroup.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     AttributeGroup.struct_class = Types::AttributeGroup
+
+    AttributeGroupDetails.add_member(:id, Shapes::ShapeRef.new(shape: AttributeGroupId, location_name: "id"))
+    AttributeGroupDetails.add_member(:arn, Shapes::ShapeRef.new(shape: AttributeGroupArn, location_name: "arn"))
+    AttributeGroupDetails.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
+    AttributeGroupDetails.struct_class = Types::AttributeGroupDetails
+
+    AttributeGroupDetailsList.member = Shapes::ShapeRef.new(shape: AttributeGroupDetails)
 
     AttributeGroupIds.member = Shapes::ShapeRef.new(shape: AttributeGroupId)
 
@@ -274,6 +285,15 @@ module Aws::AppRegistry
     ListAssociatedResourcesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListAssociatedResourcesResponse.struct_class = Types::ListAssociatedResourcesResponse
 
+    ListAttributeGroupsForApplicationRequest.add_member(:application, Shapes::ShapeRef.new(shape: ApplicationSpecifier, required: true, location: "uri", location_name: "application"))
+    ListAttributeGroupsForApplicationRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListAttributeGroupsForApplicationRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListAttributeGroupsForApplicationRequest.struct_class = Types::ListAttributeGroupsForApplicationRequest
+
+    ListAttributeGroupsForApplicationResponse.add_member(:attribute_groups_details, Shapes::ShapeRef.new(shape: AttributeGroupDetailsList, location_name: "attributeGroupsDetails"))
+    ListAttributeGroupsForApplicationResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListAttributeGroupsForApplicationResponse.struct_class = Types::ListAttributeGroupsForApplicationResponse
+
     ListAttributeGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListAttributeGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
     ListAttributeGroupsRequest.struct_class = Types::ListAttributeGroupsRequest
@@ -389,6 +409,7 @@ module Aws::AppRegistry
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:associate_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -401,6 +422,7 @@ module Aws::AppRegistry
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:create_application, Seahorse::Model::Operation.new.tap do |o|
@@ -412,6 +434,7 @@ module Aws::AppRegistry
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:create_attribute_group, Seahorse::Model::Operation.new.tap do |o|
@@ -467,6 +490,7 @@ module Aws::AppRegistry
         o.output = Shapes::ShapeRef.new(shape: DisassociateResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:get_application, Seahorse::Model::Operation.new.tap do |o|
@@ -478,6 +502,7 @@ module Aws::AppRegistry
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:get_associated_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -500,6 +525,7 @@ module Aws::AppRegistry
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:list_applications, Seahorse::Model::Operation.new.tap do |o|
@@ -568,6 +594,23 @@ module Aws::AppRegistry
         )
       end)
 
+      api.add_operation(:list_attribute_groups_for_application, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAttributeGroupsForApplication"
+        o.http_method = "GET"
+        o.http_request_uri = "/applications/{application}/attribute-group-details"
+        o.input = Shapes::ShapeRef.new(shape: ListAttributeGroupsForApplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAttributeGroupsForApplicationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTagsForResource"
         o.http_method = "GET"
@@ -621,6 +664,7 @@ module Aws::AppRegistry
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:update_attribute_group, Seahorse::Model::Operation.new.tap do |o|

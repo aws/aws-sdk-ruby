@@ -351,6 +351,39 @@ module Aws::GuardDuty
 
     # @!group API Operations
 
+    # Accepts the invitation to be a member account and get monitored by a
+    # GuardDuty administrator account that sent the invitation.
+    #
+    # @option params [required, String] :detector_id
+    #   The unique ID of the detector of the GuardDuty member account.
+    #
+    # @option params [required, String] :administrator_id
+    #   The account ID of the GuardDuty administrator account whose invitation
+    #   you're accepting.
+    #
+    # @option params [required, String] :invitation_id
+    #   The value that is used to validate the administrator account to the
+    #   member account.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.accept_administrator_invitation({
+    #     detector_id: "DetectorId", # required
+    #     administrator_id: "String", # required
+    #     invitation_id: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AcceptAdministratorInvitation AWS API Documentation
+    #
+    # @overload accept_administrator_invitation(params = {})
+    # @param [Hash] params ({})
+    def accept_administrator_invitation(params = {}, options = {})
+      req = build_request(:accept_administrator_invitation, params)
+      req.send_request(options)
+    end
+
     # Accepts the invitation to be monitored by a GuardDuty administrator
     # account.
     #
@@ -1301,6 +1334,29 @@ module Aws::GuardDuty
     #
     # @example Request syntax with placeholder values
     #
+    #   resp = client.disassociate_from_administrator_account({
+    #     detector_id: "DetectorId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DisassociateFromAdministratorAccount AWS API Documentation
+    #
+    # @overload disassociate_from_administrator_account(params = {})
+    # @param [Hash] params ({})
+    def disassociate_from_administrator_account(params = {}, options = {})
+      req = build_request(:disassociate_from_administrator_account, params)
+      req.send_request(options)
+    end
+
+    # Disassociates the current GuardDuty member account from its
+    # administrator account.
+    #
+    # @option params [required, String] :detector_id
+    #   The unique ID of the detector of the GuardDuty member account.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
     #   resp = client.disassociate_from_master_account({
     #     detector_id: "DetectorId", # required
     #   })
@@ -1315,13 +1371,7 @@ module Aws::GuardDuty
     end
 
     # Disassociates GuardDuty member accounts (to the current GuardDuty
-    # administrator account) specified by the account IDs. Member accounts
-    # added through [Invitation][1] get deleted from the current GuardDuty
-    # administrator account after 30 days of disassociation.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_invitations.html
+    # administrator account) specified by the account IDs.
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector of the GuardDuty account whose members
@@ -1378,6 +1428,38 @@ module Aws::GuardDuty
     # @param [Hash] params ({})
     def enable_organization_admin_account(params = {}, options = {})
       req = build_request(:enable_organization_admin_account, params)
+      req.send_request(options)
+    end
+
+    # Provides the details for the GuardDuty administrator account
+    # associated with the current GuardDuty member account.
+    #
+    # @option params [required, String] :detector_id
+    #   The unique ID of the detector of the GuardDuty member account.
+    #
+    # @return [Types::GetAdministratorAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAdministratorAccountResponse#administrator #administrator} => Types::Administrator
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_administrator_account({
+    #     detector_id: "DetectorId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.administrator.account_id #=> String
+    #   resp.administrator.invitation_id #=> String
+    #   resp.administrator.relationship_status #=> String
+    #   resp.administrator.invited_at #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetAdministratorAccount AWS API Documentation
+    #
+    # @overload get_administrator_account(params = {})
+    # @param [Hash] params ({})
+    def get_administrator_account(params = {}, options = {})
+      req = build_request(:get_administrator_account, params)
       req.send_request(options)
     end
 
@@ -1635,7 +1717,11 @@ module Aws::GuardDuty
     #   resp.findings[0].service.action.aws_api_call_action.service_name #=> String
     #   resp.findings[0].service.action.aws_api_call_action.remote_account_details.account_id #=> String
     #   resp.findings[0].service.action.aws_api_call_action.remote_account_details.affiliated #=> Boolean
+    #   resp.findings[0].service.action.aws_api_call_action.affected_resources #=> Hash
+    #   resp.findings[0].service.action.aws_api_call_action.affected_resources["String"] #=> String
     #   resp.findings[0].service.action.dns_request_action.domain #=> String
+    #   resp.findings[0].service.action.dns_request_action.protocol #=> String
+    #   resp.findings[0].service.action.dns_request_action.blocked #=> Boolean
     #   resp.findings[0].service.action.network_connection_action.blocked #=> Boolean
     #   resp.findings[0].service.action.network_connection_action.connection_direction #=> String
     #   resp.findings[0].service.action.network_connection_action.local_port_details.port #=> Integer
@@ -1698,6 +1784,8 @@ module Aws::GuardDuty
     #   resp.findings[0].service.resource_role #=> String
     #   resp.findings[0].service.service_name #=> String
     #   resp.findings[0].service.user_feedback #=> String
+    #   resp.findings[0].service.additional_info.value #=> String
+    #   resp.findings[0].service.additional_info.type #=> String
     #   resp.findings[0].severity #=> Float
     #   resp.findings[0].title #=> String
     #   resp.findings[0].type #=> String
@@ -1938,6 +2026,7 @@ module Aws::GuardDuty
     #   resp.members[0].relationship_status #=> String
     #   resp.members[0].invited_at #=> String
     #   resp.members[0].updated_at #=> String
+    #   resp.members[0].administrator_id #=> String
     #   resp.unprocessed_accounts #=> Array
     #   resp.unprocessed_accounts[0].account_id #=> String
     #   resp.unprocessed_accounts[0].result #=> String
@@ -1948,6 +2037,49 @@ module Aws::GuardDuty
     # @param [Hash] params ({})
     def get_members(params = {}, options = {})
       req = build_request(:get_members, params)
+      req.send_request(options)
+    end
+
+    # Provides the number of days left for each data source used in the free
+    # trial period.
+    #
+    # @option params [required, String] :detector_id
+    #   The unique ID of the detector of the GuardDuty member account.
+    #
+    # @option params [Array<String>] :account_ids
+    #   A list of account identifiers of the GuardDuty member account.
+    #
+    # @return [Types::GetRemainingFreeTrialDaysResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRemainingFreeTrialDaysResponse#accounts #accounts} => Array&lt;Types::AccountFreeTrialInfo&gt;
+    #   * {Types::GetRemainingFreeTrialDaysResponse#unprocessed_accounts #unprocessed_accounts} => Array&lt;Types::UnprocessedAccount&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_remaining_free_trial_days({
+    #     detector_id: "DetectorId", # required
+    #     account_ids: ["AccountId"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.accounts #=> Array
+    #   resp.accounts[0].account_id #=> String
+    #   resp.accounts[0].data_sources.cloud_trail.free_trial_days_remaining #=> Integer
+    #   resp.accounts[0].data_sources.dns_logs.free_trial_days_remaining #=> Integer
+    #   resp.accounts[0].data_sources.flow_logs.free_trial_days_remaining #=> Integer
+    #   resp.accounts[0].data_sources.s3_logs.free_trial_days_remaining #=> Integer
+    #   resp.accounts[0].data_sources.kubernetes.audit_logs.free_trial_days_remaining #=> Integer
+    #   resp.unprocessed_accounts #=> Array
+    #   resp.unprocessed_accounts[0].account_id #=> String
+    #   resp.unprocessed_accounts[0].result #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetRemainingFreeTrialDays AWS API Documentation
+    #
+    # @overload get_remaining_free_trial_days(params = {})
+    # @param [Hash] params ({})
+    def get_remaining_free_trial_days(params = {}, options = {})
+      req = build_request(:get_remaining_free_trial_days, params)
       req.send_request(options)
     end
 
@@ -1995,11 +2127,11 @@ module Aws::GuardDuty
     end
 
     # Lists Amazon GuardDuty usage statistics over the last 30 days for the
-    # specified detector ID. For newly enabled detectors or data sources the
-    # cost returned will include only the usage so far under 30 days, this
-    # may differ from the cost metrics in the console, which projects usage
-    # over 30 days to provide a monthly cost estimate. For more information
-    # see [Understanding How Usage Costs are Calculated][1].
+    # specified detector ID. For newly enabled detectors or data sources,
+    # the cost returned will include only the usage so far under 30 days.
+    # This may differ from the cost metrics in the console, which project
+    # usage over 30 days to provide a monthly cost estimate. For more
+    # information, see [Understanding How Usage Costs are Calculated][1].
     #
     #
     #
@@ -2547,6 +2679,7 @@ module Aws::GuardDuty
     #   resp.members[0].relationship_status #=> String
     #   resp.members[0].invited_at #=> String
     #   resp.members[0].updated_at #=> String
+    #   resp.members[0].administrator_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListMembers AWS API Documentation
@@ -3254,7 +3387,7 @@ module Aws::GuardDuty
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

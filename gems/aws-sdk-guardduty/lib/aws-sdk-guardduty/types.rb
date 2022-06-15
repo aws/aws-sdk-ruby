@@ -10,6 +10,43 @@
 module Aws::GuardDuty
   module Types
 
+    # @note When making an API call, you may pass AcceptAdministratorInvitationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         detector_id: "DetectorId", # required
+    #         administrator_id: "String", # required
+    #         invitation_id: "String", # required
+    #       }
+    #
+    # @!attribute [rw] detector_id
+    #   The unique ID of the detector of the GuardDuty member account.
+    #   @return [String]
+    #
+    # @!attribute [rw] administrator_id
+    #   The account ID of the GuardDuty administrator account whose
+    #   invitation you're accepting.
+    #   @return [String]
+    #
+    # @!attribute [rw] invitation_id
+    #   The value that is used to validate the administrator account to the
+    #   member account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AcceptAdministratorInvitationRequest AWS API Documentation
+    #
+    class AcceptAdministratorInvitationRequest < Struct.new(
+      :detector_id,
+      :administrator_id,
+      :invitation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AcceptAdministratorInvitationResponse AWS API Documentation
+    #
+    class AcceptAdministratorInvitationResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass AcceptInvitationRequest
     #   data as a hash:
     #
@@ -125,6 +162,26 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Provides details of the GuardDuty member account that uses a free
+    # trial service.
+    #
+    # @!attribute [rw] account_id
+    #   The account identifier of the GuardDuty member account.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_sources
+    #   Describes the data source enabled for the GuardDuty member account.
+    #   @return [Types::DataSourcesFreeTrial]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AccountFreeTrialInfo AWS API Documentation
+    #
+    class AccountFreeTrialInfo < Struct.new(
+      :account_id,
+      :data_sources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the account level permissions on the S3
     # bucket.
     #
@@ -204,6 +261,37 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the administrator account and invitation.
+    #
+    # @!attribute [rw] account_id
+    #   The ID of the account used as the administrator account.
+    #   @return [String]
+    #
+    # @!attribute [rw] invitation_id
+    #   The value that is used to validate the administrator account to the
+    #   member account.
+    #   @return [String]
+    #
+    # @!attribute [rw] relationship_status
+    #   The status of the relationship between the administrator and member
+    #   accounts.
+    #   @return [String]
+    #
+    # @!attribute [rw] invited_at
+    #   The timestamp when the invitation was sent.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Administrator AWS API Documentation
+    #
+    class Administrator < Struct.new(
+      :account_id,
+      :invitation_id,
+      :relationship_status,
+      :invited_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ArchiveFindingsRequest
     #   data as a hash:
     #
@@ -271,6 +359,12 @@ module Aws::GuardDuty
     #   account.
     #   @return [Types::RemoteAccountDetails]
     #
+    # @!attribute [rw] affected_resources
+    #   The details of the Amazon Web Services account that made the API
+    #   call. This field identifies the resources that were affected by this
+    #   API call.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AwsApiCallAction AWS API Documentation
     #
     class AwsApiCallAction < Struct.new(
@@ -281,7 +375,8 @@ module Aws::GuardDuty
       :user_agent,
       :remote_ip_details,
       :service_name,
-      :remote_account_details)
+      :remote_account_details,
+      :affected_resources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1254,6 +1349,59 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about which data sources are enabled for the
+    # GuardDuty member account.
+    #
+    # @!attribute [rw] free_trial_days_remaining
+    #   A value that specifies the number of days left to use each enabled
+    #   data source.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DataSourceFreeTrial AWS API Documentation
+    #
+    class DataSourceFreeTrial < Struct.new(
+      :free_trial_days_remaining)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about which data sources are enabled for the
+    # GuardDuty member account.
+    #
+    # @!attribute [rw] cloud_trail
+    #   Describes whether any AWS CloudTrail management event logs are
+    #   enabled as data sources.
+    #   @return [Types::DataSourceFreeTrial]
+    #
+    # @!attribute [rw] dns_logs
+    #   Describes whether any DNS logs are enabled as data sources.
+    #   @return [Types::DataSourceFreeTrial]
+    #
+    # @!attribute [rw] flow_logs
+    #   Describes whether any VPC Flow logs are enabled as data sources.
+    #   @return [Types::DataSourceFreeTrial]
+    #
+    # @!attribute [rw] s3_logs
+    #   Describes whether any S3 data event logs are enabled as data
+    #   sources.
+    #   @return [Types::DataSourceFreeTrial]
+    #
+    # @!attribute [rw] kubernetes
+    #   Describes whether any Kubernetes logs are enabled as data sources.
+    #   @return [Types::KubernetesDataSourceFreeTrial]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DataSourcesFreeTrial AWS API Documentation
+    #
+    class DataSourcesFreeTrial < Struct.new(
+      :cloud_trail,
+      :dns_logs,
+      :flow_logs,
+      :s3_logs,
+      :kubernetes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeclineInvitationsRequest
     #   data as a hash:
     #
@@ -1716,6 +1864,29 @@ module Aws::GuardDuty
     #
     class DisableOrganizationAdminAccountResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DisassociateFromAdministratorAccountRequest
+    #   data as a hash:
+    #
+    #       {
+    #         detector_id: "DetectorId", # required
+    #       }
+    #
+    # @!attribute [rw] detector_id
+    #   The unique ID of the detector of the GuardDuty member account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DisassociateFromAdministratorAccountRequest AWS API Documentation
+    #
+    class DisassociateFromAdministratorAccountRequest < Struct.new(
+      :detector_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DisassociateFromAdministratorAccountResponse AWS API Documentation
+    #
+    class DisassociateFromAdministratorAccountResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DisassociateFromMasterAccountRequest
     #   data as a hash:
     #
@@ -1786,10 +1957,21 @@ module Aws::GuardDuty
     #   The domain information for the API request.
     #   @return [String]
     #
+    # @!attribute [rw] protocol
+    #   The network connection protocol observed in the activity that
+    #   prompted GuardDuty to generate the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] blocked
+    #   Indicates whether the targeted port is blocked.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DnsRequestAction AWS API Documentation
     #
     class DnsRequestAction < Struct.new(
-      :domain)
+      :domain,
+      :protocol,
+      :blocked)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2053,6 +2235,37 @@ module Aws::GuardDuty
     class GeoLocation < Struct.new(
       :lat,
       :lon)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetAdministratorAccountRequest
+    #   data as a hash:
+    #
+    #       {
+    #         detector_id: "DetectorId", # required
+    #       }
+    #
+    # @!attribute [rw] detector_id
+    #   The unique ID of the detector of the GuardDuty member account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetAdministratorAccountRequest AWS API Documentation
+    #
+    class GetAdministratorAccountRequest < Struct.new(
+      :detector_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] administrator
+    #   The administrator account details.
+    #   @return [Types::Administrator]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetAdministratorAccountResponse AWS API Documentation
+    #
+    class GetAdministratorAccountResponse < Struct.new(
+      :administrator)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2482,6 +2695,50 @@ module Aws::GuardDuty
     #
     class GetMembersResponse < Struct.new(
       :members,
+      :unprocessed_accounts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetRemainingFreeTrialDaysRequest
+    #   data as a hash:
+    #
+    #       {
+    #         detector_id: "DetectorId", # required
+    #         account_ids: ["AccountId"],
+    #       }
+    #
+    # @!attribute [rw] detector_id
+    #   The unique ID of the detector of the GuardDuty member account.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_ids
+    #   A list of account identifiers of the GuardDuty member account.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetRemainingFreeTrialDaysRequest AWS API Documentation
+    #
+    class GetRemainingFreeTrialDaysRequest < Struct.new(
+      :detector_id,
+      :account_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] accounts
+    #   The member accounts which were included in a request and were
+    #   processed successfully.
+    #   @return [Array<Types::AccountFreeTrialInfo>]
+    #
+    # @!attribute [rw] unprocessed_accounts
+    #   The member account that was included in a request but for which the
+    #   request could not be processed.
+    #   @return [Array<Types::UnprocessedAccount>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetRemainingFreeTrialDaysResponse AWS API Documentation
+    #
+    class GetRemainingFreeTrialDaysResponse < Struct.new(
+      :accounts,
       :unprocessed_accounts)
       SENSITIVE = []
       include Aws::Structure
@@ -2955,6 +3212,22 @@ module Aws::GuardDuty
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/KubernetesConfigurationResult AWS API Documentation
     #
     class KubernetesConfigurationResult < Struct.new(
+      :audit_logs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about the Kubernetes resources when it is enabled as
+    # a data source.
+    #
+    # @!attribute [rw] audit_logs
+    #   Describes whether Kubernetes audit logs are enabled as a data
+    #   source.
+    #   @return [Types::DataSourceFreeTrial]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/KubernetesDataSourceFreeTrial AWS API Documentation
+    #
+    class KubernetesDataSourceFreeTrial < Struct.new(
       :audit_logs)
       SENSITIVE = []
       include Aws::Structure
@@ -3800,6 +4073,10 @@ module Aws::GuardDuty
     #   The last-updated timestamp of the member.
     #   @return [String]
     #
+    # @!attribute [rw] administrator_id
+    #   The administrator account ID.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Member AWS API Documentation
     #
     class Member < Struct.new(
@@ -3809,7 +4086,8 @@ module Aws::GuardDuty
       :email,
       :relationship_status,
       :invited_at,
-      :updated_at)
+      :updated_at,
+      :administrator_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4576,6 +4854,10 @@ module Aws::GuardDuty
     #   Feedback that was submitted about the finding.
     #   @return [String]
     #
+    # @!attribute [rw] additional_info
+    #   Contains additional information about the generated finding.
+    #   @return [Types::ServiceAdditionalInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Service AWS API Documentation
     #
     class Service < Struct.new(
@@ -4588,7 +4870,27 @@ module Aws::GuardDuty
       :event_last_seen,
       :resource_role,
       :service_name,
-      :user_feedback)
+      :user_feedback,
+      :additional_info)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Additional information about the generated finding.
+    #
+    # @!attribute [rw] value
+    #   This field specifies the value of the additional information.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Describes the type of the additional information.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ServiceAdditionalInfo AWS API Documentation
+    #
+    class ServiceAdditionalInfo < Struct.new(
+      :value,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -149,6 +149,7 @@ module Aws::WorkSpaces
     DnsIpAddresses = Shapes::ListShape.new(name: 'DnsIpAddresses')
     Ec2ImageId = Shapes::StringShape.new(name: 'Ec2ImageId')
     ErrorType = Shapes::StringShape.new(name: 'ErrorType')
+    ExceptionErrorCode = Shapes::StringShape.new(name: 'ExceptionErrorCode')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
     FailedCreateWorkspaceRequest = Shapes::StructureShape.new(name: 'FailedCreateWorkspaceRequest')
     FailedCreateWorkspaceRequests = Shapes::ListShape.new(name: 'FailedCreateWorkspaceRequests')
@@ -859,6 +860,7 @@ module Aws::WorkSpaces
     OperationInProgressException.struct_class = Types::OperationInProgressException
 
     OperationNotSupportedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    OperationNotSupportedException.add_member(:reason, Shapes::ShapeRef.new(shape: ExceptionErrorCode, location_name: "reason"))
     OperationNotSupportedException.struct_class = Types::OperationNotSupportedException
 
     RebootRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location_name: "WorkspaceId"))

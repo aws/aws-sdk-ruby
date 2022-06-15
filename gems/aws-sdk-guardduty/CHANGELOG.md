@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2022-06-15)
+------------------
+
+* Feature - Adds finding fields available from GuardDuty Console. Adds FreeTrial related operations. Deprecates the use of various APIs related to Master Accounts and Replace them with Administrator Accounts.
+
 1.57.0 (2022-04-28)
 ------------------
 

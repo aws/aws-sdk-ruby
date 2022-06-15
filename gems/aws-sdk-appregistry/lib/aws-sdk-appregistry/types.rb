@@ -250,6 +250,30 @@ module Aws::AppRegistry
       include Aws::Structure
     end
 
+    # The details related to a specific AttributeGroup.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the attribute group.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon resource name (ARN) that specifies the attribute group.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the attribute group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/AttributeGroupDetails AWS API Documentation
+    #
+    class AttributeGroupDetails < Struct.new(
+      :id,
+      :arn,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Summary of a Amazon Web Services Service Catalog AppRegistry attribute
     # group.
     #
@@ -960,6 +984,58 @@ module Aws::AppRegistry
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListAttributeGroupsForApplicationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application: "ApplicationSpecifier", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] application
+    #   The name or ID of the application.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   This token retrieves the next page of results after a previous API
+    #   call.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The upper bound of the number of results to return. The value cannot
+    #   exceed 25. If you omit this parameter, it defaults to 25. This value
+    #   is optional.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/ListAttributeGroupsForApplicationRequest AWS API Documentation
+    #
+    class ListAttributeGroupsForApplicationRequest < Struct.new(
+      :application,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attribute_groups_details
+    #   The details related to a specific AttributeGroup.
+    #   @return [Array<Types::AttributeGroupDetails>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to get the next page of results after a previous
+    #   API call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/ListAttributeGroupsForApplicationResponse AWS API Documentation
+    #
+    class ListAttributeGroupsForApplicationResponse < Struct.new(
+      :attribute_groups_details,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListAttributeGroupsRequest
     #   data as a hash:
     #
@@ -1288,8 +1364,9 @@ module Aws::AppRegistry
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The new name of the application. The name must be unique in the
-    #   region in which you are updating the application.
+    #   Deprecated: The new name of the application. The name must be unique
+    #   in the region in which you are updating the application. Please do
+    #   not use this field as we have stopped supporting name updates.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1334,8 +1411,10 @@ module Aws::AppRegistry
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The new name of the attribute group. The name must be unique in the
-    #   region in which you are updating the attribute group.
+    #   Deprecated: The new name of the attribute group. The name must be
+    #   unique in the region in which you are updating the attribute group.
+    #   Please do not use this field as we have stopped supporting name
+    #   updates.
     #   @return [String]
     #
     # @!attribute [rw] description

@@ -840,8 +840,8 @@ module Aws::WorkSpaces
     # include sensitive information.
     #
     # @!attribute [rw] logo_url
-    #   The logo URL. This is the link where users can download the logo
-    #   image. The only supported image format is `.png`.
+    #   The logo URL. The only image format accepted is a binary data object
+    #   that is converted from a `.png` file.
     #   @return [String]
     #
     # @!attribute [rw] support_email
@@ -912,8 +912,8 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] logo
-    #   The logo. This is the link where users can download the logo image.
-    #   The only image format accepted is `.png`.
+    #   The logo. The only image format accepted is a binary data object
+    #   that is converted from a `.png` file.
     #   @return [String]
     #
     # @!attribute [rw] support_email
@@ -2327,14 +2327,9 @@ module Aws::WorkSpaces
     #   specify a value that ends in `_WSP`. To use PCoIP, specify a value
     #   that does not end in `_WSP`.
     #
-    #   For non-GPU-enabled images (bundles other than Graphics.g4dn,
-    #   GraphicsPro.g4dn, Graphics, or GraphicsPro), specify `BYOL_REGULAR`
-    #   or `BYOL_REGULAR_WSP`, depending on the protocol.
-    #
-    #   <note markdown="1"> Use `BYOL_GRAPHICS_G4DN` ingestion for both Graphics.g4dn and
-    #   GraphicsPro.g4dn.
-    #
-    #    </note>
+    #   For non-GPU-enabled bundles (bundles other than Graphics or
+    #   GraphicsPro), specify `BYOL_REGULAR` or `BYOL_REGULAR_WSP`,
+    #   depending on the protocol.
     #   @return [String]
     #
     # @!attribute [rw] image_name
@@ -2355,12 +2350,8 @@ module Aws::WorkSpaces
     #   subscribing to Office for BYOL images, see [ Bring Your Own Windows
     #   Desktop Licenses][1].
     #
-    #   <note markdown="1"> * Although this parameter is an array, only one item is allowed at
-    #     this time
-    #
-    #   * Microsoft Office 2016 application subscription through AWS is
-    #     currently not supported for Graphics.g4dn Bring Your Own License
-    #     (BYOL) images
+    #   <note markdown="1"> Although this parameter is an array, only one item is allowed at
+    #   this time.
     #
     #    </note>
     #
@@ -2428,14 +2419,17 @@ module Aws::WorkSpaces
     # include sensitive information.
     #
     # @!attribute [rw] logo_url
-    #   The logo. This is the link where users can download the logo image.
-    #   This is the standard-resolution display that has a 1:1 pixel density
-    #   (or @1x), where one pixel is equal to one point.
+    #   The logo. This is the standard-resolution display that has a 1:1
+    #   pixel density (or @1x), where one pixel is equal to one point. The
+    #   only image format accepted is a binary data object that is converted
+    #   from a `.png` file.
     #   @return [String]
     #
     # @!attribute [rw] logo_2x_url
     #   The @2x version of the logo. This is the higher resolution display
-    #   that offers a scale factor of 2.0 (or @2x).
+    #   that offers a scale factor of 2.0 (or @2x). The only image format
+    #   accepted is a binary data object that is converted from a `.png`
+    #   file.
     #
     #   <note markdown="1"> For more information about iOS image size and resolution, see [Image
     #   Size and Resolution ][1] in the *Apple Human Interface Guidelines*.
@@ -2449,7 +2443,9 @@ module Aws::WorkSpaces
     #
     # @!attribute [rw] logo_3x_url
     #   The @3x version of the logo. This is the higher resolution display
-    #   that offers a scale factor of 3.0 (or @3x).
+    #   that offers a scale factor of 3.0 (or @3x).The only image format
+    #   accepted is a binary data object that is converted from a `.png`
+    #   file.
     #
     #   <note markdown="1"> For more information about iOS image size and resolution, see [Image
     #   Size and Resolution ][1] in the *Apple Human Interface Guidelines*.
@@ -2533,14 +2529,17 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] logo
-    #   The logo. This is the link where users can download the logo image.
-    #   This is the standard-resolution display that has a 1:1 pixel density
-    #   (or @1x), where one pixel is equal to one point.
+    #   The logo. This is the standard-resolution display that has a 1:1
+    #   pixel density (or @1x), where one pixel is equal to one point. The
+    #   only image format accepted is a binary data object that is converted
+    #   from a `.png` file.
     #   @return [String]
     #
     # @!attribute [rw] logo_2x
     #   The @2x version of the logo. This is the higher resolution display
-    #   that offers a scale factor of 2.0 (or @2x).
+    #   that offers a scale factor of 2.0 (or @2x). The only image format
+    #   accepted is a binary data object that is converted from a `.png`
+    #   file.
     #
     #   <note markdown="1"> For more information about iOS image size and resolution, see [Image
     #   Size and Resolution ][1] in the *Apple Human Interface Guidelines*.
@@ -2554,7 +2553,9 @@ module Aws::WorkSpaces
     #
     # @!attribute [rw] logo_3x
     #   The @3x version of the logo. This is the higher resolution display
-    #   that offers a scale factor of 3.0 (or @3x).
+    #   that offers a scale factor of 3.0 (or @3x). The only image format
+    #   accepted is a binary data object that is converted from a `.png`
+    #   file.
     #
     #   <note markdown="1"> For more information about iOS image size and resolution, see [Image
     #   Size and Resolution ][1] in the *Apple Human Interface Guidelines*.
@@ -3030,12 +3031,18 @@ module Aws::WorkSpaces
     # This operation is not supported.
     #
     # @!attribute [rw] message
+    #   The exception error message.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The exception error reason.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/OperationNotSupportedException AWS API Documentation
     #
     class OperationNotSupportedException < Struct.new(
-      :message)
+      :message,
+      :reason)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -23,6 +23,52 @@ module Aws::FinSpaceData
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AssociateUserToPermissionGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         permission_group_id: "PermissionGroupId", # required
+    #         user_id: "UserId", # required
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] permission_group_id
+    #   The unique identifier for the permission group.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The unique identifier for the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/AssociateUserToPermissionGroupRequest AWS API Documentation
+    #
+    class AssociateUserToPermissionGroupRequest < Struct.new(
+      :permission_group_id,
+      :user_id,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status_code
+    #   The returned status code of the response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/AssociateUserToPermissionGroupResponse AWS API Documentation
+    #
+    class AssociateUserToPermissionGroupResponse < Struct.new(
+      :status_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The structure with error messages.
     #
     # @!attribute [rw] error_message
@@ -769,7 +815,7 @@ module Aws::FinSpaceData
     #   @return [String]
     #
     # @!attribute [rw] s3_destination_export_file_format
-    #   Data view export file format.
+    #   Dataview export file format.
     #
     #   * `PARQUET` – Parquet export file format.
     #
@@ -1154,6 +1200,52 @@ module Aws::FinSpaceData
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DisassociateUserFromPermissionGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         permission_group_id: "PermissionGroupId", # required
+    #         user_id: "UserId", # required
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] permission_group_id
+    #   The unique identifier for the permission group.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The unique identifier for the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/DisassociateUserFromPermissionGroupRequest AWS API Documentation
+    #
+    class DisassociateUserFromPermissionGroupRequest < Struct.new(
+      :permission_group_id,
+      :user_id,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status_code
+    #   The returned status code of the response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/DisassociateUserFromPermissionGroupResponse AWS API Documentation
+    #
+    class DisassociateUserFromPermissionGroupResponse < Struct.new(
+      :status_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass EnableUserRequest
     #   data as a hash:
     #
@@ -1533,6 +1625,37 @@ module Aws::FinSpaceData
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetPermissionGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         permission_group_id: "PermissionGroupId", # required
+    #       }
+    #
+    # @!attribute [rw] permission_group_id
+    #   The unique identifier for the permission group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/GetPermissionGroupRequest AWS API Documentation
+    #
+    class GetPermissionGroupRequest < Struct.new(
+      :permission_group_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] permission_group
+    #   The structure for a permission group.
+    #   @return [Types::PermissionGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/GetPermissionGroupResponse AWS API Documentation
+    #
+    class GetPermissionGroupResponse < Struct.new(
+      :permission_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Request for GetProgrammaticAccessCredentials operation
     #
     # @note When making an API call, you may pass GetProgrammaticAccessCredentialsRequest
@@ -1634,7 +1757,7 @@ module Aws::FinSpaceData
     #   ^
     #
     #   * `APP_USER` – A user with specific permissions in FinSpace. The
-    #     users are assigned permissions by adding them to a permissions
+    #     users are assigned permissions by adding them to a permission
     #     group.
     #
     #   ^
@@ -1929,6 +2052,54 @@ module Aws::FinSpaceData
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListPermissionGroupsByUserRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_id: "UserId", # required
+    #         next_token: "PaginationToken",
+    #         max_results: 1, # required
+    #       }
+    #
+    # @!attribute [rw] user_id
+    #   The unique identifier for the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates where a results page should begin.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/ListPermissionGroupsByUserRequest AWS API Documentation
+    #
+    class ListPermissionGroupsByUserRequest < Struct.new(
+      :user_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] permission_groups
+    #   A list of returned permission groups.
+    #   @return [Array<Types::PermissionGroupByUser>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates where a results page should begin.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/ListPermissionGroupsByUserResponse AWS API Documentation
+    #
+    class ListPermissionGroupsByUserResponse < Struct.new(
+      :permission_groups,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListPermissionGroupsRequest
     #   data as a hash:
     #
@@ -1966,6 +2137,54 @@ module Aws::FinSpaceData
     #
     class ListPermissionGroupsResponse < Struct.new(
       :permission_groups,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListUsersByPermissionGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         permission_group_id: "PermissionGroupId", # required
+    #         next_token: "PaginationToken",
+    #         max_results: 1, # required
+    #       }
+    #
+    # @!attribute [rw] permission_group_id
+    #   The unique identifier for the permission group.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates where a results page should begin.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/ListUsersByPermissionGroupRequest AWS API Documentation
+    #
+    class ListUsersByPermissionGroupRequest < Struct.new(
+      :permission_group_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] users
+    #   Lists details of all users in a specific permission group.
+    #   @return [Array<Types::UserByPermissionGroup>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates where a results page should begin.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/ListUsersByPermissionGroupResponse AWS API Documentation
+    #
+    class ListUsersByPermissionGroupResponse < Struct.new(
+      :users,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -2060,6 +2279,19 @@ module Aws::FinSpaceData
     #   is determined as epoch time in milliseconds.
     #   @return [Integer]
     #
+    # @!attribute [rw] membership_status
+    #   Indicates the status of the user account within a permission group.
+    #
+    #   * `ADDITION_IN_PROGRESS` – The user account is currently being added
+    #     to the permission group.
+    #
+    #   * `ADDITION_SUCCESS` – The user account is successfully added to the
+    #     permission group.
+    #
+    #   * `REMOVAL_IN_PROGRESS` – The user is currently being removed from
+    #     the permission group.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/PermissionGroup AWS API Documentation
     #
     class PermissionGroup < Struct.new(
@@ -2068,8 +2300,42 @@ module Aws::FinSpaceData
       :description,
       :application_permissions,
       :create_time,
-      :last_modified_time)
+      :last_modified_time,
+      :membership_status)
       SENSITIVE = [:name, :description]
+      include Aws::Structure
+    end
+
+    # The structure of a permission group associated with a user account.
+    #
+    # @!attribute [rw] permission_group_id
+    #   The unique identifier for the permission group.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the permission group.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_status
+    #   Indicates the status of the user account within a permission group.
+    #
+    #   * `ADDITION_IN_PROGRESS` – The user account is currently being added
+    #     to the permission group.
+    #
+    #   * `ADDITION_SUCCESS` – The user account is successfully added to the
+    #     permission group.
+    #
+    #   * `REMOVAL_IN_PROGRESS` – The user is currently being removed from
+    #     the permission group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/PermissionGroupByUser AWS API Documentation
+    #
+    class PermissionGroupByUser < Struct.new(
+      :permission_group_id,
+      :name,
+      :membership_status)
+      SENSITIVE = [:name]
       include Aws::Structure
     end
 
@@ -2604,7 +2870,7 @@ module Aws::FinSpaceData
     #     data in FinSpace.
     #
     #   * `APP_USER` – A user with specific permissions in FinSpace. The
-    #     users are assigned permissions by adding them to a permissions
+    #     users are assigned permissions by adding them to a permission
     #     group.
     #   @return [String]
     #
@@ -2702,7 +2968,7 @@ module Aws::FinSpaceData
     #     data in FinSpace.
     #
     #   * `APP_USER` – A user with specific permissions in FinSpace. The
-    #     users are assigned permissions by adding them to a permissions
+    #     users are assigned permissions by adding them to a permission
     #     group.
     #   @return [String]
     #
@@ -2764,6 +3030,88 @@ module Aws::FinSpaceData
       :last_disabled_time,
       :last_modified_time,
       :last_login_time)
+      SENSITIVE = [:first_name, :last_name, :email_address]
+      include Aws::Structure
+    end
+
+    # The structure of a user account associated with a permission group.
+    #
+    # @!attribute [rw] user_id
+    #   The unique identifier for the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the user account.
+    #
+    #   * `CREATING` – The user account creation is in progress.
+    #
+    #   * `ENABLED` – The user account is created and is currently active.
+    #
+    #   * `DISABLED` – The user account is currently inactive.
+    #   @return [String]
+    #
+    # @!attribute [rw] first_name
+    #   The first name of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_name
+    #   The last name of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] email_address
+    #   The email address of the user. The email address serves as a unique
+    #   identifier for each user and cannot be changed after it's created.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Indicates the type of user.
+    #
+    #   * `SUPER_USER` – A user with permission to all the functionality and
+    #     data in FinSpace.
+    #
+    #   * `APP_USER` – A user with specific permissions in FinSpace. The
+    #     users are assigned permissions by adding them to a permission
+    #     group.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_access
+    #   Indicates whether the user can access FinSpace API operations.
+    #
+    #   * `ENABLED` – The user has permissions to use the API operations.
+    #
+    #   * `DISABLED` – The user does not have permissions to use any API
+    #     operations.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_access_principal_arn
+    #   The IAM ARN identifier that is attached to FinSpace API calls.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_status
+    #   Indicates the status of the user account within a permission group.
+    #
+    #   * `ADDITION_IN_PROGRESS` – The user account is currently being added
+    #     to the permission group.
+    #
+    #   * `ADDITION_SUCCESS` – The user account is successfully added to the
+    #     permission group.
+    #
+    #   * `REMOVAL_IN_PROGRESS` – The user is currently being removed from
+    #     the permission group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/UserByPermissionGroup AWS API Documentation
+    #
+    class UserByPermissionGroup < Struct.new(
+      :user_id,
+      :status,
+      :first_name,
+      :last_name,
+      :email_address,
+      :type,
+      :api_access,
+      :api_access_principal_arn,
+      :membership_status)
       SENSITIVE = [:first_name, :last_name, :email_address]
       include Aws::Structure
     end

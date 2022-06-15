@@ -13,12 +13,16 @@ module Aws::GuardDuty
 
     include Seahorse::Model
 
+    AcceptAdministratorInvitationRequest = Shapes::StructureShape.new(name: 'AcceptAdministratorInvitationRequest')
+    AcceptAdministratorInvitationResponse = Shapes::StructureShape.new(name: 'AcceptAdministratorInvitationResponse')
     AcceptInvitationRequest = Shapes::StructureShape.new(name: 'AcceptInvitationRequest')
     AcceptInvitationResponse = Shapes::StructureShape.new(name: 'AcceptInvitationResponse')
     AccessControlList = Shapes::StructureShape.new(name: 'AccessControlList')
     AccessKeyDetails = Shapes::StructureShape.new(name: 'AccessKeyDetails')
     AccountDetail = Shapes::StructureShape.new(name: 'AccountDetail')
     AccountDetails = Shapes::ListShape.new(name: 'AccountDetails')
+    AccountFreeTrialInfo = Shapes::StructureShape.new(name: 'AccountFreeTrialInfo')
+    AccountFreeTrialInfos = Shapes::ListShape.new(name: 'AccountFreeTrialInfos')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     AccountIds = Shapes::ListShape.new(name: 'AccountIds')
     AccountLevelPermissions = Shapes::StructureShape.new(name: 'AccountLevelPermissions')
@@ -26,6 +30,8 @@ module Aws::GuardDuty
     AdminAccount = Shapes::StructureShape.new(name: 'AdminAccount')
     AdminAccounts = Shapes::ListShape.new(name: 'AdminAccounts')
     AdminStatus = Shapes::StringShape.new(name: 'AdminStatus')
+    Administrator = Shapes::StructureShape.new(name: 'Administrator')
+    AffectedResources = Shapes::MapShape.new(name: 'AffectedResources')
     ArchiveFindingsRequest = Shapes::StructureShape.new(name: 'ArchiveFindingsRequest')
     ArchiveFindingsResponse = Shapes::StructureShape.new(name: 'ArchiveFindingsResponse')
     AwsApiCallAction = Shapes::StructureShape.new(name: 'AwsApiCallAction')
@@ -61,8 +67,10 @@ module Aws::GuardDuty
     DataSource = Shapes::StringShape.new(name: 'DataSource')
     DataSourceConfigurations = Shapes::StructureShape.new(name: 'DataSourceConfigurations')
     DataSourceConfigurationsResult = Shapes::StructureShape.new(name: 'DataSourceConfigurationsResult')
+    DataSourceFreeTrial = Shapes::StructureShape.new(name: 'DataSourceFreeTrial')
     DataSourceList = Shapes::ListShape.new(name: 'DataSourceList')
     DataSourceStatus = Shapes::StringShape.new(name: 'DataSourceStatus')
+    DataSourcesFreeTrial = Shapes::StructureShape.new(name: 'DataSourcesFreeTrial')
     DeclineInvitationsRequest = Shapes::StructureShape.new(name: 'DeclineInvitationsRequest')
     DeclineInvitationsResponse = Shapes::StructureShape.new(name: 'DeclineInvitationsResponse')
     DefaultServerSideEncryption = Shapes::StructureShape.new(name: 'DefaultServerSideEncryption')
@@ -93,6 +101,8 @@ module Aws::GuardDuty
     DetectorStatus = Shapes::StringShape.new(name: 'DetectorStatus')
     DisableOrganizationAdminAccountRequest = Shapes::StructureShape.new(name: 'DisableOrganizationAdminAccountRequest')
     DisableOrganizationAdminAccountResponse = Shapes::StructureShape.new(name: 'DisableOrganizationAdminAccountResponse')
+    DisassociateFromAdministratorAccountRequest = Shapes::StructureShape.new(name: 'DisassociateFromAdministratorAccountRequest')
+    DisassociateFromAdministratorAccountResponse = Shapes::StructureShape.new(name: 'DisassociateFromAdministratorAccountResponse')
     DisassociateFromMasterAccountRequest = Shapes::StructureShape.new(name: 'DisassociateFromMasterAccountRequest')
     DisassociateFromMasterAccountResponse = Shapes::StructureShape.new(name: 'DisassociateFromMasterAccountResponse')
     DisassociateMembersRequest = Shapes::StructureShape.new(name: 'DisassociateMembersRequest')
@@ -126,6 +136,8 @@ module Aws::GuardDuty
     Findings = Shapes::ListShape.new(name: 'Findings')
     FlowLogsConfigurationResult = Shapes::StructureShape.new(name: 'FlowLogsConfigurationResult')
     GeoLocation = Shapes::StructureShape.new(name: 'GeoLocation')
+    GetAdministratorAccountRequest = Shapes::StructureShape.new(name: 'GetAdministratorAccountRequest')
+    GetAdministratorAccountResponse = Shapes::StructureShape.new(name: 'GetAdministratorAccountResponse')
     GetDetectorRequest = Shapes::StructureShape.new(name: 'GetDetectorRequest')
     GetDetectorResponse = Shapes::StructureShape.new(name: 'GetDetectorResponse')
     GetFilterRequest = Shapes::StructureShape.new(name: 'GetFilterRequest')
@@ -144,6 +156,8 @@ module Aws::GuardDuty
     GetMemberDetectorsResponse = Shapes::StructureShape.new(name: 'GetMemberDetectorsResponse')
     GetMembersRequest = Shapes::StructureShape.new(name: 'GetMembersRequest')
     GetMembersResponse = Shapes::StructureShape.new(name: 'GetMembersResponse')
+    GetRemainingFreeTrialDaysRequest = Shapes::StructureShape.new(name: 'GetRemainingFreeTrialDaysRequest')
+    GetRemainingFreeTrialDaysResponse = Shapes::StructureShape.new(name: 'GetRemainingFreeTrialDaysResponse')
     GetThreatIntelSetRequest = Shapes::StructureShape.new(name: 'GetThreatIntelSetRequest')
     GetThreatIntelSetResponse = Shapes::StructureShape.new(name: 'GetThreatIntelSetResponse')
     GetUsageStatisticsRequest = Shapes::StructureShape.new(name: 'GetUsageStatisticsRequest')
@@ -168,6 +182,7 @@ module Aws::GuardDuty
     KubernetesAuditLogsConfigurationResult = Shapes::StructureShape.new(name: 'KubernetesAuditLogsConfigurationResult')
     KubernetesConfiguration = Shapes::StructureShape.new(name: 'KubernetesConfiguration')
     KubernetesConfigurationResult = Shapes::StructureShape.new(name: 'KubernetesConfigurationResult')
+    KubernetesDataSourceFreeTrial = Shapes::StructureShape.new(name: 'KubernetesDataSourceFreeTrial')
     KubernetesDetails = Shapes::StructureShape.new(name: 'KubernetesDetails')
     KubernetesUserDetails = Shapes::StructureShape.new(name: 'KubernetesUserDetails')
     KubernetesWorkloadDetails = Shapes::StructureShape.new(name: 'KubernetesWorkloadDetails')
@@ -241,6 +256,7 @@ module Aws::GuardDuty
     SecurityGroup = Shapes::StructureShape.new(name: 'SecurityGroup')
     SecurityGroups = Shapes::ListShape.new(name: 'SecurityGroups')
     Service = Shapes::StructureShape.new(name: 'Service')
+    ServiceAdditionalInfo = Shapes::StructureShape.new(name: 'ServiceAdditionalInfo')
     SortCriteria = Shapes::StructureShape.new(name: 'SortCriteria')
     SourceIps = Shapes::ListShape.new(name: 'SourceIps')
     StartMonitoringMembersRequest = Shapes::StructureShape.new(name: 'StartMonitoringMembersRequest')
@@ -300,6 +316,13 @@ module Aws::GuardDuty
     VolumeMounts = Shapes::ListShape.new(name: 'VolumeMounts')
     Volumes = Shapes::ListShape.new(name: 'Volumes')
 
+    AcceptAdministratorInvitationRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
+    AcceptAdministratorInvitationRequest.add_member(:administrator_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "administratorId"))
+    AcceptAdministratorInvitationRequest.add_member(:invitation_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "invitationId"))
+    AcceptAdministratorInvitationRequest.struct_class = Types::AcceptAdministratorInvitationRequest
+
+    AcceptAdministratorInvitationResponse.struct_class = Types::AcceptAdministratorInvitationResponse
+
     AcceptInvitationRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
     AcceptInvitationRequest.add_member(:master_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "masterId"))
     AcceptInvitationRequest.add_member(:invitation_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "invitationId"))
@@ -323,6 +346,12 @@ module Aws::GuardDuty
 
     AccountDetails.member = Shapes::ShapeRef.new(shape: AccountDetail)
 
+    AccountFreeTrialInfo.add_member(:account_id, Shapes::ShapeRef.new(shape: String, location_name: "accountId"))
+    AccountFreeTrialInfo.add_member(:data_sources, Shapes::ShapeRef.new(shape: DataSourcesFreeTrial, location_name: "dataSources"))
+    AccountFreeTrialInfo.struct_class = Types::AccountFreeTrialInfo
+
+    AccountFreeTrialInfos.member = Shapes::ShapeRef.new(shape: AccountFreeTrialInfo)
+
     AccountIds.member = Shapes::ShapeRef.new(shape: AccountId)
 
     AccountLevelPermissions.add_member(:block_public_access, Shapes::ShapeRef.new(shape: BlockPublicAccess, location_name: "blockPublicAccess"))
@@ -342,6 +371,15 @@ module Aws::GuardDuty
 
     AdminAccounts.member = Shapes::ShapeRef.new(shape: AdminAccount)
 
+    Administrator.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
+    Administrator.add_member(:invitation_id, Shapes::ShapeRef.new(shape: String, location_name: "invitationId"))
+    Administrator.add_member(:relationship_status, Shapes::ShapeRef.new(shape: String, location_name: "relationshipStatus"))
+    Administrator.add_member(:invited_at, Shapes::ShapeRef.new(shape: String, location_name: "invitedAt"))
+    Administrator.struct_class = Types::Administrator
+
+    AffectedResources.key = Shapes::ShapeRef.new(shape: String)
+    AffectedResources.value = Shapes::ShapeRef.new(shape: String)
+
     ArchiveFindingsRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
     ArchiveFindingsRequest.add_member(:finding_ids, Shapes::ShapeRef.new(shape: FindingIds, required: true, location_name: "findingIds"))
     ArchiveFindingsRequest.struct_class = Types::ArchiveFindingsRequest
@@ -356,6 +394,7 @@ module Aws::GuardDuty
     AwsApiCallAction.add_member(:remote_ip_details, Shapes::ShapeRef.new(shape: RemoteIpDetails, location_name: "remoteIpDetails"))
     AwsApiCallAction.add_member(:service_name, Shapes::ShapeRef.new(shape: String, location_name: "serviceName"))
     AwsApiCallAction.add_member(:remote_account_details, Shapes::ShapeRef.new(shape: RemoteAccountDetails, location_name: "remoteAccountDetails"))
+    AwsApiCallAction.add_member(:affected_resources, Shapes::ShapeRef.new(shape: AffectedResources, location_name: "affectedResources"))
     AwsApiCallAction.struct_class = Types::AwsApiCallAction
 
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
@@ -501,7 +540,17 @@ module Aws::GuardDuty
     DataSourceConfigurationsResult.add_member(:kubernetes, Shapes::ShapeRef.new(shape: KubernetesConfigurationResult, location_name: "kubernetes"))
     DataSourceConfigurationsResult.struct_class = Types::DataSourceConfigurationsResult
 
+    DataSourceFreeTrial.add_member(:free_trial_days_remaining, Shapes::ShapeRef.new(shape: Integer, location_name: "freeTrialDaysRemaining"))
+    DataSourceFreeTrial.struct_class = Types::DataSourceFreeTrial
+
     DataSourceList.member = Shapes::ShapeRef.new(shape: DataSource)
+
+    DataSourcesFreeTrial.add_member(:cloud_trail, Shapes::ShapeRef.new(shape: DataSourceFreeTrial, location_name: "cloudTrail"))
+    DataSourcesFreeTrial.add_member(:dns_logs, Shapes::ShapeRef.new(shape: DataSourceFreeTrial, location_name: "dnsLogs"))
+    DataSourcesFreeTrial.add_member(:flow_logs, Shapes::ShapeRef.new(shape: DataSourceFreeTrial, location_name: "flowLogs"))
+    DataSourcesFreeTrial.add_member(:s3_logs, Shapes::ShapeRef.new(shape: DataSourceFreeTrial, location_name: "s3Logs"))
+    DataSourcesFreeTrial.add_member(:kubernetes, Shapes::ShapeRef.new(shape: KubernetesDataSourceFreeTrial, location_name: "kubernetes"))
+    DataSourcesFreeTrial.struct_class = Types::DataSourcesFreeTrial
 
     DeclineInvitationsRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, required: true, location_name: "accountIds"))
     DeclineInvitationsRequest.struct_class = Types::DeclineInvitationsRequest
@@ -592,6 +641,11 @@ module Aws::GuardDuty
 
     DisableOrganizationAdminAccountResponse.struct_class = Types::DisableOrganizationAdminAccountResponse
 
+    DisassociateFromAdministratorAccountRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
+    DisassociateFromAdministratorAccountRequest.struct_class = Types::DisassociateFromAdministratorAccountRequest
+
+    DisassociateFromAdministratorAccountResponse.struct_class = Types::DisassociateFromAdministratorAccountResponse
+
     DisassociateFromMasterAccountRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
     DisassociateFromMasterAccountRequest.struct_class = Types::DisassociateFromMasterAccountRequest
 
@@ -605,6 +659,8 @@ module Aws::GuardDuty
     DisassociateMembersResponse.struct_class = Types::DisassociateMembersResponse
 
     DnsRequestAction.add_member(:domain, Shapes::ShapeRef.new(shape: String, location_name: "domain"))
+    DnsRequestAction.add_member(:protocol, Shapes::ShapeRef.new(shape: String, location_name: "protocol"))
+    DnsRequestAction.add_member(:blocked, Shapes::ShapeRef.new(shape: Boolean, location_name: "blocked"))
     DnsRequestAction.struct_class = Types::DnsRequestAction
 
     DomainDetails.add_member(:domain, Shapes::ShapeRef.new(shape: String, location_name: "domain"))
@@ -669,6 +725,12 @@ module Aws::GuardDuty
     GeoLocation.add_member(:lat, Shapes::ShapeRef.new(shape: Double, location_name: "lat"))
     GeoLocation.add_member(:lon, Shapes::ShapeRef.new(shape: Double, location_name: "lon"))
     GeoLocation.struct_class = Types::GeoLocation
+
+    GetAdministratorAccountRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
+    GetAdministratorAccountRequest.struct_class = Types::GetAdministratorAccountRequest
+
+    GetAdministratorAccountResponse.add_member(:administrator, Shapes::ShapeRef.new(shape: Administrator, required: true, location_name: "administrator"))
+    GetAdministratorAccountResponse.struct_class = Types::GetAdministratorAccountResponse
 
     GetDetectorRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
     GetDetectorRequest.struct_class = Types::GetDetectorRequest
@@ -747,6 +809,14 @@ module Aws::GuardDuty
     GetMembersResponse.add_member(:members, Shapes::ShapeRef.new(shape: Members, required: true, location_name: "members"))
     GetMembersResponse.add_member(:unprocessed_accounts, Shapes::ShapeRef.new(shape: UnprocessedAccounts, required: true, location_name: "unprocessedAccounts"))
     GetMembersResponse.struct_class = Types::GetMembersResponse
+
+    GetRemainingFreeTrialDaysRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
+    GetRemainingFreeTrialDaysRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, location_name: "accountIds"))
+    GetRemainingFreeTrialDaysRequest.struct_class = Types::GetRemainingFreeTrialDaysRequest
+
+    GetRemainingFreeTrialDaysResponse.add_member(:accounts, Shapes::ShapeRef.new(shape: AccountFreeTrialInfos, location_name: "accounts"))
+    GetRemainingFreeTrialDaysResponse.add_member(:unprocessed_accounts, Shapes::ShapeRef.new(shape: UnprocessedAccounts, location_name: "unprocessedAccounts"))
+    GetRemainingFreeTrialDaysResponse.struct_class = Types::GetRemainingFreeTrialDaysResponse
 
     GetThreatIntelSetRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
     GetThreatIntelSetRequest.add_member(:threat_intel_set_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "threatIntelSetId"))
@@ -840,6 +910,9 @@ module Aws::GuardDuty
 
     KubernetesConfigurationResult.add_member(:audit_logs, Shapes::ShapeRef.new(shape: KubernetesAuditLogsConfigurationResult, required: true, location_name: "auditLogs"))
     KubernetesConfigurationResult.struct_class = Types::KubernetesConfigurationResult
+
+    KubernetesDataSourceFreeTrial.add_member(:audit_logs, Shapes::ShapeRef.new(shape: DataSourceFreeTrial, location_name: "auditLogs"))
+    KubernetesDataSourceFreeTrial.struct_class = Types::KubernetesDataSourceFreeTrial
 
     KubernetesDetails.add_member(:kubernetes_user_details, Shapes::ShapeRef.new(shape: KubernetesUserDetails, location_name: "kubernetesUserDetails"))
     KubernetesDetails.add_member(:kubernetes_workload_details, Shapes::ShapeRef.new(shape: KubernetesWorkloadDetails, location_name: "kubernetesWorkloadDetails"))
@@ -966,6 +1039,7 @@ module Aws::GuardDuty
     Member.add_member(:relationship_status, Shapes::ShapeRef.new(shape: String, required: true, location_name: "relationshipStatus"))
     Member.add_member(:invited_at, Shapes::ShapeRef.new(shape: String, location_name: "invitedAt"))
     Member.add_member(:updated_at, Shapes::ShapeRef.new(shape: String, required: true, location_name: "updatedAt"))
+    Member.add_member(:administrator_id, Shapes::ShapeRef.new(shape: String, location_name: "administratorId"))
     Member.struct_class = Types::Member
 
     MemberDataSourceConfiguration.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
@@ -1059,8 +1133,8 @@ module Aws::GuardDuty
 
     PrivateIpAddresses.member = Shapes::ShapeRef.new(shape: PrivateIpAddressDetails)
 
-    ProductCode.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "code"))
-    ProductCode.add_member(:product_type, Shapes::ShapeRef.new(shape: String, location_name: "productType"))
+    ProductCode.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "productCodeId"))
+    ProductCode.add_member(:product_type, Shapes::ShapeRef.new(shape: String, location_name: "productCodeType"))
     ProductCode.struct_class = Types::ProductCode
 
     ProductCodes.member = Shapes::ShapeRef.new(shape: ProductCode)
@@ -1131,7 +1205,12 @@ module Aws::GuardDuty
     Service.add_member(:resource_role, Shapes::ShapeRef.new(shape: String, location_name: "resourceRole"))
     Service.add_member(:service_name, Shapes::ShapeRef.new(shape: String, location_name: "serviceName"))
     Service.add_member(:user_feedback, Shapes::ShapeRef.new(shape: String, location_name: "userFeedback"))
+    Service.add_member(:additional_info, Shapes::ShapeRef.new(shape: ServiceAdditionalInfo, location_name: "additionalInfo"))
     Service.struct_class = Types::Service
+
+    ServiceAdditionalInfo.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
+    ServiceAdditionalInfo.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "type"))
+    ServiceAdditionalInfo.struct_class = Types::ServiceAdditionalInfo
 
     SortCriteria.add_member(:attribute_name, Shapes::ShapeRef.new(shape: String, location_name: "attributeName"))
     SortCriteria.add_member(:order_by, Shapes::ShapeRef.new(shape: OrderBy, location_name: "orderBy"))
@@ -1328,10 +1407,21 @@ module Aws::GuardDuty
         "uid" => "guardduty-2017-11-28",
       }
 
+      api.add_operation(:accept_administrator_invitation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AcceptAdministratorInvitation"
+        o.http_method = "POST"
+        o.http_request_uri = "/detector/{detectorId}/administrator"
+        o.input = Shapes::ShapeRef.new(shape: AcceptAdministratorInvitationRequest)
+        o.output = Shapes::ShapeRef.new(shape: AcceptAdministratorInvitationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
       api.add_operation(:accept_invitation, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AcceptInvitation"
         o.http_method = "POST"
         o.http_request_uri = "/detector/{detectorId}/master"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: AcceptInvitationRequest)
         o.output = Shapes::ShapeRef.new(shape: AcceptInvitationResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -1528,10 +1618,21 @@ module Aws::GuardDuty
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
 
+      api.add_operation(:disassociate_from_administrator_account, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateFromAdministratorAccount"
+        o.http_method = "POST"
+        o.http_request_uri = "/detector/{detectorId}/administrator/disassociate"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateFromAdministratorAccountRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateFromAdministratorAccountResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
       api.add_operation(:disassociate_from_master_account, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisassociateFromMasterAccount"
         o.http_method = "POST"
         o.http_request_uri = "/detector/{detectorId}/master/disassociate"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DisassociateFromMasterAccountRequest)
         o.output = Shapes::ShapeRef.new(shape: DisassociateFromMasterAccountResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -1554,6 +1655,16 @@ module Aws::GuardDuty
         o.http_request_uri = "/admin/enable"
         o.input = Shapes::ShapeRef.new(shape: EnableOrganizationAdminAccountRequest)
         o.output = Shapes::ShapeRef.new(shape: EnableOrganizationAdminAccountResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
+      api.add_operation(:get_administrator_account, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAdministratorAccount"
+        o.http_method = "GET"
+        o.http_request_uri = "/detector/{detectorId}/administrator"
+        o.input = Shapes::ShapeRef.new(shape: GetAdministratorAccountRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAdministratorAccountResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
@@ -1622,6 +1733,7 @@ module Aws::GuardDuty
         o.name = "GetMasterAccount"
         o.http_method = "GET"
         o.http_request_uri = "/detector/{detectorId}/master"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetMasterAccountRequest)
         o.output = Shapes::ShapeRef.new(shape: GetMasterAccountResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -1644,6 +1756,16 @@ module Aws::GuardDuty
         o.http_request_uri = "/detector/{detectorId}/member/get"
         o.input = Shapes::ShapeRef.new(shape: GetMembersRequest)
         o.output = Shapes::ShapeRef.new(shape: GetMembersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
+      api.add_operation(:get_remaining_free_trial_days, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRemainingFreeTrialDays"
+        o.http_method = "POST"
+        o.http_request_uri = "/detector/{detectorId}/freeTrial/daysRemaining"
+        o.input = Shapes::ShapeRef.new(shape: GetRemainingFreeTrialDaysRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRemainingFreeTrialDaysResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
