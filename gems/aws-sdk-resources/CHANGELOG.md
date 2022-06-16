@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.134.0 (2022-06-16)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-redshiftserverless` gem.
+
 3.133.1 (2020-06-09)
 ------------------
 

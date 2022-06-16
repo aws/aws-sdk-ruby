@@ -77,12 +77,17 @@ module Aws::SecurityHub
     AwsCertificateManagerCertificateOptions = Shapes::StructureShape.new(name: 'AwsCertificateManagerCertificateOptions')
     AwsCertificateManagerCertificateRenewalSummary = Shapes::StructureShape.new(name: 'AwsCertificateManagerCertificateRenewalSummary')
     AwsCertificateManagerCertificateResourceRecord = Shapes::StructureShape.new(name: 'AwsCertificateManagerCertificateResourceRecord')
+    AwsCloudFormationStackDetails = Shapes::StructureShape.new(name: 'AwsCloudFormationStackDetails')
+    AwsCloudFormationStackDriftInformationDetails = Shapes::StructureShape.new(name: 'AwsCloudFormationStackDriftInformationDetails')
+    AwsCloudFormationStackOutputsDetails = Shapes::StructureShape.new(name: 'AwsCloudFormationStackOutputsDetails')
+    AwsCloudFormationStackOutputsList = Shapes::ListShape.new(name: 'AwsCloudFormationStackOutputsList')
     AwsCloudFrontDistributionCacheBehavior = Shapes::StructureShape.new(name: 'AwsCloudFrontDistributionCacheBehavior')
     AwsCloudFrontDistributionCacheBehaviors = Shapes::StructureShape.new(name: 'AwsCloudFrontDistributionCacheBehaviors')
     AwsCloudFrontDistributionCacheBehaviorsItemList = Shapes::ListShape.new(name: 'AwsCloudFrontDistributionCacheBehaviorsItemList')
     AwsCloudFrontDistributionDefaultCacheBehavior = Shapes::StructureShape.new(name: 'AwsCloudFrontDistributionDefaultCacheBehavior')
     AwsCloudFrontDistributionDetails = Shapes::StructureShape.new(name: 'AwsCloudFrontDistributionDetails')
     AwsCloudFrontDistributionLogging = Shapes::StructureShape.new(name: 'AwsCloudFrontDistributionLogging')
+    AwsCloudFrontDistributionOriginCustomOriginConfig = Shapes::StructureShape.new(name: 'AwsCloudFrontDistributionOriginCustomOriginConfig')
     AwsCloudFrontDistributionOriginGroup = Shapes::StructureShape.new(name: 'AwsCloudFrontDistributionOriginGroup')
     AwsCloudFrontDistributionOriginGroupFailover = Shapes::StructureShape.new(name: 'AwsCloudFrontDistributionOriginGroupFailover')
     AwsCloudFrontDistributionOriginGroupFailoverStatusCodes = Shapes::StructureShape.new(name: 'AwsCloudFrontDistributionOriginGroupFailoverStatusCodes')
@@ -92,9 +97,13 @@ module Aws::SecurityHub
     AwsCloudFrontDistributionOriginItem = Shapes::StructureShape.new(name: 'AwsCloudFrontDistributionOriginItem')
     AwsCloudFrontDistributionOriginItemList = Shapes::ListShape.new(name: 'AwsCloudFrontDistributionOriginItemList')
     AwsCloudFrontDistributionOriginS3OriginConfig = Shapes::StructureShape.new(name: 'AwsCloudFrontDistributionOriginS3OriginConfig')
+    AwsCloudFrontDistributionOriginSslProtocols = Shapes::StructureShape.new(name: 'AwsCloudFrontDistributionOriginSslProtocols')
     AwsCloudFrontDistributionOrigins = Shapes::StructureShape.new(name: 'AwsCloudFrontDistributionOrigins')
     AwsCloudFrontDistributionViewerCertificate = Shapes::StructureShape.new(name: 'AwsCloudFrontDistributionViewerCertificate')
     AwsCloudTrailTrailDetails = Shapes::StructureShape.new(name: 'AwsCloudTrailTrailDetails')
+    AwsCloudWatchAlarmDetails = Shapes::StructureShape.new(name: 'AwsCloudWatchAlarmDetails')
+    AwsCloudWatchAlarmDimensionsDetails = Shapes::StructureShape.new(name: 'AwsCloudWatchAlarmDimensionsDetails')
+    AwsCloudWatchAlarmDimensionsList = Shapes::ListShape.new(name: 'AwsCloudWatchAlarmDimensionsList')
     AwsCodeBuildProjectArtifactsDetails = Shapes::StructureShape.new(name: 'AwsCodeBuildProjectArtifactsDetails')
     AwsCodeBuildProjectArtifactsList = Shapes::ListShape.new(name: 'AwsCodeBuildProjectArtifactsList')
     AwsCodeBuildProjectDetails = Shapes::StructureShape.new(name: 'AwsCodeBuildProjectDetails')
@@ -130,6 +139,7 @@ module Aws::SecurityHub
     AwsDynamoDbTableStreamSpecification = Shapes::StructureShape.new(name: 'AwsDynamoDbTableStreamSpecification')
     AwsEc2EipDetails = Shapes::StructureShape.new(name: 'AwsEc2EipDetails')
     AwsEc2InstanceDetails = Shapes::StructureShape.new(name: 'AwsEc2InstanceDetails')
+    AwsEc2InstanceMetadataOptions = Shapes::StructureShape.new(name: 'AwsEc2InstanceMetadataOptions')
     AwsEc2InstanceNetworkInterfacesDetails = Shapes::StructureShape.new(name: 'AwsEc2InstanceNetworkInterfacesDetails')
     AwsEc2InstanceNetworkInterfacesList = Shapes::ListShape.new(name: 'AwsEc2InstanceNetworkInterfacesList')
     AwsEc2NetworkAclAssociation = Shapes::StructureShape.new(name: 'AwsEc2NetworkAclAssociation')
@@ -157,6 +167,7 @@ module Aws::SecurityHub
     AwsEc2SecurityGroupUserIdGroupPair = Shapes::StructureShape.new(name: 'AwsEc2SecurityGroupUserIdGroupPair')
     AwsEc2SecurityGroupUserIdGroupPairList = Shapes::ListShape.new(name: 'AwsEc2SecurityGroupUserIdGroupPairList')
     AwsEc2SubnetDetails = Shapes::StructureShape.new(name: 'AwsEc2SubnetDetails')
+    AwsEc2TransitGatewayDetails = Shapes::StructureShape.new(name: 'AwsEc2TransitGatewayDetails')
     AwsEc2VolumeAttachment = Shapes::StructureShape.new(name: 'AwsEc2VolumeAttachment')
     AwsEc2VolumeAttachmentList = Shapes::ListShape.new(name: 'AwsEc2VolumeAttachmentList')
     AwsEc2VolumeDetails = Shapes::StructureShape.new(name: 'AwsEc2VolumeDetails')
@@ -164,6 +175,9 @@ module Aws::SecurityHub
     AwsEc2VpcEndpointServiceDetails = Shapes::StructureShape.new(name: 'AwsEc2VpcEndpointServiceDetails')
     AwsEc2VpcEndpointServiceServiceTypeDetails = Shapes::StructureShape.new(name: 'AwsEc2VpcEndpointServiceServiceTypeDetails')
     AwsEc2VpcEndpointServiceServiceTypeList = Shapes::ListShape.new(name: 'AwsEc2VpcEndpointServiceServiceTypeList')
+    AwsEc2VpcPeeringConnectionDetails = Shapes::StructureShape.new(name: 'AwsEc2VpcPeeringConnectionDetails')
+    AwsEc2VpcPeeringConnectionStatusDetails = Shapes::StructureShape.new(name: 'AwsEc2VpcPeeringConnectionStatusDetails')
+    AwsEc2VpcPeeringConnectionVpcInfoDetails = Shapes::StructureShape.new(name: 'AwsEc2VpcPeeringConnectionVpcInfoDetails')
     AwsEc2VpnConnectionDetails = Shapes::StructureShape.new(name: 'AwsEc2VpnConnectionDetails')
     AwsEc2VpnConnectionOptionsDetails = Shapes::StructureShape.new(name: 'AwsEc2VpnConnectionOptionsDetails')
     AwsEc2VpnConnectionOptionsTunnelOptionsDetails = Shapes::StructureShape.new(name: 'AwsEc2VpnConnectionOptionsTunnelOptionsDetails')
@@ -184,6 +198,8 @@ module Aws::SecurityHub
     AwsEcsClusterDefaultCapacityProviderStrategyDetails = Shapes::StructureShape.new(name: 'AwsEcsClusterDefaultCapacityProviderStrategyDetails')
     AwsEcsClusterDefaultCapacityProviderStrategyList = Shapes::ListShape.new(name: 'AwsEcsClusterDefaultCapacityProviderStrategyList')
     AwsEcsClusterDetails = Shapes::StructureShape.new(name: 'AwsEcsClusterDetails')
+    AwsEcsContainerDetails = Shapes::StructureShape.new(name: 'AwsEcsContainerDetails')
+    AwsEcsContainerDetailsList = Shapes::ListShape.new(name: 'AwsEcsContainerDetailsList')
     AwsEcsServiceCapacityProviderStrategyDetails = Shapes::StructureShape.new(name: 'AwsEcsServiceCapacityProviderStrategyDetails')
     AwsEcsServiceCapacityProviderStrategyList = Shapes::ListShape.new(name: 'AwsEcsServiceCapacityProviderStrategyList')
     AwsEcsServiceDeploymentConfigurationDeploymentCircuitBreakerDetails = Shapes::StructureShape.new(name: 'AwsEcsServiceDeploymentConfigurationDeploymentCircuitBreakerDetails')
@@ -250,6 +266,14 @@ module Aws::SecurityHub
     AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationDetails = Shapes::StructureShape.new(name: 'AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationDetails')
     AwsEcsTaskDefinitionVolumesHostDetails = Shapes::StructureShape.new(name: 'AwsEcsTaskDefinitionVolumesHostDetails')
     AwsEcsTaskDefinitionVolumesList = Shapes::ListShape.new(name: 'AwsEcsTaskDefinitionVolumesList')
+    AwsEcsTaskDetails = Shapes::StructureShape.new(name: 'AwsEcsTaskDetails')
+    AwsEcsTaskVolumeDetails = Shapes::StructureShape.new(name: 'AwsEcsTaskVolumeDetails')
+    AwsEcsTaskVolumeDetailsList = Shapes::ListShape.new(name: 'AwsEcsTaskVolumeDetailsList')
+    AwsEcsTaskVolumeHostDetails = Shapes::StructureShape.new(name: 'AwsEcsTaskVolumeHostDetails')
+    AwsEfsAccessPointDetails = Shapes::StructureShape.new(name: 'AwsEfsAccessPointDetails')
+    AwsEfsAccessPointPosixUserDetails = Shapes::StructureShape.new(name: 'AwsEfsAccessPointPosixUserDetails')
+    AwsEfsAccessPointRootDirectoryCreationInfoDetails = Shapes::StructureShape.new(name: 'AwsEfsAccessPointRootDirectoryCreationInfoDetails')
+    AwsEfsAccessPointRootDirectoryDetails = Shapes::StructureShape.new(name: 'AwsEfsAccessPointRootDirectoryDetails')
     AwsEksClusterDetails = Shapes::StructureShape.new(name: 'AwsEksClusterDetails')
     AwsEksClusterLoggingClusterLoggingDetails = Shapes::StructureShape.new(name: 'AwsEksClusterLoggingClusterLoggingDetails')
     AwsEksClusterLoggingClusterLoggingList = Shapes::ListShape.new(name: 'AwsEksClusterLoggingClusterLoggingList')
@@ -321,6 +345,8 @@ module Aws::SecurityHub
     AwsIamUserDetails = Shapes::StructureShape.new(name: 'AwsIamUserDetails')
     AwsIamUserPolicy = Shapes::StructureShape.new(name: 'AwsIamUserPolicy')
     AwsIamUserPolicyList = Shapes::ListShape.new(name: 'AwsIamUserPolicyList')
+    AwsKinesisStreamDetails = Shapes::StructureShape.new(name: 'AwsKinesisStreamDetails')
+    AwsKinesisStreamStreamEncryptionDetails = Shapes::StructureShape.new(name: 'AwsKinesisStreamStreamEncryptionDetails')
     AwsKmsKeyDetails = Shapes::StructureShape.new(name: 'AwsKmsKeyDetails')
     AwsLambdaFunctionCode = Shapes::StructureShape.new(name: 'AwsLambdaFunctionCode')
     AwsLambdaFunctionDeadLetterConfig = Shapes::StructureShape.new(name: 'AwsLambdaFunctionDeadLetterConfig')
@@ -333,11 +359,14 @@ module Aws::SecurityHub
     AwsLambdaFunctionVpcConfig = Shapes::StructureShape.new(name: 'AwsLambdaFunctionVpcConfig')
     AwsLambdaLayerVersionDetails = Shapes::StructureShape.new(name: 'AwsLambdaLayerVersionDetails')
     AwsLambdaLayerVersionNumber = Shapes::IntegerShape.new(name: 'AwsLambdaLayerVersionNumber')
+    AwsMountPoint = Shapes::StructureShape.new(name: 'AwsMountPoint')
+    AwsMountPointList = Shapes::ListShape.new(name: 'AwsMountPointList')
     AwsNetworkFirewallFirewallDetails = Shapes::StructureShape.new(name: 'AwsNetworkFirewallFirewallDetails')
     AwsNetworkFirewallFirewallPolicyDetails = Shapes::StructureShape.new(name: 'AwsNetworkFirewallFirewallPolicyDetails')
     AwsNetworkFirewallFirewallSubnetMappingsDetails = Shapes::StructureShape.new(name: 'AwsNetworkFirewallFirewallSubnetMappingsDetails')
     AwsNetworkFirewallFirewallSubnetMappingsList = Shapes::ListShape.new(name: 'AwsNetworkFirewallFirewallSubnetMappingsList')
     AwsNetworkFirewallRuleGroupDetails = Shapes::StructureShape.new(name: 'AwsNetworkFirewallRuleGroupDetails')
+    AwsOpenSearchServiceDomainAdvancedSecurityOptionsDetails = Shapes::StructureShape.new(name: 'AwsOpenSearchServiceDomainAdvancedSecurityOptionsDetails')
     AwsOpenSearchServiceDomainClusterConfigDetails = Shapes::StructureShape.new(name: 'AwsOpenSearchServiceDomainClusterConfigDetails')
     AwsOpenSearchServiceDomainClusterConfigZoneAwarenessConfigDetails = Shapes::StructureShape.new(name: 'AwsOpenSearchServiceDomainClusterConfigZoneAwarenessConfigDetails')
     AwsOpenSearchServiceDomainDetails = Shapes::StructureShape.new(name: 'AwsOpenSearchServiceDomainDetails')
@@ -345,6 +374,7 @@ module Aws::SecurityHub
     AwsOpenSearchServiceDomainEncryptionAtRestOptionsDetails = Shapes::StructureShape.new(name: 'AwsOpenSearchServiceDomainEncryptionAtRestOptionsDetails')
     AwsOpenSearchServiceDomainLogPublishingOption = Shapes::StructureShape.new(name: 'AwsOpenSearchServiceDomainLogPublishingOption')
     AwsOpenSearchServiceDomainLogPublishingOptionsDetails = Shapes::StructureShape.new(name: 'AwsOpenSearchServiceDomainLogPublishingOptionsDetails')
+    AwsOpenSearchServiceDomainMasterUserOptionsDetails = Shapes::StructureShape.new(name: 'AwsOpenSearchServiceDomainMasterUserOptionsDetails')
     AwsOpenSearchServiceDomainNodeToNodeEncryptionOptionsDetails = Shapes::StructureShape.new(name: 'AwsOpenSearchServiceDomainNodeToNodeEncryptionOptionsDetails')
     AwsOpenSearchServiceDomainServiceSoftwareOptionsDetails = Shapes::StructureShape.new(name: 'AwsOpenSearchServiceDomainServiceSoftwareOptionsDetails')
     AwsOpenSearchServiceDomainVpcOptionsDetails = Shapes::StructureShape.new(name: 'AwsOpenSearchServiceDomainVpcOptionsDetails')
@@ -466,6 +496,25 @@ module Aws::SecurityHub
     AwsWafRegionalRateBasedRuleDetails = Shapes::StructureShape.new(name: 'AwsWafRegionalRateBasedRuleDetails')
     AwsWafRegionalRateBasedRuleMatchPredicate = Shapes::StructureShape.new(name: 'AwsWafRegionalRateBasedRuleMatchPredicate')
     AwsWafRegionalRateBasedRuleMatchPredicateList = Shapes::ListShape.new(name: 'AwsWafRegionalRateBasedRuleMatchPredicateList')
+    AwsWafRegionalRuleDetails = Shapes::StructureShape.new(name: 'AwsWafRegionalRuleDetails')
+    AwsWafRegionalRuleGroupDetails = Shapes::StructureShape.new(name: 'AwsWafRegionalRuleGroupDetails')
+    AwsWafRegionalRuleGroupRulesActionDetails = Shapes::StructureShape.new(name: 'AwsWafRegionalRuleGroupRulesActionDetails')
+    AwsWafRegionalRuleGroupRulesDetails = Shapes::StructureShape.new(name: 'AwsWafRegionalRuleGroupRulesDetails')
+    AwsWafRegionalRuleGroupRulesList = Shapes::ListShape.new(name: 'AwsWafRegionalRuleGroupRulesList')
+    AwsWafRegionalRulePredicateList = Shapes::ListShape.new(name: 'AwsWafRegionalRulePredicateList')
+    AwsWafRegionalRulePredicateListDetails = Shapes::StructureShape.new(name: 'AwsWafRegionalRulePredicateListDetails')
+    AwsWafRegionalWebAclDetails = Shapes::StructureShape.new(name: 'AwsWafRegionalWebAclDetails')
+    AwsWafRegionalWebAclRulesList = Shapes::ListShape.new(name: 'AwsWafRegionalWebAclRulesList')
+    AwsWafRegionalWebAclRulesListActionDetails = Shapes::StructureShape.new(name: 'AwsWafRegionalWebAclRulesListActionDetails')
+    AwsWafRegionalWebAclRulesListDetails = Shapes::StructureShape.new(name: 'AwsWafRegionalWebAclRulesListDetails')
+    AwsWafRegionalWebAclRulesListOverrideActionDetails = Shapes::StructureShape.new(name: 'AwsWafRegionalWebAclRulesListOverrideActionDetails')
+    AwsWafRuleDetails = Shapes::StructureShape.new(name: 'AwsWafRuleDetails')
+    AwsWafRuleGroupDetails = Shapes::StructureShape.new(name: 'AwsWafRuleGroupDetails')
+    AwsWafRuleGroupRulesActionDetails = Shapes::StructureShape.new(name: 'AwsWafRuleGroupRulesActionDetails')
+    AwsWafRuleGroupRulesDetails = Shapes::StructureShape.new(name: 'AwsWafRuleGroupRulesDetails')
+    AwsWafRuleGroupRulesList = Shapes::ListShape.new(name: 'AwsWafRuleGroupRulesList')
+    AwsWafRulePredicateList = Shapes::ListShape.new(name: 'AwsWafRulePredicateList')
+    AwsWafRulePredicateListDetails = Shapes::StructureShape.new(name: 'AwsWafRulePredicateListDetails')
     AwsWafWebAclDetails = Shapes::StructureShape.new(name: 'AwsWafWebAclDetails')
     AwsWafWebAclRule = Shapes::StructureShape.new(name: 'AwsWafWebAclRule')
     AwsWafWebAclRuleList = Shapes::ListShape.new(name: 'AwsWafWebAclRuleList')
@@ -561,6 +610,8 @@ module Aws::SecurityHub
     EnableSecurityHubRequest = Shapes::StructureShape.new(name: 'EnableSecurityHubRequest')
     EnableSecurityHubResponse = Shapes::StructureShape.new(name: 'EnableSecurityHubResponse')
     FieldMap = Shapes::MapShape.new(name: 'FieldMap')
+    FilePathList = Shapes::ListShape.new(name: 'FilePathList')
+    FilePaths = Shapes::StructureShape.new(name: 'FilePaths')
     FindingAggregator = Shapes::StructureShape.new(name: 'FindingAggregator')
     FindingAggregatorList = Shapes::ListShape.new(name: 'FindingAggregatorList')
     FindingProviderFields = Shapes::StructureShape.new(name: 'FindingProviderFields')
@@ -764,10 +815,12 @@ module Aws::SecurityHub
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    Threat = Shapes::StructureShape.new(name: 'Threat')
     ThreatIntelIndicator = Shapes::StructureShape.new(name: 'ThreatIntelIndicator')
     ThreatIntelIndicatorCategory = Shapes::StringShape.new(name: 'ThreatIntelIndicatorCategory')
     ThreatIntelIndicatorList = Shapes::ListShape.new(name: 'ThreatIntelIndicatorList')
     ThreatIntelIndicatorType = Shapes::StringShape.new(name: 'ThreatIntelIndicatorType')
+    ThreatList = Shapes::ListShape.new(name: 'ThreatList')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp', timestampFormat: "iso8601")
     TypeList = Shapes::ListShape.new(name: 'TypeList')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
@@ -787,6 +840,13 @@ module Aws::SecurityHub
     UpdateStandardsControlRequest = Shapes::StructureShape.new(name: 'UpdateStandardsControlRequest')
     UpdateStandardsControlResponse = Shapes::StructureShape.new(name: 'UpdateStandardsControlResponse')
     VerificationState = Shapes::StringShape.new(name: 'VerificationState')
+    VolumeMount = Shapes::StructureShape.new(name: 'VolumeMount')
+    VolumeMountList = Shapes::ListShape.new(name: 'VolumeMountList')
+    VpcInfoCidrBlockSetDetails = Shapes::StructureShape.new(name: 'VpcInfoCidrBlockSetDetails')
+    VpcInfoCidrBlockSetList = Shapes::ListShape.new(name: 'VpcInfoCidrBlockSetList')
+    VpcInfoIpv6CidrBlockSetDetails = Shapes::StructureShape.new(name: 'VpcInfoIpv6CidrBlockSetDetails')
+    VpcInfoIpv6CidrBlockSetList = Shapes::ListShape.new(name: 'VpcInfoIpv6CidrBlockSetList')
+    VpcInfoPeeringOptionsDetails = Shapes::StructureShape.new(name: 'VpcInfoPeeringOptionsDetails')
     Vulnerability = Shapes::StructureShape.new(name: 'Vulnerability')
     VulnerabilityList = Shapes::ListShape.new(name: 'VulnerabilityList')
     VulnerabilityVendor = Shapes::StructureShape.new(name: 'VulnerabilityVendor')
@@ -1133,6 +1193,33 @@ module Aws::SecurityHub
     AwsCertificateManagerCertificateResourceRecord.add_member(:value, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Value"))
     AwsCertificateManagerCertificateResourceRecord.struct_class = Types::AwsCertificateManagerCertificateResourceRecord
 
+    AwsCloudFormationStackDetails.add_member(:capabilities, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "Capabilities"))
+    AwsCloudFormationStackDetails.add_member(:creation_time, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CreationTime"))
+    AwsCloudFormationStackDetails.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Description"))
+    AwsCloudFormationStackDetails.add_member(:disable_rollback, Shapes::ShapeRef.new(shape: Boolean, location_name: "DisableRollback"))
+    AwsCloudFormationStackDetails.add_member(:drift_information, Shapes::ShapeRef.new(shape: AwsCloudFormationStackDriftInformationDetails, location_name: "DriftInformation"))
+    AwsCloudFormationStackDetails.add_member(:enable_termination_protection, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableTerminationProtection"))
+    AwsCloudFormationStackDetails.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "LastUpdatedTime"))
+    AwsCloudFormationStackDetails.add_member(:notification_arns, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "NotificationArns"))
+    AwsCloudFormationStackDetails.add_member(:outputs, Shapes::ShapeRef.new(shape: AwsCloudFormationStackOutputsList, location_name: "Outputs"))
+    AwsCloudFormationStackDetails.add_member(:role_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RoleArn"))
+    AwsCloudFormationStackDetails.add_member(:stack_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "StackId"))
+    AwsCloudFormationStackDetails.add_member(:stack_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "StackName"))
+    AwsCloudFormationStackDetails.add_member(:stack_status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "StackStatus"))
+    AwsCloudFormationStackDetails.add_member(:stack_status_reason, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "StackStatusReason"))
+    AwsCloudFormationStackDetails.add_member(:timeout_in_minutes, Shapes::ShapeRef.new(shape: Integer, location_name: "TimeoutInMinutes"))
+    AwsCloudFormationStackDetails.struct_class = Types::AwsCloudFormationStackDetails
+
+    AwsCloudFormationStackDriftInformationDetails.add_member(:stack_drift_status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "StackDriftStatus"))
+    AwsCloudFormationStackDriftInformationDetails.struct_class = Types::AwsCloudFormationStackDriftInformationDetails
+
+    AwsCloudFormationStackOutputsDetails.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Description"))
+    AwsCloudFormationStackOutputsDetails.add_member(:output_key, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "OutputKey"))
+    AwsCloudFormationStackOutputsDetails.add_member(:output_value, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "OutputValue"))
+    AwsCloudFormationStackOutputsDetails.struct_class = Types::AwsCloudFormationStackOutputsDetails
+
+    AwsCloudFormationStackOutputsList.member = Shapes::ShapeRef.new(shape: AwsCloudFormationStackOutputsDetails)
+
     AwsCloudFrontDistributionCacheBehavior.add_member(:viewer_protocol_policy, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ViewerProtocolPolicy"))
     AwsCloudFrontDistributionCacheBehavior.struct_class = Types::AwsCloudFrontDistributionCacheBehavior
 
@@ -1164,6 +1251,14 @@ module Aws::SecurityHub
     AwsCloudFrontDistributionLogging.add_member(:prefix, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Prefix"))
     AwsCloudFrontDistributionLogging.struct_class = Types::AwsCloudFrontDistributionLogging
 
+    AwsCloudFrontDistributionOriginCustomOriginConfig.add_member(:http_port, Shapes::ShapeRef.new(shape: Integer, location_name: "HttpPort"))
+    AwsCloudFrontDistributionOriginCustomOriginConfig.add_member(:https_port, Shapes::ShapeRef.new(shape: Integer, location_name: "HttpsPort"))
+    AwsCloudFrontDistributionOriginCustomOriginConfig.add_member(:origin_keepalive_timeout, Shapes::ShapeRef.new(shape: Integer, location_name: "OriginKeepaliveTimeout"))
+    AwsCloudFrontDistributionOriginCustomOriginConfig.add_member(:origin_protocol_policy, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "OriginProtocolPolicy"))
+    AwsCloudFrontDistributionOriginCustomOriginConfig.add_member(:origin_read_timeout, Shapes::ShapeRef.new(shape: Integer, location_name: "OriginReadTimeout"))
+    AwsCloudFrontDistributionOriginCustomOriginConfig.add_member(:origin_ssl_protocols, Shapes::ShapeRef.new(shape: AwsCloudFrontDistributionOriginSslProtocols, location_name: "OriginSslProtocols"))
+    AwsCloudFrontDistributionOriginCustomOriginConfig.struct_class = Types::AwsCloudFrontDistributionOriginCustomOriginConfig
+
     AwsCloudFrontDistributionOriginGroup.add_member(:failover_criteria, Shapes::ShapeRef.new(shape: AwsCloudFrontDistributionOriginGroupFailover, location_name: "FailoverCriteria"))
     AwsCloudFrontDistributionOriginGroup.struct_class = Types::AwsCloudFrontDistributionOriginGroup
 
@@ -1185,12 +1280,17 @@ module Aws::SecurityHub
     AwsCloudFrontDistributionOriginItem.add_member(:id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Id"))
     AwsCloudFrontDistributionOriginItem.add_member(:origin_path, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "OriginPath"))
     AwsCloudFrontDistributionOriginItem.add_member(:s3_origin_config, Shapes::ShapeRef.new(shape: AwsCloudFrontDistributionOriginS3OriginConfig, location_name: "S3OriginConfig"))
+    AwsCloudFrontDistributionOriginItem.add_member(:custom_origin_config, Shapes::ShapeRef.new(shape: AwsCloudFrontDistributionOriginCustomOriginConfig, location_name: "CustomOriginConfig"))
     AwsCloudFrontDistributionOriginItem.struct_class = Types::AwsCloudFrontDistributionOriginItem
 
     AwsCloudFrontDistributionOriginItemList.member = Shapes::ShapeRef.new(shape: AwsCloudFrontDistributionOriginItem)
 
     AwsCloudFrontDistributionOriginS3OriginConfig.add_member(:origin_access_identity, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "OriginAccessIdentity"))
     AwsCloudFrontDistributionOriginS3OriginConfig.struct_class = Types::AwsCloudFrontDistributionOriginS3OriginConfig
+
+    AwsCloudFrontDistributionOriginSslProtocols.add_member(:items, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "Items"))
+    AwsCloudFrontDistributionOriginSslProtocols.add_member(:quantity, Shapes::ShapeRef.new(shape: Integer, location_name: "Quantity"))
+    AwsCloudFrontDistributionOriginSslProtocols.struct_class = Types::AwsCloudFrontDistributionOriginSslProtocols
 
     AwsCloudFrontDistributionOrigins.add_member(:items, Shapes::ShapeRef.new(shape: AwsCloudFrontDistributionOriginItemList, location_name: "Items"))
     AwsCloudFrontDistributionOrigins.struct_class = Types::AwsCloudFrontDistributionOrigins
@@ -1220,6 +1320,36 @@ module Aws::SecurityHub
     AwsCloudTrailTrailDetails.add_member(:sns_topic_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SnsTopicName"))
     AwsCloudTrailTrailDetails.add_member(:trail_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "TrailArn"))
     AwsCloudTrailTrailDetails.struct_class = Types::AwsCloudTrailTrailDetails
+
+    AwsCloudWatchAlarmDetails.add_member(:actions_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "ActionsEnabled"))
+    AwsCloudWatchAlarmDetails.add_member(:alarm_actions, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "AlarmActions"))
+    AwsCloudWatchAlarmDetails.add_member(:alarm_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "AlarmArn"))
+    AwsCloudWatchAlarmDetails.add_member(:alarm_configuration_updated_timestamp, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "AlarmConfigurationUpdatedTimestamp"))
+    AwsCloudWatchAlarmDetails.add_member(:alarm_description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "AlarmDescription"))
+    AwsCloudWatchAlarmDetails.add_member(:alarm_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "AlarmName"))
+    AwsCloudWatchAlarmDetails.add_member(:comparison_operator, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ComparisonOperator"))
+    AwsCloudWatchAlarmDetails.add_member(:datapoints_to_alarm, Shapes::ShapeRef.new(shape: Integer, location_name: "DatapointsToAlarm"))
+    AwsCloudWatchAlarmDetails.add_member(:dimensions, Shapes::ShapeRef.new(shape: AwsCloudWatchAlarmDimensionsList, location_name: "Dimensions"))
+    AwsCloudWatchAlarmDetails.add_member(:evaluate_low_sample_count_percentile, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "EvaluateLowSampleCountPercentile"))
+    AwsCloudWatchAlarmDetails.add_member(:evaluation_periods, Shapes::ShapeRef.new(shape: Integer, location_name: "EvaluationPeriods"))
+    AwsCloudWatchAlarmDetails.add_member(:extended_statistic, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ExtendedStatistic"))
+    AwsCloudWatchAlarmDetails.add_member(:insufficient_data_actions, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "InsufficientDataActions"))
+    AwsCloudWatchAlarmDetails.add_member(:metric_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "MetricName"))
+    AwsCloudWatchAlarmDetails.add_member(:namespace, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Namespace"))
+    AwsCloudWatchAlarmDetails.add_member(:ok_actions, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "OkActions"))
+    AwsCloudWatchAlarmDetails.add_member(:period, Shapes::ShapeRef.new(shape: Integer, location_name: "Period"))
+    AwsCloudWatchAlarmDetails.add_member(:statistic, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Statistic"))
+    AwsCloudWatchAlarmDetails.add_member(:threshold, Shapes::ShapeRef.new(shape: Double, location_name: "Threshold"))
+    AwsCloudWatchAlarmDetails.add_member(:threshold_metric_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ThresholdMetricId"))
+    AwsCloudWatchAlarmDetails.add_member(:treat_missing_data, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "TreatMissingData"))
+    AwsCloudWatchAlarmDetails.add_member(:unit, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Unit"))
+    AwsCloudWatchAlarmDetails.struct_class = Types::AwsCloudWatchAlarmDetails
+
+    AwsCloudWatchAlarmDimensionsDetails.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
+    AwsCloudWatchAlarmDimensionsDetails.add_member(:value, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Value"))
+    AwsCloudWatchAlarmDimensionsDetails.struct_class = Types::AwsCloudWatchAlarmDimensionsDetails
+
+    AwsCloudWatchAlarmDimensionsList.member = Shapes::ShapeRef.new(shape: AwsCloudWatchAlarmDimensionsDetails)
 
     AwsCodeBuildProjectArtifactsDetails.add_member(:artifact_identifier, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ArtifactIdentifier"))
     AwsCodeBuildProjectArtifactsDetails.add_member(:encryption_disabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "EncryptionDisabled"))
@@ -1423,7 +1553,16 @@ module Aws::SecurityHub
     AwsEc2InstanceDetails.add_member(:subnet_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SubnetId"))
     AwsEc2InstanceDetails.add_member(:launched_at, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "LaunchedAt"))
     AwsEc2InstanceDetails.add_member(:network_interfaces, Shapes::ShapeRef.new(shape: AwsEc2InstanceNetworkInterfacesList, location_name: "NetworkInterfaces"))
+    AwsEc2InstanceDetails.add_member(:virtualization_type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "VirtualizationType"))
+    AwsEc2InstanceDetails.add_member(:metadata_options, Shapes::ShapeRef.new(shape: AwsEc2InstanceMetadataOptions, location_name: "MetadataOptions"))
     AwsEc2InstanceDetails.struct_class = Types::AwsEc2InstanceDetails
+
+    AwsEc2InstanceMetadataOptions.add_member(:http_endpoint, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "HttpEndpoint"))
+    AwsEc2InstanceMetadataOptions.add_member(:http_protocol_ipv_6, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "HttpProtocolIpv6"))
+    AwsEc2InstanceMetadataOptions.add_member(:http_put_response_hop_limit, Shapes::ShapeRef.new(shape: Integer, location_name: "HttpPutResponseHopLimit"))
+    AwsEc2InstanceMetadataOptions.add_member(:http_tokens, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "HttpTokens"))
+    AwsEc2InstanceMetadataOptions.add_member(:instance_metadata_tags, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "InstanceMetadataTags"))
+    AwsEc2InstanceMetadataOptions.struct_class = Types::AwsEc2InstanceMetadataOptions
 
     AwsEc2InstanceNetworkInterfacesDetails.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "NetworkInterfaceId"))
     AwsEc2InstanceNetworkInterfacesDetails.struct_class = Types::AwsEc2InstanceNetworkInterfacesDetails
@@ -1552,6 +1691,20 @@ module Aws::SecurityHub
     AwsEc2SubnetDetails.add_member(:ipv_6_cidr_block_association_set, Shapes::ShapeRef.new(shape: Ipv6CidrBlockAssociationList, location_name: "Ipv6CidrBlockAssociationSet"))
     AwsEc2SubnetDetails.struct_class = Types::AwsEc2SubnetDetails
 
+    AwsEc2TransitGatewayDetails.add_member(:id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Id"))
+    AwsEc2TransitGatewayDetails.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Description"))
+    AwsEc2TransitGatewayDetails.add_member(:default_route_table_propagation, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DefaultRouteTablePropagation"))
+    AwsEc2TransitGatewayDetails.add_member(:auto_accept_shared_attachments, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "AutoAcceptSharedAttachments"))
+    AwsEc2TransitGatewayDetails.add_member(:default_route_table_association, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DefaultRouteTableAssociation"))
+    AwsEc2TransitGatewayDetails.add_member(:transit_gateway_cidr_blocks, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "TransitGatewayCidrBlocks"))
+    AwsEc2TransitGatewayDetails.add_member(:association_default_route_table_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "AssociationDefaultRouteTableId"))
+    AwsEc2TransitGatewayDetails.add_member(:propagation_default_route_table_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "PropagationDefaultRouteTableId"))
+    AwsEc2TransitGatewayDetails.add_member(:vpn_ecmp_support, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "VpnEcmpSupport"))
+    AwsEc2TransitGatewayDetails.add_member(:dns_support, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DnsSupport"))
+    AwsEc2TransitGatewayDetails.add_member(:multicast_support, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "MulticastSupport"))
+    AwsEc2TransitGatewayDetails.add_member(:amazon_side_asn, Shapes::ShapeRef.new(shape: Integer, location_name: "AmazonSideAsn"))
+    AwsEc2TransitGatewayDetails.struct_class = Types::AwsEc2TransitGatewayDetails
+
     AwsEc2VolumeAttachment.add_member(:attach_time, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "AttachTime"))
     AwsEc2VolumeAttachment.add_member(:delete_on_termination, Shapes::ShapeRef.new(shape: Boolean, location_name: "DeleteOnTermination"))
     AwsEc2VolumeAttachment.add_member(:instance_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "InstanceId"))
@@ -1561,12 +1714,16 @@ module Aws::SecurityHub
     AwsEc2VolumeAttachmentList.member = Shapes::ShapeRef.new(shape: AwsEc2VolumeAttachment)
 
     AwsEc2VolumeDetails.add_member(:create_time, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CreateTime"))
+    AwsEc2VolumeDetails.add_member(:device_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DeviceName"))
     AwsEc2VolumeDetails.add_member(:encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "Encrypted"))
     AwsEc2VolumeDetails.add_member(:size, Shapes::ShapeRef.new(shape: Integer, location_name: "Size"))
     AwsEc2VolumeDetails.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SnapshotId"))
     AwsEc2VolumeDetails.add_member(:status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Status"))
     AwsEc2VolumeDetails.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "KmsKeyId"))
     AwsEc2VolumeDetails.add_member(:attachments, Shapes::ShapeRef.new(shape: AwsEc2VolumeAttachmentList, location_name: "Attachments"))
+    AwsEc2VolumeDetails.add_member(:volume_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "VolumeId"))
+    AwsEc2VolumeDetails.add_member(:volume_type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "VolumeType"))
+    AwsEc2VolumeDetails.add_member(:volume_scan_status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "VolumeScanStatus"))
     AwsEc2VolumeDetails.struct_class = Types::AwsEc2VolumeDetails
 
     AwsEc2VpcDetails.add_member(:cidr_block_association_set, Shapes::ShapeRef.new(shape: CidrBlockAssociationList, location_name: "CidrBlockAssociationSet"))
@@ -1592,6 +1749,26 @@ module Aws::SecurityHub
     AwsEc2VpcEndpointServiceServiceTypeDetails.struct_class = Types::AwsEc2VpcEndpointServiceServiceTypeDetails
 
     AwsEc2VpcEndpointServiceServiceTypeList.member = Shapes::ShapeRef.new(shape: AwsEc2VpcEndpointServiceServiceTypeDetails)
+
+    AwsEc2VpcPeeringConnectionDetails.add_member(:accepter_vpc_info, Shapes::ShapeRef.new(shape: AwsEc2VpcPeeringConnectionVpcInfoDetails, location_name: "AccepterVpcInfo"))
+    AwsEc2VpcPeeringConnectionDetails.add_member(:expiration_time, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ExpirationTime"))
+    AwsEc2VpcPeeringConnectionDetails.add_member(:requester_vpc_info, Shapes::ShapeRef.new(shape: AwsEc2VpcPeeringConnectionVpcInfoDetails, location_name: "RequesterVpcInfo"))
+    AwsEc2VpcPeeringConnectionDetails.add_member(:status, Shapes::ShapeRef.new(shape: AwsEc2VpcPeeringConnectionStatusDetails, location_name: "Status"))
+    AwsEc2VpcPeeringConnectionDetails.add_member(:vpc_peering_connection_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "VpcPeeringConnectionId"))
+    AwsEc2VpcPeeringConnectionDetails.struct_class = Types::AwsEc2VpcPeeringConnectionDetails
+
+    AwsEc2VpcPeeringConnectionStatusDetails.add_member(:code, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Code"))
+    AwsEc2VpcPeeringConnectionStatusDetails.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    AwsEc2VpcPeeringConnectionStatusDetails.struct_class = Types::AwsEc2VpcPeeringConnectionStatusDetails
+
+    AwsEc2VpcPeeringConnectionVpcInfoDetails.add_member(:cidr_block, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CidrBlock"))
+    AwsEc2VpcPeeringConnectionVpcInfoDetails.add_member(:cidr_block_set, Shapes::ShapeRef.new(shape: VpcInfoCidrBlockSetList, location_name: "CidrBlockSet"))
+    AwsEc2VpcPeeringConnectionVpcInfoDetails.add_member(:ipv_6_cidr_block_set, Shapes::ShapeRef.new(shape: VpcInfoIpv6CidrBlockSetList, location_name: "Ipv6CidrBlockSet"))
+    AwsEc2VpcPeeringConnectionVpcInfoDetails.add_member(:owner_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "OwnerId"))
+    AwsEc2VpcPeeringConnectionVpcInfoDetails.add_member(:peering_options, Shapes::ShapeRef.new(shape: VpcInfoPeeringOptionsDetails, location_name: "PeeringOptions"))
+    AwsEc2VpcPeeringConnectionVpcInfoDetails.add_member(:region, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Region"))
+    AwsEc2VpcPeeringConnectionVpcInfoDetails.add_member(:vpc_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "VpcId"))
+    AwsEc2VpcPeeringConnectionVpcInfoDetails.struct_class = Types::AwsEc2VpcPeeringConnectionVpcInfoDetails
 
     AwsEc2VpnConnectionDetails.add_member(:vpn_connection_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "VpnConnectionId"))
     AwsEc2VpnConnectionDetails.add_member(:state, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "State"))
@@ -1697,11 +1874,25 @@ module Aws::SecurityHub
 
     AwsEcsClusterDefaultCapacityProviderStrategyList.member = Shapes::ShapeRef.new(shape: AwsEcsClusterDefaultCapacityProviderStrategyDetails)
 
+    AwsEcsClusterDetails.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ClusterArn"))
+    AwsEcsClusterDetails.add_member(:active_services_count, Shapes::ShapeRef.new(shape: Integer, location_name: "ActiveServicesCount"))
     AwsEcsClusterDetails.add_member(:capacity_providers, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "CapacityProviders"))
     AwsEcsClusterDetails.add_member(:cluster_settings, Shapes::ShapeRef.new(shape: AwsEcsClusterClusterSettingsList, location_name: "ClusterSettings"))
     AwsEcsClusterDetails.add_member(:configuration, Shapes::ShapeRef.new(shape: AwsEcsClusterConfigurationDetails, location_name: "Configuration"))
     AwsEcsClusterDetails.add_member(:default_capacity_provider_strategy, Shapes::ShapeRef.new(shape: AwsEcsClusterDefaultCapacityProviderStrategyList, location_name: "DefaultCapacityProviderStrategy"))
+    AwsEcsClusterDetails.add_member(:cluster_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ClusterName"))
+    AwsEcsClusterDetails.add_member(:registered_container_instances_count, Shapes::ShapeRef.new(shape: Integer, location_name: "RegisteredContainerInstancesCount"))
+    AwsEcsClusterDetails.add_member(:running_tasks_count, Shapes::ShapeRef.new(shape: Integer, location_name: "RunningTasksCount"))
+    AwsEcsClusterDetails.add_member(:status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Status"))
     AwsEcsClusterDetails.struct_class = Types::AwsEcsClusterDetails
+
+    AwsEcsContainerDetails.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
+    AwsEcsContainerDetails.add_member(:image, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Image"))
+    AwsEcsContainerDetails.add_member(:mount_points, Shapes::ShapeRef.new(shape: AwsMountPointList, location_name: "MountPoints"))
+    AwsEcsContainerDetails.add_member(:privileged, Shapes::ShapeRef.new(shape: Boolean, location_name: "Privileged"))
+    AwsEcsContainerDetails.struct_class = Types::AwsEcsContainerDetails
+
+    AwsEcsContainerDetailsList.member = Shapes::ShapeRef.new(shape: AwsEcsContainerDetails)
 
     AwsEcsServiceCapacityProviderStrategyDetails.add_member(:base, Shapes::ShapeRef.new(shape: Integer, location_name: "Base"))
     AwsEcsServiceCapacityProviderStrategyDetails.add_member(:capacity_provider, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CapacityProvider"))
@@ -2013,6 +2204,48 @@ module Aws::SecurityHub
     AwsEcsTaskDefinitionVolumesHostDetails.struct_class = Types::AwsEcsTaskDefinitionVolumesHostDetails
 
     AwsEcsTaskDefinitionVolumesList.member = Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionVolumesDetails)
+
+    AwsEcsTaskDetails.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ClusterArn"))
+    AwsEcsTaskDetails.add_member(:task_definition_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "TaskDefinitionArn"))
+    AwsEcsTaskDetails.add_member(:version, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Version"))
+    AwsEcsTaskDetails.add_member(:created_at, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CreatedAt"))
+    AwsEcsTaskDetails.add_member(:started_at, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "StartedAt"))
+    AwsEcsTaskDetails.add_member(:started_by, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "StartedBy"))
+    AwsEcsTaskDetails.add_member(:group, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Group"))
+    AwsEcsTaskDetails.add_member(:volumes, Shapes::ShapeRef.new(shape: AwsEcsTaskVolumeDetailsList, location_name: "Volumes"))
+    AwsEcsTaskDetails.add_member(:containers, Shapes::ShapeRef.new(shape: AwsEcsContainerDetailsList, location_name: "Containers"))
+    AwsEcsTaskDetails.struct_class = Types::AwsEcsTaskDetails
+
+    AwsEcsTaskVolumeDetails.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
+    AwsEcsTaskVolumeDetails.add_member(:host, Shapes::ShapeRef.new(shape: AwsEcsTaskVolumeHostDetails, location_name: "Host"))
+    AwsEcsTaskVolumeDetails.struct_class = Types::AwsEcsTaskVolumeDetails
+
+    AwsEcsTaskVolumeDetailsList.member = Shapes::ShapeRef.new(shape: AwsEcsTaskVolumeDetails)
+
+    AwsEcsTaskVolumeHostDetails.add_member(:source_path, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SourcePath"))
+    AwsEcsTaskVolumeHostDetails.struct_class = Types::AwsEcsTaskVolumeHostDetails
+
+    AwsEfsAccessPointDetails.add_member(:access_point_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "AccessPointId"))
+    AwsEfsAccessPointDetails.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Arn"))
+    AwsEfsAccessPointDetails.add_member(:client_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ClientToken"))
+    AwsEfsAccessPointDetails.add_member(:file_system_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "FileSystemId"))
+    AwsEfsAccessPointDetails.add_member(:posix_user, Shapes::ShapeRef.new(shape: AwsEfsAccessPointPosixUserDetails, location_name: "PosixUser"))
+    AwsEfsAccessPointDetails.add_member(:root_directory, Shapes::ShapeRef.new(shape: AwsEfsAccessPointRootDirectoryDetails, location_name: "RootDirectory"))
+    AwsEfsAccessPointDetails.struct_class = Types::AwsEfsAccessPointDetails
+
+    AwsEfsAccessPointPosixUserDetails.add_member(:gid, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Gid"))
+    AwsEfsAccessPointPosixUserDetails.add_member(:secondary_gids, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "SecondaryGids"))
+    AwsEfsAccessPointPosixUserDetails.add_member(:uid, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Uid"))
+    AwsEfsAccessPointPosixUserDetails.struct_class = Types::AwsEfsAccessPointPosixUserDetails
+
+    AwsEfsAccessPointRootDirectoryCreationInfoDetails.add_member(:owner_gid, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "OwnerGid"))
+    AwsEfsAccessPointRootDirectoryCreationInfoDetails.add_member(:owner_uid, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "OwnerUid"))
+    AwsEfsAccessPointRootDirectoryCreationInfoDetails.add_member(:permissions, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Permissions"))
+    AwsEfsAccessPointRootDirectoryCreationInfoDetails.struct_class = Types::AwsEfsAccessPointRootDirectoryCreationInfoDetails
+
+    AwsEfsAccessPointRootDirectoryDetails.add_member(:creation_info, Shapes::ShapeRef.new(shape: AwsEfsAccessPointRootDirectoryCreationInfoDetails, location_name: "CreationInfo"))
+    AwsEfsAccessPointRootDirectoryDetails.add_member(:path, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Path"))
+    AwsEfsAccessPointRootDirectoryDetails.struct_class = Types::AwsEfsAccessPointRootDirectoryDetails
 
     AwsEksClusterDetails.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Arn"))
     AwsEksClusterDetails.add_member(:certificate_authority_data, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CertificateAuthorityData"))
@@ -2377,6 +2610,17 @@ module Aws::SecurityHub
 
     AwsIamUserPolicyList.member = Shapes::ShapeRef.new(shape: AwsIamUserPolicy)
 
+    AwsKinesisStreamDetails.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
+    AwsKinesisStreamDetails.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Arn"))
+    AwsKinesisStreamDetails.add_member(:stream_encryption, Shapes::ShapeRef.new(shape: AwsKinesisStreamStreamEncryptionDetails, location_name: "StreamEncryption"))
+    AwsKinesisStreamDetails.add_member(:shard_count, Shapes::ShapeRef.new(shape: Integer, location_name: "ShardCount"))
+    AwsKinesisStreamDetails.add_member(:retention_period_hours, Shapes::ShapeRef.new(shape: Integer, location_name: "RetentionPeriodHours"))
+    AwsKinesisStreamDetails.struct_class = Types::AwsKinesisStreamDetails
+
+    AwsKinesisStreamStreamEncryptionDetails.add_member(:encryption_type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "EncryptionType"))
+    AwsKinesisStreamStreamEncryptionDetails.add_member(:key_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "KeyId"))
+    AwsKinesisStreamStreamEncryptionDetails.struct_class = Types::AwsKinesisStreamStreamEncryptionDetails
+
     AwsKmsKeyDetails.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "AWSAccountId"))
     AwsKmsKeyDetails.add_member(:creation_date, Shapes::ShapeRef.new(shape: Double, location_name: "CreationDate"))
     AwsKmsKeyDetails.add_member(:key_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "KeyId"))
@@ -2443,6 +2687,12 @@ module Aws::SecurityHub
     AwsLambdaLayerVersionDetails.add_member(:created_date, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CreatedDate"))
     AwsLambdaLayerVersionDetails.struct_class = Types::AwsLambdaLayerVersionDetails
 
+    AwsMountPoint.add_member(:source_volume, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SourceVolume"))
+    AwsMountPoint.add_member(:container_path, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ContainerPath"))
+    AwsMountPoint.struct_class = Types::AwsMountPoint
+
+    AwsMountPointList.member = Shapes::ShapeRef.new(shape: AwsMountPoint)
+
     AwsNetworkFirewallFirewallDetails.add_member(:delete_protection, Shapes::ShapeRef.new(shape: Boolean, location_name: "DeleteProtection"))
     AwsNetworkFirewallFirewallDetails.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Description"))
     AwsNetworkFirewallFirewallDetails.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "FirewallArn"))
@@ -2476,6 +2726,11 @@ module Aws::SecurityHub
     AwsNetworkFirewallRuleGroupDetails.add_member(:type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Type"))
     AwsNetworkFirewallRuleGroupDetails.struct_class = Types::AwsNetworkFirewallRuleGroupDetails
 
+    AwsOpenSearchServiceDomainAdvancedSecurityOptionsDetails.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    AwsOpenSearchServiceDomainAdvancedSecurityOptionsDetails.add_member(:internal_user_database_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "InternalUserDatabaseEnabled"))
+    AwsOpenSearchServiceDomainAdvancedSecurityOptionsDetails.add_member(:master_user_options, Shapes::ShapeRef.new(shape: AwsOpenSearchServiceDomainMasterUserOptionsDetails, location_name: "MasterUserOptions"))
+    AwsOpenSearchServiceDomainAdvancedSecurityOptionsDetails.struct_class = Types::AwsOpenSearchServiceDomainAdvancedSecurityOptionsDetails
+
     AwsOpenSearchServiceDomainClusterConfigDetails.add_member(:instance_count, Shapes::ShapeRef.new(shape: Integer, location_name: "InstanceCount"))
     AwsOpenSearchServiceDomainClusterConfigDetails.add_member(:warm_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "WarmEnabled"))
     AwsOpenSearchServiceDomainClusterConfigDetails.add_member(:warm_count, Shapes::ShapeRef.new(shape: Integer, location_name: "WarmCount"))
@@ -2505,6 +2760,7 @@ module Aws::SecurityHub
     AwsOpenSearchServiceDomainDetails.add_member(:vpc_options, Shapes::ShapeRef.new(shape: AwsOpenSearchServiceDomainVpcOptionsDetails, location_name: "VpcOptions"))
     AwsOpenSearchServiceDomainDetails.add_member(:log_publishing_options, Shapes::ShapeRef.new(shape: AwsOpenSearchServiceDomainLogPublishingOptionsDetails, location_name: "LogPublishingOptions"))
     AwsOpenSearchServiceDomainDetails.add_member(:domain_endpoints, Shapes::ShapeRef.new(shape: FieldMap, location_name: "DomainEndpoints"))
+    AwsOpenSearchServiceDomainDetails.add_member(:advanced_security_options, Shapes::ShapeRef.new(shape: AwsOpenSearchServiceDomainAdvancedSecurityOptionsDetails, location_name: "AdvancedSecurityOptions"))
     AwsOpenSearchServiceDomainDetails.struct_class = Types::AwsOpenSearchServiceDomainDetails
 
     AwsOpenSearchServiceDomainDomainEndpointOptionsDetails.add_member(:custom_endpoint_certificate_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CustomEndpointCertificateArn"))
@@ -2526,6 +2782,11 @@ module Aws::SecurityHub
     AwsOpenSearchServiceDomainLogPublishingOptionsDetails.add_member(:search_slow_logs, Shapes::ShapeRef.new(shape: AwsOpenSearchServiceDomainLogPublishingOption, location_name: "SearchSlowLogs"))
     AwsOpenSearchServiceDomainLogPublishingOptionsDetails.add_member(:audit_logs, Shapes::ShapeRef.new(shape: AwsOpenSearchServiceDomainLogPublishingOption, location_name: "AuditLogs"))
     AwsOpenSearchServiceDomainLogPublishingOptionsDetails.struct_class = Types::AwsOpenSearchServiceDomainLogPublishingOptionsDetails
+
+    AwsOpenSearchServiceDomainMasterUserOptionsDetails.add_member(:master_user_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "MasterUserArn"))
+    AwsOpenSearchServiceDomainMasterUserOptionsDetails.add_member(:master_user_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "MasterUserName"))
+    AwsOpenSearchServiceDomainMasterUserOptionsDetails.add_member(:master_user_password, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "MasterUserPassword"))
+    AwsOpenSearchServiceDomainMasterUserOptionsDetails.struct_class = Types::AwsOpenSearchServiceDomainMasterUserOptionsDetails
 
     AwsOpenSearchServiceDomainNodeToNodeEncryptionOptionsDetails.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
     AwsOpenSearchServiceDomainNodeToNodeEncryptionOptionsDetails.struct_class = Types::AwsOpenSearchServiceDomainNodeToNodeEncryptionOptionsDetails
@@ -3178,6 +3439,7 @@ module Aws::SecurityHub
     AwsSecurityFinding.add_member(:network, Shapes::ShapeRef.new(shape: Network, location_name: "Network"))
     AwsSecurityFinding.add_member(:network_path, Shapes::ShapeRef.new(shape: NetworkPathList, location_name: "NetworkPath"))
     AwsSecurityFinding.add_member(:process, Shapes::ShapeRef.new(shape: ProcessDetails, location_name: "Process"))
+    AwsSecurityFinding.add_member(:threats, Shapes::ShapeRef.new(shape: ThreatList, location_name: "Threats"))
     AwsSecurityFinding.add_member(:threat_intel_indicators, Shapes::ShapeRef.new(shape: ThreatIntelIndicatorList, location_name: "ThreatIntelIndicators"))
     AwsSecurityFinding.add_member(:resources, Shapes::ShapeRef.new(shape: ResourceList, required: true, location_name: "Resources"))
     AwsSecurityFinding.add_member(:compliance, Shapes::ShapeRef.new(shape: Compliance, location_name: "Compliance"))
@@ -3303,6 +3565,13 @@ module Aws::SecurityHub
     AwsSnsTopicDetails.add_member(:subscription, Shapes::ShapeRef.new(shape: AwsSnsTopicSubscriptionList, location_name: "Subscription"))
     AwsSnsTopicDetails.add_member(:topic_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "TopicName"))
     AwsSnsTopicDetails.add_member(:owner, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Owner"))
+    AwsSnsTopicDetails.add_member(:sqs_success_feedback_role_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SqsSuccessFeedbackRoleArn"))
+    AwsSnsTopicDetails.add_member(:sqs_failure_feedback_role_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SqsFailureFeedbackRoleArn"))
+    AwsSnsTopicDetails.add_member(:application_success_feedback_role_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ApplicationSuccessFeedbackRoleArn"))
+    AwsSnsTopicDetails.add_member(:firehose_success_feedback_role_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "FirehoseSuccessFeedbackRoleArn"))
+    AwsSnsTopicDetails.add_member(:firehose_failure_feedback_role_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "FirehoseFailureFeedbackRoleArn"))
+    AwsSnsTopicDetails.add_member(:http_success_feedback_role_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "HttpSuccessFeedbackRoleArn"))
+    AwsSnsTopicDetails.add_member(:http_failure_feedback_role_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "HttpFailureFeedbackRoleArn"))
     AwsSnsTopicDetails.struct_class = Types::AwsSnsTopicDetails
 
     AwsSnsTopicSubscription.add_member(:endpoint, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Endpoint"))
@@ -3372,6 +3641,88 @@ module Aws::SecurityHub
     AwsWafRegionalRateBasedRuleMatchPredicate.struct_class = Types::AwsWafRegionalRateBasedRuleMatchPredicate
 
     AwsWafRegionalRateBasedRuleMatchPredicateList.member = Shapes::ShapeRef.new(shape: AwsWafRegionalRateBasedRuleMatchPredicate)
+
+    AwsWafRegionalRuleDetails.add_member(:metric_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "MetricName"))
+    AwsWafRegionalRuleDetails.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
+    AwsWafRegionalRuleDetails.add_member(:predicate_list, Shapes::ShapeRef.new(shape: AwsWafRegionalRulePredicateList, location_name: "PredicateList"))
+    AwsWafRegionalRuleDetails.add_member(:rule_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RuleId"))
+    AwsWafRegionalRuleDetails.struct_class = Types::AwsWafRegionalRuleDetails
+
+    AwsWafRegionalRuleGroupDetails.add_member(:metric_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "MetricName"))
+    AwsWafRegionalRuleGroupDetails.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
+    AwsWafRegionalRuleGroupDetails.add_member(:rule_group_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RuleGroupId"))
+    AwsWafRegionalRuleGroupDetails.add_member(:rules, Shapes::ShapeRef.new(shape: AwsWafRegionalRuleGroupRulesList, location_name: "Rules"))
+    AwsWafRegionalRuleGroupDetails.struct_class = Types::AwsWafRegionalRuleGroupDetails
+
+    AwsWafRegionalRuleGroupRulesActionDetails.add_member(:type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Type"))
+    AwsWafRegionalRuleGroupRulesActionDetails.struct_class = Types::AwsWafRegionalRuleGroupRulesActionDetails
+
+    AwsWafRegionalRuleGroupRulesDetails.add_member(:action, Shapes::ShapeRef.new(shape: AwsWafRegionalRuleGroupRulesActionDetails, location_name: "Action"))
+    AwsWafRegionalRuleGroupRulesDetails.add_member(:priority, Shapes::ShapeRef.new(shape: Integer, location_name: "Priority"))
+    AwsWafRegionalRuleGroupRulesDetails.add_member(:rule_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RuleId"))
+    AwsWafRegionalRuleGroupRulesDetails.add_member(:type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Type"))
+    AwsWafRegionalRuleGroupRulesDetails.struct_class = Types::AwsWafRegionalRuleGroupRulesDetails
+
+    AwsWafRegionalRuleGroupRulesList.member = Shapes::ShapeRef.new(shape: AwsWafRegionalRuleGroupRulesDetails)
+
+    AwsWafRegionalRulePredicateList.member = Shapes::ShapeRef.new(shape: AwsWafRegionalRulePredicateListDetails)
+
+    AwsWafRegionalRulePredicateListDetails.add_member(:data_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DataId"))
+    AwsWafRegionalRulePredicateListDetails.add_member(:negated, Shapes::ShapeRef.new(shape: Boolean, location_name: "Negated"))
+    AwsWafRegionalRulePredicateListDetails.add_member(:type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Type"))
+    AwsWafRegionalRulePredicateListDetails.struct_class = Types::AwsWafRegionalRulePredicateListDetails
+
+    AwsWafRegionalWebAclDetails.add_member(:default_action, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DefaultAction"))
+    AwsWafRegionalWebAclDetails.add_member(:metric_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "MetricName"))
+    AwsWafRegionalWebAclDetails.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
+    AwsWafRegionalWebAclDetails.add_member(:rules_list, Shapes::ShapeRef.new(shape: AwsWafRegionalWebAclRulesList, location_name: "RulesList"))
+    AwsWafRegionalWebAclDetails.add_member(:web_acl_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "WebAclId"))
+    AwsWafRegionalWebAclDetails.struct_class = Types::AwsWafRegionalWebAclDetails
+
+    AwsWafRegionalWebAclRulesList.member = Shapes::ShapeRef.new(shape: AwsWafRegionalWebAclRulesListDetails)
+
+    AwsWafRegionalWebAclRulesListActionDetails.add_member(:type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Type"))
+    AwsWafRegionalWebAclRulesListActionDetails.struct_class = Types::AwsWafRegionalWebAclRulesListActionDetails
+
+    AwsWafRegionalWebAclRulesListDetails.add_member(:action, Shapes::ShapeRef.new(shape: AwsWafRegionalWebAclRulesListActionDetails, location_name: "Action"))
+    AwsWafRegionalWebAclRulesListDetails.add_member(:override_action, Shapes::ShapeRef.new(shape: AwsWafRegionalWebAclRulesListOverrideActionDetails, location_name: "OverrideAction"))
+    AwsWafRegionalWebAclRulesListDetails.add_member(:priority, Shapes::ShapeRef.new(shape: Integer, location_name: "Priority"))
+    AwsWafRegionalWebAclRulesListDetails.add_member(:rule_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RuleId"))
+    AwsWafRegionalWebAclRulesListDetails.add_member(:type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Type"))
+    AwsWafRegionalWebAclRulesListDetails.struct_class = Types::AwsWafRegionalWebAclRulesListDetails
+
+    AwsWafRegionalWebAclRulesListOverrideActionDetails.add_member(:type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Type"))
+    AwsWafRegionalWebAclRulesListOverrideActionDetails.struct_class = Types::AwsWafRegionalWebAclRulesListOverrideActionDetails
+
+    AwsWafRuleDetails.add_member(:metric_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "MetricName"))
+    AwsWafRuleDetails.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
+    AwsWafRuleDetails.add_member(:predicate_list, Shapes::ShapeRef.new(shape: AwsWafRulePredicateList, location_name: "PredicateList"))
+    AwsWafRuleDetails.add_member(:rule_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RuleId"))
+    AwsWafRuleDetails.struct_class = Types::AwsWafRuleDetails
+
+    AwsWafRuleGroupDetails.add_member(:metric_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "MetricName"))
+    AwsWafRuleGroupDetails.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
+    AwsWafRuleGroupDetails.add_member(:rule_group_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RuleGroupId"))
+    AwsWafRuleGroupDetails.add_member(:rules, Shapes::ShapeRef.new(shape: AwsWafRuleGroupRulesList, location_name: "Rules"))
+    AwsWafRuleGroupDetails.struct_class = Types::AwsWafRuleGroupDetails
+
+    AwsWafRuleGroupRulesActionDetails.add_member(:type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Type"))
+    AwsWafRuleGroupRulesActionDetails.struct_class = Types::AwsWafRuleGroupRulesActionDetails
+
+    AwsWafRuleGroupRulesDetails.add_member(:action, Shapes::ShapeRef.new(shape: AwsWafRuleGroupRulesActionDetails, location_name: "Action"))
+    AwsWafRuleGroupRulesDetails.add_member(:priority, Shapes::ShapeRef.new(shape: Integer, location_name: "Priority"))
+    AwsWafRuleGroupRulesDetails.add_member(:rule_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RuleId"))
+    AwsWafRuleGroupRulesDetails.add_member(:type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Type"))
+    AwsWafRuleGroupRulesDetails.struct_class = Types::AwsWafRuleGroupRulesDetails
+
+    AwsWafRuleGroupRulesList.member = Shapes::ShapeRef.new(shape: AwsWafRuleGroupRulesDetails)
+
+    AwsWafRulePredicateList.member = Shapes::ShapeRef.new(shape: AwsWafRulePredicateListDetails)
+
+    AwsWafRulePredicateListDetails.add_member(:data_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DataId"))
+    AwsWafRulePredicateListDetails.add_member(:negated, Shapes::ShapeRef.new(shape: Boolean, location_name: "Negated"))
+    AwsWafRulePredicateListDetails.add_member(:type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Type"))
+    AwsWafRulePredicateListDetails.struct_class = Types::AwsWafRulePredicateListDetails
 
     AwsWafWebAclDetails.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
     AwsWafWebAclDetails.add_member(:default_action, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DefaultAction"))
@@ -3481,10 +3832,13 @@ module Aws::SecurityHub
     Compliance.add_member(:status_reasons, Shapes::ShapeRef.new(shape: StatusReasonsList, location_name: "StatusReasons"))
     Compliance.struct_class = Types::Compliance
 
+    ContainerDetails.add_member(:container_runtime, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ContainerRuntime"))
     ContainerDetails.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
     ContainerDetails.add_member(:image_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ImageId"))
     ContainerDetails.add_member(:image_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ImageName"))
     ContainerDetails.add_member(:launched_at, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "LaunchedAt"))
+    ContainerDetails.add_member(:volume_mounts, Shapes::ShapeRef.new(shape: VolumeMountList, location_name: "VolumeMounts"))
+    ContainerDetails.add_member(:privileged, Shapes::ShapeRef.new(shape: Boolean, location_name: "Privileged"))
     ContainerDetails.struct_class = Types::ContainerDetails
 
     Country.add_member(:country_code, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CountryCode"))
@@ -3695,6 +4049,14 @@ module Aws::SecurityHub
 
     FieldMap.key = Shapes::ShapeRef.new(shape: NonEmptyString)
     FieldMap.value = Shapes::ShapeRef.new(shape: NonEmptyString)
+
+    FilePathList.member = Shapes::ShapeRef.new(shape: FilePaths)
+
+    FilePaths.add_member(:file_path, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "FilePath"))
+    FilePaths.add_member(:file_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "FileName"))
+    FilePaths.add_member(:resource_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ResourceId"))
+    FilePaths.add_member(:hash, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Hash"))
+    FilePaths.struct_class = Types::FilePaths
 
     FindingAggregator.add_member(:finding_aggregator_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "FindingAggregatorArn"))
     FindingAggregator.struct_class = Types::FindingAggregator
@@ -4183,6 +4545,7 @@ module Aws::SecurityHub
     ResourceDetails.add_member(:aws_rds_db_cluster_snapshot, Shapes::ShapeRef.new(shape: AwsRdsDbClusterSnapshotDetails, location_name: "AwsRdsDbClusterSnapshot"))
     ResourceDetails.add_member(:aws_rds_db_cluster, Shapes::ShapeRef.new(shape: AwsRdsDbClusterDetails, location_name: "AwsRdsDbCluster"))
     ResourceDetails.add_member(:aws_ecs_cluster, Shapes::ShapeRef.new(shape: AwsEcsClusterDetails, location_name: "AwsEcsCluster"))
+    ResourceDetails.add_member(:aws_ecs_container, Shapes::ShapeRef.new(shape: AwsEcsContainerDetails, location_name: "AwsEcsContainer"))
     ResourceDetails.add_member(:aws_ecs_task_definition, Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionDetails, location_name: "AwsEcsTaskDefinition"))
     ResourceDetails.add_member(:container, Shapes::ShapeRef.new(shape: ContainerDetails, location_name: "Container"))
     ResourceDetails.add_member(:other, Shapes::ShapeRef.new(shape: FieldMap, location_name: "Other"))
@@ -4202,6 +4565,18 @@ module Aws::SecurityHub
     ResourceDetails.add_member(:aws_network_firewall_firewall, Shapes::ShapeRef.new(shape: AwsNetworkFirewallFirewallDetails, location_name: "AwsNetworkFirewallFirewall"))
     ResourceDetails.add_member(:aws_network_firewall_rule_group, Shapes::ShapeRef.new(shape: AwsNetworkFirewallRuleGroupDetails, location_name: "AwsNetworkFirewallRuleGroup"))
     ResourceDetails.add_member(:aws_rds_db_security_group, Shapes::ShapeRef.new(shape: AwsRdsDbSecurityGroupDetails, location_name: "AwsRdsDbSecurityGroup"))
+    ResourceDetails.add_member(:aws_kinesis_stream, Shapes::ShapeRef.new(shape: AwsKinesisStreamDetails, location_name: "AwsKinesisStream"))
+    ResourceDetails.add_member(:aws_ec2_transit_gateway, Shapes::ShapeRef.new(shape: AwsEc2TransitGatewayDetails, location_name: "AwsEc2TransitGateway"))
+    ResourceDetails.add_member(:aws_efs_access_point, Shapes::ShapeRef.new(shape: AwsEfsAccessPointDetails, location_name: "AwsEfsAccessPoint"))
+    ResourceDetails.add_member(:aws_cloud_formation_stack, Shapes::ShapeRef.new(shape: AwsCloudFormationStackDetails, location_name: "AwsCloudFormationStack"))
+    ResourceDetails.add_member(:aws_cloud_watch_alarm, Shapes::ShapeRef.new(shape: AwsCloudWatchAlarmDetails, location_name: "AwsCloudWatchAlarm"))
+    ResourceDetails.add_member(:aws_ec2_vpc_peering_connection, Shapes::ShapeRef.new(shape: AwsEc2VpcPeeringConnectionDetails, location_name: "AwsEc2VpcPeeringConnection"))
+    ResourceDetails.add_member(:aws_waf_regional_rule_group, Shapes::ShapeRef.new(shape: AwsWafRegionalRuleGroupDetails, location_name: "AwsWafRegionalRuleGroup"))
+    ResourceDetails.add_member(:aws_waf_regional_rule, Shapes::ShapeRef.new(shape: AwsWafRegionalRuleDetails, location_name: "AwsWafRegionalRule"))
+    ResourceDetails.add_member(:aws_waf_regional_web_acl, Shapes::ShapeRef.new(shape: AwsWafRegionalWebAclDetails, location_name: "AwsWafRegionalWebAcl"))
+    ResourceDetails.add_member(:aws_waf_rule, Shapes::ShapeRef.new(shape: AwsWafRuleDetails, location_name: "AwsWafRule"))
+    ResourceDetails.add_member(:aws_waf_rule_group, Shapes::ShapeRef.new(shape: AwsWafRuleGroupDetails, location_name: "AwsWafRuleGroup"))
+    ResourceDetails.add_member(:aws_ecs_task, Shapes::ShapeRef.new(shape: AwsEcsTaskDetails, location_name: "AwsEcsTask"))
     ResourceDetails.struct_class = Types::ResourceDetails
 
     ResourceList.member = Shapes::ShapeRef.new(shape: Resource)
@@ -4447,6 +4822,12 @@ module Aws::SecurityHub
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
+    Threat.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
+    Threat.add_member(:severity, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Severity"))
+    Threat.add_member(:item_count, Shapes::ShapeRef.new(shape: Integer, location_name: "ItemCount"))
+    Threat.add_member(:file_paths, Shapes::ShapeRef.new(shape: FilePathList, location_name: "FilePaths"))
+    Threat.struct_class = Types::Threat
+
     ThreatIntelIndicator.add_member(:type, Shapes::ShapeRef.new(shape: ThreatIntelIndicatorType, location_name: "Type"))
     ThreatIntelIndicator.add_member(:value, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Value"))
     ThreatIntelIndicator.add_member(:category, Shapes::ShapeRef.new(shape: ThreatIntelIndicatorCategory, location_name: "Category"))
@@ -4456,6 +4837,8 @@ module Aws::SecurityHub
     ThreatIntelIndicator.struct_class = Types::ThreatIntelIndicator
 
     ThreatIntelIndicatorList.member = Shapes::ShapeRef.new(shape: ThreatIntelIndicator)
+
+    ThreatList.member = Shapes::ShapeRef.new(shape: Threat)
 
     TypeList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 
@@ -4515,6 +4898,27 @@ module Aws::SecurityHub
     UpdateStandardsControlRequest.struct_class = Types::UpdateStandardsControlRequest
 
     UpdateStandardsControlResponse.struct_class = Types::UpdateStandardsControlResponse
+
+    VolumeMount.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
+    VolumeMount.add_member(:mount_path, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "MountPath"))
+    VolumeMount.struct_class = Types::VolumeMount
+
+    VolumeMountList.member = Shapes::ShapeRef.new(shape: VolumeMount)
+
+    VpcInfoCidrBlockSetDetails.add_member(:cidr_block, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CidrBlock"))
+    VpcInfoCidrBlockSetDetails.struct_class = Types::VpcInfoCidrBlockSetDetails
+
+    VpcInfoCidrBlockSetList.member = Shapes::ShapeRef.new(shape: VpcInfoCidrBlockSetDetails)
+
+    VpcInfoIpv6CidrBlockSetDetails.add_member(:ipv_6_cidr_block, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Ipv6CidrBlock"))
+    VpcInfoIpv6CidrBlockSetDetails.struct_class = Types::VpcInfoIpv6CidrBlockSetDetails
+
+    VpcInfoIpv6CidrBlockSetList.member = Shapes::ShapeRef.new(shape: VpcInfoIpv6CidrBlockSetDetails)
+
+    VpcInfoPeeringOptionsDetails.add_member(:allow_dns_resolution_from_remote_vpc, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllowDnsResolutionFromRemoteVpc"))
+    VpcInfoPeeringOptionsDetails.add_member(:allow_egress_from_local_classic_link_to_remote_vpc, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllowEgressFromLocalClassicLinkToRemoteVpc"))
+    VpcInfoPeeringOptionsDetails.add_member(:allow_egress_from_local_vpc_to_remote_classic_link, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllowEgressFromLocalVpcToRemoteClassicLink"))
+    VpcInfoPeeringOptionsDetails.struct_class = Types::VpcInfoPeeringOptionsDetails
 
     Vulnerability.add_member(:id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Id"))
     Vulnerability.add_member(:vulnerable_packages, Shapes::ShapeRef.new(shape: SoftwarePackageList, location_name: "VulnerablePackages"))

@@ -1448,6 +1448,10 @@ module Aws::SecretsManager
     # Services account, not including secrets that are marked for deletion.
     # To see secrets marked for deletion, use the Secrets Manager console.
     #
+    # ListSecrets is eventually consistent, however it might not reflect
+    # changes from the last five minutes. To get the latest information for
+    # a specific secret, use DescribeSecret.
+    #
     # To list the versions of a secret, use ListSecretVersionIds.
     #
     # To get the secret value from `SecretString` or `SecretBinary`, call
@@ -1685,9 +1689,9 @@ module Aws::SecretsManager
     # the staging label `AWSPREVIOUS` to the version that `AWSCURRENT` was
     # removed from.
     #
-    # This operation is idempotent. If a version with a `VersionId` with the
-    # same value as the `ClientRequestToken` parameter already exists, and
-    # you specify the same secret data, the operation succeeds but does
+    # This operation is idempotent. If you call this operation with a
+    # `ClientRequestToken` that matches an existing version's VersionId,
+    # and you specify the same secret data, the operation succeeds but does
     # nothing. However, if the secret data is different, then the operation
     # fails because you can't modify an existing version; you can only
     # create new ones.
@@ -2446,8 +2450,8 @@ module Aws::SecretsManager
     # version, Secrets Manager automatically attaches the staging label
     # `AWSCURRENT` to the new version.
     #
-    # If you call this operation with a `VersionId` that matches an existing
-    # version's `ClientRequestToken`, the operation results in an error.
+    # If you call this operation with a `ClientRequestToken` that matches an
+    # existing version's `VersionId`, the operation results in an error.
     # You can't modify an existing version, you can only create a new
     # version. To remove a version, remove all staging labels from it. See
     # UpdateSecretVersionStage.
@@ -2875,7 +2879,7 @@ module Aws::SecretsManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-secretsmanager'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

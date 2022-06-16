@@ -78,6 +78,7 @@ module Aws::RedshiftDataAPIService
     TableMember = Shapes::StructureShape.new(name: 'TableMember')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
+    WorkgroupNameString = Shapes::StringShape.new(name: 'WorkgroupNameString')
     bool = Shapes::BooleanShape.new(name: 'bool')
 
     ActiveStatementsExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -94,6 +95,7 @@ module Aws::RedshiftDataAPIService
     BatchExecuteStatementInput.add_member(:sqls, Shapes::ShapeRef.new(shape: SqlList, required: true, location_name: "Sqls"))
     BatchExecuteStatementInput.add_member(:statement_name, Shapes::ShapeRef.new(shape: StatementNameString, location_name: "StatementName"))
     BatchExecuteStatementInput.add_member(:with_event, Shapes::ShapeRef.new(shape: Boolean, location_name: "WithEvent"))
+    BatchExecuteStatementInput.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: WorkgroupNameString, location_name: "WorkgroupName"))
     BatchExecuteStatementInput.struct_class = Types::BatchExecuteStatementInput
 
     BatchExecuteStatementOutput.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: Location, location_name: "ClusterIdentifier"))
@@ -102,6 +104,7 @@ module Aws::RedshiftDataAPIService
     BatchExecuteStatementOutput.add_member(:db_user, Shapes::ShapeRef.new(shape: String, location_name: "DbUser"))
     BatchExecuteStatementOutput.add_member(:id, Shapes::ShapeRef.new(shape: StatementId, location_name: "Id"))
     BatchExecuteStatementOutput.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, location_name: "SecretArn"))
+    BatchExecuteStatementOutput.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: WorkgroupNameString, location_name: "WorkgroupName"))
     BatchExecuteStatementOutput.struct_class = Types::BatchExecuteStatementOutput
 
     CancelStatementRequest.add_member(:id, Shapes::ShapeRef.new(shape: StatementId, required: true, location_name: "Id"))
@@ -155,6 +158,7 @@ module Aws::RedshiftDataAPIService
     DescribeStatementResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusString, location_name: "Status"))
     DescribeStatementResponse.add_member(:sub_statements, Shapes::ShapeRef.new(shape: SubStatementList, location_name: "SubStatements"))
     DescribeStatementResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    DescribeStatementResponse.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: WorkgroupNameString, location_name: "WorkgroupName"))
     DescribeStatementResponse.struct_class = Types::DescribeStatementResponse
 
     DescribeTableRequest.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: Location, location_name: "ClusterIdentifier"))
@@ -166,6 +170,7 @@ module Aws::RedshiftDataAPIService
     DescribeTableRequest.add_member(:schema, Shapes::ShapeRef.new(shape: String, location_name: "Schema"))
     DescribeTableRequest.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, location_name: "SecretArn"))
     DescribeTableRequest.add_member(:table, Shapes::ShapeRef.new(shape: String, location_name: "Table"))
+    DescribeTableRequest.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: WorkgroupNameString, location_name: "WorkgroupName"))
     DescribeTableRequest.struct_class = Types::DescribeTableRequest
 
     DescribeTableResponse.add_member(:column_list, Shapes::ShapeRef.new(shape: ColumnList, location_name: "ColumnList"))
@@ -185,6 +190,7 @@ module Aws::RedshiftDataAPIService
     ExecuteStatementInput.add_member(:sql, Shapes::ShapeRef.new(shape: StatementString, required: true, location_name: "Sql"))
     ExecuteStatementInput.add_member(:statement_name, Shapes::ShapeRef.new(shape: StatementNameString, location_name: "StatementName"))
     ExecuteStatementInput.add_member(:with_event, Shapes::ShapeRef.new(shape: Boolean, location_name: "WithEvent"))
+    ExecuteStatementInput.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: WorkgroupNameString, location_name: "WorkgroupName"))
     ExecuteStatementInput.struct_class = Types::ExecuteStatementInput
 
     ExecuteStatementOutput.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: Location, location_name: "ClusterIdentifier"))
@@ -193,6 +199,7 @@ module Aws::RedshiftDataAPIService
     ExecuteStatementOutput.add_member(:db_user, Shapes::ShapeRef.new(shape: String, location_name: "DbUser"))
     ExecuteStatementOutput.add_member(:id, Shapes::ShapeRef.new(shape: StatementId, location_name: "Id"))
     ExecuteStatementOutput.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, location_name: "SecretArn"))
+    ExecuteStatementOutput.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: WorkgroupNameString, location_name: "WorkgroupName"))
     ExecuteStatementOutput.struct_class = Types::ExecuteStatementOutput
 
     Field.add_member(:blob_value, Shapes::ShapeRef.new(shape: Blob, location_name: "blobValue"))
@@ -232,6 +239,7 @@ module Aws::RedshiftDataAPIService
     ListDatabasesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
     ListDatabasesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListDatabasesRequest.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, location_name: "SecretArn"))
+    ListDatabasesRequest.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: WorkgroupNameString, location_name: "WorkgroupName"))
     ListDatabasesRequest.struct_class = Types::ListDatabasesRequest
 
     ListDatabasesResponse.add_member(:databases, Shapes::ShapeRef.new(shape: DatabaseList, location_name: "Databases"))
@@ -246,6 +254,7 @@ module Aws::RedshiftDataAPIService
     ListSchemasRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListSchemasRequest.add_member(:schema_pattern, Shapes::ShapeRef.new(shape: String, location_name: "SchemaPattern"))
     ListSchemasRequest.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, location_name: "SecretArn"))
+    ListSchemasRequest.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: WorkgroupNameString, location_name: "WorkgroupName"))
     ListSchemasRequest.struct_class = Types::ListSchemasRequest
 
     ListSchemasResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
@@ -272,6 +281,7 @@ module Aws::RedshiftDataAPIService
     ListTablesRequest.add_member(:schema_pattern, Shapes::ShapeRef.new(shape: String, location_name: "SchemaPattern"))
     ListTablesRequest.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, location_name: "SecretArn"))
     ListTablesRequest.add_member(:table_pattern, Shapes::ShapeRef.new(shape: String, location_name: "TablePattern"))
+    ListTablesRequest.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: WorkgroupNameString, location_name: "WorkgroupName"))
     ListTablesRequest.struct_class = Types::ListTablesRequest
 
     ListTablesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))

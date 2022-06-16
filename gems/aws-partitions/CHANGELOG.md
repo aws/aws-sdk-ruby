@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.599.0 (2022-06-16)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::RedshiftServerless`.
+
 1.598.0 (2022-06-08)
 ------------------
 
