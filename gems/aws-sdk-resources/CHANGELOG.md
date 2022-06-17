@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.135.0 (2022-06-17)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-connectcampaignservice` gem.
+
 3.134.0 (2022-06-16)
 ------------------
 

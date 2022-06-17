@@ -296,6 +296,7 @@ module Aws
             'ComputeOptimizer' => 'compute-optimizer',
             'ConfigService' => 'config',
             'Connect' => 'connect',
+            'ConnectCampaignService' => 'connect-campaigns',
             'ConnectContactLens' => 'contact-lens',
             'ConnectParticipant' => 'participant.connect',
             'ConnectWisdomService' => 'wisdom',

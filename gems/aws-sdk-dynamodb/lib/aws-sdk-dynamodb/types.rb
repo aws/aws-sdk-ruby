@@ -164,7 +164,7 @@ module Aws::DynamoDB
     # @!attribute [rw] l
     #   An attribute of type List. For example:
     #
-    #   `"L": [ \{"S": "Cookies"\} , \{"S": "Coffee"\}, \{"N", "3.14159"\}]`
+    #   `"L": [ \{"S": "Cookies"\} , \{"S": "Coffee"\}, \{"N": "3.14159"\}]`
     #   @return [Array<Types::AttributeValue>]
     #
     # @!attribute [rw] null
@@ -304,10 +304,9 @@ module Aws::DynamoDB
     #
     #   * `DELETE` - Nothing happens; there is no attribute to delete.
     #
-    #   * `ADD` - DynamoDB creates an item with the supplied primary key and
-    #     number (or set of numbers) for the attribute value. The only data
-    #     types allowed are number and number set; no other data types can
-    #     be specified.
+    #   * `ADD` - DynamoDB creates a new item with the supplied primary key
+    #     and number (or set) for the attribute value. The only data types
+    #     allowed are number, number set, string set or binary set.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/AttributeValueUpdate AWS API Documentation
@@ -605,7 +604,9 @@ module Aws::DynamoDB
     #   @return [String]
     #
     # @!attribute [rw] backup_size_bytes
-    #   Size of the backup in bytes.
+    #   Size of the backup in bytes. DynamoDB updates this value
+    #   approximately every six hours. Recent changes might not be reflected
+    #   in this value.
     #   @return [Integer]
     #
     # @!attribute [rw] backup_status
@@ -2522,6 +2523,10 @@ module Aws::DynamoDB
     #
     #   * `ALL_OLD` - The content of the old item is returned.
     #
+    #   There is no additional cost associated with requesting a return
+    #   value aside from the small network and processing overhead of
+    #   receiving a larger response. No read capacity units are consumed.
+    #
     #   <note markdown="1"> The `ReturnValues` parameter is used by several DynamoDB operations;
     #   however, `DeleteItem` does not recognize any values other than
     #   `NONE` or `ALL_OLD`.
@@ -3958,8 +3963,9 @@ module Aws::DynamoDB
     #   @return [String]
     #
     # @!attribute [rw] export_time
-    #   Time in the past from which to export table data. The table export
-    #   will be a snapshot of the table's state at this point in time.
+    #   Time in the past from which to export table data, counted in seconds
+    #   from the start of the Unix epoch. The table export will be a
+    #   snapshot of the table's state at this point in time.
     #   @return [Time]
     #
     # @!attribute [rw] client_token
@@ -5188,17 +5194,17 @@ module Aws::DynamoDB
     # There is no limit to the number of daily on-demand backups that can be
     # taken.
     #
-    # Up to 50 simultaneous table operations are allowed per account. These
+    # Up to 500 simultaneous table operations are allowed per account. These
     # operations include `CreateTable`, `UpdateTable`,
     # `DeleteTable`,`UpdateTimeToLive`, `RestoreTableFromBackup`, and
     # `RestoreTableToPointInTime`.
     #
     # The only exception is when you are creating a table with one or more
-    # secondary indexes. You can have up to 25 such requests running at a
+    # secondary indexes. You can have up to 250 such requests running at a
     # time; however, if the table or index specifications are complex,
     # DynamoDB might temporarily reduce the number of concurrent operations.
     #
-    # There is a soft account quota of 256 tables.
+    # There is a soft account quota of 2,500 tables.
     #
     # @!attribute [rw] message
     #   Too many operations for a given subscriber.
@@ -5255,7 +5261,8 @@ module Aws::DynamoDB
     #
     #   Where `BackupType` can be:
     #
-    #   * `USER` - On-demand backup created by you.
+    #   * `USER` - On-demand backup created by you. (The default setting if
+    #     no other backup types are specified.)
     #
     #   * `SYSTEM` - On-demand backup automatically created by DynamoDB.
     #
@@ -5859,7 +5866,7 @@ module Aws::DynamoDB
     #
     #   For local secondary indexes, the total count of `NonKeyAttributes`
     #   summed across all of the local secondary indexes, must not exceed
-    #   20. If you project the same attribute into two different indexes,
+    #   100. If you project the same attribute into two different indexes,
     #   this counts as two distinct attributes when determining the total.
     #   @return [Array<String>]
     #
@@ -6179,6 +6186,10 @@ module Aws::DynamoDB
     #     then the content of the old item is returned.
     #
     #   The values returned are strongly consistent.
+    #
+    #   There is no additional cost associated with requesting a return
+    #   value aside from the small network and processing overhead of
+    #   receiving a larger response. No read capacity units are consumed.
     #
     #   <note markdown="1"> The `ReturnValues` parameter is used by several DynamoDB operations;
     #   however, `PutItem` does not recognize any values other than `NONE`
@@ -6505,8 +6516,9 @@ module Aws::DynamoDB
     #     matching items themselves.
     #
     #   * `SPECIFIC_ATTRIBUTES` - Returns only the attributes listed in
-    #     `AttributesToGet`. This return value is equivalent to specifying
-    #     `AttributesToGet` without specifying any value for `Select`.
+    #     `ProjectionExpression`. This return value is equivalent to
+    #     specifying `ProjectionExpression` without specifying any value for
+    #     `Select`.
     #
     #     If you query or scan a local secondary index and request only
     #     attributes that are projected into that index, the operation will
@@ -6520,13 +6532,13 @@ module Aws::DynamoDB
     #     secondary index queries cannot fetch attributes from the parent
     #     table.
     #
-    #   If neither `Select` nor `AttributesToGet` are specified, DynamoDB
-    #   defaults to `ALL_ATTRIBUTES` when accessing a table, and
+    #   If neither `Select` nor `ProjectionExpression` are specified,
+    #   DynamoDB defaults to `ALL_ATTRIBUTES` when accessing a table, and
     #   `ALL_PROJECTED_ATTRIBUTES` when accessing an index. You cannot use
-    #   both `Select` and `AttributesToGet` together in a single request,
-    #   unless the value for `Select` is `SPECIFIC_ATTRIBUTES`. (This usage
-    #   is equivalent to specifying `AttributesToGet` without any value for
-    #   `Select`.)
+    #   both `Select` and `ProjectionExpression` together in a single
+    #   request, unless the value for `Select` is `SPECIFIC_ATTRIBUTES`.
+    #   (This usage is equivalent to specifying `ProjectionExpression`
+    #   without any value for `Select`.)
     #
     #   <note markdown="1"> If you use the `ProjectionExpression` parameter, then the value for
     #   `Select` can only be `SPECIFIC_ATTRIBUTES`. Any other value for
@@ -6688,7 +6700,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#FilteringResults
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#Query.FilterExpression
     #   @return [String]
     #
     # @!attribute [rw] key_condition_expression
@@ -7658,6 +7670,12 @@ module Aws::DynamoDB
     #   `DeleteTableReplica` action in the destination Region, deleting the
     #   replica and all if its items in the destination Region.
     #
+    # <note markdown="1"> When you manually remove a table or global table replica, you do not
+    # automatically remove any associated scalable targets, scaling
+    # policies, or CloudWatch alarms.
+    #
+    #  </note>
+    #
     # @note When making an API call, you may pass ReplicationGroupUpdate
     #   data as a hash:
     #
@@ -8233,8 +8251,9 @@ module Aws::DynamoDB
     #     matching items themselves.
     #
     #   * `SPECIFIC_ATTRIBUTES` - Returns only the attributes listed in
-    #     `AttributesToGet`. This return value is equivalent to specifying
-    #     `AttributesToGet` without specifying any value for `Select`.
+    #     `ProjectionExpression`. This return value is equivalent to
+    #     specifying `ProjectionExpression` without specifying any value for
+    #     `Select`.
     #
     #     If you query or scan a local secondary index and request only
     #     attributes that are projected into that index, the operation reads
@@ -8248,13 +8267,13 @@ module Aws::DynamoDB
     #     secondary index queries cannot fetch attributes from the parent
     #     table.
     #
-    #   If neither `Select` nor `AttributesToGet` are specified, DynamoDB
-    #   defaults to `ALL_ATTRIBUTES` when accessing a table, and
+    #   If neither `Select` nor `ProjectionExpression` are specified,
+    #   DynamoDB defaults to `ALL_ATTRIBUTES` when accessing a table, and
     #   `ALL_PROJECTED_ATTRIBUTES` when accessing an index. You cannot use
-    #   both `Select` and `AttributesToGet` together in a single request,
-    #   unless the value for `Select` is `SPECIFIC_ATTRIBUTES`. (This usage
-    #   is equivalent to specifying `AttributesToGet` without any value for
-    #   `Select`.)
+    #   both `Select` and `ProjectionExpression` together in a single
+    #   request, unless the value for `Select` is `SPECIFIC_ATTRIBUTES`.
+    #   (This usage is equivalent to specifying `ProjectionExpression`
+    #   without any value for `Select`.)
     #
     #   <note markdown="1"> If you use the `ProjectionExpression` parameter, then the value for
     #   `Select` can only be `SPECIFIC_ATTRIBUTES`. Any other value for
@@ -8385,7 +8404,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#FilteringResults
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#Query.FilterExpression
     #   @return [String]
     #
     # @!attribute [rw] expression_attribute_names
@@ -8943,7 +8962,7 @@ module Aws::DynamoDB
     #     * `NonKeyAttributes` - A list of one or more non-key attribute
     #       names that are projected into the secondary index. The total
     #       count of attributes provided in `NonKeyAttributes`, summed
-    #       across all of the secondary indexes, must not exceed 20. If you
+    #       across all of the secondary indexes, must not exceed 100. If you
     #       project the same attribute into two different indexes, this
     #       counts as two distinct attributes when determining the total.
     #
@@ -9023,7 +9042,7 @@ module Aws::DynamoDB
     #     * `NonKeyAttributes` - A list of one or more non-key attribute
     #       names that are projected into the secondary index. The total
     #       count of attributes provided in `NonKeyAttributes`, summed
-    #       across all of the secondary indexes, must not exceed 20. If you
+    #       across all of the secondary indexes, must not exceed 100. If you
     #       project the same attribute into two different indexes, this
     #       counts as two distinct attributes when determining the total.
     #
@@ -9133,7 +9152,8 @@ module Aws::DynamoDB
     end
 
     # A source table with the name `TableName` does not currently exist
-    # within the subscriber's account.
+    # within the subscriber's account or the subscriber is operating in the
+    # wrong Amazon Web Services Region.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -9675,7 +9695,7 @@ module Aws::DynamoDB
     # <note markdown="1"> If using Java, DynamoDB lists the cancellation reasons on the
     # `CancellationReasons` property. This property is not set for other
     # languages. Transaction cancellation reasons are ordered in the order
-    # of requested items, if an item has no error it will have `NONE` code
+    # of requested items, if an item has no error it will have `None` code
     # and `Null` message.
     #
     #  </note>
@@ -9684,7 +9704,7 @@ module Aws::DynamoDB
     #
     # * No Errors:
     #
-    #   * Code: `NONE`
+    #   * Code: `None`
     #
     #   * Message: `null`
     #

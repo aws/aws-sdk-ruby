@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.600.0 (2022-06-17)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::ConnectCampaignService`.
+
 1.599.0 (2022-06-16)
 ------------------
 

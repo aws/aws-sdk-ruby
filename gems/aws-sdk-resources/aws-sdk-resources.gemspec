@@ -88,6 +88,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-computeoptimizer', '~> 1')
   spec.add_dependency('aws-sdk-configservice', '~> 1')
   spec.add_dependency('aws-sdk-connect', '~> 1')
+  spec.add_dependency('aws-sdk-connectcampaignservice', '~> 1')
   spec.add_dependency('aws-sdk-connectcontactlens', '~> 1')
   spec.add_dependency('aws-sdk-connectparticipant', '~> 1')
   spec.add_dependency('aws-sdk-connectwisdomservice', '~> 1')

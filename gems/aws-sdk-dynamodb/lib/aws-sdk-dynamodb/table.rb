@@ -194,9 +194,9 @@ module Aws::DynamoDB
     #   * `NonKeyAttributes` - A list of one or more non-key attribute names
     #     that are projected into the secondary index. The total count of
     #     attributes provided in `NonKeyAttributes`, summed across all of
-    #     the secondary indexes, must not exceed 20. If you project the same
-    #     attribute into two different indexes, this counts as two distinct
-    #     attributes when determining the total.
+    #     the secondary indexes, must not exceed 100. If you project the
+    #     same attribute into two different indexes, this counts as two
+    #     distinct attributes when determining the total.
     #
     # * `IndexSizeBytes` - Represents the total size of the index, in bytes.
     #   DynamoDB updates this value approximately every six hours. Recent
@@ -275,9 +275,9 @@ module Aws::DynamoDB
     #   * `NonKeyAttributes` - A list of one or more non-key attribute names
     #     that are projected into the secondary index. The total count of
     #     attributes provided in `NonKeyAttributes`, summed across all of
-    #     the secondary indexes, must not exceed 20. If you project the same
-    #     attribute into two different indexes, this counts as two distinct
-    #     attributes when determining the total.
+    #     the secondary indexes, must not exceed 100. If you project the
+    #     same attribute into two different indexes, this counts as two
+    #     distinct attributes when determining the total.
     #
     # * `ProvisionedThroughput` - The provisioned throughput settings for
     #   the global secondary index, consisting of read and write capacity
@@ -568,6 +568,10 @@ module Aws::DynamoDB
     #     `ReturnValues`.)
     #
     #   * `ALL_OLD` - The content of the old item is returned.
+    #
+    #   There is no additional cost associated with requesting a return value
+    #   aside from the small network and processing overhead of receiving a
+    #   larger response. No read capacity units are consumed.
     #
     #   <note markdown="1"> The `ReturnValues` parameter is used by several DynamoDB operations;
     #   however, `DeleteItem` does not recognize any values other than `NONE`
@@ -897,6 +901,10 @@ module Aws::DynamoDB
     #
     #   The values returned are strongly consistent.
     #
+    #   There is no additional cost associated with requesting a return value
+    #   aside from the small network and processing overhead of receiving a
+    #   larger response. No read capacity units are consumed.
+    #
     #   <note markdown="1"> The `ReturnValues` parameter is used by several DynamoDB operations;
     #   however, `PutItem` does not recognize any values other than `NONE` or
     #   `ALL_OLD`.
@@ -1097,8 +1105,9 @@ module Aws::DynamoDB
     #     matching items themselves.
     #
     #   * `SPECIFIC_ATTRIBUTES` - Returns only the attributes listed in
-    #     `AttributesToGet`. This return value is equivalent to specifying
-    #     `AttributesToGet` without specifying any value for `Select`.
+    #     `ProjectionExpression`. This return value is equivalent to
+    #     specifying `ProjectionExpression` without specifying any value for
+    #     `Select`.
     #
     #     If you query or scan a local secondary index and request only
     #     attributes that are projected into that index, the operation will
@@ -1111,12 +1120,12 @@ module Aws::DynamoDB
     #     attributes that are projected into the index. Global secondary index
     #     queries cannot fetch attributes from the parent table.
     #
-    #   If neither `Select` nor `AttributesToGet` are specified, DynamoDB
+    #   If neither `Select` nor `ProjectionExpression` are specified, DynamoDB
     #   defaults to `ALL_ATTRIBUTES` when accessing a table, and
     #   `ALL_PROJECTED_ATTRIBUTES` when accessing an index. You cannot use
-    #   both `Select` and `AttributesToGet` together in a single request,
+    #   both `Select` and `ProjectionExpression` together in a single request,
     #   unless the value for `Select` is `SPECIFIC_ATTRIBUTES`. (This usage is
-    #   equivalent to specifying `AttributesToGet` without any value for
+    #   equivalent to specifying `ProjectionExpression` without any value for
     #   `Select`.)
     #
     #   <note markdown="1"> If you use the `ProjectionExpression` parameter, then the value for
@@ -1254,7 +1263,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#FilteringResults
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#Query.FilterExpression
     # @option options [String] :key_condition_expression
     #   The condition that specifies the key values for items to be retrieved
     #   by the `Query` action.
@@ -1501,8 +1510,9 @@ module Aws::DynamoDB
     #     matching items themselves.
     #
     #   * `SPECIFIC_ATTRIBUTES` - Returns only the attributes listed in
-    #     `AttributesToGet`. This return value is equivalent to specifying
-    #     `AttributesToGet` without specifying any value for `Select`.
+    #     `ProjectionExpression`. This return value is equivalent to
+    #     specifying `ProjectionExpression` without specifying any value for
+    #     `Select`.
     #
     #     If you query or scan a local secondary index and request only
     #     attributes that are projected into that index, the operation reads
@@ -1515,12 +1525,12 @@ module Aws::DynamoDB
     #     attributes that are projected into the index. Global secondary index
     #     queries cannot fetch attributes from the parent table.
     #
-    #   If neither `Select` nor `AttributesToGet` are specified, DynamoDB
+    #   If neither `Select` nor `ProjectionExpression` are specified, DynamoDB
     #   defaults to `ALL_ATTRIBUTES` when accessing a table, and
     #   `ALL_PROJECTED_ATTRIBUTES` when accessing an index. You cannot use
-    #   both `Select` and `AttributesToGet` together in a single request,
+    #   both `Select` and `ProjectionExpression` together in a single request,
     #   unless the value for `Select` is `SPECIFIC_ATTRIBUTES`. (This usage is
-    #   equivalent to specifying `AttributesToGet` without any value for
+    #   equivalent to specifying `ProjectionExpression` without any value for
     #   `Select`.)
     #
     #   <note markdown="1"> If you use the `ProjectionExpression` parameter, then the value for
@@ -1633,7 +1643,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#FilteringResults
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#Query.FilterExpression
     # @option options [Hash<String,String>] :expression_attribute_names
     #   One or more substitution tokens for attribute names in an expression.
     #   The following are some use cases for using

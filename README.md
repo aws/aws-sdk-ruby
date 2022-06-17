@@ -603,6 +603,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon WorkSpaces Web                                 | Aws::WorkSpacesWeb                       | aws-sdk-workspacesweb                       | 2020-07-08  |
 | AmazonApiGatewayManagementApi                         | Aws::ApiGatewayManagementApi             | aws-sdk-apigatewaymanagementapi             | 2018-11-29  |
 | AmazonApiGatewayV2                                    | Aws::ApiGatewayV2                        | aws-sdk-apigatewayv2                        | 2018-11-29  |
+| AmazonConnectCampaignService                          | Aws::ConnectCampaignService              | aws-sdk-connectcampaignservice              | 2021-01-30  |
 | AmazonMQ                                              | Aws::MQ                                  | aws-sdk-mq                                  | 2017-11-27  |
 | AmazonMWAA                                            | Aws::MWAA                                | aws-sdk-mwaa                                | 2020-07-01  |
 | AmazonNimbleStudio                                    | Aws::NimbleStudio                        | aws-sdk-nimblestudio                        | 2020-08-01  |
