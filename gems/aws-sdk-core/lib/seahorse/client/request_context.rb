@@ -70,6 +70,10 @@ module Seahorse
       # @param [Symbol] key
       # @param [Object] value
       def []=(key, value)
+        puts "CONTEXT: Setting key: #{key} = #{value}"
+        if (key == :request_id)
+          puts "NOOOOO!"
+        end
         @metadata[key] = value
       end
 
