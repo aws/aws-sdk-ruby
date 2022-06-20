@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2022-06-20)
+------------------
+
+* Feature - This release adds the AssetLocation structure to the ListAssets response. AssetLocation includes the RackElevation for an Asset.
+
 1.33.0 (2022-06-13)
 ------------------
 

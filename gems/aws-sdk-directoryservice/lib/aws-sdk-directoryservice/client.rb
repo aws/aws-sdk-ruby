@@ -1421,7 +1421,7 @@ module Aws::DirectoryService
     #
     #   resp = client.describe_client_authentication_settings({
     #     directory_id: "DirectoryId", # required
-    #     type: "SmartCard", # accepts SmartCard
+    #     type: "SmartCard", # accepts SmartCard, SmartCardOrPassword
     #     next_token: "NextToken",
     #     limit: 1,
     #   })
@@ -1429,7 +1429,7 @@ module Aws::DirectoryService
     # @example Response structure
     #
     #   resp.client_authentication_settings_info #=> Array
-    #   resp.client_authentication_settings_info[0].type #=> String, one of "SmartCard"
+    #   resp.client_authentication_settings_info[0].type #=> String, one of "SmartCard", "SmartCardOrPassword"
     #   resp.client_authentication_settings_info[0].status #=> String, one of "Enabled", "Disabled"
     #   resp.client_authentication_settings_info[0].last_updated_date_time #=> Time
     #   resp.next_token #=> String
@@ -1813,6 +1813,60 @@ module Aws::DirectoryService
       req.send_request(options)
     end
 
+    # Retrieves information about the configurable settings for the
+    # specified directory.
+    #
+    # @option params [required, String] :directory_id
+    #   The identifier of the directory for which to retrieve information.
+    #
+    # @option params [String] :status
+    #   The status of the directory settings for which to retrieve
+    #   information.
+    #
+    # @option params [String] :next_token
+    #   The `DescribeSettingsResult.NextToken` value from a previous call to
+    #   DescribeSettings. Pass null if this is the first call.
+    #
+    # @return [Types::DescribeSettingsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeSettingsResult#directory_id #directory_id} => String
+    #   * {Types::DescribeSettingsResult#setting_entries #setting_entries} => Array&lt;Types::SettingEntry&gt;
+    #   * {Types::DescribeSettingsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_settings({
+    #     directory_id: "DirectoryId", # required
+    #     status: "Requested", # accepts Requested, Updating, Updated, Failed, Default
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.directory_id #=> String
+    #   resp.setting_entries #=> Array
+    #   resp.setting_entries[0].type #=> String
+    #   resp.setting_entries[0].name #=> String
+    #   resp.setting_entries[0].allowed_values #=> String
+    #   resp.setting_entries[0].applied_value #=> String
+    #   resp.setting_entries[0].requested_value #=> String
+    #   resp.setting_entries[0].request_status #=> String, one of "Requested", "Updating", "Updated", "Failed", "Default"
+    #   resp.setting_entries[0].request_detailed_status #=> Hash
+    #   resp.setting_entries[0].request_detailed_status["RegionName"] #=> String, one of "Requested", "Updating", "Updated", "Failed", "Default"
+    #   resp.setting_entries[0].request_status_message #=> String
+    #   resp.setting_entries[0].last_updated_date_time #=> Time
+    #   resp.setting_entries[0].last_requested_date_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeSettings AWS API Documentation
+    #
+    # @overload describe_settings(params = {})
+    # @param [Hash] params ({})
+    def describe_settings(params = {}, options = {})
+      req = build_request(:describe_settings, params)
+      req.send_request(options)
+    end
+
     # Returns the shared directories in your account.
     #
     # @option params [required, String] :owner_directory_id
@@ -2007,7 +2061,7 @@ module Aws::DirectoryService
     #
     #   resp = client.disable_client_authentication({
     #     directory_id: "DirectoryId", # required
-    #     type: "SmartCard", # required, accepts SmartCard
+    #     type: "SmartCard", # required, accepts SmartCard, SmartCardOrPassword
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableClientAuthentication AWS API Documentation
@@ -2128,7 +2182,7 @@ module Aws::DirectoryService
     #
     #   resp = client.enable_client_authentication({
     #     directory_id: "DirectoryId", # required
-    #     type: "SmartCard", # required, accepts SmartCard
+    #     type: "SmartCard", # required, accepts SmartCard, SmartCardOrPassword
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableClientAuthentication AWS API Documentation
@@ -3060,6 +3114,43 @@ module Aws::DirectoryService
       req.send_request(options)
     end
 
+    # Updates the configurable settings for the specified directory.
+    #
+    # @option params [required, String] :directory_id
+    #   The identifier of the directory for which to update settings.
+    #
+    # @option params [required, Array<Types::Setting>] :settings
+    #   The list of Setting objects.
+    #
+    # @return [Types::UpdateSettingsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSettingsResult#directory_id #directory_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_settings({
+    #     directory_id: "DirectoryId", # required
+    #     settings: [ # required
+    #       {
+    #         name: "DirectoryConfigurationSettingName", # required
+    #         value: "DirectoryConfigurationSettingValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.directory_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateSettings AWS API Documentation
+    #
+    # @overload update_settings(params = {})
+    # @param [Hash] params ({})
+    def update_settings(params = {}, options = {})
+      req = build_request(:update_settings, params)
+      req.send_request(options)
+    end
+
     # Updates the trust that has been set up between your Managed Microsoft
     # AD directory and an self-managed Active Directory.
     #
@@ -3140,7 +3231,7 @@ module Aws::DirectoryService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-directoryservice'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

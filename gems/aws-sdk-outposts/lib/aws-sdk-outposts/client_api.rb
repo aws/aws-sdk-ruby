@@ -24,6 +24,7 @@ module Aws::Outposts
     AssetId = Shapes::StringShape.new(name: 'AssetId')
     AssetInfo = Shapes::StructureShape.new(name: 'AssetInfo')
     AssetListDefinition = Shapes::ListShape.new(name: 'AssetListDefinition')
+    AssetLocation = Shapes::StructureShape.new(name: 'AssetLocation')
     AssetType = Shapes::StringShape.new(name: 'AssetType')
     AvailabilityZone = Shapes::StringShape.new(name: 'AvailabilityZone')
     AvailabilityZoneId = Shapes::StringShape.new(name: 'AvailabilityZoneId')
@@ -140,6 +141,7 @@ module Aws::Outposts
     PowerFeedDrop = Shapes::StringShape.new(name: 'PowerFeedDrop')
     PowerPhase = Shapes::StringShape.new(name: 'PowerPhase')
     Quantity = Shapes::StringShape.new(name: 'Quantity')
+    RackElevation = Shapes::FloatShape.new(name: 'RackElevation')
     RackId = Shapes::StringShape.new(name: 'RackId')
     RackPhysicalProperties = Shapes::StructureShape.new(name: 'RackPhysicalProperties')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
@@ -207,9 +209,13 @@ module Aws::Outposts
     AssetInfo.add_member(:rack_id, Shapes::ShapeRef.new(shape: RackId, location_name: "RackId"))
     AssetInfo.add_member(:asset_type, Shapes::ShapeRef.new(shape: AssetType, location_name: "AssetType"))
     AssetInfo.add_member(:compute_attributes, Shapes::ShapeRef.new(shape: ComputeAttributes, location_name: "ComputeAttributes"))
+    AssetInfo.add_member(:asset_location, Shapes::ShapeRef.new(shape: AssetLocation, location_name: "AssetLocation"))
     AssetInfo.struct_class = Types::AssetInfo
 
     AssetListDefinition.member = Shapes::ShapeRef.new(shape: AssetInfo)
+
+    AssetLocation.add_member(:rack_elevation, Shapes::ShapeRef.new(shape: RackElevation, location_name: "RackElevation"))
+    AssetLocation.struct_class = Types::AssetLocation
 
     AvailabilityZoneIdList.member = Shapes::ShapeRef.new(shape: AvailabilityZoneId)
 

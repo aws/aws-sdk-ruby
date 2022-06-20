@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.131.2 (2022-06-20)
+------------------
+
 * Issue - Populate context :request_id for XML error responses.
 
 3.131.1 (2022-05-20)

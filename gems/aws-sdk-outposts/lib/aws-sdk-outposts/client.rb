@@ -1066,6 +1066,7 @@ module Aws::Outposts
     #   resp.assets[0].rack_id #=> String
     #   resp.assets[0].asset_type #=> String, one of "COMPUTE"
     #   resp.assets[0].compute_attributes.host_id #=> String
+    #   resp.assets[0].asset_location.rack_elevation #=> Float
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ListAssets AWS API Documentation
@@ -1896,7 +1897,7 @@ module Aws::Outposts
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-outposts'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

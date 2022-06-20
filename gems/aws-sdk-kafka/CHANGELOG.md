@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2022-06-20)
+------------------
+
+* Feature - Documentation updates to use Az Id during cluster creation.
+
 1.49.0 (2022-02-24)
 ------------------
 

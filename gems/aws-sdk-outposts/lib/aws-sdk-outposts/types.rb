@@ -122,13 +122,32 @@ module Aws::Outposts
     #   Information about compute hardware assets.
     #   @return [Types::ComputeAttributes]
     #
+    # @!attribute [rw] asset_location
+    #   The position of an asset in a rack.
+    #   @return [Types::AssetLocation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/AssetInfo AWS API Documentation
     #
     class AssetInfo < Struct.new(
       :asset_id,
       :rack_id,
       :asset_type,
-      :compute_attributes)
+      :compute_attributes,
+      :asset_location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the position of the asset in a rack.
+    #
+    # @!attribute [rw] rack_elevation
+    #   The position of an asset in a rack measured in rack units.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/AssetLocation AWS API Documentation
+    #
+    class AssetLocation < Struct.new(
+      :rack_elevation)
       SENSITIVE = []
       include Aws::Structure
     end
