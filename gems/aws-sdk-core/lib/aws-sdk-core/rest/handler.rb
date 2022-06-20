@@ -17,7 +17,7 @@ module Aws
 
       def apply_request_id(context)
         h = context.http_response.headers
-        context[:request_id] = h['x-amz-request-id'] || h['x-amzn-requestid']
+        context[:request_id] ||= h['x-amz-request-id'] || h['x-amzn-requestid']
       end
 
     end
