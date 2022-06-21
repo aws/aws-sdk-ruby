@@ -473,7 +473,7 @@ module Aws::ECS
     # that it can manage required resources in other Amazon Web Services
     # services on your behalf. However, if the IAM user that makes the call
     # doesn't have permissions to create the service-linked role, it isn't
-    # created. For more information, see [Using Service-Linked Roles for
+    # created. For more information, see [Using service-linked roles for
     # Amazon ECS][1] in the *Amazon Elastic Container Service Developer
     # Guide*.
     #
@@ -683,8 +683,8 @@ module Aws::ECS
     # In addition to maintaining the desired count of tasks in your service,
     # you can optionally run your service behind one or more load balancers.
     # The load balancers distribute traffic across the tasks that are
-    # associated with the service. For more information, see [Service Load
-    # Balancing][1] in the *Amazon Elastic Container Service Developer
+    # associated with the service. For more information, see [Service load
+    # balancing][1] in the *Amazon Elastic Container Service Developer
     # Guide*.
     #
     # Tasks for services that don't use a load balancer are considered
@@ -698,8 +698,8 @@ module Aws::ECS
     #   your desired number of tasks across your cluster. By default, the
     #   service scheduler spreads tasks across Availability Zones. You can
     #   use task placement strategies and constraints to customize task
-    #   placement decisions. For more information, see [Service Scheduler
-    #   Concepts][2] in the *Amazon Elastic Container Service Developer
+    #   placement decisions. For more information, see [Service scheduler
+    #   concepts][2] in the *Amazon Elastic Container Service Developer
     #   Guide*.
     #
     # * `DAEMON` - The daemon scheduling strategy deploys exactly one task
@@ -709,8 +709,8 @@ module Aws::ECS
     #   tasks. It also stops tasks that don't meet the placement
     #   constraints. When using this strategy, you don't need to specify a
     #   desired number of tasks, a task placement strategy, or use Service
-    #   Auto Scaling policies. For more information, see [Service Scheduler
-    #   Concepts][2] in the *Amazon Elastic Container Service Developer
+    #   Auto Scaling policies. For more information, see [Service scheduler
+    #   concepts][2] in the *Amazon Elastic Container Service Developer
     #   Guide*.
     #
     # You can optionally specify a deployment configuration for your
@@ -766,7 +766,7 @@ module Aws::ECS
     # controller, you can specify only parameters that aren't controlled at
     # the task set level. The only required parameter is the service name.
     # You control your services using the CreateTaskSet operation. For more
-    # information, see [Amazon ECS Deployment Types][3] in the *Amazon
+    # information, see [Amazon ECS deployment types][3] in the *Amazon
     # Elastic Container Service Developer Guide*.
     #
     # When the service scheduler launches new tasks, it determines task
@@ -820,7 +820,7 @@ module Aws::ECS
     #
     # @option params [Array<Types::LoadBalancer>] :load_balancers
     #   A load balancer object representing the load balancers to use with
-    #   your service. For more information, see [Service Load Balancing][1] in
+    #   your service. For more information, see [Service load balancing][1] in
     #   the *Amazon Elastic Container Service Developer Guide*.
     #
     #   If the service uses the rolling update (`ECS`) deployment controller
@@ -1100,8 +1100,8 @@ module Aws::ECS
     #
     # @option params [Boolean] :enable_ecs_managed_tags
     #   Specifies whether to turn on Amazon ECS managed tags for the tasks
-    #   within the service. For more information, see [Tagging Your Amazon ECS
-    #   Resources][1] in the *Amazon Elastic Container Service Developer
+    #   within the service. For more information, see [Tagging your Amazon ECS
+    #   resources][1] in the *Amazon Elastic Container Service Developer
     #   Guide*.
     #
     #
@@ -1455,7 +1455,7 @@ module Aws::ECS
 
     # Create a task set in the specified cluster and service. This is used
     # when a service uses the `EXTERNAL` deployment controller type. For
-    # more information, see [Amazon ECS Deployment Types][1] in the *Amazon
+    # more information, see [Amazon ECS deployment types][1] in the *Amazon
     # Elastic Container Service Developer Guide*.
     #
     #
@@ -1490,7 +1490,7 @@ module Aws::ECS
     #
     # @option params [Array<Types::ServiceRegistry>] :service_registries
     #   The details of the service discovery registries to assign to this task
-    #   set. For more information, see [Service Discovery][1].
+    #   set. For more information, see [Service discovery][1].
     #
     #
     #
@@ -1498,7 +1498,7 @@ module Aws::ECS
     #
     # @option params [String] :launch_type
     #   The launch type that new tasks in the task set uses. For more
-    #   information, see [Amazon ECS Launch Types][1] in the *Amazon Elastic
+    #   information, see [Amazon ECS launch types][1] in the *Amazon Elastic
     #   Container Service Developer Guide*.
     #
     #   If a `launchType` is specified, the `capacityProviderStrategy`
@@ -2178,7 +2178,7 @@ module Aws::ECS
 
     # Deletes a specified task set within a service. This is used when a
     # service uses the `EXTERNAL` deployment controller type. For more
-    # information, see [Amazon ECS Deployment Types][1] in the *Amazon
+    # information, see [Amazon ECS deployment types][1] in the *Amazon
     # Elastic Container Service Developer Guide*.
     #
     #
@@ -2295,11 +2295,12 @@ module Aws::ECS
     #
     # @option params [required, String] :container_instance
     #   The container instance ID or full ARN of the container instance to
-    #   deregister. The ARN contains the `arn:aws:ecs` namespace, followed by
-    #   the Region of the container instance, the Amazon Web Services account
-    #   ID of the container instance owner, the `container-instance`
-    #   namespace, and then the container instance ID. For example,
-    #   `arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID`.
+    #   deregister. For more information about the ARN format, see [Amazon
+    #   Resource Name (ARN)][1] in the *Amazon ECS Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#ecs-resource-ids
     #
     # @option params [Boolean] :force
     #   Forces the container instance to be deregistered. If you have tasks
@@ -3605,6 +3606,9 @@ module Aws::ECS
 
     # Describes a specified task or tasks.
     #
+    # Currently, stopped tasks appear in the returned results for at least
+    # one hour.
+    #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
     #   hosts the task or tasks to describe. If you do not specify a cluster,
@@ -3816,12 +3820,13 @@ module Aws::ECS
     # Returns an endpoint for the Amazon ECS agent to poll for updates.
     #
     # @option params [String] :container_instance
-    #   The container instance ID or full ARN of the container instance. The
-    #   ARN contains the `arn:aws:ecs` namespace, followed by the Region of
-    #   the container instance, the Amazon Web Services account ID of the
-    #   container instance owner, the `container-instance` namespace, and then
-    #   the container instance ID. For example,
-    #   `arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID`.
+    #   The container instance ID or full ARN of the container instance. For
+    #   more information about the ARN format, see [Amazon Resource Name
+    #   (ARN)][1] in the *Amazon ECS Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#ecs-resource-ids
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
@@ -3854,6 +3859,12 @@ module Aws::ECS
     end
 
     # Runs a command remotely on a container within a task.
+    #
+    # If you use a condition key in your IAM policy to refine the conditions
+    # for the policy statement, for example limit the actions to a specific
+    # cluster, you recevie an `AccessDeniedException` when there is a
+    # mismatch between the condition key value and the corresponding
+    # parameter value.
     #
     # @option params [String] :cluster
     #   The Amazon Resource Name (ARN) or short name of the cluster the task
@@ -7998,12 +8009,6 @@ module Aws::ECS
       req.send_request(options)
     end
 
-    # Updating the task placement strategies and constraints on an Amazon
-    # ECS service remains in preview and is a Beta Service as defined by and
-    # subject to the Beta Service Participation Service Terms located at
-    # [https://aws.amazon.com/service-terms][1] ("Beta Terms"). These Beta
-    # Terms apply to your participation in this preview.
-    #
     # Modifies the parameters of a service.
     #
     # For services using the rolling update (`ECS`) you can update the
@@ -8019,7 +8024,7 @@ module Aws::ECS
     # ECS managed tags option, and propagate tags can be updated using this
     # API. If the network configuration, platform version, task definition,
     # or load balancer need to be updated, create a new CodeDeploy
-    # deployment. For more information, see [CreateDeployment][2] in the
+    # deployment. For more information, see [CreateDeployment][1] in the
     # *CodeDeploy API Reference*.
     #
     # For services using an external deployment controller, you can update
@@ -8118,9 +8123,9 @@ module Aws::ECS
     # <note markdown="1"> You must have a service-linked role when you update any of the
     # following service properties. If you specified a custom IAM role when
     # you created the service, Amazon ECS automatically replaces the
-    # [roleARN][3] associated with the service with the ARN of your
+    # [roleARN][2] associated with the service with the ARN of your
     # service-linked role. For more information, see [Service-linked
-    # roles][4] in the *Amazon Elastic Container Service Developer Guide*.
+    # roles][3] in the *Amazon Elastic Container Service Developer Guide*.
     #
     #  * `loadBalancers,`
     #
@@ -8130,10 +8135,9 @@ module Aws::ECS
     #
     #
     #
-    # [1]: https://aws.amazon.com/service-terms
-    # [2]: https://docs.aws.amazon.com/codedeploy/latest/APIReference/API_CreateDeployment.html
-    # [3]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_Service.html#ECS-Type-Service-roleArn
-    # [4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html
+    # [1]: https://docs.aws.amazon.com/codedeploy/latest/APIReference/API_CreateDeployment.html
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_Service.html#ECS-Type-Service-roleArn
+    # [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
@@ -8753,7 +8757,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.99.0'
+      context[:gem_version] = '1.100.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

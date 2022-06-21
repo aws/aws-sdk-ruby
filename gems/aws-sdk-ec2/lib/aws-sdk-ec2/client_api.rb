@@ -3890,11 +3890,12 @@ module Aws::EC2
     CreateClientVpnRouteResult.struct_class = Types::CreateClientVpnRouteResult
 
     CreateCustomerGatewayRequest.add_member(:bgp_asn, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "BgpAsn"))
-    CreateCustomerGatewayRequest.add_member(:public_ip, Shapes::ShapeRef.new(shape: String, location_name: "IpAddress"))
+    CreateCustomerGatewayRequest.add_member(:public_ip, Shapes::ShapeRef.new(shape: String, location_name: "PublicIp"))
     CreateCustomerGatewayRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "CertificateArn"))
     CreateCustomerGatewayRequest.add_member(:type, Shapes::ShapeRef.new(shape: GatewayType, required: true, location_name: "Type"))
     CreateCustomerGatewayRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateCustomerGatewayRequest.add_member(:device_name, Shapes::ShapeRef.new(shape: String, location_name: "DeviceName"))
+    CreateCustomerGatewayRequest.add_member(:ip_address, Shapes::ShapeRef.new(shape: String, location_name: "IpAddress"))
     CreateCustomerGatewayRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     CreateCustomerGatewayRequest.struct_class = Types::CreateCustomerGatewayRequest
 
@@ -13197,6 +13198,8 @@ module Aws::EC2
     VpnConnectionOptions.add_member(:remote_ipv_4_network_cidr, Shapes::ShapeRef.new(shape: String, location_name: "remoteIpv4NetworkCidr"))
     VpnConnectionOptions.add_member(:local_ipv_6_network_cidr, Shapes::ShapeRef.new(shape: String, location_name: "localIpv6NetworkCidr"))
     VpnConnectionOptions.add_member(:remote_ipv_6_network_cidr, Shapes::ShapeRef.new(shape: String, location_name: "remoteIpv6NetworkCidr"))
+    VpnConnectionOptions.add_member(:outside_ip_address_type, Shapes::ShapeRef.new(shape: String, location_name: "outsideIpAddressType"))
+    VpnConnectionOptions.add_member(:transport_transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: String, location_name: "transportTransitGatewayAttachmentId"))
     VpnConnectionOptions.add_member(:tunnel_inside_ip_version, Shapes::ShapeRef.new(shape: TunnelInsideIpVersion, location_name: "tunnelInsideIpVersion"))
     VpnConnectionOptions.add_member(:tunnel_options, Shapes::ShapeRef.new(shape: TunnelOptionsList, location_name: "tunnelOptionSet"))
     VpnConnectionOptions.struct_class = Types::VpnConnectionOptions
@@ -13209,6 +13212,8 @@ module Aws::EC2
     VpnConnectionOptionsSpecification.add_member(:remote_ipv_4_network_cidr, Shapes::ShapeRef.new(shape: String, location_name: "RemoteIpv4NetworkCidr"))
     VpnConnectionOptionsSpecification.add_member(:local_ipv_6_network_cidr, Shapes::ShapeRef.new(shape: String, location_name: "LocalIpv6NetworkCidr"))
     VpnConnectionOptionsSpecification.add_member(:remote_ipv_6_network_cidr, Shapes::ShapeRef.new(shape: String, location_name: "RemoteIpv6NetworkCidr"))
+    VpnConnectionOptionsSpecification.add_member(:outside_ip_address_type, Shapes::ShapeRef.new(shape: String, location_name: "OutsideIpAddressType"))
+    VpnConnectionOptionsSpecification.add_member(:transport_transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, location_name: "TransportTransitGatewayAttachmentId"))
     VpnConnectionOptionsSpecification.struct_class = Types::VpnConnectionOptionsSpecification
 
     VpnGateway.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))

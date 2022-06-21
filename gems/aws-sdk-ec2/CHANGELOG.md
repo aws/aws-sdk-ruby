@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.319.0 (2022-06-21)
+------------------
+
+* Feature - This release adds support for Private IP VPNs, a new feature allowing S2S VPN connections to use private ip addresses as the tunnel outside ip address over Direct Connect as transport.
+
 1.318.0 (2022-06-13)
 ------------------
 

@@ -4970,13 +4970,12 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Provides information to Amazon Web Services about your VPN customer
-    # gateway device. The customer gateway is the appliance at your end of
-    # the VPN connection. (The device on the Amazon Web Services side of the
-    # VPN connection is the virtual private gateway.) You must provide the
-    # internet-routable IP address of the customer gateway's external
-    # interface. The IP address must be static and can be behind a device
-    # performing network address translation (NAT).
+    # Provides information to Amazon Web Services about your customer
+    # gateway device. The customer gateway device is the appliance at your
+    # end of the VPN connection. You must provide the IP address of the
+    # customer gateway device’s external interface. The IP address must be
+    # static and can be behind a device performing network address
+    # translation (NAT).
     #
     # For devices that use Border Gateway Protocol (BGP), you can also
     # provide the device's BGP Autonomous System Number (ASN). You can use
@@ -5000,8 +4999,9 @@ module Aws::EC2
     #   Default: 65000
     #
     # @option params [String] :public_ip
-    #   The Internet-routable IP address for the customer gateway's outside
-    #   interface. The address must be static.
+    #   *This member has been deprecated.* The Internet-routable IP address
+    #   for the customer gateway's outside interface. The address must be
+    #   static.
     #
     # @option params [String] :certificate_arn
     #   The Amazon Resource Name (ARN) for the customer gateway certificate.
@@ -5017,6 +5017,10 @@ module Aws::EC2
     #   A name for the customer gateway device.
     #
     #   Length Constraints: Up to 255 characters.
+    #
+    # @option params [String] :ip_address
+    #   IPv4 address for the customer gateway device's outside interface. The
+    #   address must be static.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -5069,6 +5073,7 @@ module Aws::EC2
     #       },
     #     ],
     #     device_name: "String",
+    #     ip_address: "String",
     #     dry_run: false,
     #   })
     #
@@ -13029,6 +13034,8 @@ module Aws::EC2
     #       remote_ipv_4_network_cidr: "String",
     #       local_ipv_6_network_cidr: "String",
     #       remote_ipv_6_network_cidr: "String",
+    #       outside_ip_address_type: "String",
+    #       transport_transit_gateway_attachment_id: "TransitGatewayAttachmentId",
     #     },
     #     tag_specifications: [
     #       {
@@ -13062,6 +13069,8 @@ module Aws::EC2
     #   resp.vpn_connection.options.remote_ipv_4_network_cidr #=> String
     #   resp.vpn_connection.options.local_ipv_6_network_cidr #=> String
     #   resp.vpn_connection.options.remote_ipv_6_network_cidr #=> String
+    #   resp.vpn_connection.options.outside_ip_address_type #=> String
+    #   resp.vpn_connection.options.transport_transit_gateway_attachment_id #=> String
     #   resp.vpn_connection.options.tunnel_inside_ip_version #=> String, one of "ipv4", "ipv6"
     #   resp.vpn_connection.options.tunnel_options #=> Array
     #   resp.vpn_connection.options.tunnel_options[0].outside_ip_address #=> String
@@ -18240,8 +18249,8 @@ module Aws::EC2
     #
     #   * `customer-gateway-id` - The ID of the customer gateway.
     #
-    #   * `ip-address` - The IP address of the customer gateway's
-    #     Internet-routable external interface.
+    #   * `ip-address` - The IP address of the customer gateway device's
+    #     external interface.
     #
     #   * `state` - The state of the customer gateway (`pending` \|
     #     `available` \| `deleting` \| `deleted`).
@@ -32231,6 +32240,8 @@ module Aws::EC2
     #   resp.vpn_connections[0].options.remote_ipv_4_network_cidr #=> String
     #   resp.vpn_connections[0].options.local_ipv_6_network_cidr #=> String
     #   resp.vpn_connections[0].options.remote_ipv_6_network_cidr #=> String
+    #   resp.vpn_connections[0].options.outside_ip_address_type #=> String
+    #   resp.vpn_connections[0].options.transport_transit_gateway_attachment_id #=> String
     #   resp.vpn_connections[0].options.tunnel_inside_ip_version #=> String, one of "ipv4", "ipv6"
     #   resp.vpn_connections[0].options.tunnel_options #=> Array
     #   resp.vpn_connections[0].options.tunnel_options[0].outside_ip_address #=> String
@@ -42634,6 +42645,8 @@ module Aws::EC2
     #   resp.vpn_connection.options.remote_ipv_4_network_cidr #=> String
     #   resp.vpn_connection.options.local_ipv_6_network_cidr #=> String
     #   resp.vpn_connection.options.remote_ipv_6_network_cidr #=> String
+    #   resp.vpn_connection.options.outside_ip_address_type #=> String
+    #   resp.vpn_connection.options.transport_transit_gateway_attachment_id #=> String
     #   resp.vpn_connection.options.tunnel_inside_ip_version #=> String, one of "ipv4", "ipv6"
     #   resp.vpn_connection.options.tunnel_options #=> Array
     #   resp.vpn_connection.options.tunnel_options[0].outside_ip_address #=> String
@@ -42758,6 +42771,8 @@ module Aws::EC2
     #   resp.vpn_connection.options.remote_ipv_4_network_cidr #=> String
     #   resp.vpn_connection.options.local_ipv_6_network_cidr #=> String
     #   resp.vpn_connection.options.remote_ipv_6_network_cidr #=> String
+    #   resp.vpn_connection.options.outside_ip_address_type #=> String
+    #   resp.vpn_connection.options.transport_transit_gateway_attachment_id #=> String
     #   resp.vpn_connection.options.tunnel_inside_ip_version #=> String, one of "ipv4", "ipv6"
     #   resp.vpn_connection.options.tunnel_options #=> Array
     #   resp.vpn_connection.options.tunnel_options[0].outside_ip_address #=> String
@@ -42855,6 +42870,8 @@ module Aws::EC2
     #   resp.vpn_connection.options.remote_ipv_4_network_cidr #=> String
     #   resp.vpn_connection.options.local_ipv_6_network_cidr #=> String
     #   resp.vpn_connection.options.remote_ipv_6_network_cidr #=> String
+    #   resp.vpn_connection.options.outside_ip_address_type #=> String
+    #   resp.vpn_connection.options.transport_transit_gateway_attachment_id #=> String
     #   resp.vpn_connection.options.tunnel_inside_ip_version #=> String, one of "ipv4", "ipv6"
     #   resp.vpn_connection.options.tunnel_options #=> Array
     #   resp.vpn_connection.options.tunnel_options[0].outside_ip_address #=> String
@@ -43012,6 +43029,8 @@ module Aws::EC2
     #   resp.vpn_connection.options.remote_ipv_4_network_cidr #=> String
     #   resp.vpn_connection.options.local_ipv_6_network_cidr #=> String
     #   resp.vpn_connection.options.remote_ipv_6_network_cidr #=> String
+    #   resp.vpn_connection.options.outside_ip_address_type #=> String
+    #   resp.vpn_connection.options.transport_transit_gateway_attachment_id #=> String
     #   resp.vpn_connection.options.tunnel_inside_ip_version #=> String, one of "ipv4", "ipv6"
     #   resp.vpn_connection.options.tunnel_options #=> Array
     #   resp.vpn_connection.options.tunnel_options[0].outside_ip_address #=> String
@@ -49695,7 +49714,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.318.0'
+      context[:gem_version] = '1.319.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

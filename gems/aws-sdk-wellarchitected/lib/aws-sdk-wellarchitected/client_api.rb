@@ -14,6 +14,9 @@ module Aws::WellArchitected
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AdditionalResourceType = Shapes::StringShape.new(name: 'AdditionalResourceType')
+    AdditionalResources = Shapes::StructureShape.new(name: 'AdditionalResources')
+    AdditionalResourcesList = Shapes::ListShape.new(name: 'AdditionalResourcesList')
     Answer = Shapes::StructureShape.new(name: 'Answer')
     AnswerReason = Shapes::StringShape.new(name: 'AnswerReason')
     AnswerSummaries = Shapes::ListShape.new(name: 'AnswerSummaries')
@@ -203,6 +206,7 @@ module Aws::WellArchitected
     UpdateWorkloadShareInput = Shapes::StructureShape.new(name: 'UpdateWorkloadShareInput')
     UpdateWorkloadShareOutput = Shapes::StructureShape.new(name: 'UpdateWorkloadShareOutput')
     UpgradeLensReviewInput = Shapes::StructureShape.new(name: 'UpgradeLensReviewInput')
+    Urls = Shapes::ListShape.new(name: 'Urls')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
@@ -235,6 +239,12 @@ module Aws::WellArchitected
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, required: true, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AdditionalResources.add_member(:type, Shapes::ShapeRef.new(shape: AdditionalResourceType, location_name: "Type"))
+    AdditionalResources.add_member(:content, Shapes::ShapeRef.new(shape: Urls, location_name: "Content"))
+    AdditionalResources.struct_class = Types::AdditionalResources
+
+    AdditionalResourcesList.member = Shapes::ShapeRef.new(shape: AdditionalResources)
 
     Answer.add_member(:question_id, Shapes::ShapeRef.new(shape: QuestionId, location_name: "QuestionId"))
     Answer.add_member(:pillar_id, Shapes::ShapeRef.new(shape: PillarId, location_name: "PillarId"))
@@ -274,6 +284,7 @@ module Aws::WellArchitected
     Choice.add_member(:description, Shapes::ShapeRef.new(shape: ChoiceDescription, location_name: "Description"))
     Choice.add_member(:helpful_resource, Shapes::ShapeRef.new(shape: ChoiceContent, location_name: "HelpfulResource"))
     Choice.add_member(:improvement_plan, Shapes::ShapeRef.new(shape: ChoiceContent, location_name: "ImprovementPlan"))
+    Choice.add_member(:additional_resources, Shapes::ShapeRef.new(shape: AdditionalResourcesList, location_name: "AdditionalResources"))
     Choice.struct_class = Types::Choice
 
     ChoiceAnswer.add_member(:choice_id, Shapes::ShapeRef.new(shape: ChoiceId, location_name: "ChoiceId"))
@@ -352,7 +363,7 @@ module Aws::WellArchitected
     CreateWorkloadInput.add_member(:non_aws_regions, Shapes::ShapeRef.new(shape: WorkloadNonAwsRegions, location_name: "NonAwsRegions"))
     CreateWorkloadInput.add_member(:pillar_priorities, Shapes::ShapeRef.new(shape: WorkloadPillarPriorities, location_name: "PillarPriorities"))
     CreateWorkloadInput.add_member(:architectural_design, Shapes::ShapeRef.new(shape: WorkloadArchitecturalDesign, location_name: "ArchitecturalDesign"))
-    CreateWorkloadInput.add_member(:review_owner, Shapes::ShapeRef.new(shape: WorkloadReviewOwner, required: true, location_name: "ReviewOwner"))
+    CreateWorkloadInput.add_member(:review_owner, Shapes::ShapeRef.new(shape: WorkloadReviewOwner, location_name: "ReviewOwner"))
     CreateWorkloadInput.add_member(:industry_type, Shapes::ShapeRef.new(shape: WorkloadIndustryType, location_name: "IndustryType"))
     CreateWorkloadInput.add_member(:industry, Shapes::ShapeRef.new(shape: WorkloadIndustry, location_name: "Industry"))
     CreateWorkloadInput.add_member(:lenses, Shapes::ShapeRef.new(shape: WorkloadLenses, required: true, location_name: "Lenses"))
@@ -501,6 +512,7 @@ module Aws::WellArchitected
     Lens.add_member(:description, Shapes::ShapeRef.new(shape: LensDescription, location_name: "Description"))
     Lens.add_member(:owner, Shapes::ShapeRef.new(shape: LensOwner, location_name: "Owner"))
     Lens.add_member(:share_invitation_id, Shapes::ShapeRef.new(shape: ShareInvitationId, location_name: "ShareInvitationId"))
+    Lens.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     Lens.struct_class = Types::Lens
 
     LensAliases.member = Shapes::ShapeRef.new(shape: LensAlias)
@@ -855,6 +867,8 @@ module Aws::WellArchitected
     UpgradeLensReviewInput.add_member(:milestone_name, Shapes::ShapeRef.new(shape: MilestoneName, required: true, location_name: "MilestoneName"))
     UpgradeLensReviewInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
     UpgradeLensReviewInput.struct_class = Types::UpgradeLensReviewInput
+
+    Urls.member = Shapes::ShapeRef.new(shape: ChoiceContent)
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, required: true, location_name: "Message"))
     ValidationException.add_member(:reason, Shapes::ShapeRef.new(shape: ValidationExceptionReason, location_name: "Reason"))

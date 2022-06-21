@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2022-06-21)
+------------------
+
+* Feature - Adds support for lens tagging, Adds support for multiple helpful-resource urls and multiple improvement-plan urls.
+
 1.15.0 (2022-02-24)
 ------------------
 

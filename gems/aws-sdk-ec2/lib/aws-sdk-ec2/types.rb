@@ -7309,6 +7309,7 @@ module Aws::EC2
     #           },
     #         ],
     #         device_name: "String",
+    #         ip_address: "String",
     #         dry_run: false,
     #       }
     #
@@ -7319,8 +7320,9 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] public_ip
-    #   The Internet-routable IP address for the customer gateway's outside
-    #   interface. The address must be static.
+    #   *This member has been deprecated.* The Internet-routable IP address
+    #   for the customer gateway's outside interface. The address must be
+    #   static.
     #   @return [String]
     #
     # @!attribute [rw] certificate_arn
@@ -7342,6 +7344,11 @@ module Aws::EC2
     #   Length Constraints: Up to 255 characters.
     #   @return [String]
     #
+    # @!attribute [rw] ip_address
+    #   IPv4 address for the customer gateway device's outside interface.
+    #   The address must be static.
+    #   @return [String]
+    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -7358,6 +7365,7 @@ module Aws::EC2
       :type,
       :tag_specifications,
       :device_name,
+      :ip_address,
       :dry_run)
       SENSITIVE = []
       include Aws::Structure
@@ -13919,6 +13927,8 @@ module Aws::EC2
     #           remote_ipv_4_network_cidr: "String",
     #           local_ipv_6_network_cidr: "String",
     #           remote_ipv_6_network_cidr: "String",
+    #           outside_ip_address_type: "String",
+    #           transport_transit_gateway_attachment_id: "TransitGatewayAttachmentId",
     #         },
     #         tag_specifications: [
     #           {
@@ -14149,8 +14159,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] ip_address
-    #   The Internet-routable IP address of the customer gateway's outside
-    #   interface.
+    #   The IP address of the customer gateway device's outside interface.
     #   @return [String]
     #
     # @!attribute [rw] certificate_arn
@@ -18578,8 +18587,8 @@ module Aws::EC2
     #
     #   * `customer-gateway-id` - The ID of the customer gateway.
     #
-    #   * `ip-address` - The IP address of the customer gateway's
-    #     Internet-routable external interface.
+    #   * `ip-address` - The IP address of the customer gateway device's
+    #     external interface.
     #
     #   * `state` - The state of the customer gateway (`pending` \|
     #     `available` \| `deleting` \| `deleted`).
@@ -69072,6 +69081,19 @@ module Aws::EC2
     #   The IPv6 CIDR on the Amazon Web Services side of the VPN connection.
     #   @return [String]
     #
+    # @!attribute [rw] outside_ip_address_type
+    #   The type of IPv4 address assigned to the outside interface of the
+    #   customer gateway.
+    #
+    #   Valid values: `PrivateIpv4` \| `PublicIpv4`
+    #
+    #   Default: `PublicIpv4`
+    #   @return [String]
+    #
+    # @!attribute [rw] transport_transit_gateway_attachment_id
+    #   The transit gateway attachment ID in use for the VPN tunnel.
+    #   @return [String]
+    #
     # @!attribute [rw] tunnel_inside_ip_version
     #   Indicates whether the VPN tunnels process IPv4 or IPv6 traffic.
     #   @return [String]
@@ -69089,6 +69111,8 @@ module Aws::EC2
       :remote_ipv_4_network_cidr,
       :local_ipv_6_network_cidr,
       :remote_ipv_6_network_cidr,
+      :outside_ip_address_type,
+      :transport_transit_gateway_attachment_id,
       :tunnel_inside_ip_version,
       :tunnel_options)
       SENSITIVE = []
@@ -69158,6 +69182,8 @@ module Aws::EC2
     #         remote_ipv_4_network_cidr: "String",
     #         local_ipv_6_network_cidr: "String",
     #         remote_ipv_6_network_cidr: "String",
+    #         outside_ip_address_type: "String",
+    #         transport_transit_gateway_attachment_id: "TransitGatewayAttachmentId",
     #       }
     #
     # @!attribute [rw] enable_acceleration
@@ -69211,6 +69237,21 @@ module Aws::EC2
     #   Default: `::/0`
     #   @return [String]
     #
+    # @!attribute [rw] outside_ip_address_type
+    #   The type of IPv4 address assigned to the outside interface of the
+    #   customer gateway device.
+    #
+    #   Valid values: `PrivateIpv4` \| `PublicIpv4`
+    #
+    #   Default: `PublicIpv4`
+    #   @return [String]
+    #
+    # @!attribute [rw] transport_transit_gateway_attachment_id
+    #   The transit gateway attachment ID to use for the VPN tunnel.
+    #
+    #   Required if `OutsideIpAddressType` is set to `PrivateIpv4`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpnConnectionOptionsSpecification AWS API Documentation
     #
     class VpnConnectionOptionsSpecification < Struct.new(
@@ -69221,7 +69262,9 @@ module Aws::EC2
       :local_ipv_4_network_cidr,
       :remote_ipv_4_network_cidr,
       :local_ipv_6_network_cidr,
-      :remote_ipv_6_network_cidr)
+      :remote_ipv_6_network_cidr,
+      :outside_ip_address_type,
+      :transport_transit_gateway_attachment_id)
       SENSITIVE = []
       include Aws::Structure
     end
