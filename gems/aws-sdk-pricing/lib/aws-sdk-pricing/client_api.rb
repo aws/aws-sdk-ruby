@@ -76,7 +76,7 @@ module Aws::Pricing
     GetAttributeValuesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     GetAttributeValuesResponse.struct_class = Types::GetAttributeValuesResponse
 
-    GetProductsRequest.add_member(:service_code, Shapes::ShapeRef.new(shape: String, location_name: "ServiceCode"))
+    GetProductsRequest.add_member(:service_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ServiceCode"))
     GetProductsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "Filters"))
     GetProductsRequest.add_member(:format_version, Shapes::ShapeRef.new(shape: String, location_name: "FormatVersion"))
     GetProductsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
@@ -102,7 +102,7 @@ module Aws::Pricing
 
     PriceList.member = Shapes::ShapeRef.new(shape: PriceListItemJSON, metadata: {"jsonvalue"=>true})
 
-    Service.add_member(:service_code, Shapes::ShapeRef.new(shape: String, location_name: "ServiceCode"))
+    Service.add_member(:service_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ServiceCode"))
     Service.add_member(:attribute_names, Shapes::ShapeRef.new(shape: AttributeNameList, location_name: "AttributeNames"))
     Service.struct_class = Types::Service
 

@@ -219,7 +219,7 @@ module Aws::Pricing
     #   data as a hash:
     #
     #       {
-    #         service_code: "String",
+    #         service_code: "String", # required
     #         filters: [
     #           {
     #             type: "TERM_MATCH", # required, accepts TERM_MATCH

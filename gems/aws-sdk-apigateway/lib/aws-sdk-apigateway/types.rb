@@ -6275,6 +6275,11 @@ module Aws::APIGateway
     #   certificate's expiration date, hostname, and presence of a root
     #   certificate authority. Supported only for `HTTP` and `HTTP_PROXY`
     #   integrations.
+    #
+    #   Enabling `insecureSkipVerification` isn't recommended, especially
+    #   for integrations with public HTTPS endpoints. If you enable
+    #   `insecureSkipVerification`, you increase the risk of
+    #   man-in-the-middle attacks.
     #   @return [Boolean]
     #
     class TlsConfig < Struct.new(
