@@ -1111,6 +1111,64 @@ module Aws::LookoutEquipment
       req.send_request(options)
     end
 
+    # Lists all inference events that have been found for the specified
+    # inference scheduler.
+    #
+    # @option params [String] :next_token
+    #   An opaque pagination token indicating where to continue the listing of
+    #   inference events.
+    #
+    # @option params [Integer] :max_results
+    #   Specifies the maximum number of inference events to list.
+    #
+    # @option params [required, String] :inference_scheduler_name
+    #   The name of the inference scheduler for the inference events listed.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :interval_start_time
+    #   Lookout for Equipment will return all the inference events with start
+    #   time equal to or greater than the start time given.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :interval_end_time
+    #   Lookout for Equipment will return all the inference events with end
+    #   time equal to or less than the end time given.
+    #
+    # @return [Types::ListInferenceEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListInferenceEventsResponse#next_token #next_token} => String
+    #   * {Types::ListInferenceEventsResponse#inference_event_summaries #inference_event_summaries} => Array&lt;Types::InferenceEventSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_inference_events({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     inference_scheduler_name: "InferenceSchedulerIdentifier", # required
+    #     interval_start_time: Time.now, # required
+    #     interval_end_time: Time.now, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.inference_event_summaries #=> Array
+    #   resp.inference_event_summaries[0].inference_scheduler_arn #=> String
+    #   resp.inference_event_summaries[0].inference_scheduler_name #=> String
+    #   resp.inference_event_summaries[0].event_start_time #=> Time
+    #   resp.inference_event_summaries[0].event_end_time #=> Time
+    #   resp.inference_event_summaries[0].diagnostics #=> String
+    #   resp.inference_event_summaries[0].event_duration_in_seconds #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/ListInferenceEvents AWS API Documentation
+    #
+    # @overload list_inference_events(params = {})
+    # @param [Hash] params ({})
+    def list_inference_events(params = {}, options = {})
+      req = build_request(:list_inference_events, params)
+      req.send_request(options)
+    end
+
     # Lists all inference executions that have been performed by the
     # specified inference scheduler.
     #
@@ -1680,7 +1738,7 @@ module Aws::LookoutEquipment
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lookoutequipment'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

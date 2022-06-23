@@ -959,6 +959,15 @@ module Aws::SageMaker
     #   The instance type and the Amazon Resource Name (ARN) of the SageMaker
     #   image created on the instance.
     #
+    #   <note markdown="1"> The value of `InstanceType` passed as part of the `ResourceSpec` in
+    #   the `CreateApp` call overrides the value passed as part of the
+    #   `ResourceSpec` configured for the user profile or the domain. If
+    #   `InstanceType` is not specified in any of those three `ResourceSpec`
+    #   values for a `KernelGateway` app, the `CreateApp` call fails with a
+    #   request validation error.
+    #
+    #    </note>
+    #
     # @return [Types::CreateAppResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAppResponse#app_arn #app_arn} => String
@@ -3638,6 +3647,10 @@ module Aws::SageMaker
     #       initial_active_learning_model_arn: "ModelArn",
     #       labeling_job_resource_config: {
     #         volume_kms_key_id: "KmsKeyId",
+    #         vpc_config: {
+    #           security_group_ids: ["SecurityGroupId"], # required
+    #           subnets: ["SubnetId"], # required
+    #         },
     #       },
     #     },
     #     human_task_config: { # required
@@ -3701,8 +3714,8 @@ module Aws::SageMaker
     # that you defined for the model in the hosting environment.
     #
     # For an example that calls this method when deploying a model to
-    # SageMaker hosting services, see [Deploy the Model to Amazon SageMaker
-    # Hosting Services (Amazon Web Services SDK for Python (Boto 3)).][1]
+    # SageMaker hosting services, see [Create a Model (Amazon Web Services
+    # SDK for Python (Boto 3)).][1]
     #
     # To run a batch transform using your model, you start a job with the
     # `CreateTransformJob` API. SageMaker uses your model and your dataset
@@ -3717,7 +3730,7 @@ module Aws::SageMaker
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/ex1-deploy-model.html#ex1-deploy-model-boto
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/realtime-endpoints-deployment.html#realtime-endpoints-deployment-create-model
     #
     # @option params [required, String] :model_name
     #   The name of the new model.
@@ -6634,6 +6647,9 @@ module Aws::SageMaker
     #   categorize and organize our workforce. Each tag consists of a key and
     #   a value, both of which you define.
     #
+    # @option params [Types::WorkforceVpcConfigRequest] :workforce_vpc_config
+    #   Use this parameter to configure a workforce using VPC.
+    #
     # @return [Types::CreateWorkforceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateWorkforceResponse#workforce_arn #workforce_arn} => String
@@ -6665,6 +6681,11 @@ module Aws::SageMaker
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     workforce_vpc_config: {
+    #       vpc_id: "WorkforceVpcId",
+    #       security_group_ids: ["WorkforceSecurityGroupId"],
+    #       subnets: ["WorkforceSubnetId"],
+    #     },
     #   })
     #
     # @example Response structure
@@ -9760,6 +9781,10 @@ module Aws::SageMaker
     #   resp.labeling_job_algorithms_config.labeling_job_algorithm_specification_arn #=> String
     #   resp.labeling_job_algorithms_config.initial_active_learning_model_arn #=> String
     #   resp.labeling_job_algorithms_config.labeling_job_resource_config.volume_kms_key_id #=> String
+    #   resp.labeling_job_algorithms_config.labeling_job_resource_config.vpc_config.security_group_ids #=> Array
+    #   resp.labeling_job_algorithms_config.labeling_job_resource_config.vpc_config.security_group_ids[0] #=> String
+    #   resp.labeling_job_algorithms_config.labeling_job_resource_config.vpc_config.subnets #=> Array
+    #   resp.labeling_job_algorithms_config.labeling_job_resource_config.vpc_config.subnets[0] #=> String
     #   resp.human_task_config.workteam_arn #=> String
     #   resp.human_task_config.ui_config.ui_template_s3_uri #=> String
     #   resp.human_task_config.ui_config.human_task_ui_arn #=> String
@@ -11565,6 +11590,14 @@ module Aws::SageMaker
     #   resp.workforce.oidc_config.logout_endpoint #=> String
     #   resp.workforce.oidc_config.jwks_uri #=> String
     #   resp.workforce.create_date #=> Time
+    #   resp.workforce.workforce_vpc_config.vpc_id #=> String
+    #   resp.workforce.workforce_vpc_config.security_group_ids #=> Array
+    #   resp.workforce.workforce_vpc_config.security_group_ids[0] #=> String
+    #   resp.workforce.workforce_vpc_config.subnets #=> Array
+    #   resp.workforce.workforce_vpc_config.subnets[0] #=> String
+    #   resp.workforce.workforce_vpc_config.vpc_endpoint_id #=> String
+    #   resp.workforce.status #=> String, one of "Initializing", "Updating", "Deleting", "Failed", "Active"
+    #   resp.workforce.failure_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeWorkforce AWS API Documentation
     #
@@ -16092,6 +16125,14 @@ module Aws::SageMaker
     #   resp.workforces[0].oidc_config.logout_endpoint #=> String
     #   resp.workforces[0].oidc_config.jwks_uri #=> String
     #   resp.workforces[0].create_date #=> Time
+    #   resp.workforces[0].workforce_vpc_config.vpc_id #=> String
+    #   resp.workforces[0].workforce_vpc_config.security_group_ids #=> Array
+    #   resp.workforces[0].workforce_vpc_config.security_group_ids[0] #=> String
+    #   resp.workforces[0].workforce_vpc_config.subnets #=> Array
+    #   resp.workforces[0].workforce_vpc_config.subnets[0] #=> String
+    #   resp.workforces[0].workforce_vpc_config.vpc_endpoint_id #=> String
+    #   resp.workforces[0].status #=> String, one of "Initializing", "Updating", "Deleting", "Failed", "Active"
+    #   resp.workforces[0].failure_reason #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListWorkforces AWS API Documentation
@@ -19357,6 +19398,8 @@ module Aws::SageMaker
     # tasks and to update your OpenID Connect (OIDC) Identity Provider (IdP)
     # workforce configuration.
     #
+    # The worker portal is now supported in VPC and public internet.
+    #
     # Use `SourceIpConfig` to restrict worker access to tasks to a specific
     # range of IP addresses. You specify allowed IP addresses by creating a
     # list of up to ten [CIDRs][1]. By default, a workforce isn't
@@ -19364,6 +19407,12 @@ module Aws::SageMaker
     # addresses, workers who attempt to access tasks using any IP address
     # outside the specified range are denied and get a `Not Found` error
     # message on the worker portal.
+    #
+    # To restrict access to all the workers in public internet, add the
+    # `SourceIpConfig` CIDR value as "0.0.0.0/0".
+    #
+    # Amazon SageMaker does not support Source Ip restriction for worker
+    # portals in VPC.
     #
     # Use `OidcConfig` to update the configuration of a workforce created
     # using your own OIDC IdP.
@@ -19400,6 +19449,9 @@ module Aws::SageMaker
     #   Use this parameter to update your OIDC Identity Provider (IdP)
     #   configuration for a workforce made using your own IdP.
     #
+    # @option params [Types::WorkforceVpcConfigRequest] :workforce_vpc_config
+    #   Use this parameter to update your VPC configuration for a workforce.
+    #
     # @return [Types::UpdateWorkforceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateWorkforceResponse#workforce #workforce} => Types::Workforce
@@ -19421,6 +19473,11 @@ module Aws::SageMaker
     #       logout_endpoint: "OidcEndpoint", # required
     #       jwks_uri: "OidcEndpoint", # required
     #     },
+    #     workforce_vpc_config: {
+    #       vpc_id: "WorkforceVpcId",
+    #       security_group_ids: ["WorkforceSecurityGroupId"],
+    #       subnets: ["WorkforceSubnetId"],
+    #     },
     #   })
     #
     # @example Response structure
@@ -19441,6 +19498,14 @@ module Aws::SageMaker
     #   resp.workforce.oidc_config.logout_endpoint #=> String
     #   resp.workforce.oidc_config.jwks_uri #=> String
     #   resp.workforce.create_date #=> Time
+    #   resp.workforce.workforce_vpc_config.vpc_id #=> String
+    #   resp.workforce.workforce_vpc_config.security_group_ids #=> Array
+    #   resp.workforce.workforce_vpc_config.security_group_ids[0] #=> String
+    #   resp.workforce.workforce_vpc_config.subnets #=> Array
+    #   resp.workforce.workforce_vpc_config.subnets[0] #=> String
+    #   resp.workforce.workforce_vpc_config.vpc_endpoint_id #=> String
+    #   resp.workforce.status #=> String, one of "Initializing", "Updating", "Deleting", "Failed", "Active"
+    #   resp.workforce.failure_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateWorkforce AWS API Documentation
     #
@@ -19562,7 +19627,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.127.0'
+      context[:gem_version] = '1.128.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

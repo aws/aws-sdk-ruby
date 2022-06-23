@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.128.0 (2022-06-23)
+------------------
+
+* Feature - SageMaker Ground Truth now supports Virtual Private Cloud. Customers can launch labeling jobs and access to their private workforce in VPC mode.
+
 1.127.0 (2022-05-31)
 ------------------
 

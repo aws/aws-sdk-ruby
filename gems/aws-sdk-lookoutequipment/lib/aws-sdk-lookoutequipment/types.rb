@@ -807,8 +807,7 @@ module Aws::LookoutEquipment
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Specifies the time the dataset was created in Amazon Lookout for
-    #   Equipment.
+    #   Specifies the time the dataset was created in Lookout for Equipment.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_at
@@ -1167,6 +1166,49 @@ module Aws::LookoutEquipment
     #
     class DuplicateTimestamps < Struct.new(
       :total_number_of_duplicate_timestamps)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the specific inference event, including
+    # start and end time, diagnostics information, event duration and so on.
+    #
+    # @!attribute [rw] inference_scheduler_arn
+    #   The Amazon Resource Name (ARN) of the inference scheduler being used
+    #   for the inference event.
+    #   @return [String]
+    #
+    # @!attribute [rw] inference_scheduler_name
+    #   The name of the inference scheduler being used for the inference
+    #   events.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_start_time
+    #   Indicates the starting time of an inference event.
+    #   @return [Time]
+    #
+    # @!attribute [rw] event_end_time
+    #   Indicates the ending time of an inference event.
+    #   @return [Time]
+    #
+    # @!attribute [rw] diagnostics
+    #   An array which specifies the names and values of all sensors
+    #   contributing to an inference event.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_duration_in_seconds
+    #   Indicates the size of an inference event in seconds.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/InferenceEventSummary AWS API Documentation
+    #
+    class InferenceEventSummary < Struct.new(
+      :inference_scheduler_arn,
+      :inference_scheduler_name,
+      :event_start_time,
+      :event_end_time,
+      :diagnostics,
+      :event_duration_in_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1809,6 +1851,73 @@ module Aws::LookoutEquipment
     class ListDatasetsResponse < Struct.new(
       :next_token,
       :dataset_summaries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListInferenceEventsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         inference_scheduler_name: "InferenceSchedulerIdentifier", # required
+    #         interval_start_time: Time.now, # required
+    #         interval_end_time: Time.now, # required
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   An opaque pagination token indicating where to continue the listing
+    #   of inference events.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Specifies the maximum number of inference events to list.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] inference_scheduler_name
+    #   The name of the inference scheduler for the inference events listed.
+    #   @return [String]
+    #
+    # @!attribute [rw] interval_start_time
+    #   Lookout for Equipment will return all the inference events with
+    #   start time equal to or greater than the start time given.
+    #   @return [Time]
+    #
+    # @!attribute [rw] interval_end_time
+    #   Lookout for Equipment will return all the inference events with end
+    #   time equal to or less than the end time given.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/ListInferenceEventsRequest AWS API Documentation
+    #
+    class ListInferenceEventsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :inference_scheduler_name,
+      :interval_start_time,
+      :interval_end_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   An opaque pagination token indicating where to continue the listing
+    #   of inference executions.
+    #   @return [String]
+    #
+    # @!attribute [rw] inference_event_summaries
+    #   Provides an array of information about the individual inference
+    #   events returned from the `ListInferenceEvents` operation, including
+    #   scheduler used, event start time, event end time, diagnostics, and
+    #   so on.
+    #   @return [Array<Types::InferenceEventSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/ListInferenceEventsResponse AWS API Documentation
+    #
+    class ListInferenceEventsResponse < Struct.new(
+      :next_token,
+      :inference_event_summaries)
       SENSITIVE = []
       include Aws::Structure
     end

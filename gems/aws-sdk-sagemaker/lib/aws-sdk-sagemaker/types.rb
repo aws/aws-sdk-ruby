@@ -2198,10 +2198,6 @@ module Aws::SageMaker
     #
     # @!attribute [rw] s3_data_source
     #   The Amazon S3 location of the input data.
-    #
-    #   <note markdown="1"> The input data must be in CSV format and contain at least 500 rows.
-    #
-    #    </note>
     #   @return [Types::AutoMLS3DataSource]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLDataSource AWS API Documentation
@@ -2212,9 +2208,10 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # This structure specifies how to split the data into train and test
-    # datasets. The validation and training datasets must contain the same
-    # headers. The validation dataset must be less than 2 GB in size.
+    # This structure specifies how to split the data into train and
+    # validation datasets. The validation and training datasets must contain
+    # the same headers. The validation dataset must be less than 2 GB in
+    # size.
     #
     # @note When making an API call, you may pass AutoMLDataSplitConfig
     #   data as a hash:
@@ -2563,6 +2560,22 @@ module Aws::SageMaker
     #
     # @!attribute [rw] s3_data_type
     #   The data type.
+    #
+    #   A ManifestFile should have the format shown below:
+    #
+    #   `[ \{"prefix":
+    #   "s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER/DOC-EXAMPLE-PREFIX/"\},
+    #   `
+    #
+    #   `"DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-1",`
+    #
+    #   `"DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-2",`
+    #
+    #   `... "DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-N" ]`
+    #
+    #   An S3Prefix should have the following format:
+    #
+    #   `s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER-OR-FILE`
     #   @return [String]
     #
     # @!attribute [rw] s3_uri
@@ -4382,6 +4395,15 @@ module Aws::SageMaker
     # @!attribute [rw] resource_spec
     #   The instance type and the Amazon Resource Name (ARN) of the
     #   SageMaker image created on the instance.
+    #
+    #   <note markdown="1"> The value of `InstanceType` passed as part of the `ResourceSpec` in
+    #   the `CreateApp` call overrides the value passed as part of the
+    #   `ResourceSpec` configured for the user profile or the domain. If
+    #   `InstanceType` is not specified in any of those three `ResourceSpec`
+    #   values for a `KernelGateway` app, the `CreateApp` call fails with a
+    #   request validation error.
+    #
+    #    </note>
     #   @return [Types::ResourceSpec]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateAppRequest AWS API Documentation
@@ -6731,6 +6753,10 @@ module Aws::SageMaker
     #           initial_active_learning_model_arn: "ModelArn",
     #           labeling_job_resource_config: {
     #             volume_kms_key_id: "KmsKeyId",
+    #             vpc_config: {
+    #               security_group_ids: ["SecurityGroupId"], # required
+    #               subnets: ["SubnetId"], # required
+    #             },
     #           },
     #         },
     #         human_task_config: { # required
@@ -9965,6 +9991,11 @@ module Aws::SageMaker
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         workforce_vpc_config: {
+    #           vpc_id: "WorkforceVpcId",
+    #           security_group_ids: ["WorkforceSecurityGroupId"],
+    #           subnets: ["WorkforceSubnetId"],
+    #         },
     #       }
     #
     # @!attribute [rw] cognito_config
@@ -10008,6 +10039,10 @@ module Aws::SageMaker
     #   and a value, both of which you define.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] workforce_vpc_config
+    #   Use this parameter to configure a workforce using VPC.
+    #   @return [Types::WorkforceVpcConfigRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateWorkforceRequest AWS API Documentation
     #
     class CreateWorkforceRequest < Struct.new(
@@ -10015,7 +10050,8 @@ module Aws::SageMaker
       :oidc_config,
       :source_ip_config,
       :workforce_name,
-      :tags)
+      :tags,
+      :workforce_vpc_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22002,6 +22038,10 @@ module Aws::SageMaker
     #         initial_active_learning_model_arn: "ModelArn",
     #         labeling_job_resource_config: {
     #           volume_kms_key_id: "KmsKeyId",
+    #           vpc_config: {
+    #             security_group_ids: ["SecurityGroupId"], # required
+    #             subnets: ["SubnetId"], # required
+    #           },
     #         },
     #       }
     #
@@ -22293,6 +22333,10 @@ module Aws::SageMaker
     #
     #       {
     #         volume_kms_key_id: "KmsKeyId",
+    #         vpc_config: {
+    #           security_group_ids: ["SecurityGroupId"], # required
+    #           subnets: ["SubnetId"], # required
+    #         },
     #       }
     #
     # @!attribute [rw] volume_kms_key_id
@@ -22324,10 +22368,24 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-security.html
     #   @return [String]
     #
+    # @!attribute [rw] vpc_config
+    #   Specifies a VPC that your training jobs and hosted models have
+    #   access to. Control access to and from your training and model
+    #   containers by configuring the VPC. For more information, see
+    #   [Protect Endpoints by Using an Amazon Virtual Private Cloud][1] and
+    #   [Protect Training Jobs by Using an Amazon Virtual Private Cloud][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html
+    #   @return [Types::VpcConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobResourceConfig AWS API Documentation
     #
     class LabelingJobResourceConfig < Struct.new(
-      :volume_kms_key_id)
+      :volume_kms_key_id,
+      :vpc_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27688,7 +27746,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/json-bias-parameter-config.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-config-json-monitor-bias-parameters.html
     #   @return [String]
     #
     # @!attribute [rw] environment
@@ -27961,7 +28019,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/json-model-explainability-parameter-config.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-config-json-monitor-model-explainability-parameters.html
     #   @return [String]
     #
     # @!attribute [rw] environment
@@ -34668,9 +34726,11 @@ module Aws::SageMaker
     # @!attribute [rw] instance_type
     #   The instance type that the image version runs on.
     #
-    #   <note markdown="1"> JupyterServer Apps only support the `system` value. KernelGateway
-    #   Apps do not support the `system` value, but support all other values
-    #   for available instance types.
+    #   <note markdown="1"> **JupyterServer apps** only support the `system` value.
+    #
+    #    For **KernelGateway apps**, the `system` value is translated to
+    #   `ml.t3.medium`. KernelGateway apps also support all other values for
+    #   available instance types.
     #
     #    </note>
     #   @return [String]
@@ -40442,6 +40502,11 @@ module Aws::SageMaker
     #           logout_endpoint: "OidcEndpoint", # required
     #           jwks_uri: "OidcEndpoint", # required
     #         },
+    #         workforce_vpc_config: {
+    #           vpc_id: "WorkforceVpcId",
+    #           security_group_ids: ["WorkforceSecurityGroupId"],
+    #           subnets: ["WorkforceSubnetId"],
+    #         },
     #       }
     #
     # @!attribute [rw] workforce_name
@@ -40465,12 +40530,17 @@ module Aws::SageMaker
     #   configuration for a workforce made using your own IdP.
     #   @return [Types::OidcConfig]
     #
+    # @!attribute [rw] workforce_vpc_config
+    #   Use this parameter to update your VPC configuration for a workforce.
+    #   @return [Types::WorkforceVpcConfigRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateWorkforceRequest AWS API Documentation
     #
     class UpdateWorkforceRequest < Struct.new(
       :workforce_name,
       :source_ip_config,
-      :oidc_config)
+      :oidc_config,
+      :workforce_vpc_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -40947,6 +41017,18 @@ module Aws::SageMaker
     #   The date that the workforce is created.
     #   @return [Time]
     #
+    # @!attribute [rw] workforce_vpc_config
+    #   The configuration of a VPC workforce.
+    #   @return [Types::WorkforceVpcConfigResponse]
+    #
+    # @!attribute [rw] status
+    #   The status of your workforce.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reason your workforce failed.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Workforce AWS API Documentation
     #
     class Workforce < Struct.new(
@@ -40957,7 +41039,76 @@ module Aws::SageMaker
       :sub_domain,
       :cognito_config,
       :oidc_config,
-      :create_date)
+      :create_date,
+      :workforce_vpc_config,
+      :status,
+      :failure_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The VPC object you use to create or update a workforce.
+    #
+    # @note When making an API call, you may pass WorkforceVpcConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vpc_id: "WorkforceVpcId",
+    #         security_group_ids: ["WorkforceSecurityGroupId"],
+    #         subnets: ["WorkforceSubnetId"],
+    #       }
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC that the workforce uses for communication.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_ids
+    #   The VPC security group IDs, in the form sg-xxxxxxxx. The security
+    #   groups must be for the same VPC as specified in the subnet.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnets
+    #   The ID of the subnets in the VPC that you want to connect.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/WorkforceVpcConfigRequest AWS API Documentation
+    #
+    class WorkforceVpcConfigRequest < Struct.new(
+      :vpc_id,
+      :security_group_ids,
+      :subnets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A VpcConfig object that specifies the VPC that you want your workforce
+    # to connect to.
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC that the workforce uses for communication.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_ids
+    #   The VPC security group IDs, in the form sg-xxxxxxxx. The security
+    #   groups must be for the same VPC as specified in the subnet.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnets
+    #   The ID of the subnets in the VPC that you want to connect.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_endpoint_id
+    #   The IDs for the VPC service endpoints of your VPC workforce when it
+    #   is created and updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/WorkforceVpcConfigResponse AWS API Documentation
+    #
+    class WorkforceVpcConfigResponse < Struct.new(
+      :vpc_id,
+      :security_group_ids,
+      :subnets,
+      :vpc_endpoint_id)
       SENSITIVE = []
       include Aws::Structure
     end

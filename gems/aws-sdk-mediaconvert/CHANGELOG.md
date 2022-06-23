@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.92.0 (2022-06-23)
+------------------
+
+* Feature - AWS Elemental MediaConvert SDK has released support for automatic DolbyVision metadata generation when converting HDR10 to DolbyVision.
+
 1.91.0 (2022-06-14)
 ------------------
 

@@ -459,6 +459,82 @@ module Aws::Mgn
 
     # Creates a new ReplicationConfigurationTemplate.
     #
+    # @option params [Types::PostLaunchActions] :post_launch_actions
+    #   Request to associate the default Application Migration Service
+    #   Security group with the Replication Settings template.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Request to associate the default Application Migration Service
+    #   Security group with the Replication Settings template.
+    #
+    # @return [Types::LaunchConfigurationTemplate] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::LaunchConfigurationTemplate#arn #arn} => String
+    #   * {Types::LaunchConfigurationTemplate#launch_configuration_template_id #launch_configuration_template_id} => String
+    #   * {Types::LaunchConfigurationTemplate#post_launch_actions #post_launch_actions} => Types::PostLaunchActions
+    #   * {Types::LaunchConfigurationTemplate#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_launch_configuration_template({
+    #     post_launch_actions: {
+    #       cloud_watch_log_group_name: "CloudWatchLogGroupName",
+    #       deployment: "TEST_AND_CUTOVER", # accepts TEST_AND_CUTOVER, CUTOVER_ONLY
+    #       s3_log_bucket: "S3LogBucketName",
+    #       s3_output_key_prefix: "BoundedString",
+    #       ssm_documents: [
+    #         {
+    #           action_name: "BoundedString", # required
+    #           must_succeed_for_cutover: false,
+    #           parameters: {
+    #             "SsmDocumentParameterName" => [
+    #               {
+    #                 parameter_name: "SsmParameterStoreParameterName", # required
+    #                 parameter_type: "STRING", # required, accepts STRING
+    #               },
+    #             ],
+    #           },
+    #           ssm_document_name: "SsmDocumentName", # required
+    #           timeout_seconds: 1,
+    #         },
+    #       ],
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.launch_configuration_template_id #=> String
+    #   resp.post_launch_actions.cloud_watch_log_group_name #=> String
+    #   resp.post_launch_actions.deployment #=> String, one of "TEST_AND_CUTOVER", "CUTOVER_ONLY"
+    #   resp.post_launch_actions.s3_log_bucket #=> String
+    #   resp.post_launch_actions.s3_output_key_prefix #=> String
+    #   resp.post_launch_actions.ssm_documents #=> Array
+    #   resp.post_launch_actions.ssm_documents[0].action_name #=> String
+    #   resp.post_launch_actions.ssm_documents[0].must_succeed_for_cutover #=> Boolean
+    #   resp.post_launch_actions.ssm_documents[0].parameters #=> Hash
+    #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"] #=> Array
+    #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"][0].parameter_name #=> String
+    #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING"
+    #   resp.post_launch_actions.ssm_documents[0].ssm_document_name #=> String
+    #   resp.post_launch_actions.ssm_documents[0].timeout_seconds #=> Integer
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/CreateLaunchConfigurationTemplate AWS API Documentation
+    #
+    # @overload create_launch_configuration_template(params = {})
+    # @param [Hash] params ({})
+    def create_launch_configuration_template(params = {}, options = {})
+      req = build_request(:create_launch_configuration_template, params)
+      req.send_request(options)
+    end
+
+    # Creates a new ReplicationConfigurationTemplate.
+    #
     # @option params [required, Boolean] :associate_default_security_group
     #   Request to associate the default Application Migration Service
     #   Security group with the Replication Settings template.
@@ -600,6 +676,28 @@ module Aws::Mgn
     # @param [Hash] params ({})
     def delete_job(params = {}, options = {})
       req = build_request(:delete_job, params)
+      req.send_request(options)
+    end
+
+    # Creates a new ReplicationConfigurationTemplate.
+    #
+    # @option params [required, String] :launch_configuration_template_id
+    #   ID of resource to be deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_launch_configuration_template({
+    #     launch_configuration_template_id: "LaunchConfigurationTemplateID", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DeleteLaunchConfigurationTemplate AWS API Documentation
+    #
+    # @overload delete_launch_configuration_template(params = {})
+    # @param [Hash] params ({})
+    def delete_launch_configuration_template(params = {}, options = {})
+      req = build_request(:delete_launch_configuration_template, params)
       req.send_request(options)
     end
 
@@ -762,6 +860,21 @@ module Aws::Mgn
     #   resp.items[0].job_id #=> String
     #   resp.items[0].participating_servers #=> Array
     #   resp.items[0].participating_servers[0].launch_status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
+    #   resp.items[0].participating_servers[0].launched_ec2_instance_id #=> String
+    #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list #=> Array
+    #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].execution_id #=> String
+    #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].execution_status #=> String, one of "IN_PROGRESS", "SUCCESS", "FAILED"
+    #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].failure_reason #=> String
+    #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.action_name #=> String
+    #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.must_succeed_for_cutover #=> Boolean
+    #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters #=> Hash
+    #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters["SsmDocumentParameterName"] #=> Array
+    #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters["SsmDocumentParameterName"][0].parameter_name #=> String
+    #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING"
+    #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.ssm_document_name #=> String
+    #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.timeout_seconds #=> Integer
+    #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document_type #=> String, one of "AUTOMATION", "COMMAND"
+    #   resp.items[0].participating_servers[0].post_launch_actions_status.ssm_agent_discovery_datetime #=> String
     #   resp.items[0].participating_servers[0].source_server_id #=> String
     #   resp.items[0].status #=> String, one of "PENDING", "STARTED", "COMPLETED"
     #   resp.items[0].tags #=> Hash
@@ -775,6 +888,63 @@ module Aws::Mgn
     # @param [Hash] params ({})
     def describe_jobs(params = {}, options = {})
       req = build_request(:describe_jobs, params)
+      req.send_request(options)
+    end
+
+    # Creates a new ReplicationConfigurationTemplate.
+    #
+    # @option params [Array<String>] :launch_configuration_template_i_ds
+    #   Request to disconnect Source Server from service by Server ID.
+    #
+    # @option params [Integer] :max_results
+    #   Request to disconnect Source Server from service by Server ID.
+    #
+    # @option params [String] :next_token
+    #   Request to disconnect Source Server from service by Server ID.
+    #
+    # @return [Types::DescribeLaunchConfigurationTemplatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeLaunchConfigurationTemplatesResponse#items #items} => Array&lt;Types::LaunchConfigurationTemplate&gt;
+    #   * {Types::DescribeLaunchConfigurationTemplatesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_launch_configuration_templates({
+    #     launch_configuration_template_i_ds: ["LaunchConfigurationTemplateID"],
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].arn #=> String
+    #   resp.items[0].launch_configuration_template_id #=> String
+    #   resp.items[0].post_launch_actions.cloud_watch_log_group_name #=> String
+    #   resp.items[0].post_launch_actions.deployment #=> String, one of "TEST_AND_CUTOVER", "CUTOVER_ONLY"
+    #   resp.items[0].post_launch_actions.s3_log_bucket #=> String
+    #   resp.items[0].post_launch_actions.s3_output_key_prefix #=> String
+    #   resp.items[0].post_launch_actions.ssm_documents #=> Array
+    #   resp.items[0].post_launch_actions.ssm_documents[0].action_name #=> String
+    #   resp.items[0].post_launch_actions.ssm_documents[0].must_succeed_for_cutover #=> Boolean
+    #   resp.items[0].post_launch_actions.ssm_documents[0].parameters #=> Hash
+    #   resp.items[0].post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"] #=> Array
+    #   resp.items[0].post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"][0].parameter_name #=> String
+    #   resp.items[0].post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING"
+    #   resp.items[0].post_launch_actions.ssm_documents[0].ssm_document_name #=> String
+    #   resp.items[0].post_launch_actions.ssm_documents[0].timeout_seconds #=> Integer
+    #   resp.items[0].tags #=> Hash
+    #   resp.items[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DescribeLaunchConfigurationTemplates AWS API Documentation
+    #
+    # @overload describe_launch_configuration_templates(params = {})
+    # @param [Hash] params ({})
+    def describe_launch_configuration_templates(params = {}, options = {})
+      req = build_request(:describe_launch_configuration_templates, params)
       req.send_request(options)
     end
 
@@ -1221,6 +1391,7 @@ module Aws::Mgn
     #   * {Types::LaunchConfiguration#launch_disposition #launch_disposition} => String
     #   * {Types::LaunchConfiguration#licensing #licensing} => Types::Licensing
     #   * {Types::LaunchConfiguration#name #name} => String
+    #   * {Types::LaunchConfiguration#post_launch_actions #post_launch_actions} => Types::PostLaunchActions
     #   * {Types::LaunchConfiguration#source_server_id #source_server_id} => String
     #   * {Types::LaunchConfiguration#target_instance_type_right_sizing_method #target_instance_type_right_sizing_method} => String
     #
@@ -1239,6 +1410,19 @@ module Aws::Mgn
     #   resp.launch_disposition #=> String, one of "STOPPED", "STARTED"
     #   resp.licensing.os_byol #=> Boolean
     #   resp.name #=> String
+    #   resp.post_launch_actions.cloud_watch_log_group_name #=> String
+    #   resp.post_launch_actions.deployment #=> String, one of "TEST_AND_CUTOVER", "CUTOVER_ONLY"
+    #   resp.post_launch_actions.s3_log_bucket #=> String
+    #   resp.post_launch_actions.s3_output_key_prefix #=> String
+    #   resp.post_launch_actions.ssm_documents #=> Array
+    #   resp.post_launch_actions.ssm_documents[0].action_name #=> String
+    #   resp.post_launch_actions.ssm_documents[0].must_succeed_for_cutover #=> Boolean
+    #   resp.post_launch_actions.ssm_documents[0].parameters #=> Hash
+    #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"] #=> Array
+    #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"][0].parameter_name #=> String
+    #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING"
+    #   resp.post_launch_actions.ssm_documents[0].ssm_document_name #=> String
+    #   resp.post_launch_actions.ssm_documents[0].timeout_seconds #=> Integer
     #   resp.source_server_id #=> String
     #   resp.target_instance_type_right_sizing_method #=> String, one of "NONE", "BASIC"
     #
@@ -1586,6 +1770,21 @@ module Aws::Mgn
     #   resp.job.job_id #=> String
     #   resp.job.participating_servers #=> Array
     #   resp.job.participating_servers[0].launch_status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
+    #   resp.job.participating_servers[0].launched_ec2_instance_id #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list #=> Array
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].execution_id #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].execution_status #=> String, one of "IN_PROGRESS", "SUCCESS", "FAILED"
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].failure_reason #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.action_name #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.must_succeed_for_cutover #=> Boolean
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters #=> Hash
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters["SsmDocumentParameterName"] #=> Array
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters["SsmDocumentParameterName"][0].parameter_name #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING"
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.ssm_document_name #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.timeout_seconds #=> Integer
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document_type #=> String, one of "AUTOMATION", "COMMAND"
+    #   resp.job.participating_servers[0].post_launch_actions_status.ssm_agent_discovery_datetime #=> String
     #   resp.job.participating_servers[0].source_server_id #=> String
     #   resp.job.status #=> String, one of "PENDING", "STARTED", "COMPLETED"
     #   resp.job.tags #=> Hash
@@ -1729,6 +1928,21 @@ module Aws::Mgn
     #   resp.job.job_id #=> String
     #   resp.job.participating_servers #=> Array
     #   resp.job.participating_servers[0].launch_status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
+    #   resp.job.participating_servers[0].launched_ec2_instance_id #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list #=> Array
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].execution_id #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].execution_status #=> String, one of "IN_PROGRESS", "SUCCESS", "FAILED"
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].failure_reason #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.action_name #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.must_succeed_for_cutover #=> Boolean
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters #=> Hash
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters["SsmDocumentParameterName"] #=> Array
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters["SsmDocumentParameterName"][0].parameter_name #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING"
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.ssm_document_name #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.timeout_seconds #=> Integer
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document_type #=> String, one of "AUTOMATION", "COMMAND"
+    #   resp.job.participating_servers[0].post_launch_actions_status.ssm_agent_discovery_datetime #=> String
     #   resp.job.participating_servers[0].source_server_id #=> String
     #   resp.job.status #=> String, one of "PENDING", "STARTED", "COMPLETED"
     #   resp.job.tags #=> Hash
@@ -1808,6 +2022,21 @@ module Aws::Mgn
     #   resp.job.job_id #=> String
     #   resp.job.participating_servers #=> Array
     #   resp.job.participating_servers[0].launch_status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
+    #   resp.job.participating_servers[0].launched_ec2_instance_id #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list #=> Array
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].execution_id #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].execution_status #=> String, one of "IN_PROGRESS", "SUCCESS", "FAILED"
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].failure_reason #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.action_name #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.must_succeed_for_cutover #=> Boolean
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters #=> Hash
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters["SsmDocumentParameterName"] #=> Array
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters["SsmDocumentParameterName"][0].parameter_name #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING"
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.ssm_document_name #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.timeout_seconds #=> Integer
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document_type #=> String, one of "AUTOMATION", "COMMAND"
+    #   resp.job.participating_servers[0].post_launch_actions_status.ssm_agent_discovery_datetime #=> String
     #   resp.job.participating_servers[0].source_server_id #=> String
     #   resp.job.status #=> String, one of "PENDING", "STARTED", "COMPLETED"
     #   resp.job.tags #=> Hash
@@ -1870,6 +2099,9 @@ module Aws::Mgn
     # @option params [String] :name
     #   Update Launch configuration name request.
     #
+    # @option params [Types::PostLaunchActions] :post_launch_actions
+    #   Server participating in Job.
+    #
     # @option params [required, String] :source_server_id
     #   Update Launch configuration by Source Server ID request.
     #
@@ -1885,6 +2117,7 @@ module Aws::Mgn
     #   * {Types::LaunchConfiguration#launch_disposition #launch_disposition} => String
     #   * {Types::LaunchConfiguration#licensing #licensing} => Types::Licensing
     #   * {Types::LaunchConfiguration#name #name} => String
+    #   * {Types::LaunchConfiguration#post_launch_actions #post_launch_actions} => Types::PostLaunchActions
     #   * {Types::LaunchConfiguration#source_server_id #source_server_id} => String
     #   * {Types::LaunchConfiguration#target_instance_type_right_sizing_method #target_instance_type_right_sizing_method} => String
     #
@@ -1899,6 +2132,28 @@ module Aws::Mgn
     #       os_byol: false,
     #     },
     #     name: "SmallBoundedString",
+    #     post_launch_actions: {
+    #       cloud_watch_log_group_name: "CloudWatchLogGroupName",
+    #       deployment: "TEST_AND_CUTOVER", # accepts TEST_AND_CUTOVER, CUTOVER_ONLY
+    #       s3_log_bucket: "S3LogBucketName",
+    #       s3_output_key_prefix: "BoundedString",
+    #       ssm_documents: [
+    #         {
+    #           action_name: "BoundedString", # required
+    #           must_succeed_for_cutover: false,
+    #           parameters: {
+    #             "SsmDocumentParameterName" => [
+    #               {
+    #                 parameter_name: "SsmParameterStoreParameterName", # required
+    #                 parameter_type: "STRING", # required, accepts STRING
+    #               },
+    #             ],
+    #           },
+    #           ssm_document_name: "SsmDocumentName", # required
+    #           timeout_seconds: 1,
+    #         },
+    #       ],
+    #     },
     #     source_server_id: "SourceServerID", # required
     #     target_instance_type_right_sizing_method: "NONE", # accepts NONE, BASIC
     #   })
@@ -1912,6 +2167,19 @@ module Aws::Mgn
     #   resp.launch_disposition #=> String, one of "STOPPED", "STARTED"
     #   resp.licensing.os_byol #=> Boolean
     #   resp.name #=> String
+    #   resp.post_launch_actions.cloud_watch_log_group_name #=> String
+    #   resp.post_launch_actions.deployment #=> String, one of "TEST_AND_CUTOVER", "CUTOVER_ONLY"
+    #   resp.post_launch_actions.s3_log_bucket #=> String
+    #   resp.post_launch_actions.s3_output_key_prefix #=> String
+    #   resp.post_launch_actions.ssm_documents #=> Array
+    #   resp.post_launch_actions.ssm_documents[0].action_name #=> String
+    #   resp.post_launch_actions.ssm_documents[0].must_succeed_for_cutover #=> Boolean
+    #   resp.post_launch_actions.ssm_documents[0].parameters #=> Hash
+    #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"] #=> Array
+    #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"][0].parameter_name #=> String
+    #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING"
+    #   resp.post_launch_actions.ssm_documents[0].ssm_document_name #=> String
+    #   resp.post_launch_actions.ssm_documents[0].timeout_seconds #=> Integer
     #   resp.source_server_id #=> String
     #   resp.target_instance_type_right_sizing_method #=> String, one of "NONE", "BASIC"
     #
@@ -1921,6 +2189,78 @@ module Aws::Mgn
     # @param [Hash] params ({})
     def update_launch_configuration(params = {}, options = {})
       req = build_request(:update_launch_configuration, params)
+      req.send_request(options)
+    end
+
+    # Creates a new ReplicationConfigurationTemplate.
+    #
+    # @option params [required, String] :launch_configuration_template_id
+    #   Update Launch configuration Target instance right sizing request.
+    #
+    # @option params [Types::PostLaunchActions] :post_launch_actions
+    #   Update Launch configuration Target instance right sizing request.
+    #
+    # @return [Types::LaunchConfigurationTemplate] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::LaunchConfigurationTemplate#arn #arn} => String
+    #   * {Types::LaunchConfigurationTemplate#launch_configuration_template_id #launch_configuration_template_id} => String
+    #   * {Types::LaunchConfigurationTemplate#post_launch_actions #post_launch_actions} => Types::PostLaunchActions
+    #   * {Types::LaunchConfigurationTemplate#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_launch_configuration_template({
+    #     launch_configuration_template_id: "LaunchConfigurationTemplateID", # required
+    #     post_launch_actions: {
+    #       cloud_watch_log_group_name: "CloudWatchLogGroupName",
+    #       deployment: "TEST_AND_CUTOVER", # accepts TEST_AND_CUTOVER, CUTOVER_ONLY
+    #       s3_log_bucket: "S3LogBucketName",
+    #       s3_output_key_prefix: "BoundedString",
+    #       ssm_documents: [
+    #         {
+    #           action_name: "BoundedString", # required
+    #           must_succeed_for_cutover: false,
+    #           parameters: {
+    #             "SsmDocumentParameterName" => [
+    #               {
+    #                 parameter_name: "SsmParameterStoreParameterName", # required
+    #                 parameter_type: "STRING", # required, accepts STRING
+    #               },
+    #             ],
+    #           },
+    #           ssm_document_name: "SsmDocumentName", # required
+    #           timeout_seconds: 1,
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.launch_configuration_template_id #=> String
+    #   resp.post_launch_actions.cloud_watch_log_group_name #=> String
+    #   resp.post_launch_actions.deployment #=> String, one of "TEST_AND_CUTOVER", "CUTOVER_ONLY"
+    #   resp.post_launch_actions.s3_log_bucket #=> String
+    #   resp.post_launch_actions.s3_output_key_prefix #=> String
+    #   resp.post_launch_actions.ssm_documents #=> Array
+    #   resp.post_launch_actions.ssm_documents[0].action_name #=> String
+    #   resp.post_launch_actions.ssm_documents[0].must_succeed_for_cutover #=> Boolean
+    #   resp.post_launch_actions.ssm_documents[0].parameters #=> Hash
+    #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"] #=> Array
+    #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"][0].parameter_name #=> String
+    #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING"
+    #   resp.post_launch_actions.ssm_documents[0].ssm_document_name #=> String
+    #   resp.post_launch_actions.ssm_documents[0].timeout_seconds #=> Integer
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateLaunchConfigurationTemplate AWS API Documentation
+    #
+    # @overload update_launch_configuration_template(params = {})
+    # @param [Hash] params ({})
+    def update_launch_configuration_template(params = {}, options = {})
+      req = build_request(:update_launch_configuration_template, params)
       req.send_request(options)
     end
 
@@ -2294,7 +2634,7 @@ module Aws::Mgn
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mgn'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

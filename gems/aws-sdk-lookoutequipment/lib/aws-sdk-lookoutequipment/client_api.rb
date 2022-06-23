@@ -54,10 +54,13 @@ module Aws::LookoutEquipment
     DescribeModelRequest = Shapes::StructureShape.new(name: 'DescribeModelRequest')
     DescribeModelResponse = Shapes::StructureShape.new(name: 'DescribeModelResponse')
     DuplicateTimestamps = Shapes::StructureShape.new(name: 'DuplicateTimestamps')
+    EventDurationInSeconds = Shapes::IntegerShape.new(name: 'EventDurationInSeconds')
     FileNameTimestampFormat = Shapes::StringShape.new(name: 'FileNameTimestampFormat')
     Float = Shapes::FloatShape.new(name: 'Float')
     IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
     IdempotenceToken = Shapes::StringShape.new(name: 'IdempotenceToken')
+    InferenceEventSummaries = Shapes::ListShape.new(name: 'InferenceEventSummaries')
+    InferenceEventSummary = Shapes::StructureShape.new(name: 'InferenceEventSummary')
     InferenceExecutionStatus = Shapes::StringShape.new(name: 'InferenceExecutionStatus')
     InferenceExecutionSummaries = Shapes::ListShape.new(name: 'InferenceExecutionSummaries')
     InferenceExecutionSummary = Shapes::StructureShape.new(name: 'InferenceExecutionSummary')
@@ -91,6 +94,8 @@ module Aws::LookoutEquipment
     ListDataIngestionJobsResponse = Shapes::StructureShape.new(name: 'ListDataIngestionJobsResponse')
     ListDatasetsRequest = Shapes::StructureShape.new(name: 'ListDatasetsRequest')
     ListDatasetsResponse = Shapes::StructureShape.new(name: 'ListDatasetsResponse')
+    ListInferenceEventsRequest = Shapes::StructureShape.new(name: 'ListInferenceEventsRequest')
+    ListInferenceEventsResponse = Shapes::StructureShape.new(name: 'ListInferenceEventsResponse')
     ListInferenceExecutionsRequest = Shapes::StructureShape.new(name: 'ListInferenceExecutionsRequest')
     ListInferenceExecutionsResponse = Shapes::StructureShape.new(name: 'ListInferenceExecutionsResponse')
     ListInferenceSchedulersRequest = Shapes::StructureShape.new(name: 'ListInferenceSchedulersRequest')
@@ -336,6 +341,16 @@ module Aws::LookoutEquipment
     DuplicateTimestamps.add_member(:total_number_of_duplicate_timestamps, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "TotalNumberOfDuplicateTimestamps"))
     DuplicateTimestamps.struct_class = Types::DuplicateTimestamps
 
+    InferenceEventSummaries.member = Shapes::ShapeRef.new(shape: InferenceEventSummary)
+
+    InferenceEventSummary.add_member(:inference_scheduler_arn, Shapes::ShapeRef.new(shape: InferenceSchedulerArn, location_name: "InferenceSchedulerArn"))
+    InferenceEventSummary.add_member(:inference_scheduler_name, Shapes::ShapeRef.new(shape: InferenceSchedulerName, location_name: "InferenceSchedulerName"))
+    InferenceEventSummary.add_member(:event_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EventStartTime"))
+    InferenceEventSummary.add_member(:event_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EventEndTime"))
+    InferenceEventSummary.add_member(:diagnostics, Shapes::ShapeRef.new(shape: ModelMetrics, location_name: "Diagnostics"))
+    InferenceEventSummary.add_member(:event_duration_in_seconds, Shapes::ShapeRef.new(shape: EventDurationInSeconds, location_name: "EventDurationInSeconds"))
+    InferenceEventSummary.struct_class = Types::InferenceEventSummary
+
     InferenceExecutionSummaries.member = Shapes::ShapeRef.new(shape: InferenceExecutionSummary)
 
     InferenceExecutionSummary.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, location_name: "ModelName"))
@@ -438,6 +453,17 @@ module Aws::LookoutEquipment
     ListDatasetsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListDatasetsResponse.add_member(:dataset_summaries, Shapes::ShapeRef.new(shape: DatasetSummaries, location_name: "DatasetSummaries"))
     ListDatasetsResponse.struct_class = Types::ListDatasetsResponse
+
+    ListInferenceEventsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListInferenceEventsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListInferenceEventsRequest.add_member(:inference_scheduler_name, Shapes::ShapeRef.new(shape: InferenceSchedulerIdentifier, required: true, location_name: "InferenceSchedulerName"))
+    ListInferenceEventsRequest.add_member(:interval_start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "IntervalStartTime"))
+    ListInferenceEventsRequest.add_member(:interval_end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "IntervalEndTime"))
+    ListInferenceEventsRequest.struct_class = Types::ListInferenceEventsRequest
+
+    ListInferenceEventsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListInferenceEventsResponse.add_member(:inference_event_summaries, Shapes::ShapeRef.new(shape: InferenceEventSummaries, location_name: "InferenceEventSummaries"))
+    ListInferenceEventsResponse.struct_class = Types::ListInferenceEventsResponse
 
     ListInferenceExecutionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListInferenceExecutionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
@@ -792,6 +818,25 @@ module Aws::LookoutEquipment
         o.output = Shapes::ShapeRef.new(shape: ListDatasetsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_inference_events, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListInferenceEvents"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListInferenceEventsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListInferenceEventsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o[:pager] = Aws::Pager.new(

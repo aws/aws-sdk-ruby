@@ -77,6 +77,11 @@ module Aws::Mgn
       end
 
       # @return [String]
+      def errors
+        @data[:errors]
+      end
+
+      # @return [String]
       def message
         @message || @data[:message]
       end

@@ -41,6 +41,7 @@ module Aws::MigrationHubRefactorSpaces
     CreateRouteResponse = Shapes::StructureShape.new(name: 'CreateRouteResponse')
     CreateServiceRequest = Shapes::StructureShape.new(name: 'CreateServiceRequest')
     CreateServiceResponse = Shapes::StructureShape.new(name: 'CreateServiceResponse')
+    DefaultRouteInput = Shapes::StructureShape.new(name: 'DefaultRouteInput')
     DeleteApplicationRequest = Shapes::StructureShape.new(name: 'DeleteApplicationRequest')
     DeleteApplicationResponse = Shapes::StructureShape.new(name: 'DeleteApplicationResponse')
     DeleteEnvironmentRequest = Shapes::StructureShape.new(name: 'DeleteEnvironmentRequest')
@@ -137,6 +138,8 @@ module Aws::MigrationHubRefactorSpaces
     TransitGatewayId = Shapes::StringShape.new(name: 'TransitGatewayId')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateRouteRequest = Shapes::StructureShape.new(name: 'UpdateRouteRequest')
+    UpdateRouteResponse = Shapes::StructureShape.new(name: 'UpdateRouteResponse')
     Uri = Shapes::StringShape.new(name: 'Uri')
     UriPath = Shapes::StringShape.new(name: 'UriPath')
     UriPathRouteInput = Shapes::StructureShape.new(name: 'UriPathRouteInput')
@@ -245,6 +248,7 @@ module Aws::MigrationHubRefactorSpaces
 
     CreateRouteRequest.add_member(:application_identifier, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location: "uri", location_name: "ApplicationIdentifier"))
     CreateRouteRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateRouteRequest.add_member(:default_route, Shapes::ShapeRef.new(shape: DefaultRouteInput, location_name: "DefaultRoute"))
     CreateRouteRequest.add_member(:environment_identifier, Shapes::ShapeRef.new(shape: EnvironmentId, required: true, location: "uri", location_name: "EnvironmentIdentifier"))
     CreateRouteRequest.add_member(:route_type, Shapes::ShapeRef.new(shape: RouteType, required: true, location_name: "RouteType"))
     CreateRouteRequest.add_member(:service_identifier, Shapes::ShapeRef.new(shape: ServiceId, required: true, location_name: "ServiceIdentifier"))
@@ -295,6 +299,9 @@ module Aws::MigrationHubRefactorSpaces
     CreateServiceResponse.add_member(:url_endpoint, Shapes::ShapeRef.new(shape: UrlEndpointInput, location_name: "UrlEndpoint"))
     CreateServiceResponse.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
     CreateServiceResponse.struct_class = Types::CreateServiceResponse
+
+    DefaultRouteInput.add_member(:activation_state, Shapes::ShapeRef.new(shape: RouteActivationState, location_name: "ActivationState"))
+    DefaultRouteInput.struct_class = Types::DefaultRouteInput
 
     DeleteApplicationRequest.add_member(:application_identifier, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location: "uri", location_name: "ApplicationIdentifier"))
     DeleteApplicationRequest.add_member(:environment_identifier, Shapes::ShapeRef.new(shape: EnvironmentId, required: true, location: "uri", location_name: "EnvironmentIdentifier"))
@@ -630,6 +637,20 @@ module Aws::MigrationHubRefactorSpaces
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
+    UpdateRouteRequest.add_member(:activation_state, Shapes::ShapeRef.new(shape: RouteActivationState, required: true, location_name: "ActivationState"))
+    UpdateRouteRequest.add_member(:application_identifier, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location: "uri", location_name: "ApplicationIdentifier"))
+    UpdateRouteRequest.add_member(:environment_identifier, Shapes::ShapeRef.new(shape: EnvironmentId, required: true, location: "uri", location_name: "EnvironmentIdentifier"))
+    UpdateRouteRequest.add_member(:route_identifier, Shapes::ShapeRef.new(shape: RouteId, required: true, location: "uri", location_name: "RouteIdentifier"))
+    UpdateRouteRequest.struct_class = Types::UpdateRouteRequest
+
+    UpdateRouteResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, location_name: "ApplicationId"))
+    UpdateRouteResponse.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "Arn"))
+    UpdateRouteResponse.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTime"))
+    UpdateRouteResponse.add_member(:route_id, Shapes::ShapeRef.new(shape: RouteId, location_name: "RouteId"))
+    UpdateRouteResponse.add_member(:service_id, Shapes::ShapeRef.new(shape: ServiceId, location_name: "ServiceId"))
+    UpdateRouteResponse.add_member(:state, Shapes::ShapeRef.new(shape: RouteState, location_name: "State"))
+    UpdateRouteResponse.struct_class = Types::UpdateRouteResponse
 
     UriPathRouteInput.add_member(:activation_state, Shapes::ShapeRef.new(shape: RouteActivationState, required: true, location_name: "ActivationState"))
     UriPathRouteInput.add_member(:include_child_paths, Shapes::ShapeRef.new(shape: Boolean, location_name: "IncludeChildPaths"))
@@ -1010,6 +1031,19 @@ module Aws::MigrationHubRefactorSpaces
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:update_route, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateRoute"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/environments/{EnvironmentIdentifier}/applications/{ApplicationIdentifier}/routes/{RouteIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateRouteRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateRouteResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
     end
 

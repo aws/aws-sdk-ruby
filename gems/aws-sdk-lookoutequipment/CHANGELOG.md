@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2022-06-23)
+------------------
+
+* Feature - This release adds visualizations to the scheduled inference results. Users will be able to see interference results, including diagnostic results from their running inference schedulers.
+
 1.11.0 (2022-04-27)
 ------------------
 

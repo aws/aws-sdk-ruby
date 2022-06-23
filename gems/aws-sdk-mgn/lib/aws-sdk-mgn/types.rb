@@ -101,6 +101,10 @@ module Aws::Mgn
     # @!attribute [rw] code
     #   @return [String]
     #
+    # @!attribute [rw] errors
+    #   Conflict Exception specific errors.
+    #   @return [Array<Types::ErrorDetails>]
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -116,10 +120,61 @@ module Aws::Mgn
     #
     class ConflictException < Struct.new(
       :code,
+      :errors,
       :message,
       :resource_id,
       :resource_type)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateLaunchConfigurationTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         post_launch_actions: {
+    #           cloud_watch_log_group_name: "CloudWatchLogGroupName",
+    #           deployment: "TEST_AND_CUTOVER", # accepts TEST_AND_CUTOVER, CUTOVER_ONLY
+    #           s3_log_bucket: "S3LogBucketName",
+    #           s3_output_key_prefix: "BoundedString",
+    #           ssm_documents: [
+    #             {
+    #               action_name: "BoundedString", # required
+    #               must_succeed_for_cutover: false,
+    #               parameters: {
+    #                 "SsmDocumentParameterName" => [
+    #                   {
+    #                     parameter_name: "SsmParameterStoreParameterName", # required
+    #                     parameter_type: "STRING", # required, accepts STRING
+    #                   },
+    #                 ],
+    #               },
+    #               ssm_document_name: "SsmDocumentName", # required
+    #               timeout_seconds: 1,
+    #             },
+    #           ],
+    #         },
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] post_launch_actions
+    #   Request to associate the default Application Migration Service
+    #   Security group with the Replication Settings template.
+    #   @return [Types::PostLaunchActions]
+    #
+    # @!attribute [rw] tags
+    #   Request to associate the default Application Migration Service
+    #   Security group with the Replication Settings template.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/CreateLaunchConfigurationTemplateRequest AWS API Documentation
+    #
+    class CreateLaunchConfigurationTemplateRequest < Struct.new(
+      :post_launch_actions,
+      :tags)
+      SENSITIVE = [:tags]
       include Aws::Structure
     end
 
@@ -394,6 +449,29 @@ module Aws::Mgn
     #
     class DeleteJobResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteLaunchConfigurationTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         launch_configuration_template_id: "LaunchConfigurationTemplateID", # required
+    #       }
+    #
+    # @!attribute [rw] launch_configuration_template_id
+    #   ID of resource to be deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DeleteLaunchConfigurationTemplateRequest AWS API Documentation
+    #
+    class DeleteLaunchConfigurationTemplateRequest < Struct.new(
+      :launch_configuration_template_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DeleteLaunchConfigurationTemplateResponse AWS API Documentation
+    #
+    class DeleteLaunchConfigurationTemplateResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteReplicationConfigurationTemplateRequest
     #   data as a hash:
     #
@@ -587,6 +665,54 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DescribeJobsResponse AWS API Documentation
     #
     class DescribeJobsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeLaunchConfigurationTemplatesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         launch_configuration_template_i_ds: ["LaunchConfigurationTemplateID"],
+    #         max_results: 1,
+    #         next_token: "PaginationToken",
+    #       }
+    #
+    # @!attribute [rw] launch_configuration_template_i_ds
+    #   Request to disconnect Source Server from service by Server ID.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   Request to disconnect Source Server from service by Server ID.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Request to disconnect Source Server from service by Server ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DescribeLaunchConfigurationTemplatesRequest AWS API Documentation
+    #
+    class DescribeLaunchConfigurationTemplatesRequest < Struct.new(
+      :launch_configuration_template_i_ds,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   Request to disconnect Source Server from service by Server ID.
+    #   @return [Array<Types::LaunchConfigurationTemplate>]
+    #
+    # @!attribute [rw] next_token
+    #   Request to disconnect Source Server from service by Server ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DescribeLaunchConfigurationTemplatesResponse AWS API Documentation
+    #
+    class DescribeLaunchConfigurationTemplatesResponse < Struct.new(
       :items,
       :next_token)
       SENSITIVE = []
@@ -813,6 +939,35 @@ module Aws::Mgn
     class Disk < Struct.new(
       :bytes,
       :device_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Error details.
+    #
+    # @!attribute [rw] code
+    #   Error details code.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Error details message.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   Error details resourceId.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   Error details resourceType.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ErrorDetails AWS API Documentation
+    #
+    class ErrorDetails < Struct.new(
+      :code,
+      :message,
+      :resource_id,
+      :resource_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1046,6 +1201,40 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # Job type.
+    #
+    # @!attribute [rw] execution_id
+    #   Job type.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_status
+    #   Job type.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   Job type.
+    #   @return [String]
+    #
+    # @!attribute [rw] ssm_document
+    #   Job type.
+    #   @return [Types::SsmDocument]
+    #
+    # @!attribute [rw] ssm_document_type
+    #   Job type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/JobPostLaunchActionsLaunchStatus AWS API Documentation
+    #
+    class JobPostLaunchActionsLaunchStatus < Struct.new(
+      :execution_id,
+      :execution_status,
+      :failure_reason,
+      :ssm_document,
+      :ssm_document_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] boot_mode
     #   Launch configuration boot mode.
     #   @return [String]
@@ -1074,6 +1263,10 @@ module Aws::Mgn
     #   Launch configuration name.
     #   @return [String]
     #
+    # @!attribute [rw] post_launch_actions
+    #   Server participating in Job.
+    #   @return [Types::PostLaunchActions]
+    #
     # @!attribute [rw] source_server_id
     #   Launch configuration Source Server ID.
     #   @return [String]
@@ -1092,9 +1285,37 @@ module Aws::Mgn
       :launch_disposition,
       :licensing,
       :name,
+      :post_launch_actions,
       :source_server_id,
       :target_instance_type_right_sizing_method)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   Copy Private IP during Launch Configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_configuration_template_id
+    #   Copy Private IP during Launch Configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] post_launch_actions
+    #   Copy Private IP during Launch Configuration.
+    #   @return [Types::PostLaunchActions]
+    #
+    # @!attribute [rw] tags
+    #   Copy Private IP during Launch Configuration.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/LaunchConfigurationTemplate AWS API Documentation
+    #
+    class LaunchConfigurationTemplate < Struct.new(
+      :arn,
+      :launch_configuration_template_id,
+      :post_launch_actions,
+      :tags)
+      SENSITIVE = [:tags]
       include Aws::Structure
     end
 
@@ -1422,6 +1643,14 @@ module Aws::Mgn
     #   Participating server launch status.
     #   @return [String]
     #
+    # @!attribute [rw] launched_ec2_instance_id
+    #   Participating server Source Server ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] post_launch_actions_status
+    #   Participating server Source Server ID.
+    #   @return [Types::PostLaunchActionsStatus]
+    #
     # @!attribute [rw] source_server_id
     #   Participating server Source Server ID.
     #   @return [String]
@@ -1430,7 +1659,88 @@ module Aws::Mgn
     #
     class ParticipatingServer < Struct.new(
       :launch_status,
+      :launched_ec2_instance_id,
+      :post_launch_actions_status,
       :source_server_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Server participating in Job.
+    #
+    # @note When making an API call, you may pass PostLaunchActions
+    #   data as a hash:
+    #
+    #       {
+    #         cloud_watch_log_group_name: "CloudWatchLogGroupName",
+    #         deployment: "TEST_AND_CUTOVER", # accepts TEST_AND_CUTOVER, CUTOVER_ONLY
+    #         s3_log_bucket: "S3LogBucketName",
+    #         s3_output_key_prefix: "BoundedString",
+    #         ssm_documents: [
+    #           {
+    #             action_name: "BoundedString", # required
+    #             must_succeed_for_cutover: false,
+    #             parameters: {
+    #               "SsmDocumentParameterName" => [
+    #                 {
+    #                   parameter_name: "SsmParameterStoreParameterName", # required
+    #                   parameter_type: "STRING", # required, accepts STRING
+    #                 },
+    #               ],
+    #             },
+    #             ssm_document_name: "SsmDocumentName", # required
+    #             timeout_seconds: 1,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] cloud_watch_log_group_name
+    #   Server participating in Job.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment
+    #   Server participating in Job.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_log_bucket
+    #   Server participating in Job.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_output_key_prefix
+    #   Server participating in Job.
+    #   @return [String]
+    #
+    # @!attribute [rw] ssm_documents
+    #   Server participating in Job.
+    #   @return [Array<Types::SsmDocument>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/PostLaunchActions AWS API Documentation
+    #
+    class PostLaunchActions < Struct.new(
+      :cloud_watch_log_group_name,
+      :deployment,
+      :s3_log_bucket,
+      :s3_output_key_prefix,
+      :ssm_documents)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Server participating in Job.
+    #
+    # @!attribute [rw] post_launch_actions_launch_status_list
+    #   Server participating in Job.
+    #   @return [Array<Types::JobPostLaunchActionsLaunchStatus>]
+    #
+    # @!attribute [rw] ssm_agent_discovery_datetime
+    #   Server participating in Job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/PostLaunchActionsStatus AWS API Documentation
+    #
+    class PostLaunchActionsStatus < Struct.new(
+      :post_launch_actions_launch_status_list,
+      :ssm_agent_discovery_datetime)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1842,6 +2152,85 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # Source server replication type.
+    #
+    # @note When making an API call, you may pass SsmDocument
+    #   data as a hash:
+    #
+    #       {
+    #         action_name: "BoundedString", # required
+    #         must_succeed_for_cutover: false,
+    #         parameters: {
+    #           "SsmDocumentParameterName" => [
+    #             {
+    #               parameter_name: "SsmParameterStoreParameterName", # required
+    #               parameter_type: "STRING", # required, accepts STRING
+    #             },
+    #           ],
+    #         },
+    #         ssm_document_name: "SsmDocumentName", # required
+    #         timeout_seconds: 1,
+    #       }
+    #
+    # @!attribute [rw] action_name
+    #   Source server replication type.
+    #   @return [String]
+    #
+    # @!attribute [rw] must_succeed_for_cutover
+    #   Source server replication type.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] parameters
+    #   Source server replication type.
+    #   @return [Hash<String,Array<Types::SsmParameterStoreParameter>>]
+    #
+    # @!attribute [rw] ssm_document_name
+    #   Source server replication type.
+    #   @return [String]
+    #
+    # @!attribute [rw] timeout_seconds
+    #   Source server replication type.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/SsmDocument AWS API Documentation
+    #
+    class SsmDocument < Struct.new(
+      :action_name,
+      :must_succeed_for_cutover,
+      :parameters,
+      :ssm_document_name,
+      :timeout_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Source server replication type.
+    #
+    # @note When making an API call, you may pass SsmParameterStoreParameter
+    #   data as a hash:
+    #
+    #       {
+    #         parameter_name: "SsmParameterStoreParameterName", # required
+    #         parameter_type: "STRING", # required, accepts STRING
+    #       }
+    #
+    # @!attribute [rw] parameter_name
+    #   Source server replication type.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameter_type
+    #   Source server replication type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/SsmParameterStoreParameter AWS API Documentation
+    #
+    class SsmParameterStoreParameter < Struct.new(
+      :parameter_name,
+      :parameter_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StartCutoverRequest
     #   data as a hash:
     #
@@ -2087,6 +2476,28 @@ module Aws::Mgn
     #           os_byol: false,
     #         },
     #         name: "SmallBoundedString",
+    #         post_launch_actions: {
+    #           cloud_watch_log_group_name: "CloudWatchLogGroupName",
+    #           deployment: "TEST_AND_CUTOVER", # accepts TEST_AND_CUTOVER, CUTOVER_ONLY
+    #           s3_log_bucket: "S3LogBucketName",
+    #           s3_output_key_prefix: "BoundedString",
+    #           ssm_documents: [
+    #             {
+    #               action_name: "BoundedString", # required
+    #               must_succeed_for_cutover: false,
+    #               parameters: {
+    #                 "SsmDocumentParameterName" => [
+    #                   {
+    #                     parameter_name: "SsmParameterStoreParameterName", # required
+    #                     parameter_type: "STRING", # required, accepts STRING
+    #                   },
+    #                 ],
+    #               },
+    #               ssm_document_name: "SsmDocumentName", # required
+    #               timeout_seconds: 1,
+    #             },
+    #           ],
+    #         },
     #         source_server_id: "SourceServerID", # required
     #         target_instance_type_right_sizing_method: "NONE", # accepts NONE, BASIC
     #       }
@@ -2115,6 +2526,10 @@ module Aws::Mgn
     #   Update Launch configuration name request.
     #   @return [String]
     #
+    # @!attribute [rw] post_launch_actions
+    #   Server participating in Job.
+    #   @return [Types::PostLaunchActions]
+    #
     # @!attribute [rw] source_server_id
     #   Update Launch configuration by Source Server ID request.
     #   @return [String]
@@ -2132,8 +2547,55 @@ module Aws::Mgn
       :launch_disposition,
       :licensing,
       :name,
+      :post_launch_actions,
       :source_server_id,
       :target_instance_type_right_sizing_method)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateLaunchConfigurationTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         launch_configuration_template_id: "LaunchConfigurationTemplateID", # required
+    #         post_launch_actions: {
+    #           cloud_watch_log_group_name: "CloudWatchLogGroupName",
+    #           deployment: "TEST_AND_CUTOVER", # accepts TEST_AND_CUTOVER, CUTOVER_ONLY
+    #           s3_log_bucket: "S3LogBucketName",
+    #           s3_output_key_prefix: "BoundedString",
+    #           ssm_documents: [
+    #             {
+    #               action_name: "BoundedString", # required
+    #               must_succeed_for_cutover: false,
+    #               parameters: {
+    #                 "SsmDocumentParameterName" => [
+    #                   {
+    #                     parameter_name: "SsmParameterStoreParameterName", # required
+    #                     parameter_type: "STRING", # required, accepts STRING
+    #                   },
+    #                 ],
+    #               },
+    #               ssm_document_name: "SsmDocumentName", # required
+    #               timeout_seconds: 1,
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] launch_configuration_template_id
+    #   Update Launch configuration Target instance right sizing request.
+    #   @return [String]
+    #
+    # @!attribute [rw] post_launch_actions
+    #   Update Launch configuration Target instance right sizing request.
+    #   @return [Types::PostLaunchActions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateLaunchConfigurationTemplateRequest AWS API Documentation
+    #
+    class UpdateLaunchConfigurationTemplateRequest < Struct.new(
+      :launch_configuration_template_id,
+      :post_launch_actions)
       SENSITIVE = []
       include Aws::Structure
     end

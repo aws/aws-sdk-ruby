@@ -1619,7 +1619,17 @@ module Aws::SageMaker
     WaitIntervalInSeconds = Shapes::IntegerShape.new(name: 'WaitIntervalInSeconds')
     Workforce = Shapes::StructureShape.new(name: 'Workforce')
     WorkforceArn = Shapes::StringShape.new(name: 'WorkforceArn')
+    WorkforceFailureReason = Shapes::StringShape.new(name: 'WorkforceFailureReason')
     WorkforceName = Shapes::StringShape.new(name: 'WorkforceName')
+    WorkforceSecurityGroupId = Shapes::StringShape.new(name: 'WorkforceSecurityGroupId')
+    WorkforceSecurityGroupIds = Shapes::ListShape.new(name: 'WorkforceSecurityGroupIds')
+    WorkforceStatus = Shapes::StringShape.new(name: 'WorkforceStatus')
+    WorkforceSubnetId = Shapes::StringShape.new(name: 'WorkforceSubnetId')
+    WorkforceSubnets = Shapes::ListShape.new(name: 'WorkforceSubnets')
+    WorkforceVpcConfigRequest = Shapes::StructureShape.new(name: 'WorkforceVpcConfigRequest')
+    WorkforceVpcConfigResponse = Shapes::StructureShape.new(name: 'WorkforceVpcConfigResponse')
+    WorkforceVpcEndpointId = Shapes::StringShape.new(name: 'WorkforceVpcEndpointId')
+    WorkforceVpcId = Shapes::StringShape.new(name: 'WorkforceVpcId')
     Workforces = Shapes::ListShape.new(name: 'Workforces')
     Workteam = Shapes::StructureShape.new(name: 'Workteam')
     WorkteamArn = Shapes::StringShape.new(name: 'WorkteamArn')
@@ -2677,6 +2687,7 @@ module Aws::SageMaker
     CreateWorkforceRequest.add_member(:source_ip_config, Shapes::ShapeRef.new(shape: SourceIpConfig, location_name: "SourceIpConfig"))
     CreateWorkforceRequest.add_member(:workforce_name, Shapes::ShapeRef.new(shape: WorkforceName, required: true, location_name: "WorkforceName"))
     CreateWorkforceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateWorkforceRequest.add_member(:workforce_vpc_config, Shapes::ShapeRef.new(shape: WorkforceVpcConfigRequest, location_name: "WorkforceVpcConfig"))
     CreateWorkforceRequest.struct_class = Types::CreateWorkforceRequest
 
     CreateWorkforceResponse.add_member(:workforce_arn, Shapes::ShapeRef.new(shape: WorkforceArn, required: true, location_name: "WorkforceArn"))
@@ -4473,6 +4484,7 @@ module Aws::SageMaker
     LabelingJobOutputConfig.struct_class = Types::LabelingJobOutputConfig
 
     LabelingJobResourceConfig.add_member(:volume_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
+    LabelingJobResourceConfig.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
     LabelingJobResourceConfig.struct_class = Types::LabelingJobResourceConfig
 
     LabelingJobS3DataSource.add_member(:manifest_s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "ManifestS3Uri"))
@@ -7078,6 +7090,7 @@ module Aws::SageMaker
     UpdateWorkforceRequest.add_member(:workforce_name, Shapes::ShapeRef.new(shape: WorkforceName, required: true, location_name: "WorkforceName"))
     UpdateWorkforceRequest.add_member(:source_ip_config, Shapes::ShapeRef.new(shape: SourceIpConfig, location_name: "SourceIpConfig"))
     UpdateWorkforceRequest.add_member(:oidc_config, Shapes::ShapeRef.new(shape: OidcConfig, location_name: "OidcConfig"))
+    UpdateWorkforceRequest.add_member(:workforce_vpc_config, Shapes::ShapeRef.new(shape: WorkforceVpcConfigRequest, location_name: "WorkforceVpcConfig"))
     UpdateWorkforceRequest.struct_class = Types::UpdateWorkforceRequest
 
     UpdateWorkforceResponse.add_member(:workforce, Shapes::ShapeRef.new(shape: Workforce, required: true, location_name: "Workforce"))
@@ -7142,7 +7155,25 @@ module Aws::SageMaker
     Workforce.add_member(:cognito_config, Shapes::ShapeRef.new(shape: CognitoConfig, location_name: "CognitoConfig"))
     Workforce.add_member(:oidc_config, Shapes::ShapeRef.new(shape: OidcConfigForResponse, location_name: "OidcConfig"))
     Workforce.add_member(:create_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreateDate"))
+    Workforce.add_member(:workforce_vpc_config, Shapes::ShapeRef.new(shape: WorkforceVpcConfigResponse, location_name: "WorkforceVpcConfig"))
+    Workforce.add_member(:status, Shapes::ShapeRef.new(shape: WorkforceStatus, location_name: "Status"))
+    Workforce.add_member(:failure_reason, Shapes::ShapeRef.new(shape: WorkforceFailureReason, location_name: "FailureReason"))
     Workforce.struct_class = Types::Workforce
+
+    WorkforceSecurityGroupIds.member = Shapes::ShapeRef.new(shape: WorkforceSecurityGroupId)
+
+    WorkforceSubnets.member = Shapes::ShapeRef.new(shape: WorkforceSubnetId)
+
+    WorkforceVpcConfigRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: WorkforceVpcId, location_name: "VpcId"))
+    WorkforceVpcConfigRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: WorkforceSecurityGroupIds, location_name: "SecurityGroupIds"))
+    WorkforceVpcConfigRequest.add_member(:subnets, Shapes::ShapeRef.new(shape: WorkforceSubnets, location_name: "Subnets"))
+    WorkforceVpcConfigRequest.struct_class = Types::WorkforceVpcConfigRequest
+
+    WorkforceVpcConfigResponse.add_member(:vpc_id, Shapes::ShapeRef.new(shape: WorkforceVpcId, required: true, location_name: "VpcId"))
+    WorkforceVpcConfigResponse.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: WorkforceSecurityGroupIds, required: true, location_name: "SecurityGroupIds"))
+    WorkforceVpcConfigResponse.add_member(:subnets, Shapes::ShapeRef.new(shape: WorkforceSubnets, required: true, location_name: "Subnets"))
+    WorkforceVpcConfigResponse.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: WorkforceVpcEndpointId, location_name: "VpcEndpointId"))
+    WorkforceVpcConfigResponse.struct_class = Types::WorkforceVpcConfigResponse
 
     Workforces.member = Shapes::ShapeRef.new(shape: Workforce)
 
@@ -9750,6 +9781,7 @@ module Aws::SageMaker
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateWorkforceRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateWorkforceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:update_workteam, Seahorse::Model::Operation.new.tap do |o|
