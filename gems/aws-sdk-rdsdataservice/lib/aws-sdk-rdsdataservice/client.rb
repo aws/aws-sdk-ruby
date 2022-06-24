@@ -362,6 +362,18 @@ module Aws::RDSDataService
     # `transactionID` parameter, changes that result from the call are
     # committed automatically.
     #
+    #  There isn't a fixed upper limit on the number of parameter sets.
+    # However, the maximum size of the HTTP request submitted through the
+    # Data API is 4 MiB. If the request exceeds this limit, the Data API
+    # returns an error and doesn't process the request. This 4-MiB limit
+    # includes the size of the HTTP headers and the JSON notation in the
+    # request. Thus, the number of parameter sets that you can include
+    # depends on a combination of factors, such as the size of the SQL
+    # statement and the size of each parameter set.
+    #
+    #  The response size limit is 1 MiB. If the call returns more than 1 MiB
+    # of response data, the call is terminated.
+    #
     # @option params [String] :database
     #   The name of the database.
     #
@@ -388,10 +400,19 @@ module Aws::RDSDataService
     #   The name of the database schema.
     #
     # @option params [required, String] :secret_arn
-    #   The name or ARN of the secret that enables access to the DB cluster.
+    #   The ARN of the secret that enables access to the DB cluster. Enter the
+    #   database user name and password for the credentials in the secret.
+    #
+    #   For information about creating the secret, see [Create a database
+    #   secret][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html
     #
     # @option params [required, String] :sql
-    #   The SQL statement to run.
+    #   The SQL statement to run. Don't include a semicolon (;) at the end of
+    #   the SQL statement.
     #
     # @option params [String] :transaction_id
     #   The identifier of a transaction that was started by using the
@@ -559,7 +580,15 @@ module Aws::RDSDataService
     #
     # @option params [required, String] :aws_secret_store_arn
     #   The Amazon Resource Name (ARN) of the secret that enables access to
-    #   the DB cluster.
+    #   the DB cluster. Enter the database user name and password for the
+    #   credentials in the secret.
+    #
+    #   For information about creating the secret, see [Create a database
+    #   secret][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html
     #
     # @option params [String] :database
     #   The name of the database.
@@ -641,7 +670,7 @@ module Aws::RDSDataService
     # `transactionID` parameter, changes that result from the call are
     # committed automatically.
     #
-    # If the binary response data from the database is more than 1 MB, the
+    #  If the binary response data from the database is more than 1 MB, the
     # call is terminated.
     #
     # @option params [Boolean] :continue_after_timeout
@@ -695,7 +724,15 @@ module Aws::RDSDataService
     #    </note>
     #
     # @option params [required, String] :secret_arn
-    #   The name or ARN of the secret that enables access to the DB cluster.
+    #   The ARN of the secret that enables access to the DB cluster. Enter the
+    #   database user name and password for the credentials in the secret.
+    #
+    #   For information about creating the secret, see [Create a database
+    #   secret][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html
     #
     # @option params [required, String] :sql
     #   The SQL statement to run.
@@ -873,7 +910,7 @@ module Aws::RDSDataService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rdsdataservice'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

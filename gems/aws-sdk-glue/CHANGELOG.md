@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.113.0 (2022-06-24)
+------------------
+
+* Feature - This release enables the new ListCrawls API for viewing the AWS Glue Crawler run history.
+
 1.112.0 (2022-05-17)
 ------------------
 

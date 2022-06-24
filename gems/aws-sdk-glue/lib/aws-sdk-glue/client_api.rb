@@ -179,10 +179,14 @@ module Aws::Glue
     ConnectionsList = Shapes::StructureShape.new(name: 'ConnectionsList')
     ContextWords = Shapes::ListShape.new(name: 'ContextWords')
     Crawl = Shapes::StructureShape.new(name: 'Crawl')
+    CrawlId = Shapes::StringShape.new(name: 'CrawlId')
     CrawlList = Shapes::ListShape.new(name: 'CrawlList')
     CrawlState = Shapes::StringShape.new(name: 'CrawlState')
     Crawler = Shapes::StructureShape.new(name: 'Crawler')
     CrawlerConfiguration = Shapes::StringShape.new(name: 'CrawlerConfiguration')
+    CrawlerHistory = Shapes::StructureShape.new(name: 'CrawlerHistory')
+    CrawlerHistoryList = Shapes::ListShape.new(name: 'CrawlerHistoryList')
+    CrawlerHistoryState = Shapes::StringShape.new(name: 'CrawlerHistoryState')
     CrawlerLineageSettings = Shapes::StringShape.new(name: 'CrawlerLineageSettings')
     CrawlerList = Shapes::ListShape.new(name: 'CrawlerList')
     CrawlerMetrics = Shapes::StructureShape.new(name: 'CrawlerMetrics')
@@ -195,6 +199,8 @@ module Aws::Glue
     CrawlerState = Shapes::StringShape.new(name: 'CrawlerState')
     CrawlerStoppingException = Shapes::StructureShape.new(name: 'CrawlerStoppingException')
     CrawlerTargets = Shapes::StructureShape.new(name: 'CrawlerTargets')
+    CrawlsFilter = Shapes::StructureShape.new(name: 'CrawlsFilter')
+    CrawlsFilterList = Shapes::ListShape.new(name: 'CrawlsFilterList')
     CreateBlueprintRequest = Shapes::StructureShape.new(name: 'CreateBlueprintRequest')
     CreateBlueprintResponse = Shapes::StructureShape.new(name: 'CreateBlueprintResponse')
     CreateClassifierRequest = Shapes::StructureShape.new(name: 'CreateClassifierRequest')
@@ -361,6 +367,7 @@ module Aws::Glue
     ExistCondition = Shapes::StringShape.new(name: 'ExistCondition')
     ExportLabelsTaskRunProperties = Shapes::StructureShape.new(name: 'ExportLabelsTaskRunProperties')
     ExtendedString = Shapes::StringShape.new(name: 'ExtendedString')
+    FieldName = Shapes::StringShape.new(name: 'FieldName')
     FieldType = Shapes::StringShape.new(name: 'FieldType')
     FillMissingValues = Shapes::StructureShape.new(name: 'FillMissingValues')
     Filter = Shapes::StructureShape.new(name: 'Filter')
@@ -368,6 +375,7 @@ module Aws::Glue
     FilterExpressions = Shapes::ListShape.new(name: 'FilterExpressions')
     FilterLogicalOperator = Shapes::StringShape.new(name: 'FilterLogicalOperator')
     FilterOperation = Shapes::StringShape.new(name: 'FilterOperation')
+    FilterOperator = Shapes::StringShape.new(name: 'FilterOperator')
     FilterString = Shapes::StringShape.new(name: 'FilterString')
     FilterValue = Shapes::StructureShape.new(name: 'FilterValue')
     FilterValueType = Shapes::StringShape.new(name: 'FilterValueType')
@@ -589,6 +597,8 @@ module Aws::Glue
     ListBlueprintsResponse = Shapes::StructureShape.new(name: 'ListBlueprintsResponse')
     ListCrawlersRequest = Shapes::StructureShape.new(name: 'ListCrawlersRequest')
     ListCrawlersResponse = Shapes::StructureShape.new(name: 'ListCrawlersResponse')
+    ListCrawlsRequest = Shapes::StructureShape.new(name: 'ListCrawlsRequest')
+    ListCrawlsResponse = Shapes::StructureShape.new(name: 'ListCrawlsResponse')
     ListCustomEntityTypesRequest = Shapes::StructureShape.new(name: 'ListCustomEntityTypesRequest')
     ListCustomEntityTypesResponse = Shapes::StructureShape.new(name: 'ListCustomEntityTypesResponse')
     ListDevEndpointsRequest = Shapes::StructureShape.new(name: 'ListDevEndpointsRequest')
@@ -1600,6 +1610,20 @@ module Aws::Glue
     Crawler.add_member(:lake_formation_configuration, Shapes::ShapeRef.new(shape: LakeFormationConfiguration, location_name: "LakeFormationConfiguration"))
     Crawler.struct_class = Types::Crawler
 
+    CrawlerHistory.add_member(:crawl_id, Shapes::ShapeRef.new(shape: CrawlId, location_name: "CrawlId"))
+    CrawlerHistory.add_member(:state, Shapes::ShapeRef.new(shape: CrawlerHistoryState, location_name: "State"))
+    CrawlerHistory.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
+    CrawlerHistory.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
+    CrawlerHistory.add_member(:summary, Shapes::ShapeRef.new(shape: NameString, location_name: "Summary"))
+    CrawlerHistory.add_member(:error_message, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "ErrorMessage"))
+    CrawlerHistory.add_member(:log_group, Shapes::ShapeRef.new(shape: LogGroup, location_name: "LogGroup"))
+    CrawlerHistory.add_member(:log_stream, Shapes::ShapeRef.new(shape: LogStream, location_name: "LogStream"))
+    CrawlerHistory.add_member(:message_prefix, Shapes::ShapeRef.new(shape: MessagePrefix, location_name: "MessagePrefix"))
+    CrawlerHistory.add_member(:dpu_hour, Shapes::ShapeRef.new(shape: NonNegativeDouble, location_name: "DPUHour"))
+    CrawlerHistory.struct_class = Types::CrawlerHistory
+
+    CrawlerHistoryList.member = Shapes::ShapeRef.new(shape: CrawlerHistory)
+
     CrawlerList.member = Shapes::ShapeRef.new(shape: Crawler)
 
     CrawlerMetrics.add_member(:crawler_name, Shapes::ShapeRef.new(shape: NameString, location_name: "CrawlerName"))
@@ -1635,6 +1659,13 @@ module Aws::Glue
     CrawlerTargets.add_member(:catalog_targets, Shapes::ShapeRef.new(shape: CatalogTargetList, location_name: "CatalogTargets"))
     CrawlerTargets.add_member(:delta_targets, Shapes::ShapeRef.new(shape: DeltaTargetList, location_name: "DeltaTargets"))
     CrawlerTargets.struct_class = Types::CrawlerTargets
+
+    CrawlsFilter.add_member(:field_name, Shapes::ShapeRef.new(shape: FieldName, location_name: "FieldName"))
+    CrawlsFilter.add_member(:filter_operator, Shapes::ShapeRef.new(shape: FilterOperator, location_name: "FilterOperator"))
+    CrawlsFilter.add_member(:field_value, Shapes::ShapeRef.new(shape: GenericString, location_name: "FieldValue"))
+    CrawlsFilter.struct_class = Types::CrawlsFilter
+
+    CrawlsFilterList.member = Shapes::ShapeRef.new(shape: CrawlsFilter)
 
     CreateBlueprintRequest.add_member(:name, Shapes::ShapeRef.new(shape: OrchestrationNameString, required: true, location_name: "Name"))
     CreateBlueprintRequest.add_member(:description, Shapes::ShapeRef.new(shape: Generic512CharString, location_name: "Description"))
@@ -3284,6 +3315,16 @@ module Aws::Glue
     ListCrawlersResponse.add_member(:crawler_names, Shapes::ShapeRef.new(shape: CrawlerNameList, location_name: "CrawlerNames"))
     ListCrawlersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListCrawlersResponse.struct_class = Types::ListCrawlersResponse
+
+    ListCrawlsRequest.add_member(:crawler_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "CrawlerName"))
+    ListCrawlsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    ListCrawlsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: CrawlsFilterList, location_name: "Filters"))
+    ListCrawlsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListCrawlsRequest.struct_class = Types::ListCrawlsRequest
+
+    ListCrawlsResponse.add_member(:crawls, Shapes::ShapeRef.new(shape: CrawlerHistoryList, location_name: "Crawls"))
+    ListCrawlsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListCrawlsResponse.struct_class = Types::ListCrawlsResponse
 
     ListCustomEntityTypesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListCustomEntityTypesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
@@ -6453,6 +6494,17 @@ module Aws::Glue
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_crawls, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCrawls"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListCrawlsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListCrawlsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
       end)
 
       api.add_operation(:list_custom_entity_types, Seahorse::Model::Operation.new.tap do |o|

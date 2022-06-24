@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2022-06-24)
+------------------
+
+* Feature - Documentation updates for RDS Data API
+
 1.35.0 (2022-04-25)
 ------------------
 

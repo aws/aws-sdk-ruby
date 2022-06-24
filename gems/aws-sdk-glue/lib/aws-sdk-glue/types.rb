@@ -4124,8 +4124,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] lake_formation_configuration
-    #   Specifies whether the crawler should use AWS Lake Formation
-    #   credentials for the crawler instead of the IAM role credentials.
+    #   Specifies whether the crawler should use Lake Formation credentials
+    #   for the crawler instead of the IAM role credentials.
     #   @return [Types::LakeFormationConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Crawler AWS API Documentation
@@ -4151,6 +4151,67 @@ module Aws::Glue
       :configuration,
       :crawler_security_configuration,
       :lake_formation_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the information for a run of a crawler.
+    #
+    # @!attribute [rw] crawl_id
+    #   A UUID identifier for each crawl.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the crawl.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The date and time on which the crawl started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The date and time on which the crawl ended.
+    #   @return [Time]
+    #
+    # @!attribute [rw] summary
+    #   A run summary for the specific crawl in JSON. Contains the catalog
+    #   tables and partitions that were added, updated, or deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   If an error occurred, the error message associated with the crawl.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_group
+    #   The log group associated with the crawl.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_stream
+    #   The log stream associated with the crawl.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_prefix
+    #   The prefix for a CloudWatch message about this crawl.
+    #   @return [String]
+    #
+    # @!attribute [rw] dpu_hour
+    #   The number of data processing units (DPU) used in hours for the
+    #   crawl.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CrawlerHistory AWS API Documentation
+    #
+    class CrawlerHistory < Struct.new(
+      :crawl_id,
+      :state,
+      :start_time,
+      :end_time,
+      :summary,
+      :error_message,
+      :log_group,
+      :log_stream,
+      :message_prefix,
+      :dpu_hour)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4348,6 +4409,64 @@ module Aws::Glue
       :dynamo_db_targets,
       :catalog_targets,
       :delta_targets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of fields, comparators and value that you can use to filter the
+    # crawler runs for a specified crawler.
+    #
+    # @note When making an API call, you may pass CrawlsFilter
+    #   data as a hash:
+    #
+    #       {
+    #         field_name: "CRAWL_ID", # accepts CRAWL_ID, STATE, START_TIME, END_TIME, DPU_HOUR
+    #         filter_operator: "GT", # accepts GT, GE, LT, LE, EQ, NE
+    #         field_value: "GenericString",
+    #       }
+    #
+    # @!attribute [rw] field_name
+    #   A key used to filter the crawler runs for a specified crawler. Valid
+    #   values for each of the field names are:
+    #
+    #   * `CRAWL_ID`\: A string representing the UUID identifier for a
+    #     crawl.
+    #
+    #   * `STATE`\: A string representing the state of the crawl.
+    #
+    #   * `START_TIME` and `END_TIME`\: The epoch timestamp in milliseconds.
+    #
+    #   * `DPU_HOUR`\: The number of data processing unit (DPU) hours used
+    #     for the crawl.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_operator
+    #   A defined comparator that operates on the value. The available
+    #   operators are:
+    #
+    #   * `GT`\: Greater than.
+    #
+    #   * `GE`\: Greater than or equal to.
+    #
+    #   * `LT`\: Less than.
+    #
+    #   * `LE`\: Less than or equal to.
+    #
+    #   * `EQ`\: Equal to.
+    #
+    #   * `NE`\: Not equal to.
+    #   @return [String]
+    #
+    # @!attribute [rw] field_value
+    #   The value provided for comparison on the crawl field.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CrawlsFilter AWS API Documentation
+    #
+    class CrawlsFilter < Struct.new(
+      :field_name,
+      :filter_operator,
+      :field_value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4652,7 +4771,7 @@ module Aws::Glue
     #   @return [Types::LineageConfiguration]
     #
     # @!attribute [rw] lake_formation_configuration
-    #   Specifies AWS Lake Formation configuration settings for the crawler.
+    #   Specifies Lake Formation configuration settings for the crawler.
     #   @return [Types::LakeFormationConfiguration]
     #
     # @!attribute [rw] configuration
@@ -16246,7 +16365,7 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # Specifies AWS Lake Formation configuration settings for the crawler.
+    # Specifies Lake Formation configuration settings for the crawler.
     #
     # @note When making an API call, you may pass LakeFormationConfiguration
     #   data as a hash:
@@ -16257,8 +16376,8 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] use_lake_formation_credentials
-    #   Specifies whether to use AWS Lake Formation credentials for the
-    #   crawler instead of the IAM role credentials.
+    #   Specifies whether to use Lake Formation credentials for the crawler
+    #   instead of the IAM role credentials.
     #   @return [Boolean]
     #
     # @!attribute [rw] account_id
@@ -16475,6 +16594,70 @@ module Aws::Glue
     #
     class ListCrawlersResponse < Struct.new(
       :crawler_names,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListCrawlsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         crawler_name: "NameString", # required
+    #         max_results: 1,
+    #         filters: [
+    #           {
+    #             field_name: "CRAWL_ID", # accepts CRAWL_ID, STATE, START_TIME, END_TIME, DPU_HOUR
+    #             filter_operator: "GT", # accepts GT, GE, LT, LE, EQ, NE
+    #             field_value: "GenericString",
+    #           },
+    #         ],
+    #         next_token: "Token",
+    #       }
+    #
+    # @!attribute [rw] crawler_name
+    #   The name of the crawler whose runs you want to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return. The default is 20, and
+    #   maximum is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filters
+    #   Filters the crawls by the criteria you specify in a list of
+    #   `CrawlsFilter` objects.
+    #   @return [Array<Types::CrawlsFilter>]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if this is a continuation call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListCrawlsRequest AWS API Documentation
+    #
+    class ListCrawlsRequest < Struct.new(
+      :crawler_name,
+      :max_results,
+      :filters,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] crawls
+    #   A list of `CrawlerHistory` objects representing the crawl runs that
+    #   meet your criteria.
+    #   @return [Array<Types::CrawlerHistory>]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token for paginating the returned list of tokens,
+    #   returned if the current segment of the list is not the last.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListCrawlsResponse AWS API Documentation
+    #
+    class ListCrawlsResponse < Struct.new(
+      :crawls,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -24045,7 +24228,7 @@ module Aws::Glue
     #   @return [Types::LineageConfiguration]
     #
     # @!attribute [rw] lake_formation_configuration
-    #   Specifies AWS Lake Formation configuration settings for the crawler.
+    #   Specifies Lake Formation configuration settings for the crawler.
     #   @return [Types::LakeFormationConfiguration]
     #
     # @!attribute [rw] configuration

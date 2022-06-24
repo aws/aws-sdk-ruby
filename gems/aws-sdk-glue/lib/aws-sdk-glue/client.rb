@@ -2265,7 +2265,7 @@ module Aws::Glue
     #   Specifies data lineage configuration settings for the crawler.
     #
     # @option params [Types::LakeFormationConfiguration] :lake_formation_configuration
-    #   Specifies AWS Lake Formation configuration settings for the crawler.
+    #   Specifies Lake Formation configuration settings for the crawler.
     #
     # @option params [String] :configuration
     #   Crawler configuration information. This versioned JSON string allows
@@ -10918,6 +10918,82 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Returns all the crawls of a specified crawler. Returns only the crawls
+    # that have occurred since the launch date of the crawler history
+    # feature, and only retains up to 12 months of crawls. Older crawls will
+    # not be returned.
+    #
+    # You may use this API to:
+    #
+    # * Retrive all the crawls of a specified crawler.
+    #
+    # * Retrieve all the crawls of a specified crawler within a limited
+    #   count.
+    #
+    # * Retrieve all the crawls of a specified crawler in a specific time
+    #   range.
+    #
+    # * Retrieve all the crawls of a specified crawler with a particular
+    #   state, crawl ID, or DPU hour value.
+    #
+    # @option params [required, String] :crawler_name
+    #   The name of the crawler whose runs you want to retrieve.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return. The default is 20, and
+    #   maximum is 100.
+    #
+    # @option params [Array<Types::CrawlsFilter>] :filters
+    #   Filters the crawls by the criteria you specify in a list of
+    #   `CrawlsFilter` objects.
+    #
+    # @option params [String] :next_token
+    #   A continuation token, if this is a continuation call.
+    #
+    # @return [Types::ListCrawlsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCrawlsResponse#crawls #crawls} => Array&lt;Types::CrawlerHistory&gt;
+    #   * {Types::ListCrawlsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_crawls({
+    #     crawler_name: "NameString", # required
+    #     max_results: 1,
+    #     filters: [
+    #       {
+    #         field_name: "CRAWL_ID", # accepts CRAWL_ID, STATE, START_TIME, END_TIME, DPU_HOUR
+    #         filter_operator: "GT", # accepts GT, GE, LT, LE, EQ, NE
+    #         field_value: "GenericString",
+    #       },
+    #     ],
+    #     next_token: "Token",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.crawls #=> Array
+    #   resp.crawls[0].crawl_id #=> String
+    #   resp.crawls[0].state #=> String, one of "RUNNING", "COMPLETED", "FAILED", "STOPPED"
+    #   resp.crawls[0].start_time #=> Time
+    #   resp.crawls[0].end_time #=> Time
+    #   resp.crawls[0].summary #=> String
+    #   resp.crawls[0].error_message #=> String
+    #   resp.crawls[0].log_group #=> String
+    #   resp.crawls[0].log_stream #=> String
+    #   resp.crawls[0].message_prefix #=> String
+    #   resp.crawls[0].dpu_hour #=> Float
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListCrawls AWS API Documentation
+    #
+    # @overload list_crawls(params = {})
+    # @param [Hash] params ({})
+    def list_crawls(params = {}, options = {})
+      req = build_request(:list_crawls, params)
+      req.send_request(options)
+    end
+
     # Lists all the custom patterns that have been created.
     #
     # @option params [String] :next_token
@@ -13327,7 +13403,7 @@ module Aws::Glue
     #   Specifies data lineage configuration settings for the crawler.
     #
     # @option params [Types::LakeFormationConfiguration] :lake_formation_configuration
-    #   Specifies AWS Lake Formation configuration settings for the crawler.
+    #   Specifies Lake Formation configuration settings for the crawler.
     #
     # @option params [String] :configuration
     #   Crawler configuration information. This versioned JSON string allows
@@ -14974,7 +15050,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.112.0'
+      context[:gem_version] = '1.113.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

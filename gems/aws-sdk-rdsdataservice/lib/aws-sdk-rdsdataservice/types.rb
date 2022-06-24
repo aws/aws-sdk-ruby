@@ -156,11 +156,21 @@ module Aws::RDSDataService
     #   @return [String]
     #
     # @!attribute [rw] secret_arn
-    #   The name or ARN of the secret that enables access to the DB cluster.
+    #   The ARN of the secret that enables access to the DB cluster. Enter
+    #   the database user name and password for the credentials in the
+    #   secret.
+    #
+    #   For information about creating the secret, see [Create a database
+    #   secret][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html
     #   @return [String]
     #
     # @!attribute [rw] sql
-    #   The SQL statement to run.
+    #   The SQL statement to run. Don't include a semicolon (;) at the end
+    #   of the SQL statement.
     #   @return [String]
     #
     # @!attribute [rw] transaction_id
@@ -400,7 +410,15 @@ module Aws::RDSDataService
     #
     # @!attribute [rw] aws_secret_store_arn
     #   The Amazon Resource Name (ARN) of the secret that enables access to
-    #   the DB cluster.
+    #   the DB cluster. Enter the database user name and password for the
+    #   credentials in the secret.
+    #
+    #   For information about creating the secret, see [Create a database
+    #   secret][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html
     #   @return [String]
     #
     # @!attribute [rw] database
@@ -556,7 +574,16 @@ module Aws::RDSDataService
     #   @return [String]
     #
     # @!attribute [rw] secret_arn
-    #   The name or ARN of the secret that enables access to the DB cluster.
+    #   The ARN of the secret that enables access to the DB cluster. Enter
+    #   the database user name and password for the credentials in the
+    #   secret.
+    #
+    #   For information about creating the secret, see [Create a database
+    #   secret][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html
     #   @return [String]
     #
     # @!attribute [rw] sql
