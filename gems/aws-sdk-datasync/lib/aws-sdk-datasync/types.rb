@@ -243,8 +243,9 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] in_transit_encryption
-    #   Specifies whether you want DataSync to use TLS encryption when
-    #   transferring data to or from your Amazon EFS file system.
+    #   Specifies whether you want DataSync to use Transport Layer Security
+    #   (TLS) 1.2 encryption when it copies data to or from the Amazon EFS
+    #   file system.
     #
     #   If you specify an access point using `AccessPointArn` or an IAM role
     #   using `FileSystemAccessRoleArn`, you must set this parameter to
@@ -341,6 +342,106 @@ module Aws::DataSync
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateLocationFsxOntapRequest
+    #   data as a hash:
+    #
+    #       {
+    #         protocol: { # required
+    #           nfs: {
+    #             mount_options: {
+    #               version: "AUTOMATIC", # accepts AUTOMATIC, NFS3, NFS4_0, NFS4_1
+    #             },
+    #           },
+    #           smb: {
+    #             domain: "SmbDomain",
+    #             mount_options: {
+    #               version: "AUTOMATIC", # accepts AUTOMATIC, SMB2, SMB3
+    #             },
+    #             password: "SmbPassword", # required
+    #             user: "SmbUser", # required
+    #           },
+    #         },
+    #         security_group_arns: ["Ec2SecurityGroupArn"], # required
+    #         storage_virtual_machine_arn: "StorageVirtualMachineArn", # required
+    #         subdirectory: "FsxOntapSubdirectory",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] protocol
+    #   Specifies the data transfer protocol that DataSync uses to access
+    #   your Amazon FSx file system.
+    #   @return [Types::FsxProtocol]
+    #
+    # @!attribute [rw] security_group_arns
+    #   Specifies the security groups that DataSync can use to access your
+    #   FSx for ONTAP file system. You must configure the security groups to
+    #   allow outbound traffic on the following ports (depending on the
+    #   protocol that you're using):
+    #
+    #   * **Network File System (NFS)**\: TCP port 2049
+    #
+    #   * **Server Message Block (SMB)**\: TCP port 445
+    #
+    #   Your file system's security groups must also allow inbound traffic
+    #   on the same port.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] storage_virtual_machine_arn
+    #   Specifies the ARN of the storage virtual machine (SVM) on your file
+    #   system where you're copying data to or from.
+    #   @return [String]
+    #
+    # @!attribute [rw] subdirectory
+    #   Specifies the junction path (also known as a mount point) in the SVM
+    #   volume where you're copying data to or from (for example, `/vol1`).
+    #
+    #   <note markdown="1"> Don't specify a junction path in the SVM's root volume. For more
+    #   information, see [Managing FSx for ONTAP storage virtual
+    #   machines][1] in the *Amazon FSx for NetApp ONTAP User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-svms.html
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Specifies labels that help you categorize, filter, and search for
+    #   your Amazon Web Services resources. We recommend creating at least a
+    #   name tag for your location.
+    #   @return [Array<Types::TagListEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationFsxOntapRequest AWS API Documentation
+    #
+    class CreateLocationFsxOntapRequest < Struct.new(
+      :protocol,
+      :security_group_arns,
+      :storage_virtual_machine_arn,
+      :subdirectory,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] location_arn
+    #   Specifies the ARN of the FSx for ONTAP file system location that you
+    #   create.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationFsxOntapResponse AWS API Documentation
+    #
+    class CreateLocationFsxOntapResponse < Struct.new(
+      :location_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateLocationFsxOpenZfsRequest
     #   data as a hash:
     #
@@ -351,6 +452,14 @@ module Aws::DataSync
     #             mount_options: {
     #               version: "AUTOMATIC", # accepts AUTOMATIC, NFS3, NFS4_0, NFS4_1
     #             },
+    #           },
+    #           smb: {
+    #             domain: "SmbDomain",
+    #             mount_options: {
+    #               version: "AUTOMATIC", # accepts AUTOMATIC, SMB2, SMB3
+    #             },
+    #             password: "SmbPassword", # required
+    #             user: "SmbUser", # required
     #           },
     #         },
     #         security_group_arns: ["Ec2SecurityGroupArn"], # required
@@ -811,59 +920,53 @@ module Aws::DataSync
     #       }
     #
     # @!attribute [rw] server_hostname
-    #   The name of the self-managed object storage server. This value is
-    #   the IP address or Domain Name Service (DNS) name of the object
-    #   storage server. An agent uses this hostname to mount the object
+    #   Specifies the domain name or IP address of the object storage
+    #   server. A DataSync agent uses this hostname to mount the object
     #   storage server in a network.
     #   @return [String]
     #
     # @!attribute [rw] server_port
-    #   The port that your self-managed object storage server accepts
-    #   inbound network traffic on. The server port is set by default to TCP
-    #   80 (HTTP) or TCP 443 (HTTPS). You can specify a custom port if your
-    #   self-managed object storage server requires one.
+    #   Specifies the port that your object storage server accepts inbound
+    #   network traffic on (for example, port 443).
     #   @return [Integer]
     #
     # @!attribute [rw] server_protocol
-    #   The protocol that the object storage server uses to communicate.
-    #   Valid values are HTTP or HTTPS.
+    #   Specifies the protocol that your object storage server uses to
+    #   communicate.
     #   @return [String]
     #
     # @!attribute [rw] subdirectory
-    #   The subdirectory in the self-managed object storage server that is
-    #   used to read data from.
+    #   Specifies the object prefix for your object storage server. If this
+    #   is a source location, DataSync only copies objects with this prefix.
+    #   If this is a destination location, DataSync writes all objects with
+    #   this prefix.
     #   @return [String]
     #
     # @!attribute [rw] bucket_name
-    #   The bucket on the self-managed object storage server that is used to
-    #   read data from.
+    #   Specifies the name of the object storage bucket involved in the
+    #   transfer.
     #   @return [String]
     #
     # @!attribute [rw] access_key
-    #   Optional. The access key is used if credentials are required to
-    #   access the self-managed object storage server. If your object
-    #   storage requires a user name and password to authenticate, use
-    #   `AccessKey` and `SecretKey` to provide the user name and password,
-    #   respectively.
+    #   Specifies the access key (for example, a user name) if credentials
+    #   are required to authenticate with the object storage server.
     #   @return [String]
     #
     # @!attribute [rw] secret_key
-    #   Optional. The secret key is used if credentials are required to
-    #   access the self-managed object storage server. If your object
-    #   storage requires a user name and password to authenticate, use
-    #   `AccessKey` and `SecretKey` to provide the user name and password,
-    #   respectively.
+    #   Specifies the secret key (for example, a password) if credentials
+    #   are required to authenticate with the object storage server.
     #   @return [String]
     #
     # @!attribute [rw] agent_arns
-    #   The Amazon Resource Name (ARN) of the agents associated with the
-    #   self-managed object storage server location.
+    #   Specifies the Amazon Resource Names (ARNs) of the DataSync agents
+    #   that can securely connect with your location.
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
-    #   The key-value pair that represents the tag that you want to add to
-    #   the location. The value can be an empty string. We recommend using
-    #   tags to name your resources.
+    #   Specifies the key-value pair that represents a tag that you want to
+    #   add to the resource. Tags can help you manage, filter, and search
+    #   for your resources. We recommend creating a name tag for your
+    #   location.
     #   @return [Array<Types::TagListEntry>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationObjectStorageRequest AWS API Documentation
@@ -885,8 +988,8 @@ module Aws::DataSync
     # CreateLocationObjectStorageResponse
     #
     # @!attribute [rw] location_arn
-    #   The Amazon Resource Name (ARN) of the agents associated with the
-    #   self-managed object storage server location.
+    #   Specifies the ARN of the object storage system location that you
+    #   create.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationObjectStorageResponse AWS API Documentation
@@ -1065,8 +1168,8 @@ module Aws::DataSync
     #   files and folders in the SMB share.
     #
     #   For information about choosing a user name that ensures sufficient
-    #   permissions to files, folders, and metadata, see
-    #   [user](create-smb-location.html#SMBuser).
+    #   permissions to files, folders, and metadata, see the [User
+    #   setting](create-smb-location.html#SMBuser) for SMB locations.
     #   @return [String]
     #
     # @!attribute [rw] domain
@@ -1471,8 +1574,8 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] in_transit_encryption
-    #   Whether DataSync uses TLS encryption when transferring data to or
-    #   from your Amazon EFS file system.
+    #   Describes whether DataSync uses Transport Layer Security (TLS)
+    #   encryption when copying data to or from the Amazon EFS file system.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationEfsResponse AWS API Documentation
@@ -1534,6 +1637,72 @@ module Aws::DataSync
       :location_uri,
       :security_group_arns,
       :creation_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeLocationFsxOntapRequest
+    #   data as a hash:
+    #
+    #       {
+    #         location_arn: "LocationArn", # required
+    #       }
+    #
+    # @!attribute [rw] location_arn
+    #   Specifies the Amazon Resource Name (ARN) of the FSx for ONTAP file
+    #   system location that you want information about.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationFsxOntapRequest AWS API Documentation
+    #
+    class DescribeLocationFsxOntapRequest < Struct.new(
+      :location_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] creation_time
+    #   The time that the location was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] location_arn
+    #   The ARN of the FSx for ONTAP file system location.
+    #   @return [String]
+    #
+    # @!attribute [rw] location_uri
+    #   The uniform resource identifier (URI) of the FSx for ONTAP file
+    #   system location.
+    #   @return [String]
+    #
+    # @!attribute [rw] protocol
+    #   Specifies the data transfer protocol that DataSync uses to access
+    #   your Amazon FSx file system.
+    #   @return [Types::FsxProtocol]
+    #
+    # @!attribute [rw] security_group_arns
+    #   The security groups that DataSync uses to access your FSx for ONTAP
+    #   file system.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] storage_virtual_machine_arn
+    #   The ARN of the storage virtual machine (SVM) on your FSx for ONTAP
+    #   file system where you're copying data to or from.
+    #   @return [String]
+    #
+    # @!attribute [rw] fsx_filesystem_arn
+    #   The ARN of the FSx for ONTAP file system.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationFsxOntapResponse AWS API Documentation
+    #
+    class DescribeLocationFsxOntapResponse < Struct.new(
+      :creation_time,
+      :location_arn,
+      :location_uri,
+      :protocol,
+      :security_group_arns,
+      :storage_virtual_machine_arn,
+      :fsx_filesystem_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1818,8 +1987,8 @@ module Aws::DataSync
     #       }
     #
     # @!attribute [rw] location_arn
-    #   The Amazon Resource Name (ARN) of the self-managed object storage
-    #   server location that was described.
+    #   The Amazon Resource Name (ARN) of the object storage system location
+    #   that you want information about.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationObjectStorageRequest AWS API Documentation
@@ -1833,42 +2002,34 @@ module Aws::DataSync
     # DescribeLocationObjectStorageResponse
     #
     # @!attribute [rw] location_arn
-    #   The Amazon Resource Name (ARN) of the self-managed object storage
-    #   server location to describe.
+    #   The ARN of the object storage system location.
     #   @return [String]
     #
     # @!attribute [rw] location_uri
-    #   The URL of the source self-managed object storage server location
-    #   that was described.
+    #   The URL of the object storage system location.
     #   @return [String]
     #
     # @!attribute [rw] access_key
-    #   Optional. The access key is used if credentials are required to
-    #   access the self-managed object storage server. If your object
-    #   storage requires a user name and password to authenticate, use
-    #   `AccessKey` and `SecretKey` to provide the user name and password,
-    #   respectively.
+    #   The access key (for example, a user name) required to authenticate
+    #   with the object storage server.
     #   @return [String]
     #
     # @!attribute [rw] server_port
-    #   The port that your self-managed object storage server accepts
-    #   inbound network traffic on. The server port is set by default to TCP
-    #   80 (HTTP) or TCP 443 (HTTPS).
+    #   The port that your object storage server accepts inbound network
+    #   traffic on (for example, port 443).
     #   @return [Integer]
     #
     # @!attribute [rw] server_protocol
-    #   The protocol that the object storage server uses to communicate.
-    #   Valid values are HTTP or HTTPS.
+    #   The protocol that your object storage server uses to communicate.
     #   @return [String]
     #
     # @!attribute [rw] agent_arns
-    #   The Amazon Resource Name (ARN) of the agents associated with the
-    #   self-managed object storage server location.
+    #   The ARNs of the DataSync agents that can securely connect with your
+    #   location.
     #   @return [Array<String>]
     #
     # @!attribute [rw] creation_time
-    #   The time that the self-managed object storage server agent was
-    #   created.
+    #   The time that the location was created.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationObjectStorageResponse AWS API Documentation
@@ -2397,8 +2558,8 @@ module Aws::DataSync
       include Aws::Structure
     end
 
-    # Represents the protocol that DataSync uses to access your Amazon FSx
-    # for OpenZFS file system.
+    # Specifies the data transfer protocol that DataSync uses to access your
+    # Amazon FSx file system.
     #
     # @note When making an API call, you may pass FsxProtocol
     #   data as a hash:
@@ -2409,23 +2570,39 @@ module Aws::DataSync
     #             version: "AUTOMATIC", # accepts AUTOMATIC, NFS3, NFS4_0, NFS4_1
     #           },
     #         },
+    #         smb: {
+    #           domain: "SmbDomain",
+    #           mount_options: {
+    #             version: "AUTOMATIC", # accepts AUTOMATIC, SMB2, SMB3
+    #           },
+    #           password: "SmbPassword", # required
+    #           user: "SmbUser", # required
+    #         },
     #       }
     #
     # @!attribute [rw] nfs
-    #   Represents the Network File System (NFS) protocol that DataSync uses
-    #   to access your FSx for OpenZFS file system.
+    #   Specifies the Network File System (NFS) protocol configuration that
+    #   DataSync uses to access your FSx for OpenZFS file system or FSx for
+    #   ONTAP file system's storage virtual machine (SVM).
     #   @return [Types::FsxProtocolNfs]
+    #
+    # @!attribute [rw] smb
+    #   Specifies the Server Message Block (SMB) protocol configuration that
+    #   DataSync uses to access your FSx for ONTAP file system's SVM.
+    #   @return [Types::FsxProtocolSmb]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/FsxProtocol AWS API Documentation
     #
     class FsxProtocol < Struct.new(
-      :nfs)
+      :nfs,
+      :smb)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Represents the Network File System (NFS) protocol that DataSync uses
-    # to access your Amazon FSx for OpenZFS file system.
+    # Specifies the Network File System (NFS) protocol configuration that
+    # DataSync uses to access your Amazon FSx for OpenZFS or Amazon FSx for
+    # NetApp ONTAP file system.
     #
     # @note When making an API call, you may pass FsxProtocolNfs
     #   data as a hash:
@@ -2437,8 +2614,7 @@ module Aws::DataSync
     #       }
     #
     # @!attribute [rw] mount_options
-    #   Represents the mount options that are available for DataSync to
-    #   access an NFS location.
+    #   Specifies how DataSync can access a location using the NFS protocol.
     #   @return [Types::NfsMountOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/FsxProtocolNfs AWS API Documentation
@@ -2446,6 +2622,55 @@ module Aws::DataSync
     class FsxProtocolNfs < Struct.new(
       :mount_options)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the Server Message Block (SMB) protocol configuration that
+    # DataSync uses to access your Amazon FSx for NetApp ONTAP file system.
+    # For more information, see [Accessing FSx for ONTAP file systems][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-ontap-location.html#create-ontap-location-access
+    #
+    # @note When making an API call, you may pass FsxProtocolSmb
+    #   data as a hash:
+    #
+    #       {
+    #         domain: "SmbDomain",
+    #         mount_options: {
+    #           version: "AUTOMATIC", # accepts AUTOMATIC, SMB2, SMB3
+    #         },
+    #         password: "SmbPassword", # required
+    #         user: "SmbUser", # required
+    #       }
+    #
+    # @!attribute [rw] domain
+    #   Specifies the fully qualified domain name (FQDN) of the Microsoft
+    #   Active Directory that your storage virtual machine (SVM) belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] mount_options
+    #   Specifies how DataSync can access a location using the SMB protocol.
+    #   @return [Types::SmbMountOptions]
+    #
+    # @!attribute [rw] password
+    #   Specifies the password of a user who has permission to access your
+    #   SVM.
+    #   @return [String]
+    #
+    # @!attribute [rw] user
+    #   Specifies a user who has permission to access your SVM.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/FsxProtocolSmb AWS API Documentation
+    #
+    class FsxProtocolSmb < Struct.new(
+      :domain,
+      :mount_options,
+      :password,
+      :user)
+      SENSITIVE = [:password]
       include Aws::Structure
     end
 
@@ -2900,8 +3125,7 @@ module Aws::DataSync
       include Aws::Structure
     end
 
-    # Represents the mount options that are available for DataSync to access
-    # an NFS location.
+    # Specifies how DataSync can access a location using the NFS protocol.
     #
     # @note When making an API call, you may pass NfsMountOptions
     #   data as a hash:
@@ -2911,26 +3135,28 @@ module Aws::DataSync
     #       }
     #
     # @!attribute [rw] version
-    #   The specific NFS version that you want DataSync to use to mount your
-    #   NFS share. If the server refuses to use the version specified, the
-    #   sync will fail. If you don't specify a version, DataSync defaults
-    #   to `AUTOMATIC`. That is, DataSync automatically selects a version
-    #   based on negotiation with the NFS server.
+    #   Specifies the NFS version that you want DataSync to use when
+    #   mounting your NFS share. If the server refuses to use the version
+    #   specified, the task fails.
     #
-    #   You can specify the following NFS versions:
+    #   You can specify the following options:
     #
-    #   * <b> <a href="https://tools.ietf.org/html/rfc1813">NFSv3</a> </b> -
-    #     stateless protocol version that allows for asynchronous writes on
-    #     the server.
+    #   * `AUTOMATIC` (default): DataSync chooses NFS version 4.1.
     #
-    #   * <b> <a href="https://tools.ietf.org/html/rfc3530">NFSv4.0</a> </b>
-    #     - stateful, firewall-friendly protocol version that supports
-    #     delegations and pseudo file systems.
+    #   * `NFS3`\: Stateless protocol version that allows for asynchronous
+    #     writes on the server.
     #
-    #   * <b> <a href="https://tools.ietf.org/html/rfc5661">NFSv4.1</a> </b>
-    #     - stateful protocol version that supports sessions, directory
-    #     delegations, and parallel data processing. Version 4.1 also
-    #     includes all features available in version 4.0.
+    #   * `NFSv4_0`\: Stateful, firewall-friendly protocol version that
+    #     supports delegations and pseudo file systems.
+    #
+    #   * `NFSv4_1`\: Stateful protocol version that supports sessions,
+    #     directory delegations, and parallel data processing. NFS version
+    #     4.1 also includes all features available in version 4.0.
+    #
+    #   <note markdown="1"> DataSync currently only supports NFS version 3 with Amazon FSx for
+    #   NetApp ONTAP locations.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/NfsMountOptions AWS API Documentation
@@ -3005,20 +3231,20 @@ module Aws::DataSync
     #   metadata have been transferred. For more information, see [Configure
     #   task settings][1].
     #
-    #   Default value: POINT\_IN\_TIME\_CONSISTENT.
+    #   Default value: `POINT_IN_TIME_CONSISTENT`
     #
-    #   ONLY\_FILES\_TRANSFERRED (recommended): Perform verification only on
+    #   `ONLY_FILES_TRANSFERRED` (recommended): Perform verification only on
     #   files that were transferred.
     #
-    #   POINT\_IN\_TIME\_CONSISTENT: Scan the entire source and entire
+    #   `POINT_IN_TIME_CONSISTENT`\: Scan the entire source and entire
     #   destination at the end of the transfer to verify that source and
     #   destination are fully synchronized. This option isn't supported
     #   when transferring to S3 Glacier Flexible Retrieval or S3 Glacier
     #   Deep Archive storage classes.
     #
-    #   NONE: No additional verification is done at the end of the transfer,
-    #   but all data transmissions are integrity-checked with checksum
-    #   verification during the transfer.
+    #   `NONE`\: No additional verification is done at the end of the
+    #   transfer, but all data transmissions are integrity-checked with
+    #   checksum verification during the transfer.
     #
     #
     #
@@ -3046,58 +3272,59 @@ module Aws::DataSync
     # @!attribute [rw] atime
     #   A file metadata value that shows the last time a file was accessed
     #   (that is, when the file was read or written to). If you set `Atime`
-    #   to BEST\_EFFORT, DataSync attempts to preserve the original `Atime`
+    #   to `BEST_EFFORT`, DataSync attempts to preserve the original `Atime`
     #   attribute on all source files (that is, the version before the
-    #   PREPARING phase). However, `Atime`'s behavior is not fully standard
-    #   across platforms, so DataSync can only do this on a best-effort
-    #   basis.
+    #   `PREPARING` phase). However, `Atime`'s behavior is not fully
+    #   standard across platforms, so DataSync can only do this on a
+    #   best-effort basis.
     #
-    #   Default value: BEST\_EFFORT.
+    #   Default value: `BEST_EFFORT`
     #
-    #   BEST\_EFFORT: Attempt to preserve the per-file `Atime` value
+    #   `BEST_EFFORT`\: Attempt to preserve the per-file `Atime` value
     #   (recommended).
     #
-    #   NONE: Ignore `Atime`.
+    #   `NONE`\: Ignore `Atime`.
     #
-    #   <note markdown="1"> If `Atime` is set to BEST\_EFFORT, `Mtime` must be set to PRESERVE.
+    #   <note markdown="1"> If `Atime` is set to `BEST_EFFORT`, `Mtime` must be set to
+    #   `PRESERVE`.
     #
-    #    If `Atime` is set to NONE, `Mtime` must also be NONE.
+    #    If `Atime` is set to `NONE`, `Mtime` must also be `NONE`.
     #
     #    </note>
     #   @return [String]
     #
     # @!attribute [rw] mtime
     #   A value that indicates the last time that a file was modified (that
-    #   is, a file was written to) before the PREPARING phase. This option
+    #   is, a file was written to) before the `PREPARING` phase. This option
     #   is required for cases when you need to run the same task more than
     #   one time.
     #
     #   Default Value: `PRESERVE`
     #
-    #   PRESERVE: Preserve original `Mtime` (recommended)
+    #   `PRESERVE`\: Preserve original `Mtime` (recommended)
     #
-    #   NONE: Ignore `Mtime`.
+    #   `NONE`\: Ignore `Mtime`.
     #
-    #   <note markdown="1"> If `Mtime` is set to PRESERVE, `Atime` must be set to BEST\_EFFORT.
+    #   <note markdown="1"> If `Mtime` is set to `PRESERVE`, `Atime` must be set to
+    #   `BEST_EFFORT`.
     #
-    #    If `Mtime` is set to NONE, `Atime` must also be set to NONE.
+    #    If `Mtime` is set to `NONE`, `Atime` must also be set to `NONE`.
     #
     #    </note>
     #   @return [String]
     #
     # @!attribute [rw] uid
-    #   The POSIX user ID (UID) of the file's owner. This option should
-    #   only be set for NFS, EFS, and S3 locations. To learn more about what
-    #   metadata is copied by DataSync, see [Metadata Copied by
-    #   DataSync][1].
+    #   The POSIX user ID (UID) of the file's owner.
     #
-    #   Default value: INT\_VALUE. This preserves the integer value of the
+    #   For more information, see [Metadata copied by DataSync][1].
+    #
+    #   Default value: `INT_VALUE`. This preserves the integer value of the
     #   ID.
     #
-    #   INT\_VALUE: Preserve the integer value of UID and group ID (GID)
+    #   `INT_VALUE`\: Preserve the integer value of UID and group ID (GID)
     #   (recommended).
     #
-    #   NONE: Ignore UID and GID.
+    #   `NONE`\: Ignore UID and GID.
     #
     #
     #
@@ -3105,18 +3332,17 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] gid
-    #   The POSIX group ID (GID) of the file's owners. This option should
-    #   only be set for NFS, EFS, and S3 locations. For more information
-    #   about what metadata is copied by DataSync, see [Metadata Copied by
-    #   DataSync][1].
+    #   The POSIX group ID (GID) of the file's owners.
     #
-    #   Default value: INT\_VALUE. This preserves the integer value of the
+    #   For more information, see [Metadata copied by DataSync][1].
+    #
+    #   Default value: `INT_VALUE`. This preserves the integer value of the
     #   ID.
     #
-    #   INT\_VALUE: Preserve the integer value of user ID (UID) and GID
+    #   `INT_VALUE`\: Preserve the integer value of user ID (UID) and GID
     #   (recommended).
     #
-    #   NONE: Ignore UID and GID.
+    #   `NONE`\: Ignore UID and GID.
     #
     #
     #
@@ -3132,11 +3358,12 @@ module Aws::DataSync
     #   Amazon S3 storage classes in DataSync ][1] in the *DataSync User
     #   Guide*.
     #
-    #   Default value: PRESERVE.
+    #   Default value: `PRESERVE`
     #
-    #   PRESERVE: Ignore such destination files (recommended).
+    #   `PRESERVE`\: Ignore such destination files (recommended).
     #
-    #   REMOVE: Delete destination files that aren’t present in the source.
+    #   `REMOVE`\: Delete destination files that aren’t present in the
+    #   source.
     #
     #
     #
@@ -3155,26 +3382,26 @@ module Aws::DataSync
     #
     #    </note>
     #
-    #   Default value: NONE.
+    #   Default value: `NONE`
     #
-    #   NONE: Ignore special devices (recommended).
+    #   `NONE`\: Ignore special devices (recommended).
     #
-    #   PRESERVE: Preserve character and block device metadata. This option
-    #   isn't currently supported for Amazon EFS.
+    #   `PRESERVE`\: Preserve character and block device metadata. This
+    #   option isn't currently supported for Amazon EFS.
     #   @return [String]
     #
     # @!attribute [rw] posix_permissions
     #   A value that determines which users or groups can access a file for
     #   a specific purpose such as reading, writing, or execution of the
-    #   file. This option should only be set for NFS, EFS, and S3 locations.
-    #   For more information about what metadata is copied by DataSync, see
-    #   [Metadata Copied by DataSync][1].
+    #   file.
     #
-    #   Default value: PRESERVE.
+    #   For more information, see [Metadata copied by DataSync][1].
     #
-    #   PRESERVE: Preserve POSIX-style permissions (recommended).
+    #   Default value: `PRESERVE`
     #
-    #   NONE: Ignore permissions.
+    #   `PRESERVE`\: Preserve POSIX-style permissions (recommended).
+    #
+    #   `NONE`\: Ignore permissions.
     #
     #   <note markdown="1"> DataSync can preserve extant permissions of a source location.
     #
@@ -3225,12 +3452,13 @@ module Aws::DataSync
     #   location, or whether DataSync transfers all the content from the
     #   source, without comparing to the destination location.
     #
-    #   CHANGED: DataSync copies only data or metadata that is new or
+    #   `CHANGED`\: DataSync copies only data or metadata that is new or
     #   different content from the source location to the destination
     #   location.
     #
-    #   ALL: DataSync copies all source location content to the destination,
-    #   without comparing to existing content on the destination.
+    #   `ALL`\: DataSync copies all source location content to the
+    #   destination, without comparing to existing content on the
+    #   destination.
     #   @return [String]
     #
     # @!attribute [rw] security_descriptor_copy_flags
@@ -3243,10 +3471,10 @@ module Aws::DataSync
     #   handles metadata, see [How DataSync Handles Metadata and Special
     #   Files][1].
     #
-    #   Default value: OWNER\_DACL.
+    #   Default value: `OWNER_DACL`
     #
-    #   **OWNER\_DACL**\: For each copied object, DataSync copies the
-    #   following metadata:
+    #   `OWNER_DACL`\: For each copied object, DataSync copies the following
+    #   metadata:
     #
     #   * Object owner.
     #
@@ -3257,7 +3485,7 @@ module Aws::DataSync
     #   access control lists (SACLs), which are used by administrators to
     #   log attempts to access a secured object.
     #
-    #   **OWNER\_DACL\_SACL**\: For each copied object, DataSync copies the
+    #   `OWNER_DACL_SACL`\: For each copied object, DataSync copies the
     #   following metadata:
     #
     #   * Object owner.
@@ -3274,10 +3502,10 @@ module Aws::DataSync
     #   permissions to files, folders, and metadata, see
     #   [user](create-smb-location.html#SMBuser).
     #
-    #   **NONE**\: None of the SMB security descriptor components are
-    #   copied. Destination objects are owned by the user that was provided
-    #   for accessing the destination location. DACLs and SACLs are set
-    #   based on the destination server’s configuration.
+    #   `NONE`\: None of the SMB security descriptor components are copied.
+    #   Destination objects are owned by the user that was provided for
+    #   accessing the destination location. DACLs and SACLs are set based on
+    #   the destination server’s configuration.
     #
     #
     #
@@ -3414,8 +3642,7 @@ module Aws::DataSync
       include Aws::Structure
     end
 
-    # Represents the mount options that are available for DataSync to access
-    # an SMB location.
+    # Specifies how DataSync can access a location using the SMB protocol.
     #
     # @note When making an API call, you may pass SmbMountOptions
     #   data as a hash:
@@ -3425,10 +3652,10 @@ module Aws::DataSync
     #       }
     #
     # @!attribute [rw] version
-    #   The specific SMB version that you want DataSync to use to mount your
-    #   SMB share. If you don't specify a version, DataSync defaults to
-    #   `AUTOMATIC`. That is, DataSync automatically selects a version based
-    #   on negotiation with the SMB server.
+    #   Specifies the SMB version that you want DataSync to use when
+    #   mounting your SMB share. If you don't specify a version, DataSync
+    #   defaults to `AUTOMATIC` and chooses a version based on negotiation
+    #   with the SMB server.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/SmbMountOptions AWS API Documentation
@@ -4041,8 +4268,7 @@ module Aws::DataSync
     #   @return [Types::OnPremConfig]
     #
     # @!attribute [rw] mount_options
-    #   Represents the mount options that are available for DataSync to
-    #   access an NFS location.
+    #   Specifies how DataSync can access a location using the NFS protocol.
     #   @return [Types::NfsMountOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateLocationNfsRequest AWS API Documentation
@@ -4201,8 +4427,7 @@ module Aws::DataSync
     #   @return [Array<String>]
     #
     # @!attribute [rw] mount_options
-    #   Represents the mount options that are available for DataSync to
-    #   access an SMB location.
+    #   Specifies how DataSync can access a location using the SMB protocol.
     #   @return [Types::SmbMountOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateLocationSmbRequest AWS API Documentation

@@ -14,12 +14,14 @@ module Aws::FinSpaceData
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AccessKeyId = Shapes::StringShape.new(name: 'AccessKeyId')
     AliasString = Shapes::StringShape.new(name: 'AliasString')
     ApiAccess = Shapes::StringShape.new(name: 'ApiAccess')
     ApplicationPermission = Shapes::StringShape.new(name: 'ApplicationPermission')
     ApplicationPermissionList = Shapes::ListShape.new(name: 'ApplicationPermissionList')
     AssociateUserToPermissionGroupRequest = Shapes::StructureShape.new(name: 'AssociateUserToPermissionGroupRequest')
     AssociateUserToPermissionGroupResponse = Shapes::StructureShape.new(name: 'AssociateUserToPermissionGroupResponse')
+    AwsCredentials = Shapes::StructureShape.new(name: 'AwsCredentials')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ChangeType = Shapes::StringShape.new(name: 'ChangeType')
     ChangesetArn = Shapes::StringShape.new(name: 'ChangesetArn')
@@ -85,6 +87,8 @@ module Aws::FinSpaceData
     GetDataViewResponse = Shapes::StructureShape.new(name: 'GetDataViewResponse')
     GetDatasetRequest = Shapes::StructureShape.new(name: 'GetDatasetRequest')
     GetDatasetResponse = Shapes::StructureShape.new(name: 'GetDatasetResponse')
+    GetExternalDataViewAccessDetailsRequest = Shapes::StructureShape.new(name: 'GetExternalDataViewAccessDetailsRequest')
+    GetExternalDataViewAccessDetailsResponse = Shapes::StructureShape.new(name: 'GetExternalDataViewAccessDetailsResponse')
     GetPermissionGroupRequest = Shapes::StructureShape.new(name: 'GetPermissionGroupRequest')
     GetPermissionGroupResponse = Shapes::StructureShape.new(name: 'GetPermissionGroupResponse')
     GetProgrammaticAccessCredentialsRequest = Shapes::StructureShape.new(name: 'GetProgrammaticAccessCredentialsRequest')
@@ -133,10 +137,15 @@ module Aws::FinSpaceData
     ResourcePermissionsList = Shapes::ListShape.new(name: 'ResourcePermissionsList')
     ResultLimit = Shapes::IntegerShape.new(name: 'ResultLimit')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
+    S3BucketName = Shapes::StringShape.new(name: 'S3BucketName')
     S3DestinationFormatOptions = Shapes::MapShape.new(name: 'S3DestinationFormatOptions')
+    S3Key = Shapes::StringShape.new(name: 'S3Key')
+    S3Location = Shapes::StructureShape.new(name: 'S3Location')
     SchemaDefinition = Shapes::StructureShape.new(name: 'SchemaDefinition')
     SchemaUnion = Shapes::StructureShape.new(name: 'SchemaUnion')
+    SecretAccessKey = Shapes::StringShape.new(name: 'SecretAccessKey')
     SessionDuration = Shapes::IntegerShape.new(name: 'SessionDuration')
+    SessionToken = Shapes::StringShape.new(name: 'SessionToken')
     SortColumnList = Shapes::ListShape.new(name: 'SortColumnList')
     SourceParams = Shapes::MapShape.new(name: 'SourceParams')
     StatusCode = Shapes::IntegerShape.new(name: 'StatusCode')
@@ -181,6 +190,12 @@ module Aws::FinSpaceData
 
     AssociateUserToPermissionGroupResponse.add_member(:status_code, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "statusCode"))
     AssociateUserToPermissionGroupResponse.struct_class = Types::AssociateUserToPermissionGroupResponse
+
+    AwsCredentials.add_member(:access_key_id, Shapes::ShapeRef.new(shape: AccessKeyId, location_name: "accessKeyId"))
+    AwsCredentials.add_member(:secret_access_key, Shapes::ShapeRef.new(shape: SecretAccessKey, location_name: "secretAccessKey"))
+    AwsCredentials.add_member(:session_token, Shapes::ShapeRef.new(shape: SessionToken, location_name: "sessionToken"))
+    AwsCredentials.add_member(:expiration, Shapes::ShapeRef.new(shape: TimestampEpoch, location_name: "expiration"))
+    AwsCredentials.struct_class = Types::AwsCredentials
 
     ChangesetErrorInfo.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "errorMessage"))
     ChangesetErrorInfo.add_member(:error_category, Shapes::ShapeRef.new(shape: ErrorCategory, location_name: "errorCategory"))
@@ -414,6 +429,14 @@ module Aws::FinSpaceData
     GetDatasetResponse.add_member(:status, Shapes::ShapeRef.new(shape: DatasetStatus, location_name: "status"))
     GetDatasetResponse.struct_class = Types::GetDatasetResponse
 
+    GetExternalDataViewAccessDetailsRequest.add_member(:data_view_id, Shapes::ShapeRef.new(shape: DataViewId, required: true, location: "uri", location_name: "dataviewId"))
+    GetExternalDataViewAccessDetailsRequest.add_member(:dataset_id, Shapes::ShapeRef.new(shape: DatasetId, required: true, location: "uri", location_name: "datasetId"))
+    GetExternalDataViewAccessDetailsRequest.struct_class = Types::GetExternalDataViewAccessDetailsRequest
+
+    GetExternalDataViewAccessDetailsResponse.add_member(:credentials, Shapes::ShapeRef.new(shape: AwsCredentials, location_name: "credentials"))
+    GetExternalDataViewAccessDetailsResponse.add_member(:s3_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "s3Location"))
+    GetExternalDataViewAccessDetailsResponse.struct_class = Types::GetExternalDataViewAccessDetailsResponse
+
     GetPermissionGroupRequest.add_member(:permission_group_id, Shapes::ShapeRef.new(shape: PermissionGroupId, required: true, location: "uri", location_name: "permissionGroupId"))
     GetPermissionGroupRequest.struct_class = Types::GetPermissionGroupRequest
 
@@ -563,6 +586,10 @@ module Aws::FinSpaceData
 
     S3DestinationFormatOptions.key = Shapes::ShapeRef.new(shape: StringMapKey)
     S3DestinationFormatOptions.value = Shapes::ShapeRef.new(shape: StringMapValue)
+
+    S3Location.add_member(:bucket, Shapes::ShapeRef.new(shape: S3BucketName, required: true, location_name: "bucket"))
+    S3Location.add_member(:key, Shapes::ShapeRef.new(shape: S3Key, required: true, location_name: "key"))
+    S3Location.struct_class = Types::S3Location
 
     SchemaDefinition.add_member(:columns, Shapes::ShapeRef.new(shape: ColumnList, location_name: "columns"))
     SchemaDefinition.add_member(:primary_key_columns, Shapes::ShapeRef.new(shape: ColumnNameList, location_name: "primaryKeyColumns"))
@@ -874,6 +901,19 @@ module Aws::FinSpaceData
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:get_external_data_view_access_details, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetExternalDataViewAccessDetails"
+        o.http_method = "POST"
+        o.http_request_uri = "/datasets/{datasetId}/dataviewsv2/{dataviewId}/external-access-details"
+        o.input = Shapes::ShapeRef.new(shape: GetExternalDataViewAccessDetailsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetExternalDataViewAccessDetailsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:get_permission_group, Seahorse::Model::Operation.new.tap do |o|

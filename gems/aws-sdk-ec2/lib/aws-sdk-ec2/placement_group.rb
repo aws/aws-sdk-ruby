@@ -72,6 +72,13 @@ module Aws::EC2
       data[:group_arn]
     end
 
+    # The spread level for the placement group. *Only* Outpost placement
+    # groups can be spread across hosts.
+    # @return [String]
+    def spread_level
+      data[:spread_level]
+    end
+
     # @!endgroup
 
     # @return [Client]

@@ -549,8 +549,9 @@ module Aws::DataSync
     #   assumes when mounting the Amazon EFS file system.
     #
     # @option params [String] :in_transit_encryption
-    #   Specifies whether you want DataSync to use TLS encryption when
-    #   transferring data to or from your Amazon EFS file system.
+    #   Specifies whether you want DataSync to use Transport Layer Security
+    #   (TLS) 1.2 encryption when it copies data to or from the Amazon EFS
+    #   file system.
     #
     #   If you specify an access point using `AccessPointArn` or an IAM role
     #   using `FileSystemAccessRoleArn`, you must set this parameter to
@@ -644,6 +645,100 @@ module Aws::DataSync
       req.send_request(options)
     end
 
+    # Creates an endpoint for an Amazon FSx for NetApp ONTAP file system
+    # that DataSync can access for a transfer. For more information, see
+    # [Creating a location for FSx for ONTAP][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-ontap-location.html
+    #
+    # @option params [required, Types::FsxProtocol] :protocol
+    #   Specifies the data transfer protocol that DataSync uses to access your
+    #   Amazon FSx file system.
+    #
+    # @option params [required, Array<String>] :security_group_arns
+    #   Specifies the security groups that DataSync can use to access your FSx
+    #   for ONTAP file system. You must configure the security groups to allow
+    #   outbound traffic on the following ports (depending on the protocol
+    #   that you're using):
+    #
+    #   * **Network File System (NFS)**\: TCP port 2049
+    #
+    #   * **Server Message Block (SMB)**\: TCP port 445
+    #
+    #   Your file system's security groups must also allow inbound traffic on
+    #   the same port.
+    #
+    # @option params [required, String] :storage_virtual_machine_arn
+    #   Specifies the ARN of the storage virtual machine (SVM) on your file
+    #   system where you're copying data to or from.
+    #
+    # @option params [String] :subdirectory
+    #   Specifies the junction path (also known as a mount point) in the SVM
+    #   volume where you're copying data to or from (for example, `/vol1`).
+    #
+    #   <note markdown="1"> Don't specify a junction path in the SVM's root volume. For more
+    #   information, see [Managing FSx for ONTAP storage virtual machines][1]
+    #   in the *Amazon FSx for NetApp ONTAP User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-svms.html
+    #
+    # @option params [Array<Types::TagListEntry>] :tags
+    #   Specifies labels that help you categorize, filter, and search for your
+    #   Amazon Web Services resources. We recommend creating at least a name
+    #   tag for your location.
+    #
+    # @return [Types::CreateLocationFsxOntapResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateLocationFsxOntapResponse#location_arn #location_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_location_fsx_ontap({
+    #     protocol: { # required
+    #       nfs: {
+    #         mount_options: {
+    #           version: "AUTOMATIC", # accepts AUTOMATIC, NFS3, NFS4_0, NFS4_1
+    #         },
+    #       },
+    #       smb: {
+    #         domain: "SmbDomain",
+    #         mount_options: {
+    #           version: "AUTOMATIC", # accepts AUTOMATIC, SMB2, SMB3
+    #         },
+    #         password: "SmbPassword", # required
+    #         user: "SmbUser", # required
+    #       },
+    #     },
+    #     security_group_arns: ["Ec2SecurityGroupArn"], # required
+    #     storage_virtual_machine_arn: "StorageVirtualMachineArn", # required
+    #     subdirectory: "FsxOntapSubdirectory",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.location_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationFsxOntap AWS API Documentation
+    #
+    # @overload create_location_fsx_ontap(params = {})
+    # @param [Hash] params ({})
+    def create_location_fsx_ontap(params = {}, options = {})
+      req = build_request(:create_location_fsx_ontap, params)
+      req.send_request(options)
+    end
+
     # Creates an endpoint for an Amazon FSx for OpenZFS file system.
     #
     # @option params [required, String] :fsx_filesystem_arn
@@ -680,6 +775,14 @@ module Aws::DataSync
     #         mount_options: {
     #           version: "AUTOMATIC", # accepts AUTOMATIC, NFS3, NFS4_0, NFS4_1
     #         },
+    #       },
+    #       smb: {
+    #         domain: "SmbDomain",
+    #         mount_options: {
+    #           version: "AUTOMATIC", # accepts AUTOMATIC, SMB2, SMB3
+    #         },
+    #         password: "SmbPassword", # required
+    #         user: "SmbUser", # required
     #       },
     #     },
     #     security_group_arns: ["Ec2SecurityGroupArn"], # required
@@ -1020,58 +1123,53 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Creates an endpoint for a self-managed object storage bucket. For more
-    # information about self-managed object storage locations, see [Creating
-    # a location for object storage][1].
+    # Creates an endpoint for an object storage system that DataSync can
+    # access for a transfer. For more information, see [Creating a location
+    # for object storage][1].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-object-location.html
     #
     # @option params [required, String] :server_hostname
-    #   The name of the self-managed object storage server. This value is the
-    #   IP address or Domain Name Service (DNS) name of the object storage
-    #   server. An agent uses this hostname to mount the object storage server
+    #   Specifies the domain name or IP address of the object storage server.
+    #   A DataSync agent uses this hostname to mount the object storage server
     #   in a network.
     #
     # @option params [Integer] :server_port
-    #   The port that your self-managed object storage server accepts inbound
-    #   network traffic on. The server port is set by default to TCP 80 (HTTP)
-    #   or TCP 443 (HTTPS). You can specify a custom port if your self-managed
-    #   object storage server requires one.
+    #   Specifies the port that your object storage server accepts inbound
+    #   network traffic on (for example, port 443).
     #
     # @option params [String] :server_protocol
-    #   The protocol that the object storage server uses to communicate. Valid
-    #   values are HTTP or HTTPS.
+    #   Specifies the protocol that your object storage server uses to
+    #   communicate.
     #
     # @option params [String] :subdirectory
-    #   The subdirectory in the self-managed object storage server that is
-    #   used to read data from.
+    #   Specifies the object prefix for your object storage server. If this is
+    #   a source location, DataSync only copies objects with this prefix. If
+    #   this is a destination location, DataSync writes all objects with this
+    #   prefix.
     #
     # @option params [required, String] :bucket_name
-    #   The bucket on the self-managed object storage server that is used to
-    #   read data from.
+    #   Specifies the name of the object storage bucket involved in the
+    #   transfer.
     #
     # @option params [String] :access_key
-    #   Optional. The access key is used if credentials are required to access
-    #   the self-managed object storage server. If your object storage
-    #   requires a user name and password to authenticate, use `AccessKey` and
-    #   `SecretKey` to provide the user name and password, respectively.
+    #   Specifies the access key (for example, a user name) if credentials are
+    #   required to authenticate with the object storage server.
     #
     # @option params [String] :secret_key
-    #   Optional. The secret key is used if credentials are required to access
-    #   the self-managed object storage server. If your object storage
-    #   requires a user name and password to authenticate, use `AccessKey` and
-    #   `SecretKey` to provide the user name and password, respectively.
+    #   Specifies the secret key (for example, a password) if credentials are
+    #   required to authenticate with the object storage server.
     #
     # @option params [required, Array<String>] :agent_arns
-    #   The Amazon Resource Name (ARN) of the agents associated with the
-    #   self-managed object storage server location.
+    #   Specifies the Amazon Resource Names (ARNs) of the DataSync agents that
+    #   can securely connect with your location.
     #
     # @option params [Array<Types::TagListEntry>] :tags
-    #   The key-value pair that represents the tag that you want to add to the
-    #   location. The value can be an empty string. We recommend using tags to
-    #   name your resources.
+    #   Specifies the key-value pair that represents a tag that you want to
+    #   add to the resource. Tags can help you manage, filter, and search for
+    #   your resources. We recommend creating a name tag for your location.
     #
     # @return [Types::CreateLocationObjectStorageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1242,8 +1340,8 @@ module Aws::DataSync
     #   and folders in the SMB share.
     #
     #   For information about choosing a user name that ensures sufficient
-    #   permissions to files, folders, and metadata, see
-    #   [user](create-smb-location.html#SMBuser).
+    #   permissions to files, folders, and metadata, see the [User
+    #   setting](create-smb-location.html#SMBuser) for SMB locations.
     #
     # @option params [String] :domain
     #   The name of the Windows domain that the SMB server belongs to.
@@ -1649,6 +1747,53 @@ module Aws::DataSync
       req.send_request(options)
     end
 
+    # Provides details about how an DataSync location for an Amazon FSx for
+    # NetApp ONTAP file system is configured.
+    #
+    # @option params [required, String] :location_arn
+    #   Specifies the Amazon Resource Name (ARN) of the FSx for ONTAP file
+    #   system location that you want information about.
+    #
+    # @return [Types::DescribeLocationFsxOntapResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeLocationFsxOntapResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeLocationFsxOntapResponse#location_arn #location_arn} => String
+    #   * {Types::DescribeLocationFsxOntapResponse#location_uri #location_uri} => String
+    #   * {Types::DescribeLocationFsxOntapResponse#protocol #protocol} => Types::FsxProtocol
+    #   * {Types::DescribeLocationFsxOntapResponse#security_group_arns #security_group_arns} => Array&lt;String&gt;
+    #   * {Types::DescribeLocationFsxOntapResponse#storage_virtual_machine_arn #storage_virtual_machine_arn} => String
+    #   * {Types::DescribeLocationFsxOntapResponse#fsx_filesystem_arn #fsx_filesystem_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_location_fsx_ontap({
+    #     location_arn: "LocationArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.creation_time #=> Time
+    #   resp.location_arn #=> String
+    #   resp.location_uri #=> String
+    #   resp.protocol.nfs.mount_options.version #=> String, one of "AUTOMATIC", "NFS3", "NFS4_0", "NFS4_1"
+    #   resp.protocol.smb.domain #=> String
+    #   resp.protocol.smb.mount_options.version #=> String, one of "AUTOMATIC", "SMB2", "SMB3"
+    #   resp.protocol.smb.password #=> String
+    #   resp.protocol.smb.user #=> String
+    #   resp.security_group_arns #=> Array
+    #   resp.security_group_arns[0] #=> String
+    #   resp.storage_virtual_machine_arn #=> String
+    #   resp.fsx_filesystem_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationFsxOntap AWS API Documentation
+    #
+    # @overload describe_location_fsx_ontap(params = {})
+    # @param [Hash] params ({})
+    def describe_location_fsx_ontap(params = {}, options = {})
+      req = build_request(:describe_location_fsx_ontap, params)
+      req.send_request(options)
+    end
+
     # Returns metadata about an Amazon FSx for OpenZFS location, such as
     # information about its path.
     #
@@ -1677,6 +1822,10 @@ module Aws::DataSync
     #   resp.security_group_arns #=> Array
     #   resp.security_group_arns[0] #=> String
     #   resp.protocol.nfs.mount_options.version #=> String, one of "AUTOMATIC", "NFS3", "NFS4_0", "NFS4_1"
+    #   resp.protocol.smb.domain #=> String
+    #   resp.protocol.smb.mount_options.version #=> String, one of "AUTOMATIC", "SMB2", "SMB3"
+    #   resp.protocol.smb.password #=> String
+    #   resp.protocol.smb.user #=> String
     #   resp.creation_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationFsxOpenZfs AWS API Documentation
@@ -1822,17 +1971,12 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Returns metadata about a self-managed object storage server location.
-    # For more information about self-managed object storage locations, see
-    # [Creating a location for object storage][1].
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-object-location.html
+    # Returns metadata about your DataSync location for an object storage
+    # system.
     #
     # @option params [required, String] :location_arn
-    #   The Amazon Resource Name (ARN) of the self-managed object storage
-    #   server location that was described.
+    #   The Amazon Resource Name (ARN) of the object storage system location
+    #   that you want information about.
     #
     # @return [Types::DescribeLocationObjectStorageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2674,8 +2818,7 @@ module Aws::DataSync
     #   File System (NFS) location.
     #
     # @option params [Types::NfsMountOptions] :mount_options
-    #   Represents the mount options that are available for DataSync to access
-    #   an NFS location.
+    #   Specifies how DataSync can access a location using the NFS protocol.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2821,8 +2964,7 @@ module Aws::DataSync
     #   Block (SMB) location.
     #
     # @option params [Types::SmbMountOptions] :mount_options
-    #   Represents the mount options that are available for DataSync to access
-    #   an SMB location.
+    #   Specifies how DataSync can access a location using the SMB protocol.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3035,7 +3177,7 @@ module Aws::DataSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-datasync'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

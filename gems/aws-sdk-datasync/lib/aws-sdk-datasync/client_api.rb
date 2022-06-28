@@ -29,6 +29,8 @@ module Aws::DataSync
     CreateLocationEfsResponse = Shapes::StructureShape.new(name: 'CreateLocationEfsResponse')
     CreateLocationFsxLustreRequest = Shapes::StructureShape.new(name: 'CreateLocationFsxLustreRequest')
     CreateLocationFsxLustreResponse = Shapes::StructureShape.new(name: 'CreateLocationFsxLustreResponse')
+    CreateLocationFsxOntapRequest = Shapes::StructureShape.new(name: 'CreateLocationFsxOntapRequest')
+    CreateLocationFsxOntapResponse = Shapes::StructureShape.new(name: 'CreateLocationFsxOntapResponse')
     CreateLocationFsxOpenZfsRequest = Shapes::StructureShape.new(name: 'CreateLocationFsxOpenZfsRequest')
     CreateLocationFsxOpenZfsResponse = Shapes::StructureShape.new(name: 'CreateLocationFsxOpenZfsResponse')
     CreateLocationFsxWindowsRequest = Shapes::StructureShape.new(name: 'CreateLocationFsxWindowsRequest')
@@ -57,6 +59,8 @@ module Aws::DataSync
     DescribeLocationEfsResponse = Shapes::StructureShape.new(name: 'DescribeLocationEfsResponse')
     DescribeLocationFsxLustreRequest = Shapes::StructureShape.new(name: 'DescribeLocationFsxLustreRequest')
     DescribeLocationFsxLustreResponse = Shapes::StructureShape.new(name: 'DescribeLocationFsxLustreResponse')
+    DescribeLocationFsxOntapRequest = Shapes::StructureShape.new(name: 'DescribeLocationFsxOntapRequest')
+    DescribeLocationFsxOntapResponse = Shapes::StructureShape.new(name: 'DescribeLocationFsxOntapResponse')
     DescribeLocationFsxOpenZfsRequest = Shapes::StructureShape.new(name: 'DescribeLocationFsxOpenZfsRequest')
     DescribeLocationFsxOpenZfsResponse = Shapes::StructureShape.new(name: 'DescribeLocationFsxOpenZfsResponse')
     DescribeLocationFsxWindowsRequest = Shapes::StructureShape.new(name: 'DescribeLocationFsxWindowsRequest')
@@ -95,9 +99,11 @@ module Aws::DataSync
     FilterValues = Shapes::ListShape.new(name: 'FilterValues')
     FsxFilesystemArn = Shapes::StringShape.new(name: 'FsxFilesystemArn')
     FsxLustreSubdirectory = Shapes::StringShape.new(name: 'FsxLustreSubdirectory')
+    FsxOntapSubdirectory = Shapes::StringShape.new(name: 'FsxOntapSubdirectory')
     FsxOpenZfsSubdirectory = Shapes::StringShape.new(name: 'FsxOpenZfsSubdirectory')
     FsxProtocol = Shapes::StructureShape.new(name: 'FsxProtocol')
     FsxProtocolNfs = Shapes::StructureShape.new(name: 'FsxProtocolNfs')
+    FsxProtocolSmb = Shapes::StructureShape.new(name: 'FsxProtocolSmb')
     FsxWindowsSubdirectory = Shapes::StringShape.new(name: 'FsxWindowsSubdirectory')
     Gid = Shapes::StringShape.new(name: 'Gid')
     HdfsAuthenticationType = Shapes::StringShape.new(name: 'HdfsAuthenticationType')
@@ -180,6 +186,7 @@ module Aws::DataSync
     SourceNetworkInterfaceArns = Shapes::ListShape.new(name: 'SourceNetworkInterfaceArns')
     StartTaskExecutionRequest = Shapes::StructureShape.new(name: 'StartTaskExecutionRequest')
     StartTaskExecutionResponse = Shapes::StructureShape.new(name: 'StartTaskExecutionResponse')
+    StorageVirtualMachineArn = Shapes::StringShape.new(name: 'StorageVirtualMachineArn')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagListEntry = Shapes::StructureShape.new(name: 'TagListEntry')
@@ -270,6 +277,16 @@ module Aws::DataSync
 
     CreateLocationFsxLustreResponse.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
     CreateLocationFsxLustreResponse.struct_class = Types::CreateLocationFsxLustreResponse
+
+    CreateLocationFsxOntapRequest.add_member(:protocol, Shapes::ShapeRef.new(shape: FsxProtocol, required: true, location_name: "Protocol"))
+    CreateLocationFsxOntapRequest.add_member(:security_group_arns, Shapes::ShapeRef.new(shape: Ec2SecurityGroupArnList, required: true, location_name: "SecurityGroupArns"))
+    CreateLocationFsxOntapRequest.add_member(:storage_virtual_machine_arn, Shapes::ShapeRef.new(shape: StorageVirtualMachineArn, required: true, location_name: "StorageVirtualMachineArn"))
+    CreateLocationFsxOntapRequest.add_member(:subdirectory, Shapes::ShapeRef.new(shape: FsxOntapSubdirectory, location_name: "Subdirectory"))
+    CreateLocationFsxOntapRequest.add_member(:tags, Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
+    CreateLocationFsxOntapRequest.struct_class = Types::CreateLocationFsxOntapRequest
+
+    CreateLocationFsxOntapResponse.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
+    CreateLocationFsxOntapResponse.struct_class = Types::CreateLocationFsxOntapResponse
 
     CreateLocationFsxOpenZfsRequest.add_member(:fsx_filesystem_arn, Shapes::ShapeRef.new(shape: FsxFilesystemArn, required: true, location_name: "FsxFilesystemArn"))
     CreateLocationFsxOpenZfsRequest.add_member(:protocol, Shapes::ShapeRef.new(shape: FsxProtocol, required: true, location_name: "Protocol"))
@@ -421,6 +438,18 @@ module Aws::DataSync
     DescribeLocationFsxLustreResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Time, location_name: "CreationTime"))
     DescribeLocationFsxLustreResponse.struct_class = Types::DescribeLocationFsxLustreResponse
 
+    DescribeLocationFsxOntapRequest.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, required: true, location_name: "LocationArn"))
+    DescribeLocationFsxOntapRequest.struct_class = Types::DescribeLocationFsxOntapRequest
+
+    DescribeLocationFsxOntapResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Time, location_name: "CreationTime"))
+    DescribeLocationFsxOntapResponse.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
+    DescribeLocationFsxOntapResponse.add_member(:location_uri, Shapes::ShapeRef.new(shape: LocationUri, location_name: "LocationUri"))
+    DescribeLocationFsxOntapResponse.add_member(:protocol, Shapes::ShapeRef.new(shape: FsxProtocol, location_name: "Protocol"))
+    DescribeLocationFsxOntapResponse.add_member(:security_group_arns, Shapes::ShapeRef.new(shape: Ec2SecurityGroupArnList, location_name: "SecurityGroupArns"))
+    DescribeLocationFsxOntapResponse.add_member(:storage_virtual_machine_arn, Shapes::ShapeRef.new(shape: StorageVirtualMachineArn, location_name: "StorageVirtualMachineArn"))
+    DescribeLocationFsxOntapResponse.add_member(:fsx_filesystem_arn, Shapes::ShapeRef.new(shape: FsxFilesystemArn, location_name: "FsxFilesystemArn"))
+    DescribeLocationFsxOntapResponse.struct_class = Types::DescribeLocationFsxOntapResponse
+
     DescribeLocationFsxOpenZfsRequest.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, required: true, location_name: "LocationArn"))
     DescribeLocationFsxOpenZfsRequest.struct_class = Types::DescribeLocationFsxOpenZfsRequest
 
@@ -559,10 +588,17 @@ module Aws::DataSync
     FilterValues.member = Shapes::ShapeRef.new(shape: FilterAttributeValue)
 
     FsxProtocol.add_member(:nfs, Shapes::ShapeRef.new(shape: FsxProtocolNfs, location_name: "NFS"))
+    FsxProtocol.add_member(:smb, Shapes::ShapeRef.new(shape: FsxProtocolSmb, location_name: "SMB"))
     FsxProtocol.struct_class = Types::FsxProtocol
 
     FsxProtocolNfs.add_member(:mount_options, Shapes::ShapeRef.new(shape: NfsMountOptions, location_name: "MountOptions"))
     FsxProtocolNfs.struct_class = Types::FsxProtocolNfs
+
+    FsxProtocolSmb.add_member(:domain, Shapes::ShapeRef.new(shape: SmbDomain, location_name: "Domain"))
+    FsxProtocolSmb.add_member(:mount_options, Shapes::ShapeRef.new(shape: SmbMountOptions, location_name: "MountOptions"))
+    FsxProtocolSmb.add_member(:password, Shapes::ShapeRef.new(shape: SmbPassword, required: true, location_name: "Password"))
+    FsxProtocolSmb.add_member(:user, Shapes::ShapeRef.new(shape: SmbUser, required: true, location_name: "User"))
+    FsxProtocolSmb.struct_class = Types::FsxProtocolSmb
 
     HdfsNameNode.add_member(:hostname, Shapes::ShapeRef.new(shape: HdfsServerHostname, required: true, location_name: "Hostname"))
     HdfsNameNode.add_member(:port, Shapes::ShapeRef.new(shape: HdfsServerPort, required: true, location_name: "Port"))
@@ -876,6 +912,16 @@ module Aws::DataSync
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
 
+      api.add_operation(:create_location_fsx_ontap, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateLocationFsxOntap"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateLocationFsxOntapRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateLocationFsxOntapResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+      end)
+
       api.add_operation(:create_location_fsx_open_zfs, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateLocationFsxOpenZfs"
         o.http_method = "POST"
@@ -1012,6 +1058,16 @@ module Aws::DataSync
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeLocationFsxLustreRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeLocationFsxLustreResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+      end)
+
+      api.add_operation(:describe_location_fsx_ontap, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeLocationFsxOntap"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeLocationFsxOntapRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeLocationFsxOntapResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)

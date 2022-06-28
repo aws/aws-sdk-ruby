@@ -4294,8 +4294,7 @@ module Aws::EC2
     #   instance.
     #
     # @option params [Boolean] :ephemeral_storage
-    #   Indicates whether the Capacity Reservation supports instances with
-    #   temporary, block-level storage.
+    #   *Deprecated.*
     #
     # @option params [Time,DateTime,Date,Integer,String] :end_date
     #   The date and time at which the Capacity Reservation expires. When a
@@ -7118,7 +7117,18 @@ module Aws::EC2
     #   The information for the launch template.
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
-    #   The tags to apply to the launch template during creation.
+    #   The tags to apply to the launch template on creation. To tag the
+    #   launch template, the resource type must be `launch-template`.
+    #
+    #   <note markdown="1"> To specify the tags for the resources that are created when an
+    #   instance is launched, you must use the `TagSpecifications` parameter
+    #   in the [launch template data][1] structure.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestLaunchTemplateData.html
     #
     # @return [Types::CreateLaunchTemplateResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9224,6 +9234,13 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the new placement group.
     #
+    # @option params [String] :spread_level
+    #   Determines how placement groups spread instances.
+    #
+    #   * Host – You can use `host` only with Outpost placement groups.
+    #
+    #   * Rack – No usage restrictions.
+    #
     # @return [Types::CreatePlacementGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePlacementGroupResult#placement_group #placement_group} => Types::PlacementGroup
@@ -9260,6 +9277,7 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     spread_level: "host", # accepts host, rack
     #   })
     #
     # @example Response structure
@@ -9273,6 +9291,7 @@ module Aws::EC2
     #   resp.placement_group.tags[0].key #=> String
     #   resp.placement_group.tags[0].value #=> String
     #   resp.placement_group.group_arn #=> String
+    #   resp.placement_group.spread_level #=> String, one of "host", "rack"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreatePlacementGroup AWS API Documentation
     #
@@ -9612,10 +9631,9 @@ module Aws::EC2
 
     # Creates a route in a route table within a VPC.
     #
-    # You must specify one of the following targets: internet gateway or
-    # virtual private gateway, NAT instance, NAT gateway, VPC peering
-    # connection, network interface, egress-only internet gateway, or
-    # transit gateway.
+    # You must specify either a destination CIDR block or a prefix list ID.
+    # You must also specify exactly one of the resources from the parameter
+    # list.
     #
     # When determining how to route traffic, we use the route with the most
     # specific match. For example, traffic is destined for the IPv4 address
@@ -11584,9 +11602,8 @@ module Aws::EC2
 
     # Requests a transit gateway peering attachment between the specified
     # transit gateway (requester) and a peer transit gateway (accepter). The
-    # transit gateways must be in different Regions. The peer transit
-    # gateway can be in your account or a different Amazon Web Services
-    # account.
+    # peer transit gateway can be in your account or a different Amazon Web
+    # Services account.
     #
     # After you create the peering attachment, the owner of the accepter
     # transit gateway must accept the attachment request.
@@ -24113,6 +24130,9 @@ module Aws::EC2
     #   * `entry.rule-action` - Allows or denies the matching traffic (`allow`
     #     \| `deny`).
     #
+    #   * `entry.egress` - A Boolean that indicates the type of rule. Specify
+    #     `true` for egress rules, or `false` for ingress rules.
+    #
     #   * `entry.rule-number` - The number of an entry (in other words, rule)
     #     in the set of ACL entries.
     #
@@ -25414,6 +25434,9 @@ module Aws::EC2
     #
     #   * `group-arn` - The Amazon Resource Name (ARN) of the placement group.
     #
+    #   * `spread-level` - The spread level for the placement group (`host` \|
+    #     `rack`).
+    #
     #   * `state` - The state of the placement group (`pending` \| `available`
     #     \| `deleting` \| `deleted`).
     #
@@ -25475,6 +25498,7 @@ module Aws::EC2
     #   resp.placement_groups[0].tags[0].key #=> String
     #   resp.placement_groups[0].tags[0].value #=> String
     #   resp.placement_groups[0].group_arn #=> String
+    #   resp.placement_groups[0].spread_level #=> String, one of "host", "rack"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribePlacementGroups AWS API Documentation
     #
@@ -44459,6 +44483,13 @@ module Aws::EC2
     # you might be able to recover it. For more information, see
     # AllocateAddress.
     #
+    # For more information, see [Elastic IP Addresses][1] in the *Amazon
+    # Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
+    #
     # @option params [String] :allocation_id
     #   \[EC2-VPC\] The allocation ID. Required for EC2-VPC.
     #
@@ -44832,10 +44863,11 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Replaces an existing route within a route table in a VPC. You must
-    # provide only one of the following: internet gateway, virtual private
-    # gateway, NAT instance, NAT gateway, VPC peering connection, network
-    # interface, egress-only internet gateway, or transit gateway.
+    # Replaces an existing route within a route table in a VPC.
+    #
+    # You must specify either a destination CIDR block or a prefix list ID.
+    # You must also specify exactly one of the resources from the parameter
+    # list, or reset the local route to its default target.
     #
     # For more information, see [Route tables][1] in the *Amazon Virtual
     # Private Cloud User Guide*.
@@ -49714,7 +49746,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.319.0'
+      context[:gem_version] = '1.320.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

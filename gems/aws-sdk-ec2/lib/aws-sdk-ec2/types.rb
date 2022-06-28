@@ -4348,8 +4348,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] ephemeral_storage
-    #   Indicates whether the Capacity Reservation supports instances with
-    #   temporary, block-level storage.
+    #   *Deprecated.*
     #   @return [Boolean]
     #
     # @!attribute [rw] state
@@ -6766,8 +6765,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] ephemeral_storage
-    #   Indicates whether the Capacity Reservation supports instances with
-    #   temporary, block-level storage.
+    #   *Deprecated.*
     #   @return [Boolean]
     #
     # @!attribute [rw] end_date
@@ -9317,7 +9315,18 @@ module Aws::EC2
     #   @return [Types::RequestLaunchTemplateData]
     #
     # @!attribute [rw] tag_specifications
-    #   The tags to apply to the launch template during creation.
+    #   The tags to apply to the launch template on creation. To tag the
+    #   launch template, the resource type must be `launch-template`.
+    #
+    #   <note markdown="1"> To specify the tags for the resources that are created when an
+    #   instance is launched, you must use the `TagSpecifications` parameter
+    #   in the [launch template data][1] structure.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestLaunchTemplateData.html
     #   @return [Array<Types::TagSpecification>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateLaunchTemplateRequest AWS API Documentation
@@ -10672,6 +10681,7 @@ module Aws::EC2
     #             ],
     #           },
     #         ],
+    #         spread_level: "host", # accepts host, rack
     #       }
     #
     # @!attribute [rw] dry_run
@@ -10701,6 +10711,14 @@ module Aws::EC2
     #   The tags to apply to the new placement group.
     #   @return [Array<Types::TagSpecification>]
     #
+    # @!attribute [rw] spread_level
+    #   Determines how placement groups spread instances.
+    #
+    #   * Host – You can use `host` only with Outpost placement groups.
+    #
+    #   * Rack – No usage restrictions.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreatePlacementGroupRequest AWS API Documentation
     #
     class CreatePlacementGroupRequest < Struct.new(
@@ -10708,7 +10726,8 @@ module Aws::EC2
       :group_name,
       :strategy,
       :partition_count,
-      :tag_specifications)
+      :tag_specifications,
+      :spread_level)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23314,6 +23333,9 @@ module Aws::EC2
     #   * `entry.rule-action` - Allows or denies the matching traffic
     #     (`allow` \| `deny`).
     #
+    #   * `entry.egress` - A Boolean that indicates the type of rule.
+    #     Specify `true` for egress rules, or `false` for ingress rules.
+    #
     #   * `entry.rule-number` - The number of an entry (in other words,
     #     rule) in the set of ACL entries.
     #
@@ -24095,6 +24117,9 @@ module Aws::EC2
     #
     #   * `group-arn` - The Amazon Resource Name (ARN) of the placement
     #     group.
+    #
+    #   * `spread-level` - The spread level for the placement group (`host`
+    #     \| `rack`).
     #
     #   * `state` - The state of the placement group (`pending` \|
     #     `available` \| `deleting` \| `deleted`).
@@ -32449,17 +32474,20 @@ module Aws::EC2
     #     and Amazon EC2 is attempting to maintain the target number of
     #     running instances.
     #
-    #   * `cancelled` - The EC2 Fleet or Spot Fleet request is canceled and
-    #     has no running instances. The EC2 Fleet or Spot Fleet will be
-    #     deleted two days after its instances are terminated.
+    #   * `deleted` (EC2 Fleet) / `cancelled` (Spot Fleet) - The EC2 Fleet
+    #     is deleted or the Spot Fleet request is canceled and has no
+    #     running instances. The EC2 Fleet or Spot Fleet will be deleted two
+    #     days after its instances are terminated.
     #
-    #   * `cancelled_running` - The EC2 Fleet or Spot Fleet request is
-    #     canceled and does not launch additional instances. Its existing
-    #     instances continue to run until they are interrupted or
-    #     terminated. The request remains in this state until all instances
-    #     are interrupted or terminated.
+    #   * `deleted_running` (EC2 Fleet) / `cancelled_running` (Spot Fleet) -
+    #     The EC2 Fleet is deleted or the Spot Fleet request is canceled and
+    #     does not launch additional instances. Its existing instances
+    #     continue to run until they are interrupted or terminated. The
+    #     request remains in this state until all instances are interrupted
+    #     or terminated.
     #
-    #   * `cancelled_terminating` - The EC2 Fleet or Spot Fleet request is
+    #   * `deleted_terminating` (EC2 Fleet) / `cancelled_terminating` (Spot
+    #     Fleet) - The EC2 Fleet is deleted or the Spot Fleet request is
     #     canceled and its instances are terminating. The request remains in
     #     this state until all instances are terminated.
     #
@@ -41361,10 +41389,10 @@ module Aws::EC2
     #   * For instance types with hard disk drive (HDD) storage, specify
     #     `hdd`.
     #
-    #   * For instance types with solid state drive (SDD) storage, specify
-    #     `sdd`.
+    #   * For instance types with solid state drive (SSD) storage, specify
+    #     `ssd`.
     #
-    #   Default: `hdd` and `sdd`
+    #   Default: `hdd` and `ssd`
     #   @return [Array<String>]
     #
     # @!attribute [rw] total_local_storage_gb
@@ -41761,10 +41789,10 @@ module Aws::EC2
     #   * For instance types with hard disk drive (HDD) storage, specify
     #     `hdd`.
     #
-    #   * For instance types with solid state drive (SDD) storage, specify
-    #     `sdd`.
+    #   * For instance types with solid state drive (SSD) storage, specify
+    #     `ssd`.
     #
-    #   Default: `hdd` and `sdd`
+    #   Default: `hdd` and `ssd`
     #   @return [Array<String>]
     #
     # @!attribute [rw] total_local_storage_gb
@@ -45630,10 +45658,10 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # The tag specification for the launch template.
+    # The tags specification for the launch template.
     #
     # @!attribute [rw] resource_type
-    #   The type of resource.
+    #   The type of resource to tag.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -45649,7 +45677,8 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # The tags specification for the launch template.
+    # The tags specification for the resources that are created during
+    # instance launch.
     #
     # @note When making an API call, you may pass LaunchTemplateTagSpecificationRequest
     #   data as a hash:
@@ -45665,10 +45694,14 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] resource_type
-    #   The type of resource to tag. Currently, the resource types that
-    #   support tagging on creation are `instance`, `volume`, `elastic-gpu`,
-    #   `network-interface`, and `spot-instances-request`. To tag a resource
-    #   after it has been created, see [CreateTags][1].
+    #   The type of resource to tag.
+    #
+    #   The `Valid Values` are all the resource types that can be tagged.
+    #   However, when creating a launch template, you can specify tags for
+    #   the following resource types only: `instance` \| `volume` \|
+    #   `elastic-gpu` \| `network-interface` \| `spot-instances-request`
+    #
+    #   To tag a resource after it has been created, see [CreateTags][1].
     #
     #
     #
@@ -52832,7 +52865,7 @@ module Aws::EC2
     #   @return [Array<Types::AdditionalDetail>]
     #
     # @!attribute [rw] transit_gateway
-    #   Describes a path component.
+    #   The transit gateway.
     #   @return [Types::AnalysisComponent]
     #
     # @!attribute [rw] transit_gateway_route_table_route
@@ -53429,6 +53462,11 @@ module Aws::EC2
     #   The Amazon Resource Name (ARN) of the placement group.
     #   @return [String]
     #
+    # @!attribute [rw] spread_level
+    #   The spread level for the placement group. *Only* Outpost placement
+    #   groups can be spread across hosts.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PlacementGroup AWS API Documentation
     #
     class PlacementGroup < Struct.new(
@@ -53438,7 +53476,8 @@ module Aws::EC2
       :partition_count,
       :group_id,
       :tags,
-      :group_arn)
+      :group_arn,
+      :spread_level)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -56494,14 +56533,32 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] tag_specifications
-    #   The tags to apply to the resources during launch. You can only tag
-    #   instances and volumes on launch. The specified tags are applied to
-    #   all instances or volumes that are created during launch. To tag a
-    #   resource after it has been created, see [CreateTags][1].
+    #   The tags to apply to the resources that are created during instance
+    #   launch.
+    #
+    #   You can specify tags for the following resources only:
+    #
+    #   * Instances
+    #
+    #   * Volumes
+    #
+    #   * Elastic graphics
+    #
+    #   * Spot Instance requests
+    #
+    #   * Network interfaces
+    #
+    #   To tag a resource after it has been created, see [CreateTags][1].
+    #
+    #   <note markdown="1"> To tag the launch template itself, you must use the
+    #   [TagSpecification][2] parameter.
+    #
+    #    </note>
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateLaunchTemplate.html
     #   @return [Array<Types::LaunchTemplateTagSpecificationRequest>]
     #
     # @!attribute [rw] elastic_gpu_specifications
@@ -56534,8 +56591,8 @@ module Aws::EC2
     #   @return [Types::LaunchTemplateInstanceMarketOptionsRequest]
     #
     # @!attribute [rw] credit_specification
-    #   The credit option for CPU usage of the instance. Valid for T2, T3,
-    #   or T3a instances only.
+    #   The credit option for CPU usage of the instance. Valid only for T
+    #   instances.
     #   @return [Types::CreditSpecificationRequest]
     #
     # @!attribute [rw] cpu_options
@@ -58446,7 +58503,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] tag_specifications
-    #   The tags.
+    #   The tags that are applied to the resources that are created during
+    #   instance launch.
     #   @return [Array<Types::LaunchTemplateTagSpecification>]
     #
     # @!attribute [rw] elastic_gpu_specifications

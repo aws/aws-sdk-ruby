@@ -2350,6 +2350,7 @@ module Aws::EC2
     SpotPlacementScoresTargetCapacity = Shapes::IntegerShape.new(name: 'SpotPlacementScoresTargetCapacity')
     SpotPrice = Shapes::StructureShape.new(name: 'SpotPrice')
     SpotPriceHistoryList = Shapes::ListShape.new(name: 'SpotPriceHistoryList')
+    SpreadLevel = Shapes::StringShape.new(name: 'SpreadLevel')
     StaleIpPermission = Shapes::StructureShape.new(name: 'StaleIpPermission')
     StaleIpPermissionSet = Shapes::ListShape.new(name: 'StaleIpPermissionSet')
     StaleSecurityGroup = Shapes::StructureShape.new(name: 'StaleSecurityGroup')
@@ -4240,6 +4241,7 @@ module Aws::EC2
     CreatePlacementGroupRequest.add_member(:strategy, Shapes::ShapeRef.new(shape: PlacementStrategy, location_name: "strategy"))
     CreatePlacementGroupRequest.add_member(:partition_count, Shapes::ShapeRef.new(shape: Integer, location_name: "PartitionCount"))
     CreatePlacementGroupRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    CreatePlacementGroupRequest.add_member(:spread_level, Shapes::ShapeRef.new(shape: SpreadLevel, location_name: "SpreadLevel"))
     CreatePlacementGroupRequest.struct_class = Types::CreatePlacementGroupRequest
 
     CreatePlacementGroupResult.add_member(:placement_group, Shapes::ShapeRef.new(shape: PlacementGroup, location_name: "placementGroup"))
@@ -10568,6 +10570,7 @@ module Aws::EC2
     PlacementGroup.add_member(:group_id, Shapes::ShapeRef.new(shape: String, location_name: "groupId"))
     PlacementGroup.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     PlacementGroup.add_member(:group_arn, Shapes::ShapeRef.new(shape: String, location_name: "groupArn"))
+    PlacementGroup.add_member(:spread_level, Shapes::ShapeRef.new(shape: SpreadLevel, location_name: "spreadLevel"))
     PlacementGroup.struct_class = Types::PlacementGroup
 
     PlacementGroupIdStringList.member = Shapes::ShapeRef.new(shape: PlacementGroupId, location_name: "GroupId")

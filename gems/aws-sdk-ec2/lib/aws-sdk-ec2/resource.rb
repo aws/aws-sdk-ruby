@@ -916,6 +916,7 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     spread_level: "host", # accepts host, rack
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -935,6 +936,12 @@ module Aws::EC2
     #   `partition`.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the new placement group.
+    # @option options [String] :spread_level
+    #   Determines how placement groups spread instances.
+    #
+    #   * Host – You can use `host` only with Outpost placement groups.
+    #
+    #   * Rack – No usage restrictions.
     # @return [PlacementGroup]
     def create_placement_group(options = {})
       @client.create_placement_group(options)
@@ -2742,6 +2749,9 @@ module Aws::EC2
     #   * `entry.rule-action` - Allows or denies the matching traffic (`allow`
     #     \| `deny`).
     #
+    #   * `entry.egress` - A Boolean that indicates the type of rule. Specify
+    #     `true` for egress rules, or `false` for ingress rules.
+    #
     #   * `entry.rule-number` - The number of an entry (in other words, rule)
     #     in the set of ACL entries.
     #
@@ -2985,6 +2995,9 @@ module Aws::EC2
     #   * `group-name` - The name of the placement group.
     #
     #   * `group-arn` - The Amazon Resource Name (ARN) of the placement group.
+    #
+    #   * `spread-level` - The spread level for the placement group (`host` \|
+    #     `rack`).
     #
     #   * `state` - The state of the placement group (`pending` \| `available`
     #     \| `deleting` \| `deleted`).

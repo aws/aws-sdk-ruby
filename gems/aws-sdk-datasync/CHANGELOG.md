@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2022-06-28)
+------------------
+
+* Feature - AWS DataSync now supports Amazon FSx for NetApp ONTAP locations.
+
 1.47.0 (2022-05-27)
 ------------------
 

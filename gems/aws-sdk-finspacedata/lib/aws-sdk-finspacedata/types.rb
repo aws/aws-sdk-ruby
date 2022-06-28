@@ -69,6 +69,36 @@ module Aws::FinSpaceData
       include Aws::Structure
     end
 
+    # The credentials required to access the external Dataview from the S3
+    # location.
+    #
+    # @!attribute [rw] access_key_id
+    #   The unique identifier for the security credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_access_key
+    #   The secret access key that can be used to sign requests.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_token
+    #   The token that users must pass to use the credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] expiration
+    #   The Epoch time when the current credentials expire.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/AwsCredentials AWS API Documentation
+    #
+    class AwsCredentials < Struct.new(
+      :access_key_id,
+      :secret_access_key,
+      :session_token,
+      :expiration)
+      SENSITIVE = [:secret_access_key, :session_token]
+      include Aws::Structure
+    end
+
     # The structure with error messages.
     #
     # @!attribute [rw] error_message
@@ -631,13 +661,20 @@ module Aws::FinSpaceData
     #   The option to indicate FinSpace application permissions that are
     #   granted to a specific group.
     #
+    #   When assigning application permissions, be aware that the permission
+    #   `ManageUsersAndGroups` allows users to grant themselves or others
+    #   access to any functionality in their FinSpace environment's
+    #   application. It should only be granted to trusted users.
+    #
     #   * `CreateDataset` – Group members can create new datasets.
     #
     #   * `ManageClusters` – Group members can manage Apache Spark clusters
     #     from FinSpace notebooks.
     #
     #   * `ManageUsersAndGroups` – Group members can manage users and
-    #     permission groups.
+    #     permission groups. This is a privileged permission that allows
+    #     users to grant themselves or others access to any functionality in
+    #     the application. It should only be granted to trusted users.
     #
     #   * `ManageAttributeSets` – Group members can manage attribute sets.
     #
@@ -1625,6 +1662,49 @@ module Aws::FinSpaceData
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetExternalDataViewAccessDetailsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         data_view_id: "DataViewId", # required
+    #         dataset_id: "DatasetId", # required
+    #       }
+    #
+    # @!attribute [rw] data_view_id
+    #   The unique identifier for the Dataview that you want to access.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_id
+    #   The unique identifier for the Dataset.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/GetExternalDataViewAccessDetailsRequest AWS API Documentation
+    #
+    class GetExternalDataViewAccessDetailsRequest < Struct.new(
+      :data_view_id,
+      :dataset_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] credentials
+    #   The credentials required to access the external Dataview from the S3
+    #   location.
+    #   @return [Types::AwsCredentials]
+    #
+    # @!attribute [rw] s3_location
+    #   The location where the external Dataview is stored.
+    #   @return [Types::S3Location]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/GetExternalDataViewAccessDetailsResponse AWS API Documentation
+    #
+    class GetExternalDataViewAccessDetailsResponse < Struct.new(
+      :credentials,
+      :s3_location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetPermissionGroupRequest
     #   data as a hash:
     #
@@ -2250,13 +2330,20 @@ module Aws::FinSpaceData
     #   Indicates the permissions that are granted to a specific group for
     #   accessing the FinSpace application.
     #
+    #   When assigning application permissions, be aware that the permission
+    #   `ManageUsersAndGroups` allows users to grant themselves or others
+    #   access to any functionality in their FinSpace environment's
+    #   application. It should only be granted to trusted users.
+    #
     #   * `CreateDataset` – Group members can create new datasets.
     #
     #   * `ManageClusters` – Group members can manage Apache Spark clusters
     #     from FinSpace notebooks.
     #
     #   * `ManageUsersAndGroups` – Group members can manage users and
-    #     permission groups.
+    #     permission groups. This is a privileged permission that allows
+    #     users to grant themselves or others access to any functionality in
+    #     the application. It should only be granted to trusted users.
     #
     #   * `ManageAttributeSets` – Group members can manage attribute sets.
     #
@@ -2485,6 +2572,26 @@ module Aws::FinSpaceData
     #
     class ResourcePermission < Struct.new(
       :permission)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The location of an external Dataview in an S3 bucket.
+    #
+    # @!attribute [rw] bucket
+    #   The name of the S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] key
+    #   The path of the folder, within the S3 bucket that contains the
+    #   Dataset.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/S3Location AWS API Documentation
+    #
+    class S3Location < Struct.new(
+      :bucket,
+      :key)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2796,13 +2903,20 @@ module Aws::FinSpaceData
     #   The permissions that are granted to a specific group for accessing
     #   the FinSpace application.
     #
+    #   When assigning application permissions, be aware that the permission
+    #   `ManageUsersAndGroups` allows users to grant themselves or others
+    #   access to any functionality in their FinSpace environment's
+    #   application. It should only be granted to trusted users.
+    #
     #   * `CreateDataset` – Group members can create new datasets.
     #
     #   * `ManageClusters` – Group members can manage Apache Spark clusters
     #     from FinSpace notebooks.
     #
     #   * `ManageUsersAndGroups` – Group members can manage users and
-    #     permission groups.
+    #     permission groups. This is a privileged permission that allows
+    #     users to grant themselves or others access to any functionality in
+    #     the application. It should only be granted to trusted users.
     #
     #   * `ManageAttributeSets` – Group members can manage attribute sets.
     #

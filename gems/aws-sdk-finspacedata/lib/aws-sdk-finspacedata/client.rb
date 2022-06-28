@@ -667,13 +667,20 @@ module Aws::FinSpaceData
     #   The option to indicate FinSpace application permissions that are
     #   granted to a specific group.
     #
+    #   When assigning application permissions, be aware that the permission
+    #   `ManageUsersAndGroups` allows users to grant themselves or others
+    #   access to any functionality in their FinSpace environment's
+    #   application. It should only be granted to trusted users.
+    #
     #   * `CreateDataset` – Group members can create new datasets.
     #
     #   * `ManageClusters` – Group members can manage Apache Spark clusters
     #     from FinSpace notebooks.
     #
     #   * `ManageUsersAndGroups` – Group members can manage users and
-    #     permission groups.
+    #     permission groups. This is a privileged permission that allows users
+    #     to grant themselves or others access to any functionality in the
+    #     application. It should only be granted to trusted users.
     #
     #   * `ManageAttributeSets` – Group members can manage attribute sets.
     #
@@ -1140,6 +1147,50 @@ module Aws::FinSpaceData
     # @param [Hash] params ({})
     def get_dataset(params = {}, options = {})
       req = build_request(:get_dataset, params)
+      req.send_request(options)
+    end
+
+    # Returns the credentials to access the external Dataview from an S3
+    # location. To call this API:
+    #
+    # * You must retrieve the programmatic credentials.
+    #
+    # * You must be a member of a FinSpace user group, where the dataset
+    #   that you want to access has `Read Dataset Data` permissions.
+    #
+    # @option params [required, String] :data_view_id
+    #   The unique identifier for the Dataview that you want to access.
+    #
+    # @option params [required, String] :dataset_id
+    #   The unique identifier for the Dataset.
+    #
+    # @return [Types::GetExternalDataViewAccessDetailsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetExternalDataViewAccessDetailsResponse#credentials #credentials} => Types::AwsCredentials
+    #   * {Types::GetExternalDataViewAccessDetailsResponse#s3_location #s3_location} => Types::S3Location
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_external_data_view_access_details({
+    #     data_view_id: "DataViewId", # required
+    #     dataset_id: "DatasetId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.credentials.access_key_id #=> String
+    #   resp.credentials.secret_access_key #=> String
+    #   resp.credentials.session_token #=> String
+    #   resp.credentials.expiration #=> Integer
+    #   resp.s3_location.bucket #=> String
+    #   resp.s3_location.key #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/GetExternalDataViewAccessDetails AWS API Documentation
+    #
+    # @overload get_external_data_view_access_details(params = {})
+    # @param [Hash] params ({})
+    def get_external_data_view_access_details(params = {}, options = {})
+      req = build_request(:get_external_data_view_access_details, params)
       req.send_request(options)
     end
 
@@ -1887,13 +1938,20 @@ module Aws::FinSpaceData
     #   The permissions that are granted to a specific group for accessing the
     #   FinSpace application.
     #
+    #   When assigning application permissions, be aware that the permission
+    #   `ManageUsersAndGroups` allows users to grant themselves or others
+    #   access to any functionality in their FinSpace environment's
+    #   application. It should only be granted to trusted users.
+    #
     #   * `CreateDataset` – Group members can create new datasets.
     #
     #   * `ManageClusters` – Group members can manage Apache Spark clusters
     #     from FinSpace notebooks.
     #
     #   * `ManageUsersAndGroups` – Group members can manage users and
-    #     permission groups.
+    #     permission groups. This is a privileged permission that allows users
+    #     to grant themselves or others access to any functionality in the
+    #     application. It should only be granted to trusted users.
     #
     #   * `ManageAttributeSets` – Group members can manage attribute sets.
     #
@@ -2022,7 +2080,7 @@ module Aws::FinSpaceData
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-finspacedata'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

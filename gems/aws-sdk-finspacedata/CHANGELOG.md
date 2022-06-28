@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2022-06-28)
+------------------
+
+* Feature - Release new API GetExternalDataViewAccessDetails
+
 1.16.0 (2022-06-15)
 ------------------
 
