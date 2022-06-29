@@ -740,7 +740,8 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] subnets
     #   The IDs of the public subnets. You can specify only one subnet per
     #   Availability Zone. You must specify either subnets or subnet
-    #   mappings.
+    #   mappings, but not both. To specify an Elastic IP address, specify
+    #   subnet mappings instead of subnets.
     #
     #   \[Application Load Balancers\] You must specify subnets from at
     #   least two Availability Zones.
@@ -761,7 +762,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] subnet_mappings
     #   The IDs of the public subnets. You can specify only one subnet per
     #   Availability Zone. You must specify either subnets or subnet
-    #   mappings.
+    #   mappings, but not both.
     #
     #   \[Application Load Balancers\] You must specify subnets from at
     #   least two Availability Zones. You cannot specify Elastic IP
@@ -1111,11 +1112,12 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] health_check_interval_seconds
     #   The approximate amount of time, in seconds, between health checks of
-    #   an individual target. If the target group protocol is TCP, TLS, UDP,
-    #   or TCP\_UDP, the supported values are 10 and 30 seconds. If the
-    #   target group protocol is HTTP or HTTPS, the default is 30 seconds.
-    #   If the target group protocol is GENEVE, the default is 10 seconds.
-    #   If the target type is `lambda`, the default is 35 seconds.
+    #   an individual target. If the target group protocol is HTTP or HTTPS,
+    #   the default is 30 seconds. If the target group protocol is TCP, TLS,
+    #   UDP, or TCP\_UDP, the supported values are 10 and 30 seconds and the
+    #   default is 30 seconds. If the target group protocol is GENEVE, the
+    #   default is 10 seconds. If the target type is `lambda`, the default
+    #   is 35 seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] health_check_timeout_seconds
@@ -2387,7 +2389,7 @@ module Aws::ElasticLoadBalancingV2
     #   * `access_logs.s3.prefix` - The prefix for the location in the S3
     #     bucket for the access logs.
     #
-    #   * `ipv6.deny-all-igw-traffic` - Blocks internet gateway (IGW) access
+    #   * `ipv6.deny_all_igw_traffic` - Blocks internet gateway (IGW) access
     #     to the load balancer. It is set to `false` for internet-facing
     #     load balancers and `true` for internal load balancers, preventing
     #     unintended access to your internal load balancer through an
@@ -2410,6 +2412,11 @@ module Aws::ElasticLoadBalancingV2
     #     load balancer (`true`) or routed to targets (`false`). The default
     #     is `false`.
     #
+    #   * `routing.http.preserve_host_header.enabled` - Indicates whether
+    #     the Application Load Balancer should preserve the `Host` header in
+    #     the HTTP request and send it to the target without any change. The
+    #     possible values are `true` and `false`. The default is `false`.
+    #
     #   * `routing.http.x_amzn_tls_version_and_cipher_suite.enabled` -
     #     Indicates whether the two headers (`x-amzn-tls-version` and
     #     `x-amzn-tls-cipher-suite`), which contain information about the
@@ -2425,6 +2432,24 @@ module Aws::ElasticLoadBalancingV2
     #     `X-Forwarded-For` header should preserve the source port that the
     #     client used to connect to the load balancer. The possible values
     #     are `true` and `false`. The default is `false`.
+    #
+    #   * `routing.http.xff_header_processing.mode` - Enables you to modify,
+    #     preserve, or remove the `X-Forwarded-For` header in the HTTP
+    #     request before the Application Load Balancer sends the request to
+    #     the target. The possible values are `append`, `preserve`, and
+    #     `remove`. The default is `append`.
+    #
+    #     * If the value is `append`, the Application Load Balancer adds the
+    #       client IP address (of the last hop) to the `X-Forwarded-For`
+    #       header in the HTTP request before it sends it to targets.
+    #
+    #     * If the value is `preserve` the Application Load Balancer
+    #       preserves the `X-Forwarded-For` header in the HTTP request, and
+    #       sends it to targets without any change.
+    #
+    #     * If the value is `remove`, the Application Load Balancer removes
+    #       the `X-Forwarded-For` header in the HTTP request before it sends
+    #       it to targets.
     #
     #   * `routing.http2.enabled` - Indicates whether HTTP/2 is enabled. The
     #     possible values are `true` and `false`. The default is `true`.
@@ -2944,8 +2969,6 @@ module Aws::ElasticLoadBalancingV2
     #   health checks only if the protocol of the target group is TCP, TLS,
     #   UDP, or TCP\_UDP. The GENEVE, TLS, UDP, and TCP\_UDP protocols are
     #   not supported for health checks.
-    #
-    #   With Network Load Balancers, you can't modify this setting.
     #   @return [String]
     #
     # @!attribute [rw] health_check_port
@@ -2972,15 +2995,11 @@ module Aws::ElasticLoadBalancingV2
     #   The approximate amount of time, in seconds, between health checks of
     #   an individual target. For TCP health checks, the supported values
     #   are 10 or 30 seconds.
-    #
-    #   With Network Load Balancers, you can't modify this setting.
     #   @return [Integer]
     #
     # @!attribute [rw] health_check_timeout_seconds
     #   \[HTTP/HTTPS health checks\] The amount of time, in seconds, during
     #   which no response means a failed health check.
-    #
-    #   With Network Load Balancers, you can't modify this setting.
     #   @return [Integer]
     #
     # @!attribute [rw] healthy_threshold_count
@@ -2998,8 +3017,6 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] matcher
     #   \[HTTP/HTTPS health checks\] The HTTP or gRPC codes to use when
     #   checking for a successful response from a target.
-    #
-    #   With Network Load Balancers, you can't modify this setting.
     #   @return [Types::Matcher]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyTargetGroupInput AWS API Documentation
@@ -3371,7 +3388,8 @@ module Aws::ElasticLoadBalancingV2
     # Each rule can optionally include up to one of each of the following
     # conditions: `http-request-method`, `host-header`, `path-pattern`, and
     # `source-ip`. Each rule can also optionally include one or more of each
-    # of the following conditions: `http-header` and `query-string`.
+    # of the following conditions: `http-header` and `query-string`. Note
+    # that the value for a condition cannot be empty.
     #
     # @note When making an API call, you may pass RuleCondition
     #   data as a hash:

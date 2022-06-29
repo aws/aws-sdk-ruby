@@ -31,6 +31,7 @@ module Aws::MediaLive
     AcceptInputDeviceTransferRequest = Shapes::StructureShape.new(name: 'AcceptInputDeviceTransferRequest')
     AcceptInputDeviceTransferResponse = Shapes::StructureShape.new(name: 'AcceptInputDeviceTransferResponse')
     AccessDenied = Shapes::StructureShape.new(name: 'AccessDenied')
+    AccessibilityType = Shapes::StringShape.new(name: 'AccessibilityType')
     AfdSignaling = Shapes::StringShape.new(name: 'AfdSignaling')
     AncillarySourceSettings = Shapes::StructureShape.new(name: 'AncillarySourceSettings')
     ArchiveCdnSettings = Shapes::StructureShape.new(name: 'ArchiveCdnSettings')
@@ -538,7 +539,9 @@ module Aws::MediaLive
     RejectInputDeviceTransferRequest = Shapes::StructureShape.new(name: 'RejectInputDeviceTransferRequest')
     RejectInputDeviceTransferResponse = Shapes::StructureShape.new(name: 'RejectInputDeviceTransferResponse')
     RemixSettings = Shapes::StructureShape.new(name: 'RemixSettings')
+    RenewalSettings = Shapes::StructureShape.new(name: 'RenewalSettings')
     Reservation = Shapes::StructureShape.new(name: 'Reservation')
+    ReservationAutomaticRenewal = Shapes::StringShape.new(name: 'ReservationAutomaticRenewal')
     ReservationCodec = Shapes::StringShape.new(name: 'ReservationCodec')
     ReservationMaximumBitrate = Shapes::StringShape.new(name: 'ReservationMaximumBitrate')
     ReservationMaximumFramerate = Shapes::StringShape.new(name: 'ReservationMaximumFramerate')
@@ -797,6 +800,8 @@ module Aws::MediaLive
     __longMin0Max86400000 = Shapes::IntegerShape.new(name: '__longMin0Max86400000')
     __string = Shapes::StringShape.new(name: '__string')
     __stringMax1000 = Shapes::StringShape.new(name: '__stringMax1000')
+    __stringMax2048 = Shapes::StringShape.new(name: '__stringMax2048')
+    __stringMax255 = Shapes::StringShape.new(name: '__stringMax255')
     __stringMax256 = Shapes::StringShape.new(name: '__stringMax256')
     __stringMax32 = Shapes::StringShape.new(name: '__stringMax32')
     __stringMin1 = Shapes::StringShape.new(name: '__stringMin1')
@@ -889,7 +894,7 @@ module Aws::MediaLive
     AudioDescription.add_member(:codec_settings, Shapes::ShapeRef.new(shape: AudioCodecSettings, location_name: "codecSettings"))
     AudioDescription.add_member(:language_code, Shapes::ShapeRef.new(shape: __stringMin1Max35, location_name: "languageCode"))
     AudioDescription.add_member(:language_code_control, Shapes::ShapeRef.new(shape: AudioDescriptionLanguageCodeControl, location_name: "languageCodeControl"))
-    AudioDescription.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
+    AudioDescription.add_member(:name, Shapes::ShapeRef.new(shape: __stringMax255, required: true, location_name: "name"))
     AudioDescription.add_member(:remix_settings, Shapes::ShapeRef.new(shape: RemixSettings, location_name: "remixSettings"))
     AudioDescription.add_member(:stream_name, Shapes::ShapeRef.new(shape: __string, location_name: "streamName"))
     AudioDescription.struct_class = Types::AudioDescription
@@ -1081,6 +1086,7 @@ module Aws::MediaLive
 
     CancelInputDeviceTransferResponse.struct_class = Types::CancelInputDeviceTransferResponse
 
+    CaptionDescription.add_member(:accessibility, Shapes::ShapeRef.new(shape: AccessibilityType, location_name: "accessibility"))
     CaptionDescription.add_member(:caption_selector_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "captionSelectorName"))
     CaptionDescription.add_member(:destination_settings, Shapes::ShapeRef.new(shape: CaptionDestinationSettings, location_name: "destinationSettings"))
     CaptionDescription.add_member(:language_code, Shapes::ShapeRef.new(shape: __string, location_name: "languageCode"))
@@ -1396,6 +1402,7 @@ module Aws::MediaLive
     DeleteReservationResponse.add_member(:offering_id, Shapes::ShapeRef.new(shape: __string, location_name: "offeringId"))
     DeleteReservationResponse.add_member(:offering_type, Shapes::ShapeRef.new(shape: OfferingType, location_name: "offeringType"))
     DeleteReservationResponse.add_member(:region, Shapes::ShapeRef.new(shape: __string, location_name: "region"))
+    DeleteReservationResponse.add_member(:renewal_settings, Shapes::ShapeRef.new(shape: RenewalSettings, location_name: "renewalSettings"))
     DeleteReservationResponse.add_member(:reservation_id, Shapes::ShapeRef.new(shape: __string, location_name: "reservationId"))
     DeleteReservationResponse.add_member(:resource_specification, Shapes::ShapeRef.new(shape: ReservationResourceSpecification, location_name: "resourceSpecification"))
     DeleteReservationResponse.add_member(:start, Shapes::ShapeRef.new(shape: __string, location_name: "start"))
@@ -1555,6 +1562,7 @@ module Aws::MediaLive
     DescribeReservationResponse.add_member(:offering_id, Shapes::ShapeRef.new(shape: __string, location_name: "offeringId"))
     DescribeReservationResponse.add_member(:offering_type, Shapes::ShapeRef.new(shape: OfferingType, location_name: "offeringType"))
     DescribeReservationResponse.add_member(:region, Shapes::ShapeRef.new(shape: __string, location_name: "region"))
+    DescribeReservationResponse.add_member(:renewal_settings, Shapes::ShapeRef.new(shape: RenewalSettings, location_name: "renewalSettings"))
     DescribeReservationResponse.add_member(:reservation_id, Shapes::ShapeRef.new(shape: __string, location_name: "reservationId"))
     DescribeReservationResponse.add_member(:resource_specification, Shapes::ShapeRef.new(shape: ReservationResourceSpecification, location_name: "resourceSpecification"))
     DescribeReservationResponse.add_member(:start, Shapes::ShapeRef.new(shape: __string, location_name: "start"))
@@ -2048,7 +2056,7 @@ module Aws::MediaLive
     InputDeviceUhdSettings.struct_class = Types::InputDeviceUhdSettings
 
     InputLocation.add_member(:password_param, Shapes::ShapeRef.new(shape: __string, location_name: "passwordParam"))
-    InputLocation.add_member(:uri, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "uri"))
+    InputLocation.add_member(:uri, Shapes::ShapeRef.new(shape: __stringMax2048, required: true, location_name: "uri"))
     InputLocation.add_member(:username, Shapes::ShapeRef.new(shape: __string, location_name: "username"))
     InputLocation.struct_class = Types::InputLocation
 
@@ -2636,6 +2644,7 @@ module Aws::MediaLive
 
     PurchaseOffering.add_member(:count, Shapes::ShapeRef.new(shape: __integerMin1, required: true, location_name: "count"))
     PurchaseOffering.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    PurchaseOffering.add_member(:renewal_settings, Shapes::ShapeRef.new(shape: RenewalSettings, location_name: "renewalSettings"))
     PurchaseOffering.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
     PurchaseOffering.add_member(:start, Shapes::ShapeRef.new(shape: __string, location_name: "start"))
     PurchaseOffering.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
@@ -2644,6 +2653,7 @@ module Aws::MediaLive
     PurchaseOfferingRequest.add_member(:count, Shapes::ShapeRef.new(shape: __integerMin1, required: true, location_name: "count"))
     PurchaseOfferingRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     PurchaseOfferingRequest.add_member(:offering_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "offeringId"))
+    PurchaseOfferingRequest.add_member(:renewal_settings, Shapes::ShapeRef.new(shape: RenewalSettings, location_name: "renewalSettings"))
     PurchaseOfferingRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
     PurchaseOfferingRequest.add_member(:start, Shapes::ShapeRef.new(shape: __string, location_name: "start"))
     PurchaseOfferingRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
@@ -2671,6 +2681,10 @@ module Aws::MediaLive
     RemixSettings.add_member(:channels_out, Shapes::ShapeRef.new(shape: __integerMin1Max8, location_name: "channelsOut"))
     RemixSettings.struct_class = Types::RemixSettings
 
+    RenewalSettings.add_member(:automatic_renewal, Shapes::ShapeRef.new(shape: ReservationAutomaticRenewal, location_name: "automaticRenewal"))
+    RenewalSettings.add_member(:renewal_count, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "renewalCount"))
+    RenewalSettings.struct_class = Types::RenewalSettings
+
     Reservation.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     Reservation.add_member(:count, Shapes::ShapeRef.new(shape: __integer, location_name: "count"))
     Reservation.add_member(:currency_code, Shapes::ShapeRef.new(shape: __string, location_name: "currencyCode"))
@@ -2683,6 +2697,7 @@ module Aws::MediaLive
     Reservation.add_member(:offering_id, Shapes::ShapeRef.new(shape: __string, location_name: "offeringId"))
     Reservation.add_member(:offering_type, Shapes::ShapeRef.new(shape: OfferingType, location_name: "offeringType"))
     Reservation.add_member(:region, Shapes::ShapeRef.new(shape: __string, location_name: "region"))
+    Reservation.add_member(:renewal_settings, Shapes::ShapeRef.new(shape: RenewalSettings, location_name: "renewalSettings"))
     Reservation.add_member(:reservation_id, Shapes::ShapeRef.new(shape: __string, location_name: "reservationId"))
     Reservation.add_member(:resource_specification, Shapes::ShapeRef.new(shape: ReservationResourceSpecification, location_name: "resourceSpecification"))
     Reservation.add_member(:start, Shapes::ShapeRef.new(shape: __string, location_name: "start"))
@@ -3118,9 +3133,11 @@ module Aws::MediaLive
     UpdateMultiplexResultModel.struct_class = Types::UpdateMultiplexResultModel
 
     UpdateReservation.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    UpdateReservation.add_member(:renewal_settings, Shapes::ShapeRef.new(shape: RenewalSettings, location_name: "renewalSettings"))
     UpdateReservation.struct_class = Types::UpdateReservation
 
     UpdateReservationRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    UpdateReservationRequest.add_member(:renewal_settings, Shapes::ShapeRef.new(shape: RenewalSettings, location_name: "renewalSettings"))
     UpdateReservationRequest.add_member(:reservation_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "reservationId"))
     UpdateReservationRequest.struct_class = Types::UpdateReservationRequest
 

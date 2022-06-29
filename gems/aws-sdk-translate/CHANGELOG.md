@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2022-06-29)
+------------------
+
+* Feature - Added ListLanguages API which can be used to list the languages supported by Translate.
+
 1.44.0 (2022-02-24)
 ------------------
 

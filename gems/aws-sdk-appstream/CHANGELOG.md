@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.66.0 (2022-06-29)
+------------------
+
+* Feature - Includes support for StreamingExperienceSettings in CreateStack and UpdateStack APIs
+
 1.65.0 (2022-04-14)
 ------------------
 

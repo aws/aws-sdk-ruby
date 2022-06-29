@@ -30,6 +30,7 @@ module Aws::Translate
     Description = Shapes::StringShape.new(name: 'Description')
     DetectedLanguageLowConfidenceException = Shapes::StructureShape.new(name: 'DetectedLanguageLowConfidenceException')
     Directionality = Shapes::StringShape.new(name: 'Directionality')
+    DisplayLanguageCode = Shapes::StringShape.new(name: 'DisplayLanguageCode')
     EncryptionKey = Shapes::StructureShape.new(name: 'EncryptionKey')
     EncryptionKeyID = Shapes::StringShape.new(name: 'EncryptionKeyID')
     EncryptionKeyType = Shapes::StringShape.new(name: 'EncryptionKeyType')
@@ -51,15 +52,20 @@ module Aws::Translate
     JobId = Shapes::StringShape.new(name: 'JobId')
     JobName = Shapes::StringShape.new(name: 'JobName')
     JobStatus = Shapes::StringShape.new(name: 'JobStatus')
+    Language = Shapes::StructureShape.new(name: 'Language')
     LanguageCodeString = Shapes::StringShape.new(name: 'LanguageCodeString')
     LanguageCodeStringList = Shapes::ListShape.new(name: 'LanguageCodeStringList')
+    LanguagesList = Shapes::ListShape.new(name: 'LanguagesList')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+    ListLanguagesRequest = Shapes::StructureShape.new(name: 'ListLanguagesRequest')
+    ListLanguagesResponse = Shapes::StructureShape.new(name: 'ListLanguagesResponse')
     ListParallelDataRequest = Shapes::StructureShape.new(name: 'ListParallelDataRequest')
     ListParallelDataResponse = Shapes::StructureShape.new(name: 'ListParallelDataResponse')
     ListTerminologiesRequest = Shapes::StructureShape.new(name: 'ListTerminologiesRequest')
     ListTerminologiesResponse = Shapes::StructureShape.new(name: 'ListTerminologiesResponse')
     ListTextTranslationJobsRequest = Shapes::StructureShape.new(name: 'ListTextTranslationJobsRequest')
     ListTextTranslationJobsResponse = Shapes::StructureShape.new(name: 'ListTextTranslationJobsResponse')
+    LocalizedNameString = Shapes::StringShape.new(name: 'LocalizedNameString')
     Long = Shapes::IntegerShape.new(name: 'Long')
     MaxResultsInteger = Shapes::IntegerShape.new(name: 'MaxResultsInteger')
     MergeStrategy = Shapes::StringShape.new(name: 'MergeStrategy')
@@ -103,6 +109,7 @@ module Aws::Translate
     TranslateTextResponse = Shapes::StructureShape.new(name: 'TranslateTextResponse')
     TranslationSettings = Shapes::StructureShape.new(name: 'TranslationSettings')
     UnboundedLengthString = Shapes::StringShape.new(name: 'UnboundedLengthString')
+    UnsupportedDisplayLanguageCodeException = Shapes::StructureShape.new(name: 'UnsupportedDisplayLanguageCodeException')
     UnsupportedLanguagePairException = Shapes::StructureShape.new(name: 'UnsupportedLanguagePairException')
     UpdateParallelDataRequest = Shapes::StructureShape.new(name: 'UpdateParallelDataRequest')
     UpdateParallelDataResponse = Shapes::StructureShape.new(name: 'UpdateParallelDataResponse')
@@ -204,10 +211,26 @@ module Aws::Translate
     JobDetails.add_member(:input_documents_count, Shapes::ShapeRef.new(shape: Integer, location_name: "InputDocumentsCount"))
     JobDetails.struct_class = Types::JobDetails
 
+    Language.add_member(:language_name, Shapes::ShapeRef.new(shape: LocalizedNameString, required: true, location_name: "LanguageName"))
+    Language.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCodeString, required: true, location_name: "LanguageCode"))
+    Language.struct_class = Types::Language
+
     LanguageCodeStringList.member = Shapes::ShapeRef.new(shape: LanguageCodeString)
+
+    LanguagesList.member = Shapes::ShapeRef.new(shape: Language)
 
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     LimitExceededException.struct_class = Types::LimitExceededException
+
+    ListLanguagesRequest.add_member(:display_language_code, Shapes::ShapeRef.new(shape: DisplayLanguageCode, location_name: "DisplayLanguageCode"))
+    ListLanguagesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListLanguagesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsInteger, location_name: "MaxResults"))
+    ListLanguagesRequest.struct_class = Types::ListLanguagesRequest
+
+    ListLanguagesResponse.add_member(:languages, Shapes::ShapeRef.new(shape: LanguagesList, location_name: "Languages"))
+    ListLanguagesResponse.add_member(:display_language_code, Shapes::ShapeRef.new(shape: DisplayLanguageCode, location_name: "DisplayLanguageCode"))
+    ListLanguagesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListLanguagesResponse.struct_class = Types::ListLanguagesResponse
 
     ListParallelDataRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListParallelDataRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsInteger, location_name: "MaxResults"))
@@ -382,6 +405,10 @@ module Aws::Translate
     TranslationSettings.add_member(:profanity, Shapes::ShapeRef.new(shape: Profanity, location_name: "Profanity"))
     TranslationSettings.struct_class = Types::TranslationSettings
 
+    UnsupportedDisplayLanguageCodeException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    UnsupportedDisplayLanguageCodeException.add_member(:display_language_code, Shapes::ShapeRef.new(shape: LanguageCodeString, location_name: "DisplayLanguageCode"))
+    UnsupportedDisplayLanguageCodeException.struct_class = Types::UnsupportedDisplayLanguageCodeException
+
     UnsupportedLanguagePairException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     UnsupportedLanguagePairException.add_member(:source_language_code, Shapes::ShapeRef.new(shape: LanguageCodeString, location_name: "SourceLanguageCode"))
     UnsupportedLanguagePairException.add_member(:target_language_code, Shapes::ShapeRef.new(shape: LanguageCodeString, location_name: "TargetLanguageCode"))
@@ -501,6 +528,24 @@ module Aws::Translate
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:list_languages, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListLanguages"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListLanguagesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListLanguagesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedDisplayLanguageCodeException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_parallel_data, Seahorse::Model::Operation.new.tap do |o|

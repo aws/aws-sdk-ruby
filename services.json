@@ -788,7 +788,7 @@
     "models": "redshift-data/2019-12-20"
   },
   "RedshiftServerless": {
-    "models": "redshiftserverless/2021-04-21"
+    "models": "redshift-serverless/2021-04-21"
   },
   "Rekognition": {
     "models": "rekognition/2016-06-27"

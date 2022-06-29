@@ -9148,14 +9148,17 @@ module Aws::SageMaker
     #   * {Types::DescribeFeatureGroupResponse#event_time_feature_name #event_time_feature_name} => String
     #   * {Types::DescribeFeatureGroupResponse#feature_definitions #feature_definitions} => Array&lt;Types::FeatureDefinition&gt;
     #   * {Types::DescribeFeatureGroupResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeFeatureGroupResponse#last_modified_time #last_modified_time} => Time
     #   * {Types::DescribeFeatureGroupResponse#online_store_config #online_store_config} => Types::OnlineStoreConfig
     #   * {Types::DescribeFeatureGroupResponse#offline_store_config #offline_store_config} => Types::OfflineStoreConfig
     #   * {Types::DescribeFeatureGroupResponse#role_arn #role_arn} => String
     #   * {Types::DescribeFeatureGroupResponse#feature_group_status #feature_group_status} => String
     #   * {Types::DescribeFeatureGroupResponse#offline_store_status #offline_store_status} => Types::OfflineStoreStatus
+    #   * {Types::DescribeFeatureGroupResponse#last_update_status #last_update_status} => Types::LastUpdateStatus
     #   * {Types::DescribeFeatureGroupResponse#failure_reason #failure_reason} => String
     #   * {Types::DescribeFeatureGroupResponse#description #description} => String
     #   * {Types::DescribeFeatureGroupResponse#next_token #next_token} => String
+    #   * {Types::DescribeFeatureGroupResponse#online_store_total_size_bytes #online_store_total_size_bytes} => Integer
     #
     # @example Request syntax with placeholder values
     #
@@ -9174,6 +9177,7 @@ module Aws::SageMaker
     #   resp.feature_definitions[0].feature_name #=> String
     #   resp.feature_definitions[0].feature_type #=> String, one of "Integral", "Fractional", "String"
     #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
     #   resp.online_store_config.security_config.kms_key_id #=> String
     #   resp.online_store_config.enable_online_store #=> Boolean
     #   resp.offline_store_config.s3_storage_config.s3_uri #=> String
@@ -9187,9 +9191,12 @@ module Aws::SageMaker
     #   resp.feature_group_status #=> String, one of "Creating", "Created", "CreateFailed", "Deleting", "DeleteFailed"
     #   resp.offline_store_status.status #=> String, one of "Active", "Blocked", "Disabled"
     #   resp.offline_store_status.blocked_reason #=> String
+    #   resp.last_update_status.status #=> String, one of "Successful", "Failed", "InProgress"
+    #   resp.last_update_status.failure_reason #=> String
     #   resp.failure_reason #=> String
     #   resp.description #=> String
     #   resp.next_token #=> String
+    #   resp.online_store_total_size_bytes #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeFeatureGroup AWS API Documentation
     #
@@ -9197,6 +9204,54 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def describe_feature_group(params = {}, options = {})
       req = build_request(:describe_feature_group, params)
+      req.send_request(options)
+    end
+
+    # Shows the metadata for a feature within a feature group.
+    #
+    # @option params [required, String] :feature_group_name
+    #   The name of the feature group containing the feature.
+    #
+    # @option params [required, String] :feature_name
+    #   The name of the feature.
+    #
+    # @return [Types::DescribeFeatureMetadataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeFeatureMetadataResponse#feature_group_arn #feature_group_arn} => String
+    #   * {Types::DescribeFeatureMetadataResponse#feature_group_name #feature_group_name} => String
+    #   * {Types::DescribeFeatureMetadataResponse#feature_name #feature_name} => String
+    #   * {Types::DescribeFeatureMetadataResponse#feature_type #feature_type} => String
+    #   * {Types::DescribeFeatureMetadataResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeFeatureMetadataResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::DescribeFeatureMetadataResponse#description #description} => String
+    #   * {Types::DescribeFeatureMetadataResponse#parameters #parameters} => Array&lt;Types::FeatureParameter&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_feature_metadata({
+    #     feature_group_name: "FeatureGroupName", # required
+    #     feature_name: "FeatureName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.feature_group_arn #=> String
+    #   resp.feature_group_name #=> String
+    #   resp.feature_name #=> String
+    #   resp.feature_type #=> String, one of "Integral", "Fractional", "String"
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #   resp.description #=> String
+    #   resp.parameters #=> Array
+    #   resp.parameters[0].key #=> String
+    #   resp.parameters[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeFeatureMetadata AWS API Documentation
+    #
+    # @overload describe_feature_metadata(params = {})
+    # @param [Hash] params ({})
+    def describe_feature_metadata(params = {}, options = {})
+      req = build_request(:describe_feature_metadata, params)
       req.send_request(options)
     end
 
@@ -11881,7 +11936,7 @@ module Aws::SageMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_search_suggestions({
-    #     resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup, Project
+    #     resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup, Project, FeatureMetadata
     #     suggestion_query: {
     #       property_name_query: {
     #         property_name_hint: "PropertyNameHint", # required
@@ -16544,7 +16599,7 @@ module Aws::SageMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.search({
-    #     resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup, Project
+    #     resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup, Project, FeatureMetadata
     #     search_expression: {
     #       filters: [
     #         {
@@ -17300,6 +17355,7 @@ module Aws::SageMaker
     #   resp.results[0].feature_group.feature_definitions[0].feature_name #=> String
     #   resp.results[0].feature_group.feature_definitions[0].feature_type #=> String, one of "Integral", "Fractional", "String"
     #   resp.results[0].feature_group.creation_time #=> Time
+    #   resp.results[0].feature_group.last_modified_time #=> Time
     #   resp.results[0].feature_group.online_store_config.security_config.kms_key_id #=> String
     #   resp.results[0].feature_group.online_store_config.enable_online_store #=> Boolean
     #   resp.results[0].feature_group.offline_store_config.s3_storage_config.s3_uri #=> String
@@ -17313,6 +17369,8 @@ module Aws::SageMaker
     #   resp.results[0].feature_group.feature_group_status #=> String, one of "Creating", "Created", "CreateFailed", "Deleting", "DeleteFailed"
     #   resp.results[0].feature_group.offline_store_status.status #=> String, one of "Active", "Blocked", "Disabled"
     #   resp.results[0].feature_group.offline_store_status.blocked_reason #=> String
+    #   resp.results[0].feature_group.last_update_status.status #=> String, one of "Successful", "Failed", "InProgress"
+    #   resp.results[0].feature_group.last_update_status.failure_reason #=> String
     #   resp.results[0].feature_group.failure_reason #=> String
     #   resp.results[0].feature_group.description #=> String
     #   resp.results[0].feature_group.tags #=> Array
@@ -17342,6 +17400,16 @@ module Aws::SageMaker
     #   resp.results[0].project.last_modified_by.user_profile_arn #=> String
     #   resp.results[0].project.last_modified_by.user_profile_name #=> String
     #   resp.results[0].project.last_modified_by.domain_id #=> String
+    #   resp.results[0].feature_metadata.feature_group_arn #=> String
+    #   resp.results[0].feature_metadata.feature_group_name #=> String
+    #   resp.results[0].feature_metadata.feature_name #=> String
+    #   resp.results[0].feature_metadata.feature_type #=> String, one of "Integral", "Fractional", "String"
+    #   resp.results[0].feature_metadata.creation_time #=> Time
+    #   resp.results[0].feature_metadata.last_modified_time #=> Time
+    #   resp.results[0].feature_metadata.description #=> String
+    #   resp.results[0].feature_metadata.parameters #=> Array
+    #   resp.results[0].feature_metadata.parameters[0].key #=> String
+    #   resp.results[0].feature_metadata.parameters[0].value #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Search AWS API Documentation
@@ -18501,6 +18569,89 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Updates the feature group.
+    #
+    # @option params [required, String] :feature_group_name
+    #   The name of the feature group that you're updating.
+    #
+    # @option params [Array<Types::FeatureDefinition>] :feature_additions
+    #   A list of the features that you're adding to the feature group.
+    #
+    # @return [Types::UpdateFeatureGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateFeatureGroupResponse#feature_group_arn #feature_group_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_feature_group({
+    #     feature_group_name: "FeatureGroupName", # required
+    #     feature_additions: [
+    #       {
+    #         feature_name: "FeatureName",
+    #         feature_type: "Integral", # accepts Integral, Fractional, String
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.feature_group_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateFeatureGroup AWS API Documentation
+    #
+    # @overload update_feature_group(params = {})
+    # @param [Hash] params ({})
+    def update_feature_group(params = {}, options = {})
+      req = build_request(:update_feature_group, params)
+      req.send_request(options)
+    end
+
+    # Updates the description and parameters of the feature group.
+    #
+    # @option params [required, String] :feature_group_name
+    #   The name of the feature group containing the feature that you're
+    #   updating.
+    #
+    # @option params [required, String] :feature_name
+    #   The name of the feature that you're updating.
+    #
+    # @option params [String] :description
+    #   A description that you can write to better describe the feature.
+    #
+    # @option params [Array<Types::FeatureParameter>] :parameter_additions
+    #   A list of key-value pairs that you can add to better describe the
+    #   feature.
+    #
+    # @option params [Array<String>] :parameter_removals
+    #   A list of parameter keys that you can specify to remove parameters
+    #   that describe your feature.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_feature_metadata({
+    #     feature_group_name: "FeatureGroupName", # required
+    #     feature_name: "FeatureName", # required
+    #     description: "FeatureDescription",
+    #     parameter_additions: [
+    #       {
+    #         key: "FeatureParameterKey",
+    #         value: "FeatureParameterValue",
+    #       },
+    #     ],
+    #     parameter_removals: ["FeatureParameterKey"],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateFeatureMetadata AWS API Documentation
+    #
+    # @overload update_feature_metadata(params = {})
+    # @param [Hash] params ({})
+    def update_feature_metadata(params = {}, options = {})
+      req = build_request(:update_feature_metadata, params)
+      req.send_request(options)
+    end
+
     # Updates the properties of a SageMaker image. To change the image's
     # tags, use the AddTags and DeleteTags APIs.
     #
@@ -19627,7 +19778,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.128.0'
+      context[:gem_version] = '1.129.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

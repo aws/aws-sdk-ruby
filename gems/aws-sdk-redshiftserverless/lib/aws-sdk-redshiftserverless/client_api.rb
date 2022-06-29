@@ -664,11 +664,11 @@ module Aws::RedshiftServerless
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "Redshift Serverless",
-        "serviceId" => "RedshiftServerless",
+        "serviceId" => "Redshift Serverless",
         "signatureVersion" => "v4",
         "signingName" => "redshift-serverless",
         "targetPrefix" => "RedshiftServerless",
-        "uid" => "redshiftserverless-2021-04-21",
+        "uid" => "redshift-serverless-2021-04-21",
       }
 
       api.add_operation(:convert_recovery_point_to_snapshot, Seahorse::Model::Operation.new.tap do |o|

@@ -18,7 +18,7 @@ module Aws::RedshiftServerless
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/AccessDeniedException AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/AccessDeniedException AWS API Documentation
     #
     class AccessDeniedException < Struct.new(
       :code,
@@ -48,7 +48,7 @@ module Aws::RedshiftServerless
     #   The value of the parameter to set.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/ConfigParameter AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ConfigParameter AWS API Documentation
     #
     class ConfigParameter < Struct.new(
       :parameter_key,
@@ -62,7 +62,7 @@ module Aws::RedshiftServerless
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/ConflictException AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ConflictException AWS API Documentation
     #
     class ConflictException < Struct.new(
       :message)
@@ -91,7 +91,7 @@ module Aws::RedshiftServerless
     #   The name of the snapshot.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/ConvertRecoveryPointToSnapshotRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ConvertRecoveryPointToSnapshotRequest AWS API Documentation
     #
     class ConvertRecoveryPointToSnapshotRequest < Struct.new(
       :recovery_point_id,
@@ -105,7 +105,7 @@ module Aws::RedshiftServerless
     #   The snapshot converted from the recovery point.
     #   @return [Types::Snapshot]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/ConvertRecoveryPointToSnapshotResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ConvertRecoveryPointToSnapshotResponse AWS API Documentation
     #
     class ConvertRecoveryPointToSnapshotResponse < Struct.new(
       :snapshot)
@@ -145,7 +145,7 @@ module Aws::RedshiftServerless
     #   The name of the workgroup to associate with the VPC endpoint.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/CreateEndpointAccessRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/CreateEndpointAccessRequest AWS API Documentation
     #
     class CreateEndpointAccessRequest < Struct.new(
       :endpoint_name,
@@ -160,7 +160,7 @@ module Aws::RedshiftServerless
     #   The created VPC endpoint.
     #   @return [Types::EndpointAccess]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/CreateEndpointAccessResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/CreateEndpointAccessResponse AWS API Documentation
     #
     class CreateEndpointAccessResponse < Struct.new(
       :endpoint)
@@ -229,7 +229,7 @@ module Aws::RedshiftServerless
     #   A list of tag instances.
     #   @return [Array<Types::Tag>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/CreateNamespaceRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/CreateNamespaceRequest AWS API Documentation
     #
     class CreateNamespaceRequest < Struct.new(
       :admin_user_password,
@@ -249,7 +249,7 @@ module Aws::RedshiftServerless
     #   The created namespace object.
     #   @return [Types::Namespace]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/CreateNamespaceResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/CreateNamespaceResponse AWS API Documentation
     #
     class CreateNamespaceResponse < Struct.new(
       :namespace)
@@ -278,7 +278,7 @@ module Aws::RedshiftServerless
     #   The name of the snapshot.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/CreateSnapshotRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/CreateSnapshotRequest AWS API Documentation
     #
     class CreateSnapshotRequest < Struct.new(
       :namespace_name,
@@ -292,7 +292,7 @@ module Aws::RedshiftServerless
     #   The created snapshot object.
     #   @return [Types::Snapshot]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/CreateSnapshotResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/CreateSnapshotResponse AWS API Documentation
     #
     class CreateSnapshotResponse < Struct.new(
       :snapshot)
@@ -338,7 +338,7 @@ module Aws::RedshiftServerless
     #   for.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/CreateUsageLimitRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/CreateUsageLimitRequest AWS API Documentation
     #
     class CreateUsageLimitRequest < Struct.new(
       :amount,
@@ -354,7 +354,7 @@ module Aws::RedshiftServerless
     #   The returned usage limit object.
     #   @return [Types::UsageLimit]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/CreateUsageLimitResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/CreateUsageLimitResponse AWS API Documentation
     #
     class CreateUsageLimitResponse < Struct.new(
       :usage_limit)
@@ -430,7 +430,7 @@ module Aws::RedshiftServerless
     #   The name of the created workgroup.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/CreateWorkgroupRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/CreateWorkgroupRequest AWS API Documentation
     #
     class CreateWorkgroupRequest < Struct.new(
       :base_capacity,
@@ -450,7 +450,7 @@ module Aws::RedshiftServerless
     #   The created workgroup object.
     #   @return [Types::Workgroup]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/CreateWorkgroupResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/CreateWorkgroupResponse AWS API Documentation
     #
     class CreateWorkgroupResponse < Struct.new(
       :workgroup)
@@ -469,7 +469,7 @@ module Aws::RedshiftServerless
     #   The name of the VPC endpoint to delete.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/DeleteEndpointAccessRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/DeleteEndpointAccessRequest AWS API Documentation
     #
     class DeleteEndpointAccessRequest < Struct.new(
       :endpoint_name)
@@ -481,7 +481,7 @@ module Aws::RedshiftServerless
     #   The deleted VPC endpoint.
     #   @return [Types::EndpointAccess]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/DeleteEndpointAccessResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/DeleteEndpointAccessResponse AWS API Documentation
     #
     class DeleteEndpointAccessResponse < Struct.new(
       :endpoint)
@@ -511,7 +511,7 @@ module Aws::RedshiftServerless
     #   The name of the namespace to delete.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/DeleteNamespaceRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/DeleteNamespaceRequest AWS API Documentation
     #
     class DeleteNamespaceRequest < Struct.new(
       :final_snapshot_name,
@@ -525,7 +525,7 @@ module Aws::RedshiftServerless
     #   The deleted namespace object.
     #   @return [Types::Namespace]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/DeleteNamespaceResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/DeleteNamespaceResponse AWS API Documentation
     #
     class DeleteNamespaceResponse < Struct.new(
       :namespace)
@@ -544,7 +544,7 @@ module Aws::RedshiftServerless
     #   The Amazon Resource Name (ARN) of the policy to delete.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/DeleteResourcePolicyRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/DeleteResourcePolicyRequest AWS API Documentation
     #
     class DeleteResourcePolicyRequest < Struct.new(
       :resource_arn)
@@ -552,7 +552,7 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/DeleteResourcePolicyResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/DeleteResourcePolicyResponse AWS API Documentation
     #
     class DeleteResourcePolicyResponse < Aws::EmptyStructure; end
 
@@ -567,7 +567,7 @@ module Aws::RedshiftServerless
     #   The name of the snapshot to be deleted.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/DeleteSnapshotRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/DeleteSnapshotRequest AWS API Documentation
     #
     class DeleteSnapshotRequest < Struct.new(
       :snapshot_name)
@@ -579,7 +579,7 @@ module Aws::RedshiftServerless
     #   The deleted snapshot object.
     #   @return [Types::Snapshot]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/DeleteSnapshotResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/DeleteSnapshotResponse AWS API Documentation
     #
     class DeleteSnapshotResponse < Struct.new(
       :snapshot)
@@ -598,7 +598,7 @@ module Aws::RedshiftServerless
     #   The unique identifier of the usage limit to delete.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/DeleteUsageLimitRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/DeleteUsageLimitRequest AWS API Documentation
     #
     class DeleteUsageLimitRequest < Struct.new(
       :usage_limit_id)
@@ -610,7 +610,7 @@ module Aws::RedshiftServerless
     #   The deleted usage limit object.
     #   @return [Types::UsageLimit]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/DeleteUsageLimitResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/DeleteUsageLimitResponse AWS API Documentation
     #
     class DeleteUsageLimitResponse < Struct.new(
       :usage_limit)
@@ -629,7 +629,7 @@ module Aws::RedshiftServerless
     #   The name of the workgroup to be deleted.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/DeleteWorkgroupRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/DeleteWorkgroupRequest AWS API Documentation
     #
     class DeleteWorkgroupRequest < Struct.new(
       :workgroup_name)
@@ -641,7 +641,7 @@ module Aws::RedshiftServerless
     #   The deleted workgroup object.
     #   @return [Types::Workgroup]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/DeleteWorkgroupResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/DeleteWorkgroupResponse AWS API Documentation
     #
     class DeleteWorkgroupResponse < Struct.new(
       :workgroup)
@@ -663,7 +663,7 @@ module Aws::RedshiftServerless
     #   An array of `VpcEndpoint` objects.
     #   @return [Array<Types::VpcEndpoint>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/Endpoint AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/Endpoint AWS API Documentation
     #
     class Endpoint < Struct.new(
       :address,
@@ -718,7 +718,7 @@ module Aws::RedshiftServerless
     #   The name of the workgroup associated with the endpoint.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/EndpointAccess AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/EndpointAccess AWS API Documentation
     #
     class EndpointAccess < Struct.new(
       :address,
@@ -777,7 +777,7 @@ module Aws::RedshiftServerless
     #   The name of the workgroup associated with the database.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/GetCredentialsRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetCredentialsRequest AWS API Documentation
     #
     class GetCredentialsRequest < Struct.new(
       :db_name,
@@ -809,7 +809,7 @@ module Aws::RedshiftServerless
     #   authorization refreshes.
     #   @return [Time]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/GetCredentialsResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetCredentialsResponse AWS API Documentation
     #
     class GetCredentialsResponse < Struct.new(
       :db_password,
@@ -831,7 +831,7 @@ module Aws::RedshiftServerless
     #   The name of the VPC endpoint to return information for.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/GetEndpointAccessRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetEndpointAccessRequest AWS API Documentation
     #
     class GetEndpointAccessRequest < Struct.new(
       :endpoint_name)
@@ -843,7 +843,7 @@ module Aws::RedshiftServerless
     #   The returned VPC endpoint.
     #   @return [Types::EndpointAccess]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/GetEndpointAccessResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetEndpointAccessResponse AWS API Documentation
     #
     class GetEndpointAccessResponse < Struct.new(
       :endpoint)
@@ -862,7 +862,7 @@ module Aws::RedshiftServerless
     #   The name of the namespace to retrieve information for.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/GetNamespaceRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetNamespaceRequest AWS API Documentation
     #
     class GetNamespaceRequest < Struct.new(
       :namespace_name)
@@ -874,7 +874,7 @@ module Aws::RedshiftServerless
     #   The returned namespace object.
     #   @return [Types::Namespace]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/GetNamespaceResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetNamespaceResponse AWS API Documentation
     #
     class GetNamespaceResponse < Struct.new(
       :namespace)
@@ -894,7 +894,7 @@ module Aws::RedshiftServerless
     #   for.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/GetRecoveryPointRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetRecoveryPointRequest AWS API Documentation
     #
     class GetRecoveryPointRequest < Struct.new(
       :recovery_point_id)
@@ -906,7 +906,7 @@ module Aws::RedshiftServerless
     #   The returned recovery point object.
     #   @return [Types::RecoveryPoint]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/GetRecoveryPointResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetRecoveryPointResponse AWS API Documentation
     #
     class GetRecoveryPointResponse < Struct.new(
       :recovery_point)
@@ -925,7 +925,7 @@ module Aws::RedshiftServerless
     #   The Amazon Resource Name (ARN) of the resource to return.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/GetResourcePolicyRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetResourcePolicyRequest AWS API Documentation
     #
     class GetResourcePolicyRequest < Struct.new(
       :resource_arn)
@@ -937,7 +937,7 @@ module Aws::RedshiftServerless
     #   The returned resource policy.
     #   @return [Types::ResourcePolicy]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/GetResourcePolicyResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetResourcePolicyResponse AWS API Documentation
     #
     class GetResourcePolicyResponse < Struct.new(
       :resource_policy)
@@ -967,7 +967,7 @@ module Aws::RedshiftServerless
     #   The name of the snapshot to return.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/GetSnapshotRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetSnapshotRequest AWS API Documentation
     #
     class GetSnapshotRequest < Struct.new(
       :owner_account,
@@ -981,7 +981,7 @@ module Aws::RedshiftServerless
     #   The returned snapshot object.
     #   @return [Types::Snapshot]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/GetSnapshotResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetSnapshotResponse AWS API Documentation
     #
     class GetSnapshotResponse < Struct.new(
       :snapshot)
@@ -1000,7 +1000,7 @@ module Aws::RedshiftServerless
     #   The unique identifier of the usage limit to return information for.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/GetUsageLimitRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetUsageLimitRequest AWS API Documentation
     #
     class GetUsageLimitRequest < Struct.new(
       :usage_limit_id)
@@ -1012,7 +1012,7 @@ module Aws::RedshiftServerless
     #   The returned usage limit object.
     #   @return [Types::UsageLimit]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/GetUsageLimitResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetUsageLimitResponse AWS API Documentation
     #
     class GetUsageLimitResponse < Struct.new(
       :usage_limit)
@@ -1031,7 +1031,7 @@ module Aws::RedshiftServerless
     #   The name of the workgroup to return information for.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/GetWorkgroupRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetWorkgroupRequest AWS API Documentation
     #
     class GetWorkgroupRequest < Struct.new(
       :workgroup_name)
@@ -1043,7 +1043,7 @@ module Aws::RedshiftServerless
     #   The returned workgroup object.
     #   @return [Types::Workgroup]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/GetWorkgroupResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetWorkgroupResponse AWS API Documentation
     #
     class GetWorkgroupResponse < Struct.new(
       :workgroup)
@@ -1056,7 +1056,7 @@ module Aws::RedshiftServerless
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/InsufficientCapacityException AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/InsufficientCapacityException AWS API Documentation
     #
     class InsufficientCapacityException < Struct.new(
       :message)
@@ -1070,7 +1070,7 @@ module Aws::RedshiftServerless
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/InternalServerException AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/InternalServerException AWS API Documentation
     #
     class InternalServerException < Struct.new(
       :message)
@@ -1083,7 +1083,7 @@ module Aws::RedshiftServerless
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/InvalidPaginationException AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/InvalidPaginationException AWS API Documentation
     #
     class InvalidPaginationException < Struct.new(
       :message)
@@ -1123,7 +1123,7 @@ module Aws::RedshiftServerless
     #   return.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/ListEndpointAccessRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListEndpointAccessRequest AWS API Documentation
     #
     class ListEndpointAccessRequest < Struct.new(
       :max_results,
@@ -1145,7 +1145,7 @@ module Aws::RedshiftServerless
     #   page.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/ListEndpointAccessResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListEndpointAccessResponse AWS API Documentation
     #
     class ListEndpointAccessResponse < Struct.new(
       :endpoints,
@@ -1173,7 +1173,7 @@ module Aws::RedshiftServerless
     #   `ListNamespaces` operations, which returns results in the next page.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/ListNamespacesRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListNamespacesRequest AWS API Documentation
     #
     class ListNamespacesRequest < Struct.new(
       :max_results,
@@ -1193,7 +1193,7 @@ module Aws::RedshiftServerless
     #   page.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/ListNamespacesResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListNamespacesResponse AWS API Documentation
     #
     class ListNamespacesResponse < Struct.new(
       :namespaces,
@@ -1237,7 +1237,7 @@ module Aws::RedshiftServerless
     #   The time when the recovery point's creation was initiated.
     #   @return [Time]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/ListRecoveryPointsRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListRecoveryPointsRequest AWS API Documentation
     #
     class ListRecoveryPointsRequest < Struct.new(
       :end_time,
@@ -1260,7 +1260,7 @@ module Aws::RedshiftServerless
     #   The returned recovery point objects.
     #   @return [Array<Types::RecoveryPoint>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/ListRecoveryPointsResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListRecoveryPointsResponse AWS API Documentation
     #
     class ListRecoveryPointsResponse < Struct.new(
       :next_token,
@@ -1315,7 +1315,7 @@ module Aws::RedshiftServerless
     #   The time when the creation of the snapshot was initiated.
     #   @return [Time]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/ListSnapshotsRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListSnapshotsRequest AWS API Documentation
     #
     class ListSnapshotsRequest < Struct.new(
       :end_time,
@@ -1340,7 +1340,7 @@ module Aws::RedshiftServerless
     #   All of the returned snapshot objects.
     #   @return [Array<Types::Snapshot>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/ListSnapshotsResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListSnapshotsResponse AWS API Documentation
     #
     class ListSnapshotsResponse < Struct.new(
       :next_token,
@@ -1360,7 +1360,7 @@ module Aws::RedshiftServerless
     #   The Amazon Resource Name (ARN) of the resource to list tags for.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/ListTagsForResourceRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListTagsForResourceRequest AWS API Documentation
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
@@ -1372,7 +1372,7 @@ module Aws::RedshiftServerless
     #   A map of the key-value pairs assigned to the resource.
     #   @return [Array<Types::Tag>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/ListTagsForResourceResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListTagsForResourceResponse AWS API Documentation
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
@@ -1412,7 +1412,7 @@ module Aws::RedshiftServerless
     #   The Amazon Redshift Serverless feature whose limits you want to see.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/ListUsageLimitsRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListUsageLimitsRequest AWS API Documentation
     #
     class ListUsageLimitsRequest < Struct.new(
       :max_results,
@@ -1434,7 +1434,7 @@ module Aws::RedshiftServerless
     #   An array of returned usage limit objects.
     #   @return [Array<Types::UsageLimit>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/ListUsageLimitsResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListUsageLimitsResponse AWS API Documentation
     #
     class ListUsageLimitsResponse < Struct.new(
       :next_token,
@@ -1462,7 +1462,7 @@ module Aws::RedshiftServerless
     #   operations, which returns results in the next page.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/ListWorkgroupsRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListWorkgroupsRequest AWS API Documentation
     #
     class ListWorkgroupsRequest < Struct.new(
       :max_results,
@@ -1482,7 +1482,7 @@ module Aws::RedshiftServerless
     #   The returned array of workgroups.
     #   @return [Array<Types::Workgroup>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/ListWorkgroupsResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListWorkgroupsResponse AWS API Documentation
     #
     class ListWorkgroupsResponse < Struct.new(
       :next_token,
@@ -1548,7 +1548,7 @@ module Aws::RedshiftServerless
     #   The status of the namespace.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/Namespace AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/Namespace AWS API Documentation
     #
     class Namespace < Struct.new(
       :admin_username,
@@ -1585,7 +1585,7 @@ module Aws::RedshiftServerless
     #   The unique identifier of the subnet.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/NetworkInterface AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/NetworkInterface AWS API Documentation
     #
     class NetworkInterface < Struct.new(
       :availability_zone,
@@ -1620,7 +1620,7 @@ module Aws::RedshiftServerless
     #   resource policy for.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/PutResourcePolicyRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/PutResourcePolicyRequest AWS API Documentation
     #
     class PutResourcePolicyRequest < Struct.new(
       :policy,
@@ -1633,7 +1633,7 @@ module Aws::RedshiftServerless
     #   The policy that was created or updated.
     #   @return [Types::ResourcePolicy]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/PutResourcePolicyResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/PutResourcePolicyResponse AWS API Documentation
     #
     class PutResourcePolicyResponse < Struct.new(
       :resource_policy)
@@ -1664,7 +1664,7 @@ module Aws::RedshiftServerless
     #   The name of the workgroup the recovery point is associated with.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/RecoveryPoint AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/RecoveryPoint AWS API Documentation
     #
     class RecoveryPoint < Struct.new(
       :namespace_name,
@@ -1685,7 +1685,7 @@ module Aws::RedshiftServerless
     #   The name of the resource that could not be found.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/ResourceNotFoundException AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ResourceNotFoundException AWS API Documentation
     #
     class ResourceNotFoundException < Struct.new(
       :message,
@@ -1705,7 +1705,7 @@ module Aws::RedshiftServerless
     #   The Amazon Resource Name (ARN) of the policy.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/ResourcePolicy AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ResourcePolicy AWS API Documentation
     #
     class ResourcePolicy < Struct.new(
       :policy,
@@ -1735,7 +1735,7 @@ module Aws::RedshiftServerless
     #   The name of the workgroup used to restore data.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/RestoreFromRecoveryPointRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/RestoreFromRecoveryPointRequest AWS API Documentation
     #
     class RestoreFromRecoveryPointRequest < Struct.new(
       :namespace_name,
@@ -1753,7 +1753,7 @@ module Aws::RedshiftServerless
     #   The unique identifier of the recovery point used for the restore.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/RestoreFromRecoveryPointResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/RestoreFromRecoveryPointResponse AWS API Documentation
     #
     class RestoreFromRecoveryPointResponse < Struct.new(
       :namespace,
@@ -1793,7 +1793,7 @@ module Aws::RedshiftServerless
     #   The name of the workgroup used to restore the snapshot.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/RestoreFromSnapshotRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/RestoreFromSnapshotRequest AWS API Documentation
     #
     class RestoreFromSnapshotRequest < Struct.new(
       :namespace_name,
@@ -1818,7 +1818,7 @@ module Aws::RedshiftServerless
     #   The name of the snapshot used to restore the namespace.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/RestoreFromSnapshotResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/RestoreFromSnapshotResponse AWS API Documentation
     #
     class RestoreFromSnapshotResponse < Struct.new(
       :namespace,
@@ -1833,7 +1833,7 @@ module Aws::RedshiftServerless
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/ServiceQuotaExceededException AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ServiceQuotaExceededException AWS API Documentation
     #
     class ServiceQuotaExceededException < Struct.new(
       :message)
@@ -1929,7 +1929,7 @@ module Aws::RedshiftServerless
     #   The total size, in megabytes, of how big the snapshot is.
     #   @return [Float]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/Snapshot AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/Snapshot AWS API Documentation
     #
     class Snapshot < Struct.new(
       :accounts_with_provisioned_restore_access,
@@ -1974,7 +1974,7 @@ module Aws::RedshiftServerless
     #   The value of the tag.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/Tag AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/Tag AWS API Documentation
     #
     class Tag < Struct.new(
       :key,
@@ -2004,7 +2004,7 @@ module Aws::RedshiftServerless
     #   The map of the key-value pairs used to tag the resource.
     #   @return [Array<Types::Tag>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/TagResourceRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/TagResourceRequest AWS API Documentation
     #
     class TagResourceRequest < Struct.new(
       :resource_arn,
@@ -2013,7 +2013,7 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/TagResourceResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/TagResourceResponse AWS API Documentation
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
@@ -2025,7 +2025,7 @@ module Aws::RedshiftServerless
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/ThrottlingException AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ThrottlingException AWS API Documentation
     #
     class ThrottlingException < Struct.new(
       :code,
@@ -2044,7 +2044,7 @@ module Aws::RedshiftServerless
     #   for a resource.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/TooManyTagsException AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/TooManyTagsException AWS API Documentation
     #
     class TooManyTagsException < Struct.new(
       :message,
@@ -2069,7 +2069,7 @@ module Aws::RedshiftServerless
     #   The tag or set of tags to remove from the resource.
     #   @return [Array<String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/UntagResourceRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UntagResourceRequest AWS API Documentation
     #
     class UntagResourceRequest < Struct.new(
       :resource_arn,
@@ -2078,7 +2078,7 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/UntagResourceResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
@@ -2099,7 +2099,7 @@ module Aws::RedshiftServerless
     #   the endpoint is modified.
     #   @return [Array<String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/UpdateEndpointAccessRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UpdateEndpointAccessRequest AWS API Documentation
     #
     class UpdateEndpointAccessRequest < Struct.new(
       :endpoint_name,
@@ -2112,7 +2112,7 @@ module Aws::RedshiftServerless
     #   The updated VPC endpoint.
     #   @return [Types::EndpointAccess]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/UpdateEndpointAccessResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UpdateEndpointAccessResponse AWS API Documentation
     #
     class UpdateEndpointAccessResponse < Struct.new(
       :endpoint)
@@ -2166,7 +2166,7 @@ module Aws::RedshiftServerless
     #   The name of the namespace.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/UpdateNamespaceRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UpdateNamespaceRequest AWS API Documentation
     #
     class UpdateNamespaceRequest < Struct.new(
       :admin_user_password,
@@ -2184,7 +2184,7 @@ module Aws::RedshiftServerless
     #   A list of tag instances.
     #   @return [Types::Namespace]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/UpdateNamespaceResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UpdateNamespaceResponse AWS API Documentation
     #
     class UpdateNamespaceResponse < Struct.new(
       :namespace)
@@ -2208,7 +2208,7 @@ module Aws::RedshiftServerless
     #   The name of the snapshot.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/UpdateSnapshotRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UpdateSnapshotRequest AWS API Documentation
     #
     class UpdateSnapshotRequest < Struct.new(
       :retention_period,
@@ -2221,7 +2221,7 @@ module Aws::RedshiftServerless
     #   The updated snapshot object.
     #   @return [Types::Snapshot]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/UpdateSnapshotResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UpdateSnapshotResponse AWS API Documentation
     #
     class UpdateSnapshotResponse < Struct.new(
       :snapshot)
@@ -2251,7 +2251,7 @@ module Aws::RedshiftServerless
     #   The identifier of the usage limit to update.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/UpdateUsageLimitRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UpdateUsageLimitRequest AWS API Documentation
     #
     class UpdateUsageLimitRequest < Struct.new(
       :amount,
@@ -2265,7 +2265,7 @@ module Aws::RedshiftServerless
     #   The updated usage limit object.
     #   @return [Types::UsageLimit]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/UpdateUsageLimitResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UpdateUsageLimitResponse AWS API Documentation
     #
     class UpdateUsageLimitResponse < Struct.new(
       :usage_limit)
@@ -2325,7 +2325,7 @@ module Aws::RedshiftServerless
     #   The name of the workgroup to update.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/UpdateWorkgroupRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UpdateWorkgroupRequest AWS API Documentation
     #
     class UpdateWorkgroupRequest < Struct.new(
       :base_capacity,
@@ -2343,7 +2343,7 @@ module Aws::RedshiftServerless
     #   The updated workgroup object.
     #   @return [Types::Workgroup]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/UpdateWorkgroupResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UpdateWorkgroupResponse AWS API Documentation
     #
     class UpdateWorkgroupResponse < Struct.new(
       :workgroup)
@@ -2387,7 +2387,7 @@ module Aws::RedshiftServerless
     #   The Amazon Redshift Serverless feature to limit.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/UsageLimit AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UsageLimit AWS API Documentation
     #
     class UsageLimit < Struct.new(
       :amount,
@@ -2407,7 +2407,7 @@ module Aws::RedshiftServerless
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/ValidationException AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ValidationException AWS API Documentation
     #
     class ValidationException < Struct.new(
       :message)
@@ -2432,7 +2432,7 @@ module Aws::RedshiftServerless
     #   The VPC identifier that the endpoint is associated with.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/VpcEndpoint AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/VpcEndpoint AWS API Documentation
     #
     class VpcEndpoint < Struct.new(
       :network_interfaces,
@@ -2452,7 +2452,7 @@ module Aws::RedshiftServerless
     #   The unique identifier of the VPC security group.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/VpcSecurityGroupMembership AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/VpcSecurityGroupMembership AWS API Documentation
     #
     class VpcSecurityGroupMembership < Struct.new(
       :status,
@@ -2522,7 +2522,7 @@ module Aws::RedshiftServerless
     #   The name of the workgroup.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/Workgroup AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/Workgroup AWS API Documentation
     #
     class Workgroup < Struct.new(
       :base_capacity,

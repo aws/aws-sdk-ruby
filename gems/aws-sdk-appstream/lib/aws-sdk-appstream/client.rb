@@ -1525,6 +1525,10 @@ module Aws::AppStream
     #   an iframe. You must approve the domains that you want to host embedded
     #   AppStream 2.0 streaming sessions.
     #
+    # @option params [Types::StreamingExperienceSettings] :streaming_experience_settings
+    #   The streaming protocol you want your stack to prefer. This can be UDP
+    #   or TCP. Currently, UDP is only supported in the Windows native client.
+    #
     # @return [Types::CreateStackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateStackResult#stack #stack} => Types::Stack
@@ -1564,6 +1568,9 @@ module Aws::AppStream
     #       },
     #     ],
     #     embed_host_domains: ["EmbedHostDomain"],
+    #     streaming_experience_settings: {
+    #       preferred_protocol: "TCP", # accepts TCP, UDP
+    #     },
     #   })
     #
     # @example Response structure
@@ -1594,6 +1601,7 @@ module Aws::AppStream
     #   resp.stack.access_endpoints[0].vpce_id #=> String
     #   resp.stack.embed_host_domains #=> Array
     #   resp.stack.embed_host_domains[0] #=> String
+    #   resp.stack.streaming_experience_settings.preferred_protocol #=> String, one of "TCP", "UDP"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStack AWS API Documentation
     #
@@ -2879,6 +2887,7 @@ module Aws::AppStream
     #   resp.stacks[0].access_endpoints[0].vpce_id #=> String
     #   resp.stacks[0].embed_host_domains #=> Array
     #   resp.stacks[0].embed_host_domains[0] #=> String
+    #   resp.stacks[0].streaming_experience_settings.preferred_protocol #=> String, one of "TCP", "UDP"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeStacks AWS API Documentation
@@ -3824,8 +3833,8 @@ module Aws::AppStream
     # * Elastic fleet type
     #
     #   You can update the `DisplayName`, `IdleDisconnectTimeoutInSeconds`,
-    #   `DisconnectTimeoutInSeconds`, `MaxConcurrentSessions`, and
-    #   `UsbDeviceFilterStrings` attributes.
+    #   `DisconnectTimeoutInSeconds`, `MaxConcurrentSessions`,
+    #   `SessionScriptS3Location` and `UsbDeviceFilterStrings` attributes.
     #
     # If the fleet is in the `STARTING` or `STOPPED` state, you can't
     # update it.
@@ -4201,6 +4210,10 @@ module Aws::AppStream
     #   an iframe. You must approve the domains that you want to host embedded
     #   AppStream 2.0 streaming sessions.
     #
+    # @option params [Types::StreamingExperienceSettings] :streaming_experience_settings
+    #   The streaming protocol you want your stack to prefer. This can be UDP
+    #   or TCP. Currently, UDP is only supported in the Windows native client.
+    #
     # @return [Types::UpdateStackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateStackResult#stack #stack} => Types::Stack
@@ -4221,7 +4234,7 @@ module Aws::AppStream
     #     delete_storage_connectors: false,
     #     redirect_url: "RedirectURL",
     #     feedback_url: "FeedbackURL",
-    #     attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, STORAGE_CONNECTOR_HOMEFOLDERS, STORAGE_CONNECTOR_GOOGLE_DRIVE, STORAGE_CONNECTOR_ONE_DRIVE, REDIRECT_URL, FEEDBACK_URL, THEME_NAME, USER_SETTINGS, EMBED_HOST_DOMAINS, IAM_ROLE_ARN, ACCESS_ENDPOINTS
+    #     attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, STORAGE_CONNECTOR_HOMEFOLDERS, STORAGE_CONNECTOR_GOOGLE_DRIVE, STORAGE_CONNECTOR_ONE_DRIVE, REDIRECT_URL, FEEDBACK_URL, THEME_NAME, USER_SETTINGS, EMBED_HOST_DOMAINS, IAM_ROLE_ARN, ACCESS_ENDPOINTS, STREAMING_EXPERIENCE_SETTINGS
     #     user_settings: [
     #       {
     #         action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE, DOMAIN_PASSWORD_SIGNIN, DOMAIN_SMART_CARD_SIGNIN
@@ -4239,6 +4252,9 @@ module Aws::AppStream
     #       },
     #     ],
     #     embed_host_domains: ["EmbedHostDomain"],
+    #     streaming_experience_settings: {
+    #       preferred_protocol: "TCP", # accepts TCP, UDP
+    #     },
     #   })
     #
     # @example Response structure
@@ -4269,6 +4285,7 @@ module Aws::AppStream
     #   resp.stack.access_endpoints[0].vpce_id #=> String
     #   resp.stack.embed_host_domains #=> Array
     #   resp.stack.embed_host_domains[0] #=> String
+    #   resp.stack.streaming_experience_settings.preferred_protocol #=> String, one of "TCP", "UDP"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateStack AWS API Documentation
     #
@@ -4292,7 +4309,7 @@ module Aws::AppStream
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.66.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

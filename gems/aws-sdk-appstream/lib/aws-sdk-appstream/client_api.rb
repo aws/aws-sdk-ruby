@@ -209,6 +209,7 @@ module Aws::AppStream
     Permission = Shapes::StringShape.new(name: 'Permission')
     PlatformType = Shapes::StringShape.new(name: 'PlatformType')
     Platforms = Shapes::ListShape.new(name: 'Platforms')
+    PreferredProtocol = Shapes::StringShape.new(name: 'PreferredProtocol')
     RedirectURL = Shapes::StringShape.new(name: 'RedirectURL')
     RegionName = Shapes::StringShape.new(name: 'RegionName')
     RequestLimitExceededException = Shapes::StructureShape.new(name: 'RequestLimitExceededException')
@@ -251,6 +252,7 @@ module Aws::AppStream
     StorageConnectorList = Shapes::ListShape.new(name: 'StorageConnectorList')
     StorageConnectorType = Shapes::StringShape.new(name: 'StorageConnectorType')
     StreamView = Shapes::StringShape.new(name: 'StreamView')
+    StreamingExperienceSettings = Shapes::StructureShape.new(name: 'StreamingExperienceSettings')
     StreamingUrlUserId = Shapes::StringShape.new(name: 'StreamingUrlUserId')
     String = Shapes::StringShape.new(name: 'String')
     StringList = Shapes::ListShape.new(name: 'StringList')
@@ -515,6 +517,7 @@ module Aws::AppStream
     CreateStackRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateStackRequest.add_member(:access_endpoints, Shapes::ShapeRef.new(shape: AccessEndpointList, location_name: "AccessEndpoints"))
     CreateStackRequest.add_member(:embed_host_domains, Shapes::ShapeRef.new(shape: EmbedHostDomains, location_name: "EmbedHostDomains"))
+    CreateStackRequest.add_member(:streaming_experience_settings, Shapes::ShapeRef.new(shape: StreamingExperienceSettings, location_name: "StreamingExperienceSettings"))
     CreateStackRequest.struct_class = Types::CreateStackRequest
 
     CreateStackResult.add_member(:stack, Shapes::ShapeRef.new(shape: Stack, location_name: "Stack"))
@@ -1063,6 +1066,7 @@ module Aws::AppStream
     Stack.add_member(:application_settings, Shapes::ShapeRef.new(shape: ApplicationSettingsResponse, location_name: "ApplicationSettings"))
     Stack.add_member(:access_endpoints, Shapes::ShapeRef.new(shape: AccessEndpointList, location_name: "AccessEndpoints"))
     Stack.add_member(:embed_host_domains, Shapes::ShapeRef.new(shape: EmbedHostDomains, location_name: "EmbedHostDomains"))
+    Stack.add_member(:streaming_experience_settings, Shapes::ShapeRef.new(shape: StreamingExperienceSettings, location_name: "StreamingExperienceSettings"))
     Stack.struct_class = Types::Stack
 
     StackAttributes.member = Shapes::ShapeRef.new(shape: StackAttribute)
@@ -1104,6 +1108,9 @@ module Aws::AppStream
     StorageConnector.struct_class = Types::StorageConnector
 
     StorageConnectorList.member = Shapes::ShapeRef.new(shape: StorageConnector)
+
+    StreamingExperienceSettings.add_member(:preferred_protocol, Shapes::ShapeRef.new(shape: PreferredProtocol, location_name: "PreferredProtocol"))
+    StreamingExperienceSettings.struct_class = Types::StreamingExperienceSettings
 
     StringList.member = Shapes::ShapeRef.new(shape: String)
 
@@ -1203,6 +1210,7 @@ module Aws::AppStream
     UpdateStackRequest.add_member(:application_settings, Shapes::ShapeRef.new(shape: ApplicationSettings, location_name: "ApplicationSettings"))
     UpdateStackRequest.add_member(:access_endpoints, Shapes::ShapeRef.new(shape: AccessEndpointList, location_name: "AccessEndpoints"))
     UpdateStackRequest.add_member(:embed_host_domains, Shapes::ShapeRef.new(shape: EmbedHostDomains, location_name: "EmbedHostDomains"))
+    UpdateStackRequest.add_member(:streaming_experience_settings, Shapes::ShapeRef.new(shape: StreamingExperienceSettings, location_name: "StreamingExperienceSettings"))
     UpdateStackRequest.struct_class = Types::UpdateStackRequest
 
     UpdateStackResult.add_member(:stack, Shapes::ShapeRef.new(shape: Stack, location_name: "Stack"))

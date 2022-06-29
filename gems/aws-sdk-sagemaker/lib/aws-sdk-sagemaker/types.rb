@@ -2787,9 +2787,11 @@ module Aws::SageMaker
     #   @return [Types::MetricsSource]
     #
     # @!attribute [rw] pre_training_report
+    #   The pre-training bias report for a model.
     #   @return [Types::MetricsSource]
     #
     # @!attribute [rw] post_training_report
+    #   The post-training bias report for a model.
     #   @return [Types::MetricsSource]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Bias AWS API Documentation
@@ -13593,6 +13595,10 @@ module Aws::SageMaker
     #   A timestamp indicating when SageMaker created the `FeatureGroup`.
     #   @return [Time]
     #
+    # @!attribute [rw] last_modified_time
+    #   A timestamp indicating when the feature group was last updated.
+    #   @return [Time]
+    #
     # @!attribute [rw] online_store_config
     #   The configuration for the `OnlineStore`.
     #   @return [Types::OnlineStoreConfig]
@@ -13619,6 +13625,11 @@ module Aws::SageMaker
     #   `Blocked`
     #   @return [Types::OfflineStoreStatus]
     #
+    # @!attribute [rw] last_update_status
+    #   A value indicating whether the update made to the feature group was
+    #   successful.
+    #   @return [Types::LastUpdateStatus]
+    #
     # @!attribute [rw] failure_reason
     #   The reason that the `FeatureGroup` failed to be replicated in the
     #   `OfflineStore`. This is failure can occur because:
@@ -13637,6 +13648,10 @@ module Aws::SageMaker
     #   (`FeatureDefinitions`).
     #   @return [String]
     #
+    # @!attribute [rw] online_store_total_size_bytes
+    #   The size of the `OnlineStore` in bytes.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeFeatureGroupResponse AWS API Documentation
     #
     class DescribeFeatureGroupResponse < Struct.new(
@@ -13646,14 +13661,92 @@ module Aws::SageMaker
       :event_time_feature_name,
       :feature_definitions,
       :creation_time,
+      :last_modified_time,
       :online_store_config,
       :offline_store_config,
       :role_arn,
       :feature_group_status,
       :offline_store_status,
+      :last_update_status,
       :failure_reason,
       :description,
-      :next_token)
+      :next_token,
+      :online_store_total_size_bytes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeFeatureMetadataRequest
+    #   data as a hash:
+    #
+    #       {
+    #         feature_group_name: "FeatureGroupName", # required
+    #         feature_name: "FeatureName", # required
+    #       }
+    #
+    # @!attribute [rw] feature_group_name
+    #   The name of the feature group containing the feature.
+    #   @return [String]
+    #
+    # @!attribute [rw] feature_name
+    #   The name of the feature.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeFeatureMetadataRequest AWS API Documentation
+    #
+    class DescribeFeatureMetadataRequest < Struct.new(
+      :feature_group_name,
+      :feature_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] feature_group_arn
+    #   The Amazon Resource Number (ARN) of the feature group that contains
+    #   the feature.
+    #   @return [String]
+    #
+    # @!attribute [rw] feature_group_name
+    #   The name of the feature group that you've specified.
+    #   @return [String]
+    #
+    # @!attribute [rw] feature_name
+    #   The name of the feature that you've specified.
+    #   @return [String]
+    #
+    # @!attribute [rw] feature_type
+    #   The data type of the feature.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   A timestamp indicating when the feature was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   A timestamp indicating when the metadata for the feature group was
+    #   modified. For example, if you add a parameter describing the
+    #   feature, the timestamp changes to reflect the last time you
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description you added to describe the feature.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The key-value pairs that you added to describe the feature.
+    #   @return [Array<Types::FeatureParameter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeFeatureMetadataResponse AWS API Documentation
+    #
+    class DescribeFeatureMetadataResponse < Struct.new(
+      :feature_group_arn,
+      :feature_group_name,
+      :feature_name,
+      :feature_type,
+      :creation_time,
+      :last_modified_time,
+      :description,
+      :parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17232,9 +17325,11 @@ module Aws::SageMaker
     #   @return [Types::FileSource]
     #
     # @!attribute [rw] pre_training_constraints
+    #   The pre-training constraints.
     #   @return [Types::MetricsSource]
     #
     # @!attribute [rw] post_training_constraints
+    #   The post-training constraints.
     #   @return [Types::MetricsSource]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DriftCheckBias AWS API Documentation
@@ -17267,6 +17362,7 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] constraints
+    #   The drift check explainability constraints.
     #   @return [Types::MetricsSource]
     #
     # @!attribute [rw] config_file
@@ -17302,9 +17398,11 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] statistics
+    #   The drift check model data quality statistics.
     #   @return [Types::MetricsSource]
     #
     # @!attribute [rw] constraints
+    #   The drift check model data quality constraints.
     #   @return [Types::MetricsSource]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DriftCheckModelDataQuality AWS API Documentation
@@ -17336,9 +17434,11 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] statistics
+    #   The drift check model quality statistics.
     #   @return [Types::MetricsSource]
     #
     # @!attribute [rw] constraints
+    #   The drift check model quality constraints.
     #   @return [Types::MetricsSource]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DriftCheckModelQuality AWS API Documentation
@@ -18343,6 +18443,10 @@ module Aws::SageMaker
     #   The time a `FeatureGroup` was created.
     #   @return [Time]
     #
+    # @!attribute [rw] last_modified_time
+    #   A timestamp indicating the last time you updated the feature group.
+    #   @return [Time]
+    #
     # @!attribute [rw] online_store_config
     #   Use this to specify the Amazon Web Services Key Management Service
     #   (KMS) Key ID, or `KMSKeyId`, for at rest data encryption. You can
@@ -18374,6 +18478,11 @@ module Aws::SageMaker
     #   The status of `OfflineStore`.
     #   @return [Types::OfflineStoreStatus]
     #
+    # @!attribute [rw] last_update_status
+    #   A value that indicates whether the feature group was updated
+    #   successfully.
+    #   @return [Types::LastUpdateStatus]
+    #
     # @!attribute [rw] failure_reason
     #   The reason that the `FeatureGroup` failed to be replicated in the
     #   `OfflineStore`. This is failure may be due to a failure to create a
@@ -18398,11 +18507,13 @@ module Aws::SageMaker
       :event_time_feature_name,
       :feature_definitions,
       :creation_time,
+      :last_modified_time,
       :online_store_config,
       :offline_store_config,
       :role_arn,
       :feature_group_status,
       :offline_store_status,
+      :last_update_status,
       :failure_reason,
       :description,
       :tags)
@@ -18446,6 +18557,85 @@ module Aws::SageMaker
       :creation_time,
       :feature_group_status,
       :offline_store_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The metadata for a feature. It can either be metadata that you
+    # specify, or metadata that is updated automatically.
+    #
+    # @!attribute [rw] feature_group_arn
+    #   The Amazon Resource Number (ARN) of the feature group.
+    #   @return [String]
+    #
+    # @!attribute [rw] feature_group_name
+    #   The name of the feature group containing the feature.
+    #   @return [String]
+    #
+    # @!attribute [rw] feature_name
+    #   The name of feature.
+    #   @return [String]
+    #
+    # @!attribute [rw] feature_type
+    #   The data type of the feature.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   A timestamp indicating when the feature was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   A timestamp indicating when the feature was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   An optional description that you specify to better describe the
+    #   feature.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   Optional key-value pairs that you specify to better describe the
+    #   feature.
+    #   @return [Array<Types::FeatureParameter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/FeatureMetadata AWS API Documentation
+    #
+    class FeatureMetadata < Struct.new(
+      :feature_group_arn,
+      :feature_group_name,
+      :feature_name,
+      :feature_type,
+      :creation_time,
+      :last_modified_time,
+      :description,
+      :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A key-value pair that you specify to describe the feature.
+    #
+    # @note When making an API call, you may pass FeatureParameter
+    #   data as a hash:
+    #
+    #       {
+    #         key: "FeatureParameterKey",
+    #         value: "FeatureParameterValue",
+    #       }
+    #
+    # @!attribute [rw] key
+    #   A key that must contain a value to describe the feature.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value that belongs to a key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/FeatureParameter AWS API Documentation
+    #
+    class FeatureParameter < Struct.new(
+      :key,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19008,7 +19198,7 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup, Project
+    #         resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup, Project, FeatureMetadata
     #         suggestion_query: {
     #           property_name_query: {
     #             property_name_hint: "PropertyNameHint", # required
@@ -22583,6 +22773,26 @@ module Aws::SageMaker
     class LambdaStepMetadata < Struct.new(
       :arn,
       :output_parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A value that indicates whether the update was successful.
+    #
+    # @!attribute [rw] status
+    #   A value that indicates whether the update was made successful.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   If the update wasn't successful, indicates the reason why it
+    #   failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LastUpdateStatus AWS API Documentation
+    #
+    class LastUpdateStatus < Struct.new(
+      :status,
+      :failure_reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27674,6 +27884,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Details about the metrics source.
+    #
     # @note When making an API call, you may pass MetricsSource
     #   data as a hash:
     #
@@ -27684,12 +27896,15 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] content_type
+    #   The metric source content type.
     #   @return [String]
     #
     # @!attribute [rw] content_digest
+    #   The hash key used for the metrics source.
     #   @return [String]
     #
     # @!attribute [rw] s3_uri
+    #   The S3 URI for the metrics source.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MetricsSource AWS API Documentation
@@ -35232,6 +35447,10 @@ module Aws::SageMaker
     #   The properties of a project.
     #   @return [Types::Project]
     #
+    # @!attribute [rw] feature_metadata
+    #   The feature metadata used to search through the features.
+    #   @return [Types::FeatureMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SearchRecord AWS API Documentation
     #
     class SearchRecord < Struct.new(
@@ -35245,7 +35464,8 @@ module Aws::SageMaker
       :pipeline,
       :pipeline_execution,
       :feature_group,
-      :project)
+      :project,
+      :feature_metadata)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -35254,7 +35474,7 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup, Project
+    #         resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup, Project, FeatureMetadata
     #         search_expression: {
     #           filters: [
     #             {
@@ -39465,6 +39685,100 @@ module Aws::SageMaker
     #
     class UpdateExperimentResponse < Struct.new(
       :experiment_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateFeatureGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         feature_group_name: "FeatureGroupName", # required
+    #         feature_additions: [
+    #           {
+    #             feature_name: "FeatureName",
+    #             feature_type: "Integral", # accepts Integral, Fractional, String
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] feature_group_name
+    #   The name of the feature group that you're updating.
+    #   @return [String]
+    #
+    # @!attribute [rw] feature_additions
+    #   A list of the features that you're adding to the feature group.
+    #   @return [Array<Types::FeatureDefinition>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateFeatureGroupRequest AWS API Documentation
+    #
+    class UpdateFeatureGroupRequest < Struct.new(
+      :feature_group_name,
+      :feature_additions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] feature_group_arn
+    #   The Amazon Resource Number (ARN) of the feature group that you're
+    #   updating.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateFeatureGroupResponse AWS API Documentation
+    #
+    class UpdateFeatureGroupResponse < Struct.new(
+      :feature_group_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateFeatureMetadataRequest
+    #   data as a hash:
+    #
+    #       {
+    #         feature_group_name: "FeatureGroupName", # required
+    #         feature_name: "FeatureName", # required
+    #         description: "FeatureDescription",
+    #         parameter_additions: [
+    #           {
+    #             key: "FeatureParameterKey",
+    #             value: "FeatureParameterValue",
+    #           },
+    #         ],
+    #         parameter_removals: ["FeatureParameterKey"],
+    #       }
+    #
+    # @!attribute [rw] feature_group_name
+    #   The name of the feature group containing the feature that you're
+    #   updating.
+    #   @return [String]
+    #
+    # @!attribute [rw] feature_name
+    #   The name of the feature that you're updating.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description that you can write to better describe the feature.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameter_additions
+    #   A list of key-value pairs that you can add to better describe the
+    #   feature.
+    #   @return [Array<Types::FeatureParameter>]
+    #
+    # @!attribute [rw] parameter_removals
+    #   A list of parameter keys that you can specify to remove parameters
+    #   that describe your feature.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateFeatureMetadataRequest AWS API Documentation
+    #
+    class UpdateFeatureMetadataRequest < Struct.new(
+      :feature_group_name,
+      :feature_name,
+      :description,
+      :parameter_additions,
+      :parameter_removals)
       SENSITIVE = []
       include Aws::Structure
     end

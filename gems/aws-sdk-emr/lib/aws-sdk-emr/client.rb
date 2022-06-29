@@ -402,6 +402,7 @@ module Aws::EMR
     #                   volume_type: "String", # required
     #                   iops: 1,
     #                   size_in_gb: 1, # required
+    #                   throughput: 1,
     #                 },
     #                 volumes_per_instance: 1,
     #               },
@@ -499,6 +500,7 @@ module Aws::EMR
     #                 volume_type: "String", # required
     #                 iops: 1,
     #                 size_in_gb: 1, # required
+    #                 throughput: 1,
     #               },
     #               volumes_per_instance: 1,
     #             },
@@ -1838,6 +1840,7 @@ module Aws::EMR
     #   resp.instance_fleets[0].instance_type_specifications[0].ebs_block_devices[0].volume_specification.volume_type #=> String
     #   resp.instance_fleets[0].instance_type_specifications[0].ebs_block_devices[0].volume_specification.iops #=> Integer
     #   resp.instance_fleets[0].instance_type_specifications[0].ebs_block_devices[0].volume_specification.size_in_gb #=> Integer
+    #   resp.instance_fleets[0].instance_type_specifications[0].ebs_block_devices[0].volume_specification.throughput #=> Integer
     #   resp.instance_fleets[0].instance_type_specifications[0].ebs_block_devices[0].device #=> String
     #   resp.instance_fleets[0].instance_type_specifications[0].ebs_optimized #=> Boolean
     #   resp.instance_fleets[0].instance_type_specifications[0].custom_ami_id #=> String
@@ -1916,6 +1919,7 @@ module Aws::EMR
     #   resp.instance_groups[0].ebs_block_devices[0].volume_specification.volume_type #=> String
     #   resp.instance_groups[0].ebs_block_devices[0].volume_specification.iops #=> Integer
     #   resp.instance_groups[0].ebs_block_devices[0].volume_specification.size_in_gb #=> Integer
+    #   resp.instance_groups[0].ebs_block_devices[0].volume_specification.throughput #=> Integer
     #   resp.instance_groups[0].ebs_block_devices[0].device #=> String
     #   resp.instance_groups[0].ebs_optimized #=> Boolean
     #   resp.instance_groups[0].shrink_policy.decommission_timeout #=> Integer
@@ -3193,6 +3197,7 @@ module Aws::EMR
     #                   volume_type: "String", # required
     #                   iops: 1,
     #                   size_in_gb: 1, # required
+    #                   throughput: 1,
     #                 },
     #                 volumes_per_instance: 1,
     #               },
@@ -3259,6 +3264,7 @@ module Aws::EMR
     #                       volume_type: "String", # required
     #                       iops: 1,
     #                       size_in_gb: 1, # required
+    #                       throughput: 1,
     #                     },
     #                     volumes_per_instance: 1,
     #                   },
@@ -3777,7 +3783,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

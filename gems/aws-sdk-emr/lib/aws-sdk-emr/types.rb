@@ -33,6 +33,7 @@ module Aws::EMR
     #                       volume_type: "String", # required
     #                       iops: 1,
     #                       size_in_gb: 1, # required
+    #                       throughput: 1,
     #                     },
     #                     volumes_per_instance: 1,
     #                   },
@@ -143,6 +144,7 @@ module Aws::EMR
     #                     volume_type: "String", # required
     #                     iops: 1,
     #                     size_in_gb: 1, # required
+    #                     throughput: 1,
     #                   },
     #                   volumes_per_instance: 1,
     #                 },
@@ -2017,9 +2019,9 @@ module Aws::EMR
     # instance group.
     #
     # @!attribute [rw] volume_specification
-    #   EBS volume specifications such as volume type, IOPS, and size (GiB)
-    #   that will be requested for the EBS volume attached to an EC2
-    #   instance in the cluster.
+    #   EBS volume specifications such as volume type, IOPS, size (GiB) and
+    #   throughput (MiB/s) that are requested for the EBS volume attached to
+    #   an EC2 instance in the cluster.
     #   @return [Types::VolumeSpecification]
     #
     # @!attribute [rw] device
@@ -2036,7 +2038,7 @@ module Aws::EMR
     end
 
     # Configuration of requested EBS block device associated with the
-    # instance group with count of volumes that will be associated to every
+    # instance group with count of volumes that are associated to every
     # instance.
     #
     # @note When making an API call, you may pass EbsBlockDeviceConfig
@@ -2047,19 +2049,20 @@ module Aws::EMR
     #           volume_type: "String", # required
     #           iops: 1,
     #           size_in_gb: 1, # required
+    #           throughput: 1,
     #         },
     #         volumes_per_instance: 1,
     #       }
     #
     # @!attribute [rw] volume_specification
-    #   EBS volume specifications such as volume type, IOPS, and size (GiB)
-    #   that will be requested for the EBS volume attached to an EC2
-    #   instance in the cluster.
+    #   EBS volume specifications such as volume type, IOPS, size (GiB) and
+    #   throughput (MiB/s) that are requested for the EBS volume attached to
+    #   an EC2 instance in the cluster.
     #   @return [Types::VolumeSpecification]
     #
     # @!attribute [rw] volumes_per_instance
-    #   Number of EBS volumes with a specific volume configuration that will
-    #   be associated with every instance in the instance group
+    #   Number of EBS volumes with a specific volume configuration that are
+    #   associated with every instance in the instance group
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/EbsBlockDeviceConfig AWS API Documentation
@@ -2083,6 +2086,7 @@ module Aws::EMR
     #               volume_type: "String", # required
     #               iops: 1,
     #               size_in_gb: 1, # required
+    #               throughput: 1,
     #             },
     #             volumes_per_instance: 1,
     #           },
@@ -2776,6 +2780,7 @@ module Aws::EMR
     #                     volume_type: "String", # required
     #                     iops: 1,
     #                     size_in_gb: 1, # required
+    #                     throughput: 1,
     #                   },
     #                   volumes_per_instance: 1,
     #                 },
@@ -3249,6 +3254,7 @@ module Aws::EMR
     #                 volume_type: "String", # required
     #                 iops: 1,
     #                 size_in_gb: 1, # required
+    #                 throughput: 1,
     #               },
     #               volumes_per_instance: 1,
     #             },
@@ -3731,6 +3737,7 @@ module Aws::EMR
     #                 volume_type: "String", # required
     #                 iops: 1,
     #                 size_in_gb: 1, # required
+    #                 throughput: 1,
     #               },
     #               volumes_per_instance: 1,
     #             },
@@ -4117,6 +4124,7 @@ module Aws::EMR
     #                     volume_type: "String", # required
     #                     iops: 1,
     #                     size_in_gb: 1, # required
+    #                     throughput: 1,
     #                   },
     #                   volumes_per_instance: 1,
     #                 },
@@ -4183,6 +4191,7 @@ module Aws::EMR
     #                         volume_type: "String", # required
     #                         iops: 1,
     #                         size_in_gb: 1, # required
+    #                         throughput: 1,
     #                       },
     #                       volumes_per_instance: 1,
     #                     },
@@ -6189,6 +6198,7 @@ module Aws::EMR
     #                       volume_type: "String", # required
     #                       iops: 1,
     #                       size_in_gb: 1, # required
+    #                       throughput: 1,
     #                     },
     #                     volumes_per_instance: 1,
     #                   },
@@ -6255,6 +6265,7 @@ module Aws::EMR
     #                           volume_type: "String", # required
     #                           iops: 1,
     #                           size_in_gb: 1, # required
+    #                           throughput: 1,
     #                         },
     #                         volumes_per_instance: 1,
     #                       },
@@ -8080,9 +8091,9 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # EBS volume specifications such as volume type, IOPS, and size (GiB)
-    # that will be requested for the EBS volume attached to an EC2 instance
-    # in the cluster.
+    # EBS volume specifications such as volume type, IOPS, size (GiB) and
+    # throughput (MiB/s) that are requested for the EBS volume attached to
+    # an EC2 instance in the cluster.
     #
     # @note When making an API call, you may pass VolumeSpecification
     #   data as a hash:
@@ -8091,6 +8102,7 @@ module Aws::EMR
     #         volume_type: "String", # required
     #         iops: 1,
     #         size_in_gb: 1, # required
+    #         throughput: 1,
     #       }
     #
     # @!attribute [rw] volume_type
@@ -8107,12 +8119,19 @@ module Aws::EMR
     #   1024. If the volume type is EBS-optimized, the minimum value is 10.
     #   @return [Integer]
     #
+    # @!attribute [rw] throughput
+    #   The throughput, in mebibyte per second (MiB/s). This optional
+    #   parameter can be a number from 125 - 1000 and is valid only for gp3
+    #   volumes.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/VolumeSpecification AWS API Documentation
     #
     class VolumeSpecification < Struct.new(
       :volume_type,
       :iops,
-      :size_in_gb)
+      :size_in_gb,
+      :throughput)
       SENSITIVE = []
       include Aws::Structure
     end

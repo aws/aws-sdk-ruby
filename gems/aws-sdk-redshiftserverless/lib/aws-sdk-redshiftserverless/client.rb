@@ -415,7 +415,7 @@ module Aws::RedshiftServerless
     #   resp.snapshot.status #=> String, one of "AVAILABLE", "CREATING", "DELETED", "CANCELLED", "FAILED", "COPYING"
     #   resp.snapshot.total_backup_size_in_mega_bytes #=> Float
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/ConvertRecoveryPointToSnapshot AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ConvertRecoveryPointToSnapshot AWS API Documentation
     #
     # @overload convert_recovery_point_to_snapshot(params = {})
     # @param [Hash] params ({})
@@ -479,7 +479,7 @@ module Aws::RedshiftServerless
     #   resp.endpoint.vpc_security_groups[0].vpc_security_group_id #=> String
     #   resp.endpoint.workgroup_name #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/CreateEndpointAccess AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/CreateEndpointAccess AWS API Documentation
     #
     # @overload create_endpoint_access(params = {})
     # @param [Hash] params ({})
@@ -561,7 +561,7 @@ module Aws::RedshiftServerless
     #   resp.namespace.namespace_name #=> String
     #   resp.namespace.status #=> String, one of "AVAILABLE", "MODIFYING", "DELETING"
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/CreateNamespace AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/CreateNamespace AWS API Documentation
     #
     # @overload create_namespace(params = {})
     # @param [Hash] params ({})
@@ -624,7 +624,7 @@ module Aws::RedshiftServerless
     #   resp.snapshot.status #=> String, one of "AVAILABLE", "CREATING", "DELETED", "CANCELLED", "FAILED", "COPYING"
     #   resp.snapshot.total_backup_size_in_mega_bytes #=> Float
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/CreateSnapshot AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/CreateSnapshot AWS API Documentation
     #
     # @overload create_snapshot(params = {})
     # @param [Hash] params ({})
@@ -683,7 +683,7 @@ module Aws::RedshiftServerless
     #   resp.usage_limit.usage_limit_id #=> String
     #   resp.usage_limit.usage_type #=> String, one of "serverless-compute", "cross-region-datasharing"
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/CreateUsageLimit AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/CreateUsageLimit AWS API Documentation
     #
     # @overload create_usage_limit(params = {})
     # @param [Hash] params ({})
@@ -784,7 +784,7 @@ module Aws::RedshiftServerless
     #   resp.workgroup.workgroup_id #=> String
     #   resp.workgroup.workgroup_name #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/CreateWorkgroup AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/CreateWorkgroup AWS API Documentation
     #
     # @overload create_workgroup(params = {})
     # @param [Hash] params ({})
@@ -830,7 +830,7 @@ module Aws::RedshiftServerless
     #   resp.endpoint.vpc_security_groups[0].vpc_security_group_id #=> String
     #   resp.endpoint.workgroup_name #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/DeleteEndpointAccess AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/DeleteEndpointAccess AWS API Documentation
     #
     # @overload delete_endpoint_access(params = {})
     # @param [Hash] params ({})
@@ -881,7 +881,7 @@ module Aws::RedshiftServerless
     #   resp.namespace.namespace_name #=> String
     #   resp.namespace.status #=> String, one of "AVAILABLE", "MODIFYING", "DELETING"
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/DeleteNamespace AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/DeleteNamespace AWS API Documentation
     #
     # @overload delete_namespace(params = {})
     # @param [Hash] params ({})
@@ -903,7 +903,7 @@ module Aws::RedshiftServerless
     #     resource_arn: "String", # required
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/DeleteResourcePolicy AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/DeleteResourcePolicy AWS API Documentation
     #
     # @overload delete_resource_policy(params = {})
     # @param [Hash] params ({})
@@ -952,7 +952,7 @@ module Aws::RedshiftServerless
     #   resp.snapshot.status #=> String, one of "AVAILABLE", "CREATING", "DELETED", "CANCELLED", "FAILED", "COPYING"
     #   resp.snapshot.total_backup_size_in_mega_bytes #=> Float
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/DeleteSnapshot AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/DeleteSnapshot AWS API Documentation
     #
     # @overload delete_snapshot(params = {})
     # @param [Hash] params ({})
@@ -986,7 +986,7 @@ module Aws::RedshiftServerless
     #   resp.usage_limit.usage_limit_id #=> String
     #   resp.usage_limit.usage_type #=> String, one of "serverless-compute", "cross-region-datasharing"
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/DeleteUsageLimit AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/DeleteUsageLimit AWS API Documentation
     #
     # @overload delete_usage_limit(params = {})
     # @param [Hash] params ({})
@@ -1039,7 +1039,7 @@ module Aws::RedshiftServerless
     #   resp.workgroup.workgroup_id #=> String
     #   resp.workgroup.workgroup_name #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/DeleteWorkgroup AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/DeleteWorkgroup AWS API Documentation
     #
     # @overload delete_workgroup(params = {})
     # @param [Hash] params ({})
@@ -1107,7 +1107,7 @@ module Aws::RedshiftServerless
     #   resp.expiration #=> Time
     #   resp.next_refresh_time #=> Time
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/GetCredentials AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetCredentials AWS API Documentation
     #
     # @overload get_credentials(params = {})
     # @param [Hash] params ({})
@@ -1153,7 +1153,7 @@ module Aws::RedshiftServerless
     #   resp.endpoint.vpc_security_groups[0].vpc_security_group_id #=> String
     #   resp.endpoint.workgroup_name #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/GetEndpointAccess AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetEndpointAccess AWS API Documentation
     #
     # @overload get_endpoint_access(params = {})
     # @param [Hash] params ({})
@@ -1193,7 +1193,7 @@ module Aws::RedshiftServerless
     #   resp.namespace.namespace_name #=> String
     #   resp.namespace.status #=> String, one of "AVAILABLE", "MODIFYING", "DELETING"
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/GetNamespace AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetNamespace AWS API Documentation
     #
     # @overload get_namespace(params = {})
     # @param [Hash] params ({})
@@ -1225,7 +1225,7 @@ module Aws::RedshiftServerless
     #   resp.recovery_point.total_size_in_mega_bytes #=> Float
     #   resp.recovery_point.workgroup_name #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/GetRecoveryPoint AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetRecoveryPoint AWS API Documentation
     #
     # @overload get_recovery_point(params = {})
     # @param [Hash] params ({})
@@ -1254,7 +1254,7 @@ module Aws::RedshiftServerless
     #   resp.resource_policy.policy #=> String
     #   resp.resource_policy.resource_arn #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/GetResourcePolicy AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetResourcePolicy AWS API Documentation
     #
     # @overload get_resource_policy(params = {})
     # @param [Hash] params ({})
@@ -1312,7 +1312,7 @@ module Aws::RedshiftServerless
     #   resp.snapshot.status #=> String, one of "AVAILABLE", "CREATING", "DELETED", "CANCELLED", "FAILED", "COPYING"
     #   resp.snapshot.total_backup_size_in_mega_bytes #=> Float
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/GetSnapshot AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetSnapshot AWS API Documentation
     #
     # @overload get_snapshot(params = {})
     # @param [Hash] params ({})
@@ -1346,7 +1346,7 @@ module Aws::RedshiftServerless
     #   resp.usage_limit.usage_limit_id #=> String
     #   resp.usage_limit.usage_type #=> String, one of "serverless-compute", "cross-region-datasharing"
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/GetUsageLimit AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetUsageLimit AWS API Documentation
     #
     # @overload get_usage_limit(params = {})
     # @param [Hash] params ({})
@@ -1399,7 +1399,7 @@ module Aws::RedshiftServerless
     #   resp.workgroup.workgroup_id #=> String
     #   resp.workgroup.workgroup_name #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/GetWorkgroup AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetWorkgroup AWS API Documentation
     #
     # @overload get_workgroup(params = {})
     # @param [Hash] params ({})
@@ -1467,7 +1467,7 @@ module Aws::RedshiftServerless
     #   resp.endpoints[0].workgroup_name #=> String
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/ListEndpointAccess AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListEndpointAccess AWS API Documentation
     #
     # @overload list_endpoint_access(params = {})
     # @param [Hash] params ({})
@@ -1519,7 +1519,7 @@ module Aws::RedshiftServerless
     #   resp.namespaces[0].status #=> String, one of "AVAILABLE", "MODIFYING", "DELETING"
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/ListNamespaces AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListNamespaces AWS API Documentation
     #
     # @overload list_namespaces(params = {})
     # @param [Hash] params ({})
@@ -1576,7 +1576,7 @@ module Aws::RedshiftServerless
     #   resp.recovery_points[0].total_size_in_mega_bytes #=> Float
     #   resp.recovery_points[0].workgroup_name #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/ListRecoveryPoints AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListRecoveryPoints AWS API Documentation
     #
     # @overload list_recovery_points(params = {})
     # @param [Hash] params ({})
@@ -1658,7 +1658,7 @@ module Aws::RedshiftServerless
     #   resp.snapshots[0].status #=> String, one of "AVAILABLE", "CREATING", "DELETED", "CANCELLED", "FAILED", "COPYING"
     #   resp.snapshots[0].total_backup_size_in_mega_bytes #=> Float
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/ListSnapshots AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListSnapshots AWS API Documentation
     #
     # @overload list_snapshots(params = {})
     # @param [Hash] params ({})
@@ -1688,7 +1688,7 @@ module Aws::RedshiftServerless
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/ListTagsForResource AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListTagsForResource AWS API Documentation
     #
     # @overload list_tags_for_resource(params = {})
     # @param [Hash] params ({})
@@ -1744,7 +1744,7 @@ module Aws::RedshiftServerless
     #   resp.usage_limits[0].usage_limit_id #=> String
     #   resp.usage_limits[0].usage_type #=> String, one of "serverless-compute", "cross-region-datasharing"
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/ListUsageLimits AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListUsageLimits AWS API Documentation
     #
     # @overload list_usage_limits(params = {})
     # @param [Hash] params ({})
@@ -1809,7 +1809,7 @@ module Aws::RedshiftServerless
     #   resp.workgroups[0].workgroup_id #=> String
     #   resp.workgroups[0].workgroup_name #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/ListWorkgroups AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListWorkgroups AWS API Documentation
     #
     # @overload list_workgroups(params = {})
     # @param [Hash] params ({})
@@ -1851,7 +1851,7 @@ module Aws::RedshiftServerless
     #   resp.resource_policy.policy #=> String
     #   resp.resource_policy.resource_arn #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/PutResourcePolicy AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/PutResourcePolicy AWS API Documentation
     #
     # @overload put_resource_policy(params = {})
     # @param [Hash] params ({})
@@ -1901,7 +1901,7 @@ module Aws::RedshiftServerless
     #   resp.namespace.status #=> String, one of "AVAILABLE", "MODIFYING", "DELETING"
     #   resp.recovery_point_id #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/RestoreFromRecoveryPoint AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/RestoreFromRecoveryPoint AWS API Documentation
     #
     # @overload restore_from_recovery_point(params = {})
     # @param [Hash] params ({})
@@ -1961,7 +1961,7 @@ module Aws::RedshiftServerless
     #   resp.owner_account #=> String
     #   resp.snapshot_name #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/RestoreFromSnapshot AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/RestoreFromSnapshot AWS API Documentation
     #
     # @overload restore_from_snapshot(params = {})
     # @param [Hash] params ({})
@@ -1992,7 +1992,7 @@ module Aws::RedshiftServerless
     #     ],
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/TagResource AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/TagResource AWS API Documentation
     #
     # @overload tag_resource(params = {})
     # @param [Hash] params ({})
@@ -2018,7 +2018,7 @@ module Aws::RedshiftServerless
     #     tag_keys: ["TagKey"], # required
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/UntagResource AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UntagResource AWS API Documentation
     #
     # @overload untag_resource(params = {})
     # @param [Hash] params ({})
@@ -2069,7 +2069,7 @@ module Aws::RedshiftServerless
     #   resp.endpoint.vpc_security_groups[0].vpc_security_group_id #=> String
     #   resp.endpoint.workgroup_name #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/UpdateEndpointAccess AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UpdateEndpointAccess AWS API Documentation
     #
     # @overload update_endpoint_access(params = {})
     # @param [Hash] params ({})
@@ -2138,7 +2138,7 @@ module Aws::RedshiftServerless
     #   resp.namespace.namespace_name #=> String
     #   resp.namespace.status #=> String, one of "AVAILABLE", "MODIFYING", "DELETING"
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/UpdateNamespace AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UpdateNamespace AWS API Documentation
     #
     # @overload update_namespace(params = {})
     # @param [Hash] params ({})
@@ -2191,7 +2191,7 @@ module Aws::RedshiftServerless
     #   resp.snapshot.status #=> String, one of "AVAILABLE", "CREATING", "DELETED", "CANCELLED", "FAILED", "COPYING"
     #   resp.snapshot.total_backup_size_in_mega_bytes #=> Float
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/UpdateSnapshot AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UpdateSnapshot AWS API Documentation
     #
     # @overload update_snapshot(params = {})
     # @param [Hash] params ({})
@@ -2235,7 +2235,7 @@ module Aws::RedshiftServerless
     #   resp.usage_limit.usage_limit_id #=> String
     #   resp.usage_limit.usage_type #=> String, one of "serverless-compute", "cross-region-datasharing"
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/UpdateUsageLimit AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UpdateUsageLimit AWS API Documentation
     #
     # @overload update_usage_limit(params = {})
     # @param [Hash] params ({})
@@ -2323,7 +2323,7 @@ module Aws::RedshiftServerless
     #   resp.workgroup.workgroup_id #=> String
     #   resp.workgroup.workgroup_name #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshiftserverless-2021-04-21/UpdateWorkgroup AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UpdateWorkgroup AWS API Documentation
     #
     # @overload update_workgroup(params = {})
     # @param [Hash] params ({})
@@ -2345,7 +2345,7 @@ module Aws::RedshiftServerless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshiftserverless'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

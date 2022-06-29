@@ -308,6 +308,7 @@ module Aws::EMR
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagList = Shapes::ListShape.new(name: 'TagList')
     TerminateJobFlowsInput = Shapes::StructureShape.new(name: 'TerminateJobFlowsInput')
+    ThroughputVal = Shapes::IntegerShape.new(name: 'ThroughputVal')
     Unit = Shapes::StringShape.new(name: 'Unit')
     UpdateStudioInput = Shapes::StructureShape.new(name: 'UpdateStudioInput')
     UpdateStudioSessionMappingInput = Shapes::StructureShape.new(name: 'UpdateStudioSessionMappingInput')
@@ -1455,6 +1456,7 @@ module Aws::EMR
     VolumeSpecification.add_member(:volume_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "VolumeType"))
     VolumeSpecification.add_member(:iops, Shapes::ShapeRef.new(shape: Integer, location_name: "Iops"))
     VolumeSpecification.add_member(:size_in_gb, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "SizeInGB"))
+    VolumeSpecification.add_member(:throughput, Shapes::ShapeRef.new(shape: ThroughputVal, location_name: "Throughput"))
     VolumeSpecification.struct_class = Types::VolumeSpecification
 
     XmlStringList.member = Shapes::ShapeRef.new(shape: XmlString)

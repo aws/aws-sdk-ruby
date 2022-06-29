@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2022-06-29)
+------------------
+
+* Feature - This release introduces additional optional parameter "Throughput" to VolumeSpecification to enable user to configure throughput for gp3 ebs volumes.
+
 1.60.0 (2022-05-10)
 ------------------
 

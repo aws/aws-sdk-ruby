@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2022-06-29)
+------------------
+
+* Feature - This release adds support for automatic renewal of MediaLive reservations at the end of each reservation term. Automatic renewal is optional. This release also adds support for labelling accessibility-focused audio and caption tracks in HLS outputs.
+
 1.86.0 (2022-03-28)
 ------------------
 

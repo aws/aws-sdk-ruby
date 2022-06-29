@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.129.0 (2022-06-29)
+------------------
+
+* Feature - This release adds: UpdateFeatureGroup, UpdateFeatureMetadata, DescribeFeatureMetadata APIs; FeatureMetadata type in Search API; LastModifiedTime, LastUpdateStatus, OnlineStoreTotalSizeBytes in DescribeFeatureGroup API.
+
 1.128.0 (2022-06-23)
 ------------------
 

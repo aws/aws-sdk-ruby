@@ -448,6 +448,8 @@ module Aws::SageMaker
     DescribeExperimentResponse = Shapes::StructureShape.new(name: 'DescribeExperimentResponse')
     DescribeFeatureGroupRequest = Shapes::StructureShape.new(name: 'DescribeFeatureGroupRequest')
     DescribeFeatureGroupResponse = Shapes::StructureShape.new(name: 'DescribeFeatureGroupResponse')
+    DescribeFeatureMetadataRequest = Shapes::StructureShape.new(name: 'DescribeFeatureMetadataRequest')
+    DescribeFeatureMetadataResponse = Shapes::StructureShape.new(name: 'DescribeFeatureMetadataResponse')
     DescribeFlowDefinitionRequest = Shapes::StructureShape.new(name: 'DescribeFlowDefinitionRequest')
     DescribeFlowDefinitionResponse = Shapes::StructureShape.new(name: 'DescribeFlowDefinitionResponse')
     DescribeHumanTaskUiRequest = Shapes::StructureShape.new(name: 'DescribeHumanTaskUiRequest')
@@ -624,8 +626,10 @@ module Aws::SageMaker
     ExplainabilityLocation = Shapes::StringShape.new(name: 'ExplainabilityLocation')
     FailStepMetadata = Shapes::StructureShape.new(name: 'FailStepMetadata')
     FailureReason = Shapes::StringShape.new(name: 'FailureReason')
+    FeatureAdditions = Shapes::ListShape.new(name: 'FeatureAdditions')
     FeatureDefinition = Shapes::StructureShape.new(name: 'FeatureDefinition')
     FeatureDefinitions = Shapes::ListShape.new(name: 'FeatureDefinitions')
+    FeatureDescription = Shapes::StringShape.new(name: 'FeatureDescription')
     FeatureGroup = Shapes::StructureShape.new(name: 'FeatureGroup')
     FeatureGroupArn = Shapes::StringShape.new(name: 'FeatureGroupArn')
     FeatureGroupMaxResults = Shapes::IntegerShape.new(name: 'FeatureGroupMaxResults')
@@ -636,7 +640,14 @@ module Aws::SageMaker
     FeatureGroupStatus = Shapes::StringShape.new(name: 'FeatureGroupStatus')
     FeatureGroupSummaries = Shapes::ListShape.new(name: 'FeatureGroupSummaries')
     FeatureGroupSummary = Shapes::StructureShape.new(name: 'FeatureGroupSummary')
+    FeatureMetadata = Shapes::StructureShape.new(name: 'FeatureMetadata')
     FeatureName = Shapes::StringShape.new(name: 'FeatureName')
+    FeatureParameter = Shapes::StructureShape.new(name: 'FeatureParameter')
+    FeatureParameterAdditions = Shapes::ListShape.new(name: 'FeatureParameterAdditions')
+    FeatureParameterKey = Shapes::StringShape.new(name: 'FeatureParameterKey')
+    FeatureParameterRemovals = Shapes::ListShape.new(name: 'FeatureParameterRemovals')
+    FeatureParameterValue = Shapes::StringShape.new(name: 'FeatureParameterValue')
+    FeatureParameters = Shapes::ListShape.new(name: 'FeatureParameters')
     FeatureType = Shapes::StringShape.new(name: 'FeatureType')
     FileSource = Shapes::StructureShape.new(name: 'FileSource')
     FileSystemAccessMode = Shapes::StringShape.new(name: 'FileSystemAccessMode')
@@ -810,6 +821,8 @@ module Aws::SageMaker
     LambdaFunctionArn = Shapes::StringShape.new(name: 'LambdaFunctionArn')
     LambdaStepMetadata = Shapes::StructureShape.new(name: 'LambdaStepMetadata')
     LastModifiedTime = Shapes::TimestampShape.new(name: 'LastModifiedTime')
+    LastUpdateStatus = Shapes::StructureShape.new(name: 'LastUpdateStatus')
+    LastUpdateStatusValue = Shapes::StringShape.new(name: 'LastUpdateStatusValue')
     LifecycleConfigArns = Shapes::ListShape.new(name: 'LifecycleConfigArns')
     LineageEntityParameters = Shapes::MapShape.new(name: 'LineageEntityParameters')
     LineageGroupArn = Shapes::StringShape.new(name: 'LineageGroupArn')
@@ -1129,6 +1142,7 @@ module Aws::SageMaker
     OidcMemberDefinition = Shapes::StructureShape.new(name: 'OidcMemberDefinition')
     OnlineStoreConfig = Shapes::StructureShape.new(name: 'OnlineStoreConfig')
     OnlineStoreSecurityConfig = Shapes::StructureShape.new(name: 'OnlineStoreSecurityConfig')
+    OnlineStoreTotalSizeBytes = Shapes::IntegerShape.new(name: 'OnlineStoreTotalSizeBytes')
     Operator = Shapes::StringShape.new(name: 'Operator')
     OptionalDouble = Shapes::FloatShape.new(name: 'OptionalDouble')
     OptionalInteger = Shapes::IntegerShape.new(name: 'OptionalInteger')
@@ -1563,6 +1577,9 @@ module Aws::SageMaker
     UpdateEndpointWeightsAndCapacitiesOutput = Shapes::StructureShape.new(name: 'UpdateEndpointWeightsAndCapacitiesOutput')
     UpdateExperimentRequest = Shapes::StructureShape.new(name: 'UpdateExperimentRequest')
     UpdateExperimentResponse = Shapes::StructureShape.new(name: 'UpdateExperimentResponse')
+    UpdateFeatureGroupRequest = Shapes::StructureShape.new(name: 'UpdateFeatureGroupRequest')
+    UpdateFeatureGroupResponse = Shapes::StructureShape.new(name: 'UpdateFeatureGroupResponse')
+    UpdateFeatureMetadataRequest = Shapes::StructureShape.new(name: 'UpdateFeatureMetadataRequest')
     UpdateImageRequest = Shapes::StructureShape.new(name: 'UpdateImageRequest')
     UpdateImageResponse = Shapes::StructureShape.new(name: 'UpdateImageResponse')
     UpdateModelPackageInput = Shapes::StructureShape.new(name: 'UpdateModelPackageInput')
@@ -3273,15 +3290,32 @@ module Aws::SageMaker
     DescribeFeatureGroupResponse.add_member(:event_time_feature_name, Shapes::ShapeRef.new(shape: FeatureName, required: true, location_name: "EventTimeFeatureName"))
     DescribeFeatureGroupResponse.add_member(:feature_definitions, Shapes::ShapeRef.new(shape: FeatureDefinitions, required: true, location_name: "FeatureDefinitions"))
     DescribeFeatureGroupResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, required: true, location_name: "CreationTime"))
+    DescribeFeatureGroupResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: LastModifiedTime, location_name: "LastModifiedTime"))
     DescribeFeatureGroupResponse.add_member(:online_store_config, Shapes::ShapeRef.new(shape: OnlineStoreConfig, location_name: "OnlineStoreConfig"))
     DescribeFeatureGroupResponse.add_member(:offline_store_config, Shapes::ShapeRef.new(shape: OfflineStoreConfig, location_name: "OfflineStoreConfig"))
     DescribeFeatureGroupResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     DescribeFeatureGroupResponse.add_member(:feature_group_status, Shapes::ShapeRef.new(shape: FeatureGroupStatus, location_name: "FeatureGroupStatus"))
     DescribeFeatureGroupResponse.add_member(:offline_store_status, Shapes::ShapeRef.new(shape: OfflineStoreStatus, location_name: "OfflineStoreStatus"))
+    DescribeFeatureGroupResponse.add_member(:last_update_status, Shapes::ShapeRef.new(shape: LastUpdateStatus, location_name: "LastUpdateStatus"))
     DescribeFeatureGroupResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
     DescribeFeatureGroupResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     DescribeFeatureGroupResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, required: true, location_name: "NextToken"))
+    DescribeFeatureGroupResponse.add_member(:online_store_total_size_bytes, Shapes::ShapeRef.new(shape: OnlineStoreTotalSizeBytes, location_name: "OnlineStoreTotalSizeBytes"))
     DescribeFeatureGroupResponse.struct_class = Types::DescribeFeatureGroupResponse
+
+    DescribeFeatureMetadataRequest.add_member(:feature_group_name, Shapes::ShapeRef.new(shape: FeatureGroupName, required: true, location_name: "FeatureGroupName"))
+    DescribeFeatureMetadataRequest.add_member(:feature_name, Shapes::ShapeRef.new(shape: FeatureName, required: true, location_name: "FeatureName"))
+    DescribeFeatureMetadataRequest.struct_class = Types::DescribeFeatureMetadataRequest
+
+    DescribeFeatureMetadataResponse.add_member(:feature_group_arn, Shapes::ShapeRef.new(shape: FeatureGroupArn, required: true, location_name: "FeatureGroupArn"))
+    DescribeFeatureMetadataResponse.add_member(:feature_group_name, Shapes::ShapeRef.new(shape: FeatureGroupName, required: true, location_name: "FeatureGroupName"))
+    DescribeFeatureMetadataResponse.add_member(:feature_name, Shapes::ShapeRef.new(shape: FeatureName, required: true, location_name: "FeatureName"))
+    DescribeFeatureMetadataResponse.add_member(:feature_type, Shapes::ShapeRef.new(shape: FeatureType, required: true, location_name: "FeatureType"))
+    DescribeFeatureMetadataResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, required: true, location_name: "CreationTime"))
+    DescribeFeatureMetadataResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: LastModifiedTime, required: true, location_name: "LastModifiedTime"))
+    DescribeFeatureMetadataResponse.add_member(:description, Shapes::ShapeRef.new(shape: FeatureDescription, location_name: "Description"))
+    DescribeFeatureMetadataResponse.add_member(:parameters, Shapes::ShapeRef.new(shape: FeatureParameters, location_name: "Parameters"))
+    DescribeFeatureMetadataResponse.struct_class = Types::DescribeFeatureMetadataResponse
 
     DescribeFlowDefinitionRequest.add_member(:flow_definition_name, Shapes::ShapeRef.new(shape: FlowDefinitionName, required: true, location_name: "FlowDefinitionName"))
     DescribeFlowDefinitionRequest.struct_class = Types::DescribeFlowDefinitionRequest
@@ -4069,6 +4103,8 @@ module Aws::SageMaker
     FailStepMetadata.add_member(:error_message, Shapes::ShapeRef.new(shape: String3072, location_name: "ErrorMessage"))
     FailStepMetadata.struct_class = Types::FailStepMetadata
 
+    FeatureAdditions.member = Shapes::ShapeRef.new(shape: FeatureDefinition)
+
     FeatureDefinition.add_member(:feature_name, Shapes::ShapeRef.new(shape: FeatureName, location_name: "FeatureName"))
     FeatureDefinition.add_member(:feature_type, Shapes::ShapeRef.new(shape: FeatureType, location_name: "FeatureType"))
     FeatureDefinition.struct_class = Types::FeatureDefinition
@@ -4081,11 +4117,13 @@ module Aws::SageMaker
     FeatureGroup.add_member(:event_time_feature_name, Shapes::ShapeRef.new(shape: FeatureName, location_name: "EventTimeFeatureName"))
     FeatureGroup.add_member(:feature_definitions, Shapes::ShapeRef.new(shape: FeatureDefinitions, location_name: "FeatureDefinitions"))
     FeatureGroup.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, location_name: "CreationTime"))
+    FeatureGroup.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: LastModifiedTime, location_name: "LastModifiedTime"))
     FeatureGroup.add_member(:online_store_config, Shapes::ShapeRef.new(shape: OnlineStoreConfig, location_name: "OnlineStoreConfig"))
     FeatureGroup.add_member(:offline_store_config, Shapes::ShapeRef.new(shape: OfflineStoreConfig, location_name: "OfflineStoreConfig"))
     FeatureGroup.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     FeatureGroup.add_member(:feature_group_status, Shapes::ShapeRef.new(shape: FeatureGroupStatus, location_name: "FeatureGroupStatus"))
     FeatureGroup.add_member(:offline_store_status, Shapes::ShapeRef.new(shape: OfflineStoreStatus, location_name: "OfflineStoreStatus"))
+    FeatureGroup.add_member(:last_update_status, Shapes::ShapeRef.new(shape: LastUpdateStatus, location_name: "LastUpdateStatus"))
     FeatureGroup.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
     FeatureGroup.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     FeatureGroup.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
@@ -4099,6 +4137,26 @@ module Aws::SageMaker
     FeatureGroupSummary.add_member(:feature_group_status, Shapes::ShapeRef.new(shape: FeatureGroupStatus, location_name: "FeatureGroupStatus"))
     FeatureGroupSummary.add_member(:offline_store_status, Shapes::ShapeRef.new(shape: OfflineStoreStatus, location_name: "OfflineStoreStatus"))
     FeatureGroupSummary.struct_class = Types::FeatureGroupSummary
+
+    FeatureMetadata.add_member(:feature_group_arn, Shapes::ShapeRef.new(shape: FeatureGroupArn, location_name: "FeatureGroupArn"))
+    FeatureMetadata.add_member(:feature_group_name, Shapes::ShapeRef.new(shape: FeatureGroupName, location_name: "FeatureGroupName"))
+    FeatureMetadata.add_member(:feature_name, Shapes::ShapeRef.new(shape: FeatureName, location_name: "FeatureName"))
+    FeatureMetadata.add_member(:feature_type, Shapes::ShapeRef.new(shape: FeatureType, location_name: "FeatureType"))
+    FeatureMetadata.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, location_name: "CreationTime"))
+    FeatureMetadata.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: LastModifiedTime, location_name: "LastModifiedTime"))
+    FeatureMetadata.add_member(:description, Shapes::ShapeRef.new(shape: FeatureDescription, location_name: "Description"))
+    FeatureMetadata.add_member(:parameters, Shapes::ShapeRef.new(shape: FeatureParameters, location_name: "Parameters"))
+    FeatureMetadata.struct_class = Types::FeatureMetadata
+
+    FeatureParameter.add_member(:key, Shapes::ShapeRef.new(shape: FeatureParameterKey, location_name: "Key"))
+    FeatureParameter.add_member(:value, Shapes::ShapeRef.new(shape: FeatureParameterValue, location_name: "Value"))
+    FeatureParameter.struct_class = Types::FeatureParameter
+
+    FeatureParameterAdditions.member = Shapes::ShapeRef.new(shape: FeatureParameter)
+
+    FeatureParameterRemovals.member = Shapes::ShapeRef.new(shape: FeatureParameterKey)
+
+    FeatureParameters.member = Shapes::ShapeRef.new(shape: FeatureParameter)
 
     FileSource.add_member(:content_type, Shapes::ShapeRef.new(shape: ContentType, location_name: "ContentType"))
     FileSource.add_member(:content_digest, Shapes::ShapeRef.new(shape: ContentDigest, location_name: "ContentDigest"))
@@ -4516,6 +4574,10 @@ module Aws::SageMaker
     LambdaStepMetadata.add_member(:arn, Shapes::ShapeRef.new(shape: String256, location_name: "Arn"))
     LambdaStepMetadata.add_member(:output_parameters, Shapes::ShapeRef.new(shape: OutputParameterList, location_name: "OutputParameters"))
     LambdaStepMetadata.struct_class = Types::LambdaStepMetadata
+
+    LastUpdateStatus.add_member(:status, Shapes::ShapeRef.new(shape: LastUpdateStatusValue, required: true, location_name: "Status"))
+    LastUpdateStatus.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
+    LastUpdateStatus.struct_class = Types::LastUpdateStatus
 
     LifecycleConfigArns.member = Shapes::ShapeRef.new(shape: StudioLifecycleConfigArn)
 
@@ -6392,6 +6454,7 @@ module Aws::SageMaker
     SearchRecord.add_member(:pipeline_execution, Shapes::ShapeRef.new(shape: PipelineExecution, location_name: "PipelineExecution"))
     SearchRecord.add_member(:feature_group, Shapes::ShapeRef.new(shape: FeatureGroup, location_name: "FeatureGroup"))
     SearchRecord.add_member(:project, Shapes::ShapeRef.new(shape: Project, location_name: "Project"))
+    SearchRecord.add_member(:feature_metadata, Shapes::ShapeRef.new(shape: FeatureMetadata, location_name: "FeatureMetadata"))
     SearchRecord.struct_class = Types::SearchRecord
 
     SearchRequest.add_member(:resource, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "Resource"))
@@ -6964,6 +7027,20 @@ module Aws::SageMaker
 
     UpdateExperimentResponse.add_member(:experiment_arn, Shapes::ShapeRef.new(shape: ExperimentArn, location_name: "ExperimentArn"))
     UpdateExperimentResponse.struct_class = Types::UpdateExperimentResponse
+
+    UpdateFeatureGroupRequest.add_member(:feature_group_name, Shapes::ShapeRef.new(shape: FeatureGroupName, required: true, location_name: "FeatureGroupName"))
+    UpdateFeatureGroupRequest.add_member(:feature_additions, Shapes::ShapeRef.new(shape: FeatureAdditions, location_name: "FeatureAdditions"))
+    UpdateFeatureGroupRequest.struct_class = Types::UpdateFeatureGroupRequest
+
+    UpdateFeatureGroupResponse.add_member(:feature_group_arn, Shapes::ShapeRef.new(shape: FeatureGroupArn, required: true, location_name: "FeatureGroupArn"))
+    UpdateFeatureGroupResponse.struct_class = Types::UpdateFeatureGroupResponse
+
+    UpdateFeatureMetadataRequest.add_member(:feature_group_name, Shapes::ShapeRef.new(shape: FeatureGroupName, required: true, location_name: "FeatureGroupName"))
+    UpdateFeatureMetadataRequest.add_member(:feature_name, Shapes::ShapeRef.new(shape: FeatureName, required: true, location_name: "FeatureName"))
+    UpdateFeatureMetadataRequest.add_member(:description, Shapes::ShapeRef.new(shape: FeatureDescription, location_name: "Description"))
+    UpdateFeatureMetadataRequest.add_member(:parameter_additions, Shapes::ShapeRef.new(shape: FeatureParameterAdditions, location_name: "ParameterAdditions"))
+    UpdateFeatureMetadataRequest.add_member(:parameter_removals, Shapes::ShapeRef.new(shape: FeatureParameterRemovals, location_name: "ParameterRemovals"))
+    UpdateFeatureMetadataRequest.struct_class = Types::UpdateFeatureMetadataRequest
 
     UpdateImageRequest.add_member(:delete_properties, Shapes::ShapeRef.new(shape: ImageDeletePropertyList, location_name: "DeleteProperties"))
     UpdateImageRequest.add_member(:description, Shapes::ShapeRef.new(shape: ImageDescription, location_name: "Description"))
@@ -8189,6 +8266,15 @@ module Aws::SageMaker
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeFeatureGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeFeatureGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
+      api.add_operation(:describe_feature_metadata, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeFeatureMetadata"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeFeatureMetadataRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeFeatureMetadataResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
       end)
 
@@ -9660,6 +9746,24 @@ module Aws::SageMaker
         o.input = Shapes::ShapeRef.new(shape: UpdateExperimentRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateExperimentResponse)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
+      api.add_operation(:update_feature_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateFeatureGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateFeatureGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateFeatureGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
+      api.add_operation(:update_feature_metadata, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateFeatureMetadata"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateFeatureMetadataRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
       end)
 
