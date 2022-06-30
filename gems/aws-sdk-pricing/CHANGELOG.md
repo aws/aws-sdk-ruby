@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2022-06-30)
+------------------
+
+* Feature - Documentation update for GetProducts Response.
+
 1.39.0 (2022-06-22)
 ------------------
 

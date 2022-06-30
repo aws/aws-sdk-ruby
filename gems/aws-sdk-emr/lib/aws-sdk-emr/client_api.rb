@@ -339,6 +339,7 @@ module Aws::EMR
 
     AddJobFlowStepsInput.add_member(:job_flow_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "JobFlowId"))
     AddJobFlowStepsInput.add_member(:steps, Shapes::ShapeRef.new(shape: StepConfigList, required: true, location_name: "Steps"))
+    AddJobFlowStepsInput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: ArnType, location_name: "ExecutionRoleArn"))
     AddJobFlowStepsInput.struct_class = Types::AddJobFlowStepsInput
 
     AddJobFlowStepsOutput.add_member(:step_ids, Shapes::ShapeRef.new(shape: StepIdsList, location_name: "StepIds"))
@@ -1334,6 +1335,7 @@ module Aws::EMR
     Step.add_member(:config, Shapes::ShapeRef.new(shape: HadoopStepConfig, location_name: "Config"))
     Step.add_member(:action_on_failure, Shapes::ShapeRef.new(shape: ActionOnFailure, location_name: "ActionOnFailure"))
     Step.add_member(:status, Shapes::ShapeRef.new(shape: StepStatus, location_name: "Status"))
+    Step.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: OptionalArnType, location_name: "ExecutionRoleArn"))
     Step.struct_class = Types::Step
 
     StepConfig.add_member(:name, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "Name"))

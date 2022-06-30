@@ -1972,6 +1972,9 @@ module Aws::WellArchitected
     # @option params [Integer] :max_results
     #   The maximum number of results to return for this request.
     #
+    # @option params [String] :status
+    #   The status of a workload share.
+    #
     # @return [Types::ListLensSharesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListLensSharesOutput#lens_share_summaries #lens_share_summaries} => Array&lt;Types::LensShareSummary&gt;
@@ -1986,6 +1989,7 @@ module Aws::WellArchitected
     #     shared_with_prefix: "SharedWithPrefix",
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     status: "ACCEPTED", # accepts ACCEPTED, REJECTED, PENDING, REVOKED, EXPIRED, ASSOCIATING, ASSOCIATED, FAILED
     #   })
     #
     # @example Response structure
@@ -1993,7 +1997,8 @@ module Aws::WellArchitected
     #   resp.lens_share_summaries #=> Array
     #   resp.lens_share_summaries[0].share_id #=> String
     #   resp.lens_share_summaries[0].shared_with #=> String
-    #   resp.lens_share_summaries[0].status #=> String, one of "ACCEPTED", "REJECTED", "PENDING", "REVOKED", "EXPIRED"
+    #   resp.lens_share_summaries[0].status #=> String, one of "ACCEPTED", "REJECTED", "PENDING", "REVOKED", "EXPIRED", "ASSOCIATING", "ASSOCIATED", "FAILED"
+    #   resp.lens_share_summaries[0].status_message #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListLensShares AWS API Documentation
@@ -2276,6 +2281,9 @@ module Aws::WellArchitected
     # @option params [Integer] :max_results
     #   The maximum number of results to return for this request.
     #
+    # @option params [String] :status
+    #   The status of a workload share.
+    #
     # @return [Types::ListWorkloadSharesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListWorkloadSharesOutput#workload_id #workload_id} => String
@@ -2291,6 +2299,7 @@ module Aws::WellArchitected
     #     shared_with_prefix: "SharedWithPrefix",
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     status: "ACCEPTED", # accepts ACCEPTED, REJECTED, PENDING, REVOKED, EXPIRED, ASSOCIATING, ASSOCIATED, FAILED
     #   })
     #
     # @example Response structure
@@ -2300,7 +2309,8 @@ module Aws::WellArchitected
     #   resp.workload_share_summaries[0].share_id #=> String
     #   resp.workload_share_summaries[0].shared_with #=> String
     #   resp.workload_share_summaries[0].permission_type #=> String, one of "READONLY", "CONTRIBUTOR"
-    #   resp.workload_share_summaries[0].status #=> String, one of "ACCEPTED", "REJECTED", "PENDING", "REVOKED", "EXPIRED"
+    #   resp.workload_share_summaries[0].status #=> String, one of "ACCEPTED", "REJECTED", "PENDING", "REVOKED", "EXPIRED", "ASSOCIATING", "ASSOCIATED", "FAILED"
+    #   resp.workload_share_summaries[0].status_message #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListWorkloadShares AWS API Documentation
@@ -2541,6 +2551,29 @@ module Aws::WellArchitected
     # @param [Hash] params ({})
     def update_answer(params = {}, options = {})
       req = build_request(:update_answer, params)
+      req.send_request(options)
+    end
+
+    # Updates whether the Amazon Web Services account is opted into
+    # organization sharing features.
+    #
+    # @option params [String] :organization_sharing_status
+    #   The status of organization sharing settings.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_global_settings({
+    #     organization_sharing_status: "ENABLED", # accepts ENABLED, DISABLED
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateGlobalSettings AWS API Documentation
+    #
+    # @overload update_global_settings(params = {})
+    # @param [Hash] params ({})
+    def update_global_settings(params = {}, options = {})
+      req = build_request(:update_global_settings, params)
       req.send_request(options)
     end
 
@@ -2867,7 +2900,7 @@ module Aws::WellArchitected
     #   resp.workload_share.shared_by #=> String
     #   resp.workload_share.shared_with #=> String
     #   resp.workload_share.permission_type #=> String, one of "READONLY", "CONTRIBUTOR"
-    #   resp.workload_share.status #=> String, one of "ACCEPTED", "REJECTED", "PENDING", "REVOKED", "EXPIRED"
+    #   resp.workload_share.status #=> String, one of "ACCEPTED", "REJECTED", "PENDING", "REVOKED", "EXPIRED", "ASSOCIATING", "ASSOCIATED", "FAILED"
     #   resp.workload_share.workload_name #=> String
     #   resp.workload_share.workload_id #=> String
     #
@@ -2950,7 +2983,7 @@ module Aws::WellArchitected
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wellarchitected'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

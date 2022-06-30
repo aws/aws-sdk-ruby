@@ -2435,6 +2435,9 @@ module Aws::Glue
     # @option params [required, Types::DatabaseInput] :database_input
     #   The metadata for the database.
     #
+    # @option params [Hash<String,String>] :tags
+    #   The tags you assign to the database.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -2460,6 +2463,9 @@ module Aws::Glue
     #         catalog_id: "CatalogIdString",
     #         database_name: "NameString",
     #       },
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
     #     },
     #   })
     #
@@ -5941,11 +5947,11 @@ module Aws::Glue
     #
     # @option params [Boolean] :hide_password
     #   Allows you to retrieve the connection metadata without returning the
-    #   password. For instance, the AWS Glue console uses this flag to
-    #   retrieve the connection, and does not display the password. Set this
-    #   parameter when the caller might not have permission to use the KMS key
-    #   to decrypt the password, but it does have permission to access the
-    #   rest of the connection properties.
+    #   password. For instance, the Glue console uses this flag to retrieve
+    #   the connection, and does not display the password. Set this parameter
+    #   when the caller might not have permission to use the KMS key to
+    #   decrypt the password, but it does have permission to access the rest
+    #   of the connection properties.
     #
     # @return [Types::GetConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5996,11 +6002,11 @@ module Aws::Glue
     #
     # @option params [Boolean] :hide_password
     #   Allows you to retrieve the connection metadata without returning the
-    #   password. For instance, the AWS Glue console uses this flag to
-    #   retrieve the connection, and does not display the password. Set this
-    #   parameter when the caller might not have permission to use the KMS key
-    #   to decrypt the password, but it does have permission to access the
-    #   rest of the connection properties.
+    #   password. For instance, the Glue console uses this flag to retrieve
+    #   the connection, and does not display the password. Set this parameter
+    #   when the caller might not have permission to use the KMS key to
+    #   decrypt the password, but it does have permission to access the rest
+    #   of the connection properties.
     #
     # @option params [String] :next_token
     #   A continuation token, if this is a continuation call.
@@ -14749,6 +14755,7 @@ module Aws::Glue
     #   The transaction ID at which to update the table contents.
     #
     # @option params [String] :version_id
+    #   The version ID at which to update the table contents.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -15050,7 +15057,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.113.0'
+      context[:gem_version] = '1.114.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -611,6 +611,13 @@ module Aws::Kendra
     # related to processing the batch are sent to your Amazon Web Services
     # CloudWatch log.
     #
+    # For an example of ingesting inline documents using Python and Java
+    # SDKs, see [Adding files directly to an index][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/in-adding-binary-doc.html
+    #
     # @option params [required, String] :index_id
     #   The identifier of the index to add the documents to. You need to
     #   create the index first using the `CreateIndex` API.
@@ -827,9 +834,16 @@ module Aws::Kendra
     # Amazon S3 and [custom][1] data sources are the only supported data
     # sources in the Amazon Web Services GovCloud (US-West) region.
     #
+    # For an example of creating an index and data source using the Python
+    # SDK, see [Getting started with Python SDK][2]. For an example of
+    # creating an index and data source using the Java SDK, see [Getting
+    # started with Java SDK][3].
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-custom.html
+    # [2]: https://docs.aws.amazon.com/kendra/latest/dg/gs-python.html
+    # [3]: https://docs.aws.amazon.com/kendra/latest/dg/gs-java.html
     #
     # @option params [required, String] :name
     #   A unique name for the data source. A data source name can't be
@@ -925,7 +939,7 @@ module Aws::Kendra
     #   resp = client.create_data_source({
     #     name: "DataSourceName", # required
     #     index_id: "IndexId", # required
-    #     type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE, WEBCRAWLER, WORKDOCS, FSX, SLACK, BOX, QUIP, JIRA, GITHUB
+    #     type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE, WEBCRAWLER, WORKDOCS, FSX, SLACK, BOX, QUIP, JIRA, GITHUB, ALFRESCO
     #     configuration: {
     #       s3_configuration: {
     #         bucket_name: "S3BucketName", # required
@@ -1500,6 +1514,45 @@ module Aws::Kendra
     #           },
     #         ],
     #       },
+    #       alfresco_configuration: {
+    #         site_url: "SiteUrl", # required
+    #         site_id: "SiteId", # required
+    #         secret_arn: "SecretArn", # required
+    #         ssl_certificate_s3_path: { # required
+    #           bucket: "S3BucketName", # required
+    #           key: "S3ObjectKey", # required
+    #         },
+    #         crawl_system_folders: false,
+    #         crawl_comments: false,
+    #         entity_filter: ["wiki"], # accepts wiki, blog, documentLibrary
+    #         document_library_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         blog_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         wiki_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         vpc_configuration: {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #       },
     #     },
     #     description: "Description",
     #     schedule: "ScanSchedule",
@@ -1584,8 +1637,9 @@ module Aws::Kendra
     end
 
     # Creates an Amazon Kendra experience such as a search application. For
-    # more information on creating a search application experience, see
-    # [Building a search experience with no code][1].
+    # more information on creating a search application experience,
+    # including using the Python and Java SDKs, see [Building a search
+    # experience with no code][1].
     #
     #
     #
@@ -1666,6 +1720,13 @@ module Aws::Kendra
     # answers.
     #
     # Adding FAQs to an index is an asynchronous operation.
+    #
+    # For an example of adding an FAQ to an index using Python and Java
+    # SDKs, see [Using you FAQ file][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/in-creating-faq.html#using-faq-file
     #
     # @option params [required, String] :index_id
     #   The identifier of the index that contains the FAQ.
@@ -1771,6 +1832,16 @@ module Aws::Kendra
     #
     # Once the index is active you can index your documents using the
     # `BatchPutDocument` API or using one of the supported data sources.
+    #
+    # For an example of creating an index and data source using the Python
+    # SDK, see [Getting started with Python SDK][1]. For an example of
+    # creating an index and data source using the Java SDK, see [Getting
+    # started with Java SDK][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/gs-python.html
+    # [2]: https://docs.aws.amazon.com/kendra/latest/dg/gs-java.html
     #
     # @option params [required, String] :name
     #   The name for the new index.
@@ -1919,9 +1990,13 @@ module Aws::Kendra
     # `CreateQuerySuggestionsBlockList` is currently not supported in the
     # Amazon Web Services GovCloud (US-West) region.
     #
+    # For an example of creating a block list for query suggestions using
+    # the Python SDK, see [Query suggestions block list][2].
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/kendra/latest/dg/quotas.html
+    # [2]: https://docs.aws.amazon.com/kendra/latest/dg/query-suggestions.html#suggestions-block-list
     #
     # @option params [required, String] :index_id
     #   The identifier of the index you want to create a query suggestions
@@ -2011,6 +2086,13 @@ module Aws::Kendra
 
     # Creates a thesaurus for an index. The thesaurus contains a list of
     # synonyms in Solr format.
+    #
+    # For an example of adding a thesaurus file to an index, see [Adding
+    # custom synonyms to an index][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/index-synonyms-adding-thesaurus-file.html
     #
     # @option params [required, String] :index_id
     #   The unique identifier of the index for the new thesaurus.
@@ -2367,7 +2449,7 @@ module Aws::Kendra
     #   resp.id #=> String
     #   resp.index_id #=> String
     #   resp.name #=> String
-    #   resp.type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE", "WEBCRAWLER", "WORKDOCS", "FSX", "SLACK", "BOX", "QUIP", "JIRA", "GITHUB"
+    #   resp.type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE", "WEBCRAWLER", "WORKDOCS", "FSX", "SLACK", "BOX", "QUIP", "JIRA", "GITHUB", "ALFRESCO"
     #   resp.configuration.s3_configuration.bucket_name #=> String
     #   resp.configuration.s3_configuration.inclusion_prefixes #=> Array
     #   resp.configuration.s3_configuration.inclusion_prefixes[0] #=> String
@@ -2788,6 +2870,35 @@ module Aws::Kendra
     #   resp.configuration.git_hub_configuration.git_hub_pull_request_document_attachment_configuration_field_mappings[0].data_source_field_name #=> String
     #   resp.configuration.git_hub_configuration.git_hub_pull_request_document_attachment_configuration_field_mappings[0].date_field_format #=> String
     #   resp.configuration.git_hub_configuration.git_hub_pull_request_document_attachment_configuration_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.alfresco_configuration.site_url #=> String
+    #   resp.configuration.alfresco_configuration.site_id #=> String
+    #   resp.configuration.alfresco_configuration.secret_arn #=> String
+    #   resp.configuration.alfresco_configuration.ssl_certificate_s3_path.bucket #=> String
+    #   resp.configuration.alfresco_configuration.ssl_certificate_s3_path.key #=> String
+    #   resp.configuration.alfresco_configuration.crawl_system_folders #=> Boolean
+    #   resp.configuration.alfresco_configuration.crawl_comments #=> Boolean
+    #   resp.configuration.alfresco_configuration.entity_filter #=> Array
+    #   resp.configuration.alfresco_configuration.entity_filter[0] #=> String, one of "wiki", "blog", "documentLibrary"
+    #   resp.configuration.alfresco_configuration.document_library_field_mappings #=> Array
+    #   resp.configuration.alfresco_configuration.document_library_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.alfresco_configuration.document_library_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.alfresco_configuration.document_library_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.alfresco_configuration.blog_field_mappings #=> Array
+    #   resp.configuration.alfresco_configuration.blog_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.alfresco_configuration.blog_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.alfresco_configuration.blog_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.alfresco_configuration.wiki_field_mappings #=> Array
+    #   resp.configuration.alfresco_configuration.wiki_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.alfresco_configuration.wiki_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.alfresco_configuration.wiki_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.alfresco_configuration.inclusion_patterns #=> Array
+    #   resp.configuration.alfresco_configuration.inclusion_patterns[0] #=> String
+    #   resp.configuration.alfresco_configuration.exclusion_patterns #=> Array
+    #   resp.configuration.alfresco_configuration.exclusion_patterns[0] #=> String
+    #   resp.configuration.alfresco_configuration.vpc_configuration.subnet_ids #=> Array
+    #   resp.configuration.alfresco_configuration.vpc_configuration.subnet_ids[0] #=> String
+    #   resp.configuration.alfresco_configuration.vpc_configuration.security_group_ids #=> Array
+    #   resp.configuration.alfresco_configuration.vpc_configuration.security_group_ids[0] #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.description #=> String
@@ -3622,7 +3733,7 @@ module Aws::Kendra
     #   resp.summary_items #=> Array
     #   resp.summary_items[0].name #=> String
     #   resp.summary_items[0].id #=> String
-    #   resp.summary_items[0].type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE", "WEBCRAWLER", "WORKDOCS", "FSX", "SLACK", "BOX", "QUIP", "JIRA", "GITHUB"
+    #   resp.summary_items[0].type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE", "WEBCRAWLER", "WORKDOCS", "FSX", "SLACK", "BOX", "QUIP", "JIRA", "GITHUB", "ALFRESCO"
     #   resp.summary_items[0].created_at #=> Time
     #   resp.summary_items[0].updated_at #=> Time
     #   resp.summary_items[0].status #=> String, one of "CREATING", "DELETING", "FAILED", "UPDATING", "ACTIVE"
@@ -5353,6 +5464,45 @@ module Aws::Kendra
     #           },
     #         ],
     #       },
+    #       alfresco_configuration: {
+    #         site_url: "SiteUrl", # required
+    #         site_id: "SiteId", # required
+    #         secret_arn: "SecretArn", # required
+    #         ssl_certificate_s3_path: { # required
+    #           bucket: "S3BucketName", # required
+    #           key: "S3ObjectKey", # required
+    #         },
+    #         crawl_system_folders: false,
+    #         crawl_comments: false,
+    #         entity_filter: ["wiki"], # accepts wiki, blog, documentLibrary
+    #         document_library_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         blog_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         wiki_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         vpc_configuration: {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #       },
     #     },
     #     description: "Description",
     #     schedule: "ScanSchedule",
@@ -5823,7 +5973,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

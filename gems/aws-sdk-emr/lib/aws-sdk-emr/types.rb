@@ -260,6 +260,7 @@ module Aws::EMR
     #             },
     #           },
     #         ],
+    #         execution_role_arn: "ArnType",
     #       }
     #
     # @!attribute [rw] job_flow_id
@@ -271,11 +272,23 @@ module Aws::EMR
     #   A list of StepConfig to be executed by the job flow.
     #   @return [Array<Types::StepConfig>]
     #
+    # @!attribute [rw] execution_role_arn
+    #   The Amazon Resource Name (ARN) of the runtime role for a step on the
+    #   cluster. The runtime role can be a cross-account IAM role. The
+    #   runtime role ARN is a combination of account ID, role name, and role
+    #   type using the following format:
+    #   `arn:partition:service:region:account:resource`.
+    #
+    #   For example, `arn:aws:iam::1234567890:role/ReadOnly` is a correctly
+    #   formatted runtime role ARN.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddJobFlowStepsInput AWS API Documentation
     #
     class AddJobFlowStepsInput < Struct.new(
       :job_flow_id,
-      :steps)
+      :steps,
+      :execution_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7470,6 +7483,17 @@ module Aws::EMR
     #   The current execution status details of the cluster step.
     #   @return [Types::StepStatus]
     #
+    # @!attribute [rw] execution_role_arn
+    #   The Amazon Resource Name (ARN) of the runtime role for a step on the
+    #   cluster. The runtime role can be a cross-account IAM role. The
+    #   runtime role ARN is a combination of account ID, role name, and role
+    #   type using the following format:
+    #   `arn:partition:service:region:account:resource`.
+    #
+    #   For example, `arn:aws:iam::1234567890:role/ReadOnly` is a correctly
+    #   formatted runtime role ARN.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/Step AWS API Documentation
     #
     class Step < Struct.new(
@@ -7477,7 +7501,8 @@ module Aws::EMR
       :name,
       :config,
       :action_on_failure,
-      :status)
+      :status,
+      :execution_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end

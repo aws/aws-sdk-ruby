@@ -132,6 +132,49 @@ module Aws::Athena
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass BatchGetPreparedStatementInput
+    #   data as a hash:
+    #
+    #       {
+    #         prepared_statement_names: ["StatementName"], # required
+    #         work_group: "WorkGroupName", # required
+    #       }
+    #
+    # @!attribute [rw] prepared_statement_names
+    #   A list of prepared statement names to return.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] work_group
+    #   The name of the workgroup to which the prepared statements belong.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/BatchGetPreparedStatementInput AWS API Documentation
+    #
+    class BatchGetPreparedStatementInput < Struct.new(
+      :prepared_statement_names,
+      :work_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] prepared_statements
+    #   The list of prepared statements returned.
+    #   @return [Array<Types::PreparedStatement>]
+    #
+    # @!attribute [rw] unprocessed_prepared_statement_names
+    #   A list of one or more prepared statements that were requested but
+    #   could not be returned.
+    #   @return [Array<Types::UnprocessedPreparedStatementName>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/BatchGetPreparedStatementOutput AWS API Documentation
+    #
+    class BatchGetPreparedStatementOutput < Struct.new(
+      :prepared_statements,
+      :unprocessed_prepared_statement_names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass BatchGetQueryExecutionInput
     #   data as a hash:
     #
@@ -1837,6 +1880,12 @@ module Aws::Athena
     #   The engine version that executed the query.
     #   @return [Types::EngineVersion]
     #
+    # @!attribute [rw] execution_parameters
+    #   A list of values for the parameters in a query. The values are
+    #   applied sequentially to the parameters in the query in the order in
+    #   which the parameters occur.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/QueryExecution AWS API Documentation
     #
     class QueryExecution < Struct.new(
@@ -1848,7 +1897,8 @@ module Aws::Athena
       :status,
       :statistics,
       :work_group,
-      :engine_version)
+      :engine_version,
+      :execution_parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1999,6 +2049,7 @@ module Aws::Athena
     #   @return [String]
     #
     # @!attribute [rw] resource_name
+    #   The name of the Amazon resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ResourceNotFoundException AWS API Documentation
@@ -2326,6 +2377,7 @@ module Aws::Athena
     #           },
     #         },
     #         work_group: "WorkGroupName",
+    #         execution_parameters: ["ExecutionParameter"],
     #       }
     #
     # @!attribute [rw] query_string
@@ -2367,6 +2419,12 @@ module Aws::Athena
     #   The name of the workgroup in which the query is being started.
     #   @return [String]
     #
+    # @!attribute [rw] execution_parameters
+    #   A list of values for the parameters in a query. The values are
+    #   applied sequentially to the parameters in the query in the order in
+    #   which the parameters occur.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/StartQueryExecutionInput AWS API Documentation
     #
     class StartQueryExecutionInput < Struct.new(
@@ -2374,7 +2432,8 @@ module Aws::Athena
       :client_request_token,
       :query_execution_context,
       :result_configuration,
-      :work_group)
+      :work_group,
+      :execution_parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2584,6 +2643,42 @@ module Aws::Athena
     #
     class UnprocessedNamedQueryId < Struct.new(
       :named_query_id,
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The name of a prepared statement that could not be returned.
+    #
+    # @!attribute [rw] statement_name
+    #   The name of a prepared statement that could not be returned due to
+    #   an error.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The error code returned when the request for the prepared statement
+    #   failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message containing the reason why the prepared statement
+    #   could not be returned. The following error messages are possible:
+    #
+    #   * `INVALID_INPUT` - The name of the prepared statement that was
+    #     provided is not valid (for example, the name is too long).
+    #
+    #   * `STATEMENT_NOT_FOUND` - A prepared statement with the name
+    #     provided could not be found.
+    #
+    #   * `UNAUTHORIZED` - The requester does not have permission to access
+    #     the workgroup that contains the prepared statement.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/UnprocessedPreparedStatementName AWS API Documentation
+    #
+    class UnprocessedPreparedStatementName < Struct.new(
+      :statement_name,
       :error_code,
       :error_message)
       SENSITIVE = []

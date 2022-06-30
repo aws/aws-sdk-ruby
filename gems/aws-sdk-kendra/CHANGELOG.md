@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2022-06-30)
+------------------
+
+* Feature - Amazon Kendra now provides a data source connector for alfresco
+
 1.52.0 (2022-06-02)
 ------------------
 

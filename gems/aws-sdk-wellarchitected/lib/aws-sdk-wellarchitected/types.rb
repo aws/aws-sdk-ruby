@@ -2006,12 +2006,17 @@ module Aws::WellArchitected
     #   The status of a workload share.
     #   @return [String]
     #
+    # @!attribute [rw] status_message
+    #   Optional message to compliment the Status field.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/LensShareSummary AWS API Documentation
     #
     class LensShareSummary < Struct.new(
       :share_id,
       :shared_with,
-      :status)
+      :status,
+      :status_message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2451,6 +2456,7 @@ module Aws::WellArchitected
     #         shared_with_prefix: "SharedWithPrefix",
     #         next_token: "NextToken",
     #         max_results: 1,
+    #         status: "ACCEPTED", # accepts ACCEPTED, REJECTED, PENDING, REVOKED, EXPIRED, ASSOCIATING, ASSOCIATED, FAILED
     #       }
     #
     # @!attribute [rw] lens_alias
@@ -2479,13 +2485,18 @@ module Aws::WellArchitected
     #   The maximum number of results to return for this request.
     #   @return [Integer]
     #
+    # @!attribute [rw] status
+    #   The status of a workload share.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListLensSharesInput AWS API Documentation
     #
     class ListLensSharesInput < Struct.new(
       :lens_alias,
       :shared_with_prefix,
       :next_token,
-      :max_results)
+      :max_results,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2786,6 +2797,7 @@ module Aws::WellArchitected
     #         shared_with_prefix: "SharedWithPrefix",
     #         next_token: "NextToken",
     #         max_results: 1,
+    #         status: "ACCEPTED", # accepts ACCEPTED, REJECTED, PENDING, REVOKED, EXPIRED, ASSOCIATING, ASSOCIATED, FAILED
     #       }
     #
     # @!attribute [rw] workload_id
@@ -2806,13 +2818,18 @@ module Aws::WellArchitected
     #   The maximum number of results to return for this request.
     #   @return [Integer]
     #
+    # @!attribute [rw] status
+    #   The status of a workload share.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListWorkloadSharesInput AWS API Documentation
     #
     class ListWorkloadSharesInput < Struct.new(
       :workload_id,
       :shared_with_prefix,
       :next_token,
-      :max_results)
+      :max_results,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3431,6 +3448,25 @@ module Aws::WellArchitected
       :lens_alias,
       :lens_arn,
       :answer)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateGlobalSettingsInput
+    #   data as a hash:
+    #
+    #       {
+    #         organization_sharing_status: "ENABLED", # accepts ENABLED, DISABLED
+    #       }
+    #
+    # @!attribute [rw] organization_sharing_status
+    #   The status of organization sharing settings.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateGlobalSettingsInput AWS API Documentation
+    #
+    class UpdateGlobalSettingsInput < Struct.new(
+      :organization_sharing_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4177,13 +4213,18 @@ module Aws::WellArchitected
     #   The status of a workload share.
     #   @return [String]
     #
+    # @!attribute [rw] status_message
+    #   Optional message to compliment the Status field.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/WorkloadShareSummary AWS API Documentation
     #
     class WorkloadShareSummary < Struct.new(
       :share_id,
       :shared_with,
       :permission_type,
-      :status)
+      :status,
+      :status_message)
       SENSITIVE = []
       include Aws::Structure
     end

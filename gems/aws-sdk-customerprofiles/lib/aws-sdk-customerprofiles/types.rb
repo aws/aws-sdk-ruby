@@ -38,7 +38,13 @@ module Aws::CustomerProfiles
     #   @return [String]
     #
     # @!attribute [rw] key_name
-    #   A searchable identifier of a customer profile.
+    #   A searchable identifier of a customer profile. The predefined keys
+    #   you can use include: \_account, \_profileId, \_assetId, \_caseId,
+    #   \_orderId, \_fullName, \_phone, \_email, \_ctrContactId,
+    #   \_marketoLeadId, \_salesforceAccountId, \_salesforceContactId,
+    #   \_salesforceAssetId, \_zendeskUserId, \_zendeskExternalId,
+    #   \_zendeskTicketId, \_serviceNowSystemId, \_serviceNowIncidentId,
+    #   \_segmentUserId, \_shopifyCustomerId, \_shopifyOrderId.
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -376,6 +382,7 @@ module Aws::CustomerProfiles
     #           conflict_resolving_model: "RECENCY", # required, accepts RECENCY, SOURCE
     #           source_name: "string1To255",
     #         },
+    #         min_allowed_confidence_score_for_merging: 1.0,
     #       }
     #
     # @!attribute [rw] enabled
@@ -395,12 +402,20 @@ module Aws::CustomerProfiles
     #   which `EmailAddress` should be used?
     #   @return [Types::ConflictResolution]
     #
+    # @!attribute [rw] min_allowed_confidence_score_for_merging
+    #   A number between 0 and 1 that represents the minimum confidence
+    #   score required for profiles within a matching group to be merged
+    #   during the auto-merge process. A higher score means higher
+    #   similarity required to merge profiles.
+    #   @return [Float]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/AutoMerging AWS API Documentation
     #
     class AutoMerging < Struct.new(
       :enabled,
       :consolidation,
-      :conflict_resolution)
+      :conflict_resolution,
+      :min_allowed_confidence_score_for_merging)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -580,6 +595,7 @@ module Aws::CustomerProfiles
     #               conflict_resolving_model: "RECENCY", # required, accepts RECENCY, SOURCE
     #               source_name: "string1To255",
     #             },
+    #             min_allowed_confidence_score_for_merging: 1.0,
     #           },
     #           exporting_config: {
     #             s3_exporting: {
@@ -1691,6 +1707,7 @@ module Aws::CustomerProfiles
     #           conflict_resolving_model: "RECENCY", # required, accepts RECENCY, SOURCE
     #           source_name: "string1To255",
     #         },
+    #         min_allowed_confidence_score_for_merging: 1.0,
     #       }
     #
     # @!attribute [rw] domain_name
@@ -1706,12 +1723,18 @@ module Aws::CustomerProfiles
     #   different profiles.
     #   @return [Types::ConflictResolution]
     #
+    # @!attribute [rw] min_allowed_confidence_score_for_merging
+    #   Minimum confidence score required for profiles within a matching
+    #   group to be merged during the auto-merge process.
+    #   @return [Float]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetAutoMergingPreviewRequest AWS API Documentation
     #
     class GetAutoMergingPreviewRequest < Struct.new(
       :domain_name,
       :consolidation,
-      :conflict_resolution)
+      :conflict_resolution,
+      :min_allowed_confidence_score_for_merging)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3369,9 +3392,15 @@ module Aws::CustomerProfiles
     #   @return [Array<String>]
     #
     # @!attribute [rw] confidence_score
-    #   A number between 0 and 1 that represents the confidence level of
-    #   assigning profiles to a matching group. A score of 1 likely
-    #   indicates an exact match.
+    #   A number between 0 and 1, where a higher score means higher
+    #   similarity. Examining match confidence scores lets you distinguish
+    #   between groups of similar records in which the system is highly
+    #   confident (which you may decide to merge), groups of similar records
+    #   about which the system is uncertain (which you may decide to have
+    #   reviewed by a human), and groups of similar records that the system
+    #   deems to be unlikely (which you may decide to reject). Given
+    #   confidence scores vary as per the data input, it should not be used
+    #   an absolute measure of matching quality.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/MatchItem AWS API Documentation
@@ -3406,6 +3435,7 @@ module Aws::CustomerProfiles
     #             conflict_resolving_model: "RECENCY", # required, accepts RECENCY, SOURCE
     #             source_name: "string1To255",
     #           },
+    #           min_allowed_confidence_score_for_merging: 1.0,
     #         },
     #         exporting_config: {
     #           s3_exporting: {
@@ -4047,7 +4077,14 @@ module Aws::CustomerProfiles
     #   @return [String]
     #
     # @!attribute [rw] template_id
-    #   A unique identifier for the object template.
+    #   A unique identifier for the object template. For some attributes in
+    #   the request, the service will use the default value from the object
+    #   template when TemplateId is present. If these attributes are present
+    #   in the request, the service may return a `BadRequestException`.
+    #   These attributes include: AllowProfileCreation,
+    #   SourceLastUpdatedTimestampFormat, Fields, and Keys. For example, if
+    #   AllowProfileCreation is set to true when TemplateId is set, the
+    #   service may return a `BadRequestException`.
     #   @return [String]
     #
     # @!attribute [rw] expiration_days
@@ -4899,6 +4936,7 @@ module Aws::CustomerProfiles
     #               conflict_resolving_model: "RECENCY", # required, accepts RECENCY, SOURCE
     #               source_name: "string1To255",
     #             },
+    #             min_allowed_confidence_score_for_merging: 1.0,
     #           },
     #           exporting_config: {
     #             s3_exporting: {

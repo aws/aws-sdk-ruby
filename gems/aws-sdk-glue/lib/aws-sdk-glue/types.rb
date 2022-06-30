@@ -3752,6 +3752,18 @@ module Aws::Glue
     #   * `CONNECTION_URL` - The URL for connecting to a general (non-JDBC)
     #     data source.
     #
+    #   * `SECRET_ID` - The secret ID used for the secret manager of
+    #     credentials.
+    #
+    #   * `CONNECTOR_URL` - The connector URL for a MARKETPLACE or CUSTOM
+    #     connection.
+    #
+    #   * `CONNECTOR_TYPE` - The connector type for a MARKETPLACE or CUSTOM
+    #     connection.
+    #
+    #   * `CONNECTOR_CLASS_NAME` - The connector class name for a
+    #     MARKETPLACE or CUSTOM connection.
+    #
     #   * `KAFKA_BOOTSTRAP_SERVERS` - A comma-separated list of host and
     #     port pairs that are the addresses of the Apache Kafka brokers in a
     #     Kafka cluster to which a Kafka client will connect to and
@@ -3767,18 +3779,6 @@ module Aws::Glue
     #     validation of the CA cert file or not. Glue validates for three
     #     algorithms: SHA256withRSA, SHA384withRSA and SHA512withRSA.
     #     Default value is "false".
-    #
-    #   * `SECRET_ID` - The secret ID used for the secret manager of
-    #     credentials.
-    #
-    #   * `CONNECTOR_URL` - The connector URL for a MARKETPLACE or CUSTOM
-    #     connection.
-    #
-    #   * `CONNECTOR_TYPE` - The connector type for a MARKETPLACE or CUSTOM
-    #     connection.
-    #
-    #   * `CONNECTOR_CLASS_NAME` - The connector class name for a
-    #     MARKETPLACE or CUSTOM connection.
     #
     #   * `KAFKA_CLIENT_KEYSTORE` - The Amazon S3 location of the client
     #     keystore file for Kafka client side authentication (Optional).
@@ -3797,6 +3797,45 @@ module Aws::Glue
     #   * `ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD` - The encrypted version of
     #     the Kafka client key password (if the user has the Glue encrypt
     #     passwords setting selected).
+    #
+    #   * `KAFKA_SASL_MECHANISM` - `"SCRAM-SHA-512"` or `"GSSAPI"`. These
+    #     are the two supported [SASL Mechanisms][1].
+    #
+    #   * `KAFKA_SASL_SCRAM_USERNAME` - A plaintext username used to
+    #     authenticate with the "SCRAM-SHA-512" mechanism.
+    #
+    #   * `KAFKA_SASL_SCRAM_PASSWORD` - A plaintext password used to
+    #     authenticate with the "SCRAM-SHA-512" mechanism.
+    #
+    #   * `ENCRYPTED_KAFKA_SASL_SCRAM_PASSWORD` - The encrypted version of
+    #     the Kafka SASL SCRAM password (if the user has the Glue encrypt
+    #     passwords setting selected).
+    #
+    #   * `KAFKA_SASL_GSSAPI_KEYTAB` - The S3 location of a Kerberos
+    #     `keytab` file. A keytab stores long-term keys for one or more
+    #     principals. For more information, see [MIT Kerberos Documentation:
+    #     Keytab][2].
+    #
+    #   * `KAFKA_SASL_GSSAPI_KRB5_CONF` - The S3 location of a Kerberos
+    #     `krb5.conf` file. A krb5.conf stores Kerberos configuration
+    #     information, such as the location of the KDC server. For more
+    #     information, see [MIT Kerberos Documentation: krb5.conf][3].
+    #
+    #   * `KAFKA_SASL_GSSAPI_SERVICE` - The Kerberos service name, as set
+    #     with `sasl.kerberos.service.name` in your [Kafka
+    #     Configuration][4].
+    #
+    #   * `KAFKA_SASL_GSSAPI_PRINCIPAL` - The name of the Kerberos princial
+    #     used by Glue. For more information, see [Kafka Documentation:
+    #     Configuring Kafka Brokers][5].
+    #
+    #
+    #
+    #   [1]: https://www.iana.org/assignments/sasl-mechanisms/sasl-mechanisms.xhtml
+    #   [2]: https://web.mit.edu/kerberos/krb5-latest/doc/basic/keytab_def.html
+    #   [3]: https://web.mit.edu/kerberos/krb5-1.12/doc/admin/conf_files/krb5_conf.html
+    #   [4]: https://kafka.apache.org/documentation/#brokerconfigs_sasl.kerberos.service.name
+    #   [5]: https://kafka.apache.org/documentation/#security_sasl_kerberos_clientconfig
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] physical_connection_requirements
@@ -4960,6 +4999,9 @@ module Aws::Glue
     #             database_name: "NameString",
     #           },
     #         },
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] catalog_id
@@ -4971,11 +5013,16 @@ module Aws::Glue
     #   The metadata for the database.
     #   @return [Types::DatabaseInput]
     #
+    # @!attribute [rw] tags
+    #   The tags you assign to the database.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateDatabaseRequest AWS API Documentation
     #
     class CreateDatabaseRequest < Struct.new(
       :catalog_id,
-      :database_input)
+      :database_input,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10623,8 +10670,8 @@ module Aws::Glue
     #
     # @!attribute [rw] hide_password
     #   Allows you to retrieve the connection metadata without returning the
-    #   password. For instance, the AWS Glue console uses this flag to
-    #   retrieve the connection, and does not display the password. Set this
+    #   password. For instance, the Glue console uses this flag to retrieve
+    #   the connection, and does not display the password. Set this
     #   parameter when the caller might not have permission to use the KMS
     #   key to decrypt the password, but it does have permission to access
     #   the rest of the connection properties.
@@ -10706,8 +10753,8 @@ module Aws::Glue
     #
     # @!attribute [rw] hide_password
     #   Allows you to retrieve the connection metadata without returning the
-    #   password. For instance, the AWS Glue console uses this flag to
-    #   retrieve the connection, and does not display the password. Set this
+    #   password. For instance, the Glue console uses this flag to retrieve
+    #   the connection, and does not display the password. Set this
     #   parameter when the caller might not have permission to use the KMS
     #   key to decrypt the password, but it does have permission to access
     #   the rest of the connection properties.
@@ -22529,6 +22576,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] additional_locations
+    #   A list of locations that point to the path where a Delta table is
+    #   located.
     #   @return [Array<String>]
     #
     # @!attribute [rw] input_format
@@ -22766,6 +22815,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] version_id
+    #   The ID of the table version.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Table AWS API Documentation
@@ -25809,6 +25859,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] version_id
+    #   The version ID at which to update the table contents.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateTableRequest AWS API Documentation

@@ -61,6 +61,7 @@ module Aws::CustomerProfiles
     DomainList = Shapes::ListShape.new(name: 'DomainList')
     DomainStats = Shapes::StructureShape.new(name: 'DomainStats')
     Double = Shapes::FloatShape.new(name: 'Double')
+    Double0To1 = Shapes::FloatShape.new(name: 'Double0To1')
     ExportingConfig = Shapes::StructureShape.new(name: 'ExportingConfig')
     ExportingLocation = Shapes::StructureShape.new(name: 'ExportingLocation')
     FieldContentType = Shapes::StringShape.new(name: 'FieldContentType')
@@ -296,6 +297,7 @@ module Aws::CustomerProfiles
     AutoMerging.add_member(:enabled, Shapes::ShapeRef.new(shape: optionalBoolean, required: true, location_name: "Enabled"))
     AutoMerging.add_member(:consolidation, Shapes::ShapeRef.new(shape: Consolidation, location_name: "Consolidation"))
     AutoMerging.add_member(:conflict_resolution, Shapes::ShapeRef.new(shape: ConflictResolution, location_name: "ConflictResolution"))
+    AutoMerging.add_member(:min_allowed_confidence_score_for_merging, Shapes::ShapeRef.new(shape: Double0To1, location_name: "MinAllowedConfidenceScoreForMerging"))
     AutoMerging.struct_class = Types::AutoMerging
 
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: message, location_name: "Message"))
@@ -482,6 +484,7 @@ module Aws::CustomerProfiles
     GetAutoMergingPreviewRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
     GetAutoMergingPreviewRequest.add_member(:consolidation, Shapes::ShapeRef.new(shape: Consolidation, required: true, location_name: "Consolidation"))
     GetAutoMergingPreviewRequest.add_member(:conflict_resolution, Shapes::ShapeRef.new(shape: ConflictResolution, required: true, location_name: "ConflictResolution"))
+    GetAutoMergingPreviewRequest.add_member(:min_allowed_confidence_score_for_merging, Shapes::ShapeRef.new(shape: Double0To1, location_name: "MinAllowedConfidenceScoreForMerging"))
     GetAutoMergingPreviewRequest.struct_class = Types::GetAutoMergingPreviewRequest
 
     GetAutoMergingPreviewResponse.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location_name: "DomainName"))

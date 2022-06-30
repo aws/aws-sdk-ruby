@@ -608,6 +608,16 @@ module Aws::EMR
     # @option params [required, Array<Types::StepConfig>] :steps
     #   A list of StepConfig to be executed by the job flow.
     #
+    # @option params [String] :execution_role_arn
+    #   The Amazon Resource Name (ARN) of the runtime role for a step on the
+    #   cluster. The runtime role can be a cross-account IAM role. The runtime
+    #   role ARN is a combination of account ID, role name, and role type
+    #   using the following format:
+    #   `arn:partition:service:region:account:resource`.
+    #
+    #   For example, `arn:aws:iam::1234567890:role/ReadOnly` is a correctly
+    #   formatted runtime role ARN.
+    #
     # @return [Types::AddJobFlowStepsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AddJobFlowStepsOutput#step_ids #step_ids} => Array&lt;String&gt;
@@ -633,6 +643,7 @@ module Aws::EMR
     #         },
     #       },
     #     ],
+    #     execution_role_arn: "ArnType",
     #   })
     #
     # @example Response structure
@@ -1456,6 +1467,7 @@ module Aws::EMR
     #   resp.step.status.timeline.creation_date_time #=> Time
     #   resp.step.status.timeline.start_date_time #=> Time
     #   resp.step.status.timeline.end_date_time #=> Time
+    #   resp.step.execution_role_arn #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -3783,7 +3795,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

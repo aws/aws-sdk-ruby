@@ -155,6 +155,7 @@ module Aws::WellArchitected
     NotificationSummaries = Shapes::ListShape.new(name: 'NotificationSummaries')
     NotificationSummary = Shapes::StructureShape.new(name: 'NotificationSummary')
     NotificationType = Shapes::StringShape.new(name: 'NotificationType')
+    OrganizationSharingStatus = Shapes::StringShape.new(name: 'OrganizationSharingStatus')
     PermissionType = Shapes::StringShape.new(name: 'PermissionType')
     PillarDifference = Shapes::StructureShape.new(name: 'PillarDifference')
     PillarDifferences = Shapes::ListShape.new(name: 'PillarDifferences')
@@ -185,6 +186,7 @@ module Aws::WellArchitected
     ShareStatus = Shapes::StringShape.new(name: 'ShareStatus')
     SharedWith = Shapes::StringShape.new(name: 'SharedWith')
     SharedWithPrefix = Shapes::StringShape.new(name: 'SharedWithPrefix')
+    StatusMessage = Shapes::StringShape.new(name: 'StatusMessage')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagMap = Shapes::MapShape.new(name: 'TagMap')
@@ -197,6 +199,7 @@ module Aws::WellArchitected
     UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
     UpdateAnswerInput = Shapes::StructureShape.new(name: 'UpdateAnswerInput')
     UpdateAnswerOutput = Shapes::StructureShape.new(name: 'UpdateAnswerOutput')
+    UpdateGlobalSettingsInput = Shapes::StructureShape.new(name: 'UpdateGlobalSettingsInput')
     UpdateLensReviewInput = Shapes::StructureShape.new(name: 'UpdateLensReviewInput')
     UpdateLensReviewOutput = Shapes::StructureShape.new(name: 'UpdateLensReviewOutput')
     UpdateShareInvitationInput = Shapes::StructureShape.new(name: 'UpdateShareInvitationInput')
@@ -550,6 +553,7 @@ module Aws::WellArchitected
     LensShareSummary.add_member(:share_id, Shapes::ShapeRef.new(shape: ShareId, location_name: "ShareId"))
     LensShareSummary.add_member(:shared_with, Shapes::ShapeRef.new(shape: SharedWith, location_name: "SharedWith"))
     LensShareSummary.add_member(:status, Shapes::ShapeRef.new(shape: ShareStatus, location_name: "Status"))
+    LensShareSummary.add_member(:status_message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "StatusMessage"))
     LensShareSummary.struct_class = Types::LensShareSummary
 
     LensSummaries.member = Shapes::ShapeRef.new(shape: LensSummary)
@@ -622,6 +626,7 @@ module Aws::WellArchitected
     ListLensSharesInput.add_member(:shared_with_prefix, Shapes::ShapeRef.new(shape: SharedWithPrefix, location: "querystring", location_name: "SharedWithPrefix"))
     ListLensSharesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
     ListLensSharesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListWorkloadSharesMaxResults, location: "querystring", location_name: "MaxResults"))
+    ListLensSharesInput.add_member(:status, Shapes::ShapeRef.new(shape: ShareStatus, location: "querystring", location_name: "Status"))
     ListLensSharesInput.struct_class = Types::ListLensSharesInput
 
     ListLensSharesOutput.add_member(:lens_share_summaries, Shapes::ShapeRef.new(shape: LensShareSummaries, location_name: "LensShareSummaries"))
@@ -679,6 +684,7 @@ module Aws::WellArchitected
     ListWorkloadSharesInput.add_member(:shared_with_prefix, Shapes::ShapeRef.new(shape: SharedWithPrefix, location: "querystring", location_name: "SharedWithPrefix"))
     ListWorkloadSharesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
     ListWorkloadSharesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListWorkloadSharesMaxResults, location: "querystring", location_name: "MaxResults"))
+    ListWorkloadSharesInput.add_member(:status, Shapes::ShapeRef.new(shape: ShareStatus, location: "querystring", location_name: "Status"))
     ListWorkloadSharesInput.struct_class = Types::ListWorkloadSharesInput
 
     ListWorkloadSharesOutput.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, location_name: "WorkloadId"))
@@ -816,6 +822,9 @@ module Aws::WellArchitected
     UpdateAnswerOutput.add_member(:answer, Shapes::ShapeRef.new(shape: Answer, location_name: "Answer"))
     UpdateAnswerOutput.struct_class = Types::UpdateAnswerOutput
 
+    UpdateGlobalSettingsInput.add_member(:organization_sharing_status, Shapes::ShapeRef.new(shape: OrganizationSharingStatus, location_name: "OrganizationSharingStatus"))
+    UpdateGlobalSettingsInput.struct_class = Types::UpdateGlobalSettingsInput
+
     UpdateLensReviewInput.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, required: true, location: "uri", location_name: "WorkloadId"))
     UpdateLensReviewInput.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, required: true, location: "uri", location_name: "LensAlias"))
     UpdateLensReviewInput.add_member(:lens_notes, Shapes::ShapeRef.new(shape: Notes, location_name: "LensNotes"))
@@ -934,6 +943,7 @@ module Aws::WellArchitected
     WorkloadShareSummary.add_member(:shared_with, Shapes::ShapeRef.new(shape: SharedWith, location_name: "SharedWith"))
     WorkloadShareSummary.add_member(:permission_type, Shapes::ShapeRef.new(shape: PermissionType, location_name: "PermissionType"))
     WorkloadShareSummary.add_member(:status, Shapes::ShapeRef.new(shape: ShareStatus, location_name: "Status"))
+    WorkloadShareSummary.add_member(:status_message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "StatusMessage"))
     WorkloadShareSummary.struct_class = Types::WorkloadShareSummary
 
     WorkloadSummaries.member = Shapes::ShapeRef.new(shape: WorkloadSummary)
@@ -1468,6 +1478,19 @@ module Aws::WellArchitected
         o.output = Shapes::ShapeRef.new(shape: UpdateAnswerOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:update_global_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateGlobalSettings"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/global-settings"
+        o.input = Shapes::ShapeRef.new(shape: UpdateGlobalSettingsInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)

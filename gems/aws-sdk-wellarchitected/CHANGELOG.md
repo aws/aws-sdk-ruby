@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2022-06-30)
+------------------
+
+* Feature - Added support for UpdateGlobalSettings API. Added status filter to ListWorkloadShares and ListLensShares.
+
 1.16.0 (2022-06-21)
 ------------------
 

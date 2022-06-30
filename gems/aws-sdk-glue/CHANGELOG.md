@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.114.0 (2022-06-30)
+------------------
+
+* Feature - This release adds tag as an input of CreateDatabase
+
 1.113.0 (2022-06-24)
 ------------------
 

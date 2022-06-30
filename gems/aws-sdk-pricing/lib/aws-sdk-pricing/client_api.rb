@@ -31,8 +31,8 @@ module Aws::Pricing
     InvalidNextTokenException = Shapes::StructureShape.new(name: 'InvalidNextTokenException')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
-    PriceList = Shapes::ListShape.new(name: 'PriceList')
-    PriceListItemJSON = Shapes::StringShape.new(name: 'PriceListItemJSON')
+    PriceListJsonItem = Shapes::StringShape.new(name: 'PriceListJsonItem')
+    PriceListJsonItems = Shapes::ListShape.new(name: 'PriceListJsonItems')
     Service = Shapes::StructureShape.new(name: 'Service')
     ServiceList = Shapes::ListShape.new(name: 'ServiceList')
     String = Shapes::StringShape.new(name: 'String')
@@ -84,7 +84,7 @@ module Aws::Pricing
     GetProductsRequest.struct_class = Types::GetProductsRequest
 
     GetProductsResponse.add_member(:format_version, Shapes::ShapeRef.new(shape: String, location_name: "FormatVersion"))
-    GetProductsResponse.add_member(:price_list, Shapes::ShapeRef.new(shape: PriceList, location_name: "PriceList"))
+    GetProductsResponse.add_member(:price_list, Shapes::ShapeRef.new(shape: PriceListJsonItems, location_name: "PriceList"))
     GetProductsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     GetProductsResponse.struct_class = Types::GetProductsResponse
 
@@ -100,7 +100,7 @@ module Aws::Pricing
     NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
     NotFoundException.struct_class = Types::NotFoundException
 
-    PriceList.member = Shapes::ShapeRef.new(shape: PriceListItemJSON, metadata: {"jsonvalue"=>true})
+    PriceListJsonItems.member = Shapes::ShapeRef.new(shape: PriceListJsonItem, metadata: {"jsonvalue"=>true})
 
     Service.add_member(:service_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ServiceCode"))
     Service.add_member(:attribute_names, Shapes::ShapeRef.new(shape: AttributeNameList, location_name: "AttributeNames"))

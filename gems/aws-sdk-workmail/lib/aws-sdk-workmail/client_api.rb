@@ -27,6 +27,9 @@ module Aws::WorkMail
     AssociateDelegateToResourceResponse = Shapes::StructureShape.new(name: 'AssociateDelegateToResourceResponse')
     AssociateMemberToGroupRequest = Shapes::StructureShape.new(name: 'AssociateMemberToGroupRequest')
     AssociateMemberToGroupResponse = Shapes::StructureShape.new(name: 'AssociateMemberToGroupResponse')
+    AvailabilityConfiguration = Shapes::StructureShape.new(name: 'AvailabilityConfiguration')
+    AvailabilityConfigurationList = Shapes::ListShape.new(name: 'AvailabilityConfigurationList')
+    AvailabilityProviderType = Shapes::StringShape.new(name: 'AvailabilityProviderType')
     BookingOptions = Shapes::StructureShape.new(name: 'BookingOptions')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BooleanObject = Shapes::BooleanShape.new(name: 'BooleanObject')
@@ -34,6 +37,8 @@ module Aws::WorkMail
     CancelMailboxExportJobResponse = Shapes::StructureShape.new(name: 'CancelMailboxExportJobResponse')
     CreateAliasRequest = Shapes::StructureShape.new(name: 'CreateAliasRequest')
     CreateAliasResponse = Shapes::StructureShape.new(name: 'CreateAliasResponse')
+    CreateAvailabilityConfigurationRequest = Shapes::StructureShape.new(name: 'CreateAvailabilityConfigurationRequest')
+    CreateAvailabilityConfigurationResponse = Shapes::StructureShape.new(name: 'CreateAvailabilityConfigurationResponse')
     CreateGroupRequest = Shapes::StructureShape.new(name: 'CreateGroupRequest')
     CreateGroupResponse = Shapes::StructureShape.new(name: 'CreateGroupResponse')
     CreateMobileDeviceAccessRuleRequest = Shapes::StructureShape.new(name: 'CreateMobileDeviceAccessRuleRequest')
@@ -49,6 +54,8 @@ module Aws::WorkMail
     DeleteAccessControlRuleResponse = Shapes::StructureShape.new(name: 'DeleteAccessControlRuleResponse')
     DeleteAliasRequest = Shapes::StructureShape.new(name: 'DeleteAliasRequest')
     DeleteAliasResponse = Shapes::StructureShape.new(name: 'DeleteAliasResponse')
+    DeleteAvailabilityConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteAvailabilityConfigurationRequest')
+    DeleteAvailabilityConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteAvailabilityConfigurationResponse')
     DeleteEmailMonitoringConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteEmailMonitoringConfigurationRequest')
     DeleteEmailMonitoringConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteEmailMonitoringConfigurationResponse')
     DeleteGroupRequest = Shapes::StructureShape.new(name: 'DeleteGroupRequest')
@@ -116,6 +123,8 @@ module Aws::WorkMail
     EntityNotFoundException = Shapes::StructureShape.new(name: 'EntityNotFoundException')
     EntityState = Shapes::StringShape.new(name: 'EntityState')
     EntityStateException = Shapes::StructureShape.new(name: 'EntityStateException')
+    EwsAvailabilityProvider = Shapes::StructureShape.new(name: 'EwsAvailabilityProvider')
+    ExternalUserName = Shapes::StringShape.new(name: 'ExternalUserName')
     FolderConfiguration = Shapes::StructureShape.new(name: 'FolderConfiguration')
     FolderConfigurations = Shapes::ListShape.new(name: 'FolderConfigurations')
     FolderName = Shapes::StringShape.new(name: 'FolderName')
@@ -145,11 +154,15 @@ module Aws::WorkMail
     IpRangeList = Shapes::ListShape.new(name: 'IpRangeList')
     Jobs = Shapes::ListShape.new(name: 'Jobs')
     KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
+    LambdaArn = Shapes::StringShape.new(name: 'LambdaArn')
+    LambdaAvailabilityProvider = Shapes::StructureShape.new(name: 'LambdaAvailabilityProvider')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListAccessControlRulesRequest = Shapes::StructureShape.new(name: 'ListAccessControlRulesRequest')
     ListAccessControlRulesResponse = Shapes::StructureShape.new(name: 'ListAccessControlRulesResponse')
     ListAliasesRequest = Shapes::StructureShape.new(name: 'ListAliasesRequest')
     ListAliasesResponse = Shapes::StructureShape.new(name: 'ListAliasesResponse')
+    ListAvailabilityConfigurationsRequest = Shapes::StructureShape.new(name: 'ListAvailabilityConfigurationsRequest')
+    ListAvailabilityConfigurationsResponse = Shapes::StructureShape.new(name: 'ListAvailabilityConfigurationsResponse')
     ListGroupMembersRequest = Shapes::StructureShape.new(name: 'ListGroupMembersRequest')
     ListGroupMembersResponse = Shapes::StructureShape.new(name: 'ListGroupMembersResponse')
     ListGroupsRequest = Shapes::StructureShape.new(name: 'ListGroupsRequest')
@@ -227,6 +240,7 @@ module Aws::WorkMail
     PutMobileDeviceAccessOverrideResponse = Shapes::StructureShape.new(name: 'PutMobileDeviceAccessOverrideResponse')
     PutRetentionPolicyRequest = Shapes::StructureShape.new(name: 'PutRetentionPolicyRequest')
     PutRetentionPolicyResponse = Shapes::StructureShape.new(name: 'PutRetentionPolicyResponse')
+    RedactedEwsAvailabilityProvider = Shapes::StructureShape.new(name: 'RedactedEwsAvailabilityProvider')
     RegisterMailDomainRequest = Shapes::StructureShape.new(name: 'RegisterMailDomainRequest')
     RegisterMailDomainResponse = Shapes::StructureShape.new(name: 'RegisterMailDomainResponse')
     RegisterToWorkMailRequest = Shapes::StructureShape.new(name: 'RegisterToWorkMailRequest')
@@ -257,11 +271,15 @@ module Aws::WorkMail
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TestAvailabilityConfigurationRequest = Shapes::StructureShape.new(name: 'TestAvailabilityConfigurationRequest')
+    TestAvailabilityConfigurationResponse = Shapes::StructureShape.new(name: 'TestAvailabilityConfigurationResponse')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     UnsupportedOperationException = Shapes::StructureShape.new(name: 'UnsupportedOperationException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateAvailabilityConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateAvailabilityConfigurationRequest')
+    UpdateAvailabilityConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateAvailabilityConfigurationResponse')
     UpdateDefaultMailDomainRequest = Shapes::StructureShape.new(name: 'UpdateDefaultMailDomainRequest')
     UpdateDefaultMailDomainResponse = Shapes::StructureShape.new(name: 'UpdateDefaultMailDomainResponse')
     UpdateMailboxQuotaRequest = Shapes::StructureShape.new(name: 'UpdateMailboxQuotaRequest')
@@ -272,6 +290,7 @@ module Aws::WorkMail
     UpdatePrimaryEmailAddressResponse = Shapes::StructureShape.new(name: 'UpdatePrimaryEmailAddressResponse')
     UpdateResourceRequest = Shapes::StructureShape.new(name: 'UpdateResourceRequest')
     UpdateResourceResponse = Shapes::StructureShape.new(name: 'UpdateResourceResponse')
+    Url = Shapes::StringShape.new(name: 'Url')
     User = Shapes::StructureShape.new(name: 'User')
     UserIdList = Shapes::ListShape.new(name: 'UserIdList')
     UserName = Shapes::StringShape.new(name: 'UserName')
@@ -315,6 +334,16 @@ module Aws::WorkMail
 
     AssociateMemberToGroupResponse.struct_class = Types::AssociateMemberToGroupResponse
 
+    AvailabilityConfiguration.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "DomainName"))
+    AvailabilityConfiguration.add_member(:provider_type, Shapes::ShapeRef.new(shape: AvailabilityProviderType, location_name: "ProviderType"))
+    AvailabilityConfiguration.add_member(:ews_provider, Shapes::ShapeRef.new(shape: RedactedEwsAvailabilityProvider, location_name: "EwsProvider"))
+    AvailabilityConfiguration.add_member(:lambda_provider, Shapes::ShapeRef.new(shape: LambdaAvailabilityProvider, location_name: "LambdaProvider"))
+    AvailabilityConfiguration.add_member(:date_created, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DateCreated"))
+    AvailabilityConfiguration.add_member(:date_modified, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DateModified"))
+    AvailabilityConfiguration.struct_class = Types::AvailabilityConfiguration
+
+    AvailabilityConfigurationList.member = Shapes::ShapeRef.new(shape: AvailabilityConfiguration)
+
     BookingOptions.add_member(:auto_accept_requests, Shapes::ShapeRef.new(shape: Boolean, location_name: "AutoAcceptRequests"))
     BookingOptions.add_member(:auto_decline_recurring_requests, Shapes::ShapeRef.new(shape: Boolean, location_name: "AutoDeclineRecurringRequests"))
     BookingOptions.add_member(:auto_decline_conflicting_requests, Shapes::ShapeRef.new(shape: Boolean, location_name: "AutoDeclineConflictingRequests"))
@@ -333,6 +362,15 @@ module Aws::WorkMail
     CreateAliasRequest.struct_class = Types::CreateAliasRequest
 
     CreateAliasResponse.struct_class = Types::CreateAliasResponse
+
+    CreateAvailabilityConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAvailabilityConfigurationRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
+    CreateAvailabilityConfigurationRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
+    CreateAvailabilityConfigurationRequest.add_member(:ews_provider, Shapes::ShapeRef.new(shape: EwsAvailabilityProvider, location_name: "EwsProvider"))
+    CreateAvailabilityConfigurationRequest.add_member(:lambda_provider, Shapes::ShapeRef.new(shape: LambdaAvailabilityProvider, location_name: "LambdaProvider"))
+    CreateAvailabilityConfigurationRequest.struct_class = Types::CreateAvailabilityConfigurationRequest
+
+    CreateAvailabilityConfigurationResponse.struct_class = Types::CreateAvailabilityConfigurationResponse
 
     CreateGroupRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     CreateGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: GroupName, required: true, location_name: "Name"))
@@ -403,6 +441,12 @@ module Aws::WorkMail
     DeleteAliasRequest.struct_class = Types::DeleteAliasRequest
 
     DeleteAliasResponse.struct_class = Types::DeleteAliasResponse
+
+    DeleteAvailabilityConfigurationRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
+    DeleteAvailabilityConfigurationRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
+    DeleteAvailabilityConfigurationRequest.struct_class = Types::DeleteAvailabilityConfigurationRequest
+
+    DeleteAvailabilityConfigurationResponse.struct_class = Types::DeleteAvailabilityConfigurationResponse
 
     DeleteEmailMonitoringConfigurationRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     DeleteEmailMonitoringConfigurationRequest.struct_class = Types::DeleteEmailMonitoringConfigurationRequest
@@ -615,6 +659,11 @@ module Aws::WorkMail
     EntityStateException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     EntityStateException.struct_class = Types::EntityStateException
 
+    EwsAvailabilityProvider.add_member(:ews_endpoint, Shapes::ShapeRef.new(shape: Url, required: true, location_name: "EwsEndpoint"))
+    EwsAvailabilityProvider.add_member(:ews_username, Shapes::ShapeRef.new(shape: ExternalUserName, required: true, location_name: "EwsUsername"))
+    EwsAvailabilityProvider.add_member(:ews_password, Shapes::ShapeRef.new(shape: Password, required: true, location_name: "EwsPassword"))
+    EwsAvailabilityProvider.struct_class = Types::EwsAvailabilityProvider
+
     FolderConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: FolderName, required: true, location_name: "Name"))
     FolderConfiguration.add_member(:action, Shapes::ShapeRef.new(shape: RetentionAction, required: true, location_name: "Action"))
     FolderConfiguration.add_member(:period, Shapes::ShapeRef.new(shape: RetentionPeriod, location_name: "Period"))
@@ -710,6 +759,9 @@ module Aws::WorkMail
 
     Jobs.member = Shapes::ShapeRef.new(shape: MailboxExportJob)
 
+    LambdaAvailabilityProvider.add_member(:lambda_arn, Shapes::ShapeRef.new(shape: LambdaArn, required: true, location_name: "LambdaArn"))
+    LambdaAvailabilityProvider.struct_class = Types::LambdaAvailabilityProvider
+
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     LimitExceededException.struct_class = Types::LimitExceededException
 
@@ -728,6 +780,15 @@ module Aws::WorkMail
     ListAliasesResponse.add_member(:aliases, Shapes::ShapeRef.new(shape: Aliases, location_name: "Aliases"))
     ListAliasesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListAliasesResponse.struct_class = Types::ListAliasesResponse
+
+    ListAvailabilityConfigurationsRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
+    ListAvailabilityConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListAvailabilityConfigurationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAvailabilityConfigurationsRequest.struct_class = Types::ListAvailabilityConfigurationsRequest
+
+    ListAvailabilityConfigurationsResponse.add_member(:availability_configurations, Shapes::ShapeRef.new(shape: AvailabilityConfigurationList, location_name: "AvailabilityConfigurations"))
+    ListAvailabilityConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAvailabilityConfigurationsResponse.struct_class = Types::ListAvailabilityConfigurationsResponse
 
     ListGroupMembersRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     ListGroupMembersRequest.add_member(:group_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, required: true, location_name: "GroupId"))
@@ -985,6 +1046,10 @@ module Aws::WorkMail
 
     PutRetentionPolicyResponse.struct_class = Types::PutRetentionPolicyResponse
 
+    RedactedEwsAvailabilityProvider.add_member(:ews_endpoint, Shapes::ShapeRef.new(shape: Url, location_name: "EwsEndpoint"))
+    RedactedEwsAvailabilityProvider.add_member(:ews_username, Shapes::ShapeRef.new(shape: ExternalUserName, location_name: "EwsUsername"))
+    RedactedEwsAvailabilityProvider.struct_class = Types::RedactedEwsAvailabilityProvider
+
     RegisterMailDomainRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     RegisterMailDomainRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     RegisterMailDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: WorkMailDomainName, required: true, location_name: "DomainName"))
@@ -1052,6 +1117,16 @@ module Aws::WorkMail
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
+    TestAvailabilityConfigurationRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
+    TestAvailabilityConfigurationRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "DomainName"))
+    TestAvailabilityConfigurationRequest.add_member(:ews_provider, Shapes::ShapeRef.new(shape: EwsAvailabilityProvider, location_name: "EwsProvider"))
+    TestAvailabilityConfigurationRequest.add_member(:lambda_provider, Shapes::ShapeRef.new(shape: LambdaAvailabilityProvider, location_name: "LambdaProvider"))
+    TestAvailabilityConfigurationRequest.struct_class = Types::TestAvailabilityConfigurationRequest
+
+    TestAvailabilityConfigurationResponse.add_member(:test_passed, Shapes::ShapeRef.new(shape: Boolean, location_name: "TestPassed"))
+    TestAvailabilityConfigurationResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: String, location_name: "FailureReason"))
+    TestAvailabilityConfigurationResponse.struct_class = Types::TestAvailabilityConfigurationResponse
+
     TooManyTagsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     TooManyTagsException.struct_class = Types::TooManyTagsException
 
@@ -1063,6 +1138,14 @@ module Aws::WorkMail
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
+    UpdateAvailabilityConfigurationRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
+    UpdateAvailabilityConfigurationRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
+    UpdateAvailabilityConfigurationRequest.add_member(:ews_provider, Shapes::ShapeRef.new(shape: EwsAvailabilityProvider, location_name: "EwsProvider"))
+    UpdateAvailabilityConfigurationRequest.add_member(:lambda_provider, Shapes::ShapeRef.new(shape: LambdaAvailabilityProvider, location_name: "LambdaProvider"))
+    UpdateAvailabilityConfigurationRequest.struct_class = Types::UpdateAvailabilityConfigurationRequest
+
+    UpdateAvailabilityConfigurationResponse.struct_class = Types::UpdateAvailabilityConfigurationResponse
 
     UpdateDefaultMailDomainRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     UpdateDefaultMailDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: WorkMailDomainName, required: true, location_name: "DomainName"))
@@ -1199,6 +1282,19 @@ module Aws::WorkMail
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
+      api.add_operation(:create_availability_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAvailabilityConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateAvailabilityConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAvailabilityConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+        o.errors << Shapes::ShapeRef.new(shape: NameAvailabilityException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
       api.add_operation(:create_group, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateGroup"
         o.http_method = "POST"
@@ -1291,6 +1387,16 @@ module Aws::WorkMail
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: EntityStateException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+      end)
+
+      api.add_operation(:delete_availability_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAvailabilityConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAvailabilityConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAvailabilityConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
       end)
@@ -1631,6 +1737,22 @@ module Aws::WorkMail
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: EntityStateException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_availability_configurations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAvailabilityConfigurations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListAvailabilityConfigurationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAvailabilityConfigurationsResponse)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
         o[:pager] = Aws::Pager.new(
@@ -1982,6 +2104,18 @@ module Aws::WorkMail
         o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
       end)
 
+      api.add_operation(:test_availability_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TestAvailabilityConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TestAvailabilityConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: TestAvailabilityConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+      end)
+
       api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UntagResource"
         o.http_method = "POST"
@@ -1989,6 +2123,18 @@ module Aws::WorkMail
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_availability_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAvailabilityConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAvailabilityConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAvailabilityConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
       end)
 
       api.add_operation(:update_default_mail_domain, Seahorse::Model::Operation.new.tap do |o|

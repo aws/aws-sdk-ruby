@@ -20,6 +20,8 @@ module Aws::Kendra
     AdditionalResultAttributeList = Shapes::ListShape.new(name: 'AdditionalResultAttributeList')
     AdditionalResultAttributeValue = Shapes::StructureShape.new(name: 'AdditionalResultAttributeValue')
     AdditionalResultAttributeValueType = Shapes::StringShape.new(name: 'AdditionalResultAttributeValueType')
+    AlfrescoConfiguration = Shapes::StructureShape.new(name: 'AlfrescoConfiguration')
+    AlfrescoEntity = Shapes::StringShape.new(name: 'AlfrescoEntity')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     AssociateEntitiesToExperienceFailedEntityList = Shapes::ListShape.new(name: 'AssociateEntitiesToExperienceFailedEntityList')
     AssociateEntitiesToExperienceRequest = Shapes::StructureShape.new(name: 'AssociateEntitiesToExperienceRequest')
@@ -189,6 +191,7 @@ module Aws::Kendra
     EnterpriseId = Shapes::StringShape.new(name: 'EnterpriseId')
     EntityConfiguration = Shapes::StructureShape.new(name: 'EntityConfiguration')
     EntityDisplayData = Shapes::StructureShape.new(name: 'EntityDisplayData')
+    EntityFilter = Shapes::ListShape.new(name: 'EntityFilter')
     EntityId = Shapes::StringShape.new(name: 'EntityId')
     EntityIdsList = Shapes::ListShape.new(name: 'EntityIdsList')
     EntityPersonaConfiguration = Shapes::StructureShape.new(name: 'EntityPersonaConfiguration')
@@ -429,9 +432,11 @@ module Aws::Kendra
     SharePointVersion = Shapes::StringShape.new(name: 'SharePointVersion')
     SharedDriveId = Shapes::StringShape.new(name: 'SharedDriveId')
     SinceCrawlDate = Shapes::StringShape.new(name: 'SinceCrawlDate')
+    SiteId = Shapes::StringShape.new(name: 'SiteId')
     SiteMap = Shapes::StringShape.new(name: 'SiteMap')
     SiteMapsConfiguration = Shapes::StructureShape.new(name: 'SiteMapsConfiguration')
     SiteMapsList = Shapes::ListShape.new(name: 'SiteMapsList')
+    SiteUrl = Shapes::StringShape.new(name: 'SiteUrl')
     SlackConfiguration = Shapes::StructureShape.new(name: 'SlackConfiguration')
     SlackEntity = Shapes::StringShape.new(name: 'SlackEntity')
     SlackEntityList = Shapes::ListShape.new(name: 'SlackEntityList')
@@ -537,6 +542,21 @@ module Aws::Kendra
 
     AdditionalResultAttributeValue.add_member(:text_with_highlights_value, Shapes::ShapeRef.new(shape: TextWithHighlights, location_name: "TextWithHighlightsValue"))
     AdditionalResultAttributeValue.struct_class = Types::AdditionalResultAttributeValue
+
+    AlfrescoConfiguration.add_member(:site_url, Shapes::ShapeRef.new(shape: SiteUrl, required: true, location_name: "SiteUrl"))
+    AlfrescoConfiguration.add_member(:site_id, Shapes::ShapeRef.new(shape: SiteId, required: true, location_name: "SiteId"))
+    AlfrescoConfiguration.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, required: true, location_name: "SecretArn"))
+    AlfrescoConfiguration.add_member(:ssl_certificate_s3_path, Shapes::ShapeRef.new(shape: S3Path, required: true, location_name: "SslCertificateS3Path"))
+    AlfrescoConfiguration.add_member(:crawl_system_folders, Shapes::ShapeRef.new(shape: Boolean, location_name: "CrawlSystemFolders"))
+    AlfrescoConfiguration.add_member(:crawl_comments, Shapes::ShapeRef.new(shape: Boolean, location_name: "CrawlComments"))
+    AlfrescoConfiguration.add_member(:entity_filter, Shapes::ShapeRef.new(shape: EntityFilter, location_name: "EntityFilter"))
+    AlfrescoConfiguration.add_member(:document_library_field_mappings, Shapes::ShapeRef.new(shape: DataSourceToIndexFieldMappingList, location_name: "DocumentLibraryFieldMappings"))
+    AlfrescoConfiguration.add_member(:blog_field_mappings, Shapes::ShapeRef.new(shape: DataSourceToIndexFieldMappingList, location_name: "BlogFieldMappings"))
+    AlfrescoConfiguration.add_member(:wiki_field_mappings, Shapes::ShapeRef.new(shape: DataSourceToIndexFieldMappingList, location_name: "WikiFieldMappings"))
+    AlfrescoConfiguration.add_member(:inclusion_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "InclusionPatterns"))
+    AlfrescoConfiguration.add_member(:exclusion_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "ExclusionPatterns"))
+    AlfrescoConfiguration.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: DataSourceVpcConfiguration, location_name: "VpcConfiguration"))
+    AlfrescoConfiguration.struct_class = Types::AlfrescoConfiguration
 
     AssociateEntitiesToExperienceFailedEntityList.member = Shapes::ShapeRef.new(shape: FailedEntity)
 
@@ -849,6 +869,7 @@ module Aws::Kendra
     DataSourceConfiguration.add_member(:quip_configuration, Shapes::ShapeRef.new(shape: QuipConfiguration, location_name: "QuipConfiguration"))
     DataSourceConfiguration.add_member(:jira_configuration, Shapes::ShapeRef.new(shape: JiraConfiguration, location_name: "JiraConfiguration"))
     DataSourceConfiguration.add_member(:git_hub_configuration, Shapes::ShapeRef.new(shape: GitHubConfiguration, location_name: "GitHubConfiguration"))
+    DataSourceConfiguration.add_member(:alfresco_configuration, Shapes::ShapeRef.new(shape: AlfrescoConfiguration, location_name: "AlfrescoConfiguration"))
     DataSourceConfiguration.struct_class = Types::DataSourceConfiguration
 
     DataSourceGroup.add_member(:group_id, Shapes::ShapeRef.new(shape: PrincipalName, required: true, location_name: "GroupId"))
@@ -1183,6 +1204,8 @@ module Aws::Kendra
     EntityDisplayData.add_member(:first_name, Shapes::ShapeRef.new(shape: NameType, location_name: "FirstName"))
     EntityDisplayData.add_member(:last_name, Shapes::ShapeRef.new(shape: NameType, location_name: "LastName"))
     EntityDisplayData.struct_class = Types::EntityDisplayData
+
+    EntityFilter.member = Shapes::ShapeRef.new(shape: AlfrescoEntity)
 
     EntityIdsList.member = Shapes::ShapeRef.new(shape: EntityId)
 

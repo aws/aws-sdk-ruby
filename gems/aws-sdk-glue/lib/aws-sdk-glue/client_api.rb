@@ -1729,6 +1729,7 @@ module Aws::Glue
 
     CreateDatabaseRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     CreateDatabaseRequest.add_member(:database_input, Shapes::ShapeRef.new(shape: DatabaseInput, required: true, location_name: "DatabaseInput"))
+    CreateDatabaseRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
     CreateDatabaseRequest.struct_class = Types::CreateDatabaseRequest
 
     CreateDatabaseResponse.struct_class = Types::CreateDatabaseResponse

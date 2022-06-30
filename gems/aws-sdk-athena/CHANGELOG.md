@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2022-06-30)
+------------------
+
+* Feature - This feature introduces the API support for Athena's parameterized query and BatchGetPreparedStatement API.
+
 1.53.0 (2022-04-15)
 ------------------
 

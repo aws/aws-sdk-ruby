@@ -409,6 +409,53 @@ module Aws::Athena
       req.send_request(options)
     end
 
+    # Returns the details of a single prepared statement or a list of up to
+    # 256 prepared statements for the array of prepared statement names that
+    # you provide. Requires you to have access to the workgroup to which the
+    # prepared statements belong. If a prepared statement cannot be
+    # retrieved for the name specified, the statement is listed in
+    # `UnprocessedPreparedStatementNames`.
+    #
+    # @option params [required, Array<String>] :prepared_statement_names
+    #   A list of prepared statement names to return.
+    #
+    # @option params [required, String] :work_group
+    #   The name of the workgroup to which the prepared statements belong.
+    #
+    # @return [Types::BatchGetPreparedStatementOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetPreparedStatementOutput#prepared_statements #prepared_statements} => Array&lt;Types::PreparedStatement&gt;
+    #   * {Types::BatchGetPreparedStatementOutput#unprocessed_prepared_statement_names #unprocessed_prepared_statement_names} => Array&lt;Types::UnprocessedPreparedStatementName&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_prepared_statement({
+    #     prepared_statement_names: ["StatementName"], # required
+    #     work_group: "WorkGroupName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.prepared_statements #=> Array
+    #   resp.prepared_statements[0].statement_name #=> String
+    #   resp.prepared_statements[0].query_statement #=> String
+    #   resp.prepared_statements[0].work_group_name #=> String
+    #   resp.prepared_statements[0].description #=> String
+    #   resp.prepared_statements[0].last_modified_time #=> Time
+    #   resp.unprocessed_prepared_statement_names #=> Array
+    #   resp.unprocessed_prepared_statement_names[0].statement_name #=> String
+    #   resp.unprocessed_prepared_statement_names[0].error_code #=> String
+    #   resp.unprocessed_prepared_statement_names[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/BatchGetPreparedStatement AWS API Documentation
+    #
+    # @overload batch_get_prepared_statement(params = {})
+    # @param [Hash] params ({})
+    def batch_get_prepared_statement(params = {}, options = {})
+      req = build_request(:batch_get_prepared_statement, params)
+      req.send_request(options)
+    end
+
     # Returns the details of a single query execution or a list of up to 50
     # query executions, which you provide as an array of query execution ID
     # strings. Requires you to have access to the workgroup in which the
@@ -462,6 +509,8 @@ module Aws::Athena
     #   resp.query_executions[0].work_group #=> String
     #   resp.query_executions[0].engine_version.selected_engine_version #=> String
     #   resp.query_executions[0].engine_version.effective_engine_version #=> String
+    #   resp.query_executions[0].execution_parameters #=> Array
+    #   resp.query_executions[0].execution_parameters[0] #=> String
     #   resp.unprocessed_query_execution_ids #=> Array
     #   resp.unprocessed_query_execution_ids[0].query_execution_id #=> String
     #   resp.unprocessed_query_execution_ids[0].error_code #=> String
@@ -1038,6 +1087,8 @@ module Aws::Athena
     #   resp.query_execution.work_group #=> String
     #   resp.query_execution.engine_version.selected_engine_version #=> String
     #   resp.query_execution.engine_version.effective_engine_version #=> String
+    #   resp.query_execution.execution_parameters #=> Array
+    #   resp.query_execution.execution_parameters[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetQueryExecution AWS API Documentation
     #
@@ -1400,7 +1451,7 @@ module Aws::Athena
       req.send_request(options)
     end
 
-    # Lists the prepared statements in the specfied workgroup.
+    # Lists the prepared statements in the specified workgroup.
     #
     # @option params [required, String] :work_group
     #   The workgroup to list the prepared statements for.
@@ -1705,6 +1756,11 @@ module Aws::Athena
     # @option params [String] :work_group
     #   The name of the workgroup in which the query is being started.
     #
+    # @option params [Array<String>] :execution_parameters
+    #   A list of values for the parameters in a query. The values are applied
+    #   sequentially to the parameters in the query in the order in which the
+    #   parameters occur.
+    #
     # @return [Types::StartQueryExecutionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartQueryExecutionOutput#query_execution_id #query_execution_id} => String
@@ -1730,6 +1786,7 @@ module Aws::Athena
     #       },
     #     },
     #     work_group: "WorkGroupName",
+    #     execution_parameters: ["ExecutionParameter"],
     #   })
     #
     # @example Response structure
@@ -2063,7 +2120,7 @@ module Aws::Athena
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-athena'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -112,6 +112,176 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # Provides the configuration information to connect to Alfresco as your
+    # data source.
+    #
+    # @note When making an API call, you may pass AlfrescoConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         site_url: "SiteUrl", # required
+    #         site_id: "SiteId", # required
+    #         secret_arn: "SecretArn", # required
+    #         ssl_certificate_s3_path: { # required
+    #           bucket: "S3BucketName", # required
+    #           key: "S3ObjectKey", # required
+    #         },
+    #         crawl_system_folders: false,
+    #         crawl_comments: false,
+    #         entity_filter: ["wiki"], # accepts wiki, blog, documentLibrary
+    #         document_library_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         blog_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         wiki_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         vpc_configuration: {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] site_url
+    #   The URL of the Alfresco site. For example, *https://hostname:8080*.
+    #   @return [String]
+    #
+    # @!attribute [rw] site_id
+    #   The identifier of the Alfresco site. For example, *my-site*.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_arn
+    #   The Amazon Resource Name (ARN) of an Secrets Manager secret that
+    #   contains the key-value pairs required to connect to your Alfresco
+    #   data source. The secret must contain a JSON structure with the
+    #   following keys:
+    #
+    #   * username—The user name of the Alfresco account.
+    #
+    #   * password—The password of the Alfresco account.
+    #   @return [String]
+    #
+    # @!attribute [rw] ssl_certificate_s3_path
+    #   The path to the SSL certificate stored in an Amazon S3 bucket. You
+    #   use this to connect to Alfresco.
+    #   @return [Types::S3Path]
+    #
+    # @!attribute [rw] crawl_system_folders
+    #   `TRUE` to index shared files.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] crawl_comments
+    #   `TRUE` to index comments of wikis and blogs.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] entity_filter
+    #   Specify whether to index document libraries, wikis, or blogs. You
+    #   can specify one or more of these options.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] document_library_field_mappings
+    #   A list of `DataSourceToIndexFieldMapping` objects that map
+    #   attributes or field names of Alfresco document libraries to Amazon
+    #   Kendra index field names. To create custom fields, use the
+    #   `UpdateIndex` API before you map to Alfresco fields. For more
+    #   information, see [ Mapping data source fields][1]. The Alfresco data
+    #   source field names must exist in your Alfresco custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @!attribute [rw] blog_field_mappings
+    #   A list of `DataSourceToIndexFieldMapping` objects that map
+    #   attributes or field names of Alfresco blogs to Amazon Kendra index
+    #   field names. To create custom fields, use the `UpdateIndex` API
+    #   before you map to Alfresco fields. For more information, see [
+    #   Mapping data source fields][1]. The Alfresco data source field names
+    #   must exist in your Alfresco custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @!attribute [rw] wiki_field_mappings
+    #   A list of `DataSourceToIndexFieldMapping` objects that map
+    #   attributes or field names of Alfresco wikis to Amazon Kendra index
+    #   field names. To create custom fields, use the `UpdateIndex` API
+    #   before you map to Alfresco fields. For more information, see [
+    #   Mapping data source fields][1]. The Alfresco data source field names
+    #   must exist in your Alfresco custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @!attribute [rw] inclusion_patterns
+    #   A list of regular expression patterns to include certain files in
+    #   your Alfresco data source. Files that match the patterns are
+    #   included in the index. Files that don't match the patterns are
+    #   excluded from the index. If a file matches both an inclusion pattern
+    #   and an exclusion pattern, the exclusion pattern takes precedence and
+    #   the file isn't included in the index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] exclusion_patterns
+    #   A list of regular expression patterns to exclude certain files in
+    #   your Alfresco data source. Files that match the patterns are
+    #   excluded from the index. Files that don't match the patterns are
+    #   included in the index. If a file matches both an inclusion pattern
+    #   and an exclusion pattern, the exclusion pattern takes precedence and
+    #   the file isn't included in the index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_configuration
+    #   Configuration information for an Amazon Virtual Private Cloud to
+    #   connect to your Alfresco. For more information, see [Configuring a
+    #   VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html
+    #   @return [Types::DataSourceVpcConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/AlfrescoConfiguration AWS API Documentation
+    #
+    class AlfrescoConfiguration < Struct.new(
+      :site_url,
+      :site_id,
+      :secret_arn,
+      :ssl_certificate_s3_path,
+      :crawl_system_folders,
+      :crawl_comments,
+      :entity_filter,
+      :document_library_field_mappings,
+      :blog_field_mappings,
+      :wiki_field_mappings,
+      :inclusion_patterns,
+      :exclusion_patterns,
+      :vpc_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AssociateEntitiesToExperienceRequest
     #   data as a hash:
     #
@@ -1294,7 +1464,7 @@ module Aws::Kendra
     # @!attribute [rw] storage_capacity_units
     #   The amount of extra storage capacity for an index. A single capacity
     #   unit provides 30 GB of storage space or 100,000 documents, whichever
-    #   is reached first.
+    #   is reached first. You can add up to 100 extra capacity units.
     #   @return [Integer]
     #
     # @!attribute [rw] query_capacity_units
@@ -1302,7 +1472,8 @@ module Aws::Kendra
     #   [GetQuerySuggestions][1] capacity.
     #
     #   A single extra capacity unit for an index provides 0.1 queries per
-    #   second or approximately 8,000 queries per day.
+    #   second or approximately 8,000 queries per day. You can add up to 100
+    #   extra capacity units.
     #
     #   `GetQuerySuggestions` capacity is five times the provisioned query
     #   capacity for an index, or the base capacity of 2.5 calls per second,
@@ -1461,8 +1632,7 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] crawl_attachments
-    #   Indicates whether Amazon Kendra indexes attachments to the pages and
-    #   blogs in the Confluence data source.
+    #   `TRUE` to index attachments of pages and blogs in Confluence.
     #   @return [Boolean]
     #
     # @!attribute [rw] attachment_field_mappings
@@ -1690,20 +1860,19 @@ module Aws::Kendra
     #
     # @!attribute [rw] secret_arn
     #   The Amazon Resource Name (ARN) of an Secrets Manager secret that
-    #   contains the key-value pairs required to connect to your Confluence
-    #   server. The secret must contain a JSON structure with the following
-    #   keys:
+    #   contains the user name and password required to connect to the
+    #   Confluence instance. If you use Confluence cloud, you use a
+    #   generated API token as the password. For more information, see
+    #   [Using a Confluemce data source][1].
     #
-    #   * username—The user name or email address of a user with
-    #     administrative privileges for the Confluence server.
     #
-    #   * password—The password associated with the user logging in to the
-    #     Confluence server.
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-confluence.html
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   Specifies the version of the Confluence installation that you are
-    #   connecting to.
+    #   The version or the type of the Confluence installation to connect
+    #   to.
     #   @return [String]
     #
     # @!attribute [rw] space_configuration
@@ -1744,9 +1913,9 @@ module Aws::Kendra
     #   @return [Array<String>]
     #
     # @!attribute [rw] exclusion_patterns
-    #   &gt;A list of regular expression patterns to exclude certain blog
-    #   posts, pages, spaces, or attachments in your Confluence. Content
-    #   that matches the patterns are excluded from the index. Content that
+    #   A list of regular expression patterns to exclude certain blog posts,
+    #   pages, spaces, or attachments in your Confluence. Content that
+    #   matches the patterns are excluded from the index. Content that
     #   doesn't match the patterns is included in the index. If content
     #   matches both an inclusion and exclusion pattern, the exclusion
     #   pattern takes precedence and the content isn't included in the
@@ -1786,12 +1955,11 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] page_field_mappings
-    #   &gt;Maps attributes or field names of Confluence pages to Amazon
-    #   Kendra index field names. To create custom fields, use the
-    #   `UpdateIndex` API before you map to Confluence fields. For more
-    #   information, see [Mapping data source fields][1]. The Confluence
-    #   data source field names must exist in your Confluence custom
-    #   metadata.
+    #   Maps attributes or field names of Confluence pages to Amazon Kendra
+    #   index field names. To create custom fields, use the `UpdateIndex`
+    #   API before you map to Confluence fields. For more information, see
+    #   [Mapping data source fields][1]. The Confluence data source field
+    #   names must exist in your Confluence custom metadata.
     #
     #   If you specify the `PageFieldMappings` parameter, you must specify
     #   at least one field mapping.
@@ -1874,11 +2042,11 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] crawl_personal_spaces
-    #   Specifies whether Amazon Kendra should index personal spaces. Users
-    #   can add restrictions to items in personal spaces. If personal spaces
-    #   are indexed, queries without user context information may return
-    #   restricted items from a personal space in their results. For more
-    #   information, see [Filtering on user context][1].
+    #   `TRUE` to index personal spaces. You can add restrictions to items
+    #   in personal spaces. If personal spaces are indexed, queries without
+    #   user context information may return restricted items from a personal
+    #   space in their results. For more information, see [Filtering on user
+    #   context][1].
     #
     #
     #
@@ -1886,7 +2054,7 @@ module Aws::Kendra
     #   @return [Boolean]
     #
     # @!attribute [rw] crawl_archived_spaces
-    #   Specifies whether Amazon Kendra should index archived spaces.
+    #   `TRUE` to index archived spaces.
     #   @return [Boolean]
     #
     # @!attribute [rw] include_spaces
@@ -2112,7 +2280,7 @@ module Aws::Kendra
     #       {
     #         name: "DataSourceName", # required
     #         index_id: "IndexId", # required
-    #         type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE, WEBCRAWLER, WORKDOCS, FSX, SLACK, BOX, QUIP, JIRA, GITHUB
+    #         type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE, WEBCRAWLER, WORKDOCS, FSX, SLACK, BOX, QUIP, JIRA, GITHUB, ALFRESCO
     #         configuration: {
     #           s3_configuration: {
     #             bucket_name: "S3BucketName", # required
@@ -2686,6 +2854,45 @@ module Aws::Kendra
     #                 index_field_name: "IndexFieldName", # required
     #               },
     #             ],
+    #           },
+    #           alfresco_configuration: {
+    #             site_url: "SiteUrl", # required
+    #             site_id: "SiteId", # required
+    #             secret_arn: "SecretArn", # required
+    #             ssl_certificate_s3_path: { # required
+    #               bucket: "S3BucketName", # required
+    #               key: "S3ObjectKey", # required
+    #             },
+    #             crawl_system_folders: false,
+    #             crawl_comments: false,
+    #             entity_filter: ["wiki"], # accepts wiki, blog, documentLibrary
+    #             document_library_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             blog_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             wiki_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             vpc_configuration: {
+    #               subnet_ids: ["SubnetId"], # required
+    #               security_group_ids: ["VpcSecurityGroupId"], # required
+    #             },
     #           },
     #         },
     #         description: "Description",
@@ -4136,6 +4343,45 @@ module Aws::Kendra
     #             },
     #           ],
     #         },
+    #         alfresco_configuration: {
+    #           site_url: "SiteUrl", # required
+    #           site_id: "SiteId", # required
+    #           secret_arn: "SecretArn", # required
+    #           ssl_certificate_s3_path: { # required
+    #             bucket: "S3BucketName", # required
+    #             key: "S3ObjectKey", # required
+    #           },
+    #           crawl_system_folders: false,
+    #           crawl_comments: false,
+    #           entity_filter: ["wiki"], # accepts wiki, blog, documentLibrary
+    #           document_library_field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #           blog_field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #           wiki_field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #           inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           vpc_configuration: {
+    #             subnet_ids: ["SubnetId"], # required
+    #             security_group_ids: ["VpcSecurityGroupId"], # required
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] s3_configuration
@@ -4218,6 +4464,11 @@ module Aws::Kendra
     #   data source.
     #   @return [Types::GitHubConfiguration]
     #
+    # @!attribute [rw] alfresco_configuration
+    #   Provides the configuration information to connect to Alfresco as
+    #   your data source.
+    #   @return [Types::AlfrescoConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DataSourceConfiguration AWS API Documentation
     #
     class DataSourceConfiguration < Struct.new(
@@ -4236,7 +4487,8 @@ module Aws::Kendra
       :box_configuration,
       :quip_configuration,
       :jira_configuration,
-      :git_hub_configuration)
+      :git_hub_configuration,
+      :alfresco_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8018,24 +8270,33 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] jira_account_url
-    #   The URL of the Jira account. For example, company.attlassian.net or
-    #   https://jira.company.com. You can find your Jira account URL in the
-    #   URL of your profile page for Jira desktop.
+    #   The URL of the Jira account. For example, *company.atlassian.net* or
+    #   *https://jira.company.com*. You can find your Jira account URL in
+    #   the URL of your profile page for Jira desktop.
     #   @return [String]
     #
     # @!attribute [rw] secret_arn
-    #   The Amazon Resource Name (ARN) of an Secrets Manager secret that
+    #   The Amazon Resource Name (ARN) of a secret in Secrets Manager
     #   contains the key-value pairs required to connect to your Jira data
     #   source. The secret must contain a JSON structure with the following
     #   keys:
     #
-    #   * jira-id—The ID of the Jira account.
+    #   * jiraId—The Jira username.
     #
-    #   * jiraCredentials—The password of the Jira account user.
+    #   * jiraCredentials—The Jira API token. For more information on
+    #     creating an API token in Jira, see [ Authentication for a Jira
+    #     data source][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-jira.html#jira-authentication
     #   @return [String]
     #
     # @!attribute [rw] use_change_log
-    #   Specify to use the change log option to update your index.
+    #   `TRUE` to use the Jira change log to determine which documents
+    #   require updating in the index. Depending on the change log's size,
+    #   it may take longer for Amazon Kendra to use the change log than to
+    #   scan all of your documents in Jira.
     #   @return [Boolean]
     #
     # @!attribute [rw] project
@@ -8959,7 +9220,8 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] ssl_certificate_s3_path
-    #   Information required to find a specific file in an Amazon S3 bucket.
+    #   The path to the SSL certificate stored in an Amazon S3 bucket. You
+    #   use this to connect to GitHub.
     #   @return [Types::S3Path]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/OnPremiseConfiguration AWS API Documentation
@@ -9051,8 +9313,7 @@ module Aws::Kendra
     #   @return [Array<Types::DataSourceToIndexFieldMapping>]
     #
     # @!attribute [rw] disable_local_groups
-    #   A Boolean value that specifies whether local groups are disabled
-    #   (`True`) or enabled (`False`).
+    #   `TRUE` to disable local groups information.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/OneDriveConfiguration AWS API Documentation
@@ -9846,22 +10107,19 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] crawl_file_comments
-    #   Specify whether to crawl file comments in Quip. You can specify one
-    #   or more of these options.
+    #   `TRUE` to index file comments.
     #   @return [Boolean]
     #
     # @!attribute [rw] crawl_chat_rooms
-    #   Specify whether to crawl chat rooms in Quip. You can specify one or
-    #   more of these options.
+    #   `TRUE` to index the contents of chat rooms.
     #   @return [Boolean]
     #
     # @!attribute [rw] crawl_attachments
-    #   Specify whether to crawl attachments in Quip. You can specify one or
-    #   more of these options.
+    #   `TRUE` to index attachments.
     #   @return [Boolean]
     #
     # @!attribute [rw] folder_ids
-    #   The identifier of the Quip folder IDs to index.
+    #   The identifier of the Quip folders you want to index.
     #   @return [Array<String>]
     #
     # @!attribute [rw] thread_field_mappings
@@ -10945,7 +11203,14 @@ module Aws::Kendra
     # @!attribute [rw] secret_arn
     #   The Amazon Resource Name (ARN) of the Secrets Manager secret that
     #   contains the user name and password required to connect to the
-    #   ServiceNow instance.
+    #   ServiceNow instance. You can also provide OAuth authentication
+    #   credentials of user name, password, client ID, and client secret.
+    #   For more information, see [Authentication for a ServiceNow data
+    #   source][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-servicenow.html#servicenow-authentication
     #   @return [String]
     #
     # @!attribute [rw] service_now_build_version
@@ -11224,33 +11489,28 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] share_point_version
-    #   The version of Microsoft SharePoint that you are using as a data
-    #   source.
+    #   The version of Microsoft SharePoint that you use.
     #   @return [String]
     #
     # @!attribute [rw] urls
-    #   The URLs of the Microsoft SharePoint site that contains the
-    #   documents that should be indexed.
+    #   The Microsoft SharePoint site URLs for the documents you want to
+    #   indext.
     #   @return [Array<String>]
     #
     # @!attribute [rw] secret_arn
-    #   The Amazon Resource Name (ARN) of credentials stored in Secrets
-    #   Manager. The credentials should be a user/password pair. If you use
-    #   SharePoint Server, you also need to provide the sever domain name as
-    #   part of the credentials. For more information, see [Using a
-    #   Microsoft SharePoint Data Source][1]. For more information about
-    #   Secrets Manager see [ What Is Secrets Manager][2] in the <i>Secrets
-    #   Manager </i> user guide.
+    #   The Amazon Resource Name (ARN) of an Secrets Manager secret that
+    #   contains the user name and password required to connect to the
+    #   SharePoint instance. If you use SharePoint Server, you also need to
+    #   provide the sever domain name as part of the credentials. For more
+    #   information, see [Using a Microsoft SharePoint Data Source][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html
-    #   [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
     #   @return [String]
     #
     # @!attribute [rw] crawl_attachments
-    #   `TRUE` to include attachments to documents stored in your Microsoft
-    #   SharePoint site in the index; otherwise, `FALSE`.
+    #   `TRUE` to index document attachments.
     #   @return [Boolean]
     #
     # @!attribute [rw] use_change_log
@@ -11268,7 +11528,7 @@ module Aws::Kendra
     #   exclusion pattern, the exclusion pattern takes precedence and the
     #   document isn't included in the index.
     #
-    #   The regex is applied to the display URL of the SharePoint document.
+    #   The regex applies to the display URL of the SharePoint document.
     #   @return [Array<String>]
     #
     # @!attribute [rw] exclusion_patterns
@@ -11279,11 +11539,17 @@ module Aws::Kendra
     #   exclusion pattern, the exclusion pattern takes precedence and the
     #   document isn't included in the index.
     #
-    #   The regex is applied to the display URL of the SharePoint document.
+    #   The regex applies to the display URL of the SharePoint document.
     #   @return [Array<String>]
     #
     # @!attribute [rw] vpc_configuration
-    #   Provides the configuration information to connect to an Amazon VPC.
+    #   Configuration information for an Amazon Virtual Private Cloud to
+    #   connect to your Microsoft SharePoint. For more information, see
+    #   [Configuring a VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html
     #   @return [Types::DataSourceVpcConfiguration]
     #
     # @!attribute [rw] field_mappings
@@ -11305,12 +11571,12 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] disable_local_groups
-    #   A Boolean value that specifies whether local groups are disabled
-    #   (`True`) or enabled (`False`).
+    #   `TRUE` to disable local groups information.
     #   @return [Boolean]
     #
     # @!attribute [rw] ssl_certificate_s3_path
-    #   Information required to find a specific file in an Amazon S3 bucket.
+    #   The path to the SSL certificate stored in an Amazon S3 bucket. You
+    #   use this to connect to SharePoint.
     #   @return [Types::S3Path]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/SharePointConfiguration AWS API Documentation
@@ -12702,6 +12968,45 @@ module Aws::Kendra
     #                 index_field_name: "IndexFieldName", # required
     #               },
     #             ],
+    #           },
+    #           alfresco_configuration: {
+    #             site_url: "SiteUrl", # required
+    #             site_id: "SiteId", # required
+    #             secret_arn: "SecretArn", # required
+    #             ssl_certificate_s3_path: { # required
+    #               bucket: "S3BucketName", # required
+    #               key: "S3ObjectKey", # required
+    #             },
+    #             crawl_system_folders: false,
+    #             crawl_comments: false,
+    #             entity_filter: ["wiki"], # accepts wiki, blog, documentLibrary
+    #             document_library_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             blog_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             wiki_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             vpc_configuration: {
+    #               subnet_ids: ["SubnetId"], # required
+    #               security_group_ids: ["VpcSecurityGroupId"], # required
+    #             },
     #           },
     #         },
     #         description: "Description",
