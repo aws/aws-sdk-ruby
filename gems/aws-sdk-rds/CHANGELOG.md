@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.147.0 (2022-07-01)
+------------------
+
+* Feature - Adds support for additional retention periods to Performance Insights.
+
 1.146.0 (2022-05-06)
 ------------------
 

@@ -408,26 +408,30 @@ module Aws::RDS
     #   If you copy an unencrypted DB cluster snapshot and specify a value for
     #   the `KmsKeyId` parameter, an error is returned.
     # @option options [String] :pre_signed_url
-    #   The URL that contains a Signature Version 4 signed request for the
-    #   `CopyDBClusterSnapshot` API action in the Amazon Web Services Region
-    #   that contains the source DB cluster snapshot to copy. The
-    #   `PreSignedUrl` parameter must be used when copying an encrypted DB
-    #   cluster snapshot from another Amazon Web Services Region. Don't
-    #   specify `PreSignedUrl` when you are copying an encrypted DB cluster
-    #   snapshot in the same Amazon Web Services Region.
+    #   When you are copying a DB cluster snapshot from one Amazon Web
+    #   Services GovCloud (US) Region to another, the URL that contains a
+    #   Signature Version 4 signed request for the `CopyDBClusterSnapshot` API
+    #   operation in the Amazon Web Services Region that contains the source
+    #   DB cluster snapshot to copy. Use the `PreSignedUrl` parameter when
+    #   copying an encrypted DB cluster snapshot from another Amazon Web
+    #   Services Region. Don't specify `PreSignedUrl` when copying an
+    #   encrypted DB cluster snapshot in the same Amazon Web Services Region.
     #
-    #   The pre-signed URL must be a valid request for the
-    #   `CopyDBClusterSnapshot` API action that can be executed in the source
+    #   This setting applies only to Amazon Web Services GovCloud (US)
+    #   Regions. It's ignored in other Amazon Web Services Regions.
+    #
+    #   The presigned URL must be a valid request for the
+    #   `CopyDBClusterSnapshot` API operation that can run in the source
     #   Amazon Web Services Region that contains the encrypted DB cluster
-    #   snapshot to be copied. The pre-signed URL request must contain the
-    #   following parameter values:
+    #   snapshot to copy. The presigned URL request must contain the following
+    #   parameter values:
     #
-    #   * `KmsKeyId` - The Amazon Web Services KMS key identifier for the KMS
-    #     key to use to encrypt the copy of the DB cluster snapshot in the
-    #     destination Amazon Web Services Region. This is the same identifier
-    #     for both the `CopyDBClusterSnapshot` action that is called in the
-    #     destination Amazon Web Services Region, and the action contained in
-    #     the pre-signed URL.
+    #   * `KmsKeyId` - The KMS key identifier for the KMS key to use to
+    #     encrypt the copy of the DB cluster snapshot in the destination
+    #     Amazon Web Services Region. This is the same identifier for both the
+    #     `CopyDBClusterSnapshot` operation that is called in the destination
+    #     Amazon Web Services Region, and the operation contained in the
+    #     presigned URL.
     #
     #   * `DestinationRegion` - The name of the Amazon Web Services Region
     #     that the DB cluster snapshot is to be created in.
@@ -449,9 +453,8 @@ module Aws::RDS
     #   <note markdown="1"> If you are using an Amazon Web Services SDK tool or the CLI, you can
     #   specify `SourceRegion` (or `--source-region` for the CLI) instead of
     #   specifying `PreSignedUrl` manually. Specifying `SourceRegion`
-    #   autogenerates a pre-signed URL that is a valid request for the
-    #   operation that can be executed in the source Amazon Web Services
-    #   Region.
+    #   autogenerates a presigned URL that is a valid request for the
+    #   operation that can run in the source Amazon Web Services Region.
     #
     #    </note>
     #
@@ -743,7 +746,7 @@ module Aws::RDS
     #
     #   For more information about exporting CloudWatch Logs for Amazon RDS,
     #   see [Publishing Database Logs to Amazon CloudWatch Logs][1] in the
-    #   *Amazon RDS User Guide.*.
+    #   *Amazon RDS User Guide*.
     #
     #   For more information about exporting CloudWatch Logs for Amazon
     #   Aurora, see [Publishing Database Logs to Amazon CloudWatch Logs][2] in

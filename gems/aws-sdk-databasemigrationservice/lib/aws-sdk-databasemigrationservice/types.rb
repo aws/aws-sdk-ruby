@@ -533,6 +533,8 @@ module Aws::DatabaseMigrationService
     #           max_file_size: 1,
     #           rfc_4180: false,
     #           date_partition_timezone: "String",
+    #           add_trailing_padding_character: false,
+    #           expected_bucket_owner: "String",
     #         },
     #         dms_transfer_settings: {
     #           service_access_role_arn: "String",
@@ -591,6 +593,7 @@ module Aws::DatabaseMigrationService
     #           endpoint_uri: "String", # required
     #           full_load_error_percentage: 1,
     #           error_retry_duration: 1,
+    #           use_new_mapping_type: false,
     #         },
     #         neptune_settings: {
     #           service_access_role_arn: "String",
@@ -652,6 +655,7 @@ module Aws::DatabaseMigrationService
     #           plugin_name: "no-preference", # accepts no-preference, test-decoding, pglogical
     #           secrets_manager_access_role_arn: "String",
     #           secrets_manager_secret_id: "String",
+    #           trim_space_in_char: false,
     #         },
     #         my_sql_settings: {
     #           after_connect_script: "String",
@@ -710,6 +714,7 @@ module Aws::DatabaseMigrationService
     #           secrets_manager_secret_id: "String",
     #           secrets_manager_oracle_asm_access_role_arn: "String",
     #           secrets_manager_oracle_asm_secret_id: "String",
+    #           trim_space_in_char: false,
     #         },
     #         sybase_settings: {
     #           database_name: "String",
@@ -735,6 +740,7 @@ module Aws::DatabaseMigrationService
     #           use_third_party_backup_device: false,
     #           secrets_manager_access_role_arn: "String",
     #           secrets_manager_secret_id: "String",
+    #           trim_space_in_char: false,
     #         },
     #         ibm_db_2_settings: {
     #           database_name: "String",
@@ -2929,8 +2935,7 @@ module Aws::DatabaseMigrationService
     #   If you specify any of the following filters, the output includes
     #   information for only those databases that meet the filter criteria:
     #
-    #   * `database-id` – The ID of the database, for example
-    #     `d4610ac5-e323-4ad9-bc50-eaf7249dfe9d`.
+    #   * `database-id` – The ID of the database.
     #
     #   * `database-name` – The name of the database.
     #
@@ -2944,7 +2949,7 @@ module Aws::DatabaseMigrationService
     #     collector.
     #
     #   An example is: `describe-fleet-advisor-databases --filter
-    #   Name="database-id",Values="d4610ac5-e323-4ad9-bc50-eaf7249dfe9d"`
+    #   Name="database-id",Values="45"`
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_records
@@ -4138,6 +4143,7 @@ module Aws::DatabaseMigrationService
     #         endpoint_uri: "String", # required
     #         full_load_error_percentage: 1,
     #         error_retry_duration: 1,
+    #         use_new_mapping_type: false,
     #       }
     #
     # @!attribute [rw] service_access_role_arn
@@ -4166,13 +4172,21 @@ module Aws::DatabaseMigrationService
     #   requests to the OpenSearch cluster.
     #   @return [Integer]
     #
+    # @!attribute [rw] use_new_mapping_type
+    #   Set this option to `true` for DMS to migrate documentation using the
+    #   documentation type `_doc`. OpenSearch and an Elasticsearch cluster
+    #   only support the \_doc documentation type in versions 7. x and
+    #   later. The default value is `false`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ElasticsearchSettings AWS API Documentation
     #
     class ElasticsearchSettings < Struct.new(
       :service_access_role_arn,
       :endpoint_uri,
       :full_load_error_percentage,
-      :error_retry_duration)
+      :error_retry_duration,
+      :use_new_mapping_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5538,6 +5552,7 @@ module Aws::DatabaseMigrationService
     #         use_third_party_backup_device: false,
     #         secrets_manager_access_role_arn: "String",
     #         secrets_manager_secret_id: "String",
+    #         trim_space_in_char: false,
     #       }
     #
     # @!attribute [rw] port
@@ -5653,6 +5668,12 @@ module Aws::DatabaseMigrationService
     #   connection details.
     #   @return [String]
     #
+    # @!attribute [rw] trim_space_in_char
+    #   Use the `TrimSpaceInChar` source endpoint setting to trim data on
+    #   CHAR and NCHAR data types during migration. The default value is
+    #   `true`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/MicrosoftSQLServerSettings AWS API Documentation
     #
     class MicrosoftSQLServerSettings < Struct.new(
@@ -5669,7 +5690,8 @@ module Aws::DatabaseMigrationService
       :use_bcp_full_load,
       :use_third_party_backup_device,
       :secrets_manager_access_role_arn,
-      :secrets_manager_secret_id)
+      :secrets_manager_secret_id,
+      :trim_space_in_char)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -5734,6 +5756,8 @@ module Aws::DatabaseMigrationService
     #           max_file_size: 1,
     #           rfc_4180: false,
     #           date_partition_timezone: "String",
+    #           add_trailing_padding_character: false,
+    #           expected_bucket_owner: "String",
     #         },
     #         dms_transfer_settings: {
     #           service_access_role_arn: "String",
@@ -5792,6 +5816,7 @@ module Aws::DatabaseMigrationService
     #           endpoint_uri: "String", # required
     #           full_load_error_percentage: 1,
     #           error_retry_duration: 1,
+    #           use_new_mapping_type: false,
     #         },
     #         neptune_settings: {
     #           service_access_role_arn: "String",
@@ -5853,6 +5878,7 @@ module Aws::DatabaseMigrationService
     #           plugin_name: "no-preference", # accepts no-preference, test-decoding, pglogical
     #           secrets_manager_access_role_arn: "String",
     #           secrets_manager_secret_id: "String",
+    #           trim_space_in_char: false,
     #         },
     #         my_sql_settings: {
     #           after_connect_script: "String",
@@ -5911,6 +5937,7 @@ module Aws::DatabaseMigrationService
     #           secrets_manager_secret_id: "String",
     #           secrets_manager_oracle_asm_access_role_arn: "String",
     #           secrets_manager_oracle_asm_secret_id: "String",
+    #           trim_space_in_char: false,
     #         },
     #         sybase_settings: {
     #           database_name: "String",
@@ -5936,6 +5963,7 @@ module Aws::DatabaseMigrationService
     #           use_third_party_backup_device: false,
     #           secrets_manager_access_role_arn: "String",
     #           secrets_manager_secret_id: "String",
+    #           trim_space_in_char: false,
     #         },
     #         ibm_db_2_settings: {
     #           database_name: "String",
@@ -7196,6 +7224,7 @@ module Aws::DatabaseMigrationService
     #         secrets_manager_secret_id: "String",
     #         secrets_manager_oracle_asm_access_role_arn: "String",
     #         secrets_manager_oracle_asm_secret_id: "String",
+    #         trim_space_in_char: false,
     #       }
     #
     # @!attribute [rw] add_supplemental_logging
@@ -7592,6 +7621,12 @@ module Aws::DatabaseMigrationService
     #   connection details for the Oracle endpoint.
     #   @return [String]
     #
+    # @!attribute [rw] trim_space_in_char
+    #   Use the `TrimSpaceInChar` source endpoint setting to trim data on
+    #   CHAR and NCHAR data types during migration. The default value is
+    #   `true`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/OracleSettings AWS API Documentation
     #
     class OracleSettings < Struct.new(
@@ -7634,7 +7669,8 @@ module Aws::DatabaseMigrationService
       :secrets_manager_access_role_arn,
       :secrets_manager_secret_id,
       :secrets_manager_oracle_asm_access_role_arn,
-      :secrets_manager_oracle_asm_secret_id)
+      :secrets_manager_oracle_asm_secret_id,
+      :trim_space_in_char)
       SENSITIVE = [:asm_password, :password, :security_db_encryption]
       include Aws::Structure
     end
@@ -7796,6 +7832,7 @@ module Aws::DatabaseMigrationService
     #         plugin_name: "no-preference", # accepts no-preference, test-decoding, pglogical
     #         secrets_manager_access_role_arn: "String",
     #         secrets_manager_secret_id: "String",
+    #         trim_space_in_char: false,
     #       }
     #
     # @!attribute [rw] after_connect_script
@@ -7941,6 +7978,12 @@ module Aws::DatabaseMigrationService
     #   connection details.
     #   @return [String]
     #
+    # @!attribute [rw] trim_space_in_char
+    #   Use the `TrimSpaceInChar` source endpoint setting to trim data on
+    #   CHAR and NCHAR data types during migration. The default value is
+    #   `true`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/PostgreSQLSettings AWS API Documentation
     #
     class PostgreSQLSettings < Struct.new(
@@ -7961,7 +8004,8 @@ module Aws::DatabaseMigrationService
       :slot_name,
       :plugin_name,
       :secrets_manager_access_role_arn,
-      :secrets_manager_secret_id)
+      :secrets_manager_secret_id,
+      :trim_space_in_char)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -9008,18 +9052,38 @@ module Aws::DatabaseMigrationService
     #   The reason the replication task was stopped. This response parameter
     #   can return one of the following values:
     #
-    #   * `"STOP_REASON_FULL_LOAD_COMPLETED"` – Full-load migration
-    #     completed.
+    #   * `"Stop Reason NORMAL"`
     #
-    #   * `"STOP_REASON_CACHED_CHANGES_APPLIED"` – Change data capture (CDC)
-    #     load completed.
+    #   * `"Stop Reason RECOVERABLE_ERROR"`
     #
-    #   * `"STOP_REASON_CACHED_CHANGES_NOT_APPLIED"` – In a full-load and
-    #     CDC migration, the full load stopped as specified before starting
-    #     the CDC migration.
+    #   * `"Stop Reason FATAL_ERROR"`
     #
-    #   * `"STOP_REASON_SERVER_TIME"` – The migration stopped at the
-    #     specified server time.
+    #   * `"Stop Reason FULL_LOAD_ONLY_FINISHED"`
+    #
+    #   * `"Stop Reason STOPPED_AFTER_FULL_LOAD"` – Full load completed,
+    #     with cached changes not applied
+    #
+    #   * `"Stop Reason STOPPED_AFTER_CACHED_EVENTS"` – Full load completed,
+    #     with cached changes applied
+    #
+    #   * `"Stop Reason EXPRESS_LICENSE_LIMITS_REACHED"`
+    #
+    #   * `"Stop Reason STOPPED_AFTER_DDL_APPLY"` – User-defined stop task
+    #     after DDL applied
+    #
+    #   * `"Stop Reason STOPPED_DUE_TO_LOW_MEMORY"`
+    #
+    #   * `"Stop Reason STOPPED_DUE_TO_LOW_DISK"`
+    #
+    #   * `"Stop Reason STOPPED_AT_SERVER_TIME"` – User-defined server time
+    #     for stopping task
+    #
+    #   * `"Stop Reason STOPPED_AT_COMMIT_TIME"` – User-defined commit time
+    #     for stopping task
+    #
+    #   * `"Stop Reason RECONFIGURATION_RESTART"`
+    #
+    #   * `"Stop Reason RECYCLE_TASK"`
     #   @return [String]
     #
     # @!attribute [rw] replication_task_creation_date
@@ -9588,6 +9652,8 @@ module Aws::DatabaseMigrationService
     #         max_file_size: 1,
     #         rfc_4180: false,
     #         date_partition_timezone: "String",
+    #         add_trailing_padding_character: false,
+    #         expected_bucket_owner: "String",
     #       }
     #
     # @!attribute [rw] service_access_role_arn
@@ -10141,6 +10207,23 @@ module Aws::DatabaseMigrationService
     #   "dms-nattarat-test"\}'`
     #   @return [String]
     #
+    # @!attribute [rw] add_trailing_padding_character
+    #   Use the S3 target endpoint setting `AddTrailingPaddingCharacter` to
+    #   add padding on string data. The default value is `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] expected_bucket_owner
+    #   To specify a bucket owner and prevent sniping, you can use the
+    #   `ExpectedBucketOwner` endpoint setting.
+    #
+    #   Example: `--s3-settings='\{"ExpectedBucketOwner":
+    #   "AWS_Account_ID"\}'`
+    #
+    #   When you make a request to test a connection or perform a migration,
+    #   S3 checks the account ID of the bucket owner against the specified
+    #   parameter.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/S3Settings AWS API Documentation
     #
     class S3Settings < Struct.new(
@@ -10181,7 +10264,9 @@ module Aws::DatabaseMigrationService
       :ignore_header_rows,
       :max_file_size,
       :rfc_4180,
-      :date_partition_timezone)
+      :date_partition_timezone,
+      :add_trailing_padding_character,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
