@@ -296,6 +296,7 @@ module Aws::LexModelsV2
     Message = Shapes::StructureShape.new(name: 'Message')
     MessageGroup = Shapes::StructureShape.new(name: 'MessageGroup')
     MessageGroupsList = Shapes::ListShape.new(name: 'MessageGroupsList')
+    MessageSelectionStrategy = Shapes::StringShape.new(name: 'MessageSelectionStrategy')
     MessageVariationsList = Shapes::ListShape.new(name: 'MessageVariationsList')
     MissedCount = Shapes::IntegerShape.new(name: 'MissedCount')
     MultipleValuesSetting = Shapes::StructureShape.new(name: 'MultipleValuesSetting')
@@ -1632,6 +1633,7 @@ module Aws::LexModelsV2
     PromptSpecification.add_member(:message_groups, Shapes::ShapeRef.new(shape: MessageGroupsList, required: true, location_name: "messageGroups"))
     PromptSpecification.add_member(:max_retries, Shapes::ShapeRef.new(shape: PromptMaxRetries, required: true, location_name: "maxRetries"))
     PromptSpecification.add_member(:allow_interrupt, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "allowInterrupt"))
+    PromptSpecification.add_member(:message_selection_strategy, Shapes::ShapeRef.new(shape: MessageSelectionStrategy, location_name: "messageSelectionStrategy"))
     PromptSpecification.struct_class = Types::PromptSpecification
 
     RecommendedActions.member = Shapes::ShapeRef.new(shape: RecommendedAction)

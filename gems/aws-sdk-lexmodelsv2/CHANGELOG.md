@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2022-07-05)
+------------------
+
+* Feature - This release introduces additional optional parameters "messageSelectionStrategy" to PromptSpecification, which enables the users to configure the bot to play messages in orderly manner.
+
 1.23.0 (2022-03-10)
 ------------------
 

@@ -623,6 +623,7 @@ RubyGems.org page under "LINKS" section.
 | FinSpace User Environment Management service          | Aws::Finspace                            | aws-sdk-finspace                            | 2021-03-12  |
 | Firewall Management Service                           | Aws::FMS                                 | aws-sdk-fms                                 | 2018-01-01  |
 | GameSparks                                            | Aws::GameSparks                          | aws-sdk-gamesparks                          | 2021-08-17  |
+| IAM Roles Anywhere                                    | Aws::RolesAnywhere                       | aws-sdk-rolesanywhere                       | 2018-05-10  |
 | Inspector2                                            | Aws::Inspector2                          | aws-sdk-inspector2                          | 2020-06-08  |
 | Managed Streaming for Kafka                           | Aws::Kafka                               | aws-sdk-kafka                               | 2018-11-14  |
 | Managed Streaming for Kafka Connect                   | Aws::KafkaConnect                        | aws-sdk-kafkaconnect                        | 2021-09-14  |

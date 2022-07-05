@@ -254,6 +254,7 @@ module Aws
   autoload :ResourceGroups, 'aws-sdk-resourcegroups'
   autoload :ResourceGroupsTaggingAPI, 'aws-sdk-resourcegroupstaggingapi'
   autoload :RoboMaker, 'aws-sdk-robomaker'
+  autoload :RolesAnywhere, 'aws-sdk-rolesanywhere'
   autoload :Route53, 'aws-sdk-route53'
   autoload :Route53Domains, 'aws-sdk-route53domains'
   autoload :Route53RecoveryCluster, 'aws-sdk-route53recoverycluster'

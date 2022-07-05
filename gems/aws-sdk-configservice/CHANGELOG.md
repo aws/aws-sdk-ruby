@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.78.0 (2022-07-05)
+------------------
+
+* Feature - Updating documentation service limits
+
 1.77.0 (2022-04-06)
 ------------------
 

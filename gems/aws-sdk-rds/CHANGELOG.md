@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.148.0 (2022-07-05)
+------------------
+
+* Feature - Adds waiters support for DBCluster.
+
 1.147.0 (2022-07-01)
 ------------------
 

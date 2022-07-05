@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.66.0 (2022-07-05)
+------------------
+
+* Feature - This release allows customers to programmatically create QuickSight accounts with Enterprise and Enterprise + Q editions. It also releases allowlisting domains for embedding QuickSight dashboards at runtime through the embedding APIs.
+
 1.65.0 (2022-05-18)
 ------------------
 

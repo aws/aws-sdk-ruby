@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.603.0 (2022-07-05)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::RolesAnywhere`.
+
 1.602.0 (2022-06-29)
 ------------------
 

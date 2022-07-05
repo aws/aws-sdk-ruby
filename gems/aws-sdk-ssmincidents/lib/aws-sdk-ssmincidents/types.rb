@@ -302,6 +302,9 @@ module Aws::SSMIncidents
     #         incident_template: { # required
     #           dedupe_string: "DedupeString",
     #           impact: 1, # required
+    #           incident_tags: {
+    #             "TagKey" => "TagValue",
+    #           },
     #           notification_targets: [
     #             {
     #               sns_topic_arn: "Arn",
@@ -1094,6 +1097,9 @@ module Aws::SSMIncidents
     #       {
     #         dedupe_string: "DedupeString",
     #         impact: 1, # required
+    #         incident_tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #         notification_targets: [
     #           {
     #             sns_topic_arn: "Arn",
@@ -1111,6 +1117,11 @@ module Aws::SSMIncidents
     # @!attribute [rw] impact
     #   The impact of the incident on your customers and applications.
     #   @return [Integer]
+    #
+    # @!attribute [rw] incident_tags
+    #   Tags to apply to an incident when calling the `StartIncident` API
+    #   action.
+    #   @return [Hash<String,String>]
     #
     # @!attribute [rw] notification_targets
     #   The Amazon SNS targets that are notified when updates are made to an
@@ -1131,6 +1142,7 @@ module Aws::SSMIncidents
     class IncidentTemplate < Struct.new(
       :dedupe_string,
       :impact,
+      :incident_tags,
       :notification_targets,
       :summary,
       :title)
@@ -2557,6 +2569,9 @@ module Aws::SSMIncidents
     #           },
     #         ],
     #         incident_template_summary: "IncidentSummary",
+    #         incident_template_tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #         incident_template_title: "IncidentTitle",
     #       }
     #
@@ -2626,6 +2641,12 @@ module Aws::SSMIncidents
     #   happened, what's currently happening, and next steps.
     #   @return [String]
     #
+    # @!attribute [rw] incident_template_tags
+    #   Tags to apply to an incident when calling the `StartIncident` API
+    #   action. To call this action, you must also have permission to call
+    #   the `TagResource` API action for the incident record resource.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] incident_template_title
     #   The short format name of the incident. The title can't contain
     #   spaces.
@@ -2644,6 +2665,7 @@ module Aws::SSMIncidents
       :incident_template_impact,
       :incident_template_notification_targets,
       :incident_template_summary,
+      :incident_template_tags,
       :incident_template_title)
       SENSITIVE = []
       include Aws::Structure

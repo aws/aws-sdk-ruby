@@ -982,8 +982,8 @@ module Aws::ConfigService
     #   The maximum frequency with which Config runs evaluations for a rule.
     #   You can specify a value for `MaximumExecutionFrequency` when:
     #
-    #   * You are using an Config managed rule that is triggered at a
-    #     periodic frequency.
+    #   * This is for an Config managed rule that is triggered at a periodic
+    #     frequency.
     #
     #   * Your custom rule is triggered when Config delivers the
     #     configuration snapshot. For more information, see
@@ -1523,6 +1523,12 @@ module Aws::ConfigService
     # @!attribute [rw] role_arn
     #   Amazon Resource Name (ARN) of the IAM role used to describe the
     #   Amazon Web Services resources associated with the account.
+    #
+    #   <note markdown="1"> While the API model does not require this field, the server will
+    #   reject a request without a defined roleARN for the configuration
+    #   recorder.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] recording_group
@@ -6548,7 +6554,7 @@ module Aws::ConfigService
     #
     # @!attribute [rw] maximum_execution_frequency
     #   The maximum frequency with which Config runs evaluations for a rule.
-    #   You are using an Config managed rule that is triggered at a periodic
+    #   This is for an Config managed rule that is triggered at a periodic
     #   frequency.
     #
     #   <note markdown="1"> By default, rules with a periodic trigger are evaluated every 24
@@ -7457,6 +7463,13 @@ module Aws::ConfigService
     #
     # @!attribute [rw] tags
     #   Tags associated with the resource.
+    #
+    #   <note markdown="1"> This field is not to be confused with the Amazon Web Services-wide
+    #   tag feature for Amazon Web Services resources. Tags for
+    #   `PutResourceConfig` are tags that you supply for the configuration
+    #   items of your custom resources.
+    #
+    #    </note>
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutResourceConfigRequest AWS API Documentation

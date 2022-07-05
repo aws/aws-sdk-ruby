@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.136.0 (2022-07-05)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-rolesanywhere` gem.
+
 3.135.0 (2022-06-17)
 ------------------
 

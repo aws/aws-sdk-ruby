@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2022-07-05)
+------------------
+
+* Feature - Adds support for tagging incident-record on creation by providing incident tags in the template within a response-plan.
+
 1.14.0 (2022-05-12)
 ------------------
 

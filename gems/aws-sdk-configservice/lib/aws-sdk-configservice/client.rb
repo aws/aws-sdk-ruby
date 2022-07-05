@@ -1974,9 +1974,26 @@ module Aws::ConfigService
     # Returns a list of organization Config rules.
     #
     # <note markdown="1"> When you specify the limit and the next token, you receive a paginated
-    # response. Limit and next token are not applicable if you specify
-    # organization Config rule names. It is only applicable, when you
-    # request all the organization Config rules.
+    # response.
+    #
+    #  Limit and next token are not applicable if you specify organization
+    # Config rule names. It is only applicable, when you request all the
+    # organization Config rules.
+    #
+    #  *For accounts within an organzation*
+    #
+    #  If you deploy an organizational rule or conformance pack in an
+    # organization administrator account, and then establish a delegated
+    # administrator and deploy an organizational rule or conformance pack in
+    # the delegated administrator account, you won't be able to see the
+    # organizational rule or conformance pack in the organization
+    # administrator account from the delegated administrator account or see
+    # the organizational rule or conformance pack in the delegated
+    # administrator account from organization administrator account. The
+    # `DescribeOrganizationConfigRules` and
+    # `DescribeOrganizationConformancePacks` APIs can only see and interact
+    # with the organization-related resource that were deployed from within
+    # the account calling those APIs.
     #
     #  </note>
     #
@@ -2131,6 +2148,21 @@ module Aws::ConfigService
     #  Limit and next token are not applicable if you specify organization
     # conformance packs names. They are only applicable, when you request
     # all the organization conformance packs.
+    #
+    #  *For accounts within an organzation*
+    #
+    #  If you deploy an organizational rule or conformance pack in an
+    # organization administrator account, and then establish a delegated
+    # administrator and deploy an organizational rule or conformance pack in
+    # the delegated administrator account, you won't be able to see the
+    # organizational rule or conformance pack in the organization
+    # administrator account from the delegated administrator account or see
+    # the organizational rule or conformance pack in the delegated
+    # administrator account from organization administrator account. The
+    # `DescribeOrganizationConfigRules` and
+    # `DescribeOrganizationConformancePacks` APIs can only see and interact
+    # with the organization-related resource that were deployed from within
+    # the account calling those APIs.
     #
     #  </note>
     #
@@ -4413,11 +4445,14 @@ module Aws::ConfigService
     end
 
     # Deploys conformance packs across member accounts in an Amazon Web
-    # Services Organization.
+    # Services Organization. For information on how many organization
+    # conformance packs and how many Config rules you can have per account,
+    # see [ **Service Limits** ][1] in the Config Developer Guide.
     #
     # Only a master account and a delegated administrator can call this API.
     # When calling this API with a delegated administrator, you must ensure
-    # Organizations `ListDelegatedAdministrator` permissions are added.
+    # Organizations `ListDelegatedAdministrator` permissions are added. An
+    # organization can have up to 3 delegated administrators.
     #
     # This API enables organization service access for
     # `config-multiaccountsetup.amazonaws.com` through the
@@ -4442,10 +4477,11 @@ module Aws::ConfigService
     # updated. You cannot update a conformance pack while it is in this
     # state.
     #
-    #  You can create 50 conformance packs with 25 Config rules in each pack
-    # and 3 delegated administrator per organization.
-    #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html
     #
     # @option params [required, String] :organization_conformance_pack_name
     #   Name of the organization conformance pack you want to create.
@@ -4534,6 +4570,18 @@ module Aws::ConfigService
     # service-linked Config Rules such as Organization Config rules, the
     # rules deployed by conformance packs, and rules deployed by Amazon Web
     # Services Security Hub.
+    #
+    #  </note>
+    #
+    # <note markdown="1"> For manual remediation configuration, you need to provide a value for
+    # `automationAssumeRole` or use a value in the `assumeRole`field to
+    # remediate your resources. The SSM automation document can use either
+    # as long as it maps to a valid parameter.
+    #
+    #  However, for automatic remediation configuration, the only valid
+    # `assumeRole` field value is `AutomationAssumeRole` and you need to
+    # provide a value for `AutomationAssumeRole` to remediate your
+    # resources.
     #
     #  </note>
     #
@@ -4722,6 +4770,13 @@ module Aws::ConfigService
     #
     # @option params [Hash<String,String>] :tags
     #   Tags associated with the resource.
+    #
+    #   <note markdown="1"> This field is not to be confused with the Amazon Web Services-wide tag
+    #   feature for Amazon Web Services resources. Tags for
+    #   `PutResourceConfig` are tags that you supply for the configuration
+    #   items of your custom resources.
+    #
+    #    </note>
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5213,7 +5268,7 @@ module Aws::ConfigService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-configservice'
-      context[:gem_version] = '1.77.0'
+      context[:gem_version] = '1.78.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

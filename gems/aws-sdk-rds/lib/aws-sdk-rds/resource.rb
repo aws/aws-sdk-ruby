@@ -390,25 +390,25 @@ module Aws::RDS
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     # @option options [String] :pre_signed_url
-    #   When you are replicating a DB cluster from one Amazon Web Services
-    #   GovCloud (US) Region to another, an URL that contains a Signature
-    #   Version 4 signed request for the `CreateDBCluster` operation to be
-    #   called in the source Amazon Web Services Region where the DB cluster
-    #   is replicated from. Specify `PreSignedUrl` only when you are
-    #   performing cross-Region replication from an encrypted DB cluster.
+    #   A URL that contains a Signature Version 4 signed request for the
+    #   `CreateDBCluster` action to be called in the source Amazon Web
+    #   Services Region where the DB cluster is replicated from. Specify
+    #   `PreSignedUrl` only when you are performing cross-Region replication
+    #   from an encrypted DB cluster.
     #
-    #   The presigned URL must be a valid request for the `CreateDBCluster`
-    #   API operation that can run in the source Amazon Web Services Region
-    #   that contains the encrypted DB cluster to copy.
+    #   The pre-signed URL must be a valid request for the `CreateDBCluster`
+    #   API action that can be executed in the source Amazon Web Services
+    #   Region that contains the encrypted DB cluster to be copied.
     #
-    #   The presigned URL request must contain the following parameter values:
+    #   The pre-signed URL request must contain the following parameter
+    #   values:
     #
-    #   * `KmsKeyId` - The KMS key identifier for the KMS key to use to
-    #     encrypt the copy of the DB cluster in the destination Amazon Web
-    #     Services Region. This should refer to the same KMS key for both the
-    #     `CreateDBCluster` operation that is called in the destination Amazon
-    #     Web Services Region, and the operation contained in the presigned
-    #     URL.
+    #   * `KmsKeyId` - The Amazon Web Services KMS key identifier for the KMS
+    #     key to use to encrypt the copy of the DB cluster in the destination
+    #     Amazon Web Services Region. This should refer to the same KMS key
+    #     for both the `CreateDBCluster` action that is called in the
+    #     destination Amazon Web Services Region, and the action contained in
+    #     the pre-signed URL.
     #
     #   * `DestinationRegion` - The name of the Amazon Web Services Region
     #     that Aurora read replica will be created in.
@@ -429,8 +429,9 @@ module Aws::RDS
     #   <note markdown="1"> If you are using an Amazon Web Services SDK tool or the CLI, you can
     #   specify `SourceRegion` (or `--source-region` for the CLI) instead of
     #   specifying `PreSignedUrl` manually. Specifying `SourceRegion`
-    #   autogenerates a presigned URL that is a valid request for the
-    #   operation that can run in the source Amazon Web Services Region.
+    #   autogenerates a pre-signed URL that is a valid request for the
+    #   operation that can be executed in the source Amazon Web Services
+    #   Region.
     #
     #    </note>
     #
@@ -446,7 +447,7 @@ module Aws::RDS
     #   accounts. By default, mapping isn't enabled.
     #
     #   For more information, see [ IAM Database Authentication][1] in the
-    #   *Amazon Aurora User Guide*.
+    #   *Amazon Aurora User Guide.*.
     #
     #   Valid for: Aurora DB clusters only
     #
@@ -517,9 +518,6 @@ module Aws::RDS
     #   The `multimaster` engine mode only applies for DB clusters created
     #   with Aurora MySQL version 5.6.10a.
     #
-    #   The `serverless` engine mode only applies for Aurora Serverless v1 DB
-    #   clusters.
-    #
     #   For Aurora PostgreSQL, the `global` engine mode isn't required, and
     #   both the `parallelquery` and the `multimaster` engine modes currently
     #   aren't supported.
@@ -528,25 +526,22 @@ module Aws::RDS
     #   information, see the following sections in the *Amazon Aurora User
     #   Guide*\:
     #
-    #   * [Limitations of Aurora Serverless v1][1]
+    #   * [ Limitations of Aurora Serverless v1][1]
     #
-    #   * [Requirements for Aurora Serverless v2][2]
+    #   * [ Limitations of Parallel Query][2]
     #
-    #   * [Limitations of Parallel Query][3]
+    #   * [ Limitations of Aurora Global Databases][3]
     #
-    #   * [Limitations of Aurora Global Databases][4]
-    #
-    #   * [Limitations of Multi-Master Clusters][5]
+    #   * [ Limitations of Multi-Master Clusters][4]
     #
     #   Valid for: Aurora DB clusters only
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html#aurora-serverless.limitations
-    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.requirements.html
-    #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-mysql-parallel-query.html#aurora-mysql-parallel-query-limitations
-    #   [4]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html#aurora-global-database.limitations
-    #   [5]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-multi-master.html#aurora-multi-master-limitations
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-mysql-parallel-query.html#aurora-mysql-parallel-query-limitations
+    #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html#aurora-global-database.limitations
+    #   [4]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-multi-master.html#aurora-multi-master-limitations
     # @option options [Types::ScalingConfiguration] :scaling_configuration
     #   For DB clusters in `serverless` DB engine mode, the scaling properties
     #   of the DB cluster.
@@ -769,27 +764,8 @@ module Aws::RDS
     #
     #   Valid for: Multi-AZ DB clusters only
     # @option options [Integer] :performance_insights_retention_period
-    #   The number of days to retain Performance Insights data. The default is
-    #   7 days. The following values are valid:
-    #
-    #   * 7
-    #
-    #   * *month* * 31, where *month* is a number of months from 1-23
-    #
-    #   * 731
-    #
-    #   For example, the following values are valid:
-    #
-    #   * 93 (3 months * 31)
-    #
-    #   * 341 (11 months * 31)
-    #
-    #   * 589 (19 months * 31)
-    #
-    #   * 731
-    #
-    #   If you specify a retention period such as 94, which isn't a valid
-    #   value, RDS issues an error.
+    #   The amount of time, in days, to retain Performance Insights data.
+    #   Valid values are 7 or 731 (2 years).
     #
     #   Valid for: Multi-AZ DB clusters only
     # @option options [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
@@ -1203,16 +1179,14 @@ module Aws::RDS
     #     * Web and Express editions: Must be an integer from 20 to 1024.
     # @option options [required, String] :db_instance_class
     #   The compute and memory capacity of the DB instance, for example
-    #   db.m5.large. Not all DB instance classes are available in all Amazon
+    #   db.m4.large. Not all DB instance classes are available in all Amazon
     #   Web Services Regions, or for all database engines. For the full list
     #   of DB instance classes, and availability for your engine, see [DB
-    #   instance classes][1] in the *Amazon RDS User Guide* or [Aurora DB
-    #   instance classes][2] in the *Amazon Aurora User Guide*.
+    #   Instance Class][1] in the *Amazon RDS User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html
-    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.DBInstanceClass.html
     # @option options [required, String] :engine
     #   The name of the database engine to be used for this instance.
     #
@@ -1307,9 +1281,7 @@ module Aws::RDS
     # @option options [Array<String>] :db_security_groups
     #   A list of DB security groups to associate with this DB instance.
     #
-    #   This setting applies to the legacy EC2-Classic platform, which is no
-    #   longer used to create new DB instances. Use the `VpcSecurityGroupIds`
-    #   setting instead.
+    #   Default: The default DB security group for the database engine.
     # @option options [Array<String>] :vpc_security_group_ids
     #   A list of Amazon EC2 VPC security groups to associate with this DB
     #   instance.
@@ -1403,7 +1375,7 @@ module Aws::RDS
     #
     #   * Can't be set to 0 if the DB instance is a source to read replicas
     #
-    #   * Can't be set to 0 for an RDS Custom for Oracle DB instance
+    #   * Can't be set to 0 or 35 for an RDS Custom for Oracle DB instance
     # @option options [String] :preferred_backup_window
     #   The daily time range during which automated backups are created if
     #   automated backups are enabled, using the `BackupRetentionPeriod`
@@ -1482,16 +1454,11 @@ module Aws::RDS
     #   instance is a Multi-AZ deployment.
     #
     #   This setting doesn't apply to RDS Custom.
-    #
-    #   **Amazon Aurora**
-    #
-    #   Not applicable. DB instance Availability Zones (AZs) are managed by
-    #   the DB cluster.
     # @option options [String] :engine_version
     #   The version number of the database engine to use.
     #
     #   For a list of valid engine versions, use the
-    #   `DescribeDBEngineVersions` operation.
+    #   `DescribeDBEngineVersions` action.
     #
     #   The following are the database engines and links to information about
     #   the major and minor versions that are available with Amazon RDS. Not
@@ -1564,10 +1531,6 @@ module Aws::RDS
     #   `general-public-license`
     #
     #   This setting doesn't apply to RDS Custom.
-    #
-    #   **Amazon Aurora**
-    #
-    #   Not applicable.
     # @option options [Integer] :iops
     #   The amount of Provisioned IOPS (input/output operations per second) to
     #   be initially allocated for the DB instance. For information about
@@ -1578,10 +1541,6 @@ module Aws::RDS
     #   must be a multiple between .5 and 50 of the storage amount for the DB
     #   instance. For SQL Server DB instances, must be a multiple between 1
     #   and 50 of the storage amount for the DB instance.
-    #
-    #   **Amazon Aurora**
-    #
-    #   Not applicable. Storage is managed by the DB cluster.
     #
     #
     #
@@ -1596,10 +1555,6 @@ module Aws::RDS
     #   instance.
     #
     #   This setting doesn't apply to RDS Custom.
-    #
-    #   **Amazon Aurora**
-    #
-    #   Not applicable.
     # @option options [String] :character_set_name
     #   For supported engines, this value indicates that the DB instance
     #   should be associated with the specified `CharacterSet`.
@@ -1664,19 +1619,11 @@ module Aws::RDS
     #   parameter.
     #
     #   Default: `io1` if the `Iops` parameter is specified, otherwise `gp2`
-    #
-    #   **Amazon Aurora**
-    #
-    #   Not applicable. Storage is managed by the DB cluster.
     # @option options [String] :tde_credential_arn
     #   The ARN from the key store with which to associate the instance for
     #   TDE encryption.
     #
     #   This setting doesn't apply to RDS Custom.
-    #
-    #   **Amazon Aurora**
-    #
-    #   Not applicable.
     # @option options [String] :tde_credential_password
     #   The password for the given ARN from the key store in order to access
     #   the device.
@@ -1730,10 +1677,6 @@ module Aws::RDS
     #
     #   This setting doesn't apply to RDS Custom.
     #
-    #   **Amazon Aurora**
-    #
-    #   Not applicable. The domain is managed by the DB cluster.
-    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html
@@ -1777,10 +1720,6 @@ module Aws::RDS
     #   the Directory Service.
     #
     #   This setting doesn't apply to RDS Custom.
-    #
-    #   **Amazon Aurora**
-    #
-    #   Not applicable. The domain is managed by the DB cluster.
     # @option options [Integer] :promotion_tier
     #   A value that specifies the order in which an Aurora Replica is
     #   promoted to the primary instance after a failure of the existing
@@ -1808,15 +1747,12 @@ module Aws::RDS
     #   Services Identity and Access Management (IAM) accounts to database
     #   accounts. By default, mapping isn't enabled.
     #
+    #   This setting doesn't apply to RDS Custom or Amazon Aurora. In Aurora,
+    #   mapping Amazon Web Services IAM accounts to database accounts is
+    #   managed by the DB cluster.
+    #
     #   For more information, see [ IAM Database Authentication for MySQL and
     #   PostgreSQL][1] in the *Amazon RDS User Guide*.
-    #
-    #   This setting doesn't apply to RDS Custom.
-    #
-    #   **Amazon Aurora**
-    #
-    #   Not applicable. Mapping Amazon Web Services IAM accounts to database
-    #   accounts is managed by the DB cluster.
     #
     #
     #
@@ -1845,27 +1781,8 @@ module Aws::RDS
     #
     #   This setting doesn't apply to RDS Custom.
     # @option options [Integer] :performance_insights_retention_period
-    #   The number of days to retain Performance Insights data. The default is
-    #   7 days. The following values are valid:
-    #
-    #   * 7
-    #
-    #   * *month* * 31, where *month* is a number of months from 1-23
-    #
-    #   * 731
-    #
-    #   For example, the following values are valid:
-    #
-    #   * 93 (3 months * 31)
-    #
-    #   * 341 (11 months * 31)
-    #
-    #   * 589 (19 months * 31)
-    #
-    #   * 731
-    #
-    #   If you specify a retention period such as 94, which isn't a valid
-    #   value, RDS issues an error.
+    #   The amount of time, in days, to retain Performance Insights data.
+    #   Valid values are 7 or 731 (2 years).
     #
     #   This setting doesn't apply to RDS Custom.
     # @option options [Array<String>] :enable_cloudwatch_logs_exports
@@ -1911,10 +1828,6 @@ module Aws::RDS
     #   instance class of the DB instance.
     #
     #   This setting doesn't apply to RDS Custom.
-    #
-    #   **Amazon Aurora**
-    #
-    #   Not applicable.
     # @option options [Boolean] :deletion_protection
     #   A value that indicates whether the DB instance has deletion protection
     #   enabled. The database can't be deleted when deletion protection is
@@ -1940,10 +1853,6 @@ module Aws::RDS
     #   storage autoscaling][1] in the *Amazon RDS User Guide*.
     #
     #   This setting doesn't apply to RDS Custom.
-    #
-    #   **Amazon Aurora**
-    #
-    #   Not applicable. Storage is managed by the DB cluster.
     #
     #
     #

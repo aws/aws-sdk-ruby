@@ -805,6 +805,9 @@
   "RoboMaker": {
     "models": "robomaker/2018-06-29"
   },
+  "RolesAnywhere": {
+    "models": "rolesanywhere/2018-05-10"
+  },
   "Route53": {
     "models": "route53/2013-04-01",
     "addPlugins": [

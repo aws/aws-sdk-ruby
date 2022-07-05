@@ -150,6 +150,7 @@ module Aws::SSMIncidents
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagMap = Shapes::MapShape.new(name: 'TagMap')
+    TagMapUpdate = Shapes::MapShape.new(name: 'TagMapUpdate')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
@@ -401,6 +402,7 @@ module Aws::SSMIncidents
 
     IncidentTemplate.add_member(:dedupe_string, Shapes::ShapeRef.new(shape: DedupeString, location_name: "dedupeString"))
     IncidentTemplate.add_member(:impact, Shapes::ShapeRef.new(shape: Impact, required: true, location_name: "impact"))
+    IncidentTemplate.add_member(:incident_tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "incidentTags"))
     IncidentTemplate.add_member(:notification_targets, Shapes::ShapeRef.new(shape: NotificationTargetSet, location_name: "notificationTargets"))
     IncidentTemplate.add_member(:summary, Shapes::ShapeRef.new(shape: IncidentSummary, location_name: "summary"))
     IncidentTemplate.add_member(:title, Shapes::ShapeRef.new(shape: IncidentTitle, required: true, location_name: "title"))
@@ -590,6 +592,9 @@ module Aws::SSMIncidents
     TagMap.key = Shapes::ShapeRef.new(shape: TagKey)
     TagMap.value = Shapes::ShapeRef.new(shape: TagValue)
 
+    TagMapUpdate.key = Shapes::ShapeRef.new(shape: TagKey)
+    TagMapUpdate.value = Shapes::ShapeRef.new(shape: TagValue)
+
     TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "resourceArn"))
     TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, required: true, location_name: "tags"))
     TagResourceRequest.struct_class = Types::TagResourceRequest
@@ -674,6 +679,7 @@ module Aws::SSMIncidents
     UpdateResponsePlanInput.add_member(:incident_template_impact, Shapes::ShapeRef.new(shape: Impact, location_name: "incidentTemplateImpact"))
     UpdateResponsePlanInput.add_member(:incident_template_notification_targets, Shapes::ShapeRef.new(shape: NotificationTargetSet, location_name: "incidentTemplateNotificationTargets"))
     UpdateResponsePlanInput.add_member(:incident_template_summary, Shapes::ShapeRef.new(shape: IncidentSummary, location_name: "incidentTemplateSummary"))
+    UpdateResponsePlanInput.add_member(:incident_template_tags, Shapes::ShapeRef.new(shape: TagMapUpdate, location_name: "incidentTemplateTags"))
     UpdateResponsePlanInput.add_member(:incident_template_title, Shapes::ShapeRef.new(shape: IncidentTitle, location_name: "incidentTemplateTitle"))
     UpdateResponsePlanInput.struct_class = Types::UpdateResponsePlanInput
 

@@ -1390,6 +1390,7 @@ module Aws::LexModelsV2
     #         ],
     #         max_retries: 1, # required
     #         allow_interrupt: false,
+    #         message_selection_strategy: "Random", # accepts Random, Ordered
     #       },
     #       declination_response: { # required
     #         message_groups: [ # required
@@ -1665,6 +1666,7 @@ module Aws::LexModelsV2
     #   resp.intent_confirmation_setting.prompt_specification.message_groups[0].variations[0].image_response_card.buttons[0].value #=> String
     #   resp.intent_confirmation_setting.prompt_specification.max_retries #=> Integer
     #   resp.intent_confirmation_setting.prompt_specification.allow_interrupt #=> Boolean
+    #   resp.intent_confirmation_setting.prompt_specification.message_selection_strategy #=> String, one of "Random", "Ordered"
     #   resp.intent_confirmation_setting.declination_response.message_groups #=> Array
     #   resp.intent_confirmation_setting.declination_response.message_groups[0].message.plain_text_message.value #=> String
     #   resp.intent_confirmation_setting.declination_response.message_groups[0].message.custom_payload.value #=> String
@@ -2020,6 +2022,7 @@ module Aws::LexModelsV2
     #         ],
     #         max_retries: 1, # required
     #         allow_interrupt: false,
+    #         message_selection_strategy: "Random", # accepts Random, Ordered
     #       },
     #       sample_utterances: [
     #         {
@@ -2234,6 +2237,7 @@ module Aws::LexModelsV2
     #   resp.value_elicitation_setting.prompt_specification.message_groups[0].variations[0].image_response_card.buttons[0].value #=> String
     #   resp.value_elicitation_setting.prompt_specification.max_retries #=> Integer
     #   resp.value_elicitation_setting.prompt_specification.allow_interrupt #=> Boolean
+    #   resp.value_elicitation_setting.prompt_specification.message_selection_strategy #=> String, one of "Random", "Ordered"
     #   resp.value_elicitation_setting.sample_utterances #=> Array
     #   resp.value_elicitation_setting.sample_utterances[0].utterance #=> String
     #   resp.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups #=> Array
@@ -3770,6 +3774,7 @@ module Aws::LexModelsV2
     #   resp.intent_confirmation_setting.prompt_specification.message_groups[0].variations[0].image_response_card.buttons[0].value #=> String
     #   resp.intent_confirmation_setting.prompt_specification.max_retries #=> Integer
     #   resp.intent_confirmation_setting.prompt_specification.allow_interrupt #=> Boolean
+    #   resp.intent_confirmation_setting.prompt_specification.message_selection_strategy #=> String, one of "Random", "Ordered"
     #   resp.intent_confirmation_setting.declination_response.message_groups #=> Array
     #   resp.intent_confirmation_setting.declination_response.message_groups[0].message.plain_text_message.value #=> String
     #   resp.intent_confirmation_setting.declination_response.message_groups[0].message.custom_payload.value #=> String
@@ -3951,6 +3956,7 @@ module Aws::LexModelsV2
     #   resp.value_elicitation_setting.prompt_specification.message_groups[0].variations[0].image_response_card.buttons[0].value #=> String
     #   resp.value_elicitation_setting.prompt_specification.max_retries #=> Integer
     #   resp.value_elicitation_setting.prompt_specification.allow_interrupt #=> Boolean
+    #   resp.value_elicitation_setting.prompt_specification.message_selection_strategy #=> String, one of "Random", "Ordered"
     #   resp.value_elicitation_setting.sample_utterances #=> Array
     #   resp.value_elicitation_setting.sample_utterances[0].utterance #=> String
     #   resp.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups #=> Array
@@ -5295,6 +5301,7 @@ module Aws::LexModelsV2
     #   resp.slot_summaries[0].value_elicitation_prompt_specification.message_groups[0].variations[0].image_response_card.buttons[0].value #=> String
     #   resp.slot_summaries[0].value_elicitation_prompt_specification.max_retries #=> Integer
     #   resp.slot_summaries[0].value_elicitation_prompt_specification.allow_interrupt #=> Boolean
+    #   resp.slot_summaries[0].value_elicitation_prompt_specification.message_selection_strategy #=> String, one of "Random", "Ordered"
     #   resp.slot_summaries[0].last_updated_date_time #=> Time
     #   resp.next_token #=> String
     #
@@ -6556,6 +6563,7 @@ module Aws::LexModelsV2
     #         ],
     #         max_retries: 1, # required
     #         allow_interrupt: false,
+    #         message_selection_strategy: "Random", # accepts Random, Ordered
     #       },
     #       declination_response: { # required
     #         message_groups: [ # required
@@ -6834,6 +6842,7 @@ module Aws::LexModelsV2
     #   resp.intent_confirmation_setting.prompt_specification.message_groups[0].variations[0].image_response_card.buttons[0].value #=> String
     #   resp.intent_confirmation_setting.prompt_specification.max_retries #=> Integer
     #   resp.intent_confirmation_setting.prompt_specification.allow_interrupt #=> Boolean
+    #   resp.intent_confirmation_setting.prompt_specification.message_selection_strategy #=> String, one of "Random", "Ordered"
     #   resp.intent_confirmation_setting.declination_response.message_groups #=> Array
     #   resp.intent_confirmation_setting.declination_response.message_groups[0].message.plain_text_message.value #=> String
     #   resp.intent_confirmation_setting.declination_response.message_groups[0].message.custom_payload.value #=> String
@@ -7093,6 +7102,7 @@ module Aws::LexModelsV2
     #         ],
     #         max_retries: 1, # required
     #         allow_interrupt: false,
+    #         message_selection_strategy: "Random", # accepts Random, Ordered
     #       },
     #       sample_utterances: [
     #         {
@@ -7307,6 +7317,7 @@ module Aws::LexModelsV2
     #   resp.value_elicitation_setting.prompt_specification.message_groups[0].variations[0].image_response_card.buttons[0].value #=> String
     #   resp.value_elicitation_setting.prompt_specification.max_retries #=> Integer
     #   resp.value_elicitation_setting.prompt_specification.allow_interrupt #=> Boolean
+    #   resp.value_elicitation_setting.prompt_specification.message_selection_strategy #=> String, one of "Random", "Ordered"
     #   resp.value_elicitation_setting.sample_utterances #=> Array
     #   resp.value_elicitation_setting.sample_utterances[0].utterance #=> String
     #   resp.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups #=> Array
@@ -7536,7 +7547,7 @@ module Aws::LexModelsV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelsv2'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

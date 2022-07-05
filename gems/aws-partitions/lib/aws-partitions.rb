@@ -471,6 +471,7 @@ module Aws
             'ResourceGroups' => 'resource-groups',
             'ResourceGroupsTaggingAPI' => 'tagging',
             'RoboMaker' => 'robomaker',
+            'RolesAnywhere' => 'rolesanywhere',
             'Route53' => 'route53',
             'Route53Domains' => 'route53domains',
             'Route53RecoveryCluster' => 'route53-recovery-cluster',

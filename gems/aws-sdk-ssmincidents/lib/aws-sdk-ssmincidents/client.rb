@@ -464,6 +464,9 @@ module Aws::SSMIncidents
     #     incident_template: { # required
     #       dedupe_string: "DedupeString",
     #       impact: 1, # required
+    #       incident_tags: {
+    #         "TagKey" => "TagValue",
+    #       },
     #       notification_targets: [
     #         {
     #           sns_topic_arn: "Arn",
@@ -854,6 +857,8 @@ module Aws::SSMIncidents
     #   resp.engagements[0] #=> String
     #   resp.incident_template.dedupe_string #=> String
     #   resp.incident_template.impact #=> Integer
+    #   resp.incident_template.incident_tags #=> Hash
+    #   resp.incident_template.incident_tags["TagKey"] #=> String
     #   resp.incident_template.notification_targets #=> Array
     #   resp.incident_template.notification_targets[0].sns_topic_arn #=> String
     #   resp.incident_template.summary #=> String
@@ -1706,6 +1711,11 @@ module Aws::SSMIncidents
     #   A brief summary of the incident. This typically contains what has
     #   happened, what's currently happening, and next steps.
     #
+    # @option params [Hash<String,String>] :incident_template_tags
+    #   Tags to apply to an incident when calling the `StartIncident` API
+    #   action. To call this action, you must also have permission to call the
+    #   `TagResource` API action for the incident record resource.
+    #
     # @option params [String] :incident_template_title
     #   The short format name of the incident. The title can't contain
     #   spaces.
@@ -1750,6 +1760,9 @@ module Aws::SSMIncidents
     #       },
     #     ],
     #     incident_template_summary: "IncidentSummary",
+    #     incident_template_tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #     incident_template_title: "IncidentTitle",
     #   })
     #
@@ -1824,7 +1837,7 @@ module Aws::SSMIncidents
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssmincidents'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
