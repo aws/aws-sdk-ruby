@@ -1433,6 +1433,7 @@ module Aws::CloudFormation
     #       accounts: ["Account"],
     #       accounts_url: "AccountsUrl",
     #       organizational_unit_ids: ["OrganizationalUnitId"],
+    #       account_filter_type: "NONE", # accepts NONE, INTERSECTION, DIFFERENCE, UNION
     #     },
     #     regions: ["Region"], # required
     #     parameter_overrides: [
@@ -1990,6 +1991,7 @@ module Aws::CloudFormation
     #       accounts: ["Account"],
     #       accounts_url: "AccountsUrl",
     #       organizational_unit_ids: ["OrganizationalUnitId"],
+    #       account_filter_type: "NONE", # accepts NONE, INTERSECTION, DIFFERENCE, UNION
     #     },
     #     regions: ["Region"], # required
     #     operation_preferences: {
@@ -3026,6 +3028,7 @@ module Aws::CloudFormation
     #   resp.stack_set_operation.deployment_targets.accounts_url #=> String
     #   resp.stack_set_operation.deployment_targets.organizational_unit_ids #=> Array
     #   resp.stack_set_operation.deployment_targets.organizational_unit_ids[0] #=> String
+    #   resp.stack_set_operation.deployment_targets.account_filter_type #=> String, one of "NONE", "INTERSECTION", "DIFFERENCE", "UNION"
     #   resp.stack_set_operation.stack_set_drift_detection_details.drift_status #=> String, one of "DRIFTED", "IN_SYNC", "NOT_CHECKED"
     #   resp.stack_set_operation.stack_set_drift_detection_details.drift_detection_status #=> String, one of "COMPLETED", "FAILED", "PARTIAL_SUCCESS", "IN_PROGRESS", "STOPPED"
     #   resp.stack_set_operation.stack_set_drift_detection_details.last_drift_check_timestamp #=> Time
@@ -6229,6 +6232,7 @@ module Aws::CloudFormation
     #       accounts: ["Account"],
     #       accounts_url: "AccountsUrl",
     #       organizational_unit_ids: ["OrganizationalUnitId"],
+    #       account_filter_type: "NONE", # accepts NONE, INTERSECTION, DIFFERENCE, UNION
     #     },
     #     regions: ["Region"], # required
     #     parameter_overrides: [
@@ -6626,6 +6630,7 @@ module Aws::CloudFormation
     #       accounts: ["Account"],
     #       accounts_url: "AccountsUrl",
     #       organizational_unit_ids: ["OrganizationalUnitId"],
+    #       account_filter_type: "NONE", # accepts NONE, INTERSECTION, DIFFERENCE, UNION
     #     },
     #     permission_model: "SERVICE_MANAGED", # accepts SERVICE_MANAGED, SELF_MANAGED
     #     auto_deployment: {
@@ -6780,7 +6785,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.69.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

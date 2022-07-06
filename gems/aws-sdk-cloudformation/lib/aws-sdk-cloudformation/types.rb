@@ -1413,6 +1413,7 @@ module Aws::CloudFormation
     #           accounts: ["Account"],
     #           accounts_url: "AccountsUrl",
     #           organizational_unit_ids: ["OrganizationalUnitId"],
+    #           account_filter_type: "NONE", # accepts NONE, INTERSECTION, DIFFERENCE, UNION
     #         },
     #         regions: ["Region"], # required
     #         parameter_overrides: [
@@ -2072,6 +2073,7 @@ module Aws::CloudFormation
     #           accounts: ["Account"],
     #           accounts_url: "AccountsUrl",
     #           organizational_unit_ids: ["OrganizationalUnitId"],
+    #           account_filter_type: "NONE", # accepts NONE, INTERSECTION, DIFFERENCE, UNION
     #         },
     #         regions: ["Region"], # required
     #         operation_preferences: {
@@ -2262,6 +2264,7 @@ module Aws::CloudFormation
     #         accounts: ["Account"],
     #         accounts_url: "AccountsUrl",
     #         organizational_unit_ids: ["OrganizationalUnitId"],
+    #         account_filter_type: "NONE", # accepts NONE, INTERSECTION, DIFFERENCE, UNION
     #       }
     #
     # @!attribute [rw] accounts
@@ -2278,12 +2281,39 @@ module Aws::CloudFormation
     #   StackSets deploys.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] account_filter_type
+    #   Limit deployment targets to individual accounts or include
+    #   additional accounts with provided OUs.
+    #
+    #   The following is a list of possible values for the
+    #   `AccountFilterType` operation.
+    #
+    #   * `INTERSECTION`\: StackSets deploys to the accounts specified in
+    #     `Accounts` parameter.
+    #
+    #   * `DIFFERENCE`\: StackSets excludes the accounts specified in
+    #     `Accounts` parameter. This enables user to avoid certain accounts
+    #     within an OU such as suspended accounts.
+    #
+    #   * `UNION`\: (default value) StackSets includes additional accounts
+    #     deployment targets.
+    #
+    #     This is the default value if `AccountFilterType` is not provided.
+    #     This enables user to update an entire OU and individual accounts
+    #     from a different OU in one request, which used to be two separate
+    #     requests.
+    #
+    #   * `NONE`\: Deploys to all the accounts in specified organizational
+    #     units (OU).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeploymentTargets AWS API Documentation
     #
     class DeploymentTargets < Struct.new(
       :accounts,
       :accounts_url,
-      :organizational_unit_ids)
+      :organizational_unit_ids,
+      :account_filter_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9915,6 +9945,7 @@ module Aws::CloudFormation
     #           accounts: ["Account"],
     #           accounts_url: "AccountsUrl",
     #           organizational_unit_ids: ["OrganizationalUnitId"],
+    #           account_filter_type: "NONE", # accepts NONE, INTERSECTION, DIFFERENCE, UNION
     #         },
     #         regions: ["Region"], # required
     #         parameter_overrides: [
@@ -10135,6 +10166,7 @@ module Aws::CloudFormation
     #           accounts: ["Account"],
     #           accounts_url: "AccountsUrl",
     #           organizational_unit_ids: ["OrganizationalUnitId"],
+    #           account_filter_type: "NONE", # accepts NONE, INTERSECTION, DIFFERENCE, UNION
     #         },
     #         permission_model: "SERVICE_MANAGED", # accepts SERVICE_MANAGED, SELF_MANAGED
     #         auto_deployment: {

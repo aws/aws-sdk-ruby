@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2022-07-06)
+------------------
+
+* Feature - This release introduces Group feature, which enables users to group cross-region canaries.
+
 1.27.0 (2022-05-02)
 ------------------
 

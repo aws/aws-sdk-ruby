@@ -15,6 +15,9 @@ module Aws::Synthetics
 
     ArtifactConfigInput = Shapes::StructureShape.new(name: 'ArtifactConfigInput')
     ArtifactConfigOutput = Shapes::StructureShape.new(name: 'ArtifactConfigOutput')
+    AssociateResourceRequest = Shapes::StructureShape.new(name: 'AssociateResourceRequest')
+    AssociateResourceResponse = Shapes::StructureShape.new(name: 'AssociateResourceResponse')
+    BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     BaseScreenshot = Shapes::StructureShape.new(name: 'BaseScreenshot')
     BaseScreenshotConfigIgnoreCoordinate = Shapes::StringShape.new(name: 'BaseScreenshotConfigIgnoreCoordinate')
     BaseScreenshotIgnoreCoordinates = Shapes::ListShape.new(name: 'BaseScreenshotIgnoreCoordinates')
@@ -46,8 +49,12 @@ module Aws::Synthetics
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateCanaryRequest = Shapes::StructureShape.new(name: 'CreateCanaryRequest')
     CreateCanaryResponse = Shapes::StructureShape.new(name: 'CreateCanaryResponse')
+    CreateGroupRequest = Shapes::StructureShape.new(name: 'CreateGroupRequest')
+    CreateGroupResponse = Shapes::StructureShape.new(name: 'CreateGroupResponse')
     DeleteCanaryRequest = Shapes::StructureShape.new(name: 'DeleteCanaryRequest')
     DeleteCanaryResponse = Shapes::StructureShape.new(name: 'DeleteCanaryResponse')
+    DeleteGroupRequest = Shapes::StructureShape.new(name: 'DeleteGroupRequest')
+    DeleteGroupResponse = Shapes::StructureShape.new(name: 'DeleteGroupResponse')
     DescribeCanariesLastRunNameFilter = Shapes::ListShape.new(name: 'DescribeCanariesLastRunNameFilter')
     DescribeCanariesLastRunRequest = Shapes::StructureShape.new(name: 'DescribeCanariesLastRunRequest')
     DescribeCanariesLastRunResponse = Shapes::StructureShape.new(name: 'DescribeCanariesLastRunResponse')
@@ -56,6 +63,8 @@ module Aws::Synthetics
     DescribeCanariesResponse = Shapes::StructureShape.new(name: 'DescribeCanariesResponse')
     DescribeRuntimeVersionsRequest = Shapes::StructureShape.new(name: 'DescribeRuntimeVersionsRequest')
     DescribeRuntimeVersionsResponse = Shapes::StructureShape.new(name: 'DescribeRuntimeVersionsResponse')
+    DisassociateResourceRequest = Shapes::StructureShape.new(name: 'DisassociateResourceRequest')
+    DisassociateResourceResponse = Shapes::StructureShape.new(name: 'DisassociateResourceResponse')
     EncryptionMode = Shapes::StringShape.new(name: 'EncryptionMode')
     EnvironmentVariableName = Shapes::StringShape.new(name: 'EnvironmentVariableName')
     EnvironmentVariableValue = Shapes::StringShape.new(name: 'EnvironmentVariableValue')
@@ -66,18 +75,37 @@ module Aws::Synthetics
     GetCanaryResponse = Shapes::StructureShape.new(name: 'GetCanaryResponse')
     GetCanaryRunsRequest = Shapes::StructureShape.new(name: 'GetCanaryRunsRequest')
     GetCanaryRunsResponse = Shapes::StructureShape.new(name: 'GetCanaryRunsResponse')
+    GetGroupRequest = Shapes::StructureShape.new(name: 'GetGroupRequest')
+    GetGroupResponse = Shapes::StructureShape.new(name: 'GetGroupResponse')
+    Group = Shapes::StructureShape.new(name: 'Group')
+    GroupArn = Shapes::StringShape.new(name: 'GroupArn')
+    GroupIdentifier = Shapes::StringShape.new(name: 'GroupIdentifier')
+    GroupName = Shapes::StringShape.new(name: 'GroupName')
+    GroupSummary = Shapes::StructureShape.new(name: 'GroupSummary')
+    GroupSummaryList = Shapes::ListShape.new(name: 'GroupSummaryList')
+    InternalFailureException = Shapes::StructureShape.new(name: 'InternalFailureException')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
+    ListAssociatedGroupsRequest = Shapes::StructureShape.new(name: 'ListAssociatedGroupsRequest')
+    ListAssociatedGroupsResponse = Shapes::StructureShape.new(name: 'ListAssociatedGroupsResponse')
+    ListGroupResourcesRequest = Shapes::StructureShape.new(name: 'ListGroupResourcesRequest')
+    ListGroupResourcesResponse = Shapes::StructureShape.new(name: 'ListGroupResourcesResponse')
+    ListGroupsRequest = Shapes::StructureShape.new(name: 'ListGroupsRequest')
+    ListGroupsResponse = Shapes::StructureShape.new(name: 'ListGroupsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaxCanaryResults = Shapes::IntegerShape.new(name: 'MaxCanaryResults')
     MaxFifteenMinutesInSeconds = Shapes::IntegerShape.new(name: 'MaxFifteenMinutesInSeconds')
+    MaxGroupResults = Shapes::IntegerShape.new(name: 'MaxGroupResults')
     MaxOneYearInSeconds = Shapes::IntegerShape.new(name: 'MaxOneYearInSeconds')
     MaxSize100 = Shapes::IntegerShape.new(name: 'MaxSize100')
     MaxSize1024 = Shapes::IntegerShape.new(name: 'MaxSize1024')
     MaxSize3008 = Shapes::IntegerShape.new(name: 'MaxSize3008')
+    NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
+    PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     RequestEntityTooLargeException = Shapes::StructureShape.new(name: 'RequestEntityTooLargeException')
+    ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     RuntimeVersion = Shapes::StructureShape.new(name: 'RuntimeVersion')
@@ -85,11 +113,13 @@ module Aws::Synthetics
     S3EncryptionConfig = Shapes::StructureShape.new(name: 'S3EncryptionConfig')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
+    ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     StartCanaryRequest = Shapes::StructureShape.new(name: 'StartCanaryRequest')
     StartCanaryResponse = Shapes::StructureShape.new(name: 'StartCanaryResponse')
     StopCanaryRequest = Shapes::StructureShape.new(name: 'StopCanaryRequest')
     StopCanaryResponse = Shapes::StructureShape.new(name: 'StopCanaryResponse')
     String = Shapes::StringShape.new(name: 'String')
+    StringList = Shapes::ListShape.new(name: 'StringList')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetIds = Shapes::ListShape.new(name: 'SubnetIds')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -100,6 +130,7 @@ module Aws::Synthetics
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     Token = Shapes::StringShape.new(name: 'Token')
+    TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     UUID = Shapes::StringShape.new(name: 'UUID')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
@@ -118,6 +149,15 @@ module Aws::Synthetics
 
     ArtifactConfigOutput.add_member(:s3_encryption, Shapes::ShapeRef.new(shape: S3EncryptionConfig, location_name: "S3Encryption"))
     ArtifactConfigOutput.struct_class = Types::ArtifactConfigOutput
+
+    AssociateResourceRequest.add_member(:group_identifier, Shapes::ShapeRef.new(shape: GroupIdentifier, required: true, location: "uri", location_name: "groupIdentifier"))
+    AssociateResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: CanaryArn, required: true, location_name: "ResourceArn"))
+    AssociateResourceRequest.struct_class = Types::AssociateResourceRequest
+
+    AssociateResourceResponse.struct_class = Types::AssociateResourceResponse
+
+    BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    BadRequestException.struct_class = Types::BadRequestException
 
     BaseScreenshot.add_member(:screenshot_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ScreenshotName"))
     BaseScreenshot.add_member(:ignore_coordinates, Shapes::ShapeRef.new(shape: BaseScreenshotIgnoreCoordinates, location_name: "IgnoreCoordinates"))
@@ -233,11 +273,23 @@ module Aws::Synthetics
     CreateCanaryResponse.add_member(:canary, Shapes::ShapeRef.new(shape: Canary, location_name: "Canary"))
     CreateCanaryResponse.struct_class = Types::CreateCanaryResponse
 
+    CreateGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: GroupName, required: true, location_name: "Name"))
+    CreateGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateGroupRequest.struct_class = Types::CreateGroupRequest
+
+    CreateGroupResponse.add_member(:group, Shapes::ShapeRef.new(shape: Group, location_name: "Group"))
+    CreateGroupResponse.struct_class = Types::CreateGroupResponse
+
     DeleteCanaryRequest.add_member(:name, Shapes::ShapeRef.new(shape: CanaryName, required: true, location: "uri", location_name: "name"))
     DeleteCanaryRequest.add_member(:delete_lambda, Shapes::ShapeRef.new(shape: boolean, location: "querystring", location_name: "deleteLambda"))
     DeleteCanaryRequest.struct_class = Types::DeleteCanaryRequest
 
     DeleteCanaryResponse.struct_class = Types::DeleteCanaryResponse
+
+    DeleteGroupRequest.add_member(:group_identifier, Shapes::ShapeRef.new(shape: GroupIdentifier, required: true, location: "uri", location_name: "groupIdentifier"))
+    DeleteGroupRequest.struct_class = Types::DeleteGroupRequest
+
+    DeleteGroupResponse.struct_class = Types::DeleteGroupResponse
 
     DescribeCanariesLastRunNameFilter.member = Shapes::ShapeRef.new(shape: CanaryName)
 
@@ -269,6 +321,12 @@ module Aws::Synthetics
     DescribeRuntimeVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     DescribeRuntimeVersionsResponse.struct_class = Types::DescribeRuntimeVersionsResponse
 
+    DisassociateResourceRequest.add_member(:group_identifier, Shapes::ShapeRef.new(shape: GroupIdentifier, required: true, location: "uri", location_name: "groupIdentifier"))
+    DisassociateResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: CanaryArn, required: true, location_name: "ResourceArn"))
+    DisassociateResourceRequest.struct_class = Types::DisassociateResourceRequest
+
+    DisassociateResourceResponse.struct_class = Types::DisassociateResourceResponse
+
     EnvironmentVariablesMap.key = Shapes::ShapeRef.new(shape: EnvironmentVariableName)
     EnvironmentVariablesMap.value = Shapes::ShapeRef.new(shape: EnvironmentVariableValue)
 
@@ -287,14 +345,67 @@ module Aws::Synthetics
     GetCanaryRunsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     GetCanaryRunsResponse.struct_class = Types::GetCanaryRunsResponse
 
+    GetGroupRequest.add_member(:group_identifier, Shapes::ShapeRef.new(shape: GroupIdentifier, required: true, location: "uri", location_name: "groupIdentifier"))
+    GetGroupRequest.struct_class = Types::GetGroupRequest
+
+    GetGroupResponse.add_member(:group, Shapes::ShapeRef.new(shape: Group, location_name: "Group"))
+    GetGroupResponse.struct_class = Types::GetGroupResponse
+
+    Group.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "Id"))
+    Group.add_member(:name, Shapes::ShapeRef.new(shape: GroupName, location_name: "Name"))
+    Group.add_member(:arn, Shapes::ShapeRef.new(shape: GroupArn, location_name: "Arn"))
+    Group.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    Group.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
+    Group.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    Group.struct_class = Types::Group
+
+    GroupSummary.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "Id"))
+    GroupSummary.add_member(:name, Shapes::ShapeRef.new(shape: GroupName, location_name: "Name"))
+    GroupSummary.add_member(:arn, Shapes::ShapeRef.new(shape: GroupArn, location_name: "Arn"))
+    GroupSummary.struct_class = Types::GroupSummary
+
+    GroupSummaryList.member = Shapes::ShapeRef.new(shape: GroupSummary)
+
+    InternalFailureException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InternalFailureException.struct_class = Types::InternalFailureException
+
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     InternalServerException.struct_class = Types::InternalServerException
 
-    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: CanaryArn, required: true, location: "uri", location_name: "resourceArn"))
+    ListAssociatedGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListAssociatedGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxGroupResults, location_name: "MaxResults"))
+    ListAssociatedGroupsRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: CanaryArn, required: true, location: "uri", location_name: "resourceArn"))
+    ListAssociatedGroupsRequest.struct_class = Types::ListAssociatedGroupsRequest
+
+    ListAssociatedGroupsResponse.add_member(:groups, Shapes::ShapeRef.new(shape: GroupSummaryList, location_name: "Groups"))
+    ListAssociatedGroupsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListAssociatedGroupsResponse.struct_class = Types::ListAssociatedGroupsResponse
+
+    ListGroupResourcesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListGroupResourcesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxGroupResults, location_name: "MaxResults"))
+    ListGroupResourcesRequest.add_member(:group_identifier, Shapes::ShapeRef.new(shape: GroupIdentifier, required: true, location: "uri", location_name: "groupIdentifier"))
+    ListGroupResourcesRequest.struct_class = Types::ListGroupResourcesRequest
+
+    ListGroupResourcesResponse.add_member(:resources, Shapes::ShapeRef.new(shape: StringList, location_name: "Resources"))
+    ListGroupResourcesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListGroupResourcesResponse.struct_class = Types::ListGroupResourcesResponse
+
+    ListGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxGroupResults, location_name: "MaxResults"))
+    ListGroupsRequest.struct_class = Types::ListGroupsRequest
+
+    ListGroupsResponse.add_member(:groups, Shapes::ShapeRef.new(shape: GroupSummaryList, location_name: "Groups"))
+    ListGroupsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListGroupsResponse.struct_class = Types::ListGroupsResponse
+
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location: "uri", location_name: "resourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    NotFoundException.struct_class = Types::NotFoundException
 
     RequestEntityTooLargeException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     RequestEntityTooLargeException.struct_class = Types::RequestEntityTooLargeException
@@ -316,6 +427,9 @@ module Aws::Synthetics
 
     SecurityGroupIds.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
 
+    ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
     StartCanaryRequest.add_member(:name, Shapes::ShapeRef.new(shape: CanaryName, required: true, location: "uri", location_name: "name"))
     StartCanaryRequest.struct_class = Types::StartCanaryRequest
 
@@ -326,6 +440,8 @@ module Aws::Synthetics
 
     StopCanaryResponse.struct_class = Types::StopCanaryResponse
 
+    StringList.member = Shapes::ShapeRef.new(shape: String)
+
     SubnetIds.member = Shapes::ShapeRef.new(shape: SubnetId)
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
@@ -333,13 +449,16 @@ module Aws::Synthetics
     TagMap.key = Shapes::ShapeRef.new(shape: TagKey)
     TagMap.value = Shapes::ShapeRef.new(shape: TagValue)
 
-    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: CanaryArn, required: true, location: "uri", location_name: "resourceArn"))
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location: "uri", location_name: "resourceArn"))
     TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, required: true, location_name: "Tags"))
     TagResourceRequest.struct_class = Types::TagResourceRequest
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
-    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: CanaryArn, required: true, location: "uri", location_name: "resourceArn"))
+    TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    TooManyRequestsException.struct_class = Types::TooManyRequestsException
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location: "uri", location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
@@ -400,6 +519,19 @@ module Aws::Synthetics
         "uid" => "synthetics-2017-10-11",
       }
 
+      api.add_operation(:associate_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateResource"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/group/{groupIdentifier}/associate"
+        o.input = Shapes::ShapeRef.new(shape: AssociateResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
       api.add_operation(:create_canary, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateCanary"
         o.http_method = "POST"
@@ -411,12 +543,36 @@ module Aws::Synthetics
         o.errors << Shapes::ShapeRef.new(shape: RequestEntityTooLargeException)
       end)
 
+      api.add_operation(:create_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/group"
+        o.input = Shapes::ShapeRef.new(shape: CreateGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
       api.add_operation(:delete_canary, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteCanary"
         o.http_method = "DELETE"
         o.http_request_uri = "/canary/{name}"
         o.input = Shapes::ShapeRef.new(shape: DeleteCanaryRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteCanaryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:delete_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteGroup"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/group/{groupIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -471,6 +627,18 @@ module Aws::Synthetics
         )
       end)
 
+      api.add_operation(:disassociate_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateResource"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/group/{groupIdentifier}/disassociate"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:get_canary, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetCanary"
         o.http_method = "GET"
@@ -498,15 +666,80 @@ module Aws::Synthetics
         )
       end)
 
+      api.add_operation(:get_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetGroup"
+        o.http_method = "GET"
+        o.http_request_uri = "/group/{groupIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:list_associated_groups, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAssociatedGroups"
+        o.http_method = "POST"
+        o.http_request_uri = "/resource/{resourceArn}/groups"
+        o.input = Shapes::ShapeRef.new(shape: ListAssociatedGroupsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAssociatedGroupsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_group_resources, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListGroupResources"
+        o.http_method = "POST"
+        o.http_request_uri = "/group/{groupIdentifier}/resources"
+        o.input = Shapes::ShapeRef.new(shape: ListGroupResourcesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListGroupResourcesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_groups, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListGroups"
+        o.http_method = "POST"
+        o.http_request_uri = "/groups"
+        o.input = Shapes::ShapeRef.new(shape: ListGroupsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListGroupsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTagsForResource"
         o.http_method = "GET"
         o.http_request_uri = "/tags/{resourceArn}"
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
       api.add_operation(:start_canary, Seahorse::Model::Operation.new.tap do |o|
@@ -539,9 +772,11 @@ module Aws::Synthetics
         o.http_request_uri = "/tags/{resourceArn}"
         o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
       api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -550,9 +785,11 @@ module Aws::Synthetics
         o.http_request_uri = "/tags/{resourceArn}"
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
       api.add_operation(:update_canary, Seahorse::Model::Operation.new.tap do |o|

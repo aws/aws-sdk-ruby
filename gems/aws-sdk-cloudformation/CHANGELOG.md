@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2022-07-06)
+------------------
+
+* Feature - My AWS Service (placeholder) - Add a new feature Account-level Targeting for StackSet operation
+
 1.69.0 (2022-05-25)
 ------------------
 

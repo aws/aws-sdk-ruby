@@ -62,6 +62,50 @@ module Aws::Synthetics
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AssociateResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         group_identifier: "GroupIdentifier", # required
+    #         resource_arn: "CanaryArn", # required
+    #       }
+    #
+    # @!attribute [rw] group_identifier
+    #   Specifies the group. You can specify the group name, the ARN, or the
+    #   group ID as the `GroupIdentifier`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the canary that you want to associate with the specified
+    #   group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/AssociateResourceRequest AWS API Documentation
+    #
+    class AssociateResourceRequest < Struct.new(
+      :group_identifier,
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/AssociateResourceResponse AWS API Documentation
+    #
+    class AssociateResourceResponse < Aws::EmptyStructure; end
+
+    # The request was not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A structure representing a screenshot that is used as a baseline
     # during visual monitoring comparisons made by the canary.
     #
@@ -82,8 +126,12 @@ module Aws::Synthetics
     # @!attribute [rw] ignore_coordinates
     #   Coordinates that define the part of a screen to ignore during
     #   screenshot comparisons. To obtain the coordinates to use here, use
-    #   the CloudWatch Logs console to draw the boundaries on the screen.
-    #   For more information, see \\\{LINK\\}
+    #   the CloudWatch console to draw the boundaries on the screen. For
+    #   more information, see [ Editing or deleting a canary][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/synthetics_canaries_deletion.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/BaseScreenshot AWS API Documentation
@@ -421,6 +469,9 @@ module Aws::Synthetics
     #   can't specify any Lambda reserved environment variables as the keys
     #   for your environment variables. For more information about reserved
     #   keys, see [ Runtime environment variables][1].
+    #
+    #   The environment variables keys and values are not encrypted. Do not
+    #   store sensitive information in this field.
     #
     #
     #
@@ -773,7 +824,10 @@ module Aws::Synthetics
     #
     # @!attribute [rw] run_config
     #   A structure that contains the configuration for individual canary
-    #   runs, such as timeout value.
+    #   runs, such as timeout value and environment variables.
+    #
+    #   The environment variables keys and values are not encrypted. Do not
+    #   store sensitive information in this field.
     #   @return [Types::CanaryRunConfigInput]
     #
     # @!attribute [rw] success_retention_period_in_days
@@ -855,6 +909,55 @@ module Aws::Synthetics
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "GroupName", # required
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name for the group. It can include any Unicode characters.
+    #
+    #   The names for all groups in your account, across all Regions, must
+    #   be unique.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of key-value pairs to associate with the group. You can
+    #   associate as many as 50 tags with a group.
+    #
+    #   Tags can help you organize and categorize your resources. You can
+    #   also use them to scope user permissions, by granting a user
+    #   permission to access or change only the resources that have certain
+    #   tag values.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/CreateGroupRequest AWS API Documentation
+    #
+    class CreateGroupRequest < Struct.new(
+      :name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] group
+    #   A structure that contains information about the group that was just
+    #   created.
+    #   @return [Types::Group]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/CreateGroupResponse AWS API Documentation
+    #
+    class CreateGroupResponse < Struct.new(
+      :group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteCanaryRequest
     #   data as a hash:
     #
@@ -892,6 +995,30 @@ module Aws::Synthetics
     #
     class DeleteCanaryResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         group_identifier: "GroupIdentifier", # required
+    #       }
+    #
+    # @!attribute [rw] group_identifier
+    #   Specifies which group to delete. You can specify the group name, the
+    #   ARN, or the group ID as the `GroupIdentifier`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/DeleteGroupRequest AWS API Documentation
+    #
+    class DeleteGroupRequest < Struct.new(
+      :group_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/DeleteGroupResponse AWS API Documentation
+    #
+    class DeleteGroupResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DescribeCanariesLastRunRequest
     #   data as a hash:
     #
@@ -903,8 +1030,8 @@ module Aws::Synthetics
     #
     # @!attribute [rw] next_token
     #   A token that indicates that there is more data available. You can
-    #   use this token in a subsequent `DescribeCanaries` operation to
-    #   retrieve the next set of results.
+    #   use this token in a subsequent `DescribeCanariesLastRun` operation
+    #   to retrieve the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1081,6 +1208,37 @@ module Aws::Synthetics
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DisassociateResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         group_identifier: "GroupIdentifier", # required
+    #         resource_arn: "CanaryArn", # required
+    #       }
+    #
+    # @!attribute [rw] group_identifier
+    #   Specifies the group. You can specify the group name, the ARN, or the
+    #   group ID as the `GroupIdentifier`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the canary that you want to remove from the specified
+    #   group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/DisassociateResourceRequest AWS API Documentation
+    #
+    class DisassociateResourceRequest < Struct.new(
+      :group_identifier,
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/DisassociateResourceResponse AWS API Documentation
+    #
+    class DisassociateResourceResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass GetCanaryRequest
     #   data as a hash:
     #
@@ -1101,7 +1259,7 @@ module Aws::Synthetics
     end
 
     # @!attribute [rw] canary
-    #   A strucure that contains the full information about the canary.
+    #   A structure that contains the full information about the canary.
     #   @return [Types::Canary]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/GetCanaryResponse AWS API Documentation
@@ -1167,6 +1325,114 @@ module Aws::Synthetics
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         group_identifier: "GroupIdentifier", # required
+    #       }
+    #
+    # @!attribute [rw] group_identifier
+    #   Specifies the group to return information for. You can specify the
+    #   group name, the ARN, or the group ID as the `GroupIdentifier`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/GetGroupRequest AWS API Documentation
+    #
+    class GetGroupRequest < Struct.new(
+      :group_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] group
+    #   A structure that contains information about the group.
+    #   @return [Types::Group]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/GetGroupResponse AWS API Documentation
+    #
+    class GetGroupResponse < Struct.new(
+      :group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This structure contains information about one group.
+    #
+    # @!attribute [rw] id
+    #   The unique ID of the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The list of key-value pairs that are associated with the canary.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] created_time
+    #   The date and time that the group was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time that the group was most recently updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/Group AWS API Documentation
+    #
+    class Group < Struct.new(
+      :id,
+      :name,
+      :arn,
+      :tags,
+      :created_time,
+      :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure containing some information about a group.
+    #
+    # @!attribute [rw] id
+    #   The unique ID of the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/GroupSummary AWS API Documentation
+    #
+    class GroupSummary < Struct.new(
+      :id,
+      :name,
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An internal failure occurred. Try the operation again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/InternalFailureException AWS API Documentation
+    #
+    class InternalFailureException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An unknown internal error occurred.
     #
     # @!attribute [rw] message
@@ -1180,18 +1446,181 @@ module Aws::Synthetics
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListAssociatedGroupsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "PaginationToken",
+    #         max_results: 1,
+    #         resource_arn: "CanaryArn", # required
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates that there is more data available. You can
+    #   use this token in a subsequent operation to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Specify this parameter to limit how many groups are returned each
+    #   time you use the `ListAssociatedGroups` operation. If you omit this
+    #   parameter, the default of 20 is used.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the canary that you want to view groups for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/ListAssociatedGroupsRequest AWS API Documentation
+    #
+    class ListAssociatedGroupsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] groups
+    #   An array of structures that contain information about the groups
+    #   that this canary is associated with.
+    #   @return [Array<Types::GroupSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates that there is more data available. You can
+    #   use this token in a subsequent `ListAssociatedGroups` operation to
+    #   retrieve the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/ListAssociatedGroupsResponse AWS API Documentation
+    #
+    class ListAssociatedGroupsResponse < Struct.new(
+      :groups,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListGroupResourcesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "PaginationToken",
+    #         max_results: 1,
+    #         group_identifier: "GroupIdentifier", # required
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates that there is more data available. You can
+    #   use this token in a subsequent operation to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Specify this parameter to limit how many canary ARNs are returned
+    #   each time you use the `ListGroupResources` operation. If you omit
+    #   this parameter, the default of 20 is used.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] group_identifier
+    #   Specifies the group to return information for. You can specify the
+    #   group name, the ARN, or the group ID as the `GroupIdentifier`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/ListGroupResourcesRequest AWS API Documentation
+    #
+    class ListGroupResourcesRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :group_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resources
+    #   An array of ARNs. These ARNs are for the canaries that are
+    #   associated with the group.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates that there is more data available. You can
+    #   use this token in a subsequent `ListGroupResources` operation to
+    #   retrieve the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/ListGroupResourcesResponse AWS API Documentation
+    #
+    class ListGroupResourcesResponse < Struct.new(
+      :resources,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListGroupsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "PaginationToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates that there is more data available. You can
+    #   use this token in a subsequent operation to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Specify this parameter to limit how many groups are returned each
+    #   time you use the `ListGroups` operation. If you omit this parameter,
+    #   the default of 20 is used.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/ListGroupsRequest AWS API Documentation
+    #
+    class ListGroupsRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] groups
+    #   An array of structures that each contain information about one
+    #   group.
+    #   @return [Array<Types::GroupSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates that there is more data available. You can
+    #   use this token in a subsequent `ListGroups` operation to retrieve
+    #   the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/ListGroupsResponse AWS API Documentation
+    #
+    class ListGroupsResponse < Struct.new(
+      :groups,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListTagsForResourceRequest
     #   data as a hash:
     #
     #       {
-    #         resource_arn: "CanaryArn", # required
+    #         resource_arn: "ResourceArn", # required
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The ARN of the canary that you want to view tags for.
+    #   The ARN of the canary or group that you want to view tags for.
     #
     #   The ARN format of a canary is
     #   `arn:aws:synthetics:Region:account-id:canary:canary-name `.
+    #
+    #   The ARN format of a group is
+    #   `arn:aws:synthetics:Region:account-id:group:group-name `
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/ListTagsForResourceRequest AWS API Documentation
@@ -1203,14 +1632,27 @@ module Aws::Synthetics
     end
 
     # @!attribute [rw] tags
-    #   The list of tag keys and values associated with the canary that you
-    #   specified.
+    #   The list of tag keys and values associated with the resource that
+    #   you specified.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/ListTagsForResourceResponse AWS API Documentation
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specified resource was not found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1323,6 +1765,19 @@ module Aws::Synthetics
       include Aws::Structure
     end
 
+    # The request exceeded a service quota value.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/ServiceQuotaExceededException AWS API Documentation
+    #
+    class ServiceQuotaExceededException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StartCanaryRequest
     #   data as a hash:
     #
@@ -1360,7 +1815,7 @@ module Aws::Synthetics
     #
     # @!attribute [rw] name
     #   The name of the canary that you want to stop. To find the names of
-    #   your canaries, use [DescribeCanaries][1].
+    #   your canaries, use [ListCanaries][1].
     #
     #
     #
@@ -1383,21 +1838,24 @@ module Aws::Synthetics
     #   data as a hash:
     #
     #       {
-    #         resource_arn: "CanaryArn", # required
+    #         resource_arn: "ResourceArn", # required
     #         tags: { # required
     #           "TagKey" => "TagValue",
     #         },
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The ARN of the canary that you're adding tags to.
+    #   The ARN of the canary or group that you're adding tags to.
     #
     #   The ARN format of a canary is
     #   `arn:aws:synthetics:Region:account-id:canary:canary-name `.
+    #
+    #   The ARN format of a group is
+    #   `arn:aws:synthetics:Region:account-id:group:group-name `
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The list of key-value pairs to associate with the canary.
+    #   The list of key-value pairs to associate with the resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/TagResourceRequest AWS API Documentation
@@ -1413,19 +1871,35 @@ module Aws::Synthetics
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
+    # There were too many simultaneous requests. Try the operation again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/TooManyRequestsException AWS API Documentation
+    #
+    class TooManyRequestsException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UntagResourceRequest
     #   data as a hash:
     #
     #       {
-    #         resource_arn: "CanaryArn", # required
+    #         resource_arn: "ResourceArn", # required
     #         tag_keys: ["TagKey"], # required
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The ARN of the canary that you're removing tags from.
+    #   The ARN of the canary or group that you're removing tags from.
     #
     #   The ARN format of a canary is
     #   `arn:aws:synthetics:Region:account-id:canary:canary-name `.
+    #
+    #   The ARN format of a group is
+    #   `arn:aws:synthetics:Region:account-id:group:group-name `
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
@@ -1552,6 +2026,9 @@ module Aws::Synthetics
     # @!attribute [rw] run_config
     #   A structure that contains the timeout value that is used for each
     #   individual run of the canary.
+    #
+    #   The environment variables keys and values are not encrypted. Do not
+    #   store sensitive information in this field.
     #   @return [Types::CanaryRunConfigInput]
     #
     # @!attribute [rw] success_retention_period_in_days
@@ -1639,8 +2116,8 @@ module Aws::Synthetics
     end
 
     # An object that specifies what screenshots to use as a baseline for
-    # visual monitoring by this canary, and optionally the parts of the
-    # screenshots to ignore during the visual monitoring comparison.
+    # visual monitoring by this canary. It can optionally also specify parts
+    # of the screenshots to ignore during the visual monitoring comparison.
     #
     # Visual monitoring is supported only on canaries running the
     # **syn-puppeteer-node-3.2** runtime or later. For more information, see
@@ -1707,9 +2184,8 @@ module Aws::Synthetics
     #   @return [Array<Types::BaseScreenshot>]
     #
     # @!attribute [rw] base_canary_run_id
-    #   The ID of the canary run that produced the screenshots that are used
-    #   as the baseline for visual monitoring comparisons during future runs
-    #   of this canary.
+    #   The ID of the canary run that produced the baseline screenshots that
+    #   are used for visual monitoring comparisons by this canary.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/VisualReferenceOutput AWS API Documentation

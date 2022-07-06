@@ -15,6 +15,7 @@ module Aws::CloudFormation
 
     AcceptTermsAndConditions = Shapes::BooleanShape.new(name: 'AcceptTermsAndConditions')
     Account = Shapes::StringShape.new(name: 'Account')
+    AccountFilterType = Shapes::StringShape.new(name: 'AccountFilterType')
     AccountGateResult = Shapes::StructureShape.new(name: 'AccountGateResult')
     AccountGateStatus = Shapes::StringShape.new(name: 'AccountGateStatus')
     AccountGateStatusReason = Shapes::StringShape.new(name: 'AccountGateStatusReason')
@@ -705,6 +706,7 @@ module Aws::CloudFormation
     DeploymentTargets.add_member(:accounts, Shapes::ShapeRef.new(shape: AccountList, location_name: "Accounts"))
     DeploymentTargets.add_member(:accounts_url, Shapes::ShapeRef.new(shape: AccountsUrl, location_name: "AccountsUrl"))
     DeploymentTargets.add_member(:organizational_unit_ids, Shapes::ShapeRef.new(shape: OrganizationalUnitIdList, location_name: "OrganizationalUnitIds"))
+    DeploymentTargets.add_member(:account_filter_type, Shapes::ShapeRef.new(shape: AccountFilterType, location_name: "AccountFilterType"))
     DeploymentTargets.struct_class = Types::DeploymentTargets
 
     DeregisterTypeInput.add_member(:arn, Shapes::ShapeRef.new(shape: PrivateTypeArn, location_name: "Arn"))

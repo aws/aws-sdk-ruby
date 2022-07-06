@@ -27,10 +27,15 @@ module Aws::Synthetics
   # See {Seahorse::Client::RequestContext} for more information.
   #
   # ## Error Classes
+  # * {BadRequestException}
   # * {ConflictException}
+  # * {InternalFailureException}
   # * {InternalServerException}
+  # * {NotFoundException}
   # * {RequestEntityTooLargeException}
   # * {ResourceNotFoundException}
+  # * {ServiceQuotaExceededException}
+  # * {TooManyRequestsException}
   # * {ValidationException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
@@ -38,6 +43,21 @@ module Aws::Synthetics
   module Errors
 
     extend Aws::Errors::DynamicErrors
+
+    class BadRequestException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Synthetics::Types::BadRequestException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
 
     class ConflictException < ServiceError
 
@@ -54,11 +74,41 @@ module Aws::Synthetics
       end
     end
 
+    class InternalFailureException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Synthetics::Types::InternalFailureException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class InternalServerException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Synthetics::Types::InternalServerException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class NotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Synthetics::Types::NotFoundException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -89,6 +139,36 @@ module Aws::Synthetics
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Synthetics::Types::ResourceNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ServiceQuotaExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Synthetics::Types::ServiceQuotaExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class TooManyRequestsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Synthetics::Types::TooManyRequestsException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
