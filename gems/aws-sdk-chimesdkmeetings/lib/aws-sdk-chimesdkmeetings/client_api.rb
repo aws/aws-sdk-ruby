@@ -70,6 +70,8 @@ module Aws::ChimeSDKMeetings
     StartMeetingTranscriptionRequest = Shapes::StructureShape.new(name: 'StartMeetingTranscriptionRequest')
     StopMeetingTranscriptionRequest = Shapes::StructureShape.new(name: 'StopMeetingTranscriptionRequest')
     String = Shapes::StringShape.new(name: 'String')
+    TenantId = Shapes::StringShape.new(name: 'TenantId')
+    TenantIdList = Shapes::ListShape.new(name: 'TenantIdList')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TranscribeContentIdentificationType = Shapes::StringShape.new(name: 'TranscribeContentIdentificationType')
     TranscribeContentRedactionType = Shapes::StringShape.new(name: 'TranscribeContentRedactionType')
@@ -163,6 +165,7 @@ module Aws::ChimeSDKMeetings
     CreateMeetingRequest.add_member(:notifications_configuration, Shapes::ShapeRef.new(shape: NotificationsConfiguration, location_name: "NotificationsConfiguration"))
     CreateMeetingRequest.add_member(:meeting_features, Shapes::ShapeRef.new(shape: MeetingFeaturesConfiguration, location_name: "MeetingFeatures"))
     CreateMeetingRequest.add_member(:primary_meeting_id, Shapes::ShapeRef.new(shape: PrimaryMeetingId, location_name: "PrimaryMeetingId"))
+    CreateMeetingRequest.add_member(:tenant_ids, Shapes::ShapeRef.new(shape: TenantIdList, location_name: "TenantIds"))
     CreateMeetingRequest.struct_class = Types::CreateMeetingRequest
 
     CreateMeetingResponse.add_member(:meeting, Shapes::ShapeRef.new(shape: Meeting, location_name: "Meeting"))
@@ -176,6 +179,7 @@ module Aws::ChimeSDKMeetings
     CreateMeetingWithAttendeesRequest.add_member(:notifications_configuration, Shapes::ShapeRef.new(shape: NotificationsConfiguration, location_name: "NotificationsConfiguration"))
     CreateMeetingWithAttendeesRequest.add_member(:attendees, Shapes::ShapeRef.new(shape: CreateMeetingWithAttendeesRequestItemList, required: true, location_name: "Attendees"))
     CreateMeetingWithAttendeesRequest.add_member(:primary_meeting_id, Shapes::ShapeRef.new(shape: PrimaryMeetingId, location_name: "PrimaryMeetingId"))
+    CreateMeetingWithAttendeesRequest.add_member(:tenant_ids, Shapes::ShapeRef.new(shape: TenantIdList, location_name: "TenantIds"))
     CreateMeetingWithAttendeesRequest.struct_class = Types::CreateMeetingWithAttendeesRequest
 
     CreateMeetingWithAttendeesRequestItemList.member = Shapes::ShapeRef.new(shape: CreateAttendeeRequestItem)
@@ -265,6 +269,7 @@ module Aws::ChimeSDKMeetings
     Meeting.add_member(:media_placement, Shapes::ShapeRef.new(shape: MediaPlacement, location_name: "MediaPlacement"))
     Meeting.add_member(:meeting_features, Shapes::ShapeRef.new(shape: MeetingFeaturesConfiguration, location_name: "MeetingFeatures"))
     Meeting.add_member(:primary_meeting_id, Shapes::ShapeRef.new(shape: PrimaryMeetingId, location_name: "PrimaryMeetingId"))
+    Meeting.add_member(:tenant_ids, Shapes::ShapeRef.new(shape: TenantIdList, location_name: "TenantIds"))
     Meeting.struct_class = Types::Meeting
 
     MeetingFeaturesConfiguration.add_member(:audio, Shapes::ShapeRef.new(shape: AudioFeatures, location_name: "Audio"))
@@ -297,6 +302,8 @@ module Aws::ChimeSDKMeetings
 
     StopMeetingTranscriptionRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "MeetingId"))
     StopMeetingTranscriptionRequest.struct_class = Types::StopMeetingTranscriptionRequest
+
+    TenantIdList.member = Shapes::ShapeRef.new(shape: TenantId)
 
     ThrottlingException.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "Code"))
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))

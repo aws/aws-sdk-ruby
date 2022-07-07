@@ -845,6 +845,7 @@ module Aws::SageMaker
     #                     s3_uri: "S3Uri", # required
     #                     s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
     #                     attribute_names: ["AttributeName"],
+    #                     instance_group_names: ["InstanceGroupName"],
     #                   },
     #                   file_system_data_source: {
     #                     file_system_id: "FileSystemId", # required
@@ -867,10 +868,17 @@ module Aws::SageMaker
     #               s3_output_path: "S3Uri", # required
     #             },
     #             resource_config: { # required
-    #               instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #               instance_count: 1, # required
+    #               instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #               instance_count: 1,
     #               volume_size_in_gb: 1, # required
     #               volume_kms_key_id: "KmsKeyId",
+    #               instance_groups: [
+    #                 {
+    #                   instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #                   instance_count: 1, # required
+    #                   instance_group_name: "InstanceGroupName", # required
+    #                 },
+    #               ],
     #             },
     #             stopping_condition: { # required
     #               max_runtime_in_seconds: 1,
@@ -2983,6 +2991,7 @@ module Aws::SageMaker
     #               s3_uri: "S3Uri", # required
     #               s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
     #               attribute_names: ["AttributeName"],
+    #               instance_group_names: ["InstanceGroupName"],
     #             },
     #             file_system_data_source: {
     #               file_system_id: "FileSystemId", # required
@@ -3009,10 +3018,17 @@ module Aws::SageMaker
     #         s3_output_path: "S3Uri", # required
     #       },
     #       resource_config: { # required
-    #         instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #         instance_count: 1, # required
+    #         instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #         instance_count: 1,
     #         volume_size_in_gb: 1, # required
     #         volume_kms_key_id: "KmsKeyId",
+    #         instance_groups: [
+    #           {
+    #             instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #             instance_count: 1, # required
+    #             instance_group_name: "InstanceGroupName", # required
+    #           },
+    #         ],
     #       },
     #       stopping_condition: { # required
     #         max_runtime_in_seconds: 1,
@@ -3084,6 +3100,7 @@ module Aws::SageMaker
     #                 s3_uri: "S3Uri", # required
     #                 s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
     #                 attribute_names: ["AttributeName"],
+    #                 instance_group_names: ["InstanceGroupName"],
     #               },
     #               file_system_data_source: {
     #                 file_system_id: "FileSystemId", # required
@@ -3110,10 +3127,17 @@ module Aws::SageMaker
     #           s3_output_path: "S3Uri", # required
     #         },
     #         resource_config: { # required
-    #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #           instance_count: 1, # required
+    #           instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #           instance_count: 1,
     #           volume_size_in_gb: 1, # required
     #           volume_kms_key_id: "KmsKeyId",
+    #           instance_groups: [
+    #             {
+    #               instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #               instance_count: 1, # required
+    #               instance_group_name: "InstanceGroupName", # required
+    #             },
+    #           ],
     #         },
     #         stopping_condition: { # required
     #           max_runtime_in_seconds: 1,
@@ -5923,6 +5947,7 @@ module Aws::SageMaker
     #             s3_uri: "S3Uri", # required
     #             s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
     #             attribute_names: ["AttributeName"],
+    #             instance_group_names: ["InstanceGroupName"],
     #           },
     #           file_system_data_source: {
     #             file_system_id: "FileSystemId", # required
@@ -5945,10 +5970,17 @@ module Aws::SageMaker
     #       s3_output_path: "S3Uri", # required
     #     },
     #     resource_config: { # required
-    #       instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #       instance_count: 1, # required
+    #       instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #       instance_count: 1,
     #       volume_size_in_gb: 1, # required
     #       volume_kms_key_id: "KmsKeyId",
+    #       instance_groups: [
+    #         {
+    #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #           instance_count: 1, # required
+    #           instance_group_name: "InstanceGroupName", # required
+    #         },
+    #       ],
     #     },
     #     vpc_config: {
     #       security_group_ids: ["SecurityGroupId"], # required
@@ -8044,6 +8076,8 @@ module Aws::SageMaker
     #   resp.validation_specification.validation_profiles[0].training_job_definition.input_data_config[0].data_source.s3_data_source.s3_data_distribution_type #=> String, one of "FullyReplicated", "ShardedByS3Key"
     #   resp.validation_specification.validation_profiles[0].training_job_definition.input_data_config[0].data_source.s3_data_source.attribute_names #=> Array
     #   resp.validation_specification.validation_profiles[0].training_job_definition.input_data_config[0].data_source.s3_data_source.attribute_names[0] #=> String
+    #   resp.validation_specification.validation_profiles[0].training_job_definition.input_data_config[0].data_source.s3_data_source.instance_group_names #=> Array
+    #   resp.validation_specification.validation_profiles[0].training_job_definition.input_data_config[0].data_source.s3_data_source.instance_group_names[0] #=> String
     #   resp.validation_specification.validation_profiles[0].training_job_definition.input_data_config[0].data_source.file_system_data_source.file_system_id #=> String
     #   resp.validation_specification.validation_profiles[0].training_job_definition.input_data_config[0].data_source.file_system_data_source.file_system_access_mode #=> String, one of "rw", "ro"
     #   resp.validation_specification.validation_profiles[0].training_job_definition.input_data_config[0].data_source.file_system_data_source.file_system_type #=> String, one of "EFS", "FSxLustre"
@@ -8059,6 +8093,10 @@ module Aws::SageMaker
     #   resp.validation_specification.validation_profiles[0].training_job_definition.resource_config.instance_count #=> Integer
     #   resp.validation_specification.validation_profiles[0].training_job_definition.resource_config.volume_size_in_gb #=> Integer
     #   resp.validation_specification.validation_profiles[0].training_job_definition.resource_config.volume_kms_key_id #=> String
+    #   resp.validation_specification.validation_profiles[0].training_job_definition.resource_config.instance_groups #=> Array
+    #   resp.validation_specification.validation_profiles[0].training_job_definition.resource_config.instance_groups[0].instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge"
+    #   resp.validation_specification.validation_profiles[0].training_job_definition.resource_config.instance_groups[0].instance_count #=> Integer
+    #   resp.validation_specification.validation_profiles[0].training_job_definition.resource_config.instance_groups[0].instance_group_name #=> String
     #   resp.validation_specification.validation_profiles[0].training_job_definition.stopping_condition.max_runtime_in_seconds #=> Integer
     #   resp.validation_specification.validation_profiles[0].training_job_definition.stopping_condition.max_wait_time_in_seconds #=> Integer
     #   resp.validation_specification.validation_profiles[0].transform_job_definition.max_concurrent_transforms #=> Integer
@@ -9439,6 +9477,8 @@ module Aws::SageMaker
     #   resp.training_job_definition.input_data_config[0].data_source.s3_data_source.s3_data_distribution_type #=> String, one of "FullyReplicated", "ShardedByS3Key"
     #   resp.training_job_definition.input_data_config[0].data_source.s3_data_source.attribute_names #=> Array
     #   resp.training_job_definition.input_data_config[0].data_source.s3_data_source.attribute_names[0] #=> String
+    #   resp.training_job_definition.input_data_config[0].data_source.s3_data_source.instance_group_names #=> Array
+    #   resp.training_job_definition.input_data_config[0].data_source.s3_data_source.instance_group_names[0] #=> String
     #   resp.training_job_definition.input_data_config[0].data_source.file_system_data_source.file_system_id #=> String
     #   resp.training_job_definition.input_data_config[0].data_source.file_system_data_source.file_system_access_mode #=> String, one of "rw", "ro"
     #   resp.training_job_definition.input_data_config[0].data_source.file_system_data_source.file_system_type #=> String, one of "EFS", "FSxLustre"
@@ -9458,6 +9498,10 @@ module Aws::SageMaker
     #   resp.training_job_definition.resource_config.instance_count #=> Integer
     #   resp.training_job_definition.resource_config.volume_size_in_gb #=> Integer
     #   resp.training_job_definition.resource_config.volume_kms_key_id #=> String
+    #   resp.training_job_definition.resource_config.instance_groups #=> Array
+    #   resp.training_job_definition.resource_config.instance_groups[0].instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge"
+    #   resp.training_job_definition.resource_config.instance_groups[0].instance_count #=> Integer
+    #   resp.training_job_definition.resource_config.instance_groups[0].instance_group_name #=> String
     #   resp.training_job_definition.stopping_condition.max_runtime_in_seconds #=> Integer
     #   resp.training_job_definition.stopping_condition.max_wait_time_in_seconds #=> Integer
     #   resp.training_job_definition.enable_network_isolation #=> Boolean
@@ -9500,6 +9544,8 @@ module Aws::SageMaker
     #   resp.training_job_definitions[0].input_data_config[0].data_source.s3_data_source.s3_data_distribution_type #=> String, one of "FullyReplicated", "ShardedByS3Key"
     #   resp.training_job_definitions[0].input_data_config[0].data_source.s3_data_source.attribute_names #=> Array
     #   resp.training_job_definitions[0].input_data_config[0].data_source.s3_data_source.attribute_names[0] #=> String
+    #   resp.training_job_definitions[0].input_data_config[0].data_source.s3_data_source.instance_group_names #=> Array
+    #   resp.training_job_definitions[0].input_data_config[0].data_source.s3_data_source.instance_group_names[0] #=> String
     #   resp.training_job_definitions[0].input_data_config[0].data_source.file_system_data_source.file_system_id #=> String
     #   resp.training_job_definitions[0].input_data_config[0].data_source.file_system_data_source.file_system_access_mode #=> String, one of "rw", "ro"
     #   resp.training_job_definitions[0].input_data_config[0].data_source.file_system_data_source.file_system_type #=> String, one of "EFS", "FSxLustre"
@@ -9519,6 +9565,10 @@ module Aws::SageMaker
     #   resp.training_job_definitions[0].resource_config.instance_count #=> Integer
     #   resp.training_job_definitions[0].resource_config.volume_size_in_gb #=> Integer
     #   resp.training_job_definitions[0].resource_config.volume_kms_key_id #=> String
+    #   resp.training_job_definitions[0].resource_config.instance_groups #=> Array
+    #   resp.training_job_definitions[0].resource_config.instance_groups[0].instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge"
+    #   resp.training_job_definitions[0].resource_config.instance_groups[0].instance_count #=> Integer
+    #   resp.training_job_definitions[0].resource_config.instance_groups[0].instance_group_name #=> String
     #   resp.training_job_definitions[0].stopping_condition.max_runtime_in_seconds #=> Integer
     #   resp.training_job_definitions[0].stopping_condition.max_wait_time_in_seconds #=> Integer
     #   resp.training_job_definitions[0].enable_network_isolation #=> Boolean
@@ -11182,6 +11232,8 @@ module Aws::SageMaker
     #   resp.input_data_config[0].data_source.s3_data_source.s3_data_distribution_type #=> String, one of "FullyReplicated", "ShardedByS3Key"
     #   resp.input_data_config[0].data_source.s3_data_source.attribute_names #=> Array
     #   resp.input_data_config[0].data_source.s3_data_source.attribute_names[0] #=> String
+    #   resp.input_data_config[0].data_source.s3_data_source.instance_group_names #=> Array
+    #   resp.input_data_config[0].data_source.s3_data_source.instance_group_names[0] #=> String
     #   resp.input_data_config[0].data_source.file_system_data_source.file_system_id #=> String
     #   resp.input_data_config[0].data_source.file_system_data_source.file_system_access_mode #=> String, one of "rw", "ro"
     #   resp.input_data_config[0].data_source.file_system_data_source.file_system_type #=> String, one of "EFS", "FSxLustre"
@@ -11197,6 +11249,10 @@ module Aws::SageMaker
     #   resp.resource_config.instance_count #=> Integer
     #   resp.resource_config.volume_size_in_gb #=> Integer
     #   resp.resource_config.volume_kms_key_id #=> String
+    #   resp.resource_config.instance_groups #=> Array
+    #   resp.resource_config.instance_groups[0].instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge"
+    #   resp.resource_config.instance_groups[0].instance_count #=> Integer
+    #   resp.resource_config.instance_groups[0].instance_group_name #=> String
     #   resp.vpc_config.security_group_ids #=> Array
     #   resp.vpc_config.security_group_ids[0] #=> String
     #   resp.vpc_config.subnets #=> Array
@@ -16662,6 +16718,8 @@ module Aws::SageMaker
     #   resp.results[0].training_job.input_data_config[0].data_source.s3_data_source.s3_data_distribution_type #=> String, one of "FullyReplicated", "ShardedByS3Key"
     #   resp.results[0].training_job.input_data_config[0].data_source.s3_data_source.attribute_names #=> Array
     #   resp.results[0].training_job.input_data_config[0].data_source.s3_data_source.attribute_names[0] #=> String
+    #   resp.results[0].training_job.input_data_config[0].data_source.s3_data_source.instance_group_names #=> Array
+    #   resp.results[0].training_job.input_data_config[0].data_source.s3_data_source.instance_group_names[0] #=> String
     #   resp.results[0].training_job.input_data_config[0].data_source.file_system_data_source.file_system_id #=> String
     #   resp.results[0].training_job.input_data_config[0].data_source.file_system_data_source.file_system_access_mode #=> String, one of "rw", "ro"
     #   resp.results[0].training_job.input_data_config[0].data_source.file_system_data_source.file_system_type #=> String, one of "EFS", "FSxLustre"
@@ -16677,6 +16735,10 @@ module Aws::SageMaker
     #   resp.results[0].training_job.resource_config.instance_count #=> Integer
     #   resp.results[0].training_job.resource_config.volume_size_in_gb #=> Integer
     #   resp.results[0].training_job.resource_config.volume_kms_key_id #=> String
+    #   resp.results[0].training_job.resource_config.instance_groups #=> Array
+    #   resp.results[0].training_job.resource_config.instance_groups[0].instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge"
+    #   resp.results[0].training_job.resource_config.instance_groups[0].instance_count #=> Integer
+    #   resp.results[0].training_job.resource_config.instance_groups[0].instance_group_name #=> String
     #   resp.results[0].training_job.vpc_config.security_group_ids #=> Array
     #   resp.results[0].training_job.vpc_config.security_group_ids[0] #=> String
     #   resp.results[0].training_job.vpc_config.subnets #=> Array
@@ -16851,6 +16913,8 @@ module Aws::SageMaker
     #   resp.results[0].trial_component.source_detail.training_job.input_data_config[0].data_source.s3_data_source.s3_data_distribution_type #=> String, one of "FullyReplicated", "ShardedByS3Key"
     #   resp.results[0].trial_component.source_detail.training_job.input_data_config[0].data_source.s3_data_source.attribute_names #=> Array
     #   resp.results[0].trial_component.source_detail.training_job.input_data_config[0].data_source.s3_data_source.attribute_names[0] #=> String
+    #   resp.results[0].trial_component.source_detail.training_job.input_data_config[0].data_source.s3_data_source.instance_group_names #=> Array
+    #   resp.results[0].trial_component.source_detail.training_job.input_data_config[0].data_source.s3_data_source.instance_group_names[0] #=> String
     #   resp.results[0].trial_component.source_detail.training_job.input_data_config[0].data_source.file_system_data_source.file_system_id #=> String
     #   resp.results[0].trial_component.source_detail.training_job.input_data_config[0].data_source.file_system_data_source.file_system_access_mode #=> String, one of "rw", "ro"
     #   resp.results[0].trial_component.source_detail.training_job.input_data_config[0].data_source.file_system_data_source.file_system_type #=> String, one of "EFS", "FSxLustre"
@@ -16866,6 +16930,10 @@ module Aws::SageMaker
     #   resp.results[0].trial_component.source_detail.training_job.resource_config.instance_count #=> Integer
     #   resp.results[0].trial_component.source_detail.training_job.resource_config.volume_size_in_gb #=> Integer
     #   resp.results[0].trial_component.source_detail.training_job.resource_config.volume_kms_key_id #=> String
+    #   resp.results[0].trial_component.source_detail.training_job.resource_config.instance_groups #=> Array
+    #   resp.results[0].trial_component.source_detail.training_job.resource_config.instance_groups[0].instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge"
+    #   resp.results[0].trial_component.source_detail.training_job.resource_config.instance_groups[0].instance_count #=> Integer
+    #   resp.results[0].trial_component.source_detail.training_job.resource_config.instance_groups[0].instance_group_name #=> String
     #   resp.results[0].trial_component.source_detail.training_job.vpc_config.security_group_ids #=> Array
     #   resp.results[0].trial_component.source_detail.training_job.vpc_config.security_group_ids[0] #=> String
     #   resp.results[0].trial_component.source_detail.training_job.vpc_config.subnets #=> Array
@@ -19778,7 +19846,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.129.0'
+      context[:gem_version] = '1.130.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.92.0 (2022-07-07)
+------------------
+
+* Feature - This release adds support to register a CA certificate without having to provide a verification certificate. This also allows multiple AWS accounts to register the same CA in the same region.
+
 1.91.0 (2022-06-27)
 ------------------
 

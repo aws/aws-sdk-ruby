@@ -310,6 +310,8 @@ module Aws::DatabaseMigrationService
     TargetDbType = Shapes::StringShape.new(name: 'TargetDbType')
     TestConnectionMessage = Shapes::StructureShape.new(name: 'TestConnectionMessage')
     TestConnectionResponse = Shapes::StructureShape.new(name: 'TestConnectionResponse')
+    UpdateSubscriptionsToEventBridgeMessage = Shapes::StructureShape.new(name: 'UpdateSubscriptionsToEventBridgeMessage')
+    UpdateSubscriptionsToEventBridgeResponse = Shapes::StructureShape.new(name: 'UpdateSubscriptionsToEventBridgeResponse')
     UpgradeDependencyFailureFault = Shapes::StructureShape.new(name: 'UpgradeDependencyFailureFault')
     VersionStatus = Shapes::StringShape.new(name: 'VersionStatus')
     VpcSecurityGroupIdList = Shapes::ListShape.new(name: 'VpcSecurityGroupIdList')
@@ -1777,6 +1779,12 @@ module Aws::DatabaseMigrationService
     TestConnectionResponse.add_member(:connection, Shapes::ShapeRef.new(shape: Connection, location_name: "Connection"))
     TestConnectionResponse.struct_class = Types::TestConnectionResponse
 
+    UpdateSubscriptionsToEventBridgeMessage.add_member(:force_move, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ForceMove"))
+    UpdateSubscriptionsToEventBridgeMessage.struct_class = Types::UpdateSubscriptionsToEventBridgeMessage
+
+    UpdateSubscriptionsToEventBridgeResponse.add_member(:result, Shapes::ShapeRef.new(shape: String, location_name: "Result"))
+    UpdateSubscriptionsToEventBridgeResponse.struct_class = Types::UpdateSubscriptionsToEventBridgeResponse
+
     UpgradeDependencyFailureFault.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     UpgradeDependencyFailureFault.struct_class = Types::UpgradeDependencyFailureFault
 
@@ -2633,6 +2641,16 @@ module Aws::DatabaseMigrationService
         o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
         o.errors << Shapes::ShapeRef.new(shape: ResourceQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
+      end)
+
+      api.add_operation(:update_subscriptions_to_event_bridge, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateSubscriptionsToEventBridge"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateSubscriptionsToEventBridgeMessage)
+        o.output = Shapes::ShapeRef.new(shape: UpdateSubscriptionsToEventBridgeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
       end)
     end
 

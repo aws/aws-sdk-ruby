@@ -7839,6 +7839,55 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
+    # Migrates 10 active and enabled Amazon SNS subscriptions at a time and
+    # converts them to corresponding Amazon EventBridge rules. By default,
+    # this operation migrates subscriptions only when all your replication
+    # instance versions are 3.4.6 or higher. If any replication instances
+    # are from versions earlier than 3.4.6, the operation raises an error
+    # and tells you to upgrade these instances to version 3.4.6 or higher.
+    # To enable migration regardless of version, set the `Force` option to
+    # true. However, if you don't upgrade instances earlier than version
+    # 3.4.6, some types of events might not be available when you use Amazon
+    # EventBridge.
+    #
+    # To call this operation, make sure that you have certain permissions
+    # added to your user account. For more information, see [Migrating event
+    # subscriptions to Amazon EventBridge][1] in the *Amazon Web Services
+    # Database Migration Service User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html#CHAP_Events-migrate-to-eventbridge
+    #
+    # @option params [Boolean] :force_move
+    #   When set to true, this operation migrates DMS subscriptions for Amazon
+    #   SNS notifications no matter what your replication instance version is.
+    #   If not set or set to false, this operation runs only when all your
+    #   replication instances are from DMS version 3.4.6 or higher.
+    #
+    # @return [Types::UpdateSubscriptionsToEventBridgeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSubscriptionsToEventBridgeResponse#result #result} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_subscriptions_to_event_bridge({
+    #     force_move: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.result #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/UpdateSubscriptionsToEventBridge AWS API Documentation
+    #
+    # @overload update_subscriptions_to_event_bridge(params = {})
+    # @param [Hash] params ({})
+    def update_subscriptions_to_event_bridge(params = {}, options = {})
+      req = build_request(:update_subscriptions_to_event_bridge, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -7852,7 +7901,7 @@ module Aws::DatabaseMigrationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.69.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

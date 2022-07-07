@@ -1641,6 +1641,7 @@ module Aws::IoT
     CACertificateDescription.add_member(:customer_version, Shapes::ShapeRef.new(shape: CustomerVersion, location_name: "customerVersion"))
     CACertificateDescription.add_member(:generation_id, Shapes::ShapeRef.new(shape: GenerationId, location_name: "generationId"))
     CACertificateDescription.add_member(:validity, Shapes::ShapeRef.new(shape: CertificateValidity, location_name: "validity"))
+    CACertificateDescription.add_member(:certificate_mode, Shapes::ShapeRef.new(shape: CertificateMode, location_name: "certificateMode"))
     CACertificateDescription.struct_class = Types::CACertificateDescription
 
     CACertificates.member = Shapes::ShapeRef.new(shape: CACertificate)
@@ -3926,11 +3927,12 @@ module Aws::IoT
     ReasonForNonComplianceCodes.member = Shapes::ShapeRef.new(shape: ReasonForNonComplianceCode)
 
     RegisterCACertificateRequest.add_member(:ca_certificate, Shapes::ShapeRef.new(shape: CertificatePem, required: true, location_name: "caCertificate"))
-    RegisterCACertificateRequest.add_member(:verification_certificate, Shapes::ShapeRef.new(shape: CertificatePem, required: true, location_name: "verificationCertificate"))
+    RegisterCACertificateRequest.add_member(:verification_certificate, Shapes::ShapeRef.new(shape: CertificatePem, location_name: "verificationCertificate"))
     RegisterCACertificateRequest.add_member(:set_as_active, Shapes::ShapeRef.new(shape: SetAsActive, location: "querystring", location_name: "setAsActive"))
     RegisterCACertificateRequest.add_member(:allow_auto_registration, Shapes::ShapeRef.new(shape: AllowAutoRegistration, location: "querystring", location_name: "allowAutoRegistration"))
     RegisterCACertificateRequest.add_member(:registration_config, Shapes::ShapeRef.new(shape: RegistrationConfig, location_name: "registrationConfig"))
     RegisterCACertificateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    RegisterCACertificateRequest.add_member(:certificate_mode, Shapes::ShapeRef.new(shape: CertificateMode, location_name: "certificateMode"))
     RegisterCACertificateRequest.struct_class = Types::RegisterCACertificateRequest
 
     RegisterCACertificateResponse.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: CertificateArn, location_name: "certificateArn"))

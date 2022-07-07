@@ -4997,6 +4997,7 @@ module Aws::IoT
     #   resp.certificate_description.generation_id #=> String
     #   resp.certificate_description.validity.not_before #=> Time
     #   resp.certificate_description.validity.not_after #=> Time
+    #   resp.certificate_description.certificate_mode #=> String, one of "DEFAULT", "SNI_ONLY"
     #   resp.registration_config.template_body #=> String
     #   resp.registration_config.role_arn #=> String
     #
@@ -10636,14 +10637,10 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Registers a CA certificate with IoT. This CA certificate can then be
-    # used to sign device certificates, which can be then registered with
-    # IoT. You can register up to 10 CA certificates per Amazon Web Services
-    # account that have the same subject field. This enables you to have up
-    # to 10 certificate authorities sign your device certificates. If you
-    # have more than one CA certificate registered, make sure you pass the
-    # CA certificate when you register your device certificates with the
-    # RegisterCertificate action.
+    # Registers a CA certificate with Amazon Web Services IoT Core. There is
+    # no limit to the number of CA certificates you can register in your
+    # Amazon Web Services account. You can register up to 10 CA certificates
+    # with the same `CA subject field` per Amazon Web Services account.
     #
     # Requires permission to access the [RegisterCACertificate][1] action.
     #
@@ -10654,8 +10651,11 @@ module Aws::IoT
     # @option params [required, String] :ca_certificate
     #   The CA certificate.
     #
-    # @option params [required, String] :verification_certificate
-    #   The private key verification certificate.
+    # @option params [String] :verification_certificate
+    #   The private key verification certificate. If `certificateMode` is
+    #   `SNI_ONLY`, the `verificationCertificate` field must be empty. If
+    #   `certificateMode` is `DEFAULT` or not provided, the
+    #   `verificationCertificate` field must not be empty.
     #
     # @option params [Boolean] :set_as_active
     #   A boolean value that specifies if the CA certificate is set to active.
@@ -10683,6 +10683,21 @@ module Aws::IoT
     #
     #    </note>
     #
+    # @option params [String] :certificate_mode
+    #   Describes the certificate mode in which the Certificate Authority (CA)
+    #   will be registered. If the `verificationCertificate` field is not
+    #   provided, set `certificateMode` to be `SNI_ONLY`. If the
+    #   `verificationCertificate` field is provided, set `certificateMode` to
+    #   be `DEFAULT`. When `certificateMode` is not provided, it defaults to
+    #   `DEFAULT`. All the device certificates that are registered using this
+    #   CA will be registered in the same certificate mode as the CA. For more
+    #   information about certificate mode for device certificates, see [
+    #   certificate mode][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/apireference/API_CertificateDescription.html#iot-Type-CertificateDescription-certificateMode
+    #
     # @return [Types::RegisterCACertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RegisterCACertificateResponse#certificate_arn #certificate_arn} => String
@@ -10692,7 +10707,7 @@ module Aws::IoT
     #
     #   resp = client.register_ca_certificate({
     #     ca_certificate: "CertificatePem", # required
-    #     verification_certificate: "CertificatePem", # required
+    #     verification_certificate: "CertificatePem",
     #     set_as_active: false,
     #     allow_auto_registration: false,
     #     registration_config: {
@@ -10705,6 +10720,7 @@ module Aws::IoT
     #         value: "TagValue",
     #       },
     #     ],
+    #     certificate_mode: "DEFAULT", # accepts DEFAULT, SNI_ONLY
     #   })
     #
     # @example Response structure
@@ -10719,16 +10735,17 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Registers a device certificate with IoT. If you have more than one CA
-    # certificate that has the same subject field, you must specify the CA
-    # certificate that was used to sign the device certificate being
-    # registered.
+    # Registers a device certificate with IoT in the same [certificate
+    # mode][1] as the signing CA. If you have more than one CA certificate
+    # that has the same subject field, you must specify the CA certificate
+    # that was used to sign the device certificate being registered.
     #
-    # Requires permission to access the [RegisterCertificate][1] action.
+    # Requires permission to access the [RegisterCertificate][2] action.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    # [1]: https://docs.aws.amazon.com/iot/latest/apireference/API_CertificateDescription.html#iot-Type-CertificateDescription-certificateMode
+    # [2]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
     #
     # @option params [required, String] :certificate_pem
     #   The certificate data, in PEM format.
@@ -11397,7 +11414,12 @@ module Aws::IoT
     #   The search index name.
     #
     # @option params [required, String] :query_string
-    #   The search query string.
+    #   The search query string. For more information about the search query
+    #   syntax, see [Query syntax][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/query-syntax.html
     #
     # @option params [String] :next_token
     #   The token used to get the next set of results, or `null` if there are
@@ -13694,7 +13716,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.91.0'
+      context[:gem_version] = '1.92.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -91,6 +91,27 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
+    # The accuracy of the estimated position in meters. An empty value
+    # indicates that no position data is available. A value of ‘0.0’ value
+    # indicates that position data is available. This data corresponds to
+    # the position information that you specified instead of the position
+    # computed by solver.
+    #
+    # @!attribute [rw] horizontal_accuracy
+    #   The horizontal accuracy of the estimated position in meters.
+    #   @return [Float]
+    #
+    # @!attribute [rw] vertical_accuracy
+    #   The vertical accuracy of the estimated position in meters.
+    #   @return [Float]
+    #
+    class Accuracy < Struct.new(
+      :horizontal_accuracy,
+      :vertical_accuracy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AssociateAwsAccountWithPartnerAccountRequest
     #   data as a hash:
     #
@@ -385,8 +406,8 @@ module Aws::IoTWireless
     #   @return [Types::LoRaWANConnectionStatusEventNotificationConfigurations]
     #
     # @!attribute [rw] wireless_gateway_id_event_topic
-    #   Enum to denote whether the wireless gateway id connection status
-    #   event topic is enabled or disabled .
+    #   Enum to denote whether the wireless gateway ID connection status
+    #   event topic is enabled or disabled.
     #   @return [String]
     #
     class ConnectionStatusEventConfiguration < Struct.new(
@@ -933,6 +954,11 @@ module Aws::IoTWireless
     #             fuota: 1,
     #             multicast: 1,
     #             clock_sync: 1,
+    #             positioning: {
+    #               clock_sync: 1,
+    #               stream: 1,
+    #               gnss: 1,
+    #             },
     #           },
     #         },
     #         tags: [
@@ -1800,6 +1826,11 @@ module Aws::IoTWireless
     #         fuota: 1,
     #         multicast: 1,
     #         clock_sync: 1,
+    #         positioning: {
+    #           clock_sync: 1,
+    #           stream: 1,
+    #           gnss: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] fuota
@@ -1814,10 +1845,16 @@ module Aws::IoTWireless
     #   The Fport value.
     #   @return [Integer]
     #
+    # @!attribute [rw] positioning
+    #   FPort values for the GNSS, stream, and ClockSync functions of the
+    #   positioning information.
+    #   @return [Types::Positioning]
+    #
     class FPorts < Struct.new(
       :fuota,
       :multicast,
-      :clock_sync)
+      :clock_sync,
+      :positioning)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1944,19 +1981,19 @@ module Aws::IoTWireless
 
     # @!attribute [rw] device_registration_state
     #   Resource type event configuration for the device registration state
-    #   event
+    #   event.
     #   @return [Types::DeviceRegistrationStateResourceTypeEventConfiguration]
     #
     # @!attribute [rw] proximity
-    #   Resource type event configuration for the proximity event
+    #   Resource type event configuration for the proximity event.
     #   @return [Types::ProximityResourceTypeEventConfiguration]
     #
     # @!attribute [rw] join
-    #   Resource type event configuration for the join event
+    #   Resource type event configuration for the join event.
     #   @return [Types::JoinResourceTypeEventConfiguration]
     #
     # @!attribute [rw] connection_status
-    #   Resource type event configuration for the connection status event
+    #   Resource type event configuration for the connection status event.
     #   @return [Types::ConnectionStatusResourceTypeEventConfiguration]
     #
     class GetEventConfigurationByResourceTypesResponse < Struct.new(
@@ -2240,6 +2277,110 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetPositionConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_identifier: "PositionResourceIdentifier", # required
+    #         resource_type: "WirelessDevice", # required, accepts WirelessDevice, WirelessGateway
+    #       }
+    #
+    # @!attribute [rw] resource_identifier
+    #   Resource identifier used in a position configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   Resource type of the resource for which position configuration is
+    #   retrieved.
+    #   @return [String]
+    #
+    class GetPositionConfigurationRequest < Struct.new(
+      :resource_identifier,
+      :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] solvers
+    #   The wrapper for the solver configuration details object.
+    #   @return [Types::PositionSolverDetails]
+    #
+    # @!attribute [rw] destination
+    #   The position data destination that describes the AWS IoT rule that
+    #   processes the device's position data for use by AWS IoT Core for
+    #   LoRaWAN.
+    #   @return [String]
+    #
+    class GetPositionConfigurationResponse < Struct.new(
+      :solvers,
+      :destination)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetPositionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_identifier: "PositionResourceIdentifier", # required
+    #         resource_type: "WirelessDevice", # required, accepts WirelessDevice, WirelessGateway
+    #       }
+    #
+    # @!attribute [rw] resource_identifier
+    #   Resource identifier used to retrieve the position information.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   Resource type of the resource for which position information is
+    #   retrieved.
+    #   @return [String]
+    #
+    class GetPositionRequest < Struct.new(
+      :resource_identifier,
+      :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] position
+    #   The position information of the resource.
+    #   @return [Array<Float>]
+    #
+    # @!attribute [rw] accuracy
+    #   The accuracy of the estimated position in meters. An empty value
+    #   indicates that no position data is available. A value of ‘0.0’ value
+    #   indicates that position data is available. This data corresponds to
+    #   the position information that you specified instead of the position
+    #   computed by solver.
+    #   @return [Types::Accuracy]
+    #
+    # @!attribute [rw] solver_type
+    #   The type of solver used to identify the position of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] solver_provider
+    #   The vendor of the positioning solver.
+    #   @return [String]
+    #
+    # @!attribute [rw] solver_version
+    #   The version of the positioning solver.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp
+    #   The timestamp at which the device's position was determined.
+    #   @return [String]
+    #
+    class GetPositionResponse < Struct.new(
+      :position,
+      :accuracy,
+      :solver_type,
+      :solver_provider,
+      :solver_version,
+      :timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetResourceEventConfigurationRequest
     #   data as a hash:
     #
@@ -2260,7 +2401,7 @@ module Aws::IoTWireless
     #
     # @!attribute [rw] partner_type
     #   Partner type of the resource if the identifier type is
-    #   PartnerAccountId.
+    #   `PartnerAccountId`.
     #   @return [String]
     #
     class GetResourceEventConfigurationRequest < Struct.new(
@@ -2272,11 +2413,11 @@ module Aws::IoTWireless
     end
 
     # @!attribute [rw] device_registration_state
-    #   Event configuration for the device registration state event
+    #   Event configuration for the device registration state event.
     #   @return [Types::DeviceRegistrationStateEventConfiguration]
     #
     # @!attribute [rw] proximity
-    #   Event configuration for the Proximity event
+    #   Event configuration for the proximity event.
     #   @return [Types::ProximityEventConfiguration]
     #
     # @!attribute [rw] join
@@ -3196,6 +3337,53 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListPositionConfigurationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_type: "WirelessDevice", # accepts WirelessDevice, WirelessGateway
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] resource_type
+    #   Resource type for which position configurations are listed.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in this operation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
+    #   @return [String]
+    #
+    class ListPositionConfigurationsRequest < Struct.new(
+      :resource_type,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] position_configuration_list
+    #   A list of position configurations.
+    #   @return [Array<Types::PositionConfigurationItem>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to get the next set of results, or **null** if
+    #   there are no additional results.
+    #   @return [String]
+    #
+    class ListPositionConfigurationsResponse < Struct.new(
+      :position_configuration_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListQueuedMessagesRequest
     #   data as a hash:
     #
@@ -3501,7 +3689,7 @@ module Aws::IoTWireless
     #       }
     #
     # @!attribute [rw] gateway_eui_event_topic
-    #   Enum to denote whether the gateway eui connection status event topic
+    #   Enum to denote whether the gateway EUI connection status event topic
     #   is enabled or disabled.
     #   @return [String]
     #
@@ -3573,6 +3761,11 @@ module Aws::IoTWireless
     #           fuota: 1,
     #           multicast: 1,
     #           clock_sync: 1,
+    #           positioning: {
+    #             clock_sync: 1,
+    #             stream: 1,
+    #             gnss: 1,
+    #           },
     #         },
     #       }
     #
@@ -4050,7 +4243,7 @@ module Aws::IoTWireless
     #       }
     #
     # @!attribute [rw] dev_eui_event_topic
-    #   Enum to denote whether the dev eui join event topic is enabled or
+    #   Enum to denote whether the Dev EUI join event topic is enabled or
     #   disabled.
     #   @return [String]
     #
@@ -4273,6 +4466,13 @@ module Aws::IoTWireless
     #         abp_v1_0_x: {
     #           f_cnt_start: 1,
     #         },
+    #         f_ports: {
+    #           positioning: {
+    #             clock_sync: 1,
+    #             stream: 1,
+    #             gnss: 1,
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] device_profile_id
@@ -4291,11 +4491,16 @@ module Aws::IoTWireless
     #   ABP device object for update APIs for v1.0.x
     #   @return [Types::UpdateAbpV1_0_x]
     #
+    # @!attribute [rw] f_ports
+    #   FPorts object for the positioning information of the device.
+    #   @return [Types::UpdateFPorts]
+    #
     class LoRaWANUpdateDevice < Struct.new(
       :device_profile_id,
       :service_profile_id,
       :abp_v1_1,
-      :abp_v1_0_x)
+      :abp_v1_0_x,
+      :f_ports)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4496,6 +4701,101 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
+    # The wrapper for a position configuration.
+    #
+    # @!attribute [rw] resource_identifier
+    #   Resource identifier for the position configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   Resource type of the resource for the position configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] solvers
+    #   The details of the positioning solver object used to compute the
+    #   location.
+    #   @return [Types::PositionSolverDetails]
+    #
+    # @!attribute [rw] destination
+    #   The position data destination that describes the AWS IoT rule that
+    #   processes the device's position data for use by AWS IoT Core for
+    #   LoRaWAN.
+    #   @return [String]
+    #
+    class PositionConfigurationItem < Struct.new(
+      :resource_identifier,
+      :resource_type,
+      :solvers,
+      :destination)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The wrapper for position solver configurations.
+    #
+    # @note When making an API call, you may pass PositionSolverConfigurations
+    #   data as a hash:
+    #
+    #       {
+    #         semtech_gnss: {
+    #           status: "Enabled", # required, accepts Enabled, Disabled
+    #           fec: "ROSE", # required, accepts ROSE, NONE
+    #         },
+    #       }
+    #
+    # @!attribute [rw] semtech_gnss
+    #   The Semtech GNSS solver configuration object.
+    #   @return [Types::SemtechGnssConfiguration]
+    #
+    class PositionSolverConfigurations < Struct.new(
+      :semtech_gnss)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The wrapper for position solver details.
+    #
+    # @!attribute [rw] semtech_gnss
+    #   The Semtech GNSS solver object details.
+    #   @return [Types::SemtechGnssDetail]
+    #
+    class PositionSolverDetails < Struct.new(
+      :semtech_gnss)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The FPorts for the position information.
+    #
+    # @note When making an API call, you may pass Positioning
+    #   data as a hash:
+    #
+    #       {
+    #         clock_sync: 1,
+    #         stream: 1,
+    #         gnss: 1,
+    #       }
+    #
+    # @!attribute [rw] clock_sync
+    #   The Fport value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stream
+    #   The Fport value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] gnss
+    #   The Fport value.
+    #   @return [Integer]
+    #
+    class Positioning < Struct.new(
+      :clock_sync,
+      :stream,
+      :gnss)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Proximity event configuration object for enabling and disabling
     # relevant topics.
     #
@@ -4548,6 +4848,52 @@ module Aws::IoTWireless
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass PutPositionConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_identifier: "PositionResourceIdentifier", # required
+    #         resource_type: "WirelessDevice", # required, accepts WirelessDevice, WirelessGateway
+    #         solvers: {
+    #           semtech_gnss: {
+    #             status: "Enabled", # required, accepts Enabled, Disabled
+    #             fec: "ROSE", # required, accepts ROSE, NONE
+    #           },
+    #         },
+    #         destination: "DestinationName",
+    #       }
+    #
+    # @!attribute [rw] resource_identifier
+    #   Resource identifier used to update the position configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   Resource type of the resource for which you want to update the
+    #   position configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] solvers
+    #   The positioning solvers used to update the position configuration of
+    #   the resource.
+    #   @return [Types::PositionSolverConfigurations]
+    #
+    # @!attribute [rw] destination
+    #   The position data destination that describes the AWS IoT rule that
+    #   processes the device's position data for use by AWS IoT Core for
+    #   LoRaWAN.
+    #   @return [String]
+    #
+    class PutPositionConfigurationRequest < Struct.new(
+      :resource_identifier,
+      :resource_type,
+      :solvers,
+      :destination)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class PutPositionConfigurationResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass PutResourceLogLevelRequest
     #   data as a hash:
@@ -4636,6 +4982,58 @@ module Aws::IoTWireless
       :message,
       :resource_id,
       :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the Semtech GNSS solver configuration.
+    #
+    # @note When making an API call, you may pass SemtechGnssConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         status: "Enabled", # required, accepts Enabled, Disabled
+    #         fec: "ROSE", # required, accepts ROSE, NONE
+    #       }
+    #
+    # @!attribute [rw] status
+    #   The status indicating whether the solver is enabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] fec
+    #   Whether forward error correction is enabled.
+    #   @return [String]
+    #
+    class SemtechGnssConfiguration < Struct.new(
+      :status,
+      :fec)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details of the Semtech GNSS solver object.
+    #
+    # @!attribute [rw] provider
+    #   The vendor of the solver object.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of positioning solver used.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status indicating whether the solver is enabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] fec
+    #   Whether forward error correction is enabled.
+    #   @return [String]
+    #
+    class SemtechGnssDetail < Struct.new(
+      :provider,
+      :type,
+      :status,
+      :fec)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4923,8 +5321,8 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # SidewalkEventNotificationConfigurations object Event configuration
-    # object for Sidewalk related event topics.
+    # `SidewalkEventNotificationConfigurations` object, which is the event
+    # configuration object for Sidewalk-related event topics.
     #
     # @note When making an API call, you may pass SidewalkEventNotificationConfigurations
     #   data as a hash:
@@ -5291,7 +5689,7 @@ module Aws::IoTWireless
     #       }
     #
     # @!attribute [rw] wireless_device_frame_info
-    #   FrameInfo of your wireless device resources for the trace content.
+    #   `FrameInfo` of your wireless device resources for the trace content.
     #   Use FrameInfo to debug the communication between your LoRaWAN end
     #   devices and the network server.
     #   @return [String]
@@ -5471,6 +5869,29 @@ module Aws::IoTWireless
     end
 
     class UpdateEventConfigurationByResourceTypesResponse < Aws::EmptyStructure; end
+
+    # Object for updating the FPorts information.
+    #
+    # @note When making an API call, you may pass UpdateFPorts
+    #   data as a hash:
+    #
+    #       {
+    #         positioning: {
+    #           clock_sync: 1,
+    #           stream: 1,
+    #           gnss: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] positioning
+    #   Positioning FPorts for the ClockSync, Stream, and GNSS functions.
+    #   @return [Types::Positioning]
+    #
+    class UpdateFPorts < Struct.new(
+      :positioning)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass UpdateFuotaTaskRequest
     #   data as a hash:
@@ -5719,6 +6140,37 @@ module Aws::IoTWireless
 
     class UpdatePartnerAccountResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass UpdatePositionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_identifier: "PositionResourceIdentifier", # required
+    #         resource_type: "WirelessDevice", # required, accepts WirelessDevice, WirelessGateway
+    #         position: [1.0], # required
+    #       }
+    #
+    # @!attribute [rw] resource_identifier
+    #   Resource identifier of the resource for which position is updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   Resource type of the resource for which position is updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] position
+    #   The position information of the resource.
+    #   @return [Array<Float>]
+    #
+    class UpdatePositionRequest < Struct.new(
+      :resource_identifier,
+      :resource_type,
+      :position)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class UpdatePositionResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass UpdateResourceEventConfigurationRequest
     #   data as a hash:
     #
@@ -5763,23 +6215,23 @@ module Aws::IoTWireless
     #
     # @!attribute [rw] partner_type
     #   Partner type of the resource if the identifier type is
-    #   PartnerAccountId
+    #   `PartnerAccountId`
     #   @return [String]
     #
     # @!attribute [rw] device_registration_state
-    #   Event configuration for the device registration state event
+    #   Event configuration for the device registration state event.
     #   @return [Types::DeviceRegistrationStateEventConfiguration]
     #
     # @!attribute [rw] proximity
-    #   Event configuration for the Proximity event
+    #   Event configuration for the proximity event.
     #   @return [Types::ProximityEventConfiguration]
     #
     # @!attribute [rw] join
-    #   Event configuration for the join event
+    #   Event configuration for the join event.
     #   @return [Types::JoinEventConfiguration]
     #
     # @!attribute [rw] connection_status
-    #   Event configuration for the connection status event
+    #   Event configuration for the connection status event.
     #   @return [Types::ConnectionStatusEventConfiguration]
     #
     class UpdateResourceEventConfigurationRequest < Struct.new(
@@ -5812,6 +6264,13 @@ module Aws::IoTWireless
     #           },
     #           abp_v1_0_x: {
     #             f_cnt_start: 1,
+    #           },
+    #           f_ports: {
+    #             positioning: {
+    #               clock_sync: 1,
+    #               stream: 1,
+    #               gnss: 1,
+    #             },
     #           },
     #         },
     #       }

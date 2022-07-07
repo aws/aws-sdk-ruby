@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.130.0 (2022-07-07)
+------------------
+
+* Feature - Heterogeneous clusters: the ability to launch training jobs with multiple instance types. This enables running component of the training job on the instance type that is most suitable for it. e.g. doing data processing and augmentation on CPU instances and neural network training on GPU instances
+
 1.129.0 (2022-06-29)
 ------------------
 

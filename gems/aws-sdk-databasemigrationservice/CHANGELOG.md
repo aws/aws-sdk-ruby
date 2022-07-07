@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2022-07-07)
+------------------
+
+* Feature - New api to migrate event subscriptions to event bridge rules
+
 1.69.0 (2022-07-01)
 ------------------
 

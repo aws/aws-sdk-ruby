@@ -11142,6 +11142,42 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateSubscriptionsToEventBridgeMessage
+    #   data as a hash:
+    #
+    #       {
+    #         force_move: false,
+    #       }
+    #
+    # @!attribute [rw] force_move
+    #   When set to true, this operation migrates DMS subscriptions for
+    #   Amazon SNS notifications no matter what your replication instance
+    #   version is. If not set or set to false, this operation runs only
+    #   when all your replication instances are from DMS version 3.4.6 or
+    #   higher.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/UpdateSubscriptionsToEventBridgeMessage AWS API Documentation
+    #
+    class UpdateSubscriptionsToEventBridgeMessage < Struct.new(
+      :force_move)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] result
+    #   A string that indicates how many event subscriptions were migrated
+    #   and how many remain to be migrated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/UpdateSubscriptionsToEventBridgeResponse AWS API Documentation
+    #
+    class UpdateSubscriptionsToEventBridgeResponse < Struct.new(
+      :result)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An upgrade dependency is preventing the database migration.
     #
     # @!attribute [rw] message

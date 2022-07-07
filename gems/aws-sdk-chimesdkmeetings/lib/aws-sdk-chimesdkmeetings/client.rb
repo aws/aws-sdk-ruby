@@ -413,6 +413,32 @@ module Aws::ChimeSDKMeetings
     # Updates `AttendeeCapabilities` except the capabilities listed in an
     # `ExcludedAttendeeIds` table.
     #
+    # <note markdown="1"> You use the capabilities with a set of values that control what the
+    # capabilities can do, such as `SendReceive` data. For more information
+    # about those values, see .
+    #
+    #  </note>
+    #
+    # When using capabilities, be aware of these corner cases:
+    #
+    # * You can't set `content` capabilities to `SendReceive` or `Receive`
+    #   unless you also set `video` capabilities to `SendReceive` or
+    #   `Receive`. If you don't set the `video` capability to receive, the
+    #   response will contain an HTTP 400 Bad Request status code. However,
+    #   you can set your `video` capability to receive and you set your
+    #   `content` capability to not receive.
+    #
+    # * When you change an `audio` capability from `None` or `Receive` to
+    #   `Send` or `SendReceive` , and if the attendee left their microphone
+    #   unmuted, audio will flow from the attendee to the other meeting
+    #   participants.
+    #
+    # * When you change a `video` or `content` capability from `None` or
+    #   `Receive` to `Send` or `SendReceive` , and if the attendee turned on
+    #   their video or content streams, remote attendess can receive those
+    #   streams, but only after media renegotiation between the client and
+    #   the Amazon Chime back-end server.
+    #
     # @option params [required, String] :meeting_id
     #   The ID of the meeting associated with the update request.
     #
@@ -470,6 +496,32 @@ module Aws::ChimeSDKMeetings
     #   The capabilities (`audio`, `video`, or `content`) that you want to
     #   grant an attendee. If you don't specify capabilities, all users have
     #   send and receive capabilities on all media channels by default.
+    #
+    #   <note markdown="1"> You use the capabilities with a set of values that control what the
+    #   capabilities can do, such as `SendReceive` data. For more information
+    #   about those values, see .
+    #
+    #    </note>
+    #
+    #   When using capabilities, be aware of these corner cases:
+    #
+    #   * You can't set `content` capabilities to `SendReceive` or `Receive`
+    #     unless you also set `video` capabilities to `SendReceive` or
+    #     `Receive`. If you don't set the `video` capability to receive, the
+    #     response will contain an HTTP 400 Bad Request status code. However,
+    #     you can set your `video` capability to receive and you set your
+    #     `content` capability to not receive.
+    #
+    #   * When you change an `audio` capability from `None` or `Receive` to
+    #     `Send` or `SendReceive` , and if the attendee left their microphone
+    #     unmuted, audio will flow from the attendee to the other meeting
+    #     participants.
+    #
+    #   * When you change a `video` or `content` capability from `None` or
+    #     `Receive` to `Send` or `SendReceive` , and if the attendee turned on
+    #     their video or content streams, remote attendess can receive those
+    #     streams, but only after media renegotiation between the client and
+    #     the Amazon Chime back-end server.
     #
     # @return [Types::CreateAttendeeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -553,6 +605,10 @@ module Aws::ChimeSDKMeetings
     #   When specified, replicates the media from the primary meeting to the
     #   new meeting.
     #
+    # @option params [Array<String>] :tenant_ids
+    #   A consistent and opaque identifier, created and maintained by the
+    #   builder to represent a segment of their users.
+    #
     # @return [Types::CreateMeetingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateMeetingResponse#meeting #meeting} => Types::Meeting
@@ -575,6 +631,7 @@ module Aws::ChimeSDKMeetings
     #       },
     #     },
     #     primary_meeting_id: "PrimaryMeetingId",
+    #     tenant_ids: ["TenantId"],
     #   })
     #
     # @example Response structure
@@ -593,6 +650,8 @@ module Aws::ChimeSDKMeetings
     #   resp.meeting.media_placement.event_ingestion_url #=> String
     #   resp.meeting.meeting_features.audio.echo_reduction #=> String, one of "AVAILABLE", "UNAVAILABLE"
     #   resp.meeting.primary_meeting_id #=> String
+    #   resp.meeting.tenant_ids #=> Array
+    #   resp.meeting.tenant_ids[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/CreateMeeting AWS API Documentation
     #
@@ -654,6 +713,10 @@ module Aws::ChimeSDKMeetings
     #   When specified, replicates the media from the primary meeting to the
     #   new meeting.
     #
+    # @option params [Array<String>] :tenant_ids
+    #   A consistent and opaque identifier, created and maintained by the
+    #   builder to represent a segment of their users.
+    #
     # @return [Types::CreateMeetingWithAttendeesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateMeetingWithAttendeesResponse#meeting #meeting} => Types::Meeting
@@ -688,6 +751,7 @@ module Aws::ChimeSDKMeetings
     #       },
     #     ],
     #     primary_meeting_id: "PrimaryMeetingId",
+    #     tenant_ids: ["TenantId"],
     #   })
     #
     # @example Response structure
@@ -706,6 +770,8 @@ module Aws::ChimeSDKMeetings
     #   resp.meeting.media_placement.event_ingestion_url #=> String
     #   resp.meeting.meeting_features.audio.echo_reduction #=> String, one of "AVAILABLE", "UNAVAILABLE"
     #   resp.meeting.primary_meeting_id #=> String
+    #   resp.meeting.tenant_ids #=> Array
+    #   resp.meeting.tenant_ids[0] #=> String
     #   resp.attendees #=> Array
     #   resp.attendees[0].external_user_id #=> String
     #   resp.attendees[0].attendee_id #=> String
@@ -871,6 +937,8 @@ module Aws::ChimeSDKMeetings
     #   resp.meeting.media_placement.event_ingestion_url #=> String
     #   resp.meeting.meeting_features.audio.echo_reduction #=> String, one of "AVAILABLE", "UNAVAILABLE"
     #   resp.meeting.primary_meeting_id #=> String
+    #   resp.meeting.tenant_ids #=> Array
+    #   resp.meeting.tenant_ids[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/GetMeeting AWS API Documentation
     #
@@ -1010,6 +1078,32 @@ module Aws::ChimeSDKMeetings
 
     # The capabilties that you want to update.
     #
+    # <note markdown="1"> You use the capabilities with a set of values that control what the
+    # capabilities can do, such as `SendReceive` data. For more information
+    # about those values, see .
+    #
+    #  </note>
+    #
+    # When using capabilities, be aware of these corner cases:
+    #
+    # * You can't set `content` capabilities to `SendReceive` or `Receive`
+    #   unless you also set `video` capabilities to `SendReceive` or
+    #   `Receive`. If you don't set the `video` capability to receive, the
+    #   response will contain an HTTP 400 Bad Request status code. However,
+    #   you can set your `video` capability to receive and you set your
+    #   `content` capability to not receive.
+    #
+    # * When you change an `audio` capability from `None` or `Receive` to
+    #   `Send` or `SendReceive` , and if the attendee left their microphone
+    #   unmuted, audio will flow from the attendee to the other meeting
+    #   participants.
+    #
+    # * When you change a `video` or `content` capability from `None` or
+    #   `Receive` to `Send` or `SendReceive` , and if the attendee turned on
+    #   their video or content streams, remote attendess can receive those
+    #   streams, but only after media renegotiation between the client and
+    #   the Amazon Chime back-end server.
+    #
     # @option params [required, String] :meeting_id
     #   The ID of the meeting associated with the update request.
     #
@@ -1066,7 +1160,7 @@ module Aws::ChimeSDKMeetings
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chimesdkmeetings'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

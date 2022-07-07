@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2022-07-07)
+------------------
+
+* Feature - Adds 5 APIs: PutPositionConfiguration, GetPositionConfiguration, ListPositionConfigurations, UpdatePosition, GetPosition for the new Positioning Service feature which enables customers to configure solvers to calculate position of LoRaWAN devices, or specify position of LoRaWAN devices & gateways.
+
 1.23.0 (2022-04-27)
 ------------------
 

@@ -34,7 +34,33 @@ module Aws::ChimeSDKMeetings
     #   @return [String]
     #
     # @!attribute [rw] capabilities
-    #   The capabilities (audio, video, or content) assigned to an attendee.
+    #   The capabilities assigned to an attendee: audio, video, or content.
+    #
+    #   <note markdown="1"> You use the capabilities with a set of values that control what the
+    #   capabilities can do, such as `SendReceive` data. For more
+    #   information about those values, see .
+    #
+    #    </note>
+    #
+    #   When using capabilities, be aware of these corner cases:
+    #
+    #   * You can't set `content` capabilities to `SendReceive` or
+    #     `Receive` unless you also set `video` capabilities to
+    #     `SendReceive` or `Receive`. If you don't set the `video`
+    #     capability to receive, the response will contain an HTTP 400 Bad
+    #     Request status code. However, you can set your `video` capability
+    #     to receive and you set your `content` capability to not receive.
+    #
+    #   * When you change an `audio` capability from `None` or `Receive` to
+    #     `Send` or `SendReceive` , and if the attendee left their
+    #     microphone unmuted, audio will flow from the attendee to the other
+    #     meeting participants.
+    #
+    #   * When you change a `video` or `content` capability from `None` or
+    #     `Receive` to `Send` or `SendReceive` , and if the attendee turned
+    #     on their video or content streams, remote attendess can receive
+    #     those streams, but only after media renegotiation between the
+    #     client and the Amazon Chime back-end server.
     #   @return [Types::AttendeeCapabilities]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/Attendee AWS API Documentation
@@ -48,8 +74,33 @@ module Aws::ChimeSDKMeetings
       include Aws::Structure
     end
 
-    # The media capabilities of an attendee, including audio, video and
-    # content.
+    # The media capabilities of an attendee: audio, video, or content.
+    #
+    # <note markdown="1"> You use the capabilities with a set of values that control what the
+    # capabilities can do, such as `SendReceive` data. For more information
+    # about those values, see .
+    #
+    #  </note>
+    #
+    # When using capabilities, be aware of these corner cases:
+    #
+    # * You can't set `content` capabilities to `SendReceive` or `Receive`
+    #   unless you also set `video` capabilities to `SendReceive` or
+    #   `Receive`. If you don't set the `video` capability to receive, the
+    #   response will contain an HTTP 400 Bad Request status code. However,
+    #   you can set your `video` capability to receive and you set your
+    #   `content` capability to not receive.
+    #
+    # * When you change an `audio` capability from `None` or `Receive` to
+    #   `Send` or `SendReceive` , and if the attendee left their microphone
+    #   unmuted, audio will flow from the attendee to the other meeting
+    #   participants.
+    #
+    # * When you change a `video` or `content` capability from `None` or
+    #   `Receive` to `Send` or `SendReceive` , and if the attendee turned on
+    #   their video or content streams, remote attendess can receive those
+    #   streams, but only after media renegotiation between the client and
+    #   the Amazon Chime back-end server.
     #
     # @note When making an API call, you may pass AttendeeCapabilities
     #   data as a hash:
@@ -318,6 +369,32 @@ module Aws::ChimeSDKMeetings
     #   The capabilities (`audio`, `video`, or `content`) that you want to
     #   grant an attendee. If you don't specify capabilities, all users
     #   have send and receive capabilities on all media channels by default.
+    #
+    #   <note markdown="1"> You use the capabilities with a set of values that control what the
+    #   capabilities can do, such as `SendReceive` data. For more
+    #   information about those values, see .
+    #
+    #    </note>
+    #
+    #   When using capabilities, be aware of these corner cases:
+    #
+    #   * You can't set `content` capabilities to `SendReceive` or
+    #     `Receive` unless you also set `video` capabilities to
+    #     `SendReceive` or `Receive`. If you don't set the `video`
+    #     capability to receive, the response will contain an HTTP 400 Bad
+    #     Request status code. However, you can set your `video` capability
+    #     to receive and you set your `content` capability to not receive.
+    #
+    #   * When you change an `audio` capability from `None` or `Receive` to
+    #     `Send` or `SendReceive` , and if the attendee left their
+    #     microphone unmuted, audio will flow from the attendee to the other
+    #     meeting participants.
+    #
+    #   * When you change a `video` or `content` capability from `None` or
+    #     `Receive` to `Send` or `SendReceive` , and if the attendee turned
+    #     on their video or content streams, remote attendess can receive
+    #     those streams, but only after media renegotiation between the
+    #     client and the Amazon Chime back-end server.
     #   @return [Types::AttendeeCapabilities]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/CreateAttendeeRequest AWS API Documentation
@@ -394,6 +471,7 @@ module Aws::ChimeSDKMeetings
     #           },
     #         },
     #         primary_meeting_id: "PrimaryMeetingId",
+    #         tenant_ids: ["TenantId"],
     #       }
     #
     # @!attribute [rw] client_request_token
@@ -440,6 +518,11 @@ module Aws::ChimeSDKMeetings
     #   new meeting.
     #   @return [String]
     #
+    # @!attribute [rw] tenant_ids
+    #   A consistent and opaque identifier, created and maintained by the
+    #   builder to represent a segment of their users.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/CreateMeetingRequest AWS API Documentation
     #
     class CreateMeetingRequest < Struct.new(
@@ -449,7 +532,8 @@ module Aws::ChimeSDKMeetings
       :external_meeting_id,
       :notifications_configuration,
       :meeting_features,
-      :primary_meeting_id)
+      :primary_meeting_id,
+      :tenant_ids)
       SENSITIVE = [:client_request_token, :meeting_host_id, :external_meeting_id]
       include Aws::Structure
     end
@@ -496,6 +580,7 @@ module Aws::ChimeSDKMeetings
     #           },
     #         ],
     #         primary_meeting_id: "PrimaryMeetingId",
+    #         tenant_ids: ["TenantId"],
     #       }
     #
     # @!attribute [rw] client_request_token
@@ -546,6 +631,11 @@ module Aws::ChimeSDKMeetings
     #   new meeting.
     #   @return [String]
     #
+    # @!attribute [rw] tenant_ids
+    #   A consistent and opaque identifier, created and maintained by the
+    #   builder to represent a segment of their users.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/CreateMeetingWithAttendeesRequest AWS API Documentation
     #
     class CreateMeetingWithAttendeesRequest < Struct.new(
@@ -556,7 +646,8 @@ module Aws::ChimeSDKMeetings
       :meeting_features,
       :notifications_configuration,
       :attendees,
-      :primary_meeting_id)
+      :primary_meeting_id,
+      :tenant_ids)
       SENSITIVE = [:client_request_token, :meeting_host_id, :external_meeting_id]
       include Aws::Structure
     end
@@ -1056,6 +1147,10 @@ module Aws::ChimeSDKMeetings
     #   this meeting.
     #   @return [String]
     #
+    # @!attribute [rw] tenant_ids
+    #   Array of strings.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/Meeting AWS API Documentation
     #
     class Meeting < Struct.new(
@@ -1065,7 +1160,8 @@ module Aws::ChimeSDKMeetings
       :media_region,
       :media_placement,
       :meeting_features,
-      :primary_meeting_id)
+      :primary_meeting_id,
+      :tenant_ids)
       SENSITIVE = [:meeting_host_id, :external_meeting_id]
       include Aws::Structure
     end
@@ -1153,7 +1249,7 @@ module Aws::ChimeSDKMeetings
       include Aws::Structure
     end
 
-    # The service is currently unavailable.
+    # The service encountered an unexpected error.
     #
     # @!attribute [rw] code
     #   @return [String]
@@ -1273,7 +1369,7 @@ module Aws::ChimeSDKMeetings
       include Aws::Structure
     end
 
-    # The number of requests exceeds the limit.
+    # The number of customer requests exceeds the request rate limit.
     #
     # @!attribute [rw] code
     #   @return [String]
@@ -1430,15 +1526,7 @@ module Aws::ChimeSDKMeetings
     end
 
     # @!attribute [rw] attendee
-    #   An Amazon Chime SDK meeting attendee. Includes a unique `AttendeeId`
-    #   and `JoinToken`. The `JoinToken` allows a client to authenticate and
-    #   join as the specified attendee. The `JoinToken` expires when the
-    #   meeting ends, or when DeleteAttendee is called. After that, the
-    #   attendee is unable to join the meeting.
-    #
-    #   We recommend securely transferring each `JoinToken` from your server
-    #   application to the client so that no other client has access to the
-    #   token except for the one authorized to represent the attendee.
+    #   The updated attendee data.
     #   @return [Types::Attendee]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/UpdateAttendeeCapabilitiesResponse AWS API Documentation

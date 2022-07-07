@@ -1041,6 +1041,11 @@ module Aws::IoTWireless
     #         fuota: 1,
     #         multicast: 1,
     #         clock_sync: 1,
+    #         positioning: {
+    #           clock_sync: 1,
+    #           stream: 1,
+    #           gnss: 1,
+    #         },
     #       },
     #     },
     #     tags: [
@@ -1713,7 +1718,7 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
-    # Get the event configuration by resource types.
+    # Get the event configuration based on resource types.
     #
     # @return [Types::GetEventConfigurationByResourceTypesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1956,6 +1961,85 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
+    # Get the position information for a given resource.
+    #
+    # @option params [required, String] :resource_identifier
+    #   Resource identifier used to retrieve the position information.
+    #
+    # @option params [required, String] :resource_type
+    #   Resource type of the resource for which position information is
+    #   retrieved.
+    #
+    # @return [Types::GetPositionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPositionResponse#position #position} => Array&lt;Float&gt;
+    #   * {Types::GetPositionResponse#accuracy #accuracy} => Types::Accuracy
+    #   * {Types::GetPositionResponse#solver_type #solver_type} => String
+    #   * {Types::GetPositionResponse#solver_provider #solver_provider} => String
+    #   * {Types::GetPositionResponse#solver_version #solver_version} => String
+    #   * {Types::GetPositionResponse#timestamp #timestamp} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_position({
+    #     resource_identifier: "PositionResourceIdentifier", # required
+    #     resource_type: "WirelessDevice", # required, accepts WirelessDevice, WirelessGateway
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.position #=> Array
+    #   resp.position[0] #=> Float
+    #   resp.accuracy.horizontal_accuracy #=> Float
+    #   resp.accuracy.vertical_accuracy #=> Float
+    #   resp.solver_type #=> String, one of "GNSS"
+    #   resp.solver_provider #=> String, one of "Semtech"
+    #   resp.solver_version #=> String
+    #   resp.timestamp #=> String
+    #
+    # @overload get_position(params = {})
+    # @param [Hash] params ({})
+    def get_position(params = {}, options = {})
+      req = build_request(:get_position, params)
+      req.send_request(options)
+    end
+
+    # Get position configuration for a given resource.
+    #
+    # @option params [required, String] :resource_identifier
+    #   Resource identifier used in a position configuration.
+    #
+    # @option params [required, String] :resource_type
+    #   Resource type of the resource for which position configuration is
+    #   retrieved.
+    #
+    # @return [Types::GetPositionConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPositionConfigurationResponse#solvers #solvers} => Types::PositionSolverDetails
+    #   * {Types::GetPositionConfigurationResponse#destination #destination} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_position_configuration({
+    #     resource_identifier: "PositionResourceIdentifier", # required
+    #     resource_type: "WirelessDevice", # required, accepts WirelessDevice, WirelessGateway
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.solvers.semtech_gnss.provider #=> String, one of "Semtech"
+    #   resp.solvers.semtech_gnss.type #=> String, one of "GNSS"
+    #   resp.solvers.semtech_gnss.status #=> String, one of "Enabled", "Disabled"
+    #   resp.solvers.semtech_gnss.fec #=> String, one of "ROSE", "NONE"
+    #   resp.destination #=> String
+    #
+    # @overload get_position_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_position_configuration(params = {}, options = {})
+      req = build_request(:get_position_configuration, params)
+      req.send_request(options)
+    end
+
     # Get the event configuration for a particular resource identifier.
     #
     # @option params [required, String] :identifier
@@ -1967,7 +2051,7 @@ module Aws::IoTWireless
     #
     # @option params [String] :partner_type
     #   Partner type of the resource if the identifier type is
-    #   PartnerAccountId.
+    #   `PartnerAccountId`.
     #
     # @return [Types::GetResourceEventConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2181,6 +2265,9 @@ module Aws::IoTWireless
     #   resp.lo_ra_wan.f_ports.fuota #=> Integer
     #   resp.lo_ra_wan.f_ports.multicast #=> Integer
     #   resp.lo_ra_wan.f_ports.clock_sync #=> Integer
+    #   resp.lo_ra_wan.f_ports.positioning.clock_sync #=> Integer
+    #   resp.lo_ra_wan.f_ports.positioning.stream #=> Integer
+    #   resp.lo_ra_wan.f_ports.positioning.gnss #=> Integer
     #   resp.sidewalk.amazon_id #=> String
     #   resp.sidewalk.sidewalk_id #=> String
     #   resp.sidewalk.sidewalk_manufacturing_sn #=> String
@@ -2776,6 +2863,54 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
+    # List position configurations for a given resource, such as positioning
+    # solvers.
+    #
+    # @option params [String] :resource_type
+    #   Resource type for which position configurations are listed.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in this operation.
+    #
+    # @option params [String] :next_token
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
+    #
+    # @return [Types::ListPositionConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPositionConfigurationsResponse#position_configuration_list #position_configuration_list} => Array&lt;Types::PositionConfigurationItem&gt;
+    #   * {Types::ListPositionConfigurationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_position_configurations({
+    #     resource_type: "WirelessDevice", # accepts WirelessDevice, WirelessGateway
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.position_configuration_list #=> Array
+    #   resp.position_configuration_list[0].resource_identifier #=> String
+    #   resp.position_configuration_list[0].resource_type #=> String, one of "WirelessDevice", "WirelessGateway"
+    #   resp.position_configuration_list[0].solvers.semtech_gnss.provider #=> String, one of "Semtech"
+    #   resp.position_configuration_list[0].solvers.semtech_gnss.type #=> String, one of "GNSS"
+    #   resp.position_configuration_list[0].solvers.semtech_gnss.status #=> String, one of "Enabled", "Disabled"
+    #   resp.position_configuration_list[0].solvers.semtech_gnss.fec #=> String, one of "ROSE", "NONE"
+    #   resp.position_configuration_list[0].destination #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_position_configurations(params = {})
+    # @param [Hash] params ({})
+    def list_position_configurations(params = {}, options = {})
+      req = build_request(:list_position_configurations, params)
+      req.send_request(options)
+    end
+
     # List queued messages in the downlink queue.
     #
     # @option params [required, String] :id
@@ -3066,6 +3201,47 @@ module Aws::IoTWireless
     # @param [Hash] params ({})
     def list_wireless_gateways(params = {}, options = {})
       req = build_request(:list_wireless_gateways, params)
+      req.send_request(options)
+    end
+
+    # Put position configuration for a given resource.
+    #
+    # @option params [required, String] :resource_identifier
+    #   Resource identifier used to update the position configuration.
+    #
+    # @option params [required, String] :resource_type
+    #   Resource type of the resource for which you want to update the
+    #   position configuration.
+    #
+    # @option params [Types::PositionSolverConfigurations] :solvers
+    #   The positioning solvers used to update the position configuration of
+    #   the resource.
+    #
+    # @option params [String] :destination
+    #   The position data destination that describes the AWS IoT rule that
+    #   processes the device's position data for use by AWS IoT Core for
+    #   LoRaWAN.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_position_configuration({
+    #     resource_identifier: "PositionResourceIdentifier", # required
+    #     resource_type: "WirelessDevice", # required, accepts WirelessDevice, WirelessGateway
+    #     solvers: {
+    #       semtech_gnss: {
+    #         status: "Enabled", # required, accepts Enabled, Disabled
+    #         fec: "ROSE", # required, accepts ROSE, NONE
+    #       },
+    #     },
+    #     destination: "DestinationName",
+    #   })
+    #
+    # @overload put_position_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_position_configuration(params = {}, options = {})
+      req = build_request(:put_position_configuration, params)
       req.send_request(options)
     end
 
@@ -3474,7 +3650,7 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
-    # Update the event configuration by resource types.
+    # Update the event configuration based on resource types.
     #
     # @option params [Types::DeviceRegistrationStateResourceTypeEventConfiguration] :device_registration_state
     #   Device registration state resource type event configuration object for
@@ -3744,6 +3920,34 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
+    # Update the position information of a resource.
+    #
+    # @option params [required, String] :resource_identifier
+    #   Resource identifier of the resource for which position is updated.
+    #
+    # @option params [required, String] :resource_type
+    #   Resource type of the resource for which position is updated.
+    #
+    # @option params [required, Array<Float>] :position
+    #   The position information of the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_position({
+    #     resource_identifier: "PositionResourceIdentifier", # required
+    #     resource_type: "WirelessDevice", # required, accepts WirelessDevice, WirelessGateway
+    #     position: [1.0], # required
+    #   })
+    #
+    # @overload update_position(params = {})
+    # @param [Hash] params ({})
+    def update_position(params = {}, options = {})
+      req = build_request(:update_position, params)
+      req.send_request(options)
+    end
+
     # Update the event configuration for a particular resource identifier.
     #
     # @option params [required, String] :identifier
@@ -3755,19 +3959,19 @@ module Aws::IoTWireless
     #
     # @option params [String] :partner_type
     #   Partner type of the resource if the identifier type is
-    #   PartnerAccountId
+    #   `PartnerAccountId`
     #
     # @option params [Types::DeviceRegistrationStateEventConfiguration] :device_registration_state
-    #   Event configuration for the device registration state event
+    #   Event configuration for the device registration state event.
     #
     # @option params [Types::ProximityEventConfiguration] :proximity
-    #   Event configuration for the Proximity event
+    #   Event configuration for the proximity event.
     #
     # @option params [Types::JoinEventConfiguration] :join
-    #   Event configuration for the join event
+    #   Event configuration for the join event.
     #
     # @option params [Types::ConnectionStatusEventConfiguration] :connection_status
-    #   Event configuration for the connection status event
+    #   Event configuration for the connection status event.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3845,6 +4049,13 @@ module Aws::IoTWireless
     #       abp_v1_0_x: {
     #         f_cnt_start: 1,
     #       },
+    #       f_ports: {
+    #         positioning: {
+    #           clock_sync: 1,
+    #           stream: 1,
+    #           gnss: 1,
+    #         },
+    #       },
     #     },
     #   })
     #
@@ -3907,7 +4118,7 @@ module Aws::IoTWireless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotwireless'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

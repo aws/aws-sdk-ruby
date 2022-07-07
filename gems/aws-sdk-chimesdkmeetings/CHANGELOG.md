@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2022-07-07)
+------------------
+
+* Feature - Adds support for AppKeys and TenantIds in Amazon Chime SDK WebRTC sessions
+
 1.12.0 (2022-06-09)
 ------------------
 

@@ -770,6 +770,10 @@ module Aws::SageMaker
     InputDataConfig = Shapes::ListShape.new(name: 'InputDataConfig')
     InputMode = Shapes::StringShape.new(name: 'InputMode')
     InputModes = Shapes::ListShape.new(name: 'InputModes')
+    InstanceGroup = Shapes::StructureShape.new(name: 'InstanceGroup')
+    InstanceGroupName = Shapes::StringShape.new(name: 'InstanceGroupName')
+    InstanceGroupNames = Shapes::ListShape.new(name: 'InstanceGroupNames')
+    InstanceGroups = Shapes::ListShape.new(name: 'InstanceGroups')
     InstanceMetadataServiceConfiguration = Shapes::StructureShape.new(name: 'InstanceMetadataServiceConfiguration')
     InstanceType = Shapes::StringShape.new(name: 'InstanceType')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
@@ -4458,6 +4462,15 @@ module Aws::SageMaker
 
     InputModes.member = Shapes::ShapeRef.new(shape: TrainingInputMode)
 
+    InstanceGroup.add_member(:instance_type, Shapes::ShapeRef.new(shape: TrainingInstanceType, required: true, location_name: "InstanceType"))
+    InstanceGroup.add_member(:instance_count, Shapes::ShapeRef.new(shape: TrainingInstanceCount, required: true, location_name: "InstanceCount"))
+    InstanceGroup.add_member(:instance_group_name, Shapes::ShapeRef.new(shape: InstanceGroupName, required: true, location_name: "InstanceGroupName"))
+    InstanceGroup.struct_class = Types::InstanceGroup
+
+    InstanceGroupNames.member = Shapes::ShapeRef.new(shape: InstanceGroupName)
+
+    InstanceGroups.member = Shapes::ShapeRef.new(shape: InstanceGroup)
+
     InstanceMetadataServiceConfiguration.add_member(:minimum_instance_metadata_service_version, Shapes::ShapeRef.new(shape: MinimumInstanceMetadataServiceVersion, required: true, location_name: "MinimumInstanceMetadataServiceVersion"))
     InstanceMetadataServiceConfiguration.struct_class = Types::InstanceMetadataServiceConfiguration
 
@@ -6377,10 +6390,11 @@ module Aws::SageMaker
     ResolvedAttributes.add_member(:completion_criteria, Shapes::ShapeRef.new(shape: AutoMLJobCompletionCriteria, location_name: "CompletionCriteria"))
     ResolvedAttributes.struct_class = Types::ResolvedAttributes
 
-    ResourceConfig.add_member(:instance_type, Shapes::ShapeRef.new(shape: TrainingInstanceType, required: true, location_name: "InstanceType"))
-    ResourceConfig.add_member(:instance_count, Shapes::ShapeRef.new(shape: TrainingInstanceCount, required: true, location_name: "InstanceCount"))
+    ResourceConfig.add_member(:instance_type, Shapes::ShapeRef.new(shape: TrainingInstanceType, location_name: "InstanceType"))
+    ResourceConfig.add_member(:instance_count, Shapes::ShapeRef.new(shape: TrainingInstanceCount, location_name: "InstanceCount"))
     ResourceConfig.add_member(:volume_size_in_gb, Shapes::ShapeRef.new(shape: VolumeSizeInGB, required: true, location_name: "VolumeSizeInGB"))
     ResourceConfig.add_member(:volume_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
+    ResourceConfig.add_member(:instance_groups, Shapes::ShapeRef.new(shape: InstanceGroups, location_name: "InstanceGroups"))
     ResourceConfig.struct_class = Types::ResourceConfig
 
     ResourceInUse.add_member(:message, Shapes::ShapeRef.new(shape: FailureReason, location_name: "Message"))
@@ -6425,6 +6439,7 @@ module Aws::SageMaker
     S3DataSource.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
     S3DataSource.add_member(:s3_data_distribution_type, Shapes::ShapeRef.new(shape: S3DataDistribution, location_name: "S3DataDistributionType"))
     S3DataSource.add_member(:attribute_names, Shapes::ShapeRef.new(shape: AttributeNames, location_name: "AttributeNames"))
+    S3DataSource.add_member(:instance_group_names, Shapes::ShapeRef.new(shape: InstanceGroupNames, location_name: "InstanceGroupNames"))
     S3DataSource.struct_class = Types::S3DataSource
 
     S3StorageConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
