@@ -31,8 +31,9 @@ module AwsSdkCodeGenerator
         'xmlNamespace' => true,
         'streaming' => true, # transfer-encoding
         'requiresLength' => true, # transfer-encoding
-        'union' => false,
+        'union' => false, # should remain false
         'document' => true,
+        'jsonvalue' => true,
         # event stream modeling
         'event' => false,
         'eventstream' => false,
