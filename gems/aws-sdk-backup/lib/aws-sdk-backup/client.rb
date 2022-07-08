@@ -3245,11 +3245,10 @@ module Aws::Backup
     #   “transition to cold after days” setting cannot be changed after a
     #   backup has been transitioned to cold.
     #
-    #   Only resource types that support full Backup management can transition
-    #   their backups to cold storage. Those resource types are listed in the
-    #   "Full Backup management" section of the [ Feature availability by
-    #   resource][1] table. Backup ignores this expression for other resource
-    #   types.
+    #   Resource types that are able to be transitioned to cold storage are
+    #   listed in the "Lifecycle to cold storage" section of the [ Feature
+    #   availability by resource][1] table. Backup ignores this expression for
+    #   other resource types.
     #
     #
     #
@@ -3351,11 +3350,10 @@ module Aws::Backup
     #   days” setting. The “transition to cold after days” setting cannot be
     #   changed after a backup has been transitioned to cold.
     #
-    #   Only resource types that support full Backup management can transition
-    #   their backups to cold storage. Those resource types are listed in the
-    #   "Full Backup management" section of the [ Feature availability by
-    #   resource][1] table. Backup ignores this expression for other resource
-    #   types.
+    #   Resource types that are able to be transitioned to cold storage are
+    #   listed in the "Lifecycle to cold storage" section of the [ Feature
+    #   availability by resource][1] table. Backup ignores this expression for
+    #   other resource types.
     #
     #
     #
@@ -3479,7 +3477,7 @@ module Aws::Backup
     #     directories rather than the entire file system. This parameter is
     #     optional. For example, `"itemsToRestore":"["/my.test"]"`.
     #
-    # @option params [required, String] :iam_role_arn
+    # @option params [String] :iam_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that Backup uses to
     #   create the target recovery point; for example,
     #   `arn:aws:iam::123456789012:role/S3Access`.
@@ -3529,7 +3527,7 @@ module Aws::Backup
     #     metadata: { # required
     #       "MetadataKey" => "MetadataValue",
     #     },
-    #     iam_role_arn: "IAMRoleArn", # required
+    #     iam_role_arn: "IAMRoleArn",
     #     idempotency_token: "string",
     #     resource_type: "ResourceType",
     #   })
@@ -3826,11 +3824,10 @@ module Aws::Backup
     # “transition to cold after days” setting cannot be changed after a
     # backup has been transitioned to cold.
     #
-    # Only resource types that support full Backup management can transition
-    # their backups to cold storage. Those resource types are listed in the
-    # "Full Backup management" section of the [ Feature availability by
-    # resource][1] table. Backup ignores this expression for other resource
-    # types.
+    # Resource types that are able to be transitioned to cold storage are
+    # listed in the "Lifecycle to cold storage" section of the [ Feature
+    # availability by resource][1] table. Backup ignores this expression for
+    # other resource types.
     #
     # This operation does not support continuous backups.
     #
@@ -4030,7 +4027,7 @@ module Aws::Backup
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-backup'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1159,7 +1159,7 @@ module Aws::Backup
 
     StartRestoreJobInput.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "RecoveryPointArn"))
     StartRestoreJobInput.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, required: true, location_name: "Metadata"))
-    StartRestoreJobInput.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, required: true, location_name: "IamRoleArn"))
+    StartRestoreJobInput.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "IamRoleArn"))
     StartRestoreJobInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: string, location_name: "IdempotencyToken"))
     StartRestoreJobInput.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     StartRestoreJobInput.struct_class = Types::StartRestoreJobInput
