@@ -385,13 +385,19 @@ module Aws::Redshift
     #   data as a hash:
     #
     #       {
-    #         snapshot_identifier: "String", # required
+    #         snapshot_identifier: "String",
+    #         snapshot_arn: "String",
     #         snapshot_cluster_identifier: "String",
     #         account_with_restore_access: "String", # required
     #       }
     #
     # @!attribute [rw] snapshot_identifier
     #   The identifier of the snapshot the account is authorized to restore.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_arn
+    #   The Amazon Resource Name (ARN) of the snapshot to authorize access
+    #   to.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_cluster_identifier
@@ -413,6 +419,7 @@ module Aws::Redshift
     #
     class AuthorizeSnapshotAccessMessage < Struct.new(
       :snapshot_identifier,
+      :snapshot_arn,
       :snapshot_cluster_identifier,
       :account_with_restore_access)
       SENSITIVE = []
@@ -2207,7 +2214,9 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] elastic_ip
-    #   The Elastic IP (EIP) address for the cluster.
+    #   The Elastic IP (EIP) address for the cluster. You don't have to
+    #   specify the EIP for a publicly accessible cluster with
+    #   AvailabilityZoneRelocation turned on.
     #
     #   Constraints: The cluster must be provisioned in EC2-VPC and
     #   publicly-accessible through an Internet gateway. For more
@@ -4210,6 +4219,7 @@ module Aws::Redshift
     #       {
     #         cluster_identifier: "String",
     #         snapshot_identifier: "String",
+    #         snapshot_arn: "String",
     #         snapshot_type: "String",
     #         start_time: Time.now,
     #         end_time: Time.now,
@@ -4235,6 +4245,11 @@ module Aws::Redshift
     # @!attribute [rw] snapshot_identifier
     #   The snapshot identifier of the snapshot about which to return
     #   information.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_arn
+    #   The Amazon Resource Name (ARN) of the snapshot associated with the
+    #   message to describe cluster snapshots.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_type
@@ -4348,6 +4363,7 @@ module Aws::Redshift
     class DescribeClusterSnapshotsMessage < Struct.new(
       :cluster_identifier,
       :snapshot_identifier,
+      :snapshot_arn,
       :snapshot_type,
       :start_time,
       :end_time,
@@ -5375,6 +5391,7 @@ module Aws::Redshift
     #         action_type: "restore-cluster", # required, accepts restore-cluster, recommend-node-config, resize-cluster
     #         cluster_identifier: "String",
     #         snapshot_identifier: "String",
+    #         snapshot_arn: "String",
     #         owner_account: "String",
     #         filters: [
     #           {
@@ -5404,6 +5421,11 @@ module Aws::Redshift
     # @!attribute [rw] snapshot_identifier
     #   The identifier of the snapshot to evaluate for possible node
     #   configurations.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_arn
+    #   The Amazon Resource Name (ARN) of the snapshot associated with the
+    #   message to describe node configuration.
     #   @return [String]
     #
     # @!attribute [rw] owner_account
@@ -5444,6 +5466,7 @@ module Aws::Redshift
       :action_type,
       :cluster_identifier,
       :snapshot_identifier,
+      :snapshot_arn,
       :owner_account,
       :filters,
       :marker,
@@ -10173,7 +10196,8 @@ module Aws::Redshift
     #
     #       {
     #         cluster_identifier: "String", # required
-    #         snapshot_identifier: "String", # required
+    #         snapshot_identifier: "String",
+    #         snapshot_arn: "String",
     #         snapshot_cluster_identifier: "String",
     #         port: 1,
     #         availability_zone: "String",
@@ -10229,6 +10253,11 @@ module Aws::Redshift
     #   parameter isn't case sensitive.
     #
     #   Example: `my-snapshot-id`
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_arn
+    #   The Amazon Resource Name (ARN) of the snapshot associated with the
+    #   message to restore from a cluster.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_cluster_identifier
@@ -10292,7 +10321,9 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] elastic_ip
-    #   The elastic IP (EIP) address for the cluster.
+    #   The elastic IP (EIP) address for the cluster. You don't have to
+    #   specify the EIP for a publicly accessible cluster with
+    #   AvailabilityZoneRelocation turned on.
     #   @return [String]
     #
     # @!attribute [rw] cluster_parameter_group_name
@@ -10505,6 +10536,7 @@ module Aws::Redshift
     class RestoreFromClusterSnapshotMessage < Struct.new(
       :cluster_identifier,
       :snapshot_identifier,
+      :snapshot_arn,
       :snapshot_cluster_identifier,
       :port,
       :availability_zone,
@@ -10855,7 +10887,8 @@ module Aws::Redshift
     #   data as a hash:
     #
     #       {
-    #         snapshot_identifier: "String", # required
+    #         snapshot_identifier: "String",
+    #         snapshot_arn: "String",
     #         snapshot_cluster_identifier: "String",
     #         account_with_restore_access: "String", # required
     #       }
@@ -10863,6 +10896,11 @@ module Aws::Redshift
     # @!attribute [rw] snapshot_identifier
     #   The identifier of the snapshot that the account can no longer
     #   access.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_arn
+    #   The Amazon Resource Name (ARN) of the snapshot associated with the
+    #   message to revoke access.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_cluster_identifier
@@ -10881,6 +10919,7 @@ module Aws::Redshift
     #
     class RevokeSnapshotAccessMessage < Struct.new(
       :snapshot_identifier,
+      :snapshot_arn,
       :snapshot_cluster_identifier,
       :account_with_restore_access)
       SENSITIVE = []

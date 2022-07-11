@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2022-07-11)
+------------------
+
+* Feature - Removed prerelease language for GA launch.
+
 1.2.0 (2022-06-29)
 ------------------
 

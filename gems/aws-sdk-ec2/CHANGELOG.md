@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.321.0 (2022-07-11)
+------------------
+
+* Feature - Build, manage, and monitor a unified global network that connects resources running across your cloud and on-premises environments using the AWS Cloud WAN APIs.
+
 1.320.0 (2022-06-28)
 ------------------
 

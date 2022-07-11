@@ -710,8 +710,11 @@ module Aws::Redshift
     #
     # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html
     #
-    # @option params [required, String] :snapshot_identifier
+    # @option params [String] :snapshot_identifier
     #   The identifier of the snapshot the account is authorized to restore.
+    #
+    # @option params [String] :snapshot_arn
+    #   The Amazon Resource Name (ARN) of the snapshot to authorize access to.
     #
     # @option params [String] :snapshot_cluster_identifier
     #   The identifier of the cluster the snapshot was created from. This
@@ -733,7 +736,8 @@ module Aws::Redshift
     # @example Request syntax with placeholder values
     #
     #   resp = client.authorize_snapshot_access({
-    #     snapshot_identifier: "String", # required
+    #     snapshot_identifier: "String",
+    #     snapshot_arn: "String",
     #     snapshot_cluster_identifier: "String",
     #     account_with_restore_access: "String", # required
     #   })
@@ -1388,7 +1392,9 @@ module Aws::Redshift
     #   keys in an HSM.
     #
     # @option params [String] :elastic_ip
-    #   The Elastic IP (EIP) address for the cluster.
+    #   The Elastic IP (EIP) address for the cluster. You don't have to
+    #   specify the EIP for a publicly accessible cluster with
+    #   AvailabilityZoneRelocation turned on.
     #
     #   Constraints: The cluster must be provisioned in EC2-VPC and
     #   publicly-accessible through an Internet gateway. For more information
@@ -3957,6 +3963,10 @@ module Aws::Redshift
     #   The snapshot identifier of the snapshot about which to return
     #   information.
     #
+    # @option params [String] :snapshot_arn
+    #   The Amazon Resource Name (ARN) of the snapshot associated with the
+    #   message to describe cluster snapshots.
+    #
     # @option params [String] :snapshot_type
     #   The type of snapshots for which you are requesting information. By
     #   default, snapshots of all types are returned.
@@ -4064,6 +4074,7 @@ module Aws::Redshift
     #   resp = client.describe_cluster_snapshots({
     #     cluster_identifier: "String",
     #     snapshot_identifier: "String",
+    #     snapshot_arn: "String",
     #     snapshot_type: "String",
     #     start_time: Time.now,
     #     end_time: Time.now,
@@ -5550,6 +5561,10 @@ module Aws::Redshift
     #   The identifier of the snapshot to evaluate for possible node
     #   configurations.
     #
+    # @option params [String] :snapshot_arn
+    #   The Amazon Resource Name (ARN) of the snapshot associated with the
+    #   message to describe node configuration.
+    #
     # @option params [String] :owner_account
     #   The Amazon Web Services account used to create or copy the snapshot.
     #   Required if you are restoring a snapshot you do not own, optional if
@@ -5591,6 +5606,7 @@ module Aws::Redshift
     #     action_type: "restore-cluster", # required, accepts restore-cluster, recommend-node-config, resize-cluster
     #     cluster_identifier: "String",
     #     snapshot_identifier: "String",
+    #     snapshot_arn: "String",
     #     owner_account: "String",
     #     filters: [
     #       {
@@ -10047,11 +10063,15 @@ module Aws::Redshift
     #   * Must be unique for all clusters within an Amazon Web Services
     #     account.
     #
-    # @option params [required, String] :snapshot_identifier
+    # @option params [String] :snapshot_identifier
     #   The name of the snapshot from which to create the new cluster. This
     #   parameter isn't case sensitive.
     #
     #   Example: `my-snapshot-id`
+    #
+    # @option params [String] :snapshot_arn
+    #   The Amazon Resource Name (ARN) of the snapshot associated with the
+    #   message to restore from a cluster.
     #
     # @option params [String] :snapshot_cluster_identifier
     #   The name of the cluster the source snapshot was created from. This
@@ -10105,7 +10125,9 @@ module Aws::Redshift
     #   keys in an HSM.
     #
     # @option params [String] :elastic_ip
-    #   The elastic IP (EIP) address for the cluster.
+    #   The elastic IP (EIP) address for the cluster. You don't have to
+    #   specify the EIP for a publicly accessible cluster with
+    #   AvailabilityZoneRelocation turned on.
     #
     # @option params [String] :cluster_parameter_group_name
     #   The name of the parameter group to be associated with this cluster.
@@ -10297,7 +10319,8 @@ module Aws::Redshift
     #
     #   resp = client.restore_from_cluster_snapshot({
     #     cluster_identifier: "String", # required
-    #     snapshot_identifier: "String", # required
+    #     snapshot_identifier: "String",
+    #     snapshot_arn: "String",
     #     snapshot_cluster_identifier: "String",
     #     port: 1,
     #     availability_zone: "String",
@@ -10847,8 +10870,12 @@ module Aws::Redshift
     #
     # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html
     #
-    # @option params [required, String] :snapshot_identifier
+    # @option params [String] :snapshot_identifier
     #   The identifier of the snapshot that the account can no longer access.
+    #
+    # @option params [String] :snapshot_arn
+    #   The Amazon Resource Name (ARN) of the snapshot associated with the
+    #   message to revoke access.
     #
     # @option params [String] :snapshot_cluster_identifier
     #   The identifier of the cluster the snapshot was created from. This
@@ -10867,7 +10894,8 @@ module Aws::Redshift
     # @example Request syntax with placeholder values
     #
     #   resp = client.revoke_snapshot_access({
-    #     snapshot_identifier: "String", # required
+    #     snapshot_identifier: "String",
+    #     snapshot_arn: "String",
     #     snapshot_cluster_identifier: "String",
     #     account_with_restore_access: "String", # required
     #   })
@@ -11137,7 +11165,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.83.0'
+      context[:gem_version] = '1.84.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

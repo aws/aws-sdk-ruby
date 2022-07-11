@@ -122,6 +122,8 @@ module Aws::EC2
     AssociateSubnetCidrBlockResult = Shapes::StructureShape.new(name: 'AssociateSubnetCidrBlockResult')
     AssociateTransitGatewayMulticastDomainRequest = Shapes::StructureShape.new(name: 'AssociateTransitGatewayMulticastDomainRequest')
     AssociateTransitGatewayMulticastDomainResult = Shapes::StructureShape.new(name: 'AssociateTransitGatewayMulticastDomainResult')
+    AssociateTransitGatewayPolicyTableRequest = Shapes::StructureShape.new(name: 'AssociateTransitGatewayPolicyTableRequest')
+    AssociateTransitGatewayPolicyTableResult = Shapes::StructureShape.new(name: 'AssociateTransitGatewayPolicyTableResult')
     AssociateTransitGatewayRouteTableRequest = Shapes::StructureShape.new(name: 'AssociateTransitGatewayRouteTableRequest')
     AssociateTransitGatewayRouteTableResult = Shapes::StructureShape.new(name: 'AssociateTransitGatewayRouteTableResult')
     AssociateTrunkInterfaceRequest = Shapes::StructureShape.new(name: 'AssociateTrunkInterfaceRequest')
@@ -453,13 +455,18 @@ module Aws::EC2
     CreateTransitGatewayMulticastDomainRequestOptions = Shapes::StructureShape.new(name: 'CreateTransitGatewayMulticastDomainRequestOptions')
     CreateTransitGatewayMulticastDomainResult = Shapes::StructureShape.new(name: 'CreateTransitGatewayMulticastDomainResult')
     CreateTransitGatewayPeeringAttachmentRequest = Shapes::StructureShape.new(name: 'CreateTransitGatewayPeeringAttachmentRequest')
+    CreateTransitGatewayPeeringAttachmentRequestOptions = Shapes::StructureShape.new(name: 'CreateTransitGatewayPeeringAttachmentRequestOptions')
     CreateTransitGatewayPeeringAttachmentResult = Shapes::StructureShape.new(name: 'CreateTransitGatewayPeeringAttachmentResult')
+    CreateTransitGatewayPolicyTableRequest = Shapes::StructureShape.new(name: 'CreateTransitGatewayPolicyTableRequest')
+    CreateTransitGatewayPolicyTableResult = Shapes::StructureShape.new(name: 'CreateTransitGatewayPolicyTableResult')
     CreateTransitGatewayPrefixListReferenceRequest = Shapes::StructureShape.new(name: 'CreateTransitGatewayPrefixListReferenceRequest')
     CreateTransitGatewayPrefixListReferenceResult = Shapes::StructureShape.new(name: 'CreateTransitGatewayPrefixListReferenceResult')
     CreateTransitGatewayRequest = Shapes::StructureShape.new(name: 'CreateTransitGatewayRequest')
     CreateTransitGatewayResult = Shapes::StructureShape.new(name: 'CreateTransitGatewayResult')
     CreateTransitGatewayRouteRequest = Shapes::StructureShape.new(name: 'CreateTransitGatewayRouteRequest')
     CreateTransitGatewayRouteResult = Shapes::StructureShape.new(name: 'CreateTransitGatewayRouteResult')
+    CreateTransitGatewayRouteTableAnnouncementRequest = Shapes::StructureShape.new(name: 'CreateTransitGatewayRouteTableAnnouncementRequest')
+    CreateTransitGatewayRouteTableAnnouncementResult = Shapes::StructureShape.new(name: 'CreateTransitGatewayRouteTableAnnouncementResult')
     CreateTransitGatewayRouteTableRequest = Shapes::StructureShape.new(name: 'CreateTransitGatewayRouteTableRequest')
     CreateTransitGatewayRouteTableResult = Shapes::StructureShape.new(name: 'CreateTransitGatewayRouteTableResult')
     CreateTransitGatewayVpcAttachmentRequest = Shapes::StructureShape.new(name: 'CreateTransitGatewayVpcAttachmentRequest')
@@ -598,12 +605,16 @@ module Aws::EC2
     DeleteTransitGatewayMulticastDomainResult = Shapes::StructureShape.new(name: 'DeleteTransitGatewayMulticastDomainResult')
     DeleteTransitGatewayPeeringAttachmentRequest = Shapes::StructureShape.new(name: 'DeleteTransitGatewayPeeringAttachmentRequest')
     DeleteTransitGatewayPeeringAttachmentResult = Shapes::StructureShape.new(name: 'DeleteTransitGatewayPeeringAttachmentResult')
+    DeleteTransitGatewayPolicyTableRequest = Shapes::StructureShape.new(name: 'DeleteTransitGatewayPolicyTableRequest')
+    DeleteTransitGatewayPolicyTableResult = Shapes::StructureShape.new(name: 'DeleteTransitGatewayPolicyTableResult')
     DeleteTransitGatewayPrefixListReferenceRequest = Shapes::StructureShape.new(name: 'DeleteTransitGatewayPrefixListReferenceRequest')
     DeleteTransitGatewayPrefixListReferenceResult = Shapes::StructureShape.new(name: 'DeleteTransitGatewayPrefixListReferenceResult')
     DeleteTransitGatewayRequest = Shapes::StructureShape.new(name: 'DeleteTransitGatewayRequest')
     DeleteTransitGatewayResult = Shapes::StructureShape.new(name: 'DeleteTransitGatewayResult')
     DeleteTransitGatewayRouteRequest = Shapes::StructureShape.new(name: 'DeleteTransitGatewayRouteRequest')
     DeleteTransitGatewayRouteResult = Shapes::StructureShape.new(name: 'DeleteTransitGatewayRouteResult')
+    DeleteTransitGatewayRouteTableAnnouncementRequest = Shapes::StructureShape.new(name: 'DeleteTransitGatewayRouteTableAnnouncementRequest')
+    DeleteTransitGatewayRouteTableAnnouncementResult = Shapes::StructureShape.new(name: 'DeleteTransitGatewayRouteTableAnnouncementResult')
     DeleteTransitGatewayRouteTableRequest = Shapes::StructureShape.new(name: 'DeleteTransitGatewayRouteTableRequest')
     DeleteTransitGatewayRouteTableResult = Shapes::StructureShape.new(name: 'DeleteTransitGatewayRouteTableResult')
     DeleteTransitGatewayVpcAttachmentRequest = Shapes::StructureShape.new(name: 'DeleteTransitGatewayVpcAttachmentRequest')
@@ -906,6 +917,10 @@ module Aws::EC2
     DescribeTransitGatewayMulticastDomainsResult = Shapes::StructureShape.new(name: 'DescribeTransitGatewayMulticastDomainsResult')
     DescribeTransitGatewayPeeringAttachmentsRequest = Shapes::StructureShape.new(name: 'DescribeTransitGatewayPeeringAttachmentsRequest')
     DescribeTransitGatewayPeeringAttachmentsResult = Shapes::StructureShape.new(name: 'DescribeTransitGatewayPeeringAttachmentsResult')
+    DescribeTransitGatewayPolicyTablesRequest = Shapes::StructureShape.new(name: 'DescribeTransitGatewayPolicyTablesRequest')
+    DescribeTransitGatewayPolicyTablesResult = Shapes::StructureShape.new(name: 'DescribeTransitGatewayPolicyTablesResult')
+    DescribeTransitGatewayRouteTableAnnouncementsRequest = Shapes::StructureShape.new(name: 'DescribeTransitGatewayRouteTableAnnouncementsRequest')
+    DescribeTransitGatewayRouteTableAnnouncementsResult = Shapes::StructureShape.new(name: 'DescribeTransitGatewayRouteTableAnnouncementsResult')
     DescribeTransitGatewayRouteTablesRequest = Shapes::StructureShape.new(name: 'DescribeTransitGatewayRouteTablesRequest')
     DescribeTransitGatewayRouteTablesResult = Shapes::StructureShape.new(name: 'DescribeTransitGatewayRouteTablesResult')
     DescribeTransitGatewayVpcAttachmentsRequest = Shapes::StructureShape.new(name: 'DescribeTransitGatewayVpcAttachmentsRequest')
@@ -1012,6 +1027,8 @@ module Aws::EC2
     DisassociateSubnetCidrBlockResult = Shapes::StructureShape.new(name: 'DisassociateSubnetCidrBlockResult')
     DisassociateTransitGatewayMulticastDomainRequest = Shapes::StructureShape.new(name: 'DisassociateTransitGatewayMulticastDomainRequest')
     DisassociateTransitGatewayMulticastDomainResult = Shapes::StructureShape.new(name: 'DisassociateTransitGatewayMulticastDomainResult')
+    DisassociateTransitGatewayPolicyTableRequest = Shapes::StructureShape.new(name: 'DisassociateTransitGatewayPolicyTableRequest')
+    DisassociateTransitGatewayPolicyTableResult = Shapes::StructureShape.new(name: 'DisassociateTransitGatewayPolicyTableResult')
     DisassociateTransitGatewayRouteTableRequest = Shapes::StructureShape.new(name: 'DisassociateTransitGatewayRouteTableRequest')
     DisassociateTransitGatewayRouteTableResult = Shapes::StructureShape.new(name: 'DisassociateTransitGatewayRouteTableResult')
     DisassociateTrunkInterfaceRequest = Shapes::StructureShape.new(name: 'DisassociateTrunkInterfaceRequest')
@@ -1040,6 +1057,7 @@ module Aws::EC2
     DomainType = Shapes::StringShape.new(name: 'DomainType')
     Double = Shapes::FloatShape.new(name: 'Double')
     DoubleWithConstraints = Shapes::FloatShape.new(name: 'DoubleWithConstraints')
+    DynamicRoutingValue = Shapes::StringShape.new(name: 'DynamicRoutingValue')
     EbsBlockDevice = Shapes::StructureShape.new(name: 'EbsBlockDevice')
     EbsEncryptionSupport = Shapes::StringShape.new(name: 'EbsEncryptionSupport')
     EbsInfo = Shapes::StructureShape.new(name: 'EbsInfo')
@@ -1280,6 +1298,10 @@ module Aws::EC2
     GetTransitGatewayAttachmentPropagationsResult = Shapes::StructureShape.new(name: 'GetTransitGatewayAttachmentPropagationsResult')
     GetTransitGatewayMulticastDomainAssociationsRequest = Shapes::StructureShape.new(name: 'GetTransitGatewayMulticastDomainAssociationsRequest')
     GetTransitGatewayMulticastDomainAssociationsResult = Shapes::StructureShape.new(name: 'GetTransitGatewayMulticastDomainAssociationsResult')
+    GetTransitGatewayPolicyTableAssociationsRequest = Shapes::StructureShape.new(name: 'GetTransitGatewayPolicyTableAssociationsRequest')
+    GetTransitGatewayPolicyTableAssociationsResult = Shapes::StructureShape.new(name: 'GetTransitGatewayPolicyTableAssociationsResult')
+    GetTransitGatewayPolicyTableEntriesRequest = Shapes::StructureShape.new(name: 'GetTransitGatewayPolicyTableEntriesRequest')
+    GetTransitGatewayPolicyTableEntriesResult = Shapes::StructureShape.new(name: 'GetTransitGatewayPolicyTableEntriesResult')
     GetTransitGatewayPrefixListReferencesRequest = Shapes::StructureShape.new(name: 'GetTransitGatewayPrefixListReferencesRequest')
     GetTransitGatewayPrefixListReferencesResult = Shapes::StructureShape.new(name: 'GetTransitGatewayPrefixListReferencesResult')
     GetTransitGatewayRouteTableAssociationsRequest = Shapes::StructureShape.new(name: 'GetTransitGatewayRouteTableAssociationsRequest')
@@ -2518,6 +2540,18 @@ module Aws::EC2
     TransitGatewayOptions = Shapes::StructureShape.new(name: 'TransitGatewayOptions')
     TransitGatewayPeeringAttachment = Shapes::StructureShape.new(name: 'TransitGatewayPeeringAttachment')
     TransitGatewayPeeringAttachmentList = Shapes::ListShape.new(name: 'TransitGatewayPeeringAttachmentList')
+    TransitGatewayPeeringAttachmentOptions = Shapes::StructureShape.new(name: 'TransitGatewayPeeringAttachmentOptions')
+    TransitGatewayPolicyRule = Shapes::StructureShape.new(name: 'TransitGatewayPolicyRule')
+    TransitGatewayPolicyRuleMetaData = Shapes::StructureShape.new(name: 'TransitGatewayPolicyRuleMetaData')
+    TransitGatewayPolicyTable = Shapes::StructureShape.new(name: 'TransitGatewayPolicyTable')
+    TransitGatewayPolicyTableAssociation = Shapes::StructureShape.new(name: 'TransitGatewayPolicyTableAssociation')
+    TransitGatewayPolicyTableAssociationList = Shapes::ListShape.new(name: 'TransitGatewayPolicyTableAssociationList')
+    TransitGatewayPolicyTableEntry = Shapes::StructureShape.new(name: 'TransitGatewayPolicyTableEntry')
+    TransitGatewayPolicyTableEntryList = Shapes::ListShape.new(name: 'TransitGatewayPolicyTableEntryList')
+    TransitGatewayPolicyTableId = Shapes::StringShape.new(name: 'TransitGatewayPolicyTableId')
+    TransitGatewayPolicyTableIdStringList = Shapes::ListShape.new(name: 'TransitGatewayPolicyTableIdStringList')
+    TransitGatewayPolicyTableList = Shapes::ListShape.new(name: 'TransitGatewayPolicyTableList')
+    TransitGatewayPolicyTableState = Shapes::StringShape.new(name: 'TransitGatewayPolicyTableState')
     TransitGatewayPrefixListAttachment = Shapes::StructureShape.new(name: 'TransitGatewayPrefixListAttachment')
     TransitGatewayPrefixListReference = Shapes::StructureShape.new(name: 'TransitGatewayPrefixListReference')
     TransitGatewayPrefixListReferenceSet = Shapes::ListShape.new(name: 'TransitGatewayPrefixListReferenceSet')
@@ -2531,6 +2565,12 @@ module Aws::EC2
     TransitGatewayRouteList = Shapes::ListShape.new(name: 'TransitGatewayRouteList')
     TransitGatewayRouteState = Shapes::StringShape.new(name: 'TransitGatewayRouteState')
     TransitGatewayRouteTable = Shapes::StructureShape.new(name: 'TransitGatewayRouteTable')
+    TransitGatewayRouteTableAnnouncement = Shapes::StructureShape.new(name: 'TransitGatewayRouteTableAnnouncement')
+    TransitGatewayRouteTableAnnouncementDirection = Shapes::StringShape.new(name: 'TransitGatewayRouteTableAnnouncementDirection')
+    TransitGatewayRouteTableAnnouncementId = Shapes::StringShape.new(name: 'TransitGatewayRouteTableAnnouncementId')
+    TransitGatewayRouteTableAnnouncementIdStringList = Shapes::ListShape.new(name: 'TransitGatewayRouteTableAnnouncementIdStringList')
+    TransitGatewayRouteTableAnnouncementList = Shapes::ListShape.new(name: 'TransitGatewayRouteTableAnnouncementList')
+    TransitGatewayRouteTableAnnouncementState = Shapes::StringShape.new(name: 'TransitGatewayRouteTableAnnouncementState')
     TransitGatewayRouteTableAssociation = Shapes::StructureShape.new(name: 'TransitGatewayRouteTableAssociation')
     TransitGatewayRouteTableAssociationList = Shapes::ListShape.new(name: 'TransitGatewayRouteTableAssociationList')
     TransitGatewayRouteTableId = Shapes::StringShape.new(name: 'TransitGatewayRouteTableId')
@@ -3093,6 +3133,14 @@ module Aws::EC2
 
     AssociateTransitGatewayMulticastDomainResult.add_member(:associations, Shapes::ShapeRef.new(shape: TransitGatewayMulticastDomainAssociations, location_name: "associations"))
     AssociateTransitGatewayMulticastDomainResult.struct_class = Types::AssociateTransitGatewayMulticastDomainResult
+
+    AssociateTransitGatewayPolicyTableRequest.add_member(:transit_gateway_policy_table_id, Shapes::ShapeRef.new(shape: TransitGatewayPolicyTableId, required: true, location_name: "TransitGatewayPolicyTableId"))
+    AssociateTransitGatewayPolicyTableRequest.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, required: true, location_name: "TransitGatewayAttachmentId"))
+    AssociateTransitGatewayPolicyTableRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    AssociateTransitGatewayPolicyTableRequest.struct_class = Types::AssociateTransitGatewayPolicyTableRequest
+
+    AssociateTransitGatewayPolicyTableResult.add_member(:association, Shapes::ShapeRef.new(shape: TransitGatewayPolicyTableAssociation, location_name: "association"))
+    AssociateTransitGatewayPolicyTableResult.struct_class = Types::AssociateTransitGatewayPolicyTableResult
 
     AssociateTransitGatewayRouteTableRequest.add_member(:transit_gateway_route_table_id, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableId, required: true, location_name: "TransitGatewayRouteTableId"))
     AssociateTransitGatewayRouteTableRequest.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, required: true, location_name: "TransitGatewayAttachmentId"))
@@ -4487,12 +4535,24 @@ module Aws::EC2
     CreateTransitGatewayPeeringAttachmentRequest.add_member(:peer_transit_gateway_id, Shapes::ShapeRef.new(shape: TransitAssociationGatewayId, required: true, location_name: "PeerTransitGatewayId"))
     CreateTransitGatewayPeeringAttachmentRequest.add_member(:peer_account_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "PeerAccountId"))
     CreateTransitGatewayPeeringAttachmentRequest.add_member(:peer_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "PeerRegion"))
+    CreateTransitGatewayPeeringAttachmentRequest.add_member(:options, Shapes::ShapeRef.new(shape: CreateTransitGatewayPeeringAttachmentRequestOptions, location_name: "Options"))
     CreateTransitGatewayPeeringAttachmentRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateTransitGatewayPeeringAttachmentRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     CreateTransitGatewayPeeringAttachmentRequest.struct_class = Types::CreateTransitGatewayPeeringAttachmentRequest
 
+    CreateTransitGatewayPeeringAttachmentRequestOptions.add_member(:dynamic_routing, Shapes::ShapeRef.new(shape: DynamicRoutingValue, location_name: "DynamicRouting"))
+    CreateTransitGatewayPeeringAttachmentRequestOptions.struct_class = Types::CreateTransitGatewayPeeringAttachmentRequestOptions
+
     CreateTransitGatewayPeeringAttachmentResult.add_member(:transit_gateway_peering_attachment, Shapes::ShapeRef.new(shape: TransitGatewayPeeringAttachment, location_name: "transitGatewayPeeringAttachment"))
     CreateTransitGatewayPeeringAttachmentResult.struct_class = Types::CreateTransitGatewayPeeringAttachmentResult
+
+    CreateTransitGatewayPolicyTableRequest.add_member(:transit_gateway_id, Shapes::ShapeRef.new(shape: TransitGatewayId, required: true, location_name: "TransitGatewayId"))
+    CreateTransitGatewayPolicyTableRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecifications"))
+    CreateTransitGatewayPolicyTableRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateTransitGatewayPolicyTableRequest.struct_class = Types::CreateTransitGatewayPolicyTableRequest
+
+    CreateTransitGatewayPolicyTableResult.add_member(:transit_gateway_policy_table, Shapes::ShapeRef.new(shape: TransitGatewayPolicyTable, location_name: "transitGatewayPolicyTable"))
+    CreateTransitGatewayPolicyTableResult.struct_class = Types::CreateTransitGatewayPolicyTableResult
 
     CreateTransitGatewayPrefixListReferenceRequest.add_member(:transit_gateway_route_table_id, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableId, required: true, location_name: "TransitGatewayRouteTableId"))
     CreateTransitGatewayPrefixListReferenceRequest.add_member(:prefix_list_id, Shapes::ShapeRef.new(shape: PrefixListResourceId, required: true, location_name: "PrefixListId"))
@@ -4522,6 +4582,15 @@ module Aws::EC2
 
     CreateTransitGatewayRouteResult.add_member(:route, Shapes::ShapeRef.new(shape: TransitGatewayRoute, location_name: "route"))
     CreateTransitGatewayRouteResult.struct_class = Types::CreateTransitGatewayRouteResult
+
+    CreateTransitGatewayRouteTableAnnouncementRequest.add_member(:transit_gateway_route_table_id, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableId, required: true, location_name: "TransitGatewayRouteTableId"))
+    CreateTransitGatewayRouteTableAnnouncementRequest.add_member(:peering_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, required: true, location_name: "PeeringAttachmentId"))
+    CreateTransitGatewayRouteTableAnnouncementRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    CreateTransitGatewayRouteTableAnnouncementRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateTransitGatewayRouteTableAnnouncementRequest.struct_class = Types::CreateTransitGatewayRouteTableAnnouncementRequest
+
+    CreateTransitGatewayRouteTableAnnouncementResult.add_member(:transit_gateway_route_table_announcement, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableAnnouncement, location_name: "transitGatewayRouteTableAnnouncement"))
+    CreateTransitGatewayRouteTableAnnouncementResult.struct_class = Types::CreateTransitGatewayRouteTableAnnouncementResult
 
     CreateTransitGatewayRouteTableRequest.add_member(:transit_gateway_id, Shapes::ShapeRef.new(shape: TransitGatewayId, required: true, location_name: "TransitGatewayId"))
     CreateTransitGatewayRouteTableRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecifications"))
@@ -5042,6 +5111,13 @@ module Aws::EC2
     DeleteTransitGatewayPeeringAttachmentResult.add_member(:transit_gateway_peering_attachment, Shapes::ShapeRef.new(shape: TransitGatewayPeeringAttachment, location_name: "transitGatewayPeeringAttachment"))
     DeleteTransitGatewayPeeringAttachmentResult.struct_class = Types::DeleteTransitGatewayPeeringAttachmentResult
 
+    DeleteTransitGatewayPolicyTableRequest.add_member(:transit_gateway_policy_table_id, Shapes::ShapeRef.new(shape: TransitGatewayPolicyTableId, required: true, location_name: "TransitGatewayPolicyTableId"))
+    DeleteTransitGatewayPolicyTableRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DeleteTransitGatewayPolicyTableRequest.struct_class = Types::DeleteTransitGatewayPolicyTableRequest
+
+    DeleteTransitGatewayPolicyTableResult.add_member(:transit_gateway_policy_table, Shapes::ShapeRef.new(shape: TransitGatewayPolicyTable, location_name: "transitGatewayPolicyTable"))
+    DeleteTransitGatewayPolicyTableResult.struct_class = Types::DeleteTransitGatewayPolicyTableResult
+
     DeleteTransitGatewayPrefixListReferenceRequest.add_member(:transit_gateway_route_table_id, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableId, required: true, location_name: "TransitGatewayRouteTableId"))
     DeleteTransitGatewayPrefixListReferenceRequest.add_member(:prefix_list_id, Shapes::ShapeRef.new(shape: PrefixListResourceId, required: true, location_name: "PrefixListId"))
     DeleteTransitGatewayPrefixListReferenceRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -5064,6 +5140,13 @@ module Aws::EC2
 
     DeleteTransitGatewayRouteResult.add_member(:route, Shapes::ShapeRef.new(shape: TransitGatewayRoute, location_name: "route"))
     DeleteTransitGatewayRouteResult.struct_class = Types::DeleteTransitGatewayRouteResult
+
+    DeleteTransitGatewayRouteTableAnnouncementRequest.add_member(:transit_gateway_route_table_announcement_id, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableAnnouncementId, required: true, location_name: "TransitGatewayRouteTableAnnouncementId"))
+    DeleteTransitGatewayRouteTableAnnouncementRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DeleteTransitGatewayRouteTableAnnouncementRequest.struct_class = Types::DeleteTransitGatewayRouteTableAnnouncementRequest
+
+    DeleteTransitGatewayRouteTableAnnouncementResult.add_member(:transit_gateway_route_table_announcement, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableAnnouncement, location_name: "transitGatewayRouteTableAnnouncement"))
+    DeleteTransitGatewayRouteTableAnnouncementResult.struct_class = Types::DeleteTransitGatewayRouteTableAnnouncementResult
 
     DeleteTransitGatewayRouteTableRequest.add_member(:transit_gateway_route_table_id, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableId, required: true, location_name: "TransitGatewayRouteTableId"))
     DeleteTransitGatewayRouteTableRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -6424,6 +6507,28 @@ module Aws::EC2
     DescribeTransitGatewayPeeringAttachmentsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeTransitGatewayPeeringAttachmentsResult.struct_class = Types::DescribeTransitGatewayPeeringAttachmentsResult
 
+    DescribeTransitGatewayPolicyTablesRequest.add_member(:transit_gateway_policy_table_ids, Shapes::ShapeRef.new(shape: TransitGatewayPolicyTableIdStringList, location_name: "TransitGatewayPolicyTableIds"))
+    DescribeTransitGatewayPolicyTablesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeTransitGatewayPolicyTablesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: TransitGatewayMaxResults, location_name: "MaxResults"))
+    DescribeTransitGatewayPolicyTablesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeTransitGatewayPolicyTablesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeTransitGatewayPolicyTablesRequest.struct_class = Types::DescribeTransitGatewayPolicyTablesRequest
+
+    DescribeTransitGatewayPolicyTablesResult.add_member(:transit_gateway_policy_tables, Shapes::ShapeRef.new(shape: TransitGatewayPolicyTableList, location_name: "transitGatewayPolicyTables"))
+    DescribeTransitGatewayPolicyTablesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeTransitGatewayPolicyTablesResult.struct_class = Types::DescribeTransitGatewayPolicyTablesResult
+
+    DescribeTransitGatewayRouteTableAnnouncementsRequest.add_member(:transit_gateway_route_table_announcement_ids, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableAnnouncementIdStringList, location_name: "TransitGatewayRouteTableAnnouncementIds"))
+    DescribeTransitGatewayRouteTableAnnouncementsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeTransitGatewayRouteTableAnnouncementsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: TransitGatewayMaxResults, location_name: "MaxResults"))
+    DescribeTransitGatewayRouteTableAnnouncementsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeTransitGatewayRouteTableAnnouncementsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeTransitGatewayRouteTableAnnouncementsRequest.struct_class = Types::DescribeTransitGatewayRouteTableAnnouncementsRequest
+
+    DescribeTransitGatewayRouteTableAnnouncementsResult.add_member(:transit_gateway_route_table_announcements, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableAnnouncementList, location_name: "transitGatewayRouteTableAnnouncements"))
+    DescribeTransitGatewayRouteTableAnnouncementsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeTransitGatewayRouteTableAnnouncementsResult.struct_class = Types::DescribeTransitGatewayRouteTableAnnouncementsResult
+
     DescribeTransitGatewayRouteTablesRequest.add_member(:transit_gateway_route_table_ids, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableIdStringList, location_name: "TransitGatewayRouteTableIds"))
     DescribeTransitGatewayRouteTablesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     DescribeTransitGatewayRouteTablesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: TransitGatewayMaxResults, location_name: "MaxResults"))
@@ -6789,8 +6894,9 @@ module Aws::EC2
     DisableSerialConsoleAccessResult.struct_class = Types::DisableSerialConsoleAccessResult
 
     DisableTransitGatewayRouteTablePropagationRequest.add_member(:transit_gateway_route_table_id, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableId, required: true, location_name: "TransitGatewayRouteTableId"))
-    DisableTransitGatewayRouteTablePropagationRequest.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, required: true, location_name: "TransitGatewayAttachmentId"))
+    DisableTransitGatewayRouteTablePropagationRequest.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, location_name: "TransitGatewayAttachmentId"))
     DisableTransitGatewayRouteTablePropagationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DisableTransitGatewayRouteTablePropagationRequest.add_member(:transit_gateway_route_table_announcement_id, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableAnnouncementId, location_name: "TransitGatewayRouteTableAnnouncementId"))
     DisableTransitGatewayRouteTablePropagationRequest.struct_class = Types::DisableTransitGatewayRouteTablePropagationRequest
 
     DisableTransitGatewayRouteTablePropagationResult.add_member(:propagation, Shapes::ShapeRef.new(shape: TransitGatewayPropagation, location_name: "propagation"))
@@ -6869,6 +6975,14 @@ module Aws::EC2
 
     DisassociateTransitGatewayMulticastDomainResult.add_member(:associations, Shapes::ShapeRef.new(shape: TransitGatewayMulticastDomainAssociations, location_name: "associations"))
     DisassociateTransitGatewayMulticastDomainResult.struct_class = Types::DisassociateTransitGatewayMulticastDomainResult
+
+    DisassociateTransitGatewayPolicyTableRequest.add_member(:transit_gateway_policy_table_id, Shapes::ShapeRef.new(shape: TransitGatewayPolicyTableId, required: true, location_name: "TransitGatewayPolicyTableId"))
+    DisassociateTransitGatewayPolicyTableRequest.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, required: true, location_name: "TransitGatewayAttachmentId"))
+    DisassociateTransitGatewayPolicyTableRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DisassociateTransitGatewayPolicyTableRequest.struct_class = Types::DisassociateTransitGatewayPolicyTableRequest
+
+    DisassociateTransitGatewayPolicyTableResult.add_member(:association, Shapes::ShapeRef.new(shape: TransitGatewayPolicyTableAssociation, location_name: "association"))
+    DisassociateTransitGatewayPolicyTableResult.struct_class = Types::DisassociateTransitGatewayPolicyTableResult
 
     DisassociateTransitGatewayRouteTableRequest.add_member(:transit_gateway_route_table_id, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableId, required: true, location_name: "TransitGatewayRouteTableId"))
     DisassociateTransitGatewayRouteTableRequest.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, required: true, location_name: "TransitGatewayAttachmentId"))
@@ -7124,8 +7238,9 @@ module Aws::EC2
     EnableSerialConsoleAccessResult.struct_class = Types::EnableSerialConsoleAccessResult
 
     EnableTransitGatewayRouteTablePropagationRequest.add_member(:transit_gateway_route_table_id, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableId, required: true, location_name: "TransitGatewayRouteTableId"))
-    EnableTransitGatewayRouteTablePropagationRequest.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, required: true, location_name: "TransitGatewayAttachmentId"))
+    EnableTransitGatewayRouteTablePropagationRequest.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, location_name: "TransitGatewayAttachmentId"))
     EnableTransitGatewayRouteTablePropagationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    EnableTransitGatewayRouteTablePropagationRequest.add_member(:transit_gateway_route_table_announcement_id, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableAnnouncementId, location_name: "TransitGatewayRouteTableAnnouncementId"))
     EnableTransitGatewayRouteTablePropagationRequest.struct_class = Types::EnableTransitGatewayRouteTablePropagationRequest
 
     EnableTransitGatewayRouteTablePropagationResult.add_member(:propagation, Shapes::ShapeRef.new(shape: TransitGatewayPropagation, location_name: "propagation"))
@@ -7844,6 +7959,27 @@ module Aws::EC2
     GetTransitGatewayMulticastDomainAssociationsResult.add_member(:multicast_domain_associations, Shapes::ShapeRef.new(shape: TransitGatewayMulticastDomainAssociationList, location_name: "multicastDomainAssociations"))
     GetTransitGatewayMulticastDomainAssociationsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     GetTransitGatewayMulticastDomainAssociationsResult.struct_class = Types::GetTransitGatewayMulticastDomainAssociationsResult
+
+    GetTransitGatewayPolicyTableAssociationsRequest.add_member(:transit_gateway_policy_table_id, Shapes::ShapeRef.new(shape: TransitGatewayPolicyTableId, required: true, location_name: "TransitGatewayPolicyTableId"))
+    GetTransitGatewayPolicyTableAssociationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    GetTransitGatewayPolicyTableAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: TransitGatewayMaxResults, location_name: "MaxResults"))
+    GetTransitGatewayPolicyTableAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    GetTransitGatewayPolicyTableAssociationsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    GetTransitGatewayPolicyTableAssociationsRequest.struct_class = Types::GetTransitGatewayPolicyTableAssociationsRequest
+
+    GetTransitGatewayPolicyTableAssociationsResult.add_member(:associations, Shapes::ShapeRef.new(shape: TransitGatewayPolicyTableAssociationList, location_name: "associations"))
+    GetTransitGatewayPolicyTableAssociationsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    GetTransitGatewayPolicyTableAssociationsResult.struct_class = Types::GetTransitGatewayPolicyTableAssociationsResult
+
+    GetTransitGatewayPolicyTableEntriesRequest.add_member(:transit_gateway_policy_table_id, Shapes::ShapeRef.new(shape: TransitGatewayPolicyTableId, required: true, location_name: "TransitGatewayPolicyTableId"))
+    GetTransitGatewayPolicyTableEntriesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    GetTransitGatewayPolicyTableEntriesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: TransitGatewayMaxResults, location_name: "MaxResults"))
+    GetTransitGatewayPolicyTableEntriesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    GetTransitGatewayPolicyTableEntriesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    GetTransitGatewayPolicyTableEntriesRequest.struct_class = Types::GetTransitGatewayPolicyTableEntriesRequest
+
+    GetTransitGatewayPolicyTableEntriesResult.add_member(:transit_gateway_policy_table_entries, Shapes::ShapeRef.new(shape: TransitGatewayPolicyTableEntryList, location_name: "transitGatewayPolicyTableEntries"))
+    GetTransitGatewayPolicyTableEntriesResult.struct_class = Types::GetTransitGatewayPolicyTableEntriesResult
 
     GetTransitGatewayPrefixListReferencesRequest.add_member(:transit_gateway_route_table_id, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableId, required: true, location_name: "TransitGatewayRouteTableId"))
     GetTransitGatewayPrefixListReferencesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
@@ -9924,6 +10060,7 @@ module Aws::EC2
     ModifyTransitGatewayOptions.add_member(:association_default_route_table_id, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableId, location_name: "AssociationDefaultRouteTableId"))
     ModifyTransitGatewayOptions.add_member(:default_route_table_propagation, Shapes::ShapeRef.new(shape: DefaultRouteTablePropagationValue, location_name: "DefaultRouteTablePropagation"))
     ModifyTransitGatewayOptions.add_member(:propagation_default_route_table_id, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableId, location_name: "PropagationDefaultRouteTableId"))
+    ModifyTransitGatewayOptions.add_member(:amazon_side_asn, Shapes::ShapeRef.new(shape: Long, location_name: "AmazonSideAsn"))
     ModifyTransitGatewayOptions.struct_class = Types::ModifyTransitGatewayOptions
 
     ModifyTransitGatewayPrefixListReferenceRequest.add_member(:transit_gateway_route_table_id, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableId, required: true, location_name: "TransitGatewayRouteTableId"))
@@ -10489,6 +10626,7 @@ module Aws::EC2
     PeeringConnectionOptionsRequest.struct_class = Types::PeeringConnectionOptionsRequest
 
     PeeringTgwInfo.add_member(:transit_gateway_id, Shapes::ShapeRef.new(shape: String, location_name: "transitGatewayId"))
+    PeeringTgwInfo.add_member(:core_network_id, Shapes::ShapeRef.new(shape: String, location_name: "coreNetworkId"))
     PeeringTgwInfo.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
     PeeringTgwInfo.add_member(:region, Shapes::ShapeRef.new(shape: String, location_name: "region"))
     PeeringTgwInfo.struct_class = Types::PeeringTgwInfo
@@ -12653,8 +12791,10 @@ module Aws::EC2
     TransitGatewayOptions.struct_class = Types::TransitGatewayOptions
 
     TransitGatewayPeeringAttachment.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: String, location_name: "transitGatewayAttachmentId"))
+    TransitGatewayPeeringAttachment.add_member(:accepter_transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: String, location_name: "accepterTransitGatewayAttachmentId"))
     TransitGatewayPeeringAttachment.add_member(:requester_tgw_info, Shapes::ShapeRef.new(shape: PeeringTgwInfo, location_name: "requesterTgwInfo"))
     TransitGatewayPeeringAttachment.add_member(:accepter_tgw_info, Shapes::ShapeRef.new(shape: PeeringTgwInfo, location_name: "accepterTgwInfo"))
+    TransitGatewayPeeringAttachment.add_member(:options, Shapes::ShapeRef.new(shape: TransitGatewayPeeringAttachmentOptions, location_name: "options"))
     TransitGatewayPeeringAttachment.add_member(:status, Shapes::ShapeRef.new(shape: PeeringAttachmentStatus, location_name: "status"))
     TransitGatewayPeeringAttachment.add_member(:state, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentState, location_name: "state"))
     TransitGatewayPeeringAttachment.add_member(:creation_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "creationTime"))
@@ -12662,6 +12802,48 @@ module Aws::EC2
     TransitGatewayPeeringAttachment.struct_class = Types::TransitGatewayPeeringAttachment
 
     TransitGatewayPeeringAttachmentList.member = Shapes::ShapeRef.new(shape: TransitGatewayPeeringAttachment, location_name: "item")
+
+    TransitGatewayPeeringAttachmentOptions.add_member(:dynamic_routing, Shapes::ShapeRef.new(shape: DynamicRoutingValue, location_name: "dynamicRouting"))
+    TransitGatewayPeeringAttachmentOptions.struct_class = Types::TransitGatewayPeeringAttachmentOptions
+
+    TransitGatewayPolicyRule.add_member(:source_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "sourceCidrBlock"))
+    TransitGatewayPolicyRule.add_member(:source_port_range, Shapes::ShapeRef.new(shape: String, location_name: "sourcePortRange"))
+    TransitGatewayPolicyRule.add_member(:destination_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "destinationCidrBlock"))
+    TransitGatewayPolicyRule.add_member(:destination_port_range, Shapes::ShapeRef.new(shape: String, location_name: "destinationPortRange"))
+    TransitGatewayPolicyRule.add_member(:protocol, Shapes::ShapeRef.new(shape: String, location_name: "protocol"))
+    TransitGatewayPolicyRule.add_member(:meta_data, Shapes::ShapeRef.new(shape: TransitGatewayPolicyRuleMetaData, location_name: "metaData"))
+    TransitGatewayPolicyRule.struct_class = Types::TransitGatewayPolicyRule
+
+    TransitGatewayPolicyRuleMetaData.add_member(:meta_data_key, Shapes::ShapeRef.new(shape: String, location_name: "metaDataKey"))
+    TransitGatewayPolicyRuleMetaData.add_member(:meta_data_value, Shapes::ShapeRef.new(shape: String, location_name: "metaDataValue"))
+    TransitGatewayPolicyRuleMetaData.struct_class = Types::TransitGatewayPolicyRuleMetaData
+
+    TransitGatewayPolicyTable.add_member(:transit_gateway_policy_table_id, Shapes::ShapeRef.new(shape: TransitGatewayPolicyTableId, location_name: "transitGatewayPolicyTableId"))
+    TransitGatewayPolicyTable.add_member(:transit_gateway_id, Shapes::ShapeRef.new(shape: TransitGatewayId, location_name: "transitGatewayId"))
+    TransitGatewayPolicyTable.add_member(:state, Shapes::ShapeRef.new(shape: TransitGatewayPolicyTableState, location_name: "state"))
+    TransitGatewayPolicyTable.add_member(:creation_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "creationTime"))
+    TransitGatewayPolicyTable.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    TransitGatewayPolicyTable.struct_class = Types::TransitGatewayPolicyTable
+
+    TransitGatewayPolicyTableAssociation.add_member(:transit_gateway_policy_table_id, Shapes::ShapeRef.new(shape: TransitGatewayPolicyTableId, location_name: "transitGatewayPolicyTableId"))
+    TransitGatewayPolicyTableAssociation.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, location_name: "transitGatewayAttachmentId"))
+    TransitGatewayPolicyTableAssociation.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "resourceId"))
+    TransitGatewayPolicyTableAssociation.add_member(:resource_type, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentResourceType, location_name: "resourceType"))
+    TransitGatewayPolicyTableAssociation.add_member(:state, Shapes::ShapeRef.new(shape: TransitGatewayAssociationState, location_name: "state"))
+    TransitGatewayPolicyTableAssociation.struct_class = Types::TransitGatewayPolicyTableAssociation
+
+    TransitGatewayPolicyTableAssociationList.member = Shapes::ShapeRef.new(shape: TransitGatewayPolicyTableAssociation, location_name: "item")
+
+    TransitGatewayPolicyTableEntry.add_member(:policy_rule_number, Shapes::ShapeRef.new(shape: String, location_name: "policyRuleNumber"))
+    TransitGatewayPolicyTableEntry.add_member(:policy_rule, Shapes::ShapeRef.new(shape: TransitGatewayPolicyRule, location_name: "policyRule"))
+    TransitGatewayPolicyTableEntry.add_member(:target_route_table_id, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableId, location_name: "targetRouteTableId"))
+    TransitGatewayPolicyTableEntry.struct_class = Types::TransitGatewayPolicyTableEntry
+
+    TransitGatewayPolicyTableEntryList.member = Shapes::ShapeRef.new(shape: TransitGatewayPolicyTableEntry, location_name: "item")
+
+    TransitGatewayPolicyTableIdStringList.member = Shapes::ShapeRef.new(shape: TransitGatewayPolicyTableId, location_name: "item")
+
+    TransitGatewayPolicyTableList.member = Shapes::ShapeRef.new(shape: TransitGatewayPolicyTable, location_name: "item")
 
     TransitGatewayPrefixListAttachment.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, location_name: "transitGatewayAttachmentId"))
     TransitGatewayPrefixListAttachment.add_member(:resource_type, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentResourceType, location_name: "resourceType"))
@@ -12683,6 +12865,7 @@ module Aws::EC2
     TransitGatewayPropagation.add_member(:resource_type, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentResourceType, location_name: "resourceType"))
     TransitGatewayPropagation.add_member(:transit_gateway_route_table_id, Shapes::ShapeRef.new(shape: String, location_name: "transitGatewayRouteTableId"))
     TransitGatewayPropagation.add_member(:state, Shapes::ShapeRef.new(shape: TransitGatewayPropagationState, location_name: "state"))
+    TransitGatewayPropagation.add_member(:transit_gateway_route_table_announcement_id, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableAnnouncementId, location_name: "transitGatewayRouteTableAnnouncementId"))
     TransitGatewayPropagation.struct_class = Types::TransitGatewayPropagation
 
     TransitGatewayRequestOptions.add_member(:amazon_side_asn, Shapes::ShapeRef.new(shape: Long, location_name: "AmazonSideAsn"))
@@ -12697,6 +12880,7 @@ module Aws::EC2
 
     TransitGatewayRoute.add_member(:destination_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "destinationCidrBlock"))
     TransitGatewayRoute.add_member(:prefix_list_id, Shapes::ShapeRef.new(shape: PrefixListResourceId, location_name: "prefixListId"))
+    TransitGatewayRoute.add_member(:transit_gateway_route_table_announcement_id, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableAnnouncementId, location_name: "transitGatewayRouteTableAnnouncementId"))
     TransitGatewayRoute.add_member(:transit_gateway_attachments, Shapes::ShapeRef.new(shape: TransitGatewayRouteAttachmentList, location_name: "transitGatewayAttachments"))
     TransitGatewayRoute.add_member(:type, Shapes::ShapeRef.new(shape: TransitGatewayRouteType, location_name: "type"))
     TransitGatewayRoute.add_member(:state, Shapes::ShapeRef.new(shape: TransitGatewayRouteState, location_name: "state"))
@@ -12720,6 +12904,23 @@ module Aws::EC2
     TransitGatewayRouteTable.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     TransitGatewayRouteTable.struct_class = Types::TransitGatewayRouteTable
 
+    TransitGatewayRouteTableAnnouncement.add_member(:transit_gateway_route_table_announcement_id, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableAnnouncementId, location_name: "transitGatewayRouteTableAnnouncementId"))
+    TransitGatewayRouteTableAnnouncement.add_member(:transit_gateway_id, Shapes::ShapeRef.new(shape: TransitGatewayId, location_name: "transitGatewayId"))
+    TransitGatewayRouteTableAnnouncement.add_member(:core_network_id, Shapes::ShapeRef.new(shape: String, location_name: "coreNetworkId"))
+    TransitGatewayRouteTableAnnouncement.add_member(:peer_transit_gateway_id, Shapes::ShapeRef.new(shape: TransitGatewayId, location_name: "peerTransitGatewayId"))
+    TransitGatewayRouteTableAnnouncement.add_member(:peer_core_network_id, Shapes::ShapeRef.new(shape: String, location_name: "peerCoreNetworkId"))
+    TransitGatewayRouteTableAnnouncement.add_member(:peering_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, location_name: "peeringAttachmentId"))
+    TransitGatewayRouteTableAnnouncement.add_member(:announcement_direction, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableAnnouncementDirection, location_name: "announcementDirection"))
+    TransitGatewayRouteTableAnnouncement.add_member(:transit_gateway_route_table_id, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableId, location_name: "transitGatewayRouteTableId"))
+    TransitGatewayRouteTableAnnouncement.add_member(:state, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableAnnouncementState, location_name: "state"))
+    TransitGatewayRouteTableAnnouncement.add_member(:creation_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "creationTime"))
+    TransitGatewayRouteTableAnnouncement.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    TransitGatewayRouteTableAnnouncement.struct_class = Types::TransitGatewayRouteTableAnnouncement
+
+    TransitGatewayRouteTableAnnouncementIdStringList.member = Shapes::ShapeRef.new(shape: TransitGatewayRouteTableAnnouncementId, location_name: "item")
+
+    TransitGatewayRouteTableAnnouncementList.member = Shapes::ShapeRef.new(shape: TransitGatewayRouteTableAnnouncement, location_name: "item")
+
     TransitGatewayRouteTableAssociation.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: String, location_name: "transitGatewayAttachmentId"))
     TransitGatewayRouteTableAssociation.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "resourceId"))
     TransitGatewayRouteTableAssociation.add_member(:resource_type, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentResourceType, location_name: "resourceType"))
@@ -12736,6 +12937,7 @@ module Aws::EC2
     TransitGatewayRouteTablePropagation.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "resourceId"))
     TransitGatewayRouteTablePropagation.add_member(:resource_type, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentResourceType, location_name: "resourceType"))
     TransitGatewayRouteTablePropagation.add_member(:state, Shapes::ShapeRef.new(shape: TransitGatewayPropagationState, location_name: "state"))
+    TransitGatewayRouteTablePropagation.add_member(:transit_gateway_route_table_announcement_id, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableAnnouncementId, location_name: "transitGatewayRouteTableAnnouncementId"))
     TransitGatewayRouteTablePropagation.struct_class = Types::TransitGatewayRouteTablePropagation
 
     TransitGatewayRouteTablePropagationList.member = Shapes::ShapeRef.new(shape: TransitGatewayRouteTablePropagation, location_name: "item")
@@ -13468,6 +13670,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: AssociateTransitGatewayMulticastDomainResult)
       end)
 
+      api.add_operation(:associate_transit_gateway_policy_table, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateTransitGatewayPolicyTable"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateTransitGatewayPolicyTableRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateTransitGatewayPolicyTableResult)
+      end)
+
       api.add_operation(:associate_transit_gateway_route_table, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AssociateTransitGatewayRouteTable"
         o.http_method = "POST"
@@ -14124,6 +14334,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: CreateTransitGatewayPeeringAttachmentResult)
       end)
 
+      api.add_operation(:create_transit_gateway_policy_table, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateTransitGatewayPolicyTable"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateTransitGatewayPolicyTableRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateTransitGatewayPolicyTableResult)
+      end)
+
       api.add_operation(:create_transit_gateway_prefix_list_reference, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateTransitGatewayPrefixListReference"
         o.http_method = "POST"
@@ -14146,6 +14364,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateTransitGatewayRouteTableRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateTransitGatewayRouteTableResult)
+      end)
+
+      api.add_operation(:create_transit_gateway_route_table_announcement, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateTransitGatewayRouteTableAnnouncement"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateTransitGatewayRouteTableAnnouncementRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateTransitGatewayRouteTableAnnouncementResult)
       end)
 
       api.add_operation(:create_transit_gateway_vpc_attachment, Seahorse::Model::Operation.new.tap do |o|
@@ -14620,6 +14846,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: DeleteTransitGatewayPeeringAttachmentResult)
       end)
 
+      api.add_operation(:delete_transit_gateway_policy_table, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteTransitGatewayPolicyTable"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteTransitGatewayPolicyTableRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteTransitGatewayPolicyTableResult)
+      end)
+
       api.add_operation(:delete_transit_gateway_prefix_list_reference, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteTransitGatewayPrefixListReference"
         o.http_method = "POST"
@@ -14642,6 +14876,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteTransitGatewayRouteTableRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteTransitGatewayRouteTableResult)
+      end)
+
+      api.add_operation(:delete_transit_gateway_route_table_announcement, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteTransitGatewayRouteTableAnnouncement"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteTransitGatewayRouteTableAnnouncementRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteTransitGatewayRouteTableAnnouncementResult)
       end)
 
       api.add_operation(:delete_transit_gateway_vpc_attachment, Seahorse::Model::Operation.new.tap do |o|
@@ -16173,6 +16415,34 @@ module Aws::EC2
         )
       end)
 
+      api.add_operation(:describe_transit_gateway_policy_tables, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeTransitGatewayPolicyTables"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeTransitGatewayPolicyTablesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeTransitGatewayPolicyTablesResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_transit_gateway_route_table_announcements, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeTransitGatewayRouteTableAnnouncements"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeTransitGatewayRouteTableAnnouncementsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeTransitGatewayRouteTableAnnouncementsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:describe_transit_gateway_route_tables, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeTransitGatewayRouteTables"
         o.http_method = "POST"
@@ -16613,6 +16883,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DisassociateTransitGatewayMulticastDomainRequest)
         o.output = Shapes::ShapeRef.new(shape: DisassociateTransitGatewayMulticastDomainResult)
+      end)
+
+      api.add_operation(:disassociate_transit_gateway_policy_table, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateTransitGatewayPolicyTable"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateTransitGatewayPolicyTableRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateTransitGatewayPolicyTableResult)
       end)
 
       api.add_operation(:disassociate_transit_gateway_route_table, Seahorse::Model::Operation.new.tap do |o|
@@ -17069,6 +17347,28 @@ module Aws::EC2
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:get_transit_gateway_policy_table_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetTransitGatewayPolicyTableAssociations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetTransitGatewayPolicyTableAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetTransitGatewayPolicyTableAssociationsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:get_transit_gateway_policy_table_entries, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetTransitGatewayPolicyTableEntries"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetTransitGatewayPolicyTableEntriesRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetTransitGatewayPolicyTableEntriesResult)
       end)
 
       api.add_operation(:get_transit_gateway_prefix_list_references, Seahorse::Model::Operation.new.tap do |o|
