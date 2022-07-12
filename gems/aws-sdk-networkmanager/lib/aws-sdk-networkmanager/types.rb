@@ -83,10 +83,15 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # Describes the current status of an account within an Amazon Web
+    # Services Organization, including service-linked roles (SLRs).
+    #
     # @!attribute [rw] account_id
+    #   The ID of an account within the Amazon Web Services Organization.
     #   @return [String]
     #
     # @!attribute [rw] slr_deployment_status
+    #   The status of SLR deployment for the account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/AccountStatus AWS API Documentation
@@ -291,7 +296,7 @@ module Aws::NetworkManager
     # Describes a core network attachment.
     #
     # @!attribute [rw] core_network_id
-    #   A core network ID.
+    #   The ID of a core network.
     #   @return [String]
     #
     # @!attribute [rw] core_network_arn
@@ -515,7 +520,7 @@ module Aws::NetworkManager
     #   @return [Types::ConnectPeerConfiguration]
     #
     # @!attribute [rw] tags
-    #   The tags associated with the Connect peer.
+    #   The list of key-value tags associated with the Connect peer.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ConnectPeer AWS API Documentation
@@ -657,7 +662,7 @@ module Aws::NetworkManager
     #   @return [Time]
     #
     # @!attribute [rw] tags
-    #   The tags associated with a Connect peer summary.
+    #   The list of key-value tags associated with the Connect peer summary.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ConnectPeerSummary AWS API Documentation
@@ -797,7 +802,7 @@ module Aws::NetworkManager
     #   @return [Array<Types::CoreNetworkEdge>]
     #
     # @!attribute [rw] tags
-    #   The tags associated with a core network.
+    #   The list of key-value tags associated with a core network.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CoreNetwork AWS API Documentation
@@ -838,6 +843,12 @@ module Aws::NetworkManager
     #   The new value for a core network
     #   @return [Types::CoreNetworkChangeValues]
     #
+    # @!attribute [rw] identifier_path
+    #   Uniquely identifies the path for a change within the changeset. For
+    #   example, the `IdentifierPath` for a core network segment change
+    #   might be `"CORE_NETWORK_SEGMENT/us-east-1/devsegment"`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CoreNetworkChange AWS API Documentation
     #
     class CoreNetworkChange < Struct.new(
@@ -845,7 +856,80 @@ module Aws::NetworkManager
       :action,
       :identifier,
       :previous_values,
-      :new_values)
+      :new_values,
+      :identifier_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a core network change event. This can be a change to a
+    # segment, attachment, route, etc.
+    #
+    # @!attribute [rw] type
+    #   Describes the type of change event.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   The action taken for the change event.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier_path
+    #   Uniquely identifies the path for a change within the changeset. For
+    #   example, the `IdentifierPath` for a core network segment change
+    #   might be `"CORE_NETWORK_SEGMENT/us-east-1/devsegment"`.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_time
+    #   The timestamp for an event change in status.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of the core network change event.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   Details of the change event.
+    #   @return [Types::CoreNetworkChangeEventValues]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CoreNetworkChangeEvent AWS API Documentation
+    #
+    class CoreNetworkChangeEvent < Struct.new(
+      :type,
+      :action,
+      :identifier_path,
+      :event_time,
+      :status,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a core network change event.
+    #
+    # @!attribute [rw] edge_location
+    #   The edge location for the core network change event.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_name
+    #   The segment name if the change event is associated with a segment.
+    #   @return [String]
+    #
+    # @!attribute [rw] attachment_id
+    #   The ID of the attachment if the change event is associated with an
+    #   attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] cidr
+    #   For a `STATIC_ROUTE` event, this is the IP address.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CoreNetworkChangeEventValues AWS API Documentation
+    #
+    class CoreNetworkChangeEventValues < Struct.new(
+      :edge_location,
+      :segment_name,
+      :attachment_id,
+      :cidr)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1797,6 +1881,123 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateTransitGatewayPeeringRequest
+    #   data as a hash:
+    #
+    #       {
+    #         core_network_id: "CoreNetworkId", # required
+    #         transit_gateway_arn: "TransitGatewayArn", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] core_network_id
+    #   The ID of a core network.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_arn
+    #   The ARN of the transit gateway for the peering request.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The list of key-value tags associated with the request.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] client_token
+    #   The client token associated with the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CreateTransitGatewayPeeringRequest AWS API Documentation
+    #
+    class CreateTransitGatewayPeeringRequest < Struct.new(
+      :core_network_id,
+      :transit_gateway_arn,
+      :tags,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateway_peering
+    #   Returns information about the transit gateway peering connection
+    #   request.
+    #   @return [Types::TransitGatewayPeering]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CreateTransitGatewayPeeringResponse AWS API Documentation
+    #
+    class CreateTransitGatewayPeeringResponse < Struct.new(
+      :transit_gateway_peering)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateTransitGatewayRouteTableAttachmentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         peering_id: "PeeringId", # required
+    #         transit_gateway_route_table_arn: "TransitGatewayRouteTableArn", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] peering_id
+    #   The ID of the peer for the
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_route_table_arn
+    #   The ARN of the transit gateway route table for the attachment
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The list of key-value tags associated with the request.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] client_token
+    #   The client token associated with the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CreateTransitGatewayRouteTableAttachmentRequest AWS API Documentation
+    #
+    class CreateTransitGatewayRouteTableAttachmentRequest < Struct.new(
+      :peering_id,
+      :transit_gateway_route_table_arn,
+      :tags,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateway_route_table_attachment
+    #   The route table associated with the create transit gateway route
+    #   table attachment request.
+    #   @return [Types::TransitGatewayRouteTableAttachment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CreateTransitGatewayRouteTableAttachmentResponse AWS API Documentation
+    #
+    class CreateTransitGatewayRouteTableAttachmentResponse < Struct.new(
+      :transit_gateway_route_table_attachment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateVpcAttachmentRequest
     #   data as a hash:
     #
@@ -2171,6 +2372,37 @@ module Aws::NetworkManager
     #
     class DeleteLinkResponse < Struct.new(
       :link)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeletePeeringRequest
+    #   data as a hash:
+    #
+    #       {
+    #         peering_id: "PeeringId", # required
+    #       }
+    #
+    # @!attribute [rw] peering_id
+    #   The ID of the peering connection to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DeletePeeringRequest AWS API Documentation
+    #
+    class DeletePeeringRequest < Struct.new(
+      :peering_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] peering
+    #   Information about a deleted peering connection.
+    #   @return [Types::Peering]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DeletePeeringResponse AWS API Documentation
+    #
+    class DeletePeeringResponse < Struct.new(
+      :peering)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2753,6 +2985,60 @@ module Aws::NetworkManager
     #
     class GetConnectionsResponse < Struct.new(
       :connections,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetCoreNetworkChangeEventsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         core_network_id: "CoreNetworkId", # required
+    #         policy_version_id: 1, # required
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] core_network_id
+    #   The ID of a core network.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_version_id
+    #   The ID of the policy version.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetCoreNetworkChangeEventsRequest AWS API Documentation
+    #
+    class GetCoreNetworkChangeEventsRequest < Struct.new(
+      :core_network_id,
+      :policy_version_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] core_network_change_events
+    #   The response to `GetCoreNetworkChangeEventsRequest`.
+    #   @return [Array<Types::CoreNetworkChangeEvent>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetCoreNetworkChangeEventsResponse AWS API Documentation
+    #
+    class GetCoreNetworkChangeEventsResponse < Struct.new(
+      :core_network_change_events,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -3911,6 +4197,37 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetTransitGatewayPeeringRequest
+    #   data as a hash:
+    #
+    #       {
+    #         peering_id: "PeeringId", # required
+    #       }
+    #
+    # @!attribute [rw] peering_id
+    #   The ID of the peering request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetTransitGatewayPeeringRequest AWS API Documentation
+    #
+    class GetTransitGatewayPeeringRequest < Struct.new(
+      :peering_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateway_peering
+    #   Returns information about a transit gateway peering.
+    #   @return [Types::TransitGatewayPeering]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetTransitGatewayPeeringResponse AWS API Documentation
+    #
+    class GetTransitGatewayPeeringResponse < Struct.new(
+      :transit_gateway_peering)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetTransitGatewayRegistrationsRequest
     #   data as a hash:
     #
@@ -3962,6 +4279,38 @@ module Aws::NetworkManager
     class GetTransitGatewayRegistrationsResponse < Struct.new(
       :transit_gateway_registrations,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetTransitGatewayRouteTableAttachmentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         attachment_id: "AttachmentId", # required
+    #       }
+    #
+    # @!attribute [rw] attachment_id
+    #   The ID of the transit gateway route table attachment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetTransitGatewayRouteTableAttachmentRequest AWS API Documentation
+    #
+    class GetTransitGatewayRouteTableAttachmentRequest < Struct.new(
+      :attachment_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateway_route_table_attachment
+    #   Returns information about the transit gateway route table
+    #   attachment.
+    #   @return [Types::TransitGatewayRouteTableAttachment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetTransitGatewayRouteTableAttachmentResponse AWS API Documentation
+    #
+    class GetTransitGatewayRouteTableAttachmentResponse < Struct.new(
+      :transit_gateway_route_table_attachment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4154,7 +4503,7 @@ module Aws::NetworkManager
     #
     #       {
     #         core_network_id: "CoreNetworkId",
-    #         attachment_type: "CONNECT", # accepts CONNECT, SITE_TO_SITE_VPN, VPC
+    #         attachment_type: "CONNECT", # accepts CONNECT, SITE_TO_SITE_VPN, VPC, TRANSIT_GATEWAY_ROUTE_TABLE
     #         edge_location: "ExternalRegionCode",
     #         state: "REJECTED", # accepts REJECTED, PENDING_ATTACHMENT_ACCEPTANCE, CREATING, FAILED, AVAILABLE, UPDATING, PENDING_NETWORK_UPDATE, PENDING_TAG_ACCEPTANCE, DELETING
     #         max_results: 1,
@@ -4368,9 +4717,11 @@ module Aws::NetworkManager
     #       }
     #
     # @!attribute [rw] max_results
+    #   The maximum number of results to return.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
+    #   The token for the next page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ListOrganizationServiceAccessStatusRequest AWS API Documentation
@@ -4383,15 +4734,83 @@ module Aws::NetworkManager
     end
 
     # @!attribute [rw] organization_status
+    #   Displays the status of an Amazon Web Services Organization.
     #   @return [Types::OrganizationStatus]
     #
     # @!attribute [rw] next_token
+    #   The token for the next page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ListOrganizationServiceAccessStatusResponse AWS API Documentation
     #
     class ListOrganizationServiceAccessStatusResponse < Struct.new(
       :organization_status,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListPeeringsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         core_network_id: "CoreNetworkId",
+    #         peering_type: "TRANSIT_GATEWAY", # accepts TRANSIT_GATEWAY
+    #         edge_location: "ExternalRegionCode",
+    #         state: "CREATING", # accepts CREATING, FAILED, AVAILABLE, DELETING
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] core_network_id
+    #   The ID of a core network.
+    #   @return [String]
+    #
+    # @!attribute [rw] peering_type
+    #   Returns a list of a peering requests.
+    #   @return [String]
+    #
+    # @!attribute [rw] edge_location
+    #   Returns a list edge locations for the
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   Returns a list of the peering request states.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ListPeeringsRequest AWS API Documentation
+    #
+    class ListPeeringsRequest < Struct.new(
+      :core_network_id,
+      :peering_type,
+      :edge_location,
+      :state,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] peerings
+    #   Lists the transit gateway peerings for the `ListPeerings` request.
+    #   @return [Array<Types::Peering>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ListPeeringsResponse AWS API Documentation
+    #
+    class ListPeeringsResponse < Struct.new(
+      :peerings,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -4468,7 +4887,7 @@ module Aws::NetworkManager
     #   @return [String]
     #
     # @!attribute [rw] core_network_id
-    #   a core network ID.
+    #   The ID of a core network.
     #   @return [String]
     #
     # @!attribute [rw] aws_region
@@ -4746,16 +5165,27 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # The status of an Amazon Web Services Organization and the accounts
+    # within that organization.
+    #
     # @!attribute [rw] organization_id
+    #   The ID of an Amazon Web Services Organization.
     #   @return [String]
     #
     # @!attribute [rw] organization_aws_service_access_status
+    #   The status of the organization's AWS service access. This will be
+    #   `ENABLED` or `DISABLED`.
     #   @return [String]
     #
     # @!attribute [rw] slr_deployment_status
+    #   The status of the SLR deployment for the account. This will be
+    #   either `SUCCEEDED` or `IN_PROGRESS`.
     #   @return [String]
     #
     # @!attribute [rw] account_status_list
+    #   The current service-linked role (SLR) deployment status for an
+    #   Amazon Web Services Organization's accounts. This will be either
+    #   `SUCCEEDED` or `IN_PROGRESS`.
     #   @return [Array<Types::AccountStatus>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/OrganizationStatus AWS API Documentation
@@ -4793,11 +5223,70 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # Describes a peering connection.
+    #
+    # @!attribute [rw] core_network_id
+    #   The ID of the core network for the peering request.
+    #   @return [String]
+    #
+    # @!attribute [rw] core_network_arn
+    #   The ARN of a core network.
+    #   @return [String]
+    #
+    # @!attribute [rw] peering_id
+    #   The ID of the peering attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_account_id
+    #   The ID of the account owner.
+    #   @return [String]
+    #
+    # @!attribute [rw] peering_type
+    #   The type of peering. This will be `TRANSIT_GATEWAY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of the peering connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] edge_location
+    #   The edge location for the peer.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The resource ARN of the peer.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The list of key-value tags associated with the peering.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the attachment peer was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/Peering AWS API Documentation
+    #
+    class Peering < Struct.new(
+      :core_network_id,
+      :core_network_arn,
+      :peering_id,
+      :owner_account_id,
+      :peering_type,
+      :state,
+      :edge_location,
+      :resource_arn,
+      :tags,
+      :created_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a proposed segment change. In some cases, the segment change
     # must first be evaluated and accepted.
     #
     # @!attribute [rw] tags
-    #   The key-value tags that changed for the segment.
+    #   The list of key-value tags that changed for the segment.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] attachment_policy_rule_number
@@ -5386,6 +5875,8 @@ module Aws::NetworkManager
     #       }
     #
     # @!attribute [rw] action
+    #   The action to take for the update request. This can be either
+    #   `ENABLE` or `DISABLE`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/StartOrganizationServiceAccessUpdateRequest AWS API Documentation
@@ -5397,6 +5888,8 @@ module Aws::NetworkManager
     end
 
     # @!attribute [rw] organization_status
+    #   The status of the service access update request for an Amazon Web
+    #   Services Organization.
     #   @return [Types::OrganizationStatus]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/StartOrganizationServiceAccessUpdateResponse AWS API Documentation
@@ -5587,6 +6080,25 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # Describes a transit gateway peering attachment.
+    #
+    # @!attribute [rw] peering
+    #   Describes a transit gateway peer connection.
+    #   @return [Types::Peering]
+    #
+    # @!attribute [rw] transit_gateway_arn
+    #   The ARN of the transit gateway.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/TransitGatewayPeering AWS API Documentation
+    #
+    class TransitGatewayPeering < Struct.new(
+      :peering,
+      :transit_gateway_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the registration of a transit gateway to a global network.
     #
     # @!attribute [rw] global_network_id
@@ -5626,6 +6138,30 @@ module Aws::NetworkManager
     class TransitGatewayRegistrationStateReason < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a transit gateway route table attachment.
+    #
+    # @!attribute [rw] attachment
+    #   Describes a core network attachment.
+    #   @return [Types::Attachment]
+    #
+    # @!attribute [rw] peering_id
+    #   The ID of the peering attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_route_table_arn
+    #   The ARN of the transit gateway attachment route table.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/TransitGatewayRouteTableAttachment AWS API Documentation
+    #
+    class TransitGatewayRouteTableAttachment < Struct.new(
+      :attachment,
+      :peering_id,
+      :transit_gateway_route_table_arn)
       SENSITIVE = []
       include Aws::Structure
     end

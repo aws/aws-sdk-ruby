@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2022-07-12)
+------------------
+
+* Feature - This release adds general availability API support for AWS Cloud WAN.
+
 1.23.0 (2022-05-24)
 ------------------
 
