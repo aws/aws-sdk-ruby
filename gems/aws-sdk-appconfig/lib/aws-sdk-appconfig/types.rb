@@ -10,6 +10,121 @@
 module Aws::AppConfig
   module Types
 
+    # An action defines the tasks the extension performs during the
+    # AppConfig workflow. Each action includes an action point such as
+    # `ON_CREATE_HOSTED_CONFIGURATION`, `PRE_DEPLOYMENT`, or
+    # `ON_DEPLOYMENT`. Each action also includes a name, a URI to an Lambda
+    # function, and an Amazon Resource Name (ARN) for an Identity and Access
+    # Management assume role. You specify the name, URI, and ARN for each
+    # *action point* defined in the extension. You can specify the following
+    # actions for an extension:
+    #
+    # * `PRE_CREATE_HOSTED_CONFIGURATION_VERSION`
+    #
+    # * `PRE_START_DEPLOYMENT`
+    #
+    # * `ON_DEPLOYMENT_START`
+    #
+    # * `ON_DEPLOYMENT_STEP`
+    #
+    # * `ON_DEPLOYMENT_BAKING`
+    #
+    # * `ON_DEPLOYMENT_COMPLETE`
+    #
+    # * `ON_DEPLOYMENT_ROLLED_BACK`
+    #
+    # @note When making an API call, you may pass Action
+    #   data as a hash:
+    #
+    #       {
+    #         name: "Name",
+    #         description: "Description",
+    #         uri: "Uri",
+    #         role_arn: "Arn",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The action name.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Information about the action.
+    #   @return [String]
+    #
+    # @!attribute [rw] uri
+    #   The extension URI associated to the action point in the extension
+    #   definition. The URI can be an Amazon Resource Name (ARN) for one of
+    #   the following: an Lambda function, an Amazon Simple Queue Service
+    #   queue, an Amazon Simple Notification Service topic, or the Amazon
+    #   EventBridge default event bus.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   An Amazon Resource Name (ARN) for an Identity and Access Management
+    #   assume role.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/Action AWS API Documentation
+    #
+    class Action < Struct.new(
+      :name,
+      :description,
+      :uri,
+      :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An extension that was invoked as part of a deployment event.
+    #
+    # @!attribute [rw] extension_identifier
+    #   The name, the ID, or the Amazon Resource Name (ARN) of the
+    #   extension.
+    #   @return [String]
+    #
+    # @!attribute [rw] action_name
+    #   The name of the action.
+    #   @return [String]
+    #
+    # @!attribute [rw] uri
+    #   The extension URI associated to the action point in the extension
+    #   definition. The URI can be an Amazon Resource Name (ARN) for one of
+    #   the following: an Lambda function, an Amazon Simple Queue Service
+    #   queue, an Amazon Simple Notification Service topic, or the Amazon
+    #   EventBridge default event bus.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   An Amazon Resource Name (ARN) for an Identity and Access Management
+    #   assume role.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message when an extension invocation fails.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The error code when an extension invocation fails.
+    #   @return [String]
+    #
+    # @!attribute [rw] invocation_id
+    #   A system-generated ID for this invocation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ActionInvocation AWS API Documentation
+    #
+    class ActionInvocation < Struct.new(
+      :extension_identifier,
+      :action_name,
+      :uri,
+      :role_arn,
+      :error_message,
+      :error_code,
+      :invocation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] id
     #   The application ID.
     #   @return [String]
@@ -46,6 +161,35 @@ module Aws::AppConfig
     class Applications < Struct.new(
       :items,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An extension that was invoked during a deployment.
+    #
+    # @!attribute [rw] extension_id
+    #   The system-generated ID of the extension.
+    #   @return [String]
+    #
+    # @!attribute [rw] extension_association_id
+    #   The system-generated ID for the association.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_number
+    #   The extension version number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] parameters
+    #   One or more parameters for the actions called by the extension.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/AppliedExtension AWS API Documentation
+    #
+    class AppliedExtension < Struct.new(
+      :extension_id,
+      :extension_association_id,
+      :version_number,
+      :parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -305,7 +449,7 @@ module Aws::AppConfig
     #
     #       {
     #         application_id: "Id", # required
-    #         name: "Name", # required
+    #         name: "LongName", # required
     #         description: "Description",
     #         location_uri: "Uri", # required
     #         retrieval_role_arn: "RoleArn",
@@ -404,7 +548,7 @@ module Aws::AppConfig
     #         final_bake_time_in_minutes: 1,
     #         growth_factor: 1.0, # required
     #         growth_type: "LINEAR", # accepts LINEAR, EXPONENTIAL
-    #         replicate_to: "NONE", # required, accepts NONE, SSM_DOCUMENT
+    #         replicate_to: "NONE", # accepts NONE, SSM_DOCUMENT
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
@@ -423,9 +567,18 @@ module Aws::AppConfig
     #   @return [Integer]
     #
     # @!attribute [rw] final_bake_time_in_minutes
-    #   The amount of time AppConfig monitors for alarms before considering
-    #   the deployment to be complete and no longer eligible for automatic
-    #   roll back.
+    #   Specifies the amount of time AppConfig monitors for Amazon
+    #   CloudWatch alarms after the configuration has been deployed to 100%
+    #   of its targets, before considering the deployment to be complete. If
+    #   an alarm is triggered during this time, AppConfig rolls back the
+    #   deployment. You must configure permissions for AppConfig to roll
+    #   back based on CloudWatch alarms. For more information, see
+    #   [Configuring permissions for rollback based on Amazon CloudWatch
+    #   alarms][1] in the *AppConfig User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/appconfig/latest/userguide/getting-started-with-appconfig-cloudwatch-alarms-permissions.html
     #   @return [Integer]
     #
     # @!attribute [rw] growth_factor
@@ -536,6 +689,134 @@ module Aws::AppConfig
       :description,
       :monitors,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateExtensionAssociationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         extension_identifier: "Identifier", # required
+    #         extension_version_number: 1,
+    #         resource_identifier: "Identifier", # required
+    #         parameters: {
+    #           "Name" => "StringWithLengthBetween1And2048",
+    #         },
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] extension_identifier
+    #   The name, the ID, or the Amazon Resource Name (ARN) of the
+    #   extension.
+    #   @return [String]
+    #
+    # @!attribute [rw] extension_version_number
+    #   The version number of the extension. If not specified, AppConfig
+    #   uses the maximum version of the extension.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] resource_identifier
+    #   The ARN of an application, configuration profile, or environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The parameter names and values defined in the extensions. Extension
+    #   parameters marked `Required` must be entered for this field.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] tags
+    #   Adds one or more tags for the specified extension association. Tags
+    #   are metadata that help you categorize resources in different ways,
+    #   for example, by purpose, owner, or environment. Each tag consists of
+    #   a key and an optional value, both of which you define.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/CreateExtensionAssociationRequest AWS API Documentation
+    #
+    class CreateExtensionAssociationRequest < Struct.new(
+      :extension_identifier,
+      :extension_version_number,
+      :resource_identifier,
+      :parameters,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateExtensionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "Name", # required
+    #         description: "Description",
+    #         actions: { # required
+    #           "PRE_CREATE_HOSTED_CONFIGURATION_VERSION" => [
+    #             {
+    #               name: "Name",
+    #               description: "Description",
+    #               uri: "Uri",
+    #               role_arn: "Arn",
+    #             },
+    #           ],
+    #         },
+    #         parameters: {
+    #           "Name" => {
+    #             description: "Description",
+    #             required: false,
+    #           },
+    #         },
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #         latest_version_number: 1,
+    #       }
+    #
+    # @!attribute [rw] name
+    #   A name for the extension. Each extension name in your account must
+    #   be unique. Extension versions use the same name.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Information about the extension.
+    #   @return [String]
+    #
+    # @!attribute [rw] actions
+    #   The actions defined in the extension.
+    #   @return [Hash<String,Array<Types::Action>>]
+    #
+    # @!attribute [rw] parameters
+    #   The parameters accepted by the extension. You specify parameter
+    #   values when you associate the extension to an AppConfig resource by
+    #   using the `CreateExtensionAssociation` API action. For Lambda
+    #   extension actions, these parameters are included in the Lambda
+    #   request object.
+    #   @return [Hash<String,Types::Parameter>]
+    #
+    # @!attribute [rw] tags
+    #   Adds one or more tags for the specified extension. Tags are metadata
+    #   that help you categorize resources in different ways, for example,
+    #   by purpose, owner, or environment. Each tag consists of a key and an
+    #   optional value, both of which you define.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] latest_version_number
+    #   You can omit this field when you create an extension. When you
+    #   create a new version, specify the most recent current version
+    #   number. For example, you create version 3, enter 2 for this field.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/CreateExtensionRequest AWS API Documentation
+    #
+    class CreateExtensionRequest < Struct.new(
+      :name,
+      :description,
+      :actions,
+      :parameters,
+      :tags,
+      :latest_version_number)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -688,6 +969,52 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteExtensionAssociationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         extension_association_id: "Id", # required
+    #       }
+    #
+    # @!attribute [rw] extension_association_id
+    #   The ID of the extension association to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/DeleteExtensionAssociationRequest AWS API Documentation
+    #
+    class DeleteExtensionAssociationRequest < Struct.new(
+      :extension_association_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteExtensionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         extension_identifier: "Identifier", # required
+    #         version_number: 1,
+    #       }
+    #
+    # @!attribute [rw] extension_identifier
+    #   The name, ID, or Amazon Resource Name (ARN) of the extension you
+    #   want to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_number
+    #   A specific version of an extension to delete. If omitted, the
+    #   highest version is deleted.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/DeleteExtensionRequest AWS API Documentation
+    #
+    class DeleteExtensionRequest < Struct.new(
+      :extension_identifier,
+      :version_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteHostedConfigurationVersionRequest
     #   data as a hash:
     #
@@ -795,6 +1122,13 @@ module Aws::AppConfig
     #   The time the deployment completed.
     #   @return [Time]
     #
+    # @!attribute [rw] applied_extensions
+    #   A list of extensions that were processed as part of the deployment.
+    #   The extensions that were previously associated to the configuration
+    #   profile, environment, or the application when `StartDeployment` was
+    #   called.
+    #   @return [Array<Types::AppliedExtension>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/Deployment AWS API Documentation
     #
     class Deployment < Struct.new(
@@ -815,7 +1149,8 @@ module Aws::AppConfig
       :event_log,
       :percentage_complete,
       :started_at,
-      :completed_at)
+      :completed_at,
+      :applied_extensions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -843,6 +1178,10 @@ module Aws::AppConfig
     #   attempt a new deployment.
     #   @return [String]
     #
+    # @!attribute [rw] action_invocations
+    #   The list of extensions that were invoked as part of the deployment.
+    #   @return [Array<Types::ActionInvocation>]
+    #
     # @!attribute [rw] occurred_at
     #   The date and time the event occurred.
     #   @return [Time]
@@ -853,6 +1192,7 @@ module Aws::AppConfig
       :event_type,
       :triggered_by,
       :description,
+      :action_invocations,
       :occurred_at)
       SENSITIVE = []
       include Aws::Structure
@@ -1068,6 +1408,194 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
+    # @!attribute [rw] id
+    #   The system-generated ID of the extension.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The extension name.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_number
+    #   The extension version number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] arn
+    #   The system-generated Amazon Resource Name (ARN) for the extension.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Information about the extension.
+    #   @return [String]
+    #
+    # @!attribute [rw] actions
+    #   The actions defined in the extension.
+    #   @return [Hash<String,Array<Types::Action>>]
+    #
+    # @!attribute [rw] parameters
+    #   The parameters accepted by the extension. You specify parameter
+    #   values when you associate the extension to an AppConfig resource by
+    #   using the `CreateExtensionAssociation` API action. For Lambda
+    #   extension actions, these parameters are included in the Lambda
+    #   request object.
+    #   @return [Hash<String,Types::Parameter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/Extension AWS API Documentation
+    #
+    class Extension < Struct.new(
+      :id,
+      :name,
+      :version_number,
+      :arn,
+      :description,
+      :actions,
+      :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The system-generated ID for the association.
+    #   @return [String]
+    #
+    # @!attribute [rw] extension_arn
+    #   The ARN of the extension defined in the association.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARNs of applications, configuration profiles, or environments
+    #   defined in the association.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The system-generated Amazon Resource Name (ARN) for the extension.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The parameter names and values defined in the association.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] extension_version_number
+    #   The version number for the extension defined in the association.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ExtensionAssociation AWS API Documentation
+    #
+    class ExtensionAssociation < Struct.new(
+      :id,
+      :extension_arn,
+      :resource_arn,
+      :arn,
+      :parameters,
+      :extension_version_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about an association between an extension and an AppConfig
+    # resource such as an application, environment, or configuration
+    # profile. Call `GetExtensionAssociation` to get more information about
+    # an association.
+    #
+    # @!attribute [rw] id
+    #   The extension association ID. This ID is used to call other
+    #   `ExtensionAssociation` API actions such as `GetExtensionAssociation`
+    #   or `DeleteExtensionAssociation`.
+    #   @return [String]
+    #
+    # @!attribute [rw] extension_arn
+    #   The system-generated Amazon Resource Name (ARN) for the extension.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARNs of applications, configuration profiles, or environments
+    #   defined in the association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ExtensionAssociationSummary AWS API Documentation
+    #
+    class ExtensionAssociationSummary < Struct.new(
+      :id,
+      :extension_arn,
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   The list of extension associations. Each item represents an
+    #   extension association to an application, environment, or
+    #   configuration profile.
+    #   @return [Array<Types::ExtensionAssociationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. Use this token to get
+    #   the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ExtensionAssociations AWS API Documentation
+    #
+    class ExtensionAssociations < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about an extension. Call `GetExtension` to get more
+    # information about an extension.
+    #
+    # @!attribute [rw] id
+    #   The system-generated ID of the extension.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The extension name.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_number
+    #   The extension version number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] arn
+    #   The system-generated Amazon Resource Name (ARN) for the extension.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Information about the extension.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ExtensionSummary AWS API Documentation
+    #
+    class ExtensionSummary < Struct.new(
+      :id,
+      :name,
+      :version_number,
+      :arn,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   The list of available extensions. The list includes Amazon Web
+    #   Services-authored and user-created extensions.
+    #   @return [Array<Types::ExtensionSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. Use this token to get
+    #   the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/Extensions AWS API Documentation
+    #
+    class Extensions < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetApplicationRequest
     #   data as a hash:
     #
@@ -1260,6 +1788,52 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetExtensionAssociationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         extension_association_id: "Id", # required
+    #       }
+    #
+    # @!attribute [rw] extension_association_id
+    #   The extension association ID to get.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/GetExtensionAssociationRequest AWS API Documentation
+    #
+    class GetExtensionAssociationRequest < Struct.new(
+      :extension_association_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetExtensionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         extension_identifier: "Identifier", # required
+    #         version_number: 1,
+    #       }
+    #
+    # @!attribute [rw] extension_identifier
+    #   The name, the ID, or the Amazon Resource Name (ARN) of the
+    #   extension.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_number
+    #   The extension version number. If no version number was defined,
+    #   AppConfig uses the highest version.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/GetExtensionRequest AWS API Documentation
+    #
+    class GetExtensionRequest < Struct.new(
+      :extension_identifier,
+      :version_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetHostedConfigurationVersionRequest
     #   data as a hash:
     #
@@ -1424,13 +1998,19 @@ module Aws::AppConfig
     #   The type of error for an invalid configuration.
     #   @return [String]
     #
+    # @!attribute [rw] value
+    #   Details about an error with Lambda when a synchronous extension
+    #   experiences an error during an invocation.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/InvalidConfigurationDetail AWS API Documentation
     #
     class InvalidConfigurationDetail < Struct.new(
       :constraint,
       :location,
       :reason,
-      :type)
+      :type,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1613,6 +2193,87 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListExtensionAssociationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_identifier: "Arn",
+    #         extension_identifier: "Identifier",
+    #         extension_version_number: 1,
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] resource_identifier
+    #   The ARN of an application, configuration profile, or environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] extension_identifier
+    #   The name, the ID, or the Amazon Resource Name (ARN) of the
+    #   extension.
+    #   @return [String]
+    #
+    # @!attribute [rw] extension_version_number
+    #   The version number for the extension defined in the association.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results or pass null to get the first set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ListExtensionAssociationsRequest AWS API Documentation
+    #
+    class ListExtensionAssociationsRequest < Struct.new(
+      :resource_identifier,
+      :extension_identifier,
+      :extension_version_number,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListExtensionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #         name: "QueryName",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The extension name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ListExtensionsRequest AWS API Documentation
+    #
+    class ListExtensionsRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListHostedConfigurationVersionsRequest
     #   data as a hash:
     #
@@ -1696,6 +2357,41 @@ module Aws::AppConfig
     class Monitor < Struct.new(
       :alarm_arn,
       :alarm_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A value such as an Amazon Resource Name (ARN) or an Amazon Simple
+    # Notification Service topic entered in an extension when invoked.
+    # Parameter values are specified in an extension association. For more
+    # information about extensions, see [Working with AppConfig
+    # extensions][1] in the *AppConfig User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html
+    #
+    # @note When making an API call, you may pass Parameter
+    #   data as a hash:
+    #
+    #       {
+    #         description: "Description",
+    #         required: false,
+    #       }
+    #
+    # @!attribute [rw] description
+    #   Information about the parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] required
+    #   A parameter value must be specified in the extension association.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/Parameter AWS API Documentation
+    #
+    class Parameter < Struct.new(
+      :description,
+      :required)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2124,6 +2820,91 @@ module Aws::AppConfig
       :name,
       :description,
       :monitors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateExtensionAssociationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         extension_association_id: "Id", # required
+    #         parameters: {
+    #           "Name" => "StringWithLengthBetween1And2048",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] extension_association_id
+    #   The system-generated ID for the association.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The parameter names and values defined in the extension.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/UpdateExtensionAssociationRequest AWS API Documentation
+    #
+    class UpdateExtensionAssociationRequest < Struct.new(
+      :extension_association_id,
+      :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateExtensionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         extension_identifier: "Identifier", # required
+    #         description: "Description",
+    #         actions: {
+    #           "PRE_CREATE_HOSTED_CONFIGURATION_VERSION" => [
+    #             {
+    #               name: "Name",
+    #               description: "Description",
+    #               uri: "Uri",
+    #               role_arn: "Arn",
+    #             },
+    #           ],
+    #         },
+    #         parameters: {
+    #           "Name" => {
+    #             description: "Description",
+    #             required: false,
+    #           },
+    #         },
+    #         version_number: 1,
+    #       }
+    #
+    # @!attribute [rw] extension_identifier
+    #   The name, the ID, or the Amazon Resource Name (ARN) of the
+    #   extension.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Information about the extension.
+    #   @return [String]
+    #
+    # @!attribute [rw] actions
+    #   The actions defined in the extension.
+    #   @return [Hash<String,Array<Types::Action>>]
+    #
+    # @!attribute [rw] parameters
+    #   One or more parameters for the actions called by the extension.
+    #   @return [Hash<String,Types::Parameter>]
+    #
+    # @!attribute [rw] version_number
+    #   The extension version number.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/UpdateExtensionRequest AWS API Documentation
+    #
+    class UpdateExtensionRequest < Struct.new(
+      :extension_identifier,
+      :description,
+      :actions,
+      :parameters,
+      :version_number)
       SENSITIVE = []
       include Aws::Structure
     end
