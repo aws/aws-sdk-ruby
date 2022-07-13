@@ -11,15 +11,31 @@ module Aws
 
         def call(context)
           context.operation.input.shape.members.each do |m, ref|
-            if ref['jsonvalue']
-              param_value = context.params[m]
-              unless param_value.respond_to?(:to_json)
-                raise ArgumentError, "The value of params[#{m}] is not JSON serializable."
-              end
-              context.params[m] = param_value.to_json
-            end
+            convert_jsonvalue(m, ref, context.params)
           end
           @handler.call(context)
+        end
+
+        def convert_jsonvalue(m, ref, params)
+          return if params.nil? || params[m].nil?
+
+          if ref['jsonvalue']
+            param_value = params[m]
+            unless param_value.respond_to?(:to_json)
+              raise ArgumentError, "The value of params[#{m}] is not JSON serializable."
+            end
+            params[m] = param_value.to_json
+          elsif ref.shape.is_a?(Seahorse::Model::Shapes::StructureShape)
+            ref.shape.members.each do |member_m, ref|
+              convert_jsonvalue(member_m, ref, params[m])
+            end
+          elsif ref.shape.is_a?(Seahorse::Model::Shapes::ListShape)
+            if ref.shape.member['jsonvalue']
+              params[m] = params[m].map do |v|
+                v.to_json
+              end
+            end
+          end
         end
 
       end

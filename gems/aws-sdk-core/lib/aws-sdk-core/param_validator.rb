@@ -152,7 +152,7 @@ module Aws
       when MapShape then map(ref, value, errors, context)
       when DocumentShape then document(ref, value, errors, context)
       when StringShape
-        unless value.is_a?(String)
+        unless value.is_a?(String) || ref['jsonvalue']
           errors << expected_got(context, "a String", value)
         end
       when IntegerShape

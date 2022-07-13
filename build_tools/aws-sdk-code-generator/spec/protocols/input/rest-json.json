@@ -1229,18 +1229,47 @@
     },
     "shapes": {
       "InputShape": {
-        "type":"structure",
+        "type": "structure",
+        "payload": "Body",
         "members": {
-          "Attr": {
+          "HeaderField": {
             "shape": "StringType",
             "jsonvalue": true,
             "location": "header",
             "locationName": "X-Amz-Foo"
+          },
+          "QueryField": {
+            "shape": "StringType",
+            "jsonvalue": true,
+            "location": "querystring",
+            "locationName": "Bar"
+          },
+          "Body": {
+            "shape": "BodyStructure"
           }
         }
       },
       "StringType": {
         "type": "string"
+      },
+      "ListType": {
+        "type": "list",
+        "member": {
+          "shape": "StringType",
+          "jsonvalue": true
+        }
+      },
+      "BodyStructure": {
+        "type": "structure",
+        "members": {
+          "BodyField": {
+            "shape": "StringType",
+            "jsonvalue": true
+          },
+          "BodyListField": {
+            "shape": "ListType"
+          }
+        }
       }
     },
     "cases": [
@@ -1256,12 +1285,43 @@
           "name": "OperationName"
         },
         "params": {
-          "Attr": {"Foo":"Bar"}
+          "HeaderField": {"Foo":"Bar"},
+          "QueryField": {"Foo":"Bar"},
+          "Body": {
+            "BodyField": {"Foo":"Bar"}
+          }
+        },
+        "serialized": {
+          "uri": "/?Bar=%7B%22Foo%22%3A%22Bar%22%7D",
+          "headers": {
+            "X-Amz-Foo": "eyJGb28iOiJCYXIifQ==",
+            "Content-Type": "application/json"
+          },
+          "body": "{\"BodyField\":\"{\\\"Foo\\\":\\\"Bar\\\"}\"}"
+        }
+      },
+      {
+        "given": {
+          "input": {
+            "shape": "InputShape"
+          },
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "Body": {
+            "BodyListField": [{"Foo":"Bar"}]
+          }
         },
         "serialized": {
           "uri": "/",
-          "headers": {"X-Amz-Foo": "eyJGb28iOiJCYXIifQ=="},
-          "body": ""
+          "headers": {
+            "Content-Type": "application/json"
+          },
+          "body": "{\"BodyListField\":[\"{\\\"Foo\\\":\\\"Bar\\\"}\"]}"
         }
       },
       {
@@ -1279,8 +1339,10 @@
         },
         "serialized": {
           "uri": "/",
-          "headers": {},
-          "body": ""
+          "headers": {
+            "Content-Type": "application/json"
+          },
+          "body": "{}"
         }
       }
     ]
