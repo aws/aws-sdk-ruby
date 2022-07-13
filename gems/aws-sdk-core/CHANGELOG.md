@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Add support for serializing shapes on the body with `jsonvalue` members. 
+
 3.131.2 (2022-06-20)
 ------------------
 

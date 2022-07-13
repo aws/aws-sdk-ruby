@@ -1259,6 +1259,16 @@
           "jsonvalue": true
         }
       },
+      "MapType": {
+        "type": "map",
+        "key": {
+          "shape": "StringType"
+        },
+        "value": {
+          "shape": "StringType",
+          "jsonvalue": true
+        }
+      },
       "BodyStructure": {
         "type": "structure",
         "members": {
@@ -1268,6 +1278,9 @@
           },
           "BodyListField": {
             "shape": "ListType"
+          },
+          "BodyMapField": {
+            "shape": "MapType"
           }
         }
       }
@@ -1322,6 +1335,30 @@
             "Content-Type": "application/json"
           },
           "body": "{\"BodyListField\":[\"{\\\"Foo\\\":\\\"Bar\\\"}\"]}"
+        }
+      },
+      {
+        "given": {
+          "input": {
+            "shape": "InputShape"
+          },
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "Body": {
+            "BodyMapField": {"FooBar": {"Foo":"Bar"}, "BarFoo":  {"Bar":  "Foo"}}
+          }
+        },
+        "serialized": {
+          "uri": "/",
+          "headers": {
+            "Content-Type": "application/json"
+          },
+          "body": "{\"BodyMapField\": {\"FooBar\": \"{\\\"Foo\\\":\\\"Bar\\\"}\", \"BarFoo\": \"{\\\"Bar\\\":\\\"Foo\\\"}\"}}"
         }
       },
       {
