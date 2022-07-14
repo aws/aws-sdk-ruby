@@ -909,7 +909,8 @@ module Aws::Inspector2
     #
     # @!attribute [rw] resource_type
     #   An array of Amazon Web Services resource types to return coverage
-    #   statistics for.
+    #   statistics for. The values can be `AWS_EC2_INSTANCE` or
+    #   `AWS_ECR_REPOSITORY`.
     #   @return [Array<Types::CoverageStringFilter>]
     #
     # @!attribute [rw] scan_status_code
@@ -1259,6 +1260,7 @@ module Aws::Inspector2
     #           ],
     #         },
     #         name: "FilterName", # required
+    #         reason: "FilterReason",
     #         tags: {
     #           "MapKey" => "MapValue",
     #         },
@@ -1283,6 +1285,10 @@ module Aws::Inspector2
     #   underscore (\_), and dash (-). Spaces are not allowed.
     #   @return [String]
     #
+    # @!attribute [rw] reason
+    #   The reason for creating the filter.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   A list of tags for the filter.
     #   @return [Hash<String,String>]
@@ -1294,6 +1300,7 @@ module Aws::Inspector2
       :description,
       :filter_criteria,
       :name,
+      :reason,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -2073,6 +2080,47 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # Details about the ECR automated re-scan duration setting for your
+    # environment
+    #
+    # @note When making an API call, you may pass EcrConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         rescan_duration: "LIFETIME", # required, accepts LIFETIME, DAYS_30, DAYS_180
+    #       }
+    #
+    # @!attribute [rw] rescan_duration
+    #   The ECR automated re-scan duration defines how long an ECR image
+    #   will be actively scanned by Amazon Inspector. When the number of
+    #   days since an image was last pushed exceeds the automated re-scan
+    #   duration the monitoring state of that image becomes `inactive` and
+    #   all associated findings are scheduled for closure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/EcrConfiguration AWS API Documentation
+    #
+    class EcrConfiguration < Struct.new(
+      :rescan_duration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the state of the ECR scans for your environment.
+    #
+    # @!attribute [rw] rescan_duration_state
+    #   An object that contains details about the state of the ECR automated
+    #   re-scan setting.
+    #   @return [Types::EcrRescanDurationState]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/EcrConfigurationState AWS API Documentation
+    #
+    class EcrConfigurationState < Struct.new(
+      :rescan_duration_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information on the Amazon ECR image metadata associated with a
     # finding.
     #
@@ -2104,6 +2152,36 @@ module Aws::Inspector2
     class EcrRepositoryMetadata < Struct.new(
       :name,
       :scan_frequency)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the state of any changes to the ECR automated re-scan
+    # duration setting.
+    #
+    # @!attribute [rw] rescan_duration
+    #   The ECR automated re-scan duration defines how long an ECR image
+    #   will be actively scanned by Amazon Inspector. When the number of
+    #   days since an image was last pushed exceeds the automated re-scan
+    #   duration the monitoring state of that image becomes `inactive` and
+    #   all associated findings are scheduled for closure.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of changes to the ECR automated re-scan duration.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   A timestamp representing when the last time the ECR scan duration
+    #   setting was changed.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/EcrRescanDurationState AWS API Documentation
+    #
+    class EcrRescanDurationState < Struct.new(
+      :rescan_duration,
+      :status,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2916,6 +2994,25 @@ module Aws::Inspector2
       :account_id,
       :code,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetConfigurationRequest AWS API Documentation
+    #
+    class GetConfigurationRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] ecr_configuration
+    #   Specifies how the ECR automated re-scan duration is currently
+    #   configured for your environment.
+    #   @return [Types::EcrConfigurationState]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetConfigurationResponse AWS API Documentation
+    #
+    class GetConfigurationResponse < Struct.new(
+      :ecr_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5171,6 +5268,32 @@ module Aws::Inspector2
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass UpdateConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         ecr_configuration: { # required
+    #           rescan_duration: "LIFETIME", # required, accepts LIFETIME, DAYS_30, DAYS_180
+    #         },
+    #       }
+    #
+    # @!attribute [rw] ecr_configuration
+    #   Specifies how the ECR automated re-scan will be updated for your
+    #   environment.
+    #   @return [Types::EcrConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateConfigurationRequest AWS API Documentation
+    #
+    class UpdateConfigurationRequest < Struct.new(
+      :ecr_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateConfigurationResponse AWS API Documentation
+    #
+    class UpdateConfigurationResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass UpdateFilterRequest
     #   data as a hash:
     #
@@ -5390,6 +5513,7 @@ module Aws::Inspector2
     #           ],
     #         },
     #         name: "FilterName",
+    #         reason: "FilterReason",
     #       }
     #
     # @!attribute [rw] action
@@ -5413,6 +5537,10 @@ module Aws::Inspector2
     #   The name of the filter.
     #   @return [String]
     #
+    # @!attribute [rw] reason
+    #   The reason the filter was updated.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateFilterRequest AWS API Documentation
     #
     class UpdateFilterRequest < Struct.new(
@@ -5420,7 +5548,8 @@ module Aws::Inspector2
       :description,
       :filter_arn,
       :filter_criteria,
-      :name)
+      :name,
+      :reason)
       SENSITIVE = []
       include Aws::Structure
     end

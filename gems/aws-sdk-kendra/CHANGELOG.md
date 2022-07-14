@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2022-07-14)
+------------------
+
+* Feature - This release adds AccessControlConfigurations which allow you to redefine your document level access control without the need for content re-indexing.
+
 1.53.0 (2022-06-30)
 ------------------
 

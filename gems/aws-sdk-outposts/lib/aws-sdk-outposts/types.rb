@@ -978,13 +978,42 @@ module Aws::Outposts
     #   The status of the line item.
     #   @return [String]
     #
+    # @!attribute [rw] shipment_information
+    #   Information about a line item shipment.
+    #   @return [Types::ShipmentInformation]
+    #
+    # @!attribute [rw] asset_information_list
+    #   Information about assets.
+    #   @return [Array<Types::LineItemAssetInformation>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/LineItem AWS API Documentation
     #
     class LineItem < Struct.new(
       :catalog_item_id,
       :line_item_id,
       :quantity,
-      :status)
+      :status,
+      :shipment_information,
+      :asset_information_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a line item asset.
+    #
+    # @!attribute [rw] asset_id
+    #   The ID of the asset.
+    #   @return [String]
+    #
+    # @!attribute [rw] mac_address_list
+    #   MAC addresses of the asset.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/LineItemAssetInformation AWS API Documentation
+    #
+    class LineItemAssetInformation < Struct.new(
+      :asset_id,
+      :mac_address_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1666,6 +1695,25 @@ module Aws::Outposts
     #
     class ServiceQuotaExceededException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a line item shipment.
+    #
+    # @!attribute [rw] shipment_tracking_number
+    #   The tracking number of the shipment.
+    #   @return [String]
+    #
+    # @!attribute [rw] shipment_carrier
+    #   The carrier of the shipment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ShipmentInformation AWS API Documentation
+    #
+    class ShipmentInformation < Struct.new(
+      :shipment_tracking_number,
+      :shipment_carrier)
       SENSITIVE = []
       include Aws::Structure
     end

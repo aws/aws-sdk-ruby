@@ -4027,7 +4027,7 @@ module Aws::EC2
     CreateFlowLogsRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: String, location_name: "LogGroupName"))
     CreateFlowLogsRequest.add_member(:resource_ids, Shapes::ShapeRef.new(shape: FlowLogResourceIds, required: true, location_name: "ResourceId"))
     CreateFlowLogsRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: FlowLogsResourceType, required: true, location_name: "ResourceType"))
-    CreateFlowLogsRequest.add_member(:traffic_type, Shapes::ShapeRef.new(shape: TrafficType, required: true, location_name: "TrafficType"))
+    CreateFlowLogsRequest.add_member(:traffic_type, Shapes::ShapeRef.new(shape: TrafficType, location_name: "TrafficType"))
     CreateFlowLogsRequest.add_member(:log_destination_type, Shapes::ShapeRef.new(shape: LogDestinationType, location_name: "LogDestinationType"))
     CreateFlowLogsRequest.add_member(:log_destination, Shapes::ShapeRef.new(shape: String, location_name: "LogDestination"))
     CreateFlowLogsRequest.add_member(:log_format, Shapes::ShapeRef.new(shape: String, location_name: "LogFormat"))

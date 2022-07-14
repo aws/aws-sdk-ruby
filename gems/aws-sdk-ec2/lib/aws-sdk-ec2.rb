@@ -72,6 +72,6 @@ require_relative 'aws-sdk-ec2/customizations'
 # @!group service
 module Aws::EC2
 
-  GEM_VERSION = '1.321.0'
+  GEM_VERSION = '1.322.0'
 
 end

@@ -5942,7 +5942,7 @@ module Aws::EC2
     #   you specified a VPC ID for the `ResourceId` property, specify `VPC`
     #   for this property.
     #
-    # @option params [required, String] :traffic_type
+    # @option params [String] :traffic_type
     #   The type of traffic to log. You can log traffic that the resource
     #   accepts or rejects, or all traffic.
     #
@@ -6027,8 +6027,8 @@ module Aws::EC2
     #     deliver_logs_permission_arn: "String",
     #     log_group_name: "String",
     #     resource_ids: ["FlowLogResourceId"], # required
-    #     resource_type: "VPC", # required, accepts VPC, Subnet, NetworkInterface
-    #     traffic_type: "ACCEPT", # required, accepts ACCEPT, REJECT, ALL
+    #     resource_type: "VPC", # required, accepts VPC, Subnet, NetworkInterface, TransitGateway, TransitGatewayAttachment
+    #     traffic_type: "ACCEPT", # accepts ACCEPT, REJECT, ALL
     #     log_destination_type: "cloud-watch-logs", # accepts cloud-watch-logs, s3
     #     log_destination: "String",
     #     log_format: "String",
@@ -50351,7 +50351,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.321.0'
+      context[:gem_version] = '1.322.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

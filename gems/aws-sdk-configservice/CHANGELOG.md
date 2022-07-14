@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.79.0 (2022-07-14)
+------------------
+
+* Feature - Update ResourceType enum with values for Route53Resolver, Batch, DMS, Workspaces, Stepfunctions, SageMaker, ElasticLoadBalancingV2, MSK types
+
 1.78.0 (2022-07-05)
 ------------------
 

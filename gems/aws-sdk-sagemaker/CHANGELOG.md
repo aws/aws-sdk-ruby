@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.131.0 (2022-07-14)
+------------------
+
+* Feature - This release adds support for G5, P4d, and C6i instance types in Amazon SageMaker Inference and increases the number of hyperparameters that can be searched from 20 to 30 in Amazon SageMaker Automatic Model Tuning
+
 1.130.0 (2022-07-07)
 ------------------
 

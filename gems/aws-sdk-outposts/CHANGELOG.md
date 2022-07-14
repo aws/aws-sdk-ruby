@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2022-07-14)
+------------------
+
+* Feature - This release adds the ShipmentInformation and AssetInformationList fields to the GetOrder API response.
+
 1.34.0 (2022-06-20)
 ------------------
 

@@ -93,6 +93,8 @@ module Aws::Outposts
     LifeCycleStatus = Shapes::StringShape.new(name: 'LifeCycleStatus')
     LifeCycleStatusList = Shapes::ListShape.new(name: 'LifeCycleStatusList')
     LineItem = Shapes::StructureShape.new(name: 'LineItem')
+    LineItemAssetInformation = Shapes::StructureShape.new(name: 'LineItemAssetInformation')
+    LineItemAssetInformationList = Shapes::ListShape.new(name: 'LineItemAssetInformationList')
     LineItemId = Shapes::StringShape.new(name: 'LineItemId')
     LineItemListDefinition = Shapes::ListShape.new(name: 'LineItemListDefinition')
     LineItemQuantity = Shapes::IntegerShape.new(name: 'LineItemQuantity')
@@ -112,6 +114,8 @@ module Aws::Outposts
     ListSitesOutput = Shapes::StructureShape.new(name: 'ListSitesOutput')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    MacAddress = Shapes::StringShape.new(name: 'MacAddress')
+    MacAddressList = Shapes::ListShape.new(name: 'MacAddressList')
     MaxResults1000 = Shapes::IntegerShape.new(name: 'MaxResults1000')
     MaxSize = Shapes::StringShape.new(name: 'MaxSize')
     MaximumSupportedWeightLbs = Shapes::StringShape.new(name: 'MaximumSupportedWeightLbs')
@@ -147,6 +151,8 @@ module Aws::Outposts
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     ServerEndpoint = Shapes::StringShape.new(name: 'ServerEndpoint')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    ShipmentCarrier = Shapes::StringShape.new(name: 'ShipmentCarrier')
+    ShipmentInformation = Shapes::StructureShape.new(name: 'ShipmentInformation')
     Site = Shapes::StructureShape.new(name: 'Site')
     SiteArn = Shapes::StringShape.new(name: 'SiteArn')
     SiteDescription = Shapes::StringShape.new(name: 'SiteDescription')
@@ -171,6 +177,7 @@ module Aws::Outposts
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Token = Shapes::StringShape.new(name: 'Token')
+    TrackingId = Shapes::StringShape.new(name: 'TrackingId')
     UnderlayIpAddress = Shapes::StringShape.new(name: 'UnderlayIpAddress')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
@@ -380,7 +387,15 @@ module Aws::Outposts
     LineItem.add_member(:line_item_id, Shapes::ShapeRef.new(shape: LineItemId, location_name: "LineItemId"))
     LineItem.add_member(:quantity, Shapes::ShapeRef.new(shape: LineItemQuantity, location_name: "Quantity"))
     LineItem.add_member(:status, Shapes::ShapeRef.new(shape: LineItemStatus, location_name: "Status"))
+    LineItem.add_member(:shipment_information, Shapes::ShapeRef.new(shape: ShipmentInformation, location_name: "ShipmentInformation"))
+    LineItem.add_member(:asset_information_list, Shapes::ShapeRef.new(shape: LineItemAssetInformationList, location_name: "AssetInformationList"))
     LineItem.struct_class = Types::LineItem
+
+    LineItemAssetInformation.add_member(:asset_id, Shapes::ShapeRef.new(shape: AssetId, location_name: "AssetId"))
+    LineItemAssetInformation.add_member(:mac_address_list, Shapes::ShapeRef.new(shape: MacAddressList, location_name: "MacAddressList"))
+    LineItemAssetInformation.struct_class = Types::LineItemAssetInformation
+
+    LineItemAssetInformationList.member = Shapes::ShapeRef.new(shape: LineItemAssetInformation)
 
     LineItemListDefinition.member = Shapes::ShapeRef.new(shape: LineItem)
 
@@ -451,6 +466,8 @@ module Aws::Outposts
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    MacAddressList.member = Shapes::ShapeRef.new(shape: MacAddress)
+
     NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     NotFoundException.struct_class = Types::NotFoundException
 
@@ -501,6 +518,10 @@ module Aws::Outposts
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
+    ShipmentInformation.add_member(:shipment_tracking_number, Shapes::ShapeRef.new(shape: TrackingId, location_name: "ShipmentTrackingNumber"))
+    ShipmentInformation.add_member(:shipment_carrier, Shapes::ShapeRef.new(shape: ShipmentCarrier, location_name: "ShipmentCarrier"))
+    ShipmentInformation.struct_class = Types::ShipmentInformation
 
     Site.add_member(:site_id, Shapes::ShapeRef.new(shape: SiteId, location_name: "SiteId"))
     Site.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))

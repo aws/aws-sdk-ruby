@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.322.0 (2022-07-14)
+------------------
+
+* Feature - This release adds flow logs for Transit Gateway to  allow customers to gain deeper visibility and insights into network traffic through their Transit Gateways.
+
 1.321.0 (2022-07-11)
 ------------------
 

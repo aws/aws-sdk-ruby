@@ -8033,8 +8033,8 @@ module Aws::EC2
     #         deliver_logs_permission_arn: "String",
     #         log_group_name: "String",
     #         resource_ids: ["FlowLogResourceId"], # required
-    #         resource_type: "VPC", # required, accepts VPC, Subnet, NetworkInterface
-    #         traffic_type: "ACCEPT", # required, accepts ACCEPT, REJECT, ALL
+    #         resource_type: "VPC", # required, accepts VPC, Subnet, NetworkInterface, TransitGateway, TransitGatewayAttachment
+    #         traffic_type: "ACCEPT", # accepts ACCEPT, REJECT, ALL
     #         log_destination_type: "cloud-watch-logs", # accepts cloud-watch-logs, s3
     #         log_destination: "String",
     #         log_format: "String",

@@ -16,6 +16,7 @@ module Aws::Athena
     AclConfiguration = Shapes::StructureShape.new(name: 'AclConfiguration')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     AthenaError = Shapes::StructureShape.new(name: 'AthenaError')
+    AwsAccountId = Shapes::StringShape.new(name: 'AwsAccountId')
     BatchGetNamedQueryInput = Shapes::StructureShape.new(name: 'BatchGetNamedQueryInput')
     BatchGetNamedQueryOutput = Shapes::StructureShape.new(name: 'BatchGetNamedQueryOutput')
     BatchGetPreparedStatementInput = Shapes::StructureShape.new(name: 'BatchGetPreparedStatementInput')
@@ -145,6 +146,7 @@ module Aws::Athena
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResultConfiguration = Shapes::StructureShape.new(name: 'ResultConfiguration')
     ResultConfigurationUpdates = Shapes::StructureShape.new(name: 'ResultConfigurationUpdates')
+    ResultOutputLocation = Shapes::StringShape.new(name: 'ResultOutputLocation')
     ResultSet = Shapes::StructureShape.new(name: 'ResultSet')
     ResultSetMetadata = Shapes::StructureShape.new(name: 'ResultSetMetadata')
     Row = Shapes::StructureShape.new(name: 'Row')
@@ -561,17 +563,17 @@ module Aws::Athena
     ResourceNotFoundException.add_member(:resource_name, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceName"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
-    ResultConfiguration.add_member(:output_location, Shapes::ShapeRef.new(shape: String, location_name: "OutputLocation"))
+    ResultConfiguration.add_member(:output_location, Shapes::ShapeRef.new(shape: ResultOutputLocation, location_name: "OutputLocation"))
     ResultConfiguration.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
-    ResultConfiguration.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: String, location_name: "ExpectedBucketOwner"))
+    ResultConfiguration.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "ExpectedBucketOwner"))
     ResultConfiguration.add_member(:acl_configuration, Shapes::ShapeRef.new(shape: AclConfiguration, location_name: "AclConfiguration"))
     ResultConfiguration.struct_class = Types::ResultConfiguration
 
-    ResultConfigurationUpdates.add_member(:output_location, Shapes::ShapeRef.new(shape: String, location_name: "OutputLocation"))
+    ResultConfigurationUpdates.add_member(:output_location, Shapes::ShapeRef.new(shape: ResultOutputLocation, location_name: "OutputLocation"))
     ResultConfigurationUpdates.add_member(:remove_output_location, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "RemoveOutputLocation"))
     ResultConfigurationUpdates.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
     ResultConfigurationUpdates.add_member(:remove_encryption_configuration, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "RemoveEncryptionConfiguration"))
-    ResultConfigurationUpdates.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: String, location_name: "ExpectedBucketOwner"))
+    ResultConfigurationUpdates.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "ExpectedBucketOwner"))
     ResultConfigurationUpdates.add_member(:remove_expected_bucket_owner, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "RemoveExpectedBucketOwner"))
     ResultConfigurationUpdates.add_member(:acl_configuration, Shapes::ShapeRef.new(shape: AclConfiguration, location_name: "AclConfiguration"))
     ResultConfigurationUpdates.add_member(:remove_acl_configuration, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "RemoveAclConfiguration"))

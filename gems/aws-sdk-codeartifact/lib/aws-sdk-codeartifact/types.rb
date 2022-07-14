@@ -78,8 +78,6 @@ module Aws::CodeArtifact
     #
     #   * `public:npmjs` - for the npm public repository.
     #
-    #   * `public:nuget-org` - for the NuGet Gallery.
-    #
     #   * `public:pypi` - for the Python Package Index.
     #
     #   * `public:maven-central` - for Maven Central.
@@ -169,8 +167,8 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] source_repository
-    #   The name of the repository that contains the package versions to
-    #   copy.
+    #   The name of the repository that contains the package versions to be
+    #   copied.
     #   @return [String]
     #
     # @!attribute [rw] destination_repository
@@ -178,27 +176,30 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] format
-    #   The format of the package that is copied.
+    #   The format of the package versions to be copied.
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace of the package. The package component that specifies
-    #   its namespace depends on its type. For example:
+    #   The namespace of the package versions to be copied. The package
+    #   version component that specifies its namespace depends on its type.
+    #   For example:
     #
-    #   * The namespace of a Maven package is its `groupId`.
+    #   * The namespace of a Maven package version is its `groupId`. The
+    #     namespace is required when copying Maven package versions.
     #
-    #   * The namespace of an npm package is its `scope`.
+    #   * The namespace of an npm package version is its `scope`.
     #
-    #   * A Python package does not contain a corresponding component, so
-    #     Python packages do not have a namespace.
+    #   * Python and NuGet package versions do not contain a corresponding
+    #     component, package versions of those formats do not have a
+    #     namespace.
     #   @return [String]
     #
     # @!attribute [rw] package
-    #   The name of the package that is copied.
+    #   The name of the package that contains the versions to be copied.
     #   @return [String]
     #
     # @!attribute [rw] versions
-    #   The versions of the package to copy.
+    #   The versions of the package to be copied.
     #
     #   <note markdown="1"> You must specify `versions` or `versionRevisions`. You cannot
     #   specify both.
@@ -558,15 +559,18 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace of the package. The package component that specifies
-    #   its namespace depends on its type. For example:
+    #   The namespace of the package versions to be deleted. The package
+    #   version component that specifies its namespace depends on its type.
+    #   For example:
     #
-    #   * The namespace of a Maven package is its `groupId`.
+    #   * The namespace of a Maven package version is its `groupId`. The
+    #     namespace is required when deleting Maven package versions.
     #
-    #   * The namespace of an npm package is its `scope`.
+    #   * The namespace of an npm package version is its `scope`.
     #
-    #   * A Python package does not contain a corresponding component, so
-    #     Python packages do not have a namespace.
+    #   * Python and NuGet package versions do not contain a corresponding
+    #     component, package versions of those formats do not have a
+    #     namespace.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -768,6 +772,83 @@ module Aws::CodeArtifact
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribePackageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain: "DomainName", # required
+    #         domain_owner: "AccountId",
+    #         repository: "RepositoryName", # required
+    #         format: "npm", # required, accepts npm, pypi, maven, nuget
+    #         namespace: "PackageNamespace",
+    #         package: "PackageName", # required
+    #       }
+    #
+    # @!attribute [rw] domain
+    #   The name of the domain that contains the repository that contains
+    #   the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_owner
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain. It does not include dashes or spaces.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository
+    #   The name of the repository that contains the requested package.
+    #   @return [String]
+    #
+    # @!attribute [rw] format
+    #   A format that specifies the type of the requested package.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace of the requested package. The package component that
+    #   specifies its namespace depends on its type. For example:
+    #
+    #   * The namespace of a Maven package is its `groupId`. The namespace
+    #     is required when requesting Maven packages.
+    #
+    #   * The namespace of an npm package is its `scope`.
+    #
+    #   * Python and NuGet packages do not contain a corresponding
+    #     component, packages of those formats do not have a namespace.
+    #   @return [String]
+    #
+    # @!attribute [rw] package
+    #   The name of the requested package.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/DescribePackageRequest AWS API Documentation
+    #
+    class DescribePackageRequest < Struct.new(
+      :domain,
+      :domain_owner,
+      :repository,
+      :format,
+      :namespace,
+      :package)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] package
+    #   A [PackageDescription][1] object that contains information about the
+    #   requested package.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDescription.html
+    #   @return [Types::PackageDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/DescribePackageResult AWS API Documentation
+    #
+    class DescribePackageResult < Struct.new(
+      :package)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribePackageVersionRequest
     #   data as a hash:
     #
@@ -800,15 +881,17 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace of the package. The package component that specifies
-    #   its namespace depends on its type. For example:
+    #   The namespace of the requested package version. The package version
+    #   component that specifies its namespace depends on its type. For
+    #   example:
     #
-    #   * The namespace of a Maven package is its `groupId`.
+    #   * The namespace of a Maven package version is its `groupId`.
     #
-    #   * The namespace of an npm package is its `scope`.
+    #   * The namespace of an npm package version is its `scope`.
     #
-    #   * A Python package does not contain a corresponding component, so
-    #     Python packages do not have a namespace.
+    #   * Python and NuGet package versions do not contain a corresponding
+    #     component, package versions of those formats do not have a
+    #     namespace.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -986,15 +1069,17 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace of the package. The package component that specifies
-    #   its namespace depends on its type. For example:
+    #   The namespace of the package versions to be disposed. The package
+    #   version component that specifies its namespace depends on its type.
+    #   For example:
     #
-    #   * The namespace of a Maven package is its `groupId`.
+    #   * The namespace of a Maven package version is its `groupId`.
     #
-    #   * The namespace of an npm package is its `scope`.
+    #   * The namespace of an npm package version is its `scope`.
     #
-    #   * A Python package does not contain a corresponding component, so
-    #     Python packages do not have a namespace.
+    #   * Python and NuGet package versions do not contain a corresponding
+    #     component, package versions of those formats do not have a
+    #     namespace.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -1115,6 +1200,33 @@ module Aws::CodeArtifact
       :repository_count,
       :asset_size_bytes,
       :s3_bucket_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about how a package originally entered the CodeArtifact
+    # domain. For packages published directly to CodeArtifact, the entry
+    # point is the repository it was published to. For packages ingested
+    # from an external repository, the entry point is the external
+    # connection that it was ingested from. An external connection is a
+    # CodeArtifact repository that is connected to an external repository
+    # such as the npm registry or NuGet gallery.
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository that a package was originally published
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_connection_name
+    #   The name of the external connection that a package was ingested
+    #   from.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/DomainEntryPoint AWS API Documentation
+    #
+    class DomainEntryPoint < Struct.new(
+      :repository_name,
+      :external_connection_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1294,15 +1406,17 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace of the package. The package component that specifies
-    #   its namespace depends on its type. For example:
+    #   The namespace of the package version with the requested asset file.
+    #   The package version component that specifies its namespace depends
+    #   on its type. For example:
     #
-    #   * The namespace of a Maven package is its `groupId`.
+    #   * The namespace of a Maven package version is its `groupId`.
     #
-    #   * The namespace of an npm package is its `scope`.
+    #   * The namespace of an npm package version is its `scope`.
     #
-    #   * A Python package does not contain a corresponding component, so
-    #     Python packages do not have a namespace.
+    #   * Python and NuGet package versions do not contain a corresponding
+    #     component, package versions of those formats do not have a
+    #     namespace.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -1397,23 +1511,20 @@ module Aws::CodeArtifact
     # @!attribute [rw] format
     #   A format that specifies the type of the package version with the
     #   requested readme file.
-    #
-    #   <note markdown="1"> Although `maven` is listed as a valid value, CodeArtifact does not
-    #   support displaying readme files for Maven packages.
-    #
-    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace of the package. The package component that specifies
-    #   its namespace depends on its type. For example:
+    #   The namespace of the package version with the requested readme file.
+    #   The package version component that specifies its namespace depends
+    #   on its type. For example:
     #
-    #   * The namespace of a Maven package is its `groupId`.
+    #   * The namespace of a Maven package version is its `groupId`.
     #
-    #   * The namespace of an npm package is its `scope`.
+    #   * The namespace of an npm package version is its `scope`.
     #
-    #   * A Python package does not contain a corresponding component, so
-    #     Python packages do not have a namespace.
+    #   * Python and NuGet package versions do not contain a corresponding
+    #     component, package versions of those formats do not have a
+    #     namespace.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -1444,15 +1555,17 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace of the package. The package component that specifies
-    #   its namespace depends on its type. For example:
+    #   The namespace of the package version with the requested readme file.
+    #   The package version component that specifies its namespace depends
+    #   on its type. For example:
     #
-    #   * The namespace of a Maven package is its `groupId`.
+    #   * The namespace of a Maven package version is its `groupId`.
     #
-    #   * The namespace of an npm package is its `scope`.
+    #   * The namespace of an npm package version is its `scope`.
     #
-    #   * A Python package does not contain a corresponding component, so
-    #     Python packages do not have a namespace.
+    #   * Python and NuGet package versions do not contain a corresponding
+    #     component, package versions of those formats do not have a
+    #     namespace.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -1692,28 +1805,30 @@ module Aws::CodeArtifact
     #
     # @!attribute [rw] repository
     #   The name of the repository that contains the package that contains
-    #   the returned package version assets.
+    #   the requested package version assets.
     #   @return [String]
     #
     # @!attribute [rw] format
-    #   The format of the package that contains the returned package version
-    #   assets.
+    #   The format of the package that contains the requested package
+    #   version assets.
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace of the package. The package component that specifies
+    #   The namespace of the package version that contains the requested
+    #   package version assets. The package version component that specifies
     #   its namespace depends on its type. For example:
     #
-    #   * The namespace of a Maven package is its `groupId`.
+    #   * The namespace of a Maven package version is its `groupId`.
     #
-    #   * The namespace of an npm package is its `scope`.
+    #   * The namespace of an npm package version is its `scope`.
     #
-    #   * A Python package does not contain a corresponding component, so
-    #     Python packages do not have a namespace.
+    #   * Python and NuGet package versions do not contain a corresponding
+    #     component, package versions of those formats do not have a
+    #     namespace.
     #   @return [String]
     #
     # @!attribute [rw] package
-    #   The name of the package that contains the returned package version
+    #   The name of the package that contains the requested package version
     #   assets.
     #   @return [String]
     #
@@ -1748,29 +1863,31 @@ module Aws::CodeArtifact
     end
 
     # @!attribute [rw] format
-    #   The format of the package that contains the returned package version
-    #   assets.
+    #   The format of the package that contains the requested package
+    #   version assets.
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace of the package. The package component that specifies
+    #   The namespace of the package version that contains the requested
+    #   package version assets. The package version component that specifies
     #   its namespace depends on its type. For example:
     #
-    #   * The namespace of a Maven package is its `groupId`.
+    #   * The namespace of a Maven package version is its `groupId`.
     #
-    #   * The namespace of an npm package is its `scope`.
+    #   * The namespace of an npm package version is its `scope`.
     #
-    #   * A Python package does not contain a corresponding component, so
-    #     Python packages do not have a namespace.
+    #   * Python and NuGet package versions do not contain a corresponding
+    #     component, package versions of those formats do not have a
+    #     namespace.
     #   @return [String]
     #
     # @!attribute [rw] package
-    #   The name of the package that contains the returned package version
+    #   The name of the package that contains the requested package version
     #   assets.
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   The version of the package associated with the returned assets.
+    #   The version of the package associated with the requested assets.
     #   @return [String]
     #
     # @!attribute [rw] version_revision
@@ -1838,15 +1955,17 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace of the package. The package component that specifies
-    #   its namespace depends on its type. For example:
+    #   The namespace of the package version with the requested
+    #   dependencies. The package version component that specifies its
+    #   namespace depends on its type. For example:
     #
-    #   * The namespace of a Maven package is its `groupId`.
+    #   * The namespace of a Maven package version is its `groupId`.
     #
-    #   * The namespace of an npm package is its `scope`.
+    #   * The namespace of an npm package version is its `scope`.
     #
-    #   * A Python package does not contain a corresponding component, so
-    #     Python packages do not have a namespace.
+    #   * Python and NuGet package versions do not contain a corresponding
+    #     component, package versions of those formats do not have a
+    #     namespace.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -1884,15 +2003,17 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace of the package. The package component that specifies
-    #   its namespace depends on its type. For example:
+    #   The namespace of the package version that contains the returned
+    #   dependencies. The package version component that specifies its
+    #   namespace depends on its type. For example:
     #
-    #   * The namespace of a Maven package is its `groupId`.
+    #   * The namespace of a Maven package version is its `groupId`.
     #
-    #   * The namespace of an npm package is its `scope`.
+    #   * The namespace of an npm package version is its `scope`.
     #
-    #   * A Python package does not contain a corresponding component, so
-    #     Python packages do not have a namespace.
+    #   * Python and NuGet package versions do not contain a corresponding
+    #     component, package versions of those formats do not have a
+    #     namespace.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -1950,11 +2071,12 @@ module Aws::CodeArtifact
     #         sort_by: "PUBLISHED_TIME", # accepts PUBLISHED_TIME
     #         max_results: 1,
     #         next_token: "PaginationToken",
+    #         origin_type: "INTERNAL", # accepts INTERNAL, EXTERNAL, UNKNOWN
     #       }
     #
     # @!attribute [rw] domain
     #   The name of the domain that contains the repository that contains
-    #   the returned package versions.
+    #   the requested package versions.
     #   @return [String]
     #
     # @!attribute [rw] domain_owner
@@ -1963,37 +2085,38 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] repository
-    #   The name of the repository that contains the package.
+    #   The name of the repository that contains the requested package
+    #   versions.
     #   @return [String]
     #
     # @!attribute [rw] format
-    #   The format of the returned packages.
+    #   The format of the returned package versions.
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace of the package. The package component that specifies
-    #   its namespace depends on its type. For example:
+    #   The namespace of the package that contains the requested package
+    #   versions. The package component that specifies its namespace depends
+    #   on its type. For example:
     #
     #   * The namespace of a Maven package is its `groupId`.
     #
     #   * The namespace of an npm package is its `scope`.
     #
-    #   * A Python package does not contain a corresponding component, so
-    #     Python packages do not have a namespace.
+    #   * Python and NuGet packages do not contain a corresponding
+    #     component, packages of those formats do not have a namespace.
     #   @return [String]
     #
     # @!attribute [rw] package
-    #   The name of the package for which you want to return a list of
-    #   package versions.
+    #   The name of the package for which you want to request package
+    #   versions.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   A string that specifies the status of the package versions to
-    #   include in the returned list.
+    #   A string that filters the requested package versions by status.
     #   @return [String]
     #
     # @!attribute [rw] sort_by
-    #   How to sort the returned list of package versions.
+    #   How to sort the requested list of package versions.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -2004,6 +2127,11 @@ module Aws::CodeArtifact
     #   The token for the next set of results. Use the value returned in the
     #   previous response in the next request to retrieve the next set of
     #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] origin_type
+    #   The `originType` used to filter package versions. Only package
+    #   versions with the provided `originType` will be returned.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/ListPackageVersionsRequest AWS API Documentation
@@ -2018,7 +2146,8 @@ module Aws::CodeArtifact
       :status,
       :sort_by,
       :max_results,
-      :next_token)
+      :next_token,
+      :origin_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2040,15 +2169,16 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace of the package. The package component that specifies
-    #   its namespace depends on its type. For example:
+    #   The namespace of the package that contains the requested package
+    #   versions. The package component that specifies its namespace depends
+    #   on its type. For example:
     #
     #   * The namespace of a Maven package is its `groupId`.
     #
     #   * The namespace of an npm package is its `scope`.
     #
-    #   * A Python package does not contain a corresponding component, so
-    #     Python packages do not have a namespace.
+    #   * Python and NuGet packages do not contain a corresponding
+    #     component, packages of those formats do not have a namespace.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -2093,11 +2223,13 @@ module Aws::CodeArtifact
     #         package_prefix: "PackageName",
     #         max_results: 1,
     #         next_token: "PaginationToken",
+    #         publish: "ALLOW", # accepts ALLOW, BLOCK
+    #         upstream: "ALLOW", # accepts ALLOW, BLOCK
     #       }
     #
     # @!attribute [rw] domain
     #   The name of the domain that contains the repository that contains
-    #   the requested list of packages.
+    #   the requested packages.
     #   @return [String]
     #
     # @!attribute [rw] domain_owner
@@ -2106,27 +2238,29 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] repository
-    #   The name of the repository from which packages are to be listed.
+    #   The name of the repository that contains the requested packages.
     #   @return [String]
     #
     # @!attribute [rw] format
-    #   The format of the packages.
+    #   The format used to filter requested packages. Only packages from the
+    #   provided format will be returned.
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace of the package. The package component that specifies
-    #   its namespace depends on its type. For example:
+    #   The namespace used to filter requested packages. Only packages with
+    #   the provided namespace will be returned. The package component that
+    #   specifies its namespace depends on its type. For example:
     #
     #   * The namespace of a Maven package is its `groupId`.
     #
     #   * The namespace of an npm package is its `scope`.
     #
-    #   * A Python package does not contain a corresponding component, so
-    #     Python packages do not have a namespace.
+    #   * Python and NuGet packages do not contain a corresponding
+    #     component, packages of those formats do not have a namespace.
     #   @return [String]
     #
     # @!attribute [rw] package_prefix
-    #   A prefix used to filter returned packages. Only packages with names
+    #   A prefix used to filter requested packages. Only packages with names
     #   that start with `packagePrefix` are returned.
     #   @return [String]
     #
@@ -2140,6 +2274,28 @@ module Aws::CodeArtifact
     #   results.
     #   @return [String]
     #
+    # @!attribute [rw] publish
+    #   The value of the `Publish` package origin control restriction used
+    #   to filter requested packages. Only packages with the provided
+    #   restriction are returned. For more information, see
+    #   [PackageOriginRestrictions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginRestrictions.html
+    #   @return [String]
+    #
+    # @!attribute [rw] upstream
+    #   The value of the `Upstream` package origin control restriction used
+    #   to filter requested packages. Only packages with the provided
+    #   restriction are returned. For more information, see
+    #   [PackageOriginRestrictions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginRestrictions.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/ListPackagesRequest AWS API Documentation
     #
     class ListPackagesRequest < Struct.new(
@@ -2150,7 +2306,9 @@ module Aws::CodeArtifact
       :namespace,
       :package_prefix,
       :max_results,
-      :next_token)
+      :next_token,
+      :publish,
+      :upstream)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2341,15 +2499,16 @@ module Aws::CodeArtifact
     # Details about a package dependency.
     #
     # @!attribute [rw] namespace
-    #   The namespace of the package. The package component that specifies
-    #   its namespace depends on its type. For example:
+    #   The namespace of the package that this package depends on. The
+    #   package component that specifies its namespace depends on its type.
+    #   For example:
     #
     #   * The namespace of a Maven package is its `groupId`.
     #
     #   * The namespace of an npm package is its `scope`.
     #
-    #   * A Python package does not contain a corresponding component, so
-    #     Python packages do not have a namespace.
+    #   * Python and NuGet packages do not contain a corresponding
+    #     component, packages of those formats do not have a namespace.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -2380,6 +2539,91 @@ module Aws::CodeArtifact
       include Aws::Structure
     end
 
+    # Details about a package.
+    #
+    # @!attribute [rw] format
+    #   A format that specifies the type of the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace of the package. The package component that specifies
+    #   its namespace depends on its type. For example:
+    #
+    #   * The namespace of a Maven package is its `groupId`.
+    #
+    #   * The namespace of an npm package is its `scope`.
+    #
+    #   * Python and NuGet packages do not contain a corresponding
+    #     component, packages of those formats do not have a namespace.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] origin_configuration
+    #   The package origin configuration for the package.
+    #   @return [Types::PackageOriginConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/PackageDescription AWS API Documentation
+    #
+    class PackageDescription < Struct.new(
+      :format,
+      :namespace,
+      :name,
+      :origin_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the package origin configuration of a package.
+    #
+    # @!attribute [rw] restrictions
+    #   A `PackageOriginRestrictions` object that contains information about
+    #   the upstream and publish package origin configuration for the
+    #   package.
+    #   @return [Types::PackageOriginRestrictions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/PackageOriginConfiguration AWS API Documentation
+    #
+    class PackageOriginConfiguration < Struct.new(
+      :restrictions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the origin restrictions set on the package. The package
+    # origin restrictions determine how new versions of a package can be
+    # added to a specific repository.
+    #
+    # @note When making an API call, you may pass PackageOriginRestrictions
+    #   data as a hash:
+    #
+    #       {
+    #         publish: "ALLOW", # required, accepts ALLOW, BLOCK
+    #         upstream: "ALLOW", # required, accepts ALLOW, BLOCK
+    #       }
+    #
+    # @!attribute [rw] publish
+    #   The package origin configuration that determines if new versions of
+    #   the package can be published directly to the repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] upstream
+    #   The package origin configuration that determines if new versions of
+    #   the package can be added to the repository from an external
+    #   connection or upstream source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/PackageOriginRestrictions AWS API Documentation
+    #
+    class PackageOriginRestrictions < Struct.new(
+      :publish,
+      :upstream)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about a package, including its format, namespace, and name.
     # The [ListPackages][1] operation returns a list of `PackageSummary`
     # objects.
@@ -2400,20 +2644,32 @@ module Aws::CodeArtifact
     #
     #   * The namespace of an npm package is its `scope`.
     #
-    #   * A Python package does not contain a corresponding component, so
-    #     Python packages do not have a namespace.
+    #   * Python and NuGet packages do not contain a corresponding
+    #     component, packages of those formats do not have a namespace.
     #   @return [String]
     #
     # @!attribute [rw] package
     #   The name of the package.
     #   @return [String]
     #
+    # @!attribute [rw] origin_configuration
+    #   A [PackageOriginConfiguration][1] object that contains a
+    #   [PackageOriginRestrictions][2] object that contains information
+    #   about the upstream and publish package origin restrictions.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginConfiguration.html
+    #   [2]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginRestrictions.html
+    #   @return [Types::PackageOriginConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/PackageSummary AWS API Documentation
     #
     class PackageSummary < Struct.new(
       :format,
       :namespace,
-      :package)
+      :package,
+      :origin_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2425,15 +2681,16 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace of the package. The package component that specifies
-    #   its namespace depends on its type. For example:
+    #   The namespace of the package version. The package version component
+    #   that specifies its namespace depends on its type. For example:
     #
-    #   * The namespace of a Maven package is its `groupId`.
+    #   * The namespace of a Maven package version is its `groupId`.
     #
-    #   * The namespace of an npm package is its `scope`.
+    #   * The namespace of an npm package version is its `scope`.
     #
-    #   * A Python package does not contain a corresponding component, so
-    #     Python packages do not have a namespace.
+    #   * Python and NuGet package versions do not contain a corresponding
+    #     component, package versions of those formats do not have a
+    #     namespace.
     #   @return [String]
     #
     # @!attribute [rw] package_name
@@ -2483,6 +2740,15 @@ module Aws::CodeArtifact
     #   A string that contains the status of the package version.
     #   @return [String]
     #
+    # @!attribute [rw] origin
+    #   A [PackageVersionOrigin][1] object that contains information about
+    #   how the package version was added to the repository.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionOrigin.html
+    #   @return [Types::PackageVersionOrigin]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/PackageVersionDescription AWS API Documentation
     #
     class PackageVersionDescription < Struct.new(
@@ -2497,12 +2763,13 @@ module Aws::CodeArtifact
       :published_time,
       :licenses,
       :revision,
-      :status)
+      :status,
+      :origin)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # An error associated with package.
+    # l An error associated with package.
     #
     # @!attribute [rw] error_code
     #   The error code associated with the error. Valid error codes are:
@@ -2533,6 +2800,35 @@ module Aws::CodeArtifact
       include Aws::Structure
     end
 
+    # Information about how a package version was added to a repository.
+    #
+    # @!attribute [rw] domain_entry_point
+    #   A [DomainEntryPoint][1] object that contains information about from
+    #   which repository or external connection the package version was
+    #   added to the domain.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DomainEntryPoint.html
+    #   @return [Types::DomainEntryPoint]
+    #
+    # @!attribute [rw] origin_type
+    #   Describes how the package version was originally added to the
+    #   domain. An `INTERNAL` origin type means the package version was
+    #   published directly to a repository in the domain. An `EXTERNAL`
+    #   origin type means the package version was ingested from an external
+    #   connection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/PackageVersionOrigin AWS API Documentation
+    #
+    class PackageVersionOrigin < Struct.new(
+      :domain_entry_point,
+      :origin_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about a package version, including its status, version, and
     # revision. The [ListPackageVersions][1] operation returns a list of
     # `PackageVersionSummary` objects.
@@ -2554,12 +2850,22 @@ module Aws::CodeArtifact
     #   one of the following:
     #   @return [String]
     #
+    # @!attribute [rw] origin
+    #   A [PackageVersionOrigin][1] object that contains information about
+    #   how the package version was added to the repository.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionOrigin.html
+    #   @return [Types::PackageVersionOrigin]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/PackageVersionSummary AWS API Documentation
     #
     class PackageVersionSummary < Struct.new(
       :version,
       :revision,
-      :status)
+      :status,
+      :origin)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2613,6 +2919,106 @@ module Aws::CodeArtifact
     #
     class PutDomainPermissionsPolicyResult < Struct.new(
       :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutPackageOriginConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain: "DomainName", # required
+    #         domain_owner: "AccountId",
+    #         repository: "RepositoryName", # required
+    #         format: "npm", # required, accepts npm, pypi, maven, nuget
+    #         namespace: "PackageNamespace",
+    #         package: "PackageName", # required
+    #         restrictions: { # required
+    #           publish: "ALLOW", # required, accepts ALLOW, BLOCK
+    #           upstream: "ALLOW", # required, accepts ALLOW, BLOCK
+    #         },
+    #       }
+    #
+    # @!attribute [rw] domain
+    #   The name of the domain that contains the repository that contains
+    #   the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_owner
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain. It does not include dashes or spaces.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository
+    #   The name of the repository that contains the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] format
+    #   A format that specifies the type of the package to be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace of the package to be updated. The package component
+    #   that specifies its namespace depends on its type. For example:
+    #
+    #   * The namespace of a Maven package is its `groupId`.
+    #
+    #   * The namespace of an npm package is its `scope`.
+    #
+    #   * Python and NuGet packages do not contain a corresponding
+    #     component, packages of those formats do not have a namespace.
+    #   @return [String]
+    #
+    # @!attribute [rw] package
+    #   The name of the package to be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] restrictions
+    #   A [PackageOriginRestrictions][1] object that contains information
+    #   about the `upstream` and `publish` package origin restrictions. The
+    #   `upstream` restriction determines if new package versions can be
+    #   ingested or retained from external connections or upstream
+    #   repositories. The `publish` restriction determines if new package
+    #   versions can be published directly to the repository.
+    #
+    #   You must include both the desired `upstream` and `publish`
+    #   restrictions.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginRestrictions.html
+    #   @return [Types::PackageOriginRestrictions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/PutPackageOriginConfigurationRequest AWS API Documentation
+    #
+    class PutPackageOriginConfigurationRequest < Struct.new(
+      :domain,
+      :domain_owner,
+      :repository,
+      :format,
+      :namespace,
+      :package,
+      :restrictions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] origin_configuration
+    #   A [PackageOriginConfiguration][1] object that describes the origin
+    #   configuration set for the package. It contains a
+    #   [PackageOriginRestrictions][2] object that describes how new
+    #   versions of the package can be introduced to the repository.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginConfiguration.html
+    #   [2]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginRestrictions.html
+    #   @return [Types::PackageOriginConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/PutPackageOriginConfigurationResult AWS API Documentation
+    #
+    class PutPackageOriginConfigurationResult < Struct.new(
+      :origin_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3068,15 +3474,17 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace of the package. The package component that specifies
-    #   its namespace depends on its type. For example:
+    #   The namespace of the package version to be updated. The package
+    #   version component that specifies its namespace depends on its type.
+    #   For example:
     #
-    #   * The namespace of a Maven package is its `groupId`.
+    #   * The namespace of a Maven package version is its `groupId`.
     #
-    #   * The namespace of an npm package is its `scope`.
+    #   * The namespace of an npm package version is its `scope`.
     #
-    #   * A Python package does not contain a corresponding component, so
-    #     Python packages do not have a namespace.
+    #   * Python and NuGet package versions do not contain a corresponding
+    #     component, package versions of those formats do not have a
+    #     namespace.
     #   @return [String]
     #
     # @!attribute [rw] package

@@ -10,6 +10,21 @@
 module Aws::Kendra
   module Types
 
+    # Summary information on an access control configuration that you
+    # created for your documents in an index.
+    #
+    # @!attribute [rw] id
+    #   The identifier of the access control configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/AccessControlConfigurationSummary AWS API Documentation
+    #
+    class AccessControlConfigurationSummary < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Access Control List files for the documents in a data source. For the
     # format of the file, see [Access control for S3 data sources][1].
     #
@@ -115,6 +130,16 @@ module Aws::Kendra
     # Provides the configuration information to connect to Alfresco as your
     # data source.
     #
+    # <note markdown="1"> Alfresco data source connector is currently in preview mode. Basic
+    # authentication is currently supported. If you would like to use
+    # Alfresco connector in production, contact [Support][1].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/contact-us/
+    #
     # @note When making an API call, you may pass AlfrescoConfiguration
     #   data as a hash:
     #
@@ -187,7 +212,7 @@ module Aws::Kendra
     #   @return [Boolean]
     #
     # @!attribute [rw] crawl_comments
-    #   `TRUE` to index comments of wikis and blogs.
+    #   `TRUE` to index comments of blogs and other content.
     #   @return [Boolean]
     #
     # @!attribute [rw] entity_filter
@@ -1077,6 +1102,7 @@ module Aws::Kendra
     #               },
     #             ],
     #             content_type: "PDF", # accepts PDF, HTML, MS_WORD, PLAIN_TEXT, PPT
+    #             access_control_configuration_id: "AccessControlConfigurationId",
     #           },
     #         ],
     #         custom_document_enrichment_configuration: {
@@ -1863,7 +1889,7 @@ module Aws::Kendra
     #   contains the user name and password required to connect to the
     #   Confluence instance. If you use Confluence cloud, you use a
     #   generated API token as the password. For more information, see
-    #   [Using a Confluemce data source][1].
+    #   [Using a Confluence data source][1].
     #
     #
     #
@@ -1871,8 +1897,7 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   The version or the type of the Confluence installation to connect
-    #   to.
+    #   The version or the type of Confluence installation to connect to.
     #   @return [String]
     #
     # @!attribute [rw] space_configuration
@@ -2270,6 +2295,101 @@ module Aws::Kendra
       :end_offset,
       :term,
       :corrected_term)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateAccessControlConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_id: "IndexId", # required
+    #         name: "AccessControlConfigurationName", # required
+    #         description: "Description",
+    #         access_control_list: [
+    #           {
+    #             name: "PrincipalName", # required
+    #             type: "USER", # required, accepts USER, GROUP
+    #             access: "ALLOW", # required, accepts ALLOW, DENY
+    #             data_source_id: "DataSourceId",
+    #           },
+    #         ],
+    #         hierarchical_access_control_list: [
+    #           {
+    #             principal_list: [ # required
+    #               {
+    #                 name: "PrincipalName", # required
+    #                 type: "USER", # required, accepts USER, GROUP
+    #                 access: "ALLOW", # required, accepts ALLOW, DENY
+    #                 data_source_id: "DataSourceId",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         client_token: "ClientTokenName",
+    #       }
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index to create an access control
+    #   configuration for your documents.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A name for the access control configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description for the access control configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_control_list
+    #   Information on principals (users and/or groups) and which documents
+    #   they should have access to. This is useful for user context
+    #   filtering, where search results are filtered based on the user or
+    #   their group access to documents.
+    #   @return [Array<Types::Principal>]
+    #
+    # @!attribute [rw] hierarchical_access_control_list
+    #   The list of [principal][1] lists that define the hierarchy for which
+    #   documents users should have access to.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_Principal.html
+    #   @return [Array<Types::HierarchicalPrincipal>]
+    #
+    # @!attribute [rw] client_token
+    #   A token that you provide to identify the request to create an access
+    #   control configuration. Multiple calls to the
+    #   `CreateAccessControlConfiguration` API with the same client token
+    #   will create only one access control configuration.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CreateAccessControlConfigurationRequest AWS API Documentation
+    #
+    class CreateAccessControlConfigurationRequest < Struct.new(
+      :index_id,
+      :name,
+      :description,
+      :access_control_list,
+      :hierarchical_access_control_list,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The identifier of the access control configuration for your
+    #   documents in an index.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CreateAccessControlConfigurationResponse AWS API Documentation
+    #
+    class CreateAccessControlConfigurationResponse < Struct.new(
+      :id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2965,22 +3085,22 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] name
-    #   A unique name for the data source. A data source name can't be
-    #   changed without deleting and recreating the data source.
+    #   A unique name for the data source connector. A data source name
+    #   can't be changed without deleting and recreating the data source
+    #   connector.
     #   @return [String]
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index that should be associated with this data
-    #   source.
+    #   The identifier of the index you want to use with the data source
+    #   connector.
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of repository that contains the data source.
+    #   The type of data source repository. For example, `SHAREPOINT`.
     #   @return [String]
     #
     # @!attribute [rw] configuration
-    #   Configuration information that is required to access the data source
-    #   repository.
+    #   Configuration information to connect to your data source repository.
     #
     #   You can't specify the `Configuration` parameter when the `Type`
     #   parameter is set to `CUSTOM`. If you do, you receive a
@@ -2991,14 +3111,14 @@ module Aws::Kendra
     #   @return [Types::DataSourceConfiguration]
     #
     # @!attribute [rw] description
-    #   A description for the data source.
+    #   A description for the data source connector.
     #   @return [String]
     #
     # @!attribute [rw] schedule
     #   Sets the frequency for Amazon Kendra to check the documents in your
-    #   repository and update the index. If you don't set a schedule Amazon
-    #   Kendra will not periodically update the index. You can call the
-    #   `StartDataSourceSyncJob` API to update the index.
+    #   data source repository and update the index. If you don't set a
+    #   schedule Amazon Kendra will not periodically update the index. You
+    #   can call the `StartDataSourceSyncJob` API to update the index.
     #
     #   You can't specify the `Schedule` parameter when the `Type`
     #   parameter is set to `CUSTOM`. If you do, you receive a
@@ -3007,8 +3127,8 @@ module Aws::Kendra
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of a role with permission to access
-    #   the data source. For more information, see [IAM Roles for Amazon
-    #   Kendra][1].
+    #   the data source connector. For more information, see [IAM Roles for
+    #   Amazon Kendra][1].
     #
     #   You can't specify the `RoleArn` parameter when the `Type` parameter
     #   is set to `CUSTOM`. If you do, you receive a `ValidationException`
@@ -3022,15 +3142,15 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A list of key-value pairs that identify the data source. You can use
-    #   the tags to identify and organize your resources and to control
-    #   access to resources.
+    #   A list of key-value pairs that identify the data source connector.
+    #   You can use the tags to identify and organize your resources and to
+    #   control access to resources.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] client_token
     #   A token that you provide to identify the request to create a data
-    #   source. Multiple calls to the `CreateDataSource` API with the same
-    #   client token will create only one data source.
+    #   source connector. Multiple calls to the `CreateDataSource` API with
+    #   the same client token will create only one data source connector.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -3038,9 +3158,9 @@ module Aws::Kendra
     #
     # @!attribute [rw] language_code
     #   The code for a language. This allows you to support a language for
-    #   all documents when creating the data source. English is supported by
-    #   default. For more information on supported languages, including
-    #   their codes, see [Adding documents in languages other than
+    #   all documents when creating the data source connector. English is
+    #   supported by default. For more information on supported languages,
+    #   including their codes, see [Adding documents in languages other than
     #   English][1].
     #
     #
@@ -3050,7 +3170,7 @@ module Aws::Kendra
     #
     # @!attribute [rw] custom_document_enrichment_configuration
     #   Configuration information for altering document metadata and content
-    #   during the document ingestion process when you create a data source.
+    #   during the document ingestion process.
     #
     #   For more information on how to create, modify and delete document
     #   metadata, or make other content alterations when you ingest
@@ -3081,7 +3201,7 @@ module Aws::Kendra
     end
 
     # @!attribute [rw] id
-    #   A unique identifier for the data source.
+    #   The identifier of the data source connector.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CreateDataSourceResponse AWS API Documentation
@@ -3203,19 +3323,19 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index that contains the FAQ.
+    #   The identifier of the index for the FAQ.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name that should be associated with the FAQ.
+    #   A name for the FAQ.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A description of the FAQ.
+    #   A description for the FAQ.
     #   @return [String]
     #
     # @!attribute [rw] s3_path
-    #   The S3 location of the FAQ input data.
+    #   The path to the FAQ file in S3.
     #   @return [Types::S3Path]
     #
     # @!attribute [rw] role_arn
@@ -3235,7 +3355,7 @@ module Aws::Kendra
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] file_format
-    #   The format of the input file. You can choose between a basic CSV
+    #   The format of the FAQ input file. You can choose between a basic CSV
     #   format, a CSV format that includes customs attributes in a header,
     #   and a JSON format that includes custom attributes.
     #
@@ -3339,7 +3459,7 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] name
-    #   The name for the new index.
+    #   A name for the index.
     #   @return [String]
     #
     # @!attribute [rw] edition
@@ -3580,15 +3700,15 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] index_id
-    #   The unique identifier of the index for the new thesaurus.
+    #   The identifier of the index for the thesaurus.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name for the new thesaurus.
+    #   A name for the thesaurus.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description for the new thesaurus.
+    #   A description for the thesaurus.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -3603,7 +3723,7 @@ module Aws::Kendra
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] source_s3_path
-    #   The thesaurus file Amazon S3 source path.
+    #   The path to the thesaurus file in S3.
     #   @return [Types::S3Path]
     #
     # @!attribute [rw] client_token
@@ -4857,6 +4977,36 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteAccessControlConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_id: "IndexId", # required
+    #         id: "AccessControlConfigurationId", # required
+    #       }
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index for an access control configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The identifier of the access control configuration you want to
+    #   delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DeleteAccessControlConfigurationRequest AWS API Documentation
+    #
+    class DeleteAccessControlConfigurationRequest < Struct.new(
+      :index_id,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DeleteAccessControlConfigurationResponse AWS API Documentation
+    #
+    class DeleteAccessControlConfigurationResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteDataSourceRequest
     #   data as a hash:
     #
@@ -4866,11 +5016,11 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] id
-    #   The unique identifier of the data source to delete.
+    #   The identifier of the data source you want to delete.
     #   @return [String]
     #
     # @!attribute [rw] index_id
-    #   The unique identifier of the index associated with the data source.
+    #   The identifier of the index used with the data source.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DeleteDataSourceRequest AWS API Documentation
@@ -4895,8 +5045,7 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index for your Amazon Kendra experience you
-    #   want to delete.
+    #   The identifier of the index for your Amazon Kendra experience.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DeleteExperienceRequest AWS API Documentation
@@ -4921,11 +5070,11 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] id
-    #   The identifier of the FAQ to remove.
+    #   The identifier of the FAQ you want to remove.
     #   @return [String]
     #
     # @!attribute [rw] index_id
-    #   The index to remove the FAQ from.
+    #   The identifier of the index for the FAQ.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DeleteFaqRequest AWS API Documentation
@@ -4945,7 +5094,7 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] id
-    #   The identifier of the index to delete.
+    #   The identifier of the index you want to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DeleteIndexRequest AWS API Documentation
@@ -4973,15 +5122,15 @@ module Aws::Kendra
     # @!attribute [rw] data_source_id
     #   The identifier of the data source you want to delete a group from.
     #
-    #   This is useful if a group is tied to multiple data sources and you
-    #   want to delete a group from accessing documents in a certain data
-    #   source. For example, the groups "Research", "Engineering", and
-    #   "Sales and Marketing" are all tied to the company's documents
-    #   stored in the data sources Confluence and Salesforce. You want to
-    #   delete "Research" and "Engineering" groups from Salesforce, so
-    #   that these groups cannot access customer-related documents stored in
-    #   Salesforce. Only "Sales and Marketing" should access documents in
-    #   the Salesforce data source.
+    #   A group can be tied to multiple data sources. You can delete a group
+    #   from accessing documents in a certain data source. For example, the
+    #   groups "Research", "Engineering", and "Sales and Marketing"
+    #   are all tied to the company's documents stored in the data sources
+    #   Confluence and Salesforce. You want to delete "Research" and
+    #   "Engineering" groups from Salesforce, so that these groups cannot
+    #   access customer-related documents stored in Salesforce. Only "Sales
+    #   and Marketing" should access documents in the Salesforce data
+    #   source.
     #   @return [String]
     #
     # @!attribute [rw] group_id
@@ -5027,11 +5176,11 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] index_id
-    #   The identifier of the you want to delete a block list from.
+    #   The identifier of the index for the block list.
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The unique identifier of the block list that needs to be deleted.
+    #   The identifier of the block list you want to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DeleteQuerySuggestionsBlockListRequest AWS API Documentation
@@ -5052,11 +5201,11 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] id
-    #   The identifier of the thesaurus to delete.
+    #   The identifier of the thesaurus you want to delete.
     #   @return [String]
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index associated with the thesaurus to delete.
+    #   The identifier of the index for the thesaurus.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DeleteThesaurusRequest AWS API Documentation
@@ -5064,6 +5213,73 @@ module Aws::Kendra
     class DeleteThesaurusRequest < Struct.new(
       :id,
       :index_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeAccessControlConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_id: "IndexId", # required
+    #         id: "AccessControlConfigurationId", # required
+    #       }
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index for an access control configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The identifier of the access control configuration you want to get
+    #   information on.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeAccessControlConfigurationRequest AWS API Documentation
+    #
+    class DescribeAccessControlConfigurationRequest < Struct.new(
+      :index_id,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name for the access control configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description for the access control configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message containing details if there are issues processing
+    #   the access control configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_control_list
+    #   Information on principals (users and/or groups) and which documents
+    #   they should have access to. This is useful for user context
+    #   filtering, where search results are filtered based on the user or
+    #   their group access to documents.
+    #   @return [Array<Types::Principal>]
+    #
+    # @!attribute [rw] hierarchical_access_control_list
+    #   The list of [principal][1] lists that define the hierarchy for which
+    #   documents users should have access to.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_Principal.html
+    #   @return [Array<Types::HierarchicalPrincipal>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeAccessControlConfigurationResponse AWS API Documentation
+    #
+    class DescribeAccessControlConfigurationResponse < Struct.new(
+      :name,
+      :description,
+      :error_message,
+      :access_control_list,
+      :hierarchical_access_control_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5077,11 +5293,11 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] id
-    #   The unique identifier of the data source to describe.
+    #   The identifier of the data source.
     #   @return [String]
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index that contains the data source.
+    #   The identifier of the index used with the data source.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeDataSourceRequest AWS API Documentation
@@ -5110,8 +5326,9 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] configuration
-    #   Describes how the data source is configured. The specific
-    #   information in the description depends on the data source provider.
+    #   Configuration details for the data source. This shows how the data
+    #   source is configured. The configuration options for a data source
+    #   depend on the data source provider.
     #   @return [Types::DataSourceConfiguration]
     #
     # @!attribute [rw] created_at
@@ -5123,7 +5340,7 @@ module Aws::Kendra
     #   @return [Time]
     #
     # @!attribute [rw] description
-    #   The description of the data source.
+    #   The description for the data source.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -5209,8 +5426,7 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index for your Amazon Kendra experience you
-    #   want to get information on.
+    #   The identifier of the index for your Amazon Kendra experience.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeExperienceRequest AWS API Documentation
@@ -5304,11 +5520,11 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] id
-    #   The unique identifier of the FAQ.
+    #   The identifier of the FAQ you want to get information on.
     #   @return [String]
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index that contains the FAQ.
+    #   The identifier of the index for the FAQ.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeFaqRequest AWS API Documentation
@@ -5325,7 +5541,7 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index that contains the FAQ.
+    #   The identifier of the index for the FAQ.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -5405,7 +5621,7 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] id
-    #   The identifier of the index to describe.
+    #   The identifier of the index you want to get information on.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeIndexRequest AWS API Documentation
@@ -5458,8 +5674,10 @@ module Aws::Kendra
     #   @return [Time]
     #
     # @!attribute [rw] document_metadata_configurations
-    #   Configuration settings for any metadata applied to the documents in
-    #   the index.
+    #   Configuration information for document metadata or fields. Document
+    #   metadata are fields or attributes associated with your documents.
+    #   For example, the company department name associated with each
+    #   document.
     #   @return [Array<Types::DocumentMetadataConfiguration>]
     #
     # @!attribute [rw] index_statistics
@@ -5494,7 +5712,7 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] user_group_resolution_configuration
-    #   Shows whether you have enabled the configuration for fetching access
+    #   Whether you have enabled the configuration for fetching access
     #   levels of groups and users from an Amazon Web Services Single Sign
     #   On identity source.
     #   @return [Types::UserGroupResolutionConfiguration]
@@ -5615,7 +5833,7 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The unique identifier of the block list.
+    #   The identifier of the block list you want to get information on.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeQuerySuggestionsBlockListRequest AWS API Documentation
@@ -5628,38 +5846,37 @@ module Aws::Kendra
     end
 
     # @!attribute [rw] index_id
-    #   Shows the identifier of the index for the block list.
+    #   The identifier of the index for the block list.
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   Shows the unique identifier of the block list.
+    #   The identifier of the block list.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   Shows the name of the block list.
+    #   The name of the block list.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Shows the description for the block list.
+    #   The description for the block list.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   Shows whether the current status of the block list is `ACTIVE` or
-    #   `INACTIVE`.
+    #   The current status of the block list. When the value is `ACTIVE`,
+    #   the block list is ready for use.
     #   @return [String]
     #
     # @!attribute [rw] error_message
-    #   Shows the error message with details when there are issues in
-    #   processing the block list.
+    #   The error message containing details if there are issues processing
+    #   the block list.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Shows the date-time a block list for query suggestions was created.
+    #   The date-time a block list for query suggestions was created.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
-    #   Shows the date-time a block list for query suggestions was last
-    #   updated.
+    #   The date-time a block list for query suggestions was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] source_s3_path
@@ -5678,17 +5895,17 @@ module Aws::Kendra
     #   @return [Types::S3Path]
     #
     # @!attribute [rw] item_count
-    #   Shows the current number of valid, non-empty words or phrases in the
-    #   block list text file.
+    #   The current number of valid, non-empty words or phrases in the block
+    #   list text file.
     #   @return [Integer]
     #
     # @!attribute [rw] file_size_bytes
-    #   Shows the current size of the block list text file in S3.
+    #   The current size of the block list text file in S3.
     #   @return [Integer]
     #
     # @!attribute [rw] role_arn
-    #   Shows the current IAM (Identity and Access Management) role used by
-    #   Amazon Kendra to access the block list text file in S3.
+    #   The IAM (Identity and Access Management) role used by Amazon Kendra
+    #   to access the block list text file in S3.
     #
     #   The role needs S3 read permissions to your file in S3 and needs to
     #   give STS (Security Token Service) assume role permissions to Amazon
@@ -5722,8 +5939,8 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index you want to describe query suggestions
-    #   settings for.
+    #   The identifier of the index with query suggestions that you want to
+    #   get information on.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeQuerySuggestionsConfigRequest AWS API Documentation
@@ -5735,7 +5952,7 @@ module Aws::Kendra
     end
 
     # @!attribute [rw] mode
-    #   Shows whether query suggestions are currently in `ENABLED` mode or
+    #   Whether query suggestions are currently in `ENABLED` mode or
     #   `LEARN_ONLY` mode.
     #
     #   By default, Amazon Kendra enables query suggestions.`LEARN_ONLY`
@@ -5748,39 +5965,38 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   Shows whether the status of query suggestions settings is currently
-    #   Active or Updating.
+    #   Whether the status of query suggestions settings is currently
+    #   `ACTIVE` or `UPDATING`.
     #
     #   Active means the current settings apply and Updating means your
     #   changed settings are in the process of applying.
     #   @return [String]
     #
     # @!attribute [rw] query_log_look_back_window_in_days
-    #   Shows how recent your queries are in your query log time window (in
-    #   days).
+    #   How recent your queries are in your query log time window (in days).
     #   @return [Integer]
     #
     # @!attribute [rw] include_queries_without_user_information
-    #   Shows whether Amazon Kendra uses all queries or only uses queries
-    #   that include user information to generate query suggestions.
+    #   `TRUE` to use all queries, otherwise use only queries that include
+    #   user information to generate the query suggestions.
     #   @return [Boolean]
     #
     # @!attribute [rw] minimum_number_of_querying_users
-    #   Shows the minimum number of unique users who must search a query in
-    #   order for the query to be eligible to suggest to your users.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] minimum_query_count
-    #   Shows the minimum number of times a query must be searched in order
+    #   The minimum number of unique users who must search a query in order
     #   for the query to be eligible to suggest to your users.
     #   @return [Integer]
     #
+    # @!attribute [rw] minimum_query_count
+    #   The minimum number of times a query must be searched in order for
+    #   the query to be eligible to suggest to your users.
+    #   @return [Integer]
+    #
     # @!attribute [rw] last_suggestions_build_time
-    #   Shows the date-time query suggestions for an index was last updated.
+    #   The date-time query suggestions for an index was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] last_clear_time
-    #   Shows the date-time query suggestions for an index was last cleared.
+    #   The date-time query suggestions for an index was last cleared.
     #
     #   After you clear suggestions, Amazon Kendra learns new suggestions
     #   based on new queries added to the query log from the time you
@@ -5789,7 +6005,7 @@ module Aws::Kendra
     #   @return [Time]
     #
     # @!attribute [rw] total_suggestions_count
-    #   Shows the current total count of query suggestions for an index.
+    #   The current total count of query suggestions for an index.
     #
     #   This count can change when you update your query suggestions
     #   settings, if you filter out certain queries from suggestions using a
@@ -5822,12 +6038,11 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] id
-    #   The identifier of the thesaurus to describe.
+    #   The identifier of the thesaurus you want to get information on.
     #   @return [String]
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index associated with the thesaurus to
-    #   describe.
+    #   The identifier of the index for the thesaurus.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeThesaurusRequest AWS API Documentation
@@ -5844,8 +6059,7 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index associated with the thesaurus to
-    #   describe.
+    #   The identifier of the index for the thesaurus.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -6063,6 +6277,7 @@ module Aws::Kendra
     #           },
     #         ],
     #         content_type: "PDF", # accepts PDF, HTML, MS_WORD, PLAIN_TEXT, PPT
+    #         access_control_configuration_id: "AccessControlConfigurationId",
     #       }
     #
     # @!attribute [rw] id
@@ -6107,8 +6322,10 @@ module Aws::Kendra
     #   @return [Array<Types::DocumentAttribute>]
     #
     # @!attribute [rw] access_control_list
-    #   Information on user and group access rights, which is used for user
-    #   context filtering.
+    #   Information on principals (users and/or groups) and which documents
+    #   they should have access to. This is useful for user context
+    #   filtering, where search results are filtered based on the user or
+    #   their group access to documents.
     #   @return [Array<Types::Principal>]
     #
     # @!attribute [rw] hierarchical_access_control_list
@@ -6124,6 +6341,11 @@ module Aws::Kendra
     #   The file type of the document in the `Blob` field.
     #   @return [String]
     #
+    # @!attribute [rw] access_control_configuration_id
+    #   The identifier of the access control configuration that you want to
+    #   apply to the document.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/Document AWS API Documentation
     #
     class Document < Struct.new(
@@ -6134,7 +6356,8 @@ module Aws::Kendra
       :attributes,
       :access_control_list,
       :hierarchical_access_control_list,
-      :content_type)
+      :content_type,
+      :access_control_configuration_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6451,7 +6674,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Specifies the properties of a custom index field.
+    # Specifies the properties, such as relevance tuning and searchability,
+    # of an index field.
     #
     # @note When making an API call, you may pass DocumentMetadataConfiguration
     #   data as a hash:
@@ -6485,8 +6709,8 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] relevance
-    #   Provides manual tuning parameters to determine how the field affects
-    #   the search results.
+    #   Provides tuning parameters to determine how the field affects the
+    #   search results.
     #   @return [Types::Relevance]
     #
     # @!attribute [rw] search
@@ -6523,13 +6747,12 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the tuning configuration to override document relevance
-    #   at the index level.
+    #   The name of the index field.
     #   @return [String]
     #
     # @!attribute [rw] relevance
-    #   Provides information for manually tuning the relevance of a field in
-    #   a search. When a query includes terms that match the field, the
+    #   Provides information for tuning the relevance of a field in a
+    #   search. When a query includes terms that match the field, the
     #   results are given a boost in the response based on these tuning
     #   parameters.
     #   @return [Types::Relevance]
@@ -6954,8 +7177,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides information about a frequently asked questions and answer
-    # contained in an index.
+    # Summary information for frequently asked questions and answers
+    # included in an index.
     #
     # @!attribute [rw] id
     #   The unique identifier of the FAQ.
@@ -7789,9 +8012,9 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # A list of users or sub groups that belong to a group. Users and groups
-    # are useful for filtering search results to different users based on
-    # their group's access to documents.
+    # A list of users or sub groups that belong to a group. This is useful
+    # for user context filtering, where search results are filtered based on
+    # the user or their group access to documents.
     #
     # @note When making an API call, you may pass GroupMembers
     #   data as a hash:
@@ -7852,8 +8075,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Information on the processing of `PUT` and `DELETE` actions for
-    # mapping users to their groups.
+    # Summary information on the processing of `PUT` and `DELETE` actions
+    # for mapping users to their groups.
     #
     # @!attribute [rw] status
     #   The current processing status of actions for mapping users to their
@@ -7893,7 +8116,7 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Group summary information.
+    # Summary information for groups.
     #
     # @!attribute [rw] group_id
     #   The identifier of the group you want group summary information on.
@@ -8057,7 +8280,7 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # A summary of information on the configuration of an index.
+    # Summary information on the configuration of an index.
     #
     # @!attribute [rw] name
     #   The identifier of the index.
@@ -8513,6 +8736,59 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListAccessControlConfigurationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_id: "IndexId", # required
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index for the access control configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was incomplete (because there is more data
+    #   to retrieve), Amazon Kendra returns a pagination token in the
+    #   response. You can use this pagination token to retrieve the next set
+    #   of access control configurations.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of access control configurations to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListAccessControlConfigurationsRequest AWS API Documentation
+    #
+    class ListAccessControlConfigurationsRequest < Struct.new(
+      :index_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If the response is truncated, Amazon Kendra returns this token that
+    #   you can use in the subsequent request to retrieve the next set of
+    #   access control configurations.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_control_configurations
+    #   The details of your access control configurations.
+    #   @return [Array<Types::AccessControlConfigurationSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListAccessControlConfigurationsResponse AWS API Documentation
+    #
+    class ListAccessControlConfigurationsResponse < Struct.new(
+      :next_token,
+      :access_control_configurations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListDataSourceSyncJobsRequest
     #   data as a hash:
     #
@@ -8533,7 +8809,7 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index that contains the data source.
+    #   The identifier of the index used with the data source.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -8601,7 +8877,7 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index that contains the data source.
+    #   The identifier of the index used with one or more data sources.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -9099,7 +9375,7 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index associated with the thesaurus to list.
+    #   The identifier of the index with one or more thesauri.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -9413,7 +9689,11 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides user and group information for document access filtering.
+    # Provides user and group information for [user context filtering][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/user-context-filter.html
     #
     # @note When making an API call, you may pass Principal
     #   data as a hash:
@@ -9434,7 +9714,7 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] access
-    #   Whether to allow or deny access to the principal.
+    #   Whether to allow or deny document access to the principal.
     #   @return [String]
     #
     # @!attribute [rw] data_source_id
@@ -10119,7 +10399,7 @@ module Aws::Kendra
     #   @return [Boolean]
     #
     # @!attribute [rw] folder_ids
-    #   The identifier of the Quip folders you want to index.
+    #   The identifiers of the Quip folders you want to index.
     #   @return [Array<String>]
     #
     # @!attribute [rw] thread_field_mappings
@@ -10208,9 +10488,9 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides information for manually tuning the relevance of a field in a
-    # search. When a query includes terms that match the field, the results
-    # are given a boost in the response based on these tuning parameters.
+    # Provides information for tuning the relevance of a field in a search.
+    # When a query includes terms that match the field, the results are
+    # given a boost in the response based on these tuning parameters.
     #
     # @note When making an API call, you may pass Relevance
     #   data as a hash:
@@ -11232,10 +11512,9 @@ module Aws::Kendra
     #   The type of authentication used to connect to the ServiceNow
     #   instance. If you choose `HTTP_BASIC`, Amazon Kendra is authenticated
     #   using the user name and password provided in the Secrets Manager
-    #   secret in the `SecretArn` field. When you choose `OAUTH2`, Amazon
-    #   Kendra is authenticated using the OAuth token and secret provided in
-    #   the Secrets Manager secret, and the user name and password are used
-    #   to determine which information Amazon Kendra has access to.
+    #   secret in the `SecretArn` field. If you choose `OAUTH2`, Amazon
+    #   Kendra is authenticated using the credentials of client ID, client
+    #   secret, user name and password.
     #
     #   When you use `OAUTH2` authentication, you must generate a token and
     #   a client secret using the ServiceNow console. For more information,
@@ -11282,8 +11561,7 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] crawl_attachments
-    #   Indicates whether Amazon Kendra should index attachments to
-    #   knowledge articles.
+    #   `TRUE` to index attachments to knowledge articles.
     #   @return [Boolean]
     #
     # @!attribute [rw] include_attachment_file_patterns
@@ -11383,8 +11661,7 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] crawl_attachments
-    #   Indicates whether Amazon Kendra should crawl attachments to the
-    #   service catalog items.
+    #   `TRUE` to index attachments to service catalog items.
     #   @return [Boolean]
     #
     # @!attribute [rw] include_attachment_file_patterns
@@ -12388,6 +12665,86 @@ module Aws::Kendra
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass UpdateAccessControlConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_id: "IndexId", # required
+    #         id: "AccessControlConfigurationId", # required
+    #         name: "AccessControlConfigurationName",
+    #         description: "Description",
+    #         access_control_list: [
+    #           {
+    #             name: "PrincipalName", # required
+    #             type: "USER", # required, accepts USER, GROUP
+    #             access: "ALLOW", # required, accepts ALLOW, DENY
+    #             data_source_id: "DataSourceId",
+    #           },
+    #         ],
+    #         hierarchical_access_control_list: [
+    #           {
+    #             principal_list: [ # required
+    #               {
+    #                 name: "PrincipalName", # required
+    #                 type: "USER", # required, accepts USER, GROUP
+    #                 access: "ALLOW", # required, accepts ALLOW, DENY
+    #                 data_source_id: "DataSourceId",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index for an access control configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The identifier of the access control configuration you want to
+    #   update.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A new name for the access control configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A new description for the access control configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_control_list
+    #   Information you want to update on principals (users and/or groups)
+    #   and which documents they should have access to. This is useful for
+    #   user context filtering, where search results are filtered based on
+    #   the user or their group access to documents.
+    #   @return [Array<Types::Principal>]
+    #
+    # @!attribute [rw] hierarchical_access_control_list
+    #   The updated list of [principal][1] lists that define the hierarchy
+    #   for which documents users should have access to.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_Principal.html
+    #   @return [Array<Types::HierarchicalPrincipal>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UpdateAccessControlConfigurationRequest AWS API Documentation
+    #
+    class UpdateAccessControlConfigurationRequest < Struct.new(
+      :index_id,
+      :id,
+      :name,
+      :description,
+      :access_control_list,
+      :hierarchical_access_control_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UpdateAccessControlConfigurationResponse AWS API Documentation
+    #
+    class UpdateAccessControlConfigurationResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass UpdateDataSourceRequest
     #   data as a hash:
     #
@@ -13072,43 +13429,47 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] id
-    #   The unique identifier of the data source to update.
+    #   The identifier of the data source you want to update.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the data source to update. The name of the data source
-    #   can't be updated. To rename a data source you must delete the data
-    #   source and re-create it.
+    #   A new name for the data source connector. You must first delete the
+    #   data source and re-create it to change the name of the data source.
     #   @return [String]
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index that contains the data source to update.
+    #   The identifier of the index used with the data source connector.
     #   @return [String]
     #
     # @!attribute [rw] configuration
-    #   Configuration information for an Amazon Kendra data source you want
-    #   to update.
+    #   Configuration information you want to update for the data source
+    #   connector.
     #   @return [Types::DataSourceConfiguration]
     #
     # @!attribute [rw] description
-    #   The new description for the data source.
+    #   A new description for the data source connector.
     #   @return [String]
     #
     # @!attribute [rw] schedule
-    #   The new update schedule for the data source.
+    #   The sync schedule you want to update for the data source connector.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the new role to use when the data
-    #   source is accessing resources on your behalf.
+    #   The Amazon Resource Name (ARN) of a role with permission to access
+    #   the data source. For more information, see [IAM Roles for Amazon
+    #   Kendra][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The code for a language. This allows you to support a language for
-    #   all documents when updating the data source. English is supported by
-    #   default. For more information on supported languages, including
-    #   their codes, see [Adding documents in languages other than
-    #   English][1].
+    #   The code for a language you want to update for the data source
+    #   connector. This allows you to support a language for all documents
+    #   when updating the data source. English is supported by default. For
+    #   more information on supported languages, including their codes, see
+    #   [Adding documents in languages other than English][1].
     #
     #
     #
@@ -13116,8 +13477,8 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] custom_document_enrichment_configuration
-    #   Configuration information for altering document metadata and content
-    #   during the document ingestion process when you update a data source.
+    #   Configuration information you want to update for altering document
+    #   metadata and content during the document ingestion process.
     #
     #   For more information on how to create, modify and delete document
     #   metadata, or make other content alterations when you ingest
@@ -13171,12 +13532,11 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of your Amazon Kendra experience you want to update.
+    #   A new name for your Amazon Kendra experience.
     #   @return [String]
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index for your Amazon Kendra experience you
-    #   want to update.
+    #   The identifier of the index for your Amazon Kendra experience.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -13191,11 +13551,12 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] configuration
-    #   Configuration information for your Amazon Kendra you want to update.
+    #   Configuration information you want to update for your Amazon Kendra
+    #   experience.
     #   @return [Types::ExperienceConfiguration]
     #
     # @!attribute [rw] description
-    #   The description of your Amazon Kendra experience you want to update.
+    #   A new description for your Amazon Kendra experience.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UpdateExperienceRequest AWS API Documentation
@@ -13268,16 +13629,16 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] id
-    #   The identifier of the index to update.
+    #   The identifier of the index you want to update.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the index to update.
+    #   The name of the index you want to update.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   A new IAM role that gives Amazon Kendra permission to access your
-    #   Amazon CloudWatch logs.
+    #   An Identity and Access Management (IAM) role that gives Amazon
+    #   Kendra permission to access Amazon CloudWatch logs and metrics.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -13285,7 +13646,10 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] document_metadata_configuration_updates
-    #   The document metadata you want to update.
+    #   The document metadata configuration you want to update for the
+    #   index. Document metadata are fields or attributes associated with
+    #   your documents. For example, the company department name associated
+    #   with each document.
     #   @return [Array<Types::DocumentMetadataConfiguration>]
     #
     # @!attribute [rw] capacity_units
@@ -13348,19 +13712,19 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index for a block list.
+    #   The identifier of the index for the block list.
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The unique identifier of a block list.
+    #   The identifier of the block list you want to update.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of a block list.
+    #   A new name for the block list.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description for a block list.
+    #   A new description for the block list.
     #   @return [String]
     #
     # @!attribute [rw] source_s3_path
@@ -13408,8 +13772,8 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index you want to update query suggestions
-    #   settings for.
+    #   The identifier of the index with query suggestions you want to
+    #   update.
     #   @return [String]
     #
     # @!attribute [rw] mode
@@ -13500,23 +13864,24 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] id
-    #   The identifier of the thesaurus to update.
+    #   The identifier of the thesaurus you want to update.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The updated name of the thesaurus.
+    #   A new name for the thesaurus.
     #   @return [String]
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index associated with the thesaurus to update.
+    #   The identifier of the index for the thesaurus.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The updated description of the thesaurus.
+    #   A new description for the thesaurus.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The updated role ARN of the thesaurus.
+    #   An IAM role that gives Amazon Kendra permissions to access thesaurus
+    #   file specified in `SourceS3Path`.
     #   @return [String]
     #
     # @!attribute [rw] source_s3_path
@@ -13595,8 +13960,13 @@ module Aws::Kendra
     # Provides information about the user context for an Amazon Kendra
     # index.
     #
-    # This is used for filtering search results for different users based on
-    # their access to documents.
+    # User context filtering is a kind of personalized search with the
+    # benefit of controlling access to documents. For example, not all teams
+    # that search the company portal for information should access
+    # top-secret company documents, nor are these documents relevant to all
+    # users. Only specific users or groups of teams given access to
+    # top-secret documents should see these documents in their search
+    # results.
     #
     # You provide one of the following:
     #
@@ -13655,11 +14025,11 @@ module Aws::Kendra
 
     # Provides the configuration information to fetch access levels of
     # groups and users from an Amazon Web Services Single Sign On identity
-    # source. This is useful for setting up user context filtering, where
-    # Amazon Kendra filters search results for different users based on
-    # their group's access to documents. You can also map your users to
-    # their groups for user context filtering using the [PutPrincipalMapping
-    # API][1].
+    # source. This is useful for user context filtering, where search
+    # results are filtered based on the user or their group access to
+    # documents. You can also use the [PutPrincipalMapping][1] API to map
+    # users to their groups so that you only need to provide the user ID
+    # when you issue the query.
     #
     # To set up an Amazon Web Services SSO identity source in the console to
     # use with Amazon Kendra, see [Getting started with an Amazon Web
@@ -13944,13 +14314,12 @@ module Aws::Kendra
     #   authentication.
     #
     #   You can connect to websites using basic authentication of user name
-    #   and password.
+    #   and password. You use a secret in [Secrets Manager][1] to store your
+    #   authentication credentials.
     #
     #   You must provide the website host name and port number. For example,
     #   the host name of https://a.example.com/page1.html is
     #   "a.example.com" and the port is 443, the standard port for HTTPS.
-    #   You use a secret in [Secrets Manager][1] to store your
-    #   authentication credentials.
     #
     #
     #

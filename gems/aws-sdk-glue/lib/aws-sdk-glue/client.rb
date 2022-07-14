@@ -885,7 +885,7 @@ module Aws::Glue
     #   resp.dev_endpoints[0].zeppelin_remote_spark_interpreter_port #=> Integer
     #   resp.dev_endpoints[0].public_address #=> String
     #   resp.dev_endpoints[0].status #=> String
-    #   resp.dev_endpoints[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.dev_endpoints[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
     #   resp.dev_endpoints[0].glue_version #=> String
     #   resp.dev_endpoints[0].number_of_workers #=> Integer
     #   resp.dev_endpoints[0].number_of_nodes #=> Integer
@@ -959,7 +959,7 @@ module Aws::Glue
     #   resp.jobs[0].allocated_capacity #=> Integer
     #   resp.jobs[0].timeout #=> Integer
     #   resp.jobs[0].max_capacity #=> Float
-    #   resp.jobs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.jobs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
     #   resp.jobs[0].number_of_workers #=> Integer
     #   resp.jobs[0].security_configuration #=> String
     #   resp.jobs[0].notification_property.notify_delay_after #=> Integer
@@ -1710,7 +1710,7 @@ module Aws::Glue
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].execution_time #=> Integer
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].timeout #=> Integer
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].max_capacity #=> Float
-    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].number_of_workers #=> Integer
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].security_configuration #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
@@ -1777,7 +1777,7 @@ module Aws::Glue
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].execution_time #=> Integer
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].timeout #=> Integer
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].max_capacity #=> Float
-    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].number_of_workers #=> Integer
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].security_configuration #=> String
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
@@ -2002,7 +2002,7 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Cancels the statement..
+    # Cancels the statement.
     #
     # @option params [required, String] :session_id
     #   The Session ID of the statement to be cancelled.
@@ -2630,7 +2630,7 @@ module Aws::Glue
     #     public_key: "GenericString",
     #     public_keys: ["GenericString"],
     #     number_of_nodes: 1,
-    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X
+    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X
     #     glue_version: "GlueVersionString",
     #     number_of_workers: 1,
     #     extra_python_libs_s3_path: "GenericString",
@@ -2655,7 +2655,7 @@ module Aws::Glue
     #   resp.yarn_endpoint_address #=> String
     #   resp.zeppelin_remote_spark_interpreter_port #=> Integer
     #   resp.number_of_nodes #=> Integer
-    #   resp.worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
     #   resp.glue_version #=> String
     #   resp.number_of_workers #=> Integer
     #   resp.availability_zone #=> String
@@ -2706,6 +2706,11 @@ module Aws::Glue
     #   You can specify arguments here that your own job-execution script
     #   consumes, as well as arguments that Glue itself consumes.
     #
+    #   Job arguments may be logged. Do not pass plaintext secrets as
+    #   arguments. Retrieve secrets from a Glue Connection, Secrets Manager or
+    #   other secret management mechanism if you intend to keep them within
+    #   the Job.
+    #
     #   For information about how to specify and consume your own Job
     #   arguments, see the [Calling Glue APIs in Python][1] topic in the
     #   developer guide.
@@ -2732,7 +2737,7 @@ module Aws::Glue
     #   This parameter is deprecated. Use `MaxCapacity` instead.
     #
     #   The number of Glue data processing units (DPUs) to allocate to this
-    #   Job. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is
+    #   Job. You can allocate a minimum of 2 DPUs; the default is 10. A DPU is
     #   a relative measure of processing power that consists of 4 vCPUs of
     #   compute capacity and 16 GB of memory. For more information, see the
     #   [Glue pricing page][1].
@@ -2764,8 +2769,8 @@ module Aws::Glue
     #
     #   * When you specify an Apache Spark ETL job
     #     (`JobCommand.Name`="glueetl") or Apache Spark streaming ETL job
-    #     (`JobCommand.Name`="gluestreaming"), you can allocate from 2 to
-    #     100 DPUs. The default is 10 DPUs. This job type cannot have a
+    #     (`JobCommand.Name`="gluestreaming"), you can allocate a minimum of
+    #     2 DPUs. The default is 10 DPUs. This job type cannot have a
     #     fractional DPU allocation.
     #
     #   For Glue version 2.0 jobs, you cannot instead specify a `Maximum
@@ -2812,12 +2817,9 @@ module Aws::Glue
     #   The number of workers of a defined `workerType` that are allocated
     #   when a job runs.
     #
-    #   The maximum number of workers you can define are 299 for `G.1X`, and
-    #   149 for `G.2X`.
-    #
     # @option params [String] :worker_type
     #   The type of predefined worker that is allocated when a job runs.
-    #   Accepts a value of Standard, G.1X, or G.2X.
+    #   Accepts a value of Standard, G.1X, G.2X, or G.025X.
     #
     #   * For the `Standard` worker type, each worker provides 4 vCPU, 16 GB
     #     of memory and a 50GB disk, and 2 executors per worker.
@@ -2829,6 +2831,11 @@ module Aws::Glue
     #   * For the `G.2X` worker type, each worker maps to 2 DPU (8 vCPU, 32 GB
     #     of memory, 128 GB disk), and provides 1 executor per worker. We
     #     recommend this worker type for memory-intensive jobs.
+    #
+    #   * For the `G.025X` worker type, each worker maps to 0.25 DPU (2 vCPU,
+    #     4 GB of memory, 64 GB disk), and provides 1 executor per worker. We
+    #     recommend this worker type for low volume streaming jobs. This
+    #     worker type is only available for Glue version 3.0 streaming jobs.
     #
     # @option params [Hash<String,Types::CodeGenConfigurationNode>] :code_gen_configuration_nodes
     #   The representation of a directed acyclic graph on which both the Glue
@@ -2875,7 +2882,7 @@ module Aws::Glue
     #     },
     #     glue_version: "GlueVersionString",
     #     number_of_workers: 1,
-    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X
+    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X
     #     code_gen_configuration_nodes: {
     #       "NodeId" => {
     #         athena_connector_source: {
@@ -3739,7 +3746,7 @@ module Aws::Glue
     #     role: "RoleString", # required
     #     glue_version: "GlueVersionString",
     #     max_capacity: 1.0,
-    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X
+    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X
     #     number_of_workers: 1,
     #     timeout: 1,
     #     max_retries: 1,
@@ -4244,15 +4251,33 @@ module Aws::Glue
     #   The number of connections to use for the session.
     #
     # @option params [Float] :max_capacity
-    #   The number of AWS Glue data processing units (DPUs) that can be
-    #   allocated when the job runs. A DPU is a relative measure of processing
-    #   power that consists of 4 vCPUs of compute capacity and 16 GB memory.
+    #   The number of Glue data processing units (DPUs) that can be allocated
+    #   when the job runs. A DPU is a relative measure of processing power
+    #   that consists of 4 vCPUs of compute capacity and 16 GB memory.
     #
     # @option params [Integer] :number_of_workers
-    #   The number of workers to use for the session.
+    #   The number of workers of a defined `WorkerType` to use for the
+    #   session.
     #
     # @option params [String] :worker_type
-    #   The Worker Type. Can be one of G.1X, G.2X, Standard
+    #   The type of predefined worker that is allocated to use for the
+    #   session. Accepts a value of Standard, G.1X, G.2X, or G.025X.
+    #
+    #   * For the `Standard` worker type, each worker provides 4 vCPU, 16 GB
+    #     of memory and a 50GB disk, and 2 executors per worker.
+    #
+    #   * For the `G.1X` worker type, each worker maps to 1 DPU (4 vCPU, 16 GB
+    #     of memory, 64 GB disk), and provides 1 executor per worker. We
+    #     recommend this worker type for memory-intensive jobs.
+    #
+    #   * For the `G.2X` worker type, each worker maps to 2 DPU (8 vCPU, 32 GB
+    #     of memory, 128 GB disk), and provides 1 executor per worker. We
+    #     recommend this worker type for memory-intensive jobs.
+    #
+    #   * For the `G.025X` worker type, each worker maps to 0.25 DPU (2 vCPU,
+    #     4 GB of memory, 64 GB disk), and provides 1 executor per worker. We
+    #     recommend this worker type for low volume streaming jobs. This
+    #     worker type is only available for Glue version 3.0 streaming jobs.
     #
     # @option params [String] :security_configuration
     #   The name of the SecurityConfiguration structure to be used with the
@@ -4260,7 +4285,7 @@ module Aws::Glue
     #
     # @option params [String] :glue_version
     #   The Glue version determines the versions of Apache Spark and Python
-    #   that AWS Glue supports. The GlueVersion must be greater than 2.0.
+    #   that Glue supports. The GlueVersion must be greater than 2.0.
     #
     # @option params [Hash<String,String>] :tags
     #   The map of key value pairs (tags) belonging to the session.
@@ -4292,7 +4317,7 @@ module Aws::Glue
     #     },
     #     max_capacity: 1.0,
     #     number_of_workers: 1,
-    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X
+    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X
     #     security_configuration: "NameString",
     #     glue_version: "GlueVersionString",
     #     tags: {
@@ -6542,7 +6567,7 @@ module Aws::Glue
     #   resp.dev_endpoint.zeppelin_remote_spark_interpreter_port #=> Integer
     #   resp.dev_endpoint.public_address #=> String
     #   resp.dev_endpoint.status #=> String
-    #   resp.dev_endpoint.worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.dev_endpoint.worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
     #   resp.dev_endpoint.glue_version #=> String
     #   resp.dev_endpoint.number_of_workers #=> Integer
     #   resp.dev_endpoint.number_of_nodes #=> Integer
@@ -6612,7 +6637,7 @@ module Aws::Glue
     #   resp.dev_endpoints[0].zeppelin_remote_spark_interpreter_port #=> Integer
     #   resp.dev_endpoints[0].public_address #=> String
     #   resp.dev_endpoints[0].status #=> String
-    #   resp.dev_endpoints[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.dev_endpoints[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
     #   resp.dev_endpoints[0].glue_version #=> String
     #   resp.dev_endpoints[0].number_of_workers #=> Integer
     #   resp.dev_endpoints[0].number_of_nodes #=> Integer
@@ -6678,7 +6703,7 @@ module Aws::Glue
     #   resp.job.allocated_capacity #=> Integer
     #   resp.job.timeout #=> Integer
     #   resp.job.max_capacity #=> Float
-    #   resp.job.worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.job.worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
     #   resp.job.number_of_workers #=> Integer
     #   resp.job.security_configuration #=> String
     #   resp.job.notification_property.notify_delay_after #=> Integer
@@ -7255,7 +7280,7 @@ module Aws::Glue
     #   resp.job_run.execution_time #=> Integer
     #   resp.job_run.timeout #=> Integer
     #   resp.job_run.max_capacity #=> Float
-    #   resp.job_run.worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.job_run.worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
     #   resp.job_run.number_of_workers #=> Integer
     #   resp.job_run.security_configuration #=> String
     #   resp.job_run.log_group_name #=> String
@@ -7320,7 +7345,7 @@ module Aws::Glue
     #   resp.job_runs[0].execution_time #=> Integer
     #   resp.job_runs[0].timeout #=> Integer
     #   resp.job_runs[0].max_capacity #=> Float
-    #   resp.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
     #   resp.job_runs[0].number_of_workers #=> Integer
     #   resp.job_runs[0].security_configuration #=> String
     #   resp.job_runs[0].log_group_name #=> String
@@ -7383,7 +7408,7 @@ module Aws::Glue
     #   resp.jobs[0].allocated_capacity #=> Integer
     #   resp.jobs[0].timeout #=> Integer
     #   resp.jobs[0].max_capacity #=> Float
-    #   resp.jobs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.jobs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
     #   resp.jobs[0].number_of_workers #=> Integer
     #   resp.jobs[0].security_configuration #=> String
     #   resp.jobs[0].notification_property.notify_delay_after #=> Integer
@@ -8098,7 +8123,7 @@ module Aws::Glue
     #   resp.role #=> String
     #   resp.glue_version #=> String
     #   resp.max_capacity #=> Float
-    #   resp.worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
     #   resp.number_of_workers #=> Integer
     #   resp.timeout #=> Integer
     #   resp.max_retries #=> Integer
@@ -8206,7 +8231,7 @@ module Aws::Glue
     #   resp.transforms[0].role #=> String
     #   resp.transforms[0].glue_version #=> String
     #   resp.transforms[0].max_capacity #=> Float
-    #   resp.transforms[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.transforms[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
     #   resp.transforms[0].number_of_workers #=> Integer
     #   resp.transforms[0].timeout #=> Integer
     #   resp.transforms[0].max_retries #=> Integer
@@ -10434,7 +10459,7 @@ module Aws::Glue
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].execution_time #=> Integer
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].timeout #=> Integer
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].max_capacity #=> Float
-    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].number_of_workers #=> Integer
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].security_configuration #=> String
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
@@ -10501,7 +10526,7 @@ module Aws::Glue
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].execution_time #=> Integer
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].timeout #=> Integer
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].max_capacity #=> Float
-    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].number_of_workers #=> Integer
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].security_configuration #=> String
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
@@ -10619,7 +10644,7 @@ module Aws::Glue
     #   resp.run.graph.nodes[0].job_details.job_runs[0].execution_time #=> Integer
     #   resp.run.graph.nodes[0].job_details.job_runs[0].timeout #=> Integer
     #   resp.run.graph.nodes[0].job_details.job_runs[0].max_capacity #=> Float
-    #   resp.run.graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.run.graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
     #   resp.run.graph.nodes[0].job_details.job_runs[0].number_of_workers #=> Integer
     #   resp.run.graph.nodes[0].job_details.job_runs[0].security_configuration #=> String
     #   resp.run.graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
@@ -10777,7 +10802,7 @@ module Aws::Glue
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].execution_time #=> Integer
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].timeout #=> Integer
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].max_capacity #=> Float
-    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].number_of_workers #=> Integer
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].security_configuration #=> String
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
@@ -11382,7 +11407,7 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Retrieve a session..
+    # Retrieve a list of sessions.
     #
     # @option params [String] :next_token
     #   The token for the next set of results, or null if there are no more
@@ -11457,6 +11482,7 @@ module Aws::Glue
     #   The origin of the request to list statements.
     #
     # @option params [String] :next_token
+    #   A continuation token, if this is a continuation call.
     #
     # @return [Types::ListStatementsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -12483,6 +12509,11 @@ module Aws::Glue
     #   You can specify arguments here that your own job-execution script
     #   consumes, as well as arguments that Glue itself consumes.
     #
+    #   Job arguments may be logged. Do not pass plaintext secrets as
+    #   arguments. Retrieve secrets from a Glue Connection, Secrets Manager or
+    #   other secret management mechanism if you intend to keep them within
+    #   the Job.
+    #
     #   For information about how to specify and consume your own Job
     #   arguments, see the [Calling Glue APIs in Python][1] topic in the
     #   developer guide.
@@ -12500,7 +12531,7 @@ module Aws::Glue
     #   This field is deprecated. Use `MaxCapacity` instead.
     #
     #   The number of Glue data processing units (DPUs) to allocate to this
-    #   JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU
+    #   JobRun. You can allocate a minimum of 2 DPUs; the default is 10. A DPU
     #   is a relative measure of processing power that consists of 4 vCPUs of
     #   compute capacity and 16 GB of memory. For more information, see the
     #   [Glue pricing page][1].
@@ -12531,7 +12562,7 @@ module Aws::Glue
     #     or 1 DPU. The default is 0.0625 DPU.
     #
     #   * When you specify an Apache Spark ETL job
-    #     (`JobCommand.Name`="glueetl"), you can allocate from 2 to 100
+    #     (`JobCommand.Name`="glueetl"), you can allocate a minimum of 2
     #     DPUs. The default is 10 DPUs. This job type cannot have a fractional
     #     DPU allocation.
     #
@@ -12548,7 +12579,7 @@ module Aws::Glue
     #
     # @option params [String] :worker_type
     #   The type of predefined worker that is allocated when a job runs.
-    #   Accepts a value of Standard, G.1X, or G.2X.
+    #   Accepts a value of Standard, G.1X, G.2X, or G.025X.
     #
     #   * For the `Standard` worker type, each worker provides 4 vCPU, 16 GB
     #     of memory and a 50GB disk, and 2 executors per worker.
@@ -12559,12 +12590,14 @@ module Aws::Glue
     #   * For the `G.2X` worker type, each worker provides 8 vCPU, 32 GB of
     #     memory and a 128GB disk, and 1 executor per worker.
     #
+    #   * For the `G.025X` worker type, each worker maps to 0.25 DPU (2 vCPU,
+    #     4 GB of memory, 64 GB disk), and provides 1 executor per worker. We
+    #     recommend this worker type for low volume streaming jobs. This
+    #     worker type is only available for Glue version 3.0 streaming jobs.
+    #
     # @option params [Integer] :number_of_workers
     #   The number of workers of a defined `workerType` that are allocated
     #   when a job runs.
-    #
-    #   The maximum number of workers you can define are 299 for `G.1X`, and
-    #   149 for `G.2X`.
     #
     # @return [Types::StartJobRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -12585,7 +12618,7 @@ module Aws::Glue
     #     notification_property: {
     #       notify_delay_after: 1,
     #     },
-    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X
+    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X
     #     number_of_workers: 1,
     #   })
     #
@@ -13665,13 +13698,15 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Updates an existing job definition.
+    # Updates an existing job definition. The previous job definition is
+    # completely overwritten by this information.
     #
     # @option params [required, String] :job_name
     #   The name of the job definition to update.
     #
     # @option params [required, Types::JobUpdate] :job_update
     #   Specifies the values with which to update the job definition.
+    #   Unspecified configuration is removed or reset to default values.
     #
     # @return [Types::UpdateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -13706,7 +13741,7 @@ module Aws::Glue
     #       allocated_capacity: 1,
     #       timeout: 1,
     #       max_capacity: 1.0,
-    #       worker_type: "Standard", # accepts Standard, G.1X, G.2X
+    #       worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X
     #       number_of_workers: 1,
     #       security_configuration: "NameString",
     #       notification_property: {
@@ -14496,7 +14531,7 @@ module Aws::Glue
     #     role: "RoleString",
     #     glue_version: "GlueVersionString",
     #     max_capacity: 1.0,
-    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X
+    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X
     #     number_of_workers: 1,
     #     timeout: 1,
     #     max_retries: 1,
@@ -15057,7 +15092,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.114.0'
+      context[:gem_version] = '1.115.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

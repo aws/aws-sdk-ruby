@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.115.0 (2022-07-14)
+------------------
+
+* Feature - This release adds an additional worker type for Glue Streaming jobs.
+
 1.114.0 (2022-06-30)
 ------------------
 

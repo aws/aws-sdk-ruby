@@ -13,6 +13,10 @@ module Aws::Kendra
 
     include Seahorse::Model
 
+    AccessControlConfigurationId = Shapes::StringShape.new(name: 'AccessControlConfigurationId')
+    AccessControlConfigurationName = Shapes::StringShape.new(name: 'AccessControlConfigurationName')
+    AccessControlConfigurationSummary = Shapes::StructureShape.new(name: 'AccessControlConfigurationSummary')
+    AccessControlConfigurationSummaryList = Shapes::ListShape.new(name: 'AccessControlConfigurationSummaryList')
     AccessControlListConfiguration = Shapes::StructureShape.new(name: 'AccessControlListConfiguration')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AclConfiguration = Shapes::StructureShape.new(name: 'AclConfiguration')
@@ -86,6 +90,8 @@ module Aws::Kendra
     Correction = Shapes::StructureShape.new(name: 'Correction')
     CorrectionList = Shapes::ListShape.new(name: 'CorrectionList')
     CrawlDepth = Shapes::IntegerShape.new(name: 'CrawlDepth')
+    CreateAccessControlConfigurationRequest = Shapes::StructureShape.new(name: 'CreateAccessControlConfigurationRequest')
+    CreateAccessControlConfigurationResponse = Shapes::StructureShape.new(name: 'CreateAccessControlConfigurationResponse')
     CreateDataSourceRequest = Shapes::StructureShape.new(name: 'CreateDataSourceRequest')
     CreateDataSourceResponse = Shapes::StructureShape.new(name: 'CreateDataSourceResponse')
     CreateExperienceRequest = Shapes::StructureShape.new(name: 'CreateExperienceRequest')
@@ -127,6 +133,8 @@ module Aws::Kendra
     DatabaseHost = Shapes::StringShape.new(name: 'DatabaseHost')
     DatabaseName = Shapes::StringShape.new(name: 'DatabaseName')
     DatabasePort = Shapes::IntegerShape.new(name: 'DatabasePort')
+    DeleteAccessControlConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteAccessControlConfigurationRequest')
+    DeleteAccessControlConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteAccessControlConfigurationResponse')
     DeleteDataSourceRequest = Shapes::StructureShape.new(name: 'DeleteDataSourceRequest')
     DeleteExperienceRequest = Shapes::StructureShape.new(name: 'DeleteExperienceRequest')
     DeleteExperienceResponse = Shapes::StructureShape.new(name: 'DeleteExperienceResponse')
@@ -135,6 +143,8 @@ module Aws::Kendra
     DeletePrincipalMappingRequest = Shapes::StructureShape.new(name: 'DeletePrincipalMappingRequest')
     DeleteQuerySuggestionsBlockListRequest = Shapes::StructureShape.new(name: 'DeleteQuerySuggestionsBlockListRequest')
     DeleteThesaurusRequest = Shapes::StructureShape.new(name: 'DeleteThesaurusRequest')
+    DescribeAccessControlConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeAccessControlConfigurationRequest')
+    DescribeAccessControlConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeAccessControlConfigurationResponse')
     DescribeDataSourceRequest = Shapes::StructureShape.new(name: 'DescribeDataSourceRequest')
     DescribeDataSourceResponse = Shapes::StructureShape.new(name: 'DescribeDataSourceResponse')
     DescribeExperienceRequest = Shapes::StructureShape.new(name: 'DescribeExperienceRequest')
@@ -286,6 +296,8 @@ module Aws::Kendra
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
     LambdaArn = Shapes::StringShape.new(name: 'LambdaArn')
     LanguageCode = Shapes::StringShape.new(name: 'LanguageCode')
+    ListAccessControlConfigurationsRequest = Shapes::StructureShape.new(name: 'ListAccessControlConfigurationsRequest')
+    ListAccessControlConfigurationsResponse = Shapes::StructureShape.new(name: 'ListAccessControlConfigurationsResponse')
     ListDataSourceSyncJobsRequest = Shapes::StructureShape.new(name: 'ListDataSourceSyncJobsRequest')
     ListDataSourceSyncJobsResponse = Shapes::StructureShape.new(name: 'ListDataSourceSyncJobsResponse')
     ListDataSourcesRequest = Shapes::StructureShape.new(name: 'ListDataSourcesRequest')
@@ -313,6 +325,7 @@ module Aws::Kendra
     LookBackPeriod = Shapes::IntegerShape.new(name: 'LookBackPeriod')
     MaxContentSizePerPageInMegaBytes = Shapes::FloatShape.new(name: 'MaxContentSizePerPageInMegaBytes')
     MaxLinksPerPage = Shapes::IntegerShape.new(name: 'MaxLinksPerPage')
+    MaxResultsIntegerForListAccessControlConfigurationsRequest = Shapes::IntegerShape.new(name: 'MaxResultsIntegerForListAccessControlConfigurationsRequest')
     MaxResultsIntegerForListDataSourceSyncJobsRequest = Shapes::IntegerShape.new(name: 'MaxResultsIntegerForListDataSourceSyncJobsRequest')
     MaxResultsIntegerForListDataSourcesRequest = Shapes::IntegerShape.new(name: 'MaxResultsIntegerForListDataSourcesRequest')
     MaxResultsIntegerForListEntityPersonasRequest = Shapes::IntegerShape.new(name: 'MaxResultsIntegerForListEntityPersonasRequest')
@@ -493,6 +506,8 @@ module Aws::Kendra
     Type = Shapes::StringShape.new(name: 'Type')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateAccessControlConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateAccessControlConfigurationRequest')
+    UpdateAccessControlConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateAccessControlConfigurationResponse')
     UpdateDataSourceRequest = Shapes::StructureShape.new(name: 'UpdateDataSourceRequest')
     UpdateExperienceRequest = Shapes::StructureShape.new(name: 'UpdateExperienceRequest')
     UpdateIndexRequest = Shapes::StructureShape.new(name: 'UpdateIndexRequest')
@@ -523,6 +538,11 @@ module Aws::Kendra
     WebCrawlerConfiguration = Shapes::StructureShape.new(name: 'WebCrawlerConfiguration')
     WebCrawlerMode = Shapes::StringShape.new(name: 'WebCrawlerMode')
     WorkDocsConfiguration = Shapes::StructureShape.new(name: 'WorkDocsConfiguration')
+
+    AccessControlConfigurationSummary.add_member(:id, Shapes::ShapeRef.new(shape: AccessControlConfigurationId, required: true, location_name: "Id"))
+    AccessControlConfigurationSummary.struct_class = Types::AccessControlConfigurationSummary
+
+    AccessControlConfigurationSummaryList.member = Shapes::ShapeRef.new(shape: AccessControlConfigurationSummary)
 
     AccessControlListConfiguration.add_member(:key_path, Shapes::ShapeRef.new(shape: S3ObjectKey, location_name: "KeyPath"))
     AccessControlListConfiguration.struct_class = Types::AccessControlListConfiguration
@@ -767,6 +787,17 @@ module Aws::Kendra
 
     CorrectionList.member = Shapes::ShapeRef.new(shape: Correction)
 
+    CreateAccessControlConfigurationRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
+    CreateAccessControlConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: AccessControlConfigurationName, required: true, location_name: "Name"))
+    CreateAccessControlConfigurationRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    CreateAccessControlConfigurationRequest.add_member(:access_control_list, Shapes::ShapeRef.new(shape: PrincipalList, location_name: "AccessControlList"))
+    CreateAccessControlConfigurationRequest.add_member(:hierarchical_access_control_list, Shapes::ShapeRef.new(shape: HierarchicalPrincipalList, location_name: "HierarchicalAccessControlList"))
+    CreateAccessControlConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenName, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAccessControlConfigurationRequest.struct_class = Types::CreateAccessControlConfigurationRequest
+
+    CreateAccessControlConfigurationResponse.add_member(:id, Shapes::ShapeRef.new(shape: AccessControlConfigurationId, required: true, location_name: "Id"))
+    CreateAccessControlConfigurationResponse.struct_class = Types::CreateAccessControlConfigurationResponse
+
     CreateDataSourceRequest.add_member(:name, Shapes::ShapeRef.new(shape: DataSourceName, required: true, location_name: "Name"))
     CreateDataSourceRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
     CreateDataSourceRequest.add_member(:type, Shapes::ShapeRef.new(shape: DataSourceType, required: true, location_name: "Type"))
@@ -935,6 +966,12 @@ module Aws::Kendra
     DatabaseConfiguration.add_member(:sql_configuration, Shapes::ShapeRef.new(shape: SqlConfiguration, location_name: "SqlConfiguration"))
     DatabaseConfiguration.struct_class = Types::DatabaseConfiguration
 
+    DeleteAccessControlConfigurationRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
+    DeleteAccessControlConfigurationRequest.add_member(:id, Shapes::ShapeRef.new(shape: AccessControlConfigurationId, required: true, location_name: "Id"))
+    DeleteAccessControlConfigurationRequest.struct_class = Types::DeleteAccessControlConfigurationRequest
+
+    DeleteAccessControlConfigurationResponse.struct_class = Types::DeleteAccessControlConfigurationResponse
+
     DeleteDataSourceRequest.add_member(:id, Shapes::ShapeRef.new(shape: DataSourceId, required: true, location_name: "Id"))
     DeleteDataSourceRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
     DeleteDataSourceRequest.struct_class = Types::DeleteDataSourceRequest
@@ -965,6 +1002,17 @@ module Aws::Kendra
     DeleteThesaurusRequest.add_member(:id, Shapes::ShapeRef.new(shape: ThesaurusId, required: true, location_name: "Id"))
     DeleteThesaurusRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
     DeleteThesaurusRequest.struct_class = Types::DeleteThesaurusRequest
+
+    DescribeAccessControlConfigurationRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
+    DescribeAccessControlConfigurationRequest.add_member(:id, Shapes::ShapeRef.new(shape: AccessControlConfigurationId, required: true, location_name: "Id"))
+    DescribeAccessControlConfigurationRequest.struct_class = Types::DescribeAccessControlConfigurationRequest
+
+    DescribeAccessControlConfigurationResponse.add_member(:name, Shapes::ShapeRef.new(shape: AccessControlConfigurationName, required: true, location_name: "Name"))
+    DescribeAccessControlConfigurationResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    DescribeAccessControlConfigurationResponse.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
+    DescribeAccessControlConfigurationResponse.add_member(:access_control_list, Shapes::ShapeRef.new(shape: PrincipalList, location_name: "AccessControlList"))
+    DescribeAccessControlConfigurationResponse.add_member(:hierarchical_access_control_list, Shapes::ShapeRef.new(shape: HierarchicalPrincipalList, location_name: "HierarchicalAccessControlList"))
+    DescribeAccessControlConfigurationResponse.struct_class = Types::DescribeAccessControlConfigurationResponse
 
     DescribeDataSourceRequest.add_member(:id, Shapes::ShapeRef.new(shape: DataSourceId, required: true, location_name: "Id"))
     DescribeDataSourceRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
@@ -1130,6 +1178,7 @@ module Aws::Kendra
     Document.add_member(:access_control_list, Shapes::ShapeRef.new(shape: PrincipalList, location_name: "AccessControlList"))
     Document.add_member(:hierarchical_access_control_list, Shapes::ShapeRef.new(shape: HierarchicalPrincipalList, location_name: "HierarchicalAccessControlList"))
     Document.add_member(:content_type, Shapes::ShapeRef.new(shape: ContentType, location_name: "ContentType"))
+    Document.add_member(:access_control_configuration_id, Shapes::ShapeRef.new(shape: AccessControlConfigurationId, location_name: "AccessControlConfigurationId"))
     Document.struct_class = Types::Document
 
     DocumentAttribute.add_member(:key, Shapes::ShapeRef.new(shape: DocumentAttributeKey, required: true, location_name: "Key"))
@@ -1458,6 +1507,15 @@ module Aws::Kendra
     JwtTokenTypeConfiguration.add_member(:issuer, Shapes::ShapeRef.new(shape: Issuer, location_name: "Issuer"))
     JwtTokenTypeConfiguration.add_member(:claim_regex, Shapes::ShapeRef.new(shape: ClaimRegex, location_name: "ClaimRegex"))
     JwtTokenTypeConfiguration.struct_class = Types::JwtTokenTypeConfiguration
+
+    ListAccessControlConfigurationsRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
+    ListAccessControlConfigurationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListAccessControlConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsIntegerForListAccessControlConfigurationsRequest, location_name: "MaxResults"))
+    ListAccessControlConfigurationsRequest.struct_class = Types::ListAccessControlConfigurationsRequest
+
+    ListAccessControlConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListAccessControlConfigurationsResponse.add_member(:access_control_configurations, Shapes::ShapeRef.new(shape: AccessControlConfigurationSummaryList, required: true, location_name: "AccessControlConfigurations"))
+    ListAccessControlConfigurationsResponse.struct_class = Types::ListAccessControlConfigurationsResponse
 
     ListDataSourceSyncJobsRequest.add_member(:id, Shapes::ShapeRef.new(shape: DataSourceId, required: true, location_name: "Id"))
     ListDataSourceSyncJobsRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
@@ -1982,6 +2040,16 @@ module Aws::Kendra
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
+    UpdateAccessControlConfigurationRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
+    UpdateAccessControlConfigurationRequest.add_member(:id, Shapes::ShapeRef.new(shape: AccessControlConfigurationId, required: true, location_name: "Id"))
+    UpdateAccessControlConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: AccessControlConfigurationName, location_name: "Name"))
+    UpdateAccessControlConfigurationRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    UpdateAccessControlConfigurationRequest.add_member(:access_control_list, Shapes::ShapeRef.new(shape: PrincipalList, location_name: "AccessControlList"))
+    UpdateAccessControlConfigurationRequest.add_member(:hierarchical_access_control_list, Shapes::ShapeRef.new(shape: HierarchicalPrincipalList, location_name: "HierarchicalAccessControlList"))
+    UpdateAccessControlConfigurationRequest.struct_class = Types::UpdateAccessControlConfigurationRequest
+
+    UpdateAccessControlConfigurationResponse.struct_class = Types::UpdateAccessControlConfigurationResponse
+
     UpdateDataSourceRequest.add_member(:id, Shapes::ShapeRef.new(shape: DataSourceId, required: true, location_name: "Id"))
     UpdateDataSourceRequest.add_member(:name, Shapes::ShapeRef.new(shape: DataSourceName, location_name: "Name"))
     UpdateDataSourceRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
@@ -2194,6 +2262,21 @@ module Aws::Kendra
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:create_access_control_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAccessControlConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateAccessControlConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAccessControlConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:create_data_source, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateDataSource"
         o.http_method = "POST"
@@ -2281,6 +2364,20 @@ module Aws::Kendra
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:delete_access_control_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAccessControlConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAccessControlConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAccessControlConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
@@ -2379,6 +2476,19 @@ module Aws::Kendra
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:describe_access_control_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAccessControlConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAccessControlConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAccessControlConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
@@ -2535,6 +2645,25 @@ module Aws::Kendra
         o.input = Shapes::ShapeRef.new(shape: GetSnapshotsRequest)
         o.output = Shapes::ShapeRef.new(shape: GetSnapshotsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_access_control_configurations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAccessControlConfigurations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListAccessControlConfigurationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAccessControlConfigurationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -2844,6 +2973,21 @@ module Aws::Kendra
         o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:update_access_control_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAccessControlConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAccessControlConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAccessControlConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 

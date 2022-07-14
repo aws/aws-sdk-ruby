@@ -754,12 +754,12 @@ module Aws::Athena
     #     name: "WorkGroupName", # required
     #     configuration: {
     #       result_configuration: {
-    #         output_location: "String",
+    #         output_location: "ResultOutputLocation",
     #         encryption_configuration: {
     #           encryption_option: "SSE_S3", # required, accepts SSE_S3, SSE_KMS, CSE_KMS
     #           kms_key: "String",
     #         },
-    #         expected_bucket_owner: "String",
+    #         expected_bucket_owner: "AwsAccountId",
     #         acl_configuration: {
     #           s3_acl_option: "BUCKET_OWNER_FULL_CONTROL", # required, accepts BUCKET_OWNER_FULL_CONTROL
     #         },
@@ -1775,12 +1775,12 @@ module Aws::Athena
     #       catalog: "CatalogNameString",
     #     },
     #     result_configuration: {
-    #       output_location: "String",
+    #       output_location: "ResultOutputLocation",
     #       encryption_configuration: {
     #         encryption_option: "SSE_S3", # required, accepts SSE_S3, SSE_KMS, CSE_KMS
     #         kms_key: "String",
     #       },
-    #       expected_bucket_owner: "String",
+    #       expected_bucket_owner: "AwsAccountId",
     #       acl_configuration: {
     #         s3_acl_option: "BUCKET_OWNER_FULL_CONTROL", # required, accepts BUCKET_OWNER_FULL_CONTROL
     #       },
@@ -2072,14 +2072,14 @@ module Aws::Athena
     #     configuration_updates: {
     #       enforce_work_group_configuration: false,
     #       result_configuration_updates: {
-    #         output_location: "String",
+    #         output_location: "ResultOutputLocation",
     #         remove_output_location: false,
     #         encryption_configuration: {
     #           encryption_option: "SSE_S3", # required, accepts SSE_S3, SSE_KMS, CSE_KMS
     #           kms_key: "String",
     #         },
     #         remove_encryption_configuration: false,
-    #         expected_bucket_owner: "String",
+    #         expected_bucket_owner: "AwsAccountId",
     #         remove_expected_bucket_owner: false,
     #         acl_configuration: {
     #           s3_acl_option: "BUCKET_OWNER_FULL_CONTROL", # required, accepts BUCKET_OWNER_FULL_CONTROL
@@ -2120,7 +2120,7 @@ module Aws::Athena
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-athena'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

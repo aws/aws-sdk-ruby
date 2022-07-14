@@ -104,8 +104,13 @@ module Aws::Inspector2
     Ec2InstanceSortBy = Shapes::StringShape.new(name: 'Ec2InstanceSortBy')
     Ec2Metadata = Shapes::StructureShape.new(name: 'Ec2Metadata')
     Ec2Platform = Shapes::StringShape.new(name: 'Ec2Platform')
+    EcrConfiguration = Shapes::StructureShape.new(name: 'EcrConfiguration')
+    EcrConfigurationState = Shapes::StructureShape.new(name: 'EcrConfigurationState')
     EcrContainerImageMetadata = Shapes::StructureShape.new(name: 'EcrContainerImageMetadata')
     EcrRepositoryMetadata = Shapes::StructureShape.new(name: 'EcrRepositoryMetadata')
+    EcrRescanDuration = Shapes::StringShape.new(name: 'EcrRescanDuration')
+    EcrRescanDurationState = Shapes::StructureShape.new(name: 'EcrRescanDurationState')
+    EcrRescanDurationStatus = Shapes::StringShape.new(name: 'EcrRescanDurationStatus')
     EcrScanFrequency = Shapes::StringShape.new(name: 'EcrScanFrequency')
     EnableDelegatedAdminAccountRequest = Shapes::StructureShape.new(name: 'EnableDelegatedAdminAccountRequest')
     EnableDelegatedAdminAccountResponse = Shapes::StructureShape.new(name: 'EnableDelegatedAdminAccountResponse')
@@ -146,6 +151,8 @@ module Aws::Inspector2
     FreeTrialInfoList = Shapes::ListShape.new(name: 'FreeTrialInfoList')
     FreeTrialStatus = Shapes::StringShape.new(name: 'FreeTrialStatus')
     FreeTrialType = Shapes::StringShape.new(name: 'FreeTrialType')
+    GetConfigurationRequest = Shapes::StructureShape.new(name: 'GetConfigurationRequest')
+    GetConfigurationResponse = Shapes::StructureShape.new(name: 'GetConfigurationResponse')
     GetDelegatedAdminAccountRequest = Shapes::StructureShape.new(name: 'GetDelegatedAdminAccountRequest')
     GetDelegatedAdminAccountResponse = Shapes::StructureShape.new(name: 'GetDelegatedAdminAccountResponse')
     GetFindingsReportStatusRequest = Shapes::StructureShape.new(name: 'GetFindingsReportStatusRequest')
@@ -287,6 +294,8 @@ module Aws::Inspector2
     TitleSortBy = Shapes::StringShape.new(name: 'TitleSortBy')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateConfigurationRequest')
+    UpdateConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateConfigurationResponse')
     UpdateFilterRequest = Shapes::StructureShape.new(name: 'UpdateFilterRequest')
     UpdateFilterResponse = Shapes::StructureShape.new(name: 'UpdateFilterResponse')
     UpdateOrganizationConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateOrganizationConfigurationRequest')
@@ -518,6 +527,7 @@ module Aws::Inspector2
     CreateFilterRequest.add_member(:description, Shapes::ShapeRef.new(shape: FilterDescription, location_name: "description"))
     CreateFilterRequest.add_member(:filter_criteria, Shapes::ShapeRef.new(shape: FilterCriteria, required: true, location_name: "filterCriteria"))
     CreateFilterRequest.add_member(:name, Shapes::ShapeRef.new(shape: FilterName, required: true, location_name: "name"))
+    CreateFilterRequest.add_member(:reason, Shapes::ShapeRef.new(shape: FilterReason, location_name: "reason"))
     CreateFilterRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateFilterRequest.struct_class = Types::CreateFilterRequest
 
@@ -631,12 +641,23 @@ module Aws::Inspector2
     Ec2Metadata.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     Ec2Metadata.struct_class = Types::Ec2Metadata
 
+    EcrConfiguration.add_member(:rescan_duration, Shapes::ShapeRef.new(shape: EcrRescanDuration, required: true, location_name: "rescanDuration"))
+    EcrConfiguration.struct_class = Types::EcrConfiguration
+
+    EcrConfigurationState.add_member(:rescan_duration_state, Shapes::ShapeRef.new(shape: EcrRescanDurationState, location_name: "rescanDurationState"))
+    EcrConfigurationState.struct_class = Types::EcrConfigurationState
+
     EcrContainerImageMetadata.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     EcrContainerImageMetadata.struct_class = Types::EcrContainerImageMetadata
 
     EcrRepositoryMetadata.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     EcrRepositoryMetadata.add_member(:scan_frequency, Shapes::ShapeRef.new(shape: EcrScanFrequency, location_name: "scanFrequency"))
     EcrRepositoryMetadata.struct_class = Types::EcrRepositoryMetadata
+
+    EcrRescanDurationState.add_member(:rescan_duration, Shapes::ShapeRef.new(shape: EcrRescanDuration, location_name: "rescanDuration"))
+    EcrRescanDurationState.add_member(:status, Shapes::ShapeRef.new(shape: EcrRescanDurationStatus, location_name: "status"))
+    EcrRescanDurationState.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimeTimestamp, location_name: "updatedAt"))
+    EcrRescanDurationState.struct_class = Types::EcrRescanDurationState
 
     EnableDelegatedAdminAccountRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     EnableDelegatedAdminAccountRequest.add_member(:delegated_admin_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "delegatedAdminAccountId"))
@@ -764,6 +785,11 @@ module Aws::Inspector2
     FreeTrialInfoErrorList.member = Shapes::ShapeRef.new(shape: FreeTrialInfoError)
 
     FreeTrialInfoList.member = Shapes::ShapeRef.new(shape: FreeTrialInfo)
+
+    GetConfigurationRequest.struct_class = Types::GetConfigurationRequest
+
+    GetConfigurationResponse.add_member(:ecr_configuration, Shapes::ShapeRef.new(shape: EcrConfigurationState, location_name: "ecrConfiguration"))
+    GetConfigurationResponse.struct_class = Types::GetConfigurationResponse
 
     GetDelegatedAdminAccountRequest.struct_class = Types::GetDelegatedAdminAccountRequest
 
@@ -1105,11 +1131,17 @@ module Aws::Inspector2
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
+    UpdateConfigurationRequest.add_member(:ecr_configuration, Shapes::ShapeRef.new(shape: EcrConfiguration, required: true, location_name: "ecrConfiguration"))
+    UpdateConfigurationRequest.struct_class = Types::UpdateConfigurationRequest
+
+    UpdateConfigurationResponse.struct_class = Types::UpdateConfigurationResponse
+
     UpdateFilterRequest.add_member(:action, Shapes::ShapeRef.new(shape: FilterAction, location_name: "action"))
     UpdateFilterRequest.add_member(:description, Shapes::ShapeRef.new(shape: FilterDescription, location_name: "description"))
     UpdateFilterRequest.add_member(:filter_arn, Shapes::ShapeRef.new(shape: FilterArn, required: true, location_name: "filterArn"))
     UpdateFilterRequest.add_member(:filter_criteria, Shapes::ShapeRef.new(shape: FilterCriteria, location_name: "filterCriteria"))
     UpdateFilterRequest.add_member(:name, Shapes::ShapeRef.new(shape: FilterName, location_name: "name"))
+    UpdateFilterRequest.add_member(:reason, Shapes::ShapeRef.new(shape: FilterReason, location_name: "reason"))
     UpdateFilterRequest.struct_class = Types::UpdateFilterRequest
 
     UpdateFilterResponse.add_member(:arn, Shapes::ShapeRef.new(shape: FilterArn, required: true, location_name: "arn"))
@@ -1350,6 +1382,17 @@ module Aws::Inspector2
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:get_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/configuration/get"
+        o.input = Shapes::ShapeRef.new(shape: GetConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:get_delegated_admin_account, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetDelegatedAdminAccount"
         o.http_method = "POST"
@@ -1579,6 +1622,18 @@ module Aws::Inspector2
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:update_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/configuration/update"
+        o.input = Shapes::ShapeRef.new(shape: UpdateConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)

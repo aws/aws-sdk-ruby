@@ -403,18 +403,18 @@ module Aws::Inspector2
     #
     #   resp.accounts #=> Array
     #   resp.accounts[0].account_id #=> String
-    #   resp.accounts[0].resource_state.ec2.error_code #=> String, one of "ALREADY_ENABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "SUSPEND_IN_PROGRESS", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_ERROR", "SSM_UNAVAILABLE", "SSM_THROTTLED", "EVENTBRIDGE_UNAVAILABLE", "EVENTBRIDGE_THROTTLED", "RESOURCE_SCAN_NOT_DISABLED", "DISASSOCIATE_ALL_MEMBERS"
+    #   resp.accounts[0].resource_state.ec2.error_code #=> String, one of "ALREADY_ENABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "SUSPEND_IN_PROGRESS", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_ERROR", "SSM_UNAVAILABLE", "SSM_THROTTLED", "EVENTBRIDGE_UNAVAILABLE", "EVENTBRIDGE_THROTTLED", "RESOURCE_SCAN_NOT_DISABLED", "DISASSOCIATE_ALL_MEMBERS", "ACCOUNT_IS_ISOLATED"
     #   resp.accounts[0].resource_state.ec2.error_message #=> String
     #   resp.accounts[0].resource_state.ec2.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
-    #   resp.accounts[0].resource_state.ecr.error_code #=> String, one of "ALREADY_ENABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "SUSPEND_IN_PROGRESS", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_ERROR", "SSM_UNAVAILABLE", "SSM_THROTTLED", "EVENTBRIDGE_UNAVAILABLE", "EVENTBRIDGE_THROTTLED", "RESOURCE_SCAN_NOT_DISABLED", "DISASSOCIATE_ALL_MEMBERS"
+    #   resp.accounts[0].resource_state.ecr.error_code #=> String, one of "ALREADY_ENABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "SUSPEND_IN_PROGRESS", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_ERROR", "SSM_UNAVAILABLE", "SSM_THROTTLED", "EVENTBRIDGE_UNAVAILABLE", "EVENTBRIDGE_THROTTLED", "RESOURCE_SCAN_NOT_DISABLED", "DISASSOCIATE_ALL_MEMBERS", "ACCOUNT_IS_ISOLATED"
     #   resp.accounts[0].resource_state.ecr.error_message #=> String
     #   resp.accounts[0].resource_state.ecr.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
-    #   resp.accounts[0].state.error_code #=> String, one of "ALREADY_ENABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "SUSPEND_IN_PROGRESS", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_ERROR", "SSM_UNAVAILABLE", "SSM_THROTTLED", "EVENTBRIDGE_UNAVAILABLE", "EVENTBRIDGE_THROTTLED", "RESOURCE_SCAN_NOT_DISABLED", "DISASSOCIATE_ALL_MEMBERS"
+    #   resp.accounts[0].state.error_code #=> String, one of "ALREADY_ENABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "SUSPEND_IN_PROGRESS", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_ERROR", "SSM_UNAVAILABLE", "SSM_THROTTLED", "EVENTBRIDGE_UNAVAILABLE", "EVENTBRIDGE_THROTTLED", "RESOURCE_SCAN_NOT_DISABLED", "DISASSOCIATE_ALL_MEMBERS", "ACCOUNT_IS_ISOLATED"
     #   resp.accounts[0].state.error_message #=> String
     #   resp.accounts[0].state.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts #=> Array
     #   resp.failed_accounts[0].account_id #=> String
-    #   resp.failed_accounts[0].error_code #=> String, one of "ALREADY_ENABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "SUSPEND_IN_PROGRESS", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_ERROR", "SSM_UNAVAILABLE", "SSM_THROTTLED", "EVENTBRIDGE_UNAVAILABLE", "EVENTBRIDGE_THROTTLED", "RESOURCE_SCAN_NOT_DISABLED", "DISASSOCIATE_ALL_MEMBERS"
+    #   resp.failed_accounts[0].error_code #=> String, one of "ALREADY_ENABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "SUSPEND_IN_PROGRESS", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_ERROR", "SSM_UNAVAILABLE", "SSM_THROTTLED", "EVENTBRIDGE_UNAVAILABLE", "EVENTBRIDGE_THROTTLED", "RESOURCE_SCAN_NOT_DISABLED", "DISASSOCIATE_ALL_MEMBERS", "ACCOUNT_IS_ISOLATED"
     #   resp.failed_accounts[0].error_message #=> String
     #   resp.failed_accounts[0].resource_status.ec2 #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts[0].resource_status.ecr #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
@@ -512,6 +512,9 @@ module Aws::Inspector2
     #   The name of the filter. Minimum length of 3. Maximum length of 64.
     #   Valid characters include alphanumeric characters, dot (.), underscore
     #   (\_), and dash (-). Spaces are not allowed.
+    #
+    # @option params [String] :reason
+    #   The reason for creating the filter.
     #
     # @option params [Hash<String,String>] :tags
     #   A list of tags for the filter.
@@ -737,6 +740,7 @@ module Aws::Inspector2
     #       ],
     #     },
     #     name: "FilterName", # required
+    #     reason: "FilterReason",
     #     tags: {
     #       "MapKey" => "MapValue",
     #     },
@@ -1088,7 +1092,7 @@ module Aws::Inspector2
     #   resp.accounts[0].status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts #=> Array
     #   resp.failed_accounts[0].account_id #=> String
-    #   resp.failed_accounts[0].error_code #=> String, one of "ALREADY_ENABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "SUSPEND_IN_PROGRESS", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_ERROR", "SSM_UNAVAILABLE", "SSM_THROTTLED", "EVENTBRIDGE_UNAVAILABLE", "EVENTBRIDGE_THROTTLED", "RESOURCE_SCAN_NOT_DISABLED", "DISASSOCIATE_ALL_MEMBERS"
+    #   resp.failed_accounts[0].error_code #=> String, one of "ALREADY_ENABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "SUSPEND_IN_PROGRESS", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_ERROR", "SSM_UNAVAILABLE", "SSM_THROTTLED", "EVENTBRIDGE_UNAVAILABLE", "EVENTBRIDGE_THROTTLED", "RESOURCE_SCAN_NOT_DISABLED", "DISASSOCIATE_ALL_MEMBERS", "ACCOUNT_IS_ISOLATED"
     #   resp.failed_accounts[0].error_message #=> String
     #   resp.failed_accounts[0].resource_status.ec2 #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts[0].resource_status.ecr #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
@@ -1200,7 +1204,7 @@ module Aws::Inspector2
     #   resp.accounts[0].status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts #=> Array
     #   resp.failed_accounts[0].account_id #=> String
-    #   resp.failed_accounts[0].error_code #=> String, one of "ALREADY_ENABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "SUSPEND_IN_PROGRESS", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_ERROR", "SSM_UNAVAILABLE", "SSM_THROTTLED", "EVENTBRIDGE_UNAVAILABLE", "EVENTBRIDGE_THROTTLED", "RESOURCE_SCAN_NOT_DISABLED", "DISASSOCIATE_ALL_MEMBERS"
+    #   resp.failed_accounts[0].error_code #=> String, one of "ALREADY_ENABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "SUSPEND_IN_PROGRESS", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_ERROR", "SSM_UNAVAILABLE", "SSM_THROTTLED", "EVENTBRIDGE_UNAVAILABLE", "EVENTBRIDGE_THROTTLED", "RESOURCE_SCAN_NOT_DISABLED", "DISASSOCIATE_ALL_MEMBERS", "ACCOUNT_IS_ISOLATED"
     #   resp.failed_accounts[0].error_message #=> String
     #   resp.failed_accounts[0].resource_status.ec2 #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts[0].resource_status.ecr #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
@@ -1252,6 +1256,27 @@ module Aws::Inspector2
       req.send_request(options)
     end
 
+    # Retrieves setting configurations for Inspector scans.
+    #
+    # @return [Types::GetConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetConfigurationResponse#ecr_configuration #ecr_configuration} => Types::EcrConfigurationState
+    #
+    # @example Response structure
+    #
+    #   resp.ecr_configuration.rescan_duration_state.rescan_duration #=> String, one of "LIFETIME", "DAYS_30", "DAYS_180"
+    #   resp.ecr_configuration.rescan_duration_state.status #=> String, one of "SUCCESS", "PENDING", "FAILED"
+    #   resp.ecr_configuration.rescan_duration_state.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetConfiguration AWS API Documentation
+    #
+    # @overload get_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_configuration(params = {}, options = {})
+      req = build_request(:get_configuration, params)
+      req.send_request(options)
+    end
+
     # Retrieves information about the Amazon Inspector delegated
     # administrator for your organization.
     #
@@ -1298,7 +1323,7 @@ module Aws::Inspector2
     #   resp.destination.bucket_name #=> String
     #   resp.destination.key_prefix #=> String
     #   resp.destination.kms_key_arn #=> String
-    #   resp.error_code #=> String, one of "INTERNAL_ERROR", "INVALID_PERMISSIONS"
+    #   resp.error_code #=> String, one of "INTERNAL_ERROR", "INVALID_PERMISSIONS", "NO_FINDINGS_FOUND", "BUCKET_NOT_FOUND", "INCOMPATIBLE_BUCKET_REGION", "MALFORMED_KMS_KEY"
     #   resp.error_message #=> String
     #   resp.filter_criteria.aws_account_id #=> Array
     #   resp.filter_criteria.aws_account_id[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
@@ -1595,7 +1620,7 @@ module Aws::Inspector2
     #   resp.covered_resources[0].resource_metadata.ecr_repository.name #=> String
     #   resp.covered_resources[0].resource_metadata.ecr_repository.scan_frequency #=> String, one of "MANUAL", "SCAN_ON_PUSH", "CONTINUOUS_SCAN"
     #   resp.covered_resources[0].resource_type #=> String, one of "AWS_EC2_INSTANCE", "AWS_ECR_CONTAINER_IMAGE", "AWS_ECR_REPOSITORY"
-    #   resp.covered_resources[0].scan_status.reason #=> String, one of "PENDING_INITIAL_SCAN", "ACCESS_DENIED", "INTERNAL_ERROR", "UNMANAGED_EC2_INSTANCE", "UNSUPPORTED_OS", "SCAN_ELIGIBILITY_EXPIRED", "RESOURCE_TERMINATED", "SUCCESSFUL", "NO_RESOURCES_FOUND", "IMAGE_SIZE_EXCEEDED", "SCAN_FREQUENCY_MANUAL", "SCAN_FREQUENCY_SCAN_ON_PUSH", "EC2_INSTANCE_STOPPED"
+    #   resp.covered_resources[0].scan_status.reason #=> String, one of "PENDING_INITIAL_SCAN", "ACCESS_DENIED", "INTERNAL_ERROR", "UNMANAGED_EC2_INSTANCE", "UNSUPPORTED_OS", "SCAN_ELIGIBILITY_EXPIRED", "RESOURCE_TERMINATED", "SUCCESSFUL", "NO_RESOURCES_FOUND", "IMAGE_SIZE_EXCEEDED", "SCAN_FREQUENCY_MANUAL", "SCAN_FREQUENCY_SCAN_ON_PUSH", "EC2_INSTANCE_STOPPED", "PENDING_DISABLE"
     #   resp.covered_resources[0].scan_status.status_code #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.covered_resources[0].scan_type #=> String, one of "NETWORK", "PACKAGE"
     #   resp.next_token #=> String
@@ -2484,7 +2509,7 @@ module Aws::Inspector2
     #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].file_path #=> String
     #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].fixed_in_version #=> String
     #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].name #=> String
-    #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].package_manager #=> String, one of "BUNDLER", "CARGO", "COMPOSER", "NPM", "NUGET", "PIPENV", "POETRY", "YARN", "GOBINARY", "GOMOD", "JAR", "OS"
+    #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].package_manager #=> String, one of "BUNDLER", "CARGO", "COMPOSER", "NPM", "NUGET", "PIPENV", "POETRY", "YARN", "GOBINARY", "GOMOD", "JAR", "OS", "PIP", "PYTHONPKG", "NODEPKG", "POM"
     #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].release #=> String
     #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].source_layer_hash #=> String
     #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].version #=> String
@@ -2717,6 +2742,34 @@ module Aws::Inspector2
       req.send_request(options)
     end
 
+    # Updates setting configurations for your Amazon Inspector account. When
+    # you use this API as an Amazon Inspector delegated administrator this
+    # updates the setting for all accounts you manage. Member accounts in an
+    # organization cannot update this setting.
+    #
+    # @option params [required, Types::EcrConfiguration] :ecr_configuration
+    #   Specifies how the ECR automated re-scan will be updated for your
+    #   environment.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_configuration({
+    #     ecr_configuration: { # required
+    #       rescan_duration: "LIFETIME", # required, accepts LIFETIME, DAYS_30, DAYS_180
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateConfiguration AWS API Documentation
+    #
+    # @overload update_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_configuration(params = {}, options = {})
+      req = build_request(:update_configuration, params)
+      req.send_request(options)
+    end
+
     # Specifies the action that is to be applied to the findings that match
     # the filter.
     #
@@ -2735,6 +2788,9 @@ module Aws::Inspector2
     #
     # @option params [String] :name
     #   The name of the filter.
+    #
+    # @option params [String] :reason
+    #   The reason the filter was updated.
     #
     # @return [Types::UpdateFilterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2958,6 +3014,7 @@ module Aws::Inspector2
     #       ],
     #     },
     #     name: "FilterName",
+    #     reason: "FilterReason",
     #   })
     #
     # @example Response structure
@@ -3019,7 +3076,7 @@ module Aws::Inspector2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-inspector2'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

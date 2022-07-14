@@ -415,6 +415,12 @@ module Aws::Outposts
     #   resp.order.line_items[0].line_item_id #=> String
     #   resp.order.line_items[0].quantity #=> Integer
     #   resp.order.line_items[0].status #=> String, one of "PREPARING", "BUILDING", "SHIPPED", "DELIVERED", "INSTALLING", "INSTALLED", "ERROR", "CANCELLED"
+    #   resp.order.line_items[0].shipment_information.shipment_tracking_number #=> String
+    #   resp.order.line_items[0].shipment_information.shipment_carrier #=> String, one of "DHL", "DBS", "FEDEX", "UPS"
+    #   resp.order.line_items[0].asset_information_list #=> Array
+    #   resp.order.line_items[0].asset_information_list[0].asset_id #=> String
+    #   resp.order.line_items[0].asset_information_list[0].mac_address_list #=> Array
+    #   resp.order.line_items[0].asset_information_list[0].mac_address_list[0] #=> String
     #   resp.order.payment_option #=> String, one of "ALL_UPFRONT", "NO_UPFRONT", "PARTIAL_UPFRONT"
     #   resp.order.order_submission_date #=> Time
     #   resp.order.order_fulfilled_date #=> Time
@@ -799,6 +805,12 @@ module Aws::Outposts
     #   resp.order.line_items[0].line_item_id #=> String
     #   resp.order.line_items[0].quantity #=> Integer
     #   resp.order.line_items[0].status #=> String, one of "PREPARING", "BUILDING", "SHIPPED", "DELIVERED", "INSTALLING", "INSTALLED", "ERROR", "CANCELLED"
+    #   resp.order.line_items[0].shipment_information.shipment_tracking_number #=> String
+    #   resp.order.line_items[0].shipment_information.shipment_carrier #=> String, one of "DHL", "DBS", "FEDEX", "UPS"
+    #   resp.order.line_items[0].asset_information_list #=> Array
+    #   resp.order.line_items[0].asset_information_list[0].asset_id #=> String
+    #   resp.order.line_items[0].asset_information_list[0].mac_address_list #=> Array
+    #   resp.order.line_items[0].asset_information_list[0].mac_address_list[0] #=> String
     #   resp.order.payment_option #=> String, one of "ALL_UPFRONT", "NO_UPFRONT", "PARTIAL_UPFRONT"
     #   resp.order.order_submission_date #=> Time
     #   resp.order.order_fulfilled_date #=> Time
@@ -1897,7 +1909,7 @@ module Aws::Outposts
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-outposts'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -5042,7 +5042,7 @@ module Aws::Glue
     #         public_key: "GenericString",
     #         public_keys: ["GenericString"],
     #         number_of_nodes: 1,
-    #         worker_type: "Standard", # accepts Standard, G.1X, G.2X
+    #         worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X
     #         glue_version: "GlueVersionString",
     #         number_of_workers: 1,
     #         extra_python_libs_s3_path: "GenericString",
@@ -5420,7 +5420,7 @@ module Aws::Glue
     #         },
     #         glue_version: "GlueVersionString",
     #         number_of_workers: 1,
-    #         worker_type: "Standard", # accepts Standard, G.1X, G.2X
+    #         worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X
     #         code_gen_configuration_nodes: {
     #           "NodeId" => {
     #             athena_connector_source: {
@@ -6124,6 +6124,11 @@ module Aws::Glue
     #   You can specify arguments here that your own job-execution script
     #   consumes, as well as arguments that Glue itself consumes.
     #
+    #   Job arguments may be logged. Do not pass plaintext secrets as
+    #   arguments. Retrieve secrets from a Glue Connection, Secrets Manager
+    #   or other secret management mechanism if you intend to keep them
+    #   within the Job.
+    #
     #   For information about how to specify and consume your own Job
     #   arguments, see the [Calling Glue APIs in Python][1] topic in the
     #   developer guide.
@@ -6155,7 +6160,7 @@ module Aws::Glue
     #   This parameter is deprecated. Use `MaxCapacity` instead.
     #
     #   The number of Glue data processing units (DPUs) to allocate to this
-    #   Job. You can allocate from 2 to 100 DPUs; the default is 10. A DPU
+    #   Job. You can allocate a minimum of 2 DPUs; the default is 10. A DPU
     #   is a relative measure of processing power that consists of 4 vCPUs
     #   of compute capacity and 16 GB of memory. For more information, see
     #   the [Glue pricing page][1].
@@ -6190,8 +6195,8 @@ module Aws::Glue
     #
     #   * When you specify an Apache Spark ETL job
     #     (`JobCommand.Name`="glueetl") or Apache Spark streaming ETL job
-    #     (`JobCommand.Name`="gluestreaming"), you can allocate from 2 to
-    #     100 DPUs. The default is 10 DPUs. This job type cannot have a
+    #     (`JobCommand.Name`="gluestreaming"), you can allocate a minimum
+    #     of 2 DPUs. The default is 10 DPUs. This job type cannot have a
     #     fractional DPU allocation.
     #
     #   For Glue version 2.0 jobs, you cannot instead specify a `Maximum
@@ -6242,14 +6247,11 @@ module Aws::Glue
     # @!attribute [rw] number_of_workers
     #   The number of workers of a defined `workerType` that are allocated
     #   when a job runs.
-    #
-    #   The maximum number of workers you can define are 299 for `G.1X`, and
-    #   149 for `G.2X`.
     #   @return [Integer]
     #
     # @!attribute [rw] worker_type
     #   The type of predefined worker that is allocated when a job runs.
-    #   Accepts a value of Standard, G.1X, or G.2X.
+    #   Accepts a value of Standard, G.1X, G.2X, or G.025X.
     #
     #   * For the `Standard` worker type, each worker provides 4 vCPU, 16 GB
     #     of memory and a 50GB disk, and 2 executors per worker.
@@ -6261,6 +6263,12 @@ module Aws::Glue
     #   * For the `G.2X` worker type, each worker maps to 2 DPU (8 vCPU, 32
     #     GB of memory, 128 GB disk), and provides 1 executor per worker. We
     #     recommend this worker type for memory-intensive jobs.
+    #
+    #   * For the `G.025X` worker type, each worker maps to 0.25 DPU (2
+    #     vCPU, 4 GB of memory, 64 GB disk), and provides 1 executor per
+    #     worker. We recommend this worker type for low volume streaming
+    #     jobs. This worker type is only available for Glue version 3.0
+    #     streaming jobs.
     #   @return [String]
     #
     # @!attribute [rw] code_gen_configuration_nodes
@@ -6367,7 +6375,7 @@ module Aws::Glue
     #         role: "RoleString", # required
     #         glue_version: "GlueVersionString",
     #         max_capacity: 1.0,
-    #         worker_type: "Standard", # accepts Standard, G.1X, G.2X
+    #         worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X
     #         number_of_workers: 1,
     #         timeout: 1,
     #         max_retries: 1,
@@ -7118,7 +7126,7 @@ module Aws::Glue
     #         },
     #         max_capacity: 1.0,
     #         number_of_workers: 1,
-    #         worker_type: "Standard", # accepts Standard, G.1X, G.2X
+    #         worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X
     #         security_configuration: "NameString",
     #         glue_version: "GlueVersionString",
     #         tags: {
@@ -7160,18 +7168,37 @@ module Aws::Glue
     #   @return [Types::ConnectionsList]
     #
     # @!attribute [rw] max_capacity
-    #   The number of AWS Glue data processing units (DPUs) that can be
+    #   The number of Glue data processing units (DPUs) that can be
     #   allocated when the job runs. A DPU is a relative measure of
     #   processing power that consists of 4 vCPUs of compute capacity and 16
     #   GB memory.
     #   @return [Float]
     #
     # @!attribute [rw] number_of_workers
-    #   The number of workers to use for the session.
+    #   The number of workers of a defined `WorkerType` to use for the
+    #   session.
     #   @return [Integer]
     #
     # @!attribute [rw] worker_type
-    #   The Worker Type. Can be one of G.1X, G.2X, Standard
+    #   The type of predefined worker that is allocated to use for the
+    #   session. Accepts a value of Standard, G.1X, G.2X, or G.025X.
+    #
+    #   * For the `Standard` worker type, each worker provides 4 vCPU, 16 GB
+    #     of memory and a 50GB disk, and 2 executors per worker.
+    #
+    #   * For the `G.1X` worker type, each worker maps to 1 DPU (4 vCPU, 16
+    #     GB of memory, 64 GB disk), and provides 1 executor per worker. We
+    #     recommend this worker type for memory-intensive jobs.
+    #
+    #   * For the `G.2X` worker type, each worker maps to 2 DPU (8 vCPU, 32
+    #     GB of memory, 128 GB disk), and provides 1 executor per worker. We
+    #     recommend this worker type for memory-intensive jobs.
+    #
+    #   * For the `G.025X` worker type, each worker maps to 0.25 DPU (2
+    #     vCPU, 4 GB of memory, 64 GB disk), and provides 1 executor per
+    #     worker. We recommend this worker type for low volume streaming
+    #     jobs. This worker type is only available for Glue version 3.0
+    #     streaming jobs.
     #   @return [String]
     #
     # @!attribute [rw] security_configuration
@@ -7181,7 +7208,7 @@ module Aws::Glue
     #
     # @!attribute [rw] glue_version
     #   The Glue version determines the versions of Apache Spark and Python
-    #   that AWS Glue supports. The GlueVersion must be greater than 2.0.
+    #   that Glue supports. The GlueVersion must be greater than 2.0.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -9724,8 +9751,8 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # An edge represents a directed connection between two components on a
-    # workflow graph.
+    # An edge represents a directed connection between two Glue components
+    # that are part of the workflow the edge belongs to.
     #
     # @!attribute [rw] source_id
     #   The unique of the node within the workflow where the edge starts.
@@ -14128,7 +14155,10 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # The blueprint is in an invalid state to perform a requested operation.
+    #
     # @!attribute [rw] message
+    #   A message describing the problem.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IllegalBlueprintStateException AWS API Documentation
@@ -14612,7 +14642,7 @@ module Aws::Glue
     #   This field is deprecated. Use `MaxCapacity` instead.
     #
     #   The number of Glue data processing units (DPUs) allocated to runs of
-    #   this job. You can allocate from 2 to 100 DPUs; the default is 10. A
+    #   this job. You can allocate a minimum of 2 DPUs; the default is 10. A
     #   DPU is a relative measure of processing power that consists of 4
     #   vCPUs of compute capacity and 16 GB of memory. For more information,
     #   see the [Glue pricing page][1].
@@ -14650,8 +14680,8 @@ module Aws::Glue
     #
     #   * When you specify an Apache Spark ETL job
     #     (`JobCommand.Name`="glueetl") or Apache Spark streaming ETL job
-    #     (`JobCommand.Name`="gluestreaming"), you can allocate from 2 to
-    #     100 DPUs. The default is 10 DPUs. This job type cannot have a
+    #     (`JobCommand.Name`="gluestreaming"), you can allocate a minimum
+    #     of 2 DPUs. The default is 10 DPUs. This job type cannot have a
     #     fractional DPU allocation.
     #
     #   For Glue version 2.0 jobs, you cannot instead specify a `Maximum
@@ -14665,7 +14695,7 @@ module Aws::Glue
     #
     # @!attribute [rw] worker_type
     #   The type of predefined worker that is allocated when a job runs.
-    #   Accepts a value of Standard, G.1X, or G.2X.
+    #   Accepts a value of Standard, G.1X, G.2X, or G.025X.
     #
     #   * For the `Standard` worker type, each worker provides 4 vCPU, 16 GB
     #     of memory and a 50GB disk, and 2 executors per worker.
@@ -14677,14 +14707,17 @@ module Aws::Glue
     #   * For the `G.2X` worker type, each worker maps to 2 DPU (8 vCPU, 32
     #     GB of memory, 128 GB disk), and provides 1 executor per worker. We
     #     recommend this worker type for memory-intensive jobs.
+    #
+    #   * For the `G.025X` worker type, each worker maps to 0.25 DPU (2
+    #     vCPU, 4 GB of memory, 64 GB disk), and provides 1 executor per
+    #     worker. We recommend this worker type for low volume streaming
+    #     jobs. This worker type is only available for Glue version 3.0
+    #     streaming jobs.
     #   @return [String]
     #
     # @!attribute [rw] number_of_workers
     #   The number of workers of a defined `workerType` that are allocated
     #   when a job runs.
-    #
-    #   The maximum number of workers you can define are 299 for `G.1X`, and
-    #   149 for `G.2X`.
     #   @return [Integer]
     #
     # @!attribute [rw] security_configuration
@@ -14986,7 +15019,7 @@ module Aws::Glue
     #     0.0625 or 1 DPU. The default is 0.0625 DPU.
     #
     #   * When you specify an Apache Spark ETL job
-    #     (`JobCommand.Name`="glueetl"), you can allocate from 2 to 100
+    #     (`JobCommand.Name`="glueetl"), you can allocate a minimum of 2
     #     DPUs. The default is 10 DPUs. This job type cannot have a
     #     fractional DPU allocation.
     #
@@ -14997,7 +15030,7 @@ module Aws::Glue
     #
     # @!attribute [rw] worker_type
     #   The type of predefined worker that is allocated when a job runs.
-    #   Accepts a value of Standard, G.1X, or G.2X.
+    #   Accepts a value of Standard, G.1X, G.2X, or G.025X.
     #
     #   * For the `Standard` worker type, each worker provides 4 vCPU, 16 GB
     #     of memory and a 50GB disk, and 2 executors per worker.
@@ -15007,14 +15040,17 @@ module Aws::Glue
     #
     #   * For the `G.2X` worker type, each worker provides 8 vCPU, 32 GB of
     #     memory and a 128GB disk, and 1 executor per worker.
+    #
+    #   * For the `G.025X` worker type, each worker maps to 0.25 DPU (2
+    #     vCPU, 4 GB of memory, 64 GB disk), and provides 1 executor per
+    #     worker. We recommend this worker type for low volume streaming
+    #     jobs. This worker type is only available for Glue version 3.0
+    #     streaming jobs.
     #   @return [String]
     #
     # @!attribute [rw] number_of_workers
     #   The number of workers of a defined `workerType` that are allocated
     #   when a job runs.
-    #
-    #   The maximum number of workers you can define are 299 for `G.1X`, and
-    #   149 for `G.2X`.
     #   @return [Integer]
     #
     # @!attribute [rw] security_configuration
@@ -15126,7 +15162,7 @@ module Aws::Glue
     #         allocated_capacity: 1,
     #         timeout: 1,
     #         max_capacity: 1.0,
-    #         worker_type: "Standard", # accepts Standard, G.1X, G.2X
+    #         worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X
     #         number_of_workers: 1,
     #         security_configuration: "NameString",
     #         notification_property: {
@@ -15862,7 +15898,7 @@ module Aws::Glue
     #   This field is deprecated. Use `MaxCapacity` instead.
     #
     #   The number of Glue data processing units (DPUs) to allocate to this
-    #   job. You can allocate from 2 to 100 DPUs; the default is 10. A DPU
+    #   job. You can allocate a minimum of 2 DPUs; the default is 10. A DPU
     #   is a relative measure of processing power that consists of 4 vCPUs
     #   of compute capacity and 16 GB of memory. For more information, see
     #   the [Glue pricing page][1].
@@ -15897,8 +15933,8 @@ module Aws::Glue
     #
     #   * When you specify an Apache Spark ETL job
     #     (`JobCommand.Name`="glueetl") or Apache Spark streaming ETL job
-    #     (`JobCommand.Name`="gluestreaming"), you can allocate from 2 to
-    #     100 DPUs. The default is 10 DPUs. This job type cannot have a
+    #     (`JobCommand.Name`="gluestreaming"), you can allocate a minimum
+    #     of 2 DPUs. The default is 10 DPUs. This job type cannot have a
     #     fractional DPU allocation.
     #
     #   For Glue version 2.0 jobs, you cannot instead specify a `Maximum
@@ -15912,7 +15948,7 @@ module Aws::Glue
     #
     # @!attribute [rw] worker_type
     #   The type of predefined worker that is allocated when a job runs.
-    #   Accepts a value of Standard, G.1X, or G.2X.
+    #   Accepts a value of Standard, G.1X, G.2X, or G.025X.
     #
     #   * For the `Standard` worker type, each worker provides 4 vCPU, 16 GB
     #     of memory and a 50GB disk, and 2 executors per worker.
@@ -15924,14 +15960,17 @@ module Aws::Glue
     #   * For the `G.2X` worker type, each worker maps to 2 DPU (8 vCPU, 32
     #     GB of memory, 128 GB disk), and provides 1 executor per worker. We
     #     recommend this worker type for memory-intensive jobs.
+    #
+    #   * For the `G.025X` worker type, each worker maps to 0.25 DPU (2
+    #     vCPU, 4 GB of memory, 64 GB disk), and provides 1 executor per
+    #     worker. We recommend this worker type for low volume streaming
+    #     jobs. This worker type is only available for Glue version 3.0
+    #     streaming jobs.
     #   @return [String]
     #
     # @!attribute [rw] number_of_workers
     #   The number of workers of a defined `workerType` that are allocated
     #   when a job runs.
-    #
-    #   The maximum number of workers you can define are 299 for `G.1X`, and
-    #   149 for `G.2X`.
     #   @return [Integer]
     #
     # @!attribute [rw] security_configuration
@@ -17144,7 +17183,7 @@ module Aws::Glue
     end
 
     # @!attribute [rw] ids
-    #   Returns the Id of the session.
+    #   Returns the ID of the session.
     #   @return [Array<String>]
     #
     # @!attribute [rw] sessions
@@ -17184,6 +17223,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] next_token
+    #   A continuation token, if this is a continuation call.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListStatementsRequest AWS API Documentation
@@ -17201,6 +17241,7 @@ module Aws::Glue
     #   @return [Array<Types::Statement>]
     #
     # @!attribute [rw] next_token
+    #   A continuation token, if not all statements have yet been returned.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListStatementsResponse AWS API Documentation
@@ -21332,7 +21373,7 @@ module Aws::Glue
     #   @return [Float]
     #
     # @!attribute [rw] max_capacity
-    #   The number of AWS Glue data processing units (DPUs) that can be
+    #   The number of Glue data processing units (DPUs) that can be
     #   allocated when the job runs. A DPU is a relative measure of
     #   processing power that consists of 4 vCPUs of compute capacity and 16
     #   GB memory.
@@ -21345,7 +21386,7 @@ module Aws::Glue
     #
     # @!attribute [rw] glue_version
     #   The Glue version determines the versions of Apache Spark and Python
-    #   that AWS Glue supports. The GlueVersion must be greater than 2.0.
+    #   that Glue supports. The GlueVersion must be greater than 2.0.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Session AWS API Documentation
@@ -21379,7 +21420,7 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] name
-    #   Specifies the name of the SessionCommand.Can be 'glueetl' or
+    #   Specifies the name of the SessionCommand. Can be 'glueetl' or
     #   'gluestreaming'.
     #   @return [String]
     #
@@ -21965,7 +22006,7 @@ module Aws::Glue
     #         notification_property: {
     #           notify_delay_after: 1,
     #         },
-    #         worker_type: "Standard", # accepts Standard, G.1X, G.2X
+    #         worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X
     #         number_of_workers: 1,
     #       }
     #
@@ -21983,6 +22024,11 @@ module Aws::Glue
     #
     #   You can specify arguments here that your own job-execution script
     #   consumes, as well as arguments that Glue itself consumes.
+    #
+    #   Job arguments may be logged. Do not pass plaintext secrets as
+    #   arguments. Retrieve secrets from a Glue Connection, Secrets Manager
+    #   or other secret management mechanism if you intend to keep them
+    #   within the Job.
     #
     #   For information about how to specify and consume your own Job
     #   arguments, see the [Calling Glue APIs in Python][1] topic in the
@@ -22002,7 +22048,7 @@ module Aws::Glue
     #   This field is deprecated. Use `MaxCapacity` instead.
     #
     #   The number of Glue data processing units (DPUs) to allocate to this
-    #   JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A
+    #   JobRun. You can allocate a minimum of 2 DPUs; the default is 10. A
     #   DPU is a relative measure of processing power that consists of 4
     #   vCPUs of compute capacity and 16 GB of memory. For more information,
     #   see the [Glue pricing page][1].
@@ -22036,7 +22082,7 @@ module Aws::Glue
     #     0.0625 or 1 DPU. The default is 0.0625 DPU.
     #
     #   * When you specify an Apache Spark ETL job
-    #     (`JobCommand.Name`="glueetl"), you can allocate from 2 to 100
+    #     (`JobCommand.Name`="glueetl"), you can allocate a minimum of 2
     #     DPUs. The default is 10 DPUs. This job type cannot have a
     #     fractional DPU allocation.
     #
@@ -22056,7 +22102,7 @@ module Aws::Glue
     #
     # @!attribute [rw] worker_type
     #   The type of predefined worker that is allocated when a job runs.
-    #   Accepts a value of Standard, G.1X, or G.2X.
+    #   Accepts a value of Standard, G.1X, G.2X, or G.025X.
     #
     #   * For the `Standard` worker type, each worker provides 4 vCPU, 16 GB
     #     of memory and a 50GB disk, and 2 executors per worker.
@@ -22066,14 +22112,17 @@ module Aws::Glue
     #
     #   * For the `G.2X` worker type, each worker provides 8 vCPU, 32 GB of
     #     memory and a 128GB disk, and 1 executor per worker.
+    #
+    #   * For the `G.025X` worker type, each worker maps to 0.25 DPU (2
+    #     vCPU, 4 GB of memory, 64 GB disk), and provides 1 executor per
+    #     worker. We recommend this worker type for low volume streaming
+    #     jobs. This worker type is only available for Glue version 3.0
+    #     streaming jobs.
     #   @return [String]
     #
     # @!attribute [rw] number_of_workers
     #   The number of workers of a defined `workerType` that are allocated
     #   when a job runs.
-    #
-    #   The maximum number of workers you can define are 299 for `G.1X`, and
-    #   149 for `G.2X`.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartJobRunRequest AWS API Documentation
@@ -24630,7 +24679,7 @@ module Aws::Glue
     #           allocated_capacity: 1,
     #           timeout: 1,
     #           max_capacity: 1.0,
-    #           worker_type: "Standard", # accepts Standard, G.1X, G.2X
+    #           worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X
     #           number_of_workers: 1,
     #           security_configuration: "NameString",
     #           notification_property: {
@@ -25314,6 +25363,7 @@ module Aws::Glue
     #
     # @!attribute [rw] job_update
     #   Specifies the values with which to update the job definition.
+    #   Unspecified configuration is removed or reset to default values.
     #   @return [Types::JobUpdate]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateJobRequest AWS API Documentation
@@ -25389,7 +25439,7 @@ module Aws::Glue
     #         role: "RoleString",
     #         glue_version: "GlueVersionString",
     #         max_capacity: 1.0,
-    #         worker_type: "Standard", # accepts Standard, G.1X, G.2X
+    #         worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X
     #         number_of_workers: 1,
     #         timeout: 1,
     #         max_retries: 1,

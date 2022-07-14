@@ -713,6 +713,7 @@ module Aws::Kendra
     #           },
     #         ],
     #         content_type: "PDF", # accepts PDF, HTML, MS_WORD, PLAIN_TEXT, PPT
+    #         access_control_configuration_id: "AccessControlConfigurationId",
     #       },
     #     ],
     #     custom_document_enrichment_configuration: {
@@ -820,6 +821,118 @@ module Aws::Kendra
       req.send_request(options)
     end
 
+    # Creates an access configuration for your documents. This includes user
+    # and group access information for your documents. This is useful for
+    # user context filtering, where search results are filtered based on the
+    # user or their group access to documents.
+    #
+    # You can use this to re-configure your existing document level access
+    # control without indexing all of your documents again. For example,
+    # your index contains top-secret company documents that only certain
+    # employees or users should access. One of these users leaves the
+    # company or switches to a team that should be blocked from access to
+    # top-secret documents. Your documents in your index still give this
+    # user access to top-secret documents due to the user having access at
+    # the time your documents were indexed. You can create a specific access
+    # control configuration for this user with deny access. You can later
+    # update the access control configuration to allow access in the case
+    # the user returns to the company and re-joins the 'top-secret' team.
+    # You can re-configure access control for your documents circumstances
+    # change.
+    #
+    # To apply your access control configuration to certain documents, you
+    # call the [BatchPutDocument][1] API with the
+    # `AccessControlConfigurationId` included in the [Document][2] object.
+    # If you use an S3 bucket as a data source, you update the
+    # `.metadata.json` with the `AccessControlConfigurationId` and
+    # synchronize your data source. Amazon Kendra currently only supports
+    # access control configuration for S3 data sources and documents indexed
+    # using the `BatchPutDocument` API.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_BatchPutDocument.html
+    # [2]: https://docs.aws.amazon.com/kendra/latest/dg/API_Document.html
+    #
+    # @option params [required, String] :index_id
+    #   The identifier of the index to create an access control configuration
+    #   for your documents.
+    #
+    # @option params [required, String] :name
+    #   A name for the access control configuration.
+    #
+    # @option params [String] :description
+    #   A description for the access control configuration.
+    #
+    # @option params [Array<Types::Principal>] :access_control_list
+    #   Information on principals (users and/or groups) and which documents
+    #   they should have access to. This is useful for user context filtering,
+    #   where search results are filtered based on the user or their group
+    #   access to documents.
+    #
+    # @option params [Array<Types::HierarchicalPrincipal>] :hierarchical_access_control_list
+    #   The list of [principal][1] lists that define the hierarchy for which
+    #   documents users should have access to.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_Principal.html
+    #
+    # @option params [String] :client_token
+    #   A token that you provide to identify the request to create an access
+    #   control configuration. Multiple calls to the
+    #   `CreateAccessControlConfiguration` API with the same client token will
+    #   create only one access control configuration.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateAccessControlConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAccessControlConfigurationResponse#id #id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_access_control_configuration({
+    #     index_id: "IndexId", # required
+    #     name: "AccessControlConfigurationName", # required
+    #     description: "Description",
+    #     access_control_list: [
+    #       {
+    #         name: "PrincipalName", # required
+    #         type: "USER", # required, accepts USER, GROUP
+    #         access: "ALLOW", # required, accepts ALLOW, DENY
+    #         data_source_id: "DataSourceId",
+    #       },
+    #     ],
+    #     hierarchical_access_control_list: [
+    #       {
+    #         principal_list: [ # required
+    #           {
+    #             name: "PrincipalName", # required
+    #             type: "USER", # required, accepts USER, GROUP
+    #             access: "ALLOW", # required, accepts ALLOW, DENY
+    #             data_source_id: "DataSourceId",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     client_token: "ClientTokenName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CreateAccessControlConfiguration AWS API Documentation
+    #
+    # @overload create_access_control_configuration(params = {})
+    # @param [Hash] params ({})
+    def create_access_control_configuration(params = {}, options = {})
+      req = build_request(:create_access_control_configuration, params)
+      req.send_request(options)
+    end
+
     # Creates a data source that you want to use with an Amazon Kendra
     # index.
     #
@@ -846,19 +959,18 @@ module Aws::Kendra
     # [3]: https://docs.aws.amazon.com/kendra/latest/dg/gs-java.html
     #
     # @option params [required, String] :name
-    #   A unique name for the data source. A data source name can't be
-    #   changed without deleting and recreating the data source.
+    #   A unique name for the data source connector. A data source name can't
+    #   be changed without deleting and recreating the data source connector.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index that should be associated with this data
-    #   source.
+    #   The identifier of the index you want to use with the data source
+    #   connector.
     #
     # @option params [required, String] :type
-    #   The type of repository that contains the data source.
+    #   The type of data source repository. For example, `SHAREPOINT`.
     #
     # @option params [Types::DataSourceConfiguration] :configuration
-    #   Configuration information that is required to access the data source
-    #   repository.
+    #   Configuration information to connect to your data source repository.
     #
     #   You can't specify the `Configuration` parameter when the `Type`
     #   parameter is set to `CUSTOM`. If you do, you receive a
@@ -867,13 +979,13 @@ module Aws::Kendra
     #   The `Configuration` parameter is required for all other data sources.
     #
     # @option params [String] :description
-    #   A description for the data source.
+    #   A description for the data source connector.
     #
     # @option params [String] :schedule
     #   Sets the frequency for Amazon Kendra to check the documents in your
-    #   repository and update the index. If you don't set a schedule Amazon
-    #   Kendra will not periodically update the index. You can call the
-    #   `StartDataSourceSyncJob` API to update the index.
+    #   data source repository and update the index. If you don't set a
+    #   schedule Amazon Kendra will not periodically update the index. You can
+    #   call the `StartDataSourceSyncJob` API to update the index.
     #
     #   You can't specify the `Schedule` parameter when the `Type` parameter
     #   is set to `CUSTOM`. If you do, you receive a `ValidationException`
@@ -881,7 +993,7 @@ module Aws::Kendra
     #
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of a role with permission to access the
-    #   data source. For more information, see [IAM Roles for Amazon
+    #   data source connector. For more information, see [IAM Roles for Amazon
     #   Kendra][1].
     #
     #   You can't specify the `RoleArn` parameter when the `Type` parameter
@@ -895,23 +1007,24 @@ module Aws::Kendra
     #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of key-value pairs that identify the data source. You can use
-    #   the tags to identify and organize your resources and to control access
-    #   to resources.
+    #   A list of key-value pairs that identify the data source connector. You
+    #   can use the tags to identify and organize your resources and to
+    #   control access to resources.
     #
     # @option params [String] :client_token
     #   A token that you provide to identify the request to create a data
-    #   source. Multiple calls to the `CreateDataSource` API with the same
-    #   client token will create only one data source.
+    #   source connector. Multiple calls to the `CreateDataSource` API with
+    #   the same client token will create only one data source connector.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     # @option params [String] :language_code
     #   The code for a language. This allows you to support a language for all
-    #   documents when creating the data source. English is supported by
-    #   default. For more information on supported languages, including their
-    #   codes, see [Adding documents in languages other than English][1].
+    #   documents when creating the data source connector. English is
+    #   supported by default. For more information on supported languages,
+    #   including their codes, see [Adding documents in languages other than
+    #   English][1].
     #
     #
     #
@@ -919,7 +1032,7 @@ module Aws::Kendra
     #
     # @option params [Types::CustomDocumentEnrichmentConfiguration] :custom_document_enrichment_configuration
     #   Configuration information for altering document metadata and content
-    #   during the document ingestion process when you create a data source.
+    #   during the document ingestion process.
     #
     #   For more information on how to create, modify and delete document
     #   metadata, or make other content alterations when you ingest documents
@@ -1722,23 +1835,23 @@ module Aws::Kendra
     # Adding FAQs to an index is an asynchronous operation.
     #
     # For an example of adding an FAQ to an index using Python and Java
-    # SDKs, see [Using you FAQ file][1].
+    # SDKs, see [Using your FAQ file][1].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/kendra/latest/dg/in-creating-faq.html#using-faq-file
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index that contains the FAQ.
+    #   The identifier of the index for the FAQ.
     #
     # @option params [required, String] :name
-    #   The name that should be associated with the FAQ.
+    #   A name for the FAQ.
     #
     # @option params [String] :description
-    #   A description of the FAQ.
+    #   A description for the FAQ.
     #
     # @option params [required, Types::S3Path] :s3_path
-    #   The S3 location of the FAQ input data.
+    #   The path to the FAQ file in S3.
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of a role with permission to access the
@@ -1755,7 +1868,7 @@ module Aws::Kendra
     #   resources.
     #
     # @option params [String] :file_format
-    #   The format of the input file. You can choose between a basic CSV
+    #   The format of the FAQ input file. You can choose between a basic CSV
     #   format, a CSV format that includes customs attributes in a header, and
     #   a JSON format that includes custom attributes.
     #
@@ -1825,10 +1938,10 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Creates a new Amazon Kendra index. Index creation is an asynchronous
-    # API. To determine if index creation has completed, check the `Status`
-    # field returned from a call to `DescribeIndex`. The `Status` field is
-    # set to `ACTIVE` when the index is ready to use.
+    # Creates an Amazon Kendra index. Index creation is an asynchronous API.
+    # To determine if index creation has completed, check the `Status` field
+    # returned from a call to `DescribeIndex`. The `Status` field is set to
+    # `ACTIVE` when the index is ready to use.
     #
     # Once the index is active you can index your documents using the
     # `BatchPutDocument` API or using one of the supported data sources.
@@ -1844,7 +1957,7 @@ module Aws::Kendra
     # [2]: https://docs.aws.amazon.com/kendra/latest/dg/gs-java.html
     #
     # @option params [required, String] :name
-    #   The name for the new index.
+    #   A name for the index.
     #
     # @option params [String] :edition
     #   The Amazon Kendra edition to use for the index. Choose
@@ -2095,13 +2208,13 @@ module Aws::Kendra
     # [1]: https://docs.aws.amazon.com/kendra/latest/dg/index-synonyms-adding-thesaurus-file.html
     #
     # @option params [required, String] :index_id
-    #   The unique identifier of the index for the new thesaurus.
+    #   The identifier of the index for the thesaurus.
     #
     # @option params [required, String] :name
-    #   The name for the new thesaurus.
+    #   A name for the thesaurus.
     #
     # @option params [String] :description
-    #   The description for the new thesaurus.
+    #   A description for the thesaurus.
     #
     # @option params [required, String] :role_arn
     #   An IAM role that gives Amazon Kendra permissions to access thesaurus
@@ -2113,7 +2226,7 @@ module Aws::Kendra
     #   resources.
     #
     # @option params [required, Types::S3Path] :source_s3_path
-    #   The thesaurus file Amazon S3 source path.
+    #   The path to the thesaurus file in S3.
     #
     # @option params [String] :client_token
     #   A token that you provide to identify the request to create a
@@ -2160,6 +2273,36 @@ module Aws::Kendra
       req.send_request(options)
     end
 
+    # Deletes an access control configuration that you created for your
+    # documents in an index. This includes user and group access information
+    # for your documents. This is useful for user context filtering, where
+    # search results are filtered based on the user or their group access to
+    # documents.
+    #
+    # @option params [required, String] :index_id
+    #   The identifier of the index for an access control configuration.
+    #
+    # @option params [required, String] :id
+    #   The identifier of the access control configuration you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_access_control_configuration({
+    #     index_id: "IndexId", # required
+    #     id: "AccessControlConfigurationId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DeleteAccessControlConfiguration AWS API Documentation
+    #
+    # @overload delete_access_control_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_access_control_configuration(params = {}, options = {})
+      req = build_request(:delete_access_control_configuration, params)
+      req.send_request(options)
+    end
+
     # Deletes an Amazon Kendra data source. An exception is not thrown if
     # the data source is already being deleted. While the data source is
     # being deleted, the `Status` field returned by a call to the
@@ -2171,10 +2314,10 @@ module Aws::Kendra
     # [1]: https://docs.aws.amazon.com/kendra/latest/dg/delete-data-source.html
     #
     # @option params [required, String] :id
-    #   The unique identifier of the data source to delete.
+    #   The identifier of the data source you want to delete.
     #
     # @option params [required, String] :index_id
-    #   The unique identifier of the index associated with the data source.
+    #   The identifier of the index used with the data source.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2206,8 +2349,7 @@ module Aws::Kendra
     #   The identifier of your Amazon Kendra experience you want to delete.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index for your Amazon Kendra experience you want
-    #   to delete.
+    #   The identifier of the index for your Amazon Kendra experience.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2230,10 +2372,10 @@ module Aws::Kendra
     # Removes an FAQ from an index.
     #
     # @option params [required, String] :id
-    #   The identifier of the FAQ to remove.
+    #   The identifier of the FAQ you want to remove.
     #
     # @option params [required, String] :index_id
-    #   The index to remove the FAQ from.
+    #   The identifier of the index for the FAQ.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2259,7 +2401,7 @@ module Aws::Kendra
     # set to `DELETING`.
     #
     # @option params [required, String] :id
-    #   The identifier of the index to delete.
+    #   The identifier of the index you want to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2302,15 +2444,14 @@ module Aws::Kendra
     # @option params [String] :data_source_id
     #   The identifier of the data source you want to delete a group from.
     #
-    #   This is useful if a group is tied to multiple data sources and you
-    #   want to delete a group from accessing documents in a certain data
-    #   source. For example, the groups "Research", "Engineering", and
-    #   "Sales and Marketing" are all tied to the company's documents
-    #   stored in the data sources Confluence and Salesforce. You want to
-    #   delete "Research" and "Engineering" groups from Salesforce, so
-    #   that these groups cannot access customer-related documents stored in
-    #   Salesforce. Only "Sales and Marketing" should access documents in
-    #   the Salesforce data source.
+    #   A group can be tied to multiple data sources. You can delete a group
+    #   from accessing documents in a certain data source. For example, the
+    #   groups "Research", "Engineering", and "Sales and Marketing" are
+    #   all tied to the company's documents stored in the data sources
+    #   Confluence and Salesforce. You want to delete "Research" and
+    #   "Engineering" groups from Salesforce, so that these groups cannot
+    #   access customer-related documents stored in Salesforce. Only "Sales
+    #   and Marketing" should access documents in the Salesforce data source.
     #
     # @option params [required, String] :group_id
     #   The identifier of the group you want to delete.
@@ -2363,10 +2504,10 @@ module Aws::Kendra
     # Amazon Web Services GovCloud (US-West) region.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the you want to delete a block list from.
+    #   The identifier of the index for the block list.
     #
     # @option params [required, String] :id
-    #   The unique identifier of the block list that needs to be deleted.
+    #   The identifier of the block list you want to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2389,10 +2530,10 @@ module Aws::Kendra
     # Deletes an existing Amazon Kendra thesaurus.
     #
     # @option params [required, String] :id
-    #   The identifier of the thesaurus to delete.
+    #   The identifier of the thesaurus you want to delete.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index associated with the thesaurus to delete.
+    #   The identifier of the index for the thesaurus.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2412,13 +2553,67 @@ module Aws::Kendra
       req.send_request(options)
     end
 
+    # Gets information about an access control configuration that you
+    # created for your documents in an index. This includes user and group
+    # access information for your documents. This is useful for user context
+    # filtering, where search results are filtered based on the user or
+    # their group access to documents.
+    #
+    # @option params [required, String] :index_id
+    #   The identifier of the index for an access control configuration.
+    #
+    # @option params [required, String] :id
+    #   The identifier of the access control configuration you want to get
+    #   information on.
+    #
+    # @return [Types::DescribeAccessControlConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAccessControlConfigurationResponse#name #name} => String
+    #   * {Types::DescribeAccessControlConfigurationResponse#description #description} => String
+    #   * {Types::DescribeAccessControlConfigurationResponse#error_message #error_message} => String
+    #   * {Types::DescribeAccessControlConfigurationResponse#access_control_list #access_control_list} => Array&lt;Types::Principal&gt;
+    #   * {Types::DescribeAccessControlConfigurationResponse#hierarchical_access_control_list #hierarchical_access_control_list} => Array&lt;Types::HierarchicalPrincipal&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_access_control_configuration({
+    #     index_id: "IndexId", # required
+    #     id: "AccessControlConfigurationId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.error_message #=> String
+    #   resp.access_control_list #=> Array
+    #   resp.access_control_list[0].name #=> String
+    #   resp.access_control_list[0].type #=> String, one of "USER", "GROUP"
+    #   resp.access_control_list[0].access #=> String, one of "ALLOW", "DENY"
+    #   resp.access_control_list[0].data_source_id #=> String
+    #   resp.hierarchical_access_control_list #=> Array
+    #   resp.hierarchical_access_control_list[0].principal_list #=> Array
+    #   resp.hierarchical_access_control_list[0].principal_list[0].name #=> String
+    #   resp.hierarchical_access_control_list[0].principal_list[0].type #=> String, one of "USER", "GROUP"
+    #   resp.hierarchical_access_control_list[0].principal_list[0].access #=> String, one of "ALLOW", "DENY"
+    #   resp.hierarchical_access_control_list[0].principal_list[0].data_source_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeAccessControlConfiguration AWS API Documentation
+    #
+    # @overload describe_access_control_configuration(params = {})
+    # @param [Hash] params ({})
+    def describe_access_control_configuration(params = {}, options = {})
+      req = build_request(:describe_access_control_configuration, params)
+      req.send_request(options)
+    end
+
     # Gets information about an Amazon Kendra data source.
     #
     # @option params [required, String] :id
-    #   The unique identifier of the data source to describe.
+    #   The identifier of the data source.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index that contains the data source.
+    #   The identifier of the index used with the data source.
     #
     # @return [Types::DescribeDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2965,8 +3160,7 @@ module Aws::Kendra
     #   information on.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index for your Amazon Kendra experience you want
-    #   to get information on.
+    #   The identifier of the index for your Amazon Kendra experience.
     #
     # @return [Types::DescribeExperienceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3022,10 +3216,10 @@ module Aws::Kendra
     # Gets information about an FAQ list.
     #
     # @option params [required, String] :id
-    #   The unique identifier of the FAQ.
+    #   The identifier of the FAQ you want to get information on.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index that contains the FAQ.
+    #   The identifier of the index for the FAQ.
     #
     # @return [Types::DescribeFaqResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3074,10 +3268,10 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Describes an existing Amazon Kendra index.
+    # Gets information about an existing Amazon Kendra index.
     #
     # @option params [required, String] :id
-    #   The identifier of the index to describe.
+    #   The identifier of the index you want to get information on.
     #
     # @return [Types::DescribeIndexResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3214,7 +3408,8 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Describes a block list used for query suggestions for an index.
+    # Gets information about a block list used for query suggestions for an
+    # index.
     #
     # This is used to check the current settings that are applied to a block
     # list.
@@ -3226,7 +3421,7 @@ module Aws::Kendra
     #   The identifier of the index for the block list.
     #
     # @option params [required, String] :id
-    #   The unique identifier of the block list.
+    #   The identifier of the block list you want to get information on.
     #
     # @return [Types::DescribeQuerySuggestionsBlockListResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3275,7 +3470,7 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Describes the settings of query suggestions for an index.
+    # Gets information on the settings of query suggestions for an index.
     #
     # This is used to check the current settings applied to query
     # suggestions.
@@ -3284,8 +3479,8 @@ module Aws::Kendra
     # Amazon Web Services GovCloud (US-West) region.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index you want to describe query suggestions
-    #   settings for.
+    #   The identifier of the index with query suggestions that you want to
+    #   get information on.
     #
     # @return [Types::DescribeQuerySuggestionsConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3326,13 +3521,13 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Describes an existing Amazon Kendra thesaurus.
+    # Gets information about an existing Amazon Kendra thesaurus.
     #
     # @option params [required, String] :id
-    #   The identifier of the thesaurus to describe.
+    #   The identifier of the thesaurus you want to get information on.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index associated with the thesaurus to describe.
+    #   The identifier of the index for the thesaurus.
     #
     # @return [Types::DescribeThesaurusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3626,13 +3821,60 @@ module Aws::Kendra
       req.send_request(options)
     end
 
+    # Lists one or more access control configurations for an index. This
+    # includes user and group access information for your documents. This is
+    # useful for user context filtering, where search results are filtered
+    # based on the user or their group access to documents.
+    #
+    # @option params [required, String] :index_id
+    #   The identifier of the index for the access control configuration.
+    #
+    # @option params [String] :next_token
+    #   If the previous response was incomplete (because there is more data to
+    #   retrieve), Amazon Kendra returns a pagination token in the response.
+    #   You can use this pagination token to retrieve the next set of access
+    #   control configurations.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of access control configurations to return.
+    #
+    # @return [Types::ListAccessControlConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAccessControlConfigurationsResponse#next_token #next_token} => String
+    #   * {Types::ListAccessControlConfigurationsResponse#access_control_configurations #access_control_configurations} => Array&lt;Types::AccessControlConfigurationSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_access_control_configurations({
+    #     index_id: "IndexId", # required
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.access_control_configurations #=> Array
+    #   resp.access_control_configurations[0].id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListAccessControlConfigurations AWS API Documentation
+    #
+    # @overload list_access_control_configurations(params = {})
+    # @param [Hash] params ({})
+    def list_access_control_configurations(params = {}, options = {})
+      req = build_request(:list_access_control_configurations, params)
+      req.send_request(options)
+    end
+
     # Gets statistics about synchronizing Amazon Kendra with a data source.
     #
     # @option params [required, String] :id
     #   The identifier of the data source.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index that contains the data source.
+    #   The identifier of the index used with the data source.
     #
     # @option params [String] :next_token
     #   If the previous response was incomplete (because there is more data to
@@ -3702,7 +3944,7 @@ module Aws::Kendra
     # Lists the data sources that you have created.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index that contains the data source.
+    #   The identifier of the index used with one or more data sources.
     #
     # @option params [String] :next_token
     #   If the previous response was incomplete (because there is more data to
@@ -4173,10 +4415,10 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Lists the Amazon Kendra thesauri associated with an index.
+    # Lists the thesauri for an index.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index associated with the thesaurus to list.
+    #   The identifier of the index with one or more thesauri.
     #
     # @option params [String] :next_token
     #   If the previous response was incomplete (because there is more data to
@@ -4232,10 +4474,9 @@ module Aws::Kendra
     # property group, can see top-secret company documents in their search
     # results.
     #
-    # You map users to their groups when you want to filter search results
-    # for different users based on their group’s access to documents. For
-    # more information on filtering search results for different users, see
-    # [Filtering on user context][1].
+    # This is useful for user context filtering, where search results are
+    # filtered based on the user or their group access to documents. For
+    # more information, see [Filtering on user context][1].
     #
     # If more than five `PUT` actions for a group are currently processing,
     # a validation exception is thrown.
@@ -4832,46 +5073,147 @@ module Aws::Kendra
       req.send_request(options)
     end
 
+    # Updates an access control configuration for your documents in an
+    # index. This includes user and group access information for your
+    # documents. This is useful for user context filtering, where search
+    # results are filtered based on the user or their group access to
+    # documents.
+    #
+    # You can update an access control configuration you created without
+    # indexing all of your documents again. For example, your index contains
+    # top-secret company documents that only certain employees or users
+    # should access. You created an 'allow' access control configuration
+    # for one user who recently joined the 'top-secret' team, switching
+    # from a team with 'deny' access to top-secret documents. However, the
+    # user suddenly returns to their previous team and should no longer have
+    # access to top secret documents. You can update the access control
+    # configuration to re-configure access control for your documents as
+    # circumstances change.
+    #
+    # You call the [BatchPutDocument][1] API to apply the updated access
+    # control configuration, with the `AccessControlConfigurationId`
+    # included in the [Document][2] object. If you use an S3 bucket as a
+    # data source, you synchronize your data source to apply the the
+    # `AccessControlConfigurationId` in the `.metadata.json` file. Amazon
+    # Kendra currently only supports access control configuration for S3
+    # data sources and documents indexed using the `BatchPutDocument` API.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_BatchPutDocument.html
+    # [2]: https://docs.aws.amazon.com/kendra/latest/dg/API_Document.html
+    #
+    # @option params [required, String] :index_id
+    #   The identifier of the index for an access control configuration.
+    #
+    # @option params [required, String] :id
+    #   The identifier of the access control configuration you want to update.
+    #
+    # @option params [String] :name
+    #   A new name for the access control configuration.
+    #
+    # @option params [String] :description
+    #   A new description for the access control configuration.
+    #
+    # @option params [Array<Types::Principal>] :access_control_list
+    #   Information you want to update on principals (users and/or groups) and
+    #   which documents they should have access to. This is useful for user
+    #   context filtering, where search results are filtered based on the user
+    #   or their group access to documents.
+    #
+    # @option params [Array<Types::HierarchicalPrincipal>] :hierarchical_access_control_list
+    #   The updated list of [principal][1] lists that define the hierarchy for
+    #   which documents users should have access to.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_Principal.html
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_access_control_configuration({
+    #     index_id: "IndexId", # required
+    #     id: "AccessControlConfigurationId", # required
+    #     name: "AccessControlConfigurationName",
+    #     description: "Description",
+    #     access_control_list: [
+    #       {
+    #         name: "PrincipalName", # required
+    #         type: "USER", # required, accepts USER, GROUP
+    #         access: "ALLOW", # required, accepts ALLOW, DENY
+    #         data_source_id: "DataSourceId",
+    #       },
+    #     ],
+    #     hierarchical_access_control_list: [
+    #       {
+    #         principal_list: [ # required
+    #           {
+    #             name: "PrincipalName", # required
+    #             type: "USER", # required, accepts USER, GROUP
+    #             access: "ALLOW", # required, accepts ALLOW, DENY
+    #             data_source_id: "DataSourceId",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UpdateAccessControlConfiguration AWS API Documentation
+    #
+    # @overload update_access_control_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_access_control_configuration(params = {}, options = {})
+      req = build_request(:update_access_control_configuration, params)
+      req.send_request(options)
+    end
+
     # Updates an existing Amazon Kendra data source.
     #
     # @option params [required, String] :id
-    #   The unique identifier of the data source to update.
+    #   The identifier of the data source you want to update.
     #
     # @option params [String] :name
-    #   The name of the data source to update. The name of the data source
-    #   can't be updated. To rename a data source you must delete the data
-    #   source and re-create it.
+    #   A new name for the data source connector. You must first delete the
+    #   data source and re-create it to change the name of the data source.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index that contains the data source to update.
+    #   The identifier of the index used with the data source connector.
     #
     # @option params [Types::DataSourceConfiguration] :configuration
-    #   Configuration information for an Amazon Kendra data source you want to
-    #   update.
+    #   Configuration information you want to update for the data source
+    #   connector.
     #
     # @option params [String] :description
-    #   The new description for the data source.
+    #   A new description for the data source connector.
     #
     # @option params [String] :schedule
-    #   The new update schedule for the data source.
+    #   The sync schedule you want to update for the data source connector.
     #
     # @option params [String] :role_arn
-    #   The Amazon Resource Name (ARN) of the new role to use when the data
-    #   source is accessing resources on your behalf.
+    #   The Amazon Resource Name (ARN) of a role with permission to access the
+    #   data source. For more information, see [IAM Roles for Amazon
+    #   Kendra][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html
     #
     # @option params [String] :language_code
-    #   The code for a language. This allows you to support a language for all
-    #   documents when updating the data source. English is supported by
-    #   default. For more information on supported languages, including their
-    #   codes, see [Adding documents in languages other than English][1].
+    #   The code for a language you want to update for the data source
+    #   connector. This allows you to support a language for all documents
+    #   when updating the data source. English is supported by default. For
+    #   more information on supported languages, including their codes, see
+    #   [Adding documents in languages other than English][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html
     #
     # @option params [Types::CustomDocumentEnrichmentConfiguration] :custom_document_enrichment_configuration
-    #   Configuration information for altering document metadata and content
-    #   during the document ingestion process when you update a data source.
+    #   Configuration information you want to update for altering document
+    #   metadata and content during the document ingestion process.
     #
     #   For more information on how to create, modify and delete document
     #   metadata, or make other content alterations when you ingest documents
@@ -5587,11 +5929,10 @@ module Aws::Kendra
     #   The identifier of your Amazon Kendra experience you want to update.
     #
     # @option params [String] :name
-    #   The name of your Amazon Kendra experience you want to update.
+    #   A new name for your Amazon Kendra experience.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index for your Amazon Kendra experience you want
-    #   to update.
+    #   The identifier of the index for your Amazon Kendra experience.
     #
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of a role with permission to access
@@ -5604,10 +5945,11 @@ module Aws::Kendra
     #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html
     #
     # @option params [Types::ExperienceConfiguration] :configuration
-    #   Configuration information for your Amazon Kendra you want to update.
+    #   Configuration information you want to update for your Amazon Kendra
+    #   experience.
     #
     # @option params [String] :description
-    #   The description of your Amazon Kendra experience you want to update.
+    #   A new description for your Amazon Kendra experience.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5643,20 +5985,23 @@ module Aws::Kendra
     # Updates an existing Amazon Kendra index.
     #
     # @option params [required, String] :id
-    #   The identifier of the index to update.
+    #   The identifier of the index you want to update.
     #
     # @option params [String] :name
-    #   The name of the index to update.
+    #   The name of the index you want to update.
     #
     # @option params [String] :role_arn
-    #   A new IAM role that gives Amazon Kendra permission to access your
-    #   Amazon CloudWatch logs.
+    #   An Identity and Access Management (IAM) role that gives Amazon Kendra
+    #   permission to access Amazon CloudWatch logs and metrics.
     #
     # @option params [String] :description
     #   A new description for the index.
     #
     # @option params [Array<Types::DocumentMetadataConfiguration>] :document_metadata_configuration_updates
-    #   The document metadata you want to update.
+    #   The document metadata configuration you want to update for the index.
+    #   Document metadata are fields or attributes associated with your
+    #   documents. For example, the company department name associated with
+    #   each document.
     #
     # @option params [Types::CapacityUnitsConfiguration] :capacity_units
     #   Sets the number of additional document storage and query capacity
@@ -5765,16 +6110,16 @@ module Aws::Kendra
     # Amazon Web Services GovCloud (US-West) region.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index for a block list.
+    #   The identifier of the index for the block list.
     #
     # @option params [required, String] :id
-    #   The unique identifier of a block list.
+    #   The identifier of the block list you want to update.
     #
     # @option params [String] :name
-    #   The name of a block list.
+    #   A new name for the block list.
     #
     # @option params [String] :description
-    #   The description for a block list.
+    #   A new description for the block list.
     #
     # @option params [Types::S3Path] :source_s3_path
     #   The S3 path where your block list text file sits in S3.
@@ -5836,8 +6181,7 @@ module Aws::Kendra
     # Amazon Web Services GovCloud (US-West) region.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index you want to update query suggestions
-    #   settings for.
+    #   The identifier of the index with query suggestions you want to update.
     #
     # @option params [String] :mode
     #   Set the mode to `ENABLED` or `LEARN_ONLY`.
@@ -5915,22 +6259,23 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Updates a thesaurus file associated with an index.
+    # Updates a thesaurus for an index.
     #
     # @option params [required, String] :id
-    #   The identifier of the thesaurus to update.
+    #   The identifier of the thesaurus you want to update.
     #
     # @option params [String] :name
-    #   The updated name of the thesaurus.
+    #   A new name for the thesaurus.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index associated with the thesaurus to update.
+    #   The identifier of the index for the thesaurus.
     #
     # @option params [String] :description
-    #   The updated description of the thesaurus.
+    #   A new description for the thesaurus.
     #
     # @option params [String] :role_arn
-    #   The updated role ARN of the thesaurus.
+    #   An IAM role that gives Amazon Kendra permissions to access thesaurus
+    #   file specified in `SourceS3Path`.
     #
     # @option params [Types::S3Path] :source_s3_path
     #   Information required to find a specific file in an Amazon S3 bucket.
@@ -5973,7 +6318,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2022-07-14)
+------------------
+
+* Feature - This release updates data types that contain either QueryExecutionId, NamedQueryId or ExpectedBucketOwner. Ids must be between 1 and 128 characters and contain only non-whitespace characters. ExpectedBucketOwner must be 12-digit string.
+
 1.54.0 (2022-06-30)
 ------------------
 

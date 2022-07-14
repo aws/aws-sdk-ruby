@@ -554,9 +554,9 @@ module Aws::NimbleStudio
     #
     #   resp = client.create_streaming_image({
     #     client_token: "ClientToken",
-    #     description: "SyntheticCreateStreamingImageRequestStreamingImageDescription",
+    #     description: "StreamingImageDescription",
     #     ec2_image_id: "EC2ImageId", # required
-    #     name: "SyntheticCreateStreamingImageRequestStreamingImageName", # required
+    #     name: "StreamingImageName", # required
     #     studio_id: "String", # required
     #     tags: {
     #       "String" => "String",
@@ -802,9 +802,9 @@ module Aws::NimbleStudio
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_studio({
-    #     admin_role_arn: "String", # required
+    #     admin_role_arn: "RoleArn", # required
     #     client_token: "ClientToken",
-    #     display_name: "SyntheticCreateStudioRequestStudioDisplayName", # required
+    #     display_name: "StudioDisplayName", # required
     #     studio_encryption_configuration: {
     #       key_arn: "StudioEncryptionConfigurationKeyArn",
     #       key_type: "AWS_OWNED_KEY", # required, accepts AWS_OWNED_KEY, CUSTOMER_MANAGED_KEY
@@ -813,7 +813,7 @@ module Aws::NimbleStudio
     #     tags: {
     #       "String" => "String",
     #     },
-    #     user_role_arn: "String", # required
+    #     user_role_arn: "RoleArn", # required
     #   })
     #
     # @example Response structure
@@ -872,8 +872,18 @@ module Aws::NimbleStudio
     # @option params [required, String] :name
     #   The name for the studio component.
     #
+    # @option params [String] :runtime_role_arn
+    #   An IAM role attached to a Studio Component that gives the studio
+    #   component access to AWS resources at anytime while the instance is
+    #   running.
+    #
     # @option params [Array<Types::ScriptParameterKeyValue>] :script_parameters
     #   Parameters for the studio component scripts.
+    #
+    # @option params [String] :secure_initialization_role_arn
+    #   An IAM role attached to Studio Component when the system
+    #   initialization script runs which give the studio component access to
+    #   AWS resources when the system initialization script runs.
     #
     # @option params [required, String] :studio_id
     #   The studio ID.
@@ -909,16 +919,16 @@ module Aws::NimbleStudio
     #       },
     #       compute_farm_configuration: {
     #         active_directory_user: "String",
-    #         endpoint: "SyntheticComputeFarmConfigurationString",
+    #         endpoint: "SensitiveString",
     #       },
     #       license_service_configuration: {
-    #         endpoint: "SyntheticLicenseServiceConfigurationString",
+    #         endpoint: "SensitiveString",
     #       },
     #       shared_file_system_configuration: {
-    #         endpoint: "SyntheticSharedFileSystemConfigurationString",
+    #         endpoint: "SensitiveString",
     #         file_system_id: "String",
     #         linux_mount_point: "LinuxMountPoint",
-    #         share_name: "SyntheticSharedFileSystemConfigurationString",
+    #         share_name: "SensitiveString",
     #         windows_mount_drive: "WindowsMountDrive",
     #       },
     #     },
@@ -933,12 +943,14 @@ module Aws::NimbleStudio
     #       },
     #     ],
     #     name: "StudioComponentName", # required
+    #     runtime_role_arn: "RoleArn",
     #     script_parameters: [
     #       {
     #         key: "ScriptParameterKey",
     #         value: "ScriptParameterValue",
     #       },
     #     ],
+    #     secure_initialization_role_arn: "RoleArn",
     #     studio_id: "String", # required
     #     subtype: "AWS_MANAGED_MICROSOFT_AD", # accepts AWS_MANAGED_MICROSOFT_AD, AMAZON_FSX_FOR_WINDOWS, AMAZON_FSX_FOR_LUSTRE, CUSTOM
     #     tags: {
@@ -974,9 +986,11 @@ module Aws::NimbleStudio
     #   resp.studio_component.initialization_scripts[0].run_context #=> String, one of "SYSTEM_INITIALIZATION", "USER_INITIALIZATION"
     #   resp.studio_component.initialization_scripts[0].script #=> String
     #   resp.studio_component.name #=> String
+    #   resp.studio_component.runtime_role_arn #=> String
     #   resp.studio_component.script_parameters #=> Array
     #   resp.studio_component.script_parameters[0].key #=> String
     #   resp.studio_component.script_parameters[0].value #=> String
+    #   resp.studio_component.secure_initialization_role_arn #=> String
     #   resp.studio_component.state #=> String, one of "CREATE_IN_PROGRESS", "READY", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "DELETED", "DELETE_FAILED", "CREATE_FAILED", "UPDATE_FAILED"
     #   resp.studio_component.status_code #=> String, one of "ACTIVE_DIRECTORY_ALREADY_EXISTS", "STUDIO_COMPONENT_CREATED", "STUDIO_COMPONENT_UPDATED", "STUDIO_COMPONENT_DELETED", "ENCRYPTION_KEY_ACCESS_DENIED", "ENCRYPTION_KEY_NOT_FOUND", "STUDIO_COMPONENT_CREATE_IN_PROGRESS", "STUDIO_COMPONENT_UPDATE_IN_PROGRESS", "STUDIO_COMPONENT_DELETE_IN_PROGRESS", "INTERNAL_ERROR"
     #   resp.studio_component.status_message #=> String
@@ -1350,9 +1364,11 @@ module Aws::NimbleStudio
     #   resp.studio_component.initialization_scripts[0].run_context #=> String, one of "SYSTEM_INITIALIZATION", "USER_INITIALIZATION"
     #   resp.studio_component.initialization_scripts[0].script #=> String
     #   resp.studio_component.name #=> String
+    #   resp.studio_component.runtime_role_arn #=> String
     #   resp.studio_component.script_parameters #=> Array
     #   resp.studio_component.script_parameters[0].key #=> String
     #   resp.studio_component.script_parameters[0].value #=> String
+    #   resp.studio_component.secure_initialization_role_arn #=> String
     #   resp.studio_component.state #=> String, one of "CREATE_IN_PROGRESS", "READY", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "DELETED", "DELETE_FAILED", "CREATE_FAILED", "UPDATE_FAILED"
     #   resp.studio_component.status_code #=> String, one of "ACTIVE_DIRECTORY_ALREADY_EXISTS", "STUDIO_COMPONENT_CREATED", "STUDIO_COMPONENT_UPDATED", "STUDIO_COMPONENT_DELETED", "ENCRYPTION_KEY_ACCESS_DENIED", "ENCRYPTION_KEY_NOT_FOUND", "STUDIO_COMPONENT_CREATE_IN_PROGRESS", "STUDIO_COMPONENT_UPDATE_IN_PROGRESS", "STUDIO_COMPONENT_DELETE_IN_PROGRESS", "INTERNAL_ERROR"
     #   resp.studio_component.status_message #=> String
@@ -1665,11 +1681,15 @@ module Aws::NimbleStudio
     #   resp.launch_profile_initialization.name #=> String
     #   resp.launch_profile_initialization.platform #=> String, one of "LINUX", "WINDOWS"
     #   resp.launch_profile_initialization.system_initialization_scripts #=> Array
+    #   resp.launch_profile_initialization.system_initialization_scripts[0].runtime_role_arn #=> String
     #   resp.launch_profile_initialization.system_initialization_scripts[0].script #=> String
+    #   resp.launch_profile_initialization.system_initialization_scripts[0].secure_initialization_role_arn #=> String
     #   resp.launch_profile_initialization.system_initialization_scripts[0].studio_component_id #=> String
     #   resp.launch_profile_initialization.system_initialization_scripts[0].studio_component_name #=> String
     #   resp.launch_profile_initialization.user_initialization_scripts #=> Array
+    #   resp.launch_profile_initialization.user_initialization_scripts[0].runtime_role_arn #=> String
     #   resp.launch_profile_initialization.user_initialization_scripts[0].script #=> String
+    #   resp.launch_profile_initialization.user_initialization_scripts[0].secure_initialization_role_arn #=> String
     #   resp.launch_profile_initialization.user_initialization_scripts[0].studio_component_id #=> String
     #   resp.launch_profile_initialization.user_initialization_scripts[0].studio_component_name #=> String
     #
@@ -1989,9 +2009,11 @@ module Aws::NimbleStudio
     #   resp.studio_component.initialization_scripts[0].run_context #=> String, one of "SYSTEM_INITIALIZATION", "USER_INITIALIZATION"
     #   resp.studio_component.initialization_scripts[0].script #=> String
     #   resp.studio_component.name #=> String
+    #   resp.studio_component.runtime_role_arn #=> String
     #   resp.studio_component.script_parameters #=> Array
     #   resp.studio_component.script_parameters[0].key #=> String
     #   resp.studio_component.script_parameters[0].value #=> String
+    #   resp.studio_component.secure_initialization_role_arn #=> String
     #   resp.studio_component.state #=> String, one of "CREATE_IN_PROGRESS", "READY", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "DELETED", "DELETE_FAILED", "CREATE_FAILED", "UPDATE_FAILED"
     #   resp.studio_component.status_code #=> String, one of "ACTIVE_DIRECTORY_ALREADY_EXISTS", "STUDIO_COMPONENT_CREATED", "STUDIO_COMPONENT_UPDATED", "STUDIO_COMPONENT_DELETED", "ENCRYPTION_KEY_ACCESS_DENIED", "ENCRYPTION_KEY_NOT_FOUND", "STUDIO_COMPONENT_CREATE_IN_PROGRESS", "STUDIO_COMPONENT_UPDATE_IN_PROGRESS", "STUDIO_COMPONENT_DELETE_IN_PROGRESS", "INTERNAL_ERROR"
     #   resp.studio_component.status_message #=> String
@@ -2331,7 +2353,7 @@ module Aws::NimbleStudio
       req.send_request(options)
     end
 
-    # Lists the streaming image resources in a studio.
+    # Lists the streaming sessions in a studio.
     #
     # @option params [String] :created_by
     #   Filters the request to streaming sessions created by the given user.
@@ -2465,9 +2487,11 @@ module Aws::NimbleStudio
     #   resp.studio_components[0].initialization_scripts[0].run_context #=> String, one of "SYSTEM_INITIALIZATION", "USER_INITIALIZATION"
     #   resp.studio_components[0].initialization_scripts[0].script #=> String
     #   resp.studio_components[0].name #=> String
+    #   resp.studio_components[0].runtime_role_arn #=> String
     #   resp.studio_components[0].script_parameters #=> Array
     #   resp.studio_components[0].script_parameters[0].key #=> String
     #   resp.studio_components[0].script_parameters[0].value #=> String
+    #   resp.studio_components[0].secure_initialization_role_arn #=> String
     #   resp.studio_components[0].state #=> String, one of "CREATE_IN_PROGRESS", "READY", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "DELETED", "DELETE_FAILED", "CREATE_FAILED", "UPDATE_FAILED"
     #   resp.studio_components[0].status_code #=> String, one of "ACTIVE_DIRECTORY_ALREADY_EXISTS", "STUDIO_COMPONENT_CREATED", "STUDIO_COMPONENT_UPDATED", "STUDIO_COMPONENT_DELETED", "ENCRYPTION_KEY_ACCESS_DENIED", "ENCRYPTION_KEY_NOT_FOUND", "STUDIO_COMPONENT_CREATE_IN_PROGRESS", "STUDIO_COMPONENT_UPDATE_IN_PROGRESS", "STUDIO_COMPONENT_DELETE_IN_PROGRESS", "INTERNAL_ERROR"
     #   resp.studio_components[0].status_message #=> String
@@ -3166,8 +3190,8 @@ module Aws::NimbleStudio
     #
     #   resp = client.update_streaming_image({
     #     client_token: "ClientToken",
-    #     description: "SyntheticUpdateStreamingImageRequestStreamingImageDescription",
-    #     name: "SyntheticUpdateStreamingImageRequestStreamingImageName",
+    #     description: "StreamingImageDescription",
+    #     name: "StreamingImageName",
     #     streaming_image_id: "String", # required
     #     studio_id: "String", # required
     #   })
@@ -3235,11 +3259,11 @@ module Aws::NimbleStudio
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_studio({
-    #     admin_role_arn: "String",
+    #     admin_role_arn: "RoleArn",
     #     client_token: "ClientToken",
-    #     display_name: "SyntheticUpdateStudioRequestStudioDisplayName",
+    #     display_name: "StudioDisplayName",
     #     studio_id: "String", # required
-    #     user_role_arn: "String",
+    #     user_role_arn: "RoleArn",
     #   })
     #
     # @example Response structure
@@ -3298,8 +3322,18 @@ module Aws::NimbleStudio
     # @option params [String] :name
     #   The name for the studio component.
     #
+    # @option params [String] :runtime_role_arn
+    #   An IAM role attached to a Studio Component that gives the studio
+    #   component access to AWS resources at anytime while the instance is
+    #   running.
+    #
     # @option params [Array<Types::ScriptParameterKeyValue>] :script_parameters
     #   Parameters for the studio component scripts.
+    #
+    # @option params [String] :secure_initialization_role_arn
+    #   An IAM role attached to Studio Component when the system
+    #   initialization script runs which give the studio component access to
+    #   AWS resources when the system initialization script runs.
     #
     # @option params [required, String] :studio_component_id
     #   The studio component ID.
@@ -3334,16 +3368,16 @@ module Aws::NimbleStudio
     #       },
     #       compute_farm_configuration: {
     #         active_directory_user: "String",
-    #         endpoint: "SyntheticComputeFarmConfigurationString",
+    #         endpoint: "SensitiveString",
     #       },
     #       license_service_configuration: {
-    #         endpoint: "SyntheticLicenseServiceConfigurationString",
+    #         endpoint: "SensitiveString",
     #       },
     #       shared_file_system_configuration: {
-    #         endpoint: "SyntheticSharedFileSystemConfigurationString",
+    #         endpoint: "SensitiveString",
     #         file_system_id: "String",
     #         linux_mount_point: "LinuxMountPoint",
-    #         share_name: "SyntheticSharedFileSystemConfigurationString",
+    #         share_name: "SensitiveString",
     #         windows_mount_drive: "WindowsMountDrive",
     #       },
     #     },
@@ -3358,12 +3392,14 @@ module Aws::NimbleStudio
     #       },
     #     ],
     #     name: "StudioComponentName",
+    #     runtime_role_arn: "RoleArn",
     #     script_parameters: [
     #       {
     #         key: "ScriptParameterKey",
     #         value: "ScriptParameterValue",
     #       },
     #     ],
+    #     secure_initialization_role_arn: "RoleArn",
     #     studio_component_id: "String", # required
     #     studio_id: "String", # required
     #     subtype: "AWS_MANAGED_MICROSOFT_AD", # accepts AWS_MANAGED_MICROSOFT_AD, AMAZON_FSX_FOR_WINDOWS, AMAZON_FSX_FOR_LUSTRE, CUSTOM
@@ -3397,9 +3433,11 @@ module Aws::NimbleStudio
     #   resp.studio_component.initialization_scripts[0].run_context #=> String, one of "SYSTEM_INITIALIZATION", "USER_INITIALIZATION"
     #   resp.studio_component.initialization_scripts[0].script #=> String
     #   resp.studio_component.name #=> String
+    #   resp.studio_component.runtime_role_arn #=> String
     #   resp.studio_component.script_parameters #=> Array
     #   resp.studio_component.script_parameters[0].key #=> String
     #   resp.studio_component.script_parameters[0].value #=> String
+    #   resp.studio_component.secure_initialization_role_arn #=> String
     #   resp.studio_component.state #=> String, one of "CREATE_IN_PROGRESS", "READY", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "DELETED", "DELETE_FAILED", "CREATE_FAILED", "UPDATE_FAILED"
     #   resp.studio_component.status_code #=> String, one of "ACTIVE_DIRECTORY_ALREADY_EXISTS", "STUDIO_COMPONENT_CREATED", "STUDIO_COMPONENT_UPDATED", "STUDIO_COMPONENT_DELETED", "ENCRYPTION_KEY_ACCESS_DENIED", "ENCRYPTION_KEY_NOT_FOUND", "STUDIO_COMPONENT_CREATE_IN_PROGRESS", "STUDIO_COMPONENT_UPDATE_IN_PROGRESS", "STUDIO_COMPONENT_DELETE_IN_PROGRESS", "INTERNAL_ERROR"
     #   resp.studio_component.status_message #=> String
@@ -3433,7 +3471,7 @@ module Aws::NimbleStudio
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-nimblestudio'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
