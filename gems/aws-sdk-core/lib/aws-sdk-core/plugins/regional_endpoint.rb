@@ -20,6 +20,9 @@ a default `:region` is searched for in the following locations:
 * `ENV['AWS_DEFAULT_REGION']`
 * `~/.aws/credentials`
 * `~/.aws/config`
+
+**Note for S3 usage:** For `us-east-1` region, use `s3_us_east_1_regional_endpoint`
+option to change endpoint mode.
         DOCS
         resolve_region(cfg)
       end
