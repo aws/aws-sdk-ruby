@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2022-07-15)
+------------------
+
+* Feature - Documentation updates for AWS DataSync regarding configuring Amazon FSx for ONTAP location security groups and SMB user permissions.
+
 1.48.0 (2022-06-28)
 ------------------
 

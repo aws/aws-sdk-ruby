@@ -267,6 +267,7 @@ module Aws::WAFV2
     SampledHTTPRequests = Shapes::ListShape.new(name: 'SampledHTTPRequests')
     Scope = Shapes::StringShape.new(name: 'Scope')
     SearchString = Shapes::BlobShape.new(name: 'SearchString')
+    SensitivityLevel = Shapes::StringShape.new(name: 'SensitivityLevel')
     SingleCookieName = Shapes::StringShape.new(name: 'SingleCookieName')
     SingleHeader = Shapes::StructureShape.new(name: 'SingleHeader')
     SingleQueryArgument = Shapes::StructureShape.new(name: 'SingleQueryArgument')
@@ -1133,6 +1134,7 @@ module Aws::WAFV2
 
     SqliMatchStatement.add_member(:field_to_match, Shapes::ShapeRef.new(shape: FieldToMatch, required: true, location_name: "FieldToMatch"))
     SqliMatchStatement.add_member(:text_transformations, Shapes::ShapeRef.new(shape: TextTransformations, required: true, location_name: "TextTransformations"))
+    SqliMatchStatement.add_member(:sensitivity_level, Shapes::ShapeRef.new(shape: SensitivityLevel, location_name: "SensitivityLevel"))
     SqliMatchStatement.struct_class = Types::SqliMatchStatement
 
     Statement.add_member(:byte_match_statement, Shapes::ShapeRef.new(shape: ByteMatchStatement, location_name: "ByteMatchStatement"))

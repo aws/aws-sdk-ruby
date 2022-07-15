@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2022-07-15)
+------------------
+
+* Feature - This release adds support for the new segmentation feature.
+
 1.6.0 (2022-05-09)
 ------------------
 

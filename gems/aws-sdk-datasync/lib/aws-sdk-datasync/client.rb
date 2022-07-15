@@ -658,17 +658,18 @@ module Aws::DataSync
     #   Amazon FSx file system.
     #
     # @option params [required, Array<String>] :security_group_arns
-    #   Specifies the security groups that DataSync can use to access your FSx
-    #   for ONTAP file system. You must configure the security groups to allow
-    #   outbound traffic on the following ports (depending on the protocol
-    #   that you're using):
+    #   Specifies the Amazon EC2 security groups that provide access to your
+    #   file system's preferred subnet.
     #
-    #   * **Network File System (NFS)**\: TCP port 2049
+    #   The security groups must allow outbound traffic on the following ports
+    #   (depending on the protocol you use):
+    #
+    #   * **Network File System (NFS)**\: TCP ports 111, 635, and 2049
     #
     #   * **Server Message Block (SMB)**\: TCP port 445
     #
     #   Your file system's security groups must also allow inbound traffic on
-    #   the same port.
+    #   the same ports.
     #
     # @option params [required, String] :storage_virtual_machine_arn
     #   Specifies the ARN of the storage virtual machine (SVM) on your file
@@ -812,40 +813,49 @@ module Aws::DataSync
     # system.
     #
     # @option params [String] :subdirectory
-    #   A subdirectory in the location's path. This subdirectory in the
-    #   Amazon FSx for Windows File Server file system is used to read data
-    #   from the Amazon FSx for Windows File Server source location or write
-    #   data to the FSx for Windows File Server destination.
+    #   Specifies a mount path for your file system using forward slashes.
+    #   This is where DataSync reads or writes data (depending on if this is a
+    #   source or destination location).
     #
     # @option params [required, String] :fsx_filesystem_arn
-    #   The Amazon Resource Name (ARN) for the FSx for Windows File Server
-    #   file system.
+    #   Specifies the Amazon Resource Name (ARN) for the FSx for Windows File
+    #   Server file system.
     #
     # @option params [required, Array<String>] :security_group_arns
-    #   The ARNs of the security groups that are used to configure the FSx for
-    #   Windows File Server file system.
+    #   Specifies the ARNs of the security groups that provide access to your
+    #   file system's preferred subnet.
+    #
+    #   <note markdown="1"> If you choose a security group that doesn't allow connections from
+    #   within itself, do one of the following:
+    #
+    #    * Configure the security group to allow it to communicate within
+    #     itself.
+    #
+    #   * Choose a different security group that can communicate with the
+    #     mount target's security group.
+    #
+    #    </note>
     #
     # @option params [Array<Types::TagListEntry>] :tags
-    #   The key-value pair that represents a tag that you want to add to the
-    #   resource. The value can be an empty string. This value helps you
-    #   manage, filter, and search for your resources. We recommend that you
-    #   create a name tag for your location.
+    #   Specifies labels that help you categorize, filter, and search for your
+    #   Amazon Web Services resources. We recommend creating at least a name
+    #   tag for your location.
     #
     # @option params [required, String] :user
-    #   The user who has the permissions to access files and folders in the
-    #   FSx for Windows File Server file system.
+    #   Specifies the user who has the permissions to access files and folders
+    #   in the file system.
     #
     #   For information about choosing a user name that ensures sufficient
     #   permissions to files, folders, and metadata, see
     #   [user](create-fsx-location.html#FSxWuser).
     #
     # @option params [String] :domain
-    #   The name of the Windows domain that the FSx for Windows File Server
-    #   belongs to.
+    #   Specifies the name of the Windows domain that the FSx for Windows File
+    #   Server belongs to.
     #
     # @option params [required, String] :password
-    #   The password of the user who has the permissions to access files and
-    #   folders in the FSx for Windows File Server file system.
+    #   Specifies the password of the user who has the permissions to access
+    #   files and folders in the file system.
     #
     # @return [Types::CreateLocationFsxWindowsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1399,33 +1409,27 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Creates a task.
+    # Configures a task, which defines where and how DataSync transfers your
+    # data.
     #
-    # A task includes a source location and a destination location, and a
-    # configuration that specifies how data is transferred. A task always
-    # transfers data from the source location to the destination location.
-    # The configuration specifies options such as task scheduling, bandwidth
-    # limits, etc. A task is the complete definition of a data transfer.
+    # A task includes a source location, a destination location, and the
+    # preferences for how and when you want to transfer your data (such as
+    # bandwidth limits, scheduling, among other options).
     #
     # When you create a task that transfers data between Amazon Web Services
-    # services in different Amazon Web Services Regions, one of the two
-    # locations that you specify must reside in the Region where DataSync is
-    # being used. The other location must be specified in a different
-    # Region.
+    # services in different Amazon Web Services Regions, one of your
+    # locations must reside in the Region where you're using DataSync.
     #
-    # You can transfer data between commercial Amazon Web Services Regions
-    # except for China, or between Amazon Web Services GovCloud (US)
-    # Regions.
+    # For more information, see the following topics:
     #
-    # When you use DataSync to copy files or objects between Amazon Web
-    # Services Regions, you pay for data transfer between Regions. This is
-    # billed as data transfer OUT from your source Region to your
-    # destination Region. For more information, see [Data Transfer
-    # pricing][1].
+    # * [Working with DataSync locations][1]
+    #
+    # * [Configure DataSync task settings][2]
     #
     #
     #
-    # [1]: http://aws.amazon.com/ec2/pricing/on-demand/#Data_Transfer
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html
+    # [2]: https://docs.aws.amazon.com/datasync/latest/userguide/create-task.html
     #
     # @option params [required, String] :source_location_arn
     #   The Amazon Resource Name (ARN) of the source location for the task.
@@ -2446,7 +2450,7 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Returns a list of all the tasks.
+    # Returns a list of the DataSync tasks you created.
     #
     # @option params [Integer] :max_results
     #   The maximum number of tasks to return.
@@ -3177,7 +3181,7 @@ module Aws::DataSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-datasync'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

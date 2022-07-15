@@ -586,6 +586,7 @@ module Aws::WAFV2
     #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #               },
     #             ],
+    #             sensitivity_level: "LOW", # accepts LOW, HIGH
     #           },
     #           xss_match_statement: {
     #             field_to_match: { # required
@@ -1383,6 +1384,7 @@ module Aws::WAFV2
     #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #               },
     #             ],
+    #             sensitivity_level: "LOW", # accepts LOW, HIGH
     #           },
     #           xss_match_statement: {
     #             field_to_match: { # required
@@ -2040,6 +2042,7 @@ module Aws::WAFV2
     #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #               },
     #             ],
+    #             sensitivity_level: "LOW", # accepts LOW, HIGH
     #           },
     #           xss_match_statement: {
     #             field_to_match: { # required
@@ -3510,6 +3513,7 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.sqli_match_statement.text_transformations #=> Array
     #   resp.rule_group.rules[0].statement.sqli_match_statement.text_transformations[0].priority #=> Integer
     #   resp.rule_group.rules[0].statement.sqli_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.rule_group.rules[0].statement.sqli_match_statement.sensitivity_level #=> String, one of "LOW", "HIGH"
     #   resp.rule_group.rules[0].statement.xss_match_statement.field_to_match.single_header.name #=> String
     #   resp.rule_group.rules[0].statement.xss_match_statement.field_to_match.single_query_argument.name #=> String
     #   resp.rule_group.rules[0].statement.xss_match_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
@@ -3896,6 +3900,7 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].statement.sqli_match_statement.text_transformations #=> Array
     #   resp.web_acl.rules[0].statement.sqli_match_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.rules[0].statement.sqli_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.rules[0].statement.sqli_match_statement.sensitivity_level #=> String, one of "LOW", "HIGH"
     #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.single_query_argument.name #=> String
     #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
@@ -4109,6 +4114,7 @@ module Aws::WAFV2
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.text_transformations #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.sensitivity_level #=> String, one of "LOW", "HIGH"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.single_query_argument.name #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
@@ -4299,6 +4305,7 @@ module Aws::WAFV2
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.text_transformations #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.sensitivity_level #=> String, one of "LOW", "HIGH"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.single_query_argument.name #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
@@ -4531,6 +4538,7 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].statement.sqli_match_statement.text_transformations #=> Array
     #   resp.web_acl.rules[0].statement.sqli_match_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.rules[0].statement.sqli_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.rules[0].statement.sqli_match_statement.sensitivity_level #=> String, one of "LOW", "HIGH"
     #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.single_query_argument.name #=> String
     #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
@@ -4744,6 +4752,7 @@ module Aws::WAFV2
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.text_transformations #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.sensitivity_level #=> String, one of "LOW", "HIGH"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.single_query_argument.name #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
@@ -4934,6 +4943,7 @@ module Aws::WAFV2
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.text_transformations #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.sensitivity_level #=> String, one of "LOW", "HIGH"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.single_query_argument.name #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
@@ -6323,8 +6333,8 @@ module Aws::WAFV2
 
     # Updates the expiration information for your managed rule set. Use this
     # to initiate the expiration of a managed rule group version. After you
-    # initiate expiration for a version, WAF excludes it from the reponse to
-    # ListAvailableManagedRuleGroupVersions for the managed rule group.
+    # initiate expiration for a version, WAF excludes it from the response
+    # to ListAvailableManagedRuleGroupVersions for the managed rule group.
     #
     # <note markdown="1"> This is intended for use only by vendors of managed rule sets. Vendors
     # are Amazon Web Services and Amazon Web Services Marketplace sellers.
@@ -6737,6 +6747,7 @@ module Aws::WAFV2
     #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #               },
     #             ],
+    #             sensitivity_level: "LOW", # accepts LOW, HIGH
     #           },
     #           xss_match_statement: {
     #             field_to_match: { # required
@@ -7156,7 +7167,7 @@ module Aws::WAFV2
     end
 
     # Updates the specified WebACL. While updating a web ACL, WAF provides
-    # continous coverage to the resources that you have associated with the
+    # continuous coverage to the resources that you have associated with the
     # web ACL.
     #
     # When you make changes to web ACLs or web ACL components, like rules
@@ -7422,6 +7433,7 @@ module Aws::WAFV2
     #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #               },
     #             ],
+    #             sensitivity_level: "LOW", # accepts LOW, HIGH
     #           },
     #           xss_match_statement: {
     #             field_to_match: { # required
@@ -7858,7 +7870,7 @@ module Aws::WAFV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

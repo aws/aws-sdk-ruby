@@ -226,6 +226,7 @@ module Aws::WAFV2
     #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                 },
     #               ],
+    #               sensitivity_level: "LOW", # accepts LOW, HIGH
     #             },
     #             xss_match_statement: {
     #               field_to_match: { # required
@@ -643,8 +644,8 @@ module Aws::WAFV2
     # Inspect the body of the web request. The body immediately follows the
     # request headers.
     #
-    # This is used to indicate the web request component for WAF to inspect,
-    # in the FieldToMatch specification.
+    # This is used to indicate the web request component to inspect, in the
+    # FieldToMatch specification.
     #
     # @note When making an API call, you may pass Body
     #   data as a hash:
@@ -691,7 +692,7 @@ module Aws::WAFV2
     # for, the location in requests that you want WAF to search, and other
     # settings. The bytes to search for are typically a string that
     # corresponds with ASCII characters. In the WAF console and the
-    # developer guide, this is refered to as a string match statement.
+    # developer guide, this is called a string match statement.
     #
     # @note When making an API call, you may pass ByteMatchStatement
     #   data as a hash:
@@ -791,8 +792,7 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] field_to_match
-    #   The part of the web request that you want WAF to inspect. For more
-    #   information, see FieldToMatch.
+    #   The part of the web request that you want WAF to inspect.
     #   @return [Types::FieldToMatch]
     #
     # @!attribute [rw] text_transformations
@@ -884,9 +884,6 @@ module Aws::WAFV2
     #
     # This action option is available for rules. It isn't available for web
     # ACL default actions.
-    #
-    # This is used in the context of other settings, for example to specify
-    # values for RuleAction and web ACL DefaultAction.
     #
     # @note When making an API call, you may pass CaptchaAction
     #   data as a hash:
@@ -1102,6 +1099,7 @@ module Aws::WAFV2
     #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
+    #                 sensitivity_level: "LOW", # accepts LOW, HIGH
     #               },
     #               xss_match_statement: {
     #                 field_to_match: { # required
@@ -1551,11 +1549,16 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] action_condition
-    #   A single action condition.
+    #   A single action condition. This is the action setting that a log
+    #   record must contain in order to meet the condition.
     #   @return [Types::ActionCondition]
     #
     # @!attribute [rw] label_name_condition
-    #   A single label name condition.
+    #   A single label name condition. This is the fully qualified label
+    #   name that a log record must contain in order to meet the condition.
+    #   Fully qualified labels have a prefix, optional namespaces, and label
+    #   name. The prefix identifies the rule group or web ACL context of the
+    #   rule that added the label.
     #   @return [Types::LabelNameCondition]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/Condition AWS API Documentation
@@ -1573,7 +1576,7 @@ module Aws::WAFV2
     # You must specify exactly one setting: either `All`, `IncludedCookies`,
     # or `ExcludedCookies`.
     #
-    # Example JSON: `"CookieMatchPattern": \{ "IncludedCookies":
+    # Example JSON: `"MatchPattern": \{ "IncludedCookies":
     # \{"KeyToInclude1", "KeyToInclude2", "KeyToInclude3"\} \}`
     #
     # @note When making an API call, you may pass CookieMatchPattern
@@ -1614,8 +1617,8 @@ module Aws::WAFV2
     # the cookies to inspect and you can narrow the set of cookies to
     # inspect by including or excluding specific keys.
     #
-    # This is used to indicate the web request component for WAF to inspect,
-    # in the FieldToMatch specification.
+    # This is used to indicate the web request component to inspect, in the
+    # FieldToMatch specification.
     #
     # Example JSON: `"Cookies": \{ "MatchPattern": \{ "All": \{\} \},
     # "MatchScope": "KEY", "OversizeHandling": "MATCH" \}`
@@ -1641,7 +1644,7 @@ module Aws::WAFV2
     #   You must specify exactly one setting: either `All`,
     #   `IncludedCookies`, or `ExcludedCookies`.
     #
-    #   Example JSON: `"CookieMatchPattern": \{ "IncludedCookies":
+    #   Example JSON: `"MatchPattern": \{ "IncludedCookies":
     #   \{"KeyToInclude1", "KeyToInclude2", "KeyToInclude3"\} \}`
     #   @return [Types::CookieMatchPattern]
     #
@@ -2051,6 +2054,7 @@ module Aws::WAFV2
     #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
+    #                 sensitivity_level: "LOW", # accepts LOW, HIGH
     #               },
     #               xss_match_statement: {
     #                 field_to_match: { # required
@@ -2722,6 +2726,7 @@ module Aws::WAFV2
     #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
+    #                 sensitivity_level: "LOW", # accepts LOW, HIGH
     #               },
     #               xss_match_statement: {
     #                 field_to_match: { # required
@@ -3352,7 +3357,7 @@ module Aws::WAFV2
     #   The HTTP status code to return to the client.
     #
     #   For a list of status codes that you can use in your custom
-    #   reqponses, see [Supported status codes for custom response][1] in
+    #   responses, see [Supported status codes for custom response][1] in
     #   the [WAF Developer Guide][2].
     #
     #
@@ -5250,7 +5255,7 @@ module Aws::WAFV2
     # You must specify exactly one setting: either `All`, `IncludedHeaders`,
     # or `ExcludedHeaders`.
     #
-    # Example JSON: `"HeaderMatchPattern": \{ "ExcludedHeaders":
+    # Example JSON: `"MatchPattern": \{ "ExcludedHeaders":
     # \{"KeyToExclude1", "KeyToExclude2"\} \}`
     #
     # @note When making an API call, you may pass HeaderMatchPattern
@@ -5287,15 +5292,15 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # Inspect the headers in the web request. You can specify the parts of
+    # Inspect all headers in the web request. You can specify the parts of
     # the headers to inspect and you can narrow the set of headers to
     # inspect by including or excluding specific keys.
     #
-    # This is used to indicate the web request component for WAF to inspect,
-    # in the FieldToMatch specification.
+    # This is used to indicate the web request component to inspect, in the
+    # FieldToMatch specification.
     #
-    # Alternately, you can use the `SingleHeader` `FieldToMatch` setting to
-    # inspect the value of a single header, identified by its key.
+    # If you want to inspect just the value of a single header, use the
+    # `SingleHeader` `FieldToMatch` setting instead.
     #
     # Example JSON: `"Headers": \{ "MatchPattern": \{ "All": \{\} \},
     # "MatchScope": "KEY", "OversizeHandling": "MATCH" \}`
@@ -5321,7 +5326,7 @@ module Aws::WAFV2
     #   You must specify exactly one setting: either `All`,
     #   `IncludedHeaders`, or `ExcludedHeaders`.
     #
-    #   Example JSON: `"HeaderMatchPattern": \{ "ExcludedHeaders":
+    #   Example JSON: `"MatchPattern": \{ "ExcludedHeaders":
     #   \{"KeyToExclude1", "KeyToExclude2"\} \}`
     #   @return [Types::HeaderMatchPattern]
     #
@@ -5658,8 +5663,8 @@ module Aws::WAFV2
     # Inspect the body of the web request as JSON. The body immediately
     # follows the request headers.
     #
-    # This is used to indicate the web request component for WAF to inspect,
-    # in the FieldToMatch specification.
+    # This is used to indicate the web request component to inspect, in the
+    # FieldToMatch specification.
     #
     # Use the specifications in this object to indicate which parts of the
     # JSON body to inspect using the rule's inspection criteria. WAF
@@ -7077,6 +7082,7 @@ module Aws::WAFV2
     #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #               },
     #             ],
+    #             sensitivity_level: "LOW", # accepts LOW, HIGH
     #           },
     #           xss_match_statement: {
     #             field_to_match: { # required
@@ -7954,6 +7960,7 @@ module Aws::WAFV2
     #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #               },
     #             ],
+    #             sensitivity_level: "LOW", # accepts LOW, HIGH
     #           },
     #           xss_match_statement: {
     #             field_to_match: { # required
@@ -8409,6 +8416,7 @@ module Aws::WAFV2
     #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                 },
     #               ],
+    #               sensitivity_level: "LOW", # accepts LOW, HIGH
     #             },
     #             xss_match_statement: {
     #               field_to_match: { # required
@@ -9120,11 +9128,11 @@ module Aws::WAFV2
     #   the string BadBot.
     #
     # In this rate-based rule, you also define a rate limit. For this
-    # example, the rate limit is 1,000. Requests that meet both of the
-    # conditions in the statements are counted. If the count exceeds 1,000
+    # example, the rate limit is 1,000. Requests that meet the criteria of
+    # both of the nested statements are counted. If the count exceeds 1,000
     # requests per five minutes, the rule action triggers. Requests that do
-    # not meet both conditions are not counted towards the rate limit and
-    # are not affected by this rule.
+    # not meet the criteria of both of the nested statements are not counted
+    # towards the rate limit and are not affected by this rule.
     #
     # You cannot nest a `RateBasedStatement` inside another statement, for
     # example inside a `NotStatement` or `OrStatement`. You can define a
@@ -9252,6 +9260,7 @@ module Aws::WAFV2
     #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #               },
     #             ],
+    #             sensitivity_level: "LOW", # accepts LOW, HIGH
     #           },
     #           xss_match_statement: {
     #             field_to_match: { # required
@@ -9737,8 +9746,7 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] field_to_match
-    #   The part of the web request that you want WAF to inspect. For more
-    #   information, see FieldToMatch.
+    #   The part of the web request that you want WAF to inspect.
     #   @return [Types::FieldToMatch]
     #
     # @!attribute [rw] text_transformations
@@ -9881,8 +9889,7 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] field_to_match
-    #   The part of the web request that you want WAF to inspect. For more
-    #   information, see FieldToMatch.
+    #   The part of the web request that you want WAF to inspect.
     #   @return [Types::FieldToMatch]
     #
     # @!attribute [rw] text_transformations
@@ -10099,6 +10106,7 @@ module Aws::WAFV2
     #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #               },
     #             ],
+    #             sensitivity_level: "LOW", # accepts LOW, HIGH
     #           },
     #           xss_match_statement: {
     #             field_to_match: { # required
@@ -10996,8 +11004,8 @@ module Aws::WAFV2
     # You can filter and inspect all headers with the `FieldToMatch` setting
     # `Headers`.
     #
-    # This is used to indicate the web request component for WAF to inspect,
-    # in the FieldToMatch specification.
+    # This is used to indicate the web request component to inspect, in the
+    # FieldToMatch specification.
     #
     # Example JSON: `"SingleHeader": \{ "Name": "haystack" \}`
     #
@@ -11023,8 +11031,8 @@ module Aws::WAFV2
     # Inspect one query argument in the web request, identified by name, for
     # example *UserName* or *SalesRegion*. The name isn't case sensitive.
     #
-    # This is used to indicate the web request component for WAF to inspect,
-    # in the FieldToMatch specification.
+    # This is used to indicate the web request component to inspect, in the
+    # FieldToMatch specification.
     #
     # Example JSON: `"SingleQueryArgument": \{ "Name": "myArgument" \}`
     #
@@ -11054,8 +11062,8 @@ module Aws::WAFV2
     #
     # If you configure WAF to inspect the request body, WAF inspects only
     # the first 8192 bytes (8 KB). If the request body for your web requests
-    # never exceeds 8192 bytes, you can create a size constraint condition
-    # and block requests that have a request body greater than 8192 bytes.
+    # never exceeds 8192 bytes, you could use a size constraint statement to
+    # block requests that have a request body greater than 8192 bytes.
     #
     # If you choose URI for the value of Part of the request to filter on,
     # the slash (/) in the URI counts as one character. For example, the URI
@@ -11125,8 +11133,7 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] field_to_match
-    #   The part of the web request that you want WAF to inspect. For more
-    #   information, see FieldToMatch.
+    #   The part of the web request that you want WAF to inspect.
     #   @return [Types::FieldToMatch]
     #
     # @!attribute [rw] comparison_operator
@@ -11158,14 +11165,9 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # Attackers sometimes insert malicious SQL code into web requests in an
-    # effort to extract data from your database. To allow or block web
-    # requests that appear to contain malicious SQL code, create one or more
-    # SQL injection match conditions. An SQL injection match condition
-    # identifies the part of web requests, such as the URI or the query
-    # string, that you want WAF to inspect. Later in the process, when you
-    # create a web ACL, you specify whether to allow or block requests that
-    # appear to contain malicious SQL code.
+    # A rule statement that inspects for malicious SQL code. Attackers
+    # insert malicious SQL code into web requests to do things like modify
+    # your database or extract data from it.
     #
     # @note When making an API call, you may pass SqliMatchStatement
     #   data as a hash:
@@ -11226,11 +11228,11 @@ module Aws::WAFV2
     #             type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #           },
     #         ],
+    #         sensitivity_level: "LOW", # accepts LOW, HIGH
     #       }
     #
     # @!attribute [rw] field_to_match
-    #   The part of the web request that you want WAF to inspect. For more
-    #   information, see FieldToMatch.
+    #   The part of the web request that you want WAF to inspect.
     #   @return [Types::FieldToMatch]
     #
     # @!attribute [rw] text_transformations
@@ -11242,11 +11244,33 @@ module Aws::WAFV2
     #   setting, before inspecting the content for a match.
     #   @return [Array<Types::TextTransformation>]
     #
+    # @!attribute [rw] sensitivity_level
+    #   The sensitivity that you want WAF to use to inspect for SQL
+    #   injection attacks.
+    #
+    #   `HIGH` detects more attacks, but might generate more false
+    #   positives, especially if your web requests frequently contain
+    #   unusual strings. For information about identifying and mitigating
+    #   false positives, see [Testing and tuning][1] in the *WAF Developer
+    #   Guide*.
+    #
+    #   `LOW` is generally a better choice for resources that already have
+    #   other protections against SQL injection attacks or that have a low
+    #   tolerance for false positives.
+    #
+    #   Default: `LOW`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/web-acl-testing.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/SqliMatchStatement AWS API Documentation
     #
     class SqliMatchStatement < Struct.new(
       :field_to_match,
-      :text_transformations)
+      :text_transformations,
+      :sensitivity_level)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11373,6 +11397,7 @@ module Aws::WAFV2
     #               type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #             },
     #           ],
+    #           sensitivity_level: "LOW", # accepts LOW, HIGH
     #         },
     #         xss_match_statement: {
     #           field_to_match: { # required
@@ -11690,6 +11715,7 @@ module Aws::WAFV2
     #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                 },
     #               ],
+    #               sensitivity_level: "LOW", # accepts LOW, HIGH
     #             },
     #             xss_match_statement: {
     #               field_to_match: { # required
@@ -12121,6 +12147,7 @@ module Aws::WAFV2
     #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
+    #                 sensitivity_level: "LOW", # accepts LOW, HIGH
     #               },
     #               xss_match_statement: {
     #                 field_to_match: { # required
@@ -12551,6 +12578,7 @@ module Aws::WAFV2
     #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
+    #                 sensitivity_level: "LOW", # accepts LOW, HIGH
     #               },
     #               xss_match_statement: {
     #                 field_to_match: { # required
@@ -12980,6 +13008,7 @@ module Aws::WAFV2
     #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                 },
     #               ],
+    #               sensitivity_level: "LOW", # accepts LOW, HIGH
     #             },
     #             xss_match_statement: {
     #               field_to_match: { # required
@@ -13420,6 +13449,7 @@ module Aws::WAFV2
     #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                 },
     #               ],
+    #               sensitivity_level: "LOW", # accepts LOW, HIGH
     #             },
     #             xss_match_statement: {
     #               field_to_match: { # required
@@ -13797,29 +13827,20 @@ module Aws::WAFV2
     #   search for, the location in requests that you want WAF to search,
     #   and other settings. The bytes to search for are typically a string
     #   that corresponds with ASCII characters. In the WAF console and the
-    #   developer guide, this is refered to as a string match statement.
+    #   developer guide, this is called a string match statement.
     #   @return [Types::ByteMatchStatement]
     #
     # @!attribute [rw] sqli_match_statement
-    #   Attackers sometimes insert malicious SQL code into web requests in
-    #   an effort to extract data from your database. To allow or block web
-    #   requests that appear to contain malicious SQL code, create one or
-    #   more SQL injection match conditions. An SQL injection match
-    #   condition identifies the part of web requests, such as the URI or
-    #   the query string, that you want WAF to inspect. Later in the
-    #   process, when you create a web ACL, you specify whether to allow or
-    #   block requests that appear to contain malicious SQL code.
+    #   A rule statement that inspects for malicious SQL code. Attackers
+    #   insert malicious SQL code into web requests to do things like modify
+    #   your database or extract data from it.
     #   @return [Types::SqliMatchStatement]
     #
     # @!attribute [rw] xss_match_statement
-    #   A rule statement that defines a cross-site scripting (XSS) match
-    #   search for WAF to apply to web requests. XSS attacks are those where
-    #   the attacker uses vulnerabilities in a benign website as a vehicle
-    #   to inject malicious client-site scripts into other legitimate web
-    #   browsers. The XSS match statement provides the location in requests
-    #   that you want WAF to search and text transformations to use on the
-    #   search area before WAF searches for character sequences that are
-    #   likely to be malicious strings.
+    #   A rule statement that inspects for cross-site scripting (XSS)
+    #   attacks. In XSS attacks, the attacker uses vulnerabilities in a
+    #   benign website as a vehicle to inject malicious client-site scripts
+    #   into other legitimate web browsers.
     #   @return [Types::XssMatchStatement]
     #
     # @!attribute [rw] size_constraint_statement
@@ -13831,8 +13852,8 @@ module Aws::WAFV2
     #
     #   If you configure WAF to inspect the request body, WAF inspects only
     #   the first 8192 bytes (8 KB). If the request body for your web
-    #   requests never exceeds 8192 bytes, you can create a size constraint
-    #   condition and block requests that have a request body greater than
+    #   requests never exceeds 8192 bytes, you could use a size constraint
+    #   statement to block requests that have a request body greater than
     #   8192 bytes.
     #
     #   If you choose URI for the value of Part of the request to filter on,
@@ -13916,11 +13937,12 @@ module Aws::WAFV2
     #     for the string BadBot.
     #
     #   In this rate-based rule, you also define a rate limit. For this
-    #   example, the rate limit is 1,000. Requests that meet both of the
-    #   conditions in the statements are counted. If the count exceeds 1,000
-    #   requests per five minutes, the rule action triggers. Requests that
-    #   do not meet both conditions are not counted towards the rate limit
-    #   and are not affected by this rule.
+    #   example, the rate limit is 1,000. Requests that meet the criteria of
+    #   both of the nested statements are counted. If the count exceeds
+    #   1,000 requests per five minutes, the rule action triggers. Requests
+    #   that do not meet the criteria of both of the nested statements are
+    #   not counted towards the rate limit and are not affected by this
+    #   rule.
     #
     #   You cannot nest a `RateBasedStatement` inside another statement, for
     #   example inside a `NotStatement` or `OrStatement`. You can define a
@@ -14795,6 +14817,7 @@ module Aws::WAFV2
     #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
+    #                 sensitivity_level: "LOW", # accepts LOW, HIGH
     #               },
     #               xss_match_statement: {
     #                 field_to_match: { # required
@@ -15456,6 +15479,7 @@ module Aws::WAFV2
     #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
+    #                 sensitivity_level: "LOW", # accepts LOW, HIGH
     #               },
     #               xss_match_statement: {
     #                 field_to_match: { # required
@@ -16093,8 +16117,8 @@ module Aws::WAFV2
     #   A name of the Amazon CloudWatch metric. The name can contain only
     #   the characters: A-Z, a-z, 0-9, - (hyphen), and \_ (underscore). The
     #   name can be from one to 128 characters long. It can't contain
-    #   whitespace or metric names reserved for WAF, for example "All" and
-    #   "Default\_Action."
+    #   whitespace or metric names reserved for WAF, for example `All` and
+    #   `Default_Action`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/VisibilityConfig AWS API Documentation
@@ -16417,7 +16441,7 @@ module Aws::WAFV2
     end
 
     # WAF couldn’t perform your tagging operation because of an internal
-    # error. Retry ybjectNoteWebRequestComponentour request.
+    # error. Retry your request.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -16652,14 +16676,10 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # A rule statement that defines a cross-site scripting (XSS) match
-    # search for WAF to apply to web requests. XSS attacks are those where
-    # the attacker uses vulnerabilities in a benign website as a vehicle to
-    # inject malicious client-site scripts into other legitimate web
-    # browsers. The XSS match statement provides the location in requests
-    # that you want WAF to search and text transformations to use on the
-    # search area before WAF searches for character sequences that are
-    # likely to be malicious strings.
+    # A rule statement that inspects for cross-site scripting (XSS) attacks.
+    # In XSS attacks, the attacker uses vulnerabilities in a benign website
+    # as a vehicle to inject malicious client-site scripts into other
+    # legitimate web browsers.
     #
     # @note When making an API call, you may pass XssMatchStatement
     #   data as a hash:
@@ -16723,8 +16743,7 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] field_to_match
-    #   The part of the web request that you want WAF to inspect. For more
-    #   information, see FieldToMatch.
+    #   The part of the web request that you want WAF to inspect.
     #   @return [Types::FieldToMatch]
     #
     # @!attribute [rw] text_transformations

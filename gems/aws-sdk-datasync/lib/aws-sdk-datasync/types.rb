@@ -378,17 +378,18 @@ module Aws::DataSync
     #   @return [Types::FsxProtocol]
     #
     # @!attribute [rw] security_group_arns
-    #   Specifies the security groups that DataSync can use to access your
-    #   FSx for ONTAP file system. You must configure the security groups to
-    #   allow outbound traffic on the following ports (depending on the
-    #   protocol that you're using):
+    #   Specifies the Amazon EC2 security groups that provide access to your
+    #   file system's preferred subnet.
     #
-    #   * **Network File System (NFS)**\: TCP port 2049
+    #   The security groups must allow outbound traffic on the following
+    #   ports (depending on the protocol you use):
+    #
+    #   * **Network File System (NFS)**\: TCP ports 111, 635, and 2049
     #
     #   * **Server Message Block (SMB)**\: TCP port 445
     #
     #   Your file system's security groups must also allow inbound traffic
-    #   on the same port.
+    #   on the same ports.
     #   @return [Array<String>]
     #
     # @!attribute [rw] storage_virtual_machine_arn
@@ -542,32 +543,41 @@ module Aws::DataSync
     #       }
     #
     # @!attribute [rw] subdirectory
-    #   A subdirectory in the location's path. This subdirectory in the
-    #   Amazon FSx for Windows File Server file system is used to read data
-    #   from the Amazon FSx for Windows File Server source location or write
-    #   data to the FSx for Windows File Server destination.
+    #   Specifies a mount path for your file system using forward slashes.
+    #   This is where DataSync reads or writes data (depending on if this is
+    #   a source or destination location).
     #   @return [String]
     #
     # @!attribute [rw] fsx_filesystem_arn
-    #   The Amazon Resource Name (ARN) for the FSx for Windows File Server
-    #   file system.
+    #   Specifies the Amazon Resource Name (ARN) for the FSx for Windows
+    #   File Server file system.
     #   @return [String]
     #
     # @!attribute [rw] security_group_arns
-    #   The ARNs of the security groups that are used to configure the FSx
-    #   for Windows File Server file system.
+    #   Specifies the ARNs of the security groups that provide access to
+    #   your file system's preferred subnet.
+    #
+    #   <note markdown="1"> If you choose a security group that doesn't allow connections from
+    #   within itself, do one of the following:
+    #
+    #    * Configure the security group to allow it to communicate within
+    #     itself.
+    #
+    #   * Choose a different security group that can communicate with the
+    #     mount target's security group.
+    #
+    #    </note>
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
-    #   The key-value pair that represents a tag that you want to add to the
-    #   resource. The value can be an empty string. This value helps you
-    #   manage, filter, and search for your resources. We recommend that you
-    #   create a name tag for your location.
+    #   Specifies labels that help you categorize, filter, and search for
+    #   your Amazon Web Services resources. We recommend creating at least a
+    #   name tag for your location.
     #   @return [Array<Types::TagListEntry>]
     #
     # @!attribute [rw] user
-    #   The user who has the permissions to access files and folders in the
-    #   FSx for Windows File Server file system.
+    #   Specifies the user who has the permissions to access files and
+    #   folders in the file system.
     #
     #   For information about choosing a user name that ensures sufficient
     #   permissions to files, folders, and metadata, see
@@ -575,13 +585,13 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] domain
-    #   The name of the Windows domain that the FSx for Windows File Server
-    #   belongs to.
+    #   Specifies the name of the Windows domain that the FSx for Windows
+    #   File Server belongs to.
     #   @return [String]
     #
     # @!attribute [rw] password
-    #   The password of the user who has the permissions to access files and
-    #   folders in the FSx for Windows File Server file system.
+    #   Specifies the password of the user who has the permissions to access
+    #   files and folders in the file system.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationFsxWindowsRequest AWS API Documentation
@@ -599,8 +609,8 @@ module Aws::DataSync
     end
 
     # @!attribute [rw] location_arn
-    #   The Amazon Resource Name (ARN) of the FSx for Windows File Server
-    #   file system location you created.
+    #   The ARN of the FSx for Windows File Server file system location you
+    #   created.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationFsxWindowsResponse AWS API Documentation
@@ -2660,7 +2670,37 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] user
-    #   Specifies a user who has permission to access your SVM.
+    #   Specifies a user name that can mount the location and access the
+    #   files, folders, and metadata that you need in the SVM.
+    #
+    #   If you provide a user in your Active Directory, note the following:
+    #
+    #   * If you're using Directory Service for Microsoft Active Directory,
+    #     the user must be a member of the Amazon Web Services Delegated FSx
+    #     Administrators group.
+    #
+    #   * If you're using a self-managed Active Directory, the user must be
+    #     a member of either the Domain Admins group or a custom group that
+    #     you specified for file system administration when you created your
+    #     file system.
+    #
+    #   Make sure that the user has the permissions it needs to copy the
+    #   data you want:
+    #
+    #   * `SE_TCB_NAME`\: Required to set object ownership and file
+    #     metadata. With this privilege, you also can copy NTFS
+    #     discretionary access lists (DACLs).
+    #
+    #   * `SE_SECURITY_NAME`\: May be needed to copy NTFS system access
+    #     control lists (SACLs). This operation specifically requires the
+    #     Windows privilege, which is granted to members of the Domain
+    #     Admins group. If you configure your task to copy SACLs, make sure
+    #     that the user has the required privileges. For information about
+    #     copying SACLs, see [Ownership and permissions-related options][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-task.html#configure-ownership-and-permissions
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/FsxProtocolSmb AWS API Documentation
@@ -3029,10 +3069,16 @@ module Aws::DataSync
       include Aws::Structure
     end
 
-    # You can use API filters to narrow down the list of resources returned
-    # by `ListLocations`. For example, to retrieve all your Amazon S3
-    # locations, you can use `ListLocations` with filter name `LocationType
-    # S3` and `Operator Equals`.
+    # Narrow down the list of resources returned by `ListLocations`. For
+    # example, to see all your Amazon S3 locations, create a filter using
+    # `"Name": "LocationType"`, `"Operator": "Equals"`, and `"Values":
+    # "S3"`.
+    #
+    # For more information, see [filtering resources][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/query-resources.html
     #
     # @note When making an API call, you may pass LocationFilter
     #   data as a hash:
@@ -3056,12 +3102,7 @@ module Aws::DataSync
     #
     # @!attribute [rw] operator
     #   The operator that is used to compare filter values (for example,
-    #   `Equals` or `Contains`). For more about API filtering operators, see
-    #   [API filters for ListTasks and ListLocations][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/query-resources.html
+    #   `Equals` or `Contains`).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/LocationFilter AWS API Documentation
@@ -3929,6 +3970,12 @@ module Aws::DataSync
     # location, you can use `ListTasks` with filter name `LocationId` and
     # `Operator Equals` with the ARN for the location.
     #
+    # For more information, see [filtering DataSync resources][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/query-resources.html
+    #
     # @note When making an API call, you may pass TaskFilter
     #   data as a hash:
     #
@@ -3951,12 +3998,7 @@ module Aws::DataSync
     #
     # @!attribute [rw] operator
     #   The operator that is used to compare filter values (for example,
-    #   `Equals` or `Contains`). For more about API filtering operators, see
-    #   [API filters for ListTasks and ListLocations][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/query-resources.html
+    #   `Equals` or `Contains`).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/TaskFilter AWS API Documentation

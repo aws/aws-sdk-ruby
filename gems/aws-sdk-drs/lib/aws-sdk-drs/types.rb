@@ -171,7 +171,7 @@ module Aws::Drs
     #         bandwidth_throttling: 1, # required
     #         create_public_ip: false, # required
     #         data_plane_routing: "PRIVATE_IP", # required, accepts PRIVATE_IP, PUBLIC_IP
-    #         default_large_staging_disk_type: "GP2", # required, accepts GP2, GP3, ST1
+    #         default_large_staging_disk_type: "GP2", # required, accepts GP2, GP3, ST1, AUTO
     #         ebs_encryption: "DEFAULT", # required, accepts DEFAULT, CUSTOM
     #         ebs_encryption_key_arn: "ARN",
     #         pit_policy: [ # required
@@ -446,7 +446,7 @@ module Aws::Drs
     #       }
     #
     # @!attribute [rw] recovery_instance_id
-    #   RThe ID of the Recovery Instance to be deleted.
+    #   The ID of the Recovery Instance to be deleted.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/DeleteRecoveryInstanceRequest AWS API Documentation
@@ -2116,6 +2116,7 @@ module Aws::Drs
     #         device_name: "BoundedString",
     #         iops: 1,
     #         is_boot_disk: false,
+    #         optimized_staging_disk_type: "AUTO", # accepts AUTO, GP2, GP3, IO1, SC1, ST1, STANDARD
     #         staging_disk_type: "AUTO", # accepts AUTO, GP2, GP3, IO1, SC1, ST1, STANDARD
     #         throughput: 1,
     #       }
@@ -2132,6 +2133,11 @@ module Aws::Drs
     #   Whether to boot from this disk or not.
     #   @return [Boolean]
     #
+    # @!attribute [rw] optimized_staging_disk_type
+    #   The Staging Disk EBS volume type to be used during replication when
+    #   `stagingDiskType` is set to Auto. This is a read-only field.
+    #   @return [String]
+    #
     # @!attribute [rw] staging_disk_type
     #   The Staging Disk EBS volume type to be used during replication.
     #   @return [String]
@@ -2147,6 +2153,7 @@ module Aws::Drs
       :device_name,
       :iops,
       :is_boot_disk,
+      :optimized_staging_disk_type,
       :staging_disk_type,
       :throughput)
       SENSITIVE = []
@@ -2877,7 +2884,7 @@ module Aws::Drs
     #         bandwidth_throttling: 1,
     #         create_public_ip: false,
     #         data_plane_routing: "PRIVATE_IP", # accepts PRIVATE_IP, PUBLIC_IP
-    #         default_large_staging_disk_type: "GP2", # accepts GP2, GP3, ST1
+    #         default_large_staging_disk_type: "GP2", # accepts GP2, GP3, ST1, AUTO
     #         ebs_encryption: "DEFAULT", # accepts DEFAULT, CUSTOM
     #         ebs_encryption_key_arn: "ARN",
     #         name: "SmallBoundedString",
@@ -2895,6 +2902,7 @@ module Aws::Drs
     #             device_name: "BoundedString",
     #             iops: 1,
     #             is_boot_disk: false,
+    #             optimized_staging_disk_type: "AUTO", # accepts AUTO, GP2, GP3, IO1, SC1, ST1, STANDARD
     #             staging_disk_type: "AUTO", # accepts AUTO, GP2, GP3, IO1, SC1, ST1, STANDARD
     #             throughput: 1,
     #           },
@@ -3012,7 +3020,7 @@ module Aws::Drs
     #         bandwidth_throttling: 1,
     #         create_public_ip: false,
     #         data_plane_routing: "PRIVATE_IP", # accepts PRIVATE_IP, PUBLIC_IP
-    #         default_large_staging_disk_type: "GP2", # accepts GP2, GP3, ST1
+    #         default_large_staging_disk_type: "GP2", # accepts GP2, GP3, ST1, AUTO
     #         ebs_encryption: "DEFAULT", # accepts DEFAULT, CUSTOM
     #         ebs_encryption_key_arn: "ARN",
     #         pit_policy: [

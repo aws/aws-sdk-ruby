@@ -515,7 +515,7 @@ module Aws::Drs
     #     bandwidth_throttling: 1, # required
     #     create_public_ip: false, # required
     #     data_plane_routing: "PRIVATE_IP", # required, accepts PRIVATE_IP, PUBLIC_IP
-    #     default_large_staging_disk_type: "GP2", # required, accepts GP2, GP3, ST1
+    #     default_large_staging_disk_type: "GP2", # required, accepts GP2, GP3, ST1, AUTO
     #     ebs_encryption: "DEFAULT", # required, accepts DEFAULT, CUSTOM
     #     ebs_encryption_key_arn: "ARN",
     #     pit_policy: [ # required
@@ -546,7 +546,7 @@ module Aws::Drs
     #   resp.bandwidth_throttling #=> Integer
     #   resp.create_public_ip #=> Boolean
     #   resp.data_plane_routing #=> String, one of "PRIVATE_IP", "PUBLIC_IP"
-    #   resp.default_large_staging_disk_type #=> String, one of "GP2", "GP3", "ST1"
+    #   resp.default_large_staging_disk_type #=> String, one of "GP2", "GP3", "ST1", "AUTO"
     #   resp.ebs_encryption #=> String, one of "DEFAULT", "CUSTOM"
     #   resp.ebs_encryption_key_arn #=> String
     #   resp.pit_policy #=> Array
@@ -602,7 +602,7 @@ module Aws::Drs
     # Instance must be disconnected first in order to delete it.
     #
     # @option params [required, String] :recovery_instance_id
-    #   RThe ID of the Recovery Instance to be deleted.
+    #   The ID of the Recovery Instance to be deleted.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -972,7 +972,7 @@ module Aws::Drs
     #   resp.items[0].bandwidth_throttling #=> Integer
     #   resp.items[0].create_public_ip #=> Boolean
     #   resp.items[0].data_plane_routing #=> String, one of "PRIVATE_IP", "PUBLIC_IP"
-    #   resp.items[0].default_large_staging_disk_type #=> String, one of "GP2", "GP3", "ST1"
+    #   resp.items[0].default_large_staging_disk_type #=> String, one of "GP2", "GP3", "ST1", "AUTO"
     #   resp.items[0].ebs_encryption #=> String, one of "DEFAULT", "CUSTOM"
     #   resp.items[0].ebs_encryption_key_arn #=> String
     #   resp.items[0].pit_policy #=> Array
@@ -1347,7 +1347,7 @@ module Aws::Drs
     #   resp.bandwidth_throttling #=> Integer
     #   resp.create_public_ip #=> Boolean
     #   resp.data_plane_routing #=> String, one of "PRIVATE_IP", "PUBLIC_IP"
-    #   resp.default_large_staging_disk_type #=> String, one of "GP2", "GP3", "ST1"
+    #   resp.default_large_staging_disk_type #=> String, one of "GP2", "GP3", "ST1", "AUTO"
     #   resp.ebs_encryption #=> String, one of "DEFAULT", "CUSTOM"
     #   resp.ebs_encryption_key_arn #=> String
     #   resp.name #=> String
@@ -1361,6 +1361,7 @@ module Aws::Drs
     #   resp.replicated_disks[0].device_name #=> String
     #   resp.replicated_disks[0].iops #=> Integer
     #   resp.replicated_disks[0].is_boot_disk #=> Boolean
+    #   resp.replicated_disks[0].optimized_staging_disk_type #=> String, one of "AUTO", "GP2", "GP3", "IO1", "SC1", "ST1", "STANDARD"
     #   resp.replicated_disks[0].staging_disk_type #=> String, one of "AUTO", "GP2", "GP3", "IO1", "SC1", "ST1", "STANDARD"
     #   resp.replicated_disks[0].throughput #=> Integer
     #   resp.replication_server_instance_type #=> String
@@ -2024,7 +2025,7 @@ module Aws::Drs
     #     bandwidth_throttling: 1,
     #     create_public_ip: false,
     #     data_plane_routing: "PRIVATE_IP", # accepts PRIVATE_IP, PUBLIC_IP
-    #     default_large_staging_disk_type: "GP2", # accepts GP2, GP3, ST1
+    #     default_large_staging_disk_type: "GP2", # accepts GP2, GP3, ST1, AUTO
     #     ebs_encryption: "DEFAULT", # accepts DEFAULT, CUSTOM
     #     ebs_encryption_key_arn: "ARN",
     #     name: "SmallBoundedString",
@@ -2042,6 +2043,7 @@ module Aws::Drs
     #         device_name: "BoundedString",
     #         iops: 1,
     #         is_boot_disk: false,
+    #         optimized_staging_disk_type: "AUTO", # accepts AUTO, GP2, GP3, IO1, SC1, ST1, STANDARD
     #         staging_disk_type: "AUTO", # accepts AUTO, GP2, GP3, IO1, SC1, ST1, STANDARD
     #         throughput: 1,
     #       },
@@ -2062,7 +2064,7 @@ module Aws::Drs
     #   resp.bandwidth_throttling #=> Integer
     #   resp.create_public_ip #=> Boolean
     #   resp.data_plane_routing #=> String, one of "PRIVATE_IP", "PUBLIC_IP"
-    #   resp.default_large_staging_disk_type #=> String, one of "GP2", "GP3", "ST1"
+    #   resp.default_large_staging_disk_type #=> String, one of "GP2", "GP3", "ST1", "AUTO"
     #   resp.ebs_encryption #=> String, one of "DEFAULT", "CUSTOM"
     #   resp.ebs_encryption_key_arn #=> String
     #   resp.name #=> String
@@ -2076,6 +2078,7 @@ module Aws::Drs
     #   resp.replicated_disks[0].device_name #=> String
     #   resp.replicated_disks[0].iops #=> Integer
     #   resp.replicated_disks[0].is_boot_disk #=> Boolean
+    #   resp.replicated_disks[0].optimized_staging_disk_type #=> String, one of "AUTO", "GP2", "GP3", "IO1", "SC1", "ST1", "STANDARD"
     #   resp.replicated_disks[0].staging_disk_type #=> String, one of "AUTO", "GP2", "GP3", "IO1", "SC1", "ST1", "STANDARD"
     #   resp.replicated_disks[0].throughput #=> Integer
     #   resp.replication_server_instance_type #=> String
@@ -2176,7 +2179,7 @@ module Aws::Drs
     #     bandwidth_throttling: 1,
     #     create_public_ip: false,
     #     data_plane_routing: "PRIVATE_IP", # accepts PRIVATE_IP, PUBLIC_IP
-    #     default_large_staging_disk_type: "GP2", # accepts GP2, GP3, ST1
+    #     default_large_staging_disk_type: "GP2", # accepts GP2, GP3, ST1, AUTO
     #     ebs_encryption: "DEFAULT", # accepts DEFAULT, CUSTOM
     #     ebs_encryption_key_arn: "ARN",
     #     pit_policy: [
@@ -2205,7 +2208,7 @@ module Aws::Drs
     #   resp.bandwidth_throttling #=> Integer
     #   resp.create_public_ip #=> Boolean
     #   resp.data_plane_routing #=> String, one of "PRIVATE_IP", "PUBLIC_IP"
-    #   resp.default_large_staging_disk_type #=> String, one of "GP2", "GP3", "ST1"
+    #   resp.default_large_staging_disk_type #=> String, one of "GP2", "GP3", "ST1", "AUTO"
     #   resp.ebs_encryption #=> String, one of "DEFAULT", "CUSTOM"
     #   resp.ebs_encryption_key_arn #=> String
     #   resp.pit_policy #=> Array
@@ -2247,7 +2250,7 @@ module Aws::Drs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-drs'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
