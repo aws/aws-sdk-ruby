@@ -2000,6 +2000,114 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Creates an edge deployment plan, consisting of multiple stages. Each
+    # stage may have a different deployment configuration and devices.
+    #
+    # @option params [required, String] :edge_deployment_plan_name
+    #   The name of the edge deployment plan.
+    #
+    # @option params [required, Array<Types::EdgeDeploymentModelConfig>] :model_configs
+    #   List of models associated with the edge deployment plan.
+    #
+    # @option params [required, String] :device_fleet_name
+    #   The device fleet used for this edge deployment plan.
+    #
+    # @option params [Array<Types::DeploymentStage>] :stages
+    #   List of stages of the edge deployment plan. The number of stages is
+    #   limited to 10 per deployment.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   List of tags with which to tag the edge deployment plan.
+    #
+    # @return [Types::CreateEdgeDeploymentPlanResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateEdgeDeploymentPlanResponse#edge_deployment_plan_arn #edge_deployment_plan_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_edge_deployment_plan({
+    #     edge_deployment_plan_name: "EntityName", # required
+    #     model_configs: [ # required
+    #       {
+    #         model_handle: "EntityName", # required
+    #         edge_packaging_job_name: "EntityName", # required
+    #       },
+    #     ],
+    #     device_fleet_name: "EntityName", # required
+    #     stages: [
+    #       {
+    #         stage_name: "EntityName", # required
+    #         device_selection_config: { # required
+    #           device_subset_type: "PERCENTAGE", # required, accepts PERCENTAGE, SELECTION, NAMECONTAINS
+    #           percentage: 1,
+    #           device_names: ["DeviceName"],
+    #           device_name_contains: "DeviceName",
+    #         },
+    #         deployment_config: {
+    #           failure_handling_policy: "ROLLBACK_ON_FAILURE", # required, accepts ROLLBACK_ON_FAILURE, DO_NOTHING
+    #         },
+    #       },
+    #     ],
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.edge_deployment_plan_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateEdgeDeploymentPlan AWS API Documentation
+    #
+    # @overload create_edge_deployment_plan(params = {})
+    # @param [Hash] params ({})
+    def create_edge_deployment_plan(params = {}, options = {})
+      req = build_request(:create_edge_deployment_plan, params)
+      req.send_request(options)
+    end
+
+    # Creates a new stage in an existing edge deployment plan.
+    #
+    # @option params [required, String] :edge_deployment_plan_name
+    #   The name of the edge deployment plan.
+    #
+    # @option params [required, Array<Types::DeploymentStage>] :stages
+    #   List of stages to be added to the edge deployment plan.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_edge_deployment_stage({
+    #     edge_deployment_plan_name: "EntityName", # required
+    #     stages: [ # required
+    #       {
+    #         stage_name: "EntityName", # required
+    #         device_selection_config: { # required
+    #           device_subset_type: "PERCENTAGE", # required, accepts PERCENTAGE, SELECTION, NAMECONTAINS
+    #           percentage: 1,
+    #           device_names: ["DeviceName"],
+    #           device_name_contains: "DeviceName",
+    #         },
+    #         deployment_config: {
+    #           failure_handling_policy: "ROLLBACK_ON_FAILURE", # required, accepts ROLLBACK_ON_FAILURE, DO_NOTHING
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateEdgeDeploymentStage AWS API Documentation
+    #
+    # @overload create_edge_deployment_stage(params = {})
+    # @param [Hash] params ({})
+    def create_edge_deployment_stage(params = {}, options = {})
+      req = build_request(:create_edge_deployment_stage, params)
+      req.send_request(options)
+    end
+
     # Starts a SageMaker Edge Manager model packaging job. Edge Manager will
     # use the model artifacts from the Amazon Simple Storage Service bucket
     # that you specify. After the model has been packaged, Amazon SageMaker
@@ -7144,6 +7252,57 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Deletes an edge deployment plan if (and only if) all the stages in the
+    # plan are inactive or there are no stages in the plan.
+    #
+    # @option params [required, String] :edge_deployment_plan_name
+    #   The name of the edge deployment plan to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_edge_deployment_plan({
+    #     edge_deployment_plan_name: "EntityName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteEdgeDeploymentPlan AWS API Documentation
+    #
+    # @overload delete_edge_deployment_plan(params = {})
+    # @param [Hash] params ({})
+    def delete_edge_deployment_plan(params = {}, options = {})
+      req = build_request(:delete_edge_deployment_plan, params)
+      req.send_request(options)
+    end
+
+    # Delete a stage in an edge deployment plan if (and only if) the stage
+    # is inactive.
+    #
+    # @option params [required, String] :edge_deployment_plan_name
+    #   The name of the edge deployment plan from which the stage will be
+    #   deleted.
+    #
+    # @option params [required, String] :stage_name
+    #   The name of the stage.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_edge_deployment_stage({
+    #     edge_deployment_plan_name: "EntityName", # required
+    #     stage_name: "EntityName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteEdgeDeploymentStage AWS API Documentation
+    #
+    # @overload delete_edge_deployment_stage(params = {})
+    # @param [Hash] params ({})
+    def delete_edge_deployment_stage(params = {}, options = {})
+      req = build_request(:delete_edge_deployment_stage, params)
+      req.send_request(options)
+    end
+
     # Deletes an endpoint. SageMaker frees up all of the resources that were
     # deployed when the endpoint was created.
     #
@@ -8878,6 +9037,78 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def describe_domain(params = {}, options = {})
       req = build_request(:describe_domain, params)
+      req.send_request(options)
+    end
+
+    # Describes an edge deployment plan with deployment status per stage.
+    #
+    # @option params [required, String] :edge_deployment_plan_name
+    #   The name of the deployment plan to describe.
+    #
+    # @option params [String] :next_token
+    #   If the edge deployment plan has enough stages to require tokening,
+    #   then this is the response from the last list of stages returned.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to select (50 by default).
+    #
+    # @return [Types::DescribeEdgeDeploymentPlanResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeEdgeDeploymentPlanResponse#edge_deployment_plan_arn #edge_deployment_plan_arn} => String
+    #   * {Types::DescribeEdgeDeploymentPlanResponse#edge_deployment_plan_name #edge_deployment_plan_name} => String
+    #   * {Types::DescribeEdgeDeploymentPlanResponse#model_configs #model_configs} => Array&lt;Types::EdgeDeploymentModelConfig&gt;
+    #   * {Types::DescribeEdgeDeploymentPlanResponse#device_fleet_name #device_fleet_name} => String
+    #   * {Types::DescribeEdgeDeploymentPlanResponse#edge_deployment_success #edge_deployment_success} => Integer
+    #   * {Types::DescribeEdgeDeploymentPlanResponse#edge_deployment_pending #edge_deployment_pending} => Integer
+    #   * {Types::DescribeEdgeDeploymentPlanResponse#edge_deployment_failed #edge_deployment_failed} => Integer
+    #   * {Types::DescribeEdgeDeploymentPlanResponse#stages #stages} => Array&lt;Types::DeploymentStageStatusSummary&gt;
+    #   * {Types::DescribeEdgeDeploymentPlanResponse#next_token #next_token} => String
+    #   * {Types::DescribeEdgeDeploymentPlanResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeEdgeDeploymentPlanResponse#last_modified_time #last_modified_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_edge_deployment_plan({
+    #     edge_deployment_plan_name: "EntityName", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.edge_deployment_plan_arn #=> String
+    #   resp.edge_deployment_plan_name #=> String
+    #   resp.model_configs #=> Array
+    #   resp.model_configs[0].model_handle #=> String
+    #   resp.model_configs[0].edge_packaging_job_name #=> String
+    #   resp.device_fleet_name #=> String
+    #   resp.edge_deployment_success #=> Integer
+    #   resp.edge_deployment_pending #=> Integer
+    #   resp.edge_deployment_failed #=> Integer
+    #   resp.stages #=> Array
+    #   resp.stages[0].stage_name #=> String
+    #   resp.stages[0].device_selection_config.device_subset_type #=> String, one of "PERCENTAGE", "SELECTION", "NAMECONTAINS"
+    #   resp.stages[0].device_selection_config.percentage #=> Integer
+    #   resp.stages[0].device_selection_config.device_names #=> Array
+    #   resp.stages[0].device_selection_config.device_names[0] #=> String
+    #   resp.stages[0].device_selection_config.device_name_contains #=> String
+    #   resp.stages[0].deployment_config.failure_handling_policy #=> String, one of "ROLLBACK_ON_FAILURE", "DO_NOTHING"
+    #   resp.stages[0].deployment_status.stage_status #=> String, one of "CREATING", "READYTODEPLOY", "STARTING", "INPROGRESS", "DEPLOYED", "FAILED", "STOPPING", "STOPPED"
+    #   resp.stages[0].deployment_status.edge_deployment_success_in_stage #=> Integer
+    #   resp.stages[0].deployment_status.edge_deployment_pending_in_stage #=> Integer
+    #   resp.stages[0].deployment_status.edge_deployment_failed_in_stage #=> Integer
+    #   resp.stages[0].deployment_status.edge_deployment_status_message #=> String
+    #   resp.stages[0].deployment_status.edge_deployment_stage_start_time #=> Time
+    #   resp.next_token #=> String
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEdgeDeploymentPlan AWS API Documentation
+    #
+    # @overload describe_edge_deployment_plan(params = {})
+    # @param [Hash] params ({})
+    def describe_edge_deployment_plan(params = {}, options = {})
+      req = build_request(:describe_edge_deployment_plan, params)
       req.send_request(options)
     end
 
@@ -13121,6 +13352,85 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Lists all edge deployment plans.
+    #
+    # @option params [String] :next_token
+    #   The response from the last list when returning a list large enough to
+    #   need tokening.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to select (50 by default).
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
+    #   Selects edge deployment plans created after this time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
+    #   Selects edge deployment plans created before this time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :last_modified_time_after
+    #   Selects edge deployment plans that were last updated after this time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :last_modified_time_before
+    #   Selects edge deployment plans that were last updated before this time.
+    #
+    # @option params [String] :name_contains
+    #   Selects edge deployment plans with names containing this name.
+    #
+    # @option params [String] :device_fleet_name_contains
+    #   Selects edge deployment plans with a device fleet name containing this
+    #   name.
+    #
+    # @option params [String] :sort_by
+    #   The column by which to sort the edge deployment plans. Can be one of
+    #   `NAME`, `DEVICEFLEETNAME`, `CREATIONTIME`, `LASTMODIFIEDTIME`.
+    #
+    # @option params [String] :sort_order
+    #   The direction of the sorting (ascending or descending).
+    #
+    # @return [Types::ListEdgeDeploymentPlansResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEdgeDeploymentPlansResponse#edge_deployment_plan_summaries #edge_deployment_plan_summaries} => Array&lt;Types::EdgeDeploymentPlanSummary&gt;
+    #   * {Types::ListEdgeDeploymentPlansResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_edge_deployment_plans({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     creation_time_after: Time.now,
+    #     creation_time_before: Time.now,
+    #     last_modified_time_after: Time.now,
+    #     last_modified_time_before: Time.now,
+    #     name_contains: "NameContains",
+    #     device_fleet_name_contains: "NameContains",
+    #     sort_by: "NAME", # accepts NAME, DEVICE_FLEET_NAME, CREATION_TIME, LAST_MODIFIED_TIME
+    #     sort_order: "Ascending", # accepts Ascending, Descending
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.edge_deployment_plan_summaries #=> Array
+    #   resp.edge_deployment_plan_summaries[0].edge_deployment_plan_arn #=> String
+    #   resp.edge_deployment_plan_summaries[0].edge_deployment_plan_name #=> String
+    #   resp.edge_deployment_plan_summaries[0].device_fleet_name #=> String
+    #   resp.edge_deployment_plan_summaries[0].edge_deployment_success #=> Integer
+    #   resp.edge_deployment_plan_summaries[0].edge_deployment_pending #=> Integer
+    #   resp.edge_deployment_plan_summaries[0].edge_deployment_failed #=> Integer
+    #   resp.edge_deployment_plan_summaries[0].creation_time #=> Time
+    #   resp.edge_deployment_plan_summaries[0].last_modified_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListEdgeDeploymentPlans AWS API Documentation
+    #
+    # @overload list_edge_deployment_plans(params = {})
+    # @param [Hash] params ({})
+    def list_edge_deployment_plans(params = {}, options = {})
+      req = build_request(:list_edge_deployment_plans, params)
+      req.send_request(options)
+    end
+
     # Returns a list of edge packaging jobs.
     #
     # @option params [String] :next_token
@@ -15501,6 +15811,67 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Lists devices allocated to the stage, containing detailed device
+    # information and deployment status.
+    #
+    # @option params [String] :next_token
+    #   The response from the last list when returning a list large enough to
+    #   neeed tokening.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of requests to select.
+    #
+    # @option params [required, String] :edge_deployment_plan_name
+    #   The name of the edge deployment plan.
+    #
+    # @option params [Boolean] :exclude_devices_deployed_in_other_stage
+    #   Toggle for excluding devices deployed in other stages.
+    #
+    # @option params [required, String] :stage_name
+    #   The name of the stage in the deployment.
+    #
+    # @return [Types::ListStageDevicesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListStageDevicesResponse#device_deployment_summaries #device_deployment_summaries} => Array&lt;Types::DeviceDeploymentSummary&gt;
+    #   * {Types::ListStageDevicesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_stage_devices({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     edge_deployment_plan_name: "EntityName", # required
+    #     exclude_devices_deployed_in_other_stage: false,
+    #     stage_name: "EntityName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.device_deployment_summaries #=> Array
+    #   resp.device_deployment_summaries[0].edge_deployment_plan_arn #=> String
+    #   resp.device_deployment_summaries[0].edge_deployment_plan_name #=> String
+    #   resp.device_deployment_summaries[0].stage_name #=> String
+    #   resp.device_deployment_summaries[0].deployed_stage_name #=> String
+    #   resp.device_deployment_summaries[0].device_fleet_name #=> String
+    #   resp.device_deployment_summaries[0].device_name #=> String
+    #   resp.device_deployment_summaries[0].device_arn #=> String
+    #   resp.device_deployment_summaries[0].device_deployment_status #=> String, one of "READYTODEPLOY", "INPROGRESS", "DEPLOYED", "FAILED", "STOPPING", "STOPPED"
+    #   resp.device_deployment_summaries[0].device_deployment_status_message #=> String
+    #   resp.device_deployment_summaries[0].description #=> String
+    #   resp.device_deployment_summaries[0].deployment_start_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListStageDevices AWS API Documentation
+    #
+    # @overload list_stage_devices(params = {})
+    # @param [Hash] params ({})
+    def list_stage_devices(params = {}, options = {})
+      req = build_request(:list_stage_devices, params)
+      req.send_request(options)
+    end
+
     # Lists the Studio Lifecycle Configurations in your Amazon Web Services
     # Account.
     #
@@ -17582,6 +17953,32 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Starts a stage in an edge deployment plan.
+    #
+    # @option params [required, String] :edge_deployment_plan_name
+    #   The name of the edge deployment plan to start.
+    #
+    # @option params [required, String] :stage_name
+    #   The name of the stage to start.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_edge_deployment_stage({
+    #     edge_deployment_plan_name: "EntityName", # required
+    #     stage_name: "EntityName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StartEdgeDeploymentStage AWS API Documentation
+    #
+    # @overload start_edge_deployment_stage(params = {})
+    # @param [Hash] params ({})
+    def start_edge_deployment_stage(params = {}, options = {})
+      req = build_request(:start_edge_deployment_stage, params)
+      req.send_request(options)
+    end
+
     # Starts a previously stopped monitoring schedule.
     #
     # <note markdown="1"> By default, when you successfully create a new schedule, the status of
@@ -17746,6 +18143,32 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def stop_compilation_job(params = {}, options = {})
       req = build_request(:stop_compilation_job, params)
+      req.send_request(options)
+    end
+
+    # Stops a stage in an edge deployment plan.
+    #
+    # @option params [required, String] :edge_deployment_plan_name
+    #   The name of the edge deployment plan to stop.
+    #
+    # @option params [required, String] :stage_name
+    #   The name of the stage to stop.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_edge_deployment_stage({
+    #     edge_deployment_plan_name: "EntityName", # required
+    #     stage_name: "EntityName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopEdgeDeploymentStage AWS API Documentation
+    #
+    # @overload stop_edge_deployment_stage(params = {})
+    # @param [Hash] params ({})
+    def stop_edge_deployment_stage(params = {}, options = {})
+      req = build_request(:stop_edge_deployment_stage, params)
       req.send_request(options)
     end
 
@@ -19846,7 +20269,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.131.0'
+      context[:gem_version] = '1.132.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

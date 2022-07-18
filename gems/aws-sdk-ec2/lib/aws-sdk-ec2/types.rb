@@ -599,9 +599,12 @@ module Aws::EC2
     # IPAM only discovers and monitors resources in the Amazon Web Services
     # Regions you select as operating Regions.
     #
-    # For more information about operating Regions, see [Create an
-    # IPAM](/vpc/latest/ipam/create-ipam.html) in the *Amazon VPC IPAM User
-    # Guide*.
+    # For more information about operating Regions, see [Create an IPAM][1]
+    # in the *Amazon VPC IPAM User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/ipam/create-ipam.html
     #
     # @note When making an API call, you may pass AddIpamOperatingRegion
     #   data as a hash:
@@ -2478,31 +2481,43 @@ module Aws::EC2
     # @!attribute [rw] ipv_4_ipam_pool_id
     #   Associate a CIDR allocated from an IPv4 IPAM pool to a VPC. For more
     #   information about Amazon VPC IP Address Manager (IPAM), see [What is
-    #   IPAM?](/vpc/latest/ipam/what-is-it-ipam.html) in the *Amazon VPC
-    #   IPAM User Guide*.
+    #   IPAM?][1] in the *Amazon VPC IPAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html
     #   @return [String]
     #
     # @!attribute [rw] ipv_4_netmask_length
     #   The netmask length of the IPv4 CIDR you would like to associate from
     #   an Amazon VPC IP Address Manager (IPAM) pool. For more information
-    #   about IPAM, see [What is
-    #   IPAM?](/vpc/latest/ipam/what-is-it-ipam.html) in the *Amazon VPC
-    #   IPAM User Guide*.
+    #   about IPAM, see [What is IPAM?][1] in the *Amazon VPC IPAM User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html
     #   @return [Integer]
     #
     # @!attribute [rw] ipv_6_ipam_pool_id
     #   Associates a CIDR allocated from an IPv6 IPAM pool to a VPC. For
     #   more information about Amazon VPC IP Address Manager (IPAM), see
-    #   [What is IPAM?](/vpc/latest/ipam/what-is-it-ipam.html) in the
-    #   *Amazon VPC IPAM User Guide*.
+    #   [What is IPAM?][1] in the *Amazon VPC IPAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html
     #   @return [String]
     #
     # @!attribute [rw] ipv_6_netmask_length
     #   The netmask length of the IPv6 CIDR you would like to associate from
     #   an Amazon VPC IP Address Manager (IPAM) pool. For more information
-    #   about IPAM, see [What is
-    #   IPAM?](/vpc/latest/ipam/what-is-it-ipam.html) in the *Amazon VPC
-    #   IPAM User Guide*.
+    #   about IPAM, see [What is IPAM?][1] in the *Amazon VPC IPAM User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateVpcCidrBlockRequest AWS API Documentation
@@ -8911,8 +8926,11 @@ module Aws::EC2
     #   Services Regions you select as operating Regions.
     #
     #   For more information about operating Regions, see [Create an
-    #   IPAM](/vpc/latest/ipam/create-ipam.html) in the *Amazon VPC IPAM
-    #   User Guide*.
+    #   IPAM][1] in the *Amazon VPC IPAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/ipam/create-ipam.html
     #   @return [Array<Types::AddIpamOperatingRegion>]
     #
     # @!attribute [rw] tag_specifications
@@ -9649,13 +9667,17 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] launch_template_id
-    #   The ID of the launch template. You must specify either the launch
-    #   template ID or launch template name in the request.
+    #   The ID of the launch template.
+    #
+    #   You must specify either the `LaunchTemplateId` or the
+    #   `LaunchTemplateName`, but not both.
     #   @return [String]
     #
     # @!attribute [rw] launch_template_name
-    #   The name of the launch template. You must specify either the launch
-    #   template ID or launch template name in the request.
+    #   The name of the launch template.
+    #
+    #   You must specify the `LaunchTemplateName` or the `LaunchTemplateId`,
+    #   but not both.
     #   @return [String]
     #
     # @!attribute [rw] source_version
@@ -12677,6 +12699,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] options
+    #   Requests a transit gateway peering attachment.
     #   @return [Types::CreateTransitGatewayPeeringAttachmentRequestOptions]
     #
     # @!attribute [rw] tag_specifications
@@ -12704,6 +12727,9 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes whether dynamic routing is enabled or disabled for the
+    # transit gateway peering request.
+    #
     # @note When making an API call, you may pass CreateTransitGatewayPeeringAttachmentRequestOptions
     #   data as a hash:
     #
@@ -12712,6 +12738,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] dynamic_routing
+    #   Indicates whether dynamic routing is enabled or disabled.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTransitGatewayPeeringAttachmentRequestOptions AWS API Documentation
@@ -13975,17 +14002,23 @@ module Aws::EC2
     #
     # @!attribute [rw] ipv_4_ipam_pool_id
     #   The ID of an IPv4 IPAM pool you want to use for allocating this
-    #   VPC's CIDR. For more information, see [What is
-    #   IPAM?](/vpc/latest/ipam/what-is-it-ipam.html) in the *Amazon VPC
-    #   IPAM User Guide*.
+    #   VPC's CIDR. For more information, see [What is IPAM?][1] in the
+    #   *Amazon VPC IPAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html
     #   @return [String]
     #
     # @!attribute [rw] ipv_4_netmask_length
     #   The netmask length of the IPv4 CIDR you want to allocate to this VPC
     #   from an Amazon VPC IP Address Manager (IPAM) pool. For more
-    #   information about IPAM, see [What is
-    #   IPAM?](/vpc/latest/ipam/what-is-it-ipam.html) in the *Amazon VPC
+    #   information about IPAM, see [What is IPAM?][1] in the *Amazon VPC
     #   IPAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html
     #   @return [Integer]
     #
     # @!attribute [rw] ipv_6_ipam_pool_id
@@ -13994,17 +14027,23 @@ module Aws::EC2
     #   your IP address management workflows including assigning, tracking,
     #   troubleshooting, and auditing IP addresses across Amazon Web
     #   Services Regions and accounts throughout your Amazon Web Services
-    #   Organization. For more information, see [What is
-    #   IPAM?](/vpc/latest/ipam/what-is-it-ipam.html) in the *Amazon VPC
-    #   IPAM User Guide*.
+    #   Organization. For more information, see [What is IPAM?][1] in the
+    #   *Amazon VPC IPAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html
     #   @return [String]
     #
     # @!attribute [rw] ipv_6_netmask_length
     #   The netmask length of the IPv6 CIDR you want to allocate to this VPC
     #   from an Amazon VPC IP Address Manager (IPAM) pool. For more
-    #   information about IPAM, see [What is
-    #   IPAM?](/vpc/latest/ipam/what-is-it-ipam.html) in the *Amazon VPC
+    #   information about IPAM, see [What is IPAM?][1] in the *Amazon VPC
     #   IPAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html
     #   @return [Integer]
     #
     # @!attribute [rw] dry_run
@@ -14322,12 +14361,12 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the credit option for CPU usage of a T2, T3, or T3a
-    # instance.
+    # Describes the credit option for CPU usage of a T instance.
     #
     # @!attribute [rw] cpu_credits
-    #   The credit option for CPU usage of a T2, T3, or T3a instance. Valid
-    #   values are `standard` and `unlimited`.
+    #   The credit option for CPU usage of a T instance.
+    #
+    #   Valid values: `standard` \| `unlimited`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreditSpecification AWS API Documentation
@@ -14338,7 +14377,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # The credit option for CPU usage of a T2, T3, or T3a instance.
+    # The credit option for CPU usage of a T instance.
     #
     # @note When making an API call, you may pass CreditSpecificationRequest
     #   data as a hash:
@@ -14348,8 +14387,9 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] cpu_credits
-    #   The credit option for CPU usage of a T2, T3, or T3a instance. Valid
-    #   values are `standard` and `unlimited`.
+    #   The credit option for CPU usage of a T instance.
+    #
+    #   Valid values: `standard` \| `unlimited`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreditSpecificationRequest AWS API Documentation
@@ -15123,13 +15163,17 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] launch_template_id
-    #   The ID of the launch template. You must specify either the launch
-    #   template ID or launch template name in the request.
+    #   The ID of the launch template.
+    #
+    #   You must specify either the `LaunchTemplateId` or the
+    #   `LaunchTemplateName`, but not both.
     #   @return [String]
     #
     # @!attribute [rw] launch_template_name
-    #   The name of the launch template. You must specify either the launch
-    #   template ID or launch template name in the request.
+    #   The name of the launch template.
+    #
+    #   You must specify either the `LaunchTemplateName` or the
+    #   `LaunchTemplateId`, but not both.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteLaunchTemplateRequest AWS API Documentation
@@ -15172,13 +15216,17 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] launch_template_id
-    #   The ID of the launch template. You must specify either the launch
-    #   template ID or launch template name in the request.
+    #   The ID of the launch template.
+    #
+    #   You must specify either the `LaunchTemplateId` or the
+    #   `LaunchTemplateName`, but not both.
     #   @return [String]
     #
     # @!attribute [rw] launch_template_name
-    #   The name of the launch template. You must specify either the launch
-    #   template ID or launch template name in the request.
+    #   The name of the launch template.
+    #
+    #   You must specify either the `LaunchTemplateName` or the
+    #   `LaunchTemplateId`, but not both.
     #   @return [String]
     #
     # @!attribute [rw] versions
@@ -22579,19 +22627,25 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] launch_template_id
-    #   The ID of the launch template. To describe one or more versions of a
-    #   specified launch template, you must specify either the launch
-    #   template ID or the launch template name in the request. To describe
-    #   all the latest or default launch template versions in your account,
-    #   you must omit this parameter.
+    #   The ID of the launch template.
+    #
+    #   To describe one or more versions of a specified launch template, you
+    #   must specify either the `LaunchTemplateId` or the
+    #   `LaunchTemplateName`, but not both.
+    #
+    #   To describe all the latest or default launch template versions in
+    #   your account, you must omit this parameter.
     #   @return [String]
     #
     # @!attribute [rw] launch_template_name
-    #   The name of the launch template. To describe one or more versions of
-    #   a specified launch template, you must specify either the launch
-    #   template ID or the launch template name in the request. To describe
-    #   all the latest or default launch template versions in your account,
-    #   you must omit this parameter.
+    #   The name of the launch template.
+    #
+    #   To describe one or more versions of a specified launch template, you
+    #   must specify either the `LaunchTemplateName` or the
+    #   `LaunchTemplateId`, but not both.
+    #
+    #   To describe all the latest or default launch template versions in
+    #   your account, you must omit this parameter.
     #   @return [String]
     #
     # @!attribute [rw] versions
@@ -22606,7 +22660,7 @@ module Aws::EC2
     #   the latest version, the valid value is `$Latest`. To describe all
     #   launch templates in your account that are defined as the default
     #   version, the valid value is `$Default`. You can specify `$Latest`
-    #   and `$Default` in the same call. You cannot specify numbers.
+    #   and `$Default` in the same request. You cannot specify numbers.
     #   @return [Array<String>]
     #
     # @!attribute [rw] min_version
@@ -34438,7 +34492,12 @@ module Aws::EC2
     #
     # @!attribute [rw] max_price
     #   The maximum price per unit hour that you are willing to pay for a
-    #   Spot Instance.
+    #   Spot Instance. We do not recommend using this parameter because it
+    #   can lead to increased interruptions. If you do not specify this
+    #   parameter, you will pay the current Spot price.
+    #
+    #   If you specify a maximum price, your instances will be interrupted
+    #   more frequently than if you do not specify this parameter.
     #   @return [String]
     #
     # @!attribute [rw] subnet_id
@@ -34584,7 +34643,12 @@ module Aws::EC2
     #
     # @!attribute [rw] max_price
     #   The maximum price per unit hour that you are willing to pay for a
-    #   Spot Instance.
+    #   Spot Instance. We do not recommend using this parameter because it
+    #   can lead to increased interruptions. If you do not specify this
+    #   parameter, you will pay the current Spot price.
+    #
+    #   If you specify a maximum price, your instances will be interrupted
+    #   more frequently than if you do not specify this parameter.
     #   @return [String]
     #
     # @!attribute [rw] subnet_id
@@ -34651,11 +34715,13 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the Amazon EC2 launch template and the launch template
-    # version that can be used by a Spot Fleet request to configure Amazon
-    # EC2 instances. For information about launch templates, see [Launching
-    # an instance from a launch template][1] in the *Amazon EC2 User Guide
-    # for Linux Instances*.
+    # The Amazon EC2 launch template that can be used by a Spot Fleet to
+    # configure Amazon EC2 instances. You must specify either the ID or name
+    # of the launch template in the request, but not both.
+    #
+    # For information about launch templates, see [Launch an instance from a
+    # launch template][1] in the *Amazon EC2 User Guide for Linux
+    # Instances*.
     #
     #
     #
@@ -34671,13 +34737,17 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] launch_template_id
-    #   The ID of the launch template. If you specify the template ID, you
-    #   can't specify the template name.
+    #   The ID of the launch template.
+    #
+    #   You must specify the `LaunchTemplateId` or the `LaunchTemplateName`,
+    #   but not both.
     #   @return [String]
     #
     # @!attribute [rw] launch_template_name
-    #   The name of the launch template. If you specify the template name,
-    #   you can't specify the template ID.
+    #   The name of the launch template.
+    #
+    #   You must specify the `LaunchTemplateName` or the `LaunchTemplateId`,
+    #   but not both.
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -34701,10 +34771,12 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the Amazon EC2 launch template and the launch template
-    # version that can be used by an EC2 Fleet to configure Amazon EC2
-    # instances. For information about launch templates, see [Launching an
-    # instance from a launch template][1] in the *Amazon EC2 User Guide*.
+    # The Amazon EC2 launch template that can be used by an EC2 Fleet to
+    # configure Amazon EC2 instances. You must specify either the ID or name
+    # of the launch template in the request, but not both.
+    #
+    # For information about launch templates, see [Launch an instance from a
+    # launch template][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -34720,13 +34792,17 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] launch_template_id
-    #   The ID of the launch template. If you specify the template ID, you
-    #   can't specify the template name.
+    #   The ID of the launch template.
+    #
+    #   You must specify the `LaunchTemplateId` or the `LaunchTemplateName`,
+    #   but not both.
     #   @return [String]
     #
     # @!attribute [rw] launch_template_name
-    #   The name of the launch template. If you specify the template name,
-    #   you can't specify the template ID.
+    #   The name of the launch template.
+    #
+    #   You must specify the `LaunchTemplateName` or the `LaunchTemplateId`,
+    #   but not both.
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -41861,9 +41937,10 @@ module Aws::EC2
     # @!attribute [rw] spot_max_price_percentage_over_lowest_price
     #   The price protection threshold for Spot Instances. This is the
     #   maximum you’ll pay for a Spot Instance, expressed as a percentage
-    #   above the cheapest M, C, or R instance type with your specified
-    #   attributes. When Amazon EC2 selects instance types with your
-    #   attributes, it excludes instance types priced above your threshold.
+    #   above the least expensive current generation M, C, or R instance
+    #   type with your specified attributes. When Amazon EC2 selects
+    #   instance types with your attributes, it excludes instance types
+    #   priced above your threshold.
     #
     #   The parameter accepts an integer, which Amazon EC2 interprets as a
     #   percentage.
@@ -41891,10 +41968,10 @@ module Aws::EC2
     # @!attribute [rw] on_demand_max_price_percentage_over_lowest_price
     #   The price protection threshold for On-Demand Instances. This is the
     #   maximum you’ll pay for an On-Demand Instance, expressed as a
-    #   percentage above the cheapest M, C, or R instance type with your
-    #   specified attributes. When Amazon EC2 selects instance types with
-    #   your attributes, it excludes instance types priced above your
-    #   threshold.
+    #   percentage above the least expensive current generation M, C, or R
+    #   instance type with your specified attributes. When Amazon EC2
+    #   selects instance types with your attributes, it excludes instance
+    #   types priced above your threshold.
     #
     #   The parameter accepts an integer, which Amazon EC2 interprets as a
     #   percentage.
@@ -42261,9 +42338,10 @@ module Aws::EC2
     # @!attribute [rw] spot_max_price_percentage_over_lowest_price
     #   The price protection threshold for Spot Instance. This is the
     #   maximum you’ll pay for an Spot Instance, expressed as a percentage
-    #   above the cheapest M, C, or R instance type with your specified
-    #   attributes. When Amazon EC2 selects instance types with your
-    #   attributes, it excludes instance types priced above your threshold.
+    #   above the least expensive current generation M, C, or R instance
+    #   type with your specified attributes. When Amazon EC2 selects
+    #   instance types with your attributes, it excludes instance types
+    #   priced above your threshold.
     #
     #   The parameter accepts an integer, which Amazon EC2 interprets as a
     #   percentage.
@@ -42291,10 +42369,10 @@ module Aws::EC2
     # @!attribute [rw] on_demand_max_price_percentage_over_lowest_price
     #   The price protection threshold for On-Demand Instances. This is the
     #   maximum you’ll pay for an On-Demand Instance, expressed as a
-    #   percentage above the cheapest M, C, or R instance type with your
-    #   specified attributes. When Amazon EC2 selects instance types with
-    #   your attributes, it excludes instance types priced above your
-    #   threshold.
+    #   percentage above the least expensive current generation M, C, or R
+    #   instance type with your specified attributes. When Amazon EC2
+    #   selects instance types with your attributes, it excludes instance
+    #   types priced above your threshold.
     #
     #   The parameter accepts an integer, which Amazon EC2 interprets as a
     #   percentage.
@@ -43309,9 +43387,12 @@ module Aws::EC2
     # management workflows including assigning, tracking, troubleshooting,
     # and auditing IP addresses across Amazon Web Services Regions and
     # accounts throughout your Amazon Web Services Organization. For more
-    # information, see [What is
-    # IPAM?](/vpc/latest/ipam/what-is-it-ipam.html) in the *Amazon VPC IPAM
-    # User Guide*.
+    # information, see [What is IPAM?][1] in the *Amazon VPC IPAM User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html
     #
     # @!attribute [rw] owner_id
     #   The Amazon Web Services account ID of the owner of the IPAM.
@@ -43339,9 +43420,12 @@ module Aws::EC2
     #
     # @!attribute [rw] scope_count
     #   The number of scopes in the IPAM. The scope quota is 5. For more
-    #   information on quotas, see [Quotas in
-    #   IPAM](/vpc/latest/ipam/quotas-ipam.html) in the *Amazon VPC IPAM
-    #   User Guide*.
+    #   information on quotas, see [Quotas in IPAM][1] in the *Amazon VPC
+    #   IPAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/ipam/quotas-ipam.html
     #   @return [Integer]
     #
     # @!attribute [rw] description
@@ -43355,8 +43439,11 @@ module Aws::EC2
     #   Services Regions you select as operating Regions.
     #
     #   For more information about operating Regions, see [Create an
-    #   IPAM](/vpc/latest/ipam/create-ipam.html) in the *Amazon VPC IPAM
-    #   User Guide*.
+    #   IPAM][1] in the *Amazon VPC IPAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/ipam/create-ipam.html
     #   @return [Array<Types::IpamOperatingRegion>]
     #
     # @!attribute [rw] state
@@ -43390,9 +43477,12 @@ module Aws::EC2
     end
 
     # The historical record of a CIDR within an IPAM scope. For more
-    # information, see [View the history of IP
-    # addresses](/vpc/latest/ipam/view-history-cidr-ipam.html) in the
-    # *Amazon VPC IPAM User Guide*.
+    # information, see [View the history of IP addresses][1] in the *Amazon
+    # VPC IPAM User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/ipam/view-history-cidr-ipam.html
     #
     # @!attribute [rw] resource_owner_id
     #   The ID of the resource owner.
@@ -43420,17 +43510,23 @@ module Aws::EC2
     #
     # @!attribute [rw] resource_compliance_status
     #   The compliance status of a resource. For more information on
-    #   compliance statuses, see [Monitor CIDR usage by
-    #   resource](/vpc/latest/ipam/monitor-cidr-compliance-ipam.html) in the
+    #   compliance statuses, see [Monitor CIDR usage by resource][1] in the
     #   *Amazon VPC IPAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/ipam/monitor-cidr-compliance-ipam.html
     #   @return [String]
     #
     # @!attribute [rw] resource_overlap_status
     #   The overlap status of an IPAM resource. The overlap status tells you
     #   if the CIDR for a resource overlaps with another CIDR in the scope.
     #   For more information on overlap statuses, see [Monitor CIDR usage by
-    #   resource](/vpc/latest/ipam/monitor-cidr-compliance-ipam.html) in the
-    #   *Amazon VPC IPAM User Guide*.
+    #   resource][1] in the *Amazon VPC IPAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/ipam/monitor-cidr-compliance-ipam.html
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
@@ -43500,9 +43596,12 @@ module Aws::EC2
     # IPAM only discovers and monitors resources in the Amazon Web Services
     # Regions you select as operating Regions.
     #
-    # For more information about operating Regions, see [Create an
-    # IPAM](/vpc/latest/ipam/create-ipam.html) in the *Amazon VPC IPAM User
-    # Guide*.
+    # For more information about operating Regions, see [Create an IPAM][1]
+    # in the *Amazon VPC IPAM User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/ipam/create-ipam.html
     #
     # @!attribute [rw] region_name
     #   The name of the operating Region.
@@ -43575,9 +43674,12 @@ module Aws::EC2
     #
     # @!attribute [rw] pool_depth
     #   The depth of pools in your IPAM pool. The pool depth quota is 10.
-    #   For more information, see [Quotas in
-    #   IPAM](/vpc/latest/ipam/quotas-ipam.html) in the *Amazon VPC IPAM
-    #   User Guide*.
+    #   For more information, see [Quotas in IPAM][1] in the *Amazon VPC
+    #   IPAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/ipam/quotas-ipam.html
     #   @return [Integer]
     #
     # @!attribute [rw] state
@@ -43829,31 +43931,53 @@ module Aws::EC2
     #   @return [Array<Types::IpamResourceTag>]
     #
     # @!attribute [rw] ip_usage
-    #   The IP address space in the IPAM pool that is allocated to this
-    #   resource. To convert the decimal to a percentage, multiply the
-    #   decimal by 100.
+    #   The percentage of IP address space in use. To convert the decimal to
+    #   a percentage, multiply the decimal by 100. Note the following:
+    #
+    #   * For a resources that are VPCs, this is the percentage of IP
+    #     address space in the VPC that's taken up by subnet CIDRs.
+    #
+    #   * For resources that are subnets, if the subnet has an IPv4 CIDR
+    #     provisioned to it, this is the percentage of IPv4 address space in
+    #     the subnet that's in use. If the subnet has an IPv6 CIDR
+    #     provisioned to it, the percentage of IPv6 address space in use is
+    #     not represented. The percentage of IPv6 address space in use
+    #     cannot currently be calculated.
+    #
+    #   * For resources that are public IPv4 pools, this is the percentage
+    #     of IP address space in the pool that's been allocated to Elastic
+    #     IP addresses (EIPs).
     #   @return [Float]
     #
     # @!attribute [rw] compliance_status
     #   The compliance status of the IPAM resource. For more information on
-    #   compliance statuses, see [Monitor CIDR usage by
-    #   resource](/vpc/latest/ipam/monitor-cidr-compliance-ipam.html) in the
+    #   compliance statuses, see [Monitor CIDR usage by resource][1] in the
     #   *Amazon VPC IPAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/ipam/monitor-cidr-compliance-ipam.html
     #   @return [String]
     #
     # @!attribute [rw] management_state
     #   The management state of the resource. For more information about
-    #   management states, see [Monitor CIDR usage by
-    #   resource](/vpc/latest/ipam/monitor-cidr-compliance-ipam.html) in the
+    #   management states, see [Monitor CIDR usage by resource][1] in the
     #   *Amazon VPC IPAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/ipam/monitor-cidr-compliance-ipam.html
     #   @return [String]
     #
     # @!attribute [rw] overlap_status
     #   The overlap status of an IPAM resource. The overlap status tells you
     #   if the CIDR for a resource overlaps with another CIDR in the scope.
     #   For more information on overlap statuses, see [Monitor CIDR usage by
-    #   resource](/vpc/latest/ipam/monitor-cidr-compliance-ipam.html) in the
-    #   *Amazon VPC IPAM User Guide*.
+    #   resource][1] in the *Amazon VPC IPAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/ipam/monitor-cidr-compliance-ipam.html
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
@@ -43914,9 +44038,12 @@ module Aws::EC2
     # space. Scopes enable you to reuse IP addresses across multiple
     # unconnected networks without causing IP address overlap or conflict.
     #
-    # For more information, see [How IPAM
-    # works](/vpc/latest/ipam/how-it-works-ipam.html) in the *Amazon VPC
-    # IPAM User Guide*.
+    # For more information, see [How IPAM works][1] in the *Amazon VPC IPAM
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/ipam/how-it-works-ipam.html
     #
     # @!attribute [rw] owner_id
     #   The Amazon Web Services account ID of the owner of the scope.
@@ -44854,8 +44981,8 @@ module Aws::EC2
     #
     # @!attribute [rw] threads_per_core
     #   The number of threads per CPU core. To disable multithreading for
-    #   the instance, specify a value of 1. Otherwise, specify the default
-    #   value of 2.
+    #   the instance, specify a value of `1`. Otherwise, specify the default
+    #   value of `2`.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateCpuOptionsRequest AWS API Documentation
@@ -45312,7 +45439,7 @@ module Aws::EC2
     end
 
     # The metadata options for the instance. For more information, see
-    # [Instance Metadata and User Data][1] in the *Amazon Elastic Compute
+    # [Instance metadata and user data][1] in the *Amazon Elastic Compute
     # Cloud User Guide*.
     #
     #
@@ -45401,7 +45528,7 @@ module Aws::EC2
     end
 
     # The metadata options for the instance. For more information, see
-    # [Instance Metadata and User Data][1] in the *Amazon Elastic Compute
+    # [Instance metadata and user data][1] in the *Amazon Elastic Compute
     # Cloud User Guide*.
     #
     #
@@ -45442,7 +45569,7 @@ module Aws::EC2
     #   requests. The larger the number, the further instance metadata
     #   requests can travel.
     #
-    #   Default: 1
+    #   Default: `1`
     #
     #   Possible values: Integers from 1 to 64
     #   @return [Integer]
@@ -45893,7 +46020,12 @@ module Aws::EC2
     #
     # @!attribute [rw] spot_price
     #   The maximum price per unit hour that you are willing to pay for a
-    #   Spot Instance.
+    #   Spot Instance. We do not recommend using this parameter because it
+    #   can lead to increased interruptions. If you do not specify this
+    #   parameter, you will pay the current Spot price.
+    #
+    #   If you specify a maximum price, your instances will be interrupted
+    #   more frequently than if you do not specify this parameter.
     #   @return [String]
     #
     # @!attribute [rw] subnet_id
@@ -46153,10 +46285,16 @@ module Aws::EC2
     #
     # @!attribute [rw] launch_template_id
     #   The ID of the launch template.
+    #
+    #   You must specify the `LaunchTemplateId` or the `LaunchTemplateName`,
+    #   but not both.
     #   @return [String]
     #
     # @!attribute [rw] launch_template_name
     #   The name of the launch template.
+    #
+    #   You must specify the `LaunchTemplateName` or the `LaunchTemplateId`,
+    #   but not both.
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -46179,7 +46317,13 @@ module Aws::EC2
     #
     # @!attribute [rw] max_price
     #   The maximum hourly price you're willing to pay for the Spot
-    #   Instances.
+    #   Instances. We do not recommend using this parameter because it can
+    #   lead to increased interruptions. If you do not specify this
+    #   parameter, you will pay the current Spot price.
+    #
+    #   If you specify a maximum price, your Spot Instances will be
+    #   interrupted more frequently than if you do not specify this
+    #   parameter.
     #   @return [String]
     #
     # @!attribute [rw] spot_instance_type
@@ -46230,7 +46374,13 @@ module Aws::EC2
     #
     # @!attribute [rw] max_price
     #   The maximum hourly price you're willing to pay for the Spot
-    #   Instances.
+    #   Instances. We do not recommend using this parameter because it can
+    #   lead to increased interruptions. If you do not specify this
+    #   parameter, you will pay the current Spot price.
+    #
+    #   If you specify a maximum price, your Spot Instances will be
+    #   interrupted more frequently than if you do not specify this
+    #   parameter.
     #   @return [String]
     #
     # @!attribute [rw] spot_instance_type
@@ -46238,17 +46388,22 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] block_duration_minutes
-    #   The required duration for the Spot Instances (also known as Spot
-    #   blocks), in minutes. This value must be a multiple of 60 (60, 120,
-    #   180, 240, 300, or 360).
+    #   Deprecated.
     #   @return [Integer]
     #
     # @!attribute [rw] valid_until
-    #   The end date of the request. For a one-time request, the request
-    #   remains active until all instances launch, the request is canceled,
-    #   or this date is reached. If the request is persistent, it remains
-    #   active until it is canceled or this date and time is reached. The
-    #   default end date is 7 days from the current date.
+    #   The end date of the request, in UTC format
+    #   (*YYYY-MM-DD*T*HH:MM:SS*Z). Supported only for persistent requests.
+    #
+    #   * For a persistent request, the request remains active until the
+    #     `ValidUntil` date and time is reached. Otherwise, the request
+    #     remains active until you cancel it.
+    #
+    #   * For a one-time request, `ValidUntil` is not supported. The request
+    #     remains active until all instances launch or you cancel the
+    #     request.
+    #
+    #   Default: 7 days from the current date
     #   @return [Time]
     #
     # @!attribute [rw] instance_interruption_behavior
@@ -49102,9 +49257,12 @@ module Aws::EC2
     #
     # @!attribute [rw] add_allocation_resource_tags
     #   Add tag allocation rules to a pool. For more information about
-    #   allocation rules, see [Create a top-level
-    #   pool](/vpc/latest/ipam/create-top-ipam.html) in the *Amazon VPC IPAM
-    #   User Guide*.
+    #   allocation rules, see [Create a top-level pool][1] in the *Amazon
+    #   VPC IPAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/ipam/create-top-ipam.html
     #   @return [Array<Types::RequestIpamResourceTag>]
     #
     # @!attribute [rw] remove_allocation_resource_tags
@@ -49181,8 +49339,11 @@ module Aws::EC2
     #   Amazon Web Services Regions you select as operating Regions.
     #
     #   For more information about operating Regions, see [Create an
-    #   IPAM](/vpc/latest/ipam/create-ipam.html) in the *Amazon VPC IPAM
-    #   User Guide*.
+    #   IPAM][1] in the *Amazon VPC IPAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/ipam/create-ipam.html
     #   @return [Array<Types::AddIpamOperatingRegion>]
     #
     # @!attribute [rw] remove_operating_regions
@@ -49362,13 +49523,17 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] launch_template_id
-    #   The ID of the launch template. You must specify either the launch
-    #   template ID or launch template name in the request.
+    #   The ID of the launch template.
+    #
+    #   You must specify either the `LaunchTemplateId` or the
+    #   `LaunchTemplateName`, but not both.
     #   @return [String]
     #
     # @!attribute [rw] launch_template_name
-    #   The name of the launch template. You must specify either the launch
-    #   template ID or launch template name in the request.
+    #   The name of the launch template.
+    #
+    #   You must specify either the `LaunchTemplateName` or the
+    #   `LaunchTemplateId`, but not both.
     #   @return [String]
     #
     # @!attribute [rw] default_version
@@ -53694,6 +53859,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] core_network_id
+    #   The ID of the core network where the transit gateway peer is
+    #   located.
     #   @return [String]
     #
     # @!attribute [rw] owner_id
@@ -56177,9 +56344,12 @@ module Aws::EC2
     # CIDRs. IPAM only discovers and monitors resources in the Amazon Web
     # Services Regions you select as operating Regions.
     #
-    # For more information about operating Regions, see [Create an
-    # IPAM](/vpc/latest/ipam/create-ipam.html) in the *Amazon VPC IPAM User
-    # Guide*
+    # For more information about operating Regions, see [Create an IPAM][1]
+    # in the *Amazon VPC IPAM User Guide*
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/ipam/create-ipam.html
     #
     # @note When making an API call, you may pass RemoveIpamOperatingRegion
     #   data as a hash:
@@ -57832,8 +58002,13 @@ module Aws::EC2
     #   @return [Types::RequestSpotLaunchSpecification]
     #
     # @!attribute [rw] spot_price
-    #   The maximum price per hour that you are willing to pay for a Spot
-    #   Instance. The default is the On-Demand price.
+    #   The maximum price per unit hour that you are willing to pay for a
+    #   Spot Instance. We do not recommend using this parameter because it
+    #   can lead to increased interruptions. If you do not specify this
+    #   parameter, you will pay the current Spot price.
+    #
+    #   If you specify a maximum price, your instances will be interrupted
+    #   more frequently than if you do not specify this parameter.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -60623,10 +60798,22 @@ module Aws::EC2
     #   @return [Array<Types::ElasticInferenceAccelerator>]
     #
     # @!attribute [rw] tag_specifications
-    #   The tags to apply to the resources during launch. You can only tag
-    #   instances and volumes on launch. The specified tags are applied to
-    #   all instances or volumes that are created during launch. To tag a
-    #   resource after it has been created, see [CreateTags][1].
+    #   The tags to apply to the resources that are created during instance
+    #   launch.
+    #
+    #   You can specify tags for the following resources only:
+    #
+    #   * Instances
+    #
+    #   * Volumes
+    #
+    #   * Elastic graphics
+    #
+    #   * Spot Instance requests
+    #
+    #   * Network interfaces
+    #
+    #   To tag a resource after it has been created, see [CreateTags][1].
     #
     #
     #
@@ -60733,7 +60920,7 @@ module Aws::EC2
     #
     # @!attribute [rw] disable_api_stop
     #   Indicates whether an instance is enabled for stop protection. For
-    #   more information, see [Stop Protection][1].
+    #   more information, see [Stop protection][1].
     #
     #
     #
@@ -62521,7 +62708,7 @@ module Aws::EC2
     # Describes a VPC endpoint service.
     #
     # @!attribute [rw] service_name
-    #   The Amazon Resource Name (ARN) of the service.
+    #   The name of the service.
     #   @return [String]
     #
     # @!attribute [rw] service_id
@@ -63500,9 +63687,12 @@ module Aws::EC2
     #
     # @!attribute [rw] spot_price
     #   The maximum price per unit hour that you are willing to pay for a
-    #   Spot Instance. If this value is not specified, the default is the
-    #   Spot price specified for the fleet. To determine the Spot price per
-    #   unit hour, divide the Spot price by the value of `WeightedCapacity`.
+    #   Spot Instance. We do not recommend using this parameter because it
+    #   can lead to increased interruptions. If you do not specify this
+    #   parameter, you will pay the current Spot price.
+    #
+    #   If you specify a maximum price, your instances will be interrupted
+    #   more frequently than if you do not specify this parameter.
     #   @return [String]
     #
     # @!attribute [rw] subnet_id
@@ -64010,7 +64200,12 @@ module Aws::EC2
     #
     # @!attribute [rw] spot_price
     #   The maximum price per unit hour that you are willing to pay for a
-    #   Spot Instance. The default is the On-Demand price.
+    #   Spot Instance. We do not recommend using this parameter because it
+    #   can lead to increased interruptions. If you do not specify this
+    #   parameter, you will pay the current Spot price.
+    #
+    #   If you specify a maximum price, your instances will be interrupted
+    #   more frequently than if you do not specify this parameter.
     #   @return [String]
     #
     # @!attribute [rw] target_capacity
@@ -64273,8 +64468,13 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] spot_price
-    #   The maximum price per hour that you are willing to pay for a Spot
-    #   Instance.
+    #   The maximum price per unit hour that you are willing to pay for a
+    #   Spot Instance. We do not recommend using this parameter because it
+    #   can lead to increased interruptions. If you do not specify this
+    #   parameter, you will pay the current Spot price.
+    #
+    #   If you specify a maximum price, your instances will be interrupted
+    #   more frequently than if you do not specify this parameter.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -64446,8 +64646,14 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] max_price
-    #   The maximum hourly price you're willing to pay for the Spot
-    #   Instances. The default is the On-Demand price.
+    #   The maximum hourly price that you're willing to pay for a Spot
+    #   Instance. We do not recommend using this parameter because it can
+    #   lead to increased interruptions. If you do not specify this
+    #   parameter, you will pay the current Spot price.
+    #
+    #   If you specify a maximum price, your Spot Instances will be
+    #   interrupted more frequently than if you do not specify this
+    #   parameter.
     #   @return [String]
     #
     # @!attribute [rw] spot_instance_type
@@ -64582,7 +64788,13 @@ module Aws::EC2
     #
     # @!attribute [rw] max_total_price
     #   The maximum amount per hour for Spot Instances that you're willing
-    #   to pay.
+    #   to pay. We do not recommend using this parameter because it can lead
+    #   to increased interruptions. If you do not specify this parameter,
+    #   you will pay the current Spot price.
+    #
+    #   If you specify a maximum price, your Spot Instances will be
+    #   interrupted more frequently than if you do not specify this
+    #   parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotOptions AWS API Documentation
@@ -64705,7 +64917,13 @@ module Aws::EC2
     #
     # @!attribute [rw] max_total_price
     #   The maximum amount per hour for Spot Instances that you're willing
-    #   to pay.
+    #   to pay. We do not recommend using this parameter because it can lead
+    #   to increased interruptions. If you do not specify this parameter,
+    #   you will pay the current Spot price.
+    #
+    #   If you specify a maximum price, your Spot Instances will be
+    #   interrupted more frequently than if you do not specify this
+    #   parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotOptionsRequest AWS API Documentation
@@ -64791,8 +65009,13 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the maximum price per hour that you are willing to pay for a
-    # Spot Instance.
+    # The maximum price per unit hour that you are willing to pay for a Spot
+    # Instance. We do not recommend using this parameter because it can lead
+    # to increased interruptions. If you do not specify this parameter, you
+    # will pay the current Spot price.
+    #
+    # If you specify a maximum price, your instances will be interrupted
+    # more frequently than if you do not specify this parameter.
     #
     # @!attribute [rw] availability_zone
     #   The Availability Zone.
@@ -64807,8 +65030,13 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] spot_price
-    #   The maximum price per hour that you are willing to pay for a Spot
-    #   Instance.
+    #   The maximum price per unit hour that you are willing to pay for a
+    #   Spot Instance. We do not recommend using this parameter because it
+    #   can lead to increased interruptions. If you do not specify this
+    #   parameter, you will pay the current Spot price.
+    #
+    #   If you specify a maximum price, your instances will be interrupted
+    #   more frequently than if you do not specify this parameter.
     #   @return [String]
     #
     # @!attribute [rw] timestamp
@@ -65706,6 +65934,13 @@ module Aws::EC2
     end
 
     # The tags to apply to a resource when the resource is being created.
+    #
+    # <note markdown="1"> The `Valid Values` lists all the resource types that can be tagged.
+    # However, the action you're using might not support tagging all of
+    # these resource types. If you try to tag a resource type that is
+    # unsupported for the action you're using, you'll get an error.
+    #
+    #  </note>
     #
     # @note When making an API call, you may pass TagSpecification
     #   data as a hash:
@@ -67303,6 +67538,7 @@ module Aws::EC2
     #   @return [Types::PeeringTgwInfo]
     #
     # @!attribute [rw] options
+    #   Details about the transit gateway peering attachment.
     #   @return [Types::TransitGatewayPeeringAttachmentOptions]
     #
     # @!attribute [rw] status
@@ -67338,7 +67574,11 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes dynamic routing for the transit gateway peering attachment.
+    #
     # @!attribute [rw] dynamic_routing
+    #   Describes whether dynamic routing is enabled or disabled for the
+    #   transit gateway peering attachment.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGatewayPeeringAttachmentOptions AWS API Documentation
@@ -67689,6 +67929,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] transit_gateway_route_table_announcement_id
+    #   The ID of the transit gateway route table announcement.
     #   @return [String]
     #
     # @!attribute [rw] transit_gateway_attachments
@@ -67798,6 +68039,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] core_network_id
+    #   The ID of the core network for the transit gateway route table
+    #   announcement.
     #   @return [String]
     #
     # @!attribute [rw] peer_transit_gateway_id
@@ -67805,6 +68048,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] peer_core_network_id
+    #   The ID of the core network ID for the peer.
     #   @return [String]
     #
     # @!attribute [rw] peering_attachment_id

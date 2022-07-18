@@ -361,7 +361,45 @@ module Aws::SSOAdmin
 
     # @!group API Operations
 
-    # Attaches an IAM managed policy ARN to a permission set.
+    # Attaches the specified IAM customer managed policy to the specified
+    # PermissionSet.
+    #
+    # @option params [required, String] :instance_arn
+    #   The ARN of the SSO instance under which the operation will be
+    #   executed.
+    #
+    # @option params [required, String] :permission_set_arn
+    #   The ARN of the `PermissionSet`.
+    #
+    # @option params [required, Types::CustomerManagedPolicyReference] :customer_managed_policy_reference
+    #   Specifies the name and path of the IAM customer managed policy. You
+    #   must have an IAM policy that matches the name and path in each Amazon
+    #   Web Services account where you want to deploy your permission set.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.attach_customer_managed_policy_reference_to_permission_set({
+    #     instance_arn: "InstanceArn", # required
+    #     permission_set_arn: "PermissionSetArn", # required
+    #     customer_managed_policy_reference: { # required
+    #       name: "ManagedPolicyName", # required
+    #       path: "ManagedPolicyPath",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/AttachCustomerManagedPolicyReferenceToPermissionSet AWS API Documentation
+    #
+    # @overload attach_customer_managed_policy_reference_to_permission_set(params = {})
+    # @param [Hash] params ({})
+    def attach_customer_managed_policy_reference_to_permission_set(params = {}, options = {})
+      req = build_request(:attach_customer_managed_policy_reference_to_permission_set, params)
+      req.send_request(options)
+    end
+
+    # Attaches an Amazon Web Services managed IAM policy ARN to a permission
+    # set.
     #
     # <note markdown="1"> If the permission set is already referenced by one or more account
     # assignments, you will need to call ` ProvisionPermissionSet ` after
@@ -382,7 +420,8 @@ module Aws::SSOAdmin
     #   attached to.
     #
     # @option params [required, String] :managed_policy_arn
-    #   The IAM managed policy ARN to be attached to a permission set.
+    #   The Amazon Web Services managed policy ARN to be attached to a
+    #   permission set.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -579,8 +618,8 @@ module Aws::SSOAdmin
     #     relay_state: "RelayState",
     #     tags: [
     #       {
-    #         key: "TagKey",
-    #         value: "TagValue",
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
     #       },
     #     ],
     #   })
@@ -757,6 +796,33 @@ module Aws::SSOAdmin
     # @param [Hash] params ({})
     def delete_permission_set(params = {}, options = {})
       req = build_request(:delete_permission_set, params)
+      req.send_request(options)
+    end
+
+    # Deletes the permissions boundary from a specified PermissionSet.
+    #
+    # @option params [required, String] :instance_arn
+    #   The ARN of the SSO instance under which the operation will be
+    #   executed.
+    #
+    # @option params [required, String] :permission_set_arn
+    #   The ARN of the `PermissionSet`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_permissions_boundary_from_permission_set({
+    #     instance_arn: "InstanceArn", # required
+    #     permission_set_arn: "PermissionSetArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DeletePermissionsBoundaryFromPermissionSet AWS API Documentation
+    #
+    # @overload delete_permissions_boundary_from_permission_set(params = {})
+    # @param [Hash] params ({})
+    def delete_permissions_boundary_from_permission_set(params = {}, options = {})
+      req = build_request(:delete_permissions_boundary_from_permission_set, params)
       req.send_request(options)
     end
 
@@ -974,8 +1040,45 @@ module Aws::SSOAdmin
       req.send_request(options)
     end
 
-    # Detaches the attached IAM managed policy ARN from the specified
-    # permission set.
+    # Detaches the specified IAM customer managed policy from the specified
+    # PermissionSet.
+    #
+    # @option params [required, String] :instance_arn
+    #   The ARN of the SSO instance under which the operation will be
+    #   executed.
+    #
+    # @option params [required, String] :permission_set_arn
+    #   The ARN of the `PermissionSet`.
+    #
+    # @option params [required, Types::CustomerManagedPolicyReference] :customer_managed_policy_reference
+    #   Specifies the name and path of the IAM customer managed policy. You
+    #   must have an IAM policy that matches the name and path in each Amazon
+    #   Web Services account where you want to deploy your permission set.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.detach_customer_managed_policy_reference_from_permission_set({
+    #     instance_arn: "InstanceArn", # required
+    #     permission_set_arn: "PermissionSetArn", # required
+    #     customer_managed_policy_reference: { # required
+    #       name: "ManagedPolicyName", # required
+    #       path: "ManagedPolicyPath",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DetachCustomerManagedPolicyReferenceFromPermissionSet AWS API Documentation
+    #
+    # @overload detach_customer_managed_policy_reference_from_permission_set(params = {})
+    # @param [Hash] params ({})
+    def detach_customer_managed_policy_reference_from_permission_set(params = {}, options = {})
+      req = build_request(:detach_customer_managed_policy_reference_from_permission_set, params)
+      req.send_request(options)
+    end
+
+    # Detaches the attached Amazon Web Services managed IAM policy ARN from
+    # the specified permission set.
     #
     # @option params [required, String] :instance_arn
     #   The ARN of the SSO instance under which the operation will be
@@ -988,7 +1091,8 @@ module Aws::SSOAdmin
     #   The ARN of the PermissionSet from which the policy should be detached.
     #
     # @option params [required, String] :managed_policy_arn
-    #   The IAM managed policy ARN to be attached to a permission set.
+    #   The Amazon Web Services managed policy ARN to be detached from a
+    #   permission set.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1042,6 +1146,41 @@ module Aws::SSOAdmin
     # @param [Hash] params ({})
     def get_inline_policy_for_permission_set(params = {}, options = {})
       req = build_request(:get_inline_policy_for_permission_set, params)
+      req.send_request(options)
+    end
+
+    # Obtains the permissions boundary for a specified PermissionSet.
+    #
+    # @option params [required, String] :instance_arn
+    #   The ARN of the SSO instance under which the operation will be
+    #   executed.
+    #
+    # @option params [required, String] :permission_set_arn
+    #   The ARN of the `PermissionSet`.
+    #
+    # @return [Types::GetPermissionsBoundaryForPermissionSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPermissionsBoundaryForPermissionSetResponse#permissions_boundary #permissions_boundary} => Types::PermissionsBoundary
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_permissions_boundary_for_permission_set({
+    #     instance_arn: "InstanceArn", # required
+    #     permission_set_arn: "PermissionSetArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.permissions_boundary.customer_managed_policy_reference.name #=> String
+    #   resp.permissions_boundary.customer_managed_policy_reference.path #=> String
+    #   resp.permissions_boundary.managed_policy_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/GetPermissionsBoundaryForPermissionSet AWS API Documentation
+    #
+    # @overload get_permissions_boundary_for_permission_set(params = {})
+    # @param [Hash] params ({})
+    def get_permissions_boundary_for_permission_set(params = {}, options = {})
+      req = build_request(:get_permissions_boundary_for_permission_set, params)
       req.send_request(options)
     end
 
@@ -1271,6 +1410,55 @@ module Aws::SSOAdmin
       req.send_request(options)
     end
 
+    # Lists all IAM customer managed policies attached to a specified
+    # PermissionSet.
+    #
+    # @option params [required, String] :instance_arn
+    #   The ARN of the SSO instance under which the operation will be
+    #   executed.
+    #
+    # @option params [required, String] :permission_set_arn
+    #   The ARN of the `PermissionSet`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to display for the list call.
+    #
+    # @option params [String] :next_token
+    #   The pagination token for the list API. Initially the value is null.
+    #   Use the output of previous API calls to make subsequent calls.
+    #
+    # @return [Types::ListCustomerManagedPolicyReferencesInPermissionSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCustomerManagedPolicyReferencesInPermissionSetResponse#customer_managed_policy_references #customer_managed_policy_references} => Array&lt;Types::CustomerManagedPolicyReference&gt;
+    #   * {Types::ListCustomerManagedPolicyReferencesInPermissionSetResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_customer_managed_policy_references_in_permission_set({
+    #     instance_arn: "InstanceArn", # required
+    #     permission_set_arn: "PermissionSetArn", # required
+    #     max_results: 1,
+    #     next_token: "Token",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.customer_managed_policy_references #=> Array
+    #   resp.customer_managed_policy_references[0].name #=> String
+    #   resp.customer_managed_policy_references[0].path #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListCustomerManagedPolicyReferencesInPermissionSet AWS API Documentation
+    #
+    # @overload list_customer_managed_policy_references_in_permission_set(params = {})
+    # @param [Hash] params ({})
+    def list_customer_managed_policy_references_in_permission_set(params = {}, options = {})
+      req = build_request(:list_customer_managed_policy_references_in_permission_set, params)
+      req.send_request(options)
+    end
+
     # Lists the SSO instances that the caller has access to.
     #
     # @option params [Integer] :max_results
@@ -1310,8 +1498,8 @@ module Aws::SSOAdmin
       req.send_request(options)
     end
 
-    # Lists the IAM managed policy that is attached to a specified
-    # permission set.
+    # Lists the Amazon Web Services managed IAM policy that is attached to a
+    # specified permission set.
     #
     # @option params [required, String] :instance_arn
     #   The ARN of the SSO instance under which the operation will be
@@ -1546,7 +1734,7 @@ module Aws::SSOAdmin
     #
     #   resp = client.list_tags_for_resource({
     #     instance_arn: "InstanceArn", # required
-    #     resource_arn: "GeneralArn", # required
+    #     resource_arn: "TaggableResourceArn", # required
     #     next_token: "Token",
     #   })
     #
@@ -1658,6 +1846,44 @@ module Aws::SSOAdmin
       req.send_request(options)
     end
 
+    # Attaches an Amazon Web Services managed or customer managed IAM policy
+    # to the specified PermissionSet as a permissions boundary.
+    #
+    # @option params [required, String] :instance_arn
+    #   The ARN of the SSO instance under which the operation will be
+    #   executed.
+    #
+    # @option params [required, String] :permission_set_arn
+    #   The ARN of the `PermissionSet`.
+    #
+    # @option params [required, Types::PermissionsBoundary] :permissions_boundary
+    #   The permissions boundary that you want to attach to a `PermissionSet`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_permissions_boundary_to_permission_set({
+    #     instance_arn: "InstanceArn", # required
+    #     permission_set_arn: "PermissionSetArn", # required
+    #     permissions_boundary: { # required
+    #       customer_managed_policy_reference: {
+    #         name: "ManagedPolicyName", # required
+    #         path: "ManagedPolicyPath",
+    #       },
+    #       managed_policy_arn: "ManagedPolicyArn",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/PutPermissionsBoundaryToPermissionSet AWS API Documentation
+    #
+    # @overload put_permissions_boundary_to_permission_set(params = {})
+    # @param [Hash] params ({})
+    def put_permissions_boundary_to_permission_set(params = {}, options = {})
+      req = build_request(:put_permissions_boundary_to_permission_set, params)
+      req.send_request(options)
+    end
+
     # Associates a set of tags with a specified resource.
     #
     # @option params [required, String] :instance_arn
@@ -1679,11 +1905,11 @@ module Aws::SSOAdmin
     #
     #   resp = client.tag_resource({
     #     instance_arn: "InstanceArn", # required
-    #     resource_arn: "GeneralArn", # required
+    #     resource_arn: "TaggableResourceArn", # required
     #     tags: [ # required
     #       {
-    #         key: "TagKey",
-    #         value: "TagValue",
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
     #       },
     #     ],
     #   })
@@ -1718,7 +1944,7 @@ module Aws::SSOAdmin
     #
     #   resp = client.untag_resource({
     #     instance_arn: "InstanceArn", # required
-    #     resource_arn: "GeneralArn", # required
+    #     resource_arn: "TaggableResourceArn", # required
     #     tag_keys: ["TagKey"], # required
     #   })
     #
@@ -1834,7 +2060,7 @@ module Aws::SSOAdmin
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssoadmin'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

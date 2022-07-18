@@ -702,10 +702,22 @@ module Aws::EC2
     #   You cannot specify accelerators from different generations in the same
     #   request.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
-    #   The tags to apply to the resources during launch. You can only tag
-    #   instances and volumes on launch. The specified tags are applied to all
-    #   instances or volumes that are created during launch. To tag a resource
-    #   after it has been created, see [CreateTags][1].
+    #   The tags to apply to the resources that are created during instance
+    #   launch.
+    #
+    #   You can specify tags for the following resources only:
+    #
+    #   * Instances
+    #
+    #   * Volumes
+    #
+    #   * Elastic graphics
+    #
+    #   * Spot Instance requests
+    #
+    #   * Network interfaces
+    #
+    #   To tag a resource after it has been created, see [CreateTags][1].
     #
     #
     #
@@ -788,7 +800,7 @@ module Aws::EC2
     #   The maintenance and recovery options for the instance.
     # @option options [Boolean] :disable_api_stop
     #   Indicates whether an instance is enabled for stop protection. For more
-    #   information, see [Stop Protection][1].
+    #   information, see [Stop protection][1].
     #
     #
     #

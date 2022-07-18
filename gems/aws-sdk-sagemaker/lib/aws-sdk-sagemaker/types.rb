@@ -5398,6 +5398,123 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateEdgeDeploymentPlanRequest
+    #   data as a hash:
+    #
+    #       {
+    #         edge_deployment_plan_name: "EntityName", # required
+    #         model_configs: [ # required
+    #           {
+    #             model_handle: "EntityName", # required
+    #             edge_packaging_job_name: "EntityName", # required
+    #           },
+    #         ],
+    #         device_fleet_name: "EntityName", # required
+    #         stages: [
+    #           {
+    #             stage_name: "EntityName", # required
+    #             device_selection_config: { # required
+    #               device_subset_type: "PERCENTAGE", # required, accepts PERCENTAGE, SELECTION, NAMECONTAINS
+    #               percentage: 1,
+    #               device_names: ["DeviceName"],
+    #               device_name_contains: "DeviceName",
+    #             },
+    #             deployment_config: {
+    #               failure_handling_policy: "ROLLBACK_ON_FAILURE", # required, accepts ROLLBACK_ON_FAILURE, DO_NOTHING
+    #             },
+    #           },
+    #         ],
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] edge_deployment_plan_name
+    #   The name of the edge deployment plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_configs
+    #   List of models associated with the edge deployment plan.
+    #   @return [Array<Types::EdgeDeploymentModelConfig>]
+    #
+    # @!attribute [rw] device_fleet_name
+    #   The device fleet used for this edge deployment plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] stages
+    #   List of stages of the edge deployment plan. The number of stages is
+    #   limited to 10 per deployment.
+    #   @return [Array<Types::DeploymentStage>]
+    #
+    # @!attribute [rw] tags
+    #   List of tags with which to tag the edge deployment plan.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateEdgeDeploymentPlanRequest AWS API Documentation
+    #
+    class CreateEdgeDeploymentPlanRequest < Struct.new(
+      :edge_deployment_plan_name,
+      :model_configs,
+      :device_fleet_name,
+      :stages,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] edge_deployment_plan_arn
+    #   The ARN of the edge deployment plan.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateEdgeDeploymentPlanResponse AWS API Documentation
+    #
+    class CreateEdgeDeploymentPlanResponse < Struct.new(
+      :edge_deployment_plan_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateEdgeDeploymentStageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         edge_deployment_plan_name: "EntityName", # required
+    #         stages: [ # required
+    #           {
+    #             stage_name: "EntityName", # required
+    #             device_selection_config: { # required
+    #               device_subset_type: "PERCENTAGE", # required, accepts PERCENTAGE, SELECTION, NAMECONTAINS
+    #               percentage: 1,
+    #               device_names: ["DeviceName"],
+    #               device_name_contains: "DeviceName",
+    #             },
+    #             deployment_config: {
+    #               failure_handling_policy: "ROLLBACK_ON_FAILURE", # required, accepts ROLLBACK_ON_FAILURE, DO_NOTHING
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] edge_deployment_plan_name
+    #   The name of the edge deployment plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] stages
+    #   List of stages to be added to the edge deployment plan.
+    #   @return [Array<Types::DeploymentStage>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateEdgeDeploymentStageRequest AWS API Documentation
+    #
+    class CreateEdgeDeploymentStageRequest < Struct.new(
+      :edge_deployment_plan_name,
+      :stages)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateEdgePackagingJobRequest
     #   data as a hash:
     #
@@ -11233,6 +11350,51 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteEdgeDeploymentPlanRequest
+    #   data as a hash:
+    #
+    #       {
+    #         edge_deployment_plan_name: "EntityName", # required
+    #       }
+    #
+    # @!attribute [rw] edge_deployment_plan_name
+    #   The name of the edge deployment plan to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteEdgeDeploymentPlanRequest AWS API Documentation
+    #
+    class DeleteEdgeDeploymentPlanRequest < Struct.new(
+      :edge_deployment_plan_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteEdgeDeploymentStageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         edge_deployment_plan_name: "EntityName", # required
+    #         stage_name: "EntityName", # required
+    #       }
+    #
+    # @!attribute [rw] edge_deployment_plan_name
+    #   The name of the edge deployment plan from which the stage will be
+    #   deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] stage_name
+    #   The name of the stage.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteEdgeDeploymentStageRequest AWS API Documentation
+    #
+    class DeleteEdgeDeploymentStageRequest < Struct.new(
+      :edge_deployment_plan_name,
+      :stage_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteEndpointConfigInput
     #   data as a hash:
     #
@@ -11960,6 +12122,75 @@ module Aws::SageMaker
     class DeploymentConfig < Struct.new(
       :blue_green_update_policy,
       :auto_rollback_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a stage in an edge deployment plan.
+    #
+    # @note When making an API call, you may pass DeploymentStage
+    #   data as a hash:
+    #
+    #       {
+    #         stage_name: "EntityName", # required
+    #         device_selection_config: { # required
+    #           device_subset_type: "PERCENTAGE", # required, accepts PERCENTAGE, SELECTION, NAMECONTAINS
+    #           percentage: 1,
+    #           device_names: ["DeviceName"],
+    #           device_name_contains: "DeviceName",
+    #         },
+    #         deployment_config: {
+    #           failure_handling_policy: "ROLLBACK_ON_FAILURE", # required, accepts ROLLBACK_ON_FAILURE, DO_NOTHING
+    #         },
+    #       }
+    #
+    # @!attribute [rw] stage_name
+    #   The name of the stage.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_selection_config
+    #   Configuration of the devices in the stage.
+    #   @return [Types::DeviceSelectionConfig]
+    #
+    # @!attribute [rw] deployment_config
+    #   Configuration of the deployment details.
+    #   @return [Types::EdgeDeploymentConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeploymentStage AWS API Documentation
+    #
+    class DeploymentStage < Struct.new(
+      :stage_name,
+      :device_selection_config,
+      :deployment_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information summarizing the deployment stage results.
+    #
+    # @!attribute [rw] stage_name
+    #   The name of the stage.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_selection_config
+    #   Configuration of the devices in the stage.
+    #   @return [Types::DeviceSelectionConfig]
+    #
+    # @!attribute [rw] deployment_config
+    #   Configuration of the deployment details.
+    #   @return [Types::EdgeDeploymentConfig]
+    #
+    # @!attribute [rw] deployment_status
+    #   General status of the current state.
+    #   @return [Types::EdgeDeploymentStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeploymentStageStatusSummary AWS API Documentation
+    #
+    class DeploymentStageStatusSummary < Struct.new(
+      :stage_name,
+      :device_selection_config,
+      :deployment_config,
+      :deployment_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13210,6 +13441,102 @@ module Aws::SageMaker
       :domain_settings,
       :app_security_group_management,
       :security_group_id_for_domain_boundary)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeEdgeDeploymentPlanRequest
+    #   data as a hash:
+    #
+    #       {
+    #         edge_deployment_plan_name: "EntityName", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] edge_deployment_plan_name
+    #   The name of the deployment plan to describe.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the edge deployment plan has enough stages to require tokening,
+    #   then this is the response from the last list of stages returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to select (50 by default).
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEdgeDeploymentPlanRequest AWS API Documentation
+    #
+    class DescribeEdgeDeploymentPlanRequest < Struct.new(
+      :edge_deployment_plan_name,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] edge_deployment_plan_arn
+    #   The ARN of edge deployment plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] edge_deployment_plan_name
+    #   The name of the edge deployment plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_configs
+    #   List of models associated with the edge deployment plan.
+    #   @return [Array<Types::EdgeDeploymentModelConfig>]
+    #
+    # @!attribute [rw] device_fleet_name
+    #   The device fleet used for this edge deployment plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] edge_deployment_success
+    #   The number of edge devices with the successful deployment.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] edge_deployment_pending
+    #   The number of edge devices yet to pick up deployment, or in
+    #   progress.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] edge_deployment_failed
+    #   The number of edge devices that failed the deployment.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stages
+    #   List of stages in the edge deployment plan.
+    #   @return [Array<Types::DeploymentStageStatusSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Token to use when calling the next set of stages in the edge
+    #   deployment plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time when the edge deployment plan was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The time when the edge deployment plan was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEdgeDeploymentPlanResponse AWS API Documentation
+    #
+    class DescribeEdgeDeploymentPlanResponse < Struct.new(
+      :edge_deployment_plan_arn,
+      :edge_deployment_plan_name,
+      :model_configs,
+      :device_fleet_name,
+      :edge_deployment_success,
+      :edge_deployment_pending,
+      :edge_deployment_failed,
+      :stages,
+      :next_token,
+      :creation_time,
+      :last_modified_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16983,6 +17310,70 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Contains information summarizing device details and deployment status.
+    #
+    # @!attribute [rw] edge_deployment_plan_arn
+    #   The ARN of the edge deployment plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] edge_deployment_plan_name
+    #   The name of the edge deployment plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] stage_name
+    #   The name of the stage in the edge deployment plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployed_stage_name
+    #   The name of the deployed stage.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_fleet_name
+    #   The name of the fleet to which the device belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_name
+    #   The name of the device.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_arn
+    #   The ARN of the device.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_deployment_status
+    #   The deployment status of the device.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_deployment_status_message
+    #   The detailed error message for the deployoment status result.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the device.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_start_time
+    #   The time when the deployment on the device started.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeviceDeploymentSummary AWS API Documentation
+    #
+    class DeviceDeploymentSummary < Struct.new(
+      :edge_deployment_plan_arn,
+      :edge_deployment_plan_name,
+      :stage_name,
+      :deployed_stage_name,
+      :device_fleet_name,
+      :device_name,
+      :device_arn,
+      :device_deployment_status,
+      :device_deployment_status_message,
+      :description,
+      :deployment_start_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Summary of the device fleet.
     #
     # @!attribute [rw] device_fleet_arn
@@ -17008,6 +17399,45 @@ module Aws::SageMaker
       :device_fleet_name,
       :creation_time,
       :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the configurations of selected devices.
+    #
+    # @note When making an API call, you may pass DeviceSelectionConfig
+    #   data as a hash:
+    #
+    #       {
+    #         device_subset_type: "PERCENTAGE", # required, accepts PERCENTAGE, SELECTION, NAMECONTAINS
+    #         percentage: 1,
+    #         device_names: ["DeviceName"],
+    #         device_name_contains: "DeviceName",
+    #       }
+    #
+    # @!attribute [rw] device_subset_type
+    #   Type of device subsets to deploy to the current stage.
+    #   @return [String]
+    #
+    # @!attribute [rw] percentage
+    #   Percentage of devices in the fleet to deploy to the current stage.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] device_names
+    #   List of devices chosen to deploy.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] device_name_contains
+    #   A filter to select devices with names containing this name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeviceSelectionConfig AWS API Documentation
+    #
+    class DeviceSelectionConfig < Struct.new(
+      :device_subset_type,
+      :percentage,
+      :device_names,
+      :device_name_contains)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17554,6 +17984,149 @@ module Aws::SageMaker
       :source_arn,
       :destination_arn,
       :association_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the configuration of a deployment.
+    #
+    # @note When making an API call, you may pass EdgeDeploymentConfig
+    #   data as a hash:
+    #
+    #       {
+    #         failure_handling_policy: "ROLLBACK_ON_FAILURE", # required, accepts ROLLBACK_ON_FAILURE, DO_NOTHING
+    #       }
+    #
+    # @!attribute [rw] failure_handling_policy
+    #   Toggle that determines whether to rollback to previous configuration
+    #   if the current deployment fails. By default this is turned on. You
+    #   may turn this off if you want to investigate the errors yourself.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EdgeDeploymentConfig AWS API Documentation
+    #
+    class EdgeDeploymentConfig < Struct.new(
+      :failure_handling_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the configuration of a model in a
+    # deployment.
+    #
+    # @note When making an API call, you may pass EdgeDeploymentModelConfig
+    #   data as a hash:
+    #
+    #       {
+    #         model_handle: "EntityName", # required
+    #         edge_packaging_job_name: "EntityName", # required
+    #       }
+    #
+    # @!attribute [rw] model_handle
+    #   The name the device application uses to reference this model.
+    #   @return [String]
+    #
+    # @!attribute [rw] edge_packaging_job_name
+    #   The edge packaging job associated with this deployment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EdgeDeploymentModelConfig AWS API Documentation
+    #
+    class EdgeDeploymentModelConfig < Struct.new(
+      :model_handle,
+      :edge_packaging_job_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information summarizing an edge deployment plan.
+    #
+    # @!attribute [rw] edge_deployment_plan_arn
+    #   The ARN of the edge deployment plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] edge_deployment_plan_name
+    #   The name of the edge deployment plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_fleet_name
+    #   The name of the device fleet used for the deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] edge_deployment_success
+    #   The number of edge devices with the successful deployment.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] edge_deployment_pending
+    #   The number of edge devices yet to pick up the deployment, or in
+    #   progress.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] edge_deployment_failed
+    #   The number of edge devices that failed the deployment.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] creation_time
+    #   The time when the edge deployment plan was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The time when the edge deployment plan was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EdgeDeploymentPlanSummary AWS API Documentation
+    #
+    class EdgeDeploymentPlanSummary < Struct.new(
+      :edge_deployment_plan_arn,
+      :edge_deployment_plan_name,
+      :device_fleet_name,
+      :edge_deployment_success,
+      :edge_deployment_pending,
+      :edge_deployment_failed,
+      :creation_time,
+      :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information summarizing the deployment stage results.
+    #
+    # @!attribute [rw] stage_status
+    #   The general status of the current stage.
+    #   @return [String]
+    #
+    # @!attribute [rw] edge_deployment_success_in_stage
+    #   The number of edge devices with the successful deployment in the
+    #   current stage.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] edge_deployment_pending_in_stage
+    #   The number of edge devices yet to pick up the deployment in current
+    #   stage, or in progress.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] edge_deployment_failed_in_stage
+    #   The number of edge devices that failed the deployment in current
+    #   stage.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] edge_deployment_status_message
+    #   A detailed message about deployment status in current stage.
+    #   @return [String]
+    #
+    # @!attribute [rw] edge_deployment_stage_start_time
+    #   The time when the deployment API started.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EdgeDeploymentStatus AWS API Documentation
+    #
+    class EdgeDeploymentStatus < Struct.new(
+      :stage_status,
+      :edge_deployment_success_in_stage,
+      :edge_deployment_pending_in_stage,
+      :edge_deployment_failed_in_stage,
+      :edge_deployment_status_message,
+      :edge_deployment_stage_start_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24194,6 +24767,101 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListEdgeDeploymentPlansRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         creation_time_after: Time.now,
+    #         creation_time_before: Time.now,
+    #         last_modified_time_after: Time.now,
+    #         last_modified_time_before: Time.now,
+    #         name_contains: "NameContains",
+    #         device_fleet_name_contains: "NameContains",
+    #         sort_by: "NAME", # accepts NAME, DEVICE_FLEET_NAME, CREATION_TIME, LAST_MODIFIED_TIME
+    #         sort_order: "Ascending", # accepts Ascending, Descending
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   The response from the last list when returning a list large enough
+    #   to need tokening.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to select (50 by default).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] creation_time_after
+    #   Selects edge deployment plans created after this time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time_before
+    #   Selects edge deployment plans created before this time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time_after
+    #   Selects edge deployment plans that were last updated after this
+    #   time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time_before
+    #   Selects edge deployment plans that were last updated before this
+    #   time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] name_contains
+    #   Selects edge deployment plans with names containing this name.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_fleet_name_contains
+    #   Selects edge deployment plans with a device fleet name containing
+    #   this name.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   The column by which to sort the edge deployment plans. Can be one of
+    #   `NAME`, `DEVICEFLEETNAME`, `CREATIONTIME`, `LASTMODIFIEDTIME`.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The direction of the sorting (ascending or descending).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListEdgeDeploymentPlansRequest AWS API Documentation
+    #
+    class ListEdgeDeploymentPlansRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :creation_time_after,
+      :creation_time_before,
+      :last_modified_time_after,
+      :last_modified_time_before,
+      :name_contains,
+      :device_fleet_name_contains,
+      :sort_by,
+      :sort_order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] edge_deployment_plan_summaries
+    #   List of summaries of edge deployment plans.
+    #   @return [Array<Types::EdgeDeploymentPlanSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use when calling the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListEdgeDeploymentPlansResponse AWS API Documentation
+    #
+    class ListEdgeDeploymentPlansResponse < Struct.new(
+      :edge_deployment_plan_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListEdgePackagingJobsRequest
     #   data as a hash:
     #
@@ -26937,6 +27605,67 @@ module Aws::SageMaker
     #
     class ListProjectsOutput < Struct.new(
       :project_summary_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListStageDevicesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         edge_deployment_plan_name: "EntityName", # required
+    #         exclude_devices_deployed_in_other_stage: false,
+    #         stage_name: "EntityName", # required
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   The response from the last list when returning a list large enough
+    #   to neeed tokening.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of requests to select.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] edge_deployment_plan_name
+    #   The name of the edge deployment plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] exclude_devices_deployed_in_other_stage
+    #   Toggle for excluding devices deployed in other stages.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] stage_name
+    #   The name of the stage in the deployment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListStageDevicesRequest AWS API Documentation
+    #
+    class ListStageDevicesRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :edge_deployment_plan_name,
+      :exclude_devices_deployed_in_other_stage,
+      :stage_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] device_deployment_summaries
+    #   List of summaries of devices allocated to the stage.
+    #   @return [Array<Types::DeviceDeploymentSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use when calling the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListStageDevicesResponse AWS API Documentation
+    #
+    class ListStageDevicesResponse < Struct.new(
+      :device_deployment_summaries,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -36237,6 +36966,31 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StartEdgeDeploymentStageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         edge_deployment_plan_name: "EntityName", # required
+    #         stage_name: "EntityName", # required
+    #       }
+    #
+    # @!attribute [rw] edge_deployment_plan_name
+    #   The name of the edge deployment plan to start.
+    #   @return [String]
+    #
+    # @!attribute [rw] stage_name
+    #   The name of the stage to start.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StartEdgeDeploymentStageRequest AWS API Documentation
+    #
+    class StartEdgeDeploymentStageRequest < Struct.new(
+      :edge_deployment_plan_name,
+      :stage_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StartMonitoringScheduleRequest
     #   data as a hash:
     #
@@ -36383,6 +37137,31 @@ module Aws::SageMaker
     #
     class StopCompilationJobRequest < Struct.new(
       :compilation_job_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StopEdgeDeploymentStageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         edge_deployment_plan_name: "EntityName", # required
+    #         stage_name: "EntityName", # required
+    #       }
+    #
+    # @!attribute [rw] edge_deployment_plan_name
+    #   The name of the edge deployment plan to stop.
+    #   @return [String]
+    #
+    # @!attribute [rw] stage_name
+    #   The name of the stage to stop.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopEdgeDeploymentStageRequest AWS API Documentation
+    #
+    class StopEdgeDeploymentStageRequest < Struct.new(
+      :edge_deployment_plan_name,
+      :stage_name)
       SENSITIVE = []
       include Aws::Structure
     end

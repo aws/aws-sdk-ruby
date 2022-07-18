@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2022-07-18)
+------------------
+
+* Feature - Added support for the SM2 KeySpec in China Partition Regions
+
 1.57.0 (2022-05-17)
 ------------------
 

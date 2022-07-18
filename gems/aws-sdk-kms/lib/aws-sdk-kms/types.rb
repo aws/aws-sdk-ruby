@@ -338,9 +338,9 @@ module Aws::KMS
     #
     #       {
     #         custom_key_store_name: "CustomKeyStoreNameType", # required
-    #         cloud_hsm_cluster_id: "CloudHsmClusterIdType", # required
-    #         trust_anchor_certificate: "TrustAnchorCertificateType", # required
-    #         key_store_password: "KeyStorePasswordType", # required
+    #         cloud_hsm_cluster_id: "CloudHsmClusterIdType",
+    #         trust_anchor_certificate: "TrustAnchorCertificateType",
+    #         key_store_password: "KeyStorePasswordType",
     #       }
     #
     # @!attribute [rw] custom_key_store_name
@@ -627,8 +627,8 @@ module Aws::KMS
     #         policy: "PolicyType",
     #         description: "DescriptionType",
     #         key_usage: "SIGN_VERIFY", # accepts SIGN_VERIFY, ENCRYPT_DECRYPT, GENERATE_VERIFY_MAC
-    #         customer_master_key_spec: "RSA_2048", # accepts RSA_2048, RSA_3072, RSA_4096, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, SYMMETRIC_DEFAULT, HMAC_224, HMAC_256, HMAC_384, HMAC_512
-    #         key_spec: "RSA_2048", # accepts RSA_2048, RSA_3072, RSA_4096, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, SYMMETRIC_DEFAULT, HMAC_224, HMAC_256, HMAC_384, HMAC_512
+    #         customer_master_key_spec: "RSA_2048", # accepts RSA_2048, RSA_3072, RSA_4096, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, SYMMETRIC_DEFAULT, HMAC_224, HMAC_256, HMAC_384, HMAC_512, SM2
+    #         key_spec: "RSA_2048", # accepts RSA_2048, RSA_3072, RSA_4096, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, SYMMETRIC_DEFAULT, HMAC_224, HMAC_256, HMAC_384, HMAC_512, SM2
     #         origin: "AWS_KMS", # accepts AWS_KMS, EXTERNAL, AWS_CLOUDHSM
     #         custom_key_store_id: "CustomKeyStoreIdType",
     #         bypass_policy_lockout_safety_check: false,
@@ -667,31 +667,30 @@ module Aws::KMS
     #     immediately visible][3] in the *Amazon Web Services Identity and
     #     Access Management User Guide*.
     #
-    #   A key policy document must conform to the following rules.
+    #   A key policy document can include only the following characters:
     #
-    #   * Up to 32 kilobytes (32768 bytes)
+    #   * Printable ASCII characters from the space character (`\u0020`)
+    #     through the end of the ASCII character range.
     #
-    #   * Must be UTF-8 encoded
+    #   * Printable characters in the Basic Latin and Latin-1 Supplement
+    #     character set (through `\u00FF`).
     #
-    #   * The only Unicode characters that are permitted in a key policy
-    #     document are the horizontal tab (U+0009), linefeed (U+000A),
-    #     carriage return (U+000D), and characters in the range U+0020 to
-    #     U+00FF.
+    #   * The tab (`\u0009`), line feed (`\u000A`), and carriage return
+    #     (`\u000D`) special characters
     #
-    #   * The `Sid` element in a key policy statement can include spaces.
-    #     (Spaces are prohibited in the `Sid` element of an IAM policy
-    #     document.)
-    #
-    #   For help writing and formatting a JSON policy document, see the [IAM
-    #   JSON Policy Reference][4] in the <i> <i>Identity and Access
-    #   Management User Guide</i> </i>.
+    #   For information about key policies, see [Key policies in KMS][4] in
+    #   the *Key Management Service Developer Guide*. For help writing and
+    #   formatting a JSON policy document, see the [IAM JSON Policy
+    #   Reference][5] in the <i> <i>Identity and Access Management User
+    #   Guide</i> </i>.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default
     #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam
     #   [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency
-    #   [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html
+    #   [4]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html
+    #   [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -725,6 +724,9 @@ module Aws::KMS
     #   * For asymmetric KMS keys with ECC key material, specify
     #     `SIGN_VERIFY`.
     #
+    #   * For asymmetric KMS keys with SM2 key material (China Regions
+    #     only), specify `ENCRYPT_DECRYPT` or `SIGN_VERIFY`.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations
@@ -741,10 +743,12 @@ module Aws::KMS
     #
     # @!attribute [rw] key_spec
     #   Specifies the type of KMS key to create. The default value,
-    #   `SYMMETRIC_DEFAULT`, creates a KMS key with a 256-bit symmetric key
-    #   for encryption and decryption. For help choosing a key spec for your
-    #   KMS key, see [Choosing a KMS key type][1] in the <i> <i>Key
-    #   Management Service Developer Guide</i> </i>.
+    #   `SYMMETRIC_DEFAULT`, creates a KMS key with a 256-bit AES-GCM key
+    #   that is used for encryption and decryption, except in China Regions,
+    #   where it creates a 128-bit symmetric key that uses SM4 encryption.
+    #   For help choosing a key spec for your KMS key, see [Choosing a KMS
+    #   key type][1] in the <i> <i>Key Management Service Developer
+    #   Guide</i> </i>.
     #
     #   The `KeySpec` determines whether the KMS key contains a symmetric
     #   key or an asymmetric key pair. It also determines the cryptographic
@@ -764,7 +768,7 @@ module Aws::KMS
     #
     #   * Symmetric encryption key (default)
     #
-    #     * `SYMMETRIC_DEFAULT` (AES-256-GCM)
+    #     * `SYMMETRIC_DEFAULT`
     #
     #     ^
     #
@@ -798,6 +802,12 @@ module Aws::KMS
     #
     #     * `ECC_SECG_P256K1` (secp256k1), commonly used for
     #       cryptocurrencies.
+    #
+    #     ^
+    #
+    #   * SM2 key pairs (China Regions only)
+    #
+    #     * `SM2`
     #
     #     ^
     #
@@ -851,7 +861,7 @@ module Aws::KMS
     #   The response includes the custom key store ID and the ID of the
     #   CloudHSM cluster.
     #
-    #   This operation is part of the [Custom Key Store feature][1] feature
+    #   This operation is part of the [custom key store feature][1] feature
     #   in KMS, which combines the convenience and extensive integration of
     #   KMS with the isolation and control of a single-tenant key store.
     #
@@ -1197,7 +1207,7 @@ module Aws::KMS
     #         },
     #         grant_tokens: ["GrantTokenType"],
     #         key_id: "KeyIdType",
-    #         encryption_algorithm: "SYMMETRIC_DEFAULT", # accepts SYMMETRIC_DEFAULT, RSAES_OAEP_SHA_1, RSAES_OAEP_SHA_256
+    #         encryption_algorithm: "SYMMETRIC_DEFAULT", # accepts SYMMETRIC_DEFAULT, RSAES_OAEP_SHA_1, RSAES_OAEP_SHA_256, SM2PKE
     #       }
     #
     # @!attribute [rw] ciphertext_blob
@@ -1769,7 +1779,7 @@ module Aws::KMS
     #           "EncryptionContextKey" => "EncryptionContextValue",
     #         },
     #         grant_tokens: ["GrantTokenType"],
-    #         encryption_algorithm: "SYMMETRIC_DEFAULT", # accepts SYMMETRIC_DEFAULT, RSAES_OAEP_SHA_1, RSAES_OAEP_SHA_256
+    #         encryption_algorithm: "SYMMETRIC_DEFAULT", # accepts SYMMETRIC_DEFAULT, RSAES_OAEP_SHA_1, RSAES_OAEP_SHA_256, SM2PKE
     #       }
     #
     # @!attribute [rw] key_id
@@ -1916,7 +1926,7 @@ module Aws::KMS
     #           "EncryptionContextKey" => "EncryptionContextValue",
     #         },
     #         key_id: "KeyIdType", # required
-    #         key_pair_spec: "RSA_2048", # required, accepts RSA_2048, RSA_3072, RSA_4096, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1
+    #         key_pair_spec: "RSA_2048", # required, accepts RSA_2048, RSA_3072, RSA_4096, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, SM2
     #         grant_tokens: ["GrantTokenType"],
     #       }
     #
@@ -1970,10 +1980,12 @@ module Aws::KMS
     # @!attribute [rw] key_pair_spec
     #   Determines the type of data key pair that is generated.
     #
-    #   The KMS rule that restricts the use of asymmetric RSA KMS keys to
-    #   encrypt and decrypt or to sign and verify (but not both), and the
-    #   rule that permits you to use ECC KMS keys only to sign and verify,
-    #   are not effective on data key pairs, which are used outside of KMS.
+    #   The KMS rule that restricts the use of asymmetric RSA and SM2 KMS
+    #   keys to encrypt and decrypt or to sign and verify (but not both),
+    #   and the rule that permits you to use ECC KMS keys only to sign and
+    #   verify, are not effective on data key pairs, which are used outside
+    #   of KMS. The SM2 key spec is only available in China Regions. RSA and
+    #   ECC asymmetric key pairs are also available in China Regions.
     #   @return [String]
     #
     # @!attribute [rw] grant_tokens
@@ -2052,7 +2064,7 @@ module Aws::KMS
     #           "EncryptionContextKey" => "EncryptionContextValue",
     #         },
     #         key_id: "KeyIdType", # required
-    #         key_pair_spec: "RSA_2048", # required, accepts RSA_2048, RSA_3072, RSA_4096, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1
+    #         key_pair_spec: "RSA_2048", # required, accepts RSA_2048, RSA_3072, RSA_4096, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, SM2
     #         grant_tokens: ["GrantTokenType"],
     #       }
     #
@@ -2106,10 +2118,12 @@ module Aws::KMS
     # @!attribute [rw] key_pair_spec
     #   Determines the type of data key pair that is generated.
     #
-    #   The KMS rule that restricts the use of asymmetric RSA KMS keys to
-    #   encrypt and decrypt or to sign and verify (but not both), and the
-    #   rule that permits you to use ECC KMS keys only to sign and verify,
-    #   are not effective on data key pairs, which are used outside of KMS.
+    #   The KMS rule that restricts the use of asymmetric RSA and SM2 KMS
+    #   keys to encrypt and decrypt or to sign and verify (but not both),
+    #   and the rule that permits you to use ECC KMS keys only to sign and
+    #   verify, are not effective on data key pairs, which are used outside
+    #   of KMS. The SM2 key spec is only available in China Regions. RSA and
+    #   ECC asymmetric key pairs are also available in China Regions.
     #   @return [String]
     #
     # @!attribute [rw] grant_tokens
@@ -2528,7 +2542,7 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] number_of_bytes
-    #   The length of the byte string.
+    #   The length of the random byte string. This parameter is required.
     #   @return [Integer]
     #
     # @!attribute [rw] custom_key_store_id
@@ -4241,25 +4255,29 @@ module Aws::KMS
     #     immediately visible][2] in the *Amazon Web Services Identity and
     #     Access Management User Guide*.
     #
-    #   A key policy document must conform to the following rules.
+    #   A key policy document can include only the following characters:
     #
-    #   * Up to 32 kilobytes (32768 bytes)
+    #   * Printable ASCII characters from the space character (`\u0020`)
+    #     through the end of the ASCII character range.
     #
-    #   * Must be UTF-8 encoded
+    #   * Printable characters in the Basic Latin and Latin-1 Supplement
+    #     character set (through `\u00FF`).
     #
-    #   * The only Unicode characters that are permitted in a key policy
-    #     document are the horizontal tab (U+0009), linefeed (U+000A),
-    #     carriage return (U+000D), and characters in the range U+0020 to
-    #     U+00FF.
+    #   * The tab (`\u0009`), line feed (`\u000A`), and carriage return
+    #     (`\u000D`) special characters
     #
-    #   * The `Sid` element in a key policy statement can include spaces.
-    #     (Spaces are prohibited in the `Sid` element of an IAM policy
-    #     document.)
+    #   For information about key policies, see [Key policies in KMS][3] in
+    #   the *Key Management Service Developer Guide*. For help writing and
+    #   formatting a JSON policy document, see the [IAM JSON Policy
+    #   Reference][4] in the <i> <i>Identity and Access Management User
+    #   Guide</i> </i>.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam
     #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency
+    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html
+    #   [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html
     #   @return [String]
     #
     # @!attribute [rw] bypass_policy_lockout_safety_check
@@ -4308,8 +4326,8 @@ module Aws::KMS
     #         destination_encryption_context: {
     #           "EncryptionContextKey" => "EncryptionContextValue",
     #         },
-    #         source_encryption_algorithm: "SYMMETRIC_DEFAULT", # accepts SYMMETRIC_DEFAULT, RSAES_OAEP_SHA_1, RSAES_OAEP_SHA_256
-    #         destination_encryption_algorithm: "SYMMETRIC_DEFAULT", # accepts SYMMETRIC_DEFAULT, RSAES_OAEP_SHA_1, RSAES_OAEP_SHA_256
+    #         source_encryption_algorithm: "SYMMETRIC_DEFAULT", # accepts SYMMETRIC_DEFAULT, RSAES_OAEP_SHA_1, RSAES_OAEP_SHA_256, SM2PKE
+    #         destination_encryption_algorithm: "SYMMETRIC_DEFAULT", # accepts SYMMETRIC_DEFAULT, RSAES_OAEP_SHA_1, RSAES_OAEP_SHA_256, SM2PKE
     #         grant_tokens: ["GrantTokenType"],
     #       }
     #
@@ -4621,26 +4639,30 @@ module Aws::KMS
     #     immediately visible][3] in the <i> <i>Identity and Access
     #     Management User Guide</i> </i>.
     #
-    #   A key policy document must conform to the following rules.
+    #   A key policy document can include only the following characters:
     #
-    #   * Up to 32 kilobytes (32768 bytes)
+    #   * Printable ASCII characters from the space character (`\u0020`)
+    #     through the end of the ASCII character range.
     #
-    #   * Must be UTF-8 encoded
+    #   * Printable characters in the Basic Latin and Latin-1 Supplement
+    #     character set (through `\u00FF`).
     #
-    #   * The only Unicode characters that are permitted in a key policy
-    #     document are the horizontal tab (U+0009), linefeed (U+000A),
-    #     carriage return (U+000D), and characters in the range U+0020 to
-    #     U+00FF.
+    #   * The tab (`\u0009`), line feed (`\u000A`), and carriage return
+    #     (`\u000D`) special characters
     #
-    #   * The `Sid` element in a key policy statement can include spaces.
-    #     (Spaces are prohibited in the `Sid` element of an IAM policy
-    #     document.)
+    #   For information about key policies, see [Key policies in KMS][4] in
+    #   the *Key Management Service Developer Guide*. For help writing and
+    #   formatting a JSON policy document, see the [IAM JSON Policy
+    #   Reference][5] in the <i> <i>Identity and Access Management User
+    #   Guide</i> </i>.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default
     #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam
     #   [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency
+    #   [4]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html
+    #   [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html
     #   @return [String]
     #
     # @!attribute [rw] bypass_policy_lockout_safety_check
@@ -4951,7 +4973,7 @@ module Aws::KMS
     #         message: "data", # required
     #         message_type: "RAW", # accepts RAW, DIGEST
     #         grant_tokens: ["GrantTokenType"],
-    #         signing_algorithm: "RSASSA_PSS_SHA_256", # required, accepts RSASSA_PSS_SHA_256, RSASSA_PSS_SHA_384, RSASSA_PSS_SHA_512, RSASSA_PKCS1_V1_5_SHA_256, RSASSA_PKCS1_V1_5_SHA_384, RSASSA_PKCS1_V1_5_SHA_512, ECDSA_SHA_256, ECDSA_SHA_384, ECDSA_SHA_512
+    #         signing_algorithm: "RSASSA_PSS_SHA_256", # required, accepts RSASSA_PSS_SHA_256, RSASSA_PSS_SHA_384, RSASSA_PSS_SHA_512, RSASSA_PKCS1_V1_5_SHA_256, RSASSA_PKCS1_V1_5_SHA_384, RSASSA_PKCS1_V1_5_SHA_512, ECDSA_SHA_256, ECDSA_SHA_384, ECDSA_SHA_512, SM2DSA
     #       }
     #
     # @!attribute [rw] key_id
@@ -5232,8 +5254,8 @@ module Aws::KMS
     # @!attribute [rw] alias_name
     #   Identifies the alias that is changing its KMS key. This value must
     #   begin with `alias/` followed by the alias name, such as
-    #   `alias/ExampleAlias`. You cannot use UpdateAlias to change the alias
-    #   name.
+    #   `alias/ExampleAlias`. You cannot use `UpdateAlias` to change the
+    #   alias name.
     #   @return [String]
     #
     # @!attribute [rw] target_key_id
@@ -5522,7 +5544,7 @@ module Aws::KMS
     #         message: "data", # required
     #         message_type: "RAW", # accepts RAW, DIGEST
     #         signature: "data", # required
-    #         signing_algorithm: "RSASSA_PSS_SHA_256", # required, accepts RSASSA_PSS_SHA_256, RSASSA_PSS_SHA_384, RSASSA_PSS_SHA_512, RSASSA_PKCS1_V1_5_SHA_256, RSASSA_PKCS1_V1_5_SHA_384, RSASSA_PKCS1_V1_5_SHA_512, ECDSA_SHA_256, ECDSA_SHA_384, ECDSA_SHA_512
+    #         signing_algorithm: "RSASSA_PSS_SHA_256", # required, accepts RSASSA_PSS_SHA_256, RSASSA_PSS_SHA_384, RSASSA_PSS_SHA_512, RSASSA_PKCS1_V1_5_SHA_256, RSASSA_PKCS1_V1_5_SHA_384, RSASSA_PKCS1_V1_5_SHA_512, ECDSA_SHA_256, ECDSA_SHA_384, ECDSA_SHA_512, SM2DSA
     #         grant_tokens: ["GrantTokenType"],
     #       }
     #

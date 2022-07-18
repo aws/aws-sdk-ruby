@@ -1028,6 +1028,7 @@ module Aws::ApplicationDiscoveryService
     #   * {Types::GetDiscoverySummaryResponse#agent_summary #agent_summary} => Types::CustomerAgentInfo
     #   * {Types::GetDiscoverySummaryResponse#connector_summary #connector_summary} => Types::CustomerConnectorInfo
     #   * {Types::GetDiscoverySummaryResponse#me_collector_summary #me_collector_summary} => Types::CustomerMeCollectorInfo
+    #   * {Types::GetDiscoverySummaryResponse#agentless_collector_summary #agentless_collector_summary} => Types::CustomerAgentlessCollectorInfo
     #
     # @example Response structure
     #
@@ -1056,6 +1057,13 @@ module Aws::ApplicationDiscoveryService
     #   resp.me_collector_summary.unhealthy_me_collectors #=> Integer
     #   resp.me_collector_summary.total_me_collectors #=> Integer
     #   resp.me_collector_summary.unknown_me_collectors #=> Integer
+    #   resp.agentless_collector_summary.active_agentless_collectors #=> Integer
+    #   resp.agentless_collector_summary.healthy_agentless_collectors #=> Integer
+    #   resp.agentless_collector_summary.deny_listed_agentless_collectors #=> Integer
+    #   resp.agentless_collector_summary.shutdown_agentless_collectors #=> Integer
+    #   resp.agentless_collector_summary.unhealthy_agentless_collectors #=> Integer
+    #   resp.agentless_collector_summary.total_agentless_collectors #=> Integer
+    #   resp.agentless_collector_summary.unknown_agentless_collectors #=> Integer
     #
     # @overload get_discovery_summary(params = {})
     # @param [Hash] params ({})
@@ -1534,7 +1542,7 @@ module Aws::ApplicationDiscoveryService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationdiscoveryservice'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

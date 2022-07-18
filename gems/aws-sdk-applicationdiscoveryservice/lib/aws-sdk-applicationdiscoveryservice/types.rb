@@ -520,6 +520,39 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
+    # @!attribute [rw] active_agentless_collectors
+    #   @return [Integer]
+    #
+    # @!attribute [rw] healthy_agentless_collectors
+    #   @return [Integer]
+    #
+    # @!attribute [rw] deny_listed_agentless_collectors
+    #   @return [Integer]
+    #
+    # @!attribute [rw] shutdown_agentless_collectors
+    #   @return [Integer]
+    #
+    # @!attribute [rw] unhealthy_agentless_collectors
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_agentless_collectors
+    #   @return [Integer]
+    #
+    # @!attribute [rw] unknown_agentless_collectors
+    #   @return [Integer]
+    #
+    class CustomerAgentlessCollectorInfo < Struct.new(
+      :active_agentless_collectors,
+      :healthy_agentless_collectors,
+      :deny_listed_agentless_collectors,
+      :shutdown_agentless_collectors,
+      :unhealthy_agentless_collectors,
+      :total_agentless_collectors,
+      :unknown_agentless_collectors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Inventory data for installed discovery connectors.
     #
     # @!attribute [rw] active_connectors
@@ -1247,6 +1280,9 @@ module Aws::ApplicationDiscoveryService
     #   status and health.
     #   @return [Types::CustomerMeCollectorInfo]
     #
+    # @!attribute [rw] agentless_collector_summary
+    #   @return [Types::CustomerAgentlessCollectorInfo]
+    #
     class GetDiscoverySummaryResponse < Struct.new(
       :servers,
       :applications,
@@ -1254,7 +1290,8 @@ module Aws::ApplicationDiscoveryService
       :servers_mappedto_tags,
       :agent_summary,
       :connector_summary,
-      :me_collector_summary)
+      :me_collector_summary,
+      :agentless_collector_summary)
       SENSITIVE = []
       include Aws::Structure
     end

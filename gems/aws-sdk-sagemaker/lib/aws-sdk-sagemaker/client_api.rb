@@ -259,6 +259,9 @@ module Aws::SageMaker
     CreateDeviceFleetRequest = Shapes::StructureShape.new(name: 'CreateDeviceFleetRequest')
     CreateDomainRequest = Shapes::StructureShape.new(name: 'CreateDomainRequest')
     CreateDomainResponse = Shapes::StructureShape.new(name: 'CreateDomainResponse')
+    CreateEdgeDeploymentPlanRequest = Shapes::StructureShape.new(name: 'CreateEdgeDeploymentPlanRequest')
+    CreateEdgeDeploymentPlanResponse = Shapes::StructureShape.new(name: 'CreateEdgeDeploymentPlanResponse')
+    CreateEdgeDeploymentStageRequest = Shapes::StructureShape.new(name: 'CreateEdgeDeploymentStageRequest')
     CreateEdgePackagingJobRequest = Shapes::StructureShape.new(name: 'CreateEdgePackagingJobRequest')
     CreateEndpointConfigInput = Shapes::StructureShape.new(name: 'CreateEndpointConfigInput')
     CreateEndpointConfigOutput = Shapes::StructureShape.new(name: 'CreateEndpointConfigOutput')
@@ -370,6 +373,8 @@ module Aws::SageMaker
     DeleteDataQualityJobDefinitionRequest = Shapes::StructureShape.new(name: 'DeleteDataQualityJobDefinitionRequest')
     DeleteDeviceFleetRequest = Shapes::StructureShape.new(name: 'DeleteDeviceFleetRequest')
     DeleteDomainRequest = Shapes::StructureShape.new(name: 'DeleteDomainRequest')
+    DeleteEdgeDeploymentPlanRequest = Shapes::StructureShape.new(name: 'DeleteEdgeDeploymentPlanRequest')
+    DeleteEdgeDeploymentStageRequest = Shapes::StructureShape.new(name: 'DeleteEdgeDeploymentStageRequest')
     DeleteEndpointConfigInput = Shapes::StructureShape.new(name: 'DeleteEndpointConfigInput')
     DeleteEndpointInput = Shapes::StructureShape.new(name: 'DeleteEndpointInput')
     DeleteExperimentRequest = Shapes::StructureShape.new(name: 'DeleteExperimentRequest')
@@ -411,6 +416,11 @@ module Aws::SageMaker
     DeployedImage = Shapes::StructureShape.new(name: 'DeployedImage')
     DeployedImages = Shapes::ListShape.new(name: 'DeployedImages')
     DeploymentConfig = Shapes::StructureShape.new(name: 'DeploymentConfig')
+    DeploymentStage = Shapes::StructureShape.new(name: 'DeploymentStage')
+    DeploymentStageMaxResults = Shapes::IntegerShape.new(name: 'DeploymentStageMaxResults')
+    DeploymentStageStatusSummaries = Shapes::ListShape.new(name: 'DeploymentStageStatusSummaries')
+    DeploymentStageStatusSummary = Shapes::StructureShape.new(name: 'DeploymentStageStatusSummary')
+    DeploymentStages = Shapes::ListShape.new(name: 'DeploymentStages')
     DeregisterDevicesRequest = Shapes::StructureShape.new(name: 'DeregisterDevicesRequest')
     DescribeActionRequest = Shapes::StructureShape.new(name: 'DescribeActionRequest')
     DescribeActionResponse = Shapes::StructureShape.new(name: 'DescribeActionResponse')
@@ -438,6 +448,8 @@ module Aws::SageMaker
     DescribeDeviceResponse = Shapes::StructureShape.new(name: 'DescribeDeviceResponse')
     DescribeDomainRequest = Shapes::StructureShape.new(name: 'DescribeDomainRequest')
     DescribeDomainResponse = Shapes::StructureShape.new(name: 'DescribeDomainResponse')
+    DescribeEdgeDeploymentPlanRequest = Shapes::StructureShape.new(name: 'DescribeEdgeDeploymentPlanRequest')
+    DescribeEdgeDeploymentPlanResponse = Shapes::StructureShape.new(name: 'DescribeEdgeDeploymentPlanResponse')
     DescribeEdgePackagingJobRequest = Shapes::StructureShape.new(name: 'DescribeEdgePackagingJobRequest')
     DescribeEdgePackagingJobResponse = Shapes::StructureShape.new(name: 'DescribeEdgePackagingJobResponse')
     DescribeEndpointConfigInput = Shapes::StructureShape.new(name: 'DescribeEndpointConfigInput')
@@ -520,6 +532,9 @@ module Aws::SageMaker
     DetailedModelPackageStatus = Shapes::StringShape.new(name: 'DetailedModelPackageStatus')
     Device = Shapes::StructureShape.new(name: 'Device')
     DeviceArn = Shapes::StringShape.new(name: 'DeviceArn')
+    DeviceDeploymentStatus = Shapes::StringShape.new(name: 'DeviceDeploymentStatus')
+    DeviceDeploymentSummaries = Shapes::ListShape.new(name: 'DeviceDeploymentSummaries')
+    DeviceDeploymentSummary = Shapes::StructureShape.new(name: 'DeviceDeploymentSummary')
     DeviceDescription = Shapes::StringShape.new(name: 'DeviceDescription')
     DeviceFleetArn = Shapes::StringShape.new(name: 'DeviceFleetArn')
     DeviceFleetDescription = Shapes::StringShape.new(name: 'DeviceFleetDescription')
@@ -527,7 +542,9 @@ module Aws::SageMaker
     DeviceFleetSummary = Shapes::StructureShape.new(name: 'DeviceFleetSummary')
     DeviceName = Shapes::StringShape.new(name: 'DeviceName')
     DeviceNames = Shapes::ListShape.new(name: 'DeviceNames')
+    DeviceSelectionConfig = Shapes::StructureShape.new(name: 'DeviceSelectionConfig')
     DeviceStats = Shapes::StructureShape.new(name: 'DeviceStats')
+    DeviceSubsetType = Shapes::StringShape.new(name: 'DeviceSubsetType')
     DeviceSummaries = Shapes::ListShape.new(name: 'DeviceSummaries')
     DeviceSummary = Shapes::StructureShape.new(name: 'DeviceSummary')
     Devices = Shapes::ListShape.new(name: 'Devices')
@@ -561,6 +578,13 @@ module Aws::SageMaker
     DriftCheckModelQuality = Shapes::StructureShape.new(name: 'DriftCheckModelQuality')
     EMRStepMetadata = Shapes::StructureShape.new(name: 'EMRStepMetadata')
     Edge = Shapes::StructureShape.new(name: 'Edge')
+    EdgeDeploymentConfig = Shapes::StructureShape.new(name: 'EdgeDeploymentConfig')
+    EdgeDeploymentModelConfig = Shapes::StructureShape.new(name: 'EdgeDeploymentModelConfig')
+    EdgeDeploymentModelConfigs = Shapes::ListShape.new(name: 'EdgeDeploymentModelConfigs')
+    EdgeDeploymentPlanArn = Shapes::StringShape.new(name: 'EdgeDeploymentPlanArn')
+    EdgeDeploymentPlanSummaries = Shapes::ListShape.new(name: 'EdgeDeploymentPlanSummaries')
+    EdgeDeploymentPlanSummary = Shapes::StructureShape.new(name: 'EdgeDeploymentPlanSummary')
+    EdgeDeploymentStatus = Shapes::StructureShape.new(name: 'EdgeDeploymentStatus')
     EdgeModel = Shapes::StructureShape.new(name: 'EdgeModel')
     EdgeModelStat = Shapes::StructureShape.new(name: 'EdgeModelStat')
     EdgeModelStats = Shapes::ListShape.new(name: 'EdgeModelStats')
@@ -625,6 +649,7 @@ module Aws::SageMaker
     Explainability = Shapes::StructureShape.new(name: 'Explainability')
     ExplainabilityLocation = Shapes::StringShape.new(name: 'ExplainabilityLocation')
     FailStepMetadata = Shapes::StructureShape.new(name: 'FailStepMetadata')
+    FailureHandlingPolicy = Shapes::StringShape.new(name: 'FailureHandlingPolicy')
     FailureReason = Shapes::StringShape.new(name: 'FailureReason')
     FeatureAdditions = Shapes::ListShape.new(name: 'FeatureAdditions')
     FeatureDefinition = Shapes::StructureShape.new(name: 'FeatureDefinition')
@@ -866,6 +891,9 @@ module Aws::SageMaker
     ListDevicesResponse = Shapes::StructureShape.new(name: 'ListDevicesResponse')
     ListDomainsRequest = Shapes::StructureShape.new(name: 'ListDomainsRequest')
     ListDomainsResponse = Shapes::StructureShape.new(name: 'ListDomainsResponse')
+    ListEdgeDeploymentPlansRequest = Shapes::StructureShape.new(name: 'ListEdgeDeploymentPlansRequest')
+    ListEdgeDeploymentPlansResponse = Shapes::StructureShape.new(name: 'ListEdgeDeploymentPlansResponse')
+    ListEdgeDeploymentPlansSortBy = Shapes::StringShape.new(name: 'ListEdgeDeploymentPlansSortBy')
     ListEdgePackagingJobsRequest = Shapes::StructureShape.new(name: 'ListEdgePackagingJobsRequest')
     ListEdgePackagingJobsResponse = Shapes::StructureShape.new(name: 'ListEdgePackagingJobsResponse')
     ListEdgePackagingJobsSortBy = Shapes::StringShape.new(name: 'ListEdgePackagingJobsSortBy')
@@ -933,6 +961,8 @@ module Aws::SageMaker
     ListProcessingJobsResponse = Shapes::StructureShape.new(name: 'ListProcessingJobsResponse')
     ListProjectsInput = Shapes::StructureShape.new(name: 'ListProjectsInput')
     ListProjectsOutput = Shapes::StructureShape.new(name: 'ListProjectsOutput')
+    ListStageDevicesRequest = Shapes::StructureShape.new(name: 'ListStageDevicesRequest')
+    ListStageDevicesResponse = Shapes::StructureShape.new(name: 'ListStageDevicesResponse')
     ListStudioLifecycleConfigsRequest = Shapes::StructureShape.new(name: 'ListStudioLifecycleConfigsRequest')
     ListStudioLifecycleConfigsResponse = Shapes::StructureShape.new(name: 'ListStudioLifecycleConfigsResponse')
     ListSubscribedWorkteamsRequest = Shapes::StructureShape.new(name: 'ListSubscribedWorkteamsRequest')
@@ -1174,6 +1204,7 @@ module Aws::SageMaker
     PendingDeploymentSummary = Shapes::StructureShape.new(name: 'PendingDeploymentSummary')
     PendingProductionVariantSummary = Shapes::StructureShape.new(name: 'PendingProductionVariantSummary')
     PendingProductionVariantSummaryList = Shapes::ListShape.new(name: 'PendingProductionVariantSummaryList')
+    Percentage = Shapes::IntegerShape.new(name: 'Percentage')
     Phase = Shapes::StructureShape.new(name: 'Phase')
     Phases = Shapes::ListShape.new(name: 'Phases')
     Pipeline = Shapes::StructureShape.new(name: 'Pipeline')
@@ -1405,6 +1436,8 @@ module Aws::SageMaker
     SourceUri = Shapes::StringShape.new(name: 'SourceUri')
     SpawnRate = Shapes::IntegerShape.new(name: 'SpawnRate')
     SplitType = Shapes::StringShape.new(name: 'SplitType')
+    StageStatus = Shapes::StringShape.new(name: 'StageStatus')
+    StartEdgeDeploymentStageRequest = Shapes::StructureShape.new(name: 'StartEdgeDeploymentStageRequest')
     StartMonitoringScheduleRequest = Shapes::StructureShape.new(name: 'StartMonitoringScheduleRequest')
     StartNotebookInstanceInput = Shapes::StructureShape.new(name: 'StartNotebookInstanceInput')
     StartPipelineExecutionRequest = Shapes::StructureShape.new(name: 'StartPipelineExecutionRequest')
@@ -1417,6 +1450,7 @@ module Aws::SageMaker
     StepStatus = Shapes::StringShape.new(name: 'StepStatus')
     StopAutoMLJobRequest = Shapes::StructureShape.new(name: 'StopAutoMLJobRequest')
     StopCompilationJobRequest = Shapes::StructureShape.new(name: 'StopCompilationJobRequest')
+    StopEdgeDeploymentStageRequest = Shapes::StructureShape.new(name: 'StopEdgeDeploymentStageRequest')
     StopEdgePackagingJobRequest = Shapes::StructureShape.new(name: 'StopEdgePackagingJobRequest')
     StopHyperParameterTuningJobRequest = Shapes::StructureShape.new(name: 'StopHyperParameterTuningJobRequest')
     StopInferenceRecommendationsJobRequest = Shapes::StructureShape.new(name: 'StopInferenceRecommendationsJobRequest')
@@ -2301,6 +2335,20 @@ module Aws::SageMaker
     CreateDomainResponse.add_member(:url, Shapes::ShapeRef.new(shape: String1024, location_name: "Url"))
     CreateDomainResponse.struct_class = Types::CreateDomainResponse
 
+    CreateEdgeDeploymentPlanRequest.add_member(:edge_deployment_plan_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "EdgeDeploymentPlanName"))
+    CreateEdgeDeploymentPlanRequest.add_member(:model_configs, Shapes::ShapeRef.new(shape: EdgeDeploymentModelConfigs, required: true, location_name: "ModelConfigs"))
+    CreateEdgeDeploymentPlanRequest.add_member(:device_fleet_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "DeviceFleetName"))
+    CreateEdgeDeploymentPlanRequest.add_member(:stages, Shapes::ShapeRef.new(shape: DeploymentStages, location_name: "Stages"))
+    CreateEdgeDeploymentPlanRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateEdgeDeploymentPlanRequest.struct_class = Types::CreateEdgeDeploymentPlanRequest
+
+    CreateEdgeDeploymentPlanResponse.add_member(:edge_deployment_plan_arn, Shapes::ShapeRef.new(shape: EdgeDeploymentPlanArn, required: true, location_name: "EdgeDeploymentPlanArn"))
+    CreateEdgeDeploymentPlanResponse.struct_class = Types::CreateEdgeDeploymentPlanResponse
+
+    CreateEdgeDeploymentStageRequest.add_member(:edge_deployment_plan_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "EdgeDeploymentPlanName"))
+    CreateEdgeDeploymentStageRequest.add_member(:stages, Shapes::ShapeRef.new(shape: DeploymentStages, required: true, location_name: "Stages"))
+    CreateEdgeDeploymentStageRequest.struct_class = Types::CreateEdgeDeploymentStageRequest
+
     CreateEdgePackagingJobRequest.add_member(:edge_packaging_job_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "EdgePackagingJobName"))
     CreateEdgePackagingJobRequest.add_member(:compilation_job_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "CompilationJobName"))
     CreateEdgePackagingJobRequest.add_member(:model_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "ModelName"))
@@ -2869,6 +2917,13 @@ module Aws::SageMaker
     DeleteDomainRequest.add_member(:retention_policy, Shapes::ShapeRef.new(shape: RetentionPolicy, location_name: "RetentionPolicy"))
     DeleteDomainRequest.struct_class = Types::DeleteDomainRequest
 
+    DeleteEdgeDeploymentPlanRequest.add_member(:edge_deployment_plan_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "EdgeDeploymentPlanName"))
+    DeleteEdgeDeploymentPlanRequest.struct_class = Types::DeleteEdgeDeploymentPlanRequest
+
+    DeleteEdgeDeploymentStageRequest.add_member(:edge_deployment_plan_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "EdgeDeploymentPlanName"))
+    DeleteEdgeDeploymentStageRequest.add_member(:stage_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "StageName"))
+    DeleteEdgeDeploymentStageRequest.struct_class = Types::DeleteEdgeDeploymentStageRequest
+
     DeleteEndpointConfigInput.add_member(:endpoint_config_name, Shapes::ShapeRef.new(shape: EndpointConfigName, required: true, location_name: "EndpointConfigName"))
     DeleteEndpointConfigInput.struct_class = Types::DeleteEndpointConfigInput
 
@@ -2991,6 +3046,21 @@ module Aws::SageMaker
     DeploymentConfig.add_member(:blue_green_update_policy, Shapes::ShapeRef.new(shape: BlueGreenUpdatePolicy, required: true, location_name: "BlueGreenUpdatePolicy"))
     DeploymentConfig.add_member(:auto_rollback_configuration, Shapes::ShapeRef.new(shape: AutoRollbackConfig, location_name: "AutoRollbackConfiguration"))
     DeploymentConfig.struct_class = Types::DeploymentConfig
+
+    DeploymentStage.add_member(:stage_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "StageName"))
+    DeploymentStage.add_member(:device_selection_config, Shapes::ShapeRef.new(shape: DeviceSelectionConfig, required: true, location_name: "DeviceSelectionConfig"))
+    DeploymentStage.add_member(:deployment_config, Shapes::ShapeRef.new(shape: EdgeDeploymentConfig, location_name: "DeploymentConfig"))
+    DeploymentStage.struct_class = Types::DeploymentStage
+
+    DeploymentStageStatusSummaries.member = Shapes::ShapeRef.new(shape: DeploymentStageStatusSummary)
+
+    DeploymentStageStatusSummary.add_member(:stage_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "StageName"))
+    DeploymentStageStatusSummary.add_member(:device_selection_config, Shapes::ShapeRef.new(shape: DeviceSelectionConfig, required: true, location_name: "DeviceSelectionConfig"))
+    DeploymentStageStatusSummary.add_member(:deployment_config, Shapes::ShapeRef.new(shape: EdgeDeploymentConfig, required: true, location_name: "DeploymentConfig"))
+    DeploymentStageStatusSummary.add_member(:deployment_status, Shapes::ShapeRef.new(shape: EdgeDeploymentStatus, required: true, location_name: "DeploymentStatus"))
+    DeploymentStageStatusSummary.struct_class = Types::DeploymentStageStatusSummary
+
+    DeploymentStages.member = Shapes::ShapeRef.new(shape: DeploymentStage)
 
     DeregisterDevicesRequest.add_member(:device_fleet_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "DeviceFleetName"))
     DeregisterDevicesRequest.add_member(:device_names, Shapes::ShapeRef.new(shape: DeviceNames, required: true, location_name: "DeviceNames"))
@@ -3220,6 +3290,24 @@ module Aws::SageMaker
     DescribeDomainResponse.add_member(:app_security_group_management, Shapes::ShapeRef.new(shape: AppSecurityGroupManagement, location_name: "AppSecurityGroupManagement"))
     DescribeDomainResponse.add_member(:security_group_id_for_domain_boundary, Shapes::ShapeRef.new(shape: SecurityGroupId, location_name: "SecurityGroupIdForDomainBoundary"))
     DescribeDomainResponse.struct_class = Types::DescribeDomainResponse
+
+    DescribeEdgeDeploymentPlanRequest.add_member(:edge_deployment_plan_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "EdgeDeploymentPlanName"))
+    DescribeEdgeDeploymentPlanRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeEdgeDeploymentPlanRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DeploymentStageMaxResults, location_name: "MaxResults"))
+    DescribeEdgeDeploymentPlanRequest.struct_class = Types::DescribeEdgeDeploymentPlanRequest
+
+    DescribeEdgeDeploymentPlanResponse.add_member(:edge_deployment_plan_arn, Shapes::ShapeRef.new(shape: EdgeDeploymentPlanArn, required: true, location_name: "EdgeDeploymentPlanArn"))
+    DescribeEdgeDeploymentPlanResponse.add_member(:edge_deployment_plan_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "EdgeDeploymentPlanName"))
+    DescribeEdgeDeploymentPlanResponse.add_member(:model_configs, Shapes::ShapeRef.new(shape: EdgeDeploymentModelConfigs, required: true, location_name: "ModelConfigs"))
+    DescribeEdgeDeploymentPlanResponse.add_member(:device_fleet_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "DeviceFleetName"))
+    DescribeEdgeDeploymentPlanResponse.add_member(:edge_deployment_success, Shapes::ShapeRef.new(shape: Integer, location_name: "EdgeDeploymentSuccess"))
+    DescribeEdgeDeploymentPlanResponse.add_member(:edge_deployment_pending, Shapes::ShapeRef.new(shape: Integer, location_name: "EdgeDeploymentPending"))
+    DescribeEdgeDeploymentPlanResponse.add_member(:edge_deployment_failed, Shapes::ShapeRef.new(shape: Integer, location_name: "EdgeDeploymentFailed"))
+    DescribeEdgeDeploymentPlanResponse.add_member(:stages, Shapes::ShapeRef.new(shape: DeploymentStageStatusSummaries, required: true, location_name: "Stages"))
+    DescribeEdgeDeploymentPlanResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeEdgeDeploymentPlanResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    DescribeEdgeDeploymentPlanResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    DescribeEdgeDeploymentPlanResponse.struct_class = Types::DescribeEdgeDeploymentPlanResponse
 
     DescribeEdgePackagingJobRequest.add_member(:edge_packaging_job_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "EdgePackagingJobName"))
     DescribeEdgePackagingJobRequest.struct_class = Types::DescribeEdgePackagingJobRequest
@@ -3854,6 +3942,21 @@ module Aws::SageMaker
     Device.add_member(:iot_thing_name, Shapes::ShapeRef.new(shape: ThingName, location_name: "IotThingName"))
     Device.struct_class = Types::Device
 
+    DeviceDeploymentSummaries.member = Shapes::ShapeRef.new(shape: DeviceDeploymentSummary)
+
+    DeviceDeploymentSummary.add_member(:edge_deployment_plan_arn, Shapes::ShapeRef.new(shape: EdgeDeploymentPlanArn, required: true, location_name: "EdgeDeploymentPlanArn"))
+    DeviceDeploymentSummary.add_member(:edge_deployment_plan_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "EdgeDeploymentPlanName"))
+    DeviceDeploymentSummary.add_member(:stage_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "StageName"))
+    DeviceDeploymentSummary.add_member(:deployed_stage_name, Shapes::ShapeRef.new(shape: EntityName, location_name: "DeployedStageName"))
+    DeviceDeploymentSummary.add_member(:device_fleet_name, Shapes::ShapeRef.new(shape: EntityName, location_name: "DeviceFleetName"))
+    DeviceDeploymentSummary.add_member(:device_name, Shapes::ShapeRef.new(shape: DeviceName, required: true, location_name: "DeviceName"))
+    DeviceDeploymentSummary.add_member(:device_arn, Shapes::ShapeRef.new(shape: DeviceArn, required: true, location_name: "DeviceArn"))
+    DeviceDeploymentSummary.add_member(:device_deployment_status, Shapes::ShapeRef.new(shape: DeviceDeploymentStatus, location_name: "DeviceDeploymentStatus"))
+    DeviceDeploymentSummary.add_member(:device_deployment_status_message, Shapes::ShapeRef.new(shape: String, location_name: "DeviceDeploymentStatusMessage"))
+    DeviceDeploymentSummary.add_member(:description, Shapes::ShapeRef.new(shape: DeviceDescription, location_name: "Description"))
+    DeviceDeploymentSummary.add_member(:deployment_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DeploymentStartTime"))
+    DeviceDeploymentSummary.struct_class = Types::DeviceDeploymentSummary
+
     DeviceFleetSummaries.member = Shapes::ShapeRef.new(shape: DeviceFleetSummary)
 
     DeviceFleetSummary.add_member(:device_fleet_arn, Shapes::ShapeRef.new(shape: DeviceFleetArn, required: true, location_name: "DeviceFleetArn"))
@@ -3863,6 +3966,12 @@ module Aws::SageMaker
     DeviceFleetSummary.struct_class = Types::DeviceFleetSummary
 
     DeviceNames.member = Shapes::ShapeRef.new(shape: DeviceName)
+
+    DeviceSelectionConfig.add_member(:device_subset_type, Shapes::ShapeRef.new(shape: DeviceSubsetType, required: true, location_name: "DeviceSubsetType"))
+    DeviceSelectionConfig.add_member(:percentage, Shapes::ShapeRef.new(shape: Percentage, location_name: "Percentage"))
+    DeviceSelectionConfig.add_member(:device_names, Shapes::ShapeRef.new(shape: DeviceNames, location_name: "DeviceNames"))
+    DeviceSelectionConfig.add_member(:device_name_contains, Shapes::ShapeRef.new(shape: DeviceName, location_name: "DeviceNameContains"))
+    DeviceSelectionConfig.struct_class = Types::DeviceSelectionConfig
 
     DeviceStats.add_member(:connected_device_count, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "ConnectedDeviceCount"))
     DeviceStats.add_member(:registered_device_count, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "RegisteredDeviceCount"))
@@ -3948,6 +4057,35 @@ module Aws::SageMaker
     Edge.add_member(:destination_arn, Shapes::ShapeRef.new(shape: AssociationEntityArn, location_name: "DestinationArn"))
     Edge.add_member(:association_type, Shapes::ShapeRef.new(shape: AssociationEdgeType, location_name: "AssociationType"))
     Edge.struct_class = Types::Edge
+
+    EdgeDeploymentConfig.add_member(:failure_handling_policy, Shapes::ShapeRef.new(shape: FailureHandlingPolicy, required: true, location_name: "FailureHandlingPolicy"))
+    EdgeDeploymentConfig.struct_class = Types::EdgeDeploymentConfig
+
+    EdgeDeploymentModelConfig.add_member(:model_handle, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "ModelHandle"))
+    EdgeDeploymentModelConfig.add_member(:edge_packaging_job_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "EdgePackagingJobName"))
+    EdgeDeploymentModelConfig.struct_class = Types::EdgeDeploymentModelConfig
+
+    EdgeDeploymentModelConfigs.member = Shapes::ShapeRef.new(shape: EdgeDeploymentModelConfig)
+
+    EdgeDeploymentPlanSummaries.member = Shapes::ShapeRef.new(shape: EdgeDeploymentPlanSummary)
+
+    EdgeDeploymentPlanSummary.add_member(:edge_deployment_plan_arn, Shapes::ShapeRef.new(shape: EdgeDeploymentPlanArn, required: true, location_name: "EdgeDeploymentPlanArn"))
+    EdgeDeploymentPlanSummary.add_member(:edge_deployment_plan_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "EdgeDeploymentPlanName"))
+    EdgeDeploymentPlanSummary.add_member(:device_fleet_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "DeviceFleetName"))
+    EdgeDeploymentPlanSummary.add_member(:edge_deployment_success, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "EdgeDeploymentSuccess"))
+    EdgeDeploymentPlanSummary.add_member(:edge_deployment_pending, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "EdgeDeploymentPending"))
+    EdgeDeploymentPlanSummary.add_member(:edge_deployment_failed, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "EdgeDeploymentFailed"))
+    EdgeDeploymentPlanSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    EdgeDeploymentPlanSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    EdgeDeploymentPlanSummary.struct_class = Types::EdgeDeploymentPlanSummary
+
+    EdgeDeploymentStatus.add_member(:stage_status, Shapes::ShapeRef.new(shape: StageStatus, required: true, location_name: "StageStatus"))
+    EdgeDeploymentStatus.add_member(:edge_deployment_success_in_stage, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "EdgeDeploymentSuccessInStage"))
+    EdgeDeploymentStatus.add_member(:edge_deployment_pending_in_stage, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "EdgeDeploymentPendingInStage"))
+    EdgeDeploymentStatus.add_member(:edge_deployment_failed_in_stage, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "EdgeDeploymentFailedInStage"))
+    EdgeDeploymentStatus.add_member(:edge_deployment_status_message, Shapes::ShapeRef.new(shape: String, location_name: "EdgeDeploymentStatusMessage"))
+    EdgeDeploymentStatus.add_member(:edge_deployment_stage_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EdgeDeploymentStageStartTime"))
+    EdgeDeploymentStatus.struct_class = Types::EdgeDeploymentStatus
 
     EdgeModel.add_member(:model_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "ModelName"))
     EdgeModel.add_member(:model_version, Shapes::ShapeRef.new(shape: EdgeVersion, required: true, location_name: "ModelVersion"))
@@ -4813,6 +4951,22 @@ module Aws::SageMaker
     ListDomainsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListDomainsResponse.struct_class = Types::ListDomainsResponse
 
+    ListEdgeDeploymentPlansRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListEdgeDeploymentPlansRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListMaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListEdgeDeploymentPlansRequest.add_member(:creation_time_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimeAfter"))
+    ListEdgeDeploymentPlansRequest.add_member(:creation_time_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimeBefore"))
+    ListEdgeDeploymentPlansRequest.add_member(:last_modified_time_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTimeAfter"))
+    ListEdgeDeploymentPlansRequest.add_member(:last_modified_time_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTimeBefore"))
+    ListEdgeDeploymentPlansRequest.add_member(:name_contains, Shapes::ShapeRef.new(shape: NameContains, location_name: "NameContains"))
+    ListEdgeDeploymentPlansRequest.add_member(:device_fleet_name_contains, Shapes::ShapeRef.new(shape: NameContains, location_name: "DeviceFleetNameContains"))
+    ListEdgeDeploymentPlansRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: ListEdgeDeploymentPlansSortBy, location_name: "SortBy"))
+    ListEdgeDeploymentPlansRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
+    ListEdgeDeploymentPlansRequest.struct_class = Types::ListEdgeDeploymentPlansRequest
+
+    ListEdgeDeploymentPlansResponse.add_member(:edge_deployment_plan_summaries, Shapes::ShapeRef.new(shape: EdgeDeploymentPlanSummaries, required: true, location_name: "EdgeDeploymentPlanSummaries"))
+    ListEdgeDeploymentPlansResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListEdgeDeploymentPlansResponse.struct_class = Types::ListEdgeDeploymentPlansResponse
+
     ListEdgePackagingJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListEdgePackagingJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListMaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
     ListEdgePackagingJobsRequest.add_member(:creation_time_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimeAfter"))
@@ -5254,6 +5408,17 @@ module Aws::SageMaker
     ListProjectsOutput.add_member(:project_summary_list, Shapes::ShapeRef.new(shape: ProjectSummaryList, required: true, location_name: "ProjectSummaryList"))
     ListProjectsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListProjectsOutput.struct_class = Types::ListProjectsOutput
+
+    ListStageDevicesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListStageDevicesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListMaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListStageDevicesRequest.add_member(:edge_deployment_plan_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "EdgeDeploymentPlanName"))
+    ListStageDevicesRequest.add_member(:exclude_devices_deployed_in_other_stage, Shapes::ShapeRef.new(shape: Boolean, location_name: "ExcludeDevicesDeployedInOtherStage"))
+    ListStageDevicesRequest.add_member(:stage_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "StageName"))
+    ListStageDevicesRequest.struct_class = Types::ListStageDevicesRequest
+
+    ListStageDevicesResponse.add_member(:device_deployment_summaries, Shapes::ShapeRef.new(shape: DeviceDeploymentSummaries, required: true, location_name: "DeviceDeploymentSummaries"))
+    ListStageDevicesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListStageDevicesResponse.struct_class = Types::ListStageDevicesResponse
 
     ListStudioLifecycleConfigsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListStudioLifecycleConfigsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -6546,6 +6711,10 @@ module Aws::SageMaker
     SourceIpConfig.add_member(:cidrs, Shapes::ShapeRef.new(shape: Cidrs, required: true, location_name: "Cidrs"))
     SourceIpConfig.struct_class = Types::SourceIpConfig
 
+    StartEdgeDeploymentStageRequest.add_member(:edge_deployment_plan_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "EdgeDeploymentPlanName"))
+    StartEdgeDeploymentStageRequest.add_member(:stage_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "StageName"))
+    StartEdgeDeploymentStageRequest.struct_class = Types::StartEdgeDeploymentStageRequest
+
     StartMonitoringScheduleRequest.add_member(:monitoring_schedule_name, Shapes::ShapeRef.new(shape: MonitoringScheduleName, required: true, location_name: "MonitoringScheduleName"))
     StartMonitoringScheduleRequest.struct_class = Types::StartMonitoringScheduleRequest
 
@@ -6568,6 +6737,10 @@ module Aws::SageMaker
 
     StopCompilationJobRequest.add_member(:compilation_job_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "CompilationJobName"))
     StopCompilationJobRequest.struct_class = Types::StopCompilationJobRequest
+
+    StopEdgeDeploymentStageRequest.add_member(:edge_deployment_plan_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "EdgeDeploymentPlanName"))
+    StopEdgeDeploymentStageRequest.add_member(:stage_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "StageName"))
+    StopEdgeDeploymentStageRequest.struct_class = Types::StopEdgeDeploymentStageRequest
 
     StopEdgePackagingJobRequest.add_member(:edge_packaging_job_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "EdgePackagingJobName"))
     StopEdgePackagingJobRequest.struct_class = Types::StopEdgePackagingJobRequest
@@ -7451,6 +7624,24 @@ module Aws::SageMaker
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUse)
       end)
 
+      api.add_operation(:create_edge_deployment_plan, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateEdgeDeploymentPlan"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateEdgeDeploymentPlanRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateEdgeDeploymentPlanResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
+      end)
+
+      api.add_operation(:create_edge_deployment_stage, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateEdgeDeploymentStage"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateEdgeDeploymentStageRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
+      end)
+
       api.add_operation(:create_edge_packaging_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateEdgePackagingJob"
         o.http_method = "POST"
@@ -7878,6 +8069,24 @@ module Aws::SageMaker
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
       end)
 
+      api.add_operation(:delete_edge_deployment_plan, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteEdgeDeploymentPlan"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteEdgeDeploymentPlanRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUse)
+      end)
+
+      api.add_operation(:delete_edge_deployment_stage, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteEdgeDeploymentStage"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteEdgeDeploymentStageRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUse)
+      end)
+
       api.add_operation(:delete_endpoint, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteEndpoint"
         o.http_method = "POST"
@@ -8238,6 +8447,15 @@ module Aws::SageMaker
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeDomainRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeDomainResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
+      api.add_operation(:describe_edge_deployment_plan, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeEdgeDeploymentPlan"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeEdgeDeploymentPlanRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeEdgeDeploymentPlanResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
       end)
 
@@ -8844,6 +9062,20 @@ module Aws::SageMaker
         )
       end)
 
+      api.add_operation(:list_edge_deployment_plans, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListEdgeDeploymentPlans"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListEdgeDeploymentPlansRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListEdgeDeploymentPlansResponse)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_edge_packaging_jobs, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListEdgePackagingJobs"
         o.http_method = "POST"
@@ -9283,6 +9515,20 @@ module Aws::SageMaker
         )
       end)
 
+      api.add_operation(:list_stage_devices, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListStageDevices"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListStageDevicesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListStageDevicesResponse)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_studio_lifecycle_configs, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListStudioLifecycleConfigs"
         o.http_method = "POST"
@@ -9527,6 +9773,14 @@ module Aws::SageMaker
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
       end)
 
+      api.add_operation(:start_edge_deployment_stage, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartEdgeDeploymentStage"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartEdgeDeploymentStageRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
       api.add_operation(:start_monitoring_schedule, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartMonitoringSchedule"
         o.http_method = "POST"
@@ -9571,6 +9825,14 @@ module Aws::SageMaker
         o.input = Shapes::ShapeRef.new(shape: StopCompilationJobRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
+      api.add_operation(:stop_edge_deployment_stage, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopEdgeDeploymentStage"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopEdgeDeploymentStageRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
 
       api.add_operation(:stop_edge_packaging_job, Seahorse::Model::Operation.new.tap do |o|

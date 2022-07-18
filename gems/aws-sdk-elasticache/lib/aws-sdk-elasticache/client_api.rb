@@ -1455,6 +1455,7 @@ module Aws::ElastiCache
     ReplicationGroup.add_member(:log_delivery_configurations, Shapes::ShapeRef.new(shape: LogDeliveryConfigurationList, location_name: "LogDeliveryConfigurations"))
     ReplicationGroup.add_member(:replication_group_create_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "ReplicationGroupCreateTime"))
     ReplicationGroup.add_member(:data_tiering, Shapes::ShapeRef.new(shape: DataTieringStatus, location_name: "DataTiering"))
+    ReplicationGroup.add_member(:auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: Boolean, location_name: "AutoMinorVersionUpgrade"))
     ReplicationGroup.struct_class = Types::ReplicationGroup
 
     ReplicationGroupAlreadyExistsFault.struct_class = Types::ReplicationGroupAlreadyExistsFault

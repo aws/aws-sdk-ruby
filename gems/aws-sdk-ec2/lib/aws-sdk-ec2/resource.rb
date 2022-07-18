@@ -483,10 +483,22 @@ module Aws::EC2
     #   You cannot specify accelerators from different generations in the same
     #   request.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
-    #   The tags to apply to the resources during launch. You can only tag
-    #   instances and volumes on launch. The specified tags are applied to all
-    #   instances or volumes that are created during launch. To tag a resource
-    #   after it has been created, see [CreateTags][1].
+    #   The tags to apply to the resources that are created during instance
+    #   launch.
+    #
+    #   You can specify tags for the following resources only:
+    #
+    #   * Instances
+    #
+    #   * Volumes
+    #
+    #   * Elastic graphics
+    #
+    #   * Spot Instance requests
+    #
+    #   * Network interfaces
+    #
+    #   To tag a resource after it has been created, see [CreateTags][1].
     #
     #
     #
@@ -569,7 +581,7 @@ module Aws::EC2
     #   The maintenance and recovery options for the instance.
     # @option options [Boolean] :disable_api_stop
     #   Indicates whether an instance is enabled for stop protection. For more
-    #   information, see [Stop Protection][1].
+    #   information, see [Stop protection][1].
     #
     #
     #
@@ -1485,30 +1497,42 @@ module Aws::EC2
     #   To let Amazon choose the IPv6 CIDR block for you, omit this parameter.
     # @option options [String] :ipv_4_ipam_pool_id
     #   The ID of an IPv4 IPAM pool you want to use for allocating this VPC's
-    #   CIDR. For more information, see [What is
-    #   IPAM?](/vpc/latest/ipam/what-is-it-ipam.html) in the *Amazon VPC IPAM
-    #   User Guide*.
+    #   CIDR. For more information, see [What is IPAM?][1] in the *Amazon VPC
+    #   IPAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html
     # @option options [Integer] :ipv_4_netmask_length
     #   The netmask length of the IPv4 CIDR you want to allocate to this VPC
     #   from an Amazon VPC IP Address Manager (IPAM) pool. For more
-    #   information about IPAM, see [What is
-    #   IPAM?](/vpc/latest/ipam/what-is-it-ipam.html) in the *Amazon VPC IPAM
+    #   information about IPAM, see [What is IPAM?][1] in the *Amazon VPC IPAM
     #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html
     # @option options [String] :ipv_6_ipam_pool_id
     #   The ID of an IPv6 IPAM pool which will be used to allocate this VPC an
     #   IPv6 CIDR. IPAM is a VPC feature that you can use to automate your IP
     #   address management workflows including assigning, tracking,
     #   troubleshooting, and auditing IP addresses across Amazon Web Services
     #   Regions and accounts throughout your Amazon Web Services Organization.
-    #   For more information, see [What is
-    #   IPAM?](/vpc/latest/ipam/what-is-it-ipam.html) in the *Amazon VPC IPAM
+    #   For more information, see [What is IPAM?][1] in the *Amazon VPC IPAM
     #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html
     # @option options [Integer] :ipv_6_netmask_length
     #   The netmask length of the IPv6 CIDR you want to allocate to this VPC
     #   from an Amazon VPC IP Address Manager (IPAM) pool. For more
-    #   information about IPAM, see [What is
-    #   IPAM?](/vpc/latest/ipam/what-is-it-ipam.html) in the *Amazon VPC IPAM
+    #   information about IPAM, see [What is IPAM?][1] in the *Amazon VPC IPAM
     #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

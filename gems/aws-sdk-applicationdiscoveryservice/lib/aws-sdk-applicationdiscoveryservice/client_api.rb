@@ -58,6 +58,7 @@ module Aws::ApplicationDiscoveryService
     CreateTagsRequest = Shapes::StructureShape.new(name: 'CreateTagsRequest')
     CreateTagsResponse = Shapes::StructureShape.new(name: 'CreateTagsResponse')
     CustomerAgentInfo = Shapes::StructureShape.new(name: 'CustomerAgentInfo')
+    CustomerAgentlessCollectorInfo = Shapes::StructureShape.new(name: 'CustomerAgentlessCollectorInfo')
     CustomerConnectorInfo = Shapes::StructureShape.new(name: 'CustomerConnectorInfo')
     CustomerMeCollectorInfo = Shapes::StructureShape.new(name: 'CustomerMeCollectorInfo')
     DataSource = Shapes::StringShape.new(name: 'DataSource')
@@ -272,6 +273,15 @@ module Aws::ApplicationDiscoveryService
     CustomerAgentInfo.add_member(:unknown_agents, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "unknownAgents"))
     CustomerAgentInfo.struct_class = Types::CustomerAgentInfo
 
+    CustomerAgentlessCollectorInfo.add_member(:active_agentless_collectors, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "activeAgentlessCollectors"))
+    CustomerAgentlessCollectorInfo.add_member(:healthy_agentless_collectors, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "healthyAgentlessCollectors"))
+    CustomerAgentlessCollectorInfo.add_member(:deny_listed_agentless_collectors, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "denyListedAgentlessCollectors"))
+    CustomerAgentlessCollectorInfo.add_member(:shutdown_agentless_collectors, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "shutdownAgentlessCollectors"))
+    CustomerAgentlessCollectorInfo.add_member(:unhealthy_agentless_collectors, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "unhealthyAgentlessCollectors"))
+    CustomerAgentlessCollectorInfo.add_member(:total_agentless_collectors, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "totalAgentlessCollectors"))
+    CustomerAgentlessCollectorInfo.add_member(:unknown_agentless_collectors, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "unknownAgentlessCollectors"))
+    CustomerAgentlessCollectorInfo.struct_class = Types::CustomerAgentlessCollectorInfo
+
     CustomerConnectorInfo.add_member(:active_connectors, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "activeConnectors"))
     CustomerConnectorInfo.add_member(:healthy_connectors, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "healthyConnectors"))
     CustomerConnectorInfo.add_member(:black_listed_connectors, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "blackListedConnectors"))
@@ -420,6 +430,7 @@ module Aws::ApplicationDiscoveryService
     GetDiscoverySummaryResponse.add_member(:agent_summary, Shapes::ShapeRef.new(shape: CustomerAgentInfo, location_name: "agentSummary"))
     GetDiscoverySummaryResponse.add_member(:connector_summary, Shapes::ShapeRef.new(shape: CustomerConnectorInfo, location_name: "connectorSummary"))
     GetDiscoverySummaryResponse.add_member(:me_collector_summary, Shapes::ShapeRef.new(shape: CustomerMeCollectorInfo, location_name: "meCollectorSummary"))
+    GetDiscoverySummaryResponse.add_member(:agentless_collector_summary, Shapes::ShapeRef.new(shape: CustomerAgentlessCollectorInfo, location_name: "agentlessCollectorSummary"))
     GetDiscoverySummaryResponse.struct_class = Types::GetDiscoverySummaryResponse
 
     HomeRegionNotSetException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))

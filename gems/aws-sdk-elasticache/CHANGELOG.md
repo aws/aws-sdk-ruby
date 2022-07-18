@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.79.0 (2022-07-18)
+------------------
+
+* Feature - Adding AutoMinorVersionUpgrade in the DescribeReplicationGroups API
+
 1.78.0 (2022-05-23)
 ------------------
 

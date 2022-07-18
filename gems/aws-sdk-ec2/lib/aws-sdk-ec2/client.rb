@@ -1013,9 +1013,12 @@ module Aws::EC2
 
     # Allocate a CIDR from an IPAM pool. In IPAM, an allocation is a CIDR
     # assignment from an IPAM pool to another resource or IPAM pool. For
-    # more information, see [Allocate
-    # CIDRs](/vpc/latest/ipam/allocate-cidrs-ipam.html) in the *Amazon VPC
-    # IPAM User Guide*.
+    # more information, see [Allocate CIDRs][1] in the *Amazon VPC IPAM User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/ipam/allocate-cidrs-ipam.html
     #
     # @option params [Boolean] :dry_run
     #   A check for whether you have the required permissions for the action
@@ -2256,26 +2259,40 @@ module Aws::EC2
     # @option params [String] :ipv_4_ipam_pool_id
     #   Associate a CIDR allocated from an IPv4 IPAM pool to a VPC. For more
     #   information about Amazon VPC IP Address Manager (IPAM), see [What is
-    #   IPAM?](/vpc/latest/ipam/what-is-it-ipam.html) in the *Amazon VPC IPAM
-    #   User Guide*.
+    #   IPAM?][1] in the *Amazon VPC IPAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html
     #
     # @option params [Integer] :ipv_4_netmask_length
     #   The netmask length of the IPv4 CIDR you would like to associate from
     #   an Amazon VPC IP Address Manager (IPAM) pool. For more information
-    #   about IPAM, see [What is IPAM?](/vpc/latest/ipam/what-is-it-ipam.html)
-    #   in the *Amazon VPC IPAM User Guide*.
+    #   about IPAM, see [What is IPAM?][1] in the *Amazon VPC IPAM User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html
     #
     # @option params [String] :ipv_6_ipam_pool_id
     #   Associates a CIDR allocated from an IPv6 IPAM pool to a VPC. For more
     #   information about Amazon VPC IP Address Manager (IPAM), see [What is
-    #   IPAM?](/vpc/latest/ipam/what-is-it-ipam.html) in the *Amazon VPC IPAM
-    #   User Guide*.
+    #   IPAM?][1] in the *Amazon VPC IPAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html
     #
     # @option params [Integer] :ipv_6_netmask_length
     #   The netmask length of the IPv6 CIDR you would like to associate from
     #   an Amazon VPC IP Address Manager (IPAM) pool. For more information
-    #   about IPAM, see [What is IPAM?](/vpc/latest/ipam/what-is-it-ipam.html)
-    #   in the *Amazon VPC IPAM User Guide*.
+    #   about IPAM, see [What is IPAM?][1] in the *Amazon VPC IPAM User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html
     #
     # @return [Types::AssociateVpcCidrBlockResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6640,9 +6657,12 @@ module Aws::EC2
     # addresses across Amazon Web Services Regions and accounts throughout
     # your Amazon Web Services Organization.
     #
-    # For more information, see [Create an
-    # IPAM](/vpc/latest/ipam/create-ipam.html) in the *Amazon VPC IPAM User
-    # Guide*.
+    # For more information, see [Create an IPAM][1] in the *Amazon VPC IPAM
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/ipam/create-ipam.html
     #
     # @option params [Boolean] :dry_run
     #   A check for whether you have the required permissions for the action
@@ -6659,9 +6679,12 @@ module Aws::EC2
     #   IPAM only discovers and monitors resources in the Amazon Web Services
     #   Regions you select as operating Regions.
     #
-    #   For more information about operating Regions, see [Create an
-    #   IPAM](/vpc/latest/ipam/create-ipam.html) in the *Amazon VPC IPAM User
-    #   Guide*.
+    #   For more information about operating Regions, see [Create an IPAM][1]
+    #   in the *Amazon VPC IPAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/ipam/create-ipam.html
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The key/value combination of a tag assigned to the resource. Use the
@@ -6743,9 +6766,12 @@ module Aws::EC2
     # needs for development and production applications, you can create a
     # pool for each.
     #
-    # For more information, see [Create a top-level
-    # pool](/vpc/latest/ipam/create-top-ipam.html) in the *Amazon VPC IPAM
-    # User Guide*.
+    # For more information, see [Create a top-level pool][1] in the *Amazon
+    # VPC IPAM User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/ipam/create-top-ipam.html
     #
     # @option params [Boolean] :dry_run
     #   A check for whether you have the required permissions for the action
@@ -6934,9 +6960,12 @@ module Aws::EC2
     # IP addresses across multiple unconnected networks without causing IP
     # address overlap or conflict.
     #
-    # For more information, see [Add a
-    # scope](/vpc/latest/ipam/add-scope-ipam.html) in the *Amazon VPC IPAM
+    # For more information, see [Add a scope][1] in the *Amazon VPC IPAM
     # User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/ipam/add-scope-ipam.html
     #
     # @option params [Boolean] :dry_run
     #   A check for whether you have the required permissions for the action
@@ -7482,7 +7511,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Creates a new version for a launch template. You can specify an
+    # Creates a new version of a launch template. You can specify an
     # existing version of launch template from which to base the new
     # version.
     #
@@ -7495,7 +7524,7 @@ module Aws::EC2
     # launch template that includes any changes you require.
     #
     # For more information, see [Modify a launch template (manage launch
-    # template versions)][1]in the *Amazon Elastic Compute Cloud User
+    # template versions)][1] in the *Amazon Elastic Compute Cloud User
     # Guide*.
     #
     #
@@ -7520,12 +7549,16 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [String] :launch_template_id
-    #   The ID of the launch template. You must specify either the launch
-    #   template ID or launch template name in the request.
+    #   The ID of the launch template.
+    #
+    #   You must specify either the `LaunchTemplateId` or the
+    #   `LaunchTemplateName`, but not both.
     #
     # @option params [String] :launch_template_name
-    #   The name of the launch template. You must specify either the launch
-    #   template ID or launch template name in the request.
+    #   The name of the launch template.
+    #
+    #   You must specify the `LaunchTemplateName` or the `LaunchTemplateId`,
+    #   but not both.
     #
     # @option params [String] :source_version
     #   The version number of the launch template version on which to base the
@@ -10764,11 +10797,12 @@ module Aws::EC2
     # maximum of 50 tags. Each tag consists of a key and optional value. Tag
     # keys must be unique per resource.
     #
-    # For more information about tags, see [Tagging Your Resources][1] in
-    # the *Amazon Elastic Compute Cloud User Guide*. For more information
-    # about creating IAM policies that control users' access to resources
-    # based on tags, see [Supported Resource-Level Permissions for Amazon
-    # EC2 API Actions][2] in the *Amazon Elastic Compute Cloud User Guide*.
+    # For more information about tags, see [Tag your Amazon EC2
+    # resources][1] in the *Amazon Elastic Compute Cloud User Guide*. For
+    # more information about creating IAM policies that control users'
+    # access to resources based on tags, see [Supported resource-level
+    # permissions for Amazon EC2 API actions][2] in the *Amazon Elastic
+    # Compute Cloud User Guide*.
     #
     #
     #
@@ -11652,9 +11686,8 @@ module Aws::EC2
 
     # Requests a transit gateway peering attachment between the specified
     # transit gateway (requester) and a peer transit gateway (accepter). The
-    # transit gateways must be in different Regions. The peer transit
-    # gateway can be in your account or a different Amazon Web Services
-    # account.
+    # peer transit gateway can be in your account or a different Amazon Web
+    # Services account.
     #
     # After you create the peering attachment, the owner of the accepter
     # transit gateway must accept the attachment request.
@@ -11674,6 +11707,7 @@ module Aws::EC2
     #   The Region where the peer transit gateway is located.
     #
     # @option params [Types::CreateTransitGatewayPeeringAttachmentRequestOptions] :options
+    #   Requests a transit gateway peering attachment.
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the transit gateway peering attachment.
@@ -12488,16 +12522,22 @@ module Aws::EC2
     #
     # @option params [String] :ipv_4_ipam_pool_id
     #   The ID of an IPv4 IPAM pool you want to use for allocating this VPC's
-    #   CIDR. For more information, see [What is
-    #   IPAM?](/vpc/latest/ipam/what-is-it-ipam.html) in the *Amazon VPC IPAM
-    #   User Guide*.
+    #   CIDR. For more information, see [What is IPAM?][1] in the *Amazon VPC
+    #   IPAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html
     #
     # @option params [Integer] :ipv_4_netmask_length
     #   The netmask length of the IPv4 CIDR you want to allocate to this VPC
     #   from an Amazon VPC IP Address Manager (IPAM) pool. For more
-    #   information about IPAM, see [What is
-    #   IPAM?](/vpc/latest/ipam/what-is-it-ipam.html) in the *Amazon VPC IPAM
+    #   information about IPAM, see [What is IPAM?][1] in the *Amazon VPC IPAM
     #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html
     #
     # @option params [String] :ipv_6_ipam_pool_id
     #   The ID of an IPv6 IPAM pool which will be used to allocate this VPC an
@@ -12505,16 +12545,22 @@ module Aws::EC2
     #   address management workflows including assigning, tracking,
     #   troubleshooting, and auditing IP addresses across Amazon Web Services
     #   Regions and accounts throughout your Amazon Web Services Organization.
-    #   For more information, see [What is
-    #   IPAM?](/vpc/latest/ipam/what-is-it-ipam.html) in the *Amazon VPC IPAM
+    #   For more information, see [What is IPAM?][1] in the *Amazon VPC IPAM
     #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html
     #
     # @option params [Integer] :ipv_6_netmask_length
     #   The netmask length of the IPv6 CIDR you want to allocate to this VPC
     #   from an Amazon VPC IP Address Manager (IPAM) pool. For more
-    #   information about IPAM, see [What is
-    #   IPAM?](/vpc/latest/ipam/what-is-it-ipam.html) in the *Amazon VPC IPAM
+    #   information about IPAM, see [What is IPAM?][1] in the *Amazon VPC IPAM
     #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -13940,9 +13986,12 @@ module Aws::EC2
     # Delete an IPAM. Deleting an IPAM removes all monitored data associated
     # with the IPAM including the historical data for CIDRs.
     #
-    # For more information, see [Delete an
-    # IPAM](/vpc/latest/ipam/delete-ipam.html) in the *Amazon VPC IPAM User
-    # Guide*.
+    # For more information, see [Delete an IPAM][1] in the *Amazon VPC IPAM
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/ipam/delete-ipam.html
     #
     # @option params [Boolean] :dry_run
     #   A check for whether you have the required permissions for the action
@@ -14024,14 +14073,14 @@ module Aws::EC2
     #
     #  </note>
     #
-    # For more information, see [Delete a
-    # pool](/vpc/latest/ipam/delete-pool-ipam.html) in the *Amazon VPC IPAM
+    # For more information, see [Delete a pool][3] in the *Amazon VPC IPAM
     # User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ReleaseIpamPoolAllocation.html
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeprovisionIpamPoolCidr.html
+    # [3]: https://docs.aws.amazon.com/vpc/latest/ipam/delete-pool-ipam.html
     #
     # @option params [Boolean] :dry_run
     #   A check for whether you have the required permissions for the action
@@ -14093,9 +14142,12 @@ module Aws::EC2
 
     # Delete the scope for an IPAM. You cannot delete the default scopes.
     #
-    # For more information, see [Delete a
-    # scope](/vpc/latest/ipam/delete-scope-ipam.html) in the *Amazon VPC
-    # IPAM User Guide*.
+    # For more information, see [Delete a scope][1] in the *Amazon VPC IPAM
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/ipam/delete-scope-ipam.html
     #
     # @option params [Boolean] :dry_run
     #   A check for whether you have the required permissions for the action
@@ -14195,12 +14247,16 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [String] :launch_template_id
-    #   The ID of the launch template. You must specify either the launch
-    #   template ID or launch template name in the request.
+    #   The ID of the launch template.
+    #
+    #   You must specify either the `LaunchTemplateId` or the
+    #   `LaunchTemplateName`, but not both.
     #
     # @option params [String] :launch_template_name
-    #   The name of the launch template. You must specify either the launch
-    #   template ID or launch template name in the request.
+    #   The name of the launch template.
+    #
+    #   You must specify either the `LaunchTemplateName` or the
+    #   `LaunchTemplateId`, but not both.
     #
     # @return [Types::DeleteLaunchTemplateResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -14269,12 +14325,16 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [String] :launch_template_id
-    #   The ID of the launch template. You must specify either the launch
-    #   template ID or launch template name in the request.
+    #   The ID of the launch template.
+    #
+    #   You must specify either the `LaunchTemplateId` or the
+    #   `LaunchTemplateName`, but not both.
     #
     # @option params [String] :launch_template_name
-    #   The name of the launch template. You must specify either the launch
-    #   template ID or launch template name in the request.
+    #   The name of the launch template.
+    #
+    #   You must specify either the `LaunchTemplateName` or the
+    #   `LaunchTemplateId`, but not both.
     #
     # @option params [required, Array<String>] :versions
     #   The version numbers of one or more launch template versions to delete.
@@ -15295,8 +15355,8 @@ module Aws::EC2
     # Deletes the specified set of tags from the specified set of resources.
     #
     # To list the current tags, use DescribeTags. For more information about
-    # tags, see [Tagging Your Resources][1] in the *Amazon Elastic Compute
-    # Cloud User Guide*.
+    # tags, see [Tag your Amazon EC2 resources][1] in the *Amazon Elastic
+    # Compute Cloud User Guide*.
     #
     #
     #
@@ -16468,8 +16528,11 @@ module Aws::EC2
     # Deprovision a CIDR provisioned from an IPAM pool. If you deprovision a
     # CIDR from a pool that has a source pool, the CIDR is recycled back
     # into the source pool. For more information, see [Deprovision pool
-    # CIDRs](/vpc/latest/ipam/depro-pool-cidr-ipam.html) in the *Amazon VPC
-    # IPAM User Guide*.
+    # CIDRs][1] in the *Amazon VPC IPAM User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/ipam/depro-pool-cidr-ipam.html
     #
     # @option params [Boolean] :dry_run
     #   A check for whether you have the required permissions for the action
@@ -22842,9 +22905,12 @@ module Aws::EC2
 
     # Get information about your IPAM pools.
     #
-    # For more information, see [What is
-    # IPAM?](/vpc/latest/ipam/what-is-it-ipam.html) in the *Amazon VPC IPAM
+    # For more information, see [What is IPAM?][1] in the *Amazon VPC IPAM
     # User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html
     #
     # @option params [Boolean] :dry_run
     #   A check for whether you have the required permissions for the action
@@ -23120,18 +23186,24 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [String] :launch_template_id
-    #   The ID of the launch template. To describe one or more versions of a
-    #   specified launch template, you must specify either the launch template
-    #   ID or the launch template name in the request. To describe all the
-    #   latest or default launch template versions in your account, you must
-    #   omit this parameter.
+    #   The ID of the launch template.
+    #
+    #   To describe one or more versions of a specified launch template, you
+    #   must specify either the `LaunchTemplateId` or the
+    #   `LaunchTemplateName`, but not both.
+    #
+    #   To describe all the latest or default launch template versions in your
+    #   account, you must omit this parameter.
     #
     # @option params [String] :launch_template_name
-    #   The name of the launch template. To describe one or more versions of a
-    #   specified launch template, you must specify either the launch template
-    #   ID or the launch template name in the request. To describe all the
-    #   latest or default launch template versions in your account, you must
-    #   omit this parameter.
+    #   The name of the launch template.
+    #
+    #   To describe one or more versions of a specified launch template, you
+    #   must specify either the `LaunchTemplateName` or the
+    #   `LaunchTemplateId`, but not both.
+    #
+    #   To describe all the latest or default launch template versions in your
+    #   account, you must omit this parameter.
     #
     # @option params [Array<String>] :versions
     #   One or more versions of the launch template. Valid values depend on
@@ -23145,7 +23217,7 @@ module Aws::EC2
     #   the latest version, the valid value is `$Latest`. To describe all
     #   launch templates in your account that are defined as the default
     #   version, the valid value is `$Default`. You can specify `$Latest` and
-    #   `$Default` in the same call. You cannot specify numbers.
+    #   `$Default` in the same request. You cannot specify numbers.
     #
     # @option params [String] :min_version
     #   The version number after which to describe launch template versions.
@@ -29528,8 +29600,8 @@ module Aws::EC2
 
     # Describes the specified tags for your EC2 resources.
     #
-    # For more information about tags, see [Tagging Your Resources][1] in
-    # the *Amazon Elastic Compute Cloud User Guide*.
+    # For more information about tags, see [Tag your Amazon EC2
+    # resources][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
@@ -33341,9 +33413,12 @@ module Aws::EC2
     end
 
     # Disable the IPAM account. For more information, see [Enable
-    # integration with
-    # Organizations](/vpc/latest/ipam/enable-integ-ipam.html) in the *Amazon
-    # VPC IPAM User Guide*.
+    # integration with Organizations][1] in the *Amazon VPC IPAM User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/ipam/enable-integ-ipam.html
     #
     # @option params [Boolean] :dry_run
     #   A check for whether you have the required permissions for the action
@@ -34474,8 +34549,11 @@ module Aws::EC2
     # Enable an Organizations member account as the IPAM admin account. You
     # cannot select the Organizations management account as the IPAM admin
     # account. For more information, see [Enable integration with
-    # Organizations](/vpc/latest/ipam/enable-integ-ipam.html) in the *Amazon
-    # VPC IPAM User Guide*.
+    # Organizations][1] in the *Amazon VPC IPAM User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/ipam/enable-integ-ipam.html
     #
     # @option params [Boolean] :dry_run
     #   A check for whether you have the required permissions for the action
@@ -35888,9 +35966,12 @@ module Aws::EC2
     end
 
     # Retrieve historical information about a CIDR within an IPAM scope. For
-    # more information, see [View the history of IP
-    # addresses](/vpc/latest/ipam/view-history-cidr-ipam.html) in the
+    # more information, see [View the history of IP addresses][1] in the
     # *Amazon VPC IPAM User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/ipam/view-history-cidr-ipam.html
     #
     # @option params [Boolean] :dry_run
     #   A check for whether you have the required permissions for the action
@@ -36214,9 +36295,10 @@ module Aws::EC2
     # This action calls on other describe actions to get instance
     # information. Depending on your instance configuration, you may need to
     # allow the following actions in your IAM policy:
-    # DescribeSpotInstanceRequests, DescribeInstanceCreditSpecifications,
-    # DescribeVolumes, DescribeInstanceAttribute, and DescribeElasticGpus.
-    # Or, you can allow `describe*` depending on your instance requirements.
+    # `DescribeSpotInstanceRequests`,
+    # `DescribeInstanceCreditSpecifications`, `DescribeVolumes`,
+    # `DescribeInstanceAttribute`, and `DescribeElasticGpus`. Or, you can
+    # allow `describe*` depending on your instance requirements.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -40679,9 +40761,12 @@ module Aws::EC2
     #   address CIDRs. IPAM only discovers and monitors resources in the
     #   Amazon Web Services Regions you select as operating Regions.
     #
-    #   For more information about operating Regions, see [Create an
-    #   IPAM](/vpc/latest/ipam/create-ipam.html) in the *Amazon VPC IPAM User
-    #   Guide*.
+    #   For more information about operating Regions, see [Create an IPAM][1]
+    #   in the *Amazon VPC IPAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/ipam/create-ipam.html
     #
     # @option params [Array<Types::RemoveIpamOperatingRegion>] :remove_operating_regions
     #   The operating Regions to remove.
@@ -40736,9 +40821,12 @@ module Aws::EC2
 
     # Modify the configurations of an IPAM pool.
     #
-    # For more information, see [Modify a
-    # pool](/vpc/latest/ipam/mod-pool-ipam.html) in the *Amazon VPC IPAM
+    # For more information, see [Modify a pool][1] in the *Amazon VPC IPAM
     # User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/ipam/mod-pool-ipam.html
     #
     # @option params [Boolean] :dry_run
     #   A check for whether you have the required permissions for the action
@@ -40789,9 +40877,12 @@ module Aws::EC2
     #
     # @option params [Array<Types::RequestIpamResourceTag>] :add_allocation_resource_tags
     #   Add tag allocation rules to a pool. For more information about
-    #   allocation rules, see [Create a top-level
-    #   pool](/vpc/latest/ipam/create-top-ipam.html) in the *Amazon VPC IPAM
-    #   User Guide*.
+    #   allocation rules, see [Create a top-level pool][1] in the *Amazon VPC
+    #   IPAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/ipam/create-top-ipam.html
     #
     # @option params [Array<Types::RequestIpamResourceTag>] :remove_allocation_resource_tags
     #   Remove tag allocation rules from a pool.
@@ -40869,11 +40960,14 @@ module Aws::EC2
     # it cannot be auto-imported into a pool, and it will be removed from
     # any pool it has an allocation in.
     #
-    # For more information, see [Move resource CIDRs between
-    # scopes](/vpc/latest/ipam/move-resource-ipam.html) and [Change the
-    # monitoring state of resource
-    # CIDRs](/vpc/latest/ipam/change-monitoring-state-ipam.html) in the
-    # *Amazon VPC IPAM User Guide*.
+    # For more information, see [Move resource CIDRs between scopes][1] and
+    # [Change the monitoring state of resource CIDRs][2] in the *Amazon VPC
+    # IPAM User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/ipam/move-resource-ipam.html
+    # [2]: https://docs.aws.amazon.com/vpc/latest/ipam/change-monitoring-state-ipam.html
     #
     # @option params [Boolean] :dry_run
     #   A check for whether you have the required permissions for the action
@@ -41020,12 +41114,16 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [String] :launch_template_id
-    #   The ID of the launch template. You must specify either the launch
-    #   template ID or launch template name in the request.
+    #   The ID of the launch template.
+    #
+    #   You must specify either the `LaunchTemplateId` or the
+    #   `LaunchTemplateName`, but not both.
     #
     # @option params [String] :launch_template_name
-    #   The name of the launch template. You must specify either the launch
-    #   template ID or launch template name in the request.
+    #   The name of the launch template.
+    #
+    #   You must specify either the `LaunchTemplateName` or the
+    #   `LaunchTemplateId`, but not both.
     #
     # @option params [String] :default_version
     #   The version number of the launch template to set as the default
@@ -43816,7 +43914,11 @@ module Aws::EC2
     # can move the CIDR to IPAM from a public IPv4 pool. You cannot move an
     # IPv6 CIDR to IPAM. If you are bringing a new IP address to Amazon Web
     # Services for the first time, complete the steps in [Tutorial: BYOIP
-    # address CIDRs to IPAM](/vpc/latest/ipam/tutorials-byoip-ipam.html).
+    # address CIDRs to IPAM][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/ipam/tutorials-byoip-ipam.html
     #
     # @option params [Boolean] :dry_run
     #   A check for whether you have the required permissions for the action
@@ -43967,9 +44069,12 @@ module Aws::EC2
     # new CIDRs to a top-level pool or to transfer a CIDR from a top-level
     # pool to a pool within it.
     #
-    # For more information, see [Provision CIDRs to
-    # pools](/vpc/latest/ipam/prov-cidr-ipam.html) in the *Amazon VPC IPAM
-    # User Guide*.
+    # For more information, see [Provision CIDRs to pools][1] in the *Amazon
+    # VPC IPAM User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/ipam/prov-cidr-ipam.html
     #
     # @option params [Boolean] :dry_run
     #   A check for whether you have the required permissions for the action
@@ -44022,9 +44127,12 @@ module Aws::EC2
 
     # Provision a CIDR to a public IPv4 pool.
     #
-    # For more information about IPAM, see [What is
-    # IPAM?](/vpc/latest/ipam/what-is-it-ipam.html) in the *Amazon VPC IPAM
-    # User Guide*.
+    # For more information about IPAM, see [What is IPAM?][1] in the *Amazon
+    # VPC IPAM User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html
     #
     # @option params [Boolean] :dry_run
     #   A check for whether you have the required permissions for the action
@@ -44428,7 +44536,8 @@ module Aws::EC2
     #
     # <note markdown="1"> For Amazon EBS-backed instances, CreateImage creates and registers the
     # AMI in a single request, so you don't have to register the AMI
-    # yourself.
+    # yourself. We recommend that you always use CreateImage unless you have
+    # a specific reason to use RegisterImage.
     #
     #  </note>
     #
@@ -45203,12 +45312,12 @@ module Aws::EC2
     # action to release manual allocations. To remove an allocation for a
     # resource without deleting the resource, set its monitored state to
     # false using [ModifyIpamResourceCidr][1]. For more information, see
-    # [Release an allocation](/vpc/latest/ipam/release-pool-alloc-ipam.html)
-    # in the *Amazon VPC IPAM User Guide*.
+    # [Release an allocation][2] in the *Amazon VPC IPAM User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyIpamResourceCidr.html
+    # [2]: https://docs.aws.amazon.com/vpc/latest/ipam/release-pool-alloc-ipam.html
     #
     # @option params [Boolean] :dry_run
     #   A check for whether you have the required permissions for the action
@@ -46357,8 +46466,13 @@ module Aws::EC2
     #   The launch specification.
     #
     # @option params [String] :spot_price
-    #   The maximum price per hour that you are willing to pay for a Spot
-    #   Instance. The default is the On-Demand price.
+    #   The maximum price per unit hour that you are willing to pay for a Spot
+    #   Instance. We do not recommend using this parameter because it can lead
+    #   to increased interruptions. If you do not specify this parameter, you
+    #   will pay the current Spot price.
+    #
+    #   If you specify a maximum price, your instances will be interrupted
+    #   more frequently than if you do not specify this parameter.
     #
     # @option params [String] :type
     #   The Spot Instance request type.
@@ -47964,10 +48078,22 @@ module Aws::EC2
     #   request.
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
-    #   The tags to apply to the resources during launch. You can only tag
-    #   instances and volumes on launch. The specified tags are applied to all
-    #   instances or volumes that are created during launch. To tag a resource
-    #   after it has been created, see [CreateTags][1].
+    #   The tags to apply to the resources that are created during instance
+    #   launch.
+    #
+    #   You can specify tags for the following resources only:
+    #
+    #   * Instances
+    #
+    #   * Volumes
+    #
+    #   * Elastic graphics
+    #
+    #   * Spot Instance requests
+    #
+    #   * Network interfaces
+    #
+    #   To tag a resource after it has been created, see [CreateTags][1].
     #
     #
     #
@@ -48062,7 +48188,7 @@ module Aws::EC2
     #
     # @option params [Boolean] :disable_api_stop
     #   Indicates whether an instance is enabled for stop protection. For more
-    #   information, see [Stop Protection][1].
+    #   information, see [Stop protection][1].
     #
     #
     #
@@ -50351,7 +50477,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.322.0'
+      context[:gem_version] = '1.323.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

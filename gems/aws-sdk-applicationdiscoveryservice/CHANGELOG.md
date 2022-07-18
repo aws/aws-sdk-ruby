@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2022-07-18)
+------------------
+
+* Feature - Add AWS Agentless Collector details to the GetDiscoverySummary API response
+
 1.45.0 (2022-05-16)
 ------------------
 

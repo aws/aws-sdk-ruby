@@ -154,8 +154,8 @@ module Aws::MediaPackage
     #         speke_key_provider: { # required
     #           certificate_arn: "__string",
     #           encryption_contract_configuration: {
-    #             preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1
-    #             preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1
+    #             preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
+    #             preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
     #           },
     #           resource_id: "__string", # required
     #           role_arn: "__string", # required
@@ -239,8 +239,8 @@ module Aws::MediaPackage
     #           speke_key_provider: { # required
     #             certificate_arn: "__string",
     #             encryption_contract_configuration: {
-    #               preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1
-    #               preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1
+    #               preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
+    #               preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
     #             },
     #             resource_id: "__string", # required
     #             role_arn: "__string", # required
@@ -571,8 +571,8 @@ module Aws::MediaPackage
     #             speke_key_provider: { # required
     #               certificate_arn: "__string",
     #               encryption_contract_configuration: {
-    #                 preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1
-    #                 preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1
+    #                 preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
+    #                 preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
     #               },
     #               resource_id: "__string", # required
     #               role_arn: "__string", # required
@@ -609,8 +609,8 @@ module Aws::MediaPackage
     #             speke_key_provider: { # required
     #               certificate_arn: "__string",
     #               encryption_contract_configuration: {
-    #                 preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1
-    #                 preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1
+    #                 preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
+    #                 preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
     #               },
     #               resource_id: "__string", # required
     #               role_arn: "__string", # required
@@ -618,6 +618,7 @@ module Aws::MediaPackage
     #               url: "__string", # required
     #             },
     #           },
+    #           include_iframe_only_stream: false,
     #           manifest_layout: "FULL", # accepts FULL, COMPACT
     #           manifest_window_seconds: 1,
     #           min_buffer_time_seconds: 1,
@@ -648,8 +649,8 @@ module Aws::MediaPackage
     #             speke_key_provider: { # required
     #               certificate_arn: "__string",
     #               encryption_contract_configuration: {
-    #                 preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1
-    #                 preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1
+    #                 preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
+    #                 preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
     #               },
     #               resource_id: "__string", # required
     #               role_arn: "__string", # required
@@ -677,8 +678,8 @@ module Aws::MediaPackage
     #             speke_key_provider: { # required
     #               certificate_arn: "__string",
     #               encryption_contract_configuration: {
-    #                 preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1
-    #                 preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1
+    #                 preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
+    #                 preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
     #               },
     #               resource_id: "__string", # required
     #               role_arn: "__string", # required
@@ -862,8 +863,8 @@ module Aws::MediaPackage
     #         speke_key_provider: { # required
     #           certificate_arn: "__string",
     #           encryption_contract_configuration: {
-    #             preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1
-    #             preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1
+    #             preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
+    #             preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
     #           },
     #           resource_id: "__string", # required
     #           role_arn: "__string", # required
@@ -904,8 +905,8 @@ module Aws::MediaPackage
     #           speke_key_provider: { # required
     #             certificate_arn: "__string",
     #             encryption_contract_configuration: {
-    #               preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1
-    #               preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1
+    #               preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
+    #               preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
     #             },
     #             resource_id: "__string", # required
     #             role_arn: "__string", # required
@@ -913,6 +914,7 @@ module Aws::MediaPackage
     #             url: "__string", # required
     #           },
     #         },
+    #         include_iframe_only_stream: false,
     #         manifest_layout: "FULL", # accepts FULL, COMPACT
     #         manifest_window_seconds: 1,
     #         min_buffer_time_seconds: 1,
@@ -955,6 +957,10 @@ module Aws::MediaPackage
     #   A Dynamic Adaptive Streaming over HTTP (DASH) encryption
     #   configuration.
     #   @return [Types::DashEncryption]
+    #
+    # @!attribute [rw] include_iframe_only_stream
+    #   When enabled, an I-Frame only stream will be included in the output.
+    #   @return [Boolean]
     #
     # @!attribute [rw] manifest_layout
     #   Determines the position of some tags in the Media Presentation
@@ -1034,6 +1040,7 @@ module Aws::MediaPackage
       :ad_triggers,
       :ads_on_delivery_restrictions,
       :encryption,
+      :include_iframe_only_stream,
       :manifest_layout,
       :manifest_window_seconds,
       :min_buffer_time_seconds,
@@ -1346,8 +1353,8 @@ module Aws::MediaPackage
     #   data as a hash:
     #
     #       {
-    #         preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1
-    #         preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1
+    #         preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
+    #         preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
     #       }
     #
     # @!attribute [rw] preset_speke_20_audio
@@ -1508,8 +1515,8 @@ module Aws::MediaPackage
     #         speke_key_provider: { # required
     #           certificate_arn: "__string",
     #           encryption_contract_configuration: {
-    #             preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1
-    #             preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1
+    #             preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
+    #             preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
     #           },
     #           resource_id: "__string", # required
     #           role_arn: "__string", # required
@@ -1759,8 +1766,8 @@ module Aws::MediaPackage
     #           speke_key_provider: { # required
     #             certificate_arn: "__string",
     #             encryption_contract_configuration: {
-    #               preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1
-    #               preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1
+    #               preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
+    #               preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
     #             },
     #             resource_id: "__string", # required
     #             role_arn: "__string", # required
@@ -2111,8 +2118,8 @@ module Aws::MediaPackage
     #         speke_key_provider: { # required
     #           certificate_arn: "__string",
     #           encryption_contract_configuration: {
-    #             preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1
-    #             preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1
+    #             preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
+    #             preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
     #           },
     #           resource_id: "__string", # required
     #           role_arn: "__string", # required
@@ -2145,8 +2152,8 @@ module Aws::MediaPackage
     #           speke_key_provider: { # required
     #             certificate_arn: "__string",
     #             encryption_contract_configuration: {
-    #               preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1
-    #               preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1
+    #               preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
+    #               preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
     #             },
     #             resource_id: "__string", # required
     #             role_arn: "__string", # required
@@ -2661,8 +2668,8 @@ module Aws::MediaPackage
     #       {
     #         certificate_arn: "__string",
     #         encryption_contract_configuration: {
-    #           preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1
-    #           preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1
+    #           preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
+    #           preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
     #         },
     #         resource_id: "__string", # required
     #         role_arn: "__string", # required
@@ -2910,8 +2917,8 @@ module Aws::MediaPackage
     #             speke_key_provider: { # required
     #               certificate_arn: "__string",
     #               encryption_contract_configuration: {
-    #                 preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1
-    #                 preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1
+    #                 preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
+    #                 preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
     #               },
     #               resource_id: "__string", # required
     #               role_arn: "__string", # required
@@ -2948,8 +2955,8 @@ module Aws::MediaPackage
     #             speke_key_provider: { # required
     #               certificate_arn: "__string",
     #               encryption_contract_configuration: {
-    #                 preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1
-    #                 preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1
+    #                 preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
+    #                 preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
     #               },
     #               resource_id: "__string", # required
     #               role_arn: "__string", # required
@@ -2957,6 +2964,7 @@ module Aws::MediaPackage
     #               url: "__string", # required
     #             },
     #           },
+    #           include_iframe_only_stream: false,
     #           manifest_layout: "FULL", # accepts FULL, COMPACT
     #           manifest_window_seconds: 1,
     #           min_buffer_time_seconds: 1,
@@ -2987,8 +2995,8 @@ module Aws::MediaPackage
     #             speke_key_provider: { # required
     #               certificate_arn: "__string",
     #               encryption_contract_configuration: {
-    #                 preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1
-    #                 preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1
+    #                 preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
+    #                 preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
     #               },
     #               resource_id: "__string", # required
     #               role_arn: "__string", # required
@@ -3016,8 +3024,8 @@ module Aws::MediaPackage
     #             speke_key_provider: { # required
     #               certificate_arn: "__string",
     #               encryption_contract_configuration: {
-    #                 preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1
-    #                 preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1
+    #                 preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
+    #                 preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
     #               },
     #               resource_id: "__string", # required
     #               role_arn: "__string", # required

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.132.0 (2022-07-18)
+------------------
+
+* Feature - Amazon SageMaker Edge Manager provides lightweight model deployment feature to deploy machine learning models on requested devices.
+
 1.131.0 (2022-07-14)
 ------------------
 

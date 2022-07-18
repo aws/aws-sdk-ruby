@@ -49,7 +49,12 @@ module Aws::SSOAdmin
     end
 
     # The value used for mapping a specified attribute to an identity
-    # source.
+    # source. For more information, see [Attribute mappings][1] in the
+    # Amazon Web Services Single Sign-On User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/singlesignon/latest/userguide/attributemappingsconcept.html
     #
     # @note When making an API call, you may pass AccessControlAttributeValue
     #   data as a hash:
@@ -218,6 +223,48 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AttachCustomerManagedPolicyReferenceToPermissionSetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_arn: "InstanceArn", # required
+    #         permission_set_arn: "PermissionSetArn", # required
+    #         customer_managed_policy_reference: { # required
+    #           name: "ManagedPolicyName", # required
+    #           path: "ManagedPolicyPath",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] instance_arn
+    #   The ARN of the SSO instance under which the operation will be
+    #   executed.
+    #   @return [String]
+    #
+    # @!attribute [rw] permission_set_arn
+    #   The ARN of the `PermissionSet`.
+    #   @return [String]
+    #
+    # @!attribute [rw] customer_managed_policy_reference
+    #   Specifies the name and path of the IAM customer managed policy. You
+    #   must have an IAM policy that matches the name and path in each
+    #   Amazon Web Services account where you want to deploy your permission
+    #   set.
+    #   @return [Types::CustomerManagedPolicyReference]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/AttachCustomerManagedPolicyReferenceToPermissionSetRequest AWS API Documentation
+    #
+    class AttachCustomerManagedPolicyReferenceToPermissionSetRequest < Struct.new(
+      :instance_arn,
+      :permission_set_arn,
+      :customer_managed_policy_reference)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/AttachCustomerManagedPolicyReferenceToPermissionSetResponse AWS API Documentation
+    #
+    class AttachCustomerManagedPolicyReferenceToPermissionSetResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass AttachManagedPolicyToPermissionSetRequest
     #   data as a hash:
     #
@@ -241,7 +288,8 @@ module Aws::SSOAdmin
     #   @return [String]
     #
     # @!attribute [rw] managed_policy_arn
-    #   The IAM managed policy ARN to be attached to a permission set.
+    #   The Amazon Web Services managed policy ARN to be attached to a
+    #   permission set.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/AttachManagedPolicyToPermissionSetRequest AWS API Documentation
@@ -258,15 +306,17 @@ module Aws::SSOAdmin
     #
     class AttachManagedPolicyToPermissionSetResponse < Aws::EmptyStructure; end
 
-    # A structure that stores the details of the IAM managed policy.
+    # A structure that stores the details of the Amazon Web Services managed
+    # IAM policy.
     #
     # @!attribute [rw] name
-    #   The name of the IAM managed policy.
+    #   The name of the Amazon Web Services managed IAM policy.
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The ARN of the IAM managed policy. For more information about ARNs,
-    #   see [Amazon Resource Names (ARNs) and Amazon Web Services Service
+    #   The ARN of the Amazon Web Services managed IAM policy. For more
+    #   information about ARNs, see [Amazon Resource Names (ARNs) and Amazon
+    #   Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
     #   *Amazon Web Services General Reference*.
     #   @return [String]
@@ -426,8 +476,8 @@ module Aws::SSOAdmin
     #         relay_state: "RelayState",
     #         tags: [
     #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
     #           },
     #         ],
     #       }
@@ -483,6 +533,41 @@ module Aws::SSOAdmin
     #
     class CreatePermissionSetResponse < Struct.new(
       :permission_set)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the name and path of the IAM customer managed policy. You
+    # must have an IAM policy that matches the name and path in each Amazon
+    # Web Services account where you want to deploy your permission set.
+    #
+    # @note When making an API call, you may pass CustomerManagedPolicyReference
+    #   data as a hash:
+    #
+    #       {
+    #         name: "ManagedPolicyName", # required
+    #         path: "ManagedPolicyPath",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the policy document.
+    #   @return [String]
+    #
+    # @!attribute [rw] path
+    #   The path for the policy. The default is `/`. For more information,
+    #   see [Friendly names and paths][1] in the Identity and Access
+    #   Management user guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-friendly-names
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/CustomerManagedPolicyReference AWS API Documentation
+    #
+    class CustomerManagedPolicyReference < Struct.new(
+      :name,
+      :path)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -647,6 +732,36 @@ module Aws::SSOAdmin
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DeletePermissionSetResponse AWS API Documentation
     #
     class DeletePermissionSetResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeletePermissionsBoundaryFromPermissionSetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_arn: "InstanceArn", # required
+    #         permission_set_arn: "PermissionSetArn", # required
+    #       }
+    #
+    # @!attribute [rw] instance_arn
+    #   The ARN of the SSO instance under which the operation will be
+    #   executed.
+    #   @return [String]
+    #
+    # @!attribute [rw] permission_set_arn
+    #   The ARN of the `PermissionSet`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DeletePermissionsBoundaryFromPermissionSetRequest AWS API Documentation
+    #
+    class DeletePermissionsBoundaryFromPermissionSetRequest < Struct.new(
+      :instance_arn,
+      :permission_set_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DeletePermissionsBoundaryFromPermissionSetResponse AWS API Documentation
+    #
+    class DeletePermissionsBoundaryFromPermissionSetResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DescribeAccountAssignmentCreationStatusRequest
     #   data as a hash:
@@ -857,6 +972,48 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DetachCustomerManagedPolicyReferenceFromPermissionSetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_arn: "InstanceArn", # required
+    #         permission_set_arn: "PermissionSetArn", # required
+    #         customer_managed_policy_reference: { # required
+    #           name: "ManagedPolicyName", # required
+    #           path: "ManagedPolicyPath",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] instance_arn
+    #   The ARN of the SSO instance under which the operation will be
+    #   executed.
+    #   @return [String]
+    #
+    # @!attribute [rw] permission_set_arn
+    #   The ARN of the `PermissionSet`.
+    #   @return [String]
+    #
+    # @!attribute [rw] customer_managed_policy_reference
+    #   Specifies the name and path of the IAM customer managed policy. You
+    #   must have an IAM policy that matches the name and path in each
+    #   Amazon Web Services account where you want to deploy your permission
+    #   set.
+    #   @return [Types::CustomerManagedPolicyReference]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DetachCustomerManagedPolicyReferenceFromPermissionSetRequest AWS API Documentation
+    #
+    class DetachCustomerManagedPolicyReferenceFromPermissionSetRequest < Struct.new(
+      :instance_arn,
+      :permission_set_arn,
+      :customer_managed_policy_reference)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DetachCustomerManagedPolicyReferenceFromPermissionSetResponse AWS API Documentation
+    #
+    class DetachCustomerManagedPolicyReferenceFromPermissionSetResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DetachManagedPolicyFromPermissionSetRequest
     #   data as a hash:
     #
@@ -880,7 +1037,8 @@ module Aws::SSOAdmin
     #   @return [String]
     #
     # @!attribute [rw] managed_policy_arn
-    #   The IAM managed policy ARN to be attached to a permission set.
+    #   The Amazon Web Services managed policy ARN to be detached from a
+    #   permission set.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DetachManagedPolicyFromPermissionSetRequest AWS API Documentation
@@ -934,7 +1092,45 @@ module Aws::SSOAdmin
     #
     class GetInlinePolicyForPermissionSetResponse < Struct.new(
       :inline_policy)
-      SENSITIVE = [:inline_policy]
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetPermissionsBoundaryForPermissionSetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_arn: "InstanceArn", # required
+    #         permission_set_arn: "PermissionSetArn", # required
+    #       }
+    #
+    # @!attribute [rw] instance_arn
+    #   The ARN of the SSO instance under which the operation will be
+    #   executed.
+    #   @return [String]
+    #
+    # @!attribute [rw] permission_set_arn
+    #   The ARN of the `PermissionSet`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/GetPermissionsBoundaryForPermissionSetRequest AWS API Documentation
+    #
+    class GetPermissionsBoundaryForPermissionSetRequest < Struct.new(
+      :instance_arn,
+      :permission_set_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] permissions_boundary
+    #   The permissions boundary attached to the specified permission set.
+    #   @return [Types::PermissionsBoundary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/GetPermissionsBoundaryForPermissionSetResponse AWS API Documentation
+    #
+    class GetPermissionsBoundaryForPermissionSetResponse < Struct.new(
+      :permissions_boundary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1266,6 +1462,64 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListCustomerManagedPolicyReferencesInPermissionSetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_arn: "InstanceArn", # required
+    #         permission_set_arn: "PermissionSetArn", # required
+    #         max_results: 1,
+    #         next_token: "Token",
+    #       }
+    #
+    # @!attribute [rw] instance_arn
+    #   The ARN of the SSO instance under which the operation will be
+    #   executed.
+    #   @return [String]
+    #
+    # @!attribute [rw] permission_set_arn
+    #   The ARN of the `PermissionSet`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to display for the list call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token for the list API. Initially the value is null.
+    #   Use the output of previous API calls to make subsequent calls.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListCustomerManagedPolicyReferencesInPermissionSetRequest AWS API Documentation
+    #
+    class ListCustomerManagedPolicyReferencesInPermissionSetRequest < Struct.new(
+      :instance_arn,
+      :permission_set_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] customer_managed_policy_references
+    #   Specifies the names and paths of the IAM customer managed policies
+    #   that you have attached to your permission set.
+    #   @return [Array<Types::CustomerManagedPolicyReference>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token for the list API. Initially the value is null.
+    #   Use the output of previous API calls to make subsequent calls.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListCustomerManagedPolicyReferencesInPermissionSetResponse AWS API Documentation
+    #
+    class ListCustomerManagedPolicyReferencesInPermissionSetResponse < Struct.new(
+      :customer_managed_policy_references,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListInstancesRequest
     #   data as a hash:
     #
@@ -1558,7 +1812,7 @@ module Aws::SSOAdmin
     #
     #       {
     #         instance_arn: "InstanceArn", # required
-    #         resource_arn: "GeneralArn", # required
+    #         resource_arn: "TaggableResourceArn", # required
     #         next_token: "Token",
     #       }
     #
@@ -1744,6 +1998,59 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
+    # Specifies the configuration of the Amazon Web Services managed or
+    # customer managed policy that you want to set as a permissions
+    # boundary. Specify either `CustomerManagedPolicyReference` to use the
+    # name and path of a customer managed policy, or `ManagedPolicyArn` to
+    # use the ARN of an Amazon Web Services managed IAM policy. A
+    # permissions boundary represents the maximum permissions that any
+    # policy can grant your role. For more information, see [Permissions
+    # boundaries for IAM entities][1] in the *Identity and Access Management
+    # User Guide*.
+    #
+    # Policies used as permissions boundaries do not provide permissions.
+    # You must also attach an IAM policy to the role. To learn how the
+    # effective permissions for a role are evaluated, see [IAM JSON policy
+    # evaluation logic][2] in the *Identity and Access Management User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html
+    #
+    # @note When making an API call, you may pass PermissionsBoundary
+    #   data as a hash:
+    #
+    #       {
+    #         customer_managed_policy_reference: {
+    #           name: "ManagedPolicyName", # required
+    #           path: "ManagedPolicyPath",
+    #         },
+    #         managed_policy_arn: "ManagedPolicyArn",
+    #       }
+    #
+    # @!attribute [rw] customer_managed_policy_reference
+    #   Specifies the name and path of the IAM customer managed policy. You
+    #   must have an IAM policy that matches the name and path in each
+    #   Amazon Web Services account where you want to deploy your permission
+    #   set.
+    #   @return [Types::CustomerManagedPolicyReference]
+    #
+    # @!attribute [rw] managed_policy_arn
+    #   The Amazon Web Services managed policy ARN that you want to attach
+    #   to a permission set as a permissions boundary.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/PermissionsBoundary AWS API Documentation
+    #
+    class PermissionsBoundary < Struct.new(
+      :customer_managed_policy_reference,
+      :managed_policy_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ProvisionPermissionSetRequest
     #   data as a hash:
     #
@@ -1829,13 +2136,56 @@ module Aws::SSOAdmin
       :instance_arn,
       :permission_set_arn,
       :inline_policy)
-      SENSITIVE = [:inline_policy]
+      SENSITIVE = []
       include Aws::Structure
     end
 
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/PutInlinePolicyToPermissionSetResponse AWS API Documentation
     #
     class PutInlinePolicyToPermissionSetResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass PutPermissionsBoundaryToPermissionSetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_arn: "InstanceArn", # required
+    #         permission_set_arn: "PermissionSetArn", # required
+    #         permissions_boundary: { # required
+    #           customer_managed_policy_reference: {
+    #             name: "ManagedPolicyName", # required
+    #             path: "ManagedPolicyPath",
+    #           },
+    #           managed_policy_arn: "ManagedPolicyArn",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] instance_arn
+    #   The ARN of the SSO instance under which the operation will be
+    #   executed.
+    #   @return [String]
+    #
+    # @!attribute [rw] permission_set_arn
+    #   The ARN of the `PermissionSet`.
+    #   @return [String]
+    #
+    # @!attribute [rw] permissions_boundary
+    #   The permissions boundary that you want to attach to a
+    #   `PermissionSet`.
+    #   @return [Types::PermissionsBoundary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/PutPermissionsBoundaryToPermissionSetRequest AWS API Documentation
+    #
+    class PutPermissionsBoundaryToPermissionSetRequest < Struct.new(
+      :instance_arn,
+      :permission_set_arn,
+      :permissions_boundary)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/PutPermissionsBoundaryToPermissionSetResponse AWS API Documentation
+    #
+    class PutPermissionsBoundaryToPermissionSetResponse < Aws::EmptyStructure; end
 
     # Indicates that a requested resource is not found.
     #
@@ -1873,8 +2223,8 @@ module Aws::SSOAdmin
     #   data as a hash:
     #
     #       {
-    #         key: "TagKey",
-    #         value: "TagValue",
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
     #       }
     #
     # @!attribute [rw] key
@@ -1899,11 +2249,11 @@ module Aws::SSOAdmin
     #
     #       {
     #         instance_arn: "InstanceArn", # required
-    #         resource_arn: "GeneralArn", # required
+    #         resource_arn: "TaggableResourceArn", # required
     #         tags: [ # required
     #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
     #           },
     #         ],
     #       }
@@ -1957,7 +2307,7 @@ module Aws::SSOAdmin
     #
     #       {
     #         instance_arn: "InstanceArn", # required
-    #         resource_arn: "GeneralArn", # required
+    #         resource_arn: "TaggableResourceArn", # required
     #         tag_keys: ["TagKey"], # required
     #       }
     #
