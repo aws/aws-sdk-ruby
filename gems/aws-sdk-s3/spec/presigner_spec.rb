@@ -90,7 +90,6 @@ module Aws
             expires_in: 86_400,
             whitelist_headers: ['user-agent']
           )
-          puts CGI.parse(actual_url)
           expect(actual_url).to include(
             '&X-Amz-SignedHeaders=host%3Buser-agent'
           )
