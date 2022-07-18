@@ -74,7 +74,13 @@ module Aws
     #
     class Signer
 
-      @@use_crt = nil
+      @@use_crt =
+        begin
+          require 'aws-crt'
+          true
+        rescue LoadError
+          false
+        end
 
       # @overload initialize(service:, region:, access_key_id:, secret_access_key:, session_token:nil, **options)
       #   @param [String] :service The service signing name, e.g. 's3'.
@@ -835,14 +841,7 @@ module Aws
       class << self
 
         def use_crt?
-          return @@use_crt unless @@use_crt.nil?
-          @@use_crt =
-            begin
-              require 'aws-crt'
-              true
-            rescue LoadError
-              false
-            end
+          @@use_crt
         end
 
         # @api private
