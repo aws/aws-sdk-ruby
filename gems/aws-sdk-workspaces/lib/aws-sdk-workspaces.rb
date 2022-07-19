@@ -48,6 +48,6 @@ require_relative 'aws-sdk-workspaces/customizations'
 # @!group service
 module Aws::WorkSpaces
 
-  GEM_VERSION = '1.69.0'
+  GEM_VERSION = '1.70.0'
 
 end

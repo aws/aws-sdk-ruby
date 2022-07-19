@@ -12543,8 +12543,10 @@ module Aws::Glue
     # @option params [Integer] :timeout
     #   The `JobRun` timeout in minutes. This is the maximum time that a job
     #   run can consume resources before it is terminated and enters `TIMEOUT`
-    #   status. The default is 2,880 minutes (48 hours). This overrides the
-    #   timeout value set in the parent job.
+    #   status. This value overrides the timeout value set in the parent job.
+    #
+    #   Streaming jobs do not have a timeout. The default for non-streaming
+    #   jobs is 2,880 minutes (48 hours).
     #
     # @option params [Float] :max_capacity
     #   The number of Glue data processing units (DPUs) that can be allocated
@@ -15092,7 +15094,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.115.0'
+      context[:gem_version] = '1.116.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

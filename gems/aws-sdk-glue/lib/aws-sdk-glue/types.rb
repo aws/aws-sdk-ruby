@@ -14998,8 +14998,11 @@ module Aws::Glue
     # @!attribute [rw] timeout
     #   The `JobRun` timeout in minutes. This is the maximum time that a job
     #   run can consume resources before it is terminated and enters
-    #   `TIMEOUT` status. The default is 2,880 minutes (48 hours). This
-    #   overrides the timeout value set in the parent job.
+    #   `TIMEOUT` status. This value overrides the timeout value set in the
+    #   parent job.
+    #
+    #   Streaming jobs do not have a timeout. The default for non-streaming
+    #   jobs is 2,880 minutes (48 hours).
     #   @return [Integer]
     #
     # @!attribute [rw] max_capacity
@@ -15090,10 +15093,10 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] dpu_seconds
-    #   This field populates only when an Auto Scaling job run completes,
-    #   and represents the total time each executor ran during the lifecycle
-    #   of a job run in seconds, multiplied by a DPU factor (1 for `G.1X`
-    #   and 2 for `G.2X` workers). This value may be different than the
+    #   This field populates only for Auto Scaling job runs, and represents
+    #   the total time each executor ran during the lifecycle of a job run
+    #   in seconds, multiplied by a DPU factor (1 for `G.1X`, 2 for `G.2X`,
+    #   or 0.25 for `G.025X` workers). This value may be different than the
     #   `executionEngineRuntime` * `MaxCapacity` as in the case of Auto
     #   Scaling jobs, as the number of executors running at a given time may
     #   be less than the `MaxCapacity`. Therefore, it is possible that the
@@ -22061,8 +22064,11 @@ module Aws::Glue
     # @!attribute [rw] timeout
     #   The `JobRun` timeout in minutes. This is the maximum time that a job
     #   run can consume resources before it is terminated and enters
-    #   `TIMEOUT` status. The default is 2,880 minutes (48 hours). This
-    #   overrides the timeout value set in the parent job.
+    #   `TIMEOUT` status. This value overrides the timeout value set in the
+    #   parent job.
+    #
+    #   Streaming jobs do not have a timeout. The default for non-streaming
+    #   jobs is 2,880 minutes (48 hours).
     #   @return [Integer]
     #
     # @!attribute [rw] max_capacity

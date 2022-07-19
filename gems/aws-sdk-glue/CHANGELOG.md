@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.116.0 (2022-07-19)
+------------------
+
+* Feature - Documentation updates for AWS Glue Job Timeout and Autoscaling
+
 1.115.0 (2022-07-14)
 ------------------
 

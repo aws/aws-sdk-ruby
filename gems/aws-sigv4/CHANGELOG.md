@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.5.1 (2022-07-19)
+------------------
+
 * Issue - Fix performance regression when checking if `aws-crt` is available. (#2729)
 
 1.5.0 (2022-04-20)

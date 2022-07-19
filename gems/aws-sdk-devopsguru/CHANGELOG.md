@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2022-07-19)
+------------------
+
+* Feature - Added new APIs for log anomaly detection feature.
+
 1.23.0 (2022-04-12)
 ------------------
 

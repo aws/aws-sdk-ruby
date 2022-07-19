@@ -351,6 +351,48 @@ module Aws::SagemakerEdgeManager
 
     # @!group API Operations
 
+    # Use to get the active deployments from a device.
+    #
+    # @option params [required, String] :device_name
+    #   The unique name of the device you want to get the configuration of
+    #   active deployments from.
+    #
+    # @option params [required, String] :device_fleet_name
+    #   The name of the fleet that the device belongs to.
+    #
+    # @return [Types::GetDeploymentsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDeploymentsResult#deployments #deployments} => Array&lt;Types::EdgeDeployment&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_deployments({
+    #     device_name: "DeviceName", # required
+    #     device_fleet_name: "DeviceFleetName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.deployments #=> Array
+    #   resp.deployments[0].deployment_name #=> String
+    #   resp.deployments[0].type #=> String, one of "Model"
+    #   resp.deployments[0].failure_handling_policy #=> String, one of "ROLLBACK_ON_FAILURE", "DO_NOTHING"
+    #   resp.deployments[0].definitions #=> Array
+    #   resp.deployments[0].definitions[0].model_handle #=> String
+    #   resp.deployments[0].definitions[0].s3_url #=> String
+    #   resp.deployments[0].definitions[0].checksum.type #=> String, one of "SHA1"
+    #   resp.deployments[0].definitions[0].checksum.sum #=> String
+    #   resp.deployments[0].definitions[0].state #=> String, one of "DEPLOY", "UNDEPLOY"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-edge-2020-09-23/GetDeployments AWS API Documentation
+    #
+    # @overload get_deployments(params = {})
+    # @param [Hash] params ({})
+    def get_deployments(params = {}, options = {})
+      req = build_request(:get_deployments, params)
+      req.send_request(options)
+    end
+
     # Use to check if a device is registered with SageMaker Edge Manager.
     #
     # @option params [required, String] :device_name
@@ -405,6 +447,9 @@ module Aws::SagemakerEdgeManager
     # @option params [required, String] :device_fleet_name
     #   The name of the fleet that the device belongs to.
     #
+    # @option params [Types::DeploymentResult] :deployment_result
+    #   Returns the result of a deployment on the device.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -437,6 +482,25 @@ module Aws::SagemakerEdgeManager
     #     agent_version: "Version", # required
     #     device_name: "DeviceName", # required
     #     device_fleet_name: "DeviceFleetName", # required
+    #     deployment_result: {
+    #       deployment_name: "EntityName",
+    #       deployment_status: "EntityName",
+    #       deployment_status_message: "String",
+    #       deployment_start_time: Time.now,
+    #       deployment_end_time: Time.now,
+    #       deployment_models: [
+    #         {
+    #           model_handle: "EntityName",
+    #           model_name: "ModelName",
+    #           model_version: "Version",
+    #           desired_state: "DEPLOY", # accepts DEPLOY, UNDEPLOY
+    #           state: "DEPLOY", # accepts DEPLOY, UNDEPLOY
+    #           status: "SUCCESS", # accepts SUCCESS, FAIL
+    #           status_reason: "String",
+    #           rollback_failure_reason: "String",
+    #         },
+    #       ],
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-edge-2020-09-23/SendHeartbeat AWS API Documentation
@@ -461,7 +525,7 @@ module Aws::SagemakerEdgeManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemakeredgemanager'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

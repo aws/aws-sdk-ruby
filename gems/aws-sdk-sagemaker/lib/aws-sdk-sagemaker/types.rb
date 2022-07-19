@@ -34717,7 +34717,7 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         start_arns: ["AssociationEntityArn"], # required
+    #         start_arns: ["AssociationEntityArn"],
     #         direction: "Both", # accepts Both, Ascendants, Descendants
     #         include_edges: false,
     #         filters: {

@@ -28,7 +28,7 @@ require_relative 'aws-sdk-sagemakeredgemanager/customizations'
 # structure.
 #
 #     sagemaker_edge_manager = Aws::SagemakerEdgeManager::Client.new
-#     resp = sagemaker_edge_manager.get_device_registration(params)
+#     resp = sagemaker_edge_manager.get_deployments(params)
 #
 # See {Client} for more information.
 #
@@ -48,6 +48,6 @@ require_relative 'aws-sdk-sagemakeredgemanager/customizations'
 # @!group service
 module Aws::SagemakerEdgeManager
 
-  GEM_VERSION = '1.11.0'
+  GEM_VERSION = '1.12.0'
 
 end

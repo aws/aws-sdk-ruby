@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.133.0 (2022-07-19)
+------------------
+
+* Feature - Fixed an issue with cross account QueryLineage
+
 1.132.0 (2022-07-18)
 ------------------
 

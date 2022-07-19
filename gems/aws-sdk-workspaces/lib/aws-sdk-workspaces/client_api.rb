@@ -1624,6 +1624,7 @@ module Aws::WorkSpaces
         o.output = Shapes::ShapeRef.new(shape: ImportClientBrandingResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 

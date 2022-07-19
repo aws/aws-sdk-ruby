@@ -6437,7 +6437,7 @@ module Aws::SageMaker
     QueryFilters.add_member(:properties, Shapes::ShapeRef.new(shape: QueryProperties, location_name: "Properties"))
     QueryFilters.struct_class = Types::QueryFilters
 
-    QueryLineageRequest.add_member(:start_arns, Shapes::ShapeRef.new(shape: QueryLineageStartArns, required: true, location_name: "StartArns"))
+    QueryLineageRequest.add_member(:start_arns, Shapes::ShapeRef.new(shape: QueryLineageStartArns, location_name: "StartArns"))
     QueryLineageRequest.add_member(:direction, Shapes::ShapeRef.new(shape: Direction, location_name: "Direction"))
     QueryLineageRequest.add_member(:include_edges, Shapes::ShapeRef.new(shape: Boolean, location_name: "IncludeEdges"))
     QueryLineageRequest.add_member(:filters, Shapes::ShapeRef.new(shape: QueryFilters, location_name: "Filters"))

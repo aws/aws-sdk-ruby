@@ -16743,7 +16743,7 @@ module Aws::SageMaker
     #
     # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/querying-lineage-entities.html
     #
-    # @option params [required, Array<String>] :start_arns
+    # @option params [Array<String>] :start_arns
     #   A list of resource Amazon Resource Name (ARN) that represent the
     #   starting point for your lineage query.
     #
@@ -16802,7 +16802,7 @@ module Aws::SageMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.query_lineage({
-    #     start_arns: ["AssociationEntityArn"], # required
+    #     start_arns: ["AssociationEntityArn"],
     #     direction: "Both", # accepts Both, Ascendants, Descendants
     #     include_edges: false,
     #     filters: {
@@ -20269,7 +20269,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.132.0'
+      context[:gem_version] = '1.133.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

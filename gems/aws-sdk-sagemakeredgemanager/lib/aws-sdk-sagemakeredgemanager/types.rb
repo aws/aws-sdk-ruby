@@ -10,6 +10,208 @@
 module Aws::SagemakerEdgeManager
   module Types
 
+    # Information about the checksum of a model deployed on a device.
+    #
+    # @!attribute [rw] type
+    #   The type of the checksum.
+    #   @return [String]
+    #
+    # @!attribute [rw] sum
+    #   The checksum of the model.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-edge-2020-09-23/Checksum AWS API Documentation
+    #
+    class Checksum < Struct.new(
+      :type,
+      :sum)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_handle
+    #   The unique model handle.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_url
+    #   The absolute S3 location of the model.
+    #   @return [String]
+    #
+    # @!attribute [rw] checksum
+    #   The checksum information of the model.
+    #   @return [Types::Checksum]
+    #
+    # @!attribute [rw] state
+    #   The desired state of the model.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-edge-2020-09-23/Definition AWS API Documentation
+    #
+    class Definition < Struct.new(
+      :model_handle,
+      :s3_url,
+      :checksum,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeploymentModel
+    #   data as a hash:
+    #
+    #       {
+    #         model_handle: "EntityName",
+    #         model_name: "ModelName",
+    #         model_version: "Version",
+    #         desired_state: "DEPLOY", # accepts DEPLOY, UNDEPLOY
+    #         state: "DEPLOY", # accepts DEPLOY, UNDEPLOY
+    #         status: "SUCCESS", # accepts SUCCESS, FAIL
+    #         status_reason: "String",
+    #         rollback_failure_reason: "String",
+    #       }
+    #
+    # @!attribute [rw] model_handle
+    #   The unique handle of the model.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_name
+    #   The name of the model.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_version
+    #   The version of the model.
+    #   @return [String]
+    #
+    # @!attribute [rw] desired_state
+    #   The desired state of the model.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   Returns the current state of the model.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Returns the deployment status of the model.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Returns the error message for the deployment status result.
+    #   @return [String]
+    #
+    # @!attribute [rw] rollback_failure_reason
+    #   Returns the error message if there is a rollback.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-edge-2020-09-23/DeploymentModel AWS API Documentation
+    #
+    class DeploymentModel < Struct.new(
+      :model_handle,
+      :model_name,
+      :model_version,
+      :desired_state,
+      :state,
+      :status,
+      :status_reason,
+      :rollback_failure_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the result of a deployment on an edge device that is
+    # registered with SageMaker Edge Manager.
+    #
+    # @note When making an API call, you may pass DeploymentResult
+    #   data as a hash:
+    #
+    #       {
+    #         deployment_name: "EntityName",
+    #         deployment_status: "EntityName",
+    #         deployment_status_message: "String",
+    #         deployment_start_time: Time.now,
+    #         deployment_end_time: Time.now,
+    #         deployment_models: [
+    #           {
+    #             model_handle: "EntityName",
+    #             model_name: "ModelName",
+    #             model_version: "Version",
+    #             desired_state: "DEPLOY", # accepts DEPLOY, UNDEPLOY
+    #             state: "DEPLOY", # accepts DEPLOY, UNDEPLOY
+    #             status: "SUCCESS", # accepts SUCCESS, FAIL
+    #             status_reason: "String",
+    #             rollback_failure_reason: "String",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] deployment_name
+    #   The name and unique ID of the deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_status
+    #   Returns the bucket error code.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_status_message
+    #   Returns the detailed error message.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_start_time
+    #   The timestamp of when the deployment was started on the agent.
+    #   @return [Time]
+    #
+    # @!attribute [rw] deployment_end_time
+    #   The timestamp of when the deployment was ended, and the agent got
+    #   the deployment results.
+    #   @return [Time]
+    #
+    # @!attribute [rw] deployment_models
+    #   Returns a list of models deployed on the agent.
+    #   @return [Array<Types::DeploymentModel>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-edge-2020-09-23/DeploymentResult AWS API Documentation
+    #
+    class DeploymentResult < Struct.new(
+      :deployment_name,
+      :deployment_status,
+      :deployment_status_message,
+      :deployment_start_time,
+      :deployment_end_time,
+      :deployment_models)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a deployment on an edge device that is registered
+    # with SageMaker Edge Manager.
+    #
+    # @!attribute [rw] deployment_name
+    #   The name and unique ID of the deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_handling_policy
+    #   Determines whether to rollback to previous configuration if
+    #   deployment fails.
+    #   @return [String]
+    #
+    # @!attribute [rw] definitions
+    #   Returns a list of Definition objects.
+    #   @return [Array<Types::Definition>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-edge-2020-09-23/EdgeDeployment AWS API Documentation
+    #
+    class EdgeDeployment < Struct.new(
+      :deployment_name,
+      :type,
+      :failure_handling_policy,
+      :definitions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information required for edge device metrics.
     #
     # @note When making an API call, you may pass EdgeMetric
@@ -45,6 +247,45 @@ module Aws::SagemakerEdgeManager
       :metric_name,
       :value,
       :timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetDeploymentsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         device_name: "DeviceName", # required
+    #         device_fleet_name: "DeviceFleetName", # required
+    #       }
+    #
+    # @!attribute [rw] device_name
+    #   The unique name of the device you want to get the configuration of
+    #   active deployments from.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_fleet_name
+    #   The name of the fleet that the device belongs to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-edge-2020-09-23/GetDeploymentsRequest AWS API Documentation
+    #
+    class GetDeploymentsRequest < Struct.new(
+      :device_name,
+      :device_fleet_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] deployments
+    #   Returns a list of the configurations of the active deployments on
+    #   the device.
+    #   @return [Array<Types::EdgeDeployment>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-edge-2020-09-23/GetDeploymentsResult AWS API Documentation
+    #
+    class GetDeploymentsResult < Struct.new(
+      :deployments)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -95,7 +336,7 @@ module Aws::SagemakerEdgeManager
     end
 
     # An internal failure occurred. Try your request again. If the problem
-    # persists, contact AWS customer support.
+    # persists, contact Amazon Web Services customer support.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -192,6 +433,25 @@ module Aws::SagemakerEdgeManager
     #         agent_version: "Version", # required
     #         device_name: "DeviceName", # required
     #         device_fleet_name: "DeviceFleetName", # required
+    #         deployment_result: {
+    #           deployment_name: "EntityName",
+    #           deployment_status: "EntityName",
+    #           deployment_status_message: "String",
+    #           deployment_start_time: Time.now,
+    #           deployment_end_time: Time.now,
+    #           deployment_models: [
+    #             {
+    #               model_handle: "EntityName",
+    #               model_name: "ModelName",
+    #               model_version: "Version",
+    #               desired_state: "DEPLOY", # accepts DEPLOY, UNDEPLOY
+    #               state: "DEPLOY", # accepts DEPLOY, UNDEPLOY
+    #               status: "SUCCESS", # accepts SUCCESS, FAIL
+    #               status_reason: "String",
+    #               rollback_failure_reason: "String",
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] agent_metrics
@@ -215,6 +475,10 @@ module Aws::SagemakerEdgeManager
     #   The name of the fleet that the device belongs to.
     #   @return [String]
     #
+    # @!attribute [rw] deployment_result
+    #   Returns the result of a deployment on the device.
+    #   @return [Types::DeploymentResult]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-edge-2020-09-23/SendHeartbeatRequest AWS API Documentation
     #
     class SendHeartbeatRequest < Struct.new(
@@ -222,7 +486,8 @@ module Aws::SagemakerEdgeManager
       :models,
       :agent_version,
       :device_name,
-      :device_fleet_name)
+      :device_fleet_name,
+      :deployment_result)
       SENSITIVE = []
       include Aws::Structure
     end
