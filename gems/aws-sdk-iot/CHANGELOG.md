@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.93.0 (2022-07-20)
+------------------
+
+* Feature - GA release the ability to enable/disable IoT Fleet Indexing for Device Defender and Named Shadow information, and search them through IoT Fleet Indexing APIs. This includes Named Shadow Selection as a part of the UpdateIndexingConfiguration API.
+
 1.92.0 (2022-07-07)
 ------------------
 

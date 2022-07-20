@@ -598,6 +598,7 @@ module Aws::IoT
     IndexNotReadyException = Shapes::StructureShape.new(name: 'IndexNotReadyException')
     IndexSchema = Shapes::StringShape.new(name: 'IndexSchema')
     IndexStatus = Shapes::StringShape.new(name: 'IndexStatus')
+    IndexingFilter = Shapes::StructureShape.new(name: 'IndexingFilter')
     InlineDocument = Shapes::StringShape.new(name: 'InlineDocument')
     InputName = Shapes::StringShape.new(name: 'InputName')
     InternalException = Shapes::StructureShape.new(name: 'InternalException')
@@ -818,6 +819,7 @@ module Aws::IoT
     MqttPassword = Shapes::BlobShape.new(name: 'MqttPassword')
     MqttUsername = Shapes::StringShape.new(name: 'MqttUsername')
     NamedShadowIndexingMode = Shapes::StringShape.new(name: 'NamedShadowIndexingMode')
+    NamedShadowNamesFilter = Shapes::ListShape.new(name: 'NamedShadowNamesFilter')
     NamespaceId = Shapes::StringShape.new(name: 'NamespaceId')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NonCompliantChecksCount = Shapes::IntegerShape.new(name: 'NonCompliantChecksCount')
@@ -1023,6 +1025,7 @@ module Aws::IoT
     SetLoggingOptionsRequest = Shapes::StructureShape.new(name: 'SetLoggingOptionsRequest')
     SetV2LoggingLevelRequest = Shapes::StructureShape.new(name: 'SetV2LoggingLevelRequest')
     SetV2LoggingOptionsRequest = Shapes::StructureShape.new(name: 'SetV2LoggingOptionsRequest')
+    ShadowName = Shapes::StringShape.new(name: 'ShadowName')
     SigV4Authorization = Shapes::StructureShape.new(name: 'SigV4Authorization')
     Signature = Shapes::BlobShape.new(name: 'Signature')
     SignatureAlgorithm = Shapes::StringShape.new(name: 'SignatureAlgorithm')
@@ -2963,6 +2966,9 @@ module Aws::IoT
     IndexNotReadyException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     IndexNotReadyException.struct_class = Types::IndexNotReadyException
 
+    IndexingFilter.add_member(:named_shadow_names, Shapes::ShapeRef.new(shape: NamedShadowNamesFilter, location_name: "namedShadowNames"))
+    IndexingFilter.struct_class = Types::IndexingFilter
+
     InternalException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     InternalException.struct_class = Types::InternalException
 
@@ -3763,6 +3769,8 @@ module Aws::IoT
     MqttContext.add_member(:client_id, Shapes::ShapeRef.new(shape: MqttClientId, location_name: "clientId"))
     MqttContext.struct_class = Types::MqttContext
 
+    NamedShadowNamesFilter.member = Shapes::ShapeRef.new(shape: ShadowName)
+
     NonCompliantResource.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
     NonCompliantResource.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "resourceIdentifier"))
     NonCompliantResource.add_member(:additional_info, Shapes::ShapeRef.new(shape: StringMap, location_name: "additionalInfo"))
@@ -4411,6 +4419,7 @@ module Aws::IoT
     ThingIndexingConfiguration.add_member(:named_shadow_indexing_mode, Shapes::ShapeRef.new(shape: NamedShadowIndexingMode, location_name: "namedShadowIndexingMode"))
     ThingIndexingConfiguration.add_member(:managed_fields, Shapes::ShapeRef.new(shape: Fields, location_name: "managedFields"))
     ThingIndexingConfiguration.add_member(:custom_fields, Shapes::ShapeRef.new(shape: Fields, location_name: "customFields"))
+    ThingIndexingConfiguration.add_member(:filter, Shapes::ShapeRef.new(shape: IndexingFilter, location_name: "filter"))
     ThingIndexingConfiguration.struct_class = Types::ThingIndexingConfiguration
 
     ThingNameList.member = Shapes::ShapeRef.new(shape: ThingName)

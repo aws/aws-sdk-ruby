@@ -582,7 +582,9 @@ module Aws::IoT
     # Attaches the specified policy to the specified principal (certificate
     # or other credential).
     #
-    # **Note:** This action is deprecated. Please use AttachPolicy instead.
+    # **Note:** This action is deprecated and works as expected for backward
+    # compatibility, but we won't add enhancements. Use AttachPolicy
+    # instead.
     #
     # Requires permission to access the [AttachPrincipalPolicy][1] action.
     #
@@ -6690,6 +6692,8 @@ module Aws::IoT
     #   resp.thing_indexing_configuration.custom_fields #=> Array
     #   resp.thing_indexing_configuration.custom_fields[0].name #=> String
     #   resp.thing_indexing_configuration.custom_fields[0].type #=> String, one of "Number", "String", "Boolean"
+    #   resp.thing_indexing_configuration.filter.named_shadow_names #=> Array
+    #   resp.thing_indexing_configuration.filter.named_shadow_names[0] #=> String
     #   resp.thing_group_indexing_configuration.thing_group_indexing_mode #=> String, one of "OFF", "ON"
     #   resp.thing_group_indexing_configuration.managed_fields #=> Array
     #   resp.thing_group_indexing_configuration.managed_fields[0].name #=> String
@@ -12838,6 +12842,9 @@ module Aws::IoT
     #           type: "Number", # accepts Number, String, Boolean
     #         },
     #       ],
+    #       filter: {
+    #         named_shadow_names: ["ShadowName"],
+    #       },
     #     },
     #     thing_group_indexing_configuration: {
     #       thing_group_indexing_mode: "OFF", # required, accepts OFF, ON
@@ -13716,7 +13723,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.92.0'
+      context[:gem_version] = '1.93.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

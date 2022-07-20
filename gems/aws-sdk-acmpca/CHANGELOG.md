@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2022-07-20)
+------------------
+
+* Feature - AWS Certificate Manager (ACM) Private Certificate Authority (PCA) documentation updates
+
 1.48.0 (2022-03-28)
 ------------------
 

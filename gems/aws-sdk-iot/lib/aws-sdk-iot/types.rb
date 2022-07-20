@@ -9901,6 +9901,36 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # Provides additional filters for specific data sources. Named shadow is
+    # the only data source that currently supports and requires a filter. To
+    # add named shadows to your fleet indexing configuration, set
+    # `namedShadowIndexingMode` to be `ON` and specify your shadow names in
+    # `filter`.
+    #
+    # @note When making an API call, you may pass IndexingFilter
+    #   data as a hash:
+    #
+    #       {
+    #         named_shadow_names: ["ShadowName"],
+    #       }
+    #
+    # @!attribute [rw] named_shadow_names
+    #   The shadow names that you select to index. The default maximum
+    #   number of shadow names for indexing is 10. To increase the limit,
+    #   see [Amazon Web Services IoT Device Management Quotas][1] in the
+    #   *Amazon Web Services General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/iot_device_management.html#fleet-indexing-limits
+    #   @return [Array<String>]
+    #
+    class IndexingFilter < Struct.new(
+      :named_shadow_names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An unexpected error has occurred.
     #
     # @!attribute [rw] message
@@ -17736,6 +17766,9 @@ module Aws::IoT
     #             type: "Number", # accepts Number, String, Boolean
     #           },
     #         ],
+    #         filter: {
+    #           named_shadow_names: ["ShadowName"],
+    #         },
     #       }
     #
     # @!attribute [rw] thing_indexing_mode
@@ -17801,13 +17834,22 @@ module Aws::IoT
     #   Contains custom field names and their data type.
     #   @return [Array<Types::Field>]
     #
+    # @!attribute [rw] filter
+    #   Provides additional filters for specific data sources. Named shadow
+    #   is the only data source that currently supports and requires a
+    #   filter. To add named shadows to your fleet indexing configuration,
+    #   set `namedShadowIndexingMode` to be `ON` and specify your shadow
+    #   names in `filter`.
+    #   @return [Types::IndexingFilter]
+    #
     class ThingIndexingConfiguration < Struct.new(
       :thing_indexing_mode,
       :thing_connectivity_indexing_mode,
       :device_defender_indexing_mode,
       :named_shadow_indexing_mode,
       :managed_fields,
-      :custom_fields)
+      :custom_fields,
+      :filter)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19618,6 +19660,9 @@ module Aws::IoT
     #               type: "Number", # accepts Number, String, Boolean
     #             },
     #           ],
+    #           filter: {
+    #             named_shadow_names: ["ShadowName"],
+    #           },
     #         },
     #         thing_group_indexing_configuration: {
     #           thing_group_indexing_mode: "OFF", # required, accepts OFF, ON
