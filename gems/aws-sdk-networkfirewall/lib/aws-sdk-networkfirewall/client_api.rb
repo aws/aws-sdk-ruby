@@ -28,6 +28,9 @@ module Aws::NetworkFirewall
     AzSubnet = Shapes::StringShape.new(name: 'AzSubnet')
     AzSubnets = Shapes::ListShape.new(name: 'AzSubnets')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    CIDRCount = Shapes::IntegerShape.new(name: 'CIDRCount')
+    CIDRSummary = Shapes::StructureShape.new(name: 'CIDRSummary')
+    CapacityUsageSummary = Shapes::StructureShape.new(name: 'CapacityUsageSummary')
     CollectionMember_String = Shapes::StringShape.new(name: 'CollectionMember_String')
     ConfigurationSyncState = Shapes::StringShape.new(name: 'ConfigurationSyncState')
     CreateFirewallPolicyRequest = Shapes::StructureShape.new(name: 'CreateFirewallPolicyRequest')
@@ -84,6 +87,12 @@ module Aws::NetworkFirewall
     HashMapValue = Shapes::StringShape.new(name: 'HashMapValue')
     Header = Shapes::StructureShape.new(name: 'Header')
     IPSet = Shapes::StructureShape.new(name: 'IPSet')
+    IPSetArn = Shapes::StringShape.new(name: 'IPSetArn')
+    IPSetMetadata = Shapes::StructureShape.new(name: 'IPSetMetadata')
+    IPSetMetadataMap = Shapes::MapShape.new(name: 'IPSetMetadataMap')
+    IPSetReference = Shapes::StructureShape.new(name: 'IPSetReference')
+    IPSetReferenceMap = Shapes::MapShape.new(name: 'IPSetReferenceMap')
+    IPSetReferenceName = Shapes::StringShape.new(name: 'IPSetReferenceName')
     IPSets = Shapes::MapShape.new(name: 'IPSets')
     InsufficientCapacityException = Shapes::StructureShape.new(name: 'InsufficientCapacityException')
     InternalServerError = Shapes::StructureShape.new(name: 'InternalServerError')
@@ -130,6 +139,7 @@ module Aws::NetworkFirewall
     PublishMetricAction = Shapes::StructureShape.new(name: 'PublishMetricAction')
     PutResourcePolicyRequest = Shapes::StructureShape.new(name: 'PutResourcePolicyRequest')
     PutResourcePolicyResponse = Shapes::StructureShape.new(name: 'PutResourcePolicyResponse')
+    ReferenceSets = Shapes::StructureShape.new(name: 'ReferenceSets')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     ResourceManagedStatus = Shapes::StringShape.new(name: 'ResourceManagedStatus')
@@ -257,6 +267,14 @@ module Aws::NetworkFirewall
     Attachment.struct_class = Types::Attachment
 
     AzSubnets.member = Shapes::ShapeRef.new(shape: AzSubnet)
+
+    CIDRSummary.add_member(:available_cidr_count, Shapes::ShapeRef.new(shape: CIDRCount, location_name: "AvailableCIDRCount"))
+    CIDRSummary.add_member(:utilized_cidr_count, Shapes::ShapeRef.new(shape: CIDRCount, location_name: "UtilizedCIDRCount"))
+    CIDRSummary.add_member(:ip_set_references, Shapes::ShapeRef.new(shape: IPSetMetadataMap, location_name: "IPSetReferences"))
+    CIDRSummary.struct_class = Types::CIDRSummary
+
+    CapacityUsageSummary.add_member(:cid_rs, Shapes::ShapeRef.new(shape: CIDRSummary, location_name: "CIDRs"))
+    CapacityUsageSummary.struct_class = Types::CapacityUsageSummary
 
     CreateFirewallPolicyRequest.add_member(:firewall_policy_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "FirewallPolicyName"))
     CreateFirewallPolicyRequest.add_member(:firewall_policy, Shapes::ShapeRef.new(shape: FirewallPolicy, required: true, location_name: "FirewallPolicy"))
@@ -462,6 +480,7 @@ module Aws::NetworkFirewall
     FirewallStatus.add_member(:status, Shapes::ShapeRef.new(shape: FirewallStatusValue, required: true, location_name: "Status"))
     FirewallStatus.add_member(:configuration_sync_state_summary, Shapes::ShapeRef.new(shape: ConfigurationSyncState, required: true, location_name: "ConfigurationSyncStateSummary"))
     FirewallStatus.add_member(:sync_states, Shapes::ShapeRef.new(shape: SyncStates, location_name: "SyncStates"))
+    FirewallStatus.add_member(:capacity_usage_summary, Shapes::ShapeRef.new(shape: CapacityUsageSummary, location_name: "CapacityUsageSummary"))
     FirewallStatus.struct_class = Types::FirewallStatus
 
     Firewalls.member = Shapes::ShapeRef.new(shape: FirewallMetadata)
@@ -478,6 +497,18 @@ module Aws::NetworkFirewall
 
     IPSet.add_member(:definition, Shapes::ShapeRef.new(shape: VariableDefinitionList, required: true, location_name: "Definition"))
     IPSet.struct_class = Types::IPSet
+
+    IPSetMetadata.add_member(:resolved_cidr_count, Shapes::ShapeRef.new(shape: CIDRCount, location_name: "ResolvedCIDRCount"))
+    IPSetMetadata.struct_class = Types::IPSetMetadata
+
+    IPSetMetadataMap.key = Shapes::ShapeRef.new(shape: IPSetArn)
+    IPSetMetadataMap.value = Shapes::ShapeRef.new(shape: IPSetMetadata)
+
+    IPSetReference.add_member(:reference_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ReferenceArn"))
+    IPSetReference.struct_class = Types::IPSetReference
+
+    IPSetReferenceMap.key = Shapes::ShapeRef.new(shape: IPSetReferenceName)
+    IPSetReferenceMap.value = Shapes::ShapeRef.new(shape: IPSetReference)
 
     IPSets.key = Shapes::ShapeRef.new(shape: RuleVariableName)
     IPSets.value = Shapes::ShapeRef.new(shape: IPSet)
@@ -591,6 +622,9 @@ module Aws::NetworkFirewall
 
     PutResourcePolicyResponse.struct_class = Types::PutResourcePolicyResponse
 
+    ReferenceSets.add_member(:ip_set_references, Shapes::ShapeRef.new(shape: IPSetReferenceMap, location_name: "IPSetReferences"))
+    ReferenceSets.struct_class = Types::ReferenceSets
+
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
@@ -602,6 +636,7 @@ module Aws::NetworkFirewall
     RuleDefinition.struct_class = Types::RuleDefinition
 
     RuleGroup.add_member(:rule_variables, Shapes::ShapeRef.new(shape: RuleVariables, location_name: "RuleVariables"))
+    RuleGroup.add_member(:reference_sets, Shapes::ShapeRef.new(shape: ReferenceSets, location_name: "ReferenceSets"))
     RuleGroup.add_member(:rules_source, Shapes::ShapeRef.new(shape: RulesSource, required: true, location_name: "RulesSource"))
     RuleGroup.add_member(:stateful_rule_options, Shapes::ShapeRef.new(shape: StatefulRuleOptions, location_name: "StatefulRuleOptions"))
     RuleGroup.struct_class = Types::RuleGroup

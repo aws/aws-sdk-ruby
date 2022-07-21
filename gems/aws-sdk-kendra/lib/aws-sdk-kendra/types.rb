@@ -2439,6 +2439,7 @@ module Aws::Kendra
     #               bucket: "S3BucketName", # required
     #               key: "S3ObjectKey", # required
     #             },
+    #             authentication_type: "HTTP_BASIC", # accepts HTTP_BASIC, OAUTH2
     #           },
     #           database_configuration: {
     #             database_engine_type: "RDS_AURORA_MYSQL", # required, accepts RDS_AURORA_MYSQL, RDS_AURORA_POSTGRESQL, RDS_MYSQL, RDS_POSTGRESQL
@@ -3927,6 +3928,7 @@ module Aws::Kendra
     #             bucket: "S3BucketName", # required
     #             key: "S3ObjectKey", # required
     #           },
+    #           authentication_type: "HTTP_BASIC", # accepts HTTP_BASIC, OAUTH2
     #         },
     #         database_configuration: {
     #           database_engine_type: "RDS_AURORA_MYSQL", # required, accepts RDS_AURORA_MYSQL, RDS_AURORA_POSTGRESQL, RDS_MYSQL, RDS_POSTGRESQL
@@ -8750,7 +8752,7 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   If the previous response was incomplete (because there is more data
+    #   If the previous response was incomplete (because there's more data
     #   to retrieve), Amazon Kendra returns a pagination token in the
     #   response. You can use this pagination token to retrieve the next set
     #   of access control configurations.
@@ -8771,9 +8773,9 @@ module Aws::Kendra
     end
 
     # @!attribute [rw] next_token
-    #   If the response is truncated, Amazon Kendra returns this token that
-    #   you can use in the subsequent request to retrieve the next set of
-    #   access control configurations.
+    #   If the response is truncated, Amazon Kendra returns this token,
+    #   which you can use in the subsequent request to retrieve the next set
+    #   of access control configurations.
     #   @return [String]
     #
     # @!attribute [rw] access_control_configurations
@@ -11763,6 +11765,7 @@ module Aws::Kendra
     #           bucket: "S3BucketName", # required
     #           key: "S3ObjectKey", # required
     #         },
+    #         authentication_type: "HTTP_BASIC", # accepts HTTP_BASIC, OAUTH2
     #       }
     #
     # @!attribute [rw] share_point_version
@@ -11781,9 +11784,14 @@ module Aws::Kendra
     #   provide the sever domain name as part of the credentials. For more
     #   information, see [Using a Microsoft SharePoint Data Source][1].
     #
+    #   You can also provide OAuth authentication credentials of user name,
+    #   password, client ID, and client secret. For more information, see
+    #   [Authentication for a SharePoint data source][2].
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html
+    #   [2]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html#sharepoint-authentication
     #   @return [String]
     #
     # @!attribute [rw] crawl_attachments
@@ -11856,6 +11864,13 @@ module Aws::Kendra
     #   use this to connect to SharePoint.
     #   @return [Types::S3Path]
     #
+    # @!attribute [rw] authentication_type
+    #   Whether you want to connect to SharePoint using basic authentication
+    #   of user name and password, or OAuth authentication of user name,
+    #   password, client ID, and client secret. You can use OAuth
+    #   authentication for SharePoint Online.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/SharePointConfiguration AWS API Documentation
     #
     class SharePointConfiguration < Struct.new(
@@ -11870,7 +11885,8 @@ module Aws::Kendra
       :field_mappings,
       :document_title_field_name,
       :disable_local_groups,
-      :ssl_certificate_s3_path)
+      :ssl_certificate_s3_path,
+      :authentication_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12790,6 +12806,7 @@ module Aws::Kendra
     #               bucket: "S3BucketName", # required
     #               key: "S3ObjectKey", # required
     #             },
+    #             authentication_type: "HTTP_BASIC", # accepts HTTP_BASIC, OAUTH2
     #           },
     #           database_configuration: {
     #             database_engine_type: "RDS_AURORA_MYSQL", # required, accepts RDS_AURORA_MYSQL, RDS_AURORA_POSTGRESQL, RDS_MYSQL, RDS_POSTGRESQL

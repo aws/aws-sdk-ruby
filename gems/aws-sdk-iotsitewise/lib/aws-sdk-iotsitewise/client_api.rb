@@ -120,10 +120,13 @@ module Aws::IoTSiteWise
     BatchPutAssetPropertyValueErrorCode = Shapes::StringShape.new(name: 'BatchPutAssetPropertyValueErrorCode')
     BatchPutAssetPropertyValueRequest = Shapes::StructureShape.new(name: 'BatchPutAssetPropertyValueRequest')
     BatchPutAssetPropertyValueResponse = Shapes::StructureShape.new(name: 'BatchPutAssetPropertyValueResponse')
+    Bucket = Shapes::StringShape.new(name: 'Bucket')
     CapabilityConfiguration = Shapes::StringShape.new(name: 'CapabilityConfiguration')
     CapabilityNamespace = Shapes::StringShape.new(name: 'CapabilityNamespace')
     CapabilitySyncStatus = Shapes::StringShape.new(name: 'CapabilitySyncStatus')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
+    ColumnName = Shapes::StringShape.new(name: 'ColumnName')
+    ColumnNames = Shapes::ListShape.new(name: 'ColumnNames')
     CompositeModelProperty = Shapes::StructureShape.new(name: 'CompositeModelProperty')
     ComputeLocation = Shapes::StringShape.new(name: 'ComputeLocation')
     ConfigurationErrorDetails = Shapes::StructureShape.new(name: 'ConfigurationErrorDetails')
@@ -137,6 +140,8 @@ module Aws::IoTSiteWise
     CreateAssetModelResponse = Shapes::StructureShape.new(name: 'CreateAssetModelResponse')
     CreateAssetRequest = Shapes::StructureShape.new(name: 'CreateAssetRequest')
     CreateAssetResponse = Shapes::StructureShape.new(name: 'CreateAssetResponse')
+    CreateBulkImportJobRequest = Shapes::StructureShape.new(name: 'CreateBulkImportJobRequest')
+    CreateBulkImportJobResponse = Shapes::StructureShape.new(name: 'CreateBulkImportJobResponse')
     CreateDashboardRequest = Shapes::StructureShape.new(name: 'CreateDashboardRequest')
     CreateDashboardResponse = Shapes::StructureShape.new(name: 'CreateDashboardResponse')
     CreateGatewayRequest = Shapes::StructureShape.new(name: 'CreateGatewayRequest')
@@ -145,6 +150,7 @@ module Aws::IoTSiteWise
     CreatePortalResponse = Shapes::StructureShape.new(name: 'CreatePortalResponse')
     CreateProjectRequest = Shapes::StructureShape.new(name: 'CreateProjectRequest')
     CreateProjectResponse = Shapes::StructureShape.new(name: 'CreateProjectResponse')
+    Csv = Shapes::StructureShape.new(name: 'Csv')
     CustomerManagedS3Storage = Shapes::StructureShape.new(name: 'CustomerManagedS3Storage')
     DashboardDefinition = Shapes::StringShape.new(name: 'DashboardDefinition')
     DashboardSummaries = Shapes::ListShape.new(name: 'DashboardSummaries')
@@ -172,6 +178,8 @@ module Aws::IoTSiteWise
     DescribeAssetPropertyResponse = Shapes::StructureShape.new(name: 'DescribeAssetPropertyResponse')
     DescribeAssetRequest = Shapes::StructureShape.new(name: 'DescribeAssetRequest')
     DescribeAssetResponse = Shapes::StructureShape.new(name: 'DescribeAssetResponse')
+    DescribeBulkImportJobRequest = Shapes::StructureShape.new(name: 'DescribeBulkImportJobRequest')
+    DescribeBulkImportJobResponse = Shapes::StructureShape.new(name: 'DescribeBulkImportJobResponse')
     DescribeDashboardRequest = Shapes::StructureShape.new(name: 'DescribeDashboardRequest')
     DescribeDashboardResponse = Shapes::StructureShape.new(name: 'DescribeDashboardResponse')
     DescribeDefaultEncryptionConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeDefaultEncryptionConfigurationRequest')
@@ -204,10 +212,14 @@ module Aws::IoTSiteWise
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorDetails = Shapes::StructureShape.new(name: 'ErrorDetails')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    ErrorReportLocation = Shapes::StructureShape.new(name: 'ErrorReportLocation')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
     Expression = Shapes::StringShape.new(name: 'Expression')
     ExpressionVariable = Shapes::StructureShape.new(name: 'ExpressionVariable')
     ExpressionVariables = Shapes::ListShape.new(name: 'ExpressionVariables')
+    File = Shapes::StructureShape.new(name: 'File')
+    FileFormat = Shapes::StructureShape.new(name: 'FileFormat')
+    Files = Shapes::ListShape.new(name: 'Files')
     ForwardingConfig = Shapes::StructureShape.new(name: 'ForwardingConfig')
     ForwardingConfigState = Shapes::StringShape.new(name: 'ForwardingConfigState')
     GatewayCapabilitySummaries = Shapes::ListShape.new(name: 'GatewayCapabilitySummaries')
@@ -246,6 +258,10 @@ module Aws::IoTSiteWise
     IntervalInSeconds = Shapes::IntegerShape.new(name: 'IntervalInSeconds')
     IntervalWindowInSeconds = Shapes::IntegerShape.new(name: 'IntervalWindowInSeconds')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
+    JobConfiguration = Shapes::StructureShape.new(name: 'JobConfiguration')
+    JobStatus = Shapes::StringShape.new(name: 'JobStatus')
+    JobSummaries = Shapes::ListShape.new(name: 'JobSummaries')
+    JobSummary = Shapes::StructureShape.new(name: 'JobSummary')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListAccessPoliciesRequest = Shapes::StructureShape.new(name: 'ListAccessPoliciesRequest')
@@ -259,6 +275,9 @@ module Aws::IoTSiteWise
     ListAssetsResponse = Shapes::StructureShape.new(name: 'ListAssetsResponse')
     ListAssociatedAssetsRequest = Shapes::StructureShape.new(name: 'ListAssociatedAssetsRequest')
     ListAssociatedAssetsResponse = Shapes::StructureShape.new(name: 'ListAssociatedAssetsResponse')
+    ListBulkImportJobsFilter = Shapes::StringShape.new(name: 'ListBulkImportJobsFilter')
+    ListBulkImportJobsRequest = Shapes::StructureShape.new(name: 'ListBulkImportJobsRequest')
+    ListBulkImportJobsResponse = Shapes::StructureShape.new(name: 'ListBulkImportJobsResponse')
     ListDashboardsRequest = Shapes::StructureShape.new(name: 'ListDashboardsRequest')
     ListDashboardsResponse = Shapes::StructureShape.new(name: 'ListDashboardsResponse')
     ListGatewaysRequest = Shapes::StructureShape.new(name: 'ListGatewaysRequest')
@@ -336,6 +355,7 @@ module Aws::IoTSiteWise
     SSOApplicationId = Shapes::StringShape.new(name: 'SSOApplicationId')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     StorageType = Shapes::StringShape.new(name: 'StorageType')
+    String = Shapes::StringShape.new(name: 'String')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagMap = Shapes::MapShape.new(name: 'TagMap')
@@ -750,6 +770,8 @@ module Aws::IoTSiteWise
     BatchPutAssetPropertyValueResponse.add_member(:error_entries, Shapes::ShapeRef.new(shape: BatchPutAssetPropertyErrorEntries, required: true, location_name: "errorEntries"))
     BatchPutAssetPropertyValueResponse.struct_class = Types::BatchPutAssetPropertyValueResponse
 
+    ColumnNames.member = Shapes::ShapeRef.new(shape: ColumnName)
+
     CompositeModelProperty.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     CompositeModelProperty.add_member(:type, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "type"))
     CompositeModelProperty.add_member(:asset_property, Shapes::ShapeRef.new(shape: Property, required: true, location_name: "assetProperty"))
@@ -805,6 +827,18 @@ module Aws::IoTSiteWise
     CreateAssetResponse.add_member(:asset_status, Shapes::ShapeRef.new(shape: AssetStatus, required: true, location_name: "assetStatus"))
     CreateAssetResponse.struct_class = Types::CreateAssetResponse
 
+    CreateBulkImportJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "jobName"))
+    CreateBulkImportJobRequest.add_member(:job_role_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "jobRoleArn"))
+    CreateBulkImportJobRequest.add_member(:files, Shapes::ShapeRef.new(shape: Files, required: true, location_name: "files"))
+    CreateBulkImportJobRequest.add_member(:error_report_location, Shapes::ShapeRef.new(shape: ErrorReportLocation, required: true, location_name: "errorReportLocation"))
+    CreateBulkImportJobRequest.add_member(:job_configuration, Shapes::ShapeRef.new(shape: JobConfiguration, required: true, location_name: "jobConfiguration"))
+    CreateBulkImportJobRequest.struct_class = Types::CreateBulkImportJobRequest
+
+    CreateBulkImportJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "jobId"))
+    CreateBulkImportJobResponse.add_member(:job_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "jobName"))
+    CreateBulkImportJobResponse.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, required: true, location_name: "jobStatus"))
+    CreateBulkImportJobResponse.struct_class = Types::CreateBulkImportJobResponse
+
     CreateDashboardRequest.add_member(:project_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "projectId"))
     CreateDashboardRequest.add_member(:dashboard_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "dashboardName"))
     CreateDashboardRequest.add_member(:dashboard_description, Shapes::ShapeRef.new(shape: Description, location_name: "dashboardDescription"))
@@ -855,6 +889,9 @@ module Aws::IoTSiteWise
     CreateProjectResponse.add_member(:project_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "projectId"))
     CreateProjectResponse.add_member(:project_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "projectArn"))
     CreateProjectResponse.struct_class = Types::CreateProjectResponse
+
+    Csv.add_member(:column_names, Shapes::ShapeRef.new(shape: ColumnNames, location_name: "columnNames"))
+    Csv.struct_class = Types::Csv
 
     CustomerManagedS3Storage.add_member(:s3_resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "s3ResourceArn"))
     CustomerManagedS3Storage.add_member(:role_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "roleArn"))
@@ -970,6 +1007,20 @@ module Aws::IoTSiteWise
     DescribeAssetResponse.add_member(:asset_status, Shapes::ShapeRef.new(shape: AssetStatus, required: true, location_name: "assetStatus"))
     DescribeAssetResponse.add_member(:asset_description, Shapes::ShapeRef.new(shape: Description, location_name: "assetDescription"))
     DescribeAssetResponse.struct_class = Types::DescribeAssetResponse
+
+    DescribeBulkImportJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: ID, required: true, location: "uri", location_name: "jobId"))
+    DescribeBulkImportJobRequest.struct_class = Types::DescribeBulkImportJobRequest
+
+    DescribeBulkImportJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "jobId"))
+    DescribeBulkImportJobResponse.add_member(:job_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "jobName"))
+    DescribeBulkImportJobResponse.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, required: true, location_name: "jobStatus"))
+    DescribeBulkImportJobResponse.add_member(:job_role_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "jobRoleArn"))
+    DescribeBulkImportJobResponse.add_member(:files, Shapes::ShapeRef.new(shape: Files, required: true, location_name: "files"))
+    DescribeBulkImportJobResponse.add_member(:error_report_location, Shapes::ShapeRef.new(shape: ErrorReportLocation, required: true, location_name: "errorReportLocation"))
+    DescribeBulkImportJobResponse.add_member(:job_configuration, Shapes::ShapeRef.new(shape: JobConfiguration, required: true, location_name: "jobConfiguration"))
+    DescribeBulkImportJobResponse.add_member(:job_creation_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "jobCreationDate"))
+    DescribeBulkImportJobResponse.add_member(:job_last_update_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "jobLastUpdateDate"))
+    DescribeBulkImportJobResponse.struct_class = Types::DescribeBulkImportJobResponse
 
     DescribeDashboardRequest.add_member(:dashboard_id, Shapes::ShapeRef.new(shape: ID, required: true, location: "uri", location_name: "dashboardId"))
     DescribeDashboardRequest.struct_class = Types::DescribeDashboardRequest
@@ -1098,11 +1149,25 @@ module Aws::IoTSiteWise
     ErrorDetails.add_member(:details, Shapes::ShapeRef.new(shape: DetailedErrors, location_name: "details"))
     ErrorDetails.struct_class = Types::ErrorDetails
 
+    ErrorReportLocation.add_member(:bucket, Shapes::ShapeRef.new(shape: Bucket, required: true, location_name: "bucket"))
+    ErrorReportLocation.add_member(:prefix, Shapes::ShapeRef.new(shape: String, required: true, location_name: "prefix"))
+    ErrorReportLocation.struct_class = Types::ErrorReportLocation
+
     ExpressionVariable.add_member(:name, Shapes::ShapeRef.new(shape: VariableName, required: true, location_name: "name"))
     ExpressionVariable.add_member(:value, Shapes::ShapeRef.new(shape: VariableValue, required: true, location_name: "value"))
     ExpressionVariable.struct_class = Types::ExpressionVariable
 
     ExpressionVariables.member = Shapes::ShapeRef.new(shape: ExpressionVariable)
+
+    File.add_member(:bucket, Shapes::ShapeRef.new(shape: Bucket, required: true, location_name: "bucket"))
+    File.add_member(:key, Shapes::ShapeRef.new(shape: String, required: true, location_name: "key"))
+    File.add_member(:version_id, Shapes::ShapeRef.new(shape: String, location_name: "versionId"))
+    File.struct_class = Types::File
+
+    FileFormat.add_member(:csv, Shapes::ShapeRef.new(shape: Csv, location_name: "csv"))
+    FileFormat.struct_class = Types::FileFormat
+
+    Files.member = Shapes::ShapeRef.new(shape: File)
 
     ForwardingConfig.add_member(:state, Shapes::ShapeRef.new(shape: ForwardingConfigState, required: true, location_name: "state"))
     ForwardingConfig.struct_class = Types::ForwardingConfig
@@ -1233,6 +1298,16 @@ module Aws::IoTSiteWise
     InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     InvalidRequestException.struct_class = Types::InvalidRequestException
 
+    JobConfiguration.add_member(:file_format, Shapes::ShapeRef.new(shape: FileFormat, required: true, location_name: "fileFormat"))
+    JobConfiguration.struct_class = Types::JobConfiguration
+
+    JobSummaries.member = Shapes::ShapeRef.new(shape: JobSummary)
+
+    JobSummary.add_member(:id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "id"))
+    JobSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    JobSummary.add_member(:status, Shapes::ShapeRef.new(shape: JobStatus, required: true, location_name: "status"))
+    JobSummary.struct_class = Types::JobSummary
+
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     LimitExceededException.struct_class = Types::LimitExceededException
 
@@ -1287,6 +1362,15 @@ module Aws::IoTSiteWise
     ListAssociatedAssetsResponse.add_member(:asset_summaries, Shapes::ShapeRef.new(shape: AssociatedAssetsSummaries, required: true, location_name: "assetSummaries"))
     ListAssociatedAssetsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListAssociatedAssetsResponse.struct_class = Types::ListAssociatedAssetsResponse
+
+    ListBulkImportJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListBulkImportJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListBulkImportJobsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: ListBulkImportJobsFilter, location: "querystring", location_name: "filter"))
+    ListBulkImportJobsRequest.struct_class = Types::ListBulkImportJobsRequest
+
+    ListBulkImportJobsResponse.add_member(:job_summaries, Shapes::ShapeRef.new(shape: JobSummaries, required: true, location_name: "jobSummaries"))
+    ListBulkImportJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListBulkImportJobsResponse.struct_class = Types::ListBulkImportJobsResponse
 
     ListDashboardsRequest.add_member(:project_id, Shapes::ShapeRef.new(shape: ID, required: true, location: "querystring", location_name: "projectId"))
     ListDashboardsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
@@ -1849,6 +1933,24 @@ module Aws::IoTSiteWise
         o.errors << Shapes::ShapeRef.new(shape: ConflictingOperationException)
       end)
 
+      api.add_operation(:create_bulk_import_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateBulkImportJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/jobs"
+        o.endpoint_pattern = {
+          "hostPrefix" => "data.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: CreateBulkImportJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateBulkImportJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictingOperationException)
+      end)
+
       api.add_operation(:create_dashboard, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateDashboard"
         o.http_method = "POST"
@@ -2091,6 +2193,21 @@ module Aws::IoTSiteWise
         }
         o.input = Shapes::ShapeRef.new(shape: DescribeAssetPropertyRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeAssetPropertyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:describe_bulk_import_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeBulkImportJob"
+        o.http_method = "GET"
+        o.http_request_uri = "/jobs/{jobId}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "data.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: DescribeBulkImportJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeBulkImportJobResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
@@ -2438,6 +2555,27 @@ module Aws::IoTSiteWise
         }
         o.input = Shapes::ShapeRef.new(shape: ListAssociatedAssetsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListAssociatedAssetsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_bulk_import_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListBulkImportJobs"
+        o.http_method = "GET"
+        o.http_request_uri = "/jobs"
+        o.endpoint_pattern = {
+          "hostPrefix" => "data.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: ListBulkImportJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListBulkImportJobsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

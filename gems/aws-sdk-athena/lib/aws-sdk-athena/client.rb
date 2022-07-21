@@ -1175,6 +1175,60 @@ module Aws::Athena
       req.send_request(options)
     end
 
+    # Returns query execution runtime statistics related to a single
+    # execution of a query if you have access to the workgroup in which the
+    # query ran. The query execution runtime statistics is returned only
+    # when QueryExecutionStatus$State is in a SUCCEEDED or FAILED state.
+    #
+    # @option params [required, String] :query_execution_id
+    #   The unique ID of the query execution.
+    #
+    # @return [Types::GetQueryRuntimeStatisticsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetQueryRuntimeStatisticsOutput#query_runtime_statistics #query_runtime_statistics} => Types::QueryRuntimeStatistics
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_query_runtime_statistics({
+    #     query_execution_id: "QueryExecutionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.query_runtime_statistics.timeline.query_queue_time_in_millis #=> Integer
+    #   resp.query_runtime_statistics.timeline.query_planning_time_in_millis #=> Integer
+    #   resp.query_runtime_statistics.timeline.engine_execution_time_in_millis #=> Integer
+    #   resp.query_runtime_statistics.timeline.service_processing_time_in_millis #=> Integer
+    #   resp.query_runtime_statistics.timeline.total_execution_time_in_millis #=> Integer
+    #   resp.query_runtime_statistics.rows.input_rows #=> Integer
+    #   resp.query_runtime_statistics.rows.input_bytes #=> Integer
+    #   resp.query_runtime_statistics.rows.output_bytes #=> Integer
+    #   resp.query_runtime_statistics.rows.output_rows #=> Integer
+    #   resp.query_runtime_statistics.output_stage.stage_id #=> Integer
+    #   resp.query_runtime_statistics.output_stage.state #=> String
+    #   resp.query_runtime_statistics.output_stage.output_bytes #=> Integer
+    #   resp.query_runtime_statistics.output_stage.output_rows #=> Integer
+    #   resp.query_runtime_statistics.output_stage.input_bytes #=> Integer
+    #   resp.query_runtime_statistics.output_stage.input_rows #=> Integer
+    #   resp.query_runtime_statistics.output_stage.execution_time #=> Integer
+    #   resp.query_runtime_statistics.output_stage.query_stage_plan.name #=> String
+    #   resp.query_runtime_statistics.output_stage.query_stage_plan.identifier #=> String
+    #   resp.query_runtime_statistics.output_stage.query_stage_plan.children #=> Array
+    #   resp.query_runtime_statistics.output_stage.query_stage_plan.children[0] #=> Types::QueryStagePlanNode
+    #   resp.query_runtime_statistics.output_stage.query_stage_plan.remote_sources #=> Array
+    #   resp.query_runtime_statistics.output_stage.query_stage_plan.remote_sources[0] #=> String
+    #   resp.query_runtime_statistics.output_stage.sub_stages #=> Array
+    #   resp.query_runtime_statistics.output_stage.sub_stages[0] #=> Types::QueryStage
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetQueryRuntimeStatistics AWS API Documentation
+    #
+    # @overload get_query_runtime_statistics(params = {})
+    # @param [Hash] params ({})
+    def get_query_runtime_statistics(params = {}, options = {})
+      req = build_request(:get_query_runtime_statistics, params)
+      req.send_request(options)
+    end
+
     # Returns table metadata for the specified catalog, database, and table.
     #
     # @option params [required, String] :catalog_name
@@ -1371,6 +1425,8 @@ module Aws::Athena
     #
     #   * {Types::ListEngineVersionsOutput#engine_versions #engine_versions} => Array&lt;Types::EngineVersion&gt;
     #   * {Types::ListEngineVersionsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2120,7 +2176,7 @@ module Aws::Athena
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-athena'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -329,6 +329,50 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
+    # Summarizes the CIDR blocks used by the IP set references in a
+    # firewall. Network Firewall calculates the number of CIDRs by taking an
+    # aggregated count of all CIDRs used by the IP sets you are referencing.
+    #
+    # @!attribute [rw] available_cidr_count
+    #   The number of CIDR blocks available for use by the IP set references
+    #   in a firewall.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] utilized_cidr_count
+    #   The number of CIDR blocks used by the IP set references in a
+    #   firewall.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] ip_set_references
+    #   The list of the IP set references used by a firewall.
+    #   @return [Hash<String,Types::IPSetMetadata>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CIDRSummary AWS API Documentation
+    #
+    class CIDRSummary < Struct.new(
+      :available_cidr_count,
+      :utilized_cidr_count,
+      :ip_set_references)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The capacity usage summary of the resources used by the ReferenceSets
+    # in a firewall.
+    #
+    # @!attribute [rw] cid_rs
+    #   Describes the capacity usage of the CIDR blocks used by the IP set
+    #   references in a firewall.
+    #   @return [Types::CIDRSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CapacityUsageSummary AWS API Documentation
+    #
+    class CapacityUsageSummary < Struct.new(
+      :cid_rs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateFirewallPolicyRequest
     #   data as a hash:
     #
@@ -606,6 +650,13 @@ module Aws::NetworkFirewall
     #             port_sets: {
     #               "RuleVariableName" => {
     #                 definition: ["VariableDefinition"],
+    #               },
+    #             },
+    #           },
+    #           reference_sets: {
+    #             ip_set_references: {
+    #               "IPSetReferenceName" => {
+    #                 reference_arn: "ResourceArn",
     #               },
     #             },
     #           },
@@ -2120,12 +2171,20 @@ module Aws::NetworkFirewall
     #   and configuration object.
     #   @return [Hash<String,Types::SyncState>]
     #
+    # @!attribute [rw] capacity_usage_summary
+    #   Describes the capacity usage of the resources contained in a
+    #   firewall's reference sets. Network Firewall calclulates the
+    #   capacity usage by taking an aggregated count of all of the resources
+    #   used by all of the reference sets in a firewall.
+    #   @return [Types::CapacityUsageSummary]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/FirewallStatus AWS API Documentation
     #
     class FirewallStatus < Struct.new(
       :status,
       :configuration_sync_state_summary,
-      :sync_states)
+      :sync_states,
+      :capacity_usage_summary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2251,6 +2310,63 @@ module Aws::NetworkFirewall
     #
     class IPSet < Struct.new(
       :definition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # General information about the IP set.
+    #
+    # @!attribute [rw] resolved_cidr_count
+    #   Describes the total number of CIDR blocks currently in use by the IP
+    #   set references in a firewall. To determine how many CIDR blocks are
+    #   available for you to use in a firewall, you can call
+    #   `AvailableCIDRCount`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/IPSetMetadata AWS API Documentation
+    #
+    class IPSetMetadata < Struct.new(
+      :resolved_cidr_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configures one or more IP set references for a Suricata-compatible
+    # rule group. This is used in CreateRuleGroup or UpdateRuleGroup. An IP
+    # set reference is a rule variable that references a resource that you
+    # create and manage in another Amazon Web Services service, such as an
+    # Amazon VPC prefix list. Network Firewall IP set references enable you
+    # to dynamically update the contents of your rules. When you create,
+    # update, or delete the IP set you are referencing in your rule, Network
+    # Firewall automatically updates the rule's content with the changes.
+    # For more information about IP set references in Network Firewall, see
+    # [Using IP set references][1] in the *Network Firewall Developer
+    # Guide*.
+    #
+    # Network Firewall currently supports only [Amazon VPC prefix lists][2]
+    # as IP set references.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/rule-groups-ip-set-references
+    # [2]: https://docs.aws.amazon.com/vpc/latest/userguide/managed-prefix-lists.html
+    #
+    # @note When making an API call, you may pass IPSetReference
+    #   data as a hash:
+    #
+    #       {
+    #         reference_arn: "ResourceArn",
+    #       }
+    #
+    # @!attribute [rw] reference_arn
+    #   The Amazon Resource Name (ARN) of the resource that you are
+    #   referencing in your rule group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/IPSetReference AWS API Documentation
+    #
+    class IPSetReference < Struct.new(
+      :reference_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2983,6 +3099,31 @@ module Aws::NetworkFirewall
     #
     class PutResourcePolicyResponse < Aws::EmptyStructure; end
 
+    # Contains a set of IP set references.
+    #
+    # @note When making an API call, you may pass ReferenceSets
+    #   data as a hash:
+    #
+    #       {
+    #         ip_set_references: {
+    #           "IPSetReferenceName" => {
+    #             reference_arn: "ResourceArn",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] ip_set_references
+    #   The list of IP set references.
+    #   @return [Hash<String,Types::IPSetReference>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ReferenceSets AWS API Documentation
+    #
+    class ReferenceSets < Struct.new(
+      :ip_set_references)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Unable to locate a resource using the parameters that you provided.
     #
     # @!attribute [rw] message
@@ -3136,6 +3277,13 @@ module Aws::NetworkFirewall
     #             },
     #           },
     #         },
+    #         reference_sets: {
+    #           ip_set_references: {
+    #             "IPSetReferenceName" => {
+    #               reference_arn: "ResourceArn",
+    #             },
+    #           },
+    #         },
     #         rules_source: { # required
     #           rules_string: "RulesString",
     #           rules_source_list: {
@@ -3228,6 +3376,10 @@ module Aws::NetworkFirewall
     #   You can only use these for stateful rule groups.
     #   @return [Types::RuleVariables]
     #
+    # @!attribute [rw] reference_sets
+    #   The list of a rule group's reference sets.
+    #   @return [Types::ReferenceSets]
+    #
     # @!attribute [rw] rules_source
     #   The stateful rules or stateless rules for the rule group.
     #   @return [Types::RulesSource]
@@ -3243,6 +3395,7 @@ module Aws::NetworkFirewall
     #
     class RuleGroup < Struct.new(
       :rule_variables,
+      :reference_sets,
       :rules_source,
       :stateful_rule_options)
       SENSITIVE = []
@@ -4997,6 +5150,13 @@ module Aws::NetworkFirewall
     #             port_sets: {
     #               "RuleVariableName" => {
     #                 definition: ["VariableDefinition"],
+    #               },
+    #             },
+    #           },
+    #           reference_sets: {
+    #             ip_set_references: {
+    #               "IPSetReferenceName" => {
+    #                 reference_arn: "ResourceArn",
     #               },
     #             },
     #           },

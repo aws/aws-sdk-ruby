@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2022-07-21)
+------------------
+
+* Feature - Added asynchronous API to ingest bulk historical and current data into IoT SiteWise.
+
 1.42.0 (2022-05-31)
 ------------------
 

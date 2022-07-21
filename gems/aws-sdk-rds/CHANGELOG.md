@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.149.0 (2022-07-21)
+------------------
+
+* Feature - Adds support for creating an RDS Proxy for an RDS for MariaDB database.
+
 1.148.0 (2022-07-05)
 ------------------
 

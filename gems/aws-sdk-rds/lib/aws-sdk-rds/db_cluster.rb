@@ -579,8 +579,24 @@ module Aws::RDS
       data[:performance_insights_kms_key_id]
     end
 
-    # The amount of time, in days, to retain Performance Insights data.
-    # Valid values are 7 or 731 (2 years).
+    # The number of days to retain Performance Insights data. The default is
+    # 7 days. The following values are valid:
+    #
+    # * 7
+    #
+    # * *month* * 31, where *month* is a number of months from 1-23
+    #
+    # * 731
+    #
+    # For example, the following values are valid:
+    #
+    # * 93 (3 months * 31)
+    #
+    # * 341 (11 months * 31)
+    #
+    # * 589 (19 months * 31)
+    #
+    # * 731
     #
     # This setting is only for non-Aurora Multi-AZ DB clusters.
     # @return [Integer]
@@ -1075,25 +1091,25 @@ module Aws::RDS
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     # @option options [String] :pre_signed_url
-    #   A URL that contains a Signature Version 4 signed request for the
-    #   `CreateDBCluster` action to be called in the source Amazon Web
-    #   Services Region where the DB cluster is replicated from. Specify
-    #   `PreSignedUrl` only when you are performing cross-Region replication
-    #   from an encrypted DB cluster.
+    #   When you are replicating a DB cluster from one Amazon Web Services
+    #   GovCloud (US) Region to another, an URL that contains a Signature
+    #   Version 4 signed request for the `CreateDBCluster` operation to be
+    #   called in the source Amazon Web Services Region where the DB cluster
+    #   is replicated from. Specify `PreSignedUrl` only when you are
+    #   performing cross-Region replication from an encrypted DB cluster.
     #
-    #   The pre-signed URL must be a valid request for the `CreateDBCluster`
-    #   API action that can be executed in the source Amazon Web Services
-    #   Region that contains the encrypted DB cluster to be copied.
+    #   The presigned URL must be a valid request for the `CreateDBCluster`
+    #   API operation that can run in the source Amazon Web Services Region
+    #   that contains the encrypted DB cluster to copy.
     #
-    #   The pre-signed URL request must contain the following parameter
-    #   values:
+    #   The presigned URL request must contain the following parameter values:
     #
-    #   * `KmsKeyId` - The Amazon Web Services KMS key identifier for the KMS
-    #     key to use to encrypt the copy of the DB cluster in the destination
-    #     Amazon Web Services Region. This should refer to the same KMS key
-    #     for both the `CreateDBCluster` action that is called in the
-    #     destination Amazon Web Services Region, and the action contained in
-    #     the pre-signed URL.
+    #   * `KmsKeyId` - The KMS key identifier for the KMS key to use to
+    #     encrypt the copy of the DB cluster in the destination Amazon Web
+    #     Services Region. This should refer to the same KMS key for both the
+    #     `CreateDBCluster` operation that is called in the destination Amazon
+    #     Web Services Region, and the operation contained in the presigned
+    #     URL.
     #
     #   * `DestinationRegion` - The name of the Amazon Web Services Region
     #     that Aurora read replica will be created in.
@@ -1114,9 +1130,8 @@ module Aws::RDS
     #   <note markdown="1"> If you are using an Amazon Web Services SDK tool or the CLI, you can
     #   specify `SourceRegion` (or `--source-region` for the CLI) instead of
     #   specifying `PreSignedUrl` manually. Specifying `SourceRegion`
-    #   autogenerates a pre-signed URL that is a valid request for the
-    #   operation that can be executed in the source Amazon Web Services
-    #   Region.
+    #   autogenerates a presigned URL that is a valid request for the
+    #   operation that can run in the source Amazon Web Services Region.
     #
     #    </note>
     #
@@ -1132,7 +1147,7 @@ module Aws::RDS
     #   accounts. By default, mapping isn't enabled.
     #
     #   For more information, see [ IAM Database Authentication][1] in the
-    #   *Amazon Aurora User Guide.*.
+    #   *Amazon Aurora User Guide*.
     #
     #   Valid for: Aurora DB clusters only
     #
@@ -1203,6 +1218,9 @@ module Aws::RDS
     #   The `multimaster` engine mode only applies for DB clusters created
     #   with Aurora MySQL version 5.6.10a.
     #
+    #   The `serverless` engine mode only applies for Aurora Serverless v1 DB
+    #   clusters.
+    #
     #   For Aurora PostgreSQL, the `global` engine mode isn't required, and
     #   both the `parallelquery` and the `multimaster` engine modes currently
     #   aren't supported.
@@ -1211,22 +1229,25 @@ module Aws::RDS
     #   information, see the following sections in the *Amazon Aurora User
     #   Guide*\:
     #
-    #   * [ Limitations of Aurora Serverless v1][1]
+    #   * [Limitations of Aurora Serverless v1][1]
     #
-    #   * [ Limitations of Parallel Query][2]
+    #   * [Requirements for Aurora Serverless v2][2]
     #
-    #   * [ Limitations of Aurora Global Databases][3]
+    #   * [Limitations of Parallel Query][3]
     #
-    #   * [ Limitations of Multi-Master Clusters][4]
+    #   * [Limitations of Aurora Global Databases][4]
+    #
+    #   * [Limitations of Multi-Master Clusters][5]
     #
     #   Valid for: Aurora DB clusters only
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html#aurora-serverless.limitations
-    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-mysql-parallel-query.html#aurora-mysql-parallel-query-limitations
-    #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html#aurora-global-database.limitations
-    #   [4]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-multi-master.html#aurora-multi-master-limitations
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.requirements.html
+    #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-mysql-parallel-query.html#aurora-mysql-parallel-query-limitations
+    #   [4]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html#aurora-global-database.limitations
+    #   [5]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-multi-master.html#aurora-multi-master-limitations
     # @option options [Types::ScalingConfiguration] :scaling_configuration
     #   For DB clusters in `serverless` DB engine mode, the scaling properties
     #   of the DB cluster.
@@ -1449,8 +1470,27 @@ module Aws::RDS
     #
     #   Valid for: Multi-AZ DB clusters only
     # @option options [Integer] :performance_insights_retention_period
-    #   The amount of time, in days, to retain Performance Insights data.
-    #   Valid values are 7 or 731 (2 years).
+    #   The number of days to retain Performance Insights data. The default is
+    #   7 days. The following values are valid:
+    #
+    #   * 7
+    #
+    #   * *month* * 31, where *month* is a number of months from 1-23
+    #
+    #   * 731
+    #
+    #   For example, the following values are valid:
+    #
+    #   * 93 (3 months * 31)
+    #
+    #   * 341 (11 months * 31)
+    #
+    #   * 589 (19 months * 31)
+    #
+    #   * 731
+    #
+    #   If you specify a retention period such as 94, which isn't a valid
+    #   value, RDS issues an error.
     #
     #   Valid for: Multi-AZ DB clusters only
     # @option options [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
@@ -2066,8 +2106,27 @@ module Aws::RDS
     #
     #   Valid for: Multi-AZ DB clusters only
     # @option options [Integer] :performance_insights_retention_period
-    #   The amount of time, in days, to retain Performance Insights data.
-    #   Valid values are 7 or 731 (2 years).
+    #   The number of days to retain Performance Insights data. The default is
+    #   7 days. The following values are valid:
+    #
+    #   * 7
+    #
+    #   * *month* * 31, where *month* is a number of months from 1-23
+    #
+    #   * 731
+    #
+    #   For example, the following values are valid:
+    #
+    #   * 93 (3 months * 31)
+    #
+    #   * 341 (11 months * 31)
+    #
+    #   * 589 (19 months * 31)
+    #
+    #   * 731
+    #
+    #   If you specify a retention period such as 94, which isn't a valid
+    #   value, RDS issues an error.
     #
     #   Valid for: Multi-AZ DB clusters only
     # @option options [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
@@ -2307,7 +2366,7 @@ module Aws::RDS
     #
     #   For more information about exporting CloudWatch Logs for Amazon RDS,
     #   see [Publishing Database Logs to Amazon CloudWatch Logs][1] in the
-    #   *Amazon RDS User Guide.*.
+    #   *Amazon RDS User Guide*.
     #
     #   For more information about exporting CloudWatch Logs for Amazon
     #   Aurora, see [Publishing Database Logs to Amazon CloudWatch Logs][2] in

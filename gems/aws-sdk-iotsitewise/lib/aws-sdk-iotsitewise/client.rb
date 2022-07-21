@@ -1231,6 +1231,91 @@ module Aws::IoTSiteWise
       req.send_request(options)
     end
 
+    # <note markdown="1"> This API operation is in preview release for IoT SiteWise and is
+    # subject to change. We recommend that you use this operation only with
+    # test data, and not in production environments.
+    #
+    #  </note>
+    #
+    # Defines a job to ingest data to IoT SiteWise from Amazon S3. For more
+    # information, see [Create a bulk import job (CLI)][1] in the *Amazon
+    # Simple Storage Service User Guide*.
+    #
+    # You must enable IoT SiteWise to export data to Amazon S3 before you
+    # create a bulk import job. For more information about how to configure
+    # storage settings, see [PutStorageConfiguration][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/CreateBulkImportJob.html
+    # [2]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_PutStorageConfiguration.html
+    #
+    # @option params [required, String] :job_name
+    #   The unique name that helps identify the job request.
+    #
+    # @option params [required, String] :job_role_arn
+    #   The [ARN][1] of the IAM role that allows IoT SiteWise to read Amazon
+    #   S3 data.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #
+    # @option params [required, Array<Types::File>] :files
+    #   The files in the specified Amazon S3 bucket that contain your data.
+    #
+    # @option params [required, Types::ErrorReportLocation] :error_report_location
+    #   The Amazon S3 destination where errors associated with the job
+    #   creation request are saved.
+    #
+    # @option params [required, Types::JobConfiguration] :job_configuration
+    #   Contains the configuration information of a job, such as the file
+    #   format used to save data in Amazon S3.
+    #
+    # @return [Types::CreateBulkImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateBulkImportJobResponse#job_id #job_id} => String
+    #   * {Types::CreateBulkImportJobResponse#job_name #job_name} => String
+    #   * {Types::CreateBulkImportJobResponse#job_status #job_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_bulk_import_job({
+    #     job_name: "Name", # required
+    #     job_role_arn: "ARN", # required
+    #     files: [ # required
+    #       {
+    #         bucket: "Bucket", # required
+    #         key: "String", # required
+    #         version_id: "String",
+    #       },
+    #     ],
+    #     error_report_location: { # required
+    #       bucket: "Bucket", # required
+    #       prefix: "String", # required
+    #     },
+    #     job_configuration: { # required
+    #       file_format: { # required
+    #         csv: {
+    #           column_names: ["ALIAS"], # accepts ALIAS, ASSET_ID, PROPERTY_ID, DATA_TYPE, TIMESTAMP_SECONDS, TIMESTAMP_NANO_OFFSET, QUALITY, VALUE
+    #         },
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #   resp.job_name #=> String
+    #   resp.job_status #=> String, one of "PENDING", "CANCELLED", "RUNNING", "COMPLETED", "FAILED", "COMPLETED_WITH_FAILURES"
+    #
+    # @overload create_bulk_import_job(params = {})
+    # @param [Hash] params ({})
+    def create_bulk_import_job(params = {}, options = {})
+      req = build_request(:create_bulk_import_job, params)
+      req.send_request(options)
+    end
+
     # Creates a dashboard in an IoT SiteWise Monitor project.
     #
     # @option params [required, String] :project_id
@@ -2191,6 +2276,65 @@ module Aws::IoTSiteWise
     # @param [Hash] params ({})
     def describe_asset_property(params = {}, options = {})
       req = build_request(:describe_asset_property, params)
+      req.send_request(options)
+    end
+
+    # <note markdown="1"> This API operation is in preview release for IoT SiteWise and is
+    # subject to change. We recommend that you use this operation only with
+    # test data, and not in production environments.
+    #
+    #  </note>
+    #
+    # Retrieves information about a bulk import job request. For more
+    # information, see [Describe a bulk import job (CLI)][1] in the *Amazon
+    # Simple Storage Service User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/DescribeBulkImportJob.html
+    #
+    # @option params [required, String] :job_id
+    #   The ID of the job.
+    #
+    # @return [Types::DescribeBulkImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeBulkImportJobResponse#job_id #job_id} => String
+    #   * {Types::DescribeBulkImportJobResponse#job_name #job_name} => String
+    #   * {Types::DescribeBulkImportJobResponse#job_status #job_status} => String
+    #   * {Types::DescribeBulkImportJobResponse#job_role_arn #job_role_arn} => String
+    #   * {Types::DescribeBulkImportJobResponse#files #files} => Array&lt;Types::File&gt;
+    #   * {Types::DescribeBulkImportJobResponse#error_report_location #error_report_location} => Types::ErrorReportLocation
+    #   * {Types::DescribeBulkImportJobResponse#job_configuration #job_configuration} => Types::JobConfiguration
+    #   * {Types::DescribeBulkImportJobResponse#job_creation_date #job_creation_date} => Time
+    #   * {Types::DescribeBulkImportJobResponse#job_last_update_date #job_last_update_date} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_bulk_import_job({
+    #     job_id: "ID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #   resp.job_name #=> String
+    #   resp.job_status #=> String, one of "PENDING", "CANCELLED", "RUNNING", "COMPLETED", "FAILED", "COMPLETED_WITH_FAILURES"
+    #   resp.job_role_arn #=> String
+    #   resp.files #=> Array
+    #   resp.files[0].bucket #=> String
+    #   resp.files[0].key #=> String
+    #   resp.files[0].version_id #=> String
+    #   resp.error_report_location.bucket #=> String
+    #   resp.error_report_location.prefix #=> String
+    #   resp.job_configuration.file_format.csv.column_names #=> Array
+    #   resp.job_configuration.file_format.csv.column_names[0] #=> String, one of "ALIAS", "ASSET_ID", "PROPERTY_ID", "DATA_TYPE", "TIMESTAMP_SECONDS", "TIMESTAMP_NANO_OFFSET", "QUALITY", "VALUE"
+    #   resp.job_creation_date #=> Time
+    #   resp.job_last_update_date #=> Time
+    #
+    # @overload describe_bulk_import_job(params = {})
+    # @param [Hash] params ({})
+    def describe_bulk_import_job(params = {}, options = {})
+      req = build_request(:describe_bulk_import_job, params)
       req.send_request(options)
     end
 
@@ -3443,6 +3587,60 @@ module Aws::IoTSiteWise
       req.send_request(options)
     end
 
+    # <note markdown="1"> This API operation is in preview release for IoT SiteWise and is
+    # subject to change. We recommend that you use this operation only with
+    # test data, and not in production environments.
+    #
+    #  </note>
+    #
+    # Retrieves a paginated list of bulk import job requests. For more
+    # information, see [List bulk import jobs (CLI)][1] in the *Amazon
+    # Simple Storage Service User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/ListBulkImportJobs.html
+    #
+    # @option params [String] :next_token
+    #   The token to be used for the next set of paginated results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for each paginated request.
+    #
+    # @option params [String] :filter
+    #   You can use a filter to select the bulk import jobs that you want to
+    #   retrieve.
+    #
+    # @return [Types::ListBulkImportJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBulkImportJobsResponse#job_summaries #job_summaries} => Array&lt;Types::JobSummary&gt;
+    #   * {Types::ListBulkImportJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_bulk_import_jobs({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     filter: "ALL", # accepts ALL, PENDING, RUNNING, CANCELLED, FAILED, COMPLETED_WITH_FAILURES, COMPLETED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_summaries #=> Array
+    #   resp.job_summaries[0].id #=> String
+    #   resp.job_summaries[0].name #=> String
+    #   resp.job_summaries[0].status #=> String, one of "PENDING", "CANCELLED", "RUNNING", "COMPLETED", "FAILED", "COMPLETED_WITH_FAILURES"
+    #   resp.next_token #=> String
+    #
+    # @overload list_bulk_import_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_bulk_import_jobs(params = {}, options = {})
+      req = build_request(:list_bulk_import_jobs, params)
+      req.send_request(options)
+    end
+
     # Retrieves a paginated list of dashboards for an IoT SiteWise Monitor
     # project.
     #
@@ -4675,7 +4873,7 @@ module Aws::IoTSiteWise
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotsitewise'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2022-07-21)
+------------------
+
+* Feature - This feature allows customers to retrieve runtime statistics for completed queries
+
 1.55.0 (2022-07-14)
 ------------------
 

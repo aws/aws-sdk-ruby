@@ -552,9 +552,9 @@ module Aws::DatabaseMigrationService
     #   The type of engine for the endpoint. Valid values, depending on the
     #   `EndpointType` value, include `"mysql"`, `"oracle"`, `"postgres"`,
     #   `"mariadb"`, `"aurora"`, `"aurora-postgresql"`, `"opensearch"`,
-    #   `"redshift"`, `"s3"`, `"db2"`, `"azuredb"`, `"sybase"`, `"dynamodb"`,
-    #   `"mongodb"`, `"kinesis"`, `"kafka"`, `"elasticsearch"`, `"docdb"`,
-    #   `"sqlserver"`, and `"neptune"`.
+    #   `"redshift"`, `"s3"`, `"db2"`, `db2-zos`, `"azuredb"`, `"sybase"`,
+    #   `"dynamodb"`, `"mongodb"`, `"kinesis"`, `"kafka"`, `"elasticsearch"`,
+    #   `"docdb"`, `"sqlserver"`, `"neptune"`, and `babelfish`.
     #
     # @option params [String] :username
     #   The user name to be used to log in to the endpoint database.
@@ -7901,7 +7901,7 @@ module Aws::DatabaseMigrationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.71.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

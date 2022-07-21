@@ -441,6 +441,7 @@ module Aws::Kendra
     ServiceNowServiceCatalogConfiguration = Shapes::StructureShape.new(name: 'ServiceNowServiceCatalogConfiguration')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SharePointConfiguration = Shapes::StructureShape.new(name: 'SharePointConfiguration')
+    SharePointOnlineAuthenticationType = Shapes::StringShape.new(name: 'SharePointOnlineAuthenticationType')
     SharePointUrlList = Shapes::ListShape.new(name: 'SharePointUrlList')
     SharePointVersion = Shapes::StringShape.new(name: 'SharePointVersion')
     SharedDriveId = Shapes::StringShape.new(name: 'SharedDriveId')
@@ -1901,6 +1902,7 @@ module Aws::Kendra
     SharePointConfiguration.add_member(:document_title_field_name, Shapes::ShapeRef.new(shape: DataSourceFieldName, location_name: "DocumentTitleFieldName"))
     SharePointConfiguration.add_member(:disable_local_groups, Shapes::ShapeRef.new(shape: Boolean, location_name: "DisableLocalGroups"))
     SharePointConfiguration.add_member(:ssl_certificate_s3_path, Shapes::ShapeRef.new(shape: S3Path, location_name: "SslCertificateS3Path"))
+    SharePointConfiguration.add_member(:authentication_type, Shapes::ShapeRef.new(shape: SharePointOnlineAuthenticationType, location_name: "AuthenticationType"))
     SharePointConfiguration.struct_class = Types::SharePointConfiguration
 
     SharePointUrlList.member = Shapes::ShapeRef.new(shape: Url)

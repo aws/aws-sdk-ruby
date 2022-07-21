@@ -31,6 +31,7 @@ module Aws::EC2InstanceConnect
   # * {EC2InstanceNotFoundException}
   # * {EC2InstanceStateInvalidException}
   # * {EC2InstanceTypeInvalidException}
+  # * {EC2InstanceUnavailableException}
   # * {InvalidArgsException}
   # * {SerialConsoleAccessDisabledException}
   # * {SerialConsoleSessionLimitExceededException}
@@ -94,6 +95,21 @@ module Aws::EC2InstanceConnect
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::EC2InstanceConnect::Types::EC2InstanceTypeInvalidException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class EC2InstanceUnavailableException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::EC2InstanceConnect::Types::EC2InstanceUnavailableException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

@@ -205,12 +205,59 @@ module Aws::CloudWatch
     #   @return [String]
     #
     # @!attribute [rw] state_updated_timestamp
-    #   The time stamp of the last update to the alarm state.
+    #   Tracks the timestamp of any state update, even if `StateValue`
+    #   doesn't change.
     #   @return [Time]
     #
     # @!attribute [rw] state_value
     #   The state value for the alarm.
     #   @return [String]
+    #
+    # @!attribute [rw] state_transitioned_timestamp
+    #   The timestamp of the last change to the alarm's `StateValue`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] actions_suppressed_by
+    #   When the value is `ALARM`, it means that the actions are suppressed
+    #   because the suppressor alarm is in `ALARM` When the value is
+    #   `WaitPeriod`, it means that the actions are suppressed because the
+    #   composite alarm is waiting for the suppressor alarm to go into into
+    #   the `ALARM` state. The maximum waiting time is as specified in
+    #   `ActionsSuppressorWaitPeriod`. After this time, the composite alarm
+    #   performs its actions. When the value is `ExtensionPeriod`, it means
+    #   that the actions are suppressed because the composite alarm is
+    #   waiting after the suppressor alarm went out of the `ALARM` state.
+    #   The maximum waiting time is as specified in
+    #   `ActionsSuppressorExtensionPeriod`. After this time, the composite
+    #   alarm performs its actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] actions_suppressed_reason
+    #   Captures the reason for action suppression.
+    #   @return [String]
+    #
+    # @!attribute [rw] actions_suppressor
+    #   Actions will be suppressed if the suppressor alarm is in the `ALARM`
+    #   state. `ActionsSuppressor` can be an AlarmName or an Amazon Resource
+    #   Name (ARN) from an existing alarm.
+    #   @return [String]
+    #
+    # @!attribute [rw] actions_suppressor_wait_period
+    #   The maximum time in seconds that the composite alarm waits for the
+    #   suppressor alarm to go into the `ALARM` state. After this time, the
+    #   composite alarm performs its actions.
+    #
+    #   `WaitPeriod` is required only when `ActionsSuppressor` is specified.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] actions_suppressor_extension_period
+    #   The maximum time in seconds that the composite alarm waits after
+    #   suppressor alarm goes out of the `ALARM` state. After this time, the
+    #   composite alarm performs its actions.
+    #
+    #   `ExtensionPeriod` is required only when `ActionsSuppressor` is
+    #   specified.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/CompositeAlarm AWS API Documentation
     #
@@ -227,7 +274,13 @@ module Aws::CloudWatch
       :state_reason,
       :state_reason_data,
       :state_updated_timestamp,
-      :state_value)
+      :state_value,
+      :state_transitioned_timestamp,
+      :actions_suppressed_by,
+      :actions_suppressed_reason,
+      :actions_suppressor,
+      :actions_suppressor_wait_period,
+      :actions_suppressor_extension_period)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3525,6 +3578,9 @@ module Aws::CloudWatch
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         actions_suppressor: "AlarmArn",
+    #         actions_suppressor_wait_period: 1,
+    #         actions_suppressor_extension_period: 1,
     #       }
     #
     # @!attribute [rw] actions_enabled
@@ -3635,6 +3691,29 @@ module Aws::CloudWatch
     #   values.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] actions_suppressor
+    #   Actions will be suppressed if the suppressor alarm is in the `ALARM`
+    #   state. `ActionsSuppressor` can be an AlarmName or an Amazon Resource
+    #   Name (ARN) from an existing alarm.
+    #   @return [String]
+    #
+    # @!attribute [rw] actions_suppressor_wait_period
+    #   The maximum time in seconds that the composite alarm waits for the
+    #   suppressor alarm to go into the `ALARM` state. After this time, the
+    #   composite alarm performs its actions.
+    #
+    #   `WaitPeriod` is required only when `ActionsSuppressor` is specified.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] actions_suppressor_extension_period
+    #   The maximum time in seconds that the composite alarm waits after
+    #   suppressor alarm goes out of the `ALARM` state. After this time, the
+    #   composite alarm performs its actions.
+    #
+    #   `ExtensionPeriod` is required only when `ActionsSuppressor` is
+    #   specified.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutCompositeAlarmInput AWS API Documentation
     #
     class PutCompositeAlarmInput < Struct.new(
@@ -3645,7 +3724,10 @@ module Aws::CloudWatch
       :alarm_rule,
       :insufficient_data_actions,
       :ok_actions,
-      :tags)
+      :tags,
+      :actions_suppressor,
+      :actions_suppressor_wait_period,
+      :actions_suppressor_extension_period)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -10,6 +10,89 @@
 module Aws::FraudDetector
   module Types
 
+    # The Account Takeover Insights (ATI) model performance metrics data
+    # points.
+    #
+    # @!attribute [rw] cr
+    #   The challenge rate. This indicates the percentage of login events
+    #   that the model recommends to challenge such as one-time password,
+    #   multi-factor authentication, and investigations.
+    #   @return [Float]
+    #
+    # @!attribute [rw] adr
+    #   The anomaly discovery rate. This metric quantifies the percentage of
+    #   anomalies that can be detected by the model at the selected score
+    #   threshold. A lower score threshold increases the percentage of
+    #   anomalies captured by the model, but would also require challenging
+    #   a larger percentage of login events, leading to a higher customer
+    #   friction.
+    #   @return [Float]
+    #
+    # @!attribute [rw] threshold
+    #   The model's threshold that specifies an acceptable fraud capture
+    #   rate. For example, a threshold of 500 means any model score 500 or
+    #   above is labeled as fraud.
+    #   @return [Float]
+    #
+    # @!attribute [rw] atodr
+    #   The account takeover discovery rate. This metric quantifies the
+    #   percentage of account compromise events that can be detected by the
+    #   model at the selected score threshold. This metric is only available
+    #   if 50 or more entities with at-least one labeled account takeover
+    #   event is present in the ingested dataset.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/ATIMetricDataPoint AWS API Documentation
+    #
+    class ATIMetricDataPoint < Struct.new(
+      :cr,
+      :adr,
+      :threshold,
+      :atodr)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Account Takeover Insights (ATI) model performance score.
+    #
+    # @!attribute [rw] asi
+    #   The anomaly separation index (ASI) score. This metric summarizes the
+    #   overall ability of the model to separate anomalous activities from
+    #   the normal behavior. Depending on the business, a large fraction of
+    #   these anomalous activities can be malicious and correspond to the
+    #   account takeover attacks. A model with no separability power will
+    #   have the lowest possible ASI score of 0.5, whereas the a model with
+    #   a high separability power will have the highest possible ASI score
+    #   of 1.0
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/ATIModelPerformance AWS API Documentation
+    #
+    class ATIModelPerformance < Struct.new(
+      :asi)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Account Takeover Insights (ATI) model training metric details.
+    #
+    # @!attribute [rw] metric_data_points
+    #   The model's performance metrics data points.
+    #   @return [Array<Types::ATIMetricDataPoint>]
+    #
+    # @!attribute [rw] model_performance
+    #   The model's overall performance scores.
+    #   @return [Types::ATIModelPerformance]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/ATITrainingMetricsValue AWS API Documentation
+    #
+    class ATITrainingMetricsValue < Struct.new(
+      :metric_data_points,
+      :model_performance)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An exception indicating Amazon Fraud Detector does not have the needed
     # permissions. This can occur if you submit a request, such as
     # `PutExternalModel`, that specifies a role that is not in your account.
@@ -21,6 +104,96 @@ module Aws::FraudDetector
     #
     class AccessDeniedException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The log odds metric details.
+    #
+    # Account Takeover Insights (ATI) model uses event variables from the
+    # login data you provide to continuously calculate a set of variables
+    # (aggregated variables) based on historical events. For example, your
+    # ATI model might calculate the number of times an user has logged in
+    # using the same IP address. In this case, event variables used to
+    # derive the aggregated variables are `IP address` and `user`.
+    #
+    # @!attribute [rw] variable_names
+    #   The names of all the variables.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] aggregated_variables_importance
+    #   The relative importance of the variables in the list to the other
+    #   event variable.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/AggregatedLogOddsMetric AWS API Documentation
+    #
+    class AggregatedLogOddsMetric < Struct.new(
+      :variable_names,
+      :aggregated_variables_importance)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of the impact of aggregated variables on the prediction
+    # score.
+    #
+    # Account Takeover Insights (ATI) model uses the login data you provide
+    # to continuously calculate a set of variables (aggregated variables)
+    # based on historical events. For example, the model might calculate the
+    # number of times an user has logged in using the same IP address. In
+    # this case, event variables used to derive the aggregated variables are
+    # `IP address` and `user`.
+    #
+    # @!attribute [rw] event_variable_names
+    #   The names of all the event variables that were used to derive the
+    #   aggregated variables.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] relative_impact
+    #   The relative impact of the aggregated variables in terms of
+    #   magnitude on the prediction scores.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_odds_impact
+    #   The raw, uninterpreted value represented as log-odds of the fraud.
+    #   These values are usually between -10 to +10, but range from
+    #   -infinity to +infinity.
+    #
+    #   * A positive value indicates that the variables drove the risk score
+    #     up.
+    #
+    #   * A negative value indicates that the variables drove the risk score
+    #     down.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/AggregatedVariablesImpactExplanation AWS API Documentation
+    #
+    class AggregatedVariablesImpactExplanation < Struct.new(
+      :event_variable_names,
+      :relative_impact,
+      :log_odds_impact)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of the relative importance of the aggregated variables.
+    #
+    # Account Takeover Insights (ATI) model uses event variables from the
+    # login data you provide to continuously calculate a set of variables
+    # (aggregated variables) based on historical events. For example, your
+    # ATI model might calculate the number of times an user has logged in
+    # using the same IP address. In this case, event variables used to
+    # derive the aggregated variables are `IP address` and `user`.
+    #
+    # @!attribute [rw] log_odds_metrics
+    #   List of variables' metrics.
+    #   @return [Array<Types::AggregatedLogOddsMetric>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/AggregatedVariablesImportanceMetrics AWS API Documentation
+    #
+    class AggregatedVariablesImportanceMetrics < Struct.new(
+      :log_odds_metrics)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -531,7 +704,7 @@ module Aws::FraudDetector
     #         model_versions: [
     #           {
     #             model_id: "modelIdentifier", # required
-    #             model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
+    #             model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS, ACCOUNT_TAKEOVER_INSIGHTS
     #             model_version_number: "floatVersionString", # required
     #             arn: "fraudDetectorArn",
     #           },
@@ -629,7 +802,7 @@ module Aws::FraudDetector
     #
     #       {
     #         model_id: "modelIdentifier", # required
-    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
+    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS, ACCOUNT_TAKEOVER_INSIGHTS
     #         description: "description",
     #         event_type_name: "string", # required
     #         tags: [
@@ -681,12 +854,12 @@ module Aws::FraudDetector
     #
     #       {
     #         model_id: "modelIdentifier", # required
-    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
+    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS, ACCOUNT_TAKEOVER_INSIGHTS
     #         training_data_source: "EXTERNAL_EVENTS", # required, accepts EXTERNAL_EVENTS, INGESTED_EVENTS
     #         training_data_schema: { # required
     #           model_variables: ["string"], # required
-    #           label_schema: { # required
-    #             label_mapper: { # required
+    #           label_schema: {
+    #             label_mapper: {
     #               "string" => ["string"],
     #             },
     #             unlabeled_events_treatment: "IGNORE", # accepts IGNORE, FRAUD, LEGIT
@@ -931,10 +1104,10 @@ module Aws::FraudDetector
     #
     class CreateVariableResult < Aws::EmptyStructure; end
 
-    # The model training validation messages.
+    # The model training data validation metrics.
     #
     # @!attribute [rw] file_level_messages
-    #   The file-specific model training validation messages.
+    #   The file-specific model training data validation messages.
     #   @return [Array<Types::FileValidationMessage>]
     #
     # @!attribute [rw] field_level_messages
@@ -1217,7 +1390,7 @@ module Aws::FraudDetector
     #
     #       {
     #         model_id: "modelIdentifier", # required
-    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
+    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS, ACCOUNT_TAKEOVER_INSIGHTS
     #       }
     #
     # @!attribute [rw] model_id
@@ -1246,7 +1419,7 @@ module Aws::FraudDetector
     #
     #       {
     #         model_id: "modelIdentifier", # required
-    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
+    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS, ACCOUNT_TAKEOVER_INSIGHTS
     #         model_version_number: "floatVersionString", # required
     #       }
     #
@@ -1413,7 +1586,7 @@ module Aws::FraudDetector
     #       {
     #         model_id: "modelIdentifier",
     #         model_version_number: "floatVersionString",
-    #         model_type: "ONLINE_FRAUD_INSIGHTS", # accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
+    #         model_type: "ONLINE_FRAUD_INSIGHTS", # accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS, ACCOUNT_TAKEOVER_INSIGHTS
     #         next_token: "string",
     #         max_results: 1,
     #       }
@@ -2868,7 +3041,7 @@ module Aws::FraudDetector
     #
     #       {
     #         model_id: "modelIdentifier", # required
-    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
+    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS, ACCOUNT_TAKEOVER_INSIGHTS
     #         model_version_number: "floatVersionString", # required
     #       }
     #
@@ -2975,7 +3148,7 @@ module Aws::FraudDetector
     #
     #       {
     #         model_id: "modelIdentifier",
-    #         model_type: "ONLINE_FRAUD_INSIGHTS", # accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
+    #         model_type: "ONLINE_FRAUD_INSIGHTS", # accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS, ACCOUNT_TAKEOVER_INSIGHTS
     #         next_token: "string",
     #         max_results: 1,
     #       }
@@ -3332,7 +3505,7 @@ module Aws::FraudDetector
     #   data as a hash:
     #
     #       {
-    #         label_mapper: { # required
+    #         label_mapper: {
     #           "string" => ["string"],
     #         },
     #         unlabeled_events_treatment: "IGNORE", # accepts IGNORE, FRAUD, LEGIT
@@ -3754,7 +3927,7 @@ module Aws::FraudDetector
     #
     #       {
     #         model_id: "modelIdentifier", # required
-    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
+    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS, ACCOUNT_TAKEOVER_INSIGHTS
     #         model_version_number: "floatVersionString", # required
     #         arn: "fraudDetectorArn",
     #       }
@@ -3840,6 +4013,11 @@ module Aws::FraudDetector
     #   The model version ARN.
     #   @return [String]
     #
+    # @!attribute [rw] training_result_v2
+    #   The training result details. The details include the relative
+    #   importance of the variables.
+    #   @return [Types::TrainingResultV2]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/ModelVersionDetail AWS API Documentation
     #
     class ModelVersionDetail < Struct.new(
@@ -3854,7 +4032,8 @@ module Aws::FraudDetector
       :training_result,
       :last_updated_time,
       :created_time,
-      :arn)
+      :arn,
+      :training_result_v2)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3879,6 +4058,75 @@ module Aws::FraudDetector
       :output_variable_name,
       :evaluation_score,
       :prediction_explanations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Online Fraud Insights (OFI) model performance metrics data points.
+    #
+    # @!attribute [rw] fpr
+    #   The false positive rate. This is the percentage of total legitimate
+    #   events that are incorrectly predicted as fraud.
+    #   @return [Float]
+    #
+    # @!attribute [rw] precision
+    #   The percentage of fraud events correctly predicted as fraudulent as
+    #   compared to all events predicted as fraudulent.
+    #   @return [Float]
+    #
+    # @!attribute [rw] tpr
+    #   The true positive rate. This is the percentage of total fraud the
+    #   model detects. Also known as capture rate.
+    #   @return [Float]
+    #
+    # @!attribute [rw] threshold
+    #   The model threshold that specifies an acceptable fraud capture rate.
+    #   For example, a threshold of 500 means any model score 500 or above
+    #   is labeled as fraud.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/OFIMetricDataPoint AWS API Documentation
+    #
+    class OFIMetricDataPoint < Struct.new(
+      :fpr,
+      :precision,
+      :tpr,
+      :threshold)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Online Fraud Insights (OFI) model performance score.
+    #
+    # @!attribute [rw] auc
+    #   The area under the curve (auc). This summarizes the total positive
+    #   rate (tpr) and false positive rate (FPR) across all possible model
+    #   score thresholds.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/OFIModelPerformance AWS API Documentation
+    #
+    class OFIModelPerformance < Struct.new(
+      :auc)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Online Fraud Insights (OFI) model training metric details.
+    #
+    # @!attribute [rw] metric_data_points
+    #   The model's performance metrics data points.
+    #   @return [Array<Types::OFIMetricDataPoint>]
+    #
+    # @!attribute [rw] model_performance
+    #   The model's overall performance score.
+    #   @return [Types::OFIModelPerformance]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/OFITrainingMetricsValue AWS API Documentation
+    #
+    class OFITrainingMetricsValue < Struct.new(
+      :metric_data_points,
+      :model_performance)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3924,10 +4172,23 @@ module Aws::FraudDetector
     #   The details of the event variable's impact on the prediction score.
     #   @return [Array<Types::VariableImpactExplanation>]
     #
+    # @!attribute [rw] aggregated_variables_impact_explanations
+    #   The details of the aggregated variables impact on the prediction
+    #   score.
+    #
+    #   Account Takeover Insights (ATI) model uses event variables from the
+    #   login data you provide to continuously calculate a set of variables
+    #   (aggregated variables) based on historical events. For example, your
+    #   ATI model might calculate the number of times an user has logged in
+    #   using the same IP address. In this case, event variables used to
+    #   derive the aggregated variables are `IP address` and `user`.
+    #   @return [Array<Types::AggregatedVariablesImpactExplanation>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/PredictionExplanations AWS API Documentation
     #
     class PredictionExplanations < Struct.new(
-      :variable_impact_explanations)
+      :variable_impact_explanations,
+      :aggregated_variables_impact_explanations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4501,6 +4762,76 @@ module Aws::FraudDetector
     #
     class SendEventResult < Aws::EmptyStructure; end
 
+    # The performance metrics data points for Transaction Fraud Insights
+    # (TFI) model.
+    #
+    # @!attribute [rw] fpr
+    #   The false positive rate. This is the percentage of total legitimate
+    #   events that are incorrectly predicted as fraud.
+    #   @return [Float]
+    #
+    # @!attribute [rw] precision
+    #   The percentage of fraud events correctly predicted as fraudulent as
+    #   compared to all events predicted as fraudulent.
+    #   @return [Float]
+    #
+    # @!attribute [rw] tpr
+    #   The true positive rate. This is the percentage of total fraud the
+    #   model detects. Also known as capture rate.
+    #   @return [Float]
+    #
+    # @!attribute [rw] threshold
+    #   The model threshold that specifies an acceptable fraud capture rate.
+    #   For example, a threshold of 500 means any model score 500 or above
+    #   is labeled as fraud.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/TFIMetricDataPoint AWS API Documentation
+    #
+    class TFIMetricDataPoint < Struct.new(
+      :fpr,
+      :precision,
+      :tpr,
+      :threshold)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Transaction Fraud Insights (TFI) model performance score.
+    #
+    # @!attribute [rw] auc
+    #   The area under the curve (auc). This summarizes the total positive
+    #   rate (tpr) and false positive rate (FPR) across all possible model
+    #   score thresholds.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/TFIModelPerformance AWS API Documentation
+    #
+    class TFIModelPerformance < Struct.new(
+      :auc)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Transaction Fraud Insights (TFI) model training metric details.
+    #
+    # @!attribute [rw] metric_data_points
+    #   The model's performance metrics data points.
+    #   @return [Array<Types::TFIMetricDataPoint>]
+    #
+    # @!attribute [rw] model_performance
+    #   The model performance score.
+    #   @return [Types::TFIModelPerformance]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/TFITrainingMetricsValue AWS API Documentation
+    #
+    class TFITrainingMetricsValue < Struct.new(
+      :metric_data_points,
+      :model_performance)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A key and value pair.
     #
     # @note When making an API call, you may pass Tag
@@ -4582,8 +4913,8 @@ module Aws::FraudDetector
     #
     #       {
     #         model_variables: ["string"], # required
-    #         label_schema: { # required
-    #           label_mapper: { # required
+    #         label_schema: {
+    #           label_mapper: {
     #             "string" => ["string"],
     #           },
     #           unlabeled_events_treatment: "IGNORE", # accepts IGNORE, FRAUD, LEGIT
@@ -4629,6 +4960,30 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
+    # The training metrics details.
+    #
+    # @!attribute [rw] ofi
+    #   The Online Fraud Insights (OFI) model training metric details.
+    #   @return [Types::OFITrainingMetricsValue]
+    #
+    # @!attribute [rw] tfi
+    #   The Transaction Fraud Insights (TFI) model training metric details.
+    #   @return [Types::TFITrainingMetricsValue]
+    #
+    # @!attribute [rw] ati
+    #   The Account Takeover Insights (ATI) model training metric details.
+    #   @return [Types::ATITrainingMetricsValue]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/TrainingMetricsV2 AWS API Documentation
+    #
+    class TrainingMetricsV2 < Struct.new(
+      :ofi,
+      :tfi,
+      :ati)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The training result details.
     #
     # @!attribute [rw] data_validation_metrics
@@ -4649,6 +5004,42 @@ module Aws::FraudDetector
       :data_validation_metrics,
       :training_metrics,
       :variable_importance_metrics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The training result details.
+    #
+    # @!attribute [rw] data_validation_metrics
+    #   The model training data validation metrics.
+    #   @return [Types::DataValidationMetrics]
+    #
+    # @!attribute [rw] training_metrics_v2
+    #   The training metric details.
+    #   @return [Types::TrainingMetricsV2]
+    #
+    # @!attribute [rw] variable_importance_metrics
+    #   The variable importance metrics details.
+    #   @return [Types::VariableImportanceMetrics]
+    #
+    # @!attribute [rw] aggregated_variables_importance_metrics
+    #   The variable importance metrics of the aggregated variables.
+    #
+    #   Account Takeover Insights (ATI) model uses event variables from the
+    #   login data you provide to continuously calculate a set of variables
+    #   (aggregated variables) based on historical events. For example, your
+    #   ATI model might calculate the number of times an user has logged in
+    #   using the same IP address. In this case, event variables used to
+    #   derive the aggregated variables are `IP address` and `user`.
+    #   @return [Types::AggregatedVariablesImportanceMetrics]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/TrainingResultV2 AWS API Documentation
+    #
+    class TrainingResultV2 < Struct.new(
+      :data_validation_metrics,
+      :training_metrics_v2,
+      :variable_importance_metrics,
+      :aggregated_variables_importance_metrics)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4735,7 +5126,7 @@ module Aws::FraudDetector
     #         model_versions: [
     #           {
     #             model_id: "modelIdentifier", # required
-    #             model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
+    #             model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS, ACCOUNT_TAKEOVER_INSIGHTS
     #             model_version_number: "floatVersionString", # required
     #             arn: "fraudDetectorArn",
     #           },
@@ -4884,7 +5275,7 @@ module Aws::FraudDetector
     #
     #       {
     #         model_id: "modelIdentifier", # required
-    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
+    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS, ACCOUNT_TAKEOVER_INSIGHTS
     #         description: "description",
     #       }
     #
@@ -4919,7 +5310,7 @@ module Aws::FraudDetector
     #
     #       {
     #         model_id: "modelIdentifier", # required
-    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
+    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS, ACCOUNT_TAKEOVER_INSIGHTS
     #         major_version_number: "wholeNumberVersionString", # required
     #         external_events_detail: {
     #           data_location: "s3BucketLocation", # required
@@ -5010,7 +5401,7 @@ module Aws::FraudDetector
     #
     #       {
     #         model_id: "modelIdentifier", # required
-    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
+    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS, ACCOUNT_TAKEOVER_INSIGHTS
     #         model_version_number: "floatVersionString", # required
     #         status: "ACTIVE", # required, accepts ACTIVE, INACTIVE, TRAINING_CANCELLED
     #       }

@@ -1132,6 +1132,37 @@ module Aws::Athena
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetQueryRuntimeStatisticsInput
+    #   data as a hash:
+    #
+    #       {
+    #         query_execution_id: "QueryExecutionId", # required
+    #       }
+    #
+    # @!attribute [rw] query_execution_id
+    #   The unique ID of the query execution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetQueryRuntimeStatisticsInput AWS API Documentation
+    #
+    class GetQueryRuntimeStatisticsInput < Struct.new(
+      :query_execution_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] query_runtime_statistics
+    #   Runtime statistics about the query execution.
+    #   @return [Types::QueryRuntimeStatistics]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetQueryRuntimeStatisticsOutput AWS API Documentation
+    #
+    class GetQueryRuntimeStatisticsOutput < Struct.new(
+      :query_runtime_statistics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetTableMetadataInput
     #   data as a hash:
     #
@@ -2043,6 +2074,200 @@ module Aws::Athena
       :submission_date_time,
       :completion_date_time,
       :athena_error)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The query execution timeline, statistics on input and output rows and
+    # bytes, and the different query stages that form the query execution
+    # plan.
+    #
+    # @!attribute [rw] timeline
+    #   Timeline statistics such as query queue time, planning time,
+    #   execution time, service processing time, and total execution time.
+    #   @return [Types::QueryRuntimeStatisticsTimeline]
+    #
+    # @!attribute [rw] rows
+    #   Statistics such as input rows and bytes read by the query, rows and
+    #   bytes output by the query, and the number of rows written by the
+    #   query.
+    #   @return [Types::QueryRuntimeStatisticsRows]
+    #
+    # @!attribute [rw] output_stage
+    #   Stage statistics such as input and output rows and bytes, execution
+    #   time, and stage state. This information also includes substages and
+    #   the query stage plan.
+    #   @return [Types::QueryStage]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/QueryRuntimeStatistics AWS API Documentation
+    #
+    class QueryRuntimeStatistics < Struct.new(
+      :timeline,
+      :rows,
+      :output_stage)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Statistics such as input rows and bytes read by the query, rows and
+    # bytes output by the query, and the number of rows written by the
+    # query.
+    #
+    # @!attribute [rw] input_rows
+    #   The number of rows read to execute the query.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] input_bytes
+    #   The number of bytes read to execute the query.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] output_bytes
+    #   The number of bytes returned by the query.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] output_rows
+    #   The number of rows returned by the query.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/QueryRuntimeStatisticsRows AWS API Documentation
+    #
+    class QueryRuntimeStatisticsRows < Struct.new(
+      :input_rows,
+      :input_bytes,
+      :output_bytes,
+      :output_rows)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Timeline statistics such as query queue time, planning time, execution
+    # time, service processing time, and total execution time.
+    #
+    # @!attribute [rw] query_queue_time_in_millis
+    #   The number of milliseconds that the query was in your query queue
+    #   waiting for resources. Note that if transient errors occur, Athena
+    #   might automatically add the query back to the queue.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] query_planning_time_in_millis
+    #   The number of milliseconds that Athena took to plan the query
+    #   processing flow. This includes the time spent retrieving table
+    #   partitions from the data source. Note that because the query engine
+    #   performs the query planning, query planning time is a subset of
+    #   engine processing time.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] engine_execution_time_in_millis
+    #   The number of milliseconds that the query took to execute.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] service_processing_time_in_millis
+    #   The number of milliseconds that Athena took to finalize and publish
+    #   the query results after the query engine finished running the query.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_execution_time_in_millis
+    #   The number of milliseconds that Athena took to run the query.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/QueryRuntimeStatisticsTimeline AWS API Documentation
+    #
+    class QueryRuntimeStatisticsTimeline < Struct.new(
+      :query_queue_time_in_millis,
+      :query_planning_time_in_millis,
+      :engine_execution_time_in_millis,
+      :service_processing_time_in_millis,
+      :total_execution_time_in_millis)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Stage statistics such as input and output rows and bytes, execution
+    # time and stage state. This information also includes substages and the
+    # query stage plan.
+    #
+    # @!attribute [rw] stage_id
+    #   The identifier for a stage.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] state
+    #   State of the stage after query execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_bytes
+    #   The number of bytes output from the stage after execution.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] output_rows
+    #   The number of rows output from the stage after execution.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] input_bytes
+    #   The number of bytes input into the stage for execution.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] input_rows
+    #   The number of rows input into the stage for execution.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] execution_time
+    #   Time taken to execute this stage.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] query_stage_plan
+    #   Stage plan information such as name, identifier, sub plans, and
+    #   source stages.
+    #   @return [Types::QueryStagePlanNode]
+    #
+    # @!attribute [rw] sub_stages
+    #   List of sub query stages that form this stage execution plan.
+    #   @return [Array<Types::QueryStage>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/QueryStage AWS API Documentation
+    #
+    class QueryStage < Struct.new(
+      :stage_id,
+      :state,
+      :output_bytes,
+      :output_rows,
+      :input_bytes,
+      :input_rows,
+      :execution_time,
+      :query_stage_plan,
+      :sub_stages)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Stage plan information such as name, identifier, sub plans, and remote
+    # sources.
+    #
+    # @!attribute [rw] name
+    #   Name of the query stage plan that describes the operation this stage
+    #   is performing as part of query execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   Information about the operation this query stage plan node is
+    #   performing.
+    #   @return [String]
+    #
+    # @!attribute [rw] children
+    #   Stage plan information such as name, identifier, sub plans, and
+    #   remote sources of child plan nodes/
+    #   @return [Array<Types::QueryStagePlanNode>]
+    #
+    # @!attribute [rw] remote_sources
+    #   Source plan node IDs.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/QueryStagePlanNode AWS API Documentation
+    #
+    class QueryStagePlanNode < Struct.new(
+      :name,
+      :identifier,
+      :children,
+      :remote_sources)
       SENSITIVE = []
       include Aws::Structure
     end

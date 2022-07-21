@@ -809,9 +809,10 @@ module Aws::DatabaseMigrationService
     #   The type of engine for the endpoint. Valid values, depending on the
     #   `EndpointType` value, include `"mysql"`, `"oracle"`, `"postgres"`,
     #   `"mariadb"`, `"aurora"`, `"aurora-postgresql"`, `"opensearch"`,
-    #   `"redshift"`, `"s3"`, `"db2"`, `"azuredb"`, `"sybase"`,
+    #   `"redshift"`, `"s3"`, `"db2"`, `db2-zos`, `"azuredb"`, `"sybase"`,
     #   `"dynamodb"`, `"mongodb"`, `"kinesis"`, `"kafka"`,
-    #   `"elasticsearch"`, `"docdb"`, `"sqlserver"`, and `"neptune"`.
+    #   `"elasticsearch"`, `"docdb"`, `"sqlserver"`, `"neptune"`, and
+    #   `babelfish`.
     #   @return [String]
     #
     # @!attribute [rw] username
@@ -10942,8 +10943,8 @@ module Aws::DatabaseMigrationService
     #   The state of the tables described.
     #
     #   Valid states: Table does not exist \| Before load \| Full load \|
-    #   Table completed \| Table cancelled \| Table error \| Table all \|
-    #   Table updates \| Table is being reloaded
+    #   Table completed \| Table cancelled \| Table error \| Table is being
+    #   reloaded
     #   @return [String]
     #
     # @!attribute [rw] validation_pending_records

@@ -638,14 +638,18 @@ module Aws::NetworkFirewall
     #   resp.firewall.encryption_configuration.key_id #=> String
     #   resp.firewall.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
     #   resp.firewall_status.status #=> String, one of "PROVISIONING", "DELETING", "READY"
-    #   resp.firewall_status.configuration_sync_state_summary #=> String, one of "PENDING", "IN_SYNC"
+    #   resp.firewall_status.configuration_sync_state_summary #=> String, one of "PENDING", "IN_SYNC", "CAPACITY_CONSTRAINED"
     #   resp.firewall_status.sync_states #=> Hash
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.subnet_id #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.endpoint_id #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.status #=> String, one of "CREATING", "DELETING", "SCALING", "READY"
     #   resp.firewall_status.sync_states["AvailabilityZone"].config #=> Hash
-    #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].sync_status #=> String, one of "PENDING", "IN_SYNC"
+    #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].sync_status #=> String, one of "PENDING", "IN_SYNC", "CAPACITY_CONSTRAINED"
     #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].update_token #=> String
+    #   resp.firewall_status.capacity_usage_summary.cid_rs.available_cidr_count #=> Integer
+    #   resp.firewall_status.capacity_usage_summary.cid_rs.utilized_cidr_count #=> Integer
+    #   resp.firewall_status.capacity_usage_summary.cid_rs.ip_set_references #=> Hash
+    #   resp.firewall_status.capacity_usage_summary.cid_rs.ip_set_references["IPSetArn"].resolved_cidr_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CreateFirewall AWS API Documentation
     #
@@ -922,6 +926,13 @@ module Aws::NetworkFirewall
     #           },
     #         },
     #       },
+    #       reference_sets: {
+    #         ip_set_references: {
+    #           "IPSetReferenceName" => {
+    #             reference_arn: "ResourceArn",
+    #           },
+    #         },
+    #       },
     #       rules_source: { # required
     #         rules_string: "RulesString",
     #         rules_source_list: {
@@ -1118,14 +1129,18 @@ module Aws::NetworkFirewall
     #   resp.firewall.encryption_configuration.key_id #=> String
     #   resp.firewall.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
     #   resp.firewall_status.status #=> String, one of "PROVISIONING", "DELETING", "READY"
-    #   resp.firewall_status.configuration_sync_state_summary #=> String, one of "PENDING", "IN_SYNC"
+    #   resp.firewall_status.configuration_sync_state_summary #=> String, one of "PENDING", "IN_SYNC", "CAPACITY_CONSTRAINED"
     #   resp.firewall_status.sync_states #=> Hash
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.subnet_id #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.endpoint_id #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.status #=> String, one of "CREATING", "DELETING", "SCALING", "READY"
     #   resp.firewall_status.sync_states["AvailabilityZone"].config #=> Hash
-    #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].sync_status #=> String, one of "PENDING", "IN_SYNC"
+    #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].sync_status #=> String, one of "PENDING", "IN_SYNC", "CAPACITY_CONSTRAINED"
     #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].update_token #=> String
+    #   resp.firewall_status.capacity_usage_summary.cid_rs.available_cidr_count #=> Integer
+    #   resp.firewall_status.capacity_usage_summary.cid_rs.utilized_cidr_count #=> Integer
+    #   resp.firewall_status.capacity_usage_summary.cid_rs.ip_set_references #=> Hash
+    #   resp.firewall_status.capacity_usage_summary.cid_rs.ip_set_references["IPSetArn"].resolved_cidr_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DeleteFirewall AWS API Documentation
     #
@@ -1321,14 +1336,18 @@ module Aws::NetworkFirewall
     #   resp.firewall.encryption_configuration.key_id #=> String
     #   resp.firewall.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
     #   resp.firewall_status.status #=> String, one of "PROVISIONING", "DELETING", "READY"
-    #   resp.firewall_status.configuration_sync_state_summary #=> String, one of "PENDING", "IN_SYNC"
+    #   resp.firewall_status.configuration_sync_state_summary #=> String, one of "PENDING", "IN_SYNC", "CAPACITY_CONSTRAINED"
     #   resp.firewall_status.sync_states #=> Hash
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.subnet_id #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.endpoint_id #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.status #=> String, one of "CREATING", "DELETING", "SCALING", "READY"
     #   resp.firewall_status.sync_states["AvailabilityZone"].config #=> Hash
-    #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].sync_status #=> String, one of "PENDING", "IN_SYNC"
+    #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].sync_status #=> String, one of "PENDING", "IN_SYNC", "CAPACITY_CONSTRAINED"
     #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].update_token #=> String
+    #   resp.firewall_status.capacity_usage_summary.cid_rs.available_cidr_count #=> Integer
+    #   resp.firewall_status.capacity_usage_summary.cid_rs.utilized_cidr_count #=> Integer
+    #   resp.firewall_status.capacity_usage_summary.cid_rs.ip_set_references #=> Hash
+    #   resp.firewall_status.capacity_usage_summary.cid_rs.ip_set_references["IPSetArn"].resolved_cidr_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeFirewall AWS API Documentation
     #
@@ -1529,6 +1548,8 @@ module Aws::NetworkFirewall
     #   resp.rule_group.rule_variables.port_sets #=> Hash
     #   resp.rule_group.rule_variables.port_sets["RuleVariableName"].definition #=> Array
     #   resp.rule_group.rule_variables.port_sets["RuleVariableName"].definition[0] #=> String
+    #   resp.rule_group.reference_sets.ip_set_references #=> Hash
+    #   resp.rule_group.reference_sets.ip_set_references["IPSetReferenceName"].reference_arn #=> String
     #   resp.rule_group.rules_source.rules_string #=> String
     #   resp.rule_group.rules_source.rules_source_list.targets #=> Array
     #   resp.rule_group.rules_source.rules_source_list.targets[0] #=> String
@@ -2743,6 +2764,13 @@ module Aws::NetworkFirewall
     #           },
     #         },
     #       },
+    #       reference_sets: {
+    #         ip_set_references: {
+    #           "IPSetReferenceName" => {
+    #             reference_arn: "ResourceArn",
+    #           },
+    #         },
+    #       },
     #       rules_source: { # required
     #         rules_string: "RulesString",
     #         rules_source_list: {
@@ -2956,7 +2984,7 @@ module Aws::NetworkFirewall
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-networkfirewall'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

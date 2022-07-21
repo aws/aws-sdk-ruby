@@ -2632,6 +2632,109 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateBulkImportJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_name: "Name", # required
+    #         job_role_arn: "ARN", # required
+    #         files: [ # required
+    #           {
+    #             bucket: "Bucket", # required
+    #             key: "String", # required
+    #             version_id: "String",
+    #           },
+    #         ],
+    #         error_report_location: { # required
+    #           bucket: "Bucket", # required
+    #           prefix: "String", # required
+    #         },
+    #         job_configuration: { # required
+    #           file_format: { # required
+    #             csv: {
+    #               column_names: ["ALIAS"], # accepts ALIAS, ASSET_ID, PROPERTY_ID, DATA_TYPE, TIMESTAMP_SECONDS, TIMESTAMP_NANO_OFFSET, QUALITY, VALUE
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] job_name
+    #   The unique name that helps identify the job request.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_role_arn
+    #   The [ARN][1] of the IAM role that allows IoT SiteWise to read Amazon
+    #   S3 data.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] files
+    #   The files in the specified Amazon S3 bucket that contain your data.
+    #   @return [Array<Types::File>]
+    #
+    # @!attribute [rw] error_report_location
+    #   The Amazon S3 destination where errors associated with the job
+    #   creation request are saved.
+    #   @return [Types::ErrorReportLocation]
+    #
+    # @!attribute [rw] job_configuration
+    #   Contains the configuration information of a job, such as the file
+    #   format used to save data in Amazon S3.
+    #   @return [Types::JobConfiguration]
+    #
+    class CreateBulkImportJobRequest < Struct.new(
+      :job_name,
+      :job_role_arn,
+      :files,
+      :error_report_location,
+      :job_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The ID of the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_name
+    #   The unique name that helps identify the job request.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_status
+    #   The status of the bulk import job can be one of following values.
+    #
+    #   * `PENDING` – IoT SiteWise is waiting for the current bulk import
+    #     job to finish.
+    #
+    #   * `CANCELLED` – The bulk import job has been canceled.
+    #
+    #   * `RUNNING` – IoT SiteWise is processing your request to import your
+    #     data from Amazon S3.
+    #
+    #   * `COMPLETED` – IoT SiteWise successfully completed your request to
+    #     import data from Amazon S3.
+    #
+    #   * `FAILED` – IoT SiteWise couldn't process your request to import
+    #     data from Amazon S3. You can use logs saved in the specified error
+    #     report location in Amazon S3 to troubleshoot issues.
+    #
+    #   * `COMPLETED_WITH_FAILURES` – IoT SiteWise completed your request to
+    #     import data from Amazon S3 with errors. You can use logs saved in
+    #     the specified error report location in Amazon S3 to troubleshoot
+    #     issues.
+    #   @return [String]
+    #
+    class CreateBulkImportJobResponse < Struct.new(
+      :job_id,
+      :job_name,
+      :job_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateDashboardRequest
     #   data as a hash:
     #
@@ -3034,6 +3137,25 @@ module Aws::IoTSiteWise
     class CreateProjectResponse < Struct.new(
       :project_id,
       :project_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A .csv file.
+    #
+    # @note When making an API call, you may pass Csv
+    #   data as a hash:
+    #
+    #       {
+    #         column_names: ["ALIAS"], # accepts ALIAS, ASSET_ID, PROPERTY_ID, DATA_TYPE, TIMESTAMP_SECONDS, TIMESTAMP_NANO_OFFSET, QUALITY, VALUE
+    #       }
+    #
+    # @!attribute [rw] column_names
+    #   The column names specified in the .csv file.
+    #   @return [Array<String>]
+    #
+    class Csv < Struct.new(
+      :column_names)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3666,6 +3788,100 @@ module Aws::IoTSiteWise
       :asset_last_update_date,
       :asset_status,
       :asset_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeBulkImportJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "ID", # required
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The ID of the job.
+    #   @return [String]
+    #
+    class DescribeBulkImportJobRequest < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The ID of the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_name
+    #   The unique name that helps identify the job request.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_status
+    #   The status of the bulk import job can be one of following values.
+    #
+    #   * `PENDING` – IoT SiteWise is waiting for the current bulk import
+    #     job to finish.
+    #
+    #   * `CANCELLED` – The bulk import job has been canceled.
+    #
+    #   * `RUNNING` – IoT SiteWise is processing your request to import your
+    #     data from Amazon S3.
+    #
+    #   * `COMPLETED` – IoT SiteWise successfully completed your request to
+    #     import data from Amazon S3.
+    #
+    #   * `FAILED` – IoT SiteWise couldn't process your request to import
+    #     data from Amazon S3. You can use logs saved in the specified error
+    #     report location in Amazon S3 to troubleshoot issues.
+    #
+    #   * `COMPLETED_WITH_FAILURES` – IoT SiteWise completed your request to
+    #     import data from Amazon S3 with errors. You can use logs saved in
+    #     the specified error report location in Amazon S3 to troubleshoot
+    #     issues.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_role_arn
+    #   The [ARN][1] of the IAM role that allows IoT SiteWise to read Amazon
+    #   S3 data.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] files
+    #   The files in the specified Amazon S3 bucket that contain your data.
+    #   @return [Array<Types::File>]
+    #
+    # @!attribute [rw] error_report_location
+    #   The Amazon S3 destination where errors associated with the job
+    #   creation request are saved.
+    #   @return [Types::ErrorReportLocation]
+    #
+    # @!attribute [rw] job_configuration
+    #   Contains the configuration information of a job, such as the file
+    #   format used to save data in Amazon S3.
+    #   @return [Types::JobConfiguration]
+    #
+    # @!attribute [rw] job_creation_date
+    #   The date the job was created, in Unix epoch TIME.
+    #   @return [Time]
+    #
+    # @!attribute [rw] job_last_update_date
+    #   The date the job was last updated, in Unix epoch time.
+    #   @return [Time]
+    #
+    class DescribeBulkImportJobResponse < Struct.new(
+      :job_id,
+      :job_name,
+      :job_status,
+      :job_role_arn,
+      :files,
+      :error_report_location,
+      :job_configuration,
+      :job_creation_date,
+      :job_last_update_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4380,6 +4596,42 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
+    # The Amazon S3 destination where errors associated with the job
+    # creation request are saved.
+    #
+    # @note When making an API call, you may pass ErrorReportLocation
+    #   data as a hash:
+    #
+    #       {
+    #         bucket: "Bucket", # required
+    #         prefix: "String", # required
+    #       }
+    #
+    # @!attribute [rw] bucket
+    #   The name of the Amazon S3 bucket to which errors associated with the
+    #   bulk import job are sent.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix
+    #   Amazon S3 uses the prefix as a folder name to organize data in the
+    #   bucket. Each Amazon S3 object has a key that is its unique
+    #   identifier in the bucket. Each object in a bucket has exactly one
+    #   key. The prefix must end with a forward slash (/). For more
+    #   information, see [Organizing objects using prefixes][1] in the
+    #   *Amazon Simple Storage Service User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html
+    #   @return [String]
+    #
+    class ErrorReportLocation < Struct.new(
+      :bucket,
+      :prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains expression variable information.
     #
     # @note When making an API call, you may pass ExpressionVariable
@@ -4405,6 +4657,61 @@ module Aws::IoTSiteWise
     class ExpressionVariable < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The file in Amazon S3 where your data is saved.
+    #
+    # @note When making an API call, you may pass File
+    #   data as a hash:
+    #
+    #       {
+    #         bucket: "Bucket", # required
+    #         key: "String", # required
+    #         version_id: "String",
+    #       }
+    #
+    # @!attribute [rw] bucket
+    #   The name of the Amazon S3 bucket from which data is imported.
+    #   @return [String]
+    #
+    # @!attribute [rw] key
+    #   The key of the Amazon S3 object that contains your data. Each object
+    #   has a key that is a unique identifier. Each object has exactly one
+    #   key.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_id
+    #   The version ID to identify a specific version of the Amazon S3
+    #   object that contains your data.
+    #   @return [String]
+    #
+    class File < Struct.new(
+      :bucket,
+      :key,
+      :version_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The file format of the data.
+    #
+    # @note When making an API call, you may pass FileFormat
+    #   data as a hash:
+    #
+    #       {
+    #         csv: {
+    #           column_names: ["ALIAS"], # accepts ALIAS, ASSET_ID, PROPERTY_ID, DATA_TYPE, TIMESTAMP_SECONDS, TIMESTAMP_NANO_OFFSET, QUALITY, VALUE
+    #         },
+    #       }
+    #
+    # @!attribute [rw] csv
+    #   The .csv file format.
+    #   @return [Types::Csv]
+    #
+    class FileFormat < Struct.new(
+      :csv)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5271,6 +5578,72 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
+    # Contains the configuration information of a job, such as the file
+    # format used to save data in Amazon S3.
+    #
+    # @note When making an API call, you may pass JobConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         file_format: { # required
+    #           csv: {
+    #             column_names: ["ALIAS"], # accepts ALIAS, ASSET_ID, PROPERTY_ID, DATA_TYPE, TIMESTAMP_SECONDS, TIMESTAMP_NANO_OFFSET, QUALITY, VALUE
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] file_format
+    #   The file format of the data in Amazon S3.
+    #   @return [Types::FileFormat]
+    #
+    class JobConfiguration < Struct.new(
+      :file_format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains a job summary information.
+    #
+    # @!attribute [rw] id
+    #   The ID of the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The unique name that helps identify the job request.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the bulk import job can be one of following values.
+    #
+    #   * `PENDING` – IoT SiteWise is waiting for the current bulk import
+    #     job to finish.
+    #
+    #   * `CANCELLED` – The bulk import job has been canceled.
+    #
+    #   * `RUNNING` – IoT SiteWise is processing your request to import your
+    #     data from Amazon S3.
+    #
+    #   * `COMPLETED` – IoT SiteWise successfully completed your request to
+    #     import data from Amazon S3.
+    #
+    #   * `FAILED` – IoT SiteWise couldn't process your request to import
+    #     data from Amazon S3. You can use logs saved in the specified error
+    #     report location in Amazon S3 to troubleshoot issues.
+    #
+    #   * `COMPLETED_WITH_FAILURES` – IoT SiteWise completed your request to
+    #     import data from Amazon S3 with errors. You can use logs saved in
+    #     the specified error report location in Amazon S3 to troubleshoot
+    #     issues.
+    #   @return [String]
+    #
+    class JobSummary < Struct.new(
+      :id,
+      :name,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # You've reached the limit for a resource. For example, this can occur
     # if you're trying to associate more than the allowed number of child
     # assets or attempting to create more than the allowed number of
@@ -5612,6 +5985,52 @@ module Aws::IoTSiteWise
     #
     class ListAssociatedAssetsResponse < Struct.new(
       :asset_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListBulkImportJobsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         filter: "ALL", # accepts ALL, PENDING, RUNNING, CANCELLED, FAILED, COMPLETED_WITH_FAILURES, COMPLETED
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   The token to be used for the next set of paginated results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return for each paginated request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filter
+    #   You can use a filter to select the bulk import jobs that you want to
+    #   retrieve.
+    #   @return [String]
+    #
+    class ListBulkImportJobsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_summaries
+    #   One or more job summaries to list.
+    #   @return [Array<Types::JobSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no
+    #   additional results.
+    #   @return [String]
+    #
+    class ListBulkImportJobsResponse < Struct.new(
+      :job_summaries,
       :next_token)
       SENSITIVE = []
       include Aws::Structure

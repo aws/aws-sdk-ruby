@@ -830,15 +830,14 @@ module Aws::Kendra
     # control without indexing all of your documents again. For example,
     # your index contains top-secret company documents that only certain
     # employees or users should access. One of these users leaves the
-    # company or switches to a team that should be blocked from access to
-    # top-secret documents. Your documents in your index still give this
-    # user access to top-secret documents due to the user having access at
-    # the time your documents were indexed. You can create a specific access
-    # control configuration for this user with deny access. You can later
-    # update the access control configuration to allow access in the case
-    # the user returns to the company and re-joins the 'top-secret' team.
-    # You can re-configure access control for your documents circumstances
-    # change.
+    # company or switches to a team that should be blocked from accessing
+    # top-secret documents. The user still has access to top-secret
+    # documents because the user had access when your documents were
+    # previously indexed. You can create a specific access control
+    # configuration for the user with deny access. You can later update the
+    # access control configuration to allow access if the user returns to
+    # the company and re-joins the 'top-secret' team. You can re-configure
+    # access control for your documents as circumstances change.
     #
     # To apply your access control configuration to certain documents, you
     # call the [BatchPutDocument][1] API with the
@@ -1091,6 +1090,7 @@ module Aws::Kendra
     #           bucket: "S3BucketName", # required
     #           key: "S3ObjectKey", # required
     #         },
+    #         authentication_type: "HTTP_BASIC", # accepts HTTP_BASIC, OAUTH2
     #       },
     #       database_configuration: {
     #         database_engine_type: "RDS_AURORA_MYSQL", # required, accepts RDS_AURORA_MYSQL, RDS_AURORA_POSTGRESQL, RDS_MYSQL, RDS_POSTGRESQL
@@ -2676,6 +2676,7 @@ module Aws::Kendra
     #   resp.configuration.share_point_configuration.disable_local_groups #=> Boolean
     #   resp.configuration.share_point_configuration.ssl_certificate_s3_path.bucket #=> String
     #   resp.configuration.share_point_configuration.ssl_certificate_s3_path.key #=> String
+    #   resp.configuration.share_point_configuration.authentication_type #=> String, one of "HTTP_BASIC", "OAUTH2"
     #   resp.configuration.database_configuration.database_engine_type #=> String, one of "RDS_AURORA_MYSQL", "RDS_AURORA_POSTGRESQL", "RDS_MYSQL", "RDS_POSTGRESQL"
     #   resp.configuration.database_configuration.connection_configuration.database_host #=> String
     #   resp.configuration.database_configuration.connection_configuration.database_port #=> Integer
@@ -3830,7 +3831,7 @@ module Aws::Kendra
     #   The identifier of the index for the access control configuration.
     #
     # @option params [String] :next_token
-    #   If the previous response was incomplete (because there is more data to
+    #   If the previous response was incomplete (because there's more data to
     #   retrieve), Amazon Kendra returns a pagination token in the response.
     #   You can use this pagination token to retrieve the next set of access
     #   control configurations.
@@ -5093,7 +5094,7 @@ module Aws::Kendra
     # You call the [BatchPutDocument][1] API to apply the updated access
     # control configuration, with the `AccessControlConfigurationId`
     # included in the [Document][2] object. If you use an S3 bucket as a
-    # data source, you synchronize your data source to apply the the
+    # data source, you synchronize your data source to apply the
     # `AccessControlConfigurationId` in the `.metadata.json` file. Amazon
     # Kendra currently only supports access control configuration for S3
     # data sources and documents indexed using the `BatchPutDocument` API.
@@ -5270,6 +5271,7 @@ module Aws::Kendra
     #           bucket: "S3BucketName", # required
     #           key: "S3ObjectKey", # required
     #         },
+    #         authentication_type: "HTTP_BASIC", # accepts HTTP_BASIC, OAUTH2
     #       },
     #       database_configuration: {
     #         database_engine_type: "RDS_AURORA_MYSQL", # required, accepts RDS_AURORA_MYSQL, RDS_AURORA_POSTGRESQL, RDS_MYSQL, RDS_POSTGRESQL
@@ -6318,7 +6320,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

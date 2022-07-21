@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2022-07-21)
+------------------
+
+* Feature - Adding support for the suppression of Composite Alarm actions
+
 1.64.0 (2022-04-14)
 ------------------
 

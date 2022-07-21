@@ -16,6 +16,8 @@ module Aws::CloudWatch
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     ActionPrefix = Shapes::StringShape.new(name: 'ActionPrefix')
     ActionsEnabled = Shapes::BooleanShape.new(name: 'ActionsEnabled')
+    ActionsSuppressedBy = Shapes::StringShape.new(name: 'ActionsSuppressedBy')
+    ActionsSuppressedReason = Shapes::StringShape.new(name: 'ActionsSuppressedReason')
     AlarmArn = Shapes::StringShape.new(name: 'AlarmArn')
     AlarmDescription = Shapes::StringShape.new(name: 'AlarmDescription')
     AlarmHistoryItem = Shapes::StructureShape.new(name: 'AlarmHistoryItem')
@@ -246,6 +248,7 @@ module Aws::CloudWatch
     StopMetricStreamsInput = Shapes::StructureShape.new(name: 'StopMetricStreamsInput')
     StopMetricStreamsOutput = Shapes::StructureShape.new(name: 'StopMetricStreamsOutput')
     StorageResolution = Shapes::IntegerShape.new(name: 'StorageResolution')
+    SuppressorPeriod = Shapes::IntegerShape.new(name: 'SuppressorPeriod')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -310,6 +313,12 @@ module Aws::CloudWatch
     CompositeAlarm.add_member(:state_reason_data, Shapes::ShapeRef.new(shape: StateReasonData, location_name: "StateReasonData"))
     CompositeAlarm.add_member(:state_updated_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StateUpdatedTimestamp"))
     CompositeAlarm.add_member(:state_value, Shapes::ShapeRef.new(shape: StateValue, location_name: "StateValue"))
+    CompositeAlarm.add_member(:state_transitioned_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StateTransitionedTimestamp"))
+    CompositeAlarm.add_member(:actions_suppressed_by, Shapes::ShapeRef.new(shape: ActionsSuppressedBy, location_name: "ActionsSuppressedBy"))
+    CompositeAlarm.add_member(:actions_suppressed_reason, Shapes::ShapeRef.new(shape: ActionsSuppressedReason, location_name: "ActionsSuppressedReason"))
+    CompositeAlarm.add_member(:actions_suppressor, Shapes::ShapeRef.new(shape: AlarmArn, location_name: "ActionsSuppressor"))
+    CompositeAlarm.add_member(:actions_suppressor_wait_period, Shapes::ShapeRef.new(shape: SuppressorPeriod, location_name: "ActionsSuppressorWaitPeriod"))
+    CompositeAlarm.add_member(:actions_suppressor_extension_period, Shapes::ShapeRef.new(shape: SuppressorPeriod, location_name: "ActionsSuppressorExtensionPeriod"))
     CompositeAlarm.struct_class = Types::CompositeAlarm
 
     CompositeAlarms.member = Shapes::ShapeRef.new(shape: CompositeAlarm)
@@ -802,6 +811,9 @@ module Aws::CloudWatch
     PutCompositeAlarmInput.add_member(:insufficient_data_actions, Shapes::ShapeRef.new(shape: ResourceList, location_name: "InsufficientDataActions"))
     PutCompositeAlarmInput.add_member(:ok_actions, Shapes::ShapeRef.new(shape: ResourceList, location_name: "OKActions"))
     PutCompositeAlarmInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    PutCompositeAlarmInput.add_member(:actions_suppressor, Shapes::ShapeRef.new(shape: AlarmArn, location_name: "ActionsSuppressor"))
+    PutCompositeAlarmInput.add_member(:actions_suppressor_wait_period, Shapes::ShapeRef.new(shape: SuppressorPeriod, location_name: "ActionsSuppressorWaitPeriod"))
+    PutCompositeAlarmInput.add_member(:actions_suppressor_extension_period, Shapes::ShapeRef.new(shape: SuppressorPeriod, location_name: "ActionsSuppressorExtensionPeriod"))
     PutCompositeAlarmInput.struct_class = Types::PutCompositeAlarmInput
 
     PutDashboardInput.add_member(:dashboard_name, Shapes::ShapeRef.new(shape: DashboardName, required: true, location_name: "DashboardName"))

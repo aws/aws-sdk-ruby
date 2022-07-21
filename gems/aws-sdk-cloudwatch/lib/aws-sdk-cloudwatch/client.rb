@@ -809,6 +809,12 @@ module Aws::CloudWatch
     #   resp.composite_alarms[0].state_reason_data #=> String
     #   resp.composite_alarms[0].state_updated_timestamp #=> Time
     #   resp.composite_alarms[0].state_value #=> String, one of "OK", "ALARM", "INSUFFICIENT_DATA"
+    #   resp.composite_alarms[0].state_transitioned_timestamp #=> Time
+    #   resp.composite_alarms[0].actions_suppressed_by #=> String, one of "WaitPeriod", "ExtensionPeriod", "Alarm"
+    #   resp.composite_alarms[0].actions_suppressed_reason #=> String
+    #   resp.composite_alarms[0].actions_suppressor #=> String
+    #   resp.composite_alarms[0].actions_suppressor_wait_period #=> Integer
+    #   resp.composite_alarms[0].actions_suppressor_extension_period #=> Integer
     #   resp.metric_alarms #=> Array
     #   resp.metric_alarms[0].alarm_name #=> String
     #   resp.metric_alarms[0].alarm_arn #=> String
@@ -2550,6 +2556,26 @@ module Aws::CloudWatch
     #   use them to scope user permissions, by granting a user permission to
     #   access or change only resources with certain tag values.
     #
+    # @option params [String] :actions_suppressor
+    #   Actions will be suppressed if the suppressor alarm is in the `ALARM`
+    #   state. `ActionsSuppressor` can be an AlarmName or an Amazon Resource
+    #   Name (ARN) from an existing alarm.
+    #
+    # @option params [Integer] :actions_suppressor_wait_period
+    #   The maximum time in seconds that the composite alarm waits for the
+    #   suppressor alarm to go into the `ALARM` state. After this time, the
+    #   composite alarm performs its actions.
+    #
+    #   `WaitPeriod` is required only when `ActionsSuppressor` is specified.
+    #
+    # @option params [Integer] :actions_suppressor_extension_period
+    #   The maximum time in seconds that the composite alarm waits after
+    #   suppressor alarm goes out of the `ALARM` state. After this time, the
+    #   composite alarm performs its actions.
+    #
+    #   `ExtensionPeriod` is required only when `ActionsSuppressor` is
+    #   specified.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -2568,6 +2594,9 @@ module Aws::CloudWatch
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     actions_suppressor: "AlarmArn",
+    #     actions_suppressor_wait_period: 1,
+    #     actions_suppressor_extension_period: 1,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutCompositeAlarm AWS API Documentation
@@ -3633,7 +3662,7 @@ module Aws::CloudWatch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
