@@ -719,6 +719,12 @@ module Aws::RDS
       data[:network_type]
     end
 
+    # The status of the policy state of the activity stream.
+    # @return [String]
+    def activity_stream_policy_status
+      data[:activity_stream_policy_status]
+    end
+
     # @!endgroup
 
     # @return [Client]

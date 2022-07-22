@@ -534,6 +534,10 @@ module Aws::MediaLive
     PurchaseOfferingResponse = Shapes::StructureShape.new(name: 'PurchaseOfferingResponse')
     PurchaseOfferingResultModel = Shapes::StructureShape.new(name: 'PurchaseOfferingResultModel')
     RawSettings = Shapes::StructureShape.new(name: 'RawSettings')
+    RebootInputDevice = Shapes::StructureShape.new(name: 'RebootInputDevice')
+    RebootInputDeviceForce = Shapes::StringShape.new(name: 'RebootInputDeviceForce')
+    RebootInputDeviceRequest = Shapes::StructureShape.new(name: 'RebootInputDeviceRequest')
+    RebootInputDeviceResponse = Shapes::StructureShape.new(name: 'RebootInputDeviceResponse')
     Rec601Settings = Shapes::StructureShape.new(name: 'Rec601Settings')
     Rec709Settings = Shapes::StructureShape.new(name: 'Rec709Settings')
     RejectInputDeviceTransferRequest = Shapes::StructureShape.new(name: 'RejectInputDeviceTransferRequest')
@@ -603,6 +607,8 @@ module Aws::MediaLive
     StandardHlsSettings = Shapes::StructureShape.new(name: 'StandardHlsSettings')
     StartChannelRequest = Shapes::StructureShape.new(name: 'StartChannelRequest')
     StartChannelResponse = Shapes::StructureShape.new(name: 'StartChannelResponse')
+    StartInputDeviceMaintenanceWindowRequest = Shapes::StructureShape.new(name: 'StartInputDeviceMaintenanceWindowRequest')
+    StartInputDeviceMaintenanceWindowResponse = Shapes::StructureShape.new(name: 'StartInputDeviceMaintenanceWindowResponse')
     StartMultiplexRequest = Shapes::StructureShape.new(name: 'StartMultiplexRequest')
     StartMultiplexResponse = Shapes::StructureShape.new(name: 'StartMultiplexResponse')
     StartTimecode = Shapes::StructureShape.new(name: 'StartTimecode')
@@ -2667,6 +2673,15 @@ module Aws::MediaLive
 
     RawSettings.struct_class = Types::RawSettings
 
+    RebootInputDevice.add_member(:force, Shapes::ShapeRef.new(shape: RebootInputDeviceForce, location_name: "force"))
+    RebootInputDevice.struct_class = Types::RebootInputDevice
+
+    RebootInputDeviceRequest.add_member(:force, Shapes::ShapeRef.new(shape: RebootInputDeviceForce, location_name: "force"))
+    RebootInputDeviceRequest.add_member(:input_device_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "inputDeviceId"))
+    RebootInputDeviceRequest.struct_class = Types::RebootInputDeviceRequest
+
+    RebootInputDeviceResponse.struct_class = Types::RebootInputDeviceResponse
+
     Rec601Settings.struct_class = Types::Rec601Settings
 
     Rec709Settings.struct_class = Types::Rec709Settings
@@ -2854,6 +2869,11 @@ module Aws::MediaLive
     StartChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     StartChannelResponse.add_member(:vpc, Shapes::ShapeRef.new(shape: VpcOutputSettingsDescription, location_name: "vpc"))
     StartChannelResponse.struct_class = Types::StartChannelResponse
+
+    StartInputDeviceMaintenanceWindowRequest.add_member(:input_device_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "inputDeviceId"))
+    StartInputDeviceMaintenanceWindowRequest.struct_class = Types::StartInputDeviceMaintenanceWindowRequest
+
+    StartInputDeviceMaintenanceWindowResponse.struct_class = Types::StartInputDeviceMaintenanceWindowResponse
 
     StartMultiplexRequest.add_member(:multiplex_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "multiplexId"))
     StartMultiplexRequest.struct_class = Types::StartMultiplexRequest
@@ -4029,6 +4049,22 @@ module Aws::MediaLive
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:reboot_input_device, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RebootInputDevice"
+        o.http_method = "POST"
+        o.http_request_uri = "/prod/inputDevices/{inputDeviceId}/reboot"
+        o.input = Shapes::ShapeRef.new(shape: RebootInputDeviceRequest)
+        o.output = Shapes::ShapeRef.new(shape: RebootInputDeviceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
       api.add_operation(:reject_input_device_transfer, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RejectInputDeviceTransfer"
         o.http_method = "POST"
@@ -4060,6 +4096,22 @@ module Aws::MediaLive
         o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:start_input_device_maintenance_window, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartInputDeviceMaintenanceWindow"
+        o.http_method = "POST"
+        o.http_request_uri = "/prod/inputDevices/{inputDeviceId}/startInputDeviceMaintenanceWindow"
+        o.input = Shapes::ShapeRef.new(shape: StartInputDeviceMaintenanceWindowRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartInputDeviceMaintenanceWindowResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:start_multiplex, Seahorse::Model::Operation.new.tap do |o|

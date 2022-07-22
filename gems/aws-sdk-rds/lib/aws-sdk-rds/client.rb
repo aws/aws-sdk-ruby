@@ -4693,6 +4693,7 @@ module Aws::RDS
     #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.backup_target #=> String
     #   resp.db_instance.network_type #=> String
+    #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstance AWS API Documentation
     #
@@ -5483,6 +5484,7 @@ module Aws::RDS
     #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.backup_target #=> String
     #   resp.db_instance.network_type #=> String
+    #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplica AWS API Documentation
     #
@@ -5661,9 +5663,8 @@ module Aws::RDS
     #   The kinds of databases that the proxy can connect to. This value
     #   determines which database network protocol the proxy recognizes when
     #   it interprets network traffic to and from the database. For Aurora
-    #   MySQL, RDS for MariaDB, and RDS for MySQL databases, specify `MYSQL`.
-    #   For Aurora PostgreSQL and RDS for PostgreSQL databases, specify
-    #   `POSTGRESQL`.
+    #   MySQL and RDS for MySQL databases, specify `MYSQL`. For Aurora
+    #   PostgreSQL and RDS for PostgreSQL databases, specify `POSTGRESQL`.
     #
     # @option params [required, Array<Types::UserAuthConfig>] :auth
     #   The authorization mechanism that the proxy uses.
@@ -7324,6 +7325,7 @@ module Aws::RDS
     #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.backup_target #=> String
     #   resp.db_instance.network_type #=> String
+    #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstance AWS API Documentation
     #
@@ -9543,6 +9545,7 @@ module Aws::RDS
     #   resp.db_instances[0].custom_iam_instance_profile #=> String
     #   resp.db_instances[0].backup_target #=> String
     #   resp.db_instances[0].network_type #=> String
+    #   resp.db_instances[0].activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -12842,6 +12845,63 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Changes the audit policy state of a database activity stream to either
+    # locked (default) or unlocked. A locked policy is read-only, whereas an
+    # unlocked policy is read/write. If your activity stream is started and
+    # locked, you can unlock it, customize your audit policy, and then lock
+    # your activity stream. Restarting the activity stream isn't required.
+    # For more information, see [ Modifying a database activity stream][1]
+    # in the *Amazon RDS User Guide*.
+    #
+    # This operation is supported for RDS for Oracle only.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/DBActivityStreams.Modifying.html
+    #
+    # @option params [String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the RDS for Oracle DB instance, for
+    #   example, `arn:aws:rds:us-east-1:12345667890:instance:my-orcl-db`.
+    #
+    # @option params [String] :audit_policy_state
+    #   The audit policy state. When a policy is unlocked, it is read/write.
+    #   When it is locked, it is read-only. You can edit your audit policy
+    #   only when the activity stream is unlocked or stopped.
+    #
+    # @return [Types::ModifyActivityStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyActivityStreamResponse#kms_key_id #kms_key_id} => String
+    #   * {Types::ModifyActivityStreamResponse#kinesis_stream_name #kinesis_stream_name} => String
+    #   * {Types::ModifyActivityStreamResponse#status #status} => String
+    #   * {Types::ModifyActivityStreamResponse#mode #mode} => String
+    #   * {Types::ModifyActivityStreamResponse#engine_native_audit_fields_included #engine_native_audit_fields_included} => Boolean
+    #   * {Types::ModifyActivityStreamResponse#policy_status #policy_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_activity_stream({
+    #     resource_arn: "String",
+    #     audit_policy_state: "locked", # accepts locked, unlocked
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.kms_key_id #=> String
+    #   resp.kinesis_stream_name #=> String
+    #   resp.status #=> String, one of "stopped", "starting", "started", "stopping"
+    #   resp.mode #=> String, one of "sync", "async"
+    #   resp.engine_native_audit_fields_included #=> Boolean
+    #   resp.policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyActivityStream AWS API Documentation
+    #
+    # @overload modify_activity_stream(params = {})
+    # @param [Hash] params ({})
+    def modify_activity_stream(params = {}, options = {})
+      req = build_request(:modify_activity_stream, params)
+      req.send_request(options)
+    end
+
     # Override the system-default Secure Sockets Layer/Transport Layer
     # Security (SSL/TLS) certificate for Amazon RDS for new DB instances, or
     # remove the override.
@@ -15247,6 +15307,7 @@ module Aws::RDS
     #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.backup_target #=> String
     #   resp.db_instance.network_type #=> String
+    #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstance AWS API Documentation
     #
@@ -16476,6 +16537,7 @@ module Aws::RDS
     #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.backup_target #=> String
     #   resp.db_instance.network_type #=> String
+    #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplica AWS API Documentation
     #
@@ -17072,6 +17134,7 @@ module Aws::RDS
     #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.backup_target #=> String
     #   resp.db_instance.network_type #=> String
+    #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBInstance AWS API Documentation
     #
@@ -19980,6 +20043,7 @@ module Aws::RDS
     #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.backup_target #=> String
     #   resp.db_instance.network_type #=> String
+    #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshot AWS API Documentation
     #
@@ -20627,6 +20691,7 @@ module Aws::RDS
     #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.backup_target #=> String
     #   resp.db_instance.network_type #=> String
+    #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3 AWS API Documentation
     #
@@ -21365,6 +21430,7 @@ module Aws::RDS
     #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.backup_target #=> String
     #   resp.db_instance.network_type #=> String
+    #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTime AWS API Documentation
     #
@@ -21848,6 +21914,7 @@ module Aws::RDS
     #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.backup_target #=> String
     #   resp.db_instance.network_type #=> String
+    #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstance AWS API Documentation
     #
@@ -22472,6 +22539,7 @@ module Aws::RDS
     #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.backup_target #=> String
     #   resp.db_instance.network_type #=> String
+    #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstance AWS API Documentation
     #
@@ -22563,7 +22631,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.149.0'
+      context[:gem_version] = '1.150.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

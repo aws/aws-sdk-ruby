@@ -5194,9 +5194,8 @@ module Aws::RDS
     #   The kinds of databases that the proxy can connect to. This value
     #   determines which database network protocol the proxy recognizes when
     #   it interprets network traffic to and from the database. For Aurora
-    #   MySQL, RDS for MariaDB, and RDS for MySQL databases, specify
-    #   `MYSQL`. For Aurora PostgreSQL and RDS for PostgreSQL databases,
-    #   specify `POSTGRESQL`.
+    #   MySQL and RDS for MySQL databases, specify `MYSQL`. For Aurora
+    #   PostgreSQL and RDS for PostgreSQL databases, specify `POSTGRESQL`.
     #   @return [String]
     #
     # @!attribute [rw] auth
@@ -7882,6 +7881,10 @@ module Aws::RDS
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     #   @return [String]
     #
+    # @!attribute [rw] activity_stream_policy_status
+    #   The status of the policy state of the activity stream.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstance AWS API Documentation
     #
     class DBInstance < Struct.new(
@@ -7959,7 +7962,8 @@ module Aws::RDS
       :resume_full_automation_mode_time,
       :custom_iam_instance_profile,
       :backup_target,
-      :network_type)
+      :network_type,
+      :activity_stream_policy_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8499,9 +8503,8 @@ module Aws::RDS
     #   The kinds of databases that the proxy can connect to. This value
     #   determines which database network protocol the proxy recognizes when
     #   it interprets network traffic to and from the database. `MYSQL`
-    #   supports Aurora MySQL, RDS for MariaDB, and RDS for MySQL databases.
-    #   `POSTGRESQL` supports Aurora PostgreSQL and RDS for PostgreSQL
-    #   databases.
+    #   supports Aurora MySQL and RDS for MySQL databases. `POSTGRESQL`
+    #   supports Aurora PostgreSQL and RDS for PostgreSQL databases.
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
@@ -14471,6 +14474,76 @@ module Aws::RDS
     class MinimumEngineVersionPerAllowedValue < Struct.new(
       :allowed_value,
       :minimum_engine_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ModifyActivityStreamRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "String",
+    #         audit_policy_state: "locked", # accepts locked, unlocked
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the RDS for Oracle DB instance,
+    #   for example,
+    #   `arn:aws:rds:us-east-1:12345667890:instance:my-orcl-db`.
+    #   @return [String]
+    #
+    # @!attribute [rw] audit_policy_state
+    #   The audit policy state. When a policy is unlocked, it is read/write.
+    #   When it is locked, it is read-only. You can edit your audit policy
+    #   only when the activity stream is unlocked or stopped.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyActivityStreamRequest AWS API Documentation
+    #
+    class ModifyActivityStreamRequest < Struct.new(
+      :resource_arn,
+      :audit_policy_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] kms_key_id
+    #   The Amazon Web Services KMS key identifier for encryption of
+    #   messages in the database activity stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] kinesis_stream_name
+    #   The name of the Amazon Kinesis data stream to be used for the
+    #   database activity stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the modification to the database activity stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   The mode of the database activity stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_native_audit_fields_included
+    #   Indicates whether engine-native audit fields are included in the
+    #   database activity stream.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] policy_status
+    #   The status of the modification to the policy state of the database
+    #   activity stream.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyActivityStreamResponse AWS API Documentation
+    #
+    class ModifyActivityStreamResponse < Struct.new(
+      :kms_key_id,
+      :kinesis_stream_name,
+      :status,
+      :mode,
+      :engine_native_audit_fields_included,
+      :policy_status)
       SENSITIVE = []
       include Aws::Structure
     end

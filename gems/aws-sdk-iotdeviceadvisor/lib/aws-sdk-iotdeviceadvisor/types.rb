@@ -35,8 +35,10 @@ module Aws::IoTDeviceAdvisor
     #             },
     #           ],
     #           intended_for_qualification: false,
+    #           is_long_duration_test: false,
     #           root_group: "RootGroup",
     #           device_permission_role_arn: "AmazonResourceName",
+    #           protocol: "MqttV3_1_1", # accepts MqttV3_1_1, MqttV5
     #         },
     #         tags: {
     #           "String128" => "String256",
@@ -616,8 +618,10 @@ module Aws::IoTDeviceAdvisor
     #           },
     #         ],
     #         intended_for_qualification: false,
+    #         is_long_duration_test: false,
     #         root_group: "RootGroup",
     #         device_permission_role_arn: "AmazonResourceName",
+    #         protocol: "MqttV3_1_1", # accepts MqttV3_1_1, MqttV5
     #       }
     #
     # @!attribute [rw] suite_definition_name
@@ -632,6 +636,10 @@ module Aws::IoTDeviceAdvisor
     #   Gets the tests intended for qualification in a suite.
     #   @return [Boolean]
     #
+    # @!attribute [rw] is_long_duration_test
+    #   Verifies if the test suite is a long duration test.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] root_group
     #   Gets test suite root group.
     #   @return [String]
@@ -640,12 +648,18 @@ module Aws::IoTDeviceAdvisor
     #   Gets the device permission ARN.
     #   @return [String]
     #
+    # @!attribute [rw] protocol
+    #   Gets the MQTT protocol that is configured in the suite definition.
+    #   @return [String]
+    #
     class SuiteDefinitionConfiguration < Struct.new(
       :suite_definition_name,
       :devices,
       :intended_for_qualification,
+      :is_long_duration_test,
       :root_group,
-      :device_permission_role_arn)
+      :device_permission_role_arn,
+      :protocol)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -668,6 +682,14 @@ module Aws::IoTDeviceAdvisor
     #   Specifies if the test suite is intended for qualification.
     #   @return [Boolean]
     #
+    # @!attribute [rw] is_long_duration_test
+    #   Verifies if the test suite is a long duration test.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] protocol
+    #   Gets the MQTT protocol that is configured in the suite definition.
+    #   @return [String]
+    #
     # @!attribute [rw] created_at
     #   Date (in Unix epoch time) when the test suite was created.
     #   @return [Time]
@@ -677,6 +699,8 @@ module Aws::IoTDeviceAdvisor
       :suite_definition_name,
       :default_devices,
       :intended_for_qualification,
+      :is_long_duration_test,
+      :protocol,
       :created_at)
       SENSITIVE = []
       include Aws::Structure
@@ -863,6 +887,10 @@ module Aws::IoTDeviceAdvisor
     #   Provides test case run failure result.
     #   @return [String]
     #
+    # @!attribute [rw] test_scenarios
+    #   Provides the test scenarios for the test case run.
+    #   @return [Array<Types::TestCaseScenario>]
+    #
     class TestCaseRun < Struct.new(
       :test_case_run_id,
       :test_case_definition_id,
@@ -872,7 +900,63 @@ module Aws::IoTDeviceAdvisor
       :end_time,
       :log_url,
       :warnings,
-      :failure)
+      :failure,
+      :test_scenarios)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides test case scenario.
+    #
+    # @!attribute [rw] test_case_scenario_id
+    #   Provides test case scenario ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_case_scenario_type
+    #   Provides test case scenario type. Type is one of the following:
+    #
+    #   * Advanced
+    #
+    #   * Basic
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Provides the test case scenario status. Status is one of the
+    #   following:
+    #
+    #   * `PASS`\: Test passed.
+    #
+    #   * `FAIL`\: Test failed.
+    #
+    #   * `PENDING`\: Test has not started running but is scheduled.
+    #
+    #   * `RUNNING`\: Test is running.
+    #
+    #   * `STOPPING`\: Test is performing cleanup steps. You will see this
+    #     status only if you stop a suite run.
+    #
+    #   * `STOPPED` Test is stopped. You will see this status only if you
+    #     stop a suite run.
+    #
+    #   * `PASS_WITH_WARNINGS`\: Test passed with warnings.
+    #
+    #   * `ERORR`\: Test faced an error when running due to an internal
+    #     issue.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure
+    #   Provides test case scenario failure result.
+    #   @return [String]
+    #
+    # @!attribute [rw] system_message
+    #   @return [String]
+    #
+    class TestCaseScenario < Struct.new(
+      :test_case_scenario_id,
+      :test_case_scenario_type,
+      :status,
+      :failure,
+      :system_message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -928,8 +1012,10 @@ module Aws::IoTDeviceAdvisor
     #             },
     #           ],
     #           intended_for_qualification: false,
+    #           is_long_duration_test: false,
     #           root_group: "RootGroup",
     #           device_permission_role_arn: "AmazonResourceName",
+    #           protocol: "MqttV3_1_1", # accepts MqttV3_1_1, MqttV5
     #         },
     #       }
     #

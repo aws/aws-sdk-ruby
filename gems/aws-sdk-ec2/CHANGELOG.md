@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.324.0 (2022-07-22)
+------------------
+
+* Feature - Added support for EC2 M1 Mac instances. For more information, please visit aws.amazon.com/mac.
+
 1.323.0 (2022-07-18)
 ------------------
 

@@ -15420,6 +15420,49 @@ module Aws::MediaLive
     #
     class RawSettings < Aws::EmptyStructure; end
 
+    # @!attribute [rw] force
+    #   Force a reboot of an input device. If the device is streaming, it
+    #   will stop streaming and begin rebooting within a few seconds of
+    #   sending the command. If the device was streaming prior to the
+    #   reboot, the device will resume streaming when the reboot completes.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RebootInputDevice AWS API Documentation
+    #
+    class RebootInputDevice < Struct.new(
+      :force)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RebootInputDeviceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         force: "NO", # accepts NO, YES
+    #         input_device_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] force
+    #   Whether or not to force reboot the input device.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_device_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RebootInputDeviceRequest AWS API Documentation
+    #
+    class RebootInputDeviceRequest < Struct.new(
+      :force,
+      :input_device_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RebootInputDeviceResponse AWS API Documentation
+    #
+    class RebootInputDeviceResponse < Aws::EmptyStructure; end
+
     # Rec601 Settings
     #
     # @api private
@@ -16877,6 +16920,28 @@ module Aws::MediaLive
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass StartInputDeviceMaintenanceWindowRequest
+    #   data as a hash:
+    #
+    #       {
+    #         input_device_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] input_device_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartInputDeviceMaintenanceWindowRequest AWS API Documentation
+    #
+    class StartInputDeviceMaintenanceWindowRequest < Struct.new(
+      :input_device_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartInputDeviceMaintenanceWindowResponse AWS API Documentation
+    #
+    class StartInputDeviceMaintenanceWindowResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass StartMultiplexRequest
     #   data as a hash:

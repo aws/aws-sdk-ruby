@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.150.0 (2022-07-22)
+------------------
+
+* Feature - This release adds the "ModifyActivityStream" API with support for audit policy state locking and unlocking.
+
 1.149.0 (2022-07-21)
 ------------------
 

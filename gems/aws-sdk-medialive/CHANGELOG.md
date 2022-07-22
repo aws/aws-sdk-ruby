@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.88.0 (2022-07-22)
+------------------
+
+* Feature - Link devices now support remote rebooting. Link devices now support maintenance windows. Maintenance windows allow a Link device to install software updates without stopping the MediaLive channel. The channel will experience a brief loss of input from the device while updates are installed.
+
 1.87.0 (2022-06-29)
 ------------------
 

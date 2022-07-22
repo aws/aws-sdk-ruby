@@ -5744,6 +5744,34 @@ module Aws::MediaLive
       req.send_request(options)
     end
 
+    # Send a reboot command to the specified input device. The device will
+    # begin rebooting within a few seconds of sending the command. When the
+    # reboot is complete, the device’s connection status will change to
+    # connected.
+    #
+    # @option params [String] :force
+    #   Whether or not to force reboot the input device.
+    #
+    # @option params [required, String] :input_device_id
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reboot_input_device({
+    #     force: "NO", # accepts NO, YES
+    #     input_device_id: "__string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RebootInputDevice AWS API Documentation
+    #
+    # @overload reboot_input_device(params = {})
+    # @param [Hash] params ({})
+    def reboot_input_device(params = {}, options = {})
+      req = build_request(:reboot_input_device, params)
+      req.send_request(options)
+    end
+
     # Reject the transfer of the specified input device to your AWS account.
     #
     # @option params [required, String] :input_device_id
@@ -6425,6 +6453,35 @@ module Aws::MediaLive
     # @param [Hash] params ({})
     def start_channel(params = {}, options = {})
       req = build_request(:start_channel, params)
+      req.send_request(options)
+    end
+
+    # Start a maintenance window for the specified input device. Starting a
+    # maintenance window will give the device up to two hours to install
+    # software. If the device was streaming prior to the maintenance, it
+    # will resume streaming when the software is fully installed. Devices
+    # automatically install updates while they are powered on and their
+    # MediaLive channels are stopped. A maintenance window allows you to
+    # update a device without having to stop MediaLive channels that use the
+    # device. The device must remain powered on and connected to the
+    # internet for the duration of the maintenance.
+    #
+    # @option params [required, String] :input_device_id
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_input_device_maintenance_window({
+    #     input_device_id: "__string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartInputDeviceMaintenanceWindow AWS API Documentation
+    #
+    # @overload start_input_device_maintenance_window(params = {})
+    # @param [Hash] params ({})
+    def start_input_device_maintenance_window(params = {}, options = {})
+      req = build_request(:start_input_device_maintenance_window, params)
       req.send_request(options)
     end
 
@@ -9959,7 +10016,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.87.0'
+      context[:gem_version] = '1.88.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
