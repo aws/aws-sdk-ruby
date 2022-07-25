@@ -47,7 +47,7 @@ module Aws::AutoScaling
       data[:scheduled_action_arn]
     end
 
-    # This parameter is no longer used.
+    # This property is no longer used.
     # @return [Time]
     def time
       data[:time]
