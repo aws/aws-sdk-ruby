@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2022-07-26)
+------------------
+
+* Feature - This release introduces support for the automatic scaling of inference units used by Amazon Rekognition Custom Labels models.
+
 1.68.0 (2022-05-16)
 ------------------
 

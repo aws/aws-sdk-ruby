@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.151.0 (2022-07-26)
+------------------
+
+* Feature - Adds support for using RDS Proxies with RDS for MariaDB databases.
+
 1.150.0 (2022-07-22)
 ------------------
 

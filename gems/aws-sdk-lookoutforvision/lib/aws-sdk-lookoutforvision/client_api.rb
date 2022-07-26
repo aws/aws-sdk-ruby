@@ -366,6 +366,8 @@ module Aws::LookoutforVision
     ModelDescription.add_member(:evaluation_result, Shapes::ShapeRef.new(shape: OutputS3Object, location_name: "EvaluationResult"))
     ModelDescription.add_member(:evaluation_end_timestamp, Shapes::ShapeRef.new(shape: DateTime, location_name: "EvaluationEndTimestamp"))
     ModelDescription.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
+    ModelDescription.add_member(:min_inference_units, Shapes::ShapeRef.new(shape: InferenceUnits, location_name: "MinInferenceUnits"))
+    ModelDescription.add_member(:max_inference_units, Shapes::ShapeRef.new(shape: InferenceUnits, location_name: "MaxInferenceUnits"))
     ModelDescription.struct_class = Types::ModelDescription
 
     ModelMetadata.add_member(:creation_timestamp, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreationTimestamp"))
@@ -467,6 +469,7 @@ module Aws::LookoutforVision
     StartModelRequest.add_member(:model_version, Shapes::ShapeRef.new(shape: ModelVersion, required: true, location: "uri", location_name: "modelVersion"))
     StartModelRequest.add_member(:min_inference_units, Shapes::ShapeRef.new(shape: InferenceUnits, required: true, location_name: "MinInferenceUnits"))
     StartModelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amzn-Client-Token", metadata: {"idempotencyToken"=>true}))
+    StartModelRequest.add_member(:max_inference_units, Shapes::ShapeRef.new(shape: InferenceUnits, location_name: "MaxInferenceUnits"))
     StartModelRequest.struct_class = Types::StartModelRequest
 
     StartModelResponse.add_member(:status, Shapes::ShapeRef.new(shape: ModelHostingStatus, location_name: "Status"))

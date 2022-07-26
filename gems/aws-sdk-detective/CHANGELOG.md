@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2022-07-26)
+------------------
+
+* Feature - Added the ability to get data source package information for the behavior graph. Graph administrators can now start (or stop) optional datasources on the behavior graph.
+
 1.28.0 (2022-02-24)
 ------------------
 

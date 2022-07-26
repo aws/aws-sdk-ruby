@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2022-07-26)
+------------------
+
+* Feature - Documentation updates for AWS Security Hub
+
 1.67.0 (2022-06-16)
 ------------------
 

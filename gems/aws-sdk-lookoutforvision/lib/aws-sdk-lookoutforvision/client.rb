@@ -885,6 +885,8 @@ module Aws::LookoutforVision
     #   resp.model_description.evaluation_result.key #=> String
     #   resp.model_description.evaluation_end_timestamp #=> Time
     #   resp.model_description.kms_key_id #=> String
+    #   resp.model_description.min_inference_units #=> Integer
+    #   resp.model_description.max_inference_units #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/DescribeModel AWS API Documentation
     #
@@ -1267,7 +1269,8 @@ module Aws::LookoutforVision
       req.send_request(options)
     end
 
-    # Lists the Amazon Lookout for Vision projects in your AWS account.
+    # Lists the Amazon Lookout for Vision projects in your AWS account that
+    # are in the AWS Region in which you call `ListProjects`.
     #
     # The `ListProjects` operation is eventually consistent. Recent calls to
     # `CreateProject` and `DeleteProject` might take a while to appear in
@@ -1404,6 +1407,11 @@ module Aws::LookoutforVision
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Integer] :max_inference_units
+    #   The maximum number of inference units to use for auto-scaling the
+    #   model. If you don't specify a value, Amazon Lookout for Vision
+    #   doesn't auto-scale the model.
+    #
     # @return [Types::StartModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartModelResponse#status #status} => String
@@ -1415,6 +1423,7 @@ module Aws::LookoutforVision
     #     model_version: "ModelVersion", # required
     #     min_inference_units: 1, # required
     #     client_token: "ClientToken",
+    #     max_inference_units: 1,
     #   })
     #
     # @example Response structure
@@ -1777,7 +1786,7 @@ module Aws::LookoutforVision
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lookoutforvision'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

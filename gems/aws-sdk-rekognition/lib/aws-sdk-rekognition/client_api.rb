@@ -1239,6 +1239,7 @@ module Aws::Rekognition
     ProjectVersionDescription.add_member(:evaluation_result, Shapes::ShapeRef.new(shape: EvaluationResult, location_name: "EvaluationResult"))
     ProjectVersionDescription.add_member(:manifest_summary, Shapes::ShapeRef.new(shape: GroundTruthManifest, location_name: "ManifestSummary"))
     ProjectVersionDescription.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
+    ProjectVersionDescription.add_member(:max_inference_units, Shapes::ShapeRef.new(shape: InferenceUnits, location_name: "MaxInferenceUnits"))
     ProjectVersionDescription.struct_class = Types::ProjectVersionDescription
 
     ProjectVersionDescriptions.member = Shapes::ShapeRef.new(shape: ProjectVersionDescription)
@@ -1423,6 +1424,7 @@ module Aws::Rekognition
 
     StartProjectVersionRequest.add_member(:project_version_arn, Shapes::ShapeRef.new(shape: ProjectVersionArn, required: true, location_name: "ProjectVersionArn"))
     StartProjectVersionRequest.add_member(:min_inference_units, Shapes::ShapeRef.new(shape: InferenceUnits, required: true, location_name: "MinInferenceUnits"))
+    StartProjectVersionRequest.add_member(:max_inference_units, Shapes::ShapeRef.new(shape: InferenceUnits, location_name: "MaxInferenceUnits"))
     StartProjectVersionRequest.struct_class = Types::StartProjectVersionRequest
 
     StartProjectVersionResponse.add_member(:status, Shapes::ShapeRef.new(shape: ProjectVersionStatus, location_name: "Status"))

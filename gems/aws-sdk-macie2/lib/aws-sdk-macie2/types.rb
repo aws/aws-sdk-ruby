@@ -1710,7 +1710,10 @@ module Aws::Macie2
     # @!attribute [rw] occurrences
     #   Specifies the location of 1-15 occurrences of sensitive data that
     #   was detected by a managed data identifier or a custom data
-    #   identifier and produced a sensitive data finding.
+    #   identifier and produced a sensitive data finding. Depending on the
+    #   file or storage format of the affected S3 object, you can optionally
+    #   retrieve (reveal) sample occurrences of the sensitive data that was
+    #   detected.
     #   @return [Types::Occurrences]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/CustomDetection AWS API Documentation
@@ -1778,7 +1781,10 @@ module Aws::Macie2
     # @!attribute [rw] occurrences
     #   Specifies the location of 1-15 occurrences of sensitive data that
     #   was detected by a managed data identifier or a custom data
-    #   identifier and produced a sensitive data finding.
+    #   identifier and produced a sensitive data finding. Depending on the
+    #   file or storage format of the affected S3 object, you can optionally
+    #   retrieve (reveal) sample occurrences of the sensitive data that was
+    #   detected.
     #   @return [Types::Occurrences]
     #
     # @!attribute [rw] type
@@ -2130,6 +2136,20 @@ module Aws::Macie2
     class DescribeOrganizationConfigurationResponse < Struct.new(
       :auto_enable,
       :max_account_limit_reached)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies 1-10 occurrences of a specific type of sensitive data
+    # reported by a finding.
+    #
+    # @!attribute [rw] value
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DetectedDataDetails AWS API Documentation
+    #
+    class DetectedDataDetails < Struct.new(
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3215,6 +3235,117 @@ module Aws::Macie2
       :relationship_status,
       :tags,
       :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetRevealConfigurationRequest AWS API Documentation
+    #
+    class GetRevealConfigurationRequest < Aws::EmptyStructure; end
+
+    # Provides information about the configuration settings for retrieving
+    # occurrences of sensitive data reported by findings, and the status of
+    # the configuration for an Amazon Macie account.
+    #
+    # @!attribute [rw] configuration
+    #   Specifies the configuration settings for retrieving occurrences of
+    #   sensitive data reported by findings, and the status of the
+    #   configuration for an Amazon Macie account. When you enable the
+    #   configuration for the first time, your request must specify an AWS
+    #   Key Management Service (AWS KMS) key. Otherwise, an error occurs.
+    #   Macie uses the specified key to encrypt the sensitive data that you
+    #   retrieve.
+    #   @return [Types::RevealConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetRevealConfigurationResponse AWS API Documentation
+    #
+    class GetRevealConfigurationResponse < Struct.new(
+      :configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetSensitiveDataOccurrencesAvailabilityRequest
+    #   data as a hash:
+    #
+    #       {
+    #         finding_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] finding_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetSensitiveDataOccurrencesAvailabilityRequest AWS API Documentation
+    #
+    class GetSensitiveDataOccurrencesAvailabilityRequest < Struct.new(
+      :finding_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about whether occurrences of sensitive data can
+    # be retrieved for a finding and, if not, why the data can't be
+    # retrieved.
+    #
+    # @!attribute [rw] code
+    #   Specifies whether occurrences of sensitive data can be retrieved for
+    #   a finding. Possible values are:
+    #   @return [String]
+    #
+    # @!attribute [rw] reasons
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetSensitiveDataOccurrencesAvailabilityResponse AWS API Documentation
+    #
+    class GetSensitiveDataOccurrencesAvailabilityResponse < Struct.new(
+      :code,
+      :reasons)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetSensitiveDataOccurrencesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         finding_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] finding_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetSensitiveDataOccurrencesRequest AWS API Documentation
+    #
+    class GetSensitiveDataOccurrencesRequest < Struct.new(
+      :finding_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the results of a request to retrieve occurrences of sensitive
+    # data reported by a finding.
+    #
+    # @!attribute [rw] error
+    #   @return [String]
+    #
+    # @!attribute [rw] sensitive_data_occurrences
+    #   Specifies a type of sensitive data reported by a finding and
+    #   provides occurrences of the specified type of sensitive data.
+    #   @return [Hash<String,Array<Types::DetectedDataDetails>>]
+    #
+    # @!attribute [rw] status
+    #   The status of a request to retrieve occurrences of sensitive data
+    #   reported by a finding. Possible values are:
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetSensitiveDataOccurrencesResponse AWS API Documentation
+    #
+    class GetSensitiveDataOccurrencesResponse < Struct.new(
+      :error,
+      :sensitive_data_occurrences,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4606,7 +4737,9 @@ module Aws::Macie2
 
     # Specifies the location of 1-15 occurrences of sensitive data that was
     # detected by a managed data identifier or a custom data identifier and
-    # produced a sensitive data finding.
+    # produced a sensitive data finding. Depending on the file or storage
+    # format of the affected S3 object, you can optionally retrieve (reveal)
+    # sample occurrences of the sensitive data that was detected.
     #
     # @!attribute [rw] cells
     #   Specifies the location of occurrences of sensitive data in a
@@ -4878,6 +5011,39 @@ module Aws::Macie2
     class ResourcesAffected < Struct.new(
       :s3_bucket,
       :s3_object)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the configuration settings for retrieving occurrences of
+    # sensitive data reported by findings, and the status of the
+    # configuration for an Amazon Macie account. When you enable the
+    # configuration for the first time, your request must specify an AWS Key
+    # Management Service (AWS KMS) key. Otherwise, an error occurs. Macie
+    # uses the specified key to encrypt the sensitive data that you
+    # retrieve.
+    #
+    # @note When making an API call, you may pass RevealConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         kms_key_id: "__stringMin1Max2048",
+    #         status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #       }
+    #
+    # @!attribute [rw] kms_key_id
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the configuration for the Amazon Macie account. In a
+    #   request, valid values are:
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/RevealConfiguration AWS API Documentation
+    #
+    class RevealConfiguration < Struct.new(
+      :kms_key_id,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6328,6 +6494,20 @@ module Aws::Macie2
       include Aws::Structure
     end
 
+    # Provides information about an error that occurred due to an
+    # unprocessable entity.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UnprocessableEntityException AWS API Documentation
+    #
+    class UnprocessableEntityException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information about an account-related request that hasn't
     # been processed.
     #
@@ -6599,6 +6779,60 @@ module Aws::Macie2
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UpdateOrganizationConfigurationResponse AWS API Documentation
     #
     class UpdateOrganizationConfigurationResponse < Aws::EmptyStructure; end
+
+    # Specifies the configuration settings for retrieving occurrences of
+    # sensitive data reported by findings, and the status of the
+    # configuration for an Amazon Macie account.
+    #
+    # @note When making an API call, you may pass UpdateRevealConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         configuration: { # required
+    #           kms_key_id: "__stringMin1Max2048",
+    #           status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #         },
+    #       }
+    #
+    # @!attribute [rw] configuration
+    #   Specifies the configuration settings for retrieving occurrences of
+    #   sensitive data reported by findings, and the status of the
+    #   configuration for an Amazon Macie account. When you enable the
+    #   configuration for the first time, your request must specify an AWS
+    #   Key Management Service (AWS KMS) key. Otherwise, an error occurs.
+    #   Macie uses the specified key to encrypt the sensitive data that you
+    #   retrieve.
+    #   @return [Types::RevealConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UpdateRevealConfigurationRequest AWS API Documentation
+    #
+    class UpdateRevealConfigurationRequest < Struct.new(
+      :configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about updated configuration settings for
+    # retrieving occurrences of sensitive data reported by findings, and the
+    # status of the configuration for an Amazon Macie account.
+    #
+    # @!attribute [rw] configuration
+    #   Specifies the configuration settings for retrieving occurrences of
+    #   sensitive data reported by findings, and the status of the
+    #   configuration for an Amazon Macie account. When you enable the
+    #   configuration for the first time, your request must specify an AWS
+    #   Key Management Service (AWS KMS) key. Otherwise, an error occurs.
+    #   Macie uses the specified key to encrypt the sensitive data that you
+    #   retrieve.
+    #   @return [Types::RevealConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UpdateRevealConfigurationResponse AWS API Documentation
+    #
+    class UpdateRevealConfigurationResponse < Struct.new(
+      :configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Provides data for a specific usage metric and the corresponding quota
     # for an Amazon Macie account.

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2022-07-26)
+------------------
+
+* Feature - Amazon GuardDuty introduces a new Malware Protection feature that triggers malware scan on selected EC2 instance resources, after the service detects a potentially malicious activity.
+
 1.58.0 (2022-06-15)
 ------------------
 

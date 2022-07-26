@@ -5194,8 +5194,9 @@ module Aws::RDS
     #   The kinds of databases that the proxy can connect to. This value
     #   determines which database network protocol the proxy recognizes when
     #   it interprets network traffic to and from the database. For Aurora
-    #   MySQL and RDS for MySQL databases, specify `MYSQL`. For Aurora
-    #   PostgreSQL and RDS for PostgreSQL databases, specify `POSTGRESQL`.
+    #   MySQL, RDS for MariaDB, and RDS for MySQL databases, specify
+    #   `MYSQL`. For Aurora PostgreSQL and RDS for PostgreSQL databases,
+    #   specify `POSTGRESQL`.
     #   @return [String]
     #
     # @!attribute [rw] auth
@@ -8503,8 +8504,9 @@ module Aws::RDS
     #   The kinds of databases that the proxy can connect to. This value
     #   determines which database network protocol the proxy recognizes when
     #   it interprets network traffic to and from the database. `MYSQL`
-    #   supports Aurora MySQL and RDS for MySQL databases. `POSTGRESQL`
-    #   supports Aurora PostgreSQL and RDS for PostgreSQL databases.
+    #   supports Aurora MySQL, RDS for MariaDB, and RDS for MySQL databases.
+    #   `POSTGRESQL` supports Aurora PostgreSQL and RDS for PostgreSQL
+    #   databases.
     #   @return [String]
     #
     # @!attribute [rw] vpc_id

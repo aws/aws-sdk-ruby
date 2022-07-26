@@ -1047,9 +1047,10 @@ module Aws::Rekognition
     #
     # @!attribute [rw] regions_of_interest
     #   Specifies locations in the frames where Amazon Rekognition checks
-    #   for objects or people. You can specify up to 10 regions of interest.
-    #   This is an optional parameter for label detection stream processors
-    #   and should not be used to create a face search stream processor.
+    #   for objects or people. You can specify up to 10 regions of interest,
+    #   and each region has either a polygon or a bounding box. This is an
+    #   optional parameter for label detection stream processors and should
+    #   not be used to create a face search stream processor.
     #   @return [Array<Types::RegionOfInterest>]
     #
     # @!attribute [rw] data_sharing_preference
@@ -4823,6 +4824,12 @@ module Aws::Rekognition
     #   that was used to encrypt the model during training.
     #   @return [String]
     #
+    # @!attribute [rw] max_inference_units
+    #   The maximum number of inference units Amazon Rekognition Custom
+    #   Labels uses to auto-scale the model. For more information, see
+    #   StartProjectVersion.
+    #   @return [Integer]
+    #
     class ProjectVersionDescription < Struct.new(
       :project_version_arn,
       :creation_timestamp,
@@ -4836,7 +4843,8 @@ module Aws::Rekognition
       :testing_data_result,
       :evaluation_result,
       :manifest_summary,
-      :kms_key_id)
+      :kms_key_id,
+      :max_inference_units)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5075,7 +5083,7 @@ module Aws::Rekognition
 
     # Specifies a location within the frame that Rekognition checks for
     # objects of interest such as text, labels, or faces. It uses a
-    # `BoundingBox` or object or `Polygon` to set a region of the screen.
+    # `BoundingBox` or `Polygon` to set a region of the screen.
     #
     # A word, face, or label is included in the region if it is more than
     # half in that region. If there is more than one region, the word, face,
@@ -5970,6 +5978,7 @@ module Aws::Rekognition
     #       {
     #         project_version_arn: "ProjectVersionArn", # required
     #         min_inference_units: 1, # required
+    #         max_inference_units: 1,
     #       }
     #
     # @!attribute [rw] project_version_arn
@@ -5979,15 +5988,27 @@ module Aws::Rekognition
     #
     # @!attribute [rw] min_inference_units
     #   The minimum number of inference units to use. A single inference
-    #   unit represents 1 hour of processing and can support up to 5
-    #   Transaction Pers Second (TPS). Use a higher number to increase the
-    #   TPS throughput of your model. You are charged for the number of
-    #   inference units that you use.
+    #   unit represents 1 hour of processing.
+    #
+    #   For information about the number of transactions per second (TPS)
+    #   that an inference unit can support, see *Running a trained Amazon
+    #   Rekognition Custom Labels model* in the Amazon Rekognition Custom
+    #   Labels Guide.
+    #
+    #   Use a higher number to increase the TPS throughput of your model.
+    #   You are charged for the number of inference units that you use.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_inference_units
+    #   The maximum number of inference units to use for auto-scaling the
+    #   model. If you don't specify a value, Amazon Rekognition Custom
+    #   Labels doesn't auto-scale the model.
     #   @return [Integer]
     #
     class StartProjectVersionRequest < Struct.new(
       :project_version_arn,
-      :min_inference_units)
+      :min_inference_units,
+      :max_inference_units)
       SENSITIVE = []
       include Aws::Structure
     end

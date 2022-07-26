@@ -5663,8 +5663,9 @@ module Aws::RDS
     #   The kinds of databases that the proxy can connect to. This value
     #   determines which database network protocol the proxy recognizes when
     #   it interprets network traffic to and from the database. For Aurora
-    #   MySQL and RDS for MySQL databases, specify `MYSQL`. For Aurora
-    #   PostgreSQL and RDS for PostgreSQL databases, specify `POSTGRESQL`.
+    #   MySQL, RDS for MariaDB, and RDS for MySQL databases, specify `MYSQL`.
+    #   For Aurora PostgreSQL and RDS for PostgreSQL databases, specify
+    #   `POSTGRESQL`.
     #
     # @option params [required, Array<Types::UserAuthConfig>] :auth
     #   The authorization mechanism that the proxy uses.
@@ -22631,7 +22632,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.150.0'
+      context[:gem_version] = '1.151.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

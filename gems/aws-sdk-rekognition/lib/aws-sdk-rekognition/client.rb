@@ -1031,9 +1031,10 @@ module Aws::Rekognition
     #
     # @option params [Array<Types::RegionOfInterest>] :regions_of_interest
     #   Specifies locations in the frames where Amazon Rekognition checks for
-    #   objects or people. You can specify up to 10 regions of interest. This
-    #   is an optional parameter for label detection stream processors and
-    #   should not be used to create a face search stream processor.
+    #   objects or people. You can specify up to 10 regions of interest, and
+    #   each region has either a polygon or a bounding box. This is an
+    #   optional parameter for label detection stream processors and should
+    #   not be used to create a face search stream processor.
     #
     # @option params [Types::StreamProcessorDataSharingPreference] :data_sharing_preference
     #   Shows whether you are sharing data with Rekognition to improve model
@@ -1515,6 +1516,7 @@ module Aws::Rekognition
     #   resp.project_version_descriptions[0].manifest_summary.s3_object.name #=> String
     #   resp.project_version_descriptions[0].manifest_summary.s3_object.version #=> String
     #   resp.project_version_descriptions[0].kms_key_id #=> String
+    #   resp.project_version_descriptions[0].max_inference_units #=> Integer
     #   resp.next_token #=> String
     #
     #
@@ -5401,6 +5403,9 @@ module Aws::Rekognition
     #
     #  </note>
     #
+    # For more information, see *Running a trained Amazon Rekognition Custom
+    # Labels model* in the Amazon Rekognition Custom Labels Guide.
+    #
     # This operation requires permissions to perform the
     # `rekognition:StartProjectVersion` action.
     #
@@ -5410,10 +5415,20 @@ module Aws::Rekognition
     #
     # @option params [required, Integer] :min_inference_units
     #   The minimum number of inference units to use. A single inference unit
-    #   represents 1 hour of processing and can support up to 5 Transaction
-    #   Pers Second (TPS). Use a higher number to increase the TPS throughput
-    #   of your model. You are charged for the number of inference units that
-    #   you use.
+    #   represents 1 hour of processing.
+    #
+    #   For information about the number of transactions per second (TPS) that
+    #   an inference unit can support, see *Running a trained Amazon
+    #   Rekognition Custom Labels model* in the Amazon Rekognition Custom
+    #   Labels Guide.
+    #
+    #   Use a higher number to increase the TPS throughput of your model. You
+    #   are charged for the number of inference units that you use.
+    #
+    # @option params [Integer] :max_inference_units
+    #   The maximum number of inference units to use for auto-scaling the
+    #   model. If you don't specify a value, Amazon Rekognition Custom Labels
+    #   doesn't auto-scale the model.
     #
     # @return [Types::StartProjectVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5424,6 +5439,7 @@ module Aws::Rekognition
     #   resp = client.start_project_version({
     #     project_version_arn: "ProjectVersionArn", # required
     #     min_inference_units: 1, # required
+    #     max_inference_units: 1,
     #   })
     #
     # @example Response structure
@@ -5960,7 +5976,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2022-07-26)
+------------------
+
+* Feature - AWS Transfer Family now supports Applicability Statement 2 (AS2), a network protocol used for the secure and reliable transfer of critical Business-to-Business (B2B) data over the public internet using HTTP/HTTPS as the transport mechanism.
+
 1.56.0 (2022-06-22)
 ------------------
 
