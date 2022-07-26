@@ -146,6 +146,9 @@ module Aws
         data.to_h
       end
 
+      def to_json(options = {})
+        to_h.to_json(options)
+      end
     end
 
     # The actual decorator module implementation. It is in a distinct module

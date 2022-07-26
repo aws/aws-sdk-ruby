@@ -1,10 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix `to_json` usage on pageable responses when using Rails.
+
 3.131.3 (2022-07-18)
 ------------------
 
-* Issue - Add support for serializing shapes on the body with `jsonvalue` members. 
+* Issue - Add support for serializing shapes on the body with `jsonvalue` members.
 
 3.131.2 (2022-06-20)
 ------------------
