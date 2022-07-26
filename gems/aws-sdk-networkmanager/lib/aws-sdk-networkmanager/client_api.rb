@@ -18,6 +18,10 @@ module Aws::NetworkManager
     AcceptAttachmentRequest = Shapes::StructureShape.new(name: 'AcceptAttachmentRequest')
     AcceptAttachmentResponse = Shapes::StructureShape.new(name: 'AcceptAttachmentResponse')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AccountId = Shapes::StringShape.new(name: 'AccountId')
+    AccountStatus = Shapes::StructureShape.new(name: 'AccountStatus')
+    AccountStatusList = Shapes::ListShape.new(name: 'AccountStatusList')
+    Action = Shapes::StringShape.new(name: 'Action')
     AssociateConnectPeerRequest = Shapes::StructureShape.new(name: 'AssociateConnectPeerRequest')
     AssociateConnectPeerResponse = Shapes::StructureShape.new(name: 'AssociateConnectPeerResponse')
     AssociateCustomerGatewayRequest = Shapes::StructureShape.new(name: 'AssociateCustomerGatewayRequest')
@@ -36,6 +40,7 @@ module Aws::NetworkManager
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ChangeAction = Shapes::StringShape.new(name: 'ChangeAction')
     ChangeSetState = Shapes::StringShape.new(name: 'ChangeSetState')
+    ChangeStatus = Shapes::StringShape.new(name: 'ChangeStatus')
     ChangeType = Shapes::StringShape.new(name: 'ChangeType')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
@@ -67,6 +72,9 @@ module Aws::NetworkManager
     CoreNetwork = Shapes::StructureShape.new(name: 'CoreNetwork')
     CoreNetworkArn = Shapes::StringShape.new(name: 'CoreNetworkArn')
     CoreNetworkChange = Shapes::StructureShape.new(name: 'CoreNetworkChange')
+    CoreNetworkChangeEvent = Shapes::StructureShape.new(name: 'CoreNetworkChangeEvent')
+    CoreNetworkChangeEventList = Shapes::ListShape.new(name: 'CoreNetworkChangeEventList')
+    CoreNetworkChangeEventValues = Shapes::StructureShape.new(name: 'CoreNetworkChangeEventValues')
     CoreNetworkChangeList = Shapes::ListShape.new(name: 'CoreNetworkChangeList')
     CoreNetworkChangeValues = Shapes::StructureShape.new(name: 'CoreNetworkChangeValues')
     CoreNetworkEdge = Shapes::StructureShape.new(name: 'CoreNetworkEdge')
@@ -104,6 +112,10 @@ module Aws::NetworkManager
     CreateSiteResponse = Shapes::StructureShape.new(name: 'CreateSiteResponse')
     CreateSiteToSiteVpnAttachmentRequest = Shapes::StructureShape.new(name: 'CreateSiteToSiteVpnAttachmentRequest')
     CreateSiteToSiteVpnAttachmentResponse = Shapes::StructureShape.new(name: 'CreateSiteToSiteVpnAttachmentResponse')
+    CreateTransitGatewayPeeringRequest = Shapes::StructureShape.new(name: 'CreateTransitGatewayPeeringRequest')
+    CreateTransitGatewayPeeringResponse = Shapes::StructureShape.new(name: 'CreateTransitGatewayPeeringResponse')
+    CreateTransitGatewayRouteTableAttachmentRequest = Shapes::StructureShape.new(name: 'CreateTransitGatewayRouteTableAttachmentRequest')
+    CreateTransitGatewayRouteTableAttachmentResponse = Shapes::StructureShape.new(name: 'CreateTransitGatewayRouteTableAttachmentResponse')
     CreateVpcAttachmentRequest = Shapes::StructureShape.new(name: 'CreateVpcAttachmentRequest')
     CreateVpcAttachmentResponse = Shapes::StructureShape.new(name: 'CreateVpcAttachmentResponse')
     CustomerGatewayArn = Shapes::StringShape.new(name: 'CustomerGatewayArn')
@@ -128,6 +140,8 @@ module Aws::NetworkManager
     DeleteGlobalNetworkResponse = Shapes::StructureShape.new(name: 'DeleteGlobalNetworkResponse')
     DeleteLinkRequest = Shapes::StructureShape.new(name: 'DeleteLinkRequest')
     DeleteLinkResponse = Shapes::StructureShape.new(name: 'DeleteLinkResponse')
+    DeletePeeringRequest = Shapes::StructureShape.new(name: 'DeletePeeringRequest')
+    DeletePeeringResponse = Shapes::StructureShape.new(name: 'DeletePeeringResponse')
     DeleteResourcePolicyRequest = Shapes::StructureShape.new(name: 'DeleteResourcePolicyRequest')
     DeleteResourcePolicyResponse = Shapes::StructureShape.new(name: 'DeleteResourcePolicyResponse')
     DeleteSiteRequest = Shapes::StructureShape.new(name: 'DeleteSiteRequest')
@@ -169,6 +183,8 @@ module Aws::NetworkManager
     GetConnectPeerResponse = Shapes::StructureShape.new(name: 'GetConnectPeerResponse')
     GetConnectionsRequest = Shapes::StructureShape.new(name: 'GetConnectionsRequest')
     GetConnectionsResponse = Shapes::StructureShape.new(name: 'GetConnectionsResponse')
+    GetCoreNetworkChangeEventsRequest = Shapes::StructureShape.new(name: 'GetCoreNetworkChangeEventsRequest')
+    GetCoreNetworkChangeEventsResponse = Shapes::StructureShape.new(name: 'GetCoreNetworkChangeEventsResponse')
     GetCoreNetworkChangeSetRequest = Shapes::StructureShape.new(name: 'GetCoreNetworkChangeSetRequest')
     GetCoreNetworkChangeSetResponse = Shapes::StructureShape.new(name: 'GetCoreNetworkChangeSetResponse')
     GetCoreNetworkPolicyRequest = Shapes::StructureShape.new(name: 'GetCoreNetworkPolicyRequest')
@@ -203,8 +219,12 @@ module Aws::NetworkManager
     GetSitesResponse = Shapes::StructureShape.new(name: 'GetSitesResponse')
     GetTransitGatewayConnectPeerAssociationsRequest = Shapes::StructureShape.new(name: 'GetTransitGatewayConnectPeerAssociationsRequest')
     GetTransitGatewayConnectPeerAssociationsResponse = Shapes::StructureShape.new(name: 'GetTransitGatewayConnectPeerAssociationsResponse')
+    GetTransitGatewayPeeringRequest = Shapes::StructureShape.new(name: 'GetTransitGatewayPeeringRequest')
+    GetTransitGatewayPeeringResponse = Shapes::StructureShape.new(name: 'GetTransitGatewayPeeringResponse')
     GetTransitGatewayRegistrationsRequest = Shapes::StructureShape.new(name: 'GetTransitGatewayRegistrationsRequest')
     GetTransitGatewayRegistrationsResponse = Shapes::StructureShape.new(name: 'GetTransitGatewayRegistrationsResponse')
+    GetTransitGatewayRouteTableAttachmentRequest = Shapes::StructureShape.new(name: 'GetTransitGatewayRouteTableAttachmentRequest')
+    GetTransitGatewayRouteTableAttachmentResponse = Shapes::StructureShape.new(name: 'GetTransitGatewayRouteTableAttachmentResponse')
     GetVpcAttachmentRequest = Shapes::StructureShape.new(name: 'GetVpcAttachmentRequest')
     GetVpcAttachmentResponse = Shapes::StructureShape.new(name: 'GetVpcAttachmentResponse')
     GlobalNetwork = Shapes::StructureShape.new(name: 'GlobalNetwork')
@@ -233,6 +253,10 @@ module Aws::NetworkManager
     ListCoreNetworkPolicyVersionsResponse = Shapes::StructureShape.new(name: 'ListCoreNetworkPolicyVersionsResponse')
     ListCoreNetworksRequest = Shapes::StructureShape.new(name: 'ListCoreNetworksRequest')
     ListCoreNetworksResponse = Shapes::StructureShape.new(name: 'ListCoreNetworksResponse')
+    ListOrganizationServiceAccessStatusRequest = Shapes::StructureShape.new(name: 'ListOrganizationServiceAccessStatusRequest')
+    ListOrganizationServiceAccessStatusResponse = Shapes::StructureShape.new(name: 'ListOrganizationServiceAccessStatusResponse')
+    ListPeeringsRequest = Shapes::StructureShape.new(name: 'ListPeeringsRequest')
+    ListPeeringsResponse = Shapes::StructureShape.new(name: 'ListPeeringsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     Location = Shapes::StructureShape.new(name: 'Location')
@@ -251,8 +275,16 @@ module Aws::NetworkManager
     NetworkTelemetry = Shapes::StructureShape.new(name: 'NetworkTelemetry')
     NetworkTelemetryList = Shapes::ListShape.new(name: 'NetworkTelemetryList')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    OrganizationAwsServiceAccessStatus = Shapes::StringShape.new(name: 'OrganizationAwsServiceAccessStatus')
+    OrganizationId = Shapes::StringShape.new(name: 'OrganizationId')
+    OrganizationStatus = Shapes::StructureShape.new(name: 'OrganizationStatus')
     PathComponent = Shapes::StructureShape.new(name: 'PathComponent')
     PathComponentList = Shapes::ListShape.new(name: 'PathComponentList')
+    Peering = Shapes::StructureShape.new(name: 'Peering')
+    PeeringId = Shapes::StringShape.new(name: 'PeeringId')
+    PeeringList = Shapes::ListShape.new(name: 'PeeringList')
+    PeeringState = Shapes::StringShape.new(name: 'PeeringState')
+    PeeringType = Shapes::StringShape.new(name: 'PeeringType')
     ProposedSegmentChange = Shapes::StructureShape.new(name: 'ProposedSegmentChange')
     PutCoreNetworkPolicyRequest = Shapes::StructureShape.new(name: 'PutCoreNetworkPolicyRequest')
     PutCoreNetworkPolicyResponse = Shapes::StructureShape.new(name: 'PutCoreNetworkPolicyResponse')
@@ -287,6 +319,7 @@ module Aws::NetworkManager
     RouteTableType = Shapes::StringShape.new(name: 'RouteTableType')
     RouteType = Shapes::StringShape.new(name: 'RouteType')
     RouteTypeList = Shapes::ListShape.new(name: 'RouteTypeList')
+    SLRDeploymentStatus = Shapes::StringShape.new(name: 'SLRDeploymentStatus')
     ServerSideString = Shapes::StringShape.new(name: 'ServerSideString')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     Site = Shapes::StructureShape.new(name: 'Site')
@@ -296,6 +329,8 @@ module Aws::NetworkManager
     SiteList = Shapes::ListShape.new(name: 'SiteList')
     SiteState = Shapes::StringShape.new(name: 'SiteState')
     SiteToSiteVpnAttachment = Shapes::StructureShape.new(name: 'SiteToSiteVpnAttachment')
+    StartOrganizationServiceAccessUpdateRequest = Shapes::StructureShape.new(name: 'StartOrganizationServiceAccessUpdateRequest')
+    StartOrganizationServiceAccessUpdateResponse = Shapes::StructureShape.new(name: 'StartOrganizationServiceAccessUpdateResponse')
     StartRouteAnalysisRequest = Shapes::StructureShape.new(name: 'StartRouteAnalysisRequest')
     StartRouteAnalysisResponse = Shapes::StructureShape.new(name: 'StartRouteAnalysisResponse')
     SubnetArn = Shapes::StringShape.new(name: 'SubnetArn')
@@ -317,11 +352,13 @@ module Aws::NetworkManager
     TransitGatewayConnectPeerAssociation = Shapes::StructureShape.new(name: 'TransitGatewayConnectPeerAssociation')
     TransitGatewayConnectPeerAssociationList = Shapes::ListShape.new(name: 'TransitGatewayConnectPeerAssociationList')
     TransitGatewayConnectPeerAssociationState = Shapes::StringShape.new(name: 'TransitGatewayConnectPeerAssociationState')
+    TransitGatewayPeering = Shapes::StructureShape.new(name: 'TransitGatewayPeering')
     TransitGatewayRegistration = Shapes::StructureShape.new(name: 'TransitGatewayRegistration')
     TransitGatewayRegistrationList = Shapes::ListShape.new(name: 'TransitGatewayRegistrationList')
     TransitGatewayRegistrationState = Shapes::StringShape.new(name: 'TransitGatewayRegistrationState')
     TransitGatewayRegistrationStateReason = Shapes::StructureShape.new(name: 'TransitGatewayRegistrationStateReason')
     TransitGatewayRouteTableArn = Shapes::StringShape.new(name: 'TransitGatewayRouteTableArn')
+    TransitGatewayRouteTableAttachment = Shapes::StructureShape.new(name: 'TransitGatewayRouteTableAttachment')
     TunnelProtocol = Shapes::StringShape.new(name: 'TunnelProtocol')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
@@ -362,6 +399,12 @@ module Aws::NetworkManager
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ServerSideString, required: true, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AccountStatus.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
+    AccountStatus.add_member(:slr_deployment_status, Shapes::ShapeRef.new(shape: SLRDeploymentStatus, location_name: "SLRDeploymentStatus"))
+    AccountStatus.struct_class = Types::AccountStatus
+
+    AccountStatusList.member = Shapes::ShapeRef.new(shape: AccountStatus)
 
     AssociateConnectPeerRequest.add_member(:global_network_id, Shapes::ShapeRef.new(shape: GlobalNetworkId, required: true, location: "uri", location_name: "globalNetworkId"))
     AssociateConnectPeerRequest.add_member(:connect_peer_id, Shapes::ShapeRef.new(shape: ConnectPeerId, required: true, location_name: "ConnectPeerId"))
@@ -523,7 +566,24 @@ module Aws::NetworkManager
     CoreNetworkChange.add_member(:identifier, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "Identifier"))
     CoreNetworkChange.add_member(:previous_values, Shapes::ShapeRef.new(shape: CoreNetworkChangeValues, location_name: "PreviousValues"))
     CoreNetworkChange.add_member(:new_values, Shapes::ShapeRef.new(shape: CoreNetworkChangeValues, location_name: "NewValues"))
+    CoreNetworkChange.add_member(:identifier_path, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "IdentifierPath"))
     CoreNetworkChange.struct_class = Types::CoreNetworkChange
+
+    CoreNetworkChangeEvent.add_member(:type, Shapes::ShapeRef.new(shape: ChangeType, location_name: "Type"))
+    CoreNetworkChangeEvent.add_member(:action, Shapes::ShapeRef.new(shape: ChangeAction, location_name: "Action"))
+    CoreNetworkChangeEvent.add_member(:identifier_path, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "IdentifierPath"))
+    CoreNetworkChangeEvent.add_member(:event_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "EventTime"))
+    CoreNetworkChangeEvent.add_member(:status, Shapes::ShapeRef.new(shape: ChangeStatus, location_name: "Status"))
+    CoreNetworkChangeEvent.add_member(:values, Shapes::ShapeRef.new(shape: CoreNetworkChangeEventValues, location_name: "Values"))
+    CoreNetworkChangeEvent.struct_class = Types::CoreNetworkChangeEvent
+
+    CoreNetworkChangeEventList.member = Shapes::ShapeRef.new(shape: CoreNetworkChangeEvent)
+
+    CoreNetworkChangeEventValues.add_member(:edge_location, Shapes::ShapeRef.new(shape: ExternalRegionCode, location_name: "EdgeLocation"))
+    CoreNetworkChangeEventValues.add_member(:segment_name, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "SegmentName"))
+    CoreNetworkChangeEventValues.add_member(:attachment_id, Shapes::ShapeRef.new(shape: AttachmentId, location_name: "AttachmentId"))
+    CoreNetworkChangeEventValues.add_member(:cidr, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "Cidr"))
+    CoreNetworkChangeEventValues.struct_class = Types::CoreNetworkChangeEventValues
 
     CoreNetworkChangeList.member = Shapes::ShapeRef.new(shape: CoreNetworkChange)
 
@@ -694,6 +754,24 @@ module Aws::NetworkManager
     CreateSiteToSiteVpnAttachmentResponse.add_member(:site_to_site_vpn_attachment, Shapes::ShapeRef.new(shape: SiteToSiteVpnAttachment, location_name: "SiteToSiteVpnAttachment"))
     CreateSiteToSiteVpnAttachmentResponse.struct_class = Types::CreateSiteToSiteVpnAttachmentResponse
 
+    CreateTransitGatewayPeeringRequest.add_member(:core_network_id, Shapes::ShapeRef.new(shape: CoreNetworkId, required: true, location_name: "CoreNetworkId"))
+    CreateTransitGatewayPeeringRequest.add_member(:transit_gateway_arn, Shapes::ShapeRef.new(shape: TransitGatewayArn, required: true, location_name: "TransitGatewayArn"))
+    CreateTransitGatewayPeeringRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateTransitGatewayPeeringRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateTransitGatewayPeeringRequest.struct_class = Types::CreateTransitGatewayPeeringRequest
+
+    CreateTransitGatewayPeeringResponse.add_member(:transit_gateway_peering, Shapes::ShapeRef.new(shape: TransitGatewayPeering, location_name: "TransitGatewayPeering"))
+    CreateTransitGatewayPeeringResponse.struct_class = Types::CreateTransitGatewayPeeringResponse
+
+    CreateTransitGatewayRouteTableAttachmentRequest.add_member(:peering_id, Shapes::ShapeRef.new(shape: PeeringId, required: true, location_name: "PeeringId"))
+    CreateTransitGatewayRouteTableAttachmentRequest.add_member(:transit_gateway_route_table_arn, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableArn, required: true, location_name: "TransitGatewayRouteTableArn"))
+    CreateTransitGatewayRouteTableAttachmentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateTransitGatewayRouteTableAttachmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateTransitGatewayRouteTableAttachmentRequest.struct_class = Types::CreateTransitGatewayRouteTableAttachmentRequest
+
+    CreateTransitGatewayRouteTableAttachmentResponse.add_member(:transit_gateway_route_table_attachment, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableAttachment, location_name: "TransitGatewayRouteTableAttachment"))
+    CreateTransitGatewayRouteTableAttachmentResponse.struct_class = Types::CreateTransitGatewayRouteTableAttachmentResponse
+
     CreateVpcAttachmentRequest.add_member(:core_network_id, Shapes::ShapeRef.new(shape: CoreNetworkId, required: true, location_name: "CoreNetworkId"))
     CreateVpcAttachmentRequest.add_member(:vpc_arn, Shapes::ShapeRef.new(shape: VpcArn, required: true, location_name: "VpcArn"))
     CreateVpcAttachmentRequest.add_member(:subnet_arns, Shapes::ShapeRef.new(shape: SubnetArnList, required: true, location_name: "SubnetArns"))
@@ -767,6 +845,12 @@ module Aws::NetworkManager
 
     DeleteLinkResponse.add_member(:link, Shapes::ShapeRef.new(shape: Link, location_name: "Link"))
     DeleteLinkResponse.struct_class = Types::DeleteLinkResponse
+
+    DeletePeeringRequest.add_member(:peering_id, Shapes::ShapeRef.new(shape: PeeringId, required: true, location: "uri", location_name: "peeringId"))
+    DeletePeeringRequest.struct_class = Types::DeletePeeringRequest
+
+    DeletePeeringResponse.add_member(:peering, Shapes::ShapeRef.new(shape: Peering, location_name: "Peering"))
+    DeletePeeringResponse.struct_class = Types::DeletePeeringResponse
 
     DeleteResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location: "uri", location_name: "resourceArn"))
     DeleteResourcePolicyRequest.struct_class = Types::DeleteResourcePolicyRequest
@@ -893,6 +977,16 @@ module Aws::NetworkManager
     GetConnectionsResponse.add_member(:connections, Shapes::ShapeRef.new(shape: ConnectionList, location_name: "Connections"))
     GetConnectionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     GetConnectionsResponse.struct_class = Types::GetConnectionsResponse
+
+    GetCoreNetworkChangeEventsRequest.add_member(:core_network_id, Shapes::ShapeRef.new(shape: CoreNetworkId, required: true, location: "uri", location_name: "coreNetworkId"))
+    GetCoreNetworkChangeEventsRequest.add_member(:policy_version_id, Shapes::ShapeRef.new(shape: Integer, required: true, location: "uri", location_name: "policyVersionId"))
+    GetCoreNetworkChangeEventsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    GetCoreNetworkChangeEventsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    GetCoreNetworkChangeEventsRequest.struct_class = Types::GetCoreNetworkChangeEventsRequest
+
+    GetCoreNetworkChangeEventsResponse.add_member(:core_network_change_events, Shapes::ShapeRef.new(shape: CoreNetworkChangeEventList, location_name: "CoreNetworkChangeEvents"))
+    GetCoreNetworkChangeEventsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetCoreNetworkChangeEventsResponse.struct_class = Types::GetCoreNetworkChangeEventsResponse
 
     GetCoreNetworkChangeSetRequest.add_member(:core_network_id, Shapes::ShapeRef.new(shape: CoreNetworkId, required: true, location: "uri", location_name: "coreNetworkId"))
     GetCoreNetworkChangeSetRequest.add_member(:policy_version_id, Shapes::ShapeRef.new(shape: Integer, required: true, location: "uri", location_name: "policyVersionId"))
@@ -1076,6 +1170,12 @@ module Aws::NetworkManager
     GetTransitGatewayConnectPeerAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     GetTransitGatewayConnectPeerAssociationsResponse.struct_class = Types::GetTransitGatewayConnectPeerAssociationsResponse
 
+    GetTransitGatewayPeeringRequest.add_member(:peering_id, Shapes::ShapeRef.new(shape: PeeringId, required: true, location: "uri", location_name: "peeringId"))
+    GetTransitGatewayPeeringRequest.struct_class = Types::GetTransitGatewayPeeringRequest
+
+    GetTransitGatewayPeeringResponse.add_member(:transit_gateway_peering, Shapes::ShapeRef.new(shape: TransitGatewayPeering, location_name: "TransitGatewayPeering"))
+    GetTransitGatewayPeeringResponse.struct_class = Types::GetTransitGatewayPeeringResponse
+
     GetTransitGatewayRegistrationsRequest.add_member(:global_network_id, Shapes::ShapeRef.new(shape: GlobalNetworkId, required: true, location: "uri", location_name: "globalNetworkId"))
     GetTransitGatewayRegistrationsRequest.add_member(:transit_gateway_arns, Shapes::ShapeRef.new(shape: TransitGatewayArnList, location: "querystring", location_name: "transitGatewayArns"))
     GetTransitGatewayRegistrationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -1085,6 +1185,12 @@ module Aws::NetworkManager
     GetTransitGatewayRegistrationsResponse.add_member(:transit_gateway_registrations, Shapes::ShapeRef.new(shape: TransitGatewayRegistrationList, location_name: "TransitGatewayRegistrations"))
     GetTransitGatewayRegistrationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     GetTransitGatewayRegistrationsResponse.struct_class = Types::GetTransitGatewayRegistrationsResponse
+
+    GetTransitGatewayRouteTableAttachmentRequest.add_member(:attachment_id, Shapes::ShapeRef.new(shape: AttachmentId, required: true, location: "uri", location_name: "attachmentId"))
+    GetTransitGatewayRouteTableAttachmentRequest.struct_class = Types::GetTransitGatewayRouteTableAttachmentRequest
+
+    GetTransitGatewayRouteTableAttachmentResponse.add_member(:transit_gateway_route_table_attachment, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableAttachment, location_name: "TransitGatewayRouteTableAttachment"))
+    GetTransitGatewayRouteTableAttachmentResponse.struct_class = Types::GetTransitGatewayRouteTableAttachmentResponse
 
     GetVpcAttachmentRequest.add_member(:attachment_id, Shapes::ShapeRef.new(shape: AttachmentId, required: true, location: "uri", location_name: "attachmentId"))
     GetVpcAttachmentRequest.struct_class = Types::GetVpcAttachmentRequest
@@ -1172,6 +1278,26 @@ module Aws::NetworkManager
     ListCoreNetworksResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListCoreNetworksResponse.struct_class = Types::ListCoreNetworksResponse
 
+    ListOrganizationServiceAccessStatusRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListOrganizationServiceAccessStatusRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListOrganizationServiceAccessStatusRequest.struct_class = Types::ListOrganizationServiceAccessStatusRequest
+
+    ListOrganizationServiceAccessStatusResponse.add_member(:organization_status, Shapes::ShapeRef.new(shape: OrganizationStatus, location_name: "OrganizationStatus"))
+    ListOrganizationServiceAccessStatusResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListOrganizationServiceAccessStatusResponse.struct_class = Types::ListOrganizationServiceAccessStatusResponse
+
+    ListPeeringsRequest.add_member(:core_network_id, Shapes::ShapeRef.new(shape: CoreNetworkId, location: "querystring", location_name: "coreNetworkId"))
+    ListPeeringsRequest.add_member(:peering_type, Shapes::ShapeRef.new(shape: PeeringType, location: "querystring", location_name: "peeringType"))
+    ListPeeringsRequest.add_member(:edge_location, Shapes::ShapeRef.new(shape: ExternalRegionCode, location: "querystring", location_name: "edgeLocation"))
+    ListPeeringsRequest.add_member(:state, Shapes::ShapeRef.new(shape: PeeringState, location: "querystring", location_name: "state"))
+    ListPeeringsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListPeeringsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListPeeringsRequest.struct_class = Types::ListPeeringsRequest
+
+    ListPeeringsResponse.add_member(:peerings, Shapes::ShapeRef.new(shape: PeeringList, location_name: "Peerings"))
+    ListPeeringsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListPeeringsResponse.struct_class = Types::ListPeeringsResponse
+
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location: "uri", location_name: "resourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
@@ -1247,12 +1373,32 @@ module Aws::NetworkManager
 
     NetworkTelemetryList.member = Shapes::ShapeRef.new(shape: NetworkTelemetry)
 
+    OrganizationStatus.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId"))
+    OrganizationStatus.add_member(:organization_aws_service_access_status, Shapes::ShapeRef.new(shape: OrganizationAwsServiceAccessStatus, location_name: "OrganizationAwsServiceAccessStatus"))
+    OrganizationStatus.add_member(:slr_deployment_status, Shapes::ShapeRef.new(shape: SLRDeploymentStatus, location_name: "SLRDeploymentStatus"))
+    OrganizationStatus.add_member(:account_status_list, Shapes::ShapeRef.new(shape: AccountStatusList, location_name: "AccountStatusList"))
+    OrganizationStatus.struct_class = Types::OrganizationStatus
+
     PathComponent.add_member(:sequence, Shapes::ShapeRef.new(shape: Integer, location_name: "Sequence"))
     PathComponent.add_member(:resource, Shapes::ShapeRef.new(shape: NetworkResourceSummary, location_name: "Resource"))
     PathComponent.add_member(:destination_cidr_block, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "DestinationCidrBlock"))
     PathComponent.struct_class = Types::PathComponent
 
     PathComponentList.member = Shapes::ShapeRef.new(shape: PathComponent)
+
+    Peering.add_member(:core_network_id, Shapes::ShapeRef.new(shape: CoreNetworkId, location_name: "CoreNetworkId"))
+    Peering.add_member(:core_network_arn, Shapes::ShapeRef.new(shape: CoreNetworkArn, location_name: "CoreNetworkArn"))
+    Peering.add_member(:peering_id, Shapes::ShapeRef.new(shape: PeeringId, location_name: "PeeringId"))
+    Peering.add_member(:owner_account_id, Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "OwnerAccountId"))
+    Peering.add_member(:peering_type, Shapes::ShapeRef.new(shape: PeeringType, location_name: "PeeringType"))
+    Peering.add_member(:state, Shapes::ShapeRef.new(shape: PeeringState, location_name: "State"))
+    Peering.add_member(:edge_location, Shapes::ShapeRef.new(shape: ExternalRegionCode, location_name: "EdgeLocation"))
+    Peering.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ResourceArn"))
+    Peering.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    Peering.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreatedAt"))
+    Peering.struct_class = Types::Peering
+
+    PeeringList.member = Shapes::ShapeRef.new(shape: Peering)
 
     ProposedSegmentChange.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     ProposedSegmentChange.add_member(:attachment_policy_rule_number, Shapes::ShapeRef.new(shape: Integer, location_name: "AttachmentPolicyRuleNumber"))
@@ -1374,6 +1520,12 @@ module Aws::NetworkManager
     SiteToSiteVpnAttachment.add_member(:vpn_connection_arn, Shapes::ShapeRef.new(shape: VpnConnectionArn, location_name: "VpnConnectionArn"))
     SiteToSiteVpnAttachment.struct_class = Types::SiteToSiteVpnAttachment
 
+    StartOrganizationServiceAccessUpdateRequest.add_member(:action, Shapes::ShapeRef.new(shape: Action, required: true, location_name: "Action"))
+    StartOrganizationServiceAccessUpdateRequest.struct_class = Types::StartOrganizationServiceAccessUpdateRequest
+
+    StartOrganizationServiceAccessUpdateResponse.add_member(:organization_status, Shapes::ShapeRef.new(shape: OrganizationStatus, location_name: "OrganizationStatus"))
+    StartOrganizationServiceAccessUpdateResponse.struct_class = Types::StartOrganizationServiceAccessUpdateResponse
+
     StartRouteAnalysisRequest.add_member(:global_network_id, Shapes::ShapeRef.new(shape: GlobalNetworkId, required: true, location: "uri", location_name: "globalNetworkId"))
     StartRouteAnalysisRequest.add_member(:source, Shapes::ShapeRef.new(shape: RouteAnalysisEndpointOptionsSpecification, required: true, location_name: "Source"))
     StartRouteAnalysisRequest.add_member(:destination, Shapes::ShapeRef.new(shape: RouteAnalysisEndpointOptionsSpecification, required: true, location_name: "Destination"))
@@ -1417,6 +1569,10 @@ module Aws::NetworkManager
 
     TransitGatewayConnectPeerAssociationList.member = Shapes::ShapeRef.new(shape: TransitGatewayConnectPeerAssociation)
 
+    TransitGatewayPeering.add_member(:peering, Shapes::ShapeRef.new(shape: Peering, location_name: "Peering"))
+    TransitGatewayPeering.add_member(:transit_gateway_arn, Shapes::ShapeRef.new(shape: TransitGatewayArn, location_name: "TransitGatewayArn"))
+    TransitGatewayPeering.struct_class = Types::TransitGatewayPeering
+
     TransitGatewayRegistration.add_member(:global_network_id, Shapes::ShapeRef.new(shape: GlobalNetworkId, location_name: "GlobalNetworkId"))
     TransitGatewayRegistration.add_member(:transit_gateway_arn, Shapes::ShapeRef.new(shape: TransitGatewayArn, location_name: "TransitGatewayArn"))
     TransitGatewayRegistration.add_member(:state, Shapes::ShapeRef.new(shape: TransitGatewayRegistrationStateReason, location_name: "State"))
@@ -1427,6 +1583,11 @@ module Aws::NetworkManager
     TransitGatewayRegistrationStateReason.add_member(:code, Shapes::ShapeRef.new(shape: TransitGatewayRegistrationState, location_name: "Code"))
     TransitGatewayRegistrationStateReason.add_member(:message, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "Message"))
     TransitGatewayRegistrationStateReason.struct_class = Types::TransitGatewayRegistrationStateReason
+
+    TransitGatewayRouteTableAttachment.add_member(:attachment, Shapes::ShapeRef.new(shape: Attachment, location_name: "Attachment"))
+    TransitGatewayRouteTableAttachment.add_member(:peering_id, Shapes::ShapeRef.new(shape: PeeringId, location_name: "PeeringId"))
+    TransitGatewayRouteTableAttachment.add_member(:transit_gateway_route_table_arn, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableArn, location_name: "TransitGatewayRouteTableArn"))
+    TransitGatewayRouteTableAttachment.struct_class = Types::TransitGatewayRouteTableAttachment
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location: "uri", location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
@@ -1753,6 +1914,34 @@ module Aws::NetworkManager
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:create_transit_gateway_peering, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateTransitGatewayPeering"
+        o.http_method = "POST"
+        o.http_request_uri = "/transit-gateway-peerings"
+        o.input = Shapes::ShapeRef.new(shape: CreateTransitGatewayPeeringRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateTransitGatewayPeeringResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:create_transit_gateway_route_table_attachment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateTransitGatewayRouteTableAttachment"
+        o.http_method = "POST"
+        o.http_request_uri = "/transit-gateway-route-table-attachments"
+        o.input = Shapes::ShapeRef.new(shape: CreateTransitGatewayRouteTableAttachmentRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateTransitGatewayRouteTableAttachmentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:create_vpc_attachment, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateVpcAttachment"
         o.http_method = "POST"
@@ -1871,6 +2060,20 @@ module Aws::NetworkManager
         o.http_request_uri = "/global-networks/{globalNetworkId}/links/{linkId}"
         o.input = Shapes::ShapeRef.new(shape: DeleteLinkRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteLinkResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:delete_peering, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeletePeering"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/peerings/{peeringId}"
+        o.input = Shapes::ShapeRef.new(shape: DeletePeeringRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeletePeeringResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -2085,6 +2288,25 @@ module Aws::NetworkManager
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_core_network_change_events, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCoreNetworkChangeEvents"
+        o.http_method = "GET"
+        o.http_request_uri = "/core-networks/{coreNetworkId}/core-network-change-events/{policyVersionId}"
+        o.input = Shapes::ShapeRef.new(shape: GetCoreNetworkChangeEventsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCoreNetworkChangeEventsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_core_network_change_set, Seahorse::Model::Operation.new.tap do |o|
@@ -2361,6 +2583,19 @@ module Aws::NetworkManager
         )
       end)
 
+      api.add_operation(:get_transit_gateway_peering, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetTransitGatewayPeering"
+        o.http_method = "GET"
+        o.http_request_uri = "/transit-gateway-peerings/{peeringId}"
+        o.input = Shapes::ShapeRef.new(shape: GetTransitGatewayPeeringRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetTransitGatewayPeeringResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:get_transit_gateway_registrations, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetTransitGatewayRegistrations"
         o.http_method = "GET"
@@ -2378,6 +2613,19 @@ module Aws::NetworkManager
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:get_transit_gateway_route_table_attachment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetTransitGatewayRouteTableAttachment"
+        o.http_method = "GET"
+        o.http_request_uri = "/transit-gateway-route-table-attachments/{attachmentId}"
+        o.input = Shapes::ShapeRef.new(shape: GetTransitGatewayRouteTableAttachmentRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetTransitGatewayRouteTableAttachmentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:get_vpc_attachment, Seahorse::Model::Operation.new.tap do |o|
@@ -2454,6 +2702,32 @@ module Aws::NetworkManager
         o.http_request_uri = "/core-networks"
         o.input = Shapes::ShapeRef.new(shape: ListCoreNetworksRequest)
         o.output = Shapes::ShapeRef.new(shape: ListCoreNetworksResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_organization_service_access_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListOrganizationServiceAccessStatus"
+        o.http_method = "GET"
+        o.http_request_uri = "/organizations/service-access"
+        o.input = Shapes::ShapeRef.new(shape: ListOrganizationServiceAccessStatusRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListOrganizationServiceAccessStatusResponse)
+      end)
+
+      api.add_operation(:list_peerings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPeerings"
+        o.http_method = "GET"
+        o.http_request_uri = "/peerings"
+        o.input = Shapes::ShapeRef.new(shape: ListPeeringsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListPeeringsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -2548,6 +2822,20 @@ module Aws::NetworkManager
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:start_organization_service_access_update, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartOrganizationServiceAccessUpdate"
+        o.http_method = "POST"
+        o.http_request_uri = "/organizations/service-access"
+        o.input = Shapes::ShapeRef.new(shape: StartOrganizationServiceAccessUpdateRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartOrganizationServiceAccessUpdateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:start_route_analysis, Seahorse::Model::Operation.new.tap do |o|

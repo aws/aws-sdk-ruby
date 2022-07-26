@@ -113,6 +113,68 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
+    # Information about your account's integration with Amazon CodeGuru
+    # Profiler. This returns whether DevOps Guru is configured to consume
+    # recommendations generated from Amazon CodeGuru Profiler.
+    #
+    # @note When making an API call, you may pass AmazonCodeGuruProfilerIntegration
+    #   data as a hash:
+    #
+    #       {
+    #         status: "ENABLED", # accepts ENABLED, DISABLED
+    #       }
+    #
+    # @!attribute [rw] status
+    #   The status of the CodeGuru Profiler integration. Specifies if DevOps
+    #   Guru is enabled to consume recommendations that are generated from
+    #   Amazon CodeGuru Profiler.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/AmazonCodeGuruProfilerIntegration AWS API Documentation
+    #
+    class AmazonCodeGuruProfilerIntegration < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An Amazon CloudWatch log group that contains log anomalies and is used
+    # to generate an insight.
+    #
+    # @!attribute [rw] log_group_name
+    #   The name of the CloudWatch log group.
+    #   @return [String]
+    #
+    # @!attribute [rw] impact_start_time
+    #   The time the anomalous log events began. The impact start time
+    #   indicates the time of the first log anomaly event that occurs.
+    #   @return [Time]
+    #
+    # @!attribute [rw] impact_end_time
+    #   The time the anomalous log events stopped.
+    #   @return [Time]
+    #
+    # @!attribute [rw] number_of_log_lines_scanned
+    #   The number of log lines that were scanned for anomalous log events.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] log_anomaly_showcases
+    #   The log anomalies in the log group. Each log anomaly displayed
+    #   represents a cluster of similar anomalous log events.
+    #   @return [Array<Types::LogAnomalyShowcase>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/AnomalousLogGroup AWS API Documentation
+    #
+    class AnomalousLogGroup < Struct.new(
+      :log_group_name,
+      :impact_start_time,
+      :impact_end_time,
+      :number_of_log_lines_scanned,
+      :log_anomaly_showcases)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A time range that specifies when DevOps Guru opens and then closes an
     # anomaly. This is different from `AnomalyTimeRange`, which specifies
     # the time range when DevOps Guru actually observes the anomalous
@@ -178,6 +240,32 @@ module Aws::DevOpsGuru
     class AnomalySourceDetails < Struct.new(
       :cloud_watch_metrics,
       :performance_insights_metrics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Metadata about the detection source that generates proactive
+    # anomalies. The anomaly is detected using analysis of the metric data 
+    # over a period of time
+    #
+    # @!attribute [rw] source
+    #   The source of the anomaly.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_resource_name
+    #   The name of the anomaly's resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_resource_type
+    #   The anomaly's resource type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/AnomalySourceMetadata AWS API Documentation
+    #
+    class AnomalySourceMetadata < Struct.new(
+      :source,
+      :source_resource_name,
+      :source_resource_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -384,7 +472,7 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # The dimension of am Amazon CloudWatch metric that is used when DevOps
+    # The dimension of an Amazon CloudWatch metric that is used when DevOps
     # Guru analyzes the resources in your account for operational problems
     # and anomalous behavior. A dimension is a name/value pair that is part
     # of the identity of a metric. A metric can have up to 10 dimensions.
@@ -535,6 +623,29 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteInsightRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "InsightId", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The ID of the insight.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DeleteInsightRequest AWS API Documentation
+    #
+    class DeleteInsightRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DeleteInsightResponse AWS API Documentation
+    #
+    class DeleteInsightResponse < Aws::EmptyStructure; end
+
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeAccountHealthRequest AWS API Documentation
@@ -667,6 +778,24 @@ module Aws::DevOpsGuru
     class DescribeAnomalyResponse < Struct.new(
       :proactive_anomaly,
       :reactive_anomaly)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeEventSourcesConfigRequest AWS API Documentation
+    #
+    class DescribeEventSourcesConfigRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] event_sources
+    #   Lists the event sources in the configuration.
+    #   @return [Types::EventSourcesConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeEventSourcesConfigResponse AWS API Documentation
+    #
+    class DescribeEventSourcesConfigResponse < Struct.new(
+      :event_sources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1223,6 +1352,31 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
+    # Information about the integration of DevOps Guru as consumer with
+    # another AWS service, such as AWS CodeGuru Profiler via EventBridge.
+    #
+    # @note When making an API call, you may pass EventSourcesConfig
+    #   data as a hash:
+    #
+    #       {
+    #         amazon_code_guru_profiler: {
+    #           status: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #       }
+    #
+    # @!attribute [rw] amazon_code_guru_profiler
+    #   Information about whether DevOps Guru is configured to consume
+    #   recommendations which are generated from AWS CodeGuru Profiler.
+    #   @return [Types::AmazonCodeGuruProfilerIntegration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/EventSourcesConfig AWS API Documentation
+    #
+    class EventSourcesConfig < Struct.new(
+      :amazon_code_guru_profiler)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The time range during which an Amazon Web Services event occurred.
     # Amazon Web Services resource events and metrics are analyzed by DevOps
     # Guru to find anomalous behavior and provide recommendations to improve
@@ -1533,6 +1687,64 @@ module Aws::DevOpsGuru
     class ListAnomaliesForInsightResponse < Struct.new(
       :proactive_anomalies,
       :reactive_anomalies,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListAnomalousLogGroupsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         insight_id: "InsightId", # required
+    #         max_results: 1,
+    #         next_token: "UuidNextToken",
+    #       }
+    #
+    # @!attribute [rw] insight_id
+    #   The ID of the insight containing the log groups.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If this value is null, it retrieves the first page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ListAnomalousLogGroupsRequest AWS API Documentation
+    #
+    class ListAnomalousLogGroupsRequest < Struct.new(
+      :insight_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] insight_id
+    #   The ID of the insight containing the log groups.
+    #   @return [String]
+    #
+    # @!attribute [rw] anomalous_log_groups
+    #   The list of Amazon CloudWatch log groups that are related to an
+    #   insight.
+    #   @return [Array<Types::AnomalousLogGroup>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If there are no more pages, this value is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ListAnomalousLogGroupsResponse AWS API Documentation
+    #
+    class ListAnomalousLogGroupsResponse < Struct.new(
+      :insight_id,
+      :anomalous_log_groups,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -1902,6 +2114,92 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
+    # Filters to determine which monitored resources you want to retrieve.
+    # You can filter by resource type or resource permission status.
+    #
+    # @note When making an API call, you may pass ListMonitoredResourcesFilters
+    #   data as a hash:
+    #
+    #       {
+    #         resource_permission: "FULL_PERMISSION", # required, accepts FULL_PERMISSION, MISSING_PERMISSION
+    #         resource_type_filters: ["LOG_GROUPS"], # required, accepts LOG_GROUPS
+    #       }
+    #
+    # @!attribute [rw] resource_permission
+    #   The permission status of a resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type_filters
+    #   The type of resource that you wish to retrieve, such as log groups.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ListMonitoredResourcesFilters AWS API Documentation
+    #
+    class ListMonitoredResourcesFilters < Struct.new(
+      :resource_permission,
+      :resource_type_filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListMonitoredResourcesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filters: { # required
+    #           resource_permission: "FULL_PERMISSION", # required, accepts FULL_PERMISSION, MISSING_PERMISSION
+    #           resource_type_filters: ["LOG_GROUPS"], # required, accepts LOG_GROUPS
+    #         },
+    #         max_results: 1,
+    #         next_token: "UuidNextToken",
+    #       }
+    #
+    # @!attribute [rw] filters
+    #   Filters to determine which monitored resources you want to retrieve.
+    #   You can filter by resource type or resource permission status.
+    #   @return [Types::ListMonitoredResourcesFilters]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If this value is null, it retrieves the first page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ListMonitoredResourcesRequest AWS API Documentation
+    #
+    class ListMonitoredResourcesRequest < Struct.new(
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] monitored_resource_identifiers
+    #   Information about the resource that is being monitored, including
+    #   the name of the resource, the type of resource, and whether or not
+    #   permission is given to DevOps Guru to access that resource.
+    #   @return [Array<Types::MonitoredResourceIdentifier>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If there are no more pages, this value is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ListMonitoredResourcesResponse AWS API Documentation
+    #
+    class ListMonitoredResourcesResponse < Struct.new(
+      :monitored_resource_identifiers,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListNotificationChannelsRequest
     #   data as a hash:
     #
@@ -2085,6 +2383,134 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
+    # Information about an anomalous log event found within a log group.
+    #
+    # @!attribute [rw] log_stream_name
+    #   The name of the Amazon CloudWatch log stream that the anomalous log
+    #   event belongs to. A log stream is a sequence of log events that
+    #   share the same source.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_anomaly_type
+    #   The type of log anomaly that has been detected.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_anomaly_token
+    #   The token where the anomaly was detected. This may refer to an
+    #   exception or another location, or it may be blank for log anomalies
+    #   such as format anomalies.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_event_id
+    #   The ID of the log event.
+    #   @return [String]
+    #
+    # @!attribute [rw] explanation
+    #   The explanation for why the log event is considered an anomaly.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_log_lines_occurrences
+    #   The number of log lines where this anomalous log event occurs.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] log_event_timestamp
+    #   The time of the first occurrence of the anomalous log event.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/LogAnomalyClass AWS API Documentation
+    #
+    class LogAnomalyClass < Struct.new(
+      :log_stream_name,
+      :log_anomaly_type,
+      :log_anomaly_token,
+      :log_event_id,
+      :explanation,
+      :number_of_log_lines_occurrences,
+      :log_event_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A cluster of similar anomalous log events found within a log group.
+    #
+    # @!attribute [rw] log_anomaly_classes
+    #   A list of anomalous log events that may be related.
+    #   @return [Array<Types::LogAnomalyClass>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/LogAnomalyShowcase AWS API Documentation
+    #
+    class LogAnomalyShowcase < Struct.new(
+      :log_anomaly_classes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the integration of DevOps Guru with CloudWatch log
+    # groups for log anomaly detection.
+    #
+    # @!attribute [rw] opt_in_status
+    #   Specifies if DevOps Guru is configured to perform log anomaly
+    #   detection on CloudWatch log groups.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/LogsAnomalyDetectionIntegration AWS API Documentation
+    #
+    class LogsAnomalyDetectionIntegration < Struct.new(
+      :opt_in_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the integration of DevOps Guru with CloudWatch log
+    # groups for log anomaly detection. You can use this to update the
+    # configuration.
+    #
+    # @note When making an API call, you may pass LogsAnomalyDetectionIntegrationConfig
+    #   data as a hash:
+    #
+    #       {
+    #         opt_in_status: "ENABLED", # accepts ENABLED, DISABLED
+    #       }
+    #
+    # @!attribute [rw] opt_in_status
+    #   Specifies if DevOps Guru is configured to perform log anomaly
+    #   detection on CloudWatch log groups.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/LogsAnomalyDetectionIntegrationConfig AWS API Documentation
+    #
+    class LogsAnomalyDetectionIntegrationConfig < Struct.new(
+      :opt_in_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the resource that is being monitored, including the
+    # name of the resource, the type of resource, and whether or not
+    # permission is given to DevOps Guru to access that resource.
+    #
+    # @!attribute [rw] monitored_resource_name
+    #   The name of the resource being monitored.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of resource being monitored.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_permission
+    #   The permission status of a resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/MonitoredResourceIdentifier AWS API Documentation
+    #
+    class MonitoredResourceIdentifier < Struct.new(
+      :monitored_resource_name,
+      :type,
+      :resource_permission)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a notification channel. A notification channel is
     # used to notify you when DevOps Guru creates an insight. The one
     # supported notification channel is Amazon Simple Notification Service
@@ -2093,8 +2519,15 @@ module Aws::DevOpsGuru
     # If you use an Amazon SNS topic in another account, you must attach a
     # policy to it that grants DevOps Guru permission to it notifications.
     # DevOps Guru adds the required policy on your behalf to send
+    # notifications using Amazon SNS in your account. DevOps Guru only
+    # supports standard SNS topics. For more information, see [Permissions
+    # for cross account Amazon SNS topics][1].
+    #
+    # If you use an Amazon SNS topic in another account, you must attach a
+    # policy to it that grants DevOps Guru permission to it notifications.
+    # DevOps Guru adds the required policy on your behalf to send
     # notifications using Amazon SNS in your account. For more information,
-    # see [Permissions for cross account Amazon SNS topics][1].
+    # see Permissions for cross account Amazon SNS topics.
     #
     # If you use an Amazon SNS topic that is encrypted by an Amazon Web
     # Services Key Management Service customer-managed key (CMK), then you
@@ -2145,9 +2578,15 @@ module Aws::DevOpsGuru
     #   If you use an Amazon SNS topic in another account, you must attach a
     #   policy to it that grants DevOps Guru permission to it notifications.
     #   DevOps Guru adds the required policy on your behalf to send
+    #   notifications using Amazon SNS in your account. DevOps Guru only
+    #   supports standard SNS topics. For more information, see [Permissions
+    #   for cross account Amazon SNS topics][1].
+    #
+    #   If you use an Amazon SNS topic in another account, you must attach a
+    #   policy to it that grants DevOps Guru permission to it notifications.
+    #   DevOps Guru adds the required policy on your behalf to send
     #   notifications using Amazon SNS in your account. For more
-    #   information, see [Permissions for cross account Amazon SNS
-    #   topics][1].
+    #   information, see Permissions for cross account Amazon SNS topics.
     #
     #   If you use an Amazon SNS topic that is encrypted by an Amazon Web
     #   Services Key Management Service customer-managed key (CMK), then you
@@ -2188,7 +2627,7 @@ module Aws::DevOpsGuru
 
     # Information about whether DevOps Guru is configured to create an
     # OpsItem in Amazon Web Services Systems Manager OpsCenter for each
-    # created insight.
+    # created insight. You can use this to update the configuration.
     #
     # @note When making an API call, you may pass OpsCenterIntegrationConfig
     #   data as a hash:
@@ -2675,6 +3114,15 @@ module Aws::DevOpsGuru
     #   generated this anomaly.
     #   @return [Float]
     #
+    # @!attribute [rw] source_metadata
+    #   The metadata for the anomaly.
+    #   @return [Types::AnomalySourceMetadata]
+    #
+    # @!attribute [rw] anomaly_resources
+    #   Information about a resource in which DevOps Guru detected anomalous
+    #   behavior.
+    #   @return [Array<Types::AnomalyResource>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ProactiveAnomaly AWS API Documentation
     #
     class ProactiveAnomaly < Struct.new(
@@ -2688,7 +3136,9 @@ module Aws::DevOpsGuru
       :source_details,
       :associated_insight_id,
       :resource_collection,
-      :limit)
+      :limit,
+      :source_metadata,
+      :anomaly_resources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2764,6 +3214,15 @@ module Aws::DevOpsGuru
     #   generated this anomaly.
     #   @return [Float]
     #
+    # @!attribute [rw] source_metadata
+    #   The metadata of the source which detects proactive anomalies.
+    #   @return [Types::AnomalySourceMetadata]
+    #
+    # @!attribute [rw] anomaly_resources
+    #   Information about a resource in which DevOps Guru detected anomalous
+    #   behavior.
+    #   @return [Array<Types::AnomalyResource>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ProactiveAnomalySummary AWS API Documentation
     #
     class ProactiveAnomalySummary < Struct.new(
@@ -2777,7 +3236,9 @@ module Aws::DevOpsGuru
       :source_details,
       :associated_insight_id,
       :resource_collection,
-      :limit)
+      :limit,
+      :source_metadata,
+      :anomaly_resources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2834,6 +3295,10 @@ module Aws::DevOpsGuru
     #   before they are created for each insight.
     #   @return [String]
     #
+    # @!attribute [rw] description
+    #   Describes the proactive insight.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ProactiveInsight AWS API Documentation
     #
     class ProactiveInsight < Struct.new(
@@ -2844,7 +3309,8 @@ module Aws::DevOpsGuru
       :insight_time_range,
       :prediction_time_range,
       :resource_collection,
-      :ssm_ops_item_id)
+      :ssm_ops_item_id,
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3277,6 +3743,10 @@ module Aws::DevOpsGuru
     #   before they are created for each insight.
     #   @return [String]
     #
+    # @!attribute [rw] description
+    #   Describes the reactive insight.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ReactiveInsight AWS API Documentation
     #
     class ReactiveInsight < Struct.new(
@@ -3286,7 +3756,8 @@ module Aws::DevOpsGuru
       :status,
       :insight_time_range,
       :resource_collection,
-      :ssm_ops_item_id)
+      :ssm_ops_item_id,
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3454,6 +3925,10 @@ module Aws::DevOpsGuru
     #   learn more about what's happening and to help address the issue.
     #   @return [Array<Types::RecommendationRelatedAnomaly>]
     #
+    # @!attribute [rw] category
+    #   The category type of the recommendation.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/Recommendation AWS API Documentation
     #
     class Recommendation < Struct.new(
@@ -3462,7 +3937,8 @@ module Aws::DevOpsGuru
       :name,
       :reason,
       :related_events,
-      :related_anomalies)
+      :related_anomalies,
+      :category)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4181,10 +4657,16 @@ module Aws::DevOpsGuru
     #   created insight.
     #   @return [Types::OpsCenterIntegration]
     #
+    # @!attribute [rw] logs_anomaly_detection
+    #   Information about whether DevOps Guru is configured to perform log
+    #   anomaly detection on Amazon CloudWatch log groups.
+    #   @return [Types::LogsAnomalyDetectionIntegration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ServiceIntegrationConfig AWS API Documentation
     #
     class ServiceIntegrationConfig < Struct.new(
-      :ops_center)
+      :ops_center,
+      :logs_anomaly_detection)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4262,8 +4744,15 @@ module Aws::DevOpsGuru
     # If you use an Amazon SNS topic in another account, you must attach a
     # policy to it that grants DevOps Guru permission to it notifications.
     # DevOps Guru adds the required policy on your behalf to send
+    # notifications using Amazon SNS in your account. DevOps Guru only
+    # supports standard SNS topics. For more information, see [Permissions
+    # for cross account Amazon SNS topics][1].
+    #
+    # If you use an Amazon SNS topic in another account, you must attach a
+    # policy to it that grants DevOps Guru permission to it notifications.
+    # DevOps Guru adds the required policy on your behalf to send
     # notifications using Amazon SNS in your account. For more information,
-    # see [Permissions for cross account Amazon SNS topics][1].
+    # see Permissions for cross account Amazon SNS topics.
     #
     # If you use an Amazon SNS topic that is encrypted by an Amazon Web
     # Services Key Management Service customer-managed key (CMK), then you
@@ -4669,6 +5158,34 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateEventSourcesConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         event_sources: {
+    #           amazon_code_guru_profiler: {
+    #             status: "ENABLED", # accepts ENABLED, DISABLED
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] event_sources
+    #   Configuration information about the integration of DevOps Guru as
+    #   the Consumer via EventBridge with another AWS Service.
+    #   @return [Types::EventSourcesConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/UpdateEventSourcesConfigRequest AWS API Documentation
+    #
+    class UpdateEventSourcesConfigRequest < Struct.new(
+      :event_sources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/UpdateEventSourcesConfigResponse AWS API Documentation
+    #
+    class UpdateEventSourcesConfigResponse < Aws::EmptyStructure; end
+
     # Contains information used to update a collection of Amazon Web
     # Services resources.
     #
@@ -4792,18 +5309,27 @@ module Aws::DevOpsGuru
     #         ops_center: {
     #           opt_in_status: "ENABLED", # accepts ENABLED, DISABLED
     #         },
+    #         logs_anomaly_detection: {
+    #           opt_in_status: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
     #       }
     #
     # @!attribute [rw] ops_center
     #   Information about whether DevOps Guru is configured to create an
     #   OpsItem in Amazon Web Services Systems Manager OpsCenter for each
-    #   created insight.
+    #   created insight. You can use this to update the configuration.
     #   @return [Types::OpsCenterIntegrationConfig]
+    #
+    # @!attribute [rw] logs_anomaly_detection
+    #   Information about whether DevOps Guru is configured to perform log
+    #   anomaly detection on Amazon CloudWatch log groups.
+    #   @return [Types::LogsAnomalyDetectionIntegrationConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/UpdateServiceIntegrationConfig AWS API Documentation
     #
     class UpdateServiceIntegrationConfig < Struct.new(
-      :ops_center)
+      :ops_center,
+      :logs_anomaly_detection)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4814,6 +5340,9 @@ module Aws::DevOpsGuru
     #       {
     #         service_integration: { # required
     #           ops_center: {
+    #             opt_in_status: "ENABLED", # accepts ENABLED, DISABLED
+    #           },
+    #           logs_anomaly_detection: {
     #             opt_in_status: "ENABLED", # accepts ENABLED, DISABLED
     #           },
     #         },

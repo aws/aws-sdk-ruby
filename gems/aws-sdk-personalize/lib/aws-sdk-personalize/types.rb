@@ -93,9 +93,13 @@ module Aws::Personalize
     end
 
     # When the solution performs AutoML (`performAutoML` is true in
-    # CreateSolution), Amazon Personalize determines which recipe, from the
-    # specified list, optimizes the given metric. Amazon Personalize then
-    # uses that recipe for the solution.
+    # [CreateSolution][1]), Amazon Personalize determines which recipe, from
+    # the specified list, optimizes the given metric. Amazon Personalize
+    # then uses that recipe for the solution.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html
     #
     # @note When making an API call, you may pass AutoMLConfig
     #   data as a hash:
@@ -123,8 +127,12 @@ module Aws::Personalize
     end
 
     # When the solution performs AutoML (`performAutoML` is true in
-    # CreateSolution), specifies the recipe that best optimized the
+    # [CreateSolution][1]), specifies the recipe that best optimized the
     # specified metric.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html
     #
     # @!attribute [rw] best_recipe_arn
     #   The Amazon Resource Name (ARN) of the best recipe.
@@ -310,9 +318,14 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # A truncated version of the BatchInferenceJob datatype. The
-    # ListBatchInferenceJobs operation returns a list of batch inference job
-    # summaries.
+    # A truncated version of the [BatchInferenceJob][1]. The
+    # [ListBatchInferenceJobs][2] operation returns a list of batch
+    # inference job summaries.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/API_BatchInferenceJob.html
+    # [2]: https://docs.aws.amazon.com/personalize/latest/dg/API_ListBatchInferenceJobs.html
     #
     # @!attribute [rw] batch_inference_job_arn
     #   The Amazon Resource Name (ARN) of the batch inference job.
@@ -496,9 +509,14 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # A truncated version of the BatchSegmentJob datatype. The
-    # ListBatchSegmentJobs operation returns a list of batch segment job
-    # summaries.
+    # A truncated version of the [BatchSegmentJob][1] datatype.
+    # [ListBatchSegmentJobs][2] operation returns a list of batch segment
+    # job summaries.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/API_BatchSegmentJob.html
+    # [2]: https://docs.aws.amazon.com/personalize/latest/dg/API_ListBatchSegmentJobs.html
     #
     # @!attribute [rw] batch_segment_job_arn
     #   The Amazon Resource Name (ARN) of the batch segment job.
@@ -553,7 +571,11 @@ module Aws::Personalize
     end
 
     # An object that describes the deployment of a solution version. For
-    # more information on campaigns, see CreateCampaign.
+    # more information on campaigns, see [CreateCampaign][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/API_CreateCampaign.html
     #
     # @!attribute [rw] name
     #   The name of the campaign.
@@ -603,7 +625,11 @@ module Aws::Personalize
     #
     # @!attribute [rw] latest_campaign_update
     #   Provides a summary of the properties of a campaign update. For a
-    #   complete listing, call the DescribeCampaign API.
+    #   complete listing, call the [DescribeCampaign][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html
     #   @return [Types::CampaignUpdateSummary]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/Campaign AWS API Documentation
@@ -655,7 +681,11 @@ module Aws::Personalize
     end
 
     # Provides a summary of the properties of a campaign. For a complete
-    # listing, call the DescribeCampaign API.
+    # listing, call the [DescribeCampaign][1] API.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html
     #
     # @!attribute [rw] name
     #   The name of the campaign.
@@ -702,7 +732,11 @@ module Aws::Personalize
     end
 
     # Provides a summary of the properties of a campaign update. For a
-    # complete listing, call the DescribeCampaign API.
+    # complete listing, call the [DescribeCampaign][1] API.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html
     #
     # @!attribute [rw] solution_version_arn
     #   The Amazon Resource Name (ARN) of the deployed solution version.
@@ -842,6 +876,12 @@ module Aws::Personalize
     #             "ParameterName" => "ParameterValue",
     #           },
     #         },
+    #         tags: [
+    #           {
+    #             tag_key: "TagKey", # required
+    #             tag_value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] job_name
@@ -855,8 +895,8 @@ module Aws::Personalize
     #
     # @!attribute [rw] filter_arn
     #   The ARN of the filter to apply to the batch inference job. For more
-    #   information on using filters, see [Filtering Batch
-    #   Recommendations][1]..
+    #   information on using filters, see [Filtering batch
+    #   recommendations][1].
     #
     #
     #
@@ -864,7 +904,7 @@ module Aws::Personalize
     #   @return [String]
     #
     # @!attribute [rw] num_results
-    #   The number of recommendations to retreive.
+    #   The number of recommendations to retrieve.
     #   @return [Integer]
     #
     # @!attribute [rw] job_input
@@ -887,6 +927,14 @@ module Aws::Personalize
     #   The configuration details of a batch inference job.
     #   @return [Types::BatchInferenceJobConfig]
     #
+    # @!attribute [rw] tags
+    #   A list of [tags][1] to apply to the batch inference job.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateBatchInferenceJobRequest AWS API Documentation
     #
     class CreateBatchInferenceJobRequest < Struct.new(
@@ -897,7 +945,8 @@ module Aws::Personalize
       :job_input,
       :job_output,
       :role_arn,
-      :batch_inference_job_config)
+      :batch_inference_job_config,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -935,6 +984,12 @@ module Aws::Personalize
     #           },
     #         },
     #         role_arn: "RoleArn", # required
+    #         tags: [
+    #           {
+    #             tag_key: "TagKey", # required
+    #             tag_value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] job_name
@@ -948,7 +1003,12 @@ module Aws::Personalize
     #
     # @!attribute [rw] filter_arn
     #   The ARN of the filter to apply to the batch segment job. For more
-    #   information on using filters, see filter-batch.
+    #   information on using filters, see [Filtering batch
+    #   recommendations][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/filter-batch.html
     #   @return [String]
     #
     # @!attribute [rw] num_results
@@ -972,6 +1032,14 @@ module Aws::Personalize
     #   buckets respectively.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of [tags][1] to apply to the batch segment job.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateBatchSegmentJobRequest AWS API Documentation
     #
     class CreateBatchSegmentJobRequest < Struct.new(
@@ -981,7 +1049,8 @@ module Aws::Personalize
       :num_results,
       :job_input,
       :job_output,
-      :role_arn)
+      :role_arn,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1010,6 +1079,12 @@ module Aws::Personalize
     #             "ParameterName" => "ParameterValue",
     #           },
     #         },
+    #         tags: [
+    #           {
+    #             tag_key: "TagKey", # required
+    #             tag_value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -1030,13 +1105,22 @@ module Aws::Personalize
     #   The configuration details of a campaign.
     #   @return [Types::CampaignConfig]
     #
+    # @!attribute [rw] tags
+    #   A list of [tags][1] to apply to the campaign.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateCampaignRequest AWS API Documentation
     #
     class CreateCampaignRequest < Struct.new(
       :name,
       :solution_version_arn,
       :min_provisioned_tps,
-      :campaign_config)
+      :campaign_config,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1067,6 +1151,12 @@ module Aws::Personalize
     #             kms_key_arn: "KmsKeyArn",
     #           },
     #         },
+    #         tags: [
+    #           {
+    #             tag_key: "TagKey", # required
+    #             tag_value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] job_name
@@ -1095,6 +1185,14 @@ module Aws::Personalize
     #   The path to the Amazon S3 bucket where the job's output is stored.
     #   @return [Types::DatasetExportJobOutput]
     #
+    # @!attribute [rw] tags
+    #   A list of [tags][1] to apply to the dataset export job.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateDatasetExportJobRequest AWS API Documentation
     #
     class CreateDatasetExportJobRequest < Struct.new(
@@ -1102,7 +1200,8 @@ module Aws::Personalize
       :dataset_arn,
       :ingestion_mode,
       :role_arn,
-      :job_output)
+      :job_output,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1127,6 +1226,12 @@ module Aws::Personalize
     #         role_arn: "RoleArn",
     #         kms_key_arn: "KmsKeyArn",
     #         domain: "ECOMMERCE", # accepts ECOMMERCE, VIDEO_ON_DEMAND
+    #         tags: [
+    #           {
+    #             tag_key: "TagKey", # required
+    #             tag_value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -1152,13 +1257,22 @@ module Aws::Personalize
     #   solution versions that you deploy with a campaign.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of [tags][1] to apply to the dataset group.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateDatasetGroupRequest AWS API Documentation
     #
     class CreateDatasetGroupRequest < Struct.new(
       :name,
       :role_arn,
       :kms_key_arn,
-      :domain)
+      :domain,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1190,6 +1304,12 @@ module Aws::Personalize
     #           data_location: "S3Location",
     #         },
     #         role_arn: "RoleArn", # required
+    #         tags: [
+    #           {
+    #             tag_key: "TagKey", # required
+    #             tag_value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] job_name
@@ -1209,13 +1329,22 @@ module Aws::Personalize
     #   S3 data source.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of [tags][1] to apply to the dataset import job.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateDatasetImportJobRequest AWS API Documentation
     #
     class CreateDatasetImportJobRequest < Struct.new(
       :job_name,
       :dataset_arn,
       :data_source,
-      :role_arn)
+      :role_arn,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1240,6 +1369,12 @@ module Aws::Personalize
     #         schema_arn: "Arn", # required
     #         dataset_group_arn: "Arn", # required
     #         dataset_type: "DatasetType", # required
+    #         tags: [
+    #           {
+    #             tag_key: "TagKey", # required
+    #             tag_value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -1268,13 +1403,22 @@ module Aws::Personalize
     #   * Users
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of [tags][1] to apply to the dataset.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateDatasetRequest AWS API Documentation
     #
     class CreateDatasetRequest < Struct.new(
       :name,
       :schema_arn,
       :dataset_group_arn,
-      :dataset_type)
+      :dataset_type,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1297,6 +1441,12 @@ module Aws::Personalize
     #       {
     #         name: "Name", # required
     #         dataset_group_arn: "Arn", # required
+    #         tags: [
+    #           {
+    #             tag_key: "TagKey", # required
+    #             tag_value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -1308,11 +1458,20 @@ module Aws::Personalize
     #   the event data.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of [tags][1] to apply to the event tracker.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateEventTrackerRequest AWS API Documentation
     #
     class CreateEventTrackerRequest < Struct.new(
       :name,
-      :dataset_group_arn)
+      :dataset_group_arn,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1346,6 +1505,12 @@ module Aws::Personalize
     #         name: "Name", # required
     #         dataset_group_arn: "Arn", # required
     #         filter_expression: "FilterExpression", # required
+    #         tags: [
+    #           {
+    #             tag_key: "TagKey", # required
+    #             tag_value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -1360,15 +1525,28 @@ module Aws::Personalize
     #   The filter expression defines which items are included or excluded
     #   from recommendations. Filter expression must follow specific format
     #   rules. For information about filter expression structure and syntax,
-    #   see filter-expressions.
+    #   see [Filter expressions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/filter-expressions.html
     #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of [tags][1] to apply to the filter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html
+    #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateFilterRequest AWS API Documentation
     #
     class CreateFilterRequest < Struct.new(
       :name,
       :dataset_group_arn,
-      :filter_expression)
+      :filter_expression,
+      :tags)
       SENSITIVE = [:filter_expression]
       include Aws::Structure
     end
@@ -1398,6 +1576,12 @@ module Aws::Personalize
     #           },
     #           min_recommendation_requests_per_second: 1,
     #         },
+    #         tags: [
+    #           {
+    #             tag_key: "TagKey", # required
+    #             tag_value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -1425,13 +1609,22 @@ module Aws::Personalize
     #   The configuration details of the recommender.
     #   @return [Types::RecommenderConfig]
     #
+    # @!attribute [rw] tags
+    #   A list of [tags][1] to apply to the recommender.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateRecommenderRequest AWS API Documentation
     #
     class CreateRecommenderRequest < Struct.new(
       :name,
       :dataset_group_arn,
       :recipe_arn,
-      :recommender_config)
+      :recommender_config,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1553,6 +1746,12 @@ module Aws::Personalize
     #             objective_sensitivity: "LOW", # accepts LOW, MEDIUM, HIGH, OFF
     #           },
     #         },
+    #         tags: [
+    #           {
+    #             tag_key: "TagKey", # required
+    #             tag_value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -1609,6 +1808,14 @@ module Aws::Personalize
     #    </note>
     #   @return [Types::SolutionConfig]
     #
+    # @!attribute [rw] tags
+    #   A list of [tags][1] to apply to the solution.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateSolutionRequest AWS API Documentation
     #
     class CreateSolutionRequest < Struct.new(
@@ -1618,7 +1825,8 @@ module Aws::Personalize
       :recipe_arn,
       :dataset_group_arn,
       :event_type,
-      :solution_config)
+      :solution_config,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1641,6 +1849,12 @@ module Aws::Personalize
     #       {
     #         solution_arn: "Arn", # required
     #         training_mode: "FULL", # accepts FULL, UPDATE
+    #         tags: [
+    #           {
+    #             tag_key: "TagKey", # required
+    #             tag_value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] solution_arn
@@ -1668,11 +1882,20 @@ module Aws::Personalize
     #   [2]: https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-hrnn-coldstart.html
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of [tags][1] to apply to the solution version.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateSolutionVersionRequest AWS API Documentation
     #
     class CreateSolutionVersionRequest < Struct.new(
       :solution_arn,
-      :training_mode)
+      :training_mode,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1778,7 +2001,7 @@ module Aws::Personalize
     end
 
     # Describes a job that exports a dataset to an Amazon S3 bucket. For
-    # more information, see CreateDatasetExportJob.
+    # more information, see [CreateDatasetExportJob][1].
     #
     # A dataset export job can be in one of the following states:
     #
@@ -1786,6 +2009,10 @@ module Aws::Personalize
     #   FAILED
     #
     # ^
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetExportJob.html
     #
     # @!attribute [rw] job_name
     #   The name of the export job.
@@ -1885,7 +2112,11 @@ module Aws::Personalize
     end
 
     # Provides a summary of the properties of a dataset export job. For a
-    # complete listing, call the DescribeDatasetExportJob API.
+    # complete listing, call the [DescribeDatasetExportJob][1] API.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetExportJob.html
     #
     # @!attribute [rw] dataset_export_job_arn
     #   The Amazon Resource Name (ARN) of the dataset export job.
@@ -1935,13 +2166,19 @@ module Aws::Personalize
 
     # A dataset group is a collection of related datasets (Interactions,
     # User, and Item). You create a dataset group by calling
-    # CreateDatasetGroup. You then create a dataset and add it to a dataset
-    # group by calling CreateDataset. The dataset group is used to create
-    # and train a solution by calling CreateSolution. A dataset group can
-    # contain only one of each type of dataset.
+    # [CreateDatasetGroup][1]. You then create a dataset and add it to a
+    # dataset group by calling [CreateDataset][2]. The dataset group is used
+    # to create and train a solution by calling [CreateSolution][3]. A
+    # dataset group can contain only one of each type of dataset.
     #
     # You can specify an Key Management Service (KMS) key to encrypt the
     # datasets in the group.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetGroup.html
+    # [2]: https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html
+    # [3]: https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html
     #
     # @!attribute [rw] name
     #   The name of the dataset group.
@@ -2005,7 +2242,11 @@ module Aws::Personalize
     end
 
     # Provides a summary of the properties of a dataset group. For a
-    # complete listing, call the DescribeDatasetGroup API.
+    # complete listing, call the [DescribeDatasetGroup][1] API.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetGroup.html
     #
     # @!attribute [rw] name
     #   The name of the dataset group.
@@ -2059,7 +2300,7 @@ module Aws::Personalize
 
     # Describes a job that imports training data from a data source (Amazon
     # S3 bucket) to an Amazon Personalize dataset. For more information, see
-    # CreateDatasetImportJob.
+    # [CreateDatasetImportJob][1].
     #
     # A dataset import job can be in one of the following states:
     #
@@ -2067,6 +2308,10 @@ module Aws::Personalize
     #   FAILED
     #
     # ^
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetImportJob.html
     #
     # @!attribute [rw] job_name
     #   The name of the import job.
@@ -2130,7 +2375,11 @@ module Aws::Personalize
     end
 
     # Provides a summary of the properties of a dataset import job. For a
-    # complete listing, call the DescribeDatasetImportJob API.
+    # complete listing, call the [DescribeDatasetImportJob][1] API.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetImportJob.html
     #
     # @!attribute [rw] dataset_import_job_arn
     #   The Amazon Resource Name (ARN) of the dataset import job.
@@ -2179,7 +2428,11 @@ module Aws::Personalize
     end
 
     # Describes the schema for a dataset. For more information on schemas,
-    # see CreateSchema.
+    # see [CreateSchema][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSchema.html
     #
     # @!attribute [rw] name
     #   The name of the schema.
@@ -2220,7 +2473,11 @@ module Aws::Personalize
     end
 
     # Provides a summary of the properties of a dataset schema. For a
-    # complete listing, call the DescribeSchema API.
+    # complete listing, call the [DescribeSchema][1] API.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSchema.html
     #
     # @!attribute [rw] name
     #   The name of the schema.
@@ -2256,7 +2513,11 @@ module Aws::Personalize
     end
 
     # Provides a summary of the properties of a dataset. For a complete
-    # listing, call the DescribeDataset API.
+    # listing, call the [DescribeDataset][1] API.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDataset.html
     #
     # @!attribute [rw] name
     #   The name of the dataset.
@@ -3161,7 +3422,11 @@ module Aws::Personalize
     end
 
     # Provides a summary of the properties of an event tracker. For a
-    # complete listing, call the DescribeEventTracker API.
+    # complete listing, call the [DescribeEventTracker][1] API.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeEventTracker.html
     #
     # @!attribute [rw] name
     #   The name of the event tracker.
@@ -3284,7 +3549,11 @@ module Aws::Personalize
     #   Specifies the type of item interactions to filter out of
     #   recommendation results. The filter expression must follow specific
     #   format rules. For information about filter expression structure and
-    #   syntax, see filter-expressions.
+    #   syntax, see [Filter expressions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/filter-expressions.html
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -3375,7 +3644,12 @@ module Aws::Personalize
     #   @return [String]
     #
     # @!attribute [rw] metrics
-    #   The metrics for the solution version.
+    #   The metrics for the solution version. For more information, see [
+    #   Evaluating a solution version with metrics ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/working-with-training-metrics.html
     #   @return [Hash<String,Float>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/GetSolutionMetricsResponse AWS API Documentation
@@ -3764,8 +4038,12 @@ module Aws::Personalize
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   A token returned from the previous call to `ListCampaigns` for
+    #   A token returned from the previous call to [ListCampaigns][1] for
     #   getting the next set of campaigns (if they exist).
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/API_ListCampaigns.html
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -4119,8 +4397,8 @@ module Aws::Personalize
     # @!attribute [rw] domain
     #   Filters returned recipes by domain for a Domain dataset group. Only
     #   recipes (Domain dataset group use cases) for this domain are
-    #   included in the response. If you don't specify a domain, only
-    #   non-domain recipes are returned.
+    #   included in the response. If you don't specify a domain, all
+    #   recipes are returned.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/ListRecipesRequest AWS API Documentation
@@ -4344,6 +4622,37 @@ module Aws::Personalize
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The resource's Amazon Resource Name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The resource's tags.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the additional objective for the solution, such as
     # maximizing streaming minutes or increasing revenue. For more
     # information see [Optimizing a solution][1].
@@ -4382,7 +4691,11 @@ module Aws::Personalize
 
     # Provides information about a recipe. Each recipe provides an algorithm
     # that Amazon Personalize uses in model training when you use the
-    # CreateSolution operation.
+    # [CreateSolution][1] operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html
     #
     # @!attribute [rw] name
     #   The name of the recipe.
@@ -4444,7 +4757,11 @@ module Aws::Personalize
     end
 
     # Provides a summary of the properties of a recipe. For a complete
-    # listing, call the DescribeRecipe API.
+    # listing, call the [DescribeRecipe][1] API.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeRecipe.html
     #
     # @!attribute [rw] name
     #   The name of the recipe.
@@ -4532,6 +4849,9 @@ module Aws::Personalize
     #   * CREATE PENDING &gt; CREATE IN\_PROGRESS &gt; ACTIVE -or- CREATE
     #     FAILED
     #
+    #   * STOP PENDING &gt; STOP IN\_PROGRESS &gt; INACTIVE &gt; START
+    #     PENDING &gt; START IN\_PROGRESS &gt; ACTIVE
+    #
     #   * DELETE PENDING &gt; DELETE IN\_PROGRESS
     #   @return [String]
     #
@@ -4542,6 +4862,16 @@ module Aws::Personalize
     # @!attribute [rw] latest_recommender_update
     #   Provides a summary of the latest updates to the recommender.
     #   @return [Types::RecommenderUpdateSummary]
+    #
+    # @!attribute [rw] model_metrics
+    #   Provides evaluation metrics that help you determine the performance
+    #   of a recommender. For more information, see [ Evaluating a
+    #   recommender][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/evaluating-recommenders.html
+    #   @return [Hash<String,Float>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/Recommender AWS API Documentation
     #
@@ -4555,7 +4885,8 @@ module Aws::Personalize
       :last_updated_date_time,
       :status,
       :failure_reason,
-      :latest_recommender_update)
+      :latest_recommender_update,
+      :model_metrics)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4626,6 +4957,9 @@ module Aws::Personalize
     #   * CREATE PENDING &gt; CREATE IN\_PROGRESS &gt; ACTIVE -or- CREATE
     #     FAILED
     #
+    #   * STOP PENDING &gt; STOP IN\_PROGRESS &gt; INACTIVE &gt; START
+    #     PENDING &gt; START IN\_PROGRESS &gt; ACTIVE
+    #
     #   * DELETE PENDING &gt; DELETE IN\_PROGRESS
     #   @return [String]
     #
@@ -4654,7 +4988,11 @@ module Aws::Personalize
     end
 
     # Provides a summary of the properties of a recommender update. For a
-    # complete listing, call the DescribeRecommender API operation.
+    # complete listing, call the [DescribeRecommender][1] API.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeRecommender.html
     #
     # @!attribute [rw] recommender_config
     #   The configuration details of the recommender update.
@@ -4677,6 +5015,9 @@ module Aws::Personalize
     #
     #   * CREATE PENDING &gt; CREATE IN\_PROGRESS &gt; ACTIVE -or- CREATE
     #     FAILED
+    #
+    #   * STOP PENDING &gt; STOP IN\_PROGRESS &gt; INACTIVE &gt; START
+    #     PENDING &gt; START IN\_PROGRESS &gt; ACTIVE
     #
     #   * DELETE PENDING &gt; DELETE IN\_PROGRESS
     #   @return [String]
@@ -4930,8 +5271,12 @@ module Aws::Personalize
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] auto_ml_config
-    #   The AutoMLConfig object containing a list of recipes to search when
-    #   AutoML is performed.
+    #   The [AutoMLConfig][1] object containing a list of recipes to search
+    #   when AutoML is performed.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/API_AutoMLConfig.html
     #   @return [Types::AutoMLConfig]
     #
     # @!attribute [rw] optimization_objective
@@ -4958,7 +5303,11 @@ module Aws::Personalize
     end
 
     # Provides a summary of the properties of a solution. For a complete
-    # listing, call the DescribeSolution API.
+    # listing, call the [DescribeSolution][1] API.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html
     #
     # @!attribute [rw] name
     #   The name of the solution.
@@ -5000,7 +5349,11 @@ module Aws::Personalize
     end
 
     # An object that provides information about a specific version of a
-    # Solution in a Custom dataset group.
+    # [Solution][1] in a Custom dataset group.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/API_Solution.html
     #
     # @!attribute [rw] solution_version_arn
     #   The ARN of the solution version.
@@ -5124,7 +5477,11 @@ module Aws::Personalize
     end
 
     # Provides a summary of the properties of a solution version. For a
-    # complete listing, call the DescribeSolutionVersion API.
+    # complete listing, call the [DescribeSolutionVersion][1] API.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html
     #
     # @!attribute [rw] solution_version_arn
     #   The Amazon Resource Name (ARN) of the solution version.
@@ -5167,6 +5524,68 @@ module Aws::Personalize
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StartRecommenderRequest
+    #   data as a hash:
+    #
+    #       {
+    #         recommender_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] recommender_arn
+    #   The Amazon Resource Name (ARN) of the recommender to start.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/StartRecommenderRequest AWS API Documentation
+    #
+    class StartRecommenderRequest < Struct.new(
+      :recommender_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recommender_arn
+    #   The Amazon Resource Name (ARN) of the recommender you started.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/StartRecommenderResponse AWS API Documentation
+    #
+    class StartRecommenderResponse < Struct.new(
+      :recommender_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StopRecommenderRequest
+    #   data as a hash:
+    #
+    #       {
+    #         recommender_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] recommender_arn
+    #   The Amazon Resource Name (ARN) of the recommender to stop.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/StopRecommenderRequest AWS API Documentation
+    #
+    class StopRecommenderRequest < Struct.new(
+      :recommender_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recommender_arn
+    #   The Amazon Resource Name (ARN) of the recommender you stopped.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/StopRecommenderResponse AWS API Documentation
+    #
+    class StopRecommenderResponse < Struct.new(
+      :recommender_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StopSolutionVersionCreationRequest
     #   data as a hash:
     #
@@ -5187,6 +5606,109 @@ module Aws::Personalize
       include Aws::Structure
     end
 
+    # The optional metadata that you apply to resources to help you
+    # categorize and organize them. Each tag consists of a key and an
+    # optional value, both of which you define. For more information see
+    # [Tagging Personalize resources][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         tag_key: "TagKey", # required
+    #         tag_value: "TagValue", # required
+    #       }
+    #
+    # @!attribute [rw] tag_key
+    #   One part of a key-value pair that makes up a tag. A key is a general
+    #   label that acts like a category for more specific tag values.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_value
+    #   The optional part of a key-value pair that makes up a tag. A value
+    #   acts as a descriptor within a tag category (key).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :tag_key,
+      :tag_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #         tags: [ # required
+    #           {
+    #             tag_key: "TagKey", # required
+    #             tag_value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The resource's Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags to apply to the resource. For more information see [Tagging
+    #   Personalize resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
+    # The request contains more tag keys than can be associated with a
+    # resource (50 tag keys per resource).
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/TooManyTagKeysException AWS API Documentation
+    #
+    class TooManyTagKeysException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # You have exceeded the maximum number of tags you can apply to this
+    # resource.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/TooManyTagsException AWS API Documentation
+    #
+    class TooManyTagsException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # If hyperparameter optimization (HPO) was performed, contains the
     # hyperparameter values of the best performing model.
     #
@@ -5201,6 +5723,35 @@ module Aws::Personalize
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The resource's Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   Keys to remove from the resource's tags.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateCampaignRequest
     #   data as a hash:

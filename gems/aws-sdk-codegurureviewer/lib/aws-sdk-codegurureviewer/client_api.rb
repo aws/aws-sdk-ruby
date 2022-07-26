@@ -34,6 +34,7 @@ module Aws::CodeGuruReviewer
     CodeReviewType = Shapes::StructureShape.new(name: 'CodeReviewType')
     CommitDiffSourceCodeType = Shapes::StructureShape.new(name: 'CommitDiffSourceCodeType')
     CommitId = Shapes::StringShape.new(name: 'CommitId')
+    ConfigFileState = Shapes::StringShape.new(name: 'ConfigFileState')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConnectionArn = Shapes::StringShape.new(name: 'ConnectionArn')
     CreateCodeReviewRequest = Shapes::StructureShape.new(name: 'CreateCodeReviewRequest')
@@ -59,6 +60,7 @@ module Aws::CodeGuruReviewer
     KMSKeyDetails = Shapes::StructureShape.new(name: 'KMSKeyDetails')
     KMSKeyId = Shapes::StringShape.new(name: 'KMSKeyId')
     LineNumber = Shapes::IntegerShape.new(name: 'LineNumber')
+    LinesOfCodeCount = Shapes::IntegerShape.new(name: 'LinesOfCodeCount')
     ListCodeReviewsMaxResults = Shapes::IntegerShape.new(name: 'ListCodeReviewsMaxResults')
     ListCodeReviewsRequest = Shapes::StructureShape.new(name: 'ListCodeReviewsRequest')
     ListCodeReviewsResponse = Shapes::StructureShape.new(name: 'ListCodeReviewsResponse')
@@ -73,7 +75,6 @@ module Aws::CodeGuruReviewer
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     LongDescription = Shapes::StringShape.new(name: 'LongDescription')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
-    MeteredLinesOfCodeCount = Shapes::IntegerShape.new(name: 'MeteredLinesOfCodeCount')
     Metrics = Shapes::StructureShape.new(name: 'Metrics')
     MetricsSummary = Shapes::StructureShape.new(name: 'MetricsSummary')
     Name = Shapes::StringShape.new(name: 'Name')
@@ -183,6 +184,7 @@ module Aws::CodeGuruReviewer
     CodeReview.add_member(:association_arn, Shapes::ShapeRef.new(shape: AssociationArn, location_name: "AssociationArn"))
     CodeReview.add_member(:metrics, Shapes::ShapeRef.new(shape: Metrics, location_name: "Metrics"))
     CodeReview.add_member(:analysis_types, Shapes::ShapeRef.new(shape: AnalysisTypes, location_name: "AnalysisTypes"))
+    CodeReview.add_member(:config_file_state, Shapes::ShapeRef.new(shape: ConfigFileState, location_name: "ConfigFileState"))
     CodeReview.struct_class = Types::CodeReview
 
     CodeReviewSummaries.member = Shapes::ShapeRef.new(shape: CodeReviewSummary)
@@ -313,11 +315,13 @@ module Aws::CodeGuruReviewer
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
-    Metrics.add_member(:metered_lines_of_code_count, Shapes::ShapeRef.new(shape: MeteredLinesOfCodeCount, location_name: "MeteredLinesOfCodeCount"))
+    Metrics.add_member(:metered_lines_of_code_count, Shapes::ShapeRef.new(shape: LinesOfCodeCount, location_name: "MeteredLinesOfCodeCount"))
+    Metrics.add_member(:suppressed_lines_of_code_count, Shapes::ShapeRef.new(shape: LinesOfCodeCount, location_name: "SuppressedLinesOfCodeCount"))
     Metrics.add_member(:findings_count, Shapes::ShapeRef.new(shape: FindingsCount, location_name: "FindingsCount"))
     Metrics.struct_class = Types::Metrics
 
-    MetricsSummary.add_member(:metered_lines_of_code_count, Shapes::ShapeRef.new(shape: MeteredLinesOfCodeCount, location_name: "MeteredLinesOfCodeCount"))
+    MetricsSummary.add_member(:metered_lines_of_code_count, Shapes::ShapeRef.new(shape: LinesOfCodeCount, location_name: "MeteredLinesOfCodeCount"))
+    MetricsSummary.add_member(:suppressed_lines_of_code_count, Shapes::ShapeRef.new(shape: LinesOfCodeCount, location_name: "SuppressedLinesOfCodeCount"))
     MetricsSummary.add_member(:findings_count, Shapes::ShapeRef.new(shape: FindingsCount, location_name: "FindingsCount"))
     MetricsSummary.struct_class = Types::MetricsSummary
 

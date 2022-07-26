@@ -5,11 +5,10 @@ module Aws
     module Plugins
       # @api private
       class QueueUrls < Seahorse::Client::Plugin
-
+        # Extract region from a provided queue_url
         class Handler < Seahorse::Client::Handler
-
           def call(context)
-            if queue_url = context.params[:queue_url]
+            if (queue_url = context.params[:queue_url])
               update_endpoint(context, queue_url)
               update_region(context, queue_url)
             end
@@ -24,7 +23,7 @@ module Aws
           # region, then we will modify the request to have
           # a sigv4 signer for the proper region.
           def update_region(context, queue_url)
-            if queue_region = parse_region(queue_url)
+            if (queue_region = parse_region(queue_url))
               if queue_region != context.config.region
                 config = context.config.dup
                 config.region = queue_region
@@ -37,12 +36,21 @@ module Aws
 
           private
 
-          # take the first component after service delimiter
-          # https://sqs.us-east-1.amazonaws.com/1234567890/demo
-          # https://vpce-x-y.sqs.us-east-1.vpce.amazonaws.com/1234567890/demo
+          # take the first component after the SQS service component
+          # Will return us-east-1 for:
+          #   https://sqs.us-east-1.amazonaws.com/1234567890/demo
+          #   https://vpce-x-y.sqs.us-east-1.vpce.amazonaws.com/1234567890/demo
+          # Will not return for:
+          #   https://localstack-sqs.example.dev/queue/example
           def parse_region(url)
-            parts = url.split('sqs.')
-            parts[1].split('.').first if parts.size > 1
+            parts = URI.parse(url).host.split('.')
+            parts.each_with_index do |part, index|
+              if part == 'sqs'
+                # assume region is the part right after the 'sqs' part
+                return parts[index + 1]
+              end
+            end
+            nil # no region found
           end
 
         end

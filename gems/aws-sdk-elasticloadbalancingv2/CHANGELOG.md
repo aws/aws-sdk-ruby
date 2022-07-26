@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.78.0 (2022-06-29)
+------------------
+
+* Feature - This release adds two attributes for ALB. One, helps to preserve the host header and the other helps to modify, preserve, or remove the X-Forwarded-For header in the HTTP request.
+
+1.77.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.76.0 (2022-02-03)
 ------------------
 

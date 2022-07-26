@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::AuditManager
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -658,8 +660,8 @@ module Aws::AuditManager
     #     },
     #     roles: [ # required
     #       {
-    #         role_type: "PROCESS_OWNER", # accepts PROCESS_OWNER, RESOURCE_OWNER
-    #         role_arn: "IamArn",
+    #         role_type: "PROCESS_OWNER", # required, accepts PROCESS_OWNER, RESOURCE_OWNER
+    #         role_arn: "IamArn", # required
     #       },
     #     ],
     #     framework_id: "UUID", # required
@@ -790,7 +792,7 @@ module Aws::AuditManager
     #         name: "ControlSetName", # required
     #         controls: [
     #           {
-    #             id: "UUID",
+    #             id: "UUID", # required
     #           },
     #         ],
     #       },
@@ -1061,7 +1063,35 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Deletes an assessment report from an assessment in Audit Manager.
+    # Deletes an assessment report in Audit Manager.
+    #
+    # When you run the `DeleteAssessmentReport` operation, Audit Manager
+    # attempts to delete the following data:
+    #
+    # 1.  The specified assessment report that’s stored in your S3 bucket
+    #
+    # 2.  The associated metadata that’s stored in Audit Manager
+    #
+    # If Audit Manager can’t access the assessment report in your S3 bucket,
+    # the report isn’t deleted. In this event, the `DeleteAssessmentReport`
+    # operation doesn’t fail. Instead, it proceeds to delete the associated
+    # metadata only. You must then delete the assessment report from the S3
+    # bucket yourself.
+    #
+    # This scenario happens when Audit Manager receives a `403 (Forbidden)`
+    # or `404 (Not Found)` error from Amazon S3. To avoid this, make sure
+    # that your S3 bucket is available, and that you configured the correct
+    # permissions for Audit Manager to delete resources in your S3 bucket.
+    # For an example permissions policy that you can use, see [Assessment
+    # report destination permissions][1] in the *Audit Manager User Guide*.
+    # For information about the issues that could cause a `403 (Forbidden)`
+    # or `404 (Not Found`) error from Amazon S3, see [List of Error
+    # Codes][2] in the *Amazon Simple Storage Service API Reference*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/audit-manager/latest/userguide/security_iam_id-based-policy-examples.html#full-administrator-access-assessment-report-destination
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ErrorCodeList
     #
     # @option params [required, String] :assessment_id
     #   The unique identifier for the assessment.
@@ -1111,6 +1141,48 @@ module Aws::AuditManager
 
     # Deregisters an account in Audit Manager.
     #
+    # <note markdown="1"> When you deregister your account from Audit Manager, your data isn’t
+    # deleted. If you want to delete your resource data, you must perform
+    # that task separately before you deregister your account. Either, you
+    # can do this in the Audit Manager console. Or, you can use one of the
+    # delete API operations that are provided by Audit Manager.
+    #
+    #  To delete your Audit Manager resource data, see the following
+    # instructions:
+    #
+    #  * [DeleteAssessment][1] (see also: [Deleting an assessment][2] in the
+    #   *Audit Manager User Guide*)
+    #
+    # * [DeleteAssessmentFramework][3] (see also: [Deleting a custom
+    #   framework][4] in the *Audit Manager User Guide*)
+    #
+    # * [DeleteAssessmentFrameworkShare][5] (see also: [Deleting a share
+    #   request][6] in the *Audit Manager User Guide*)
+    #
+    # * [DeleteAssessmentReport][7] (see also: [Deleting an assessment
+    #   report][8] in the *Audit Manager User Guide*)
+    #
+    # * [DeleteControl][9] (see also: [Deleting a custom control][10] in the
+    #   *Audit Manager User Guide*)
+    #
+    #  At this time, Audit Manager doesn't provide an option to delete
+    # evidence. All available delete operations are listed above.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessment.html
+    # [2]: https://docs.aws.amazon.com/audit-manager/latest/userguide/delete-assessment.html
+    # [3]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessmentFramework.html
+    # [4]: https://docs.aws.amazon.com/audit-manager/latest/userguide/delete-custom-framework.html
+    # [5]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessmentFrameworkShare.html
+    # [6]: https://docs.aws.amazon.com/audit-manager/latest/userguide/deleting-shared-framework-requests.html
+    # [7]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessmentReport.html
+    # [8]: https://docs.aws.amazon.com/audit-manager/latest/userguide/generate-assessment-report.html#delete-assessment-report-steps
+    # [9]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteControl.html
+    # [10]: https://docs.aws.amazon.com/audit-manager/latest/userguide/delete-controls.html
+    #
     # @return [Types::DeregisterAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeregisterAccountResponse#status #status} => String
@@ -1128,15 +1200,58 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Removes the specified member Amazon Web Services account as a
-    # delegated administrator for Audit Manager.
+    # Removes the specified Amazon Web Services account as a delegated
+    # administrator for Audit Manager.
     #
     # When you remove a delegated administrator from your Audit Manager
     # settings, you continue to have access to the evidence that you
     # previously collected under that account. This is also the case when
-    # you deregister a delegated administrator from Audit Manager. However,
+    # you deregister a delegated administrator from Organizations. However,
     # Audit Manager will stop collecting and attaching evidence to that
     # delegated administrator account moving forward.
+    #
+    # <note markdown="1"> When you deregister a delegated administrator account for Audit
+    # Manager, the data for that account isn’t deleted. If you want to
+    # delete resource data for a delegated administrator account, you must
+    # perform that task separately before you deregister the account.
+    # Either, you can do this in the Audit Manager console. Or, you can use
+    # one of the delete API operations that are provided by Audit Manager.
+    #
+    #  To delete your Audit Manager resource data, see the following
+    # instructions:
+    #
+    #  * [DeleteAssessment][1] (see also: [Deleting an assessment][2] in the
+    #   *Audit Manager User Guide*)
+    #
+    # * [DeleteAssessmentFramework][3] (see also: [Deleting a custom
+    #   framework][4] in the *Audit Manager User Guide*)
+    #
+    # * [DeleteAssessmentFrameworkShare][5] (see also: [Deleting a share
+    #   request][6] in the *Audit Manager User Guide*)
+    #
+    # * [DeleteAssessmentReport][7] (see also: [Deleting an assessment
+    #   report][8] in the *Audit Manager User Guide*)
+    #
+    # * [DeleteControl][9] (see also: [Deleting a custom control][10] in the
+    #   *Audit Manager User Guide*)
+    #
+    #  At this time, Audit Manager doesn't provide an option to delete
+    # evidence. All available delete operations are listed above.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessment.html
+    # [2]: https://docs.aws.amazon.com/audit-manager/latest/userguide/delete-assessment.html
+    # [3]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessmentFramework.html
+    # [4]: https://docs.aws.amazon.com/audit-manager/latest/userguide/delete-custom-framework.html
+    # [5]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessmentFrameworkShare.html
+    # [6]: https://docs.aws.amazon.com/audit-manager/latest/userguide/deleting-shared-framework-requests.html
+    # [7]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessmentReport.html
+    # [8]: https://docs.aws.amazon.com/audit-manager/latest/userguide/generate-assessment-report.html#delete-assessment-report-steps
+    # [9]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteControl.html
+    # [10]: https://docs.aws.amazon.com/audit-manager/latest/userguide/delete-controls.html
     #
     # @option params [String] :admin_account_id
     #   The identifier for the administrator account.
@@ -1952,8 +2067,8 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Returns a list of the in-scope Amazon Web Services services for the
-    # specified assessment.
+    # Returns a list of the in-scope Amazon Web Services for the specified
+    # assessment.
     #
     # @return [Types::GetServicesInScopeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2689,6 +2804,32 @@ module Aws::AuditManager
     # custom framework is available. Recipients have 120 days to accept or
     # decline the request. If no action is taken, the share request expires.
     #
+    # When you create a share request, Audit Manager stores a snapshot of
+    # your custom framework in the US East (N. Virginia) Amazon Web Services
+    # Region. Audit Manager also stores a backup of the same snapshot in the
+    # US West (Oregon) Amazon Web Services Region.
+    #
+    # Audit Manager deletes the snapshot and the backup snapshot when one of
+    # the following events occurs:
+    #
+    # * The sender revokes the share request.
+    #
+    # * The recipient declines the share request.
+    #
+    # * The recipient encounters an error and doesn't successfully accept
+    #   the share request.
+    #
+    # * The share request expires before the recipient responds to the
+    #   request.
+    #
+    # When a sender [resends a share request][1], the snapshot is replaced
+    # with an updated version that corresponds with the latest version of
+    # the custom framework.
+    #
+    # When a recipient accepts a share request, the snapshot is replicated
+    # into their Amazon Web Services account under the Amazon Web Services
+    # Region that was specified in the share request.
+    #
     # When you invoke the `StartAssessmentFrameworkShare` API, you are about
     # to share a custom framework with another Amazon Web Services account.
     # You may not share a custom framework that is derived from a standard
@@ -2696,11 +2837,12 @@ module Aws::AuditManager
     # sharing by Amazon Web Services, unless you have obtained permission to
     # do so from the owner of the standard framework. To learn more about
     # which standard frameworks are eligible for sharing, see [Framework
-    # sharing eligibility][1] in the *Audit Manager User Guide*.
+    # sharing eligibility][2] in the *Audit Manager User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/audit-manager/latest/userguide/share-custom-framework-concepts-and-terminology.html#eligibility
+    # [1]: https://docs.aws.amazon.com/audit-manager/latest/userguide/framework-sharing.html#framework-sharing-resend
+    # [2]: https://docs.aws.amazon.com/audit-manager/latest/userguide/share-custom-framework-concepts-and-terminology.html#eligibility
     #
     # @option params [required, String] :framework_id
     #   The unique identifier for the custom framework to be shared.
@@ -2859,8 +3001,8 @@ module Aws::AuditManager
     #     },
     #     roles: [
     #       {
-    #         role_type: "PROCESS_OWNER", # accepts PROCESS_OWNER, RESOURCE_OWNER
-    #         role_arn: "IamArn",
+    #         role_type: "PROCESS_OWNER", # required, accepts PROCESS_OWNER, RESOURCE_OWNER
+    #         role_arn: "IamArn", # required
     #       },
     #     ],
     #   })
@@ -3116,9 +3258,9 @@ module Aws::AuditManager
     #       {
     #         id: "ControlSetName",
     #         name: "ControlSetName", # required
-    #         controls: [
+    #         controls: [ # required
     #           {
-    #             id: "UUID",
+    #             id: "UUID", # required
     #           },
     #         ],
     #       },
@@ -3458,8 +3600,8 @@ module Aws::AuditManager
     #     },
     #     default_process_owners: [
     #       {
-    #         role_type: "PROCESS_OWNER", # accepts PROCESS_OWNER, RESOURCE_OWNER
-    #         role_arn: "IamArn",
+    #         role_type: "PROCESS_OWNER", # required, accepts PROCESS_OWNER, RESOURCE_OWNER
+    #         role_arn: "IamArn", # required
     #       },
     #     ],
     #     kms_key: "KmsKey",
@@ -3536,7 +3678,7 @@ module Aws::AuditManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-auditmanager'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.84.0 (2022-05-12)
+------------------
+
+* Feature - Lambda releases NodeJs 16 managed runtime to be available in all commercial regions.
+
+1.83.0 (2022-04-06)
+------------------
+
+* Feature - This release adds new APIs for creating and managing Lambda Function URLs and adds a new FunctionUrlAuthType parameter to the AddPermission API. Customers can use Function URLs to create built-in HTTPS endpoints on their functions.
+
+1.82.0 (2022-03-24)
+------------------
+
+* Feature - Adds support for increased ephemeral storage (/tmp) up to 10GB for Lambda functions. Customers can now provision up to 10 GB of ephemeral storage per function instance, a 20x increase over the previous limit of 512 MB.
+
+1.81.0 (2022-03-11)
+------------------
+
+* Feature - Adds PrincipalOrgID support to AddPermission API. Customers can use it to manage permissions to lambda functions at AWS Organizations level.
+
+1.80.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.79.0 (2022-02-23)
+------------------
+
+* Feature - Lambda releases .NET 6 managed runtime to be available in all commercial regions.
+
 1.78.0 (2022-02-03)
 ------------------
 

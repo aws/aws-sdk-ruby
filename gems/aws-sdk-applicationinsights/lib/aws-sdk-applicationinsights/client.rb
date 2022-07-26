@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::ApplicationInsights
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -384,8 +386,17 @@ module Aws::ApplicationInsights
     #   characters. The maximum length of a tag value is 256 characters.
     #
     # @option params [Boolean] :auto_config_enabled
+    #   Indicates whether Application Insights automatically configures
+    #   unmonitored resources in the resource group.
     #
     # @option params [Boolean] :auto_create
+    #   Configures all of the resources in the resource group by applying the
+    #   recommended configurations.
+    #
+    # @option params [String] :grouping_type
+    #   Application Insights can create applications based on a resource group
+    #   or on an account. To create an account-based application using all of
+    #   the resources in the account, set this parameter to `ACCOUNT_BASED`.
     #
     # @return [Types::CreateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -406,6 +417,7 @@ module Aws::ApplicationInsights
     #     ],
     #     auto_config_enabled: false,
     #     auto_create: false,
+    #     grouping_type: "ACCOUNT_BASED", # accepts ACCOUNT_BASED
     #   })
     #
     # @example Response structure
@@ -724,9 +736,7 @@ module Aws::ApplicationInsights
     #   The name of the component.
     #
     # @option params [required, String] :tier
-    #   The tier of the application component. Supported tiers include
-    #   `DOT_NET_CORE`, `DOT_NET_WORKER`, `DOT_NET_WEB`, `SQL_SERVER`, and
-    #   `DEFAULT`.
+    #   The tier of the application component.
     #
     # @return [Types::DescribeComponentConfigurationRecommendationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -890,7 +900,7 @@ module Aws::ApplicationInsights
     #   resp.problem.affected_resource #=> String
     #   resp.problem.start_time #=> Time
     #   resp.problem.end_time #=> Time
-    #   resp.problem.severity_level #=> String, one of "Low", "Medium", "High"
+    #   resp.problem.severity_level #=> String, one of "Informative", "Low", "Medium", "High"
     #   resp.problem.resource_group_name #=> String
     #   resp.problem.feedback #=> Hash
     #   resp.problem.feedback["FeedbackKey"] #=> String, one of "NOT_SPECIFIED", "USEFUL", "NOT_USEFUL"
@@ -1277,6 +1287,7 @@ module Aws::ApplicationInsights
     #   The token to request the next page of results.
     #
     # @option params [String] :component_name
+    #   The name of the component.
     #
     # @return [Types::ListProblemsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1307,7 +1318,7 @@ module Aws::ApplicationInsights
     #   resp.problem_list[0].affected_resource #=> String
     #   resp.problem_list[0].start_time #=> Time
     #   resp.problem_list[0].end_time #=> Time
-    #   resp.problem_list[0].severity_level #=> String, one of "Low", "Medium", "High"
+    #   resp.problem_list[0].severity_level #=> String, one of "Informative", "Low", "Medium", "High"
     #   resp.problem_list[0].resource_group_name #=> String
     #   resp.problem_list[0].feedback #=> Hash
     #   resp.problem_list[0].feedback["FeedbackKey"] #=> String, one of "NOT_SPECIFIED", "USEFUL", "NOT_USEFUL"
@@ -1463,6 +1474,7 @@ module Aws::ApplicationInsights
     #   problems.
     #
     # @option params [Boolean] :auto_config_enabled
+    #   Turns auto-configuration on or off.
     #
     # @return [Types::UpdateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1549,9 +1561,7 @@ module Aws::ApplicationInsights
     #   Indicates whether the application component is monitored.
     #
     # @option params [String] :tier
-    #   The tier of the application component. Supported tiers include
-    #   `DOT_NET_WORKER`, `DOT_NET_WEB`, `DOT_NET_CORE`, `SQL_SERVER`, and
-    #   `DEFAULT`.
+    #   The tier of the application component.
     #
     # @option params [String] :component_configuration
     #   The configuration settings of the component. The value is the escaped
@@ -1567,6 +1577,8 @@ module Aws::ApplicationInsights
     #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/component-config.html
     #
     # @option params [Boolean] :auto_config_enabled
+    #   Automatically configures the component by applying the recommended
+    #   configurations.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1663,7 +1675,7 @@ module Aws::ApplicationInsights
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationinsights'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

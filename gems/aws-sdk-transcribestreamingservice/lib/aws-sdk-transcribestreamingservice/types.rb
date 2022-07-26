@@ -567,7 +567,9 @@ module Aws::TranscribeStreamingService
     #   @return [String]
     #
     # @!attribute [rw] media_sample_rate_hertz
-    #   The sample rate of the input audio in Hertz.
+    #   The sample rate of the input audio (in Hertz). Amazon Transcribe
+    #   medical supports a range from 16,000 Hz to 48,000 Hz. Note that the
+    #   sample rate you specify must match that of your audio.
     #   @return [Integer]
     #
     # @!attribute [rw] media_encoding
@@ -657,7 +659,7 @@ module Aws::TranscribeStreamingService
     #   @return [String]
     #
     # @!attribute [rw] media_sample_rate_hertz
-    #   The sample rate of the input audio in Hertz.
+    #   The sample rate of the input audio, in Hertz (Hz).
     #   @return [Integer]
     #
     # @!attribute [rw] media_encoding
@@ -748,6 +750,8 @@ module Aws::TranscribeStreamingService
     #         identify_language: false,
     #         language_options: "LanguageOptions",
     #         preferred_language: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
+    #         vocabulary_names: "VocabularyNames",
+    #         vocabulary_filter_names: "VocabularyFilterNames",
     #       }
     #
     # @!attribute [rw] language_code
@@ -755,9 +759,10 @@ module Aws::TranscribeStreamingService
     #   @return [String]
     #
     # @!attribute [rw] media_sample_rate_hertz
-    #   The sample rate, in Hertz (Hz), of the input audio. We suggest that
-    #   you use 8,000 Hz for low quality audio and 16,000 Hz or higher for
-    #   high quality audio.
+    #   The sample rate of the input audio (in Hertz). Low-quality audio,
+    #   such as telephone audio, is typically around 8,000 Hz. High-quality
+    #   audio typically ranges from 16,000 Hz to 48,000 Hz. Note that the
+    #   sample rate you specify must match that of your audio.
     #   @return [Integer]
     #
     # @!attribute [rw] media_encoding
@@ -765,8 +770,13 @@ module Aws::TranscribeStreamingService
     #   @return [String]
     #
     # @!attribute [rw] vocabulary_name
-    #   The name of the vocabulary to use when processing the transcription
-    #   job.
+    #   The name of the custom vocabulary you want to use with your
+    #   transcription.
+    #
+    #   This operation is not intended for use in conjunction with the
+    #   `IdentifyLanguage` operation. If you're using `IdentifyLanguage` in
+    #   your request and want to use one or more custom vocabularies with
+    #   your transcription, use the `VocabularyNames` operation instead.
     #   @return [String]
     #
     # @!attribute [rw] session_id
@@ -782,9 +792,14 @@ module Aws::TranscribeStreamingService
     #   @return [Types::AudioStream]
     #
     # @!attribute [rw] vocabulary_filter_name
-    #   The name of the vocabulary filter you've created that is unique to
-    #   your account. Provide the name in this field to successfully use it
-    #   in a stream.
+    #   The name of the vocabulary filter you want to use with your
+    #   transcription.
+    #
+    #   This operation is not intended for use in conjunction with the
+    #   `IdentifyLanguage` operation. If you're using `IdentifyLanguage` in
+    #   your request and want to use one or more vocabulary filters with
+    #   your transcription, use the `VocabularyFilterNames` operation
+    #   instead.
     #   @return [String]
     #
     # @!attribute [rw] vocabulary_filter_method
@@ -808,10 +823,6 @@ module Aws::TranscribeStreamingService
     #   Amazon Transcribe also produces a transcription of each item. An
     #   item includes the start time, end time, and any alternative
     #   transcriptions.
-    #
-    #   You can't set both `ShowSpeakerLabel` and
-    #   `EnableChannelIdentification` in the same request. If you set both,
-    #   your request returns a `BadRequestException`.
     #   @return [Boolean]
     #
     # @!attribute [rw] number_of_channels
@@ -901,6 +912,36 @@ module Aws::TranscribeStreamingService
     #   `true`in your request.
     #   @return [String]
     #
+    # @!attribute [rw] vocabulary_names
+    #   The names of the custom vocabularies you want to use with your
+    #   transcription.
+    #
+    #   Note that if the custom vocabularies you specify are in languages
+    #   that don't match the language identified in your media, your job
+    #   fails.
+    #
+    #   This operation is only intended for use in conjunction with the
+    #   `IdentifyLanguage` operation. If you're not using
+    #   `IdentifyLanguage` in your request and want to use a custom
+    #   vocabulary with your transcription, use the `VocabularyName`
+    #   operation instead.
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_filter_names
+    #   The names of the vocabulary filters you want to use with your
+    #   transcription.
+    #
+    #   Note that if the vocabulary filters you specify are in languages
+    #   that don't match the language identified in your media, your job
+    #   fails.
+    #
+    #   This operation is only intended for use in conjunction with the
+    #   `IdentifyLanguage` operation. If you're not using
+    #   `IdentifyLanguage` in your request and want to use a vocabulary
+    #   filter with your transcription, use the `VocabularyFilterName`
+    #   operation instead.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/StartStreamTranscriptionRequest AWS API Documentation
     #
     class StartStreamTranscriptionRequest < Struct.new(
@@ -923,13 +964,15 @@ module Aws::TranscribeStreamingService
       :language_model_name,
       :identify_language,
       :language_options,
-      :preferred_language)
+      :preferred_language,
+      :vocabulary_names,
+      :vocabulary_filter_names)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] request_id
-    #   An identifier for the streaming transcription.
+    #   An identifier for the transcription.
     #   @return [String]
     #
     # @!attribute [rw] language_code
@@ -937,9 +980,7 @@ module Aws::TranscribeStreamingService
     #   @return [String]
     #
     # @!attribute [rw] media_sample_rate_hertz
-    #   The sample rate, in Hertz (Hz), for the input audio stream. Use
-    #   8,000 Hz for low quality audio and 16,000 Hz or higher for high
-    #   quality audio.
+    #   The sample rate, in Hertz (Hz), for the input audio stream.
     #   @return [Integer]
     #
     # @!attribute [rw] media_encoding
@@ -947,7 +988,7 @@ module Aws::TranscribeStreamingService
     #   @return [String]
     #
     # @!attribute [rw] vocabulary_name
-    #   The name of the vocabulary used when processing the stream.
+    #   The name of the custom vocabulary used when processing the stream.
     #   @return [String]
     #
     # @!attribute [rw] session_id
@@ -960,19 +1001,20 @@ module Aws::TranscribeStreamingService
     #   @return [Types::TranscriptResultStream]
     #
     # @!attribute [rw] vocabulary_filter_name
-    #   The name of the vocabulary filter used in your media stream.
+    #   The name of the vocabulary filter used when processing the stream.
     #   @return [String]
     #
     # @!attribute [rw] vocabulary_filter_method
-    #   The vocabulary filtering method used in the media stream.
+    #   The vocabulary filtering method used when processing the stream.
     #   @return [String]
     #
     # @!attribute [rw] show_speaker_label
-    #   Shows whether speaker identification was enabled in the stream.
+    #   Shows whether speaker identification was enabled in the
+    #   transcription.
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_channel_identification
-    #   Shows whether channel identification has been enabled in the stream.
+    #   Shows whether channel identification was enabled in the stream.
     #   @return [Boolean]
     #
     # @!attribute [rw] number_of_channels
@@ -980,8 +1022,8 @@ module Aws::TranscribeStreamingService
     #   @return [Integer]
     #
     # @!attribute [rw] enable_partial_results_stabilization
-    #   Shows whether partial results stabilization has been enabled in the
-    #   stream.
+    #   Shows whether partial results stabilization was enabled in the
+    #   transcription.
     #   @return [Boolean]
     #
     # @!attribute [rw] partial_results_stability
@@ -1002,7 +1044,7 @@ module Aws::TranscribeStreamingService
     #   @return [String]
     #
     # @!attribute [rw] language_model_name
-    #   The name of the language model used in your media stream.
+    #   The name of the custom language model used in the transcription.
     #   @return [String]
     #
     # @!attribute [rw] identify_language
@@ -1016,6 +1058,14 @@ module Aws::TranscribeStreamingService
     #
     # @!attribute [rw] preferred_language
     #   The preferred language you specified in your request.
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_names
+    #   The name of the custom vocabulary used when processing the stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_filter_names
+    #   The name of the vocabulary filter used when processing the stream.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/StartStreamTranscriptionResponse AWS API Documentation
@@ -1041,7 +1091,9 @@ module Aws::TranscribeStreamingService
       :language_model_name,
       :identify_language,
       :language_options,
-      :preferred_language)
+      :preferred_language,
+      :vocabulary_names,
+      :vocabulary_filter_names)
       SENSITIVE = []
       include Aws::Structure
     end

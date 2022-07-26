@@ -10,12 +10,51 @@
 module Aws::Athena
   module Types
 
+    # Indicates that an Amazon S3 canned ACL should be set to control
+    # ownership of stored query results. When Athena stores query results in
+    # Amazon S3, the canned ACL is set with the `x-amz-acl` request header.
+    # For more information about S3 Object Ownership, see [Object Ownership
+    # settings][1] in the *Amazon S3 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html#object-ownership-overview
+    #
+    # @note When making an API call, you may pass AclConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         s3_acl_option: "BUCKET_OWNER_FULL_CONTROL", # required, accepts BUCKET_OWNER_FULL_CONTROL
+    #       }
+    #
+    # @!attribute [rw] s3_acl_option
+    #   The Amazon S3 canned ACL that Athena should specify when storing
+    #   query results. Currently the only supported canned ACL is
+    #   `BUCKET_OWNER_FULL_CONTROL`. If a query runs in a workgroup and the
+    #   workgroup overrides client-side settings, then the Amazon S3 canned
+    #   ACL specified in the workgroup's settings is used for all queries
+    #   that run in the workgroup. For more information about Amazon S3
+    #   canned ACLs, see [Canned ACL][1] in the *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/AclConfiguration AWS API Documentation
+    #
+    class AclConfiguration < Struct.new(
+      :s3_acl_option)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information about an Athena query error. The `AthenaError`
     # feature provides standardized error information to help you understand
     # failed queries and take steps after a query failure occurs.
     # `AthenaError` includes an `ErrorCategory` field that specifies whether
     # the cause of the failed query is due to system error, user error, or
-    # unknown error.
+    # other error.
     #
     # @!attribute [rw] error_category
     #   An integer value that specifies the category of a query failure
@@ -25,17 +64,40 @@ module Aws::Athena
     #
     #   **2** - User
     #
-    #   **3** - Unknown
+    #   **3** - Other
     #   @return [Integer]
+    #
+    # @!attribute [rw] error_type
+    #   An integer value that provides specific information about an Athena
+    #   query error. For the meaning of specific values, see the [Error Type
+    #   Reference][1] in the *Amazon Athena User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/athena/latest/ug/error-reference.html#error-reference-error-type-reference
+    #   @return [Integer]
+    #
+    # @!attribute [rw] retryable
+    #   True if the query might succeed if resubmitted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] error_message
+    #   Contains a short description of the error that occurred.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/AthenaError AWS API Documentation
     #
     class AthenaError < Struct.new(
-      :error_category)
+      :error_category,
+      :error_type,
+      :retryable,
+      :error_message)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # Contains an array of named query IDs.
+    #
     # @note When making an API call, you may pass BatchGetNamedQueryInput
     #   data as a hash:
     #
@@ -72,6 +134,51 @@ module Aws::Athena
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass BatchGetPreparedStatementInput
+    #   data as a hash:
+    #
+    #       {
+    #         prepared_statement_names: ["StatementName"], # required
+    #         work_group: "WorkGroupName", # required
+    #       }
+    #
+    # @!attribute [rw] prepared_statement_names
+    #   A list of prepared statement names to return.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] work_group
+    #   The name of the workgroup to which the prepared statements belong.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/BatchGetPreparedStatementInput AWS API Documentation
+    #
+    class BatchGetPreparedStatementInput < Struct.new(
+      :prepared_statement_names,
+      :work_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] prepared_statements
+    #   The list of prepared statements returned.
+    #   @return [Array<Types::PreparedStatement>]
+    #
+    # @!attribute [rw] unprocessed_prepared_statement_names
+    #   A list of one or more prepared statements that were requested but
+    #   could not be returned.
+    #   @return [Array<Types::UnprocessedPreparedStatementName>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/BatchGetPreparedStatementOutput AWS API Documentation
+    #
+    class BatchGetPreparedStatementOutput < Struct.new(
+      :prepared_statements,
+      :unprocessed_prepared_statement_names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains an array of query execution IDs.
+    #
     # @note When making an API call, you may pass BatchGetQueryExecutionInput
     #   data as a hash:
     #
@@ -417,12 +524,15 @@ module Aws::Athena
     #         name: "WorkGroupName", # required
     #         configuration: {
     #           result_configuration: {
-    #             output_location: "String",
+    #             output_location: "ResultOutputLocation",
     #             encryption_configuration: {
     #               encryption_option: "SSE_S3", # required, accepts SSE_S3, SSE_KMS, CSE_KMS
     #               kms_key: "String",
     #             },
-    #             expected_bucket_owner: "String",
+    #             expected_bucket_owner: "AwsAccountId",
+    #             acl_configuration: {
+    #               s3_acl_option: "BUCKET_OWNER_FULL_CONTROL", # required, accepts BUCKET_OWNER_FULL_CONTROL
+    #             },
     #           },
     #           enforce_work_group_configuration: false,
     #           publish_cloud_watch_metrics_enabled: false,
@@ -725,7 +835,7 @@ module Aws::Athena
     class DeleteWorkGroupOutput < Aws::EmptyStructure; end
 
     # If query results are encrypted in Amazon S3, indicates the encryption
-    # option used (for example, `SSE-KMS` or `CSE-KMS`) and key information.
+    # option used (for example, `SSE_KMS` or `CSE_KMS`) and key information.
     #
     # @note When making an API call, you may pass EncryptionConfiguration
     #   data as a hash:
@@ -737,9 +847,9 @@ module Aws::Athena
     #
     # @!attribute [rw] encryption_option
     #   Indicates whether Amazon S3 server-side encryption with Amazon
-    #   S3-managed keys (`SSE-S3`), server-side encryption with KMS-managed
-    #   keys (`SSE-KMS`), or client-side encryption with KMS-managed keys
-    #   (CSE-KMS) is used.
+    #   S3-managed keys (`SSE_S3`), server-side encryption with KMS-managed
+    #   keys (`SSE_KMS`), or client-side encryption with KMS-managed keys
+    #   (`CSE_KMS`) is used.
     #
     #   If a query runs in a workgroup and the workgroup overrides
     #   client-side settings, then the workgroup's setting for encryption
@@ -748,7 +858,7 @@ module Aws::Athena
     #   @return [String]
     #
     # @!attribute [rw] kms_key
-    #   For `SSE-KMS` and `CSE-KMS`, this is the KMS key ARN or ID.
+    #   For `SSE_KMS` and `CSE_KMS`, this is the KMS key ARN or ID.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/EncryptionConfiguration AWS API Documentation
@@ -1018,6 +1128,37 @@ module Aws::Athena
       :update_count,
       :result_set,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetQueryRuntimeStatisticsInput
+    #   data as a hash:
+    #
+    #       {
+    #         query_execution_id: "QueryExecutionId", # required
+    #       }
+    #
+    # @!attribute [rw] query_execution_id
+    #   The unique ID of the query execution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetQueryRuntimeStatisticsInput AWS API Documentation
+    #
+    class GetQueryRuntimeStatisticsInput < Struct.new(
+      :query_execution_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] query_runtime_statistics
+    #   Runtime statistics about the query execution.
+    #   @return [Types::QueryRuntimeStatistics]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetQueryRuntimeStatisticsOutput AWS API Documentation
+    #
+    class GetQueryRuntimeStatisticsOutput < Struct.new(
+      :query_runtime_statistics)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1631,8 +1772,8 @@ module Aws::Athena
       include Aws::Structure
     end
 
-    # A query, where `QueryString` is the list of SQL query statements that
-    # comprise the query.
+    # A query, where `QueryString` contains the SQL statements that make up
+    # the query.
     #
     # @!attribute [rw] name
     #   The query name.
@@ -1647,7 +1788,7 @@ module Aws::Athena
     #   @return [String]
     #
     # @!attribute [rw] query_string
-    #   The SQL query statements that comprise the query.
+    #   The SQL statements that make up the query.
     #   @return [String]
     #
     # @!attribute [rw] named_query_id
@@ -1774,6 +1915,12 @@ module Aws::Athena
     #   The engine version that executed the query.
     #   @return [Types::EngineVersion]
     #
+    # @!attribute [rw] execution_parameters
+    #   A list of values for the parameters in a query. The values are
+    #   applied sequentially to the parameters in the query in the order in
+    #   which the parameters occur.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/QueryExecution AWS API Documentation
     #
     class QueryExecution < Struct.new(
@@ -1785,7 +1932,8 @@ module Aws::Athena
       :status,
       :statistics,
       :work_group,
-      :engine_version)
+      :engine_version,
+      :execution_parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1930,12 +2078,207 @@ module Aws::Athena
       include Aws::Structure
     end
 
+    # The query execution timeline, statistics on input and output rows and
+    # bytes, and the different query stages that form the query execution
+    # plan.
+    #
+    # @!attribute [rw] timeline
+    #   Timeline statistics such as query queue time, planning time,
+    #   execution time, service processing time, and total execution time.
+    #   @return [Types::QueryRuntimeStatisticsTimeline]
+    #
+    # @!attribute [rw] rows
+    #   Statistics such as input rows and bytes read by the query, rows and
+    #   bytes output by the query, and the number of rows written by the
+    #   query.
+    #   @return [Types::QueryRuntimeStatisticsRows]
+    #
+    # @!attribute [rw] output_stage
+    #   Stage statistics such as input and output rows and bytes, execution
+    #   time, and stage state. This information also includes substages and
+    #   the query stage plan.
+    #   @return [Types::QueryStage]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/QueryRuntimeStatistics AWS API Documentation
+    #
+    class QueryRuntimeStatistics < Struct.new(
+      :timeline,
+      :rows,
+      :output_stage)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Statistics such as input rows and bytes read by the query, rows and
+    # bytes output by the query, and the number of rows written by the
+    # query.
+    #
+    # @!attribute [rw] input_rows
+    #   The number of rows read to execute the query.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] input_bytes
+    #   The number of bytes read to execute the query.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] output_bytes
+    #   The number of bytes returned by the query.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] output_rows
+    #   The number of rows returned by the query.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/QueryRuntimeStatisticsRows AWS API Documentation
+    #
+    class QueryRuntimeStatisticsRows < Struct.new(
+      :input_rows,
+      :input_bytes,
+      :output_bytes,
+      :output_rows)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Timeline statistics such as query queue time, planning time, execution
+    # time, service processing time, and total execution time.
+    #
+    # @!attribute [rw] query_queue_time_in_millis
+    #   The number of milliseconds that the query was in your query queue
+    #   waiting for resources. Note that if transient errors occur, Athena
+    #   might automatically add the query back to the queue.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] query_planning_time_in_millis
+    #   The number of milliseconds that Athena took to plan the query
+    #   processing flow. This includes the time spent retrieving table
+    #   partitions from the data source. Note that because the query engine
+    #   performs the query planning, query planning time is a subset of
+    #   engine processing time.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] engine_execution_time_in_millis
+    #   The number of milliseconds that the query took to execute.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] service_processing_time_in_millis
+    #   The number of milliseconds that Athena took to finalize and publish
+    #   the query results after the query engine finished running the query.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_execution_time_in_millis
+    #   The number of milliseconds that Athena took to run the query.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/QueryRuntimeStatisticsTimeline AWS API Documentation
+    #
+    class QueryRuntimeStatisticsTimeline < Struct.new(
+      :query_queue_time_in_millis,
+      :query_planning_time_in_millis,
+      :engine_execution_time_in_millis,
+      :service_processing_time_in_millis,
+      :total_execution_time_in_millis)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Stage statistics such as input and output rows and bytes, execution
+    # time and stage state. This information also includes substages and the
+    # query stage plan.
+    #
+    # @!attribute [rw] stage_id
+    #   The identifier for a stage.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] state
+    #   State of the stage after query execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_bytes
+    #   The number of bytes output from the stage after execution.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] output_rows
+    #   The number of rows output from the stage after execution.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] input_bytes
+    #   The number of bytes input into the stage for execution.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] input_rows
+    #   The number of rows input into the stage for execution.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] execution_time
+    #   Time taken to execute this stage.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] query_stage_plan
+    #   Stage plan information such as name, identifier, sub plans, and
+    #   source stages.
+    #   @return [Types::QueryStagePlanNode]
+    #
+    # @!attribute [rw] sub_stages
+    #   List of sub query stages that form this stage execution plan.
+    #   @return [Array<Types::QueryStage>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/QueryStage AWS API Documentation
+    #
+    class QueryStage < Struct.new(
+      :stage_id,
+      :state,
+      :output_bytes,
+      :output_rows,
+      :input_bytes,
+      :input_rows,
+      :execution_time,
+      :query_stage_plan,
+      :sub_stages)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Stage plan information such as name, identifier, sub plans, and remote
+    # sources.
+    #
+    # @!attribute [rw] name
+    #   Name of the query stage plan that describes the operation this stage
+    #   is performing as part of query execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   Information about the operation this query stage plan node is
+    #   performing.
+    #   @return [String]
+    #
+    # @!attribute [rw] children
+    #   Stage plan information such as name, identifier, sub plans, and
+    #   remote sources of child plan nodes/
+    #   @return [Array<Types::QueryStagePlanNode>]
+    #
+    # @!attribute [rw] remote_sources
+    #   Source plan node IDs.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/QueryStagePlanNode AWS API Documentation
+    #
+    class QueryStagePlanNode < Struct.new(
+      :name,
+      :identifier,
+      :children,
+      :remote_sources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A resource, such as a workgroup, was not found.
     #
     # @!attribute [rw] message
     #   @return [String]
     #
     # @!attribute [rw] resource_name
+    #   The name of the Amazon resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ResourceNotFoundException AWS API Documentation
@@ -1956,12 +2299,15 @@ module Aws::Athena
     #   data as a hash:
     #
     #       {
-    #         output_location: "String",
+    #         output_location: "ResultOutputLocation",
     #         encryption_configuration: {
     #           encryption_option: "SSE_S3", # required, accepts SSE_S3, SSE_KMS, CSE_KMS
     #           kms_key: "String",
     #         },
-    #         expected_bucket_owner: "String",
+    #         expected_bucket_owner: "AwsAccountId",
+    #         acl_configuration: {
+    #           s3_acl_option: "BUCKET_OWNER_FULL_CONTROL", # required, accepts BUCKET_OWNER_FULL_CONTROL
+    #         },
     #       }
     #
     # @!attribute [rw] output_location
@@ -1983,7 +2329,7 @@ module Aws::Athena
     #
     # @!attribute [rw] encryption_configuration
     #   If query results are encrypted in Amazon S3, indicates the
-    #   encryption option used (for example, `SSE-KMS` or `CSE-KMS`) and key
+    #   encryption option used (for example, `SSE_KMS` or `CSE_KMS`) and key
     #   information. This is a client-side setting. If workgroup settings
     #   override client-side settings, then the query uses the encryption
     #   configuration that is specified for the workgroup, and also uses the
@@ -2017,12 +2363,29 @@ module Aws::Athena
     #   [1]: https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html
     #   @return [String]
     #
+    # @!attribute [rw] acl_configuration
+    #   Indicates that an Amazon S3 canned ACL should be set to control
+    #   ownership of stored query results. Currently the only supported
+    #   canned ACL is `BUCKET_OWNER_FULL_CONTROL`. This is a client-side
+    #   setting. If workgroup settings override client-side settings, then
+    #   the query uses the ACL configuration that is specified for the
+    #   workgroup, and also uses the location for storing query results
+    #   specified in the workgroup. For more information, see
+    #   WorkGroupConfiguration$EnforceWorkGroupConfiguration and [Workgroup
+    #   Settings Override Client-Side Settings][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html
+    #   @return [Types::AclConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ResultConfiguration AWS API Documentation
     #
     class ResultConfiguration < Struct.new(
       :output_location,
       :encryption_configuration,
-      :expected_bucket_owner)
+      :expected_bucket_owner,
+      :acl_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2034,15 +2397,19 @@ module Aws::Athena
     #   data as a hash:
     #
     #       {
-    #         output_location: "String",
+    #         output_location: "ResultOutputLocation",
     #         remove_output_location: false,
     #         encryption_configuration: {
     #           encryption_option: "SSE_S3", # required, accepts SSE_S3, SSE_KMS, CSE_KMS
     #           kms_key: "String",
     #         },
     #         remove_encryption_configuration: false,
-    #         expected_bucket_owner: "String",
+    #         expected_bucket_owner: "AwsAccountId",
     #         remove_expected_bucket_owner: false,
+    #         acl_configuration: {
+    #           s3_acl_option: "BUCKET_OWNER_FULL_CONTROL", # required, accepts BUCKET_OWNER_FULL_CONTROL
+    #         },
+    #         remove_acl_configuration: false,
     #       }
     #
     # @!attribute [rw] output_location
@@ -2067,7 +2434,7 @@ module Aws::Athena
     #   in this workgroup should be ignored and set to null. If set to
     #   "false" or not set, and a value is present in the `OutputLocation`
     #   in `ResultConfigurationUpdates` (the client-side setting), the
-    #   `OutputLocation` in the workgroup's `ResultConfiguration` is
+    #   `OutputLocation` in the workgroup's `ResultConfiguration` will be
     #   updated with the new value. For more information, see [Workgroup
     #   Settings Override Client-Side Settings][1].
     #
@@ -2087,9 +2454,9 @@ module Aws::Athena
     #   to "false" or not set, and a value is present in the
     #   `EncryptionConfiguration` in `ResultConfigurationUpdates` (the
     #   client-side setting), the `EncryptionConfiguration` in the
-    #   workgroup's `ResultConfiguration` is updated with the new value.
-    #   For more information, see [Workgroup Settings Override Client-Side
-    #   Settings][1].
+    #   workgroup's `ResultConfiguration` will be updated with the new
+    #   value. For more information, see [Workgroup Settings Override
+    #   Client-Side Settings][1].
     #
     #
     #
@@ -2132,6 +2499,24 @@ module Aws::Athena
     #   [1]: https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] acl_configuration
+    #   The ACL configuration for the query results.
+    #   @return [Types::AclConfiguration]
+    #
+    # @!attribute [rw] remove_acl_configuration
+    #   If set to `true`, indicates that the previously-specified ACL
+    #   configuration for queries in this workgroup should be ignored and
+    #   set to null. If set to `false` or not set, and a value is present in
+    #   the `AclConfiguration` of `ResultConfigurationUpdates`, the
+    #   `AclConfiguration` in the workgroup's `ResultConfiguration` is
+    #   updated with the new value. For more information, see [Workgroup
+    #   Settings Override Client-Side Settings][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ResultConfigurationUpdates AWS API Documentation
     #
     class ResultConfigurationUpdates < Struct.new(
@@ -2140,12 +2525,14 @@ module Aws::Athena
       :encryption_configuration,
       :remove_encryption_configuration,
       :expected_bucket_owner,
-      :remove_expected_bucket_owner)
+      :remove_expected_bucket_owner,
+      :acl_configuration,
+      :remove_acl_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # The metadata and rows that comprise a query result set. The metadata
+    # The metadata and rows that make up a query result set. The metadata
     # describes the column structure and data types. To return a `ResultSet`
     # object, use GetQueryResults.
     #
@@ -2183,7 +2570,7 @@ module Aws::Athena
       include Aws::Structure
     end
 
-    # The rows that comprise a query result table.
+    # The rows that make up a query result table.
     #
     # @!attribute [rw] data
     #   The data that populates a row in a query result table.
@@ -2208,14 +2595,18 @@ module Aws::Athena
     #           catalog: "CatalogNameString",
     #         },
     #         result_configuration: {
-    #           output_location: "String",
+    #           output_location: "ResultOutputLocation",
     #           encryption_configuration: {
     #             encryption_option: "SSE_S3", # required, accepts SSE_S3, SSE_KMS, CSE_KMS
     #             kms_key: "String",
     #           },
-    #           expected_bucket_owner: "String",
+    #           expected_bucket_owner: "AwsAccountId",
+    #           acl_configuration: {
+    #             s3_acl_option: "BUCKET_OWNER_FULL_CONTROL", # required, accepts BUCKET_OWNER_FULL_CONTROL
+    #           },
     #         },
     #         work_group: "WorkGroupName",
+    #         execution_parameters: ["ExecutionParameter"],
     #       }
     #
     # @!attribute [rw] query_string
@@ -2257,6 +2648,12 @@ module Aws::Athena
     #   The name of the workgroup in which the query is being started.
     #   @return [String]
     #
+    # @!attribute [rw] execution_parameters
+    #   A list of values for the parameters in a query. The values are
+    #   applied sequentially to the parameters in the query in the order in
+    #   which the parameters occur.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/StartQueryExecutionInput AWS API Documentation
     #
     class StartQueryExecutionInput < Struct.new(
@@ -2264,7 +2661,8 @@ module Aws::Athena
       :client_request_token,
       :query_execution_context,
       :result_configuration,
-      :work_group)
+      :work_group,
+      :execution_parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2480,6 +2878,42 @@ module Aws::Athena
       include Aws::Structure
     end
 
+    # The name of a prepared statement that could not be returned.
+    #
+    # @!attribute [rw] statement_name
+    #   The name of a prepared statement that could not be returned due to
+    #   an error.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The error code returned when the request for the prepared statement
+    #   failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message containing the reason why the prepared statement
+    #   could not be returned. The following error messages are possible:
+    #
+    #   * `INVALID_INPUT` - The name of the prepared statement that was
+    #     provided is not valid (for example, the name is too long).
+    #
+    #   * `STATEMENT_NOT_FOUND` - A prepared statement with the name
+    #     provided could not be found.
+    #
+    #   * `UNAUTHORIZED` - The requester does not have permission to access
+    #     the workgroup that contains the prepared statement.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/UnprocessedPreparedStatementName AWS API Documentation
+    #
+    class UnprocessedPreparedStatementName < Struct.new(
+      :statement_name,
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a query execution that failed to process.
     #
     # @!attribute [rw] query_execution_id
@@ -2609,6 +3043,47 @@ module Aws::Athena
     #
     class UpdateDataCatalogOutput < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass UpdateNamedQueryInput
+    #   data as a hash:
+    #
+    #       {
+    #         named_query_id: "NamedQueryId", # required
+    #         name: "NameString", # required
+    #         description: "NamedQueryDescriptionString",
+    #         query_string: "QueryString", # required
+    #       }
+    #
+    # @!attribute [rw] named_query_id
+    #   The unique identifier (UUID) of the query.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the query.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The query description.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_string
+    #   The contents of the query with all query statements.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/UpdateNamedQueryInput AWS API Documentation
+    #
+    class UpdateNamedQueryInput < Struct.new(
+      :named_query_id,
+      :name,
+      :description,
+      :query_string)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/UpdateNamedQueryOutput AWS API Documentation
+    #
+    class UpdateNamedQueryOutput < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass UpdatePreparedStatementInput
     #   data as a hash:
     #
@@ -2659,15 +3134,19 @@ module Aws::Athena
     #         configuration_updates: {
     #           enforce_work_group_configuration: false,
     #           result_configuration_updates: {
-    #             output_location: "String",
+    #             output_location: "ResultOutputLocation",
     #             remove_output_location: false,
     #             encryption_configuration: {
     #               encryption_option: "SSE_S3", # required, accepts SSE_S3, SSE_KMS, CSE_KMS
     #               kms_key: "String",
     #             },
     #             remove_encryption_configuration: false,
-    #             expected_bucket_owner: "String",
+    #             expected_bucket_owner: "AwsAccountId",
     #             remove_expected_bucket_owner: false,
+    #             acl_configuration: {
+    #               s3_acl_option: "BUCKET_OWNER_FULL_CONTROL", # required, accepts BUCKET_OWNER_FULL_CONTROL
+    #             },
+    #             remove_acl_configuration: false,
     #           },
     #           publish_cloud_watch_metrics_enabled: false,
     #           bytes_scanned_cutoff_per_query: 1,
@@ -2781,12 +3260,15 @@ module Aws::Athena
     #
     #       {
     #         result_configuration: {
-    #           output_location: "String",
+    #           output_location: "ResultOutputLocation",
     #           encryption_configuration: {
     #             encryption_option: "SSE_S3", # required, accepts SSE_S3, SSE_KMS, CSE_KMS
     #             kms_key: "String",
     #           },
-    #           expected_bucket_owner: "String",
+    #           expected_bucket_owner: "AwsAccountId",
+    #           acl_configuration: {
+    #             s3_acl_option: "BUCKET_OWNER_FULL_CONTROL", # required, accepts BUCKET_OWNER_FULL_CONTROL
+    #           },
     #         },
     #         enforce_work_group_configuration: false,
     #         publish_cloud_watch_metrics_enabled: false,
@@ -2881,15 +3363,19 @@ module Aws::Athena
     #       {
     #         enforce_work_group_configuration: false,
     #         result_configuration_updates: {
-    #           output_location: "String",
+    #           output_location: "ResultOutputLocation",
     #           remove_output_location: false,
     #           encryption_configuration: {
     #             encryption_option: "SSE_S3", # required, accepts SSE_S3, SSE_KMS, CSE_KMS
     #             kms_key: "String",
     #           },
     #           remove_encryption_configuration: false,
-    #           expected_bucket_owner: "String",
+    #           expected_bucket_owner: "AwsAccountId",
     #           remove_expected_bucket_owner: false,
+    #           acl_configuration: {
+    #             s3_acl_option: "BUCKET_OWNER_FULL_CONTROL", # required, accepts BUCKET_OWNER_FULL_CONTROL
+    #           },
+    #           remove_acl_configuration: false,
     #         },
     #         publish_cloud_watch_metrics_enabled: false,
     #         bytes_scanned_cutoff_per_query: 1,

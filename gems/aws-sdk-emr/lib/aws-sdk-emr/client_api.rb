@@ -215,6 +215,8 @@ module Aws::EMR
     NotebookExecutionStatus = Shapes::StringShape.new(name: 'NotebookExecutionStatus')
     NotebookExecutionSummary = Shapes::StructureShape.new(name: 'NotebookExecutionSummary')
     NotebookExecutionSummaryList = Shapes::ListShape.new(name: 'NotebookExecutionSummaryList')
+    OSRelease = Shapes::StructureShape.new(name: 'OSRelease')
+    OSReleaseList = Shapes::ListShape.new(name: 'OSReleaseList')
     OnDemandCapacityReservationOptions = Shapes::StructureShape.new(name: 'OnDemandCapacityReservationOptions')
     OnDemandCapacityReservationPreference = Shapes::StringShape.new(name: 'OnDemandCapacityReservationPreference')
     OnDemandCapacityReservationUsageStrategy = Shapes::StringShape.new(name: 'OnDemandCapacityReservationUsageStrategy')
@@ -236,6 +238,7 @@ module Aws::EMR
     PutBlockPublicAccessConfigurationOutput = Shapes::StructureShape.new(name: 'PutBlockPublicAccessConfigurationOutput')
     PutManagedScalingPolicyInput = Shapes::StructureShape.new(name: 'PutManagedScalingPolicyInput')
     PutManagedScalingPolicyOutput = Shapes::StructureShape.new(name: 'PutManagedScalingPolicyOutput')
+    ReconfigurationType = Shapes::StringShape.new(name: 'ReconfigurationType')
     ReleaseLabelFilter = Shapes::StructureShape.new(name: 'ReleaseLabelFilter')
     RemoveAutoScalingPolicyInput = Shapes::StructureShape.new(name: 'RemoveAutoScalingPolicyInput')
     RemoveAutoScalingPolicyOutput = Shapes::StructureShape.new(name: 'RemoveAutoScalingPolicyOutput')
@@ -305,6 +308,7 @@ module Aws::EMR
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagList = Shapes::ListShape.new(name: 'TagList')
     TerminateJobFlowsInput = Shapes::StructureShape.new(name: 'TerminateJobFlowsInput')
+    ThroughputVal = Shapes::IntegerShape.new(name: 'ThroughputVal')
     Unit = Shapes::StringShape.new(name: 'Unit')
     UpdateStudioInput = Shapes::StructureShape.new(name: 'UpdateStudioInput')
     UpdateStudioSessionMappingInput = Shapes::StructureShape.new(name: 'UpdateStudioSessionMappingInput')
@@ -335,6 +339,7 @@ module Aws::EMR
 
     AddJobFlowStepsInput.add_member(:job_flow_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "JobFlowId"))
     AddJobFlowStepsInput.add_member(:steps, Shapes::ShapeRef.new(shape: StepConfigList, required: true, location_name: "Steps"))
+    AddJobFlowStepsInput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: ArnType, location_name: "ExecutionRoleArn"))
     AddJobFlowStepsInput.struct_class = Types::AddJobFlowStepsInput
 
     AddJobFlowStepsOutput.add_member(:step_ids, Shapes::ShapeRef.new(shape: StepIdsList, location_name: "StepIds"))
@@ -449,6 +454,7 @@ module Aws::EMR
     Cluster.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: OptionalArnType, location_name: "OutpostArn"))
     Cluster.add_member(:step_concurrency_level, Shapes::ShapeRef.new(shape: Integer, location_name: "StepConcurrencyLevel"))
     Cluster.add_member(:placement_groups, Shapes::ShapeRef.new(shape: PlacementGroupConfigList, location_name: "PlacementGroups"))
+    Cluster.add_member(:os_release_label, Shapes::ShapeRef.new(shape: String, location_name: "OSReleaseLabel"))
     Cluster.struct_class = Types::Cluster
 
     ClusterStateChangeReason.add_member(:code, Shapes::ShapeRef.new(shape: ClusterStateChangeReasonCode, location_name: "Code"))
@@ -575,6 +581,7 @@ module Aws::EMR
     DescribeReleaseLabelOutput.add_member(:release_label, Shapes::ShapeRef.new(shape: String, location_name: "ReleaseLabel"))
     DescribeReleaseLabelOutput.add_member(:applications, Shapes::ShapeRef.new(shape: SimplifiedApplicationList, location_name: "Applications"))
     DescribeReleaseLabelOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeReleaseLabelOutput.add_member(:available_os_releases, Shapes::ShapeRef.new(shape: OSReleaseList, location_name: "AvailableOSReleases"))
     DescribeReleaseLabelOutput.struct_class = Types::DescribeReleaseLabelOutput
 
     DescribeSecurityConfigurationInput.add_member(:name, Shapes::ShapeRef.new(shape: XmlString, required: true, location_name: "Name"))
@@ -808,6 +815,7 @@ module Aws::EMR
     InstanceGroupModifyConfig.add_member(:instance_count, Shapes::ShapeRef.new(shape: Integer, location_name: "InstanceCount"))
     InstanceGroupModifyConfig.add_member(:ec2_instance_ids_to_terminate, Shapes::ShapeRef.new(shape: EC2InstanceIdsToTerminateList, location_name: "EC2InstanceIdsToTerminate"))
     InstanceGroupModifyConfig.add_member(:shrink_policy, Shapes::ShapeRef.new(shape: ShrinkPolicy, location_name: "ShrinkPolicy"))
+    InstanceGroupModifyConfig.add_member(:reconfiguration_type, Shapes::ShapeRef.new(shape: ReconfigurationType, location_name: "ReconfigurationType"))
     InstanceGroupModifyConfig.add_member(:configurations, Shapes::ShapeRef.new(shape: ConfigurationList, location_name: "Configurations"))
     InstanceGroupModifyConfig.struct_class = Types::InstanceGroupModifyConfig
 
@@ -1111,6 +1119,11 @@ module Aws::EMR
 
     NotebookExecutionSummaryList.member = Shapes::ShapeRef.new(shape: NotebookExecutionSummary)
 
+    OSRelease.add_member(:label, Shapes::ShapeRef.new(shape: String, location_name: "Label"))
+    OSRelease.struct_class = Types::OSRelease
+
+    OSReleaseList.member = Shapes::ShapeRef.new(shape: OSRelease)
+
     OnDemandCapacityReservationOptions.add_member(:usage_strategy, Shapes::ShapeRef.new(shape: OnDemandCapacityReservationUsageStrategy, location_name: "UsageStrategy"))
     OnDemandCapacityReservationOptions.add_member(:capacity_reservation_preference, Shapes::ShapeRef.new(shape: OnDemandCapacityReservationPreference, location_name: "CapacityReservationPreference"))
     OnDemandCapacityReservationOptions.add_member(:capacity_reservation_resource_group_arn, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "CapacityReservationResourceGroupArn"))
@@ -1218,6 +1231,7 @@ module Aws::EMR
     RunJobFlowInput.add_member(:managed_scaling_policy, Shapes::ShapeRef.new(shape: ManagedScalingPolicy, location_name: "ManagedScalingPolicy"))
     RunJobFlowInput.add_member(:placement_group_configs, Shapes::ShapeRef.new(shape: PlacementGroupConfigList, location_name: "PlacementGroupConfigs"))
     RunJobFlowInput.add_member(:auto_termination_policy, Shapes::ShapeRef.new(shape: AutoTerminationPolicy, location_name: "AutoTerminationPolicy"))
+    RunJobFlowInput.add_member(:os_release_label, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "OSReleaseLabel"))
     RunJobFlowInput.struct_class = Types::RunJobFlowInput
 
     RunJobFlowOutput.add_member(:job_flow_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "JobFlowId"))
@@ -1321,6 +1335,7 @@ module Aws::EMR
     Step.add_member(:config, Shapes::ShapeRef.new(shape: HadoopStepConfig, location_name: "Config"))
     Step.add_member(:action_on_failure, Shapes::ShapeRef.new(shape: ActionOnFailure, location_name: "ActionOnFailure"))
     Step.add_member(:status, Shapes::ShapeRef.new(shape: StepStatus, location_name: "Status"))
+    Step.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: OptionalArnType, location_name: "ExecutionRoleArn"))
     Step.struct_class = Types::Step
 
     StepConfig.add_member(:name, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "Name"))
@@ -1443,6 +1458,7 @@ module Aws::EMR
     VolumeSpecification.add_member(:volume_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "VolumeType"))
     VolumeSpecification.add_member(:iops, Shapes::ShapeRef.new(shape: Integer, location_name: "Iops"))
     VolumeSpecification.add_member(:size_in_gb, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "SizeInGB"))
+    VolumeSpecification.add_member(:throughput, Shapes::ShapeRef.new(shape: ThroughputVal, location_name: "Throughput"))
     VolumeSpecification.struct_class = Types::VolumeSpecification
 
     XmlStringList.member = Shapes::ShapeRef.new(shape: XmlString)

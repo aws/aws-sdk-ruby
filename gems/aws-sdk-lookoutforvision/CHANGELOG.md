@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2022-07-26)
+------------------
+
+* Feature - This release introduces support for the automatic scaling of inference units used by Amazon Lookout for Vision models.
+
+1.14.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.13.0 (2022-02-10)
+------------------
+
+* Feature - This release makes CompilerOptions in Lookout for Vision's StartModelPackagingJob's Configuration object optional.
+
 1.12.0 (2022-02-03)
 ------------------
 

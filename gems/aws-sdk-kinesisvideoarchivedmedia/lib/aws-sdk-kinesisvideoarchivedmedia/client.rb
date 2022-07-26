@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::KinesisVideoArchivedMedia
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -1153,6 +1155,129 @@ module Aws::KinesisVideoArchivedMedia
       req.send_request(options)
     end
 
+    # Retrieves a list of Images corresponding to each timestamp for a given
+    # time range, sampling interval, and image format configuration.
+    #
+    # @option params [String] :stream_name
+    #   The name of the stream from which to retrieve the images. You must
+    #   specify either the `StreamName` or the `StreamARN`.
+    #
+    # @option params [String] :stream_arn
+    #   The Amazon Resource Name (ARN) of the stream from which to retrieve
+    #   the images. You must specify either the `StreamName` or the
+    #   `StreamARN`.
+    #
+    # @option params [required, String] :image_selector_type
+    #   The origin of the Server or Producer timestamps to use to generate the
+    #   images.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :start_timestamp
+    #   The starting point from which the images should be generated. This
+    #   `StartTimestamp` must be within an inclusive range of timestamps for
+    #   an image to be returned.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :end_timestamp
+    #   The end timestamp for the range of images to be generated.
+    #
+    # @option params [required, Integer] :sampling_interval
+    #   The time interval in milliseconds (ms) at which the images need to be
+    #   generated from the stream. The minimum value that can be provided is
+    #   3000 ms. If the timestamp range is less than the sampling interval,
+    #   the Image from the `startTimestamp` will be returned if available.
+    #
+    #   <note markdown="1"> The minimum value of 3000 ms is a soft limit. If needed, a lower
+    #   sampling frequency can be requested.
+    #
+    #    </note>
+    #
+    # @option params [required, String] :format
+    #   The format that will be used to encode the image.
+    #
+    # @option params [Hash<String,String>] :format_config
+    #   The list of a key-value pair structure that contains extra parameters
+    #   that can be applied when the image is generated. The `FormatConfig`
+    #   key is the `JPEGQuality`, which indicates the JPEG quality key to be
+    #   used to generate the image. The `FormatConfig` value accepts ints from
+    #   1 to 100. If the value is 1, the image will be generated with less
+    #   quality and the best compression. If the value is 100, the image will
+    #   be generated with the best quality and less compression. If no value
+    #   is provided, the default value of the `JPEGQuality` key will be set to
+    #   80.
+    #
+    # @option params [Integer] :width_pixels
+    #   The width of the output image that is used in conjunction with the
+    #   `HeightPixels` parameter. When both `WidthPixels` and `HeightPixels`
+    #   parameters are provided, the image will be stretched to fit the
+    #   specified aspect ratio. If only the `WidthPixels` parameter is
+    #   provided or if only the `HeightPixels` is provided, a
+    #   `ValidationException` will be thrown. If neither parameter is
+    #   provided, the original image size from the stream will be returned.
+    #
+    # @option params [Integer] :height_pixels
+    #   The height of the output image that is used in conjunction with the
+    #   `WidthPixels` parameter. When both `HeightPixels` and `WidthPixels`
+    #   parameters are provided, the image will be stretched to fit the
+    #   specified aspect ratio. If only the `HeightPixels` parameter is
+    #   provided, its original aspect ratio will be used to calculate the
+    #   `WidthPixels` ratio. If neither parameter is provided, the original
+    #   image size will be returned.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of images to be returned by the API.
+    #
+    #   <note markdown="1"> The default limit is 100 images per API response. The additional
+    #   results will be paginated.
+    #
+    #    </note>
+    #
+    # @option params [String] :next_token
+    #   A token that specifies where to start paginating the next set of
+    #   Images. This is the `GetImages:NextToken` from a previously truncated
+    #   response.
+    #
+    # @return [Types::GetImagesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetImagesOutput#images #images} => Array&lt;Types::Image&gt;
+    #   * {Types::GetImagesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_images({
+    #     stream_name: "StreamName",
+    #     stream_arn: "ResourceARN",
+    #     image_selector_type: "PRODUCER_TIMESTAMP", # required, accepts PRODUCER_TIMESTAMP, SERVER_TIMESTAMP
+    #     start_timestamp: Time.now, # required
+    #     end_timestamp: Time.now, # required
+    #     sampling_interval: 1, # required
+    #     format: "JPEG", # required, accepts JPEG, PNG
+    #     format_config: {
+    #       "JPEGQuality" => "FormatConfigValue",
+    #     },
+    #     width_pixels: 1,
+    #     height_pixels: 1,
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.images #=> Array
+    #   resp.images[0].time_stamp #=> Time
+    #   resp.images[0].error #=> String, one of "NO_MEDIA", "MEDIA_ERROR"
+    #   resp.images[0].image_content #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/GetImages AWS API Documentation
+    #
+    # @overload get_images(params = {})
+    # @param [Hash] params ({})
+    def get_images(params = {}, options = {})
+      req = build_request(:get_images, params)
+      req.send_request(options)
+    end
+
     # Gets media for a list of fragments (specified by fragment number) from
     # the archived data in an Amazon Kinesis video stream.
     #
@@ -1350,7 +1475,7 @@ module Aws::KinesisVideoArchivedMedia
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesisvideoarchivedmedia'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

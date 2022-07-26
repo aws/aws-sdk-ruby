@@ -310,7 +310,8 @@ module Aws::IoTDataPlane
     #   message payloads.
     #
     #   Publishing an empty (null) payload with **retain** = `true` deletes
-    #   the retained message identified by **topic** from IoT Core.
+    #   the retained message identified by **topic** from Amazon Web
+    #   Services IoT Core.
     #   @return [String]
     #
     class PublishRequest < Struct.new(

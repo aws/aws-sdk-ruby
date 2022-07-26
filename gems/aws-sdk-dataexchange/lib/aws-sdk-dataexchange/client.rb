@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::DataExchange
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -697,6 +699,9 @@ module Aws::DataExchange
     #   * {Types::CreateRevisionResponse#source_id #source_id} => String
     #   * {Types::CreateRevisionResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::CreateRevisionResponse#updated_at #updated_at} => Time
+    #   * {Types::CreateRevisionResponse#revocation_comment #revocation_comment} => String
+    #   * {Types::CreateRevisionResponse#revoked #revoked} => Boolean
+    #   * {Types::CreateRevisionResponse#revoked_at #revoked_at} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -720,6 +725,9 @@ module Aws::DataExchange
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
     #   resp.updated_at #=> Time
+    #   resp.revocation_comment #=> String
+    #   resp.revoked #=> Boolean
+    #   resp.revoked_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/CreateRevision AWS API Documentation
     #
@@ -1086,6 +1094,9 @@ module Aws::DataExchange
     #   * {Types::GetRevisionResponse#source_id #source_id} => String
     #   * {Types::GetRevisionResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::GetRevisionResponse#updated_at #updated_at} => Time
+    #   * {Types::GetRevisionResponse#revocation_comment #revocation_comment} => String
+    #   * {Types::GetRevisionResponse#revoked #revoked} => Boolean
+    #   * {Types::GetRevisionResponse#revoked_at #revoked_at} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -1106,6 +1117,9 @@ module Aws::DataExchange
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
     #   resp.updated_at #=> Time
+    #   resp.revocation_comment #=> String
+    #   resp.revoked #=> Boolean
+    #   resp.revoked_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/GetRevision AWS API Documentation
     #
@@ -1152,6 +1166,9 @@ module Aws::DataExchange
     #   resp.revisions[0].id #=> String
     #   resp.revisions[0].source_id #=> String
     #   resp.revisions[0].updated_at #=> Time
+    #   resp.revisions[0].revocation_comment #=> String
+    #   resp.revisions[0].revoked #=> Boolean
+    #   resp.revisions[0].revoked_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/ListDataSetRevisions AWS API Documentation
     #
@@ -1449,6 +1466,61 @@ module Aws::DataExchange
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # This operation revokes subscribers' access to a revision.
+    #
+    # @option params [required, String] :data_set_id
+    #
+    # @option params [required, String] :revision_id
+    #
+    # @option params [required, String] :revocation_comment
+    #   A required comment to inform subscribers of the reason their access to
+    #   the revision was revoked.
+    #
+    # @return [Types::RevokeRevisionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RevokeRevisionResponse#arn #arn} => String
+    #   * {Types::RevokeRevisionResponse#comment #comment} => String
+    #   * {Types::RevokeRevisionResponse#created_at #created_at} => Time
+    #   * {Types::RevokeRevisionResponse#data_set_id #data_set_id} => String
+    #   * {Types::RevokeRevisionResponse#finalized #finalized} => Boolean
+    #   * {Types::RevokeRevisionResponse#id #id} => String
+    #   * {Types::RevokeRevisionResponse#revocation_comment #revocation_comment} => String
+    #   * {Types::RevokeRevisionResponse#revoked #revoked} => Boolean
+    #   * {Types::RevokeRevisionResponse#revoked_at #revoked_at} => Time
+    #   * {Types::RevokeRevisionResponse#source_id #source_id} => String
+    #   * {Types::RevokeRevisionResponse#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.revoke_revision({
+    #     data_set_id: "__string", # required
+    #     revision_id: "__string", # required
+    #     revocation_comment: "__stringMin10Max512", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.comment #=> String
+    #   resp.created_at #=> Time
+    #   resp.data_set_id #=> String
+    #   resp.finalized #=> Boolean
+    #   resp.id #=> String
+    #   resp.revocation_comment #=> String
+    #   resp.revoked #=> Boolean
+    #   resp.revoked_at #=> Time
+    #   resp.source_id #=> String
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/RevokeRevision AWS API Documentation
+    #
+    # @overload revoke_revision(params = {})
+    # @param [Hash] params ({})
+    def revoke_revision(params = {}, options = {})
+      req = build_request(:revoke_revision, params)
       req.send_request(options)
     end
 
@@ -1781,6 +1853,9 @@ module Aws::DataExchange
     #   * {Types::UpdateRevisionResponse#id #id} => String
     #   * {Types::UpdateRevisionResponse#source_id #source_id} => String
     #   * {Types::UpdateRevisionResponse#updated_at #updated_at} => Time
+    #   * {Types::UpdateRevisionResponse#revocation_comment #revocation_comment} => String
+    #   * {Types::UpdateRevisionResponse#revoked #revoked} => Boolean
+    #   * {Types::UpdateRevisionResponse#revoked_at #revoked_at} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -1801,6 +1876,9 @@ module Aws::DataExchange
     #   resp.id #=> String
     #   resp.source_id #=> String
     #   resp.updated_at #=> Time
+    #   resp.revocation_comment #=> String
+    #   resp.revoked #=> Boolean
+    #   resp.revoked_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/UpdateRevision AWS API Documentation
     #
@@ -1824,7 +1902,7 @@ module Aws::DataExchange
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dataexchange'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

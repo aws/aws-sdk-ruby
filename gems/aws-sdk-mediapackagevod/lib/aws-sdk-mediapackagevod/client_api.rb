@@ -75,6 +75,7 @@ module Aws::MediaPackageVod
     PackagingGroupList = Shapes::StructureShape.new(name: 'PackagingGroupList')
     PackagingGroupUpdateParameters = Shapes::StructureShape.new(name: 'PackagingGroupUpdateParameters')
     Profile = Shapes::StringShape.new(name: 'Profile')
+    ScteMarkersSource = Shapes::StringShape.new(name: 'ScteMarkersSource')
     SegmentTemplateFormat = Shapes::StringShape.new(name: 'SegmentTemplateFormat')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SpekeKeyProvider = Shapes::StructureShape.new(name: 'SpekeKeyProvider')
@@ -226,6 +227,7 @@ module Aws::MediaPackageVod
     DashManifest.add_member(:manifest_name, Shapes::ShapeRef.new(shape: __string, location_name: "manifestName"))
     DashManifest.add_member(:min_buffer_time_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "minBufferTimeSeconds"))
     DashManifest.add_member(:profile, Shapes::ShapeRef.new(shape: Profile, location_name: "profile"))
+    DashManifest.add_member(:scte_markers_source, Shapes::ShapeRef.new(shape: ScteMarkersSource, location_name: "scteMarkersSource"))
     DashManifest.add_member(:stream_selection, Shapes::ShapeRef.new(shape: StreamSelection, location_name: "streamSelection"))
     DashManifest.struct_class = Types::DashManifest
 

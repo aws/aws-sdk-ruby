@@ -610,7 +610,7 @@ module Aws::KafkaConnect
       :plugins,
       :service_execution_role_arn,
       :worker_configuration)
-      SENSITIVE = []
+      SENSITIVE = [:connector_configuration]
       include Aws::Structure
     end
 
@@ -714,7 +714,7 @@ module Aws::KafkaConnect
     #       {
     #         description: "__stringMax1024",
     #         name: "__stringMin1Max128", # required
-    #         properties_file_content: "__string", # required
+    #         properties_file_content: "SyntheticCreateWorkerConfigurationRequest__string", # required
     #       }
     #
     # @!attribute [rw] description
@@ -735,7 +735,7 @@ module Aws::KafkaConnect
       :description,
       :name,
       :properties_file_content)
-      SENSITIVE = []
+      SENSITIVE = [:properties_file_content]
       include Aws::Structure
     end
 
@@ -998,6 +998,44 @@ module Aws::KafkaConnect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteCustomPluginRequest
+    #   data as a hash:
+    #
+    #       {
+    #         custom_plugin_arn: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] custom_plugin_arn
+    #   The Amazon Resource Name (ARN) of the custom plugin that you want to
+    #   delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/DeleteCustomPluginRequest AWS API Documentation
+    #
+    class DeleteCustomPluginRequest < Struct.new(
+      :custom_plugin_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] custom_plugin_arn
+    #   The Amazon Resource Name (ARN) of the custom plugin that you
+    #   requested to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_plugin_state
+    #   The state of the custom plugin.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/DeleteCustomPluginResponse AWS API Documentation
+    #
+    class DeleteCustomPluginResponse < Struct.new(
+      :custom_plugin_arn,
+      :custom_plugin_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeConnectorRequest
     #   data as a hash:
     #
@@ -1084,6 +1122,10 @@ module Aws::KafkaConnect
     #   to access Amazon Web Services resources.
     #   @return [String]
     #
+    # @!attribute [rw] state_description
+    #   Details about the state of a connector.
+    #   @return [Types::StateDescription]
+    #
     # @!attribute [rw] worker_configuration
     #   Specifies which worker configuration was used for the connector.
     #   @return [Types::WorkerConfigurationDescription]
@@ -1106,8 +1148,9 @@ module Aws::KafkaConnect
       :log_delivery,
       :plugins,
       :service_execution_role_arn,
+      :state_description,
       :worker_configuration)
-      SENSITIVE = []
+      SENSITIVE = [:connector_configuration]
       include Aws::Structure
     end
 
@@ -1156,6 +1199,10 @@ module Aws::KafkaConnect
     #   The name of the custom plugin.
     #   @return [String]
     #
+    # @!attribute [rw] state_description
+    #   Details about the state of a custom plugin.
+    #   @return [Types::StateDescription]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/DescribeCustomPluginResponse AWS API Documentation
     #
     class DescribeCustomPluginResponse < Struct.new(
@@ -1164,7 +1211,8 @@ module Aws::KafkaConnect
       :custom_plugin_state,
       :description,
       :latest_revision,
-      :name)
+      :name,
+      :state_description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1996,6 +2044,25 @@ module Aws::KafkaConnect
       include Aws::Structure
     end
 
+    # Details about the state of a resource.
+    #
+    # @!attribute [rw] code
+    #   A code that describes the state of a resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message that describes the state of a resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/StateDescription AWS API Documentation
+    #
+    class StateDescription < Struct.new(
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # HTTP Status Code 429: Limit exceeded. Resource limit reached.
     #
     # @!attribute [rw] message
@@ -2206,7 +2273,7 @@ module Aws::KafkaConnect
       :description,
       :properties_file_content,
       :revision)
-      SENSITIVE = []
+      SENSITIVE = [:properties_file_content]
       include Aws::Structure
     end
 

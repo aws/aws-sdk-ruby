@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::Lambda
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -422,21 +424,23 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Grants an Amazon Web Services service or another account permission to
-    # use a function. You can apply the policy at the function level, or
-    # specify a qualifier to restrict access to a single version or alias.
-    # If you use a qualifier, the invoker must use the full Amazon Resource
-    # Name (ARN) of that version or alias to invoke the function. Note:
-    # Lambda does not support adding policies to version $LATEST.
+    # Grants an Amazon Web Services service, account, or organization
+    # permission to use a function. You can apply the policy at the function
+    # level, or specify a qualifier to restrict access to a single version
+    # or alias. If you use a qualifier, the invoker must use the full Amazon
+    # Resource Name (ARN) of that version or alias to invoke the function.
+    # Note: Lambda does not support adding policies to version $LATEST.
     #
     # To grant permission to another account, specify the account ID as the
-    # `Principal`. For Amazon Web Services services, the principal is a
-    # domain-style identifier defined by the service, like
-    # `s3.amazonaws.com` or `sns.amazonaws.com`. For Amazon Web Services
-    # services, you can also specify the ARN of the associated resource as
-    # the `SourceArn`. If you grant permission to a service principal
-    # without specifying the source, other accounts could potentially
-    # configure resources in their account to invoke your Lambda function.
+    # `Principal`. To grant permission to an organization defined in
+    # Organizations, specify the organization ID as the `PrincipalOrgID`.
+    # For Amazon Web Services services, the principal is a domain-style
+    # identifier defined by the service, like `s3.amazonaws.com` or
+    # `sns.amazonaws.com`. For Amazon Web Services services, you can also
+    # specify the ARN of the associated resource as the `SourceArn`. If you
+    # grant permission to a service principal without specifying the source,
+    # other accounts could potentially configure resources in their account
+    # to invoke your Lambda function.
     #
     # This action adds a statement to a resource-based permissions policy
     # for the function. For more information about function policies, see
@@ -503,6 +507,22 @@ module Aws::Lambda
     #   specified. Use this option to avoid modifying a policy that has
     #   changed since you last read it.
     #
+    # @option params [String] :principal_org_id
+    #   The identifier for your organization in Organizations. Use this to
+    #   grant permissions to all the Amazon Web Services accounts under this
+    #   organization.
+    #
+    # @option params [String] :function_url_auth_type
+    #   The type of authentication that your function URL uses. Set to
+    #   `AWS_IAM` if you want to restrict access to authenticated `IAM` users
+    #   only. Set to `NONE` if you want to bypass IAM authentication to create
+    #   a public endpoint. For more information, see [ Security and auth model
+    #   for Lambda function URLs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html
+    #
     # @return [Types::AddPermissionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AddPermissionResponse#statement #statement} => String
@@ -519,6 +539,8 @@ module Aws::Lambda
     #     event_source_token: "EventSourceToken",
     #     qualifier: "Qualifier",
     #     revision_id: "String",
+    #     principal_org_id: "PrincipalOrgID",
+    #     function_url_auth_type: "NONE", # accepts NONE, AWS_IAM
     #   })
     #
     # @example Response structure
@@ -786,7 +808,7 @@ module Aws::Lambda
     #
     #   * **Amazon Kinesis** - Default 100. Max 10,000.
     #
-    #   * **Amazon DynamoDB Streams** - Default 100. Max 1,000.
+    #   * **Amazon DynamoDB Streams** - Default 100. Max 10,000.
     #
     #   * **Amazon Simple Queue Service** - Default 10. For standard queues
     #     the max is 10,000. For FIFO queues the max is 10.
@@ -1199,6 +1221,10 @@ module Aws::Lambda
     #   string array with one of the valid values (arm64 or x86\_64). The
     #   default value is `x86_64`.
     #
+    # @option params [Types::EphemeralStorage] :ephemeral_storage
+    #   The size of the function’s /tmp directory in MB. The default value is
+    #   512, but can be any whole number between 512 and 10240 MB.
+    #
     # @return [Types::FunctionConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::FunctionConfiguration#function_name #function_name} => String
@@ -1233,12 +1259,13 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#signing_profile_version_arn #signing_profile_version_arn} => String
     #   * {Types::FunctionConfiguration#signing_job_arn #signing_job_arn} => String
     #   * {Types::FunctionConfiguration#architectures #architectures} => Array&lt;String&gt;
+    #   * {Types::FunctionConfiguration#ephemeral_storage #ephemeral_storage} => Types::EphemeralStorage
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_function({
     #     function_name: "FunctionName", # required
-    #     runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
+    #     runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
     #     role: "RoleArn", # required
     #     handler: "Handler",
     #     code: { # required
@@ -1286,13 +1313,16 @@ module Aws::Lambda
     #     },
     #     code_signing_config_arn: "CodeSigningConfigArn",
     #     architectures: ["x86_64"], # accepts x86_64, arm64
+    #     ephemeral_storage: {
+    #       size: 1, # required
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -1342,6 +1372,7 @@ module Aws::Lambda
     #   resp.signing_job_arn #=> String
     #   resp.architectures #=> Array
     #   resp.architectures[0] #=> String, one of "x86_64", "arm64"
+    #   resp.ephemeral_storage.size #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunction AWS API Documentation
     #
@@ -1349,6 +1380,97 @@ module Aws::Lambda
     # @param [Hash] params ({})
     def create_function(params = {}, options = {})
       req = build_request(:create_function, params)
+      req.send_request(options)
+    end
+
+    # Creates a Lambda function URL with the specified configuration
+    # parameters. A function URL is a dedicated HTTP(S) endpoint that you
+    # can use to invoke your function.
+    #
+    # @option params [required, String] :function_name
+    #   The name of the Lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `my-function`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
+    #
+    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
+    #
+    # @option params [String] :qualifier
+    #   The alias name.
+    #
+    # @option params [required, String] :auth_type
+    #   The type of authentication that your function URL uses. Set to
+    #   `AWS_IAM` if you want to restrict access to authenticated `IAM` users
+    #   only. Set to `NONE` if you want to bypass IAM authentication to create
+    #   a public endpoint. For more information, see [ Security and auth model
+    #   for Lambda function URLs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html
+    #
+    # @option params [Types::Cors] :cors
+    #   The [cross-origin resource sharing (CORS)][1] settings for your
+    #   function URL.
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+    #
+    # @return [Types::CreateFunctionUrlConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateFunctionUrlConfigResponse#function_url #function_url} => String
+    #   * {Types::CreateFunctionUrlConfigResponse#function_arn #function_arn} => String
+    #   * {Types::CreateFunctionUrlConfigResponse#auth_type #auth_type} => String
+    #   * {Types::CreateFunctionUrlConfigResponse#cors #cors} => Types::Cors
+    #   * {Types::CreateFunctionUrlConfigResponse#creation_time #creation_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_function_url_config({
+    #     function_name: "FunctionName", # required
+    #     qualifier: "FunctionUrlQualifier",
+    #     auth_type: "NONE", # required, accepts NONE, AWS_IAM
+    #     cors: {
+    #       allow_credentials: false,
+    #       allow_headers: ["Header"],
+    #       allow_methods: ["Method"],
+    #       allow_origins: ["Origin"],
+    #       expose_headers: ["Header"],
+    #       max_age: 1,
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.function_url #=> String
+    #   resp.function_arn #=> String
+    #   resp.auth_type #=> String, one of "NONE", "AWS_IAM"
+    #   resp.cors.allow_credentials #=> Boolean
+    #   resp.cors.allow_headers #=> Array
+    #   resp.cors.allow_headers[0] #=> String
+    #   resp.cors.allow_methods #=> Array
+    #   resp.cors.allow_methods[0] #=> String
+    #   resp.cors.allow_origins #=> Array
+    #   resp.cors.allow_origins[0] #=> String
+    #   resp.cors.expose_headers #=> Array
+    #   resp.cors.expose_headers[0] #=> String
+    #   resp.cors.max_age #=> Integer
+    #   resp.creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunctionUrlConfig AWS API Documentation
+    #
+    # @overload create_function_url_config(params = {})
+    # @param [Hash] params ({})
+    def create_function_url_config(params = {}, options = {})
+      req = build_request(:create_function_url_config, params)
       req.send_request(options)
     end
 
@@ -1663,6 +1785,46 @@ module Aws::Lambda
     # @param [Hash] params ({})
     def delete_function_event_invoke_config(params = {}, options = {})
       req = build_request(:delete_function_event_invoke_config, params)
+      req.send_request(options)
+    end
+
+    # Deletes a Lambda function URL. When you delete a function URL, you
+    # can't recover it. Creating a new function URL results in a different
+    # URL address.
+    #
+    # @option params [required, String] :function_name
+    #   The name of the Lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `my-function`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
+    #
+    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
+    #
+    # @option params [String] :qualifier
+    #   The alias name.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_function_url_config({
+    #     function_name: "FunctionName", # required
+    #     qualifier: "FunctionUrlQualifier",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunctionUrlConfig AWS API Documentation
+    #
+    # @overload delete_function_url_config(params = {})
+    # @param [Hash] params ({})
+    def delete_function_url_config(params = {}, options = {})
+      req = build_request(:delete_function_url_config, params)
       req.send_request(options)
     end
 
@@ -1986,7 +2148,7 @@ module Aws::Lambda
     #
     #   resp.configuration.function_name #=> String
     #   resp.configuration.function_arn #=> String
-    #   resp.configuration.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
+    #   resp.configuration.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
     #   resp.configuration.role #=> String
     #   resp.configuration.handler #=> String
     #   resp.configuration.code_size #=> Integer
@@ -2036,6 +2198,7 @@ module Aws::Lambda
     #   resp.configuration.signing_job_arn #=> String
     #   resp.configuration.architectures #=> Array
     #   resp.configuration.architectures[0] #=> String, one of "x86_64", "arm64"
+    #   resp.configuration.ephemeral_storage.size #=> Integer
     #   resp.code.repository_type #=> String
     #   resp.code.location #=> String
     #   resp.code.image_uri #=> String
@@ -2047,7 +2210,9 @@ module Aws::Lambda
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
+    #   * function_active_v2
     #   * function_exists
+    #   * function_updated_v2
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunction AWS API Documentation
     #
@@ -2204,6 +2369,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#signing_profile_version_arn #signing_profile_version_arn} => String
     #   * {Types::FunctionConfiguration#signing_job_arn #signing_job_arn} => String
     #   * {Types::FunctionConfiguration#architectures #architectures} => Array&lt;String&gt;
+    #   * {Types::FunctionConfiguration#ephemeral_storage #ephemeral_storage} => Types::EphemeralStorage
     #
     # @example Request syntax with placeholder values
     #
@@ -2216,7 +2382,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -2266,6 +2432,7 @@ module Aws::Lambda
     #   resp.signing_job_arn #=> String
     #   resp.architectures #=> Array
     #   resp.architectures[0] #=> String, one of "x86_64", "arm64"
+    #   resp.ephemeral_storage.size #=> Integer
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2341,6 +2508,69 @@ module Aws::Lambda
       req.send_request(options)
     end
 
+    # Returns details about a Lambda function URL.
+    #
+    # @option params [required, String] :function_name
+    #   The name of the Lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `my-function`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
+    #
+    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
+    #
+    # @option params [String] :qualifier
+    #   The alias name.
+    #
+    # @return [Types::GetFunctionUrlConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFunctionUrlConfigResponse#function_url #function_url} => String
+    #   * {Types::GetFunctionUrlConfigResponse#function_arn #function_arn} => String
+    #   * {Types::GetFunctionUrlConfigResponse#auth_type #auth_type} => String
+    #   * {Types::GetFunctionUrlConfigResponse#cors #cors} => Types::Cors
+    #   * {Types::GetFunctionUrlConfigResponse#creation_time #creation_time} => Time
+    #   * {Types::GetFunctionUrlConfigResponse#last_modified_time #last_modified_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_function_url_config({
+    #     function_name: "FunctionName", # required
+    #     qualifier: "FunctionUrlQualifier",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.function_url #=> String
+    #   resp.function_arn #=> String
+    #   resp.auth_type #=> String, one of "NONE", "AWS_IAM"
+    #   resp.cors.allow_credentials #=> Boolean
+    #   resp.cors.allow_headers #=> Array
+    #   resp.cors.allow_headers[0] #=> String
+    #   resp.cors.allow_methods #=> Array
+    #   resp.cors.allow_methods[0] #=> String
+    #   resp.cors.allow_origins #=> Array
+    #   resp.cors.allow_origins[0] #=> String
+    #   resp.cors.expose_headers #=> Array
+    #   resp.cors.expose_headers[0] #=> String
+    #   resp.cors.max_age #=> Integer
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionUrlConfig AWS API Documentation
+    #
+    # @overload get_function_url_config(params = {})
+    # @param [Hash] params ({})
+    def get_function_url_config(params = {}, options = {})
+      req = build_request(:get_function_url_config, params)
+      req.send_request(options)
+    end
+
     # Returns information about a version of an [Lambda layer][1], with a
     # link to download the layer archive that's valid for 10 minutes.
     #
@@ -2386,7 +2616,7 @@ module Aws::Lambda
     #   resp.created_date #=> Time
     #   resp.version #=> Integer
     #   resp.compatible_runtimes #=> Array
-    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
+    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
     #   resp.license_info #=> String
     #   resp.compatible_architectures #=> Array
     #   resp.compatible_architectures[0] #=> String, one of "x86_64", "arm64"
@@ -2441,7 +2671,7 @@ module Aws::Lambda
     #   resp.created_date #=> Time
     #   resp.version #=> Integer
     #   resp.compatible_runtimes #=> Array
-    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
+    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
     #   resp.license_info #=> String
     #   resp.compatible_architectures #=> Array
     #   resp.compatible_architectures[0] #=> String, one of "x86_64", "arm64"
@@ -3071,6 +3301,76 @@ module Aws::Lambda
       req.send_request(options)
     end
 
+    # Returns a list of Lambda function URLs for the specified function.
+    #
+    # @option params [required, String] :function_name
+    #   The name of the Lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `my-function`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
+    #
+    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
+    #
+    # @option params [String] :marker
+    #   Specify the pagination token that's returned by a previous request to
+    #   retrieve the next page of results.
+    #
+    # @option params [Integer] :max_items
+    #   The maximum number of function URLs to return in the response. Note
+    #   that `ListFunctionUrlConfigs` returns a maximum of 50 items in each
+    #   response, even if you set the number higher.
+    #
+    # @return [Types::ListFunctionUrlConfigsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFunctionUrlConfigsResponse#function_url_configs #function_url_configs} => Array&lt;Types::FunctionUrlConfig&gt;
+    #   * {Types::ListFunctionUrlConfigsResponse#next_marker #next_marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_function_url_configs({
+    #     function_name: "FunctionName", # required
+    #     marker: "String",
+    #     max_items: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.function_url_configs #=> Array
+    #   resp.function_url_configs[0].function_url #=> String
+    #   resp.function_url_configs[0].function_arn #=> String
+    #   resp.function_url_configs[0].creation_time #=> Time
+    #   resp.function_url_configs[0].last_modified_time #=> Time
+    #   resp.function_url_configs[0].cors.allow_credentials #=> Boolean
+    #   resp.function_url_configs[0].cors.allow_headers #=> Array
+    #   resp.function_url_configs[0].cors.allow_headers[0] #=> String
+    #   resp.function_url_configs[0].cors.allow_methods #=> Array
+    #   resp.function_url_configs[0].cors.allow_methods[0] #=> String
+    #   resp.function_url_configs[0].cors.allow_origins #=> Array
+    #   resp.function_url_configs[0].cors.allow_origins[0] #=> String
+    #   resp.function_url_configs[0].cors.expose_headers #=> Array
+    #   resp.function_url_configs[0].cors.expose_headers[0] #=> String
+    #   resp.function_url_configs[0].cors.max_age #=> Integer
+    #   resp.function_url_configs[0].auth_type #=> String, one of "NONE", "AWS_IAM"
+    #   resp.next_marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctionUrlConfigs AWS API Documentation
+    #
+    # @overload list_function_url_configs(params = {})
+    # @param [Hash] params ({})
+    def list_function_url_configs(params = {}, options = {})
+      req = build_request(:list_function_url_configs, params)
+      req.send_request(options)
+    end
+
     # Returns a list of Lambda functions, with the version-specific
     # configuration of each. Lambda returns up to 50 functions per call.
     #
@@ -3127,7 +3427,7 @@ module Aws::Lambda
     #   resp.functions #=> Array
     #   resp.functions[0].function_name #=> String
     #   resp.functions[0].function_arn #=> String
-    #   resp.functions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
+    #   resp.functions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
     #   resp.functions[0].role #=> String
     #   resp.functions[0].handler #=> String
     #   resp.functions[0].code_size #=> Integer
@@ -3177,6 +3477,7 @@ module Aws::Lambda
     #   resp.functions[0].signing_job_arn #=> String
     #   resp.functions[0].architectures #=> Array
     #   resp.functions[0].architectures[0] #=> String, one of "x86_64", "arm64"
+    #   resp.functions[0].ephemeral_storage.size #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctions AWS API Documentation
     #
@@ -3271,7 +3572,7 @@ module Aws::Lambda
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_layer_versions({
-    #     compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
+    #     compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
     #     layer_name: "LayerName", # required
     #     marker: "String",
     #     max_items: 1,
@@ -3287,7 +3588,7 @@ module Aws::Lambda
     #   resp.layer_versions[0].description #=> String
     #   resp.layer_versions[0].created_date #=> Time
     #   resp.layer_versions[0].compatible_runtimes #=> Array
-    #   resp.layer_versions[0].compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
+    #   resp.layer_versions[0].compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
     #   resp.layer_versions[0].license_info #=> String
     #   resp.layer_versions[0].compatible_architectures #=> Array
     #   resp.layer_versions[0].compatible_architectures[0] #=> String, one of "x86_64", "arm64"
@@ -3339,7 +3640,7 @@ module Aws::Lambda
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_layers({
-    #     compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
+    #     compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
     #     marker: "String",
     #     max_items: 1,
     #     compatible_architecture: "x86_64", # accepts x86_64, arm64
@@ -3356,7 +3657,7 @@ module Aws::Lambda
     #   resp.layers[0].latest_matching_version.description #=> String
     #   resp.layers[0].latest_matching_version.created_date #=> Time
     #   resp.layers[0].latest_matching_version.compatible_runtimes #=> Array
-    #   resp.layers[0].latest_matching_version.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
+    #   resp.layers[0].latest_matching_version.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
     #   resp.layers[0].latest_matching_version.license_info #=> String
     #   resp.layers[0].latest_matching_version.compatible_architectures #=> Array
     #   resp.layers[0].latest_matching_version.compatible_architectures[0] #=> String, one of "x86_64", "arm64"
@@ -3518,7 +3819,7 @@ module Aws::Lambda
     #   resp.versions #=> Array
     #   resp.versions[0].function_name #=> String
     #   resp.versions[0].function_arn #=> String
-    #   resp.versions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
+    #   resp.versions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
     #   resp.versions[0].role #=> String
     #   resp.versions[0].handler #=> String
     #   resp.versions[0].code_size #=> Integer
@@ -3568,6 +3869,7 @@ module Aws::Lambda
     #   resp.versions[0].signing_job_arn #=> String
     #   resp.versions[0].architectures #=> Array
     #   resp.versions[0].architectures[0] #=> String, one of "x86_64", "arm64"
+    #   resp.versions[0].ephemeral_storage.size #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListVersionsByFunction AWS API Documentation
     #
@@ -3650,7 +3952,7 @@ module Aws::Lambda
     #       s3_object_version: "S3ObjectVersion",
     #       zip_file: "data",
     #     },
-    #     compatible_runtimes: ["nodejs"], # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
+    #     compatible_runtimes: ["nodejs"], # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
     #     license_info: "LicenseInfo",
     #     compatible_architectures: ["x86_64"], # accepts x86_64, arm64
     #   })
@@ -3668,7 +3970,7 @@ module Aws::Lambda
     #   resp.created_date #=> Time
     #   resp.version #=> Integer
     #   resp.compatible_runtimes #=> Array
-    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
+    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
     #   resp.license_info #=> String
     #   resp.compatible_architectures #=> Array
     #   resp.compatible_architectures[0] #=> String, one of "x86_64", "arm64"
@@ -3763,6 +4065,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#signing_profile_version_arn #signing_profile_version_arn} => String
     #   * {Types::FunctionConfiguration#signing_job_arn #signing_job_arn} => String
     #   * {Types::FunctionConfiguration#architectures #architectures} => Array&lt;String&gt;
+    #   * {Types::FunctionConfiguration#ephemeral_storage #ephemeral_storage} => Types::EphemeralStorage
     #
     # @example Request syntax with placeholder values
     #
@@ -3777,7 +4080,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -3827,6 +4130,7 @@ module Aws::Lambda
     #   resp.signing_job_arn #=> String
     #   resp.architectures #=> Array
     #   resp.architectures[0] #=> String, one of "x86_64", "arm64"
+    #   resp.ephemeral_storage.size #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PublishVersion AWS API Documentation
     #
@@ -4514,7 +4818,7 @@ module Aws::Lambda
     #
     #   * **Amazon Kinesis** - Default 100. Max 10,000.
     #
-    #   * **Amazon DynamoDB Streams** - Default 100. Max 1,000.
+    #   * **Amazon DynamoDB Streams** - Default 100. Max 10,000.
     #
     #   * **Amazon Simple Queue Service** - Default 10. For standard queues
     #     the max is 10,000. For FIFO queues the max is 10.
@@ -4689,6 +4993,18 @@ module Aws::Lambda
     # function, the code package must be signed by a trusted publisher. For
     # more information, see [Configuring code signing][1].
     #
+    # If the function's package type is `Image`, you must specify the code
+    # package in `ImageUri` as the URI of a [container image][2] in the
+    # Amazon ECR registry.
+    #
+    # If the function's package type is `Zip`, you must specify the
+    # deployment package as a [.zip file archive][3]. Enter the Amazon S3
+    # bucket and key of the code .zip file location. You can also provide
+    # the function code inline using the `ZipFile` field.
+    #
+    # The code in the deployment package must be compatible with the target
+    # instruction set architecture of the function (`x86-64` or `arm64`).
+    #
     # The function's code is locked when you publish a version. You can't
     # modify the code of a published version, only the unpublished version.
     #
@@ -4701,6 +5017,8 @@ module Aws::Lambda
     #
     #
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-trustedcode.html
+    # [2]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-images.html
+    # [3]: https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html#gettingstarted-package-zip
     #
     # @option params [required, String] :function_name
     #   The name of the Lambda function.
@@ -4720,22 +5038,26 @@ module Aws::Lambda
     # @option params [String, StringIO, File] :zip_file
     #   The base64-encoded contents of the deployment package. Amazon Web
     #   Services SDK and Amazon Web Services CLI clients handle the encoding
-    #   for you.
+    #   for you. Use only with a function defined with a .zip file archive
+    #   deployment package.
     #
     # @option params [String] :s3_bucket
     #   An Amazon S3 bucket in the same Amazon Web Services Region as your
     #   function. The bucket can be in a different Amazon Web Services
-    #   account.
+    #   account. Use only with a function defined with a .zip file archive
+    #   deployment package.
     #
     # @option params [String] :s3_key
-    #   The Amazon S3 key of the deployment package.
+    #   The Amazon S3 key of the deployment package. Use only with a function
+    #   defined with a .zip file archive deployment package.
     #
     # @option params [String] :s3_object_version
     #   For versioned objects, the version of the deployment package object to
     #   use.
     #
     # @option params [String] :image_uri
-    #   URI of a container image in the Amazon ECR registry.
+    #   URI of a container image in the Amazon ECR registry. Do not use for a
+    #   function defined with a .zip file archive.
     #
     # @option params [Boolean] :publish
     #   Set to true to publish a new version of the function after updating
@@ -4790,6 +5112,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#signing_profile_version_arn #signing_profile_version_arn} => String
     #   * {Types::FunctionConfiguration#signing_job_arn #signing_job_arn} => String
     #   * {Types::FunctionConfiguration#architectures #architectures} => Array&lt;String&gt;
+    #   * {Types::FunctionConfiguration#ephemeral_storage #ephemeral_storage} => Types::EphemeralStorage
     #
     # @example Request syntax with placeholder values
     #
@@ -4810,7 +5133,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -4860,6 +5183,7 @@ module Aws::Lambda
     #   resp.signing_job_arn #=> String
     #   resp.architectures #=> Array
     #   resp.architectures[0] #=> String, one of "x86_64", "arm64"
+    #   resp.ephemeral_storage.size #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionCode AWS API Documentation
     #
@@ -5014,6 +5338,10 @@ module Aws::Lambda
     #
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/images-parms.html
     #
+    # @option params [Types::EphemeralStorage] :ephemeral_storage
+    #   The size of the function’s /tmp directory in MB. The default value is
+    #   512, but can be any whole number between 512 and 10240 MB.
+    #
     # @return [Types::FunctionConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::FunctionConfiguration#function_name #function_name} => String
@@ -5048,6 +5376,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#signing_profile_version_arn #signing_profile_version_arn} => String
     #   * {Types::FunctionConfiguration#signing_job_arn #signing_job_arn} => String
     #   * {Types::FunctionConfiguration#architectures #architectures} => Array&lt;String&gt;
+    #   * {Types::FunctionConfiguration#ephemeral_storage #ephemeral_storage} => Types::EphemeralStorage
     #
     # @example Request syntax with placeholder values
     #
@@ -5067,7 +5396,7 @@ module Aws::Lambda
     #         "EnvironmentVariableName" => "EnvironmentVariableValue",
     #       },
     #     },
-    #     runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
+    #     runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
     #     dead_letter_config: {
     #       target_arn: "ResourceArn",
     #     },
@@ -5088,13 +5417,16 @@ module Aws::Lambda
     #       command: ["String"],
     #       working_directory: "WorkingDirectory",
     #     },
+    #     ephemeral_storage: {
+    #       size: 1, # required
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -5144,6 +5476,7 @@ module Aws::Lambda
     #   resp.signing_job_arn #=> String
     #   resp.architectures #=> Array
     #   resp.architectures[0] #=> String, one of "x86_64", "arm64"
+    #   resp.ephemeral_storage.size #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionConfiguration AWS API Documentation
     #
@@ -5245,6 +5578,97 @@ module Aws::Lambda
       req.send_request(options)
     end
 
+    # Updates the configuration for a Lambda function URL.
+    #
+    # @option params [required, String] :function_name
+    #   The name of the Lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `my-function`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
+    #
+    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
+    #
+    # @option params [String] :qualifier
+    #   The alias name.
+    #
+    # @option params [String] :auth_type
+    #   The type of authentication that your function URL uses. Set to
+    #   `AWS_IAM` if you want to restrict access to authenticated `IAM` users
+    #   only. Set to `NONE` if you want to bypass IAM authentication to create
+    #   a public endpoint. For more information, see [ Security and auth model
+    #   for Lambda function URLs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html
+    #
+    # @option params [Types::Cors] :cors
+    #   The [cross-origin resource sharing (CORS)][1] settings for your
+    #   function URL.
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+    #
+    # @return [Types::UpdateFunctionUrlConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateFunctionUrlConfigResponse#function_url #function_url} => String
+    #   * {Types::UpdateFunctionUrlConfigResponse#function_arn #function_arn} => String
+    #   * {Types::UpdateFunctionUrlConfigResponse#auth_type #auth_type} => String
+    #   * {Types::UpdateFunctionUrlConfigResponse#cors #cors} => Types::Cors
+    #   * {Types::UpdateFunctionUrlConfigResponse#creation_time #creation_time} => Time
+    #   * {Types::UpdateFunctionUrlConfigResponse#last_modified_time #last_modified_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_function_url_config({
+    #     function_name: "FunctionName", # required
+    #     qualifier: "FunctionUrlQualifier",
+    #     auth_type: "NONE", # accepts NONE, AWS_IAM
+    #     cors: {
+    #       allow_credentials: false,
+    #       allow_headers: ["Header"],
+    #       allow_methods: ["Method"],
+    #       allow_origins: ["Origin"],
+    #       expose_headers: ["Header"],
+    #       max_age: 1,
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.function_url #=> String
+    #   resp.function_arn #=> String
+    #   resp.auth_type #=> String, one of "NONE", "AWS_IAM"
+    #   resp.cors.allow_credentials #=> Boolean
+    #   resp.cors.allow_headers #=> Array
+    #   resp.cors.allow_headers[0] #=> String
+    #   resp.cors.allow_methods #=> Array
+    #   resp.cors.allow_methods[0] #=> String
+    #   resp.cors.allow_origins #=> Array
+    #   resp.cors.allow_origins[0] #=> String
+    #   resp.cors.expose_headers #=> Array
+    #   resp.cors.expose_headers[0] #=> String
+    #   resp.cors.max_age #=> Integer
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionUrlConfig AWS API Documentation
+    #
+    # @overload update_function_url_config(params = {})
+    # @param [Hash] params ({})
+    def update_function_url_config(params = {}, options = {})
+      req = build_request(:update_function_url_config, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -5258,7 +5682,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.78.0'
+      context[:gem_version] = '1.84.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -5324,11 +5748,13 @@ module Aws::Lambda
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name      | params                              | :delay   | :max_attempts |
-    # | ---------------- | ----------------------------------- | -------- | ------------- |
-    # | function_active  | {Client#get_function_configuration} | 5        | 60            |
-    # | function_exists  | {Client#get_function}               | 1        | 20            |
-    # | function_updated | {Client#get_function_configuration} | 5        | 60            |
+    # | waiter_name         | params                              | :delay   | :max_attempts |
+    # | ------------------- | ----------------------------------- | -------- | ------------- |
+    # | function_active     | {Client#get_function_configuration} | 5        | 60            |
+    # | function_active_v2  | {Client#get_function}               | 1        | 300           |
+    # | function_exists     | {Client#get_function}               | 1        | 20            |
+    # | function_updated    | {Client#get_function_configuration} | 5        | 60            |
+    # | function_updated_v2 | {Client#get_function}               | 1        | 300           |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
@@ -5380,8 +5806,10 @@ module Aws::Lambda
     def waiters
       {
         function_active: Waiters::FunctionActive,
+        function_active_v2: Waiters::FunctionActiveV2,
         function_exists: Waiters::FunctionExists,
-        function_updated: Waiters::FunctionUpdated
+        function_updated: Waiters::FunctionUpdated,
+        function_updated_v2: Waiters::FunctionUpdatedV2
       }
     end
 

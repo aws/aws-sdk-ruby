@@ -3102,6 +3102,10 @@ module Aws::CloudFront
     #               },
     #             ],
     #           },
+    #           server_timing_headers_config: {
+    #             enabled: false, # required
+    #             sampling_rate: 1.0,
+    #           },
     #         },
     #       }
     #
@@ -11674,6 +11678,10 @@ module Aws::CloudFront
     #             },
     #           ],
     #         },
+    #         server_timing_headers_config: {
+    #           enabled: false, # required
+    #           sampling_rate: 1.0,
+    #         },
     #       }
     #
     # @!attribute [rw] comment
@@ -11702,6 +11710,11 @@ module Aws::CloudFront
     #   A configuration for a set of custom HTTP response headers.
     #   @return [Types::ResponseHeadersPolicyCustomHeadersConfig]
     #
+    # @!attribute [rw] server_timing_headers_config
+    #   A configuration for enabling the `Server-Timing` header in HTTP
+    #   responses sent from CloudFront.
+    #   @return [Types::ResponseHeadersPolicyServerTimingHeadersConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ResponseHeadersPolicyConfig AWS API Documentation
     #
     class ResponseHeadersPolicyConfig < Struct.new(
@@ -11709,7 +11722,8 @@ module Aws::CloudFront
       :name,
       :cors_config,
       :security_headers_config,
-      :custom_headers_config)
+      :custom_headers_config,
+      :server_timing_headers_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12266,6 +12280,60 @@ module Aws::CloudFront
       :content_security_policy,
       :content_type_options,
       :strict_transport_security)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A configuration for enabling the `Server-Timing` header in HTTP
+    # responses sent from CloudFront. CloudFront adds this header to HTTP
+    # responses that it sends in response to requests that match a cache
+    # behavior that's associated with this response headers policy.
+    #
+    # You can use the `Server-Timing` header to view metrics that can help
+    # you gain insights about the behavior and performance of CloudFront.
+    # For example, you can see which cache layer served a cache hit, or the
+    # first byte latency from the origin when there was a cache miss. You
+    # can use the metrics in the `Server-Timing` header to troubleshoot
+    # issues or test the efficiency of your CloudFront configuration. For
+    # more information, see [Server-Timing header][1] in the *Amazon
+    # CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/understanding-response-headers-policies.html#server-timing-header
+    #
+    # @note When making an API call, you may pass ResponseHeadersPolicyServerTimingHeadersConfig
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false, # required
+    #         sampling_rate: 1.0,
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   A Boolean that determines whether CloudFront adds the
+    #   `Server-Timing` header to HTTP responses that it sends in response
+    #   to requests that match a cache behavior that's associated with this
+    #   response headers policy.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] sampling_rate
+    #   A number 0–100 (inclusive) that specifies the percentage of
+    #   responses that you want CloudFront to add the `Server-Timing` header
+    #   to. When you set the sampling rate to 100, CloudFront adds the
+    #   `Server-Timing` header to the HTTP response for every request that
+    #   matches the cache behavior that this response headers policy is
+    #   attached to. When you set it to 50, CloudFront adds the header to
+    #   50% of the responses for requests that match the cache behavior. You
+    #   can set the sampling rate to any number 0–100 with up to four
+    #   decimal places.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ResponseHeadersPolicyServerTimingHeadersConfig AWS API Documentation
+    #
+    class ResponseHeadersPolicyServerTimingHeadersConfig < Struct.new(
+      :enabled,
+      :sampling_rate)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13279,6 +13347,27 @@ module Aws::CloudFront
       :function_error_message,
       :function_output)
       SENSITIVE = [:function_execution_logs, :function_error_message, :function_output]
+      include Aws::Structure
+    end
+
+    # The length of the `Content-Security-Policy` header value in the
+    # response headers policy exceeds the maximum.
+    #
+    # For more information, see [Quotas][1] (formerly known as limits) in
+    # the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooLongCSPInResponseHeadersPolicy AWS API Documentation
+    #
+    class TooLongCSPInResponseHeadersPolicy < Struct.new(
+      :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15167,6 +15256,10 @@ module Aws::CloudFront
     #                 override: false, # required
     #               },
     #             ],
+    #           },
+    #           server_timing_headers_config: {
+    #             enabled: false, # required
+    #             sampling_rate: 1.0,
     #           },
     #         },
     #         id: "string", # required

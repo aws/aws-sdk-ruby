@@ -939,8 +939,8 @@ module Aws::LocationService
     #   @return [Boolean]
     #
     # @!attribute [rw] departure_position
-    #   The start position for the route. Defined in [WGS 84][1] format:
-    #   `[longitude, latitude]`.
+    #   The start position for the route. Defined in [World Geodetic System
+    #   (WGS 84)][1] format: `[longitude, latitude]`.
     #
     #   * For example, `[-123.115, 49.285]`
     #
@@ -957,7 +957,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://earth-info.nga.mil/GandG/wgs84/index.html
+    #   [1]: https://earth-info.nga.mil/index.php?dir=wgs84&amp;action=wgs84
     #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html
     #   @return [Array<Float>]
     #
@@ -982,8 +982,8 @@ module Aws::LocationService
     #   @return [Time]
     #
     # @!attribute [rw] destination_position
-    #   The finish position for the route. Defined in [WGS 84][1] format:
-    #   `[longitude, latitude]`.
+    #   The finish position for the route. Defined in [World Geodetic System
+    #   (WGS 84)][1] format: `[longitude, latitude]`.
     #
     #   * For example, `[-122.339, 47.615]`
     #
@@ -998,7 +998,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://earth-info.nga.mil/GandG/wgs84/index.html
+    #   [1]: https://earth-info.nga.mil/index.php?dir=wgs84&amp;action=wgs84
     #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html
     #   @return [Array<Float>]
     #
@@ -1236,7 +1236,7 @@ module Aws::LocationService
     #   @return [Boolean]
     #
     # @!attribute [rw] avoid_tolls
-    #   Avoids ferries when calculating routes.
+    #   Avoids tolls when calculating routes.
     #
     #   Default Value: `false`
     #
@@ -2674,7 +2674,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://earth-info.nga.mil/GandG/wgs84/index.html
+    #   [1]: https://earth-info.nga.mil/index.php?dir=wgs84&amp;action=wgs84
     #   @return [Array<Float>]
     #
     # @!attribute [rw] position_properties
@@ -2791,6 +2791,7 @@ module Aws::LocationService
     #       {
     #         device_id: "Id", # required
     #         end_time_exclusive: Time.now,
+    #         max_results: 1,
     #         next_token: "Token",
     #         start_time_inclusive: Time.now,
     #         tracker_name: "ResourceName", # required
@@ -2816,6 +2817,13 @@ module Aws::LocationService
     #
     #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
     #   @return [Time]
+    #
+    # @!attribute [rw] max_results
+    #   An optional limit for the number of device positions returned in a
+    #   single call.
+    #
+    #   Default value: `100`
+    #   @return [Integer]
     #
     # @!attribute [rw] next_token
     #   The pagination token specifying which page of results to return in
@@ -2852,6 +2860,7 @@ module Aws::LocationService
     class GetDevicePositionHistoryRequest < Struct.new(
       :device_id,
       :end_time_exclusive,
+      :max_results,
       :next_token,
       :start_time_inclusive,
       :tracker_name)
@@ -3063,7 +3072,9 @@ module Aws::LocationService
     #
     #   * VectorHereBerlin – `Fira GO Regular` \| `Fira GO Bold`
     #
-    #   ^
+    #   * VectorHereExplore, VectorHereExploreTruck – `Firo GO Italic` \|
+    #     `Fira GO Map` \| `Fira GO Map Bold` \| `Noto Sans CJK JP Bold` \|
+    #     `Noto Sans CJK JP Light` \| `Noto Sans CJK JP Regular`
     #
     #
     #
@@ -3647,12 +3658,20 @@ module Aws::LocationService
     #
     #       {
     #         collection_name: "ResourceName", # required
+    #         max_results: 1,
     #         next_token: "Token",
     #       }
     #
     # @!attribute [rw] collection_name
     #   The name of the geofence collection storing the list of geofences.
     #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   An optional limit for the number of geofences returned in a single
+    #   call.
+    #
+    #   Default value: `100`
+    #   @return [Integer]
     #
     # @!attribute [rw] next_token
     #   The pagination token specifying which page of results to return in
@@ -3666,6 +3685,7 @@ module Aws::LocationService
     #
     class ListGeofencesRequest < Struct.new(
       :collection_name,
+      :max_results,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -4271,18 +4291,20 @@ module Aws::LocationService
     #   * `VectorHereBerlin` – The HERE Berlin map style is a high contrast
     #     detailed base map of the world that blends 3D and 2D rendering.
     #
-    #     <note markdown="1"> When using HERE as your data provider, and selecting the Style
-    #     `VectorHereBerlin`, you may not use HERE Technologies maps for
-    #     Asset Management. See the [AWS Service Terms][3] for Amazon
-    #     Location Service.
+    #   * `VectorHereExplore` – A default HERE map style containing a
+    #     neutral, global map and its features including roads, buildings,
+    #     landmarks, and water features. It also now includes a fully
+    #     designed map of Japan.
     #
-    #      </note>
+    #   * `VectorHereExploreTruck` – A global map containing truck
+    #     restrictions and attributes (e.g. width / height / HAZMAT)
+    #     symbolized with highlighted segments and icons on top of HERE
+    #     Explore to support use cases within transport and logistics.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/esri.html
     #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/HERE.html
-    #   [3]: https://aws.amazon.com/service-terms/
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/MapConfiguration AWS API Documentation
@@ -4295,6 +4317,9 @@ module Aws::LocationService
 
     # Contains details about addresses or points of interest that match the
     # search criteria.
+    #
+    # Not all details are included with all responses. Some details may only
+    # be returned by specific data partners.
     #
     # @!attribute [rw] address_number
     #   The numerical portion of an address, such as a building number.
@@ -4520,8 +4545,8 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # The result for one `SnappedDeparturePosition`
-    # `SnappedDestinationPosition` pair.
+    # The result for the calculated route of one `DeparturePosition`
+    # `DestinationPosition` pair.
     #
     # @!attribute [rw] distance
     #   The total distance of travel for the route.
@@ -4700,10 +4725,21 @@ module Aws::LocationService
     #   The preferred language used to return results. The value must be a
     #   valid [BCP 47][1] language tag, for example, `en` for English.
     #
-    #   This setting affects the languages used in the results. It does not
-    #   change which results are returned. If the language is not specified,
-    #   or not supported for a particular result, the partner automatically
-    #   chooses a language for the result.
+    #   This setting affects the languages used in the results, but not the
+    #   results themselves. If no language is specified, or not supported
+    #   for a particular result, the partner automatically chooses a
+    #   language for the result.
+    #
+    #   For an example, we'll use the Greek language. You search for a
+    #   location around Athens, Greece, with the `language` parameter set to
+    #   `en`. The `city` in the results will most likely be returned as
+    #   `Athens`.
+    #
+    #   If you set the `language` parameter to `el`, for Greek, then the
+    #   `city` in the results will more likely be returned as `Αθήνα`.
+    #
+    #   If the data provider does not have a value for Greek, the result
+    #   will be in a language that the provider does support.
     #
     #
     #
@@ -4819,7 +4855,7 @@ module Aws::LocationService
     #         index_name: "ResourceName", # required
     #         language: "LanguageTag",
     #         max_results: 1,
-    #         text: "SyntheticSearchPlaceIndexForSuggestionsRequestString", # required
+    #         text: "SearchPlaceIndexForSuggestionsRequestTextString", # required
     #       }
     #
     # @!attribute [rw] bias_position
@@ -4883,12 +4919,20 @@ module Aws::LocationService
     #   The preferred language used to return results. The value must be a
     #   valid [BCP 47][1] language tag, for example, `en` for English.
     #
-    #   This setting affects the languages used in the results. It does not
-    #   change which results are returned. If the language is not specified,
-    #   or not supported for a particular result, the partner automatically
-    #   chooses a language for the result.
+    #   This setting affects the languages used in the results. If no
+    #   language is specified, or not supported for a particular result, the
+    #   partner automatically chooses a language for the result.
     #
-    #   Used only when the partner selected is Here.
+    #   For an example, we'll use the Greek language. You search for
+    #   `Athens, Gr` to get suggestions with the `language` parameter set to
+    #   `en`. The results found will most likely be returned as `Athens,
+    #   Greece`.
+    #
+    #   If you set the `language` parameter to `el`, for Greek, then the
+    #   result found will more likely be returned as `Αθήνα, Ελλάδα`.
+    #
+    #   If the data provider does not have a value for Greek, the result
+    #   will be in a language that the provider does support.
     #
     #
     #
@@ -5023,7 +5067,7 @@ module Aws::LocationService
     #         index_name: "ResourceName", # required
     #         language: "LanguageTag",
     #         max_results: 1,
-    #         text: "SyntheticSearchPlaceIndexForTextRequestString", # required
+    #         text: "SearchPlaceIndexForTextRequestTextString", # required
     #       }
     #
     # @!attribute [rw] bias_position
@@ -5087,10 +5131,20 @@ module Aws::LocationService
     #   The preferred language used to return results. The value must be a
     #   valid [BCP 47][1] language tag, for example, `en` for English.
     #
-    #   This setting affects the languages used in the results. It does not
-    #   change which results are returned. If the language is not specified,
-    #   or not supported for a particular result, the partner automatically
-    #   chooses a language for the result.
+    #   This setting affects the languages used in the results, but not the
+    #   results themselves. If no language is specified, or not supported
+    #   for a particular result, the partner automatically chooses a
+    #   language for the result.
+    #
+    #   For an example, we'll use the Greek language. You search for
+    #   `Athens, Greece`, with the `language` parameter set to `en`. The
+    #   result found will most likely be returned as `Athens`.
+    #
+    #   If you set the `language` parameter to `el`, for Greek, then the
+    #   result found will more likely be returned as `Αθήνα`.
+    #
+    #   If the data provider does not have a value for Greek, the result
+    #   will be in a language that the provider does support.
     #
     #
     #
@@ -5126,6 +5180,9 @@ module Aws::LocationService
     # @!attribute [rw] results
     #   A list of Places matching the input text. Each result contains
     #   additional information about the specific point of interest.
+    #
+    #   Not all response properties are included with all responses. Some
+    #   properties may only be returned by specific data partners.
     #   @return [Array<Types::SearchForTextResult>]
     #
     # @!attribute [rw] summary

@@ -1265,6 +1265,116 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateEndpointRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "EndpointName", # required
+    #         description: "EndpointDescription",
+    #         routing_config: { # required
+    #           failover_config: { # required
+    #             primary: { # required
+    #               health_check: "HealthCheck", # required
+    #             },
+    #             secondary: { # required
+    #               route: "Route", # required
+    #             },
+    #           },
+    #         },
+    #         replication_config: {
+    #           state: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #         event_buses: [ # required
+    #           {
+    #             event_bus_arn: "NonPartnerEventBusArn", # required
+    #           },
+    #         ],
+    #         role_arn: "IamRoleArn",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the global endpoint. For example,
+    #   `"Name":"us-east-2-custom_bus_A-endpoint"`.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the global endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_config
+    #   Configure the routing policy, including the health check and
+    #   secondary Region..
+    #   @return [Types::RoutingConfig]
+    #
+    # @!attribute [rw] replication_config
+    #   Enable or disable event replication.
+    #   @return [Types::ReplicationConfig]
+    #
+    # @!attribute [rw] event_buses
+    #   Define the event buses used.
+    #
+    #   The names of the event buses must be identical in each Region.
+    #   @return [Array<Types::EndpointEventBus>]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the role used for replication.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/CreateEndpointRequest AWS API Documentation
+    #
+    class CreateEndpointRequest < Struct.new(
+      :name,
+      :description,
+      :routing_config,
+      :replication_config,
+      :event_buses,
+      :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the endpoint that was created by this request.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the endpoint that was created by this request.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_config
+    #   The routing configuration defined by this request.
+    #   @return [Types::RoutingConfig]
+    #
+    # @!attribute [rw] replication_config
+    #   Whether event replication was enabled or disabled by this request.
+    #   @return [Types::ReplicationConfig]
+    #
+    # @!attribute [rw] event_buses
+    #   The event buses used by this request.
+    #   @return [Array<Types::EndpointEventBus>]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the role used by event replication for this request.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the endpoint that was created by this request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/CreateEndpointResponse AWS API Documentation
+    #
+    class CreateEndpointResponse < Struct.new(
+      :name,
+      :arn,
+      :routing_config,
+      :replication_config,
+      :event_buses,
+      :role_arn,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateEventBusRequest
     #   data as a hash:
     #
@@ -1554,6 +1664,30 @@ module Aws::EventBridge
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DeleteEndpointRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "EndpointName", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the endpoint you want to delete. For example,
+    #   `"Name":"us-east-2-custom_bus_A-endpoint"`..
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DeleteEndpointRequest AWS API Documentation
+    #
+    class DeleteEndpointRequest < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DeleteEndpointResponse AWS API Documentation
+    #
+    class DeleteEndpointResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteEventBusRequest
     #   data as a hash:
@@ -1881,6 +2015,111 @@ module Aws::EventBridge
       :creation_time,
       :last_modified_time,
       :last_authorized_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeEndpointRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "EndpointName", # required
+    #         home_region: "HomeRegion",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the endpoint you want to get information about. For
+    #   example, `"Name":"us-east-2-custom_bus_A-endpoint"`.
+    #   @return [String]
+    #
+    # @!attribute [rw] home_region
+    #   The primary Region of the endpoint you want to get information
+    #   about. For example `"HomeRegion": "us-east-1"`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DescribeEndpointRequest AWS API Documentation
+    #
+    class DescribeEndpointRequest < Struct.new(
+      :name,
+      :home_region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the endpoint you asked for information about.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the endpoint you asked for information about.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the endpoint you asked for information about.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_config
+    #   The routing configuration of the endpoint you asked for information
+    #   about.
+    #   @return [Types::RoutingConfig]
+    #
+    # @!attribute [rw] replication_config
+    #   Whether replication is enabled or disabled for the endpoint you
+    #   asked for information about.
+    #   @return [Types::ReplicationConfig]
+    #
+    # @!attribute [rw] event_buses
+    #   The event buses being used by the endpoint you asked for information
+    #   about.
+    #   @return [Array<Types::EndpointEventBus>]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the role used by the endpoint you asked for information
+    #   about.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_id
+    #   The ID of the endpoint you asked for information about.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_url
+    #   The URL of the endpoint you asked for information about.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of the endpoint you asked for information about.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_reason
+    #   The reason the endpoint you asked for information about is in its
+    #   current state.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time the endpoint you asked for information about was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The last time the endpoint you asked for information about was
+    #   modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DescribeEndpointResponse AWS API Documentation
+    #
+    class DescribeEndpointResponse < Struct.new(
+      :name,
+      :description,
+      :arn,
+      :routing_config,
+      :replication_config,
+      :event_buses,
+      :role_arn,
+      :endpoint_id,
+      :endpoint_url,
+      :state,
+      :state_reason,
+      :creation_time,
+      :last_modified_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2302,7 +2541,7 @@ module Aws::EventBridge
     #   Specifies the launch type on which your task is running. The launch
     #   type that you specify here must match one of the launch type
     #   (compatibilities) of the target task. The `FARGATE` value is
-    #   supported only in the Regions where Fargate witt Amazon ECS is
+    #   supported only in the Regions where Fargate with Amazon ECS is
     #   supported. For more information, see [Fargate on Amazon ECS][1] in
     #   the *Amazon Elastic Container Service Developer Guide*.
     #
@@ -2446,6 +2685,111 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
+    # An global endpoint used to improve your application's availability by
+    # making it regional-fault tolerant. For more information about global
+    # endpoints, see [Making applications Regional-fault tolerant with
+    # global endpoints and event replication][1] in the Amazon EventBridge
+    # User Guide..
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-global-endpoints.html
+    #
+    # @!attribute [rw] name
+    #   The name of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description for the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_config
+    #   The routing configuration of the endpoint.
+    #   @return [Types::RoutingConfig]
+    #
+    # @!attribute [rw] replication_config
+    #   Whether event replication was enabled or disabled for this endpoint.
+    #   @return [Types::ReplicationConfig]
+    #
+    # @!attribute [rw] event_buses
+    #   The event buses being used by the endpoint.
+    #   @return [Array<Types::EndpointEventBus>]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the role used by event replication for the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_id
+    #   The URL subdomain of the endpoint. For example, if the URL for
+    #   Endpoint is abcde.veo.endpoints.event.amazonaws.com, then the
+    #   EndpointId is `abcde.veo`.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_url
+    #   The URL of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_reason
+    #   The reason the endpoint is in its current state.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time the endpoint was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The last time the endpoint was modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/Endpoint AWS API Documentation
+    #
+    class Endpoint < Struct.new(
+      :name,
+      :description,
+      :arn,
+      :routing_config,
+      :replication_config,
+      :event_buses,
+      :role_arn,
+      :endpoint_id,
+      :endpoint_url,
+      :state,
+      :state_reason,
+      :creation_time,
+      :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The event buses the endpoint is associated with.
+    #
+    # @note When making an API call, you may pass EndpointEventBus
+    #   data as a hash:
+    #
+    #       {
+    #         event_bus_arn: "NonPartnerEventBusArn", # required
+    #       }
+    #
+    # @!attribute [rw] event_bus_arn
+    #   The ARN of the event bus the endpoint is associated with.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/EndpointEventBus AWS API Documentation
+    #
+    class EndpointEventBus < Struct.new(
+      :event_bus_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An event bus receives events from a source and routes them to rules
     # associated with that event bus. Your account's default event bus
     # receives events from Amazon Web Services services. A custom event bus
@@ -2521,6 +2865,39 @@ module Aws::EventBridge
       :expiration_time,
       :name,
       :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The failover configuration for an endpoint. This includes what
+    # triggers failover and what happens when it's triggered.
+    #
+    # @note When making an API call, you may pass FailoverConfig
+    #   data as a hash:
+    #
+    #       {
+    #         primary: { # required
+    #           health_check: "HealthCheck", # required
+    #         },
+    #         secondary: { # required
+    #           route: "Route", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] primary
+    #   The main Region of the endpoint.
+    #   @return [Types::Primary]
+    #
+    # @!attribute [rw] secondary
+    #   The Region that events are routed to when failover is triggered or
+    #   event replication is enabled.
+    #   @return [Types::Secondary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/FailoverConfig AWS API Documentation
+    #
+    class FailoverConfig < Struct.new(
+      :primary,
+      :secondary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2897,6 +3274,73 @@ module Aws::EventBridge
     #
     class ListConnectionsResponse < Struct.new(
       :connections,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListEndpointsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name_prefix: "EndpointName",
+    #         home_region: "HomeRegion",
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] name_prefix
+    #   A value that will return a subset of the endpoints associated with
+    #   this account. For example, `"NamePrefix": "ABC"` will return all
+    #   endpoints with "ABC" in the name.
+    #   @return [String]
+    #
+    # @!attribute [rw] home_region
+    #   The primary Region of the endpoints associated with this account.
+    #   For example `"HomeRegion": "us-east-1"`.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If `nextToken` is returned, there are more results available. The
+    #   value of nextToken is a unique pagination token for each page. Make
+    #   the call again using the returned token to retrieve the next page.
+    #   Keep all other arguments unchanged. Each pagination token expires
+    #   after 24 hours. Using an expired pagination token will return an
+    #   HTTP 400 InvalidToken error.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results returned by the call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListEndpointsRequest AWS API Documentation
+    #
+    class ListEndpointsRequest < Struct.new(
+      :name_prefix,
+      :home_region,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] endpoints
+    #   The endpoints returned by the call.
+    #   @return [Array<Types::Endpoint>]
+    #
+    # @!attribute [rw] next_token
+    #   If `nextToken` is returned, there are more results available. The
+    #   value of nextToken is a unique pagination token for each page. Make
+    #   the call again using the returned token to retrieve the next page.
+    #   Keep all other arguments unchanged. Each pagination token expires
+    #   after 24 hours. Using an expired pagination token will return an
+    #   HTTP 400 InvalidToken error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListEndpointsResponse AWS API Documentation
+    #
+    class ListEndpointsResponse < Struct.new(
+      :endpoints,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -3582,6 +4026,28 @@ module Aws::EventBridge
     #
     class PolicyLengthExceededException < Aws::EmptyStructure; end
 
+    # The primary Region of the endpoint.
+    #
+    # @note When making an API call, you may pass Primary
+    #   data as a hash:
+    #
+    #       {
+    #         health_check: "HealthCheck", # required
+    #       }
+    #
+    # @!attribute [rw] health_check
+    #   The ARN of the health check used by the endpoint to determine
+    #   whether failover is triggered.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/Primary AWS API Documentation
+    #
+    class Primary < Struct.new(
+      :health_check)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutEventsRequest
     #   data as a hash:
     #
@@ -3597,6 +4063,7 @@ module Aws::EventBridge
     #             trace_header: "TraceHeader",
     #           },
     #         ],
+    #         endpoint_id: "EndpointId",
     #       }
     #
     # @!attribute [rw] entries
@@ -3605,10 +4072,19 @@ module Aws::EventBridge
     #   event, resources associated with the event, and so on.
     #   @return [Array<Types::PutEventsRequestEntry>]
     #
+    # @!attribute [rw] endpoint_id
+    #   The URL subdomain of the endpoint. For example, if the URL for
+    #   Endpoint is abcde.veo.endpoints.event.amazonaws.com, then the
+    #   EndpointId is `abcde.veo`.
+    #
+    #   When using Java, you must include `auth-crt` on the class path.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PutEventsRequest AWS API Documentation
     #
     class PutEventsRequest < Struct.new(
-      :entries)
+      :entries,
+      :endpoint_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3654,18 +4130,26 @@ module Aws::EventBridge
     #   @return [String]
     #
     # @!attribute [rw] detail
-    #   A valid JSON string. There is no other schema imposed. The JSON
-    #   string may contain fields and nested subobjects.
+    #   A valid JSON object. There is no other schema imposed. The JSON
+    #   object may contain fields and nested subobjects.
     #   @return [String]
     #
     # @!attribute [rw] event_bus_name
     #   The name or ARN of the event bus to receive the event. Only the
     #   rules that are associated with this event bus are used to match the
     #   event. If you omit this, the default event bus is used.
+    #
+    #   <note markdown="1"> If you're using a global endpoint with a custom bus, you must enter
+    #   the name, not the ARN, of the event bus in either the primary or
+    #   secondary Region here and the corresponding event bus in the other
+    #   Region will be determined based on the endpoint referenced by the
+    #   `EndpointId`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] trace_header
-    #   An X-Ray trade header, which is an http header (X-Amzn-Trace-Id)
+    #   An X-Ray trace header, which is an http header (X-Amzn-Trace-Id)
     #   that contains the trace-id associated with the event.
     #
     #   To learn more about X-Ray trace headers, see [Tracing header][1] in
@@ -3710,7 +4194,12 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # Represents an event that failed to be submitted.
+    # Represents an event that failed to be submitted. For information about
+    # the errors that are common to all actions, see [Common Errors][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/eventbridge/latest/APIReference/CommonErrors.html
     #
     # @!attribute [rw] event_id
     #   The ID of the event.
@@ -3897,6 +4386,10 @@ module Aws::EventBridge
     #   external account, specify this `StatementId` when you run
     #   [RemovePermission][1].
     #
+    #   <note markdown="1"> Each `StatementId` must be unique.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_RemovePermission.html
@@ -3970,12 +4463,12 @@ module Aws::EventBridge
     #   @return [String]
     #
     # @!attribute [rw] event_pattern
-    #   The event pattern. For more information, see [Events and Event
-    #   Patterns][1] in the *Amazon EventBridge User Guide*.
+    #   The event pattern. For more information, see [EventBridge event
+    #   patterns][1] in the *Amazon EventBridge User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html
+    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html.html
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -4487,6 +4980,27 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
+    # Endpoints can replicate all events to the secondary Region.
+    #
+    # @note When making an API call, you may pass ReplicationConfig
+    #   data as a hash:
+    #
+    #       {
+    #         state: "ENABLED", # accepts ENABLED, DISABLED
+    #       }
+    #
+    # @!attribute [rw] state
+    #   The state of event replication.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ReplicationConfig AWS API Documentation
+    #
+    class ReplicationConfig < Struct.new(
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The resource you are trying to create already exists.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ResourceAlreadyExistsException AWS API Documentation
@@ -4527,6 +5041,35 @@ module Aws::EventBridge
     class RetryPolicy < Struct.new(
       :maximum_retry_attempts,
       :maximum_event_age_in_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The routing configuration of the endpoint.
+    #
+    # @note When making an API call, you may pass RoutingConfig
+    #   data as a hash:
+    #
+    #       {
+    #         failover_config: { # required
+    #           primary: { # required
+    #             health_check: "HealthCheck", # required
+    #           },
+    #           secondary: { # required
+    #             route: "Route", # required
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] failover_config
+    #   The failover configuration for an endpoint. This includes what
+    #   triggers failover and what happens when it's triggered.
+    #   @return [Types::FailoverConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/RoutingConfig AWS API Documentation
+    #
+    class RoutingConfig < Struct.new(
+      :failover_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4719,6 +5262,28 @@ module Aws::EventBridge
     #
     class SageMakerPipelineParameters < Struct.new(
       :pipeline_parameter_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The secondary Region that processes events when failover is triggered
+    # or replication is enabled.
+    #
+    # @note When making an API call, you may pass Secondary
+    #   data as a hash:
+    #
+    #       {
+    #         route: "Route", # required
+    #       }
+    #
+    # @!attribute [rw] route
+    #   Defines the secondary Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/Secondary AWS API Documentation
+    #
+    class Secondary < Struct.new(
+      :route)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5025,8 +5590,9 @@ module Aws::EventBridge
     #       }
     #
     # @!attribute [rw] id
-    #   The ID of the target. We recommend using a memorable and unique
-    #   string.
+    #   The ID of the target within the specified rule. Use this ID to
+    #   reference the target when updating the rule. We recommend using a
+    #   memorable and unique string.
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -5786,6 +6352,126 @@ module Aws::EventBridge
       :creation_time,
       :last_modified_time,
       :last_authorized_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateEndpointRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "EndpointName", # required
+    #         description: "EndpointDescription",
+    #         routing_config: {
+    #           failover_config: { # required
+    #             primary: { # required
+    #               health_check: "HealthCheck", # required
+    #             },
+    #             secondary: { # required
+    #               route: "Route", # required
+    #             },
+    #           },
+    #         },
+    #         replication_config: {
+    #           state: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #         event_buses: [
+    #           {
+    #             event_bus_arn: "NonPartnerEventBusArn", # required
+    #           },
+    #         ],
+    #         role_arn: "IamRoleArn",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the endpoint you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description for the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_config
+    #   Configure the routing policy, including the health check and
+    #   secondary Region..
+    #   @return [Types::RoutingConfig]
+    #
+    # @!attribute [rw] replication_config
+    #   Whether event replication was enabled or disabled by this request.
+    #   @return [Types::ReplicationConfig]
+    #
+    # @!attribute [rw] event_buses
+    #   Define event buses used for replication.
+    #   @return [Array<Types::EndpointEventBus>]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the role used by event replication for this request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/UpdateEndpointRequest AWS API Documentation
+    #
+    class UpdateEndpointRequest < Struct.new(
+      :name,
+      :description,
+      :routing_config,
+      :replication_config,
+      :event_buses,
+      :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the endpoint you updated in this request.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the endpoint you updated in this request.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_config
+    #   The routing configuration you updated in this request.
+    #   @return [Types::RoutingConfig]
+    #
+    # @!attribute [rw] replication_config
+    #   Whether event replication was enabled or disabled for the endpoint
+    #   you updated in this request.
+    #   @return [Types::ReplicationConfig]
+    #
+    # @!attribute [rw] event_buses
+    #   The event buses used for replication for the endpoint you updated in
+    #   this request.
+    #   @return [Array<Types::EndpointEventBus>]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the role used by event replication for the endpoint you
+    #   updated in this request.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_id
+    #   The ID of the endpoint you updated in this request.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_url
+    #   The URL of the endpoint you updated in this request.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the endpoint you updated in this request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/UpdateEndpointResponse AWS API Documentation
+    #
+    class UpdateEndpointResponse < Struct.new(
+      :name,
+      :arn,
+      :routing_config,
+      :replication_config,
+      :event_buses,
+      :role_arn,
+      :endpoint_id,
+      :endpoint_url,
+      :state)
       SENSITIVE = []
       include Aws::Structure
     end

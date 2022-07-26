@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::ChimeSDKMessaging
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -557,6 +559,15 @@ module Aws::ChimeSDKMessaging
     # @option params [required, String] :chime_bearer
     #   The `AppInstanceUserArn` of the user that makes the API call.
     #
+    # @option params [String] :channel_id
+    #   The ID of the channel in the request.
+    #
+    # @option params [Array<String>] :member_arns
+    #   The ARNs of the channel members in the request.
+    #
+    # @option params [Array<String>] :moderator_arns
+    #   The ARNs of the channel moderators in the request.
+    #
     # @return [Types::CreateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateChannelResponse#channel_arn #channel_arn} => String
@@ -577,6 +588,9 @@ module Aws::ChimeSDKMessaging
     #       },
     #     ],
     #     chime_bearer: "ChimeArn", # required
+    #     channel_id: "ChannelId",
+    #     member_arns: ["ChimeArn"],
+    #     moderator_arns: ["ChimeArn"],
     #   })
     #
     # @example Response structure
@@ -2312,6 +2326,66 @@ module Aws::ChimeSDKMessaging
       req.send_request(options)
     end
 
+    # Allows an `AppInstanceUser` to search the channels that they belong
+    # to. The `AppInstanceUser` can search by membership or external ID. An
+    # `AppInstanceAdmin` can search across all channels within the
+    # `AppInstance`.
+    #
+    # @option params [String] :chime_bearer
+    #   The `AppInstanceUserArn` of the user making the API call.
+    #
+    # @option params [required, Array<Types::SearchField>] :fields
+    #   A list of the `Field` objects in the channel being searched.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of channels that you want returned.
+    #
+    # @option params [String] :next_token
+    #   The token returned from previous API requests until the number of
+    #   channels is reached.
+    #
+    # @return [Types::SearchChannelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchChannelsResponse#channels #channels} => Array&lt;Types::ChannelSummary&gt;
+    #   * {Types::SearchChannelsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_channels({
+    #     chime_bearer: "ChimeArn",
+    #     fields: [ # required
+    #       {
+    #         key: "MEMBERS", # required, accepts MEMBERS
+    #         values: ["SearchFieldValue"], # required
+    #         operator: "EQUALS", # required, accepts EQUALS, INCLUDES
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channels #=> Array
+    #   resp.channels[0].name #=> String
+    #   resp.channels[0].channel_arn #=> String
+    #   resp.channels[0].mode #=> String, one of "UNRESTRICTED", "RESTRICTED"
+    #   resp.channels[0].privacy #=> String, one of "PUBLIC", "PRIVATE"
+    #   resp.channels[0].metadata #=> String
+    #   resp.channels[0].last_message_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/SearchChannels AWS API Documentation
+    #
+    # @overload search_channels(params = {})
+    # @param [Hash] params ({})
+    def search_channels(params = {}, options = {})
+      req = build_request(:search_channels, params)
+      req.send_request(options)
+    end
+
     # Sends a message to a particular channel that the member is a part of.
     #
     # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the
@@ -2472,10 +2546,10 @@ module Aws::ChimeSDKMessaging
     # @option params [required, String] :channel_arn
     #   The ARN of the channel.
     #
-    # @option params [required, String] :name
+    # @option params [String] :name
     #   The name of the channel.
     #
-    # @option params [required, String] :mode
+    # @option params [String] :mode
     #   The mode of the update request.
     #
     # @option params [String] :metadata
@@ -2492,8 +2566,8 @@ module Aws::ChimeSDKMessaging
     #
     #   resp = client.update_channel({
     #     channel_arn: "ChimeArn", # required
-    #     name: "NonEmptyResourceName", # required
-    #     mode: "UNRESTRICTED", # required, accepts UNRESTRICTED, RESTRICTED
+    #     name: "NonEmptyResourceName",
+    #     mode: "UNRESTRICTED", # accepts UNRESTRICTED, RESTRICTED
     #     metadata: "Metadata",
     #     chime_bearer: "ChimeArn", # required
     #   })
@@ -2665,7 +2739,7 @@ module Aws::ChimeSDKMessaging
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chimesdkmessaging'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

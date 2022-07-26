@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.66.0 (2022-06-29)
+------------------
+
+* Feature - Includes support for StreamingExperienceSettings in CreateStack and UpdateStack APIs
+
+1.65.0 (2022-04-14)
+------------------
+
+* Feature - Includes updates for create and update fleet APIs to manage the session scripts locations for Elastic fleets.
+
+1.64.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.63.0 (2022-02-03)
 ------------------
 

@@ -35,6 +35,7 @@ module Aws::KinesisVideo
   # * {InvalidArgumentException}
   # * {InvalidDeviceException}
   # * {InvalidResourceFormatException}
+  # * {NoDataRetentionException}
   # * {NotAuthorizedException}
   # * {ResourceInUseException}
   # * {ResourceNotFoundException}
@@ -157,6 +158,21 @@ module Aws::KinesisVideo
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::KinesisVideo::Types::InvalidResourceFormatException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class NoDataRetentionException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::KinesisVideo::Types::NoDataRetentionException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::AppMesh
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -376,11 +378,11 @@ module Aws::AppMesh
     #   The name of the service mesh to create the gateway route in.
     #
     # @option params [String] :mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID is
-    #   not your own, then the account that you specify must share the mesh
-    #   with your account before you can create the resource in the service
-    #   mesh. For more information about mesh sharing, see [Working with
-    #   shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then the account that you specify must
+    #   share the mesh with your account before you can create the resource in
+    #   the service mesh. For more information about mesh sharing, see
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -707,6 +709,9 @@ module Aws::AppMesh
     #       egress_filter: {
     #         type: "ALLOW_ALL", # required, accepts ALLOW_ALL, DROP_ALL
     #       },
+    #       service_discovery: {
+    #         ip_preference: "IPv6_PREFERRED", # accepts IPv6_PREFERRED, IPv4_PREFERRED, IPv4_ONLY, IPv6_ONLY
+    #       },
     #     },
     #     tags: [
     #       {
@@ -727,6 +732,7 @@ module Aws::AppMesh
     #   resp.mesh.metadata.uid #=> String
     #   resp.mesh.metadata.version #=> Integer
     #   resp.mesh.spec.egress_filter.type #=> String, one of "ALLOW_ALL", "DROP_ALL"
+    #   resp.mesh.spec.service_discovery.ip_preference #=> String, one of "IPv6_PREFERRED", "IPv4_PREFERRED", "IPv4_ONLY", "IPv6_ONLY"
     #   resp.mesh.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateMesh AWS API Documentation
@@ -761,11 +767,11 @@ module Aws::AppMesh
     #   The name of the service mesh to create the route in.
     #
     # @option params [String] :mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID is
-    #   not your own, then the account that you specify must share the mesh
-    #   with your account before you can create the resource in the service
-    #   mesh. For more information about mesh sharing, see [Working with
-    #   shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then the account that you specify must
+    #   share the mesh with your account before you can create the resource in
+    #   the service mesh. For more information about mesh sharing, see
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -1148,11 +1154,11 @@ module Aws::AppMesh
     #   The name of the service mesh to create the virtual gateway in.
     #
     # @option params [String] :mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID is
-    #   not your own, then the account that you specify must share the mesh
-    #   with your account before you can create the resource in the service
-    #   mesh. For more information about mesh sharing, see [Working with
-    #   shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then the account that you specify must
+    #   share the mesh with your account before you can create the resource in
+    #   the service mesh. For more information about mesh sharing, see
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -1383,7 +1389,7 @@ module Aws::AppMesh
     # For more information about virtual nodes, see [Virtual nodes][1]. You
     # must be using `1.15.0` or later of the Envoy image when setting these
     # variables. For more information aboutApp Mesh Envoy variables, see
-    # [Envoy image][2] in the AWS App Mesh User Guide.
+    # [Envoy image][2] in the App Mesh User Guide.
     #
     #
     #
@@ -1402,11 +1408,11 @@ module Aws::AppMesh
     #   The name of the service mesh to create the virtual node in.
     #
     # @option params [String] :mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID is
-    #   not your own, then the account that you specify must share the mesh
-    #   with your account before you can create the resource in the service
-    #   mesh. For more information about mesh sharing, see [Working with
-    #   shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then the account that you specify must
+    #   share the mesh with your account before you can create the resource in
+    #   the service mesh. For more information about mesh sharing, see
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -1638,11 +1644,13 @@ module Aws::AppMesh
     #               value: "AwsCloudMapInstanceAttributeValue", # required
     #             },
     #           ],
+    #           ip_preference: "IPv6_PREFERRED", # accepts IPv6_PREFERRED, IPv4_PREFERRED, IPv4_ONLY, IPv6_ONLY
     #           namespace_name: "AwsCloudMapName", # required
     #           service_name: "AwsCloudMapName", # required
     #         },
     #         dns: {
     #           hostname: "Hostname", # required
+    #           ip_preference: "IPv6_PREFERRED", # accepts IPv6_PREFERRED, IPv4_PREFERRED, IPv4_ONLY, IPv6_ONLY
     #           response_type: "LOADBALANCER", # accepts LOADBALANCER, ENDPOINTS
     #         },
     #       },
@@ -1740,9 +1748,11 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes #=> Array
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes[0].key #=> String
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes[0].value #=> String
+    #   resp.virtual_node.spec.service_discovery.aws_cloud_map.ip_preference #=> String, one of "IPv6_PREFERRED", "IPv4_PREFERRED", "IPv4_ONLY", "IPv6_ONLY"
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.namespace_name #=> String
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.service_name #=> String
     #   resp.virtual_node.spec.service_discovery.dns.hostname #=> String
+    #   resp.virtual_node.spec.service_discovery.dns.ip_preference #=> String, one of "IPv6_PREFERRED", "IPv4_PREFERRED", "IPv4_ONLY", "IPv6_ONLY"
     #   resp.virtual_node.spec.service_discovery.dns.response_type #=> String, one of "LOADBALANCER", "ENDPOINTS"
     #   resp.virtual_node.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #   resp.virtual_node.virtual_node_name #=> String
@@ -1783,11 +1793,11 @@ module Aws::AppMesh
     #   The name of the service mesh to create the virtual router in.
     #
     # @option params [String] :mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID is
-    #   not your own, then the account that you specify must share the mesh
-    #   with your account before you can create the resource in the service
-    #   mesh. For more information about mesh sharing, see [Working with
-    #   shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then the account that you specify must
+    #   share the mesh with your account before you can create the resource in
+    #   the service mesh. For more information about mesh sharing, see
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -1888,11 +1898,11 @@ module Aws::AppMesh
     #   The name of the service mesh to create the virtual service in.
     #
     # @option params [String] :mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID is
-    #   not your own, then the account that you specify must share the mesh
-    #   with your account before you can create the resource in the service
-    #   mesh. For more information about mesh sharing, see [Working with
-    #   shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then the account that you specify must
+    #   share the mesh with your account before you can create the resource in
+    #   the service mesh. For more information about mesh sharing, see
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -1973,10 +1983,10 @@ module Aws::AppMesh
     #   The name of the service mesh to delete the gateway route from.
     #
     # @option params [String] :mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID is
-    #   not your own, then it's the ID of the account that shared the mesh
-    #   with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account that
+    #   shared the mesh with your account. For more information about mesh
+    #   sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -2112,6 +2122,7 @@ module Aws::AppMesh
     #   resp.mesh.metadata.uid #=> String
     #   resp.mesh.metadata.version #=> Integer
     #   resp.mesh.spec.egress_filter.type #=> String, one of "ALLOW_ALL", "DROP_ALL"
+    #   resp.mesh.spec.service_discovery.ip_preference #=> String, one of "IPv6_PREFERRED", "IPv4_PREFERRED", "IPv4_ONLY", "IPv6_ONLY"
     #   resp.mesh.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteMesh AWS API Documentation
@@ -2129,10 +2140,10 @@ module Aws::AppMesh
     #   The name of the service mesh to delete the route in.
     #
     # @option params [String] :mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID is
-    #   not your own, then it's the ID of the account that shared the mesh
-    #   with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account that
+    #   shared the mesh with your account. For more information about mesh
+    #   sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -2282,10 +2293,10 @@ module Aws::AppMesh
     #   The name of the service mesh to delete the virtual gateway from.
     #
     # @option params [String] :mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID is
-    #   not your own, then it's the ID of the account that shared the mesh
-    #   with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account that
+    #   shared the mesh with your account. For more information about mesh
+    #   sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -2373,10 +2384,10 @@ module Aws::AppMesh
     #   The name of the service mesh to delete the virtual node in.
     #
     # @option params [String] :mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID is
-    #   not your own, then it's the ID of the account that shared the mesh
-    #   with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account that
+    #   shared the mesh with your account. For more information about mesh
+    #   sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -2481,9 +2492,11 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes #=> Array
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes[0].key #=> String
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes[0].value #=> String
+    #   resp.virtual_node.spec.service_discovery.aws_cloud_map.ip_preference #=> String, one of "IPv6_PREFERRED", "IPv4_PREFERRED", "IPv4_ONLY", "IPv6_ONLY"
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.namespace_name #=> String
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.service_name #=> String
     #   resp.virtual_node.spec.service_discovery.dns.hostname #=> String
+    #   resp.virtual_node.spec.service_discovery.dns.ip_preference #=> String, one of "IPv6_PREFERRED", "IPv4_PREFERRED", "IPv4_ONLY", "IPv6_ONLY"
     #   resp.virtual_node.spec.service_discovery.dns.response_type #=> String, one of "LOADBALANCER", "ENDPOINTS"
     #   resp.virtual_node.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #   resp.virtual_node.virtual_node_name #=> String
@@ -2506,10 +2519,10 @@ module Aws::AppMesh
     #   The name of the service mesh to delete the virtual router in.
     #
     # @option params [String] :mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID is
-    #   not your own, then it's the ID of the account that shared the mesh
-    #   with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account that
+    #   shared the mesh with your account. For more information about mesh
+    #   sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -2561,10 +2574,10 @@ module Aws::AppMesh
     #   The name of the service mesh to delete the virtual service in.
     #
     # @option params [String] :mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID is
-    #   not your own, then it's the ID of the account that shared the mesh
-    #   with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account that
+    #   shared the mesh with your account. For more information about mesh
+    #   sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -2618,10 +2631,10 @@ module Aws::AppMesh
     #   The name of the service mesh that the gateway route resides in.
     #
     # @option params [String] :mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID is
-    #   not your own, then it's the ID of the account that shared the mesh
-    #   with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account that
+    #   shared the mesh with your account. For more information about mesh
+    #   sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -2734,10 +2747,10 @@ module Aws::AppMesh
     #   The name of the service mesh to describe.
     #
     # @option params [String] :mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID is
-    #   not your own, then it's the ID of the account that shared the mesh
-    #   with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account that
+    #   shared the mesh with your account. For more information about mesh
+    #   sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -2765,6 +2778,7 @@ module Aws::AppMesh
     #   resp.mesh.metadata.uid #=> String
     #   resp.mesh.metadata.version #=> Integer
     #   resp.mesh.spec.egress_filter.type #=> String, one of "ALLOW_ALL", "DROP_ALL"
+    #   resp.mesh.spec.service_discovery.ip_preference #=> String, one of "IPv6_PREFERRED", "IPv4_PREFERRED", "IPv4_ONLY", "IPv6_ONLY"
     #   resp.mesh.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeMesh AWS API Documentation
@@ -2782,10 +2796,10 @@ module Aws::AppMesh
     #   The name of the service mesh that the route resides in.
     #
     # @option params [String] :mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID is
-    #   not your own, then it's the ID of the account that shared the mesh
-    #   with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account that
+    #   shared the mesh with your account. For more information about mesh
+    #   sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -2934,10 +2948,10 @@ module Aws::AppMesh
     #   The name of the service mesh that the gateway route resides in.
     #
     # @option params [String] :mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID is
-    #   not your own, then it's the ID of the account that shared the mesh
-    #   with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account that
+    #   shared the mesh with your account. For more information about mesh
+    #   sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -3022,10 +3036,10 @@ module Aws::AppMesh
     #   The name of the service mesh that the virtual node resides in.
     #
     # @option params [String] :mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID is
-    #   not your own, then it's the ID of the account that shared the mesh
-    #   with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account that
+    #   shared the mesh with your account. For more information about mesh
+    #   sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -3130,9 +3144,11 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes #=> Array
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes[0].key #=> String
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes[0].value #=> String
+    #   resp.virtual_node.spec.service_discovery.aws_cloud_map.ip_preference #=> String, one of "IPv6_PREFERRED", "IPv4_PREFERRED", "IPv4_ONLY", "IPv6_ONLY"
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.namespace_name #=> String
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.service_name #=> String
     #   resp.virtual_node.spec.service_discovery.dns.hostname #=> String
+    #   resp.virtual_node.spec.service_discovery.dns.ip_preference #=> String, one of "IPv6_PREFERRED", "IPv4_PREFERRED", "IPv4_ONLY", "IPv6_ONLY"
     #   resp.virtual_node.spec.service_discovery.dns.response_type #=> String, one of "LOADBALANCER", "ENDPOINTS"
     #   resp.virtual_node.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #   resp.virtual_node.virtual_node_name #=> String
@@ -3152,10 +3168,10 @@ module Aws::AppMesh
     #   The name of the service mesh that the virtual router resides in.
     #
     # @option params [String] :mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID is
-    #   not your own, then it's the ID of the account that shared the mesh
-    #   with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account that
+    #   shared the mesh with your account. For more information about mesh
+    #   sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -3207,10 +3223,10 @@ module Aws::AppMesh
     #   The name of the service mesh that the virtual service resides in.
     #
     # @option params [String] :mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID is
-    #   not your own, then it's the ID of the account that shared the mesh
-    #   with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account that
+    #   shared the mesh with your account. For more information about mesh
+    #   sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -3272,10 +3288,10 @@ module Aws::AppMesh
     #   The name of the service mesh to list gateway routes in.
     #
     # @option params [String] :mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID is
-    #   not your own, then it's the ID of the account that shared the mesh
-    #   with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account that
+    #   shared the mesh with your account. For more information about mesh
+    #   sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -3405,10 +3421,10 @@ module Aws::AppMesh
     #   The name of the service mesh to list routes in.
     #
     # @option params [String] :mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID is
-    #   not your own, then it's the ID of the account that shared the mesh
-    #   with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account that
+    #   shared the mesh with your account. For more information about mesh
+    #   sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -3532,10 +3548,10 @@ module Aws::AppMesh
     #   The name of the service mesh to list virtual gateways in.
     #
     # @option params [String] :mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID is
-    #   not your own, then it's the ID of the account that shared the mesh
-    #   with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account that
+    #   shared the mesh with your account. For more information about mesh
+    #   sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -3601,10 +3617,10 @@ module Aws::AppMesh
     #   The name of the service mesh to list virtual nodes in.
     #
     # @option params [String] :mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID is
-    #   not your own, then it's the ID of the account that shared the mesh
-    #   with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account that
+    #   shared the mesh with your account. For more information about mesh
+    #   sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -3670,10 +3686,10 @@ module Aws::AppMesh
     #   The name of the service mesh to list virtual routers in.
     #
     # @option params [String] :mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID is
-    #   not your own, then it's the ID of the account that shared the mesh
-    #   with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account that
+    #   shared the mesh with your account. For more information about mesh
+    #   sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -3739,10 +3755,10 @@ module Aws::AppMesh
     #   The name of the service mesh to list virtual services in.
     #
     # @option params [String] :mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID is
-    #   not your own, then it's the ID of the account that shared the mesh
-    #   with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account that
+    #   shared the mesh with your account. For more information about mesh
+    #   sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -3872,10 +3888,10 @@ module Aws::AppMesh
     #   The name of the service mesh that the gateway route resides in.
     #
     # @option params [String] :mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID is
-    #   not your own, then it's the ID of the account that shared the mesh
-    #   with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account that
+    #   shared the mesh with your account. For more information about mesh
+    #   sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -4170,6 +4186,9 @@ module Aws::AppMesh
     #       egress_filter: {
     #         type: "ALLOW_ALL", # required, accepts ALLOW_ALL, DROP_ALL
     #       },
+    #       service_discovery: {
+    #         ip_preference: "IPv6_PREFERRED", # accepts IPv6_PREFERRED, IPv4_PREFERRED, IPv4_ONLY, IPv6_ONLY
+    #       },
     #     },
     #   })
     #
@@ -4184,6 +4203,7 @@ module Aws::AppMesh
     #   resp.mesh.metadata.uid #=> String
     #   resp.mesh.metadata.version #=> Integer
     #   resp.mesh.spec.egress_filter.type #=> String, one of "ALLOW_ALL", "DROP_ALL"
+    #   resp.mesh.spec.service_discovery.ip_preference #=> String, one of "IPv6_PREFERRED", "IPv4_PREFERRED", "IPv4_ONLY", "IPv6_ONLY"
     #   resp.mesh.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateMesh AWS API Documentation
@@ -4210,10 +4230,10 @@ module Aws::AppMesh
     #   The name of the service mesh that the route resides in.
     #
     # @option params [String] :mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID is
-    #   not your own, then it's the ID of the account that shared the mesh
-    #   with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account that
+    #   shared the mesh with your account. For more information about mesh
+    #   sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -4568,10 +4588,10 @@ module Aws::AppMesh
     #   The name of the service mesh that the virtual gateway resides in.
     #
     # @option params [String] :mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID is
-    #   not your own, then it's the ID of the account that shared the mesh
-    #   with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account that
+    #   shared the mesh with your account. For more information about mesh
+    #   sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -4772,10 +4792,10 @@ module Aws::AppMesh
     #   The name of the service mesh that the virtual node resides in.
     #
     # @option params [String] :mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID is
-    #   not your own, then it's the ID of the account that shared the mesh
-    #   with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account that
+    #   shared the mesh with your account. For more information about mesh
+    #   sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -5001,11 +5021,13 @@ module Aws::AppMesh
     #               value: "AwsCloudMapInstanceAttributeValue", # required
     #             },
     #           ],
+    #           ip_preference: "IPv6_PREFERRED", # accepts IPv6_PREFERRED, IPv4_PREFERRED, IPv4_ONLY, IPv6_ONLY
     #           namespace_name: "AwsCloudMapName", # required
     #           service_name: "AwsCloudMapName", # required
     #         },
     #         dns: {
     #           hostname: "Hostname", # required
+    #           ip_preference: "IPv6_PREFERRED", # accepts IPv6_PREFERRED, IPv4_PREFERRED, IPv4_ONLY, IPv6_ONLY
     #           response_type: "LOADBALANCER", # accepts LOADBALANCER, ENDPOINTS
     #         },
     #       },
@@ -5097,9 +5119,11 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes #=> Array
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes[0].key #=> String
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes[0].value #=> String
+    #   resp.virtual_node.spec.service_discovery.aws_cloud_map.ip_preference #=> String, one of "IPv6_PREFERRED", "IPv4_PREFERRED", "IPv4_ONLY", "IPv6_ONLY"
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.namespace_name #=> String
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.service_name #=> String
     #   resp.virtual_node.spec.service_discovery.dns.hostname #=> String
+    #   resp.virtual_node.spec.service_discovery.dns.ip_preference #=> String, one of "IPv6_PREFERRED", "IPv4_PREFERRED", "IPv4_ONLY", "IPv6_ONLY"
     #   resp.virtual_node.spec.service_discovery.dns.response_type #=> String, one of "LOADBALANCER", "ENDPOINTS"
     #   resp.virtual_node.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #   resp.virtual_node.virtual_node_name #=> String
@@ -5127,10 +5151,10 @@ module Aws::AppMesh
     #   The name of the service mesh that the virtual router resides in.
     #
     # @option params [String] :mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID is
-    #   not your own, then it's the ID of the account that shared the mesh
-    #   with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account that
+    #   shared the mesh with your account. For more information about mesh
+    #   sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -5205,10 +5229,10 @@ module Aws::AppMesh
     #   The name of the service mesh that the virtual service resides in.
     #
     # @option params [String] :mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID is
-    #   not your own, then it's the ID of the account that shared the mesh
-    #   with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account that
+    #   shared the mesh with your account. For more information about mesh
+    #   sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -5281,7 +5305,7 @@ module Aws::AppMesh
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appmesh'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

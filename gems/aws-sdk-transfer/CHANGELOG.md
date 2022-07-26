@@ -1,6 +1,61 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2022-07-26)
+------------------
+
+* Feature - AWS Transfer Family now supports Applicability Statement 2 (AS2), a network protocol used for the secure and reliable transfer of critical Business-to-Business (B2B) data over the public internet using HTTP/HTTPS as the transport mechanism.
+
+1.56.0 (2022-06-22)
+------------------
+
+* Feature - Until today, the service supported only RSA host keys and user keys. Now with this launch, Transfer Family has expanded the support for ECDSA and ED25519 host keys and user keys, enabling customers to support a broader set of clients by choosing RSA, ECDSA, and ED25519 host and user keys.
+
+1.55.0 (2022-05-18)
+------------------
+
+* Feature - AWS Transfer Family now supports SetStat server configuration option, which provides the ability to ignore SetStat command issued by file transfer clients, enabling customers to upload files without any errors.
+
+1.54.0 (2022-05-12)
+------------------
+
+* Feature - AWS Transfer Family now accepts ECDSA keys for server host keys
+
+1.53.0 (2022-04-19)
+------------------
+
+* Feature - This release contains corrected HomeDirectoryMappings examples for several API functions: CreateAccess, UpdateAccess, CreateUser, and UpdateUser,.
+
+1.52.0 (2022-03-23)
+------------------
+
+* Feature - Documentation updates for AWS Transfer Family to describe how to remove an associated workflow from a server.
+
+1.51.0 (2022-03-10)
+------------------
+
+* Feature - Adding more descriptive error types for managed workflows
+
+1.50.0 (2022-03-04)
+------------------
+
+* Feature - Add waiters for server online and offline.
+
+1.49.0 (2022-02-24)
+------------------
+
+* Feature - Support automatic pagination when listing AWS Transfer Family resources.
+
+1.48.0 (2022-02-23)
+------------------
+
+* Feature - The file input selection feature provides the ability to use either the originally uploaded file or the output file from the previous workflow step, enabling customers to make multiple copies of the original file while keeping the source file intact for file archival.
+
+1.47.0 (2022-02-18)
+------------------
+
+* Feature - Properties for Transfer Family used with SFTP, FTP, and FTPS protocols. Display Banners are bodies of text that can be displayed before and/or after a user authenticates onto a server using one of the previously mentioned protocols.
+
 1.46.0 (2022-02-03)
 ------------------
 

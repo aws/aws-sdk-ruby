@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2022-07-19)
+------------------
+
+* Feature - Increased the character limit of the login message from 850 to 2000 characters.
+
+1.69.0 (2022-06-15)
+------------------
+
+* Feature - Added new field "reason" to OperationNotSupportedException. Receiving this exception in the DeregisterWorkspaceDirectory API will now return a reason giving more context on the failure.
+
+1.68.0 (2022-05-12)
+------------------
+
+* Feature - Increased the character limit of the login message from 600 to 850 characters.
+
+1.67.0 (2022-04-11)
+------------------
+
+* Feature - Added API support that allows customers to create GPU-enabled WorkSpaces using EC2 G4dn instances.
+
+1.66.0 (2022-03-31)
+------------------
+
+* Feature - Added APIs that allow you to customize the logo, login message, and help links in the WorkSpaces client login page. To learn more, visit https://docs.aws.amazon.com/workspaces/latest/adminguide/customize-branding.html
+
+1.65.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.64.0 (2022-02-03)
 ------------------
 

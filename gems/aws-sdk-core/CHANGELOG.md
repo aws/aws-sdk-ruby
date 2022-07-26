@@ -1,6 +1,83 @@
 Unreleased Changes
 ------------------
 
+3.131.3 (2022-07-18)
+------------------
+
+* Issue - Add support for serializing shapes on the body with `jsonvalue` members. 
+
+3.131.2 (2022-06-20)
+------------------
+
+* Issue - Populate context :request_id for XML error responses.
+
+3.131.1 (2022-05-20)
+------------------
+
+* Issue - Bump the minimum version of `jmespath` dependency.
+
+3.131.0 (2022-05-16)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+3.130.2 (2022-04-22)
+------------------
+
+* Issue - Don't pass `:before_refresh` to Client constructors in RefreshingCredential implementations (#2690).
+
+3.130.1 (2022-04-12)
+------------------
+
+* Issue - Don't call `refresh!` on non-refreshable `Credentials` when retrying errors (#2685).
+
+3.130.0 (2022-03-11)
+------------------
+
+* Feature - Asynchronously refresh AWS credentials (#2641).
+
+* Issue - Add x-amz-region-set to list of headers deleted for re-sign.
+
+3.129.1 (2022-03-10)
+------------------
+
+* Issue - Make stubs thread safe by creating new responses for each operation call (#2675).
+
+3.129.0 (2022-03-08)
+------------------
+
+* Feature - Add support for cases when `InstanceProfileCredentials` (IMDS) is unable to refresh credentials.
+
+3.128.1 (2022-03-07)
+------------------
+
+* Issue - Fixed `Aws::PageableResponse` invalidating Ruby's global constant cache.
+
+3.128.0 (2022-03-04)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+3.127.0 (2022-02-24)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+* Feature - Support `HttpChecksum` trait for requests and responses.
+
+3.126.2 (2022-02-16)
+------------------
+
+* Issue - Add a before_refresh callback to AssumeRoleCredentials (#2529).
+* Issue - Raise a `NoSuchProfileError` when config and credentials files don't exist.
+
+3.126.1 (2022-02-14)
+------------------
+
+* Issue - Set `create_time` on IMDS tokens before fetch to reduce chance of using expired tokens and retry failures due to using expired tokens.
+
 3.126.0 (2022-02-03)
 ------------------
 

@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2022-05-18)
+------------------
+
+* Feature - Documentation updates for AWS Batch.
+
+1.61.0 (2022-04-14)
+------------------
+
+* Feature - Enables configuration updates for compute environments with BEST_FIT_PROGRESSIVE and SPOT_CAPACITY_OPTIMIZED allocation strategies.
+
+1.60.0 (2022-03-25)
+------------------
+
+* Feature - Bug Fix: Fixed a bug where shapes were marked as unboxed and were not serialized and sent over the wire, causing an API error from the service.
+
+1.59.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.58.0 (2022-02-03)
 ------------------
 

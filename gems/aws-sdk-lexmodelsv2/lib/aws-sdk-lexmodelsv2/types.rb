@@ -162,7 +162,7 @@ module Aws::LexModelsV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/designing-output-format.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/designing-output-format.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AssociatedTranscript AWS API Documentation
@@ -784,7 +784,7 @@ module Aws::LexModelsV2
     end
 
     # The object representing the URL of the bot definition, the URL of the
-    # associated transcript and a statistical summary of the bot
+    # associated transcript, and a statistical summary of the bot
     # recommendation results.
     #
     # @!attribute [rw] bot_locale_export_url
@@ -1962,7 +1962,7 @@ module Aws::LexModelsV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/latest/dg/API_DescribeExport.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_DescribeExport.html
     #   @return [String]
     #
     # @!attribute [rw] creation_date_time
@@ -2326,6 +2326,7 @@ module Aws::LexModelsV2
     #             ],
     #             max_retries: 1, # required
     #             allow_interrupt: false,
+    #             message_selection_strategy: "Random", # accepts Random, Ordered
     #           },
     #           declination_response: { # required
     #             message_groups: [ # required
@@ -2874,7 +2875,7 @@ module Aws::LexModelsV2
     #       {
     #         slot_name: "Name", # required
     #         description: "Description",
-    #         slot_type_id: "BuiltInOrCustomSlotTypeId", # required
+    #         slot_type_id: "BuiltInOrCustomSlotTypeId",
     #         value_elicitation_setting: { # required
     #           default_value_specification: {
     #             default_value_list: [ # required
@@ -2937,6 +2938,7 @@ module Aws::LexModelsV2
     #             ],
     #             max_retries: 1, # required
     #             allow_interrupt: false,
+    #             message_selection_strategy: "Random", # accepts Random, Ordered
     #           },
     #           sample_utterances: [
     #             {
@@ -6835,6 +6837,7 @@ module Aws::LexModelsV2
     #           ],
     #           max_retries: 1, # required
     #           allow_interrupt: false,
+    #           message_selection_strategy: "Random", # accepts Random, Ordered
     #         },
     #         declination_response: { # required
     #           message_groups: [ # required
@@ -9250,6 +9253,7 @@ module Aws::LexModelsV2
     #         ],
     #         max_retries: 1, # required
     #         allow_interrupt: false,
+    #         message_selection_strategy: "Random", # accepts Random, Ordered
     #       }
     #
     # @!attribute [rw] message_groups
@@ -9267,12 +9271,18 @@ module Aws::LexModelsV2
     #   bot.
     #   @return [Boolean]
     #
+    # @!attribute [rw] message_selection_strategy
+    #   Indicates how a message is selected from a message group among
+    #   retries.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/PromptSpecification AWS API Documentation
     #
     class PromptSpecification < Struct.new(
       :message_groups,
       :max_retries,
-      :allow_interrupt)
+      :allow_interrupt,
+      :message_selection_strategy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10213,6 +10223,7 @@ module Aws::LexModelsV2
     #           ],
     #           max_retries: 1, # required
     #           allow_interrupt: false,
+    #           message_selection_strategy: "Random", # accepts Random, Ordered
     #         },
     #         sample_utterances: [
     #           {
@@ -12024,6 +12035,7 @@ module Aws::LexModelsV2
     #             ],
     #             max_retries: 1, # required
     #             allow_interrupt: false,
+    #             message_selection_strategy: "Random", # accepts Random, Ordered
     #           },
     #           declination_response: { # required
     #             message_groups: [ # required
@@ -12441,7 +12453,7 @@ module Aws::LexModelsV2
     #         slot_id: "Id", # required
     #         slot_name: "Name", # required
     #         description: "Description",
-    #         slot_type_id: "BuiltInOrCustomSlotTypeId", # required
+    #         slot_type_id: "BuiltInOrCustomSlotTypeId",
     #         value_elicitation_setting: { # required
     #           default_value_specification: {
     #             default_value_list: [ # required
@@ -12504,6 +12516,7 @@ module Aws::LexModelsV2
     #             ],
     #             max_retries: 1, # required
     #             allow_interrupt: false,
+    #             message_selection_strategy: "Random", # accepts Random, Ordered
     #           },
     #           sample_utterances: [
     #             {

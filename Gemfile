@@ -6,6 +6,7 @@ gem 'rake', require: false
 
 gem 'http-2'
 gem 'jmespath'
+gem 'aws-crt' if ENV['CRT']
 
 # faster xml libraries
 unless ENV['PURE_RUBY']
@@ -14,7 +15,7 @@ unless ENV['PURE_RUBY']
 
   unless defined?(JRUBY_VERSION)
     gem 'libxml-ruby'
-    gem 'ox', " <= 2.14.6"
+    gem 'ox'
   end
 end
 
@@ -28,7 +29,6 @@ group :test do
 
   gem 'multipart-post'
   gem 'rspec'
-  gem 'rspec-mocks', '<= 3.10.2'
 end
 
 group :build do

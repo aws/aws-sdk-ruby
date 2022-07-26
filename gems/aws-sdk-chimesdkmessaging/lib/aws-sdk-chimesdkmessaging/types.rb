@@ -17,7 +17,8 @@ module Aws::ChimeSDKMessaging
     #   @return [String]
     #
     # @!attribute [rw] read_marker_timestamp
-    #   The time at which a message was last read.
+    #   The time at which an `AppInstanceUser` last marked a channel as
+    #   read.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/AppInstanceUserMembershipSummary AWS API Documentation
@@ -1129,6 +1130,9 @@ module Aws::ChimeSDKMessaging
     #           },
     #         ],
     #         chime_bearer: "ChimeArn", # required
+    #         channel_id: "ChannelId",
+    #         member_arns: ["ChimeArn"],
+    #         moderator_arns: ["ChimeArn"],
     #       }
     #
     # @!attribute [rw] app_instance_arn
@@ -1171,6 +1175,18 @@ module Aws::ChimeSDKMessaging
     #   The `AppInstanceUserArn` of the user that makes the API call.
     #   @return [String]
     #
+    # @!attribute [rw] channel_id
+    #   The ID of the channel in the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_arns
+    #   The ARNs of the channel members in the request.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] moderator_arns
+    #   The ARNs of the channel moderators in the request.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/CreateChannelRequest AWS API Documentation
     #
     class CreateChannelRequest < Struct.new(
@@ -1181,8 +1197,11 @@ module Aws::ChimeSDKMessaging
       :metadata,
       :client_request_token,
       :tags,
-      :chime_bearer)
-      SENSITIVE = [:name, :metadata, :client_request_token]
+      :chime_bearer,
+      :channel_id,
+      :member_arns,
+      :moderator_arns)
+      SENSITIVE = [:name, :metadata, :client_request_token, :channel_id]
       include Aws::Structure
     end
 
@@ -2051,8 +2070,7 @@ module Aws::ChimeSDKMessaging
     end
 
     # @!attribute [rw] channel_memberships
-    #   The token passed by previous API calls until all requested users are
-    #   returned.
+    #   The information for the requested channel memberships.
     #   @return [Array<Types::ChannelMembershipForAppInstanceUserSummary>]
     #
     # @!attribute [rw] next_token
@@ -2666,7 +2684,7 @@ module Aws::ChimeSDKMessaging
     #
     # @!attribute [rw] filter_rule
     #   The simple JSON object used to send a subset of a push notification
-    #   to the requsted member.
+    #   to the requested member.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/PushNotificationPreferences AWS API Documentation
@@ -2805,6 +2823,115 @@ module Aws::ChimeSDKMessaging
     class ResourceLimitExceededException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass SearchChannelsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         chime_bearer: "ChimeArn",
+    #         fields: [ # required
+    #           {
+    #             key: "MEMBERS", # required, accepts MEMBERS
+    #             values: ["SearchFieldValue"], # required
+    #             operator: "EQUALS", # required, accepts EQUALS, INCLUDES
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] chime_bearer
+    #   The `AppInstanceUserArn` of the user making the API call.
+    #   @return [String]
+    #
+    # @!attribute [rw] fields
+    #   A list of the `Field` objects in the channel being searched.
+    #   @return [Array<Types::SearchField>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of channels that you want returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token returned from previous API requests until the number of
+    #   channels is reached.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/SearchChannelsRequest AWS API Documentation
+    #
+    class SearchChannelsRequest < Struct.new(
+      :chime_bearer,
+      :fields,
+      :max_results,
+      :next_token)
+      SENSITIVE = [:next_token]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channels
+    #   A list of the channels in the request.
+    #   @return [Array<Types::ChannelSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token returned from previous API responses until the number of
+    #   channels is reached.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/SearchChannelsResponse AWS API Documentation
+    #
+    class SearchChannelsResponse < Struct.new(
+      :channels,
+      :next_token)
+      SENSITIVE = [:next_token]
+      include Aws::Structure
+    end
+
+    # A `Field` of the channel that you want to search.
+    #
+    # @note When making an API call, you may pass SearchField
+    #   data as a hash:
+    #
+    #       {
+    #         key: "MEMBERS", # required, accepts MEMBERS
+    #         values: ["SearchFieldValue"], # required
+    #         operator: "EQUALS", # required, accepts EQUALS, INCLUDES
+    #       }
+    #
+    # @!attribute [rw] key
+    #   An `enum` value that indicates the key to search the channel on.
+    #   `MEMBERS` allows you to search channels based on memberships. You
+    #   can use it with the `EQUALS` operator to get channels whose
+    #   memberships are equal to the specified values, and with the
+    #   `INCLUDES` operator to get channels whose memberships include the
+    #   specified values.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values that you want to search for, a list of strings. The
+    #   values must be `AppInstanceUserArns` specified as a list of strings.
+    #
+    #   <note markdown="1"> This operation isn't supported for `AppInstanceUsers` with large
+    #   number of memberships.
+    #
+    #    </note>
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] operator
+    #   The operator used to compare field values, currently `EQUALS` or
+    #   `INCLUDES`. Use the `EQUALS` operator to find channels whose
+    #   memberships equal the specified values. Use the `INCLUDES` operator
+    #   to find channels whose memberships include the specified values.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/SearchField AWS API Documentation
+    #
+    class SearchField < Struct.new(
+      :key,
+      :values,
+      :operator)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3223,8 +3350,8 @@ module Aws::ChimeSDKMessaging
     #
     #       {
     #         channel_arn: "ChimeArn", # required
-    #         name: "NonEmptyResourceName", # required
-    #         mode: "UNRESTRICTED", # required, accepts UNRESTRICTED, RESTRICTED
+    #         name: "NonEmptyResourceName",
+    #         mode: "UNRESTRICTED", # accepts UNRESTRICTED, RESTRICTED
     #         metadata: "Metadata",
     #         chime_bearer: "ChimeArn", # required
     #       }

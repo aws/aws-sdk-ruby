@@ -86,6 +86,7 @@ module Aws::AutoScaling
     CreateLaunchConfigurationType = Shapes::StructureShape.new(name: 'CreateLaunchConfigurationType')
     CreateOrUpdateTagsType = Shapes::StructureShape.new(name: 'CreateOrUpdateTagsType')
     CustomizedMetricSpecification = Shapes::StructureShape.new(name: 'CustomizedMetricSpecification')
+    DefaultInstanceWarmup = Shapes::IntegerShape.new(name: 'DefaultInstanceWarmup')
     DeleteAutoScalingGroupType = Shapes::StructureShape.new(name: 'DeleteAutoScalingGroupType')
     DeleteLifecycleHookAnswer = Shapes::StructureShape.new(name: 'DeleteLifecycleHookAnswer')
     DeleteLifecycleHookType = Shapes::StructureShape.new(name: 'DeleteLifecycleHookType')
@@ -171,6 +172,7 @@ module Aws::AutoScaling
     InstanceRefreshWarmPoolProgress = Shapes::StructureShape.new(name: 'InstanceRefreshWarmPoolProgress')
     InstanceRefreshes = Shapes::ListShape.new(name: 'InstanceRefreshes')
     InstanceRequirements = Shapes::StructureShape.new(name: 'InstanceRequirements')
+    InstanceReusePolicy = Shapes::StructureShape.new(name: 'InstanceReusePolicy')
     Instances = Shapes::ListShape.new(name: 'Instances')
     InstancesDistribution = Shapes::StructureShape.new(name: 'InstancesDistribution')
     InstancesToUpdate = Shapes::IntegerShape.new(name: 'InstancesToUpdate')
@@ -298,6 +300,7 @@ module Aws::AutoScaling
     ResourceInUseFault = Shapes::StructureShape.new(name: 'ResourceInUseFault')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     ReturnData = Shapes::BooleanShape.new(name: 'ReturnData')
+    ReuseOnScaleIn = Shapes::BooleanShape.new(name: 'ReuseOnScaleIn')
     ScalingActivityInProgressFault = Shapes::StructureShape.new(name: 'ScalingActivityInProgressFault')
     ScalingActivityStatusCode = Shapes::StringShape.new(name: 'ScalingActivityStatusCode')
     ScalingPolicies = Shapes::ListShape.new(name: 'ScalingPolicies')
@@ -465,6 +468,7 @@ module Aws::AutoScaling
     AutoScalingGroup.add_member(:warm_pool_size, Shapes::ShapeRef.new(shape: WarmPoolSize, location_name: "WarmPoolSize"))
     AutoScalingGroup.add_member(:context, Shapes::ShapeRef.new(shape: Context, location_name: "Context"))
     AutoScalingGroup.add_member(:desired_capacity_type, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "DesiredCapacityType"))
+    AutoScalingGroup.add_member(:default_instance_warmup, Shapes::ShapeRef.new(shape: DefaultInstanceWarmup, location_name: "DefaultInstanceWarmup"))
     AutoScalingGroup.struct_class = Types::AutoScalingGroup
 
     AutoScalingGroupNames.member = Shapes::ShapeRef.new(shape: XmlStringMaxLen255)
@@ -579,6 +583,7 @@ module Aws::AutoScaling
     CreateAutoScalingGroupType.add_member(:max_instance_lifetime, Shapes::ShapeRef.new(shape: MaxInstanceLifetime, location_name: "MaxInstanceLifetime"))
     CreateAutoScalingGroupType.add_member(:context, Shapes::ShapeRef.new(shape: Context, location_name: "Context"))
     CreateAutoScalingGroupType.add_member(:desired_capacity_type, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "DesiredCapacityType"))
+    CreateAutoScalingGroupType.add_member(:default_instance_warmup, Shapes::ShapeRef.new(shape: DefaultInstanceWarmup, location_name: "DefaultInstanceWarmup"))
     CreateAutoScalingGroupType.struct_class = Types::CreateAutoScalingGroupType
 
     CreateLaunchConfigurationType.add_member(:launch_configuration_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "LaunchConfigurationName"))
@@ -925,6 +930,9 @@ module Aws::AutoScaling
     InstanceRequirements.add_member(:accelerator_total_memory_mi_b, Shapes::ShapeRef.new(shape: AcceleratorTotalMemoryMiBRequest, location_name: "AcceleratorTotalMemoryMiB"))
     InstanceRequirements.struct_class = Types::InstanceRequirements
 
+    InstanceReusePolicy.add_member(:reuse_on_scale_in, Shapes::ShapeRef.new(shape: ReuseOnScaleIn, location_name: "ReuseOnScaleIn"))
+    InstanceReusePolicy.struct_class = Types::InstanceReusePolicy
+
     Instances.member = Shapes::ShapeRef.new(shape: Instance)
 
     InstancesDistribution.add_member(:on_demand_allocation_strategy, Shapes::ShapeRef.new(shape: XmlString, location_name: "OnDemandAllocationStrategy"))
@@ -1225,6 +1233,7 @@ module Aws::AutoScaling
     PutWarmPoolType.add_member(:max_group_prepared_capacity, Shapes::ShapeRef.new(shape: MaxGroupPreparedCapacity, location_name: "MaxGroupPreparedCapacity"))
     PutWarmPoolType.add_member(:min_size, Shapes::ShapeRef.new(shape: WarmPoolMinSize, location_name: "MinSize"))
     PutWarmPoolType.add_member(:pool_state, Shapes::ShapeRef.new(shape: WarmPoolState, location_name: "PoolState"))
+    PutWarmPoolType.add_member(:instance_reuse_policy, Shapes::ShapeRef.new(shape: InstanceReusePolicy, location_name: "InstanceReusePolicy"))
     PutWarmPoolType.struct_class = Types::PutWarmPoolType
 
     RecordLifecycleActionHeartbeatAnswer.struct_class = Types::RecordLifecycleActionHeartbeatAnswer
@@ -1412,6 +1421,7 @@ module Aws::AutoScaling
     UpdateAutoScalingGroupType.add_member(:capacity_rebalance, Shapes::ShapeRef.new(shape: CapacityRebalanceEnabled, location_name: "CapacityRebalance"))
     UpdateAutoScalingGroupType.add_member(:context, Shapes::ShapeRef.new(shape: Context, location_name: "Context"))
     UpdateAutoScalingGroupType.add_member(:desired_capacity_type, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "DesiredCapacityType"))
+    UpdateAutoScalingGroupType.add_member(:default_instance_warmup, Shapes::ShapeRef.new(shape: DefaultInstanceWarmup, location_name: "DefaultInstanceWarmup"))
     UpdateAutoScalingGroupType.struct_class = Types::UpdateAutoScalingGroupType
 
     VCpuCountRequest.add_member(:min, Shapes::ShapeRef.new(shape: NullablePositiveInteger, required: true, location_name: "Min"))
@@ -1424,6 +1434,7 @@ module Aws::AutoScaling
     WarmPoolConfiguration.add_member(:min_size, Shapes::ShapeRef.new(shape: WarmPoolMinSize, location_name: "MinSize"))
     WarmPoolConfiguration.add_member(:pool_state, Shapes::ShapeRef.new(shape: WarmPoolState, location_name: "PoolState"))
     WarmPoolConfiguration.add_member(:status, Shapes::ShapeRef.new(shape: WarmPoolStatus, location_name: "Status"))
+    WarmPoolConfiguration.add_member(:instance_reuse_policy, Shapes::ShapeRef.new(shape: InstanceReusePolicy, location_name: "InstanceReusePolicy"))
     WarmPoolConfiguration.struct_class = Types::WarmPoolConfiguration
 
 

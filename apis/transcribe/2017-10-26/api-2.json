@@ -939,6 +939,7 @@
         "LanguageModel":{"shape":"LanguageModel"}
       }
     },
+    "DurationInSeconds":{"type":"float"},
     "FailureReason":{"type":"string"},
     "GetCallAnalyticsCategoryRequest":{
       "type":"structure",
@@ -1101,7 +1102,6 @@
         "af-ZA",
         "ar-AE",
         "ar-SA",
-        "cy-GB",
         "da-DK",
         "de-CH",
         "de-DE",
@@ -1117,8 +1117,6 @@
         "fa-IR",
         "fr-CA",
         "fr-FR",
-        "ga-IE",
-        "gd-GB",
         "he-IL",
         "hi-IN",
         "id-ID",
@@ -1139,6 +1137,17 @@
         "en-ZA",
         "en-NZ"
       ]
+    },
+    "LanguageCodeItem":{
+      "type":"structure",
+      "members":{
+        "LanguageCode":{"shape":"LanguageCode"},
+        "DurationInSeconds":{"shape":"DurationInSeconds"}
+      }
+    },
+    "LanguageCodeList":{
+      "type":"list",
+      "member":{"shape":"LanguageCodeItem"}
     },
     "LanguageIdSettings":{
       "type":"structure",
@@ -1368,6 +1377,11 @@
       "type":"string",
       "enum":["PHI"]
     },
+    "MedicalMediaSampleRateHertz":{
+      "type":"integer",
+      "max":48000,
+      "min":16000
+    },
     "MedicalTranscript":{
       "type":"structure",
       "members":{
@@ -1380,7 +1394,7 @@
         "MedicalTranscriptionJobName":{"shape":"TranscriptionJobName"},
         "TranscriptionJobStatus":{"shape":"TranscriptionJobStatus"},
         "LanguageCode":{"shape":"LanguageCode"},
-        "MediaSampleRateHertz":{"shape":"MediaSampleRateHertz"},
+        "MediaSampleRateHertz":{"shape":"MedicalMediaSampleRateHertz"},
         "MediaFormat":{"shape":"MediaFormat"},
         "Media":{"shape":"Media"},
         "Transcript":{"shape":"MedicalTranscript"},
@@ -1622,8 +1636,7 @@
       "type":"structure",
       "required":[
         "CallAnalyticsJobName",
-        "Media",
-        "DataAccessRoleArn"
+        "Media"
       ],
       "members":{
         "CallAnalyticsJobName":{"shape":"CallAnalyticsJobName"},
@@ -1654,7 +1667,7 @@
       "members":{
         "MedicalTranscriptionJobName":{"shape":"TranscriptionJobName"},
         "LanguageCode":{"shape":"LanguageCode"},
-        "MediaSampleRateHertz":{"shape":"MediaSampleRateHertz"},
+        "MediaSampleRateHertz":{"shape":"MedicalMediaSampleRateHertz"},
         "MediaFormat":{"shape":"MediaFormat"},
         "Media":{"shape":"Media"},
         "OutputBucketName":{"shape":"OutputBucketName"},
@@ -1695,6 +1708,7 @@
         "JobExecutionSettings":{"shape":"JobExecutionSettings"},
         "ContentRedaction":{"shape":"ContentRedaction"},
         "IdentifyLanguage":{"shape":"Boolean"},
+        "IdentifyMultipleLanguages":{"shape":"Boolean"},
         "LanguageOptions":{"shape":"LanguageOptions"},
         "Subtitles":{"shape":"Subtitles"},
         "Tags":{"shape":"TagList"},
@@ -1728,17 +1742,24 @@
       "type":"list",
       "member":{"shape":"SubtitleFormat"}
     },
+    "SubtitleOutputStartIndex":{
+      "type":"integer",
+      "max":1,
+      "min":0
+    },
     "Subtitles":{
       "type":"structure",
       "members":{
-        "Formats":{"shape":"SubtitleFormats"}
+        "Formats":{"shape":"SubtitleFormats"},
+        "OutputStartIndex":{"shape":"SubtitleOutputStartIndex"}
       }
     },
     "SubtitlesOutput":{
       "type":"structure",
       "members":{
         "Formats":{"shape":"SubtitleFormats"},
-        "SubtitleFileUris":{"shape":"SubtitleFileUris"}
+        "SubtitleFileUris":{"shape":"SubtitleFileUris"},
+        "OutputStartIndex":{"shape":"SubtitleOutputStartIndex"}
       }
     },
     "Tag":{
@@ -1846,8 +1867,10 @@
         "JobExecutionSettings":{"shape":"JobExecutionSettings"},
         "ContentRedaction":{"shape":"ContentRedaction"},
         "IdentifyLanguage":{"shape":"Boolean"},
+        "IdentifyMultipleLanguages":{"shape":"Boolean"},
         "LanguageOptions":{"shape":"LanguageOptions"},
         "IdentifiedLanguageScore":{"shape":"IdentifiedLanguageScore"},
+        "LanguageCodes":{"shape":"LanguageCodeList"},
         "Tags":{"shape":"TagList"},
         "Subtitles":{"shape":"SubtitlesOutput"},
         "LanguageIdSettings":{"shape":"LanguageIdSettingsMap"}
@@ -1886,7 +1909,9 @@
         "ContentRedaction":{"shape":"ContentRedaction"},
         "ModelSettings":{"shape":"ModelSettings"},
         "IdentifyLanguage":{"shape":"Boolean"},
-        "IdentifiedLanguageScore":{"shape":"IdentifiedLanguageScore"}
+        "IdentifyMultipleLanguages":{"shape":"Boolean"},
+        "IdentifiedLanguageScore":{"shape":"IdentifiedLanguageScore"},
+        "LanguageCodes":{"shape":"LanguageCodeList"}
       }
     },
     "Type":{
@@ -1933,7 +1958,8 @@
       "type":"structure",
       "required":[
         "VocabularyName",
-        "LanguageCode"
+        "LanguageCode",
+        "VocabularyFileUri"
       ],
       "members":{
         "VocabularyName":{"shape":"VocabularyName"},

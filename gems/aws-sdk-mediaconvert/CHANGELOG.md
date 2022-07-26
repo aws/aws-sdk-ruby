@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.92.0 (2022-06-23)
+------------------
+
+* Feature - AWS Elemental MediaConvert SDK has released support for automatic DolbyVision metadata generation when converting HDR10 to DolbyVision.
+
+1.91.0 (2022-06-14)
+------------------
+
+* Feature - AWS Elemental MediaConvert SDK has added support for rules that constrain Automatic-ABR rendition selection when generating ABR package ladders.
+
+1.90.0 (2022-05-24)
+------------------
+
+* Feature - AWS Elemental MediaConvert SDK has added support for rules that constrain Automatic-ABR rendition selection when generating ABR package ladders.
+
+1.89.0 (2022-04-29)
+------------------
+
+* Feature - AWS Elemental MediaConvert SDK nows supports creation of Dolby Vision profile 8.1, the ability to generate black frames of video, and introduces audio-only DASH and CMAF support.
+
+1.88.0 (2022-04-08)
+------------------
+
+* Feature - AWS Elemental MediaConvert SDK has added support for the pass-through of WebVTT styling to WebVTT outputs, pass-through of KLV metadata to supported formats, and improved filter support for processing 444/RGB content.
+
+1.87.0 (2022-03-08)
+------------------
+
+* Feature - AWS Elemental MediaConvert SDK has added support for reading timecode from AVCHD sources and now provides the ability to segment WebVTT at the same interval as the video and audio in HLS packages.
+
+1.86.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.85.0 (2022-02-03)
 ------------------
 

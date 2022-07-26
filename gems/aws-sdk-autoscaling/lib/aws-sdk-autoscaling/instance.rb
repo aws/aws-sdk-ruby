@@ -60,7 +60,7 @@ module Aws::AutoScaling
     # used. For information about lifecycle states, see [Instance
     # lifecycle][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
-    # Valid Values: `Pending` \| `Pending:Wait` \| `Pending:Proceed` \|
+    # Valid values: `Pending` \| `Pending:Wait` \| `Pending:Proceed` \|
     # `Quarantined` \| `InService` \| `Terminating` \| `Terminating:Wait` \|
     # `Terminating:Proceed` \| `Terminated` \| `Detaching` \| `Detached` \|
     # `EnteringStandby` \| `Standby` \| `Warmed:Pending` \|

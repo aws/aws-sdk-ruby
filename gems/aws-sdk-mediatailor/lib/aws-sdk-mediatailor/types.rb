@@ -342,7 +342,7 @@ module Aws::MediaTailor
     #   By default, AWS Elemental MediaTailor uses Amazon CloudFront with
     #   default cache settings as its CDN for ad segments. To set up an
     #   alternate CDN, create a rule in your CDN for the origin
-    #   ads.mediatailor.&amp;lt;region&gt;.amazonaws.com. Then specify the
+    #   ads.mediatailor.&amp;lt;region>.amazonaws.com. Then specify the
     #   rule's name in this AdSegmentUrlPrefix. When AWS Elemental
     #   MediaTailor serves a manifest, it reports your CDN as the source for
     #   ad segments.
@@ -413,6 +413,11 @@ module Aws::MediaTailor
     #   The tags to assign to the channel.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] tier
+    #   The tier for this channel. STANDARD tier channels can contain live
+    #   programs.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/Channel AWS API Documentation
     #
     class Channel < Struct.new(
@@ -424,7 +429,8 @@ module Aws::MediaTailor
       :last_modified_time,
       :outputs,
       :playback_mode,
-      :tags)
+      :tags,
+      :tier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -519,6 +525,7 @@ module Aws::MediaTailor
     #         tags: {
     #           "__string" => "__string",
     #         },
+    #         tier: "BASIC", # accepts BASIC, STANDARD
     #       }
     #
     # @!attribute [rw] channel_name
@@ -550,6 +557,10 @@ module Aws::MediaTailor
     #   The tags to assign to the channel.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] tier
+    #   The tier of the channel.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/CreateChannelRequest AWS API Documentation
     #
     class CreateChannelRequest < Struct.new(
@@ -557,7 +568,8 @@ module Aws::MediaTailor
       :filler_slate,
       :outputs,
       :playback_mode,
-      :tags)
+      :tags,
+      :tier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -590,6 +602,9 @@ module Aws::MediaTailor
     # @!attribute [rw] tags
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] tier
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/CreateChannelResponse AWS API Documentation
     #
     class CreateChannelResponse < Struct.new(
@@ -601,6 +616,89 @@ module Aws::MediaTailor
       :last_modified_time,
       :outputs,
       :playback_mode,
+      :tags,
+      :tier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The live source configuration parameters.
+    #
+    # @note When making an API call, you may pass CreateLiveSourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         http_package_configurations: [ # required
+    #           {
+    #             path: "__string", # required
+    #             source_group: "__string", # required
+    #             type: "DASH", # required, accepts DASH, HLS
+    #           },
+    #         ],
+    #         live_source_name: "__string", # required
+    #         source_location_name: "__string", # required
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] http_package_configurations
+    #   A list of HTTP package configuration parameters for this live
+    #   source.
+    #   @return [Array<Types::HttpPackageConfiguration>]
+    #
+    # @!attribute [rw] live_source_name
+    #   @return [String]
+    #
+    # @!attribute [rw] source_location_name
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to assign to the live source.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/CreateLiveSourceRequest AWS API Documentation
+    #
+    class CreateLiveSourceRequest < Struct.new(
+      :http_package_configurations,
+      :live_source_name,
+      :source_location_name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   @return [Time]
+    #
+    # @!attribute [rw] http_package_configurations
+    #   The VOD source's HTTP package configuration settings.
+    #   @return [Array<Types::HttpPackageConfiguration>]
+    #
+    # @!attribute [rw] last_modified_time
+    #   @return [Time]
+    #
+    # @!attribute [rw] live_source_name
+    #   @return [String]
+    #
+    # @!attribute [rw] source_location_name
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/CreateLiveSourceResponse AWS API Documentation
+    #
+    class CreateLiveSourceResponse < Struct.new(
+      :arn,
+      :creation_time,
+      :http_package_configurations,
+      :last_modified_time,
+      :live_source_name,
+      :source_location_name,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -735,9 +833,11 @@ module Aws::MediaTailor
     #           },
     #         ],
     #         channel_name: "__string", # required
+    #         live_source_name: "__string",
     #         program_name: "__string", # required
     #         schedule_configuration: { # required
     #           transition: { # required
+    #             duration_millis: 1,
     #             relative_position: "BEFORE_PROGRAM", # required, accepts BEFORE_PROGRAM, AFTER_PROGRAM
     #             relative_program: "__string",
     #             scheduled_start_time_millis: 1,
@@ -745,7 +845,7 @@ module Aws::MediaTailor
     #           },
     #         },
     #         source_location_name: "__string", # required
-    #         vod_source_name: "__string", # required
+    #         vod_source_name: "__string",
     #       }
     #
     # @!attribute [rw] ad_breaks
@@ -753,6 +853,10 @@ module Aws::MediaTailor
     #   @return [Array<Types::AdBreak>]
     #
     # @!attribute [rw] channel_name
+    #   @return [String]
+    #
+    # @!attribute [rw] live_source_name
+    #   The name of the LiveSource for this Program.
     #   @return [String]
     #
     # @!attribute [rw] program_name
@@ -775,6 +879,7 @@ module Aws::MediaTailor
     class CreateProgramRequest < Struct.new(
       :ad_breaks,
       :channel_name,
+      :live_source_name,
       :program_name,
       :schedule_configuration,
       :source_location_name,
@@ -795,6 +900,9 @@ module Aws::MediaTailor
     # @!attribute [rw] creation_time
     #   @return [Time]
     #
+    # @!attribute [rw] live_source_name
+    #   @return [String]
+    #
     # @!attribute [rw] program_name
     #   @return [String]
     #
@@ -814,6 +922,7 @@ module Aws::MediaTailor
       :arn,
       :channel_name,
       :creation_time,
+      :live_source_name,
       :program_name,
       :scheduled_start_time,
       :source_location_name,
@@ -868,8 +977,8 @@ module Aws::MediaTailor
     #   @return [Types::HttpConfiguration]
     #
     # @!attribute [rw] segment_delivery_configurations
-    #   An array of segment delivery configurations for this source
-    #   location.
+    #   A list of the segment delivery configurations associated with this
+    #   resource.
     #   @return [Array<Types::SegmentDeliveryConfiguration>]
     #
     # @!attribute [rw] source_location_name
@@ -965,8 +1074,7 @@ module Aws::MediaTailor
     #       }
     #
     # @!attribute [rw] http_package_configurations
-    #   An array of HTTP package configuration parameters for this VOD
-    #   source.
+    #   A list of HTTP package configuration parameters for this VOD source.
     #   @return [Array<Types::HttpPackageConfiguration>]
     #
     # @!attribute [rw] source_location_name
@@ -1229,6 +1337,35 @@ module Aws::MediaTailor
     #
     class DeleteChannelResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteLiveSourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         live_source_name: "__string", # required
+    #         source_location_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] live_source_name
+    #   @return [String]
+    #
+    # @!attribute [rw] source_location_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DeleteLiveSourceRequest AWS API Documentation
+    #
+    class DeleteLiveSourceRequest < Struct.new(
+      :live_source_name,
+      :source_location_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This response includes only the "type" : "object" property.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DeleteLiveSourceResponse AWS API Documentation
+    #
+    class DeleteLiveSourceResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeletePlaybackConfigurationRequest
     #   data as a hash:
     #
@@ -1420,6 +1557,10 @@ module Aws::MediaTailor
     #   The tags assigned to the channel.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] tier
+    #   The channel's tier.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DescribeChannelResponse AWS API Documentation
     #
     class DescribeChannelResponse < Struct.new(
@@ -1431,6 +1572,74 @@ module Aws::MediaTailor
       :last_modified_time,
       :outputs,
       :playback_mode,
+      :tags,
+      :tier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeLiveSourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         live_source_name: "__string", # required
+    #         source_location_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] live_source_name
+    #   @return [String]
+    #
+    # @!attribute [rw] source_location_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DescribeLiveSourceRequest AWS API Documentation
+    #
+    class DescribeLiveSourceRequest < Struct.new(
+      :live_source_name,
+      :source_location_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This response includes only the "type" : "object" property.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the live source.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The timestamp that indicates when the live source was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] http_package_configurations
+    #   The HTTP package configurations.
+    #   @return [Array<Types::HttpPackageConfiguration>]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp that indicates when the live source was modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] live_source_name
+    #   The name of the live source.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_location_name
+    #   The name of the source location associated with the VOD source.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags assigned to the live source.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DescribeLiveSourceResponse AWS API Documentation
+    #
+    class DescribeLiveSourceResponse < Struct.new(
+      :arn,
+      :creation_time,
+      :http_package_configurations,
+      :last_modified_time,
+      :live_source_name,
+      :source_location_name,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -1477,6 +1686,10 @@ module Aws::MediaTailor
     #   The timestamp of when the program was created.
     #   @return [Time]
     #
+    # @!attribute [rw] live_source_name
+    #   The name of the LiveSource for this Program.
+    #   @return [String]
+    #
     # @!attribute [rw] program_name
     #   The name of the program.
     #   @return [String]
@@ -1503,6 +1716,7 @@ module Aws::MediaTailor
       :arn,
       :channel_name,
       :creation_time,
+      :live_source_name,
       :program_name,
       :scheduled_start_time,
       :source_location_name,
@@ -1557,8 +1771,8 @@ module Aws::MediaTailor
     #   @return [Time]
     #
     # @!attribute [rw] segment_delivery_configurations
-    #   An array of segment delivery configurations for this source
-    #   location.
+    #   A list of the segment delivery configurations associated with this
+    #   resource.
     #   @return [Array<Types::SegmentDeliveryConfiguration>]
     #
     # @!attribute [rw] source_location_name
@@ -1623,7 +1837,7 @@ module Aws::MediaTailor
     #   @return [Array<Types::HttpPackageConfiguration>]
     #
     # @!attribute [rw] last_modified_time
-    #   The ARN for the VOD source.
+    #   The last modified time of the VOD source.
     #   @return [Time]
     #
     # @!attribute [rw] source_location_name
@@ -1720,7 +1934,7 @@ module Aws::MediaTailor
     # Returns the schedule entries for the channel.
     #
     # @!attribute [rw] items
-    #   An array of schedule entries for the channel.
+    #   A list of schedule entries for the channel.
     #   @return [Array<Types::ScheduleEntry>]
     #
     # @!attribute [rw] next_token
@@ -2095,7 +2309,7 @@ module Aws::MediaTailor
     # Lists the alerts for a given resource.
     #
     # @!attribute [rw] items
-    #   An array of alerts that are associated with this resource.
+    #   A list of alerts that are associated with this resource.
     #   @return [Array<Types::Alert>]
     #
     # @!attribute [rw] next_token
@@ -2138,7 +2352,7 @@ module Aws::MediaTailor
     # Returns a list of channels.
     #
     # @!attribute [rw] items
-    #   An array of channels that are associated with this account.
+    #   A list of channels that are associated with this account.
     #   @return [Array<Types::Channel>]
     #
     # @!attribute [rw] next_token
@@ -2150,6 +2364,54 @@ module Aws::MediaTailor
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListChannelsResponse AWS API Documentation
     #
     class ListChannelsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListLiveSourcesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "__string",
+    #         source_location_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] source_location_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListLiveSourcesRequest AWS API Documentation
+    #
+    class ListLiveSourcesRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :source_location_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of your live sources.
+    #
+    # @!attribute [rw] items
+    #   Lists the live sources.
+    #   @return [Array<Types::LiveSource>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token from the list request. Use the token to fetch the
+    #   next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListLiveSourcesResponse AWS API Documentation
+    #
+    class ListLiveSourcesResponse < Struct.new(
       :items,
       :next_token)
       SENSITIVE = []
@@ -2303,7 +2565,7 @@ module Aws::MediaTailor
     # Lists the source locations.
     #
     # @!attribute [rw] items
-    #   An array of source locations.
+    #   A list of source locations.
     #   @return [Array<Types::SourceLocation>]
     #
     # @!attribute [rw] next_token
@@ -2377,7 +2639,7 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
-    # An array of VOD sources.
+    # A list of VOD sources.
     #
     # @!attribute [rw] items
     #   Lists the VOD sources.
@@ -2428,6 +2690,50 @@ module Aws::MediaTailor
     class LivePreRollConfiguration < Struct.new(
       :ad_decision_server_url,
       :max_duration_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Live source configuration parameters.
+    #
+    # @!attribute [rw] arn
+    #   The ARN for the live source.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The timestamp that indicates when the live source was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] http_package_configurations
+    #   The HTTP package configurations for the live source.
+    #   @return [Array<Types::HttpPackageConfiguration>]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp that indicates when the live source was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] live_source_name
+    #   The name that's used to refer to a live source.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_location_name
+    #   The name of the source location.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags assigned to the live source.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/LiveSource AWS API Documentation
+    #
+    class LiveSource < Struct.new(
+      :arn,
+      :creation_time,
+      :http_package_configurations,
+      :last_modified_time,
+      :live_source_name,
+      :source_location_name,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3230,6 +3536,7 @@ module Aws::MediaTailor
     #
     #       {
     #         transition: { # required
+    #           duration_millis: 1,
     #           relative_position: "BEFORE_PROGRAM", # required, accepts BEFORE_PROGRAM, AFTER_PROGRAM
     #           relative_program: "__string",
     #           scheduled_start_time_millis: 1,
@@ -3267,6 +3574,10 @@ module Aws::MediaTailor
     #   The name of the channel that uses this schedule.
     #   @return [String]
     #
+    # @!attribute [rw] live_source_name
+    #   The name of the live source used for the program.
+    #   @return [String]
+    #
     # @!attribute [rw] program_name
     #   The name of the program.
     #   @return [String]
@@ -3296,6 +3607,7 @@ module Aws::MediaTailor
       :approximate_start_time,
       :arn,
       :channel_name,
+      :live_source_name,
       :program_name,
       :schedule_ad_breaks,
       :schedule_entry_type,
@@ -3352,6 +3664,12 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # The base URL of the host or path of the segment delivery server that
+    # you're using to serve segments. This is typically a content delivery
+    # network (CDN). The URL can be absolute or relative. To use an absolute
+    # URL include the protocol, such as https://example.com/some/path. To
+    # use a relative URL specify the relative path, such as /some/path*.
+    #
     # @note When making an API call, you may pass SegmentDeliveryConfiguration
     #   data as a hash:
     #
@@ -3366,7 +3684,7 @@ module Aws::MediaTailor
     #   delivery network (CDN). The URL can be absolute or relative. To use
     #   an absolute URL include the protocol, such as
     #   https://example.com/some/path. To use a relative URL specify the
-    #   relative path, such as /some/path.
+    #   relative path, such as /some/path*.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -3440,8 +3758,7 @@ module Aws::MediaTailor
     #   @return [Time]
     #
     # @!attribute [rw] segment_delivery_configurations
-    #   An array of segment delivery configurations for this source
-    #   location.
+    #   The segment delivery configurations for the source location.
     #   @return [Array<Types::SegmentDeliveryConfiguration>]
     #
     # @!attribute [rw] source_location_name
@@ -3590,11 +3907,16 @@ module Aws::MediaTailor
     #   data as a hash:
     #
     #       {
+    #         duration_millis: 1,
     #         relative_position: "BEFORE_PROGRAM", # required, accepts BEFORE_PROGRAM, AFTER_PROGRAM
     #         relative_program: "__string",
     #         scheduled_start_time_millis: 1,
     #         type: "__string", # required
     #       }
+    #
+    # @!attribute [rw] duration_millis
+    #   The duration of the live program in seconds.
+    #   @return [Integer]
     #
     # @!attribute [rw] relative_position
     #   The position where this program will be inserted relative to the
@@ -3634,6 +3956,7 @@ module Aws::MediaTailor
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/Transition AWS API Documentation
     #
     class Transition < Struct.new(
+      :duration_millis,
       :relative_position,
       :relative_program,
       :scheduled_start_time_millis,
@@ -3745,6 +4068,9 @@ module Aws::MediaTailor
     # @!attribute [rw] tags
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] tier
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/UpdateChannelResponse AWS API Documentation
     #
     class UpdateChannelResponse < Struct.new(
@@ -3756,6 +4082,81 @@ module Aws::MediaTailor
       :last_modified_time,
       :outputs,
       :playback_mode,
+      :tags,
+      :tier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Updates a live source's configuration.
+    #
+    # @note When making an API call, you may pass UpdateLiveSourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         http_package_configurations: [ # required
+    #           {
+    #             path: "__string", # required
+    #             source_group: "__string", # required
+    #             type: "DASH", # required, accepts DASH, HLS
+    #           },
+    #         ],
+    #         live_source_name: "__string", # required
+    #         source_location_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] http_package_configurations
+    #   A list of HTTP package configurations for the live source on this
+    #   account.
+    #   @return [Array<Types::HttpPackageConfiguration>]
+    #
+    # @!attribute [rw] live_source_name
+    #   @return [String]
+    #
+    # @!attribute [rw] source_location_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/UpdateLiveSourceRequest AWS API Documentation
+    #
+    class UpdateLiveSourceRequest < Struct.new(
+      :http_package_configurations,
+      :live_source_name,
+      :source_location_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   @return [Time]
+    #
+    # @!attribute [rw] http_package_configurations
+    #   The VOD source's HTTP package configuration settings.
+    #   @return [Array<Types::HttpPackageConfiguration>]
+    #
+    # @!attribute [rw] last_modified_time
+    #   @return [Time]
+    #
+    # @!attribute [rw] live_source_name
+    #   @return [String]
+    #
+    # @!attribute [rw] source_location_name
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/UpdateLiveSourceResponse AWS API Documentation
+    #
+    class UpdateLiveSourceResponse < Struct.new(
+      :arn,
+      :creation_time,
+      :http_package_configurations,
+      :last_modified_time,
+      :live_source_name,
+      :source_location_name,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -3804,8 +4205,8 @@ module Aws::MediaTailor
     #   @return [Types::HttpConfiguration]
     #
     # @!attribute [rw] segment_delivery_configurations
-    #   An array of segment delivery configurations for this source
-    #   location.
+    #   A list of the segment delivery configurations associated with this
+    #   resource.
     #   @return [Array<Types::SegmentDeliveryConfiguration>]
     #
     # @!attribute [rw] source_location_name
@@ -3893,7 +4294,7 @@ module Aws::MediaTailor
     #       }
     #
     # @!attribute [rw] http_package_configurations
-    #   An array of HTTP package configurations for the VOD source on this
+    #   A list of HTTP package configurations for the VOD source on this
     #   account.
     #   @return [Array<Types::HttpPackageConfiguration>]
     #

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2022-06-30)
+------------------
+
+* Feature - Added support for UpdateGlobalSettings API. Added status filter to ListWorkloadShares and ListLensShares.
+
+1.16.0 (2022-06-21)
+------------------
+
+* Feature - Adds support for lens tagging, Adds support for multiple helpful-resource urls and multiple improvement-plan urls.
+
+1.15.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.14.0 (2022-02-03)
 ------------------
 

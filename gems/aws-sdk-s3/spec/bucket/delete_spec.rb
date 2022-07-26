@@ -53,7 +53,7 @@ module Aws
               .and_call_original
 
             expect(client).to receive(:delete_bucket)
-              .with(bucket: 'bucket-name')
+              .with({bucket: 'bucket-name'})
               .and_call_original
 
             bucket.delete!
@@ -79,19 +79,19 @@ module Aws
               .exactly(3).times
 
             expect(client).to receive(:delete_bucket)
-              .with(bucket: 'bucket-name')
+              .with({bucket: 'bucket-name'})
               .and_raise(bucket_not_empty_exception).ordered
 
             expect(Kernel).to receive(:sleep).with(default_initial_wait).ordered
 
             expect(client).to receive(:delete_bucket)
-              .with(bucket: 'bucket-name')
+              .with({bucket: 'bucket-name'})
               .and_raise(bucket_not_empty_exception).ordered
 
             expect(Kernel).to receive(:sleep).with(second_attempt_wait).ordered
 
             expect(client).to receive(:delete_bucket)
-              .with(bucket: 'bucket-name').ordered
+              .with({bucket: 'bucket-name'}).ordered
               .and_call_original
 
             bucket.delete!
@@ -111,19 +111,19 @@ module Aws
                 .exactly(3).times
 
               expect(client).to receive(:delete_bucket)
-                .with(bucket: 'bucket-name')
+                .with({bucket: 'bucket-name'})
                 .and_raise(bucket_not_empty_exception).ordered
 
               expect(Kernel).to receive(:sleep).with(initial_wait).ordered
 
               expect(client).to receive(:delete_bucket)
-                .with(bucket: 'bucket-name')
+                .with({bucket: 'bucket-name'})
                 .and_raise(bucket_not_empty_exception).ordered
 
               expect(Kernel).to receive(:sleep).with(initial_wait**2).ordered
 
               expect(client).to receive(:delete_bucket)
-                .with(bucket: 'bucket-name').ordered
+                .with({bucket: 'bucket-name'}).ordered
                 .and_call_original
 
               bucket.delete!(initial_wait: initial_wait)
@@ -144,7 +144,7 @@ module Aws
                 .and_call_original
 
               expect(client).to receive(:delete_bucket)
-                .with(bucket: 'bucket-name')
+                .with({bucket: 'bucket-name'})
                 .and_raise(bucket_not_empty_exception)
 
               expect do

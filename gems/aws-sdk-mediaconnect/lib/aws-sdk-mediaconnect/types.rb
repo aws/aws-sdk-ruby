@@ -329,6 +329,35 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # Create maintenance setting for a flow
+    #
+    # @note When making an API call, you may pass AddMaintenance
+    #   data as a hash:
+    #
+    #       {
+    #         maintenance_day: "Monday", # required, accepts Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+    #         maintenance_start_hour: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] maintenance_day
+    #   A day of a week when the maintenance will happen. Use
+    #   Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday.
+    #   @return [String]
+    #
+    # @!attribute [rw] maintenance_start_hour
+    #   UTC time when the maintenance will happen. Use 24-hour HH:MM format.
+    #   Minutes must be 00. Example: 13:00. The default value is 02:00.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddMaintenance AWS API Documentation
+    #
+    class AddMaintenance < Struct.new(
+      :maintenance_day,
+      :maintenance_start_hour)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The media stream that you want to add to the flow.
     #
     # @note When making an API call, you may pass AddMediaStreamRequest
@@ -784,6 +813,10 @@ module Aws::MediaConnect
     #             subnet_id: "__string", # required
     #           },
     #         ],
+    #         maintenance: {
+    #           maintenance_day: "Monday", # required, accepts Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+    #           maintenance_start_hour: "__string", # required
+    #         },
     #       }
     #
     # @!attribute [rw] availability_zone
@@ -824,6 +857,10 @@ module Aws::MediaConnect
     #   The VPC interfaces you want on the flow.
     #   @return [Array<Types::VpcInterfaceRequest>]
     #
+    # @!attribute [rw] maintenance
+    #   Create maintenance setting for a flow
+    #   @return [Types::AddMaintenance]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/CreateFlowRequest AWS API Documentation
     #
     class CreateFlowRequest < Struct.new(
@@ -835,7 +872,8 @@ module Aws::MediaConnect
       :source,
       :source_failover_config,
       :sources,
-      :vpc_interfaces)
+      :vpc_interfaces,
+      :maintenance)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1379,6 +1417,10 @@ module Aws::MediaConnect
     #   The VPC Interfaces for this flow.
     #   @return [Array<Types::VpcInterface>]
     #
+    # @!attribute [rw] maintenance
+    #   The maintenance setting of a flow
+    #   @return [Types::Maintenance]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/Flow AWS API Documentation
     #
     class Flow < Struct.new(
@@ -1394,7 +1436,8 @@ module Aws::MediaConnect
       :source_failover_config,
       :sources,
       :status,
-      :vpc_interfaces)
+      :vpc_interfaces,
+      :maintenance)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2077,6 +2120,10 @@ module Aws::MediaConnect
     #   The current status of the flow.
     #   @return [String]
     #
+    # @!attribute [rw] maintenance
+    #   The maintenance setting of a flow
+    #   @return [Types::Maintenance]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListedFlow AWS API Documentation
     #
     class ListedFlow < Struct.new(
@@ -2085,7 +2132,41 @@ module Aws::MediaConnect
       :flow_arn,
       :name,
       :source_type,
-      :status)
+      :status,
+      :maintenance)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The maintenance setting of a flow
+    #
+    # @!attribute [rw] maintenance_day
+    #   A day of a week when the maintenance will happen. Use
+    #   Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday.
+    #   @return [String]
+    #
+    # @!attribute [rw] maintenance_deadline
+    #   The Maintenance has to be performed before this deadline in ISO UTC
+    #   format. Example: 2021-01-30T08:30:00Z.
+    #   @return [String]
+    #
+    # @!attribute [rw] maintenance_scheduled_date
+    #   A scheduled date in ISO UTC format when the maintenance will happen.
+    #   Use YYYY-MM-DD format. Example: 2021-01-30.
+    #   @return [String]
+    #
+    # @!attribute [rw] maintenance_start_hour
+    #   UTC time when the maintenance will happen. Use 24-hour HH:MM format.
+    #   Minutes must be 00. Example: 13:00. The default value is 02:00.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/Maintenance AWS API Documentation
+    #
+    class Maintenance < Struct.new(
+      :maintenance_day,
+      :maintenance_deadline,
+      :maintenance_scheduled_date,
+      :maintenance_start_hour)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3967,6 +4048,11 @@ module Aws::MediaConnect
     #           },
     #           state: "ENABLED", # accepts ENABLED, DISABLED
     #         },
+    #         maintenance: {
+    #           maintenance_day: "Monday", # accepts Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+    #           maintenance_scheduled_date: "__string",
+    #           maintenance_start_hour: "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] flow_arn
@@ -3976,11 +4062,16 @@ module Aws::MediaConnect
     #   The settings for source failover.
     #   @return [Types::UpdateFailoverConfig]
     #
+    # @!attribute [rw] maintenance
+    #   Update maintenance setting for a flow
+    #   @return [Types::UpdateMaintenance]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFlowRequest AWS API Documentation
     #
     class UpdateFlowRequest < Struct.new(
       :flow_arn,
-      :source_failover_config)
+      :source_failover_config,
+      :maintenance)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4172,6 +4263,42 @@ module Aws::MediaConnect
     class UpdateFlowSourceResponse < Struct.new(
       :flow_arn,
       :source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Update maintenance setting for a flow
+    #
+    # @note When making an API call, you may pass UpdateMaintenance
+    #   data as a hash:
+    #
+    #       {
+    #         maintenance_day: "Monday", # accepts Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+    #         maintenance_scheduled_date: "__string",
+    #         maintenance_start_hour: "__string",
+    #       }
+    #
+    # @!attribute [rw] maintenance_day
+    #   A day of a week when the maintenance will happen. use
+    #   Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday.
+    #   @return [String]
+    #
+    # @!attribute [rw] maintenance_scheduled_date
+    #   A scheduled date in ISO UTC format when the maintenance will happen.
+    #   Use YYYY-MM-DD format. Example: 2021-01-30.
+    #   @return [String]
+    #
+    # @!attribute [rw] maintenance_start_hour
+    #   UTC time when the maintenance will happen. Use 24-hour HH:MM format.
+    #   Minutes must be 00. Example: 13:00. The default value is 02:00.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateMaintenance AWS API Documentation
+    #
+    class UpdateMaintenance < Struct.new(
+      :maintenance_day,
+      :maintenance_scheduled_date,
+      :maintenance_start_hour)
       SENSITIVE = []
       include Aws::Structure
     end

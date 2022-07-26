@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2022-05-20)
+------------------
+
+* Feature - Comprehend releases 14 new entity types for DetectPiiEntities and ContainsPiiEntities APIs.
+
+1.60.0 (2022-03-09)
+------------------
+
+* Feature - Amazon Comprehend now supports extracting the sentiment associated with entities such as brands, products and services from text documents.
+
+1.59.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.58.0 (2022-02-03)
 ------------------
 

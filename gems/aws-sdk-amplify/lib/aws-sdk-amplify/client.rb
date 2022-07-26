@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::Amplify
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -370,12 +372,46 @@ module Aws::Amplify
     # @option params [String] :oauth_token
     #   The OAuth token for a third-party source control system for an Amplify
     #   app. The OAuth token is used to create a webhook and a read-only
-    #   deploy key. The OAuth token is not stored.
+    #   deploy key using SSH cloning. The OAuth token is not stored.
+    #
+    #   Use `oauthToken` for repository providers other than GitHub, such as
+    #   Bitbucket or CodeCommit. To authorize access to GitHub as your
+    #   repository provider, use `accessToken`.
+    #
+    #   You must specify either `oauthToken` or `accessToken` when you create
+    #   a new app.
+    #
+    #   Existing Amplify apps deployed from a GitHub repository using OAuth
+    #   continue to work with CI/CD. However, we strongly recommend that you
+    #   migrate these apps to use the GitHub App. For more information, see
+    #   [Migrating an existing OAuth app to the Amplify GitHub App][1] in the
+    #   *Amplify User Guide* .
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amplify/latest/UserGuide/setting-up-GitHub-access.html#migrating-to-github-app-auth
     #
     # @option params [String] :access_token
-    #   The personal access token for a third-party source control system for
-    #   an Amplify app. The personal access token is used to create a webhook
-    #   and a read-only deploy key. The token is not stored.
+    #   The personal access token for a GitHub repository for an Amplify app.
+    #   The personal access token is used to authorize access to a GitHub
+    #   repository using the Amplify GitHub App. The token is not stored.
+    #
+    #   Use `accessToken` for GitHub repositories only. To authorize access to
+    #   a repository provider such as Bitbucket or CodeCommit, use
+    #   `oauthToken`.
+    #
+    #   You must specify either `accessToken` or `oauthToken` when you create
+    #   a new app.
+    #
+    #   Existing Amplify apps deployed from a GitHub repository using OAuth
+    #   continue to work with CI/CD. However, we strongly recommend that you
+    #   migrate these apps to use the GitHub App. For more information, see
+    #   [Migrating an existing OAuth app to the Amplify GitHub App][1] in the
+    #   *Amplify User Guide* .
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amplify/latest/UserGuide/setting-up-GitHub-access.html#migrating-to-github-app-auth
     #
     # @option params [Hash<String,String>] :environment_variables
     #   The environment variables map for an Amplify app.
@@ -427,7 +463,7 @@ module Aws::Amplify
     #     name: "Name", # required
     #     description: "Description",
     #     repository: "Repository",
-    #     platform: "WEB", # accepts WEB
+    #     platform: "WEB", # accepts WEB, WEB_DYNAMIC
     #     iam_service_role_arn: "ServiceRoleArn",
     #     oauth_token: "OauthToken",
     #     access_token: "AccessToken",
@@ -478,7 +514,7 @@ module Aws::Amplify
     #   resp.app.tags["TagKey"] #=> String
     #   resp.app.description #=> String
     #   resp.app.repository #=> String
-    #   resp.app.platform #=> String, one of "WEB"
+    #   resp.app.platform #=> String, one of "WEB", "WEB_DYNAMIC"
     #   resp.app.create_time #=> Time
     #   resp.app.update_time #=> Time
     #   resp.app.iam_service_role_arn #=> String
@@ -514,6 +550,7 @@ module Aws::Amplify
     #   resp.app.auto_branch_creation_config.build_spec #=> String
     #   resp.app.auto_branch_creation_config.enable_pull_request_preview #=> Boolean
     #   resp.app.auto_branch_creation_config.pull_request_environment_name #=> String
+    #   resp.app.repository_clone_method #=> String, one of "SSH", "TOKEN", "SIGV4"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateApp AWS API Documentation
     #
@@ -889,7 +926,7 @@ module Aws::Amplify
     #   resp.app.tags["TagKey"] #=> String
     #   resp.app.description #=> String
     #   resp.app.repository #=> String
-    #   resp.app.platform #=> String, one of "WEB"
+    #   resp.app.platform #=> String, one of "WEB", "WEB_DYNAMIC"
     #   resp.app.create_time #=> Time
     #   resp.app.update_time #=> Time
     #   resp.app.iam_service_role_arn #=> String
@@ -925,6 +962,7 @@ module Aws::Amplify
     #   resp.app.auto_branch_creation_config.build_spec #=> String
     #   resp.app.auto_branch_creation_config.enable_pull_request_preview #=> Boolean
     #   resp.app.auto_branch_creation_config.pull_request_environment_name #=> String
+    #   resp.app.repository_clone_method #=> String, one of "SSH", "TOKEN", "SIGV4"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteApp AWS API Documentation
     #
@@ -1224,7 +1262,7 @@ module Aws::Amplify
     #   resp.app.tags["TagKey"] #=> String
     #   resp.app.description #=> String
     #   resp.app.repository #=> String
-    #   resp.app.platform #=> String, one of "WEB"
+    #   resp.app.platform #=> String, one of "WEB", "WEB_DYNAMIC"
     #   resp.app.create_time #=> Time
     #   resp.app.update_time #=> Time
     #   resp.app.iam_service_role_arn #=> String
@@ -1260,6 +1298,7 @@ module Aws::Amplify
     #   resp.app.auto_branch_creation_config.build_spec #=> String
     #   resp.app.auto_branch_creation_config.enable_pull_request_preview #=> Boolean
     #   resp.app.auto_branch_creation_config.pull_request_environment_name #=> String
+    #   resp.app.repository_clone_method #=> String, one of "SSH", "TOKEN", "SIGV4"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetApp AWS API Documentation
     #
@@ -1567,7 +1606,7 @@ module Aws::Amplify
     #   resp.apps[0].tags["TagKey"] #=> String
     #   resp.apps[0].description #=> String
     #   resp.apps[0].repository #=> String
-    #   resp.apps[0].platform #=> String, one of "WEB"
+    #   resp.apps[0].platform #=> String, one of "WEB", "WEB_DYNAMIC"
     #   resp.apps[0].create_time #=> Time
     #   resp.apps[0].update_time #=> Time
     #   resp.apps[0].iam_service_role_arn #=> String
@@ -1603,6 +1642,7 @@ module Aws::Amplify
     #   resp.apps[0].auto_branch_creation_config.build_spec #=> String
     #   resp.apps[0].auto_branch_creation_config.enable_pull_request_preview #=> Boolean
     #   resp.apps[0].auto_branch_creation_config.pull_request_environment_name #=> String
+    #   resp.apps[0].repository_clone_method #=> String, one of "SSH", "TOKEN", "SIGV4"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListApps AWS API Documentation
@@ -2247,13 +2287,49 @@ module Aws::Amplify
     #
     # @option params [String] :oauth_token
     #   The OAuth token for a third-party source control system for an Amplify
-    #   app. The token is used to create a webhook and a read-only deploy key.
-    #   The OAuth token is not stored.
+    #   app. The OAuth token is used to create a webhook and a read-only
+    #   deploy key using SSH cloning. The OAuth token is not stored.
+    #
+    #   Use `oauthToken` for repository providers other than GitHub, such as
+    #   Bitbucket or CodeCommit.
+    #
+    #   To authorize access to GitHub as your repository provider, use
+    #   `accessToken`.
+    #
+    #   You must specify either `oauthToken` or `accessToken` when you update
+    #   an app.
+    #
+    #   Existing Amplify apps deployed from a GitHub repository using OAuth
+    #   continue to work with CI/CD. However, we strongly recommend that you
+    #   migrate these apps to use the GitHub App. For more information, see
+    #   [Migrating an existing OAuth app to the Amplify GitHub App][1] in the
+    #   *Amplify User Guide* .
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amplify/latest/UserGuide/setting-up-GitHub-access.html#migrating-to-github-app-auth
     #
     # @option params [String] :access_token
-    #   The personal access token for a third-party source control system for
-    #   an Amplify app. The token is used to create webhook and a read-only
-    #   deploy key. The token is not stored.
+    #   The personal access token for a GitHub repository for an Amplify app.
+    #   The personal access token is used to authorize access to a GitHub
+    #   repository using the Amplify GitHub App. The token is not stored.
+    #
+    #   Use `accessToken` for GitHub repositories only. To authorize access to
+    #   a repository provider such as Bitbucket or CodeCommit, use
+    #   `oauthToken`.
+    #
+    #   You must specify either `accessToken` or `oauthToken` when you update
+    #   an app.
+    #
+    #   Existing Amplify apps deployed from a GitHub repository using OAuth
+    #   continue to work with CI/CD. However, we strongly recommend that you
+    #   migrate these apps to use the GitHub App. For more information, see
+    #   [Migrating an existing OAuth app to the Amplify GitHub App][1] in the
+    #   *Amplify User Guide* .
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amplify/latest/UserGuide/setting-up-GitHub-access.html#migrating-to-github-app-auth
     #
     # @return [Types::UpdateAppResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2265,7 +2341,7 @@ module Aws::Amplify
     #     app_id: "AppId", # required
     #     name: "Name",
     #     description: "Description",
-    #     platform: "WEB", # accepts WEB
+    #     platform: "WEB", # accepts WEB, WEB_DYNAMIC
     #     iam_service_role_arn: "ServiceRoleArn",
     #     environment_variables: {
     #       "EnvKey" => "EnvValue",
@@ -2314,7 +2390,7 @@ module Aws::Amplify
     #   resp.app.tags["TagKey"] #=> String
     #   resp.app.description #=> String
     #   resp.app.repository #=> String
-    #   resp.app.platform #=> String, one of "WEB"
+    #   resp.app.platform #=> String, one of "WEB", "WEB_DYNAMIC"
     #   resp.app.create_time #=> Time
     #   resp.app.update_time #=> Time
     #   resp.app.iam_service_role_arn #=> String
@@ -2350,6 +2426,7 @@ module Aws::Amplify
     #   resp.app.auto_branch_creation_config.build_spec #=> String
     #   resp.app.auto_branch_creation_config.enable_pull_request_preview #=> Boolean
     #   resp.app.auto_branch_creation_config.pull_request_environment_name #=> String
+    #   resp.app.repository_clone_method #=> String, one of "SSH", "TOKEN", "SIGV4"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UpdateApp AWS API Documentation
     #
@@ -2504,7 +2581,7 @@ module Aws::Amplify
     # @option params [Boolean] :enable_auto_sub_domain
     #   Enables the automated creation of subdomains for branches.
     #
-    # @option params [required, Array<Types::SubDomainSetting>] :sub_domain_settings
+    # @option params [Array<Types::SubDomainSetting>] :sub_domain_settings
     #   Describes the settings for the subdomain.
     #
     # @option params [Array<String>] :auto_sub_domain_creation_patterns
@@ -2524,7 +2601,7 @@ module Aws::Amplify
     #     app_id: "AppId", # required
     #     domain_name: "DomainName", # required
     #     enable_auto_sub_domain: false,
-    #     sub_domain_settings: [ # required
+    #     sub_domain_settings: [
     #       {
     #         prefix: "DomainPrefix", # required
     #         branch_name: "BranchName", # required
@@ -2615,7 +2692,7 @@ module Aws::Amplify
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-amplify'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

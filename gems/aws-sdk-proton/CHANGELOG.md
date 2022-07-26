@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2022-06-02)
+------------------
+
+* Feature - Add new "Components" API to enable users to Create, Delete and Update AWS Proton components.
+
+1.15.0 (2022-04-04)
+------------------
+
+* Feature - SDK release to support tagging for AWS Proton Repository resource
+
+1.14.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.13.0 (2022-02-03)
 ------------------
 

@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -76,6 +77,7 @@ module Aws::FinSpaceData
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -351,6 +353,46 @@ module Aws::FinSpaceData
 
     # @!group API Operations
 
+    # Adds a user account to a permission group to grant permissions for
+    # actions a user can perform in FinSpace.
+    #
+    # @option params [required, String] :permission_group_id
+    #   The unique identifier for the permission group.
+    #
+    # @option params [required, String] :user_id
+    #   The unique identifier for the user.
+    #
+    # @option params [String] :client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::AssociateUserToPermissionGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateUserToPermissionGroupResponse#status_code #status_code} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_user_to_permission_group({
+    #     permission_group_id: "PermissionGroupId", # required
+    #     user_id: "UserId", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status_code #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/AssociateUserToPermissionGroup AWS API Documentation
+    #
+    # @overload associate_user_to_permission_group(params = {})
+    # @param [Hash] params ({})
+    def associate_user_to_permission_group(params = {}, options = {})
+      req = build_request(:associate_user_to_permission_group, params)
+      req.send_request(options)
+    end
+
     # Creates a new Changeset in a FinSpace Dataset.
     #
     # @option params [String] :client_token
@@ -364,15 +406,15 @@ module Aws::FinSpaceData
     #   will be created.
     #
     # @option params [required, String] :change_type
-    #   Option to indicate how a Changeset will be applied to a Dataset.
+    #   The option to indicate how a Changeset will be applied to a Dataset.
     #
-    #   * `REPLACE` - Changeset will be considered as a replacement to all
+    #   * `REPLACE` – Changeset will be considered as a replacement to all
     #     prior loaded Changesets.
     #
-    #   * `APPEND` - Changeset will be considered as an addition to the end of
+    #   * `APPEND` – Changeset will be considered as an addition to the end of
     #     all prior loaded Changesets.
     #
-    #   * `MODIFY` - Changeset is considered as a replacement to a specific
+    #   * `MODIFY` – Changeset is considered as a replacement to a specific
     #     prior ingested Changeset.
     #
     # @option params [required, Hash<String,String>] :source_params
@@ -390,7 +432,7 @@ module Aws::FinSpaceData
     #   The S3 path that you specify must allow the FinSpace role access. To
     #   do that, you first need to configure the IAM policy on S3 bucket. For
     #   more information, see [Loading data from an Amazon S3 Bucket using the
-    #   FinSpace API][1]section.
+    #   FinSpace API][1] section.
     #
     #
     #
@@ -404,13 +446,13 @@ module Aws::FinSpaceData
     #   `formatType` is a required attribute and can have the following
     #   values:
     #
-    #   * `PARQUET` - Parquet source file format.
+    #   * `PARQUET` – Parquet source file format.
     #
-    #   * `CSV` - CSV source file format.
+    #   * `CSV` – CSV source file format.
     #
-    #   * `JSON` - JSON source file format.
+    #   * `JSON` – JSON source file format.
     #
-    #   * `XML` - XML source file format.
+    #   * `XML` – XML source file format.
     #
     #   Here is an example of how you could specify the `formatParams`\:
     #
@@ -484,7 +526,7 @@ module Aws::FinSpaceData
     #
     # @option params [Integer] :as_of_timestamp
     #   Beginning time to use for the Dataview. The value is determined as
-    #   Epoch time in milliseconds. For example, the value for Monday,
+    #   epoch time in milliseconds. For example, the value for Monday,
     #   November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
     #
     # @option params [required, Types::DataViewDestinationTypeParams] :destination_type_params
@@ -541,9 +583,9 @@ module Aws::FinSpaceData
     # @option params [required, String] :kind
     #   The format in which Dataset data is structured.
     #
-    #   * `TABULAR` - Data is structured in a tabular format.
+    #   * `TABULAR` – Data is structured in a tabular format.
     #
-    #   * `NON_TABULAR` - Data is structured in a non-tabular format.
+    #   * `NON_TABULAR` – Data is structured in a non-tabular format.
     #
     # @option params [String] :dataset_description
     #   Description of a Dataset.
@@ -612,6 +654,149 @@ module Aws::FinSpaceData
       req.send_request(options)
     end
 
+    # Creates a group of permissions for various actions that a user can
+    # perform in FinSpace.
+    #
+    # @option params [required, String] :name
+    #   The name of the permission group.
+    #
+    # @option params [String] :description
+    #   A brief description for the permission group.
+    #
+    # @option params [required, Array<String>] :application_permissions
+    #   The option to indicate FinSpace application permissions that are
+    #   granted to a specific group.
+    #
+    #   When assigning application permissions, be aware that the permission
+    #   `ManageUsersAndGroups` allows users to grant themselves or others
+    #   access to any functionality in their FinSpace environment's
+    #   application. It should only be granted to trusted users.
+    #
+    #   * `CreateDataset` – Group members can create new datasets.
+    #
+    #   * `ManageClusters` – Group members can manage Apache Spark clusters
+    #     from FinSpace notebooks.
+    #
+    #   * `ManageUsersAndGroups` – Group members can manage users and
+    #     permission groups. This is a privileged permission that allows users
+    #     to grant themselves or others access to any functionality in the
+    #     application. It should only be granted to trusted users.
+    #
+    #   * `ManageAttributeSets` – Group members can manage attribute sets.
+    #
+    #   * `ViewAuditData` – Group members can view audit data.
+    #
+    #   * `AccessNotebooks` – Group members will have access to FinSpace
+    #     notebooks.
+    #
+    #   * `GetTemporaryCredentials` – Group members can get temporary API
+    #     credentials.
+    #
+    # @option params [String] :client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreatePermissionGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreatePermissionGroupResponse#permission_group_id #permission_group_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_permission_group({
+    #     name: "PermissionGroupName", # required
+    #     description: "PermissionGroupDescription",
+    #     application_permissions: ["CreateDataset"], # required, accepts CreateDataset, ManageClusters, ManageUsersAndGroups, ManageAttributeSets, ViewAuditData, AccessNotebooks, GetTemporaryCredentials
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.permission_group_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/CreatePermissionGroup AWS API Documentation
+    #
+    # @overload create_permission_group(params = {})
+    # @param [Hash] params ({})
+    def create_permission_group(params = {}, options = {})
+      req = build_request(:create_permission_group, params)
+      req.send_request(options)
+    end
+
+    # Creates a new user in FinSpace.
+    #
+    # @option params [required, String] :email_address
+    #   The email address of the user that you want to register. The email
+    #   address serves as a uniquer identifier for each user and cannot be
+    #   changed after it's created.
+    #
+    # @option params [required, String] :type
+    #   The option to indicate the type of user. Use one of the following
+    #   options to specify this parameter:
+    #
+    #   * `SUPER_USER` – A user with permission to all the functionality and
+    #     data in FinSpace.
+    #
+    #   * `APP_USER` – A user with specific permissions in FinSpace. The users
+    #     are assigned permissions by adding them to a permission group.
+    #
+    # @option params [String] :first_name
+    #   The first name of the user that you want to register.
+    #
+    # @option params [String] :last_name
+    #   The last name of the user that you want to register.
+    #
+    # @option params [String] :api_access
+    #   The option to indicate whether the user can use the
+    #   `GetProgrammaticAccessCredentials` API to obtain credentials that can
+    #   then be used to access other FinSpace Data API operations.
+    #
+    #   * `ENABLED` – The user has permissions to use the APIs.
+    #
+    #   * `DISABLED` – The user does not have permissions to use any APIs.
+    #
+    # @option params [String] :api_access_principal_arn
+    #   The ARN identifier of an AWS user or role that is allowed to call the
+    #   `GetProgrammaticAccessCredentials` API to obtain a credentials token
+    #   for a specific FinSpace user. This must be an IAM role within your
+    #   FinSpace account.
+    #
+    # @option params [String] :client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateUserResponse#user_id #user_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_user({
+    #     email_address: "Email", # required
+    #     type: "SUPER_USER", # required, accepts SUPER_USER, APP_USER
+    #     first_name: "FirstName",
+    #     last_name: "LastName",
+    #     api_access: "ENABLED", # accepts ENABLED, DISABLED
+    #     api_access_principal_arn: "RoleArn",
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.user_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/CreateUser AWS API Documentation
+    #
+    # @overload create_user(params = {})
+    # @param [Hash] params ({})
+    def create_user(params = {}, options = {})
+      req = build_request(:create_user, params)
+      req.send_request(options)
+    end
+
     # Deletes a FinSpace Dataset.
     #
     # @option params [String] :client_token
@@ -644,6 +829,153 @@ module Aws::FinSpaceData
     # @param [Hash] params ({})
     def delete_dataset(params = {}, options = {})
       req = build_request(:delete_dataset, params)
+      req.send_request(options)
+    end
+
+    # Deletes a permission group. This action is irreversible.
+    #
+    # @option params [required, String] :permission_group_id
+    #   The unique identifier for the permission group that you want to
+    #   delete.
+    #
+    # @option params [String] :client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::DeletePermissionGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeletePermissionGroupResponse#permission_group_id #permission_group_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_permission_group({
+    #     permission_group_id: "PermissionGroupId", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.permission_group_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/DeletePermissionGroup AWS API Documentation
+    #
+    # @overload delete_permission_group(params = {})
+    # @param [Hash] params ({})
+    def delete_permission_group(params = {}, options = {})
+      req = build_request(:delete_permission_group, params)
+      req.send_request(options)
+    end
+
+    # Denies access to the FinSpace web application and API for the
+    # specified user.
+    #
+    # @option params [required, String] :user_id
+    #   The unique identifier for the user account that you want to disable.
+    #
+    # @option params [String] :client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::DisableUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisableUserResponse#user_id #user_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disable_user({
+    #     user_id: "UserId", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.user_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/DisableUser AWS API Documentation
+    #
+    # @overload disable_user(params = {})
+    # @param [Hash] params ({})
+    def disable_user(params = {}, options = {})
+      req = build_request(:disable_user, params)
+      req.send_request(options)
+    end
+
+    # Removes a user account from a permission group.
+    #
+    # @option params [required, String] :permission_group_id
+    #   The unique identifier for the permission group.
+    #
+    # @option params [required, String] :user_id
+    #   The unique identifier for the user.
+    #
+    # @option params [String] :client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::DisassociateUserFromPermissionGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisassociateUserFromPermissionGroupResponse#status_code #status_code} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_user_from_permission_group({
+    #     permission_group_id: "PermissionGroupId", # required
+    #     user_id: "UserId", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status_code #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/DisassociateUserFromPermissionGroup AWS API Documentation
+    #
+    # @overload disassociate_user_from_permission_group(params = {})
+    # @param [Hash] params ({})
+    def disassociate_user_from_permission_group(params = {}, options = {})
+      req = build_request(:disassociate_user_from_permission_group, params)
+      req.send_request(options)
+    end
+
+    # Allows the specified user to access the FinSpace web application and
+    # API.
+    #
+    # @option params [required, String] :user_id
+    #   The unique identifier for the user account that you want to enable.
+    #
+    # @option params [String] :client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::EnableUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EnableUserResponse#user_id #user_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.enable_user({
+    #     user_id: "UserId", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.user_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/EnableUser AWS API Documentation
+    #
+    # @overload enable_user(params = {})
+    # @param [Hash] params ({})
+    def enable_user(params = {}, options = {})
+      req = build_request(:enable_user, params)
       req.send_request(options)
     end
 
@@ -818,6 +1150,85 @@ module Aws::FinSpaceData
       req.send_request(options)
     end
 
+    # Returns the credentials to access the external Dataview from an S3
+    # location. To call this API:
+    #
+    # * You must retrieve the programmatic credentials.
+    #
+    # * You must be a member of a FinSpace user group, where the dataset
+    #   that you want to access has `Read Dataset Data` permissions.
+    #
+    # @option params [required, String] :data_view_id
+    #   The unique identifier for the Dataview that you want to access.
+    #
+    # @option params [required, String] :dataset_id
+    #   The unique identifier for the Dataset.
+    #
+    # @return [Types::GetExternalDataViewAccessDetailsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetExternalDataViewAccessDetailsResponse#credentials #credentials} => Types::AwsCredentials
+    #   * {Types::GetExternalDataViewAccessDetailsResponse#s3_location #s3_location} => Types::S3Location
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_external_data_view_access_details({
+    #     data_view_id: "DataViewId", # required
+    #     dataset_id: "DatasetId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.credentials.access_key_id #=> String
+    #   resp.credentials.secret_access_key #=> String
+    #   resp.credentials.session_token #=> String
+    #   resp.credentials.expiration #=> Integer
+    #   resp.s3_location.bucket #=> String
+    #   resp.s3_location.key #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/GetExternalDataViewAccessDetails AWS API Documentation
+    #
+    # @overload get_external_data_view_access_details(params = {})
+    # @param [Hash] params ({})
+    def get_external_data_view_access_details(params = {}, options = {})
+      req = build_request(:get_external_data_view_access_details, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the details of a specific permission group.
+    #
+    # @option params [required, String] :permission_group_id
+    #   The unique identifier for the permission group.
+    #
+    # @return [Types::GetPermissionGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPermissionGroupResponse#permission_group #permission_group} => Types::PermissionGroup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_permission_group({
+    #     permission_group_id: "PermissionGroupId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.permission_group.permission_group_id #=> String
+    #   resp.permission_group.name #=> String
+    #   resp.permission_group.description #=> String
+    #   resp.permission_group.application_permissions #=> Array
+    #   resp.permission_group.application_permissions[0] #=> String, one of "CreateDataset", "ManageClusters", "ManageUsersAndGroups", "ManageAttributeSets", "ViewAuditData", "AccessNotebooks", "GetTemporaryCredentials"
+    #   resp.permission_group.create_time #=> Integer
+    #   resp.permission_group.last_modified_time #=> Integer
+    #   resp.permission_group.membership_status #=> String, one of "ADDITION_IN_PROGRESS", "ADDITION_SUCCESS", "REMOVAL_IN_PROGRESS"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/GetPermissionGroup AWS API Documentation
+    #
+    # @overload get_permission_group(params = {})
+    # @param [Hash] params ({})
+    def get_permission_group(params = {}, options = {})
+      req = build_request(:get_permission_group, params)
+      req.send_request(options)
+    end
+
     # Request programmatic credentials to use with FinSpace SDK.
     #
     # @option params [Integer] :duration_in_minutes
@@ -854,6 +1265,58 @@ module Aws::FinSpaceData
       req.send_request(options)
     end
 
+    # Retrieves details for a specific user.
+    #
+    # @option params [required, String] :user_id
+    #   The unique identifier of the user to get data for.
+    #
+    # @return [Types::GetUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetUserResponse#user_id #user_id} => String
+    #   * {Types::GetUserResponse#status #status} => String
+    #   * {Types::GetUserResponse#first_name #first_name} => String
+    #   * {Types::GetUserResponse#last_name #last_name} => String
+    #   * {Types::GetUserResponse#email_address #email_address} => String
+    #   * {Types::GetUserResponse#type #type} => String
+    #   * {Types::GetUserResponse#api_access #api_access} => String
+    #   * {Types::GetUserResponse#api_access_principal_arn #api_access_principal_arn} => String
+    #   * {Types::GetUserResponse#create_time #create_time} => Integer
+    #   * {Types::GetUserResponse#last_enabled_time #last_enabled_time} => Integer
+    #   * {Types::GetUserResponse#last_disabled_time #last_disabled_time} => Integer
+    #   * {Types::GetUserResponse#last_modified_time #last_modified_time} => Integer
+    #   * {Types::GetUserResponse#last_login_time #last_login_time} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_user({
+    #     user_id: "UserId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.user_id #=> String
+    #   resp.status #=> String, one of "CREATING", "ENABLED", "DISABLED"
+    #   resp.first_name #=> String
+    #   resp.last_name #=> String
+    #   resp.email_address #=> String
+    #   resp.type #=> String, one of "SUPER_USER", "APP_USER"
+    #   resp.api_access #=> String, one of "ENABLED", "DISABLED"
+    #   resp.api_access_principal_arn #=> String
+    #   resp.create_time #=> Integer
+    #   resp.last_enabled_time #=> Integer
+    #   resp.last_disabled_time #=> Integer
+    #   resp.last_modified_time #=> Integer
+    #   resp.last_login_time #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/GetUser AWS API Documentation
+    #
+    # @overload get_user(params = {})
+    # @param [Hash] params ({})
+    def get_user(params = {}, options = {})
+      req = build_request(:get_user, params)
+      req.send_request(options)
+    end
+
     # A temporary Amazon S3 location, where you can copy your files from a
     # source location to stage or use as a scratch space in FinSpace
     # notebook.
@@ -861,11 +1324,11 @@ module Aws::FinSpaceData
     # @option params [String] :location_type
     #   Specify the type of the working location.
     #
-    #   * `SAGEMAKER` - Use the Amazon S3 location as a temporary location to
+    #   * `SAGEMAKER` – Use the Amazon S3 location as a temporary location to
     #     store data content when working with FinSpace Notebooks that run on
     #     SageMaker studio.
     #
-    #   * `INGESTION` - Use the Amazon S3 location as a staging location to
+    #   * `INGESTION` – Use the Amazon S3 location as a staging location to
     #     copy your data content and then use the location with the Changeset
     #     creation operation.
     #
@@ -906,7 +1369,7 @@ module Aws::FinSpaceData
     #   The maximum number of results per page.
     #
     # @option params [String] :next_token
-    #   A token indicating where a results page should begin.
+    #   A token that indicates where a results page should begin.
     #
     # @return [Types::ListChangesetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -959,7 +1422,7 @@ module Aws::FinSpaceData
     #   The unique identifier of the Dataset for which to retrieve Dataviews.
     #
     # @option params [String] :next_token
-    #   A token indicating where a results page should begin.
+    #   A token that indicates where a results page should begin.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results per page.
@@ -1014,7 +1477,7 @@ module Aws::FinSpaceData
     # Lists all of the active Datasets that a user has access to.
     #
     # @option params [String] :next_token
-    #   A token indicating where a results page should begin.
+    #   A token that indicates where a results page should begin.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results per page.
@@ -1064,6 +1527,229 @@ module Aws::FinSpaceData
       req.send_request(options)
     end
 
+    # Lists all available permission groups in FinSpace.
+    #
+    # @option params [String] :next_token
+    #   A token that indicates where a results page should begin.
+    #
+    # @option params [required, Integer] :max_results
+    #   The maximum number of results per page.
+    #
+    # @return [Types::ListPermissionGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPermissionGroupsResponse#permission_groups #permission_groups} => Array&lt;Types::PermissionGroup&gt;
+    #   * {Types::ListPermissionGroupsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_permission_groups({
+    #     next_token: "PaginationToken",
+    #     max_results: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.permission_groups #=> Array
+    #   resp.permission_groups[0].permission_group_id #=> String
+    #   resp.permission_groups[0].name #=> String
+    #   resp.permission_groups[0].description #=> String
+    #   resp.permission_groups[0].application_permissions #=> Array
+    #   resp.permission_groups[0].application_permissions[0] #=> String, one of "CreateDataset", "ManageClusters", "ManageUsersAndGroups", "ManageAttributeSets", "ViewAuditData", "AccessNotebooks", "GetTemporaryCredentials"
+    #   resp.permission_groups[0].create_time #=> Integer
+    #   resp.permission_groups[0].last_modified_time #=> Integer
+    #   resp.permission_groups[0].membership_status #=> String, one of "ADDITION_IN_PROGRESS", "ADDITION_SUCCESS", "REMOVAL_IN_PROGRESS"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/ListPermissionGroups AWS API Documentation
+    #
+    # @overload list_permission_groups(params = {})
+    # @param [Hash] params ({})
+    def list_permission_groups(params = {}, options = {})
+      req = build_request(:list_permission_groups, params)
+      req.send_request(options)
+    end
+
+    # Lists all the permission groups that are associated with a specific
+    # user account.
+    #
+    # @option params [required, String] :user_id
+    #   The unique identifier for the user.
+    #
+    # @option params [String] :next_token
+    #   A token that indicates where a results page should begin.
+    #
+    # @option params [required, Integer] :max_results
+    #   The maximum number of results per page.
+    #
+    # @return [Types::ListPermissionGroupsByUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPermissionGroupsByUserResponse#permission_groups #permission_groups} => Array&lt;Types::PermissionGroupByUser&gt;
+    #   * {Types::ListPermissionGroupsByUserResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_permission_groups_by_user({
+    #     user_id: "UserId", # required
+    #     next_token: "PaginationToken",
+    #     max_results: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.permission_groups #=> Array
+    #   resp.permission_groups[0].permission_group_id #=> String
+    #   resp.permission_groups[0].name #=> String
+    #   resp.permission_groups[0].membership_status #=> String, one of "ADDITION_IN_PROGRESS", "ADDITION_SUCCESS", "REMOVAL_IN_PROGRESS"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/ListPermissionGroupsByUser AWS API Documentation
+    #
+    # @overload list_permission_groups_by_user(params = {})
+    # @param [Hash] params ({})
+    def list_permission_groups_by_user(params = {}, options = {})
+      req = build_request(:list_permission_groups_by_user, params)
+      req.send_request(options)
+    end
+
+    # Lists all available user accounts in FinSpace.
+    #
+    # @option params [String] :next_token
+    #   A token that indicates where a results page should begin.
+    #
+    # @option params [required, Integer] :max_results
+    #   The maximum number of results per page.
+    #
+    # @return [Types::ListUsersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListUsersResponse#users #users} => Array&lt;Types::User&gt;
+    #   * {Types::ListUsersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_users({
+    #     next_token: "PaginationToken",
+    #     max_results: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.users #=> Array
+    #   resp.users[0].user_id #=> String
+    #   resp.users[0].status #=> String, one of "CREATING", "ENABLED", "DISABLED"
+    #   resp.users[0].first_name #=> String
+    #   resp.users[0].last_name #=> String
+    #   resp.users[0].email_address #=> String
+    #   resp.users[0].type #=> String, one of "SUPER_USER", "APP_USER"
+    #   resp.users[0].api_access #=> String, one of "ENABLED", "DISABLED"
+    #   resp.users[0].api_access_principal_arn #=> String
+    #   resp.users[0].create_time #=> Integer
+    #   resp.users[0].last_enabled_time #=> Integer
+    #   resp.users[0].last_disabled_time #=> Integer
+    #   resp.users[0].last_modified_time #=> Integer
+    #   resp.users[0].last_login_time #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/ListUsers AWS API Documentation
+    #
+    # @overload list_users(params = {})
+    # @param [Hash] params ({})
+    def list_users(params = {}, options = {})
+      req = build_request(:list_users, params)
+      req.send_request(options)
+    end
+
+    # Lists details of all the users in a specific permission group.
+    #
+    # @option params [required, String] :permission_group_id
+    #   The unique identifier for the permission group.
+    #
+    # @option params [String] :next_token
+    #   A token that indicates where a results page should begin.
+    #
+    # @option params [required, Integer] :max_results
+    #   The maximum number of results per page.
+    #
+    # @return [Types::ListUsersByPermissionGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListUsersByPermissionGroupResponse#users #users} => Array&lt;Types::UserByPermissionGroup&gt;
+    #   * {Types::ListUsersByPermissionGroupResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_users_by_permission_group({
+    #     permission_group_id: "PermissionGroupId", # required
+    #     next_token: "PaginationToken",
+    #     max_results: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.users #=> Array
+    #   resp.users[0].user_id #=> String
+    #   resp.users[0].status #=> String, one of "CREATING", "ENABLED", "DISABLED"
+    #   resp.users[0].first_name #=> String
+    #   resp.users[0].last_name #=> String
+    #   resp.users[0].email_address #=> String
+    #   resp.users[0].type #=> String, one of "SUPER_USER", "APP_USER"
+    #   resp.users[0].api_access #=> String, one of "ENABLED", "DISABLED"
+    #   resp.users[0].api_access_principal_arn #=> String
+    #   resp.users[0].membership_status #=> String, one of "ADDITION_IN_PROGRESS", "ADDITION_SUCCESS", "REMOVAL_IN_PROGRESS"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/ListUsersByPermissionGroup AWS API Documentation
+    #
+    # @overload list_users_by_permission_group(params = {})
+    # @param [Hash] params ({})
+    def list_users_by_permission_group(params = {}, options = {})
+      req = build_request(:list_users_by_permission_group, params)
+      req.send_request(options)
+    end
+
+    # Resets the password for a specified user ID and generates a temporary
+    # one. Only a superuser can reset password for other users. Resetting
+    # the password immediately invalidates the previous password associated
+    # with the user.
+    #
+    # @option params [required, String] :user_id
+    #   The unique identifier of the user that a temporary password is
+    #   requested for.
+    #
+    # @option params [String] :client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::ResetUserPasswordResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ResetUserPasswordResponse#user_id #user_id} => String
+    #   * {Types::ResetUserPasswordResponse#temporary_password #temporary_password} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reset_user_password({
+    #     user_id: "UserId", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.user_id #=> String
+    #   resp.temporary_password #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/ResetUserPassword AWS API Documentation
+    #
+    # @overload reset_user_password(params = {})
+    # @param [Hash] params ({})
+    def reset_user_password(params = {}, options = {})
+      req = build_request(:reset_user_password, params)
+      req.send_request(options)
+    end
+
     # Updates a FinSpace Changeset.
     #
     # @option params [String] :client_token
@@ -1108,13 +1794,13 @@ module Aws::FinSpaceData
     #   `formatType` is a required attribute and can have the following
     #   values:
     #
-    #   * `PARQUET` - Parquet source file format.
+    #   * `PARQUET` – Parquet source file format.
     #
-    #   * `CSV` - CSV source file format.
+    #   * `CSV` – CSV source file format.
     #
-    #   * `JSON` - JSON source file format.
+    #   * `JSON` – JSON source file format.
     #
-    #   * `XML` - XML source file format.
+    #   * `XML` – XML source file format.
     #
     #   Here is an example of how you could specify the `formatParams`\:
     #
@@ -1183,9 +1869,9 @@ module Aws::FinSpaceData
     # @option params [required, String] :kind
     #   The format in which the Dataset data is structured.
     #
-    #   * `TABULAR` - Data is structured in a tabular format.
+    #   * `TABULAR` – Data is structured in a tabular format.
     #
-    #   * `NON_TABULAR` - Data is structured in a non-tabular format.
+    #   * `NON_TABULAR` – Data is structured in a non-tabular format.
     #
     # @option params [String] :dataset_description
     #   A description for the Dataset.
@@ -1236,6 +1922,151 @@ module Aws::FinSpaceData
       req.send_request(options)
     end
 
+    # Modifies the details of a permission group. You cannot modify a
+    # `permissionGroupID`.
+    #
+    # @option params [required, String] :permission_group_id
+    #   The unique identifier for the permission group to update.
+    #
+    # @option params [String] :name
+    #   The name of the permission group.
+    #
+    # @option params [String] :description
+    #   A brief description for the permission group.
+    #
+    # @option params [Array<String>] :application_permissions
+    #   The permissions that are granted to a specific group for accessing the
+    #   FinSpace application.
+    #
+    #   When assigning application permissions, be aware that the permission
+    #   `ManageUsersAndGroups` allows users to grant themselves or others
+    #   access to any functionality in their FinSpace environment's
+    #   application. It should only be granted to trusted users.
+    #
+    #   * `CreateDataset` – Group members can create new datasets.
+    #
+    #   * `ManageClusters` – Group members can manage Apache Spark clusters
+    #     from FinSpace notebooks.
+    #
+    #   * `ManageUsersAndGroups` – Group members can manage users and
+    #     permission groups. This is a privileged permission that allows users
+    #     to grant themselves or others access to any functionality in the
+    #     application. It should only be granted to trusted users.
+    #
+    #   * `ManageAttributeSets` – Group members can manage attribute sets.
+    #
+    #   * `ViewAuditData` – Group members can view audit data.
+    #
+    #   * `AccessNotebooks` – Group members will have access to FinSpace
+    #     notebooks.
+    #
+    #   * `GetTemporaryCredentials` – Group members can get temporary API
+    #     credentials.
+    #
+    # @option params [String] :client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::UpdatePermissionGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdatePermissionGroupResponse#permission_group_id #permission_group_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_permission_group({
+    #     permission_group_id: "PermissionGroupId", # required
+    #     name: "PermissionGroupName",
+    #     description: "PermissionGroupDescription",
+    #     application_permissions: ["CreateDataset"], # accepts CreateDataset, ManageClusters, ManageUsersAndGroups, ManageAttributeSets, ViewAuditData, AccessNotebooks, GetTemporaryCredentials
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.permission_group_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/UpdatePermissionGroup AWS API Documentation
+    #
+    # @overload update_permission_group(params = {})
+    # @param [Hash] params ({})
+    def update_permission_group(params = {}, options = {})
+      req = build_request(:update_permission_group, params)
+      req.send_request(options)
+    end
+
+    # Modifies the details of the specified user account. You cannot update
+    # the `userId` for a user.
+    #
+    # @option params [required, String] :user_id
+    #   The unique identifier for the user account to update.
+    #
+    # @option params [String] :type
+    #   The option to indicate the type of user.
+    #
+    #   * `SUPER_USER`– A user with permission to all the functionality and
+    #     data in FinSpace.
+    #
+    #   * `APP_USER` – A user with specific permissions in FinSpace. The users
+    #     are assigned permissions by adding them to a permission group.
+    #
+    # @option params [String] :first_name
+    #   The first name of the user.
+    #
+    # @option params [String] :last_name
+    #   The last name of the user.
+    #
+    # @option params [String] :api_access
+    #   The option to indicate whether the user can use the
+    #   `GetProgrammaticAccessCredentials` API to obtain credentials that can
+    #   then be used to access other FinSpace Data API operations.
+    #
+    #   * `ENABLED` – The user has permissions to use the APIs.
+    #
+    #   * `DISABLED` – The user does not have permissions to use any APIs.
+    #
+    # @option params [String] :api_access_principal_arn
+    #   The ARN identifier of an AWS user or role that is allowed to call the
+    #   `GetProgrammaticAccessCredentials` API to obtain a credentials token
+    #   for a specific FinSpace user. This must be an IAM role within your
+    #   FinSpace account.
+    #
+    # @option params [String] :client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::UpdateUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateUserResponse#user_id #user_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_user({
+    #     user_id: "UserId", # required
+    #     type: "SUPER_USER", # accepts SUPER_USER, APP_USER
+    #     first_name: "FirstName",
+    #     last_name: "LastName",
+    #     api_access: "ENABLED", # accepts ENABLED, DISABLED
+    #     api_access_principal_arn: "RoleArn",
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.user_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/UpdateUser AWS API Documentation
+    #
+    # @overload update_user(params = {})
+    # @param [Hash] params ({})
+    def update_user(params = {}, options = {})
+      req = build_request(:update_user, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1249,7 +2080,7 @@ module Aws::FinSpaceData
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-finspacedata'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

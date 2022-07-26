@@ -7,7 +7,7 @@
     "AddThingToThingGroup": "<p>Adds a thing to a thing group.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">AddThingToThingGroup</a> action.</p>",
     "AssociateTargetsWithJob": "<p>Associates a group with a continuous job. The following criteria must be met: </p> <ul> <li> <p>The job must have been created with the <code>targetSelection</code> field set to \"CONTINUOUS\".</p> </li> <li> <p>The job status must currently be \"IN_PROGRESS\".</p> </li> <li> <p>The total number of targets associated with a job must not exceed 100.</p> </li> </ul> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">AssociateTargetsWithJob</a> action.</p>",
     "AttachPolicy": "<p>Attaches the specified policy to the specified principal (certificate or other credential).</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">AttachPolicy</a> action.</p>",
-    "AttachPrincipalPolicy": "<p>Attaches the specified policy to the specified principal (certificate or other credential).</p> <p> <b>Note:</b> This action is deprecated. Please use <a>AttachPolicy</a> instead.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">AttachPrincipalPolicy</a> action.</p>",
+    "AttachPrincipalPolicy": "<p>Attaches the specified policy to the specified principal (certificate or other credential).</p> <p> <b>Note:</b> This action is deprecated and works as expected for backward compatibility, but we won't add enhancements. Use <a>AttachPolicy</a> instead.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">AttachPrincipalPolicy</a> action.</p>",
     "AttachSecurityProfile": "<p>Associates a Device Defender security profile with a thing group or this account. Each thing group or account can have up to five security profiles associated with it.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">AttachSecurityProfile</a> action.</p>",
     "AttachThingPrincipal": "<p>Attaches the specified principal to the specified thing. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">AttachThingPrincipal</a> action.</p>",
     "CancelAuditMitigationActionsTask": "<p>Cancels a mitigation action task that is in progress. If the task is not in progress, an InvalidRequestException occurs.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CancelAuditMitigationActionsTask</a> action.</p>",
@@ -157,6 +157,7 @@
     "ListJobTemplates": "<p>Returns a list of job templates.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListJobTemplates</a> action.</p>",
     "ListJobs": "<p>Lists jobs.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListJobs</a> action.</p>",
     "ListManagedJobTemplates": "<p>Returns a list of managed job templates.</p>",
+    "ListMetricValues": "<p>Lists the values reported for an IoT Device Defender metric (device-side metric, cloud-side metric, or custom metric) by the given thing during the specified time period.</p>",
     "ListMitigationActions": "<p>Gets a list of all mitigation actions that match the specified filter criteria.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListMitigationActions</a> action.</p>",
     "ListOTAUpdates": "<p>Lists OTA updates.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListOTAUpdates</a> action.</p>",
     "ListOutgoingCertificates": "<p>Lists certificates that are being transferred but not yet accepted.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListOutgoingCertificates</a> action.</p>",
@@ -189,8 +190,8 @@
     "ListV2LoggingLevels": "<p>Lists logging levels.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListV2LoggingLevels</a> action.</p>",
     "ListViolationEvents": "<p>Lists the Device Defender security profile violations discovered during the given time period. You can use filters to limit the results to those alerts issued for a particular security profile, behavior, or thing (device).</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListViolationEvents</a> action.</p>",
     "PutVerificationStateOnViolation": "<p>Set a verification state and provide a description of that verification state on a violation (detect alarm).</p>",
-    "RegisterCACertificate": "<p>Registers a CA certificate with IoT. This CA certificate can then be used to sign device certificates, which can be then registered with IoT. You can register up to 10 CA certificates per Amazon Web Services account that have the same subject field. This enables you to have up to 10 certificate authorities sign your device certificates. If you have more than one CA certificate registered, make sure you pass the CA certificate when you register your device certificates with the <a>RegisterCertificate</a> action.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">RegisterCACertificate</a> action.</p>",
-    "RegisterCertificate": "<p>Registers a device certificate with IoT. If you have more than one CA certificate that has the same subject field, you must specify the CA certificate that was used to sign the device certificate being registered.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">RegisterCertificate</a> action.</p>",
+    "RegisterCACertificate": "<p>Registers a CA certificate with Amazon Web Services IoT Core. There is no limit to the number of CA certificates you can register in your Amazon Web Services account. You can register up to 10 CA certificates with the same <code>CA subject field</code> per Amazon Web Services account.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">RegisterCACertificate</a> action.</p>",
+    "RegisterCertificate": "<p>Registers a device certificate with IoT in the same <a href=\"https://docs.aws.amazon.com/iot/latest/apireference/API_CertificateDescription.html#iot-Type-CertificateDescription-certificateMode\">certificate mode</a> as the signing CA. If you have more than one CA certificate that has the same subject field, you must specify the CA certificate that was used to sign the device certificate being registered.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">RegisterCertificate</a> action.</p>",
     "RegisterCertificateWithoutCA": "<p>Register a certificate that does not have a certificate authority (CA). For supported certificates, consult <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/x509-client-certs.html#x509-cert-algorithms\"> Certificate signing algorithms supported by IoT</a>. </p>",
     "RegisterThing": "<p>Provisions a thing in the device registry. RegisterThing calls other IoT control plane APIs. These calls might exceed your account level <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_iot\"> IoT Throttling Limits</a> and cause throttle errors. Please contact <a href=\"https://console.aws.amazon.com/support/home\">Amazon Web Services Customer Support</a> to raise your throttling limits if necessary.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">RegisterThing</a> action.</p>",
     "RejectCertificateTransfer": "<p>Rejects a pending certificate transfer. After IoT rejects a certificate transfer, the certificate status changes from <b>PENDING_TRANSFER</b> to <b>INACTIVE</b>.</p> <p>To check for pending certificate transfers, call <a>ListCertificates</a> to enumerate your certificates.</p> <p>This operation can only be called by the transfer destination. After it is called, the certificate will be returned to the source's account in the INACTIVE state.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">RejectCertificateTransfer</a> action.</p>",
@@ -1203,6 +1204,7 @@
       "refs": {
         "AdditionalMetricsToRetainList$member": null,
         "Behavior$metric": "<p>What is measured by the behavior.</p>",
+        "ListMetricValuesRequest$metricName": "<p>The name of the security profile metric for which values are returned.</p>",
         "MetricToRetain$metric": "<p>What is measured by the behavior.</p>"
       }
     },
@@ -1307,6 +1309,13 @@
       "refs": {
         "AuthorizerDescription$signingDisabled": "<p>Specifies whether IoT validates the token signature in an authorization request.</p>",
         "CreateAuthorizerRequest$signingDisabled": "<p>Specifies whether IoT validates the token signature in an authorization request.</p>"
+      }
+    },
+    "BooleanWrapperObject": {
+      "base": null,
+      "refs": {
+        "Job$isConcurrent": "<p>Indicates whether a job is concurrent. Will be true when a job is rolling out new job executions or canceling previously created executions, otherwise false.</p>",
+        "JobSummary$isConcurrent": "<p>Indicates whether a job is concurrent. Will be true when a job is rolling out new job executions or canceling previously created executions, otherwise false.</p>"
       }
     },
     "Bucket": {
@@ -1512,8 +1521,10 @@
     "CertificateMode": {
       "base": null,
       "refs": {
-        "Certificate$certificateMode": "<p>The mode of the certificate.</p>",
-        "CertificateDescription$certificateMode": "<p>The mode of the certificate.</p>"
+        "CACertificateDescription$certificateMode": "<p>The mode of the CA. </p> <p>All the device certificates that are registered using this CA will be registered in the same mode as the CA. For more information about certificate mode for device certificates, see <a href=\"https://docs.aws.amazon.com/iot/latest/apireference/API_CertificateDescription.html#iot-Type-CertificateDescription-certificateMode\">certificate mode</a>.</p>",
+        "Certificate$certificateMode": "<p>The mode of the certificate.</p> <p> <code>DEFAULT</code>: A certificate in <code>DEFAULT</code> mode is either generated by Amazon Web Services IoT Core or registered with an issuer certificate authority (CA) in <code>DEFAULT</code> mode. Devices with certificates in <code>DEFAULT</code> mode aren't required to send the Server Name Indication (SNI) extension when connecting to Amazon Web Services IoT Core. However, to use features such as custom domains and VPC endpoints, we recommend that you use the SNI extension when connecting to Amazon Web Services IoT Core.</p> <p> <code>SNI_ONLY</code>: A certificate in <code>SNI_ONLY</code> mode is registered without an issuer CA. Devices with certificates in <code>SNI_ONLY</code> mode must send the SNI extension when connecting to Amazon Web Services IoT Core. </p>",
+        "CertificateDescription$certificateMode": "<p>The mode of the certificate.</p> <p> <code>DEFAULT</code>: A certificate in <code>DEFAULT</code> mode is either generated by Amazon Web Services IoT Core or registered with an issuer certificate authority (CA) in <code>DEFAULT</code> mode. Devices with certificates in <code>DEFAULT</code> mode aren't required to send the Server Name Indication (SNI) extension when connecting to Amazon Web Services IoT Core. However, to use features such as custom domains and VPC endpoints, we recommend that you use the SNI extension when connecting to Amazon Web Services IoT Core.</p> <p> <code>SNI_ONLY</code>: A certificate in <code>SNI_ONLY</code> mode is registered without an issuer CA. Devices with certificates in <code>SNI_ONLY</code> mode must send the SNI extension when connecting to Amazon Web Services IoT Core. </p> <p>For more information about the value for SNI extension, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/transport-security.html\">Transport security in IoT</a>.</p>",
+        "RegisterCACertificateRequest$certificateMode": "<p>Describes the certificate mode in which the Certificate Authority (CA) will be registered. If the <code>verificationCertificate</code> field is not provided, set <code>certificateMode</code> to be <code>SNI_ONLY</code>. If the <code>verificationCertificate</code> field is provided, set <code>certificateMode</code> to be <code>DEFAULT</code>. When <code>certificateMode</code> is not provided, it defaults to <code>DEFAULT</code>. All the device certificates that are registered using this CA will be registered in the same certificate mode as the CA. For more information about certificate mode for device certificates, see <a href=\"https://docs.aws.amazon.com/iot/latest/apireference/API_CertificateDescription.html#iot-Type-CertificateDescription-certificateMode\"> certificate mode</a>. </p>"
       }
     },
     "CertificateName": {
@@ -1537,7 +1548,7 @@
         "CreateKeysAndCertificateResponse$certificatePem": "<p>The certificate data, in PEM format.</p>",
         "CreateProvisioningClaimResponse$certificatePem": "<p>The provisioning claim certificate.</p>",
         "RegisterCACertificateRequest$caCertificate": "<p>The CA certificate.</p>",
-        "RegisterCACertificateRequest$verificationCertificate": "<p>The private key verification certificate.</p>",
+        "RegisterCACertificateRequest$verificationCertificate": "<p>The private key verification certificate. If <code>certificateMode</code> is <code>SNI_ONLY</code>, the <code>verificationCertificate</code> field must be empty. If <code>certificateMode</code> is <code>DEFAULT</code> or not provided, the <code>verificationCertificate</code> field must not be empty. </p>",
         "RegisterCertificateRequest$certificatePem": "<p>The certificate data, in PEM format.</p>",
         "RegisterCertificateRequest$caCertificatePem": "<p>The CA certificate used to sign the device certificate being registered.</p>",
         "RegisterCertificateWithoutCARequest$certificatePem": "<p>The certificate data, in PEM format.</p>",
@@ -1560,7 +1571,7 @@
       "refs": {
         "Certificate$status": "<p>The status of the certificate.</p> <p>The status value REGISTER_INACTIVE is deprecated and should not be used.</p>",
         "CertificateDescription$status": "<p>The status of the certificate.</p>",
-        "RegisterCertificateRequest$status": "<p>The status of the register certificate request.</p>",
+        "RegisterCertificateRequest$status": "<p>The status of the register certificate request. Valid values that you can use include <code>ACTIVE</code>, <code>INACTIVE</code>, and <code>REVOKED</code>.</p>",
         "RegisterCertificateWithoutCARequest$status": "<p>The status of the register certificate request.</p>",
         "UpdateCertificateRequest$newStatus": "<p>The new status.</p> <p> <b>Note:</b> Setting the status to PENDING_TRANSFER or PENDING_ACTIVATION will result in an exception being thrown. PENDING_TRANSFER and PENDING_ACTIVATION are statuses used internally by IoT. They are not intended for developer use.</p> <p> <b>Note:</b> The status value REGISTER_INACTIVE is deprecated and should not be used.</p>"
       }
@@ -2078,9 +2089,9 @@
     "CredentialDurationSeconds": {
       "base": null,
       "refs": {
-        "CreateRoleAliasRequest$credentialDurationSeconds": "<p>How long (in seconds) the credentials will be valid. The default value is 3,600 seconds.</p>",
+        "CreateRoleAliasRequest$credentialDurationSeconds": "<p>How long (in seconds) the credentials will be valid. The default value is 3,600 seconds.</p> <p>This value must be less than or equal to the maximum session duration of the IAM role that the role alias references.</p>",
         "RoleAliasDescription$credentialDurationSeconds": "<p>The number of seconds for which the credential is valid.</p>",
-        "UpdateRoleAliasRequest$credentialDurationSeconds": "<p>The number of seconds the credential will be valid.</p>"
+        "UpdateRoleAliasRequest$credentialDurationSeconds": "<p>The number of seconds the credential will be valid.</p> <p>This value must be less than or equal to the maximum session duration of the IAM role that the role alias references.</p>"
       }
     },
     "CustomCodeSigning": {
@@ -2092,7 +2103,7 @@
     "CustomMetricArn": {
       "base": null,
       "refs": {
-        "CreateCustomMetricResponse$metricArn": "<p> The Amazon Resource Number (ARN) of the custom metric, e.g. <code>arn:<i>aws-partition</i>:iot:<i>region</i>:<i>accountId</i>:custommetric/<i>metricName</i> </code> </p>",
+        "CreateCustomMetricResponse$metricArn": "<p> The Amazon Resource Number (ARN) of the custom metric. For example, <code>arn:<i>aws-partition</i>:iot:<i>region</i>:<i>accountId</i>:custommetric/<i>metricName</i> </code> </p>",
         "DescribeCustomMetricResponse$metricArn": "<p> The Amazon Resource Number (ARN) of the custom metric. </p>",
         "UpdateCustomMetricResponse$metricArn": "<p> The Amazon Resource Number (ARN) of the custom metric. </p>"
       }
@@ -2100,7 +2111,7 @@
     "CustomMetricDisplayName": {
       "base": null,
       "refs": {
-        "CreateCustomMetricRequest$displayName": "<p> Field represents a friendly name in the console for the custom metric; it doesn't have to be unique. Don't use this name as the metric identifier in the device metric report. Can be updated once defined.</p>",
+        "CreateCustomMetricRequest$displayName": "<p> The friendly name in the console for the custom metric. This name doesn't have to be unique. Don't use this name as the metric identifier in the device metric report. You can update the friendly name after you define it.</p>",
         "DescribeCustomMetricResponse$displayName": "<p> Field represents a friendly name in the console for the custom metric; doesn't have to be unique. Don't use this name as the metric identifier in the device metric report. Can be updated. </p>",
         "UpdateCustomMetricRequest$displayName": "<p> Field represents a friendly name in the console for the custom metric, it doesn't have to be unique. Don't use this name as the metric identifier in the device metric report. Can be updated. </p>",
         "UpdateCustomMetricResponse$displayName": "<p> A friendly name in the console for the custom metric </p>"
@@ -2109,9 +2120,9 @@
     "CustomMetricType": {
       "base": null,
       "refs": {
-        "CreateCustomMetricRequest$metricType": "<p> The type of the custom metric. Types include <code>string-list</code>, <code>ip-address-list</code>, <code>number-list</code>, and <code>number</code>. </p>",
-        "DescribeCustomMetricResponse$metricType": "<p> The type of the custom metric. Types include <code>string-list</code>, <code>ip-address-list</code>, <code>number-list</code>, and <code>number</code>. </p>",
-        "UpdateCustomMetricResponse$metricType": "<p> The type of the custom metric. Types include <code>string-list</code>, <code>ip-address-list</code>, <code>number-list</code>, and <code>number</code>. </p>"
+        "CreateCustomMetricRequest$metricType": "<p> The type of the custom metric. </p> <important> <p>The type <code>number</code> only takes a single metric value as an input, but when you submit the metrics value in the DeviceMetrics report, you must pass it as an array with a single value.</p> </important>",
+        "DescribeCustomMetricResponse$metricType": "<p> The type of the custom metric. </p> <important> <p>The type <code>number</code> only takes a single metric value as an input, but while submitting the metrics value in the DeviceMetrics report, it must be passed as an array with a single value.</p> </important>",
+        "UpdateCustomMetricResponse$metricType": "<p> The type of the custom metric. </p> <important> <p>The type <code>number</code> only takes a single metric value as an input, but while submitting the metrics value in the DeviceMetrics report, it must be passed as an array with a single value.</p> </important>"
       }
     },
     "CustomerVersion": {
@@ -3000,6 +3011,7 @@
         "DetectMitigationActionExecution$thingName": "<p> The name of the thing. </p>",
         "ListActiveViolationsRequest$thingName": "<p>The name of the thing whose active violations are listed.</p>",
         "ListDetectMitigationActionsExecutionsRequest$thingName": "<p> The name of the thing whose mitigation actions are listed. </p>",
+        "ListMetricValuesRequest$thingName": "<p>The name of the thing for which security profile metric values are returned.</p>",
         "ListViolationEventsRequest$thingName": "<p>A filter to limit results to those alerts caused by the specified thing.</p>",
         "ViolationEvent$thingName": "<p>The name of the thing responsible for the violation event.</p>"
       }
@@ -3021,6 +3033,7 @@
         "DescribeDimensionRequest$name": "<p>The unique identifier for the dimension.</p>",
         "DescribeDimensionResponse$name": "<p>The unique identifier for the dimension.</p>",
         "DimensionNames$member": null,
+        "ListMetricValuesRequest$dimensionName": "<p>The dimension name.</p>",
         "ListSecurityProfilesRequest$dimensionName": "<p>A filter to limit results to the security profiles that use the defined dimension. Cannot be used with <code>metricName</code> </p>",
         "MetricDimension$dimensionName": "<p>A unique identifier for the dimension.</p>",
         "UpdateDimensionRequest$name": "<p>A unique identifier for the dimension. Choose something that describes the type and value to make it easy to remember what it does.</p>",
@@ -3059,6 +3072,7 @@
     "DimensionValueOperator": {
       "base": null,
       "refs": {
+        "ListMetricValuesRequest$dimensionValueOperator": "<p>The dimension value operator.</p>",
         "MetricDimension$operator": "<p>Defines how the <code>dimensionValues</code> of a dimension are interpreted. For example, for dimension type TOPIC_FILTER, the <code>IN</code> operator, a message will be counted only if its topic matches one of the topic filters. With <code>NOT_IN</code> operator, a message will be counted only if it doesn't match any of the topic filters. The operator is optional: if it's not provided (is <code>null</code>), it will be interpreted as <code>IN</code>.</p>"
       }
     },
@@ -3081,7 +3095,7 @@
       }
     },
     "DocumentParameter": {
-      "base": "<p>A map of key-value pairs containing the patterns that need to be replaced in a managed template job document schema. You can use the description of each key as a guidance to specify the inputs during runtime when creating a job.</p>",
+      "base": "<p>A map of key-value pairs containing the patterns that need to be replaced in a managed template job document schema. You can use the description of each key as a guidance to specify the inputs during runtime when creating a job.</p> <note> <p> <code>documentParameters</code> can only be used when creating jobs from Amazon Web Services managed templates. This parameter can't be used with custom job templates or to create jobs from them.</p> </note>",
       "refs": {
         "DocumentParameters$member": null
       }
@@ -3089,7 +3103,7 @@
     "DocumentParameters": {
       "base": null,
       "refs": {
-        "DescribeManagedJobTemplateResponse$documentParameters": "<p>A map of key-value pairs that you can use as guidance to specify the inputs for creating a job from a managed template.</p>"
+        "DescribeManagedJobTemplateResponse$documentParameters": "<p>A map of key-value pairs that you can use as guidance to specify the inputs for creating a job from a managed template.</p> <note> <p> <code>documentParameters</code> can only be used when creating jobs from Amazon Web Services managed templates. This parameter can't be used with custom job templates or to create jobs from them.</p> </note>"
       }
     },
     "DomainConfigurationArn": {
@@ -3755,7 +3769,7 @@
     "HashAlgorithm": {
       "base": null,
       "refs": {
-        "CustomCodeSigning$hashAlgorithm": "<p>The hash algorithm used to code sign the file.</p>"
+        "CustomCodeSigning$hashAlgorithm": "<p>The hash algorithm used to code sign the file. You can use a string as the algorithm name if the target over-the-air (OTA) update devices are able to verify the signature that was generated using the same signature algorithm. For example, FreeRTOS uses <code>SHA256</code> or <code>SHA1</code>, so you can pass either of them based on which was used for generating the signature.</p>"
       }
     },
     "HashKeyField": {
@@ -3925,6 +3939,12 @@
       "base": null,
       "refs": {
         "DescribeIndexResponse$indexStatus": "<p>The index status.</p>"
+      }
+    },
+    "IndexingFilter": {
+      "base": "<p>Provides additional filters for specific data sources. Named shadow is the only data source that currently supports and requires a filter. To add named shadows to your fleet indexing configuration, set <code>namedShadowIndexingMode</code> to be <code>ON</code> and specify your shadow names in <code>filter</code>.</p>",
+      "refs": {
+        "ThingIndexingConfiguration$filter": "<p>Provides additional filters for specific data sources. Named shadow is the only data source that currently supports and requires a filter. To add named shadows to your fleet indexing configuration, set <code>namedShadowIndexingMode</code> to be <code>ON</code> and specify your shadow names in <code>filter</code>.</p>"
       }
     },
     "InlineDocument": {
@@ -4573,6 +4593,16 @@
       "refs": {
       }
     },
+    "ListMetricValuesRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "ListMetricValuesResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
     "ListMitigationActionsRequest": {
       "base": null,
       "refs": {
@@ -5049,6 +5079,7 @@
         "ListDetectMitigationActionsTasksRequest$maxResults": "<p>The maximum number of results to return at one time. The default is 25.</p>",
         "ListDimensionsRequest$maxResults": "<p>The maximum number of results to retrieve at one time.</p>",
         "ListFleetMetricsRequest$maxResults": "<p>The maximum number of results to return in this operation.</p>",
+        "ListMetricValuesRequest$maxResults": "<p>The maximum number of results to return at one time.</p>",
         "ListMitigationActionsRequest$maxResults": "<p>The maximum number of results to return at one time. The default is 25.</p>",
         "ListOTAUpdatesRequest$maxResults": "<p>The maximum number of results to return at one time.</p>",
         "ListProvisioningTemplateVersionsRequest$maxResults": "<p>The maximum number of results to return at one time.</p>",
@@ -5095,6 +5126,18 @@
         "IotEventsAction$messageId": "<p>The ID of the message. The default <code>messageId</code> is a new UUID value.</p> <p>When <code>batchMode</code> is <code>true</code>, you can't specify a <code>messageId</code>--a new UUID value will be assigned.</p> <p>Assign a value to this property to ensure that only one input (message) with a given <code>messageId</code> will be processed by an IoT Events detector.</p>"
       }
     },
+    "MetricDatum": {
+      "base": "<p>A metric.</p>",
+      "refs": {
+        "MetricDatumList$member": null
+      }
+    },
+    "MetricDatumList": {
+      "base": null,
+      "refs": {
+        "ListMetricValuesResponse$metricDatumList": "<p>The data the thing reports for the metric during the specified time period.</p>"
+      }
+    },
     "MetricDimension": {
       "base": "<p>The dimension of a metric.</p>",
       "refs": {
@@ -5105,7 +5148,7 @@
     "MetricName": {
       "base": null,
       "refs": {
-        "CreateCustomMetricRequest$metricName": "<p> The name of the custom metric. This will be used in the metric report submitted from the device/thing. Shouldn't begin with <code>aws:</code>. Cannot be updated once defined.</p>",
+        "CreateCustomMetricRequest$metricName": "<p> The name of the custom metric. This will be used in the metric report submitted from the device/thing. The name can't begin with <code>aws:</code>. You can't change the name after you define it.</p>",
         "CreateCustomMetricResponse$metricName": "<p> The name of the custom metric to be used in the metric report. </p>",
         "DeleteCustomMetricRequest$metricName": "<p> The name of the custom metric. </p>",
         "DescribeCustomMetricRequest$metricName": "<p> The name of the custom metric. </p>",
@@ -5133,6 +5176,7 @@
       "refs": {
         "ActiveViolation$lastViolationValue": "<p>The value of the metric (the measurement) that caused the most recent violation.</p>",
         "BehaviorCriteria$value": "<p>The value to be compared with the <code>metric</code>.</p>",
+        "MetricDatum$value": "<p>The value reported for the metric.</p>",
         "ViolationEvent$metricValue": "<p>The value of the metric (the measurement).</p>"
       }
     },
@@ -5297,6 +5341,12 @@
         "ThingIndexingConfiguration$namedShadowIndexingMode": "<p>Named shadow indexing mode. Valid values are:</p> <ul> <li> <p>ON – Your thing index contains named shadow. To enable thing named shadow indexing, <i>namedShadowIndexingMode</i> must not be set to OFF.</p> </li> <li> <p>OFF - Named shadow indexing is disabled.</p> </li> </ul> <p>For more information about Shadows, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/iot-device-shadows.html\">IoT Device Shadow service.</a> </p>"
       }
     },
+    "NamedShadowNamesFilter": {
+      "base": null,
+      "refs": {
+        "IndexingFilter$namedShadowNames": "<p>The shadow names that you select to index. The default maximum number of shadow names for indexing is 10. To increase the limit, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/iot_device_management.html#fleet-indexing-limits\">Amazon Web Services IoT Device Management Quotas</a> in the <i>Amazon Web Services General Reference</i>. </p>"
+      }
+    },
     "NamespaceId": {
       "base": null,
       "refs": {
@@ -5351,6 +5401,8 @@
         "ListJobsResponse$nextToken": "<p>The token for the next set of results, or <b>null</b> if there are no additional results.</p>",
         "ListManagedJobTemplatesRequest$nextToken": "<p>The token to retrieve the next set of results.</p>",
         "ListManagedJobTemplatesResponse$nextToken": "<p>The token to retrieve the next set of results.</p>",
+        "ListMetricValuesRequest$nextToken": "<p>The token for the next set of results.</p>",
+        "ListMetricValuesResponse$nextToken": "<p>A token that can be used to retrieve the next set of results, or <code>null</code> if there are no additional results.</p>",
         "ListMitigationActionsRequest$nextToken": "<p>The token for the next set of results.</p>",
         "ListMitigationActionsResponse$nextToken": "<p>The token for the next set of results.</p>",
         "ListOTAUpdatesRequest$nextToken": "<p>A token used to retrieve the next set of results.</p>",
@@ -5429,6 +5481,7 @@
     "NullableBoolean": {
       "base": null,
       "refs": {
+        "AddThingsToThingGroupParams$overrideDynamicGroups": "<p>Specifies if this mitigation action can move the things that triggered the mitigation action even if they are part of one or more dynamic thing groups.</p>",
         "StartDetectMitigationActionsTaskRequest$includeOnlyActiveViolations": "<p> Specifies to list only active violations. </p>",
         "StartDetectMitigationActionsTaskRequest$includeSuppressedAlerts": "<p> Specifies to include suppressed alerts. </p>"
       }
@@ -5581,7 +5634,6 @@
       "base": null,
       "refs": {
         "AddThingToThingGroupRequest$overrideDynamicGroups": "<p>Override dynamic thing groups with static thing groups when 10-group limit is reached. If a thing belongs to 10 thing groups, and one or more of those groups are dynamic thing groups, adding a thing to a static group removes the thing from the last dynamic group.</p>",
-        "AddThingsToThingGroupParams$overrideDynamicGroups": "<p>Specifies if this mitigation action can move the things that triggered the mitigation action even if they are part of one or more dynamic thing groups.</p>",
         "UpdateThingGroupsForThingRequest$overrideDynamicGroups": "<p>Override dynamic thing groups with static thing groups when 10-group limit is reached. If a thing belongs to 10 thing groups, and one or more of those groups are dynamic thing groups, adding a thing to a static group removes the thing from the last dynamic group.</p>"
       }
     },
@@ -5618,8 +5670,8 @@
     "ParameterMap": {
       "base": null,
       "refs": {
-        "CreateJobRequest$documentParameters": "<p>Parameters of a managed template that you can specify to create the job document.</p>",
-        "Job$documentParameters": "<p>A key-value map that pairs the patterns that need to be replaced in a managed template job document schema. You can use the description of each key as a guidance to specify the inputs during runtime when creating a job.</p>"
+        "CreateJobRequest$documentParameters": "<p>Parameters of an Amazon Web Services managed template that you can specify to create the job document.</p> <note> <p> <code>documentParameters</code> can only be used when creating jobs from Amazon Web Services managed templates. This parameter can't be used with custom job templates or to create jobs from them.</p> </note>",
+        "Job$documentParameters": "<p>A key-value map that pairs the patterns that need to be replaced in a managed template job document schema. You can use the description of each key as a guidance to specify the inputs during runtime when creating a job.</p> <note> <p> <code>documentParameters</code> can only be used when creating jobs from Amazon Web Services managed templates. This parameter can't be used with custom job templates or to create jobs from them.</p> </note>"
       }
     },
     "ParameterValue": {
@@ -6031,7 +6083,7 @@
         "GetCardinalityRequest$queryString": "<p>The search query string.</p>",
         "GetPercentilesRequest$queryString": "<p>The search query string.</p>",
         "GetStatisticsRequest$queryString": "<p>The query used to search. You can specify \"*\" for the query string to get the count of all indexed things in your Amazon Web Services account.</p>",
-        "SearchIndexRequest$queryString": "<p>The search query string.</p>",
+        "SearchIndexRequest$queryString": "<p>The search query string. For more information about the search query syntax, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/query-syntax.html\">Query syntax</a>.</p>",
         "UpdateDynamicThingGroupRequest$queryString": "<p>The dynamic thing group search query string to update.</p>",
         "UpdateFleetMetricRequest$queryString": "<p>The search query string.</p>"
       }
@@ -6469,7 +6521,7 @@
         "DescribeThingRegistrationTaskResponse$roleArn": "<p>The role ARN that grants access to the input file bucket.</p>",
         "EnableIoTLoggingParams$roleArnForLogging": "<p>The Amazon Resource Name (ARN) of the IAM role used for logging.</p>",
         "MitigationAction$roleArn": "<p>The IAM role ARN used to apply this mitigation action.</p>",
-        "PresignedUrlConfig$roleArn": "<p>The ARN of an IAM role that grants grants permission to download files from the S3 bucket where the job data/updates are stored. The role must also grant permission for IoT to download the files.</p>",
+        "PresignedUrlConfig$roleArn": "<p>The ARN of an IAM role that grants grants permission to download files from the S3 bucket where the job data/updates are stored. The role must also grant permission for IoT to download the files.</p> <important> <p>For information about addressing the confused deputy problem, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/cross-service-confused-deputy-prevention.html\">cross-service confused deputy prevention</a> in the <i>Amazon Web Services IoT Core developer guide</i>.</p> </important>",
         "RegistrationConfig$roleArn": "<p>The ARN of the role.</p>",
         "ResourceIdentifier$iamRoleArn": "<p>The ARN of the IAM role that has overly permissive actions.</p>",
         "RoleAliasDescription$roleArn": "<p>The role ARN.</p>",
@@ -6803,13 +6855,13 @@
         "AcceptCertificateTransferRequest$setAsActive": "<p>Specifies whether the certificate is active.</p>",
         "CreateCertificateFromCsrRequest$setAsActive": "<p>Specifies whether the certificate is active.</p>",
         "CreateKeysAndCertificateRequest$setAsActive": "<p>Specifies whether the certificate is active.</p>",
-        "RegisterCACertificateRequest$setAsActive": "<p>A boolean value that specifies if the CA certificate is set to active.</p>"
+        "RegisterCACertificateRequest$setAsActive": "<p>A boolean value that specifies if the CA certificate is set to active.</p> <p>Valid values: <code>ACTIVE | INACTIVE</code> </p>"
       }
     },
     "SetAsActiveFlag": {
       "base": null,
       "refs": {
-        "RegisterCertificateRequest$setAsActive": "<p>A boolean value that specifies if the certificate is set to active.</p>"
+        "RegisterCertificateRequest$setAsActive": "<p>A boolean value that specifies if the certificate is set to active.</p> <p>Valid values: <code>ACTIVE | INACTIVE</code> </p>"
       }
     },
     "SetAsDefault": {
@@ -6849,6 +6901,12 @@
       "refs": {
       }
     },
+    "ShadowName": {
+      "base": null,
+      "refs": {
+        "NamedShadowNamesFilter$member": null
+      }
+    },
     "SigV4Authorization": {
       "base": "<p>For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 signing process</a>.</p>",
       "refs": {
@@ -6864,7 +6922,7 @@
     "SignatureAlgorithm": {
       "base": null,
       "refs": {
-        "CustomCodeSigning$signatureAlgorithm": "<p>The signature algorithm used to code sign the file.</p>"
+        "CustomCodeSigning$signatureAlgorithm": "<p>The signature algorithm used to code sign the file. You can use a string as the algorithm name if the target over-the-air (OTA) update devices are able to verify the signature that was generated using the same signature algorithm. For example, FreeRTOS uses <code>ECDSA</code> or <code>RSA</code>, so you can pass either of them based on which was used for generating the signature.</p>"
       }
     },
     "SigningJobId": {
@@ -7305,11 +7363,11 @@
     "TargetSelection": {
       "base": null,
       "refs": {
-        "CreateJobRequest$targetSelection": "<p>Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing when a change is detected in a target. For example, a job will run on a thing when the thing is added to a target group, even after the job was completed by all things originally in the group.</p>",
+        "CreateJobRequest$targetSelection": "<p>Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing when a change is detected in a target. For example, a job will run on a thing when the thing is added to a target group, even after the job was completed by all things originally in the group.</p> <note> <p>We recommend that you use continuous jobs instead of snapshot jobs for dynamic thing group targets. By using continuous jobs, devices that join the group receive the job execution even after the job has been created.</p> </note>",
         "CreateOTAUpdateRequest$targetSelection": "<p>Specifies whether the update will continue to run (CONTINUOUS), or will be complete after all the things specified as targets have completed the update (SNAPSHOT). If continuous, the update may also be run on a thing when a change is detected in a target. For example, an update will run on a thing when the thing is added to a target group, even after the update was completed by all things originally in the group. Valid values: CONTINUOUS | SNAPSHOT.</p>",
-        "Job$targetSelection": "<p>Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing when a change is detected in a target. For example, a job will run on a device when the thing representing the device is added to a target group, even after the job was completed by all things originally in the group. </p>",
-        "JobSummary$targetSelection": "<p>Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing when a change is detected in a target. For example, a job will run on a thing when the thing is added to a target group, even after the job was completed by all things originally in the group.</p>",
-        "ListJobsRequest$targetSelection": "<p>Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing when a change is detected in a target. For example, a job will run on a thing when the thing is added to a target group, even after the job was completed by all things originally in the group. </p>",
+        "Job$targetSelection": "<p>Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing when a change is detected in a target. For example, a job will run on a device when the thing representing the device is added to a target group, even after the job was completed by all things originally in the group. </p> <note> <p>We recommend that you use continuous jobs instead of snapshot jobs for dynamic thing group targets. By using continuous jobs, devices that join the group receive the job execution even after the job has been created.</p> </note>",
+        "JobSummary$targetSelection": "<p>Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing when a change is detected in a target. For example, a job will run on a thing when the thing is added to a target group, even after the job was completed by all things originally in the group.</p> <note> <p>We recommend that you use continuous jobs instead of snapshot jobs for dynamic thing group targets. By using continuous jobs, devices that join the group receive the job execution even after the job has been created.</p> </note>",
+        "ListJobsRequest$targetSelection": "<p>Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing when a change is detected in a target. For example, a job will run on a thing when the thing is added to a target group, even after the job was completed by all things originally in the group. </p> <note> <p>We recommend that you use continuous jobs instead of snapshot jobs for dynamic thing group targets. By using continuous jobs, devices that join the group receive the job execution even after the job has been created.</p> </note>",
         "OTAUpdateInfo$targetSelection": "<p>Specifies whether the OTA update will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the OTA update (SNAPSHOT). If continuous, the OTA update may also be run on a thing when a change is detected in a target. For example, an OTA update will run on a thing when the thing is added to a target group, even after the OTA update was completed by all things originally in the group. </p>"
       }
     },
@@ -7809,8 +7867,11 @@
         "ListDetectMitigationActionsExecutionsRequest$endTime": "<p> The end of the time period for which ML Detect mitigation actions executions are returned. </p>",
         "ListDetectMitigationActionsTasksRequest$startTime": "<p> A filter to limit results to those found after the specified time. You must specify either the startTime and endTime or the taskId, but not both. </p>",
         "ListDetectMitigationActionsTasksRequest$endTime": "<p> The end of the time period for which ML Detect mitigation actions tasks are returned. </p>",
+        "ListMetricValuesRequest$startTime": "<p>The start of the time period for which metric values are returned.</p>",
+        "ListMetricValuesRequest$endTime": "<p>The end of the time period for which metric values are returned.</p>",
         "ListViolationEventsRequest$startTime": "<p>The start time for the alerts to be listed.</p>",
         "ListViolationEventsRequest$endTime": "<p>The end time for the alerts to be listed.</p>",
+        "MetricDatum$timestamp": "<p>The time the metric value was reported.</p>",
         "MitigationActionIdentifier$creationDate": "<p>The date when this mitigation action was created.</p>",
         "UpdateAuditSuppressionRequest$expirationDate": "<p> The expiration date (epoch timestamp in seconds) that you want the suppression to adhere to. </p>",
         "UpdateCustomMetricResponse$creationDate": "<p> The creation date of the custom metric in milliseconds since epoch. </p>",

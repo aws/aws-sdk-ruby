@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::ManagedGrafana
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -382,7 +384,7 @@ module Aws::ManagedGrafana
     #   resp.workspace.authentication.saml_configuration_status #=> String, one of "CONFIGURED", "NOT_CONFIGURED"
     #   resp.workspace.created #=> Time
     #   resp.workspace.data_sources #=> Array
-    #   resp.workspace.data_sources[0] #=> String, one of "AMAZON_OPENSEARCH_SERVICE", "CLOUDWATCH", "PROMETHEUS", "XRAY", "TIMESTREAM", "SITEWISE"
+    #   resp.workspace.data_sources[0] #=> String, one of "AMAZON_OPENSEARCH_SERVICE", "CLOUDWATCH", "PROMETHEUS", "XRAY", "TIMESTREAM", "SITEWISE", "ATHENA", "REDSHIFT"
     #   resp.workspace.description #=> String
     #   resp.workspace.endpoint #=> String
     #   resp.workspace.free_trial_consumed #=> Boolean
@@ -401,6 +403,8 @@ module Aws::ManagedGrafana
     #   resp.workspace.permission_type #=> String, one of "CUSTOMER_MANAGED", "SERVICE_MANAGED"
     #   resp.workspace.stack_set_name #=> String
     #   resp.workspace.status #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "UPDATING", "UPGRADING", "DELETION_FAILED", "CREATION_FAILED", "UPDATE_FAILED", "UPGRADE_FAILED", "LICENSE_REMOVAL_FAILED"
+    #   resp.workspace.tags #=> Hash
+    #   resp.workspace.tags["TagKey"] #=> String
     #   resp.workspace.workspace_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/AssociateLicense AWS API Documentation
@@ -455,10 +459,11 @@ module Aws::ManagedGrafana
     #   in other accounts in an organization.
     #
     # @option params [required, String] :permission_type
-    #   If you specify `Service Managed`, Amazon Managed Grafana automatically
-    #   creates the IAM roles and provisions the permissions that the
-    #   workspace needs to use Amazon Web Services data sources and
-    #   notification channels.
+    #   If you specify `SERVICE_MANAGED` on AWS Grafana console, Amazon
+    #   Managed Grafana automatically creates the IAM roles and provisions the
+    #   permissions that the workspace needs to use Amazon Web Services data
+    #   sources and notification channels. In CLI mode, the permissionType
+    #   `SERVICE_MANAGED` will not create the IAM role for you.
     #
     #   If you specify `CUSTOMER_MANAGED`, you will manage those roles and
     #   permissions yourself. If you are creating this workspace in a member
@@ -469,7 +474,7 @@ module Aws::ManagedGrafana
     #
     #   For more information, see [Amazon Managed Grafana permissions and
     #   policies for Amazon Web Services data sources and notification
-    #   channels][1]
+    #   channels][1].
     #
     #
     #
@@ -478,6 +483,9 @@ module Aws::ManagedGrafana
     # @option params [String] :stack_set_name
     #   The name of the CloudFormation stack set to use to generate IAM roles
     #   to be used for this workspace.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The list of tags associated with the workspace.
     #
     # @option params [Array<String>] :workspace_data_sources
     #   Specify the Amazon Web Services data sources that you want to be
@@ -493,6 +501,8 @@ module Aws::ManagedGrafana
     # @option params [String] :workspace_description
     #   A description for the workspace. This is used only to help you
     #   identify this workspace.
+    #
+    #   Pattern: `^[\\p\{L\}\\p\{Z\}\\p\{N\}\\p\{P\}]\{0,2048\}$`
     #
     # @option params [String] :workspace_name
     #   The name for the workspace. It does not have to be unique.
@@ -511,10 +521,8 @@ module Aws::ManagedGrafana
     # @option params [String] :workspace_role_arn
     #   The workspace needs an IAM role that grants permissions to the Amazon
     #   Web Services resources that the workspace will view data from. If you
-    #   already have a role that you want to use, specify it here. If you omit
-    #   this field and you specify some Amazon Web Services resources in
-    #   `workspaceDataSources` or `workspaceNotificationDestinations`, a new
-    #   IAM role with the necessary permissions is automatically created.
+    #   already have a role that you want to use, specify it here. The
+    #   permission type should be set to `CUSTOMER_MANAGED`.
     #
     # @return [Types::CreateWorkspaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -529,7 +537,10 @@ module Aws::ManagedGrafana
     #     organization_role_name: "OrganizationRoleName",
     #     permission_type: "CUSTOMER_MANAGED", # required, accepts CUSTOMER_MANAGED, SERVICE_MANAGED
     #     stack_set_name: "StackSetName",
-    #     workspace_data_sources: ["AMAZON_OPENSEARCH_SERVICE"], # accepts AMAZON_OPENSEARCH_SERVICE, CLOUDWATCH, PROMETHEUS, XRAY, TIMESTREAM, SITEWISE
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     workspace_data_sources: ["AMAZON_OPENSEARCH_SERVICE"], # accepts AMAZON_OPENSEARCH_SERVICE, CLOUDWATCH, PROMETHEUS, XRAY, TIMESTREAM, SITEWISE, ATHENA, REDSHIFT
     #     workspace_description: "Description",
     #     workspace_name: "WorkspaceName",
     #     workspace_notification_destinations: ["SNS"], # accepts SNS
@@ -545,7 +556,7 @@ module Aws::ManagedGrafana
     #   resp.workspace.authentication.saml_configuration_status #=> String, one of "CONFIGURED", "NOT_CONFIGURED"
     #   resp.workspace.created #=> Time
     #   resp.workspace.data_sources #=> Array
-    #   resp.workspace.data_sources[0] #=> String, one of "AMAZON_OPENSEARCH_SERVICE", "CLOUDWATCH", "PROMETHEUS", "XRAY", "TIMESTREAM", "SITEWISE"
+    #   resp.workspace.data_sources[0] #=> String, one of "AMAZON_OPENSEARCH_SERVICE", "CLOUDWATCH", "PROMETHEUS", "XRAY", "TIMESTREAM", "SITEWISE", "ATHENA", "REDSHIFT"
     #   resp.workspace.description #=> String
     #   resp.workspace.endpoint #=> String
     #   resp.workspace.free_trial_consumed #=> Boolean
@@ -564,6 +575,8 @@ module Aws::ManagedGrafana
     #   resp.workspace.permission_type #=> String, one of "CUSTOMER_MANAGED", "SERVICE_MANAGED"
     #   resp.workspace.stack_set_name #=> String
     #   resp.workspace.status #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "UPDATING", "UPGRADING", "DELETION_FAILED", "CREATION_FAILED", "UPDATE_FAILED", "UPGRADE_FAILED", "LICENSE_REMOVAL_FAILED"
+    #   resp.workspace.tags #=> Hash
+    #   resp.workspace.tags["TagKey"] #=> String
     #   resp.workspace.workspace_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/CreateWorkspace AWS API Documentation
@@ -572,6 +585,58 @@ module Aws::ManagedGrafana
     # @param [Hash] params ({})
     def create_workspace(params = {}, options = {})
       req = build_request(:create_workspace, params)
+      req.send_request(options)
+    end
+
+    # Creates an API key for the workspace. This key can be used to
+    # authenticate requests sent to the workspace's HTTP API. See [
+    # https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html](
+    # https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html)
+    # for available APIs and example requests.
+    #
+    # @option params [required, String] :key_name
+    #   Specifies the name of the key to create. Key names must be unique to
+    #   the workspace.
+    #
+    # @option params [required, String] :key_role
+    #   Specifies the permission level of the key.
+    #
+    #   Valid Values: `VIEWER` \| `EDITOR` \| `ADMIN`
+    #
+    # @option params [required, Integer] :seconds_to_live
+    #   Specifies the time in seconds until the key expires. Keys can be valid
+    #   for up to 30 days.
+    #
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace in which to create an API key.
+    #
+    # @return [Types::CreateWorkspaceApiKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateWorkspaceApiKeyResponse#key #key} => String
+    #   * {Types::CreateWorkspaceApiKeyResponse#key_name #key_name} => String
+    #   * {Types::CreateWorkspaceApiKeyResponse#workspace_id #workspace_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_workspace_api_key({
+    #     key_name: "ApiKeyName", # required
+    #     key_role: "String", # required
+    #     seconds_to_live: 1, # required
+    #     workspace_id: "WorkspaceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.key #=> String
+    #   resp.key_name #=> String
+    #   resp.workspace_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/CreateWorkspaceApiKey AWS API Documentation
+    #
+    # @overload create_workspace_api_key(params = {})
+    # @param [Hash] params ({})
+    def create_workspace_api_key(params = {}, options = {})
+      req = build_request(:create_workspace_api_key, params)
       req.send_request(options)
     end
 
@@ -598,7 +663,7 @@ module Aws::ManagedGrafana
     #   resp.workspace.authentication.saml_configuration_status #=> String, one of "CONFIGURED", "NOT_CONFIGURED"
     #   resp.workspace.created #=> Time
     #   resp.workspace.data_sources #=> Array
-    #   resp.workspace.data_sources[0] #=> String, one of "AMAZON_OPENSEARCH_SERVICE", "CLOUDWATCH", "PROMETHEUS", "XRAY", "TIMESTREAM", "SITEWISE"
+    #   resp.workspace.data_sources[0] #=> String, one of "AMAZON_OPENSEARCH_SERVICE", "CLOUDWATCH", "PROMETHEUS", "XRAY", "TIMESTREAM", "SITEWISE", "ATHENA", "REDSHIFT"
     #   resp.workspace.description #=> String
     #   resp.workspace.endpoint #=> String
     #   resp.workspace.free_trial_consumed #=> Boolean
@@ -617,6 +682,8 @@ module Aws::ManagedGrafana
     #   resp.workspace.permission_type #=> String, one of "CUSTOMER_MANAGED", "SERVICE_MANAGED"
     #   resp.workspace.stack_set_name #=> String
     #   resp.workspace.status #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "UPDATING", "UPGRADING", "DELETION_FAILED", "CREATION_FAILED", "UPDATE_FAILED", "UPGRADE_FAILED", "LICENSE_REMOVAL_FAILED"
+    #   resp.workspace.tags #=> Hash
+    #   resp.workspace.tags["TagKey"] #=> String
     #   resp.workspace.workspace_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/DeleteWorkspace AWS API Documentation
@@ -625,6 +692,40 @@ module Aws::ManagedGrafana
     # @param [Hash] params ({})
     def delete_workspace(params = {}, options = {})
       req = build_request(:delete_workspace, params)
+      req.send_request(options)
+    end
+
+    # Deletes an API key for a workspace.
+    #
+    # @option params [required, String] :key_name
+    #   The name of the API key to delete.
+    #
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace to delete.
+    #
+    # @return [Types::DeleteWorkspaceApiKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteWorkspaceApiKeyResponse#key_name #key_name} => String
+    #   * {Types::DeleteWorkspaceApiKeyResponse#workspace_id #workspace_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_workspace_api_key({
+    #     key_name: "ApiKeyName", # required
+    #     workspace_id: "WorkspaceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.key_name #=> String
+    #   resp.workspace_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/DeleteWorkspaceApiKey AWS API Documentation
+    #
+    # @overload delete_workspace_api_key(params = {})
+    # @param [Hash] params ({})
+    def delete_workspace_api_key(params = {}, options = {})
+      req = build_request(:delete_workspace_api_key, params)
       req.send_request(options)
     end
 
@@ -651,7 +752,7 @@ module Aws::ManagedGrafana
     #   resp.workspace.authentication.saml_configuration_status #=> String, one of "CONFIGURED", "NOT_CONFIGURED"
     #   resp.workspace.created #=> Time
     #   resp.workspace.data_sources #=> Array
-    #   resp.workspace.data_sources[0] #=> String, one of "AMAZON_OPENSEARCH_SERVICE", "CLOUDWATCH", "PROMETHEUS", "XRAY", "TIMESTREAM", "SITEWISE"
+    #   resp.workspace.data_sources[0] #=> String, one of "AMAZON_OPENSEARCH_SERVICE", "CLOUDWATCH", "PROMETHEUS", "XRAY", "TIMESTREAM", "SITEWISE", "ATHENA", "REDSHIFT"
     #   resp.workspace.description #=> String
     #   resp.workspace.endpoint #=> String
     #   resp.workspace.free_trial_consumed #=> Boolean
@@ -670,6 +771,8 @@ module Aws::ManagedGrafana
     #   resp.workspace.permission_type #=> String, one of "CUSTOMER_MANAGED", "SERVICE_MANAGED"
     #   resp.workspace.stack_set_name #=> String
     #   resp.workspace.status #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "UPDATING", "UPGRADING", "DELETION_FAILED", "CREATION_FAILED", "UPDATE_FAILED", "UPGRADE_FAILED", "LICENSE_REMOVAL_FAILED"
+    #   resp.workspace.tags #=> Hash
+    #   resp.workspace.tags["TagKey"] #=> String
     #   resp.workspace.workspace_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/DescribeWorkspace AWS API Documentation
@@ -755,7 +858,7 @@ module Aws::ManagedGrafana
     #   resp.workspace.authentication.saml_configuration_status #=> String, one of "CONFIGURED", "NOT_CONFIGURED"
     #   resp.workspace.created #=> Time
     #   resp.workspace.data_sources #=> Array
-    #   resp.workspace.data_sources[0] #=> String, one of "AMAZON_OPENSEARCH_SERVICE", "CLOUDWATCH", "PROMETHEUS", "XRAY", "TIMESTREAM", "SITEWISE"
+    #   resp.workspace.data_sources[0] #=> String, one of "AMAZON_OPENSEARCH_SERVICE", "CLOUDWATCH", "PROMETHEUS", "XRAY", "TIMESTREAM", "SITEWISE", "ATHENA", "REDSHIFT"
     #   resp.workspace.description #=> String
     #   resp.workspace.endpoint #=> String
     #   resp.workspace.free_trial_consumed #=> Boolean
@@ -774,6 +877,8 @@ module Aws::ManagedGrafana
     #   resp.workspace.permission_type #=> String, one of "CUSTOMER_MANAGED", "SERVICE_MANAGED"
     #   resp.workspace.stack_set_name #=> String
     #   resp.workspace.status #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "UPDATING", "UPGRADING", "DELETION_FAILED", "CREATION_FAILED", "UPDATE_FAILED", "UPGRADE_FAILED", "LICENSE_REMOVAL_FAILED"
+    #   resp.workspace.tags #=> Hash
+    #   resp.workspace.tags["TagKey"] #=> String
     #   resp.workspace.workspace_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/DisassociateLicense AWS API Documentation
@@ -837,7 +942,7 @@ module Aws::ManagedGrafana
     #
     #   resp.next_token #=> String
     #   resp.permissions #=> Array
-    #   resp.permissions[0].role #=> String, one of "ADMIN", "EDITOR"
+    #   resp.permissions[0].role #=> String, one of "ADMIN", "EDITOR", "VIEWER"
     #   resp.permissions[0].user.id #=> String
     #   resp.permissions[0].user.type #=> String, one of "SSO_USER", "SSO_GROUP"
     #
@@ -847,6 +952,38 @@ module Aws::ManagedGrafana
     # @param [Hash] params ({})
     def list_permissions(params = {}, options = {})
       req = build_request(:list_permissions, params)
+      req.send_request(options)
+    end
+
+    # The `ListTagsForResource` operation returns the tags that are
+    # associated with the Amazon Managed Service for Grafana resource
+    # specified by the `resourceArn`. Currently, the only resource that can
+    # be tagged is a workspace.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource the list of tags are associated with.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
       req.send_request(options)
     end
 
@@ -896,6 +1033,8 @@ module Aws::ManagedGrafana
     #   resp.workspaces[0].notification_destinations #=> Array
     #   resp.workspaces[0].notification_destinations[0] #=> String, one of "SNS"
     #   resp.workspaces[0].status #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "UPDATING", "UPGRADING", "DELETION_FAILED", "CREATION_FAILED", "UPDATE_FAILED", "UPGRADE_FAILED", "LICENSE_REMOVAL_FAILED"
+    #   resp.workspaces[0].tags #=> Hash
+    #   resp.workspaces[0].tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/ListWorkspaces AWS API Documentation
     #
@@ -903,6 +1042,70 @@ module Aws::ManagedGrafana
     # @param [Hash] params ({})
     def list_workspaces(params = {}, options = {})
       req = build_request(:list_workspaces, params)
+      req.send_request(options)
+    end
+
+    # The `TagResource` operation associates tags with an Amazon Managed
+    # Grafana resource. Currently, the only resource that can be tagged is
+    # workspaces.
+    #
+    # If you specify a new tag key for the resource, this tag is appended to
+    # the list of tags associated with the resource. If you specify a tag
+    # key that is already associated with the resource, the new tag value
+    # that you specify replaces the previous value for that tag.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource the tag is associated with.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   The list of tag keys and values to associate with the resource. You
+    #   can associate tag keys only, tags (key and values) only or a
+    #   combination of tag keys and tags.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "String", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # The `UntagResource` operation removes the association of the tag with
+    # the Amazon Managed Grafana resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource the tag association is removed from.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The key values of the tag to be removed from the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "String", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -925,7 +1128,7 @@ module Aws::ManagedGrafana
     #     update_instruction_batch: [ # required
     #       {
     #         action: "ADD", # required, accepts ADD, REVOKE
-    #         role: "ADMIN", # required, accepts ADMIN, EDITOR
+    #         role: "ADMIN", # required, accepts ADMIN, EDITOR, VIEWER
     #         users: [ # required
     #           {
     #             id: "SsoId", # required
@@ -941,7 +1144,7 @@ module Aws::ManagedGrafana
     #
     #   resp.errors #=> Array
     #   resp.errors[0].caused_by.action #=> String, one of "ADD", "REVOKE"
-    #   resp.errors[0].caused_by.role #=> String, one of "ADMIN", "EDITOR"
+    #   resp.errors[0].caused_by.role #=> String, one of "ADMIN", "EDITOR", "VIEWER"
     #   resp.errors[0].caused_by.users #=> Array
     #   resp.errors[0].caused_by.users[0].id #=> String
     #   resp.errors[0].caused_by.users[0].type #=> String, one of "SSO_USER", "SSO_GROUP"
@@ -1061,7 +1264,7 @@ module Aws::ManagedGrafana
     #     organization_role_name: "OrganizationRoleName",
     #     permission_type: "CUSTOMER_MANAGED", # accepts CUSTOMER_MANAGED, SERVICE_MANAGED
     #     stack_set_name: "StackSetName",
-    #     workspace_data_sources: ["AMAZON_OPENSEARCH_SERVICE"], # accepts AMAZON_OPENSEARCH_SERVICE, CLOUDWATCH, PROMETHEUS, XRAY, TIMESTREAM, SITEWISE
+    #     workspace_data_sources: ["AMAZON_OPENSEARCH_SERVICE"], # accepts AMAZON_OPENSEARCH_SERVICE, CLOUDWATCH, PROMETHEUS, XRAY, TIMESTREAM, SITEWISE, ATHENA, REDSHIFT
     #     workspace_description: "Description",
     #     workspace_id: "WorkspaceId", # required
     #     workspace_name: "WorkspaceName",
@@ -1078,7 +1281,7 @@ module Aws::ManagedGrafana
     #   resp.workspace.authentication.saml_configuration_status #=> String, one of "CONFIGURED", "NOT_CONFIGURED"
     #   resp.workspace.created #=> Time
     #   resp.workspace.data_sources #=> Array
-    #   resp.workspace.data_sources[0] #=> String, one of "AMAZON_OPENSEARCH_SERVICE", "CLOUDWATCH", "PROMETHEUS", "XRAY", "TIMESTREAM", "SITEWISE"
+    #   resp.workspace.data_sources[0] #=> String, one of "AMAZON_OPENSEARCH_SERVICE", "CLOUDWATCH", "PROMETHEUS", "XRAY", "TIMESTREAM", "SITEWISE", "ATHENA", "REDSHIFT"
     #   resp.workspace.description #=> String
     #   resp.workspace.endpoint #=> String
     #   resp.workspace.free_trial_consumed #=> Boolean
@@ -1097,6 +1300,8 @@ module Aws::ManagedGrafana
     #   resp.workspace.permission_type #=> String, one of "CUSTOMER_MANAGED", "SERVICE_MANAGED"
     #   resp.workspace.stack_set_name #=> String
     #   resp.workspace.status #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "UPDATING", "UPGRADING", "DELETION_FAILED", "CREATION_FAILED", "UPDATE_FAILED", "UPGRADE_FAILED", "LICENSE_REMOVAL_FAILED"
+    #   resp.workspace.tags #=> Hash
+    #   resp.workspace.tags["TagKey"] #=> String
     #   resp.workspace.workspace_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/UpdateWorkspace AWS API Documentation
@@ -1208,7 +1413,7 @@ module Aws::ManagedGrafana
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-managedgrafana'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

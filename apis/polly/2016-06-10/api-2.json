@@ -376,7 +376,9 @@
         "sv-SE",
         "tr-TR",
         "en-NZ",
-        "en-ZA"
+        "en-ZA",
+        "ca-ES",
+        "de-AT"
       ]
     },
     "LanguageCodeList":{
@@ -829,7 +831,13 @@
         "Zeina",
         "Zhiyu",
         "Aria",
-        "Ayanda"
+        "Ayanda",
+        "Arlet",
+        "Hannah",
+        "Arthur",
+        "Daniel",
+        "Liam",
+        "Pedro"
       ]
     },
     "VoiceList":{

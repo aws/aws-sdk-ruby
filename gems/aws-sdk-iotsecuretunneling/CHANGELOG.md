@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2022-05-04)
+------------------
+
+* Feature - This release introduces a new API RotateTunnelAccessToken that allow revoking the existing tokens and generate new tokens
+
+1.20.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.19.0 (2022-02-03)
 ------------------
 

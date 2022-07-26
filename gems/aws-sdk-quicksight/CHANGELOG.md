@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.66.0 (2022-07-05)
+------------------
+
+* Feature - This release allows customers to programmatically create QuickSight accounts with Enterprise and Enterprise + Q editions. It also releases allowlisting domains for embedding QuickSight dashboards at runtime through the embedding APIs.
+
+1.65.0 (2022-05-18)
+------------------
+
+* Feature - API UpdatePublicSharingSettings enables IAM admins to enable/disable account level setting for public access of dashboards. When enabled, owners/co-owners for dashboards can enable public access on their dashboards. These dashboards can only be accessed through share link or embedding.
+
+1.64.0 (2022-03-21)
+------------------
+
+* Feature - AWS QuickSight Service Features - Expand public API support for group management.
+
+1.63.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.62.0 (2022-02-03)
 ------------------
 

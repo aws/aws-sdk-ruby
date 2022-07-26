@@ -31,6 +31,24 @@
         {"shape":"ValidationException"}
       ]
     },
+    "DeleteInsight":{
+      "name":"DeleteInsight",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/insights/{Id}",
+        "responseCode":200
+      },
+      "input":{"shape":"DeleteInsightRequest"},
+      "output":{"shape":"DeleteInsightResponse"},
+      "errors":[
+        {"shape":"AccessDeniedException"},
+        {"shape":"InternalServerException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ConflictException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"ValidationException"}
+      ]
+    },
     "DescribeAccountHealth":{
       "name":"DescribeAccountHealth",
       "http":{
@@ -76,6 +94,22 @@
         {"shape":"AccessDeniedException"},
         {"shape":"InternalServerException"},
         {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"ValidationException"}
+      ]
+    },
+    "DescribeEventSourcesConfig":{
+      "name":"DescribeEventSourcesConfig",
+      "http":{
+        "method":"POST",
+        "requestUri":"/event-sources",
+        "responseCode":200
+      },
+      "input":{"shape":"DescribeEventSourcesConfigRequest"},
+      "output":{"shape":"DescribeEventSourcesConfigResponse"},
+      "errors":[
+        {"shape":"AccessDeniedException"},
+        {"shape":"InternalServerException"},
         {"shape":"ThrottlingException"},
         {"shape":"ValidationException"}
       ]
@@ -190,6 +224,7 @@
       "errors":[
         {"shape":"AccessDeniedException"},
         {"shape":"InternalServerException"},
+        {"shape":"ResourceNotFoundException"},
         {"shape":"ThrottlingException"},
         {"shape":"ValidationException"}
       ]
@@ -245,6 +280,23 @@
         {"shape":"ValidationException"}
       ]
     },
+    "ListAnomalousLogGroups":{
+      "name":"ListAnomalousLogGroups",
+      "http":{
+        "method":"POST",
+        "requestUri":"/list-log-anomalies",
+        "responseCode":200
+      },
+      "input":{"shape":"ListAnomalousLogGroupsRequest"},
+      "output":{"shape":"ListAnomalousLogGroupsResponse"},
+      "errors":[
+        {"shape":"AccessDeniedException"},
+        {"shape":"InternalServerException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"ValidationException"}
+      ]
+    },
     "ListEvents":{
       "name":"ListEvents",
       "http":{
@@ -273,6 +325,22 @@
       "output":{"shape":"ListInsightsResponse"},
       "errors":[
         {"shape":"AccessDeniedException"},
+        {"shape":"InternalServerException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"ValidationException"}
+      ]
+    },
+    "ListMonitoredResources":{
+      "name":"ListMonitoredResources",
+      "http":{
+        "method":"POST",
+        "requestUri":"/monitoredResources",
+        "responseCode":200
+      },
+      "input":{"shape":"ListMonitoredResourcesRequest"},
+      "output":{"shape":"ListMonitoredResourcesResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
         {"shape":"InternalServerException"},
         {"shape":"ThrottlingException"},
         {"shape":"ValidationException"}
@@ -413,6 +481,22 @@
         {"shape":"ValidationException"}
       ]
     },
+    "UpdateEventSourcesConfig":{
+      "name":"UpdateEventSourcesConfig",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/event-sources",
+        "responseCode":200
+      },
+      "input":{"shape":"UpdateEventSourcesConfigRequest"},
+      "output":{"shape":"UpdateEventSourcesConfigResponse"},
+      "errors":[
+        {"shape":"AccessDeniedException"},
+        {"shape":"InternalServerException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"ValidationException"}
+      ]
+    },
     "UpdateResourceCollection":{
       "name":"UpdateResourceCollection",
       "http":{
@@ -496,6 +580,26 @@
         "Id":{"shape":"NotificationChannelId"}
       }
     },
+    "AmazonCodeGuruProfilerIntegration":{
+      "type":"structure",
+      "members":{
+        "Status":{"shape":"EventSourceOptInStatus"}
+      }
+    },
+    "AnomalousLogGroup":{
+      "type":"structure",
+      "members":{
+        "LogGroupName":{"shape":"LogGroupName"},
+        "ImpactStartTime":{"shape":"Timestamp"},
+        "ImpactEndTime":{"shape":"Timestamp"},
+        "NumberOfLogLinesScanned":{"shape":"NumberOfLogLinesScanned"},
+        "LogAnomalyShowcases":{"shape":"LogAnomalyShowcases"}
+      }
+    },
+    "AnomalousLogGroups":{
+      "type":"list",
+      "member":{"shape":"AnomalousLogGroup"}
+    },
     "AnomalyDescription":{"type":"string"},
     "AnomalyId":{
       "type":"string",
@@ -535,11 +639,20 @@
         "HIGH"
       ]
     },
+    "AnomalySource":{"type":"string"},
     "AnomalySourceDetails":{
       "type":"structure",
       "members":{
         "CloudWatchMetrics":{"shape":"CloudWatchMetricsDetails"},
         "PerformanceInsightsMetrics":{"shape":"PerformanceInsightsMetricsDetails"}
+      }
+    },
+    "AnomalySourceMetadata":{
+      "type":"structure",
+      "members":{
+        "Source":{"shape":"AnomalySource"},
+        "SourceResourceName":{"shape":"ResourceName"},
+        "SourceResourceType":{"shape":"ResourceType"}
       }
     },
     "AnomalyStatus":{
@@ -737,6 +850,22 @@
         "EndTime":{"shape":"Timestamp"}
       }
     },
+    "DeleteInsightRequest":{
+      "type":"structure",
+      "required":["Id"],
+      "members":{
+        "Id":{
+          "shape":"InsightId",
+          "location":"uri",
+          "locationName":"Id"
+        }
+      }
+    },
+    "DeleteInsightResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "DescribeAccountHealthRequest":{
       "type":"structure",
       "members":{
@@ -799,6 +928,17 @@
       "members":{
         "ProactiveAnomaly":{"shape":"ProactiveAnomaly"},
         "ReactiveAnomaly":{"shape":"ReactiveAnomaly"}
+      }
+    },
+    "DescribeEventSourcesConfigRequest":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DescribeEventSourcesConfigResponse":{
+      "type":"structure",
+      "members":{
+        "EventSources":{"shape":"EventSourcesConfig"}
       }
     },
     "DescribeFeedbackRequest":{
@@ -1019,6 +1159,19 @@
       "min":10,
       "pattern":"^[a-z]+[a-z0-9]*\\.amazonaws\\.com|aws\\.events$"
     },
+    "EventSourceOptInStatus":{
+      "type":"string",
+      "enum":[
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "EventSourcesConfig":{
+      "type":"structure",
+      "members":{
+        "AmazonCodeGuruProfiler":{"shape":"AmazonCodeGuruProfilerIntegration"}
+      }
+    },
     "EventTimeRange":{
       "type":"structure",
       "required":[
@@ -1033,6 +1186,11 @@
     "Events":{
       "type":"list",
       "member":{"shape":"Event"}
+    },
+    "Explanation":{
+      "type":"string",
+      "max":2048,
+      "min":1
     },
     "GetCostEstimationRequest":{
       "type":"structure",
@@ -1078,6 +1236,7 @@
         "NextToken":{"shape":"UuidNextToken"}
       }
     },
+    "InsightDescription":{"type":"string"},
     "InsightFeedback":{
       "type":"structure",
       "members":{
@@ -1200,6 +1359,32 @@
         "NextToken":{"shape":"UuidNextToken"}
       }
     },
+    "ListAnomalousLogGroupsMaxResults":{
+      "type":"integer",
+      "max":200,
+      "min":1
+    },
+    "ListAnomalousLogGroupsRequest":{
+      "type":"structure",
+      "required":["InsightId"],
+      "members":{
+        "InsightId":{"shape":"InsightId"},
+        "MaxResults":{"shape":"ListAnomalousLogGroupsMaxResults"},
+        "NextToken":{"shape":"UuidNextToken"}
+      }
+    },
+    "ListAnomalousLogGroupsResponse":{
+      "type":"structure",
+      "required":[
+        "InsightId",
+        "AnomalousLogGroups"
+      ],
+      "members":{
+        "InsightId":{"shape":"InsightId"},
+        "AnomalousLogGroups":{"shape":"AnomalousLogGroups"},
+        "NextToken":{"shape":"UuidNextToken"}
+      }
+    },
     "ListEventsFilters":{
       "type":"structure",
       "members":{
@@ -1305,6 +1490,39 @@
         "Any":{"shape":"ListInsightsAnyStatusFilter"}
       }
     },
+    "ListMonitoredResourcesFilters":{
+      "type":"structure",
+      "required":[
+        "ResourcePermission",
+        "ResourceTypeFilters"
+      ],
+      "members":{
+        "ResourcePermission":{"shape":"ResourcePermission"},
+        "ResourceTypeFilters":{"shape":"ResourceTypeFilters"}
+      }
+    },
+    "ListMonitoredResourcesMaxResults":{
+      "type":"integer",
+      "max":50,
+      "min":1
+    },
+    "ListMonitoredResourcesRequest":{
+      "type":"structure",
+      "required":["Filters"],
+      "members":{
+        "Filters":{"shape":"ListMonitoredResourcesFilters"},
+        "MaxResults":{"shape":"ListMonitoredResourcesMaxResults"},
+        "NextToken":{"shape":"UuidNextToken"}
+      }
+    },
+    "ListMonitoredResourcesResponse":{
+      "type":"structure",
+      "required":["MonitoredResourceIdentifiers"],
+      "members":{
+        "MonitoredResourceIdentifiers":{"shape":"MonitoredResourceIdentifiers"},
+        "NextToken":{"shape":"UuidNextToken"}
+      }
+    },
     "ListNotificationChannelsRequest":{
       "type":"structure",
       "members":{
@@ -1370,8 +1588,101 @@
         "ZH_TW"
       ]
     },
+    "LogAnomalyClass":{
+      "type":"structure",
+      "members":{
+        "LogStreamName":{"shape":"LogStreamName"},
+        "LogAnomalyType":{"shape":"LogAnomalyType"},
+        "LogAnomalyToken":{"shape":"LogAnomalyToken"},
+        "LogEventId":{"shape":"LogEventId"},
+        "Explanation":{"shape":"Explanation"},
+        "NumberOfLogLinesOccurrences":{"shape":"NumberOfLogLinesOccurrences"},
+        "LogEventTimestamp":{"shape":"Timestamp"}
+      }
+    },
+    "LogAnomalyClasses":{
+      "type":"list",
+      "member":{"shape":"LogAnomalyClass"},
+      "max":10,
+      "min":0
+    },
+    "LogAnomalyShowcase":{
+      "type":"structure",
+      "members":{
+        "LogAnomalyClasses":{"shape":"LogAnomalyClasses"}
+      }
+    },
+    "LogAnomalyShowcases":{
+      "type":"list",
+      "member":{"shape":"LogAnomalyShowcase"},
+      "max":20,
+      "min":0
+    },
+    "LogAnomalyToken":{
+      "type":"string",
+      "max":2048,
+      "min":1
+    },
+    "LogAnomalyType":{
+      "type":"string",
+      "enum":[
+        "KEYWORD",
+        "KEYWORD_TOKEN",
+        "FORMAT",
+        "HTTP_CODE",
+        "BLOCK_FORMAT",
+        "NUMERICAL_POINT",
+        "NUMERICAL_NAN",
+        "NEW_FIELD_NAME"
+      ]
+    },
+    "LogEventId":{
+      "type":"string",
+      "max":512,
+      "min":1
+    },
+    "LogGroupName":{
+      "type":"string",
+      "max":512,
+      "min":1
+    },
+    "LogStreamName":{
+      "type":"string",
+      "max":512,
+      "min":1
+    },
+    "LogsAnomalyDetectionIntegration":{
+      "type":"structure",
+      "members":{
+        "OptInStatus":{"shape":"OptInStatus"}
+      }
+    },
+    "LogsAnomalyDetectionIntegrationConfig":{
+      "type":"structure",
+      "members":{
+        "OptInStatus":{"shape":"OptInStatus"}
+      }
+    },
     "MeanTimeToRecoverInMilliseconds":{"type":"long"},
     "MetricValue":{"type":"double"},
+    "MonitoredResourceIdentifier":{
+      "type":"structure",
+      "members":{
+        "MonitoredResourceName":{"shape":"MonitoredResourceName"},
+        "Type":{"shape":"ResourceType"},
+        "ResourcePermission":{"shape":"ResourcePermission"}
+      }
+    },
+    "MonitoredResourceIdentifiers":{
+      "type":"list",
+      "member":{"shape":"MonitoredResourceIdentifier"}
+    },
+    "MonitoredResourceName":{
+      "type":"string",
+      "max":512,
+      "min":1,
+      "pattern":"[\\.\\-_\\/#A-Za-z0-9]+"
+    },
     "NotificationChannel":{
       "type":"structure",
       "members":{
@@ -1397,6 +1708,8 @@
     "NumOpenReactiveInsights":{"type":"integer"},
     "NumProactiveInsights":{"type":"integer"},
     "NumReactiveInsights":{"type":"integer"},
+    "NumberOfLogLinesOccurrences":{"type":"integer"},
+    "NumberOfLogLinesScanned":{"type":"integer"},
     "OpsCenterIntegration":{
       "type":"structure",
       "members":{
@@ -1566,7 +1879,9 @@
         "SourceDetails":{"shape":"AnomalySourceDetails"},
         "AssociatedInsightId":{"shape":"InsightId"},
         "ResourceCollection":{"shape":"ResourceCollection"},
-        "Limit":{"shape":"AnomalyLimit"}
+        "Limit":{"shape":"AnomalyLimit"},
+        "SourceMetadata":{"shape":"AnomalySourceMetadata"},
+        "AnomalyResources":{"shape":"AnomalyResources"}
       }
     },
     "ProactiveAnomalySummary":{
@@ -1582,7 +1897,9 @@
         "SourceDetails":{"shape":"AnomalySourceDetails"},
         "AssociatedInsightId":{"shape":"InsightId"},
         "ResourceCollection":{"shape":"ResourceCollection"},
-        "Limit":{"shape":"AnomalyLimit"}
+        "Limit":{"shape":"AnomalyLimit"},
+        "SourceMetadata":{"shape":"AnomalySourceMetadata"},
+        "AnomalyResources":{"shape":"AnomalyResources"}
       }
     },
     "ProactiveInsight":{
@@ -1595,7 +1912,8 @@
         "InsightTimeRange":{"shape":"InsightTimeRange"},
         "PredictionTimeRange":{"shape":"PredictionTimeRange"},
         "ResourceCollection":{"shape":"ResourceCollection"},
-        "SsmOpsItemId":{"shape":"SsmOpsItemId"}
+        "SsmOpsItemId":{"shape":"SsmOpsItemId"},
+        "Description":{"shape":"InsightDescription"}
       }
     },
     "ProactiveInsightSummary":{
@@ -1695,7 +2013,8 @@
         "Status":{"shape":"InsightStatus"},
         "InsightTimeRange":{"shape":"InsightTimeRange"},
         "ResourceCollection":{"shape":"ResourceCollection"},
-        "SsmOpsItemId":{"shape":"SsmOpsItemId"}
+        "SsmOpsItemId":{"shape":"SsmOpsItemId"},
+        "Description":{"shape":"InsightDescription"}
       }
     },
     "ReactiveInsightSummary":{
@@ -1741,9 +2060,11 @@
         "Name":{"shape":"RecommendationName"},
         "Reason":{"shape":"RecommendationReason"},
         "RelatedEvents":{"shape":"RecommendationRelatedEvents"},
-        "RelatedAnomalies":{"shape":"RecommendationRelatedAnomalies"}
+        "RelatedAnomalies":{"shape":"RecommendationRelatedAnomalies"},
+        "Category":{"shape":"RecommendationCategory"}
       }
     },
+    "RecommendationCategory":{"type":"string"},
     "RecommendationDescription":{"type":"string"},
     "RecommendationLink":{"type":"string"},
     "RecommendationName":{"type":"string"},
@@ -1889,11 +2210,26 @@
       "error":{"httpStatusCode":404},
       "exception":true
     },
+    "ResourcePermission":{
+      "type":"string",
+      "enum":[
+        "FULL_PERMISSION",
+        "MISSING_PERMISSION"
+      ]
+    },
     "ResourceType":{
       "type":"string",
       "max":256,
       "min":1,
       "pattern":"^[a-zA-Z]+[a-zA-Z0-9-_:]*$"
+    },
+    "ResourceTypeFilter":{
+      "type":"string",
+      "enum":["LOG_GROUPS"]
+    },
+    "ResourceTypeFilters":{
+      "type":"list",
+      "member":{"shape":"ResourceTypeFilter"}
     },
     "RetryAfterSeconds":{"type":"integer"},
     "SearchInsightsAccountIdList":{
@@ -2003,7 +2339,8 @@
     "ServiceIntegrationConfig":{
       "type":"structure",
       "members":{
-        "OpsCenter":{"shape":"OpsCenterIntegration"}
+        "OpsCenter":{"shape":"OpsCenterIntegration"},
+        "LogsAnomalyDetection":{"shape":"LogsAnomalyDetectionIntegration"}
       }
     },
     "ServiceName":{
@@ -2214,6 +2551,17 @@
         "StackNames":{"shape":"UpdateStackNames"}
       }
     },
+    "UpdateEventSourcesConfigRequest":{
+      "type":"structure",
+      "members":{
+        "EventSources":{"shape":"EventSourcesConfig"}
+      }
+    },
+    "UpdateEventSourcesConfigResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "UpdateResourceCollectionAction":{
       "type":"string",
       "enum":[
@@ -2247,7 +2595,8 @@
     "UpdateServiceIntegrationConfig":{
       "type":"structure",
       "members":{
-        "OpsCenter":{"shape":"OpsCenterIntegrationConfig"}
+        "OpsCenter":{"shape":"OpsCenterIntegrationConfig"},
+        "LogsAnomalyDetection":{"shape":"LogsAnomalyDetectionIntegrationConfig"}
       }
     },
     "UpdateServiceIntegrationRequest":{

@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2022-05-25)
+------------------
+
+* Feature - Documentation-only update added for CodeConfiguration.
+
+1.13.0 (2022-04-11)
+------------------
+
+* Feature - This release adds tracing for App Runner services with X-Ray using AWS Distro for OpenTelemetry. New APIs: CreateObservabilityConfiguration, DescribeObservabilityConfiguration, ListObservabilityConfigurations, and DeleteObservabilityConfiguration. Updated APIs: CreateService and UpdateService.
+
+1.12.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.11.0 (2022-02-22)
+------------------
+
+* Feature - AWS App Runner adds a Java platform (Corretto 8, Corretto 11 runtimes) and a Node.js 14 runtime.
+
+1.10.0 (2022-02-08)
+------------------
+
+* Feature - This release adds support for App Runner to route outbound network traffic of a service through an Amazon VPC. New API: CreateVpcConnector, DescribeVpcConnector, ListVpcConnectors, and DeleteVpcConnector. Updated API: CreateService, DescribeService, and UpdateService.
+
 1.9.0 (2022-02-03)
 ------------------
 

@@ -37,6 +37,9 @@ module Aws::WAFV2
     Condition = Shapes::StructureShape.new(name: 'Condition')
     Conditions = Shapes::ListShape.new(name: 'Conditions')
     ConsumedCapacity = Shapes::IntegerShape.new(name: 'ConsumedCapacity')
+    CookieMatchPattern = Shapes::StructureShape.new(name: 'CookieMatchPattern')
+    CookieNames = Shapes::ListShape.new(name: 'CookieNames')
+    Cookies = Shapes::StructureShape.new(name: 'Cookies')
     CountAction = Shapes::StructureShape.new(name: 'CountAction')
     Country = Shapes::StringShape.new(name: 'Country')
     CountryCode = Shapes::StringShape.new(name: 'CountryCode')
@@ -76,6 +79,7 @@ module Aws::WAFV2
     DescribeManagedRuleGroupResponse = Shapes::StructureShape.new(name: 'DescribeManagedRuleGroupResponse')
     DisassociateWebACLRequest = Shapes::StructureShape.new(name: 'DisassociateWebACLRequest')
     DisassociateWebACLResponse = Shapes::StructureShape.new(name: 'DisassociateWebACLResponse')
+    DownloadUrl = Shapes::StringShape.new(name: 'DownloadUrl')
     EntityDescription = Shapes::StringShape.new(name: 'EntityDescription')
     EntityId = Shapes::StringShape.new(name: 'EntityId')
     EntityName = Shapes::StringShape.new(name: 'EntityName')
@@ -85,6 +89,7 @@ module Aws::WAFV2
     ExcludedRules = Shapes::ListShape.new(name: 'ExcludedRules')
     FailureReason = Shapes::StringShape.new(name: 'FailureReason')
     FallbackBehavior = Shapes::StringShape.new(name: 'FallbackBehavior')
+    FieldIdentifier = Shapes::StringShape.new(name: 'FieldIdentifier')
     FieldToMatch = Shapes::StructureShape.new(name: 'FieldToMatch')
     FieldToMatchData = Shapes::StringShape.new(name: 'FieldToMatchData')
     Filter = Shapes::StructureShape.new(name: 'Filter')
@@ -97,6 +102,8 @@ module Aws::WAFV2
     ForwardedIPConfig = Shapes::StructureShape.new(name: 'ForwardedIPConfig')
     ForwardedIPHeaderName = Shapes::StringShape.new(name: 'ForwardedIPHeaderName')
     ForwardedIPPosition = Shapes::StringShape.new(name: 'ForwardedIPPosition')
+    GenerateMobileSdkReleaseUrlRequest = Shapes::StructureShape.new(name: 'GenerateMobileSdkReleaseUrlRequest')
+    GenerateMobileSdkReleaseUrlResponse = Shapes::StructureShape.new(name: 'GenerateMobileSdkReleaseUrlResponse')
     GeoMatchStatement = Shapes::StructureShape.new(name: 'GeoMatchStatement')
     GetIPSetRequest = Shapes::StructureShape.new(name: 'GetIPSetRequest')
     GetIPSetResponse = Shapes::StructureShape.new(name: 'GetIPSetResponse')
@@ -104,6 +111,8 @@ module Aws::WAFV2
     GetLoggingConfigurationResponse = Shapes::StructureShape.new(name: 'GetLoggingConfigurationResponse')
     GetManagedRuleSetRequest = Shapes::StructureShape.new(name: 'GetManagedRuleSetRequest')
     GetManagedRuleSetResponse = Shapes::StructureShape.new(name: 'GetManagedRuleSetResponse')
+    GetMobileSdkReleaseRequest = Shapes::StructureShape.new(name: 'GetMobileSdkReleaseRequest')
+    GetMobileSdkReleaseResponse = Shapes::StructureShape.new(name: 'GetMobileSdkReleaseResponse')
     GetPermissionPolicyRequest = Shapes::StructureShape.new(name: 'GetPermissionPolicyRequest')
     GetPermissionPolicyResponse = Shapes::StructureShape.new(name: 'GetPermissionPolicyResponse')
     GetRateBasedStatementManagedKeysRequest = Shapes::StructureShape.new(name: 'GetRateBasedStatementManagedKeysRequest')
@@ -123,8 +132,11 @@ module Aws::WAFV2
     HTTPMethod = Shapes::StringShape.new(name: 'HTTPMethod')
     HTTPRequest = Shapes::StructureShape.new(name: 'HTTPRequest')
     HTTPVersion = Shapes::StringShape.new(name: 'HTTPVersion')
+    HeaderMatchPattern = Shapes::StructureShape.new(name: 'HeaderMatchPattern')
     HeaderName = Shapes::StringShape.new(name: 'HeaderName')
+    HeaderNames = Shapes::ListShape.new(name: 'HeaderNames')
     HeaderValue = Shapes::StringShape.new(name: 'HeaderValue')
+    Headers = Shapes::StructureShape.new(name: 'Headers')
     IPAddress = Shapes::StringShape.new(name: 'IPAddress')
     IPAddressVersion = Shapes::StringShape.new(name: 'IPAddressVersion')
     IPAddresses = Shapes::ListShape.new(name: 'IPAddresses')
@@ -160,6 +172,8 @@ module Aws::WAFV2
     ListManagedRuleSetsRequest = Shapes::StructureShape.new(name: 'ListManagedRuleSetsRequest')
     ListManagedRuleSetsResponse = Shapes::StructureShape.new(name: 'ListManagedRuleSetsResponse')
     ListMaxItems = Shapes::IntegerShape.new(name: 'ListMaxItems')
+    ListMobileSdkReleasesRequest = Shapes::StructureShape.new(name: 'ListMobileSdkReleasesRequest')
+    ListMobileSdkReleasesResponse = Shapes::StructureShape.new(name: 'ListMobileSdkReleasesResponse')
     ListRegexPatternSetsRequest = Shapes::StructureShape.new(name: 'ListRegexPatternSetsRequest')
     ListRegexPatternSetsResponse = Shapes::StructureShape.new(name: 'ListRegexPatternSetsResponse')
     ListResourcesForWebACLRequest = Shapes::StructureShape.new(name: 'ListResourcesForWebACLRequest')
@@ -175,6 +189,9 @@ module Aws::WAFV2
     LoggingConfiguration = Shapes::StructureShape.new(name: 'LoggingConfiguration')
     LoggingConfigurations = Shapes::ListShape.new(name: 'LoggingConfigurations')
     LoggingFilter = Shapes::StructureShape.new(name: 'LoggingFilter')
+    LoginPathString = Shapes::StringShape.new(name: 'LoginPathString')
+    ManagedRuleGroupConfig = Shapes::StructureShape.new(name: 'ManagedRuleGroupConfig')
+    ManagedRuleGroupConfigs = Shapes::ListShape.new(name: 'ManagedRuleGroupConfigs')
     ManagedRuleGroupStatement = Shapes::StructureShape.new(name: 'ManagedRuleGroupStatement')
     ManagedRuleGroupSummaries = Shapes::ListShape.new(name: 'ManagedRuleGroupSummaries')
     ManagedRuleGroupSummary = Shapes::StructureShape.new(name: 'ManagedRuleGroupSummary')
@@ -184,16 +201,23 @@ module Aws::WAFV2
     ManagedRuleSetSummaries = Shapes::ListShape.new(name: 'ManagedRuleSetSummaries')
     ManagedRuleSetSummary = Shapes::StructureShape.new(name: 'ManagedRuleSetSummary')
     ManagedRuleSetVersion = Shapes::StructureShape.new(name: 'ManagedRuleSetVersion')
+    MapMatchScope = Shapes::StringShape.new(name: 'MapMatchScope')
     Method = Shapes::StructureShape.new(name: 'Method')
     MetricName = Shapes::StringShape.new(name: 'MetricName')
+    MobileSdkRelease = Shapes::StructureShape.new(name: 'MobileSdkRelease')
     NextMarker = Shapes::StringShape.new(name: 'NextMarker')
     NoneAction = Shapes::StructureShape.new(name: 'NoneAction')
     NotStatement = Shapes::StructureShape.new(name: 'NotStatement')
     OrStatement = Shapes::StructureShape.new(name: 'OrStatement')
+    OutputUrl = Shapes::StringShape.new(name: 'OutputUrl')
     OverrideAction = Shapes::StructureShape.new(name: 'OverrideAction')
+    OversizeHandling = Shapes::StringShape.new(name: 'OversizeHandling')
     PaginationLimit = Shapes::IntegerShape.new(name: 'PaginationLimit')
     ParameterExceptionField = Shapes::StringShape.new(name: 'ParameterExceptionField')
     ParameterExceptionParameter = Shapes::StringShape.new(name: 'ParameterExceptionParameter')
+    PasswordField = Shapes::StructureShape.new(name: 'PasswordField')
+    PayloadType = Shapes::StringShape.new(name: 'PayloadType')
+    Platform = Shapes::StringShape.new(name: 'Platform')
     PolicyString = Shapes::StringShape.new(name: 'PolicyString')
     PopulationSize = Shapes::IntegerShape.new(name: 'PopulationSize')
     PositionalConstraint = Shapes::StringShape.new(name: 'PositionalConstraint')
@@ -218,6 +242,9 @@ module Aws::WAFV2
     RegexPatternSetSummary = Shapes::StructureShape.new(name: 'RegexPatternSetSummary')
     RegexPatternString = Shapes::StringShape.new(name: 'RegexPatternString')
     RegularExpressionList = Shapes::ListShape.new(name: 'RegularExpressionList')
+    ReleaseNotes = Shapes::StringShape.new(name: 'ReleaseNotes')
+    ReleaseSummaries = Shapes::ListShape.new(name: 'ReleaseSummaries')
+    ReleaseSummary = Shapes::StructureShape.new(name: 'ReleaseSummary')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceArns = Shapes::ListShape.new(name: 'ResourceArns')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
@@ -240,6 +267,8 @@ module Aws::WAFV2
     SampledHTTPRequests = Shapes::ListShape.new(name: 'SampledHTTPRequests')
     Scope = Shapes::StringShape.new(name: 'Scope')
     SearchString = Shapes::BlobShape.new(name: 'SearchString')
+    SensitivityLevel = Shapes::StringShape.new(name: 'SensitivityLevel')
+    SingleCookieName = Shapes::StringShape.new(name: 'SingleCookieName')
     SingleHeader = Shapes::StructureShape.new(name: 'SingleHeader')
     SingleQueryArgument = Shapes::StructureShape.new(name: 'SingleQueryArgument')
     Size = Shapes::IntegerShape.new(name: 'Size')
@@ -278,12 +307,14 @@ module Aws::WAFV2
     UpdateWebACLRequest = Shapes::StructureShape.new(name: 'UpdateWebACLRequest')
     UpdateWebACLResponse = Shapes::StructureShape.new(name: 'UpdateWebACLResponse')
     UriPath = Shapes::StructureShape.new(name: 'UriPath')
+    UsernameField = Shapes::StructureShape.new(name: 'UsernameField')
     VendorName = Shapes::StringShape.new(name: 'VendorName')
     VersionKeyString = Shapes::StringShape.new(name: 'VersionKeyString')
     VersionToPublish = Shapes::StructureShape.new(name: 'VersionToPublish')
     VersionsToPublish = Shapes::MapShape.new(name: 'VersionsToPublish')
     VisibilityConfig = Shapes::StructureShape.new(name: 'VisibilityConfig')
     WAFAssociatedItemException = Shapes::StructureShape.new(name: 'WAFAssociatedItemException')
+    WAFConfigurationWarningException = Shapes::StructureShape.new(name: 'WAFConfigurationWarningException')
     WAFDuplicateItemException = Shapes::StructureShape.new(name: 'WAFDuplicateItemException')
     WAFExpiredManagedRuleGroupVersionException = Shapes::StructureShape.new(name: 'WAFExpiredManagedRuleGroupVersionException')
     WAFInternalErrorException = Shapes::StructureShape.new(name: 'WAFInternalErrorException')
@@ -327,6 +358,7 @@ module Aws::WAFV2
     BlockAction.add_member(:custom_response, Shapes::ShapeRef.new(shape: CustomResponse, location_name: "CustomResponse"))
     BlockAction.struct_class = Types::BlockAction
 
+    Body.add_member(:oversize_handling, Shapes::ShapeRef.new(shape: OversizeHandling, location_name: "OversizeHandling"))
     Body.struct_class = Types::Body
 
     ByteMatchStatement.add_member(:search_string, Shapes::ShapeRef.new(shape: SearchString, required: true, location_name: "SearchString"))
@@ -358,6 +390,18 @@ module Aws::WAFV2
     Condition.struct_class = Types::Condition
 
     Conditions.member = Shapes::ShapeRef.new(shape: Condition)
+
+    CookieMatchPattern.add_member(:all, Shapes::ShapeRef.new(shape: All, location_name: "All"))
+    CookieMatchPattern.add_member(:included_cookies, Shapes::ShapeRef.new(shape: CookieNames, location_name: "IncludedCookies"))
+    CookieMatchPattern.add_member(:excluded_cookies, Shapes::ShapeRef.new(shape: CookieNames, location_name: "ExcludedCookies"))
+    CookieMatchPattern.struct_class = Types::CookieMatchPattern
+
+    CookieNames.member = Shapes::ShapeRef.new(shape: SingleCookieName)
+
+    Cookies.add_member(:match_pattern, Shapes::ShapeRef.new(shape: CookieMatchPattern, required: true, location_name: "MatchPattern"))
+    Cookies.add_member(:match_scope, Shapes::ShapeRef.new(shape: MapMatchScope, required: true, location_name: "MatchScope"))
+    Cookies.add_member(:oversize_handling, Shapes::ShapeRef.new(shape: OversizeHandling, required: true, location_name: "OversizeHandling"))
+    Cookies.struct_class = Types::Cookies
 
     CountAction.add_member(:custom_request_handling, Shapes::ShapeRef.new(shape: CustomRequestHandling, location_name: "CustomRequestHandling"))
     CountAction.struct_class = Types::CountAction
@@ -519,6 +563,8 @@ module Aws::WAFV2
     FieldToMatch.add_member(:body, Shapes::ShapeRef.new(shape: Body, location_name: "Body"))
     FieldToMatch.add_member(:method, Shapes::ShapeRef.new(shape: Method, location_name: "Method"))
     FieldToMatch.add_member(:json_body, Shapes::ShapeRef.new(shape: JsonBody, location_name: "JsonBody"))
+    FieldToMatch.add_member(:headers, Shapes::ShapeRef.new(shape: Headers, location_name: "Headers"))
+    FieldToMatch.add_member(:cookies, Shapes::ShapeRef.new(shape: Cookies, location_name: "Cookies"))
     FieldToMatch.struct_class = Types::FieldToMatch
 
     Filter.add_member(:behavior, Shapes::ShapeRef.new(shape: FilterBehavior, required: true, location_name: "Behavior"))
@@ -544,6 +590,13 @@ module Aws::WAFV2
     ForwardedIPConfig.add_member(:header_name, Shapes::ShapeRef.new(shape: ForwardedIPHeaderName, required: true, location_name: "HeaderName"))
     ForwardedIPConfig.add_member(:fallback_behavior, Shapes::ShapeRef.new(shape: FallbackBehavior, required: true, location_name: "FallbackBehavior"))
     ForwardedIPConfig.struct_class = Types::ForwardedIPConfig
+
+    GenerateMobileSdkReleaseUrlRequest.add_member(:platform, Shapes::ShapeRef.new(shape: Platform, required: true, location_name: "Platform"))
+    GenerateMobileSdkReleaseUrlRequest.add_member(:release_version, Shapes::ShapeRef.new(shape: VersionKeyString, required: true, location_name: "ReleaseVersion"))
+    GenerateMobileSdkReleaseUrlRequest.struct_class = Types::GenerateMobileSdkReleaseUrlRequest
+
+    GenerateMobileSdkReleaseUrlResponse.add_member(:url, Shapes::ShapeRef.new(shape: DownloadUrl, location_name: "Url"))
+    GenerateMobileSdkReleaseUrlResponse.struct_class = Types::GenerateMobileSdkReleaseUrlResponse
 
     GeoMatchStatement.add_member(:country_codes, Shapes::ShapeRef.new(shape: CountryCodes, location_name: "CountryCodes"))
     GeoMatchStatement.add_member(:forwarded_ip_config, Shapes::ShapeRef.new(shape: ForwardedIPConfig, location_name: "ForwardedIPConfig"))
@@ -572,6 +625,13 @@ module Aws::WAFV2
     GetManagedRuleSetResponse.add_member(:managed_rule_set, Shapes::ShapeRef.new(shape: ManagedRuleSet, location_name: "ManagedRuleSet"))
     GetManagedRuleSetResponse.add_member(:lock_token, Shapes::ShapeRef.new(shape: LockToken, location_name: "LockToken"))
     GetManagedRuleSetResponse.struct_class = Types::GetManagedRuleSetResponse
+
+    GetMobileSdkReleaseRequest.add_member(:platform, Shapes::ShapeRef.new(shape: Platform, required: true, location_name: "Platform"))
+    GetMobileSdkReleaseRequest.add_member(:release_version, Shapes::ShapeRef.new(shape: VersionKeyString, required: true, location_name: "ReleaseVersion"))
+    GetMobileSdkReleaseRequest.struct_class = Types::GetMobileSdkReleaseRequest
+
+    GetMobileSdkReleaseResponse.add_member(:mobile_sdk_release, Shapes::ShapeRef.new(shape: MobileSdkRelease, location_name: "MobileSdkRelease"))
+    GetMobileSdkReleaseResponse.struct_class = Types::GetMobileSdkReleaseResponse
 
     GetPermissionPolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
     GetPermissionPolicyRequest.struct_class = Types::GetPermissionPolicyRequest
@@ -634,6 +694,7 @@ module Aws::WAFV2
 
     GetWebACLResponse.add_member(:web_acl, Shapes::ShapeRef.new(shape: WebACL, location_name: "WebACL"))
     GetWebACLResponse.add_member(:lock_token, Shapes::ShapeRef.new(shape: LockToken, location_name: "LockToken"))
+    GetWebACLResponse.add_member(:application_integration_url, Shapes::ShapeRef.new(shape: OutputUrl, location_name: "ApplicationIntegrationURL"))
     GetWebACLResponse.struct_class = Types::GetWebACLResponse
 
     HTTPHeader.add_member(:name, Shapes::ShapeRef.new(shape: HeaderName, location_name: "Name"))
@@ -649,6 +710,18 @@ module Aws::WAFV2
     HTTPRequest.add_member(:http_version, Shapes::ShapeRef.new(shape: HTTPVersion, location_name: "HTTPVersion"))
     HTTPRequest.add_member(:headers, Shapes::ShapeRef.new(shape: HTTPHeaders, location_name: "Headers"))
     HTTPRequest.struct_class = Types::HTTPRequest
+
+    HeaderMatchPattern.add_member(:all, Shapes::ShapeRef.new(shape: All, location_name: "All"))
+    HeaderMatchPattern.add_member(:included_headers, Shapes::ShapeRef.new(shape: HeaderNames, location_name: "IncludedHeaders"))
+    HeaderMatchPattern.add_member(:excluded_headers, Shapes::ShapeRef.new(shape: HeaderNames, location_name: "ExcludedHeaders"))
+    HeaderMatchPattern.struct_class = Types::HeaderMatchPattern
+
+    HeaderNames.member = Shapes::ShapeRef.new(shape: FieldToMatchData)
+
+    Headers.add_member(:match_pattern, Shapes::ShapeRef.new(shape: HeaderMatchPattern, required: true, location_name: "MatchPattern"))
+    Headers.add_member(:match_scope, Shapes::ShapeRef.new(shape: MapMatchScope, required: true, location_name: "MatchScope"))
+    Headers.add_member(:oversize_handling, Shapes::ShapeRef.new(shape: OversizeHandling, required: true, location_name: "OversizeHandling"))
+    Headers.struct_class = Types::Headers
 
     IPAddresses.member = Shapes::ShapeRef.new(shape: IPAddress)
 
@@ -684,6 +757,7 @@ module Aws::WAFV2
     JsonBody.add_member(:match_pattern, Shapes::ShapeRef.new(shape: JsonMatchPattern, required: true, location_name: "MatchPattern"))
     JsonBody.add_member(:match_scope, Shapes::ShapeRef.new(shape: JsonMatchScope, required: true, location_name: "MatchScope"))
     JsonBody.add_member(:invalid_fallback_behavior, Shapes::ShapeRef.new(shape: BodyParsingFallbackBehavior, location_name: "InvalidFallbackBehavior"))
+    JsonBody.add_member(:oversize_handling, Shapes::ShapeRef.new(shape: OversizeHandling, location_name: "OversizeHandling"))
     JsonBody.struct_class = Types::JsonBody
 
     JsonMatchPattern.add_member(:all, Shapes::ShapeRef.new(shape: All, location_name: "All"))
@@ -718,6 +792,7 @@ module Aws::WAFV2
 
     ListAvailableManagedRuleGroupVersionsResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
     ListAvailableManagedRuleGroupVersionsResponse.add_member(:versions, Shapes::ShapeRef.new(shape: ManagedRuleGroupVersions, location_name: "Versions"))
+    ListAvailableManagedRuleGroupVersionsResponse.add_member(:current_default_version, Shapes::ShapeRef.new(shape: VersionKeyString, location_name: "CurrentDefaultVersion"))
     ListAvailableManagedRuleGroupVersionsResponse.struct_class = Types::ListAvailableManagedRuleGroupVersionsResponse
 
     ListAvailableManagedRuleGroupsRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "Scope"))
@@ -755,6 +830,15 @@ module Aws::WAFV2
     ListManagedRuleSetsResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
     ListManagedRuleSetsResponse.add_member(:managed_rule_sets, Shapes::ShapeRef.new(shape: ManagedRuleSetSummaries, location_name: "ManagedRuleSets"))
     ListManagedRuleSetsResponse.struct_class = Types::ListManagedRuleSetsResponse
+
+    ListMobileSdkReleasesRequest.add_member(:platform, Shapes::ShapeRef.new(shape: Platform, required: true, location_name: "Platform"))
+    ListMobileSdkReleasesRequest.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
+    ListMobileSdkReleasesRequest.add_member(:limit, Shapes::ShapeRef.new(shape: PaginationLimit, location_name: "Limit"))
+    ListMobileSdkReleasesRequest.struct_class = Types::ListMobileSdkReleasesRequest
+
+    ListMobileSdkReleasesResponse.add_member(:release_summaries, Shapes::ShapeRef.new(shape: ReleaseSummaries, location_name: "ReleaseSummaries"))
+    ListMobileSdkReleasesResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
+    ListMobileSdkReleasesResponse.struct_class = Types::ListMobileSdkReleasesResponse
 
     ListRegexPatternSetsRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "Scope"))
     ListRegexPatternSetsRequest.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
@@ -814,17 +898,27 @@ module Aws::WAFV2
     LoggingFilter.add_member(:default_behavior, Shapes::ShapeRef.new(shape: FilterBehavior, required: true, location_name: "DefaultBehavior"))
     LoggingFilter.struct_class = Types::LoggingFilter
 
+    ManagedRuleGroupConfig.add_member(:login_path, Shapes::ShapeRef.new(shape: LoginPathString, location_name: "LoginPath"))
+    ManagedRuleGroupConfig.add_member(:payload_type, Shapes::ShapeRef.new(shape: PayloadType, location_name: "PayloadType"))
+    ManagedRuleGroupConfig.add_member(:username_field, Shapes::ShapeRef.new(shape: UsernameField, location_name: "UsernameField"))
+    ManagedRuleGroupConfig.add_member(:password_field, Shapes::ShapeRef.new(shape: PasswordField, location_name: "PasswordField"))
+    ManagedRuleGroupConfig.struct_class = Types::ManagedRuleGroupConfig
+
+    ManagedRuleGroupConfigs.member = Shapes::ShapeRef.new(shape: ManagedRuleGroupConfig)
+
     ManagedRuleGroupStatement.add_member(:vendor_name, Shapes::ShapeRef.new(shape: VendorName, required: true, location_name: "VendorName"))
     ManagedRuleGroupStatement.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "Name"))
     ManagedRuleGroupStatement.add_member(:version, Shapes::ShapeRef.new(shape: VersionKeyString, location_name: "Version"))
     ManagedRuleGroupStatement.add_member(:excluded_rules, Shapes::ShapeRef.new(shape: ExcludedRules, location_name: "ExcludedRules"))
     ManagedRuleGroupStatement.add_member(:scope_down_statement, Shapes::ShapeRef.new(shape: Statement, location_name: "ScopeDownStatement"))
+    ManagedRuleGroupStatement.add_member(:managed_rule_group_configs, Shapes::ShapeRef.new(shape: ManagedRuleGroupConfigs, location_name: "ManagedRuleGroupConfigs"))
     ManagedRuleGroupStatement.struct_class = Types::ManagedRuleGroupStatement
 
     ManagedRuleGroupSummaries.member = Shapes::ShapeRef.new(shape: ManagedRuleGroupSummary)
 
     ManagedRuleGroupSummary.add_member(:vendor_name, Shapes::ShapeRef.new(shape: VendorName, location_name: "VendorName"))
     ManagedRuleGroupSummary.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, location_name: "Name"))
+    ManagedRuleGroupSummary.add_member(:versioning_supported, Shapes::ShapeRef.new(shape: Boolean, location_name: "VersioningSupported"))
     ManagedRuleGroupSummary.add_member(:description, Shapes::ShapeRef.new(shape: EntityDescription, location_name: "Description"))
     ManagedRuleGroupSummary.struct_class = Types::ManagedRuleGroupSummary
 
@@ -863,6 +957,12 @@ module Aws::WAFV2
 
     Method.struct_class = Types::Method
 
+    MobileSdkRelease.add_member(:release_version, Shapes::ShapeRef.new(shape: VersionKeyString, location_name: "ReleaseVersion"))
+    MobileSdkRelease.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
+    MobileSdkRelease.add_member(:release_notes, Shapes::ShapeRef.new(shape: ReleaseNotes, location_name: "ReleaseNotes"))
+    MobileSdkRelease.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    MobileSdkRelease.struct_class = Types::MobileSdkRelease
+
     NoneAction.struct_class = Types::NoneAction
 
     NotStatement.add_member(:statement, Shapes::ShapeRef.new(shape: Statement, required: true, location_name: "Statement"))
@@ -874,6 +974,9 @@ module Aws::WAFV2
     OverrideAction.add_member(:count, Shapes::ShapeRef.new(shape: CountAction, location_name: "Count"))
     OverrideAction.add_member(:none, Shapes::ShapeRef.new(shape: NoneAction, location_name: "None"))
     OverrideAction.struct_class = Types::OverrideAction
+
+    PasswordField.add_member(:identifier, Shapes::ShapeRef.new(shape: FieldIdentifier, required: true, location_name: "Identifier"))
+    PasswordField.struct_class = Types::PasswordField
 
     PublishedVersions.key = Shapes::ShapeRef.new(shape: VersionKeyString)
     PublishedVersions.value = Shapes::ShapeRef.new(shape: ManagedRuleSetVersion)
@@ -945,6 +1048,12 @@ module Aws::WAFV2
     RegexPatternSetSummary.struct_class = Types::RegexPatternSetSummary
 
     RegularExpressionList.member = Shapes::ShapeRef.new(shape: Regex)
+
+    ReleaseSummaries.member = Shapes::ShapeRef.new(shape: ReleaseSummary)
+
+    ReleaseSummary.add_member(:release_version, Shapes::ShapeRef.new(shape: VersionKeyString, location_name: "ReleaseVersion"))
+    ReleaseSummary.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
+    ReleaseSummary.struct_class = Types::ReleaseSummary
 
     ResourceArns.member = Shapes::ShapeRef.new(shape: ResourceArn)
 
@@ -1025,6 +1134,7 @@ module Aws::WAFV2
 
     SqliMatchStatement.add_member(:field_to_match, Shapes::ShapeRef.new(shape: FieldToMatch, required: true, location_name: "FieldToMatch"))
     SqliMatchStatement.add_member(:text_transformations, Shapes::ShapeRef.new(shape: TextTransformations, required: true, location_name: "TextTransformations"))
+    SqliMatchStatement.add_member(:sensitivity_level, Shapes::ShapeRef.new(shape: SensitivityLevel, location_name: "SensitivityLevel"))
     SqliMatchStatement.struct_class = Types::SqliMatchStatement
 
     Statement.add_member(:byte_match_statement, Shapes::ShapeRef.new(shape: ByteMatchStatement, location_name: "ByteMatchStatement"))
@@ -1145,6 +1255,9 @@ module Aws::WAFV2
 
     UriPath.struct_class = Types::UriPath
 
+    UsernameField.add_member(:identifier, Shapes::ShapeRef.new(shape: FieldIdentifier, required: true, location_name: "Identifier"))
+    UsernameField.struct_class = Types::UsernameField
+
     VersionToPublish.add_member(:associated_rule_group_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "AssociatedRuleGroupArn"))
     VersionToPublish.add_member(:forecasted_lifetime, Shapes::ShapeRef.new(shape: TimeWindowDay, location_name: "ForecastedLifetime"))
     VersionToPublish.struct_class = Types::VersionToPublish
@@ -1159,6 +1272,9 @@ module Aws::WAFV2
 
     WAFAssociatedItemException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     WAFAssociatedItemException.struct_class = Types::WAFAssociatedItemException
+
+    WAFConfigurationWarningException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    WAFConfigurationWarningException.struct_class = Types::WAFConfigurationWarningException
 
     WAFDuplicateItemException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     WAFDuplicateItemException.struct_class = Types::WAFDuplicateItemException
@@ -1357,6 +1473,7 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: WAFSubscriptionNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFConfigurationWarningException)
       end)
 
       api.add_operation(:delete_firewall_manager_rule_groups, Seahorse::Model::Operation.new.tap do |o|
@@ -1486,6 +1603,18 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
       end)
 
+      api.add_operation(:generate_mobile_sdk_release_url, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GenerateMobileSdkReleaseUrl"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GenerateMobileSdkReleaseUrlRequest)
+        o.output = Shapes::ShapeRef.new(shape: GenerateMobileSdkReleaseUrlResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
+      end)
+
       api.add_operation(:get_ip_set, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetIPSet"
         o.http_method = "POST"
@@ -1519,6 +1648,18 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
+      end)
+
+      api.add_operation(:get_mobile_sdk_release, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMobileSdkRelease"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetMobileSdkReleaseRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetMobileSdkReleaseResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
       end)
 
@@ -1613,6 +1754,7 @@ module Aws::WAFV2
         o.output = Shapes::ShapeRef.new(shape: ListAvailableManagedRuleGroupVersionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
       end)
 
@@ -1655,6 +1797,17 @@ module Aws::WAFV2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListManagedRuleSetsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListManagedRuleSetsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
+      end)
+
+      api.add_operation(:list_mobile_sdk_releases, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListMobileSdkReleases"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListMobileSdkReleasesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListMobileSdkReleasesResponse)
         o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
@@ -1847,6 +2000,7 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFUnavailableEntityException)
         o.errors << Shapes::ShapeRef.new(shape: WAFSubscriptionNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFConfigurationWarningException)
       end)
 
       api.add_operation(:update_web_acl, Seahorse::Model::Operation.new.tap do |o|
@@ -1866,6 +2020,7 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFSubscriptionNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
         o.errors << Shapes::ShapeRef.new(shape: WAFExpiredManagedRuleGroupVersionException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFConfigurationWarningException)
       end)
     end
 

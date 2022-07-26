@@ -25,6 +25,14 @@ module Aws
        'WlSrUk+8d2/rvcnEv2QXer0=</HostId></Error>'
       end
 
+      let(:expired_credentials_body) do
+        '<?xml version="1.0" encoding="UTF-8"?>\n<Error><Code>'\
+        'ExpiredToken</Code><Message>The provided token has expired'\
+        '</Message><RequestId>531B68B3613F5C96</RequestId>'\
+        '<HostId>TMnOREh0Ms0touCRX0XkJinw7xqsF0v/iFyA+nCC4d3PpF+k2oek'\
+        'WlSrUk+8d2/rvcnEv2QXer0=</HostId></Error>'
+      end
+
       before(:each) do
         allow($stderr).to receive(:write)
         S3::BUCKET_REGIONS.clear
@@ -83,6 +91,18 @@ module Aws
           expect do
             client.put_object(bucket: 'bucket', key: 'keya', body: 'body')
           end.to raise_error(Aws::S3::Errors::AuthorizationHeaderMalformed)
+        end
+      end
+
+      context 'expired credentials' do
+        it 'does not detect region mismatch' do
+          client = S3::Client.new(client_opts.merge(region: 'us-west-2'))
+          stub_request(:put, 'https://s3.us-west-2.amazonaws.com/my.bucket/key')
+            .to_return(status: [400, 'ExpiredToken'], body: expired_credentials_body)
+
+          expect do
+            client.put_object(bucket: 'my.bucket', key: 'key')
+          end.to raise_error(Aws::S3::Errors::ExpiredToken)
         end
       end
 

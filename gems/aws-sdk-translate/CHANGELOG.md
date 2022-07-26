@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2022-06-29)
+------------------
+
+* Feature - Added ListLanguages API which can be used to list the languages supported by Translate.
+
+1.44.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.43.0 (2022-02-22)
+------------------
+
+* Feature - This release enables customers to use translation settings for formality customization in their synchronous translation output.
+
 1.42.0 (2022-02-03)
 ------------------
 

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative '../../spec_helper'
+require_relative '../../retry_errors_helper'
 
 module Aws
   module Plugins
@@ -207,10 +208,18 @@ module Aws
       end
 
       it 'retries if creds expire and are refreshable' do
+        # Note: this adds the refresh! method to credentials
         expect(credentials).to receive(:refresh!).exactly(3).times
         resp.error = RetryErrorsSvc::Errors::AuthFailure.new(nil, nil)
         handle { |_context| resp }
         expect(resp.context.retries).to eq(3)
+      end
+
+      it 'does not call refresh! when error is expired credentials and clock skew' do
+        resp.error = RetryErrorsSvc::Errors::RequestExpired.new(nil, nil)
+        resp.context.http_response.headers['date'] = (Time.now + 10*60).iso8601
+        handle { |_context| resp }
+        expect(resp.context.retries).to eq(1)
       end
 
       it 'retries if endpoint discovery error is detected' do

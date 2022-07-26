@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2022-04-19)
+------------------
+
+* Feature - This release adds support for specifying and extracting information from documents using the Queries feature within Analyze Document API
+
+1.37.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.36.0 (2022-02-23)
+------------------
+
+* Feature - Added support for merged cells and column header for table response.
+
 1.35.0 (2022-02-03)
 ------------------
 

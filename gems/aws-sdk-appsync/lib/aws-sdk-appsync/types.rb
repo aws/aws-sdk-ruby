@@ -446,7 +446,7 @@ module Aws::AppSync
     #   data as a hash:
     #
     #       {
-    #         ttl: 1,
+    #         ttl: 1, # required
     #         caching_keys: ["String"],
     #       }
     #
@@ -493,7 +493,8 @@ module Aws::AppSync
     #
     # @!attribute [rw] app_id_client_regex
     #   A regular expression for validating the incoming Amazon Cognito user
-    #   pool app client ID.
+    #   pool app client ID. If this value isn't set, no filtering is
+    #   applied.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CognitoUserPoolConfig AWS API Documentation
@@ -1089,7 +1090,7 @@ module Aws::AppSync
     #           },
     #         },
     #         caching_config: {
-    #           ttl: 1,
+    #           ttl: 1, # required
     #           caching_keys: ["String"],
     #         },
     #         max_batch_size: 1,
@@ -1718,6 +1719,65 @@ module Aws::AppSync
     class ElasticsearchDataSourceConfig < Struct.new(
       :endpoint,
       :aws_region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the list of errors generated when attempting to evaluate a
+    # mapping template.
+    #
+    # @!attribute [rw] message
+    #   The error payload.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ErrorDetail AWS API Documentation
+    #
+    class ErrorDetail < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass EvaluateMappingTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         template: "Template", # required
+    #         context: "Context", # required
+    #       }
+    #
+    # @!attribute [rw] template
+    #   The mapping template; this can be a request or response template. A
+    #   `template` is required for this action.
+    #   @return [String]
+    #
+    # @!attribute [rw] context
+    #   The map that holds all of the contextual information for your
+    #   resolver invocation. A `context` is required for this action.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/EvaluateMappingTemplateRequest AWS API Documentation
+    #
+    class EvaluateMappingTemplateRequest < Struct.new(
+      :template,
+      :context)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] evaluation_result
+    #   The mapping template; this can be a request or response template.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   The `ErrorDetail` object.
+    #   @return [Types::ErrorDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/EvaluateMappingTemplateResponse AWS API Documentation
+    #
+    class EvaluateMappingTemplateResponse < Struct.new(
+      :evaluation_result,
+      :error)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3960,7 +4020,7 @@ module Aws::AppSync
     #           },
     #         },
     #         caching_config: {
-    #           ttl: 1,
+    #           ttl: 1, # required
     #           caching_keys: ["String"],
     #         },
     #         max_batch_size: 1,
@@ -4134,7 +4194,8 @@ module Aws::AppSync
     #
     # @!attribute [rw] app_id_client_regex
     #   A regular expression for validating the incoming Amazon Cognito user
-    #   pool app client ID.
+    #   pool app client ID. If this value isn't set, no filtering is
+    #   applied.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UserPoolConfig AWS API Documentation

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2022-03-23)
+------------------
+
+* Feature - Increased the maximum supported value for the Timeout parameter of the StartSnapshot API from 60 minutes to 4320 minutes.  Changed the HTTP error code for ConflictException from 503 to 409.
+
+1.25.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.24.0 (2022-02-03)
 ------------------
 

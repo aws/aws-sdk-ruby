@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.137.0 (2022-05-04)
+------------------
+
+* Feature - This release adds the TargetMaps parameter in SSM State Manager API.
+
+1.136.0 (2022-04-29)
+------------------
+
+* Feature - Update the StartChangeRequestExecution, adding TargetMaps to the Runbook parameter
+
+1.135.0 (2022-04-19)
+------------------
+
+* Feature - Added offset support for specifying the number of days to wait after the date and time specified by a CRON expression when creating SSM association.
+
+1.134.0 (2022-03-25)
+------------------
+
+* Feature - This Patch Manager release supports creating, updating, and deleting Patch Baselines for Rocky Linux OS.
+
+1.133.0 (2022-03-23)
+------------------
+
+* Feature - Update AddTagsToResource, ListTagsForResource, and RemoveTagsFromResource APIs to reflect the support for tagging Automation resources. Includes other minor documentation updates.
+
+1.132.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.131.0 (2022-02-16)
+------------------
+
+* Feature - Assorted ticket fixes and updates for AWS Systems Manager.
+
+1.130.0 (2022-02-11)
+------------------
+
+* Feature - Documentation updates for AWS Systems Manager.
+
 1.129.0 (2022-02-03)
 ------------------
 

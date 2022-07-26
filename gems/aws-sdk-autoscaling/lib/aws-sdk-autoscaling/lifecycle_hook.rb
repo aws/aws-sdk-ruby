@@ -44,27 +44,25 @@ module Aws::AutoScaling
     end
     alias :lifecycle_hook_name :name
 
-    # The state of the EC2 instance to which to attach the lifecycle hook.
-    # The following are possible values:
+    # The lifecycle transition.
     #
-    # * autoscaling:EC2\_INSTANCE\_LAUNCHING
-    #
-    # * autoscaling:EC2\_INSTANCE\_TERMINATING
+    # Valid values: `autoscaling:EC2_INSTANCE_LAUNCHING` \|
+    # `autoscaling:EC2_INSTANCE_TERMINATING`
     # @return [String]
     def lifecycle_transition
       data[:lifecycle_transition]
     end
 
     # The ARN of the target that Amazon EC2 Auto Scaling sends notifications
-    # to when an instance is in the transition state for the lifecycle hook.
-    # The notification target can be either an SQS queue or an SNS topic.
+    # to when an instance is in a wait state for the lifecycle hook.
     # @return [String]
     def notification_target_arn
       data[:notification_target_arn]
     end
 
     # The ARN of the IAM role that allows the Auto Scaling group to publish
-    # to the specified notification target.
+    # to the specified notification target (an Amazon SNS topic or an Amazon
+    # SQS queue).
     # @return [String]
     def role_arn
       data[:role_arn]
@@ -80,24 +78,24 @@ module Aws::AutoScaling
     # The maximum time, in seconds, that can elapse before the lifecycle
     # hook times out. If the lifecycle hook times out, Amazon EC2 Auto
     # Scaling performs the action that you specified in the `DefaultResult`
-    # parameter.
+    # property.
     # @return [Integer]
     def heartbeat_timeout
       data[:heartbeat_timeout]
     end
 
-    # The maximum time, in seconds, that an instance can remain in a
-    # `Pending:Wait` or `Terminating:Wait` state. The maximum is 172800
-    # seconds (48 hours) or 100 times `HeartbeatTimeout`, whichever is
-    # smaller.
+    # The maximum time, in seconds, that an instance can remain in a wait
+    # state. The maximum is 172800 seconds (48 hours) or 100 times
+    # `HeartbeatTimeout`, whichever is smaller.
     # @return [Integer]
     def global_timeout
       data[:global_timeout]
     end
 
-    # Defines the action the Auto Scaling group should take when the
-    # lifecycle hook timeout elapses or if an unexpected failure occurs. The
-    # possible values are `CONTINUE` and `ABANDON`.
+    # The action the Auto Scaling group takes when the lifecycle hook
+    # timeout elapses or if an unexpected failure occurs.
+    #
+    # Valid values: `CONTINUE` \| `ABANDON`
     # @return [String]
     def default_result
       data[:default_result]
@@ -254,8 +252,8 @@ module Aws::AutoScaling
     #   sends this token to the notification target you specified when you
     #   created the lifecycle hook.
     # @option options [required, String] :lifecycle_action_result
-    #   The action for the group to take. This parameter can be either
-    #   `CONTINUE` or `ABANDON`.
+    #   The action for the group to take. You can specify either `CONTINUE` or
+    #   `ABANDON`.
     # @option options [String] :instance_id
     #   The ID of the instance.
     # @return [Types::CompleteLifecycleActionAnswer]
@@ -294,27 +292,29 @@ module Aws::AutoScaling
     #   })
     # @param [Hash] options ({})
     # @option options [String] :lifecycle_transition
-    #   The instance state to which you want to attach the lifecycle hook. The
-    #   valid values are:
+    #   The lifecycle transition. For Auto Scaling groups, there are two major
+    #   lifecycle transitions.
     #
-    #   * autoscaling:EC2\_INSTANCE\_LAUNCHING
+    #   * To create a lifecycle hook for scale-out events, specify
+    #     `autoscaling:EC2_INSTANCE_LAUNCHING`.
     #
-    #   * autoscaling:EC2\_INSTANCE\_TERMINATING
+    #   * To create a lifecycle hook for scale-in events, specify
+    #     `autoscaling:EC2_INSTANCE_TERMINATING`.
     #
     #   Required for new lifecycle hooks, but optional when updating existing
     #   hooks.
     # @option options [String] :role_arn
     #   The ARN of the IAM role that allows the Auto Scaling group to publish
-    #   to the specified notification target, for example, an Amazon SNS topic
-    #   or an Amazon SQS queue.
+    #   to the specified notification target.
     #
-    #   Required for new lifecycle hooks, but optional when updating existing
-    #   hooks.
+    #   Valid only if the notification target is an Amazon SNS topic or an
+    #   Amazon SQS queue. Required for new lifecycle hooks, but optional when
+    #   updating existing hooks.
     # @option options [String] :notification_target_arn
-    #   The ARN of the notification target that Amazon EC2 Auto Scaling uses
-    #   to notify you when an instance is in the transition state for the
-    #   lifecycle hook. This target can be either an SQS queue or an SNS
-    #   topic.
+    #   The Amazon Resource Name (ARN) of the notification target that Amazon
+    #   EC2 Auto Scaling uses to notify you when an instance is in a wait
+    #   state for the lifecycle hook. You can specify either an Amazon SNS
+    #   topic or an Amazon SQS queue.
     #
     #   If you specify an empty string, this overrides the current ARN.
     #
@@ -332,16 +332,12 @@ module Aws::AutoScaling
     #   The maximum time, in seconds, that can elapse before the lifecycle
     #   hook times out. The range is from `30` to `7200` seconds. The default
     #   value is `3600` seconds (1 hour).
-    #
-    #   If the lifecycle hook times out, Amazon EC2 Auto Scaling performs the
-    #   action that you specified in the `DefaultResult` parameter. You can
-    #   prevent the lifecycle hook from timing out by calling the
-    #   RecordLifecycleActionHeartbeat API.
     # @option options [String] :default_result
-    #   Defines the action the Auto Scaling group should take when the
-    #   lifecycle hook timeout elapses or if an unexpected failure occurs.
-    #   This parameter can be either `CONTINUE` or `ABANDON`. The default
-    #   value is `ABANDON`.
+    #   The action the Auto Scaling group takes when the lifecycle hook
+    #   timeout elapses or if an unexpected failure occurs. The default value
+    #   is `ABANDON`.
+    #
+    #   Valid values: `CONTINUE` \| `ABANDON`
     # @return [Types::PutLifecycleHookAnswer]
     def put(options = {})
       options = options.merge(

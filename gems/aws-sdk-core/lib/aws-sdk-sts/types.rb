@@ -213,7 +213,7 @@ module Aws::STS
     #
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_session-tags.html
     #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-limits.html#reference_iam-limits-entity-length
-    #   [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/session-tags.html#id_session-tags_ctlogs
+    #   [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_session-tags.html#id_session-tags_ctlogs
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] transitive_tag_keys
@@ -710,13 +710,13 @@ module Aws::STS
     #   @return [String]
     #
     # @!attribute [rw] provider_id
-    #   The fully qualified host component of the domain name of the
-    #   identity provider.
+    #   The fully qualified host component of the domain name of the OAuth
+    #   2.0 identity provider. Do not specify this value for an OpenID
+    #   Connect identity provider.
     #
-    #   Specify this value only for OAuth 2.0 access tokens. Currently
-    #   `www.amazon.com` and `graph.facebook.com` are the only supported
-    #   identity providers for OAuth 2.0 access tokens. Do not include URL
-    #   schemes and port numbers.
+    #   Currently `www.amazon.com` and `graph.facebook.com` are the only
+    #   supported identity providers for OAuth 2.0 access tokens. Do not
+    #   include URL schemes and port numbers.
     #
     #   Do not specify this value for OpenID Connect ID tokens.
     #   @return [String]

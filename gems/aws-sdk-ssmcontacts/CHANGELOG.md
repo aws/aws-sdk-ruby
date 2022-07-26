@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2022-05-09)
+------------------
+
+* Feature - Fixed an error in the DescribeEngagement example for AWS Incident Manager.
+
+1.13.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.12.0 (2022-02-03)
 ------------------
 

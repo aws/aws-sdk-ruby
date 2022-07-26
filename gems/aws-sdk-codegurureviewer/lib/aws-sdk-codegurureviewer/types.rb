@@ -322,10 +322,17 @@ module Aws::CodeGuruReviewer
     #   @return [Types::Metrics]
     #
     # @!attribute [rw] analysis_types
-    #   They types of analysis performed during a repository analysis or a
+    #   The types of analysis performed during a repository analysis or a
     #   pull request review. You can specify either `Security`,
     #   `CodeQuality`, or both.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] config_file_state
+    #   The state of the `aws-codeguru-reviewer.yml` configuration file that
+    #   allows the configuration of the CodeGuru Reviewer analysis. The file
+    #   either exists, doesn't exist, or exists with errors at the root
+    #   directory of your repository.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/CodeReview AWS API Documentation
     #
@@ -344,7 +351,8 @@ module Aws::CodeGuruReviewer
       :source_code_type,
       :association_arn,
       :metrics,
-      :analysis_types)
+      :analysis_types,
+      :config_file_state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1373,9 +1381,18 @@ module Aws::CodeGuruReviewer
     # Information about the statistics from the code review.
     #
     # @!attribute [rw] metered_lines_of_code_count
-    #   `MeteredLinesOfCode` is the number of lines of code in the
+    #   `MeteredLinesOfCodeCount` is the number of lines of code in the
     #   repository where the code review happened. This does not include
     #   non-code lines such as comments and blank lines.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] suppressed_lines_of_code_count
+    #   `SuppressedLinesOfCodeCount` is the number of lines of code in the
+    #   repository where the code review happened that CodeGuru Reviewer did
+    #   not analyze. The lines suppressed in the analysis is based on the
+    #   `excludeFiles` variable in the `aws-codeguru-reviewer.yml` file.
+    #   This number does not include non-code lines such as comments and
+    #   blank lines.
     #   @return [Integer]
     #
     # @!attribute [rw] findings_count
@@ -1386,6 +1403,7 @@ module Aws::CodeGuruReviewer
     #
     class Metrics < Struct.new(
       :metered_lines_of_code_count,
+      :suppressed_lines_of_code_count,
       :findings_count)
       SENSITIVE = []
       include Aws::Structure
@@ -1408,6 +1426,25 @@ module Aws::CodeGuruReviewer
     #   the 25 changed lines of code for a total of 2,725 lines of code.
     #   @return [Integer]
     #
+    # @!attribute [rw] suppressed_lines_of_code_count
+    #   Lines of code suppressed in the code review based on the
+    #   `excludeFiles` element in the `aws-codeguru-reviewer.yml` file. For
+    #   full repository analyses, this number includes all lines of code in
+    #   the files that are suppressed. For pull requests, this number only
+    #   includes the *changed* lines of code that are suppressed. In both
+    #   cases, this number does not include non-code lines such as comments
+    #   and import statements. For example, if you initiate a full
+    #   repository analysis on a repository containing 5 files, each file
+    #   with 100 lines of code, and 2 files are listed as excluded in the
+    #   `aws-codeguru-reviewer.yml` file, then `SuppressedLinesOfCodeCount`
+    #   returns 200 (2 * 100) as the total number of lines of code
+    #   suppressed. However, if you submit a pull request for the same
+    #   repository, then `SuppressedLinesOfCodeCount` only includes the
+    #   lines in the 2 files that changed. If only 1 of the 2 files changed
+    #   in the pull request, then `SuppressedLinesOfCodeCount` returns 100
+    #   (1 * 100) as the total number of lines of code suppressed.
+    #   @return [Integer]
+    #
     # @!attribute [rw] findings_count
     #   Total number of recommendations found in the code review.
     #   @return [Integer]
@@ -1416,6 +1453,7 @@ module Aws::CodeGuruReviewer
     #
     class MetricsSummary < Struct.new(
       :metered_lines_of_code_count,
+      :suppressed_lines_of_code_count,
       :findings_count)
       SENSITIVE = []
       include Aws::Structure

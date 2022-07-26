@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::Organizations
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -371,27 +373,27 @@ module Aws::Organizations
     #   The user who calls the API for an invitation to join must have the
     #   `organizations:AcceptHandshake` permission. If you enabled all
     #   features in the organization, the user must also have the
-    #   `iam:CreateServiceLinkedRole` permission so that AWS Organizations
-    #   can create the required service-linked role named
-    #   `AWSServiceRoleForOrganizations`. For more information, see [AWS
-    #   Organizations and Service-Linked Roles][1] in the *AWS Organizations
+    #   `iam:CreateServiceLinkedRole` permission so that Organizations can
+    #   create the required service-linked role named
+    #   `AWSServiceRoleForOrganizations`. For more information, see
+    #   [Organizations and Service-Linked Roles][1] in the *Organizations
     #   User Guide*.
     #
     # * **Enable all features final confirmation** handshake: only a
     #   principal from the management account.
     #
-    #   For more information about invitations, see [Inviting an AWS Account
-    #   to Join Your Organization][2] in the *AWS Organizations User Guide.*
-    #   For more information about requests to enable all features in the
-    #   organization, see [Enabling All Features in Your Organization][3] in
-    #   the *AWS Organizations User Guide.*
+    #   For more information about invitations, see [Inviting an Amazon Web
+    #   Services account to join your organization][2] in the *Organizations
+    #   User Guide.* For more information about requests to enable all
+    #   features in the organization, see [Enabling all features in your
+    #   organization][3] in the *Organizations User Guide.*
     #
     # After you accept a handshake, it continues to appear in the results of
     # relevant APIs for only 30 days. After that, it's deleted.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integration_services.html#orgs_integration_service-linked-roles
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integration_services.html#orgs_integration_service-linked-roles
     # [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_invites.html
     # [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
     #
@@ -498,7 +500,7 @@ module Aws::Organizations
 
     # Attaches a policy to a root, an organizational unit (OU), or an
     # individual account. How the policy affects accounts depends on the
-    # type of policy. Refer to the *AWS Organizations User Guide* for
+    # type of policy. Refer to the *Organizations User Guide* for
     # information about each policy type:
     #
     # * [AISERVICES\_OPT\_OUT\_POLICY][1]
@@ -708,70 +710,139 @@ module Aws::Organizations
       req.send_request(options)
     end
 
-    # Creates an AWS account that is automatically a member of the
-    # organization whose credentials made the request. This is an
-    # asynchronous request that AWS performs in the background. Because
-    # `CreateAccount` operates asynchronously, it can return a successful
-    # completion message even though account initialization might still be
-    # in progress. You might need to wait a few minutes before you can
-    # successfully access the account. To check the status of the request,
-    # do one of the following:
+    # Closes an Amazon Web Services member account within an organization.
+    # You can't close the management account with this API. This is an
+    # asynchronous request that Amazon Web Services performs in the
+    # background. Because `CloseAccount` operates asynchronously, it can
+    # return a successful completion message even though account closure
+    # might still be in progress. You need to wait a few minutes before the
+    # account is fully closed. To check the status of the request, do one of
+    # the following:
+    #
+    # * Use the `AccountId` that you sent in the `CloseAccount` request to
+    #   provide as a parameter to the DescribeAccount operation.
+    #
+    #   While the close account request is in progress, Account status will
+    #   indicate PENDING\_CLOSURE. When the close account request completes,
+    #   the status will change to SUSPENDED.
+    #
+    # * Check the CloudTrail log for the `CloseAccountResult` event that
+    #   gets published after the account closes successfully. For
+    #   information on using CloudTrail with Organizations, see [Logging and
+    #   monitoring in Organizations][1] in the *Organizations User Guide.*
+    #
+    # <note markdown="1"> * You can only close 10% of active member accounts within a rolling 30
+    #   day period. This quota is not bound by a calendar month, but starts
+    #   when you close an account. Within 30 days of that initial account
+    #   closure, you can't exceed the 10% account closure limit.
+    #
+    # * To reinstate a closed account, contact Amazon Web Services Support
+    #   within the 90-day grace period while the account is in SUSPENDED
+    #   status.
+    #
+    # * If the Amazon Web Services account you attempt to close is linked to
+    #   an Amazon Web Services GovCloud (US) account, the `CloseAccount`
+    #   request will close both accounts. To learn important pre-closure
+    #   details, see [ Closing an Amazon Web Services GovCloud (US)
+    #   account][2] in the <i> Amazon Web Services GovCloud User Guide</i>.
+    #
+    #  </note>
+    #
+    # For more information about closing accounts, see [Closing an Amazon
+    # Web Services account][3] in the *Organizations User Guide.*
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_security_incident-response.html#orgs_cloudtrail-integration
+    # [2]: https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/Closing-govcloud-account.html
+    # [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html
+    #
+    # @option params [required, String] :account_id
+    #   Retrieves the Amazon Web Services account Id for the current
+    #   `CloseAccount` API request.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.close_account({
+    #     account_id: "AccountId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CloseAccount AWS API Documentation
+    #
+    # @overload close_account(params = {})
+    # @param [Hash] params ({})
+    def close_account(params = {}, options = {})
+      req = build_request(:close_account, params)
+      req.send_request(options)
+    end
+
+    # Creates an Amazon Web Services account that is automatically a member
+    # of the organization whose credentials made the request. This is an
+    # asynchronous request that Amazon Web Services performs in the
+    # background. Because `CreateAccount` operates asynchronously, it can
+    # return a successful completion message even though account
+    # initialization might still be in progress. You might need to wait a
+    # few minutes before you can successfully access the account. To check
+    # the status of the request, do one of the following:
     #
     # * Use the `Id` member of the `CreateAccountStatus` response element
     #   from this operation to provide as a parameter to the
     #   DescribeCreateAccountStatus operation.
     #
-    # * Check the AWS CloudTrail log for the `CreateAccountResult` event.
-    #   For information on using AWS CloudTrail with AWS Organizations, see
-    #   [Logging and monitoring in AWS Organizations][1] in the *AWS
-    #   Organizations User Guide.*
+    # * Check the CloudTrail log for the `CreateAccountResult` event. For
+    #   information on using CloudTrail with Organizations, see [Logging and
+    #   monitoring in Organizations][1] in the *Organizations User Guide.*
     #
     # The user who calls the API to create an account must have the
     # `organizations:CreateAccount` permission. If you enabled all features
-    # in the organization, AWS Organizations creates the required
-    # service-linked role named `AWSServiceRoleForOrganizations`. For more
-    # information, see [AWS Organizations and Service-Linked Roles][2] in
-    # the *AWS Organizations User Guide*.
+    # in the organization, Organizations creates the required service-linked
+    # role named `AWSServiceRoleForOrganizations`. For more information, see
+    # [Organizations and Service-Linked Roles][2] in the *Organizations User
+    # Guide*.
     #
     # If the request includes tags, then the requester must have the
     # `organizations:TagResource` permission.
     #
-    # AWS Organizations preconfigures the new member account with a role
-    # (named `OrganizationAccountAccessRole` by default) that grants users
-    # in the management account administrator permissions in the new member
-    # account. Principals in the management account can assume the role. AWS
+    # Organizations preconfigures the new member account with a role (named
+    # `OrganizationAccountAccessRole` by default) that grants users in the
+    # management account administrator permissions in the new member
+    # account. Principals in the management account can assume the role.
     # Organizations clones the company name and address information for the
     # new account from the organization's management account.
     #
     # This operation can be called only from the organization's management
     # account.
     #
-    # For more information about creating accounts, see [Creating an AWS
-    # Account in Your Organization][3] in the *AWS Organizations User
-    # Guide.*
+    # For more information about creating accounts, see [Creating an Amazon
+    # Web Services account in Your Organization][3] in the *Organizations
+    # User Guide.*
     #
-    # * When you create an account in an organization using the AWS
+    # * When you create an account in an organization using the
     #   Organizations console, API, or CLI commands, the information
     #   required for the account to operate as a standalone account, such as
     #   a payment method and signing the end user license agreement (EULA)
     #   is *not* automatically collected. If you must remove an account from
     #   your organization later, you can do so only after you provide the
     #   missing information. Follow the steps at [ To leave an organization
-    #   as a member account][4] in the *AWS Organizations User Guide*.
+    #   as a member account][4] in the *Organizations User Guide*.
     #
     # * If you get an exception that indicates that you exceeded your
-    #   account limits for the organization, contact [AWS Support][5].
+    #   account limits for the organization, contact [Amazon Web Services
+    #   Support][5].
     #
     # * If you get an exception that indicates that the operation failed
     #   because your organization is still initializing, wait one hour and
-    #   then try again. If the error persists, contact [AWS Support][5].
+    #   then try again. If the error persists, contact [Amazon Web Services
+    #   Support][5].
     #
     # * Using `CreateAccount` to create multiple temporary accounts isn't
     #   recommended. You can only close an account from the Billing and Cost
-    #   Management Console, and you must be signed in as the root user. For
+    #   Management console, and you must be signed in as the root user. For
     #   information on the requirements and process for closing an account,
-    #   see [Closing an AWS Account][6] in the *AWS Organizations User
-    #   Guide*.
+    #   see [Closing an Amazon Web Services account][6] in the
+    #   *Organizations User Guide*.
     #
     # <note markdown="1"> When you create a member account with this operation, you can choose
     # whether to create the account with the **IAM User and Role Access to
@@ -786,20 +857,45 @@ module Aws::Organizations
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_security_incident-response.html#orgs_cloudtrail-integration
-    # [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html#orgs_integrate_services-using_slrs
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_security_incident-response.html#orgs_cloudtrail-integration
+    # [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html#orgs_integrate_services-using_slrs
     # [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create.html
-    # [4]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info
+    # [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info
     # [5]: https://console.aws.amazon.com/support/home#/
-    # [6]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html
+    # [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html
     # [7]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html
     #
     # @option params [required, String] :email
     #   The email address of the owner to assign to the new member account.
-    #   This email address must not already be associated with another AWS
-    #   account. You must use a valid email address to complete account
-    #   creation. You can't access the root user of the account or remove an
-    #   account that was created with an invalid email address.
+    #   This email address must not already be associated with another Amazon
+    #   Web Services account. You must use a valid email address to complete
+    #   account creation.
+    #
+    #   The rules for a valid email address:
+    #
+    #   * The address must be a minimum of 6 and a maximum of 64 characters
+    #     long.
+    #
+    #   * All characters must be 7-bit ASCII characters.
+    #
+    #   * There must be one and only one @ symbol, which separates the local
+    #     name from the domain name.
+    #
+    #   * The local name can't contain any of the following characters:
+    #
+    #     whitespace, " ' ( ) &lt; &gt; \[ \] : ; , \\ \| % &amp;
+    #
+    #   * The local name can't begin with a dot (.)
+    #
+    #   * The domain name can consist of only the characters
+    #     \[a-z\],\[A-Z\],\[0-9\], hyphen (-), or dot (.)
+    #
+    #   * The domain name can't begin or end with a hyphen (-) or dot (.)
+    #
+    #   * The domain name must contain at least one dot
+    #
+    #   You can't access the root user of the account or remove an account
+    #   that was created with an invalid email address.
     #
     # @option params [required, String] :account_name
     #   The friendly name of the member account.
@@ -807,11 +903,11 @@ module Aws::Organizations
     # @option params [String] :role_name
     #   (Optional)
     #
-    #   The name of an IAM role that AWS Organizations automatically
-    #   preconfigures in the new member account. This role trusts the
-    #   management account, allowing users in the management account to assume
-    #   the role, as permitted by the management account administrator. The
-    #   role has administrator permissions in the new member account.
+    #   The name of an IAM role that Organizations automatically preconfigures
+    #   in the new member account. This role trusts the management account,
+    #   allowing users in the management account to assume the role, as
+    #   permitted by the management account administrator. The role has
+    #   administrator permissions in the new member account.
     #
     #   If you don't specify this parameter, the role name defaults to
     #   `OrganizationAccountAccessRole`.
@@ -820,10 +916,10 @@ module Aws::Organizations
     #   account, see the following links:
     #
     #   * [Accessing and Administering the Member Accounts in Your
-    #     Organization][1] in the *AWS Organizations User Guide*
+    #     Organization][1] in the *Organizations User Guide*
     #
-    #   * Steps 2 and 3 in [Tutorial: Delegate Access Across AWS Accounts
-    #     Using IAM Roles][2] in the *IAM User Guide*
+    #   * Steps 2 and 3 in [Tutorial: Delegate Access Across Amazon Web
+    #     Services accounts Using IAM Roles][2] in the *IAM User Guide*
     #
     #   The [regex pattern][3] that is used to validate this parameter. The
     #   pattern can include uppercase letters, lowercase letters, digits with
@@ -840,8 +936,8 @@ module Aws::Organizations
     #   billing information *if* they have the required permissions. If set to
     #   `DENY`, only the root user of the new account can access account
     #   billing information. For more information, see [Activating Access to
-    #   the Billing and Cost Management Console][1] in the *AWS Billing and
-    #   Cost Management User Guide*.
+    #   the Billing and Cost Management Console][1] in the *Amazon Web
+    #   Services Billing and Cost Management User Guide*.
     #
     #   If you don't specify this parameter, the value defaults to `ALLOW`,
     #   and IAM users and roles with the required permissions can access
@@ -855,12 +951,12 @@ module Aws::Organizations
     #   A list of tags that you want to attach to the newly created account.
     #   For each tag in the list, you must specify both a tag key and a value.
     #   You can set the value to an empty string, but you can't set it to
-    #   `null`. For more information about tagging, see [Tagging AWS
-    #   Organizations resources][1] in the AWS Organizations User Guide.
+    #   `null`. For more information about tagging, see [Tagging Organizations
+    #   resources][1] in the Organizations User Guide.
     #
-    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed number
-    #   of tags for an account, then the entire request fails and the account
-    #   is not created.
+    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the maximum allowed
+    #   number of tags for an account, then the entire request fails and the
+    #   account is not created.
     #
     #    </note>
     #
@@ -897,7 +993,7 @@ module Aws::Organizations
     #
     #   resp = client.create_account({
     #     email: "Email", # required
-    #     account_name: "AccountName", # required
+    #     account_name: "CreateAccountName", # required
     #     role_name: "RoleName",
     #     iam_user_access_to_billing: "ALLOW", # accepts ALLOW, DENY
     #     tags: [
@@ -917,7 +1013,7 @@ module Aws::Organizations
     #   resp.create_account_status.completed_timestamp #=> Time
     #   resp.create_account_status.account_id #=> String
     #   resp.create_account_status.gov_cloud_account_id #=> String
-    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE", "GOVCLOUD_ACCOUNT_ALREADY_EXISTS", "MISSING_BUSINESS_VALIDATION", "FAILED_BUSINESS_VALIDATION", "PENDING_BUSINESS_VALIDATION", "INVALID_IDENTITY_FOR_BUSINESS_VALIDATION", "UNKNOWN_BUSINESS_VALIDATION", "MISSING_PAYMENT_INSTRUMENT"
+    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE", "GOVCLOUD_ACCOUNT_ALREADY_EXISTS", "MISSING_BUSINESS_VALIDATION", "FAILED_BUSINESS_VALIDATION", "PENDING_BUSINESS_VALIDATION", "INVALID_IDENTITY_FOR_BUSINESS_VALIDATION", "UNKNOWN_BUSINESS_VALIDATION", "MISSING_PAYMENT_INSTRUMENT", "INVALID_PAYMENT_INSTRUMENT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateAccount AWS API Documentation
     #
@@ -930,33 +1026,34 @@ module Aws::Organizations
 
     # This action is available if all of the following are true:
     #
-    # * You're authorized to create accounts in the AWS GovCloud (US)
-    #   Region. For more information on the AWS GovCloud (US) Region, see
-    #   the [ *AWS GovCloud User Guide*.][1]
+    # * You're authorized to create accounts in the Amazon Web Services
+    #   GovCloud (US) Region. For more information on the Amazon Web
+    #   Services GovCloud (US) Region, see the [ *Amazon Web Services
+    #   GovCloud User Guide*.][1]
     #
-    # * You already have an account in the AWS GovCloud (US) Region that is
-    #   paired with a management account of an organization in the
-    #   commercial Region.
+    # * You already have an account in the Amazon Web Services GovCloud (US)
+    #   Region that is paired with a management account of an organization
+    #   in the commercial Region.
     #
     # * You call this action from the management account of your
     #   organization in the commercial Region.
     #
     # * You have the `organizations:CreateGovCloudAccount` permission.
     #
-    # AWS Organizations automatically creates the required service-linked
-    # role named `AWSServiceRoleForOrganizations`. For more information, see
-    # [AWS Organizations and Service-Linked Roles][2] in the *AWS
-    # Organizations User Guide.*
+    # Organizations automatically creates the required service-linked role
+    # named `AWSServiceRoleForOrganizations`. For more information, see
+    # [Organizations and Service-Linked Roles][2] in the *Organizations User
+    # Guide.*
     #
-    # AWS automatically enables AWS CloudTrail for AWS GovCloud (US)
-    # accounts, but you should also do the following:
+    # Amazon Web Services automatically enables CloudTrail for Amazon Web
+    # Services GovCloud (US) accounts, but you should also do the following:
     #
-    # * Verify that AWS CloudTrail is enabled to store logs.
+    # * Verify that CloudTrail is enabled to store logs.
     #
-    # * Create an S3 bucket for AWS CloudTrail log storage.
+    # * Create an Amazon S3 bucket for CloudTrail log storage.
     #
-    #   For more information, see [Verifying AWS CloudTrail Is Enabled][3]
-    #   in the *AWS GovCloud User Guide*.
+    #   For more information, see [Verifying CloudTrail Is Enabled][3] in
+    #   the *Amazon Web Services GovCloud User Guide*.
     #
     # If the request includes tags, then the requester must have the
     # `organizations:TagResource` permission. The tags are attached to the
@@ -966,74 +1063,79 @@ module Aws::Organizations
     # GovCloud account exists.
     #
     # You call this action from the management account of your organization
-    # in the commercial Region to create a standalone AWS account in the AWS
-    # GovCloud (US) Region. After the account is created, the management
-    # account of an organization in the AWS GovCloud (US) Region can invite
-    # it to that organization. For more information on inviting standalone
-    # accounts in the AWS GovCloud (US) to join an organization, see [AWS
-    # Organizations][4] in the *AWS GovCloud User Guide.*
+    # in the commercial Region to create a standalone Amazon Web Services
+    # account in the Amazon Web Services GovCloud (US) Region. After the
+    # account is created, the management account of an organization in the
+    # Amazon Web Services GovCloud (US) Region can invite it to that
+    # organization. For more information on inviting standalone accounts in
+    # the Amazon Web Services GovCloud (US) to join an organization, see
+    # [Organizations][4] in the *Amazon Web Services GovCloud User Guide.*
     #
-    # Calling `CreateGovCloudAccount` is an asynchronous request that AWS
-    # performs in the background. Because `CreateGovCloudAccount` operates
-    # asynchronously, it can return a successful completion message even
-    # though account initialization might still be in progress. You might
-    # need to wait a few minutes before you can successfully access the
-    # account. To check the status of the request, do one of the following:
+    # Calling `CreateGovCloudAccount` is an asynchronous request that Amazon
+    # Web Services performs in the background. Because
+    # `CreateGovCloudAccount` operates asynchronously, it can return a
+    # successful completion message even though account initialization might
+    # still be in progress. You might need to wait a few minutes before you
+    # can successfully access the account. To check the status of the
+    # request, do one of the following:
     #
     # * Use the `OperationId` response element from this operation to
     #   provide as a parameter to the DescribeCreateAccountStatus operation.
     #
-    # * Check the AWS CloudTrail log for the `CreateAccountResult` event.
-    #   For information on using AWS CloudTrail with Organizations, see
-    #   [Monitoring the Activity in Your Organization][5] in the *AWS
-    #   Organizations User Guide.*
+    # * Check the CloudTrail log for the `CreateAccountResult` event. For
+    #   information on using CloudTrail with Organizations, see [Monitoring
+    #   the Activity in Your Organization][5] in the *Organizations User
+    #   Guide.*
     #
     #
     #
     # When you call the `CreateGovCloudAccount` action, you create two
-    # accounts: a standalone account in the AWS GovCloud (US) Region and an
-    # associated account in the commercial Region for billing and support
-    # purposes. The account in the commercial Region is automatically a
-    # member of the organization whose credentials made the request. Both
-    # accounts are associated with the same email address.
+    # accounts: a standalone account in the Amazon Web Services GovCloud
+    # (US) Region and an associated account in the commercial Region for
+    # billing and support purposes. The account in the commercial Region is
+    # automatically a member of the organization whose credentials made the
+    # request. Both accounts are associated with the same email address.
     #
     # A role is created in the new account in the commercial Region that
     # allows the management account in the organization in the commercial
-    # Region to assume it. An AWS GovCloud (US) account is then created and
-    # associated with the commercial account that you just created. A role
-    # is also created in the new AWS GovCloud (US) account that can be
-    # assumed by the AWS GovCloud (US) account that is associated with the
-    # management account of the commercial organization. For more
-    # information and to view a diagram that explains how account access
-    # works, see [AWS Organizations][4] in the *AWS GovCloud User Guide.*
+    # Region to assume it. An Amazon Web Services GovCloud (US) account is
+    # then created and associated with the commercial account that you just
+    # created. A role is also created in the new Amazon Web Services
+    # GovCloud (US) account that can be assumed by the Amazon Web Services
+    # GovCloud (US) account that is associated with the management account
+    # of the commercial organization. For more information and to view a
+    # diagram that explains how account access works, see [Organizations][4]
+    # in the *Amazon Web Services GovCloud User Guide.*
     #
-    # For more information about creating accounts, see [Creating an AWS
-    # Account in Your Organization][6] in the *AWS Organizations User
-    # Guide.*
+    # For more information about creating accounts, see [Creating an Amazon
+    # Web Services account in Your Organization][6] in the *Organizations
+    # User Guide.*
     #
-    # * When you create an account in an organization using the AWS
+    # * When you create an account in an organization using the
     #   Organizations console, API, or CLI commands, the information
     #   required for the account to operate as a standalone account is *not*
     #   automatically collected. This includes a payment method and signing
     #   the end user license agreement (EULA). If you must remove an account
     #   from your organization later, you can do so only after you provide
     #   the missing information. Follow the steps at [ To leave an
-    #   organization as a member account][7] in the *AWS Organizations User
+    #   organization as a member account][7] in the *Organizations User
     #   Guide.*
     #
     # * If you get an exception that indicates that you exceeded your
-    #   account limits for the organization, contact [AWS Support][8].
+    #   account limits for the organization, contact [Amazon Web Services
+    #   Support][8].
     #
     # * If you get an exception that indicates that the operation failed
     #   because your organization is still initializing, wait one hour and
-    #   then try again. If the error persists, contact [AWS Support][8].
+    #   then try again. If the error persists, contact [Amazon Web Services
+    #   Support][8].
     #
     # * Using `CreateGovCloudAccount` to create multiple temporary accounts
-    #   isn't recommended. You can only close an account from the AWS
-    #   Billing and Cost Management console, and you must be signed in as
-    #   the root user. For information on the requirements and process for
-    #   closing an account, see [Closing an AWS Account][9] in the *AWS
-    #   Organizations User Guide*.
+    #   isn't recommended. You can only close an account from the Amazon
+    #   Web Services Billing and Cost Management console, and you must be
+    #   signed in as the root user. For information on the requirements and
+    #   process for closing an account, see [Closing an Amazon Web Services
+    #   account][9] in the *Organizations User Guide*.
     #
     # <note markdown="1"> When you create a member account with this operation, you can choose
     # whether to create the account with the **IAM User and Role Access to
@@ -1048,49 +1150,78 @@ module Aws::Organizations
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/govcloud-us/latest/UserGuide/welcome.html
-    # [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html#orgs_integrate_services-using_slrs
-    # [3]: http://docs.aws.amazon.com/govcloud-us/latest/UserGuide/verifying-cloudtrail.html
-    # [4]: http://docs.aws.amazon.com/govcloud-us/latest/UserGuide/govcloud-organizations.html
-    # [5]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_monitoring.html
+    # [1]: https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/welcome.html
+    # [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html#orgs_integrate_services-using_slrs
+    # [3]: https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/verifying-cloudtrail.html
+    # [4]: https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/govcloud-organizations.html
+    # [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_monitoring.html
     # [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create.html
-    # [7]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info
+    # [7]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info
     # [8]: https://console.aws.amazon.com/support/home#/
-    # [9]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html
+    # [9]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html
     # [10]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html
     #
     # @option params [required, String] :email
-    #   The email address of the owner to assign to the new member account in
-    #   the commercial Region. This email address must not already be
-    #   associated with another AWS account. You must use a valid email
-    #   address to complete account creation. You can't access the root user
-    #   of the account or remove an account that was created with an invalid
-    #   email address. Like all request parameters for
-    #   `CreateGovCloudAccount`, the request for the email address for the AWS
-    #   GovCloud (US) account originates from the commercial Region, not from
-    #   the AWS GovCloud (US) Region.
+    #   Specifies the email address of the owner to assign to the new member
+    #   account in the commercial Region. This email address must not already
+    #   be associated with another Amazon Web Services account. You must use a
+    #   valid email address to complete account creation.
+    #
+    #   The rules for a valid email address:
+    #
+    #   * The address must be a minimum of 6 and a maximum of 64 characters
+    #     long.
+    #
+    #   * All characters must be 7-bit ASCII characters.
+    #
+    #   * There must be one and only one @ symbol, which separates the local
+    #     name from the domain name.
+    #
+    #   * The local name can't contain any of the following characters:
+    #
+    #     whitespace, " ' ( ) &lt; &gt; \[ \] : ; , \\ \| % &amp;
+    #
+    #   * The local name can't begin with a dot (.)
+    #
+    #   * The domain name can consist of only the characters
+    #     \[a-z\],\[A-Z\],\[0-9\], hyphen (-), or dot (.)
+    #
+    #   * The domain name can't begin or end with a hyphen (-) or dot (.)
+    #
+    #   * The domain name must contain at least one dot
+    #
+    #   You can't access the root user of the account or remove an account
+    #   that was created with an invalid email address. Like all request
+    #   parameters for `CreateGovCloudAccount`, the request for the email
+    #   address for the Amazon Web Services GovCloud (US) account originates
+    #   from the commercial Region, not from the Amazon Web Services GovCloud
+    #   (US) Region.
     #
     # @option params [required, String] :account_name
     #   The friendly name of the member account.
     #
+    #   The account name can consist of only the characters
+    #   \[a-z\],\[A-Z\],\[0-9\], hyphen (-), or dot (.) You can't separate
+    #   characters with a dash (–).
+    #
     # @option params [String] :role_name
     #   (Optional)
     #
-    #   The name of an IAM role that AWS Organizations automatically
-    #   preconfigures in the new member accounts in both the AWS GovCloud (US)
-    #   Region and in the commercial Region. This role trusts the management
-    #   account, allowing users in the management account to assume the role,
-    #   as permitted by the management account administrator. The role has
-    #   administrator permissions in the new member account.
+    #   The name of an IAM role that Organizations automatically preconfigures
+    #   in the new member accounts in both the Amazon Web Services GovCloud
+    #   (US) Region and in the commercial Region. This role trusts the
+    #   management account, allowing users in the management account to assume
+    #   the role, as permitted by the management account administrator. The
+    #   role has administrator permissions in the new member account.
     #
     #   If you don't specify this parameter, the role name defaults to
     #   `OrganizationAccountAccessRole`.
     #
     #   For more information about how to use this role to access the member
     #   account, see [Accessing and Administering the Member Accounts in Your
-    #   Organization][1] in the *AWS Organizations User Guide* and steps 2 and
-    #   3 in [Tutorial: Delegate Access Across AWS Accounts Using IAM
-    #   Roles][2] in the *IAM User Guide.*
+    #   Organization][1] in the *Organizations User Guide* and steps 2 and 3
+    #   in [Tutorial: Delegate Access Across Amazon Web Services accounts
+    #   Using IAM Roles][2] in the *IAM User Guide.*
     #
     #   The [regex pattern][3] that is used to validate this parameter. The
     #   pattern can include uppercase letters, lowercase letters, digits with
@@ -1108,7 +1239,8 @@ module Aws::Organizations
     #   the required permissions. If set to `DENY`, only the root user of the
     #   new account can access account billing information. For more
     #   information, see [Activating Access to the Billing and Cost Management
-    #   Console][1] in the *AWS Billing and Cost Management User Guide.*
+    #   Console][1] in the *Amazon Web Services Billing and Cost Management
+    #   User Guide.*
     #
     #   If you don't specify this parameter, the value defaults to `ALLOW`,
     #   and IAM users and roles with the required permissions can access
@@ -1127,12 +1259,12 @@ module Aws::Organizations
     #
     #   For each tag in the list, you must specify both a tag key and a value.
     #   You can set the value to an empty string, but you can't set it to
-    #   `null`. For more information about tagging, see [Tagging AWS
-    #   Organizations resources][1] in the AWS Organizations User Guide.
+    #   `null`. For more information about tagging, see [Tagging Organizations
+    #   resources][1] in the Organizations User Guide.
     #
-    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed number
-    #   of tags for an account, then the entire request fails and the account
-    #   is not created.
+    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the maximum allowed
+    #   number of tags for an account, then the entire request fails and the
+    #   account is not created.
     #
     #    </note>
     #
@@ -1148,7 +1280,7 @@ module Aws::Organizations
     #
     #   resp = client.create_gov_cloud_account({
     #     email: "Email", # required
-    #     account_name: "AccountName", # required
+    #     account_name: "CreateAccountName", # required
     #     role_name: "RoleName",
     #     iam_user_access_to_billing: "ALLOW", # accepts ALLOW, DENY
     #     tags: [
@@ -1168,7 +1300,7 @@ module Aws::Organizations
     #   resp.create_account_status.completed_timestamp #=> Time
     #   resp.create_account_status.account_id #=> String
     #   resp.create_account_status.gov_cloud_account_id #=> String
-    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE", "GOVCLOUD_ACCOUNT_ALREADY_EXISTS", "MISSING_BUSINESS_VALIDATION", "FAILED_BUSINESS_VALIDATION", "PENDING_BUSINESS_VALIDATION", "INVALID_IDENTITY_FOR_BUSINESS_VALIDATION", "UNKNOWN_BUSINESS_VALIDATION", "MISSING_PAYMENT_INSTRUMENT"
+    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE", "GOVCLOUD_ACCOUNT_ALREADY_EXISTS", "MISSING_BUSINESS_VALIDATION", "FAILED_BUSINESS_VALIDATION", "PENDING_BUSINESS_VALIDATION", "INVALID_IDENTITY_FOR_BUSINESS_VALIDATION", "UNKNOWN_BUSINESS_VALIDATION", "MISSING_PAYMENT_INSTRUMENT", "INVALID_PAYMENT_INSTRUMENT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateGovCloudAccount AWS API Documentation
     #
@@ -1179,9 +1311,9 @@ module Aws::Organizations
       req.send_request(options)
     end
 
-    # Creates an AWS organization. The account whose user is calling the
-    # `CreateOrganization` operation automatically becomes the [management
-    # account][1] of the new organization.
+    # Creates an Amazon Web Services organization. The account whose user is
+    # calling the `CreateOrganization` operation automatically becomes the
+    # [management account][1] of the new organization.
     #
     # This operation must be called using credentials from the account that
     # is to become the new organization's management account. The principal
@@ -1205,17 +1337,17 @@ module Aws::Organizations
     #
     #   * `CONSOLIDATED_BILLING`\: All member accounts have their bills
     #     consolidated to and paid by the management account. For more
-    #     information, see [Consolidated billing][1] in the *AWS Organizations
+    #     information, see [Consolidated billing][1] in the *Organizations
     #     User Guide.*
     #
     #     The consolidated billing feature subset isn't available for
-    #     organizations in the AWS GovCloud (US) Region.
+    #     organizations in the Amazon Web Services GovCloud (US) Region.
     #
     #   * `ALL`\: In addition to all the features supported by the
     #     consolidated billing feature set, the management account can also
     #     apply any policy type to any member account in the organization. For
-    #     more information, see [All features][2] in the *AWS Organizations
-    #     User Guide.*
+    #     more information, see [All features][2] in the *Organizations User
+    #     Guide.*
     #
     #
     #
@@ -1312,7 +1444,7 @@ module Aws::Organizations
     # is five.
     #
     # For more information about OUs, see [Managing Organizational Units][1]
-    # in the *AWS Organizations User Guide.*
+    # in the *Organizations User Guide.*
     #
     # If the request includes tags, then the requester must have the
     # `organizations:TagResource` permission.
@@ -1350,8 +1482,8 @@ module Aws::Organizations
     #   A list of tags that you want to attach to the newly created OU. For
     #   each tag in the list, you must specify both a tag key and a value. You
     #   can set the value to an empty string, but you can't set it to `null`.
-    #   For more information about tagging, see [Tagging AWS Organizations
-    #   resources][1] in the AWS Organizations User Guide.
+    #   For more information about tagging, see [Tagging Organizations
+    #   resources][1] in the Organizations User Guide.
     #
     #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed number
     #   of tags for an OU, then the entire request fails and the OU is not
@@ -1415,7 +1547,8 @@ module Aws::Organizations
     end
 
     # Creates a policy of a specified type that you can attach to a root, an
-    # organizational unit (OU), or an individual AWS account.
+    # organizational unit (OU), or an individual Amazon Web Services
+    # account.
     #
     # For more information about policies and their use, see [Managing
     # Organization Policies][1].
@@ -1471,8 +1604,8 @@ module Aws::Organizations
     #   A list of tags that you want to attach to the newly created policy.
     #   For each tag in the list, you must specify both a tag key and a value.
     #   You can set the value to an empty string, but you can't set it to
-    #   `null`. For more information about tagging, see [Tagging AWS
-    #   Organizations resources][1] in the AWS Organizations User Guide.
+    #   `null`. For more information about tagging, see [Tagging Organizations
+    #   resources][1] in the Organizations User Guide.
     #
     #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed number
     #   of tags for a policy, then the entire request fails and the policy is
@@ -1773,19 +1906,19 @@ module Aws::Organizations
       req.send_request(options)
     end
 
-    # Removes the specified member AWS account as a delegated administrator
-    # for the specified AWS service.
+    # Removes the specified member Amazon Web Services account as a
+    # delegated administrator for the specified Amazon Web Services service.
     #
     # Deregistering a delegated administrator can have unintended impacts on
-    # the functionality of the enabled AWS service. See the documentation
-    # for the enabled service before you deregister a delegated
-    # administrator so that you understand any potential impacts.
+    # the functionality of the enabled Amazon Web Services service. See the
+    # documentation for the enabled service before you deregister a
+    # delegated administrator so that you understand any potential impacts.
     #
-    # You can run this action only for AWS services that support this
-    # feature. For a current list of services that support it, see the
-    # column *Supports Delegated Administrator* in the table at [AWS
-    # Services that you can use with AWS Organizations][1] in the *AWS
-    # Organizations User Guide.*
+    # You can run this action only for Amazon Web Services services that
+    # support this feature. For a current list of services that support it,
+    # see the column *Supports Delegated Administrator* in the table at
+    # [Amazon Web Services Services that you can use with Organizations][1]
+    # in the *Organizations User Guide.*
     #
     # This operation can be called only from the organization's management
     # account.
@@ -1799,14 +1932,14 @@ module Aws::Organizations
     #   you want to deregister as a delegated administrator.
     #
     # @option params [required, String] :service_principal
-    #   The service principal name of an AWS service for which the account is
-    #   a delegated administrator.
+    #   The service principal name of an Amazon Web Services service for which
+    #   the account is a delegated administrator.
     #
     #   Delegated administrator privileges are revoked for only the specified
-    #   AWS service from the member account. If the specified service is the
-    #   only service for which the member account is a delegated
-    #   administrator, the operation also revokes Organizations read action
-    #   permissions.
+    #   Amazon Web Services service from the member account. If the specified
+    #   service is the only service for which the member account is a
+    #   delegated administrator, the operation also revokes Organizations read
+    #   action permissions.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1826,16 +1959,16 @@ module Aws::Organizations
       req.send_request(options)
     end
 
-    # Retrieves AWS Organizations-related information about the specified
+    # Retrieves Organizations-related information about the specified
     # account.
     #
     # This operation can be called only from the organization's management
     # account or by a member account that is a delegated administrator for
-    # an AWS service.
+    # an Amazon Web Services service.
     #
     # @option params [required, String] :account_id
-    #   The unique identifier (ID) of the AWS account that you want
-    #   information about. You can get the ID from the ListAccounts or
+    #   The unique identifier (ID) of the Amazon Web Services account that you
+    #   want information about. You can get the ID from the ListAccounts or
     #   ListAccountsForParent operations.
     #
     #   The [regex pattern][1] for an account ID string requires exactly 12
@@ -1880,7 +2013,7 @@ module Aws::Organizations
     #   resp.account.arn #=> String
     #   resp.account.email #=> String
     #   resp.account.name #=> String
-    #   resp.account.status #=> String, one of "ACTIVE", "SUSPENDED"
+    #   resp.account.status #=> String, one of "ACTIVE", "SUSPENDED", "PENDING_CLOSURE"
     #   resp.account.joined_method #=> String, one of "INVITED", "CREATED"
     #   resp.account.joined_timestamp #=> Time
     #
@@ -1898,7 +2031,7 @@ module Aws::Organizations
     #
     # This operation can be called only from the organization's management
     # account or by a member account that is a delegated administrator for
-    # an AWS service.
+    # an Amazon Web Services service.
     #
     # @option params [required, String] :create_account_request_id
     #   Specifies the `Id` value that uniquely identifies the `CreateAccount`
@@ -1952,7 +2085,7 @@ module Aws::Organizations
     #   resp.create_account_status.completed_timestamp #=> Time
     #   resp.create_account_status.account_id #=> String
     #   resp.create_account_status.gov_cloud_account_id #=> String
-    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE", "GOVCLOUD_ACCOUNT_ALREADY_EXISTS", "MISSING_BUSINESS_VALIDATION", "FAILED_BUSINESS_VALIDATION", "PENDING_BUSINESS_VALIDATION", "INVALID_IDENTITY_FOR_BUSINESS_VALIDATION", "UNKNOWN_BUSINESS_VALIDATION", "MISSING_PAYMENT_INSTRUMENT"
+    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE", "GOVCLOUD_ACCOUNT_ALREADY_EXISTS", "MISSING_BUSINESS_VALIDATION", "FAILED_BUSINESS_VALIDATION", "PENDING_BUSINESS_VALIDATION", "INVALID_IDENTITY_FOR_BUSINESS_VALIDATION", "UNKNOWN_BUSINESS_VALIDATION", "MISSING_PAYMENT_INSTRUMENT", "INVALID_PAYMENT_INSTRUMENT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeCreateAccountStatus AWS API Documentation
     #
@@ -1972,15 +2105,15 @@ module Aws::Organizations
     # control policies (SCPs).
     #
     # For more information about policy inheritance, see [How Policy
-    # Inheritance Works][1] in the *AWS Organizations User Guide*.
+    # Inheritance Works][1] in the *Organizations User Guide*.
     #
     # This operation can be called only from the organization's management
     # account or by a member account that is a delegated administrator for
-    # an AWS service.
+    # an Amazon Web Services service.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies-inheritance.html
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies-inheritance.html
     #
     # @option params [required, String] :policy_type
     #   The type of policy that you want information about. You can specify
@@ -2206,7 +2339,7 @@ module Aws::Organizations
     #
     # This operation can be called only from the organization's management
     # account or by a member account that is a delegated administrator for
-    # an AWS service.
+    # an Amazon Web Services service.
     #
     # @option params [required, String] :organizational_unit_id
     #   The unique identifier (ID) of the organizational unit that you want
@@ -2269,7 +2402,7 @@ module Aws::Organizations
     #
     # This operation can be called only from the organization's management
     # account or by a member account that is a delegated administrator for
-    # an AWS service.
+    # an Amazon Web Services service.
     #
     # @option params [required, String] :policy_id
     #   The unique identifier (ID) of the policy that you want details about.
@@ -2341,8 +2474,8 @@ module Aws::Organizations
     # account.
     #
     # If the policy being detached is a service control policy (SCP), the
-    # changes to permissions for AWS Identity and Access Management (IAM)
-    # users and roles in affected accounts are immediate.
+    # changes to permissions for Identity and Access Management (IAM) users
+    # and roles in affected accounts are immediate.
     #
     # Every root, OU, and account must have at least one SCP attached. If
     # you want to replace the default `FullAWSAccess` policy with an SCP
@@ -2425,27 +2558,27 @@ module Aws::Organizations
       req.send_request(options)
     end
 
-    # Disables the integration of an AWS service (the service that is
-    # specified by `ServicePrincipal`) with AWS Organizations. When you
-    # disable integration, the specified service no longer can create a
-    # [service-linked role][1] in *new* accounts in your organization. This
-    # means the service can't perform operations on your behalf on any new
-    # accounts in your organization. The service can still perform
-    # operations in older accounts until the service completes its clean-up
-    # from AWS Organizations.
+    # Disables the integration of an Amazon Web Services service (the
+    # service that is specified by `ServicePrincipal`) with Organizations.
+    # When you disable integration, the specified service no longer can
+    # create a [service-linked role][1] in *new* accounts in your
+    # organization. This means the service can't perform operations on your
+    # behalf on any new accounts in your organization. The service can still
+    # perform operations in older accounts until the service completes its
+    # clean-up from Organizations.
     #
     # We <b> <i>strongly recommend</i> </b> that you don't use this command
-    # to disable integration between AWS Organizations and the specified AWS
-    # service. Instead, use the console or commands that are provided by the
-    # specified service. This lets the trusted service perform any required
-    # initialization when enabling trusted access, such as creating any
-    # required resources and any required clean up of resources when
-    # disabling trusted access.
+    # to disable integration between Organizations and the specified Amazon
+    # Web Services service. Instead, use the console or commands that are
+    # provided by the specified service. This lets the trusted service
+    # perform any required initialization when enabling trusted access, such
+    # as creating any required resources and any required clean up of
+    # resources when disabling trusted access.
     #
     #  For information about how to disable trusted service access to your
     # organization using the trusted service, see the **Learn more** link
-    # under the **Supports Trusted Access** column at [AWS services that you
-    # can use with AWS Organizations][2]. on this page.
+    # under the **Supports Trusted Access** column at [Amazon Web Services
+    # services that you can use with Organizations][2]. on this page.
     #
     #  If you disable access by using this command, it causes the following
     # actions to occur:
@@ -2454,7 +2587,7 @@ module Aws::Organizations
     #   accounts in your organization. This means that the service can't
     #   perform operations on your behalf on any new accounts in your
     #   organization. The service can still perform operations in older
-    #   accounts until the service completes its clean-up from AWS
+    #   accounts until the service completes its clean-up from
     #   Organizations.
     #
     # * The service can no longer perform tasks in the member accounts in
@@ -2474,30 +2607,31 @@ module Aws::Organizations
     # up any resources that are required only for the integration. How the
     # service cleans up its resources in the organization's accounts
     # depends on that service. For more information, see the documentation
-    # for the other AWS service.
+    # for the other Amazon Web Services service.
     #
     # After you perform the `DisableAWSServiceAccess` operation, the
     # specified service can no longer perform operations in your
     # organization's accounts
     #
-    # For more information about integrating other services with AWS
+    # For more information about integrating other services with
     # Organizations, including the list of services that work with
-    # Organizations, see [Integrating AWS Organizations with Other AWS
-    # Services][3] in the *AWS Organizations User Guide.*
+    # Organizations, see [Integrating Organizations with Other Amazon Web
+    # Services Services][3] in the *Organizations User Guide.*
     #
     # This operation can be called only from the organization's management
     # account.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html
     # [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services_list.html
-    # [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html
+    # [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html
     #
     # @option params [required, String] :service_principal
-    #   The service principal name of the AWS service for which you want to
-    #   disable integration with your organization. This is typically in the
-    #   form of a URL, such as ` service-abbreviation.amazonaws.com`.
+    #   The service principal name of the Amazon Web Services service for
+    #   which you want to disable integration with your organization. This is
+    #   typically in the form of a URL, such as `
+    #   service-abbreviation.amazonaws.com`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2523,12 +2657,12 @@ module Aws::Organizations
     # any organizational unit (OU) or account in that root. You can undo
     # this by using the EnablePolicyType operation.
     #
-    # This is an asynchronous request that AWS performs in the background.
-    # If you disable a policy type for a root, it still appears enabled for
-    # the organization if [all features][1] are enabled for the
-    # organization. AWS recommends that you first use ListRoots to see the
-    # status of policy types for a specified root, and then use this
-    # operation.
+    # This is an asynchronous request that Amazon Web Services performs in
+    # the background. If you disable a policy type for a root, it still
+    # appears enabled for the organization if [all features][1] are enabled
+    # for the organization. Amazon Web Services recommends that you first
+    # use ListRoots to see the status of policy types for a specified root,
+    # and then use this operation.
     #
     # This operation can be called only from the organization's management
     # account.
@@ -2621,38 +2755,40 @@ module Aws::Organizations
       req.send_request(options)
     end
 
-    # Enables the integration of an AWS service (the service that is
-    # specified by `ServicePrincipal`) with AWS Organizations. When you
+    # Enables the integration of an Amazon Web Services service (the service
+    # that is specified by `ServicePrincipal`) with Organizations. When you
     # enable integration, you allow the specified service to create a
     # [service-linked role][1] in all the accounts in your organization.
     # This allows the service to perform operations on your behalf in your
     # organization and its accounts.
     #
-    # We recommend that you enable integration between AWS Organizations and
-    # the specified AWS service by using the console or commands that are
-    # provided by the specified service. Doing so ensures that the service
-    # is aware that it can create the resources that are required for the
-    # integration. How the service creates those resources in the
+    # We recommend that you enable integration between Organizations and the
+    # specified Amazon Web Services service by using the console or commands
+    # that are provided by the specified service. Doing so ensures that the
+    # service is aware that it can create the resources that are required
+    # for the integration. How the service creates those resources in the
     # organization's accounts depends on that service. For more
-    # information, see the documentation for the other AWS service.
+    # information, see the documentation for the other Amazon Web Services
+    # service.
     #
-    # For more information about enabling services to integrate with AWS
-    # Organizations, see [Integrating AWS Organizations with Other AWS
-    # Services][2] in the *AWS Organizations User Guide.*
+    # For more information about enabling services to integrate with
+    # Organizations, see [Integrating Organizations with Other Amazon Web
+    # Services Services][2] in the *Organizations User Guide.*
     #
     # This operation can be called only from the organization's management
     # account and only if the organization has [enabled all features][3].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html
-    # [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html
-    # [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html
+    # [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html
+    # [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
     #
     # @option params [required, String] :service_principal
-    #   The service principal name of the AWS service for which you want to
-    #   enable integration with your organization. This is typically in the
-    #   form of a URL, such as ` service-abbreviation.amazonaws.com`.
+    #   The service principal name of the Amazon Web Services service for
+    #   which you want to enable integration with your organization. This is
+    #   typically in the form of a URL, such as `
+    #   service-abbreviation.amazonaws.com`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2675,9 +2811,9 @@ module Aws::Organizations
     # organization policies that can restrict the services and actions that
     # can be called in each account. Until you enable all features, you have
     # access only to consolidated billing, and you can't use any of the
-    # advanced account administration features that AWS Organizations
-    # supports. For more information, see [Enabling All Features in Your
-    # Organization][1] in the *AWS Organizations User Guide.*
+    # advanced account administration features that Organizations supports.
+    # For more information, see [Enabling All Features in Your
+    # Organization][1] in the *Organizations User Guide.*
     #
     # This operation is required only for organizations that were created
     # explicitly with only the consolidated billing features enabled.
@@ -2779,9 +2915,10 @@ module Aws::Organizations
     # organizational unit (OU), or account in that root. You can undo this
     # by using the DisablePolicyType operation.
     #
-    # This is an asynchronous request that AWS performs in the background.
-    # AWS recommends that you first use ListRoots to see the status of
-    # policy types for a specified root, and then use this operation.
+    # This is an asynchronous request that Amazon Web Services performs in
+    # the background. Amazon Web Services recommends that you first use
+    # ListRoots to see the status of policy types for a specified root, and
+    # then use this operation.
     #
     # This operation can be called only from the organization's management
     # account.
@@ -2876,24 +3013,25 @@ module Aws::Organizations
     end
 
     # Sends an invitation to another account to join your organization as a
-    # member account. AWS Organizations sends email on your behalf to the
-    # email address that is associated with the other account's owner. The
+    # member account. Organizations sends email on your behalf to the email
+    # address that is associated with the other account's owner. The
     # invitation is implemented as a Handshake whose details are in the
     # response.
     #
-    # * You can invite AWS accounts only from the same seller as the
-    #   management account. For example, if your organization's management
-    #   account was created by Amazon Internet Services Pvt. Ltd (AISPL), an
-    #   AWS seller in India, you can invite only other AISPL accounts to
-    #   your organization. You can't combine accounts from AISPL and AWS or
-    #   from any other AWS seller. For more information, see [Consolidated
-    #   Billing in India][1].
+    # * You can invite Amazon Web Services accounts only from the same
+    #   seller as the management account. For example, if your
+    #   organization's management account was created by Amazon Internet
+    #   Services Pvt. Ltd (AISPL), an Amazon Web Services seller in India,
+    #   you can invite only other AISPL accounts to your organization. You
+    #   can't combine accounts from AISPL and Amazon Web Services or from
+    #   any other Amazon Web Services seller. For more information, see
+    #   [Consolidated Billing in India][1].
     #
     # * If you receive an exception that indicates that you exceeded your
     #   account limits for the organization or that the operation failed
     #   because your organization is still initializing, wait one hour and
-    #   then try again. If the error persists after an hour, contact [AWS
-    #   Support][2].
+    #   then try again. If the error persists after an hour, contact [Amazon
+    #   Web Services Support][2].
     #
     # If the request includes tags, then the requester must have the
     # `organizations:TagResource` permission.
@@ -2903,24 +3041,25 @@ module Aws::Organizations
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/useconsolidatedbilliing-India.html
+    # [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/useconsolidatedbilliing-India.html
     # [2]: https://console.aws.amazon.com/support/home#/
     #
     # @option params [required, Types::HandshakeParty] :target
-    #   The identifier (ID) of the AWS account that you want to invite to join
-    #   your organization. This is a JSON object that contains the following
-    #   elements:
+    #   The identifier (ID) of the Amazon Web Services account that you want
+    #   to invite to join your organization. This is a JSON object that
+    #   contains the following elements:
     #
     #   `\{ "Type": "ACCOUNT", "Id": "< account id number >" \}`
     #
-    #   If you use the AWS CLI, you can submit this as a single string,
-    #   similar to the following example:
+    #   If you use the CLI, you can submit this as a single string, similar to
+    #   the following example:
     #
     #   `--target Id=123456789012,Type=ACCOUNT`
     #
-    #   If you specify `"Type": "ACCOUNT"`, you must provide the AWS account
-    #   ID number as the `Id`. If you specify `"Type": "EMAIL"`, you must
-    #   specify the email address that is associated with the account.
+    #   If you specify `"Type": "ACCOUNT"`, you must provide the Amazon Web
+    #   Services account ID number as the `Id`. If you specify `"Type":
+    #   "EMAIL"`, you must specify the email address that is associated with
+    #   the account.
     #
     #   `--target Id=diego@example.com,Type=EMAIL`
     #
@@ -2933,8 +3072,8 @@ module Aws::Organizations
     #   a member of the organization. For each tag in the list, you must
     #   specify both a tag key and a value. You can set the value to an empty
     #   string, but you can't set it to `null`. For more information about
-    #   tagging, see [Tagging AWS Organizations resources][1] in the AWS
-    #   Organizations User Guide.
+    #   tagging, see [Tagging Organizations resources][1] in the Organizations
+    #   User Guide.
     #
     #   Any tags in the request are checked for compliance with any applicable
     #   tag policies when the request is made. The request is rejected if the
@@ -3077,7 +3216,7 @@ module Aws::Organizations
     # * You can leave an organization as a member account only if the
     #   account is configured with the information required to operate as a
     #   standalone account. When you create an account in an organization
-    #   using the AWS Organizations console, API, or CLI commands, the
+    #   using the Organizations console, API, or CLI commands, the
     #   information required of standalone accounts is *not* automatically
     #   collected. For each account that you want to make standalone, you
     #   must perform the following steps. If any of the steps are already
@@ -3089,26 +3228,28 @@ module Aws::Organizations
     #
     #   * Provide a current payment method
     #
-    #   AWS uses the payment method to charge for any billable (not free
-    #   tier) AWS activity that occurs while the account isn't attached to
-    #   an organization. Follow the steps at [ To leave an organization when
-    #   all required account information has not yet been provided][1] in
-    #   the *AWS Organizations User Guide.*
+    #   Amazon Web Services uses the payment method to charge for any
+    #   billable (not free tier) Amazon Web Services activity that occurs
+    #   while the account isn't attached to an organization. Follow the
+    #   steps at [ To leave an organization when all required account
+    #   information has not yet been provided][1] in the *Organizations User
+    #   Guide.*
     #
     # * The account that you want to leave must not be a delegated
-    #   administrator account for any AWS service enabled for your
-    #   organization. If the account is a delegated administrator, you must
-    #   first change the delegated administrator account to another account
-    #   that is remaining in the organization.
+    #   administrator account for any Amazon Web Services service enabled
+    #   for your organization. If the account is a delegated administrator,
+    #   you must first change the delegated administrator account to another
+    #   account that is remaining in the organization.
     #
     # * You can leave an organization only after you enable IAM user access
     #   to billing in your account. For more information, see [Activating
-    #   Access to the Billing and Cost Management Console][2] in the *AWS
-    #   Billing and Cost Management User Guide.*
+    #   Access to the Billing and Cost Management Console][2] in the *Amazon
+    #   Web Services Billing and Cost Management User Guide.*
     #
     # * After the account leaves the organization, all tags that were
-    #   attached to the account object in the organization are deleted. AWS
-    #   accounts outside of an organization do not support tags.
+    #   attached to the account object in the organization are deleted.
+    #   Amazon Web Services accounts outside of an organization do not
+    #   support tags.
     #
     # * A newly created account has a waiting period before it can be
     #   removed from its organization. If you get an error that indicates
@@ -3116,8 +3257,8 @@ module Aws::Organizations
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info
-    # [2]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info
+    # [2]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3138,23 +3279,23 @@ module Aws::Organizations
       req.send_request(options)
     end
 
-    # Returns a list of the AWS services that you enabled to integrate with
-    # your organization. After a service on this list creates the resources
-    # that it requires for the integration, it can perform operations on
-    # your organization and its accounts.
+    # Returns a list of the Amazon Web Services services that you enabled to
+    # integrate with your organization. After a service on this list creates
+    # the resources that it requires for the integration, it can perform
+    # operations on your organization and its accounts.
     #
-    # For more information about integrating other services with AWS
+    # For more information about integrating other services with
     # Organizations, including the list of services that currently work with
-    # Organizations, see [Integrating AWS Organizations with Other AWS
-    # Services][1] in the *AWS Organizations User Guide.*
+    # Organizations, see [Integrating Organizations with Other Amazon Web
+    # Services Services][1] in the *Organizations User Guide.*
     #
     # This operation can be called only from the organization's management
     # account or by a member account that is a delegated administrator for
-    # an AWS service.
+    # an Amazon Web Services service.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html
     #
     # @option params [String] :next_token
     #   The parameter for receiving additional results if you receive a
@@ -3219,7 +3360,7 @@ module Aws::Organizations
     #
     # This operation can be called only from the organization's management
     # account or by a member account that is a delegated administrator for
-    # an AWS service.
+    # an Amazon Web Services service.
     #
     # @option params [String] :next_token
     #   The parameter for receiving additional results if you receive a
@@ -3311,7 +3452,7 @@ module Aws::Organizations
     #   resp.accounts[0].arn #=> String
     #   resp.accounts[0].email #=> String
     #   resp.accounts[0].name #=> String
-    #   resp.accounts[0].status #=> String, one of "ACTIVE", "SUSPENDED"
+    #   resp.accounts[0].status #=> String, one of "ACTIVE", "SUSPENDED", "PENDING_CLOSURE"
     #   resp.accounts[0].joined_method #=> String, one of "INVITED", "CREATED"
     #   resp.accounts[0].joined_timestamp #=> Time
     #   resp.next_token #=> String
@@ -3342,7 +3483,7 @@ module Aws::Organizations
     #
     # This operation can be called only from the organization's management
     # account or by a member account that is a delegated administrator for
-    # an AWS service.
+    # an Amazon Web Services service.
     #
     # @option params [required, String] :parent_id
     #   The unique identifier (ID) for the parent root or organization unit
@@ -3422,7 +3563,7 @@ module Aws::Organizations
     #   resp.accounts[0].arn #=> String
     #   resp.accounts[0].email #=> String
     #   resp.accounts[0].name #=> String
-    #   resp.accounts[0].status #=> String, one of "ACTIVE", "SUSPENDED"
+    #   resp.accounts[0].status #=> String, one of "ACTIVE", "SUSPENDED", "PENDING_CLOSURE"
     #   resp.accounts[0].joined_method #=> String, one of "INVITED", "CREATED"
     #   resp.accounts[0].joined_timestamp #=> Time
     #   resp.next_token #=> String
@@ -3451,7 +3592,7 @@ module Aws::Organizations
     #
     # This operation can be called only from the organization's management
     # account or by a member account that is a delegated administrator for
-    # an AWS service.
+    # an Amazon Web Services service.
     #
     # @option params [required, String] :parent_id
     #   The unique identifier (ID) for the parent root or OU whose children
@@ -3563,7 +3704,7 @@ module Aws::Organizations
     #
     # This operation can be called only from the organization's management
     # account or by a member account that is a delegated administrator for
-    # an AWS service.
+    # an Amazon Web Services service.
     #
     # @option params [Array<String>] :states
     #   A list of one or more states that you want included in the response.
@@ -3663,7 +3804,7 @@ module Aws::Organizations
     #   resp.create_account_statuses[0].completed_timestamp #=> Time
     #   resp.create_account_statuses[0].account_id #=> String
     #   resp.create_account_statuses[0].gov_cloud_account_id #=> String
-    #   resp.create_account_statuses[0].failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE", "GOVCLOUD_ACCOUNT_ALREADY_EXISTS", "MISSING_BUSINESS_VALIDATION", "FAILED_BUSINESS_VALIDATION", "PENDING_BUSINESS_VALIDATION", "INVALID_IDENTITY_FOR_BUSINESS_VALIDATION", "UNKNOWN_BUSINESS_VALIDATION", "MISSING_PAYMENT_INSTRUMENT"
+    #   resp.create_account_statuses[0].failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE", "GOVCLOUD_ACCOUNT_ALREADY_EXISTS", "MISSING_BUSINESS_VALIDATION", "FAILED_BUSINESS_VALIDATION", "PENDING_BUSINESS_VALIDATION", "INVALID_IDENTITY_FOR_BUSINESS_VALIDATION", "UNKNOWN_BUSINESS_VALIDATION", "MISSING_PAYMENT_INSTRUMENT", "INVALID_PAYMENT_INSTRUMENT"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListCreateAccountStatus AWS API Documentation
@@ -3675,12 +3816,12 @@ module Aws::Organizations
       req.send_request(options)
     end
 
-    # Lists the AWS accounts that are designated as delegated administrators
-    # in this organization.
+    # Lists the Amazon Web Services accounts that are designated as
+    # delegated administrators in this organization.
     #
     # This operation can be called only from the organization's management
     # account or by a member account that is a delegated administrator for
-    # an AWS service.
+    # an Amazon Web Services service.
     #
     # @option params [String] :service_principal
     #   Specifies a service principal name. If specified, then the operation
@@ -3730,7 +3871,7 @@ module Aws::Organizations
     #   resp.delegated_administrators[0].arn #=> String
     #   resp.delegated_administrators[0].email #=> String
     #   resp.delegated_administrators[0].name #=> String
-    #   resp.delegated_administrators[0].status #=> String, one of "ACTIVE", "SUSPENDED"
+    #   resp.delegated_administrators[0].status #=> String, one of "ACTIVE", "SUSPENDED", "PENDING_CLOSURE"
     #   resp.delegated_administrators[0].joined_method #=> String, one of "INVITED", "CREATED"
     #   resp.delegated_administrators[0].joined_timestamp #=> Time
     #   resp.delegated_administrators[0].delegation_enabled_date #=> Time
@@ -3745,12 +3886,12 @@ module Aws::Organizations
       req.send_request(options)
     end
 
-    # List the AWS services for which the specified account is a delegated
-    # administrator.
+    # List the Amazon Web Services services for which the specified account
+    # is a delegated administrator.
     #
     # This operation can be called only from the organization's management
     # account or by a member account that is a delegated administrator for
-    # an AWS service.
+    # an Amazon Web Services service.
     #
     # @option params [required, String] :account_id
     #   The account ID number of a delegated administrator account in the
@@ -3809,9 +3950,9 @@ module Aws::Organizations
     # Lists the current handshakes that are associated with the account of
     # the requesting user.
     #
-    # Handshakes that are `ACCEPTED`, `DECLINED`, or `CANCELED` appear in
-    # the results of this API for only 30 days after changing to that state.
-    # After that, they're deleted and no longer accessible.
+    # Handshakes that are `ACCEPTED`, `DECLINED`, `CANCELED`, or `EXPIRED`
+    # appear in the results of this API for only 30 days after changing to
+    # that state. After that, they're deleted and no longer accessible.
     #
     # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
     # when calling a `List*` operation. These operations can occasionally
@@ -3958,9 +4099,9 @@ module Aws::Organizations
     # operation returns a list of handshake structures. Each structure
     # contains details and status about a handshake.
     #
-    # Handshakes that are `ACCEPTED`, `DECLINED`, or `CANCELED` appear in
-    # the results of this API for only 30 days after changing to that state.
-    # After that, they're deleted and no longer accessible.
+    # Handshakes that are `ACCEPTED`, `DECLINED`, `CANCELED`, or `EXPIRED`
+    # appear in the results of this API for only 30 days after changing to
+    # that state. After that, they're deleted and no longer accessible.
     #
     # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
     # when calling a `List*` operation. These operations can occasionally
@@ -3972,7 +4113,7 @@ module Aws::Organizations
     #
     # This operation can be called only from the organization's management
     # account or by a member account that is a delegated administrator for
-    # an AWS service.
+    # an Amazon Web Services service.
     #
     # @option params [Types::HandshakeFilter] :filter
     #   A filter of the handshakes that you want included in the response. The
@@ -4158,7 +4299,7 @@ module Aws::Organizations
     #
     # This operation can be called only from the organization's management
     # account or by a member account that is a delegated administrator for
-    # an AWS service.
+    # an Amazon Web Services service.
     #
     # @option params [required, String] :parent_id
     #   The unique identifier (ID) of the root or OU whose child OUs you want
@@ -4270,7 +4411,7 @@ module Aws::Organizations
     #
     # This operation can be called only from the organization's management
     # account or by a member account that is a delegated administrator for
-    # an AWS service.
+    # an Amazon Web Services service.
     #
     # <note markdown="1"> In the current release, a child can have only a single parent.
     #
@@ -4376,7 +4517,7 @@ module Aws::Organizations
     #
     # This operation can be called only from the organization's management
     # account or by a member account that is a delegated administrator for
-    # an AWS service.
+    # an Amazon Web Services service.
     #
     # @option params [required, String] :filter
     #   Specifies the type of policy that you want to include in the response.
@@ -4504,7 +4645,7 @@ module Aws::Organizations
     #
     # This operation can be called only from the organization's management
     # account or by a member account that is a delegated administrator for
-    # an AWS service.
+    # an Amazon Web Services service.
     #
     # @option params [required, String] :target_id
     #   The unique identifier (ID) of the root, organizational unit, or
@@ -4639,7 +4780,7 @@ module Aws::Organizations
     #
     # This operation can be called only from the organization's management
     # account or by a member account that is a delegated administrator for
-    # an AWS service.
+    # an Amazon Web Services service.
     #
     # <note markdown="1"> Policy types can be enabled and disabled in roots. This is distinct
     # from whether they're available in the organization. When you enable
@@ -4730,9 +4871,9 @@ module Aws::Organizations
 
     # Lists tags that are attached to the specified resource.
     #
-    # You can attach tags to the following resources in AWS Organizations.
+    # You can attach tags to the following resources in Organizations.
     #
-    # * AWS account
+    # * Amazon Web Services account
     #
     # * Organization root
     #
@@ -4742,14 +4883,14 @@ module Aws::Organizations
     #
     # This operation can be called only from the organization's management
     # account or by a member account that is a delegated administrator for
-    # an AWS service.
+    # an Amazon Web Services service.
     #
     # @option params [required, String] :resource_id
     #   The ID of the resource with the tags to list.
     #
     #   You can specify any of the following taggable resources.
     #
-    #   * AWS account – specify the account ID number.
+    #   * Amazon Web Services account – specify the account ID number.
     #
     #   * Organizational unit – specify the OU ID that begins with `ou-` and
     #     looks similar to: `ou-1a2b-34uvwxyz `
@@ -4810,7 +4951,7 @@ module Aws::Organizations
     #
     # This operation can be called only from the organization's management
     # account or by a member account that is a delegated administrator for
-    # an AWS service.
+    # an Amazon Web Services service.
     #
     # @option params [required, String] :policy_id
     #   The unique identifier (ID) of the policy whose attachments you want to
@@ -4995,15 +5136,16 @@ module Aws::Organizations
     end
 
     # Enables the specified member account to administer the Organizations
-    # features of the specified AWS service. It grants read-only access to
-    # AWS Organizations service data. The account still requires IAM
-    # permissions to access and administer the AWS service.
+    # features of the specified Amazon Web Services service. It grants
+    # read-only access to Organizations service data. The account still
+    # requires IAM permissions to access and administer the Amazon Web
+    # Services service.
     #
-    # You can run this action only for AWS services that support this
-    # feature. For a current list of services that support it, see the
-    # column *Supports Delegated Administrator* in the table at [AWS
-    # Services that you can use with AWS Organizations][1] in the *AWS
-    # Organizations User Guide.*
+    # You can run this action only for Amazon Web Services services that
+    # support this feature. For a current list of services that support it,
+    # see the column *Supports Delegated Administrator* in the table at
+    # [Amazon Web Services Services that you can use with Organizations][1]
+    # in the *Organizations User Guide.*
     #
     # This operation can be called only from the organization's management
     # account.
@@ -5017,8 +5159,8 @@ module Aws::Organizations
     #   register as a delegated administrator.
     #
     # @option params [required, String] :service_principal
-    #   The service principal of the AWS service for which you want to make
-    #   the member account a delegated administrator.
+    #   The service principal of the Amazon Web Services service for which you
+    #   want to make the member account a delegated administrator.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5053,32 +5195,33 @@ module Aws::Organizations
     # * You can remove an account from your organization only if the account
     #   is configured with the information required to operate as a
     #   standalone account. When you create an account in an organization
-    #   using the AWS Organizations console, API, or CLI commands, the
+    #   using the Organizations console, API, or CLI commands, the
     #   information required of standalone accounts is *not* automatically
     #   collected. For an account that you want to make standalone, you must
     #   choose a support plan, provide and verify the required contact
-    #   information, and provide a current payment method. AWS uses the
-    #   payment method to charge for any billable (not free tier) AWS
-    #   activity that occurs while the account isn't attached to an
-    #   organization. To remove an account that doesn't yet have this
-    #   information, you must sign in as the member account and follow the
-    #   steps at [ To leave an organization when all required account
-    #   information has not yet been provided][1] in the *AWS Organizations
-    #   User Guide.*
+    #   information, and provide a current payment method. Amazon Web
+    #   Services uses the payment method to charge for any billable (not
+    #   free tier) Amazon Web Services activity that occurs while the
+    #   account isn't attached to an organization. To remove an account
+    #   that doesn't yet have this information, you must sign in as the
+    #   member account and follow the steps at [ To leave an organization
+    #   when all required account information has not yet been provided][1]
+    #   in the *Organizations User Guide.*
     #
     # * The account that you want to leave must not be a delegated
-    #   administrator account for any AWS service enabled for your
-    #   organization. If the account is a delegated administrator, you must
-    #   first change the delegated administrator account to another account
-    #   that is remaining in the organization.
+    #   administrator account for any Amazon Web Services service enabled
+    #   for your organization. If the account is a delegated administrator,
+    #   you must first change the delegated administrator account to another
+    #   account that is remaining in the organization.
     #
     # * After the account leaves the organization, all tags that were
-    #   attached to the account object in the organization are deleted. AWS
-    #   accounts outside of an organization do not support tags.
+    #   attached to the account object in the organization are deleted.
+    #   Amazon Web Services accounts outside of an organization do not
+    #   support tags.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info
     #
     # @option params [required, String] :account_id
     #   The unique identifier (ID) of the member account that you want to
@@ -5119,10 +5262,10 @@ module Aws::Organizations
 
     # Adds one or more tags to the specified resource.
     #
-    # Currently, you can attach tags to the following resources in AWS
+    # Currently, you can attach tags to the following resources in
     # Organizations.
     #
-    # * AWS account
+    # * Amazon Web Services account
     #
     # * Organization root
     #
@@ -5136,12 +5279,9 @@ module Aws::Organizations
     # @option params [required, String] :resource_id
     #   The ID of the resource to add a tag to.
     #
-    # @option params [required, Array<Types::Tag>] :tags
-    #   A list of tags to add to the specified resource.
-    #
     #   You can specify any of the following taggable resources.
     #
-    #   * AWS account – specify the account ID number.
+    #   * Amazon Web Services account – specify the account ID number.
     #
     #   * Organizational unit – specify the OU ID that begins with `ou-` and
     #     looks similar to: `ou-1a2b-34uvwxyz `
@@ -5152,13 +5292,14 @@ module Aws::Organizations
     #   * Policy – specify the policy ID that begins with `p-` andlooks
     #     similar to: `p-12abcdefg3 `
     #
-    #   For each tag in the list, you must specify both a tag key and a value.
-    #   You can set the value to an empty string, but you can't set it to
-    #   `null`.
+    # @option params [required, Array<Types::Tag>] :tags
+    #   A list of tags to add to the specified resource.
     #
-    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed number
-    #   of tags for an account user, then the entire request fails and the
-    #   account is not created.
+    #   For each tag in the list, you must specify both a tag key and a value.
+    #   The value can be an empty string, but you can't set it to `null`.
+    #
+    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the maximum allowed
+    #   number of tags for a resource, then the entire request fails.
     #
     #    </note>
     #
@@ -5187,9 +5328,9 @@ module Aws::Organizations
 
     # Removes any tags with the specified keys from the specified resource.
     #
-    # You can attach tags to the following resources in AWS Organizations.
+    # You can attach tags to the following resources in Organizations.
     #
-    # * AWS account
+    # * Amazon Web Services account
     #
     # * Organization root
     #
@@ -5205,7 +5346,7 @@ module Aws::Organizations
     #
     #   You can specify any of the following taggable resources.
     #
-    #   * AWS account – specify the account ID number.
+    #   * Amazon Web Services account – specify the account ID number.
     #
     #   * Organizational unit – specify the OU ID that begins with `ou-` and
     #     looks similar to: `ou-1a2b-34uvwxyz `
@@ -5347,7 +5488,7 @@ module Aws::Organizations
     #   If provided, the new content for the policy. The text must be
     #   correctly formatted JSON that complies with the syntax for the
     #   policy's type. For more information, see [Service Control Policy
-    #   Syntax][1] in the *AWS Organizations User Guide.*
+    #   Syntax][1] in the *Organizations User Guide.*
     #
     #
     #
@@ -5450,7 +5591,7 @@ module Aws::Organizations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -54,11 +54,11 @@ module Aws
         before(:each) do
           allow(Dir).to receive(:tmpdir).and_return(tmpdir)
 
-          allow(client).to receive(:head_object).with(
+          allow(client).to receive(:head_object).with({
             bucket: 'bucket',
             key: 'small',
             part_number: 1
-          ).and_return(
+          }).and_return(
             client.stub_data(
               :head_object,
               content_length: one_meg,
@@ -66,12 +66,12 @@ module Aws
             )
           )
 
-          allow(client).to receive(:head_object).with(
+          allow(client).to receive(:head_object).with({
             bucket: 'bucket',
             key: 'small',
             part_number: 1,
             version_id: version_id
-          ).and_return(
+          }).and_return(
             client.stub_data(
               :head_object,
               content_length: one_meg,
@@ -79,11 +79,11 @@ module Aws
             )
           )
 
-          allow(client).to receive(:head_object).with(
+          allow(client).to receive(:head_object).with({
             bucket: 'bucket',
             key: 'large',
             part_number: 1
-          ).and_return(
+          }).and_return(
             client.stub_data(
               :head_object,
               content_length: 5 * one_meg,
@@ -91,21 +91,21 @@ module Aws
             )
           )
 
-          allow(client).to receive(:head_object).with(
+          allow(client).to receive(:head_object).with({
             bucket: 'bucket',
             key: 'large'
-          ).and_return(
+          }).and_return(
             client.stub_data(
               :head_object,
               content_length: 20 * one_meg
             )
           )
 
-          allow(client).to receive(:head_object).with(
+          allow(client).to receive(:head_object).with({
             bucket: 'bucket',
             key: 'single',
             part_number: 1
-          ).and_return(
+          }).and_return(
             client.stub_data(
               :head_object,
               content_length: 15 * one_meg,
@@ -115,42 +115,42 @@ module Aws
         end
 
         it 'downloads single part files in Client#get_object' do
-          expect(client).to receive(:get_object).with(
+          expect(client).to receive(:get_object).with({
             bucket: 'bucket',
             key: 'small',
             response_target: path
-          ).exactly(1).times
+          }).exactly(1).times
 
           small_obj.download_file(path)
         end
 
         it 'download larger files in parts' do
-          expect(client).to receive(:head_object).with(
+          expect(client).to receive(:head_object).with({
             bucket: 'bucket',
             key: 'large',
             part_number: 1
-          ).exactly(1).times
+          }).exactly(1).times
 
           large_obj.download_file(path)
         end
 
         it 'download larger files in ranges' do
-          expect(client).to receive(:head_object).with(
+          expect(client).to receive(:head_object).with({
             bucket: 'bucket',
             key: 'single',
             part_number: 1
-          ).exactly(1).times
+          }).exactly(1).times
 
           single_obj.download_file(path)
         end
 
         it 'supports download object with version_id' do
-          expect(client).to receive(:get_object).with(
+          expect(client).to receive(:get_object).with({
             bucket: 'bucket',
             key: 'small',
             version_id: version_id,
             response_target: path
-          ).exactly(1).times
+          }).exactly(1).times
 
           small_obj.download_file(path, version_id: version_id)
         end
@@ -185,11 +185,11 @@ module Aws
           let(:chunk_size) { 5 * one_meg }
 
           before :each do
-            allow(client).to receive(:head_object).with(
+            allow(client).to receive(:head_object).with({
               bucket: 'bucket',
               key: 'boundary',
               part_number: 1
-            ).and_return(
+            }).and_return(
               client.stub_data(
                 :head_object,
                 content_length: file_size
@@ -207,21 +207,21 @@ module Aws
           end
 
           it 'downloads the file with default chunk size' do
-            expect(client).to receive(:head_object).with(
+            expect(client).to receive(:head_object).with({
               bucket: 'bucket',
               key: 'boundary',
               part_number: 1
-            ).exactly(1).times
+            }).exactly(1).times
 
             boundary_obj.download_file(path)
           end
 
           it 'downloads the file with provided chunk size' do
-            expect(client).to receive(:head_object).with(
+            expect(client).to receive(:head_object).with({
               bucket: 'bucket',
               key: 'boundary',
               part_number: 1
-            ).exactly(1).times
+            }).exactly(1).times
 
             boundary_obj.download_file(path, chunk_size: chunk_size)
           end

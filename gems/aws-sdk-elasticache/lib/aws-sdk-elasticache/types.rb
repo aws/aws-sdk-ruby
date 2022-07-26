@@ -304,8 +304,8 @@ module Aws::ElastiCache
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
     #
-    #       **T4g node types** (available only for Redis engine version 6.0
-    #       onward and for Memcached engine version 1.5.16 onward):
+    #       **T4g node types** (available only for Redis engine version
+    #       5.0.6 onward and for Memcached engine version 1.5.16 onward):
     #       `cache.t4g.micro`, `cache.t4g.small`, `cache.t4g.medium`
     #
     #       **T3 node types:** `cache.t3.micro`, `cache.t3.small`,
@@ -314,7 +314,9 @@ module Aws::ElastiCache
     #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
     #       `cache.t2.medium`
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **T1 node types:** `cache.t1.micro`
     #
@@ -326,7 +328,9 @@ module Aws::ElastiCache
     #
     #   * Compute optimized:
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **C1 node types:** `cache.c1.xlarge`
     #
@@ -364,7 +368,9 @@ module Aws::ElastiCache
     #       `cache.r4.2xlarge`, `cache.r4.4xlarge`, `cache.r4.8xlarge`,
     #       `cache.r4.16xlarge`
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **M2 node types:** `cache.m2.xlarge`, `cache.m2.2xlarge`,
     #       `cache.m2.4xlarge`
@@ -651,7 +657,7 @@ module Aws::ElastiCache
     #
     #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
     #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \|
-    #   `redis5.0` \| `redis6.0` \| `redis6.2`
+    #   `redis5.0` \| `redis6.x`
     #   @return [String]
     #
     # @!attribute [rw] cache_engine_description
@@ -724,7 +730,7 @@ module Aws::ElastiCache
     #     **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #     `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
     #
-    #     **T4g node types** (available only for Redis engine version 6.0
+    #     **T4g node types** (available only for Redis engine version 5.0.6
     #     onward and for Memcached engine version 1.5.16 onward):
     #     `cache.t4g.micro`, `cache.t4g.small`, `cache.t4g.medium`
     #
@@ -734,7 +740,9 @@ module Aws::ElastiCache
     #     **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
     #     `cache.t2.medium`
     #
-    #   * Previous generation: (not recommended)
+    #   * Previous generation: (not recommended. Existing clusters are still
+    #     supported but creation of new clusters is not supported for these
+    #     types.)
     #
     #     **T1 node types:** `cache.t1.micro`
     #
@@ -746,7 +754,9 @@ module Aws::ElastiCache
     #
     # * Compute optimized:
     #
-    #   * Previous generation: (not recommended)
+    #   * Previous generation: (not recommended. Existing clusters are still
+    #     supported but creation of new clusters is not supported for these
+    #     types.)
     #
     #     **C1 node types:** `cache.c1.xlarge`
     #
@@ -783,7 +793,9 @@ module Aws::ElastiCache
     #     `cache.r4.2xlarge`, `cache.r4.4xlarge`, `cache.r4.8xlarge`,
     #     `cache.r4.16xlarge`
     #
-    #   * Previous generation: (not recommended)
+    #   * Previous generation: (not recommended. Existing clusters are still
+    #     supported but creation of new clusters is not supported for these
+    #     types.)
     #
     #     **M2 node types:** `cache.m2.xlarge`, `cache.m2.2xlarge`,
     #     `cache.m2.4xlarge`
@@ -1614,6 +1626,7 @@ module Aws::ElastiCache
     #             enabled: false,
     #           },
     #         ],
+    #         transit_encryption_enabled: false,
     #       }
     #
     # @!attribute [rw] cache_cluster_id
@@ -1736,8 +1749,8 @@ module Aws::ElastiCache
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
     #
-    #       **T4g node types** (available only for Redis engine version 6.0
-    #       onward and Memcached engine version 1.5.16 onward):
+    #       **T4g node types** (available only for Redis engine version
+    #       5.0.6 onward and Memcached engine version 1.5.16 onward):
     #       `cache.t4g.micro`, `cache.t4g.small`, `cache.t4g.medium`
     #
     #       **T3 node types:** `cache.t3.micro`, `cache.t3.small`,
@@ -1746,7 +1759,9 @@ module Aws::ElastiCache
     #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
     #       `cache.t2.medium`
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **T1 node types:** `cache.t1.micro`
     #
@@ -1758,20 +1773,11 @@ module Aws::ElastiCache
     #
     #   * Compute optimized:
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **C1 node types:** `cache.c1.xlarge`
-    #
-    #   * Memory optimized with data tiering:
-    #
-    #     * Current generation:
-    #
-    #       **R6gd node types** (available only for Redis engine version 6.2
-    #       onward).
-    #
-    #       `cache.r6gd.xlarge`, `cache.r6gd.2xlarge`, `cache.r6gd.4xlarge`,
-    #       `cache.r6gd.8xlarge`, `cache.r6gd.12xlarge`,
-    #       `cache.r6gd.16xlarge`
     #
     #   * Memory optimized:
     #
@@ -1796,7 +1802,9 @@ module Aws::ElastiCache
     #       `cache.r4.2xlarge`, `cache.r4.4xlarge`, `cache.r4.8xlarge`,
     #       `cache.r4.16xlarge`
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **M2 node types:** `cache.m2.xlarge`, `cache.m2.2xlarge`,
     #       `cache.m2.4xlarge`
@@ -2005,6 +2013,17 @@ module Aws::ElastiCache
     #   Specifies the destination, format and type of the logs.
     #   @return [Array<Types::LogDeliveryConfigurationRequest>]
     #
+    # @!attribute [rw] transit_encryption_enabled
+    #   A flag that enables in-transit encryption when set to true. You
+    #   cannot modify the value of `TransitEncryptionEnabled` after the
+    #   cluster is created. To enable in-transit encryption on a cluster you
+    #   must set `TransitEncryptionEnabled` to true when you create a
+    #   cluster.
+    #
+    #   **Required:** Only available when creating a cache cluster in an
+    #   Amazon VPC using Memcached version `1.6.12` or later.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheClusterMessage AWS API Documentation
     #
     class CreateCacheClusterMessage < Struct.new(
@@ -2034,7 +2053,8 @@ module Aws::ElastiCache
       :outpost_mode,
       :preferred_outpost_arn,
       :preferred_outpost_arns,
-      :log_delivery_configurations)
+      :log_delivery_configurations,
+      :transit_encryption_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2532,8 +2552,8 @@ module Aws::ElastiCache
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
     #
-    #       **T4g node types** (available only for Redis engine version 6.0
-    #       onward and Memcached engine version 1.5.16 onward):
+    #       **T4g node types** (available only for Redis engine version
+    #       5.0.6 onward and Memcached engine version 1.5.16 onward):
     #       `cache.t4g.micro`, `cache.t4g.small`, `cache.t4g.medium`
     #
     #       **T3 node types:** `cache.t3.micro`, `cache.t3.small`,
@@ -2542,7 +2562,9 @@ module Aws::ElastiCache
     #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
     #       `cache.t2.medium`
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **T1 node types:** `cache.t1.micro`
     #
@@ -2554,7 +2576,9 @@ module Aws::ElastiCache
     #
     #   * Compute optimized:
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **C1 node types:** `cache.c1.xlarge`
     #
@@ -2592,7 +2616,9 @@ module Aws::ElastiCache
     #       `cache.r4.2xlarge`, `cache.r4.4xlarge`, `cache.r4.8xlarge`,
     #       `cache.r4.16xlarge`
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **M2 node types:** `cache.m2.xlarge`, `cache.m2.2xlarge`,
     #       `cache.m2.4xlarge`
@@ -4207,8 +4233,8 @@ module Aws::ElastiCache
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
     #
-    #       **T4g node types** (available only for Redis engine version 6.0
-    #       onward and for Memcached engine version 1.5.16 onward):
+    #       **T4g node types** (available only for Redis engine version
+    #       5.0.6 onward and for Memcached engine version 1.5.16 onward):
     #       `cache.t4g.micro`, `cache.t4g.small`, `cache.t4g.medium`
     #
     #       **T3 node types:** `cache.t3.micro`, `cache.t3.small`,
@@ -4217,7 +4243,9 @@ module Aws::ElastiCache
     #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
     #       `cache.t2.medium`
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **T1 node types:** `cache.t1.micro`
     #
@@ -4229,7 +4257,9 @@ module Aws::ElastiCache
     #
     #   * Compute optimized:
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **C1 node types:** `cache.c1.xlarge`
     #
@@ -4267,7 +4297,9 @@ module Aws::ElastiCache
     #       `cache.r4.2xlarge`, `cache.r4.4xlarge`, `cache.r4.8xlarge`,
     #       `cache.r4.16xlarge`
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **M2 node types:** `cache.m2.xlarge`, `cache.m2.2xlarge`,
     #       `cache.m2.4xlarge`
@@ -4401,8 +4433,8 @@ module Aws::ElastiCache
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
     #
-    #       **T4g node types** (available only for Redis engine version 6.0
-    #       onward and for Memcached engine version 1.5.16 onward):
+    #       **T4g node types** (available only for Redis engine version
+    #       5.0.6 onward and for Memcached engine version 1.5.16 onward):
     #       `cache.t4g.micro`, `cache.t4g.small`, `cache.t4g.medium`
     #
     #       **T3 node types:** `cache.t3.micro`, `cache.t3.small`,
@@ -4411,7 +4443,9 @@ module Aws::ElastiCache
     #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
     #       `cache.t2.medium`
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **T1 node types:** `cache.t1.micro`
     #
@@ -4423,7 +4457,9 @@ module Aws::ElastiCache
     #
     #   * Compute optimized:
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **C1 node types:** `cache.c1.xlarge`
     #
@@ -4461,7 +4497,9 @@ module Aws::ElastiCache
     #       `cache.r4.2xlarge`, `cache.r4.4xlarge`, `cache.r4.8xlarge`,
     #       `cache.r4.16xlarge`
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **M2 node types:** `cache.m2.xlarge`, `cache.m2.2xlarge`,
     #       `cache.m2.4xlarge`
@@ -5037,7 +5075,7 @@ module Aws::ElastiCache
     #
     #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
     #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \|
-    #   `redis5.0` \| `redis6.0` \| `redis6.2`
+    #   `redis5.0` \| `redis6.0` \| `redis6.x`
     #   @return [String]
     #
     # @!attribute [rw] marker
@@ -7887,6 +7925,13 @@ module Aws::ElastiCache
     #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/data-tiering.html
     #   @return [String]
     #
+    # @!attribute [rw] auto_minor_version_upgrade
+    #    If you are running Redis engine version 6.0 or later, set this
+    #   parameter to yes if you want to opt-in to the next auto minor
+    #   version upgrade campaign. This parameter is disabled for previous
+    #   versions. 
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReplicationGroup AWS API Documentation
     #
     class ReplicationGroup < Struct.new(
@@ -7915,7 +7960,8 @@ module Aws::ElastiCache
       :user_group_ids,
       :log_delivery_configurations,
       :replication_group_create_time,
-      :data_tiering)
+      :data_tiering,
+      :auto_minor_version_upgrade)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8047,8 +8093,8 @@ module Aws::ElastiCache
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
     #
-    #       **T4g node types** (available only for Redis engine version 6.0
-    #       onward and Memcached engine version 1.5.16 onward):
+    #       **T4g node types** (available only for Redis engine version
+    #       5.0.6 onward and Memcached engine version 1.5.16 onward):
     #       `cache.t4g.micro`, `cache.t4g.small`, `cache.t4g.medium`
     #
     #       **T3 node types:** `cache.t3.micro`, `cache.t3.small`,
@@ -8057,7 +8103,9 @@ module Aws::ElastiCache
     #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
     #       `cache.t2.medium`
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **T1 node types:** `cache.t1.micro`
     #
@@ -8069,7 +8117,9 @@ module Aws::ElastiCache
     #
     #   * Compute optimized:
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **C1 node types:** `cache.c1.xlarge`
     #
@@ -8107,7 +8157,9 @@ module Aws::ElastiCache
     #       `cache.r4.2xlarge`, `cache.r4.4xlarge`, `cache.r4.8xlarge`,
     #       `cache.r4.16xlarge`
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **M2 node types:** `cache.m2.xlarge`, `cache.m2.2xlarge`,
     #       `cache.m2.4xlarge`
@@ -8271,8 +8323,8 @@ module Aws::ElastiCache
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
     #
-    #       **T4g node types** (available only for Redis engine version 6.0
-    #       onward and Memcached engine version 1.5.16 onward):
+    #       **T4g node types** (available only for Redis engine version
+    #       5.0.6 onward and Memcached engine version 1.5.16 onward):
     #       `cache.t4g.micro`, `cache.t4g.small`, `cache.t4g.medium`
     #
     #       **T3 node types:** `cache.t3.micro`, `cache.t3.small`,
@@ -8281,7 +8333,9 @@ module Aws::ElastiCache
     #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
     #       `cache.t2.medium`
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **T1 node types:** `cache.t1.micro`
     #
@@ -8293,7 +8347,9 @@ module Aws::ElastiCache
     #
     #   * Compute optimized:
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **C1 node types:** `cache.c1.xlarge`
     #
@@ -8331,7 +8387,9 @@ module Aws::ElastiCache
     #       `cache.r4.2xlarge`, `cache.r4.4xlarge`, `cache.r4.8xlarge`,
     #       `cache.r4.16xlarge`
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **M2 node types:** `cache.m2.xlarge`, `cache.m2.2xlarge`,
     #       `cache.m2.4xlarge`
@@ -8773,8 +8831,8 @@ module Aws::ElastiCache
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
     #
-    #       **T4g node types** (available only for Redis engine version 6.0
-    #       onward and Memcached engine version 1.5.16 onward):
+    #       **T4g node types** (available only for Redis engine version
+    #       5.0.6 onward and Memcached engine version 1.5.16 onward):
     #
     #       `cache.t4g.micro`, `cache.t4g.small`, `cache.t4g.medium`
     #
@@ -8784,7 +8842,9 @@ module Aws::ElastiCache
     #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
     #       `cache.t2.medium`
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **T1 node types:** `cache.t1.micro`
     #
@@ -8796,7 +8856,9 @@ module Aws::ElastiCache
     #
     #   * Compute optimized:
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **C1 node types:** `cache.c1.xlarge`
     #
@@ -8838,7 +8900,9 @@ module Aws::ElastiCache
     #       `cache.r4.2xlarge`, `cache.r4.4xlarge`, `cache.r4.8xlarge`,
     #       `cache.r4.16xlarge`
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **M2 node types:** `cache.m2.xlarge`, `cache.m2.2xlarge`,
     #       `cache.m2.4xlarge`

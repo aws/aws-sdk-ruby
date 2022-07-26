@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2022-06-07)
+------------------
+
+* Feature - Added two new APIs to support cost allocation tags operations: ListCostAllocationTags, UpdateCostAllocationTagsStatus.
+
+1.76.0 (2022-03-22)
+------------------
+
+* Feature - Added three new APIs to support tagging and resource-level authorization on Cost Explorer resources: TagResource, UntagResource, ListTagsForResource.  Added optional parameters to CreateCostCategoryDefinition, CreateAnomalySubscription and CreateAnomalyMonitor APIs to support Tag On Create.
+
+1.75.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.74.0 (2022-02-16)
+------------------
+
+* Feature - AWS Cost Anomaly Detection now supports SNS FIFO topic subscribers.
+
 1.73.0 (2022-02-03)
 ------------------
 

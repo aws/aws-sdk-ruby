@@ -861,7 +861,8 @@ module Aws::ServiceCatalog
     DescribeProvisioningParametersOutput.add_member(:usage_instructions, Shapes::ShapeRef.new(shape: UsageInstructions, location_name: "UsageInstructions"))
     DescribeProvisioningParametersOutput.add_member(:tag_options, Shapes::ShapeRef.new(shape: TagOptionSummaries, location_name: "TagOptions"))
     DescribeProvisioningParametersOutput.add_member(:provisioning_artifact_preferences, Shapes::ShapeRef.new(shape: ProvisioningArtifactPreferences, location_name: "ProvisioningArtifactPreferences"))
-    DescribeProvisioningParametersOutput.add_member(:provisioning_artifact_outputs, Shapes::ShapeRef.new(shape: ProvisioningArtifactOutputs, location_name: "ProvisioningArtifactOutputs"))
+    DescribeProvisioningParametersOutput.add_member(:provisioning_artifact_outputs, Shapes::ShapeRef.new(shape: ProvisioningArtifactOutputs, deprecated: true, location_name: "ProvisioningArtifactOutputs", metadata: {"deprecatedMessage"=>"This property is deprecated and returns the Id and Description of the Provisioning Artifact. Use ProvisioningArtifactOutputKeys instead to get the Keys and Descriptions of the outputs."}))
+    DescribeProvisioningParametersOutput.add_member(:provisioning_artifact_output_keys, Shapes::ShapeRef.new(shape: ProvisioningArtifactOutputs, location_name: "ProvisioningArtifactOutputKeys"))
     DescribeProvisioningParametersOutput.struct_class = Types::DescribeProvisioningParametersOutput
 
     DescribeRecordInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))

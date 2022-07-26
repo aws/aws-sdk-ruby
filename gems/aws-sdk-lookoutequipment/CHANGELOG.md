@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2022-06-23)
+------------------
+
+* Feature - This release adds visualizations to the scheduled inference results. Users will be able to see interference results, including diagnostic results from their running inference schedulers.
+
+1.11.0 (2022-04-27)
+------------------
+
+* Feature - This release adds the following new features: 1) Introduces an option for automatic schema creation 2) Now allows for Ingestion of data containing most common errors and allows automatic data cleaning 3) Introduces new API ListSensorStatistics that gives further information about the ingested data
+
+1.10.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.9.0 (2022-02-03)
 ------------------
 

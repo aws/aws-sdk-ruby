@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2022-04-21)
+------------------
+
+* Feature - This release introduces tiered channels and adds support for live sources. Customers using a STANDARD channel can now create programs using live sources.
+
+1.54.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.53.0 (2022-02-03)
 ------------------
 

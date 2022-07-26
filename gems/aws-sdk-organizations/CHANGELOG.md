@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2022-05-02)
+------------------
+
+* Feature - This release adds the INVALID_PAYMENT_INSTRUMENT as a fail reason and an error message.
+
+1.69.0 (2022-03-29)
+------------------
+
+* Feature - This release provides the new CloseAccount API that enables principals in the management account to close any member account within an organization.
+
+1.68.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.67.0 (2022-02-03)
 ------------------
 

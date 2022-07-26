@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::MediaConnect
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -738,6 +740,9 @@ module Aws::MediaConnect
     # @option params [Array<Types::VpcInterfaceRequest>] :vpc_interfaces
     #   The VPC interfaces you want on the flow.
     #
+    # @option params [Types::AddMaintenance] :maintenance
+    #   Create maintenance setting for a flow
+    #
     # @return [Types::CreateFlowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFlowResponse#flow #flow} => Types::Flow
@@ -939,6 +944,10 @@ module Aws::MediaConnect
     #         subnet_id: "__string", # required
     #       },
     #     ],
+    #     maintenance: {
+    #       maintenance_day: "Monday", # required, accepts Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+    #       maintenance_start_hour: "__string", # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -1116,6 +1125,10 @@ module Aws::MediaConnect
     #   resp.flow.vpc_interfaces[0].security_group_ids #=> Array
     #   resp.flow.vpc_interfaces[0].security_group_ids[0] #=> String
     #   resp.flow.vpc_interfaces[0].subnet_id #=> String
+    #   resp.flow.maintenance.maintenance_day #=> String, one of "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+    #   resp.flow.maintenance.maintenance_deadline #=> String
+    #   resp.flow.maintenance.maintenance_scheduled_date #=> String
+    #   resp.flow.maintenance.maintenance_start_hour #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/CreateFlow AWS API Documentation
     #
@@ -1347,6 +1360,10 @@ module Aws::MediaConnect
     #   resp.flow.vpc_interfaces[0].security_group_ids #=> Array
     #   resp.flow.vpc_interfaces[0].security_group_ids[0] #=> String
     #   resp.flow.vpc_interfaces[0].subnet_id #=> String
+    #   resp.flow.maintenance.maintenance_day #=> String, one of "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+    #   resp.flow.maintenance.maintenance_deadline #=> String
+    #   resp.flow.maintenance.maintenance_scheduled_date #=> String
+    #   resp.flow.maintenance.maintenance_start_hour #=> String
     #   resp.messages.errors #=> Array
     #   resp.messages.errors[0] #=> String
     #
@@ -1582,6 +1599,10 @@ module Aws::MediaConnect
     #   resp.flows[0].name #=> String
     #   resp.flows[0].source_type #=> String, one of "OWNED", "ENTITLED"
     #   resp.flows[0].status #=> String, one of "STANDBY", "ACTIVE", "UPDATING", "DELETING", "STARTING", "STOPPING", "ERROR"
+    #   resp.flows[0].maintenance.maintenance_day #=> String, one of "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+    #   resp.flows[0].maintenance.maintenance_deadline #=> String
+    #   resp.flows[0].maintenance.maintenance_scheduled_date #=> String
+    #   resp.flows[0].maintenance.maintenance_start_hour #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListFlows AWS API Documentation
@@ -2068,6 +2089,9 @@ module Aws::MediaConnect
     # @option params [Types::UpdateFailoverConfig] :source_failover_config
     #   The settings for source failover.
     #
+    # @option params [Types::UpdateMaintenance] :maintenance
+    #   Update maintenance setting for a flow
+    #
     # @return [Types::UpdateFlowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateFlowResponse#flow #flow} => Types::Flow
@@ -2083,6 +2107,11 @@ module Aws::MediaConnect
     #         primary_source: "__string",
     #       },
     #       state: "ENABLED", # accepts ENABLED, DISABLED
+    #     },
+    #     maintenance: {
+    #       maintenance_day: "Monday", # accepts Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+    #       maintenance_scheduled_date: "__string",
+    #       maintenance_start_hour: "__string",
     #     },
     #   })
     #
@@ -2261,6 +2290,10 @@ module Aws::MediaConnect
     #   resp.flow.vpc_interfaces[0].security_group_ids #=> Array
     #   resp.flow.vpc_interfaces[0].security_group_ids[0] #=> String
     #   resp.flow.vpc_interfaces[0].subnet_id #=> String
+    #   resp.flow.maintenance.maintenance_day #=> String, one of "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+    #   resp.flow.maintenance.maintenance_deadline #=> String
+    #   resp.flow.maintenance.maintenance_scheduled_date #=> String
+    #   resp.flow.maintenance.maintenance_start_hour #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFlow AWS API Documentation
     #
@@ -2791,7 +2824,7 @@ module Aws::MediaConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconnect'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

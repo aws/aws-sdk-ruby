@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2022-06-28)
+------------------
+
+* Feature - Add 4 new neural voices - Pedro (es-US), Liam (fr-CA), Daniel (de-DE) and Arthur (en-GB).
+
+1.55.0 (2022-04-19)
+------------------
+
+* Feature - Amazon Polly adds new Austrian German voice - Hannah. Hannah is available as Neural voice only.
+
+1.54.0 (2022-03-22)
+------------------
+
+* Feature - Amazon Polly adds new Catalan voice - Arlet. Arlet is available as Neural voice only.
+
+1.53.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.52.0 (2022-02-03)
 ------------------
 

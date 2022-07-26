@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2022-05-23)
+------------------
+
+* Feature - Adding modelMetrics as part of DescribeRecommender API response for Personalize.
+
+1.41.0 (2022-04-19)
+------------------
+
+* Feature - Adding StartRecommender and StopRecommender APIs for Personalize.
+
+1.40.0 (2022-04-07)
+------------------
+
+* Feature - This release provides tagging support in AWS Personalize.
+
+1.39.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.38.0 (2022-02-03)
 ------------------
 

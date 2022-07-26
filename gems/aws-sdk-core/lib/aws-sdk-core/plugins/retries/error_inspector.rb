@@ -82,7 +82,7 @@ module Aws
         end
 
         def checksum?
-          CHECKSUM_ERRORS.include?(@name) || @error.is_a?(Errors::ChecksumError)
+          CHECKSUM_ERRORS.include?(@name)
         end
 
         def networking?

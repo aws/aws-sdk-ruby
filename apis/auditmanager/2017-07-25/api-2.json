@@ -712,7 +712,8 @@
         {"shape":"ValidationException"},
         {"shape":"AccessDeniedException"},
         {"shape":"InternalServerException"},
-        {"shape":"ResourceNotFoundException"}
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"}
       ]
     },
     "RegisterOrganizationAdminAccount":{
@@ -1643,6 +1644,7 @@
     "ControlsCount":{"type":"integer"},
     "CreateAssessmentFrameworkControl":{
       "type":"structure",
+      "required":["id"],
       "members":{
         "id":{"shape":"UUID"}
       }
@@ -3023,6 +3025,10 @@
     },
     "Role":{
       "type":"structure",
+      "required":[
+        "roleType",
+        "roleArn"
+      ],
       "members":{
         "roleType":{"shape":"RoleType"},
         "roleArn":{"shape":"IamArn"}
@@ -3127,8 +3133,8 @@
     "SnsArn":{
       "type":"string",
       "max":2048,
-      "min":20,
-      "pattern":"^arn:.*:sns:.*"
+      "min":4,
+      "pattern":"^arn:.*:sns:.*|NONE"
     },
     "SourceDescription":{
       "type":"string",
@@ -3252,6 +3258,15 @@
       "max":1000,
       "pattern":"^[\\w\\W\\s\\S]*$"
     },
+    "ThrottlingException":{
+      "type":"structure",
+      "required":["message"],
+      "members":{
+        "message":{"shape":"String"}
+      },
+      "error":{"httpStatusCode":400},
+      "exception":true
+    },
     "Timestamp":{"type":"timestamp"},
     "TimestampUUID":{
       "type":"string",
@@ -3371,7 +3386,10 @@
     },
     "UpdateAssessmentFrameworkControlSet":{
       "type":"structure",
-      "required":["name"],
+      "required":[
+        "name",
+        "controls"
+      ],
       "members":{
         "id":{"shape":"ControlSetName"},
         "name":{"shape":"ControlSetName"},
@@ -3380,7 +3398,8 @@
     },
     "UpdateAssessmentFrameworkControlSets":{
       "type":"list",
-      "member":{"shape":"UpdateAssessmentFrameworkControlSet"}
+      "member":{"shape":"UpdateAssessmentFrameworkControlSet"},
+      "min":1
     },
     "UpdateAssessmentFrameworkRequest":{
       "type":"structure",

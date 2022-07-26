@@ -87,6 +87,8 @@ module Aws::Comprehend
     DescribeResourcePolicyResponse = Shapes::StructureShape.new(name: 'DescribeResourcePolicyResponse')
     DescribeSentimentDetectionJobRequest = Shapes::StructureShape.new(name: 'DescribeSentimentDetectionJobRequest')
     DescribeSentimentDetectionJobResponse = Shapes::StructureShape.new(name: 'DescribeSentimentDetectionJobResponse')
+    DescribeTargetedSentimentDetectionJobRequest = Shapes::StructureShape.new(name: 'DescribeTargetedSentimentDetectionJobRequest')
+    DescribeTargetedSentimentDetectionJobResponse = Shapes::StructureShape.new(name: 'DescribeTargetedSentimentDetectionJobResponse')
     DescribeTopicsDetectionJobRequest = Shapes::StructureShape.new(name: 'DescribeTopicsDetectionJobRequest')
     DescribeTopicsDetectionJobResponse = Shapes::StructureShape.new(name: 'DescribeTopicsDetectionJobResponse')
     DetectDominantLanguageRequest = Shapes::StructureShape.new(name: 'DetectDominantLanguageRequest')
@@ -226,6 +228,8 @@ module Aws::Comprehend
     ListSentimentDetectionJobsResponse = Shapes::StructureShape.new(name: 'ListSentimentDetectionJobsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    ListTargetedSentimentDetectionJobsRequest = Shapes::StructureShape.new(name: 'ListTargetedSentimentDetectionJobsRequest')
+    ListTargetedSentimentDetectionJobsResponse = Shapes::StructureShape.new(name: 'ListTargetedSentimentDetectionJobsResponse')
     ListTopicsDetectionJobsRequest = Shapes::StructureShape.new(name: 'ListTopicsDetectionJobsRequest')
     ListTopicsDetectionJobsResponse = Shapes::StructureShape.new(name: 'ListTopicsDetectionJobsResponse')
     MaskCharacter = Shapes::StringShape.new(name: 'MaskCharacter')
@@ -275,6 +279,8 @@ module Aws::Comprehend
     StartPiiEntitiesDetectionJobResponse = Shapes::StructureShape.new(name: 'StartPiiEntitiesDetectionJobResponse')
     StartSentimentDetectionJobRequest = Shapes::StructureShape.new(name: 'StartSentimentDetectionJobRequest')
     StartSentimentDetectionJobResponse = Shapes::StructureShape.new(name: 'StartSentimentDetectionJobResponse')
+    StartTargetedSentimentDetectionJobRequest = Shapes::StructureShape.new(name: 'StartTargetedSentimentDetectionJobRequest')
+    StartTargetedSentimentDetectionJobResponse = Shapes::StructureShape.new(name: 'StartTargetedSentimentDetectionJobResponse')
     StartTopicsDetectionJobRequest = Shapes::StructureShape.new(name: 'StartTopicsDetectionJobRequest')
     StartTopicsDetectionJobResponse = Shapes::StructureShape.new(name: 'StartTopicsDetectionJobResponse')
     StopDominantLanguageDetectionJobRequest = Shapes::StructureShape.new(name: 'StopDominantLanguageDetectionJobRequest')
@@ -289,6 +295,8 @@ module Aws::Comprehend
     StopPiiEntitiesDetectionJobResponse = Shapes::StructureShape.new(name: 'StopPiiEntitiesDetectionJobResponse')
     StopSentimentDetectionJobRequest = Shapes::StructureShape.new(name: 'StopSentimentDetectionJobRequest')
     StopSentimentDetectionJobResponse = Shapes::StructureShape.new(name: 'StopSentimentDetectionJobResponse')
+    StopTargetedSentimentDetectionJobRequest = Shapes::StructureShape.new(name: 'StopTargetedSentimentDetectionJobRequest')
+    StopTargetedSentimentDetectionJobResponse = Shapes::StructureShape.new(name: 'StopTargetedSentimentDetectionJobResponse')
     StopTrainingDocumentClassifierRequest = Shapes::StructureShape.new(name: 'StopTrainingDocumentClassifierRequest')
     StopTrainingDocumentClassifierResponse = Shapes::StructureShape.new(name: 'StopTrainingDocumentClassifierResponse')
     StopTrainingEntityRecognizerRequest = Shapes::StructureShape.new(name: 'StopTrainingEntityRecognizerRequest')
@@ -306,6 +314,9 @@ module Aws::Comprehend
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TargetEventTypes = Shapes::ListShape.new(name: 'TargetEventTypes')
+    TargetedSentimentDetectionJobFilter = Shapes::StructureShape.new(name: 'TargetedSentimentDetectionJobFilter')
+    TargetedSentimentDetectionJobProperties = Shapes::StructureShape.new(name: 'TargetedSentimentDetectionJobProperties')
+    TargetedSentimentDetectionJobPropertiesList = Shapes::ListShape.new(name: 'TargetedSentimentDetectionJobPropertiesList')
     TextSizeLimitExceededException = Shapes::StructureShape.new(name: 'TextSizeLimitExceededException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
@@ -572,6 +583,12 @@ module Aws::Comprehend
 
     DescribeSentimentDetectionJobResponse.add_member(:sentiment_detection_job_properties, Shapes::ShapeRef.new(shape: SentimentDetectionJobProperties, location_name: "SentimentDetectionJobProperties"))
     DescribeSentimentDetectionJobResponse.struct_class = Types::DescribeSentimentDetectionJobResponse
+
+    DescribeTargetedSentimentDetectionJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
+    DescribeTargetedSentimentDetectionJobRequest.struct_class = Types::DescribeTargetedSentimentDetectionJobRequest
+
+    DescribeTargetedSentimentDetectionJobResponse.add_member(:targeted_sentiment_detection_job_properties, Shapes::ShapeRef.new(shape: TargetedSentimentDetectionJobProperties, location_name: "TargetedSentimentDetectionJobProperties"))
+    DescribeTargetedSentimentDetectionJobResponse.struct_class = Types::DescribeTargetedSentimentDetectionJobResponse
 
     DescribeTopicsDetectionJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
     DescribeTopicsDetectionJobRequest.struct_class = Types::DescribeTopicsDetectionJobRequest
@@ -1100,6 +1117,15 @@ module Aws::Comprehend
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    ListTargetedSentimentDetectionJobsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: TargetedSentimentDetectionJobFilter, location_name: "Filter"))
+    ListTargetedSentimentDetectionJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListTargetedSentimentDetectionJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsInteger, location_name: "MaxResults"))
+    ListTargetedSentimentDetectionJobsRequest.struct_class = Types::ListTargetedSentimentDetectionJobsRequest
+
+    ListTargetedSentimentDetectionJobsResponse.add_member(:targeted_sentiment_detection_job_properties_list, Shapes::ShapeRef.new(shape: TargetedSentimentDetectionJobPropertiesList, location_name: "TargetedSentimentDetectionJobPropertiesList"))
+    ListTargetedSentimentDetectionJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListTargetedSentimentDetectionJobsResponse.struct_class = Types::ListTargetedSentimentDetectionJobsResponse
+
     ListTopicsDetectionJobsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: TopicsDetectionJobFilter, location_name: "Filter"))
     ListTopicsDetectionJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListTopicsDetectionJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsInteger, location_name: "MaxResults"))
@@ -1317,6 +1343,22 @@ module Aws::Comprehend
     StartSentimentDetectionJobResponse.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
     StartSentimentDetectionJobResponse.struct_class = Types::StartSentimentDetectionJobResponse
 
+    StartTargetedSentimentDetectionJobRequest.add_member(:input_data_config, Shapes::ShapeRef.new(shape: InputDataConfig, required: true, location_name: "InputDataConfig"))
+    StartTargetedSentimentDetectionJobRequest.add_member(:output_data_config, Shapes::ShapeRef.new(shape: OutputDataConfig, required: true, location_name: "OutputDataConfig"))
+    StartTargetedSentimentDetectionJobRequest.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "DataAccessRoleArn"))
+    StartTargetedSentimentDetectionJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
+    StartTargetedSentimentDetectionJobRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, required: true, location_name: "LanguageCode"))
+    StartTargetedSentimentDetectionJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestTokenString, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    StartTargetedSentimentDetectionJobRequest.add_member(:volume_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
+    StartTargetedSentimentDetectionJobRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
+    StartTargetedSentimentDetectionJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    StartTargetedSentimentDetectionJobRequest.struct_class = Types::StartTargetedSentimentDetectionJobRequest
+
+    StartTargetedSentimentDetectionJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    StartTargetedSentimentDetectionJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: ComprehendArn, location_name: "JobArn"))
+    StartTargetedSentimentDetectionJobResponse.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
+    StartTargetedSentimentDetectionJobResponse.struct_class = Types::StartTargetedSentimentDetectionJobResponse
+
     StartTopicsDetectionJobRequest.add_member(:input_data_config, Shapes::ShapeRef.new(shape: InputDataConfig, required: true, location_name: "InputDataConfig"))
     StartTopicsDetectionJobRequest.add_member(:output_data_config, Shapes::ShapeRef.new(shape: OutputDataConfig, required: true, location_name: "OutputDataConfig"))
     StartTopicsDetectionJobRequest.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "DataAccessRoleArn"))
@@ -1375,6 +1417,13 @@ module Aws::Comprehend
     StopSentimentDetectionJobResponse.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
     StopSentimentDetectionJobResponse.struct_class = Types::StopSentimentDetectionJobResponse
 
+    StopTargetedSentimentDetectionJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
+    StopTargetedSentimentDetectionJobRequest.struct_class = Types::StopTargetedSentimentDetectionJobRequest
+
+    StopTargetedSentimentDetectionJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    StopTargetedSentimentDetectionJobResponse.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
+    StopTargetedSentimentDetectionJobResponse.struct_class = Types::StopTargetedSentimentDetectionJobResponse
+
     StopTrainingDocumentClassifierRequest.add_member(:document_classifier_arn, Shapes::ShapeRef.new(shape: DocumentClassifierArn, required: true, location_name: "DocumentClassifierArn"))
     StopTrainingDocumentClassifierRequest.struct_class = Types::StopTrainingDocumentClassifierRequest
 
@@ -1409,6 +1458,29 @@ module Aws::Comprehend
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
     TargetEventTypes.member = Shapes::ShapeRef.new(shape: EventTypeString)
+
+    TargetedSentimentDetectionJobFilter.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
+    TargetedSentimentDetectionJobFilter.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
+    TargetedSentimentDetectionJobFilter.add_member(:submit_time_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTimeBefore"))
+    TargetedSentimentDetectionJobFilter.add_member(:submit_time_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTimeAfter"))
+    TargetedSentimentDetectionJobFilter.struct_class = Types::TargetedSentimentDetectionJobFilter
+
+    TargetedSentimentDetectionJobProperties.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    TargetedSentimentDetectionJobProperties.add_member(:job_arn, Shapes::ShapeRef.new(shape: ComprehendArn, location_name: "JobArn"))
+    TargetedSentimentDetectionJobProperties.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
+    TargetedSentimentDetectionJobProperties.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
+    TargetedSentimentDetectionJobProperties.add_member(:message, Shapes::ShapeRef.new(shape: AnyLengthString, location_name: "Message"))
+    TargetedSentimentDetectionJobProperties.add_member(:submit_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTime"))
+    TargetedSentimentDetectionJobProperties.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
+    TargetedSentimentDetectionJobProperties.add_member(:input_data_config, Shapes::ShapeRef.new(shape: InputDataConfig, location_name: "InputDataConfig"))
+    TargetedSentimentDetectionJobProperties.add_member(:output_data_config, Shapes::ShapeRef.new(shape: OutputDataConfig, location_name: "OutputDataConfig"))
+    TargetedSentimentDetectionJobProperties.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
+    TargetedSentimentDetectionJobProperties.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn"))
+    TargetedSentimentDetectionJobProperties.add_member(:volume_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
+    TargetedSentimentDetectionJobProperties.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
+    TargetedSentimentDetectionJobProperties.struct_class = Types::TargetedSentimentDetectionJobProperties
+
+    TargetedSentimentDetectionJobPropertiesList.member = Shapes::ShapeRef.new(shape: TargetedSentimentDetectionJobProperties)
 
     TextSizeLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     TextSizeLimitExceededException.struct_class = Types::TextSizeLimitExceededException
@@ -1804,6 +1876,18 @@ module Aws::Comprehend
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:describe_targeted_sentiment_detection_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeTargetedSentimentDetectionJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeTargetedSentimentDetectionJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeTargetedSentimentDetectionJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: JobNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:describe_topics_detection_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeTopicsDetectionJob"
         o.http_method = "POST"
@@ -2117,6 +2201,24 @@ module Aws::Comprehend
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:list_targeted_sentiment_detection_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTargetedSentimentDetectionJobs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTargetedSentimentDetectionJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTargetedSentimentDetectionJobsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidFilterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_topics_detection_jobs, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTopicsDetectionJobs"
         o.http_method = "POST"
@@ -2241,6 +2343,19 @@ module Aws::Comprehend
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:start_targeted_sentiment_detection_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartTargetedSentimentDetectionJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartTargetedSentimentDetectionJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartTargetedSentimentDetectionJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: KmsKeyValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:start_topics_detection_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartTopicsDetectionJob"
         o.http_method = "POST"
@@ -2315,6 +2430,17 @@ module Aws::Comprehend
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: StopSentimentDetectionJobRequest)
         o.output = Shapes::ShapeRef.new(shape: StopSentimentDetectionJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: JobNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:stop_targeted_sentiment_detection_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopTargetedSentimentDetectionJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopTargetedSentimentDetectionJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopTargetedSentimentDetectionJobResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: JobNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

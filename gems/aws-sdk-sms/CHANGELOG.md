@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2022-04-04)
+------------------
+
+* Feature - Revised product update notice for SMS console deprecation.
+
+1.39.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.38.0 (2022-02-03)
 ------------------
 

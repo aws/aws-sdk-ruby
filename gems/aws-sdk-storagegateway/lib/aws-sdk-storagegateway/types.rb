@@ -385,8 +385,6 @@ module Aws::StorageGateway
     #   eject the tape, the tape is archived directly into the storage class
     #   (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the
     #   pool.
-    #
-    #   Valid Values: `GLACIER` \| `DEEP_ARCHIVE`
     #   @return [String]
     #
     # @!attribute [rw] bypass_governance_retention
@@ -671,8 +669,6 @@ module Aws::StorageGateway
     #   application to eject the tape, the tape is archived directly into
     #   the storage class (S3 Glacier or S3 Glacier Deep Archive) that
     #   corresponds to the pool.
-    #
-    #   Valid Values: `GLACIER` \| `DEEP_ARCHIVE`
     #   @return [String]
     #
     # @!attribute [rw] tape_size_in_bytes
@@ -877,6 +873,13 @@ module Aws::StorageGateway
     #
     #   <note markdown="1"> This value is not available for volumes created prior to May 13,
     #   2015, until you store data on the volume.
+    #
+    #    If you use a delete tool that overwrites the data on your volume
+    #   with random data, your usage will not be reduced. This is because
+    #   the random data is not compressible. If you want to reduce the
+    #   amount of billed storage on your volume, we recommend overwriting
+    #   your files with zeros to compress the data to a negligible amount of
+    #   actual storage.
     #
     #    </note>
     #   @return [Integer]
@@ -1293,8 +1296,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] default_storage_class
     #   The default storage class for objects put into an Amazon S3 bucket
-    #   by the S3 File Gateway. The default value is
-    #   `S3_INTELLIGENT_TIERING`. Optional.
+    #   by the S3 File Gateway. The default value is `S3_STANDARD`.
+    #   Optional.
     #
     #   Valid Values: `S3_STANDARD` \| `S3_INTELLIGENT_TIERING` \|
     #   `S3_STANDARD_IA` \| `S3_ONEZONE_IA`
@@ -1578,8 +1581,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] default_storage_class
     #   The default storage class for objects put into an Amazon S3 bucket
-    #   by the S3 File Gateway. The default value is
-    #   `S3_INTELLIGENT_TIERING`. Optional.
+    #   by the S3 File Gateway. The default value is `S3_STANDARD`.
+    #   Optional.
     #
     #   Valid Values: `S3_STANDARD` \| `S3_INTELLIGENT_TIERING` \|
     #   `S3_STANDARD_IA` \| `S3_ONEZONE_IA`
@@ -2269,8 +2272,6 @@ module Aws::StorageGateway
     #   associated with the pool. When you use your backup application to
     #   eject the tape, the tape is archived directly into the storage class
     #   (S3 Glacier or S3 Deep Archive) that corresponds to the pool.
-    #
-    #   Valid Values: `GLACIER` \| `DEEP_ARCHIVE`
     #   @return [String]
     #
     # @!attribute [rw] worm
@@ -2404,8 +2405,6 @@ module Aws::StorageGateway
     #   eject the tape, the tape is archived directly into the storage class
     #   (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the
     #   pool.
-    #
-    #   Valid Values: `GLACIER` \| `DEEP_ARCHIVE`
     #   @return [String]
     #
     # @!attribute [rw] worm
@@ -3293,7 +3292,9 @@ module Aws::StorageGateway
     # @!attribute [rw] last_software_update
     #   The date on which the last software update was applied to the
     #   gateway. If the gateway has never been updated, this field does not
-    #   return a value in the response.
+    #   return a value in the response. This only only exist and returns
+    #   once it have been chosen and set by the SGW service, based on the OS
+    #   version of the gateway VM
     #   @return [String]
     #
     # @!attribute [rw] ec2_instance_id
@@ -3320,7 +3321,9 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] cloud_watch_log_group_arn
     #   The Amazon Resource Name (ARN) of the Amazon CloudWatch log group
-    #   that is used to monitor events in the gateway.
+    #   that is used to monitor events in the gateway. This field only only
+    #   exist and returns once it have been chosen and set by the SGW
+    #   service, based on the OS version of the gateway VM
     #   @return [String]
     #
     # @!attribute [rw] host_environment
@@ -5578,8 +5581,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] default_storage_class
     #   The default storage class for objects put into an Amazon S3 bucket
-    #   by the S3 File Gateway. The default value is
-    #   `S3_INTELLIGENT_TIERING`. Optional.
+    #   by the S3 File Gateway. The default value is `S3_STANDARD`.
+    #   Optional.
     #
     #   Valid Values: `S3_STANDARD` \| `S3_INTELLIGENT_TIERING` \|
     #   `S3_STANDARD_IA` \| `S3_ONEZONE_IA`
@@ -6178,8 +6181,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] default_storage_class
     #   The default storage class for objects put into an Amazon S3 bucket
-    #   by the S3 File Gateway. The default value is
-    #   `S3_INTELLIGENT_TIERING`. Optional.
+    #   by the S3 File Gateway. The default value is `S3_STANDARD`.
+    #   Optional.
     #
     #   Valid Values: `S3_STANDARD` \| `S3_INTELLIGENT_TIERING` \|
     #   `S3_STANDARD_IA` \| `S3_ONEZONE_IA`
@@ -6881,8 +6884,6 @@ module Aws::StorageGateway
     #   eject the tape, the tape is archived directly into the storage class
     #   (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the
     #   pool.
-    #
-    #   Valid Values: `GLACIER` \| `DEEP_ARCHIVE`
     #   @return [String]
     #
     # @!attribute [rw] worm
@@ -6975,8 +6976,6 @@ module Aws::StorageGateway
     #   The ID of the pool that was used to archive the tape. The tapes in
     #   this pool are archived in the S3 storage class that is associated
     #   with the pool.
-    #
-    #   Valid Values: `GLACIER` \| `DEEP_ARCHIVE`
     #   @return [String]
     #
     # @!attribute [rw] worm
@@ -7047,8 +7046,6 @@ module Aws::StorageGateway
     #   eject the tape, the tape is archived directly into the storage class
     #   (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the
     #   pool.
-    #
-    #   Valid Values: `GLACIER` \| `DEEP_ARCHIVE`
     #   @return [String]
     #
     # @!attribute [rw] retention_start_date
@@ -7664,8 +7661,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] default_storage_class
     #   The default storage class for objects put into an Amazon S3 bucket
-    #   by the S3 File Gateway. The default value is
-    #   `S3_INTELLIGENT_TIERING`. Optional.
+    #   by the S3 File Gateway. The default value is `S3_STANDARD`.
+    #   Optional.
     #
     #   Valid Values: `S3_STANDARD` \| `S3_INTELLIGENT_TIERING` \|
     #   `S3_STANDARD_IA` \| `S3_ONEZONE_IA`
@@ -7855,8 +7852,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] default_storage_class
     #   The default storage class for objects put into an Amazon S3 bucket
-    #   by the S3 File Gateway. The default value is
-    #   `S3_INTELLIGENT_TIERING`. Optional.
+    #   by the S3 File Gateway. The default value is `S3_STANDARD`.
+    #   Optional.
     #
     #   Valid Values: `S3_STANDARD` \| `S3_INTELLIGENT_TIERING` \|
     #   `S3_STANDARD_IA` \| `S3_ONEZONE_IA`

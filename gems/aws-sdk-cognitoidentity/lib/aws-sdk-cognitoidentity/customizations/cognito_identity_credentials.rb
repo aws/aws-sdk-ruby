@@ -85,7 +85,10 @@ module Aws
         @identity_id = options.delete(:identity_id)
         @custom_role_arn = options.delete(:custom_role_arn)
         @logins = options.delete(:logins) || {}
-        @before_refresh = options.delete(:before_refresh)
+        @async_refresh = false
+
+        client_opts = {}
+        options.each_pair { |k,v| client_opts[k] = v unless CLIENT_EXCLUDE_OPTIONS.include?(k) }
 
         if !@identity_pool_id && !@identity_id
           raise ArgumentError,
@@ -93,7 +96,7 @@ module Aws
         end
 
         @client = options[:client] || CognitoIdentity::Client.new(
-          options.merge(credentials: false)
+          client_opts.merge(credentials: false)
         )
         super
       end

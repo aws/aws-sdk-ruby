@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2022-07-19)
+------------------
+
+* Feature - Added new APIs for log anomaly detection feature.
+
+1.23.0 (2022-04-12)
+------------------
+
+* Feature - This release adds new APIs DeleteInsight to deletes the insight along with the associated anomalies, events and recommendations.
+
+1.22.0 (2022-03-04)
+------------------
+
+* Feature - Amazon DevOps Guru now integrates with Amazon CodeGuru Profiler. You can view CodeGuru Profiler recommendations for your AWS Lambda function in DevOps Guru. This feature is enabled by default for new customers as of 3/4/2022. Existing customers can enable this feature with UpdateEventSourcesConfig.
+
+1.21.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.20.0 (2022-02-03)
 ------------------
 

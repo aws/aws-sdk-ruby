@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::IoT
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -580,7 +582,9 @@ module Aws::IoT
     # Attaches the specified policy to the specified principal (certificate
     # or other credential).
     #
-    # **Note:** This action is deprecated. Please use AttachPolicy instead.
+    # **Note:** This action is deprecated and works as expected for backward
+    # compatibility, but we won't add enhancements. Use AttachPolicy
+    # instead.
     #
     # Requires permission to access the [AttachPrincipalPolicy][1] action.
     #
@@ -1273,17 +1277,21 @@ module Aws::IoT
     #
     # @option params [required, String] :metric_name
     #   The name of the custom metric. This will be used in the metric report
-    #   submitted from the device/thing. Shouldn't begin with `aws:`. Cannot
-    #   be updated once defined.
+    #   submitted from the device/thing. The name can't begin with `aws:`.
+    #   You can't change the name after you define it.
     #
     # @option params [String] :display_name
-    #   Field represents a friendly name in the console for the custom metric;
-    #   it doesn't have to be unique. Don't use this name as the metric
-    #   identifier in the device metric report. Can be updated once defined.
+    #   The friendly name in the console for the custom metric. This name
+    #   doesn't have to be unique. Don't use this name as the metric
+    #   identifier in the device metric report. You can update the friendly
+    #   name after you define it.
     #
     # @option params [required, String] :metric_type
-    #   The type of the custom metric. Types include `string-list`,
-    #   `ip-address-list`, `number-list`, and `number`.
+    #   The type of the custom metric.
+    #
+    #   The type `number` only takes a single metric value as an input, but
+    #   when you submit the metrics value in the DeviceMetrics report, you
+    #   must pass it as an array with a single value.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Metadata that can be used to manage the custom metric.
@@ -1710,6 +1718,13 @@ module Aws::IoT
     #   a thing when the thing is added to a target group, even after the job
     #   was completed by all things originally in the group.
     #
+    #   <note markdown="1"> We recommend that you use continuous jobs instead of snapshot jobs for
+    #   dynamic thing group targets. By using continuous jobs, devices that
+    #   join the group receive the job execution even after the job has been
+    #   created.
+    #
+    #    </note>
+    #
     # @option params [Types::JobExecutionsRolloutConfig] :job_executions_rollout_config
     #   Allows you to create a staged rollout of the job.
     #
@@ -1746,8 +1761,14 @@ module Aws::IoT
     #   Allows you to create the criteria to retry a job.
     #
     # @option params [Hash<String,String>] :document_parameters
-    #   Parameters of a managed template that you can specify to create the
-    #   job document.
+    #   Parameters of an Amazon Web Services managed template that you can
+    #   specify to create the job document.
+    #
+    #   <note markdown="1"> `documentParameters` can only be used when creating jobs from Amazon
+    #   Web Services managed templates. This parameter can't be used with
+    #   custom job templates or to create jobs from them.
+    #
+    #    </note>
     #
     # @return [Types::CreateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2572,6 +2593,9 @@ module Aws::IoT
     # @option params [Integer] :credential_duration_seconds
     #   How long (in seconds) the credentials will be valid. The default value
     #   is 3,600 seconds.
+    #
+    #   This value must be less than or equal to the maximum session duration
+    #   of the IAM role that the role alias references.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Metadata which can be used to manage the role alias.
@@ -4975,6 +4999,7 @@ module Aws::IoT
     #   resp.certificate_description.generation_id #=> String
     #   resp.certificate_description.validity.not_before #=> Time
     #   resp.certificate_description.validity.not_after #=> Time
+    #   resp.certificate_description.certificate_mode #=> String, one of "DEFAULT", "SNI_ONLY"
     #   resp.registration_config.template_body #=> String
     #   resp.registration_config.role_arn #=> String
     #
@@ -5517,6 +5542,7 @@ module Aws::IoT
     #   resp.job.job_executions_retry_config.criteria_list[0].number_of_retries #=> Integer
     #   resp.job.document_parameters #=> Hash
     #   resp.job.document_parameters["ParameterKey"] #=> String
+    #   resp.job.is_concurrent #=> Boolean
     #
     # @overload describe_job(params = {})
     # @param [Hash] params ({})
@@ -6666,6 +6692,8 @@ module Aws::IoT
     #   resp.thing_indexing_configuration.custom_fields #=> Array
     #   resp.thing_indexing_configuration.custom_fields[0].name #=> String
     #   resp.thing_indexing_configuration.custom_fields[0].type #=> String, one of "Number", "String", "Boolean"
+    #   resp.thing_indexing_configuration.filter.named_shadow_names #=> Array
+    #   resp.thing_indexing_configuration.filter.named_shadow_names[0] #=> String
     #   resp.thing_group_indexing_configuration.thing_group_indexing_mode #=> String, one of "OFF", "ON"
     #   resp.thing_group_indexing_configuration.managed_fields #=> Array
     #   resp.thing_group_indexing_configuration.managed_fields[0].name #=> String
@@ -8760,6 +8788,13 @@ module Aws::IoT
     #   a thing when the thing is added to a target group, even after the job
     #   was completed by all things originally in the group.
     #
+    #   <note markdown="1"> We recommend that you use continuous jobs instead of snapshot jobs for
+    #   dynamic thing group targets. By using continuous jobs, devices that
+    #   join the group receive the job execution even after the job has been
+    #   created.
+    #
+    #    </note>
+    #
     # @option params [Integer] :max_results
     #   The maximum number of results to return per request.
     #
@@ -8817,6 +8852,7 @@ module Aws::IoT
     #   resp.jobs[0].created_at #=> Time
     #   resp.jobs[0].last_updated_at #=> Time
     #   resp.jobs[0].completed_at #=> Time
+    #   resp.jobs[0].is_concurrent #=> Boolean
     #   resp.next_token #=> String
     #
     # @overload list_jobs(params = {})
@@ -8867,6 +8903,78 @@ module Aws::IoT
     # @param [Hash] params ({})
     def list_managed_job_templates(params = {}, options = {})
       req = build_request(:list_managed_job_templates, params)
+      req.send_request(options)
+    end
+
+    # Lists the values reported for an IoT Device Defender metric
+    # (device-side metric, cloud-side metric, or custom metric) by the given
+    # thing during the specified time period.
+    #
+    # @option params [required, String] :thing_name
+    #   The name of the thing for which security profile metric values are
+    #   returned.
+    #
+    # @option params [required, String] :metric_name
+    #   The name of the security profile metric for which values are returned.
+    #
+    # @option params [String] :dimension_name
+    #   The dimension name.
+    #
+    # @option params [String] :dimension_value_operator
+    #   The dimension value operator.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :start_time
+    #   The start of the time period for which metric values are returned.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :end_time
+    #   The end of the time period for which metric values are returned.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return at one time.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results.
+    #
+    # @return [Types::ListMetricValuesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMetricValuesResponse#metric_datum_list #metric_datum_list} => Array&lt;Types::MetricDatum&gt;
+    #   * {Types::ListMetricValuesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_metric_values({
+    #     thing_name: "DeviceDefenderThingName", # required
+    #     metric_name: "BehaviorMetric", # required
+    #     dimension_name: "DimensionName",
+    #     dimension_value_operator: "IN", # accepts IN, NOT_IN
+    #     start_time: Time.now, # required
+    #     end_time: Time.now, # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.metric_datum_list #=> Array
+    #   resp.metric_datum_list[0].timestamp #=> Time
+    #   resp.metric_datum_list[0].value.count #=> Integer
+    #   resp.metric_datum_list[0].value.cidrs #=> Array
+    #   resp.metric_datum_list[0].value.cidrs[0] #=> String
+    #   resp.metric_datum_list[0].value.ports #=> Array
+    #   resp.metric_datum_list[0].value.ports[0] #=> Integer
+    #   resp.metric_datum_list[0].value.number #=> Float
+    #   resp.metric_datum_list[0].value.numbers #=> Array
+    #   resp.metric_datum_list[0].value.numbers[0] #=> Float
+    #   resp.metric_datum_list[0].value.strings #=> Array
+    #   resp.metric_datum_list[0].value.strings[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_metric_values(params = {})
+    # @param [Hash] params ({})
+    def list_metric_values(params = {}, options = {})
+      req = build_request(:list_metric_values, params)
       req.send_request(options)
     end
 
@@ -10533,14 +10641,10 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Registers a CA certificate with IoT. This CA certificate can then be
-    # used to sign device certificates, which can be then registered with
-    # IoT. You can register up to 10 CA certificates per Amazon Web Services
-    # account that have the same subject field. This enables you to have up
-    # to 10 certificate authorities sign your device certificates. If you
-    # have more than one CA certificate registered, make sure you pass the
-    # CA certificate when you register your device certificates with the
-    # RegisterCertificate action.
+    # Registers a CA certificate with Amazon Web Services IoT Core. There is
+    # no limit to the number of CA certificates you can register in your
+    # Amazon Web Services account. You can register up to 10 CA certificates
+    # with the same `CA subject field` per Amazon Web Services account.
     #
     # Requires permission to access the [RegisterCACertificate][1] action.
     #
@@ -10551,11 +10655,16 @@ module Aws::IoT
     # @option params [required, String] :ca_certificate
     #   The CA certificate.
     #
-    # @option params [required, String] :verification_certificate
-    #   The private key verification certificate.
+    # @option params [String] :verification_certificate
+    #   The private key verification certificate. If `certificateMode` is
+    #   `SNI_ONLY`, the `verificationCertificate` field must be empty. If
+    #   `certificateMode` is `DEFAULT` or not provided, the
+    #   `verificationCertificate` field must not be empty.
     #
     # @option params [Boolean] :set_as_active
     #   A boolean value that specifies if the CA certificate is set to active.
+    #
+    #   Valid values: `ACTIVE | INACTIVE`
     #
     # @option params [Boolean] :allow_auto_registration
     #   Allows this CA certificate to be used for auto registration of device
@@ -10578,6 +10687,21 @@ module Aws::IoT
     #
     #    </note>
     #
+    # @option params [String] :certificate_mode
+    #   Describes the certificate mode in which the Certificate Authority (CA)
+    #   will be registered. If the `verificationCertificate` field is not
+    #   provided, set `certificateMode` to be `SNI_ONLY`. If the
+    #   `verificationCertificate` field is provided, set `certificateMode` to
+    #   be `DEFAULT`. When `certificateMode` is not provided, it defaults to
+    #   `DEFAULT`. All the device certificates that are registered using this
+    #   CA will be registered in the same certificate mode as the CA. For more
+    #   information about certificate mode for device certificates, see [
+    #   certificate mode][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/apireference/API_CertificateDescription.html#iot-Type-CertificateDescription-certificateMode
+    #
     # @return [Types::RegisterCACertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RegisterCACertificateResponse#certificate_arn #certificate_arn} => String
@@ -10587,7 +10711,7 @@ module Aws::IoT
     #
     #   resp = client.register_ca_certificate({
     #     ca_certificate: "CertificatePem", # required
-    #     verification_certificate: "CertificatePem", # required
+    #     verification_certificate: "CertificatePem",
     #     set_as_active: false,
     #     allow_auto_registration: false,
     #     registration_config: {
@@ -10600,6 +10724,7 @@ module Aws::IoT
     #         value: "TagValue",
     #       },
     #     ],
+    #     certificate_mode: "DEFAULT", # accepts DEFAULT, SNI_ONLY
     #   })
     #
     # @example Response structure
@@ -10614,16 +10739,17 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Registers a device certificate with IoT. If you have more than one CA
-    # certificate that has the same subject field, you must specify the CA
-    # certificate that was used to sign the device certificate being
-    # registered.
+    # Registers a device certificate with IoT in the same [certificate
+    # mode][1] as the signing CA. If you have more than one CA certificate
+    # that has the same subject field, you must specify the CA certificate
+    # that was used to sign the device certificate being registered.
     #
-    # Requires permission to access the [RegisterCertificate][1] action.
+    # Requires permission to access the [RegisterCertificate][2] action.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    # [1]: https://docs.aws.amazon.com/iot/latest/apireference/API_CertificateDescription.html#iot-Type-CertificateDescription-certificateMode
+    # [2]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
     #
     # @option params [required, String] :certificate_pem
     #   The certificate data, in PEM format.
@@ -10635,8 +10761,11 @@ module Aws::IoT
     # @option params [Boolean] :set_as_active
     #   A boolean value that specifies if the certificate is set to active.
     #
+    #   Valid values: `ACTIVE | INACTIVE`
+    #
     # @option params [String] :status
-    #   The status of the register certificate request.
+    #   The status of the register certificate request. Valid values that you
+    #   can use include `ACTIVE`, `INACTIVE`, and `REVOKED`.
     #
     # @return [Types::RegisterCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11289,7 +11418,12 @@ module Aws::IoT
     #   The search index name.
     #
     # @option params [required, String] :query_string
-    #   The search query string.
+    #   The search query string. For more information about the search query
+    #   syntax, see [Query syntax][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/query-syntax.html
     #
     # @option params [String] :next_token
     #   The token used to get the next set of results, or `null` if there are
@@ -12708,6 +12842,9 @@ module Aws::IoT
     #           type: "Number", # accepts Number, String, Boolean
     #         },
     #       ],
+    #       filter: {
+    #         named_shadow_names: ["ShadowName"],
+    #       },
     #     },
     #     thing_group_indexing_configuration: {
     #       thing_group_indexing_mode: "OFF", # required, accepts OFF, ON
@@ -12968,6 +13105,9 @@ module Aws::IoT
     #
     # @option params [Integer] :credential_duration_seconds
     #   The number of seconds the credential will be valid.
+    #
+    #   This value must be less than or equal to the maximum session duration
+    #   of the IAM role that the role alias references.
     #
     # @return [Types::UpdateRoleAliasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -13583,7 +13723,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.85.0'
+      context[:gem_version] = '1.93.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

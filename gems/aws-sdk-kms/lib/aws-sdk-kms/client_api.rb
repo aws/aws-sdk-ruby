@@ -90,6 +90,8 @@ module Aws::KMS
     GenerateDataKeyResponse = Shapes::StructureShape.new(name: 'GenerateDataKeyResponse')
     GenerateDataKeyWithoutPlaintextRequest = Shapes::StructureShape.new(name: 'GenerateDataKeyWithoutPlaintextRequest')
     GenerateDataKeyWithoutPlaintextResponse = Shapes::StructureShape.new(name: 'GenerateDataKeyWithoutPlaintextResponse')
+    GenerateMacRequest = Shapes::StructureShape.new(name: 'GenerateMacRequest')
+    GenerateMacResponse = Shapes::StructureShape.new(name: 'GenerateMacResponse')
     GenerateRandomRequest = Shapes::StructureShape.new(name: 'GenerateRandomRequest')
     GenerateRandomResponse = Shapes::StructureShape.new(name: 'GenerateRandomResponse')
     GetKeyPolicyRequest = Shapes::StructureShape.new(name: 'GetKeyPolicyRequest')
@@ -123,6 +125,7 @@ module Aws::KMS
     InvalidKeyUsageException = Shapes::StructureShape.new(name: 'InvalidKeyUsageException')
     InvalidMarkerException = Shapes::StructureShape.new(name: 'InvalidMarkerException')
     KMSInternalException = Shapes::StructureShape.new(name: 'KMSInternalException')
+    KMSInvalidMacException = Shapes::StructureShape.new(name: 'KMSInvalidMacException')
     KMSInvalidSignatureException = Shapes::StructureShape.new(name: 'KMSInvalidSignatureException')
     KMSInvalidStateException = Shapes::StructureShape.new(name: 'KMSInvalidStateException')
     KeyIdType = Shapes::StringShape.new(name: 'KeyIdType')
@@ -148,6 +151,8 @@ module Aws::KMS
     ListResourceTagsRequest = Shapes::StructureShape.new(name: 'ListResourceTagsRequest')
     ListResourceTagsResponse = Shapes::StructureShape.new(name: 'ListResourceTagsResponse')
     ListRetirableGrantsRequest = Shapes::StructureShape.new(name: 'ListRetirableGrantsRequest')
+    MacAlgorithmSpec = Shapes::StringShape.new(name: 'MacAlgorithmSpec')
+    MacAlgorithmSpecList = Shapes::ListShape.new(name: 'MacAlgorithmSpecList')
     MalformedPolicyDocumentException = Shapes::StructureShape.new(name: 'MalformedPolicyDocumentException')
     MarkerType = Shapes::StringShape.new(name: 'MarkerType')
     MessageType = Shapes::StringShape.new(name: 'MessageType')
@@ -195,6 +200,8 @@ module Aws::KMS
     UpdateCustomKeyStoreResponse = Shapes::StructureShape.new(name: 'UpdateCustomKeyStoreResponse')
     UpdateKeyDescriptionRequest = Shapes::StructureShape.new(name: 'UpdateKeyDescriptionRequest')
     UpdatePrimaryRegionRequest = Shapes::StructureShape.new(name: 'UpdatePrimaryRegionRequest')
+    VerifyMacRequest = Shapes::StructureShape.new(name: 'VerifyMacRequest')
+    VerifyMacResponse = Shapes::StructureShape.new(name: 'VerifyMacResponse')
     VerifyRequest = Shapes::StructureShape.new(name: 'VerifyRequest')
     VerifyResponse = Shapes::StructureShape.new(name: 'VerifyResponse')
     WrappingKeySpec = Shapes::StringShape.new(name: 'WrappingKeySpec')
@@ -242,9 +249,9 @@ module Aws::KMS
     CreateAliasRequest.struct_class = Types::CreateAliasRequest
 
     CreateCustomKeyStoreRequest.add_member(:custom_key_store_name, Shapes::ShapeRef.new(shape: CustomKeyStoreNameType, required: true, location_name: "CustomKeyStoreName"))
-    CreateCustomKeyStoreRequest.add_member(:cloud_hsm_cluster_id, Shapes::ShapeRef.new(shape: CloudHsmClusterIdType, required: true, location_name: "CloudHsmClusterId"))
-    CreateCustomKeyStoreRequest.add_member(:trust_anchor_certificate, Shapes::ShapeRef.new(shape: TrustAnchorCertificateType, required: true, location_name: "TrustAnchorCertificate"))
-    CreateCustomKeyStoreRequest.add_member(:key_store_password, Shapes::ShapeRef.new(shape: KeyStorePasswordType, required: true, location_name: "KeyStorePassword"))
+    CreateCustomKeyStoreRequest.add_member(:cloud_hsm_cluster_id, Shapes::ShapeRef.new(shape: CloudHsmClusterIdType, location_name: "CloudHsmClusterId"))
+    CreateCustomKeyStoreRequest.add_member(:trust_anchor_certificate, Shapes::ShapeRef.new(shape: TrustAnchorCertificateType, location_name: "TrustAnchorCertificate"))
+    CreateCustomKeyStoreRequest.add_member(:key_store_password, Shapes::ShapeRef.new(shape: KeyStorePasswordType, location_name: "KeyStorePassword"))
     CreateCustomKeyStoreRequest.struct_class = Types::CreateCustomKeyStoreRequest
 
     CreateCustomKeyStoreResponse.add_member(:custom_key_store_id, Shapes::ShapeRef.new(shape: CustomKeyStoreIdType, location_name: "CustomKeyStoreId"))
@@ -433,6 +440,17 @@ module Aws::KMS
     GenerateDataKeyWithoutPlaintextResponse.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, location_name: "KeyId"))
     GenerateDataKeyWithoutPlaintextResponse.struct_class = Types::GenerateDataKeyWithoutPlaintextResponse
 
+    GenerateMacRequest.add_member(:message, Shapes::ShapeRef.new(shape: PlaintextType, required: true, location_name: "Message"))
+    GenerateMacRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
+    GenerateMacRequest.add_member(:mac_algorithm, Shapes::ShapeRef.new(shape: MacAlgorithmSpec, required: true, location_name: "MacAlgorithm"))
+    GenerateMacRequest.add_member(:grant_tokens, Shapes::ShapeRef.new(shape: GrantTokenList, location_name: "GrantTokens"))
+    GenerateMacRequest.struct_class = Types::GenerateMacRequest
+
+    GenerateMacResponse.add_member(:mac, Shapes::ShapeRef.new(shape: CiphertextType, location_name: "Mac"))
+    GenerateMacResponse.add_member(:mac_algorithm, Shapes::ShapeRef.new(shape: MacAlgorithmSpec, location_name: "MacAlgorithm"))
+    GenerateMacResponse.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, location_name: "KeyId"))
+    GenerateMacResponse.struct_class = Types::GenerateMacResponse
+
     GenerateRandomRequest.add_member(:number_of_bytes, Shapes::ShapeRef.new(shape: NumberOfBytesType, location_name: "NumberOfBytes"))
     GenerateRandomRequest.add_member(:custom_key_store_id, Shapes::ShapeRef.new(shape: CustomKeyStoreIdType, location_name: "CustomKeyStoreId"))
     GenerateRandomRequest.struct_class = Types::GenerateRandomRequest
@@ -543,6 +561,9 @@ module Aws::KMS
     KMSInternalException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
     KMSInternalException.struct_class = Types::KMSInternalException
 
+    KMSInvalidMacException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    KMSInvalidMacException.struct_class = Types::KMSInvalidMacException
+
     KMSInvalidSignatureException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
     KMSInvalidSignatureException.struct_class = Types::KMSInvalidSignatureException
 
@@ -577,6 +598,7 @@ module Aws::KMS
     KeyMetadata.add_member(:multi_region, Shapes::ShapeRef.new(shape: NullableBooleanType, location_name: "MultiRegion"))
     KeyMetadata.add_member(:multi_region_configuration, Shapes::ShapeRef.new(shape: MultiRegionConfiguration, location_name: "MultiRegionConfiguration"))
     KeyMetadata.add_member(:pending_deletion_window_in_days, Shapes::ShapeRef.new(shape: PendingWindowInDaysType, location_name: "PendingDeletionWindowInDays"))
+    KeyMetadata.add_member(:mac_algorithms, Shapes::ShapeRef.new(shape: MacAlgorithmSpecList, location_name: "MacAlgorithms"))
     KeyMetadata.struct_class = Types::KeyMetadata
 
     KeyUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
@@ -640,6 +662,8 @@ module Aws::KMS
     ListRetirableGrantsRequest.add_member(:marker, Shapes::ShapeRef.new(shape: MarkerType, location_name: "Marker"))
     ListRetirableGrantsRequest.add_member(:retiring_principal, Shapes::ShapeRef.new(shape: PrincipalIdType, required: true, location_name: "RetiringPrincipal"))
     ListRetirableGrantsRequest.struct_class = Types::ListRetirableGrantsRequest
+
+    MacAlgorithmSpecList.member = Shapes::ShapeRef.new(shape: MacAlgorithmSpec)
 
     MalformedPolicyDocumentException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
     MalformedPolicyDocumentException.struct_class = Types::MalformedPolicyDocumentException
@@ -770,6 +794,18 @@ module Aws::KMS
     UpdatePrimaryRegionRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
     UpdatePrimaryRegionRequest.add_member(:primary_region, Shapes::ShapeRef.new(shape: RegionType, required: true, location_name: "PrimaryRegion"))
     UpdatePrimaryRegionRequest.struct_class = Types::UpdatePrimaryRegionRequest
+
+    VerifyMacRequest.add_member(:message, Shapes::ShapeRef.new(shape: PlaintextType, required: true, location_name: "Message"))
+    VerifyMacRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
+    VerifyMacRequest.add_member(:mac_algorithm, Shapes::ShapeRef.new(shape: MacAlgorithmSpec, required: true, location_name: "MacAlgorithm"))
+    VerifyMacRequest.add_member(:mac, Shapes::ShapeRef.new(shape: CiphertextType, required: true, location_name: "Mac"))
+    VerifyMacRequest.add_member(:grant_tokens, Shapes::ShapeRef.new(shape: GrantTokenList, location_name: "GrantTokens"))
+    VerifyMacRequest.struct_class = Types::VerifyMacRequest
+
+    VerifyMacResponse.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, location_name: "KeyId"))
+    VerifyMacResponse.add_member(:mac_valid, Shapes::ShapeRef.new(shape: BooleanType, location_name: "MacValid"))
+    VerifyMacResponse.add_member(:mac_algorithm, Shapes::ShapeRef.new(shape: MacAlgorithmSpec, location_name: "MacAlgorithm"))
+    VerifyMacResponse.struct_class = Types::VerifyMacResponse
 
     VerifyRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
     VerifyRequest.add_member(:message, Shapes::ShapeRef.new(shape: PlaintextType, required: true, location_name: "Message"))
@@ -958,6 +994,13 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: CustomKeyStoreNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidMarkerException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
+        o[:pager] = Aws::Pager.new(
+          more_results: "truncated",
+          limit_key: "limit",
+          tokens: {
+            "next_marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_key, Seahorse::Model::Operation.new.tap do |o|
@@ -1116,6 +1159,21 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: DisabledException)
         o.errors << Shapes::ShapeRef.new(shape: KeyUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: DependencyTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidKeyUsageException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGrantTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+      end)
+
+      api.add_operation(:generate_mac, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GenerateMac"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GenerateMacRequest)
+        o.output = Shapes::ShapeRef.new(shape: GenerateMacResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: KeyUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidKeyUsageException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidGrantTokenException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
@@ -1301,6 +1359,13 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidMarkerException)
+        o[:pager] = Aws::Pager.new(
+          more_results: "truncated",
+          limit_key: "limit",
+          tokens: {
+            "next_marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:list_retirable_grants, Seahorse::Model::Operation.new.tap do |o|
@@ -1314,6 +1379,13 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
+        o[:pager] = Aws::Pager.new(
+          more_results: "truncated",
+          limit_key: "limit",
+          tokens: {
+            "next_marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:put_key_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -1524,6 +1596,22 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidSignatureException)
+      end)
+
+      api.add_operation(:verify_mac, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "VerifyMac"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: VerifyMacRequest)
+        o.output = Shapes::ShapeRef.new(shape: VerifyMacResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: KeyUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidKeyUsageException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGrantTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInvalidMacException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
       end)
     end
 

@@ -13,6 +13,7 @@ module Aws::Route53
 
     include Seahorse::Model
 
+    ARN = Shapes::StringShape.new(name: 'ARN')
     AWSAccountID = Shapes::StringShape.new(name: 'AWSAccountID')
     AccountLimit = Shapes::StructureShape.new(name: 'AccountLimit')
     AccountLimitType = Shapes::StringShape.new(name: 'AccountLimitType')
@@ -28,6 +29,9 @@ module Aws::Route53
     Change = Shapes::StructureShape.new(name: 'Change')
     ChangeAction = Shapes::StringShape.new(name: 'ChangeAction')
     ChangeBatch = Shapes::StructureShape.new(name: 'ChangeBatch')
+    ChangeCidrCollectionRequest = Shapes::StructureShape.new(name: 'ChangeCidrCollectionRequest')
+    ChangeCidrCollectionResponse = Shapes::StructureShape.new(name: 'ChangeCidrCollectionResponse')
+    ChangeId = Shapes::StringShape.new(name: 'ChangeId')
     ChangeInfo = Shapes::StructureShape.new(name: 'ChangeInfo')
     ChangeResourceRecordSetsRequest = Shapes::StructureShape.new(name: 'ChangeResourceRecordSetsRequest')
     ChangeResourceRecordSetsResponse = Shapes::StructureShape.new(name: 'ChangeResourceRecordSetsResponse')
@@ -37,13 +41,35 @@ module Aws::Route53
     Changes = Shapes::ListShape.new(name: 'Changes')
     CheckerIpRanges = Shapes::ListShape.new(name: 'CheckerIpRanges')
     ChildHealthCheckList = Shapes::ListShape.new(name: 'ChildHealthCheckList')
+    Cidr = Shapes::StringShape.new(name: 'Cidr')
+    CidrBlockInUseException = Shapes::StructureShape.new(name: 'CidrBlockInUseException')
+    CidrBlockSummaries = Shapes::ListShape.new(name: 'CidrBlockSummaries')
+    CidrBlockSummary = Shapes::StructureShape.new(name: 'CidrBlockSummary')
+    CidrCollection = Shapes::StructureShape.new(name: 'CidrCollection')
+    CidrCollectionAlreadyExistsException = Shapes::StructureShape.new(name: 'CidrCollectionAlreadyExistsException')
+    CidrCollectionChange = Shapes::StructureShape.new(name: 'CidrCollectionChange')
+    CidrCollectionChangeAction = Shapes::StringShape.new(name: 'CidrCollectionChangeAction')
+    CidrCollectionChanges = Shapes::ListShape.new(name: 'CidrCollectionChanges')
+    CidrCollectionInUseException = Shapes::StructureShape.new(name: 'CidrCollectionInUseException')
+    CidrCollectionVersionMismatchException = Shapes::StructureShape.new(name: 'CidrCollectionVersionMismatchException')
+    CidrList = Shapes::ListShape.new(name: 'CidrList')
+    CidrLocationNameDefaultAllowed = Shapes::StringShape.new(name: 'CidrLocationNameDefaultAllowed')
+    CidrLocationNameDefaultNotAllowed = Shapes::StringShape.new(name: 'CidrLocationNameDefaultNotAllowed')
+    CidrNonce = Shapes::StringShape.new(name: 'CidrNonce')
+    CidrRoutingConfig = Shapes::StructureShape.new(name: 'CidrRoutingConfig')
     CloudWatchAlarmConfiguration = Shapes::StructureShape.new(name: 'CloudWatchAlarmConfiguration')
     CloudWatchLogsLogGroupArn = Shapes::StringShape.new(name: 'CloudWatchLogsLogGroupArn')
     CloudWatchRegion = Shapes::StringShape.new(name: 'CloudWatchRegion')
+    CollectionName = Shapes::StringShape.new(name: 'CollectionName')
+    CollectionSummaries = Shapes::ListShape.new(name: 'CollectionSummaries')
+    CollectionSummary = Shapes::StructureShape.new(name: 'CollectionSummary')
+    CollectionVersion = Shapes::IntegerShape.new(name: 'CollectionVersion')
     ComparisonOperator = Shapes::StringShape.new(name: 'ComparisonOperator')
     ConcurrentModification = Shapes::StructureShape.new(name: 'ConcurrentModification')
     ConflictingDomainExists = Shapes::StructureShape.new(name: 'ConflictingDomainExists')
     ConflictingTypes = Shapes::StructureShape.new(name: 'ConflictingTypes')
+    CreateCidrCollectionRequest = Shapes::StructureShape.new(name: 'CreateCidrCollectionRequest')
+    CreateCidrCollectionResponse = Shapes::StructureShape.new(name: 'CreateCidrCollectionResponse')
     CreateHealthCheckRequest = Shapes::StructureShape.new(name: 'CreateHealthCheckRequest')
     CreateHealthCheckResponse = Shapes::StructureShape.new(name: 'CreateHealthCheckResponse')
     CreateHostedZoneRequest = Shapes::StructureShape.new(name: 'CreateHostedZoneRequest')
@@ -76,6 +102,8 @@ module Aws::Route53
     DelegationSetNotAvailable = Shapes::StructureShape.new(name: 'DelegationSetNotAvailable')
     DelegationSetNotReusable = Shapes::StructureShape.new(name: 'DelegationSetNotReusable')
     DelegationSets = Shapes::ListShape.new(name: 'DelegationSets')
+    DeleteCidrCollectionRequest = Shapes::StructureShape.new(name: 'DeleteCidrCollectionRequest')
+    DeleteCidrCollectionResponse = Shapes::StructureShape.new(name: 'DeleteCidrCollectionResponse')
     DeleteHealthCheckRequest = Shapes::StructureShape.new(name: 'DeleteHealthCheckRequest')
     DeleteHealthCheckResponse = Shapes::StructureShape.new(name: 'DeleteHealthCheckResponse')
     DeleteHostedZoneRequest = Shapes::StructureShape.new(name: 'DeleteHostedZoneRequest')
@@ -214,6 +242,12 @@ module Aws::Route53
     LimitValue = Shapes::IntegerShape.new(name: 'LimitValue')
     LimitsExceeded = Shapes::StructureShape.new(name: 'LimitsExceeded')
     LinkedService = Shapes::StructureShape.new(name: 'LinkedService')
+    ListCidrBlocksRequest = Shapes::StructureShape.new(name: 'ListCidrBlocksRequest')
+    ListCidrBlocksResponse = Shapes::StructureShape.new(name: 'ListCidrBlocksResponse')
+    ListCidrCollectionsRequest = Shapes::StructureShape.new(name: 'ListCidrCollectionsRequest')
+    ListCidrCollectionsResponse = Shapes::StructureShape.new(name: 'ListCidrCollectionsResponse')
+    ListCidrLocationsRequest = Shapes::StructureShape.new(name: 'ListCidrLocationsRequest')
+    ListCidrLocationsResponse = Shapes::StructureShape.new(name: 'ListCidrLocationsResponse')
     ListGeoLocationsRequest = Shapes::StructureShape.new(name: 'ListGeoLocationsRequest')
     ListGeoLocationsResponse = Shapes::StructureShape.new(name: 'ListGeoLocationsResponse')
     ListHealthChecksRequest = Shapes::StructureShape.new(name: 'ListHealthChecksRequest')
@@ -246,6 +280,8 @@ module Aws::Route53
     ListTrafficPolicyVersionsResponse = Shapes::StructureShape.new(name: 'ListTrafficPolicyVersionsResponse')
     ListVPCAssociationAuthorizationsRequest = Shapes::StructureShape.new(name: 'ListVPCAssociationAuthorizationsRequest')
     ListVPCAssociationAuthorizationsResponse = Shapes::StructureShape.new(name: 'ListVPCAssociationAuthorizationsResponse')
+    LocationSummaries = Shapes::ListShape.new(name: 'LocationSummaries')
+    LocationSummary = Shapes::StructureShape.new(name: 'LocationSummary')
     MaxResults = Shapes::StringShape.new(name: 'MaxResults')
     MeasureLatency = Shapes::BooleanShape.new(name: 'MeasureLatency')
     Message = Shapes::StringShape.new(name: 'Message')
@@ -253,6 +289,8 @@ module Aws::Route53
     Nameserver = Shapes::StringShape.new(name: 'Nameserver')
     Namespace = Shapes::StringShape.new(name: 'Namespace')
     NoSuchChange = Shapes::StructureShape.new(name: 'NoSuchChange')
+    NoSuchCidrCollectionException = Shapes::StructureShape.new(name: 'NoSuchCidrCollectionException')
+    NoSuchCidrLocationException = Shapes::StructureShape.new(name: 'NoSuchCidrLocationException')
     NoSuchCloudWatchLogsLogGroup = Shapes::StructureShape.new(name: 'NoSuchCloudWatchLogsLogGroup')
     NoSuchDelegationSet = Shapes::StructureShape.new(name: 'NoSuchDelegationSet')
     NoSuchGeoLocation = Shapes::StructureShape.new(name: 'NoSuchGeoLocation')
@@ -354,6 +392,7 @@ module Aws::Route53
     TrafficPolicyVersion = Shapes::IntegerShape.new(name: 'TrafficPolicyVersion')
     TrafficPolicyVersionMarker = Shapes::StringShape.new(name: 'TrafficPolicyVersionMarker')
     TransportProtocol = Shapes::StringShape.new(name: 'TransportProtocol')
+    UUID = Shapes::StringShape.new(name: 'UUID')
     UpdateHealthCheckRequest = Shapes::StructureShape.new(name: 'UpdateHealthCheckRequest')
     UpdateHealthCheckResponse = Shapes::StructureShape.new(name: 'UpdateHealthCheckResponse')
     UpdateHostedZoneCommentRequest = Shapes::StructureShape.new(name: 'UpdateHostedZoneCommentRequest')
@@ -406,6 +445,14 @@ module Aws::Route53
     ChangeBatch.add_member(:changes, Shapes::ShapeRef.new(shape: Changes, required: true, location_name: "Changes"))
     ChangeBatch.struct_class = Types::ChangeBatch
 
+    ChangeCidrCollectionRequest.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "CidrCollectionId"))
+    ChangeCidrCollectionRequest.add_member(:collection_version, Shapes::ShapeRef.new(shape: CollectionVersion, location_name: "CollectionVersion"))
+    ChangeCidrCollectionRequest.add_member(:changes, Shapes::ShapeRef.new(shape: CidrCollectionChanges, required: true, location_name: "Changes"))
+    ChangeCidrCollectionRequest.struct_class = Types::ChangeCidrCollectionRequest
+
+    ChangeCidrCollectionResponse.add_member(:id, Shapes::ShapeRef.new(shape: ChangeId, required: true, location_name: "Id"))
+    ChangeCidrCollectionResponse.struct_class = Types::ChangeCidrCollectionResponse
+
     ChangeInfo.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "Id"))
     ChangeInfo.add_member(:status, Shapes::ShapeRef.new(shape: ChangeStatus, required: true, location_name: "Status"))
     ChangeInfo.add_member(:submitted_at, Shapes::ShapeRef.new(shape: TimeStamp, required: true, location_name: "SubmittedAt"))
@@ -433,6 +480,43 @@ module Aws::Route53
 
     ChildHealthCheckList.member = Shapes::ShapeRef.new(shape: HealthCheckId, location_name: "ChildHealthCheck")
 
+    CidrBlockInUseException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    CidrBlockInUseException.struct_class = Types::CidrBlockInUseException
+
+    CidrBlockSummaries.member = Shapes::ShapeRef.new(shape: CidrBlockSummary)
+
+    CidrBlockSummary.add_member(:cidr_block, Shapes::ShapeRef.new(shape: Cidr, location_name: "CidrBlock"))
+    CidrBlockSummary.add_member(:location_name, Shapes::ShapeRef.new(shape: CidrLocationNameDefaultNotAllowed, location_name: "LocationName"))
+    CidrBlockSummary.struct_class = Types::CidrBlockSummary
+
+    CidrCollection.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
+    CidrCollection.add_member(:id, Shapes::ShapeRef.new(shape: UUID, location_name: "Id"))
+    CidrCollection.add_member(:name, Shapes::ShapeRef.new(shape: CollectionName, location_name: "Name"))
+    CidrCollection.add_member(:version, Shapes::ShapeRef.new(shape: CollectionVersion, location_name: "Version"))
+    CidrCollection.struct_class = Types::CidrCollection
+
+    CidrCollectionAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    CidrCollectionAlreadyExistsException.struct_class = Types::CidrCollectionAlreadyExistsException
+
+    CidrCollectionChange.add_member(:location_name, Shapes::ShapeRef.new(shape: CidrLocationNameDefaultNotAllowed, required: true, location_name: "LocationName"))
+    CidrCollectionChange.add_member(:action, Shapes::ShapeRef.new(shape: CidrCollectionChangeAction, required: true, location_name: "Action"))
+    CidrCollectionChange.add_member(:cidr_list, Shapes::ShapeRef.new(shape: CidrList, required: true, location_name: "CidrList"))
+    CidrCollectionChange.struct_class = Types::CidrCollectionChange
+
+    CidrCollectionChanges.member = Shapes::ShapeRef.new(shape: CidrCollectionChange)
+
+    CidrCollectionInUseException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    CidrCollectionInUseException.struct_class = Types::CidrCollectionInUseException
+
+    CidrCollectionVersionMismatchException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    CidrCollectionVersionMismatchException.struct_class = Types::CidrCollectionVersionMismatchException
+
+    CidrList.member = Shapes::ShapeRef.new(shape: Cidr, location_name: "Cidr")
+
+    CidrRoutingConfig.add_member(:collection_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "CollectionId"))
+    CidrRoutingConfig.add_member(:location_name, Shapes::ShapeRef.new(shape: CidrLocationNameDefaultAllowed, required: true, location_name: "LocationName"))
+    CidrRoutingConfig.struct_class = Types::CidrRoutingConfig
+
     CloudWatchAlarmConfiguration.add_member(:evaluation_periods, Shapes::ShapeRef.new(shape: EvaluationPeriods, required: true, location_name: "EvaluationPeriods"))
     CloudWatchAlarmConfiguration.add_member(:threshold, Shapes::ShapeRef.new(shape: Threshold, required: true, location_name: "Threshold"))
     CloudWatchAlarmConfiguration.add_member(:comparison_operator, Shapes::ShapeRef.new(shape: ComparisonOperator, required: true, location_name: "ComparisonOperator"))
@@ -443,6 +527,14 @@ module Aws::Route53
     CloudWatchAlarmConfiguration.add_member(:dimensions, Shapes::ShapeRef.new(shape: DimensionList, location_name: "Dimensions"))
     CloudWatchAlarmConfiguration.struct_class = Types::CloudWatchAlarmConfiguration
 
+    CollectionSummaries.member = Shapes::ShapeRef.new(shape: CollectionSummary)
+
+    CollectionSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
+    CollectionSummary.add_member(:id, Shapes::ShapeRef.new(shape: UUID, location_name: "Id"))
+    CollectionSummary.add_member(:name, Shapes::ShapeRef.new(shape: CollectionName, location_name: "Name"))
+    CollectionSummary.add_member(:version, Shapes::ShapeRef.new(shape: CollectionVersion, location_name: "Version"))
+    CollectionSummary.struct_class = Types::CollectionSummary
+
     ConcurrentModification.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ConcurrentModification.struct_class = Types::ConcurrentModification
 
@@ -451,6 +543,14 @@ module Aws::Route53
 
     ConflictingTypes.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ConflictingTypes.struct_class = Types::ConflictingTypes
+
+    CreateCidrCollectionRequest.add_member(:name, Shapes::ShapeRef.new(shape: CollectionName, required: true, location_name: "Name"))
+    CreateCidrCollectionRequest.add_member(:caller_reference, Shapes::ShapeRef.new(shape: CidrNonce, required: true, location_name: "CallerReference"))
+    CreateCidrCollectionRequest.struct_class = Types::CreateCidrCollectionRequest
+
+    CreateCidrCollectionResponse.add_member(:collection, Shapes::ShapeRef.new(shape: CidrCollection, location_name: "Collection"))
+    CreateCidrCollectionResponse.add_member(:location, Shapes::ShapeRef.new(shape: ResourceURI, location: "header", location_name: "Location"))
+    CreateCidrCollectionResponse.struct_class = Types::CreateCidrCollectionResponse
 
     CreateHealthCheckRequest.add_member(:caller_reference, Shapes::ShapeRef.new(shape: HealthCheckNonce, required: true, location_name: "CallerReference"))
     CreateHealthCheckRequest.add_member(:health_check_config, Shapes::ShapeRef.new(shape: HealthCheckConfig, required: true, location_name: "HealthCheckConfig"))
@@ -577,6 +677,11 @@ module Aws::Route53
 
     DelegationSets.member = Shapes::ShapeRef.new(shape: DelegationSet, location_name: "DelegationSet")
 
+    DeleteCidrCollectionRequest.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "CidrCollectionId"))
+    DeleteCidrCollectionRequest.struct_class = Types::DeleteCidrCollectionRequest
+
+    DeleteCidrCollectionResponse.struct_class = Types::DeleteCidrCollectionResponse
+
     DeleteHealthCheckRequest.add_member(:health_check_id, Shapes::ShapeRef.new(shape: HealthCheckId, required: true, location: "uri", location_name: "HealthCheckId"))
     DeleteHealthCheckRequest.struct_class = Types::DeleteHealthCheckRequest
 
@@ -672,7 +777,7 @@ module Aws::Route53
     GetAccountLimitResponse.add_member(:count, Shapes::ShapeRef.new(shape: UsageCount, required: true, location_name: "Count"))
     GetAccountLimitResponse.struct_class = Types::GetAccountLimitResponse
 
-    GetChangeRequest.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "Id"))
+    GetChangeRequest.add_member(:id, Shapes::ShapeRef.new(shape: ChangeId, required: true, location: "uri", location_name: "Id"))
     GetChangeRequest.struct_class = Types::GetChangeRequest
 
     GetChangeResponse.add_member(:change_info, Shapes::ShapeRef.new(shape: ChangeInfo, required: true, location_name: "ChangeInfo"))
@@ -954,6 +1059,33 @@ module Aws::Route53
     LinkedService.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     LinkedService.struct_class = Types::LinkedService
 
+    ListCidrBlocksRequest.add_member(:collection_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "CidrCollectionId"))
+    ListCidrBlocksRequest.add_member(:location_name, Shapes::ShapeRef.new(shape: CidrLocationNameDefaultNotAllowed, location: "querystring", location_name: "location"))
+    ListCidrBlocksRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nexttoken"))
+    ListCidrBlocksRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxresults"))
+    ListCidrBlocksRequest.struct_class = Types::ListCidrBlocksRequest
+
+    ListCidrBlocksResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListCidrBlocksResponse.add_member(:cidr_blocks, Shapes::ShapeRef.new(shape: CidrBlockSummaries, location_name: "CidrBlocks"))
+    ListCidrBlocksResponse.struct_class = Types::ListCidrBlocksResponse
+
+    ListCidrCollectionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nexttoken"))
+    ListCidrCollectionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxresults"))
+    ListCidrCollectionsRequest.struct_class = Types::ListCidrCollectionsRequest
+
+    ListCidrCollectionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListCidrCollectionsResponse.add_member(:cidr_collections, Shapes::ShapeRef.new(shape: CollectionSummaries, location_name: "CidrCollections"))
+    ListCidrCollectionsResponse.struct_class = Types::ListCidrCollectionsResponse
+
+    ListCidrLocationsRequest.add_member(:collection_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "CidrCollectionId"))
+    ListCidrLocationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nexttoken"))
+    ListCidrLocationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxresults"))
+    ListCidrLocationsRequest.struct_class = Types::ListCidrLocationsRequest
+
+    ListCidrLocationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListCidrLocationsResponse.add_member(:cidr_locations, Shapes::ShapeRef.new(shape: LocationSummaries, location_name: "CidrLocations"))
+    ListCidrLocationsResponse.struct_class = Types::ListCidrLocationsResponse
+
     ListGeoLocationsRequest.add_member(:start_continent_code, Shapes::ShapeRef.new(shape: GeoLocationContinentCode, location: "querystring", location_name: "startcontinentcode"))
     ListGeoLocationsRequest.add_member(:start_country_code, Shapes::ShapeRef.new(shape: GeoLocationCountryCode, location: "querystring", location_name: "startcountrycode"))
     ListGeoLocationsRequest.add_member(:start_subdivision_code, Shapes::ShapeRef.new(shape: GeoLocationSubdivisionCode, location: "querystring", location_name: "startsubdivisioncode"))
@@ -1139,8 +1271,19 @@ module Aws::Route53
     ListVPCAssociationAuthorizationsResponse.add_member(:vp_cs, Shapes::ShapeRef.new(shape: VPCs, required: true, location_name: "VPCs"))
     ListVPCAssociationAuthorizationsResponse.struct_class = Types::ListVPCAssociationAuthorizationsResponse
 
+    LocationSummaries.member = Shapes::ShapeRef.new(shape: LocationSummary)
+
+    LocationSummary.add_member(:location_name, Shapes::ShapeRef.new(shape: CidrLocationNameDefaultAllowed, location_name: "LocationName"))
+    LocationSummary.struct_class = Types::LocationSummary
+
     NoSuchChange.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     NoSuchChange.struct_class = Types::NoSuchChange
+
+    NoSuchCidrCollectionException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    NoSuchCidrCollectionException.struct_class = Types::NoSuchCidrCollectionException
+
+    NoSuchCidrLocationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    NoSuchCidrLocationException.struct_class = Types::NoSuchCidrLocationException
 
     NoSuchCloudWatchLogsLogGroup.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     NoSuchCloudWatchLogsLogGroup.struct_class = Types::NoSuchCloudWatchLogsLogGroup
@@ -1208,6 +1351,7 @@ module Aws::Route53
     ResourceRecordSet.add_member(:alias_target, Shapes::ShapeRef.new(shape: AliasTarget, location_name: "AliasTarget"))
     ResourceRecordSet.add_member(:health_check_id, Shapes::ShapeRef.new(shape: HealthCheckId, location_name: "HealthCheckId"))
     ResourceRecordSet.add_member(:traffic_policy_instance_id, Shapes::ShapeRef.new(shape: TrafficPolicyInstanceId, location_name: "TrafficPolicyInstanceId"))
+    ResourceRecordSet.add_member(:cidr_routing_config, Shapes::ShapeRef.new(shape: CidrRoutingConfig, location_name: "CidrRoutingConfig"))
     ResourceRecordSet.struct_class = Types::ResourceRecordSet
 
     ResourceRecordSets.member = Shapes::ShapeRef.new(shape: ResourceRecordSet, location_name: "ResourceRecordSet")
@@ -1431,6 +1575,25 @@ module Aws::Route53
         o.errors << Shapes::ShapeRef.new(shape: PriorRequestNotComplete)
       end)
 
+      api.add_operation(:change_cidr_collection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ChangeCidrCollection"
+        o.http_method = "POST"
+        o.http_request_uri = "/2013-04-01/cidrcollection/{CidrCollectionId}"
+        o.input = Shapes::ShapeRef.new(shape: ChangeCidrCollectionRequest,
+          location_name: "ChangeCidrCollectionRequest",
+          metadata: {
+            "xmlNamespace" => {"uri"=>"https://route53.amazonaws.com/doc/2013-04-01/"}
+          }
+        )
+        o.output = Shapes::ShapeRef.new(shape: ChangeCidrCollectionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchCidrCollectionException)
+        o.errors << Shapes::ShapeRef.new(shape: CidrCollectionVersionMismatchException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+        o.errors << Shapes::ShapeRef.new(shape: CidrBlockInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitsExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModification)
+      end)
+
       api.add_operation(:change_resource_record_sets, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ChangeResourceRecordSets"
         o.http_method = "POST"
@@ -1465,6 +1628,23 @@ module Aws::Route53
         o.errors << Shapes::ShapeRef.new(shape: NoSuchHostedZone)
         o.errors << Shapes::ShapeRef.new(shape: PriorRequestNotComplete)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:create_cidr_collection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateCidrCollection"
+        o.http_method = "POST"
+        o.http_request_uri = "/2013-04-01/cidrcollection"
+        o.input = Shapes::ShapeRef.new(shape: CreateCidrCollectionRequest,
+          location_name: "CreateCidrCollectionRequest",
+          metadata: {
+            "xmlNamespace" => {"uri"=>"https://route53.amazonaws.com/doc/2013-04-01/"}
+          }
+        )
+        o.output = Shapes::ShapeRef.new(shape: CreateCidrCollectionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitsExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+        o.errors << Shapes::ShapeRef.new(shape: CidrCollectionAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModification)
       end)
 
       api.add_operation(:create_health_check, Seahorse::Model::Operation.new.tap do |o|
@@ -1651,6 +1831,18 @@ module Aws::Route53
         o.errors << Shapes::ShapeRef.new(shape: KeySigningKeyInUse)
         o.errors << Shapes::ShapeRef.new(shape: KeySigningKeyInParentDSRecord)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+      end)
+
+      api.add_operation(:delete_cidr_collection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteCidrCollection"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/2013-04-01/cidrcollection/{CidrCollectionId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteCidrCollectionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteCidrCollectionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchCidrCollectionException)
+        o.errors << Shapes::ShapeRef.new(shape: CidrCollectionInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModification)
       end)
 
       api.add_operation(:delete_health_check, Seahorse::Model::Operation.new.tap do |o|
@@ -1980,6 +2172,54 @@ module Aws::Route53
         o.http_request_uri = "/2013-04-01/trafficpolicyinstancecount"
         o.input = Shapes::ShapeRef.new(shape: GetTrafficPolicyInstanceCountRequest)
         o.output = Shapes::ShapeRef.new(shape: GetTrafficPolicyInstanceCountResponse)
+      end)
+
+      api.add_operation(:list_cidr_blocks, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCidrBlocks"
+        o.http_method = "GET"
+        o.http_request_uri = "/2013-04-01/cidrcollection/{CidrCollectionId}/cidrblocks"
+        o.input = Shapes::ShapeRef.new(shape: ListCidrBlocksRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListCidrBlocksResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchCidrCollectionException)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchCidrLocationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_cidr_collections, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCidrCollections"
+        o.http_method = "GET"
+        o.http_request_uri = "/2013-04-01/cidrcollection"
+        o.input = Shapes::ShapeRef.new(shape: ListCidrCollectionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListCidrCollectionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_cidr_locations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCidrLocations"
+        o.http_method = "GET"
+        o.http_request_uri = "/2013-04-01/cidrcollection/{CidrCollectionId}"
+        o.input = Shapes::ShapeRef.new(shape: ListCidrLocationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListCidrLocationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchCidrCollectionException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_geo_locations, Seahorse::Model::Operation.new.tap do |o|

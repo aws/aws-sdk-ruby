@@ -161,7 +161,7 @@ module Aws::NimbleStudio
     #
     #       {
     #         active_directory_user: "String",
-    #         endpoint: "SyntheticComputeFarmConfigurationString",
+    #         endpoint: "SensitiveString",
     #       }
     #
     # @!attribute [rw] active_directory_user
@@ -317,9 +317,9 @@ module Aws::NimbleStudio
     #
     #       {
     #         client_token: "ClientToken",
-    #         description: "SyntheticCreateStreamingImageRequestStreamingImageDescription",
+    #         description: "StreamingImageDescription",
     #         ec2_image_id: "EC2ImageId", # required
-    #         name: "SyntheticCreateStreamingImageRequestStreamingImageName", # required
+    #         name: "StreamingImageName", # required
     #         studio_id: "String", # required
     #         tags: {
     #           "String" => "String",
@@ -534,16 +534,16 @@ module Aws::NimbleStudio
     #           },
     #           compute_farm_configuration: {
     #             active_directory_user: "String",
-    #             endpoint: "SyntheticComputeFarmConfigurationString",
+    #             endpoint: "SensitiveString",
     #           },
     #           license_service_configuration: {
-    #             endpoint: "SyntheticLicenseServiceConfigurationString",
+    #             endpoint: "SensitiveString",
     #           },
     #           shared_file_system_configuration: {
-    #             endpoint: "SyntheticSharedFileSystemConfigurationString",
+    #             endpoint: "SensitiveString",
     #             file_system_id: "String",
     #             linux_mount_point: "LinuxMountPoint",
-    #             share_name: "SyntheticSharedFileSystemConfigurationString",
+    #             share_name: "SensitiveString",
     #             windows_mount_drive: "WindowsMountDrive",
     #           },
     #         },
@@ -558,12 +558,14 @@ module Aws::NimbleStudio
     #           },
     #         ],
     #         name: "StudioComponentName", # required
+    #         runtime_role_arn: "RoleArn",
     #         script_parameters: [
     #           {
     #             key: "ScriptParameterKey",
     #             value: "ScriptParameterValue",
     #           },
     #         ],
+    #         secure_initialization_role_arn: "RoleArn",
     #         studio_id: "String", # required
     #         subtype: "AWS_MANAGED_MICROSOFT_AD", # accepts AWS_MANAGED_MICROSOFT_AD, AMAZON_FSX_FOR_WINDOWS, AMAZON_FSX_FOR_LUSTRE, CUSTOM
     #         tags: {
@@ -602,9 +604,21 @@ module Aws::NimbleStudio
     #   The name for the studio component.
     #   @return [String]
     #
+    # @!attribute [rw] runtime_role_arn
+    #   An IAM role attached to a Studio Component that gives the studio
+    #   component access to AWS resources at anytime while the instance is
+    #   running.
+    #   @return [String]
+    #
     # @!attribute [rw] script_parameters
     #   Parameters for the studio component scripts.
     #   @return [Array<Types::ScriptParameterKeyValue>]
+    #
+    # @!attribute [rw] secure_initialization_role_arn
+    #   An IAM role attached to Studio Component when the system
+    #   initialization script runs which give the studio component access to
+    #   AWS resources when the system initialization script runs.
+    #   @return [String]
     #
     # @!attribute [rw] studio_id
     #   The studio ID.
@@ -632,7 +646,9 @@ module Aws::NimbleStudio
       :ec2_security_group_ids,
       :initialization_scripts,
       :name,
+      :runtime_role_arn,
       :script_parameters,
+      :secure_initialization_role_arn,
       :studio_id,
       :subtype,
       :tags,
@@ -657,9 +673,9 @@ module Aws::NimbleStudio
     #   data as a hash:
     #
     #       {
-    #         admin_role_arn: "String", # required
+    #         admin_role_arn: "RoleArn", # required
     #         client_token: "ClientToken",
-    #         display_name: "SyntheticCreateStudioRequestStudioDisplayName", # required
+    #         display_name: "StudioDisplayName", # required
     #         studio_encryption_configuration: {
     #           key_arn: "StudioEncryptionConfigurationKeyArn",
     #           key_type: "AWS_OWNED_KEY", # required, accepts AWS_OWNED_KEY, CUSTOMER_MANAGED_KEY
@@ -668,7 +684,7 @@ module Aws::NimbleStudio
     #         tags: {
     #           "String" => "String",
     #         },
-    #         user_role_arn: "String", # required
+    #         user_role_arn: "RoleArn", # required
     #       }
     #
     # @!attribute [rw] admin_role_arn
@@ -1810,8 +1826,20 @@ module Aws::NimbleStudio
     # The Launch Profile Initialization Script is used when start streaming
     # session runs.
     #
+    # @!attribute [rw] runtime_role_arn
+    #   An IAM role attached to a Studio Component that gives the studio
+    #   component access to AWS resources at anytime while the instance is
+    #   running.
+    #   @return [String]
+    #
     # @!attribute [rw] script
     #   The initialization script.
+    #   @return [String]
+    #
+    # @!attribute [rw] secure_initialization_role_arn
+    #   An IAM role attached to Studio Component when the system
+    #   initialization script runs which give the studio component access to
+    #   AWS resources when the system initialization script runs.
     #   @return [String]
     #
     # @!attribute [rw] studio_component_id
@@ -1825,7 +1853,9 @@ module Aws::NimbleStudio
     # @see http://docs.aws.amazon.com/goto/WebAPI/nimble-2020-08-01/LaunchProfileInitializationScript AWS API Documentation
     #
     class LaunchProfileInitializationScript < Struct.new(
+      :runtime_role_arn,
       :script,
+      :secure_initialization_role_arn,
       :studio_component_id,
       :studio_component_name)
       SENSITIVE = [:script, :studio_component_name]
@@ -1888,7 +1918,7 @@ module Aws::NimbleStudio
     #   data as a hash:
     #
     #       {
-    #         endpoint: "SyntheticLicenseServiceConfigurationString",
+    #         endpoint: "SensitiveString",
     #       }
     #
     # @!attribute [rw] endpoint
@@ -2656,10 +2686,10 @@ module Aws::NimbleStudio
     #   data as a hash:
     #
     #       {
-    #         endpoint: "SyntheticSharedFileSystemConfigurationString",
+    #         endpoint: "SensitiveString",
     #         file_system_id: "String",
     #         linux_mount_point: "LinuxMountPoint",
-    #         share_name: "SyntheticSharedFileSystemConfigurationString",
+    #         share_name: "SensitiveString",
     #         windows_mount_drive: "WindowsMountDrive",
     #       }
     #
@@ -2870,13 +2900,13 @@ module Aws::NimbleStudio
     #   If you then call `StopStreamingSession`, the session fails. If the
     #   time that a session stays in the READY state exceeds the
     #   `maxSessionLengthInMinutes` value, the session will automatically be
-    #   terminated by AWS (instead of stopped).
+    #   terminated (instead of stopped).
     #
     #   If the value is set to a positive number, the session can be
     #   stopped. You can call `StopStreamingSession` to stop sessions in the
     #   READY state. If the time that a session stays in the READY state
     #   exceeds the `maxSessionLengthInMinutes` value, the session will
-    #   automatically be stopped by AWS (instead of terminated).
+    #   automatically be stopped (instead of terminated).
     #   @return [Integer]
     #
     # @!attribute [rw] session_storage
@@ -2949,13 +2979,13 @@ module Aws::NimbleStudio
     #   If you then call `StopStreamingSession`, the session fails. If the
     #   time that a session stays in the READY state exceeds the
     #   `maxSessionLengthInMinutes` value, the session will automatically be
-    #   terminated by AWS (instead of stopped).
+    #   terminated (instead of stopped).
     #
     #   If the value is set to a positive number, the session can be
     #   stopped. You can call `StopStreamingSession` to stop sessions in the
     #   READY state. If the time that a session stays in the READY state
     #   exceeds the `maxSessionLengthInMinutes` value, the session will
-    #   automatically be stopped by AWS (instead of terminated).
+    #   automatically be stopped (instead of terminated).
     #   @return [Integer]
     #
     # @!attribute [rw] session_storage
@@ -3489,9 +3519,21 @@ module Aws::NimbleStudio
     #   A friendly name for the studio component resource.
     #   @return [String]
     #
+    # @!attribute [rw] runtime_role_arn
+    #   An IAM role attached to a Studio Component that gives the studio
+    #   component access to AWS resources at anytime while the instance is
+    #   running.
+    #   @return [String]
+    #
     # @!attribute [rw] script_parameters
     #   Parameters for the studio component scripts.
     #   @return [Array<Types::ScriptParameterKeyValue>]
+    #
+    # @!attribute [rw] secure_initialization_role_arn
+    #   An IAM role attached to Studio Component when the system
+    #   initialization script runs which give the studio component access to
+    #   AWS resources when the system initialization script runs.
+    #   @return [String]
     #
     # @!attribute [rw] state
     #   The current state.
@@ -3542,7 +3584,9 @@ module Aws::NimbleStudio
       :ec2_security_group_ids,
       :initialization_scripts,
       :name,
+      :runtime_role_arn,
       :script_parameters,
+      :secure_initialization_role_arn,
       :state,
       :status_code,
       :status_message,
@@ -4014,8 +4058,8 @@ module Aws::NimbleStudio
     #
     #       {
     #         client_token: "ClientToken",
-    #         description: "SyntheticUpdateStreamingImageRequestStreamingImageDescription",
-    #         name: "SyntheticUpdateStreamingImageRequestStreamingImageName",
+    #         description: "StreamingImageDescription",
+    #         name: "StreamingImageName",
     #         streaming_image_id: "String", # required
     #         studio_id: "String", # required
     #       }
@@ -4099,16 +4143,16 @@ module Aws::NimbleStudio
     #           },
     #           compute_farm_configuration: {
     #             active_directory_user: "String",
-    #             endpoint: "SyntheticComputeFarmConfigurationString",
+    #             endpoint: "SensitiveString",
     #           },
     #           license_service_configuration: {
-    #             endpoint: "SyntheticLicenseServiceConfigurationString",
+    #             endpoint: "SensitiveString",
     #           },
     #           shared_file_system_configuration: {
-    #             endpoint: "SyntheticSharedFileSystemConfigurationString",
+    #             endpoint: "SensitiveString",
     #             file_system_id: "String",
     #             linux_mount_point: "LinuxMountPoint",
-    #             share_name: "SyntheticSharedFileSystemConfigurationString",
+    #             share_name: "SensitiveString",
     #             windows_mount_drive: "WindowsMountDrive",
     #           },
     #         },
@@ -4123,12 +4167,14 @@ module Aws::NimbleStudio
     #           },
     #         ],
     #         name: "StudioComponentName",
+    #         runtime_role_arn: "RoleArn",
     #         script_parameters: [
     #           {
     #             key: "ScriptParameterKey",
     #             value: "ScriptParameterValue",
     #           },
     #         ],
+    #         secure_initialization_role_arn: "RoleArn",
     #         studio_component_id: "String", # required
     #         studio_id: "String", # required
     #         subtype: "AWS_MANAGED_MICROSOFT_AD", # accepts AWS_MANAGED_MICROSOFT_AD, AMAZON_FSX_FOR_WINDOWS, AMAZON_FSX_FOR_LUSTRE, CUSTOM
@@ -4165,9 +4211,21 @@ module Aws::NimbleStudio
     #   The name for the studio component.
     #   @return [String]
     #
+    # @!attribute [rw] runtime_role_arn
+    #   An IAM role attached to a Studio Component that gives the studio
+    #   component access to AWS resources at anytime while the instance is
+    #   running.
+    #   @return [String]
+    #
     # @!attribute [rw] script_parameters
     #   Parameters for the studio component scripts.
     #   @return [Array<Types::ScriptParameterKeyValue>]
+    #
+    # @!attribute [rw] secure_initialization_role_arn
+    #   An IAM role attached to Studio Component when the system
+    #   initialization script runs which give the studio component access to
+    #   AWS resources when the system initialization script runs.
+    #   @return [String]
     #
     # @!attribute [rw] studio_component_id
     #   The studio component ID.
@@ -4194,7 +4252,9 @@ module Aws::NimbleStudio
       :ec2_security_group_ids,
       :initialization_scripts,
       :name,
+      :runtime_role_arn,
       :script_parameters,
+      :secure_initialization_role_arn,
       :studio_component_id,
       :studio_id,
       :subtype,
@@ -4219,11 +4279,11 @@ module Aws::NimbleStudio
     #   data as a hash:
     #
     #       {
-    #         admin_role_arn: "String",
+    #         admin_role_arn: "RoleArn",
     #         client_token: "ClientToken",
-    #         display_name: "SyntheticUpdateStudioRequestStudioDisplayName",
+    #         display_name: "StudioDisplayName",
     #         studio_id: "String", # required
-    #         user_role_arn: "String",
+    #         user_role_arn: "RoleArn",
     #       }
     #
     # @!attribute [rw] admin_role_arn

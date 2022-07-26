@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2022-06-16)
+------------------
+
+* Feature - This release adds a new --workgroup-name field to operations that connect to an endpoint. Customers can now execute queries against their serverless workgroups.
+
+1.20.0 (2022-06-16)
+------------------
+
+* Feature - This release adds a new --workgroup-name field to operations that connect to an endpoint. Customers can now execute queries against their serverless workgroups.
+
+1.19.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.18.0 (2022-02-03)
 ------------------
 

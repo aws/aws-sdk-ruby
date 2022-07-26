@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2022-07-05)
+------------------
+
+* Feature - This release introduces additional optional parameters "messageSelectionStrategy" to PromptSpecification, which enables the users to configure the bot to play messages in orderly manner.
+
+1.23.0 (2022-03-10)
+------------------
+
+* Feature - This release makes slotTypeId an optional parameter in CreateSlot and UpdateSlot APIs in Amazon Lex V2 for model building. Customers can create and update slots without specifying a slot type id.
+
+1.22.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.21.0 (2022-02-03)
 ------------------
 

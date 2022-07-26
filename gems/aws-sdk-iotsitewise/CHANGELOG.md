@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2022-07-21)
+------------------
+
+* Feature - Added asynchronous API to ingest bulk historical and current data into IoT SiteWise.
+
+1.42.0 (2022-05-31)
+------------------
+
+* Feature - This release adds the following new optional field to the IoT SiteWise asset resource: assetDescription.
+
+1.41.0 (2022-04-21)
+------------------
+
+* Feature - This release adds 3 new batch data query APIs : BatchGetAssetPropertyValue, BatchGetAssetPropertyValueHistory and BatchGetAssetPropertyAggregates
+
+1.40.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.39.0 (2022-02-03)
 ------------------
 

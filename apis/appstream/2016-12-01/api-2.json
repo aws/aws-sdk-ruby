@@ -1361,7 +1361,8 @@
         "StreamView":{"shape":"StreamView"},
         "Platform":{"shape":"PlatformType"},
         "MaxConcurrentSessions":{"shape":"Integer"},
-        "UsbDeviceFilterStrings":{"shape":"UsbDeviceFilterStrings"}
+        "UsbDeviceFilterStrings":{"shape":"UsbDeviceFilterStrings"},
+        "SessionScriptS3Location":{"shape":"S3Location"}
       }
     },
     "CreateFleetResult":{
@@ -1427,7 +1428,8 @@
         "ApplicationSettings":{"shape":"ApplicationSettings"},
         "Tags":{"shape":"Tags"},
         "AccessEndpoints":{"shape":"AccessEndpointList"},
-        "EmbedHostDomains":{"shape":"EmbedHostDomains"}
+        "EmbedHostDomains":{"shape":"EmbedHostDomains"},
+        "StreamingExperienceSettings":{"shape":"StreamingExperienceSettings"}
       }
     },
     "CreateStackResult":{
@@ -2136,7 +2138,8 @@
         "StreamView":{"shape":"StreamView"},
         "Platform":{"shape":"PlatformType"},
         "MaxConcurrentSessions":{"shape":"Integer"},
-        "UsbDeviceFilterStrings":{"shape":"UsbDeviceFilterStrings"}
+        "UsbDeviceFilterStrings":{"shape":"UsbDeviceFilterStrings"},
+        "SessionScriptS3Location":{"shape":"S3Location"}
       }
     },
     "FleetAttribute":{
@@ -2146,7 +2149,8 @@
         "VPC_CONFIGURATION_SECURITY_GROUP_IDS",
         "DOMAIN_JOIN_INFO",
         "IAM_ROLE_ARN",
-        "USB_DEVICE_FILTER_STRINGS"
+        "USB_DEVICE_FILTER_STRINGS",
+        "SESSION_SCRIPT_S3_LOCATION"
       ]
     },
     "FleetAttributes":{
@@ -2515,6 +2519,13 @@
       "member":{"shape":"PlatformType"},
       "max":4
     },
+    "PreferredProtocol":{
+      "type":"string",
+      "enum":[
+        "TCP",
+        "UDP"
+      ]
+    },
     "RedirectURL":{
       "type":"string",
       "max":1000
@@ -2704,7 +2715,8 @@
         "UserSettings":{"shape":"UserSettingList"},
         "ApplicationSettings":{"shape":"ApplicationSettingsResponse"},
         "AccessEndpoints":{"shape":"AccessEndpointList"},
-        "EmbedHostDomains":{"shape":"EmbedHostDomains"}
+        "EmbedHostDomains":{"shape":"EmbedHostDomains"},
+        "StreamingExperienceSettings":{"shape":"StreamingExperienceSettings"}
       }
     },
     "StackAttribute":{
@@ -2720,7 +2732,8 @@
         "USER_SETTINGS",
         "EMBED_HOST_DOMAINS",
         "IAM_ROLE_ARN",
-        "ACCESS_ENDPOINTS"
+        "ACCESS_ENDPOINTS",
+        "STREAMING_EXPERIENCE_SETTINGS"
       ]
     },
     "StackAttributes":{
@@ -2827,6 +2840,12 @@
         "APP",
         "DESKTOP"
       ]
+    },
+    "StreamingExperienceSettings":{
+      "type":"structure",
+      "members":{
+        "PreferredProtocol":{"shape":"PreferredProtocol"}
+      }
     },
     "StreamingUrlUserId":{
       "type":"string",
@@ -2985,7 +3004,8 @@
         "StreamView":{"shape":"StreamView"},
         "Platform":{"shape":"PlatformType"},
         "MaxConcurrentSessions":{"shape":"Integer"},
-        "UsbDeviceFilterStrings":{"shape":"UsbDeviceFilterStrings"}
+        "UsbDeviceFilterStrings":{"shape":"UsbDeviceFilterStrings"},
+        "SessionScriptS3Location":{"shape":"S3Location"}
       }
     },
     "UpdateFleetResult":{
@@ -3030,7 +3050,8 @@
         "UserSettings":{"shape":"UserSettingList"},
         "ApplicationSettings":{"shape":"ApplicationSettings"},
         "AccessEndpoints":{"shape":"AccessEndpointList"},
-        "EmbedHostDomains":{"shape":"EmbedHostDomains"}
+        "EmbedHostDomains":{"shape":"EmbedHostDomains"},
+        "StreamingExperienceSettings":{"shape":"StreamingExperienceSettings"}
       }
     },
     "UpdateStackResult":{

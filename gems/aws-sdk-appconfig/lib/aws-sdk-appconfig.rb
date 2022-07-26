@@ -48,6 +48,6 @@ require_relative 'aws-sdk-appconfig/customizations'
 # @!group service
 module Aws::AppConfig
 
-  GEM_VERSION = '1.24.0'
+  GEM_VERSION = '1.26.0'
 
 end

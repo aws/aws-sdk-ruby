@@ -796,15 +796,24 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The ID of the Key Management Service (KMS) key used to encrypt the
-    #   file system's data for Amazon FSx for Windows File Server file
-    #   systems, Amazon FSx for NetApp ONTAP file systems, and Amazon FSx
-    #   for Lustre `PERSISTENT_1` and `PERSISTENT_2` file systems at rest.
-    #   If this ID isn't specified, the key managed by Amazon FSx is used.
-    #   The Amazon FSx for Lustre `SCRATCH_1` and `SCRATCH_2` file systems
-    #   are always encrypted at rest using Amazon FSx-managed keys. For more
-    #   information, see [Encrypt][1] in the *Key Management Service API
-    #   Reference*.
+    #   Specifies the ID of the Key Management Service (KMS) key to use for
+    #   encrypting data on Amazon FSx file systems, as follows:
+    #
+    #   * Amazon FSx for Lustre `PERSISTENT_1` and `PERSISTENT_2` deployment
+    #     types only.
+    #
+    #     `SCRATCH_1` and `SCRATCH_2` types are encrypted using the Amazon
+    #     FSx service KMS key for your account.
+    #
+    #   * Amazon FSx for NetApp ONTAP
+    #
+    #   * Amazon FSx for OpenZFS
+    #
+    #   * Amazon FSx for Windows File Server
+    #
+    #   If a `KmsKeyId` isn't specified, the Amazon FSx-managed KMS key for
+    #   your account is used. For more information, see [Encrypt][1] in the
+    #   *Key Management Service API Reference*.
     #
     #
     #
@@ -966,6 +975,13 @@ module Aws::FSx
     #   from or imported to. This file system directory can be linked to
     #   only one Amazon S3 bucket, and no other S3 bucket can be linked to
     #   the directory.
+    #
+    #   <note markdown="1"> If you specify only a forward slash (`/`) as the file system path,
+    #   you can link only 1 data repository to the file system. You can only
+    #   specify "/" as the file system path for the first data repository
+    #   associated with a file system.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] data_repository_path
@@ -1192,6 +1208,10 @@ module Aws::FSx
     #             level: "DISABLED", # required, accepts DISABLED, WARN_ONLY, ERROR_ONLY, WARN_ERROR
     #             destination: "GeneralARN",
     #           },
+    #           root_squash_configuration: {
+    #             root_squash: "LustreRootSquash",
+    #             no_squash_nids: ["LustreNoSquashNid"],
+    #           },
     #         },
     #         storage_type: "SSD", # accepts SSD, HDD
     #         kms_key_id: "KmsKeyId",
@@ -1209,7 +1229,8 @@ module Aws::FSx
     #             iops: 1,
     #           },
     #           root_volume_configuration: {
-    #             data_compression_type: "NONE", # accepts NONE, ZSTD
+    #             record_size_ki_b: 1,
+    #             data_compression_type: "NONE", # accepts NONE, ZSTD, LZ4
     #             nfs_exports: [
     #               {
     #                 client_configurations: [ # required
@@ -1322,15 +1343,24 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The ID of the Key Management Service (KMS) key used to encrypt the
-    #   file system's data for Amazon FSx for Windows File Server file
-    #   systems, Amazon FSx for NetApp ONTAP file systems, and Amazon FSx
-    #   for Lustre `PERSISTENT_1` and `PERSISTENT_2` file systems at rest.
-    #   If this ID isn't specified, the key managed by Amazon FSx is used.
-    #   The Amazon FSx for Lustre `SCRATCH_1` and `SCRATCH_2` file systems
-    #   are always encrypted at rest using Amazon FSx-managed keys. For more
-    #   information, see [Encrypt][1] in the *Key Management Service API
-    #   Reference*.
+    #   Specifies the ID of the Key Management Service (KMS) key to use for
+    #   encrypting data on Amazon FSx file systems, as follows:
+    #
+    #   * Amazon FSx for Lustre `PERSISTENT_1` and `PERSISTENT_2` deployment
+    #     types only.
+    #
+    #     `SCRATCH_1` and `SCRATCH_2` types are encrypted using the Amazon
+    #     FSx service KMS key for your account.
+    #
+    #   * Amazon FSx for NetApp ONTAP
+    #
+    #   * Amazon FSx for OpenZFS
+    #
+    #   * Amazon FSx for Windows File Server
+    #
+    #   If a `KmsKeyId` isn't specified, the Amazon FSx-managed KMS key for
+    #   your account is used. For more information, see [Encrypt][1] in the
+    #   *Key Management Service API Reference*.
     #
     #
     #
@@ -1420,6 +1450,10 @@ module Aws::FSx
     #         log_configuration: {
     #           level: "DISABLED", # required, accepts DISABLED, WARN_ONLY, ERROR_ONLY, WARN_ERROR
     #           destination: "GeneralARN",
+    #         },
+    #         root_squash_configuration: {
+    #           root_squash: "LustreRootSquash",
+    #           no_squash_nids: ["LustreNoSquashNid"],
     #         },
     #       }
     #
@@ -1570,14 +1604,14 @@ module Aws::FSx
     #
     #   <note markdown="1"> This parameter is not supported for file systems with the
     #   `Persistent_2` deployment type. Instead, use
-    #   `CreateDataRepositoryAssociation"` to create a data repository
+    #   `CreateDataRepositoryAssociation` to create a data repository
     #   association to link your Lustre file system to a data repository.
     #
     #    </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/autoimport-data-repo.html
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/older-deployment-types.html#legacy-auto-import-from-s3
     #   @return [String]
     #
     # @!attribute [rw] per_unit_storage_throughput
@@ -1667,6 +1701,13 @@ module Aws::FSx
     #   system to Amazon CloudWatch Logs.
     #   @return [Types::LustreLogCreateConfiguration]
     #
+    # @!attribute [rw] root_squash_configuration
+    #   The Lustre root squash configuration used when creating an Amazon
+    #   FSx for Lustre file system. When enabled, root squash restricts
+    #   root-level access from clients that try to access your file system
+    #   as a root user.
+    #   @return [Types::LustreRootSquashConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemLustreConfiguration AWS API Documentation
     #
     class CreateFileSystemLustreConfiguration < Struct.new(
@@ -1682,7 +1723,8 @@ module Aws::FSx
       :copy_tags_to_backups,
       :drive_cache_type,
       :data_compression_type,
-      :log_configuration)
+      :log_configuration,
+      :root_squash_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1696,7 +1738,7 @@ module Aws::FSx
     #       {
     #         automatic_backup_retention_days: 1,
     #         daily_automatic_backup_start_time: "DailyTime",
-    #         deployment_type: "MULTI_AZ_1", # required, accepts MULTI_AZ_1
+    #         deployment_type: "MULTI_AZ_1", # required, accepts MULTI_AZ_1, SINGLE_AZ_1
     #         endpoint_ip_address_range: "IpAddressRange",
     #         fsx_admin_password: "AdminPassword",
     #         disk_iops_configuration: {
@@ -1723,14 +1765,31 @@ module Aws::FSx
     #
     # @!attribute [rw] deployment_type
     #   Specifies the FSx for ONTAP file system deployment type to use in
-    #   creating the file system. `MULTI_AZ_1` is the supported ONTAP
-    #   deployment type.
+    #   creating the file system.
+    #
+    #   * `MULTI_AZ_1` - (Default) A high availability file system
+    #     configured for Multi-AZ redundancy to tolerate temporary
+    #     Availability Zone (AZ) unavailability.
+    #
+    #   * `SINGLE_AZ_1` - A file system configured for Single-AZ redundancy.
+    #
+    #   For information about the use cases for Multi-AZ and Single-AZ
+    #   deployments, refer to [Choosing a file system deployment type][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/high-availability-AZ.html
     #   @return [String]
     #
     # @!attribute [rw] endpoint_ip_address_range
-    #   Specifies the IP address range in which the endpoints to access your
-    #   file system will be created. By default, Amazon FSx selects an
-    #   unused IP address range for you from the 198.19.* range.
+    #   (Multi-AZ only) Specifies the IP address range in which the
+    #   endpoints to access your file system will be created. By default,
+    #   Amazon FSx selects an unused IP address range for you from the
+    #   198.19.* range.
+    #
+    #   The Endpoint IP address range you select for your file system must
+    #   exist outside the VPC's CIDR range and must be at least /30 or
+    #   larger.
     #   @return [String]
     #
     # @!attribute [rw] fsx_admin_password
@@ -1750,11 +1809,11 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] route_table_ids
-    #   Specifies the virtual private cloud (VPC) route tables in which your
-    #   file system's endpoints will be created. You should specify all VPC
-    #   route tables associated with the subnets in which your clients are
-    #   located. By default, Amazon FSx selects your VPC's default route
-    #   table.
+    #   (Multi-AZ only) Specifies the virtual private cloud (VPC) route
+    #   tables in which your file system's endpoints will be created. You
+    #   should specify all VPC route tables associated with the subnets in
+    #   which your clients are located. By default, Amazon FSx selects your
+    #   VPC's default route table.
     #   @return [Array<String>]
     #
     # @!attribute [rw] throughput_capacity
@@ -1796,8 +1855,8 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # The OpenZFS configuration properties for the file system that you are
-    # creating.
+    # The Amazon FSx for OpenZFS configuration properties for the file
+    # system that you are creating.
     #
     # @note When making an API call, you may pass CreateFileSystemOpenZFSConfiguration
     #   data as a hash:
@@ -1815,7 +1874,8 @@ module Aws::FSx
     #           iops: 1,
     #         },
     #         root_volume_configuration: {
-    #           data_compression_type: "NONE", # accepts NONE, ZSTD
+    #           record_size_ki_b: 1,
+    #           data_compression_type: "NONE", # accepts NONE, ZSTD, LZ4
     #           nfs_exports: [
     #             {
     #               client_configurations: [ # required
@@ -1873,8 +1933,8 @@ module Aws::FSx
     #
     # @!attribute [rw] deployment_type
     #   Specifies the file system deployment type. Amazon FSx for OpenZFS
-    #   supports `SINGLE_AZ_1`. `SINGLE_AZ_1` is a file system configured
-    #   for a single Availability Zone (AZ) of redundancy.
+    #   supports `SINGLE_AZ_1`. `SINGLE_AZ_1` deployment type is configured
+    #   for redundancy within a single Availability Zone.
     #   @return [String]
     #
     # @!attribute [rw] throughput_capacity
@@ -1992,11 +2052,15 @@ module Aws::FSx
     #             level: "DISABLED", # required, accepts DISABLED, WARN_ONLY, ERROR_ONLY, WARN_ERROR
     #             destination: "GeneralARN",
     #           },
+    #           root_squash_configuration: {
+    #             root_squash: "LustreRootSquash",
+    #             no_squash_nids: ["LustreNoSquashNid"],
+    #           },
     #         },
     #         ontap_configuration: {
     #           automatic_backup_retention_days: 1,
     #           daily_automatic_backup_start_time: "DailyTime",
-    #           deployment_type: "MULTI_AZ_1", # required, accepts MULTI_AZ_1
+    #           deployment_type: "MULTI_AZ_1", # required, accepts MULTI_AZ_1, SINGLE_AZ_1
     #           endpoint_ip_address_range: "IpAddressRange",
     #           fsx_admin_password: "AdminPassword",
     #           disk_iops_configuration: {
@@ -2022,7 +2086,8 @@ module Aws::FSx
     #             iops: 1,
     #           },
     #           root_volume_configuration: {
-    #             data_compression_type: "NONE", # accepts NONE, ZSTD
+    #             record_size_ki_b: 1,
+    #             data_compression_type: "NONE", # accepts NONE, ZSTD, LZ4
     #             nfs_exports: [
     #               {
     #                 client_configurations: [ # required
@@ -2152,15 +2217,24 @@ module Aws::FSx
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] kms_key_id
-    #   The ID of the Key Management Service (KMS) key used to encrypt the
-    #   file system's data for Amazon FSx for Windows File Server file
-    #   systems, Amazon FSx for NetApp ONTAP file systems, and Amazon FSx
-    #   for Lustre `PERSISTENT_1` and `PERSISTENT_2` file systems at rest.
-    #   If this ID isn't specified, the key managed by Amazon FSx is used.
-    #   The Amazon FSx for Lustre `SCRATCH_1` and `SCRATCH_2` file systems
-    #   are always encrypted at rest using Amazon FSx-managed keys. For more
-    #   information, see [Encrypt][1] in the *Key Management Service API
-    #   Reference*.
+    #   Specifies the ID of the Key Management Service (KMS) key to use for
+    #   encrypting data on Amazon FSx file systems, as follows:
+    #
+    #   * Amazon FSx for Lustre `PERSISTENT_1` and `PERSISTENT_2` deployment
+    #     types only.
+    #
+    #     `SCRATCH_1` and `SCRATCH_2` types are encrypted using the Amazon
+    #     FSx service KMS key for your account.
+    #
+    #   * Amazon FSx for NetApp ONTAP
+    #
+    #   * Amazon FSx for OpenZFS
+    #
+    #   * Amazon FSx for Windows File Server
+    #
+    #   If a `KmsKeyId` isn't specified, the Amazon FSx-managed KMS key for
+    #   your account is used. For more information, see [Encrypt][1] in the
+    #   *Key Management Service API Reference*.
     #
     #
     #
@@ -2583,8 +2657,8 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # Specifies the configuration of the OpenZFS volume that you are
-    # creating.
+    # Specifies the configuration of the Amazon FSx for OpenZFS volume that
+    # you are creating.
     #
     # @note When making an API call, you may pass CreateOpenZFSVolumeConfiguration
     #   data as a hash:
@@ -2593,7 +2667,8 @@ module Aws::FSx
     #         parent_volume_id: "VolumeId", # required
     #         storage_capacity_reservation_gi_b: 1,
     #         storage_capacity_quota_gi_b: 1,
-    #         data_compression_type: "NONE", # accepts NONE, ZSTD
+    #         record_size_ki_b: 1,
+    #         data_compression_type: "NONE", # accepts NONE, ZSTD, LZ4
     #         copy_tags_to_snapshots: false,
     #         origin_snapshot: {
     #           snapshot_arn: "ResourceARN", # required
@@ -2620,32 +2695,83 @@ module Aws::FSx
     #       }
     #
     # @!attribute [rw] parent_volume_id
-    #   The ID of the volume to use as the parent volume.
+    #   The ID of the volume to use as the parent volume of the volume that
+    #   you are creating.
     #   @return [String]
     #
     # @!attribute [rw] storage_capacity_reservation_gi_b
-    #   The amount of storage in gibibytes (GiB) to reserve from the parent
-    #   volume. You can't reserve more storage than the parent volume has
-    #   reserved.
+    #   Specifies the amount of storage in gibibytes (GiB) to reserve from
+    #   the parent volume. Setting `StorageCapacityReservationGiB`
+    #   guarantees that the specified amount of storage space on the parent
+    #   volume will always be available for the volume. You can't reserve
+    #   more storage than the parent volume has. To *not* specify a storage
+    #   capacity reservation, set this to `0` or `-1`. For more information,
+    #   see [Volume properties][1] in the *Amazon FSx for OpenZFS User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/managing-volumes.html#volume-properties
     #   @return [Integer]
     #
     # @!attribute [rw] storage_capacity_quota_gi_b
-    #   The maximum amount of storage in gibibytes (GiB) that the volume can
-    #   use from its parent. You can specify a quota larger than the storage
-    #   on the parent volume.
+    #   Sets the maximum storage size in gibibytes (GiB) for the volume. You
+    #   can specify a quota that is larger than the storage on the parent
+    #   volume. A volume quota limits the amount of storage that the volume
+    #   can consume to the configured amount, but does not guarantee the
+    #   space will be available on the parent volume. To guarantee quota
+    #   space, you must also set `StorageCapacityReservationGiB`. To *not*
+    #   specify a storage capacity quota, set this to `-1`.
+    #
+    #   For more information, see [Volume properties][1] in the *Amazon FSx
+    #   for OpenZFS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/managing-volumes.html#volume-properties
+    #   @return [Integer]
+    #
+    # @!attribute [rw] record_size_ki_b
+    #   Specifies the suggested block size for a volume in a ZFS dataset, in
+    #   kibibytes (KiB). Valid values are 4, 8, 16, 32, 64, 128, 256, 512,
+    #   or 1024 KiB. The default is 128 KiB. We recommend using the default
+    #   setting for the majority of use cases. Generally, workloads that
+    #   write in fixed small or large record sizes may benefit from setting
+    #   a custom record size, like database workloads (small record size) or
+    #   media streaming workloads (large record size). For additional
+    #   guidance on when to set a custom record size, see [ ZFS Record
+    #   size][1] in the *Amazon FSx for OpenZFS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance.html#record-size-performance
     #   @return [Integer]
     #
     # @!attribute [rw] data_compression_type
-    #   Specifies the method used to compress the data on the volume. Unless
-    #   the compression type is specified, volumes inherit the
-    #   `DataCompressionType` value of their parent volume.
+    #   Specifies the method used to compress the data on the volume. The
+    #   compression type is `NONE` by default.
     #
-    #   * `NONE` - Doesn't compress the data on the volume.
+    #   * `NONE` - Doesn't compress the data on the volume. `NONE` is the
+    #     default.
     #
     #   * `ZSTD` - Compresses the data in the volume using the Zstandard
-    #     (ZSTD) compression algorithm. This algorithm reduces the amount of
-    #     space used on your volume and has very little impact on compute
-    #     resources.
+    #     (ZSTD) compression algorithm. ZSTD compression provides a higher
+    #     level of data compression and higher read throughput performance
+    #     than LZ4 compression.
+    #
+    #   * `LZ4` - Compresses the data in the volume using the LZ4
+    #     compression algorithm. LZ4 compression provides a lower level of
+    #     compression and higher write throughput performance than ZSTD
+    #     compression.
+    #
+    #   For more information about volume compression types and the
+    #   performance of your Amazon FSx for OpenZFS file system, see [ Tips
+    #   for maximizing performance][1] File system and volume settings in
+    #   the *Amazon FSx for OpenZFS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance.html#performance-tips-zfs
     #   @return [String]
     #
     # @!attribute [rw] copy_tags_to_snapshots
@@ -2683,6 +2809,7 @@ module Aws::FSx
       :parent_volume_id,
       :storage_capacity_reservation_gi_b,
       :storage_capacity_quota_gi_b,
+      :record_size_ki_b,
       :data_compression_type,
       :copy_tags_to_snapshots,
       :origin_snapshot,
@@ -3013,7 +3140,8 @@ module Aws::FSx
     #           parent_volume_id: "VolumeId", # required
     #           storage_capacity_reservation_gi_b: 1,
     #           storage_capacity_quota_gi_b: 1,
-    #           data_compression_type: "NONE", # accepts NONE, ZSTD
+    #           record_size_ki_b: 1,
+    #           data_compression_type: "NONE", # accepts NONE, ZSTD, LZ4
     #           copy_tags_to_snapshots: false,
     #           origin_snapshot: {
     #             snapshot_arn: "ResourceARN", # required
@@ -3176,6 +3304,13 @@ module Aws::FSx
     #   from or imported to. This file system directory can be linked to
     #   only one Amazon S3 bucket, and no other S3 bucket can be linked to
     #   the directory.
+    #
+    #   <note markdown="1"> If you specify only a forward slash (`/`) as the file system path,
+    #   you can link only 1 data repository to the file system. You can only
+    #   specify "/" as the file system path for the first data repository
+    #   associated with a file system.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] data_repository_path
@@ -3821,8 +3956,8 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # The configuration object for the OpenZFS file system used in the
-    # `DeleteFileSystem` operation.
+    # The configuration object for the Amazon FSx for OpenZFS file system
+    # used in the `DeleteFileSystem` operation.
     #
     # @note When making an API call, you may pass DeleteFileSystemOpenZFSConfiguration
     #   data as a hash:
@@ -3835,25 +3970,34 @@ module Aws::FSx
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         options: ["DELETE_CHILD_VOLUMES_AND_SNAPSHOTS"], # accepts DELETE_CHILD_VOLUMES_AND_SNAPSHOTS
     #       }
     #
     # @!attribute [rw] skip_final_backup
     #   By default, Amazon FSx for OpenZFS takes a final backup on your
     #   behalf when the `DeleteFileSystem` operation is invoked. Doing this
     #   helps protect you from data loss, and we highly recommend taking the
-    #   final backup. If you want to skip this backup, use this value to do
-    #   so.
+    #   final backup. If you want to skip taking a final backup, set this
+    #   value to `true`.
     #   @return [Boolean]
     #
     # @!attribute [rw] final_backup_tags
-    #   A list of `Tag` values, with a maximum of 50 elements.
+    #   A list of tags to apply to the file system's final backup.
     #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] options
+    #   To delete a file system if there are child volumes present below the
+    #   root volume, use the string `DELETE_CHILD_VOLUMES_AND_SNAPSHOTS`. If
+    #   your file system has child volumes and you don't use this option,
+    #   the delete request will fail.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteFileSystemOpenZFSConfiguration AWS API Documentation
     #
     class DeleteFileSystemOpenZFSConfiguration < Struct.new(
       :skip_final_backup,
-      :final_backup_tags)
+      :final_backup_tags,
+      :options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3913,6 +4057,7 @@ module Aws::FSx
     #               value: "TagValue", # required
     #             },
     #           ],
+    #           options: ["DELETE_CHILD_VOLUMES_AND_SNAPSHOTS"], # accepts DELETE_CHILD_VOLUMES_AND_SNAPSHOTS
     #         },
     #       }
     #
@@ -4993,6 +5138,10 @@ module Aws::FSx
     #   * `MISCONFIGURED` - The file system is in a failed but recoverable
     #     state.
     #
+    #   * `MISCONFIGURED_UNAVAILABLE` - (Amazon FSx for Windows File Server
+    #     only) The file system is currently unavailable due to a change in
+    #     your Active Directory configuration.
+    #
     #   * `UPDATING` - The file system is undergoing a customer-initiated
     #     update.
     #   @return [String]
@@ -5052,23 +5201,25 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The ID of the Key Management Service (KMS) key used to encrypt the
-    #   file system's data for Amazon FSx for Windows File Server file
-    #   systems, Amazon FSx for NetApp ONTAP file systems, and `PERSISTENT`
-    #   Amazon FSx for Lustre file systems at rest. If this ID isn't
-    #   specified, the Amazon FSx-managed key for your account is used. The
-    #   scratch Amazon FSx for Lustre file systems are always encrypted at
-    #   rest using the Amazon FSx-managed key for your account. For more
-    #   information, see [Encrypt][1] in the *Key Management Service API
-    #   Reference*.
+    #   The ID of the Key Management Service (KMS) key used to encrypt
+    #   Amazon FSx file system data. Used as follows with Amazon FSx file
+    #   system types:
     #
+    #   * Amazon FSx for Lustre `PERSISTENT_1` and `PERSISTENT_2` deployment
+    #     types only.
     #
+    #     `SCRATCH_1` and `SCRATCH_2` types are encrypted using the Amazon
+    #     FSx service KMS key for your account.
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html
+    #   * Amazon FSx for NetApp ONTAP
+    #
+    #   * Amazon FSx for OpenZFS
+    #
+    #   * Amazon FSx for Windows File Server
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) for the file system resource.
+    #   The Amazon Resource Name (ARN) of the file system resource.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -5082,7 +5233,8 @@ module Aws::FSx
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] windows_configuration
-    #   The configuration for this FSx for Windows File Server file system.
+    #   The configuration for this Amazon FSx for Windows File Server file
+    #   system.
     #   @return [Types::WindowsFileSystemConfiguration]
     #
     # @!attribute [rw] lustre_configuration
@@ -5097,7 +5249,7 @@ module Aws::FSx
     #   @return [Array<Types::AdministrativeAction>]
     #
     # @!attribute [rw] ontap_configuration
-    #   The configuration for this FSx for ONTAP file system.
+    #   The configuration for this Amazon FSx for NetApp ONTAP file system.
     #   @return [Types::OntapFileSystemConfiguration]
     #
     # @!attribute [rw] file_system_type_version
@@ -5506,8 +5658,8 @@ module Aws::FSx
     #
     # @!attribute [rw] weekly_maintenance_start_time
     #   The preferred start time to perform weekly maintenance, formatted
-    #   d:HH:MM in the UTC time zone. Here, d is the weekday number, from 1
-    #   through 7, beginning with Monday and ending with Sunday.
+    #   d:HH:MM in the UTC time zone. Here, `d` is the weekday number, from
+    #   1 through 7, beginning with Monday and ending with Sunday.
     #   @return [String]
     #
     # @!attribute [rw] data_repository_configuration
@@ -5622,6 +5774,12 @@ module Aws::FSx
     #   log events for your file system to Amazon CloudWatch Logs.
     #   @return [Types::LustreLogConfiguration]
     #
+    # @!attribute [rw] root_squash_configuration
+    #   The Lustre root squash configuration for an Amazon FSx for Lustre
+    #   file system. When enabled, root squash restricts root-level access
+    #   from clients that try to access your file system as a root user.
+    #   @return [Types::LustreRootSquashConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/LustreFileSystemConfiguration AWS API Documentation
     #
     class LustreFileSystemConfiguration < Struct.new(
@@ -5635,7 +5793,8 @@ module Aws::FSx
       :copy_tags_to_backups,
       :drive_cache_type,
       :data_compression_type,
-      :log_configuration)
+      :log_configuration,
+      :root_squash_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5753,6 +5912,68 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # The configuration for Lustre root squash used to restrict root-level
+    # access from clients that try to access your FSx for Lustre file system
+    # as root. Use the `RootSquash` parameter to enable root squash. To
+    # learn more about Lustre root squash, see [Lustre root squash][1].
+    #
+    # You can also use the `NoSquashNids` parameter to provide an array of
+    # clients who are not affected by the root squash setting. These clients
+    # will access the file system as root, with unrestricted privileges.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/root-squash.html
+    #
+    # @note When making an API call, you may pass LustreRootSquashConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         root_squash: "LustreRootSquash",
+    #         no_squash_nids: ["LustreNoSquashNid"],
+    #       }
+    #
+    # @!attribute [rw] root_squash
+    #   You enable root squash by setting a user ID (UID) and group ID (GID)
+    #   for the file system in the format `UID:GID` (for example,
+    #   `365534:65534`). The UID and GID values can range from `0` to
+    #   `4294967294`\:
+    #
+    #   * A non-zero value for UID and GID enables root squash. The UID and
+    #     GID values can be different, but each must be a non-zero value.
+    #
+    #   * A value of `0` (zero) for UID and GID indicates root, and
+    #     therefore disables root squash.
+    #
+    #   When root squash is enabled, the user ID and group ID of a root user
+    #   accessing the file system are re-mapped to the UID and GID you
+    #   provide.
+    #   @return [String]
+    #
+    # @!attribute [rw] no_squash_nids
+    #   When root squash is enabled, you can optionally specify an array of
+    #   NIDs of clients for which root squash does not apply. A client NID
+    #   is a Lustre Network Identifier used to uniquely identify a client.
+    #   You can specify the NID as either a single address or a range of
+    #   addresses:
+    #
+    #   * A single address is described in standard Lustre NID format by
+    #     specifying the client’s IP address followed by the Lustre network
+    #     ID (for example, `10.0.1.6@tcp`).
+    #
+    #   * An address range is described using a dash to separate the range
+    #     (for example, `10.0.[2-10].[1-255]@tcp`).
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/LustreRootSquashConfiguration AWS API Documentation
+    #
+    class LustreRootSquashConfiguration < Struct.new(
+      :root_squash,
+      :no_squash_nids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A file system configuration is required for this operation.
     #
     # @!attribute [rw] message
@@ -5817,12 +6038,32 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] deployment_type
-    #   The ONTAP file system deployment type.
+    #   Specifies the FSx for ONTAP file system deployment type in use in
+    #   the file system.
+    #
+    #   * `MULTI_AZ_1` - (Default) A high availability file system
+    #     configured for Multi-AZ redundancy to tolerate temporary
+    #     Availability Zone (AZ) unavailability.
+    #
+    #   * `SINGLE_AZ_1` - A file system configured for Single-AZ redundancy.
+    #
+    #   For information about the use cases for Multi-AZ and Single-AZ
+    #   deployments, refer to [Choosing Multi-AZ or Single-AZ file system
+    #   deployment][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/high-availability-multiAZ.html
     #   @return [String]
     #
     # @!attribute [rw] endpoint_ip_address_range
-    #   The IP address range in which the endpoints to access your file
-    #   system are created.
+    #   (Multi-AZ only) The IP address range in which the endpoints to
+    #   access your file system are created.
+    #
+    #   The Endpoint IP address range you select for your file system must
+    #   exist outside the VPC's CIDR range and must be at least /30 or
+    #   larger. If you do not specify this optional parameter, Amazon FSx
+    #   will automatically select a CIDR block for you.
     #   @return [String]
     #
     # @!attribute [rw] endpoints
@@ -5847,12 +6088,13 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] route_table_ids
-    #   The VPC route tables in which your file system's endpoints are
-    #   created.
+    #   (Multi-AZ only) The VPC route tables in which your file system's
+    #   endpoints are created.
     #   @return [Array<String>]
     #
     # @!attribute [rw] throughput_capacity
-    #   The sustained throughput of an Amazon FSx file system in MBps.
+    #   The sustained throughput of an Amazon FSx file system in Megabytes
+    #   per second (MBps).
     #   @return [Integer]
     #
     # @!attribute [rw] weekly_maintenance_start_time
@@ -5983,8 +6225,8 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # Specifies who can mount the file system and the options that can be
-    # used while mounting the file system.
+    # Specifies who can mount an OpenZFS file system and the options
+    # available while mounting the file system.
     #
     # @note When making an API call, you may pass OpenZFSClientConfiguration
     #   data as a hash:
@@ -5997,7 +6239,7 @@ module Aws::FSx
     # @!attribute [rw] clients
     #   A value that specifies who can mount the file system. You can
     #   provide a wildcard character (`*`), an IP address (`0.0.0.0`), or a
-    #   CIDR address (`192.0.2.0/24`. By default, Amazon FSx uses the
+    #   CIDR address (`192.0.2.0/24`). By default, Amazon FSx uses the
     #   wildcard character when specifying the client.
     #   @return [String]
     #
@@ -6007,10 +6249,9 @@ module Aws::FSx
     #   [exports(5) - Linux man page][1]. When choosing your options,
     #   consider the following:
     #
-    #   * `crossmount` is used by default. If you don't specify
-    #     `crossmount` when changing the client configuration, you won't be
-    #     able to see or access snapshots in your file system's snapshot
-    #     directory.
+    #   * `crossmnt` is used by default. If you don't specify `crossmnt`
+    #     when changing the client configuration, you won't be able to see
+    #     or access snapshots in your file system's snapshot directory.
     #
     #   * `sync` is used by default. If you instead specify `async`, the
     #     system acknowledges writes before writing to disk. If the system
@@ -6037,7 +6278,8 @@ module Aws::FSx
     #   data as a hash:
     #
     #       {
-    #         data_compression_type: "NONE", # accepts NONE, ZSTD
+    #         record_size_ki_b: 1,
+    #         data_compression_type: "NONE", # accepts NONE, ZSTD, LZ4
     #         nfs_exports: [
     #           {
     #             client_configurations: [ # required
@@ -6059,17 +6301,36 @@ module Aws::FSx
     #         read_only: false,
     #       }
     #
+    # @!attribute [rw] record_size_ki_b
+    #   Specifies the record size of an OpenZFS root volume, in kibibytes
+    #   (KiB). Valid values are 4, 8, 16, 32, 64, 128, 256, 512, or 1024
+    #   KiB. The default is 128 KiB. Most workloads should use the default
+    #   record size. Database workflows can benefit from a smaller record
+    #   size, while streaming workflows can benefit from a larger record
+    #   size. For additional guidance on setting a custom record size, see [
+    #   Tips for maximizing performance][1] in the *Amazon FSx for OpenZFS
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance.html#performance-tips-zfs
+    #   @return [Integer]
+    #
     # @!attribute [rw] data_compression_type
-    #   Specifies the method used to compress the data on the volume. Unless
-    #   the compression type is specified, volumes inherit the
-    #   `DataCompressionType` value of their parent volume.
+    #   Specifies the method used to compress the data on the volume. The
+    #   compression type is `NONE` by default.
     #
-    #   * `NONE` - Doesn't compress the data on the volume.
+    #   * `NONE` - Doesn't compress the data on the volume. `NONE` is the
+    #     default.
     #
-    #   * `ZSTD` - Compresses the data in the volume using the ZStandard
-    #     (ZSTD) compression algorithm. This algorithm reduces the amount of
-    #     space used on your volume and has very little impact on compute
-    #     resources.
+    #   * `ZSTD` - Compresses the data in the volume using the Zstandard
+    #     (ZSTD) compression algorithm. Compared to LZ4, Z-Standard provides
+    #     a better compression ratio to minimize on-disk storage
+    #     utilization.
+    #
+    #   * `LZ4` - Compresses the data in the volume using the LZ4
+    #     compression algorithm. Compared to Z-Standard, LZ4 is less
+    #     compute-intensive and delivers higher write throughput speeds.
     #   @return [String]
     #
     # @!attribute [rw] nfs_exports
@@ -6083,12 +6344,13 @@ module Aws::FSx
     #
     # @!attribute [rw] copy_tags_to_snapshots
     #   A Boolean value indicating whether tags for the volume should be
-    #   copied to snapshots. This value defaults to `false`. If it's set to
-    #   `true`, all tags for the volume are copied to snapshots where the
-    #   user doesn't specify tags. If this value is `true` and you specify
-    #   one or more tags, only the specified tags are copied to snapshots.
-    #   If you specify one or more tags when creating the snapshot, no tags
-    #   are copied from the volume, regardless of this value.
+    #   copied to snapshots of the volume. This value defaults to `false`.
+    #   If it's set to `true`, all tags for the volume are copied to
+    #   snapshots where the user doesn't specify tags. If this value is
+    #   `true` and you specify one or more tags, only the specified tags are
+    #   copied to snapshots. If you specify one or more tags when creating
+    #   the snapshot, no tags are copied from the volume, regardless of this
+    #   value.
     #   @return [Boolean]
     #
     # @!attribute [rw] read_only
@@ -6100,6 +6362,7 @@ module Aws::FSx
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/OpenZFSCreateRootVolumeConfiguration AWS API Documentation
     #
     class OpenZFSCreateRootVolumeConfiguration < Struct.new(
+      :record_size_ki_b,
       :data_compression_type,
       :nfs_exports,
       :user_and_group_quotas,
@@ -6152,8 +6415,8 @@ module Aws::FSx
     #
     # @!attribute [rw] throughput_capacity
     #   The throughput of an Amazon FSx file system, measured in megabytes
-    #   per second (MBps), in 2 to the nth increments, between 2^3 (8) and
-    #   2^11 (2048).
+    #   per second (MBps). Valid values are 64, 128, 256, 512, 1024, 2048,
+    #   3072, or 4096 MB/s.
     #   @return [Integer]
     #
     # @!attribute [rw] weekly_maintenance_start_time
@@ -6202,8 +6465,8 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # The Network File System NFS) configurations for mounting an Amazon FSx
-    # for OpenZFS file system.
+    # The Network File System (NFS) configurations for mounting an Amazon
+    # FSx for OpenZFS file system.
     #
     # @note When making an API call, you may pass OpenZFSNfsExport
     #   data as a hash:
@@ -6325,17 +6588,29 @@ module Aws::FSx
     #   on the parent volume.
     #   @return [Integer]
     #
-    # @!attribute [rw] data_compression_type
-    #   The method used to compress the data on the volume. Unless a
-    #   compression type is specified, volumes inherit the
-    #   `DataCompressionType` value of their parent volume.
+    # @!attribute [rw] record_size_ki_b
+    #   The record size of an OpenZFS volume, in kibibytes (KiB). Valid
+    #   values are 4, 8, 16, 32, 64, 128, 256, 512, or 1024 KiB. The default
+    #   is 128 KiB. Most workloads should use the default record size. For
+    #   guidance on when to set a custom record size, see the *Amazon FSx
+    #   for OpenZFS User Guide*.
+    #   @return [Integer]
     #
-    #   * `NONE` - Doesn't compress the data on the volume.
+    # @!attribute [rw] data_compression_type
+    #   Specifies the method used to compress the data on the volume. The
+    #   compression type is `NONE` by default.
+    #
+    #   * `NONE` - Doesn't compress the data on the volume. `NONE` is the
+    #     default.
     #
     #   * `ZSTD` - Compresses the data in the volume using the Zstandard
-    #     (ZSTD) compression algorithm. This algorithm reduces the amount of
-    #     space used on your volume and has very little impact on compute
-    #     resources.
+    #     (ZSTD) compression algorithm. Compared to LZ4, Z-Standard provides
+    #     a better compression ratio to minimize on-disk storage
+    #     utilization.
+    #
+    #   * `LZ4` - Compresses the data in the volume using the LZ4
+    #     compression algorithm. Compared to Z-Standard, LZ4 is less
+    #     compute-intensive and delivers higher write throughput speeds.
     #   @return [String]
     #
     # @!attribute [rw] copy_tags_to_snapshots
@@ -6374,6 +6649,7 @@ module Aws::FSx
       :volume_path,
       :storage_capacity_reservation_gi_b,
       :storage_capacity_quota_gi_b,
+      :record_size_ki_b,
       :data_compression_type,
       :copy_tags_to_snapshots,
       :origin_snapshot,
@@ -6504,9 +6780,10 @@ module Aws::FSx
     #     intermediate snapshots and this option isn't used,
     #     `RestoreVolumeFromSnapshot` fails.
     #
-    #   * `DELETE_CLONED_VOLUMES` - Deletes any volumes cloned from this
-    #     volume. If there are any cloned volumes and this option isn't
-    #     used, `RestoreVolumeFromSnapshot` fails.
+    #   * `DELETE_CLONED_VOLUMES` - Deletes any dependent clone volumes
+    #     created from intermediate snapshots. If there are any dependent
+    #     clone volumes and this option isn't used,
+    #     `RestoreVolumeFromSnapshot` fails.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/RestoreVolumeFromSnapshotRequest AWS API Documentation
@@ -6810,6 +7087,10 @@ module Aws::FSx
     #   * `AVAILABLE` - The snapshot is fully available.
     #   @return [String]
     #
+    # @!attribute [rw] lifecycle_transition_reason
+    #   Describes why a resource lifecycle state changed.
+    #   @return [Types::LifecycleTransitionReason]
+    #
     # @!attribute [rw] tags
     #   A list of `Tag` values, with a maximum of 50 elements.
     #   @return [Array<Types::Tag>]
@@ -6829,6 +7110,7 @@ module Aws::FSx
       :volume_id,
       :creation_time,
       :lifecycle,
+      :lifecycle_transition_reason,
       :tags,
       :administrative_actions)
       SENSITIVE = []
@@ -6901,7 +7183,7 @@ module Aws::FSx
     end
 
     # Describes the Amazon FSx for NetApp ONTAP storage virtual machine
-    # (SVM) configuraton.
+    # (SVM) configuration.
     #
     # @!attribute [rw] active_directory_configuration
     #   Describes the Microsoft Active Directory configuration to which the
@@ -7029,8 +7311,7 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # No Amazon FSx for NetApp ONTAP SVMs were found based upon the supplied
-    # parameters.
+    # No FSx for ONTAP SVMs were found based upon the supplied parameters.
     #
     # @!attribute [rw] message
     #   A detailed error message.
@@ -7411,6 +7692,10 @@ module Aws::FSx
     #           level: "DISABLED", # required, accepts DISABLED, WARN_ONLY, ERROR_ONLY, WARN_ERROR
     #           destination: "GeneralARN",
     #         },
+    #         root_squash_configuration: {
+    #           root_squash: "LustreRootSquash",
+    #           no_squash_nids: ["LustreNoSquashNid"],
+    #         },
     #       }
     #
     # @!attribute [rw] weekly_maintenance_start_time
@@ -7488,6 +7773,13 @@ module Aws::FSx
     #   system to Amazon CloudWatch Logs.
     #   @return [Types::LustreLogCreateConfiguration]
     #
+    # @!attribute [rw] root_squash_configuration
+    #   The Lustre root squash configuration used when updating an Amazon
+    #   FSx for Lustre file system. When enabled, root squash restricts
+    #   root-level access from clients that try to access your file system
+    #   as a root user.
+    #   @return [Types::LustreRootSquashConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystemLustreConfiguration AWS API Documentation
     #
     class UpdateFileSystemLustreConfiguration < Struct.new(
@@ -7496,7 +7788,8 @@ module Aws::FSx
       :automatic_backup_retention_days,
       :auto_import_policy,
       :data_compression_type,
-      :log_configuration)
+      :log_configuration,
+      :root_squash_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7516,6 +7809,7 @@ module Aws::FSx
     #           mode: "AUTOMATIC", # accepts AUTOMATIC, USER_PROVISIONED
     #           iops: 1,
     #         },
+    #         throughput_capacity: 1,
     #       }
     #
     # @!attribute [rw] automatic_backup_retention_days
@@ -7560,6 +7854,12 @@ module Aws::FSx
     #   `USER_PROVISIONED` IOPS, the total number of SSD IOPS provisioned.
     #   @return [Types::DiskIopsConfiguration]
     #
+    # @!attribute [rw] throughput_capacity
+    #   Specifies the throughput of an FSx for NetApp ONTAP file system,
+    #   measured in megabytes per second (MBps). Valid values are 128, 256,
+    #   512, 1024, or 2048 MB/s.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystemOntapConfiguration AWS API Documentation
     #
     class UpdateFileSystemOntapConfiguration < Struct.new(
@@ -7567,7 +7867,8 @@ module Aws::FSx
       :daily_automatic_backup_start_time,
       :fsx_admin_password,
       :weekly_maintenance_start_time,
-      :disk_iops_configuration)
+      :disk_iops_configuration,
+      :throughput_capacity)
       SENSITIVE = [:fsx_admin_password]
       include Aws::Structure
     end
@@ -7625,8 +7926,8 @@ module Aws::FSx
     #
     # @!attribute [rw] throughput_capacity
     #   The throughput of an Amazon FSx file system, measured in megabytes
-    #   per second (MBps), in 2 to the nth increments, between 2^3 (8) and
-    #   2^12 (4096).
+    #   per second (MBps). Valid values are 64, 128, 256, 512, 1024, 2048,
+    #   3072, or 4096 MB/s.
     #   @return [Integer]
     #
     # @!attribute [rw] weekly_maintenance_start_time
@@ -7704,6 +8005,10 @@ module Aws::FSx
     #             level: "DISABLED", # required, accepts DISABLED, WARN_ONLY, ERROR_ONLY, WARN_ERROR
     #             destination: "GeneralARN",
     #           },
+    #           root_squash_configuration: {
+    #             root_squash: "LustreRootSquash",
+    #             no_squash_nids: ["LustreNoSquashNid"],
+    #           },
     #         },
     #         ontap_configuration: {
     #           automatic_backup_retention_days: 1,
@@ -7714,6 +8019,7 @@ module Aws::FSx
     #             mode: "AUTOMATIC", # accepts AUTOMATIC, USER_PROVISIONED
     #             iops: 1,
     #           },
+    #           throughput_capacity: 1,
     #         },
     #         open_zfs_configuration: {
     #           automatic_backup_retention_days: 1,
@@ -7987,7 +8293,8 @@ module Aws::FSx
     #       {
     #         storage_capacity_reservation_gi_b: 1,
     #         storage_capacity_quota_gi_b: 1,
-    #         data_compression_type: "NONE", # accepts NONE, ZSTD
+    #         record_size_ki_b: 1,
+    #         data_compression_type: "NONE", # accepts NONE, ZSTD, LZ4
     #         nfs_exports: [
     #           {
     #             client_configurations: [ # required
@@ -8011,26 +8318,47 @@ module Aws::FSx
     # @!attribute [rw] storage_capacity_reservation_gi_b
     #   The amount of storage in gibibytes (GiB) to reserve from the parent
     #   volume. You can't reserve more storage than the parent volume has
-    #   reserved.
+    #   reserved. You can specify a value of `-1` to unset a volume's
+    #   storage capacity reservation.
     #   @return [Integer]
     #
     # @!attribute [rw] storage_capacity_quota_gi_b
     #   The maximum amount of storage in gibibytes (GiB) that the volume can
     #   use from its parent. You can specify a quota larger than the storage
-    #   on the parent volume.
+    #   on the parent volume. You can specify a value of `-1` to unset a
+    #   volume's storage capacity quota.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] record_size_ki_b
+    #   Specifies the record size of an OpenZFS volume, in kibibytes (KiB).
+    #   Valid values are 4, 8, 16, 32, 64, 128, 256, 512, or 1024 KiB. The
+    #   default is 128 KiB. Most workloads should use the default record
+    #   size. Database workflows can benefit from a smaller record size,
+    #   while streaming workflows can benefit from a larger record size. For
+    #   additional guidance on when to set a custom record size, see [ Tips
+    #   for maximizing performance][1] in the *Amazon FSx for OpenZFS User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance.html#performance-tips-zfs
     #   @return [Integer]
     #
     # @!attribute [rw] data_compression_type
-    #   Specifies the method used to compress the data on the volume. Unless
-    #   the compression type is specified, volumes inherit the
-    #   `DataCompressionType` value of their parent volume.
+    #   Specifies the method used to compress the data on the volume. The
+    #   compression type is `NONE` by default.
     #
-    #   * `NONE` - Doesn't compress the data on the volume.
+    #   * `NONE` - Doesn't compress the data on the volume. `NONE` is the
+    #     default.
     #
     #   * `ZSTD` - Compresses the data in the volume using the Zstandard
-    #     (ZSTD) compression algorithm. This algorithm reduces the amount of
-    #     space used on your volume and has very little impact on compute
-    #     resources.
+    #     (ZSTD) compression algorithm. Compared to LZ4, Z-Standard provides
+    #     a better compression ratio to minimize on-disk storage
+    #     utilization.
+    #
+    #   * `LZ4` - Compresses the data in the volume using the LZ4
+    #     compression algorithm. Compared to Z-Standard, LZ4 is less
+    #     compute-intensive and delivers higher write throughput speeds.
     #   @return [String]
     #
     # @!attribute [rw] nfs_exports
@@ -8052,6 +8380,7 @@ module Aws::FSx
     class UpdateOpenZFSVolumeConfiguration < Struct.new(
       :storage_capacity_reservation_gi_b,
       :storage_capacity_quota_gi_b,
+      :record_size_ki_b,
       :data_compression_type,
       :nfs_exports,
       :user_and_group_quotas,
@@ -8164,7 +8493,7 @@ module Aws::FSx
 
     # @!attribute [rw] storage_virtual_machine
     #   Describes the Amazon FSx for NetApp ONTAP storage virtual machine
-    #   (SVM) configuraton.
+    #   (SVM) configuration.
     #   @return [Types::StorageVirtualMachine]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateStorageVirtualMachineResponse AWS API Documentation
@@ -8224,7 +8553,8 @@ module Aws::FSx
     #         open_zfs_configuration: {
     #           storage_capacity_reservation_gi_b: 1,
     #           storage_capacity_quota_gi_b: 1,
-    #           data_compression_type: "NONE", # accepts NONE, ZSTD
+    #           record_size_ki_b: 1,
+    #           data_compression_type: "NONE", # accepts NONE, ZSTD, LZ4
     #           nfs_exports: [
     #             {
     #               client_configurations: [ # required
@@ -8427,8 +8757,7 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # No Amazon FSx for NetApp ONTAP volumes were found based upon the
-    # supplied parameters.
+    # No Amazon FSx volumes were found based upon the supplied parameters.
     #
     # @!attribute [rw] message
     #   A detailed error message.

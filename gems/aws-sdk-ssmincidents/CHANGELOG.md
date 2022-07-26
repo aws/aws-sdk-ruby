@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2022-07-05)
+------------------
+
+* Feature - Adds support for tagging incident-record on creation by providing incident tags in the template within a response-plan.
+
+1.14.0 (2022-05-12)
+------------------
+
+* Feature - Adding support for dynamic SSM Runbook parameter values. Updating validation pattern for engagements. Adding ConflictException to UpdateReplicationSet API contract.
+
+1.13.0 (2022-03-16)
+------------------
+
+* Feature - Removed incorrect validation pattern for IncidentRecordSource.invokedBy
+
+1.12.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.11.0 (2022-02-07)
+------------------
+
+* Feature - Update RelatedItem enum to support SSM Automation
+
 1.10.0 (2022-02-03)
 ------------------
 

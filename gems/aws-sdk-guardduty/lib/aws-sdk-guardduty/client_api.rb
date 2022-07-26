@@ -13,12 +13,16 @@ module Aws::GuardDuty
 
     include Seahorse::Model
 
+    AcceptAdministratorInvitationRequest = Shapes::StructureShape.new(name: 'AcceptAdministratorInvitationRequest')
+    AcceptAdministratorInvitationResponse = Shapes::StructureShape.new(name: 'AcceptAdministratorInvitationResponse')
     AcceptInvitationRequest = Shapes::StructureShape.new(name: 'AcceptInvitationRequest')
     AcceptInvitationResponse = Shapes::StructureShape.new(name: 'AcceptInvitationResponse')
     AccessControlList = Shapes::StructureShape.new(name: 'AccessControlList')
     AccessKeyDetails = Shapes::StructureShape.new(name: 'AccessKeyDetails')
     AccountDetail = Shapes::StructureShape.new(name: 'AccountDetail')
     AccountDetails = Shapes::ListShape.new(name: 'AccountDetails')
+    AccountFreeTrialInfo = Shapes::StructureShape.new(name: 'AccountFreeTrialInfo')
+    AccountFreeTrialInfos = Shapes::ListShape.new(name: 'AccountFreeTrialInfos')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     AccountIds = Shapes::ListShape.new(name: 'AccountIds')
     AccountLevelPermissions = Shapes::StructureShape.new(name: 'AccountLevelPermissions')
@@ -26,6 +30,8 @@ module Aws::GuardDuty
     AdminAccount = Shapes::StructureShape.new(name: 'AdminAccount')
     AdminAccounts = Shapes::ListShape.new(name: 'AdminAccounts')
     AdminStatus = Shapes::StringShape.new(name: 'AdminStatus')
+    Administrator = Shapes::StructureShape.new(name: 'Administrator')
+    AffectedResources = Shapes::MapShape.new(name: 'AffectedResources')
     ArchiveFindingsRequest = Shapes::StructureShape.new(name: 'ArchiveFindingsRequest')
     ArchiveFindingsResponse = Shapes::StructureShape.new(name: 'ArchiveFindingsResponse')
     AwsApiCallAction = Shapes::StructureShape.new(name: 'AwsApiCallAction')
@@ -57,12 +63,15 @@ module Aws::GuardDuty
     CreateThreatIntelSetRequest = Shapes::StructureShape.new(name: 'CreateThreatIntelSetRequest')
     CreateThreatIntelSetResponse = Shapes::StructureShape.new(name: 'CreateThreatIntelSetResponse')
     Criterion = Shapes::MapShape.new(name: 'Criterion')
+    CriterionKey = Shapes::StringShape.new(name: 'CriterionKey')
     DNSLogsConfigurationResult = Shapes::StructureShape.new(name: 'DNSLogsConfigurationResult')
     DataSource = Shapes::StringShape.new(name: 'DataSource')
     DataSourceConfigurations = Shapes::StructureShape.new(name: 'DataSourceConfigurations')
     DataSourceConfigurationsResult = Shapes::StructureShape.new(name: 'DataSourceConfigurationsResult')
+    DataSourceFreeTrial = Shapes::StructureShape.new(name: 'DataSourceFreeTrial')
     DataSourceList = Shapes::ListShape.new(name: 'DataSourceList')
     DataSourceStatus = Shapes::StringShape.new(name: 'DataSourceStatus')
+    DataSourcesFreeTrial = Shapes::StructureShape.new(name: 'DataSourcesFreeTrial')
     DeclineInvitationsRequest = Shapes::StructureShape.new(name: 'DeclineInvitationsRequest')
     DeclineInvitationsResponse = Shapes::StructureShape.new(name: 'DeclineInvitationsResponse')
     DefaultServerSideEncryption = Shapes::StructureShape.new(name: 'DefaultServerSideEncryption')
@@ -80,6 +89,8 @@ module Aws::GuardDuty
     DeletePublishingDestinationResponse = Shapes::StructureShape.new(name: 'DeletePublishingDestinationResponse')
     DeleteThreatIntelSetRequest = Shapes::StructureShape.new(name: 'DeleteThreatIntelSetRequest')
     DeleteThreatIntelSetResponse = Shapes::StructureShape.new(name: 'DeleteThreatIntelSetResponse')
+    DescribeMalwareScansRequest = Shapes::StructureShape.new(name: 'DescribeMalwareScansRequest')
+    DescribeMalwareScansResponse = Shapes::StructureShape.new(name: 'DescribeMalwareScansResponse')
     DescribeOrganizationConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeOrganizationConfigurationRequest')
     DescribeOrganizationConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeOrganizationConfigurationResponse')
     DescribePublishingDestinationRequest = Shapes::StructureShape.new(name: 'DescribePublishingDestinationRequest')
@@ -93,6 +104,8 @@ module Aws::GuardDuty
     DetectorStatus = Shapes::StringShape.new(name: 'DetectorStatus')
     DisableOrganizationAdminAccountRequest = Shapes::StructureShape.new(name: 'DisableOrganizationAdminAccountRequest')
     DisableOrganizationAdminAccountResponse = Shapes::StructureShape.new(name: 'DisableOrganizationAdminAccountResponse')
+    DisassociateFromAdministratorAccountRequest = Shapes::StructureShape.new(name: 'DisassociateFromAdministratorAccountRequest')
+    DisassociateFromAdministratorAccountResponse = Shapes::StructureShape.new(name: 'DisassociateFromAdministratorAccountResponse')
     DisassociateFromMasterAccountRequest = Shapes::StructureShape.new(name: 'DisassociateFromMasterAccountRequest')
     DisassociateFromMasterAccountResponse = Shapes::StructureShape.new(name: 'DisassociateFromMasterAccountResponse')
     DisassociateMembersRequest = Shapes::StructureShape.new(name: 'DisassociateMembersRequest')
@@ -100,6 +113,12 @@ module Aws::GuardDuty
     DnsRequestAction = Shapes::StructureShape.new(name: 'DnsRequestAction')
     DomainDetails = Shapes::StructureShape.new(name: 'DomainDetails')
     Double = Shapes::FloatShape.new(name: 'Double')
+    EbsSnapshotPreservation = Shapes::StringShape.new(name: 'EbsSnapshotPreservation')
+    EbsVolumeDetails = Shapes::StructureShape.new(name: 'EbsVolumeDetails')
+    EbsVolumeScanDetails = Shapes::StructureShape.new(name: 'EbsVolumeScanDetails')
+    EbsVolumesResult = Shapes::StructureShape.new(name: 'EbsVolumesResult')
+    EcsClusterDetails = Shapes::StructureShape.new(name: 'EcsClusterDetails')
+    EcsTaskDetails = Shapes::StructureShape.new(name: 'EcsTaskDetails')
     EksClusterDetails = Shapes::StructureShape.new(name: 'EksClusterDetails')
     Email = Shapes::StringShape.new(name: 'Email')
     EnableOrganizationAdminAccountRequest = Shapes::StructureShape.new(name: 'EnableOrganizationAdminAccountRequest')
@@ -108,7 +127,12 @@ module Aws::GuardDuty
     Equals = Shapes::ListShape.new(name: 'Equals')
     Evidence = Shapes::StructureShape.new(name: 'Evidence')
     Feedback = Shapes::StringShape.new(name: 'Feedback')
+    FilePaths = Shapes::ListShape.new(name: 'FilePaths')
     FilterAction = Shapes::StringShape.new(name: 'FilterAction')
+    FilterCondition = Shapes::StructureShape.new(name: 'FilterCondition')
+    FilterCriteria = Shapes::StructureShape.new(name: 'FilterCriteria')
+    FilterCriterion = Shapes::StructureShape.new(name: 'FilterCriterion')
+    FilterCriterionList = Shapes::ListShape.new(name: 'FilterCriterionList')
     FilterDescription = Shapes::StringShape.new(name: 'FilterDescription')
     FilterName = Shapes::StringShape.new(name: 'FilterName')
     FilterNames = Shapes::ListShape.new(name: 'FilterNames')
@@ -126,6 +150,8 @@ module Aws::GuardDuty
     Findings = Shapes::ListShape.new(name: 'Findings')
     FlowLogsConfigurationResult = Shapes::StructureShape.new(name: 'FlowLogsConfigurationResult')
     GeoLocation = Shapes::StructureShape.new(name: 'GeoLocation')
+    GetAdministratorAccountRequest = Shapes::StructureShape.new(name: 'GetAdministratorAccountRequest')
+    GetAdministratorAccountResponse = Shapes::StructureShape.new(name: 'GetAdministratorAccountResponse')
     GetDetectorRequest = Shapes::StructureShape.new(name: 'GetDetectorRequest')
     GetDetectorResponse = Shapes::StructureShape.new(name: 'GetDetectorResponse')
     GetFilterRequest = Shapes::StructureShape.new(name: 'GetFilterRequest')
@@ -138,22 +164,29 @@ module Aws::GuardDuty
     GetIPSetResponse = Shapes::StructureShape.new(name: 'GetIPSetResponse')
     GetInvitationsCountRequest = Shapes::StructureShape.new(name: 'GetInvitationsCountRequest')
     GetInvitationsCountResponse = Shapes::StructureShape.new(name: 'GetInvitationsCountResponse')
+    GetMalwareScanSettingsRequest = Shapes::StructureShape.new(name: 'GetMalwareScanSettingsRequest')
+    GetMalwareScanSettingsResponse = Shapes::StructureShape.new(name: 'GetMalwareScanSettingsResponse')
     GetMasterAccountRequest = Shapes::StructureShape.new(name: 'GetMasterAccountRequest')
     GetMasterAccountResponse = Shapes::StructureShape.new(name: 'GetMasterAccountResponse')
     GetMemberDetectorsRequest = Shapes::StructureShape.new(name: 'GetMemberDetectorsRequest')
     GetMemberDetectorsResponse = Shapes::StructureShape.new(name: 'GetMemberDetectorsResponse')
     GetMembersRequest = Shapes::StructureShape.new(name: 'GetMembersRequest')
     GetMembersResponse = Shapes::StructureShape.new(name: 'GetMembersResponse')
+    GetRemainingFreeTrialDaysRequest = Shapes::StructureShape.new(name: 'GetRemainingFreeTrialDaysRequest')
+    GetRemainingFreeTrialDaysResponse = Shapes::StructureShape.new(name: 'GetRemainingFreeTrialDaysResponse')
     GetThreatIntelSetRequest = Shapes::StructureShape.new(name: 'GetThreatIntelSetRequest')
     GetThreatIntelSetResponse = Shapes::StructureShape.new(name: 'GetThreatIntelSetResponse')
     GetUsageStatisticsRequest = Shapes::StructureShape.new(name: 'GetUsageStatisticsRequest')
     GetUsageStatisticsResponse = Shapes::StructureShape.new(name: 'GetUsageStatisticsResponse')
     Groups = Shapes::ListShape.new(name: 'Groups')
     GuardDutyArn = Shapes::StringShape.new(name: 'GuardDutyArn')
+    HighestSeverityThreatDetails = Shapes::StructureShape.new(name: 'HighestSeverityThreatDetails')
     HostPath = Shapes::StructureShape.new(name: 'HostPath')
     IamInstanceProfile = Shapes::StructureShape.new(name: 'IamInstanceProfile')
+    InstanceArn = Shapes::StringShape.new(name: 'InstanceArn')
     InstanceDetails = Shapes::StructureShape.new(name: 'InstanceDetails')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
+    IntegerValueWithMax = Shapes::IntegerShape.new(name: 'IntegerValueWithMax')
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
     Invitation = Shapes::StructureShape.new(name: 'Invitation')
     Invitations = Shapes::ListShape.new(name: 'Invitations')
@@ -168,6 +201,7 @@ module Aws::GuardDuty
     KubernetesAuditLogsConfigurationResult = Shapes::StructureShape.new(name: 'KubernetesAuditLogsConfigurationResult')
     KubernetesConfiguration = Shapes::StructureShape.new(name: 'KubernetesConfiguration')
     KubernetesConfigurationResult = Shapes::StructureShape.new(name: 'KubernetesConfigurationResult')
+    KubernetesDataSourceFreeTrial = Shapes::StructureShape.new(name: 'KubernetesDataSourceFreeTrial')
     KubernetesDetails = Shapes::StructureShape.new(name: 'KubernetesDetails')
     KubernetesUserDetails = Shapes::StructureShape.new(name: 'KubernetesUserDetails')
     KubernetesWorkloadDetails = Shapes::StructureShape.new(name: 'KubernetesWorkloadDetails')
@@ -195,6 +229,11 @@ module Aws::GuardDuty
     LocalPortDetails = Shapes::StructureShape.new(name: 'LocalPortDetails')
     Location = Shapes::StringShape.new(name: 'Location')
     Long = Shapes::IntegerShape.new(name: 'Long')
+    LongValue = Shapes::IntegerShape.new(name: 'LongValue')
+    MalwareProtectionConfiguration = Shapes::StructureShape.new(name: 'MalwareProtectionConfiguration')
+    MalwareProtectionConfigurationResult = Shapes::StructureShape.new(name: 'MalwareProtectionConfigurationResult')
+    MalwareProtectionDataSourceFreeTrial = Shapes::StructureShape.new(name: 'MalwareProtectionDataSourceFreeTrial')
+    MapEquals = Shapes::ListShape.new(name: 'MapEquals')
     Master = Shapes::StructureShape.new(name: 'Master')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Member = Shapes::StructureShape.new(name: 'Member')
@@ -206,22 +245,30 @@ module Aws::GuardDuty
     NetworkConnectionAction = Shapes::StructureShape.new(name: 'NetworkConnectionAction')
     NetworkInterface = Shapes::StructureShape.new(name: 'NetworkInterface')
     NetworkInterfaces = Shapes::ListShape.new(name: 'NetworkInterfaces')
+    NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     NotEquals = Shapes::ListShape.new(name: 'NotEquals')
     OrderBy = Shapes::StringShape.new(name: 'OrderBy')
     Organization = Shapes::StructureShape.new(name: 'Organization')
     OrganizationDataSourceConfigurations = Shapes::StructureShape.new(name: 'OrganizationDataSourceConfigurations')
     OrganizationDataSourceConfigurationsResult = Shapes::StructureShape.new(name: 'OrganizationDataSourceConfigurationsResult')
+    OrganizationEbsVolumes = Shapes::StructureShape.new(name: 'OrganizationEbsVolumes')
+    OrganizationEbsVolumesResult = Shapes::StructureShape.new(name: 'OrganizationEbsVolumesResult')
     OrganizationKubernetesAuditLogsConfiguration = Shapes::StructureShape.new(name: 'OrganizationKubernetesAuditLogsConfiguration')
     OrganizationKubernetesAuditLogsConfigurationResult = Shapes::StructureShape.new(name: 'OrganizationKubernetesAuditLogsConfigurationResult')
     OrganizationKubernetesConfiguration = Shapes::StructureShape.new(name: 'OrganizationKubernetesConfiguration')
     OrganizationKubernetesConfigurationResult = Shapes::StructureShape.new(name: 'OrganizationKubernetesConfigurationResult')
+    OrganizationMalwareProtectionConfiguration = Shapes::StructureShape.new(name: 'OrganizationMalwareProtectionConfiguration')
+    OrganizationMalwareProtectionConfigurationResult = Shapes::StructureShape.new(name: 'OrganizationMalwareProtectionConfigurationResult')
     OrganizationS3LogsConfiguration = Shapes::StructureShape.new(name: 'OrganizationS3LogsConfiguration')
     OrganizationS3LogsConfigurationResult = Shapes::StructureShape.new(name: 'OrganizationS3LogsConfigurationResult')
+    OrganizationScanEc2InstanceWithFindings = Shapes::StructureShape.new(name: 'OrganizationScanEc2InstanceWithFindings')
+    OrganizationScanEc2InstanceWithFindingsResult = Shapes::StructureShape.new(name: 'OrganizationScanEc2InstanceWithFindingsResult')
     Owner = Shapes::StructureShape.new(name: 'Owner')
     PermissionConfiguration = Shapes::StructureShape.new(name: 'PermissionConfiguration')
     PortProbeAction = Shapes::StructureShape.new(name: 'PortProbeAction')
     PortProbeDetail = Shapes::StructureShape.new(name: 'PortProbeDetail')
     PortProbeDetails = Shapes::ListShape.new(name: 'PortProbeDetails')
+    PositiveLong = Shapes::IntegerShape.new(name: 'PositiveLong')
     PrivateIpAddressDetails = Shapes::StructureShape.new(name: 'PrivateIpAddressDetails')
     PrivateIpAddresses = Shapes::ListShape.new(name: 'PrivateIpAddresses')
     ProductCode = Shapes::StructureShape.new(name: 'ProductCode')
@@ -232,17 +279,37 @@ module Aws::GuardDuty
     RemoteIpDetails = Shapes::StructureShape.new(name: 'RemoteIpDetails')
     RemotePortDetails = Shapes::StructureShape.new(name: 'RemotePortDetails')
     Resource = Shapes::StructureShape.new(name: 'Resource')
+    ResourceDetails = Shapes::StructureShape.new(name: 'ResourceDetails')
     ResourceList = Shapes::ListShape.new(name: 'ResourceList')
     S3BucketDetail = Shapes::StructureShape.new(name: 'S3BucketDetail')
     S3BucketDetails = Shapes::ListShape.new(name: 'S3BucketDetails')
     S3LogsConfiguration = Shapes::StructureShape.new(name: 'S3LogsConfiguration')
     S3LogsConfigurationResult = Shapes::StructureShape.new(name: 'S3LogsConfigurationResult')
+    Scan = Shapes::StructureShape.new(name: 'Scan')
+    ScanCondition = Shapes::StructureShape.new(name: 'ScanCondition')
+    ScanConditionPair = Shapes::StructureShape.new(name: 'ScanConditionPair')
+    ScanCriterion = Shapes::MapShape.new(name: 'ScanCriterion')
+    ScanCriterionKey = Shapes::StringShape.new(name: 'ScanCriterionKey')
+    ScanDetections = Shapes::StructureShape.new(name: 'ScanDetections')
+    ScanEc2InstanceWithFindings = Shapes::StructureShape.new(name: 'ScanEc2InstanceWithFindings')
+    ScanEc2InstanceWithFindingsResult = Shapes::StructureShape.new(name: 'ScanEc2InstanceWithFindingsResult')
+    ScanFilePath = Shapes::StructureShape.new(name: 'ScanFilePath')
+    ScanResourceCriteria = Shapes::StructureShape.new(name: 'ScanResourceCriteria')
+    ScanResult = Shapes::StringShape.new(name: 'ScanResult')
+    ScanResultDetails = Shapes::StructureShape.new(name: 'ScanResultDetails')
+    ScanStatus = Shapes::StringShape.new(name: 'ScanStatus')
+    ScanThreatName = Shapes::StructureShape.new(name: 'ScanThreatName')
+    ScanThreatNames = Shapes::ListShape.new(name: 'ScanThreatNames')
+    ScannedItemCount = Shapes::StructureShape.new(name: 'ScannedItemCount')
+    Scans = Shapes::ListShape.new(name: 'Scans')
     SecurityContext = Shapes::StructureShape.new(name: 'SecurityContext')
     SecurityGroup = Shapes::StructureShape.new(name: 'SecurityGroup')
     SecurityGroups = Shapes::ListShape.new(name: 'SecurityGroups')
     Service = Shapes::StructureShape.new(name: 'Service')
+    ServiceAdditionalInfo = Shapes::StructureShape.new(name: 'ServiceAdditionalInfo')
     SortCriteria = Shapes::StructureShape.new(name: 'SortCriteria')
     SourceIps = Shapes::ListShape.new(name: 'SourceIps')
+    Sources = Shapes::ListShape.new(name: 'Sources')
     StartMonitoringMembersRequest = Shapes::StructureShape.new(name: 'StartMonitoringMembersRequest')
     StartMonitoringMembersResponse = Shapes::StructureShape.new(name: 'StartMonitoringMembersResponse')
     StopMonitoringMembersRequest = Shapes::StructureShape.new(name: 'StopMonitoringMembersRequest')
@@ -256,14 +323,17 @@ module Aws::GuardDuty
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Tags = Shapes::ListShape.new(name: 'Tags')
+    ThreatDetectedByName = Shapes::StructureShape.new(name: 'ThreatDetectedByName')
     ThreatIntelSetFormat = Shapes::StringShape.new(name: 'ThreatIntelSetFormat')
     ThreatIntelSetIds = Shapes::ListShape.new(name: 'ThreatIntelSetIds')
     ThreatIntelSetStatus = Shapes::StringShape.new(name: 'ThreatIntelSetStatus')
     ThreatIntelligenceDetail = Shapes::StructureShape.new(name: 'ThreatIntelligenceDetail')
     ThreatIntelligenceDetails = Shapes::ListShape.new(name: 'ThreatIntelligenceDetails')
     ThreatNames = Shapes::ListShape.new(name: 'ThreatNames')
+    ThreatsDetectedItemCount = Shapes::StructureShape.new(name: 'ThreatsDetectedItemCount')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     Total = Shapes::StructureShape.new(name: 'Total')
+    TriggerDetails = Shapes::StructureShape.new(name: 'TriggerDetails')
     UnarchiveFindingsRequest = Shapes::StructureShape.new(name: 'UnarchiveFindingsRequest')
     UnarchiveFindingsResponse = Shapes::StructureShape.new(name: 'UnarchiveFindingsResponse')
     UnprocessedAccount = Shapes::StructureShape.new(name: 'UnprocessedAccount')
@@ -278,6 +348,8 @@ module Aws::GuardDuty
     UpdateFindingsFeedbackResponse = Shapes::StructureShape.new(name: 'UpdateFindingsFeedbackResponse')
     UpdateIPSetRequest = Shapes::StructureShape.new(name: 'UpdateIPSetRequest')
     UpdateIPSetResponse = Shapes::StructureShape.new(name: 'UpdateIPSetResponse')
+    UpdateMalwareScanSettingsRequest = Shapes::StructureShape.new(name: 'UpdateMalwareScanSettingsRequest')
+    UpdateMalwareScanSettingsResponse = Shapes::StructureShape.new(name: 'UpdateMalwareScanSettingsResponse')
     UpdateMemberDetectorsRequest = Shapes::StructureShape.new(name: 'UpdateMemberDetectorsRequest')
     UpdateMemberDetectorsResponse = Shapes::StructureShape.new(name: 'UpdateMemberDetectorsResponse')
     UpdateOrganizationConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateOrganizationConfigurationRequest')
@@ -296,9 +368,18 @@ module Aws::GuardDuty
     UsageStatisticType = Shapes::StringShape.new(name: 'UsageStatisticType')
     UsageStatistics = Shapes::StructureShape.new(name: 'UsageStatistics')
     Volume = Shapes::StructureShape.new(name: 'Volume')
+    VolumeDetail = Shapes::StructureShape.new(name: 'VolumeDetail')
+    VolumeDetails = Shapes::ListShape.new(name: 'VolumeDetails')
     VolumeMount = Shapes::StructureShape.new(name: 'VolumeMount')
     VolumeMounts = Shapes::ListShape.new(name: 'VolumeMounts')
     Volumes = Shapes::ListShape.new(name: 'Volumes')
+
+    AcceptAdministratorInvitationRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
+    AcceptAdministratorInvitationRequest.add_member(:administrator_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "administratorId"))
+    AcceptAdministratorInvitationRequest.add_member(:invitation_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "invitationId"))
+    AcceptAdministratorInvitationRequest.struct_class = Types::AcceptAdministratorInvitationRequest
+
+    AcceptAdministratorInvitationResponse.struct_class = Types::AcceptAdministratorInvitationResponse
 
     AcceptInvitationRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
     AcceptInvitationRequest.add_member(:master_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "masterId"))
@@ -323,6 +404,12 @@ module Aws::GuardDuty
 
     AccountDetails.member = Shapes::ShapeRef.new(shape: AccountDetail)
 
+    AccountFreeTrialInfo.add_member(:account_id, Shapes::ShapeRef.new(shape: String, location_name: "accountId"))
+    AccountFreeTrialInfo.add_member(:data_sources, Shapes::ShapeRef.new(shape: DataSourcesFreeTrial, location_name: "dataSources"))
+    AccountFreeTrialInfo.struct_class = Types::AccountFreeTrialInfo
+
+    AccountFreeTrialInfos.member = Shapes::ShapeRef.new(shape: AccountFreeTrialInfo)
+
     AccountIds.member = Shapes::ShapeRef.new(shape: AccountId)
 
     AccountLevelPermissions.add_member(:block_public_access, Shapes::ShapeRef.new(shape: BlockPublicAccess, location_name: "blockPublicAccess"))
@@ -342,6 +429,15 @@ module Aws::GuardDuty
 
     AdminAccounts.member = Shapes::ShapeRef.new(shape: AdminAccount)
 
+    Administrator.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
+    Administrator.add_member(:invitation_id, Shapes::ShapeRef.new(shape: String, location_name: "invitationId"))
+    Administrator.add_member(:relationship_status, Shapes::ShapeRef.new(shape: String, location_name: "relationshipStatus"))
+    Administrator.add_member(:invited_at, Shapes::ShapeRef.new(shape: String, location_name: "invitedAt"))
+    Administrator.struct_class = Types::Administrator
+
+    AffectedResources.key = Shapes::ShapeRef.new(shape: String)
+    AffectedResources.value = Shapes::ShapeRef.new(shape: String)
+
     ArchiveFindingsRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
     ArchiveFindingsRequest.add_member(:finding_ids, Shapes::ShapeRef.new(shape: FindingIds, required: true, location_name: "findingIds"))
     ArchiveFindingsRequest.struct_class = Types::ArchiveFindingsRequest
@@ -356,6 +452,7 @@ module Aws::GuardDuty
     AwsApiCallAction.add_member(:remote_ip_details, Shapes::ShapeRef.new(shape: RemoteIpDetails, location_name: "remoteIpDetails"))
     AwsApiCallAction.add_member(:service_name, Shapes::ShapeRef.new(shape: String, location_name: "serviceName"))
     AwsApiCallAction.add_member(:remote_account_details, Shapes::ShapeRef.new(shape: RemoteAccountDetails, location_name: "remoteAccountDetails"))
+    AwsApiCallAction.add_member(:affected_resources, Shapes::ShapeRef.new(shape: AffectedResources, location_name: "affectedResources"))
     AwsApiCallAction.struct_class = Types::AwsApiCallAction
 
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
@@ -492,6 +589,7 @@ module Aws::GuardDuty
 
     DataSourceConfigurations.add_member(:s3_logs, Shapes::ShapeRef.new(shape: S3LogsConfiguration, location_name: "s3Logs"))
     DataSourceConfigurations.add_member(:kubernetes, Shapes::ShapeRef.new(shape: KubernetesConfiguration, location_name: "kubernetes"))
+    DataSourceConfigurations.add_member(:malware_protection, Shapes::ShapeRef.new(shape: MalwareProtectionConfiguration, location_name: "malwareProtection"))
     DataSourceConfigurations.struct_class = Types::DataSourceConfigurations
 
     DataSourceConfigurationsResult.add_member(:cloud_trail, Shapes::ShapeRef.new(shape: CloudTrailConfigurationResult, required: true, location_name: "cloudTrail"))
@@ -499,9 +597,21 @@ module Aws::GuardDuty
     DataSourceConfigurationsResult.add_member(:flow_logs, Shapes::ShapeRef.new(shape: FlowLogsConfigurationResult, required: true, location_name: "flowLogs"))
     DataSourceConfigurationsResult.add_member(:s3_logs, Shapes::ShapeRef.new(shape: S3LogsConfigurationResult, required: true, location_name: "s3Logs"))
     DataSourceConfigurationsResult.add_member(:kubernetes, Shapes::ShapeRef.new(shape: KubernetesConfigurationResult, location_name: "kubernetes"))
+    DataSourceConfigurationsResult.add_member(:malware_protection, Shapes::ShapeRef.new(shape: MalwareProtectionConfigurationResult, location_name: "malwareProtection"))
     DataSourceConfigurationsResult.struct_class = Types::DataSourceConfigurationsResult
 
+    DataSourceFreeTrial.add_member(:free_trial_days_remaining, Shapes::ShapeRef.new(shape: Integer, location_name: "freeTrialDaysRemaining"))
+    DataSourceFreeTrial.struct_class = Types::DataSourceFreeTrial
+
     DataSourceList.member = Shapes::ShapeRef.new(shape: DataSource)
+
+    DataSourcesFreeTrial.add_member(:cloud_trail, Shapes::ShapeRef.new(shape: DataSourceFreeTrial, location_name: "cloudTrail"))
+    DataSourcesFreeTrial.add_member(:dns_logs, Shapes::ShapeRef.new(shape: DataSourceFreeTrial, location_name: "dnsLogs"))
+    DataSourcesFreeTrial.add_member(:flow_logs, Shapes::ShapeRef.new(shape: DataSourceFreeTrial, location_name: "flowLogs"))
+    DataSourcesFreeTrial.add_member(:s3_logs, Shapes::ShapeRef.new(shape: DataSourceFreeTrial, location_name: "s3Logs"))
+    DataSourcesFreeTrial.add_member(:kubernetes, Shapes::ShapeRef.new(shape: KubernetesDataSourceFreeTrial, location_name: "kubernetes"))
+    DataSourcesFreeTrial.add_member(:malware_protection, Shapes::ShapeRef.new(shape: MalwareProtectionDataSourceFreeTrial, location_name: "malwareProtection"))
+    DataSourcesFreeTrial.struct_class = Types::DataSourcesFreeTrial
 
     DeclineInvitationsRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, required: true, location_name: "accountIds"))
     DeclineInvitationsRequest.struct_class = Types::DeclineInvitationsRequest
@@ -555,6 +665,17 @@ module Aws::GuardDuty
 
     DeleteThreatIntelSetResponse.struct_class = Types::DeleteThreatIntelSetResponse
 
+    DescribeMalwareScansRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
+    DescribeMalwareScansRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeMalwareScansRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: IntegerValueWithMax, location_name: "maxResults"))
+    DescribeMalwareScansRequest.add_member(:filter_criteria, Shapes::ShapeRef.new(shape: FilterCriteria, location_name: "filterCriteria"))
+    DescribeMalwareScansRequest.add_member(:sort_criteria, Shapes::ShapeRef.new(shape: SortCriteria, location_name: "sortCriteria"))
+    DescribeMalwareScansRequest.struct_class = Types::DescribeMalwareScansRequest
+
+    DescribeMalwareScansResponse.add_member(:scans, Shapes::ShapeRef.new(shape: Scans, required: true, location_name: "scans"))
+    DescribeMalwareScansResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeMalwareScansResponse.struct_class = Types::DescribeMalwareScansResponse
+
     DescribeOrganizationConfigurationRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
     DescribeOrganizationConfigurationRequest.struct_class = Types::DescribeOrganizationConfigurationRequest
 
@@ -592,6 +713,11 @@ module Aws::GuardDuty
 
     DisableOrganizationAdminAccountResponse.struct_class = Types::DisableOrganizationAdminAccountResponse
 
+    DisassociateFromAdministratorAccountRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
+    DisassociateFromAdministratorAccountRequest.struct_class = Types::DisassociateFromAdministratorAccountRequest
+
+    DisassociateFromAdministratorAccountResponse.struct_class = Types::DisassociateFromAdministratorAccountResponse
+
     DisassociateFromMasterAccountRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
     DisassociateFromMasterAccountRequest.struct_class = Types::DisassociateFromMasterAccountRequest
 
@@ -605,10 +731,49 @@ module Aws::GuardDuty
     DisassociateMembersResponse.struct_class = Types::DisassociateMembersResponse
 
     DnsRequestAction.add_member(:domain, Shapes::ShapeRef.new(shape: String, location_name: "domain"))
+    DnsRequestAction.add_member(:protocol, Shapes::ShapeRef.new(shape: String, location_name: "protocol"))
+    DnsRequestAction.add_member(:blocked, Shapes::ShapeRef.new(shape: Boolean, location_name: "blocked"))
     DnsRequestAction.struct_class = Types::DnsRequestAction
 
     DomainDetails.add_member(:domain, Shapes::ShapeRef.new(shape: String, location_name: "domain"))
     DomainDetails.struct_class = Types::DomainDetails
+
+    EbsVolumeDetails.add_member(:scanned_volume_details, Shapes::ShapeRef.new(shape: VolumeDetails, location_name: "scannedVolumeDetails"))
+    EbsVolumeDetails.add_member(:skipped_volume_details, Shapes::ShapeRef.new(shape: VolumeDetails, location_name: "skippedVolumeDetails"))
+    EbsVolumeDetails.struct_class = Types::EbsVolumeDetails
+
+    EbsVolumeScanDetails.add_member(:scan_id, Shapes::ShapeRef.new(shape: String, location_name: "scanId"))
+    EbsVolumeScanDetails.add_member(:scan_started_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "scanStartedAt"))
+    EbsVolumeScanDetails.add_member(:scan_completed_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "scanCompletedAt"))
+    EbsVolumeScanDetails.add_member(:trigger_finding_id, Shapes::ShapeRef.new(shape: String, location_name: "triggerFindingId"))
+    EbsVolumeScanDetails.add_member(:sources, Shapes::ShapeRef.new(shape: Sources, location_name: "sources"))
+    EbsVolumeScanDetails.add_member(:scan_detections, Shapes::ShapeRef.new(shape: ScanDetections, location_name: "scanDetections"))
+    EbsVolumeScanDetails.struct_class = Types::EbsVolumeScanDetails
+
+    EbsVolumesResult.add_member(:status, Shapes::ShapeRef.new(shape: DataSourceStatus, location_name: "status"))
+    EbsVolumesResult.struct_class = Types::EbsVolumesResult
+
+    EcsClusterDetails.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    EcsClusterDetails.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
+    EcsClusterDetails.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
+    EcsClusterDetails.add_member(:active_services_count, Shapes::ShapeRef.new(shape: Integer, location_name: "activeServicesCount"))
+    EcsClusterDetails.add_member(:registered_container_instances_count, Shapes::ShapeRef.new(shape: Integer, location_name: "registeredContainerInstancesCount"))
+    EcsClusterDetails.add_member(:running_tasks_count, Shapes::ShapeRef.new(shape: Integer, location_name: "runningTasksCount"))
+    EcsClusterDetails.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    EcsClusterDetails.add_member(:task_details, Shapes::ShapeRef.new(shape: EcsTaskDetails, location_name: "taskDetails"))
+    EcsClusterDetails.struct_class = Types::EcsClusterDetails
+
+    EcsTaskDetails.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
+    EcsTaskDetails.add_member(:definition_arn, Shapes::ShapeRef.new(shape: String, location_name: "definitionArn"))
+    EcsTaskDetails.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "version"))
+    EcsTaskDetails.add_member(:task_created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    EcsTaskDetails.add_member(:started_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startedAt"))
+    EcsTaskDetails.add_member(:started_by, Shapes::ShapeRef.new(shape: String, location_name: "startedBy"))
+    EcsTaskDetails.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    EcsTaskDetails.add_member(:volumes, Shapes::ShapeRef.new(shape: Volumes, location_name: "volumes"))
+    EcsTaskDetails.add_member(:containers, Shapes::ShapeRef.new(shape: Containers, location_name: "containers"))
+    EcsTaskDetails.add_member(:group, Shapes::ShapeRef.new(shape: String, location_name: "group"))
+    EcsTaskDetails.struct_class = Types::EcsTaskDetails
 
     EksClusterDetails.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     EksClusterDetails.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
@@ -629,6 +794,22 @@ module Aws::GuardDuty
 
     Evidence.add_member(:threat_intelligence_details, Shapes::ShapeRef.new(shape: ThreatIntelligenceDetails, location_name: "threatIntelligenceDetails"))
     Evidence.struct_class = Types::Evidence
+
+    FilePaths.member = Shapes::ShapeRef.new(shape: ScanFilePath)
+
+    FilterCondition.add_member(:equals_value, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "equalsValue"))
+    FilterCondition.add_member(:greater_than, Shapes::ShapeRef.new(shape: LongValue, location_name: "greaterThan"))
+    FilterCondition.add_member(:less_than, Shapes::ShapeRef.new(shape: LongValue, location_name: "lessThan"))
+    FilterCondition.struct_class = Types::FilterCondition
+
+    FilterCriteria.add_member(:filter_criterion, Shapes::ShapeRef.new(shape: FilterCriterionList, location_name: "filterCriterion"))
+    FilterCriteria.struct_class = Types::FilterCriteria
+
+    FilterCriterion.add_member(:criterion_key, Shapes::ShapeRef.new(shape: CriterionKey, location_name: "criterionKey"))
+    FilterCriterion.add_member(:filter_condition, Shapes::ShapeRef.new(shape: FilterCondition, location_name: "filterCondition"))
+    FilterCriterion.struct_class = Types::FilterCriterion
+
+    FilterCriterionList.member = Shapes::ShapeRef.new(shape: FilterCriterion)
 
     FilterNames.member = Shapes::ShapeRef.new(shape: FilterName)
 
@@ -669,6 +850,12 @@ module Aws::GuardDuty
     GeoLocation.add_member(:lat, Shapes::ShapeRef.new(shape: Double, location_name: "lat"))
     GeoLocation.add_member(:lon, Shapes::ShapeRef.new(shape: Double, location_name: "lon"))
     GeoLocation.struct_class = Types::GeoLocation
+
+    GetAdministratorAccountRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
+    GetAdministratorAccountRequest.struct_class = Types::GetAdministratorAccountRequest
+
+    GetAdministratorAccountResponse.add_member(:administrator, Shapes::ShapeRef.new(shape: Administrator, required: true, location_name: "administrator"))
+    GetAdministratorAccountResponse.struct_class = Types::GetAdministratorAccountResponse
 
     GetDetectorRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
     GetDetectorRequest.struct_class = Types::GetDetectorRequest
@@ -726,6 +913,13 @@ module Aws::GuardDuty
     GetInvitationsCountResponse.add_member(:invitations_count, Shapes::ShapeRef.new(shape: Integer, location_name: "invitationsCount"))
     GetInvitationsCountResponse.struct_class = Types::GetInvitationsCountResponse
 
+    GetMalwareScanSettingsRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
+    GetMalwareScanSettingsRequest.struct_class = Types::GetMalwareScanSettingsRequest
+
+    GetMalwareScanSettingsResponse.add_member(:scan_resource_criteria, Shapes::ShapeRef.new(shape: ScanResourceCriteria, location_name: "scanResourceCriteria"))
+    GetMalwareScanSettingsResponse.add_member(:ebs_snapshot_preservation, Shapes::ShapeRef.new(shape: EbsSnapshotPreservation, location_name: "ebsSnapshotPreservation"))
+    GetMalwareScanSettingsResponse.struct_class = Types::GetMalwareScanSettingsResponse
+
     GetMasterAccountRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
     GetMasterAccountRequest.struct_class = Types::GetMasterAccountRequest
 
@@ -747,6 +941,14 @@ module Aws::GuardDuty
     GetMembersResponse.add_member(:members, Shapes::ShapeRef.new(shape: Members, required: true, location_name: "members"))
     GetMembersResponse.add_member(:unprocessed_accounts, Shapes::ShapeRef.new(shape: UnprocessedAccounts, required: true, location_name: "unprocessedAccounts"))
     GetMembersResponse.struct_class = Types::GetMembersResponse
+
+    GetRemainingFreeTrialDaysRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
+    GetRemainingFreeTrialDaysRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, location_name: "accountIds"))
+    GetRemainingFreeTrialDaysRequest.struct_class = Types::GetRemainingFreeTrialDaysRequest
+
+    GetRemainingFreeTrialDaysResponse.add_member(:accounts, Shapes::ShapeRef.new(shape: AccountFreeTrialInfos, location_name: "accounts"))
+    GetRemainingFreeTrialDaysResponse.add_member(:unprocessed_accounts, Shapes::ShapeRef.new(shape: UnprocessedAccounts, location_name: "unprocessedAccounts"))
+    GetRemainingFreeTrialDaysResponse.struct_class = Types::GetRemainingFreeTrialDaysResponse
 
     GetThreatIntelSetRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
     GetThreatIntelSetRequest.add_member(:threat_intel_set_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "threatIntelSetId"))
@@ -772,6 +974,11 @@ module Aws::GuardDuty
     GetUsageStatisticsResponse.struct_class = Types::GetUsageStatisticsResponse
 
     Groups.member = Shapes::ShapeRef.new(shape: String)
+
+    HighestSeverityThreatDetails.add_member(:severity, Shapes::ShapeRef.new(shape: String, location_name: "severity"))
+    HighestSeverityThreatDetails.add_member(:threat_name, Shapes::ShapeRef.new(shape: String, location_name: "threatName"))
+    HighestSeverityThreatDetails.add_member(:count, Shapes::ShapeRef.new(shape: Integer, location_name: "count"))
+    HighestSeverityThreatDetails.struct_class = Types::HighestSeverityThreatDetails
 
     HostPath.add_member(:path, Shapes::ShapeRef.new(shape: String, location_name: "path"))
     HostPath.struct_class = Types::HostPath
@@ -840,6 +1047,9 @@ module Aws::GuardDuty
 
     KubernetesConfigurationResult.add_member(:audit_logs, Shapes::ShapeRef.new(shape: KubernetesAuditLogsConfigurationResult, required: true, location_name: "auditLogs"))
     KubernetesConfigurationResult.struct_class = Types::KubernetesConfigurationResult
+
+    KubernetesDataSourceFreeTrial.add_member(:audit_logs, Shapes::ShapeRef.new(shape: DataSourceFreeTrial, location_name: "auditLogs"))
+    KubernetesDataSourceFreeTrial.struct_class = Types::KubernetesDataSourceFreeTrial
 
     KubernetesDetails.add_member(:kubernetes_user_details, Shapes::ShapeRef.new(shape: KubernetesUserDetails, location_name: "kubernetesUserDetails"))
     KubernetesDetails.add_member(:kubernetes_workload_details, Shapes::ShapeRef.new(shape: KubernetesWorkloadDetails, location_name: "kubernetesWorkloadDetails"))
@@ -953,6 +1163,18 @@ module Aws::GuardDuty
     LocalPortDetails.add_member(:port_name, Shapes::ShapeRef.new(shape: String, location_name: "portName"))
     LocalPortDetails.struct_class = Types::LocalPortDetails
 
+    MalwareProtectionConfiguration.add_member(:scan_ec2_instance_with_findings, Shapes::ShapeRef.new(shape: ScanEc2InstanceWithFindings, location_name: "scanEc2InstanceWithFindings"))
+    MalwareProtectionConfiguration.struct_class = Types::MalwareProtectionConfiguration
+
+    MalwareProtectionConfigurationResult.add_member(:scan_ec2_instance_with_findings, Shapes::ShapeRef.new(shape: ScanEc2InstanceWithFindingsResult, location_name: "scanEc2InstanceWithFindings"))
+    MalwareProtectionConfigurationResult.add_member(:service_role, Shapes::ShapeRef.new(shape: String, location_name: "serviceRole"))
+    MalwareProtectionConfigurationResult.struct_class = Types::MalwareProtectionConfigurationResult
+
+    MalwareProtectionDataSourceFreeTrial.add_member(:scan_ec2_instance_with_findings, Shapes::ShapeRef.new(shape: DataSourceFreeTrial, location_name: "scanEc2InstanceWithFindings"))
+    MalwareProtectionDataSourceFreeTrial.struct_class = Types::MalwareProtectionDataSourceFreeTrial
+
+    MapEquals.member = Shapes::ShapeRef.new(shape: ScanConditionPair)
+
     Master.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
     Master.add_member(:invitation_id, Shapes::ShapeRef.new(shape: String, location_name: "invitationId"))
     Master.add_member(:relationship_status, Shapes::ShapeRef.new(shape: String, location_name: "relationshipStatus"))
@@ -966,6 +1188,7 @@ module Aws::GuardDuty
     Member.add_member(:relationship_status, Shapes::ShapeRef.new(shape: String, required: true, location_name: "relationshipStatus"))
     Member.add_member(:invited_at, Shapes::ShapeRef.new(shape: String, location_name: "invitedAt"))
     Member.add_member(:updated_at, Shapes::ShapeRef.new(shape: String, required: true, location_name: "updatedAt"))
+    Member.add_member(:administrator_id, Shapes::ShapeRef.new(shape: String, location_name: "administratorId"))
     Member.struct_class = Types::Member
 
     MemberDataSourceConfiguration.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
@@ -1011,11 +1234,19 @@ module Aws::GuardDuty
 
     OrganizationDataSourceConfigurations.add_member(:s3_logs, Shapes::ShapeRef.new(shape: OrganizationS3LogsConfiguration, location_name: "s3Logs"))
     OrganizationDataSourceConfigurations.add_member(:kubernetes, Shapes::ShapeRef.new(shape: OrganizationKubernetesConfiguration, location_name: "kubernetes"))
+    OrganizationDataSourceConfigurations.add_member(:malware_protection, Shapes::ShapeRef.new(shape: OrganizationMalwareProtectionConfiguration, location_name: "malwareProtection"))
     OrganizationDataSourceConfigurations.struct_class = Types::OrganizationDataSourceConfigurations
 
     OrganizationDataSourceConfigurationsResult.add_member(:s3_logs, Shapes::ShapeRef.new(shape: OrganizationS3LogsConfigurationResult, required: true, location_name: "s3Logs"))
     OrganizationDataSourceConfigurationsResult.add_member(:kubernetes, Shapes::ShapeRef.new(shape: OrganizationKubernetesConfigurationResult, location_name: "kubernetes"))
+    OrganizationDataSourceConfigurationsResult.add_member(:malware_protection, Shapes::ShapeRef.new(shape: OrganizationMalwareProtectionConfigurationResult, location_name: "malwareProtection"))
     OrganizationDataSourceConfigurationsResult.struct_class = Types::OrganizationDataSourceConfigurationsResult
+
+    OrganizationEbsVolumes.add_member(:auto_enable, Shapes::ShapeRef.new(shape: Boolean, location_name: "autoEnable"))
+    OrganizationEbsVolumes.struct_class = Types::OrganizationEbsVolumes
+
+    OrganizationEbsVolumesResult.add_member(:auto_enable, Shapes::ShapeRef.new(shape: Boolean, location_name: "autoEnable"))
+    OrganizationEbsVolumesResult.struct_class = Types::OrganizationEbsVolumesResult
 
     OrganizationKubernetesAuditLogsConfiguration.add_member(:auto_enable, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "autoEnable"))
     OrganizationKubernetesAuditLogsConfiguration.struct_class = Types::OrganizationKubernetesAuditLogsConfiguration
@@ -1029,11 +1260,23 @@ module Aws::GuardDuty
     OrganizationKubernetesConfigurationResult.add_member(:audit_logs, Shapes::ShapeRef.new(shape: OrganizationKubernetesAuditLogsConfigurationResult, required: true, location_name: "auditLogs"))
     OrganizationKubernetesConfigurationResult.struct_class = Types::OrganizationKubernetesConfigurationResult
 
+    OrganizationMalwareProtectionConfiguration.add_member(:scan_ec2_instance_with_findings, Shapes::ShapeRef.new(shape: OrganizationScanEc2InstanceWithFindings, location_name: "scanEc2InstanceWithFindings"))
+    OrganizationMalwareProtectionConfiguration.struct_class = Types::OrganizationMalwareProtectionConfiguration
+
+    OrganizationMalwareProtectionConfigurationResult.add_member(:scan_ec2_instance_with_findings, Shapes::ShapeRef.new(shape: OrganizationScanEc2InstanceWithFindingsResult, location_name: "scanEc2InstanceWithFindings"))
+    OrganizationMalwareProtectionConfigurationResult.struct_class = Types::OrganizationMalwareProtectionConfigurationResult
+
     OrganizationS3LogsConfiguration.add_member(:auto_enable, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "autoEnable"))
     OrganizationS3LogsConfiguration.struct_class = Types::OrganizationS3LogsConfiguration
 
     OrganizationS3LogsConfigurationResult.add_member(:auto_enable, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "autoEnable"))
     OrganizationS3LogsConfigurationResult.struct_class = Types::OrganizationS3LogsConfigurationResult
+
+    OrganizationScanEc2InstanceWithFindings.add_member(:ebs_volumes, Shapes::ShapeRef.new(shape: OrganizationEbsVolumes, location_name: "ebsVolumes"))
+    OrganizationScanEc2InstanceWithFindings.struct_class = Types::OrganizationScanEc2InstanceWithFindings
+
+    OrganizationScanEc2InstanceWithFindingsResult.add_member(:ebs_volumes, Shapes::ShapeRef.new(shape: OrganizationEbsVolumesResult, location_name: "ebsVolumes"))
+    OrganizationScanEc2InstanceWithFindingsResult.struct_class = Types::OrganizationScanEc2InstanceWithFindingsResult
 
     Owner.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
     Owner.struct_class = Types::Owner
@@ -1059,8 +1302,8 @@ module Aws::GuardDuty
 
     PrivateIpAddresses.member = Shapes::ShapeRef.new(shape: PrivateIpAddressDetails)
 
-    ProductCode.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "code"))
-    ProductCode.add_member(:product_type, Shapes::ShapeRef.new(shape: String, location_name: "productType"))
+    ProductCode.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "productCodeId"))
+    ProductCode.add_member(:product_type, Shapes::ShapeRef.new(shape: String, location_name: "productCodeType"))
     ProductCode.struct_class = Types::ProductCode
 
     ProductCodes.member = Shapes::ShapeRef.new(shape: ProductCode)
@@ -1090,7 +1333,13 @@ module Aws::GuardDuty
     Resource.add_member(:eks_cluster_details, Shapes::ShapeRef.new(shape: EksClusterDetails, location_name: "eksClusterDetails"))
     Resource.add_member(:kubernetes_details, Shapes::ShapeRef.new(shape: KubernetesDetails, location_name: "kubernetesDetails"))
     Resource.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "resourceType"))
+    Resource.add_member(:ebs_volume_details, Shapes::ShapeRef.new(shape: EbsVolumeDetails, location_name: "ebsVolumeDetails"))
+    Resource.add_member(:ecs_cluster_details, Shapes::ShapeRef.new(shape: EcsClusterDetails, location_name: "ecsClusterDetails"))
+    Resource.add_member(:container_details, Shapes::ShapeRef.new(shape: Container, location_name: "containerDetails"))
     Resource.struct_class = Types::Resource
+
+    ResourceDetails.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, location_name: "instanceArn"))
+    ResourceDetails.struct_class = Types::ResourceDetails
 
     ResourceList.member = Shapes::ShapeRef.new(shape: String)
 
@@ -1112,6 +1361,72 @@ module Aws::GuardDuty
     S3LogsConfigurationResult.add_member(:status, Shapes::ShapeRef.new(shape: DataSourceStatus, required: true, location_name: "status"))
     S3LogsConfigurationResult.struct_class = Types::S3LogsConfigurationResult
 
+    Scan.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, location_name: "detectorId"))
+    Scan.add_member(:admin_detector_id, Shapes::ShapeRef.new(shape: DetectorId, location_name: "adminDetectorId"))
+    Scan.add_member(:scan_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "scanId"))
+    Scan.add_member(:scan_status, Shapes::ShapeRef.new(shape: ScanStatus, location_name: "scanStatus"))
+    Scan.add_member(:failure_reason, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "failureReason"))
+    Scan.add_member(:scan_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "scanStartTime"))
+    Scan.add_member(:scan_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "scanEndTime"))
+    Scan.add_member(:trigger_details, Shapes::ShapeRef.new(shape: TriggerDetails, location_name: "triggerDetails"))
+    Scan.add_member(:resource_details, Shapes::ShapeRef.new(shape: ResourceDetails, location_name: "resourceDetails"))
+    Scan.add_member(:scan_result_details, Shapes::ShapeRef.new(shape: ScanResultDetails, location_name: "scanResultDetails"))
+    Scan.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
+    Scan.add_member(:total_bytes, Shapes::ShapeRef.new(shape: PositiveLong, location_name: "totalBytes"))
+    Scan.add_member(:file_count, Shapes::ShapeRef.new(shape: PositiveLong, location_name: "fileCount"))
+    Scan.add_member(:attached_volumes, Shapes::ShapeRef.new(shape: VolumeDetails, location_name: "attachedVolumes"))
+    Scan.struct_class = Types::Scan
+
+    ScanCondition.add_member(:map_equals, Shapes::ShapeRef.new(shape: MapEquals, required: true, location_name: "mapEquals"))
+    ScanCondition.struct_class = Types::ScanCondition
+
+    ScanConditionPair.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "key"))
+    ScanConditionPair.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "value"))
+    ScanConditionPair.struct_class = Types::ScanConditionPair
+
+    ScanCriterion.key = Shapes::ShapeRef.new(shape: ScanCriterionKey)
+    ScanCriterion.value = Shapes::ShapeRef.new(shape: ScanCondition)
+
+    ScanDetections.add_member(:scanned_item_count, Shapes::ShapeRef.new(shape: ScannedItemCount, location_name: "scannedItemCount"))
+    ScanDetections.add_member(:threats_detected_item_count, Shapes::ShapeRef.new(shape: ThreatsDetectedItemCount, location_name: "threatsDetectedItemCount"))
+    ScanDetections.add_member(:highest_severity_threat_details, Shapes::ShapeRef.new(shape: HighestSeverityThreatDetails, location_name: "highestSeverityThreatDetails"))
+    ScanDetections.add_member(:threat_detected_by_name, Shapes::ShapeRef.new(shape: ThreatDetectedByName, location_name: "threatDetectedByName"))
+    ScanDetections.struct_class = Types::ScanDetections
+
+    ScanEc2InstanceWithFindings.add_member(:ebs_volumes, Shapes::ShapeRef.new(shape: Boolean, location_name: "ebsVolumes"))
+    ScanEc2InstanceWithFindings.struct_class = Types::ScanEc2InstanceWithFindings
+
+    ScanEc2InstanceWithFindingsResult.add_member(:ebs_volumes, Shapes::ShapeRef.new(shape: EbsVolumesResult, location_name: "ebsVolumes"))
+    ScanEc2InstanceWithFindingsResult.struct_class = Types::ScanEc2InstanceWithFindingsResult
+
+    ScanFilePath.add_member(:file_path, Shapes::ShapeRef.new(shape: String, location_name: "filePath"))
+    ScanFilePath.add_member(:volume_arn, Shapes::ShapeRef.new(shape: String, location_name: "volumeArn"))
+    ScanFilePath.add_member(:hash, Shapes::ShapeRef.new(shape: String, location_name: "hash"))
+    ScanFilePath.add_member(:file_name, Shapes::ShapeRef.new(shape: String, location_name: "fileName"))
+    ScanFilePath.struct_class = Types::ScanFilePath
+
+    ScanResourceCriteria.add_member(:include, Shapes::ShapeRef.new(shape: ScanCriterion, location_name: "include"))
+    ScanResourceCriteria.add_member(:exclude, Shapes::ShapeRef.new(shape: ScanCriterion, location_name: "exclude"))
+    ScanResourceCriteria.struct_class = Types::ScanResourceCriteria
+
+    ScanResultDetails.add_member(:scan_result, Shapes::ShapeRef.new(shape: ScanResult, location_name: "scanResult"))
+    ScanResultDetails.struct_class = Types::ScanResultDetails
+
+    ScanThreatName.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    ScanThreatName.add_member(:severity, Shapes::ShapeRef.new(shape: String, location_name: "severity"))
+    ScanThreatName.add_member(:item_count, Shapes::ShapeRef.new(shape: Integer, location_name: "itemCount"))
+    ScanThreatName.add_member(:file_paths, Shapes::ShapeRef.new(shape: FilePaths, location_name: "filePaths"))
+    ScanThreatName.struct_class = Types::ScanThreatName
+
+    ScanThreatNames.member = Shapes::ShapeRef.new(shape: ScanThreatName)
+
+    ScannedItemCount.add_member(:total_gb, Shapes::ShapeRef.new(shape: Integer, location_name: "totalGb"))
+    ScannedItemCount.add_member(:files, Shapes::ShapeRef.new(shape: Integer, location_name: "files"))
+    ScannedItemCount.add_member(:volumes, Shapes::ShapeRef.new(shape: Integer, location_name: "volumes"))
+    ScannedItemCount.struct_class = Types::ScannedItemCount
+
+    Scans.member = Shapes::ShapeRef.new(shape: Scan)
+
     SecurityContext.add_member(:privileged, Shapes::ShapeRef.new(shape: Boolean, location_name: "privileged"))
     SecurityContext.struct_class = Types::SecurityContext
 
@@ -1131,13 +1446,22 @@ module Aws::GuardDuty
     Service.add_member(:resource_role, Shapes::ShapeRef.new(shape: String, location_name: "resourceRole"))
     Service.add_member(:service_name, Shapes::ShapeRef.new(shape: String, location_name: "serviceName"))
     Service.add_member(:user_feedback, Shapes::ShapeRef.new(shape: String, location_name: "userFeedback"))
+    Service.add_member(:additional_info, Shapes::ShapeRef.new(shape: ServiceAdditionalInfo, location_name: "additionalInfo"))
+    Service.add_member(:feature_name, Shapes::ShapeRef.new(shape: String, location_name: "featureName"))
+    Service.add_member(:ebs_volume_scan_details, Shapes::ShapeRef.new(shape: EbsVolumeScanDetails, location_name: "ebsVolumeScanDetails"))
     Service.struct_class = Types::Service
+
+    ServiceAdditionalInfo.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
+    ServiceAdditionalInfo.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "type"))
+    ServiceAdditionalInfo.struct_class = Types::ServiceAdditionalInfo
 
     SortCriteria.add_member(:attribute_name, Shapes::ShapeRef.new(shape: String, location_name: "attributeName"))
     SortCriteria.add_member(:order_by, Shapes::ShapeRef.new(shape: OrderBy, location_name: "orderBy"))
     SortCriteria.struct_class = Types::SortCriteria
 
     SourceIps.member = Shapes::ShapeRef.new(shape: String)
+
+    Sources.member = Shapes::ShapeRef.new(shape: String)
 
     StartMonitoringMembersRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
     StartMonitoringMembersRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, required: true, location_name: "accountIds"))
@@ -1170,6 +1494,12 @@ module Aws::GuardDuty
 
     Tags.member = Shapes::ShapeRef.new(shape: Tag)
 
+    ThreatDetectedByName.add_member(:item_count, Shapes::ShapeRef.new(shape: Integer, location_name: "itemCount"))
+    ThreatDetectedByName.add_member(:unique_threat_name_count, Shapes::ShapeRef.new(shape: Integer, location_name: "uniqueThreatNameCount"))
+    ThreatDetectedByName.add_member(:shortened, Shapes::ShapeRef.new(shape: Boolean, location_name: "shortened"))
+    ThreatDetectedByName.add_member(:threat_names, Shapes::ShapeRef.new(shape: ScanThreatNames, location_name: "threatNames"))
+    ThreatDetectedByName.struct_class = Types::ThreatDetectedByName
+
     ThreatIntelSetIds.member = Shapes::ShapeRef.new(shape: String)
 
     ThreatIntelligenceDetail.add_member(:threat_list_name, Shapes::ShapeRef.new(shape: String, location_name: "threatListName"))
@@ -1180,9 +1510,16 @@ module Aws::GuardDuty
 
     ThreatNames.member = Shapes::ShapeRef.new(shape: String)
 
+    ThreatsDetectedItemCount.add_member(:files, Shapes::ShapeRef.new(shape: Integer, location_name: "files"))
+    ThreatsDetectedItemCount.struct_class = Types::ThreatsDetectedItemCount
+
     Total.add_member(:amount, Shapes::ShapeRef.new(shape: String, location_name: "amount"))
     Total.add_member(:unit, Shapes::ShapeRef.new(shape: String, location_name: "unit"))
     Total.struct_class = Types::Total
+
+    TriggerDetails.add_member(:guard_duty_finding_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "guardDutyFindingId"))
+    TriggerDetails.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
+    TriggerDetails.struct_class = Types::TriggerDetails
 
     UnarchiveFindingsRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
     UnarchiveFindingsRequest.add_member(:finding_ids, Shapes::ShapeRef.new(shape: FindingIds, required: true, location_name: "findingIds"))
@@ -1237,6 +1574,13 @@ module Aws::GuardDuty
     UpdateIPSetRequest.struct_class = Types::UpdateIPSetRequest
 
     UpdateIPSetResponse.struct_class = Types::UpdateIPSetResponse
+
+    UpdateMalwareScanSettingsRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
+    UpdateMalwareScanSettingsRequest.add_member(:scan_resource_criteria, Shapes::ShapeRef.new(shape: ScanResourceCriteria, location_name: "scanResourceCriteria"))
+    UpdateMalwareScanSettingsRequest.add_member(:ebs_snapshot_preservation, Shapes::ShapeRef.new(shape: EbsSnapshotPreservation, location_name: "ebsSnapshotPreservation"))
+    UpdateMalwareScanSettingsRequest.struct_class = Types::UpdateMalwareScanSettingsRequest
+
+    UpdateMalwareScanSettingsResponse.struct_class = Types::UpdateMalwareScanSettingsResponse
 
     UpdateMemberDetectorsRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
     UpdateMemberDetectorsRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, required: true, location_name: "accountIds"))
@@ -1302,6 +1646,17 @@ module Aws::GuardDuty
     Volume.add_member(:host_path, Shapes::ShapeRef.new(shape: HostPath, location_name: "hostPath"))
     Volume.struct_class = Types::Volume
 
+    VolumeDetail.add_member(:volume_arn, Shapes::ShapeRef.new(shape: String, location_name: "volumeArn"))
+    VolumeDetail.add_member(:volume_type, Shapes::ShapeRef.new(shape: String, location_name: "volumeType"))
+    VolumeDetail.add_member(:device_name, Shapes::ShapeRef.new(shape: String, location_name: "deviceName"))
+    VolumeDetail.add_member(:volume_size_in_gb, Shapes::ShapeRef.new(shape: Integer, location_name: "volumeSizeInGB"))
+    VolumeDetail.add_member(:encryption_type, Shapes::ShapeRef.new(shape: String, location_name: "encryptionType"))
+    VolumeDetail.add_member(:snapshot_arn, Shapes::ShapeRef.new(shape: String, location_name: "snapshotArn"))
+    VolumeDetail.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyArn"))
+    VolumeDetail.struct_class = Types::VolumeDetail
+
+    VolumeDetails.member = Shapes::ShapeRef.new(shape: VolumeDetail)
+
     VolumeMount.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     VolumeMount.add_member(:mount_path, Shapes::ShapeRef.new(shape: String, location_name: "mountPath"))
     VolumeMount.struct_class = Types::VolumeMount
@@ -1328,10 +1683,21 @@ module Aws::GuardDuty
         "uid" => "guardduty-2017-11-28",
       }
 
+      api.add_operation(:accept_administrator_invitation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AcceptAdministratorInvitation"
+        o.http_method = "POST"
+        o.http_request_uri = "/detector/{detectorId}/administrator"
+        o.input = Shapes::ShapeRef.new(shape: AcceptAdministratorInvitationRequest)
+        o.output = Shapes::ShapeRef.new(shape: AcceptAdministratorInvitationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
       api.add_operation(:accept_invitation, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AcceptInvitation"
         o.http_method = "POST"
         o.http_request_uri = "/detector/{detectorId}/master"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: AcceptInvitationRequest)
         o.output = Shapes::ShapeRef.new(shape: AcceptInvitationResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -1498,6 +1864,22 @@ module Aws::GuardDuty
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
 
+      api.add_operation(:describe_malware_scans, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeMalwareScans"
+        o.http_method = "POST"
+        o.http_request_uri = "/detector/{detectorId}/malware-scans"
+        o.input = Shapes::ShapeRef.new(shape: DescribeMalwareScansRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeMalwareScansResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:describe_organization_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeOrganizationConfiguration"
         o.http_method = "GET"
@@ -1528,10 +1910,21 @@ module Aws::GuardDuty
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
 
+      api.add_operation(:disassociate_from_administrator_account, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateFromAdministratorAccount"
+        o.http_method = "POST"
+        o.http_request_uri = "/detector/{detectorId}/administrator/disassociate"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateFromAdministratorAccountRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateFromAdministratorAccountResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
       api.add_operation(:disassociate_from_master_account, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisassociateFromMasterAccount"
         o.http_method = "POST"
         o.http_request_uri = "/detector/{detectorId}/master/disassociate"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DisassociateFromMasterAccountRequest)
         o.output = Shapes::ShapeRef.new(shape: DisassociateFromMasterAccountResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -1554,6 +1947,16 @@ module Aws::GuardDuty
         o.http_request_uri = "/admin/enable"
         o.input = Shapes::ShapeRef.new(shape: EnableOrganizationAdminAccountRequest)
         o.output = Shapes::ShapeRef.new(shape: EnableOrganizationAdminAccountResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
+      api.add_operation(:get_administrator_account, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAdministratorAccount"
+        o.http_method = "GET"
+        o.http_request_uri = "/detector/{detectorId}/administrator"
+        o.input = Shapes::ShapeRef.new(shape: GetAdministratorAccountRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAdministratorAccountResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
@@ -1618,10 +2021,21 @@ module Aws::GuardDuty
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
 
+      api.add_operation(:get_malware_scan_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMalwareScanSettings"
+        o.http_method = "GET"
+        o.http_request_uri = "/detector/{detectorId}/malware-scan-settings"
+        o.input = Shapes::ShapeRef.new(shape: GetMalwareScanSettingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetMalwareScanSettingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
       api.add_operation(:get_master_account, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetMasterAccount"
         o.http_method = "GET"
         o.http_request_uri = "/detector/{detectorId}/master"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetMasterAccountRequest)
         o.output = Shapes::ShapeRef.new(shape: GetMasterAccountResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -1644,6 +2058,16 @@ module Aws::GuardDuty
         o.http_request_uri = "/detector/{detectorId}/member/get"
         o.input = Shapes::ShapeRef.new(shape: GetMembersRequest)
         o.output = Shapes::ShapeRef.new(shape: GetMembersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
+      api.add_operation(:get_remaining_free_trial_days, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRemainingFreeTrialDays"
+        o.http_method = "POST"
+        o.http_request_uri = "/detector/{detectorId}/freeTrial/daysRemaining"
+        o.input = Shapes::ShapeRef.new(shape: GetRemainingFreeTrialDaysRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRemainingFreeTrialDaysResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
@@ -1924,6 +2348,16 @@ module Aws::GuardDuty
         o.http_request_uri = "/detector/{detectorId}/ipset/{ipSetId}"
         o.input = Shapes::ShapeRef.new(shape: UpdateIPSetRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateIPSetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
+      api.add_operation(:update_malware_scan_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateMalwareScanSettings"
+        o.http_method = "POST"
+        o.http_request_uri = "/detector/{detectorId}/malware-scan-settings"
+        o.input = Shapes::ShapeRef.new(shape: UpdateMalwareScanSettingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateMalwareScanSettingsResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)

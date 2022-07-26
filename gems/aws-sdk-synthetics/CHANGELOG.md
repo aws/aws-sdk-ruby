@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2022-07-06)
+------------------
+
+* Feature - This release introduces Group feature, which enables users to group cross-region canaries.
+
+1.27.0 (2022-05-02)
+------------------
+
+* Feature - CloudWatch Synthetics has introduced a new feature to provide customers with an option to delete the underlying resources that Synthetics canary creates when the user chooses to delete the canary.
+
+1.26.0 (2022-03-04)
+------------------
+
+* Feature - Allow custom handler function.
+
+1.25.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.24.0 (2022-02-07)
+------------------
+
+* Feature - Adding names parameters to the Describe APIs.
+
 1.23.0 (2022-02-03)
 ------------------
 

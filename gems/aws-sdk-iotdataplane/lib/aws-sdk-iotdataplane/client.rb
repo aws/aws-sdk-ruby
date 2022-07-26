@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::IoTDataPlane
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -398,8 +400,8 @@ module Aws::IoTDataPlane
     #
     # Requires permission to access the [GetRetainedMessage][1] action.
     #
-    # For more information about messaging costs, see [IoT Core pricing -
-    # Messaging][2].
+    # For more information about messaging costs, see [Amazon Web Services
+    # IoT Core pricing - Messaging][2].
     #
     #
     #
@@ -534,8 +536,8 @@ module Aws::IoTDataPlane
     #
     # Requires permission to access the [ListRetainedMessages][2] action.
     #
-    # For more information about messaging costs, see [IoT Core pricing -
-    # Messaging][3].
+    # For more information about messaging costs, see [Amazon Web Services
+    # IoT Core pricing - Messaging][3].
     #
     #
     #
@@ -588,8 +590,8 @@ module Aws::IoTDataPlane
     # For more information about MQTT messages, see [MQTT Protocol][2] in
     # the IoT Developer Guide.
     #
-    # For more information about messaging costs, see [IoT Core pricing -
-    # Messaging][3].
+    # For more information about messaging costs, see [Amazon Web Services
+    # IoT Core pricing - Messaging][3].
     #
     #
     #
@@ -619,7 +621,8 @@ module Aws::IoTDataPlane
     #   payloads.
     #
     #   Publishing an empty (null) payload with **retain** = `true` deletes
-    #   the retained message identified by **topic** from IoT Core.
+    #   the retained message identified by **topic** from Amazon Web Services
+    #   IoT Core.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -696,7 +699,7 @@ module Aws::IoTDataPlane
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotdataplane'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

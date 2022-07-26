@@ -135,7 +135,8 @@
         {"shape":"AuthorizationQuotaExceededFault"},
         {"shape":"DependentServiceRequestThrottlingFault"},
         {"shape":"InvalidClusterSnapshotStateFault"},
-        {"shape":"LimitExceededFault"}
+        {"shape":"LimitExceededFault"},
+        {"shape":"UnsupportedOperationFault"}
       ]
     },
     "BatchDeleteClusterSnapshots":{
@@ -858,7 +859,8 @@
       "errors":[
         {"shape":"ClusterNotFoundFault"},
         {"shape":"ClusterSnapshotNotFoundFault"},
-        {"shape":"InvalidTagFault"}
+        {"shape":"InvalidTagFault"},
+        {"shape":"UnsupportedOperationFault"}
       ]
     },
     "DescribeClusterSubnetGroups":{
@@ -1113,7 +1115,8 @@
         {"shape":"ClusterSnapshotNotFoundFault"},
         {"shape":"InvalidClusterSnapshotStateFault"},
         {"shape":"ClusterNotFoundFault"},
-        {"shape":"AccessToSnapshotDeniedFault"}
+        {"shape":"AccessToSnapshotDeniedFault"},
+        {"shape":"UnsupportedOperationFault"}
       ]
     },
     "DescribeOrderableClusterOptions":{
@@ -1418,6 +1421,22 @@
       "output":{
         "shape":"ClusterCredentials",
         "resultWrapper":"GetClusterCredentialsResult"
+      },
+      "errors":[
+        {"shape":"ClusterNotFoundFault"},
+        {"shape":"UnsupportedOperationFault"}
+      ]
+    },
+    "GetClusterCredentialsWithIAM":{
+      "name":"GetClusterCredentialsWithIAM",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetClusterCredentialsWithIAMMessage"},
+      "output":{
+        "shape":"ClusterExtendedCredentials",
+        "resultWrapper":"GetClusterCredentialsWithIAMResult"
       },
       "errors":[
         {"shape":"ClusterNotFoundFault"},
@@ -2009,7 +2028,8 @@
       "errors":[
         {"shape":"AccessToSnapshotDeniedFault"},
         {"shape":"AuthorizationNotFoundFault"},
-        {"shape":"ClusterSnapshotNotFoundFault"}
+        {"shape":"ClusterSnapshotNotFoundFault"},
+        {"shape":"UnsupportedOperationFault"}
       ]
     },
     "RotateEncryptionKey":{
@@ -2151,7 +2171,8 @@
       "members":{
         "DataShareArn":{"shape":"String"},
         "AssociateEntireAccount":{"shape":"BooleanOptional"},
-        "ConsumerArn":{"shape":"String"}
+        "ConsumerArn":{"shape":"String"},
+        "ConsumerRegion":{"shape":"String"}
       }
     },
     "AssociatedClusterList":{
@@ -2315,12 +2336,10 @@
     },
     "AuthorizeSnapshotAccessMessage":{
       "type":"structure",
-      "required":[
-        "SnapshotIdentifier",
-        "AccountWithRestoreAccess"
-      ],
+      "required":["AccountWithRestoreAccess"],
       "members":{
         "SnapshotIdentifier":{"shape":"String"},
+        "SnapshotArn":{"shape":"String"},
         "SnapshotClusterIdentifier":{"shape":"String"},
         "AccountWithRestoreAccess":{"shape":"String"}
       }
@@ -2537,6 +2556,15 @@
       "members":{
         "Marker":{"shape":"String"},
         "ClusterDbRevisions":{"shape":"ClusterDbRevisionsList"}
+      }
+    },
+    "ClusterExtendedCredentials":{
+      "type":"structure",
+      "members":{
+        "DbUser":{"shape":"String"},
+        "DbPassword":{"shape":"SensitiveString"},
+        "Expiration":{"shape":"TStamp"},
+        "NextRefreshTime":{"shape":"TStamp"}
       }
     },
     "ClusterIamRole":{
@@ -3005,7 +3033,8 @@
         "SnapshotScheduleIdentifier":{"shape":"String"},
         "AvailabilityZoneRelocation":{"shape":"BooleanOptional"},
         "AquaConfigurationStatus":{"shape":"AquaConfigurationStatus"},
-        "DefaultIamRoleArn":{"shape":"String"}
+        "DefaultIamRoleArn":{"shape":"String"},
+        "LoadSampleData":{"shape":"String"}
       }
     },
     "CreateClusterParameterGroupMessage":{
@@ -3264,6 +3293,7 @@
       "members":{
         "ConsumerIdentifier":{"shape":"String"},
         "Status":{"shape":"DataShareStatus"},
+        "ConsumerRegion":{"shape":"String"},
         "CreatedDate":{"shape":"TStamp"},
         "StatusChangeDate":{"shape":"TStamp"}
       }
@@ -3578,6 +3608,7 @@
       "members":{
         "ClusterIdentifier":{"shape":"String"},
         "SnapshotIdentifier":{"shape":"String"},
+        "SnapshotArn":{"shape":"String"},
         "SnapshotType":{"shape":"String"},
         "StartTime":{"shape":"TStamp"},
         "EndTime":{"shape":"TStamp"},
@@ -3772,6 +3803,7 @@
         "ActionType":{"shape":"ActionType"},
         "ClusterIdentifier":{"shape":"String"},
         "SnapshotIdentifier":{"shape":"String"},
+        "SnapshotArn":{"shape":"String"},
         "OwnerAccount":{"shape":"String"},
         "Filters":{
           "shape":"NodeConfigurationOptionsFilterList",
@@ -3947,7 +3979,8 @@
       "members":{
         "DataShareArn":{"shape":"String"},
         "DisassociateEntireAccount":{"shape":"BooleanOptional"},
-        "ConsumerArn":{"shape":"String"}
+        "ConsumerArn":{"shape":"String"},
+        "ConsumerRegion":{"shape":"String"}
       }
     },
     "Double":{"type":"double"},
@@ -3984,14 +4017,13 @@
     },
     "EnableLoggingMessage":{
       "type":"structure",
-      "required":[
-        "ClusterIdentifier",
-        "BucketName"
-      ],
+      "required":["ClusterIdentifier"],
       "members":{
         "ClusterIdentifier":{"shape":"String"},
         "BucketName":{"shape":"String"},
-        "S3KeyPrefix":{"shape":"String"}
+        "S3KeyPrefix":{"shape":"String"},
+        "LogDestinationType":{"shape":"LogDestinationType"},
+        "LogExports":{"shape":"LogTypeList"}
       }
     },
     "EnableSnapshotCopyMessage":{
@@ -4276,6 +4308,15 @@
         "DurationSeconds":{"shape":"IntegerOptional"},
         "AutoCreate":{"shape":"BooleanOptional"},
         "DbGroups":{"shape":"DbGroupList"}
+      }
+    },
+    "GetClusterCredentialsWithIAMMessage":{
+      "type":"structure",
+      "required":["ClusterIdentifier"],
+      "members":{
+        "DbName":{"shape":"String"},
+        "ClusterIdentifier":{"shape":"String"},
+        "DurationSeconds":{"shape":"IntegerOptional"}
       }
     },
     "GetReservedNodeExchangeConfigurationOptionsInputMessage":{
@@ -4855,6 +4896,17 @@
       },
       "exception":true
     },
+    "LogDestinationType":{
+      "type":"string",
+      "enum":[
+        "s3",
+        "cloudwatch"
+      ]
+    },
+    "LogTypeList":{
+      "type":"list",
+      "member":{"shape":"String"}
+    },
     "LoggingStatus":{
       "type":"structure",
       "members":{
@@ -4863,7 +4915,9 @@
         "S3KeyPrefix":{"shape":"String"},
         "LastSuccessfulDeliveryTime":{"shape":"TStamp"},
         "LastFailureTime":{"shape":"TStamp"},
-        "LastFailureMessage":{"shape":"String"}
+        "LastFailureMessage":{"shape":"String"},
+        "LogDestinationType":{"shape":"LogDestinationType"},
+        "LogExports":{"shape":"LogTypeList"}
       }
     },
     "Long":{"type":"long"},
@@ -5740,13 +5794,11 @@
     },
     "RestoreFromClusterSnapshotMessage":{
       "type":"structure",
-      "required":[
-        "ClusterIdentifier",
-        "SnapshotIdentifier"
-      ],
+      "required":["ClusterIdentifier"],
       "members":{
         "ClusterIdentifier":{"shape":"String"},
         "SnapshotIdentifier":{"shape":"String"},
+        "SnapshotArn":{"shape":"String"},
         "SnapshotClusterIdentifier":{"shape":"String"},
         "Port":{"shape":"IntegerOptional"},
         "AvailabilityZone":{"shape":"String"},
@@ -5775,7 +5827,8 @@
         "AquaConfigurationStatus":{"shape":"AquaConfigurationStatus"},
         "DefaultIamRoleArn":{"shape":"String"},
         "ReservedNodeId":{"shape":"String"},
-        "TargetReservedNodeOfferingId":{"shape":"String"}
+        "TargetReservedNodeOfferingId":{"shape":"String"},
+        "Encrypted":{"shape":"BooleanOptional"}
       }
     },
     "RestoreFromClusterSnapshotResult":{
@@ -5877,12 +5930,10 @@
     },
     "RevokeSnapshotAccessMessage":{
       "type":"structure",
-      "required":[
-        "SnapshotIdentifier",
-        "AccountWithRestoreAccess"
-      ],
+      "required":["AccountWithRestoreAccess"],
       "members":{
         "SnapshotIdentifier":{"shape":"String"},
+        "SnapshotArn":{"shape":"String"},
         "SnapshotClusterIdentifier":{"shape":"String"},
         "AccountWithRestoreAccess":{"shape":"String"}
       }
@@ -6761,7 +6812,8 @@
       "type":"string",
       "enum":[
         "spectrum",
-        "concurrency-scaling"
+        "concurrency-scaling",
+        "cross-region-datasharing"
       ]
     },
     "UsageLimitLimitType":{

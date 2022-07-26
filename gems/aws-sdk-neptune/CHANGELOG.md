@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2022-06-08)
+------------------
+
+* Feature - This release adds support for Neptune to be configured as a global database, with a primary DB cluster in one region, and up to five secondary DB clusters in other regions.
+
+1.45.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.44.0 (2022-02-03)
 ------------------
 

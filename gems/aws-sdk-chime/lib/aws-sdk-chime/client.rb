@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::Chime
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -952,7 +954,7 @@ module Aws::Chime
     #   not need to pass this option.**
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Tags assigned to the `AppInstanceUser`.
+    #   Tags assigned to the `AppInstance`.
     #
     # @return [Types::CreateAppInstanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4580,6 +4582,7 @@ module Aws::Chime
     # @example Response structure
     #
     #   resp.logging_configuration.enable_sip_logs #=> Boolean
+    #   resp.logging_configuration.enable_media_metric_logs #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetVoiceConnectorLoggingConfiguration AWS API Documentation
     #
@@ -6647,12 +6650,14 @@ module Aws::Chime
     #     voice_connector_id: "NonEmptyString", # required
     #     logging_configuration: { # required
     #       enable_sip_logs: false,
+    #       enable_media_metric_logs: false,
     #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.logging_configuration.enable_sip_logs #=> Boolean
+    #   resp.logging_configuration.enable_media_metric_logs #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutVoiceConnectorLoggingConfiguration AWS API Documentation
     #
@@ -8198,9 +8203,9 @@ module Aws::Chime
       req.send_request(options)
     end
 
-    # Allows you to trigger a Lambda function at any time while a call is
-    # active, and replace the current actions with new actions returned by
-    # the invocation.
+    # Invokes the AWS Lambda function associated with the SIP media
+    # application and transaction ID in an update request. The Lambda
+    # function can then return a new set of actions.
     #
     # @option params [required, String] :sip_media_application_id
     #   The ID of the SIP media application handling the call.
@@ -8500,7 +8505,7 @@ module Aws::Chime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chime'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

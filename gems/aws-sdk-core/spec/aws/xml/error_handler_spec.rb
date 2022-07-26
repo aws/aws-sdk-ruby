@@ -56,7 +56,7 @@ module Aws
       <Message>Required parameter 'AvailabilityZone' is not provided.</Message>
     </Error>
   </Errors>
-  <RequestID>549b7a4f-088e-41f1-8db0-905f3c3e0e03</RequestID>
+  <RequestId>549b7a4f-088e-41f1-8db0-905f3c3e0e03</RequestId>
 </Response>
       XML
 
@@ -73,7 +73,7 @@ module Aws
 
       let(:unmodeled_error) { <<-XML.strip }
 <?xml version="1.0"?>
-<ErrorResponse xmlns="http://cloudfront.amazonaws.com/doc/2016-09-07/">
+<ErrorResponse xmlns="http://cloudfront.amazonaws.com/doc/2018-11-05/">
   <Error>
     <Type>Sender</Type>
     <Code>MalformedXML</Code>
@@ -114,6 +114,7 @@ module Aws
         }.to raise_error { |error|
           expect(error.code).to eq('AccessDenied')
           expect(error.message).to eq('foo')
+          expect(error.context[:request_id]).to eq('b25f48e8-84fd-11e6-80d9-574e0c4664cb')
         }
       end
 
@@ -133,6 +134,7 @@ module Aws
         }.to raise_error { |error|
           expect(error.code).to eq('MalformedXML')
           expect(error.message).to eq(msg)
+          expect(error.context[:request_id]).to eq('b25f48e8-84fd-11e6-80d9-574e0c4664cb')
         }
       end
 
@@ -157,6 +159,7 @@ module Aws
         }.to raise_error { |error|
           expect(error.code).to eq('InvalidRequest')
           expect(error.message).to eq('Required parameter \'AvailabilityZone\' is not provided.')
+          expect(error.context[:request_id]).to eq('549b7a4f-088e-41f1-8db0-905f3c3e0e03')
         }
       end
 
@@ -168,6 +171,7 @@ module Aws
         }.to raise_error { |error|
           expect(error.code).to eq('InvalidParameter')
           expect(error.message).to eq('Invalid parameter: TopicArn Reason: no value for required parameter')
+          expect(error.context[:request_id]).to eq('e9e9cfe5-9023-5f6f-a9fc-9f817a196bcd')
         }
       end
     end

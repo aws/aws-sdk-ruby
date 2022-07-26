@@ -48,6 +48,6 @@ require_relative 'aws-sdk-braket/customizations'
 # @!group service
 module Aws::Braket
 
-  GEM_VERSION = '1.17.0'
+  GEM_VERSION = '1.19.0'
 
 end

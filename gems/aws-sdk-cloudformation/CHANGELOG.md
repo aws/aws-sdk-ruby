@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2022-07-06)
+------------------
+
+* Feature - My AWS Service (placeholder) - Add a new feature Account-level Targeting for StackSet operation
+
+1.69.0 (2022-05-25)
+------------------
+
+* Feature - Add a new parameter statusReason to DescribeStackSetOperation output for additional details
+
+1.68.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.67.0 (2022-02-10)
+------------------
+
+* Feature - This SDK release adds AWS CloudFormation Hooks HandlerErrorCodes
+
+1.66.0 (2022-02-09)
+------------------
+
+* Feature - This SDK release is for the feature launch of AWS CloudFormation Hooks.
+
 1.65.0 (2022-02-03)
 ------------------
 

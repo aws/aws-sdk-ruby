@@ -745,6 +745,7 @@ module Aws::Neptune
     #         enable_iam_database_authentication: false,
     #         enable_cloudwatch_logs_exports: ["String"],
     #         deletion_protection: false,
+    #         global_cluster_identifier: "GlobalClusterIdentifier",
     #         source_region: "String",
     #       }
     #
@@ -964,6 +965,11 @@ module Aws::Neptune
     #   protection is enabled. By default, deletion protection is enabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] global_cluster_identifier
+    #   The ID of the Neptune global database to which this new DB cluster
+    #   should be added.
+    #   @return [String]
+    #
     # @!attribute [rw] source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -997,6 +1003,7 @@ module Aws::Neptune
       :enable_iam_database_authentication,
       :enable_cloudwatch_logs_exports,
       :deletion_protection,
+      :global_cluster_identifier,
       :source_region)
       SENSITIVE = []
       include Aws::Structure
@@ -1837,6 +1844,79 @@ module Aws::Neptune
     #
     class CreateEventSubscriptionResult < Struct.new(
       :event_subscription)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateGlobalClusterMessage
+    #   data as a hash:
+    #
+    #       {
+    #         global_cluster_identifier: "GlobalClusterIdentifier", # required
+    #         source_db_cluster_identifier: "String",
+    #         engine: "String",
+    #         engine_version: "String",
+    #         deletion_protection: false,
+    #         storage_encrypted: false,
+    #       }
+    #
+    # @!attribute [rw] global_cluster_identifier
+    #   The cluster identifier of the new global database cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_db_cluster_identifier
+    #   (*Optional*) The Amazon Resource Name (ARN) of an existing Neptune
+    #   DB cluster to use as the primary cluster of the new global database.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine
+    #   The name of the database engine to be used in the global database.
+    #
+    #   Valid values: `neptune`
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_version
+    #   The Neptune engine version to be used by the global database.
+    #
+    #   Valid values: `1.2.0.0` or above.
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_protection
+    #   The deletion protection setting for the new global database. The
+    #   global database can't be deleted when deletion protection is
+    #   enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] storage_encrypted
+    #   The storage encryption setting for the new global database cluster.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/CreateGlobalClusterMessage AWS API Documentation
+    #
+    class CreateGlobalClusterMessage < Struct.new(
+      :global_cluster_identifier,
+      :source_db_cluster_identifier,
+      :engine,
+      :engine_version,
+      :deletion_protection,
+      :storage_encrypted)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] global_cluster
+    #   Contains the details of an Amazon Neptune global database.
+    #
+    #   This data type is used as a response element for the
+    #   CreateGlobalCluster, DescribeGlobalClusters, ModifyGlobalCluster,
+    #   DeleteGlobalCluster, FailoverGlobalCluster, and
+    #   RemoveFromGlobalCluster actions.
+    #   @return [Types::GlobalCluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/CreateGlobalClusterResult AWS API Documentation
+    #
+    class CreateGlobalClusterResult < Struct.new(
+      :global_cluster)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2768,6 +2848,11 @@ module Aws::Neptune
     #   replicas.
     #   @return [Boolean]
     #
+    # @!attribute [rw] supports_global_databases
+    #   A value that indicates whether you can use Aurora global databases
+    #   with a specific DB engine version.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBEngineVersion AWS API Documentation
     #
     class DBEngineVersion < Struct.new(
@@ -2782,7 +2867,8 @@ module Aws::Neptune
       :supported_timezones,
       :exportable_log_types,
       :supports_log_exports_to_cloudwatch_logs,
-      :supports_read_replica)
+      :supports_read_replica,
+      :supports_global_databases)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3877,6 +3963,42 @@ module Aws::Neptune
     #
     class DeleteEventSubscriptionResult < Struct.new(
       :event_subscription)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteGlobalClusterMessage
+    #   data as a hash:
+    #
+    #       {
+    #         global_cluster_identifier: "GlobalClusterIdentifier", # required
+    #       }
+    #
+    # @!attribute [rw] global_cluster_identifier
+    #   The cluster identifier of the global database cluster being deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DeleteGlobalClusterMessage AWS API Documentation
+    #
+    class DeleteGlobalClusterMessage < Struct.new(
+      :global_cluster_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] global_cluster
+    #   Contains the details of an Amazon Neptune global database.
+    #
+    #   This data type is used as a response element for the
+    #   CreateGlobalCluster, DescribeGlobalClusters, ModifyGlobalCluster,
+    #   DeleteGlobalCluster, FailoverGlobalCluster, and
+    #   RemoveFromGlobalCluster actions.
+    #   @return [Types::GlobalCluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DeleteGlobalClusterResult AWS API Documentation
+    #
+    class DeleteGlobalClusterResult < Struct.new(
+      :global_cluster)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5010,6 +5132,52 @@ module Aws::Neptune
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeGlobalClustersMessage
+    #   data as a hash:
+    #
+    #       {
+    #         global_cluster_identifier: "GlobalClusterIdentifier",
+    #         max_records: 1,
+    #         marker: "String",
+    #       }
+    #
+    # @!attribute [rw] global_cluster_identifier
+    #   The user-supplied DB cluster identifier. If this parameter is
+    #   specified, only information about the specified DB cluster is
+    #   returned. This parameter is not case-sensitive.
+    #
+    #   Constraints: If supplied, must match an existing DB cluster
+    #   identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   marker token is included in the response that you can use to
+    #   retrieve the remaining results.
+    #
+    #   Default: `100`
+    #
+    #   Constraints: Minimum 20, maximum 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   (*Optional*) A pagination token returned by a previous call to
+    #   `DescribeGlobalClusters`. If this parameter is specified, the
+    #   response will only include records beyond the marker, up to the
+    #   number specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DescribeGlobalClustersMessage AWS API Documentation
+    #
+    class DescribeGlobalClustersMessage < Struct.new(
+      :global_cluster_identifier,
+      :max_records,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeOrderableDBInstanceOptionsMessage
     #   data as a hash:
     #
@@ -5542,6 +5710,55 @@ module Aws::Neptune
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass FailoverGlobalClusterMessage
+    #   data as a hash:
+    #
+    #       {
+    #         global_cluster_identifier: "GlobalClusterIdentifier", # required
+    #         target_db_cluster_identifier: "String", # required
+    #       }
+    #
+    # @!attribute [rw] global_cluster_identifier
+    #   Identifier of the Neptune global database that should be failed
+    #   over. The identifier is the unique key assigned by the user when the
+    #   Neptune global database was created. In other words, it's the name
+    #   of the global database that you want to fail over.
+    #
+    #   Constraints: Must match the identifier of an existing Neptune global
+    #   database.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_db_cluster_identifier
+    #   The Amazon Resource Name (ARN) of the secondary Neptune DB cluster
+    #   that you want to promote to primary for the global database.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/FailoverGlobalClusterMessage AWS API Documentation
+    #
+    class FailoverGlobalClusterMessage < Struct.new(
+      :global_cluster_identifier,
+      :target_db_cluster_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] global_cluster
+    #   Contains the details of an Amazon Neptune global database.
+    #
+    #   This data type is used as a response element for the
+    #   CreateGlobalCluster, DescribeGlobalClusters, ModifyGlobalCluster,
+    #   DeleteGlobalCluster, FailoverGlobalCluster, and
+    #   RemoveFromGlobalCluster actions.
+    #   @return [Types::GlobalCluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/FailoverGlobalClusterResult AWS API Documentation
+    #
+    class FailoverGlobalClusterResult < Struct.new(
+      :global_cluster)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This type is not currently supported.
     #
     # @note When making an API call, you may pass Filter
@@ -5565,6 +5782,139 @@ module Aws::Neptune
     class Filter < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the details of an Amazon Neptune global database.
+    #
+    # This data type is used as a response element for the
+    # CreateGlobalCluster, DescribeGlobalClusters, ModifyGlobalCluster,
+    # DeleteGlobalCluster, FailoverGlobalCluster, and
+    # RemoveFromGlobalCluster actions.
+    #
+    # @!attribute [rw] global_cluster_identifier
+    #   Contains a user-supplied global database cluster identifier. This
+    #   identifier is the unique key that identifies a global database.
+    #   @return [String]
+    #
+    # @!attribute [rw] global_cluster_resource_id
+    #   An immutable identifier for the global database that is unique
+    #   within in all regions. This identifier is found in CloudTrail log
+    #   entries whenever the KMS key for the DB cluster is accessed.
+    #   @return [String]
+    #
+    # @!attribute [rw] global_cluster_arn
+    #   The Amazon Resource Name (ARN) for the global database.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Specifies the current state of this global database.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine
+    #   The Neptune database engine used by the global database
+    #   (`"neptune"`).
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_version
+    #   The Neptune engine version used by the global database.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_encrypted
+    #   The storage encryption setting for the global database.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] deletion_protection
+    #   The deletion protection setting for the global database.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] global_cluster_members
+    #   A list of cluster ARNs and instance ARNs for all the DB clusters
+    #   that are part of the global database.
+    #   @return [Array<Types::GlobalClusterMember>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/GlobalCluster AWS API Documentation
+    #
+    class GlobalCluster < Struct.new(
+      :global_cluster_identifier,
+      :global_cluster_resource_id,
+      :global_cluster_arn,
+      :status,
+      :engine,
+      :engine_version,
+      :storage_encrypted,
+      :deletion_protection,
+      :global_cluster_members)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The `GlobalClusterIdentifier` already exists. Choose a new global
+    # database identifier (unique name) to create a new global database
+    # cluster.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/GlobalClusterAlreadyExistsFault AWS API Documentation
+    #
+    class GlobalClusterAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # A data structure with information about any primary and secondary
+    # clusters associated with an Neptune global database.
+    #
+    # @!attribute [rw] db_cluster_arn
+    #   The Amazon Resource Name (ARN) for each Neptune cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] readers
+    #   The Amazon Resource Name (ARN) for each read-only secondary cluster
+    #   associated with the Neptune global database.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] is_writer
+    #   Specifies whether the Neptune cluster is the primary cluster (that
+    #   is, has read-write capability) for the Neptune global database with
+    #   which it is associated.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/GlobalClusterMember AWS API Documentation
+    #
+    class GlobalClusterMember < Struct.new(
+      :db_cluster_arn,
+      :readers,
+      :is_writer)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The `GlobalClusterIdentifier` doesn't refer to an existing global
+    # database cluster.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/GlobalClusterNotFoundFault AWS API Documentation
+    #
+    class GlobalClusterNotFoundFault < Aws::EmptyStructure; end
+
+    # The number of global database clusters for this account is already at
+    # the maximum allowed.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/GlobalClusterQuotaExceededFault AWS API Documentation
+    #
+    class GlobalClusterQuotaExceededFault < Aws::EmptyStructure; end
+
+    # @!attribute [rw] marker
+    #   A pagination token. If this parameter is returned in the response,
+    #   more records are available, which can be retrieved by one or more
+    #   additional calls to `DescribeGlobalClusters`.
+    #   @return [String]
+    #
+    # @!attribute [rw] global_clusters
+    #   The list of global clusters and instances returned by this request.
+    #   @return [Array<Types::GlobalCluster>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/GlobalClustersMessage AWS API Documentation
+    #
+    class GlobalClustersMessage < Struct.new(
+      :marker,
+      :global_clusters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5660,6 +6010,13 @@ module Aws::Neptune
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/InvalidEventSubscriptionStateFault AWS API Documentation
     #
     class InvalidEventSubscriptionStateFault < Aws::EmptyStructure; end
+
+    # The global cluster is in an invalid state and can't perform the
+    # requested operation.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/InvalidGlobalClusterStateFault AWS API Documentation
+    #
+    class InvalidGlobalClusterStateFault < Aws::EmptyStructure; end
 
     # Cannot restore from vpc backup to non-vpc DB instance.
     #
@@ -5766,8 +6123,8 @@ module Aws::Neptune
     end
 
     # This data type represents the information you need to connect to an
-    # Amazon Aurora DB cluster. This data type is used as a response element
-    # in the following actions:
+    # Amazon Neptune DB cluster. This data type is used as a response
+    # element in the following actions:
     #
     # * `CreateDBClusterEndpoint`
     #
@@ -6826,6 +7183,98 @@ module Aws::Neptune
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ModifyGlobalClusterMessage
+    #   data as a hash:
+    #
+    #       {
+    #         global_cluster_identifier: "GlobalClusterIdentifier", # required
+    #         new_global_cluster_identifier: "GlobalClusterIdentifier",
+    #         deletion_protection: false,
+    #         engine_version: "String",
+    #         allow_major_version_upgrade: false,
+    #       }
+    #
+    # @!attribute [rw] global_cluster_identifier
+    #   The DB cluster identifier for the global cluster being modified.
+    #   This parameter is not case-sensitive.
+    #
+    #   Constraints: Must match the identifier of an existing global
+    #   database cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_global_cluster_identifier
+    #   A new cluster identifier to assign to the global database. This
+    #   value is stored as a lowercase string.
+    #
+    #   Constraints:
+    #
+    #   * Must contain from 1 to 63 letters, numbers, or hyphens.
+    #
+    #   * The first character must be a letter.
+    #
+    #   * Can't end with a hyphen or contain two consecutive hyphens
+    #
+    #   Example: `my-cluster2`
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Indicates whether the global database has deletion protection
+    #   enabled. The global database cannot be deleted when deletion
+    #   protection is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] engine_version
+    #   The version number of the database engine to which you want to
+    #   upgrade. Changing this parameter will result in an outage. The
+    #   change is applied during the next maintenance window unless
+    #   `ApplyImmediately` is enabled.
+    #
+    #   To list all of the available Neptune engine versions, use the
+    #   following command:
+    #   @return [String]
+    #
+    # @!attribute [rw] allow_major_version_upgrade
+    #   A value that indicates whether major version upgrades are allowed.
+    #
+    #   Constraints: You must allow major version upgrades if you specify a
+    #   value for the `EngineVersion` parameter that is a different major
+    #   version than the DB cluster's current version.
+    #
+    #   If you upgrade the major version of a global database, the cluster
+    #   and DB instance parameter groups are set to the default parameter
+    #   groups for the new version, so you will need to apply any custom
+    #   parameter groups after completing the upgrade.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/ModifyGlobalClusterMessage AWS API Documentation
+    #
+    class ModifyGlobalClusterMessage < Struct.new(
+      :global_cluster_identifier,
+      :new_global_cluster_identifier,
+      :deletion_protection,
+      :engine_version,
+      :allow_major_version_upgrade)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] global_cluster
+    #   Contains the details of an Amazon Neptune global database.
+    #
+    #   This data type is used as a response element for the
+    #   CreateGlobalCluster, DescribeGlobalClusters, ModifyGlobalCluster,
+    #   DeleteGlobalCluster, FailoverGlobalCluster, and
+    #   RemoveFromGlobalCluster actions.
+    #   @return [Types::GlobalCluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/ModifyGlobalClusterResult AWS API Documentation
+    #
+    class ModifyGlobalClusterResult < Struct.new(
+      :global_cluster)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Not supported by Neptune.
     #
     # @!attribute [rw] option_group_name
@@ -6938,6 +7387,11 @@ module Aws::Neptune
     #   Maximum provisioned IOPS per GiB for a DB instance.
     #   @return [Float]
     #
+    # @!attribute [rw] supports_global_databases
+    #   A value that indicates whether you can use Neptune global databases
+    #   with a specific combination of other DB engine attributes.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/OrderableDBInstanceOption AWS API Documentation
     #
     class OrderableDBInstanceOption < Struct.new(
@@ -6960,7 +7414,8 @@ module Aws::Neptune
       :min_iops_per_db_instance,
       :max_iops_per_db_instance,
       :min_iops_per_gib,
-      :max_iops_per_gib)
+      :max_iops_per_gib,
+      :supports_global_databases)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7361,6 +7816,50 @@ module Aws::Neptune
     #
     class RebootDBInstanceResult < Struct.new(
       :db_instance)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RemoveFromGlobalClusterMessage
+    #   data as a hash:
+    #
+    #       {
+    #         global_cluster_identifier: "GlobalClusterIdentifier", # required
+    #         db_cluster_identifier: "String", # required
+    #       }
+    #
+    # @!attribute [rw] global_cluster_identifier
+    #   The identifier of the Neptune global database from which to detach
+    #   the specified Neptune DB cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   The Amazon Resource Name (ARN) identifying the cluster to be
+    #   detached from the Neptune global database cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/RemoveFromGlobalClusterMessage AWS API Documentation
+    #
+    class RemoveFromGlobalClusterMessage < Struct.new(
+      :global_cluster_identifier,
+      :db_cluster_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] global_cluster
+    #   Contains the details of an Amazon Neptune global database.
+    #
+    #   This data type is used as a response element for the
+    #   CreateGlobalCluster, DescribeGlobalClusters, ModifyGlobalCluster,
+    #   DeleteGlobalCluster, FailoverGlobalCluster, and
+    #   RemoveFromGlobalCluster actions.
+    #   @return [Types::GlobalCluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/RemoveFromGlobalClusterResult AWS API Documentation
+    #
+    class RemoveFromGlobalClusterResult < Struct.new(
+      :global_cluster)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8295,6 +8794,11 @@ module Aws::Neptune
     #   major version.
     #   @return [Boolean]
     #
+    # @!attribute [rw] supports_global_databases
+    #   A value that indicates whether you can use Neptune global databases
+    #   with the target engine version.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/UpgradeTarget AWS API Documentation
     #
     class UpgradeTarget < Struct.new(
@@ -8302,7 +8806,8 @@ module Aws::Neptune
       :engine_version,
       :description,
       :auto_upgrade,
-      :is_major_version_upgrade)
+      :is_major_version_upgrade,
+      :supports_global_databases)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -28,6 +28,8 @@ module Aws::SSOAdmin
     AccountAssignmentOperationStatusMetadata = Shapes::StructureShape.new(name: 'AccountAssignmentOperationStatusMetadata')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     AccountList = Shapes::ListShape.new(name: 'AccountList')
+    AttachCustomerManagedPolicyReferenceToPermissionSetRequest = Shapes::StructureShape.new(name: 'AttachCustomerManagedPolicyReferenceToPermissionSetRequest')
+    AttachCustomerManagedPolicyReferenceToPermissionSetResponse = Shapes::StructureShape.new(name: 'AttachCustomerManagedPolicyReferenceToPermissionSetResponse')
     AttachManagedPolicyToPermissionSetRequest = Shapes::StructureShape.new(name: 'AttachManagedPolicyToPermissionSetRequest')
     AttachManagedPolicyToPermissionSetResponse = Shapes::StructureShape.new(name: 'AttachManagedPolicyToPermissionSetResponse')
     AttachedManagedPolicy = Shapes::StructureShape.new(name: 'AttachedManagedPolicy')
@@ -40,6 +42,8 @@ module Aws::SSOAdmin
     CreateInstanceAccessControlAttributeConfigurationResponse = Shapes::StructureShape.new(name: 'CreateInstanceAccessControlAttributeConfigurationResponse')
     CreatePermissionSetRequest = Shapes::StructureShape.new(name: 'CreatePermissionSetRequest')
     CreatePermissionSetResponse = Shapes::StructureShape.new(name: 'CreatePermissionSetResponse')
+    CustomerManagedPolicyReference = Shapes::StructureShape.new(name: 'CustomerManagedPolicyReference')
+    CustomerManagedPolicyReferenceList = Shapes::ListShape.new(name: 'CustomerManagedPolicyReferenceList')
     Date = Shapes::TimestampShape.new(name: 'Date')
     DeleteAccountAssignmentRequest = Shapes::StructureShape.new(name: 'DeleteAccountAssignmentRequest')
     DeleteAccountAssignmentResponse = Shapes::StructureShape.new(name: 'DeleteAccountAssignmentResponse')
@@ -49,6 +53,8 @@ module Aws::SSOAdmin
     DeleteInstanceAccessControlAttributeConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteInstanceAccessControlAttributeConfigurationResponse')
     DeletePermissionSetRequest = Shapes::StructureShape.new(name: 'DeletePermissionSetRequest')
     DeletePermissionSetResponse = Shapes::StructureShape.new(name: 'DeletePermissionSetResponse')
+    DeletePermissionsBoundaryFromPermissionSetRequest = Shapes::StructureShape.new(name: 'DeletePermissionsBoundaryFromPermissionSetRequest')
+    DeletePermissionsBoundaryFromPermissionSetResponse = Shapes::StructureShape.new(name: 'DeletePermissionsBoundaryFromPermissionSetResponse')
     DescribeAccountAssignmentCreationStatusRequest = Shapes::StructureShape.new(name: 'DescribeAccountAssignmentCreationStatusRequest')
     DescribeAccountAssignmentCreationStatusResponse = Shapes::StructureShape.new(name: 'DescribeAccountAssignmentCreationStatusResponse')
     DescribeAccountAssignmentDeletionStatusRequest = Shapes::StructureShape.new(name: 'DescribeAccountAssignmentDeletionStatusRequest')
@@ -59,12 +65,15 @@ module Aws::SSOAdmin
     DescribePermissionSetProvisioningStatusResponse = Shapes::StructureShape.new(name: 'DescribePermissionSetProvisioningStatusResponse')
     DescribePermissionSetRequest = Shapes::StructureShape.new(name: 'DescribePermissionSetRequest')
     DescribePermissionSetResponse = Shapes::StructureShape.new(name: 'DescribePermissionSetResponse')
+    DetachCustomerManagedPolicyReferenceFromPermissionSetRequest = Shapes::StructureShape.new(name: 'DetachCustomerManagedPolicyReferenceFromPermissionSetRequest')
+    DetachCustomerManagedPolicyReferenceFromPermissionSetResponse = Shapes::StructureShape.new(name: 'DetachCustomerManagedPolicyReferenceFromPermissionSetResponse')
     DetachManagedPolicyFromPermissionSetRequest = Shapes::StructureShape.new(name: 'DetachManagedPolicyFromPermissionSetRequest')
     DetachManagedPolicyFromPermissionSetResponse = Shapes::StructureShape.new(name: 'DetachManagedPolicyFromPermissionSetResponse')
     Duration = Shapes::StringShape.new(name: 'Duration')
-    GeneralArn = Shapes::StringShape.new(name: 'GeneralArn')
     GetInlinePolicyForPermissionSetRequest = Shapes::StructureShape.new(name: 'GetInlinePolicyForPermissionSetRequest')
     GetInlinePolicyForPermissionSetResponse = Shapes::StructureShape.new(name: 'GetInlinePolicyForPermissionSetResponse')
+    GetPermissionsBoundaryForPermissionSetRequest = Shapes::StructureShape.new(name: 'GetPermissionsBoundaryForPermissionSetRequest')
+    GetPermissionsBoundaryForPermissionSetResponse = Shapes::StructureShape.new(name: 'GetPermissionsBoundaryForPermissionSetResponse')
     Id = Shapes::StringShape.new(name: 'Id')
     InstanceAccessControlAttributeConfiguration = Shapes::StructureShape.new(name: 'InstanceAccessControlAttributeConfiguration')
     InstanceAccessControlAttributeConfigurationStatus = Shapes::StringShape.new(name: 'InstanceAccessControlAttributeConfigurationStatus')
@@ -82,6 +91,8 @@ module Aws::SSOAdmin
     ListAccountAssignmentsResponse = Shapes::StructureShape.new(name: 'ListAccountAssignmentsResponse')
     ListAccountsForProvisionedPermissionSetRequest = Shapes::StructureShape.new(name: 'ListAccountsForProvisionedPermissionSetRequest')
     ListAccountsForProvisionedPermissionSetResponse = Shapes::StructureShape.new(name: 'ListAccountsForProvisionedPermissionSetResponse')
+    ListCustomerManagedPolicyReferencesInPermissionSetRequest = Shapes::StructureShape.new(name: 'ListCustomerManagedPolicyReferencesInPermissionSetRequest')
+    ListCustomerManagedPolicyReferencesInPermissionSetResponse = Shapes::StructureShape.new(name: 'ListCustomerManagedPolicyReferencesInPermissionSetResponse')
     ListInstancesRequest = Shapes::StructureShape.new(name: 'ListInstancesRequest')
     ListInstancesResponse = Shapes::StructureShape.new(name: 'ListInstancesResponse')
     ListManagedPoliciesInPermissionSetRequest = Shapes::StructureShape.new(name: 'ListManagedPoliciesInPermissionSetRequest')
@@ -95,6 +106,8 @@ module Aws::SSOAdmin
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ManagedPolicyArn = Shapes::StringShape.new(name: 'ManagedPolicyArn')
+    ManagedPolicyName = Shapes::StringShape.new(name: 'ManagedPolicyName')
+    ManagedPolicyPath = Shapes::StringShape.new(name: 'ManagedPolicyPath')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Name = Shapes::StringShape.new(name: 'Name')
     OperationStatusFilter = Shapes::StructureShape.new(name: 'OperationStatusFilter')
@@ -107,6 +120,7 @@ module Aws::SSOAdmin
     PermissionSetProvisioningStatus = Shapes::StructureShape.new(name: 'PermissionSetProvisioningStatus')
     PermissionSetProvisioningStatusList = Shapes::ListShape.new(name: 'PermissionSetProvisioningStatusList')
     PermissionSetProvisioningStatusMetadata = Shapes::StructureShape.new(name: 'PermissionSetProvisioningStatusMetadata')
+    PermissionsBoundary = Shapes::StructureShape.new(name: 'PermissionsBoundary')
     PrincipalId = Shapes::StringShape.new(name: 'PrincipalId')
     PrincipalType = Shapes::StringShape.new(name: 'PrincipalType')
     ProvisionPermissionSetRequest = Shapes::StructureShape.new(name: 'ProvisionPermissionSetRequest')
@@ -115,6 +129,8 @@ module Aws::SSOAdmin
     ProvisioningStatus = Shapes::StringShape.new(name: 'ProvisioningStatus')
     PutInlinePolicyToPermissionSetRequest = Shapes::StructureShape.new(name: 'PutInlinePolicyToPermissionSetRequest')
     PutInlinePolicyToPermissionSetResponse = Shapes::StructureShape.new(name: 'PutInlinePolicyToPermissionSetResponse')
+    PutPermissionsBoundaryToPermissionSetRequest = Shapes::StructureShape.new(name: 'PutPermissionsBoundaryToPermissionSetRequest')
+    PutPermissionsBoundaryToPermissionSetResponse = Shapes::StructureShape.new(name: 'PutPermissionsBoundaryToPermissionSetResponse')
     Reason = Shapes::StringShape.new(name: 'Reason')
     RelayState = Shapes::StringShape.new(name: 'RelayState')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -129,6 +145,7 @@ module Aws::SSOAdmin
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TaggableResourceArn = Shapes::StringShape.new(name: 'TaggableResourceArn')
     TargetId = Shapes::StringShape.new(name: 'TargetId')
     TargetType = Shapes::StringShape.new(name: 'TargetType')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
@@ -186,6 +203,13 @@ module Aws::SSOAdmin
 
     AccountList.member = Shapes::ShapeRef.new(shape: AccountId)
 
+    AttachCustomerManagedPolicyReferenceToPermissionSetRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
+    AttachCustomerManagedPolicyReferenceToPermissionSetRequest.add_member(:permission_set_arn, Shapes::ShapeRef.new(shape: PermissionSetArn, required: true, location_name: "PermissionSetArn"))
+    AttachCustomerManagedPolicyReferenceToPermissionSetRequest.add_member(:customer_managed_policy_reference, Shapes::ShapeRef.new(shape: CustomerManagedPolicyReference, required: true, location_name: "CustomerManagedPolicyReference"))
+    AttachCustomerManagedPolicyReferenceToPermissionSetRequest.struct_class = Types::AttachCustomerManagedPolicyReferenceToPermissionSetRequest
+
+    AttachCustomerManagedPolicyReferenceToPermissionSetResponse.struct_class = Types::AttachCustomerManagedPolicyReferenceToPermissionSetResponse
+
     AttachManagedPolicyToPermissionSetRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
     AttachManagedPolicyToPermissionSetRequest.add_member(:permission_set_arn, Shapes::ShapeRef.new(shape: PermissionSetArn, required: true, location_name: "PermissionSetArn"))
     AttachManagedPolicyToPermissionSetRequest.add_member(:managed_policy_arn, Shapes::ShapeRef.new(shape: ManagedPolicyArn, required: true, location_name: "ManagedPolicyArn"))
@@ -230,6 +254,12 @@ module Aws::SSOAdmin
     CreatePermissionSetResponse.add_member(:permission_set, Shapes::ShapeRef.new(shape: PermissionSet, location_name: "PermissionSet"))
     CreatePermissionSetResponse.struct_class = Types::CreatePermissionSetResponse
 
+    CustomerManagedPolicyReference.add_member(:name, Shapes::ShapeRef.new(shape: ManagedPolicyName, required: true, location_name: "Name"))
+    CustomerManagedPolicyReference.add_member(:path, Shapes::ShapeRef.new(shape: ManagedPolicyPath, location_name: "Path"))
+    CustomerManagedPolicyReference.struct_class = Types::CustomerManagedPolicyReference
+
+    CustomerManagedPolicyReferenceList.member = Shapes::ShapeRef.new(shape: CustomerManagedPolicyReference)
+
     DeleteAccountAssignmentRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
     DeleteAccountAssignmentRequest.add_member(:target_id, Shapes::ShapeRef.new(shape: TargetId, required: true, location_name: "TargetId"))
     DeleteAccountAssignmentRequest.add_member(:target_type, Shapes::ShapeRef.new(shape: TargetType, required: true, location_name: "TargetType"))
@@ -257,6 +287,12 @@ module Aws::SSOAdmin
     DeletePermissionSetRequest.struct_class = Types::DeletePermissionSetRequest
 
     DeletePermissionSetResponse.struct_class = Types::DeletePermissionSetResponse
+
+    DeletePermissionsBoundaryFromPermissionSetRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
+    DeletePermissionsBoundaryFromPermissionSetRequest.add_member(:permission_set_arn, Shapes::ShapeRef.new(shape: PermissionSetArn, required: true, location_name: "PermissionSetArn"))
+    DeletePermissionsBoundaryFromPermissionSetRequest.struct_class = Types::DeletePermissionsBoundaryFromPermissionSetRequest
+
+    DeletePermissionsBoundaryFromPermissionSetResponse.struct_class = Types::DeletePermissionsBoundaryFromPermissionSetResponse
 
     DescribeAccountAssignmentCreationStatusRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
     DescribeAccountAssignmentCreationStatusRequest.add_member(:account_assignment_creation_request_id, Shapes::ShapeRef.new(shape: UUId, required: true, location_name: "AccountAssignmentCreationRequestId"))
@@ -294,6 +330,13 @@ module Aws::SSOAdmin
     DescribePermissionSetResponse.add_member(:permission_set, Shapes::ShapeRef.new(shape: PermissionSet, location_name: "PermissionSet"))
     DescribePermissionSetResponse.struct_class = Types::DescribePermissionSetResponse
 
+    DetachCustomerManagedPolicyReferenceFromPermissionSetRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
+    DetachCustomerManagedPolicyReferenceFromPermissionSetRequest.add_member(:permission_set_arn, Shapes::ShapeRef.new(shape: PermissionSetArn, required: true, location_name: "PermissionSetArn"))
+    DetachCustomerManagedPolicyReferenceFromPermissionSetRequest.add_member(:customer_managed_policy_reference, Shapes::ShapeRef.new(shape: CustomerManagedPolicyReference, required: true, location_name: "CustomerManagedPolicyReference"))
+    DetachCustomerManagedPolicyReferenceFromPermissionSetRequest.struct_class = Types::DetachCustomerManagedPolicyReferenceFromPermissionSetRequest
+
+    DetachCustomerManagedPolicyReferenceFromPermissionSetResponse.struct_class = Types::DetachCustomerManagedPolicyReferenceFromPermissionSetResponse
+
     DetachManagedPolicyFromPermissionSetRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
     DetachManagedPolicyFromPermissionSetRequest.add_member(:permission_set_arn, Shapes::ShapeRef.new(shape: PermissionSetArn, required: true, location_name: "PermissionSetArn"))
     DetachManagedPolicyFromPermissionSetRequest.add_member(:managed_policy_arn, Shapes::ShapeRef.new(shape: ManagedPolicyArn, required: true, location_name: "ManagedPolicyArn"))
@@ -307,6 +350,13 @@ module Aws::SSOAdmin
 
     GetInlinePolicyForPermissionSetResponse.add_member(:inline_policy, Shapes::ShapeRef.new(shape: PermissionSetPolicyDocument, location_name: "InlinePolicy"))
     GetInlinePolicyForPermissionSetResponse.struct_class = Types::GetInlinePolicyForPermissionSetResponse
+
+    GetPermissionsBoundaryForPermissionSetRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
+    GetPermissionsBoundaryForPermissionSetRequest.add_member(:permission_set_arn, Shapes::ShapeRef.new(shape: PermissionSetArn, required: true, location_name: "PermissionSetArn"))
+    GetPermissionsBoundaryForPermissionSetRequest.struct_class = Types::GetPermissionsBoundaryForPermissionSetRequest
+
+    GetPermissionsBoundaryForPermissionSetResponse.add_member(:permissions_boundary, Shapes::ShapeRef.new(shape: PermissionsBoundary, location_name: "PermissionsBoundary"))
+    GetPermissionsBoundaryForPermissionSetResponse.struct_class = Types::GetPermissionsBoundaryForPermissionSetResponse
 
     InstanceAccessControlAttributeConfiguration.add_member(:access_control_attributes, Shapes::ShapeRef.new(shape: AccessControlAttributeList, required: true, location_name: "AccessControlAttributes"))
     InstanceAccessControlAttributeConfiguration.struct_class = Types::InstanceAccessControlAttributeConfiguration
@@ -362,6 +412,16 @@ module Aws::SSOAdmin
     ListAccountsForProvisionedPermissionSetResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListAccountsForProvisionedPermissionSetResponse.struct_class = Types::ListAccountsForProvisionedPermissionSetResponse
 
+    ListCustomerManagedPolicyReferencesInPermissionSetRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
+    ListCustomerManagedPolicyReferencesInPermissionSetRequest.add_member(:permission_set_arn, Shapes::ShapeRef.new(shape: PermissionSetArn, required: true, location_name: "PermissionSetArn"))
+    ListCustomerManagedPolicyReferencesInPermissionSetRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListCustomerManagedPolicyReferencesInPermissionSetRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListCustomerManagedPolicyReferencesInPermissionSetRequest.struct_class = Types::ListCustomerManagedPolicyReferencesInPermissionSetRequest
+
+    ListCustomerManagedPolicyReferencesInPermissionSetResponse.add_member(:customer_managed_policy_references, Shapes::ShapeRef.new(shape: CustomerManagedPolicyReferenceList, location_name: "CustomerManagedPolicyReferences"))
+    ListCustomerManagedPolicyReferencesInPermissionSetResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListCustomerManagedPolicyReferencesInPermissionSetResponse.struct_class = Types::ListCustomerManagedPolicyReferencesInPermissionSetResponse
+
     ListInstancesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListInstancesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListInstancesRequest.struct_class = Types::ListInstancesRequest
@@ -411,7 +471,7 @@ module Aws::SSOAdmin
     ListPermissionSetsResponse.struct_class = Types::ListPermissionSetsResponse
 
     ListTagsForResourceRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
-    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: GeneralArn, required: true, location_name: "ResourceArn"))
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: TaggableResourceArn, required: true, location_name: "ResourceArn"))
     ListTagsForResourceRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
@@ -447,6 +507,10 @@ module Aws::SSOAdmin
     PermissionSetProvisioningStatusMetadata.add_member(:created_date, Shapes::ShapeRef.new(shape: Date, location_name: "CreatedDate"))
     PermissionSetProvisioningStatusMetadata.struct_class = Types::PermissionSetProvisioningStatusMetadata
 
+    PermissionsBoundary.add_member(:customer_managed_policy_reference, Shapes::ShapeRef.new(shape: CustomerManagedPolicyReference, location_name: "CustomerManagedPolicyReference"))
+    PermissionsBoundary.add_member(:managed_policy_arn, Shapes::ShapeRef.new(shape: ManagedPolicyArn, location_name: "ManagedPolicyArn"))
+    PermissionsBoundary.struct_class = Types::PermissionsBoundary
+
     ProvisionPermissionSetRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
     ProvisionPermissionSetRequest.add_member(:permission_set_arn, Shapes::ShapeRef.new(shape: PermissionSetArn, required: true, location_name: "PermissionSetArn"))
     ProvisionPermissionSetRequest.add_member(:target_id, Shapes::ShapeRef.new(shape: TargetId, location_name: "TargetId"))
@@ -463,14 +527,21 @@ module Aws::SSOAdmin
 
     PutInlinePolicyToPermissionSetResponse.struct_class = Types::PutInlinePolicyToPermissionSetResponse
 
+    PutPermissionsBoundaryToPermissionSetRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
+    PutPermissionsBoundaryToPermissionSetRequest.add_member(:permission_set_arn, Shapes::ShapeRef.new(shape: PermissionSetArn, required: true, location_name: "PermissionSetArn"))
+    PutPermissionsBoundaryToPermissionSetRequest.add_member(:permissions_boundary, Shapes::ShapeRef.new(shape: PermissionsBoundary, required: true, location_name: "PermissionsBoundary"))
+    PutPermissionsBoundaryToPermissionSetRequest.struct_class = Types::PutPermissionsBoundaryToPermissionSetRequest
+
+    PutPermissionsBoundaryToPermissionSetResponse.struct_class = Types::PutPermissionsBoundaryToPermissionSetResponse
+
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ResourceNotFoundMessage, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ServiceQuotaExceededMessage, location_name: "Message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
-    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, location_name: "Key"))
-    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
     Tag.struct_class = Types::Tag
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
@@ -478,7 +549,7 @@ module Aws::SSOAdmin
     TagList.member = Shapes::ShapeRef.new(shape: Tag)
 
     TagResourceRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
-    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: GeneralArn, required: true, location_name: "ResourceArn"))
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: TaggableResourceArn, required: true, location_name: "ResourceArn"))
     TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
     TagResourceRequest.struct_class = Types::TagResourceRequest
 
@@ -488,7 +559,7 @@ module Aws::SSOAdmin
     ThrottlingException.struct_class = Types::ThrottlingException
 
     UntagResourceRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
-    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: GeneralArn, required: true, location_name: "ResourceArn"))
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: TaggableResourceArn, required: true, location_name: "ResourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
@@ -531,6 +602,21 @@ module Aws::SSOAdmin
         "targetPrefix" => "SWBExternalService",
         "uid" => "sso-admin-2020-07-20",
       }
+
+      api.add_operation(:attach_customer_managed_policy_reference_to_permission_set, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AttachCustomerManagedPolicyReferenceToPermissionSet"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AttachCustomerManagedPolicyReferenceToPermissionSetRequest)
+        o.output = Shapes::ShapeRef.new(shape: AttachCustomerManagedPolicyReferenceToPermissionSetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
 
       api.add_operation(:attach_managed_policy_to_permission_set, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AttachManagedPolicyToPermissionSet"
@@ -647,6 +733,19 @@ module Aws::SSOAdmin
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:delete_permissions_boundary_from_permission_set, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeletePermissionsBoundaryFromPermissionSet"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeletePermissionsBoundaryFromPermissionSetRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeletePermissionsBoundaryFromPermissionSetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:describe_account_assignment_creation_status, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeAccountAssignmentCreationStatus"
         o.http_method = "POST"
@@ -712,6 +811,20 @@ module Aws::SSOAdmin
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:detach_customer_managed_policy_reference_from_permission_set, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DetachCustomerManagedPolicyReferenceFromPermissionSet"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DetachCustomerManagedPolicyReferenceFromPermissionSetRequest)
+        o.output = Shapes::ShapeRef.new(shape: DetachCustomerManagedPolicyReferenceFromPermissionSetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:detach_managed_policy_from_permission_set, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DetachManagedPolicyFromPermissionSet"
         o.http_method = "POST"
@@ -732,6 +845,19 @@ module Aws::SSOAdmin
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetInlinePolicyForPermissionSetRequest)
         o.output = Shapes::ShapeRef.new(shape: GetInlinePolicyForPermissionSetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:get_permissions_boundary_for_permission_set, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPermissionsBoundaryForPermissionSet"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetPermissionsBoundaryForPermissionSetRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetPermissionsBoundaryForPermissionSetResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -802,6 +928,25 @@ module Aws::SSOAdmin
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListAccountsForProvisionedPermissionSetRequest)
         o.output = Shapes::ShapeRef.new(shape: ListAccountsForProvisionedPermissionSetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_customer_managed_policy_references_in_permission_set, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCustomerManagedPolicyReferencesInPermissionSet"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListCustomerManagedPolicyReferencesInPermissionSetRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListCustomerManagedPolicyReferencesInPermissionSetResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -950,6 +1095,20 @@ module Aws::SSOAdmin
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:put_permissions_boundary_to_permission_set, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutPermissionsBoundaryToPermissionSet"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutPermissionsBoundaryToPermissionSetRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutPermissionsBoundaryToPermissionSetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)

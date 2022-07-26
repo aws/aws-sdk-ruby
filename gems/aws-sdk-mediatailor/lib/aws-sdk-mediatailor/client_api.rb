@@ -31,6 +31,8 @@ module Aws::MediaTailor
     ConfigureLogsForPlaybackConfigurationResponse = Shapes::StructureShape.new(name: 'ConfigureLogsForPlaybackConfigurationResponse')
     CreateChannelRequest = Shapes::StructureShape.new(name: 'CreateChannelRequest')
     CreateChannelResponse = Shapes::StructureShape.new(name: 'CreateChannelResponse')
+    CreateLiveSourceRequest = Shapes::StructureShape.new(name: 'CreateLiveSourceRequest')
+    CreateLiveSourceResponse = Shapes::StructureShape.new(name: 'CreateLiveSourceResponse')
     CreatePrefetchScheduleRequest = Shapes::StructureShape.new(name: 'CreatePrefetchScheduleRequest')
     CreatePrefetchScheduleResponse = Shapes::StructureShape.new(name: 'CreatePrefetchScheduleResponse')
     CreateProgramRequest = Shapes::StructureShape.new(name: 'CreateProgramRequest')
@@ -47,6 +49,8 @@ module Aws::MediaTailor
     DeleteChannelPolicyResponse = Shapes::StructureShape.new(name: 'DeleteChannelPolicyResponse')
     DeleteChannelRequest = Shapes::StructureShape.new(name: 'DeleteChannelRequest')
     DeleteChannelResponse = Shapes::StructureShape.new(name: 'DeleteChannelResponse')
+    DeleteLiveSourceRequest = Shapes::StructureShape.new(name: 'DeleteLiveSourceRequest')
+    DeleteLiveSourceResponse = Shapes::StructureShape.new(name: 'DeleteLiveSourceResponse')
     DeletePlaybackConfigurationRequest = Shapes::StructureShape.new(name: 'DeletePlaybackConfigurationRequest')
     DeletePlaybackConfigurationResponse = Shapes::StructureShape.new(name: 'DeletePlaybackConfigurationResponse')
     DeletePrefetchScheduleRequest = Shapes::StructureShape.new(name: 'DeletePrefetchScheduleRequest')
@@ -59,6 +63,8 @@ module Aws::MediaTailor
     DeleteVodSourceResponse = Shapes::StructureShape.new(name: 'DeleteVodSourceResponse')
     DescribeChannelRequest = Shapes::StructureShape.new(name: 'DescribeChannelRequest')
     DescribeChannelResponse = Shapes::StructureShape.new(name: 'DescribeChannelResponse')
+    DescribeLiveSourceRequest = Shapes::StructureShape.new(name: 'DescribeLiveSourceRequest')
+    DescribeLiveSourceResponse = Shapes::StructureShape.new(name: 'DescribeLiveSourceResponse')
     DescribeProgramRequest = Shapes::StructureShape.new(name: 'DescribeProgramRequest')
     DescribeProgramResponse = Shapes::StructureShape.new(name: 'DescribeProgramResponse')
     DescribeSourceLocationRequest = Shapes::StructureShape.new(name: 'DescribeSourceLocationRequest')
@@ -82,6 +88,8 @@ module Aws::MediaTailor
     ListAlertsResponse = Shapes::StructureShape.new(name: 'ListAlertsResponse')
     ListChannelsRequest = Shapes::StructureShape.new(name: 'ListChannelsRequest')
     ListChannelsResponse = Shapes::StructureShape.new(name: 'ListChannelsResponse')
+    ListLiveSourcesRequest = Shapes::StructureShape.new(name: 'ListLiveSourcesRequest')
+    ListLiveSourcesResponse = Shapes::StructureShape.new(name: 'ListLiveSourcesResponse')
     ListPlaybackConfigurationsRequest = Shapes::StructureShape.new(name: 'ListPlaybackConfigurationsRequest')
     ListPlaybackConfigurationsResponse = Shapes::StructureShape.new(name: 'ListPlaybackConfigurationsResponse')
     ListPrefetchSchedulesRequest = Shapes::StructureShape.new(name: 'ListPrefetchSchedulesRequest')
@@ -93,6 +101,7 @@ module Aws::MediaTailor
     ListVodSourcesRequest = Shapes::StructureShape.new(name: 'ListVodSourcesRequest')
     ListVodSourcesResponse = Shapes::StructureShape.new(name: 'ListVodSourcesResponse')
     LivePreRollConfiguration = Shapes::StructureShape.new(name: 'LivePreRollConfiguration')
+    LiveSource = Shapes::StructureShape.new(name: 'LiveSource')
     LogConfiguration = Shapes::StructureShape.new(name: 'LogConfiguration')
     ManifestProcessingRules = Shapes::StructureShape.new(name: 'ManifestProcessingRules')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
@@ -128,11 +137,14 @@ module Aws::MediaTailor
     StopChannelRequest = Shapes::StructureShape.new(name: 'StopChannelRequest')
     StopChannelResponse = Shapes::StructureShape.new(name: 'StopChannelResponse')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    Tier = Shapes::StringShape.new(name: 'Tier')
     Transition = Shapes::StructureShape.new(name: 'Transition')
     Type = Shapes::StringShape.new(name: 'Type')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UpdateChannelRequest = Shapes::StructureShape.new(name: 'UpdateChannelRequest')
     UpdateChannelResponse = Shapes::StructureShape.new(name: 'UpdateChannelResponse')
+    UpdateLiveSourceRequest = Shapes::StructureShape.new(name: 'UpdateLiveSourceRequest')
+    UpdateLiveSourceResponse = Shapes::StructureShape.new(name: 'UpdateLiveSourceResponse')
     UpdateSourceLocationRequest = Shapes::StructureShape.new(name: 'UpdateSourceLocationRequest')
     UpdateSourceLocationResponse = Shapes::StructureShape.new(name: 'UpdateSourceLocationResponse')
     UpdateVodSourceRequest = Shapes::StructureShape.new(name: 'UpdateVodSourceRequest')
@@ -146,6 +158,7 @@ module Aws::MediaTailor
     __listOfAlert = Shapes::ListShape.new(name: '__listOfAlert')
     __listOfAvailMatchingCriteria = Shapes::ListShape.new(name: '__listOfAvailMatchingCriteria')
     __listOfChannel = Shapes::ListShape.new(name: '__listOfChannel')
+    __listOfLiveSource = Shapes::ListShape.new(name: '__listOfLiveSource')
     __listOfPlaybackConfiguration = Shapes::ListShape.new(name: '__listOfPlaybackConfiguration')
     __listOfPrefetchSchedule = Shapes::ListShape.new(name: '__listOfPrefetchSchedule')
     __listOfScheduleAdBreak = Shapes::ListShape.new(name: '__listOfScheduleAdBreak')
@@ -207,6 +220,7 @@ module Aws::MediaTailor
     Channel.add_member(:outputs, Shapes::ShapeRef.new(shape: ResponseOutputs, required: true, location_name: "Outputs"))
     Channel.add_member(:playback_mode, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "PlaybackMode"))
     Channel.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
+    Channel.add_member(:tier, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Tier"))
     Channel.struct_class = Types::Channel
 
     ConfigurationAliasesRequest.key = Shapes::ShapeRef.new(shape: __string)
@@ -228,6 +242,7 @@ module Aws::MediaTailor
     CreateChannelRequest.add_member(:outputs, Shapes::ShapeRef.new(shape: RequestOutputs, required: true, location_name: "Outputs"))
     CreateChannelRequest.add_member(:playback_mode, Shapes::ShapeRef.new(shape: PlaybackMode, required: true, location_name: "PlaybackMode"))
     CreateChannelRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
+    CreateChannelRequest.add_member(:tier, Shapes::ShapeRef.new(shape: Tier, location_name: "Tier"))
     CreateChannelRequest.struct_class = Types::CreateChannelRequest
 
     CreateChannelResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
@@ -239,7 +254,23 @@ module Aws::MediaTailor
     CreateChannelResponse.add_member(:outputs, Shapes::ShapeRef.new(shape: ResponseOutputs, location_name: "Outputs"))
     CreateChannelResponse.add_member(:playback_mode, Shapes::ShapeRef.new(shape: __string, location_name: "PlaybackMode"))
     CreateChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
+    CreateChannelResponse.add_member(:tier, Shapes::ShapeRef.new(shape: __string, location_name: "Tier"))
     CreateChannelResponse.struct_class = Types::CreateChannelResponse
+
+    CreateLiveSourceRequest.add_member(:http_package_configurations, Shapes::ShapeRef.new(shape: HttpPackageConfigurations, required: true, location_name: "HttpPackageConfigurations"))
+    CreateLiveSourceRequest.add_member(:live_source_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "liveSourceName"))
+    CreateLiveSourceRequest.add_member(:source_location_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "sourceLocationName"))
+    CreateLiveSourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
+    CreateLiveSourceRequest.struct_class = Types::CreateLiveSourceRequest
+
+    CreateLiveSourceResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
+    CreateLiveSourceResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "CreationTime"))
+    CreateLiveSourceResponse.add_member(:http_package_configurations, Shapes::ShapeRef.new(shape: HttpPackageConfigurations, location_name: "HttpPackageConfigurations"))
+    CreateLiveSourceResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "LastModifiedTime"))
+    CreateLiveSourceResponse.add_member(:live_source_name, Shapes::ShapeRef.new(shape: __string, location_name: "LiveSourceName"))
+    CreateLiveSourceResponse.add_member(:source_location_name, Shapes::ShapeRef.new(shape: __string, location_name: "SourceLocationName"))
+    CreateLiveSourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
+    CreateLiveSourceResponse.struct_class = Types::CreateLiveSourceResponse
 
     CreatePrefetchScheduleRequest.add_member(:consumption, Shapes::ShapeRef.new(shape: PrefetchConsumption, required: true, location_name: "Consumption"))
     CreatePrefetchScheduleRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "Name"))
@@ -258,16 +289,18 @@ module Aws::MediaTailor
 
     CreateProgramRequest.add_member(:ad_breaks, Shapes::ShapeRef.new(shape: __listOfAdBreak, location_name: "AdBreaks"))
     CreateProgramRequest.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "channelName"))
+    CreateProgramRequest.add_member(:live_source_name, Shapes::ShapeRef.new(shape: __string, location_name: "LiveSourceName"))
     CreateProgramRequest.add_member(:program_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "programName"))
     CreateProgramRequest.add_member(:schedule_configuration, Shapes::ShapeRef.new(shape: ScheduleConfiguration, required: true, location_name: "ScheduleConfiguration"))
     CreateProgramRequest.add_member(:source_location_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "SourceLocationName"))
-    CreateProgramRequest.add_member(:vod_source_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "VodSourceName"))
+    CreateProgramRequest.add_member(:vod_source_name, Shapes::ShapeRef.new(shape: __string, location_name: "VodSourceName"))
     CreateProgramRequest.struct_class = Types::CreateProgramRequest
 
     CreateProgramResponse.add_member(:ad_breaks, Shapes::ShapeRef.new(shape: __listOfAdBreak, location_name: "AdBreaks"))
     CreateProgramResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
     CreateProgramResponse.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, location_name: "ChannelName"))
     CreateProgramResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "CreationTime"))
+    CreateProgramResponse.add_member(:live_source_name, Shapes::ShapeRef.new(shape: __string, location_name: "LiveSourceName"))
     CreateProgramResponse.add_member(:program_name, Shapes::ShapeRef.new(shape: __string, location_name: "ProgramName"))
     CreateProgramResponse.add_member(:scheduled_start_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "ScheduledStartTime"))
     CreateProgramResponse.add_member(:source_location_name, Shapes::ShapeRef.new(shape: __string, location_name: "SourceLocationName"))
@@ -336,6 +369,12 @@ module Aws::MediaTailor
 
     DeleteChannelResponse.struct_class = Types::DeleteChannelResponse
 
+    DeleteLiveSourceRequest.add_member(:live_source_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "liveSourceName"))
+    DeleteLiveSourceRequest.add_member(:source_location_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "sourceLocationName"))
+    DeleteLiveSourceRequest.struct_class = Types::DeleteLiveSourceRequest
+
+    DeleteLiveSourceResponse.struct_class = Types::DeleteLiveSourceResponse
+
     DeletePlaybackConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "Name"))
     DeletePlaybackConfigurationRequest.struct_class = Types::DeletePlaybackConfigurationRequest
 
@@ -376,7 +415,21 @@ module Aws::MediaTailor
     DescribeChannelResponse.add_member(:outputs, Shapes::ShapeRef.new(shape: ResponseOutputs, location_name: "Outputs"))
     DescribeChannelResponse.add_member(:playback_mode, Shapes::ShapeRef.new(shape: __string, location_name: "PlaybackMode"))
     DescribeChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
+    DescribeChannelResponse.add_member(:tier, Shapes::ShapeRef.new(shape: __string, location_name: "Tier"))
     DescribeChannelResponse.struct_class = Types::DescribeChannelResponse
+
+    DescribeLiveSourceRequest.add_member(:live_source_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "liveSourceName"))
+    DescribeLiveSourceRequest.add_member(:source_location_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "sourceLocationName"))
+    DescribeLiveSourceRequest.struct_class = Types::DescribeLiveSourceRequest
+
+    DescribeLiveSourceResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
+    DescribeLiveSourceResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "CreationTime"))
+    DescribeLiveSourceResponse.add_member(:http_package_configurations, Shapes::ShapeRef.new(shape: HttpPackageConfigurations, location_name: "HttpPackageConfigurations"))
+    DescribeLiveSourceResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "LastModifiedTime"))
+    DescribeLiveSourceResponse.add_member(:live_source_name, Shapes::ShapeRef.new(shape: __string, location_name: "LiveSourceName"))
+    DescribeLiveSourceResponse.add_member(:source_location_name, Shapes::ShapeRef.new(shape: __string, location_name: "SourceLocationName"))
+    DescribeLiveSourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
+    DescribeLiveSourceResponse.struct_class = Types::DescribeLiveSourceResponse
 
     DescribeProgramRequest.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "channelName"))
     DescribeProgramRequest.add_member(:program_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "programName"))
@@ -386,6 +439,7 @@ module Aws::MediaTailor
     DescribeProgramResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
     DescribeProgramResponse.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, location_name: "ChannelName"))
     DescribeProgramResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "CreationTime"))
+    DescribeProgramResponse.add_member(:live_source_name, Shapes::ShapeRef.new(shape: __string, location_name: "LiveSourceName"))
     DescribeProgramResponse.add_member(:program_name, Shapes::ShapeRef.new(shape: __string, location_name: "ProgramName"))
     DescribeProgramResponse.add_member(:scheduled_start_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "ScheduledStartTime"))
     DescribeProgramResponse.add_member(:source_location_name, Shapes::ShapeRef.new(shape: __string, location_name: "SourceLocationName"))
@@ -504,6 +558,15 @@ module Aws::MediaTailor
     ListChannelsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "NextToken"))
     ListChannelsResponse.struct_class = Types::ListChannelsResponse
 
+    ListLiveSourcesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListLiveSourcesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    ListLiveSourcesRequest.add_member(:source_location_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "sourceLocationName"))
+    ListLiveSourcesRequest.struct_class = Types::ListLiveSourcesRequest
+
+    ListLiveSourcesResponse.add_member(:items, Shapes::ShapeRef.new(shape: __listOfLiveSource, location_name: "Items"))
+    ListLiveSourcesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "NextToken"))
+    ListLiveSourcesResponse.struct_class = Types::ListLiveSourcesResponse
+
     ListPlaybackConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
     ListPlaybackConfigurationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "NextToken"))
     ListPlaybackConfigurationsRequest.struct_class = Types::ListPlaybackConfigurationsRequest
@@ -548,6 +611,15 @@ module Aws::MediaTailor
     LivePreRollConfiguration.add_member(:ad_decision_server_url, Shapes::ShapeRef.new(shape: __string, location_name: "AdDecisionServerUrl"))
     LivePreRollConfiguration.add_member(:max_duration_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "MaxDurationSeconds"))
     LivePreRollConfiguration.struct_class = Types::LivePreRollConfiguration
+
+    LiveSource.add_member(:arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Arn"))
+    LiveSource.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "CreationTime"))
+    LiveSource.add_member(:http_package_configurations, Shapes::ShapeRef.new(shape: HttpPackageConfigurations, required: true, location_name: "HttpPackageConfigurations"))
+    LiveSource.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "LastModifiedTime"))
+    LiveSource.add_member(:live_source_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "LiveSourceName"))
+    LiveSource.add_member(:source_location_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "SourceLocationName"))
+    LiveSource.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
+    LiveSource.struct_class = Types::LiveSource
 
     LogConfiguration.add_member(:percent_enabled, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "PercentEnabled"))
     LogConfiguration.struct_class = Types::LogConfiguration
@@ -667,11 +739,12 @@ module Aws::MediaTailor
     ScheduleEntry.add_member(:approximate_start_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "ApproximateStartTime"))
     ScheduleEntry.add_member(:arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Arn"))
     ScheduleEntry.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ChannelName"))
+    ScheduleEntry.add_member(:live_source_name, Shapes::ShapeRef.new(shape: __string, location_name: "LiveSourceName"))
     ScheduleEntry.add_member(:program_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ProgramName"))
     ScheduleEntry.add_member(:schedule_ad_breaks, Shapes::ShapeRef.new(shape: __listOfScheduleAdBreak, location_name: "ScheduleAdBreaks"))
     ScheduleEntry.add_member(:schedule_entry_type, Shapes::ShapeRef.new(shape: ScheduleEntryType, location_name: "ScheduleEntryType"))
     ScheduleEntry.add_member(:source_location_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "SourceLocationName"))
-    ScheduleEntry.add_member(:vod_source_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "VodSourceName"))
+    ScheduleEntry.add_member(:vod_source_name, Shapes::ShapeRef.new(shape: __string, location_name: "VodSourceName"))
     ScheduleEntry.struct_class = Types::ScheduleEntry
 
     SecretsManagerAccessTokenConfiguration.add_member(:header_name, Shapes::ShapeRef.new(shape: __string, location_name: "HeaderName"))
@@ -718,6 +791,7 @@ module Aws::MediaTailor
     TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, required: true, location_name: "tags"))
     TagResourceRequest.struct_class = Types::TagResourceRequest
 
+    Transition.add_member(:duration_millis, Shapes::ShapeRef.new(shape: __long, location_name: "DurationMillis"))
     Transition.add_member(:relative_position, Shapes::ShapeRef.new(shape: RelativePosition, required: true, location_name: "RelativePosition"))
     Transition.add_member(:relative_program, Shapes::ShapeRef.new(shape: __string, location_name: "RelativeProgram"))
     Transition.add_member(:scheduled_start_time_millis, Shapes::ShapeRef.new(shape: __long, location_name: "ScheduledStartTimeMillis"))
@@ -742,7 +816,22 @@ module Aws::MediaTailor
     UpdateChannelResponse.add_member(:outputs, Shapes::ShapeRef.new(shape: ResponseOutputs, location_name: "Outputs"))
     UpdateChannelResponse.add_member(:playback_mode, Shapes::ShapeRef.new(shape: __string, location_name: "PlaybackMode"))
     UpdateChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
+    UpdateChannelResponse.add_member(:tier, Shapes::ShapeRef.new(shape: __string, location_name: "Tier"))
     UpdateChannelResponse.struct_class = Types::UpdateChannelResponse
+
+    UpdateLiveSourceRequest.add_member(:http_package_configurations, Shapes::ShapeRef.new(shape: HttpPackageConfigurations, required: true, location_name: "HttpPackageConfigurations"))
+    UpdateLiveSourceRequest.add_member(:live_source_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "liveSourceName"))
+    UpdateLiveSourceRequest.add_member(:source_location_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "sourceLocationName"))
+    UpdateLiveSourceRequest.struct_class = Types::UpdateLiveSourceRequest
+
+    UpdateLiveSourceResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
+    UpdateLiveSourceResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "CreationTime"))
+    UpdateLiveSourceResponse.add_member(:http_package_configurations, Shapes::ShapeRef.new(shape: HttpPackageConfigurations, location_name: "HttpPackageConfigurations"))
+    UpdateLiveSourceResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "LastModifiedTime"))
+    UpdateLiveSourceResponse.add_member(:live_source_name, Shapes::ShapeRef.new(shape: __string, location_name: "LiveSourceName"))
+    UpdateLiveSourceResponse.add_member(:source_location_name, Shapes::ShapeRef.new(shape: __string, location_name: "SourceLocationName"))
+    UpdateLiveSourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
+    UpdateLiveSourceResponse.struct_class = Types::UpdateLiveSourceResponse
 
     UpdateSourceLocationRequest.add_member(:access_configuration, Shapes::ShapeRef.new(shape: AccessConfiguration, location_name: "AccessConfiguration"))
     UpdateSourceLocationRequest.add_member(:default_segment_delivery_configuration, Shapes::ShapeRef.new(shape: DefaultSegmentDeliveryConfiguration, location_name: "DefaultSegmentDeliveryConfiguration"))
@@ -792,6 +881,8 @@ module Aws::MediaTailor
     __listOfAvailMatchingCriteria.member = Shapes::ShapeRef.new(shape: AvailMatchingCriteria)
 
     __listOfChannel.member = Shapes::ShapeRef.new(shape: Channel)
+
+    __listOfLiveSource.member = Shapes::ShapeRef.new(shape: LiveSource)
 
     __listOfPlaybackConfiguration.member = Shapes::ShapeRef.new(shape: PlaybackConfiguration)
 
@@ -847,6 +938,14 @@ module Aws::MediaTailor
         o.output = Shapes::ShapeRef.new(shape: CreateChannelResponse)
       end)
 
+      api.add_operation(:create_live_source, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateLiveSource"
+        o.http_method = "POST"
+        o.http_request_uri = "/sourceLocation/{sourceLocationName}/liveSource/{liveSourceName}"
+        o.input = Shapes::ShapeRef.new(shape: CreateLiveSourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateLiveSourceResponse)
+      end)
+
       api.add_operation(:create_prefetch_schedule, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreatePrefetchSchedule"
         o.http_method = "POST"
@@ -895,6 +994,14 @@ module Aws::MediaTailor
         o.output = Shapes::ShapeRef.new(shape: DeleteChannelPolicyResponse)
       end)
 
+      api.add_operation(:delete_live_source, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteLiveSource"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/sourceLocation/{sourceLocationName}/liveSource/{liveSourceName}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteLiveSourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteLiveSourceResponse)
+      end)
+
       api.add_operation(:delete_playback_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeletePlaybackConfiguration"
         o.http_method = "DELETE"
@@ -941,6 +1048,14 @@ module Aws::MediaTailor
         o.http_request_uri = "/channel/{channelName}"
         o.input = Shapes::ShapeRef.new(shape: DescribeChannelRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeChannelResponse)
+      end)
+
+      api.add_operation(:describe_live_source, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeLiveSource"
+        o.http_method = "GET"
+        o.http_request_uri = "/sourceLocation/{sourceLocationName}/liveSource/{liveSourceName}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeLiveSourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeLiveSourceResponse)
       end)
 
       api.add_operation(:describe_program, Seahorse::Model::Operation.new.tap do |o|
@@ -1025,6 +1140,20 @@ module Aws::MediaTailor
         o.http_request_uri = "/channels"
         o.input = Shapes::ShapeRef.new(shape: ListChannelsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListChannelsResponse)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_live_sources, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListLiveSources"
+        o.http_method = "GET"
+        o.http_request_uri = "/sourceLocation/{sourceLocationName}/liveSources"
+        o.input = Shapes::ShapeRef.new(shape: ListLiveSourcesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListLiveSourcesResponse)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1154,6 +1283,14 @@ module Aws::MediaTailor
         o.http_request_uri = "/channel/{channelName}"
         o.input = Shapes::ShapeRef.new(shape: UpdateChannelRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateChannelResponse)
+      end)
+
+      api.add_operation(:update_live_source, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateLiveSource"
+        o.http_method = "PUT"
+        o.http_request_uri = "/sourceLocation/{sourceLocationName}/liveSource/{liveSourceName}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateLiveSourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateLiveSourceResponse)
       end)
 
       api.add_operation(:update_source_location, Seahorse::Model::Operation.new.tap do |o|

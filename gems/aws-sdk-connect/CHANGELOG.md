@@ -1,6 +1,56 @@
 Unreleased Changes
 ------------------
 
+1.74.0 (2022-06-17)
+------------------
+
+* Feature - This release updates these APIs: UpdateInstanceAttribute, DescribeInstanceAttribute and ListInstanceAttributes. You can use it to programmatically enable/disable High volume outbound communications using attribute type HIGH_VOLUME_OUTBOUND on the specified Amazon Connect instance.
+
+1.73.0 (2022-06-06)
+------------------
+
+* Feature - This release adds a new API, GetCurrentUserData, which returns real-time details about users' current activity.
+
+1.72.0 (2022-06-02)
+------------------
+
+* Feature - This release adds the following features: 1) New APIs to manage (create, list, update) task template resources, 2) Updates to startTaskContact API to support task templates, and 3) new TransferContact API to programmatically transfer in-progress tasks via a contact flow.
+
+1.71.0 (2022-04-28)
+------------------
+
+* Feature - This release introduces an API for changing the current agent status of a user in Connect.
+
+1.70.0 (2022-04-25)
+------------------
+
+* Feature - This release adds SearchUsers API which can be used to search for users with a Connect Instance
+
+1.69.0 (2022-04-20)
+------------------
+
+* Feature - This release adds APIs to search, claim, release, list, update, and describe phone numbers. You can also use them to associate and disassociate contact flows to phone numbers.
+
+1.68.0 (2022-04-01)
+------------------
+
+* Feature - This release updates these APIs: UpdateInstanceAttribute, DescribeInstanceAttribute and ListInstanceAttributes. You can use it to programmatically enable/disable multi-party conferencing using attribute type MULTI_PARTY_CONFERENCING on the specified Amazon Connect instance.
+
+1.67.0 (2022-03-11)
+------------------
+
+* Feature - This release adds support for enabling Rich Messaging when starting a new chat session via the StartChatContact API. Rich Messaging enables the following formatting options: bold, italics, hyperlinks, bulleted lists, and numbered lists.
+
+1.66.0 (2022-03-04)
+------------------
+
+* Feature - This release updates the *InstanceStorageConfig APIs so they support a new ResourceType: REAL_TIME_CONTACT_ANALYSIS_SEGMENTS. Use this resource type to enable streaming for real-time contact analysis and to associate the Kinesis stream where real-time contact analysis segments will be published.
+
+1.65.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.64.0 (2022-02-03)
 ------------------
 

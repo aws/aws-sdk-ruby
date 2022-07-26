@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::IoTWireless
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -834,6 +836,77 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
+    # Creates a new network analyzer configuration.
+    #
+    # @option params [required, String] :name
+    #   Name of the network analyzer configuration.
+    #
+    # @option params [Types::TraceContent] :trace_content
+    #   Trace content for your wireless gateway and wireless device resources.
+    #
+    # @option params [Array<String>] :wireless_devices
+    #   Wireless device resources to add to the network analyzer
+    #   configuration. Provide the `WirelessDeviceId` of the resource to add
+    #   in the input array.
+    #
+    # @option params [Array<String>] :wireless_gateways
+    #   Wireless gateway resources to add to the network analyzer
+    #   configuration. Provide the `WirelessGatewayId` of the resource to add
+    #   in the input array.
+    #
+    # @option params [String] :description
+    #   The description of the new resource.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tag to attach to the specified resource. Tags are metadata that
+    #   you can use to manage a resource.
+    #
+    # @option params [String] :client_request_token
+    #   Each resource must have a unique client request token. If you try to
+    #   create a new resource with the same token as a resource that already
+    #   exists, an exception occurs. If you omit this value, AWS SDKs will
+    #   automatically generate a unique client request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateNetworkAnalyzerConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateNetworkAnalyzerConfigurationResponse#arn #arn} => String
+    #   * {Types::CreateNetworkAnalyzerConfigurationResponse#name #name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_network_analyzer_configuration({
+    #     name: "NetworkAnalyzerConfigurationName", # required
+    #     trace_content: {
+    #       wireless_device_frame_info: "ENABLED", # accepts ENABLED, DISABLED
+    #       log_level: "INFO", # accepts INFO, ERROR, DISABLED
+    #     },
+    #     wireless_devices: ["WirelessDeviceId"],
+    #     wireless_gateways: ["WirelessGatewayId"],
+    #     description: "Description",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     client_request_token: "ClientRequestToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.name #=> String
+    #
+    # @overload create_network_analyzer_configuration(params = {})
+    # @param [Hash] params ({})
+    def create_network_analyzer_configuration(params = {}, options = {})
+      req = build_request(:create_network_analyzer_configuration, params)
+      req.send_request(options)
+    end
+
     # Creates a new service profile.
     #
     # @option params [String] :name
@@ -954,6 +1027,7 @@ module Aws::IoTWireless
     #           nwk_s_enc_key: "NwkSEncKey",
     #           app_s_key: "AppSKey",
     #         },
+    #         f_cnt_start: 1,
     #       },
     #       abp_v1_0_x: {
     #         dev_addr: "DevAddr",
@@ -961,11 +1035,17 @@ module Aws::IoTWireless
     #           nwk_s_key: "NwkSKey",
     #           app_s_key: "AppSKey",
     #         },
+    #         f_cnt_start: 1,
     #       },
     #       f_ports: {
     #         fuota: 1,
     #         multicast: 1,
     #         clock_sync: 1,
+    #         positioning: {
+    #           clock_sync: 1,
+    #           stream: 1,
+    #           gnss: 1,
+    #         },
     #       },
     #     },
     #     tags: [
@@ -1240,18 +1320,39 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
-    # The operation to delete queued messages.
+    # Deletes a network analyzer configuration.
+    #
+    # @option params [required, String] :configuration_name
+    #   Name of the network analyzer configuration.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_network_analyzer_configuration({
+    #     configuration_name: "NetworkAnalyzerConfigurationName", # required
+    #   })
+    #
+    # @overload delete_network_analyzer_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_network_analyzer_configuration(params = {}, options = {})
+      req = build_request(:delete_network_analyzer_configuration, params)
+      req.send_request(options)
+    end
+
+    # Remove queued messages from the downlink queue.
     #
     # @option params [required, String] :id
-    #   Id of a given wireless device which messages will be deleted
+    #   The ID of a given wireless device for which downlink messages will be
+    #   deleted.
     #
     # @option params [required, String] :message_id
-    #   if messageID=="*", the queue for a particular wireless deviceId
-    #   will be purged, otherwise, the specific message with messageId will be
-    #   deleted
+    #   If message ID is `"*"`, it cleares the entire downlink queue for a
+    #   given device, specified by the wireless device ID. Otherwise, the
+    #   downlink message with the specified message ID will be deleted.
     #
     # @option params [String] :wireless_device_type
-    #   The wireless device type, it is either Sidewalk or LoRaWAN.
+    #   The wireless device type, which can be either Sidewalk or LoRaWAN.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1617,6 +1718,29 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
+    # Get the event configuration based on resource types.
+    #
+    # @return [Types::GetEventConfigurationByResourceTypesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetEventConfigurationByResourceTypesResponse#device_registration_state #device_registration_state} => Types::DeviceRegistrationStateResourceTypeEventConfiguration
+    #   * {Types::GetEventConfigurationByResourceTypesResponse#proximity #proximity} => Types::ProximityResourceTypeEventConfiguration
+    #   * {Types::GetEventConfigurationByResourceTypesResponse#join #join} => Types::JoinResourceTypeEventConfiguration
+    #   * {Types::GetEventConfigurationByResourceTypesResponse#connection_status #connection_status} => Types::ConnectionStatusResourceTypeEventConfiguration
+    #
+    # @example Response structure
+    #
+    #   resp.device_registration_state.sidewalk.wireless_device_event_topic #=> String, one of "Enabled", "Disabled"
+    #   resp.proximity.sidewalk.wireless_device_event_topic #=> String, one of "Enabled", "Disabled"
+    #   resp.join.lo_ra_wan.wireless_device_event_topic #=> String, one of "Enabled", "Disabled"
+    #   resp.connection_status.lo_ra_wan.wireless_gateway_event_topic #=> String, one of "Enabled", "Disabled"
+    #
+    # @overload get_event_configuration_by_resource_types(params = {})
+    # @param [Hash] params ({})
+    def get_event_configuration_by_resource_types(params = {}, options = {})
+      req = build_request(:get_event_configuration_by_resource_types, params)
+      req.send_request(options)
+    end
+
     # Gets information about a FUOTA task.
     #
     # @option params [required, String] :id
@@ -1763,16 +1887,19 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
-    # Get NetworkAnalyzer configuration.
+    # Get network analyzer configuration.
     #
     # @option params [required, String] :configuration_name
-    #   NetworkAnalyzer configuration name.
+    #   Name of the network analyzer configuration.
     #
     # @return [Types::GetNetworkAnalyzerConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetNetworkAnalyzerConfigurationResponse#trace_content #trace_content} => Types::TraceContent
     #   * {Types::GetNetworkAnalyzerConfigurationResponse#wireless_devices #wireless_devices} => Array&lt;String&gt;
     #   * {Types::GetNetworkAnalyzerConfigurationResponse#wireless_gateways #wireless_gateways} => Array&lt;String&gt;
+    #   * {Types::GetNetworkAnalyzerConfigurationResponse#description #description} => String
+    #   * {Types::GetNetworkAnalyzerConfigurationResponse#arn #arn} => String
+    #   * {Types::GetNetworkAnalyzerConfigurationResponse#name #name} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1788,6 +1915,9 @@ module Aws::IoTWireless
     #   resp.wireless_devices[0] #=> String
     #   resp.wireless_gateways #=> Array
     #   resp.wireless_gateways[0] #=> String
+    #   resp.description #=> String
+    #   resp.arn #=> String
+    #   resp.name #=> String
     #
     # @overload get_network_analyzer_configuration(params = {})
     # @param [Hash] params ({})
@@ -1831,6 +1961,85 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
+    # Get the position information for a given resource.
+    #
+    # @option params [required, String] :resource_identifier
+    #   Resource identifier used to retrieve the position information.
+    #
+    # @option params [required, String] :resource_type
+    #   Resource type of the resource for which position information is
+    #   retrieved.
+    #
+    # @return [Types::GetPositionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPositionResponse#position #position} => Array&lt;Float&gt;
+    #   * {Types::GetPositionResponse#accuracy #accuracy} => Types::Accuracy
+    #   * {Types::GetPositionResponse#solver_type #solver_type} => String
+    #   * {Types::GetPositionResponse#solver_provider #solver_provider} => String
+    #   * {Types::GetPositionResponse#solver_version #solver_version} => String
+    #   * {Types::GetPositionResponse#timestamp #timestamp} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_position({
+    #     resource_identifier: "PositionResourceIdentifier", # required
+    #     resource_type: "WirelessDevice", # required, accepts WirelessDevice, WirelessGateway
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.position #=> Array
+    #   resp.position[0] #=> Float
+    #   resp.accuracy.horizontal_accuracy #=> Float
+    #   resp.accuracy.vertical_accuracy #=> Float
+    #   resp.solver_type #=> String, one of "GNSS"
+    #   resp.solver_provider #=> String, one of "Semtech"
+    #   resp.solver_version #=> String
+    #   resp.timestamp #=> String
+    #
+    # @overload get_position(params = {})
+    # @param [Hash] params ({})
+    def get_position(params = {}, options = {})
+      req = build_request(:get_position, params)
+      req.send_request(options)
+    end
+
+    # Get position configuration for a given resource.
+    #
+    # @option params [required, String] :resource_identifier
+    #   Resource identifier used in a position configuration.
+    #
+    # @option params [required, String] :resource_type
+    #   Resource type of the resource for which position configuration is
+    #   retrieved.
+    #
+    # @return [Types::GetPositionConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPositionConfigurationResponse#solvers #solvers} => Types::PositionSolverDetails
+    #   * {Types::GetPositionConfigurationResponse#destination #destination} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_position_configuration({
+    #     resource_identifier: "PositionResourceIdentifier", # required
+    #     resource_type: "WirelessDevice", # required, accepts WirelessDevice, WirelessGateway
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.solvers.semtech_gnss.provider #=> String, one of "Semtech"
+    #   resp.solvers.semtech_gnss.type #=> String, one of "GNSS"
+    #   resp.solvers.semtech_gnss.status #=> String, one of "Enabled", "Disabled"
+    #   resp.solvers.semtech_gnss.fec #=> String, one of "ROSE", "NONE"
+    #   resp.destination #=> String
+    #
+    # @overload get_position_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_position_configuration(params = {}, options = {})
+      req = build_request(:get_position_configuration, params)
+      req.send_request(options)
+    end
+
     # Get the event configuration for a particular resource identifier.
     #
     # @option params [required, String] :identifier
@@ -1842,25 +2051,33 @@ module Aws::IoTWireless
     #
     # @option params [String] :partner_type
     #   Partner type of the resource if the identifier type is
-    #   PartnerAccountId.
+    #   `PartnerAccountId`.
     #
     # @return [Types::GetResourceEventConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetResourceEventConfigurationResponse#device_registration_state #device_registration_state} => Types::DeviceRegistrationStateEventConfiguration
     #   * {Types::GetResourceEventConfigurationResponse#proximity #proximity} => Types::ProximityEventConfiguration
+    #   * {Types::GetResourceEventConfigurationResponse#join #join} => Types::JoinEventConfiguration
+    #   * {Types::GetResourceEventConfigurationResponse#connection_status #connection_status} => Types::ConnectionStatusEventConfiguration
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_resource_event_configuration({
     #     identifier: "Identifier", # required
-    #     identifier_type: "PartnerAccountId", # required, accepts PartnerAccountId
+    #     identifier_type: "PartnerAccountId", # required, accepts PartnerAccountId, DevEui, GatewayEui, WirelessDeviceId, WirelessGatewayId
     #     partner_type: "Sidewalk", # accepts Sidewalk
     #   })
     #
     # @example Response structure
     #
     #   resp.device_registration_state.sidewalk.amazon_id_event_topic #=> String, one of "Enabled", "Disabled"
+    #   resp.device_registration_state.wireless_device_id_event_topic #=> String, one of "Enabled", "Disabled"
     #   resp.proximity.sidewalk.amazon_id_event_topic #=> String, one of "Enabled", "Disabled"
+    #   resp.proximity.wireless_device_id_event_topic #=> String, one of "Enabled", "Disabled"
+    #   resp.join.lo_ra_wan.dev_eui_event_topic #=> String, one of "Enabled", "Disabled"
+    #   resp.join.wireless_device_id_event_topic #=> String, one of "Enabled", "Disabled"
+    #   resp.connection_status.lo_ra_wan.gateway_eui_event_topic #=> String, one of "Enabled", "Disabled"
+    #   resp.connection_status.wireless_gateway_id_event_topic #=> String, one of "Enabled", "Disabled"
     #
     # @overload get_resource_event_configuration(params = {})
     # @param [Hash] params ({})
@@ -1910,7 +2127,8 @@ module Aws::IoTWireless
     # @option params [String] :service_type
     #   The service type for which to get endpoint information about. Can be
     #   `CUPS` for the Configuration and Update Server endpoint, or `LNS` for
-    #   the LoRaWAN Network Server endpoint.
+    #   the LoRaWAN Network Server endpoint or `CLAIM` for the global
+    #   endpoint.
     #
     # @return [Types::GetServiceEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2039,12 +2257,17 @@ module Aws::IoTWireless
     #   resp.lo_ra_wan.abp_v1_1.session_keys.s_nwk_s_int_key #=> String
     #   resp.lo_ra_wan.abp_v1_1.session_keys.nwk_s_enc_key #=> String
     #   resp.lo_ra_wan.abp_v1_1.session_keys.app_s_key #=> String
+    #   resp.lo_ra_wan.abp_v1_1.f_cnt_start #=> Integer
     #   resp.lo_ra_wan.abp_v1_0_x.dev_addr #=> String
     #   resp.lo_ra_wan.abp_v1_0_x.session_keys.nwk_s_key #=> String
     #   resp.lo_ra_wan.abp_v1_0_x.session_keys.app_s_key #=> String
+    #   resp.lo_ra_wan.abp_v1_0_x.f_cnt_start #=> Integer
     #   resp.lo_ra_wan.f_ports.fuota #=> Integer
     #   resp.lo_ra_wan.f_ports.multicast #=> Integer
     #   resp.lo_ra_wan.f_ports.clock_sync #=> Integer
+    #   resp.lo_ra_wan.f_ports.positioning.clock_sync #=> Integer
+    #   resp.lo_ra_wan.f_ports.positioning.stream #=> Integer
+    #   resp.lo_ra_wan.f_ports.positioning.gnss #=> Integer
     #   resp.sidewalk.amazon_id #=> String
     #   resp.sidewalk.sidewalk_id #=> String
     #   resp.sidewalk.sidewalk_manufacturing_sn #=> String
@@ -2396,6 +2619,56 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
+    # List event configurations where at least one event topic has been
+    # enabled.
+    #
+    # @option params [required, String] :resource_type
+    #   Resource type to filter event configurations.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in this operation.
+    #
+    # @option params [String] :next_token
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
+    #
+    # @return [Types::ListEventConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEventConfigurationsResponse#next_token #next_token} => String
+    #   * {Types::ListEventConfigurationsResponse#event_configurations_list #event_configurations_list} => Array&lt;Types::EventConfigurationItem&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_event_configurations({
+    #     resource_type: "SidewalkAccount", # required, accepts SidewalkAccount, WirelessDevice, WirelessGateway
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.event_configurations_list #=> Array
+    #   resp.event_configurations_list[0].identifier #=> String
+    #   resp.event_configurations_list[0].identifier_type #=> String, one of "PartnerAccountId", "DevEui", "GatewayEui", "WirelessDeviceId", "WirelessGatewayId"
+    #   resp.event_configurations_list[0].partner_type #=> String, one of "Sidewalk"
+    #   resp.event_configurations_list[0].events.device_registration_state.sidewalk.amazon_id_event_topic #=> String, one of "Enabled", "Disabled"
+    #   resp.event_configurations_list[0].events.device_registration_state.wireless_device_id_event_topic #=> String, one of "Enabled", "Disabled"
+    #   resp.event_configurations_list[0].events.proximity.sidewalk.amazon_id_event_topic #=> String, one of "Enabled", "Disabled"
+    #   resp.event_configurations_list[0].events.proximity.wireless_device_id_event_topic #=> String, one of "Enabled", "Disabled"
+    #   resp.event_configurations_list[0].events.join.lo_ra_wan.dev_eui_event_topic #=> String, one of "Enabled", "Disabled"
+    #   resp.event_configurations_list[0].events.join.wireless_device_id_event_topic #=> String, one of "Enabled", "Disabled"
+    #   resp.event_configurations_list[0].events.connection_status.lo_ra_wan.gateway_eui_event_topic #=> String, one of "Enabled", "Disabled"
+    #   resp.event_configurations_list[0].events.connection_status.wireless_gateway_id_event_topic #=> String, one of "Enabled", "Disabled"
+    #
+    # @overload list_event_configurations(params = {})
+    # @param [Hash] params ({})
+    def list_event_configurations(params = {}, options = {})
+      req = build_request(:list_event_configurations, params)
+      req.send_request(options)
+    end
+
     # Lists the FUOTA tasks registered to your AWS account.
     #
     # @option params [String] :next_token
@@ -2515,6 +2788,44 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
+    # Lists the network analyzer configurations.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in this operation.
+    #
+    # @option params [String] :next_token
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
+    #
+    # @return [Types::ListNetworkAnalyzerConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListNetworkAnalyzerConfigurationsResponse#next_token #next_token} => String
+    #   * {Types::ListNetworkAnalyzerConfigurationsResponse#network_analyzer_configuration_list #network_analyzer_configuration_list} => Array&lt;Types::NetworkAnalyzerConfigurations&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_network_analyzer_configurations({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.network_analyzer_configuration_list #=> Array
+    #   resp.network_analyzer_configuration_list[0].arn #=> String
+    #   resp.network_analyzer_configuration_list[0].name #=> String
+    #
+    # @overload list_network_analyzer_configurations(params = {})
+    # @param [Hash] params ({})
+    def list_network_analyzer_configurations(params = {}, options = {})
+      req = build_request(:list_network_analyzer_configurations, params)
+      req.send_request(options)
+    end
+
     # Lists the partner accounts associated with your AWS account.
     #
     # @option params [String] :next_token
@@ -2552,10 +2863,59 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
-    # The operation to list queued messages.
+    # List position configurations for a given resource, such as positioning
+    # solvers.
+    #
+    # @option params [String] :resource_type
+    #   Resource type for which position configurations are listed.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in this operation.
+    #
+    # @option params [String] :next_token
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
+    #
+    # @return [Types::ListPositionConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPositionConfigurationsResponse#position_configuration_list #position_configuration_list} => Array&lt;Types::PositionConfigurationItem&gt;
+    #   * {Types::ListPositionConfigurationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_position_configurations({
+    #     resource_type: "WirelessDevice", # accepts WirelessDevice, WirelessGateway
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.position_configuration_list #=> Array
+    #   resp.position_configuration_list[0].resource_identifier #=> String
+    #   resp.position_configuration_list[0].resource_type #=> String, one of "WirelessDevice", "WirelessGateway"
+    #   resp.position_configuration_list[0].solvers.semtech_gnss.provider #=> String, one of "Semtech"
+    #   resp.position_configuration_list[0].solvers.semtech_gnss.type #=> String, one of "GNSS"
+    #   resp.position_configuration_list[0].solvers.semtech_gnss.status #=> String, one of "Enabled", "Disabled"
+    #   resp.position_configuration_list[0].solvers.semtech_gnss.fec #=> String, one of "ROSE", "NONE"
+    #   resp.position_configuration_list[0].destination #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_position_configurations(params = {})
+    # @param [Hash] params ({})
+    def list_position_configurations(params = {}, options = {})
+      req = build_request(:list_position_configurations, params)
+      req.send_request(options)
+    end
+
+    # List queued messages in the downlink queue.
     #
     # @option params [required, String] :id
-    #   Id of a given wireless device which the downlink packets are targeted
+    #   The ID of a given wireless device which the downlink message packets
+    #   are being sent.
     #
     # @option params [String] :next_token
     #   To retrieve the next set of results, the `nextToken` value from a
@@ -2566,7 +2926,7 @@ module Aws::IoTWireless
     #   The maximum number of results to return in this operation.
     #
     # @option params [String] :wireless_device_type
-    #   The wireless device type, it is either Sidewalk or LoRaWAN.
+    #   The wireless device type, whic can be either Sidewalk or LoRaWAN.
     #
     # @return [Types::ListQueuedMessagesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2844,6 +3204,47 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
+    # Put position configuration for a given resource.
+    #
+    # @option params [required, String] :resource_identifier
+    #   Resource identifier used to update the position configuration.
+    #
+    # @option params [required, String] :resource_type
+    #   Resource type of the resource for which you want to update the
+    #   position configuration.
+    #
+    # @option params [Types::PositionSolverConfigurations] :solvers
+    #   The positioning solvers used to update the position configuration of
+    #   the resource.
+    #
+    # @option params [String] :destination
+    #   The position data destination that describes the AWS IoT rule that
+    #   processes the device's position data for use by AWS IoT Core for
+    #   LoRaWAN.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_position_configuration({
+    #     resource_identifier: "PositionResourceIdentifier", # required
+    #     resource_type: "WirelessDevice", # required, accepts WirelessDevice, WirelessGateway
+    #     solvers: {
+    #       semtech_gnss: {
+    #         status: "Enabled", # required, accepts Enabled, Disabled
+    #         fec: "ROSE", # required, accepts ROSE, NONE
+    #       },
+    #     },
+    #     destination: "DestinationName",
+    #   })
+    #
+    # @overload put_position_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_position_configuration(params = {}, options = {})
+      req = build_request(:put_position_configuration, params)
+      req.send_request(options)
+    end
+
     # Sets the log-level override for a resource-ID and resource-type. This
     # option can be specified for a wireless gateway or a wireless device. A
     # limit of 200 log level override can be set per account.
@@ -2858,7 +3259,9 @@ module Aws::IoTWireless
     #   `WirelessGateway`.
     #
     # @option params [required, String] :log_level
-    #   The log level for a log message.
+    #   The log level for a log message. The log levels can be disabled, or
+    #   set to `ERROR` to display less verbose logs containing only error
+    #   information, or to `INFO` for more detailed logs.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3247,6 +3650,58 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
+    # Update the event configuration based on resource types.
+    #
+    # @option params [Types::DeviceRegistrationStateResourceTypeEventConfiguration] :device_registration_state
+    #   Device registration state resource type event configuration object for
+    #   enabling and disabling wireless gateway topic.
+    #
+    # @option params [Types::ProximityResourceTypeEventConfiguration] :proximity
+    #   Proximity resource type event configuration object for enabling and
+    #   disabling wireless gateway topic.
+    #
+    # @option params [Types::JoinResourceTypeEventConfiguration] :join
+    #   Join resource type event configuration object for enabling and
+    #   disabling wireless device topic.
+    #
+    # @option params [Types::ConnectionStatusResourceTypeEventConfiguration] :connection_status
+    #   Connection status resource type event configuration object for
+    #   enabling and disabling wireless gateway topic.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_event_configuration_by_resource_types({
+    #     device_registration_state: {
+    #       sidewalk: {
+    #         wireless_device_event_topic: "Enabled", # accepts Enabled, Disabled
+    #       },
+    #     },
+    #     proximity: {
+    #       sidewalk: {
+    #         wireless_device_event_topic: "Enabled", # accepts Enabled, Disabled
+    #       },
+    #     },
+    #     join: {
+    #       lo_ra_wan: {
+    #         wireless_device_event_topic: "Enabled", # accepts Enabled, Disabled
+    #       },
+    #     },
+    #     connection_status: {
+    #       lo_ra_wan: {
+    #         wireless_gateway_event_topic: "Enabled", # accepts Enabled, Disabled
+    #       },
+    #     },
+    #   })
+    #
+    # @overload update_event_configuration_by_resource_types(params = {})
+    # @param [Hash] params ({})
+    def update_event_configuration_by_resource_types(params = {}, options = {})
+      req = build_request(:update_event_configuration_by_resource_types, params)
+      req.send_request(options)
+    end
+
     # Updates properties of a FUOTA task.
     #
     # @option params [required, String] :id
@@ -3296,7 +3751,9 @@ module Aws::IoTWireless
     # CloudWatch.
     #
     # @option params [String] :default_log_level
-    #   The log level for a log message.
+    #   The log level for a log message. The log levels can be disabled, or
+    #   set to `ERROR` to display less verbose logs containing only error
+    #   information, or to `INFO` for more detailed logs.
     #
     # @option params [Array<Types::WirelessDeviceLogOption>] :wireless_device_log_options
     #   The list of wireless device log options.
@@ -3378,25 +3835,36 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
-    # Update NetworkAnalyzer configuration.
+    # Update network analyzer configuration.
     #
     # @option params [required, String] :configuration_name
-    #   NetworkAnalyzer configuration name.
+    #   Name of the network analyzer configuration.
     #
     # @option params [Types::TraceContent] :trace_content
-    #   Trace Content for resources.
+    #   Trace content for your wireless gateway and wireless device resources.
     #
     # @option params [Array<String>] :wireless_devices_to_add
-    #   WirelessDevices to add into NetworkAnalyzerConfiguration.
+    #   Wireless device resources to add to the network analyzer
+    #   configuration. Provide the `WirelessDeviceId` of the resource to add
+    #   in the input array.
     #
     # @option params [Array<String>] :wireless_devices_to_remove
-    #   WirelessDevices to remove from NetworkAnalyzerConfiguration.
+    #   Wireless device resources to remove from the network analyzer
+    #   configuration. Provide the `WirelessDeviceId` of the resources to
+    #   remove in the input array.
     #
     # @option params [Array<String>] :wireless_gateways_to_add
-    #   WirelessGateways to add into NetworkAnalyzerConfiguration.
+    #   Wireless gateway resources to add to the network analyzer
+    #   configuration. Provide the `WirelessGatewayId` of the resource to add
+    #   in the input array.
     #
     # @option params [Array<String>] :wireless_gateways_to_remove
-    #   WirelessGateways to remove from NetworkAnalyzerConfiguration.
+    #   Wireless gateway resources to remove from the network analyzer
+    #   configuration. Provide the `WirelessGatewayId` of the resources to
+    #   remove in the input array.
+    #
+    # @option params [String] :description
+    #   The description of the new resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3412,6 +3880,7 @@ module Aws::IoTWireless
     #     wireless_devices_to_remove: ["WirelessDeviceId"],
     #     wireless_gateways_to_add: ["WirelessGatewayId"],
     #     wireless_gateways_to_remove: ["WirelessGatewayId"],
+    #     description: "Description",
     #   })
     #
     # @overload update_network_analyzer_configuration(params = {})
@@ -3451,6 +3920,34 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
+    # Update the position information of a resource.
+    #
+    # @option params [required, String] :resource_identifier
+    #   Resource identifier of the resource for which position is updated.
+    #
+    # @option params [required, String] :resource_type
+    #   Resource type of the resource for which position is updated.
+    #
+    # @option params [required, Array<Float>] :position
+    #   The position information of the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_position({
+    #     resource_identifier: "PositionResourceIdentifier", # required
+    #     resource_type: "WirelessDevice", # required, accepts WirelessDevice, WirelessGateway
+    #     position: [1.0], # required
+    #   })
+    #
+    # @overload update_position(params = {})
+    # @param [Hash] params ({})
+    def update_position(params = {}, options = {})
+      req = build_request(:update_position, params)
+      req.send_request(options)
+    end
+
     # Update the event configuration for a particular resource identifier.
     #
     # @option params [required, String] :identifier
@@ -3462,13 +3959,19 @@ module Aws::IoTWireless
     #
     # @option params [String] :partner_type
     #   Partner type of the resource if the identifier type is
-    #   PartnerAccountId
+    #   `PartnerAccountId`
     #
     # @option params [Types::DeviceRegistrationStateEventConfiguration] :device_registration_state
-    #   Event configuration for the device registration state event
+    #   Event configuration for the device registration state event.
     #
     # @option params [Types::ProximityEventConfiguration] :proximity
-    #   Event configuration for the Proximity event
+    #   Event configuration for the proximity event.
+    #
+    # @option params [Types::JoinEventConfiguration] :join
+    #   Event configuration for the join event.
+    #
+    # @option params [Types::ConnectionStatusEventConfiguration] :connection_status
+    #   Event configuration for the connection status event.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3476,17 +3979,31 @@ module Aws::IoTWireless
     #
     #   resp = client.update_resource_event_configuration({
     #     identifier: "Identifier", # required
-    #     identifier_type: "PartnerAccountId", # required, accepts PartnerAccountId
+    #     identifier_type: "PartnerAccountId", # required, accepts PartnerAccountId, DevEui, GatewayEui, WirelessDeviceId, WirelessGatewayId
     #     partner_type: "Sidewalk", # accepts Sidewalk
     #     device_registration_state: {
     #       sidewalk: {
     #         amazon_id_event_topic: "Enabled", # accepts Enabled, Disabled
     #       },
+    #       wireless_device_id_event_topic: "Enabled", # accepts Enabled, Disabled
     #     },
     #     proximity: {
     #       sidewalk: {
     #         amazon_id_event_topic: "Enabled", # accepts Enabled, Disabled
     #       },
+    #       wireless_device_id_event_topic: "Enabled", # accepts Enabled, Disabled
+    #     },
+    #     join: {
+    #       lo_ra_wan: {
+    #         dev_eui_event_topic: "Enabled", # accepts Enabled, Disabled
+    #       },
+    #       wireless_device_id_event_topic: "Enabled", # accepts Enabled, Disabled
+    #     },
+    #     connection_status: {
+    #       lo_ra_wan: {
+    #         gateway_eui_event_topic: "Enabled", # accepts Enabled, Disabled
+    #       },
+    #       wireless_gateway_id_event_topic: "Enabled", # accepts Enabled, Disabled
     #     },
     #   })
     #
@@ -3526,6 +4043,19 @@ module Aws::IoTWireless
     #     lo_ra_wan: {
     #       device_profile_id: "DeviceProfileId",
     #       service_profile_id: "ServiceProfileId",
+    #       abp_v1_1: {
+    #         f_cnt_start: 1,
+    #       },
+    #       abp_v1_0_x: {
+    #         f_cnt_start: 1,
+    #       },
+    #       f_ports: {
+    #         positioning: {
+    #           clock_sync: 1,
+    #           stream: 1,
+    #           gnss: 1,
+    #         },
+    #       },
     #     },
     #   })
     #
@@ -3588,7 +4118,7 @@ module Aws::IoTWireless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotwireless'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

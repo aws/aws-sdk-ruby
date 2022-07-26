@@ -43,6 +43,7 @@ module Aws::DirectoryService
   # * {DomainControllerLimitExceededException}
   # * {EntityAlreadyExistsException}
   # * {EntityDoesNotExistException}
+  # * {IncompatibleSettingsException}
   # * {InsufficientPermissionsException}
   # * {InvalidCertificateException}
   # * {InvalidClientAuthStatusException}
@@ -60,6 +61,7 @@ module Aws::DirectoryService
   # * {SnapshotLimitExceededException}
   # * {TagLimitExceededException}
   # * {UnsupportedOperationException}
+  # * {UnsupportedSettingsException}
   # * {UserDoesNotExistException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
@@ -373,6 +375,26 @@ module Aws::DirectoryService
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::DirectoryService::Types::EntityDoesNotExistException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def request_id
+        @data[:request_id]
+      end
+    end
+
+    class IncompatibleSettingsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DirectoryService::Types::IncompatibleSettingsException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -713,6 +735,26 @@ module Aws::DirectoryService
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::DirectoryService::Types::UnsupportedOperationException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def request_id
+        @data[:request_id]
+      end
+    end
+
+    class UnsupportedSettingsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DirectoryService::Types::UnsupportedSettingsException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

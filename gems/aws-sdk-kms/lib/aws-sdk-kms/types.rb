@@ -338,9 +338,9 @@ module Aws::KMS
     #
     #       {
     #         custom_key_store_name: "CustomKeyStoreNameType", # required
-    #         cloud_hsm_cluster_id: "CloudHsmClusterIdType", # required
-    #         trust_anchor_certificate: "TrustAnchorCertificateType", # required
-    #         key_store_password: "KeyStorePasswordType", # required
+    #         cloud_hsm_cluster_id: "CloudHsmClusterIdType",
+    #         trust_anchor_certificate: "TrustAnchorCertificateType",
+    #         key_store_password: "KeyStorePasswordType",
     #       }
     #
     # @!attribute [rw] custom_key_store_name
@@ -415,7 +415,7 @@ module Aws::KMS
     #         key_id: "KeyIdType", # required
     #         grantee_principal: "PrincipalIdType", # required
     #         retiring_principal: "PrincipalIdType",
-    #         operations: ["Decrypt"], # required, accepts Decrypt, Encrypt, GenerateDataKey, GenerateDataKeyWithoutPlaintext, ReEncryptFrom, ReEncryptTo, Sign, Verify, GetPublicKey, CreateGrant, RetireGrant, DescribeKey, GenerateDataKeyPair, GenerateDataKeyPairWithoutPlaintext
+    #         operations: ["Decrypt"], # required, accepts Decrypt, Encrypt, GenerateDataKey, GenerateDataKeyWithoutPlaintext, ReEncryptFrom, ReEncryptTo, Sign, Verify, GetPublicKey, CreateGrant, RetireGrant, DescribeKey, GenerateDataKeyPair, GenerateDataKeyPairWithoutPlaintext, GenerateMac, VerifyMac
     #         constraints: {
     #           encryption_context_subset: {
     #             "EncryptionContextKey" => "EncryptionContextValue",
@@ -491,12 +491,13 @@ module Aws::KMS
     # @!attribute [rw] operations
     #   A list of operations that the grant permits.
     #
-    #   The operation must be supported on the KMS key. For example, you
-    #   cannot create a grant for a symmetric KMS key that allows the Sign
-    #   operation, or a grant for an asymmetric KMS key that allows the
-    #   GenerateDataKey operation. If you try, KMS returns a
-    #   `ValidationError` exception. For details, see [Grant operations][1]
-    #   in the *Key Management Service Developer Guide*.
+    #   This list must include only operations that are permitted in a
+    #   grant. Also, the operation must be supported on the KMS key. For
+    #   example, you cannot create a grant for a symmetric encryption KMS
+    #   key that allows the Sign operation, or a grant for an asymmetric KMS
+    #   key that allows the GenerateDataKey operation. If you try, KMS
+    #   returns a `ValidationError` exception. For details, see [Grant
+    #   operations][1] in the *Key Management Service Developer Guide*.
     #
     #
     #
@@ -509,27 +510,39 @@ module Aws::KMS
     #   KMS supports the `EncryptionContextEquals` and
     #   `EncryptionContextSubset` grant constraints. Each constraint value
     #   can include up to 8 encryption context pairs. The encryption context
-    #   value in each constraint cannot exceed 384 characters.
+    #   value in each constraint cannot exceed 384 characters. For
+    #   information about grant constraints, see [Using grant
+    #   constraints][1] in the *Key Management Service Developer Guide*. For
+    #   more information about encryption context, see [Encryption
+    #   context][2] in the <i> <i>Key Management Service Developer Guide</i>
+    #   </i>.
     #
-    #   These grant constraints allow the permissions in the grant only when
-    #   the encryption context in the request matches
+    #   The encryption context grant constraints allow the permissions in
+    #   the grant only when the encryption context in the request matches
     #   (`EncryptionContextEquals`) or includes (`EncryptionContextSubset`)
-    #   the encryption context specified in this structure. For information
-    #   about grant constraints, see [Using grant constraints][1] in the
-    #   *Key Management Service Developer Guide*. For more information about
-    #   encryption context, see [Encryption Context][2] in the <i> <i>Key
-    #   Management Service Developer Guide</i> </i>.
+    #   the encryption context specified in this structure.
     #
     #   The encryption context grant constraints are supported only on
-    #   operations that include an encryption context. You cannot use an
-    #   encryption context grant constraint for cryptographic operations
-    #   with asymmetric KMS keys or for management operations, such as
-    #   DescribeKey or RetireGrant.
+    #   [grant operations][3] that include an `EncryptionContext` parameter,
+    #   such as cryptographic operations on symmetric encryption KMS keys.
+    #   Grants with grant constraints can include the DescribeKey and
+    #   RetireGrant operations, but the constraint doesn't apply to these
+    #   operations. If a grant with a grant constraint includes the
+    #   `CreateGrant` operation, the constraint requires that any grants
+    #   created with the `CreateGrant` permission have an equally strict or
+    #   stricter encryption context constraint.
+    #
+    #   You cannot use an encryption context grant constraint for
+    #   cryptographic operations with asymmetric KMS keys or HMAC KMS keys.
+    #   These keys don't support an encryption context.
+    #
+    #
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/create-grant-overview.html#grant-constraints
     #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
+    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#terms-grant-operations
     #   @return [Types::GrantConstraints]
     #
     # @!attribute [rw] grant_tokens
@@ -613,9 +626,9 @@ module Aws::KMS
     #       {
     #         policy: "PolicyType",
     #         description: "DescriptionType",
-    #         key_usage: "SIGN_VERIFY", # accepts SIGN_VERIFY, ENCRYPT_DECRYPT
-    #         customer_master_key_spec: "RSA_2048", # accepts RSA_2048, RSA_3072, RSA_4096, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, SYMMETRIC_DEFAULT
-    #         key_spec: "RSA_2048", # accepts RSA_2048, RSA_3072, RSA_4096, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, SYMMETRIC_DEFAULT
+    #         key_usage: "SIGN_VERIFY", # accepts SIGN_VERIFY, ENCRYPT_DECRYPT, GENERATE_VERIFY_MAC
+    #         customer_master_key_spec: "RSA_2048", # accepts RSA_2048, RSA_3072, RSA_4096, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, SYMMETRIC_DEFAULT, HMAC_224, HMAC_256, HMAC_384, HMAC_512, SM2
+    #         key_spec: "RSA_2048", # accepts RSA_2048, RSA_3072, RSA_4096, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, SYMMETRIC_DEFAULT, HMAC_224, HMAC_256, HMAC_384, HMAC_512, SM2
     #         origin: "AWS_KMS", # accepts AWS_KMS, EXTERNAL, AWS_CLOUDHSM
     #         custom_key_store_id: "CustomKeyStoreIdType",
     #         bypass_policy_lockout_safety_check: false,
@@ -629,16 +642,19 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] policy
-    #   The key policy to attach to the KMS key.
+    #   The key policy to attach to the KMS key. If you do not specify a key
+    #   policy, KMS attaches a default key policy to the KMS key. For more
+    #   information, see [Default key policy][1] in the *Key Management
+    #   Service Developer Guide*.
     #
     #   If you provide a key policy, it must meet the following criteria:
     #
-    #   * If you don't set `BypassPolicyLockoutSafetyCheck` to true, the
+    #   * If you don't set `BypassPolicyLockoutSafetyCheck` to `True`, the
     #     key policy must allow the principal that is making the `CreateKey`
     #     request to make a subsequent PutKeyPolicy request on the KMS key.
     #     This reduces the risk that the KMS key becomes unmanageable. For
     #     more information, refer to the scenario in the [Default Key
-    #     Policy][1] section of the <i> <i>Key Management Service Developer
+    #     Policy][2] section of the <i> <i>Key Management Service Developer
     #     Guide</i> </i>.
     #
     #   * Each statement in the key policy must contain one or more
@@ -648,25 +664,33 @@ module Aws::KMS
     #     enforce a delay before including the new principal in a key policy
     #     because the new principal might not be immediately visible to KMS.
     #     For more information, see [Changes that I make are not always
-    #     immediately visible][2] in the *Amazon Web Services Identity and
+    #     immediately visible][3] in the *Amazon Web Services Identity and
     #     Access Management User Guide*.
     #
-    #   If you do not provide a key policy, KMS attaches a default key
-    #   policy to the KMS key. For more information, see [Default Key
-    #   Policy][3] in the *Key Management Service Developer Guide*.
+    #   A key policy document can include only the following characters:
     #
-    #   The key policy size quota is 32 kilobytes (32768 bytes).
+    #   * Printable ASCII characters from the space character (`\u0020`)
+    #     through the end of the ASCII character range.
     #
-    #   For help writing and formatting a JSON policy document, see the [IAM
-    #   JSON Policy Reference][4] in the <i> <i>Identity and Access
-    #   Management User Guide</i> </i>.
+    #   * Printable characters in the Basic Latin and Latin-1 Supplement
+    #     character set (through `\u00FF`).
+    #
+    #   * The tab (`\u0009`), line feed (`\u000A`), and carriage return
+    #     (`\u000D`) special characters
+    #
+    #   For information about key policies, see [Key policies in KMS][4] in
+    #   the *Key Management Service Developer Guide*. For help writing and
+    #   formatting a JSON policy document, see the [IAM JSON Policy
+    #   Reference][5] in the <i> <i>Identity and Access Management User
+    #   Guide</i> </i>.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam
-    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency
-    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default
-    #   [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam
+    #   [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency
+    #   [4]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html
+    #   [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -683,19 +707,25 @@ module Aws::KMS
     # @!attribute [rw] key_usage
     #   Determines the [cryptographic operations][1] for which you can use
     #   the KMS key. The default value is `ENCRYPT_DECRYPT`. This parameter
-    #   is required only for asymmetric KMS keys. You can't change the
-    #   `KeyUsage` value after the KMS key is created.
+    #   is optional when you are creating a symmetric encryption KMS key;
+    #   otherwise, it is required. You can't change the `KeyUsage` value
+    #   after the KMS key is created.
     #
     #   Select only one valid value.
     #
-    #   * For symmetric KMS keys, omit the parameter or specify
+    #   * For symmetric encryption KMS keys, omit the parameter or specify
     #     `ENCRYPT_DECRYPT`.
+    #
+    #   * For HMAC KMS keys (symmetric), specify `GENERATE_VERIFY_MAC`.
     #
     #   * For asymmetric KMS keys with RSA key material, specify
     #     `ENCRYPT_DECRYPT` or `SIGN_VERIFY`.
     #
     #   * For asymmetric KMS keys with ECC key material, specify
     #     `SIGN_VERIFY`.
+    #
+    #   * For asymmetric KMS keys with SM2 key material (China Regions
+    #     only), specify `ENCRYPT_DECRYPT` or `SIGN_VERIFY`.
     #
     #
     #
@@ -713,34 +743,44 @@ module Aws::KMS
     #
     # @!attribute [rw] key_spec
     #   Specifies the type of KMS key to create. The default value,
-    #   `SYMMETRIC_DEFAULT`, creates a KMS key with a 256-bit symmetric key
-    #   for encryption and decryption. For help choosing a key spec for your
-    #   KMS key, see [How to Choose Your KMS key Configuration][1] in the
-    #   <i> <i>Key Management Service Developer Guide</i> </i>.
+    #   `SYMMETRIC_DEFAULT`, creates a KMS key with a 256-bit AES-GCM key
+    #   that is used for encryption and decryption, except in China Regions,
+    #   where it creates a 128-bit symmetric key that uses SM4 encryption.
+    #   For help choosing a key spec for your KMS key, see [Choosing a KMS
+    #   key type][1] in the <i> <i>Key Management Service Developer
+    #   Guide</i> </i>.
     #
     #   The `KeySpec` determines whether the KMS key contains a symmetric
-    #   key or an asymmetric key pair. It also determines the encryption
-    #   algorithms or signing algorithms that the KMS key supports. You
-    #   can't change the `KeySpec` after the KMS key is created. To further
-    #   restrict the algorithms that can be used with the KMS key, use a
-    #   condition key in its key policy or IAM policy. For more information,
-    #   see [kms:EncryptionAlgorithm][2] or [kms:Signing Algorithm][3] in
-    #   the <i> <i>Key Management Service Developer Guide</i> </i>.
+    #   key or an asymmetric key pair. It also determines the cryptographic
+    #   algorithms that the KMS key supports. You can't change the
+    #   `KeySpec` after the KMS key is created. To further restrict the
+    #   algorithms that can be used with the KMS key, use a condition key in
+    #   its key policy or IAM policy. For more information, see
+    #   [kms:EncryptionAlgorithm][2], [kms:MacAlgorithm][3] or [kms:Signing
+    #   Algorithm][4] in the <i> <i>Key Management Service Developer
+    #   Guide</i> </i>.
     #
-    #   [Amazon Web Services services that are integrated with KMS][4] use
-    #   symmetric KMS keys to protect your data. These services do not
-    #   support asymmetric KMS keys. For help determining whether a KMS key
-    #   is symmetric or asymmetric, see [Identifying Symmetric and
-    #   Asymmetric KMS keys][5] in the *Key Management Service Developer
-    #   Guide*.
+    #   [Amazon Web Services services that are integrated with KMS][5] use
+    #   symmetric encryption KMS keys to protect your data. These services
+    #   do not support asymmetric KMS keys or HMAC KMS keys.
     #
     #   KMS supports the following key specs for KMS keys:
     #
-    #   * Symmetric key (default)
+    #   * Symmetric encryption key (default)
     #
-    #     * `SYMMETRIC_DEFAULT` (AES-256-GCM)
+    #     * `SYMMETRIC_DEFAULT`
     #
     #     ^
+    #
+    #   * HMAC keys (symmetric)
+    #
+    #     * `HMAC_224`
+    #
+    #     * `HMAC_256`
+    #
+    #     * `HMAC_384`
+    #
+    #     * `HMAC_512`
     #
     #   * Asymmetric RSA key pairs
     #
@@ -765,13 +805,19 @@ module Aws::KMS
     #
     #     ^
     #
+    #   * SM2 key pairs (China Regions only)
+    #
+    #     * `SM2`
+    #
+    #     ^
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/symm-asymm-choose.html
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-types.html#symm-asymm-choose
     #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/policy-conditions.html#conditions-kms-encryption-algorithm
-    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/policy-conditions.html#conditions-kms-signing-algorithm
-    #   [4]: http://aws.amazon.com/kms/features/#AWS_Service_Integration
-    #   [5]: https://docs.aws.amazon.com/kms/latest/developerguide/find-symm-asymm.html
+    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/policy-conditions.html#conditions-kms-mac-algorithm
+    #   [4]: https://docs.aws.amazon.com/kms/latest/developerguide/policy-conditions.html#conditions-kms-signing-algorithm
+    #   [5]: http://aws.amazon.com/kms/features/#AWS_Service_Integration
     #   @return [String]
     #
     # @!attribute [rw] origin
@@ -783,13 +829,13 @@ module Aws::KMS
     #   material), set the value to `EXTERNAL`. For more information about
     #   importing key material into KMS, see [Importing Key Material][1] in
     #   the *Key Management Service Developer Guide*. This value is valid
-    #   only for symmetric KMS keys.
+    #   only for symmetric encryption KMS keys.
     #
     #   To create a KMS key in an KMS [custom key store][2] and create its
     #   key material in the associated CloudHSM cluster, set this value to
     #   `AWS_CLOUDHSM`. You must also use the `CustomKeyStoreId` parameter
     #   to identify the custom key store. This value is valid only for
-    #   symmetric KMS keys.
+    #   symmetric encryption KMS keys.
     #
     #
     #
@@ -805,9 +851,9 @@ module Aws::KMS
     #   associated with the custom key store must have at least two active
     #   HSMs, each in a different Availability Zone in the Region.
     #
-    #   This parameter is valid only for symmetric KMS keys and regional KMS
-    #   keys. You cannot create an asymmetric KMS key or a multi-Region key
-    #   in a custom key store.
+    #   This parameter is valid only for symmetric encryption KMS keys in a
+    #   single Region. You cannot create any other type of KMS key in a
+    #   custom key store.
     #
     #   To find the ID of a custom key store, use the
     #   DescribeCustomKeyStores operation.
@@ -815,7 +861,7 @@ module Aws::KMS
     #   The response includes the custom key store ID and the ID of the
     #   CloudHSM cluster.
     #
-    #   This operation is part of the [Custom Key Store feature][1] feature
+    #   This operation is part of the [custom key store feature][1] feature
     #   in KMS, which combines the convenience and extensive integration of
     #   KMS with the isolation and control of a single-tenant key store.
     #
@@ -853,8 +899,8 @@ module Aws::KMS
     #   TagResource operation.
     #
     #   <note markdown="1"> Tagging or untagging a KMS key can allow or deny permission to the
-    #   KMS key. For details, see [Using ABAC in KMS][1] in the *Key
-    #   Management Service Developer Guide*.
+    #   KMS key. For details, see [ABAC in KMS][1] in the *Key Management
+    #   Service Developer Guide*.
     #
     #    </note>
     #
@@ -895,15 +941,16 @@ module Aws::KMS
     #   to encrypt data in one Amazon Web Services Region and decrypt it in
     #   a different Amazon Web Services Region without re-encrypting the
     #   data or making a cross-Region call. For more information about
-    #   multi-Region keys, see [Using multi-Region keys][1] in the *Key
+    #   multi-Region keys, see [Multi-Region keys in KMS][1] in the *Key
     #   Management Service Developer Guide*.
     #
     #   This value creates a *primary key*, not a replica. To create a
     #   *replica key*, use the ReplicateKey operation.
     #
-    #   You can create a symmetric or asymmetric multi-Region key, and you
-    #   can create a multi-Region key with imported key material. However,
-    #   you cannot create a multi-Region key in a custom key store.
+    #   You can create a multi-Region version of a symmetric encryption KMS
+    #   key, an HMAC KMS key, an asymmetric KMS key, or a KMS key with
+    #   imported key material. However, you cannot create a multi-Region key
+    #   in a custom key store.
     #
     #
     #
@@ -1160,7 +1207,7 @@ module Aws::KMS
     #         },
     #         grant_tokens: ["GrantTokenType"],
     #         key_id: "KeyIdType",
-    #         encryption_algorithm: "SYMMETRIC_DEFAULT", # accepts SYMMETRIC_DEFAULT, RSAES_OAEP_SHA_1, RSAES_OAEP_SHA_256
+    #         encryption_algorithm: "SYMMETRIC_DEFAULT", # accepts SYMMETRIC_DEFAULT, RSAES_OAEP_SHA_1, RSAES_OAEP_SHA_256, SM2PKE
     #       }
     #
     # @!attribute [rw] ciphertext_blob
@@ -1170,17 +1217,20 @@ module Aws::KMS
     # @!attribute [rw] encryption_context
     #   Specifies the encryption context to use when decrypting the data. An
     #   encryption context is valid only for [cryptographic operations][1]
-    #   with a symmetric KMS key. The standard asymmetric encryption
-    #   algorithms that KMS uses do not support an encryption context.
+    #   with a symmetric encryption KMS key. The standard asymmetric
+    #   encryption algorithms and HMAC algorithms that KMS uses do not
+    #   support an encryption context.
     #
     #   An *encryption context* is a collection of non-secret key-value
-    #   pairs that represents additional authenticated data. When you use an
+    #   pairs that represent additional authenticated data. When you use an
     #   encryption context to encrypt data, you must specify the same (an
     #   exact case-sensitive match) encryption context to decrypt the data.
-    #   An encryption context is optional when encrypting with a symmetric
-    #   KMS key, but it is highly recommended.
+    #   An encryption context is supported only on operations with symmetric
+    #   encryption KMS keys. On operations with symmetric encryption KMS
+    #   keys, an encryption context is optional, but it is strongly
+    #   recommended.
     #
-    #   For more information, see [Encryption Context][2] in the *Key
+    #   For more information, see [Encryption context][2] in the *Key
     #   Management Service Developer Guide*.
     #
     #
@@ -1204,15 +1254,18 @@ module Aws::KMS
     #   @return [Array<String>]
     #
     # @!attribute [rw] key_id
-    #   Specifies the KMS key that KMS uses to decrypt the ciphertext. Enter
-    #   a key ID of the KMS key that was used to encrypt the ciphertext.
+    #   Specifies the KMS key that KMS uses to decrypt the ciphertext.
+    #
+    #   Enter a key ID of the KMS key that was used to encrypt the
+    #   ciphertext. If you identify a different KMS key, the `Decrypt`
+    #   operation throws an `IncorrectKeyException`.
     #
     #   This parameter is required only when the ciphertext was encrypted
-    #   under an asymmetric KMS key. If you used a symmetric KMS key, KMS
-    #   can get the KMS key from metadata that it adds to the symmetric
-    #   ciphertext blob. However, it is always recommended as a best
-    #   practice. This practice ensures that you use the KMS key that you
-    #   intend.
+    #   under an asymmetric KMS key. If you used a symmetric encryption KMS
+    #   key, KMS can get the KMS key from metadata that it adds to the
+    #   symmetric ciphertext blob. However, it is always recommended as a
+    #   best practice. This practice ensures that you use the KMS key that
+    #   you intend.
     #
     #   To specify a KMS key, use its key ID, key ARN, alias name, or alias
     #   ARN. When using an alias name, prefix it with `"alias/"`. To specify
@@ -1243,7 +1296,7 @@ module Aws::KMS
     #   This parameter is required only when the ciphertext was encrypted
     #   under an asymmetric KMS key. The default value, `SYMMETRIC_DEFAULT`,
     #   represents the only supported algorithm that is valid for symmetric
-    #   KMS keys.
+    #   encryption KMS keys.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DecryptRequest AWS API Documentation
@@ -1570,9 +1623,10 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] key_id
-    #   Identifies a symmetric KMS key. You cannot enable or disable
-    #   automatic rotation of [asymmetric KMS keys][1], KMS keys with
-    #   [imported key material][2], or KMS keys in a [custom key store][3].
+    #   Identifies a symmetric encryption KMS key. You cannot enable or
+    #   disable automatic rotation of [asymmetric KMS keys][1], [HMAC KMS
+    #   keys][2], KMS keys with [imported key material][3], or KMS keys in a
+    #   [custom key store][4].
     #
     #   Specify the key ID or key ARN of the KMS key.
     #
@@ -1589,8 +1643,9 @@ module Aws::KMS
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html#asymmetric-cmks
-    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
-    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html
+    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
+    #   [4]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DisableKeyRotationRequest AWS API Documentation
@@ -1678,11 +1733,12 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] key_id
-    #   Identifies a symmetric KMS key. You cannot enable automatic rotation
-    #   of [asymmetric KMS keys][1], KMS keys with [imported key
-    #   material][2], or KMS keys in a [custom key store][3]. To enable or
-    #   disable automatic rotation of a set of related [multi-Region
-    #   keys][4], set the property on the primary key.
+    #   Identifies a symmetric encryption KMS key. You cannot enable or
+    #   disable automatic rotation of [asymmetric KMS keys][1], [HMAC KMS
+    #   keys][2], KMS keys with [imported key material][3], or KMS keys in a
+    #   [custom key store][4]. The key rotation status of these KMS keys is
+    #   always `false`. To enable or disable automatic rotation of a set of
+    #   related [multi-Region keys][5], set the property on the primary key.
     #
     #   Specify the key ID or key ARN of the KMS key.
     #
@@ -1698,10 +1754,11 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/symm-asymm-concepts.html#asymmetric-cmks
-    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
-    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
-    #   [4]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html#mrk-replica-key
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html
+    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
+    #   [4]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
+    #   [5]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-manage.html#multi-region-rotate
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/EnableKeyRotationRequest AWS API Documentation
@@ -1722,11 +1779,13 @@ module Aws::KMS
     #           "EncryptionContextKey" => "EncryptionContextValue",
     #         },
     #         grant_tokens: ["GrantTokenType"],
-    #         encryption_algorithm: "SYMMETRIC_DEFAULT", # accepts SYMMETRIC_DEFAULT, RSAES_OAEP_SHA_1, RSAES_OAEP_SHA_256
+    #         encryption_algorithm: "SYMMETRIC_DEFAULT", # accepts SYMMETRIC_DEFAULT, RSAES_OAEP_SHA_1, RSAES_OAEP_SHA_256, SM2PKE
     #       }
     #
     # @!attribute [rw] key_id
-    #   Identifies the KMS key to use in the encryption operation.
+    #   Identifies the KMS key to use in the encryption operation. The KMS
+    #   key must have a `KeyUsage` of `ENCRYPT_DECRYPT`. To find the
+    #   `KeyUsage` of a KMS key, use the DescribeKey operation.
     #
     #   To specify a KMS key, use its key ID, key ARN, alias name, or alias
     #   ARN. When using an alias name, prefix it with `"alias/"`. To specify
@@ -1755,18 +1814,20 @@ module Aws::KMS
     # @!attribute [rw] encryption_context
     #   Specifies the encryption context that will be used to encrypt the
     #   data. An encryption context is valid only for [cryptographic
-    #   operations][1] with a symmetric KMS key. The standard asymmetric
-    #   encryption algorithms that KMS uses do not support an encryption
-    #   context.
+    #   operations][1] with a symmetric encryption KMS key. The standard
+    #   asymmetric encryption algorithms and HMAC algorithms that KMS uses
+    #   do not support an encryption context.
     #
     #   An *encryption context* is a collection of non-secret key-value
-    #   pairs that represents additional authenticated data. When you use an
+    #   pairs that represent additional authenticated data. When you use an
     #   encryption context to encrypt data, you must specify the same (an
     #   exact case-sensitive match) encryption context to decrypt the data.
-    #   An encryption context is optional when encrypting with a symmetric
-    #   KMS key, but it is highly recommended.
+    #   An encryption context is supported only on operations with symmetric
+    #   encryption KMS keys. On operations with symmetric encryption KMS
+    #   keys, an encryption context is optional, but it is strongly
+    #   recommended.
     #
-    #   For more information, see [Encryption Context][2] in the *Key
+    #   For more information, see [Encryption context][2] in the *Key
     #   Management Service Developer Guide*.
     #
     #
@@ -1795,9 +1856,9 @@ module Aws::KMS
     #   that you specify.
     #
     #   This parameter is required only for asymmetric KMS keys. The default
-    #   value, `SYMMETRIC_DEFAULT`, is the algorithm used for symmetric KMS
-    #   keys. If you are using an asymmetric KMS key, we recommend
-    #   RSAES\_OAEP\_SHA\_256.
+    #   value, `SYMMETRIC_DEFAULT`, is the algorithm used for symmetric
+    #   encryption KMS keys. If you are using an asymmetric KMS key, we
+    #   recommend RSAES\_OAEP\_SHA\_256.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/EncryptRequest AWS API Documentation
@@ -1865,7 +1926,7 @@ module Aws::KMS
     #           "EncryptionContextKey" => "EncryptionContextValue",
     #         },
     #         key_id: "KeyIdType", # required
-    #         key_pair_spec: "RSA_2048", # required, accepts RSA_2048, RSA_3072, RSA_4096, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1
+    #         key_pair_spec: "RSA_2048", # required, accepts RSA_2048, RSA_3072, RSA_4096, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, SM2
     #         grant_tokens: ["GrantTokenType"],
     #       }
     #
@@ -1874,13 +1935,15 @@ module Aws::KMS
     #   the private key in the data key pair.
     #
     #   An *encryption context* is a collection of non-secret key-value
-    #   pairs that represents additional authenticated data. When you use an
+    #   pairs that represent additional authenticated data. When you use an
     #   encryption context to encrypt data, you must specify the same (an
     #   exact case-sensitive match) encryption context to decrypt the data.
-    #   An encryption context is optional when encrypting with a symmetric
-    #   KMS key, but it is highly recommended.
+    #   An encryption context is supported only on operations with symmetric
+    #   encryption KMS keys. On operations with symmetric encryption KMS
+    #   keys, an encryption context is optional, but it is strongly
+    #   recommended.
     #
-    #   For more information, see [Encryption Context][1] in the *Key
+    #   For more information, see [Encryption context][1] in the *Key
     #   Management Service Developer Guide*.
     #
     #
@@ -1889,10 +1952,10 @@ module Aws::KMS
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] key_id
-    #   Specifies the symmetric KMS key that encrypts the private key in the
-    #   data key pair. You cannot specify an asymmetric KMS key or a KMS key
-    #   in a custom key store. To get the type and origin of your KMS key,
-    #   use the DescribeKey operation.
+    #   Specifies the symmetric encryption KMS key that encrypts the private
+    #   key in the data key pair. You cannot specify an asymmetric KMS key
+    #   or a KMS key in a custom key store. To get the type and origin of
+    #   your KMS key, use the DescribeKey operation.
     #
     #   To specify a KMS key, use its key ID, key ARN, alias name, or alias
     #   ARN. When using an alias name, prefix it with `"alias/"`. To specify
@@ -1917,10 +1980,12 @@ module Aws::KMS
     # @!attribute [rw] key_pair_spec
     #   Determines the type of data key pair that is generated.
     #
-    #   The KMS rule that restricts the use of asymmetric RSA KMS keys to
-    #   encrypt and decrypt or to sign and verify (but not both), and the
-    #   rule that permits you to use ECC KMS keys only to sign and verify,
-    #   are not effective on data key pairs, which are used outside of KMS.
+    #   The KMS rule that restricts the use of asymmetric RSA and SM2 KMS
+    #   keys to encrypt and decrypt or to sign and verify (but not both),
+    #   and the rule that permits you to use ECC KMS keys only to sign and
+    #   verify, are not effective on data key pairs, which are used outside
+    #   of KMS. The SM2 key spec is only available in China Regions. RSA and
+    #   ECC asymmetric key pairs are also available in China Regions.
     #   @return [String]
     #
     # @!attribute [rw] grant_tokens
@@ -1961,7 +2026,9 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] public_key
-    #   The public key (in plaintext).
+    #   The public key (in plaintext). When you use the HTTP API or the
+    #   Amazon Web Services CLI, the value is Base64-encoded. Otherwise, it
+    #   is not Base64-encoded.
     #   @return [String]
     #
     # @!attribute [rw] key_id
@@ -1997,7 +2064,7 @@ module Aws::KMS
     #           "EncryptionContextKey" => "EncryptionContextValue",
     #         },
     #         key_id: "KeyIdType", # required
-    #         key_pair_spec: "RSA_2048", # required, accepts RSA_2048, RSA_3072, RSA_4096, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1
+    #         key_pair_spec: "RSA_2048", # required, accepts RSA_2048, RSA_3072, RSA_4096, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, SM2
     #         grant_tokens: ["GrantTokenType"],
     #       }
     #
@@ -2006,13 +2073,15 @@ module Aws::KMS
     #   the private key in the data key pair.
     #
     #   An *encryption context* is a collection of non-secret key-value
-    #   pairs that represents additional authenticated data. When you use an
+    #   pairs that represent additional authenticated data. When you use an
     #   encryption context to encrypt data, you must specify the same (an
     #   exact case-sensitive match) encryption context to decrypt the data.
-    #   An encryption context is optional when encrypting with a symmetric
-    #   KMS key, but it is highly recommended.
+    #   An encryption context is supported only on operations with symmetric
+    #   encryption KMS keys. On operations with symmetric encryption KMS
+    #   keys, an encryption context is optional, but it is strongly
+    #   recommended.
     #
-    #   For more information, see [Encryption Context][1] in the *Key
+    #   For more information, see [Encryption context][1] in the *Key
     #   Management Service Developer Guide*.
     #
     #
@@ -2021,10 +2090,10 @@ module Aws::KMS
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] key_id
-    #   Specifies the KMS key that encrypts the private key in the data key
-    #   pair. You must specify a symmetric KMS key. You cannot use an
-    #   asymmetric KMS key or a KMS key in a custom key store. To get the
-    #   type and origin of your KMS key, use the DescribeKey operation.
+    #   Specifies the symmetric encryption KMS key that encrypts the private
+    #   key in the data key pair. You cannot specify an asymmetric KMS key
+    #   or a KMS key in a custom key store. To get the type and origin of
+    #   your KMS key, use the DescribeKey operation.
     #
     #   To specify a KMS key, use its key ID, key ARN, alias name, or alias
     #   ARN. When using an alias name, prefix it with `"alias/"`. To specify
@@ -2049,10 +2118,12 @@ module Aws::KMS
     # @!attribute [rw] key_pair_spec
     #   Determines the type of data key pair that is generated.
     #
-    #   The KMS rule that restricts the use of asymmetric RSA KMS keys to
-    #   encrypt and decrypt or to sign and verify (but not both), and the
-    #   rule that permits you to use ECC KMS keys only to sign and verify,
-    #   are not effective on data key pairs, which are used outside of KMS.
+    #   The KMS rule that restricts the use of asymmetric RSA and SM2 KMS
+    #   keys to encrypt and decrypt or to sign and verify (but not both),
+    #   and the rule that permits you to use ECC KMS keys only to sign and
+    #   verify, are not effective on data key pairs, which are used outside
+    #   of KMS. The SM2 key spec is only available in China Regions. RSA and
+    #   ECC asymmetric key pairs are also available in China Regions.
     #   @return [String]
     #
     # @!attribute [rw] grant_tokens
@@ -2087,7 +2158,9 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] public_key
-    #   The public key (in plaintext).
+    #   The public key (in plaintext). When you use the HTTP API or the
+    #   Amazon Web Services CLI, the value is Base64-encoded. Otherwise, it
+    #   is not Base64-encoded.
     #   @return [String]
     #
     # @!attribute [rw] key_id
@@ -2128,7 +2201,10 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] key_id
-    #   Identifies the symmetric KMS key that encrypts the data key.
+    #   Specifies the symmetric encryption KMS key that encrypts the data
+    #   key. You cannot specify an asymmetric KMS key or a KMS key in a
+    #   custom key store. To get the type and origin of your KMS key, use
+    #   the DescribeKey operation.
     #
     #   To specify a KMS key, use its key ID, key ARN, alias name, or alias
     #   ARN. When using an alias name, prefix it with `"alias/"`. To specify
@@ -2155,13 +2231,15 @@ module Aws::KMS
     #   the data key.
     #
     #   An *encryption context* is a collection of non-secret key-value
-    #   pairs that represents additional authenticated data. When you use an
+    #   pairs that represent additional authenticated data. When you use an
     #   encryption context to encrypt data, you must specify the same (an
     #   exact case-sensitive match) encryption context to decrypt the data.
-    #   An encryption context is optional when encrypting with a symmetric
-    #   KMS key, but it is highly recommended.
+    #   An encryption context is supported only on operations with symmetric
+    #   encryption KMS keys. On operations with symmetric encryption KMS
+    #   keys, an encryption context is optional, but it is strongly
+    #   recommended.
     #
-    #   For more information, see [Encryption Context][1] in the *Key
+    #   For more information, see [Encryption context][1] in the *Key
     #   Management Service Developer Guide*.
     #
     #
@@ -2260,7 +2338,10 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] key_id
-    #   The identifier of the symmetric KMS key that encrypts the data key.
+    #   Specifies the symmetric encryption KMS key that encrypts the data
+    #   key. You cannot specify an asymmetric KMS key or a KMS key in a
+    #   custom key store. To get the type and origin of your KMS key, use
+    #   the DescribeKey operation.
     #
     #   To specify a KMS key, use its key ID, key ARN, alias name, or alias
     #   ARN. When using an alias name, prefix it with `"alias/"`. To specify
@@ -2287,13 +2368,15 @@ module Aws::KMS
     #   the data key.
     #
     #   An *encryption context* is a collection of non-secret key-value
-    #   pairs that represents additional authenticated data. When you use an
+    #   pairs that represent additional authenticated data. When you use an
     #   encryption context to encrypt data, you must specify the same (an
     #   exact case-sensitive match) encryption context to decrypt the data.
-    #   An encryption context is optional when encrypting with a symmetric
-    #   KMS key, but it is highly recommended.
+    #   An encryption context is supported only on operations with symmetric
+    #   encryption KMS keys. On operations with symmetric encryption KMS
+    #   keys, an encryption context is optional, but it is strongly
+    #   recommended.
     #
-    #   For more information, see [Encryption Context][1] in the *Key
+    #   For more information, see [Encryption context][1] in the *Key
     #   Management Service Developer Guide*.
     #
     #
@@ -2363,6 +2446,93 @@ module Aws::KMS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GenerateMacRequest
+    #   data as a hash:
+    #
+    #       {
+    #         message: "data", # required
+    #         key_id: "KeyIdType", # required
+    #         mac_algorithm: "HMAC_SHA_224", # required, accepts HMAC_SHA_224, HMAC_SHA_256, HMAC_SHA_384, HMAC_SHA_512
+    #         grant_tokens: ["GrantTokenType"],
+    #       }
+    #
+    # @!attribute [rw] message
+    #   The message to be hashed. Specify a message of up to 4,096 bytes.
+    #
+    #   `GenerateMac` and VerifyMac do not provide special handling for
+    #   message digests. If you generate an HMAC for a hash digest of a
+    #   message, you must verify the HMAC of the same hash digest.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_id
+    #   The HMAC KMS key to use in the operation. The MAC algorithm computes
+    #   the HMAC for the message and the key as described in [RFC 2104][1].
+    #
+    #   To identify an HMAC KMS key, use the DescribeKey operation and see
+    #   the `KeySpec` field in the response.
+    #
+    #
+    #
+    #   [1]: https://datatracker.ietf.org/doc/html/rfc2104
+    #   @return [String]
+    #
+    # @!attribute [rw] mac_algorithm
+    #   The MAC algorithm used in the operation.
+    #
+    #   The algorithm must be compatible with the HMAC KMS key that you
+    #   specify. To find the MAC algorithms that your HMAC KMS key supports,
+    #   use the DescribeKey operation and see the `MacAlgorithms` field in
+    #   the `DescribeKey` response.
+    #   @return [String]
+    #
+    # @!attribute [rw] grant_tokens
+    #   A list of grant tokens.
+    #
+    #   Use a grant token when your permission to call this operation comes
+    #   from a new grant that has not yet achieved *eventual consistency*.
+    #   For more information, see [Grant token][1] and [Using a grant
+    #   token][2] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateMacRequest AWS API Documentation
+    #
+    class GenerateMacRequest < Struct.new(
+      :message,
+      :key_id,
+      :mac_algorithm,
+      :grant_tokens)
+      SENSITIVE = [:message]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] mac
+    #   The hash-based message authentication code (HMAC) for the given
+    #   message, key, and MAC algorithm.
+    #   @return [String]
+    #
+    # @!attribute [rw] mac_algorithm
+    #   The MAC algorithm that was used to generate the HMAC.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_id
+    #   The HMAC KMS key used in the operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateMacResponse AWS API Documentation
+    #
+    class GenerateMacResponse < Struct.new(
+      :mac,
+      :mac_algorithm,
+      :key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GenerateRandomRequest
     #   data as a hash:
     #
@@ -2372,7 +2542,7 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] number_of_bytes
-    #   The length of the byte string.
+    #   The length of the random byte string. This parameter is required.
     #   @return [Integer]
     #
     # @!attribute [rw] custom_key_store_id
@@ -2513,8 +2683,9 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] key_id
-    #   The identifier of the symmetric KMS key into which you will import
-    #   key material. The `Origin` of the KMS key must be `EXTERNAL`.
+    #   The identifier of the symmetric encryption KMS key into which you
+    #   will import key material. The `Origin` of the KMS key must be
+    #   `EXTERNAL`.
     #
     #   Specify the key ID or key ARN of the KMS key.
     #
@@ -2729,10 +2900,11 @@ module Aws::KMS
     #
     # KMS applies the grant constraints only to cryptographic operations
     # that support an encryption context, that is, all cryptographic
-    # operations with a [symmetric KMS key][3]. Grant constraints are not
-    # applied to operations that do not support an encryption context, such
-    # as cryptographic operations with asymmetric KMS keys and management
-    # operations, such as DescribeKey or RetireGrant.
+    # operations with a [symmetric encryption KMS key][3]. Grant constraints
+    # are not applied to operations that do not support an encryption
+    # context, such as cryptographic operations with HMAC KMS keys or
+    # asymmetric KMS keys, and management operations, such as DescribeKey or
+    # RetireGrant.
     #
     # In a cryptographic operation, the encryption context in the decryption
     # operation must be an exact, case-sensitive match for the keys and
@@ -2880,10 +3052,13 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] key_id
-    #   The identifier of the symmetric KMS key that receives the imported
-    #   key material. The KMS key's `Origin` must be `EXTERNAL`. This must
-    #   be the same KMS key specified in the `KeyID` parameter of the
-    #   corresponding GetParametersForImport request.
+    #   The identifier of the symmetric encryption KMS key that receives the
+    #   imported key material. This must be the same KMS key specified in
+    #   the `KeyID` parameter of the corresponding GetParametersForImport
+    #   request. The `Origin` of the KMS key must be `EXTERNAL`. You cannot
+    #   perform this operation on an asymmetric KMS key, an HMAC KMS key, a
+    #   KMS key in a custom key store, or on a KMS key in a different Amazon
+    #   Web Services account
     #
     #   Specify the key ID or key ARN of the KMS key.
     #
@@ -3095,9 +3270,11 @@ module Aws::KMS
     #   key `(KeySpec`).
     #
     # For encrypting, decrypting, re-encrypting, and generating data keys,
-    # the `KeyUsage` must be `ENCRYPT_DECRYPT`. For signing and verifying,
-    # the `KeyUsage` must be `SIGN_VERIFY`. To find the `KeyUsage` of a KMS
-    # key, use the DescribeKey operation.
+    # the `KeyUsage` must be `ENCRYPT_DECRYPT`. For signing and verifying
+    # messages, the `KeyUsage` must be `SIGN_VERIFY`. For generating and
+    # verifying message authentication codes (MACs), the `KeyUsage` must be
+    # `GENERATE_VERIFY_MAC`. To find the `KeyUsage` of a KMS key, use the
+    # DescribeKey operation.
     #
     # To find the encryption or signing algorithms supported for a
     # particular KMS key, use the DescribeKey operation.
@@ -3141,6 +3318,22 @@ module Aws::KMS
       include Aws::Structure
     end
 
+    # The request was rejected because the HMAC verification failed. HMAC
+    # verification fails when the HMAC computed by using the specified
+    # message, HMAC KMS key, and MAC algorithm does not match the HMAC
+    # specified in the request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/KMSInvalidMacException AWS API Documentation
+    #
+    class KMSInvalidMacException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request was rejected because the signature verification failed.
     # Signature verification fails when it cannot confirm that signature was
     # produced by signing the specified message with the specified KMS key
@@ -3161,8 +3354,8 @@ module Aws::KMS
     # is not valid for this request.
     #
     # For more information about how key state affects the use of a KMS key,
-    # see [Key state: Effect on your KMS key][1] in the <i> <i>Key
-    # Management Service Developer Guide</i> </i>.
+    # see [Key states of KMS keys][1] in the <i> <i>Key Management Service
+    # Developer Guide</i> </i>.
     #
     #
     #
@@ -3247,8 +3440,8 @@ module Aws::KMS
     #   The current status of the KMS key.
     #
     #   For more information about how key state affects the use of a KMS
-    #   key, see [Key state: Effect on your KMS key][1] in the *Key
-    #   Management Service Developer Guide*.
+    #   key, see [Key states of KMS keys][1] in the *Key Management Service
+    #   Developer Guide*.
     #
     #
     #
@@ -3355,9 +3548,8 @@ module Aws::KMS
     #   (`False`) key. This value is `True` for multi-Region primary and
     #   replica keys and `False` for regional KMS keys.
     #
-    #   For more information about multi-Region keys, see [Using
-    #   multi-Region keys][1] in the *Key Management Service Developer
-    #   Guide*.
+    #   For more information about multi-Region keys, see [Multi-Region keys
+    #   in KMS][1] in the *Key Management Service Developer Guide*.
     #
     #
     #
@@ -3402,6 +3594,14 @@ module Aws::KMS
     #   the deletion date appears in the `DeletionDate` field.
     #   @return [Integer]
     #
+    # @!attribute [rw] mac_algorithms
+    #   The message authentication code (MAC) algorithm that the HMAC KMS
+    #   key supports.
+    #
+    #   This value is present only when the `KeyUsage` of the KMS key is
+    #   `GENERATE_VERIFY_MAC`.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/KeyMetadata AWS API Documentation
     #
     class KeyMetadata < Struct.new(
@@ -3426,7 +3626,8 @@ module Aws::KMS
       :signing_algorithms,
       :multi_region,
       :multi_region_configuration,
-      :pending_deletion_window_in_days)
+      :pending_deletion_window_in_days,
+      :mac_algorithms)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3834,8 +4035,8 @@ module Aws::KMS
     #   A list of tags. Each tag consists of a tag key and a tag value.
     #
     #   <note markdown="1"> Tagging or untagging a KMS key can allow or deny permission to the
-    #   KMS key. For details, see [Using ABAC in KMS][1] in the *Key
-    #   Management Service Developer Guide*.
+    #   KMS key. For details, see [ABAC in KMS][1] in the *Key Management
+    #   Service Developer Guide*.
     #
     #    </note>
     #
@@ -4054,15 +4255,29 @@ module Aws::KMS
     #     immediately visible][2] in the *Amazon Web Services Identity and
     #     Access Management User Guide*.
     #
-    #   The key policy cannot exceed 32 kilobytes (32768 bytes). For more
-    #   information, see [Resource Quotas][3] in the *Key Management Service
-    #   Developer Guide*.
+    #   A key policy document can include only the following characters:
+    #
+    #   * Printable ASCII characters from the space character (`\u0020`)
+    #     through the end of the ASCII character range.
+    #
+    #   * Printable characters in the Basic Latin and Latin-1 Supplement
+    #     character set (through `\u00FF`).
+    #
+    #   * The tab (`\u0009`), line feed (`\u000A`), and carriage return
+    #     (`\u000D`) special characters
+    #
+    #   For information about key policies, see [Key policies in KMS][3] in
+    #   the *Key Management Service Developer Guide*. For help writing and
+    #   formatting a JSON policy document, see the [IAM JSON Policy
+    #   Reference][4] in the <i> <i>Identity and Access Management User
+    #   Guide</i> </i>.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam
     #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency
-    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/resource-limits.html
+    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html
+    #   [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html
     #   @return [String]
     #
     # @!attribute [rw] bypass_policy_lockout_safety_check
@@ -4111,8 +4326,8 @@ module Aws::KMS
     #         destination_encryption_context: {
     #           "EncryptionContextKey" => "EncryptionContextValue",
     #         },
-    #         source_encryption_algorithm: "SYMMETRIC_DEFAULT", # accepts SYMMETRIC_DEFAULT, RSAES_OAEP_SHA_1, RSAES_OAEP_SHA_256
-    #         destination_encryption_algorithm: "SYMMETRIC_DEFAULT", # accepts SYMMETRIC_DEFAULT, RSAES_OAEP_SHA_1, RSAES_OAEP_SHA_256
+    #         source_encryption_algorithm: "SYMMETRIC_DEFAULT", # accepts SYMMETRIC_DEFAULT, RSAES_OAEP_SHA_1, RSAES_OAEP_SHA_256, SM2PKE
+    #         destination_encryption_algorithm: "SYMMETRIC_DEFAULT", # accepts SYMMETRIC_DEFAULT, RSAES_OAEP_SHA_1, RSAES_OAEP_SHA_256, SM2PKE
     #         grant_tokens: ["GrantTokenType"],
     #       }
     #
@@ -4126,13 +4341,15 @@ module Aws::KMS
     #   ciphertext.
     #
     #   An *encryption context* is a collection of non-secret key-value
-    #   pairs that represents additional authenticated data. When you use an
+    #   pairs that represent additional authenticated data. When you use an
     #   encryption context to encrypt data, you must specify the same (an
     #   exact case-sensitive match) encryption context to decrypt the data.
-    #   An encryption context is optional when encrypting with a symmetric
-    #   KMS key, but it is highly recommended.
+    #   An encryption context is supported only on operations with symmetric
+    #   encryption KMS keys. On operations with symmetric encryption KMS
+    #   keys, an encryption context is optional, but it is strongly
+    #   recommended.
     #
-    #   For more information, see [Encryption Context][1] in the *Key
+    #   For more information, see [Encryption context][1] in the *Key
     #   Management Service Developer Guide*.
     #
     #
@@ -4142,15 +4359,18 @@ module Aws::KMS
     #
     # @!attribute [rw] source_key_id
     #   Specifies the KMS key that KMS will use to decrypt the ciphertext
-    #   before it is re-encrypted. Enter a key ID of the KMS key that was
-    #   used to encrypt the ciphertext.
+    #   before it is re-encrypted.
+    #
+    #   Enter a key ID of the KMS key that was used to encrypt the
+    #   ciphertext. If you identify a different KMS key, the `ReEncrypt`
+    #   operation throws an `IncorrectKeyException`.
     #
     #   This parameter is required only when the ciphertext was encrypted
-    #   under an asymmetric KMS key. If you used a symmetric KMS key, KMS
-    #   can get the KMS key from metadata that it adds to the symmetric
-    #   ciphertext blob. However, it is always recommended as a best
-    #   practice. This practice ensures that you use the KMS key that you
-    #   intend.
+    #   under an asymmetric KMS key. If you used a symmetric encryption KMS
+    #   key, KMS can get the KMS key from metadata that it adds to the
+    #   symmetric ciphertext blob. However, it is always recommended as a
+    #   best practice. This practice ensures that you use the KMS key that
+    #   you intend.
     #
     #   To specify a KMS key, use its key ID, key ARN, alias name, or alias
     #   ARN. When using an alias name, prefix it with `"alias/"`. To specify
@@ -4174,9 +4394,9 @@ module Aws::KMS
     #
     # @!attribute [rw] destination_key_id
     #   A unique identifier for the KMS key that is used to reencrypt the
-    #   data. Specify a symmetric or asymmetric KMS key with a `KeyUsage`
-    #   value of `ENCRYPT_DECRYPT`. To find the `KeyUsage` value of a KMS
-    #   key, use the DescribeKey operation.
+    #   data. Specify a symmetric encryption KMS key or an asymmetric KMS
+    #   key with a `KeyUsage` value of `ENCRYPT_DECRYPT`. To find the
+    #   `KeyUsage` value of a KMS key, use the DescribeKey operation.
     #
     #   To specify a KMS key, use its key ID, key ARN, alias name, or alias
     #   ARN. When using an alias name, prefix it with `"alias/"`. To specify
@@ -4203,17 +4423,19 @@ module Aws::KMS
     #   data.
     #
     #   A destination encryption context is valid only when the destination
-    #   KMS key is a symmetric KMS key. The standard ciphertext format for
-    #   asymmetric KMS keys does not include fields for metadata.
+    #   KMS key is a symmetric encryption KMS key. The standard ciphertext
+    #   format for asymmetric KMS keys does not include fields for metadata.
     #
     #   An *encryption context* is a collection of non-secret key-value
-    #   pairs that represents additional authenticated data. When you use an
+    #   pairs that represent additional authenticated data. When you use an
     #   encryption context to encrypt data, you must specify the same (an
     #   exact case-sensitive match) encryption context to decrypt the data.
-    #   An encryption context is optional when encrypting with a symmetric
-    #   KMS key, but it is highly recommended.
+    #   An encryption context is supported only on operations with symmetric
+    #   encryption KMS keys. On operations with symmetric encryption KMS
+    #   keys, an encryption context is optional, but it is strongly
+    #   recommended.
     #
-    #   For more information, see [Encryption Context][1] in the *Key
+    #   For more information, see [Encryption context][1] in the *Key
     #   Management Service Developer Guide*.
     #
     #
@@ -4224,8 +4446,8 @@ module Aws::KMS
     # @!attribute [rw] source_encryption_algorithm
     #   Specifies the encryption algorithm that KMS will use to decrypt the
     #   ciphertext before it is reencrypted. The default value,
-    #   `SYMMETRIC_DEFAULT`, represents the algorithm used for symmetric KMS
-    #   keys.
+    #   `SYMMETRIC_DEFAULT`, represents the algorithm used for symmetric
+    #   encryption KMS keys.
     #
     #   Specify the same algorithm that was used to encrypt the ciphertext.
     #   If you specify a different algorithm, the decrypt attempt fails.
@@ -4238,7 +4460,7 @@ module Aws::KMS
     #   Specifies the encryption algorithm that KMS will use to reecrypt the
     #   data after it has decrypted it. The default value,
     #   `SYMMETRIC_DEFAULT`, represents the encryption algorithm used for
-    #   symmetric KMS keys.
+    #   symmetric encryption KMS keys.
     #
     #   This parameter is required only when the destination KMS key is an
     #   asymmetric KMS key.
@@ -4359,24 +4581,33 @@ module Aws::KMS
     #   [KMS service endpoints][1] in the *Amazon Web Services General
     #   Reference*.
     #
+    #   <note markdown="1"> HMAC KMS keys are not supported in all Amazon Web Services Regions.
+    #   If you try to replicate an HMAC KMS key in an Amazon Web Services
+    #   Region in which HMAC keys are not supported, the `ReplicateKey`
+    #   operation returns an `UnsupportedOperationException`. For a list of
+    #   Regions in which HMAC KMS keys are supported, see [HMAC keys in
+    #   KMS][2] in the *Key Management Service Developer Guide*.
+    #
+    #    </note>
+    #
     #   The replica must be in a different Amazon Web Services Region than
     #   its primary key and other replicas of that primary key, but in the
     #   same Amazon Web Services partition. KMS must be available in the
     #   replica Region. If the Region is not enabled by default, the Amazon
-    #   Web Services account must be enabled in the Region.
-    #
-    #   For information about Amazon Web Services partitions, see [Amazon
-    #   Resource Names (ARNs) in the *Amazon Web Services General
-    #   Reference*.][2] For information about enabling and disabling
-    #   Regions, see [Enabling a Region][3] and [Disabling a Region][4] in
-    #   the *Amazon Web Services General Reference*.
+    #   Web Services account must be enabled in the Region. For information
+    #   about Amazon Web Services partitions, see [Amazon Resource Names
+    #   (ARNs)][3] in the *Amazon Web Services General Reference*. For
+    #   information about enabling and disabling Regions, see [Enabling a
+    #   Region][4] and [Disabling a Region][5] in the *Amazon Web Services
+    #   General Reference*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/kms.html#kms_region
-    #   [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
-    #   [3]: https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable
-    #   [4]: https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-disable
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html
+    #   [3]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [4]: https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable
+    #   [5]: https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-disable
     #   @return [String]
     #
     # @!attribute [rw] policy
@@ -4408,13 +4639,30 @@ module Aws::KMS
     #     immediately visible][3] in the <i> <i>Identity and Access
     #     Management User Guide</i> </i>.
     #
-    #   * The key policy size quota is 32 kilobytes (32768 bytes).
+    #   A key policy document can include only the following characters:
+    #
+    #   * Printable ASCII characters from the space character (`\u0020`)
+    #     through the end of the ASCII character range.
+    #
+    #   * Printable characters in the Basic Latin and Latin-1 Supplement
+    #     character set (through `\u00FF`).
+    #
+    #   * The tab (`\u0009`), line feed (`\u000A`), and carriage return
+    #     (`\u000D`) special characters
+    #
+    #   For information about key policies, see [Key policies in KMS][4] in
+    #   the *Key Management Service Developer Guide*. For help writing and
+    #   formatting a JSON policy document, see the [IAM JSON Policy
+    #   Reference][5] in the <i> <i>Identity and Access Management User
+    #   Guide</i> </i>.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default
     #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam
     #   [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency
+    #   [4]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html
+    #   [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html
     #   @return [String]
     #
     # @!attribute [rw] bypass_policy_lockout_safety_check
@@ -4455,8 +4703,8 @@ module Aws::KMS
     #   the TagResource operation.
     #
     #   <note markdown="1"> Tagging or untagging a KMS key can allow or deny permission to the
-    #   KMS key. For details, see [Using ABAC in KMS][1] in the *Key
-    #   Management Service Developer Guide*.
+    #   KMS key. For details, see [ABAC in KMS][1] in the *Key Management
+    #   Service Developer Guide*.
     #
     #    </note>
     #
@@ -4500,9 +4748,9 @@ module Aws::KMS
 
     # @!attribute [rw] replica_key_metadata
     #   Displays details about the new replica key, including its Amazon
-    #   Resource Name ([key ARN][1]) and [key state][2]. It also includes
-    #   the ARN and Amazon Web Services Region of its primary key and other
-    #   replica keys.
+    #   Resource Name ([key ARN][1]) and [Key states of KMS keys][2]. It
+    #   also includes the ARN and Amazon Web Services Region of its primary
+    #   key and other replica keys.
     #
     #
     #
@@ -4652,7 +4900,7 @@ module Aws::KMS
     #   The waiting period, specified in number of days. After the waiting
     #   period ends, KMS deletes the KMS key.
     #
-    #   If the KMS key is a multi-Region primary key with replicas, the
+    #   If the KMS key is a multi-Region primary key with replica keys, the
     #   waiting period begins when the last of its replica keys is deleted.
     #   Otherwise, the waiting period begins immediately.
     #
@@ -4690,8 +4938,8 @@ module Aws::KMS
     #   The current status of the KMS key.
     #
     #   For more information about how key state affects the use of a KMS
-    #   key, see [Key state: Effect on your KMS key][1] in the *Key
-    #   Management Service Developer Guide*.
+    #   key, see [Key states of KMS keys][1] in the *Key Management Service
+    #   Developer Guide*.
     #
     #
     #
@@ -4725,7 +4973,7 @@ module Aws::KMS
     #         message: "data", # required
     #         message_type: "RAW", # accepts RAW, DIGEST
     #         grant_tokens: ["GrantTokenType"],
-    #         signing_algorithm: "RSASSA_PSS_SHA_256", # required, accepts RSASSA_PSS_SHA_256, RSASSA_PSS_SHA_384, RSASSA_PSS_SHA_512, RSASSA_PKCS1_V1_5_SHA_256, RSASSA_PKCS1_V1_5_SHA_384, RSASSA_PKCS1_V1_5_SHA_512, ECDSA_SHA_256, ECDSA_SHA_384, ECDSA_SHA_512
+    #         signing_algorithm: "RSASSA_PSS_SHA_256", # required, accepts RSASSA_PSS_SHA_256, RSASSA_PSS_SHA_384, RSASSA_PSS_SHA_512, RSASSA_PKCS1_V1_5_SHA_256, RSASSA_PKCS1_V1_5_SHA_384, RSASSA_PKCS1_V1_5_SHA_512, ECDSA_SHA_256, ECDSA_SHA_384, ECDSA_SHA_512, SM2DSA
     #       }
     #
     # @!attribute [rw] key_id
@@ -5006,8 +5254,8 @@ module Aws::KMS
     # @!attribute [rw] alias_name
     #   Identifies the alias that is changing its KMS key. This value must
     #   begin with `alias/` followed by the alias name, such as
-    #   `alias/ExampleAlias`. You cannot use UpdateAlias to change the alias
-    #   name.
+    #   `alias/ExampleAlias`. You cannot use `UpdateAlias` to change the
+    #   alias name.
     #   @return [String]
     #
     # @!attribute [rw] target_key_id
@@ -5194,6 +5442,100 @@ module Aws::KMS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass VerifyMacRequest
+    #   data as a hash:
+    #
+    #       {
+    #         message: "data", # required
+    #         key_id: "KeyIdType", # required
+    #         mac_algorithm: "HMAC_SHA_224", # required, accepts HMAC_SHA_224, HMAC_SHA_256, HMAC_SHA_384, HMAC_SHA_512
+    #         mac: "data", # required
+    #         grant_tokens: ["GrantTokenType"],
+    #       }
+    #
+    # @!attribute [rw] message
+    #   The message that will be used in the verification. Enter the same
+    #   message that was used to generate the HMAC.
+    #
+    #   GenerateMac and `VerifyMac` do not provide special handling for
+    #   message digests. If you generated an HMAC for a hash digest of a
+    #   message, you must verify the HMAC for the same hash digest.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_id
+    #   The KMS key that will be used in the verification.
+    #
+    #   Enter a key ID of the KMS key that was used to generate the HMAC. If
+    #   you identify a different KMS key, the `VerifyMac` operation fails.
+    #   @return [String]
+    #
+    # @!attribute [rw] mac_algorithm
+    #   The MAC algorithm that will be used in the verification. Enter the
+    #   same MAC algorithm that was used to compute the HMAC. This algorithm
+    #   must be supported by the HMAC KMS key identified by the `KeyId`
+    #   parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] mac
+    #   The HMAC to verify. Enter the HMAC that was generated by the
+    #   GenerateMac operation when you specified the same message, HMAC KMS
+    #   key, and MAC algorithm as the values specified in this request.
+    #   @return [String]
+    #
+    # @!attribute [rw] grant_tokens
+    #   A list of grant tokens.
+    #
+    #   Use a grant token when your permission to call this operation comes
+    #   from a new grant that has not yet achieved *eventual consistency*.
+    #   For more information, see [Grant token][1] and [Using a grant
+    #   token][2] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/VerifyMacRequest AWS API Documentation
+    #
+    class VerifyMacRequest < Struct.new(
+      :message,
+      :key_id,
+      :mac_algorithm,
+      :mac,
+      :grant_tokens)
+      SENSITIVE = [:message]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] key_id
+    #   The HMAC KMS key used in the verification.
+    #   @return [String]
+    #
+    # @!attribute [rw] mac_valid
+    #   A Boolean value that indicates whether the HMAC was verified. A
+    #   value of `True` indicates that the HMAC (`Mac`) was generated with
+    #   the specified `Message`, HMAC KMS key (`KeyID`) and `MacAlgorithm.`.
+    #
+    #   If the HMAC is not verified, the `VerifyMac` operation fails with a
+    #   `KMSInvalidMacException` exception. This exception indicates that
+    #   one or more of the inputs changed since the HMAC was computed.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] mac_algorithm
+    #   The MAC algorithm used in the verification.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/VerifyMacResponse AWS API Documentation
+    #
+    class VerifyMacResponse < Struct.new(
+      :key_id,
+      :mac_valid,
+      :mac_algorithm)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass VerifyRequest
     #   data as a hash:
     #
@@ -5202,7 +5544,7 @@ module Aws::KMS
     #         message: "data", # required
     #         message_type: "RAW", # accepts RAW, DIGEST
     #         signature: "data", # required
-    #         signing_algorithm: "RSASSA_PSS_SHA_256", # required, accepts RSASSA_PSS_SHA_256, RSASSA_PSS_SHA_384, RSASSA_PSS_SHA_512, RSASSA_PKCS1_V1_5_SHA_256, RSASSA_PKCS1_V1_5_SHA_384, RSASSA_PKCS1_V1_5_SHA_512, ECDSA_SHA_256, ECDSA_SHA_384, ECDSA_SHA_512
+    #         signing_algorithm: "RSASSA_PSS_SHA_256", # required, accepts RSASSA_PSS_SHA_256, RSASSA_PSS_SHA_384, RSASSA_PSS_SHA_512, RSASSA_PKCS1_V1_5_SHA_256, RSASSA_PKCS1_V1_5_SHA_384, RSASSA_PKCS1_V1_5_SHA_512, ECDSA_SHA_256, ECDSA_SHA_384, ECDSA_SHA_512, SM2DSA
     #         grant_tokens: ["GrantTokenType"],
     #       }
     #

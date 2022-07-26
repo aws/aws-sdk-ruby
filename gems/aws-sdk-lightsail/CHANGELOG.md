@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2022-05-26)
+------------------
+
+* Feature - Amazon Lightsail now supports the ability to configure a Lightsail Container Service to pull images from Amazon ECR private repositories in your account.
+
+1.67.0 (2022-05-12)
+------------------
+
+* Feature - This release adds support to include inactive database bundles in the response of the GetRelationalDatabaseBundles request.
+
+1.66.0 (2022-05-04)
+------------------
+
+* Feature - Documentation updates for Lightsail
+
+1.65.0 (2022-04-26)
+------------------
+
+* Feature - This release adds support for Lightsail load balancer HTTP to HTTPS redirect and TLS policy configuration.
+
+1.64.0 (2022-04-15)
+------------------
+
+* Feature - This release adds support to describe the synchronization status of the account-level block public access feature for your Amazon Lightsail buckets.
+
+1.63.0 (2022-02-24)
+------------------
+
+* Feature - This release adds support to delete and create Lightsail default key pairs that you can use with Lightsail instances.
+
 1.62.0 (2022-02-03)
 ------------------
 

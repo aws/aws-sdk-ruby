@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.78.0 (2022-06-22)
+------------------
+
+* Feature - Documentation updates for Amazon API Gateway
+
+1.77.0 (2022-05-25)
+------------------
+
+* Feature - Documentation updates for Amazon API Gateway
+
+1.76.0 (2022-04-07)
+------------------
+
+* Feature - ApiGateway CLI command get-usage now includes usagePlanId, startDate, and endDate fields in the output to match documentation.
+
+1.75.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.74.0 (2022-02-03)
 ------------------
 

@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::EMR
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -400,6 +402,7 @@ module Aws::EMR
     #                   volume_type: "String", # required
     #                   iops: 1,
     #                   size_in_gb: 1, # required
+    #                   throughput: 1,
     #                 },
     #                 volumes_per_instance: 1,
     #               },
@@ -497,6 +500,7 @@ module Aws::EMR
     #                 volume_type: "String", # required
     #                 iops: 1,
     #                 size_in_gb: 1, # required
+    #                 throughput: 1,
     #               },
     #               volumes_per_instance: 1,
     #             },
@@ -604,6 +608,16 @@ module Aws::EMR
     # @option params [required, Array<Types::StepConfig>] :steps
     #   A list of StepConfig to be executed by the job flow.
     #
+    # @option params [String] :execution_role_arn
+    #   The Amazon Resource Name (ARN) of the runtime role for a step on the
+    #   cluster. The runtime role can be a cross-account IAM role. The runtime
+    #   role ARN is a combination of account ID, role name, and role type
+    #   using the following format:
+    #   `arn:partition:service:region:account:resource`.
+    #
+    #   For example, `arn:aws:iam::1234567890:role/ReadOnly` is a correctly
+    #   formatted runtime role ARN.
+    #
     # @return [Types::AddJobFlowStepsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AddJobFlowStepsOutput#step_ids #step_ids} => Array&lt;String&gt;
@@ -629,6 +643,7 @@ module Aws::EMR
     #         },
     #       },
     #     ],
+    #     execution_role_arn: "ArnType",
     #   })
     #
     # @example Response structure
@@ -1143,6 +1158,7 @@ module Aws::EMR
     #   resp.cluster.placement_groups #=> Array
     #   resp.cluster.placement_groups[0].instance_role #=> String, one of "MASTER", "CORE", "TASK"
     #   resp.cluster.placement_groups[0].placement_strategy #=> String, one of "SPREAD", "PARTITION", "CLUSTER", "NONE"
+    #   resp.cluster.os_release_label #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -1350,6 +1366,7 @@ module Aws::EMR
     #   * {Types::DescribeReleaseLabelOutput#release_label #release_label} => String
     #   * {Types::DescribeReleaseLabelOutput#applications #applications} => Array&lt;Types::SimplifiedApplication&gt;
     #   * {Types::DescribeReleaseLabelOutput#next_token #next_token} => String
+    #   * {Types::DescribeReleaseLabelOutput#available_os_releases #available_os_releases} => Array&lt;Types::OSRelease&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1366,6 +1383,8 @@ module Aws::EMR
     #   resp.applications[0].name #=> String
     #   resp.applications[0].version #=> String
     #   resp.next_token #=> String
+    #   resp.available_os_releases #=> Array
+    #   resp.available_os_releases[0].label #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeReleaseLabel AWS API Documentation
     #
@@ -1448,6 +1467,7 @@ module Aws::EMR
     #   resp.step.status.timeline.creation_date_time #=> Time
     #   resp.step.status.timeline.start_date_time #=> Time
     #   resp.step.status.timeline.end_date_time #=> Time
+    #   resp.step.execution_role_arn #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -1832,6 +1852,7 @@ module Aws::EMR
     #   resp.instance_fleets[0].instance_type_specifications[0].ebs_block_devices[0].volume_specification.volume_type #=> String
     #   resp.instance_fleets[0].instance_type_specifications[0].ebs_block_devices[0].volume_specification.iops #=> Integer
     #   resp.instance_fleets[0].instance_type_specifications[0].ebs_block_devices[0].volume_specification.size_in_gb #=> Integer
+    #   resp.instance_fleets[0].instance_type_specifications[0].ebs_block_devices[0].volume_specification.throughput #=> Integer
     #   resp.instance_fleets[0].instance_type_specifications[0].ebs_block_devices[0].device #=> String
     #   resp.instance_fleets[0].instance_type_specifications[0].ebs_optimized #=> Boolean
     #   resp.instance_fleets[0].instance_type_specifications[0].custom_ami_id #=> String
@@ -1910,6 +1931,7 @@ module Aws::EMR
     #   resp.instance_groups[0].ebs_block_devices[0].volume_specification.volume_type #=> String
     #   resp.instance_groups[0].ebs_block_devices[0].volume_specification.iops #=> Integer
     #   resp.instance_groups[0].ebs_block_devices[0].volume_specification.size_in_gb #=> Integer
+    #   resp.instance_groups[0].ebs_block_devices[0].volume_specification.throughput #=> Integer
     #   resp.instance_groups[0].ebs_block_devices[0].device #=> String
     #   resp.instance_groups[0].ebs_optimized #=> Boolean
     #   resp.instance_groups[0].shrink_policy.decommission_timeout #=> Integer
@@ -2482,6 +2504,7 @@ module Aws::EMR
     #             instance_termination_timeout: 1,
     #           },
     #         },
+    #         reconfiguration_type: "OVERWRITE", # accepts OVERWRITE, MERGE
     #         configurations: [
     #           {
     #             classification: "String",
@@ -3137,6 +3160,11 @@ module Aws::EMR
     #
     #   [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-termination.html
     #
+    # @option params [String] :os_release_label
+    #   Specifies a particular Amazon Linux release for all nodes in a cluster
+    #   launch RunJobFlow request. If a release is not specified, Amazon EMR
+    #   uses the latest validated Amazon Linux release for cluster launch.
+    #
     # @return [Types::RunJobFlowOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RunJobFlowOutput#job_flow_id #job_flow_id} => String
@@ -3181,6 +3209,7 @@ module Aws::EMR
     #                   volume_type: "String", # required
     #                   iops: 1,
     #                   size_in_gb: 1, # required
+    #                   throughput: 1,
     #                 },
     #                 volumes_per_instance: 1,
     #               },
@@ -3247,6 +3276,7 @@ module Aws::EMR
     #                       volume_type: "String", # required
     #                       iops: 1,
     #                       size_in_gb: 1, # required
+    #                       throughput: 1,
     #                     },
     #                     volumes_per_instance: 1,
     #                   },
@@ -3396,6 +3426,7 @@ module Aws::EMR
     #     auto_termination_policy: {
     #       idle_timeout: 1,
     #     },
+    #     os_release_label: "XmlStringMaxLen256",
     #   })
     #
     # @example Response structure
@@ -3764,7 +3795,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

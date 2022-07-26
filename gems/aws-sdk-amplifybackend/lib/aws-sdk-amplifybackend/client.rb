@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::AmplifyBackend
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -611,6 +613,16 @@ module Aws::AmplifyBackend
     #         required_sign_up_attributes: ["ADDRESS"], # required, accepts ADDRESS, BIRTHDATE, EMAIL, FAMILY_NAME, GENDER, GIVEN_NAME, LOCALE, MIDDLE_NAME, NAME, NICKNAME, PHONE_NUMBER, PICTURE, PREFERRED_USERNAME, PROFILE, UPDATED_AT, WEBSITE, ZONE_INFO
     #         sign_in_method: "EMAIL", # required, accepts EMAIL, EMAIL_AND_PHONE_NUMBER, PHONE_NUMBER, USERNAME
     #         user_pool_name: "__string", # required
+    #         verification_message: {
+    #           delivery_method: "EMAIL", # required, accepts EMAIL, SMS
+    #           email_settings: {
+    #             email_message: "__string",
+    #             email_subject: "__string",
+    #           },
+    #           sms_settings: {
+    #             sms_message: "__string",
+    #           },
+    #         },
     #       },
     #     },
     #     resource_name: "__string", # required
@@ -1282,6 +1294,10 @@ module Aws::AmplifyBackend
     #   resp.resource_config.user_pool_configs.required_sign_up_attributes[0] #=> String, one of "ADDRESS", "BIRTHDATE", "EMAIL", "FAMILY_NAME", "GENDER", "GIVEN_NAME", "LOCALE", "MIDDLE_NAME", "NAME", "NICKNAME", "PHONE_NUMBER", "PICTURE", "PREFERRED_USERNAME", "PROFILE", "UPDATED_AT", "WEBSITE", "ZONE_INFO"
     #   resp.resource_config.user_pool_configs.sign_in_method #=> String, one of "EMAIL", "EMAIL_AND_PHONE_NUMBER", "PHONE_NUMBER", "USERNAME"
     #   resp.resource_config.user_pool_configs.user_pool_name #=> String
+    #   resp.resource_config.user_pool_configs.verification_message.delivery_method #=> String, one of "EMAIL", "SMS"
+    #   resp.resource_config.user_pool_configs.verification_message.email_settings.email_message #=> String
+    #   resp.resource_config.user_pool_configs.verification_message.email_settings.email_subject #=> String
+    #   resp.resource_config.user_pool_configs.verification_message.sms_settings.sms_message #=> String
     #   resp.resource_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/GetBackendAuth AWS API Documentation
@@ -1832,6 +1848,16 @@ module Aws::AmplifyBackend
     #           additional_constraints: ["REQUIRE_DIGIT"], # accepts REQUIRE_DIGIT, REQUIRE_LOWERCASE, REQUIRE_SYMBOL, REQUIRE_UPPERCASE
     #           minimum_length: 1.0,
     #         },
+    #         verification_message: {
+    #           delivery_method: "EMAIL", # required, accepts EMAIL, SMS
+    #           email_settings: {
+    #             email_message: "__string",
+    #             email_subject: "__string",
+    #           },
+    #           sms_settings: {
+    #             sms_message: "__string",
+    #           },
+    #         },
     #       },
     #     },
     #     resource_name: "__string", # required
@@ -2015,7 +2041,7 @@ module Aws::AmplifyBackend
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-amplifybackend'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

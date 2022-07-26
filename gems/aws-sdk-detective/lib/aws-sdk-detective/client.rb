@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::Detective
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -380,6 +382,85 @@ module Aws::Detective
       req.send_request(options)
     end
 
+    # Gets data source package information for the behavior graph.
+    #
+    # @option params [required, String] :graph_arn
+    #   The ARN of the behavior graph.
+    #
+    # @option params [required, Array<String>] :account_ids
+    #   The list of Amazon Web Services accounts to get data source package
+    #   information on.
+    #
+    # @return [Types::BatchGetGraphMemberDatasourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetGraphMemberDatasourcesResponse#member_datasources #member_datasources} => Array&lt;Types::MembershipDatasources&gt;
+    #   * {Types::BatchGetGraphMemberDatasourcesResponse#unprocessed_accounts #unprocessed_accounts} => Array&lt;Types::UnprocessedAccount&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_graph_member_datasources({
+    #     graph_arn: "GraphArn", # required
+    #     account_ids: ["AccountId"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.member_datasources #=> Array
+    #   resp.member_datasources[0].account_id #=> String
+    #   resp.member_datasources[0].graph_arn #=> String
+    #   resp.member_datasources[0].datasource_package_ingest_history #=> Hash
+    #   resp.member_datasources[0].datasource_package_ingest_history["DatasourcePackage"] #=> Hash
+    #   resp.member_datasources[0].datasource_package_ingest_history["DatasourcePackage"]["DatasourcePackageIngestState"].timestamp #=> Time
+    #   resp.unprocessed_accounts #=> Array
+    #   resp.unprocessed_accounts[0].account_id #=> String
+    #   resp.unprocessed_accounts[0].reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/BatchGetGraphMemberDatasources AWS API Documentation
+    #
+    # @overload batch_get_graph_member_datasources(params = {})
+    # @param [Hash] params ({})
+    def batch_get_graph_member_datasources(params = {}, options = {})
+      req = build_request(:batch_get_graph_member_datasources, params)
+      req.send_request(options)
+    end
+
+    # Gets information on the data source package history for an account.
+    #
+    # @option params [required, Array<String>] :graph_arns
+    #   The ARN of the behavior graph.
+    #
+    # @return [Types::BatchGetMembershipDatasourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetMembershipDatasourcesResponse#membership_datasources #membership_datasources} => Array&lt;Types::MembershipDatasources&gt;
+    #   * {Types::BatchGetMembershipDatasourcesResponse#unprocessed_graphs #unprocessed_graphs} => Array&lt;Types::UnprocessedGraph&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_membership_datasources({
+    #     graph_arns: ["GraphArn"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.membership_datasources #=> Array
+    #   resp.membership_datasources[0].account_id #=> String
+    #   resp.membership_datasources[0].graph_arn #=> String
+    #   resp.membership_datasources[0].datasource_package_ingest_history #=> Hash
+    #   resp.membership_datasources[0].datasource_package_ingest_history["DatasourcePackage"] #=> Hash
+    #   resp.membership_datasources[0].datasource_package_ingest_history["DatasourcePackage"]["DatasourcePackageIngestState"].timestamp #=> Time
+    #   resp.unprocessed_graphs #=> Array
+    #   resp.unprocessed_graphs[0].graph_arn #=> String
+    #   resp.unprocessed_graphs[0].reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/BatchGetMembershipDatasources AWS API Documentation
+    #
+    # @overload batch_get_membership_datasources(params = {})
+    # @param [Hash] params ({})
+    def batch_get_membership_datasources(params = {}, options = {})
+      req = build_request(:batch_get_membership_datasources, params)
+      req.send_request(options)
+    end
+
     # Creates a new behavior graph for the calling account, and sets that
     # account as the administrator account. This operation is called by the
     # account that is enabling Detective.
@@ -527,6 +608,11 @@ module Aws::Detective
     #   resp.members[0].percent_of_graph_utilization #=> Float
     #   resp.members[0].percent_of_graph_utilization_updated_time #=> Time
     #   resp.members[0].invitation_type #=> String, one of "INVITATION", "ORGANIZATION"
+    #   resp.members[0].volume_usage_by_datasource_package #=> Hash
+    #   resp.members[0].volume_usage_by_datasource_package["DatasourcePackage"].volume_usage_in_bytes #=> Integer
+    #   resp.members[0].volume_usage_by_datasource_package["DatasourcePackage"].volume_usage_update_time #=> Time
+    #   resp.members[0].datasource_package_ingest_states #=> Hash
+    #   resp.members[0].datasource_package_ingest_states["DatasourcePackage"] #=> String, one of "STARTED", "STOPPED", "DISABLED"
     #   resp.unprocessed_accounts #=> Array
     #   resp.unprocessed_accounts[0].account_id #=> String
     #   resp.unprocessed_accounts[0].reason #=> String
@@ -656,12 +742,19 @@ module Aws::Detective
       req.send_request(options)
     end
 
-    # Removes the Detective administrator account for the organization in
-    # the current Region. Deletes the behavior graph for that account.
+    # Removes the Detective administrator account in the current Region.
+    # Deletes the organization behavior graph.
     #
-    # Can only be called by the organization management account. Before you
-    # can select a different Detective administrator account, you must
-    # remove the Detective administrator account in all Regions.
+    # Can only be called by the organization management account.
+    #
+    # Removing the Detective administrator account does not affect the
+    # delegated administrator account for Detective in Organizations.
+    #
+    # To remove the delegated administrator account in Organizations, use
+    # the Organizations API. Removing the delegated administrator account
+    # also removes the Detective administrator account in all Regions,
+    # except for Regions where the Detective administrator account is the
+    # organization management account.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -714,10 +807,17 @@ module Aws::Detective
     #
     # Can only be called by the organization management account.
     #
-    # The Detective administrator account for an organization must be the
-    # same in all Regions. If you already designated a Detective
-    # administrator account in another Region, then you must designate the
-    # same account.
+    # If the organization has a delegated administrator account in
+    # Organizations, then the Detective administrator account must be either
+    # the delegated administrator account or the organization management
+    # account.
+    #
+    # If the organization does not have a delegated administrator account in
+    # Organizations, then you can choose any account in the organization. If
+    # you choose an account other than the organization management account,
+    # Detective calls Organizations to make that account the delegated
+    # administrator account for Detective. The organization management
+    # account cannot be the delegated administrator account.
     #
     # @option params [required, String] :account_id
     #   The Amazon Web Services account identifier of the account to designate
@@ -783,6 +883,11 @@ module Aws::Detective
     #   resp.member_details[0].percent_of_graph_utilization #=> Float
     #   resp.member_details[0].percent_of_graph_utilization_updated_time #=> Time
     #   resp.member_details[0].invitation_type #=> String, one of "INVITATION", "ORGANIZATION"
+    #   resp.member_details[0].volume_usage_by_datasource_package #=> Hash
+    #   resp.member_details[0].volume_usage_by_datasource_package["DatasourcePackage"].volume_usage_in_bytes #=> Integer
+    #   resp.member_details[0].volume_usage_by_datasource_package["DatasourcePackage"].volume_usage_update_time #=> Time
+    #   resp.member_details[0].datasource_package_ingest_states #=> Hash
+    #   resp.member_details[0].datasource_package_ingest_states["DatasourcePackage"] #=> String, one of "STARTED", "STOPPED", "DISABLED"
     #   resp.unprocessed_accounts #=> Array
     #   resp.unprocessed_accounts[0].account_id #=> String
     #   resp.unprocessed_accounts[0].reason #=> String
@@ -793,6 +898,51 @@ module Aws::Detective
     # @param [Hash] params ({})
     def get_members(params = {}, options = {})
       req = build_request(:get_members, params)
+      req.send_request(options)
+    end
+
+    # Lists data source packages in the behavior graph.
+    #
+    # @option params [required, String] :graph_arn
+    #   The ARN of the behavior graph.
+    #
+    # @option params [String] :next_token
+    #   For requests to get the next page of results, the pagination token
+    #   that was returned with the previous set of results. The initial
+    #   request does not include a pagination token.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @return [Types::ListDatasourcePackagesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDatasourcePackagesResponse#datasource_packages #datasource_packages} => Hash&lt;String,Types::DatasourcePackageIngestDetail&gt;
+    #   * {Types::ListDatasourcePackagesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_datasource_packages({
+    #     graph_arn: "GraphArn", # required
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.datasource_packages #=> Hash
+    #   resp.datasource_packages["DatasourcePackage"].datasource_package_ingest_state #=> String, one of "STARTED", "STOPPED", "DISABLED"
+    #   resp.datasource_packages["DatasourcePackage"].last_ingest_state_change #=> Hash
+    #   resp.datasource_packages["DatasourcePackage"].last_ingest_state_change["DatasourcePackageIngestState"].timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/ListDatasourcePackages AWS API Documentation
+    #
+    # @overload list_datasource_packages(params = {})
+    # @param [Hash] params ({})
+    def list_datasource_packages(params = {}, options = {})
+      req = build_request(:list_datasource_packages, params)
       req.send_request(options)
     end
 
@@ -897,6 +1047,11 @@ module Aws::Detective
     #   resp.invitations[0].percent_of_graph_utilization #=> Float
     #   resp.invitations[0].percent_of_graph_utilization_updated_time #=> Time
     #   resp.invitations[0].invitation_type #=> String, one of "INVITATION", "ORGANIZATION"
+    #   resp.invitations[0].volume_usage_by_datasource_package #=> Hash
+    #   resp.invitations[0].volume_usage_by_datasource_package["DatasourcePackage"].volume_usage_in_bytes #=> Integer
+    #   resp.invitations[0].volume_usage_by_datasource_package["DatasourcePackage"].volume_usage_update_time #=> Time
+    #   resp.invitations[0].datasource_package_ingest_states #=> Hash
+    #   resp.invitations[0].datasource_package_ingest_states["DatasourcePackage"] #=> String, one of "STARTED", "STOPPED", "DISABLED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/ListInvitations AWS API Documentation
@@ -963,6 +1118,11 @@ module Aws::Detective
     #   resp.member_details[0].percent_of_graph_utilization #=> Float
     #   resp.member_details[0].percent_of_graph_utilization_updated_time #=> Time
     #   resp.member_details[0].invitation_type #=> String, one of "INVITATION", "ORGANIZATION"
+    #   resp.member_details[0].volume_usage_by_datasource_package #=> Hash
+    #   resp.member_details[0].volume_usage_by_datasource_package["DatasourcePackage"].volume_usage_in_bytes #=> Integer
+    #   resp.member_details[0].volume_usage_by_datasource_package["DatasourcePackage"].volume_usage_update_time #=> Time
+    #   resp.member_details[0].datasource_package_ingest_states #=> Hash
+    #   resp.member_details[0].datasource_package_ingest_states["DatasourcePackage"] #=> String, one of "STARTED", "STOPPED", "DISABLED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/ListMembers AWS API Documentation
@@ -1173,6 +1333,32 @@ module Aws::Detective
       req.send_request(options)
     end
 
+    # Starts a data source packages for the behavior graph.
+    #
+    # @option params [required, String] :graph_arn
+    #   The ARN of the behavior graph.
+    #
+    # @option params [required, Array<String>] :datasource_packages
+    #   The data source package start for the behavior graph.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_datasource_packages({
+    #     graph_arn: "GraphArn", # required
+    #     datasource_packages: ["DETECTIVE_CORE"], # required, accepts DETECTIVE_CORE, EKS_AUDIT
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/UpdateDatasourcePackages AWS API Documentation
+    #
+    # @overload update_datasource_packages(params = {})
+    # @param [Hash] params ({})
+    def update_datasource_packages(params = {}, options = {})
+      req = build_request(:update_datasource_packages, params)
+      req.send_request(options)
+    end
+
     # Updates the configuration for the Organizations integration in the
     # current Region. Can only be called by the Detective administrator
     # account for the organization.
@@ -1215,7 +1401,7 @@ module Aws::Detective
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-detective'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

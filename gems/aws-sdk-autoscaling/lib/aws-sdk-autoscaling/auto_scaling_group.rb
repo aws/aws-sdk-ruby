@@ -118,9 +118,7 @@ module Aws::AutoScaling
       data[:health_check_type]
     end
 
-    # The amount of time, in seconds, that Amazon EC2 Auto Scaling waits
-    # before checking the health status of an EC2 instance that has come
-    # into service and marking it unhealthy due to a failed health check.
+    # The duration of the health check grace period, in seconds.
     # @return [Integer]
     def health_check_grace_period
       data[:health_check_grace_period]
@@ -220,21 +218,16 @@ module Aws::AutoScaling
 
     # The unit of measurement for the value specified for desired capacity.
     # Amazon EC2 Auto Scaling supports `DesiredCapacityType` for
-    # attribute-based instance type selection only. For more information,
-    # see [Creating an Auto Scaling group using attribute-based instance
-    # type selection][1] in the *Amazon EC2 Auto Scaling User Guide*.
-    #
-    # By default, Amazon EC2 Auto Scaling specifies `units`, which
-    # translates into number of instances.
-    #
-    # Valid values: `units` \| `vcpu` \| `memory-mib`
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-instance-type-requirements.html
+    # attribute-based instance type selection only.
     # @return [String]
     def desired_capacity_type
       data[:desired_capacity_type]
+    end
+
+    # The duration of the default instance warmup, in seconds.
+    # @return [Integer]
+    def default_instance_warmup
+      data[:default_instance_warmup]
     end
 
     # @!endgroup
@@ -460,8 +453,8 @@ module Aws::AutoScaling
     # @option options [Boolean] :force_delete
     #   Specifies that the group is to be deleted along with all instances
     #   associated with the group, without waiting for all instances to be
-    #   terminated. This parameter also deletes any outstanding lifecycle
-    #   actions associated with the group.
+    #   terminated. This action also deletes any outstanding lifecycle actions
+    #   associated with the group.
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(auto_scaling_group_name: @name)
@@ -503,7 +496,9 @@ module Aws::AutoScaling
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :metrics
-    #   Specifies one or more of the following metrics:
+    #   Identifies the metrics to disable.
+    #
+    #   You can specify one or more of the following metrics:
     #
     #   * `GroupMinSize`
     #
@@ -545,7 +540,14 @@ module Aws::AutoScaling
     #
     #   * `GroupAndWarmPoolTotalCapacity`
     #
-    #   If you omit this parameter, all metrics are disabled.
+    #   If you omit this property, all metrics are disabled.
+    #
+    #   For more information, see [Auto Scaling group metrics][1] in the
+    #   *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-cloudwatch-monitoring.html#as-group-metrics
     # @return [EmptyStructure]
     def disable_metrics_collection(options = {})
       options = options.merge(auto_scaling_group_name: @name)
@@ -561,8 +563,9 @@ module Aws::AutoScaling
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :metrics
-    #   Specifies which group-level metrics to start collecting. You can
-    #   specify one or more of the following metrics:
+    #   Identifies the metrics to enable.
+    #
+    #   You can specify one or more of the following metrics:
     #
     #   * `GroupMinSize`
     #
@@ -580,9 +583,6 @@ module Aws::AutoScaling
     #
     #   * `GroupTotalInstances`
     #
-    #   The instance weighting feature supports the following additional
-    #   metrics:
-    #
     #   * `GroupInServiceCapacity`
     #
     #   * `GroupPendingCapacity`
@@ -592,8 +592,6 @@ module Aws::AutoScaling
     #   * `GroupTerminatingCapacity`
     #
     #   * `GroupTotalCapacity`
-    #
-    #   The warm pools feature supports the following additional metrics:
     #
     #   * `WarmPoolDesiredCapacity`
     #
@@ -609,10 +607,18 @@ module Aws::AutoScaling
     #
     #   * `GroupAndWarmPoolTotalCapacity`
     #
-    #   If you omit this parameter, all metrics are enabled.
+    #   If you specify `Granularity` and don't specify any metrics, all
+    #   metrics are enabled.
+    #
+    #   For more information, see [Auto Scaling group metrics][1] in the
+    #   *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-cloudwatch-monitoring.html#as-group-metrics
     # @option options [required, String] :granularity
-    #   The granularity to associate with the metrics to collect. The only
-    #   valid value is `1Minute`.
+    #   The frequency at which Amazon EC2 Auto Scaling sends aggregated data
+    #   to CloudWatch. The only valid value is `1Minute`.
     # @return [EmptyStructure]
     def enable_metrics_collection(options = {})
       options = options.merge(auto_scaling_group_name: @name)
@@ -815,13 +821,15 @@ module Aws::AutoScaling
     #   Required if the policy type is `SimpleScaling`. (Not used with any
     #   other policy type.)
     # @option options [Integer] :cooldown
-    #   The duration of the policy's cooldown period, in seconds. When a
-    #   cooldown period is specified here, it overrides the default cooldown
-    #   period defined for the Auto Scaling group.
+    #   A cooldown period, in seconds, that applies to a specific simple
+    #   scaling policy. When a cooldown period is specified here, it overrides
+    #   the default cooldown.
     #
     #   Valid only if the policy type is `SimpleScaling`. For more
     #   information, see [Scaling cooldowns for Amazon EC2 Auto Scaling][1] in
     #   the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #   Default: None
     #
     #
     #
@@ -839,13 +847,22 @@ module Aws::AutoScaling
     #   Required if the policy type is `StepScaling`. (Not used with any other
     #   policy type.)
     # @option options [Integer] :estimated_instance_warmup
+    #   *Not needed if the default instance warmup is defined for the group.*
+    #
     #   The estimated time, in seconds, until a newly launched instance can
-    #   contribute to the CloudWatch metrics. If not provided, the default is
-    #   to use the value from the default cooldown period for the Auto Scaling
-    #   group.
+    #   contribute to the CloudWatch metrics. This warm-up period applies to
+    #   instances launched due to a specific target tracking or step scaling
+    #   policy. When a warm-up period is specified here, it overrides the
+    #   default instance warmup.
     #
     #   Valid only if the policy type is `TargetTrackingScaling` or
     #   `StepScaling`.
+    #
+    #   <note markdown="1"> The default is to use the value for the default instance warmup
+    #   defined for the group. If default instance warmup is null, then
+    #   `EstimatedInstanceWarmup` falls back to the value of default cooldown.
+    #
+    #    </note>
     # @option options [Types::TargetTrackingConfiguration] :target_tracking_configuration
     #   A target tracking scaling policy. Provides support for predefined or
     #   custom metrics.
@@ -861,7 +878,7 @@ module Aws::AutoScaling
     #   * `ALBRequestCountPerTarget`
     #
     #   If you specify `ALBRequestCountPerTarget` for the metric, you must
-    #   specify the `ResourceLabel` parameter with the
+    #   specify the `ResourceLabel` property with the
     #   `PredefinedMetricSpecification`.
     #
     #   For more information, see [TargetTrackingConfiguration][1] in the
@@ -923,20 +940,18 @@ module Aws::AutoScaling
     # @option options [required, String] :scheduled_action_name
     #   The name of this scaling action.
     # @option options [Time,DateTime,Date,Integer,String] :time
-    #   This parameter is no longer used.
+    #   This property is no longer used.
     # @option options [Time,DateTime,Date,Integer,String] :start_time
     #   The date and time for this action to start, in YYYY-MM-DDThh:mm:ssZ
     #   format in UTC/GMT only and in quotes (for example,
-    #   `"2019-06-01T00:00:00Z"`).
+    #   `"2021-06-01T00:00:00Z"`).
     #
     #   If you specify `Recurrence` and `StartTime`, Amazon EC2 Auto Scaling
     #   performs the action at this time, and then performs the action based
     #   on the specified recurrence.
-    #
-    #   If you try to schedule your action in the past, Amazon EC2 Auto
-    #   Scaling returns an error message.
     # @option options [Time,DateTime,Date,Integer,String] :end_time
-    #   The date and time for the recurring schedule to end, in UTC.
+    #   The date and time for the recurring schedule to end, in UTC. For
+    #   example, `"2021-06-01T00:00:00Z"`.
     # @option options [String] :recurrence
     #   The recurring schedule for this action. This format consists of five
     #   fields separated by white spaces: \[Minute\] \[Hour\]
@@ -961,6 +976,11 @@ module Aws::AutoScaling
     #   after the scheduled action runs and the capacity it attempts to
     #   maintain. It can scale beyond this capacity if you add more scaling
     #   conditions.
+    #
+    #   <note markdown="1"> You must specify at least one of the following properties: `MaxSize`,
+    #   `MinSize`, or `DesiredCapacity`.
+    #
+    #    </note>
     # @option options [String] :time_zone
     #   Specifies the time zone for a cron expression. If a time zone is not
     #   provided, UTC is used by default.
@@ -1010,7 +1030,7 @@ module Aws::AutoScaling
     #
     #   * `ScheduledActions`
     #
-    #   If you omit this parameter, all processes are specified.
+    #   If you omit this property, all processes are specified.
     # @return [EmptyStructure]
     def resume_processes(options = {})
       options = options.merge(auto_scaling_group_name: @name)
@@ -1069,7 +1089,7 @@ module Aws::AutoScaling
     #
     #   * `ScheduledActions`
     #
-    #   If you omit this parameter, all processes are specified.
+    #   If you omit this property, all processes are specified.
     # @return [EmptyStructure]
     def suspend_processes(options = {})
       options = options.merge(auto_scaling_group_name: @name)
@@ -1177,6 +1197,7 @@ module Aws::AutoScaling
     #     capacity_rebalance: false,
     #     context: "Context",
     #     desired_capacity_type: "XmlStringMaxLen255",
+    #     default_instance_warmup: 1,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :launch_configuration_name
@@ -1215,10 +1236,10 @@ module Aws::AutoScaling
     #   size of the group and less than or equal to the maximum size of the
     #   group.
     # @option options [Integer] :default_cooldown
-    #   The amount of time, in seconds, after a scaling activity completes
-    #   before another scaling activity can start. The default value is `300`.
-    #   This setting applies when using simple scaling policies, but not when
-    #   using other scaling policies or scheduled scaling. For more
+    #   *Only needed if you use simple scaling policies.*
+    #
+    #   The amount of time, in seconds, between one scaling activity ending
+    #   and another one starting due to simple scaling policies. For more
     #   information, see [Scaling cooldowns for Amazon EC2 Auto Scaling][1] in
     #   the *Amazon EC2 Auto Scaling User Guide*.
     #
@@ -1235,22 +1256,25 @@ module Aws::AutoScaling
     # @option options [Integer] :health_check_grace_period
     #   The amount of time, in seconds, that Amazon EC2 Auto Scaling waits
     #   before checking the health status of an EC2 instance that has come
-    #   into service and marking it unhealthy due to a failed health check.
-    #   The default value is `0`. For more information, see [Health check
-    #   grace period][1] in the *Amazon EC2 Auto Scaling User Guide*.
-    #
-    #   Conditional: Required if you are adding an `ELB` health check.
+    #   into service and marking it unhealthy due to a failed Elastic Load
+    #   Balancing or custom health check. This is useful if your instances do
+    #   not immediately pass these health checks after they enter the
+    #   `InService` state. For more information, see [Health check grace
+    #   period][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html#health-check-grace-period
     # @option options [String] :placement_group
     #   The name of an existing placement group into which to launch your
-    #   instances, if any. A placement group is a logical grouping of
-    #   instances within a single Availability Zone. You cannot specify
-    #   multiple Availability Zones and a placement group. For more
-    #   information, see [Placement Groups][1] in the *Amazon EC2 User Guide
-    #   for Linux Instances*.
+    #   instances. For more information, see [Placement groups][1] in the
+    #   *Amazon EC2 User Guide for Linux Instances*.
+    #
+    #   <note markdown="1"> A *cluster* placement group is a logical grouping of instances within
+    #   a single Availability Zone. You cannot specify multiple Availability
+    #   Zones and a cluster placement group.
+    #
+    #    </note>
     #
     #
     #
@@ -1258,18 +1282,21 @@ module Aws::AutoScaling
     # @option options [String] :vpc_zone_identifier
     #   A comma-separated list of subnet IDs for a virtual private cloud
     #   (VPC). If you specify `VPCZoneIdentifier` with `AvailabilityZones`,
-    #   the subnets that you specify for this parameter must reside in those
-    #   Availability Zones.
+    #   the subnets that you specify must reside in those Availability Zones.
     # @option options [Array<String>] :termination_policies
     #   A policy or a list of policies that are used to select the instances
     #   to terminate. The policies are executed in the order that you list
-    #   them. For more information, see [Controlling which Auto Scaling
-    #   instances terminate during scale in][1] in the *Amazon EC2 Auto
-    #   Scaling User Guide*.
+    #   them. For more information, see [Work with Amazon EC2 Auto Scaling
+    #   termination policies][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #   Valid values: `Default` \| `AllocationStrategy` \|
+    #   `ClosestToNextInstanceHour` \| `NewestInstance` \| `OldestInstance` \|
+    #   `OldestLaunchConfiguration` \| `OldestLaunchTemplate` \|
+    #   `arn:aws:lambda:region:account-id:function:my-function:my-alias`
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-termination-policies.html
     # @option options [Boolean] :new_instances_protected_from_scale_in
     #   Indicates whether newly launched instances are protected from
     #   termination by Amazon EC2 Auto Scaling when scaling in. For more
@@ -1302,8 +1329,8 @@ module Aws::AutoScaling
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html
     # @option options [Boolean] :capacity_rebalance
     #   Enables or disables Capacity Rebalancing. For more information, see
-    #   [Amazon EC2 Auto Scaling Capacity Rebalancing][1] in the *Amazon EC2
-    #   Auto Scaling User Guide*.
+    #   [Use Capacity Rebalancing to handle Amazon EC2 Spot Interruptions][1]
+    #   in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
@@ -1325,6 +1352,29 @@ module Aws::AutoScaling
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-instance-type-requirements.html
+    # @option options [Integer] :default_instance_warmup
+    #   The amount of time, in seconds, until a newly launched instance can
+    #   contribute to the Amazon CloudWatch metrics. This delay lets an
+    #   instance finish initializing before Amazon EC2 Auto Scaling aggregates
+    #   instance metrics, resulting in more reliable usage data. Set this
+    #   value equal to the amount of time that it takes for resource
+    #   consumption to become stable after an instance reaches the `InService`
+    #   state. For more information, see [Set the default instance warmup for
+    #   an Auto Scaling group][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #   To manage your warm-up settings at the group level, we recommend that
+    #   you set the default instance warmup, *even if its value is set to 0
+    #   seconds*. This also optimizes the performance of scaling policies that
+    #   scale continuously, such as target tracking and step scaling policies.
+    #
+    #    If you need to remove a value that you previously set, include the
+    #   property but specify `-1` for the value. However, we strongly
+    #   recommend keeping the default instance warmup enabled by specifying a
+    #   minimum value of `0`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-default-instance-warmup.html
     # @return [AutoScalingGroup]
     def update(options = {})
       options = options.merge(auto_scaling_group_name: @name)
@@ -1346,7 +1396,7 @@ module Aws::AutoScaling
     # @param [Hash] options ({})
     # @option options [Array<String>] :activity_ids
     #   The activity IDs of the desired scaling activities. If you omit this
-    #   parameter, all activities for the past six weeks are described. If
+    #   property, all activities for the past six weeks are described. If
     #   unknown activities are requested, they are ignored with no error. If
     #   you specify an Auto Scaling group, the results are limited to that
     #   group.
@@ -1418,7 +1468,7 @@ module Aws::AutoScaling
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :lifecycle_hook_names
-    #   The names of one or more lifecycle hooks. If you omit this parameter,
+    #   The names of one or more lifecycle hooks. If you omit this property,
     #   all lifecycle hooks are described.
     # @return [LifecycleHook::Collection]
     def lifecycle_hooks(options = {})
@@ -1515,7 +1565,7 @@ module Aws::AutoScaling
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :policy_names
-    #   The names of one or more policies. If you omit this parameter, all
+    #   The names of one or more policies. If you omit this property, all
     #   policies are described. If a group name is provided, the results are
     #   limited to that group. If you specify an unknown policy name, it is
     #   ignored with no error.
@@ -1553,17 +1603,17 @@ module Aws::AutoScaling
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :scheduled_action_names
-    #   The names of one or more scheduled actions. If you omit this
-    #   parameter, all scheduled actions are described. If you specify an
-    #   unknown scheduled action, it is ignored with no error.
+    #   The names of one or more scheduled actions. If you omit this property,
+    #   all scheduled actions are described. If you specify an unknown
+    #   scheduled action, it is ignored with no error.
     #
     #   Array Members: Maximum number of 50 actions.
     # @option options [Time,DateTime,Date,Integer,String] :start_time
     #   The earliest scheduled start time to return. If scheduled action names
-    #   are provided, this parameter is ignored.
+    #   are provided, this property is ignored.
     # @option options [Time,DateTime,Date,Integer,String] :end_time
     #   The latest scheduled start time to return. If scheduled action names
-    #   are provided, this parameter is ignored.
+    #   are provided, this property is ignored.
     # @return [ScheduledAction::Collection]
     def scheduled_actions(options = {})
       batches = Enumerator.new do |y|

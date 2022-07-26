@@ -48,6 +48,6 @@ require_relative 'aws-sdk-managedgrafana/customizations'
 # @!group service
 module Aws::ManagedGrafana
 
-  GEM_VERSION = '1.5.0'
+  GEM_VERSION = '1.8.0'
 
 end

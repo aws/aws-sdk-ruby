@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2022-03-22)
+------------------
+
+* Feature - The release fixes the incorrect permissions called out in the documentation - DESCRIBE_TAG, ASSOCIATE_TAG, DELETE_TAG, ALTER_TAG. This trebuchet release fixes the corresponding SDK and documentation.
+
+1.25.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.24.0 (2022-02-04)
 ------------------
 

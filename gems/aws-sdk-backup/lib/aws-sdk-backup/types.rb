@@ -492,13 +492,19 @@ module Aws::Backup
     #   backups automatically according to the lifecycle that you define.
     #
     #   Backups transitioned to cold storage must be stored in cold storage
-    #   for a minimum of 90 days. Therefore, the “expire after days” setting
-    #   must be 90 days greater than the “transition to cold after days”
-    #   setting. The “transition to cold after days” setting cannot be
-    #   changed after a backup has been transitioned to cold.
+    #   for a minimum of 90 days. Therefore, the “retention” setting must be
+    #   90 days greater than the “transition to cold after days” setting.
+    #   The “transition to cold after days” setting cannot be changed after
+    #   a backup has been transitioned to cold.
     #
-    #   Only Amazon EFS file system backups can be transitioned to cold
-    #   storage.
+    #   Resource types that are able to be transitioned to cold storage are
+    #   listed in the "Lifecycle to cold storage" section of the [ Feature
+    #   availability by resource][1] table. Backup ignores this expression
+    #   for other resource types.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource
     #   @return [Types::Lifecycle]
     #
     # @!attribute [rw] recovery_point_tags
@@ -604,13 +610,19 @@ module Aws::Backup
     #   backups automatically according to the lifecycle that you define.
     #
     #   Backups transitioned to cold storage must be stored in cold storage
-    #   for a minimum of 90 days. Therefore, the “expire after days” setting
-    #   must be 90 days greater than the “transition to cold after days”
-    #   setting. The “transition to cold after days” setting cannot be
-    #   changed after a backup has been transitioned to cold.
+    #   for a minimum of 90 days. Therefore, the “retention” setting must be
+    #   90 days greater than the “transition to cold after days” setting.
+    #   The “transition to cold after days” setting cannot be changed after
+    #   a backup has been transitioned to cold.
     #
-    #   Only Amazon EFS file system backups can be transitioned to cold
-    #   storage.
+    #   Resource types that are able to be transitioned to cold storage are
+    #   listed in the "Lifecycle to cold storage" section of the [ Feature
+    #   availability by resource][1] table. Backup ignores this expression
+    #   for other resource types.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource
     #   @return [Types::Lifecycle]
     #
     # @!attribute [rw] recovery_point_tags
@@ -647,6 +659,11 @@ module Aws::Backup
     end
 
     # Used to specify a set of resources to a backup plan.
+    #
+    # Specifying your desired `Conditions`, `ListOfTags`, `NotResources`,
+    # and/or `Resources` is recommended. If none of these are specified,
+    # Backup will attempt to select all supported and opted-in storage
+    # resources, which could have unintended cost implications.
     #
     # @note When making an API call, you may pass BackupSelection
     #   data as a hash:
@@ -715,9 +732,9 @@ module Aws::Backup
     #
     # @!attribute [rw] list_of_tags
     #   A list of conditions that you define to assign resources to your
-    #   backup plans using tags. For example, `"StringEquals":
-    #   \{"Department": "accounting"`. Condition operators are case
-    #   sensitive.
+    #   backup plans using tags. For example, `"StringEquals": \{
+    #   "ConditionKey": "aws:ResourceTag/CreatedByCryo", "ConditionValue":
+    #   "true" \},`. Condition operators are case sensitive.
     #
     #   `ListOfTags` differs from `Conditions` as follows:
     #
@@ -741,9 +758,9 @@ module Aws::Backup
     #
     # @!attribute [rw] conditions
     #   A list of conditions that you define to assign resources to your
-    #   backup plans using tags. For example, `"StringEquals":
-    #   \{"Department": "accounting"`. Condition operators are case
-    #   sensitive.
+    #   backup plans using tags. For example, `"StringEquals": \{
+    #   "ConditionKey": "aws:ResourceTag/CreatedByCryo", "ConditionValue":
+    #   "true" \},`. Condition operators are case sensitive.
     #
     #   `Conditions` differs from `ListOfTags` as follows:
     #
@@ -841,9 +858,20 @@ module Aws::Backup
     #   @return [Time]
     #
     # @!attribute [rw] encryption_key_arn
-    #   The server-side encryption key that is used to protect your backups;
-    #   for example,
+    #   A server-side encryption key you can specify to encrypt your backups
+    #   from services that support full Backup management; for example,
     #   `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`.
+    #   If you specify a key, you must specify its ARN, not its alias. If
+    #   you do not specify a key, Backup creates a KMS key for you by
+    #   default.
+    #
+    #   To learn which Backup services support full Backup management and
+    #   how Backup handles encryption for backups from services that do not
+    #   yet support full Backup, see [ Encryption for backups in Backup][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/encryption.html
     #   @return [String]
     #
     # @!attribute [rw] creator_request_id
@@ -934,13 +962,19 @@ module Aws::Backup
     # backups automatically according to the lifecycle that you define.
     #
     # Backups transitioned to cold storage must be stored in cold storage
-    # for a minimum of 90 days. Therefore, the “expire after days” setting
-    # must be 90 days greater than the “transition to cold after days”
-    # setting. The “transition to cold after days” setting cannot be changed
-    # after a backup has been transitioned to cold.
+    # for a minimum of 90 days. Therefore, the “retention” setting must be
+    # 90 days greater than the “transition to cold after days” setting. The
+    # “transition to cold after days” setting cannot be changed after a
+    # backup has been transitioned to cold.
     #
-    # Only Amazon EFS file system backups can be transitioned to cold
-    # storage.
+    # Resource types that are able to be transitioned to cold storage are
+    # listed in the "Lifecycle to cold storage" section of the [ Feature
+    # availability by resource][1] table. Backup ignores this expression for
+    # other resource types.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource
     #
     # @!attribute [rw] move_to_cold_storage_at
     #   A timestamp that specifies when to transition a recovery point to
@@ -976,7 +1010,7 @@ module Aws::Backup
     # @!attribute [rw] condition_type
     #   An operation applied to a key-value pair used to assign resources to
     #   your backup plan. Condition only supports `StringEquals`. For more
-    #   flexible assignment options, incluidng `StringLike` and the ability
+    #   flexible assignment options, including `StringLike` and the ability
     #   to exclude resources from your backup plan, use `Conditions` (with
     #   an "s" on the end) for your [ `BackupSelection` ][1].
     #
@@ -1231,14 +1265,19 @@ module Aws::Backup
     #   deleted.
     #
     #   Backups transitioned to cold storage must be stored in cold storage
-    #   for a minimum of 90 days. Therefore, on the console, the “expire
-    #   after days” setting must be 90 days greater than the “transition to
-    #   cold after days” setting. The “transition to cold after days”
-    #   setting cannot be changed after a backup has been transitioned to
-    #   cold.
+    #   for a minimum of 90 days. Therefore, on the console, the “retention”
+    #   setting must be 90 days greater than the “transition to cold after
+    #   days” setting. The “transition to cold after days” setting cannot be
+    #   changed after a backup has been transitioned to cold.
     #
-    #   Only Amazon EFS file system backups can be transitioned to cold
-    #   storage.
+    #   Resource types that are able to be transitioned to cold storage are
+    #   listed in the "Lifecycle to cold storage" section of the [ Feature
+    #   availability by resource][1] table. Backup ignores this expression
+    #   for other resource types.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource
     #   @return [Types::Lifecycle]
     #
     # @!attribute [rw] destination_backup_vault_arn
@@ -2736,13 +2775,19 @@ module Aws::Backup
     #   backups automatically according to the lifecycle that you define.
     #
     #   Backups that are transitioned to cold storage must be stored in cold
-    #   storage for a minimum of 90 days. Therefore, the “expire after days”
-    #   setting must be 90 days greater than the “transition to cold after
-    #   days” setting. The “transition to cold after days” setting cannot be
+    #   storage for a minimum of 90 days. Therefore, the “retention” setting
+    #   must be 90 days greater than the “transition to cold after days”
+    #   setting. The “transition to cold after days” setting cannot be
     #   changed after a backup has been transitioned to cold.
     #
-    #   Only Amazon EFS file system backups can be transitioned to cold
-    #   storage.
+    #   Resource types that are able to be transitioned to cold storage are
+    #   listed in the "Lifecycle to cold storage" section of the [ Feature
+    #   availability by resource][1] table. Backup ignores this expression
+    #   for other resource types.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource
     #   @return [Types::Lifecycle]
     #
     # @!attribute [rw] encryption_key_arn
@@ -2808,12 +2853,24 @@ module Aws::Backup
     #   @return [Hash<String,Boolean>]
     #
     # @!attribute [rw] resource_type_management_preference
-    #   Returns whether a DynamoDB recovery point was taken using [
-    #   Backup's advanced DynamoDB backup features][1].
+    #   Returns whether Backup fully manages the backups for a resource
+    #   type.
+    #
+    #   For the benefits of full Backup management, see [ Full Backup
+    #   management][1].
+    #
+    #   For a list of resource types and whether each supports full Backup
+    #   management, see the [ Feature availability by resource][2] table.
+    #
+    #   If `"DynamoDB":false`, you can enable full Backup management for
+    #   DynamoDB backup by enabling [ Backup's advanced DynamoDB backup
+    #   features][3].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/advanced-ddb-backup.html
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#full-management
+    #   [2]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource
+    #   [3]: https://docs.aws.amazon.com/aws-backup/latest/devguide/advanced-ddb-backup.html#advanced-ddb-backup-enable-cli
     #   @return [Hash<String,Boolean>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeRegionSettingsOutput AWS API Documentation
@@ -3148,7 +3205,8 @@ module Aws::Backup
     #   The scope of a control. The control scope defines what the control
     #   will evaluate. Three examples of control scopes are: a specific
     #   backup plan, all backup plans with a specific tag, or all backup
-    #   plans. For more information, see `ControlScope`.
+    #   plans. For more information, see [
+    #   `ControlScope`.](aws-backup/latest/devguide/API_ControlScope.html)
     #   @return [Types::ControlScope]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/FrameworkControl AWS API Documentation
@@ -3566,6 +3624,10 @@ module Aws::Backup
     #   * `RDS` for Amazon Relational Database Service
     #
     #   * `Storage Gateway` for Storage Gateway
+    #
+    #   * `DocDB` for Amazon DocumentDB (with MongoDB compatibility)
+    #
+    #   * `Neptune` for Amazon Neptune
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/GetSupportedResourceTypesOutput AWS API Documentation
@@ -3659,13 +3721,19 @@ module Aws::Backup
     # before a recovery point transitions to cold storage or is deleted.
     #
     # Backups transitioned to cold storage must be stored in cold storage
-    # for a minimum of 90 days. Therefore, on the console, the “expire after
-    # days” setting must be 90 days greater than the “transition to cold
-    # after days” setting. The “transition to cold after days” setting
-    # cannot be changed after a backup has been transitioned to cold.
+    # for a minimum of 90 days. Therefore, on the console, the “retention”
+    # setting must be 90 days greater than the “transition to cold after
+    # days” setting. The “transition to cold after days” setting cannot be
+    # changed after a backup has been transitioned to cold.
     #
-    # Only Amazon EFS file system backups can be transitioned to cold
-    # storage.
+    # Resource types that are able to be transitioned to cold storage are
+    # listed in the "Lifecycle to cold storage" section of the [ Feature
+    # availability by resource][1] table. Backup ignores this expression for
+    # other resource types.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource
     #
     # @note When making an API call, you may pass Lifecycle
     #   data as a hash:
@@ -3734,6 +3802,8 @@ module Aws::Backup
     #         by_created_after: Time.now,
     #         by_resource_type: "ResourceType",
     #         by_account_id: "AccountId",
+    #         by_complete_after: Time.now,
+    #         by_complete_before: Time.now,
     #       }
     #
     # @!attribute [rw] next_token
@@ -3776,6 +3846,10 @@ module Aws::Backup
     # @!attribute [rw] by_resource_type
     #   Returns only backup jobs for the specified resources:
     #
+    #   * `Aurora` for Amazon Aurora
+    #
+    #   * `DocumentDB` for Amazon DocumentDB (with MongoDB compatibility)
+    #
     #   * `DynamoDB` for Amazon DynamoDB
     #
     #   * `EBS` for Amazon Elastic Block Store
@@ -3784,11 +3858,17 @@ module Aws::Backup
     #
     #   * `EFS` for Amazon Elastic File System
     #
+    #   * `FSx` for Amazon FSx
+    #
+    #   * `Neptune` for Amazon Neptune
+    #
     #   * `RDS` for Amazon Relational Database Service
     #
-    #   * `Aurora` for Amazon Aurora
-    #
     #   * `Storage Gateway` for Storage Gateway
+    #
+    #   * `S3` for Amazon S3
+    #
+    #   * `VirtualMachine` for virtual machines
     #   @return [String]
     #
     # @!attribute [rw] by_account_id
@@ -3798,6 +3878,16 @@ module Aws::Backup
     #   If used from an Organizations management account, passing `*`
     #   returns all jobs across the organization.
     #   @return [String]
+    #
+    # @!attribute [rw] by_complete_after
+    #   Returns only backup jobs completed after a date expressed in Unix
+    #   format and Coordinated Universal Time (UTC).
+    #   @return [Time]
+    #
+    # @!attribute [rw] by_complete_before
+    #   Returns only backup jobs completed before a date expressed in Unix
+    #   format and Coordinated Universal Time (UTC).
+    #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListBackupJobsInput AWS API Documentation
     #
@@ -3810,7 +3900,9 @@ module Aws::Backup
       :by_created_before,
       :by_created_after,
       :by_resource_type,
-      :by_account_id)
+      :by_account_id,
+      :by_complete_after,
+      :by_complete_before)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4115,6 +4207,8 @@ module Aws::Backup
     #         by_resource_type: "ResourceType",
     #         by_destination_vault_arn: "string",
     #         by_account_id: "AccountId",
+    #         by_complete_before: Time.now,
+    #         by_complete_after: Time.now,
     #       }
     #
     # @!attribute [rw] next_token
@@ -4148,6 +4242,10 @@ module Aws::Backup
     # @!attribute [rw] by_resource_type
     #   Returns only backup jobs for the specified resources:
     #
+    #   * `Aurora` for Amazon Aurora
+    #
+    #   * `DocumentDB` for Amazon DocumentDB (with MongoDB compatibility)
+    #
     #   * `DynamoDB` for Amazon DynamoDB
     #
     #   * `EBS` for Amazon Elastic Block Store
@@ -4156,11 +4254,17 @@ module Aws::Backup
     #
     #   * `EFS` for Amazon Elastic File System
     #
+    #   * `FSx` for Amazon FSx
+    #
+    #   * `Neptune` for Amazon Neptune
+    #
     #   * `RDS` for Amazon Relational Database Service
     #
-    #   * `Aurora` for Amazon Aurora
-    #
     #   * `Storage Gateway` for Storage Gateway
+    #
+    #   * `S3` for Amazon S3
+    #
+    #   * `VirtualMachine` for virtual machines
     #   @return [String]
     #
     # @!attribute [rw] by_destination_vault_arn
@@ -4174,6 +4278,16 @@ module Aws::Backup
     #   associated with the specified account ID.
     #   @return [String]
     #
+    # @!attribute [rw] by_complete_before
+    #   Returns only copy jobs completed before a date expressed in Unix
+    #   format and Coordinated Universal Time (UTC).
+    #   @return [Time]
+    #
+    # @!attribute [rw] by_complete_after
+    #   Returns only copy jobs completed after a date expressed in Unix
+    #   format and Coordinated Universal Time (UTC).
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListCopyJobsInput AWS API Documentation
     #
     class ListCopyJobsInput < Struct.new(
@@ -4185,7 +4299,9 @@ module Aws::Backup
       :by_created_after,
       :by_resource_type,
       :by_destination_vault_arn,
-      :by_account_id)
+      :by_account_id,
+      :by_complete_before,
+      :by_complete_after)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4613,6 +4729,8 @@ module Aws::Backup
     #         by_created_before: Time.now,
     #         by_created_after: Time.now,
     #         by_status: "PENDING", # accepts PENDING, RUNNING, COMPLETED, ABORTED, FAILED
+    #         by_complete_before: Time.now,
+    #         by_complete_after: Time.now,
     #       }
     #
     # @!attribute [rw] next_token
@@ -4645,6 +4763,16 @@ module Aws::Backup
     #   Returns only restore jobs associated with the specified job status.
     #   @return [String]
     #
+    # @!attribute [rw] by_complete_before
+    #   Returns only copy jobs completed before a date expressed in Unix
+    #   format and Coordinated Universal Time (UTC).
+    #   @return [Time]
+    #
+    # @!attribute [rw] by_complete_after
+    #   Returns only copy jobs completed after a date expressed in Unix
+    #   format and Coordinated Universal Time (UTC).
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListRestoreJobsInput AWS API Documentation
     #
     class ListRestoreJobsInput < Struct.new(
@@ -4653,7 +4781,9 @@ module Aws::Backup
       :by_account_id,
       :by_created_before,
       :by_created_after,
-      :by_status)
+      :by_status,
+      :by_complete_before,
+      :by_complete_after)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4851,7 +4981,8 @@ module Aws::Backup
     #   longer than the minimum retention period. If the job's retention
     #   period is shorter than that minimum retention period, then the vault
     #   fails that backup or copy job, and you should either modify your
-    #   lifecycle settings or use a different vault. Recovery points already
+    #   lifecycle settings or use a different vault. The shortest minimum
+    #   retention period you can specify is 1 day. Recovery points already
     #   saved in the vault prior to Vault Lock are not affected.
     #   @return [Integer]
     #
@@ -4872,8 +5003,10 @@ module Aws::Backup
     #   shorter than the maximum retention period. If the job's retention
     #   period is longer than that maximum retention period, then the vault
     #   fails the backup or copy job, and you should either modify your
-    #   lifecycle settings or use a different vault. Recovery points already
-    #   saved in the vault prior to Vault Lock are not affected.
+    #   lifecycle settings or use a different vault. The longest maximum
+    #   retention period you can specify is 36500 days (approximately 100
+    #   years). Recovery points already saved in the vault prior to Vault
+    #   Lock are not affected.
     #   @return [Integer]
     #
     # @!attribute [rw] changeable_for_days
@@ -4915,7 +5048,7 @@ module Aws::Backup
     #       {
     #         backup_vault_name: "BackupVaultName", # required
     #         sns_topic_arn: "ARN", # required
-    #         backup_vault_events: ["BACKUP_JOB_STARTED"], # required, accepts BACKUP_JOB_STARTED, BACKUP_JOB_COMPLETED, BACKUP_JOB_SUCCESSFUL, BACKUP_JOB_FAILED, BACKUP_JOB_EXPIRED, RESTORE_JOB_STARTED, RESTORE_JOB_COMPLETED, RESTORE_JOB_SUCCESSFUL, RESTORE_JOB_FAILED, COPY_JOB_STARTED, COPY_JOB_SUCCESSFUL, COPY_JOB_FAILED, RECOVERY_POINT_MODIFIED, BACKUP_PLAN_CREATED, BACKUP_PLAN_MODIFIED
+    #         backup_vault_events: ["BACKUP_JOB_STARTED"], # required, accepts BACKUP_JOB_STARTED, BACKUP_JOB_COMPLETED, BACKUP_JOB_SUCCESSFUL, BACKUP_JOB_FAILED, BACKUP_JOB_EXPIRED, RESTORE_JOB_STARTED, RESTORE_JOB_COMPLETED, RESTORE_JOB_SUCCESSFUL, RESTORE_JOB_FAILED, COPY_JOB_STARTED, COPY_JOB_SUCCESSFUL, COPY_JOB_FAILED, RECOVERY_POINT_MODIFIED, BACKUP_PLAN_CREATED, BACKUP_PLAN_MODIFIED, S3_BACKUP_OBJECT_FAILED, S3_RESTORE_OBJECT_FAILED
     #       }
     #
     # @!attribute [rw] backup_vault_name
@@ -4946,6 +5079,8 @@ module Aws::Backup
     #
     #   * `RESTORE_JOB_STARTED` \| `RESTORE_JOB_COMPLETED` \|
     #     `RECOVERY_POINT_MODIFIED`
+    #
+    #   * `S3_BACKUP_OBJECT_FAILED` \| `S3_RESTORE_OBJECT_FAILED`
     #
     #   <note markdown="1"> Ignore the list below because it includes deprecated events. Refer
     #   to the list above.
@@ -5057,13 +5192,19 @@ module Aws::Backup
     #   backups automatically according to the lifecycle that you define.
     #
     #   Backups transitioned to cold storage must be stored in cold storage
-    #   for a minimum of 90 days. Therefore, the “expire after days” setting
-    #   must be 90 days greater than the “transition to cold after days”
-    #   setting. The “transition to cold after days” setting cannot be
-    #   changed after a backup has been transitioned to cold.
+    #   for a minimum of 90 days. Therefore, the “retention” setting must be
+    #   90 days greater than the “transition to cold after days” setting.
+    #   The “transition to cold after days” setting cannot be changed after
+    #   a backup has been transitioned to cold.
     #
-    #   Only Amazon EFS file system backups can be transitioned to cold
-    #   storage.
+    #   Resource types that are able to be transitioned to cold storage are
+    #   listed in the "Lifecycle to cold storage" section of the [ Feature
+    #   availability by resource][1] table. Backup ignores this expression
+    #   for other resource types.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource
     #   @return [Types::Lifecycle]
     #
     # @!attribute [rw] encryption_key_arn
@@ -5644,7 +5785,7 @@ module Aws::Backup
     #
     # @!attribute [rw] complete_window_minutes
     #   A value in minutes during which a successfully started backup must
-    #   complete, or else AWS Backup will cancel the job. This value is
+    #   complete, or else Backup will cancel the job. This value is
     #   optional. This value begins counting down from when the backup was
     #   scheduled. It does not add additional time for `StartWindowMinutes`,
     #   or if the backup started later than scheduled.
@@ -5656,13 +5797,19 @@ module Aws::Backup
     #   backups automatically according to the lifecycle that you define.
     #
     #   Backups transitioned to cold storage must be stored in cold storage
-    #   for a minimum of 90 days. Therefore, the “expire after days” setting
-    #   must be 90 days greater than the “transition to cold after days”
-    #   setting. The “transition to cold after days” setting cannot be
-    #   changed after a backup has been transitioned to cold.
+    #   for a minimum of 90 days. Therefore, the “retention” setting must be
+    #   90 days greater than the “transition to cold after days” setting.
+    #   The “transition to cold after days” setting cannot be changed after
+    #   a backup has been transitioned to cold.
     #
-    #   Only Amazon EFS file system backups can be transitioned to cold
-    #   storage.
+    #   Resource types that are able to be transitioned to cold storage are
+    #   listed in the "Lifecycle to cold storage" section of the [ Feature
+    #   availability by resource][1] table. Backup ignores this expression
+    #   for other resource types.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource
     #   @return [Types::Lifecycle]
     #
     # @!attribute [rw] recovery_point_tags
@@ -5776,14 +5923,19 @@ module Aws::Backup
     #   deleted.
     #
     #   Backups transitioned to cold storage must be stored in cold storage
-    #   for a minimum of 90 days. Therefore, on the console, the “expire
-    #   after days” setting must be 90 days greater than the “transition to
-    #   cold after days” setting. The “transition to cold after days”
-    #   setting cannot be changed after a backup has been transitioned to
-    #   cold.
+    #   for a minimum of 90 days. Therefore, on the console, the “retention”
+    #   setting must be 90 days greater than the “transition to cold after
+    #   days” setting. The “transition to cold after days” setting cannot be
+    #   changed after a backup has been transitioned to cold.
     #
-    #   Only Amazon EFS file system backups can be transitioned to cold
-    #   storage.
+    #   Resource types that are able to be transitioned to cold storage are
+    #   listed in the "Lifecycle to cold storage" section of the [ Feature
+    #   availability by resource][1] table. Backup ignores this expression
+    #   for other resource types.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource
     #   @return [Types::Lifecycle]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/StartCopyJobInput AWS API Documentation
@@ -5872,7 +6024,7 @@ module Aws::Backup
     #         metadata: { # required
     #           "MetadataKey" => "MetadataValue",
     #         },
-    #         iam_role_arn: "IAMRoleArn", # required
+    #         iam_role_arn: "IAMRoleArn",
     #         idempotency_token: "string",
     #         resource_type: "ResourceType",
     #       }
@@ -5942,6 +6094,10 @@ module Aws::Backup
     #   Starts a job to restore a recovery point for one of the following
     #   resources:
     #
+    #   * `Aurora` for Amazon Aurora
+    #
+    #   * `DocumentDB` for Amazon DocumentDB (with MongoDB compatibility)
+    #
     #   * `DynamoDB` for Amazon DynamoDB
     #
     #   * `EBS` for Amazon Elastic Block Store
@@ -5950,11 +6106,17 @@ module Aws::Backup
     #
     #   * `EFS` for Amazon Elastic File System
     #
+    #   * `FSx` for Amazon FSx
+    #
+    #   * `Neptune` for Amazon Neptune
+    #
     #   * `RDS` for Amazon Relational Database Service
     #
-    #   * `Aurora` for Amazon Aurora
-    #
     #   * `Storage Gateway` for Storage Gateway
+    #
+    #   * `S3` for Amazon S3
+    #
+    #   * `VirtualMachine` for virtual machines
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/StartRestoreJobInput AWS API Documentation
@@ -6304,10 +6466,10 @@ module Aws::Backup
     #   backups automatically according to the lifecycle that you define.
     #
     #   Backups transitioned to cold storage must be stored in cold storage
-    #   for a minimum of 90 days. Therefore, the “expire after days” setting
-    #   must be 90 days greater than the “transition to cold after days”
-    #   setting. The “transition to cold after days” setting cannot be
-    #   changed after a backup has been transitioned to cold.
+    #   for a minimum of 90 days. Therefore, the “retention” setting must be
+    #   90 days greater than the “transition to cold after days” setting.
+    #   The “transition to cold after days” setting cannot be changed after
+    #   a backup has been transitioned to cold.
     #   @return [Types::Lifecycle]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/UpdateRecoveryPointLifecycleInput AWS API Documentation
@@ -6337,13 +6499,19 @@ module Aws::Backup
     #   backups automatically according to the lifecycle that you define.
     #
     #   Backups transitioned to cold storage must be stored in cold storage
-    #   for a minimum of 90 days. Therefore, the “expire after days” setting
-    #   must be 90 days greater than the “transition to cold after days”
-    #   setting. The “transition to cold after days” setting cannot be
-    #   changed after a backup has been transitioned to cold.
+    #   for a minimum of 90 days. Therefore, the “retention” setting must be
+    #   90 days greater than the “transition to cold after days” setting.
+    #   The “transition to cold after days” setting cannot be changed after
+    #   a backup has been transitioned to cold.
     #
-    #   Only Amazon EFS file system backups can be transitioned to cold
-    #   storage.
+    #   Resource types that are able to be transitioned to cold storage are
+    #   listed in the "Lifecycle to cold storage" section of the [ Feature
+    #   availability by resource][1] table. Backup ignores this expression
+    #   for other resource types.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource
     #   @return [Types::Lifecycle]
     #
     # @!attribute [rw] calculated_lifecycle
@@ -6380,12 +6548,15 @@ module Aws::Backup
     #   @return [Hash<String,Boolean>]
     #
     # @!attribute [rw] resource_type_management_preference
-    #   Enables or disables [ Backup's advanced DynamoDB backup
-    #   features][1] for the Region.
+    #   Enables or disables full Backup management of backups for a resource
+    #   type. To enable full Backup management for DynamoDB along with [
+    #   Backup's advanced DynamoDB backup features][1], follow the
+    #   procedure to [ enable advanced DynamoDB backup programmatically][2].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/advanced-ddb-backup.html
+    #   [2]: https://docs.aws.amazon.com/aws-backup/latest/devguide/advanced-ddb-backup.html#advanced-ddb-backup-enable-cli
     #   @return [Hash<String,Boolean>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/UpdateRegionSettingsInput AWS API Documentation

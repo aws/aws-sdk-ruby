@@ -117,6 +117,11 @@
       "limit_key": "MaxResults",
       "output_token": "NextToken"
     },
+    "ListCustomEntityTypes": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken"
+    },
     "ListDevEndpoints": {
       "input_token": "NextToken",
       "limit_key": "MaxResults",
@@ -149,6 +154,11 @@
       "limit_key": "MaxResults",
       "output_token": "NextToken",
       "result_key": "Schemas"
+    },
+    "ListSessions": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken"
     },
     "ListTriggers": {
       "input_token": "NextToken",

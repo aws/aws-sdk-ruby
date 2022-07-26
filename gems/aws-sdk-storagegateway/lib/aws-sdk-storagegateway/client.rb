@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::StorageGateway
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -785,8 +787,6 @@ module Aws::StorageGateway
     # is archived directly into the S3 storage class (S3 Glacier or S3
     # Glacier Deep Archive) that corresponds to the pool.
     #
-    # Valid Values: `GLACIER` \| `DEEP_ARCHIVE`
-    #
     # @option params [required, String] :tape_arn
     #   The unique Amazon Resource Name (ARN) of the virtual tape that you
     #   want to add to the tape pool.
@@ -797,8 +797,6 @@ module Aws::StorageGateway
     #   associated with the pool. When you use your backup application to
     #   eject the tape, the tape is archived directly into the storage class
     #   (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool.
-    #
-    #   Valid Values: `GLACIER` \| `DEEP_ARCHIVE`
     #
     # @option params [Boolean] :bypass_governance_retention
     #   Set permissions to bypass governance retention. If the lock type of
@@ -1328,8 +1326,7 @@ module Aws::StorageGateway
     #
     # @option params [String] :default_storage_class
     #   The default storage class for objects put into an Amazon S3 bucket by
-    #   the S3 File Gateway. The default value is `S3_INTELLIGENT_TIERING`.
-    #   Optional.
+    #   the S3 File Gateway. The default value is `S3_STANDARD`. Optional.
     #
     #   Valid Values: `S3_STANDARD` \| `S3_INTELLIGENT_TIERING` \|
     #   `S3_STANDARD_IA` \| `S3_ONEZONE_IA`
@@ -1586,8 +1583,7 @@ module Aws::StorageGateway
     #
     # @option params [String] :default_storage_class
     #   The default storage class for objects put into an Amazon S3 bucket by
-    #   the S3 File Gateway. The default value is `S3_INTELLIGENT_TIERING`.
-    #   Optional.
+    #   the S3 File Gateway. The default value is `S3_STANDARD`. Optional.
     #
     #   Valid Values: `S3_STANDARD` \| `S3_INTELLIGENT_TIERING` \|
     #   `S3_STANDARD_IA` \| `S3_ONEZONE_IA`
@@ -2285,8 +2281,6 @@ module Aws::StorageGateway
     #   eject the tape, the tape is archived directly into the storage class
     #   (S3 Glacier or S3 Deep Archive) that corresponds to the pool.
     #
-    #   Valid Values: `GLACIER` \| `DEEP_ARCHIVE`
-    #
     # @option params [Boolean] :worm
     #   Set to `TRUE` if the tape you are creating is to be configured as a
     #   write-once-read-many (WORM) tape.
@@ -2416,8 +2410,6 @@ module Aws::StorageGateway
     #   associated with the pool. When you use your backup application to
     #   eject the tape, the tape is archived directly into the storage class
     #   (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool.
-    #
-    #   Valid Values: `GLACIER` \| `DEEP_ARCHIVE`
     #
     # @option params [Boolean] :worm
     #   Set to `TRUE` if the tape you are creating is to be configured as a
@@ -2751,7 +2743,7 @@ module Aws::StorageGateway
     # for a volume. For more information, see [Backing up your volumes][1].
     # In the `DeleteSnapshotSchedule` request, you identify the volume by
     # providing its Amazon Resource Name (ARN). This operation is only
-    # supported in stored and cached volume gateway types.
+    # supported for cached volume gateway types.
     #
     # <note markdown="1"> To list or delete a snapshot, you must use the Amazon EC2 API. For
     # more information, go to [DescribeSnapshots][2] in the *Amazon Elastic
@@ -5389,7 +5381,7 @@ module Aws::StorageGateway
     end
 
     # Sends you notification through CloudWatch Events when all files
-    # written to your file share have been uploaded to Amazon S3.
+    # written to your file share have been uploaded to S3. Amazon S3.
     #
     # Storage Gateway can send a notification through Amazon CloudWatch
     # Events when all files written to your file share up to that point in
@@ -5465,10 +5457,21 @@ module Aws::StorageGateway
     # additional requests. For more information, see [Getting notified about
     # file operations][1] in the *Storage Gateway User Guide*.
     #
-    # If you invoke the RefreshCache API when two requests are already being
-    # processed, any new request will cause an
-    # `InvalidGatewayRequestException` error because too many requests were
-    # sent to the server.
+    # * Wait at least 60 seconds between consecutive RefreshCache API
+    #   requests.
+    #
+    # * RefreshCache does not evict cache entries if invoked consecutively
+    #   within 60 seconds of a previous RefreshCache request.
+    #
+    # * If you invoke the RefreshCache API when two requests are already
+    #   being processed, any new request will cause an
+    #   `InvalidGatewayRequestException` error because too many requests
+    #   were sent to the server.
+    #
+    # <note markdown="1"> The S3 bucket name does not need to be included when entering the list
+    # of folders in the FolderList parameter.
+    #
+    #  </note>
     #
     # For more information, see [Getting notified about file operations][1]
     # in the *Storage Gateway User Guide*.
@@ -6578,8 +6581,7 @@ module Aws::StorageGateway
     #
     # @option params [String] :default_storage_class
     #   The default storage class for objects put into an Amazon S3 bucket by
-    #   the S3 File Gateway. The default value is `S3_INTELLIGENT_TIERING`.
-    #   Optional.
+    #   the S3 File Gateway. The default value is `S3_STANDARD`. Optional.
     #
     #   Valid Values: `S3_STANDARD` \| `S3_INTELLIGENT_TIERING` \|
     #   `S3_STANDARD_IA` \| `S3_ONEZONE_IA`
@@ -6757,8 +6759,7 @@ module Aws::StorageGateway
     #
     # @option params [String] :default_storage_class
     #   The default storage class for objects put into an Amazon S3 bucket by
-    #   the S3 File Gateway. The default value is `S3_INTELLIGENT_TIERING`.
-    #   Optional.
+    #   the S3 File Gateway. The default value is `S3_STANDARD`. Optional.
     #
     #   Valid Values: `S3_STANDARD` \| `S3_INTELLIGENT_TIERING` \|
     #   `S3_STANDARD_IA` \| `S3_ONEZONE_IA`
@@ -7220,7 +7221,7 @@ module Aws::StorageGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-storagegateway'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

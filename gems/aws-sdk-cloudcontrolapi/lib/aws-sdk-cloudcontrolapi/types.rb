@@ -64,7 +64,7 @@ module Aws::CloudControlApi
     # The specified client token has already been used in another resource
     # request.
     #
-    # It is best practice for client tokens to be unique for each resource
+    # It's best practice for client tokens to be unique for each resource
     # operation request. However, client token expire after 36 hours.
     #
     # @!attribute [rw] message
@@ -128,11 +128,11 @@ module Aws::CloudControlApi
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the Identity and Access Management
-    #   (IAM) for Cloud Control API to use when performing this resource
-    #   operation. The role specified must have the permissions required for
-    #   this operation. The necessary permissions for each event handler are
-    #   defined in the ` handlers ` section of the [resource type definition
-    #   schema][1].
+    #   (IAM) role for Cloud Control API to use when performing this
+    #   resource operation. The role specified must have the permissions
+    #   required for this operation. The necessary permissions for each
+    #   event handler are defined in the ` handlers ` section of the
+    #   [resource type definition schema][1].
     #
     #   If you do not specify a role, Cloud Control API uses a temporary
     #   session created using your Amazon Web Services user credentials.
@@ -183,25 +183,7 @@ module Aws::CloudControlApi
     #
     #    </note>
     #
-    #   Specify the desired state as one of the following:
-    #
-    #   * A JSON blob
-    #
-    #   * A local path containing the desired state in JSON data format
-    #
-    #   For more information, see [Composing the desired state of the
-    #   resource][1] in the *Amazon Web Services Cloud Control API User
-    #   Guide*.
-    #
-    #   For more information about the properties of a specific resource,
-    #   refer to the related topic for the resource in the [Resource and
-    #   property types reference][2] in the *Amazon Web Services
-    #   CloudFormation Users Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-create.html#resource-operations-create-desiredstate
-    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
+    #        <p>Specify the desired state as one of the following:</p> <ul> <li> <p>A JSON blob</p> </li> <li> <p>A local path containing the desired state in JSON data format</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-create.html#resource-operations-create-desiredstate">Composing the desired state of the resource</a> in the <i>Amazon Web Services Cloud Control API User Guide</i>.</p> <p>For more information about the properties of a specific resource, refer to the related topic for the resource in the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html">Resource and property types reference</a> in the <i>CloudFormation Users Guide</i>.</p>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudcontrol-2021-09-30/CreateResourceInput AWS API Documentation
@@ -260,11 +242,11 @@ module Aws::CloudControlApi
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the Identity and Access Management
-    #   (IAM) for Cloud Control API to use when performing this resource
-    #   operation. The role specified must have the permissions required for
-    #   this operation. The necessary permissions for each event handler are
-    #   defined in the ` handlers ` section of the [resource type definition
-    #   schema][1].
+    #   (IAM) role for Cloud Control API to use when performing this
+    #   resource operation. The role specified must have the permissions
+    #   required for this operation. The necessary permissions for each
+    #   event handler are defined in the ` handlers ` section of the
+    #   [resource type definition schema][1].
     #
     #   If you do not specify a role, Cloud Control API uses a temporary
     #   session created using your Amazon Web Services user credentials.
@@ -361,7 +343,7 @@ module Aws::CloudControlApi
     end
 
     # The resource handler has returned that the downstream service
-    # generated an error that does not map to any other handler error code.
+    # generated an error that doesn't map to any other handler error code.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -396,11 +378,11 @@ module Aws::CloudControlApi
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the Identity and Access Management
-    #   (IAM) for Cloud Control API to use when performing this resource
-    #   operation. The role specified must have the permissions required for
-    #   this operation. The necessary permissions for each event handler are
-    #   defined in the ` handlers ` section of the [resource type definition
-    #   schema][1].
+    #   (IAM) role for Cloud Control API to use when performing this
+    #   resource operation. The role specified must have the permissions
+    #   required for this operation. The necessary permissions for each
+    #   event handler are defined in the ` handlers ` section of the
+    #   [resource type definition schema][1].
     #
     #   If you do not specify a role, Cloud Control API uses a temporary
     #   session created using your Amazon Web Services user credentials.
@@ -644,11 +626,11 @@ module Aws::CloudControlApi
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the Identity and Access Management
-    #   (IAM) for Cloud Control API to use when performing this resource
-    #   operation. The role specified must have the permissions required for
-    #   this operation. The necessary permissions for each event handler are
-    #   defined in the ` handlers ` section of the [resource type definition
-    #   schema][1].
+    #   (IAM) role for Cloud Control API to use when performing this
+    #   resource operation. The role specified must have the permissions
+    #   required for this operation. The necessary permissions for each
+    #   event handler are defined in the ` handlers ` section of the
+    #   [resource type definition schema][1].
     #
     #   If you do not specify a role, Cloud Control API uses a temporary
     #   session created using your Amazon Web Services user credentials.
@@ -672,12 +654,7 @@ module Aws::CloudControlApi
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to be returned with a single call. If
-    #   the number of available results exceeds this maximum, the response
-    #   includes a `NextToken` value that you can assign to the `NextToken`
-    #   request parameter to get the next set of results.
-    #
-    #   The default is `20`.
+    #   Reserved.
     #   @return [Integer]
     #
     # @!attribute [rw] resource_model
@@ -724,7 +701,7 @@ module Aws::CloudControlApi
       include Aws::Structure
     end
 
-    # The resource handler has returned that the request could not be
+    # The resource handler has returned that the request couldn't be
     # completed due to networking issues, such as a failure to receive a
     # response from the server.
     #
@@ -754,7 +731,7 @@ module Aws::CloudControlApi
     end
 
     # One or more properties included in this resource operation are defined
-    # as create-only, and therefore cannot be updated.
+    # as create-only, and therefore can't be updated.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -767,7 +744,7 @@ module Aws::CloudControlApi
       include Aws::Structure
     end
 
-    # Cloud Control API has not received a valid response from the resource
+    # Cloud Control API hasn't received a valid response from the resource
     # handler, due to a configuration error. This includes issues such as
     # the resource handler returning an invalid response, or timing out.
     #
@@ -821,7 +798,7 @@ module Aws::CloudControlApi
     # @!attribute [rw] operation_status
     #   The current status of the resource operation request.
     #
-    #   * `PENDING`\: The resource operation has not yet started.
+    #   * `PENDING`\: The resource operation hasn't yet started.
     #
     #   * `IN_PROGRESS`\: The resource operation is currently in progress.
     #
@@ -882,7 +859,7 @@ module Aws::CloudControlApi
       include Aws::Structure
     end
 
-    # A resource operation with the specified request token cannot be found.
+    # A resource operation with the specified request token can't be found.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -896,7 +873,7 @@ module Aws::CloudControlApi
     end
 
     # The resource is temporarily unavailable to be acted upon. For example,
-    # if the resource is currently undergoing an operation and cannot be
+    # if the resource is currently undergoing an operation and can't be
     # acted upon until that operation is finished.
     #
     # @!attribute [rw] message
@@ -936,7 +913,7 @@ module Aws::CloudControlApi
       include Aws::Structure
     end
 
-    # A resource with the specified identifier cannot be found.
+    # A resource with the specified identifier can't be found.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -969,14 +946,14 @@ module Aws::CloudControlApi
     #   * `PENDING`\: The operation has been requested, but not yet
     #     initiated.
     #
-    #   * `IN_PROGRESS`\: The operation is currently in progress.
+    #   * `IN_PROGRESS`\: The operation is in progress.
     #
-    #   * `SUCCESS`\: The operation has successfully completed.
+    #   * `SUCCESS`\: The operation completed.
     #
-    #   * `FAILED`\: The operation has failed.
+    #   * `FAILED`\: The operation failed.
     #
-    #   * `CANCEL_IN_PROGRESS`\: The operation is currently in the process
-    #     of being canceled.
+    #   * `CANCEL_IN_PROGRESS`\: The operation is in the process of being
+    #     canceled.
     #
     #   * `CANCEL_COMPLETE`\: The operation has been canceled.
     #   @return [Array<String>]
@@ -1031,7 +1008,7 @@ module Aws::CloudControlApi
       include Aws::Structure
     end
 
-    # The specified extension does not exist in the CloudFormation registry.
+    # The specified extension doesn't exist in the CloudFormation registry.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1044,7 +1021,7 @@ module Aws::CloudControlApi
       include Aws::Structure
     end
 
-    # The specified resource does not support this resource operation.
+    # The specified resource doesn't support this resource operation.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1081,11 +1058,11 @@ module Aws::CloudControlApi
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the Identity and Access Management
-    #   (IAM) for Cloud Control API to use when performing this resource
-    #   operation. The role specified must have the permissions required for
-    #   this operation. The necessary permissions for each event handler are
-    #   defined in the ` handlers ` section of the [resource type definition
-    #   schema][1].
+    #   (IAM) role for Cloud Control API to use when performing this
+    #   resource operation. The role specified must have the permissions
+    #   required for this operation. The necessary permissions for each
+    #   event handler are defined in the ` handlers ` section of the
+    #   [resource type definition schema][1].
     #
     #   If you do not specify a role, Cloud Control API uses a temporary
     #   session created using your Amazon Web Services user credentials.

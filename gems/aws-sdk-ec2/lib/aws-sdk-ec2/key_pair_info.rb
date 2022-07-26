@@ -80,6 +80,28 @@ module Aws::EC2
       data[:tags]
     end
 
+    # The public key material.
+    # @return [String]
+    def public_key
+      data[:public_key]
+    end
+
+    # If you used Amazon EC2 to create the key pair, this is the date and
+    # time when the key was created, in [ISO 8601 date-time format][1], in
+    # the UTC time zone.
+    #
+    # If you imported an existing key pair to Amazon EC2, this is the date
+    # and time the key was imported, in [ISO 8601 date-time format][1], in
+    # the UTC time zone.
+    #
+    #
+    #
+    # [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    # @return [Time]
+    def create_time
+      data[:create_time]
+    end
+
     # @!endgroup
 
     # @return [Client]

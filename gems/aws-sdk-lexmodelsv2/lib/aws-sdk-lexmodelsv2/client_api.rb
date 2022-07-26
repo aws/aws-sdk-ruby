@@ -296,6 +296,7 @@ module Aws::LexModelsV2
     Message = Shapes::StructureShape.new(name: 'Message')
     MessageGroup = Shapes::StructureShape.new(name: 'MessageGroup')
     MessageGroupsList = Shapes::ListShape.new(name: 'MessageGroupsList')
+    MessageSelectionStrategy = Shapes::StringShape.new(name: 'MessageSelectionStrategy')
     MessageVariationsList = Shapes::ListShape.new(name: 'MessageVariationsList')
     MissedCount = Shapes::IntegerShape.new(name: 'MissedCount')
     MultipleValuesSetting = Shapes::StructureShape.new(name: 'MultipleValuesSetting')
@@ -824,7 +825,7 @@ module Aws::LexModelsV2
 
     CreateSlotRequest.add_member(:slot_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "slotName"))
     CreateSlotRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    CreateSlotRequest.add_member(:slot_type_id, Shapes::ShapeRef.new(shape: BuiltInOrCustomSlotTypeId, required: true, location_name: "slotTypeId"))
+    CreateSlotRequest.add_member(:slot_type_id, Shapes::ShapeRef.new(shape: BuiltInOrCustomSlotTypeId, location_name: "slotTypeId"))
     CreateSlotRequest.add_member(:value_elicitation_setting, Shapes::ShapeRef.new(shape: SlotValueElicitationSetting, required: true, location_name: "valueElicitationSetting"))
     CreateSlotRequest.add_member(:obfuscation_setting, Shapes::ShapeRef.new(shape: ObfuscationSetting, location_name: "obfuscationSetting"))
     CreateSlotRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
@@ -1632,6 +1633,7 @@ module Aws::LexModelsV2
     PromptSpecification.add_member(:message_groups, Shapes::ShapeRef.new(shape: MessageGroupsList, required: true, location_name: "messageGroups"))
     PromptSpecification.add_member(:max_retries, Shapes::ShapeRef.new(shape: PromptMaxRetries, required: true, location_name: "maxRetries"))
     PromptSpecification.add_member(:allow_interrupt, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "allowInterrupt"))
+    PromptSpecification.add_member(:message_selection_strategy, Shapes::ShapeRef.new(shape: MessageSelectionStrategy, location_name: "messageSelectionStrategy"))
     PromptSpecification.struct_class = Types::PromptSpecification
 
     RecommendedActions.member = Shapes::ShapeRef.new(shape: RecommendedAction)
@@ -2001,7 +2003,7 @@ module Aws::LexModelsV2
     UpdateSlotRequest.add_member(:slot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "slotId"))
     UpdateSlotRequest.add_member(:slot_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "slotName"))
     UpdateSlotRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    UpdateSlotRequest.add_member(:slot_type_id, Shapes::ShapeRef.new(shape: BuiltInOrCustomSlotTypeId, required: true, location_name: "slotTypeId"))
+    UpdateSlotRequest.add_member(:slot_type_id, Shapes::ShapeRef.new(shape: BuiltInOrCustomSlotTypeId, location_name: "slotTypeId"))
     UpdateSlotRequest.add_member(:value_elicitation_setting, Shapes::ShapeRef.new(shape: SlotValueElicitationSetting, required: true, location_name: "valueElicitationSetting"))
     UpdateSlotRequest.add_member(:obfuscation_setting, Shapes::ShapeRef.new(shape: ObfuscationSetting, location_name: "obfuscationSetting"))
     UpdateSlotRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))

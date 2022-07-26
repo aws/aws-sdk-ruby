@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2022-07-15)
+------------------
+
+* Feature - This release adds support for the new segmentation feature.
+
+1.6.0 (2022-05-09)
+------------------
+
+* Feature - Add detail message inside GetExperimentResults API response to indicate experiment result availability
+
+1.5.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.4.0 (2022-02-17)
+------------------
+
+* Feature - Add support for filtering list of experiments and launches by status
+
 1.3.0 (2022-02-03)
 ------------------
 

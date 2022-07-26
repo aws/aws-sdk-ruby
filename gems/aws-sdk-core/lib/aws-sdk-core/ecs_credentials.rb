@@ -4,6 +4,11 @@ require 'time'
 require 'net/http'
 
 module Aws
+  # An auto-refreshing credential provider that loads credentials from
+  # instances running in ECS.
+  #
+  #     ecs_credentials = Aws::ECSCredentials.new(retries: 3)
+  #     ec2 = Aws::EC2::Client.new(credentials: ecs_credentials)
   class ECSCredentials
 
     include CredentialProvider
@@ -43,6 +48,10 @@ module Aws
     # @option options [IO] :http_debug_output (nil) HTTP wire
     #   traces are sent to this object.  You can specify something
     #   like $stdout.
+    # @option options [Callable] before_refresh Proc called before
+    #   credentials are refreshed. `before_refresh` is called
+    #   with an instance of this object when
+    #   AWS credentials are required and need to be refreshed.
     def initialize options = {}
       @retries = options[:retries] || 5
       @ip_address = options[:ip_address] || '169.254.170.2'
@@ -58,6 +67,7 @@ module Aws
       @http_read_timeout = options[:http_read_timeout] || 5
       @http_debug_output = options[:http_debug_output]
       @backoff = backoff(options[:backoff])
+      @async_refresh = false
       super
     end
 

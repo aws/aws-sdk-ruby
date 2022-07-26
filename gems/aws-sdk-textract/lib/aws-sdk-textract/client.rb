@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::Textract
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -378,6 +380,11 @@ module Aws::Textract
     #   document are returned (including text that doesn't have a
     #   relationship with the value of `FeatureTypes`).
     #
+    # * Queries.A QUERIES\_RESULT Block object contains the answer to the
+    #   query, the alias associated and an ID that connect it to the query
+    #   asked. This Block also contains a location and attached confidence
+    #   score.
+    #
     # Selection elements such as check boxes and option buttons (radio
     # buttons) can be detected in form data and in tables. A
     # SELECTION\_ELEMENT `Block` object contains information about a
@@ -400,7 +407,8 @@ module Aws::Textract
     # @option params [required, Types::Document] :document
     #   The input document as base64-encoded bytes or an Amazon S3 object. If
     #   you use the AWS CLI to call Amazon Textract operations, you can't
-    #   pass image bytes. The document must be an image in JPEG or PNG format.
+    #   pass image bytes. The document must be an image in JPEG, PNG, PDF, or
+    #   TIFF format.
     #
     #   If you're using an AWS SDK to call Amazon Textract, you might not
     #   need to base64-encode image bytes that are passed using the `Bytes`
@@ -417,6 +425,10 @@ module Aws::Textract
     # @option params [Types::HumanLoopConfig] :human_loop_config
     #   Sets the configuration for the human in the loop workflow for
     #   analyzing documents.
+    #
+    # @option params [Types::QueriesConfig] :queries_config
+    #   Contains Queries and the alias for those Queries, as determined by the
+    #   input.
     #
     # @return [Types::AnalyzeDocumentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -436,7 +448,7 @@ module Aws::Textract
     #         version: "S3ObjectVersion",
     #       },
     #     },
-    #     feature_types: ["TABLES"], # required, accepts TABLES, FORMS
+    #     feature_types: ["TABLES"], # required, accepts TABLES, FORMS, QUERIES
     #     human_loop_config: {
     #       human_loop_name: "HumanLoopName", # required
     #       flow_definition_arn: "FlowDefinitionArn", # required
@@ -444,13 +456,22 @@ module Aws::Textract
     #         content_classifiers: ["FreeOfPersonallyIdentifiableInformation"], # accepts FreeOfPersonallyIdentifiableInformation, FreeOfAdultContent
     #       },
     #     },
+    #     queries_config: {
+    #       queries: [ # required
+    #         {
+    #           text: "QueryInput", # required
+    #           alias: "QueryInput",
+    #           pages: ["QueryPage"],
+    #         },
+    #       ],
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.document_metadata.pages #=> Integer
     #   resp.blocks #=> Array
-    #   resp.blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT"
+    #   resp.blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT", "MERGED_CELL", "TITLE", "QUERY", "QUERY_RESULT"
     #   resp.blocks[0].confidence #=> Float
     #   resp.blocks[0].text #=> String
     #   resp.blocks[0].text_type #=> String, one of "HANDWRITING", "PRINTED"
@@ -467,13 +488,17 @@ module Aws::Textract
     #   resp.blocks[0].geometry.polygon[0].y #=> Float
     #   resp.blocks[0].id #=> String
     #   resp.blocks[0].relationships #=> Array
-    #   resp.blocks[0].relationships[0].type #=> String, one of "VALUE", "CHILD", "COMPLEX_FEATURES"
+    #   resp.blocks[0].relationships[0].type #=> String, one of "VALUE", "CHILD", "COMPLEX_FEATURES", "MERGED_CELL", "TITLE", "ANSWER"
     #   resp.blocks[0].relationships[0].ids #=> Array
     #   resp.blocks[0].relationships[0].ids[0] #=> String
     #   resp.blocks[0].entity_types #=> Array
-    #   resp.blocks[0].entity_types[0] #=> String, one of "KEY", "VALUE"
+    #   resp.blocks[0].entity_types[0] #=> String, one of "KEY", "VALUE", "COLUMN_HEADER"
     #   resp.blocks[0].selection_status #=> String, one of "SELECTED", "NOT_SELECTED"
     #   resp.blocks[0].page #=> Integer
+    #   resp.blocks[0].query.text #=> String
+    #   resp.blocks[0].query.alias #=> String
+    #   resp.blocks[0].query.pages #=> Array
+    #   resp.blocks[0].query.pages[0] #=> String
     #   resp.human_loop_activation_output.human_loop_arn #=> String
     #   resp.human_loop_activation_output.human_loop_activation_reasons #=> Array
     #   resp.human_loop_activation_output.human_loop_activation_reasons[0] #=> String
@@ -609,7 +634,9 @@ module Aws::Textract
 
     # Analyzes identity documents for relevant information. This information
     # is extracted and returned as `IdentityDocumentFields`, which records
-    # both the normalized field and value of the extracted text.
+    # both the normalized field and value of the extracted text.Unlike other
+    # Amazon Textract operations, `AnalyzeID` doesn't return any Geometry
+    # data.
     #
     # @option params [required, Array<Types::Document>] :document_pages
     #   The document being passed to AnalyzeID.
@@ -662,8 +689,9 @@ module Aws::Textract
 
     # Detects text in the input document. Amazon Textract can detect lines
     # of text and the words that make up a line of text. The input document
-    # must be an image in JPEG or PNG format. `DetectDocumentText` returns
-    # the detected text in an array of Block objects.
+    # must be an image in JPEG, PNG, PDF, or TIFF format.
+    # `DetectDocumentText` returns the detected text in an array of Block
+    # objects.
     #
     # Each document page has as an associated `Block` of type PAGE. Each
     # PAGE `Block` object is the parent of LINE `Block` objects that
@@ -712,7 +740,7 @@ module Aws::Textract
     #
     #   resp.document_metadata.pages #=> Integer
     #   resp.blocks #=> Array
-    #   resp.blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT"
+    #   resp.blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT", "MERGED_CELL", "TITLE", "QUERY", "QUERY_RESULT"
     #   resp.blocks[0].confidence #=> Float
     #   resp.blocks[0].text #=> String
     #   resp.blocks[0].text_type #=> String, one of "HANDWRITING", "PRINTED"
@@ -729,13 +757,17 @@ module Aws::Textract
     #   resp.blocks[0].geometry.polygon[0].y #=> Float
     #   resp.blocks[0].id #=> String
     #   resp.blocks[0].relationships #=> Array
-    #   resp.blocks[0].relationships[0].type #=> String, one of "VALUE", "CHILD", "COMPLEX_FEATURES"
+    #   resp.blocks[0].relationships[0].type #=> String, one of "VALUE", "CHILD", "COMPLEX_FEATURES", "MERGED_CELL", "TITLE", "ANSWER"
     #   resp.blocks[0].relationships[0].ids #=> Array
     #   resp.blocks[0].relationships[0].ids[0] #=> String
     #   resp.blocks[0].entity_types #=> Array
-    #   resp.blocks[0].entity_types[0] #=> String, one of "KEY", "VALUE"
+    #   resp.blocks[0].entity_types[0] #=> String, one of "KEY", "VALUE", "COLUMN_HEADER"
     #   resp.blocks[0].selection_status #=> String, one of "SELECTED", "NOT_SELECTED"
     #   resp.blocks[0].page #=> Integer
+    #   resp.blocks[0].query.text #=> String
+    #   resp.blocks[0].query.alias #=> String
+    #   resp.blocks[0].query.pages #=> Array
+    #   resp.blocks[0].query.pages[0] #=> String
     #   resp.detect_document_text_model_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/DetectDocumentText AWS API Documentation
@@ -778,6 +810,11 @@ module Aws::Textract
     #   document are returned (including text that doesn't have a
     #   relationship with the value of the `StartDocumentAnalysis`
     #   `FeatureTypes` input parameter).
+    #
+    # * Queries. A QUERIES\_RESULT Block object contains the answer to the
+    #   query, the alias associated and an ID that connect it to the query
+    #   asked. This Block also contains a location and attached confidence
+    #   score
     #
     # Selection elements such as check boxes and option buttons (radio
     # buttons) can be detected in form data and in tables. A
@@ -839,7 +876,7 @@ module Aws::Textract
     #   resp.job_status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED", "PARTIAL_SUCCESS"
     #   resp.next_token #=> String
     #   resp.blocks #=> Array
-    #   resp.blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT"
+    #   resp.blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT", "MERGED_CELL", "TITLE", "QUERY", "QUERY_RESULT"
     #   resp.blocks[0].confidence #=> Float
     #   resp.blocks[0].text #=> String
     #   resp.blocks[0].text_type #=> String, one of "HANDWRITING", "PRINTED"
@@ -856,13 +893,17 @@ module Aws::Textract
     #   resp.blocks[0].geometry.polygon[0].y #=> Float
     #   resp.blocks[0].id #=> String
     #   resp.blocks[0].relationships #=> Array
-    #   resp.blocks[0].relationships[0].type #=> String, one of "VALUE", "CHILD", "COMPLEX_FEATURES"
+    #   resp.blocks[0].relationships[0].type #=> String, one of "VALUE", "CHILD", "COMPLEX_FEATURES", "MERGED_CELL", "TITLE", "ANSWER"
     #   resp.blocks[0].relationships[0].ids #=> Array
     #   resp.blocks[0].relationships[0].ids[0] #=> String
     #   resp.blocks[0].entity_types #=> Array
-    #   resp.blocks[0].entity_types[0] #=> String, one of "KEY", "VALUE"
+    #   resp.blocks[0].entity_types[0] #=> String, one of "KEY", "VALUE", "COLUMN_HEADER"
     #   resp.blocks[0].selection_status #=> String, one of "SELECTED", "NOT_SELECTED"
     #   resp.blocks[0].page #=> Integer
+    #   resp.blocks[0].query.text #=> String
+    #   resp.blocks[0].query.alias #=> String
+    #   resp.blocks[0].query.pages #=> Array
+    #   resp.blocks[0].query.pages[0] #=> String
     #   resp.warnings #=> Array
     #   resp.warnings[0].error_code #=> String
     #   resp.warnings[0].pages #=> Array
@@ -957,7 +998,7 @@ module Aws::Textract
     #   resp.job_status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED", "PARTIAL_SUCCESS"
     #   resp.next_token #=> String
     #   resp.blocks #=> Array
-    #   resp.blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT"
+    #   resp.blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT", "MERGED_CELL", "TITLE", "QUERY", "QUERY_RESULT"
     #   resp.blocks[0].confidence #=> Float
     #   resp.blocks[0].text #=> String
     #   resp.blocks[0].text_type #=> String, one of "HANDWRITING", "PRINTED"
@@ -974,13 +1015,17 @@ module Aws::Textract
     #   resp.blocks[0].geometry.polygon[0].y #=> Float
     #   resp.blocks[0].id #=> String
     #   resp.blocks[0].relationships #=> Array
-    #   resp.blocks[0].relationships[0].type #=> String, one of "VALUE", "CHILD", "COMPLEX_FEATURES"
+    #   resp.blocks[0].relationships[0].type #=> String, one of "VALUE", "CHILD", "COMPLEX_FEATURES", "MERGED_CELL", "TITLE", "ANSWER"
     #   resp.blocks[0].relationships[0].ids #=> Array
     #   resp.blocks[0].relationships[0].ids[0] #=> String
     #   resp.blocks[0].entity_types #=> Array
-    #   resp.blocks[0].entity_types[0] #=> String, one of "KEY", "VALUE"
+    #   resp.blocks[0].entity_types[0] #=> String, one of "KEY", "VALUE", "COLUMN_HEADER"
     #   resp.blocks[0].selection_status #=> String, one of "SELECTED", "NOT_SELECTED"
     #   resp.blocks[0].page #=> Integer
+    #   resp.blocks[0].query.text #=> String
+    #   resp.blocks[0].query.alias #=> String
+    #   resp.blocks[0].query.pages #=> Array
+    #   resp.blocks[0].query.pages[0] #=> String
     #   resp.warnings #=> Array
     #   resp.warnings[0].error_code #=> String
     #   resp.warnings[0].pages #=> Array
@@ -1200,6 +1245,8 @@ module Aws::Textract
     #   customer bucket. When this parameter is not enabled, the result will
     #   be encrypted server side,using SSE-S3.
     #
+    # @option params [Types::QueriesConfig] :queries_config
+    #
     # @return [Types::StartDocumentAnalysisResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartDocumentAnalysisResponse#job_id #job_id} => String
@@ -1214,7 +1261,7 @@ module Aws::Textract
     #         version: "S3ObjectVersion",
     #       },
     #     },
-    #     feature_types: ["TABLES"], # required, accepts TABLES, FORMS
+    #     feature_types: ["TABLES"], # required, accepts TABLES, FORMS, QUERIES
     #     client_request_token: "ClientRequestToken",
     #     job_tag: "JobTag",
     #     notification_channel: {
@@ -1226,6 +1273,15 @@ module Aws::Textract
     #       s3_prefix: "S3ObjectName",
     #     },
     #     kms_key_id: "KMSKeyId",
+    #     queries_config: {
+    #       queries: [ # required
+    #         {
+    #           text: "QueryInput", # required
+    #           alias: "QueryInput",
+    #           pages: ["QueryPage"],
+    #         },
+    #       ],
+    #     },
     #   })
     #
     # @example Response structure
@@ -1458,7 +1514,7 @@ module Aws::Textract
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-textract'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

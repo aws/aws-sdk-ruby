@@ -38,7 +38,13 @@ module Aws::CustomerProfiles
     #   @return [String]
     #
     # @!attribute [rw] key_name
-    #   A searchable identifier of a customer profile.
+    #   A searchable identifier of a customer profile. The predefined keys
+    #   you can use include: \_account, \_profileId, \_assetId, \_caseId,
+    #   \_orderId, \_fullName, \_phone, \_email, \_ctrContactId,
+    #   \_marketoLeadId, \_salesforceAccountId, \_salesforceContactId,
+    #   \_salesforceAssetId, \_zendeskUserId, \_zendeskExternalId,
+    #   \_zendeskTicketId, \_serviceNowSystemId, \_serviceNowIncidentId,
+    #   \_segmentUserId, \_shopifyCustomerId, \_shopifyOrderId.
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -153,6 +159,212 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # Details for workflow of type `APPFLOW_INTEGRATION`.
+    #
+    # @note When making an API call, you may pass AppflowIntegration
+    #   data as a hash:
+    #
+    #       {
+    #         flow_definition: { # required
+    #           description: "FlowDescription",
+    #           flow_name: "FlowName", # required
+    #           kms_arn: "KmsArn", # required
+    #           source_flow_config: { # required
+    #             connector_profile_name: "ConnectorProfileName",
+    #             connector_type: "Salesforce", # required, accepts Salesforce, Marketo, Zendesk, Servicenow, S3
+    #             incremental_pull_config: {
+    #               datetime_type_field_name: "DatetimeTypeFieldName",
+    #             },
+    #             source_connector_properties: { # required
+    #               marketo: {
+    #                 object: "Object", # required
+    #               },
+    #               s3: {
+    #                 bucket_name: "BucketName", # required
+    #                 bucket_prefix: "BucketPrefix",
+    #               },
+    #               salesforce: {
+    #                 object: "Object", # required
+    #                 enable_dynamic_field_update: false,
+    #                 include_deleted_records: false,
+    #               },
+    #               service_now: {
+    #                 object: "Object", # required
+    #               },
+    #               zendesk: {
+    #                 object: "Object", # required
+    #               },
+    #             },
+    #           },
+    #           tasks: [ # required
+    #             {
+    #               connector_operator: {
+    #                 marketo: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, BETWEEN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #                 s3: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #                 salesforce: "PROJECTION", # accepts PROJECTION, LESS_THAN, CONTAINS, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #                 service_now: "PROJECTION", # accepts PROJECTION, CONTAINS, LESS_THAN, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #                 zendesk: "PROJECTION", # accepts PROJECTION, GREATER_THAN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #               },
+    #               destination_field: "DestinationField",
+    #               source_fields: ["stringTo2048"], # required
+    #               task_properties: {
+    #                 "VALUE" => "Property",
+    #               },
+    #               task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Mask, Merge, Truncate, Validate
+    #             },
+    #           ],
+    #           trigger_config: { # required
+    #             trigger_type: "Scheduled", # required, accepts Scheduled, Event, OnDemand
+    #             trigger_properties: {
+    #               scheduled: {
+    #                 schedule_expression: "ScheduleExpression", # required
+    #                 data_pull_mode: "Incremental", # accepts Incremental, Complete
+    #                 schedule_start_time: Time.now,
+    #                 schedule_end_time: Time.now,
+    #                 timezone: "Timezone",
+    #                 schedule_offset: 1,
+    #                 first_execution_from: Time.now,
+    #               },
+    #             },
+    #           },
+    #         },
+    #         batches: [
+    #           {
+    #             start_time: Time.now, # required
+    #             end_time: Time.now, # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] flow_definition
+    #   The configurations that control how Customer Profiles retrieves data
+    #   from the source, Amazon AppFlow. Customer Profiles uses this
+    #   information to create an AppFlow flow on behalf of customers.
+    #   @return [Types::FlowDefinition]
+    #
+    # @!attribute [rw] batches
+    #   Batches in workflow of type `APPFLOW_INTEGRATION`.
+    #   @return [Array<Types::Batch>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/AppflowIntegration AWS API Documentation
+    #
+    class AppflowIntegration < Struct.new(
+      :flow_definition,
+      :batches)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Structure holding all `APPFLOW_INTEGRATION` specific workflow
+    # attributes.
+    #
+    # @!attribute [rw] source_connector_type
+    #   Specifies the source connector type, such as Salesforce, ServiceNow,
+    #   and Marketo. Indicates source of ingestion.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_profile_name
+    #   The name of the AppFlow connector profile used for ingestion.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role. Customer Profiles
+    #   assumes this role to create resources on your behalf as part of
+    #   workflow execution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/AppflowIntegrationWorkflowAttributes AWS API Documentation
+    #
+    class AppflowIntegrationWorkflowAttributes < Struct.new(
+      :source_connector_type,
+      :connector_profile_name,
+      :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Workflow specific execution metrics for `APPFLOW_INTEGRATION`
+    # workflow.
+    #
+    # @!attribute [rw] records_processed
+    #   Number of records processed in `APPFLOW_INTEGRATION` workflow.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] steps_completed
+    #   Total steps completed in `APPFLOW_INTEGRATION` workflow.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_steps
+    #   Total steps in `APPFLOW_INTEGRATION` workflow.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/AppflowIntegrationWorkflowMetrics AWS API Documentation
+    #
+    class AppflowIntegrationWorkflowMetrics < Struct.new(
+      :records_processed,
+      :steps_completed,
+      :total_steps)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Workflow step details for `APPFLOW_INTEGRATION` workflow.
+    #
+    # @!attribute [rw] flow_name
+    #   Name of the flow created during execution of workflow step.
+    #   `APPFLOW_INTEGRATION` workflow type creates an appflow flow during
+    #   workflow step execution on the customers behalf.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Workflow step status for `APPFLOW_INTEGRATION` workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_message
+    #   Message indicating execution of workflow step for
+    #   `APPFLOW_INTEGRATION` workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] records_processed
+    #   Total number of records processed during execution of workflow step
+    #   for `APPFLOW_INTEGRATION` workflow.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] batch_records_start_time
+    #   Start datetime of records pulled in batch during execution of
+    #   workflow step for `APPFLOW_INTEGRATION` workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] batch_records_end_time
+    #   End datetime of records pulled in batch during execution of workflow
+    #   step for `APPFLOW_INTEGRATION` workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   Creation timestamp of workflow step for `APPFLOW_INTEGRATION`
+    #   workflow.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   Last updated timestamp for workflow step for `APPFLOW_INTEGRATION`
+    #   workflow.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/AppflowIntegrationWorkflowStep AWS API Documentation
+    #
+    class AppflowIntegrationWorkflowStep < Struct.new(
+      :flow_name,
+      :status,
+      :execution_message,
+      :records_processed,
+      :batch_records_start_time,
+      :batch_records_end_time,
+      :created_at,
+      :last_updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration settings for how to perform the auto-merging of
     # profiles.
     #
@@ -170,6 +382,7 @@ module Aws::CustomerProfiles
     #           conflict_resolving_model: "RECENCY", # required, accepts RECENCY, SOURCE
     #           source_name: "string1To255",
     #         },
+    #         min_allowed_confidence_score_for_merging: 1.0,
     #       }
     #
     # @!attribute [rw] enabled
@@ -189,12 +402,20 @@ module Aws::CustomerProfiles
     #   which `EmailAddress` should be used?
     #   @return [Types::ConflictResolution]
     #
+    # @!attribute [rw] min_allowed_confidence_score_for_merging
+    #   A number between 0 and 1 that represents the minimum confidence
+    #   score required for profiles within a matching group to be merged
+    #   during the auto-merge process. A higher score means higher
+    #   similarity required to merge profiles.
+    #   @return [Float]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/AutoMerging AWS API Documentation
     #
     class AutoMerging < Struct.new(
       :enabled,
       :consolidation,
-      :conflict_resolution)
+      :conflict_resolution,
+      :min_allowed_confidence_score_for_merging)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -208,6 +429,35 @@ module Aws::CustomerProfiles
     #
     class BadRequestException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Batch defines the boundaries for ingestion for each step in
+    # `APPFLOW_INTEGRATION` workflow. `APPFLOW_INTEGRATION` workflow splits
+    # ingestion based on these boundaries.
+    #
+    # @note When making an API call, you may pass Batch
+    #   data as a hash:
+    #
+    #       {
+    #         start_time: Time.now, # required
+    #         end_time: Time.now, # required
+    #       }
+    #
+    # @!attribute [rw] start_time
+    #   Start time of batch to split ingestion.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   End time of batch to split ingestion.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/Batch AWS API Documentation
+    #
+    class Batch < Struct.new(
+      :start_time,
+      :end_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -345,6 +595,7 @@ module Aws::CustomerProfiles
     #               conflict_resolving_model: "RECENCY", # required, accepts RECENCY, SOURCE
     #               source_name: "string1To255",
     #             },
+    #             min_allowed_confidence_score_for_merging: 1.0,
     #           },
     #           exporting_config: {
     #             s3_exporting: {
@@ -477,6 +728,150 @@ module Aws::CustomerProfiles
       :created_at,
       :last_updated_at,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateIntegrationWorkflowRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "name", # required
+    #         workflow_type: "APPFLOW_INTEGRATION", # required, accepts APPFLOW_INTEGRATION
+    #         integration_config: { # required
+    #           appflow_integration: {
+    #             flow_definition: { # required
+    #               description: "FlowDescription",
+    #               flow_name: "FlowName", # required
+    #               kms_arn: "KmsArn", # required
+    #               source_flow_config: { # required
+    #                 connector_profile_name: "ConnectorProfileName",
+    #                 connector_type: "Salesforce", # required, accepts Salesforce, Marketo, Zendesk, Servicenow, S3
+    #                 incremental_pull_config: {
+    #                   datetime_type_field_name: "DatetimeTypeFieldName",
+    #                 },
+    #                 source_connector_properties: { # required
+    #                   marketo: {
+    #                     object: "Object", # required
+    #                   },
+    #                   s3: {
+    #                     bucket_name: "BucketName", # required
+    #                     bucket_prefix: "BucketPrefix",
+    #                   },
+    #                   salesforce: {
+    #                     object: "Object", # required
+    #                     enable_dynamic_field_update: false,
+    #                     include_deleted_records: false,
+    #                   },
+    #                   service_now: {
+    #                     object: "Object", # required
+    #                   },
+    #                   zendesk: {
+    #                     object: "Object", # required
+    #                   },
+    #                 },
+    #               },
+    #               tasks: [ # required
+    #                 {
+    #                   connector_operator: {
+    #                     marketo: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, BETWEEN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #                     s3: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #                     salesforce: "PROJECTION", # accepts PROJECTION, LESS_THAN, CONTAINS, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #                     service_now: "PROJECTION", # accepts PROJECTION, CONTAINS, LESS_THAN, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #                     zendesk: "PROJECTION", # accepts PROJECTION, GREATER_THAN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #                   },
+    #                   destination_field: "DestinationField",
+    #                   source_fields: ["stringTo2048"], # required
+    #                   task_properties: {
+    #                     "VALUE" => "Property",
+    #                   },
+    #                   task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Mask, Merge, Truncate, Validate
+    #                 },
+    #               ],
+    #               trigger_config: { # required
+    #                 trigger_type: "Scheduled", # required, accepts Scheduled, Event, OnDemand
+    #                 trigger_properties: {
+    #                   scheduled: {
+    #                     schedule_expression: "ScheduleExpression", # required
+    #                     data_pull_mode: "Incremental", # accepts Incremental, Complete
+    #                     schedule_start_time: Time.now,
+    #                     schedule_end_time: Time.now,
+    #                     timezone: "Timezone",
+    #                     schedule_offset: 1,
+    #                     first_execution_from: Time.now,
+    #                   },
+    #                 },
+    #               },
+    #             },
+    #             batches: [
+    #               {
+    #                 start_time: Time.now, # required
+    #                 end_time: Time.now, # required
+    #               },
+    #             ],
+    #           },
+    #         },
+    #         object_type_name: "typeName", # required
+    #         role_arn: "RoleArn", # required
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] workflow_type
+    #   The type of workflow. The only supported value is
+    #   APPFLOW\_INTEGRATION.
+    #   @return [String]
+    #
+    # @!attribute [rw] integration_config
+    #   Configuration data for integration workflow.
+    #   @return [Types::IntegrationConfig]
+    #
+    # @!attribute [rw] object_type_name
+    #   The name of the profile object type.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role. Customer Profiles
+    #   assumes this role to create resources on your behalf as part of
+    #   workflow execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/CreateIntegrationWorkflowRequest AWS API Documentation
+    #
+    class CreateIntegrationWorkflowRequest < Struct.new(
+      :domain_name,
+      :workflow_type,
+      :integration_config,
+      :object_type_name,
+      :role_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] workflow_id
+    #   Unique identifier for the workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message indicating create request was received.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/CreateIntegrationWorkflowResponse AWS API Documentation
+    #
+    class CreateIntegrationWorkflowResponse < Struct.new(
+      :workflow_id,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -928,6 +1323,35 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteWorkflowRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "name", # required
+    #         workflow_id: "string1To255", # required
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] workflow_id
+    #   Unique identifier for the workflow.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DeleteWorkflowRequest AWS API Documentation
+    #
+    class DeleteWorkflowRequest < Struct.new(
+      :domain_name,
+      :workflow_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DeleteWorkflowResponse AWS API Documentation
+    #
+    class DeleteWorkflowResponse < Aws::EmptyStructure; end
+
     # Usage-specific statistics about the domain.
     #
     # @!attribute [rw] profile_count
@@ -1283,6 +1707,7 @@ module Aws::CustomerProfiles
     #           conflict_resolving_model: "RECENCY", # required, accepts RECENCY, SOURCE
     #           source_name: "string1To255",
     #         },
+    #         min_allowed_confidence_score_for_merging: 1.0,
     #       }
     #
     # @!attribute [rw] domain_name
@@ -1298,12 +1723,18 @@ module Aws::CustomerProfiles
     #   different profiles.
     #   @return [Types::ConflictResolution]
     #
+    # @!attribute [rw] min_allowed_confidence_score_for_merging
+    #   Minimum confidence score required for profiles within a matching
+    #   group to be merged during the auto-merge process.
+    #   @return [Float]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetAutoMergingPreviewRequest AWS API Documentation
     #
     class GetAutoMergingPreviewRequest < Struct.new(
       :domain_name,
       :consolidation,
-      :conflict_resolution)
+      :conflict_resolution,
+      :min_allowed_confidence_score_for_merging)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1601,6 +2032,10 @@ module Aws::CustomerProfiles
     #   `ShopifyCreateOrders`, and `ShopifyUpdatedOrders`.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] workflow_id
+    #   Unique identifier for the workflow.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetIntegrationResponse AWS API Documentation
     #
     class GetIntegrationResponse < Struct.new(
@@ -1610,7 +2045,8 @@ module Aws::CustomerProfiles
       :created_at,
       :last_updated_at,
       :tags,
-      :object_type_names)
+      :object_type_names,
+      :workflow_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1843,6 +2279,147 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetWorkflowRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "name", # required
+    #         workflow_id: "uuid", # required
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] workflow_id
+    #   Unique identifier for the workflow.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetWorkflowRequest AWS API Documentation
+    #
+    class GetWorkflowRequest < Struct.new(
+      :domain_name,
+      :workflow_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] workflow_id
+    #   Unique identifier for the workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] workflow_type
+    #   The type of workflow. The only supported value is
+    #   APPFLOW\_INTEGRATION.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Status of workflow execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_description
+    #   Workflow error messages during execution (if any).
+    #   @return [String]
+    #
+    # @!attribute [rw] start_date
+    #   The timestamp that represents when workflow execution started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp that represents when workflow execution last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] attributes
+    #   Attributes provided for workflow execution.
+    #   @return [Types::WorkflowAttributes]
+    #
+    # @!attribute [rw] metrics
+    #   Workflow specific execution metrics.
+    #   @return [Types::WorkflowMetrics]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetWorkflowResponse AWS API Documentation
+    #
+    class GetWorkflowResponse < Struct.new(
+      :workflow_id,
+      :workflow_type,
+      :status,
+      :error_description,
+      :start_date,
+      :last_updated_at,
+      :attributes,
+      :metrics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetWorkflowStepsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "name", # required
+    #         workflow_id: "uuid", # required
+    #         next_token: "token",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] workflow_id
+    #   Unique identifier for the workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetWorkflowStepsRequest AWS API Documentation
+    #
+    class GetWorkflowStepsRequest < Struct.new(
+      :domain_name,
+      :workflow_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] workflow_id
+    #   Unique identifier for the workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] workflow_type
+    #   The type of workflow. The only supported value is
+    #   APPFLOW\_INTEGRATION.
+    #   @return [String]
+    #
+    # @!attribute [rw] items
+    #   List containing workflow step details.
+    #   @return [Array<Types::WorkflowStepItem>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetWorkflowStepsResponse AWS API Documentation
+    #
+    class GetWorkflowStepsResponse < Struct.new(
+      :workflow_id,
+      :workflow_type,
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the Identity Resolution Job.
     #
     # @!attribute [rw] domain_name
@@ -1940,6 +2517,97 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # Configuration data for integration workflow.
+    #
+    # @note When making an API call, you may pass IntegrationConfig
+    #   data as a hash:
+    #
+    #       {
+    #         appflow_integration: {
+    #           flow_definition: { # required
+    #             description: "FlowDescription",
+    #             flow_name: "FlowName", # required
+    #             kms_arn: "KmsArn", # required
+    #             source_flow_config: { # required
+    #               connector_profile_name: "ConnectorProfileName",
+    #               connector_type: "Salesforce", # required, accepts Salesforce, Marketo, Zendesk, Servicenow, S3
+    #               incremental_pull_config: {
+    #                 datetime_type_field_name: "DatetimeTypeFieldName",
+    #               },
+    #               source_connector_properties: { # required
+    #                 marketo: {
+    #                   object: "Object", # required
+    #                 },
+    #                 s3: {
+    #                   bucket_name: "BucketName", # required
+    #                   bucket_prefix: "BucketPrefix",
+    #                 },
+    #                 salesforce: {
+    #                   object: "Object", # required
+    #                   enable_dynamic_field_update: false,
+    #                   include_deleted_records: false,
+    #                 },
+    #                 service_now: {
+    #                   object: "Object", # required
+    #                 },
+    #                 zendesk: {
+    #                   object: "Object", # required
+    #                 },
+    #               },
+    #             },
+    #             tasks: [ # required
+    #               {
+    #                 connector_operator: {
+    #                   marketo: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, BETWEEN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #                   s3: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #                   salesforce: "PROJECTION", # accepts PROJECTION, LESS_THAN, CONTAINS, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #                   service_now: "PROJECTION", # accepts PROJECTION, CONTAINS, LESS_THAN, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #                   zendesk: "PROJECTION", # accepts PROJECTION, GREATER_THAN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #                 },
+    #                 destination_field: "DestinationField",
+    #                 source_fields: ["stringTo2048"], # required
+    #                 task_properties: {
+    #                   "VALUE" => "Property",
+    #                 },
+    #                 task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Mask, Merge, Truncate, Validate
+    #               },
+    #             ],
+    #             trigger_config: { # required
+    #               trigger_type: "Scheduled", # required, accepts Scheduled, Event, OnDemand
+    #               trigger_properties: {
+    #                 scheduled: {
+    #                   schedule_expression: "ScheduleExpression", # required
+    #                   data_pull_mode: "Incremental", # accepts Incremental, Complete
+    #                   schedule_start_time: Time.now,
+    #                   schedule_end_time: Time.now,
+    #                   timezone: "Timezone",
+    #                   schedule_offset: 1,
+    #                   first_execution_from: Time.now,
+    #                 },
+    #               },
+    #             },
+    #           },
+    #           batches: [
+    #             {
+    #               start_time: Time.now, # required
+    #               end_time: Time.now, # required
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] appflow_integration
+    #   Configuration data for `APPFLOW_INTEGRATION` workflow type.
+    #   @return [Types::AppflowIntegration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/IntegrationConfig AWS API Documentation
+    #
+    class IntegrationConfig < Struct.new(
+      :appflow_integration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An internal service error occurred.
     #
     # @!attribute [rw] message
@@ -2012,6 +2680,7 @@ module Aws::CustomerProfiles
     #         uri: "string1To255", # required
     #         next_token: "token",
     #         max_results: 1,
+    #         include_hidden: false,
     #       }
     #
     # @!attribute [rw] uri
@@ -2027,12 +2696,18 @@ module Aws::CustomerProfiles
     #   The maximum number of objects returned per page.
     #   @return [Integer]
     #
+    # @!attribute [rw] include_hidden
+    #   Boolean to indicate if hidden integration should be returned.
+    #   Defaults to `False`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListAccountIntegrationsRequest AWS API Documentation
     #
     class ListAccountIntegrationsRequest < Struct.new(
       :uri,
       :next_token,
-      :max_results)
+      :max_results,
+      :include_hidden)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2215,6 +2890,10 @@ module Aws::CustomerProfiles
     #   `ShopifyCreateOrders`, and `ShopifyUpdatedOrders`.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] workflow_id
+    #   Unique identifier for the workflow.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListIntegrationItem AWS API Documentation
     #
     class ListIntegrationItem < Struct.new(
@@ -2224,7 +2903,8 @@ module Aws::CustomerProfiles
       :created_at,
       :last_updated_at,
       :tags,
-      :object_type_names)
+      :object_type_names,
+      :workflow_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2236,6 +2916,7 @@ module Aws::CustomerProfiles
     #         domain_name: "name", # required
     #         next_token: "token",
     #         max_results: 1,
+    #         include_hidden: false,
     #       }
     #
     # @!attribute [rw] domain_name
@@ -2250,12 +2931,18 @@ module Aws::CustomerProfiles
     #   The maximum number of objects returned per page.
     #   @return [Integer]
     #
+    # @!attribute [rw] include_hidden
+    #   Boolean to indicate if hidden integration should be returned.
+    #   Defaults to `False`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListIntegrationsRequest AWS API Documentation
     #
     class ListIntegrationsRequest < Struct.new(
       :domain_name,
       :next_token,
-      :max_results)
+      :max_results,
+      :include_hidden)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2556,6 +3243,122 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # A workflow in list of workflows.
+    #
+    # @!attribute [rw] workflow_type
+    #   The type of workflow. The only supported value is
+    #   APPFLOW\_INTEGRATION.
+    #   @return [String]
+    #
+    # @!attribute [rw] workflow_id
+    #   Unique identifier for the workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Status of workflow execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_description
+    #   Description for workflow execution status.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   Creation timestamp for workflow.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   Last updated timestamp for workflow.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListWorkflowsItem AWS API Documentation
+    #
+    class ListWorkflowsItem < Struct.new(
+      :workflow_type,
+      :workflow_id,
+      :status,
+      :status_description,
+      :created_at,
+      :last_updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListWorkflowsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "name", # required
+    #         workflow_type: "APPFLOW_INTEGRATION", # accepts APPFLOW_INTEGRATION
+    #         status: "NOT_STARTED", # accepts NOT_STARTED, IN_PROGRESS, COMPLETE, FAILED, SPLIT, RETRY, CANCELLED
+    #         query_start_date: Time.now,
+    #         query_end_date: Time.now,
+    #         next_token: "token",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] workflow_type
+    #   The type of workflow. The only supported value is
+    #   APPFLOW\_INTEGRATION.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Status of workflow execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_start_date
+    #   Retrieve workflows started after timestamp.
+    #   @return [Time]
+    #
+    # @!attribute [rw] query_end_date
+    #   Retrieve workflows ended after timestamp.
+    #   @return [Time]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListWorkflowsRequest AWS API Documentation
+    #
+    class ListWorkflowsRequest < Struct.new(
+      :domain_name,
+      :workflow_type,
+      :status,
+      :query_start_date,
+      :query_end_date,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   List containing workflow details.
+    #   @return [Array<Types::ListWorkflowsItem>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListWorkflowsResponse AWS API Documentation
+    #
+    class ListWorkflowsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The properties that are applied when Marketo is being used as a
     # source.
     #
@@ -2589,9 +3392,15 @@ module Aws::CustomerProfiles
     #   @return [Array<String>]
     #
     # @!attribute [rw] confidence_score
-    #   A number between 0 and 1 that represents the confidence level of
-    #   assigning profiles to a matching group. A score of 1 likely
-    #   indicates an exact match.
+    #   A number between 0 and 1, where a higher score means higher
+    #   similarity. Examining match confidence scores lets you distinguish
+    #   between groups of similar records in which the system is highly
+    #   confident (which you may decide to merge), groups of similar records
+    #   about which the system is uncertain (which you may decide to have
+    #   reviewed by a human), and groups of similar records that the system
+    #   deems to be unlikely (which you may decide to reject). Given
+    #   confidence scores vary as per the data input, it should not be used
+    #   an absolute measure of matching quality.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/MatchItem AWS API Documentation
@@ -2626,6 +3435,7 @@ module Aws::CustomerProfiles
     #             conflict_resolving_model: "RECENCY", # required, accepts RECENCY, SOURCE
     #             source_name: "string1To255",
     #           },
+    #           min_allowed_confidence_score_for_merging: 1.0,
     #         },
     #         exporting_config: {
     #           s3_exporting: {
@@ -3159,6 +3969,10 @@ module Aws::CustomerProfiles
     #   `ShopifyCreateOrders`, and `ShopifyUpdatedOrders`.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] workflow_id
+    #   Unique identifier for the workflow.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/PutIntegrationResponse AWS API Documentation
     #
     class PutIntegrationResponse < Struct.new(
@@ -3168,7 +3982,8 @@ module Aws::CustomerProfiles
       :created_at,
       :last_updated_at,
       :tags,
-      :object_type_names)
+      :object_type_names,
+      :workflow_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3262,7 +4077,14 @@ module Aws::CustomerProfiles
     #   @return [String]
     #
     # @!attribute [rw] template_id
-    #   A unique identifier for the object template.
+    #   A unique identifier for the object template. For some attributes in
+    #   the request, the service will use the default value from the object
+    #   template when TemplateId is present. If these attributes are present
+    #   in the request, the service may return a `BadRequestException`.
+    #   These attributes include: AllowProfileCreation,
+    #   SourceLastUpdatedTimestampFormat, Fields, and Keys. For example, if
+    #   AllowProfileCreation is set to true when TemplateId is set, the
+    #   service may return a `BadRequestException`.
     #   @return [String]
     #
     # @!attribute [rw] expiration_days
@@ -4114,6 +4936,7 @@ module Aws::CustomerProfiles
     #               conflict_resolving_model: "RECENCY", # required, accepts RECENCY, SOURCE
     #               source_name: "string1To255",
     #             },
+    #             min_allowed_confidence_score_for_merging: 1.0,
     #           },
     #           exporting_config: {
     #             s3_exporting: {
@@ -4460,6 +5283,49 @@ module Aws::CustomerProfiles
     #
     class UpdateProfileResponse < Struct.new(
       :profile_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Structure to hold workflow attributes.
+    #
+    # @!attribute [rw] appflow_integration
+    #   Workflow attributes specific to `APPFLOW_INTEGRATION` workflow.
+    #   @return [Types::AppflowIntegrationWorkflowAttributes]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/WorkflowAttributes AWS API Documentation
+    #
+    class WorkflowAttributes < Struct.new(
+      :appflow_integration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Generic object containing workflow execution metrics.
+    #
+    # @!attribute [rw] appflow_integration
+    #   Workflow execution metrics for `APPFLOW_INTEGRATION` workflow.
+    #   @return [Types::AppflowIntegrationWorkflowMetrics]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/WorkflowMetrics AWS API Documentation
+    #
+    class WorkflowMetrics < Struct.new(
+      :appflow_integration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # List containing steps in workflow.
+    #
+    # @!attribute [rw] appflow_integration
+    #   Workflow step information specific to `APPFLOW_INTEGRATION`
+    #   workflow.
+    #   @return [Types::AppflowIntegrationWorkflowStep]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/WorkflowStepItem AWS API Documentation
+    #
+    class WorkflowStepItem < Struct.new(
+      :appflow_integration)
       SENSITIVE = []
       include Aws::Structure
     end

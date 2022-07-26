@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2022-07-21)
+------------------
+
+* Feature - Adding support for the suppression of Composite Alarm actions
+
+1.64.0 (2022-04-14)
+------------------
+
+* Feature - Updates documentation for additional statistics in CloudWatch Metric Streams.
+
+1.63.0 (2022-04-13)
+------------------
+
+* Feature - Adds support for additional statistics in CloudWatch Metric Streams.
+
+1.62.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.61.0 (2022-02-03)
 ------------------
 

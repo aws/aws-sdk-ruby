@@ -722,7 +722,7 @@ module Aws::MediaLive
     #         },
     #         language_code: "__stringMin1Max35",
     #         language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
-    #         name: "__string", # required
+    #         name: "__stringMax255", # required
     #         remix_settings: {
     #           channel_mappings: [ # required
     #             {
@@ -932,7 +932,7 @@ module Aws::MediaLive
     #         audio_group_id: "__string",
     #         audio_only_image: {
     #           password_param: "__string",
-    #           uri: "__string", # required
+    #           uri: "__stringMax2048", # required
     #           username: "__string",
     #         },
     #         audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT", # accepts ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
@@ -1281,7 +1281,7 @@ module Aws::MediaLive
     #       {
     #         avail_blanking_image: {
     #           password_param: "__string",
-    #           uri: "__string", # required
+    #           uri: "__stringMax2048", # required
     #           username: "__string",
     #         },
     #         state: "DISABLED", # accepts DISABLED, ENABLED
@@ -1620,7 +1620,7 @@ module Aws::MediaLive
     #                 height: 1,
     #                 image: { # required
     #                   password_param: "__string",
-    #                   uri: "__string", # required
+    #                   uri: "__stringMax2048", # required
     #                   username: "__string",
     #                 },
     #                 image_x: 1,
@@ -1989,7 +1989,7 @@ module Aws::MediaLive
     #                   height: 1,
     #                   image: { # required
     #                     password_param: "__string",
-    #                     uri: "__string", # required
+    #                     uri: "__stringMax2048", # required
     #                     username: "__string",
     #                   },
     #                   image_x: 1,
@@ -2087,13 +2087,13 @@ module Aws::MediaLive
     #       {
     #         blackout_slate_image: {
     #           password_param: "__string",
-    #           uri: "__string", # required
+    #           uri: "__stringMax2048", # required
     #           username: "__string",
     #         },
     #         network_end_blackout: "DISABLED", # accepts DISABLED, ENABLED
     #         network_end_blackout_image: {
     #           password_param: "__string",
-    #           uri: "__string", # required
+    #           uri: "__stringMax2048", # required
     #           username: "__string",
     #         },
     #         network_id: "__stringMin34Max34",
@@ -2153,7 +2153,7 @@ module Aws::MediaLive
     #         background_opacity: 1,
     #         font: {
     #           password_param: "__string",
-    #           uri: "__string", # required
+    #           uri: "__stringMax2048", # required
     #           username: "__string",
     #         },
     #         font_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
@@ -2342,6 +2342,7 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
+    #         accessibility: "DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES", # accepts DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES, IMPLEMENTS_ACCESSIBILITY_FEATURES
     #         caption_selector_name: "__string", # required
     #         destination_settings: {
     #           arib_destination_settings: {
@@ -2352,7 +2353,7 @@ module Aws::MediaLive
     #             background_opacity: 1,
     #             font: {
     #               password_param: "__string",
-    #               uri: "__string", # required
+    #               uri: "__stringMax2048", # required
     #               username: "__string",
     #             },
     #             font_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
@@ -2375,7 +2376,7 @@ module Aws::MediaLive
     #             background_opacity: 1,
     #             font: {
     #               password_param: "__string",
-    #               uri: "__string", # required
+    #               uri: "__stringMax2048", # required
     #               username: "__string",
     #             },
     #             font_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
@@ -2424,6 +2425,12 @@ module Aws::MediaLive
     #         name: "__string", # required
     #       }
     #
+    # @!attribute [rw] accessibility
+    #   Indicates whether the caption track implements accessibility
+    #   features such as written descriptions of spoken dialog, music, and
+    #   sounds.
+    #   @return [String]
+    #
     # @!attribute [rw] caption_selector_name
     #   Specifies which input caption selector to use as a caption source
     #   when generating output captions. This field should match a
@@ -2452,6 +2459,7 @@ module Aws::MediaLive
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CaptionDescription AWS API Documentation
     #
     class CaptionDescription < Struct.new(
+      :accessibility,
       :caption_selector_name,
       :destination_settings,
       :language_code,
@@ -2475,7 +2483,7 @@ module Aws::MediaLive
     #           background_opacity: 1,
     #           font: {
     #             password_param: "__string",
-    #             uri: "__string", # required
+    #             uri: "__stringMax2048", # required
     #             username: "__string",
     #           },
     #           font_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
@@ -2498,7 +2506,7 @@ module Aws::MediaLive
     #           background_opacity: 1,
     #           font: {
     #             password_param: "__string",
-    #             uri: "__string", # required
+    #             uri: "__stringMax2048", # required
     #             username: "__string",
     #           },
     #           font_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
@@ -2935,6 +2943,10 @@ module Aws::MediaLive
     #   The log level being written to CloudWatch Logs.
     #   @return [String]
     #
+    # @!attribute [rw] maintenance
+    #   Maintenance settings for this channel.
+    #   @return [Types::MaintenanceStatus]
+    #
     # @!attribute [rw] name
     #   The name of the channel. (user-mutable)
     #   @return [String]
@@ -2976,6 +2988,7 @@ module Aws::MediaLive
       :input_attachments,
       :input_specification,
       :log_level,
+      :maintenance,
       :name,
       :pipeline_details,
       :pipelines_running_count,
@@ -3054,6 +3067,10 @@ module Aws::MediaLive
     #   The log level being written to CloudWatch Logs.
     #   @return [String]
     #
+    # @!attribute [rw] maintenance
+    #   Maintenance settings for this channel.
+    #   @return [Types::MaintenanceStatus]
+    #
     # @!attribute [rw] name
     #   The name of the channel. (user-mutable)
     #   @return [String]
@@ -3090,6 +3107,7 @@ module Aws::MediaLive
       :input_attachments,
       :input_specification,
       :log_level,
+      :maintenance,
       :name,
       :pipelines_running_count,
       :role_arn,
@@ -3173,6 +3191,10 @@ module Aws::MediaLive
     #   The log level to write to CloudWatch Logs.
     #   @return [String]
     #
+    # @!attribute [rw] maintenance
+    #   Maintenance settings for this channel.
+    #   @return [Types::MaintenanceCreateSettings]
+    #
     # @!attribute [rw] name
     #   Name of channel.
     #   @return [String]
@@ -3209,6 +3231,7 @@ module Aws::MediaLive
       :input_attachments,
       :input_specification,
       :log_level,
+      :maintenance,
       :name,
       :request_id,
       :reserved,
@@ -3332,7 +3355,7 @@ module Aws::MediaLive
     #               },
     #               language_code: "__stringMin1Max35",
     #               language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
-    #               name: "__string", # required
+    #               name: "__stringMax255", # required
     #               remix_settings: {
     #                 channel_mappings: [ # required
     #                   {
@@ -3354,7 +3377,7 @@ module Aws::MediaLive
     #           avail_blanking: {
     #             avail_blanking_image: {
     #               password_param: "__string",
-    #               uri: "__string", # required
+    #               uri: "__stringMax2048", # required
     #               username: "__string",
     #             },
     #             state: "DISABLED", # accepts DISABLED, ENABLED
@@ -3376,13 +3399,13 @@ module Aws::MediaLive
     #           blackout_slate: {
     #             blackout_slate_image: {
     #               password_param: "__string",
-    #               uri: "__string", # required
+    #               uri: "__stringMax2048", # required
     #               username: "__string",
     #             },
     #             network_end_blackout: "DISABLED", # accepts DISABLED, ENABLED
     #             network_end_blackout_image: {
     #               password_param: "__string",
-    #               uri: "__string", # required
+    #               uri: "__stringMax2048", # required
     #               username: "__string",
     #             },
     #             network_id: "__stringMin34Max34",
@@ -3390,6 +3413,7 @@ module Aws::MediaLive
     #           },
     #           caption_descriptions: [
     #             {
+    #               accessibility: "DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES", # accepts DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES, IMPLEMENTS_ACCESSIBILITY_FEATURES
     #               caption_selector_name: "__string", # required
     #               destination_settings: {
     #                 arib_destination_settings: {
@@ -3400,7 +3424,7 @@ module Aws::MediaLive
     #                   background_opacity: 1,
     #                   font: {
     #                     password_param: "__string",
-    #                     uri: "__string", # required
+    #                     uri: "__stringMax2048", # required
     #                     username: "__string",
     #                   },
     #                   font_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
@@ -3423,7 +3447,7 @@ module Aws::MediaLive
     #                   background_opacity: 1,
     #                   font: {
     #                     password_param: "__string",
-    #                     uri: "__string", # required
+    #                     uri: "__stringMax2048", # required
     #                     username: "__string",
     #                   },
     #                   font_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
@@ -3483,7 +3507,7 @@ module Aws::MediaLive
     #               input_loss_image_color: "__stringMin6Max6",
     #               input_loss_image_slate: {
     #                 password_param: "__string",
-    #                 uri: "__string", # required
+    #                 uri: "__stringMax2048", # required
     #                 username: "__string",
     #               },
     #               input_loss_image_type: "COLOR", # accepts COLOR, SLATE
@@ -3600,7 +3624,7 @@ module Aws::MediaLive
     #                     static_key_settings: {
     #                       key_provider_server: {
     #                         password_param: "__string",
-    #                         uri: "__string", # required
+    #                         uri: "__stringMax2048", # required
     #                         username: "__string",
     #                       },
     #                       static_key_value: "__stringMin32Max32", # required
@@ -3753,7 +3777,7 @@ module Aws::MediaLive
     #                           audio_group_id: "__string",
     #                           audio_only_image: {
     #                             password_param: "__string",
-    #                             uri: "__string", # required
+    #                             uri: "__stringMax2048", # required
     #                             username: "__string",
     #                           },
     #                           audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT", # accepts ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
@@ -4172,6 +4196,10 @@ module Aws::MediaLive
     #           resolution: "SD", # accepts SD, HD, UHD
     #         },
     #         log_level: "ERROR", # accepts ERROR, WARNING, INFO, DEBUG, DISABLED
+    #         maintenance: {
+    #           maintenance_day: "MONDAY", # accepts MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+    #           maintenance_start_time: "__stringPattern010920300",
+    #         },
     #         name: "__string",
     #         request_id: "__string",
     #         reserved: "__string",
@@ -4211,6 +4239,9 @@ module Aws::MediaLive
     #   The log level the user wants for their channel.
     #   @return [String]
     #
+    # @!attribute [rw] maintenance
+    #   @return [Types::MaintenanceCreateSettings]
+    #
     # @!attribute [rw] name
     #   @return [String]
     #
@@ -4244,6 +4275,7 @@ module Aws::MediaLive
       :input_attachments,
       :input_specification,
       :log_level,
+      :maintenance,
       :name,
       :request_id,
       :reserved,
@@ -4877,6 +4909,9 @@ module Aws::MediaLive
     #   The log level the user wants for their channel.
     #   @return [String]
     #
+    # @!attribute [rw] maintenance
+    #   @return [Types::MaintenanceStatus]
+    #
     # @!attribute [rw] name
     #   @return [String]
     #
@@ -4912,6 +4947,7 @@ module Aws::MediaLive
       :input_attachments,
       :input_specification,
       :log_level,
+      :maintenance,
       :name,
       :pipeline_details,
       :pipelines_running_count,
@@ -5142,6 +5178,10 @@ module Aws::MediaLive
     # @!attribute [rw] region
     #   @return [String]
     #
+    # @!attribute [rw] renewal_settings
+    #   The Renewal settings for Reservations
+    #   @return [Types::RenewalSettings]
+    #
     # @!attribute [rw] reservation_id
     #   @return [String]
     #
@@ -5177,6 +5217,7 @@ module Aws::MediaLive
       :offering_id,
       :offering_type,
       :region,
+      :renewal_settings,
       :reservation_id,
       :resource_specification,
       :start,
@@ -5284,6 +5325,9 @@ module Aws::MediaLive
     #   The log level the user wants for their channel.
     #   @return [String]
     #
+    # @!attribute [rw] maintenance
+    #   @return [Types::MaintenanceStatus]
+    #
     # @!attribute [rw] name
     #   @return [String]
     #
@@ -5319,6 +5363,7 @@ module Aws::MediaLive
       :input_attachments,
       :input_specification,
       :log_level,
+      :maintenance,
       :name,
       :pipeline_details,
       :pipelines_running_count,
@@ -5861,6 +5906,10 @@ module Aws::MediaLive
     # @!attribute [rw] region
     #   @return [String]
     #
+    # @!attribute [rw] renewal_settings
+    #   The Renewal settings for Reservations
+    #   @return [Types::RenewalSettings]
+    #
     # @!attribute [rw] reservation_id
     #   @return [String]
     #
@@ -5896,6 +5945,7 @@ module Aws::MediaLive
       :offering_id,
       :offering_type,
       :region,
+      :renewal_settings,
       :reservation_id,
       :resource_specification,
       :start,
@@ -6044,7 +6094,7 @@ module Aws::MediaLive
     #         background_opacity: 1,
     #         font: {
     #           password_param: "__string",
-    #           uri: "__string", # required
+    #           uri: "__stringMax2048", # required
     #           username: "__string",
     #         },
     #         font_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
@@ -6433,10 +6483,8 @@ module Aws::MediaLive
     #       }
     #
     # @!attribute [rw] copyright_holder
-    #   Applies only if you plan to convert these source captions to
-    #   EBU-TT-D or TTML in an output. Complete this field if you want to
-    #   include the name of the copyright holder in the copyright metadata
-    #   tag in the TTML
+    #   Complete this field if you want to include the name of the copyright
+    #   holder in the copyright tag in the captions metadata.
     #   @return [String]
     #
     # @!attribute [rw] fill_line_gap
@@ -6637,7 +6685,7 @@ module Aws::MediaLive
     #             },
     #             language_code: "__stringMin1Max35",
     #             language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
-    #             name: "__string", # required
+    #             name: "__stringMax255", # required
     #             remix_settings: {
     #               channel_mappings: [ # required
     #                 {
@@ -6659,7 +6707,7 @@ module Aws::MediaLive
     #         avail_blanking: {
     #           avail_blanking_image: {
     #             password_param: "__string",
-    #             uri: "__string", # required
+    #             uri: "__stringMax2048", # required
     #             username: "__string",
     #           },
     #           state: "DISABLED", # accepts DISABLED, ENABLED
@@ -6681,13 +6729,13 @@ module Aws::MediaLive
     #         blackout_slate: {
     #           blackout_slate_image: {
     #             password_param: "__string",
-    #             uri: "__string", # required
+    #             uri: "__stringMax2048", # required
     #             username: "__string",
     #           },
     #           network_end_blackout: "DISABLED", # accepts DISABLED, ENABLED
     #           network_end_blackout_image: {
     #             password_param: "__string",
-    #             uri: "__string", # required
+    #             uri: "__stringMax2048", # required
     #             username: "__string",
     #           },
     #           network_id: "__stringMin34Max34",
@@ -6695,6 +6743,7 @@ module Aws::MediaLive
     #         },
     #         caption_descriptions: [
     #           {
+    #             accessibility: "DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES", # accepts DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES, IMPLEMENTS_ACCESSIBILITY_FEATURES
     #             caption_selector_name: "__string", # required
     #             destination_settings: {
     #               arib_destination_settings: {
@@ -6705,7 +6754,7 @@ module Aws::MediaLive
     #                 background_opacity: 1,
     #                 font: {
     #                   password_param: "__string",
-    #                   uri: "__string", # required
+    #                   uri: "__stringMax2048", # required
     #                   username: "__string",
     #                 },
     #                 font_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
@@ -6728,7 +6777,7 @@ module Aws::MediaLive
     #                 background_opacity: 1,
     #                 font: {
     #                   password_param: "__string",
-    #                   uri: "__string", # required
+    #                   uri: "__stringMax2048", # required
     #                   username: "__string",
     #                 },
     #                 font_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
@@ -6788,7 +6837,7 @@ module Aws::MediaLive
     #             input_loss_image_color: "__stringMin6Max6",
     #             input_loss_image_slate: {
     #               password_param: "__string",
-    #               uri: "__string", # required
+    #               uri: "__stringMax2048", # required
     #               username: "__string",
     #             },
     #             input_loss_image_type: "COLOR", # accepts COLOR, SLATE
@@ -6905,7 +6954,7 @@ module Aws::MediaLive
     #                   static_key_settings: {
     #                     key_provider_server: {
     #                       password_param: "__string",
-    #                       uri: "__string", # required
+    #                       uri: "__stringMax2048", # required
     #                       username: "__string",
     #                     },
     #                     static_key_value: "__stringMin32Max32", # required
@@ -7058,7 +7107,7 @@ module Aws::MediaLive
     #                         audio_group_id: "__string",
     #                         audio_only_image: {
     #                           password_param: "__string",
-    #                           uri: "__string", # required
+    #                           uri: "__stringMax2048", # required
     #                           username: "__string",
     #                         },
     #                         audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT", # accepts ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
@@ -7821,7 +7870,7 @@ module Aws::MediaLive
     #           input_loss_image_color: "__stringMin6Max6",
     #           input_loss_image_slate: {
     #             password_param: "__string",
-    #             uri: "__string", # required
+    #             uri: "__stringMax2048", # required
     #             username: "__string",
     #           },
     #           input_loss_image_type: "COLOR", # accepts COLOR, SLATE
@@ -8956,7 +9005,7 @@ module Aws::MediaLive
     #           static_key_settings: {
     #             key_provider_server: {
     #               password_param: "__string",
-    #               uri: "__string", # required
+    #               uri: "__stringMax2048", # required
     #               username: "__string",
     #             },
     #             static_key_value: "__stringMin32Max32", # required
@@ -9463,7 +9512,7 @@ module Aws::MediaLive
     #             audio_group_id: "__string",
     #             audio_only_image: {
     #               password_param: "__string",
-    #               uri: "__string", # required
+    #               uri: "__stringMax2048", # required
     #               username: "__string",
     #             },
     #             audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT", # accepts ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
@@ -9566,7 +9615,7 @@ module Aws::MediaLive
     #           audio_group_id: "__string",
     #           audio_only_image: {
     #             password_param: "__string",
-    #             uri: "__string", # required
+    #             uri: "__stringMax2048", # required
     #             username: "__string",
     #           },
     #           audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT", # accepts ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
@@ -10502,7 +10551,7 @@ module Aws::MediaLive
     #
     #       {
     #         password_param: "__string",
-    #         uri: "__string", # required
+    #         uri: "__stringMax2048", # required
     #         username: "__string",
     #       }
     #
@@ -10545,7 +10594,7 @@ module Aws::MediaLive
     #         input_loss_image_color: "__stringMin6Max6",
     #         input_loss_image_slate: {
     #           password_param: "__string",
-    #           uri: "__string", # required
+    #           uri: "__stringMax2048", # required
     #           username: "__string",
     #         },
     #         input_loss_image_type: "COLOR", # accepts COLOR, SLATE
@@ -11158,7 +11207,7 @@ module Aws::MediaLive
     #         static_key_settings: {
     #           key_provider_server: {
     #             password_param: "__string",
-    #             uri: "__string", # required
+    #             uri: "__stringMax2048", # required
     #             username: "__string",
     #           },
     #           static_key_value: "__stringMin32Max32", # required
@@ -12369,6 +12418,96 @@ module Aws::MediaLive
       :timed_metadata_pid,
       :transport_stream_id,
       :video_pid)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass MaintenanceCreateSettings
+    #   data as a hash:
+    #
+    #       {
+    #         maintenance_day: "MONDAY", # accepts MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+    #         maintenance_start_time: "__stringPattern010920300",
+    #       }
+    #
+    # @!attribute [rw] maintenance_day
+    #   Choose one day of the week for maintenance. The chosen day is used
+    #   for all future maintenance windows.
+    #   @return [String]
+    #
+    # @!attribute [rw] maintenance_start_time
+    #   Choose the hour that maintenance will start. The chosen time is used
+    #   for all future maintenance windows.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MaintenanceCreateSettings AWS API Documentation
+    #
+    class MaintenanceCreateSettings < Struct.new(
+      :maintenance_day,
+      :maintenance_start_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] maintenance_day
+    #   The currently selected maintenance day.
+    #   @return [String]
+    #
+    # @!attribute [rw] maintenance_deadline
+    #   Maintenance is required by the displayed date and time. Date and
+    #   time is in ISO.
+    #   @return [String]
+    #
+    # @!attribute [rw] maintenance_scheduled_date
+    #   The currently scheduled maintenance date and time. Date and time is
+    #   in ISO.
+    #   @return [String]
+    #
+    # @!attribute [rw] maintenance_start_time
+    #   The currently selected maintenance start time. Time is in UTC.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MaintenanceStatus AWS API Documentation
+    #
+    class MaintenanceStatus < Struct.new(
+      :maintenance_day,
+      :maintenance_deadline,
+      :maintenance_scheduled_date,
+      :maintenance_start_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass MaintenanceUpdateSettings
+    #   data as a hash:
+    #
+    #       {
+    #         maintenance_day: "MONDAY", # accepts MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+    #         maintenance_scheduled_date: "__string",
+    #         maintenance_start_time: "__stringPattern010920300",
+    #       }
+    #
+    # @!attribute [rw] maintenance_day
+    #   Choose one day of the week for maintenance. The chosen day is used
+    #   for all future maintenance windows.
+    #   @return [String]
+    #
+    # @!attribute [rw] maintenance_scheduled_date
+    #   Choose a specific date for maintenance to occur. The chosen date is
+    #   used for the next maintenance window only.
+    #   @return [String]
+    #
+    # @!attribute [rw] maintenance_start_time
+    #   Choose the hour that maintenance will start. The chosen time is used
+    #   for all future maintenance windows.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MaintenanceUpdateSettings AWS API Documentation
+    #
+    class MaintenanceUpdateSettings < Struct.new(
+      :maintenance_day,
+      :maintenance_scheduled_date,
+      :maintenance_start_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13885,7 +14024,7 @@ module Aws::MediaLive
     #                 audio_group_id: "__string",
     #                 audio_only_image: {
     #                   password_param: "__string",
-    #                   uri: "__string", # required
+    #                   uri: "__stringMax2048", # required
     #                   username: "__string",
     #                 },
     #                 audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT", # accepts ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
@@ -14246,7 +14385,7 @@ module Aws::MediaLive
     #               static_key_settings: {
     #                 key_provider_server: {
     #                   password_param: "__string",
-    #                   uri: "__string", # required
+    #                   uri: "__stringMax2048", # required
     #                   username: "__string",
     #                 },
     #                 static_key_value: "__stringMin32Max32", # required
@@ -14399,7 +14538,7 @@ module Aws::MediaLive
     #                     audio_group_id: "__string",
     #                     audio_only_image: {
     #                       password_param: "__string",
-    #                       uri: "__string", # required
+    #                       uri: "__stringMax2048", # required
     #                       username: "__string",
     #                     },
     #                     audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT", # accepts ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
@@ -14537,9 +14676,7 @@ module Aws::MediaLive
     #       }
     #
     # @!attribute [rw] name
-    #   Custom output group name optionally defined by the user. Only
-    #   letters, numbers, and the underscore character allowed; only 32
-    #   characters allowed.
+    #   Custom output group name optionally defined by the user.
     #   @return [String]
     #
     # @!attribute [rw] output_group_settings
@@ -14657,7 +14794,7 @@ module Aws::MediaLive
     #             static_key_settings: {
     #               key_provider_server: {
     #                 password_param: "__string",
-    #                 uri: "__string", # required
+    #                 uri: "__stringMax2048", # required
     #                 username: "__string",
     #               },
     #               static_key_value: "__stringMin32Max32", # required
@@ -14878,7 +15015,7 @@ module Aws::MediaLive
     #               audio_group_id: "__string",
     #               audio_only_image: {
     #                 password_param: "__string",
-    #                 uri: "__string", # required
+    #                 uri: "__stringMax2048", # required
     #                 username: "__string",
     #               },
     #               audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT", # accepts ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
@@ -15161,6 +15298,10 @@ module Aws::MediaLive
     #   Name for the new reservation
     #   @return [String]
     #
+    # @!attribute [rw] renewal_settings
+    #   Renewal settings for the reservation
+    #   @return [Types::RenewalSettings]
+    #
     # @!attribute [rw] request_id
     #   Unique request ID to be specified. This is needed to prevent retries from creating multiple resources.**A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -15181,6 +15322,7 @@ module Aws::MediaLive
     class PurchaseOffering < Struct.new(
       :count,
       :name,
+      :renewal_settings,
       :request_id,
       :start,
       :tags)
@@ -15195,6 +15337,10 @@ module Aws::MediaLive
     #         count: 1, # required
     #         name: "__string",
     #         offering_id: "__string", # required
+    #         renewal_settings: {
+    #           automatic_renewal: "DISABLED", # accepts DISABLED, ENABLED, UNAVAILABLE
+    #           renewal_count: 1,
+    #         },
     #         request_id: "__string",
     #         start: "__string",
     #         tags: {
@@ -15210,6 +15356,10 @@ module Aws::MediaLive
     #
     # @!attribute [rw] offering_id
     #   @return [String]
+    #
+    # @!attribute [rw] renewal_settings
+    #   The Renewal settings for Reservations
+    #   @return [Types::RenewalSettings]
     #
     # @!attribute [rw] request_id
     #   **A suitable default value is auto-generated.** You should normally
@@ -15228,6 +15378,7 @@ module Aws::MediaLive
       :count,
       :name,
       :offering_id,
+      :renewal_settings,
       :request_id,
       :start,
       :tags)
@@ -15268,6 +15419,49 @@ module Aws::MediaLive
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RawSettings AWS API Documentation
     #
     class RawSettings < Aws::EmptyStructure; end
+
+    # @!attribute [rw] force
+    #   Force a reboot of an input device. If the device is streaming, it
+    #   will stop streaming and begin rebooting within a few seconds of
+    #   sending the command. If the device was streaming prior to the
+    #   reboot, the device will resume streaming when the reboot completes.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RebootInputDevice AWS API Documentation
+    #
+    class RebootInputDevice < Struct.new(
+      :force)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RebootInputDeviceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         force: "NO", # accepts NO, YES
+    #         input_device_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] force
+    #   Whether or not to force reboot the input device.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_device_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RebootInputDeviceRequest AWS API Documentation
+    #
+    class RebootInputDeviceRequest < Struct.new(
+      :force,
+      :input_device_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RebootInputDeviceResponse AWS API Documentation
+    #
+    class RebootInputDeviceResponse < Aws::EmptyStructure; end
 
     # Rec601 Settings
     #
@@ -15352,6 +15546,33 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # The Renewal settings for Reservations
+    #
+    # @note When making an API call, you may pass RenewalSettings
+    #   data as a hash:
+    #
+    #       {
+    #         automatic_renewal: "DISABLED", # accepts DISABLED, ENABLED, UNAVAILABLE
+    #         renewal_count: 1,
+    #       }
+    #
+    # @!attribute [rw] automatic_renewal
+    #   Automatic renewal status for the reservation
+    #   @return [String]
+    #
+    # @!attribute [rw] renewal_count
+    #   Count for the reservation renewal
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RenewalSettings AWS API Documentation
+    #
+    class RenewalSettings < Struct.new(
+      :automatic_renewal,
+      :renewal_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Reserved resources available to use
     #
     # @!attribute [rw] arn
@@ -15407,6 +15628,10 @@ module Aws::MediaLive
     #   AWS region, e.g. 'us-west-2'
     #   @return [String]
     #
+    # @!attribute [rw] renewal_settings
+    #   Renewal settings for the reservation
+    #   @return [Types::RenewalSettings]
+    #
     # @!attribute [rw] reservation_id
     #   Unique reservation ID, e.g. '1234567'
     #   @return [String]
@@ -15447,6 +15672,7 @@ module Aws::MediaLive
       :offering_id,
       :offering_type,
       :region,
+      :renewal_settings,
       :reservation_id,
       :resource_specification,
       :start,
@@ -15755,7 +15981,7 @@ module Aws::MediaLive
     #             height: 1,
     #             image: { # required
     #               password_param: "__string",
-    #               uri: "__string", # required
+    #               uri: "__stringMax2048", # required
     #               username: "__string",
     #             },
     #             image_x: 1,
@@ -15904,7 +16130,7 @@ module Aws::MediaLive
     #           height: 1,
     #           image: { # required
     #             password_param: "__string",
-    #             uri: "__string", # required
+    #             uri: "__stringMax2048", # required
     #             username: "__string",
     #           },
     #           image_x: 1,
@@ -16645,6 +16871,9 @@ module Aws::MediaLive
     #   The log level the user wants for their channel.
     #   @return [String]
     #
+    # @!attribute [rw] maintenance
+    #   @return [Types::MaintenanceStatus]
+    #
     # @!attribute [rw] name
     #   @return [String]
     #
@@ -16680,6 +16909,7 @@ module Aws::MediaLive
       :input_attachments,
       :input_specification,
       :log_level,
+      :maintenance,
       :name,
       :pipeline_details,
       :pipelines_running_count,
@@ -16690,6 +16920,28 @@ module Aws::MediaLive
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass StartInputDeviceMaintenanceWindowRequest
+    #   data as a hash:
+    #
+    #       {
+    #         input_device_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] input_device_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartInputDeviceMaintenanceWindowRequest AWS API Documentation
+    #
+    class StartInputDeviceMaintenanceWindowRequest < Struct.new(
+      :input_device_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartInputDeviceMaintenanceWindowResponse AWS API Documentation
+    #
+    class StartInputDeviceMaintenanceWindowResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass StartMultiplexRequest
     #   data as a hash:
@@ -16793,7 +17045,7 @@ module Aws::MediaLive
     #         height: 1,
     #         image: { # required
     #           password_param: "__string",
-    #           uri: "__string", # required
+    #           uri: "__stringMax2048", # required
     #           username: "__string",
     #         },
     #         image_x: 1,
@@ -16921,7 +17173,7 @@ module Aws::MediaLive
     #       {
     #         key_provider_server: {
     #           password_param: "__string",
-    #           uri: "__string", # required
+    #           uri: "__stringMax2048", # required
     #           username: "__string",
     #         },
     #         static_key_value: "__stringMin32Max32", # required
@@ -16996,6 +17248,9 @@ module Aws::MediaLive
     #   The log level the user wants for their channel.
     #   @return [String]
     #
+    # @!attribute [rw] maintenance
+    #   @return [Types::MaintenanceStatus]
+    #
     # @!attribute [rw] name
     #   @return [String]
     #
@@ -17031,6 +17286,7 @@ module Aws::MediaLive
       :input_attachments,
       :input_specification,
       :log_level,
+      :maintenance,
       :name,
       :pipeline_details,
       :pipelines_running_count,
@@ -17392,9 +17648,8 @@ module Aws::MediaLive
     #       }
     #
     # @!attribute [rw] style_control
-    #   When set to passthrough, passes through style and position
-    #   information from a TTML-like input source (TTML, SMPTE-TT, CFF-TT)
-    #   to the CFF-TT output or TTML output.
+    #   This field is not currently supported and will not affect the output
+    #   styling. Leave the default value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/TtmlDestinationSettings AWS API Documentation
@@ -17676,6 +17931,10 @@ module Aws::MediaLive
     #   The log level to write to CloudWatch Logs.
     #   @return [String]
     #
+    # @!attribute [rw] maintenance
+    #   Maintenance settings for this channel.
+    #   @return [Types::MaintenanceUpdateSettings]
+    #
     # @!attribute [rw] name
     #   The name of the channel.
     #   @return [String]
@@ -17695,6 +17954,7 @@ module Aws::MediaLive
       :input_attachments,
       :input_specification,
       :log_level,
+      :maintenance,
       :name,
       :role_arn)
       SENSITIVE = []
@@ -17893,7 +18153,7 @@ module Aws::MediaLive
     #               },
     #               language_code: "__stringMin1Max35",
     #               language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
-    #               name: "__string", # required
+    #               name: "__stringMax255", # required
     #               remix_settings: {
     #                 channel_mappings: [ # required
     #                   {
@@ -17915,7 +18175,7 @@ module Aws::MediaLive
     #           avail_blanking: {
     #             avail_blanking_image: {
     #               password_param: "__string",
-    #               uri: "__string", # required
+    #               uri: "__stringMax2048", # required
     #               username: "__string",
     #             },
     #             state: "DISABLED", # accepts DISABLED, ENABLED
@@ -17937,13 +18197,13 @@ module Aws::MediaLive
     #           blackout_slate: {
     #             blackout_slate_image: {
     #               password_param: "__string",
-    #               uri: "__string", # required
+    #               uri: "__stringMax2048", # required
     #               username: "__string",
     #             },
     #             network_end_blackout: "DISABLED", # accepts DISABLED, ENABLED
     #             network_end_blackout_image: {
     #               password_param: "__string",
-    #               uri: "__string", # required
+    #               uri: "__stringMax2048", # required
     #               username: "__string",
     #             },
     #             network_id: "__stringMin34Max34",
@@ -17951,6 +18211,7 @@ module Aws::MediaLive
     #           },
     #           caption_descriptions: [
     #             {
+    #               accessibility: "DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES", # accepts DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES, IMPLEMENTS_ACCESSIBILITY_FEATURES
     #               caption_selector_name: "__string", # required
     #               destination_settings: {
     #                 arib_destination_settings: {
@@ -17961,7 +18222,7 @@ module Aws::MediaLive
     #                   background_opacity: 1,
     #                   font: {
     #                     password_param: "__string",
-    #                     uri: "__string", # required
+    #                     uri: "__stringMax2048", # required
     #                     username: "__string",
     #                   },
     #                   font_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
@@ -17984,7 +18245,7 @@ module Aws::MediaLive
     #                   background_opacity: 1,
     #                   font: {
     #                     password_param: "__string",
-    #                     uri: "__string", # required
+    #                     uri: "__stringMax2048", # required
     #                     username: "__string",
     #                   },
     #                   font_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
@@ -18044,7 +18305,7 @@ module Aws::MediaLive
     #               input_loss_image_color: "__stringMin6Max6",
     #               input_loss_image_slate: {
     #                 password_param: "__string",
-    #                 uri: "__string", # required
+    #                 uri: "__stringMax2048", # required
     #                 username: "__string",
     #               },
     #               input_loss_image_type: "COLOR", # accepts COLOR, SLATE
@@ -18161,7 +18422,7 @@ module Aws::MediaLive
     #                     static_key_settings: {
     #                       key_provider_server: {
     #                         password_param: "__string",
-    #                         uri: "__string", # required
+    #                         uri: "__stringMax2048", # required
     #                         username: "__string",
     #                       },
     #                       static_key_value: "__stringMin32Max32", # required
@@ -18314,7 +18575,7 @@ module Aws::MediaLive
     #                           audio_group_id: "__string",
     #                           audio_only_image: {
     #                             password_param: "__string",
-    #                             uri: "__string", # required
+    #                             uri: "__stringMax2048", # required
     #                             username: "__string",
     #                           },
     #                           audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT", # accepts ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
@@ -18733,6 +18994,11 @@ module Aws::MediaLive
     #           resolution: "SD", # accepts SD, HD, UHD
     #         },
     #         log_level: "ERROR", # accepts ERROR, WARNING, INFO, DEBUG, DISABLED
+    #         maintenance: {
+    #           maintenance_day: "MONDAY", # accepts MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+    #           maintenance_scheduled_date: "__string",
+    #           maintenance_start_time: "__stringPattern010920300",
+    #         },
     #         name: "__string",
     #         role_arn: "__string",
     #       }
@@ -18760,6 +19026,9 @@ module Aws::MediaLive
     #   The log level the user wants for their channel.
     #   @return [String]
     #
+    # @!attribute [rw] maintenance
+    #   @return [Types::MaintenanceUpdateSettings]
+    #
     # @!attribute [rw] name
     #   @return [String]
     #
@@ -18776,6 +19045,7 @@ module Aws::MediaLive
       :input_attachments,
       :input_specification,
       :log_level,
+      :maintenance,
       :name,
       :role_arn)
       SENSITIVE = []
@@ -19302,10 +19572,15 @@ module Aws::MediaLive
     #   Name of the reservation
     #   @return [String]
     #
+    # @!attribute [rw] renewal_settings
+    #   Renewal settings for the reservation
+    #   @return [Types::RenewalSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateReservation AWS API Documentation
     #
     class UpdateReservation < Struct.new(
-      :name)
+      :name,
+      :renewal_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19315,11 +19590,19 @@ module Aws::MediaLive
     #
     #       {
     #         name: "__string",
+    #         renewal_settings: {
+    #           automatic_renewal: "DISABLED", # accepts DISABLED, ENABLED, UNAVAILABLE
+    #           renewal_count: 1,
+    #         },
     #         reservation_id: "__string", # required
     #       }
     #
     # @!attribute [rw] name
     #   @return [String]
+    #
+    # @!attribute [rw] renewal_settings
+    #   The Renewal settings for Reservations
+    #   @return [Types::RenewalSettings]
     #
     # @!attribute [rw] reservation_id
     #   @return [String]
@@ -19328,6 +19611,7 @@ module Aws::MediaLive
     #
     class UpdateReservationRequest < Struct.new(
       :name,
+      :renewal_settings,
       :reservation_id)
       SENSITIVE = []
       include Aws::Structure

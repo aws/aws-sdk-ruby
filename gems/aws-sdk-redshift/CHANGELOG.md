@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.84.0 (2022-07-11)
+------------------
+
+* Feature - This release adds a new --snapshot-arn field for describe-cluster-snapshots, describe-node-configuration-options, restore-from-cluster-snapshot, authorize-snapshot-acsess, and revoke-snapshot-acsess APIs. It allows customers to give a Redshift snapshot ARN or a Redshift Serverless ARN as input.
+
+1.83.0 (2022-06-08)
+------------------
+
+* Feature - Adds new API GetClusterCredentialsWithIAM to return temporary credentials.
+
+1.82.0 (2022-05-06)
+------------------
+
+* Feature - Introduces new field 'LoadSampleData' in CreateCluster operation. Customers can now specify 'LoadSampleData' option during creation of a cluster, which results in loading of sample data in the cluster that is created.
+
+1.81.0 (2022-04-19)
+------------------
+
+* Feature - Introduces new fields for LogDestinationType and LogExports on EnableLogging requests and Enable/Disable/DescribeLogging responses. Customers can now select CloudWatch Logs as a destination for their Audit Logs.
+
+1.80.0 (2022-03-23)
+------------------
+
+* Feature - This release adds a new [--encrypted | --no-encrypted] field in restore-from-cluster-snapshot API. Customers can now restore an unencrypted snapshot to a cluster encrypted with AWS Managed Key or their own KMS key.
+
+1.79.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.78.0 (2022-02-17)
+------------------
+
+* Feature - SDK release for Cross region datasharing and cost-control for cross region datasharing
+
 1.77.0 (2022-02-03)
 ------------------
 

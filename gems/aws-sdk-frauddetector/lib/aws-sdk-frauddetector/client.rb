@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::FraudDetector
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -664,7 +666,7 @@ module Aws::FraudDetector
     #     model_versions: [
     #       {
     #         model_id: "modelIdentifier", # required
-    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
+    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS, ACCOUNT_TAKEOVER_INSIGHTS
     #         model_version_number: "floatVersionString", # required
     #         arn: "fraudDetectorArn",
     #       },
@@ -716,7 +718,7 @@ module Aws::FraudDetector
     #
     #   resp = client.create_model({
     #     model_id: "modelIdentifier", # required
-    #     model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
+    #     model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS, ACCOUNT_TAKEOVER_INSIGHTS
     #     description: "description",
     #     event_type_name: "string", # required
     #     tags: [
@@ -773,12 +775,12 @@ module Aws::FraudDetector
     #
     #   resp = client.create_model_version({
     #     model_id: "modelIdentifier", # required
-    #     model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
+    #     model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS, ACCOUNT_TAKEOVER_INSIGHTS
     #     training_data_source: "EXTERNAL_EVENTS", # required, accepts EXTERNAL_EVENTS, INGESTED_EVENTS
     #     training_data_schema: { # required
     #       model_variables: ["string"], # required
-    #       label_schema: { # required
-    #         label_mapper: { # required
+    #       label_schema: {
+    #         label_mapper: {
     #           "string" => ["string"],
     #         },
     #         unlabeled_events_treatment: "IGNORE", # accepts IGNORE, FRAUD, LEGIT
@@ -805,7 +807,7 @@ module Aws::FraudDetector
     # @example Response structure
     #
     #   resp.model_id #=> String
-    #   resp.model_type #=> String, one of "ONLINE_FRAUD_INSIGHTS", "TRANSACTION_FRAUD_INSIGHTS"
+    #   resp.model_type #=> String, one of "ONLINE_FRAUD_INSIGHTS", "TRANSACTION_FRAUD_INSIGHTS", "ACCOUNT_TAKEOVER_INSIGHTS"
     #   resp.model_version_number #=> String
     #   resp.status #=> String
     #
@@ -941,7 +943,8 @@ module Aws::FraudDetector
       req.send_request(options)
     end
 
-    # Deletes data that was batch imported to Amazon Fraud Detector.
+    # Deletes the specified batch import job ID record. This action does not
+    # delete the data that was batch imported.
     #
     # @option params [required, String] :job_id
     #   The ID of the batch import job to delete.
@@ -1242,7 +1245,7 @@ module Aws::FraudDetector
     #
     #   resp = client.delete_model({
     #     model_id: "modelIdentifier", # required
-    #     model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
+    #     model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS, ACCOUNT_TAKEOVER_INSIGHTS
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteModel AWS API Documentation
@@ -1278,7 +1281,7 @@ module Aws::FraudDetector
     #
     #   resp = client.delete_model_version({
     #     model_id: "modelIdentifier", # required
-    #     model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
+    #     model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS, ACCOUNT_TAKEOVER_INSIGHTS
     #     model_version_number: "floatVersionString", # required
     #   })
     #
@@ -1459,7 +1462,7 @@ module Aws::FraudDetector
     #   resp = client.describe_model_versions({
     #     model_id: "modelIdentifier",
     #     model_version_number: "floatVersionString",
-    #     model_type: "ONLINE_FRAUD_INSIGHTS", # accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
+    #     model_type: "ONLINE_FRAUD_INSIGHTS", # accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS, ACCOUNT_TAKEOVER_INSIGHTS
     #     next_token: "string",
     #     max_results: 1,
     #   })
@@ -1468,7 +1471,7 @@ module Aws::FraudDetector
     #
     #   resp.model_version_details #=> Array
     #   resp.model_version_details[0].model_id #=> String
-    #   resp.model_version_details[0].model_type #=> String, one of "ONLINE_FRAUD_INSIGHTS", "TRANSACTION_FRAUD_INSIGHTS"
+    #   resp.model_version_details[0].model_type #=> String, one of "ONLINE_FRAUD_INSIGHTS", "TRANSACTION_FRAUD_INSIGHTS", "ACCOUNT_TAKEOVER_INSIGHTS"
     #   resp.model_version_details[0].model_version_number #=> String
     #   resp.model_version_details[0].status #=> String
     #   resp.model_version_details[0].training_data_source #=> String, one of "EXTERNAL_EVENTS", "INGESTED_EVENTS"
@@ -1505,6 +1508,42 @@ module Aws::FraudDetector
     #   resp.model_version_details[0].last_updated_time #=> String
     #   resp.model_version_details[0].created_time #=> String
     #   resp.model_version_details[0].arn #=> String
+    #   resp.model_version_details[0].training_result_v2.data_validation_metrics.file_level_messages #=> Array
+    #   resp.model_version_details[0].training_result_v2.data_validation_metrics.file_level_messages[0].title #=> String
+    #   resp.model_version_details[0].training_result_v2.data_validation_metrics.file_level_messages[0].content #=> String
+    #   resp.model_version_details[0].training_result_v2.data_validation_metrics.file_level_messages[0].type #=> String
+    #   resp.model_version_details[0].training_result_v2.data_validation_metrics.field_level_messages #=> Array
+    #   resp.model_version_details[0].training_result_v2.data_validation_metrics.field_level_messages[0].field_name #=> String
+    #   resp.model_version_details[0].training_result_v2.data_validation_metrics.field_level_messages[0].identifier #=> String
+    #   resp.model_version_details[0].training_result_v2.data_validation_metrics.field_level_messages[0].title #=> String
+    #   resp.model_version_details[0].training_result_v2.data_validation_metrics.field_level_messages[0].content #=> String
+    #   resp.model_version_details[0].training_result_v2.data_validation_metrics.field_level_messages[0].type #=> String
+    #   resp.model_version_details[0].training_result_v2.training_metrics_v2.ofi.metric_data_points #=> Array
+    #   resp.model_version_details[0].training_result_v2.training_metrics_v2.ofi.metric_data_points[0].fpr #=> Float
+    #   resp.model_version_details[0].training_result_v2.training_metrics_v2.ofi.metric_data_points[0].precision #=> Float
+    #   resp.model_version_details[0].training_result_v2.training_metrics_v2.ofi.metric_data_points[0].tpr #=> Float
+    #   resp.model_version_details[0].training_result_v2.training_metrics_v2.ofi.metric_data_points[0].threshold #=> Float
+    #   resp.model_version_details[0].training_result_v2.training_metrics_v2.ofi.model_performance.auc #=> Float
+    #   resp.model_version_details[0].training_result_v2.training_metrics_v2.tfi.metric_data_points #=> Array
+    #   resp.model_version_details[0].training_result_v2.training_metrics_v2.tfi.metric_data_points[0].fpr #=> Float
+    #   resp.model_version_details[0].training_result_v2.training_metrics_v2.tfi.metric_data_points[0].precision #=> Float
+    #   resp.model_version_details[0].training_result_v2.training_metrics_v2.tfi.metric_data_points[0].tpr #=> Float
+    #   resp.model_version_details[0].training_result_v2.training_metrics_v2.tfi.metric_data_points[0].threshold #=> Float
+    #   resp.model_version_details[0].training_result_v2.training_metrics_v2.tfi.model_performance.auc #=> Float
+    #   resp.model_version_details[0].training_result_v2.training_metrics_v2.ati.metric_data_points #=> Array
+    #   resp.model_version_details[0].training_result_v2.training_metrics_v2.ati.metric_data_points[0].cr #=> Float
+    #   resp.model_version_details[0].training_result_v2.training_metrics_v2.ati.metric_data_points[0].adr #=> Float
+    #   resp.model_version_details[0].training_result_v2.training_metrics_v2.ati.metric_data_points[0].threshold #=> Float
+    #   resp.model_version_details[0].training_result_v2.training_metrics_v2.ati.metric_data_points[0].atodr #=> Float
+    #   resp.model_version_details[0].training_result_v2.training_metrics_v2.ati.model_performance.asi #=> Float
+    #   resp.model_version_details[0].training_result_v2.variable_importance_metrics.log_odds_metrics #=> Array
+    #   resp.model_version_details[0].training_result_v2.variable_importance_metrics.log_odds_metrics[0].variable_name #=> String
+    #   resp.model_version_details[0].training_result_v2.variable_importance_metrics.log_odds_metrics[0].variable_type #=> String
+    #   resp.model_version_details[0].training_result_v2.variable_importance_metrics.log_odds_metrics[0].variable_importance #=> Float
+    #   resp.model_version_details[0].training_result_v2.aggregated_variables_importance_metrics.log_odds_metrics #=> Array
+    #   resp.model_version_details[0].training_result_v2.aggregated_variables_importance_metrics.log_odds_metrics[0].variable_names #=> Array
+    #   resp.model_version_details[0].training_result_v2.aggregated_variables_importance_metrics.log_odds_metrics[0].variable_names[0] #=> String
+    #   resp.model_version_details[0].training_result_v2.aggregated_variables_importance_metrics.log_odds_metrics[0].aggregated_variables_importance #=> Float
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DescribeModelVersions AWS API Documentation
@@ -1704,7 +1743,7 @@ module Aws::FraudDetector
     #   resp.external_model_endpoints[0] #=> String
     #   resp.model_versions #=> Array
     #   resp.model_versions[0].model_id #=> String
-    #   resp.model_versions[0].model_type #=> String, one of "ONLINE_FRAUD_INSIGHTS", "TRANSACTION_FRAUD_INSIGHTS"
+    #   resp.model_versions[0].model_type #=> String, one of "ONLINE_FRAUD_INSIGHTS", "TRANSACTION_FRAUD_INSIGHTS", "ACCOUNT_TAKEOVER_INSIGHTS"
     #   resp.model_versions[0].model_version_number #=> String
     #   resp.model_versions[0].arn #=> String
     #   resp.rules #=> Array
@@ -1960,7 +1999,7 @@ module Aws::FraudDetector
     #
     #   resp.model_scores #=> Array
     #   resp.model_scores[0].model_version.model_id #=> String
-    #   resp.model_scores[0].model_version.model_type #=> String, one of "ONLINE_FRAUD_INSIGHTS", "TRANSACTION_FRAUD_INSIGHTS"
+    #   resp.model_scores[0].model_version.model_type #=> String, one of "ONLINE_FRAUD_INSIGHTS", "TRANSACTION_FRAUD_INSIGHTS", "ACCOUNT_TAKEOVER_INSIGHTS"
     #   resp.model_scores[0].model_version.model_version_number #=> String
     #   resp.model_scores[0].model_version.arn #=> String
     #   resp.model_scores[0].scores #=> Hash
@@ -2002,7 +2041,16 @@ module Aws::FraudDetector
     #   The detector version ID.
     #
     # @option params [required, String] :prediction_timestamp
-    #   The timestamp that defines when the prediction was generated.
+    #   The timestamp that defines when the prediction was generated. The
+    #   timestamp must be specified using ISO 8601 standard in UTC.
+    #
+    #   We recommend calling [ListEventPredictions][1] first, and using the
+    #   `predictionTimestamp` value in the response to provide an accurate
+    #   prediction timestamp value.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/frauddetector/latest/api/API_ListEventPredictions.html
     #
     # @return [Types::GetEventPredictionMetadataResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2069,6 +2117,11 @@ module Aws::FraudDetector
     #   resp.evaluated_model_versions[0].evaluations[0].prediction_explanations.variable_impact_explanations[0].event_variable_name #=> String
     #   resp.evaluated_model_versions[0].evaluations[0].prediction_explanations.variable_impact_explanations[0].relative_impact #=> String
     #   resp.evaluated_model_versions[0].evaluations[0].prediction_explanations.variable_impact_explanations[0].log_odds_impact #=> Float
+    #   resp.evaluated_model_versions[0].evaluations[0].prediction_explanations.aggregated_variables_impact_explanations #=> Array
+    #   resp.evaluated_model_versions[0].evaluations[0].prediction_explanations.aggregated_variables_impact_explanations[0].event_variable_names #=> Array
+    #   resp.evaluated_model_versions[0].evaluations[0].prediction_explanations.aggregated_variables_impact_explanations[0].event_variable_names[0] #=> String
+    #   resp.evaluated_model_versions[0].evaluations[0].prediction_explanations.aggregated_variables_impact_explanations[0].relative_impact #=> String
+    #   resp.evaluated_model_versions[0].evaluations[0].prediction_explanations.aggregated_variables_impact_explanations[0].log_odds_impact #=> Float
     #   resp.evaluated_external_models #=> Array
     #   resp.evaluated_external_models[0].model_endpoint #=> String
     #   resp.evaluated_external_models[0].use_event_variables #=> Boolean
@@ -2311,14 +2364,14 @@ module Aws::FraudDetector
     #
     #   resp = client.get_model_version({
     #     model_id: "modelIdentifier", # required
-    #     model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
+    #     model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS, ACCOUNT_TAKEOVER_INSIGHTS
     #     model_version_number: "floatVersionString", # required
     #   })
     #
     # @example Response structure
     #
     #   resp.model_id #=> String
-    #   resp.model_type #=> String, one of "ONLINE_FRAUD_INSIGHTS", "TRANSACTION_FRAUD_INSIGHTS"
+    #   resp.model_type #=> String, one of "ONLINE_FRAUD_INSIGHTS", "TRANSACTION_FRAUD_INSIGHTS", "ACCOUNT_TAKEOVER_INSIGHTS"
     #   resp.model_version_number #=> String
     #   resp.training_data_source #=> String, one of "EXTERNAL_EVENTS", "INGESTED_EVENTS"
     #   resp.training_data_schema.model_variables #=> Array
@@ -2379,7 +2432,7 @@ module Aws::FraudDetector
     #
     #   resp = client.get_models({
     #     model_id: "modelIdentifier",
-    #     model_type: "ONLINE_FRAUD_INSIGHTS", # accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
+    #     model_type: "ONLINE_FRAUD_INSIGHTS", # accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS, ACCOUNT_TAKEOVER_INSIGHTS
     #     next_token: "string",
     #     max_results: 1,
     #   })
@@ -2389,7 +2442,7 @@ module Aws::FraudDetector
     #   resp.next_token #=> String
     #   resp.models #=> Array
     #   resp.models[0].model_id #=> String
-    #   resp.models[0].model_type #=> String, one of "ONLINE_FRAUD_INSIGHTS", "TRANSACTION_FRAUD_INSIGHTS"
+    #   resp.models[0].model_type #=> String, one of "ONLINE_FRAUD_INSIGHTS", "TRANSACTION_FRAUD_INSIGHTS", "ACCOUNT_TAKEOVER_INSIGHTS"
     #   resp.models[0].description #=> String
     #   resp.models[0].event_type_name #=> String
     #   resp.models[0].created_time #=> String
@@ -3184,7 +3237,7 @@ module Aws::FraudDetector
     #     model_versions: [
     #       {
     #         model_id: "modelIdentifier", # required
-    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
+    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS, ACCOUNT_TAKEOVER_INSIGHTS
     #         model_version_number: "floatVersionString", # required
     #         arn: "fraudDetectorArn",
     #       },
@@ -3316,7 +3369,7 @@ module Aws::FraudDetector
     #
     #   resp = client.update_model({
     #     model_id: "modelIdentifier", # required
-    #     model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
+    #     model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS, ACCOUNT_TAKEOVER_INSIGHTS
     #     description: "description",
     #   })
     #
@@ -3367,7 +3420,7 @@ module Aws::FraudDetector
     #
     #   resp = client.update_model_version({
     #     model_id: "modelIdentifier", # required
-    #     model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
+    #     model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS, ACCOUNT_TAKEOVER_INSIGHTS
     #     major_version_number: "wholeNumberVersionString", # required
     #     external_events_detail: {
     #       data_location: "s3BucketLocation", # required
@@ -3390,7 +3443,7 @@ module Aws::FraudDetector
     # @example Response structure
     #
     #   resp.model_id #=> String
-    #   resp.model_type #=> String, one of "ONLINE_FRAUD_INSIGHTS", "TRANSACTION_FRAUD_INSIGHTS"
+    #   resp.model_type #=> String, one of "ONLINE_FRAUD_INSIGHTS", "TRANSACTION_FRAUD_INSIGHTS", "ACCOUNT_TAKEOVER_INSIGHTS"
     #   resp.model_version_number #=> String
     #   resp.status #=> String
     #
@@ -3407,9 +3460,11 @@ module Aws::FraudDetector
     #
     # You can perform the following status updates:
     #
-    # 1.  Change the `TRAINING_COMPLETE` status to `ACTIVE`.
+    # 1.  Change the `TRAINING_IN_PROGRESS` status to `TRAINING_CANCELLED`.
     #
-    # 2.  Change `ACTIVE` to `INACTIVE`.
+    # 2.  Change the `TRAINING_COMPLETE` status to `ACTIVE`.
+    #
+    # 3.  Change `ACTIVE` to `INACTIVE`.
     #
     # @option params [required, String] :model_id
     #   The model ID of the model version to update.
@@ -3429,7 +3484,7 @@ module Aws::FraudDetector
     #
     #   resp = client.update_model_version_status({
     #     model_id: "modelIdentifier", # required
-    #     model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
+    #     model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS, ACCOUNT_TAKEOVER_INSIGHTS
     #     model_version_number: "floatVersionString", # required
     #     status: "ACTIVE", # required, accepts ACTIVE, INACTIVE, TRAINING_CANCELLED
     #   })
@@ -3584,7 +3639,7 @@ module Aws::FraudDetector
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-frauddetector'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

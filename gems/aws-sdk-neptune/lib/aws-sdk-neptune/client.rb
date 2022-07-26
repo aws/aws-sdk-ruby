@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -76,6 +77,7 @@ module Aws::Neptune
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -1025,6 +1027,10 @@ module Aws::Neptune
     #   enabled. The database can't be deleted when deletion protection is
     #   enabled. By default, deletion protection is enabled.
     #
+    # @option params [String] :global_cluster_identifier
+    #   The ID of the Neptune global database to which this new DB cluster
+    #   should be added.
+    #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -1066,6 +1072,7 @@ module Aws::Neptune
     #     enable_iam_database_authentication: false,
     #     enable_cloudwatch_logs_exports: ["String"],
     #     deletion_protection: false,
+    #     global_cluster_identifier: "GlobalClusterIdentifier",
     #     source_region: "String",
     #   })
     #
@@ -2097,6 +2104,81 @@ module Aws::Neptune
       req.send_request(options)
     end
 
+    # Creates a Neptune global database spread across multiple Amazon
+    # Regions. The global database contains a single primary cluster with
+    # read-write capability, and read-only secondary clusters that receive
+    # data from the primary cluster through high-speed replication performed
+    # by the Neptune storage subsystem.
+    #
+    # You can create a global database that is initially empty, and then add
+    # a primary cluster and secondary clusters to it, or you can specify an
+    # existing Neptune cluster during the create operation to become the
+    # primary cluster of the global database.
+    #
+    # @option params [required, String] :global_cluster_identifier
+    #   The cluster identifier of the new global database cluster.
+    #
+    # @option params [String] :source_db_cluster_identifier
+    #   (*Optional*) The Amazon Resource Name (ARN) of an existing Neptune DB
+    #   cluster to use as the primary cluster of the new global database.
+    #
+    # @option params [String] :engine
+    #   The name of the database engine to be used in the global database.
+    #
+    #   Valid values: `neptune`
+    #
+    # @option params [String] :engine_version
+    #   The Neptune engine version to be used by the global database.
+    #
+    #   Valid values: `1.2.0.0` or above.
+    #
+    # @option params [Boolean] :deletion_protection
+    #   The deletion protection setting for the new global database. The
+    #   global database can't be deleted when deletion protection is enabled.
+    #
+    # @option params [Boolean] :storage_encrypted
+    #   The storage encryption setting for the new global database cluster.
+    #
+    # @return [Types::CreateGlobalClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateGlobalClusterResult#global_cluster #global_cluster} => Types::GlobalCluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_global_cluster({
+    #     global_cluster_identifier: "GlobalClusterIdentifier", # required
+    #     source_db_cluster_identifier: "String",
+    #     engine: "String",
+    #     engine_version: "String",
+    #     deletion_protection: false,
+    #     storage_encrypted: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.global_cluster.global_cluster_identifier #=> String
+    #   resp.global_cluster.global_cluster_resource_id #=> String
+    #   resp.global_cluster.global_cluster_arn #=> String
+    #   resp.global_cluster.status #=> String
+    #   resp.global_cluster.engine #=> String
+    #   resp.global_cluster.engine_version #=> String
+    #   resp.global_cluster.storage_encrypted #=> Boolean
+    #   resp.global_cluster.deletion_protection #=> Boolean
+    #   resp.global_cluster.global_cluster_members #=> Array
+    #   resp.global_cluster.global_cluster_members[0].db_cluster_arn #=> String
+    #   resp.global_cluster.global_cluster_members[0].readers #=> Array
+    #   resp.global_cluster.global_cluster_members[0].readers[0] #=> String
+    #   resp.global_cluster.global_cluster_members[0].is_writer #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/CreateGlobalCluster AWS API Documentation
+    #
+    # @overload create_global_cluster(params = {})
+    # @param [Hash] params ({})
+    def create_global_cluster(params = {}, options = {})
+      req = build_request(:create_global_cluster, params)
+      req.send_request(options)
+    end
+
     # The DeleteDBCluster action deletes a previously provisioned DB
     # cluster. When you delete a DB cluster, all automated backups for that
     # DB cluster are deleted and can't be recovered. Manual DB cluster
@@ -2658,6 +2740,47 @@ module Aws::Neptune
     # @param [Hash] params ({})
     def delete_event_subscription(params = {}, options = {})
       req = build_request(:delete_event_subscription, params)
+      req.send_request(options)
+    end
+
+    # Deletes a global database. The primary and all secondary clusters must
+    # already be detached or deleted first.
+    #
+    # @option params [required, String] :global_cluster_identifier
+    #   The cluster identifier of the global database cluster being deleted.
+    #
+    # @return [Types::DeleteGlobalClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteGlobalClusterResult#global_cluster #global_cluster} => Types::GlobalCluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_global_cluster({
+    #     global_cluster_identifier: "GlobalClusterIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.global_cluster.global_cluster_identifier #=> String
+    #   resp.global_cluster.global_cluster_resource_id #=> String
+    #   resp.global_cluster.global_cluster_arn #=> String
+    #   resp.global_cluster.status #=> String
+    #   resp.global_cluster.engine #=> String
+    #   resp.global_cluster.engine_version #=> String
+    #   resp.global_cluster.storage_encrypted #=> Boolean
+    #   resp.global_cluster.deletion_protection #=> Boolean
+    #   resp.global_cluster.global_cluster_members #=> Array
+    #   resp.global_cluster.global_cluster_members[0].db_cluster_arn #=> String
+    #   resp.global_cluster.global_cluster_members[0].readers #=> Array
+    #   resp.global_cluster.global_cluster_members[0].readers[0] #=> String
+    #   resp.global_cluster.global_cluster_members[0].is_writer #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DeleteGlobalCluster AWS API Documentation
+    #
+    # @overload delete_global_cluster(params = {})
+    # @param [Hash] params ({})
+    def delete_global_cluster(params = {}, options = {})
+      req = build_request(:delete_global_cluster, params)
       req.send_request(options)
     end
 
@@ -3346,12 +3469,14 @@ module Aws::Neptune
     #   resp.db_engine_versions[0].valid_upgrade_target[0].description #=> String
     #   resp.db_engine_versions[0].valid_upgrade_target[0].auto_upgrade #=> Boolean
     #   resp.db_engine_versions[0].valid_upgrade_target[0].is_major_version_upgrade #=> Boolean
+    #   resp.db_engine_versions[0].valid_upgrade_target[0].supports_global_databases #=> Boolean
     #   resp.db_engine_versions[0].supported_timezones #=> Array
     #   resp.db_engine_versions[0].supported_timezones[0].timezone_name #=> String
     #   resp.db_engine_versions[0].exportable_log_types #=> Array
     #   resp.db_engine_versions[0].exportable_log_types[0] #=> String
     #   resp.db_engine_versions[0].supports_log_exports_to_cloudwatch_logs #=> Boolean
     #   resp.db_engine_versions[0].supports_read_replica #=> Boolean
+    #   resp.db_engine_versions[0].supports_global_databases #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DescribeDBEngineVersions AWS API Documentation
     #
@@ -4172,6 +4297,73 @@ module Aws::Neptune
       req.send_request(options)
     end
 
+    # Returns information about Neptune global database clusters. This API
+    # supports pagination.
+    #
+    # @option params [String] :global_cluster_identifier
+    #   The user-supplied DB cluster identifier. If this parameter is
+    #   specified, only information about the specified DB cluster is
+    #   returned. This parameter is not case-sensitive.
+    #
+    #   Constraints: If supplied, must match an existing DB cluster
+    #   identifier.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   marker token is included in the response that you can use to retrieve
+    #   the remaining results.
+    #
+    #   Default: `100`
+    #
+    #   Constraints: Minimum 20, maximum 100.
+    #
+    # @option params [String] :marker
+    #   (*Optional*) A pagination token returned by a previous call to
+    #   `DescribeGlobalClusters`. If this parameter is specified, the response
+    #   will only include records beyond the marker, up to the number
+    #   specified by `MaxRecords`.
+    #
+    # @return [Types::GlobalClustersMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GlobalClustersMessage#marker #marker} => String
+    #   * {Types::GlobalClustersMessage#global_clusters #global_clusters} => Array&lt;Types::GlobalCluster&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_global_clusters({
+    #     global_cluster_identifier: "GlobalClusterIdentifier",
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.global_clusters #=> Array
+    #   resp.global_clusters[0].global_cluster_identifier #=> String
+    #   resp.global_clusters[0].global_cluster_resource_id #=> String
+    #   resp.global_clusters[0].global_cluster_arn #=> String
+    #   resp.global_clusters[0].status #=> String
+    #   resp.global_clusters[0].engine #=> String
+    #   resp.global_clusters[0].engine_version #=> String
+    #   resp.global_clusters[0].storage_encrypted #=> Boolean
+    #   resp.global_clusters[0].deletion_protection #=> Boolean
+    #   resp.global_clusters[0].global_cluster_members #=> Array
+    #   resp.global_clusters[0].global_cluster_members[0].db_cluster_arn #=> String
+    #   resp.global_clusters[0].global_cluster_members[0].readers #=> Array
+    #   resp.global_clusters[0].global_cluster_members[0].readers[0] #=> String
+    #   resp.global_clusters[0].global_cluster_members[0].is_writer #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DescribeGlobalClusters AWS API Documentation
+    #
+    # @overload describe_global_clusters(params = {})
+    # @param [Hash] params ({})
+    def describe_global_clusters(params = {}, options = {})
+      req = build_request(:describe_global_clusters, params)
+      req.send_request(options)
+    end
+
     # Returns a list of orderable DB instance options for the specified
     # engine.
     #
@@ -4262,6 +4454,7 @@ module Aws::Neptune
     #   resp.orderable_db_instance_options[0].max_iops_per_db_instance #=> Integer
     #   resp.orderable_db_instance_options[0].min_iops_per_gib #=> Float
     #   resp.orderable_db_instance_options[0].max_iops_per_gib #=> Float
+    #   resp.orderable_db_instance_options[0].supports_global_databases #=> Boolean
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DescribeOrderableDBInstanceOptions AWS API Documentation
@@ -4498,6 +4691,73 @@ module Aws::Neptune
     # @param [Hash] params ({})
     def failover_db_cluster(params = {}, options = {})
       req = build_request(:failover_db_cluster, params)
+      req.send_request(options)
+    end
+
+    # Initiates the failover process for a Neptune global database.
+    #
+    # A failover for a Neptune global database promotes one of secondary
+    # read-only DB clusters to be the primary DB cluster and demotes the
+    # primary DB cluster to being a secondary (read-only) DB cluster. In
+    # other words, the role of the current primary DB cluster and the
+    # selected target secondary DB cluster are switched. The selected
+    # secondary DB cluster assumes full read/write capabilities for the
+    # Neptune global database.
+    #
+    # <note markdown="1"> This action applies **only** to Neptune global databases. This action
+    # is only intended for use on healthy Neptune global databases with
+    # healthy Neptune DB clusters and no region-wide outages, to test
+    # disaster recovery scenarios or to reconfigure the global database
+    # topology.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :global_cluster_identifier
+    #   Identifier of the Neptune global database that should be failed over.
+    #   The identifier is the unique key assigned by the user when the Neptune
+    #   global database was created. In other words, it's the name of the
+    #   global database that you want to fail over.
+    #
+    #   Constraints: Must match the identifier of an existing Neptune global
+    #   database.
+    #
+    # @option params [required, String] :target_db_cluster_identifier
+    #   The Amazon Resource Name (ARN) of the secondary Neptune DB cluster
+    #   that you want to promote to primary for the global database.
+    #
+    # @return [Types::FailoverGlobalClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::FailoverGlobalClusterResult#global_cluster #global_cluster} => Types::GlobalCluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.failover_global_cluster({
+    #     global_cluster_identifier: "GlobalClusterIdentifier", # required
+    #     target_db_cluster_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.global_cluster.global_cluster_identifier #=> String
+    #   resp.global_cluster.global_cluster_resource_id #=> String
+    #   resp.global_cluster.global_cluster_arn #=> String
+    #   resp.global_cluster.status #=> String
+    #   resp.global_cluster.engine #=> String
+    #   resp.global_cluster.engine_version #=> String
+    #   resp.global_cluster.storage_encrypted #=> Boolean
+    #   resp.global_cluster.deletion_protection #=> Boolean
+    #   resp.global_cluster.global_cluster_members #=> Array
+    #   resp.global_cluster.global_cluster_members[0].db_cluster_arn #=> String
+    #   resp.global_cluster.global_cluster_members[0].readers #=> Array
+    #   resp.global_cluster.global_cluster_members[0].readers[0] #=> String
+    #   resp.global_cluster.global_cluster_members[0].is_writer #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/FailoverGlobalCluster AWS API Documentation
+    #
+    # @overload failover_global_cluster(params = {})
+    # @param [Hash] params ({})
+    def failover_global_cluster(params = {}, options = {})
+      req = build_request(:failover_global_cluster, params)
       req.send_request(options)
     end
 
@@ -5686,6 +5946,96 @@ module Aws::Neptune
       req.send_request(options)
     end
 
+    # Modify a setting for an Amazon Neptune global cluster. You can change
+    # one or more database configuration parameters by specifying these
+    # parameters and their new values in the request.
+    #
+    # @option params [required, String] :global_cluster_identifier
+    #   The DB cluster identifier for the global cluster being modified. This
+    #   parameter is not case-sensitive.
+    #
+    #   Constraints: Must match the identifier of an existing global database
+    #   cluster.
+    #
+    # @option params [String] :new_global_cluster_identifier
+    #   A new cluster identifier to assign to the global database. This value
+    #   is stored as a lowercase string.
+    #
+    #   Constraints:
+    #
+    #   * Must contain from 1 to 63 letters, numbers, or hyphens.
+    #
+    #   * The first character must be a letter.
+    #
+    #   * Can't end with a hyphen or contain two consecutive hyphens
+    #
+    #   Example: `my-cluster2`
+    #
+    # @option params [Boolean] :deletion_protection
+    #   Indicates whether the global database has deletion protection enabled.
+    #   The global database cannot be deleted when deletion protection is
+    #   enabled.
+    #
+    # @option params [String] :engine_version
+    #   The version number of the database engine to which you want to
+    #   upgrade. Changing this parameter will result in an outage. The change
+    #   is applied during the next maintenance window unless
+    #   `ApplyImmediately` is enabled.
+    #
+    #   To list all of the available Neptune engine versions, use the
+    #   following command:
+    #
+    # @option params [Boolean] :allow_major_version_upgrade
+    #   A value that indicates whether major version upgrades are allowed.
+    #
+    #   Constraints: You must allow major version upgrades if you specify a
+    #   value for the `EngineVersion` parameter that is a different major
+    #   version than the DB cluster's current version.
+    #
+    #   If you upgrade the major version of a global database, the cluster and
+    #   DB instance parameter groups are set to the default parameter groups
+    #   for the new version, so you will need to apply any custom parameter
+    #   groups after completing the upgrade.
+    #
+    # @return [Types::ModifyGlobalClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyGlobalClusterResult#global_cluster #global_cluster} => Types::GlobalCluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_global_cluster({
+    #     global_cluster_identifier: "GlobalClusterIdentifier", # required
+    #     new_global_cluster_identifier: "GlobalClusterIdentifier",
+    #     deletion_protection: false,
+    #     engine_version: "String",
+    #     allow_major_version_upgrade: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.global_cluster.global_cluster_identifier #=> String
+    #   resp.global_cluster.global_cluster_resource_id #=> String
+    #   resp.global_cluster.global_cluster_arn #=> String
+    #   resp.global_cluster.status #=> String
+    #   resp.global_cluster.engine #=> String
+    #   resp.global_cluster.engine_version #=> String
+    #   resp.global_cluster.storage_encrypted #=> Boolean
+    #   resp.global_cluster.deletion_protection #=> Boolean
+    #   resp.global_cluster.global_cluster_members #=> Array
+    #   resp.global_cluster.global_cluster_members[0].db_cluster_arn #=> String
+    #   resp.global_cluster.global_cluster_members[0].readers #=> Array
+    #   resp.global_cluster.global_cluster_members[0].readers[0] #=> String
+    #   resp.global_cluster.global_cluster_members[0].is_writer #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/ModifyGlobalCluster AWS API Documentation
+    #
+    # @overload modify_global_cluster(params = {})
+    # @param [Hash] params ({})
+    def modify_global_cluster(params = {}, options = {})
+      req = build_request(:modify_global_cluster, params)
+      req.send_request(options)
+    end
+
     # Not supported.
     #
     # @option params [required, String] :db_cluster_identifier
@@ -5910,6 +6260,55 @@ module Aws::Neptune
     # @param [Hash] params ({})
     def reboot_db_instance(params = {}, options = {})
       req = build_request(:reboot_db_instance, params)
+      req.send_request(options)
+    end
+
+    # Detaches a Neptune DB cluster from a Neptune global database. A
+    # secondary cluster becomes a normal standalone cluster with read-write
+    # capability instead of being read-only, and no longer receives data
+    # from a the primary cluster.
+    #
+    # @option params [required, String] :global_cluster_identifier
+    #   The identifier of the Neptune global database from which to detach the
+    #   specified Neptune DB cluster.
+    #
+    # @option params [required, String] :db_cluster_identifier
+    #   The Amazon Resource Name (ARN) identifying the cluster to be detached
+    #   from the Neptune global database cluster.
+    #
+    # @return [Types::RemoveFromGlobalClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RemoveFromGlobalClusterResult#global_cluster #global_cluster} => Types::GlobalCluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.remove_from_global_cluster({
+    #     global_cluster_identifier: "GlobalClusterIdentifier", # required
+    #     db_cluster_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.global_cluster.global_cluster_identifier #=> String
+    #   resp.global_cluster.global_cluster_resource_id #=> String
+    #   resp.global_cluster.global_cluster_arn #=> String
+    #   resp.global_cluster.status #=> String
+    #   resp.global_cluster.engine #=> String
+    #   resp.global_cluster.engine_version #=> String
+    #   resp.global_cluster.storage_encrypted #=> Boolean
+    #   resp.global_cluster.deletion_protection #=> Boolean
+    #   resp.global_cluster.global_cluster_members #=> Array
+    #   resp.global_cluster.global_cluster_members[0].db_cluster_arn #=> String
+    #   resp.global_cluster.global_cluster_members[0].readers #=> Array
+    #   resp.global_cluster.global_cluster_members[0].readers[0] #=> String
+    #   resp.global_cluster.global_cluster_members[0].is_writer #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/RemoveFromGlobalCluster AWS API Documentation
+    #
+    # @overload remove_from_global_cluster(params = {})
+    # @param [Hash] params ({})
+    def remove_from_global_cluster(params = {}, options = {})
+      req = build_request(:remove_from_global_cluster, params)
       req.send_request(options)
     end
 
@@ -6827,7 +7226,7 @@ module Aws::Neptune
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-neptune'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

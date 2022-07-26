@@ -15,6 +15,7 @@ module Aws::IoTSecureTunneling
 
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     ClientAccessToken = Shapes::StringShape.new(name: 'ClientAccessToken')
+    ClientMode = Shapes::StringShape.new(name: 'ClientMode')
     CloseTunnelRequest = Shapes::StructureShape.new(name: 'CloseTunnelRequest')
     CloseTunnelResponse = Shapes::StructureShape.new(name: 'CloseTunnelResponse')
     ConnectionState = Shapes::StructureShape.new(name: 'ConnectionState')
@@ -36,6 +37,8 @@ module Aws::IoTSecureTunneling
     OpenTunnelRequest = Shapes::StructureShape.new(name: 'OpenTunnelRequest')
     OpenTunnelResponse = Shapes::StructureShape.new(name: 'OpenTunnelResponse')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    RotateTunnelAccessTokenRequest = Shapes::StructureShape.new(name: 'RotateTunnelAccessTokenRequest')
+    RotateTunnelAccessTokenResponse = Shapes::StructureShape.new(name: 'RotateTunnelAccessTokenResponse')
     Service = Shapes::StringShape.new(name: 'Service')
     ServiceList = Shapes::ListShape.new(name: 'ServiceList')
     Tag = Shapes::StructureShape.new(name: 'Tag')
@@ -109,6 +112,16 @@ module Aws::IoTSecureTunneling
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    RotateTunnelAccessTokenRequest.add_member(:tunnel_id, Shapes::ShapeRef.new(shape: TunnelId, required: true, location_name: "tunnelId"))
+    RotateTunnelAccessTokenRequest.add_member(:client_mode, Shapes::ShapeRef.new(shape: ClientMode, required: true, location_name: "clientMode"))
+    RotateTunnelAccessTokenRequest.add_member(:destination_config, Shapes::ShapeRef.new(shape: DestinationConfig, location_name: "destinationConfig"))
+    RotateTunnelAccessTokenRequest.struct_class = Types::RotateTunnelAccessTokenRequest
+
+    RotateTunnelAccessTokenResponse.add_member(:tunnel_arn, Shapes::ShapeRef.new(shape: TunnelArn, location_name: "tunnelArn"))
+    RotateTunnelAccessTokenResponse.add_member(:source_access_token, Shapes::ShapeRef.new(shape: ClientAccessToken, location_name: "sourceAccessToken"))
+    RotateTunnelAccessTokenResponse.add_member(:destination_access_token, Shapes::ShapeRef.new(shape: ClientAccessToken, location_name: "destinationAccessToken"))
+    RotateTunnelAccessTokenResponse.struct_class = Types::RotateTunnelAccessTokenResponse
 
     ServiceList.member = Shapes::ShapeRef.new(shape: Service)
 
@@ -225,6 +238,15 @@ module Aws::IoTSecureTunneling
         o.input = Shapes::ShapeRef.new(shape: OpenTunnelRequest)
         o.output = Shapes::ShapeRef.new(shape: OpenTunnelResponse)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:rotate_tunnel_access_token, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RotateTunnelAccessToken"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RotateTunnelAccessTokenRequest)
+        o.output = Shapes::ShapeRef.new(shape: RotateTunnelAccessTokenResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

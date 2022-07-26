@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::Lightsail
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -410,11 +412,11 @@ module Aws::Lightsail
     # Use the `CreateCertificate` action to create a certificate that you
     # can attach to your distribution.
     #
-    # Only certificates created in the `us-east-1` AWS Region can be
-    # attached to Lightsail distributions. Lightsail distributions are
-    # global resources that can reference an origin in any AWS Region, and
-    # distribute its content globally. However, all distributions are
-    # located in the `us-east-1` Region.
+    # Only certificates created in the `us-east-1` Amazon Web Services
+    # Region can be attached to Lightsail distributions. Lightsail
+    # distributions are global resources that can reference an origin in any
+    # Amazon Web Services Region, and distribute its content globally.
+    # However, all distributions are located in the `us-east-1` Region.
     #
     # @option params [required, String] :distribution_name
     #   The name of the distribution that the certificate will be attached to.
@@ -771,8 +773,8 @@ module Aws::Lightsail
     # Copies a manual snapshot of an instance or disk as another manual
     # snapshot, or copies an automatic snapshot of an instance or disk as a
     # manual snapshot. This operation can also be used to copy a manual or
-    # automatic snapshot of an instance or a disk from one AWS Region to
-    # another in Amazon Lightsail.
+    # automatic snapshot of an instance or a disk from one Amazon Web
+    # Services Region to another in Amazon Lightsail.
     #
     # When copying a *manual snapshot*, be sure to define the `source
     # region`, `source snapshot name`, and `target snapshot name`
@@ -852,8 +854,8 @@ module Aws::Lightsail
     #   The name of the new manual snapshot to be created as a copy.
     #
     # @option params [required, String] :source_region
-    #   The AWS Region where the source manual or automatic snapshot is
-    #   located.
+    #   The Amazon Web Services Region where the source manual or automatic
+    #   snapshot is located.
     #
     # @return [Types::CopySnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -923,16 +925,25 @@ module Aws::Lightsail
     #   A bucket bundle specifies the monthly cost, storage space, and data
     #   transfer quota for a bucket.
     #
-    #   Use the GetBucketBundles action to get a list of bundle IDs that you
-    #   can specify.
+    #   Use the [GetBucketBundles][1] action to get a list of bundle IDs that
+    #   you can specify.
     #
-    #   Use the UpdateBucketBundle action to change the bundle after the
+    #   Use the [UpdateBucketBundle][2] action to change the bundle after the
     #   bucket is created.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetBucketBundles.html
+    #   [2]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_UpdateBucketBundle.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tag keys and optional values to add to the bucket during creation.
     #
-    #   Use the TagResource action to tag the bucket after it's created.
+    #   Use the [TagResource][1] action to tag the bucket after it's created.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_TagResource.html
     #
     # @option params [Boolean] :enable_object_versioning
     #   A Boolean value that indicates whether to enable versioning of objects
@@ -1023,9 +1034,9 @@ module Aws::Lightsail
     #
     # Access keys grant full programmatic access to the specified bucket and
     # its objects. You can have a maximum of two access keys per bucket. Use
-    # the GetBucketAccessKeys action to get a list of current access keys
-    # for a specific bucket. For more information about access keys, see
-    # [Creating access keys for a bucket in Amazon Lightsail][1] in the
+    # the [GetBucketAccessKeys][1] action to get a list of current access
+    # keys for a specific bucket. For more information about access keys,
+    # see [Creating access keys for a bucket in Amazon Lightsail][2] in the
     # *Amazon Lightsail Developer Guide*.
     #
     # The `secretAccessKey` value is returned only in response to the
@@ -1036,7 +1047,8 @@ module Aws::Lightsail
     #
     #
     #
-    # [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-creating-bucket-access-keys
+    # [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetBucketAccessKeys.html
+    # [2]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-creating-bucket-access-keys
     #
     # @option params [required, String] :bucket_name
     #   The name of the bucket that the new access key will belong to, and
@@ -1095,11 +1107,11 @@ module Aws::Lightsail
     # `UpdateContainerService` action to use the certificate and its domains
     # with your container service.
     #
-    # Only certificates created in the `us-east-1` AWS Region can be
-    # attached to Lightsail distributions. Lightsail distributions are
-    # global resources that can reference an origin in any AWS Region, and
-    # distribute its content globally. However, all distributions are
-    # located in the `us-east-1` Region.
+    # Only certificates created in the `us-east-1` Amazon Web Services
+    # Region can be attached to Lightsail distributions. Lightsail
+    # distributions are global resources that can reference an origin in any
+    # Amazon Web Services Region, and distribute its content globally.
+    # However, all distributions are located in the `us-east-1` Region.
     #
     # @option params [required, String] :certificate_name
     #   The name for the certificate.
@@ -1273,10 +1285,11 @@ module Aws::Lightsail
     #
     # A contact method is used to send you notifications about your Amazon
     # Lightsail resources. You can add one email address and one mobile
-    # phone number contact method in each AWS Region. However, SMS text
-    # messaging is not supported in some AWS Regions, and SMS text messages
-    # cannot be sent to some countries/regions. For more information, see
-    # [Notifications in Amazon Lightsail][1].
+    # phone number contact method in each Amazon Web Services Region.
+    # However, SMS text messaging is not supported in some Amazon Web
+    # Services Regions, and SMS text messages cannot be sent to some
+    # countries/regions. For more information, see [Notifications in Amazon
+    # Lightsail][1].
     #
     #
     #
@@ -1286,7 +1299,8 @@ module Aws::Lightsail
     #   The protocol of the contact method, such as `Email` or `SMS` (text
     #   messaging).
     #
-    #   The `SMS` protocol is supported only in the following AWS Regions.
+    #   The `SMS` protocol is supported only in the following Amazon Web
+    #   Services Regions.
     #
     #   * US East (N. Virginia) (`us-east-1`)
     #
@@ -1301,9 +1315,9 @@ module Aws::Lightsail
     #   * Asia Pacific (Sydney) (`ap-southeast-2`)
     #
     #   For a list of countries/regions where SMS text messages can be sent,
-    #   and the latest AWS Regions where SMS text messaging is supported, see
-    #   [Supported Regions and Countries][1] in the *Amazon SNS Developer
-    #   Guide*.
+    #   and the latest Amazon Web Services Regions where SMS text messaging is
+    #   supported, see [Supported Regions and Countries][1] in the *Amazon SNS
+    #   Developer Guide*.
     #
     #   For more information about notifications in Amazon Lightsail, see
     #   [Notifications in Amazon Lightsail][2].
@@ -1390,7 +1404,8 @@ module Aws::Lightsail
     #
     #   The following are the requirements for container service names:
     #
-    #   * Must be unique within each AWS Region in your Lightsail account.
+    #   * Must be unique within each Amazon Web Services Region in your
+    #     Lightsail account.
     #
     #   * Must contain 1 to 63 characters.
     #
@@ -1464,6 +1479,19 @@ module Aws::Lightsail
     #   deployment and its settings, such as the HTTP or HTTPS port to use,
     #   and the health check configuration.
     #
+    # @option params [Types::PrivateRegistryAccessRequest] :private_registry_access
+    #   An object to describe the configuration for the container service to
+    #   access private container image repositories, such as Amazon Elastic
+    #   Container Registry (Amazon ECR) private repositories.
+    #
+    #   For more information, see [Configuring access to an Amazon ECR private
+    #   repository for an Amazon Lightsail container service][1] in the
+    #   *Amazon Lightsail Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-container-service-ecr-private-repo-access
+    #
     # @return [Types::CreateContainerServiceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateContainerServiceResult#container_service #container_service} => Types::ContainerService
@@ -1507,6 +1535,11 @@ module Aws::Lightsail
     #           path: "string",
     #           success_codes: "string",
     #         },
+    #       },
+    #     },
+    #     private_registry_access: {
+    #       ecr_image_puller_role: {
+    #         is_active: false,
     #       },
     #     },
     #   })
@@ -1573,6 +1606,8 @@ module Aws::Lightsail
     #   resp.container_service.public_domain_names["string"] #=> Array
     #   resp.container_service.public_domain_names["string"][0] #=> String
     #   resp.container_service.url #=> String
+    #   resp.container_service.private_registry_access.ecr_image_puller_role.is_active #=> Boolean
+    #   resp.container_service.private_registry_access.ecr_image_puller_role.principal_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateContainerService AWS API Documentation
     #
@@ -1593,10 +1628,10 @@ module Aws::Lightsail
     # and the health check configuration.
     #
     # You can deploy containers to your container service using container
-    # images from a public registry like Docker Hub, or from your local
-    # machine. For more information, see [Creating container images for your
-    # Amazon Lightsail container services][1] in the *Amazon Lightsail
-    # Developer Guide*.
+    # images from a public registry such as Amazon ECR Public, or from your
+    # local machine. For more information, see [Creating container images
+    # for your Amazon Lightsail container services][1] in the *Amazon
+    # Lightsail Developer Guide*.
     #
     #
     #
@@ -1709,6 +1744,8 @@ module Aws::Lightsail
     #   resp.container_service.public_domain_names["string"] #=> Array
     #   resp.container_service.public_domain_names["string"][0] #=> String
     #   resp.container_service.url #=> String
+    #   resp.container_service.private_registry_access.ecr_image_puller_role.is_active #=> Boolean
+    #   resp.container_service.private_registry_access.ecr_image_puller_role.principal_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateContainerServiceDeployment AWS API Documentation
     #
@@ -2142,7 +2179,7 @@ module Aws::Lightsail
     #
     # @option params [required, Types::InputOrigin] :origin
     #   An object that describes the origin resource for the distribution,
-    #   such as a Lightsail instance or load balancer.
+    #   such as a Lightsail instance, bucket, or load balancer.
     #
     #   The distribution pulls, caches, and serves content from the origin.
     #
@@ -2851,15 +2888,23 @@ module Aws::Lightsail
       req.send_request(options)
     end
 
-    # Creates an SSH key pair.
+    # Creates a custom SSH key pair that you can use with an Amazon
+    # Lightsail instance.
+    #
+    # <note markdown="1"> Use the [DownloadDefaultKeyPair][1] action to create a Lightsail
+    # default key pair in an Amazon Web Services Region where a default key
+    # pair does not currently exist.
+    #
+    #  </note>
     #
     # The `create key pair` operation supports tag-based access control via
     # request tags. For more information, see the [Amazon Lightsail
-    # Developer Guide][1].
+    # Developer Guide][2].
     #
     #
     #
-    # [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags
+    # [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_DownloadDefaultKeyPair.html
+    # [2]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags
     #
     # @option params [required, String] :key_pair_name
     #   The name for your new key pair.
@@ -2990,6 +3035,21 @@ module Aws::Lightsail
     #
     #   The default value is `dualstack`.
     #
+    # @option params [String] :tls_policy_name
+    #   The name of the TLS policy to apply to the load balancer.
+    #
+    #   Use the [GetLoadBalancerTlsPolicies][1] action to get a list of TLS
+    #   policy names that you can specify.
+    #
+    #   For more information about load balancer TLS policies, see
+    #   [Configuring TLS security policies on your Amazon Lightsail load
+    #   balancers][2] in the *Amazon Lightsail Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetLoadBalancerTlsPolicies.html
+    #   [2]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configure-load-balancer-tls-security-policy
+    #
     # @return [Types::CreateLoadBalancerResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateLoadBalancerResult#operations #operations} => Array&lt;Types::Operation&gt;
@@ -3010,6 +3070,7 @@ module Aws::Lightsail
     #       },
     #     ],
     #     ip_address_type: "dualstack", # accepts dualstack, ipv4
+    #     tls_policy_name: "string",
     #   })
     #
     # @example Response structure
@@ -3703,15 +3764,20 @@ module Aws::Lightsail
     # Deletes a Amazon Lightsail bucket.
     #
     # <note markdown="1"> When you delete your bucket, the bucket name is released and can be
-    # reused for a new bucket in your account or another AWS account.
+    # reused for a new bucket in your account or another Amazon Web Services
+    # account.
     #
     #  </note>
     #
     # @option params [required, String] :bucket_name
     #   The name of the bucket to delete.
     #
-    #   Use the GetBuckets action to get a list of bucket names that you can
-    #   specify.
+    #   Use the [GetBuckets][1] action to get a list of bucket names that you
+    #   can specify.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetBuckets.html
     #
     # @option params [Boolean] :force_delete
     #   A Boolean value that indicates whether to force delete the bucket.
@@ -3722,7 +3788,7 @@ module Aws::Lightsail
     #   * The bucket is the origin of a distribution.
     #
     #   * The bucket has instances that were granted access to it using the
-    #     SetResourceAccessForBucket action.
+    #     [SetResourceAccessForBucket][1] action.
     #
     #   * The bucket has objects.
     #
@@ -3731,6 +3797,10 @@ module Aws::Lightsail
     #   Force deleting a bucket might impact other resources that rely on the
     #   bucket, such as instances, distributions, or software that use the
     #   issued access keys.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_SetResourceAccessForBucket.html
     #
     # @return [Types::DeleteBucketResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3788,8 +3858,12 @@ module Aws::Lightsail
     # @option params [required, String] :access_key_id
     #   The ID of the access key to delete.
     #
-    #   Use the GetBucketAccessKeys action to get a list of access key IDs
-    #   that you can specify.
+    #   Use the [GetBucketAccessKeys][1] action to get a list of access key
+    #   IDs that you can specify.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetBucketAccessKeys.html
     #
     # @return [Types::DeleteBucketAccessKeyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3881,10 +3955,11 @@ module Aws::Lightsail
     #
     # A contact method is used to send you notifications about your Amazon
     # Lightsail resources. You can add one email address and one mobile
-    # phone number contact method in each AWS Region. However, SMS text
-    # messaging is not supported in some AWS Regions, and SMS text messages
-    # cannot be sent to some countries/regions. For more information, see
-    # [Notifications in Amazon Lightsail][1].
+    # phone number contact method in each Amazon Web Services Region.
+    # However, SMS text messaging is not supported in some Amazon Web
+    # Services Regions, and SMS text messages cannot be sent to some
+    # countries/regions. For more information, see [Notifications in Amazon
+    # Lightsail][1].
     #
     #
     #
@@ -4374,18 +4449,36 @@ module Aws::Lightsail
       req.send_request(options)
     end
 
-    # Deletes a specific SSH key pair.
+    # Deletes the specified key pair by removing the public key from Amazon
+    # Lightsail.
+    #
+    # You can delete key pairs that were created using the
+    # [ImportKeyPair][1] and [CreateKeyPair][2] actions, as well as the
+    # Lightsail default key pair. A new default key pair will not be created
+    # unless you launch an instance without specifying a custom key pair, or
+    # you call the [DownloadDefaultKeyPair][3] API.
     #
     # The `delete key pair` operation supports tag-based access control via
     # resource tags applied to the resource identified by `key pair name`.
-    # For more information, see the [Amazon Lightsail Developer Guide][1].
+    # For more information, see the [Amazon Lightsail Developer Guide][4].
     #
     #
     #
-    # [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags
+    # [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_ImportKeyPair.html
+    # [2]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_CreateKeyPair.html
+    # [3]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_DownloadDefaultKeyPair.html
+    # [4]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags
     #
     # @option params [required, String] :key_pair_name
     #   The name of the key pair to delete.
+    #
+    # @option params [String] :expected_fingerprint
+    #   The RSA fingerprint of the Lightsail default key pair to delete.
+    #
+    #   <note markdown="1"> The `expectedFingerprint` parameter is required only when specifying
+    #   to delete a Lightsail default key pair.
+    #
+    #    </note>
     #
     # @return [Types::DeleteKeyPairResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4395,6 +4488,7 @@ module Aws::Lightsail
     #
     #   resp = client.delete_key_pair({
     #     key_pair_name: "ResourceName", # required
+    #     expected_fingerprint: "string",
     #   })
     #
     # @example Response structure
@@ -4972,17 +5066,22 @@ module Aws::Lightsail
       req.send_request(options)
     end
 
-    # Downloads the default SSH key pair from the user's account.
+    # Downloads the regional Amazon Lightsail default key pair.
+    #
+    # This action also creates a Lightsail default key pair if a default key
+    # pair does not currently exist in the Amazon Web Services Region.
     #
     # @return [Types::DownloadDefaultKeyPairResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DownloadDefaultKeyPairResult#public_key_base_64 #public_key_base_64} => String
     #   * {Types::DownloadDefaultKeyPairResult#private_key_base_64 #private_key_base_64} => String
+    #   * {Types::DownloadDefaultKeyPairResult#created_at #created_at} => Time
     #
     # @example Response structure
     #
     #   resp.public_key_base_64 #=> String
     #   resp.private_key_base_64 #=> String
+    #   resp.created_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DownloadDefaultKeyPair AWS API Documentation
     #
@@ -5295,8 +5394,8 @@ module Aws::Lightsail
     #  </note>
     #
     # @option params [Boolean] :include_inactive
-    #   A Boolean value indicating whether to include inactive results in your
-    #   request.
+    #   A Boolean value that indicates whether to include inactive
+    #   (unavailable) blueprints in the response of your request.
     #
     # @option params [String] :page_token
     #   The token to advance to the next page of results from your request.
@@ -5348,8 +5447,12 @@ module Aws::Lightsail
     #
     # This action does not return the secret access key value of an access
     # key. You can get a secret access key only when you create it from the
-    # response of the CreateBucketAccessKey action. If you lose the secret
-    # access key, you must create a new access key.
+    # response of the [CreateBucketAccessKey][1] action. If you lose the
+    # secret access key, you must create a new access key.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_CreateBucketAccessKey.html
     #
     # @option params [required, String] :bucket_name
     #   The name of the bucket for which to return access keys.
@@ -5389,11 +5492,16 @@ module Aws::Lightsail
     # The bucket bundle specifies the monthly cost, storage quota, and data
     # transfer quota for a bucket.
     #
-    # Use the UpdateBucketBundle action to update the bundle for a bucket.
+    # Use the [UpdateBucketBundle][1] action to update the bundle for a
+    # bucket.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_UpdateBucketBundle.html
     #
     # @option params [Boolean] :include_inactive
     #   A Boolean value that indicates whether to include inactive
-    #   (unavailable) bundles in the response.
+    #   (unavailable) bundles in the response of your request.
     #
     # @return [Types::GetBucketBundlesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5549,10 +5657,13 @@ module Aws::Lightsail
       req.send_request(options)
     end
 
-    # Returns information about one or more Amazon Lightsail buckets.
+    # Returns information about one or more Amazon Lightsail buckets. The
+    # information returned includes the synchronization status of the Amazon
+    # Simple Storage Service (Amazon S3) account-level block public access
+    # feature for your Lightsail buckets.
     #
     # For more information about buckets, see [Buckets in Amazon
-    # Lightsail][1] in the *Amazon Lightsail Developer Guide*..
+    # Lightsail][1] in the *Amazon Lightsail Developer Guide*.
     #
     #
     #
@@ -5561,8 +5672,8 @@ module Aws::Lightsail
     # @option params [String] :bucket_name
     #   The name of the bucket for which to return information.
     #
-    #   When omitted, the response includes all of your buckets in the AWS
-    #   Region where the request is made.
+    #   When omitted, the response includes all of your buckets in the Amazon
+    #   Web Services Region where the request is made.
     #
     # @option params [String] :page_token
     #   The token to advance to the next page of results from your request.
@@ -5574,12 +5685,17 @@ module Aws::Lightsail
     # @option params [Boolean] :include_connected_resources
     #   A Boolean value that indicates whether to include Lightsail instances
     #   that were given access to the bucket using the
-    #   SetResourceAccessForBucket action.
+    #   [SetResourceAccessForBucket][1] action.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_SetResourceAccessForBucket.html
     #
     # @return [Types::GetBucketsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetBucketsResult#buckets #buckets} => Array&lt;Types::Bucket&gt;
     #   * {Types::GetBucketsResult#next_page_token #next_page_token} => String
+    #   * {Types::GetBucketsResult#account_level_bpa_sync #account_level_bpa_sync} => Types::AccountLevelBpaSync
     #
     # @example Request syntax with placeholder values
     #
@@ -5619,6 +5735,10 @@ module Aws::Lightsail
     #   resp.buckets[0].access_log_config.destination #=> String
     #   resp.buckets[0].access_log_config.prefix #=> String
     #   resp.next_page_token #=> String
+    #   resp.account_level_bpa_sync.status #=> String, one of "InSync", "Failed", "NeverSynced", "Defaulted"
+    #   resp.account_level_bpa_sync.last_synced_at #=> Time
+    #   resp.account_level_bpa_sync.message #=> String, one of "DEFAULTED_FOR_SLR_MISSING", "SYNC_ON_HOLD", "DEFAULTED_FOR_SLR_MISSING_ON_HOLD", "Unknown"
+    #   resp.account_level_bpa_sync.bpa_impacts_lightsail #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetBuckets AWS API Documentation
     #
@@ -5629,12 +5749,20 @@ module Aws::Lightsail
       req.send_request(options)
     end
 
-    # Returns the list of bundles that are available for purchase. A bundle
-    # describes the specs for your virtual private server (or *instance*).
+    # Returns the bundles that you can apply to an Amazon Lightsail instance
+    # when you create it.
+    #
+    # A bundle describes the specifications of an instance, such as the
+    # monthly cost, amount of memory, the number of vCPUs, amount of storage
+    # space, and monthly network data transfer quota.
+    #
+    # <note markdown="1"> Bundles are referred to as *instance plans* in the Lightsail console.
+    #
+    #  </note>
     #
     # @option params [Boolean] :include_inactive
-    #   A Boolean value that indicates whether to include inactive bundle
-    #   results in your request.
+    #   A Boolean value that indicates whether to include inactive
+    #   (unavailable) bundles in the response of your request.
     #
     # @option params [String] :page_token
     #   The token to advance to the next page of results from your request.
@@ -5697,8 +5825,8 @@ module Aws::Lightsail
     #   `ISSUED` status.
     #
     #   When omitted, the response includes all of your certificates in the
-    #   AWS Region where the request is made, regardless of their current
-    #   status.
+    #   Amazon Web Services Region where the request is made, regardless of
+    #   their current status.
     #
     # @option params [Boolean] :include_certificate_details
     #   Indicates whether to include detailed information about the
@@ -5711,7 +5839,7 @@ module Aws::Lightsail
     #   The name for the certificate for which to return information.
     #
     #   When omitted, the response includes all of your certificates in the
-    #   AWS Region where the request is made.
+    #   Amazon Web Services Region where the request is made.
     #
     # @return [Types::GetCertificatesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5837,10 +5965,11 @@ module Aws::Lightsail
     #
     # A contact method is used to send you notifications about your Amazon
     # Lightsail resources. You can add one email address and one mobile
-    # phone number contact method in each AWS Region. However, SMS text
-    # messaging is not supported in some AWS Regions, and SMS text messages
-    # cannot be sent to some countries/regions. For more information, see
-    # [Notifications in Amazon Lightsail][1].
+    # phone number contact method in each Amazon Web Services Region.
+    # However, SMS text messaging is not supported in some Amazon Web
+    # Services Regions, and SMS text messages cannot be sent to some
+    # countries/regions. For more information, see [Notifications in Amazon
+    # Lightsail][1].
     #
     #
     #
@@ -6281,7 +6410,7 @@ module Aws::Lightsail
     #   The name of the container service for which to return information.
     #
     #   When omitted, the response includes all of your container services in
-    #   the AWS Region where the request is made.
+    #   the Amazon Web Services Region where the request is made.
     #
     # @return [Types::ContainerServicesListResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6356,6 +6485,8 @@ module Aws::Lightsail
     #   resp.container_services[0].public_domain_names["string"] #=> Array
     #   resp.container_services[0].public_domain_names["string"][0] #=> String
     #   resp.container_services[0].url #=> String
+    #   resp.container_services[0].private_registry_access.ecr_image_puller_role.is_active #=> Boolean
+    #   resp.container_services[0].private_registry_access.ecr_image_puller_role.principal_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetContainerServices AWS API Documentation
     #
@@ -6578,7 +6709,7 @@ module Aws::Lightsail
     # content delivery network (CDN) distributions.
     #
     # A distribution bundle specifies the monthly network transfer quota and
-    # monthly cost of your dsitribution.
+    # monthly cost of your distribution.
     #
     # @return [Types::GetDistributionBundlesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6831,7 +6962,7 @@ module Aws::Lightsail
     #   The name of the distribution for which to return information.
     #
     #   When omitted, the response includes all of your distributions in the
-    #   AWS Region where the request is made.
+    #   Amazon Web Services Region where the request is made.
     #
     # @option params [String] :page_token
     #   The token to advance to the next page of results from your request.
@@ -7009,8 +7140,12 @@ module Aws::Lightsail
     # snapshot` operation.
     #
     # An export snapshot record can be used to create a new Amazon EC2
-    # instance and its related resources with the CreateCloudFormationStack
-    # action.
+    # instance and its related resources with the
+    # [CreateCloudFormationStack][1] action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_CreateCloudFormationStack.html
     #
     # @option params [String] :page_token
     #   The token to advance to the next page of results from your request.
@@ -7795,6 +7930,10 @@ module Aws::Lightsail
     #   results are paginated, the response will return a next page token that
     #   you can specify as the page token in a subsequent request.
     #
+    # @option params [Boolean] :include_default_key_pair
+    #   A Boolean value that indicates whether to include the default key pair
+    #   in the response of your request.
+    #
     # @return [Types::GetKeyPairsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetKeyPairsResult#key_pairs #key_pairs} => Array&lt;Types::KeyPair&gt;
@@ -7804,6 +7943,7 @@ module Aws::Lightsail
     #
     #   resp = client.get_key_pairs({
     #     page_token: "string",
+    #     include_default_key_pair: false,
     #   })
     #
     # @example Response structure
@@ -7875,6 +8015,8 @@ module Aws::Lightsail
     #   resp.load_balancer.configuration_options #=> Hash
     #   resp.load_balancer.configuration_options["LoadBalancerAttributeName"] #=> String
     #   resp.load_balancer.ip_address_type #=> String, one of "dualstack", "ipv4"
+    #   resp.load_balancer.https_redirection_enabled #=> Boolean
+    #   resp.load_balancer.tls_policy_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetLoadBalancer AWS API Documentation
     #
@@ -8165,6 +8307,57 @@ module Aws::Lightsail
       req.send_request(options)
     end
 
+    # Returns a list of TLS security policies that you can apply to
+    # Lightsail load balancers.
+    #
+    # For more information about load balancer TLS security policies, see
+    # [Configuring TLS security policies on your Amazon Lightsail load
+    # balancers][1] in the *Amazon Lightsail Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configure-load-balancer-tls-security-policy
+    #
+    # @option params [String] :page_token
+    #   The token to advance to the next page of results from your request.
+    #
+    #   To get a page token, perform an initial `GetLoadBalancerTlsPolicies`
+    #   request. If your results are paginated, the response will return a
+    #   next page token that you can specify as the page token in a subsequent
+    #   request.
+    #
+    # @return [Types::GetLoadBalancerTlsPoliciesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetLoadBalancerTlsPoliciesResult#tls_policies #tls_policies} => Array&lt;Types::LoadBalancerTlsPolicy&gt;
+    #   * {Types::GetLoadBalancerTlsPoliciesResult#next_page_token #next_page_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_load_balancer_tls_policies({
+    #     page_token: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tls_policies #=> Array
+    #   resp.tls_policies[0].name #=> String
+    #   resp.tls_policies[0].is_default #=> Boolean
+    #   resp.tls_policies[0].description #=> String
+    #   resp.tls_policies[0].protocols #=> Array
+    #   resp.tls_policies[0].protocols[0] #=> String
+    #   resp.tls_policies[0].ciphers #=> Array
+    #   resp.tls_policies[0].ciphers[0] #=> String
+    #   resp.next_page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetLoadBalancerTlsPolicies AWS API Documentation
+    #
+    # @overload get_load_balancer_tls_policies(params = {})
+    # @param [Hash] params ({})
+    def get_load_balancer_tls_policies(params = {}, options = {})
+      req = build_request(:get_load_balancer_tls_policies, params)
+      req.send_request(options)
+    end
+
     # Returns information about all load balancers in an account.
     #
     # @option params [String] :page_token
@@ -8215,6 +8408,8 @@ module Aws::Lightsail
     #   resp.load_balancers[0].configuration_options #=> Hash
     #   resp.load_balancers[0].configuration_options["LoadBalancerAttributeName"] #=> String
     #   resp.load_balancers[0].ip_address_type #=> String, one of "dualstack", "ipv4"
+    #   resp.load_balancers[0].https_redirection_enabled #=> Boolean
+    #   resp.load_balancers[0].tls_policy_name #=> String
     #   resp.next_page_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetLoadBalancers AWS API Documentation
@@ -8546,6 +8741,10 @@ module Aws::Lightsail
     #   next page token that you can specify as the page token in a subsequent
     #   request.
     #
+    # @option params [Boolean] :include_inactive
+    #   A Boolean value that indicates whether to include inactive
+    #   (unavailable) bundles in the response of your request.
+    #
     # @return [Types::GetRelationalDatabaseBundlesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetRelationalDatabaseBundlesResult#bundles #bundles} => Array&lt;Types::RelationalDatabaseBundle&gt;
@@ -8555,6 +8754,7 @@ module Aws::Lightsail
     #
     #   resp = client.get_relational_database_bundles({
     #     page_token: "string",
+    #     include_inactive: false,
     #   })
     #
     # @example Response structure
@@ -9548,12 +9748,12 @@ module Aws::Lightsail
     #   triggered.
     #
     #   A notification is not sent if a contact protocol is not specified, if
-    #   the specified contact protocol is not configured in the AWS Region, or
-    #   if notifications are not enabled for the alarm using the
-    #   `notificationEnabled` paramater.
+    #   the specified contact protocol is not configured in the Amazon Web
+    #   Services Region, or if notifications are not enabled for the alarm
+    #   using the `notificationEnabled` paramater.
     #
     #   Use the `CreateContactMethod` action to configure a contact protocol
-    #   in an AWS Region.
+    #   in an Amazon Web Services Region.
     #
     # @option params [Array<String>] :notification_triggers
     #   The alarm states that trigger a notification.
@@ -9978,10 +10178,11 @@ module Aws::Lightsail
     #
     # A contact method is used to send you notifications about your Amazon
     # Lightsail resources. You can add one email address and one mobile
-    # phone number contact method in each AWS Region. However, SMS text
-    # messaging is not supported in some AWS Regions, and SMS text messages
-    # cannot be sent to some countries/regions. For more information, see
-    # [Notifications in Amazon Lightsail][1].
+    # phone number contact method in each Amazon Web Services Region.
+    # However, SMS text messaging is not supported in some Amazon Web
+    # Services Regions, and SMS text messages cannot be sent to some
+    # countries/regions. For more information, see [Notifications in Amazon
+    # Lightsail][1].
     #
     # A verification request is sent to the contact method when you
     # initially create it. Use this action to send another verification
@@ -10047,8 +10248,9 @@ module Aws::Lightsail
     #   `LoadBalancer`.
     #
     #   <note markdown="1"> Distribution-related APIs are available only in the N. Virginia
-    #   (`us-east-1`) AWS Region. Set your AWS Region configuration to
-    #   `us-east-1` to create, view, or edit distributions.
+    #   (`us-east-1`) Amazon Web Services Region. Set your Amazon Web Services
+    #   Region configuration to `us-east-1` to create, view, or edit
+    #   distributions.
     #
     #    </note>
     #
@@ -10103,7 +10305,7 @@ module Aws::Lightsail
     # Lightsail bucket.
     #
     # Lightsail buckets currently support setting access for Lightsail
-    # instances in the same AWS Region.
+    # instances in the same Amazon Web Services Region.
     #
     # @option params [required, String] :resource_name
     #   The name of the Lightsail instance for which to set bucket access. The
@@ -10623,8 +10825,8 @@ module Aws::Lightsail
     # Updates an existing Amazon Lightsail bucket.
     #
     # Use this action to update the configuration of an existing bucket,
-    # such as versioning, public accessibility, and the AWS accounts that
-    # can access the bucket.
+    # such as versioning, public accessibility, and the Amazon Web Services
+    # accounts that can access the bucket.
     #
     # @option params [required, String] :bucket_name
     #   The name of the bucket to update.
@@ -10645,10 +10847,11 @@ module Aws::Lightsail
     #     bucket. Existing object versions are retained.
     #
     # @option params [Array<String>] :readonly_access_accounts
-    #   An array of strings to specify the AWS account IDs that can access the
-    #   bucket.
+    #   An array of strings to specify the Amazon Web Services account IDs
+    #   that can access the bucket.
     #
-    #   You can give a maximum of 10 AWS accounts access to a bucket.
+    #   You can give a maximum of 10 Amazon Web Services accounts access to a
+    #   bucket.
     #
     # @option params [Types::BucketAccessLogConfig] :access_log_config
     #   An object that describes the access log configuration for the bucket.
@@ -10733,7 +10936,7 @@ module Aws::Lightsail
     # A bucket bundle specifies the monthly cost, storage space, and data
     # transfer quota for a bucket. You can update a bucket's bundle only
     # one time within a monthly AWS billing cycle. To determine if you can
-    # update a bucket's bundle, use the GetBuckets action. The
+    # update a bucket's bundle, use the [GetBuckets][1] action. The
     # `ableToUpdateBundle` parameter in the response will indicate whether
     # you can currently update a bucket's bundle.
     #
@@ -10746,14 +10949,22 @@ module Aws::Lightsail
     # measure. Choose a bucket bundle that will provide the bucket with
     # ample storage space and data transfer for a long time to come.
     #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetBuckets.html
+    #
     # @option params [required, String] :bucket_name
     #   The name of the bucket for which to update the bundle.
     #
     # @option params [required, String] :bundle_id
     #   The ID of the new bundle to apply to the bucket.
     #
-    #   Use the GetBucketBundles action to get a list of bundle IDs that you
-    #   can specify.
+    #   Use the [GetBucketBundles][1] action to get a list of bundle IDs that
+    #   you can specify.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetBucketBundles.html
     #
     # @return [Types::UpdateBucketBundleResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -10842,6 +11053,19 @@ module Aws::Lightsail
     #   You can specify public domain names using a string to array map as
     #   shown in the example later on this page.
     #
+    # @option params [Types::PrivateRegistryAccessRequest] :private_registry_access
+    #   An object to describe the configuration for the container service to
+    #   access private container image repositories, such as Amazon Elastic
+    #   Container Registry (Amazon ECR) private repositories.
+    #
+    #   For more information, see [Configuring access to an Amazon ECR private
+    #   repository for an Amazon Lightsail container service][1] in the
+    #   *Amazon Lightsail Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-container-service-ecr-private-repo-access
+    #
     # @return [Types::UpdateContainerServiceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateContainerServiceResult#container_service #container_service} => Types::ContainerService
@@ -10855,6 +11079,11 @@ module Aws::Lightsail
     #     is_disabled: false,
     #     public_domain_names: {
     #       "string" => ["string"],
+    #     },
+    #     private_registry_access: {
+    #       ecr_image_puller_role: {
+    #         is_active: false,
+    #       },
     #     },
     #   })
     #
@@ -10920,6 +11149,8 @@ module Aws::Lightsail
     #   resp.container_service.public_domain_names["string"] #=> Array
     #   resp.container_service.public_domain_names["string"][0] #=> String
     #   resp.container_service.url #=> String
+    #   resp.container_service.private_registry_access.ecr_image_puller_role.is_active #=> Boolean
+    #   resp.container_service.private_registry_access.ecr_image_puller_role.principal_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateContainerService AWS API Documentation
     #
@@ -10944,7 +11175,7 @@ module Aws::Lightsail
     #
     # @option params [Types::InputOrigin] :origin
     #   An object that describes the origin resource for the distribution,
-    #   such as a Lightsail instance or load balancer.
+    #   such as a Lightsail instance, bucket, or load balancer.
     #
     #   The distribution pulls, caches, and serves content from the origin.
     #
@@ -11042,7 +11273,7 @@ module Aws::Lightsail
     # (CDN) distribution.
     #
     # A distribution bundle specifies the monthly network transfer quota and
-    # monthly cost of your dsitribution.
+    # monthly cost of your distribution.
     #
     # Update your distribution's bundle if your distribution is going over
     # its monthly network transfer quota and is incurring an overage fee.
@@ -11181,10 +11412,43 @@ module Aws::Lightsail
     #   `my-load-balancer`.
     #
     # @option params [required, String] :attribute_name
-    #   The name of the attribute you want to update. Valid values are below.
+    #   The name of the attribute you want to update.
     #
     # @option params [required, String] :attribute_value
     #   The value that you want to specify for the attribute name.
+    #
+    #   The following values are supported depending on what you specify for
+    #   the `attributeName` request parameter:
+    #
+    #   * If you specify `HealthCheckPath` for the `attributeName` request
+    #     parameter, then the `attributeValue` request parameter must be the
+    #     path to ping on the target (for example, `/weather/us/wa/seattle`).
+    #
+    #   * If you specify `SessionStickinessEnabled` for the `attributeName`
+    #     request parameter, then the `attributeValue` request parameter must
+    #     be `true` to activate session stickiness or `false` to deactivate
+    #     session stickiness.
+    #
+    #   * If you specify `SessionStickiness_LB_CookieDurationSeconds` for the
+    #     `attributeName` request parameter, then the `attributeValue` request
+    #     parameter must be an interger that represents the cookie duration in
+    #     seconds.
+    #
+    #   * If you specify `HttpsRedirectionEnabled` for the `attributeName`
+    #     request parameter, then the `attributeValue` request parameter must
+    #     be `true` to activate HTTP to HTTPS redirection or `false` to
+    #     deactivate HTTP to HTTPS redirection.
+    #
+    #   * If you specify `TlsPolicyName` for the `attributeName` request
+    #     parameter, then the `attributeValue` request parameter must be the
+    #     name of the TLS policy.
+    #
+    #     Use the [GetLoadBalancerTlsPolicies][1] action to get a list of TLS
+    #     policy names that you can specify.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetLoadBalancerTlsPolicies.html
     #
     # @return [Types::UpdateLoadBalancerAttributeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11194,7 +11458,7 @@ module Aws::Lightsail
     #
     #   resp = client.update_load_balancer_attribute({
     #     load_balancer_name: "ResourceName", # required
-    #     attribute_name: "HealthCheckPath", # required, accepts HealthCheckPath, SessionStickinessEnabled, SessionStickiness_LB_CookieDurationSeconds
+    #     attribute_name: "HealthCheckPath", # required, accepts HealthCheckPath, SessionStickinessEnabled, SessionStickiness_LB_CookieDurationSeconds, HttpsRedirectionEnabled, TlsPolicyName
     #     attribute_value: "StringMax256", # required
     #   })
     #
@@ -11464,7 +11728,7 @@ module Aws::Lightsail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lightsail'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

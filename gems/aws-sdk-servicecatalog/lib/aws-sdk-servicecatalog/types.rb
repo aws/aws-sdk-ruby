@@ -2529,6 +2529,12 @@ module Aws::ServiceCatalog
     #   The output of the provisioning artifact.
     #   @return [Array<Types::ProvisioningArtifactOutput>]
     #
+    # @!attribute [rw] provisioning_artifact_output_keys
+    #   A list of the keys and descriptions of the outputs. These outputs
+    #   can be referenced from a provisioned product launched from this
+    #   provisioning artifact.
+    #   @return [Array<Types::ProvisioningArtifactOutput>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisioningParametersOutput AWS API Documentation
     #
     class DescribeProvisioningParametersOutput < Struct.new(
@@ -2537,7 +2543,8 @@ module Aws::ServiceCatalog
       :usage_instructions,
       :tag_options,
       :provisioning_artifact_preferences,
-      :provisioning_artifact_outputs)
+      :provisioning_artifact_outputs,
+      :provisioning_artifact_output_keys)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3361,7 +3368,7 @@ module Aws::ServiceCatalog
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] name
-    #   The name of the portfolio to which the user was assigned.
+    #   The name of the portfolio that contains the product.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/LaunchPathSummary AWS API Documentation
@@ -3416,12 +3423,14 @@ module Aws::ServiceCatalog
     #   The type of shared portfolios to list. The default is to list
     #   imported portfolios.
     #
-    #   * `AWS_ORGANIZATIONS` - List portfolios shared by the management
-    #     account of your organization
+    #   * `AWS_ORGANIZATIONS` - List portfolios accepted and shared via
+    #     organizational sharing by the management account or delegated
+    #     administrator of your organization.
     #
-    #   * `AWS_SERVICECATALOG` - List default portfolios
+    #   * `AWS_SERVICECATALOG` - Deprecated type.
     #
-    #   * `IMPORTED` - List imported portfolios
+    #   * `IMPORTED` - List imported portfolios that have been accepted and
+    #     shared through account-to-account sharing.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListAcceptedPortfolioSharesInput AWS API Documentation

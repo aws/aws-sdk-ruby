@@ -329,11 +329,11 @@ module Aws::RDS
       data[:enabled_cloudwatch_logs_exports]
     end
 
-    # The current capacity of an Aurora Serverless DB cluster. The capacity
-    # is 0 (zero) when the cluster is paused.
+    # The current capacity of an Aurora Serverless v1 DB cluster. The
+    # capacity is 0 (zero) when the cluster is paused.
     #
-    # For more information about Aurora Serverless, see [Using Amazon Aurora
-    # Serverless][1] in the *Amazon Aurora User Guide*.
+    # For more information about Aurora Serverless v1, see [Using Amazon
+    # Aurora Serverless v1][1] in the *Amazon Aurora User Guide*.
     #
     #
     #
@@ -359,8 +359,8 @@ module Aws::RDS
     # Shows the scaling configuration for an Aurora DB cluster in
     # `serverless` DB engine mode.
     #
-    # For more information, see [Using Amazon Aurora Serverless][1] in the
-    # *Amazon Aurora User Guide*.
+    # For more information, see [Using Amazon Aurora Serverless v1][1] in
+    # the *Amazon Aurora User Guide*.
     #
     #
     #
@@ -378,15 +378,15 @@ module Aws::RDS
     end
 
     # A value that indicates whether the HTTP endpoint for an Aurora
-    # Serverless DB cluster is enabled.
+    # Serverless v1 DB cluster is enabled.
     #
     # When enabled, the HTTP endpoint provides a connectionless web service
-    # API for running SQL queries on the Aurora Serverless DB cluster. You
-    # can also query your database from inside the RDS console with the
+    # API for running SQL queries on the Aurora Serverless v1 DB cluster.
+    # You can also query your database from inside the RDS console with the
     # query editor.
     #
-    # For more information, see [Using the Data API for Aurora
-    # Serverless][1] in the *Amazon Aurora User Guide*.
+    # For more information, see [Using the Data API for Aurora Serverless
+    # v1][1] in the *Amazon Aurora User Guide*.
     #
     #
     #
@@ -579,13 +579,43 @@ module Aws::RDS
       data[:performance_insights_kms_key_id]
     end
 
-    # The amount of time, in days, to retain Performance Insights data.
-    # Valid values are 7 or 731 (2 years).
+    # The number of days to retain Performance Insights data. The default is
+    # 7 days. The following values are valid:
+    #
+    # * 7
+    #
+    # * *month* * 31, where *month* is a number of months from 1-23
+    #
+    # * 731
+    #
+    # For example, the following values are valid:
+    #
+    # * 93 (3 months * 31)
+    #
+    # * 341 (11 months * 31)
+    #
+    # * 589 (19 months * 31)
+    #
+    # * 731
     #
     # This setting is only for non-Aurora Multi-AZ DB clusters.
     # @return [Integer]
     def performance_insights_retention_period
       data[:performance_insights_retention_period]
+    end
+
+    # Shows the scaling configuration for an Aurora Serverless v2 DB
+    # cluster.
+    #
+    # For more information, see [Using Amazon Aurora Serverless v2][1] in
+    # the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
+    # @return [Types::ServerlessV2ScalingConfigurationInfo]
+    def serverless_v2_scaling_configuration
+      data[:serverless_v2_scaling_configuration]
     end
 
     # @!endgroup
@@ -780,6 +810,10 @@ module Aws::RDS
     #     enable_performance_insights: false,
     #     performance_insights_kms_key_id: "String",
     #     performance_insights_retention_period: 1,
+    #     serverless_v2_scaling_configuration: {
+    #       min_capacity: 1.0,
+    #       max_capacity: 1.0,
+    #     },
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -900,22 +934,22 @@ module Aws::RDS
     #   **Aurora MySQL**
     #
     #   For information, see [MySQL on Amazon RDS Versions][1] in the *Amazon
-    #   Aurora User Guide.*
+    #   Aurora User Guide*.
     #
     #   **Aurora PostgreSQL**
     #
     #   For information, see [Amazon Aurora PostgreSQL releases and engine
-    #   versions][2] in the *Amazon Aurora User Guide.*
+    #   versions][2] in the *Amazon Aurora User Guide*.
     #
     #   **MySQL**
     #
     #   For information, see [MySQL on Amazon RDS Versions][3] in the *Amazon
-    #   RDS User Guide.*
+    #   RDS User Guide*.
     #
     #   **PostgreSQL**
     #
     #   For information, see [Amazon RDS for PostgreSQL versions and
-    #   extensions][4] in the *Amazon RDS User Guide.*
+    #   extensions][4] in the *Amazon RDS User Guide*.
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
@@ -975,7 +1009,7 @@ module Aws::RDS
     #   The default is a 30-minute window selected at random from an 8-hour
     #   block of time for each Amazon Web Services Region. To view the time
     #   blocks available, see [ Backup window][1] in the *Amazon Aurora User
-    #   Guide.*
+    #   Guide*.
     #
     #   Constraints:
     #
@@ -1002,7 +1036,7 @@ module Aws::RDS
     #   block of time for each Amazon Web Services Region, occurring on a
     #   random day of the week. To see the time blocks available, see [
     #   Adjusting the Preferred DB Cluster Maintenance Window][1] in the
-    #   *Amazon Aurora User Guide.*
+    #   *Amazon Aurora User Guide*.
     #
     #   Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
     #
@@ -1057,25 +1091,25 @@ module Aws::RDS
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     # @option options [String] :pre_signed_url
-    #   A URL that contains a Signature Version 4 signed request for the
-    #   `CreateDBCluster` action to be called in the source Amazon Web
-    #   Services Region where the DB cluster is replicated from. Specify
-    #   `PreSignedUrl` only when you are performing cross-Region replication
-    #   from an encrypted DB cluster.
+    #   When you are replicating a DB cluster from one Amazon Web Services
+    #   GovCloud (US) Region to another, an URL that contains a Signature
+    #   Version 4 signed request for the `CreateDBCluster` operation to be
+    #   called in the source Amazon Web Services Region where the DB cluster
+    #   is replicated from. Specify `PreSignedUrl` only when you are
+    #   performing cross-Region replication from an encrypted DB cluster.
     #
-    #   The pre-signed URL must be a valid request for the `CreateDBCluster`
-    #   API action that can be executed in the source Amazon Web Services
-    #   Region that contains the encrypted DB cluster to be copied.
+    #   The presigned URL must be a valid request for the `CreateDBCluster`
+    #   API operation that can run in the source Amazon Web Services Region
+    #   that contains the encrypted DB cluster to copy.
     #
-    #   The pre-signed URL request must contain the following parameter
-    #   values:
+    #   The presigned URL request must contain the following parameter values:
     #
-    #   * `KmsKeyId` - The Amazon Web Services KMS key identifier for the KMS
-    #     key to use to encrypt the copy of the DB cluster in the destination
-    #     Amazon Web Services Region. This should refer to the same KMS key
-    #     for both the `CreateDBCluster` action that is called in the
-    #     destination Amazon Web Services Region, and the action contained in
-    #     the pre-signed URL.
+    #   * `KmsKeyId` - The KMS key identifier for the KMS key to use to
+    #     encrypt the copy of the DB cluster in the destination Amazon Web
+    #     Services Region. This should refer to the same KMS key for both the
+    #     `CreateDBCluster` operation that is called in the destination Amazon
+    #     Web Services Region, and the operation contained in the presigned
+    #     URL.
     #
     #   * `DestinationRegion` - The name of the Amazon Web Services Region
     #     that Aurora read replica will be created in.
@@ -1096,9 +1130,8 @@ module Aws::RDS
     #   <note markdown="1"> If you are using an Amazon Web Services SDK tool or the CLI, you can
     #   specify `SourceRegion` (or `--source-region` for the CLI) instead of
     #   specifying `PreSignedUrl` manually. Specifying `SourceRegion`
-    #   autogenerates a pre-signed URL that is a valid request for the
-    #   operation that can be executed in the source Amazon Web Services
-    #   Region.
+    #   autogenerates a presigned URL that is a valid request for the
+    #   operation that can run in the source Amazon Web Services Region.
     #
     #    </note>
     #
@@ -1114,7 +1147,7 @@ module Aws::RDS
     #   accounts. By default, mapping isn't enabled.
     #
     #   For more information, see [ IAM Database Authentication][1] in the
-    #   *Amazon Aurora User Guide.*
+    #   *Amazon Aurora User Guide*.
     #
     #   Valid for: Aurora DB clusters only
     #
@@ -1138,8 +1171,15 @@ module Aws::RDS
     # @option options [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of log types that need to be enabled for exporting to
     #   CloudWatch Logs. The values in the list depend on the DB engine being
-    #   used. For more information, see [Publishing Database Logs to Amazon
-    #   CloudWatch Logs][1] in the *Amazon Aurora User Guide*.
+    #   used.
+    #
+    #   **RDS for MySQL**
+    #
+    #   Possible values are `error`, `general`, and `slowquery`.
+    #
+    #   **RDS for PostgreSQL**
+    #
+    #   Possible values are `postgresql` and `upgrade`.
     #
     #   **Aurora MySQL**
     #
@@ -1149,11 +1189,20 @@ module Aws::RDS
     #
     #   Possible value is `postgresql`.
     #
-    #   Valid for: Aurora DB clusters only
+    #   For more information about exporting CloudWatch Logs for Amazon RDS,
+    #   see [Publishing Database Logs to Amazon CloudWatch Logs][1] in the
+    #   *Amazon RDS User Guide*.
+    #
+    #   For more information about exporting CloudWatch Logs for Amazon
+    #   Aurora, see [Publishing Database Logs to Amazon CloudWatch Logs][2] in
+    #   the *Amazon Aurora User Guide*.
+    #
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     # @option options [String] :engine_mode
     #   The DB engine mode of the DB cluster, either `provisioned`,
     #   `serverless`, `parallelquery`, `global`, or `multimaster`.
@@ -1169,6 +1218,9 @@ module Aws::RDS
     #   The `multimaster` engine mode only applies for DB clusters created
     #   with Aurora MySQL version 5.6.10a.
     #
+    #   The `serverless` engine mode only applies for Aurora Serverless v1 DB
+    #   clusters.
+    #
     #   For Aurora PostgreSQL, the `global` engine mode isn't required, and
     #   both the `parallelquery` and the `multimaster` engine modes currently
     #   aren't supported.
@@ -1177,22 +1229,25 @@ module Aws::RDS
     #   information, see the following sections in the *Amazon Aurora User
     #   Guide*\:
     #
-    #   * [ Limitations of Aurora Serverless][1]
+    #   * [Limitations of Aurora Serverless v1][1]
     #
-    #   * [ Limitations of Parallel Query][2]
+    #   * [Requirements for Aurora Serverless v2][2]
     #
-    #   * [ Limitations of Aurora Global Databases][3]
+    #   * [Limitations of Parallel Query][3]
     #
-    #   * [ Limitations of Multi-Master Clusters][4]
+    #   * [Limitations of Aurora Global Databases][4]
+    #
+    #   * [Limitations of Multi-Master Clusters][5]
     #
     #   Valid for: Aurora DB clusters only
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html#aurora-serverless.limitations
-    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-mysql-parallel-query.html#aurora-mysql-parallel-query-limitations
-    #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html#aurora-global-database.limitations
-    #   [4]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-multi-master.html#aurora-multi-master-limitations
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.requirements.html
+    #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-mysql-parallel-query.html#aurora-mysql-parallel-query-limitations
+    #   [4]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html#aurora-global-database.limitations
+    #   [5]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-multi-master.html#aurora-multi-master-limitations
     # @option options [Types::ScalingConfiguration] :scaling_configuration
     #   For DB clusters in `serverless` DB engine mode, the scaling properties
     #   of the DB cluster.
@@ -1211,16 +1266,16 @@ module Aws::RDS
     #   Valid for: Aurora DB clusters only
     # @option options [Boolean] :enable_http_endpoint
     #   A value that indicates whether to enable the HTTP endpoint for an
-    #   Aurora Serverless DB cluster. By default, the HTTP endpoint is
+    #   Aurora Serverless v1 DB cluster. By default, the HTTP endpoint is
     #   disabled.
     #
     #   When enabled, the HTTP endpoint provides a connectionless web service
-    #   API for running SQL queries on the Aurora Serverless DB cluster. You
-    #   can also query your database from inside the RDS console with the
+    #   API for running SQL queries on the Aurora Serverless v1 DB cluster.
+    #   You can also query your database from inside the RDS console with the
     #   query editor.
     #
-    #   For more information, see [Using the Data API for Aurora
-    #   Serverless][1] in the *Amazon Aurora User Guide*.
+    #   For more information, see [Using the Data API for Aurora Serverless
+    #   v1][1] in the *Amazon Aurora User Guide*.
     #
     #   Valid for: Aurora DB clusters only
     #
@@ -1231,7 +1286,7 @@ module Aws::RDS
     #   A value that indicates whether to copy all tags from the DB cluster to
     #   snapshots of the DB cluster. The default is not to copy them.
     #
-    #   Valid for: Aurora DB clusters only
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     # @option options [String] :domain
     #   The Active Directory directory ID to create the DB cluster in.
     #
@@ -1274,7 +1329,7 @@ module Aws::RDS
     #   engines.
     #
     #   For the full list of DB instance classes and availability for your
-    #   engine, see [DB instance class][1] in the *Amazon RDS User Guide.*
+    #   engine, see [DB instance class][1] in the *Amazon RDS User Guide*.
     #
     #   This setting is required to create a Multi-AZ DB cluster.
     #
@@ -1415,10 +1470,39 @@ module Aws::RDS
     #
     #   Valid for: Multi-AZ DB clusters only
     # @option options [Integer] :performance_insights_retention_period
-    #   The amount of time, in days, to retain Performance Insights data.
-    #   Valid values are 7 or 731 (2 years).
+    #   The number of days to retain Performance Insights data. The default is
+    #   7 days. The following values are valid:
+    #
+    #   * 7
+    #
+    #   * *month* * 31, where *month* is a number of months from 1-23
+    #
+    #   * 731
+    #
+    #   For example, the following values are valid:
+    #
+    #   * 93 (3 months * 31)
+    #
+    #   * 341 (11 months * 31)
+    #
+    #   * 589 (19 months * 31)
+    #
+    #   * 731
+    #
+    #   If you specify a retention period such as 94, which isn't a valid
+    #   value, RDS issues an error.
     #
     #   Valid for: Multi-AZ DB clusters only
+    # @option options [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
+    #   Contains the scaling configuration of an Aurora Serverless v2 DB
+    #   cluster.
+    #
+    #   For more information, see [Using Amazon Aurora Serverless v2][1] in
+    #   the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -1590,6 +1674,10 @@ module Aws::RDS
     #     enable_performance_insights: false,
     #     performance_insights_kms_key_id: "String",
     #     performance_insights_retention_period: 1,
+    #     serverless_v2_scaling_configuration: {
+    #       min_capacity: 1.0,
+    #       max_capacity: 1.0,
+    #     },
     #   })
     # @param [Hash] options ({})
     # @option options [String] :new_db_cluster_identifier
@@ -1676,7 +1764,7 @@ module Aws::RDS
     #   The default is a 30-minute window selected at random from an 8-hour
     #   block of time for each Amazon Web Services Region. To view the time
     #   blocks available, see [ Backup window][1] in the *Amazon Aurora User
-    #   Guide.*
+    #   Guide*.
     #
     #   Constraints:
     #
@@ -1703,7 +1791,7 @@ module Aws::RDS
     #   block of time for each Amazon Web Services Region, occurring on a
     #   random day of the week. To see the time blocks available, see [
     #   Adjusting the Preferred DB Cluster Maintenance Window][1] in the
-    #   *Amazon Aurora User Guide.*
+    #   *Amazon Aurora User Guide*.
     #
     #   Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
     #
@@ -1720,7 +1808,7 @@ module Aws::RDS
     #   accounts. By default, mapping isn't enabled.
     #
     #   For more information, see [ IAM Database Authentication][1] in the
-    #   *Amazon Aurora User Guide.*
+    #   *Amazon Aurora User Guide*.
     #
     #   Valid for: Aurora DB clusters only
     #
@@ -1743,9 +1831,39 @@ module Aws::RDS
     #   Valid for: Aurora MySQL DB clusters only
     # @option options [Types::CloudwatchLogsExportConfiguration] :cloudwatch_logs_export_configuration
     #   The configuration setting for the log types to be enabled for export
-    #   to CloudWatch Logs for a specific DB cluster.
+    #   to CloudWatch Logs for a specific DB cluster. The values in the list
+    #   depend on the DB engine being used.
     #
-    #   Valid for: Aurora DB clusters only
+    #   **RDS for MySQL**
+    #
+    #   Possible values are `error`, `general`, and `slowquery`.
+    #
+    #   **RDS for PostgreSQL**
+    #
+    #   Possible values are `postgresql` and `upgrade`.
+    #
+    #   **Aurora MySQL**
+    #
+    #   Possible values are `audit`, `error`, `general`, and `slowquery`.
+    #
+    #   **Aurora PostgreSQL**
+    #
+    #   Possible value is `postgresql`.
+    #
+    #   For more information about exporting CloudWatch Logs for Amazon RDS,
+    #   see [ Publishing Database Logs to Amazon CloudWatch Logs][1] in the
+    #   *Amazon RDS User Guide*.
+    #
+    #   For more information about exporting CloudWatch Logs for Amazon
+    #   Aurora, see [Publishing Database Logs to Amazon CloudWatch Logs][2] in
+    #   the *Amazon Aurora User Guide*.
+    #
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     # @option options [String] :engine_version
     #   The version number of the database engine to which you want to
     #   upgrade. Changing this parameter results in an outage. The change is
@@ -1797,8 +1915,8 @@ module Aws::RDS
     #
     #   <note markdown="1"> When you apply a parameter group using the
     #   `DBInstanceParameterGroupName` parameter, the DB cluster isn't
-    #   rebooted automatically. Also, parameter changes aren't applied during
-    #   the next maintenance window but instead are applied immediately.
+    #   rebooted automatically. Also, parameter changes are applied
+    #   immediately rather than during the next maintenance window.
     #
     #    </note>
     #
@@ -1809,8 +1927,9 @@ module Aws::RDS
     #   * The DB parameter group must be in the same DB parameter group family
     #     as this DB cluster.
     #
-    #   * The `DBInstanceParameterGroupName` parameter is only valid in
-    #     combination with the `AllowMajorVersionUpgrade` parameter.
+    #   * The `DBInstanceParameterGroupName` parameter is valid in combination
+    #     with the `AllowMajorVersionUpgrade` parameter for a major version
+    #     upgrade only.
     #
     #   Valid for: Aurora DB clusters only
     # @option options [String] :domain
@@ -1844,16 +1963,16 @@ module Aws::RDS
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     # @option options [Boolean] :enable_http_endpoint
     #   A value that indicates whether to enable the HTTP endpoint for an
-    #   Aurora Serverless DB cluster. By default, the HTTP endpoint is
+    #   Aurora Serverless v1 DB cluster. By default, the HTTP endpoint is
     #   disabled.
     #
     #   When enabled, the HTTP endpoint provides a connectionless web service
-    #   API for running SQL queries on the Aurora Serverless DB cluster. You
-    #   can also query your database from inside the RDS console with the
+    #   API for running SQL queries on the Aurora Serverless v1 DB cluster.
+    #   You can also query your database from inside the RDS console with the
     #   query editor.
     #
-    #   For more information, see [Using the Data API for Aurora
-    #   Serverless][1] in the *Amazon Aurora User Guide*.
+    #   For more information, see [Using the Data API for Aurora Serverless
+    #   v1][1] in the *Amazon Aurora User Guide*.
     #
     #   Valid for: Aurora DB clusters only
     #
@@ -1864,7 +1983,7 @@ module Aws::RDS
     #   A value that indicates whether to copy all tags from the DB cluster to
     #   snapshots of the DB cluster. The default is not to copy them.
     #
-    #   Valid for: Aurora DB clusters only
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     # @option options [Boolean] :enable_global_write_forwarding
     #   A value that indicates whether to enable this DB cluster to forward
     #   write operations to the primary cluster of an Aurora global database
@@ -1888,7 +2007,7 @@ module Aws::RDS
     #   engines.
     #
     #   For the full list of DB instance classes and availability for your
-    #   engine, see [DB Instance Class][1] in the *Amazon RDS User Guide.*
+    #   engine, see [ DB Instance Class][1] in the *Amazon RDS User Guide*.
     #
     #   Valid for: Multi-AZ DB clusters only
     #
@@ -1987,10 +2106,39 @@ module Aws::RDS
     #
     #   Valid for: Multi-AZ DB clusters only
     # @option options [Integer] :performance_insights_retention_period
-    #   The amount of time, in days, to retain Performance Insights data.
-    #   Valid values are 7 or 731 (2 years).
+    #   The number of days to retain Performance Insights data. The default is
+    #   7 days. The following values are valid:
+    #
+    #   * 7
+    #
+    #   * *month* * 31, where *month* is a number of months from 1-23
+    #
+    #   * 731
+    #
+    #   For example, the following values are valid:
+    #
+    #   * 93 (3 months * 31)
+    #
+    #   * 341 (11 months * 31)
+    #
+    #   * 589 (19 months * 31)
+    #
+    #   * 731
+    #
+    #   If you specify a retention period such as 94, which isn't a valid
+    #   value, RDS issues an error.
     #
     #   Valid for: Multi-AZ DB clusters only
+    # @option options [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
+    #   Contains the scaling configuration of an Aurora Serverless v2 DB
+    #   cluster.
+    #
+    #   For more information, see [Using Amazon Aurora Serverless v2][1] in
+    #   the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
     # @return [DBCluster]
     def modify(options = {})
       options = options.merge(db_cluster_identifier: @id)
@@ -2041,6 +2189,10 @@ module Aws::RDS
     #     storage_type: "String",
     #     publicly_accessible: false,
     #     iops: 1,
+    #     serverless_v2_scaling_configuration: {
+    #       min_capacity: 1.0,
+    #       max_capacity: 1.0,
+    #     },
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :db_cluster_identifier
@@ -2170,7 +2322,7 @@ module Aws::RDS
     #   accounts. By default, mapping isn't enabled.
     #
     #   For more information, see [ IAM Database Authentication][1] in the
-    #   *Amazon Aurora User Guide.*
+    #   *Amazon Aurora User Guide*.
     #
     #   Valid for: Aurora DB clusters only
     #
@@ -2196,14 +2348,36 @@ module Aws::RDS
     #   CloudWatch Logs. The values in the list depend on the DB engine being
     #   used.
     #
-    #   For more information, see [Publishing Database Logs to Amazon
-    #   CloudWatch Logs][1] in the *Amazon Aurora User Guide*.
+    #   **RDS for MySQL**
     #
-    #   Valid for: Aurora DB clusters only
+    #   Possible values are `error`, `general`, and `slowquery`.
+    #
+    #   **RDS for PostgreSQL**
+    #
+    #   Possible values are `postgresql` and `upgrade`.
+    #
+    #   **Aurora MySQL**
+    #
+    #   Possible values are `audit`, `error`, `general`, and `slowquery`.
+    #
+    #   **Aurora PostgreSQL**
+    #
+    #   Possible value is `postgresql`.
+    #
+    #   For more information about exporting CloudWatch Logs for Amazon RDS,
+    #   see [Publishing Database Logs to Amazon CloudWatch Logs][1] in the
+    #   *Amazon RDS User Guide*.
+    #
+    #   For more information about exporting CloudWatch Logs for Amazon
+    #   Aurora, see [Publishing Database Logs to Amazon CloudWatch Logs][2] in
+    #   the *Amazon Aurora User Guide*.
+    #
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     # @option options [String] :db_cluster_parameter_group_name
     #   The name of the DB cluster parameter group to associate with this DB
     #   cluster. If this argument is omitted, the default DB cluster parameter
@@ -2232,7 +2406,7 @@ module Aws::RDS
     #   cluster to snapshots of the restored DB cluster. The default is not to
     #   copy them.
     #
-    #   Valid for: Aurora DB clusters only
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     # @option options [String] :domain
     #   Specify the Active Directory directory ID to restore the DB cluster
     #   in. The domain must be created prior to this operation.
@@ -2260,10 +2434,11 @@ module Aws::RDS
     # @option options [String] :engine_mode
     #   The engine mode of the new cluster. Specify `provisioned` or
     #   `serverless`, depending on the type of the cluster you are creating.
-    #   You can create an Aurora Serverless clone from a provisioned cluster,
-    #   or a provisioned clone from an Aurora Serverless cluster. To create a
-    #   clone that is an Aurora Serverless cluster, the original cluster must
-    #   be an Aurora Serverless cluster or an encrypted provisioned cluster.
+    #   You can create an Aurora Serverless v1 clone from a provisioned
+    #   cluster, or a provisioned clone from an Aurora Serverless v1 cluster.
+    #   To create a clone that is an Aurora Serverless v1 cluster, the
+    #   original cluster must be an Aurora Serverless v1 cluster or an
+    #   encrypted provisioned cluster.
     #
     #   Valid for: Aurora DB clusters only
     # @option options [String] :db_cluster_instance_class
@@ -2344,6 +2519,16 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS
+    # @option options [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
+    #   Contains the scaling configuration of an Aurora Serverless v2 DB
+    #   cluster.
+    #
+    #   For more information, see [Using Amazon Aurora Serverless v2][1] in
+    #   the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
     # @return [DBCluster]
     def restore(options = {})
       options = options.merge(source_db_cluster_identifier: @id)

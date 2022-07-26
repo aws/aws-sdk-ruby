@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::LookoutforVision
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -883,6 +885,8 @@ module Aws::LookoutforVision
     #   resp.model_description.evaluation_result.key #=> String
     #   resp.model_description.evaluation_end_timestamp #=> Time
     #   resp.model_description.kms_key_id #=> String
+    #   resp.model_description.min_inference_units #=> Integer
+    #   resp.model_description.max_inference_units #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/DescribeModel AWS API Documentation
     #
@@ -1265,7 +1269,8 @@ module Aws::LookoutforVision
       req.send_request(options)
     end
 
-    # Lists the Amazon Lookout for Vision projects in your AWS account.
+    # Lists the Amazon Lookout for Vision projects in your AWS account that
+    # are in the AWS Region in which you call `ListProjects`.
     #
     # The `ListProjects` operation is eventually consistent. Recent calls to
     # `CreateProject` and `DeleteProject` might take a while to appear in
@@ -1402,6 +1407,11 @@ module Aws::LookoutforVision
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Integer] :max_inference_units
+    #   The maximum number of inference units to use for auto-scaling the
+    #   model. If you don't specify a value, Amazon Lookout for Vision
+    #   doesn't auto-scale the model.
+    #
     # @return [Types::StartModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartModelResponse#status #status} => String
@@ -1413,6 +1423,7 @@ module Aws::LookoutforVision
     #     model_version: "ModelVersion", # required
     #     min_inference_units: 1, # required
     #     client_token: "ClientToken",
+    #     max_inference_units: 1,
     #   })
     #
     # @example Response structure
@@ -1443,7 +1454,7 @@ module Aws::LookoutforVision
     #
     # This operation requires the following permissions:
     #
-    # * `lookoutvision:StartModelPackagingJobs`
+    # * `lookoutvision:StartModelPackagingJob`
     #
     # * `s3:PutObject`
     #
@@ -1513,7 +1524,7 @@ module Aws::LookoutforVision
     #     job_name: "ModelPackagingJobName",
     #     configuration: { # required
     #       greengrass: { # required
-    #         compiler_options: "CompilerOptions", # required
+    #         compiler_options: "CompilerOptions",
     #         target_device: "jetson_xavier", # accepts jetson_xavier
     #         target_platform: {
     #           os: "LINUX", # required, accepts LINUX
@@ -1775,7 +1786,7 @@ module Aws::LookoutforVision
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lookoutforvision'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

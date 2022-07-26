@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::PI
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -370,7 +372,11 @@ module Aws::PI
     #
     # @option params [required, String] :service_type
     #   The Amazon Web Services service for which Performance Insights will
-    #   return metrics. The only valid value for *ServiceType* is `RDS`.
+    #   return metrics. Valid values are as follows:
+    #
+    #   * `RDS`
+    #
+    #   * `DOCDB`
     #
     # @option params [required, String] :identifier
     #   An immutable, Amazon Web Services Region-unique identifier for a data
@@ -401,10 +407,10 @@ module Aws::PI
     #
     #   Valid values for `Metric` are:
     #
-    #   * `db.load.avg` - a scaled representation of the number of active
+    #   * `db.load.avg` - A scaled representation of the number of active
     #     sessions for the database engine.
     #
-    #   * `db.sampledload.avg` - the raw number of active sessions for the
+    #   * `db.sampledload.avg` - The raw number of active sessions for the
     #     database engine.
     #
     #   If the number of active sessions is less than an internal Performance
@@ -446,8 +452,8 @@ module Aws::PI
     #   Additional metrics for the top `N` dimension keys. If the specified
     #   dimension group in the `GroupBy` parameter is `db.sql_tokenized`, you
     #   can specify per-SQL metrics to get the values for the top `N` SQL
-    #   digests. The response syntax is `"AdditionalMetrics" : \{ "string" :
-    #   "string" \}`.
+    #   digests. The response syntax is as follows: `"AdditionalMetrics" : \{
+    #   "string" : "string" \}`.
     #
     # @option params [Types::DimensionGroup] :partition_by
     #   For each dimension specified in `GroupBy`, specify a secondary
@@ -538,7 +544,7 @@ module Aws::PI
     # Get the attributes of the specified dimension group for a DB instance
     # or data source. For example, if you specify a SQL ID,
     # `GetDimensionKeyDetails` retrieves the full text of the dimension
-    # `db.sql.statement`cassociated with this ID. This operation is useful
+    # `db.sql.statement` associated with this ID. This operation is useful
     # because `GetResourceMetrics` and `DescribeDimensionKeys` don't
     # support retrieval of large SQL statement text.
     #
@@ -553,21 +559,35 @@ module Aws::PI
     #   value. For example, specify `db-ABCDEFGHIJKLMNOPQRSTU1VW2X`.
     #
     # @option params [required, String] :group
-    #   The name of the dimension group. The only valid value is `db.sql`.
-    #   Performance Insights searches the specified group for the dimension
-    #   group ID.
+    #   The name of the dimension group. Performance Insights searches the
+    #   specified group for the dimension group ID. The following group name
+    #   values are valid:
+    #
+    #   * `db.query` (Amazon DocumentDB only)
+    #
+    #   * `db.sql` (Amazon RDS and Aurora only)
     #
     # @option params [required, String] :group_identifier
     #   The ID of the dimension group from which to retrieve dimension
     #   details. For dimension group `db.sql`, the group ID is `db.sql.id`.
+    #   The following group ID values are valid:
+    #
+    #   * `db.sql.id` for dimension group `db.sql` (Aurora and RDS only)
+    #
+    #   * `db.query.id` for dimension group `db.query` (DocumentDB only)
     #
     # @option params [Array<String>] :requested_dimensions
     #   A list of dimensions to retrieve the detail data for within the given
-    #   dimension group. For the dimension group `db.sql`, specify either the
-    #   full dimension name `db.sql.statement` or the short dimension name
-    #   `statement`. If you don't specify this parameter, Performance
+    #   dimension group. If you don't specify this parameter, Performance
     #   Insights returns all dimension data within the specified dimension
-    #   group.
+    #   group. Specify dimension names for the following dimension groups:
+    #
+    #   * `db.sql` - Specify either the full dimension name `db.sql.statement`
+    #     or the short dimension name `statement` (Aurora and RDS only).
+    #
+    #   * `db.query` - Specify either the full dimension name
+    #     `db.query.statement` or the short dimension name `statement`
+    #     (DocumentDB only).
     #
     # @return [Types::GetDimensionKeyDetailsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -641,10 +661,9 @@ module Aws::PI
       req.send_request(options)
     end
 
-    # Retrieve Performance Insights metrics for a set of data sources, over
-    # a time period. You can provide specific dimension groups and
-    # dimensions, and provide aggregation and filtering criteria for each
-    # group.
+    # Retrieve Performance Insights metrics for a set of data sources over a
+    # time period. You can provide specific dimension groups and dimensions,
+    # and provide aggregation and filtering criteria for each group.
     #
     # <note markdown="1"> Each response element returns a maximum of 500 bytes. For larger
     # elements, such as SQL statements, only the first 500 bytes are
@@ -654,14 +673,21 @@ module Aws::PI
     #
     # @option params [required, String] :service_type
     #   The Amazon Web Services service for which Performance Insights returns
-    #   metrics. The only valid value for *ServiceType* is `RDS`.
+    #   metrics. Valid values are as follows:
+    #
+    #   * `RDS`
+    #
+    #   * `DOCDB`
     #
     # @option params [required, String] :identifier
-    #   An immutable, Amazon Web Services Region-unique identifier for a data
-    #   source. Performance Insights gathers metrics from this data source.
+    #   An immutable identifier for a data source that is unique for an Amazon
+    #   Web Services Region. Performance Insights gathers metrics from this
+    #   data source. In the console, the identifier is shown as *ResourceID*.
+    #   When you call `DescribeDBInstances`, the identifier is returned as
+    #   `DbiResourceId`.
     #
     #   To use a DB instance as a data source, specify its `DbiResourceId`
-    #   value. For example, specify `db-FAIHNTYBKTGAUSUZQYPDS2GW4A`.
+    #   value. For example, specify `db-ABCDEFGHIJKLMNOPQRSTU1VW2X`.
     #
     # @option params [required, Array<Types::MetricQuery>] :metric_queries
     #   An array of one or more queries to perform. Each query must specify a
@@ -670,17 +696,19 @@ module Aws::PI
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :start_time
     #   The date and time specifying the beginning of the requested time
-    #   series data. You can't specify a `StartTime` that's earlier than 7
-    #   days ago. The value specified is *inclusive* - data points equal to or
-    #   greater than `StartTime` will be returned.
+    #   series query range. You can't specify a `StartTime` that is earlier
+    #   than 7 days ago. By default, Performance Insights has 7 days of
+    #   retention, but you can extend this range up to 2 years. The value
+    #   specified is *inclusive*. Thus, the command returns data points equal
+    #   to or greater than `StartTime`.
     #
     #   The value for `StartTime` must be earlier than the value for
     #   `EndTime`.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :end_time
     #   The date and time specifying the end of the requested time series
-    #   data. The value specified is *exclusive* - data points less than (but
-    #   not equal to) `EndTime` will be returned.
+    #   query range. The value specified is *exclusive*. Thus, the command
+    #   returns data points less than (but not equal to) `EndTime`.
     #
     #   The value for `EndTime` must be later than the value for `StartTime`.
     #
@@ -855,13 +883,15 @@ module Aws::PI
     #   The types of metrics to return in the response. Valid values in the
     #   array include the following:
     #
-    #   * `os` (OS counter metrics)
+    #   * `os` (OS counter metrics) - All engines
     #
-    #   * `db` (DB load metrics)
+    #   * `db` (DB load metrics) - All engines except for Amazon DocumentDB
     #
-    #   * `db.sql.stats` (per-SQL metrics)
+    #   * `db.sql.stats` (per-SQL metrics) - All engines except for Amazon
+    #     DocumentDB
     #
-    #   * `db.sql_tokenized.stats` (per-SQL digest metrics)
+    #   * `db.sql_tokenized.stats` (per-SQL digest metrics) - All engines
+    #     except for Amazon DocumentDB
     #
     # @option params [String] :next_token
     #   An optional pagination token provided by a previous request. If this
@@ -920,7 +950,7 @@ module Aws::PI
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pi'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -25,6 +25,19 @@
         {"shape":"InvalidRequestException"}
       ]
     },
+    "BatchGetPreparedStatement":{
+      "name":"BatchGetPreparedStatement",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"BatchGetPreparedStatementInput"},
+      "output":{"shape":"BatchGetPreparedStatementOutput"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"InvalidRequestException"}
+      ]
+    },
     "BatchGetQueryExecution":{
       "name":"BatchGetQueryExecution",
       "http":{
@@ -221,6 +234,19 @@
       },
       "input":{"shape":"GetQueryResultsInput"},
       "output":{"shape":"GetQueryResultsOutput"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"InvalidRequestException"}
+      ]
+    },
+    "GetQueryRuntimeStatistics":{
+      "name":"GetQueryRuntimeStatistics",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetQueryRuntimeStatisticsInput"},
+      "output":{"shape":"GetQueryRuntimeStatisticsOutput"},
       "errors":[
         {"shape":"InternalServerException"},
         {"shape":"InvalidRequestException"}
@@ -443,6 +469,20 @@
         {"shape":"InvalidRequestException"}
       ]
     },
+    "UpdateNamedQuery":{
+      "name":"UpdateNamedQuery",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateNamedQueryInput"},
+      "output":{"shape":"UpdateNamedQueryOutput"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"InvalidRequestException"}
+      ],
+      "idempotent":true
+    },
     "UpdatePreparedStatement":{
       "name":"UpdatePreparedStatement",
       "http":{
@@ -472,6 +512,13 @@
     }
   },
   "shapes":{
+    "AclConfiguration":{
+      "type":"structure",
+      "required":["S3AclOption"],
+      "members":{
+        "S3AclOption":{"shape":"S3AclOption"}
+      }
+    },
     "AmazonResourceName":{
       "type":"string",
       "max":1011,
@@ -480,8 +527,17 @@
     "AthenaError":{
       "type":"structure",
       "members":{
-        "ErrorCategory":{"shape":"ErrorCategory"}
+        "ErrorCategory":{"shape":"ErrorCategory"},
+        "ErrorType":{"shape":"ErrorType"},
+        "Retryable":{"shape":"Boolean"},
+        "ErrorMessage":{"shape":"String"}
       }
+    },
+    "AwsAccountId":{
+      "type":"string",
+      "max":12,
+      "min":12,
+      "pattern":"^[0-9]+$"
     },
     "BatchGetNamedQueryInput":{
       "type":"structure",
@@ -495,6 +551,24 @@
       "members":{
         "NamedQueries":{"shape":"NamedQueryList"},
         "UnprocessedNamedQueryIds":{"shape":"UnprocessedNamedQueryIdList"}
+      }
+    },
+    "BatchGetPreparedStatementInput":{
+      "type":"structure",
+      "required":[
+        "PreparedStatementNames",
+        "WorkGroup"
+      ],
+      "members":{
+        "PreparedStatementNames":{"shape":"PreparedStatementNameList"},
+        "WorkGroup":{"shape":"WorkGroupName"}
+      }
+    },
+    "BatchGetPreparedStatementOutput":{
+      "type":"structure",
+      "members":{
+        "PreparedStatements":{"shape":"PreparedStatementDetailsList"},
+        "UnprocessedPreparedStatementNames":{"shape":"UnprocessedPreparedStatementNameList"}
       }
     },
     "BatchGetQueryExecutionInput":{
@@ -810,6 +884,22 @@
       "min":1
     },
     "ErrorMessage":{"type":"string"},
+    "ErrorType":{
+      "type":"integer",
+      "box":true,
+      "max":9999,
+      "min":0
+    },
+    "ExecutionParameter":{
+      "type":"string",
+      "max":1024,
+      "min":1
+    },
+    "ExecutionParameters":{
+      "type":"list",
+      "member":{"shape":"ExecutionParameter"},
+      "min":1
+    },
     "ExpressionString":{
       "type":"string",
       "max":256,
@@ -903,6 +993,19 @@
         "UpdateCount":{"shape":"Long"},
         "ResultSet":{"shape":"ResultSet"},
         "NextToken":{"shape":"Token"}
+      }
+    },
+    "GetQueryRuntimeStatisticsInput":{
+      "type":"structure",
+      "required":["QueryExecutionId"],
+      "members":{
+        "QueryExecutionId":{"shape":"QueryExecutionId"}
+      }
+    },
+    "GetQueryRuntimeStatisticsOutput":{
+      "type":"structure",
+      "members":{
+        "QueryRuntimeStatistics":{"shape":"QueryRuntimeStatistics"}
       }
     },
     "GetTableMetadataInput":{
@@ -1194,7 +1297,17 @@
         "WorkGroup":{"shape":"WorkGroupName"}
       }
     },
-    "NamedQueryId":{"type":"string"},
+    "NamedQueryDescriptionString":{
+      "type":"string",
+      "max":1024,
+      "min":0
+    },
+    "NamedQueryId":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"\\S+"
+    },
     "NamedQueryIdList":{
       "type":"list",
       "member":{"shape":"NamedQueryId"},
@@ -1224,6 +1337,14 @@
         "LastModifiedTime":{"shape":"Date"}
       }
     },
+    "PreparedStatementDetailsList":{
+      "type":"list",
+      "member":{"shape":"PreparedStatement"}
+    },
+    "PreparedStatementNameList":{
+      "type":"list",
+      "member":{"shape":"StatementName"}
+    },
     "PreparedStatementSummary":{
       "type":"structure",
       "members":{
@@ -1248,7 +1369,8 @@
         "Status":{"shape":"QueryExecutionStatus"},
         "Statistics":{"shape":"QueryExecutionStatistics"},
         "WorkGroup":{"shape":"WorkGroupName"},
-        "EngineVersion":{"shape":"EngineVersion"}
+        "EngineVersion":{"shape":"EngineVersion"},
+        "ExecutionParameters":{"shape":"ExecutionParameters"}
       }
     },
     "QueryExecutionContext":{
@@ -1258,7 +1380,12 @@
         "Catalog":{"shape":"CatalogNameString"}
       }
     },
-    "QueryExecutionId":{"type":"string"},
+    "QueryExecutionId":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"\\S+"
+    },
     "QueryExecutionIdList":{
       "type":"list",
       "member":{"shape":"QueryExecutionId"},
@@ -1301,6 +1428,64 @@
         "AthenaError":{"shape":"AthenaError"}
       }
     },
+    "QueryRuntimeStatistics":{
+      "type":"structure",
+      "members":{
+        "Timeline":{"shape":"QueryRuntimeStatisticsTimeline"},
+        "Rows":{"shape":"QueryRuntimeStatisticsRows"},
+        "OutputStage":{"shape":"QueryStage"}
+      }
+    },
+    "QueryRuntimeStatisticsRows":{
+      "type":"structure",
+      "members":{
+        "InputRows":{"shape":"Long"},
+        "InputBytes":{"shape":"Long"},
+        "OutputBytes":{"shape":"Long"},
+        "OutputRows":{"shape":"Long"}
+      }
+    },
+    "QueryRuntimeStatisticsTimeline":{
+      "type":"structure",
+      "members":{
+        "QueryQueueTimeInMillis":{"shape":"Long"},
+        "QueryPlanningTimeInMillis":{"shape":"Long"},
+        "EngineExecutionTimeInMillis":{"shape":"Long"},
+        "ServiceProcessingTimeInMillis":{"shape":"Long"},
+        "TotalExecutionTimeInMillis":{"shape":"Long"}
+      }
+    },
+    "QueryStage":{
+      "type":"structure",
+      "members":{
+        "StageId":{"shape":"Long"},
+        "State":{"shape":"String"},
+        "OutputBytes":{"shape":"Long"},
+        "OutputRows":{"shape":"Long"},
+        "InputBytes":{"shape":"Long"},
+        "InputRows":{"shape":"Long"},
+        "ExecutionTime":{"shape":"Long"},
+        "QueryStagePlan":{"shape":"QueryStagePlanNode"},
+        "SubStages":{"shape":"QueryStages"}
+      }
+    },
+    "QueryStagePlanNode":{
+      "type":"structure",
+      "members":{
+        "Name":{"shape":"String"},
+        "Identifier":{"shape":"String"},
+        "Children":{"shape":"QueryStagePlanNodes"},
+        "RemoteSources":{"shape":"StringList"}
+      }
+    },
+    "QueryStagePlanNodes":{
+      "type":"list",
+      "member":{"shape":"QueryStagePlanNode"}
+    },
+    "QueryStages":{
+      "type":"list",
+      "member":{"shape":"QueryStage"}
+    },
     "QueryString":{
       "type":"string",
       "max":262144,
@@ -1317,22 +1502,26 @@
     "ResultConfiguration":{
       "type":"structure",
       "members":{
-        "OutputLocation":{"shape":"String"},
+        "OutputLocation":{"shape":"ResultOutputLocation"},
         "EncryptionConfiguration":{"shape":"EncryptionConfiguration"},
-        "ExpectedBucketOwner":{"shape":"String"}
+        "ExpectedBucketOwner":{"shape":"AwsAccountId"},
+        "AclConfiguration":{"shape":"AclConfiguration"}
       }
     },
     "ResultConfigurationUpdates":{
       "type":"structure",
       "members":{
-        "OutputLocation":{"shape":"String"},
+        "OutputLocation":{"shape":"ResultOutputLocation"},
         "RemoveOutputLocation":{"shape":"BoxedBoolean"},
         "EncryptionConfiguration":{"shape":"EncryptionConfiguration"},
         "RemoveEncryptionConfiguration":{"shape":"BoxedBoolean"},
-        "ExpectedBucketOwner":{"shape":"String"},
-        "RemoveExpectedBucketOwner":{"shape":"BoxedBoolean"}
+        "ExpectedBucketOwner":{"shape":"AwsAccountId"},
+        "RemoveExpectedBucketOwner":{"shape":"BoxedBoolean"},
+        "AclConfiguration":{"shape":"AclConfiguration"},
+        "RemoveAclConfiguration":{"shape":"BoxedBoolean"}
       }
     },
+    "ResultOutputLocation":{"type":"string"},
     "ResultSet":{
       "type":"structure",
       "members":{
@@ -1356,6 +1545,10 @@
       "type":"list",
       "member":{"shape":"Row"}
     },
+    "S3AclOption":{
+      "type":"string",
+      "enum":["BUCKET_OWNER_FULL_CONTROL"]
+    },
     "StartQueryExecutionInput":{
       "type":"structure",
       "required":["QueryString"],
@@ -1367,7 +1560,8 @@
         },
         "QueryExecutionContext":{"shape":"QueryExecutionContext"},
         "ResultConfiguration":{"shape":"ResultConfiguration"},
-        "WorkGroup":{"shape":"WorkGroupName"}
+        "WorkGroup":{"shape":"WorkGroupName"},
+        "ExecutionParameters":{"shape":"ExecutionParameters"}
       }
     },
     "StartQueryExecutionOutput":{
@@ -1406,6 +1600,10 @@
       }
     },
     "String":{"type":"string"},
+    "StringList":{
+      "type":"list",
+      "member":{"shape":"String"}
+    },
     "TableMetadata":{
       "type":"structure",
       "required":["Name"],
@@ -1504,6 +1702,18 @@
       "type":"list",
       "member":{"shape":"UnprocessedNamedQueryId"}
     },
+    "UnprocessedPreparedStatementName":{
+      "type":"structure",
+      "members":{
+        "StatementName":{"shape":"StatementName"},
+        "ErrorCode":{"shape":"ErrorCode"},
+        "ErrorMessage":{"shape":"ErrorMessage"}
+      }
+    },
+    "UnprocessedPreparedStatementNameList":{
+      "type":"list",
+      "member":{"shape":"UnprocessedPreparedStatementName"}
+    },
     "UnprocessedQueryExecutionId":{
       "type":"structure",
       "members":{
@@ -1546,6 +1756,25 @@
       }
     },
     "UpdateDataCatalogOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "UpdateNamedQueryInput":{
+      "type":"structure",
+      "required":[
+        "NamedQueryId",
+        "Name",
+        "QueryString"
+      ],
+      "members":{
+        "NamedQueryId":{"shape":"NamedQueryId"},
+        "Name":{"shape":"NameString"},
+        "Description":{"shape":"NamedQueryDescriptionString"},
+        "QueryString":{"shape":"QueryString"}
+      }
+    },
+    "UpdateNamedQueryOutput":{
       "type":"structure",
       "members":{
       }

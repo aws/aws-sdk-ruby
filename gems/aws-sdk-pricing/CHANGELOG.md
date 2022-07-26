@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2022-06-30)
+------------------
+
+* Feature - Documentation update for GetProducts Response.
+
+1.39.0 (2022-06-22)
+------------------
+
+* Feature - This release introduces 1 update to the GetProducts API. The serviceCode attribute is now required when you use the GetProductsRequest.
+
+1.38.0 (2022-04-26)
+------------------
+
+* Feature - Documentation updates for Price List API
+
+1.37.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.36.0 (2022-02-03)
 ------------------
 

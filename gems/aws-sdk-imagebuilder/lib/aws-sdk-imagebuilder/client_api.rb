@@ -106,6 +106,10 @@ module Aws::Imagebuilder
     EbsVolumeType = Shapes::StringShape.new(name: 'EbsVolumeType')
     EmptyString = Shapes::StringShape.new(name: 'EmptyString')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    FastLaunchConfiguration = Shapes::StructureShape.new(name: 'FastLaunchConfiguration')
+    FastLaunchConfigurationList = Shapes::ListShape.new(name: 'FastLaunchConfigurationList')
+    FastLaunchLaunchTemplateSpecification = Shapes::StructureShape.new(name: 'FastLaunchLaunchTemplateSpecification')
+    FastLaunchSnapshotConfiguration = Shapes::StructureShape.new(name: 'FastLaunchSnapshotConfiguration')
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
     FilterName = Shapes::StringShape.new(name: 'FilterName')
@@ -214,6 +218,7 @@ module Aws::Imagebuilder
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     Logging = Shapes::StructureShape.new(name: 'Logging')
+    MaxParallelLaunches = Shapes::IntegerShape.new(name: 'MaxParallelLaunches')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
     OrganizationArn = Shapes::StringShape.new(name: 'OrganizationArn')
@@ -264,6 +269,7 @@ module Aws::Imagebuilder
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TargetContainerRepository = Shapes::StructureShape.new(name: 'TargetContainerRepository')
+    TargetResourceCount = Shapes::IntegerShape.new(name: 'TargetResourceCount')
     Timezone = Shapes::StringShape.new(name: 'Timezone')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
@@ -611,6 +617,7 @@ module Aws::Imagebuilder
     Distribution.add_member(:license_configuration_arns, Shapes::ShapeRef.new(shape: LicenseConfigurationArnList, location_name: "licenseConfigurationArns"))
     Distribution.add_member(:launch_template_configurations, Shapes::ShapeRef.new(shape: LaunchTemplateConfigurationList, location_name: "launchTemplateConfigurations"))
     Distribution.add_member(:s3_export_configuration, Shapes::ShapeRef.new(shape: S3ExportConfiguration, location_name: "s3ExportConfiguration"))
+    Distribution.add_member(:fast_launch_configurations, Shapes::ShapeRef.new(shape: FastLaunchConfigurationList, location_name: "fastLaunchConfigurations"))
     Distribution.struct_class = Types::Distribution
 
     DistributionConfiguration.add_member(:arn, Shapes::ShapeRef.new(shape: ImageBuilderArn, location_name: "arn"))
@@ -645,6 +652,23 @@ module Aws::Imagebuilder
     EbsInstanceBlockDeviceSpecification.add_member(:volume_type, Shapes::ShapeRef.new(shape: EbsVolumeType, location_name: "volumeType"))
     EbsInstanceBlockDeviceSpecification.add_member(:throughput, Shapes::ShapeRef.new(shape: EbsVolumeThroughput, location_name: "throughput"))
     EbsInstanceBlockDeviceSpecification.struct_class = Types::EbsInstanceBlockDeviceSpecification
+
+    FastLaunchConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enabled"))
+    FastLaunchConfiguration.add_member(:snapshot_configuration, Shapes::ShapeRef.new(shape: FastLaunchSnapshotConfiguration, location_name: "snapshotConfiguration"))
+    FastLaunchConfiguration.add_member(:max_parallel_launches, Shapes::ShapeRef.new(shape: MaxParallelLaunches, location_name: "maxParallelLaunches"))
+    FastLaunchConfiguration.add_member(:launch_template, Shapes::ShapeRef.new(shape: FastLaunchLaunchTemplateSpecification, location_name: "launchTemplate"))
+    FastLaunchConfiguration.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
+    FastLaunchConfiguration.struct_class = Types::FastLaunchConfiguration
+
+    FastLaunchConfigurationList.member = Shapes::ShapeRef.new(shape: FastLaunchConfiguration)
+
+    FastLaunchLaunchTemplateSpecification.add_member(:launch_template_id, Shapes::ShapeRef.new(shape: LaunchTemplateId, location_name: "launchTemplateId"))
+    FastLaunchLaunchTemplateSpecification.add_member(:launch_template_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "launchTemplateName"))
+    FastLaunchLaunchTemplateSpecification.add_member(:launch_template_version, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "launchTemplateVersion"))
+    FastLaunchLaunchTemplateSpecification.struct_class = Types::FastLaunchLaunchTemplateSpecification
+
+    FastLaunchSnapshotConfiguration.add_member(:target_resource_count, Shapes::ShapeRef.new(shape: TargetResourceCount, location_name: "targetResourceCount"))
+    FastLaunchSnapshotConfiguration.struct_class = Types::FastLaunchSnapshotConfiguration
 
     Filter.add_member(:name, Shapes::ShapeRef.new(shape: FilterName, location_name: "name"))
     Filter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValues, location_name: "values"))

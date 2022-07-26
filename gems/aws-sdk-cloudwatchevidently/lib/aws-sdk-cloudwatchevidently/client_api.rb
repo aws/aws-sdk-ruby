@@ -30,6 +30,8 @@ module Aws::CloudWatchEvidently
     CreateLaunchResponse = Shapes::StructureShape.new(name: 'CreateLaunchResponse')
     CreateProjectRequest = Shapes::StructureShape.new(name: 'CreateProjectRequest')
     CreateProjectResponse = Shapes::StructureShape.new(name: 'CreateProjectResponse')
+    CreateSegmentRequest = Shapes::StructureShape.new(name: 'CreateSegmentRequest')
+    CreateSegmentResponse = Shapes::StructureShape.new(name: 'CreateSegmentResponse')
     CwDimensionSafeName = Shapes::StringShape.new(name: 'CwDimensionSafeName')
     CwLogGroupSafeName = Shapes::StringShape.new(name: 'CwLogGroupSafeName')
     DeleteExperimentRequest = Shapes::StructureShape.new(name: 'DeleteExperimentRequest')
@@ -40,6 +42,8 @@ module Aws::CloudWatchEvidently
     DeleteLaunchResponse = Shapes::StructureShape.new(name: 'DeleteLaunchResponse')
     DeleteProjectRequest = Shapes::StructureShape.new(name: 'DeleteProjectRequest')
     DeleteProjectResponse = Shapes::StructureShape.new(name: 'DeleteProjectResponse')
+    DeleteSegmentRequest = Shapes::StructureShape.new(name: 'DeleteSegmentRequest')
+    DeleteSegmentResponse = Shapes::StructureShape.new(name: 'DeleteSegmentResponse')
     Description = Shapes::StringShape.new(name: 'Description')
     Double = Shapes::FloatShape.new(name: 'Double')
     DoubleValueList = Shapes::ListShape.new(name: 'DoubleValueList')
@@ -95,6 +99,8 @@ module Aws::CloudWatchEvidently
     GetLaunchResponse = Shapes::StructureShape.new(name: 'GetLaunchResponse')
     GetProjectRequest = Shapes::StructureShape.new(name: 'GetProjectRequest')
     GetProjectResponse = Shapes::StructureShape.new(name: 'GetProjectResponse')
+    GetSegmentRequest = Shapes::StructureShape.new(name: 'GetSegmentRequest')
+    GetSegmentResponse = Shapes::StructureShape.new(name: 'GetSegmentResponse')
     GroupName = Shapes::StringShape.new(name: 'GroupName')
     GroupToWeightMap = Shapes::MapShape.new(name: 'GroupToWeightMap')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
@@ -121,6 +127,10 @@ module Aws::CloudWatchEvidently
     ListLaunchesResponse = Shapes::StructureShape.new(name: 'ListLaunchesResponse')
     ListProjectsRequest = Shapes::StructureShape.new(name: 'ListProjectsRequest')
     ListProjectsResponse = Shapes::StructureShape.new(name: 'ListProjectsResponse')
+    ListSegmentReferencesRequest = Shapes::StructureShape.new(name: 'ListSegmentReferencesRequest')
+    ListSegmentReferencesResponse = Shapes::StructureShape.new(name: 'ListSegmentReferencesResponse')
+    ListSegmentsRequest = Shapes::StructureShape.new(name: 'ListSegmentsRequest')
+    ListSegmentsResponse = Shapes::StructureShape.new(name: 'ListSegmentsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     Long = Shapes::IntegerShape.new(name: 'Long')
@@ -128,6 +138,8 @@ module Aws::CloudWatchEvidently
     MaxFeatures = Shapes::IntegerShape.new(name: 'MaxFeatures')
     MaxLaunches = Shapes::IntegerShape.new(name: 'MaxLaunches')
     MaxProjects = Shapes::IntegerShape.new(name: 'MaxProjects')
+    MaxReferences = Shapes::IntegerShape.new(name: 'MaxReferences')
+    MaxSegments = Shapes::IntegerShape.new(name: 'MaxSegments')
     MetricDefinition = Shapes::StructureShape.new(name: 'MetricDefinition')
     MetricDefinitionConfig = Shapes::StructureShape.new(name: 'MetricDefinitionConfig')
     MetricDefinitionConfigEventPatternString = Shapes::StringShape.new(name: 'MetricDefinitionConfigEventPatternString')
@@ -144,6 +156,7 @@ module Aws::CloudWatchEvidently
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     OnlineAbConfig = Shapes::StructureShape.new(name: 'OnlineAbConfig')
     OnlineAbDefinition = Shapes::StructureShape.new(name: 'OnlineAbDefinition')
+    PrimitiveBoolean = Shapes::BooleanShape.new(name: 'PrimitiveBoolean')
     Project = Shapes::StructureShape.new(name: 'Project')
     ProjectArn = Shapes::StringShape.new(name: 'ProjectArn')
     ProjectDataDelivery = Shapes::StructureShape.new(name: 'ProjectDataDelivery')
@@ -158,6 +171,8 @@ module Aws::CloudWatchEvidently
     PutProjectEventsResultEntry = Shapes::StructureShape.new(name: 'PutProjectEventsResultEntry')
     PutProjectEventsResultEntryList = Shapes::ListShape.new(name: 'PutProjectEventsResultEntryList')
     RandomizationSalt = Shapes::StringShape.new(name: 'RandomizationSalt')
+    RefResource = Shapes::StructureShape.new(name: 'RefResource')
+    RefResourceList = Shapes::ListShape.new(name: 'RefResourceList')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResultsPeriod = Shapes::IntegerShape.new(name: 'ResultsPeriod')
     RuleName = Shapes::StringShape.new(name: 'RuleName')
@@ -172,6 +187,15 @@ module Aws::CloudWatchEvidently
     ScheduledSplitsLaunchConfig = Shapes::StructureShape.new(name: 'ScheduledSplitsLaunchConfig')
     ScheduledSplitsLaunchDefinition = Shapes::StructureShape.new(name: 'ScheduledSplitsLaunchDefinition')
     ScheduledStepList = Shapes::ListShape.new(name: 'ScheduledStepList')
+    Segment = Shapes::StructureShape.new(name: 'Segment')
+    SegmentArn = Shapes::StringShape.new(name: 'SegmentArn')
+    SegmentList = Shapes::ListShape.new(name: 'SegmentList')
+    SegmentName = Shapes::StringShape.new(name: 'SegmentName')
+    SegmentOverride = Shapes::StructureShape.new(name: 'SegmentOverride')
+    SegmentOverridesList = Shapes::ListShape.new(name: 'SegmentOverridesList')
+    SegmentPattern = Shapes::StringShape.new(name: 'SegmentPattern')
+    SegmentRef = Shapes::StringShape.new(name: 'SegmentRef')
+    SegmentReferenceResourceType = Shapes::StringShape.new(name: 'SegmentReferenceResourceType')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SplitWeight = Shapes::IntegerShape.new(name: 'SplitWeight')
@@ -190,6 +214,8 @@ module Aws::CloudWatchEvidently
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TestSegmentPatternRequest = Shapes::StructureShape.new(name: 'TestSegmentPatternRequest')
+    TestSegmentPatternResponse = Shapes::StructureShape.new(name: 'TestSegmentPatternResponse')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TimestampList = Shapes::ListShape.new(name: 'TimestampList')
@@ -256,6 +282,7 @@ module Aws::CloudWatchEvidently
     CreateExperimentRequest.add_member(:project, Shapes::ShapeRef.new(shape: ProjectRef, required: true, location: "uri", location_name: "project"))
     CreateExperimentRequest.add_member(:randomization_salt, Shapes::ShapeRef.new(shape: RandomizationSalt, location_name: "randomizationSalt"))
     CreateExperimentRequest.add_member(:sampling_rate, Shapes::ShapeRef.new(shape: SplitWeight, location_name: "samplingRate", metadata: {"box"=>true}))
+    CreateExperimentRequest.add_member(:segment, Shapes::ShapeRef.new(shape: SegmentRef, location_name: "segment"))
     CreateExperimentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateExperimentRequest.add_member(:treatments, Shapes::ShapeRef.new(shape: TreatmentConfigList, required: true, location_name: "treatments"))
     CreateExperimentRequest.struct_class = Types::CreateExperimentRequest
@@ -298,6 +325,15 @@ module Aws::CloudWatchEvidently
     CreateProjectResponse.add_member(:project, Shapes::ShapeRef.new(shape: Project, required: true, location_name: "project"))
     CreateProjectResponse.struct_class = Types::CreateProjectResponse
 
+    CreateSegmentRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    CreateSegmentRequest.add_member(:name, Shapes::ShapeRef.new(shape: SegmentName, required: true, location_name: "name"))
+    CreateSegmentRequest.add_member(:pattern, Shapes::ShapeRef.new(shape: SegmentPattern, required: true, location_name: "pattern", metadata: {"jsonvalue"=>true}))
+    CreateSegmentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateSegmentRequest.struct_class = Types::CreateSegmentRequest
+
+    CreateSegmentResponse.add_member(:segment, Shapes::ShapeRef.new(shape: Segment, required: true, location_name: "segment"))
+    CreateSegmentResponse.struct_class = Types::CreateSegmentResponse
+
     DeleteExperimentRequest.add_member(:experiment, Shapes::ShapeRef.new(shape: ExperimentName, required: true, location: "uri", location_name: "experiment"))
     DeleteExperimentRequest.add_member(:project, Shapes::ShapeRef.new(shape: ProjectRef, required: true, location: "uri", location_name: "project"))
     DeleteExperimentRequest.struct_class = Types::DeleteExperimentRequest
@@ -320,6 +356,11 @@ module Aws::CloudWatchEvidently
     DeleteProjectRequest.struct_class = Types::DeleteProjectRequest
 
     DeleteProjectResponse.struct_class = Types::DeleteProjectResponse
+
+    DeleteSegmentRequest.add_member(:segment, Shapes::ShapeRef.new(shape: SegmentRef, required: true, location: "uri", location_name: "segment"))
+    DeleteSegmentRequest.struct_class = Types::DeleteSegmentRequest
+
+    DeleteSegmentResponse.struct_class = Types::DeleteSegmentResponse
 
     DoubleValueList.member = Shapes::ShapeRef.new(shape: Double)
 
@@ -381,6 +422,7 @@ module Aws::CloudWatchEvidently
     Experiment.add_member(:randomization_salt, Shapes::ShapeRef.new(shape: RandomizationSalt, location_name: "randomizationSalt"))
     Experiment.add_member(:sampling_rate, Shapes::ShapeRef.new(shape: SplitWeight, location_name: "samplingRate"))
     Experiment.add_member(:schedule, Shapes::ShapeRef.new(shape: ExperimentSchedule, location_name: "schedule"))
+    Experiment.add_member(:segment, Shapes::ShapeRef.new(shape: SegmentArn, location_name: "segment"))
     Experiment.add_member(:status, Shapes::ShapeRef.new(shape: ExperimentStatus, required: true, location_name: "status"))
     Experiment.add_member(:status_reason, Shapes::ShapeRef.new(shape: Description, location_name: "statusReason"))
     Experiment.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
@@ -469,6 +511,7 @@ module Aws::CloudWatchEvidently
     GetExperimentResultsRequest.add_member(:treatment_names, Shapes::ShapeRef.new(shape: TreatmentNameList, required: true, location_name: "treatmentNames"))
     GetExperimentResultsRequest.struct_class = Types::GetExperimentResultsRequest
 
+    GetExperimentResultsResponse.add_member(:details, Shapes::ShapeRef.new(shape: String, location_name: "details"))
     GetExperimentResultsResponse.add_member(:reports, Shapes::ShapeRef.new(shape: ExperimentReportList, location_name: "reports"))
     GetExperimentResultsResponse.add_member(:results_data, Shapes::ShapeRef.new(shape: ExperimentResultsDataList, location_name: "resultsData"))
     GetExperimentResultsResponse.add_member(:timestamps, Shapes::ShapeRef.new(shape: TimestampList, location_name: "timestamps"))
@@ -493,6 +536,12 @@ module Aws::CloudWatchEvidently
 
     GetProjectResponse.add_member(:project, Shapes::ShapeRef.new(shape: Project, required: true, location_name: "project"))
     GetProjectResponse.struct_class = Types::GetProjectResponse
+
+    GetSegmentRequest.add_member(:segment, Shapes::ShapeRef.new(shape: SegmentRef, required: true, location: "uri", location_name: "segment"))
+    GetSegmentRequest.struct_class = Types::GetSegmentRequest
+
+    GetSegmentResponse.add_member(:segment, Shapes::ShapeRef.new(shape: Segment, required: true, location_name: "segment"))
+    GetSegmentResponse.struct_class = Types::GetSegmentResponse
 
     GroupToWeightMap.key = Shapes::ShapeRef.new(shape: GroupName)
     GroupToWeightMap.value = Shapes::ShapeRef.new(shape: SplitWeight)
@@ -541,6 +590,7 @@ module Aws::CloudWatchEvidently
     ListExperimentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxExperiments, location: "querystring", location_name: "maxResults"))
     ListExperimentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListExperimentsRequest.add_member(:project, Shapes::ShapeRef.new(shape: ProjectRef, required: true, location: "uri", location_name: "project"))
+    ListExperimentsRequest.add_member(:status, Shapes::ShapeRef.new(shape: ExperimentStatus, location: "querystring", location_name: "status"))
     ListExperimentsRequest.struct_class = Types::ListExperimentsRequest
 
     ListExperimentsResponse.add_member(:experiments, Shapes::ShapeRef.new(shape: ExperimentList, location_name: "experiments"))
@@ -559,6 +609,7 @@ module Aws::CloudWatchEvidently
     ListLaunchesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxLaunches, location: "querystring", location_name: "maxResults"))
     ListLaunchesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListLaunchesRequest.add_member(:project, Shapes::ShapeRef.new(shape: ProjectRef, required: true, location: "uri", location_name: "project"))
+    ListLaunchesRequest.add_member(:status, Shapes::ShapeRef.new(shape: LaunchStatus, location: "querystring", location_name: "status"))
     ListLaunchesRequest.struct_class = Types::ListLaunchesRequest
 
     ListLaunchesResponse.add_member(:launches, Shapes::ShapeRef.new(shape: LaunchesList, location_name: "launches"))
@@ -573,6 +624,24 @@ module Aws::CloudWatchEvidently
     ListProjectsResponse.add_member(:projects, Shapes::ShapeRef.new(shape: ProjectSummariesList, location_name: "projects"))
     ListProjectsResponse.struct_class = Types::ListProjectsResponse
 
+    ListSegmentReferencesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxReferences, location: "querystring", location_name: "maxResults"))
+    ListSegmentReferencesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListSegmentReferencesRequest.add_member(:segment, Shapes::ShapeRef.new(shape: SegmentRef, required: true, location: "uri", location_name: "segment"))
+    ListSegmentReferencesRequest.add_member(:type, Shapes::ShapeRef.new(shape: SegmentReferenceResourceType, required: true, location: "querystring", location_name: "type"))
+    ListSegmentReferencesRequest.struct_class = Types::ListSegmentReferencesRequest
+
+    ListSegmentReferencesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListSegmentReferencesResponse.add_member(:referenced_by, Shapes::ShapeRef.new(shape: RefResourceList, location_name: "referencedBy"))
+    ListSegmentReferencesResponse.struct_class = Types::ListSegmentReferencesResponse
+
+    ListSegmentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxSegments, location: "querystring", location_name: "maxResults"))
+    ListSegmentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListSegmentsRequest.struct_class = Types::ListSegmentsRequest
+
+    ListSegmentsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListSegmentsResponse.add_member(:segments, Shapes::ShapeRef.new(shape: SegmentList, location_name: "segments"))
+    ListSegmentsResponse.struct_class = Types::ListSegmentsResponse
+
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "resourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
@@ -586,11 +655,11 @@ module Aws::CloudWatchEvidently
     MetricDefinition.add_member(:value_key, Shapes::ShapeRef.new(shape: JsonPath, location_name: "valueKey"))
     MetricDefinition.struct_class = Types::MetricDefinition
 
-    MetricDefinitionConfig.add_member(:entity_id_key, Shapes::ShapeRef.new(shape: JsonPath, location_name: "entityIdKey"))
+    MetricDefinitionConfig.add_member(:entity_id_key, Shapes::ShapeRef.new(shape: JsonPath, required: true, location_name: "entityIdKey"))
     MetricDefinitionConfig.add_member(:event_pattern, Shapes::ShapeRef.new(shape: MetricDefinitionConfigEventPatternString, location_name: "eventPattern", metadata: {"jsonvalue"=>true}))
-    MetricDefinitionConfig.add_member(:name, Shapes::ShapeRef.new(shape: CwDimensionSafeName, location_name: "name"))
+    MetricDefinitionConfig.add_member(:name, Shapes::ShapeRef.new(shape: CwDimensionSafeName, required: true, location_name: "name"))
     MetricDefinitionConfig.add_member(:unit_label, Shapes::ShapeRef.new(shape: MetricUnitLabel, location_name: "unitLabel"))
-    MetricDefinitionConfig.add_member(:value_key, Shapes::ShapeRef.new(shape: JsonPath, location_name: "valueKey"))
+    MetricDefinitionConfig.add_member(:value_key, Shapes::ShapeRef.new(shape: JsonPath, required: true, location_name: "valueKey"))
     MetricDefinitionConfig.struct_class = Types::MetricDefinitionConfig
 
     MetricGoal.add_member(:desired_change, Shapes::ShapeRef.new(shape: ChangeDirectionEnum, location_name: "desiredChange"))
@@ -679,6 +748,17 @@ module Aws::CloudWatchEvidently
 
     PutProjectEventsResultEntryList.member = Shapes::ShapeRef.new(shape: PutProjectEventsResultEntry)
 
+    RefResource.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
+    RefResource.add_member(:end_time, Shapes::ShapeRef.new(shape: String, location_name: "endTime"))
+    RefResource.add_member(:last_updated_on, Shapes::ShapeRef.new(shape: String, location_name: "lastUpdatedOn"))
+    RefResource.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    RefResource.add_member(:start_time, Shapes::ShapeRef.new(shape: String, location_name: "startTime"))
+    RefResource.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
+    RefResource.add_member(:type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "type"))
+    RefResource.struct_class = Types::RefResource
+
+    RefResourceList.member = Shapes::ShapeRef.new(shape: RefResource)
+
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ResourceNotFoundException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "resourceId"))
     ResourceNotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "resourceType"))
@@ -693,10 +773,12 @@ module Aws::CloudWatchEvidently
     S3DestinationConfig.struct_class = Types::S3DestinationConfig
 
     ScheduledSplit.add_member(:group_weights, Shapes::ShapeRef.new(shape: GroupToWeightMap, location_name: "groupWeights"))
+    ScheduledSplit.add_member(:segment_overrides, Shapes::ShapeRef.new(shape: SegmentOverridesList, location_name: "segmentOverrides"))
     ScheduledSplit.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startTime"))
     ScheduledSplit.struct_class = Types::ScheduledSplit
 
     ScheduledSplitConfig.add_member(:group_weights, Shapes::ShapeRef.new(shape: GroupToWeightMap, required: true, location_name: "groupWeights"))
+    ScheduledSplitConfig.add_member(:segment_overrides, Shapes::ShapeRef.new(shape: SegmentOverridesList, location_name: "segmentOverrides"))
     ScheduledSplitConfig.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startTime"))
     ScheduledSplitConfig.struct_class = Types::ScheduledSplitConfig
 
@@ -709,6 +791,26 @@ module Aws::CloudWatchEvidently
     ScheduledSplitsLaunchDefinition.struct_class = Types::ScheduledSplitsLaunchDefinition
 
     ScheduledStepList.member = Shapes::ShapeRef.new(shape: ScheduledSplit)
+
+    Segment.add_member(:arn, Shapes::ShapeRef.new(shape: SegmentArn, required: true, location_name: "arn"))
+    Segment.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdTime"))
+    Segment.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    Segment.add_member(:experiment_count, Shapes::ShapeRef.new(shape: Long, location_name: "experimentCount"))
+    Segment.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastUpdatedTime"))
+    Segment.add_member(:launch_count, Shapes::ShapeRef.new(shape: Long, location_name: "launchCount"))
+    Segment.add_member(:name, Shapes::ShapeRef.new(shape: SegmentName, required: true, location_name: "name"))
+    Segment.add_member(:pattern, Shapes::ShapeRef.new(shape: SegmentPattern, required: true, location_name: "pattern", metadata: {"jsonvalue"=>true}))
+    Segment.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    Segment.struct_class = Types::Segment
+
+    SegmentList.member = Shapes::ShapeRef.new(shape: Segment)
+
+    SegmentOverride.add_member(:evaluation_order, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "evaluationOrder"))
+    SegmentOverride.add_member(:segment, Shapes::ShapeRef.new(shape: SegmentRef, required: true, location_name: "segment"))
+    SegmentOverride.add_member(:weights, Shapes::ShapeRef.new(shape: GroupToWeightMap, required: true, location_name: "weights"))
+    SegmentOverride.struct_class = Types::SegmentOverride
+
+    SegmentOverridesList.member = Shapes::ShapeRef.new(shape: SegmentOverride)
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ServiceQuotaExceededException.add_member(:quota_code, Shapes::ShapeRef.new(shape: String, location_name: "quotaCode"))
@@ -764,6 +866,13 @@ module Aws::CloudWatchEvidently
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
+    TestSegmentPatternRequest.add_member(:pattern, Shapes::ShapeRef.new(shape: SegmentPattern, required: true, location_name: "pattern", metadata: {"jsonvalue"=>true}))
+    TestSegmentPatternRequest.add_member(:payload, Shapes::ShapeRef.new(shape: JsonValue, required: true, location_name: "payload", metadata: {"jsonvalue"=>true}))
+    TestSegmentPatternRequest.struct_class = Types::TestSegmentPatternRequest
+
+    TestSegmentPatternResponse.add_member(:match, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "match"))
+    TestSegmentPatternResponse.struct_class = Types::TestSegmentPatternResponse
+
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ThrottlingException.add_member(:quota_code, Shapes::ShapeRef.new(shape: String, location_name: "quotaCode"))
     ThrottlingException.add_member(:service_code, Shapes::ShapeRef.new(shape: String, location_name: "serviceCode"))
@@ -803,7 +912,9 @@ module Aws::CloudWatchEvidently
     UpdateExperimentRequest.add_member(:online_ab_config, Shapes::ShapeRef.new(shape: OnlineAbConfig, location_name: "onlineAbConfig"))
     UpdateExperimentRequest.add_member(:project, Shapes::ShapeRef.new(shape: ProjectRef, required: true, location: "uri", location_name: "project"))
     UpdateExperimentRequest.add_member(:randomization_salt, Shapes::ShapeRef.new(shape: RandomizationSalt, location_name: "randomizationSalt"))
+    UpdateExperimentRequest.add_member(:remove_segment, Shapes::ShapeRef.new(shape: PrimitiveBoolean, location_name: "removeSegment"))
     UpdateExperimentRequest.add_member(:sampling_rate, Shapes::ShapeRef.new(shape: SplitWeight, location_name: "samplingRate", metadata: {"box"=>true}))
+    UpdateExperimentRequest.add_member(:segment, Shapes::ShapeRef.new(shape: SegmentRef, location_name: "segment"))
     UpdateExperimentRequest.add_member(:treatments, Shapes::ShapeRef.new(shape: TreatmentConfigList, location_name: "treatments"))
     UpdateExperimentRequest.struct_class = Types::UpdateExperimentRequest
 
@@ -971,12 +1082,25 @@ module Aws::CloudWatchEvidently
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:create_segment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateSegment"
+        o.http_method = "POST"
+        o.http_request_uri = "/segments"
+        o.input = Shapes::ShapeRef.new(shape: CreateSegmentRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateSegmentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:delete_experiment, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteExperiment"
         o.http_method = "DELETE"
         o.http_request_uri = "/projects/{project}/experiments/{experiment}"
         o.input = Shapes::ShapeRef.new(shape: DeleteExperimentRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteExperimentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
@@ -1023,6 +1147,19 @@ module Aws::CloudWatchEvidently
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:delete_segment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteSegment"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/segments/{segment}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteSegmentRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteSegmentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:evaluate_feature, Seahorse::Model::Operation.new.tap do |o|
         o.name = "EvaluateFeature"
         o.http_method = "POST"
@@ -1045,6 +1182,7 @@ module Aws::CloudWatchEvidently
         o.input = Shapes::ShapeRef.new(shape: GetExperimentRequest)
         o.output = Shapes::ShapeRef.new(shape: GetExperimentResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
@@ -1081,6 +1219,7 @@ module Aws::CloudWatchEvidently
         o.input = Shapes::ShapeRef.new(shape: GetLaunchRequest)
         o.output = Shapes::ShapeRef.new(shape: GetLaunchResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
@@ -1097,6 +1236,18 @@ module Aws::CloudWatchEvidently
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:get_segment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSegment"
+        o.http_method = "GET"
+        o.http_request_uri = "/segments/{segment}"
+        o.input = Shapes::ShapeRef.new(shape: GetSegmentRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSegmentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:list_experiments, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListExperiments"
         o.http_method = "GET"
@@ -1105,6 +1256,7 @@ module Aws::CloudWatchEvidently
         o.output = Shapes::ShapeRef.new(shape: ListExperimentsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1165,6 +1317,41 @@ module Aws::CloudWatchEvidently
         )
       end)
 
+      api.add_operation(:list_segment_references, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSegmentReferences"
+        o.http_method = "GET"
+        o.http_request_uri = "/segments/{segment}/references"
+        o.input = Shapes::ShapeRef.new(shape: ListSegmentReferencesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListSegmentReferencesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_segments, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSegments"
+        o.http_method = "GET"
+        o.http_request_uri = "/segments"
+        o.input = Shapes::ShapeRef.new(shape: ListSegmentsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListSegmentsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTagsForResource"
         o.http_method = "GET"
@@ -1213,6 +1400,7 @@ module Aws::CloudWatchEvidently
         o.output = Shapes::ShapeRef.new(shape: StartLaunchResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -1253,6 +1441,17 @@ module Aws::CloudWatchEvidently
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:test_segment_pattern, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TestSegmentPattern"
+        o.http_method = "POST"
+        o.http_request_uri = "/test-segment-pattern"
+        o.input = Shapes::ShapeRef.new(shape: TestSegmentPatternRequest)
+        o.output = Shapes::ShapeRef.new(shape: TestSegmentPatternResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -1310,6 +1509,7 @@ module Aws::CloudWatchEvidently
         o.input = Shapes::ShapeRef.new(shape: UpdateProjectRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateProjectResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)

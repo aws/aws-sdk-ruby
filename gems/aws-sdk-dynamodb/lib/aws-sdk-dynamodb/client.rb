@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -78,6 +79,7 @@ module Aws::DynamoDB
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -379,12 +381,24 @@ module Aws::DynamoDB
     # @!group API Operations
 
     # This operation allows you to perform batch reads or writes on data
-    # stored in DynamoDB, using PartiQL.
+    # stored in DynamoDB, using PartiQL. Each read statement in a
+    # `BatchExecuteStatement` must specify an equality condition on all key
+    # attributes. This enforces that each `SELECT` statement in a batch
+    # returns at most a single item.
     #
     # <note markdown="1"> The entire batch must consist of either read statements or write
     # statements, you cannot mix both in one batch.
     #
     #  </note>
+    #
+    # A HTTP 200 response does not mean that all statements in the
+    # BatchExecuteStatement succeeded. Error details for individual
+    # statements can be found under the [Error][1] field of the
+    # `BatchStatementResponse` for each statement.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_BatchStatementResponse.html#DDB-Type-BatchStatementResponse-Error
     #
     # @option params [required, Array<Types::BatchStatementRequest>] :statements
     #   The list of PartiQL statements representing the batch to run.
@@ -1760,6 +1774,10 @@ module Aws::DynamoDB
     #
     #   * `ALL_OLD` - The content of the old item is returned.
     #
+    #   There is no additional cost associated with requesting a return value
+    #   aside from the small network and processing overhead of receiving a
+    #   larger response. No read capacity units are consumed.
+    #
     #   <note markdown="1"> The `ReturnValues` parameter is used by several DynamoDB operations;
     #   however, `DeleteItem` does not recognize any values other than `NONE`
     #   or `ALL_OLD`.
@@ -3016,6 +3034,19 @@ module Aws::DynamoDB
     # This operation allows you to perform reads and singleton writes on
     # data stored in DynamoDB, using PartiQL.
     #
+    # For PartiQL reads (`SELECT` statement), if the total number of
+    # processed items exceeds the maximum dataset size limit of 1 MB, the
+    # read stops and results are returned to the user as a
+    # `LastEvaluatedKey` value to continue the read in a subsequent
+    # operation. If the filter criteria in `WHERE` clause does not match any
+    # data, the read will return an empty result set.
+    #
+    # A single `SELECT` statement response can return up to the maximum
+    # number of items (if using the Limit parameter) or a maximum of 1 MB of
+    # data (and then apply any filtering to the results using `WHERE`
+    # clause). If `LastEvaluatedKey` is present in the response, you need to
+    # paginate the result set.
+    #
     # @option params [required, String] :statement
     #   The PartiQL statement representing the operation to run.
     #
@@ -3048,11 +3079,24 @@ module Aws::DynamoDB
     #
     #   * `NONE` - No `ConsumedCapacity` details are included in the response.
     #
+    # @option params [Integer] :limit
+    #   The maximum number of items to evaluate (not necessarily the number of
+    #   matching items). If DynamoDB processes the number of items up to the
+    #   limit while processing the results, it stops the operation and returns
+    #   the matching values up to that point, along with a key in
+    #   `LastEvaluatedKey` to apply in a subsequent operation so you can pick
+    #   up where you left off. Also, if the processed dataset size exceeds 1
+    #   MB before DynamoDB reaches this limit, it stops the operation and
+    #   returns the matching values up to the limit, and a key in
+    #   `LastEvaluatedKey` to apply in a subsequent operation to continue the
+    #   operation.
+    #
     # @return [Types::ExecuteStatementOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ExecuteStatementOutput#items #items} => Array&lt;Hash&lt;String,Types::AttributeValue&gt;&gt;
     #   * {Types::ExecuteStatementOutput#next_token #next_token} => String
     #   * {Types::ExecuteStatementOutput#consumed_capacity #consumed_capacity} => Types::ConsumedCapacity
+    #   * {Types::ExecuteStatementOutput#last_evaluated_key #last_evaluated_key} => Hash&lt;String,Types::AttributeValue&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -3062,6 +3106,7 @@ module Aws::DynamoDB
     #     consistent_read: false,
     #     next_token: "PartiQLNextToken",
     #     return_consumed_capacity: "INDEXES", # accepts INDEXES, TOTAL, NONE
+    #     limit: 1,
     #   })
     #
     # @example Response structure
@@ -3085,6 +3130,8 @@ module Aws::DynamoDB
     #   resp.consumed_capacity.global_secondary_indexes["IndexName"].read_capacity_units #=> Float
     #   resp.consumed_capacity.global_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity.global_secondary_indexes["IndexName"].capacity_units #=> Float
+    #   resp.last_evaluated_key #=> Hash
+    #   resp.last_evaluated_key["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExecuteStatement AWS API Documentation
     #
@@ -3187,8 +3234,9 @@ module Aws::DynamoDB
     #   The Amazon Resource Name (ARN) associated with the table to export.
     #
     # @option params [Time,DateTime,Date,Integer,String] :export_time
-    #   Time in the past from which to export table data. The table export
-    #   will be a snapshot of the table's state at this point in time.
+    #   Time in the past from which to export table data, counted in seconds
+    #   from the start of the Unix epoch. The table export will be a snapshot
+    #   of the table's state at this point in time.
     #
     # @option params [String] :client_token
     #   Providing a `ClientToken` makes the call to
@@ -3517,7 +3565,8 @@ module Aws::DynamoDB
     #
     #   Where `BackupType` can be:
     #
-    #   * `USER` - On-demand backup created by you.
+    #   * `USER` - On-demand backup created by you. (The default setting if no
+    #     other backup types are specified.)
     #
     #   * `SYSTEM` - On-demand backup automatically created by DynamoDB.
     #
@@ -3824,29 +3873,6 @@ module Aws::DynamoDB
     # item's attribute values in the same operation, using the
     # `ReturnValues` parameter.
     #
-    # This topic provides general information about the `PutItem` API.
-    #
-    #  For information on how to call the `PutItem` API using the Amazon Web
-    # Services SDK in specific languages, see the following:
-    #
-    #  * [ PutItem in the Command Line Interface][1]
-    #
-    # * [ PutItem in the SDK for .NET][2]
-    #
-    # * [ PutItem in the SDK for C++][3]
-    #
-    # * [ PutItem in the SDK for Go][4]
-    #
-    # * [ PutItem in the SDK for Java][5]
-    #
-    # * [ PutItem in the SDK for JavaScript][6]
-    #
-    # * [ PutItem in the SDK for PHP V3][7]
-    #
-    # * [ PutItem in the SDK for Python (Boto)][8]
-    #
-    # * [ PutItem in the SDK for Ruby V2][9]
-    #
     # When you add an item, the primary key attributes are the only required
     # attributes. Attribute values cannot be null.
     #
@@ -3867,21 +3893,12 @@ module Aws::DynamoDB
     #
     #  </note>
     #
-    # For more information about `PutItem`, see [Working with Items][10] in
+    # For more information about `PutItem`, see [Working with Items][1] in
     # the *Amazon DynamoDB Developer Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/goto/aws-cli/dynamodb-2012-08-10/PutItem
-    # [2]: http://docs.aws.amazon.com/goto/DotNetSDKV3/dynamodb-2012-08-10/PutItem
-    # [3]: http://docs.aws.amazon.com/goto/SdkForCpp/dynamodb-2012-08-10/PutItem
-    # [4]: http://docs.aws.amazon.com/goto/SdkForGoV1/dynamodb-2012-08-10/PutItem
-    # [5]: http://docs.aws.amazon.com/goto/SdkForJava/dynamodb-2012-08-10/PutItem
-    # [6]: http://docs.aws.amazon.com/goto/AWSJavaScriptSDK/dynamodb-2012-08-10/PutItem
-    # [7]: http://docs.aws.amazon.com/goto/SdkForPHPV3/dynamodb-2012-08-10/PutItem
-    # [8]: http://docs.aws.amazon.com/goto/boto3/dynamodb-2012-08-10/PutItem
-    # [9]: http://docs.aws.amazon.com/goto/SdkForRubyV2/dynamodb-2012-08-10/PutItem
-    # [10]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithItems.html
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithItems.html
     #
     # @option params [required, String] :table_name
     #   The name of the table to contain the item.
@@ -3935,6 +3952,10 @@ module Aws::DynamoDB
     #     then the content of the old item is returned.
     #
     #   The values returned are strongly consistent.
+    #
+    #   There is no additional cost associated with requesting a return value
+    #   aside from the small network and processing overhead of receiving a
+    #   larger response. No read capacity units are consumed.
     #
     #   <note markdown="1"> The `ReturnValues` parameter is used by several DynamoDB operations;
     #   however, `PutItem` does not recognize any values other than `NONE` or
@@ -4257,8 +4278,9 @@ module Aws::DynamoDB
     #     matching items themselves.
     #
     #   * `SPECIFIC_ATTRIBUTES` - Returns only the attributes listed in
-    #     `AttributesToGet`. This return value is equivalent to specifying
-    #     `AttributesToGet` without specifying any value for `Select`.
+    #     `ProjectionExpression`. This return value is equivalent to
+    #     specifying `ProjectionExpression` without specifying any value for
+    #     `Select`.
     #
     #     If you query or scan a local secondary index and request only
     #     attributes that are projected into that index, the operation will
@@ -4271,12 +4293,12 @@ module Aws::DynamoDB
     #     attributes that are projected into the index. Global secondary index
     #     queries cannot fetch attributes from the parent table.
     #
-    #   If neither `Select` nor `AttributesToGet` are specified, DynamoDB
+    #   If neither `Select` nor `ProjectionExpression` are specified, DynamoDB
     #   defaults to `ALL_ATTRIBUTES` when accessing a table, and
     #   `ALL_PROJECTED_ATTRIBUTES` when accessing an index. You cannot use
-    #   both `Select` and `AttributesToGet` together in a single request,
+    #   both `Select` and `ProjectionExpression` together in a single request,
     #   unless the value for `Select` is `SPECIFIC_ATTRIBUTES`. (This usage is
-    #   equivalent to specifying `AttributesToGet` without any value for
+    #   equivalent to specifying `ProjectionExpression` without any value for
     #   `Select`.)
     #
     #   <note markdown="1"> If you use the `ProjectionExpression` parameter, then the value for
@@ -4425,7 +4447,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#FilteringResults
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#Query.FilterExpression
     #
     # @option params [String] :key_condition_expression
     #   The condition that specifies the key values for items to be retrieved
@@ -5210,8 +5232,9 @@ module Aws::DynamoDB
     #     matching items themselves.
     #
     #   * `SPECIFIC_ATTRIBUTES` - Returns only the attributes listed in
-    #     `AttributesToGet`. This return value is equivalent to specifying
-    #     `AttributesToGet` without specifying any value for `Select`.
+    #     `ProjectionExpression`. This return value is equivalent to
+    #     specifying `ProjectionExpression` without specifying any value for
+    #     `Select`.
     #
     #     If you query or scan a local secondary index and request only
     #     attributes that are projected into that index, the operation reads
@@ -5224,12 +5247,12 @@ module Aws::DynamoDB
     #     attributes that are projected into the index. Global secondary index
     #     queries cannot fetch attributes from the parent table.
     #
-    #   If neither `Select` nor `AttributesToGet` are specified, DynamoDB
+    #   If neither `Select` nor `ProjectionExpression` are specified, DynamoDB
     #   defaults to `ALL_ATTRIBUTES` when accessing a table, and
     #   `ALL_PROJECTED_ATTRIBUTES` when accessing an index. You cannot use
-    #   both `Select` and `AttributesToGet` together in a single request,
+    #   both `Select` and `ProjectionExpression` together in a single request,
     #   unless the value for `Select` is `SPECIFIC_ATTRIBUTES`. (This usage is
-    #   equivalent to specifying `AttributesToGet` without any value for
+    #   equivalent to specifying `ProjectionExpression` without any value for
     #   `Select`.)
     #
     #   <note markdown="1"> If you use the `ProjectionExpression` parameter, then the value for
@@ -5350,7 +5373,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#FilteringResults
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#Query.FilterExpression
     #
     # @option params [Hash<String,String>] :expression_attribute_names
     #   One or more substitution tokens for attribute names in an expression.
@@ -6723,8 +6746,6 @@ module Aws::DynamoDB
     #
     # * Modify the provisioned throughput settings of the table.
     #
-    # * Enable or disable DynamoDB Streams on the table.
-    #
     # * Remove a global secondary index from the table.
     #
     # * Create a new global secondary index on the table. After the index
@@ -7320,7 +7341,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.75.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

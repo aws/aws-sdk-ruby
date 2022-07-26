@@ -28,8 +28,10 @@ module Aws::DatabaseMigrationService
   #
   # ## Error Classes
   # * {AccessDeniedFault}
+  # * {CollectorNotFoundFault}
   # * {InsufficientResourceCapacityFault}
   # * {InvalidCertificateFault}
+  # * {InvalidOperationFault}
   # * {InvalidResourceStateFault}
   # * {InvalidSubnet}
   # * {KMSAccessDeniedFault}
@@ -72,6 +74,21 @@ module Aws::DatabaseMigrationService
       end
     end
 
+    class CollectorNotFoundFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DatabaseMigrationService::Types::CollectorNotFoundFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class InsufficientResourceCapacityFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -92,6 +109,21 @@ module Aws::DatabaseMigrationService
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::DatabaseMigrationService::Types::InvalidCertificateFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class InvalidOperationFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DatabaseMigrationService::Types::InvalidOperationFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

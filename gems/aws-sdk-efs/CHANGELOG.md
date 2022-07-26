@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2022-04-12)
+------------------
+
+* Feature - Amazon EFS adds support for a ThrottlingException when using the CreateAccessPoint API if the account is nearing the AccessPoint limit(120).
+
+1.53.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.52.0 (2022-02-03)
 ------------------
 

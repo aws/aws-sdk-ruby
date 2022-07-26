@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2022-05-25)
+------------------
+
+* Feature - This release adds root squash support to FSx for Lustre to restrict root level access from clients by mapping root users to a less-privileged user/group with limited permissions.
+
+1.55.0 (2022-04-13)
+------------------
+
+* Feature - This release adds support for deploying FSx for ONTAP file systems in a single Availability Zone.
+
+1.54.0 (2022-04-05)
+------------------
+
+* Feature - Provide customers more visibility into file system status by adding new "Misconfigured Unavailable" status for Amazon FSx for Windows File Server.
+
+1.53.0 (2022-03-30)
+------------------
+
+* Feature - This release adds support for modifying throughput capacity for FSx for ONTAP file systems.
+
+1.52.0 (2022-03-03)
+------------------
+
+* Feature - This release adds support for data repository associations to use root ("/") as the file system path
+
+1.51.0 (2022-02-28)
+------------------
+
+* Feature - This release adds support for the following FSx for OpenZFS features: snapshot lifecycle transition messages, force flag for deleting file systems with child resources, LZ4 data compression, custom record sizes, and unsetting volume quotas and reservations.
+
+1.50.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.49.0 (2022-02-03)
 ------------------
 

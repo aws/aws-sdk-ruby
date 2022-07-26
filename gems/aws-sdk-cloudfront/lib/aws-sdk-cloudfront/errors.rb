@@ -104,6 +104,7 @@ module Aws::CloudFront
   # * {StreamingDistributionAlreadyExists}
   # * {StreamingDistributionNotDisabled}
   # * {TestFunctionFailed}
+  # * {TooLongCSPInResponseHeadersPolicy}
   # * {TooManyCacheBehaviors}
   # * {TooManyCachePolicies}
   # * {TooManyCertificates}
@@ -1306,6 +1307,21 @@ module Aws::CloudFront
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudFront::Types::TestFunctionFailed] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class TooLongCSPInResponseHeadersPolicy < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::TooLongCSPInResponseHeadersPolicy] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

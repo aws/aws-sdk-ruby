@@ -10,6 +10,21 @@
 module Aws::Kendra
   module Types
 
+    # Summary information on an access control configuration that you
+    # created for your documents in an index.
+    #
+    # @!attribute [rw] id
+    #   The identifier of the access control configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/AccessControlConfigurationSummary AWS API Documentation
+    #
+    class AccessControlConfigurationSummary < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Access Control List files for the documents in a data source. For the
     # format of the file, see [Access control for S3 data sources][1].
     #
@@ -62,7 +77,7 @@ module Aws::Kendra
     #   A list of groups, separated by semi-colons, that filters a query
     #   response based on user context. The document is only returned to
     #   users that are in one of the groups specified in the `UserContext`
-    #   field of the `Query` operation.
+    #   field of the `Query` API.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/AclConfiguration AWS API Documentation
@@ -108,6 +123,186 @@ module Aws::Kendra
     #
     class AdditionalResultAttributeValue < Struct.new(
       :text_with_highlights_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the configuration information to connect to Alfresco as your
+    # data source.
+    #
+    # <note markdown="1"> Alfresco data source connector is currently in preview mode. Basic
+    # authentication is currently supported. If you would like to use
+    # Alfresco connector in production, contact [Support][1].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/contact-us/
+    #
+    # @note When making an API call, you may pass AlfrescoConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         site_url: "SiteUrl", # required
+    #         site_id: "SiteId", # required
+    #         secret_arn: "SecretArn", # required
+    #         ssl_certificate_s3_path: { # required
+    #           bucket: "S3BucketName", # required
+    #           key: "S3ObjectKey", # required
+    #         },
+    #         crawl_system_folders: false,
+    #         crawl_comments: false,
+    #         entity_filter: ["wiki"], # accepts wiki, blog, documentLibrary
+    #         document_library_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         blog_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         wiki_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         vpc_configuration: {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] site_url
+    #   The URL of the Alfresco site. For example, *https://hostname:8080*.
+    #   @return [String]
+    #
+    # @!attribute [rw] site_id
+    #   The identifier of the Alfresco site. For example, *my-site*.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_arn
+    #   The Amazon Resource Name (ARN) of an Secrets Manager secret that
+    #   contains the key-value pairs required to connect to your Alfresco
+    #   data source. The secret must contain a JSON structure with the
+    #   following keys:
+    #
+    #   * username—The user name of the Alfresco account.
+    #
+    #   * password—The password of the Alfresco account.
+    #   @return [String]
+    #
+    # @!attribute [rw] ssl_certificate_s3_path
+    #   The path to the SSL certificate stored in an Amazon S3 bucket. You
+    #   use this to connect to Alfresco.
+    #   @return [Types::S3Path]
+    #
+    # @!attribute [rw] crawl_system_folders
+    #   `TRUE` to index shared files.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] crawl_comments
+    #   `TRUE` to index comments of blogs and other content.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] entity_filter
+    #   Specify whether to index document libraries, wikis, or blogs. You
+    #   can specify one or more of these options.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] document_library_field_mappings
+    #   A list of `DataSourceToIndexFieldMapping` objects that map
+    #   attributes or field names of Alfresco document libraries to Amazon
+    #   Kendra index field names. To create custom fields, use the
+    #   `UpdateIndex` API before you map to Alfresco fields. For more
+    #   information, see [ Mapping data source fields][1]. The Alfresco data
+    #   source field names must exist in your Alfresco custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @!attribute [rw] blog_field_mappings
+    #   A list of `DataSourceToIndexFieldMapping` objects that map
+    #   attributes or field names of Alfresco blogs to Amazon Kendra index
+    #   field names. To create custom fields, use the `UpdateIndex` API
+    #   before you map to Alfresco fields. For more information, see [
+    #   Mapping data source fields][1]. The Alfresco data source field names
+    #   must exist in your Alfresco custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @!attribute [rw] wiki_field_mappings
+    #   A list of `DataSourceToIndexFieldMapping` objects that map
+    #   attributes or field names of Alfresco wikis to Amazon Kendra index
+    #   field names. To create custom fields, use the `UpdateIndex` API
+    #   before you map to Alfresco fields. For more information, see [
+    #   Mapping data source fields][1]. The Alfresco data source field names
+    #   must exist in your Alfresco custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @!attribute [rw] inclusion_patterns
+    #   A list of regular expression patterns to include certain files in
+    #   your Alfresco data source. Files that match the patterns are
+    #   included in the index. Files that don't match the patterns are
+    #   excluded from the index. If a file matches both an inclusion pattern
+    #   and an exclusion pattern, the exclusion pattern takes precedence and
+    #   the file isn't included in the index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] exclusion_patterns
+    #   A list of regular expression patterns to exclude certain files in
+    #   your Alfresco data source. Files that match the patterns are
+    #   excluded from the index. Files that don't match the patterns are
+    #   included in the index. If a file matches both an inclusion pattern
+    #   and an exclusion pattern, the exclusion pattern takes precedence and
+    #   the file isn't included in the index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_configuration
+    #   Configuration information for an Amazon Virtual Private Cloud to
+    #   connect to your Alfresco. For more information, see [Configuring a
+    #   VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html
+    #   @return [Types::DataSourceVpcConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/AlfrescoConfiguration AWS API Documentation
+    #
+    class AlfrescoConfiguration < Struct.new(
+      :site_url,
+      :site_id,
+      :secret_arn,
+      :ssl_certificate_s3_path,
+      :crawl_system_folders,
+      :crawl_comments,
+      :entity_filter,
+      :document_library_field_mappings,
+      :blog_field_mappings,
+      :wiki_field_mappings,
+      :inclusion_patterns,
+      :exclusion_patterns,
+      :vpc_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -736,7 +931,7 @@ module Aws::Kendra
     end
 
     # Provides information about documents that could not be removed from an
-    # index by the `BatchDeleteDocument` operation.
+    # index by the `BatchDeleteDocument` API.
     #
     # @!attribute [rw] id
     #   The identifier of the document that couldn't be removed from the
@@ -788,7 +983,7 @@ module Aws::Kendra
     #
     # @!attribute [rw] index_id
     #   The identifier of the index to add documents to. The index ID is
-    #   returned by the [ CreateIndex ][1] operation.
+    #   returned by the [CreateIndex ][1] API.
     #
     #
     #
@@ -907,6 +1102,7 @@ module Aws::Kendra
     #               },
     #             ],
     #             content_type: "PDF", # accepts PDF, HTML, MS_WORD, PLAIN_TEXT, PPT
+    #             access_control_configuration_id: "AccessControlConfigurationId",
     #           },
     #         ],
     #         custom_document_enrichment_configuration: {
@@ -969,13 +1165,13 @@ module Aws::Kendra
     #
     # @!attribute [rw] index_id
     #   The identifier of the index to add the documents to. You need to
-    #   create the index first using the `CreateIndex` operation.
+    #   create the index first using the `CreateIndex` API.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of a role that is allowed to run the
-    #   `BatchPutDocument` operation. For more information, see [IAM Roles
-    #   for Amazon Kendra][1].
+    #   `BatchPutDocument` API. For more information, see [IAM Roles for
+    #   Amazon Kendra][1].
     #
     #
     #
@@ -984,13 +1180,6 @@ module Aws::Kendra
     #
     # @!attribute [rw] documents
     #   One or more documents to add to the index.
-    #
-    #   Documents can include custom attributes. For example,
-    #   'DataSourceId' and 'DataSourceSyncJobId' are custom attributes
-    #   that provide information on the synchronization of documents running
-    #   on a data source. Note, 'DataSourceSyncJobId' could be an optional
-    #   custom attribute as Amazon Kendra will use the ID of a running sync
-    #   job.
     #
     #   Documents have the following file size limits.
     #
@@ -1011,7 +1200,7 @@ module Aws::Kendra
     # @!attribute [rw] custom_document_enrichment_configuration
     #   Configuration information for altering your document metadata and
     #   content during the document ingestion process when you use the
-    #   `BatchPutDocument` operation.
+    #   `BatchPutDocument` API.
     #
     #   For more information on how to create, modify and delete document
     #   metadata, or make other content alterations when you ingest
@@ -1082,8 +1271,212 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Specifies capacity units configured for your enterprise edition index.
-    # You can add and remove capacity units to tune an index to your
+    # Provides the configuration information to connect to Box as your data
+    # source.
+    #
+    # @note When making an API call, you may pass BoxConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         enterprise_id: "EnterpriseId", # required
+    #         secret_arn: "SecretArn", # required
+    #         use_change_log: false,
+    #         crawl_comments: false,
+    #         crawl_tasks: false,
+    #         crawl_web_links: false,
+    #         file_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         task_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         comment_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         web_link_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         vpc_configuration: {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] enterprise_id
+    #   The identifier of the Box Enterprise platform. You can find the
+    #   enterprise ID in the Box Developer Console settings or when you
+    #   create an app in Box and download your authentication credentials.
+    #   For example, *801234567*.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_arn
+    #   The Amazon Resource Name (ARN) of an Secrets Manager secret that
+    #   contains the key-value pairs required to connect to your Box
+    #   platform. The secret must contain a JSON structure with the
+    #   following keys:
+    #
+    #   * clientID—The identifier of the client OAuth 2.0 authentication
+    #     application created in Box.
+    #
+    #   * clientSecret—A set of characters known only to the OAuth 2.0
+    #     authentication application created in Box.
+    #
+    #   * publicKeyId—The identifier of the public key contained within an
+    #     identity certificate.
+    #
+    #   * privateKey—A set of characters that make up an encryption key.
+    #
+    #   * passphrase—A set of characters that act like a password.
+    #
+    #   You create an application in Box to generate the keys or credentials
+    #   required for the secret. For more information, see [Authentication
+    #   for a Box data source][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-box.html#box-authentication
+    #   @return [String]
+    #
+    # @!attribute [rw] use_change_log
+    #   `TRUE` to use the Slack change log to determine which documents
+    #   require updating in the index. Depending on the data source change
+    #   log's size, it may take longer for Amazon Kendra to use the change
+    #   log than to scan all of your documents.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] crawl_comments
+    #   `TRUE` to index comments.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] crawl_tasks
+    #   `TRUE` to index the contents of tasks.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] crawl_web_links
+    #   `TRUE` to index web links.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] file_field_mappings
+    #   A list of `DataSourceToIndexFieldMapping` objects that map
+    #   attributes or field names of Box files to Amazon Kendra index field
+    #   names. To create custom fields, use the `UpdateIndex` API before you
+    #   map to Box fields. For more information, see [Mapping data source
+    #   fields][1]. The Box field names must exist in your Box custom
+    #   metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @!attribute [rw] task_field_mappings
+    #   A list of `DataSourceToIndexFieldMapping` objects that map
+    #   attributes or field names of Box tasks to Amazon Kendra index field
+    #   names. To create custom fields, use the `UpdateIndex` API before you
+    #   map to Box fields. For more information, see [Mapping data source
+    #   fields][1]. The Box field names must exist in your Box custom
+    #   metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @!attribute [rw] comment_field_mappings
+    #   A list of `DataSourceToIndexFieldMapping` objects that map
+    #   attributes or field names of Box comments to Amazon Kendra index
+    #   field names. To create custom fields, use the `UpdateIndex` API
+    #   before you map to Box fields. For more information, see [Mapping
+    #   data source fields][1]. The Box field names must exist in your Box
+    #   custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @!attribute [rw] web_link_field_mappings
+    #   A list of `DataSourceToIndexFieldMapping` objects that map
+    #   attributes or field names of Box web links to Amazon Kendra index
+    #   field names. To create custom fields, use the `UpdateIndex` API
+    #   before you map to Box fields. For more information, see [Mapping
+    #   data source fields][1]. The Box field names must exist in your Box
+    #   custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @!attribute [rw] inclusion_patterns
+    #   A list of regular expression patterns to include certain files and
+    #   folders in your Box platform. Files and folders that match the
+    #   patterns are included in the index. Files and folders that don't
+    #   match the patterns are excluded from the index. If a file or folder
+    #   matches both an inclusion and exclusion pattern, the exclusion
+    #   pattern takes precedence and the file or folder isn't included in
+    #   the index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] exclusion_patterns
+    #   A list of regular expression patterns to exclude certain files and
+    #   folders from your Box platform. Files and folders that match the
+    #   patterns are excluded from the index.Files and folders that don't
+    #   match the patterns are included in the index. If a file or folder
+    #   matches both an inclusion and exclusion pattern, the exclusion
+    #   pattern takes precedence and the file or folder isn't included in
+    #   the index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_configuration
+    #   Configuration information for an Amazon VPC to connect to your Box.
+    #   For more information, see [Configuring a VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html
+    #   @return [Types::DataSourceVpcConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/BoxConfiguration AWS API Documentation
+    #
+    class BoxConfiguration < Struct.new(
+      :enterprise_id,
+      :secret_arn,
+      :use_change_log,
+      :crawl_comments,
+      :crawl_tasks,
+      :crawl_web_links,
+      :file_field_mappings,
+      :task_field_mappings,
+      :comment_field_mappings,
+      :web_link_field_mappings,
+      :inclusion_patterns,
+      :exclusion_patterns,
+      :vpc_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies additional capacity units configured for your Enterprise
+    # Edition index. You can add and remove capacity units to fit your usage
     # requirements.
     #
     # @note When making an API call, you may pass CapacityUnitsConfiguration
@@ -1097,7 +1490,7 @@ module Aws::Kendra
     # @!attribute [rw] storage_capacity_units
     #   The amount of extra storage capacity for an index. A single capacity
     #   unit provides 30 GB of storage space or 100,000 documents, whichever
-    #   is reached first.
+    #   is reached first. You can add up to 100 extra capacity units.
     #   @return [Integer]
     #
     # @!attribute [rw] query_capacity_units
@@ -1105,7 +1498,8 @@ module Aws::Kendra
     #   [GetQuerySuggestions][1] capacity.
     #
     #   A single extra capacity unit for an index provides 0.1 queries per
-    #   second or approximately 8,000 queries per day.
+    #   second or approximately 8,000 queries per day. You can add up to 100
+    #   extra capacity units.
     #
     #   `GetQuerySuggestions` capacity is five times the provisioned query
     #   capacity for an index, or the base capacity of 2.5 calls per second,
@@ -1151,8 +1545,8 @@ module Aws::Kendra
     end
 
     # Gathers information about when a particular result was clicked by a
-    # user. Your application uses the `SubmitFeedback` operation to provide
-    # click information.
+    # user. Your application uses the `SubmitFeedback` API to provide click
+    # information.
     #
     # @note When making an API call, you may pass ClickFeedback
     #   data as a hash:
@@ -1214,7 +1608,7 @@ module Aws::Kendra
     # @!attribute [rw] field_mappings
     #   An array of objects that map database column names to the
     #   corresponding fields in an index. You must first create the fields
-    #   in the index using the `UpdateIndex` operation.
+    #   in the index using the `UpdateIndex` API.
     #   @return [Array<Types::DataSourceToIndexFieldMapping>]
     #
     # @!attribute [rw] change_detecting_columns
@@ -1245,7 +1639,7 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Specifies the attachment settings for the Confluence data source.
+    # Configuration of attachment settings for the Confluence data source.
     # Attachment settings are optional, if you don't specify settings
     # attachments, Amazon Kendra won't index them.
     #
@@ -1264,18 +1658,23 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] crawl_attachments
-    #   Indicates whether Amazon Kendra indexes attachments to the pages and
-    #   blogs in the Confluence data source.
+    #   `TRUE` to index attachments of pages and blogs in Confluence.
     #   @return [Boolean]
     #
     # @!attribute [rw] attachment_field_mappings
-    #   Defines how attachment metadata fields should be mapped to index
-    #   fields. Before you can map a field, you must first create an index
-    #   field with a matching type using the console or the `UpdateIndex`
-    #   operation.
+    #   Maps attributes or field names of Confluence attachments to Amazon
+    #   Kendra index field names. To create custom fields, use the
+    #   `UpdateIndex` API before you map to Confluence fields. For more
+    #   information, see [Mapping data source fields][1]. The Confluence
+    #   data source field names must exist in your Confluence custom
+    #   metadata.
     #
     #   If you specify the `AttachentFieldMappings` parameter, you must
     #   specify at least one field mapping.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
     #   @return [Array<Types::ConfluenceAttachmentToIndexFieldMapping>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ConfluenceAttachmentConfiguration AWS API Documentation
@@ -1287,11 +1686,15 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Defines the mapping between a field in the Confluence data source to a
-    # Amazon Kendra index field.
+    # Maps attributes or field names of Confluence attachments to Amazon
+    # Kendra index field names. To create custom fields, use the
+    # `UpdateIndex` API before you map to Confluence fields. For more
+    # information, see [Mapping data source fields][1]. The Confuence data
+    # source field names must exist in your Confluence custom metadata.
     #
-    # You must first create the index field using the `UpdateIndex`
-    # operation.
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
     #
     # @note When making an API call, you may pass ConfluenceAttachmentToIndexFieldMapping
     #   data as a hash:
@@ -1305,8 +1708,7 @@ module Aws::Kendra
     # @!attribute [rw] data_source_field_name
     #   The name of the field in the data source.
     #
-    #   You must first create the index field using the `UpdateIndex`
-    #   operation.
+    #   You must first create the index field using the `UpdateIndex` API.
     #   @return [String]
     #
     # @!attribute [rw] date_field_format
@@ -1331,10 +1733,10 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Specifies the blog settings for the Confluence data source. Blogs are
-    # always indexed unless filtered from the index by the
+    # Configuration of blog settings for the Confluence data source. Blogs
+    # are always indexed unless filtered from the index by the
     # `ExclusionPatterns` or `InclusionPatterns` fields in the
-    # `ConfluenceConfiguration` type.
+    # `ConfluenceConfiguration` object.
     #
     # @note When making an API call, you may pass ConfluenceBlogConfiguration
     #   data as a hash:
@@ -1350,13 +1752,18 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] blog_field_mappings
-    #   Defines how blog metadata fields should be mapped to index fields.
-    #   Before you can map a field, you must first create an index field
-    #   with a matching type using the console or the `UpdateIndex`
-    #   operation.
+    #   Maps attributes or field names of Confluence blogs to Amazon Kendra
+    #   index field names. To create custom fields, use the `UpdateIndex`
+    #   API before you map to Confluence fields. For more information, see
+    #   [Mapping data source fields][1]. The Confluence data source field
+    #   names must exist in your Confluence custom metadata.
     #
     #   If you specify the `BlogFieldMappings` parameter, you must specify
     #   at least one field mapping.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
     #   @return [Array<Types::ConfluenceBlogToIndexFieldMapping>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ConfluenceBlogConfiguration AWS API Documentation
@@ -1367,11 +1774,15 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Defines the mapping between a blog field in the Confluence data source
-    # to a Amazon Kendra index field.
+    # Maps attributes or field names of Confluence blog to Amazon Kendra
+    # index field names. To create custom fields, use the `UpdateIndex` API
+    # before you map to Confluence fields. For more information, see
+    # [Mapping data source fields][1]. The Confluence data source field
+    # names must exist in your Confluence custom metadata.
     #
-    # You must first create the index field using the `UpdateIndex`
-    # operation.
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
     #
     # @note When making an API call, you may pass ConfluenceBlogToIndexFieldMapping
     #   data as a hash:
@@ -1408,8 +1819,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides configuration information for data sources that connect to
-    # Confluence.
+    # Provides the configuration information to connect to Confluence as
+    # your data source.
     #
     # @note When making an API call, you may pass ConfluenceConfiguration
     #   data as a hash:
@@ -1469,66 +1880,71 @@ module Aws::Kendra
     #
     # @!attribute [rw] server_url
     #   The URL of your Confluence instance. Use the full URL of the server.
-    #   For example, `https://server.example.com:port/`. You can also use an
-    #   IP address, for example, `https://192.168.1.113/`.
+    #   For example, *https://server.example.com:port/*. You can also use an
+    #   IP address, for example, *https://192.168.1.113/*.
     #   @return [String]
     #
     # @!attribute [rw] secret_arn
     #   The Amazon Resource Name (ARN) of an Secrets Manager secret that
-    #   contains the key/value pairs required to connect to your Confluence
-    #   server. The secret must contain a JSON structure with the following
-    #   keys:
+    #   contains the user name and password required to connect to the
+    #   Confluence instance. If you use Confluence cloud, you use a
+    #   generated API token as the password. For more information, see
+    #   [Using a Confluence data source][1].
     #
-    #   * username - The user name or email address of a user with
-    #     administrative privileges for the Confluence server.
     #
-    #   * password - The password associated with the user logging in to the
-    #     Confluence server.
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-confluence.html
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   Specifies the version of the Confluence installation that you are
-    #   connecting to.
+    #   The version or the type of Confluence installation to connect to.
     #   @return [String]
     #
     # @!attribute [rw] space_configuration
-    #   Specifies configuration information for indexing Confluence spaces.
+    #   Configuration information for indexing Confluence spaces.
     #   @return [Types::ConfluenceSpaceConfiguration]
     #
     # @!attribute [rw] page_configuration
-    #   Specifies configuration information for indexing Confluence pages.
+    #   Configuration information for indexing Confluence pages.
     #   @return [Types::ConfluencePageConfiguration]
     #
     # @!attribute [rw] blog_configuration
-    #   Specifies configuration information for indexing Confluence blogs.
+    #   Configuration information for indexing Confluence blogs.
     #   @return [Types::ConfluenceBlogConfiguration]
     #
     # @!attribute [rw] attachment_configuration
-    #   Specifies configuration information for indexing attachments to
-    #   Confluence blogs and pages.
+    #   Configuration information for indexing attachments to Confluence
+    #   blogs and pages.
     #   @return [Types::ConfluenceAttachmentConfiguration]
     #
     # @!attribute [rw] vpc_configuration
-    #   Specifies the information for connecting to an Amazon VPC.
+    #   Configuration information for an Amazon Virtual Private Cloud to
+    #   connect to your Confluence. For more information, see [Configuring a
+    #   VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html
     #   @return [Types::DataSourceVpcConfiguration]
     #
     # @!attribute [rw] inclusion_patterns
-    #   A list of regular expression patterns that apply to a URL on the
-    #   Confluence server. An inclusion pattern can apply to a blog post, a
-    #   page, a space, or an attachment. Items that match the patterns are
-    #   included in the index. Items that don't match the pattern are
-    #   excluded from the index. If an item matches both an inclusion
-    #   pattern and an exclusion pattern, the item isn't included in the
+    #   A list of regular expression patterns to include certain blog posts,
+    #   pages, spaces, or attachments in your Confluence. Content that
+    #   matches the patterns are included in the index. Content that
+    #   doesn't match the patterns is excluded from the index. If content
+    #   matches both an inclusion and exclusion pattern, the exclusion
+    #   pattern takes precedence and the content isn't included in the
     #   index.
     #   @return [Array<String>]
     #
     # @!attribute [rw] exclusion_patterns
-    #   A list of regular expression patterns that apply to a URL on the
-    #   Confluence server. An exclusion pattern can apply to a blog post, a
-    #   page, a space, or an attachment. Items that match the pattern are
-    #   excluded from the index. Items that don't match the pattern are
-    #   included in the index. If a item matches both an exclusion pattern
-    #   and an inclusion pattern, the item isn't included in the index.
+    #   A list of regular expression patterns to exclude certain blog posts,
+    #   pages, spaces, or attachments in your Confluence. Content that
+    #   matches the patterns are excluded from the index. Content that
+    #   doesn't match the patterns is included in the index. If content
+    #   matches both an inclusion and exclusion pattern, the exclusion
+    #   pattern takes precedence and the content isn't included in the
+    #   index.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ConfluenceConfiguration AWS API Documentation
@@ -1548,7 +1964,7 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Specifies the page settings for the Confluence data source.
+    # Configuration of the page settings for the Confluence data source.
     #
     # @note When making an API call, you may pass ConfluencePageConfiguration
     #   data as a hash:
@@ -1564,13 +1980,18 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] page_field_mappings
-    #   Defines how page metadata fields should be mapped to index fields.
-    #   Before you can map a field, you must first create an index field
-    #   with a matching type using the console or the `UpdateIndex`
-    #   operation.
+    #   Maps attributes or field names of Confluence pages to Amazon Kendra
+    #   index field names. To create custom fields, use the `UpdateIndex`
+    #   API before you map to Confluence fields. For more information, see
+    #   [Mapping data source fields][1]. The Confluence data source field
+    #   names must exist in your Confluence custom metadata.
     #
     #   If you specify the `PageFieldMappings` parameter, you must specify
     #   at least one field mapping.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
     #   @return [Array<Types::ConfluencePageToIndexFieldMapping>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ConfluencePageConfiguration AWS API Documentation
@@ -1581,11 +2002,15 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Defines the mapping between a field in the Confluence data source to a
-    # Amazon Kendra index field.
+    # &gt;Maps attributes or field names of Confluence pages to Amazon
+    # Kendra index field names. To create custom fields, use the
+    # `UpdateIndex` API before you map to Confluence fields. For more
+    # information, see [Mapping data source fields][1]. The Confluence data
+    # source field names must exist in your Confluence custom metadata.
     #
-    # You must first create the index field using the `UpdateIndex`
-    # operation.
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
     #
     # @note When making an API call, you may pass ConfluencePageToIndexFieldMapping
     #   data as a hash:
@@ -1622,7 +2047,7 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Specifies the configuration for indexing Confluence spaces.
+    # Configuration information for indexing Confluence spaces.
     #
     # @note When making an API call, you may pass ConfluenceSpaceConfiguration
     #   data as a hash:
@@ -1642,11 +2067,11 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] crawl_personal_spaces
-    #   Specifies whether Amazon Kendra should index personal spaces. Users
-    #   can add restrictions to items in personal spaces. If personal spaces
-    #   are indexed, queries without user context information may return
-    #   restricted items from a personal space in their results. For more
-    #   information, see [Filtering on user context][1].
+    #   `TRUE` to index personal spaces. You can add restrictions to items
+    #   in personal spaces. If personal spaces are indexed, queries without
+    #   user context information may return restricted items from a personal
+    #   space in their results. For more information, see [Filtering on user
+    #   context][1].
     #
     #
     #
@@ -1654,7 +2079,7 @@ module Aws::Kendra
     #   @return [Boolean]
     #
     # @!attribute [rw] crawl_archived_spaces
-    #   Specifies whether Amazon Kendra should index archived spaces.
+    #   `TRUE` to index archived spaces.
     #   @return [Boolean]
     #
     # @!attribute [rw] include_spaces
@@ -1674,13 +2099,18 @@ module Aws::Kendra
     #   @return [Array<String>]
     #
     # @!attribute [rw] space_field_mappings
-    #   Defines how space metadata fields should be mapped to index fields.
-    #   Before you can map a field, you must first create an index field
-    #   with a matching type using the console or the `UpdateIndex`
-    #   operation.
+    #   Maps attributes or field names of Confluence spaces to Amazon Kendra
+    #   index field names. To create custom fields, use the `UpdateIndex`
+    #   API before you map to Confluence fields. For more information, see
+    #   [Mapping data source fields][1]. The Confluence data source field
+    #   names must exist in your Confluence custom metadata.
     #
     #   If you specify the `SpaceFieldMappings` parameter, you must specify
     #   at least one field mapping.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
     #   @return [Array<Types::ConfluenceSpaceToIndexFieldMapping>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ConfluenceSpaceConfiguration AWS API Documentation
@@ -1695,11 +2125,15 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Defines the mapping between a field in the Confluence data source to a
-    # Amazon Kendra index field.
+    # &gt;Maps attributes or field names of Confluence spaces to Amazon
+    # Kendra index field names. To create custom fields, use the
+    # `UpdateIndex` API before you map to Confluence fields. For more
+    # information, see [Mapping data source fields][1]. The Confluence data
+    # source field names must exist in your Confluence custom metadata.
     #
-    # You must first create the index field using the `UpdateIndex`
-    # operation.
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
     #
     # @note When making an API call, you may pass ConfluenceSpaceToIndexFieldMapping
     #   data as a hash:
@@ -1736,7 +2170,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides the information necessary to connect to a database.
+    # Provides the configuration information that's required to connect to
+    # a database.
     #
     # @note When making an API call, you may pass ConnectionConfiguration
     #   data as a hash:
@@ -1791,8 +2226,9 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Configuration information for your content sources, such as data
-    # sources, FAQs, and content indexed directly via [BatchPutDocument][1].
+    # Provides the configuration information for your content sources, such
+    # as data sources, FAQs, and content indexed directly via
+    # [BatchPutDocument][1].
     #
     #
     #
@@ -1819,7 +2255,7 @@ module Aws::Kendra
     #
     # @!attribute [rw] direct_put_content
     #   `TRUE` to use documents you indexed directly using the
-    #   `BatchPutDocument` operation.
+    #   `BatchPutDocument` API.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ContentSourceConfiguration AWS API Documentation
@@ -1832,13 +2268,139 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # A corrected misspelled word in a query.
+    #
+    # @!attribute [rw] begin_offset
+    #   The zero-based location in the response string or text where the
+    #   corrected word starts.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_offset
+    #   The zero-based location in the response string or text where the
+    #   corrected word ends.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] term
+    #   The string or text of a misspelled word in a query.
+    #   @return [String]
+    #
+    # @!attribute [rw] corrected_term
+    #   The string or text of a corrected misspelled word in a query.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/Correction AWS API Documentation
+    #
+    class Correction < Struct.new(
+      :begin_offset,
+      :end_offset,
+      :term,
+      :corrected_term)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateAccessControlConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_id: "IndexId", # required
+    #         name: "AccessControlConfigurationName", # required
+    #         description: "Description",
+    #         access_control_list: [
+    #           {
+    #             name: "PrincipalName", # required
+    #             type: "USER", # required, accepts USER, GROUP
+    #             access: "ALLOW", # required, accepts ALLOW, DENY
+    #             data_source_id: "DataSourceId",
+    #           },
+    #         ],
+    #         hierarchical_access_control_list: [
+    #           {
+    #             principal_list: [ # required
+    #               {
+    #                 name: "PrincipalName", # required
+    #                 type: "USER", # required, accepts USER, GROUP
+    #                 access: "ALLOW", # required, accepts ALLOW, DENY
+    #                 data_source_id: "DataSourceId",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         client_token: "ClientTokenName",
+    #       }
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index to create an access control
+    #   configuration for your documents.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A name for the access control configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description for the access control configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_control_list
+    #   Information on principals (users and/or groups) and which documents
+    #   they should have access to. This is useful for user context
+    #   filtering, where search results are filtered based on the user or
+    #   their group access to documents.
+    #   @return [Array<Types::Principal>]
+    #
+    # @!attribute [rw] hierarchical_access_control_list
+    #   The list of [principal][1] lists that define the hierarchy for which
+    #   documents users should have access to.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_Principal.html
+    #   @return [Array<Types::HierarchicalPrincipal>]
+    #
+    # @!attribute [rw] client_token
+    #   A token that you provide to identify the request to create an access
+    #   control configuration. Multiple calls to the
+    #   `CreateAccessControlConfiguration` API with the same client token
+    #   will create only one access control configuration.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CreateAccessControlConfigurationRequest AWS API Documentation
+    #
+    class CreateAccessControlConfigurationRequest < Struct.new(
+      :index_id,
+      :name,
+      :description,
+      :access_control_list,
+      :hierarchical_access_control_list,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The identifier of the access control configuration for your
+    #   documents in an index.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CreateAccessControlConfigurationResponse AWS API Documentation
+    #
+    class CreateAccessControlConfigurationResponse < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateDataSourceRequest
     #   data as a hash:
     #
     #       {
     #         name: "DataSourceName", # required
     #         index_id: "IndexId", # required
-    #         type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE, WEBCRAWLER, WORKDOCS
+    #         type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE, WEBCRAWLER, WORKDOCS, FSX, SLACK, BOX, QUIP, JIRA, GITHUB, ALFRESCO
     #         configuration: {
     #           s3_configuration: {
     #             bucket_name: "S3BucketName", # required
@@ -1877,6 +2439,7 @@ module Aws::Kendra
     #               bucket: "S3BucketName", # required
     #               key: "S3ObjectKey", # required
     #             },
+    #             authentication_type: "HTTP_BASIC", # accepts HTTP_BASIC, OAUTH2
     #           },
     #           database_configuration: {
     #             database_engine_type: "RDS_AURORA_MYSQL", # required, accepts RDS_AURORA_MYSQL, RDS_AURORA_POSTGRESQL, RDS_MYSQL, RDS_POSTGRESQL
@@ -2150,6 +2713,308 @@ module Aws::Kendra
     #               },
     #             ],
     #           },
+    #           fsx_configuration: {
+    #             file_system_id: "FileSystemId", # required
+    #             file_system_type: "WINDOWS", # required, accepts WINDOWS
+    #             vpc_configuration: { # required
+    #               subnet_ids: ["SubnetId"], # required
+    #               security_group_ids: ["VpcSecurityGroupId"], # required
+    #             },
+    #             secret_arn: "SecretArn",
+    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #           },
+    #           slack_configuration: {
+    #             team_id: "TeamId", # required
+    #             secret_arn: "SecretArn", # required
+    #             vpc_configuration: {
+    #               subnet_ids: ["SubnetId"], # required
+    #               security_group_ids: ["VpcSecurityGroupId"], # required
+    #             },
+    #             slack_entity_list: ["PUBLIC_CHANNEL"], # required, accepts PUBLIC_CHANNEL, PRIVATE_CHANNEL, GROUP_MESSAGE, DIRECT_MESSAGE
+    #             use_change_log: false,
+    #             crawl_bot_message: false,
+    #             exclude_archived: false,
+    #             since_crawl_date: "SinceCrawlDate", # required
+    #             look_back_period: 1,
+    #             private_channel_filter: ["String"],
+    #             public_channel_filter: ["String"],
+    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #           },
+    #           box_configuration: {
+    #             enterprise_id: "EnterpriseId", # required
+    #             secret_arn: "SecretArn", # required
+    #             use_change_log: false,
+    #             crawl_comments: false,
+    #             crawl_tasks: false,
+    #             crawl_web_links: false,
+    #             file_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             task_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             comment_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             web_link_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             vpc_configuration: {
+    #               subnet_ids: ["SubnetId"], # required
+    #               security_group_ids: ["VpcSecurityGroupId"], # required
+    #             },
+    #           },
+    #           quip_configuration: {
+    #             domain: "Domain", # required
+    #             secret_arn: "SecretArn", # required
+    #             crawl_file_comments: false,
+    #             crawl_chat_rooms: false,
+    #             crawl_attachments: false,
+    #             folder_ids: ["FolderId"],
+    #             thread_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             message_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             attachment_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             vpc_configuration: {
+    #               subnet_ids: ["SubnetId"], # required
+    #               security_group_ids: ["VpcSecurityGroupId"], # required
+    #             },
+    #           },
+    #           jira_configuration: {
+    #             jira_account_url: "JiraAccountUrl", # required
+    #             secret_arn: "SecretArn", # required
+    #             use_change_log: false,
+    #             project: ["String"],
+    #             issue_type: ["String"],
+    #             status: ["String"],
+    #             issue_sub_entity_filter: ["COMMENTS"], # accepts COMMENTS, ATTACHMENTS, WORKLOGS
+    #             attachment_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             comment_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             issue_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             project_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             work_log_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             vpc_configuration: {
+    #               subnet_ids: ["SubnetId"], # required
+    #               security_group_ids: ["VpcSecurityGroupId"], # required
+    #             },
+    #           },
+    #           git_hub_configuration: {
+    #             saa_s_configuration: {
+    #               organization_name: "OrganizationName", # required
+    #               host_url: "Url", # required
+    #             },
+    #             on_premise_configuration: {
+    #               host_url: "Url", # required
+    #               organization_name: "OrganizationName", # required
+    #               ssl_certificate_s3_path: { # required
+    #                 bucket: "S3BucketName", # required
+    #                 key: "S3ObjectKey", # required
+    #               },
+    #             },
+    #             type: "SAAS", # accepts SAAS, ON_PREMISE
+    #             secret_arn: "SecretArn", # required
+    #             use_change_log: false,
+    #             git_hub_document_crawl_properties: {
+    #               crawl_repository_documents: false,
+    #               crawl_issue: false,
+    #               crawl_issue_comment: false,
+    #               crawl_issue_comment_attachment: false,
+    #               crawl_pull_request: false,
+    #               crawl_pull_request_comment: false,
+    #               crawl_pull_request_comment_attachment: false,
+    #             },
+    #             repository_filter: ["RepositoryName"],
+    #             inclusion_folder_name_patterns: ["String"],
+    #             inclusion_file_type_patterns: ["String"],
+    #             inclusion_file_name_patterns: ["String"],
+    #             exclusion_folder_name_patterns: ["String"],
+    #             exclusion_file_type_patterns: ["String"],
+    #             exclusion_file_name_patterns: ["String"],
+    #             vpc_configuration: {
+    #               subnet_ids: ["SubnetId"], # required
+    #               security_group_ids: ["VpcSecurityGroupId"], # required
+    #             },
+    #             git_hub_repository_configuration_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             git_hub_commit_configuration_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             git_hub_issue_document_configuration_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             git_hub_issue_comment_configuration_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             git_hub_issue_attachment_configuration_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             git_hub_pull_request_comment_configuration_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             git_hub_pull_request_document_configuration_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             git_hub_pull_request_document_attachment_configuration_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #           },
+    #           alfresco_configuration: {
+    #             site_url: "SiteUrl", # required
+    #             site_id: "SiteId", # required
+    #             secret_arn: "SecretArn", # required
+    #             ssl_certificate_s3_path: { # required
+    #               bucket: "S3BucketName", # required
+    #               key: "S3ObjectKey", # required
+    #             },
+    #             crawl_system_folders: false,
+    #             crawl_comments: false,
+    #             entity_filter: ["wiki"], # accepts wiki, blog, documentLibrary
+    #             document_library_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             blog_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             wiki_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             vpc_configuration: {
+    #               subnet_ids: ["SubnetId"], # required
+    #               security_group_ids: ["VpcSecurityGroupId"], # required
+    #             },
+    #           },
     #         },
     #         description: "Description",
     #         schedule: "ScanSchedule",
@@ -2221,22 +3086,22 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] name
-    #   A unique name for the data source. A data source name can't be
-    #   changed without deleting and recreating the data source.
+    #   A unique name for the data source connector. A data source name
+    #   can't be changed without deleting and recreating the data source
+    #   connector.
     #   @return [String]
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index that should be associated with this data
-    #   source.
+    #   The identifier of the index you want to use with the data source
+    #   connector.
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of repository that contains the data source.
+    #   The type of data source repository. For example, `SHAREPOINT`.
     #   @return [String]
     #
     # @!attribute [rw] configuration
-    #   The connector configuration information that is required to access
-    #   the repository.
+    #   Configuration information to connect to your data source repository.
     #
     #   You can't specify the `Configuration` parameter when the `Type`
     #   parameter is set to `CUSTOM`. If you do, you receive a
@@ -2247,14 +3112,14 @@ module Aws::Kendra
     #   @return [Types::DataSourceConfiguration]
     #
     # @!attribute [rw] description
-    #   A description for the data source.
+    #   A description for the data source connector.
     #   @return [String]
     #
     # @!attribute [rw] schedule
-    #   Sets the frequency that Amazon Kendra will check the documents in
-    #   your repository and update the index. If you don't set a schedule
-    #   Amazon Kendra will not periodically update the index. You can call
-    #   the `StartDataSourceSyncJob` operation to update the index.
+    #   Sets the frequency for Amazon Kendra to check the documents in your
+    #   data source repository and update the index. If you don't set a
+    #   schedule Amazon Kendra will not periodically update the index. You
+    #   can call the `StartDataSourceSyncJob` API to update the index.
     #
     #   You can't specify the `Schedule` parameter when the `Type`
     #   parameter is set to `CUSTOM`. If you do, you receive a
@@ -2263,8 +3128,8 @@ module Aws::Kendra
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of a role with permission to access
-    #   the data source. For more information, see [IAM Roles for Amazon
-    #   Kendra][1].
+    #   the data source connector. For more information, see [IAM Roles for
+    #   Amazon Kendra][1].
     #
     #   You can't specify the `RoleArn` parameter when the `Type` parameter
     #   is set to `CUSTOM`. If you do, you receive a `ValidationException`
@@ -2278,15 +3143,15 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A list of key-value pairs that identify the data source. You can use
-    #   the tags to identify and organize your resources and to control
-    #   access to resources.
+    #   A list of key-value pairs that identify the data source connector.
+    #   You can use the tags to identify and organize your resources and to
+    #   control access to resources.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] client_token
     #   A token that you provide to identify the request to create a data
-    #   source. Multiple calls to the `CreateDataSource` operation with the
-    #   same client token will create only one data source.
+    #   source connector. Multiple calls to the `CreateDataSource` API with
+    #   the same client token will create only one data source connector.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -2294,9 +3159,9 @@ module Aws::Kendra
     #
     # @!attribute [rw] language_code
     #   The code for a language. This allows you to support a language for
-    #   all documents when creating the data source. English is supported by
-    #   default. For more information on supported languages, including
-    #   their codes, see [Adding documents in languages other than
+    #   all documents when creating the data source connector. English is
+    #   supported by default. For more information on supported languages,
+    #   including their codes, see [Adding documents in languages other than
     #   English][1].
     #
     #
@@ -2306,7 +3171,7 @@ module Aws::Kendra
     #
     # @!attribute [rw] custom_document_enrichment_configuration
     #   Configuration information for altering document metadata and content
-    #   during the document ingestion process when you create a data source.
+    #   during the document ingestion process.
     #
     #   For more information on how to create, modify and delete document
     #   metadata, or make other content alterations when you ingest
@@ -2337,7 +3202,7 @@ module Aws::Kendra
     end
 
     # @!attribute [rw] id
-    #   A unique identifier for the data source.
+    #   The identifier of the data source connector.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CreateDataSourceResponse AWS API Documentation
@@ -2379,10 +3244,9 @@ module Aws::Kendra
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of a role with permission to access
-    #   `Query` operations, `QuerySuggestions` operations, `SubmitFeedback`
-    #   operations, and Amazon Web Services SSO that stores your user and
-    #   group information. For more information, see [IAM roles for Amazon
-    #   Kendra][1].
+    #   `Query` API, `QuerySuggestions` API, `SubmitFeedback` API, and
+    #   Amazon Web Services SSO that stores your user and group information.
+    #   For more information, see [IAM roles for Amazon Kendra][1].
     #
     #
     #
@@ -2390,11 +3254,11 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] configuration
-    #   Provides the configuration information for your Amazon Kendra
-    #   experience. This includes `ContentSourceConfiguration`, which
-    #   specifies the data source IDs and/or FAQ IDs, and
-    #   `UserIdentityConfiguration`, which specifies the user or group
-    #   information to grant access to your Amazon Kendra experience.
+    #   Configuration information for your Amazon Kendra experience. This
+    #   includes `ContentSourceConfiguration`, which specifies the data
+    #   source IDs and/or FAQ IDs, and `UserIdentityConfiguration`, which
+    #   specifies the user or group information to grant access to your
+    #   Amazon Kendra experience.
     #   @return [Types::ExperienceConfiguration]
     #
     # @!attribute [rw] description
@@ -2404,7 +3268,7 @@ module Aws::Kendra
     # @!attribute [rw] client_token
     #   A token that you provide to identify the request to create your
     #   Amazon Kendra experience. Multiple calls to the `CreateExperience`
-    #   operation with the same client token creates only one Amazon Kendra
+    #   API with the same client token creates only one Amazon Kendra
     #   experience.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -2460,19 +3324,19 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index that contains the FAQ.
+    #   The identifier of the index for the FAQ.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name that should be associated with the FAQ.
+    #   A name for the FAQ.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A description of the FAQ.
+    #   A description for the FAQ.
     #   @return [String]
     #
     # @!attribute [rw] s3_path
-    #   The S3 location of the FAQ input data.
+    #   The path to the FAQ file in S3.
     #   @return [Types::S3Path]
     #
     # @!attribute [rw] role_arn
@@ -2492,7 +3356,7 @@ module Aws::Kendra
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] file_format
-    #   The format of the input file. You can choose between a basic CSV
+    #   The format of the FAQ input file. You can choose between a basic CSV
     #   format, a CSV format that includes customs attributes in a header,
     #   and a JSON format that includes custom attributes.
     #
@@ -2508,8 +3372,8 @@ module Aws::Kendra
     #
     # @!attribute [rw] client_token
     #   A token that you provide to identify the request to create a FAQ.
-    #   Multiple calls to the `CreateFaqRequest` operation with the same
-    #   client token will create only one FAQ.
+    #   Multiple calls to the `CreateFaqRequest` API with the same client
+    #   token will create only one FAQ.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -2596,7 +3460,7 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] name
-    #   The name for the new index.
+    #   A name for the index.
     #   @return [String]
     #
     # @!attribute [rw] edition
@@ -2618,14 +3482,14 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   An Identity and Access Management(IAM) role that gives Amazon Kendra
-    #   permissions to access your Amazon CloudWatch logs and metrics. This
-    #   is also the role used when you use the `BatchPutDocument` operation
-    #   to index documents from an Amazon S3 bucket.
+    #   An Identity and Access Management (IAM) role that gives Amazon
+    #   Kendra permissions to access your Amazon CloudWatch logs and
+    #   metrics. This is also the role you use when you call the
+    #   `BatchPutDocument` API to index documents from an Amazon S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] server_side_encryption_configuration
-    #   The identifier of the KMScustomer managed key (CMK) to use to
+    #   The identifier of the KMS customer managed key (CMK) that's used to
     #   encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't
     #   support asymmetric CMKs.
     #   @return [Types::ServerSideEncryptionConfiguration]
@@ -2636,8 +3500,8 @@ module Aws::Kendra
     #
     # @!attribute [rw] client_token
     #   A token that you provide to identify the request to create an index.
-    #   Multiple calls to the `CreateIndex` operation with the same client
-    #   token will create only one index.
+    #   Multiple calls to the `CreateIndex` API with the same client token
+    #   will create only one index.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -2778,10 +3642,10 @@ module Aws::Kendra
     #   The IAM (Identity and Access Management) role used by Amazon Kendra
     #   to access the block list text file in your S3 bucket.
     #
-    #   You need permissions to the role ARN (Amazon Resource Name). The
-    #   role needs S3 read permissions to your file in S3 and needs to give
-    #   STS (Security Token Service) assume role permissions to Amazon
-    #   Kendra.
+    #   You need permissions to the role ARN (Amazon Web Services Resource
+    #   Name). The role needs S3 read permissions to your file in S3 and
+    #   needs to give STS (Security Token Service) assume role permissions
+    #   to Amazon Kendra.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2837,15 +3701,15 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] index_id
-    #   The unique identifier of the index for the new thesaurus.
+    #   The identifier of the index for the thesaurus.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name for the new thesaurus.
+    #   A name for the thesaurus.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description for the new thesaurus.
+    #   A description for the thesaurus.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -2860,13 +3724,13 @@ module Aws::Kendra
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] source_s3_path
-    #   The thesaurus file Amazon S3 source path.
+    #   The path to the thesaurus file in S3.
     #   @return [Types::S3Path]
     #
     # @!attribute [rw] client_token
     #   A token that you provide to identify the request to create a
-    #   thesaurus. Multiple calls to the `CreateThesaurus` operation with
-    #   the same client token will create only one thesaurus.
+    #   thesaurus. Multiple calls to the `CreateThesaurus` API with the same
+    #   client token will create only one thesaurus.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -3020,7 +3884,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Configuration information for an Amazon Kendra data source.
+    # Provides the configuration information for an Amazon Kendra data
+    # source.
     #
     # @note When making an API call, you may pass DataSourceConfiguration
     #   data as a hash:
@@ -3063,6 +3928,7 @@ module Aws::Kendra
     #             bucket: "S3BucketName", # required
     #             key: "S3ObjectKey", # required
     #           },
+    #           authentication_type: "HTTP_BASIC", # accepts HTTP_BASIC, OAUTH2
     #         },
     #         database_configuration: {
     #           database_engine_type: "RDS_AURORA_MYSQL", # required, accepts RDS_AURORA_MYSQL, RDS_AURORA_POSTGRESQL, RDS_MYSQL, RDS_POSTGRESQL
@@ -3336,46 +4202,348 @@ module Aws::Kendra
     #             },
     #           ],
     #         },
+    #         fsx_configuration: {
+    #           file_system_id: "FileSystemId", # required
+    #           file_system_type: "WINDOWS", # required, accepts WINDOWS
+    #           vpc_configuration: { # required
+    #             subnet_ids: ["SubnetId"], # required
+    #             security_group_ids: ["VpcSecurityGroupId"], # required
+    #           },
+    #           secret_arn: "SecretArn",
+    #           inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #         },
+    #         slack_configuration: {
+    #           team_id: "TeamId", # required
+    #           secret_arn: "SecretArn", # required
+    #           vpc_configuration: {
+    #             subnet_ids: ["SubnetId"], # required
+    #             security_group_ids: ["VpcSecurityGroupId"], # required
+    #           },
+    #           slack_entity_list: ["PUBLIC_CHANNEL"], # required, accepts PUBLIC_CHANNEL, PRIVATE_CHANNEL, GROUP_MESSAGE, DIRECT_MESSAGE
+    #           use_change_log: false,
+    #           crawl_bot_message: false,
+    #           exclude_archived: false,
+    #           since_crawl_date: "SinceCrawlDate", # required
+    #           look_back_period: 1,
+    #           private_channel_filter: ["String"],
+    #           public_channel_filter: ["String"],
+    #           inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #         },
+    #         box_configuration: {
+    #           enterprise_id: "EnterpriseId", # required
+    #           secret_arn: "SecretArn", # required
+    #           use_change_log: false,
+    #           crawl_comments: false,
+    #           crawl_tasks: false,
+    #           crawl_web_links: false,
+    #           file_field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #           task_field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #           comment_field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #           web_link_field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #           inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           vpc_configuration: {
+    #             subnet_ids: ["SubnetId"], # required
+    #             security_group_ids: ["VpcSecurityGroupId"], # required
+    #           },
+    #         },
+    #         quip_configuration: {
+    #           domain: "Domain", # required
+    #           secret_arn: "SecretArn", # required
+    #           crawl_file_comments: false,
+    #           crawl_chat_rooms: false,
+    #           crawl_attachments: false,
+    #           folder_ids: ["FolderId"],
+    #           thread_field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #           message_field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #           attachment_field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #           inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           vpc_configuration: {
+    #             subnet_ids: ["SubnetId"], # required
+    #             security_group_ids: ["VpcSecurityGroupId"], # required
+    #           },
+    #         },
+    #         jira_configuration: {
+    #           jira_account_url: "JiraAccountUrl", # required
+    #           secret_arn: "SecretArn", # required
+    #           use_change_log: false,
+    #           project: ["String"],
+    #           issue_type: ["String"],
+    #           status: ["String"],
+    #           issue_sub_entity_filter: ["COMMENTS"], # accepts COMMENTS, ATTACHMENTS, WORKLOGS
+    #           attachment_field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #           comment_field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #           issue_field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #           project_field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #           work_log_field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #           inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           vpc_configuration: {
+    #             subnet_ids: ["SubnetId"], # required
+    #             security_group_ids: ["VpcSecurityGroupId"], # required
+    #           },
+    #         },
+    #         git_hub_configuration: {
+    #           saa_s_configuration: {
+    #             organization_name: "OrganizationName", # required
+    #             host_url: "Url", # required
+    #           },
+    #           on_premise_configuration: {
+    #             host_url: "Url", # required
+    #             organization_name: "OrganizationName", # required
+    #             ssl_certificate_s3_path: { # required
+    #               bucket: "S3BucketName", # required
+    #               key: "S3ObjectKey", # required
+    #             },
+    #           },
+    #           type: "SAAS", # accepts SAAS, ON_PREMISE
+    #           secret_arn: "SecretArn", # required
+    #           use_change_log: false,
+    #           git_hub_document_crawl_properties: {
+    #             crawl_repository_documents: false,
+    #             crawl_issue: false,
+    #             crawl_issue_comment: false,
+    #             crawl_issue_comment_attachment: false,
+    #             crawl_pull_request: false,
+    #             crawl_pull_request_comment: false,
+    #             crawl_pull_request_comment_attachment: false,
+    #           },
+    #           repository_filter: ["RepositoryName"],
+    #           inclusion_folder_name_patterns: ["String"],
+    #           inclusion_file_type_patterns: ["String"],
+    #           inclusion_file_name_patterns: ["String"],
+    #           exclusion_folder_name_patterns: ["String"],
+    #           exclusion_file_type_patterns: ["String"],
+    #           exclusion_file_name_patterns: ["String"],
+    #           vpc_configuration: {
+    #             subnet_ids: ["SubnetId"], # required
+    #             security_group_ids: ["VpcSecurityGroupId"], # required
+    #           },
+    #           git_hub_repository_configuration_field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #           git_hub_commit_configuration_field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #           git_hub_issue_document_configuration_field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #           git_hub_issue_comment_configuration_field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #           git_hub_issue_attachment_configuration_field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #           git_hub_pull_request_comment_configuration_field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #           git_hub_pull_request_document_configuration_field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #           git_hub_pull_request_document_attachment_configuration_field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #         },
+    #         alfresco_configuration: {
+    #           site_url: "SiteUrl", # required
+    #           site_id: "SiteId", # required
+    #           secret_arn: "SecretArn", # required
+    #           ssl_certificate_s3_path: { # required
+    #             bucket: "S3BucketName", # required
+    #             key: "S3ObjectKey", # required
+    #           },
+    #           crawl_system_folders: false,
+    #           crawl_comments: false,
+    #           entity_filter: ["wiki"], # accepts wiki, blog, documentLibrary
+    #           document_library_field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #           blog_field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #           wiki_field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #           inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           vpc_configuration: {
+    #             subnet_ids: ["SubnetId"], # required
+    #             security_group_ids: ["VpcSecurityGroupId"], # required
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] s3_configuration
-    #   Provides information to create a data source connector for a
-    #   document repository in an Amazon S3 bucket.
+    #   Provides the configuration information to connect to an Amazon S3
+    #   bucket as your data source.
     #   @return [Types::S3DataSourceConfiguration]
     #
     # @!attribute [rw] share_point_configuration
-    #   Provides information necessary to create a data source connector for
-    #   a Microsoft SharePoint site.
+    #   Provides the configuration information to connect to Microsoft
+    #   SharePoint as your data source.
     #   @return [Types::SharePointConfiguration]
     #
     # @!attribute [rw] database_configuration
-    #   Provides information necessary to create a data source connector for
-    #   a database.
+    #   Provides the configuration information to connect to a database as
+    #   your data source.
     #   @return [Types::DatabaseConfiguration]
     #
     # @!attribute [rw] salesforce_configuration
-    #   Provides configuration information for data sources that connect to
-    #   a Salesforce site.
+    #   Provides the configuration information to connect to Salesforce as
+    #   your data source.
     #   @return [Types::SalesforceConfiguration]
     #
     # @!attribute [rw] one_drive_configuration
-    #   Provides configuration for data sources that connect to Microsoft
-    #   OneDrive.
+    #   Provides the configuration information to connect to Microsoft
+    #   OneDrive as your data source.
     #   @return [Types::OneDriveConfiguration]
     #
     # @!attribute [rw] service_now_configuration
-    #   Provides configuration for data sources that connect to ServiceNow
-    #   instances.
+    #   Provides the configuration information to connect to ServiceNow as
+    #   your data source.
     #   @return [Types::ServiceNowConfiguration]
     #
     # @!attribute [rw] confluence_configuration
-    #   Provides configuration information for connecting to a Confluence
-    #   data source.
+    #   Provides the configuration information to connect to Confluence as
+    #   your data source.
     #   @return [Types::ConfluenceConfiguration]
     #
     # @!attribute [rw] google_drive_configuration
-    #   Provides configuration for data sources that connect to Google
-    #   Drive.
+    #   Provides the configuration information to connect to Google Drive as
+    #   your data source.
     #   @return [Types::GoogleDriveConfiguration]
     #
     # @!attribute [rw] web_crawler_configuration
@@ -3384,9 +4552,44 @@ module Aws::Kendra
     #   @return [Types::WebCrawlerConfiguration]
     #
     # @!attribute [rw] work_docs_configuration
-    #   Provides the configuration information to connect to WorkDocs as
-    #   your data source.
+    #   Provides the configuration information to connect to Amazon WorkDocs
+    #   as your data source.
     #   @return [Types::WorkDocsConfiguration]
+    #
+    # @!attribute [rw] fsx_configuration
+    #   Provides the configuration information to connect to Amazon FSx as
+    #   your data source.
+    #   @return [Types::FsxConfiguration]
+    #
+    # @!attribute [rw] slack_configuration
+    #   Provides the configuration information to connect to Slack as your
+    #   data source.
+    #   @return [Types::SlackConfiguration]
+    #
+    # @!attribute [rw] box_configuration
+    #   Provides the configuration information to connect to Box as your
+    #   data source.
+    #   @return [Types::BoxConfiguration]
+    #
+    # @!attribute [rw] quip_configuration
+    #   Provides the configuration information to connect to Quip as your
+    #   data source.
+    #   @return [Types::QuipConfiguration]
+    #
+    # @!attribute [rw] jira_configuration
+    #   Provides the configuration information to connect to Jira as your
+    #   data source.
+    #   @return [Types::JiraConfiguration]
+    #
+    # @!attribute [rw] git_hub_configuration
+    #   Provides the configuration information to connect to GitHub as your
+    #   data source.
+    #   @return [Types::GitHubConfiguration]
+    #
+    # @!attribute [rw] alfresco_configuration
+    #   Provides the configuration information to connect to Alfresco as
+    #   your data source.
+    #   @return [Types::AlfrescoConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DataSourceConfiguration AWS API Documentation
     #
@@ -3400,7 +4603,14 @@ module Aws::Kendra
       :confluence_configuration,
       :google_drive_configuration,
       :web_crawler_configuration,
-      :work_docs_configuration)
+      :work_docs_configuration,
+      :fsx_configuration,
+      :slack_configuration,
+      :box_configuration,
+      :quip_configuration,
+      :jira_configuration,
+      :git_hub_configuration,
+      :alfresco_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3436,8 +4646,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Summary information for a Amazon Kendra data source. Returned in a
-    # call to the `DescribeDataSource` operation.
+    # Summary information for an Amazon Kendra data source. Returned in a
+    # call to the `DescribeDataSource` API.
     #
     # @!attribute [rw] name
     #   The name of the data source.
@@ -3489,18 +4699,18 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides information about a synchronization job.
+    # Provides information about a data source synchronization job.
     #
     # @!attribute [rw] execution_id
     #   A unique identifier for the synchronization job.
     #   @return [String]
     #
     # @!attribute [rw] start_time
-    #   The UNIX datetime that the synchronization job was started.
+    #   The UNIX datetime that the synchronization job started.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
-    #   The UNIX datetime that the synchronization job was completed.
+    #   The UNIX datetime that the synchronization job completed.
     #   @return [Time]
     #
     # @!attribute [rw] status
@@ -3518,7 +4728,7 @@ module Aws::Kendra
     #
     # @!attribute [rw] error_code
     #   If the `Status` field is set to `FAILED`, the `ErrorCode` field
-    #   contains a the reason that the synchronization failed.
+    #   indicates the reason the synchronization failed.
     #   @return [String]
     #
     # @!attribute [rw] data_source_error_code
@@ -3626,8 +4836,7 @@ module Aws::Kendra
     end
 
     # Maps a column or attribute in the data source to an index field. You
-    # must first create the fields in the index using the `UpdateIndex`
-    # operation.
+    # must first create the fields in the index using the `UpdateIndex` API.
     #
     # @note When making an API call, you may pass DataSourceToIndexFieldMapping
     #   data as a hash:
@@ -3660,7 +4869,7 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides information for connecting to an Amazon VPC.
+    # Provides the configuration information to connect to an Amazon VPC.
     #
     # @note When making an API call, you may pass DataSourceVpcConfiguration
     #   data as a hash:
@@ -3691,7 +4900,7 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides the information necessary to connect a database to an index.
+    # Provides the configuration information to connect to a index.
     #
     # @note When making an API call, you may pass DatabaseConfiguration
     #   data as a hash:
@@ -3735,11 +4944,11 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] connection_configuration
-    #   The information necessary to connect to a database.
+    #   Configuration information that's required to connect to a database.
     #   @return [Types::ConnectionConfiguration]
     #
     # @!attribute [rw] vpc_configuration
-    #   Provides information for connecting to an Amazon VPC.
+    #   Provides the configuration information to connect to an Amazon VPC.
     #   @return [Types::DataSourceVpcConfiguration]
     #
     # @!attribute [rw] column_configuration
@@ -3770,6 +4979,36 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteAccessControlConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_id: "IndexId", # required
+    #         id: "AccessControlConfigurationId", # required
+    #       }
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index for an access control configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The identifier of the access control configuration you want to
+    #   delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DeleteAccessControlConfigurationRequest AWS API Documentation
+    #
+    class DeleteAccessControlConfigurationRequest < Struct.new(
+      :index_id,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DeleteAccessControlConfigurationResponse AWS API Documentation
+    #
+    class DeleteAccessControlConfigurationResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteDataSourceRequest
     #   data as a hash:
     #
@@ -3779,11 +5018,11 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] id
-    #   The unique identifier of the data source to delete.
+    #   The identifier of the data source you want to delete.
     #   @return [String]
     #
     # @!attribute [rw] index_id
-    #   The unique identifier of the index associated with the data source.
+    #   The identifier of the index used with the data source.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DeleteDataSourceRequest AWS API Documentation
@@ -3808,8 +5047,7 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index for your Amazon Kendra experience you
-    #   want to delete.
+    #   The identifier of the index for your Amazon Kendra experience.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DeleteExperienceRequest AWS API Documentation
@@ -3834,11 +5072,11 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] id
-    #   The identifier of the FAQ to remove.
+    #   The identifier of the FAQ you want to remove.
     #   @return [String]
     #
     # @!attribute [rw] index_id
-    #   The index to remove the FAQ from.
+    #   The identifier of the index for the FAQ.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DeleteFaqRequest AWS API Documentation
@@ -3858,7 +5096,7 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] id
-    #   The identifier of the index to delete.
+    #   The identifier of the index you want to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DeleteIndexRequest AWS API Documentation
@@ -3886,15 +5124,15 @@ module Aws::Kendra
     # @!attribute [rw] data_source_id
     #   The identifier of the data source you want to delete a group from.
     #
-    #   This is useful if a group is tied to multiple data sources and you
-    #   want to delete a group from accessing documents in a certain data
-    #   source. For example, the groups "Research", "Engineering", and
-    #   "Sales and Marketing" are all tied to the company's documents
-    #   stored in the data sources Confluence and Salesforce. You want to
-    #   delete "Research" and "Engineering" groups from Salesforce, so
-    #   that these groups cannot access customer-related documents stored in
-    #   Salesforce. Only "Sales and Marketing" should access documents in
-    #   the Salesforce data source.
+    #   A group can be tied to multiple data sources. You can delete a group
+    #   from accessing documents in a certain data source. For example, the
+    #   groups "Research", "Engineering", and "Sales and Marketing"
+    #   are all tied to the company's documents stored in the data sources
+    #   Confluence and Salesforce. You want to delete "Research" and
+    #   "Engineering" groups from Salesforce, so that these groups cannot
+    #   access customer-related documents stored in Salesforce. Only "Sales
+    #   and Marketing" should access documents in the Salesforce data
+    #   source.
     #   @return [String]
     #
     # @!attribute [rw] group_id
@@ -3940,11 +5178,11 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] index_id
-    #   The identifier of the you want to delete a block list from.
+    #   The identifier of the index for the block list.
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The unique identifier of the block list that needs to be deleted.
+    #   The identifier of the block list you want to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DeleteQuerySuggestionsBlockListRequest AWS API Documentation
@@ -3965,11 +5203,11 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] id
-    #   The identifier of the thesaurus to delete.
+    #   The identifier of the thesaurus you want to delete.
     #   @return [String]
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index associated with the thesaurus to delete.
+    #   The identifier of the index for the thesaurus.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DeleteThesaurusRequest AWS API Documentation
@@ -3977,6 +5215,73 @@ module Aws::Kendra
     class DeleteThesaurusRequest < Struct.new(
       :id,
       :index_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeAccessControlConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_id: "IndexId", # required
+    #         id: "AccessControlConfigurationId", # required
+    #       }
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index for an access control configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The identifier of the access control configuration you want to get
+    #   information on.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeAccessControlConfigurationRequest AWS API Documentation
+    #
+    class DescribeAccessControlConfigurationRequest < Struct.new(
+      :index_id,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name for the access control configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description for the access control configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message containing details if there are issues processing
+    #   the access control configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_control_list
+    #   Information on principals (users and/or groups) and which documents
+    #   they should have access to. This is useful for user context
+    #   filtering, where search results are filtered based on the user or
+    #   their group access to documents.
+    #   @return [Array<Types::Principal>]
+    #
+    # @!attribute [rw] hierarchical_access_control_list
+    #   The list of [principal][1] lists that define the hierarchy for which
+    #   documents users should have access to.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_Principal.html
+    #   @return [Array<Types::HierarchicalPrincipal>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeAccessControlConfigurationResponse AWS API Documentation
+    #
+    class DescribeAccessControlConfigurationResponse < Struct.new(
+      :name,
+      :description,
+      :error_message,
+      :access_control_list,
+      :hierarchical_access_control_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3990,11 +5295,11 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] id
-    #   The unique identifier of the data source to describe.
+    #   The identifier of the data source.
     #   @return [String]
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index that contains the data source.
+    #   The identifier of the index used with the data source.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeDataSourceRequest AWS API Documentation
@@ -4023,9 +5328,9 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] configuration
-    #   Information that describes where the data source is located and how
-    #   the data source is configured. The specific information in the
-    #   description depends on the data source provider.
+    #   Configuration details for the data source. This shows how the data
+    #   source is configured. The configuration options for a data source
+    #   depend on the data source provider.
     #   @return [Types::DataSourceConfiguration]
     #
     # @!attribute [rw] created_at
@@ -4037,7 +5342,7 @@ module Aws::Kendra
     #   @return [Time]
     #
     # @!attribute [rw] description
-    #   The description of the data source.
+    #   The description for the data source.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -4048,7 +5353,7 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] schedule
-    #   The schedule that Amazon Kendra will update the data source.
+    #   The schedule for Amazon Kendra to update the index.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -4123,8 +5428,7 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index for your Amazon Kendra experience you
-    #   want to get information on.
+    #   The identifier of the index for your Amazon Kendra experience.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeExperienceRequest AWS API Documentation
@@ -4182,9 +5486,9 @@ module Aws::Kendra
     #
     # @!attribute [rw] role_arn
     #   Shows the Amazon Resource Name (ARN) of a role with permission to
-    #   access `Query` operations, `QuerySuggestions` operations,
-    #   `SubmitFeedback` operations, and Amazon Web Services SSO that stores
-    #   your user and group information.
+    #   access `Query` API, `QuerySuggestions` API, `SubmitFeedback` API,
+    #   and Amazon Web Services SSO that stores your user and group
+    #   information.
     #   @return [String]
     #
     # @!attribute [rw] error_message
@@ -4218,11 +5522,11 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] id
-    #   The unique identifier of the FAQ.
+    #   The identifier of the FAQ you want to get information on.
     #   @return [String]
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index that contains the FAQ.
+    #   The identifier of the index for the FAQ.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeFaqRequest AWS API Documentation
@@ -4239,7 +5543,7 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index that contains the FAQ.
+    #   The identifier of the index for the FAQ.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -4319,7 +5623,7 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] id
-    #   The name of the index to describe.
+    #   The identifier of the index you want to get information on.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeIndexRequest AWS API Documentation
@@ -4335,7 +5639,7 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The name of the index.
+    #   The identifier of the index.
     #   @return [String]
     #
     # @!attribute [rw] edition
@@ -4349,8 +5653,8 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] server_side_encryption_configuration
-    #   The identifier of the KMScustomer master key (CMK) used to encrypt
-    #   your data. Amazon Kendra doesn't support asymmetric CMKs.
+    #   The identifier of the KMScustomer master key (CMK) that is used to
+    #   encrypt your data. Amazon Kendra doesn't support asymmetric CMKs.
     #   @return [Types::ServerSideEncryptionConfiguration]
     #
     # @!attribute [rw] status
@@ -4360,7 +5664,7 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the index.
+    #   The description for the index.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -4372,8 +5676,10 @@ module Aws::Kendra
     #   @return [Time]
     #
     # @!attribute [rw] document_metadata_configurations
-    #   Configuration settings for any metadata applied to the documents in
-    #   the index.
+    #   Configuration information for document metadata or fields. Document
+    #   metadata are fields or attributes associated with your documents.
+    #   For example, the company department name associated with each
+    #   document.
     #   @return [Array<Types::DocumentMetadataConfiguration>]
     #
     # @!attribute [rw] index_statistics
@@ -4382,16 +5688,21 @@ module Aws::Kendra
     #   @return [Types::IndexStatistics]
     #
     # @!attribute [rw] error_message
-    #   When th e`Status` field value is `FAILED`, the `ErrorMessage` field
+    #   When the `Status` field value is `FAILED`, the `ErrorMessage` field
     #   contains a message that explains why.
     #   @return [String]
     #
     # @!attribute [rw] capacity_units
-    #   For Enterprise edition indexes, you can choose to use additional
+    #   For Enterprise Edition indexes, you can choose to use additional
     #   capacity to meet the needs of your application. This contains the
-    #   capacity units used for the index. A 0 for the query capacity or the
-    #   storage capacity indicates that the index is using the default
-    #   capacity for the index.
+    #   capacity units used for the index. A query or document storage
+    #   capacity of zero indicates that the index is using the default
+    #   capacity. For more information on the default capacity for an index
+    #   and adjusting this, see [Adjusting capacity][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/adjusting-capacity.html
     #   @return [Types::CapacityUnitsConfiguration]
     #
     # @!attribute [rw] user_token_configurations
@@ -4403,7 +5714,7 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] user_group_resolution_configuration
-    #   Shows whether you have enabled the configuration for fetching access
+    #   Whether you have enabled the configuration for fetching access
     #   levels of groups and users from an Amazon Web Services Single Sign
     #   On identity source.
     #   @return [Types::UserGroupResolutionConfiguration]
@@ -4524,7 +5835,7 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The unique identifier of the block list.
+    #   The identifier of the block list you want to get information on.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeQuerySuggestionsBlockListRequest AWS API Documentation
@@ -4537,38 +5848,37 @@ module Aws::Kendra
     end
 
     # @!attribute [rw] index_id
-    #   Shows the identifier of the index for the block list.
+    #   The identifier of the index for the block list.
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   Shows the unique identifier of the block list.
+    #   The identifier of the block list.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   Shows the name of the block list.
+    #   The name of the block list.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Shows the description for the block list.
+    #   The description for the block list.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   Shows whether the current status of the block list is `ACTIVE` or
-    #   `INACTIVE`.
+    #   The current status of the block list. When the value is `ACTIVE`,
+    #   the block list is ready for use.
     #   @return [String]
     #
     # @!attribute [rw] error_message
-    #   Shows the error message with details when there are issues in
-    #   processing the block list.
+    #   The error message containing details if there are issues processing
+    #   the block list.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Shows the date-time a block list for query suggestions was created.
+    #   The date-time a block list for query suggestions was created.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
-    #   Shows the date-time a block list for query suggestions was last
-    #   updated.
+    #   The date-time a block list for query suggestions was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] source_s3_path
@@ -4587,17 +5897,17 @@ module Aws::Kendra
     #   @return [Types::S3Path]
     #
     # @!attribute [rw] item_count
-    #   Shows the current number of valid, non-empty words or phrases in the
-    #   block list text file.
+    #   The current number of valid, non-empty words or phrases in the block
+    #   list text file.
     #   @return [Integer]
     #
     # @!attribute [rw] file_size_bytes
-    #   Shows the current size of the block list text file in S3.
+    #   The current size of the block list text file in S3.
     #   @return [Integer]
     #
     # @!attribute [rw] role_arn
-    #   Shows the current IAM (Identity and Access Management) role used by
-    #   Amazon Kendra to access the block list text file in S3.
+    #   The IAM (Identity and Access Management) role used by Amazon Kendra
+    #   to access the block list text file in S3.
     #
     #   The role needs S3 read permissions to your file in S3 and needs to
     #   give STS (Security Token Service) assume role permissions to Amazon
@@ -4631,8 +5941,8 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index you want to describe query suggestions
-    #   settings for.
+    #   The identifier of the index with query suggestions that you want to
+    #   get information on.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeQuerySuggestionsConfigRequest AWS API Documentation
@@ -4644,12 +5954,12 @@ module Aws::Kendra
     end
 
     # @!attribute [rw] mode
-    #   Shows whether query suggestions are currently in `ENABLED` mode or
+    #   Whether query suggestions are currently in `ENABLED` mode or
     #   `LEARN_ONLY` mode.
     #
     #   By default, Amazon Kendra enables query suggestions.`LEARN_ONLY`
     #   turns off query suggestions for your users. You can change the mode
-    #   using the [UpdateQuerySuggestionsConfig][1] operation.
+    #   using the [UpdateQuerySuggestionsConfig][1] API.
     #
     #
     #
@@ -4657,39 +5967,38 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   Shows whether the status of query suggestions settings is currently
-    #   Active or Updating.
+    #   Whether the status of query suggestions settings is currently
+    #   `ACTIVE` or `UPDATING`.
     #
     #   Active means the current settings apply and Updating means your
     #   changed settings are in the process of applying.
     #   @return [String]
     #
     # @!attribute [rw] query_log_look_back_window_in_days
-    #   Shows how recent your queries are in your query log time window (in
-    #   days).
+    #   How recent your queries are in your query log time window (in days).
     #   @return [Integer]
     #
     # @!attribute [rw] include_queries_without_user_information
-    #   Shows whether Amazon Kendra uses all queries or only uses queries
-    #   that include user information to generate query suggestions.
+    #   `TRUE` to use all queries, otherwise use only queries that include
+    #   user information to generate the query suggestions.
     #   @return [Boolean]
     #
     # @!attribute [rw] minimum_number_of_querying_users
-    #   Shows the minimum number of unique users who must search a query in
-    #   order for the query to be eligible to suggest to your users.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] minimum_query_count
-    #   Shows the minimum number of times a query must be searched in order
+    #   The minimum number of unique users who must search a query in order
     #   for the query to be eligible to suggest to your users.
     #   @return [Integer]
     #
+    # @!attribute [rw] minimum_query_count
+    #   The minimum number of times a query must be searched in order for
+    #   the query to be eligible to suggest to your users.
+    #   @return [Integer]
+    #
     # @!attribute [rw] last_suggestions_build_time
-    #   Shows the date-time query suggestions for an index was last updated.
+    #   The date-time query suggestions for an index was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] last_clear_time
-    #   Shows the date-time query suggestions for an index was last cleared.
+    #   The date-time query suggestions for an index was last cleared.
     #
     #   After you clear suggestions, Amazon Kendra learns new suggestions
     #   based on new queries added to the query log from the time you
@@ -4698,7 +6007,7 @@ module Aws::Kendra
     #   @return [Time]
     #
     # @!attribute [rw] total_suggestions_count
-    #   Shows the current total count of query suggestions for an index.
+    #   The current total count of query suggestions for an index.
     #
     #   This count can change when you update your query suggestions
     #   settings, if you filter out certain queries from suggestions using a
@@ -4731,12 +6040,11 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] id
-    #   The identifier of the thesaurus to describe.
+    #   The identifier of the thesaurus you want to get information on.
     #   @return [String]
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index associated with the thesaurus to
-    #   describe.
+    #   The identifier of the index for the thesaurus.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeThesaurusRequest AWS API Documentation
@@ -4753,8 +6061,7 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index associated with the thesaurus to
-    #   describe.
+    #   The identifier of the index for the thesaurus.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -4972,10 +6279,17 @@ module Aws::Kendra
     #           },
     #         ],
     #         content_type: "PDF", # accepts PDF, HTML, MS_WORD, PLAIN_TEXT, PPT
+    #         access_control_configuration_id: "AccessControlConfigurationId",
     #       }
     #
     # @!attribute [rw] id
     #   A unique identifier of the document in the index.
+    #
+    #   Note, each document ID must be unique per index. You cannot create a
+    #   data source to index your documents with their unique IDs and then
+    #   use the `BatchPutDocument` API to index the same documents, or vice
+    #   versa. You can delete a data source and then use the
+    #   `BatchPutDocument` API to index the same documents, or vice versa.
     #   @return [String]
     #
     # @!attribute [rw] title
@@ -4987,9 +6301,9 @@ module Aws::Kendra
     #
     #   Documents passed to the `Blob` parameter must be base64 encoded.
     #   Your code might not need to encode the document file bytes if
-    #   you're using an Amazon Web Services SDK to call Amazon Kendra
-    #   operations. If you are calling the Amazon Kendra endpoint directly
-    #   using REST, you must base64 encode the contents before sending.
+    #   you're using an Amazon Web Services SDK to call Amazon Kendra APIs.
+    #   If you are calling the Amazon Kendra endpoint directly using REST,
+    #   you must base64 encode the contents before sending.
     #   @return [String]
     #
     # @!attribute [rw] s3_path
@@ -5001,11 +6315,19 @@ module Aws::Kendra
     #   attributes to provide additional information for searching, to
     #   provide facets for refining searches, and to provide additional
     #   information in the query response.
+    #
+    #   For example, 'DataSourceId' and 'DataSourceSyncJobId' are custom
+    #   attributes that provide information on the synchronization of
+    #   documents running on a data source. Note, 'DataSourceSyncJobId'
+    #   could be an optional custom attribute as Amazon Kendra will use the
+    #   ID of a running sync job.
     #   @return [Array<Types::DocumentAttribute>]
     #
     # @!attribute [rw] access_control_list
-    #   Information on user and group access rights, which is used for user
-    #   context filtering.
+    #   Information on principals (users and/or groups) and which documents
+    #   they should have access to. This is useful for user context
+    #   filtering, where search results are filtered based on the user or
+    #   their group access to documents.
     #   @return [Array<Types::Principal>]
     #
     # @!attribute [rw] hierarchical_access_control_list
@@ -5021,6 +6343,11 @@ module Aws::Kendra
     #   The file type of the document in the `Blob` field.
     #   @return [String]
     #
+    # @!attribute [rw] access_control_configuration_id
+    #   The identifier of the access control configuration that you want to
+    #   apply to the document.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/Document AWS API Documentation
     #
     class Document < Struct.new(
@@ -5031,15 +6358,14 @@ module Aws::Kendra
       :attributes,
       :access_control_list,
       :hierarchical_access_control_list,
-      :content_type)
+      :content_type,
+      :access_control_configuration_id)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # A custom attribute value assigned to a document.
-    #
-    # For more information on how to create custom document attributes, see
-    # [Custom Attributes][1].
+    # A document attribute or metadata field. To create custom document
+    # attributes, see [Custom attributes][1].
     #
     #
     #
@@ -5213,8 +6539,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # The value of a custom document attribute. You can only provide one
-    # value for a custom attribute.
+    # The value of a document attribute. You can only provide one value for
+    # a document attribute.
     #
     # @note When making an API call, you may pass DocumentAttributeValue
     #   data as a hash:
@@ -5262,7 +6588,7 @@ module Aws::Kendra
     # doing a faceted search.
     #
     # @!attribute [rw] document_attribute_value
-    #   The value of the attribute. For example, "HR."
+    #   The value of the attribute. For example, "HR".
     #   @return [Types::DocumentAttributeValue]
     #
     # @!attribute [rw] count
@@ -5270,11 +6596,27 @@ module Aws::Kendra
     #   value for the key.
     #   @return [Integer]
     #
+    # @!attribute [rw] facet_results
+    #   Contains the results of a document attribute that is a nested facet.
+    #   A `FacetResult` contains the counts for each facet nested within a
+    #   facet.
+    #
+    #   For example, the document attribute or facet "Department" includes
+    #   a value called "Engineering". In addition, the document attribute
+    #   or facet "SubDepartment" includes the values "Frontend" and
+    #   "Backend" for documents assigned to "Engineering". You can
+    #   display nested facets in the search results so that documents can be
+    #   searched not only by department but also by a sub department within
+    #   a department. The counts for documents that belong to "Frontend"
+    #   and "Backend" within "Engineering" are returned for a query.
+    #   @return [Array<Types::FacetResult>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DocumentAttributeValueCountPair AWS API Documentation
     #
     class DocumentAttributeValueCountPair < Struct.new(
       :document_attribute_value,
-      :count)
+      :count,
+      :facet_results)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5334,7 +6676,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Specifies the properties of a custom index field.
+    # Specifies the properties, such as relevance tuning and searchability,
+    # of an index field.
     #
     # @note When making an API call, you may pass DocumentMetadataConfiguration
     #   data as a hash:
@@ -5368,8 +6711,8 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] relevance
-    #   Provides manual tuning parameters to determine how the field affects
-    #   the search results.
+    #   Provides tuning parameters to determine how the field affects the
+    #   search results.
     #   @return [Types::Relevance]
     #
     # @!attribute [rw] search
@@ -5406,13 +6749,12 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the tuning configuration to override document relevance
-    #   at the index level.
+    #   The name of the index field.
     #   @return [String]
     #
     # @!attribute [rw] relevance
-    #   Provides information for manually tuning the relevance of a field in
-    #   a search. When a query includes terms that match the field, the
+    #   Provides information for tuning the relevance of a field in a
+    #   search. When a query includes terms that match the field, the
     #   results are given a boost in the response based on these tuning
     #   parameters.
     #   @return [Types::Relevance]
@@ -5453,7 +6795,7 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides the configuration information of users or groups in your
+    # Provides the configuration information for users or groups in your
     # Amazon Web Services SSO identity source to grant access your Amazon
     # Kendra experience.
     #
@@ -5517,7 +6859,7 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides the configuration information of users or groups in your
+    # Provides the configuration information for users or groups in your
     # Amazon Web Services SSO identity source for access to your Amazon
     # Kendra experience. Specific permissions are defined for each user or
     # group once they are granted access to your Amazon Kendra experience.
@@ -5556,7 +6898,7 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Specifies the configuration information for your Amazon Kendra
+    # Provides the configuration information for your Amazon Kendra
     # experience. This includes the data source IDs and/or FAQ IDs, and user
     # or group information to grant access to your Amazon Kendra experience.
     #
@@ -5577,8 +6919,8 @@ module Aws::Kendra
     # @!attribute [rw] content_source_configuration
     #   The identifiers of your data sources and FAQs. Or, you can specify
     #   that you want to use documents indexed via the `BatchPutDocument`
-    #   operation. This is the content you want to use for your Amazon
-    #   Kendra experience.
+    #   API. This is the content you want to use for your Amazon Kendra
+    #   experience.
     #   @return [Types::ContentSourceConfiguration]
     #
     # @!attribute [rw] user_identity_configuration
@@ -5595,8 +6937,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides the configuration information of the endpoint for your Amazon
-    # Kendra experience.
+    # Provides the configuration information for the endpoint for your
+    # Amazon Kendra experience.
     #
     # @!attribute [rw] endpoint_type
     #   The type of endpoint for your Amazon Kendra experience. The type
@@ -5693,23 +7035,78 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Information about a document attribute
+    # Information about a document attribute. You can use document
+    # attributes as facets.
+    #
+    # For example, the document attribute or facet "Department" includes
+    # the values "HR", "Engineering", and "Accounting". You can
+    # display these values in the search results so that documents can be
+    # searched by department.
+    #
+    # You can display up to 10 facet values per facet for a query. If you
+    # want to increase this limit, contact [Support][1].
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/contact-us/
     #
     # @note When making an API call, you may pass Facet
     #   data as a hash:
     #
     #       {
     #         document_attribute_key: "DocumentAttributeKey",
+    #         facets: [
+    #           {
+    #             document_attribute_key: "DocumentAttributeKey",
+    #             facets: {
+    #               # recursive FacetList
+    #             },
+    #             max_results: 1,
+    #           },
+    #         ],
+    #         max_results: 1,
     #       }
     #
     # @!attribute [rw] document_attribute_key
     #   The unique key for the document attribute.
     #   @return [String]
     #
+    # @!attribute [rw] facets
+    #   An array of document attributes that are nested facets within a
+    #   facet.
+    #
+    #   For example, the document attribute or facet "Department" includes
+    #   a value called "Engineering". In addition, the document attribute
+    #   or facet "SubDepartment" includes the values "Frontend" and
+    #   "Backend" for documents assigned to "Engineering". You can
+    #   display nested facets in the search results so that documents can be
+    #   searched not only by department but also by a sub department within
+    #   a department. This helps your users further narrow their search.
+    #
+    #   You can only have one nested facet within a facet. If you want to
+    #   increase this limit, contact [Support][1].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/contact-us/
+    #   @return [Array<Types::Facet>]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of facet values per facet. The default is 10. You can
+    #   use this to limit the number of facet values to less than 10. If you
+    #   want to increase the default, contact [Support][1].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/contact-us/
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/Facet AWS API Documentation
     #
     class Facet < Struct.new(
-      :document_attribute_key)
+      :document_attribute_key,
+      :facets,
+      :max_results)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5782,8 +7179,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides information about a frequently asked questions and answer
-    # contained in an index.
+    # Summary information for frequently asked questions and answers
+    # included in an index.
     #
     # @!attribute [rw] id
     #   The unique identifier of the FAQ.
@@ -5833,6 +7230,116 @@ module Aws::Kendra
       :updated_at,
       :file_format,
       :language_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the configuration information to connect to Amazon FSx as
+    # your data source.
+    #
+    # @note When making an API call, you may pass FsxConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         file_system_id: "FileSystemId", # required
+    #         file_system_type: "WINDOWS", # required, accepts WINDOWS
+    #         vpc_configuration: { # required
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #         secret_arn: "SecretArn",
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] file_system_id
+    #   The identifier of the Amazon FSx file system.
+    #
+    #   You can find your file system ID on the file system dashboard in the
+    #   Amazon FSx console. For information on how to create a file system
+    #   in Amazon FSx console, using Windows File Server as an example, see
+    #   [Amazon FSx Getting started guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/getting-started-step1.html
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_type
+    #   The Amazon FSx file system type. Windows is currently the only
+    #   supported type.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_configuration
+    #   Configuration information for an Amazon Virtual Private Cloud to
+    #   connect to your Amazon FSx. Your Amazon FSx instance must reside
+    #   inside your VPC.
+    #   @return [Types::DataSourceVpcConfiguration]
+    #
+    # @!attribute [rw] secret_arn
+    #   The Amazon Resource Name (ARN) of an Secrets Manager secret that
+    #   contains the key-value pairs required to connect to your Amazon FSx
+    #   file system. Windows is currently the only supported type. The
+    #   secret must contain a JSON structure with the following keys:
+    #
+    #   * username—The Active Directory user name, along with the Domain
+    #     Name System (DNS) domain name. For example,
+    #     *user@corp.example.com*. The Active Directory user account must
+    #     have read and mounting access to the Amazon FSx file system for
+    #     Windows.
+    #
+    #   * password—The password of the Active Directory user account with
+    #     read and mounting access to the Amazon FSx Windows file system.
+    #   @return [String]
+    #
+    # @!attribute [rw] inclusion_patterns
+    #   A list of regular expression patterns to include certain files in
+    #   your Amazon FSx file system. Files that match the patterns are
+    #   included in the index. Files that don't match the patterns are
+    #   excluded from the index. If a file matches both an inclusion and
+    #   exclusion pattern, the exclusion pattern takes precedence and the
+    #   file isn't included in the index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] exclusion_patterns
+    #   A list of regular expression patterns to exclude certain files in
+    #   your Amazon FSx file system. Files that match the patterns are
+    #   excluded from the index. Files that don't match the patterns are
+    #   included in the index. If a file matches both an inclusion and
+    #   exclusion pattern, the exclusion pattern takes precedence and the
+    #   file isn't included in the index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] field_mappings
+    #   A list of `DataSourceToIndexFieldMapping` objects that map Amazon
+    #   FSx data source attributes or field names to Amazon Kendra index
+    #   field names. To create custom fields, use the `UpdateIndex` API
+    #   before you map to Amazon FSx fields. For more information, see
+    #   [Mapping data source fields][1]. The Amazon FSx data source field
+    #   names must exist in your Amazon FSx custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/FsxConfiguration AWS API Documentation
+    #
+    class FsxConfiguration < Struct.new(
+      :file_system_id,
+      :file_system_type,
+      :vpc_configuration,
+      :secret_arn,
+      :inclusion_patterns,
+      :exclusion_patterns,
+      :field_mappings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5999,8 +7506,415 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides configuration information for data sources that connect to
-    # Google Drive.
+    # Provides the configuration information to connect to GitHub as your
+    # data source.
+    #
+    # @note When making an API call, you may pass GitHubConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         saa_s_configuration: {
+    #           organization_name: "OrganizationName", # required
+    #           host_url: "Url", # required
+    #         },
+    #         on_premise_configuration: {
+    #           host_url: "Url", # required
+    #           organization_name: "OrganizationName", # required
+    #           ssl_certificate_s3_path: { # required
+    #             bucket: "S3BucketName", # required
+    #             key: "S3ObjectKey", # required
+    #           },
+    #         },
+    #         type: "SAAS", # accepts SAAS, ON_PREMISE
+    #         secret_arn: "SecretArn", # required
+    #         use_change_log: false,
+    #         git_hub_document_crawl_properties: {
+    #           crawl_repository_documents: false,
+    #           crawl_issue: false,
+    #           crawl_issue_comment: false,
+    #           crawl_issue_comment_attachment: false,
+    #           crawl_pull_request: false,
+    #           crawl_pull_request_comment: false,
+    #           crawl_pull_request_comment_attachment: false,
+    #         },
+    #         repository_filter: ["RepositoryName"],
+    #         inclusion_folder_name_patterns: ["String"],
+    #         inclusion_file_type_patterns: ["String"],
+    #         inclusion_file_name_patterns: ["String"],
+    #         exclusion_folder_name_patterns: ["String"],
+    #         exclusion_file_type_patterns: ["String"],
+    #         exclusion_file_name_patterns: ["String"],
+    #         vpc_configuration: {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #         git_hub_repository_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         git_hub_commit_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         git_hub_issue_document_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         git_hub_issue_comment_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         git_hub_issue_attachment_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         git_hub_pull_request_comment_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         git_hub_pull_request_document_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         git_hub_pull_request_document_attachment_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] saa_s_configuration
+    #   Configuration information to connect to GitHub Enterprise Cloud
+    #   (SaaS).
+    #   @return [Types::SaaSConfiguration]
+    #
+    # @!attribute [rw] on_premise_configuration
+    #   Configuration information to connect to GitHub Enterprise Server (on
+    #   premises).
+    #   @return [Types::OnPremiseConfiguration]
+    #
+    # @!attribute [rw] type
+    #   The type of GitHub service you want to connect to—GitHub Enterprise
+    #   Cloud (SaaS) or GitHub Enterprise Server (on premises).
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_arn
+    #   The Amazon Resource Name (ARN) of an Secrets Manager secret that
+    #   contains the key-value pairs required to connect to your GitHub. The
+    #   secret must contain a JSON structure with the following keys:
+    #
+    #   * githubToken—The access token created in GitHub. For more
+    #     information on creating a token in GitHub, see [Authentication for
+    #     a GitHub data source][1].
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-github.html#github-authentication
+    #   @return [String]
+    #
+    # @!attribute [rw] use_change_log
+    #   `TRUE` to use the GitHub change log to determine which documents
+    #   require updating in the index. Depending on the GitHub change log's
+    #   size, it may take longer for Amazon Kendra to use the change log
+    #   than to scan all of your documents in GitHub.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] git_hub_document_crawl_properties
+    #   Configuration information to include certain types of GitHub
+    #   content. You can configure to index repository files only, or also
+    #   include issues and pull requests, comments, and comment attachments.
+    #   @return [Types::GitHubDocumentCrawlProperties]
+    #
+    # @!attribute [rw] repository_filter
+    #   A list of names of the specific repositories you want to index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] inclusion_folder_name_patterns
+    #   A list of regular expression patterns to include certain folder
+    #   names in your GitHub repository or repositories. Folder names that
+    #   match the patterns are included in the index. Folder names that
+    #   don't match the patterns are excluded from the index. If a folder
+    #   matches both an inclusion and exclusion pattern, the exclusion
+    #   pattern takes precedence and the folder isn't included in the
+    #   index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] inclusion_file_type_patterns
+    #   A list of regular expression patterns to include certain file types
+    #   in your GitHub repository or repositories. File types that match the
+    #   patterns are included in the index. File types that don't match the
+    #   patterns are excluded from the index. If a file matches both an
+    #   inclusion and exclusion pattern, the exclusion pattern takes
+    #   precedence and the file isn't included in the index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] inclusion_file_name_patterns
+    #   A list of regular expression patterns to include certain file names
+    #   in your GitHub repository or repositories. File names that match the
+    #   patterns are included in the index. File names that don't match the
+    #   patterns are excluded from the index. If a file matches both an
+    #   inclusion and exclusion pattern, the exclusion pattern takes
+    #   precedence and the file isn't included in the index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] exclusion_folder_name_patterns
+    #   A list of regular expression patterns to exclude certain folder
+    #   names in your GitHub repository or repositories. Folder names that
+    #   match the patterns are excluded from the index. Folder names that
+    #   don't match the patterns are included in the index. If a folder
+    #   matches both an exclusion and inclusion pattern, the exclusion
+    #   pattern takes precedence and the folder isn't included in the
+    #   index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] exclusion_file_type_patterns
+    #   A list of regular expression patterns to exclude certain file types
+    #   in your GitHub repository or repositories. File types that match the
+    #   patterns are excluded from the index. File types that don't match
+    #   the patterns are included in the index. If a file matches both an
+    #   exclusion and inclusion pattern, the exclusion pattern takes
+    #   precedence and the file isn't included in the index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] exclusion_file_name_patterns
+    #   A list of regular expression patterns to exclude certain file names
+    #   in your GitHub repository or repositories. File names that match the
+    #   patterns are excluded from the index. File names that don't match
+    #   the patterns are included in the index. If a file matches both an
+    #   exclusion and inclusion pattern, the exclusion pattern takes
+    #   precedence and the file isn't included in the index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_configuration
+    #   Configuration information of an Amazon Virtual Private Cloud to
+    #   connect to your GitHub. For more information, see [Configuring a
+    #   VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html
+    #   @return [Types::DataSourceVpcConfiguration]
+    #
+    # @!attribute [rw] git_hub_repository_configuration_field_mappings
+    #   A list of `DataSourceToIndexFieldMapping` objects that map GitHub
+    #   repository attributes or field names to Amazon Kendra index field
+    #   names. To create custom fields, use the `UpdateIndex` API before you
+    #   map to GitHub fields. For more information, see [Mapping data source
+    #   fields][1]. The GitHub data source field names must exist in your
+    #   GitHub custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @!attribute [rw] git_hub_commit_configuration_field_mappings
+    #   A list of `DataSourceToIndexFieldMapping` objects that map
+    #   attributes or field names of GitHub commits to Amazon Kendra index
+    #   field names. To create custom fields, use the `UpdateIndex` API
+    #   before you map to GitHub fields. For more information, see [Mapping
+    #   data source fields][1]. The GitHub data source field names must
+    #   exist in your GitHub custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @!attribute [rw] git_hub_issue_document_configuration_field_mappings
+    #   A list of `DataSourceToIndexFieldMapping` objects that map
+    #   attributes or field names of GitHub issues to Amazon Kendra index
+    #   field names. To create custom fields, use the `UpdateIndex` API
+    #   before you map to GitHub fields. For more information, see [Mapping
+    #   data source fields][1]. The GitHub data source field names must
+    #   exist in your GitHub custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @!attribute [rw] git_hub_issue_comment_configuration_field_mappings
+    #   A list of `DataSourceToIndexFieldMapping` objects that map
+    #   attributes or field names of GitHub issue comments to Amazon Kendra
+    #   index field names. To create custom fields, use the `UpdateIndex`
+    #   API before you map to GitHub fields. For more information, see
+    #   [Mapping data source fields][1]. The GitHub data source field names
+    #   must exist in your GitHub custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @!attribute [rw] git_hub_issue_attachment_configuration_field_mappings
+    #   A list of `DataSourceToIndexFieldMapping` objects that map
+    #   attributes or field names of GitHub issue attachments to Amazon
+    #   Kendra index field names. To create custom fields, use the
+    #   `UpdateIndex` API before you map to GitHub fields. For more
+    #   information, see [Mapping data source fields][1]. The GitHub data
+    #   source field names must exist in your GitHub custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @!attribute [rw] git_hub_pull_request_comment_configuration_field_mappings
+    #   A list of `DataSourceToIndexFieldMapping` objects that map
+    #   attributes or field names of GitHub pull request comments to Amazon
+    #   Kendra index field names. To create custom fields, use the
+    #   `UpdateIndex` API before you map to GitHub fields. For more
+    #   information, see [Mapping data source fields][1]. The GitHub data
+    #   source field names must exist in your GitHub custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @!attribute [rw] git_hub_pull_request_document_configuration_field_mappings
+    #   A list of `DataSourceToIndexFieldMapping` objects that map
+    #   attributes or field names of GitHub pull requests to Amazon Kendra
+    #   index field names. To create custom fields, use the `UpdateIndex`
+    #   API before you map to GitHub fields. For more information, see
+    #   [Mapping data source fields][1]. The GitHub data source field names
+    #   must exist in your GitHub custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @!attribute [rw] git_hub_pull_request_document_attachment_configuration_field_mappings
+    #   A list of `DataSourceToIndexFieldMapping` objects that map
+    #   attributes or field names of GitHub pull request attachments to
+    #   Amazon Kendra index field names. To create custom fields, use the
+    #   `UpdateIndex` API before you map to GitHub fields. For more
+    #   information, see [Mapping data source fields][1]. The GitHub data
+    #   source field names must exist in your GitHub custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/GitHubConfiguration AWS API Documentation
+    #
+    class GitHubConfiguration < Struct.new(
+      :saa_s_configuration,
+      :on_premise_configuration,
+      :type,
+      :secret_arn,
+      :use_change_log,
+      :git_hub_document_crawl_properties,
+      :repository_filter,
+      :inclusion_folder_name_patterns,
+      :inclusion_file_type_patterns,
+      :inclusion_file_name_patterns,
+      :exclusion_folder_name_patterns,
+      :exclusion_file_type_patterns,
+      :exclusion_file_name_patterns,
+      :vpc_configuration,
+      :git_hub_repository_configuration_field_mappings,
+      :git_hub_commit_configuration_field_mappings,
+      :git_hub_issue_document_configuration_field_mappings,
+      :git_hub_issue_comment_configuration_field_mappings,
+      :git_hub_issue_attachment_configuration_field_mappings,
+      :git_hub_pull_request_comment_configuration_field_mappings,
+      :git_hub_pull_request_document_configuration_field_mappings,
+      :git_hub_pull_request_document_attachment_configuration_field_mappings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the configuration information to include certain types of
+    # GitHub content. You can configure to index repository files only, or
+    # also include issues and pull requests, comments, and comment
+    # attachments.
+    #
+    # @note When making an API call, you may pass GitHubDocumentCrawlProperties
+    #   data as a hash:
+    #
+    #       {
+    #         crawl_repository_documents: false,
+    #         crawl_issue: false,
+    #         crawl_issue_comment: false,
+    #         crawl_issue_comment_attachment: false,
+    #         crawl_pull_request: false,
+    #         crawl_pull_request_comment: false,
+    #         crawl_pull_request_comment_attachment: false,
+    #       }
+    #
+    # @!attribute [rw] crawl_repository_documents
+    #   `TRUE` to index all files with a repository.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] crawl_issue
+    #   `TRUE` to index all issues within a repository.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] crawl_issue_comment
+    #   `TRUE` to index all comments on issues.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] crawl_issue_comment_attachment
+    #   `TRUE` to include all comment attachments for issues.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] crawl_pull_request
+    #   `TRUE` to index all pull requests within a repository.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] crawl_pull_request_comment
+    #   `TRUE` to index all comments on pull requests.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] crawl_pull_request_comment_attachment
+    #   `TRUE` to include all comment attachments for pull requests.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/GitHubDocumentCrawlProperties AWS API Documentation
+    #
+    class GitHubDocumentCrawlProperties < Struct.new(
+      :crawl_repository_documents,
+      :crawl_issue,
+      :crawl_issue_comment,
+      :crawl_issue_comment_attachment,
+      :crawl_pull_request,
+      :crawl_pull_request_comment,
+      :crawl_pull_request_comment_attachment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the configuration information to connect to Google Drive as
+    # your data source.
     #
     # @note When making an API call, you may pass GoogleDriveConfiguration
     #   data as a hash:
@@ -6033,30 +7947,34 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] inclusion_patterns
-    #   A list of regular expression patterns that apply to path on Google
-    #   Drive. Items that match the pattern are included in the index from
-    #   both shared drives and users' My Drives. Items that don't match
-    #   the pattern are excluded from the index. If an item matches both an
-    #   inclusion pattern and an exclusion pattern, it is excluded from the
-    #   index.
+    #   A list of regular expression patterns to include certain items in
+    #   your Google Drive, including shared drives and users' My Drives.
+    #   Items that match the patterns are included in the index. Items that
+    #   don't match the patterns are excluded from the index. If an item
+    #   matches both an inclusion and exclusion pattern, the exclusion
+    #   pattern takes precedence and the item isn't included in the index.
     #   @return [Array<String>]
     #
     # @!attribute [rw] exclusion_patterns
-    #   A list of regular expression patterns that apply to the path on
-    #   Google Drive. Items that match the pattern are excluded from the
-    #   index from both shared drives and users' My Drives. Items that
-    #   don't match the pattern are included in the index. If an item
-    #   matches both an exclusion pattern and an inclusion pattern, it is
-    #   excluded from the index.
+    #   A list of regular expression patterns to exclude certain items in
+    #   your Google Drive, including shared drives and users' My Drives.
+    #   Items that match the patterns are excluded from the index. Items
+    #   that don't match the patterns are included in the index. If an item
+    #   matches both an inclusion and exclusion pattern, the exclusion
+    #   pattern takes precedence and the item isn't included in the index.
     #   @return [Array<String>]
     #
     # @!attribute [rw] field_mappings
-    #   Defines mapping between a field in the Google Drive and a Amazon
-    #   Kendra index field.
+    #   Maps Google Drive data source attributes or field names to Amazon
+    #   Kendra index field names. To create custom fields, use the
+    #   `UpdateIndex` API before you map to Google Drive fields. For more
+    #   information, see [Mapping data source fields][1]. The Google Drive
+    #   data source field names must exist in your Google Drive custom
+    #   metadata.
     #
-    #   If you are using the console, you can define index fields when
-    #   creating the mapping. If you are using the API, you must first
-    #   create the field using the `UpdateIndex` operation.
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
     #   @return [Array<Types::DataSourceToIndexFieldMapping>]
     #
     # @!attribute [rw] exclude_mime_types
@@ -6096,9 +8014,9 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # A list of users or sub groups that belong to a group. Users and groups
-    # are useful for filtering search results to different users based on
-    # their group's access to documents.
+    # A list of users or sub groups that belong to a group. This is useful
+    # for user context filtering, where search results are filtered based on
+    # the user or their group access to documents.
     #
     # @note When making an API call, you may pass GroupMembers
     #   data as a hash:
@@ -6159,8 +8077,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Information on the processing of `PUT` and `DELETE` actions for
-    # mapping users to their groups.
+    # Summary information on the processing of `PUT` and `DELETE` actions
+    # for mapping users to their groups.
     #
     # @!attribute [rw] status
     #   The current processing status of actions for mapping users to their
@@ -6200,7 +8118,7 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Group summary information.
+    # Summary information for groups.
     #
     # @!attribute [rw] group_id
     #   The identifier of the group you want group summary information on.
@@ -6364,15 +8282,15 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # A summary of information about an index.
+    # Summary information on the configuration of an index.
     #
     # @!attribute [rw] name
-    #   The name of the index.
+    #   The identifier of the index.
     #   @return [String]
     #
     # @!attribute [rw] id
     #   A unique identifier for the index. Use this to identify the index
-    #   when you are using operations such as `Query`, `DescribeIndex`,
+    #   when you are using APIs such as `Query`, `DescribeIndex`,
     #   `UpdateIndex`, and `DeleteIndex`.
     #   @return [String]
     #
@@ -6387,7 +8305,7 @@ module Aws::Kendra
     #
     # @!attribute [rw] updated_at
     #   The Unix timestamp when the index was last updated by the
-    #   `UpdateIndex` operation.
+    #   `UpdateIndex` API.
     #   @return [Time]
     #
     # @!attribute [rw] status
@@ -6519,7 +8437,224 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Configuration information for the JSON token type.
+    # Provides the configuration information to connect to Jira as your data
+    # source.
+    #
+    # @note When making an API call, you may pass JiraConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         jira_account_url: "JiraAccountUrl", # required
+    #         secret_arn: "SecretArn", # required
+    #         use_change_log: false,
+    #         project: ["String"],
+    #         issue_type: ["String"],
+    #         status: ["String"],
+    #         issue_sub_entity_filter: ["COMMENTS"], # accepts COMMENTS, ATTACHMENTS, WORKLOGS
+    #         attachment_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         comment_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         issue_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         project_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         work_log_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         vpc_configuration: {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] jira_account_url
+    #   The URL of the Jira account. For example, *company.atlassian.net* or
+    #   *https://jira.company.com*. You can find your Jira account URL in
+    #   the URL of your profile page for Jira desktop.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_arn
+    #   The Amazon Resource Name (ARN) of a secret in Secrets Manager
+    #   contains the key-value pairs required to connect to your Jira data
+    #   source. The secret must contain a JSON structure with the following
+    #   keys:
+    #
+    #   * jiraId—The Jira username.
+    #
+    #   * jiraCredentials—The Jira API token. For more information on
+    #     creating an API token in Jira, see [ Authentication for a Jira
+    #     data source][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-jira.html#jira-authentication
+    #   @return [String]
+    #
+    # @!attribute [rw] use_change_log
+    #   `TRUE` to use the Jira change log to determine which documents
+    #   require updating in the index. Depending on the change log's size,
+    #   it may take longer for Amazon Kendra to use the change log than to
+    #   scan all of your documents in Jira.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] project
+    #   Specify which projects to crawl in your Jira data source. You can
+    #   specify one or more Jira project IDs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] issue_type
+    #   Specify which issue types to crawl in your Jira data source. You can
+    #   specify one or more of these options to crawl.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] status
+    #   Specify which statuses to crawl in your Jira data source. You can
+    #   specify one or more of these options to crawl.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] issue_sub_entity_filter
+    #   Specify whether to crawl comments, attachments, and work logs. You
+    #   can specify one or more of these options.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] attachment_field_mappings
+    #   A list of DataSourceToIndexFieldMapping objects that map attributes
+    #   or field names of Jira attachments to Amazon Kendra index field
+    #   names. To create custom fields, use the UpdateIndex API before you
+    #   map to Jira fields. For more information, see [ Mapping data source
+    #   fields][1]. The Jira data source field names must exist in your Jira
+    #   custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @!attribute [rw] comment_field_mappings
+    #   A list of DataSourceToIndexFieldMapping objects that map attributes
+    #   or field names of Jira comments to Amazon Kendra index field names.
+    #   To create custom fields, use the UpdateIndex API before you map to
+    #   Jira fields. For more information, see [ Mapping data source
+    #   fields][1]. The Jira data source field names must exist in your Jira
+    #   custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @!attribute [rw] issue_field_mappings
+    #   A list of DataSourceToIndexFieldMapping objects that map attributes
+    #   or field names of Jira issues to Amazon Kendra index field names. To
+    #   create custom fields, use the UpdateIndex API before you map to Jira
+    #   fields. For more information, see [ Mapping data source fields][1].
+    #   The Jira data source field names must exist in your Jira custom
+    #   metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @!attribute [rw] project_field_mappings
+    #   A list of DataSourceToIndexFieldMapping objects that map attributes
+    #   or field names of Jira projects to Amazon Kendra index field names.
+    #   To create custom fields, use the UpdateIndex API before you map to
+    #   Jira fields. For more information, see [ Mapping data source
+    #   fields][1]. The Jira data source field names must exist in your Jira
+    #   custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @!attribute [rw] work_log_field_mappings
+    #   A list of DataSourceToIndexFieldMapping objects that map attributes
+    #   or field names of Jira work logs to Amazon Kendra index field names.
+    #   To create custom fields, use the UpdateIndex API before you map to
+    #   Jira fields. For more information, see [ Mapping data source
+    #   fields][1]. The Jira data source field names must exist in your Jira
+    #   custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @!attribute [rw] inclusion_patterns
+    #   A list of regular expression patterns to include certain file paths,
+    #   file names, and file types in your Jira data source. Files that
+    #   match the patterns are included in the index. Files that don't
+    #   match the patterns are excluded from the index. If a file matches
+    #   both an inclusion pattern and an exclusion pattern, the exclusion
+    #   pattern takes precedence and the file isn't included in the index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] exclusion_patterns
+    #   A list of regular expression patterns to exclude certain file paths,
+    #   file names, and file types in your Jira data source. Files that
+    #   match the patterns are excluded from the index. Files that don’t
+    #   match the patterns are included in the index. If a file matches both
+    #   an inclusion pattern and an exclusion pattern, the exclusion pattern
+    #   takes precedence and the file isn't included in the index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_configuration
+    #   Configuration information for an Amazon Virtual Private Cloud to
+    #   connect to your Jira. Your Jira account must reside inside your VPC.
+    #   @return [Types::DataSourceVpcConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/JiraConfiguration AWS API Documentation
+    #
+    class JiraConfiguration < Struct.new(
+      :jira_account_url,
+      :secret_arn,
+      :use_change_log,
+      :project,
+      :issue_type,
+      :status,
+      :issue_sub_entity_filter,
+      :attachment_field_mappings,
+      :comment_field_mappings,
+      :issue_field_mappings,
+      :project_field_mappings,
+      :work_log_field_mappings,
+      :inclusion_patterns,
+      :exclusion_patterns,
+      :vpc_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the configuration information for the JSON token type.
     #
     # @note When making an API call, you may pass JsonTokenTypeConfiguration
     #   data as a hash:
@@ -6546,7 +8681,7 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Configuration information for the JWT token type.
+    # Provides the configuration information for the JWT token type.
     #
     # @note When making an API call, you may pass JwtTokenTypeConfiguration
     #   data as a hash:
@@ -6603,6 +8738,59 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListAccessControlConfigurationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_id: "IndexId", # required
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index for the access control configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was incomplete (because there's more data
+    #   to retrieve), Amazon Kendra returns a pagination token in the
+    #   response. You can use this pagination token to retrieve the next set
+    #   of access control configurations.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of access control configurations to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListAccessControlConfigurationsRequest AWS API Documentation
+    #
+    class ListAccessControlConfigurationsRequest < Struct.new(
+      :index_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If the response is truncated, Amazon Kendra returns this token,
+    #   which you can use in the subsequent request to retrieve the next set
+    #   of access control configurations.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_control_configurations
+    #   The details of your access control configurations.
+    #   @return [Array<Types::AccessControlConfigurationSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListAccessControlConfigurationsResponse AWS API Documentation
+    #
+    class ListAccessControlConfigurationsResponse < Struct.new(
+      :next_token,
+      :access_control_configurations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListDataSourceSyncJobsRequest
     #   data as a hash:
     #
@@ -6623,7 +8811,7 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index that contains the data source.
+    #   The identifier of the index used with the data source.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -6691,7 +8879,7 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index that contains the data source.
+    #   The identifier of the index used with one or more data sources.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -7056,7 +9244,8 @@ module Aws::Kendra
     end
 
     # @!attribute [rw] index_configuration_summary_items
-    #   An array of summary information for one or more indexes.
+    #   An array of summary information on the configuration of one or more
+    #   indexes.
     #   @return [Array<Types::IndexConfigurationSummary>]
     #
     # @!attribute [rw] next_token
@@ -7188,7 +9377,7 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index associated with the thesaurus to list.
+    #   The identifier of the index with one or more thesauri.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -7281,8 +9470,50 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides configuration information for data sources that connect to
-    # OneDrive.
+    # Provides the configuration information to connect to GitHub Enterprise
+    # Server (on premises).
+    #
+    # @note When making an API call, you may pass OnPremiseConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         host_url: "Url", # required
+    #         organization_name: "OrganizationName", # required
+    #         ssl_certificate_s3_path: { # required
+    #           bucket: "S3BucketName", # required
+    #           key: "S3ObjectKey", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] host_url
+    #   The GitHub host URL or API endpoint URL. For example,
+    #   *https://on-prem-host-url/api/v3/*
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_name
+    #   The name of the organization of the GitHub Enterprise Server
+    #   (in-premise) account you want to connect to. You can find your
+    #   organization name by logging into GitHub desktop and selecting
+    #   **Your organizations** under your profile picture dropdown.
+    #   @return [String]
+    #
+    # @!attribute [rw] ssl_certificate_s3_path
+    #   The path to the SSL certificate stored in an Amazon S3 bucket. You
+    #   use this to connect to GitHub.
+    #   @return [Types::S3Path]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/OnPremiseConfiguration AWS API Documentation
+    #
+    class OnPremiseConfiguration < Struct.new(
+      :host_url,
+      :organization_name,
+      :ssl_certificate_s3_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the configuration information to connect to OneDrive as your
+    # data source.
     #
     # @note When making an API call, you may pass OneDriveConfiguration
     #   data as a hash:
@@ -7325,33 +9556,42 @@ module Aws::Kendra
     #   @return [Types::OneDriveUsers]
     #
     # @!attribute [rw] inclusion_patterns
-    #   A list of regular expression patterns. Documents that match the
-    #   pattern are included in the index. Documents that don't match the
-    #   pattern are excluded from the index. If a document matches both an
-    #   inclusion pattern and an exclusion pattern, the document is not
-    #   included in the index.
+    #   A list of regular expression patterns to include certain documents
+    #   in your OneDrive. Documents that match the patterns are included in
+    #   the index. Documents that don't match the patterns are excluded
+    #   from the index. If a document matches both an inclusion and
+    #   exclusion pattern, the exclusion pattern takes precedence and the
+    #   document isn't included in the index.
     #
-    #   The exclusion pattern is applied to the file name.
+    #   The pattern is applied to the file name.
     #   @return [Array<String>]
     #
     # @!attribute [rw] exclusion_patterns
-    #   List of regular expressions applied to documents. Items that match
-    #   the exclusion pattern are not indexed. If you provide both an
-    #   inclusion pattern and an exclusion pattern, any item that matches
-    #   the exclusion pattern isn't indexed.
+    #   A list of regular expression patterns to exclude certain documents
+    #   in your OneDrive. Documents that match the patterns are excluded
+    #   from the index. Documents that don't match the patterns are
+    #   included in the index. If a document matches both an inclusion and
+    #   exclusion pattern, the exclusion pattern takes precedence and the
+    #   document isn't included in the index.
     #
-    #   The exclusion pattern is applied to the file name.
+    #   The pattern is applied to the file name.
     #   @return [Array<String>]
     #
     # @!attribute [rw] field_mappings
-    #   A list of `DataSourceToIndexFieldMapping` objects that map Microsoft
-    #   OneDrive fields to custom fields in the Amazon Kendra index. You
-    #   must first create the index fields before you map OneDrive fields.
+    #   A list of `DataSourceToIndexFieldMapping` objects that map OneDrive
+    #   data source attributes or field names to Amazon Kendra index field
+    #   names. To create custom fields, use the `UpdateIndex` API before you
+    #   map to OneDrive fields. For more information, see [Mapping data
+    #   source fields][1]. The OneDrive data source field names must exist
+    #   in your OneDrive custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
     #   @return [Array<Types::DataSourceToIndexFieldMapping>]
     #
     # @!attribute [rw] disable_local_groups
-    #   A Boolean value that specifies whether local groups are disabled
-    #   (`True`) or enabled (`False`).
+    #   `TRUE` to disable local groups information.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/OneDriveConfiguration AWS API Documentation
@@ -7451,7 +9691,11 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides user and group information for document access filtering.
+    # Provides user and group information for [user context filtering][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/user-context-filter.html
     #
     # @note When making an API call, you may pass Principal
     #   data as a hash:
@@ -7472,7 +9716,7 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] access
-    #   Whether to allow or deny access to the principal.
+    #   Whether to allow or deny document access to the principal.
     #   @return [String]
     #
     # @!attribute [rw] data_source_id
@@ -7737,6 +9981,10 @@ module Aws::Kendra
     #         facets: [
     #           {
     #             document_attribute_key: "DocumentAttributeKey",
+    #             facets: {
+    #               # recursive FacetList
+    #             },
+    #             max_results: 1,
     #           },
     #         ],
     #         requested_document_attributes: ["DocumentAttributeKey"],
@@ -7773,11 +10021,14 @@ module Aws::Kendra
     #           ],
     #         },
     #         visitor_id: "VisitorId",
+    #         spell_correction_configuration: {
+    #           include_query_spell_check_suggestions: false, # required
+    #         },
     #       }
     #
     # @!attribute [rw] index_id
     #   The unique identifier of the index to search. The identifier is
-    #   returned in the response from the `CreateIndex` operation.
+    #   returned in the response from the `CreateIndex` API.
     #   @return [String]
     #
     # @!attribute [rw] query_text
@@ -7797,14 +10048,14 @@ module Aws::Kendra
     #
     # @!attribute [rw] facets
     #   An array of documents attributes. Amazon Kendra returns a count for
-    #   each attribute key specified. You can use this information to help
-    #   narrow the search for your user.
+    #   each attribute key specified. This helps your users narrow their
+    #   search.
     #   @return [Array<Types::Facet>]
     #
     # @!attribute [rw] requested_document_attributes
-    #   An array of document attributes to include in the response. No other
-    #   document attributes are included in the response. By default all
-    #   document attributes are included in the response.
+    #   An array of document attributes to include in the response. You can
+    #   limit the response to include certain document attributes. By
+    #   default all document attributes are included in the response.
     #   @return [Array<String>]
     #
     # @!attribute [rw] query_result_type_filter
@@ -7866,6 +10117,10 @@ module Aws::Kendra
     #   `VisitorId`.
     #   @return [String]
     #
+    # @!attribute [rw] spell_correction_configuration
+    #   Enables suggested spell corrections for queries.
+    #   @return [Types::SpellCorrectionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/QueryRequest AWS API Documentation
     #
     class QueryRequest < Struct.new(
@@ -7880,7 +10135,8 @@ module Aws::Kendra
       :page_size,
       :sorting_configuration,
       :user_context,
-      :visitor_id)
+      :visitor_id,
+      :spell_correction_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7919,6 +10175,11 @@ module Aws::Kendra
     #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/searching-example.html#searching-index-query-syntax
     #   @return [Array<Types::Warning>]
     #
+    # @!attribute [rw] spell_corrected_queries
+    #   A list of information related to suggested spell corrections for a
+    #   query.
+    #   @return [Array<Types::SpellCorrectedQuery>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/QueryResult AWS API Documentation
     #
     class QueryResult < Struct.new(
@@ -7926,7 +10187,8 @@ module Aws::Kendra
       :result_items,
       :facet_results,
       :total_number_of_results,
-      :warnings)
+      :warnings,
+      :spell_corrected_queries)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7969,9 +10231,9 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] document_attributes
-    #   An array of document attributes for the document that the query
-    #   result maps to. For example, the document author (Author) or the
-    #   source URI (SourceUri) of the document.
+    #   An array of document attributes assigned to a document in the search
+    #   results. For example, the document author (`_author`) or the source
+    #   URI (`_source_uri`) of the document.
     #   @return [Array<Types::DocumentAttribute>]
     #
     # @!attribute [rw] score_attributes
@@ -8064,9 +10326,173 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides information for manually tuning the relevance of a field in a
-    # search. When a query includes terms that match the field, the results
-    # are given a boost in the response based on these tuning parameters.
+    # Provides the configuration information to connect to Quip as your data
+    # source.
+    #
+    # @note When making an API call, you may pass QuipConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         domain: "Domain", # required
+    #         secret_arn: "SecretArn", # required
+    #         crawl_file_comments: false,
+    #         crawl_chat_rooms: false,
+    #         crawl_attachments: false,
+    #         folder_ids: ["FolderId"],
+    #         thread_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         message_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         attachment_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         vpc_configuration: {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] domain
+    #   The Quip site domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_arn
+    #   The Amazon Resource Name (ARN) of an Secrets Manager secret that
+    #   contains the key-value pairs that are required to connect to your
+    #   Quip. The secret must contain a JSON structure with the following
+    #   keys:
+    #
+    #   * accessToken—The token created in Quip. For more information, see
+    #     [Authentication for a Quip data source][1].
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-slack.html#quip-authentication
+    #   @return [String]
+    #
+    # @!attribute [rw] crawl_file_comments
+    #   `TRUE` to index file comments.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] crawl_chat_rooms
+    #   `TRUE` to index the contents of chat rooms.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] crawl_attachments
+    #   `TRUE` to index attachments.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] folder_ids
+    #   The identifiers of the Quip folders you want to index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] thread_field_mappings
+    #   A list of `DataSourceToIndexFieldMapping` objects that map
+    #   attributes or field names of Quip threads to Amazon Kendra index
+    #   field names. To create custom fields, use the `UpdateIndex` API
+    #   before you map to Quip fields. For more information, see [Mapping
+    #   data source fields][1]. The Quip field names must exist in your Quip
+    #   custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @!attribute [rw] message_field_mappings
+    #   A list of `DataSourceToIndexFieldMapping` objects that map
+    #   attributes or field names of Quip messages to Amazon Kendra index
+    #   field names. To create custom fields, use the `UpdateIndex` API
+    #   before you map to Quip fields. For more information, see [Mapping
+    #   data source fields][1]. The Quip field names must exist in your Quip
+    #   custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @!attribute [rw] attachment_field_mappings
+    #   A list of `DataSourceToIndexFieldMapping` objects that map
+    #   attributes or field names of Quip attachments to Amazon Kendra index
+    #   field names. To create custom fields, use the `UpdateIndex` API
+    #   before you map to Quip fields. For more information, see [Mapping
+    #   data source fields][1]. The Quip field names must exist in your Quip
+    #   custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @!attribute [rw] inclusion_patterns
+    #   A list of regular expression patterns to include certain files in
+    #   your Quip file system. Files that match the patterns are included in
+    #   the index. Files that don't match the patterns are excluded from
+    #   the index. If a file matches both an inclusion pattern and an
+    #   exclusion pattern, the exclusion pattern takes precedence, and the
+    #   file isn't included in the index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] exclusion_patterns
+    #   A list of regular expression patterns to exclude certain files in
+    #   your Quip file system. Files that match the patterns are excluded
+    #   from the index. Files that don’t match the patterns are included in
+    #   the index. If a file matches both an inclusion pattern and an
+    #   exclusion pattern, the exclusion pattern takes precedence, and the
+    #   file isn't included in the index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_configuration
+    #   Configuration information for an Amazon Virtual Private Cloud (VPC)
+    #   to connect to your Quip. For more information, see [Configuring a
+    #   VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html
+    #   @return [Types::DataSourceVpcConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/QuipConfiguration AWS API Documentation
+    #
+    class QuipConfiguration < Struct.new(
+      :domain,
+      :secret_arn,
+      :crawl_file_comments,
+      :crawl_chat_rooms,
+      :crawl_attachments,
+      :folder_ids,
+      :thread_field_mappings,
+      :message_field_mappings,
+      :attachment_field_mappings,
+      :inclusion_patterns,
+      :exclusion_patterns,
+      :vpc_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information for tuning the relevance of a field in a search.
+    # When a query includes terms that match the field, the results are
+    # given a boost in the response based on these tuning parameters.
     #
     # @note When making an API call, you may pass Relevance
     #   data as a hash:
@@ -8148,7 +10574,7 @@ module Aws::Kendra
     end
 
     # Provides feedback on how relevant a document is to a search. Your
-    # application uses the `SubmitFeedback` operation to provide relevance
+    # application uses the `SubmitFeedback` API to provide relevance
     # information.
     #
     # @note When making an API call, you may pass RelevanceFeedback
@@ -8221,8 +10647,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides configuration information for a data source to index
-    # documents in an Amazon S3 bucket.
+    # Provides the configuration information to connect to an Amazon S3
+    # bucket.
     #
     # @note When making an API call, you may pass S3DataSourceConfiguration
     #   data as a hash:
@@ -8350,8 +10776,40 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Defines configuration for syncing a Salesforce chatter feed. The
-    # contents of the object comes from the Salesforce FeedItem table.
+    # Provides the configuration information to connect to GitHub Enterprise
+    # Cloud (SaaS).
+    #
+    # @note When making an API call, you may pass SaaSConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         organization_name: "OrganizationName", # required
+    #         host_url: "Url", # required
+    #       }
+    #
+    # @!attribute [rw] organization_name
+    #   The name of the organization of the GitHub Enterprise Cloud (SaaS)
+    #   account you want to connect to. You can find your organization name
+    #   by logging into GitHub desktop and selecting **Your organizations**
+    #   under your profile picture dropdown.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_url
+    #   The GitHub host URL or API endpoint URL. For example,
+    #   *https://api.github.com*.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/SaaSConfiguration AWS API Documentation
+    #
+    class SaaSConfiguration < Struct.new(
+      :organization_name,
+      :host_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration information for syncing a Salesforce chatter feed.
+    # The contents of the object comes from the Salesforce FeedItem table.
     #
     # @note When making an API call, you may pass SalesforceChatterFeedConfiguration
     #   data as a hash:
@@ -8404,8 +10862,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides configuration information for connecting to a Salesforce data
-    # source.
+    # Provides the configuration information to connect to Salesforce as
+    # your data source.
     #
     # @note When making an API call, you may pass SalesforceConfiguration
     #   data as a hash:
@@ -8512,19 +10970,19 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] standard_object_configurations
-    #   Specifies the Salesforce standard objects that Amazon Kendra
+    #   Configuration of the Salesforce standard objects that Amazon Kendra
     #   indexes.
     #   @return [Array<Types::SalesforceStandardObjectConfiguration>]
     #
     # @!attribute [rw] knowledge_article_configuration
-    #   Specifies configuration information for the knowledge article types
-    #   that Amazon Kendra indexes. Amazon Kendra indexes standard knowledge
+    #   Configuration information for the knowledge article types that
+    #   Amazon Kendra indexes. Amazon Kendra indexes standard knowledge
     #   articles and the standard fields of knowledge articles, or the
     #   custom fields of custom knowledge articles, but not both.
     #   @return [Types::SalesforceKnowledgeArticleConfiguration]
     #
     # @!attribute [rw] chatter_feed_configuration
-    #   Specifies configuration information for Salesforce chatter feeds.
+    #   Configuration information for Salesforce chatter feeds.
     #   @return [Types::SalesforceChatterFeedConfiguration]
     #
     # @!attribute [rw] crawl_attachments
@@ -8533,28 +10991,30 @@ module Aws::Kendra
     #   @return [Boolean]
     #
     # @!attribute [rw] standard_object_attachment_configuration
-    #   Provides configuration information for processing attachments to
-    #   Salesforce standard objects.
+    #   Configuration information for processing attachments to Salesforce
+    #   standard objects.
     #   @return [Types::SalesforceStandardObjectAttachmentConfiguration]
     #
     # @!attribute [rw] include_attachment_file_patterns
-    #   A list of regular expression patterns. Documents that match the
-    #   patterns are included in the index. Documents that don't match the
-    #   patterns are excluded from the index. If a document matches both an
-    #   inclusion pattern and an exclusion pattern, the document is not
-    #   included in the index.
+    #   A list of regular expression patterns to include certain documents
+    #   in your Salesforce. Documents that match the patterns are included
+    #   in the index. Documents that don't match the patterns are excluded
+    #   from the index. If a document matches both an inclusion and
+    #   exclusion pattern, the exclusion pattern takes precedence and the
+    #   document isn't included in the index.
     #
-    #   The regex is applied to the name of the attached file.
+    #   The pattern is applied to the name of the attached file.
     #   @return [Array<String>]
     #
     # @!attribute [rw] exclude_attachment_file_patterns
-    #   A list of regular expression patterns. Documents that match the
-    #   patterns are excluded from the index. Documents that don't match
-    #   the patterns are included in the index. If a document matches both
-    #   an exclusion pattern and an inclusion pattern, the document is not
-    #   included in the index.
+    #   A list of regular expression patterns to exclude certain documents
+    #   in your Salesforce. Documents that match the patterns are excluded
+    #   from the index. Documents that don't match the patterns are
+    #   included in the index. If a document matches both an inclusion and
+    #   exclusion pattern, the exclusion pattern takes precedence and the
+    #   document isn't included in the index.
     #
-    #   The regex is applied to the name of the attached file.
+    #   The pattern is applied to the name of the attached file.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/SalesforceConfiguration AWS API Documentation
@@ -8573,7 +11033,7 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides configuration information for indexing Salesforce custom
+    # Provides the configuration information for indexing Salesforce custom
     # articles.
     #
     # @note When making an API call, you may pass SalesforceCustomKnowledgeArticleTypeConfiguration
@@ -8607,8 +11067,16 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] field_mappings
-    #   One or more objects that map fields in the custom knowledge article
-    #   to fields in the Amazon Kendra index.
+    #   Maps attributes or field names of the custom knowledge article to
+    #   Amazon Kendra index field names. To create custom fields, use the
+    #   `UpdateIndex` API before you map to Salesforce fields. For more
+    #   information, see [Mapping data source fields][1]. The Salesforce
+    #   data source field names must exist in your Salesforce custom
+    #   metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
     #   @return [Array<Types::DataSourceToIndexFieldMapping>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/SalesforceCustomKnowledgeArticleTypeConfiguration AWS API Documentation
@@ -8622,7 +11090,7 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Specifies configuration information for the knowledge article types
+    # Provides the configuration information for the knowledge article types
     # that Amazon Kendra indexes. Amazon Kendra indexes standard knowledge
     # articles and the standard fields of knowledge articles, or the custom
     # fields of custom knowledge articles, but not both
@@ -8666,13 +11134,12 @@ module Aws::Kendra
     #   @return [Array<String>]
     #
     # @!attribute [rw] standard_knowledge_article_type_configuration
-    #   Provides configuration information for standard Salesforce knowledge
+    #   Configuration information for standard Salesforce knowledge
     #   articles.
     #   @return [Types::SalesforceStandardKnowledgeArticleTypeConfiguration]
     #
     # @!attribute [rw] custom_knowledge_article_type_configurations
-    #   Provides configuration information for custom Salesforce knowledge
-    #   articles.
+    #   Configuration information for custom Salesforce knowledge articles.
     #   @return [Array<Types::SalesforceCustomKnowledgeArticleTypeConfiguration>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/SalesforceKnowledgeArticleConfiguration AWS API Documentation
@@ -8685,8 +11152,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides configuration information for standard Salesforce knowledge
-    # articles.
+    # Provides the configuration information for standard Salesforce
+    # knowledge articles.
     #
     # @note When making an API call, you may pass SalesforceStandardKnowledgeArticleTypeConfiguration
     #   data as a hash:
@@ -8712,9 +11179,16 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] field_mappings
-    #   One or more objects that map fields in the knowledge article to
-    #   Amazon Kendra index fields. The index field must exist before you
-    #   can map a Salesforce field to it.
+    #   Maps attributes or field names of the knowledge article to Amazon
+    #   Kendra index field names. To create custom fields, use the
+    #   `UpdateIndex` API before you map to Salesforce fields. For more
+    #   information, see [Mapping data source fields][1]. The Salesforce
+    #   data source field names must exist in your Salesforce custom
+    #   metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
     #   @return [Array<Types::DataSourceToIndexFieldMapping>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/SalesforceStandardKnowledgeArticleTypeConfiguration AWS API Documentation
@@ -8727,7 +11201,7 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides configuration information for processing attachments to
+    # Provides the configuration information for processing attachments to
     # Salesforce standard objects.
     #
     # @note When making an API call, you may pass SalesforceStandardObjectAttachmentConfiguration
@@ -8762,7 +11236,7 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Specifies configuration information for indexing a single standard
+    # Provides the configuration information for indexing a single standard
     # object.
     #
     # @note When making an API call, you may pass SalesforceStandardObjectConfiguration
@@ -8796,9 +11270,16 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] field_mappings
-    #   One or more objects that map fields in the standard object to Amazon
-    #   Kendra index fields. The index field must exist before you can map a
-    #   Salesforce field to it.
+    #   Maps attributes or field names of the standard object to Amazon
+    #   Kendra index field names. To create custom fields, use the
+    #   `UpdateIndex` API before you map to Salesforce fields. For more
+    #   information, see [Mapping data source fields][1]. The Salesforce
+    #   data source field names must exist in your Salesforce custom
+    #   metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
     #   @return [Array<Types::DataSourceToIndexFieldMapping>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/SalesforceStandardObjectConfiguration AWS API Documentation
@@ -8877,7 +11358,7 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides the configuration information of the seed or starting point
+    # Provides the configuration information for the seed or starting point
     # URLs to crawl.
     #
     # *When selecting websites to index, you must adhere to the [Amazon
@@ -8930,9 +11411,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides the identifier of the KMScustomer master key (CMK) used to
-    # encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't support
-    # asymmetric CMKs.
+    # Provides the identifier of the KMS key used to encrypt data indexed by
+    # Amazon Kendra. Amazon Kendra doesn't support asymmetric keys.
     #
     # @note When making an API call, you may pass ServerSideEncryptionConfiguration
     #   data as a hash:
@@ -8942,8 +11422,8 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] kms_key_id
-    #   The identifier of the KMScustomer master key (CMK). Amazon Kendra
-    #   doesn't support asymmetric CMKs.
+    #   The identifier of the KMS key. Amazon Kendra doesn't support
+    #   asymmetric keys.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ServerSideEncryptionConfiguration AWS API Documentation
@@ -8954,8 +11434,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides configuration information required to connect to a ServiceNow
-    # data source.
+    # Provides the configuration information to connect to ServiceNow as
+    # your data source.
     #
     # @note When making an API call, you may pass ServiceNowConfiguration
     #   data as a hash:
@@ -8999,13 +11479,20 @@ module Aws::Kendra
     # @!attribute [rw] host_url
     #   The ServiceNow instance that the data source connects to. The host
     #   endpoint should look like the following:
-    #   `\{instance\}.service-now.com.`
+    #   *\\\{instance\\}.service-now.com.*
     #   @return [String]
     #
     # @!attribute [rw] secret_arn
     #   The Amazon Resource Name (ARN) of the Secrets Manager secret that
     #   contains the user name and password required to connect to the
-    #   ServiceNow instance.
+    #   ServiceNow instance. You can also provide OAuth authentication
+    #   credentials of user name, password, client ID, and client secret.
+    #   For more information, see [Authentication for a ServiceNow data
+    #   source][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-servicenow.html#servicenow-authentication
     #   @return [String]
     #
     # @!attribute [rw] service_now_build_version
@@ -9014,24 +11501,22 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] knowledge_article_configuration
-    #   Provides configuration information for crawling knowledge articles
-    #   in the ServiceNow site.
+    #   Configuration information for crawling knowledge articles in the
+    #   ServiceNow site.
     #   @return [Types::ServiceNowKnowledgeArticleConfiguration]
     #
     # @!attribute [rw] service_catalog_configuration
-    #   Provides configuration information for crawling service catalogs in
-    #   the ServiceNow site.
+    #   Configuration information for crawling service catalogs in the
+    #   ServiceNow site.
     #   @return [Types::ServiceNowServiceCatalogConfiguration]
     #
     # @!attribute [rw] authentication_type
-    #   Determines the type of authentication used to connect to the
-    #   ServiceNow instance. If you choose `HTTP_BASIC`, Amazon Kendra is
-    #   authenticated using the user name and password provided in the
-    #   Secrets Manager secret in the `SecretArn` field. When you choose
-    #   `OAUTH2`, Amazon Kendra is authenticated using the OAuth token and
-    #   secret provided in the Secrets Manager secret, and the user name and
-    #   password are used to determine which information Amazon Kendra has
-    #   access to.
+    #   The type of authentication used to connect to the ServiceNow
+    #   instance. If you choose `HTTP_BASIC`, Amazon Kendra is authenticated
+    #   using the user name and password provided in the Secrets Manager
+    #   secret in the `SecretArn` field. If you choose `OAUTH2`, Amazon
+    #   Kendra is authenticated using the credentials of client ID, client
+    #   secret, user name and password.
     #
     #   When you use `OAUTH2` authentication, you must generate a token and
     #   a client secret using the ServiceNow console. For more information,
@@ -9055,8 +11540,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides configuration information for crawling knowledge articles in
-    # the ServiceNow site.
+    # Provides the configuration information for crawling knowledge articles
+    # in the ServiceNow site.
     #
     # @note When making an API call, you may pass ServiceNowKnowledgeArticleConfiguration
     #   data as a hash:
@@ -9078,20 +11563,31 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] crawl_attachments
-    #   Indicates whether Amazon Kendra should index attachments to
-    #   knowledge articles.
+    #   `TRUE` to index attachments to knowledge articles.
     #   @return [Boolean]
     #
     # @!attribute [rw] include_attachment_file_patterns
-    #   List of regular expressions applied to knowledge articles. Items
-    #   that don't match the inclusion pattern are not indexed. The regex
-    #   is applied to the field specified in the `PatternTargetField`.
+    #   A list of regular expression patterns to include certain attachments
+    #   of knowledge articles in your ServiceNow. Item that match the
+    #   patterns are included in the index. Items that don't match the
+    #   patterns are excluded from the index. If an item matches both an
+    #   inclusion and exclusion pattern, the exclusion pattern takes
+    #   precedence and the item isn't included in the index.
+    #
+    #   The regex is applied to the field specified in the
+    #   `PatternTargetField`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] exclude_attachment_file_patterns
-    #   List of regular expressions applied to knowledge articles. Items
-    #   that don't match the inclusion pattern are not indexed. The regex
-    #   is applied to the field specified in the `PatternTargetField`
+    #   A list of regular expression patterns to exclude certain attachments
+    #   of knowledge articles in your ServiceNow. Item that match the
+    #   patterns are excluded from the index. Items that don't match the
+    #   patterns are included in the index. If an item matches both an
+    #   inclusion and exclusion pattern, the exclusion pattern takes
+    #   precedence and the item isn't included in the index.
+    #
+    #   The regex is applied to the field specified in the
+    #   `PatternTargetField`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] document_data_field_name
@@ -9105,8 +11601,16 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] field_mappings
-    #   Mapping between ServiceNow fields and Amazon Kendra index fields.
-    #   You must create the index field before you map the field.
+    #   Maps attributes or field names of knoweldge articles to Amazon
+    #   Kendra index field names. To create custom fields, use the
+    #   `UpdateIndex` API before you map to ServiceNow fields. For more
+    #   information, see [Mapping data source fields][1]. The ServiceNow
+    #   data source field names must exist in your ServiceNow custom
+    #   metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
     #   @return [Array<Types::DataSourceToIndexFieldMapping>]
     #
     # @!attribute [rw] filter_query
@@ -9137,8 +11641,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides configuration information for crawling service catalog items
-    # in the ServiceNow site
+    # Provides the configuration information for crawling service catalog
+    # items in the ServiceNow site
     #
     # @note When making an API call, you may pass ServiceNowServiceCatalogConfiguration
     #   data as a hash:
@@ -9159,26 +11663,27 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] crawl_attachments
-    #   Indicates whether Amazon Kendra should crawl attachments to the
-    #   service catalog items.
+    #   `TRUE` to index attachments to service catalog items.
     #   @return [Boolean]
     #
     # @!attribute [rw] include_attachment_file_patterns
-    #   A list of regular expression patterns. Documents that match the
-    #   patterns are included in the index. Documents that don't match the
-    #   patterns are excluded from the index. If a document matches both an
-    #   exclusion pattern and an inclusion pattern, the document is not
-    #   included in the index.
+    #   A list of regular expression patterns to include certain attachments
+    #   of catalogs in your ServiceNow. Item that match the patterns are
+    #   included in the index. Items that don't match the patterns are
+    #   excluded from the index. If an item matches both an inclusion and
+    #   exclusion pattern, the exclusion pattern takes precedence and the
+    #   item isn't included in the index.
     #
     #   The regex is applied to the file name of the attachment.
     #   @return [Array<String>]
     #
     # @!attribute [rw] exclude_attachment_file_patterns
-    #   A list of regular expression patterns. Documents that match the
-    #   patterns are excluded from the index. Documents that don't match
-    #   the patterns are included in the index. If a document matches both
-    #   an exclusion pattern and an inclusion pattern, the document is not
-    #   included in the index.
+    #   A list of regular expression patterns to exclude certain attachments
+    #   of catalogs in your ServiceNow. Item that match the patterns are
+    #   excluded from the index. Items that don't match the patterns are
+    #   included in the index. If an item matches both an inclusion and
+    #   exclusion pattern, the exclusion pattern takes precedence and the
+    #   item isn't included in the index.
     #
     #   The regex is applied to the file name of the attachment.
     #   @return [Array<String>]
@@ -9194,8 +11699,15 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] field_mappings
-    #   Mapping between ServiceNow fields and Amazon Kendra index fields.
-    #   You must create the index field before you map the field.
+    #   Maps attributes or field names of catalogs to Amazon Kendra index
+    #   field names. To create custom fields, use the `UpdateIndex` API
+    #   before you map to ServiceNow fields. For more information, see
+    #   [Mapping data source fields][1]. The ServiceNow data source field
+    #   names must exist in your ServiceNow custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
     #   @return [Array<Types::DataSourceToIndexFieldMapping>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ServiceNowServiceCatalogConfiguration AWS API Documentation
@@ -9222,8 +11734,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides configuration information for connecting to a Microsoft
-    # SharePoint data source.
+    # Provides the configuration information to connect to Microsoft
+    # SharePoint as your data source.
     #
     # @note When making an API call, you may pass SharePointConfiguration
     #   data as a hash:
@@ -9253,77 +11765,85 @@ module Aws::Kendra
     #           bucket: "S3BucketName", # required
     #           key: "S3ObjectKey", # required
     #         },
+    #         authentication_type: "HTTP_BASIC", # accepts HTTP_BASIC, OAUTH2
     #       }
     #
     # @!attribute [rw] share_point_version
-    #   The version of Microsoft SharePoint that you are using as a data
-    #   source.
+    #   The version of Microsoft SharePoint that you use.
     #   @return [String]
     #
     # @!attribute [rw] urls
-    #   The URLs of the Microsoft SharePoint site that contains the
-    #   documents that should be indexed.
+    #   The Microsoft SharePoint site URLs for the documents you want to
+    #   indext.
     #   @return [Array<String>]
     #
     # @!attribute [rw] secret_arn
-    #   The Amazon Resource Name (ARN) of credentials stored in Secrets
-    #   Manager. The credentials should be a user/password pair. If you use
-    #   SharePoint Server, you also need to provide the sever domain name as
-    #   part of the credentials. For more information, see [Using a
-    #   Microsoft SharePoint Data Source][1]. For more information about
-    #   Secrets Manager see [ What Is Secrets Manager][2] in the <i>Secrets
-    #   Manager </i> user guide.
+    #   The Amazon Resource Name (ARN) of an Secrets Manager secret that
+    #   contains the user name and password required to connect to the
+    #   SharePoint instance. If you use SharePoint Server, you also need to
+    #   provide the sever domain name as part of the credentials. For more
+    #   information, see [Using a Microsoft SharePoint Data Source][1].
+    #
+    #   You can also provide OAuth authentication credentials of user name,
+    #   password, client ID, and client secret. For more information, see
+    #   [Authentication for a SharePoint data source][2].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html
-    #   [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
+    #   [2]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html#sharepoint-authentication
     #   @return [String]
     #
     # @!attribute [rw] crawl_attachments
-    #   `TRUE` to include attachments to documents stored in your Microsoft
-    #   SharePoint site in the index; otherwise, `FALSE`.
+    #   `TRUE` to index document attachments.
     #   @return [Boolean]
     #
     # @!attribute [rw] use_change_log
-    #   Set to `TRUE` to use the Microsoft SharePoint change log to
-    #   determine the documents that need to be updated in the index.
-    #   Depending on the size of the SharePoint change log, it may take
-    #   longer for Amazon Kendra to use the change log than it takes it to
-    #   determine the changed documents using the Amazon Kendra document
-    #   crawler.
+    #   `TRUE` to use the SharePoint change log to determine which documents
+    #   require updating in the index. Depending on the change log's size,
+    #   it may take longer for Amazon Kendra to use the change log than to
+    #   scan all of your documents in SharePoint.
     #   @return [Boolean]
     #
     # @!attribute [rw] inclusion_patterns
-    #   A list of regular expression patterns. Documents that match the
-    #   patterns are included in the index. Documents that don't match the
-    #   patterns are excluded from the index. If a document matches both an
-    #   inclusion pattern and an exclusion pattern, the document is not
-    #   included in the index.
+    #   A list of regular expression patterns to include certain documents
+    #   in your SharePoint. Documents that match the patterns are included
+    #   in the index. Documents that don't match the patterns are excluded
+    #   from the index. If a document matches both an inclusion and
+    #   exclusion pattern, the exclusion pattern takes precedence and the
+    #   document isn't included in the index.
     #
-    #   The regex is applied to the display URL of the SharePoint document.
+    #   The regex applies to the display URL of the SharePoint document.
     #   @return [Array<String>]
     #
     # @!attribute [rw] exclusion_patterns
-    #   A list of regular expression patterns. Documents that match the
-    #   patterns are excluded from the index. Documents that don't match
-    #   the patterns are included in the index. If a document matches both
-    #   an exclusion pattern and an inclusion pattern, the document is not
-    #   included in the index.
+    #   A list of regular expression patterns to exclude certain documents
+    #   in your SharePoint. Documents that match the patterns are excluded
+    #   from the index. Documents that don't match the patterns are
+    #   included in the index. If a document matches both an inclusion and
+    #   exclusion pattern, the exclusion pattern takes precedence and the
+    #   document isn't included in the index.
     #
-    #   The regex is applied to the display URL of the SharePoint document.
+    #   The regex applies to the display URL of the SharePoint document.
     #   @return [Array<String>]
     #
     # @!attribute [rw] vpc_configuration
-    #   Provides information for connecting to an Amazon VPC.
+    #   Configuration information for an Amazon Virtual Private Cloud to
+    #   connect to your Microsoft SharePoint. For more information, see
+    #   [Configuring a VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html
     #   @return [Types::DataSourceVpcConfiguration]
     #
     # @!attribute [rw] field_mappings
-    #   A list of `DataSourceToIndexFieldMapping` objects that map Microsoft
-    #   SharePoint attributes to custom fields in the Amazon Kendra index.
-    #   You must first create the index fields using the `UpdateIndex`
-    #   operation before you map SharePoint attributes. For more
-    #   information, see [Mapping Data Source Fields][1].
+    #   A list of `DataSourceToIndexFieldMapping` objects that map
+    #   SharePoint data source attributes or field names to Amazon Kendra
+    #   index field names. To create custom fields, use the `UpdateIndex`
+    #   API before you map to SharePoint fields. For more information, see
+    #   [Mapping data source fields][1]. The SharePoint data source field
+    #   names must exist in your SharePoint custom metadata.
     #
     #
     #
@@ -9336,13 +11856,20 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] disable_local_groups
-    #   A Boolean value that specifies whether local groups are disabled
-    #   (`True`) or enabled (`False`).
+    #   `TRUE` to disable local groups information.
     #   @return [Boolean]
     #
     # @!attribute [rw] ssl_certificate_s3_path
-    #   Information required to find a specific file in an Amazon S3 bucket.
+    #   The path to the SSL certificate stored in an Amazon S3 bucket. You
+    #   use this to connect to SharePoint.
     #   @return [Types::S3Path]
+    #
+    # @!attribute [rw] authentication_type
+    #   Whether you want to connect to SharePoint using basic authentication
+    #   of user name and password, or OAuth authentication of user name,
+    #   password, client ID, and client secret. You can use OAuth
+    #   authentication for SharePoint Online.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/SharePointConfiguration AWS API Documentation
     #
@@ -9358,12 +11885,13 @@ module Aws::Kendra
       :field_mappings,
       :document_title_field_name,
       :disable_local_groups,
-      :ssl_certificate_s3_path)
+      :ssl_certificate_s3_path,
+      :authentication_type)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Provides the configuration information of the sitemap URLs to crawl.
+    # Provides the configuration information for the sitemap URLs to crawl.
     #
     # *When selecting websites to index, you must adhere to the [Amazon
     # Acceptable Use Policy][1] and all other Amazon terms. Remember that
@@ -9391,6 +11919,180 @@ module Aws::Kendra
     #
     class SiteMapsConfiguration < Struct.new(
       :site_maps)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the configuration information to connect to Slack as your
+    # data source.
+    #
+    # @note When making an API call, you may pass SlackConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         team_id: "TeamId", # required
+    #         secret_arn: "SecretArn", # required
+    #         vpc_configuration: {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #         slack_entity_list: ["PUBLIC_CHANNEL"], # required, accepts PUBLIC_CHANNEL, PRIVATE_CHANNEL, GROUP_MESSAGE, DIRECT_MESSAGE
+    #         use_change_log: false,
+    #         crawl_bot_message: false,
+    #         exclude_archived: false,
+    #         since_crawl_date: "SinceCrawlDate", # required
+    #         look_back_period: 1,
+    #         private_channel_filter: ["String"],
+    #         public_channel_filter: ["String"],
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] team_id
+    #   The identifier of the team in the Slack workspace. For example,
+    #   *T0123456789*.
+    #
+    #   You can find your team ID in the URL of the main page of your Slack
+    #   workspace. When you log in to Slack via a browser, you are directed
+    #   to the URL of the main page. For example,
+    #   *https://app.slack.com/client/**T0123456789**/...*.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_arn
+    #   The Amazon Resource Name (ARN) of an Secrets Manager secret that
+    #   contains the key-value pairs required to connect to your Slack
+    #   workspace team. The secret must contain a JSON structure with the
+    #   following keys:
+    #
+    #   * slackToken—The user or bot token created in Slack. For more
+    #     information on creating a token in Slack, see [Authentication for
+    #     a Slack data source][1].
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-slack.html#slack-authentication
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_configuration
+    #   Configuration information for an Amazon Virtual Private Cloud to
+    #   connect to your Slack. For more information, see [Configuring a
+    #   VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html
+    #   @return [Types::DataSourceVpcConfiguration]
+    #
+    # @!attribute [rw] slack_entity_list
+    #   Specify whether to index public channels, private channels, group
+    #   messages, and direct messages. You can specify one or more of these
+    #   options.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] use_change_log
+    #   `TRUE` to use the Slack change log to determine which documents
+    #   require updating in the index. Depending on the Slack change log's
+    #   size, it may take longer for Amazon Kendra to use the change log
+    #   than to scan all of your documents in Slack.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] crawl_bot_message
+    #   `TRUE` to index bot messages from your Slack workspace team.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] exclude_archived
+    #   `TRUE` to exclude archived messages to index from your Slack
+    #   workspace team.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] since_crawl_date
+    #   The date to start crawling your data from your Slack workspace team.
+    #   The date must follow this format: `yyyy-mm-dd`.
+    #   @return [String]
+    #
+    # @!attribute [rw] look_back_period
+    #   The number of hours for change log to look back from when you last
+    #   synchronized your data. You can look back up to 7 days or 168 hours.
+    #
+    #   Change log updates your index only if new content was added since
+    #   you last synced your data. Updated or deleted content from before
+    #   you last synced does not get updated in your index. To capture
+    #   updated or deleted content before you last synced, set the
+    #   `LookBackPeriod` to the number of hours you want change log to look
+    #   back.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] private_channel_filter
+    #   The list of private channel names from your Slack workspace team.
+    #   You use this if you want to index specific private channels, not all
+    #   private channels. You can also use regular expression patterns to
+    #   filter private channels.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] public_channel_filter
+    #   The list of public channel names to index from your Slack workspace
+    #   team. You use this if you want to index specific public channels,
+    #   not all public channels. You can also use regular expression
+    #   patterns to filter public channels.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] inclusion_patterns
+    #   A list of regular expression patterns to include certain attached
+    #   files in your Slack workspace team. Files that match the patterns
+    #   are included in the index. Files that don't match the patterns are
+    #   excluded from the index. If a file matches both an inclusion and
+    #   exclusion pattern, the exclusion pattern takes precedence and the
+    #   file isn't included in the index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] exclusion_patterns
+    #   A list of regular expression patterns to exclude certain attached
+    #   files in your Slack workspace team. Files that match the patterns
+    #   are excluded from the index. Files that don’t match the patterns are
+    #   included in the index. If a file matches both an inclusion and
+    #   exclusion pattern, the exclusion pattern takes precedence and the
+    #   file isn't included in the index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] field_mappings
+    #   A list of `DataSourceToIndexFieldMapping` objects that map Slack
+    #   data source attributes or field names to Amazon Kendra index field
+    #   names. To create custom fields, use the `UpdateIndex` API before you
+    #   map to Slack fields. For more information, see [Mapping data source
+    #   fields][1]. The Slack data source field names must exist in your
+    #   Slack custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/SlackConfiguration AWS API Documentation
+    #
+    class SlackConfiguration < Struct.new(
+      :team_id,
+      :secret_arn,
+      :vpc_configuration,
+      :slack_entity_list,
+      :use_change_log,
+      :crawl_bot_message,
+      :exclude_archived,
+      :since_crawl_date,
+      :look_back_period,
+      :private_channel_filter,
+      :public_channel_filter,
+      :inclusion_patterns,
+      :exclusion_patterns,
+      :field_mappings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9454,8 +12156,60 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides information that configures Amazon Kendra to use a SQL
-    # database.
+    # A query with suggested spell corrections.
+    #
+    # @!attribute [rw] suggested_query_text
+    #   The query with the suggested spell corrections.
+    #   @return [String]
+    #
+    # @!attribute [rw] corrections
+    #   The corrected misspelled word or words in a query.
+    #   @return [Array<Types::Correction>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/SpellCorrectedQuery AWS API Documentation
+    #
+    class SpellCorrectedQuery < Struct.new(
+      :suggested_query_text,
+      :corrections)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the configuration information for suggested query spell
+    # corrections.
+    #
+    # Suggested spell corrections are based on words that appear in your
+    # indexed documents and how closely a corrected word matches a
+    # misspelled word.
+    #
+    # This feature is designed with certain defaults or limits. For
+    # information on the current limits and how to request more support for
+    # some limits, see the [Spell Checker documentation][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/query-spell-check.html
+    #
+    # @note When making an API call, you may pass SpellCorrectionConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         include_query_spell_check_suggestions: false, # required
+    #       }
+    #
+    # @!attribute [rw] include_query_spell_check_suggestions
+    #   `TRUE` to suggest spell corrections for queries.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/SpellCorrectionConfiguration AWS API Documentation
+    #
+    class SpellCorrectionConfiguration < Struct.new(
+      :include_query_spell_check_suggestions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the configuration information to use a SQL database.
     #
     # @note When making an API call, you may pass SqlConfiguration
     #   data as a hash:
@@ -9614,7 +12368,7 @@ module Aws::Kendra
     # @!attribute [rw] query_id
     #   The identifier of the specific query for which you are submitting
     #   feedback. The query ID is returned in the response to the `Query`
-    #   operation.
+    #   API.
     #   @return [String]
     #
     # @!attribute [rw] click_feedback_items
@@ -9927,6 +12681,86 @@ module Aws::Kendra
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass UpdateAccessControlConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_id: "IndexId", # required
+    #         id: "AccessControlConfigurationId", # required
+    #         name: "AccessControlConfigurationName",
+    #         description: "Description",
+    #         access_control_list: [
+    #           {
+    #             name: "PrincipalName", # required
+    #             type: "USER", # required, accepts USER, GROUP
+    #             access: "ALLOW", # required, accepts ALLOW, DENY
+    #             data_source_id: "DataSourceId",
+    #           },
+    #         ],
+    #         hierarchical_access_control_list: [
+    #           {
+    #             principal_list: [ # required
+    #               {
+    #                 name: "PrincipalName", # required
+    #                 type: "USER", # required, accepts USER, GROUP
+    #                 access: "ALLOW", # required, accepts ALLOW, DENY
+    #                 data_source_id: "DataSourceId",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index for an access control configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The identifier of the access control configuration you want to
+    #   update.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A new name for the access control configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A new description for the access control configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_control_list
+    #   Information you want to update on principals (users and/or groups)
+    #   and which documents they should have access to. This is useful for
+    #   user context filtering, where search results are filtered based on
+    #   the user or their group access to documents.
+    #   @return [Array<Types::Principal>]
+    #
+    # @!attribute [rw] hierarchical_access_control_list
+    #   The updated list of [principal][1] lists that define the hierarchy
+    #   for which documents users should have access to.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_Principal.html
+    #   @return [Array<Types::HierarchicalPrincipal>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UpdateAccessControlConfigurationRequest AWS API Documentation
+    #
+    class UpdateAccessControlConfigurationRequest < Struct.new(
+      :index_id,
+      :id,
+      :name,
+      :description,
+      :access_control_list,
+      :hierarchical_access_control_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UpdateAccessControlConfigurationResponse AWS API Documentation
+    #
+    class UpdateAccessControlConfigurationResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass UpdateDataSourceRequest
     #   data as a hash:
     #
@@ -9972,6 +12806,7 @@ module Aws::Kendra
     #               bucket: "S3BucketName", # required
     #               key: "S3ObjectKey", # required
     #             },
+    #             authentication_type: "HTTP_BASIC", # accepts HTTP_BASIC, OAUTH2
     #           },
     #           database_configuration: {
     #             database_engine_type: "RDS_AURORA_MYSQL", # required, accepts RDS_AURORA_MYSQL, RDS_AURORA_POSTGRESQL, RDS_MYSQL, RDS_POSTGRESQL
@@ -10245,6 +13080,308 @@ module Aws::Kendra
     #               },
     #             ],
     #           },
+    #           fsx_configuration: {
+    #             file_system_id: "FileSystemId", # required
+    #             file_system_type: "WINDOWS", # required, accepts WINDOWS
+    #             vpc_configuration: { # required
+    #               subnet_ids: ["SubnetId"], # required
+    #               security_group_ids: ["VpcSecurityGroupId"], # required
+    #             },
+    #             secret_arn: "SecretArn",
+    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #           },
+    #           slack_configuration: {
+    #             team_id: "TeamId", # required
+    #             secret_arn: "SecretArn", # required
+    #             vpc_configuration: {
+    #               subnet_ids: ["SubnetId"], # required
+    #               security_group_ids: ["VpcSecurityGroupId"], # required
+    #             },
+    #             slack_entity_list: ["PUBLIC_CHANNEL"], # required, accepts PUBLIC_CHANNEL, PRIVATE_CHANNEL, GROUP_MESSAGE, DIRECT_MESSAGE
+    #             use_change_log: false,
+    #             crawl_bot_message: false,
+    #             exclude_archived: false,
+    #             since_crawl_date: "SinceCrawlDate", # required
+    #             look_back_period: 1,
+    #             private_channel_filter: ["String"],
+    #             public_channel_filter: ["String"],
+    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #           },
+    #           box_configuration: {
+    #             enterprise_id: "EnterpriseId", # required
+    #             secret_arn: "SecretArn", # required
+    #             use_change_log: false,
+    #             crawl_comments: false,
+    #             crawl_tasks: false,
+    #             crawl_web_links: false,
+    #             file_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             task_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             comment_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             web_link_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             vpc_configuration: {
+    #               subnet_ids: ["SubnetId"], # required
+    #               security_group_ids: ["VpcSecurityGroupId"], # required
+    #             },
+    #           },
+    #           quip_configuration: {
+    #             domain: "Domain", # required
+    #             secret_arn: "SecretArn", # required
+    #             crawl_file_comments: false,
+    #             crawl_chat_rooms: false,
+    #             crawl_attachments: false,
+    #             folder_ids: ["FolderId"],
+    #             thread_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             message_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             attachment_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             vpc_configuration: {
+    #               subnet_ids: ["SubnetId"], # required
+    #               security_group_ids: ["VpcSecurityGroupId"], # required
+    #             },
+    #           },
+    #           jira_configuration: {
+    #             jira_account_url: "JiraAccountUrl", # required
+    #             secret_arn: "SecretArn", # required
+    #             use_change_log: false,
+    #             project: ["String"],
+    #             issue_type: ["String"],
+    #             status: ["String"],
+    #             issue_sub_entity_filter: ["COMMENTS"], # accepts COMMENTS, ATTACHMENTS, WORKLOGS
+    #             attachment_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             comment_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             issue_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             project_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             work_log_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             vpc_configuration: {
+    #               subnet_ids: ["SubnetId"], # required
+    #               security_group_ids: ["VpcSecurityGroupId"], # required
+    #             },
+    #           },
+    #           git_hub_configuration: {
+    #             saa_s_configuration: {
+    #               organization_name: "OrganizationName", # required
+    #               host_url: "Url", # required
+    #             },
+    #             on_premise_configuration: {
+    #               host_url: "Url", # required
+    #               organization_name: "OrganizationName", # required
+    #               ssl_certificate_s3_path: { # required
+    #                 bucket: "S3BucketName", # required
+    #                 key: "S3ObjectKey", # required
+    #               },
+    #             },
+    #             type: "SAAS", # accepts SAAS, ON_PREMISE
+    #             secret_arn: "SecretArn", # required
+    #             use_change_log: false,
+    #             git_hub_document_crawl_properties: {
+    #               crawl_repository_documents: false,
+    #               crawl_issue: false,
+    #               crawl_issue_comment: false,
+    #               crawl_issue_comment_attachment: false,
+    #               crawl_pull_request: false,
+    #               crawl_pull_request_comment: false,
+    #               crawl_pull_request_comment_attachment: false,
+    #             },
+    #             repository_filter: ["RepositoryName"],
+    #             inclusion_folder_name_patterns: ["String"],
+    #             inclusion_file_type_patterns: ["String"],
+    #             inclusion_file_name_patterns: ["String"],
+    #             exclusion_folder_name_patterns: ["String"],
+    #             exclusion_file_type_patterns: ["String"],
+    #             exclusion_file_name_patterns: ["String"],
+    #             vpc_configuration: {
+    #               subnet_ids: ["SubnetId"], # required
+    #               security_group_ids: ["VpcSecurityGroupId"], # required
+    #             },
+    #             git_hub_repository_configuration_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             git_hub_commit_configuration_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             git_hub_issue_document_configuration_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             git_hub_issue_comment_configuration_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             git_hub_issue_attachment_configuration_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             git_hub_pull_request_comment_configuration_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             git_hub_pull_request_document_configuration_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             git_hub_pull_request_document_attachment_configuration_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #           },
+    #           alfresco_configuration: {
+    #             site_url: "SiteUrl", # required
+    #             site_id: "SiteId", # required
+    #             secret_arn: "SecretArn", # required
+    #             ssl_certificate_s3_path: { # required
+    #               bucket: "S3BucketName", # required
+    #               key: "S3ObjectKey", # required
+    #             },
+    #             crawl_system_folders: false,
+    #             crawl_comments: false,
+    #             entity_filter: ["wiki"], # accepts wiki, blog, documentLibrary
+    #             document_library_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             blog_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             wiki_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             vpc_configuration: {
+    #               subnet_ids: ["SubnetId"], # required
+    #               security_group_ids: ["VpcSecurityGroupId"], # required
+    #             },
+    #           },
     #         },
     #         description: "Description",
     #         schedule: "ScanSchedule",
@@ -10309,42 +13446,47 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] id
-    #   The unique identifier of the data source to update.
+    #   The identifier of the data source you want to update.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the data source to update. The name of the data source
-    #   can't be updated. To rename a data source you must delete the data
-    #   source and re-create it.
+    #   A new name for the data source connector. You must first delete the
+    #   data source and re-create it to change the name of the data source.
     #   @return [String]
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index that contains the data source to update.
+    #   The identifier of the index used with the data source connector.
     #   @return [String]
     #
     # @!attribute [rw] configuration
-    #   Configuration information for an Amazon Kendra data source.
+    #   Configuration information you want to update for the data source
+    #   connector.
     #   @return [Types::DataSourceConfiguration]
     #
     # @!attribute [rw] description
-    #   The new description for the data source.
+    #   A new description for the data source connector.
     #   @return [String]
     #
     # @!attribute [rw] schedule
-    #   The new update schedule for the data source.
+    #   The sync schedule you want to update for the data source connector.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the new role to use when the data
-    #   source is accessing resources on your behalf.
+    #   The Amazon Resource Name (ARN) of a role with permission to access
+    #   the data source. For more information, see [IAM Roles for Amazon
+    #   Kendra][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The code for a language. This allows you to support a language for
-    #   all documents when updating the data source. English is supported by
-    #   default. For more information on supported languages, including
-    #   their codes, see [Adding documents in languages other than
-    #   English][1].
+    #   The code for a language you want to update for the data source
+    #   connector. This allows you to support a language for all documents
+    #   when updating the data source. English is supported by default. For
+    #   more information on supported languages, including their codes, see
+    #   [Adding documents in languages other than English][1].
     #
     #
     #
@@ -10352,8 +13494,8 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] custom_document_enrichment_configuration
-    #   Configuration information for altering document metadata and content
-    #   during the document ingestion process when you update a data source.
+    #   Configuration information you want to update for altering document
+    #   metadata and content during the document ingestion process.
     #
     #   For more information on how to create, modify and delete document
     #   metadata, or make other content alterations when you ingest
@@ -10407,20 +13549,18 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of your Amazon Kendra experience you want to update.
+    #   A new name for your Amazon Kendra experience.
     #   @return [String]
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index for your Amazon Kendra experience you
-    #   want to update.
+    #   The identifier of the index for your Amazon Kendra experience.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of a role with permission to access
-    #   `Query` operations, `QuerySuggestions` operations, `SubmitFeedback`
-    #   operations, and Amazon Web Services SSO that stores your user and
-    #   group information. For more information, see [IAM roles for Amazon
-    #   Kendra][1].
+    #   `Query` API, `QuerySuggestions` API, `SubmitFeedback` API, and
+    #   Amazon Web Services SSO that stores your user and group information.
+    #   For more information, see [IAM roles for Amazon Kendra][1].
     #
     #
     #
@@ -10428,13 +13568,12 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] configuration
-    #   Provides the user configuration information. This includes the
-    #   Amazon Web Services SSO field name that contains the identifiers of
-    #   your users, such as their emails.
+    #   Configuration information you want to update for your Amazon Kendra
+    #   experience.
     #   @return [Types::ExperienceConfiguration]
     #
     # @!attribute [rw] description
-    #   The description of your Amazon Kendra experience you want to update.
+    #   A new description for your Amazon Kendra experience.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UpdateExperienceRequest AWS API Documentation
@@ -10507,16 +13646,16 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] id
-    #   The identifier of the index to update.
+    #   The identifier of the index you want to update.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the index to update.
+    #   The name of the index you want to update.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   A new IAM role that gives Amazon Kendra permission to access your
-    #   Amazon CloudWatch logs.
+    #   An Identity and Access Management (IAM) role that gives Amazon
+    #   Kendra permission to access Amazon CloudWatch logs and metrics.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -10524,16 +13663,19 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] document_metadata_configuration_updates
-    #   The document metadata to update.
+    #   The document metadata configuration you want to update for the
+    #   index. Document metadata are fields or attributes associated with
+    #   your documents. For example, the company department name associated
+    #   with each document.
     #   @return [Array<Types::DocumentMetadataConfiguration>]
     #
     # @!attribute [rw] capacity_units
-    #   Sets the number of additional storage and query capacity units that
-    #   should be used by the index. You can change the capacity of the
-    #   index up to 5 times per day.
+    #   Sets the number of additional document storage and query capacity
+    #   units that should be used by the index. You can change the capacity
+    #   of the index up to 5 times per day, or make 5 API calls.
     #
     #   If you are using extra storage units, you can't reduce the storage
-    #   capacity below that required to meet the storage needs for your
+    #   capacity below what is required to meet the storage needs for your
     #   index.
     #   @return [Types::CapacityUnitsConfiguration]
     #
@@ -10587,19 +13729,19 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index for a block list.
+    #   The identifier of the index for the block list.
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The unique identifier of a block list.
+    #   The identifier of the block list you want to update.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of a block list.
+    #   A new name for the block list.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description for a block list.
+    #   A new description for the block list.
     #   @return [String]
     #
     # @!attribute [rw] source_s3_path
@@ -10647,8 +13789,8 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index you want to update query suggestions
-    #   settings for.
+    #   The identifier of the index with query suggestions you want to
+    #   update.
     #   @return [String]
     #
     # @!attribute [rw] mode
@@ -10739,23 +13881,24 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] id
-    #   The identifier of the thesaurus to update.
+    #   The identifier of the thesaurus you want to update.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The updated name of the thesaurus.
+    #   A new name for the thesaurus.
     #   @return [String]
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index associated with the thesaurus to update.
+    #   The identifier of the index for the thesaurus.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The updated description of the thesaurus.
+    #   A new description for the thesaurus.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The updated role ARN of the thesaurus.
+    #   An IAM role that gives Amazon Kendra permissions to access thesaurus
+    #   file specified in `SourceS3Path`.
     #   @return [String]
     #
     # @!attribute [rw] source_s3_path
@@ -10805,8 +13948,8 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] seed_url_configuration
-    #   Provides the configuration of the seed or starting point URLs of the
-    #   websites you want to crawl.
+    #   Configuration of the seed or starting point URLs of the websites you
+    #   want to crawl.
     #
     #   You can choose to crawl only the website host names, or the website
     #   host names with subdomains, or the website host names with
@@ -10816,8 +13959,7 @@ module Aws::Kendra
     #   @return [Types::SeedUrlConfiguration]
     #
     # @!attribute [rw] site_maps_configuration
-    #   Provides the configuration of the sitemap URLs of the websites you
-    #   want to crawl.
+    #   Configuration of the sitemap URLs of the websites you want to crawl.
     #
     #   Only URLs belonging to the same website host names are crawled. You
     #   can list up to three sitemap URLs.
@@ -10835,8 +13977,13 @@ module Aws::Kendra
     # Provides information about the user context for an Amazon Kendra
     # index.
     #
-    # This is used for filtering search results for different users based on
-    # their access to documents.
+    # User context filtering is a kind of personalized search with the
+    # benefit of controlling access to documents. For example, not all teams
+    # that search the company portal for information should access
+    # top-secret company documents, nor are these documents relevant to all
+    # users. Only specific users or groups of teams given access to
+    # top-secret documents should see these documents in their search
+    # results.
     #
     # You provide one of the following:
     #
@@ -10895,11 +14042,11 @@ module Aws::Kendra
 
     # Provides the configuration information to fetch access levels of
     # groups and users from an Amazon Web Services Single Sign On identity
-    # source. This is useful for setting up user context filtering, where
-    # Amazon Kendra filters search results for different users based on
-    # their group's access to documents. You can also map your users to
-    # their groups for user context filtering using the [PutPrincipalMapping
-    # operation][1].
+    # source. This is useful for user context filtering, where search
+    # results are filtered based on the user or their group access to
+    # documents. You can also use the [PutPrincipalMapping][1] API to map
+    # users to their groups so that you only need to provide the user ID
+    # when you issue the query.
     #
     # To set up an Amazon Web Services SSO identity source in the console to
     # use with Amazon Kendra, see [Getting started with an Amazon Web
@@ -10910,7 +14057,7 @@ module Aws::Kendra
     # Amazon Kendra currently does not support using
     # `UserGroupResolutionConfiguration` with an Amazon Web Services
     # organization member account for your Amazon Web Services SSO identify
-    # source. You must create your index in the parent account for the
+    # source. You must create your index in the management account for the
     # organization in order to use `UserGroupResolutionConfiguration`.
     #
     #
@@ -10942,7 +14089,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Configuration information for the identifiers of your users.
+    # Provides the configuration information for the identifiers of your
+    # users.
     #
     # @note When making an API call, you may pass UserIdentityConfiguration
     #   data as a hash:
@@ -10975,7 +14123,7 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides configuration information for a token configuration.
+    # Provides the configuration information for a token.
     #
     # @note When making an API call, you may pass UserTokenConfiguration
     #   data as a hash:
@@ -11144,24 +14292,26 @@ module Aws::Kendra
     #   @return [Integer]
     #
     # @!attribute [rw] url_inclusion_patterns
-    #   The regular expression pattern to include certain URLs to crawl.
-    #
-    #   If there is a regular expression pattern to exclude certain URLs
-    #   that conflicts with the include pattern, the exclude pattern takes
-    #   precedence.
+    #   A list of regular expression patterns to include certain URLs to
+    #   crawl. URLs that match the patterns are included in the index. URLs
+    #   that don't match the patterns are excluded from the index. If a URL
+    #   matches both an inclusion and exclusion pattern, the exclusion
+    #   pattern takes precedence and the URL file isn't included in the
+    #   index.
     #   @return [Array<String>]
     #
     # @!attribute [rw] url_exclusion_patterns
-    #   The regular expression pattern to exclude certain URLs to crawl.
-    #
-    #   If there is a regular expression pattern to include certain URLs
-    #   that conflicts with the exclude pattern, the exclude pattern takes
-    #   precedence.
+    #   A list of regular expression patterns to exclude certain URLs to
+    #   crawl. URLs that match the patterns are excluded from the index.
+    #   URLs that don't match the patterns are included in the index. If a
+    #   URL matches both an inclusion and exclusion pattern, the exclusion
+    #   pattern takes precedence and the URL file isn't included in the
+    #   index.
     #   @return [Array<String>]
     #
     # @!attribute [rw] proxy_configuration
-    #   Provides configuration information required to connect to your
-    #   internal websites via a web proxy.
+    #   Configuration information required to connect to your internal
+    #   websites via a web proxy.
     #
     #   You must provide the website host name and port number. For example,
     #   the host name of https://a.example.com/page1.html is
@@ -11177,17 +14327,16 @@ module Aws::Kendra
     #   @return [Types::ProxyConfiguration]
     #
     # @!attribute [rw] authentication_configuration
-    #   Provides configuration information required to connect to websites
-    #   using authentication.
+    #   Configuration information required to connect to websites using
+    #   authentication.
     #
     #   You can connect to websites using basic authentication of user name
-    #   and password.
+    #   and password. You use a secret in [Secrets Manager][1] to store your
+    #   authentication credentials.
     #
     #   You must provide the website host name and port number. For example,
     #   the host name of https://a.example.com/page1.html is
     #   "a.example.com" and the port is 443, the standard port for HTTPS.
-    #   You use a secret in [Secrets Manager][1] to store your
-    #   authentication credentials.
     #
     #
     #
@@ -11259,43 +14408,37 @@ module Aws::Kendra
     #   @return [Boolean]
     #
     # @!attribute [rw] use_change_log
-    #   `TRUE` to use the change logs to update documents in your index
-    #   instead of scanning all documents.
-    #
-    #   If you are syncing your Amazon WorkDocs data source with your index
-    #   for the first time, all documents are scanned. After your first
-    #   sync, you can use the change logs to update your documents in your
-    #   index for future syncs.
-    #
-    #   The default is set to `FALSE`.
+    #   `TRUE` to use the Amazon WorkDocs change log to determine which
+    #   documents require updating in the index. Depending on the change
+    #   log's size, it may take longer for Amazon Kendra to use the change
+    #   log than to scan all of your documents in Amazon WorkDocs.
     #   @return [Boolean]
     #
     # @!attribute [rw] inclusion_patterns
     #   A list of regular expression patterns to include certain files in
     #   your Amazon WorkDocs site repository. Files that match the patterns
     #   are included in the index. Files that don't match the patterns are
-    #   excluded from the index. If a file matches both an inclusion pattern
-    #   and an exclusion pattern, the exclusion pattern takes precedence and
-    #   the file isn’t included in the index.
+    #   excluded from the index. If a file matches both an inclusion and
+    #   exclusion pattern, the exclusion pattern takes precedence and the
+    #   file isn't included in the index.
     #   @return [Array<String>]
     #
     # @!attribute [rw] exclusion_patterns
     #   A list of regular expression patterns to exclude certain files in
     #   your Amazon WorkDocs site repository. Files that match the patterns
     #   are excluded from the index. Files that don’t match the patterns are
-    #   included in the index. If a file matches both an inclusion pattern
-    #   and an exclusion pattern, the exclusion pattern takes precedence and
-    #   the file isn’t included in the index.
+    #   included in the index. If a file matches both an inclusion and
+    #   exclusion pattern, the exclusion pattern takes precedence and the
+    #   file isn't included in the index.
     #   @return [Array<String>]
     #
     # @!attribute [rw] field_mappings
     #   A list of `DataSourceToIndexFieldMapping` objects that map Amazon
-    #   WorkDocs field names to custom index field names in Amazon Kendra.
-    #   You must first create the custom index fields using the
-    #   `UpdateIndex` operation before you map to Amazon WorkDocs fields.
-    #   For more information, see [Mapping Data Source Fields][1]. The
-    #   Amazon WorkDocs data source field names need to exist in your Amazon
-    #   WorkDocs custom metadata.
+    #   WorkDocs data source attributes or field names to Amazon Kendra
+    #   index field names. To create custom fields, use the `UpdateIndex`
+    #   API before you map to Amazon WorkDocs fields. For more information,
+    #   see [Mapping data source fields][1]. The Amazon WorkDocs data source
+    #   field names must exist in your Amazon WorkDocs custom metadata.
     #
     #
     #

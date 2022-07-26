@@ -13,6 +13,7 @@ module Aws::MQ
 
     include Seahorse::Model
 
+    ActionRequired = Shapes::StructureShape.new(name: 'ActionRequired')
     AuthenticationStrategy = Shapes::StringShape.new(name: 'AuthenticationStrategy')
     AvailabilityZone = Shapes::StructureShape.new(name: 'AvailabilityZone')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
@@ -117,6 +118,7 @@ module Aws::MQ
     __double = Shapes::FloatShape.new(name: '__double')
     __integer = Shapes::IntegerShape.new(name: '__integer')
     __integerMin5Max100 = Shapes::IntegerShape.new(name: '__integerMin5Max100')
+    __listOfActionRequired = Shapes::ListShape.new(name: '__listOfActionRequired')
     __listOfAvailabilityZone = Shapes::ListShape.new(name: '__listOfAvailabilityZone')
     __listOfBrokerEngineType = Shapes::ListShape.new(name: '__listOfBrokerEngineType')
     __listOfBrokerInstance = Shapes::ListShape.new(name: '__listOfBrokerInstance')
@@ -136,6 +138,10 @@ module Aws::MQ
     __string = Shapes::StringShape.new(name: '__string')
     __timestampIso8601 = Shapes::TimestampShape.new(name: '__timestampIso8601', timestampFormat: "iso8601")
     __timestampUnix = Shapes::TimestampShape.new(name: '__timestampUnix', timestampFormat: "unixTimestamp")
+
+    ActionRequired.add_member(:action_required_code, Shapes::ShapeRef.new(shape: __string, location_name: "actionRequiredCode"))
+    ActionRequired.add_member(:action_required_info, Shapes::ShapeRef.new(shape: __string, location_name: "actionRequiredInfo"))
+    ActionRequired.struct_class = Types::ActionRequired
 
     AvailabilityZone.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     AvailabilityZone.struct_class = Types::AvailabilityZone
@@ -350,6 +356,7 @@ module Aws::MQ
     DescribeBrokerInstanceOptionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
     DescribeBrokerInstanceOptionsResponse.struct_class = Types::DescribeBrokerInstanceOptionsResponse
 
+    DescribeBrokerOutput.add_member(:actions_required, Shapes::ShapeRef.new(shape: __listOfActionRequired, location_name: "actionsRequired"))
     DescribeBrokerOutput.add_member(:authentication_strategy, Shapes::ShapeRef.new(shape: AuthenticationStrategy, location_name: "authenticationStrategy"))
     DescribeBrokerOutput.add_member(:auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: __boolean, required: true, location_name: "autoMinorVersionUpgrade"))
     DescribeBrokerOutput.add_member(:broker_arn, Shapes::ShapeRef.new(shape: __string, location_name: "brokerArn"))
@@ -383,6 +390,7 @@ module Aws::MQ
     DescribeBrokerRequest.add_member(:broker_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "broker-id"))
     DescribeBrokerRequest.struct_class = Types::DescribeBrokerRequest
 
+    DescribeBrokerResponse.add_member(:actions_required, Shapes::ShapeRef.new(shape: __listOfActionRequired, location_name: "actionsRequired"))
     DescribeBrokerResponse.add_member(:authentication_strategy, Shapes::ShapeRef.new(shape: AuthenticationStrategy, location_name: "authenticationStrategy"))
     DescribeBrokerResponse.add_member(:auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: __boolean, location_name: "autoMinorVersionUpgrade"))
     DescribeBrokerResponse.add_member(:broker_arn, Shapes::ShapeRef.new(shape: __string, location_name: "brokerArn"))
@@ -713,6 +721,8 @@ module Aws::MQ
     WeeklyStartTime.add_member(:time_of_day, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "timeOfDay"))
     WeeklyStartTime.add_member(:time_zone, Shapes::ShapeRef.new(shape: __string, location_name: "timeZone"))
     WeeklyStartTime.struct_class = Types::WeeklyStartTime
+
+    __listOfActionRequired.member = Shapes::ShapeRef.new(shape: ActionRequired)
 
     __listOfAvailabilityZone.member = Shapes::ShapeRef.new(shape: AvailabilityZone)
 

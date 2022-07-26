@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2022-05-20)
+------------------
+
+* Feature - Doc-only update to publish the new valid values for log retention
+
+1.52.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.51.0 (2022-02-03)
 ------------------
 

@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::ElasticLoadBalancingV2
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -807,7 +809,9 @@ module Aws::ElasticLoadBalancingV2
     #
     # @option params [Array<String>] :subnets
     #   The IDs of the public subnets. You can specify only one subnet per
-    #   Availability Zone. You must specify either subnets or subnet mappings.
+    #   Availability Zone. You must specify either subnets or subnet mappings,
+    #   but not both. To specify an Elastic IP address, specify subnet
+    #   mappings instead of subnets.
     #
     #   \[Application Load Balancers\] You must specify subnets from at least
     #   two Availability Zones.
@@ -826,7 +830,8 @@ module Aws::ElasticLoadBalancingV2
     #
     # @option params [Array<Types::SubnetMapping>] :subnet_mappings
     #   The IDs of the public subnets. You can specify only one subnet per
-    #   Availability Zone. You must specify either subnets or subnet mappings.
+    #   Availability Zone. You must specify either subnets or subnet mappings,
+    #   but not both.
     #
     #   \[Application Load Balancers\] You must specify subnets from at least
     #   two Availability Zones. You cannot specify Elastic IP addresses for
@@ -1391,11 +1396,12 @@ module Aws::ElasticLoadBalancingV2
     #
     # @option params [Integer] :health_check_interval_seconds
     #   The approximate amount of time, in seconds, between health checks of
-    #   an individual target. If the target group protocol is TCP, TLS, UDP,
-    #   or TCP\_UDP, the supported values are 10 and 30 seconds. If the target
-    #   group protocol is HTTP or HTTPS, the default is 30 seconds. If the
-    #   target group protocol is GENEVE, the default is 10 seconds. If the
-    #   target type is `lambda`, the default is 35 seconds.
+    #   an individual target. If the target group protocol is HTTP or HTTPS,
+    #   the default is 30 seconds. If the target group protocol is TCP, TLS,
+    #   UDP, or TCP\_UDP, the supported values are 10 and 30 seconds and the
+    #   default is 30 seconds. If the target group protocol is GENEVE, the
+    #   default is 10 seconds. If the target type is `lambda`, the default is
+    #   35 seconds.
     #
     # @option params [Integer] :health_check_timeout_seconds
     #   The amount of time, in seconds, during which no response from a target
@@ -3553,6 +3559,10 @@ module Aws::ElasticLoadBalancingV2
     # Modifies the health checks used when evaluating the health state of
     # the targets in the specified target group.
     #
+    # If the protocol of the target group is TCP, TLS, UDP, or TCP\_UDP, you
+    # can't modify the health check protocol, interval, timeout, or success
+    # codes.
+    #
     # @option params [required, String] :target_group_arn
     #   The Amazon Resource Name (ARN) of the target group.
     #
@@ -3565,8 +3575,6 @@ module Aws::ElasticLoadBalancingV2
     #   only if the protocol of the target group is TCP, TLS, UDP, or
     #   TCP\_UDP. The GENEVE, TLS, UDP, and TCP\_UDP protocols are not
     #   supported for health checks.
-    #
-    #   With Network Load Balancers, you can't modify this setting.
     #
     # @option params [String] :health_check_port
     #   The port the load balancer uses when performing health checks on
@@ -3590,13 +3598,9 @@ module Aws::ElasticLoadBalancingV2
     #   an individual target. For TCP health checks, the supported values are
     #   10 or 30 seconds.
     #
-    #   With Network Load Balancers, you can't modify this setting.
-    #
     # @option params [Integer] :health_check_timeout_seconds
     #   \[HTTP/HTTPS health checks\] The amount of time, in seconds, during
     #   which no response means a failed health check.
-    #
-    #   With Network Load Balancers, you can't modify this setting.
     #
     # @option params [Integer] :healthy_threshold_count
     #   The number of consecutive health checks successes required before
@@ -3611,8 +3615,6 @@ module Aws::ElasticLoadBalancingV2
     # @option params [Types::Matcher] :matcher
     #   \[HTTP/HTTPS health checks\] The HTTP or gRPC codes to use when
     #   checking for a successful response from a target.
-    #
-    #   With Network Load Balancers, you can't modify this setting.
     #
     # @return [Types::ModifyTargetGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4311,7 +4313,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.76.0'
+      context[:gem_version] = '1.78.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

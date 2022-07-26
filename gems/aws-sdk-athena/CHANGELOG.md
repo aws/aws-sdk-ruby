@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2022-07-21)
+------------------
+
+* Feature - This feature allows customers to retrieve runtime statistics for completed queries
+
+1.55.0 (2022-07-14)
+------------------
+
+* Feature - This release updates data types that contain either QueryExecutionId, NamedQueryId or ExpectedBucketOwner. Ids must be between 1 and 128 characters and contain only non-whitespace characters. ExpectedBucketOwner must be 12-digit string.
+
+1.54.0 (2022-06-30)
+------------------
+
+* Feature - This feature introduces the API support for Athena's parameterized query and BatchGetPreparedStatement API.
+
+1.53.0 (2022-04-15)
+------------------
+
+* Feature - This release adds subfields, ErrorMessage, Retryable, to the AthenaError response object in the GetQueryExecution API when a query fails.
+
+1.52.0 (2022-03-02)
+------------------
+
+* Feature - This release adds support for S3 Object Ownership by allowing the S3 bucket owner full control canned ACL to be set when Athena writes query results to S3 buckets.
+
+1.51.0 (2022-02-28)
+------------------
+
+* Feature - This release adds support for updating an existing named query.
+
+1.50.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.49.0 (2022-02-14)
+------------------
+
+* Feature - This release adds a subfield, ErrorType, to the AthenaError response object in the GetQueryExecution API when a query fails.
+
 1.48.0 (2022-02-04)
 ------------------
 

@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::GlueDataBrew
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -448,7 +450,7 @@ module Aws::GlueDataBrew
     #
     #   resp = client.create_dataset({
     #     name: "DatasetName", # required
-    #     format: "CSV", # accepts CSV, JSON, PARQUET, EXCEL
+    #     format: "CSV", # accepts CSV, JSON, PARQUET, EXCEL, ORC
     #     format_options: {
     #       json: {
     #         multi_line: false,
@@ -909,6 +911,7 @@ module Aws::GlueDataBrew
     #             delimiter: "Delimiter",
     #           },
     #         },
+    #         max_output_files: 1,
     #       },
     #     ],
     #     data_catalog_outputs: [
@@ -1300,7 +1303,7 @@ module Aws::GlueDataBrew
     #   resp.created_by #=> String
     #   resp.create_date #=> Time
     #   resp.name #=> String
-    #   resp.format #=> String, one of "CSV", "JSON", "PARQUET", "EXCEL"
+    #   resp.format #=> String, one of "CSV", "JSON", "PARQUET", "EXCEL", "ORC"
     #   resp.format_options.json.multi_line #=> Boolean
     #   resp.format_options.excel.sheet_names #=> Array
     #   resp.format_options.excel.sheet_names[0] #=> String
@@ -1419,6 +1422,7 @@ module Aws::GlueDataBrew
     #   resp.outputs[0].location.bucket_owner #=> String
     #   resp.outputs[0].overwrite #=> Boolean
     #   resp.outputs[0].format_options.csv.delimiter #=> String
+    #   resp.outputs[0].max_output_files #=> Integer
     #   resp.data_catalog_outputs #=> Array
     #   resp.data_catalog_outputs[0].catalog_id #=> String
     #   resp.data_catalog_outputs[0].database_name #=> String
@@ -1571,6 +1575,7 @@ module Aws::GlueDataBrew
     #   resp.outputs[0].location.bucket_owner #=> String
     #   resp.outputs[0].overwrite #=> Boolean
     #   resp.outputs[0].format_options.csv.delimiter #=> String
+    #   resp.outputs[0].max_output_files #=> Integer
     #   resp.data_catalog_outputs #=> Array
     #   resp.data_catalog_outputs[0].catalog_id #=> String
     #   resp.data_catalog_outputs[0].database_name #=> String
@@ -1862,7 +1867,7 @@ module Aws::GlueDataBrew
     #   resp.datasets[0].created_by #=> String
     #   resp.datasets[0].create_date #=> Time
     #   resp.datasets[0].name #=> String
-    #   resp.datasets[0].format #=> String, one of "CSV", "JSON", "PARQUET", "EXCEL"
+    #   resp.datasets[0].format #=> String, one of "CSV", "JSON", "PARQUET", "EXCEL", "ORC"
     #   resp.datasets[0].format_options.json.multi_line #=> Boolean
     #   resp.datasets[0].format_options.excel.sheet_names #=> Array
     #   resp.datasets[0].format_options.excel.sheet_names[0] #=> String
@@ -1970,6 +1975,7 @@ module Aws::GlueDataBrew
     #   resp.job_runs[0].outputs[0].location.bucket_owner #=> String
     #   resp.job_runs[0].outputs[0].overwrite #=> Boolean
     #   resp.job_runs[0].outputs[0].format_options.csv.delimiter #=> String
+    #   resp.job_runs[0].outputs[0].max_output_files #=> Integer
     #   resp.job_runs[0].data_catalog_outputs #=> Array
     #   resp.job_runs[0].data_catalog_outputs[0].catalog_id #=> String
     #   resp.job_runs[0].data_catalog_outputs[0].database_name #=> String
@@ -2070,6 +2076,7 @@ module Aws::GlueDataBrew
     #   resp.jobs[0].outputs[0].location.bucket_owner #=> String
     #   resp.jobs[0].outputs[0].overwrite #=> Boolean
     #   resp.jobs[0].outputs[0].format_options.csv.delimiter #=> String
+    #   resp.jobs[0].outputs[0].max_output_files #=> Integer
     #   resp.jobs[0].data_catalog_outputs #=> Array
     #   resp.jobs[0].data_catalog_outputs[0].catalog_id #=> String
     #   resp.jobs[0].data_catalog_outputs[0].database_name #=> String
@@ -2730,7 +2737,7 @@ module Aws::GlueDataBrew
     #
     #   resp = client.update_dataset({
     #     name: "DatasetName", # required
-    #     format: "CSV", # accepts CSV, JSON, PARQUET, EXCEL
+    #     format: "CSV", # accepts CSV, JSON, PARQUET, EXCEL, ORC
     #     format_options: {
     #       json: {
     #         multi_line: false,
@@ -3141,6 +3148,7 @@ module Aws::GlueDataBrew
     #             delimiter: "Delimiter",
     #           },
     #         },
+    #         max_output_files: 1,
     #       },
     #     ],
     #     data_catalog_outputs: [
@@ -3309,7 +3317,7 @@ module Aws::GlueDataBrew
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-gluedatabrew'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1799,6 +1799,22 @@
         {"shape":"UnauthenticatedException"}
       ]
     },
+    "GetLoadBalancerTlsPolicies":{
+      "name":"GetLoadBalancerTlsPolicies",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetLoadBalancerTlsPoliciesRequest"},
+      "output":{"shape":"GetLoadBalancerTlsPoliciesResult"},
+      "errors":[
+        {"shape":"ServiceException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"AccountSetupInProgressException"},
+        {"shape":"UnauthenticatedException"},
+        {"shape":"InvalidInputException"}
+      ]
+    },
     "GetLoadBalancers":{
       "name":"GetLoadBalancers",
       "http":{
@@ -2742,6 +2758,24 @@
         "private"
       ]
     },
+    "AccountLevelBpaSync":{
+      "type":"structure",
+      "members":{
+        "status":{"shape":"AccountLevelBpaSyncStatus"},
+        "lastSyncedAt":{"shape":"IsoDate"},
+        "message":{"shape":"BPAStatusMessage"},
+        "bpaImpactsLightsail":{"shape":"boolean"}
+      }
+    },
+    "AccountLevelBpaSyncStatus":{
+      "type":"string",
+      "enum":[
+        "InSync",
+        "Failed",
+        "NeverSynced",
+        "Defaulted"
+      ]
+    },
     "AccountSetupInProgressException":{
       "type":"structure",
       "members":{
@@ -2976,6 +3010,15 @@
     "AvailabilityZoneList":{
       "type":"list",
       "member":{"shape":"AvailabilityZone"}
+    },
+    "BPAStatusMessage":{
+      "type":"string",
+      "enum":[
+        "DEFAULTED_FOR_SLR_MISSING",
+        "SYNC_ON_HOLD",
+        "DEFAULTED_FOR_SLR_MISSING_ON_HOLD",
+        "Unknown"
+      ]
     },
     "Base64":{"type":"string"},
     "BehaviorEnum":{
@@ -3353,7 +3396,8 @@
         "principalArn":{"shape":"string"},
         "privateDomainName":{"shape":"string"},
         "publicDomainNames":{"shape":"ContainerServicePublicDomains"},
-        "url":{"shape":"string"}
+        "url":{"shape":"string"},
+        "privateRegistryAccess":{"shape":"PrivateRegistryAccess"}
       }
     },
     "ContainerServiceDeployment":{
@@ -3385,6 +3429,19 @@
         "INACTIVE",
         "FAILED"
       ]
+    },
+    "ContainerServiceECRImagePullerRole":{
+      "type":"structure",
+      "members":{
+        "isActive":{"shape":"boolean"},
+        "principalArn":{"shape":"string"}
+      }
+    },
+    "ContainerServiceECRImagePullerRoleRequest":{
+      "type":"structure",
+      "members":{
+        "isActive":{"shape":"boolean"}
+      }
     },
     "ContainerServiceEndpoint":{
       "type":"structure",
@@ -3690,7 +3747,8 @@
         "scale":{"shape":"ContainerServiceScale"},
         "tags":{"shape":"TagList"},
         "publicDomainNames":{"shape":"ContainerServicePublicDomains"},
-        "deployment":{"shape":"ContainerServiceDeploymentRequest"}
+        "deployment":{"shape":"ContainerServiceDeploymentRequest"},
+        "privateRegistryAccess":{"shape":"PrivateRegistryAccessRequest"}
       }
     },
     "CreateContainerServiceResult":{
@@ -3926,7 +3984,8 @@
         "certificateDomainName":{"shape":"DomainName"},
         "certificateAlternativeNames":{"shape":"DomainNameList"},
         "tags":{"shape":"TagList"},
-        "ipAddressType":{"shape":"IpAddressType"}
+        "ipAddressType":{"shape":"IpAddressType"},
+        "tlsPolicyName":{"shape":"string"}
       }
     },
     "CreateLoadBalancerResult":{
@@ -4239,7 +4298,8 @@
       "type":"structure",
       "required":["keyPairName"],
       "members":{
-        "keyPairName":{"shape":"ResourceName"}
+        "keyPairName":{"shape":"ResourceName"},
+        "expectedFingerprint":{"shape":"string"}
       }
     },
     "DeleteKeyPairResult":{
@@ -4601,7 +4661,8 @@
       "type":"structure",
       "members":{
         "publicKeyBase64":{"shape":"Base64"},
-        "privateKeyBase64":{"shape":"Base64"}
+        "privateKeyBase64":{"shape":"Base64"},
+        "createdAt":{"shape":"IsoDate"}
       }
     },
     "EligibleToRenew":{"type":"string"},
@@ -4819,7 +4880,8 @@
       "type":"structure",
       "members":{
         "buckets":{"shape":"BucketList"},
-        "nextPageToken":{"shape":"string"}
+        "nextPageToken":{"shape":"string"},
+        "accountLevelBpaSync":{"shape":"AccountLevelBpaSync"}
       }
     },
     "GetBundlesRequest":{
@@ -5270,7 +5332,8 @@
     "GetKeyPairsRequest":{
       "type":"structure",
       "members":{
-        "pageToken":{"shape":"string"}
+        "pageToken":{"shape":"string"},
+        "includeDefaultKeyPair":{"shape":"boolean"}
       }
     },
     "GetKeyPairsResult":{
@@ -5332,6 +5395,19 @@
       "type":"structure",
       "members":{
         "tlsCertificates":{"shape":"LoadBalancerTlsCertificateList"}
+      }
+    },
+    "GetLoadBalancerTlsPoliciesRequest":{
+      "type":"structure",
+      "members":{
+        "pageToken":{"shape":"string"}
+      }
+    },
+    "GetLoadBalancerTlsPoliciesResult":{
+      "type":"structure",
+      "members":{
+        "tlsPolicies":{"shape":"LoadBalancerTlsPolicyList"},
+        "nextPageToken":{"shape":"string"}
       }
     },
     "GetLoadBalancersRequest":{
@@ -5421,7 +5497,8 @@
     "GetRelationalDatabaseBundlesRequest":{
       "type":"structure",
       "members":{
-        "pageToken":{"shape":"string"}
+        "pageToken":{"shape":"string"},
+        "includeInactive":{"shape":"boolean"}
       }
     },
     "GetRelationalDatabaseBundlesResult":{
@@ -6037,7 +6114,9 @@
         "instanceHealthSummary":{"shape":"InstanceHealthSummaryList"},
         "tlsCertificateSummaries":{"shape":"LoadBalancerTlsCertificateSummaryList"},
         "configurationOptions":{"shape":"LoadBalancerConfigurationOptions"},
-        "ipAddressType":{"shape":"IpAddressType"}
+        "ipAddressType":{"shape":"IpAddressType"},
+        "httpsRedirectionEnabled":{"shape":"boolean"},
+        "tlsPolicyName":{"shape":"ResourceName"}
       }
     },
     "LoadBalancerAttributeName":{
@@ -6045,7 +6124,9 @@
       "enum":[
         "HealthCheckPath",
         "SessionStickinessEnabled",
-        "SessionStickiness_LB_CookieDurationSeconds"
+        "SessionStickiness_LB_CookieDurationSeconds",
+        "HttpsRedirectionEnabled",
+        "TlsPolicyName"
       ]
     },
     "LoadBalancerConfigurationOptions":{
@@ -6222,6 +6303,20 @@
     "LoadBalancerTlsCertificateSummaryList":{
       "type":"list",
       "member":{"shape":"LoadBalancerTlsCertificateSummary"}
+    },
+    "LoadBalancerTlsPolicy":{
+      "type":"structure",
+      "members":{
+        "name":{"shape":"ResourceName"},
+        "isDefault":{"shape":"boolean"},
+        "description":{"shape":"string"},
+        "protocols":{"shape":"StringList"},
+        "ciphers":{"shape":"StringList"}
+      }
+    },
+    "LoadBalancerTlsPolicyList":{
+      "type":"list",
+      "member":{"shape":"LoadBalancerTlsPolicy"}
     },
     "LogEvent":{
       "type":"structure",
@@ -6624,6 +6719,18 @@
         "open",
         "closed"
       ]
+    },
+    "PrivateRegistryAccess":{
+      "type":"structure",
+      "members":{
+        "ecrImagePullerRole":{"shape":"ContainerServiceECRImagePullerRole"}
+      }
+    },
+    "PrivateRegistryAccessRequest":{
+      "type":"structure",
+      "members":{
+        "ecrImagePullerRole":{"shape":"ContainerServiceECRImagePullerRoleRequest"}
+      }
     },
     "PutAlarmRequest":{
       "type":"structure",
@@ -7347,7 +7454,8 @@
         "power":{"shape":"ContainerServicePowerName"},
         "scale":{"shape":"ContainerServiceScale"},
         "isDisabled":{"shape":"boolean"},
-        "publicDomainNames":{"shape":"ContainerServicePublicDomains"}
+        "publicDomainNames":{"shape":"ContainerServicePublicDomains"},
+        "privateRegistryAccess":{"shape":"PrivateRegistryAccessRequest"}
       }
     },
     "UpdateContainerServiceResult":{

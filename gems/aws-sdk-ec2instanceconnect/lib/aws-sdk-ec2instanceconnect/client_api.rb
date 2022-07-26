@@ -18,6 +18,7 @@ module Aws::EC2InstanceConnect
     EC2InstanceNotFoundException = Shapes::StructureShape.new(name: 'EC2InstanceNotFoundException')
     EC2InstanceStateInvalidException = Shapes::StructureShape.new(name: 'EC2InstanceStateInvalidException')
     EC2InstanceTypeInvalidException = Shapes::StructureShape.new(name: 'EC2InstanceTypeInvalidException')
+    EC2InstanceUnavailableException = Shapes::StructureShape.new(name: 'EC2InstanceUnavailableException')
     InstanceId = Shapes::StringShape.new(name: 'InstanceId')
     InstanceOSUser = Shapes::StringShape.new(name: 'InstanceOSUser')
     InvalidArgsException = Shapes::StructureShape.new(name: 'InvalidArgsException')
@@ -47,6 +48,9 @@ module Aws::EC2InstanceConnect
 
     EC2InstanceTypeInvalidException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     EC2InstanceTypeInvalidException.struct_class = Types::EC2InstanceTypeInvalidException
+
+    EC2InstanceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    EC2InstanceUnavailableException.struct_class = Types::EC2InstanceUnavailableException
 
     InvalidArgsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InvalidArgsException.struct_class = Types::InvalidArgsException
@@ -116,6 +120,7 @@ module Aws::EC2InstanceConnect
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: EC2InstanceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: EC2InstanceStateInvalidException)
+        o.errors << Shapes::ShapeRef.new(shape: EC2InstanceUnavailableException)
       end)
 
       api.add_operation(:send_serial_console_ssh_public_key, Seahorse::Model::Operation.new.tap do |o|
@@ -134,6 +139,7 @@ module Aws::EC2InstanceConnect
         o.errors << Shapes::ShapeRef.new(shape: SerialConsoleSessionLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: SerialConsoleSessionUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: EC2InstanceStateInvalidException)
+        o.errors << Shapes::ShapeRef.new(shape: EC2InstanceUnavailableException)
       end)
     end
 

@@ -644,6 +644,10 @@ module Aws::Route53
     #           },
     #           health_check_id: "HealthCheckId",
     #           traffic_policy_instance_id: "TrafficPolicyInstanceId",
+    #           cidr_routing_config: {
+    #             collection_id: "UUID", # required
+    #             location_name: "CidrLocationNameDefaultAllowed", # required
+    #           },
     #         },
     #       }
     #
@@ -722,6 +726,10 @@ module Aws::Route53
     #               },
     #               health_check_id: "HealthCheckId",
     #               traffic_policy_instance_id: "TrafficPolicyInstanceId",
+    #               cidr_routing_config: {
+    #                 collection_id: "UUID", # required
+    #                 location_name: "CidrLocationNameDefaultAllowed", # required
+    #               },
     #             },
     #           },
     #         ],
@@ -741,6 +749,74 @@ module Aws::Route53
     class ChangeBatch < Struct.new(
       :comment,
       :changes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ChangeCidrCollectionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "UUID", # required
+    #         collection_version: 1,
+    #         changes: [ # required
+    #           {
+    #             location_name: "CidrLocationNameDefaultNotAllowed", # required
+    #             action: "PUT", # required, accepts PUT, DELETE_IF_EXISTS
+    #             cidr_list: ["Cidr"], # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The UUID of the CIDR collection to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] collection_version
+    #   A sequential counter that Amazon Route 53 sets to 1 when you create
+    #   a collection and increments it by 1 each time you update the
+    #   collection.
+    #
+    #   We recommend that you use `ListCidrCollection` to get the current
+    #   value of `CollectionVersion` for the collection that you want to
+    #   update, and then include that value with the change request. This
+    #   prevents Route 53 from overwriting an intervening update:
+    #
+    #   * If the value in the request matches the value of
+    #     `CollectionVersion` in the collection, Route 53 updates the
+    #     collection.
+    #
+    #   * If the value of `CollectionVersion` in the collection is greater
+    #     than the value in the request, the collection was changed after
+    #     you got the version number. Route 53 does not update the
+    #     collection, and it returns a `CidrCollectionVersionMismatch`
+    #     error.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] changes
+    #   Information about changes to a CIDR collection.
+    #   @return [Array<Types::CidrCollectionChange>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ChangeCidrCollectionRequest AWS API Documentation
+    #
+    class ChangeCidrCollectionRequest < Struct.new(
+      :id,
+      :collection_version,
+      :changes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The ID that is returned by `ChangeCidrCollection`. You can use it as
+    #   input to `GetChange` to see if a CIDR collection change has
+    #   propagated or not.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ChangeCidrCollectionResponse AWS API Documentation
+    #
+    class ChangeCidrCollectionResponse < Struct.new(
+      :id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -827,6 +903,10 @@ module Aws::Route53
     #                 },
     #                 health_check_id: "HealthCheckId",
     #                 traffic_policy_instance_id: "TrafficPolicyInstanceId",
+    #                 cidr_routing_config: {
+    #                   collection_id: "UUID", # required
+    #                   location_name: "CidrLocationNameDefaultAllowed", # required
+    #                 },
     #               },
     #             },
     #           ],
@@ -936,6 +1016,176 @@ module Aws::Route53
     #
     class ChangeTagsForResourceResponse < Aws::EmptyStructure; end
 
+    # This CIDR block is already in use.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CidrBlockInUseException AWS API Documentation
+    #
+    class CidrBlockInUseException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A complex type that lists the CIDR blocks.
+    #
+    # @!attribute [rw] cidr_block
+    #   Value for the CIDR block.
+    #   @return [String]
+    #
+    # @!attribute [rw] location_name
+    #   The location name of the CIDR block.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CidrBlockSummary AWS API Documentation
+    #
+    class CidrBlockSummary < Struct.new(
+      :cidr_block,
+      :location_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A complex type that identifies a CIDR collection.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the collection. Can be used to reference the collection
+    #   in IAM policy or in another Amazon Web Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique ID of the CIDR collection.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of a CIDR collection.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   A sequential counter that Route 53 sets to 1 when you create a CIDR
+    #   collection and increments by 1 each time you update settings for the
+    #   CIDR collection.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CidrCollection AWS API Documentation
+    #
+    class CidrCollection < Struct.new(
+      :arn,
+      :id,
+      :name,
+      :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A CIDR collection with this name and a different caller reference
+    # already exists in this account.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CidrCollectionAlreadyExistsException AWS API Documentation
+    #
+    class CidrCollectionAlreadyExistsException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A complex type that contains information about the CIDR collection
+    # change.
+    #
+    # @note When making an API call, you may pass CidrCollectionChange
+    #   data as a hash:
+    #
+    #       {
+    #         location_name: "CidrLocationNameDefaultNotAllowed", # required
+    #         action: "PUT", # required, accepts PUT, DELETE_IF_EXISTS
+    #         cidr_list: ["Cidr"], # required
+    #       }
+    #
+    # @!attribute [rw] location_name
+    #   Name of the location that is associated with the CIDR collection.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   CIDR collection change action.
+    #   @return [String]
+    #
+    # @!attribute [rw] cidr_list
+    #   List of CIDR blocks.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CidrCollectionChange AWS API Documentation
+    #
+    class CidrCollectionChange < Struct.new(
+      :location_name,
+      :action,
+      :cidr_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This CIDR collection is in use, and isn't empty.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CidrCollectionInUseException AWS API Documentation
+    #
+    class CidrCollectionInUseException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The CIDR collection version you provided, doesn't match the one in
+    # the `ListCidrCollections` operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CidrCollectionVersionMismatchException AWS API Documentation
+    #
+    class CidrCollectionVersionMismatchException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The object that is specified in resource record set object when you
+    # are linking a resource record set to a CIDR location.
+    #
+    # A `LocationName` with an asterisk “*” can be used to create a default
+    # CIDR record. `CollectionId` is still required for default record.
+    #
+    # @note When making an API call, you may pass CidrRoutingConfig
+    #   data as a hash:
+    #
+    #       {
+    #         collection_id: "UUID", # required
+    #         location_name: "CidrLocationNameDefaultAllowed", # required
+    #       }
+    #
+    # @!attribute [rw] collection_id
+    #   The CIDR collection ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] location_name
+    #   The CIDR collection location name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CidrRoutingConfig AWS API Documentation
+    #
+    class CidrRoutingConfig < Struct.new(
+      :collection_id,
+      :location_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A complex type that contains information about the CloudWatch alarm
     # that Amazon Route 53 is monitoring for this health check.
     #
@@ -1005,6 +1255,42 @@ module Aws::Route53
       include Aws::Structure
     end
 
+    # A complex type that is an entry in an [CidrCollection][1] array.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_CidrCollection.html
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the collection summary. Can be used to reference the
+    #   collection in IAM policy or cross-account.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   Unique ID for the CIDR collection.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of a CIDR collection.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   A sequential counter that Route 53 sets to 1 when you create a CIDR
+    #   collection and increments by 1 each time you update settings for the
+    #   CIDR collection.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CollectionSummary AWS API Documentation
+    #
+    class CollectionSummary < Struct.new(
+      :arn,
+      :id,
+      :name,
+      :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Another user submitted a request to create, update, or delete the
     # object at the same time that you did. Retry the request.
     #
@@ -1066,6 +1352,51 @@ module Aws::Route53
     #
     class ConflictingTypes < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateCidrCollectionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "CollectionName", # required
+    #         caller_reference: "CidrNonce", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   A unique identifier for the account that can be used to reference
+    #   the collection from other API calls.
+    #   @return [String]
+    #
+    # @!attribute [rw] caller_reference
+    #   A client-specific token that allows requests to be securely retried
+    #   so that the intended outcome will only occur once, retries receive a
+    #   similar response, and there are no additional edge cases to handle.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateCidrCollectionRequest AWS API Documentation
+    #
+    class CreateCidrCollectionRequest < Struct.new(
+      :name,
+      :caller_reference)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] collection
+    #   A complex type that contains information about the CIDR collection.
+    #   @return [Types::CidrCollection]
+    #
+    # @!attribute [rw] location
+    #   A unique URL that represents the location for the CIDR collection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateCidrCollectionResponse AWS API Documentation
+    #
+    class CreateCidrCollectionResponse < Struct.new(
+      :collection,
+      :location)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1183,13 +1514,13 @@ module Aws::Route53
     # @!attribute [rw] name
     #   The name of the domain. Specify a fully qualified domain name, for
     #   example, *www.example.com*. The trailing dot is optional; Amazon
-    #   Route 53 assumes that the domain name is fully qualified. This means
-    #   that Route 53 treats *www.example.com* (without a trailing dot) and
+    #   Route 53 assumes that the domain name is fully qualified. This means
+    #   that Route 53 treats *www.example.com* (without a trailing dot) and
     #   *www.example.com.* (with a trailing dot) as identical.
     #
     #   If you're creating a public hosted zone, this is the name you have
     #   registered with your DNS registrar. If your domain name is
-    #   registered with a registrar other than Route 53, change the name
+    #   registered with a registrar other than Route 53, change the name
     #   servers for your domain to the set of `NameServers` that
     #   `CreateHostedZone` returns in `DelegationSet`.
     #   @return [String]
@@ -1233,7 +1564,7 @@ module Aws::Route53
     #
     # @!attribute [rw] delegation_set_id
     #   If you want to associate a reusable delegation set with this hosted
-    #   zone, the ID that Amazon Route 53 assigned to the reusable
+    #   zone, the ID that Amazon Route 53 assigned to the reusable
     #   delegation set when you created it. For more information about
     #   reusable delegation sets, see [CreateReusableDelegationSet][1].
     #
@@ -1968,6 +2299,29 @@ module Aws::Route53
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteCidrCollectionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "UUID", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The UUID of the collection to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteCidrCollectionRequest AWS API Documentation
+    #
+    class DeleteCidrCollectionRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteCidrCollectionResponse AWS API Documentation
+    #
+    class DeleteCidrCollectionResponse < Aws::EmptyStructure; end
+
     # This action deletes a health check.
     #
     # @note When making an API call, you may pass DeleteHealthCheckRequest
@@ -2563,7 +2917,7 @@ module Aws::Route53
     #   data as a hash:
     #
     #       {
-    #         id: "ResourceId", # required
+    #         id: "ChangeId", # required
     #       }
     #
     # @!attribute [rw] id
@@ -4539,21 +4893,14 @@ module Aws::Route53
       include Aws::Structure
     end
 
-    # This operation can't be completed either because the current account
-    # has reached the limit on reusable delegation sets that it can create
-    # or because you've reached the limit on the number of Amazon VPCs that
-    # you can associate with a private hosted zone. To get the current limit
-    # on the number of reusable delegation sets, see [GetAccountLimit][1].
-    # To get the current limit on the number of Amazon VPCs that you can
-    # associate with a private hosted zone, see [GetHostedZoneLimit][2]. To
-    # request a higher limit, [create a case][3] with the Amazon Web
-    # Services Support Center.
+    # This operation can't be completed because the current account has
+    # reached the limit on the resource you are trying to create. To request
+    # a higher limit, [create a case][1] with the Amazon Web Services
+    # Support Center.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetAccountLimit.html
-    # [2]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetHostedZoneLimit.html
-    # [3]: http://aws.amazon.com/route53-request
+    # [1]: http://aws.amazon.com/route53-request
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -4589,6 +4936,173 @@ module Aws::Route53
     class LinkedService < Struct.new(
       :service_principal,
       :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListCidrBlocksRequest
+    #   data as a hash:
+    #
+    #       {
+    #         collection_id: "UUID", # required
+    #         location_name: "CidrLocationNameDefaultNotAllowed",
+    #         next_token: "PaginationToken",
+    #         max_results: "MaxResults",
+    #       }
+    #
+    # @!attribute [rw] collection_id
+    #   The UUID of the CIDR collection.
+    #   @return [String]
+    #
+    # @!attribute [rw] location_name
+    #   The name of the CIDR collection location.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   An opaque pagination token to indicate where the service is to begin
+    #   enumerating results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of results you want returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListCidrBlocksRequest AWS API Documentation
+    #
+    class ListCidrBlocksRequest < Struct.new(
+      :collection_id,
+      :location_name,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   An opaque pagination token to indicate where the service is to begin
+    #   enumerating results.
+    #
+    #   If no value is provided, the listing of results starts from the
+    #   beginning.
+    #   @return [String]
+    #
+    # @!attribute [rw] cidr_blocks
+    #   A complex type that contains information about the CIDR blocks.
+    #   @return [Array<Types::CidrBlockSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListCidrBlocksResponse AWS API Documentation
+    #
+    class ListCidrBlocksResponse < Struct.new(
+      :next_token,
+      :cidr_blocks)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListCidrCollectionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "PaginationToken",
+    #         max_results: "MaxResults",
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   An opaque pagination token to indicate where the service is to begin
+    #   enumerating results.
+    #
+    #   If no value is provided, the listing of results starts from the
+    #   beginning.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of CIDR collections to return in the response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListCidrCollectionsRequest AWS API Documentation
+    #
+    class ListCidrCollectionsRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   An opaque pagination token to indicate where the service is to begin
+    #   enumerating results.
+    #
+    #   If no value is provided, the listing of results starts from the
+    #   beginning.
+    #   @return [String]
+    #
+    # @!attribute [rw] cidr_collections
+    #   A complex type with information about the CIDR collection.
+    #   @return [Array<Types::CollectionSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListCidrCollectionsResponse AWS API Documentation
+    #
+    class ListCidrCollectionsResponse < Struct.new(
+      :next_token,
+      :cidr_collections)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListCidrLocationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         collection_id: "UUID", # required
+    #         next_token: "PaginationToken",
+    #         max_results: "MaxResults",
+    #       }
+    #
+    # @!attribute [rw] collection_id
+    #   The CIDR collection ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   An opaque pagination token to indicate where the service is to begin
+    #   enumerating results.
+    #
+    #   If no value is provided, the listing of results starts from the
+    #   beginning.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of CIDR collection locations to return in the
+    #   response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListCidrLocationsRequest AWS API Documentation
+    #
+    class ListCidrLocationsRequest < Struct.new(
+      :collection_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   An opaque pagination token to indicate where the service is to begin
+    #   enumerating results.
+    #
+    #   If no value is provided, the listing of results starts from the
+    #   beginning.
+    #   @return [String]
+    #
+    # @!attribute [rw] cidr_locations
+    #   A complex type that contains information about the list of CIDR
+    #   locations.
+    #   @return [Array<Types::LocationSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListCidrLocationsResponse AWS API Documentation
+    #
+    class ListCidrLocationsResponse < Struct.new(
+      :next_token,
+      :cidr_locations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6147,6 +6661,20 @@ module Aws::Route53
       include Aws::Structure
     end
 
+    # A complex type that contains information about the CIDR location.
+    #
+    # @!attribute [rw] location_name
+    #   A string that specifies a location name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/LocationSummary AWS API Documentation
+    #
+    class LocationSummary < Struct.new(
+      :location_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A change with the specified change ID does not exist.
     #
     # @!attribute [rw] message
@@ -6155,6 +6683,33 @@ module Aws::Route53
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/NoSuchChange AWS API Documentation
     #
     class NoSuchChange < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The CIDR collection you specified, doesn't exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/NoSuchCidrCollectionException AWS API Documentation
+    #
+    class NoSuchCidrCollectionException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The CIDR collection location doesn't match any locations in your
+    # account.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/NoSuchCidrLocationException AWS API Documentation
+    #
+    class NoSuchCidrLocationException < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -6442,6 +6997,10 @@ module Aws::Route53
     #         },
     #         health_check_id: "HealthCheckId",
     #         traffic_policy_instance_id: "TrafficPolicyInstanceId",
+    #         cidr_routing_config: {
+    #           collection_id: "UUID", # required
+    #           location_name: "CidrLocationNameDefaultAllowed", # required
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -6987,6 +7546,15 @@ module Aws::Route53
     #   use.
     #   @return [String]
     #
+    # @!attribute [rw] cidr_routing_config
+    #   The object that is specified in resource record set object when you
+    #   are linking a resource record set to a CIDR location.
+    #
+    #   A `LocationName` with an asterisk “*” can be used to create a
+    #   default CIDR record. `CollectionId` is still required for default
+    #   record.
+    #   @return [Types::CidrRoutingConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ResourceRecordSet AWS API Documentation
     #
     class ResourceRecordSet < Struct.new(
@@ -7002,7 +7570,8 @@ module Aws::Route53
       :resource_records,
       :alias_target,
       :health_check_id,
-      :traffic_policy_instance_id)
+      :traffic_policy_instance_id,
+      :cidr_routing_config)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -10,6 +10,19 @@
 module Aws::RDSDataService
   module Types
 
+    # You do not have sufficient access to perform this action.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains an array.
     #
     # @note ArrayValue is a union - when making an API calls you must set exactly one of the members.
@@ -25,11 +38,11 @@ module Aws::RDSDataService
     #   @return [Array<Boolean>]
     #
     # @!attribute [rw] double_values
-    #   An array of integers.
+    #   An array of floating-point numbers.
     #   @return [Array<Float>]
     #
     # @!attribute [rw] long_values
-    #   An array of floating point numbers.
+    #   An array of integers.
     #   @return [Array<Integer>]
     #
     # @!attribute [rw] string_values
@@ -143,11 +156,21 @@ module Aws::RDSDataService
     #   @return [String]
     #
     # @!attribute [rw] secret_arn
-    #   The name or ARN of the secret that enables access to the DB cluster.
+    #   The ARN of the secret that enables access to the DB cluster. Enter
+    #   the database user name and password for the credentials in the
+    #   secret.
+    #
+    #   For information about creating the secret, see [Create a database
+    #   secret][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html
     #   @return [String]
     #
     # @!attribute [rw] sql
-    #   The SQL statement to run.
+    #   The SQL statement to run. Don't include a semicolon (;) at the end
+    #   of the SQL statement.
     #   @return [String]
     #
     # @!attribute [rw] transaction_id
@@ -387,7 +410,15 @@ module Aws::RDSDataService
     #
     # @!attribute [rw] aws_secret_store_arn
     #   The Amazon Resource Name (ARN) of the secret that enables access to
-    #   the DB cluster.
+    #   the DB cluster. Enter the database user name and password for the
+    #   credentials in the secret.
+    #
+    #   For information about creating the secret, see [Create a database
+    #   secret][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html
     #   @return [String]
     #
     # @!attribute [rw] database
@@ -446,6 +477,7 @@ module Aws::RDSDataService
     #       {
     #         continue_after_timeout: false,
     #         database: "DbName",
+    #         format_records_as: "NONE", # accepts NONE, JSON
     #         include_result_metadata: false,
     #         parameters: [
     #           {
@@ -475,6 +507,7 @@ module Aws::RDSDataService
     #         resource_arn: "Arn", # required
     #         result_set_options: {
     #           decimal_return_type: "STRING", # accepts STRING, DOUBLE_OR_LONG
+    #           long_return_type: "STRING", # accepts STRING, LONG
     #         },
     #         schema: "DbName",
     #         secret_arn: "Arn", # required
@@ -495,6 +528,21 @@ module Aws::RDSDataService
     #
     # @!attribute [rw] database
     #   The name of the database.
+    #   @return [String]
+    #
+    # @!attribute [rw] format_records_as
+    #   A value that indicates whether to format the result set as a single
+    #   JSON string. This parameter only applies to `SELECT` statements and
+    #   is ignored for other types of statements. Allowed values are `NONE`
+    #   and `JSON`. The default value is `NONE`. The result is returned in
+    #   the `formattedRecords` field.
+    #
+    #   For usage information about the JSON format for result sets, see
+    #   [Using the Data API][1] in the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html
     #   @return [String]
     #
     # @!attribute [rw] include_result_metadata
@@ -526,7 +574,16 @@ module Aws::RDSDataService
     #   @return [String]
     #
     # @!attribute [rw] secret_arn
-    #   The name or ARN of the secret that enables access to the DB cluster.
+    #   The ARN of the secret that enables access to the DB cluster. Enter
+    #   the database user name and password for the credentials in the
+    #   secret.
+    #
+    #   For information about creating the secret, see [Create a database
+    #   secret][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html
     #   @return [String]
     #
     # @!attribute [rw] sql
@@ -547,6 +604,7 @@ module Aws::RDSDataService
     class ExecuteStatementRequest < Struct.new(
       :continue_after_timeout,
       :database,
+      :format_records_as,
       :include_result_metadata,
       :parameters,
       :resource_arn,
@@ -563,11 +621,22 @@ module Aws::RDSDataService
     # statement against a database.
     #
     # @!attribute [rw] column_metadata
-    #   Metadata for the columns included in the results.
+    #   Metadata for the columns included in the results. This field is
+    #   blank if the `formatRecordsAs` parameter is set to `JSON`.
     #   @return [Array<Types::ColumnMetadata>]
     #
+    # @!attribute [rw] formatted_records
+    #   A string value that represents the result set of a `SELECT`
+    #   statement in JSON format. This value is only present when the
+    #   `formatRecordsAs` parameter is set to `JSON`.
+    #
+    #   The size limit for this field is currently 10 MB. If the
+    #   JSON-formatted string representing the result set requires more than
+    #   10 MB, the call returns an error.
+    #   @return [String]
+    #
     # @!attribute [rw] generated_fields
-    #   Values for fields generated during the request.
+    #   Values for fields generated during a DML request.
     #
     #        <note> <p>The <code>generatedFields</code> data isn't supported by Aurora PostgreSQL. To get the values of generated fields, use the <code>RETURNING</code> clause. For more information, see <a href="https://www.postgresql.org/docs/10/dml-returning.html">Returning Data From Modified Rows</a> in the PostgreSQL documentation.</p> </note>
     #   @return [Array<Types::Field>]
@@ -577,13 +646,15 @@ module Aws::RDSDataService
     #   @return [Integer]
     #
     # @!attribute [rw] records
-    #   The records returned by the SQL statement.
+    #   The records returned by the SQL statement. This field is blank if
+    #   the `formatRecordsAs` parameter is set to `JSON`.
     #   @return [Array<Array<Types::Field>>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/ExecuteStatementResponse AWS API Documentation
     #
     class ExecuteStatementResponse < Struct.new(
       :column_metadata,
+      :formatted_records,
       :generated_fields,
       :number_of_records_updated,
       :records)
@@ -687,6 +758,10 @@ module Aws::RDSDataService
 
     # A record returned by a call.
     #
+    # This data structure is only used with the deprecated `ExecuteSql`
+    # operation. Use the `BatchExecuteStatement` or `ExecuteStatement`
+    # operation instead.
+    #
     # @!attribute [rw] values
     #   The values returned in the record.
     #   @return [Array<Types::Value>]
@@ -700,6 +775,10 @@ module Aws::RDSDataService
     end
 
     # The result set returned by a SQL statement.
+    #
+    # This data structure is only used with the deprecated `ExecuteSql`
+    # operation. Use the `BatchExecuteStatement` or `ExecuteStatement`
+    # operation instead.
     #
     # @!attribute [rw] records
     #   The records in the result set.
@@ -744,6 +823,7 @@ module Aws::RDSDataService
     #
     #       {
     #         decimal_return_type: "STRING", # accepts STRING, DOUBLE_OR_LONG
+    #         long_return_type: "STRING", # accepts STRING, LONG
     #       }
     #
     # @!attribute [rw] decimal_return_type
@@ -758,10 +838,18 @@ module Aws::RDSDataService
     #   working with currency values.
     #   @return [String]
     #
+    # @!attribute [rw] long_return_type
+    #   A value that indicates how a field of `LONG` type is represented.
+    #   Allowed values are `LONG` and `STRING`. The default is `LONG`.
+    #   Specify `STRING` if the length or precision of numeric values might
+    #   cause truncation or rounding errors.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/ResultSetOptions AWS API Documentation
     #
     class ResultSetOptions < Struct.new(
-      :decimal_return_type)
+      :decimal_return_type,
+      :long_return_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -896,7 +984,7 @@ module Aws::RDSDataService
 
     # The result of a SQL statement.
     #
-    #      <important> <p>This data type is deprecated.</p> </important>
+    #      <important> <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation. Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p> </important>
     #
     # @!attribute [rw] number_of_records_updated
     #   The number of records updated by a SQL statement.
@@ -937,6 +1025,10 @@ module Aws::RDSDataService
 
     # A structure value returned by a call.
     #
+    # This data structure is only used with the deprecated `ExecuteSql`
+    # operation. Use the `BatchExecuteStatement` or `ExecuteStatement`
+    # operation instead.
+    #
     # @!attribute [rw] attributes
     #   The attributes returned in the record.
     #   @return [Array<Types::Value>]
@@ -965,7 +1057,7 @@ module Aws::RDSDataService
 
     # Contains the value of a column.
     #
-    #      <important> <p>This data type is deprecated.</p> </important>
+    #      <important> <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation. Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p> </important>
     #
     # @note Value is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Value corresponding to the set member.
     #

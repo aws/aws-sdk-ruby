@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::WellArchitected
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -409,7 +411,14 @@ module Aws::WellArchitected
     #  </note>
     #
     # @option params [required, String] :lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #
@@ -469,7 +478,14 @@ module Aws::WellArchitected
     # Region. Only the owner of a lens can delete it.
     #
     # @option params [required, String] :lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #
@@ -625,7 +641,7 @@ module Aws::WellArchitected
     # @option params [String] :architectural_design
     #   The URL of the architectural design for the workload.
     #
-    # @option params [required, String] :review_owner
+    # @option params [String] :review_owner
     #   The review owner of the workload. The name, email address, or
     #   identifier for the primary group or individual that owns the workload
     #   review process.
@@ -735,7 +751,7 @@ module Aws::WellArchitected
     #     non_aws_regions: ["WorkloadNonAwsRegion"],
     #     pillar_priorities: ["PillarId"],
     #     architectural_design: "WorkloadArchitecturalDesign",
-    #     review_owner: "WorkloadReviewOwner", # required
+    #     review_owner: "WorkloadReviewOwner",
     #     industry_type: "WorkloadIndustryType",
     #     industry: "WorkloadIndustry",
     #     lenses: ["LensAlias"], # required
@@ -849,7 +865,14 @@ module Aws::WellArchitected
     #  </note>
     #
     # @option params [required, String] :lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #
@@ -913,7 +936,14 @@ module Aws::WellArchitected
     #   The ID associated with the workload share.
     #
     # @option params [required, String] :lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #
@@ -1100,7 +1130,14 @@ module Aws::WellArchitected
     # [1]: https://docs.aws.amazon.com/wellarchitected/latest/userguide/lenses-format-specification.html
     #
     # @option params [required, String] :lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #
@@ -1138,7 +1175,14 @@ module Aws::WellArchitected
     #   Web Services Region.
     #
     # @option params [required, String] :lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #
@@ -1188,6 +1232,11 @@ module Aws::WellArchitected
     #   resp.answer.choices[0].helpful_resource.url #=> String
     #   resp.answer.choices[0].improvement_plan.display_text #=> String
     #   resp.answer.choices[0].improvement_plan.url #=> String
+    #   resp.answer.choices[0].additional_resources #=> Array
+    #   resp.answer.choices[0].additional_resources[0].type #=> String, one of "HELPFUL_RESOURCE", "IMPROVEMENT_PLAN"
+    #   resp.answer.choices[0].additional_resources[0].content #=> Array
+    #   resp.answer.choices[0].additional_resources[0].content[0].display_text #=> String
+    #   resp.answer.choices[0].additional_resources[0].content[0].url #=> String
     #   resp.answer.selected_choices #=> Array
     #   resp.answer.selected_choices[0] #=> String
     #   resp.answer.choice_answers #=> Array
@@ -1212,7 +1261,14 @@ module Aws::WellArchitected
     # Get an existing lens.
     #
     # @option params [required, String] :lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #
@@ -1238,6 +1294,8 @@ module Aws::WellArchitected
     #   resp.lens.description #=> String
     #   resp.lens.owner #=> String
     #   resp.lens.share_invitation_id #=> String
+    #   resp.lens.tags #=> Hash
+    #   resp.lens.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetLens AWS API Documentation
     #
@@ -1255,7 +1313,14 @@ module Aws::WellArchitected
     #   Web Services Region.
     #
     # @option params [required, String] :lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #
@@ -1315,7 +1380,14 @@ module Aws::WellArchitected
     #   Web Services Region.
     #
     # @option params [required, String] :lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #
@@ -1358,7 +1430,14 @@ module Aws::WellArchitected
     # Get lens version differences.
     #
     # @option params [required, String] :lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #
@@ -1564,7 +1643,14 @@ module Aws::WellArchitected
     # [1]: https://docs.aws.amazon.com/wellarchitected/latest/userguide/lenses-format-specification.html
     #
     # @option params [String] :lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #
@@ -1628,7 +1714,14 @@ module Aws::WellArchitected
     #   Web Services Region.
     #
     # @option params [required, String] :lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #
@@ -1688,6 +1781,11 @@ module Aws::WellArchitected
     #   resp.answer_summaries[0].choices[0].helpful_resource.url #=> String
     #   resp.answer_summaries[0].choices[0].improvement_plan.display_text #=> String
     #   resp.answer_summaries[0].choices[0].improvement_plan.url #=> String
+    #   resp.answer_summaries[0].choices[0].additional_resources #=> Array
+    #   resp.answer_summaries[0].choices[0].additional_resources[0].type #=> String, one of "HELPFUL_RESOURCE", "IMPROVEMENT_PLAN"
+    #   resp.answer_summaries[0].choices[0].additional_resources[0].content #=> Array
+    #   resp.answer_summaries[0].choices[0].additional_resources[0].content[0].display_text #=> String
+    #   resp.answer_summaries[0].choices[0].additional_resources[0].content[0].url #=> String
     #   resp.answer_summaries[0].selected_choices #=> Array
     #   resp.answer_summaries[0].selected_choices[0] #=> String
     #   resp.answer_summaries[0].choice_answer_summaries #=> Array
@@ -1715,7 +1813,14 @@ module Aws::WellArchitected
     #   Web Services Region.
     #
     # @option params [required, String] :lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #
@@ -1846,7 +1951,14 @@ module Aws::WellArchitected
     # List the lens shares associated with the lens.
     #
     # @option params [required, String] :lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #
@@ -1859,6 +1971,9 @@ module Aws::WellArchitected
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return for this request.
+    #
+    # @option params [String] :status
+    #   The status of a workload share.
     #
     # @return [Types::ListLensSharesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1874,6 +1989,7 @@ module Aws::WellArchitected
     #     shared_with_prefix: "SharedWithPrefix",
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     status: "ACCEPTED", # accepts ACCEPTED, REJECTED, PENDING, REVOKED, EXPIRED, ASSOCIATING, ASSOCIATED, FAILED
     #   })
     #
     # @example Response structure
@@ -1881,7 +1997,8 @@ module Aws::WellArchitected
     #   resp.lens_share_summaries #=> Array
     #   resp.lens_share_summaries[0].share_id #=> String
     #   resp.lens_share_summaries[0].shared_with #=> String
-    #   resp.lens_share_summaries[0].status #=> String, one of "ACCEPTED", "REJECTED", "PENDING", "REVOKED", "EXPIRED"
+    #   resp.lens_share_summaries[0].status #=> String, one of "ACCEPTED", "REJECTED", "PENDING", "REVOKED", "EXPIRED", "ASSOCIATING", "ASSOCIATED", "FAILED"
+    #   resp.lens_share_summaries[0].status_message #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListLensShares AWS API Documentation
@@ -2116,6 +2233,11 @@ module Aws::WellArchitected
 
     # List the tags for a resource.
     #
+    # <note markdown="1"> The WorkloadArn parameter can be either a workload ARN or a custom
+    # lens ARN.
+    #
+    #  </note>
+    #
     # @option params [required, String] :workload_arn
     #   The ARN for the workload.
     #
@@ -2159,6 +2281,9 @@ module Aws::WellArchitected
     # @option params [Integer] :max_results
     #   The maximum number of results to return for this request.
     #
+    # @option params [String] :status
+    #   The status of a workload share.
+    #
     # @return [Types::ListWorkloadSharesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListWorkloadSharesOutput#workload_id #workload_id} => String
@@ -2174,6 +2299,7 @@ module Aws::WellArchitected
     #     shared_with_prefix: "SharedWithPrefix",
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     status: "ACCEPTED", # accepts ACCEPTED, REJECTED, PENDING, REVOKED, EXPIRED, ASSOCIATING, ASSOCIATED, FAILED
     #   })
     #
     # @example Response structure
@@ -2183,7 +2309,8 @@ module Aws::WellArchitected
     #   resp.workload_share_summaries[0].share_id #=> String
     #   resp.workload_share_summaries[0].shared_with #=> String
     #   resp.workload_share_summaries[0].permission_type #=> String, one of "READONLY", "CONTRIBUTOR"
-    #   resp.workload_share_summaries[0].status #=> String, one of "ACCEPTED", "REJECTED", "PENDING", "REVOKED", "EXPIRED"
+    #   resp.workload_share_summaries[0].status #=> String, one of "ACCEPTED", "REJECTED", "PENDING", "REVOKED", "EXPIRED", "ASSOCIATING", "ASSOCIATED", "FAILED"
+    #   resp.workload_share_summaries[0].status_message #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListWorkloadShares AWS API Documentation
@@ -2248,6 +2375,11 @@ module Aws::WellArchitected
 
     # Adds one or more tags to the specified resource.
     #
+    # <note markdown="1"> The WorkloadArn parameter can be either a workload ARN or a custom
+    # lens ARN.
+    #
+    #  </note>
+    #
     # @option params [required, String] :workload_arn
     #   The ARN for the workload.
     #
@@ -2275,6 +2407,11 @@ module Aws::WellArchitected
     end
 
     # Deletes specified tags from a resource.
+    #
+    # <note markdown="1"> The WorkloadArn parameter can be either a workload ARN or a custom
+    # lens ARN.
+    #
+    #  </note>
     #
     # To specify multiple tags, use separate **tagKeys** parameters, for
     # example:
@@ -2313,7 +2450,14 @@ module Aws::WellArchitected
     #   Web Services Region.
     #
     # @option params [required, String] :lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #
@@ -2384,6 +2528,11 @@ module Aws::WellArchitected
     #   resp.answer.choices[0].helpful_resource.url #=> String
     #   resp.answer.choices[0].improvement_plan.display_text #=> String
     #   resp.answer.choices[0].improvement_plan.url #=> String
+    #   resp.answer.choices[0].additional_resources #=> Array
+    #   resp.answer.choices[0].additional_resources[0].type #=> String, one of "HELPFUL_RESOURCE", "IMPROVEMENT_PLAN"
+    #   resp.answer.choices[0].additional_resources[0].content #=> Array
+    #   resp.answer.choices[0].additional_resources[0].content[0].display_text #=> String
+    #   resp.answer.choices[0].additional_resources[0].content[0].url #=> String
     #   resp.answer.selected_choices #=> Array
     #   resp.answer.selected_choices[0] #=> String
     #   resp.answer.choice_answers #=> Array
@@ -2405,6 +2554,29 @@ module Aws::WellArchitected
       req.send_request(options)
     end
 
+    # Updates whether the Amazon Web Services account is opted into
+    # organization sharing features.
+    #
+    # @option params [String] :organization_sharing_status
+    #   The status of organization sharing settings.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_global_settings({
+    #     organization_sharing_status: "ENABLED", # accepts ENABLED, DISABLED
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateGlobalSettings AWS API Documentation
+    #
+    # @overload update_global_settings(params = {})
+    # @param [Hash] params ({})
+    def update_global_settings(params = {}, options = {})
+      req = build_request(:update_global_settings, params)
+      req.send_request(options)
+    end
+
     # Update lens review.
     #
     # @option params [required, String] :workload_id
@@ -2412,7 +2584,14 @@ module Aws::WellArchitected
     #   Web Services Region.
     #
     # @option params [required, String] :lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #
@@ -2721,7 +2900,7 @@ module Aws::WellArchitected
     #   resp.workload_share.shared_by #=> String
     #   resp.workload_share.shared_with #=> String
     #   resp.workload_share.permission_type #=> String, one of "READONLY", "CONTRIBUTOR"
-    #   resp.workload_share.status #=> String, one of "ACCEPTED", "REJECTED", "PENDING", "REVOKED", "EXPIRED"
+    #   resp.workload_share.status #=> String, one of "ACCEPTED", "REJECTED", "PENDING", "REVOKED", "EXPIRED", "ASSOCIATING", "ASSOCIATED", "FAILED"
     #   resp.workload_share.workload_name #=> String
     #   resp.workload_share.workload_id #=> String
     #
@@ -2741,7 +2920,14 @@ module Aws::WellArchitected
     #   Web Services Region.
     #
     # @option params [required, String] :lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #
@@ -2797,7 +2983,7 @@ module Aws::WellArchitected
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wellarchitected'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

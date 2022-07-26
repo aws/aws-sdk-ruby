@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::CloudFront
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -2170,6 +2172,10 @@ module Aws::CloudFront
     #           },
     #         ],
     #       },
+    #       server_timing_headers_config: {
+    #         enabled: false, # required
+    #         sampling_rate: 1.0,
+    #       },
     #     },
     #   })
     #
@@ -2214,6 +2220,8 @@ module Aws::CloudFront
     #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].header #=> String
     #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].value #=> String
     #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].override #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.server_timing_headers_config.enabled #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.server_timing_headers_config.sampling_rate #=> Float
     #   resp.location #=> String
     #   resp.etag #=> String
     #
@@ -4175,6 +4183,8 @@ module Aws::CloudFront
     #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].header #=> String
     #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].value #=> String
     #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].override #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.server_timing_headers_config.enabled #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.server_timing_headers_config.sampling_rate #=> Float
     #   resp.etag #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetResponseHeadersPolicy AWS API Documentation
@@ -4254,6 +4264,8 @@ module Aws::CloudFront
     #   resp.response_headers_policy_config.custom_headers_config.items[0].header #=> String
     #   resp.response_headers_policy_config.custom_headers_config.items[0].value #=> String
     #   resp.response_headers_policy_config.custom_headers_config.items[0].override #=> Boolean
+    #   resp.response_headers_policy_config.server_timing_headers_config.enabled #=> Boolean
+    #   resp.response_headers_policy_config.server_timing_headers_config.sampling_rate #=> Float
     #   resp.etag #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetResponseHeadersPolicyConfig AWS API Documentation
@@ -5997,6 +6009,8 @@ module Aws::CloudFront
     #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].header #=> String
     #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].value #=> String
     #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].override #=> Boolean
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.server_timing_headers_config.enabled #=> Boolean
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.server_timing_headers_config.sampling_rate #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListResponseHeadersPolicies AWS API Documentation
     #
@@ -7588,6 +7602,10 @@ module Aws::CloudFront
     #           },
     #         ],
     #       },
+    #       server_timing_headers_config: {
+    #         enabled: false, # required
+    #         sampling_rate: 1.0,
+    #       },
     #     },
     #     id: "string", # required
     #     if_match: "string",
@@ -7634,6 +7652,8 @@ module Aws::CloudFront
     #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].header #=> String
     #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].value #=> String
     #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].override #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.server_timing_headers_config.enabled #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.server_timing_headers_config.sampling_rate #=> Float
     #   resp.etag #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateResponseHeadersPolicy AWS API Documentation
@@ -7748,7 +7768,7 @@ module Aws::CloudFront
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

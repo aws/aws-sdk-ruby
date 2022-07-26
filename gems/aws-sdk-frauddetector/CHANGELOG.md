@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2022-07-21)
+------------------
+
+* Feature - The release introduces Account Takeover Insights (ATI) model. The ATI model detects fraud relating to account takeover. This release also adds support for new variable types: ARE_CREDENTIALS_VALID and SESSION_ID and adds new structures to Model Version APIs.
+
+1.33.0 (2022-06-10)
+------------------
+
+* Feature - Documentation updates for Amazon Fraud Detector (AWSHawksNest)
+
+1.32.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.31.0 (2022-02-03)
 ------------------
 

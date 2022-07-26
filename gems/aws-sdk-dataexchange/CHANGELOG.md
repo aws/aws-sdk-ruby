@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2022-03-15)
+------------------
+
+* Feature - This feature enables data providers to use the RevokeRevision operation to revoke subscriber access to a given revision. Subscribers are unable to interact with assets within a revoked revision.
+
+1.25.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.24.0 (2022-02-03)
 ------------------
 

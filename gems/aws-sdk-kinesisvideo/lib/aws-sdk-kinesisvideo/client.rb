@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::KinesisVideo
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -355,7 +357,8 @@ module Aws::KinesisVideo
     #
     # @option params [required, String] :channel_name
     #   A name for the signaling channel that you are creating. It must be
-    #   unique for each AWS account and AWS Region.
+    #   unique for each Amazon Web Services account and Amazon Web Services
+    #   Region.
     #
     # @option params [String] :channel_type
     #   A type of the signaling channel that you are creating. Currently,
@@ -377,7 +380,7 @@ module Aws::KinesisVideo
     #
     #   resp = client.create_signaling_channel({
     #     channel_name: "ChannelName", # required
-    #     channel_type: "SINGLE_MASTER", # accepts SINGLE_MASTER
+    #     channel_type: "SINGLE_MASTER", # accepts SINGLE_MASTER, FULL_MESH
     #     single_master_configuration: {
     #       message_ttl_seconds: 1,
     #     },
@@ -450,8 +453,8 @@ module Aws::KinesisVideo
     #   [2]: https://tools.ietf.org/html/rfc6838#section-4.2
     #
     # @option params [String] :kms_key_id
-    #   The ID of the AWS Key Management Service (AWS KMS) key that you want
-    #   Kinesis Video Streams to use to encrypt stream data.
+    #   The ID of the Key Management Service (KMS) key that you want Kinesis
+    #   Video Streams to use to encrypt stream data.
     #
     #   If no key ID is specified, the default, Kinesis Video-managed key
     #   (`aws/kinesisvideo`) is used.
@@ -588,6 +591,89 @@ module Aws::KinesisVideo
       req.send_request(options)
     end
 
+    # Gets the `ImageGenerationConfiguration` for a given Kinesis video
+    # stream.
+    #
+    # @option params [String] :stream_name
+    #   The name of the stream from which to retrieve the image generation
+    #   configuration. You must specify either the `StreamName` or the
+    #   `StreamARN`.
+    #
+    # @option params [String] :stream_arn
+    #   The Amazon Resource Name (ARN) of the Kinesis video stream from which
+    #   to retrieve the image generation configuration. You must specify
+    #   either the `StreamName` or the `StreamARN`.
+    #
+    # @return [Types::DescribeImageGenerationConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeImageGenerationConfigurationOutput#image_generation_configuration #image_generation_configuration} => Types::ImageGenerationConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_image_generation_configuration({
+    #     stream_name: "StreamName",
+    #     stream_arn: "ResourceARN",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.image_generation_configuration.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.image_generation_configuration.image_selector_type #=> String, one of "SERVER_TIMESTAMP", "PRODUCER_TIMESTAMP"
+    #   resp.image_generation_configuration.destination_config.uri #=> String
+    #   resp.image_generation_configuration.destination_config.destination_region #=> String
+    #   resp.image_generation_configuration.sampling_interval #=> Integer
+    #   resp.image_generation_configuration.format #=> String, one of "JPEG", "PNG"
+    #   resp.image_generation_configuration.format_config #=> Hash
+    #   resp.image_generation_configuration.format_config["FormatConfigKey"] #=> String
+    #   resp.image_generation_configuration.width_pixels #=> Integer
+    #   resp.image_generation_configuration.height_pixels #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/DescribeImageGenerationConfiguration AWS API Documentation
+    #
+    # @overload describe_image_generation_configuration(params = {})
+    # @param [Hash] params ({})
+    def describe_image_generation_configuration(params = {}, options = {})
+      req = build_request(:describe_image_generation_configuration, params)
+      req.send_request(options)
+    end
+
+    # Gets the `NotificationConfiguration` for a given Kinesis video stream.
+    #
+    # @option params [String] :stream_name
+    #   The name of the stream from which to retrieve the notification
+    #   configuration. You must specify either the `StreamName` or the
+    #   `StreamARN`.
+    #
+    # @option params [String] :stream_arn
+    #   The Amazon Resource Name (ARN) of the Kinesis video stream from where
+    #   you want to retrieve the notification configuration. You must specify
+    #   either the `StreamName` or the StreamARN.
+    #
+    # @return [Types::DescribeNotificationConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeNotificationConfigurationOutput#notification_configuration #notification_configuration} => Types::NotificationConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_notification_configuration({
+    #     stream_name: "StreamName",
+    #     stream_arn: "ResourceARN",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.notification_configuration.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.notification_configuration.destination_config.uri #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/DescribeNotificationConfiguration AWS API Documentation
+    #
+    # @overload describe_notification_configuration(params = {})
+    # @param [Hash] params ({})
+    def describe_notification_configuration(params = {}, options = {})
+      req = build_request(:describe_notification_configuration, params)
+      req.send_request(options)
+    end
+
     # Returns the most current information about the signaling channel. You
     # must specify either the name or the Amazon Resource Name (ARN) of the
     # channel that you want to describe.
@@ -613,7 +699,7 @@ module Aws::KinesisVideo
     #
     #   resp.channel_info.channel_name #=> String
     #   resp.channel_info.channel_arn #=> String
-    #   resp.channel_info.channel_type #=> String, one of "SINGLE_MASTER"
+    #   resp.channel_info.channel_type #=> String, one of "SINGLE_MASTER", "FULL_MESH"
     #   resp.channel_info.channel_status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING"
     #   resp.channel_info.creation_time #=> Time
     #   resp.channel_info.single_master_configuration.message_ttl_seconds #=> Integer
@@ -703,7 +789,7 @@ module Aws::KinesisVideo
     #   resp = client.get_data_endpoint({
     #     stream_name: "StreamName",
     #     stream_arn: "ResourceARN",
-    #     api_name: "PUT_MEDIA", # required, accepts PUT_MEDIA, GET_MEDIA, LIST_FRAGMENTS, GET_MEDIA_FOR_FRAGMENT_LIST, GET_HLS_STREAMING_SESSION_URL, GET_DASH_STREAMING_SESSION_URL, GET_CLIP
+    #     api_name: "PUT_MEDIA", # required, accepts PUT_MEDIA, GET_MEDIA, LIST_FRAGMENTS, GET_MEDIA_FOR_FRAGMENT_LIST, GET_HLS_STREAMING_SESSION_URL, GET_DASH_STREAMING_SESSION_URL, GET_CLIP, GET_IMAGES
     #   })
     #
     # @example Response structure
@@ -812,7 +898,7 @@ module Aws::KinesisVideo
     #   resp.channel_info_list #=> Array
     #   resp.channel_info_list[0].channel_name #=> String
     #   resp.channel_info_list[0].channel_arn #=> String
-    #   resp.channel_info_list[0].channel_type #=> String, one of "SINGLE_MASTER"
+    #   resp.channel_info_list[0].channel_type #=> String, one of "SINGLE_MASTER", "FULL_MESH"
     #   resp.channel_info_list[0].channel_status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING"
     #   resp.channel_info_list[0].creation_time #=> Time
     #   resp.channel_info_list[0].single_master_configuration.message_ttl_seconds #=> Integer
@@ -973,11 +1059,11 @@ module Aws::KinesisVideo
     end
 
     # Adds one or more tags to a signaling channel. A *tag* is a key-value
-    # pair (the value is optional) that you can define and assign to AWS
-    # resources. If you specify a tag that already exists, the tag value is
-    # replaced with the value that you specify in the request. For more
-    # information, see [Using Cost Allocation Tags][1] in the *AWS Billing
-    # and Cost Management User Guide*.
+    # pair (the value is optional) that you can define and assign to Amazon
+    # Web Services resources. If you specify a tag that already exists, the
+    # tag value is replaced with the value that you specify in the request.
+    # For more information, see [Using Cost Allocation Tags][1] in the
+    # *Billing and Cost Management and Cost Management User Guide*.
     #
     #
     #
@@ -1015,18 +1101,18 @@ module Aws::KinesisVideo
     end
 
     # Adds one or more tags to a stream. A *tag* is a key-value pair (the
-    # value is optional) that you can define and assign to AWS resources. If
-    # you specify a tag that already exists, the tag value is replaced with
-    # the value that you specify in the request. For more information, see
-    # [Using Cost Allocation Tags][1] in the *AWS Billing and Cost
-    # Management User Guide*.
+    # value is optional) that you can define and assign to Amazon Web
+    # Services resources. If you specify a tag that already exists, the tag
+    # value is replaced with the value that you specify in the request. For
+    # more information, see [Using Cost Allocation Tags][1] in the *Billing
+    # and Cost Management and Cost Management User Guide*.
     #
     # You must provide either the `StreamName` or the `StreamARN`.
     #
     # This operation requires permission for the `KinesisVideo:TagStream`
     # action.
     #
-    # Kinesis video streams support up to 50 tags.
+    # A Kinesis video stream can support up to 50 tags.
     #
     #
     #
@@ -1197,6 +1283,97 @@ module Aws::KinesisVideo
       req.send_request(options)
     end
 
+    # Updates the `StreamInfo` and `ImageProcessingConfiguration` fields.
+    #
+    # @option params [String] :stream_name
+    #   The name of the stream from which to update the image generation
+    #   configuration. You must specify either the `StreamName` or the
+    #   `StreamARN`.
+    #
+    # @option params [String] :stream_arn
+    #   The Amazon Resource Name (ARN) of the Kinesis video stream from where
+    #   you want to update the image generation configuration. You must
+    #   specify either the `StreamName` or the `StreamARN`.
+    #
+    # @option params [Types::ImageGenerationConfiguration] :image_generation_configuration
+    #   The structure that contains the information required for the KVS
+    #   images delivery. If the structure is null, the configuration will be
+    #   deleted from the stream.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_image_generation_configuration({
+    #     stream_name: "StreamName",
+    #     stream_arn: "ResourceARN",
+    #     image_generation_configuration: {
+    #       status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #       image_selector_type: "SERVER_TIMESTAMP", # required, accepts SERVER_TIMESTAMP, PRODUCER_TIMESTAMP
+    #       destination_config: { # required
+    #         uri: "DestinationUri", # required
+    #         destination_region: "DestinationRegion", # required
+    #       },
+    #       sampling_interval: 1, # required
+    #       format: "JPEG", # required, accepts JPEG, PNG
+    #       format_config: {
+    #         "JPEGQuality" => "FormatConfigValue",
+    #       },
+    #       width_pixels: 1,
+    #       height_pixels: 1,
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/UpdateImageGenerationConfiguration AWS API Documentation
+    #
+    # @overload update_image_generation_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_image_generation_configuration(params = {}, options = {})
+      req = build_request(:update_image_generation_configuration, params)
+      req.send_request(options)
+    end
+
+    # Updates the notification information for a stream.
+    #
+    # @option params [String] :stream_name
+    #   The name of the stream from which to update the notification
+    #   configuration. You must specify either the `StreamName` or the
+    #   `StreamARN`.
+    #
+    # @option params [String] :stream_arn
+    #   The Amazon Resource Name (ARN) of the Kinesis video stream from where
+    #   you want to update the notification configuration. You must specify
+    #   either the `StreamName` or the `StreamARN`.
+    #
+    # @option params [Types::NotificationConfiguration] :notification_configuration
+    #   The structure containing the information required for notifications.
+    #   If the structure is null, the configuration will be deleted from the
+    #   stream.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_notification_configuration({
+    #     stream_name: "StreamName",
+    #     stream_arn: "ResourceARN",
+    #     notification_configuration: {
+    #       status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #       destination_config: { # required
+    #         uri: "DestinationUri", # required
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/UpdateNotificationConfiguration AWS API Documentation
+    #
+    # @overload update_notification_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_notification_configuration(params = {}, options = {})
+      req = build_request(:update_notification_configuration, params)
+      req.send_request(options)
+    end
+
     # Updates the existing signaling channel. This is an asynchronous
     # operation and takes time to complete.
     #
@@ -1320,7 +1497,7 @@ module Aws::KinesisVideo
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesisvideo'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

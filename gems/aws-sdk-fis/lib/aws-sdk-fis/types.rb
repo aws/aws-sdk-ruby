@@ -183,6 +183,44 @@ module Aws::FIS
       include Aws::Structure
     end
 
+    # Specifies the configuration for experiment logging.
+    #
+    # @note When making an API call, you may pass CreateExperimentTemplateLogConfigurationInput
+    #   data as a hash:
+    #
+    #       {
+    #         cloud_watch_logs_configuration: {
+    #           log_group_arn: "CloudWatchLogGroupArn", # required
+    #         },
+    #         s3_configuration: {
+    #           bucket_name: "S3BucketName", # required
+    #           prefix: "S3ObjectKey",
+    #         },
+    #         log_schema_version: 1, # required
+    #       }
+    #
+    # @!attribute [rw] cloud_watch_logs_configuration
+    #   The configuration for experiment logging to Amazon CloudWatch Logs.
+    #   @return [Types::ExperimentTemplateCloudWatchLogsLogConfigurationInput]
+    #
+    # @!attribute [rw] s3_configuration
+    #   The configuration for experiment logging to Amazon S3.
+    #   @return [Types::ExperimentTemplateS3LogConfigurationInput]
+    #
+    # @!attribute [rw] log_schema_version
+    #   The schema version.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/CreateExperimentTemplateLogConfigurationInput AWS API Documentation
+    #
+    class CreateExperimentTemplateLogConfigurationInput < Struct.new(
+      :cloud_watch_logs_configuration,
+      :s3_configuration,
+      :log_schema_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateExperimentTemplateRequest
     #   data as a hash:
     #
@@ -231,6 +269,16 @@ module Aws::FIS
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
+    #         log_configuration: {
+    #           cloud_watch_logs_configuration: {
+    #             log_group_arn: "CloudWatchLogGroupArn", # required
+    #           },
+    #           s3_configuration: {
+    #             bucket_name: "S3BucketName", # required
+    #             prefix: "S3ObjectKey",
+    #           },
+    #           log_schema_version: 1, # required
+    #         },
     #       }
     #
     # @!attribute [rw] client_token
@@ -266,6 +314,10 @@ module Aws::FIS
     #   The tags to apply to the experiment template.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] log_configuration
+    #   The configuration for experiment logging.
+    #   @return [Types::CreateExperimentTemplateLogConfigurationInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/CreateExperimentTemplateRequest AWS API Documentation
     #
     class CreateExperimentTemplateRequest < Struct.new(
@@ -275,7 +327,8 @@ module Aws::FIS
       :targets,
       :actions,
       :role_arn,
-      :tags)
+      :tags,
+      :log_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -484,6 +537,10 @@ module Aws::FIS
     #   The tags for the experiment.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] log_configuration
+    #   The configuration for experiment logging.
+    #   @return [Types::ExperimentLogConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/Experiment AWS API Documentation
     #
     class Experiment < Struct.new(
@@ -497,7 +554,8 @@ module Aws::FIS
       :creation_time,
       :start_time,
       :end_time,
-      :tags)
+      :tags,
+      :log_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -567,6 +625,65 @@ module Aws::FIS
     class ExperimentActionState < Struct.new(
       :status,
       :reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the configuration for experiment logging to Amazon
+    # CloudWatch Logs.
+    #
+    # @!attribute [rw] log_group_arn
+    #   The Amazon Resource Name (ARN) of the destination Amazon CloudWatch
+    #   Logs log group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ExperimentCloudWatchLogsLogConfiguration AWS API Documentation
+    #
+    class ExperimentCloudWatchLogsLogConfiguration < Struct.new(
+      :log_group_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the configuration for experiment logging.
+    #
+    # @!attribute [rw] cloud_watch_logs_configuration
+    #   The configuration for experiment logging to Amazon CloudWatch Logs.
+    #   @return [Types::ExperimentCloudWatchLogsLogConfiguration]
+    #
+    # @!attribute [rw] s3_configuration
+    #   The configuration for experiment logging to Amazon S3.
+    #   @return [Types::ExperimentS3LogConfiguration]
+    #
+    # @!attribute [rw] log_schema_version
+    #   The schema version.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ExperimentLogConfiguration AWS API Documentation
+    #
+    class ExperimentLogConfiguration < Struct.new(
+      :cloud_watch_logs_configuration,
+      :s3_configuration,
+      :log_schema_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the configuration for experiment logging to Amazon S3.
+    #
+    # @!attribute [rw] bucket_name
+    #   The name of the destination bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix
+    #   The bucket prefix.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ExperimentS3LogConfiguration AWS API Documentation
+    #
+    class ExperimentS3LogConfiguration < Struct.new(
+      :bucket_name,
+      :prefix)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -741,6 +858,10 @@ module Aws::FIS
     #   The tags for the experiment template.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] log_configuration
+    #   The configuration for experiment logging.
+    #   @return [Types::ExperimentTemplateLogConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ExperimentTemplate AWS API Documentation
     #
     class ExperimentTemplate < Struct.new(
@@ -752,7 +873,8 @@ module Aws::FIS
       :creation_time,
       :last_update_time,
       :role_arn,
-      :tags)
+      :tags,
+      :log_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -788,6 +910,115 @@ module Aws::FIS
       :parameters,
       :targets,
       :start_after)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the configuration for experiment logging to Amazon
+    # CloudWatch Logs.
+    #
+    # @!attribute [rw] log_group_arn
+    #   The Amazon Resource Name (ARN) of the destination Amazon CloudWatch
+    #   Logs log group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ExperimentTemplateCloudWatchLogsLogConfiguration AWS API Documentation
+    #
+    class ExperimentTemplateCloudWatchLogsLogConfiguration < Struct.new(
+      :log_group_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the configuration for experiment logging to Amazon
+    # CloudWatch Logs.
+    #
+    # @note When making an API call, you may pass ExperimentTemplateCloudWatchLogsLogConfigurationInput
+    #   data as a hash:
+    #
+    #       {
+    #         log_group_arn: "CloudWatchLogGroupArn", # required
+    #       }
+    #
+    # @!attribute [rw] log_group_arn
+    #   The Amazon Resource Name (ARN) of the destination Amazon CloudWatch
+    #   Logs log group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ExperimentTemplateCloudWatchLogsLogConfigurationInput AWS API Documentation
+    #
+    class ExperimentTemplateCloudWatchLogsLogConfigurationInput < Struct.new(
+      :log_group_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the configuration for experiment logging.
+    #
+    # @!attribute [rw] cloud_watch_logs_configuration
+    #   The configuration for experiment logging to Amazon CloudWatch Logs.
+    #   @return [Types::ExperimentTemplateCloudWatchLogsLogConfiguration]
+    #
+    # @!attribute [rw] s3_configuration
+    #   The configuration for experiment logging to Amazon S3.
+    #   @return [Types::ExperimentTemplateS3LogConfiguration]
+    #
+    # @!attribute [rw] log_schema_version
+    #   The schema version.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ExperimentTemplateLogConfiguration AWS API Documentation
+    #
+    class ExperimentTemplateLogConfiguration < Struct.new(
+      :cloud_watch_logs_configuration,
+      :s3_configuration,
+      :log_schema_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the configuration for experiment logging to Amazon S3.
+    #
+    # @!attribute [rw] bucket_name
+    #   The name of the destination bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix
+    #   The bucket prefix.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ExperimentTemplateS3LogConfiguration AWS API Documentation
+    #
+    class ExperimentTemplateS3LogConfiguration < Struct.new(
+      :bucket_name,
+      :prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the configuration for experiment logging to Amazon S3.
+    #
+    # @note When making an API call, you may pass ExperimentTemplateS3LogConfigurationInput
+    #   data as a hash:
+    #
+    #       {
+    #         bucket_name: "S3BucketName", # required
+    #         prefix: "S3ObjectKey",
+    #       }
+    #
+    # @!attribute [rw] bucket_name
+    #   The name of the destination bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix
+    #   The bucket prefix.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ExperimentTemplateS3LogConfigurationInput AWS API Documentation
+    #
+    class ExperimentTemplateS3LogConfigurationInput < Struct.new(
+      :bucket_name,
+      :prefix)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1556,6 +1787,44 @@ module Aws::FIS
       include Aws::Structure
     end
 
+    # Specifies the configuration for experiment logging.
+    #
+    # @note When making an API call, you may pass UpdateExperimentTemplateLogConfigurationInput
+    #   data as a hash:
+    #
+    #       {
+    #         cloud_watch_logs_configuration: {
+    #           log_group_arn: "CloudWatchLogGroupArn", # required
+    #         },
+    #         s3_configuration: {
+    #           bucket_name: "S3BucketName", # required
+    #           prefix: "S3ObjectKey",
+    #         },
+    #         log_schema_version: 1,
+    #       }
+    #
+    # @!attribute [rw] cloud_watch_logs_configuration
+    #   The configuration for experiment logging to Amazon CloudWatch Logs.
+    #   @return [Types::ExperimentTemplateCloudWatchLogsLogConfigurationInput]
+    #
+    # @!attribute [rw] s3_configuration
+    #   The configuration for experiment logging to Amazon S3.
+    #   @return [Types::ExperimentTemplateS3LogConfigurationInput]
+    #
+    # @!attribute [rw] log_schema_version
+    #   The schema version.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/UpdateExperimentTemplateLogConfigurationInput AWS API Documentation
+    #
+    class UpdateExperimentTemplateLogConfigurationInput < Struct.new(
+      :cloud_watch_logs_configuration,
+      :s3_configuration,
+      :log_schema_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateExperimentTemplateRequest
     #   data as a hash:
     #
@@ -1601,6 +1870,16 @@ module Aws::FIS
     #           },
     #         },
     #         role_arn: "RoleArn",
+    #         log_configuration: {
+    #           cloud_watch_logs_configuration: {
+    #             log_group_arn: "CloudWatchLogGroupArn", # required
+    #           },
+    #           s3_configuration: {
+    #             bucket_name: "S3BucketName", # required
+    #             prefix: "S3ObjectKey",
+    #           },
+    #           log_schema_version: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] id
@@ -1628,6 +1907,10 @@ module Aws::FIS
     #   service permission to perform service actions on your behalf.
     #   @return [String]
     #
+    # @!attribute [rw] log_configuration
+    #   The configuration for experiment logging.
+    #   @return [Types::UpdateExperimentTemplateLogConfigurationInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/UpdateExperimentTemplateRequest AWS API Documentation
     #
     class UpdateExperimentTemplateRequest < Struct.new(
@@ -1636,7 +1919,8 @@ module Aws::FIS
       :stop_conditions,
       :targets,
       :actions,
-      :role_arn)
+      :role_arn,
+      :log_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

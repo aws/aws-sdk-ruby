@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::Pinpoint
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -377,6 +379,7 @@ module Aws::Pinpoint
     #   resp.application_response.name #=> String
     #   resp.application_response.tags #=> Hash
     #   resp.application_response.tags["__string"] #=> String
+    #   resp.application_response.creation_date #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateApp AWS API Documentation
     #
@@ -2709,6 +2712,7 @@ module Aws::Pinpoint
     #   resp.application_response.name #=> String
     #   resp.application_response.tags #=> Hash
     #   resp.application_response.tags["__string"] #=> String
+    #   resp.application_response.creation_date #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteApp AWS API Documentation
     #
@@ -4157,6 +4161,7 @@ module Aws::Pinpoint
     #   resp.application_response.name #=> String
     #   resp.application_response.tags #=> Hash
     #   resp.application_response.tags["__string"] #=> String
+    #   resp.application_response.creation_date #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApp AWS API Documentation
     #
@@ -4287,6 +4292,7 @@ module Aws::Pinpoint
     #   resp.applications_response.item[0].name #=> String
     #   resp.applications_response.item[0].tags #=> Hash
     #   resp.applications_response.item[0].tags["__string"] #=> String
+    #   resp.applications_response.item[0].creation_date #=> String
     #   resp.applications_response.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApps AWS API Documentation
@@ -12050,7 +12056,7 @@ module Aws::Pinpoint
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpoint'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

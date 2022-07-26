@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::Mgn
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -457,6 +459,82 @@ module Aws::Mgn
 
     # Creates a new ReplicationConfigurationTemplate.
     #
+    # @option params [Types::PostLaunchActions] :post_launch_actions
+    #   Request to associate the default Application Migration Service
+    #   Security group with the Replication Settings template.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Request to associate the default Application Migration Service
+    #   Security group with the Replication Settings template.
+    #
+    # @return [Types::LaunchConfigurationTemplate] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::LaunchConfigurationTemplate#arn #arn} => String
+    #   * {Types::LaunchConfigurationTemplate#launch_configuration_template_id #launch_configuration_template_id} => String
+    #   * {Types::LaunchConfigurationTemplate#post_launch_actions #post_launch_actions} => Types::PostLaunchActions
+    #   * {Types::LaunchConfigurationTemplate#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_launch_configuration_template({
+    #     post_launch_actions: {
+    #       cloud_watch_log_group_name: "CloudWatchLogGroupName",
+    #       deployment: "TEST_AND_CUTOVER", # accepts TEST_AND_CUTOVER, CUTOVER_ONLY
+    #       s3_log_bucket: "S3LogBucketName",
+    #       s3_output_key_prefix: "BoundedString",
+    #       ssm_documents: [
+    #         {
+    #           action_name: "BoundedString", # required
+    #           must_succeed_for_cutover: false,
+    #           parameters: {
+    #             "SsmDocumentParameterName" => [
+    #               {
+    #                 parameter_name: "SsmParameterStoreParameterName", # required
+    #                 parameter_type: "STRING", # required, accepts STRING
+    #               },
+    #             ],
+    #           },
+    #           ssm_document_name: "SsmDocumentName", # required
+    #           timeout_seconds: 1,
+    #         },
+    #       ],
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.launch_configuration_template_id #=> String
+    #   resp.post_launch_actions.cloud_watch_log_group_name #=> String
+    #   resp.post_launch_actions.deployment #=> String, one of "TEST_AND_CUTOVER", "CUTOVER_ONLY"
+    #   resp.post_launch_actions.s3_log_bucket #=> String
+    #   resp.post_launch_actions.s3_output_key_prefix #=> String
+    #   resp.post_launch_actions.ssm_documents #=> Array
+    #   resp.post_launch_actions.ssm_documents[0].action_name #=> String
+    #   resp.post_launch_actions.ssm_documents[0].must_succeed_for_cutover #=> Boolean
+    #   resp.post_launch_actions.ssm_documents[0].parameters #=> Hash
+    #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"] #=> Array
+    #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"][0].parameter_name #=> String
+    #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING"
+    #   resp.post_launch_actions.ssm_documents[0].ssm_document_name #=> String
+    #   resp.post_launch_actions.ssm_documents[0].timeout_seconds #=> Integer
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/CreateLaunchConfigurationTemplate AWS API Documentation
+    #
+    # @overload create_launch_configuration_template(params = {})
+    # @param [Hash] params ({})
+    def create_launch_configuration_template(params = {}, options = {})
+      req = build_request(:create_launch_configuration_template, params)
+      req.send_request(options)
+    end
+
+    # Creates a new ReplicationConfigurationTemplate.
+    #
     # @option params [required, Boolean] :associate_default_security_group
     #   Request to associate the default Application Migration Service
     #   Security group with the Replication Settings template.
@@ -474,15 +552,15 @@ module Aws::Mgn
     #   template creation.
     #
     # @option params [required, String] :default_large_staging_disk_type
-    #   Request to configure the Staging Disk EBS volume type to "gp2"
+    #   Request to configure the default large staging disk EBS volume type
     #   during Replication Settings template creation.
     #
     # @option params [required, String] :ebs_encryption
-    #   Request to configure EBS enryption during Replication Settings
+    #   Request to configure EBS encryption during Replication Settings
     #   template creation.
     #
     # @option params [String] :ebs_encryption_key_arn
-    #   Request to configure an EBS enryption key during Replication Settings
+    #   Request to configure an EBS encryption key during Replication Settings
     #   template creation.
     #
     # @option params [required, String] :replication_server_instance_type
@@ -490,7 +568,7 @@ module Aws::Mgn
     #   Replication Settings template creation.
     #
     # @option params [required, Array<String>] :replication_servers_security_groups_i_ds
-    #   Request to configure the Replication Server Secuirity group ID during
+    #   Request to configure the Replication Server Security group ID during
     #   Replication Settings template creation.
     #
     # @option params [required, String] :staging_area_subnet_id
@@ -498,7 +576,7 @@ module Aws::Mgn
     #   Settings template creation.
     #
     # @option params [required, Hash<String,String>] :staging_area_tags
-    #   Request to configure Staiging Area tags during Replication Settings
+    #   Request to configure Staging Area tags during Replication Settings
     #   template creation.
     #
     # @option params [Hash<String,String>] :tags
@@ -534,7 +612,7 @@ module Aws::Mgn
     #     bandwidth_throttling: 1, # required
     #     create_public_ip: false, # required
     #     data_plane_routing: "PRIVATE_IP", # required, accepts PRIVATE_IP, PUBLIC_IP
-    #     default_large_staging_disk_type: "GP2", # required, accepts GP2, ST1
+    #     default_large_staging_disk_type: "GP2", # required, accepts GP2, ST1, GP3
     #     ebs_encryption: "DEFAULT", # required, accepts DEFAULT, CUSTOM
     #     ebs_encryption_key_arn: "ARN",
     #     replication_server_instance_type: "EC2InstanceType", # required
@@ -556,7 +634,7 @@ module Aws::Mgn
     #   resp.bandwidth_throttling #=> Integer
     #   resp.create_public_ip #=> Boolean
     #   resp.data_plane_routing #=> String, one of "PRIVATE_IP", "PUBLIC_IP"
-    #   resp.default_large_staging_disk_type #=> String, one of "GP2", "ST1"
+    #   resp.default_large_staging_disk_type #=> String, one of "GP2", "ST1", "GP3"
     #   resp.ebs_encryption #=> String, one of "DEFAULT", "CUSTOM"
     #   resp.ebs_encryption_key_arn #=> String
     #   resp.replication_configuration_template_id #=> String
@@ -598,6 +676,28 @@ module Aws::Mgn
     # @param [Hash] params ({})
     def delete_job(params = {}, options = {})
       req = build_request(:delete_job, params)
+      req.send_request(options)
+    end
+
+    # Creates a new ReplicationConfigurationTemplate.
+    #
+    # @option params [required, String] :launch_configuration_template_id
+    #   ID of resource to be deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_launch_configuration_template({
+    #     launch_configuration_template_id: "LaunchConfigurationTemplateID", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DeleteLaunchConfigurationTemplate AWS API Documentation
+    #
+    # @overload delete_launch_configuration_template(params = {})
+    # @param [Hash] params ({})
+    def delete_launch_configuration_template(params = {}, options = {})
+      req = build_request(:delete_launch_configuration_template, params)
       req.send_request(options)
     end
 
@@ -646,7 +746,7 @@ module Aws::Mgn
       req.send_request(options)
     end
 
-    # Deletes a single vCenter client by ID.
+    # Deletes a given vCenter client by ID.
     #
     # @option params [required, String] :vcenter_client_id
     #   ID of resource to be deleted.
@@ -668,7 +768,7 @@ module Aws::Mgn
       req.send_request(options)
     end
 
-    # Retrieves detailed Job log with paging.
+    # Retrieves detailed job log items with paging.
     #
     # @option params [required, String] :job_id
     #   Request to describe Job log job ID.
@@ -716,20 +816,20 @@ module Aws::Mgn
 
     # Returns a list of Jobs. Use the JobsID and fromDate and toData filters
     # to limit which jobs are returned. The response is sorted by
-    # creationDataTime - latest date first. Jobs are normaly created by the
+    # creationDataTime - latest date first. Jobs are normally created by the
     # StartTest, StartCutover, and TerminateTargetInstances APIs. Jobs are
     # also created by DiagnosticLaunch and TerminateDiagnosticInstances,
     # which are APIs available only to *Support* and only used in response
     # to relevant support tickets.
     #
-    # @option params [required, Types::DescribeJobsRequestFilters] :filters
+    # @option params [Types::DescribeJobsRequestFilters] :filters
     #   Request to describe Job log filters.
     #
     # @option params [Integer] :max_results
-    #   Request to describe Job log by max results.
+    #   Request to describe job log items by max results.
     #
     # @option params [String] :next_token
-    #   Request to describe Job logby next token.
+    #   Request to describe job log items by next token.
     #
     # @return [Types::DescribeJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -741,7 +841,7 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_jobs({
-    #     filters: { # required
+    #     filters: {
     #       from_date: "ISO8601DatetimeString",
     #       job_i_ds: ["JobID"],
     #       to_date: "ISO8601DatetimeString",
@@ -760,6 +860,21 @@ module Aws::Mgn
     #   resp.items[0].job_id #=> String
     #   resp.items[0].participating_servers #=> Array
     #   resp.items[0].participating_servers[0].launch_status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
+    #   resp.items[0].participating_servers[0].launched_ec2_instance_id #=> String
+    #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list #=> Array
+    #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].execution_id #=> String
+    #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].execution_status #=> String, one of "IN_PROGRESS", "SUCCESS", "FAILED"
+    #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].failure_reason #=> String
+    #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.action_name #=> String
+    #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.must_succeed_for_cutover #=> Boolean
+    #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters #=> Hash
+    #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters["SsmDocumentParameterName"] #=> Array
+    #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters["SsmDocumentParameterName"][0].parameter_name #=> String
+    #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING"
+    #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.ssm_document_name #=> String
+    #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.timeout_seconds #=> Integer
+    #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document_type #=> String, one of "AUTOMATION", "COMMAND"
+    #   resp.items[0].participating_servers[0].post_launch_actions_status.ssm_agent_discovery_datetime #=> String
     #   resp.items[0].participating_servers[0].source_server_id #=> String
     #   resp.items[0].status #=> String, one of "PENDING", "STARTED", "COMPLETED"
     #   resp.items[0].tags #=> Hash
@@ -776,6 +891,63 @@ module Aws::Mgn
       req.send_request(options)
     end
 
+    # Creates a new ReplicationConfigurationTemplate.
+    #
+    # @option params [Array<String>] :launch_configuration_template_i_ds
+    #   Request to disconnect Source Server from service by Server ID.
+    #
+    # @option params [Integer] :max_results
+    #   Request to disconnect Source Server from service by Server ID.
+    #
+    # @option params [String] :next_token
+    #   Request to disconnect Source Server from service by Server ID.
+    #
+    # @return [Types::DescribeLaunchConfigurationTemplatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeLaunchConfigurationTemplatesResponse#items #items} => Array&lt;Types::LaunchConfigurationTemplate&gt;
+    #   * {Types::DescribeLaunchConfigurationTemplatesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_launch_configuration_templates({
+    #     launch_configuration_template_i_ds: ["LaunchConfigurationTemplateID"],
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].arn #=> String
+    #   resp.items[0].launch_configuration_template_id #=> String
+    #   resp.items[0].post_launch_actions.cloud_watch_log_group_name #=> String
+    #   resp.items[0].post_launch_actions.deployment #=> String, one of "TEST_AND_CUTOVER", "CUTOVER_ONLY"
+    #   resp.items[0].post_launch_actions.s3_log_bucket #=> String
+    #   resp.items[0].post_launch_actions.s3_output_key_prefix #=> String
+    #   resp.items[0].post_launch_actions.ssm_documents #=> Array
+    #   resp.items[0].post_launch_actions.ssm_documents[0].action_name #=> String
+    #   resp.items[0].post_launch_actions.ssm_documents[0].must_succeed_for_cutover #=> Boolean
+    #   resp.items[0].post_launch_actions.ssm_documents[0].parameters #=> Hash
+    #   resp.items[0].post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"] #=> Array
+    #   resp.items[0].post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"][0].parameter_name #=> String
+    #   resp.items[0].post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING"
+    #   resp.items[0].post_launch_actions.ssm_documents[0].ssm_document_name #=> String
+    #   resp.items[0].post_launch_actions.ssm_documents[0].timeout_seconds #=> Integer
+    #   resp.items[0].tags #=> Hash
+    #   resp.items[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DescribeLaunchConfigurationTemplates AWS API Documentation
+    #
+    # @overload describe_launch_configuration_templates(params = {})
+    # @param [Hash] params ({})
+    def describe_launch_configuration_templates(params = {}, options = {})
+      req = build_request(:describe_launch_configuration_templates, params)
+      req.send_request(options)
+    end
+
     # Lists all ReplicationConfigurationTemplates, filtered by Source Server
     # IDs.
     #
@@ -785,7 +957,7 @@ module Aws::Mgn
     # @option params [String] :next_token
     #   Request to describe Replication Configuration template by next token.
     #
-    # @option params [required, Array<String>] :replication_configuration_template_i_ds
+    # @option params [Array<String>] :replication_configuration_template_i_ds
     #   Request to describe Replication Configuration template by template
     #   IDs.
     #
@@ -801,7 +973,7 @@ module Aws::Mgn
     #   resp = client.describe_replication_configuration_templates({
     #     max_results: 1,
     #     next_token: "PaginationToken",
-    #     replication_configuration_template_i_ds: ["ReplicationConfigurationTemplateID"], # required
+    #     replication_configuration_template_i_ds: ["ReplicationConfigurationTemplateID"],
     #   })
     #
     # @example Response structure
@@ -812,7 +984,7 @@ module Aws::Mgn
     #   resp.items[0].bandwidth_throttling #=> Integer
     #   resp.items[0].create_public_ip #=> Boolean
     #   resp.items[0].data_plane_routing #=> String, one of "PRIVATE_IP", "PUBLIC_IP"
-    #   resp.items[0].default_large_staging_disk_type #=> String, one of "GP2", "ST1"
+    #   resp.items[0].default_large_staging_disk_type #=> String, one of "GP2", "ST1", "GP3"
     #   resp.items[0].ebs_encryption #=> String, one of "DEFAULT", "CUSTOM"
     #   resp.items[0].ebs_encryption_key_arn #=> String
     #   resp.items[0].replication_configuration_template_id #=> String
@@ -838,7 +1010,7 @@ module Aws::Mgn
 
     # Retrieves all SourceServers or multiple SourceServers by ID.
     #
-    # @option params [required, Types::DescribeSourceServersRequestFilters] :filters
+    # @option params [Types::DescribeSourceServersRequestFilters] :filters
     #   Request to filter Source Servers list.
     #
     # @option params [Integer] :max_results
@@ -857,7 +1029,7 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_source_servers({
-    #     filters: { # required
+    #     filters: {
     #       is_archived: false,
     #       life_cycle_states: ["STOPPED"], # accepts STOPPED, NOT_READY, READY_FOR_TEST, TESTING, READY_FOR_CUTOVER, CUTTING_OVER, CUTOVER, DISCONNECTED, DISCOVERED
     #       replication_types: ["AGENT_BASED"], # accepts AGENT_BASED, SNAPSHOT_SHIPPING
@@ -941,7 +1113,7 @@ module Aws::Mgn
       req.send_request(options)
     end
 
-    # Lists all vCenter clients.
+    # Returns a list of the installed vCenter clients.
     #
     # @option params [Integer] :max_results
     #   Maximum results to be returned in DescribeVcenterClients.
@@ -993,14 +1165,14 @@ module Aws::Mgn
     # of these source servers will be terminated / deleted within 90
     # minutes. Launched Test or Cutover instances will NOT be terminated. If
     # the agent on the source server has not been prevented from
-    # communciating with the Application Migration Service service, then it
+    # communicating with the Application Migration Service service, then it
     # will receive a command to uninstall itself (within approximately 10
     # minutes). The following properties of the SourceServer will be changed
     # immediately: dataReplicationInfo.dataReplicationState will be set to
     # DISCONNECTED; The totalStorageBytes property for each of
     # dataReplicationInfo.replicatedDisks will be set to zero;
-    # dataReplicationInfo.lagDuration and
-    # dataReplicationInfo.lagDurationwill be nullified.
+    # dataReplicationInfo.lagDuration and dataReplicationInfo.lagDuration
+    # will be nullified.
     #
     # @option params [required, String] :source_server_id
     #   Request to disconnect Source Server from service by Server ID.
@@ -1103,15 +1275,15 @@ module Aws::Mgn
     # terminated. The AWS Replication Agent will receive a command to
     # uninstall itself (within 10 minutes). The following properties of the
     # SourceServer will be changed immediately:
-    # dataReplicationInfo.dataReplicationState will be to DISCONNECTED; The
-    # SourceServer.lifeCycle.state will be changed to CUTOVER; The
-    # totalStorageBytes property fo each of
+    # dataReplicationInfo.dataReplicationState will be changed to
+    # DISCONNECTED; The SourceServer.lifeCycle.state will be changed to
+    # CUTOVER; The totalStorageBytes property fo each of
     # dataReplicationInfo.replicatedDisks will be set to zero;
-    # dataReplicationInfo.lagDuration and
-    # dataReplicationInfo.lagDurationwill be nullified.
+    # dataReplicationInfo.lagDuration and dataReplicationInfo.lagDuration
+    # will be nullified.
     #
     # @option params [required, String] :source_server_id
-    #   Request to finalize Cutover by Soure Server ID.
+    #   Request to finalize Cutover by Source Server ID.
     #
     # @return [Types::SourceServer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1212,12 +1384,14 @@ module Aws::Mgn
     #
     # @return [Types::LaunchConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::LaunchConfiguration#boot_mode #boot_mode} => String
     #   * {Types::LaunchConfiguration#copy_private_ip #copy_private_ip} => Boolean
     #   * {Types::LaunchConfiguration#copy_tags #copy_tags} => Boolean
     #   * {Types::LaunchConfiguration#ec2_launch_template_id #ec2_launch_template_id} => String
     #   * {Types::LaunchConfiguration#launch_disposition #launch_disposition} => String
     #   * {Types::LaunchConfiguration#licensing #licensing} => Types::Licensing
     #   * {Types::LaunchConfiguration#name #name} => String
+    #   * {Types::LaunchConfiguration#post_launch_actions #post_launch_actions} => Types::PostLaunchActions
     #   * {Types::LaunchConfiguration#source_server_id #source_server_id} => String
     #   * {Types::LaunchConfiguration#target_instance_type_right_sizing_method #target_instance_type_right_sizing_method} => String
     #
@@ -1229,12 +1403,26 @@ module Aws::Mgn
     #
     # @example Response structure
     #
+    #   resp.boot_mode #=> String, one of "LEGACY_BIOS", "UEFI"
     #   resp.copy_private_ip #=> Boolean
     #   resp.copy_tags #=> Boolean
     #   resp.ec2_launch_template_id #=> String
     #   resp.launch_disposition #=> String, one of "STOPPED", "STARTED"
     #   resp.licensing.os_byol #=> Boolean
     #   resp.name #=> String
+    #   resp.post_launch_actions.cloud_watch_log_group_name #=> String
+    #   resp.post_launch_actions.deployment #=> String, one of "TEST_AND_CUTOVER", "CUTOVER_ONLY"
+    #   resp.post_launch_actions.s3_log_bucket #=> String
+    #   resp.post_launch_actions.s3_output_key_prefix #=> String
+    #   resp.post_launch_actions.ssm_documents #=> Array
+    #   resp.post_launch_actions.ssm_documents[0].action_name #=> String
+    #   resp.post_launch_actions.ssm_documents[0].must_succeed_for_cutover #=> Boolean
+    #   resp.post_launch_actions.ssm_documents[0].parameters #=> Hash
+    #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"] #=> Array
+    #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"][0].parameter_name #=> String
+    #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING"
+    #   resp.post_launch_actions.ssm_documents[0].ssm_document_name #=> String
+    #   resp.post_launch_actions.ssm_documents[0].timeout_seconds #=> Integer
     #   resp.source_server_id #=> String
     #   resp.target_instance_type_right_sizing_method #=> String, one of "NONE", "BASIC"
     #
@@ -1250,7 +1438,7 @@ module Aws::Mgn
     # Lists all ReplicationConfigurations, filtered by Source Server ID.
     #
     # @option params [required, String] :source_server_id
-    #   Request to get Replication Configuaration by Source Server ID.
+    #   Request to get Replication Configuration by Source Server ID.
     #
     # @return [Types::ReplicationConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1282,7 +1470,7 @@ module Aws::Mgn
     #   resp.bandwidth_throttling #=> Integer
     #   resp.create_public_ip #=> Boolean
     #   resp.data_plane_routing #=> String, one of "PRIVATE_IP", "PUBLIC_IP"
-    #   resp.default_large_staging_disk_type #=> String, one of "GP2", "ST1"
+    #   resp.default_large_staging_disk_type #=> String, one of "GP2", "ST1", "GP3"
     #   resp.ebs_encryption #=> String, one of "DEFAULT", "CUSTOM"
     #   resp.ebs_encryption_key_arn #=> String
     #   resp.name #=> String
@@ -1290,7 +1478,8 @@ module Aws::Mgn
     #   resp.replicated_disks[0].device_name #=> String
     #   resp.replicated_disks[0].iops #=> Integer
     #   resp.replicated_disks[0].is_boot_disk #=> Boolean
-    #   resp.replicated_disks[0].staging_disk_type #=> String, one of "AUTO", "GP2", "IO1", "SC1", "ST1", "STANDARD"
+    #   resp.replicated_disks[0].staging_disk_type #=> String, one of "AUTO", "GP2", "IO1", "SC1", "ST1", "STANDARD", "GP3", "IO2"
+    #   resp.replicated_disks[0].throughput #=> Integer
     #   resp.replication_server_instance_type #=> String
     #   resp.replication_servers_security_groups_i_ds #=> Array
     #   resp.replication_servers_security_groups_i_ds[0] #=> String
@@ -1353,8 +1542,8 @@ module Aws::Mgn
 
     # Archives specific Source Servers by setting the
     # SourceServer.isArchived property to true for specified SourceServers
-    # by ID. This command only works for SourceServers with a
-    # lifecycle.state which equals DISCONNECTED or CUTOVER.
+    # by ID. This command only works for SourceServers with a lifecycle.
+    # state which equals DISCONNECTED or CUTOVER.
     #
     # @option params [required, String] :source_server_id
     #   Mark as archived by Source Server ID.
@@ -1581,6 +1770,21 @@ module Aws::Mgn
     #   resp.job.job_id #=> String
     #   resp.job.participating_servers #=> Array
     #   resp.job.participating_servers[0].launch_status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
+    #   resp.job.participating_servers[0].launched_ec2_instance_id #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list #=> Array
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].execution_id #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].execution_status #=> String, one of "IN_PROGRESS", "SUCCESS", "FAILED"
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].failure_reason #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.action_name #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.must_succeed_for_cutover #=> Boolean
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters #=> Hash
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters["SsmDocumentParameterName"] #=> Array
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters["SsmDocumentParameterName"][0].parameter_name #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING"
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.ssm_document_name #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.timeout_seconds #=> Integer
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document_type #=> String, one of "AUTOMATION", "COMMAND"
+    #   resp.job.participating_servers[0].post_launch_actions_status.ssm_agent_discovery_datetime #=> String
     #   resp.job.participating_servers[0].source_server_id #=> String
     #   resp.job.status #=> String, one of "PENDING", "STARTED", "COMPLETED"
     #   resp.job.tags #=> Hash
@@ -1596,7 +1800,7 @@ module Aws::Mgn
       req.send_request(options)
     end
 
-    # Starts replication on source server by ID.
+    # Starts replication for SNAPSHOT\_SHIPPING agents.
     #
     # @option params [required, String] :source_server_id
     #   ID of source server on which to start replication.
@@ -1692,7 +1896,7 @@ module Aws::Mgn
       req.send_request(options)
     end
 
-    # Lauches a Test Instance for specific Source Servers. This command
+    # Launches a Test Instance for specific Source Servers. This command
     # starts a LAUNCH job whose initiatedBy property is StartTest and
     # changes the SourceServer.lifeCycle.state property to TESTING.
     #
@@ -1724,6 +1928,21 @@ module Aws::Mgn
     #   resp.job.job_id #=> String
     #   resp.job.participating_servers #=> Array
     #   resp.job.participating_servers[0].launch_status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
+    #   resp.job.participating_servers[0].launched_ec2_instance_id #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list #=> Array
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].execution_id #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].execution_status #=> String, one of "IN_PROGRESS", "SUCCESS", "FAILED"
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].failure_reason #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.action_name #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.must_succeed_for_cutover #=> Boolean
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters #=> Hash
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters["SsmDocumentParameterName"] #=> Array
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters["SsmDocumentParameterName"][0].parameter_name #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING"
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.ssm_document_name #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.timeout_seconds #=> Integer
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document_type #=> String, one of "AUTOMATION", "COMMAND"
+    #   resp.job.participating_servers[0].post_launch_actions_status.ssm_agent_discovery_datetime #=> String
     #   resp.job.participating_servers[0].source_server_id #=> String
     #   resp.job.status #=> String, one of "PENDING", "STARTED", "COMPLETED"
     #   resp.job.tags #=> Hash
@@ -1803,6 +2022,21 @@ module Aws::Mgn
     #   resp.job.job_id #=> String
     #   resp.job.participating_servers #=> Array
     #   resp.job.participating_servers[0].launch_status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
+    #   resp.job.participating_servers[0].launched_ec2_instance_id #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list #=> Array
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].execution_id #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].execution_status #=> String, one of "IN_PROGRESS", "SUCCESS", "FAILED"
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].failure_reason #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.action_name #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.must_succeed_for_cutover #=> Boolean
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters #=> Hash
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters["SsmDocumentParameterName"] #=> Array
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters["SsmDocumentParameterName"][0].parameter_name #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING"
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.ssm_document_name #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.timeout_seconds #=> Integer
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document_type #=> String, one of "AUTOMATION", "COMMAND"
+    #   resp.job.participating_servers[0].post_launch_actions_status.ssm_agent_discovery_datetime #=> String
     #   resp.job.participating_servers[0].source_server_id #=> String
     #   resp.job.status #=> String, one of "PENDING", "STARTED", "COMPLETED"
     #   resp.job.tags #=> Hash
@@ -1847,6 +2081,9 @@ module Aws::Mgn
 
     # Updates multiple LaunchConfigurations by Source Server ID.
     #
+    # @option params [String] :boot_mode
+    #   Update Launch configuration boot mode request.
+    #
     # @option params [Boolean] :copy_private_ip
     #   Update Launch configuration copy Private IP request.
     #
@@ -1862,6 +2099,9 @@ module Aws::Mgn
     # @option params [String] :name
     #   Update Launch configuration name request.
     #
+    # @option params [Types::PostLaunchActions] :post_launch_actions
+    #   Server participating in Job.
+    #
     # @option params [required, String] :source_server_id
     #   Update Launch configuration by Source Server ID request.
     #
@@ -1870,18 +2110,21 @@ module Aws::Mgn
     #
     # @return [Types::LaunchConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::LaunchConfiguration#boot_mode #boot_mode} => String
     #   * {Types::LaunchConfiguration#copy_private_ip #copy_private_ip} => Boolean
     #   * {Types::LaunchConfiguration#copy_tags #copy_tags} => Boolean
     #   * {Types::LaunchConfiguration#ec2_launch_template_id #ec2_launch_template_id} => String
     #   * {Types::LaunchConfiguration#launch_disposition #launch_disposition} => String
     #   * {Types::LaunchConfiguration#licensing #licensing} => Types::Licensing
     #   * {Types::LaunchConfiguration#name #name} => String
+    #   * {Types::LaunchConfiguration#post_launch_actions #post_launch_actions} => Types::PostLaunchActions
     #   * {Types::LaunchConfiguration#source_server_id #source_server_id} => String
     #   * {Types::LaunchConfiguration#target_instance_type_right_sizing_method #target_instance_type_right_sizing_method} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_launch_configuration({
+    #     boot_mode: "LEGACY_BIOS", # accepts LEGACY_BIOS, UEFI
     #     copy_private_ip: false,
     #     copy_tags: false,
     #     launch_disposition: "STOPPED", # accepts STOPPED, STARTED
@@ -1889,18 +2132,54 @@ module Aws::Mgn
     #       os_byol: false,
     #     },
     #     name: "SmallBoundedString",
+    #     post_launch_actions: {
+    #       cloud_watch_log_group_name: "CloudWatchLogGroupName",
+    #       deployment: "TEST_AND_CUTOVER", # accepts TEST_AND_CUTOVER, CUTOVER_ONLY
+    #       s3_log_bucket: "S3LogBucketName",
+    #       s3_output_key_prefix: "BoundedString",
+    #       ssm_documents: [
+    #         {
+    #           action_name: "BoundedString", # required
+    #           must_succeed_for_cutover: false,
+    #           parameters: {
+    #             "SsmDocumentParameterName" => [
+    #               {
+    #                 parameter_name: "SsmParameterStoreParameterName", # required
+    #                 parameter_type: "STRING", # required, accepts STRING
+    #               },
+    #             ],
+    #           },
+    #           ssm_document_name: "SsmDocumentName", # required
+    #           timeout_seconds: 1,
+    #         },
+    #       ],
+    #     },
     #     source_server_id: "SourceServerID", # required
     #     target_instance_type_right_sizing_method: "NONE", # accepts NONE, BASIC
     #   })
     #
     # @example Response structure
     #
+    #   resp.boot_mode #=> String, one of "LEGACY_BIOS", "UEFI"
     #   resp.copy_private_ip #=> Boolean
     #   resp.copy_tags #=> Boolean
     #   resp.ec2_launch_template_id #=> String
     #   resp.launch_disposition #=> String, one of "STOPPED", "STARTED"
     #   resp.licensing.os_byol #=> Boolean
     #   resp.name #=> String
+    #   resp.post_launch_actions.cloud_watch_log_group_name #=> String
+    #   resp.post_launch_actions.deployment #=> String, one of "TEST_AND_CUTOVER", "CUTOVER_ONLY"
+    #   resp.post_launch_actions.s3_log_bucket #=> String
+    #   resp.post_launch_actions.s3_output_key_prefix #=> String
+    #   resp.post_launch_actions.ssm_documents #=> Array
+    #   resp.post_launch_actions.ssm_documents[0].action_name #=> String
+    #   resp.post_launch_actions.ssm_documents[0].must_succeed_for_cutover #=> Boolean
+    #   resp.post_launch_actions.ssm_documents[0].parameters #=> Hash
+    #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"] #=> Array
+    #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"][0].parameter_name #=> String
+    #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING"
+    #   resp.post_launch_actions.ssm_documents[0].ssm_document_name #=> String
+    #   resp.post_launch_actions.ssm_documents[0].timeout_seconds #=> Integer
     #   resp.source_server_id #=> String
     #   resp.target_instance_type_right_sizing_method #=> String, one of "NONE", "BASIC"
     #
@@ -1910,6 +2189,78 @@ module Aws::Mgn
     # @param [Hash] params ({})
     def update_launch_configuration(params = {}, options = {})
       req = build_request(:update_launch_configuration, params)
+      req.send_request(options)
+    end
+
+    # Creates a new ReplicationConfigurationTemplate.
+    #
+    # @option params [required, String] :launch_configuration_template_id
+    #   Update Launch configuration Target instance right sizing request.
+    #
+    # @option params [Types::PostLaunchActions] :post_launch_actions
+    #   Update Launch configuration Target instance right sizing request.
+    #
+    # @return [Types::LaunchConfigurationTemplate] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::LaunchConfigurationTemplate#arn #arn} => String
+    #   * {Types::LaunchConfigurationTemplate#launch_configuration_template_id #launch_configuration_template_id} => String
+    #   * {Types::LaunchConfigurationTemplate#post_launch_actions #post_launch_actions} => Types::PostLaunchActions
+    #   * {Types::LaunchConfigurationTemplate#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_launch_configuration_template({
+    #     launch_configuration_template_id: "LaunchConfigurationTemplateID", # required
+    #     post_launch_actions: {
+    #       cloud_watch_log_group_name: "CloudWatchLogGroupName",
+    #       deployment: "TEST_AND_CUTOVER", # accepts TEST_AND_CUTOVER, CUTOVER_ONLY
+    #       s3_log_bucket: "S3LogBucketName",
+    #       s3_output_key_prefix: "BoundedString",
+    #       ssm_documents: [
+    #         {
+    #           action_name: "BoundedString", # required
+    #           must_succeed_for_cutover: false,
+    #           parameters: {
+    #             "SsmDocumentParameterName" => [
+    #               {
+    #                 parameter_name: "SsmParameterStoreParameterName", # required
+    #                 parameter_type: "STRING", # required, accepts STRING
+    #               },
+    #             ],
+    #           },
+    #           ssm_document_name: "SsmDocumentName", # required
+    #           timeout_seconds: 1,
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.launch_configuration_template_id #=> String
+    #   resp.post_launch_actions.cloud_watch_log_group_name #=> String
+    #   resp.post_launch_actions.deployment #=> String, one of "TEST_AND_CUTOVER", "CUTOVER_ONLY"
+    #   resp.post_launch_actions.s3_log_bucket #=> String
+    #   resp.post_launch_actions.s3_output_key_prefix #=> String
+    #   resp.post_launch_actions.ssm_documents #=> Array
+    #   resp.post_launch_actions.ssm_documents[0].action_name #=> String
+    #   resp.post_launch_actions.ssm_documents[0].must_succeed_for_cutover #=> Boolean
+    #   resp.post_launch_actions.ssm_documents[0].parameters #=> Hash
+    #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"] #=> Array
+    #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"][0].parameter_name #=> String
+    #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING"
+    #   resp.post_launch_actions.ssm_documents[0].ssm_document_name #=> String
+    #   resp.post_launch_actions.ssm_documents[0].timeout_seconds #=> Integer
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateLaunchConfigurationTemplate AWS API Documentation
+    #
+    # @overload update_launch_configuration_template(params = {})
+    # @param [Hash] params ({})
+    def update_launch_configuration_template(params = {}, options = {})
+      req = build_request(:update_launch_configuration_template, params)
       req.send_request(options)
     end
 
@@ -1991,7 +2342,7 @@ module Aws::Mgn
     #     bandwidth_throttling: 1,
     #     create_public_ip: false,
     #     data_plane_routing: "PRIVATE_IP", # accepts PRIVATE_IP, PUBLIC_IP
-    #     default_large_staging_disk_type: "GP2", # accepts GP2, ST1
+    #     default_large_staging_disk_type: "GP2", # accepts GP2, ST1, GP3
     #     ebs_encryption: "DEFAULT", # accepts DEFAULT, CUSTOM
     #     ebs_encryption_key_arn: "ARN",
     #     name: "SmallBoundedString",
@@ -2000,7 +2351,8 @@ module Aws::Mgn
     #         device_name: "BoundedString",
     #         iops: 1,
     #         is_boot_disk: false,
-    #         staging_disk_type: "AUTO", # accepts AUTO, GP2, IO1, SC1, ST1, STANDARD
+    #         staging_disk_type: "AUTO", # accepts AUTO, GP2, IO1, SC1, ST1, STANDARD, GP3, IO2
+    #         throughput: 1,
     #       },
     #     ],
     #     replication_server_instance_type: "EC2InstanceType",
@@ -2019,7 +2371,7 @@ module Aws::Mgn
     #   resp.bandwidth_throttling #=> Integer
     #   resp.create_public_ip #=> Boolean
     #   resp.data_plane_routing #=> String, one of "PRIVATE_IP", "PUBLIC_IP"
-    #   resp.default_large_staging_disk_type #=> String, one of "GP2", "ST1"
+    #   resp.default_large_staging_disk_type #=> String, one of "GP2", "ST1", "GP3"
     #   resp.ebs_encryption #=> String, one of "DEFAULT", "CUSTOM"
     #   resp.ebs_encryption_key_arn #=> String
     #   resp.name #=> String
@@ -2027,7 +2379,8 @@ module Aws::Mgn
     #   resp.replicated_disks[0].device_name #=> String
     #   resp.replicated_disks[0].iops #=> Integer
     #   resp.replicated_disks[0].is_boot_disk #=> Boolean
-    #   resp.replicated_disks[0].staging_disk_type #=> String, one of "AUTO", "GP2", "IO1", "SC1", "ST1", "STANDARD"
+    #   resp.replicated_disks[0].staging_disk_type #=> String, one of "AUTO", "GP2", "IO1", "SC1", "ST1", "STANDARD", "GP3", "IO2"
+    #   resp.replicated_disks[0].throughput #=> Integer
     #   resp.replication_server_instance_type #=> String
     #   resp.replication_servers_security_groups_i_ds #=> Array
     #   resp.replication_servers_security_groups_i_ds[0] #=> String
@@ -2124,7 +2477,7 @@ module Aws::Mgn
     #     bandwidth_throttling: 1,
     #     create_public_ip: false,
     #     data_plane_routing: "PRIVATE_IP", # accepts PRIVATE_IP, PUBLIC_IP
-    #     default_large_staging_disk_type: "GP2", # accepts GP2, ST1
+    #     default_large_staging_disk_type: "GP2", # accepts GP2, ST1, GP3
     #     ebs_encryption: "DEFAULT", # accepts DEFAULT, CUSTOM
     #     ebs_encryption_key_arn: "ARN",
     #     replication_configuration_template_id: "ReplicationConfigurationTemplateID", # required
@@ -2144,7 +2497,7 @@ module Aws::Mgn
     #   resp.bandwidth_throttling #=> Integer
     #   resp.create_public_ip #=> Boolean
     #   resp.data_plane_routing #=> String, one of "PRIVATE_IP", "PUBLIC_IP"
-    #   resp.default_large_staging_disk_type #=> String, one of "GP2", "ST1"
+    #   resp.default_large_staging_disk_type #=> String, one of "GP2", "ST1", "GP3"
     #   resp.ebs_encryption #=> String, one of "DEFAULT", "CUSTOM"
     #   resp.ebs_encryption_key_arn #=> String
     #   resp.replication_configuration_template_id #=> String
@@ -2167,7 +2520,8 @@ module Aws::Mgn
       req.send_request(options)
     end
 
-    # Updates source server Replication Type by ID.
+    # Allows you to change between the AGENT\_BASED replication type and the
+    # SNAPSHOT\_SHIPPING replication type.
     #
     # @option params [required, String] :replication_type
     #   Replication type to which to update source server.
@@ -2280,7 +2634,7 @@ module Aws::Mgn
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mgn'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

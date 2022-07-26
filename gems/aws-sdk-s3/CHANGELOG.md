@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.114.0 (2022-05-03)
+------------------
+
+* Feature - Documentation only update for doc bug fixes for the S3 API docs.
+
+1.113.2 (2022-04-26)
+------------------
+
+* Issue - Fix an issue where `ExpiredToken` errors were retried as if the request was from another region.
+
+1.113.1 (2022-04-25)
+------------------
+
+* Issue - Rewind the underlying file on a streaming retry that is not a truncated body (#2692).
+
+1.113.0 (2022-02-24)
+------------------
+
+* Feature - This release adds support for new integrity checking capabilities in Amazon S3. You can choose from four supported checksum algorithms for data integrity checking on your upload and download requests. In addition, AWS SDK can automatically calculate a checksum as it streams data into S3
+
 1.112.0 (2022-02-03)
 ------------------
 

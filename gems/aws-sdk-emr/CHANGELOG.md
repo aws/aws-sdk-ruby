@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2022-06-30)
+------------------
+
+* Feature - This release adds support for the ExecutionRoleArn parameter in the AddJobFlowSteps and DescribeStep APIs. Customers can use ExecutionRoleArn to specify the IAM role used for each job they submit using the AddJobFlowSteps API.
+
+1.61.0 (2022-06-29)
+------------------
+
+* Feature - This release introduces additional optional parameter "Throughput" to VolumeSpecification to enable user to configure throughput for gp3 ebs volumes.
+
+1.60.0 (2022-05-10)
+------------------
+
+* Feature - This release updates the Amazon EMR ModifyInstanceGroups API to support "MERGE" type cluster reconfiguration. Also, added the ability to specify a particular Amazon Linux release for all nodes in a cluster launch request.
+
+1.59.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.58.0 (2022-02-03)
 ------------------
 

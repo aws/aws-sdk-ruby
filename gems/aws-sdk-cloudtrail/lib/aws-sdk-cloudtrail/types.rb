@@ -10,7 +10,7 @@
 module Aws::CloudTrail
   module Types
 
-    # Specifies the tags to add to a trail.
+    # Specifies the tags to add to a trail or event data store.
     #
     # @note When making an API call, you may pass AddTagsRequest
     #   data as a hash:
@@ -26,8 +26,8 @@ module Aws::CloudTrail
     #       }
     #
     # @!attribute [rw] resource_id
-    #   Specifies the ARN of the trail to which one or more tags will be
-    #   added. The format of a trail ARN is:
+    #   Specifies the ARN of the trail or event data store to which one or
+    #   more tags will be added. The format of a trail ARN is:
     #
     #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #   @return [String]
@@ -403,8 +403,8 @@ module Aws::CloudTrail
 
     # This exception is thrown when the specified resource is not ready for
     # an operation. This can occur when you try to run an operation on a
-    # trail before CloudTrail has time to fully load the trail. If this
-    # exception occurs, wait a few minutes, and then try the operation
+    # resource before CloudTrail has time to fully load the resource. If
+    # this exception occurs, wait a few minutes, and then try the operation
     # again.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ConflictException AWS API Documentation
@@ -1074,7 +1074,7 @@ module Aws::CloudTrail
     #
     # @!attribute [rw] query_status
     #   The status of a query. Values for `QueryStatus` include `QUEUED`,
-    #   `RUNNING`, `FINISHED`, `FAILED`, or `CANCELLED`
+    #   `RUNNING`, `FINISHED`, `FAILED`, `TIMED_OUT`, or `CANCELLED`
     #   @return [String]
     #
     # @!attribute [rw] query_statistics
@@ -1250,42 +1250,44 @@ module Aws::CloudTrail
     #   @return [String]
     #
     # @!attribute [rw] termination_protection_enabled
-    #   Indicates whether the event data store is protected from
-    #   termination.
+    #   This field is being deprecated. Indicates whether the event data
+    #   store is protected from termination.
     #   @return [Boolean]
     #
     # @!attribute [rw] status
-    #   The status of an event data store. Values are `ENABLED` and
-    #   `PENDING_DELETION`.
+    #   This field is being deprecated. The status of an event data store.
+    #   Values are `ENABLED` and `PENDING_DELETION`.
     #   @return [String]
     #
     # @!attribute [rw] advanced_event_selectors
-    #   The advanced event selectors that were used to select events for the
-    #   data store.
+    #   This field is being deprecated. The advanced event selectors that
+    #   were used to select events for the data store.
     #   @return [Array<Types::AdvancedEventSelector>]
     #
     # @!attribute [rw] multi_region_enabled
-    #   Indicates whether the event data store includes events from all
-    #   regions, or only from the region in which it was created.
+    #   This field is being deprecated. Indicates whether the event data
+    #   store includes events from all regions, or only from the region in
+    #   which it was created.
     #   @return [Boolean]
     #
     # @!attribute [rw] organization_enabled
-    #   Indicates that an event data store is collecting logged events for
-    #   an organization.
+    #   This field is being deprecated. Indicates that an event data store
+    #   is collecting logged events for an organization.
     #   @return [Boolean]
     #
     # @!attribute [rw] retention_period
-    #   The retention period, in days.
+    #   This field is being deprecated. The retention period, in days.
     #   @return [Integer]
     #
     # @!attribute [rw] created_timestamp
-    #   The timestamp of the event data store's creation.
+    #   This field is being deprecated. The timestamp of the event data
+    #   store's creation.
     #   @return [Time]
     #
     # @!attribute [rw] updated_timestamp
-    #   The timestamp showing when an event data store was updated, if
-    #   applicable. `UpdatedTimestamp` is always either the same or newer
-    #   than the time shown in `CreatedTimestamp`.
+    #   This field is being deprecated. The timestamp showing when an event
+    #   data store was updated, if applicable. `UpdatedTimestamp` is always
+    #   either the same or newer than the time shown in `CreatedTimestamp`.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/EventDataStore AWS API Documentation
@@ -1671,7 +1673,7 @@ module Aws::CloudTrail
 
     # @!attribute [rw] query_status
     #   The status of the query. Values include `QUEUED`, `RUNNING`,
-    #   `FINISHED`, `FAILED`, or `CANCELLED`.
+    #   `FINISHED`, `FAILED`, `TIMED_OUT`, or `CANCELLED`.
     #   @return [String]
     #
     # @!attribute [rw] query_statistics
@@ -1900,14 +1902,14 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
-    # The event data store against which you ran your query is inactive.
+    # The event data store is inactive.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InactiveEventDataStoreException AWS API Documentation
     #
     class InactiveEventDataStoreException < Aws::EmptyStructure; end
 
     # The specified query cannot be canceled because it is in the
-    # `FINISHED`, `FAILED`, or `CANCELLED` state.
+    # `FINISHED`, `FAILED`, `TIMED_OUT`, or `CANCELLED` state.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InactiveQueryException AWS API Documentation
     #
@@ -1945,14 +1947,9 @@ module Aws::CloudTrail
     end
 
     # This exception is thrown when the IAM user or role that is used to
-    # create the organization trail is lacking one or more required
-    # permissions for creating an organization trail in a required service.
-    # For more information, see [Prepare For Creating a Trail For Your
-    # Organization][1].
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-an-organizational-trail-prepare.html
+    # create the organization resource lacks one or more required
+    # permissions for creating an organization resource in a required
+    # service.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InsufficientDependencyServiceAccessPermissionException AWS API Documentation
     #
@@ -1992,7 +1989,8 @@ module Aws::CloudTrail
     #
     class InvalidCloudWatchLogsRoleArnException < Aws::EmptyStructure; end
 
-    # A date range for the query was specified that is not valid. For more
+    # A date range for the query was specified that is not valid. Be sure
+    # that the start time is chronologically before the end time. For more
     # information about writing a query, see [Create or edit a query][1] in
     # the *CloudTrail User Guide*.
     #
@@ -2317,7 +2315,7 @@ module Aws::CloudTrail
     #         max_results: 1,
     #         start_time: Time.now,
     #         end_time: Time.now,
-    #         query_status: "QUEUED", # accepts QUEUED, RUNNING, FINISHED, FAILED, CANCELLED
+    #         query_status: "QUEUED", # accepts QUEUED, RUNNING, FINISHED, FAILED, CANCELLED, TIMED_OUT
     #       }
     #
     # @!attribute [rw] event_data_store
@@ -2346,7 +2344,7 @@ module Aws::CloudTrail
     # @!attribute [rw] query_status
     #   The status of queries that you want to return in results. Valid
     #   values for `QueryStatus` include `QUEUED`, `RUNNING`, `FINISHED`,
-    #   `FAILED`, or `CANCELLED`.
+    #   `FAILED`, `TIMED_OUT`, or `CANCELLED`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListQueriesRequest AWS API Documentation
@@ -2380,7 +2378,7 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
-    # Specifies a list of trail tags to return.
+    # Specifies a list of tags to return.
     #
     # @note When making an API call, you may pass ListTagsRequest
     #   data as a hash:
@@ -2391,10 +2389,8 @@ module Aws::CloudTrail
     #       }
     #
     # @!attribute [rw] resource_id_list
-    #   Specifies a list of trail ARNs whose tags will be listed. The list
-    #   has a limit of 20 ARNs. The following is the format of a trail ARN.
-    #
-    #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
+    #   Specifies a list of trail and event data store ARNs whose tags will
+    #   be listed. The list has a limit of 20 ARNs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -2614,14 +2610,15 @@ module Aws::CloudTrail
     class MaximumNumberOfTrailsExceededException < Aws::EmptyStructure; end
 
     # This exception is thrown when the Amazon Web Services account making
-    # the request to create or update an organization trail is not the
-    # management account for an organization in Organizations. For more
-    # information, see [Prepare For Creating a Trail For Your
-    # Organization][1].
+    # the request to create or update an organization trail or event data
+    # store is not the management account for an organization in
+    # Organizations. For more information, see [Prepare For Creating a Trail
+    # For Your Organization][1] or [Create an event data store][2].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-an-organizational-trail-prepare.html
+    # [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-event-data-store.html
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/NotOrganizationMasterAccountException AWS API Documentation
     #
@@ -2636,12 +2633,7 @@ module Aws::CloudTrail
 
     # This exception is thrown when Organizations is not configured to
     # support all features. All features must be enabled in Organizations to
-    # support creating an organization trail. For more information, see
-    # [Prepare For Creating a Trail For Your Organization][1].
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-an-organizational-trail-prepare.html
+    # support creating an organization trail or event data store.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/OrganizationNotInAllFeaturesModeException AWS API Documentation
     #
@@ -2863,7 +2855,7 @@ module Aws::CloudTrail
     #
     # @!attribute [rw] query_status
     #   The status of the query. This can be `QUEUED`, `RUNNING`,
-    #   `FINISHED`, `FAILED`, or `CANCELLED`.
+    #   `FINISHED`, `FAILED`, `TIMED_OUT`, or `CANCELLED`.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -2896,11 +2888,18 @@ module Aws::CloudTrail
     #   The total number of results returned by a query.
     #   @return [Integer]
     #
+    # @!attribute [rw] bytes_scanned
+    #   The total bytes that the query scanned in the event data store. This
+    #   value matches the number of bytes for which your account is billed
+    #   for the query, unless the query is still running.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/QueryStatistics AWS API Documentation
     #
     class QueryStatistics < Struct.new(
       :results_count,
-      :total_results_count)
+      :total_results_count,
+      :bytes_scanned)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2917,6 +2916,12 @@ module Aws::CloudTrail
     #   The number of events that the query scanned in the event data store.
     #   @return [Integer]
     #
+    # @!attribute [rw] bytes_scanned
+    #   The total bytes that the query scanned in the event data store. This
+    #   value matches the number of bytes for which your account is billed
+    #   for the query, unless the query is still running.
+    #   @return [Integer]
+    #
     # @!attribute [rw] execution_time_in_millis
     #   The query's run time, in milliseconds.
     #   @return [Integer]
@@ -2930,13 +2935,14 @@ module Aws::CloudTrail
     class QueryStatisticsForDescribeQuery < Struct.new(
       :events_matched,
       :events_scanned,
+      :bytes_scanned,
       :execution_time_in_millis,
       :creation_time)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Specifies the tags to remove from a trail.
+    # Specifies the tags to remove from a trail or event data store.
     #
     # @note When making an API call, you may pass RemoveTagsRequest
     #   data as a hash:
@@ -2952,10 +2958,14 @@ module Aws::CloudTrail
     #       }
     #
     # @!attribute [rw] resource_id
-    #   Specifies the ARN of the trail from which tags should be removed.
-    #   The format of a trail ARN is:
+    #   Specifies the ARN of the trail or event data store from which tags
+    #   should be removed.
     #
+    #   Example trail ARN format:
     #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
+    #
+    #   Example event data store ARN format:
+    #   `arn:aws:cloudtrail:us-east-2:12345678910:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE`
     #   @return [String]
     #
     # @!attribute [rw] tags_list

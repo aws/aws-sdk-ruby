@@ -965,7 +965,7 @@ module Aws::EKS
     #         disk_size: 1,
     #         subnets: ["String"], # required
     #         instance_types: ["String"],
-    #         ami_type: "AL2_x86_64", # accepts AL2_x86_64, AL2_x86_64_GPU, AL2_ARM_64, CUSTOM, BOTTLEROCKET_ARM_64, BOTTLEROCKET_x86_64
+    #         ami_type: "AL2_x86_64", # accepts AL2_x86_64, AL2_x86_64_GPU, AL2_ARM_64, CUSTOM, BOTTLEROCKET_ARM_64, BOTTLEROCKET_x86_64, BOTTLEROCKET_ARM_64_NVIDIA, BOTTLEROCKET_x86_64_NVIDIA
     #         remote_access: {
     #           ec2_ssh_key: "String",
     #           source_security_groups: ["String"],
@@ -1017,7 +1017,8 @@ module Aws::EKS
     #   The default disk size is 20 GiB. If you specify `launchTemplate`,
     #   then don't specify `diskSize`, or the node group deployment will
     #   fail. For more information about using launch templates with Amazon
-    #   EKS, see [Launch template support][1] in the Amazon EKS User Guide.
+    #   EKS, see [Launch template support][1] in the *Amazon EKS User
+    #   Guide*.
     #
     #
     #
@@ -1030,7 +1031,7 @@ module Aws::EKS
     #   specify [ `SubnetId` ][1] in your launch template, or the node group
     #   deployment will fail. For more information about using launch
     #   templates with Amazon EKS, see [Launch template support][2] in the
-    #   Amazon EKS User Guide.
+    #   *Amazon EKS User Guide*.
     #
     #
     #
@@ -1067,8 +1068,8 @@ module Aws::EKS
     #   you specify `launchTemplate`, and your launch template uses a custom
     #   AMI, then don't specify `amiType`, or the node group deployment
     #   will fail. For more information about using launch templates with
-    #   Amazon EKS, see [Launch template support][1] in the Amazon EKS User
-    #   Guide.
+    #   Amazon EKS, see [Launch template support][1] in the *Amazon EKS User
+    #   Guide*.
     #
     #
     #
@@ -1080,7 +1081,7 @@ module Aws::EKS
     #   If you specify `launchTemplate`, then don't specify `remoteAccess`,
     #   or the node group deployment will fail. For more information about
     #   using launch templates with Amazon EKS, see [Launch template
-    #   support][1] in the Amazon EKS User Guide.
+    #   support][1] in the *Amazon EKS User Guide*.
     #
     #
     #
@@ -1099,11 +1100,12 @@ module Aws::EKS
     #   specify `launchTemplate`, then don't specify [ `IamInstanceProfile`
     #   ][2] in your launch template, or the node group deployment will
     #   fail. For more information about using launch templates with Amazon
-    #   EKS, see [Launch template support][3] in the Amazon EKS User Guide.
+    #   EKS, see [Launch template support][3] in the *Amazon EKS User
+    #   Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html
     #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_IamInstanceProfile.html
     #   [3]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
     #   @return [String]
@@ -1115,6 +1117,11 @@ module Aws::EKS
     #
     # @!attribute [rw] taints
     #   The Kubernetes taints to be applied to the nodes in the node group.
+    #   For more information, see [Node taints on managed node groups][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html
     #   @return [Array<Types::Taint>]
     #
     # @!attribute [rw] tags
@@ -1155,7 +1162,7 @@ module Aws::EKS
     #   launch template uses a custom AMI, then don't specify `version`, or
     #   the node group deployment will fail. For more information about
     #   using launch templates with Amazon EKS, see [Launch template
-    #   support][1] in the Amazon EKS User Guide.
+    #   support][1] in the *Amazon EKS User Guide*.
     #
     #
     #
@@ -1171,7 +1178,8 @@ module Aws::EKS
     #   `launchTemplate`, and your launch template uses a custom AMI, then
     #   don't specify `releaseVersion`, or the node group deployment will
     #   fail. For more information about using launch templates with Amazon
-    #   EKS, see [Launch template support][2] in the Amazon EKS User Guide.
+    #   EKS, see [Launch template support][2] in the *Amazon EKS User
+    #   Guide*.
     #
     #
     #
@@ -1704,11 +1712,13 @@ module Aws::EKS
     #
     # @!attribute [rw] nodegroup_name
     #   The name of the Amazon EKS node group associated with the update.
+    #   This parameter is required if the update is a node group update.
     #   @return [String]
     #
     # @!attribute [rw] addon_name
     #   The name of the add-on. The name must match one of the names
-    #   returned by [ `ListAddons` ][1].
+    #   returned by [ `ListAddons` ][1]. This parameter is required if the
+    #   update is an add-on update.
     #
     #
     #
@@ -1994,7 +2004,8 @@ module Aws::EKS
     #       }
     #
     # @!attribute [rw] type
-    #   The type of the identity provider configuration.
+    #   The type of the identity provider configuration. The only type
+    #   available is `oidc`.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2129,7 +2140,7 @@ module Aws::EKS
     #     instances to be assigned a public IP address, then you need to
     #     enable the `auto-assign public IP address` setting for the subnet.
     #     See [Modifying the public IPv4 addressing attribute for your
-    #     subnet][1] in the Amazon VPC User Guide.
+    #     subnet][1] in the *Amazon VPC User Guide*.
     #
     #   * **IamInstanceProfileNotFound**\: We couldn't find the IAM
     #     instance profile for your managed node group. You may be able to
@@ -2212,21 +2223,22 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] ip_family
-    #   Specify which IP version is used to assign Kubernetes Pod and
-    #   Service IP addresses. If you don't specify a value, `ipv4` is used
-    #   by default. You can only specify an IP family when you create a
-    #   cluster and can't change this value once the cluster is created. If
-    #   you specify `ipv6`, the VPC and subnets that you specify for cluster
+    #   Specify which IP family is used to assign Kubernetes pod and service
+    #   IP addresses. If you don't specify a value, `ipv4` is used by
+    #   default. You can only specify an IP family when you create a cluster
+    #   and can't change this value once the cluster is created. If you
+    #   specify `ipv6`, the VPC and subnets that you specify for cluster
     #   creation must have both IPv4 and IPv6 CIDR blocks assigned to them.
+    #   You can't specify `ipv6` for clusters in China Regions.
     #
     #   You can only specify `ipv6` for 1.21 and later clusters that use
-    #   version 1.10.0 or later of the Amazon VPC CNI add-on. If you specify
-    #   `ipv6`, then ensure that your VPC meets the requirements and that
-    #   you're familiar with the considerations listed in [Assigning IPv6
-    #   addresses to Pods and Services][1] in the Amazon EKS User Guide. If
-    #   you specify `ipv6`, Kubernetes assigns Service and Pod addresses
-    #   from the unique local address range (fc00::/7). You can't specify a
-    #   custom IPv6 CIDR block.
+    #   version 1.10.1 or later of the Amazon VPC CNI add-on. If you specify
+    #   `ipv6`, then ensure that your VPC meets the requirements listed in
+    #   the considerations listed in [Assigning IPv6 addresses to pods and
+    #   services][1] in the Amazon EKS User Guide. Kubernetes assigns
+    #   services IPv6 addresses from the unique local address range
+    #   (fc00::/7). You can't specify a custom IPv6 CIDR block. Pod
+    #   addresses are assigned from the subnet's IPv6 CIDR.
     #
     #
     #
@@ -2247,7 +2259,7 @@ module Aws::EKS
     # not both.
     #
     # @!attribute [rw] service_ipv_4_cidr
-    #   The CIDR block that Kubernetes Pod and Service IP addresses are
+    #   The CIDR block that Kubernetes pod and service IP addresses are
     #   assigned from. Kubernetes assigns addresses from an IPv4 CIDR block
     #   assigned to a subnet that the node is in. If you didn't specify a
     #   CIDR block when you created the cluster, then Kubernetes assigns
@@ -2257,17 +2269,19 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] service_ipv_6_cidr
-    #   The CIDR block that Kubernetes Pod and Service IP addresses are
+    #   The CIDR block that Kubernetes pod and service IP addresses are
     #   assigned from if you created a 1.21 or later cluster with version
-    #   1.10.0 or later of the Amazon VPC CNI add-on and specified `ipv6`
+    #   1.10.1 or later of the Amazon VPC CNI add-on and specified `ipv6`
     #   for **ipFamily** when you created the cluster. Kubernetes assigns
-    #   addresses from the unique local address range (fc00::/7).
+    #   service addresses from the unique local address range (`fc00::/7`)
+    #   because you can't specify a custom IPv6 CIDR block when you create
+    #   the cluster.
     #   @return [String]
     #
     # @!attribute [rw] ip_family
-    #   The IP family used to assign Kubernetes Pod and Service IP
+    #   The IP family used to assign Kubernetes pod and service IP
     #   addresses. The IP family is always `ipv4`, unless you have a `1.21`
-    #   or later cluster running version 1.10.0 or later of the Amazon VPC
+    #   or later cluster running version 1.10.1 or later of the Amazon VPC
     #   CNI add-on and specified `ipv6` when you created the cluster.
     #   @return [String]
     #
@@ -2288,8 +2302,8 @@ module Aws::EKS
     # group deployment or update will fail. For more information about
     # launch templates, see [ `CreateLaunchTemplate` ][6] in the Amazon EC2
     # API Reference. For more information about using launch templates with
-    # Amazon EKS, see [Launch template support][7] in the Amazon EKS User
-    # Guide.
+    # Amazon EKS, see [Launch template support][7] in the *Amazon EKS User
+    # Guide*.
     #
     # Specify either `name` or `id`, but not both.
     #
@@ -2937,7 +2951,12 @@ module Aws::EKS
     #   when they are created. Effect is one of `No_Schedule`,
     #   `Prefer_No_Schedule`, or `No_Execute`. Kubernetes taints can be used
     #   together with tolerations to control how workloads are scheduled to
-    #   your nodes.
+    #   your nodes. For more information, see [Node taints on managed node
+    #   groups][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html
     #   @return [Array<Types::Taint>]
     #
     # @!attribute [rw] resources
@@ -3572,7 +3591,7 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # Required resources (such as Service Linked Roles) were created and are
+    # Required resources (such as service-linked roles) were created and are
     # still propagating. Retry later.
     #
     # @!attribute [rw] message
@@ -3660,7 +3679,12 @@ module Aws::EKS
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
-    # A property that allows a node to repel a set of pods.
+    # A property that allows a node to repel a set of pods. For more
+    # information, see [Node taints on managed node groups][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html
     #
     # @note When making an API call, you may pass Taint
     #   data as a hash:
@@ -4104,7 +4128,12 @@ module Aws::EKS
     #
     # @!attribute [rw] taints
     #   The Kubernetes taints to be applied to the nodes in the node group
-    #   after the update.
+    #   after the update. For more information, see [Node taints on managed
+    #   node groups][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html
     #   @return [Types::UpdateTaintsPayload]
     #
     # @!attribute [rw] scaling_config
@@ -4184,8 +4213,8 @@ module Aws::EKS
     #   version. If you specify `launchTemplate`, and your launch template
     #   uses a custom AMI, then don't specify `version`, or the node group
     #   update will fail. For more information about using launch templates
-    #   with Amazon EKS, see [Launch template support][1] in the Amazon EKS
-    #   User Guide.
+    #   with Amazon EKS, see [Launch template support][1] in the *Amazon EKS
+    #   User Guide*.
     #
     #
     #
@@ -4201,7 +4230,7 @@ module Aws::EKS
     #   launch template uses a custom AMI, then don't specify
     #   `releaseVersion`, or the node group update will fail. For more
     #   information about using launch templates with Amazon EKS, see
-    #   [Launch template support][2] in the Amazon EKS User Guide.
+    #   [Launch template support][2] in the *Amazon EKS User Guide*.
     #
     #
     #
@@ -4278,6 +4307,11 @@ module Aws::EKS
     end
 
     # An object representing the details of an update to a taints payload.
+    # For more information, see [Node taints on managed node groups][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html
     #
     # @note When making an API call, you may pass UpdateTaintsPayload
     #   data as a hash:

@@ -37,7 +37,7 @@ module Aws::AppMesh
     # An object that represents the Cloud Map attribute information for your
     # virtual node.
     #
-    # <note markdown="1"> AWS Cloud Map is not available in the eu-south-1 Region.
+    # <note markdown="1"> Cloud Map is not available in the eu-south-1 Region.
     #
     #  </note>
     #
@@ -87,6 +87,7 @@ module Aws::AppMesh
     #             value: "AwsCloudMapInstanceAttributeValue", # required
     #           },
     #         ],
+    #         ip_preference: "IPv6_PREFERRED", # accepts IPv6_PREFERRED, IPv4_PREFERRED, IPv4_ONLY, IPv6_ONLY
     #         namespace_name: "AwsCloudMapName", # required
     #         service_name: "AwsCloudMapName", # required
     #       }
@@ -97,6 +98,10 @@ module Aws::AppMesh
     #   you registered the instance. Only instances that match all of the
     #   specified key/value pairs will be returned.
     #   @return [Array<Types::AwsCloudMapInstanceAttribute>]
+    #
+    # @!attribute [rw] ip_preference
+    #   The IP version to use to control traffic within the mesh.
+    #   @return [String]
     #
     # @!attribute [rw] namespace_name
     #   The name of the Cloud Map namespace to use.
@@ -110,6 +115,7 @@ module Aws::AppMesh
     #
     class AwsCloudMapServiceDiscovery < Struct.new(
       :attributes,
+      :ip_preference,
       :namespace_name,
       :service_name)
       SENSITIVE = []
@@ -567,11 +573,11 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID
-    #   is not your own, then the account that you specify must share the
-    #   mesh with your account before you can create the resource in the
-    #   service mesh. For more information about mesh sharing, see [Working
-    #   with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then the account that you specify
+    #   must share the mesh with your account before you can create the
+    #   resource in the service mesh. For more information about mesh
+    #   sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -636,6 +642,9 @@ module Aws::AppMesh
     #         spec: {
     #           egress_filter: {
     #             type: "ALLOW_ALL", # required, accepts ALLOW_ALL, DROP_ALL
+    #           },
+    #           service_discovery: {
+    #             ip_preference: "IPv6_PREFERRED", # accepts IPv6_PREFERRED, IPv4_PREFERRED, IPv4_ONLY, IPv6_ONLY
     #           },
     #         },
     #         tags: [
@@ -926,11 +935,11 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID
-    #   is not your own, then the account that you specify must share the
-    #   mesh with your account before you can create the resource in the
-    #   service mesh. For more information about mesh sharing, see [Working
-    #   with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then the account that you specify
+    #   must share the mesh with your account before you can create the
+    #   resource in the service mesh. For more information about mesh
+    #   sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -1122,11 +1131,11 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID
-    #   is not your own, then the account that you specify must share the
-    #   mesh with your account before you can create the resource in the
-    #   service mesh. For more information about mesh sharing, see [Working
-    #   with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then the account that you specify
+    #   must share the mesh with your account before you can create the
+    #   resource in the service mesh. For more information about mesh
+    #   sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -1389,11 +1398,13 @@ module Aws::AppMesh
     #                   value: "AwsCloudMapInstanceAttributeValue", # required
     #                 },
     #               ],
+    #               ip_preference: "IPv6_PREFERRED", # accepts IPv6_PREFERRED, IPv4_PREFERRED, IPv4_ONLY, IPv6_ONLY
     #               namespace_name: "AwsCloudMapName", # required
     #               service_name: "AwsCloudMapName", # required
     #             },
     #             dns: {
     #               hostname: "Hostname", # required
+    #               ip_preference: "IPv6_PREFERRED", # accepts IPv6_PREFERRED, IPv4_PREFERRED, IPv4_ONLY, IPv6_ONLY
     #               response_type: "LOADBALANCER", # accepts LOADBALANCER, ENDPOINTS
     #             },
     #           },
@@ -1421,11 +1432,11 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID
-    #   is not your own, then the account that you specify must share the
-    #   mesh with your account before you can create the resource in the
-    #   service mesh. For more information about mesh sharing, see [Working
-    #   with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then the account that you specify
+    #   must share the mesh with your account before you can create the
+    #   resource in the service mesh. For more information about mesh
+    #   sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -1521,11 +1532,11 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID
-    #   is not your own, then the account that you specify must share the
-    #   mesh with your account before you can create the resource in the
-    #   service mesh. For more information about mesh sharing, see [Working
-    #   with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then the account that you specify
+    #   must share the mesh with your account before you can create the
+    #   resource in the service mesh. For more information about mesh
+    #   sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -1622,11 +1633,11 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID
-    #   is not your own, then the account that you specify must share the
-    #   mesh with your account before you can create the resource in the
-    #   service mesh. For more information about mesh sharing, see [Working
-    #   with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then the account that you specify
+    #   must share the mesh with your account before you can create the
+    #   resource in the service mesh. For more information about mesh
+    #   sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -1698,10 +1709,10 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID
-    #   is not your own, then it's the ID of the account that shared the
-    #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account
+    #   that shared the mesh with your account. For more information about
+    #   mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -1793,10 +1804,10 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID
-    #   is not your own, then it's the ID of the account that shared the
-    #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account
+    #   that shared the mesh with your account. For more information about
+    #   mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -1852,10 +1863,10 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID
-    #   is not your own, then it's the ID of the account that shared the
-    #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account
+    #   that shared the mesh with your account. For more information about
+    #   mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -1904,10 +1915,10 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID
-    #   is not your own, then it's the ID of the account that shared the
-    #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account
+    #   that shared the mesh with your account. For more information about
+    #   mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -1962,10 +1973,10 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID
-    #   is not your own, then it's the ID of the account that shared the
-    #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account
+    #   that shared the mesh with your account. For more information about
+    #   mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -2020,10 +2031,10 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID
-    #   is not your own, then it's the ID of the account that shared the
-    #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account
+    #   that shared the mesh with your account. For more information about
+    #   mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -2079,10 +2090,10 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID
-    #   is not your own, then it's the ID of the account that shared the
-    #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account
+    #   that shared the mesh with your account. For more information about
+    #   mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -2134,10 +2145,10 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID
-    #   is not your own, then it's the ID of the account that shared the
-    #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account
+    #   that shared the mesh with your account. For more information about
+    #   mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -2188,10 +2199,10 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID
-    #   is not your own, then it's the ID of the account that shared the
-    #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account
+    #   that shared the mesh with your account. For more information about
+    #   mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -2247,10 +2258,10 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID
-    #   is not your own, then it's the ID of the account that shared the
-    #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account
+    #   that shared the mesh with your account. For more information about
+    #   mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -2301,10 +2312,10 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID
-    #   is not your own, then it's the ID of the account that shared the
-    #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account
+    #   that shared the mesh with your account. For more information about
+    #   mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -2359,10 +2370,10 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID
-    #   is not your own, then it's the ID of the account that shared the
-    #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account
+    #   that shared the mesh with your account. For more information about
+    #   mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -2417,10 +2428,10 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID
-    #   is not your own, then it's the ID of the account that shared the
-    #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account
+    #   that shared the mesh with your account. For more information about
+    #   mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -2465,11 +2476,16 @@ module Aws::AppMesh
     #
     #       {
     #         hostname: "Hostname", # required
+    #         ip_preference: "IPv6_PREFERRED", # accepts IPv6_PREFERRED, IPv4_PREFERRED, IPv4_ONLY, IPv6_ONLY
     #         response_type: "LOADBALANCER", # accepts LOADBALANCER, ENDPOINTS
     #       }
     #
     # @!attribute [rw] hostname
     #   Specifies the DNS service discovery hostname for the virtual node.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_preference
+    #   The IP version to use to control traffic within the mesh.
     #   @return [String]
     #
     # @!attribute [rw] response_type
@@ -2480,6 +2496,7 @@ module Aws::AppMesh
     #
     class DnsServiceDiscovery < Struct.new(
       :hostname,
+      :ip_preference,
       :response_type)
       SENSITIVE = []
       include Aws::Structure
@@ -2555,10 +2572,7 @@ module Aws::AppMesh
     #   specify a path in the Envoy container's file system to write the
     #   files to disk.
     #
-    #   <note markdown="1"> The Envoy process must have write permissions to the path that you
-    #   specify here. Otherwise, Envoy fails to bootstrap properly.
-    #
-    #    </note>
+    #        <note> <p>The Envoy process must have write permissions to the path that you specify here. Otherwise, Envoy fails to bootstrap properly.</p> </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/FileAccessLog AWS API Documentation
@@ -2696,10 +2710,10 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID
-    #   is not your own, then it's the ID of the account that shared the
-    #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account
+    #   that shared the mesh with your account. For more information about
+    #   mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -2707,10 +2721,10 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] resource_owner
-    #   The AWS IAM account ID of the resource owner. If the account ID is
-    #   not your own, then it's the ID of the mesh owner or of another
-    #   account that the mesh is shared with. For more information about
-    #   mesh sharing, see [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the resource owner. If the
+    #   account ID is not your own, then it's the ID of the mesh owner or
+    #   of another account that the mesh is shared with. For more
+    #   information about mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -4512,7 +4526,7 @@ module Aws::AppMesh
     end
 
     # You have exceeded a service limit for your account. For more
-    # information, see [Service Limits][1] in the *AWS App Mesh User Guide*.
+    # information, see [Service Limits][1] in the *App Mesh User Guide*.
     #
     #
     #
@@ -4556,10 +4570,10 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID
-    #   is not your own, then it's the ID of the account that shared the
-    #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account
+    #   that shared the mesh with your account. For more information about
+    #   mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -4711,10 +4725,10 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID
-    #   is not your own, then it's the ID of the account that shared the
-    #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account
+    #   that shared the mesh with your account. For more information about
+    #   mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -4867,10 +4881,10 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID
-    #   is not your own, then it's the ID of the account that shared the
-    #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account
+    #   that shared the mesh with your account. For more information about
+    #   mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -4947,10 +4961,10 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID
-    #   is not your own, then it's the ID of the account that shared the
-    #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account
+    #   that shared the mesh with your account. For more information about
+    #   mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -5030,10 +5044,10 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID
-    #   is not your own, then it's the ID of the account that shared the
-    #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account
+    #   that shared the mesh with your account. For more information about
+    #   mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -5113,10 +5127,10 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID
-    #   is not your own, then it's the ID of the account that shared the
-    #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account
+    #   that shared the mesh with your account. For more information about
+    #   mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -5430,7 +5444,7 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object that represents an AWS Certicate Manager (ACM) certificate.
+    # An object that represents an Certificate Manager certificate.
     #
     # @note When making an API call, you may pass ListenerTlsAcmCertificate
     #   data as a hash:
@@ -5466,8 +5480,8 @@ module Aws::AppMesh
     # @note ListenerTlsCertificate is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ListenerTlsCertificate corresponding to the set member.
     #
     # @!attribute [rw] acm
-    #   A reference to an object that represents an AWS Certicate Manager
-    #   (ACM) certificate.
+    #   A reference to an object that represents an Certificate Manager
+    #   certificate.
     #   @return [Types::ListenerTlsAcmCertificate]
     #
     # @!attribute [rw] file
@@ -5742,10 +5756,10 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID
-    #   is not your own, then it's the ID of the account that shared the
-    #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account
+    #   that shared the mesh with your account. For more information about
+    #   mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -5753,10 +5767,10 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] resource_owner
-    #   The AWS IAM account ID of the resource owner. If the account ID is
-    #   not your own, then it's the ID of the mesh owner or of another
-    #   account that the mesh is shared with. For more information about
-    #   mesh sharing, see [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the resource owner. If the
+    #   account ID is not your own, then it's the ID of the mesh owner or
+    #   of another account that the mesh is shared with. For more
+    #   information about mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -5782,6 +5796,28 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # An object that represents the service discovery information for a
+    # service mesh.
+    #
+    # @note When making an API call, you may pass MeshServiceDiscovery
+    #   data as a hash:
+    #
+    #       {
+    #         ip_preference: "IPv6_PREFERRED", # accepts IPv6_PREFERRED, IPv4_PREFERRED, IPv4_ONLY, IPv6_ONLY
+    #       }
+    #
+    # @!attribute [rw] ip_preference
+    #   The IP version to use to control traffic within the mesh.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/MeshServiceDiscovery AWS API Documentation
+    #
+    class MeshServiceDiscovery < Struct.new(
+      :ip_preference)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object that represents the specification of a service mesh.
     #
     # @note When making an API call, you may pass MeshSpec
@@ -5791,16 +5827,25 @@ module Aws::AppMesh
     #         egress_filter: {
     #           type: "ALLOW_ALL", # required, accepts ALLOW_ALL, DROP_ALL
     #         },
+    #         service_discovery: {
+    #           ip_preference: "IPv6_PREFERRED", # accepts IPv6_PREFERRED, IPv4_PREFERRED, IPv4_ONLY, IPv6_ONLY
+    #         },
     #       }
     #
     # @!attribute [rw] egress_filter
     #   The egress filter rules for the service mesh.
     #   @return [Types::EgressFilter]
     #
+    # @!attribute [rw] service_discovery
+    #   An object that represents the service discovery information for a
+    #   service mesh.
+    #   @return [Types::MeshServiceDiscovery]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/MeshSpec AWS API Documentation
     #
     class MeshSpec < Struct.new(
-      :egress_filter)
+      :egress_filter,
+      :service_discovery)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5960,10 +6005,10 @@ module Aws::AppMesh
     #   @return [Time]
     #
     # @!attribute [rw] mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID
-    #   is not your own, then it's the ID of the account that shared the
-    #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account
+    #   that shared the mesh with your account. For more information about
+    #   mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -5971,10 +6016,10 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] resource_owner
-    #   The AWS IAM account ID of the resource owner. If the account ID is
-    #   not your own, then it's the ID of the mesh owner or of another
-    #   account that the mesh is shared with. For more information about
-    #   mesh sharing, see [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the resource owner. If the
+    #   account ID is not your own, then it's the ID of the mesh owner or
+    #   of another account that the mesh is shared with. For more
+    #   information about mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -6064,10 +6109,10 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID
-    #   is not your own, then it's the ID of the account that shared the
-    #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account
+    #   that shared the mesh with your account. For more information about
+    #   mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -6075,10 +6120,10 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] resource_owner
-    #   The AWS IAM account ID of the resource owner. If the account ID is
-    #   not your own, then it's the ID of the mesh owner or of another
-    #   account that the mesh is shared with. For more information about
-    #   mesh sharing, see [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the resource owner. If the
+    #   account ID is not your own, then it's the ID of the mesh owner or
+    #   of another account that the mesh is shared with. For more
+    #   information about mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -7032,10 +7077,10 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID
-    #   is not your own, then it's the ID of the account that shared the
-    #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account
+    #   that shared the mesh with your account. For more information about
+    #   mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -7090,6 +7135,9 @@ module Aws::AppMesh
     #         spec: {
     #           egress_filter: {
     #             type: "ALLOW_ALL", # required, accepts ALLOW_ALL, DROP_ALL
+    #           },
+    #           service_discovery: {
+    #             ip_preference: "IPv6_PREFERRED", # accepts IPv6_PREFERRED, IPv4_PREFERRED, IPv4_ONLY, IPv6_ONLY
     #           },
     #         },
     #       }
@@ -7360,10 +7408,10 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID
-    #   is not your own, then it's the ID of the account that shared the
-    #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account
+    #   that shared the mesh with your account. For more information about
+    #   mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -7539,10 +7587,10 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID
-    #   is not your own, then it's the ID of the account that shared the
-    #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account
+    #   that shared the mesh with your account. For more information about
+    #   mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -7796,11 +7844,13 @@ module Aws::AppMesh
     #                   value: "AwsCloudMapInstanceAttributeValue", # required
     #                 },
     #               ],
+    #               ip_preference: "IPv6_PREFERRED", # accepts IPv6_PREFERRED, IPv4_PREFERRED, IPv4_ONLY, IPv6_ONLY
     #               namespace_name: "AwsCloudMapName", # required
     #               service_name: "AwsCloudMapName", # required
     #             },
     #             dns: {
     #               hostname: "Hostname", # required
+    #               ip_preference: "IPv6_PREFERRED", # accepts IPv6_PREFERRED, IPv4_PREFERRED, IPv4_ONLY, IPv6_ONLY
     #               response_type: "LOADBALANCER", # accepts LOADBALANCER, ENDPOINTS
     #             },
     #           },
@@ -7822,10 +7872,10 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID
-    #   is not your own, then it's the ID of the account that shared the
-    #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account
+    #   that shared the mesh with your account. For more information about
+    #   mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -7907,10 +7957,10 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID
-    #   is not your own, then it's the ID of the account that shared the
-    #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account
+    #   that shared the mesh with your account. For more information about
+    #   mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -7992,10 +8042,10 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID
-    #   is not your own, then it's the ID of the account that shared the
-    #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account
+    #   that shared the mesh with your account. For more information about
+    #   mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -8958,10 +9008,10 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID
-    #   is not your own, then it's the ID of the account that shared the
-    #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account
+    #   that shared the mesh with your account. For more information about
+    #   mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -8969,10 +9019,10 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] resource_owner
-    #   The AWS IAM account ID of the resource owner. If the account ID is
-    #   not your own, then it's the ID of the mesh owner or of another
-    #   account that the mesh is shared with. For more information about
-    #   mesh sharing, see [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the resource owner. If the
+    #   account ID is not your own, then it's the ID of the mesh owner or
+    #   of another account that the mesh is shared with. For more
+    #   information about mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -9487,10 +9537,10 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID
-    #   is not your own, then it's the ID of the account that shared the
-    #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account
+    #   that shared the mesh with your account. For more information about
+    #   mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -9498,10 +9548,10 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] resource_owner
-    #   The AWS IAM account ID of the resource owner. If the account ID is
-    #   not your own, then it's the ID of the mesh owner or of another
-    #   account that the mesh is shared with. For more information about
-    #   mesh sharing, see [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the resource owner. If the
+    #   account ID is not your own, then it's the ID of the mesh owner or
+    #   of another account that the mesh is shared with. For more
+    #   information about mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -9761,11 +9811,13 @@ module Aws::AppMesh
     #                 value: "AwsCloudMapInstanceAttributeValue", # required
     #               },
     #             ],
+    #             ip_preference: "IPv6_PREFERRED", # accepts IPv6_PREFERRED, IPv4_PREFERRED, IPv4_ONLY, IPv6_ONLY
     #             namespace_name: "AwsCloudMapName", # required
     #             service_name: "AwsCloudMapName", # required
     #           },
     #           dns: {
     #             hostname: "Hostname", # required
+    #             ip_preference: "IPv6_PREFERRED", # accepts IPv6_PREFERRED, IPv4_PREFERRED, IPv4_ONLY, IPv6_ONLY
     #             response_type: "LOADBALANCER", # accepts LOADBALANCER, ENDPOINTS
     #           },
     #         },
@@ -9926,10 +9978,10 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID
-    #   is not your own, then it's the ID of the account that shared the
-    #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account
+    #   that shared the mesh with your account. For more information about
+    #   mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -9937,10 +9989,10 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] resource_owner
-    #   The AWS IAM account ID of the resource owner. If the account ID is
-    #   not your own, then it's the ID of the mesh owner or of another
-    #   account that the mesh is shared with. For more information about
-    #   mesh sharing, see [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the resource owner. If the
+    #   account ID is not your own, then it's the ID of the mesh owner or
+    #   of another account that the mesh is shared with. For more
+    #   information about mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -10183,10 +10235,10 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_owner
-    #   The AWS IAM account ID of the service mesh owner. If the account ID
-    #   is not your own, then it's the ID of the account that shared the
-    #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the service mesh owner. If
+    #   the account ID is not your own, then it's the ID of the account
+    #   that shared the mesh with your account. For more information about
+    #   mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -10194,10 +10246,10 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] resource_owner
-    #   The AWS IAM account ID of the resource owner. If the account ID is
-    #   not your own, then it's the ID of the mesh owner or of another
-    #   account that the mesh is shared with. For more information about
-    #   mesh sharing, see [Working with shared meshes][1].
+    #   The Amazon Web Services IAM account ID of the resource owner. If the
+    #   account ID is not your own, then it's the ID of the mesh owner or
+    #   of another account that the mesh is shared with. For more
+    #   information about mesh sharing, see [Working with shared meshes][1].
     #
     #
     #

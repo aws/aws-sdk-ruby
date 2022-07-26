@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2022-07-21)
+------------------
+
+* Feature - This release includes a new exception type "EC2InstanceUnavailableException" for SendSSHPublicKey and SendSerialConsoleSSHPublicKey APIs.
+
+1.24.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.23.0 (2022-02-03)
 ------------------
 

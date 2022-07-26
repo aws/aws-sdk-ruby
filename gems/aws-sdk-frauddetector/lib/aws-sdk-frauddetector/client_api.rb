@@ -13,7 +13,14 @@ module Aws::FraudDetector
 
     include Seahorse::Model
 
+    ATIMetricDataPoint = Shapes::StructureShape.new(name: 'ATIMetricDataPoint')
+    ATIMetricDataPointsList = Shapes::ListShape.new(name: 'ATIMetricDataPointsList')
+    ATIModelPerformance = Shapes::StructureShape.new(name: 'ATIModelPerformance')
+    ATITrainingMetricsValue = Shapes::StructureShape.new(name: 'ATITrainingMetricsValue')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AggregatedLogOddsMetric = Shapes::StructureShape.new(name: 'AggregatedLogOddsMetric')
+    AggregatedVariablesImpactExplanation = Shapes::StructureShape.new(name: 'AggregatedVariablesImpactExplanation')
+    AggregatedVariablesImportanceMetrics = Shapes::StructureShape.new(name: 'AggregatedVariablesImportanceMetrics')
     AsyncJobStatus = Shapes::StringShape.new(name: 'AsyncJobStatus')
     BatchCreateVariableError = Shapes::StructureShape.new(name: 'BatchCreateVariableError')
     BatchCreateVariableErrorList = Shapes::ListShape.new(name: 'BatchCreateVariableErrorList')
@@ -166,6 +173,8 @@ module Aws::FraudDetector
     Language = Shapes::StringShape.new(name: 'Language')
     ListEventPredictionsRequest = Shapes::StructureShape.new(name: 'ListEventPredictionsRequest')
     ListEventPredictionsResult = Shapes::StructureShape.new(name: 'ListEventPredictionsResult')
+    ListOfAggregatedLogOddsMetrics = Shapes::ListShape.new(name: 'ListOfAggregatedLogOddsMetrics')
+    ListOfAggregatedVariablesImpactExplanations = Shapes::ListShape.new(name: 'ListOfAggregatedVariablesImpactExplanations')
     ListOfEvaluatedExternalModels = Shapes::ListShape.new(name: 'ListOfEvaluatedExternalModels')
     ListOfEvaluatedModelVersions = Shapes::ListShape.new(name: 'ListOfEvaluatedModelVersions')
     ListOfEventPredictionSummaries = Shapes::ListShape.new(name: 'ListOfEventPredictionSummaries')
@@ -200,6 +209,10 @@ module Aws::FraudDetector
     ModelVersionStatus = Shapes::StringShape.new(name: 'ModelVersionStatus')
     NameList = Shapes::ListShape.new(name: 'NameList')
     NonEmptyListOfStrings = Shapes::ListShape.new(name: 'NonEmptyListOfStrings')
+    OFIMetricDataPoint = Shapes::StructureShape.new(name: 'OFIMetricDataPoint')
+    OFIMetricDataPointsList = Shapes::ListShape.new(name: 'OFIMetricDataPointsList')
+    OFIModelPerformance = Shapes::StructureShape.new(name: 'OFIModelPerformance')
+    OFITrainingMetricsValue = Shapes::StructureShape.new(name: 'OFITrainingMetricsValue')
     Outcome = Shapes::StructureShape.new(name: 'Outcome')
     OutcomeList = Shapes::ListShape.new(name: 'OutcomeList')
     OutcomesMaxResults = Shapes::IntegerShape.new(name: 'OutcomesMaxResults')
@@ -230,6 +243,10 @@ module Aws::FraudDetector
     RulesMaxResults = Shapes::IntegerShape.new(name: 'RulesMaxResults')
     SendEventRequest = Shapes::StructureShape.new(name: 'SendEventRequest')
     SendEventResult = Shapes::StructureShape.new(name: 'SendEventResult')
+    TFIMetricDataPoint = Shapes::StructureShape.new(name: 'TFIMetricDataPoint')
+    TFIMetricDataPointsList = Shapes::ListShape.new(name: 'TFIMetricDataPointsList')
+    TFIModelPerformance = Shapes::StructureShape.new(name: 'TFIModelPerformance')
+    TFITrainingMetricsValue = Shapes::StructureShape.new(name: 'TFITrainingMetricsValue')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResult = Shapes::StructureShape.new(name: 'TagResourceResult')
@@ -238,7 +255,9 @@ module Aws::FraudDetector
     TrainingDataSchema = Shapes::StructureShape.new(name: 'TrainingDataSchema')
     TrainingDataSourceEnum = Shapes::StringShape.new(name: 'TrainingDataSourceEnum')
     TrainingMetrics = Shapes::StructureShape.new(name: 'TrainingMetrics')
+    TrainingMetricsV2 = Shapes::StructureShape.new(name: 'TrainingMetricsV2')
     TrainingResult = Shapes::StructureShape.new(name: 'TrainingResult')
+    TrainingResultV2 = Shapes::StructureShape.new(name: 'TrainingResultV2')
     UnlabeledEventsTreatment = Shapes::StringShape.new(name: 'UnlabeledEventsTreatment')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResult = Shapes::StructureShape.new(name: 'UntagResourceResult')
@@ -318,8 +337,35 @@ module Aws::FraudDetector
     variableValue = Shapes::StringShape.new(name: 'variableValue')
     wholeNumberVersionString = Shapes::StringShape.new(name: 'wholeNumberVersionString')
 
+    ATIMetricDataPoint.add_member(:cr, Shapes::ShapeRef.new(shape: float, location_name: "cr"))
+    ATIMetricDataPoint.add_member(:adr, Shapes::ShapeRef.new(shape: float, location_name: "adr"))
+    ATIMetricDataPoint.add_member(:threshold, Shapes::ShapeRef.new(shape: float, location_name: "threshold"))
+    ATIMetricDataPoint.add_member(:atodr, Shapes::ShapeRef.new(shape: float, location_name: "atodr"))
+    ATIMetricDataPoint.struct_class = Types::ATIMetricDataPoint
+
+    ATIMetricDataPointsList.member = Shapes::ShapeRef.new(shape: ATIMetricDataPoint)
+
+    ATIModelPerformance.add_member(:asi, Shapes::ShapeRef.new(shape: float, location_name: "asi"))
+    ATIModelPerformance.struct_class = Types::ATIModelPerformance
+
+    ATITrainingMetricsValue.add_member(:metric_data_points, Shapes::ShapeRef.new(shape: ATIMetricDataPointsList, location_name: "metricDataPoints"))
+    ATITrainingMetricsValue.add_member(:model_performance, Shapes::ShapeRef.new(shape: ATIModelPerformance, location_name: "modelPerformance"))
+    ATITrainingMetricsValue.struct_class = Types::ATITrainingMetricsValue
+
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: string, required: true, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AggregatedLogOddsMetric.add_member(:variable_names, Shapes::ShapeRef.new(shape: ListOfStrings, required: true, location_name: "variableNames"))
+    AggregatedLogOddsMetric.add_member(:aggregated_variables_importance, Shapes::ShapeRef.new(shape: float, required: true, location_name: "aggregatedVariablesImportance"))
+    AggregatedLogOddsMetric.struct_class = Types::AggregatedLogOddsMetric
+
+    AggregatedVariablesImpactExplanation.add_member(:event_variable_names, Shapes::ShapeRef.new(shape: ListOfStrings, location_name: "eventVariableNames"))
+    AggregatedVariablesImpactExplanation.add_member(:relative_impact, Shapes::ShapeRef.new(shape: string, location_name: "relativeImpact"))
+    AggregatedVariablesImpactExplanation.add_member(:log_odds_impact, Shapes::ShapeRef.new(shape: float, location_name: "logOddsImpact"))
+    AggregatedVariablesImpactExplanation.struct_class = Types::AggregatedVariablesImpactExplanation
+
+    AggregatedVariablesImportanceMetrics.add_member(:log_odds_metrics, Shapes::ShapeRef.new(shape: ListOfAggregatedLogOddsMetrics, location_name: "logOddsMetrics"))
+    AggregatedVariablesImportanceMetrics.struct_class = Types::AggregatedVariablesImportanceMetrics
 
     BatchCreateVariableError.add_member(:name, Shapes::ShapeRef.new(shape: string, location_name: "name"))
     BatchCreateVariableError.add_member(:code, Shapes::ShapeRef.new(shape: integer, location_name: "code"))
@@ -952,7 +998,7 @@ module Aws::FraudDetector
     Label.add_member(:arn, Shapes::ShapeRef.new(shape: fraudDetectorArn, location_name: "arn"))
     Label.struct_class = Types::Label
 
-    LabelSchema.add_member(:label_mapper, Shapes::ShapeRef.new(shape: labelMapper, required: true, location_name: "labelMapper"))
+    LabelSchema.add_member(:label_mapper, Shapes::ShapeRef.new(shape: labelMapper, location_name: "labelMapper"))
     LabelSchema.add_member(:unlabeled_events_treatment, Shapes::ShapeRef.new(shape: UnlabeledEventsTreatment, location_name: "unlabeledEventsTreatment"))
     LabelSchema.struct_class = Types::LabelSchema
 
@@ -968,6 +1014,10 @@ module Aws::FraudDetector
     ListEventPredictionsResult.add_member(:event_prediction_summaries, Shapes::ShapeRef.new(shape: ListOfEventPredictionSummaries, location_name: "eventPredictionSummaries"))
     ListEventPredictionsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "nextToken"))
     ListEventPredictionsResult.struct_class = Types::ListEventPredictionsResult
+
+    ListOfAggregatedLogOddsMetrics.member = Shapes::ShapeRef.new(shape: AggregatedLogOddsMetric)
+
+    ListOfAggregatedVariablesImpactExplanations.member = Shapes::ShapeRef.new(shape: AggregatedVariablesImpactExplanation)
 
     ListOfEvaluatedExternalModels.member = Shapes::ShapeRef.new(shape: EvaluatedExternalModel)
 
@@ -1064,6 +1114,7 @@ module Aws::FraudDetector
     ModelVersionDetail.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: time, location_name: "lastUpdatedTime"))
     ModelVersionDetail.add_member(:created_time, Shapes::ShapeRef.new(shape: time, location_name: "createdTime"))
     ModelVersionDetail.add_member(:arn, Shapes::ShapeRef.new(shape: fraudDetectorArn, location_name: "arn"))
+    ModelVersionDetail.add_member(:training_result_v2, Shapes::ShapeRef.new(shape: TrainingResultV2, location_name: "trainingResultV2"))
     ModelVersionDetail.struct_class = Types::ModelVersionDetail
 
     ModelVersionEvaluation.add_member(:output_variable_name, Shapes::ShapeRef.new(shape: string, location_name: "outputVariableName"))
@@ -1075,6 +1126,21 @@ module Aws::FraudDetector
 
     NonEmptyListOfStrings.member = Shapes::ShapeRef.new(shape: string)
 
+    OFIMetricDataPoint.add_member(:fpr, Shapes::ShapeRef.new(shape: float, location_name: "fpr"))
+    OFIMetricDataPoint.add_member(:precision, Shapes::ShapeRef.new(shape: float, location_name: "precision"))
+    OFIMetricDataPoint.add_member(:tpr, Shapes::ShapeRef.new(shape: float, location_name: "tpr"))
+    OFIMetricDataPoint.add_member(:threshold, Shapes::ShapeRef.new(shape: float, location_name: "threshold"))
+    OFIMetricDataPoint.struct_class = Types::OFIMetricDataPoint
+
+    OFIMetricDataPointsList.member = Shapes::ShapeRef.new(shape: OFIMetricDataPoint)
+
+    OFIModelPerformance.add_member(:auc, Shapes::ShapeRef.new(shape: float, location_name: "auc"))
+    OFIModelPerformance.struct_class = Types::OFIModelPerformance
+
+    OFITrainingMetricsValue.add_member(:metric_data_points, Shapes::ShapeRef.new(shape: OFIMetricDataPointsList, location_name: "metricDataPoints"))
+    OFITrainingMetricsValue.add_member(:model_performance, Shapes::ShapeRef.new(shape: OFIModelPerformance, location_name: "modelPerformance"))
+    OFITrainingMetricsValue.struct_class = Types::OFITrainingMetricsValue
+
     Outcome.add_member(:name, Shapes::ShapeRef.new(shape: identifier, location_name: "name"))
     Outcome.add_member(:description, Shapes::ShapeRef.new(shape: description, location_name: "description"))
     Outcome.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: time, location_name: "lastUpdatedTime"))
@@ -1085,6 +1151,7 @@ module Aws::FraudDetector
     OutcomeList.member = Shapes::ShapeRef.new(shape: Outcome)
 
     PredictionExplanations.add_member(:variable_impact_explanations, Shapes::ShapeRef.new(shape: listOfVariableImpactExplanations, location_name: "variableImpactExplanations"))
+    PredictionExplanations.add_member(:aggregated_variables_impact_explanations, Shapes::ShapeRef.new(shape: ListOfAggregatedVariablesImpactExplanations, location_name: "aggregatedVariablesImpactExplanations"))
     PredictionExplanations.struct_class = Types::PredictionExplanations
 
     PredictionTimeRange.add_member(:start_time, Shapes::ShapeRef.new(shape: time, required: true, location_name: "startTime"))
@@ -1189,6 +1256,21 @@ module Aws::FraudDetector
 
     SendEventResult.struct_class = Types::SendEventResult
 
+    TFIMetricDataPoint.add_member(:fpr, Shapes::ShapeRef.new(shape: float, location_name: "fpr"))
+    TFIMetricDataPoint.add_member(:precision, Shapes::ShapeRef.new(shape: float, location_name: "precision"))
+    TFIMetricDataPoint.add_member(:tpr, Shapes::ShapeRef.new(shape: float, location_name: "tpr"))
+    TFIMetricDataPoint.add_member(:threshold, Shapes::ShapeRef.new(shape: float, location_name: "threshold"))
+    TFIMetricDataPoint.struct_class = Types::TFIMetricDataPoint
+
+    TFIMetricDataPointsList.member = Shapes::ShapeRef.new(shape: TFIMetricDataPoint)
+
+    TFIModelPerformance.add_member(:auc, Shapes::ShapeRef.new(shape: float, location_name: "auc"))
+    TFIModelPerformance.struct_class = Types::TFIModelPerformance
+
+    TFITrainingMetricsValue.add_member(:metric_data_points, Shapes::ShapeRef.new(shape: TFIMetricDataPointsList, location_name: "metricDataPoints"))
+    TFITrainingMetricsValue.add_member(:model_performance, Shapes::ShapeRef.new(shape: TFIModelPerformance, location_name: "modelPerformance"))
+    TFITrainingMetricsValue.struct_class = Types::TFITrainingMetricsValue
+
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: tagKey, required: true, location_name: "key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: tagValue, required: true, location_name: "value"))
     Tag.struct_class = Types::Tag
@@ -1203,17 +1285,28 @@ module Aws::FraudDetector
     ThrottlingException.struct_class = Types::ThrottlingException
 
     TrainingDataSchema.add_member(:model_variables, Shapes::ShapeRef.new(shape: ListOfStrings, required: true, location_name: "modelVariables"))
-    TrainingDataSchema.add_member(:label_schema, Shapes::ShapeRef.new(shape: LabelSchema, required: true, location_name: "labelSchema"))
+    TrainingDataSchema.add_member(:label_schema, Shapes::ShapeRef.new(shape: LabelSchema, location_name: "labelSchema"))
     TrainingDataSchema.struct_class = Types::TrainingDataSchema
 
     TrainingMetrics.add_member(:auc, Shapes::ShapeRef.new(shape: float, location_name: "auc"))
     TrainingMetrics.add_member(:metric_data_points, Shapes::ShapeRef.new(shape: metricDataPointsList, location_name: "metricDataPoints"))
     TrainingMetrics.struct_class = Types::TrainingMetrics
 
+    TrainingMetricsV2.add_member(:ofi, Shapes::ShapeRef.new(shape: OFITrainingMetricsValue, location_name: "ofi"))
+    TrainingMetricsV2.add_member(:tfi, Shapes::ShapeRef.new(shape: TFITrainingMetricsValue, location_name: "tfi"))
+    TrainingMetricsV2.add_member(:ati, Shapes::ShapeRef.new(shape: ATITrainingMetricsValue, location_name: "ati"))
+    TrainingMetricsV2.struct_class = Types::TrainingMetricsV2
+
     TrainingResult.add_member(:data_validation_metrics, Shapes::ShapeRef.new(shape: DataValidationMetrics, location_name: "dataValidationMetrics"))
     TrainingResult.add_member(:training_metrics, Shapes::ShapeRef.new(shape: TrainingMetrics, location_name: "trainingMetrics"))
     TrainingResult.add_member(:variable_importance_metrics, Shapes::ShapeRef.new(shape: VariableImportanceMetrics, location_name: "variableImportanceMetrics"))
     TrainingResult.struct_class = Types::TrainingResult
+
+    TrainingResultV2.add_member(:data_validation_metrics, Shapes::ShapeRef.new(shape: DataValidationMetrics, location_name: "dataValidationMetrics"))
+    TrainingResultV2.add_member(:training_metrics_v2, Shapes::ShapeRef.new(shape: TrainingMetricsV2, location_name: "trainingMetricsV2"))
+    TrainingResultV2.add_member(:variable_importance_metrics, Shapes::ShapeRef.new(shape: VariableImportanceMetrics, location_name: "variableImportanceMetrics"))
+    TrainingResultV2.add_member(:aggregated_variables_importance_metrics, Shapes::ShapeRef.new(shape: AggregatedVariablesImportanceMetrics, location_name: "aggregatedVariablesImportanceMetrics"))
+    TrainingResultV2.struct_class = Types::TrainingResultV2
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: fraudDetectorArn, required: true, location_name: "resourceARN"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: tagKeyList, required: true, location_name: "tagKeys"))
@@ -1353,7 +1446,7 @@ module Aws::FraudDetector
     labelList.member = Shapes::ShapeRef.new(shape: Label)
 
     labelMapper.key = Shapes::ShapeRef.new(shape: string)
-    labelMapper.value = Shapes::ShapeRef.new(shape: NonEmptyListOfStrings)
+    labelMapper.value = Shapes::ShapeRef.new(shape: ListOfStrings)
 
     listOfEntities.member = Shapes::ShapeRef.new(shape: Entity)
 

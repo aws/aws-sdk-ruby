@@ -45,6 +45,9 @@ module Aws::SSMIncidents
     DeleteResponsePlanOutput = Shapes::StructureShape.new(name: 'DeleteResponsePlanOutput')
     DeleteTimelineEventInput = Shapes::StructureShape.new(name: 'DeleteTimelineEventInput')
     DeleteTimelineEventOutput = Shapes::StructureShape.new(name: 'DeleteTimelineEventOutput')
+    DynamicSsmParameterValue = Shapes::UnionShape.new(name: 'DynamicSsmParameterValue')
+    DynamicSsmParameters = Shapes::MapShape.new(name: 'DynamicSsmParameters')
+    DynamicSsmParametersKeyString = Shapes::StringShape.new(name: 'DynamicSsmParametersKeyString')
     EmptyChatChannel = Shapes::StructureShape.new(name: 'EmptyChatChannel')
     EngagementSet = Shapes::ListShape.new(name: 'EngagementSet')
     EventData = Shapes::StringShape.new(name: 'EventData')
@@ -125,6 +128,7 @@ module Aws::SSMIncidents
     ResponsePlanSummaryList = Shapes::ListShape.new(name: 'ResponsePlanSummaryList')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     ServiceCode = Shapes::StringShape.new(name: 'ServiceCode')
+    ServicePrincipal = Shapes::StringShape.new(name: 'ServicePrincipal')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SnsArn = Shapes::StringShape.new(name: 'SnsArn')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
@@ -146,6 +150,7 @@ module Aws::SSMIncidents
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagMap = Shapes::MapShape.new(name: 'TagMap')
+    TagMapUpdate = Shapes::MapShape.new(name: 'TagMapUpdate')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
@@ -174,6 +179,7 @@ module Aws::SSMIncidents
     UpdateTimelineEventOutput = Shapes::StructureShape.new(name: 'UpdateTimelineEventOutput')
     Url = Shapes::StringShape.new(name: 'Url')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
+    VariableType = Shapes::StringShape.new(name: 'VariableType')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, required: true, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
@@ -293,6 +299,15 @@ module Aws::SSMIncidents
 
     DeleteTimelineEventOutput.struct_class = Types::DeleteTimelineEventOutput
 
+    DynamicSsmParameterValue.add_member(:variable, Shapes::ShapeRef.new(shape: VariableType, location_name: "variable"))
+    DynamicSsmParameterValue.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    DynamicSsmParameterValue.add_member_subclass(:variable, Types::DynamicSsmParameterValue::Variable)
+    DynamicSsmParameterValue.add_member_subclass(:unknown, Types::DynamicSsmParameterValue::Unknown)
+    DynamicSsmParameterValue.struct_class = Types::DynamicSsmParameterValue
+
+    DynamicSsmParameters.key = Shapes::ShapeRef.new(shape: DynamicSsmParametersKeyString)
+    DynamicSsmParameters.value = Shapes::ShapeRef.new(shape: DynamicSsmParameterValue)
+
     EmptyChatChannel.struct_class = Types::EmptyChatChannel
 
     EngagementSet.member = Shapes::ShapeRef.new(shape: SsmContactsArn)
@@ -369,7 +384,7 @@ module Aws::SSMIncidents
     IncidentRecord.struct_class = Types::IncidentRecord
 
     IncidentRecordSource.add_member(:created_by, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "createdBy"))
-    IncidentRecordSource.add_member(:invoked_by, Shapes::ShapeRef.new(shape: Arn, location_name: "invokedBy"))
+    IncidentRecordSource.add_member(:invoked_by, Shapes::ShapeRef.new(shape: ServicePrincipal, location_name: "invokedBy"))
     IncidentRecordSource.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "resourceArn"))
     IncidentRecordSource.add_member(:source, Shapes::ShapeRef.new(shape: IncidentSource, required: true, location_name: "source"))
     IncidentRecordSource.struct_class = Types::IncidentRecordSource
@@ -387,6 +402,7 @@ module Aws::SSMIncidents
 
     IncidentTemplate.add_member(:dedupe_string, Shapes::ShapeRef.new(shape: DedupeString, location_name: "dedupeString"))
     IncidentTemplate.add_member(:impact, Shapes::ShapeRef.new(shape: Impact, required: true, location_name: "impact"))
+    IncidentTemplate.add_member(:incident_tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "incidentTags"))
     IncidentTemplate.add_member(:notification_targets, Shapes::ShapeRef.new(shape: NotificationTargetSet, location_name: "notificationTargets"))
     IncidentTemplate.add_member(:summary, Shapes::ShapeRef.new(shape: IncidentSummary, location_name: "summary"))
     IncidentTemplate.add_member(:title, Shapes::ShapeRef.new(shape: IncidentTitle, required: true, location_name: "title"))
@@ -547,6 +563,7 @@ module Aws::SSMIncidents
 
     SsmAutomation.add_member(:document_name, Shapes::ShapeRef.new(shape: SsmAutomationDocumentNameString, required: true, location_name: "documentName"))
     SsmAutomation.add_member(:document_version, Shapes::ShapeRef.new(shape: SsmAutomationDocumentVersionString, location_name: "documentVersion"))
+    SsmAutomation.add_member(:dynamic_parameters, Shapes::ShapeRef.new(shape: DynamicSsmParameters, location_name: "dynamicParameters"))
     SsmAutomation.add_member(:parameters, Shapes::ShapeRef.new(shape: SsmParameters, location_name: "parameters"))
     SsmAutomation.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
     SsmAutomation.add_member(:target_account, Shapes::ShapeRef.new(shape: SsmTargetAccount, location_name: "targetAccount"))
@@ -574,6 +591,9 @@ module Aws::SSMIncidents
 
     TagMap.key = Shapes::ShapeRef.new(shape: TagKey)
     TagMap.value = Shapes::ShapeRef.new(shape: TagValue)
+
+    TagMapUpdate.key = Shapes::ShapeRef.new(shape: TagKey)
+    TagMapUpdate.value = Shapes::ShapeRef.new(shape: TagValue)
 
     TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "resourceArn"))
     TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, required: true, location_name: "tags"))
@@ -659,6 +679,7 @@ module Aws::SSMIncidents
     UpdateResponsePlanInput.add_member(:incident_template_impact, Shapes::ShapeRef.new(shape: Impact, location_name: "incidentTemplateImpact"))
     UpdateResponsePlanInput.add_member(:incident_template_notification_targets, Shapes::ShapeRef.new(shape: NotificationTargetSet, location_name: "incidentTemplateNotificationTargets"))
     UpdateResponsePlanInput.add_member(:incident_template_summary, Shapes::ShapeRef.new(shape: IncidentSummary, location_name: "incidentTemplateSummary"))
+    UpdateResponsePlanInput.add_member(:incident_template_tags, Shapes::ShapeRef.new(shape: TagMapUpdate, location_name: "incidentTemplateTags"))
     UpdateResponsePlanInput.add_member(:incident_template_title, Shapes::ShapeRef.new(shape: IncidentTitle, location_name: "incidentTemplateTitle"))
     UpdateResponsePlanInput.struct_class = Types::UpdateResponsePlanInput
 
@@ -1081,6 +1102,7 @@ module Aws::SSMIncidents
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 

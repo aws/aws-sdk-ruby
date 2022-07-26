@@ -483,8 +483,24 @@ module Aws::RDS
       data[:performance_insights_kms_key_id]
     end
 
-    # The amount of time, in days, to retain Performance Insights data.
-    # Valid values are 7 or 731 (2 years).
+    # The number of days to retain Performance Insights data. The default is
+    # 7 days. The following values are valid:
+    #
+    # * 7
+    #
+    # * *month* * 31, where *month* is a number of months from 1-23
+    #
+    # * 731
+    #
+    # For example, the following values are valid:
+    #
+    # * 93 (3 months * 31)
+    #
+    # * 341 (11 months * 31)
+    #
+    # * 589 (19 months * 31)
+    #
+    # * 731
     # @return [Integer]
     def performance_insights_retention_period
       data[:performance_insights_retention_period]
@@ -661,8 +677,7 @@ module Aws::RDS
     #   start with the prefix `AWSRDSCustom`.
     #
     # For the list of permissions required for the IAM role, see [ Configure
-    # IAM and your VPC][1] in the *Amazon Relational Database Service User
-    # Guide*.
+    # IAM and your VPC][1] in the *Amazon RDS User Guide*.
     #
     #
     #
@@ -677,6 +692,37 @@ module Aws::RDS
     # @return [String]
     def backup_target
       data[:backup_target]
+    end
+
+    # The network type of the DB instance.
+    #
+    # Valid values:
+    #
+    # * `IPV4`
+    #
+    # * `DUAL`
+    #
+    # The network type is determined by the `DBSubnetGroup` specified for
+    # the DB instance. A `DBSubnetGroup` can support only the IPv4 protocol
+    # or the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    # For more information, see [ Working with a DB instance in a VPC][1] in
+    # the *Amazon RDS User Guide* and [ Working with a DB instance in a
+    # VPC][2] in the *Amazon Aurora User Guide.*
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    # @return [String]
+    def network_type
+      data[:network_type]
+    end
+
+    # The status of the policy state of the activity stream.
+    # @return [String]
+    def activity_stream_policy_status
+      data[:activity_stream_policy_status]
     end
 
     # @!endgroup
@@ -875,6 +921,7 @@ module Aws::RDS
     #     enable_customer_owned_ip: false,
     #     custom_iam_instance_profile: "String",
     #     backup_target: "String",
+    #     network_type: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :db_name
@@ -1094,14 +1141,16 @@ module Aws::RDS
     #     * Web and Express editions: Must be an integer from 20 to 1024.
     # @option options [required, String] :db_instance_class
     #   The compute and memory capacity of the DB instance, for example
-    #   db.m4.large. Not all DB instance classes are available in all Amazon
+    #   db.m5.large. Not all DB instance classes are available in all Amazon
     #   Web Services Regions, or for all database engines. For the full list
     #   of DB instance classes, and availability for your engine, see [DB
-    #   Instance Class][1] in the *Amazon RDS User Guide.*
+    #   instance classes][1] in the *Amazon RDS User Guide* or [Aurora DB
+    #   instance classes][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.DBInstanceClass.html
     # @option options [required, String] :engine
     #   The name of the database engine to be used for this instance.
     #
@@ -1196,7 +1245,9 @@ module Aws::RDS
     # @option options [Array<String>] :db_security_groups
     #   A list of DB security groups to associate with this DB instance.
     #
-    #   Default: The default DB security group for the database engine.
+    #   This setting applies to the legacy EC2-Classic platform, which is no
+    #   longer used to create new DB instances. Use the `VpcSecurityGroupIds`
+    #   setting instead.
     # @option options [Array<String>] :vpc_security_group_ids
     #   A list of Amazon EC2 VPC security groups to associate with this DB
     #   instance.
@@ -1215,7 +1266,10 @@ module Aws::RDS
     #
     #   **Amazon Aurora**
     #
-    #   Not applicable. Availability Zones are managed by the DB cluster.
+    #   Each Aurora DB cluster hosts copies of its storage in three separate
+    #   Availability Zones. Specify one of these Availability Zones. Aurora
+    #   automatically chooses an appropriate Availability Zone if you don't
+    #   specify one.
     #
     #   Default: A random, system-chosen Availability Zone in the endpoint's
     #   Amazon Web Services Region.
@@ -1227,19 +1281,9 @@ module Aws::RDS
     #   Zone must be in the same Amazon Web Services Region as the current
     #   endpoint.
     #
-    #   <note markdown="1"> If you're creating a DB instance in an RDS on VMware environment,
-    #   specify the identifier of the custom Availability Zone to create the
-    #   DB instance in.
-    #
-    #    For more information about RDS on VMware, see the [ RDS on VMware User
-    #   Guide.][2]
-    #
-    #    </note>
-    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html
-    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html
     # @option options [String] :db_subnet_group_name
     #   A DB subnet group to associate with this DB instance.
     #
@@ -1297,7 +1341,7 @@ module Aws::RDS
     #
     #   * Can't be set to 0 if the DB instance is a source to read replicas
     #
-    #   * Can't be set to 0 or 35 for an RDS Custom for Oracle DB instance
+    #   * Can't be set to 0 for an RDS Custom for Oracle DB instance
     # @option options [String] :preferred_backup_window
     #   The daily time range during which automated backups are created if
     #   automated backups are enabled, using the `BackupRetentionPeriod`
@@ -1376,11 +1420,16 @@ module Aws::RDS
     #   instance is a Multi-AZ deployment.
     #
     #   This setting doesn't apply to RDS Custom.
+    #
+    #   **Amazon Aurora**
+    #
+    #   Not applicable. DB instance Availability Zones (AZs) are managed by
+    #   the DB cluster.
     # @option options [String] :engine_version
     #   The version number of the database engine to use.
     #
     #   For a list of valid engine versions, use the
-    #   `DescribeDBEngineVersions` action.
+    #   `DescribeDBEngineVersions` operation.
     #
     #   The following are the database engines and links to information about
     #   the major and minor versions that are available with Amazon RDS. Not
@@ -1398,42 +1447,42 @@ module Aws::RDS
     #   setting is required for RDS Custom for Oracle. The CEV name has the
     #   following format: `19.customized_string `. An example identifier is
     #   `19.my_cev1`. For more information, see [ Creating an RDS Custom for
-    #   Oracle DB instance][1] in the *Amazon RDS User Guide.*.
+    #   Oracle DB instance][1] in the *Amazon RDS User Guide*.
     #
     #   **Amazon RDS Custom for SQL Server**
     #
     #   See [RDS Custom for SQL Server general requirements][2] in the *Amazon
-    #   RDS User Guide.*
+    #   RDS User Guide*.
     #
     #   **MariaDB**
     #
     #   For information, see [MariaDB on Amazon RDS Versions][3] in the
-    #   *Amazon RDS User Guide.*
+    #   *Amazon RDS User Guide*.
     #
     #   **Microsoft SQL Server**
     #
     #   For information, see [Microsoft SQL Server Versions on Amazon RDS][4]
-    #   in the *Amazon RDS User Guide.*
+    #   in the *Amazon RDS User Guide*.
     #
     #   **MySQL**
     #
     #   For information, see [MySQL on Amazon RDS Versions][5] in the *Amazon
-    #   RDS User Guide.*
+    #   RDS User Guide*.
     #
     #   **Oracle**
     #
     #   For information, see [Oracle Database Engine Release Notes][6] in the
-    #   *Amazon RDS User Guide.*
+    #   *Amazon RDS User Guide*.
     #
     #   **PostgreSQL**
     #
     #   For information, see [Amazon RDS for PostgreSQL versions and
-    #   extensions][7] in the *Amazon RDS User Guide.*
+    #   extensions][7] in the *Amazon RDS User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-creating.html#custom-creating.create
-    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-reqs-limits.html#custom-reqs-limits.reqsMS
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-reqs-limits-MS.html
     #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html#MariaDB.Concepts.VersionMgmt
     #   [4]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.VersionSupport
     #   [5]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt
@@ -1453,6 +1502,10 @@ module Aws::RDS
     #   `general-public-license`
     #
     #   This setting doesn't apply to RDS Custom.
+    #
+    #   **Amazon Aurora**
+    #
+    #   Not applicable.
     # @option options [Integer] :iops
     #   The amount of Provisioned IOPS (input/output operations per second) to
     #   be initially allocated for the DB instance. For information about
@@ -1463,6 +1516,10 @@ module Aws::RDS
     #   must be a multiple between .5 and 50 of the storage amount for the DB
     #   instance. For SQL Server DB instances, must be a multiple between 1
     #   and 50 of the storage amount for the DB instance.
+    #
+    #   **Amazon Aurora**
+    #
+    #   Not applicable. Storage is managed by the DB cluster.
     #
     #
     #
@@ -1477,6 +1534,10 @@ module Aws::RDS
     #   instance.
     #
     #   This setting doesn't apply to RDS Custom.
+    #
+    #   **Amazon Aurora**
+    #
+    #   Not applicable.
     # @option options [String] :character_set_name
     #   For supported engines, this value indicates that the DB instance
     #   should be associated with the specified `CharacterSet`.
@@ -1541,11 +1602,19 @@ module Aws::RDS
     #   parameter.
     #
     #   Default: `io1` if the `Iops` parameter is specified, otherwise `gp2`
+    #
+    #   **Amazon Aurora**
+    #
+    #   Not applicable. Storage is managed by the DB cluster.
     # @option options [String] :tde_credential_arn
     #   The ARN from the key store with which to associate the instance for
     #   TDE encryption.
     #
     #   This setting doesn't apply to RDS Custom.
+    #
+    #   **Amazon Aurora**
+    #
+    #   Not applicable.
     # @option options [String] :tde_credential_password
     #   The password for the given ARN from the key store in order to access
     #   the device.
@@ -1599,6 +1668,10 @@ module Aws::RDS
     #
     #   This setting doesn't apply to RDS Custom.
     #
+    #   **Amazon Aurora**
+    #
+    #   Not applicable. The domain is managed by the DB cluster.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html
@@ -1642,6 +1715,10 @@ module Aws::RDS
     #   the Directory Service.
     #
     #   This setting doesn't apply to RDS Custom.
+    #
+    #   **Amazon Aurora**
+    #
+    #   Not applicable. The domain is managed by the DB cluster.
     # @option options [Integer] :promotion_tier
     #   A value that specifies the order in which an Aurora Replica is
     #   promoted to the primary instance after a failure of the existing
@@ -1669,12 +1746,15 @@ module Aws::RDS
     #   Services Identity and Access Management (IAM) accounts to database
     #   accounts. By default, mapping isn't enabled.
     #
-    #   This setting doesn't apply to RDS Custom or Amazon Aurora. In Aurora,
-    #   mapping Amazon Web Services IAM accounts to database accounts is
-    #   managed by the DB cluster.
-    #
     #   For more information, see [ IAM Database Authentication for MySQL and
-    #   PostgreSQL][1] in the *Amazon RDS User Guide.*
+    #   PostgreSQL][1] in the *Amazon RDS User Guide*.
+    #
+    #   This setting doesn't apply to RDS Custom.
+    #
+    #   **Amazon Aurora**
+    #
+    #   Not applicable. Mapping Amazon Web Services IAM accounts to database
+    #   accounts is managed by the DB cluster.
     #
     #
     #
@@ -1682,7 +1762,7 @@ module Aws::RDS
     # @option options [Boolean] :enable_performance_insights
     #   A value that indicates whether to enable Performance Insights for the
     #   DB instance. For more information, see [Using Amazon Performance
-    #   Insights][1] in the *Amazon Relational Database Service User Guide*.
+    #   Insights][1] in the *Amazon RDS User Guide*.
     #
     #   This setting doesn't apply to RDS Custom.
     #
@@ -1703,15 +1783,34 @@ module Aws::RDS
     #
     #   This setting doesn't apply to RDS Custom.
     # @option options [Integer] :performance_insights_retention_period
-    #   The amount of time, in days, to retain Performance Insights data.
-    #   Valid values are 7 or 731 (2 years).
+    #   The number of days to retain Performance Insights data. The default is
+    #   7 days. The following values are valid:
+    #
+    #   * 7
+    #
+    #   * *month* * 31, where *month* is a number of months from 1-23
+    #
+    #   * 731
+    #
+    #   For example, the following values are valid:
+    #
+    #   * 93 (3 months * 31)
+    #
+    #   * 341 (11 months * 31)
+    #
+    #   * 589 (19 months * 31)
+    #
+    #   * 731
+    #
+    #   If you specify a retention period such as 94, which isn't a valid
+    #   value, RDS issues an error.
     #
     #   This setting doesn't apply to RDS Custom.
     # @option options [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of log types that need to be enabled for exporting to
     #   CloudWatch Logs. The values in the list depend on the DB engine. For
-    #   more information, see [Publishing Database Logs to Amazon CloudWatch
-    #   Logs][1] in the *Amazon Relational Database Service User Guide*.
+    #   more information, see [ Publishing Database Logs to Amazon CloudWatch
+    #   Logs][1] in the *Amazon RDS User Guide*.
     #
     #   **Amazon Aurora**
     #
@@ -1750,6 +1849,10 @@ module Aws::RDS
     #   instance class of the DB instance.
     #
     #   This setting doesn't apply to RDS Custom.
+    #
+    #   **Amazon Aurora**
+    #
+    #   Not applicable.
     # @option options [Boolean] :deletion_protection
     #   A value that indicates whether the DB instance has deletion protection
     #   enabled. The database can't be deleted when deletion protection is
@@ -1775,6 +1878,10 @@ module Aws::RDS
     #   storage autoscaling][1] in the *Amazon RDS User Guide*.
     #
     #   This setting doesn't apply to RDS Custom.
+    #
+    #   **Amazon Aurora**
+    #
+    #   Not applicable. Storage is managed by the DB cluster.
     #
     #
     #
@@ -1813,8 +1920,7 @@ module Aws::RDS
     #     start with the prefix `AWSRDSCustom`.
     #
     #   For the list of permissions required for the IAM role, see [ Configure
-    #   IAM and your VPC][1] in the *Amazon Relational Database Service User
-    #   Guide*.
+    #   IAM and your VPC][1] in the *Amazon RDS User Guide*.
     #
     #   This setting is required for RDS Custom.
     #
@@ -1833,6 +1939,25 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
+    # @option options [String] :network_type
+    #   The network type of the DB instance.
+    #
+    #   Valid values:
+    #
+    #   * `IPV4`
+    #
+    #   * `DUAL`
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the DB instance. A `DBSubnetGroup` can support only the IPv4 protocol
+    #   or the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [ Working with a DB instance in a VPC][1] in
+    #   the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     # @return [DBInstance]
     def create(options = {})
       options = options.merge(db_instance_identifier: @id)
@@ -1889,6 +2014,7 @@ module Aws::RDS
     #     replica_mode: "open-read-only", # accepts open-read-only, mounted
     #     max_allocated_storage: 1,
     #     custom_iam_instance_profile: "String",
+    #     network_type: "String",
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -1901,7 +2027,7 @@ module Aws::RDS
     #   db.m4.large. Not all DB instance classes are available in all Amazon
     #   Web Services Regions, or for all database engines. For the full list
     #   of DB instance classes, and availability for your engine, see [DB
-    #   Instance Class][1] in the *Amazon RDS User Guide.*
+    #   Instance Class][1] in the *Amazon RDS User Guide*.
     #
     #   Default: Inherits from the source DB instance.
     #
@@ -1961,7 +2087,7 @@ module Aws::RDS
     #   specified DB engine for a cross-Region read replica.
     #
     #   Specifying a parameter group for this operation is only supported for
-    #   Oracle DB instances. It isn't supported for RDS Custom.
+    #   MySQL and Oracle DB instances. It isn't supported for RDS Custom.
     #
     #   Constraints:
     #
@@ -2090,9 +2216,16 @@ module Aws::RDS
     #   This setting doesn't apply to RDS Custom, which uses the same KMS key
     #   as the primary replica.
     # @option options [String] :pre_signed_url
-    #   The URL that contains a Signature Version 4 signed request for the
-    #   `CreateDBInstanceReadReplica` API action in the source Amazon Web
-    #   Services Region that contains the source DB instance.
+    #   When you are creating a read replica from one Amazon Web Services
+    #   GovCloud (US) Region to another or from one China Amazon Web Services
+    #   Region to another, the URL that contains a Signature Version 4 signed
+    #   request for the `CreateDBInstanceReadReplica` API operation in the
+    #   source Amazon Web Services Region that contains the source DB
+    #   instance.
+    #
+    #   This setting applies only to Amazon Web Services GovCloud (US) Regions
+    #   and China Amazon Web Services Regions. It's ignored in other Amazon
+    #   Web Services Regions.
     #
     #   You must specify this parameter when you create an encrypted read
     #   replica from another Amazon Web Services Region by using the Amazon
@@ -2100,32 +2233,31 @@ module Aws::RDS
     #   encrypted read replica in the same Amazon Web Services Region.
     #
     #   The presigned URL must be a valid request for the
-    #   `CreateDBInstanceReadReplica` API action that can be executed in the
-    #   source Amazon Web Services Region that contains the encrypted source
-    #   DB instance. The presigned URL request must contain the following
+    #   `CreateDBInstanceReadReplica` API operation that can run in the source
+    #   Amazon Web Services Region that contains the encrypted source DB
+    #   instance. The presigned URL request must contain the following
     #   parameter values:
     #
     #   * `DestinationRegion` - The Amazon Web Services Region that the
     #     encrypted read replica is created in. This Amazon Web Services
     #     Region is the same one where the `CreateDBInstanceReadReplica`
-    #     action is called that contains this presigned URL.
+    #     operation is called that contains this presigned URL.
     #
     #     For example, if you create an encrypted DB instance in the us-west-1
     #     Amazon Web Services Region, from a source DB instance in the
     #     us-east-2 Amazon Web Services Region, then you call the
-    #     `CreateDBInstanceReadReplica` action in the us-east-1 Amazon Web
+    #     `CreateDBInstanceReadReplica` operation in the us-east-1 Amazon Web
     #     Services Region and provide a presigned URL that contains a call to
-    #     the `CreateDBInstanceReadReplica` action in the us-west-2 Amazon Web
-    #     Services Region. For this example, the `DestinationRegion` in the
-    #     presigned URL must be set to the us-east-1 Amazon Web Services
+    #     the `CreateDBInstanceReadReplica` operation in the us-west-2 Amazon
+    #     Web Services Region. For this example, the `DestinationRegion` in
+    #     the presigned URL must be set to the us-east-1 Amazon Web Services
     #     Region.
     #
-    #   * `KmsKeyId` - The Amazon Web Services KMS key identifier for the key
-    #     to use to encrypt the read replica in the destination Amazon Web
-    #     Services Region. This is the same identifier for both the
-    #     `CreateDBInstanceReadReplica` action that is called in the
-    #     destination Amazon Web Services Region, and the action contained in
-    #     the presigned URL.
+    #   * `KmsKeyId` - The KMS key identifier for the key to use to encrypt
+    #     the read replica in the destination Amazon Web Services Region. This
+    #     is the same identifier for both the `CreateDBInstanceReadReplica`
+    #     operation that is called in the destination Amazon Web Services
+    #     Region, and the operation contained in the presigned URL.
     #
     #   * `SourceDBInstanceIdentifier` - The DB instance identifier for the
     #     encrypted DB instance to be replicated. This identifier must be in
@@ -2144,11 +2276,10 @@ module Aws::RDS
     #   specify `SourceRegion` (or `--source-region` for the CLI) instead of
     #   specifying `PreSignedUrl` manually. Specifying `SourceRegion`
     #   autogenerates a presigned URL that is a valid request for the
-    #   operation that can be executed in the source Amazon Web Services
-    #   Region.
+    #   operation that can run in the source Amazon Web Services Region.
     #
-    #    `SourceRegion` isn't supported for SQL Server, because SQL Server on
-    #   Amazon RDS doesn't support cross-Region read replicas.
+    #    `SourceRegion` isn't supported for SQL Server, because Amazon RDS for
+    #   SQL Server doesn't support cross-Region read replicas.
     #
     #    </note>
     #
@@ -2165,7 +2296,7 @@ module Aws::RDS
     #
     #   For more information about IAM database authentication, see [ IAM
     #   Database Authentication for MySQL and PostgreSQL][1] in the *Amazon
-    #   RDS User Guide.*
+    #   RDS User Guide*.
     #
     #   This setting doesn't apply to RDS Custom.
     #
@@ -2198,8 +2329,27 @@ module Aws::RDS
     #
     #   This setting doesn't apply to RDS Custom.
     # @option options [Integer] :performance_insights_retention_period
-    #   The amount of time, in days, to retain Performance Insights data.
-    #   Valid values are 7 or 731 (2 years).
+    #   The number of days to retain Performance Insights data. The default is
+    #   7 days. The following values are valid:
+    #
+    #   * 7
+    #
+    #   * *month* * 31, where *month* is a number of months from 1-23
+    #
+    #   * 731
+    #
+    #   For example, the following values are valid:
+    #
+    #   * 93 (3 months * 31)
+    #
+    #   * 341 (11 months * 31)
+    #
+    #   * 589 (19 months * 31)
+    #
+    #   * 731
+    #
+    #   If you specify a retention period such as 94, which isn't a valid
+    #   value, RDS issues an error.
     #
     #   This setting doesn't apply to RDS Custom.
     # @option options [Array<String>] :enable_cloudwatch_logs_exports
@@ -2301,14 +2451,32 @@ module Aws::RDS
     #     start with the prefix `AWSRDSCustom`.
     #
     #   For the list of permissions required for the IAM role, see [ Configure
-    #   IAM and your VPC][1] in the *Amazon Relational Database Service User
-    #   Guide*.
+    #   IAM and your VPC][1] in the *Amazon RDS User Guide*.
     #
     #   This setting is required for RDS Custom.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc
+    # @option options [String] :network_type
+    #   The network type of the DB instance.
+    #
+    #   Valid values:
+    #
+    #   * `IPV4`
+    #
+    #   * `DUAL`
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   read replica. A `DBSubnetGroup` can support only the IPv4 protocol or
+    #   the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [ Working with a DB instance in a VPC][1] in
+    #   the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -2490,6 +2658,7 @@ module Aws::RDS
     #     aws_backup_recovery_point_arn: "AwsBackupRecoveryPointArn",
     #     automation_mode: "full", # accepts full, all-paused
     #     resume_full_automation_mode_minutes: 1,
+    #     network_type: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [Integer] :allocated_storage
@@ -2505,10 +2674,11 @@ module Aws::RDS
     #   `CreateDBInstance`.
     # @option options [String] :db_instance_class
     #   The new compute and memory capacity of the DB instance, for example
-    #   db.m4.large. Not all DB instance classes are available in all Amazon
+    #   db.m5.large. Not all DB instance classes are available in all Amazon
     #   Web Services Regions, or for all database engines. For the full list
     #   of DB instance classes, and availability for your engine, see [DB
-    #   Instance Class][1] in the *Amazon RDS User Guide*.
+    #   instance classes][1] in the *Amazon RDS User Guide* or [Aurora DB
+    #   instance classes][2] in the *Amazon Aurora User Guide*.
     #
     #   If you modify the DB instance class, an outage occurs during the
     #   change. The change is applied during the next maintenance window,
@@ -2521,6 +2691,7 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.DBInstanceClass.html
     # @option options [String] :db_subnet_group_name
     #   The new DB subnet group for the DB instance. You can use this
     #   parameter to move your DB instance to a different VPC. If your DB
@@ -2627,7 +2798,7 @@ module Aws::RDS
     #
     #   Constraints: Must contain from 8 to 128 characters.
     #
-    #   <note markdown="1"> Amazon RDS API actions never return the password, so this action
+    #   <note markdown="1"> Amazon RDS API operations never return the password, so this action
     #   provides a way to regain access to a primary instance user if the
     #   password is lost. This includes restoring privileges that might have
     #   been accidentally revoked.
@@ -2677,8 +2848,8 @@ module Aws::RDS
     #   Constraints:
     #
     #   * It must be a value from 0 to 35. It can't be set to 0 if the DB
-    #     instance is a source to read replicas. It can't be set to 0 or 35
-    #     for an RDS Custom for Oracle DB instance.
+    #     instance is a source to read replicas. It can't be set to 0 for an
+    #     RDS Custom for Oracle DB instance.
     #
     #   * It can be specified for a MySQL read replica only if the source is
     #     running MySQL 5.6 or later.
@@ -3066,7 +3237,7 @@ module Aws::RDS
     #   DB instance.
     #
     #   For more information, see [Using Amazon Performance Insights][1] in
-    #   the *Amazon Relational Database Service User Guide*.
+    #   the *Amazon RDS User Guide*.
     #
     #   This setting doesn't apply to RDS Custom.
     #
@@ -3087,8 +3258,27 @@ module Aws::RDS
     #
     #   This setting doesn't apply to RDS Custom.
     # @option options [Integer] :performance_insights_retention_period
-    #   The amount of time, in days, to retain Performance Insights data.
-    #   Valid values are 7 or 731 (2 years).
+    #   The number of days to retain Performance Insights data. The default is
+    #   7 days. The following values are valid:
+    #
+    #   * 7
+    #
+    #   * *month* * 31, where *month* is a number of months from 1-23
+    #
+    #   * 731
+    #
+    #   For example, the following values are valid:
+    #
+    #   * 93 (3 months * 31)
+    #
+    #   * 341 (11 months * 31)
+    #
+    #   * 589 (19 months * 31)
+    #
+    #   * 731
+    #
+    #   If you specify a retention period such as 94, which isn't a valid
+    #   value, RDS issues an error.
     #
     #   This setting doesn't apply to RDS Custom.
     # @option options [Types::CloudwatchLogsExportConfiguration] :cloudwatch_logs_export_configuration
@@ -3153,7 +3343,7 @@ module Aws::RDS
     #
     #   * For more information about rotating your SSL/TLS certificate for
     #     Aurora DB engines, see [ Rotating Your SSL/TLS Certificate][2] in
-    #     the *Amazon Aurora User Guide.*
+    #     the *Amazon Aurora User Guide*.
     #
     #   This setting doesn't apply to RDS Custom.
     #
@@ -3216,6 +3406,25 @@ module Aws::RDS
     #   The number of minutes to pause the automation. When the time period
     #   ends, RDS Custom resumes full automation. The minimum value is `60`
     #   (default). The maximum value is `1,440`.
+    # @option options [String] :network_type
+    #   The network type of the DB instance.
+    #
+    #   Valid values:
+    #
+    #   * `IPV4`
+    #
+    #   * `DUAL`
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the DB instance. A `DBSubnetGroup` can support only the IPv4 protocol
+    #   or the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [ Working with a DB instance in a VPC][1] in
+    #   the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     # @return [DBInstance]
     def modify(options = {})
       options = options.merge(db_instance_identifier: @id)
@@ -3351,6 +3560,7 @@ module Aws::RDS
     #     enable_customer_owned_ip: false,
     #     custom_iam_instance_profile: "String",
     #     backup_target: "String",
+    #     network_type: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :target_db_instance_identifier
@@ -3389,7 +3599,7 @@ module Aws::RDS
     #   example db.m4.large. Not all DB instance classes are available in all
     #   Amazon Web Services Regions, or for all database engines. For the full
     #   list of DB instance classes, and availability for your engine, see [DB
-    #   Instance Class][1] in the *Amazon RDS User Guide.*
+    #   Instance Class][1] in the *Amazon RDS User Guide*.
     #
     #   Default: The same DBInstanceClass as the original DB instance.
     #
@@ -3685,8 +3895,7 @@ module Aws::RDS
     #     start with the prefix `AWSRDSCustom`.
     #
     #   For the list of permissions required for the IAM role, see [ Configure
-    #   IAM and your VPC][1] in the *Amazon Relational Database Service User
-    #   Guide*.
+    #   IAM and your VPC][1] in the *Amazon RDS User Guide*.
     #
     #   This setting is required for RDS Custom.
     #
@@ -3706,6 +3915,25 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
+    # @option options [String] :network_type
+    #   The network type of the DB instance.
+    #
+    #   Valid values:
+    #
+    #   * `IPV4`
+    #
+    #   * `DUAL`
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the DB instance. A `DBSubnetGroup` can support only the IPv4 protocol
+    #   or the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [ Working with a DB instance in a VPC][1] in
+    #   the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     # @return [DBInstance]
     def restore(options = {})
       options = options.merge(source_db_instance_identifier: @id)
@@ -3942,13 +4170,12 @@ module Aws::RDS
     #   Supported filters:
     #
     #   * `db-cluster-id` - Accepts DB cluster identifiers and DB cluster
-    #     Amazon Resource Names (ARNs). The results list will only include
-    #     pending maintenance actions for the DB clusters identified by these
-    #     ARNs.
+    #     Amazon Resource Names (ARNs). The results list only includes pending
+    #     maintenance actions for the DB clusters identified by these ARNs.
     #
     #   * `db-instance-id` - Accepts DB instance identifiers and DB instance
-    #     ARNs. The results list will only include pending maintenance actions
-    #     for the DB instances identified by these ARNs.
+    #     ARNs. The results list only includes pending maintenance actions for
+    #     the DB instances identified by these ARNs.
     # @return [PendingMaintenanceAction::Collection]
     def pending_maintenance_actions(options = {})
       batches = Enumerator.new do |y|
@@ -4014,9 +4241,8 @@ module Aws::RDS
     #   })
     # @param [Hash] options ({})
     # @option options [String] :db_snapshot_identifier
-    #   A specific DB snapshot identifier to describe. This parameter can't
-    #   be used in conjunction with `DBInstanceIdentifier`. This value is
-    #   stored as a lowercase string.
+    #   A specific DB snapshot identifier to describe. This value is stored as
+    #   a lowercase string.
     #
     #   Constraints:
     #

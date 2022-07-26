@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2022-07-13)
+------------------
+
+* Feature - Adding Create, Get, Update, Delete, and List APIs for new two new resources: Extensions and ExtensionAssociations.
+
+1.25.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.24.0 (2022-02-03)
 ------------------
 

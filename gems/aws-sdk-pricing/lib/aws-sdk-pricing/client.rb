@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::Pricing
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -449,10 +451,10 @@ module Aws::Pricing
       req.send_request(options)
     end
 
-    # Returns a list of attribute values. Attibutes are similar to the
+    # Returns a list of attribute values. Attributes are similar to the
     # details in a Price List API offer file. For a list of available
-    # attributes, see [Offer File Definitions][1] in the [Amazon Web
-    # Services Billing and Cost Management User Guide][2].
+    # attributes, see [Offer File Definitions][1] in the [Billing and Cost
+    # Management User Guide][2].
     #
     #
     #
@@ -532,7 +534,7 @@ module Aws::Pricing
 
     # Returns a list of all products that match the filter criteria.
     #
-    # @option params [String] :service_code
+    # @option params [required, String] :service_code
     #   The code for the service whose products you want to retrieve.
     #
     # @option params [Array<Types::Filter>] :filters
@@ -562,7 +564,7 @@ module Aws::Pricing
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_products({
-    #     service_code: "String",
+    #     service_code: "String", # required
     #     filters: [
     #       {
     #         type: "TERM_MATCH", # required, accepts TERM_MATCH
@@ -604,7 +606,7 @@ module Aws::Pricing
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pricing'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

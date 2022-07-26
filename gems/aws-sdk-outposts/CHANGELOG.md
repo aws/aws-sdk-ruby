@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2022-07-14)
+------------------
+
+* Feature - This release adds the ShipmentInformation and AssetInformationList fields to the GetOrder API response.
+
+1.34.0 (2022-06-20)
+------------------
+
+* Feature - This release adds the AssetLocation structure to the ListAssets response. AssetLocation includes the RackElevation for an Asset.
+
+1.33.0 (2022-06-13)
+------------------
+
+* Feature - This release adds API operations AWS uses to install Outpost servers.
+
+1.32.0 (2022-05-12)
+------------------
+
+* Feature - Documentation updates for AWS Outposts.
+
+1.31.0 (2022-05-02)
+------------------
+
+* Feature - This release adds a new API called ListAssets to the Outposts SDK, which lists the hardware assets in an Outpost.
+
+1.30.0 (2022-03-11)
+------------------
+
+* Feature - This release adds address filters for listSites
+
+1.29.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.28.0 (2022-02-03)
 ------------------
 

@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2022-07-20)
+------------------
+
+* Feature - AWS Certificate Manager (ACM) Private Certificate Authority (PCA) documentation updates
+
+1.48.0 (2022-03-28)
+------------------
+
+* Feature - Updating service name entities
+
+1.47.0 (2022-03-16)
+------------------
+
+* Feature - AWS Certificate Manager (ACM) Private Certificate Authority (CA) now supports customizable certificate subject names and extensions.
+
+1.46.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.45.0 (2022-02-03)
 ------------------
 

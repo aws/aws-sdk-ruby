@@ -777,7 +777,7 @@ module Aws::S3Control
     #             ],
     #             redirect_location: "NonEmptyMaxLength2048String",
     #             requester_pays: false,
-    #             storage_class: "STANDARD", # accepts STANDARD, STANDARD_IA, ONEZONE_IA, GLACIER, INTELLIGENT_TIERING, DEEP_ARCHIVE
+    #             storage_class: "STANDARD", # accepts STANDARD, STANDARD_IA, ONEZONE_IA, GLACIER, INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR
     #             un_modified_since_constraint: Time.now,
     #             sse_aws_kms_key_id: "KmsKeyArnString",
     #             target_key_prefix: "NonEmptyMaxLength1024String",
@@ -785,6 +785,7 @@ module Aws::S3Control
     #             object_lock_mode: "COMPLIANCE", # accepts COMPLIANCE, GOVERNANCE
     #             object_lock_retain_until_date: Time.now,
     #             bucket_key_enabled: false,
+    #             checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
     #           },
     #           s3_put_object_acl: {
     #             access_control_policy: {
@@ -833,6 +834,8 @@ module Aws::S3Control
     #               mode: "COMPLIANCE", # accepts COMPLIANCE, GOVERNANCE
     #             },
     #           },
+    #           s3_replicate_object: {
+    #           },
     #         },
     #         report: { # required
     #           bucket: "S3BucketArnString",
@@ -842,7 +845,7 @@ module Aws::S3Control
     #           report_scope: "AllTasks", # accepts AllTasks, FailedTasksOnly
     #         },
     #         client_request_token: "NonEmptyMaxLength64String", # required
-    #         manifest: { # required
+    #         manifest: {
     #           spec: { # required
     #             format: "S3BatchOperations_CSV_20180820", # required, accepts S3BatchOperations_CSV_20180820, S3InventoryReport_CSV_20161130
     #             fields: ["Ignore"], # accepts Ignore, Bucket, Key, VersionId
@@ -862,6 +865,32 @@ module Aws::S3Control
     #             value: "TagValueString", # required
     #           },
     #         ],
+    #         manifest_generator: {
+    #           s3_job_manifest_generator: {
+    #             expected_bucket_owner: "AccountId",
+    #             source_bucket: "S3BucketArnString", # required
+    #             manifest_output_location: {
+    #               expected_manifest_bucket_owner: "AccountId",
+    #               bucket: "S3BucketArnString", # required
+    #               manifest_prefix: "ManifestPrefixString",
+    #               manifest_encryption: {
+    #                 sses3: {
+    #                 },
+    #                 ssekms: {
+    #                   key_id: "KmsKeyArnString", # required
+    #                 },
+    #               },
+    #               manifest_format: "S3InventoryReport_CSV_20211130", # required, accepts S3InventoryReport_CSV_20211130
+    #             },
+    #             filter: {
+    #               eligible_for_replication: false,
+    #               created_after: Time.now,
+    #               created_before: Time.now,
+    #               object_replication_statuses: ["COMPLETED"], # accepts COMPLETED, FAILED, REPLICA, NONE
+    #             },
+    #             enable_manifest_output: false, # required
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] account_id
@@ -923,6 +952,12 @@ module Aws::S3Control
     #   an optional parameter.
     #   @return [Array<Types::S3Tag>]
     #
+    # @!attribute [rw] manifest_generator
+    #   The attribute container for the ManifestGenerator details. Jobs must
+    #   be created with either a manifest file or a ManifestGenerator, but
+    #   not both.
+    #   @return [Types::JobManifestGenerator]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateJobRequest AWS API Documentation
     #
     class CreateJobRequest < Struct.new(
@@ -935,7 +970,8 @@ module Aws::S3Control
       :description,
       :priority,
       :role_arn,
-      :tags)
+      :tags,
+      :manifest_generator)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1677,6 +1713,38 @@ module Aws::S3Control
     class Exclude < Struct.new(
       :buckets,
       :regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The encryption configuration to use when storing the generated
+    # manifest.
+    #
+    # @note When making an API call, you may pass GeneratedManifestEncryption
+    #   data as a hash:
+    #
+    #       {
+    #         sses3: {
+    #         },
+    #         ssekms: {
+    #           key_id: "KmsKeyArnString", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] sses3
+    #   Specifies the use of SSE-S3 to encrypt generated manifest objects.
+    #   @return [Types::SSES3Encryption]
+    #
+    # @!attribute [rw] ssekms
+    #   Configuration details on how SSE-KMS is used to encrypt generated
+    #   manifest objects.
+    #   @return [Types::SSEKMSEncryption]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GeneratedManifestEncryption AWS API Documentation
+    #
+    class GeneratedManifestEncryption < Struct.new(
+      :sses3,
+      :ssekms)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2715,6 +2783,16 @@ module Aws::S3Control
     #   automatically exits the `Suspended` state.
     #   @return [String]
     #
+    # @!attribute [rw] manifest_generator
+    #   The manifest generator that was used to generate a job manifest for
+    #   this job.
+    #   @return [Types::JobManifestGenerator]
+    #
+    # @!attribute [rw] generated_manifest_descriptor
+    #   The attribute of the JobDescriptor containing details about the
+    #   job's generated manifest.
+    #   @return [Types::S3GeneratedManifestDescriptor]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/JobDescriptor AWS API Documentation
     #
     class JobDescriptor < Struct.new(
@@ -2734,7 +2812,9 @@ module Aws::S3Control
       :termination_date,
       :role_arn,
       :suspended_date,
-      :suspended_cause)
+      :suspended_cause,
+      :manifest_generator,
+      :generated_manifest_descriptor)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2847,6 +2927,73 @@ module Aws::S3Control
     class JobManifest < Struct.new(
       :spec,
       :location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configures the type of the job's ManifestGenerator.
+    #
+    # @note JobManifestGenerator is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note JobManifestGenerator is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of JobManifestGenerator corresponding to the set member.
+    #
+    # @!attribute [rw] s3_job_manifest_generator
+    #   The S3 job ManifestGenerator's configuration details.
+    #   @return [Types::S3JobManifestGenerator]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/JobManifestGenerator AWS API Documentation
+    #
+    class JobManifestGenerator < Struct.new(
+      :s3_job_manifest_generator,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class S3JobManifestGenerator < JobManifestGenerator; end
+      class Unknown < JobManifestGenerator; end
+    end
+
+    # The filter used to describe a set of objects for the job's manifest.
+    #
+    # @note When making an API call, you may pass JobManifestGeneratorFilter
+    #   data as a hash:
+    #
+    #       {
+    #         eligible_for_replication: false,
+    #         created_after: Time.now,
+    #         created_before: Time.now,
+    #         object_replication_statuses: ["COMPLETED"], # accepts COMPLETED, FAILED, REPLICA, NONE
+    #       }
+    #
+    # @!attribute [rw] eligible_for_replication
+    #   Include objects in the generated manifest only if they are eligible
+    #   for replication according to the Replication configuration on the
+    #   source bucket.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] created_after
+    #   If provided, the generated manifest should include only source
+    #   bucket objects that were created after this time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_before
+    #   If provided, the generated manifest should include only source
+    #   bucket objects that were created before this time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] object_replication_statuses
+    #   If provided, the generated manifest should include only source
+    #   bucket objects that have one of the specified Replication statuses.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/JobManifestGeneratorFilter AWS API Documentation
+    #
+    class JobManifestGeneratorFilter < Struct.new(
+      :eligible_for_replication,
+      :created_after,
+      :created_before,
+      :object_replication_statuses)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2977,7 +3124,7 @@ module Aws::S3Control
     #           ],
     #           redirect_location: "NonEmptyMaxLength2048String",
     #           requester_pays: false,
-    #           storage_class: "STANDARD", # accepts STANDARD, STANDARD_IA, ONEZONE_IA, GLACIER, INTELLIGENT_TIERING, DEEP_ARCHIVE
+    #           storage_class: "STANDARD", # accepts STANDARD, STANDARD_IA, ONEZONE_IA, GLACIER, INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR
     #           un_modified_since_constraint: Time.now,
     #           sse_aws_kms_key_id: "KmsKeyArnString",
     #           target_key_prefix: "NonEmptyMaxLength1024String",
@@ -2985,6 +3132,7 @@ module Aws::S3Control
     #           object_lock_mode: "COMPLIANCE", # accepts COMPLIANCE, GOVERNANCE
     #           object_lock_retain_until_date: Time.now,
     #           bucket_key_enabled: false,
+    #           checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
     #         },
     #         s3_put_object_acl: {
     #           access_control_policy: {
@@ -3032,6 +3180,8 @@ module Aws::S3Control
     #             retain_until_date: Time.now,
     #             mode: "COMPLIANCE", # accepts COMPLIANCE, GOVERNANCE
     #           },
+    #         },
+    #         s3_replicate_object: {
     #         },
     #       }
     #
@@ -3089,6 +3239,11 @@ module Aws::S3Control
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-retention-date.html
     #   @return [Types::S3SetObjectRetentionOperation]
     #
+    # @!attribute [rw] s3_replicate_object
+    #   Directs the specified job to invoke `ReplicateObject` on every
+    #   object in the job's manifest.
+    #   @return [Types::S3ReplicateObjectOperation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/JobOperation AWS API Documentation
     #
     class JobOperation < Struct.new(
@@ -3099,7 +3254,8 @@ module Aws::S3Control
       :s3_delete_object_tagging,
       :s3_initiate_restore_object,
       :s3_put_object_legal_hold,
-      :s3_put_object_retention)
+      :s3_put_object_retention,
+      :s3_replicate_object)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3117,12 +3273,17 @@ module Aws::S3Control
     # @!attribute [rw] number_of_tasks_failed
     #   @return [Integer]
     #
+    # @!attribute [rw] timers
+    #   The JobTimers attribute of a job's progress summary.
+    #   @return [Types::JobTimers]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/JobProgressSummary AWS API Documentation
     #
     class JobProgressSummary < Struct.new(
       :total_number_of_tasks,
       :number_of_tasks_succeeded,
-      :number_of_tasks_failed)
+      :number_of_tasks_failed,
+      :timers)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3184,6 +3345,21 @@ module Aws::S3Control
     #
     class JobStatusException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides timing details for the job.
+    #
+    # @!attribute [rw] elapsed_time_in_active_seconds
+    #   Indicates the elapsed time in seconds the job has been in the Active
+    #   job state.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/JobTimers AWS API Documentation
+    #
+    class JobTimers < Struct.new(
+      :elapsed_time_in_active_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3547,9 +3723,11 @@ module Aws::S3Control
     #
     # @!attribute [rw] max_results
     #   The maximum number of access points that you want to include in the
-    #   list. If there are more than this number of access points, then the
-    #   response will include a continuation token in the `NextToken` field
-    #   that you can use to retrieve the next page of access points.
+    #   list. The response may contain fewer access points but will never
+    #   contain more. If there are more than this number of access points,
+    #   then the response will include a continuation token in the
+    #   `NextToken` field that you can use to retrieve the next page of
+    #   access points.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListAccessPointsForObjectLambdaRequest AWS API Documentation
@@ -5331,7 +5509,7 @@ module Aws::S3Control
     #         ],
     #         redirect_location: "NonEmptyMaxLength2048String",
     #         requester_pays: false,
-    #         storage_class: "STANDARD", # accepts STANDARD, STANDARD_IA, ONEZONE_IA, GLACIER, INTELLIGENT_TIERING, DEEP_ARCHIVE
+    #         storage_class: "STANDARD", # accepts STANDARD, STANDARD_IA, ONEZONE_IA, GLACIER, INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR
     #         un_modified_since_constraint: Time.now,
     #         sse_aws_kms_key_id: "KmsKeyArnString",
     #         target_key_prefix: "NonEmptyMaxLength1024String",
@@ -5339,6 +5517,7 @@ module Aws::S3Control
     #         object_lock_mode: "COMPLIANCE", # accepts COMPLIANCE, GOVERNANCE
     #         object_lock_retain_until_date: Time.now,
     #         bucket_key_enabled: false,
+    #         checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
     #       }
     #
     # @!attribute [rw] target_resource
@@ -5361,6 +5540,10 @@ module Aws::S3Control
     #   @return [Time]
     #
     # @!attribute [rw] new_object_metadata
+    #   If you don't provide this parameter, Amazon S3 copies all the
+    #   metadata from the original objects. If you specify an empty set, the
+    #   new objects will have no tags. Otherwise, Amazon S3 assigns the
+    #   supplied tags to the new objects.
     #   @return [Types::S3ObjectMetadata]
     #
     # @!attribute [rw] new_object_tagging
@@ -5387,8 +5570,8 @@ module Aws::S3Control
     # @!attribute [rw] target_key_prefix
     #   Specifies the folder prefix into which you would like the objects to
     #   be copied. For example, to copy objects into a folder named
-    #   "Folder1" in the destination bucket, set the TargetKeyPrefix to
-    #   "Folder1/".
+    #   `Folder1` in the destination bucket, set the TargetKeyPrefix to
+    #   `Folder1`.
     #   @return [String]
     #
     # @!attribute [rw] object_lock_legal_hold_status
@@ -5416,6 +5599,16 @@ module Aws::S3Control
     #   *bucket-level* settings for S3 Bucket Key.
     #   @return [Boolean]
     #
+    # @!attribute [rw] checksum_algorithm
+    #   Indicates the algorithm you want Amazon S3 to use to create the
+    #   checksum. For more information see [ Checking object integrity][1]
+    #   in the *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/CheckingObjectIntegrity.xml
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3CopyObjectOperation AWS API Documentation
     #
     class S3CopyObjectOperation < Struct.new(
@@ -5435,7 +5628,8 @@ module Aws::S3Control
       :object_lock_legal_hold_status,
       :object_lock_mode,
       :object_lock_retain_until_date,
-      :bucket_key_enabled)
+      :bucket_key_enabled,
+      :checksum_algorithm)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5449,6 +5643,27 @@ module Aws::S3Control
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3DeleteObjectTaggingOperation AWS API Documentation
     #
     class S3DeleteObjectTaggingOperation < Aws::EmptyStructure; end
+
+    # Describes the specified job's generated manifest. Batch Operations
+    # jobs created with a ManifestGenerator populate details of this
+    # descriptor after execution of the ManifestGenerator.
+    #
+    # @!attribute [rw] format
+    #   The format of the generated manifest.
+    #   @return [String]
+    #
+    # @!attribute [rw] location
+    #   Contains the information required to locate a manifest object.
+    #   @return [Types::JobManifestLocation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3GeneratedManifestDescriptor AWS API Documentation
+    #
+    class S3GeneratedManifestDescriptor < Struct.new(
+      :format,
+      :location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass S3Grant
     #   data as a hash:
@@ -5523,11 +5738,10 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] expiration_in_days
-    #   This argument specifies how long the S3 Glacier Flexible Retrieval
-    #   or S3 Glacier Deep Archive object remains available in Amazon S3. S3
-    #   Initiate Restore Object jobs that target S3 Glacier Flexible
-    #   Retrieval and S3 Glacier Deep Archive objects require
-    #   `ExpirationInDays` set to 1 or greater.
+    #   This argument specifies how long the S3 Glacier or S3 Glacier Deep
+    #   Archive object remains available in Amazon S3. S3 Initiate Restore
+    #   Object jobs that target S3 Glacier and S3 Glacier Deep Archive
+    #   objects require `ExpirationInDays` set to 1 or greater.
     #
     #   Conversely, do *not* set `ExpirationInDays` when creating S3
     #   Initiate Restore Object jobs that target S3 Intelligent-Tiering
@@ -5536,8 +5750,8 @@ module Aws::S3Control
     #   expiry, so specifying `ExpirationInDays` results in restore request
     #   failure.
     #
-    #   S3 Batch Operations jobs can operate either on S3 Glacier Flexible
-    #   Retrieval and S3 Glacier Deep Archive storage class objects or on S3
+    #   S3 Batch Operations jobs can operate either on S3 Glacier and S3
+    #   Glacier Deep Archive storage class objects or on S3
     #   Intelligent-Tiering Archive Access and Deep Archive Access storage
     #   tier objects, but not both types in the same job. If you need to
     #   restore objects of both types you *must* create separate Batch
@@ -5554,6 +5768,128 @@ module Aws::S3Control
     class S3InitiateRestoreObjectOperation < Struct.new(
       :expiration_in_days,
       :glacier_job_tier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The container for the service that will create the S3 manifest.
+    #
+    # @note When making an API call, you may pass S3JobManifestGenerator
+    #   data as a hash:
+    #
+    #       {
+    #         expected_bucket_owner: "AccountId",
+    #         source_bucket: "S3BucketArnString", # required
+    #         manifest_output_location: {
+    #           expected_manifest_bucket_owner: "AccountId",
+    #           bucket: "S3BucketArnString", # required
+    #           manifest_prefix: "ManifestPrefixString",
+    #           manifest_encryption: {
+    #             sses3: {
+    #             },
+    #             ssekms: {
+    #               key_id: "KmsKeyArnString", # required
+    #             },
+    #           },
+    #           manifest_format: "S3InventoryReport_CSV_20211130", # required, accepts S3InventoryReport_CSV_20211130
+    #         },
+    #         filter: {
+    #           eligible_for_replication: false,
+    #           created_after: Time.now,
+    #           created_before: Time.now,
+    #           object_replication_statuses: ["COMPLETED"], # accepts COMPLETED, FAILED, REPLICA, NONE
+    #         },
+    #         enable_manifest_output: false, # required
+    #       }
+    #
+    # @!attribute [rw] expected_bucket_owner
+    #   The Amazon Web Services account ID that owns the bucket the
+    #   generated manifest is written to. If provided the generated manifest
+    #   bucket's owner Amazon Web Services account ID must match this
+    #   value, else the job fails.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_bucket
+    #   The source bucket used by the ManifestGenerator.
+    #   @return [String]
+    #
+    # @!attribute [rw] manifest_output_location
+    #   Specifies the location the generated manifest will be written to.
+    #   @return [Types::S3ManifestOutputLocation]
+    #
+    # @!attribute [rw] filter
+    #   Specifies rules the S3JobManifestGenerator should use to use to
+    #   decide whether an object in the source bucket should or should not
+    #   be included in the generated job manifest.
+    #   @return [Types::JobManifestGeneratorFilter]
+    #
+    # @!attribute [rw] enable_manifest_output
+    #   Determines whether or not to write the job's generated manifest to
+    #   a bucket.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3JobManifestGenerator AWS API Documentation
+    #
+    class S3JobManifestGenerator < Struct.new(
+      :expected_bucket_owner,
+      :source_bucket,
+      :manifest_output_location,
+      :filter,
+      :enable_manifest_output)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Location details for where the generated manifest should be written.
+    #
+    # @note When making an API call, you may pass S3ManifestOutputLocation
+    #   data as a hash:
+    #
+    #       {
+    #         expected_manifest_bucket_owner: "AccountId",
+    #         bucket: "S3BucketArnString", # required
+    #         manifest_prefix: "ManifestPrefixString",
+    #         manifest_encryption: {
+    #           sses3: {
+    #           },
+    #           ssekms: {
+    #             key_id: "KmsKeyArnString", # required
+    #           },
+    #         },
+    #         manifest_format: "S3InventoryReport_CSV_20211130", # required, accepts S3InventoryReport_CSV_20211130
+    #       }
+    #
+    # @!attribute [rw] expected_manifest_bucket_owner
+    #   The Account ID that owns the bucket the generated manifest is
+    #   written to.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket
+    #   The bucket ARN the generated manifest should be written to.
+    #   @return [String]
+    #
+    # @!attribute [rw] manifest_prefix
+    #   Prefix identifying one or more objects to which the manifest
+    #   applies.
+    #   @return [String]
+    #
+    # @!attribute [rw] manifest_encryption
+    #   Specifies what encryption should be used when the generated manifest
+    #   objects are written.
+    #   @return [Types::GeneratedManifestEncryption]
+    #
+    # @!attribute [rw] manifest_format
+    #   The format of the generated manifest.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3ManifestOutputLocation AWS API Documentation
+    #
+    class S3ManifestOutputLocation < Struct.new(
+      :expected_manifest_bucket_owner,
+      :bucket,
+      :manifest_prefix,
+      :manifest_encryption,
+      :manifest_format)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5673,6 +6009,15 @@ module Aws::S3Control
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # Directs the specified job to invoke `ReplicateObject` on every object
+    # in the job's manifest.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3ReplicateObjectOperation AWS API Documentation
+    #
+    class S3ReplicateObjectOperation < Aws::EmptyStructure; end
 
     # Contains the S3 Object Lock retention mode to be applied to all
     # objects in the S3 Batch Operations job. If you don't provide `Mode`
@@ -5913,11 +6258,44 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # Configuration for the use of SSE-KMS to encrypt generated manifest
+    # objects.
+    #
+    # @note When making an API call, you may pass SSEKMSEncryption
+    #   data as a hash:
+    #
+    #       {
+    #         key_id: "KmsKeyArnString", # required
+    #       }
+    #
+    # @!attribute [rw] key_id
+    #   Specifies the ID of the Amazon Web Services Key Management Service
+    #   (Amazon Web Services KMS) symmetric customer managed key to use for
+    #   encrypting generated manifest objects.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/SSEKMSEncryption AWS API Documentation
+    #
+    class SSEKMSEncryption < Struct.new(
+      :key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/SSES3 AWS API Documentation
     #
     class SSES3 < Aws::EmptyStructure; end
+
+    # Configuration for the use of SSE-S3 to encrypt generated manifest
+    # objects.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/SSES3Encryption AWS API Documentation
+    #
+    class SSES3Encryption < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass SelectionCriteria
     #   data as a hash:

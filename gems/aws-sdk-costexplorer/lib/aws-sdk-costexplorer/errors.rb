@@ -34,6 +34,7 @@ module Aws::CostExplorer
   # * {RequestChangedException}
   # * {ResourceNotFoundException}
   # * {ServiceQuotaExceededException}
+  # * {TooManyTagsException}
   # * {UnknownMonitorException}
   # * {UnknownSubscriptionException}
   # * {UnresolvableUsageUnitException}
@@ -132,6 +133,11 @@ module Aws::CostExplorer
       def message
         @message || @data[:message]
       end
+
+      # @return [String]
+      def resource_name
+        @data[:resource_name]
+      end
     end
 
     class ServiceQuotaExceededException < ServiceError
@@ -146,6 +152,26 @@ module Aws::CostExplorer
       # @return [String]
       def message
         @message || @data[:message]
+      end
+    end
+
+    class TooManyTagsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CostExplorer::Types::TooManyTagsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def resource_name
+        @data[:resource_name]
       end
     end
 

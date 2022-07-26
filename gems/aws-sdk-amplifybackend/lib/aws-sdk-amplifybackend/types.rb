@@ -855,8 +855,8 @@ module Aws::AmplifyBackend
       include Aws::Structure
     end
 
-    # Describes the forgot password policy for authenticating into the
-    # Amplify app.
+    # **(DEPRECATED)** Describes the forgot password policy for
+    # authenticating into the Amplify app.
     #
     # @note When making an API call, you may pass CreateBackendAuthForgotPasswordConfig
     #   data as a hash:
@@ -873,18 +873,18 @@ module Aws::AmplifyBackend
     #       }
     #
     # @!attribute [rw] delivery_method
-    #   Describes which mode to use (either SMS or email) to deliver
-    #   messages to app users who want to recover their password.
+    #   **(DEPRECATED)** Describes which mode to use (either SMS or email)
+    #   to deliver messages to app users who want to recover their password.
     #   @return [String]
     #
     # @!attribute [rw] email_settings
-    #   The configuration for the email sent when an app user forgets their
-    #   password.
+    #   **(DEPRECATED)** The configuration for the email sent when an app
+    #   user forgets their password.
     #   @return [Types::EmailSettings]
     #
     # @!attribute [rw] sms_settings
-    #   The configuration for the SMS message sent when an app user forgets
-    #   their password.
+    #   **(DEPRECATED)** The configuration for the SMS message sent when an
+    #   app user forgets their password.
     #   @return [Types::SmsSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/CreateBackendAuthForgotPasswordConfig AWS API Documentation
@@ -1152,6 +1152,16 @@ module Aws::AmplifyBackend
     #             required_sign_up_attributes: ["ADDRESS"], # required, accepts ADDRESS, BIRTHDATE, EMAIL, FAMILY_NAME, GENDER, GIVEN_NAME, LOCALE, MIDDLE_NAME, NAME, NICKNAME, PHONE_NUMBER, PICTURE, PREFERRED_USERNAME, PROFILE, UPDATED_AT, WEBSITE, ZONE_INFO
     #             sign_in_method: "EMAIL", # required, accepts EMAIL, EMAIL_AND_PHONE_NUMBER, PHONE_NUMBER, USERNAME
     #             user_pool_name: "__string", # required
+    #             verification_message: {
+    #               delivery_method: "EMAIL", # required, accepts EMAIL, SMS
+    #               email_settings: {
+    #                 email_message: "__string",
+    #                 email_subject: "__string",
+    #               },
+    #               sms_settings: {
+    #                 sms_message: "__string",
+    #               },
+    #             },
     #           },
     #         },
     #         resource_name: "__string", # required
@@ -1247,6 +1257,16 @@ module Aws::AmplifyBackend
     #           required_sign_up_attributes: ["ADDRESS"], # required, accepts ADDRESS, BIRTHDATE, EMAIL, FAMILY_NAME, GENDER, GIVEN_NAME, LOCALE, MIDDLE_NAME, NAME, NICKNAME, PHONE_NUMBER, PICTURE, PREFERRED_USERNAME, PROFILE, UPDATED_AT, WEBSITE, ZONE_INFO
     #           sign_in_method: "EMAIL", # required, accepts EMAIL, EMAIL_AND_PHONE_NUMBER, PHONE_NUMBER, USERNAME
     #           user_pool_name: "__string", # required
+    #           verification_message: {
+    #             delivery_method: "EMAIL", # required, accepts EMAIL, SMS
+    #             email_settings: {
+    #               email_message: "__string",
+    #               email_subject: "__string",
+    #             },
+    #             sms_settings: {
+    #               sms_message: "__string",
+    #             },
+    #           },
     #         },
     #       }
     #
@@ -1372,11 +1392,22 @@ module Aws::AmplifyBackend
     #         required_sign_up_attributes: ["ADDRESS"], # required, accepts ADDRESS, BIRTHDATE, EMAIL, FAMILY_NAME, GENDER, GIVEN_NAME, LOCALE, MIDDLE_NAME, NAME, NICKNAME, PHONE_NUMBER, PICTURE, PREFERRED_USERNAME, PROFILE, UPDATED_AT, WEBSITE, ZONE_INFO
     #         sign_in_method: "EMAIL", # required, accepts EMAIL, EMAIL_AND_PHONE_NUMBER, PHONE_NUMBER, USERNAME
     #         user_pool_name: "__string", # required
+    #         verification_message: {
+    #           delivery_method: "EMAIL", # required, accepts EMAIL, SMS
+    #           email_settings: {
+    #             email_message: "__string",
+    #             email_subject: "__string",
+    #           },
+    #           sms_settings: {
+    #             sms_message: "__string",
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] forgot_password
-    #   Describes the forgotten password policy for your Amazon Cognito user
-    #   pool, configured as a part of your Amplify project.
+    #   **(DEPRECATED)** Describes the forgotten password policy for your
+    #   Amazon Cognito user pool, configured as a part of your Amplify
+    #   project.
     #   @return [Types::CreateBackendAuthForgotPasswordConfig]
     #
     # @!attribute [rw] mfa
@@ -1409,6 +1440,11 @@ module Aws::AmplifyBackend
     #   The Amazon Cognito user pool name.
     #   @return [String]
     #
+    # @!attribute [rw] verification_message
+    #   Describes the email or SMS verification message for your Amazon
+    #   Cognito user pool, configured as a part of your Amplify project.
+    #   @return [Types::CreateBackendAuthVerificationMessageConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/CreateBackendAuthUserPoolConfig AWS API Documentation
     #
     class CreateBackendAuthUserPoolConfig < Struct.new(
@@ -1418,7 +1454,47 @@ module Aws::AmplifyBackend
       :password_policy,
       :required_sign_up_attributes,
       :sign_in_method,
-      :user_pool_name)
+      :user_pool_name,
+      :verification_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Creates an email or SMS verification message for the auth resource
+    # configured for your Amplify project.
+    #
+    # @note When making an API call, you may pass CreateBackendAuthVerificationMessageConfig
+    #   data as a hash:
+    #
+    #       {
+    #         delivery_method: "EMAIL", # required, accepts EMAIL, SMS
+    #         email_settings: {
+    #           email_message: "__string",
+    #           email_subject: "__string",
+    #         },
+    #         sms_settings: {
+    #           sms_message: "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] delivery_method
+    #   The type of verification message to send.
+    #   @return [String]
+    #
+    # @!attribute [rw] email_settings
+    #   The settings for the email message.
+    #   @return [Types::EmailSettings]
+    #
+    # @!attribute [rw] sms_settings
+    #   The settings for the SMS message.
+    #   @return [Types::SmsSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/CreateBackendAuthVerificationMessageConfig AWS API Documentation
+    #
+    class CreateBackendAuthVerificationMessageConfig < Struct.new(
+      :delivery_method,
+      :email_settings,
+      :sms_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1527,7 +1603,7 @@ module Aws::AmplifyBackend
     #   @return [String]
     #
     # @!attribute [rw] resource_config
-    #   The resource configuration for creating backend storage.
+    #   The resource configuration for creating a backend.
     #   @return [Types::ResourceConfig]
     #
     # @!attribute [rw] resource_name
@@ -2207,6 +2283,8 @@ module Aws::AmplifyBackend
       include Aws::Structure
     end
 
+    # The settings for the email message.
+    #
     # @note When making an API call, you may pass EmailSettings
     #   data as a hash:
     #
@@ -2216,11 +2294,11 @@ module Aws::AmplifyBackend
     #       }
     #
     # @!attribute [rw] email_message
-    #   The body of the email.
+    #   The contents of the email message.
     #   @return [String]
     #
     # @!attribute [rw] email_subject
-    #   The subject of the email.
+    #   The contents of the subject line of the email message.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/EmailSettings AWS API Documentation
@@ -3668,6 +3746,8 @@ module Aws::AmplifyBackend
       include Aws::Structure
     end
 
+    # The settings for the SMS message.
+    #
     # @note When making an API call, you may pass SmsSettings
     #   data as a hash:
     #
@@ -3676,7 +3756,7 @@ module Aws::AmplifyBackend
     #       }
     #
     # @!attribute [rw] sms_message
-    #   The body of the SMS message.
+    #   The contents of the SMS message.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/SmsSettings AWS API Documentation
@@ -3861,8 +3941,8 @@ module Aws::AmplifyBackend
       include Aws::Structure
     end
 
-    # Describes the forgot password policy for authenticating into the
-    # Amplify app.
+    # **(DEPRECATED)** Describes the forgot password policy for
+    # authenticating into the Amplify app.
     #
     # @note When making an API call, you may pass UpdateBackendAuthForgotPasswordConfig
     #   data as a hash:
@@ -3879,18 +3959,19 @@ module Aws::AmplifyBackend
     #       }
     #
     # @!attribute [rw] delivery_method
-    #   Describes which mode to use (either SMS or email) to deliver
-    #   messages to app users that want to recover their password.
+    #   **(DEPRECATED)** Describes which mode to use (either SMS or email)
+    #   to deliver messages to app users that want to recover their
+    #   password.
     #   @return [String]
     #
     # @!attribute [rw] email_settings
-    #   The configuration for the email sent when an app user forgets their
-    #   password.
+    #   **(DEPRECATED)** The configuration for the email sent when an app
+    #   user forgets their password.
     #   @return [Types::EmailSettings]
     #
     # @!attribute [rw] sms_settings
-    #   The configuration for the SMS message sent when an Amplify app user
-    #   forgets their password.
+    #   **(DEPRECATED)** The configuration for the SMS message sent when an
+    #   Amplify app user forgets their password.
     #   @return [Types::SmsSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/UpdateBackendAuthForgotPasswordConfig AWS API Documentation
@@ -4146,6 +4227,16 @@ module Aws::AmplifyBackend
     #               additional_constraints: ["REQUIRE_DIGIT"], # accepts REQUIRE_DIGIT, REQUIRE_LOWERCASE, REQUIRE_SYMBOL, REQUIRE_UPPERCASE
     #               minimum_length: 1.0,
     #             },
+    #             verification_message: {
+    #               delivery_method: "EMAIL", # required, accepts EMAIL, SMS
+    #               email_settings: {
+    #                 email_message: "__string",
+    #                 email_subject: "__string",
+    #               },
+    #               sms_settings: {
+    #                 sms_message: "__string",
+    #               },
+    #             },
     #           },
     #         },
     #         resource_name: "__string", # required
@@ -4236,6 +4327,16 @@ module Aws::AmplifyBackend
     #           password_policy: {
     #             additional_constraints: ["REQUIRE_DIGIT"], # accepts REQUIRE_DIGIT, REQUIRE_LOWERCASE, REQUIRE_SYMBOL, REQUIRE_UPPERCASE
     #             minimum_length: 1.0,
+    #           },
+    #           verification_message: {
+    #             delivery_method: "EMAIL", # required, accepts EMAIL, SMS
+    #             email_settings: {
+    #               email_message: "__string",
+    #               email_subject: "__string",
+    #             },
+    #             sms_settings: {
+    #               sms_message: "__string",
+    #             },
     #           },
     #         },
     #       }
@@ -4360,11 +4461,22 @@ module Aws::AmplifyBackend
     #           additional_constraints: ["REQUIRE_DIGIT"], # accepts REQUIRE_DIGIT, REQUIRE_LOWERCASE, REQUIRE_SYMBOL, REQUIRE_UPPERCASE
     #           minimum_length: 1.0,
     #         },
+    #         verification_message: {
+    #           delivery_method: "EMAIL", # required, accepts EMAIL, SMS
+    #           email_settings: {
+    #             email_message: "__string",
+    #             email_subject: "__string",
+    #           },
+    #           sms_settings: {
+    #             sms_message: "__string",
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] forgot_password
-    #   Describes the forgot password policy for your Amazon Cognito user
-    #   pool, configured as a part of your Amplify project.
+    #   **(DEPRECATED)** Describes the forgot password policy for your
+    #   Amazon Cognito user pool, configured as a part of your Amplify
+    #   project.
     #   @return [Types::UpdateBackendAuthForgotPasswordConfig]
     #
     # @!attribute [rw] mfa
@@ -4383,13 +4495,58 @@ module Aws::AmplifyBackend
     #   configured as a part of your Amplify project.
     #   @return [Types::UpdateBackendAuthPasswordPolicyConfig]
     #
+    # @!attribute [rw] verification_message
+    #   Describes the email or SMS verification message for your Amazon
+    #   Cognito user pool, configured as a part of your Amplify project.
+    #   @return [Types::UpdateBackendAuthVerificationMessageConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/UpdateBackendAuthUserPoolConfig AWS API Documentation
     #
     class UpdateBackendAuthUserPoolConfig < Struct.new(
       :forgot_password,
       :mfa,
       :o_auth,
-      :password_policy)
+      :password_policy,
+      :verification_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Updates the configuration of the email or SMS message for the auth
+    # resource configured for your Amplify project.
+    #
+    # @note When making an API call, you may pass UpdateBackendAuthVerificationMessageConfig
+    #   data as a hash:
+    #
+    #       {
+    #         delivery_method: "EMAIL", # required, accepts EMAIL, SMS
+    #         email_settings: {
+    #           email_message: "__string",
+    #           email_subject: "__string",
+    #         },
+    #         sms_settings: {
+    #           sms_message: "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] delivery_method
+    #   The type of verification message to send.
+    #   @return [String]
+    #
+    # @!attribute [rw] email_settings
+    #   The settings for the email message.
+    #   @return [Types::EmailSettings]
+    #
+    # @!attribute [rw] sms_settings
+    #   The settings for the SMS message.
+    #   @return [Types::SmsSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/UpdateBackendAuthVerificationMessageConfig AWS API Documentation
+    #
+    class UpdateBackendAuthVerificationMessageConfig < Struct.new(
+      :delivery_method,
+      :email_settings,
+      :sms_settings)
       SENSITIVE = []
       include Aws::Structure
     end

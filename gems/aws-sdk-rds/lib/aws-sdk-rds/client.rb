@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -76,6 +77,7 @@ module Aws::RDS
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -761,9 +763,9 @@ module Aws::RDS
     # cluster.
     #
     # For more information on backtracking, see [ Backtracking an Aurora DB
-    # Cluster][1] in the *Amazon Aurora User Guide.*
+    # Cluster][1] in the *Amazon Aurora User Guide*.
     #
-    # <note markdown="1"> This action only applies to Aurora MySQL DB clusters.
+    # <note markdown="1"> This action applies only to Aurora MySQL DB clusters.
     #
     #  </note>
     #
@@ -1018,59 +1020,15 @@ module Aws::RDS
     #
     # You can copy an encrypted DB cluster snapshot from another Amazon Web
     # Services Region. In that case, the Amazon Web Services Region where
-    # you call the `CopyDBClusterSnapshot` action is the destination Amazon
-    # Web Services Region for the encrypted DB cluster snapshot to be copied
-    # to. To copy an encrypted DB cluster snapshot from another Amazon Web
-    # Services Region, you must provide the following values:
+    # you call the `CopyDBClusterSnapshot` operation is the destination
+    # Amazon Web Services Region for the encrypted DB cluster snapshot to be
+    # copied to. To copy an encrypted DB cluster snapshot from another
+    # Amazon Web Services Region, you must provide the following values:
     #
     # * `KmsKeyId` - The Amazon Web Services Key Management System (Amazon
     #   Web Services KMS) key identifier for the key to use to encrypt the
     #   copy of the DB cluster snapshot in the destination Amazon Web
     #   Services Region.
-    #
-    # * `PreSignedUrl` - A URL that contains a Signature Version 4 signed
-    #   request for the `CopyDBClusterSnapshot` action to be called in the
-    #   source Amazon Web Services Region where the DB cluster snapshot is
-    #   copied from. The pre-signed URL must be a valid request for the
-    #   `CopyDBClusterSnapshot` API action that can be executed in the
-    #   source Amazon Web Services Region that contains the encrypted DB
-    #   cluster snapshot to be copied.
-    #
-    #   The pre-signed URL request must contain the following parameter
-    #   values:
-    #
-    #   * `KmsKeyId` - The Amazon Web Services KMS key identifier for the
-    #     KMS key to use to encrypt the copy of the DB cluster snapshot in
-    #     the destination Amazon Web Services Region. This is the same
-    #     identifier for both the `CopyDBClusterSnapshot` action that is
-    #     called in the destination Amazon Web Services Region, and the
-    #     action contained in the pre-signed URL.
-    #
-    #   * `DestinationRegion` - The name of the Amazon Web Services Region
-    #     that the DB cluster snapshot is to be created in.
-    #
-    #   * `SourceDBClusterSnapshotIdentifier` - The DB cluster snapshot
-    #     identifier for the encrypted DB cluster snapshot to be copied.
-    #     This identifier must be in the Amazon Resource Name (ARN) format
-    #     for the source Amazon Web Services Region. For example, if you are
-    #     copying an encrypted DB cluster snapshot from the us-west-2 Amazon
-    #     Web Services Region, then your `SourceDBClusterSnapshotIdentifier`
-    #     looks like the following example:
-    #     `arn:aws:rds:us-west-2:123456789012:cluster-snapshot:aurora-cluster1-snapshot-20161115`.
-    #
-    #   To learn how to generate a Signature Version 4 signed request, see [
-    #   Authenticating Requests: Using Query Parameters (Amazon Web Services
-    #   Signature Version 4)][1] and [ Signature Version 4 Signing
-    #   Process][2].
-    #
-    #   <note markdown="1"> If you are using an Amazon Web Services SDK tool or the CLI, you can
-    #   specify `SourceRegion` (or `--source-region` for the CLI) instead of
-    #   specifying `PreSignedUrl` manually. Specifying `SourceRegion`
-    #   autogenerates a pre-signed URL that is a valid request for the
-    #   operation that can be executed in the source Amazon Web Services
-    #   Region.
-    #
-    #    </note>
     #
     # * `TargetDBClusterSnapshotIdentifier` - The identifier for the new
     #   copy of the DB cluster snapshot in the destination Amazon Web
@@ -1080,7 +1038,7 @@ module Aws::RDS
     #   identifier for the encrypted DB cluster snapshot to be copied. This
     #   identifier must be in the ARN format for the source Amazon Web
     #   Services Region and is the same value as the
-    #   `SourceDBClusterSnapshotIdentifier` in the pre-signed URL.
+    #   `SourceDBClusterSnapshotIdentifier` in the presigned URL.
     #
     # To cancel the copy operation once it is in progress, delete the target
     # DB cluster snapshot identified by `TargetDBClusterSnapshotIdentifier`
@@ -1088,27 +1046,20 @@ module Aws::RDS
     #
     # For more information on copying encrypted Amazon Aurora DB cluster
     # snapshots from one Amazon Web Services Region to another, see [
-    # Copying a Snapshot][3] in the *Amazon Aurora User Guide.*
+    # Copying a Snapshot][1] in the *Amazon Aurora User Guide*.
     #
     # For more information on Amazon Aurora DB clusters, see [ What is
-    # Amazon Aurora?][4] in the *Amazon Aurora User Guide.*
+    # Amazon Aurora?][2] in the *Amazon Aurora User Guide*.
     #
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
-    # deployments with two readable standby DB instances][5] in the *Amazon
-    # RDS User Guide.*
-    #
-    # <note markdown="1"> The Multi-AZ DB clusters feature is in preview and is subject to
-    # change.
-    #
-    #  </note>
+    # deployments with two readable standby DB instances][3] in the *Amazon
+    # RDS User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
-    # [2]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
-    # [3]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_CopySnapshot.html
-    # [4]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html
-    # [5]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_CopySnapshot.html
+    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html
+    # [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html
     #
     # @option params [required, String] :source_db_cluster_snapshot_identifier
     #   The identifier of the DB cluster snapshot to copy. This parameter
@@ -1127,7 +1078,7 @@ module Aws::RDS
     #   * If the source snapshot is in a different Amazon Web Services Region
     #     than the copy, specify a valid DB cluster snapshot ARN. For more
     #     information, go to [ Copying Snapshots Across Amazon Web Services
-    #     Regions][1] in the *Amazon Aurora User Guide.*
+    #     Regions][1] in the *Amazon Aurora User Guide*.
     #
     #   Example: `my-cluster-snapshot1`
     #
@@ -1176,26 +1127,30 @@ module Aws::RDS
     #   the `KmsKeyId` parameter, an error is returned.
     #
     # @option params [String] :pre_signed_url
-    #   The URL that contains a Signature Version 4 signed request for the
-    #   `CopyDBClusterSnapshot` API action in the Amazon Web Services Region
-    #   that contains the source DB cluster snapshot to copy. The
-    #   `PreSignedUrl` parameter must be used when copying an encrypted DB
-    #   cluster snapshot from another Amazon Web Services Region. Don't
-    #   specify `PreSignedUrl` when you are copying an encrypted DB cluster
-    #   snapshot in the same Amazon Web Services Region.
+    #   When you are copying a DB cluster snapshot from one Amazon Web
+    #   Services GovCloud (US) Region to another, the URL that contains a
+    #   Signature Version 4 signed request for the `CopyDBClusterSnapshot` API
+    #   operation in the Amazon Web Services Region that contains the source
+    #   DB cluster snapshot to copy. Use the `PreSignedUrl` parameter when
+    #   copying an encrypted DB cluster snapshot from another Amazon Web
+    #   Services Region. Don't specify `PreSignedUrl` when copying an
+    #   encrypted DB cluster snapshot in the same Amazon Web Services Region.
     #
-    #   The pre-signed URL must be a valid request for the
-    #   `CopyDBClusterSnapshot` API action that can be executed in the source
+    #   This setting applies only to Amazon Web Services GovCloud (US)
+    #   Regions. It's ignored in other Amazon Web Services Regions.
+    #
+    #   The presigned URL must be a valid request for the
+    #   `CopyDBClusterSnapshot` API operation that can run in the source
     #   Amazon Web Services Region that contains the encrypted DB cluster
-    #   snapshot to be copied. The pre-signed URL request must contain the
-    #   following parameter values:
+    #   snapshot to copy. The presigned URL request must contain the following
+    #   parameter values:
     #
-    #   * `KmsKeyId` - The Amazon Web Services KMS key identifier for the KMS
-    #     key to use to encrypt the copy of the DB cluster snapshot in the
-    #     destination Amazon Web Services Region. This is the same identifier
-    #     for both the `CopyDBClusterSnapshot` action that is called in the
-    #     destination Amazon Web Services Region, and the action contained in
-    #     the pre-signed URL.
+    #   * `KmsKeyId` - The KMS key identifier for the KMS key to use to
+    #     encrypt the copy of the DB cluster snapshot in the destination
+    #     Amazon Web Services Region. This is the same identifier for both the
+    #     `CopyDBClusterSnapshot` operation that is called in the destination
+    #     Amazon Web Services Region, and the operation contained in the
+    #     presigned URL.
     #
     #   * `DestinationRegion` - The name of the Amazon Web Services Region
     #     that the DB cluster snapshot is to be created in.
@@ -1217,9 +1172,8 @@ module Aws::RDS
     #   <note markdown="1"> If you are using an Amazon Web Services SDK tool or the CLI, you can
     #   specify `SourceRegion` (or `--source-region` for the CLI) instead of
     #   specifying `PreSignedUrl` manually. Specifying `SourceRegion`
-    #   autogenerates a pre-signed URL that is a valid request for the
-    #   operation that can be executed in the source Amazon Web Services
-    #   Region.
+    #   autogenerates a presigned URL that is a valid request for the
+    #   operation that can run in the source Amazon Web Services Region.
     #
     #    </note>
     #
@@ -1418,13 +1372,13 @@ module Aws::RDS
     #
     # You can copy a snapshot from one Amazon Web Services Region to
     # another. In that case, the Amazon Web Services Region where you call
-    # the `CopyDBSnapshot` action is the destination Amazon Web Services
+    # the `CopyDBSnapshot` operation is the destination Amazon Web Services
     # Region for the DB snapshot copy.
     #
     # This command doesn't apply to RDS Custom.
     #
     # For more information about copying snapshots, see [Copying a DB
-    # Snapshot][1] in the *Amazon RDS User Guide.*
+    # Snapshot][1] in the *Amazon RDS User Guide*.
     #
     #
     #
@@ -1446,8 +1400,7 @@ module Aws::RDS
     #   must be the Amazon Resource Name (ARN) of the shared DB snapshot.
     #
     #   If you are copying an encrypted snapshot this parameter must be in the
-    #   ARN format for the source Amazon Web Services Region, and must match
-    #   the `SourceDBSnapshotIdentifier` in the `PreSignedUrl` parameter.
+    #   ARN format for the source Amazon Web Services Region.
     #
     #   Constraints:
     #
@@ -1513,39 +1466,46 @@ module Aws::RDS
     #   snapshot to the target DB snapshot. By default, tags are not copied.
     #
     # @option params [String] :pre_signed_url
-    #   The URL that contains a Signature Version 4 signed request for the
-    #   `CopyDBSnapshot` API action in the source Amazon Web Services Region
-    #   that contains the source DB snapshot to copy.
+    #   When you are copying a snapshot from one Amazon Web Services GovCloud
+    #   (US) Region to another, the URL that contains a Signature Version 4
+    #   signed request for the `CopyDBSnapshot` API operation in the source
+    #   Amazon Web Services Region that contains the source DB snapshot to
+    #   copy.
+    #
+    #   This setting applies only to Amazon Web Services GovCloud (US)
+    #   Regions. It's ignored in other Amazon Web Services Regions.
     #
     #   You must specify this parameter when you copy an encrypted DB snapshot
     #   from another Amazon Web Services Region by using the Amazon RDS API.
     #   Don't specify `PreSignedUrl` when you are copying an encrypted DB
     #   snapshot in the same Amazon Web Services Region.
     #
-    #   The presigned URL must be a valid request for the `CopyDBSnapshot` API
-    #   action that can be executed in the source Amazon Web Services Region
-    #   that contains the encrypted DB snapshot to be copied. The presigned
-    #   URL request must contain the following parameter values:
+    #   The presigned URL must be a valid request for the
+    #   `CopyDBClusterSnapshot` API operation that can run in the source
+    #   Amazon Web Services Region that contains the encrypted DB cluster
+    #   snapshot to copy. The presigned URL request must contain the following
+    #   parameter values:
     #
     #   * `DestinationRegion` - The Amazon Web Services Region that the
     #     encrypted DB snapshot is copied to. This Amazon Web Services Region
-    #     is the same one where the `CopyDBSnapshot` action is called that
+    #     is the same one where the `CopyDBSnapshot` operation is called that
     #     contains this presigned URL.
     #
     #     For example, if you copy an encrypted DB snapshot from the us-west-2
     #     Amazon Web Services Region to the us-east-1 Amazon Web Services
-    #     Region, then you call the `CopyDBSnapshot` action in the us-east-1
-    #     Amazon Web Services Region and provide a presigned URL that contains
-    #     a call to the `CopyDBSnapshot` action in the us-west-2 Amazon Web
-    #     Services Region. For this example, the `DestinationRegion` in the
-    #     presigned URL must be set to the us-east-1 Amazon Web Services
-    #     Region.
+    #     Region, then you call the `CopyDBSnapshot` operation in the
+    #     us-east-1 Amazon Web Services Region and provide a presigned URL
+    #     that contains a call to the `CopyDBSnapshot` operation in the
+    #     us-west-2 Amazon Web Services Region. For this example, the
+    #     `DestinationRegion` in the presigned URL must be set to the
+    #     us-east-1 Amazon Web Services Region.
     #
-    #   * `KmsKeyId` - The Amazon Web Services KMS key identifier for the KMS
-    #     key to use to encrypt the copy of the DB snapshot in the destination
-    #     Amazon Web Services Region. This is the same identifier for both the
-    #     `CopyDBSnapshot` action that is called in the destination Amazon Web
-    #     Services Region, and the action contained in the presigned URL.
+    #   * `KmsKeyId` - The KMS key identifier for the KMS key to use to
+    #     encrypt the copy of the DB snapshot in the destination Amazon Web
+    #     Services Region. This is the same identifier for both the
+    #     `CopyDBSnapshot` operation that is called in the destination Amazon
+    #     Web Services Region, and the operation contained in the presigned
+    #     URL.
     #
     #   * `SourceDBSnapshotIdentifier` - The DB snapshot identifier for the
     #     encrypted snapshot to be copied. This identifier must be in the
@@ -1562,9 +1522,8 @@ module Aws::RDS
     #   <note markdown="1"> If you are using an Amazon Web Services SDK tool or the CLI, you can
     #   specify `SourceRegion` (or `--source-region` for the CLI) instead of
     #   specifying `PreSignedUrl` manually. Specifying `SourceRegion`
-    #   autogenerates a pre-signed URL that is a valid request for the
-    #   operation that can be executed in the source Amazon Web Services
-    #   Region.
+    #   autogenerates a presigned URL that is a valid request for the
+    #   operation that can run in the source Amazon Web Services Region.
     #
     #    </note>
     #
@@ -1583,7 +1542,7 @@ module Aws::RDS
     #   Encryption for Oracle or Microsoft SQL Server, you must specify this
     #   option when copying across Amazon Web Services Regions. For more
     #   information, see [Option group considerations][1] in the *Amazon RDS
-    #   User Guide.*
+    #   User Guide*.
     #
     #
     #
@@ -1799,71 +1758,6 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # Creates a custom Availability Zone (AZ).
-    #
-    # A custom AZ is an on-premises AZ that is integrated with a VMware
-    # vSphere cluster.
-    #
-    # For more information about RDS on VMware, see the [ RDS on VMware User
-    # Guide.][1]
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html
-    #
-    # @option params [required, String] :custom_availability_zone_name
-    #   The name of the custom Availability Zone (AZ).
-    #
-    # @option params [String] :existing_vpn_id
-    #   The ID of an existing virtual private network (VPN) between the Amazon
-    #   RDS website and the VMware vSphere cluster.
-    #
-    # @option params [String] :new_vpn_tunnel_name
-    #   The name of a new VPN tunnel between the Amazon RDS website and the
-    #   VMware vSphere cluster.
-    #
-    #   Specify this parameter only if `ExistingVpnId` isn't specified.
-    #
-    # @option params [String] :vpn_tunnel_originator_ip
-    #   The IP address of network traffic from your on-premises data center. A
-    #   custom AZ receives the network traffic.
-    #
-    #   Specify this parameter only if `ExistingVpnId` isn't specified.
-    #
-    # @return [Types::CreateCustomAvailabilityZoneResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::CreateCustomAvailabilityZoneResult#custom_availability_zone #custom_availability_zone} => Types::CustomAvailabilityZone
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.create_custom_availability_zone({
-    #     custom_availability_zone_name: "String", # required
-    #     existing_vpn_id: "String",
-    #     new_vpn_tunnel_name: "String",
-    #     vpn_tunnel_originator_ip: "String",
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.custom_availability_zone.custom_availability_zone_id #=> String
-    #   resp.custom_availability_zone.custom_availability_zone_name #=> String
-    #   resp.custom_availability_zone.custom_availability_zone_status #=> String
-    #   resp.custom_availability_zone.vpn_details.vpn_id #=> String
-    #   resp.custom_availability_zone.vpn_details.vpn_tunnel_originator_ip #=> String
-    #   resp.custom_availability_zone.vpn_details.vpn_gateway_ip #=> String
-    #   resp.custom_availability_zone.vpn_details.vpn_psk #=> String
-    #   resp.custom_availability_zone.vpn_details.vpn_name #=> String
-    #   resp.custom_availability_zone.vpn_details.vpn_state #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateCustomAvailabilityZone AWS API Documentation
-    #
-    # @overload create_custom_availability_zone(params = {})
-    # @param [Hash] params ({})
-    def create_custom_availability_zone(params = {}, options = {})
-      req = build_request(:create_custom_availability_zone, params)
-      req.send_request(options)
-    end
-
     # Creates a custom DB engine version (CEV). A CEV is a binary volume
     # snapshot of a database engine and specific AMI. The supported engines
     # are the following:
@@ -2025,6 +1919,7 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#kms_key_id #kms_key_id} => String
     #   * {Types::DBEngineVersion#create_time #create_time} => Time
     #   * {Types::DBEngineVersion#tag_list #tag_list} => Array&lt;Types::Tag&gt;
+    #   * {Types::DBEngineVersion#supports_babelfish #supports_babelfish} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -2069,6 +1964,7 @@ module Aws::RDS
     #   resp.valid_upgrade_target[0].supported_engine_modes[0] #=> String
     #   resp.valid_upgrade_target[0].supports_parallel_query #=> Boolean
     #   resp.valid_upgrade_target[0].supports_global_databases #=> Boolean
+    #   resp.valid_upgrade_target[0].supports_babelfish #=> Boolean
     #   resp.supported_timezones #=> Array
     #   resp.supported_timezones[0].timezone_name #=> String
     #   resp.exportable_log_types #=> Array
@@ -2091,6 +1987,7 @@ module Aws::RDS
     #   resp.tag_list #=> Array
     #   resp.tag_list[0].key #=> String
     #   resp.tag_list[0].value #=> String
+    #   resp.supports_babelfish #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateCustomDBEngineVersion AWS API Documentation
     #
@@ -2105,22 +2002,14 @@ module Aws::RDS
     #
     # You can use the `ReplicationSourceIdentifier` parameter to create an
     # Amazon Aurora DB cluster as a read replica of another DB cluster or
-    # Amazon RDS MySQL or PostgreSQL DB instance. For cross-Region
-    # replication where the DB cluster identified by
-    # `ReplicationSourceIdentifier` is encrypted, also specify the
-    # `PreSignedUrl` parameter.
+    # Amazon RDS MySQL or PostgreSQL DB instance.
     #
     # For more information on Amazon Aurora, see [ What is Amazon
-    # Aurora?][1] in the *Amazon Aurora User Guide.*
+    # Aurora?][1] in the *Amazon Aurora User Guide*.
     #
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][2] in the *Amazon
-    # RDS User Guide.*
-    #
-    # <note markdown="1"> The Multi-AZ DB clusters feature is in preview and is subject to
-    # change.
-    #
-    #  </note>
+    # RDS User Guide*.
     #
     #
     #
@@ -2268,22 +2157,22 @@ module Aws::RDS
     #   **Aurora MySQL**
     #
     #   For information, see [MySQL on Amazon RDS Versions][1] in the *Amazon
-    #   Aurora User Guide.*
+    #   Aurora User Guide*.
     #
     #   **Aurora PostgreSQL**
     #
     #   For information, see [Amazon Aurora PostgreSQL releases and engine
-    #   versions][2] in the *Amazon Aurora User Guide.*
+    #   versions][2] in the *Amazon Aurora User Guide*.
     #
     #   **MySQL**
     #
     #   For information, see [MySQL on Amazon RDS Versions][3] in the *Amazon
-    #   RDS User Guide.*
+    #   RDS User Guide*.
     #
     #   **PostgreSQL**
     #
     #   For information, see [Amazon RDS for PostgreSQL versions and
-    #   extensions][4] in the *Amazon RDS User Guide.*
+    #   extensions][4] in the *Amazon RDS User Guide*.
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
@@ -2348,7 +2237,7 @@ module Aws::RDS
     #   The default is a 30-minute window selected at random from an 8-hour
     #   block of time for each Amazon Web Services Region. To view the time
     #   blocks available, see [ Backup window][1] in the *Amazon Aurora User
-    #   Guide.*
+    #   Guide*.
     #
     #   Constraints:
     #
@@ -2376,7 +2265,7 @@ module Aws::RDS
     #   block of time for each Amazon Web Services Region, occurring on a
     #   random day of the week. To see the time blocks available, see [
     #   Adjusting the Preferred DB Cluster Maintenance Window][1] in the
-    #   *Amazon Aurora User Guide.*
+    #   *Amazon Aurora User Guide*.
     #
     #   Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
     #
@@ -2436,25 +2325,25 @@ module Aws::RDS
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
     # @option params [String] :pre_signed_url
-    #   A URL that contains a Signature Version 4 signed request for the
-    #   `CreateDBCluster` action to be called in the source Amazon Web
-    #   Services Region where the DB cluster is replicated from. Specify
-    #   `PreSignedUrl` only when you are performing cross-Region replication
-    #   from an encrypted DB cluster.
+    #   When you are replicating a DB cluster from one Amazon Web Services
+    #   GovCloud (US) Region to another, an URL that contains a Signature
+    #   Version 4 signed request for the `CreateDBCluster` operation to be
+    #   called in the source Amazon Web Services Region where the DB cluster
+    #   is replicated from. Specify `PreSignedUrl` only when you are
+    #   performing cross-Region replication from an encrypted DB cluster.
     #
-    #   The pre-signed URL must be a valid request for the `CreateDBCluster`
-    #   API action that can be executed in the source Amazon Web Services
-    #   Region that contains the encrypted DB cluster to be copied.
+    #   The presigned URL must be a valid request for the `CreateDBCluster`
+    #   API operation that can run in the source Amazon Web Services Region
+    #   that contains the encrypted DB cluster to copy.
     #
-    #   The pre-signed URL request must contain the following parameter
-    #   values:
+    #   The presigned URL request must contain the following parameter values:
     #
-    #   * `KmsKeyId` - The Amazon Web Services KMS key identifier for the KMS
-    #     key to use to encrypt the copy of the DB cluster in the destination
-    #     Amazon Web Services Region. This should refer to the same KMS key
-    #     for both the `CreateDBCluster` action that is called in the
-    #     destination Amazon Web Services Region, and the action contained in
-    #     the pre-signed URL.
+    #   * `KmsKeyId` - The KMS key identifier for the KMS key to use to
+    #     encrypt the copy of the DB cluster in the destination Amazon Web
+    #     Services Region. This should refer to the same KMS key for both the
+    #     `CreateDBCluster` operation that is called in the destination Amazon
+    #     Web Services Region, and the operation contained in the presigned
+    #     URL.
     #
     #   * `DestinationRegion` - The name of the Amazon Web Services Region
     #     that Aurora read replica will be created in.
@@ -2475,9 +2364,8 @@ module Aws::RDS
     #   <note markdown="1"> If you are using an Amazon Web Services SDK tool or the CLI, you can
     #   specify `SourceRegion` (or `--source-region` for the CLI) instead of
     #   specifying `PreSignedUrl` manually. Specifying `SourceRegion`
-    #   autogenerates a pre-signed URL that is a valid request for the
-    #   operation that can be executed in the source Amazon Web Services
-    #   Region.
+    #   autogenerates a presigned URL that is a valid request for the
+    #   operation that can run in the source Amazon Web Services Region.
     #
     #    </note>
     #
@@ -2494,7 +2382,7 @@ module Aws::RDS
     #   accounts. By default, mapping isn't enabled.
     #
     #   For more information, see [ IAM Database Authentication][1] in the
-    #   *Amazon Aurora User Guide.*
+    #   *Amazon Aurora User Guide*.
     #
     #   Valid for: Aurora DB clusters only
     #
@@ -2520,8 +2408,15 @@ module Aws::RDS
     # @option params [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of log types that need to be enabled for exporting to
     #   CloudWatch Logs. The values in the list depend on the DB engine being
-    #   used. For more information, see [Publishing Database Logs to Amazon
-    #   CloudWatch Logs][1] in the *Amazon Aurora User Guide*.
+    #   used.
+    #
+    #   **RDS for MySQL**
+    #
+    #   Possible values are `error`, `general`, and `slowquery`.
+    #
+    #   **RDS for PostgreSQL**
+    #
+    #   Possible values are `postgresql` and `upgrade`.
     #
     #   **Aurora MySQL**
     #
@@ -2531,11 +2426,20 @@ module Aws::RDS
     #
     #   Possible value is `postgresql`.
     #
-    #   Valid for: Aurora DB clusters only
+    #   For more information about exporting CloudWatch Logs for Amazon RDS,
+    #   see [Publishing Database Logs to Amazon CloudWatch Logs][1] in the
+    #   *Amazon RDS User Guide*.
+    #
+    #   For more information about exporting CloudWatch Logs for Amazon
+    #   Aurora, see [Publishing Database Logs to Amazon CloudWatch Logs][2] in
+    #   the *Amazon Aurora User Guide*.
+    #
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #
     # @option params [String] :engine_mode
     #   The DB engine mode of the DB cluster, either `provisioned`,
@@ -2552,6 +2456,9 @@ module Aws::RDS
     #   The `multimaster` engine mode only applies for DB clusters created
     #   with Aurora MySQL version 5.6.10a.
     #
+    #   The `serverless` engine mode only applies for Aurora Serverless v1 DB
+    #   clusters.
+    #
     #   For Aurora PostgreSQL, the `global` engine mode isn't required, and
     #   both the `parallelquery` and the `multimaster` engine modes currently
     #   aren't supported.
@@ -2560,22 +2467,25 @@ module Aws::RDS
     #   information, see the following sections in the *Amazon Aurora User
     #   Guide*\:
     #
-    #   * [ Limitations of Aurora Serverless][1]
+    #   * [Limitations of Aurora Serverless v1][1]
     #
-    #   * [ Limitations of Parallel Query][2]
+    #   * [Requirements for Aurora Serverless v2][2]
     #
-    #   * [ Limitations of Aurora Global Databases][3]
+    #   * [Limitations of Parallel Query][3]
     #
-    #   * [ Limitations of Multi-Master Clusters][4]
+    #   * [Limitations of Aurora Global Databases][4]
+    #
+    #   * [Limitations of Multi-Master Clusters][5]
     #
     #   Valid for: Aurora DB clusters only
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html#aurora-serverless.limitations
-    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-mysql-parallel-query.html#aurora-mysql-parallel-query-limitations
-    #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html#aurora-global-database.limitations
-    #   [4]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-multi-master.html#aurora-multi-master-limitations
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.requirements.html
+    #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-mysql-parallel-query.html#aurora-mysql-parallel-query-limitations
+    #   [4]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html#aurora-global-database.limitations
+    #   [5]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-multi-master.html#aurora-multi-master-limitations
     #
     # @option params [Types::ScalingConfiguration] :scaling_configuration
     #   For DB clusters in `serverless` DB engine mode, the scaling properties
@@ -2598,16 +2508,16 @@ module Aws::RDS
     #
     # @option params [Boolean] :enable_http_endpoint
     #   A value that indicates whether to enable the HTTP endpoint for an
-    #   Aurora Serverless DB cluster. By default, the HTTP endpoint is
+    #   Aurora Serverless v1 DB cluster. By default, the HTTP endpoint is
     #   disabled.
     #
     #   When enabled, the HTTP endpoint provides a connectionless web service
-    #   API for running SQL queries on the Aurora Serverless DB cluster. You
-    #   can also query your database from inside the RDS console with the
+    #   API for running SQL queries on the Aurora Serverless v1 DB cluster.
+    #   You can also query your database from inside the RDS console with the
     #   query editor.
     #
-    #   For more information, see [Using the Data API for Aurora
-    #   Serverless][1] in the *Amazon Aurora User Guide*.
+    #   For more information, see [Using the Data API for Aurora Serverless
+    #   v1][1] in the *Amazon Aurora User Guide*.
     #
     #   Valid for: Aurora DB clusters only
     #
@@ -2619,7 +2529,7 @@ module Aws::RDS
     #   A value that indicates whether to copy all tags from the DB cluster to
     #   snapshots of the DB cluster. The default is not to copy them.
     #
-    #   Valid for: Aurora DB clusters only
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
     # @option params [String] :domain
     #   The Active Directory directory ID to create the DB cluster in.
@@ -2666,7 +2576,7 @@ module Aws::RDS
     #   engines.
     #
     #   For the full list of DB instance classes and availability for your
-    #   engine, see [DB instance class][1] in the *Amazon RDS User Guide.*
+    #   engine, see [DB instance class][1] in the *Amazon RDS User Guide*.
     #
     #   This setting is required to create a Multi-AZ DB cluster.
     #
@@ -2817,10 +2727,40 @@ module Aws::RDS
     #   Valid for: Multi-AZ DB clusters only
     #
     # @option params [Integer] :performance_insights_retention_period
-    #   The amount of time, in days, to retain Performance Insights data.
-    #   Valid values are 7 or 731 (2 years).
+    #   The number of days to retain Performance Insights data. The default is
+    #   7 days. The following values are valid:
+    #
+    #   * 7
+    #
+    #   * *month* * 31, where *month* is a number of months from 1-23
+    #
+    #   * 731
+    #
+    #   For example, the following values are valid:
+    #
+    #   * 93 (3 months * 31)
+    #
+    #   * 341 (11 months * 31)
+    #
+    #   * 589 (19 months * 31)
+    #
+    #   * 731
+    #
+    #   If you specify a retention period such as 94, which isn't a valid
+    #   value, RDS issues an error.
     #
     #   Valid for: Multi-AZ DB clusters only
+    #
+    # @option params [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
+    #   Contains the scaling configuration of an Aurora Serverless v2 DB
+    #   cluster.
+    #
+    #   For more information, see [Using Amazon Aurora Serverless v2][1] in
+    #   the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
     #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -2916,6 +2856,10 @@ module Aws::RDS
     #     enable_performance_insights: false,
     #     performance_insights_kms_key_id: "String",
     #     performance_insights_retention_period: 1,
+    #     serverless_v2_scaling_configuration: {
+    #       min_capacity: 1.0,
+    #       max_capacity: 1.0,
+    #     },
     #     source_region: "String",
     #   })
     #
@@ -3021,6 +2965,8 @@ module Aws::RDS
     #   resp.db_cluster.performance_insights_enabled #=> Boolean
     #   resp.db_cluster.performance_insights_kms_key_id #=> String
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
+    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBCluster AWS API Documentation
     #
@@ -3034,7 +2980,7 @@ module Aws::RDS
     # Creates a new custom endpoint and associates it with an Amazon Aurora
     # DB cluster.
     #
-    # <note markdown="1"> This action only applies to Aurora DB clusters.
+    # <note markdown="1"> This action applies only to Aurora DB clusters.
     #
     #  </note>
     #
@@ -3146,20 +3092,16 @@ module Aws::RDS
     # the default database for a DB cluster, such as the character set for
     # the default database defined by the `character_set_database`
     # parameter. You can use the *Parameter Groups* option of the [Amazon
-    # RDS console][1] or the `DescribeDBClusterParameters` action to verify
-    # that your DB cluster parameter group has been created or modified.
+    # RDS console][1] or the `DescribeDBClusterParameters` operation to
+    # verify that your DB cluster parameter group has been created or
+    # modified.
     #
     # For more information on Amazon Aurora, see [ What is Amazon
-    # Aurora?][2] in the *Amazon Aurora User Guide.*
+    # Aurora?][2] in the *Amazon Aurora User Guide*.
     #
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][3] in the *Amazon
-    # RDS User Guide.*
-    #
-    # <note markdown="1"> The Multi-AZ DB clusters feature is in preview and is subject to
-    # change.
-    #
-    #  </note>
+    # RDS User Guide*.
     #
     #
     #
@@ -3293,16 +3235,11 @@ module Aws::RDS
     # Creates a snapshot of a DB cluster.
     #
     # For more information on Amazon Aurora, see [ What is Amazon
-    # Aurora?][1] in the *Amazon Aurora User Guide.*
+    # Aurora?][1] in the *Amazon Aurora User Guide*.
     #
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][2] in the *Amazon
-    # RDS User Guide.*
-    #
-    # <note markdown="1"> The Multi-AZ DB clusters feature is in preview and is subject to
-    # change.
-    #
-    #  </note>
+    # RDS User Guide*.
     #
     #
     #
@@ -3409,6 +3346,23 @@ module Aws::RDS
     end
 
     # Creates a new DB instance.
+    #
+    # The new DB instance can be an RDS DB instance, or it can be a DB
+    # instance in an Aurora DB cluster. For an Aurora DB cluster, you can
+    # call this operation multiple times to add more than one DB instance to
+    # the cluster.
+    #
+    # For more information about creating an RDS DB instance, see [ Creating
+    # an Amazon RDS DB instance][1] in the *Amazon RDS User Guide*.
+    #
+    # For more information about creating a DB instance in an Aurora DB
+    # cluster, see [ Creating an Amazon Aurora DB cluster][2] in the *Amazon
+    # Aurora User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateDBInstance.html
+    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.CreateInstance.html
     #
     # @option params [String] :db_name
     #   The meaning of this parameter differs according to the database engine
@@ -3643,14 +3597,16 @@ module Aws::RDS
     #
     # @option params [required, String] :db_instance_class
     #   The compute and memory capacity of the DB instance, for example
-    #   db.m4.large. Not all DB instance classes are available in all Amazon
+    #   db.m5.large. Not all DB instance classes are available in all Amazon
     #   Web Services Regions, or for all database engines. For the full list
     #   of DB instance classes, and availability for your engine, see [DB
-    #   Instance Class][1] in the *Amazon RDS User Guide.*
+    #   instance classes][1] in the *Amazon RDS User Guide* or [Aurora DB
+    #   instance classes][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.DBInstanceClass.html
     #
     # @option params [required, String] :engine
     #   The name of the database engine to be used for this instance.
@@ -3749,7 +3705,9 @@ module Aws::RDS
     # @option params [Array<String>] :db_security_groups
     #   A list of DB security groups to associate with this DB instance.
     #
-    #   Default: The default DB security group for the database engine.
+    #   This setting applies to the legacy EC2-Classic platform, which is no
+    #   longer used to create new DB instances. Use the `VpcSecurityGroupIds`
+    #   setting instead.
     #
     # @option params [Array<String>] :vpc_security_group_ids
     #   A list of Amazon EC2 VPC security groups to associate with this DB
@@ -3770,7 +3728,10 @@ module Aws::RDS
     #
     #   **Amazon Aurora**
     #
-    #   Not applicable. Availability Zones are managed by the DB cluster.
+    #   Each Aurora DB cluster hosts copies of its storage in three separate
+    #   Availability Zones. Specify one of these Availability Zones. Aurora
+    #   automatically chooses an appropriate Availability Zone if you don't
+    #   specify one.
     #
     #   Default: A random, system-chosen Availability Zone in the endpoint's
     #   Amazon Web Services Region.
@@ -3782,19 +3743,9 @@ module Aws::RDS
     #   Zone must be in the same Amazon Web Services Region as the current
     #   endpoint.
     #
-    #   <note markdown="1"> If you're creating a DB instance in an RDS on VMware environment,
-    #   specify the identifier of the custom Availability Zone to create the
-    #   DB instance in.
-    #
-    #    For more information about RDS on VMware, see the [ RDS on VMware User
-    #   Guide.][2]
-    #
-    #    </note>
-    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html
-    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html
     #
     # @option params [String] :db_subnet_group_name
     #   A DB subnet group to associate with this DB instance.
@@ -3856,7 +3807,7 @@ module Aws::RDS
     #
     #   * Can't be set to 0 if the DB instance is a source to read replicas
     #
-    #   * Can't be set to 0 or 35 for an RDS Custom for Oracle DB instance
+    #   * Can't be set to 0 for an RDS Custom for Oracle DB instance
     #
     # @option params [String] :preferred_backup_window
     #   The daily time range during which automated backups are created if
@@ -3939,11 +3890,16 @@ module Aws::RDS
     #
     #   This setting doesn't apply to RDS Custom.
     #
+    #   **Amazon Aurora**
+    #
+    #   Not applicable. DB instance Availability Zones (AZs) are managed by
+    #   the DB cluster.
+    #
     # @option params [String] :engine_version
     #   The version number of the database engine to use.
     #
     #   For a list of valid engine versions, use the
-    #   `DescribeDBEngineVersions` action.
+    #   `DescribeDBEngineVersions` operation.
     #
     #   The following are the database engines and links to information about
     #   the major and minor versions that are available with Amazon RDS. Not
@@ -3961,42 +3917,42 @@ module Aws::RDS
     #   setting is required for RDS Custom for Oracle. The CEV name has the
     #   following format: `19.customized_string `. An example identifier is
     #   `19.my_cev1`. For more information, see [ Creating an RDS Custom for
-    #   Oracle DB instance][1] in the *Amazon RDS User Guide.*.
+    #   Oracle DB instance][1] in the *Amazon RDS User Guide*.
     #
     #   **Amazon RDS Custom for SQL Server**
     #
     #   See [RDS Custom for SQL Server general requirements][2] in the *Amazon
-    #   RDS User Guide.*
+    #   RDS User Guide*.
     #
     #   **MariaDB**
     #
     #   For information, see [MariaDB on Amazon RDS Versions][3] in the
-    #   *Amazon RDS User Guide.*
+    #   *Amazon RDS User Guide*.
     #
     #   **Microsoft SQL Server**
     #
     #   For information, see [Microsoft SQL Server Versions on Amazon RDS][4]
-    #   in the *Amazon RDS User Guide.*
+    #   in the *Amazon RDS User Guide*.
     #
     #   **MySQL**
     #
     #   For information, see [MySQL on Amazon RDS Versions][5] in the *Amazon
-    #   RDS User Guide.*
+    #   RDS User Guide*.
     #
     #   **Oracle**
     #
     #   For information, see [Oracle Database Engine Release Notes][6] in the
-    #   *Amazon RDS User Guide.*
+    #   *Amazon RDS User Guide*.
     #
     #   **PostgreSQL**
     #
     #   For information, see [Amazon RDS for PostgreSQL versions and
-    #   extensions][7] in the *Amazon RDS User Guide.*
+    #   extensions][7] in the *Amazon RDS User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-creating.html#custom-creating.create
-    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-reqs-limits.html#custom-reqs-limits.reqsMS
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-reqs-limits-MS.html
     #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html#MariaDB.Concepts.VersionMgmt
     #   [4]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.VersionSupport
     #   [5]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt
@@ -4019,6 +3975,10 @@ module Aws::RDS
     #
     #   This setting doesn't apply to RDS Custom.
     #
+    #   **Amazon Aurora**
+    #
+    #   Not applicable.
+    #
     # @option params [Integer] :iops
     #   The amount of Provisioned IOPS (input/output operations per second) to
     #   be initially allocated for the DB instance. For information about
@@ -4029,6 +3989,10 @@ module Aws::RDS
     #   must be a multiple between .5 and 50 of the storage amount for the DB
     #   instance. For SQL Server DB instances, must be a multiple between 1
     #   and 50 of the storage amount for the DB instance.
+    #
+    #   **Amazon Aurora**
+    #
+    #   Not applicable. Storage is managed by the DB cluster.
     #
     #
     #
@@ -4044,6 +4008,10 @@ module Aws::RDS
     #   instance.
     #
     #   This setting doesn't apply to RDS Custom.
+    #
+    #   **Amazon Aurora**
+    #
+    #   Not applicable.
     #
     # @option params [String] :character_set_name
     #   For supported engines, this value indicates that the DB instance
@@ -4115,11 +4083,19 @@ module Aws::RDS
     #
     #   Default: `io1` if the `Iops` parameter is specified, otherwise `gp2`
     #
+    #   **Amazon Aurora**
+    #
+    #   Not applicable. Storage is managed by the DB cluster.
+    #
     # @option params [String] :tde_credential_arn
     #   The ARN from the key store with which to associate the instance for
     #   TDE encryption.
     #
     #   This setting doesn't apply to RDS Custom.
+    #
+    #   **Amazon Aurora**
+    #
+    #   Not applicable.
     #
     # @option params [String] :tde_credential_password
     #   The password for the given ARN from the key store in order to access
@@ -4177,6 +4153,10 @@ module Aws::RDS
     #
     #   This setting doesn't apply to RDS Custom.
     #
+    #   **Amazon Aurora**
+    #
+    #   Not applicable. The domain is managed by the DB cluster.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html
@@ -4225,6 +4205,10 @@ module Aws::RDS
     #
     #   This setting doesn't apply to RDS Custom.
     #
+    #   **Amazon Aurora**
+    #
+    #   Not applicable. The domain is managed by the DB cluster.
+    #
     # @option params [Integer] :promotion_tier
     #   A value that specifies the order in which an Aurora Replica is
     #   promoted to the primary instance after a failure of the existing
@@ -4254,12 +4238,15 @@ module Aws::RDS
     #   Services Identity and Access Management (IAM) accounts to database
     #   accounts. By default, mapping isn't enabled.
     #
-    #   This setting doesn't apply to RDS Custom or Amazon Aurora. In Aurora,
-    #   mapping Amazon Web Services IAM accounts to database accounts is
-    #   managed by the DB cluster.
-    #
     #   For more information, see [ IAM Database Authentication for MySQL and
-    #   PostgreSQL][1] in the *Amazon RDS User Guide.*
+    #   PostgreSQL][1] in the *Amazon RDS User Guide*.
+    #
+    #   This setting doesn't apply to RDS Custom.
+    #
+    #   **Amazon Aurora**
+    #
+    #   Not applicable. Mapping Amazon Web Services IAM accounts to database
+    #   accounts is managed by the DB cluster.
     #
     #
     #
@@ -4268,7 +4255,7 @@ module Aws::RDS
     # @option params [Boolean] :enable_performance_insights
     #   A value that indicates whether to enable Performance Insights for the
     #   DB instance. For more information, see [Using Amazon Performance
-    #   Insights][1] in the *Amazon Relational Database Service User Guide*.
+    #   Insights][1] in the *Amazon RDS User Guide*.
     #
     #   This setting doesn't apply to RDS Custom.
     #
@@ -4291,16 +4278,35 @@ module Aws::RDS
     #   This setting doesn't apply to RDS Custom.
     #
     # @option params [Integer] :performance_insights_retention_period
-    #   The amount of time, in days, to retain Performance Insights data.
-    #   Valid values are 7 or 731 (2 years).
+    #   The number of days to retain Performance Insights data. The default is
+    #   7 days. The following values are valid:
+    #
+    #   * 7
+    #
+    #   * *month* * 31, where *month* is a number of months from 1-23
+    #
+    #   * 731
+    #
+    #   For example, the following values are valid:
+    #
+    #   * 93 (3 months * 31)
+    #
+    #   * 341 (11 months * 31)
+    #
+    #   * 589 (19 months * 31)
+    #
+    #   * 731
+    #
+    #   If you specify a retention period such as 94, which isn't a valid
+    #   value, RDS issues an error.
     #
     #   This setting doesn't apply to RDS Custom.
     #
     # @option params [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of log types that need to be enabled for exporting to
     #   CloudWatch Logs. The values in the list depend on the DB engine. For
-    #   more information, see [Publishing Database Logs to Amazon CloudWatch
-    #   Logs][1] in the *Amazon Relational Database Service User Guide*.
+    #   more information, see [ Publishing Database Logs to Amazon CloudWatch
+    #   Logs][1] in the *Amazon RDS User Guide*.
     #
     #   **Amazon Aurora**
     #
@@ -4341,6 +4347,10 @@ module Aws::RDS
     #
     #   This setting doesn't apply to RDS Custom.
     #
+    #   **Amazon Aurora**
+    #
+    #   Not applicable.
+    #
     # @option params [Boolean] :deletion_protection
     #   A value that indicates whether the DB instance has deletion protection
     #   enabled. The database can't be deleted when deletion protection is
@@ -4367,6 +4377,10 @@ module Aws::RDS
     #   storage autoscaling][1] in the *Amazon RDS User Guide*.
     #
     #   This setting doesn't apply to RDS Custom.
+    #
+    #   **Amazon Aurora**
+    #
+    #   Not applicable. Storage is managed by the DB cluster.
     #
     #
     #
@@ -4407,8 +4421,7 @@ module Aws::RDS
     #     start with the prefix `AWSRDSCustom`.
     #
     #   For the list of permissions required for the IAM role, see [ Configure
-    #   IAM and your VPC][1] in the *Amazon Relational Database Service User
-    #   Guide*.
+    #   IAM and your VPC][1] in the *Amazon RDS User Guide*.
     #
     #   This setting is required for RDS Custom.
     #
@@ -4428,6 +4441,26 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
+    #
+    # @option params [String] :network_type
+    #   The network type of the DB instance.
+    #
+    #   Valid values:
+    #
+    #   * `IPV4`
+    #
+    #   * `DUAL`
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the DB instance. A `DBSubnetGroup` can support only the IPv4 protocol
+    #   or the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [ Working with a DB instance in a VPC][1] in
+    #   the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     #
     # @return [Types::CreateDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4516,6 +4549,7 @@ module Aws::RDS
     #     enable_customer_owned_ip: false,
     #     custom_iam_instance_profile: "String",
     #     backup_target: "String",
+    #     network_type: "String",
     #   })
     #
     # @example Response structure
@@ -4554,6 +4588,8 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_outpost.arn #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
+    #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
+    #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
@@ -4656,6 +4692,8 @@ module Aws::RDS
     #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.backup_target #=> String
+    #   resp.db_instance.network_type #=> String
+    #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstance AWS API Documentation
     #
@@ -4672,8 +4710,8 @@ module Aws::RDS
     # information, see [Working with Read Replicas][1] in the *Amazon RDS
     # User Guide*.
     #
-    # Amazon Aurora doesn't support this action. Call the
-    # `CreateDBInstance` action to create a DB instance for an Aurora DB
+    # Amazon Aurora doesn't support this operation. Call the
+    # `CreateDBInstance` operation to create a DB instance for an Aurora DB
     # cluster.
     #
     # All read replica DB instances are created with backups disabled. All
@@ -4738,7 +4776,7 @@ module Aws::RDS
     #   db.m4.large. Not all DB instance classes are available in all Amazon
     #   Web Services Regions, or for all database engines. For the full list
     #   of DB instance classes, and availability for your engine, see [DB
-    #   Instance Class][1] in the *Amazon RDS User Guide.*
+    #   Instance Class][1] in the *Amazon RDS User Guide*.
     #
     #   Default: Inherits from the source DB instance.
     #
@@ -4805,7 +4843,7 @@ module Aws::RDS
     #   specified DB engine for a cross-Region read replica.
     #
     #   Specifying a parameter group for this operation is only supported for
-    #   Oracle DB instances. It isn't supported for RDS Custom.
+    #   MySQL and Oracle DB instances. It isn't supported for RDS Custom.
     #
     #   Constraints:
     #
@@ -4944,9 +4982,16 @@ module Aws::RDS
     #   as the primary replica.
     #
     # @option params [String] :pre_signed_url
-    #   The URL that contains a Signature Version 4 signed request for the
-    #   `CreateDBInstanceReadReplica` API action in the source Amazon Web
-    #   Services Region that contains the source DB instance.
+    #   When you are creating a read replica from one Amazon Web Services
+    #   GovCloud (US) Region to another or from one China Amazon Web Services
+    #   Region to another, the URL that contains a Signature Version 4 signed
+    #   request for the `CreateDBInstanceReadReplica` API operation in the
+    #   source Amazon Web Services Region that contains the source DB
+    #   instance.
+    #
+    #   This setting applies only to Amazon Web Services GovCloud (US) Regions
+    #   and China Amazon Web Services Regions. It's ignored in other Amazon
+    #   Web Services Regions.
     #
     #   You must specify this parameter when you create an encrypted read
     #   replica from another Amazon Web Services Region by using the Amazon
@@ -4954,32 +4999,31 @@ module Aws::RDS
     #   encrypted read replica in the same Amazon Web Services Region.
     #
     #   The presigned URL must be a valid request for the
-    #   `CreateDBInstanceReadReplica` API action that can be executed in the
-    #   source Amazon Web Services Region that contains the encrypted source
-    #   DB instance. The presigned URL request must contain the following
+    #   `CreateDBInstanceReadReplica` API operation that can run in the source
+    #   Amazon Web Services Region that contains the encrypted source DB
+    #   instance. The presigned URL request must contain the following
     #   parameter values:
     #
     #   * `DestinationRegion` - The Amazon Web Services Region that the
     #     encrypted read replica is created in. This Amazon Web Services
     #     Region is the same one where the `CreateDBInstanceReadReplica`
-    #     action is called that contains this presigned URL.
+    #     operation is called that contains this presigned URL.
     #
     #     For example, if you create an encrypted DB instance in the us-west-1
     #     Amazon Web Services Region, from a source DB instance in the
     #     us-east-2 Amazon Web Services Region, then you call the
-    #     `CreateDBInstanceReadReplica` action in the us-east-1 Amazon Web
+    #     `CreateDBInstanceReadReplica` operation in the us-east-1 Amazon Web
     #     Services Region and provide a presigned URL that contains a call to
-    #     the `CreateDBInstanceReadReplica` action in the us-west-2 Amazon Web
-    #     Services Region. For this example, the `DestinationRegion` in the
-    #     presigned URL must be set to the us-east-1 Amazon Web Services
+    #     the `CreateDBInstanceReadReplica` operation in the us-west-2 Amazon
+    #     Web Services Region. For this example, the `DestinationRegion` in
+    #     the presigned URL must be set to the us-east-1 Amazon Web Services
     #     Region.
     #
-    #   * `KmsKeyId` - The Amazon Web Services KMS key identifier for the key
-    #     to use to encrypt the read replica in the destination Amazon Web
-    #     Services Region. This is the same identifier for both the
-    #     `CreateDBInstanceReadReplica` action that is called in the
-    #     destination Amazon Web Services Region, and the action contained in
-    #     the presigned URL.
+    #   * `KmsKeyId` - The KMS key identifier for the key to use to encrypt
+    #     the read replica in the destination Amazon Web Services Region. This
+    #     is the same identifier for both the `CreateDBInstanceReadReplica`
+    #     operation that is called in the destination Amazon Web Services
+    #     Region, and the operation contained in the presigned URL.
     #
     #   * `SourceDBInstanceIdentifier` - The DB instance identifier for the
     #     encrypted DB instance to be replicated. This identifier must be in
@@ -4998,11 +5042,10 @@ module Aws::RDS
     #   specify `SourceRegion` (or `--source-region` for the CLI) instead of
     #   specifying `PreSignedUrl` manually. Specifying `SourceRegion`
     #   autogenerates a presigned URL that is a valid request for the
-    #   operation that can be executed in the source Amazon Web Services
-    #   Region.
+    #   operation that can run in the source Amazon Web Services Region.
     #
-    #    `SourceRegion` isn't supported for SQL Server, because SQL Server on
-    #   Amazon RDS doesn't support cross-Region read replicas.
+    #    `SourceRegion` isn't supported for SQL Server, because Amazon RDS for
+    #   SQL Server doesn't support cross-Region read replicas.
     #
     #    </note>
     #
@@ -5020,7 +5063,7 @@ module Aws::RDS
     #
     #   For more information about IAM database authentication, see [ IAM
     #   Database Authentication for MySQL and PostgreSQL][1] in the *Amazon
-    #   RDS User Guide.*
+    #   RDS User Guide*.
     #
     #   This setting doesn't apply to RDS Custom.
     #
@@ -5056,8 +5099,27 @@ module Aws::RDS
     #   This setting doesn't apply to RDS Custom.
     #
     # @option params [Integer] :performance_insights_retention_period
-    #   The amount of time, in days, to retain Performance Insights data.
-    #   Valid values are 7 or 731 (2 years).
+    #   The number of days to retain Performance Insights data. The default is
+    #   7 days. The following values are valid:
+    #
+    #   * 7
+    #
+    #   * *month* * 31, where *month* is a number of months from 1-23
+    #
+    #   * 731
+    #
+    #   For example, the following values are valid:
+    #
+    #   * 93 (3 months * 31)
+    #
+    #   * 341 (11 months * 31)
+    #
+    #   * 589 (19 months * 31)
+    #
+    #   * 731
+    #
+    #   If you specify a retention period such as 94, which isn't a valid
+    #   value, RDS issues an error.
     #
     #   This setting doesn't apply to RDS Custom.
     #
@@ -5168,14 +5230,33 @@ module Aws::RDS
     #     start with the prefix `AWSRDSCustom`.
     #
     #   For the list of permissions required for the IAM role, see [ Configure
-    #   IAM and your VPC][1] in the *Amazon Relational Database Service User
-    #   Guide*.
+    #   IAM and your VPC][1] in the *Amazon RDS User Guide*.
     #
     #   This setting is required for RDS Custom.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc
+    #
+    # @option params [String] :network_type
+    #   The network type of the DB instance.
+    #
+    #   Valid values:
+    #
+    #   * `IPV4`
+    #
+    #   * `DUAL`
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   read replica. A `DBSubnetGroup` can support only the IPv4 protocol or
+    #   the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [ Working with a DB instance in a VPC][1] in
+    #   the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -5258,6 +5339,7 @@ module Aws::RDS
     #     replica_mode: "open-read-only", # accepts open-read-only, mounted
     #     max_allocated_storage: 1,
     #     custom_iam_instance_profile: "String",
+    #     network_type: "String",
     #     source_region: "String",
     #   })
     #
@@ -5297,6 +5379,8 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_outpost.arn #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
+    #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
+    #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
@@ -5399,6 +5483,8 @@ module Aws::RDS
     #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.backup_target #=> String
+    #   resp.db_instance.network_type #=> String
+    #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplica AWS API Documentation
     #
@@ -5576,8 +5662,10 @@ module Aws::RDS
     # @option params [required, String] :engine_family
     #   The kinds of databases that the proxy can connect to. This value
     #   determines which database network protocol the proxy recognizes when
-    #   it interprets network traffic to and from the database. The engine
-    #   family applies to MySQL and PostgreSQL for both RDS and Aurora.
+    #   it interprets network traffic to and from the database. For Aurora
+    #   MySQL, RDS for MariaDB, and RDS for MySQL databases, specify `MYSQL`.
+    #   For Aurora PostgreSQL and RDS for PostgreSQL databases, specify
+    #   `POSTGRESQL`.
     #
     # @option params [required, Array<Types::UserAuthConfig>] :auth
     #   The authorization mechanism that the proxy uses.
@@ -6042,6 +6130,8 @@ module Aws::RDS
     #   resp.db_subnet_group.subnets[0].subnet_outpost.arn #=> String
     #   resp.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_subnet_group.db_subnet_group_arn #=> String
+    #   resp.db_subnet_group.supported_network_types #=> Array
+    #   resp.db_subnet_group.supported_network_types[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSubnetGroup AWS API Documentation
     #
@@ -6052,11 +6142,11 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # Creates an RDS event notification subscription. This action requires a
-    # topic Amazon Resource Name (ARN) created by either the RDS console,
-    # the SNS console, or the SNS API. To obtain an ARN with SNS, you must
-    # create a topic in Amazon SNS and subscribe to the topic. The ARN is
-    # displayed in the SNS console.
+    # Creates an RDS event notification subscription. This operation
+    # requires a topic Amazon Resource Name (ARN) created by either the RDS
+    # console, the SNS console, or the SNS API. To obtain an ARN with SNS,
+    # you must create a topic in Amazon SNS and subscribe to the topic. The
+    # ARN is displayed in the SNS console.
     #
     # You can specify the type of source (`SourceType`) that you want to be
     # notified of and provide a list of RDS sources (`SourceIds`) that
@@ -6239,7 +6329,7 @@ module Aws::RDS
     # existing Aurora cluster during the create operation, and this cluster
     # becomes the primary cluster of the global database.
     #
-    # <note markdown="1"> This action only applies to Aurora DB clusters.
+    # <note markdown="1"> This action applies only to Aurora DB clusters.
     #
     #  </note>
     #
@@ -6261,9 +6351,9 @@ module Aws::RDS
     #   global database can't be deleted when deletion protection is enabled.
     #
     # @option params [String] :database_name
-    #   The name for your database of up to 64 alpha-numeric characters. If
-    #   you do not provide a name, Amazon Aurora will not create a database in
-    #   the global database cluster you are creating.
+    #   The name for your database of up to 64 alphanumeric characters. If you
+    #   do not provide a name, Amazon Aurora will not create a database in the
+    #   global database cluster you are creating.
     #
     # @option params [Boolean] :storage_encrypted
     #   The storage encryption setting for the new global database cluster.
@@ -6448,52 +6538,6 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # Deletes a custom Availability Zone (AZ).
-    #
-    # A custom AZ is an on-premises AZ that is integrated with a VMware
-    # vSphere cluster.
-    #
-    # For more information about RDS on VMware, see the [ RDS on VMware User
-    # Guide.][1]
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html
-    #
-    # @option params [required, String] :custom_availability_zone_id
-    #   The custom AZ identifier.
-    #
-    # @return [Types::DeleteCustomAvailabilityZoneResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::DeleteCustomAvailabilityZoneResult#custom_availability_zone #custom_availability_zone} => Types::CustomAvailabilityZone
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.delete_custom_availability_zone({
-    #     custom_availability_zone_id: "String", # required
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.custom_availability_zone.custom_availability_zone_id #=> String
-    #   resp.custom_availability_zone.custom_availability_zone_name #=> String
-    #   resp.custom_availability_zone.custom_availability_zone_status #=> String
-    #   resp.custom_availability_zone.vpn_details.vpn_id #=> String
-    #   resp.custom_availability_zone.vpn_details.vpn_tunnel_originator_ip #=> String
-    #   resp.custom_availability_zone.vpn_details.vpn_gateway_ip #=> String
-    #   resp.custom_availability_zone.vpn_details.vpn_psk #=> String
-    #   resp.custom_availability_zone.vpn_details.vpn_name #=> String
-    #   resp.custom_availability_zone.vpn_details.vpn_state #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteCustomAvailabilityZone AWS API Documentation
-    #
-    # @overload delete_custom_availability_zone(params = {})
-    # @param [Hash] params ({})
-    def delete_custom_availability_zone(params = {}, options = {})
-      req = build_request(:delete_custom_availability_zone, params)
-      req.send_request(options)
-    end
-
     # Deletes a custom engine version. To run this command, make sure you
     # meet the following prerequisites:
     #
@@ -6559,6 +6603,7 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#kms_key_id #kms_key_id} => String
     #   * {Types::DBEngineVersion#create_time #create_time} => Time
     #   * {Types::DBEngineVersion#tag_list #tag_list} => Array&lt;Types::Tag&gt;
+    #   * {Types::DBEngineVersion#supports_babelfish #supports_babelfish} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -6592,6 +6637,7 @@ module Aws::RDS
     #   resp.valid_upgrade_target[0].supported_engine_modes[0] #=> String
     #   resp.valid_upgrade_target[0].supports_parallel_query #=> Boolean
     #   resp.valid_upgrade_target[0].supports_global_databases #=> Boolean
+    #   resp.valid_upgrade_target[0].supports_babelfish #=> Boolean
     #   resp.supported_timezones #=> Array
     #   resp.supported_timezones[0].timezone_name #=> String
     #   resp.exportable_log_types #=> Array
@@ -6614,6 +6660,7 @@ module Aws::RDS
     #   resp.tag_list #=> Array
     #   resp.tag_list[0].key #=> String
     #   resp.tag_list[0].value #=> String
+    #   resp.supports_babelfish #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteCustomDBEngineVersion AWS API Documentation
     #
@@ -6630,16 +6677,11 @@ module Aws::RDS
     # snapshots of the specified DB cluster are not deleted.
     #
     # For more information on Amazon Aurora, see [ What is Amazon
-    # Aurora?][1] in the *Amazon Aurora User Guide.*
+    # Aurora?][1] in the *Amazon Aurora User Guide*.
     #
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][2] in the *Amazon
-    # RDS User Guide.*
-    #
-    # <note markdown="1"> The Multi-AZ DB clusters feature is in preview and is subject to
-    # change.
-    #
-    #  </note>
+    # RDS User Guide*.
     #
     #
     #
@@ -6817,6 +6859,8 @@ module Aws::RDS
     #   resp.db_cluster.performance_insights_enabled #=> Boolean
     #   resp.db_cluster.performance_insights_kms_key_id #=> String
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
+    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBCluster AWS API Documentation
     #
@@ -6886,16 +6930,11 @@ module Aws::RDS
     # clusters.
     #
     # For more information on Amazon Aurora, see [ What is Amazon
-    # Aurora?][1] in the *Amazon Aurora User Guide.*
+    # Aurora?][1] in the *Amazon Aurora User Guide*.
     #
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][2] in the *Amazon
-    # RDS User Guide.*
-    #
-    # <note markdown="1"> The Multi-AZ DB clusters feature is in preview and is subject to
-    # change.
-    #
-    #  </note>
+    # RDS User Guide*.
     #
     #
     #
@@ -6948,16 +6987,11 @@ module Aws::RDS
     #  </note>
     #
     # For more information on Amazon Aurora, see [ What is Amazon
-    # Aurora?][1] in the *Amazon Aurora User Guide.*
+    # Aurora?][1] in the *Amazon Aurora User Guide*.
     #
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][2] in the *Amazon
-    # RDS User Guide.*
-    #
-    # <note markdown="1"> The Multi-AZ DB clusters feature is in preview and is subject to
-    # change.
-    #
-    #  </note>
+    # RDS User Guide*.
     #
     #
     #
@@ -7187,6 +7221,8 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_outpost.arn #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
+    #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
+    #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
@@ -7289,6 +7325,8 @@ module Aws::RDS
     #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.backup_target #=> String
+    #   resp.db_instance.network_type #=> String
+    #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstance AWS API Documentation
     #
@@ -7784,49 +7822,6 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # Deletes the installation medium for a DB engine that requires an
-    # on-premises customer provided license, such as Microsoft SQL Server.
-    #
-    # @option params [required, String] :installation_media_id
-    #   The installation medium ID.
-    #
-    # @return [Types::InstallationMedia] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::InstallationMedia#installation_media_id #installation_media_id} => String
-    #   * {Types::InstallationMedia#custom_availability_zone_id #custom_availability_zone_id} => String
-    #   * {Types::InstallationMedia#engine #engine} => String
-    #   * {Types::InstallationMedia#engine_version #engine_version} => String
-    #   * {Types::InstallationMedia#engine_installation_media_path #engine_installation_media_path} => String
-    #   * {Types::InstallationMedia#os_installation_media_path #os_installation_media_path} => String
-    #   * {Types::InstallationMedia#status #status} => String
-    #   * {Types::InstallationMedia#failure_cause #failure_cause} => Types::InstallationMediaFailureCause
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.delete_installation_media({
-    #     installation_media_id: "String", # required
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.installation_media_id #=> String
-    #   resp.custom_availability_zone_id #=> String
-    #   resp.engine #=> String
-    #   resp.engine_version #=> String
-    #   resp.engine_installation_media_path #=> String
-    #   resp.os_installation_media_path #=> String
-    #   resp.status #=> String
-    #   resp.failure_cause.message #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteInstallationMedia AWS API Documentation
-    #
-    # @overload delete_installation_media(params = {})
-    # @param [Hash] params ({})
-    def delete_installation_media(params = {}, options = {})
-      req = build_request(:delete_installation_media, params)
-      req.send_request(options)
-    end
-
     # Deletes an existing option group.
     #
     # @option params [required, String] :option_group_name
@@ -8027,89 +8022,10 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # Returns information about custom Availability Zones (AZs).
-    #
-    # A custom AZ is an on-premises AZ that is integrated with a VMware
-    # vSphere cluster.
-    #
-    # For more information about RDS on VMware, see the [ RDS on VMware User
-    # Guide.][1]
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html
-    #
-    # @option params [String] :custom_availability_zone_id
-    #   The custom AZ identifier. If this parameter is specified, information
-    #   from only the specific custom AZ is returned.
-    #
-    # @option params [Array<Types::Filter>] :filters
-    #   A filter that specifies one or more custom AZs to describe.
-    #
-    # @option params [Integer] :max_records
-    #   The maximum number of records to include in the response. If more
-    #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so you can retrieve
-    #   the remaining results.
-    #
-    #   Default: 100
-    #
-    #   Constraints: Minimum 20, maximum 100.
-    #
-    # @option params [String] :marker
-    #   An optional pagination token provided by a previous
-    #   `DescribeCustomAvailabilityZones` request. If this parameter is
-    #   specified, the response includes only records beyond the marker, up to
-    #   the value specified by `MaxRecords`.
-    #
-    # @return [Types::CustomAvailabilityZoneMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::CustomAvailabilityZoneMessage#marker #marker} => String
-    #   * {Types::CustomAvailabilityZoneMessage#custom_availability_zones #custom_availability_zones} => Array&lt;Types::CustomAvailabilityZone&gt;
-    #
-    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.describe_custom_availability_zones({
-    #     custom_availability_zone_id: "String",
-    #     filters: [
-    #       {
-    #         name: "String", # required
-    #         values: ["String"], # required
-    #       },
-    #     ],
-    #     max_records: 1,
-    #     marker: "String",
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.marker #=> String
-    #   resp.custom_availability_zones #=> Array
-    #   resp.custom_availability_zones[0].custom_availability_zone_id #=> String
-    #   resp.custom_availability_zones[0].custom_availability_zone_name #=> String
-    #   resp.custom_availability_zones[0].custom_availability_zone_status #=> String
-    #   resp.custom_availability_zones[0].vpn_details.vpn_id #=> String
-    #   resp.custom_availability_zones[0].vpn_details.vpn_tunnel_originator_ip #=> String
-    #   resp.custom_availability_zones[0].vpn_details.vpn_gateway_ip #=> String
-    #   resp.custom_availability_zones[0].vpn_details.vpn_psk #=> String
-    #   resp.custom_availability_zones[0].vpn_details.vpn_name #=> String
-    #   resp.custom_availability_zones[0].vpn_details.vpn_state #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeCustomAvailabilityZones AWS API Documentation
-    #
-    # @overload describe_custom_availability_zones(params = {})
-    # @param [Hash] params ({})
-    def describe_custom_availability_zones(params = {}, options = {})
-      req = build_request(:describe_custom_availability_zones, params)
-      req.send_request(options)
-    end
-
     # Returns information about backtracks for a DB cluster.
     #
     # For more information on Amazon Aurora, see [ What is Amazon
-    # Aurora?][1] in the *Amazon Aurora User Guide.*
+    # Aurora?][1] in the *Amazon Aurora User Guide*.
     #
     # <note markdown="1"> This action only applies to Aurora MySQL DB clusters.
     #
@@ -8328,16 +8244,11 @@ module Aws::RDS
     # group.
     #
     # For more information on Amazon Aurora, see [ What is Amazon
-    # Aurora?][1] in the *Amazon Aurora User Guide.*
+    # Aurora?][1] in the *Amazon Aurora User Guide*.
     #
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][2] in the *Amazon
-    # RDS User Guide.*
-    #
-    # <note markdown="1"> The Multi-AZ DB clusters feature is in preview and is subject to
-    # change.
-    #
-    #  </note>
+    # RDS User Guide*.
     #
     #
     #
@@ -8430,16 +8341,11 @@ module Aws::RDS
     # parameter group.
     #
     # For more information on Amazon Aurora, see [ What is Amazon
-    # Aurora?][1] in the *Amazon Aurora User Guide.*
+    # Aurora?][1] in the *Amazon Aurora User Guide*.
     #
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][2] in the *Amazon
-    # RDS User Guide.*
-    #
-    # <note markdown="1"> The Multi-AZ DB clusters feature is in preview and is subject to
-    # change.
-    #
-    #  </note>
+    # RDS User Guide*.
     #
     #
     #
@@ -8608,16 +8514,11 @@ module Aws::RDS
     # supports pagination.
     #
     # For more information on Amazon Aurora DB clusters, see [ What is
-    # Amazon Aurora?][1] in the *Amazon Aurora User Guide.*
+    # Amazon Aurora?][1] in the *Amazon Aurora User Guide*.
     #
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][2] in the *Amazon
-    # RDS User Guide.*
-    #
-    # <note markdown="1"> The Multi-AZ DB clusters feature is in preview and is subject to
-    # change.
-    #
-    #  </note>
+    # RDS User Guide*.
     #
     #
     #
@@ -8814,16 +8715,11 @@ module Aws::RDS
     # clusters. This API supports pagination.
     #
     # For more information on Amazon Aurora DB clusters, see [ What is
-    # Amazon Aurora?][1] in the *Amazon Aurora User Guide.*
+    # Amazon Aurora?][1] in the *Amazon Aurora User Guide*.
     #
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][2] in the *Amazon
-    # RDS User Guide.*
-    #
-    # <note markdown="1"> The Multi-AZ DB clusters feature is in preview and is subject to
-    # change.
-    #
-    #  </note>
+    # RDS User Guide*.
     #
     # This operation can also return information for Amazon Neptune DB
     # instances and Amazon DocumentDB instances.
@@ -8850,18 +8746,18 @@ module Aws::RDS
     #   Supported filters:
     #
     #   * `clone-group-id` - Accepts clone group identifiers. The results list
-    #     will only include information about the DB clusters associated with
+    #     only includes information about the DB clusters associated with
     #     these clone groups.
     #
     #   * `db-cluster-id` - Accepts DB cluster identifiers and DB cluster
-    #     Amazon Resource Names (ARNs). The results list will only include
+    #     Amazon Resource Names (ARNs). The results list only includes
     #     information about the DB clusters identified by these ARNs.
     #
     #   * `domain` - Accepts Active Directory directory IDs. The results list
-    #     will only include information about the DB clusters associated with
+    #     only includes information about the DB clusters associated with
     #     these domains.
     #
-    #   * `engine` - Accepts engine names. The results list will only include
+    #   * `engine` - Accepts engine names. The results list only includes
     #     information about the DB clusters for these engines.
     #
     # @option params [Integer] :max_records
@@ -9024,6 +8920,14 @@ module Aws::RDS
     #   resp.db_clusters[0].performance_insights_enabled #=> Boolean
     #   resp.db_clusters[0].performance_insights_kms_key_id #=> String
     #   resp.db_clusters[0].performance_insights_retention_period #=> Integer
+    #   resp.db_clusters[0].serverless_v2_scaling_configuration.min_capacity #=> Float
+    #   resp.db_clusters[0].serverless_v2_scaling_configuration.max_capacity #=> Float
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * db_cluster_available
+    #   * db_cluster_deleted
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusters AWS API Documentation
     #
@@ -9086,7 +8990,42 @@ module Aws::RDS
     #   ^
     #
     # @option params [Array<Types::Filter>] :filters
-    #   This parameter isn't currently supported.
+    #   A filter that specifies one or more DB engine versions to describe.
+    #
+    #   Supported filters:
+    #
+    #   * `db-parameter-group-family` - Accepts parameter groups family names.
+    #     The results list only includes information about the DB engine
+    #     versions for these parameter group families.
+    #
+    #   * `engine` - Accepts engine names. The results list only includes
+    #     information about the DB engine versions for these engines.
+    #
+    #   * `engine-mode` - Accepts DB engine modes. The results list only
+    #     includes information about the DB engine versions for these engine
+    #     modes. Valid DB engine modes are the following:
+    #
+    #     * `global`
+    #
+    #     * `multimaster`
+    #
+    #     * `parallelquery`
+    #
+    #     * `provisioned`
+    #
+    #     * `serverless`
+    #
+    #   * `engine-version` - Accepts engine versions. The results list only
+    #     includes information about the DB engine versions for these engine
+    #     versions.
+    #
+    #   * `status` - Accepts engine version statuses. The results list only
+    #     includes information about the DB engine versions for these
+    #     statuses. Valid statuses are the following:
+    #
+    #     * `available`
+    #
+    #     * `deprecated`
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more than
@@ -9207,6 +9146,7 @@ module Aws::RDS
     #   resp.db_engine_versions[0].valid_upgrade_target[0].supported_engine_modes[0] #=> String
     #   resp.db_engine_versions[0].valid_upgrade_target[0].supports_parallel_query #=> Boolean
     #   resp.db_engine_versions[0].valid_upgrade_target[0].supports_global_databases #=> Boolean
+    #   resp.db_engine_versions[0].valid_upgrade_target[0].supports_babelfish #=> Boolean
     #   resp.db_engine_versions[0].supported_timezones #=> Array
     #   resp.db_engine_versions[0].supported_timezones[0].timezone_name #=> String
     #   resp.db_engine_versions[0].exportable_log_types #=> Array
@@ -9229,6 +9169,7 @@ module Aws::RDS
     #   resp.db_engine_versions[0].tag_list #=> Array
     #   resp.db_engine_versions[0].tag_list[0].key #=> String
     #   resp.db_engine_versions[0].tag_list[0].value #=> String
+    #   resp.db_engine_versions[0].supports_babelfish #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBEngineVersions AWS API Documentation
     #
@@ -9393,12 +9334,12 @@ module Aws::RDS
     #   Supported filters:
     #
     #   * `db-cluster-id` - Accepts DB cluster identifiers and DB cluster
-    #     Amazon Resource Names (ARNs). The results list will only include
+    #     Amazon Resource Names (ARNs). The results list only includes
     #     information about the DB instances associated with the DB clusters
     #     identified by these ARNs.
     #
     #   * `db-instance-id` - Accepts DB instance identifiers and DB instance
-    #     Amazon Resource Names (ARNs). The results list will only include
+    #     Amazon Resource Names (ARNs). The results list only includes
     #     information about the DB instances identified by these ARNs.
     #
     #   * `dbi-resource-id` - Accepts DB instance resource identifiers. The
@@ -9406,10 +9347,10 @@ module Aws::RDS
     #     identified by these DB instance resource identifiers.
     #
     #   * `domain` - Accepts Active Directory directory IDs. The results list
-    #     will only include information about the DB instances associated with
+    #     only includes information about the DB instances associated with
     #     these domains.
     #
-    #   * `engine` - Accepts engine names. The results list will only include
+    #   * `engine` - Accepts engine names. The results list only includes
     #     information about the DB instances for these engines.
     #
     # @option params [Integer] :max_records
@@ -9500,6 +9441,8 @@ module Aws::RDS
     #   resp.db_instances[0].db_subnet_group.subnets[0].subnet_outpost.arn #=> String
     #   resp.db_instances[0].db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_instances[0].db_subnet_group.db_subnet_group_arn #=> String
+    #   resp.db_instances[0].db_subnet_group.supported_network_types #=> Array
+    #   resp.db_instances[0].db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instances[0].preferred_maintenance_window #=> String
     #   resp.db_instances[0].pending_modified_values.db_instance_class #=> String
     #   resp.db_instances[0].pending_modified_values.allocated_storage #=> Integer
@@ -9602,6 +9545,8 @@ module Aws::RDS
     #   resp.db_instances[0].resume_full_automation_mode_time #=> Time
     #   resp.db_instances[0].custom_iam_instance_profile #=> String
     #   resp.db_instances[0].backup_target #=> String
+    #   resp.db_instances[0].network_type #=> String
+    #   resp.db_instances[0].activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -10364,8 +10309,7 @@ module Aws::RDS
     #
     # @option params [String] :db_instance_identifier
     #   The ID of the DB instance to retrieve the list of DB snapshots for.
-    #   This parameter can't be used in conjunction with
-    #   `DBSnapshotIdentifier`. This parameter isn't case-sensitive.
+    #   This parameter isn't case-sensitive.
     #
     #   Constraints:
     #
@@ -10374,9 +10318,8 @@ module Aws::RDS
     #   ^
     #
     # @option params [String] :db_snapshot_identifier
-    #   A specific DB snapshot identifier to describe. This parameter can't
-    #   be used in conjunction with `DBInstanceIdentifier`. This value is
-    #   stored as a lowercase string.
+    #   A specific DB snapshot identifier to describe. This value is stored as
+    #   a lowercase string.
     #
     #   Constraints:
     #
@@ -10659,6 +10602,8 @@ module Aws::RDS
     #   resp.db_subnet_groups[0].subnets[0].subnet_outpost.arn #=> String
     #   resp.db_subnet_groups[0].subnets[0].subnet_status #=> String
     #   resp.db_subnet_groups[0].db_subnet_group_arn #=> String
+    #   resp.db_subnet_groups[0].supported_network_types #=> Array
+    #   resp.db_subnet_groups[0].supported_network_types[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBSubnetGroups AWS API Documentation
     #
@@ -10673,7 +10618,7 @@ module Aws::RDS
     # cluster database engine.
     #
     # For more information on Amazon Aurora, see [ What is Amazon
-    # Aurora?][1] in the *Amazon Aurora User Guide.*
+    # Aurora?][1] in the *Amazon Aurora User Guide*.
     #
     #
     #
@@ -10767,6 +10712,86 @@ module Aws::RDS
     #
     # @option params [required, String] :db_parameter_group_family
     #   The name of the DB parameter group family.
+    #
+    #   Valid Values:
+    #
+    #   * `aurora5.6`
+    #
+    #   * `aurora-mysql5.7`
+    #
+    #   * `aurora-mysql8.0`
+    #
+    #   * `aurora-postgresql10`
+    #
+    #   * `aurora-postgresql11`
+    #
+    #   * `aurora-postgresql12`
+    #
+    #   * `aurora-postgresql13`
+    #
+    #   * `mariadb10.2`
+    #
+    #   * `mariadb10.3`
+    #
+    #   * `mariadb10.4`
+    #
+    #   * `mariadb10.5`
+    #
+    #   * `mariadb10.6`
+    #
+    #   * `mysql5.7`
+    #
+    #   * `mysql8.0`
+    #
+    #   * `postgres10`
+    #
+    #   * `postgres11`
+    #
+    #   * `postgres12`
+    #
+    #   * `postgres13`
+    #
+    #   * `postgres14`
+    #
+    #   * `sqlserver-ee-11.0`
+    #
+    #   * `sqlserver-ee-12.0`
+    #
+    #   * `sqlserver-ee-13.0`
+    #
+    #   * `sqlserver-ee-14.0`
+    #
+    #   * `sqlserver-ee-15.0`
+    #
+    #   * `sqlserver-ex-11.0`
+    #
+    #   * `sqlserver-ex-12.0`
+    #
+    #   * `sqlserver-ex-13.0`
+    #
+    #   * `sqlserver-ex-14.0`
+    #
+    #   * `sqlserver-ex-15.0`
+    #
+    #   * `sqlserver-se-11.0`
+    #
+    #   * `sqlserver-se-12.0`
+    #
+    #   * `sqlserver-se-13.0`
+    #
+    #   * `sqlserver-se-14.0`
+    #
+    #   * `sqlserver-se-15.0`
+    #
+    #   * `sqlserver-web-11.0`
+    #
+    #   * `sqlserver-web-12.0`
+    #
+    #   * `sqlserver-web-13.0`
+    #
+    #   * `sqlserver-web-14.0`
+    #
+    #   * `sqlserver-web-15.0`
     #
     # @option params [Array<Types::Filter>] :filters
     #   This parameter isn't currently supported.
@@ -11014,9 +11039,18 @@ module Aws::RDS
     # snapshot, DB cluster snapshot group, or RDS Proxy can be obtained by
     # providing the name as a parameter.
     #
+    # For more information on working with events, see [Monitoring Amazon
+    # RDS events][1] in the *Amazon RDS User Guide* and [Monitoring Amazon
+    # Aurora events][2] in the *Amazon Aurora User Guide*.
+    #
     # <note markdown="1"> By default, RDS returns events that were generated in the past hour.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/working-with-events.html
+    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/working-with-events.html
     #
     # @option params [String] :source_identifier
     #   The identifier of the event source for which events are returned. If
@@ -11280,7 +11314,7 @@ module Aws::RDS
     # supports pagination.
     #
     # For more information on Amazon Aurora, see [ What is Amazon
-    # Aurora?][1] in the *Amazon Aurora User Guide.*
+    # Aurora?][1] in the *Amazon Aurora User Guide*.
     #
     # <note markdown="1"> This action only applies to Aurora DB clusters.
     #
@@ -11370,82 +11404,6 @@ module Aws::RDS
     # @param [Hash] params ({})
     def describe_global_clusters(params = {}, options = {})
       req = build_request(:describe_global_clusters, params)
-      req.send_request(options)
-    end
-
-    # Describes the available installation media for a DB engine that
-    # requires an on-premises customer provided license, such as Microsoft
-    # SQL Server.
-    #
-    # @option params [String] :installation_media_id
-    #   The installation medium ID.
-    #
-    # @option params [Array<Types::Filter>] :filters
-    #   A filter that specifies one or more installation media to describe.
-    #   Supported filters include the following:
-    #
-    #   * `custom-availability-zone-id` - Accepts custom Availability Zone
-    #     (AZ) identifiers. The results list includes information about only
-    #     the custom AZs identified by these identifiers.
-    #
-    #   * `engine` - Accepts database engines. The results list includes
-    #     information about only the database engines identified by these
-    #     identifiers.
-    #
-    #     For more information about the valid engines for installation media,
-    #     see ImportInstallationMedia.
-    #
-    # @option params [Integer] :max_records
-    #   An optional pagination token provided by a previous
-    #   DescribeInstallationMedia request. If this parameter is specified, the
-    #   response includes only records beyond the marker, up to the value
-    #   specified by `MaxRecords`.
-    #
-    # @option params [String] :marker
-    #   An optional pagination token provided by a previous request. If this
-    #   parameter is specified, the response includes only records beyond the
-    #   marker, up to the value specified by `MaxRecords`.
-    #
-    # @return [Types::InstallationMediaMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::InstallationMediaMessage#marker #marker} => String
-    #   * {Types::InstallationMediaMessage#installation_media #installation_media} => Array&lt;Types::InstallationMedia&gt;
-    #
-    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.describe_installation_media({
-    #     installation_media_id: "String",
-    #     filters: [
-    #       {
-    #         name: "String", # required
-    #         values: ["String"], # required
-    #       },
-    #     ],
-    #     max_records: 1,
-    #     marker: "String",
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.marker #=> String
-    #   resp.installation_media #=> Array
-    #   resp.installation_media[0].installation_media_id #=> String
-    #   resp.installation_media[0].custom_availability_zone_id #=> String
-    #   resp.installation_media[0].engine #=> String
-    #   resp.installation_media[0].engine_version #=> String
-    #   resp.installation_media[0].engine_installation_media_path #=> String
-    #   resp.installation_media[0].os_installation_media_path #=> String
-    #   resp.installation_media[0].status #=> String
-    #   resp.installation_media[0].failure_cause.message #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeInstallationMedia AWS API Documentation
-    #
-    # @overload describe_installation_media(params = {})
-    # @param [Hash] params ({})
-    def describe_installation_media(params = {}, options = {})
-      req = build_request(:describe_installation_media, params)
       req.send_request(options)
     end
 
@@ -11799,13 +11757,13 @@ module Aws::RDS
     #
     #   Default: 100
     #
-    #   Constraints: Minimum 20, maximum 100.
+    #   Constraints: Minimum 20, maximum 10000.
     #
     # @option params [String] :marker
     #   An optional pagination token provided by a previous
     #   DescribeOrderableDBInstanceOptions request. If this parameter is
     #   specified, the response includes only records beyond the marker, up to
-    #   the value specified by `MaxRecords` .
+    #   the value specified by `MaxRecords`.
     #
     # @return [Types::OrderableDBInstanceOptionsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11889,6 +11847,8 @@ module Aws::RDS
     #   resp.orderable_db_instance_options[0].supported_activity_stream_modes[0] #=> String
     #   resp.orderable_db_instance_options[0].supports_global_databases #=> Boolean
     #   resp.orderable_db_instance_options[0].supports_clusters #=> Boolean
+    #   resp.orderable_db_instance_options[0].supported_network_types #=> Array
+    #   resp.orderable_db_instance_options[0].supported_network_types[0] #=> String
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOrderableDBInstanceOptions AWS API Documentation
@@ -11913,13 +11873,12 @@ module Aws::RDS
     #   Supported filters:
     #
     #   * `db-cluster-id` - Accepts DB cluster identifiers and DB cluster
-    #     Amazon Resource Names (ARNs). The results list will only include
-    #     pending maintenance actions for the DB clusters identified by these
-    #     ARNs.
+    #     Amazon Resource Names (ARNs). The results list only includes pending
+    #     maintenance actions for the DB clusters identified by these ARNs.
     #
     #   * `db-instance-id` - Accepts DB instance identifiers and DB instance
-    #     ARNs. The results list will only include pending maintenance actions
-    #     for the DB instances identified by these ARNs.
+    #     ARNs. The results list only includes pending maintenance actions for
+    #     the DB instances identified by these ARNs.
     #
     # @option params [String] :marker
     #   An optional pagination token provided by a previous
@@ -12553,7 +12512,7 @@ module Aws::RDS
     #
     # An Amazon Aurora DB cluster automatically fails over to an Aurora
     # Replica, if one exists, when the primary DB instance fails. A Multi-AZ
-    # DB cluster automatically fails over to a readbable standby DB instance
+    # DB cluster automatically fails over to a readable standby DB instance
     # when the primary DB instance fails.
     #
     # To simulate a failure of a primary instance for testing, you can force
@@ -12563,16 +12522,11 @@ module Aws::RDS
     # complete.
     #
     # For more information on Amazon Aurora DB clusters, see [ What is
-    # Amazon Aurora?][1] in the *Amazon Aurora User Guide.*
+    # Amazon Aurora?][1] in the *Amazon Aurora User Guide*.
     #
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][2] in the *Amazon
-    # RDS User Guide.*
-    #
-    # <note markdown="1"> The Multi-AZ DB clusters feature is in preview and is subject to
-    # change.
-    #
-    #  </note>
+    # RDS User Guide*.
     #
     #
     #
@@ -12727,6 +12681,8 @@ module Aws::RDS
     #   resp.db_cluster.performance_insights_enabled #=> Boolean
     #   resp.db_cluster.performance_insights_kms_key_id #=> String
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
+    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverDBCluster AWS API Documentation
     #
@@ -12750,7 +12706,7 @@ module Aws::RDS
     #
     # For more information about failing over an Amazon Aurora global
     # database, see [Managed planned failover for Amazon Aurora global
-    # databases][1] in the *Amazon Aurora User Guide.*
+    # databases][1] in the *Amazon Aurora User Guide*.
     #
     # <note markdown="1"> This action applies to GlobalCluster (Aurora global databases) only.
     # Use this action only on healthy Aurora global databases with running
@@ -12824,100 +12780,6 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # Imports the installation media for a DB engine that requires an
-    # on-premises customer provided license, such as SQL Server.
-    #
-    # @option params [required, String] :custom_availability_zone_id
-    #   The identifier of the custom Availability Zone (AZ) to import the
-    #   installation media to.
-    #
-    # @option params [required, String] :engine
-    #   The name of the database engine to be used for this instance.
-    #
-    #   The list only includes supported DB engines that require an
-    #   on-premises customer provided license.
-    #
-    #   Valid Values:
-    #
-    #   * `sqlserver-ee`
-    #
-    #   * `sqlserver-se`
-    #
-    #   * `sqlserver-ex`
-    #
-    #   * `sqlserver-web`
-    #
-    # @option params [required, String] :engine_version
-    #   The version number of the database engine to use.
-    #
-    #   For a list of valid engine versions, call DescribeDBEngineVersions.
-    #
-    #   The following are the database engines and links to information about
-    #   the major and minor versions. The list only includes DB engines that
-    #   require an on-premises customer provided license.
-    #
-    #   **Microsoft SQL Server**
-    #
-    #   See [ Microsoft SQL Server Versions on Amazon RDS][1] in the *Amazon
-    #   RDS User Guide.*
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.VersionSupport
-    #
-    # @option params [required, String] :engine_installation_media_path
-    #   The path to the installation medium for the specified DB engine.
-    #
-    #   Example:
-    #   `SQLServerISO/en_sql_server_2016_enterprise_x64_dvd_8701793.iso`
-    #
-    # @option params [required, String] :os_installation_media_path
-    #   The path to the installation medium for the operating system
-    #   associated with the specified DB engine.
-    #
-    #   Example: `WindowsISO/en_windows_server_2016_x64_dvd_9327751.iso`
-    #
-    # @return [Types::InstallationMedia] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::InstallationMedia#installation_media_id #installation_media_id} => String
-    #   * {Types::InstallationMedia#custom_availability_zone_id #custom_availability_zone_id} => String
-    #   * {Types::InstallationMedia#engine #engine} => String
-    #   * {Types::InstallationMedia#engine_version #engine_version} => String
-    #   * {Types::InstallationMedia#engine_installation_media_path #engine_installation_media_path} => String
-    #   * {Types::InstallationMedia#os_installation_media_path #os_installation_media_path} => String
-    #   * {Types::InstallationMedia#status #status} => String
-    #   * {Types::InstallationMedia#failure_cause #failure_cause} => Types::InstallationMediaFailureCause
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.import_installation_media({
-    #     custom_availability_zone_id: "String", # required
-    #     engine: "String", # required
-    #     engine_version: "String", # required
-    #     engine_installation_media_path: "String", # required
-    #     os_installation_media_path: "String", # required
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.installation_media_id #=> String
-    #   resp.custom_availability_zone_id #=> String
-    #   resp.engine #=> String
-    #   resp.engine_version #=> String
-    #   resp.engine_installation_media_path #=> String
-    #   resp.os_installation_media_path #=> String
-    #   resp.status #=> String
-    #   resp.failure_cause.message #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ImportInstallationMedia AWS API Documentation
-    #
-    # @overload import_installation_media(params = {})
-    # @param [Hash] params ({})
-    def import_installation_media(params = {}, options = {})
-      req = build_request(:import_installation_media, params)
-      req.send_request(options)
-    end
-
     # Lists all tags on an Amazon RDS resource.
     #
     # For an overview on tagging an Amazon RDS resource, see [Tagging Amazon
@@ -12984,9 +12846,66 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Changes the audit policy state of a database activity stream to either
+    # locked (default) or unlocked. A locked policy is read-only, whereas an
+    # unlocked policy is read/write. If your activity stream is started and
+    # locked, you can unlock it, customize your audit policy, and then lock
+    # your activity stream. Restarting the activity stream isn't required.
+    # For more information, see [ Modifying a database activity stream][1]
+    # in the *Amazon RDS User Guide*.
+    #
+    # This operation is supported for RDS for Oracle only.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/DBActivityStreams.Modifying.html
+    #
+    # @option params [String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the RDS for Oracle DB instance, for
+    #   example, `arn:aws:rds:us-east-1:12345667890:instance:my-orcl-db`.
+    #
+    # @option params [String] :audit_policy_state
+    #   The audit policy state. When a policy is unlocked, it is read/write.
+    #   When it is locked, it is read-only. You can edit your audit policy
+    #   only when the activity stream is unlocked or stopped.
+    #
+    # @return [Types::ModifyActivityStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyActivityStreamResponse#kms_key_id #kms_key_id} => String
+    #   * {Types::ModifyActivityStreamResponse#kinesis_stream_name #kinesis_stream_name} => String
+    #   * {Types::ModifyActivityStreamResponse#status #status} => String
+    #   * {Types::ModifyActivityStreamResponse#mode #mode} => String
+    #   * {Types::ModifyActivityStreamResponse#engine_native_audit_fields_included #engine_native_audit_fields_included} => Boolean
+    #   * {Types::ModifyActivityStreamResponse#policy_status #policy_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_activity_stream({
+    #     resource_arn: "String",
+    #     audit_policy_state: "locked", # accepts locked, unlocked
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.kms_key_id #=> String
+    #   resp.kinesis_stream_name #=> String
+    #   resp.status #=> String, one of "stopped", "starting", "started", "stopping"
+    #   resp.mode #=> String, one of "sync", "async"
+    #   resp.engine_native_audit_fields_included #=> Boolean
+    #   resp.policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyActivityStream AWS API Documentation
+    #
+    # @overload modify_activity_stream(params = {})
+    # @param [Hash] params ({})
+    def modify_activity_stream(params = {}, options = {})
+      req = build_request(:modify_activity_stream, params)
+      req.send_request(options)
+    end
+
     # Override the system-default Secure Sockets Layer/Transport Layer
-    # Security (SSL/TLS) certificate for Amazon RDS for new DB instances
-    # temporarily, or remove the override.
+    # Security (SSL/TLS) certificate for Amazon RDS for new DB instances, or
+    # remove the override.
     #
     # By using this operation, you can specify an RDS-approved SSL/TLS
     # certificate for new DB instances that is different from the default
@@ -13063,29 +12982,29 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # Set the capacity of an Aurora Serverless DB cluster to a specific
+    # Set the capacity of an Aurora Serverless v1 DB cluster to a specific
     # value.
     #
-    # Aurora Serverless scales seamlessly based on the workload on the DB
+    # Aurora Serverless v1 scales seamlessly based on the workload on the DB
     # cluster. In some cases, the capacity might not scale fast enough to
     # meet a sudden change in workload, such as a large number of new
     # transactions. Call `ModifyCurrentDBClusterCapacity` to set the
     # capacity explicitly.
     #
-    # After this call sets the DB cluster capacity, Aurora Serverless can
+    # After this call sets the DB cluster capacity, Aurora Serverless v1 can
     # automatically scale the DB cluster based on the cooldown period for
     # scaling up and the cooldown period for scaling down.
     #
-    # For more information about Aurora Serverless, see [Using Amazon Aurora
-    # Serverless][1] in the *Amazon Aurora User Guide*.
+    # For more information about Aurora Serverless v1, see [Using Amazon
+    # Aurora Serverless v1][1] in the *Amazon Aurora User Guide*.
     #
     # If you call `ModifyCurrentDBClusterCapacity` with the default
-    # `TimeoutAction`, connections that prevent Aurora Serverless from
+    # `TimeoutAction`, connections that prevent Aurora Serverless v1 from
     # finding a scaling point might be dropped. For more information about
-    # scaling points, see [ Autoscaling for Aurora Serverless][2] in the
+    # scaling points, see [ Autoscaling for Aurora Serverless v1][2] in the
     # *Amazon Aurora User Guide*.
     #
-    # <note markdown="1"> This action only applies to Aurora Serverless DB clusters.
+    # <note markdown="1"> This action only applies to Aurora Serverless v1 DB clusters.
     #
     #  </note>
     #
@@ -13107,8 +13026,8 @@ module Aws::RDS
     # @option params [Integer] :capacity
     #   The DB cluster capacity.
     #
-    #   When you change the capacity of a paused Aurora Serverless DB cluster,
-    #   it automatically resumes.
+    #   When you change the capacity of a paused Aurora Serverless v1 DB
+    #   cluster, it automatically resumes.
     #
     #   Constraints:
     #
@@ -13119,9 +13038,9 @@ module Aws::RDS
     #     `16`, `32`, `64`, `192`, and `384`.
     #
     # @option params [Integer] :seconds_before_timeout
-    #   The amount of time, in seconds, that Aurora Serverless tries to find a
-    #   scaling point to perform seamless scaling before enforcing the timeout
-    #   action. The default is 300.
+    #   The amount of time, in seconds, that Aurora Serverless v1 tries to
+    #   find a scaling point to perform seamless scaling before enforcing the
+    #   timeout action. The default is 300.
     #
     #   Specify a value between 10 and 600 seconds.
     #
@@ -13250,6 +13169,7 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#kms_key_id #kms_key_id} => String
     #   * {Types::DBEngineVersion#create_time #create_time} => Time
     #   * {Types::DBEngineVersion#tag_list #tag_list} => Array&lt;Types::Tag&gt;
+    #   * {Types::DBEngineVersion#supports_babelfish #supports_babelfish} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -13285,6 +13205,7 @@ module Aws::RDS
     #   resp.valid_upgrade_target[0].supported_engine_modes[0] #=> String
     #   resp.valid_upgrade_target[0].supports_parallel_query #=> Boolean
     #   resp.valid_upgrade_target[0].supports_global_databases #=> Boolean
+    #   resp.valid_upgrade_target[0].supports_babelfish #=> Boolean
     #   resp.supported_timezones #=> Array
     #   resp.supported_timezones[0].timezone_name #=> String
     #   resp.exportable_log_types #=> Array
@@ -13307,6 +13228,7 @@ module Aws::RDS
     #   resp.tag_list #=> Array
     #   resp.tag_list[0].key #=> String
     #   resp.tag_list[0].value #=> String
+    #   resp.supports_babelfish #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyCustomDBEngineVersion AWS API Documentation
     #
@@ -13322,16 +13244,11 @@ module Aws::RDS
     # parameters and the new values in the request.
     #
     # For more information on Amazon Aurora DB clusters, see [ What is
-    # Amazon Aurora?][1] in the *Amazon Aurora User Guide.*
+    # Amazon Aurora?][1] in the *Amazon Aurora User Guide*.
     #
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][2] in the *Amazon
-    # RDS User Guide.*
-    #
-    # <note markdown="1"> The Multi-AZ DB clusters feature is in preview and is subject to
-    # change.
-    #
-    #  </note>
+    # RDS User Guide*.
     #
     #
     #
@@ -13439,7 +13356,7 @@ module Aws::RDS
     #   The default is a 30-minute window selected at random from an 8-hour
     #   block of time for each Amazon Web Services Region. To view the time
     #   blocks available, see [ Backup window][1] in the *Amazon Aurora User
-    #   Guide.*
+    #   Guide*.
     #
     #   Constraints:
     #
@@ -13467,7 +13384,7 @@ module Aws::RDS
     #   block of time for each Amazon Web Services Region, occurring on a
     #   random day of the week. To see the time blocks available, see [
     #   Adjusting the Preferred DB Cluster Maintenance Window][1] in the
-    #   *Amazon Aurora User Guide.*
+    #   *Amazon Aurora User Guide*.
     #
     #   Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
     #
@@ -13485,7 +13402,7 @@ module Aws::RDS
     #   accounts. By default, mapping isn't enabled.
     #
     #   For more information, see [ IAM Database Authentication][1] in the
-    #   *Amazon Aurora User Guide.*
+    #   *Amazon Aurora User Guide*.
     #
     #   Valid for: Aurora DB clusters only
     #
@@ -13510,9 +13427,39 @@ module Aws::RDS
     #
     # @option params [Types::CloudwatchLogsExportConfiguration] :cloudwatch_logs_export_configuration
     #   The configuration setting for the log types to be enabled for export
-    #   to CloudWatch Logs for a specific DB cluster.
+    #   to CloudWatch Logs for a specific DB cluster. The values in the list
+    #   depend on the DB engine being used.
     #
-    #   Valid for: Aurora DB clusters only
+    #   **RDS for MySQL**
+    #
+    #   Possible values are `error`, `general`, and `slowquery`.
+    #
+    #   **RDS for PostgreSQL**
+    #
+    #   Possible values are `postgresql` and `upgrade`.
+    #
+    #   **Aurora MySQL**
+    #
+    #   Possible values are `audit`, `error`, `general`, and `slowquery`.
+    #
+    #   **Aurora PostgreSQL**
+    #
+    #   Possible value is `postgresql`.
+    #
+    #   For more information about exporting CloudWatch Logs for Amazon RDS,
+    #   see [ Publishing Database Logs to Amazon CloudWatch Logs][1] in the
+    #   *Amazon RDS User Guide*.
+    #
+    #   For more information about exporting CloudWatch Logs for Amazon
+    #   Aurora, see [Publishing Database Logs to Amazon CloudWatch Logs][2] in
+    #   the *Amazon Aurora User Guide*.
+    #
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #
     # @option params [String] :engine_version
     #   The version number of the database engine to which you want to
@@ -13567,8 +13514,8 @@ module Aws::RDS
     #
     #   <note markdown="1"> When you apply a parameter group using the
     #   `DBInstanceParameterGroupName` parameter, the DB cluster isn't
-    #   rebooted automatically. Also, parameter changes aren't applied during
-    #   the next maintenance window but instead are applied immediately.
+    #   rebooted automatically. Also, parameter changes are applied
+    #   immediately rather than during the next maintenance window.
     #
     #    </note>
     #
@@ -13579,8 +13526,9 @@ module Aws::RDS
     #   * The DB parameter group must be in the same DB parameter group family
     #     as this DB cluster.
     #
-    #   * The `DBInstanceParameterGroupName` parameter is only valid in
-    #     combination with the `AllowMajorVersionUpgrade` parameter.
+    #   * The `DBInstanceParameterGroupName` parameter is valid in combination
+    #     with the `AllowMajorVersionUpgrade` parameter for a major version
+    #     upgrade only.
     #
     #   Valid for: Aurora DB clusters only
     #
@@ -13619,16 +13567,16 @@ module Aws::RDS
     #
     # @option params [Boolean] :enable_http_endpoint
     #   A value that indicates whether to enable the HTTP endpoint for an
-    #   Aurora Serverless DB cluster. By default, the HTTP endpoint is
+    #   Aurora Serverless v1 DB cluster. By default, the HTTP endpoint is
     #   disabled.
     #
     #   When enabled, the HTTP endpoint provides a connectionless web service
-    #   API for running SQL queries on the Aurora Serverless DB cluster. You
-    #   can also query your database from inside the RDS console with the
+    #   API for running SQL queries on the Aurora Serverless v1 DB cluster.
+    #   You can also query your database from inside the RDS console with the
     #   query editor.
     #
-    #   For more information, see [Using the Data API for Aurora
-    #   Serverless][1] in the *Amazon Aurora User Guide*.
+    #   For more information, see [Using the Data API for Aurora Serverless
+    #   v1][1] in the *Amazon Aurora User Guide*.
     #
     #   Valid for: Aurora DB clusters only
     #
@@ -13640,7 +13588,7 @@ module Aws::RDS
     #   A value that indicates whether to copy all tags from the DB cluster to
     #   snapshots of the DB cluster. The default is not to copy them.
     #
-    #   Valid for: Aurora DB clusters only
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
     # @option params [Boolean] :enable_global_write_forwarding
     #   A value that indicates whether to enable this DB cluster to forward
@@ -13666,7 +13614,7 @@ module Aws::RDS
     #   engines.
     #
     #   For the full list of DB instance classes and availability for your
-    #   engine, see [DB Instance Class][1] in the *Amazon RDS User Guide.*
+    #   engine, see [ DB Instance Class][1] in the *Amazon RDS User Guide*.
     #
     #   Valid for: Multi-AZ DB clusters only
     #
@@ -13774,10 +13722,40 @@ module Aws::RDS
     #   Valid for: Multi-AZ DB clusters only
     #
     # @option params [Integer] :performance_insights_retention_period
-    #   The amount of time, in days, to retain Performance Insights data.
-    #   Valid values are 7 or 731 (2 years).
+    #   The number of days to retain Performance Insights data. The default is
+    #   7 days. The following values are valid:
+    #
+    #   * 7
+    #
+    #   * *month* * 31, where *month* is a number of months from 1-23
+    #
+    #   * 731
+    #
+    #   For example, the following values are valid:
+    #
+    #   * 93 (3 months * 31)
+    #
+    #   * 341 (11 months * 31)
+    #
+    #   * 589 (19 months * 31)
+    #
+    #   * 731
+    #
+    #   If you specify a retention period such as 94, which isn't a valid
+    #   value, RDS issues an error.
     #
     #   Valid for: Multi-AZ DB clusters only
+    #
+    # @option params [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
+    #   Contains the scaling configuration of an Aurora Serverless v2 DB
+    #   cluster.
+    #
+    #   For more information, see [Using Amazon Aurora Serverless v2][1] in
+    #   the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
     #
     # @return [Types::ModifyDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -13850,6 +13828,10 @@ module Aws::RDS
     #     enable_performance_insights: false,
     #     performance_insights_kms_key_id: "String",
     #     performance_insights_retention_period: 1,
+    #     serverless_v2_scaling_configuration: {
+    #       min_capacity: 1.0,
+    #       max_capacity: 1.0,
+    #     },
     #   })
     #
     # @example Response structure
@@ -13954,6 +13936,8 @@ module Aws::RDS
     #   resp.db_cluster.performance_insights_enabled #=> Boolean
     #   resp.db_cluster.performance_insights_kms_key_id #=> String
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
+    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBCluster AWS API Documentation
     #
@@ -14046,26 +14030,21 @@ module Aws::RDS
     # database for a DB cluster, such as the character set for the default
     # database defined by the `character_set_database` parameter. You can
     # use the *Parameter Groups* option of the [Amazon RDS console][1] or
-    # the `DescribeDBClusterParameters` action to verify that your DB
+    # the `DescribeDBClusterParameters` operation to verify that your DB
     # cluster parameter group has been created or modified.
     #
     #  If the modified DB cluster parameter group is used by an Aurora
-    # Serverless cluster, Aurora applies the update immediately. The cluster
-    # restart might interrupt your workload. In that case, your application
-    # must reopen any connections and retry any transactions that were
-    # active when the parameter changes took effect.
+    # Serverless v1 cluster, Aurora applies the update immediately. The
+    # cluster restart might interrupt your workload. In that case, your
+    # application must reopen any connections and retry any transactions
+    # that were active when the parameter changes took effect.
     #
     # For more information on Amazon Aurora DB clusters, see [ What is
-    # Amazon Aurora?][2] in the *Amazon Aurora User Guide.*
+    # Amazon Aurora?][2] in the *Amazon Aurora User Guide*.
     #
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][3] in the *Amazon
     # RDS User Guide.*
-    #
-    # <note markdown="1"> The Multi-AZ DB clusters feature is in preview and is subject to
-    # change.
-    #
-    #  </note>
     #
     #
     #
@@ -14178,7 +14157,7 @@ module Aws::RDS
     # To view which Amazon Web Services accounts have access to copy or
     # restore a manual DB cluster snapshot, or whether a manual DB cluster
     # snapshot is public or private, use the
-    # DescribeDBClusterSnapshotAttributes API action. The accounts are
+    # DescribeDBClusterSnapshotAttributes API operation. The accounts are
     # returned as values for the `restore` attribute.
     #
     # @option params [required, String] :db_cluster_snapshot_identifier
@@ -14192,7 +14171,7 @@ module Aws::RDS
     #   or restore a manual DB cluster snapshot, set this value to `restore`.
     #
     #   <note markdown="1"> To view the list of attributes available to modify, use the
-    #   DescribeDBClusterSnapshotAttributes API action.
+    #   DescribeDBClusterSnapshotAttributes API operation.
     #
     #    </note>
     #
@@ -14304,10 +14283,11 @@ module Aws::RDS
     #
     # @option params [String] :db_instance_class
     #   The new compute and memory capacity of the DB instance, for example
-    #   db.m4.large. Not all DB instance classes are available in all Amazon
+    #   db.m5.large. Not all DB instance classes are available in all Amazon
     #   Web Services Regions, or for all database engines. For the full list
     #   of DB instance classes, and availability for your engine, see [DB
-    #   Instance Class][1] in the *Amazon RDS User Guide*.
+    #   instance classes][1] in the *Amazon RDS User Guide* or [Aurora DB
+    #   instance classes][2] in the *Amazon Aurora User Guide*.
     #
     #   If you modify the DB instance class, an outage occurs during the
     #   change. The change is applied during the next maintenance window,
@@ -14320,6 +14300,7 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.DBInstanceClass.html
     #
     # @option params [String] :db_subnet_group_name
     #   The new DB subnet group for the DB instance. You can use this
@@ -14431,7 +14412,7 @@ module Aws::RDS
     #
     #   Constraints: Must contain from 8 to 128 characters.
     #
-    #   <note markdown="1"> Amazon RDS API actions never return the password, so this action
+    #   <note markdown="1"> Amazon RDS API operations never return the password, so this action
     #   provides a way to regain access to a primary instance user if the
     #   password is lost. This includes restoring privileges that might have
     #   been accidentally revoked.
@@ -14483,8 +14464,8 @@ module Aws::RDS
     #   Constraints:
     #
     #   * It must be a value from 0 to 35. It can't be set to 0 if the DB
-    #     instance is a source to read replicas. It can't be set to 0 or 35
-    #     for an RDS Custom for Oracle DB instance.
+    #     instance is a source to read replicas. It can't be set to 0 for an
+    #     RDS Custom for Oracle DB instance.
     #
     #   * It can be specified for a MySQL read replica only if the source is
     #     running MySQL 5.6 or later.
@@ -14896,7 +14877,7 @@ module Aws::RDS
     #   DB instance.
     #
     #   For more information, see [Using Amazon Performance Insights][1] in
-    #   the *Amazon Relational Database Service User Guide*.
+    #   the *Amazon RDS User Guide*.
     #
     #   This setting doesn't apply to RDS Custom.
     #
@@ -14919,8 +14900,27 @@ module Aws::RDS
     #   This setting doesn't apply to RDS Custom.
     #
     # @option params [Integer] :performance_insights_retention_period
-    #   The amount of time, in days, to retain Performance Insights data.
-    #   Valid values are 7 or 731 (2 years).
+    #   The number of days to retain Performance Insights data. The default is
+    #   7 days. The following values are valid:
+    #
+    #   * 7
+    #
+    #   * *month* * 31, where *month* is a number of months from 1-23
+    #
+    #   * 731
+    #
+    #   For example, the following values are valid:
+    #
+    #   * 93 (3 months * 31)
+    #
+    #   * 341 (11 months * 31)
+    #
+    #   * 589 (19 months * 31)
+    #
+    #   * 731
+    #
+    #   If you specify a retention period such as 94, which isn't a valid
+    #   value, RDS issues an error.
     #
     #   This setting doesn't apply to RDS Custom.
     #
@@ -14991,7 +14991,7 @@ module Aws::RDS
     #
     #   * For more information about rotating your SSL/TLS certificate for
     #     Aurora DB engines, see [ Rotating Your SSL/TLS Certificate][2] in
-    #     the *Amazon Aurora User Guide.*
+    #     the *Amazon Aurora User Guide*.
     #
     #   This setting doesn't apply to RDS Custom.
     #
@@ -15059,6 +15059,26 @@ module Aws::RDS
     #   The number of minutes to pause the automation. When the time period
     #   ends, RDS Custom resumes full automation. The minimum value is `60`
     #   (default). The maximum value is `1,440`.
+    #
+    # @option params [String] :network_type
+    #   The network type of the DB instance.
+    #
+    #   Valid values:
+    #
+    #   * `IPV4`
+    #
+    #   * `DUAL`
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the DB instance. A `DBSubnetGroup` can support only the IPv4 protocol
+    #   or the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [ Working with a DB instance in a VPC][1] in
+    #   the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     #
     # @return [Types::ModifyDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -15144,6 +15164,7 @@ module Aws::RDS
     #     aws_backup_recovery_point_arn: "AwsBackupRecoveryPointArn",
     #     automation_mode: "full", # accepts full, all-paused
     #     resume_full_automation_mode_minutes: 1,
+    #     network_type: "String",
     #   })
     #
     # @example Response structure
@@ -15182,6 +15203,8 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_outpost.arn #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
+    #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
+    #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
@@ -15284,6 +15307,8 @@ module Aws::RDS
     #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.backup_target #=> String
+    #   resp.db_instance.network_type #=> String
+    #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstance AWS API Documentation
     #
@@ -15572,10 +15597,10 @@ module Aws::RDS
     # Modifies the properties of a `DBProxyTargetGroup`.
     #
     # @option params [required, String] :target_group_name
-    #   The name of the new target group to assign to the proxy.
+    #   The name of the target group to modify.
     #
     # @option params [required, String] :db_proxy_name
-    #   The name of the new proxy to which to assign the target group.
+    #   The name of the proxy.
     #
     # @option params [Types::ConnectionPoolConfiguration] :connection_pool_config
     #   The settings that determine the size and behavior of the connection
@@ -15763,7 +15788,7 @@ module Aws::RDS
     #
     # To view which Amazon Web Services accounts have access to copy or
     # restore a manual DB snapshot, or whether a manual DB snapshot public
-    # or private, use the DescribeDBSnapshotAttributes API action. The
+    # or private, use the DescribeDBSnapshotAttributes API operation. The
     # accounts are returned as values for the `restore` attribute.
     #
     # @option params [required, String] :db_snapshot_identifier
@@ -15776,7 +15801,7 @@ module Aws::RDS
     #   or restore a manual DB snapshot, set this value to `restore`.
     #
     #   <note markdown="1"> To view the list of attributes available to modify, use the
-    #   DescribeDBSnapshotAttributes API action.
+    #   DescribeDBSnapshotAttributes API operation.
     #
     #    </note>
     #
@@ -15914,6 +15939,8 @@ module Aws::RDS
     #   resp.db_subnet_group.subnets[0].subnet_outpost.arn #=> String
     #   resp.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_subnet_group.db_subnet_group_arn #=> String
+    #   resp.db_subnet_group.supported_network_types #=> Array
+    #   resp.db_subnet_group.supported_network_types[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSubnetGroup AWS API Documentation
     #
@@ -16032,7 +16059,7 @@ module Aws::RDS
     # one or more database configuration parameters by specifying these
     # parameters and the new values in the request. For more information on
     # Amazon Aurora, see [ What is Amazon Aurora?][1] in the *Amazon Aurora
-    # User Guide.*
+    # User Guide*.
     #
     # <note markdown="1"> This action only applies to Aurora DB clusters.
     #
@@ -16406,6 +16433,8 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_outpost.arn #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
+    #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
+    #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
@@ -16508,6 +16537,8 @@ module Aws::RDS
     #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.backup_target #=> String
+    #   resp.db_instance.network_type #=> String
+    #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplica AWS API Documentation
     #
@@ -16644,6 +16675,8 @@ module Aws::RDS
     #   resp.db_cluster.performance_insights_enabled #=> Boolean
     #   resp.db_cluster.performance_insights_kms_key_id #=> String
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
+    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplicaDBCluster AWS API Documentation
     #
@@ -16752,8 +16785,7 @@ module Aws::RDS
     # a DB cluster results in a momentary outage, during which the DB
     # cluster status is set to rebooting.
     #
-    # Use this operation only for a non-Aurora Multi-AZ DB cluster. The
-    # Multi-AZ DB clusters feature is in preview and is subject to change.
+    # Use this operation only for a non-Aurora Multi-AZ DB cluster.
     #
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][1] in the *Amazon
@@ -16885,6 +16917,8 @@ module Aws::RDS
     #   resp.db_cluster.performance_insights_enabled #=> Boolean
     #   resp.db_cluster.performance_insights_kms_key_id #=> String
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
+    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBCluster AWS API Documentation
     #
@@ -16908,6 +16942,9 @@ module Aws::RDS
     # in the *Amazon RDS User Guide.*
     #
     # This command doesn't apply to RDS Custom.
+    #
+    # If your DB instance is part of a Multi-AZ DB cluster, you can reboot
+    # the DB cluster with the `RebootDBCluster` operation.
     #
     #
     #
@@ -16993,6 +17030,8 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_outpost.arn #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
+    #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
+    #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
@@ -17095,6 +17134,8 @@ module Aws::RDS
     #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.backup_target #=> String
+    #   resp.db_instance.network_type #=> String
+    #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBInstance AWS API Documentation
     #
@@ -17219,16 +17260,11 @@ module Aws::RDS
     # Management (IAM) role from a DB cluster.
     #
     # For more information on Amazon Aurora DB clusters, see [ What is
-    # Amazon Aurora?][1] in the *Amazon Aurora User Guide.*
+    # Amazon Aurora?][1] in the *Amazon Aurora User Guide*.
     #
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][2] in the *Amazon
     # RDS User Guide.*
-    #
-    # <note markdown="1"> The Multi-AZ DB clusters feature is in preview and is subject to
-    # change.
-    #
-    #  </note>
     #
     #
     #
@@ -17430,16 +17466,11 @@ module Aws::RDS
     # cluster that you want the updated static parameter to apply to.
     #
     # For more information on Amazon Aurora DB clusters, see [ What is
-    # Amazon Aurora?][1] in the *Amazon Aurora User Guide.*
+    # Amazon Aurora?][1] in the *Amazon Aurora User Guide*.
     #
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][2] in the *Amazon
     # RDS User Guide.*
-    #
-    # <note markdown="1"> The Multi-AZ DB clusters feature is in preview and is subject to
-    # change.
-    #
-    #  </note>
     #
     #
     #
@@ -17632,7 +17663,7 @@ module Aws::RDS
     #  </note>
     #
     # For more information on Amazon Aurora, see [ What is Amazon
-    # Aurora?][2] in the *Amazon Aurora User Guide.*
+    # Aurora?][2] in the *Amazon Aurora User Guide*.
     #
     # <note markdown="1"> This action only applies to Aurora DB clusters. The source DB engine
     # must be MySQL.
@@ -17708,9 +17739,9 @@ module Aws::RDS
     # @option params [required, String] :engine
     #   The name of the database engine to be used for this DB cluster.
     #
-    #   Valid Values: `aurora` (for MySQL 5.6-compatible Aurora),
+    #   Valid Values: `aurora` (for MySQL 5.6-compatible Aurora) and
     #   `aurora-mysql` (for MySQL 5.7-compatible and MySQL 8.0-compatible
-    #   Aurora), and `aurora-postgresql`
+    #   Aurora)
     #
     # @option params [String] :engine_version
     #   The version number of the database engine to use.
@@ -17728,20 +17759,10 @@ module Aws::RDS
     #   `aws rds describe-db-engine-versions --engine aurora-mysql --query
     #   "DBEngineVersions[].EngineVersion"`
     #
-    #   To list all of the available engine versions for `aurora-postgresql`,
-    #   use the following command:
-    #
-    #   `aws rds describe-db-engine-versions --engine aurora-postgresql
-    #   --query "DBEngineVersions[].EngineVersion"`
-    #
     #   **Aurora MySQL**
     #
-    #   Example: `5.6.10a`, `5.6.mysql_aurora.1.19.2`, `5.7.12`,
-    #   `5.7.mysql_aurora.2.04.5`, `8.0.mysql_aurora.3.01.0`
-    #
-    #   **Aurora PostgreSQL**
-    #
-    #   Example: `9.6.3`, `10.7`
+    #   Example: `5.6.10a`, `5.6.mysql_aurora.1.19.2`,
+    #   `5.7.mysql_aurora.2.07.1`, `8.0.mysql_aurora.3.02.0`
     #
     # @option params [Integer] :port
     #   The port number on which the instances in the restored DB cluster
@@ -17782,7 +17803,7 @@ module Aws::RDS
     #   The default is a 30-minute window selected at random from an 8-hour
     #   block of time for each Amazon Web Services Region. To view the time
     #   blocks available, see [ Backup window][1] in the *Amazon Aurora User
-    #   Guide.*
+    #   Guide*.
     #
     #   Constraints:
     #
@@ -17808,7 +17829,7 @@ module Aws::RDS
     #   block of time for each Amazon Web Services Region, occurring on a
     #   random day of the week. To see the time blocks available, see [
     #   Adjusting the Preferred Maintenance Window][1] in the *Amazon Aurora
-    #   User Guide.*
+    #   User Guide*.
     #
     #   Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
     #
@@ -17850,7 +17871,7 @@ module Aws::RDS
     #   accounts. By default, mapping isn't enabled.
     #
     #   For more information, see [ IAM Database Authentication][1] in the
-    #   *Amazon Aurora User Guide.*
+    #   *Amazon Aurora User Guide*.
     #
     #
     #
@@ -17904,8 +17925,19 @@ module Aws::RDS
     # @option params [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of logs that the restored DB cluster is to export to
     #   CloudWatch Logs. The values in the list depend on the DB engine being
-    #   used. For more information, see [Publishing Database Logs to Amazon
-    #   CloudWatch Logs][1] in the *Amazon Aurora User Guide*.
+    #   used.
+    #
+    #   **Aurora MySQL**
+    #
+    #   Possible values are `audit`, `error`, `general`, and `slowquery`.
+    #
+    #   **Aurora PostgreSQL**
+    #
+    #   Possible value is `postgresql`.
+    #
+    #   For more information about exporting CloudWatch Logs for Amazon
+    #   Aurora, see [Publishing Database Logs to Amazon CloudWatch Logs][1] in
+    #   the *Amazon Aurora User Guide*.
     #
     #
     #
@@ -17937,6 +17969,17 @@ module Aws::RDS
     # @option params [String] :domain_iam_role_name
     #   Specify the name of the IAM role to be used when making API calls to
     #   the Directory Service.
+    #
+    # @option params [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
+    #   Contains the scaling configuration of an Aurora Serverless v2 DB
+    #   cluster.
+    #
+    #   For more information, see [Using Amazon Aurora Serverless v2][1] in
+    #   the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
     #
     # @return [Types::RestoreDBClusterFromS3Result] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -17981,6 +18024,10 @@ module Aws::RDS
     #     copy_tags_to_snapshot: false,
     #     domain: "String",
     #     domain_iam_role_name: "String",
+    #     serverless_v2_scaling_configuration: {
+    #       min_capacity: 1.0,
+    #       max_capacity: 1.0,
+    #     },
     #   })
     #
     # @example Response structure
@@ -18085,6 +18132,8 @@ module Aws::RDS
     #   resp.db_cluster.performance_insights_enabled #=> Boolean
     #   resp.db_cluster.performance_insights_kms_key_id #=> String
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
+    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3 AWS API Documentation
     #
@@ -18111,16 +18160,11 @@ module Aws::RDS
     #  </note>
     #
     # For more information on Amazon Aurora DB clusters, see [ What is
-    # Amazon Aurora?][1] in the *Amazon Aurora User Guide.*
+    # Amazon Aurora?][1] in the *Amazon Aurora User Guide*.
     #
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][2] in the *Amazon
     # RDS User Guide.*
-    #
-    # <note markdown="1"> The Multi-AZ DB clusters feature is in preview and is subject to
-    # change.
-    #
-    #  </note>
     #
     #
     #
@@ -18210,12 +18254,12 @@ module Aws::RDS
     #   **Aurora MySQL**
     #
     #   See [MySQL on Amazon RDS Versions][1] in the *Amazon Aurora User
-    #   Guide.*
+    #   Guide*.
     #
     #   **Aurora PostgreSQL**
     #
     #   See [Amazon Aurora PostgreSQL releases and engine versions][2] in the
-    #   *Amazon Aurora User Guide.*
+    #   *Amazon Aurora User Guide*.
     #
     #   **MySQL**
     #
@@ -18302,7 +18346,7 @@ module Aws::RDS
     #   accounts. By default, mapping isn't enabled.
     #
     #   For more information, see [ IAM Database Authentication][1] in the
-    #   *Amazon Aurora User Guide.*
+    #   *Amazon Aurora User Guide*.
     #
     #   Valid for: Aurora DB clusters only
     #
@@ -18334,14 +18378,36 @@ module Aws::RDS
     #   CloudWatch Logs. The values in the list depend on the DB engine being
     #   used.
     #
-    #   For more information, see [Publishing Database Logs to Amazon
-    #   CloudWatch Logs ][1] in the *Amazon Aurora User Guide*.
+    #   **RDS for MySQL**
     #
-    #   Valid for: Aurora DB clusters only
+    #   Possible values are `error`, `general`, and `slowquery`.
+    #
+    #   **RDS for PostgreSQL**
+    #
+    #   Possible values are `postgresql` and `upgrade`.
+    #
+    #   **Aurora MySQL**
+    #
+    #   Possible values are `audit`, `error`, `general`, and `slowquery`.
+    #
+    #   **Aurora PostgreSQL**
+    #
+    #   Possible value is `postgresql`.
+    #
+    #   For more information about exporting CloudWatch Logs for Amazon RDS,
+    #   see [Publishing Database Logs to Amazon CloudWatch Logs][1] in the
+    #   *Amazon RDS User Guide*.
+    #
+    #   For more information about exporting CloudWatch Logs for Amazon
+    #   Aurora, see [Publishing Database Logs to Amazon CloudWatch Logs][2] in
+    #   the *Amazon Aurora User Guide*.
+    #
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #
     # @option params [String] :engine_mode
     #   The DB engine mode of the DB cluster, either `provisioned`,
@@ -18391,7 +18457,7 @@ module Aws::RDS
     #   cluster to snapshots of the restored DB cluster. The default is not to
     #   copy them.
     #
-    #   Valid for: Aurora DB clusters only
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
     # @option params [String] :domain
     #   Specify the Active Directory directory ID to restore the DB cluster
@@ -18423,7 +18489,7 @@ module Aws::RDS
     #   For the full list of DB instance classes, and availability for your
     #   engine, see [DB Instance Class][1] in the *Amazon RDS User Guide.*
     #
-    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
+    #   Valid for: Multi-AZ DB clusters only
     #
     #
     #
@@ -18496,6 +18562,17 @@ module Aws::RDS
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
+    # @option params [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
+    #   Contains the scaling configuration of an Aurora Serverless v2 DB
+    #   cluster.
+    #
+    #   For more information, see [Using Amazon Aurora Serverless v2][1] in
+    #   the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
+    #
     # @return [Types::RestoreDBClusterFromSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterFromSnapshotResult#db_cluster #db_cluster} => Types::DBCluster
@@ -18558,6 +18635,10 @@ module Aws::RDS
     #     storage_type: "String",
     #     iops: 1,
     #     publicly_accessible: false,
+    #     serverless_v2_scaling_configuration: {
+    #       min_capacity: 1.0,
+    #       max_capacity: 1.0,
+    #     },
     #   })
     #
     # @example Response structure
@@ -18662,6 +18743,8 @@ module Aws::RDS
     #   resp.db_cluster.performance_insights_enabled #=> Boolean
     #   resp.db_cluster.performance_insights_kms_key_id #=> String
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
+    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshot AWS API Documentation
     #
@@ -18690,16 +18773,11 @@ module Aws::RDS
     #  </note>
     #
     # For more information on Amazon Aurora DB clusters, see [ What is
-    # Amazon Aurora?][1] in the *Amazon Aurora User Guide.*
+    # Amazon Aurora?][1] in the *Amazon Aurora User Guide*.
     #
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][2] in the *Amazon
     # RDS User Guide.*
-    #
-    # <note markdown="1"> The Multi-AZ DB clusters feature is in preview and is subject to
-    # change.
-    #
-    #  </note>
     #
     #
     #
@@ -18854,7 +18932,7 @@ module Aws::RDS
     #   accounts. By default, mapping isn't enabled.
     #
     #   For more information, see [ IAM Database Authentication][1] in the
-    #   *Amazon Aurora User Guide.*
+    #   *Amazon Aurora User Guide*.
     #
     #   Valid for: Aurora DB clusters only
     #
@@ -18882,14 +18960,36 @@ module Aws::RDS
     #   CloudWatch Logs. The values in the list depend on the DB engine being
     #   used.
     #
-    #   For more information, see [Publishing Database Logs to Amazon
-    #   CloudWatch Logs][1] in the *Amazon Aurora User Guide*.
+    #   **RDS for MySQL**
     #
-    #   Valid for: Aurora DB clusters only
+    #   Possible values are `error`, `general`, and `slowquery`.
+    #
+    #   **RDS for PostgreSQL**
+    #
+    #   Possible values are `postgresql` and `upgrade`.
+    #
+    #   **Aurora MySQL**
+    #
+    #   Possible values are `audit`, `error`, `general`, and `slowquery`.
+    #
+    #   **Aurora PostgreSQL**
+    #
+    #   Possible value is `postgresql`.
+    #
+    #   For more information about exporting CloudWatch Logs for Amazon RDS,
+    #   see [Publishing Database Logs to Amazon CloudWatch Logs][1] in the
+    #   *Amazon RDS User Guide*.
+    #
+    #   For more information about exporting CloudWatch Logs for Amazon
+    #   Aurora, see [Publishing Database Logs to Amazon CloudWatch Logs][2] in
+    #   the *Amazon Aurora User Guide*.
+    #
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #
     # @option params [String] :db_cluster_parameter_group_name
     #   The name of the DB cluster parameter group to associate with this DB
@@ -18921,7 +19021,7 @@ module Aws::RDS
     #   cluster to snapshots of the restored DB cluster. The default is not to
     #   copy them.
     #
-    #   Valid for: Aurora DB clusters only
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
     # @option params [String] :domain
     #   Specify the Active Directory directory ID to restore the DB cluster
@@ -18953,10 +19053,11 @@ module Aws::RDS
     # @option params [String] :engine_mode
     #   The engine mode of the new cluster. Specify `provisioned` or
     #   `serverless`, depending on the type of the cluster you are creating.
-    #   You can create an Aurora Serverless clone from a provisioned cluster,
-    #   or a provisioned clone from an Aurora Serverless cluster. To create a
-    #   clone that is an Aurora Serverless cluster, the original cluster must
-    #   be an Aurora Serverless cluster or an encrypted provisioned cluster.
+    #   You can create an Aurora Serverless v1 clone from a provisioned
+    #   cluster, or a provisioned clone from an Aurora Serverless v1 cluster.
+    #   To create a clone that is an Aurora Serverless v1 cluster, the
+    #   original cluster must be an Aurora Serverless v1 cluster or an
+    #   encrypted provisioned cluster.
     #
     #   Valid for: Aurora DB clusters only
     #
@@ -19042,6 +19143,17 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS
     #
+    # @option params [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
+    #   Contains the scaling configuration of an Aurora Serverless v2 DB
+    #   cluster.
+    #
+    #   For more information, see [Using Amazon Aurora Serverless v2][1] in
+    #   the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
+    #
     # @return [Types::RestoreDBClusterToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterToPointInTimeResult#db_cluster #db_cluster} => Types::DBCluster
@@ -19103,6 +19215,10 @@ module Aws::RDS
     #     storage_type: "String",
     #     publicly_accessible: false,
     #     iops: 1,
+    #     serverless_v2_scaling_configuration: {
+    #       min_capacity: 1.0,
+    #       max_capacity: 1.0,
+    #     },
     #   })
     #
     # @example Response structure
@@ -19207,6 +19323,8 @@ module Aws::RDS
     #   resp.db_cluster.performance_insights_enabled #=> Boolean
     #   resp.db_cluster.performance_insights_kms_key_id #=> String
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
+    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTime AWS API Documentation
     #
@@ -19619,6 +19737,26 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
     #
+    # @option params [String] :network_type
+    #   The network type of the DB instance.
+    #
+    #   Valid values:
+    #
+    #   * `IPV4`
+    #
+    #   * `DUAL`
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the DB instance. A `DBSubnetGroup` can support only the IPv4 protocol
+    #   or the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [ Working with a DB instance in a VPC][1] in
+    #   the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    #
     # @return [Types::RestoreDBInstanceFromDBSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceFromDBSnapshotResult#db_instance #db_instance} => Types::DBInstance
@@ -19762,6 +19900,7 @@ module Aws::RDS
     #     enable_customer_owned_ip: false,
     #     custom_iam_instance_profile: "String",
     #     backup_target: "String",
+    #     network_type: "String",
     #   })
     #
     # @example Response structure
@@ -19800,6 +19939,8 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_outpost.arn #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
+    #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
+    #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
@@ -19902,6 +20043,8 @@ module Aws::RDS
     #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.backup_target #=> String
+    #   resp.db_instance.network_type #=> String
+    #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshot AWS API Documentation
     #
@@ -20243,7 +20386,7 @@ module Aws::RDS
     #   DB instance.
     #
     #   For more information, see [Using Amazon Performance Insights][1] in
-    #   the *Amazon Relational Database Service User Guide*.
+    #   the *Amazon RDS User Guide*.
     #
     #
     #
@@ -20262,8 +20405,27 @@ module Aws::RDS
     #   a different default KMS key for each Amazon Web Services Region.
     #
     # @option params [Integer] :performance_insights_retention_period
-    #   The amount of time, in days, to retain Performance Insights data.
-    #   Valid values are 7 or 731 (2 years).
+    #   The number of days to retain Performance Insights data. The default is
+    #   7 days. The following values are valid:
+    #
+    #   * 7
+    #
+    #   * *month* * 31, where *month* is a number of months from 1-23
+    #
+    #   * 731
+    #
+    #   For example, the following values are valid:
+    #
+    #   * 93 (3 months * 31)
+    #
+    #   * 341 (11 months * 31)
+    #
+    #   * 589 (19 months * 31)
+    #
+    #   * 731
+    #
+    #   If you specify a retention period such as 94, which isn't a valid
+    #   value, RDS issues an error.
     #
     # @option params [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of logs that the restored DB instance is to export to
@@ -20304,6 +20466,26 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.Autoscaling
+    #
+    # @option params [String] :network_type
+    #   The network type of the DB instance.
+    #
+    #   Valid values:
+    #
+    #   * `IPV4`
+    #
+    #   * `DUAL`
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the DB instance. A `DBSubnetGroup` can support only the IPv4 protocol
+    #   or the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [ Working with a DB instance in a VPC][1] in
+    #   the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     #
     # @return [Types::RestoreDBInstanceFromS3Result] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -20366,6 +20548,7 @@ module Aws::RDS
     #     use_default_processor_features: false,
     #     deletion_protection: false,
     #     max_allocated_storage: 1,
+    #     network_type: "String",
     #   })
     #
     # @example Response structure
@@ -20404,6 +20587,8 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_outpost.arn #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
+    #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
+    #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
@@ -20506,6 +20691,8 @@ module Aws::RDS
     #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.backup_target #=> String
+    #   resp.db_instance.network_type #=> String
+    #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3 AWS API Documentation
     #
@@ -20583,7 +20770,7 @@ module Aws::RDS
     #   example db.m4.large. Not all DB instance classes are available in all
     #   Amazon Web Services Regions, or for all database engines. For the full
     #   list of DB instance classes, and availability for your engine, see [DB
-    #   Instance Class][1] in the *Amazon RDS User Guide.*
+    #   Instance Class][1] in the *Amazon RDS User Guide*.
     #
     #   Default: The same DBInstanceClass as the original DB instance.
     #
@@ -20909,8 +21096,7 @@ module Aws::RDS
     #     start with the prefix `AWSRDSCustom`.
     #
     #   For the list of permissions required for the IAM role, see [ Configure
-    #   IAM and your VPC][1] in the *Amazon Relational Database Service User
-    #   Guide*.
+    #   IAM and your VPC][1] in the *Amazon RDS User Guide*.
     #
     #   This setting is required for RDS Custom.
     #
@@ -20931,6 +21117,26 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
+    #
+    # @option params [String] :network_type
+    #   The network type of the DB instance.
+    #
+    #   Valid values:
+    #
+    #   * `IPV4`
+    #
+    #   * `DUAL`
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the DB instance. A `DBSubnetGroup` can support only the IPv4 protocol
+    #   or the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [ Working with a DB instance in a VPC][1] in
+    #   the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     #
     # @return [Types::RestoreDBInstanceToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -21081,6 +21287,7 @@ module Aws::RDS
     #     enable_customer_owned_ip: false,
     #     custom_iam_instance_profile: "String",
     #     backup_target: "String",
+    #     network_type: "String",
     #   })
     #
     # @example Response structure
@@ -21119,6 +21326,8 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_outpost.arn #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
+    #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
+    #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
@@ -21221,6 +21430,8 @@ module Aws::RDS
     #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.backup_target #=> String
+    #   resp.db_instance.network_type #=> String
+    #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTime AWS API Documentation
     #
@@ -21396,7 +21607,7 @@ module Aws::RDS
     # StopDBCluster action.
     #
     # For more information, see [ Stopping and Starting an Aurora
-    # Cluster][1] in the *Amazon Aurora User Guide.*
+    # Cluster][1] in the *Amazon Aurora User Guide*.
     #
     # <note markdown="1"> This action only applies to Aurora DB clusters.
     #
@@ -21522,6 +21733,8 @@ module Aws::RDS
     #   resp.db_cluster.performance_insights_enabled #=> Boolean
     #   resp.db_cluster.performance_insights_kms_key_id #=> String
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
+    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBCluster AWS API Documentation
     #
@@ -21597,6 +21810,8 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_outpost.arn #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
+    #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
+    #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
@@ -21699,6 +21914,8 @@ module Aws::RDS
     #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.backup_target #=> String
+    #   resp.db_instance.network_type #=> String
+    #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstance AWS API Documentation
     #
@@ -21737,13 +21954,35 @@ module Aws::RDS
     #   `arn:aws:kms:us-east-1:123456789012:key/AKIAIOSFODNN7EXAMPLE`.
     #
     # @option params [String] :pre_signed_url
-    #   A URL that contains a Signature Version 4 signed request for the
-    #   StartDBInstanceAutomatedBackupsReplication action to be called in the
+    #   In an Amazon Web Services GovCloud (US) Region, an URL that contains a
+    #   Signature Version 4 signed request for the
+    #   `StartDBInstanceAutomatedBackupsReplication` operation to call in the
     #   Amazon Web Services Region of the source DB instance. The presigned
     #   URL must be a valid request for the
-    #   StartDBInstanceAutomatedBackupsReplication API action that can be
-    #   executed in the Amazon Web Services Region that contains the source DB
+    #   `StartDBInstanceAutomatedBackupsReplication` API operation that can
+    #   run in the Amazon Web Services Region that contains the source DB
     #   instance.
+    #
+    #   This setting applies only to Amazon Web Services GovCloud (US)
+    #   Regions. It's ignored in other Amazon Web Services Regions.
+    #
+    #   To learn how to generate a Signature Version 4 signed request, see [
+    #   Authenticating Requests: Using Query Parameters (Amazon Web Services
+    #   Signature Version 4)][1] and [ Signature Version 4 Signing
+    #   Process][2].
+    #
+    #   <note markdown="1"> If you are using an Amazon Web Services SDK tool or the CLI, you can
+    #   specify `SourceRegion` (or `--source-region` for the CLI) instead of
+    #   specifying `PreSignedUrl` manually. Specifying `SourceRegion`
+    #   autogenerates a presigned URL that is a valid request for the
+    #   operation that can run in the source Amazon Web Services Region.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
+    #   [2]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
     #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -21986,7 +22225,7 @@ module Aws::RDS
     # do a point-in-time restore if necessary.
     #
     # For more information, see [ Stopping and Starting an Aurora
-    # Cluster][1] in the *Amazon Aurora User Guide.*
+    # Cluster][1] in the *Amazon Aurora User Guide*.
     #
     # <note markdown="1"> This action only applies to Aurora DB clusters.
     #
@@ -22112,6 +22351,8 @@ module Aws::RDS
     #   resp.db_cluster.performance_insights_enabled #=> Boolean
     #   resp.db_cluster.performance_insights_kms_key_id #=> String
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
+    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBCluster AWS API Documentation
     #
@@ -22194,6 +22435,8 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_outpost.arn #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
+    #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
+    #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
@@ -22296,6 +22539,8 @@ module Aws::RDS
     #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.backup_target #=> String
+    #   resp.db_instance.network_type #=> String
+    #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstance AWS API Documentation
     #
@@ -22308,7 +22553,8 @@ module Aws::RDS
 
     # Stops automated backup replication for a DB instance.
     #
-    # This command doesn't apply to RDS Custom.
+    # This command doesn't apply to RDS Custom, Aurora MySQL, and Aurora
+    # PostgreSQL.
     #
     # For more information, see [ Replicating Automated Backups to Another
     # Amazon Web Services Region][1] in the *Amazon RDS User Guide.*
@@ -22386,7 +22632,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.138.0'
+      context[:gem_version] = '1.151.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -22454,6 +22700,8 @@ module Aws::RDS
     #
     # | waiter_name                   | params                                 | :delay   | :max_attempts |
     # | ----------------------------- | -------------------------------------- | -------- | ------------- |
+    # | db_cluster_available          | {Client#describe_db_clusters}          | 30       | 60            |
+    # | db_cluster_deleted            | {Client#describe_db_clusters}          | 30       | 60            |
     # | db_cluster_snapshot_available | {Client#describe_db_cluster_snapshots} | 30       | 60            |
     # | db_cluster_snapshot_deleted   | {Client#describe_db_cluster_snapshots} | 30       | 60            |
     # | db_instance_available         | {Client#describe_db_instances}         | 30       | 60            |
@@ -22510,6 +22758,8 @@ module Aws::RDS
 
     def waiters
       {
+        db_cluster_available: Waiters::DBClusterAvailable,
+        db_cluster_deleted: Waiters::DBClusterDeleted,
         db_cluster_snapshot_available: Waiters::DBClusterSnapshotAvailable,
         db_cluster_snapshot_deleted: Waiters::DBClusterSnapshotDeleted,
         db_instance_available: Waiters::DBInstanceAvailable,

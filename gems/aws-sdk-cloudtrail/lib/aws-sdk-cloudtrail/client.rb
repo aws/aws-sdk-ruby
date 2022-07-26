@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::CloudTrail
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -359,18 +361,19 @@ module Aws::CloudTrail
 
     # @!group API Operations
 
-    # Adds one or more tags to a trail, up to a limit of 50. Overwrites an
-    # existing tag's value when a new value is specified for an existing
-    # tag key. Tag key names must be unique for a trail; you cannot have two
-    # keys with the same name but different values. If you specify a key
-    # without a value, the tag will be created with the specified key and a
-    # value of null. You can tag a trail that applies to all Amazon Web
-    # Services Regions only from the Region in which the trail was created
-    # (also known as its home region).
+    # Adds one or more tags to a trail or event data store, up to a limit of
+    # 50. Overwrites an existing tag's value when a new value is specified
+    # for an existing tag key. Tag key names must be unique for a trail; you
+    # cannot have two keys with the same name but different values. If you
+    # specify a key without a value, the tag will be created with the
+    # specified key and a value of null. You can tag a trail or event data
+    # store that applies to all Amazon Web Services Regions only from the
+    # Region in which the trail or event data store was created (also known
+    # as its home region).
     #
     # @option params [required, String] :resource_id
-    #   Specifies the ARN of the trail to which one or more tags will be
-    #   added. The format of a trail ARN is:
+    #   Specifies the ARN of the trail or event data store to which one or
+    #   more tags will be added. The format of a trail ARN is:
     #
     #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #
@@ -401,10 +404,10 @@ module Aws::CloudTrail
     end
 
     # Cancels a query if the query is not in a terminated state, such as
-    # `CANCELLED`, `FAILED` or `FINISHED`. You must specify an ARN value for
-    # `EventDataStore`. The ID of the query that you want to cancel is also
-    # required. When you run `CancelQuery`, the query status might show as
-    # `CANCELLED` even if the operation is not yet finished.
+    # `CANCELLED`, `FAILED`, `TIMED_OUT`, or `FINISHED`. You must specify an
+    # ARN value for `EventDataStore`. The ID of the query that you want to
+    # cancel is also required. When you run `CancelQuery`, the query status
+    # might show as `CANCELLED` even if the operation is not yet finished.
     #
     # @option params [required, String] :event_data_store
     #   The ARN (or the ID suffix of the ARN) of an event data store on which
@@ -429,7 +432,7 @@ module Aws::CloudTrail
     # @example Response structure
     #
     #   resp.query_id #=> String
-    #   resp.query_status #=> String, one of "QUEUED", "RUNNING", "FINISHED", "FAILED", "CANCELLED"
+    #   resp.query_status #=> String, one of "QUEUED", "RUNNING", "FINISHED", "FAILED", "CANCELLED", "TIMED_OUT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CancelQuery AWS API Documentation
     #
@@ -829,9 +832,10 @@ module Aws::CloudTrail
     #
     #   resp.query_id #=> String
     #   resp.query_string #=> String
-    #   resp.query_status #=> String, one of "QUEUED", "RUNNING", "FINISHED", "FAILED", "CANCELLED"
+    #   resp.query_status #=> String, one of "QUEUED", "RUNNING", "FINISHED", "FAILED", "CANCELLED", "TIMED_OUT"
     #   resp.query_statistics.events_matched #=> Integer
     #   resp.query_statistics.events_scanned #=> Integer
+    #   resp.query_statistics.bytes_scanned #=> Integer
     #   resp.query_statistics.execution_time_in_millis #=> Integer
     #   resp.query_statistics.creation_time #=> Time
     #   resp.error_message #=> String
@@ -1170,9 +1174,10 @@ module Aws::CloudTrail
     #
     # @example Response structure
     #
-    #   resp.query_status #=> String, one of "QUEUED", "RUNNING", "FINISHED", "FAILED", "CANCELLED"
+    #   resp.query_status #=> String, one of "QUEUED", "RUNNING", "FINISHED", "FAILED", "CANCELLED", "TIMED_OUT"
     #   resp.query_statistics.results_count #=> Integer
     #   resp.query_statistics.total_results_count #=> Integer
+    #   resp.query_statistics.bytes_scanned #=> Integer
     #   resp.query_result_rows #=> Array
     #   resp.query_result_rows[0] #=> Array
     #   resp.query_result_rows[0][0] #=> Hash
@@ -1428,7 +1433,7 @@ module Aws::CloudTrail
     # shorten the list of results, you can specify a time range, formatted
     # as timestamps, by adding `StartTime` and `EndTime` parameters, and a
     # `QueryStatus` value. Valid values for `QueryStatus` include `QUEUED`,
-    # `RUNNING`, `FINISHED`, `FAILED`, or `CANCELLED`.
+    # `RUNNING`, `FINISHED`, `FAILED`, `TIMED_OUT`, or `CANCELLED`.
     #
     # @option params [required, String] :event_data_store
     #   The ARN (or the ID suffix of the ARN) of an event data store on which
@@ -1451,7 +1456,7 @@ module Aws::CloudTrail
     # @option params [String] :query_status
     #   The status of queries that you want to return in results. Valid values
     #   for `QueryStatus` include `QUEUED`, `RUNNING`, `FINISHED`, `FAILED`,
-    #   or `CANCELLED`.
+    #   `TIMED_OUT`, or `CANCELLED`.
     #
     # @return [Types::ListQueriesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1468,14 +1473,14 @@ module Aws::CloudTrail
     #     max_results: 1,
     #     start_time: Time.now,
     #     end_time: Time.now,
-    #     query_status: "QUEUED", # accepts QUEUED, RUNNING, FINISHED, FAILED, CANCELLED
+    #     query_status: "QUEUED", # accepts QUEUED, RUNNING, FINISHED, FAILED, CANCELLED, TIMED_OUT
     #   })
     #
     # @example Response structure
     #
     #   resp.queries #=> Array
     #   resp.queries[0].query_id #=> String
-    #   resp.queries[0].query_status #=> String, one of "QUEUED", "RUNNING", "FINISHED", "FAILED", "CANCELLED"
+    #   resp.queries[0].query_status #=> String, one of "QUEUED", "RUNNING", "FINISHED", "FAILED", "CANCELLED", "TIMED_OUT"
     #   resp.queries[0].creation_time #=> Time
     #   resp.next_token #=> String
     #
@@ -1488,13 +1493,12 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
-    # Lists the tags for the trail in the current region.
+    # Lists the tags for the trail or event data store in the current
+    # region.
     #
     # @option params [required, Array<String>] :resource_id_list
-    #   Specifies a list of trail ARNs whose tags will be listed. The list has
-    #   a limit of 20 ARNs. The following is the format of a trail ARN.
-    #
-    #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
+    #   Specifies a list of trail and event data store ARNs whose tags will be
+    #   listed. The list has a limit of 20 ARNs.
     #
     # @option params [String] :next_token
     #   Reserved for future use.
@@ -1907,13 +1911,17 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
-    # Removes the specified tags from a trail.
+    # Removes the specified tags from a trail or event data store.
     #
     # @option params [required, String] :resource_id
-    #   Specifies the ARN of the trail from which tags should be removed. The
-    #   format of a trail ARN is:
+    #   Specifies the ARN of the trail or event data store from which tags
+    #   should be removed.
     #
+    #   Example trail ARN format:
     #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
+    #
+    #   Example event data store ARN format:
+    #   `arn:aws:cloudtrail:us-east-2:12345678910:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE`
     #
     # @option params [required, Array<Types::Tag>] :tags_list
     #   Specifies a list of tags to be removed.
@@ -2410,7 +2418,7 @@ module Aws::CloudTrail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudtrail'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

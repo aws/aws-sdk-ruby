@@ -15,6 +15,7 @@ module Aws::CloudFormation
 
     AcceptTermsAndConditions = Shapes::BooleanShape.new(name: 'AcceptTermsAndConditions')
     Account = Shapes::StringShape.new(name: 'Account')
+    AccountFilterType = Shapes::StringShape.new(name: 'AccountFilterType')
     AccountGateResult = Shapes::StructureShape.new(name: 'AccountGateResult')
     AccountGateStatus = Shapes::StringShape.new(name: 'AccountGateStatus')
     AccountGateStatusReason = Shapes::StringShape.new(name: 'AccountGateStatusReason')
@@ -47,6 +48,11 @@ module Aws::CloudFormation
     CausingEntity = Shapes::StringShape.new(name: 'CausingEntity')
     Change = Shapes::StructureShape.new(name: 'Change')
     ChangeAction = Shapes::StringShape.new(name: 'ChangeAction')
+    ChangeSetHook = Shapes::StructureShape.new(name: 'ChangeSetHook')
+    ChangeSetHookResourceTargetDetails = Shapes::StructureShape.new(name: 'ChangeSetHookResourceTargetDetails')
+    ChangeSetHookTargetDetails = Shapes::StructureShape.new(name: 'ChangeSetHookTargetDetails')
+    ChangeSetHooks = Shapes::ListShape.new(name: 'ChangeSetHooks')
+    ChangeSetHooksStatus = Shapes::StringShape.new(name: 'ChangeSetHooksStatus')
     ChangeSetId = Shapes::StringShape.new(name: 'ChangeSetId')
     ChangeSetName = Shapes::StringShape.new(name: 'ChangeSetName')
     ChangeSetNameOrId = Shapes::StringShape.new(name: 'ChangeSetNameOrId')
@@ -91,6 +97,8 @@ module Aws::CloudFormation
     DeregisterTypeOutput = Shapes::StructureShape.new(name: 'DeregisterTypeOutput')
     DescribeAccountLimitsInput = Shapes::StructureShape.new(name: 'DescribeAccountLimitsInput')
     DescribeAccountLimitsOutput = Shapes::StructureShape.new(name: 'DescribeAccountLimitsOutput')
+    DescribeChangeSetHooksInput = Shapes::StructureShape.new(name: 'DescribeChangeSetHooksInput')
+    DescribeChangeSetHooksOutput = Shapes::StructureShape.new(name: 'DescribeChangeSetHooksOutput')
     DescribeChangeSetInput = Shapes::StructureShape.new(name: 'DescribeChangeSetInput')
     DescribeChangeSetOutput = Shapes::StructureShape.new(name: 'DescribeChangeSetOutput')
     DescribePublisherInput = Shapes::StructureShape.new(name: 'DescribePublisherInput')
@@ -152,6 +160,17 @@ module Aws::CloudFormation
     GetTemplateSummaryInput = Shapes::StructureShape.new(name: 'GetTemplateSummaryInput')
     GetTemplateSummaryOutput = Shapes::StructureShape.new(name: 'GetTemplateSummaryOutput')
     HandlerErrorCode = Shapes::StringShape.new(name: 'HandlerErrorCode')
+    HookFailureMode = Shapes::StringShape.new(name: 'HookFailureMode')
+    HookInvocationCount = Shapes::IntegerShape.new(name: 'HookInvocationCount')
+    HookInvocationPoint = Shapes::StringShape.new(name: 'HookInvocationPoint')
+    HookStatus = Shapes::StringShape.new(name: 'HookStatus')
+    HookStatusReason = Shapes::StringShape.new(name: 'HookStatusReason')
+    HookTargetType = Shapes::StringShape.new(name: 'HookTargetType')
+    HookTargetTypeName = Shapes::StringShape.new(name: 'HookTargetTypeName')
+    HookType = Shapes::StringShape.new(name: 'HookType')
+    HookTypeConfigurationVersionId = Shapes::StringShape.new(name: 'HookTypeConfigurationVersionId')
+    HookTypeName = Shapes::StringShape.new(name: 'HookTypeName')
+    HookTypeVersionId = Shapes::StringShape.new(name: 'HookTypeVersionId')
     IdentityProvider = Shapes::StringShape.new(name: 'IdentityProvider')
     ImportStacksToStackSetInput = Shapes::StructureShape.new(name: 'ImportStacksToStackSetInput')
     ImportStacksToStackSetOutput = Shapes::StructureShape.new(name: 'ImportStacksToStackSetOutput')
@@ -374,6 +393,7 @@ module Aws::CloudFormation
     StackSetOperationResultSummaries = Shapes::ListShape.new(name: 'StackSetOperationResultSummaries')
     StackSetOperationResultSummary = Shapes::StructureShape.new(name: 'StackSetOperationResultSummary')
     StackSetOperationStatus = Shapes::StringShape.new(name: 'StackSetOperationStatus')
+    StackSetOperationStatusReason = Shapes::StringShape.new(name: 'StackSetOperationStatusReason')
     StackSetOperationSummaries = Shapes::ListShape.new(name: 'StackSetOperationSummaries')
     StackSetOperationSummary = Shapes::StructureShape.new(name: 'StackSetOperationSummary')
     StackSetStatus = Shapes::StringShape.new(name: 'StackSetStatus')
@@ -514,8 +534,28 @@ module Aws::CloudFormation
     Capabilities.member = Shapes::ShapeRef.new(shape: Capability)
 
     Change.add_member(:type, Shapes::ShapeRef.new(shape: ChangeType, location_name: "Type"))
+    Change.add_member(:hook_invocation_count, Shapes::ShapeRef.new(shape: HookInvocationCount, location_name: "HookInvocationCount"))
     Change.add_member(:resource_change, Shapes::ShapeRef.new(shape: ResourceChange, location_name: "ResourceChange"))
     Change.struct_class = Types::Change
+
+    ChangeSetHook.add_member(:invocation_point, Shapes::ShapeRef.new(shape: HookInvocationPoint, location_name: "InvocationPoint"))
+    ChangeSetHook.add_member(:failure_mode, Shapes::ShapeRef.new(shape: HookFailureMode, location_name: "FailureMode"))
+    ChangeSetHook.add_member(:type_name, Shapes::ShapeRef.new(shape: HookTypeName, location_name: "TypeName"))
+    ChangeSetHook.add_member(:type_version_id, Shapes::ShapeRef.new(shape: HookTypeVersionId, location_name: "TypeVersionId"))
+    ChangeSetHook.add_member(:type_configuration_version_id, Shapes::ShapeRef.new(shape: HookTypeConfigurationVersionId, location_name: "TypeConfigurationVersionId"))
+    ChangeSetHook.add_member(:target_details, Shapes::ShapeRef.new(shape: ChangeSetHookTargetDetails, location_name: "TargetDetails"))
+    ChangeSetHook.struct_class = Types::ChangeSetHook
+
+    ChangeSetHookResourceTargetDetails.add_member(:logical_resource_id, Shapes::ShapeRef.new(shape: LogicalResourceId, location_name: "LogicalResourceId"))
+    ChangeSetHookResourceTargetDetails.add_member(:resource_type, Shapes::ShapeRef.new(shape: HookTargetTypeName, location_name: "ResourceType"))
+    ChangeSetHookResourceTargetDetails.add_member(:resource_action, Shapes::ShapeRef.new(shape: ChangeAction, location_name: "ResourceAction"))
+    ChangeSetHookResourceTargetDetails.struct_class = Types::ChangeSetHookResourceTargetDetails
+
+    ChangeSetHookTargetDetails.add_member(:target_type, Shapes::ShapeRef.new(shape: HookTargetType, location_name: "TargetType"))
+    ChangeSetHookTargetDetails.add_member(:resource_target_details, Shapes::ShapeRef.new(shape: ChangeSetHookResourceTargetDetails, location_name: "ResourceTargetDetails"))
+    ChangeSetHookTargetDetails.struct_class = Types::ChangeSetHookTargetDetails
+
+    ChangeSetHooks.member = Shapes::ShapeRef.new(shape: ChangeSetHook)
 
     ChangeSetNotFoundException.struct_class = Types::ChangeSetNotFoundException
 
@@ -666,6 +706,7 @@ module Aws::CloudFormation
     DeploymentTargets.add_member(:accounts, Shapes::ShapeRef.new(shape: AccountList, location_name: "Accounts"))
     DeploymentTargets.add_member(:accounts_url, Shapes::ShapeRef.new(shape: AccountsUrl, location_name: "AccountsUrl"))
     DeploymentTargets.add_member(:organizational_unit_ids, Shapes::ShapeRef.new(shape: OrganizationalUnitIdList, location_name: "OrganizationalUnitIds"))
+    DeploymentTargets.add_member(:account_filter_type, Shapes::ShapeRef.new(shape: AccountFilterType, location_name: "AccountFilterType"))
     DeploymentTargets.struct_class = Types::DeploymentTargets
 
     DeregisterTypeInput.add_member(:arn, Shapes::ShapeRef.new(shape: PrivateTypeArn, location_name: "Arn"))
@@ -682,6 +723,21 @@ module Aws::CloudFormation
     DescribeAccountLimitsOutput.add_member(:account_limits, Shapes::ShapeRef.new(shape: AccountLimitList, location_name: "AccountLimits"))
     DescribeAccountLimitsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeAccountLimitsOutput.struct_class = Types::DescribeAccountLimitsOutput
+
+    DescribeChangeSetHooksInput.add_member(:change_set_name, Shapes::ShapeRef.new(shape: ChangeSetNameOrId, required: true, location_name: "ChangeSetName"))
+    DescribeChangeSetHooksInput.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackNameOrId, location_name: "StackName"))
+    DescribeChangeSetHooksInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeChangeSetHooksInput.add_member(:logical_resource_id, Shapes::ShapeRef.new(shape: LogicalResourceId, location_name: "LogicalResourceId"))
+    DescribeChangeSetHooksInput.struct_class = Types::DescribeChangeSetHooksInput
+
+    DescribeChangeSetHooksOutput.add_member(:change_set_id, Shapes::ShapeRef.new(shape: ChangeSetId, location_name: "ChangeSetId"))
+    DescribeChangeSetHooksOutput.add_member(:change_set_name, Shapes::ShapeRef.new(shape: ChangeSetName, location_name: "ChangeSetName"))
+    DescribeChangeSetHooksOutput.add_member(:hooks, Shapes::ShapeRef.new(shape: ChangeSetHooks, location_name: "Hooks"))
+    DescribeChangeSetHooksOutput.add_member(:status, Shapes::ShapeRef.new(shape: ChangeSetHooksStatus, location_name: "Status"))
+    DescribeChangeSetHooksOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeChangeSetHooksOutput.add_member(:stack_id, Shapes::ShapeRef.new(shape: StackId, location_name: "StackId"))
+    DescribeChangeSetHooksOutput.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackName, location_name: "StackName"))
+    DescribeChangeSetHooksOutput.struct_class = Types::DescribeChangeSetHooksOutput
 
     DescribeChangeSetInput.add_member(:change_set_name, Shapes::ShapeRef.new(shape: ChangeSetNameOrId, required: true, location_name: "ChangeSetName"))
     DescribeChangeSetInput.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackNameOrId, location_name: "StackName"))
@@ -1326,6 +1382,11 @@ module Aws::CloudFormation
     StackEvent.add_member(:resource_status_reason, Shapes::ShapeRef.new(shape: ResourceStatusReason, location_name: "ResourceStatusReason"))
     StackEvent.add_member(:resource_properties, Shapes::ShapeRef.new(shape: ResourceProperties, location_name: "ResourceProperties"))
     StackEvent.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
+    StackEvent.add_member(:hook_type, Shapes::ShapeRef.new(shape: HookType, location_name: "HookType"))
+    StackEvent.add_member(:hook_status, Shapes::ShapeRef.new(shape: HookStatus, location_name: "HookStatus"))
+    StackEvent.add_member(:hook_status_reason, Shapes::ShapeRef.new(shape: HookStatusReason, location_name: "HookStatusReason"))
+    StackEvent.add_member(:hook_invocation_point, Shapes::ShapeRef.new(shape: HookInvocationPoint, location_name: "HookInvocationPoint"))
+    StackEvent.add_member(:hook_failure_mode, Shapes::ShapeRef.new(shape: HookFailureMode, location_name: "HookFailureMode"))
     StackEvent.struct_class = Types::StackEvent
 
     StackEvents.member = Shapes::ShapeRef.new(shape: StackEvent)
@@ -1482,6 +1543,7 @@ module Aws::CloudFormation
     StackSetOperation.add_member(:end_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTimestamp"))
     StackSetOperation.add_member(:deployment_targets, Shapes::ShapeRef.new(shape: DeploymentTargets, location_name: "DeploymentTargets"))
     StackSetOperation.add_member(:stack_set_drift_detection_details, Shapes::ShapeRef.new(shape: StackSetDriftDetectionDetails, location_name: "StackSetDriftDetectionDetails"))
+    StackSetOperation.add_member(:status_reason, Shapes::ShapeRef.new(shape: StackSetOperationStatusReason, location_name: "StatusReason"))
     StackSetOperation.struct_class = Types::StackSetOperation
 
     StackSetOperationPreferences.add_member(:region_concurrency_type, Shapes::ShapeRef.new(shape: RegionConcurrencyType, location_name: "RegionConcurrencyType"))
@@ -1509,6 +1571,7 @@ module Aws::CloudFormation
     StackSetOperationSummary.add_member(:status, Shapes::ShapeRef.new(shape: StackSetOperationStatus, location_name: "Status"))
     StackSetOperationSummary.add_member(:creation_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimestamp"))
     StackSetOperationSummary.add_member(:end_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTimestamp"))
+    StackSetOperationSummary.add_member(:status_reason, Shapes::ShapeRef.new(shape: StackSetOperationStatusReason, location_name: "StatusReason"))
     StackSetOperationSummary.struct_class = Types::StackSetOperationSummary
 
     StackSetSummaries.member = Shapes::ShapeRef.new(shape: StackSetSummary)
@@ -1904,6 +1967,15 @@ module Aws::CloudFormation
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeChangeSetInput)
         o.output = Shapes::ShapeRef.new(shape: DescribeChangeSetOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ChangeSetNotFoundException)
+      end)
+
+      api.add_operation(:describe_change_set_hooks, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeChangeSetHooks"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeChangeSetHooksInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeChangeSetHooksOutput)
         o.errors << Shapes::ShapeRef.new(shape: ChangeSetNotFoundException)
       end)
 

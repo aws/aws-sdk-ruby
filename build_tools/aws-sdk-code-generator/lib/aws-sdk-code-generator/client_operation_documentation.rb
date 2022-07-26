@@ -101,7 +101,7 @@ module AwsSdkCodeGenerator
           if member_ref['idempotencyToken']
             docstring = docstring.to_s + "<p><b>A suitable default value is auto-generated.** You should normally not need to pass this option.</b></p>"
           end
-          if member_ref['jsonvalue']
+          if member_ref['jsonvalue'] || member_shape['jsonvalue']
             docstring = docstring.to_s + "<p><b>SDK automatically handles json encoding and base64 encoding for you when the required value (Hash, Array, etc.) is provided according to the description.</b></p>"
           end
           if member_shape['document']

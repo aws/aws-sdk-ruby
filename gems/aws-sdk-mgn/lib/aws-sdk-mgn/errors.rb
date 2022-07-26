@@ -77,6 +77,11 @@ module Aws::Mgn
       end
 
       # @return [String]
+      def errors
+        @data[:errors]
+      end
+
+      # @return [String]
       def message
         @message || @data[:message]
       end
@@ -164,6 +169,11 @@ module Aws::Mgn
       # @return [String]
       def quota_code
         @data[:quota_code]
+      end
+
+      # @return [String]
+      def quota_value
+        @data[:quota_value]
       end
 
       # @return [String]

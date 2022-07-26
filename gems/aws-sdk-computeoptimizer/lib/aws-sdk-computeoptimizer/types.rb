@@ -342,6 +342,11 @@ module Aws::ComputeOptimizer
     #   instances that are part of Auto Scaling groups. The
     #   `AutoScalingGroup` option encompasses only instances that are part
     #   of an Auto Scaling group.
+    #
+    #   <note markdown="1"> The valid values for this parameter are `Ec2Instance` and
+    #   `AutoScalingGroup`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] scope
@@ -2067,6 +2072,11 @@ module Aws::ComputeOptimizer
     #   instances that are part of Auto Scaling groups. The
     #   `AutoScalingGroup` option encompasses only instances that are part
     #   of an Auto Scaling group.
+    #
+    #   <note markdown="1"> The valid values for this parameter are `Ec2Instance` and
+    #   `AutoScalingGroup`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] scope
@@ -3159,6 +3169,11 @@ module Aws::ComputeOptimizer
     #   instances that are part of Auto Scaling groups. The
     #   `AutoScalingGroup` option encompasses only instances that are part
     #   of an Auto Scaling group.
+    #
+    #   <note markdown="1"> The valid values for this parameter are `Ec2Instance` and
+    #   `AutoScalingGroup`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] scope

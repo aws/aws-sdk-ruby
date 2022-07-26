@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::Transfer
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -361,11 +363,11 @@ module Aws::Transfer
 
     # Used by administrators to choose which groups in the directory should
     # have access to upload and download files over the enabled protocols
-    # using Amazon Web Services Transfer Family. For example, a Microsoft
-    # Active Directory might contain 50,000 users, but only a small fraction
-    # might need the ability to transfer files to the server. An
-    # administrator can use `CreateAccess` to limit the access to the
-    # correct set of users who need this ability.
+    # using Transfer Family. For example, a Microsoft Active Directory might
+    # contain 50,000 users, but only a small fraction might need the ability
+    # to transfer files to the server. An administrator can use
+    # `CreateAccess` to limit the access to the correct set of users who
+    # need this ability.
     #
     # @option params [String] :home_directory
     #   The landing directory (folder) for a user when they log in to the
@@ -374,12 +376,13 @@ module Aws::Transfer
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
     # @option params [String] :home_directory_type
-    #   The type of landing directory (folder) you want your users' home
-    #   directory to be when they log into the server. If you set it to
+    #   The type of landing directory (folder) that you want your users' home
+    #   directory to be when they log in to the server. If you set it to
     #   `PATH`, the user will see the absolute Amazon S3 bucket or EFS paths
     #   as is in their file transfer protocol clients. If you set it
     #   `LOGICAL`, you need to provide mappings in the `HomeDirectoryMappings`
-    #   for how you want to make Amazon S3 or EFS paths visible to your users.
+    #   for how you want to make Amazon S3 or Amazon EFS paths visible to your
+    #   users.
     #
     # @option params [Array<Types::HomeDirectoryMapEntry>] :home_directory_mappings
     #   Logical directory mappings that specify what Amazon S3 or Amazon EFS
@@ -387,10 +390,9 @@ module Aws::Transfer
     #   them visible. You must specify the `Entry` and `Target` pair, where
     #   `Entry` shows how the path is made visible and `Target` is the actual
     #   Amazon S3 or Amazon EFS path. If you only specify a target, it is
-    #   displayed as is. You also must ensure that your Amazon Web Services
-    #   Identity and Access Management (IAM) role provides access to paths in
-    #   `Target`. This value can only be set when `HomeDirectoryType` is set
-    #   to *LOGICAL*.
+    #   displayed as is. You also must ensure that your Identity and Access
+    #   Management (IAM) role provides access to paths in `Target`. This value
+    #   can be set only when `HomeDirectoryType` is set to *LOGICAL*.
     #
     #   The following is an `Entry` and `Target` pair example.
     #
@@ -404,38 +406,27 @@ module Aws::Transfer
     #
     #   The following is an `Entry` and `Target` pair example for `chroot`.
     #
-    #   `[ \{ "Entry:": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
-    #
-    #   <note markdown="1"> If the target of a logical directory entry does not exist in Amazon S3
-    #   or EFS, the entry is ignored. As a workaround, you can use the Amazon
-    #   S3 API or EFS API to create 0 byte objects as place holders for your
-    #   directory. If using the CLI, use the `s3api` or `efsapi` call instead
-    #   of `s3` or `efs` so you can use the put-object operation. For example,
-    #   you use the following: `aws s3api put-object --bucket bucketname --key
-    #   path/to/folder/`. Make sure that the end of the key name ends in a `/`
-    #   for it to be considered a folder.
-    #
-    #    </note>
+    #   `[ \{ "Entry": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
     #
     # @option params [String] :policy
-    #   A session policy for your user so that you can use the same IAM role
-    #   across multiple users. This policy scopes down user access to portions
-    #   of their Amazon S3 bucket. Variables that you can use inside this
-    #   policy include `$\{Transfer:UserName\}`,
-    #   `$\{Transfer:HomeDirectory\}`, and `$\{Transfer:HomeBucket\}`.
+    #   A session policy for your user so that you can use the same Identity
+    #   and Access Management (IAM) role across multiple users. This policy
+    #   scopes down a user's access to portions of their Amazon S3 bucket.
+    #   Variables that you can use inside this policy include
+    #   `$\{Transfer:UserName\}`, `$\{Transfer:HomeDirectory\}`, and
+    #   `$\{Transfer:HomeBucket\}`.
     #
-    #   <note markdown="1"> This only applies when the domain of `ServerId` is S3. EFS does not
-    #   use session policies.
+    #   <note markdown="1"> This policy applies only when the domain of `ServerId` is Amazon S3.
+    #   Amazon EFS does not use session policies.
     #
-    #    For session policies, Amazon Web Services Transfer Family stores the
-    #   policy as a JSON blob, instead of the Amazon Resource Name (ARN) of
-    #   the policy. You save the policy as a JSON blob and pass it in the
-    #   `Policy` argument.
+    #    For session policies, Transfer Family stores the policy as a JSON
+    #   blob, instead of the Amazon Resource Name (ARN) of the policy. You
+    #   save the policy as a JSON blob and pass it in the `Policy` argument.
     #
     #    For an example of a session policy, see [Example session policy][1].
     #
-    #    For more information, see [AssumeRole][2] in the *Amazon Web Services
-    #   Security Token Service API Reference*.
+    #    For more information, see [AssumeRole][2] in the *Security Token
+    #   Service API Reference*.
     #
     #    </note>
     #
@@ -453,13 +444,14 @@ module Aws::Transfer
     #   out of your Amazon EFS file systems.
     #
     # @option params [required, String] :role
-    #   Specifies the Amazon Resource Name (ARN) of the IAM role that controls
-    #   your users' access to your Amazon S3 bucket or EFS file system. The
-    #   policies attached to this role determine the level of access that you
-    #   want to provide your users when transferring files into and out of
-    #   your Amazon S3 bucket or EFS file system. The IAM role should also
-    #   contain a trust relationship that allows the server to access your
-    #   resources when servicing your users' transfer requests.
+    #   The Amazon Resource Name (ARN) of the Identity and Access Management
+    #   (IAM) role that controls your users' access to your Amazon S3 bucket
+    #   or Amazon EFS file system. The policies attached to this role
+    #   determine the level of access that you want to provide your users when
+    #   transferring files into and out of your Amazon S3 bucket or Amazon EFS
+    #   file system. The IAM role should also contain a trust relationship
+    #   that allows the server to access your resources when servicing your
+    #   users' transfer requests.
     #
     # @option params [required, String] :server_id
     #   A system-assigned unique identifier for a server instance. This is the
@@ -469,9 +461,9 @@ module Aws::Transfer
     #   A unique identifier that is required to identify specific groups
     #   within your directory. The users of the group that you associate have
     #   access to your Amazon S3 or Amazon EFS resources over the enabled
-    #   protocols using Amazon Web Services Transfer Family. If you know the
-    #   group name, you can view the SID values by running the following
-    #   command using Windows PowerShell.
+    #   protocols using Transfer Family. If you know the group name, you can
+    #   view the SID values by running the following command using Windows
+    #   PowerShell.
     #
     #   `Get-ADGroup -Filter \{samAccountName -like "YourGroupName*"\}
     #   -Properties * | Select SamAccountName,ObjectSid`
@@ -479,10 +471,10 @@ module Aws::Transfer
     #   In that command, replace *YourGroupName* with the name of your Active
     #   Directory group.
     #
-    #   The regex used to validate this parameter is a string of characters
-    #   consisting of uppercase and lowercase alphanumeric characters with no
-    #   spaces. You can also include underscores or any of the following
-    #   characters: =,.@:/-
+    #   The regular expression used to validate this parameter is a string of
+    #   characters consisting of uppercase and lowercase alphanumeric
+    #   characters with no spaces. You can also include underscores or any of
+    #   the following characters: =,.@:/-
     #
     # @return [Types::CreateAccessResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -525,6 +517,214 @@ module Aws::Transfer
       req.send_request(options)
     end
 
+    # Creates an agreement. An agreement is a bilateral trading partner
+    # agreement, or partnership, between an Transfer Family server and an
+    # AS2 process. The agreement defines the file and message transfer
+    # relationship between the server and the AS2 process. To define an
+    # agreement, Transfer Family combines a server, local profile, partner
+    # profile, certificate, and other attributes.
+    #
+    # The partner is identified with the `PartnerProfileId`, and the AS2
+    # process is identified with the `LocalProfileId`.
+    #
+    # @option params [String] :description
+    #   A name or short description to identify the agreement.
+    #
+    # @option params [required, String] :server_id
+    #   A system-assigned unique identifier for a server instance. This is the
+    #   specific server that the agreement uses.
+    #
+    # @option params [required, String] :local_profile_id
+    #   A unique identifier for the AS2 local profile.
+    #
+    # @option params [required, String] :partner_profile_id
+    #   A unique identifier for the partner profile used in the agreement.
+    #
+    # @option params [required, String] :base_directory
+    #   The landing directory (folder) for files transferred by using the AS2
+    #   protocol.
+    #
+    #   A `BaseDirectory` example is `/DOC-EXAMPLE-BUCKET/home/mydirectory `.
+    #
+    # @option params [required, String] :access_role
+    #   The Amazon Resource Name (ARN) of the Identity and Access Management
+    #   (IAM) role that grants access to at least the `HomeDirectory` of your
+    #   users' Amazon S3 buckets.
+    #
+    # @option params [String] :status
+    #   The status of the agreement. The agreement can be either `ACTIVE` or
+    #   `INACTIVE`.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Key-value pairs that can be used to group and search for agreements.
+    #
+    # @return [Types::CreateAgreementResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAgreementResponse#agreement_id #agreement_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_agreement({
+    #     description: "Description",
+    #     server_id: "ServerId", # required
+    #     local_profile_id: "ProfileId", # required
+    #     partner_profile_id: "ProfileId", # required
+    #     base_directory: "HomeDirectory", # required
+    #     access_role: "Role", # required
+    #     status: "ACTIVE", # accepts ACTIVE, INACTIVE
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.agreement_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CreateAgreement AWS API Documentation
+    #
+    # @overload create_agreement(params = {})
+    # @param [Hash] params ({})
+    def create_agreement(params = {}, options = {})
+      req = build_request(:create_agreement, params)
+      req.send_request(options)
+    end
+
+    # Creates the connector, which captures the parameters for an outbound
+    # connection for the AS2 protocol. The connector is required for sending
+    # files from a customer's non Amazon Web Services server.
+    #
+    # @option params [required, String] :url
+    #   The URL of the partner's AS2 endpoint.
+    #
+    # @option params [required, Types::As2ConnectorConfig] :as_2_config
+    #   A structure that contains the parameters for a connector object.
+    #
+    # @option params [required, String] :access_role
+    #   With AS2, you can send files by calling `StartFileTransfer` and
+    #   specifying the file paths in the request parameter, `SendFilePaths`.
+    #   We use the file’s parent directory (for example, for
+    #   `--send-file-paths /bucket/dir/file.txt`, parent directory is
+    #   `/bucket/dir/`) to temporarily store a processed AS2 message file,
+    #   store the MDN when we receive them from the partner, and write a final
+    #   JSON file containing relevant metadata of the transmission. So, the
+    #   `AccessRole` needs to provide read and write access to the parent
+    #   directory of the file location used in the `StartFileTransfer`
+    #   request. Additionally, you need to provide read and write access to
+    #   the parent directory of the files that you intend to send with
+    #   `StartFileTransfer`.
+    #
+    # @option params [String] :logging_role
+    #   The Amazon Resource Name (ARN) of the Identity and Access Management
+    #   (IAM) role that allows a connector to turn on CloudWatch logging for
+    #   Amazon S3 events. When set, you can view connector activity in your
+    #   CloudWatch logs.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Key-value pairs that can be used to group and search for connectors.
+    #   Tags are metadata attached to connectors for any purpose.
+    #
+    # @return [Types::CreateConnectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateConnectorResponse#connector_id #connector_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_connector({
+    #     url: "Url", # required
+    #     as_2_config: { # required
+    #       local_profile_id: "ProfileId",
+    #       partner_profile_id: "ProfileId",
+    #       message_subject: "MessageSubject",
+    #       compression: "ZLIB", # accepts ZLIB, DISABLED
+    #       encryption_algorithm: "AES128_CBC", # accepts AES128_CBC, AES192_CBC, AES256_CBC
+    #       signing_algorithm: "SHA256", # accepts SHA256, SHA384, SHA512, SHA1, NONE
+    #       mdn_signing_algorithm: "SHA256", # accepts SHA256, SHA384, SHA512, SHA1, NONE, DEFAULT
+    #       mdn_response: "SYNC", # accepts SYNC, NONE
+    #     },
+    #     access_role: "Role", # required
+    #     logging_role: "Role",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connector_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CreateConnector AWS API Documentation
+    #
+    # @overload create_connector(params = {})
+    # @param [Hash] params ({})
+    def create_connector(params = {}, options = {})
+      req = build_request(:create_connector, params)
+      req.send_request(options)
+    end
+
+    # Creates the profile for the AS2 process. The agreement is between the
+    # partner and the AS2 process.
+    #
+    # @option params [required, String] :as_2_id
+    #   The `As2Id` is the *AS2-name*, as defined in the defined in the [RFC
+    #   4130][1]. For inbound transfers, this is the `AS2-From` header for the
+    #   AS2 messages sent from the partner. For outbound connectors, this is
+    #   the `AS2-To` header for the AS2 messages sent to the partner using the
+    #   `StartFileTransfer` API operation. This ID cannot include spaces.
+    #
+    #
+    #
+    #   [1]: https://datatracker.ietf.org/doc/html/rfc4130
+    #
+    # @option params [required, String] :profile_type
+    #   Indicates whether to list only `LOCAL` type profiles or only `PARTNER`
+    #   type profiles. If not supplied in the request, the command lists all
+    #   types of profiles.
+    #
+    # @option params [Array<String>] :certificate_ids
+    #   An array of identifiers for the imported certificates. You use this
+    #   identifier for working with profiles and partner profiles.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Key-value pairs that can be used to group and search for AS2 profiles.
+    #
+    # @return [Types::CreateProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateProfileResponse#profile_id #profile_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_profile({
+    #     as_2_id: "As2Id", # required
+    #     profile_type: "LOCAL", # required, accepts LOCAL, PARTNER
+    #     certificate_ids: ["CertificateId"],
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.profile_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CreateProfile AWS API Documentation
+    #
+    # @overload create_profile(params = {})
+    # @param [Hash] params ({})
+    def create_profile(params = {}, options = {})
+      req = build_request(:create_profile, params)
+      req.send_request(options)
+    end
+
     # Instantiates an auto-scaling virtual server based on the selected file
     # transfer protocol in Amazon Web Services. When you make updates to
     # your file transfer protocol-enabled server or when you work with
@@ -532,20 +732,18 @@ module Aws::Transfer
     # to the newly created server.
     #
     # @option params [String] :certificate
-    #   The Amazon Resource Name (ARN) of the Amazon Web Services Certificate
-    #   Manager (ACM) certificate. Required when `Protocols` is set to `FTPS`.
+    #   The Amazon Resource Name (ARN) of the Certificate Manager (ACM)
+    #   certificate. Required when `Protocols` is set to `FTPS`.
     #
     #   To request a new public certificate, see [Request a public
-    #   certificate][1] in the <i> Amazon Web Services Certificate Manager
-    #   User Guide</i>.
+    #   certificate][1] in the *Certificate Manager User Guide*.
     #
     #   To import an existing certificate into ACM, see [Importing
-    #   certificates into ACM][2] in the <i> Amazon Web Services Certificate
-    #   Manager User Guide</i>.
+    #   certificates into ACM][2] in the *Certificate Manager User Guide*.
     #
     #   To request a private certificate to use FTPS through private IP
-    #   addresses, see [Request a private certificate][3] in the <i> Amazon
-    #   Web Services Certificate Manager User Guide</i>.
+    #   addresses, see [Request a private certificate][3] in the *Certificate
+    #   Manager User Guide*.
     #
     #   Certificates with the following cryptographic algorithms and key sizes
     #   are supported:
@@ -584,10 +782,10 @@ module Aws::Transfer
     # @option params [Types::EndpointDetails] :endpoint_details
     #   The virtual private cloud (VPC) endpoint settings that are configured
     #   for your server. When you host your endpoint within your VPC, you can
-    #   make it accessible only to resources within your VPC, or you can
-    #   attach Elastic IP addresses and make it accessible to clients over the
-    #   internet. Your VPC's default security groups are automatically
-    #   assigned to your endpoint.
+    #   make your endpoint accessible only to resources within your VPC, or
+    #   you can attach Elastic IP addresses and make your endpoint accessible
+    #   to clients over the internet. Your VPC's default security groups are
+    #   automatically assigned to your endpoint.
     #
     # @option params [String] :endpoint_type
     #   The type of endpoint that you want your server to use. You can choose
@@ -617,15 +815,37 @@ module Aws::Transfer
     #    </note>
     #
     # @option params [String] :host_key
-    #   The RSA private key as generated by the `ssh-keygen -N "" -m PEM -f
-    #   my-new-server-key` command.
+    #   The RSA, ECDSA, or ED25519 private key to use for your server.
+    #
+    #   Use the following command to generate an RSA 2048 bit key with no
+    #   passphrase:
+    #
+    #   `ssh-keygen -t rsa -b 2048 -N "" -m PEM -f my-new-server-key`.
+    #
+    #   Use a minimum value of 2048 for the `-b` option. You can create a
+    #   stronger key by using 3072 or 4096.
+    #
+    #   Use the following command to generate an ECDSA 256 bit key with no
+    #   passphrase:
+    #
+    #   `ssh-keygen -t ecdsa -b 256 -N "" -m PEM -f my-new-server-key`.
+    #
+    #   Valid values for the `-b` option for ECDSA are 256, 384, and 521.
+    #
+    #   Use the following command to generate an ED25519 key with no
+    #   passphrase:
+    #
+    #   `ssh-keygen -t ed25519 -N "" -f my-new-server-key`.
+    #
+    #   For all of these commands, you can replace *my-new-server-key* with a
+    #   string of your choice.
     #
     #   If you aren't planning to migrate existing users from an existing
     #   SFTP-enabled server to a new server, don't update the host key.
     #   Accidentally changing a server's host key can be disruptive.
     #
     #   For more information, see [Change the host key for your SFTP-enabled
-    #   server][1] in the *Amazon Web Services Transfer Family User Guide*.
+    #   server][1] in the *Transfer Family User Guide*.
     #
     #
     #
@@ -639,31 +859,51 @@ module Aws::Transfer
     #   Not required when `IdentityProviderType` is set to `SERVICE_MANAGED`.
     #
     # @option params [String] :identity_provider_type
-    #   Specifies the mode of authentication for a server. The default value
-    #   is `SERVICE_MANAGED`, which allows you to store and access user
-    #   credentials within the Amazon Web Services Transfer Family service.
+    #   The mode of authentication for a server. The default value is
+    #   `SERVICE_MANAGED`, which allows you to store and access user
+    #   credentials within the Transfer Family service.
     #
     #   Use `AWS_DIRECTORY_SERVICE` to provide access to Active Directory
-    #   groups in Amazon Web Services Managed Active Directory or Microsoft
-    #   Active Directory in your on-premises environment or in Amazon Web
-    #   Services using AD Connectors. This option also requires you to provide
-    #   a Directory ID using the `IdentityProviderDetails` parameter.
+    #   groups in Directory Service for Microsoft Active Directory or
+    #   Microsoft Active Directory in your on-premises environment or in
+    #   Amazon Web Services using AD Connector. This option also requires you
+    #   to provide a Directory ID by using the `IdentityProviderDetails`
+    #   parameter.
     #
     #   Use the `API_GATEWAY` value to integrate with an identity provider of
     #   your choosing. The `API_GATEWAY` setting requires you to provide an
-    #   API Gateway endpoint URL to call for authentication using the
-    #   `IdentityProviderDetails` parameter.
+    #   Amazon API Gateway endpoint URL to call for authentication by using
+    #   the `IdentityProviderDetails` parameter.
     #
-    #   Use the `AWS_LAMBDA` value to directly use a Lambda function as your
+    #   Use the `AWS_LAMBDA` value to directly use an Lambda function as your
     #   identity provider. If you choose this value, you must specify the ARN
-    #   for the lambda function in the `Function` parameter for the
+    #   for the Lambda function in the `Function` parameter or the
     #   `IdentityProviderDetails` data type.
     #
     # @option params [String] :logging_role
-    #   Specifies the Amazon Resource Name (ARN) of the Amazon Web Services
-    #   Identity and Access Management (IAM) role that allows a server to turn
-    #   on Amazon CloudWatch logging for Amazon S3 or Amazon EFS events. When
-    #   set, user activity can be viewed in your CloudWatch logs.
+    #   The Amazon Resource Name (ARN) of the Identity and Access Management
+    #   (IAM) role that allows a server to turn on Amazon CloudWatch logging
+    #   for Amazon S3 or Amazon EFSevents. When set, you can view user
+    #   activity in your CloudWatch logs.
+    #
+    # @option params [String] :post_authentication_login_banner
+    #   Specifies a string to display when users connect to a server. This
+    #   string is displayed after the user authenticates.
+    #
+    #   <note markdown="1"> The SFTP protocol does not support post-authentication display
+    #   banners.
+    #
+    #    </note>
+    #
+    # @option params [String] :pre_authentication_login_banner
+    #   Specifies a string to display when users connect to a server. This
+    #   string is displayed before the user authenticates. For example, the
+    #   following banner displays details about using the system:
+    #
+    #   `This system is for the use of authorized users only. Individuals
+    #   using this computer system without authority, or in excess of their
+    #   authority, are subject to having all of their activities on this
+    #   system monitored and recorded by system personnel.`
     #
     # @option params [Array<String>] :protocols
     #   Specifies the file transfer protocol or protocols over which your file
@@ -678,33 +918,52 @@ module Aws::Transfer
     #
     #   * `FTP` (File Transfer Protocol): Unencrypted file transfer
     #
-    #   <note markdown="1"> If you select `FTPS`, you must choose a certificate stored in Amazon
-    #   Web Services Certificate Manager (ACM) which is used to identify your
-    #   server when clients connect to it over FTPS.
+    #   * `AS2` (Applicability Statement 2): used for transporting structured
+    #     business-to-business data
     #
-    #    If `Protocol` includes either `FTP` or `FTPS`, then the `EndpointType`
-    #   must be `VPC` and the `IdentityProviderType` must be
-    #   `AWS_DIRECTORY_SERVICE` or `API_GATEWAY`.
+    #   <note markdown="1"> * If you select `FTPS`, you must choose a certificate stored in
+    #     Certificate Manager (ACM) which is used to identify your server when
+    #     clients connect to it over FTPS.
     #
-    #    If `Protocol` includes `FTP`, then `AddressAllocationIds` cannot be
-    #   associated.
+    #   * If `Protocol` includes either `FTP` or `FTPS`, then the
+    #     `EndpointType` must be `VPC` and the `IdentityProviderType` must be
+    #     `AWS_DIRECTORY_SERVICE` or `API_GATEWAY`.
     #
-    #    If `Protocol` is set only to `SFTP`, the `EndpointType` can be set to
-    #   `PUBLIC` and the `IdentityProviderType` can be set to
-    #   `SERVICE_MANAGED`.
+    #   * If `Protocol` includes `FTP`, then `AddressAllocationIds` cannot be
+    #     associated.
+    #
+    #   * If `Protocol` is set only to `SFTP`, the `EndpointType` can be set
+    #     to `PUBLIC` and the `IdentityProviderType` can be set to
+    #     `SERVICE_MANAGED`.
+    #
+    #   * If `Protocol` includes `AS2`, then the `EndpointType` must be `VPC`,
+    #     and domain must be Amazon S3.
     #
     #    </note>
     #
     # @option params [Types::ProtocolDetails] :protocol_details
     #   The protocol settings that are configured for your server.
     #
-    #   Use the `PassiveIp` parameter to indicate passive mode (for FTP and
-    #   FTPS protocols). Enter a single dotted-quad IPv4 address, such as the
-    #   external IP address of a firewall, router, or load balancer.
+    #   * To indicate passive mode (for FTP and FTPS protocols), use the
+    #     `PassiveIp` parameter. Enter a single dotted-quad IPv4 address, such
+    #     as the external IP address of a firewall, router, or load balancer.
     #
-    #   Use the `TlsSessionResumptionMode` parameter to determine whether or
-    #   not your Transfer server resumes recent, negotiated sessions through a
-    #   unique session ID.
+    #   * To ignore the error that is generated when the client attempts to
+    #     use the `SETSTAT` command on a file that you are uploading to an
+    #     Amazon S3 bucket, use the `SetStatOption` parameter. To have the
+    #     Transfer Family server ignore the `SETSTAT` command and upload files
+    #     without needing to make any changes to your SFTP client, set the
+    #     value to `ENABLE_NO_OP`. If you set the `SetStatOption` parameter to
+    #     `ENABLE_NO_OP`, Transfer Family generates a log entry to Amazon
+    #     CloudWatch Logs, so that you can determine when the client is making
+    #     a `SETSTAT` call.
+    #
+    #   * To determine whether your Transfer Family server resumes recent,
+    #     negotiated sessions through a unique session ID, use the
+    #     `TlsSessionResumptionMode` parameter.
+    #
+    #   * `As2Transports` indicates the transport method for the AS2 messages.
+    #     Currently, only HTTP is supported.
     #
     # @option params [String] :security_policy_name
     #   Specifies the name of the security policy that is attached to the
@@ -715,7 +974,7 @@ module Aws::Transfer
     #
     # @option params [Types::WorkflowDetails] :workflow_details
     #   Specifies the workflow ID for the workflow to assign and the execution
-    #   role used for executing the workflow.
+    #   role that's used for executing the workflow.
     #
     # @return [Types::CreateServerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -743,10 +1002,14 @@ module Aws::Transfer
     #     },
     #     identity_provider_type: "SERVICE_MANAGED", # accepts SERVICE_MANAGED, API_GATEWAY, AWS_DIRECTORY_SERVICE, AWS_LAMBDA
     #     logging_role: "Role",
-    #     protocols: ["SFTP"], # accepts SFTP, FTP, FTPS
+    #     post_authentication_login_banner: "PostAuthenticationLoginBanner",
+    #     pre_authentication_login_banner: "PreAuthenticationLoginBanner",
+    #     protocols: ["SFTP"], # accepts SFTP, FTP, FTPS, AS2
     #     protocol_details: {
     #       passive_ip: "PassiveIp",
     #       tls_session_resumption_mode: "DISABLED", # accepts DISABLED, ENABLED, ENFORCED
+    #       set_stat_option: "DEFAULT", # accepts DEFAULT, ENABLE_NO_OP
+    #       as_2_transports: ["HTTP"], # accepts HTTP
     #     },
     #     security_policy_name: "SecurityPolicyName",
     #     tags: [
@@ -783,9 +1046,9 @@ module Aws::Transfer
     # servers that have the `IdentityProviderType` set to `SERVICE_MANAGED`.
     # Using parameters for `CreateUser`, you can specify the user name, set
     # the home directory, store the user's public key, and assign the
-    # user's Amazon Web Services Identity and Access Management (IAM) role.
-    # You can also optionally add a session policy, and assign metadata with
-    # tags that can be used to group and search for users.
+    # user's Identity and Access Management (IAM) role. You can also
+    # optionally add a session policy, and assign metadata with tags that
+    # can be used to group and search for users.
     #
     # @option params [String] :home_directory
     #   The landing directory (folder) for a user when they log in to the
@@ -794,12 +1057,13 @@ module Aws::Transfer
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
     # @option params [String] :home_directory_type
-    #   The type of landing directory (folder) you want your users' home
-    #   directory to be when they log into the server. If you set it to
+    #   The type of landing directory (folder) that you want your users' home
+    #   directory to be when they log in to the server. If you set it to
     #   `PATH`, the user will see the absolute Amazon S3 bucket or EFS paths
     #   as is in their file transfer protocol clients. If you set it
     #   `LOGICAL`, you need to provide mappings in the `HomeDirectoryMappings`
-    #   for how you want to make Amazon S3 or EFS paths visible to your users.
+    #   for how you want to make Amazon S3 or Amazon EFS paths visible to your
+    #   users.
     #
     # @option params [Array<Types::HomeDirectoryMapEntry>] :home_directory_mappings
     #   Logical directory mappings that specify what Amazon S3 or Amazon EFS
@@ -807,10 +1071,9 @@ module Aws::Transfer
     #   them visible. You must specify the `Entry` and `Target` pair, where
     #   `Entry` shows how the path is made visible and `Target` is the actual
     #   Amazon S3 or Amazon EFS path. If you only specify a target, it is
-    #   displayed as is. You also must ensure that your Amazon Web Services
-    #   Identity and Access Management (IAM) role provides access to paths in
-    #   `Target`. This value can only be set when `HomeDirectoryType` is set
-    #   to *LOGICAL*.
+    #   displayed as is. You also must ensure that your Identity and Access
+    #   Management (IAM) role provides access to paths in `Target`. This value
+    #   can be set only when `HomeDirectoryType` is set to *LOGICAL*.
     #
     #   The following is an `Entry` and `Target` pair example.
     #
@@ -824,33 +1087,22 @@ module Aws::Transfer
     #
     #   The following is an `Entry` and `Target` pair example for `chroot`.
     #
-    #   `[ \{ "Entry:": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
-    #
-    #   <note markdown="1"> If the target of a logical directory entry does not exist in Amazon S3
-    #   or EFS, the entry is ignored. As a workaround, you can use the Amazon
-    #   S3 API or EFS API to create 0 byte objects as place holders for your
-    #   directory. If using the CLI, use the `s3api` or `efsapi` call instead
-    #   of `s3` or `efs` so you can use the put-object operation. For example,
-    #   you use the following: `aws s3api put-object --bucket bucketname --key
-    #   path/to/folder/`. Make sure that the end of the key name ends in a `/`
-    #   for it to be considered a folder.
-    #
-    #    </note>
+    #   `[ \{ "Entry": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
     #
     # @option params [String] :policy
-    #   A session policy for your user so that you can use the same IAM role
-    #   across multiple users. This policy scopes down user access to portions
-    #   of their Amazon S3 bucket. Variables that you can use inside this
-    #   policy include `$\{Transfer:UserName\}`,
-    #   `$\{Transfer:HomeDirectory\}`, and `$\{Transfer:HomeBucket\}`.
+    #   A session policy for your user so that you can use the same Identity
+    #   and Access Management (IAM) role across multiple users. This policy
+    #   scopes down a user's access to portions of their Amazon S3 bucket.
+    #   Variables that you can use inside this policy include
+    #   `$\{Transfer:UserName\}`, `$\{Transfer:HomeDirectory\}`, and
+    #   `$\{Transfer:HomeBucket\}`.
     #
-    #   <note markdown="1"> This only applies when the domain of `ServerId` is S3. EFS does not
-    #   use session policies.
+    #   <note markdown="1"> This policy applies only when the domain of `ServerId` is Amazon S3.
+    #   Amazon EFS does not use session policies.
     #
-    #    For session policies, Amazon Web Services Transfer Family stores the
-    #   policy as a JSON blob, instead of the Amazon Resource Name (ARN) of
-    #   the policy. You save the policy as a JSON blob and pass it in the
-    #   `Policy` argument.
+    #    For session policies, Transfer Family stores the policy as a JSON
+    #   blob, instead of the Amazon Resource Name (ARN) of the policy. You
+    #   save the policy as a JSON blob and pass it in the `Policy` argument.
     #
     #    For an example of a session policy, see [Example session policy][1].
     #
@@ -873,13 +1125,14 @@ module Aws::Transfer
     #   into and out of your Amazon EFS file systems.
     #
     # @option params [required, String] :role
-    #   Specifies the Amazon Resource Name (ARN) of the IAM role that controls
-    #   your users' access to your Amazon S3 bucket or EFS file system. The
-    #   policies attached to this role determine the level of access that you
-    #   want to provide your users when transferring files into and out of
-    #   your Amazon S3 bucket or EFS file system. The IAM role should also
-    #   contain a trust relationship that allows the server to access your
-    #   resources when servicing your users' transfer requests.
+    #   The Amazon Resource Name (ARN) of the Identity and Access Management
+    #   (IAM) role that controls your users' access to your Amazon S3 bucket
+    #   or Amazon EFS file system. The policies attached to this role
+    #   determine the level of access that you want to provide your users when
+    #   transferring files into and out of your Amazon S3 bucket or Amazon EFS
+    #   file system. The IAM role should also contain a trust relationship
+    #   that allows the server to access your resources when servicing your
+    #   users' transfer requests.
     #
     # @option params [required, String] :server_id
     #   A system-assigned unique identifier for a server instance. This is the
@@ -889,10 +1142,7 @@ module Aws::Transfer
     #   The public portion of the Secure Shell (SSH) key used to authenticate
     #   the user to the server.
     #
-    #   <note markdown="1"> Currently, Transfer Family does not accept elliptical curve keys (keys
-    #   beginning with `ecdsa`).
-    #
-    #    </note>
+    #   Transfer Family accepts RSA, ECDSA, and ED25519 keys.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Key-value pairs that can be used to group and search for users. Tags
@@ -969,20 +1219,20 @@ module Aws::Transfer
     #   The `TYPE` specifies which of the following actions is being taken for
     #   this step.
     #
-    #   * *Copy*\: copy the file to another location
+    #   * *COPY*\: Copy the file to another location.
     #
-    #   * *Custom*\: custom step with a lambda target
+    #   * *CUSTOM*\: Perform a custom step with an Lambda function target.
     #
-    #   * *Delete*\: delete the file
+    #   * *DELETE*\: Delete the file.
     #
-    #   * *Tag*\: add a tag to the file
+    #   * *TAG*\: Add a tag to the file.
     #
     #   <note markdown="1"> Currently, copying and tagging are supported only on S3.
     #
     #    </note>
     #
     #   For file location, you specify either the S3 bucket and key, or the
-    #   EFS filesystem ID and path.
+    #   EFS file system ID and path.
     #
     # @option params [Array<Types::WorkflowStep>] :on_exception_steps
     #   Specifies the steps (actions) to take if errors are encountered during
@@ -1023,14 +1273,17 @@ module Aws::Transfer
     #             },
     #           },
     #           overwrite_existing: "TRUE", # accepts TRUE, FALSE
+    #           source_file_location: "SourceFileLocation",
     #         },
     #         custom_step_details: {
     #           name: "WorkflowStepName",
     #           target: "CustomStepTarget",
     #           timeout_seconds: 1,
+    #           source_file_location: "SourceFileLocation",
     #         },
     #         delete_step_details: {
     #           name: "WorkflowStepName",
+    #           source_file_location: "SourceFileLocation",
     #         },
     #         tag_step_details: {
     #           name: "WorkflowStepName",
@@ -1040,6 +1293,7 @@ module Aws::Transfer
     #               value: "S3TagValue", # required
     #             },
     #           ],
+    #           source_file_location: "SourceFileLocation",
     #         },
     #       },
     #     ],
@@ -1059,14 +1313,17 @@ module Aws::Transfer
     #             },
     #           },
     #           overwrite_existing: "TRUE", # accepts TRUE, FALSE
+    #           source_file_location: "SourceFileLocation",
     #         },
     #         custom_step_details: {
     #           name: "WorkflowStepName",
     #           target: "CustomStepTarget",
     #           timeout_seconds: 1,
+    #           source_file_location: "SourceFileLocation",
     #         },
     #         delete_step_details: {
     #           name: "WorkflowStepName",
+    #           source_file_location: "SourceFileLocation",
     #         },
     #         tag_step_details: {
     #           name: "WorkflowStepName",
@@ -1076,6 +1333,7 @@ module Aws::Transfer
     #               value: "S3TagValue", # required
     #             },
     #           ],
+    #           source_file_location: "SourceFileLocation",
     #         },
     #       },
     #     ],
@@ -1111,9 +1369,9 @@ module Aws::Transfer
     #   A unique identifier that is required to identify specific groups
     #   within your directory. The users of the group that you associate have
     #   access to your Amazon S3 or Amazon EFS resources over the enabled
-    #   protocols using Amazon Web Services Transfer Family. If you know the
-    #   group name, you can view the SID values by running the following
-    #   command using Windows PowerShell.
+    #   protocols using Transfer Family. If you know the group name, you can
+    #   view the SID values by running the following command using Windows
+    #   PowerShell.
     #
     #   `Get-ADGroup -Filter \{samAccountName -like "YourGroupName*"\}
     #   -Properties * | Select SamAccountName,ObjectSid`
@@ -1121,10 +1379,10 @@ module Aws::Transfer
     #   In that command, replace *YourGroupName* with the name of your Active
     #   Directory group.
     #
-    #   The regex used to validate this parameter is a string of characters
-    #   consisting of uppercase and lowercase alphanumeric characters with no
-    #   spaces. You can also include underscores or any of the following
-    #   characters: =,.@:/-
+    #   The regular expression used to validate this parameter is a string of
+    #   characters consisting of uppercase and lowercase alphanumeric
+    #   characters with no spaces. You can also include underscores or any of
+    #   the following characters: =,.@:/-
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1141,6 +1399,100 @@ module Aws::Transfer
     # @param [Hash] params ({})
     def delete_access(params = {}, options = {})
       req = build_request(:delete_access, params)
+      req.send_request(options)
+    end
+
+    # Delete the agreement that's specified in the provided `AgreementId`.
+    #
+    # @option params [required, String] :agreement_id
+    #   A unique identifier for the agreement. This identifier is returned
+    #   when you create an agreement.
+    #
+    # @option params [required, String] :server_id
+    #   The server ID associated with the agreement that you are deleting.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_agreement({
+    #     agreement_id: "AgreementId", # required
+    #     server_id: "ServerId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DeleteAgreement AWS API Documentation
+    #
+    # @overload delete_agreement(params = {})
+    # @param [Hash] params ({})
+    def delete_agreement(params = {}, options = {})
+      req = build_request(:delete_agreement, params)
+      req.send_request(options)
+    end
+
+    # Deletes the certificate that's specified in the `CertificateId`
+    # parameter.
+    #
+    # @option params [required, String] :certificate_id
+    #   The ID of the certificate object that you are deleting.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_certificate({
+    #     certificate_id: "CertificateId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DeleteCertificate AWS API Documentation
+    #
+    # @overload delete_certificate(params = {})
+    # @param [Hash] params ({})
+    def delete_certificate(params = {}, options = {})
+      req = build_request(:delete_certificate, params)
+      req.send_request(options)
+    end
+
+    # Deletes the agreement that's specified in the provided `ConnectorId`.
+    #
+    # @option params [required, String] :connector_id
+    #   The unique identifier for the connector.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_connector({
+    #     connector_id: "ConnectorId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DeleteConnector AWS API Documentation
+    #
+    # @overload delete_connector(params = {})
+    # @param [Hash] params ({})
+    def delete_connector(params = {}, options = {})
+      req = build_request(:delete_connector, params)
+      req.send_request(options)
+    end
+
+    # Deletes the profile that's specified in the `ProfileId` parameter.
+    #
+    # @option params [required, String] :profile_id
+    #   The ID of the profile that you are deleting.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_profile({
+    #     profile_id: "ProfileId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DeleteProfile AWS API Documentation
+    #
+    # @overload delete_profile(params = {})
+    # @param [Hash] params ({})
+    def delete_profile(params = {}, options = {})
+      req = build_request(:delete_profile, params)
       req.send_request(options)
     end
 
@@ -1259,7 +1611,7 @@ module Aws::Transfer
 
     # Describes the access that is assigned to the specific file transfer
     # protocol-enabled server, as identified by its `ServerId` property and
-    # its `ExternalID`.
+    # its `ExternalId`.
     #
     # The response from this call returns the properties of the access that
     # is associated with the `ServerId` value that was specified.
@@ -1272,9 +1624,9 @@ module Aws::Transfer
     #   A unique identifier that is required to identify specific groups
     #   within your directory. The users of the group that you associate have
     #   access to your Amazon S3 or Amazon EFS resources over the enabled
-    #   protocols using Amazon Web Services Transfer Family. If you know the
-    #   group name, you can view the SID values by running the following
-    #   command using Windows PowerShell.
+    #   protocols using Transfer Family. If you know the group name, you can
+    #   view the SID values by running the following command using Windows
+    #   PowerShell.
     #
     #   `Get-ADGroup -Filter \{samAccountName -like "YourGroupName*"\}
     #   -Properties * | Select SamAccountName,ObjectSid`
@@ -1282,10 +1634,10 @@ module Aws::Transfer
     #   In that command, replace *YourGroupName* with the name of your Active
     #   Directory group.
     #
-    #   The regex used to validate this parameter is a string of characters
-    #   consisting of uppercase and lowercase alphanumeric characters with no
-    #   spaces. You can also include underscores or any of the following
-    #   characters: =,.@:/-
+    #   The regular expression used to validate this parameter is a string of
+    #   characters consisting of uppercase and lowercase alphanumeric
+    #   characters with no spaces. You can also include underscores or any of
+    #   the following characters: =,.@:/-
     #
     # @return [Types::DescribeAccessResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1321,6 +1673,137 @@ module Aws::Transfer
     # @param [Hash] params ({})
     def describe_access(params = {}, options = {})
       req = build_request(:describe_access, params)
+      req.send_request(options)
+    end
+
+    # Describes the agreement that's identified by the `AgreementId`.
+    #
+    # @option params [required, String] :agreement_id
+    #   A unique identifier for the agreement. This identifier is returned
+    #   when you create an agreement.
+    #
+    # @option params [required, String] :server_id
+    #   The server ID that's associated with the agreement.
+    #
+    # @return [Types::DescribeAgreementResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAgreementResponse#agreement #agreement} => Types::DescribedAgreement
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_agreement({
+    #     agreement_id: "AgreementId", # required
+    #     server_id: "ServerId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.agreement.arn #=> String
+    #   resp.agreement.agreement_id #=> String
+    #   resp.agreement.description #=> String
+    #   resp.agreement.status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.agreement.server_id #=> String
+    #   resp.agreement.local_profile_id #=> String
+    #   resp.agreement.partner_profile_id #=> String
+    #   resp.agreement.base_directory #=> String
+    #   resp.agreement.access_role #=> String
+    #   resp.agreement.tags #=> Array
+    #   resp.agreement.tags[0].key #=> String
+    #   resp.agreement.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribeAgreement AWS API Documentation
+    #
+    # @overload describe_agreement(params = {})
+    # @param [Hash] params ({})
+    def describe_agreement(params = {}, options = {})
+      req = build_request(:describe_agreement, params)
+      req.send_request(options)
+    end
+
+    # Describes the certificate that's identified by the `CertificateId`.
+    #
+    # @option params [required, String] :certificate_id
+    #   An array of identifiers for the imported certificates. You use this
+    #   identifier for working with profiles and partner profiles.
+    #
+    # @return [Types::DescribeCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeCertificateResponse#certificate #certificate} => Types::DescribedCertificate
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_certificate({
+    #     certificate_id: "CertificateId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.certificate.arn #=> String
+    #   resp.certificate.certificate_id #=> String
+    #   resp.certificate.usage #=> String, one of "SIGNING", "ENCRYPTION"
+    #   resp.certificate.status #=> String, one of "ACTIVE", "PENDING_ROTATION", "INACTIVE"
+    #   resp.certificate.certificate #=> String
+    #   resp.certificate.certificate_chain #=> String
+    #   resp.certificate.active_date #=> Time
+    #   resp.certificate.inactive_date #=> Time
+    #   resp.certificate.serial #=> String
+    #   resp.certificate.not_before_date #=> Time
+    #   resp.certificate.not_after_date #=> Time
+    #   resp.certificate.type #=> String, one of "CERTIFICATE", "CERTIFICATE_WITH_PRIVATE_KEY"
+    #   resp.certificate.description #=> String
+    #   resp.certificate.tags #=> Array
+    #   resp.certificate.tags[0].key #=> String
+    #   resp.certificate.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribeCertificate AWS API Documentation
+    #
+    # @overload describe_certificate(params = {})
+    # @param [Hash] params ({})
+    def describe_certificate(params = {}, options = {})
+      req = build_request(:describe_certificate, params)
+      req.send_request(options)
+    end
+
+    # Describes the connector that's identified by the `ConnectorId.`
+    #
+    # @option params [required, String] :connector_id
+    #   The unique identifier for the connector.
+    #
+    # @return [Types::DescribeConnectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeConnectorResponse#connector #connector} => Types::DescribedConnector
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_connector({
+    #     connector_id: "ConnectorId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connector.arn #=> String
+    #   resp.connector.connector_id #=> String
+    #   resp.connector.url #=> String
+    #   resp.connector.as_2_config.local_profile_id #=> String
+    #   resp.connector.as_2_config.partner_profile_id #=> String
+    #   resp.connector.as_2_config.message_subject #=> String
+    #   resp.connector.as_2_config.compression #=> String, one of "ZLIB", "DISABLED"
+    #   resp.connector.as_2_config.encryption_algorithm #=> String, one of "AES128_CBC", "AES192_CBC", "AES256_CBC"
+    #   resp.connector.as_2_config.signing_algorithm #=> String, one of "SHA256", "SHA384", "SHA512", "SHA1", "NONE"
+    #   resp.connector.as_2_config.mdn_signing_algorithm #=> String, one of "SHA256", "SHA384", "SHA512", "SHA1", "NONE", "DEFAULT"
+    #   resp.connector.as_2_config.mdn_response #=> String, one of "SYNC", "NONE"
+    #   resp.connector.access_role #=> String
+    #   resp.connector.logging_role #=> String
+    #   resp.connector.tags #=> Array
+    #   resp.connector.tags[0].key #=> String
+    #   resp.connector.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribeConnector AWS API Documentation
+    #
+    # @overload describe_connector(params = {})
+    # @param [Hash] params ({})
+    def describe_connector(params = {}, options = {})
+      req = build_request(:describe_connector, params)
       req.send_request(options)
     end
 
@@ -1369,12 +1852,12 @@ module Aws::Transfer
     #   resp.execution.results.steps #=> Array
     #   resp.execution.results.steps[0].step_type #=> String, one of "COPY", "CUSTOM", "TAG", "DELETE"
     #   resp.execution.results.steps[0].outputs #=> String
-    #   resp.execution.results.steps[0].error.type #=> String, one of "PERMISSION_DENIED"
+    #   resp.execution.results.steps[0].error.type #=> String, one of "PERMISSION_DENIED", "CUSTOM_STEP_FAILED", "THROTTLED", "ALREADY_EXISTS", "NOT_FOUND", "BAD_REQUEST", "TIMEOUT", "INTERNAL_SERVER_ERROR"
     #   resp.execution.results.steps[0].error.message #=> String
     #   resp.execution.results.on_exception_steps #=> Array
     #   resp.execution.results.on_exception_steps[0].step_type #=> String, one of "COPY", "CUSTOM", "TAG", "DELETE"
     #   resp.execution.results.on_exception_steps[0].outputs #=> String
-    #   resp.execution.results.on_exception_steps[0].error.type #=> String, one of "PERMISSION_DENIED"
+    #   resp.execution.results.on_exception_steps[0].error.type #=> String, one of "PERMISSION_DENIED", "CUSTOM_STEP_FAILED", "THROTTLED", "ALREADY_EXISTS", "NOT_FOUND", "BAD_REQUEST", "TIMEOUT", "INTERNAL_SERVER_ERROR"
     #   resp.execution.results.on_exception_steps[0].error.message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribeExecution AWS API Documentation
@@ -1383,6 +1866,43 @@ module Aws::Transfer
     # @param [Hash] params ({})
     def describe_execution(params = {}, options = {})
       req = build_request(:describe_execution, params)
+      req.send_request(options)
+    end
+
+    # Returns the details of the profile that's specified by the
+    # `ProfileId`.
+    #
+    # @option params [required, String] :profile_id
+    #   The identifier of the profile that you want described.
+    #
+    # @return [Types::DescribeProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeProfileResponse#profile #profile} => Types::DescribedProfile
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_profile({
+    #     profile_id: "ProfileId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.profile.arn #=> String
+    #   resp.profile.profile_id #=> String
+    #   resp.profile.profile_type #=> String, one of "LOCAL", "PARTNER"
+    #   resp.profile.as_2_id #=> String
+    #   resp.profile.certificate_ids #=> Array
+    #   resp.profile.certificate_ids[0] #=> String
+    #   resp.profile.tags #=> Array
+    #   resp.profile.tags[0].key #=> String
+    #   resp.profile.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribeProfile AWS API Documentation
+    #
+    # @overload describe_profile(params = {})
+    # @param [Hash] params ({})
+    def describe_profile(params = {}, options = {})
+      req = build_request(:describe_profile, params)
       req.send_request(options)
     end
 
@@ -1457,6 +1977,9 @@ module Aws::Transfer
     #   resp.server.certificate #=> String
     #   resp.server.protocol_details.passive_ip #=> String
     #   resp.server.protocol_details.tls_session_resumption_mode #=> String, one of "DISABLED", "ENABLED", "ENFORCED"
+    #   resp.server.protocol_details.set_stat_option #=> String, one of "DEFAULT", "ENABLE_NO_OP"
+    #   resp.server.protocol_details.as_2_transports #=> Array
+    #   resp.server.protocol_details.as_2_transports[0] #=> String, one of "HTTP"
     #   resp.server.domain #=> String, one of "S3", "EFS"
     #   resp.server.endpoint_details.address_allocation_ids #=> Array
     #   resp.server.endpoint_details.address_allocation_ids[0] #=> String
@@ -1474,8 +1997,10 @@ module Aws::Transfer
     #   resp.server.identity_provider_details.function #=> String
     #   resp.server.identity_provider_type #=> String, one of "SERVICE_MANAGED", "API_GATEWAY", "AWS_DIRECTORY_SERVICE", "AWS_LAMBDA"
     #   resp.server.logging_role #=> String
+    #   resp.server.post_authentication_login_banner #=> String
+    #   resp.server.pre_authentication_login_banner #=> String
     #   resp.server.protocols #=> Array
-    #   resp.server.protocols[0] #=> String, one of "SFTP", "FTP", "FTPS"
+    #   resp.server.protocols[0] #=> String, one of "SFTP", "FTP", "FTPS", "AS2"
     #   resp.server.security_policy_name #=> String
     #   resp.server.server_id #=> String
     #   resp.server.state #=> String, one of "OFFLINE", "ONLINE", "STARTING", "STOPPING", "START_FAILED", "STOP_FAILED"
@@ -1486,6 +2011,12 @@ module Aws::Transfer
     #   resp.server.workflow_details.on_upload #=> Array
     #   resp.server.workflow_details.on_upload[0].workflow_id #=> String
     #   resp.server.workflow_details.on_upload[0].execution_role #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * server_offline
+    #   * server_online
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribeServer AWS API Documentation
     #
@@ -1508,8 +2039,8 @@ module Aws::Transfer
     #
     # @option params [required, String] :user_name
     #   The name of the user assigned to one or more servers. User names are
-    #   part of the sign-in credentials to use the Amazon Web Services
-    #   Transfer Family service and perform file transfer tasks.
+    #   part of the sign-in credentials to use the Transfer Family service and
+    #   perform file transfer tasks.
     #
     # @return [Types::DescribeUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1583,14 +2114,18 @@ module Aws::Transfer
     #   resp.workflow.steps[0].copy_step_details.destination_file_location.efs_file_location.file_system_id #=> String
     #   resp.workflow.steps[0].copy_step_details.destination_file_location.efs_file_location.path #=> String
     #   resp.workflow.steps[0].copy_step_details.overwrite_existing #=> String, one of "TRUE", "FALSE"
+    #   resp.workflow.steps[0].copy_step_details.source_file_location #=> String
     #   resp.workflow.steps[0].custom_step_details.name #=> String
     #   resp.workflow.steps[0].custom_step_details.target #=> String
     #   resp.workflow.steps[0].custom_step_details.timeout_seconds #=> Integer
+    #   resp.workflow.steps[0].custom_step_details.source_file_location #=> String
     #   resp.workflow.steps[0].delete_step_details.name #=> String
+    #   resp.workflow.steps[0].delete_step_details.source_file_location #=> String
     #   resp.workflow.steps[0].tag_step_details.name #=> String
     #   resp.workflow.steps[0].tag_step_details.tags #=> Array
     #   resp.workflow.steps[0].tag_step_details.tags[0].key #=> String
     #   resp.workflow.steps[0].tag_step_details.tags[0].value #=> String
+    #   resp.workflow.steps[0].tag_step_details.source_file_location #=> String
     #   resp.workflow.on_exception_steps #=> Array
     #   resp.workflow.on_exception_steps[0].type #=> String, one of "COPY", "CUSTOM", "TAG", "DELETE"
     #   resp.workflow.on_exception_steps[0].copy_step_details.name #=> String
@@ -1599,14 +2134,18 @@ module Aws::Transfer
     #   resp.workflow.on_exception_steps[0].copy_step_details.destination_file_location.efs_file_location.file_system_id #=> String
     #   resp.workflow.on_exception_steps[0].copy_step_details.destination_file_location.efs_file_location.path #=> String
     #   resp.workflow.on_exception_steps[0].copy_step_details.overwrite_existing #=> String, one of "TRUE", "FALSE"
+    #   resp.workflow.on_exception_steps[0].copy_step_details.source_file_location #=> String
     #   resp.workflow.on_exception_steps[0].custom_step_details.name #=> String
     #   resp.workflow.on_exception_steps[0].custom_step_details.target #=> String
     #   resp.workflow.on_exception_steps[0].custom_step_details.timeout_seconds #=> Integer
+    #   resp.workflow.on_exception_steps[0].custom_step_details.source_file_location #=> String
     #   resp.workflow.on_exception_steps[0].delete_step_details.name #=> String
+    #   resp.workflow.on_exception_steps[0].delete_step_details.source_file_location #=> String
     #   resp.workflow.on_exception_steps[0].tag_step_details.name #=> String
     #   resp.workflow.on_exception_steps[0].tag_step_details.tags #=> Array
     #   resp.workflow.on_exception_steps[0].tag_step_details.tags[0].key #=> String
     #   resp.workflow.on_exception_steps[0].tag_step_details.tags[0].value #=> String
+    #   resp.workflow.on_exception_steps[0].tag_step_details.source_file_location #=> String
     #   resp.workflow.workflow_id #=> String
     #   resp.workflow.tags #=> Array
     #   resp.workflow.tags[0].key #=> String
@@ -1618,6 +2157,70 @@ module Aws::Transfer
     # @param [Hash] params ({})
     def describe_workflow(params = {}, options = {})
       req = build_request(:describe_workflow, params)
+      req.send_request(options)
+    end
+
+    # Imports the signing and encryption certificates that you need to
+    # create local (AS2) profiles and partner profiles.
+    #
+    # @option params [required, String] :usage
+    #   Specifies whether this certificate is used for signing or encryption.
+    #
+    # @option params [required, String] :certificate
+    #   The file that contains the certificate to import.
+    #
+    # @option params [String] :certificate_chain
+    #   An optional list of certificates that make up the chain for the
+    #   certificate that's being imported.
+    #
+    # @option params [String] :private_key
+    #   The file that contains the private key for the certificate that's
+    #   being imported.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :active_date
+    #   An optional date that specifies when the certificate becomes active.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :inactive_date
+    #   An optional date that specifies when the certificate becomes inactive.
+    #
+    # @option params [String] :description
+    #   A short description that helps identify the certificate.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Key-value pairs that can be used to group and search for certificates.
+    #
+    # @return [Types::ImportCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ImportCertificateResponse#certificate_id #certificate_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.import_certificate({
+    #     usage: "SIGNING", # required, accepts SIGNING, ENCRYPTION
+    #     certificate: "CertificateBodyType", # required
+    #     certificate_chain: "CertificateChainType",
+    #     private_key: "PrivateKeyType",
+    #     active_date: Time.now,
+    #     inactive_date: Time.now,
+    #     description: "Description",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.certificate_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ImportCertificate AWS API Documentation
+    #
+    # @overload import_certificate(params = {})
+    # @param [Hash] params ({})
+    def import_certificate(params = {}, options = {})
+      req = build_request(:import_certificate, params)
       req.send_request(options)
     end
 
@@ -1633,6 +2236,8 @@ module Aws::Transfer
     #
     # @option params [required, String] :ssh_public_key_body
     #   The public key portion of an SSH key pair.
+    #
+    #   Transfer Family accepts RSA, ECDSA, and ED25519 keys.
     #
     # @option params [required, String] :user_name
     #   The name of the user account that is assigned to one or more servers.
@@ -1716,10 +2321,159 @@ module Aws::Transfer
       req.send_request(options)
     end
 
+    # Returns a list of the agreements for the server that's identified by
+    # the `ServerId` that you supply. If you want to limit the results to a
+    # certain number, supply a value for the `MaxResults` parameter. If you
+    # ran the command previously and received a value for `NextToken`, you
+    # can supply that value to continue listing agreements from where you
+    # left off.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of agreements to return.
+    #
+    # @option params [String] :next_token
+    #   When you can get additional results from the `ListAgreements` call, a
+    #   `NextToken` parameter is returned in the output. You can then pass in
+    #   a subsequent command to the `NextToken` parameter to continue listing
+    #   additional agreements.
+    #
+    # @option params [required, String] :server_id
+    #   The identifier of the server for which you want a list of agreements.
+    #
+    # @return [Types::ListAgreementsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAgreementsResponse#next_token #next_token} => String
+    #   * {Types::ListAgreementsResponse#agreements #agreements} => Array&lt;Types::ListedAgreement&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_agreements({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     server_id: "ServerId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.agreements #=> Array
+    #   resp.agreements[0].arn #=> String
+    #   resp.agreements[0].agreement_id #=> String
+    #   resp.agreements[0].description #=> String
+    #   resp.agreements[0].status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.agreements[0].server_id #=> String
+    #   resp.agreements[0].local_profile_id #=> String
+    #   resp.agreements[0].partner_profile_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ListAgreements AWS API Documentation
+    #
+    # @overload list_agreements(params = {})
+    # @param [Hash] params ({})
+    def list_agreements(params = {}, options = {})
+      req = build_request(:list_agreements, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of the current certificates that have been imported
+    # into Transfer Family. If you want to limit the results to a certain
+    # number, supply a value for the `MaxResults` parameter. If you ran the
+    # command previously and received a value for the `NextToken` parameter,
+    # you can supply that value to continue listing certificates from where
+    # you left off.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of certificates to return.
+    #
+    # @option params [String] :next_token
+    #   When you can get additional results from the `ListCertificates` call,
+    #   a `NextToken` parameter is returned in the output. You can then pass
+    #   in a subsequent command to the `NextToken` parameter to continue
+    #   listing additional certificates.
+    #
+    # @return [Types::ListCertificatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCertificatesResponse#next_token #next_token} => String
+    #   * {Types::ListCertificatesResponse#certificates #certificates} => Array&lt;Types::ListedCertificate&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_certificates({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.certificates #=> Array
+    #   resp.certificates[0].arn #=> String
+    #   resp.certificates[0].certificate_id #=> String
+    #   resp.certificates[0].usage #=> String, one of "SIGNING", "ENCRYPTION"
+    #   resp.certificates[0].status #=> String, one of "ACTIVE", "PENDING_ROTATION", "INACTIVE"
+    #   resp.certificates[0].active_date #=> Time
+    #   resp.certificates[0].inactive_date #=> Time
+    #   resp.certificates[0].type #=> String, one of "CERTIFICATE", "CERTIFICATE_WITH_PRIVATE_KEY"
+    #   resp.certificates[0].description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ListCertificates AWS API Documentation
+    #
+    # @overload list_certificates(params = {})
+    # @param [Hash] params ({})
+    def list_certificates(params = {}, options = {})
+      req = build_request(:list_certificates, params)
+      req.send_request(options)
+    end
+
+    # Lists the connectors for the specified Region.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of connectors to return.
+    #
+    # @option params [String] :next_token
+    #   When you can get additional results from the `ListConnectors` call, a
+    #   `NextToken` parameter is returned in the output. You can then pass in
+    #   a subsequent command to the `NextToken` parameter to continue listing
+    #   additional connectors.
+    #
+    # @return [Types::ListConnectorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListConnectorsResponse#next_token #next_token} => String
+    #   * {Types::ListConnectorsResponse#connectors #connectors} => Array&lt;Types::ListedConnector&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_connectors({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.connectors #=> Array
+    #   resp.connectors[0].arn #=> String
+    #   resp.connectors[0].connector_id #=> String
+    #   resp.connectors[0].url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ListConnectors AWS API Documentation
+    #
+    # @overload list_connectors(params = {})
+    # @param [Hash] params ({})
+    def list_connectors(params = {}, options = {})
+      req = build_request(:list_connectors, params)
+      req.send_request(options)
+    end
+
     # Lists all executions for the specified workflow.
     #
     # @option params [Integer] :max_results
-    #   Specifies the aximum number of executions to return.
+    #   Specifies the maximum number of executions to return.
     #
     # @option params [String] :next_token
     #   `ListExecutions` returns the `NextToken` parameter in the output. You
@@ -1728,13 +2482,13 @@ module Aws::Transfer
     #
     #   This is useful for pagination, for instance. If you have 100
     #   executions for a workflow, you might only want to list first 10. If
-    #   so, callthe API by specifing the `max-results`\:
+    #   so, call the API by specifying the `max-results`\:
     #
     #   `aws transfer list-executions --max-results 10`
     #
     #   This returns details for the first 10 executions, as well as the
     #   pointer (`NextToken`) to the eleventh execution. You can now call the
-    #   API again, suppling the `NextToken` value you received:
+    #   API again, supplying the `NextToken` value you received:
     #
     #   `aws transfer list-executions --max-results 10 --next-token
     #   $somePointerReturnedFromPreviousListResult`
@@ -1785,6 +2539,58 @@ module Aws::Transfer
     # @param [Hash] params ({})
     def list_executions(params = {}, options = {})
       req = build_request(:list_executions, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of the profiles for your system. If you want to limit
+    # the results to a certain number, supply a value for the `MaxResults`
+    # parameter. If you ran the command previously and received a value for
+    # `NextToken`, you can supply that value to continue listing profiles
+    # from where you left off.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of profiles to return.
+    #
+    # @option params [String] :next_token
+    #   When there are additional results that were not returned, a
+    #   `NextToken` parameter is returned. You can use that value for a
+    #   subsequent call to `ListProfiles` to continue listing results.
+    #
+    # @option params [String] :profile_type
+    #   Indicates whether to list only `LOCAL` type profiles or only `PARTNER`
+    #   type profiles. If not supplied in the request, the command lists all
+    #   types of profiles.
+    #
+    # @return [Types::ListProfilesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListProfilesResponse#next_token #next_token} => String
+    #   * {Types::ListProfilesResponse#profiles #profiles} => Array&lt;Types::ListedProfile&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_profiles({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     profile_type: "LOCAL", # accepts LOCAL, PARTNER
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.profiles #=> Array
+    #   resp.profiles[0].arn #=> String
+    #   resp.profiles[0].profile_id #=> String
+    #   resp.profiles[0].as_2_id #=> String
+    #   resp.profiles[0].profile_type #=> String, one of "LOCAL", "PARTNER"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ListProfiles AWS API Documentation
+    #
+    # @overload list_profiles(params = {})
+    # @param [Hash] params ({})
+    def list_profiles(params = {}, options = {})
+      req = build_request(:list_profiles, params)
       req.send_request(options)
     end
 
@@ -2064,6 +2870,41 @@ module Aws::Transfer
       req.send_request(options)
     end
 
+    # Begins an outbound file transfer. You specify the `ConnectorId` and
+    # the file paths for where to send the files.
+    #
+    # @option params [required, String] :connector_id
+    #   The unique identifier for the connector.
+    #
+    # @option params [required, Array<String>] :send_file_paths
+    #   An array of strings. Each string represents the absolute path for one
+    #   outbound file transfer. For example, ` DOC-EXAMPLE-BUCKET/myfile.txt
+    #   `.
+    #
+    # @return [Types::StartFileTransferResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartFileTransferResponse#transfer_id #transfer_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_file_transfer({
+    #     connector_id: "ConnectorId", # required
+    #     send_file_paths: ["FilePath"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transfer_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/StartFileTransfer AWS API Documentation
+    #
+    # @overload start_file_transfer(params = {})
+    # @param [Hash] params ({})
+    def start_file_transfer(params = {}, options = {})
+      req = build_request(:start_file_transfer, params)
+      req.send_request(options)
+    end
+
     # Changes the state of a file transfer protocol-enabled server from
     # `OFFLINE` to `ONLINE`. It has no impact on a server that is already
     # `ONLINE`. An `ONLINE` server can accept and process file transfer
@@ -2100,7 +2941,7 @@ module Aws::Transfer
     # file transfer jobs. Information tied to your server, such as server
     # and user properties, are not affected by stopping your server.
     #
-    # <note markdown="1"> Stopping the server will not reduce or impact your file transfer
+    # <note markdown="1"> Stopping the server does not reduce or impact your file transfer
     # protocol endpoint billing; you must delete the server to stop being
     # billed.
     #
@@ -2238,7 +3079,7 @@ module Aws::Transfer
     #
     #   resp = client.test_identity_provider({
     #     server_id: "ServerId", # required
-    #     server_protocol: "SFTP", # accepts SFTP, FTP, FTPS
+    #     server_protocol: "SFTP", # accepts SFTP, FTP, FTPS, AS2
     #     source_ip: "SourceIp",
     #     user_name: "UserName", # required
     #     user_password: "UserPassword",
@@ -2304,12 +3145,13 @@ module Aws::Transfer
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
     # @option params [String] :home_directory_type
-    #   The type of landing directory (folder) you want your users' home
-    #   directory to be when they log into the server. If you set it to
+    #   The type of landing directory (folder) that you want your users' home
+    #   directory to be when they log in to the server. If you set it to
     #   `PATH`, the user will see the absolute Amazon S3 bucket or EFS paths
     #   as is in their file transfer protocol clients. If you set it
     #   `LOGICAL`, you need to provide mappings in the `HomeDirectoryMappings`
-    #   for how you want to make Amazon S3 or EFS paths visible to your users.
+    #   for how you want to make Amazon S3 or Amazon EFS paths visible to your
+    #   users.
     #
     # @option params [Array<Types::HomeDirectoryMapEntry>] :home_directory_mappings
     #   Logical directory mappings that specify what Amazon S3 or Amazon EFS
@@ -2317,10 +3159,9 @@ module Aws::Transfer
     #   them visible. You must specify the `Entry` and `Target` pair, where
     #   `Entry` shows how the path is made visible and `Target` is the actual
     #   Amazon S3 or Amazon EFS path. If you only specify a target, it is
-    #   displayed as is. You also must ensure that your Amazon Web Services
-    #   Identity and Access Management (IAM) role provides access to paths in
-    #   `Target`. This value can only be set when `HomeDirectoryType` is set
-    #   to *LOGICAL*.
+    #   displayed as is. You also must ensure that your Identity and Access
+    #   Management (IAM) role provides access to paths in `Target`. This value
+    #   can be set only when `HomeDirectoryType` is set to *LOGICAL*.
     #
     #   The following is an `Entry` and `Target` pair example.
     #
@@ -2334,33 +3175,22 @@ module Aws::Transfer
     #
     #   The following is an `Entry` and `Target` pair example for `chroot`.
     #
-    #   `[ \{ "Entry:": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
-    #
-    #   <note markdown="1"> If the target of a logical directory entry does not exist in Amazon S3
-    #   or EFS, the entry is ignored. As a workaround, you can use the Amazon
-    #   S3 API or EFS API to create 0 byte objects as place holders for your
-    #   directory. If using the CLI, use the `s3api` or `efsapi` call instead
-    #   of `s3` or `efs` so you can use the put-object operation. For example,
-    #   you use the following: `aws s3api put-object --bucket bucketname --key
-    #   path/to/folder/`. Make sure that the end of the key name ends in a `/`
-    #   for it to be considered a folder.
-    #
-    #    </note>
+    #   `[ \{ "Entry": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
     #
     # @option params [String] :policy
-    #   A session policy for your user so that you can use the same IAM role
-    #   across multiple users. This policy scopes down user access to portions
-    #   of their Amazon S3 bucket. Variables that you can use inside this
-    #   policy include `$\{Transfer:UserName\}`,
-    #   `$\{Transfer:HomeDirectory\}`, and `$\{Transfer:HomeBucket\}`.
+    #   A session policy for your user so that you can use the same Identity
+    #   and Access Management (IAM) role across multiple users. This policy
+    #   scopes down a user's access to portions of their Amazon S3 bucket.
+    #   Variables that you can use inside this policy include
+    #   `$\{Transfer:UserName\}`, `$\{Transfer:HomeDirectory\}`, and
+    #   `$\{Transfer:HomeBucket\}`.
     #
-    #   <note markdown="1"> This only applies when the domain of `ServerId` is S3. EFS does not
-    #   use session policies.
+    #   <note markdown="1"> This policy applies only when the domain of `ServerId` is Amazon S3.
+    #   Amazon EFS does not use session policies.
     #
-    #    For session policies, Amazon Web Services Transfer Family stores the
-    #   policy as a JSON blob, instead of the Amazon Resource Name (ARN) of
-    #   the policy. You save the policy as a JSON blob and pass it in the
-    #   `Policy` argument.
+    #    For session policies, Transfer Family stores the policy as a JSON
+    #   blob, instead of the Amazon Resource Name (ARN) of the policy. You
+    #   save the policy as a JSON blob and pass it in the `Policy` argument.
     #
     #    For an example of a session policy, see [Example session policy][1].
     #
@@ -2383,13 +3213,14 @@ module Aws::Transfer
     #   out of your Amazon EFS file systems.
     #
     # @option params [String] :role
-    #   Specifies the Amazon Resource Name (ARN) of the IAM role that controls
-    #   your users' access to your Amazon S3 bucket or EFS file system. The
-    #   policies attached to this role determine the level of access that you
-    #   want to provide your users when transferring files into and out of
-    #   your Amazon S3 bucket or EFS file system. The IAM role should also
-    #   contain a trust relationship that allows the server to access your
-    #   resources when servicing your users' transfer requests.
+    #   The Amazon Resource Name (ARN) of the Identity and Access Management
+    #   (IAM) role that controls your users' access to your Amazon S3 bucket
+    #   or Amazon EFS file system. The policies attached to this role
+    #   determine the level of access that you want to provide your users when
+    #   transferring files into and out of your Amazon S3 bucket or Amazon EFS
+    #   file system. The IAM role should also contain a trust relationship
+    #   that allows the server to access your resources when servicing your
+    #   users' transfer requests.
     #
     # @option params [required, String] :server_id
     #   A system-assigned unique identifier for a server instance. This is the
@@ -2399,9 +3230,9 @@ module Aws::Transfer
     #   A unique identifier that is required to identify specific groups
     #   within your directory. The users of the group that you associate have
     #   access to your Amazon S3 or Amazon EFS resources over the enabled
-    #   protocols using Amazon Web Services Transfer Family. If you know the
-    #   group name, you can view the SID values by running the following
-    #   command using Windows PowerShell.
+    #   protocols using Transfer Family. If you know the group name, you can
+    #   view the SID values by running the following command using Windows
+    #   PowerShell.
     #
     #   `Get-ADGroup -Filter \{samAccountName -like "YourGroupName*"\}
     #   -Properties * | Select SamAccountName,ObjectSid`
@@ -2409,10 +3240,10 @@ module Aws::Transfer
     #   In that command, replace *YourGroupName* with the name of your Active
     #   Directory group.
     #
-    #   The regex used to validate this parameter is a string of characters
-    #   consisting of uppercase and lowercase alphanumeric characters with no
-    #   spaces. You can also include underscores or any of the following
-    #   characters: =,.@:/-
+    #   The regular expression used to validate this parameter is a string of
+    #   characters consisting of uppercase and lowercase alphanumeric
+    #   characters with no spaces. You can also include underscores or any of
+    #   the following characters: =,.@:/-
     #
     # @return [Types::UpdateAccessResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2452,6 +3283,216 @@ module Aws::Transfer
     # @param [Hash] params ({})
     def update_access(params = {}, options = {})
       req = build_request(:update_access, params)
+      req.send_request(options)
+    end
+
+    # Updates some of the parameters for an existing agreement. Provide the
+    # `AgreementId` and the `ServerId` for the agreement that you want to
+    # update, along with the new values for the parameters to update.
+    #
+    # @option params [required, String] :agreement_id
+    #   A unique identifier for the agreement. This identifier is returned
+    #   when you create an agreement.
+    #
+    # @option params [required, String] :server_id
+    #   A system-assigned unique identifier for a server instance. This is the
+    #   specific server that the agreement uses.
+    #
+    # @option params [String] :description
+    #   To replace the existing description, provide a short description for
+    #   the agreement.
+    #
+    # @option params [String] :status
+    #   You can update the status for the agreement, either activating an
+    #   inactive agreement or the reverse.
+    #
+    # @option params [String] :local_profile_id
+    #   To change the local profile identifier, provide a new value here.
+    #
+    # @option params [String] :partner_profile_id
+    #   To change the partner profile identifier, provide a new value here.
+    #
+    # @option params [String] :base_directory
+    #   To change the landing directory (folder) for files that are
+    #   transferred, provide the bucket folder that you want to use; for
+    #   example, `/DOC-EXAMPLE-BUCKET/home/mydirectory `.
+    #
+    # @option params [String] :access_role
+    #   The Amazon Resource Name (ARN) of the Identity and Access Management
+    #   (IAM) role that grants access to at least the `HomeDirectory` of your
+    #   users' Amazon S3 buckets.
+    #
+    # @return [Types::UpdateAgreementResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAgreementResponse#agreement_id #agreement_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_agreement({
+    #     agreement_id: "AgreementId", # required
+    #     server_id: "ServerId", # required
+    #     description: "Description",
+    #     status: "ACTIVE", # accepts ACTIVE, INACTIVE
+    #     local_profile_id: "ProfileId",
+    #     partner_profile_id: "ProfileId",
+    #     base_directory: "HomeDirectory",
+    #     access_role: "Role",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.agreement_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateAgreement AWS API Documentation
+    #
+    # @overload update_agreement(params = {})
+    # @param [Hash] params ({})
+    def update_agreement(params = {}, options = {})
+      req = build_request(:update_agreement, params)
+      req.send_request(options)
+    end
+
+    # Updates the active and inactive dates for a certificate.
+    #
+    # @option params [required, String] :certificate_id
+    #   The identifier of the certificate object that you are updating.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :active_date
+    #   An optional date that specifies when the certificate becomes active.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :inactive_date
+    #   An optional date that specifies when the certificate becomes inactive.
+    #
+    # @option params [String] :description
+    #   A short description to help identify the certificate.
+    #
+    # @return [Types::UpdateCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateCertificateResponse#certificate_id #certificate_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_certificate({
+    #     certificate_id: "CertificateId", # required
+    #     active_date: Time.now,
+    #     inactive_date: Time.now,
+    #     description: "Description",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.certificate_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateCertificate AWS API Documentation
+    #
+    # @overload update_certificate(params = {})
+    # @param [Hash] params ({})
+    def update_certificate(params = {}, options = {})
+      req = build_request(:update_certificate, params)
+      req.send_request(options)
+    end
+
+    # Updates some of the parameters for an existing connector. Provide the
+    # `ConnectorId` for the connector that you want to update, along with
+    # the new values for the parameters to update.
+    #
+    # @option params [required, String] :connector_id
+    #   The unique identifier for the connector.
+    #
+    # @option params [String] :url
+    #   The URL of the partner's AS2 endpoint.
+    #
+    # @option params [Types::As2ConnectorConfig] :as_2_config
+    #   A structure that contains the parameters for a connector object.
+    #
+    # @option params [String] :access_role
+    #   With AS2, you can send files by calling `StartFileTransfer` and
+    #   specifying the file paths in the request parameter, `SendFilePaths`.
+    #   We use the file’s parent directory (for example, for
+    #   `--send-file-paths /bucket/dir/file.txt`, parent directory is
+    #   `/bucket/dir/`) to temporarily store a processed AS2 message file,
+    #   store the MDN when we receive them from the partner, and write a final
+    #   JSON file containing relevant metadata of the transmission. So, the
+    #   `AccessRole` needs to provide read and write access to the parent
+    #   directory of the file location used in the `StartFileTransfer`
+    #   request. Additionally, you need to provide read and write access to
+    #   the parent directory of the files that you intend to send with
+    #   `StartFileTransfer`.
+    #
+    # @option params [String] :logging_role
+    #   The Amazon Resource Name (ARN) of the Identity and Access Management
+    #   (IAM) role that allows a connector to turn on CloudWatch logging for
+    #   Amazon S3 events. When set, you can view connector activity in your
+    #   CloudWatch logs.
+    #
+    # @return [Types::UpdateConnectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateConnectorResponse#connector_id #connector_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_connector({
+    #     connector_id: "ConnectorId", # required
+    #     url: "Url",
+    #     as_2_config: {
+    #       local_profile_id: "ProfileId",
+    #       partner_profile_id: "ProfileId",
+    #       message_subject: "MessageSubject",
+    #       compression: "ZLIB", # accepts ZLIB, DISABLED
+    #       encryption_algorithm: "AES128_CBC", # accepts AES128_CBC, AES192_CBC, AES256_CBC
+    #       signing_algorithm: "SHA256", # accepts SHA256, SHA384, SHA512, SHA1, NONE
+    #       mdn_signing_algorithm: "SHA256", # accepts SHA256, SHA384, SHA512, SHA1, NONE, DEFAULT
+    #       mdn_response: "SYNC", # accepts SYNC, NONE
+    #     },
+    #     access_role: "Role",
+    #     logging_role: "Role",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connector_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateConnector AWS API Documentation
+    #
+    # @overload update_connector(params = {})
+    # @param [Hash] params ({})
+    def update_connector(params = {}, options = {})
+      req = build_request(:update_connector, params)
+      req.send_request(options)
+    end
+
+    # Updates some of the parameters for an existing profile. Provide the
+    # `ProfileId` for the profile that you want to update, along with the
+    # new values for the parameters to update.
+    #
+    # @option params [required, String] :profile_id
+    #   The identifier of the profile object that you are updating.
+    #
+    # @option params [Array<String>] :certificate_ids
+    #   An array of identifiers for the imported certificates. You use this
+    #   identifier for working with profiles and partner profiles.
+    #
+    # @return [Types::UpdateProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateProfileResponse#profile_id #profile_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_profile({
+    #     profile_id: "ProfileId", # required
+    #     certificate_ids: ["CertificateId"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.profile_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateProfile AWS API Documentation
+    #
+    # @overload update_profile(params = {})
+    # @param [Hash] params ({})
+    def update_profile(params = {}, options = {})
+      req = build_request(:update_profile, params)
       req.send_request(options)
     end
 
@@ -2504,21 +3545,34 @@ module Aws::Transfer
     # @option params [Types::ProtocolDetails] :protocol_details
     #   The protocol settings that are configured for your server.
     #
-    #   Use the `PassiveIp` parameter to indicate passive mode (for FTP and
-    #   FTPS protocols). Enter a single dotted-quad IPv4 address, such as the
-    #   external IP address of a firewall, router, or load balancer.
+    #   * To indicate passive mode (for FTP and FTPS protocols), use the
+    #     `PassiveIp` parameter. Enter a single dotted-quad IPv4 address, such
+    #     as the external IP address of a firewall, router, or load balancer.
     #
-    #   Use the `TlsSessionResumptionMode` parameter to determine whether or
-    #   not your Transfer server resumes recent, negotiated sessions through a
-    #   unique session ID.
+    #   * To ignore the error that is generated when the client attempts to
+    #     use the `SETSTAT` command on a file that you are uploading to an
+    #     Amazon S3 bucket, use the `SetStatOption` parameter. To have the
+    #     Transfer Family server ignore the `SETSTAT` command and upload files
+    #     without needing to make any changes to your SFTP client, set the
+    #     value to `ENABLE_NO_OP`. If you set the `SetStatOption` parameter to
+    #     `ENABLE_NO_OP`, Transfer Family generates a log entry to Amazon
+    #     CloudWatch Logs, so that you can determine when the client is making
+    #     a `SETSTAT` call.
+    #
+    #   * To determine whether your Transfer Family server resumes recent,
+    #     negotiated sessions through a unique session ID, use the
+    #     `TlsSessionResumptionMode` parameter.
+    #
+    #   * `As2Transports` indicates the transport method for the AS2 messages.
+    #     Currently, only HTTP is supported.
     #
     # @option params [Types::EndpointDetails] :endpoint_details
     #   The virtual private cloud (VPC) endpoint settings that are configured
     #   for your server. When you host your endpoint within your VPC, you can
-    #   make it accessible only to resources within your VPC, or you can
-    #   attach Elastic IP addresses and make it accessible to clients over the
-    #   internet. Your VPC's default security groups are automatically
-    #   assigned to your endpoint.
+    #   make your endpoint accessible only to resources within your VPC, or
+    #   you can attach Elastic IP addresses and make your endpoint accessible
+    #   to clients over the internet. Your VPC's default security groups are
+    #   automatically assigned to your endpoint.
     #
     # @option params [String] :endpoint_type
     #   The type of endpoint that you want your server to use. You can choose
@@ -2548,15 +3602,37 @@ module Aws::Transfer
     #    </note>
     #
     # @option params [String] :host_key
-    #   The RSA private key as generated by `ssh-keygen -N "" -m PEM -f
-    #   my-new-server-key`.
+    #   The RSA, ECDSA, or ED25519 private key to use for your server.
+    #
+    #   Use the following command to generate an RSA 2048 bit key with no
+    #   passphrase:
+    #
+    #   `ssh-keygen -t rsa -b 2048 -N "" -m PEM -f my-new-server-key`.
+    #
+    #   Use a minimum value of 2048 for the `-b` option. You can create a
+    #   stronger key by using 3072 or 4096.
+    #
+    #   Use the following command to generate an ECDSA 256 bit key with no
+    #   passphrase:
+    #
+    #   `ssh-keygen -t ecdsa -b 256 -N "" -m PEM -f my-new-server-key`.
+    #
+    #   Valid values for the `-b` option for ECDSA are 256, 384, and 521.
+    #
+    #   Use the following command to generate an ED25519 key with no
+    #   passphrase:
+    #
+    #   `ssh-keygen -t ed25519 -N "" -f my-new-server-key`.
+    #
+    #   For all of these commands, you can replace *my-new-server-key* with a
+    #   string of your choice.
     #
     #   If you aren't planning to migrate existing users from an existing
-    #   server to a new server, don't update the host key. Accidentally
-    #   changing a server's host key can be disruptive.
+    #   SFTP-enabled server to a new server, don't update the host key.
+    #   Accidentally changing a server's host key can be disruptive.
     #
     #   For more information, see [Change the host key for your SFTP-enabled
-    #   server][1] in the *Amazon Web ServicesTransfer Family User Guide*.
+    #   server][1] in the *Transfer Family User Guide*.
     #
     #
     #
@@ -2567,10 +3643,29 @@ module Aws::Transfer
     #   customer's authentication API method.
     #
     # @option params [String] :logging_role
-    #   Specifies the Amazon Resource Name (ARN) of the Amazon Web Services
-    #   Identity and Access Management (IAM) role that allows a server to turn
-    #   on Amazon CloudWatch logging for Amazon S3 or Amazon EFS events. When
-    #   set, user activity can be viewed in your CloudWatch logs.
+    #   The Amazon Resource Name (ARN) of the Identity and Access Management
+    #   (IAM) role that allows a server to turn on Amazon CloudWatch logging
+    #   for Amazon S3 or Amazon EFSevents. When set, you can view user
+    #   activity in your CloudWatch logs.
+    #
+    # @option params [String] :post_authentication_login_banner
+    #   Specifies a string to display when users connect to a server. This
+    #   string is displayed after the user authenticates.
+    #
+    #   <note markdown="1"> The SFTP protocol does not support post-authentication display
+    #   banners.
+    #
+    #    </note>
+    #
+    # @option params [String] :pre_authentication_login_banner
+    #   Specifies a string to display when users connect to a server. This
+    #   string is displayed before the user authenticates. For example, the
+    #   following banner displays details about using the system:
+    #
+    #   `This system is for the use of authorized users only. Individuals
+    #   using this computer system without authority, or in excess of their
+    #   authority, are subject to having all of their activities on this
+    #   system monitored and recorded by system personnel.`
     #
     # @option params [Array<String>] :protocols
     #   Specifies the file transfer protocol or protocols over which your file
@@ -2612,7 +3707,13 @@ module Aws::Transfer
     #
     # @option params [Types::WorkflowDetails] :workflow_details
     #   Specifies the workflow ID for the workflow to assign and the execution
-    #   role used for executing the workflow.
+    #   role that's used for executing the workflow.
+    #
+    #   To remove an associated workflow from a server, you can provide an
+    #   empty `OnUpload` object, as in the following example.
+    #
+    #   `aws transfer update-server --server-id s-01234567890abcdef
+    #   --workflow-details '\{"OnUpload":[]\}'`
     #
     # @return [Types::UpdateServerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2625,6 +3726,8 @@ module Aws::Transfer
     #     protocol_details: {
     #       passive_ip: "PassiveIp",
     #       tls_session_resumption_mode: "DISABLED", # accepts DISABLED, ENABLED, ENFORCED
+    #       set_stat_option: "DEFAULT", # accepts DEFAULT, ENABLE_NO_OP
+    #       as_2_transports: ["HTTP"], # accepts HTTP
     #     },
     #     endpoint_details: {
     #       address_allocation_ids: ["AddressAllocationId"],
@@ -2642,7 +3745,9 @@ module Aws::Transfer
     #       function: "Function",
     #     },
     #     logging_role: "NullableRole",
-    #     protocols: ["SFTP"], # accepts SFTP, FTP, FTPS
+    #     post_authentication_login_banner: "PostAuthenticationLoginBanner",
+    #     pre_authentication_login_banner: "PreAuthenticationLoginBanner",
+    #     protocols: ["SFTP"], # accepts SFTP, FTP, FTPS, AS2
     #     security_policy_name: "SecurityPolicyName",
     #     server_id: "ServerId", # required
     #     workflow_details: {
@@ -2682,12 +3787,13 @@ module Aws::Transfer
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
     # @option params [String] :home_directory_type
-    #   The type of landing directory (folder) you want your users' home
-    #   directory to be when they log into the server. If you set it to
+    #   The type of landing directory (folder) that you want your users' home
+    #   directory to be when they log in to the server. If you set it to
     #   `PATH`, the user will see the absolute Amazon S3 bucket or EFS paths
     #   as is in their file transfer protocol clients. If you set it
     #   `LOGICAL`, you need to provide mappings in the `HomeDirectoryMappings`
-    #   for how you want to make Amazon S3 or EFS paths visible to your users.
+    #   for how you want to make Amazon S3 or Amazon EFS paths visible to your
+    #   users.
     #
     # @option params [Array<Types::HomeDirectoryMapEntry>] :home_directory_mappings
     #   Logical directory mappings that specify what Amazon S3 or Amazon EFS
@@ -2695,10 +3801,9 @@ module Aws::Transfer
     #   them visible. You must specify the `Entry` and `Target` pair, where
     #   `Entry` shows how the path is made visible and `Target` is the actual
     #   Amazon S3 or Amazon EFS path. If you only specify a target, it is
-    #   displayed as is. You also must ensure that your Amazon Web Services
-    #   Identity and Access Management (IAM) role provides access to paths in
-    #   `Target`. This value can only be set when `HomeDirectoryType` is set
-    #   to *LOGICAL*.
+    #   displayed as is. You also must ensure that your Identity and Access
+    #   Management (IAM) role provides access to paths in `Target`. This value
+    #   can be set only when `HomeDirectoryType` is set to *LOGICAL*.
     #
     #   The following is an `Entry` and `Target` pair example.
     #
@@ -2712,33 +3817,22 @@ module Aws::Transfer
     #
     #   The following is an `Entry` and `Target` pair example for `chroot`.
     #
-    #   `[ \{ "Entry:": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
-    #
-    #   <note markdown="1"> If the target of a logical directory entry does not exist in Amazon S3
-    #   or EFS, the entry is ignored. As a workaround, you can use the Amazon
-    #   S3 API or EFS API to create 0 byte objects as place holders for your
-    #   directory. If using the CLI, use the `s3api` or `efsapi` call instead
-    #   of `s3` or `efs` so you can use the put-object operation. For example,
-    #   you use the following: `aws s3api put-object --bucket bucketname --key
-    #   path/to/folder/`. Make sure that the end of the key name ends in a `/`
-    #   for it to be considered a folder.
-    #
-    #    </note>
+    #   `[ \{ "Entry": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
     #
     # @option params [String] :policy
-    #   A session policy for your user so that you can use the same IAM role
-    #   across multiple users. This policy scopes down user access to portions
-    #   of their Amazon S3 bucket. Variables that you can use inside this
-    #   policy include `$\{Transfer:UserName\}`,
-    #   `$\{Transfer:HomeDirectory\}`, and `$\{Transfer:HomeBucket\}`.
+    #   A session policy for your user so that you can use the same Identity
+    #   and Access Management (IAM) role across multiple users. This policy
+    #   scopes down a user's access to portions of their Amazon S3 bucket.
+    #   Variables that you can use inside this policy include
+    #   `$\{Transfer:UserName\}`, `$\{Transfer:HomeDirectory\}`, and
+    #   `$\{Transfer:HomeBucket\}`.
     #
-    #   <note markdown="1"> This only applies when the domain of `ServerId` is S3. EFS does not
-    #   use session policies.
+    #   <note markdown="1"> This policy applies only when the domain of `ServerId` is Amazon S3.
+    #   Amazon EFS does not use session policies.
     #
-    #    For session policies, Amazon Web Services Transfer Family stores the
-    #   policy as a JSON blob, instead of the Amazon Resource Name (ARN) of
-    #   the policy. You save the policy as a JSON blob and pass it in the
-    #   `Policy` argument.
+    #    For session policies, Transfer Family stores the policy as a JSON
+    #   blob, instead of the Amazon Resource Name (ARN) of the policy. You
+    #   save the policy as a JSON blob and pass it in the `Policy` argument.
     #
     #    For an example of a session policy, see [Creating a session
     #   policy][1].
@@ -2762,13 +3856,14 @@ module Aws::Transfer
     #   transferring files into and out of your Amazon EFS file systems.
     #
     # @option params [String] :role
-    #   Specifies the Amazon Resource Name (ARN) of the IAM role that controls
-    #   your users' access to your Amazon S3 bucket or EFS file system. The
-    #   policies attached to this role determine the level of access that you
-    #   want to provide your users when transferring files into and out of
-    #   your Amazon S3 bucket or EFS file system. The IAM role should also
-    #   contain a trust relationship that allows the server to access your
-    #   resources when servicing your users' transfer requests.
+    #   The Amazon Resource Name (ARN) of the Identity and Access Management
+    #   (IAM) role that controls your users' access to your Amazon S3 bucket
+    #   or Amazon EFS file system. The policies attached to this role
+    #   determine the level of access that you want to provide your users when
+    #   transferring files into and out of your Amazon S3 bucket or Amazon EFS
+    #   file system. The IAM role should also contain a trust relationship
+    #   that allows the server to access your resources when servicing your
+    #   users' transfer requests.
     #
     # @option params [required, String] :server_id
     #   A system-assigned unique identifier for a server instance that the
@@ -2836,14 +3931,129 @@ module Aws::Transfer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
+    end
+
+    # Polls an API operation until a resource enters a desired state.
+    #
+    # ## Basic Usage
+    #
+    # A waiter will call an API operation until:
+    #
+    # * It is successful
+    # * It enters a terminal state
+    # * It makes the maximum number of attempts
+    #
+    # In between attempts, the waiter will sleep.
+    #
+    #     # polls in a loop, sleeping between attempts
+    #     client.wait_until(waiter_name, params)
+    #
+    # ## Configuration
+    #
+    # You can configure the maximum number of polling attempts, and the
+    # delay (in seconds) between each polling attempt. You can pass
+    # configuration as the final arguments hash.
+    #
+    #     # poll for ~25 seconds
+    #     client.wait_until(waiter_name, params, {
+    #       max_attempts: 5,
+    #       delay: 5,
+    #     })
+    #
+    # ## Callbacks
+    #
+    # You can be notified before each polling attempt and before each
+    # delay. If you throw `:success` or `:failure` from these callbacks,
+    # it will terminate the waiter.
+    #
+    #     started_at = Time.now
+    #     client.wait_until(waiter_name, params, {
+    #
+    #       # disable max attempts
+    #       max_attempts: nil,
+    #
+    #       # poll for 1 hour, instead of a number of attempts
+    #       before_wait: -> (attempts, response) do
+    #         throw :failure if Time.now - started_at > 3600
+    #       end
+    #     })
+    #
+    # ## Handling Errors
+    #
+    # When a waiter is unsuccessful, it will raise an error.
+    # All of the failure errors extend from
+    # {Aws::Waiters::Errors::WaiterFailed}.
+    #
+    #     begin
+    #       client.wait_until(...)
+    #     rescue Aws::Waiters::Errors::WaiterFailed
+    #       # resource did not enter the desired state in time
+    #     end
+    #
+    # ## Valid Waiters
+    #
+    # The following table lists the valid waiter names, the operations they call,
+    # and the default `:delay` and `:max_attempts` values.
+    #
+    # | waiter_name    | params                   | :delay   | :max_attempts |
+    # | -------------- | ------------------------ | -------- | ------------- |
+    # | server_offline | {Client#describe_server} | 30       | 120           |
+    # | server_online  | {Client#describe_server} | 30       | 120           |
+    #
+    # @raise [Errors::FailureStateError] Raised when the waiter terminates
+    #   because the waiter has entered a state that it will not transition
+    #   out of, preventing success.
+    #
+    # @raise [Errors::TooManyAttemptsError] Raised when the configured
+    #   maximum number of attempts have been made, and the waiter is not
+    #   yet successful.
+    #
+    # @raise [Errors::UnexpectedError] Raised when an error is encounted
+    #   while polling for a resource that is not expected.
+    #
+    # @raise [Errors::NoSuchWaiterError] Raised when you request to wait
+    #   for an unknown state.
+    #
+    # @return [Boolean] Returns `true` if the waiter was successful.
+    # @param [Symbol] waiter_name
+    # @param [Hash] params ({})
+    # @param [Hash] options ({})
+    # @option options [Integer] :max_attempts
+    # @option options [Integer] :delay
+    # @option options [Proc] :before_attempt
+    # @option options [Proc] :before_wait
+    def wait_until(waiter_name, params = {}, options = {})
+      w = waiter(waiter_name, options)
+      yield(w.waiter) if block_given? # deprecated
+      w.wait(params)
     end
 
     # @api private
     # @deprecated
     def waiter_names
-      []
+      waiters.keys
+    end
+
+    private
+
+    # @param [Symbol] waiter_name
+    # @param [Hash] options ({})
+    def waiter(waiter_name, options = {})
+      waiter_class = waiters[waiter_name]
+      if waiter_class
+        waiter_class.new(options.merge(client: self))
+      else
+        raise Aws::Waiters::Errors::NoSuchWaiterError.new(waiter_name, waiters.keys)
+      end
+    end
+
+    def waiters
+      {
+        server_offline: Waiters::ServerOffline,
+        server_online: Waiters::ServerOnline
+      }
     end
 
     class << self

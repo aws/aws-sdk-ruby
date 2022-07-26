@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::EBS
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -410,16 +412,25 @@ module Aws::EBS
     # @option params [required, String] :snapshot_id
     #   The ID of the snapshot containing the block from which to get data.
     #
-    # @option params [required, Integer] :block_index
-    #   The block index of the block from which to get data.
+    #   If the specified snapshot is encrypted, you must have permission to
+    #   use the KMS key that was used to encrypt the snapshot. For more
+    #   information, see [ Using encryption][1] in the *Amazon Elastic Compute
+    #   Cloud User Guide*.
     #
-    #   Obtain the `BlockIndex` by running the `ListChangedBlocks` or
-    #   `ListSnapshotBlocks` operations.
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapis-using-encryption.html
+    #
+    # @option params [required, Integer] :block_index
+    #   The block index of the block in which to read the data. A block index
+    #   is a logical index in units of `512` KiB blocks. To identify the block
+    #   index, divide the logical offset of the data in the logical volume by
+    #   the block size (logical offset of data/`524288`). The logical offset
+    #   of the data must be `512` KiB aligned.
     #
     # @option params [required, String] :block_token
-    #   The block token of the block from which to get data.
-    #
-    #   Obtain the `BlockToken` by running the `ListChangedBlocks` or
+    #   The block token of the block from which to get data. You can obtain
+    #   the `BlockToken` by running the `ListChangedBlocks` or
     #   `ListSnapshotBlocks` operations.
     #
     # @return [Types::GetSnapshotBlockResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -610,6 +621,15 @@ module Aws::EBS
     # @option params [required, String] :snapshot_id
     #   The ID of the snapshot.
     #
+    #   If the specified snapshot is encrypted, you must have permission to
+    #   use the KMS key that was used to encrypt the snapshot. For more
+    #   information, see [ Using encryption][1] in the *Amazon Elastic Compute
+    #   Cloud User Guide*..
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapis-using-encryption.html
+    #
     # @option params [required, Integer] :block_index
     #   The block index of the block in which to write the data. A block index
     #   is a logical index in units of `512` KiB blocks. To identify the block
@@ -703,13 +723,26 @@ module Aws::EBS
     #   you are creating the first snapshot for an on-premises volume, omit
     #   this parameter.
     #
-    #   If your account is enabled for encryption by default, you cannot use
-    #   an unencrypted snapshot as a parent snapshot. You must first create an
-    #   encrypted copy of the parent snapshot using [CopySnapshot][1].
+    #   You can't specify **ParentSnapshotId** and **Encrypted** in the same
+    #   request. If you specify both parameters, the request fails with
+    #   `ValidationException`.
+    #
+    #   The encryption status of the snapshot depends on the values that you
+    #   specify for **Encrypted**, **KmsKeyArn**, and **ParentSnapshotId**,
+    #   and whether your Amazon Web Services account is enabled for [
+    #   encryption by default][1]. For more information, see [ Using
+    #   encryption][2] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #   If you specify an encrypted parent snapshot, you must have permission
+    #   to use the KMS key that was used to encrypt the parent snapshot. For
+    #   more information, see [ Permissions to use Key Management Service
+    #   keys][3] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CopySnapshot.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapis-using-encryption.html
+    #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapi-permissions.html#ebsapi-kms-permissions
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tags to apply to the snapshot.
@@ -739,40 +772,47 @@ module Aws::EBS
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-direct-api-idempotency.html
     #
     # @option params [Boolean] :encrypted
-    #   Indicates whether to encrypt the snapshot. To create an encrypted
-    #   snapshot, specify `true`. To create an unencrypted snapshot, omit this
-    #   parameter.
+    #   Indicates whether to encrypt the snapshot.
     #
-    #   If you specify a value for **ParentSnapshotId**, omit this parameter.
+    #   You can't specify **Encrypted** and <b> ParentSnapshotId</b> in the
+    #   same request. If you specify both parameters, the request fails with
+    #   `ValidationException`.
     #
-    #   If you specify `true`, the snapshot is encrypted using the KMS key
-    #   specified using the **KmsKeyArn** parameter. If no value is specified
-    #   for **KmsKeyArn**, the default KMS key for your account is used. If no
-    #   default KMS key has been specified for your account, the Amazon Web
-    #   Services managed KMS key is used. To set a default KMS key for your
-    #   account, use [ ModifyEbsDefaultKmsKeyId][1].
+    #   The encryption status of the snapshot depends on the values that you
+    #   specify for **Encrypted**, **KmsKeyArn**, and **ParentSnapshotId**,
+    #   and whether your Amazon Web Services account is enabled for [
+    #   encryption by default][1]. For more information, see [ Using
+    #   encryption][2] in the *Amazon Elastic Compute Cloud User Guide*.
     #
-    #   If your account is enabled for encryption by default, you cannot set
-    #   this parameter to `false`. In this case, you can omit this parameter.
-    #
-    #   For more information, see [ Using encryption][2] in the *Amazon
-    #   Elastic Compute Cloud User Guide*.
+    #   To create an encrypted snapshot, you must have permission to use the
+    #   KMS key. For more information, see [ Permissions to use Key Management
+    #   Service keys][3] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyEbsDefaultKmsKeyId.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-accessing-snapshot.html#ebsapis-using-encryption
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapis-using-encryption.html
+    #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapi-permissions.html#ebsapi-kms-permissions
     #
     # @option params [String] :kms_key_arn
     #   The Amazon Resource Name (ARN) of the Key Management Service (KMS) key
-    #   to be used to encrypt the snapshot. If you do not specify a KMS key,
-    #   the default Amazon Web Services managed KMS key is used.
+    #   to be used to encrypt the snapshot.
     #
-    #   If you specify a **ParentSnapshotId**, omit this parameter; the
-    #   snapshot will be encrypted using the same KMS key that was used to
-    #   encrypt the parent snapshot.
+    #   The encryption status of the snapshot depends on the values that you
+    #   specify for **Encrypted**, **KmsKeyArn**, and **ParentSnapshotId**,
+    #   and whether your Amazon Web Services account is enabled for [
+    #   encryption by default][1]. For more information, see [ Using
+    #   encryption][2] in the *Amazon Elastic Compute Cloud User Guide*.
     #
-    #   If **Encrypted** is set to `true`, you must specify a KMS key ARN.
+    #   To create an encrypted snapshot, you must have permission to use the
+    #   KMS key. For more information, see [ Permissions to use Key Management
+    #   Service keys][3] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapis-using-encryption.html
+    #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapi-permissions.html#ebsapi-kms-permissions
     #
     # @option params [Integer] :timeout
     #   The amount of time (in minutes) after which the snapshot is
@@ -852,7 +892,7 @@ module Aws::EBS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ebs'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

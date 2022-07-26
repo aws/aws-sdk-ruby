@@ -98,6 +98,7 @@ module Aws
           req.headers.delete('Authorization')
           req.headers.delete('X-Amz-Security-Token')
           req.headers.delete('X-Amz-Date')
+          req.headers.delete('x-Amz-Region-Set')
 
           if context.config.respond_to?(:clock_skew) &&
              context.config.clock_skew &&
@@ -134,7 +135,7 @@ module Aws
         def apply_authtype(context)
           if context.operation['authtype'].eql?('v4-unsigned-body') &&
              context.http_request.endpoint.scheme.eql?('https')
-            context.http_request.headers['X-Amz-Content-Sha256'] = 'UNSIGNED-PAYLOAD'
+            context.http_request.headers['X-Amz-Content-Sha256'] ||= 'UNSIGNED-PAYLOAD'
           end
           context
         end

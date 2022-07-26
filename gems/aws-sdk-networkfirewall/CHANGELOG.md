@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2022-07-21)
+------------------
+
+* Feature - Network Firewall now supports referencing dynamic IP sets from stateful rule groups, for IP sets stored in Amazon VPC prefix lists.
+
+1.17.0 (2022-04-28)
+------------------
+
+* Feature - AWS Network Firewall adds support for stateful threat signature AWS managed rule groups.
+
+1.16.0 (2022-04-26)
+------------------
+
+* Feature - AWS Network Firewall now enables customers to use a customer managed AWS KMS key for the encryption of their firewall resources.
+
+1.15.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.14.0 (2022-02-03)
 ------------------
 

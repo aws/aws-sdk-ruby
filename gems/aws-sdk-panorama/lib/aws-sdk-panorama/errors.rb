@@ -65,6 +65,16 @@ module Aws::Panorama
       end
 
       # @return [String]
+      def error_arguments
+        @data[:error_arguments]
+      end
+
+      # @return [String]
+      def error_id
+        @data[:error_id]
+      end
+
+      # @return [String]
       def message
         @message || @data[:message]
       end
@@ -77,16 +87,6 @@ module Aws::Panorama
       # @return [String]
       def resource_type
         @data[:resource_type]
-      end
-
-      # @return [String]
-      def error_id
-        @data[:error_id]
-      end
-
-      # @return [String]
-      def error_arguments
-        @data[:error_arguments]
       end
     end
 
@@ -150,6 +150,11 @@ module Aws::Panorama
       end
 
       # @return [String]
+      def quota_code
+        @data[:quota_code]
+      end
+
+      # @return [String]
       def resource_id
         @data[:resource_id]
       end
@@ -157,11 +162,6 @@ module Aws::Panorama
       # @return [String]
       def resource_type
         @data[:resource_type]
-      end
-
-      # @return [String]
-      def quota_code
-        @data[:quota_code]
       end
 
       # @return [String]
@@ -180,13 +180,8 @@ module Aws::Panorama
       end
 
       # @return [String]
-      def message
-        @message || @data[:message]
-      end
-
-      # @return [String]
-      def reason
-        @data[:reason]
+      def error_arguments
+        @data[:error_arguments]
       end
 
       # @return [String]
@@ -195,13 +190,18 @@ module Aws::Panorama
       end
 
       # @return [String]
-      def error_arguments
-        @data[:error_arguments]
+      def fields
+        @data[:fields]
       end
 
       # @return [String]
-      def fields
-        @data[:fields]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def reason
+        @data[:reason]
       end
     end
 

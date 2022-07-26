@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2022-05-16)
+------------------
+
+* Feature - Updated the descriptions for the ListAcceptedPortfolioShares API description and the PortfolioShareType parameters.
+
+1.70.0 (2022-04-04)
+------------------
+
+* Feature - This release adds ProvisioningArtifictOutputKeys to DescribeProvisioningParameters to reference the outputs of a Provisioned Product and deprecates ProvisioningArtifactOutputs.
+
+1.69.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.68.0 (2022-02-03)
 ------------------
 

@@ -161,6 +161,7 @@ module Aws::GlueDataBrew
     LogSubscription = Shapes::StringShape.new(name: 'LogSubscription')
     MaxCapacity = Shapes::IntegerShape.new(name: 'MaxCapacity')
     MaxFiles = Shapes::IntegerShape.new(name: 'MaxFiles')
+    MaxOutputFiles = Shapes::IntegerShape.new(name: 'MaxOutputFiles')
     MaxResults100 = Shapes::IntegerShape.new(name: 'MaxResults100')
     MaxRetries = Shapes::IntegerShape.new(name: 'MaxRetries')
     Message = Shapes::StringShape.new(name: 'Message')
@@ -842,6 +843,7 @@ module Aws::GlueDataBrew
     Output.add_member(:location, Shapes::ShapeRef.new(shape: S3Location, required: true, location_name: "Location"))
     Output.add_member(:overwrite, Shapes::ShapeRef.new(shape: OverwriteOutput, location_name: "Overwrite"))
     Output.add_member(:format_options, Shapes::ShapeRef.new(shape: OutputFormatOptions, location_name: "FormatOptions"))
+    Output.add_member(:max_output_files, Shapes::ShapeRef.new(shape: MaxOutputFiles, location_name: "MaxOutputFiles"))
     Output.struct_class = Types::Output
 
     OutputFormatOptions.add_member(:csv, Shapes::ShapeRef.new(shape: CsvOutputOptions, location_name: "Csv"))

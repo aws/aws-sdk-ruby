@@ -1277,7 +1277,9 @@
         "COPY_JOB_FAILED",
         "RECOVERY_POINT_MODIFIED",
         "BACKUP_PLAN_CREATED",
-        "BACKUP_PLAN_MODIFIED"
+        "BACKUP_PLAN_MODIFIED",
+        "S3_BACKUP_OBJECT_FAILED",
+        "S3_RESTORE_OBJECT_FAILED"
       ]
     },
     "BackupVaultEvents":{
@@ -2284,6 +2286,16 @@
           "shape":"AccountId",
           "location":"querystring",
           "locationName":"accountId"
+        },
+        "ByCompleteAfter":{
+          "shape":"timestamp",
+          "location":"querystring",
+          "locationName":"completeAfter"
+        },
+        "ByCompleteBefore":{
+          "shape":"timestamp",
+          "location":"querystring",
+          "locationName":"completeBefore"
         }
       }
     },
@@ -2468,6 +2480,16 @@
           "shape":"AccountId",
           "location":"querystring",
           "locationName":"accountId"
+        },
+        "ByCompleteBefore":{
+          "shape":"timestamp",
+          "location":"querystring",
+          "locationName":"completeBefore"
+        },
+        "ByCompleteAfter":{
+          "shape":"timestamp",
+          "location":"querystring",
+          "locationName":"completeAfter"
         }
       }
     },
@@ -2703,6 +2725,16 @@
           "shape":"RestoreJobStatus",
           "location":"querystring",
           "locationName":"status"
+        },
+        "ByCompleteBefore":{
+          "shape":"timestamp",
+          "location":"querystring",
+          "locationName":"completeBefore"
+        },
+        "ByCompleteAfter":{
+          "shape":"timestamp",
+          "location":"querystring",
+          "locationName":"completeAfter"
         }
       }
     },
@@ -3117,8 +3149,7 @@
       "type":"structure",
       "required":[
         "RecoveryPointArn",
-        "Metadata",
-        "IamRoleArn"
+        "Metadata"
       ],
       "members":{
         "RecoveryPointArn":{"shape":"ARN"},

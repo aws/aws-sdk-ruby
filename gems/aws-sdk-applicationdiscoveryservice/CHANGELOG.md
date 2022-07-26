@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2022-07-18)
+------------------
+
+* Feature - Add AWS Agentless Collector details to the GetDiscoverySummary API response
+
+1.45.0 (2022-05-16)
+------------------
+
+* Feature - Add Migration Evaluator Collector details to the GetDiscoverySummary API response
+
+1.44.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.43.0 (2022-02-03)
 ------------------
 

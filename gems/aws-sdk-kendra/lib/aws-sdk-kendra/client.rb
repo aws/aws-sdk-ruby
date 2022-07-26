@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::Kendra
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -471,7 +473,7 @@ module Aws::Kendra
     end
 
     # Removes one or more documents from an index. The documents must have
-    # been added with the `BatchPutDocument` operation.
+    # been added with the `BatchPutDocument` API.
     #
     # The documents are deleted asynchronously. You can see the progress of
     # the deletion by using Amazon Web Services CloudWatch. Any error
@@ -519,17 +521,16 @@ module Aws::Kendra
     end
 
     # Returns the indexing status for one or more documents submitted with
-    # the [ BatchPutDocument][1] operation.
+    # the [ BatchPutDocument][1] API.
     #
-    # When you use the `BatchPutDocument` operation, documents are indexed
-    # asynchronously. You can use the `BatchGetDocumentStatus` operation to
-    # get the current status of a list of documents so that you can
-    # determine if they have been successfully indexed.
+    # When you use the `BatchPutDocument` API, documents are indexed
+    # asynchronously. You can use the `BatchGetDocumentStatus` API to get
+    # the current status of a list of documents so that you can determine if
+    # they have been successfully indexed.
     #
-    # You can also use the `BatchGetDocumentStatus` operation to check the
-    # status of the [ BatchDeleteDocument][2] operation. When a document is
-    # deleted from the index, Amazon Kendra returns `NOT_FOUND` as the
-    # status.
+    # You can also use the `BatchGetDocumentStatus` API to check the status
+    # of the [ BatchDeleteDocument][2] API. When a document is deleted from
+    # the index, Amazon Kendra returns `NOT_FOUND` as the status.
     #
     #
     #
@@ -538,7 +539,7 @@ module Aws::Kendra
     #
     # @option params [required, String] :index_id
     #   The identifier of the index to add documents to. The index ID is
-    #   returned by the [ CreateIndex ][1] operation.
+    #   returned by the [CreateIndex ][1] API.
     #
     #
     #
@@ -599,24 +600,31 @@ module Aws::Kendra
 
     # Adds one or more documents to an index.
     #
-    # The `BatchPutDocument` operation enables you to ingest inline
-    # documents or a set of documents stored in an Amazon S3 bucket. Use
-    # this operation to ingest your text and unstructured text into an
-    # index, add custom attributes to the documents, and to attach an access
-    # control list to the documents added to the index.
+    # The `BatchPutDocument` API enables you to ingest inline documents or a
+    # set of documents stored in an Amazon S3 bucket. Use this API to ingest
+    # your text and unstructured text into an index, add custom attributes
+    # to the documents, and to attach an access control list to the
+    # documents added to the index.
     #
     # The documents are indexed asynchronously. You can see the progress of
     # the batch using Amazon Web Services CloudWatch. Any error messages
     # related to processing the batch are sent to your Amazon Web Services
     # CloudWatch log.
     #
+    # For an example of ingesting inline documents using Python and Java
+    # SDKs, see [Adding files directly to an index][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/in-adding-binary-doc.html
+    #
     # @option params [required, String] :index_id
     #   The identifier of the index to add the documents to. You need to
-    #   create the index first using the `CreateIndex` operation.
+    #   create the index first using the `CreateIndex` API.
     #
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of a role that is allowed to run the
-    #   `BatchPutDocument` operation. For more information, see [IAM Roles for
+    #   `BatchPutDocument` API. For more information, see [IAM Roles for
     #   Amazon Kendra][1].
     #
     #
@@ -625,12 +633,6 @@ module Aws::Kendra
     #
     # @option params [required, Array<Types::Document>] :documents
     #   One or more documents to add to the index.
-    #
-    #   Documents can include custom attributes. For example, 'DataSourceId'
-    #   and 'DataSourceSyncJobId' are custom attributes that provide
-    #   information on the synchronization of documents running on a data
-    #   source. Note, 'DataSourceSyncJobId' could be an optional custom
-    #   attribute as Amazon Kendra will use the ID of a running sync job.
     #
     #   Documents have the following file size limits.
     #
@@ -650,7 +652,7 @@ module Aws::Kendra
     # @option params [Types::CustomDocumentEnrichmentConfiguration] :custom_document_enrichment_configuration
     #   Configuration information for altering your document metadata and
     #   content during the document ingestion process when you use the
-    #   `BatchPutDocument` operation.
+    #   `BatchPutDocument` API.
     #
     #   For more information on how to create, modify and delete document
     #   metadata, or make other content alterations when you ingest documents
@@ -711,6 +713,7 @@ module Aws::Kendra
     #           },
     #         ],
     #         content_type: "PDF", # accepts PDF, HTML, MS_WORD, PLAIN_TEXT, PPT
+    #         access_control_configuration_id: "AccessControlConfigurationId",
     #       },
     #     ],
     #     custom_document_enrichment_configuration: {
@@ -818,6 +821,117 @@ module Aws::Kendra
       req.send_request(options)
     end
 
+    # Creates an access configuration for your documents. This includes user
+    # and group access information for your documents. This is useful for
+    # user context filtering, where search results are filtered based on the
+    # user or their group access to documents.
+    #
+    # You can use this to re-configure your existing document level access
+    # control without indexing all of your documents again. For example,
+    # your index contains top-secret company documents that only certain
+    # employees or users should access. One of these users leaves the
+    # company or switches to a team that should be blocked from accessing
+    # top-secret documents. The user still has access to top-secret
+    # documents because the user had access when your documents were
+    # previously indexed. You can create a specific access control
+    # configuration for the user with deny access. You can later update the
+    # access control configuration to allow access if the user returns to
+    # the company and re-joins the 'top-secret' team. You can re-configure
+    # access control for your documents as circumstances change.
+    #
+    # To apply your access control configuration to certain documents, you
+    # call the [BatchPutDocument][1] API with the
+    # `AccessControlConfigurationId` included in the [Document][2] object.
+    # If you use an S3 bucket as a data source, you update the
+    # `.metadata.json` with the `AccessControlConfigurationId` and
+    # synchronize your data source. Amazon Kendra currently only supports
+    # access control configuration for S3 data sources and documents indexed
+    # using the `BatchPutDocument` API.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_BatchPutDocument.html
+    # [2]: https://docs.aws.amazon.com/kendra/latest/dg/API_Document.html
+    #
+    # @option params [required, String] :index_id
+    #   The identifier of the index to create an access control configuration
+    #   for your documents.
+    #
+    # @option params [required, String] :name
+    #   A name for the access control configuration.
+    #
+    # @option params [String] :description
+    #   A description for the access control configuration.
+    #
+    # @option params [Array<Types::Principal>] :access_control_list
+    #   Information on principals (users and/or groups) and which documents
+    #   they should have access to. This is useful for user context filtering,
+    #   where search results are filtered based on the user or their group
+    #   access to documents.
+    #
+    # @option params [Array<Types::HierarchicalPrincipal>] :hierarchical_access_control_list
+    #   The list of [principal][1] lists that define the hierarchy for which
+    #   documents users should have access to.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_Principal.html
+    #
+    # @option params [String] :client_token
+    #   A token that you provide to identify the request to create an access
+    #   control configuration. Multiple calls to the
+    #   `CreateAccessControlConfiguration` API with the same client token will
+    #   create only one access control configuration.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateAccessControlConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAccessControlConfigurationResponse#id #id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_access_control_configuration({
+    #     index_id: "IndexId", # required
+    #     name: "AccessControlConfigurationName", # required
+    #     description: "Description",
+    #     access_control_list: [
+    #       {
+    #         name: "PrincipalName", # required
+    #         type: "USER", # required, accepts USER, GROUP
+    #         access: "ALLOW", # required, accepts ALLOW, DENY
+    #         data_source_id: "DataSourceId",
+    #       },
+    #     ],
+    #     hierarchical_access_control_list: [
+    #       {
+    #         principal_list: [ # required
+    #           {
+    #             name: "PrincipalName", # required
+    #             type: "USER", # required, accepts USER, GROUP
+    #             access: "ALLOW", # required, accepts ALLOW, DENY
+    #             data_source_id: "DataSourceId",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     client_token: "ClientTokenName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CreateAccessControlConfiguration AWS API Documentation
+    #
+    # @overload create_access_control_configuration(params = {})
+    # @param [Hash] params ({})
+    def create_access_control_configuration(params = {}, options = {})
+      req = build_request(:create_access_control_configuration, params)
+      req.send_request(options)
+    end
+
     # Creates a data source that you want to use with an Amazon Kendra
     # index.
     #
@@ -832,24 +946,30 @@ module Aws::Kendra
     # Amazon S3 and [custom][1] data sources are the only supported data
     # sources in the Amazon Web Services GovCloud (US-West) region.
     #
+    # For an example of creating an index and data source using the Python
+    # SDK, see [Getting started with Python SDK][2]. For an example of
+    # creating an index and data source using the Java SDK, see [Getting
+    # started with Java SDK][3].
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-custom.html
+    # [2]: https://docs.aws.amazon.com/kendra/latest/dg/gs-python.html
+    # [3]: https://docs.aws.amazon.com/kendra/latest/dg/gs-java.html
     #
     # @option params [required, String] :name
-    #   A unique name for the data source. A data source name can't be
-    #   changed without deleting and recreating the data source.
+    #   A unique name for the data source connector. A data source name can't
+    #   be changed without deleting and recreating the data source connector.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index that should be associated with this data
-    #   source.
+    #   The identifier of the index you want to use with the data source
+    #   connector.
     #
     # @option params [required, String] :type
-    #   The type of repository that contains the data source.
+    #   The type of data source repository. For example, `SHAREPOINT`.
     #
     # @option params [Types::DataSourceConfiguration] :configuration
-    #   The connector configuration information that is required to access the
-    #   repository.
+    #   Configuration information to connect to your data source repository.
     #
     #   You can't specify the `Configuration` parameter when the `Type`
     #   parameter is set to `CUSTOM`. If you do, you receive a
@@ -858,13 +978,13 @@ module Aws::Kendra
     #   The `Configuration` parameter is required for all other data sources.
     #
     # @option params [String] :description
-    #   A description for the data source.
+    #   A description for the data source connector.
     #
     # @option params [String] :schedule
-    #   Sets the frequency that Amazon Kendra will check the documents in your
-    #   repository and update the index. If you don't set a schedule Amazon
-    #   Kendra will not periodically update the index. You can call the
-    #   `StartDataSourceSyncJob` operation to update the index.
+    #   Sets the frequency for Amazon Kendra to check the documents in your
+    #   data source repository and update the index. If you don't set a
+    #   schedule Amazon Kendra will not periodically update the index. You can
+    #   call the `StartDataSourceSyncJob` API to update the index.
     #
     #   You can't specify the `Schedule` parameter when the `Type` parameter
     #   is set to `CUSTOM`. If you do, you receive a `ValidationException`
@@ -872,7 +992,7 @@ module Aws::Kendra
     #
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of a role with permission to access the
-    #   data source. For more information, see [IAM Roles for Amazon
+    #   data source connector. For more information, see [IAM Roles for Amazon
     #   Kendra][1].
     #
     #   You can't specify the `RoleArn` parameter when the `Type` parameter
@@ -886,23 +1006,24 @@ module Aws::Kendra
     #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of key-value pairs that identify the data source. You can use
-    #   the tags to identify and organize your resources and to control access
-    #   to resources.
+    #   A list of key-value pairs that identify the data source connector. You
+    #   can use the tags to identify and organize your resources and to
+    #   control access to resources.
     #
     # @option params [String] :client_token
     #   A token that you provide to identify the request to create a data
-    #   source. Multiple calls to the `CreateDataSource` operation with the
-    #   same client token will create only one data source.
+    #   source connector. Multiple calls to the `CreateDataSource` API with
+    #   the same client token will create only one data source connector.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     # @option params [String] :language_code
     #   The code for a language. This allows you to support a language for all
-    #   documents when creating the data source. English is supported by
-    #   default. For more information on supported languages, including their
-    #   codes, see [Adding documents in languages other than English][1].
+    #   documents when creating the data source connector. English is
+    #   supported by default. For more information on supported languages,
+    #   including their codes, see [Adding documents in languages other than
+    #   English][1].
     #
     #
     #
@@ -910,7 +1031,7 @@ module Aws::Kendra
     #
     # @option params [Types::CustomDocumentEnrichmentConfiguration] :custom_document_enrichment_configuration
     #   Configuration information for altering document metadata and content
-    #   during the document ingestion process when you create a data source.
+    #   during the document ingestion process.
     #
     #   For more information on how to create, modify and delete document
     #   metadata, or make other content alterations when you ingest documents
@@ -930,7 +1051,7 @@ module Aws::Kendra
     #   resp = client.create_data_source({
     #     name: "DataSourceName", # required
     #     index_id: "IndexId", # required
-    #     type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE, WEBCRAWLER, WORKDOCS
+    #     type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE, WEBCRAWLER, WORKDOCS, FSX, SLACK, BOX, QUIP, JIRA, GITHUB, ALFRESCO
     #     configuration: {
     #       s3_configuration: {
     #         bucket_name: "S3BucketName", # required
@@ -969,6 +1090,7 @@ module Aws::Kendra
     #           bucket: "S3BucketName", # required
     #           key: "S3ObjectKey", # required
     #         },
+    #         authentication_type: "HTTP_BASIC", # accepts HTTP_BASIC, OAUTH2
     #       },
     #       database_configuration: {
     #         database_engine_type: "RDS_AURORA_MYSQL", # required, accepts RDS_AURORA_MYSQL, RDS_AURORA_POSTGRESQL, RDS_MYSQL, RDS_POSTGRESQL
@@ -1242,6 +1364,308 @@ module Aws::Kendra
     #           },
     #         ],
     #       },
+    #       fsx_configuration: {
+    #         file_system_id: "FileSystemId", # required
+    #         file_system_type: "WINDOWS", # required, accepts WINDOWS
+    #         vpc_configuration: { # required
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #         secret_arn: "SecretArn",
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #       },
+    #       slack_configuration: {
+    #         team_id: "TeamId", # required
+    #         secret_arn: "SecretArn", # required
+    #         vpc_configuration: {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #         slack_entity_list: ["PUBLIC_CHANNEL"], # required, accepts PUBLIC_CHANNEL, PRIVATE_CHANNEL, GROUP_MESSAGE, DIRECT_MESSAGE
+    #         use_change_log: false,
+    #         crawl_bot_message: false,
+    #         exclude_archived: false,
+    #         since_crawl_date: "SinceCrawlDate", # required
+    #         look_back_period: 1,
+    #         private_channel_filter: ["String"],
+    #         public_channel_filter: ["String"],
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #       },
+    #       box_configuration: {
+    #         enterprise_id: "EnterpriseId", # required
+    #         secret_arn: "SecretArn", # required
+    #         use_change_log: false,
+    #         crawl_comments: false,
+    #         crawl_tasks: false,
+    #         crawl_web_links: false,
+    #         file_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         task_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         comment_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         web_link_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         vpc_configuration: {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #       },
+    #       quip_configuration: {
+    #         domain: "Domain", # required
+    #         secret_arn: "SecretArn", # required
+    #         crawl_file_comments: false,
+    #         crawl_chat_rooms: false,
+    #         crawl_attachments: false,
+    #         folder_ids: ["FolderId"],
+    #         thread_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         message_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         attachment_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         vpc_configuration: {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #       },
+    #       jira_configuration: {
+    #         jira_account_url: "JiraAccountUrl", # required
+    #         secret_arn: "SecretArn", # required
+    #         use_change_log: false,
+    #         project: ["String"],
+    #         issue_type: ["String"],
+    #         status: ["String"],
+    #         issue_sub_entity_filter: ["COMMENTS"], # accepts COMMENTS, ATTACHMENTS, WORKLOGS
+    #         attachment_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         comment_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         issue_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         project_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         work_log_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         vpc_configuration: {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #       },
+    #       git_hub_configuration: {
+    #         saa_s_configuration: {
+    #           organization_name: "OrganizationName", # required
+    #           host_url: "Url", # required
+    #         },
+    #         on_premise_configuration: {
+    #           host_url: "Url", # required
+    #           organization_name: "OrganizationName", # required
+    #           ssl_certificate_s3_path: { # required
+    #             bucket: "S3BucketName", # required
+    #             key: "S3ObjectKey", # required
+    #           },
+    #         },
+    #         type: "SAAS", # accepts SAAS, ON_PREMISE
+    #         secret_arn: "SecretArn", # required
+    #         use_change_log: false,
+    #         git_hub_document_crawl_properties: {
+    #           crawl_repository_documents: false,
+    #           crawl_issue: false,
+    #           crawl_issue_comment: false,
+    #           crawl_issue_comment_attachment: false,
+    #           crawl_pull_request: false,
+    #           crawl_pull_request_comment: false,
+    #           crawl_pull_request_comment_attachment: false,
+    #         },
+    #         repository_filter: ["RepositoryName"],
+    #         inclusion_folder_name_patterns: ["String"],
+    #         inclusion_file_type_patterns: ["String"],
+    #         inclusion_file_name_patterns: ["String"],
+    #         exclusion_folder_name_patterns: ["String"],
+    #         exclusion_file_type_patterns: ["String"],
+    #         exclusion_file_name_patterns: ["String"],
+    #         vpc_configuration: {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #         git_hub_repository_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         git_hub_commit_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         git_hub_issue_document_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         git_hub_issue_comment_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         git_hub_issue_attachment_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         git_hub_pull_request_comment_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         git_hub_pull_request_document_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         git_hub_pull_request_document_attachment_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #       },
+    #       alfresco_configuration: {
+    #         site_url: "SiteUrl", # required
+    #         site_id: "SiteId", # required
+    #         secret_arn: "SecretArn", # required
+    #         ssl_certificate_s3_path: { # required
+    #           bucket: "S3BucketName", # required
+    #           key: "S3ObjectKey", # required
+    #         },
+    #         crawl_system_folders: false,
+    #         crawl_comments: false,
+    #         entity_filter: ["wiki"], # accepts wiki, blog, documentLibrary
+    #         document_library_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         blog_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         wiki_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         vpc_configuration: {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #       },
     #     },
     #     description: "Description",
     #     schedule: "ScanSchedule",
@@ -1326,8 +1750,9 @@ module Aws::Kendra
     end
 
     # Creates an Amazon Kendra experience such as a search application. For
-    # more information on creating a search application experience, see
-    # [Building a search experience with no code][1].
+    # more information on creating a search application experience,
+    # including using the Python and Java SDKs, see [Building a search
+    # experience with no code][1].
     #
     #
     #
@@ -1341,29 +1766,28 @@ module Aws::Kendra
     #
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of a role with permission to access
-    #   `Query` operations, `QuerySuggestions` operations, `SubmitFeedback`
-    #   operations, and Amazon Web Services SSO that stores your user and
-    #   group information. For more information, see [IAM roles for Amazon
-    #   Kendra][1].
+    #   `Query` API, `QuerySuggestions` API, `SubmitFeedback` API, and Amazon
+    #   Web Services SSO that stores your user and group information. For more
+    #   information, see [IAM roles for Amazon Kendra][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html
     #
     # @option params [Types::ExperienceConfiguration] :configuration
-    #   Provides the configuration information for your Amazon Kendra
-    #   experience. This includes `ContentSourceConfiguration`, which
-    #   specifies the data source IDs and/or FAQ IDs, and
-    #   `UserIdentityConfiguration`, which specifies the user or group
-    #   information to grant access to your Amazon Kendra experience.
+    #   Configuration information for your Amazon Kendra experience. This
+    #   includes `ContentSourceConfiguration`, which specifies the data source
+    #   IDs and/or FAQ IDs, and `UserIdentityConfiguration`, which specifies
+    #   the user or group information to grant access to your Amazon Kendra
+    #   experience.
     #
     # @option params [String] :description
     #   A description for your Amazon Kendra experience.
     #
     # @option params [String] :client_token
     #   A token that you provide to identify the request to create your Amazon
-    #   Kendra experience. Multiple calls to the `CreateExperience` operation
-    #   with the same client token creates only one Amazon Kendra experience.
+    #   Kendra experience. Multiple calls to the `CreateExperience` API with
+    #   the same client token creates only one Amazon Kendra experience.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1410,17 +1834,24 @@ module Aws::Kendra
     #
     # Adding FAQs to an index is an asynchronous operation.
     #
+    # For an example of adding an FAQ to an index using Python and Java
+    # SDKs, see [Using your FAQ file][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/in-creating-faq.html#using-faq-file
+    #
     # @option params [required, String] :index_id
-    #   The identifier of the index that contains the FAQ.
+    #   The identifier of the index for the FAQ.
     #
     # @option params [required, String] :name
-    #   The name that should be associated with the FAQ.
+    #   A name for the FAQ.
     #
     # @option params [String] :description
-    #   A description of the FAQ.
+    #   A description for the FAQ.
     #
     # @option params [required, Types::S3Path] :s3_path
-    #   The S3 location of the FAQ input data.
+    #   The path to the FAQ file in S3.
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of a role with permission to access the
@@ -1437,7 +1868,7 @@ module Aws::Kendra
     #   resources.
     #
     # @option params [String] :file_format
-    #   The format of the input file. You can choose between a basic CSV
+    #   The format of the FAQ input file. You can choose between a basic CSV
     #   format, a CSV format that includes customs attributes in a header, and
     #   a JSON format that includes custom attributes.
     #
@@ -1452,8 +1883,8 @@ module Aws::Kendra
     #
     # @option params [String] :client_token
     #   A token that you provide to identify the request to create a FAQ.
-    #   Multiple calls to the `CreateFaqRequest` operation with the same
-    #   client token will create only one FAQ.
+    #   Multiple calls to the `CreateFaqRequest` API with the same client
+    #   token will create only one FAQ.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1507,17 +1938,26 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Creates a new Amazon Kendra index. Index creation is an asynchronous
-    # operation. To determine if index creation has completed, check the
-    # `Status` field returned from a call to `DescribeIndex`. The `Status`
-    # field is set to `ACTIVE` when the index is ready to use.
+    # Creates an Amazon Kendra index. Index creation is an asynchronous API.
+    # To determine if index creation has completed, check the `Status` field
+    # returned from a call to `DescribeIndex`. The `Status` field is set to
+    # `ACTIVE` when the index is ready to use.
     #
     # Once the index is active you can index your documents using the
-    # `BatchPutDocument` operation or using one of the supported data
-    # sources.
+    # `BatchPutDocument` API or using one of the supported data sources.
+    #
+    # For an example of creating an index and data source using the Python
+    # SDK, see [Getting started with Python SDK][1]. For an example of
+    # creating an index and data source using the Java SDK, see [Getting
+    # started with Java SDK][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/gs-python.html
+    # [2]: https://docs.aws.amazon.com/kendra/latest/dg/gs-java.html
     #
     # @option params [required, String] :name
-    #   The name for the new index.
+    #   A name for the index.
     #
     # @option params [String] :edition
     #   The Amazon Kendra edition to use for the index. Choose
@@ -1537,14 +1977,14 @@ module Aws::Kendra
     #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/quotas.html
     #
     # @option params [required, String] :role_arn
-    #   An Identity and Access Management(IAM) role that gives Amazon Kendra
+    #   An Identity and Access Management (IAM) role that gives Amazon Kendra
     #   permissions to access your Amazon CloudWatch logs and metrics. This is
-    #   also the role used when you use the `BatchPutDocument` operation to
+    #   also the role you use when you call the `BatchPutDocument` API to
     #   index documents from an Amazon S3 bucket.
     #
     # @option params [Types::ServerSideEncryptionConfiguration] :server_side_encryption_configuration
-    #   The identifier of the KMScustomer managed key (CMK) to use to encrypt
-    #   data indexed by Amazon Kendra. Amazon Kendra doesn't support
+    #   The identifier of the KMS customer managed key (CMK) that's used to
+    #   encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't support
     #   asymmetric CMKs.
     #
     # @option params [String] :description
@@ -1552,8 +1992,8 @@ module Aws::Kendra
     #
     # @option params [String] :client_token
     #   A token that you provide to identify the request to create an index.
-    #   Multiple calls to the `CreateIndex` operation with the same client
-    #   token will create only one index.
+    #   Multiple calls to the `CreateIndex` API with the same client token
+    #   will create only one index.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1663,9 +2103,13 @@ module Aws::Kendra
     # `CreateQuerySuggestionsBlockList` is currently not supported in the
     # Amazon Web Services GovCloud (US-West) region.
     #
+    # For an example of creating a block list for query suggestions using
+    # the Python SDK, see [Query suggestions block list][2].
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/kendra/latest/dg/quotas.html
+    # [2]: https://docs.aws.amazon.com/kendra/latest/dg/query-suggestions.html#suggestions-block-list
     #
     # @option params [required, String] :index_id
     #   The identifier of the index you want to create a query suggestions
@@ -1707,9 +2151,10 @@ module Aws::Kendra
     #   The IAM (Identity and Access Management) role used by Amazon Kendra to
     #   access the block list text file in your S3 bucket.
     #
-    #   You need permissions to the role ARN (Amazon Resource Name). The role
-    #   needs S3 read permissions to your file in S3 and needs to give STS
-    #   (Security Token Service) assume role permissions to Amazon Kendra.
+    #   You need permissions to the role ARN (Amazon Web Services Resource
+    #   Name). The role needs S3 read permissions to your file in S3 and needs
+    #   to give STS (Security Token Service) assume role permissions to Amazon
+    #   Kendra.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A tag that you can assign to a block list that categorizes the block
@@ -1755,14 +2200,21 @@ module Aws::Kendra
     # Creates a thesaurus for an index. The thesaurus contains a list of
     # synonyms in Solr format.
     #
+    # For an example of adding a thesaurus file to an index, see [Adding
+    # custom synonyms to an index][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/index-synonyms-adding-thesaurus-file.html
+    #
     # @option params [required, String] :index_id
-    #   The unique identifier of the index for the new thesaurus.
+    #   The identifier of the index for the thesaurus.
     #
     # @option params [required, String] :name
-    #   The name for the new thesaurus.
+    #   A name for the thesaurus.
     #
     # @option params [String] :description
-    #   The description for the new thesaurus.
+    #   A description for the thesaurus.
     #
     # @option params [required, String] :role_arn
     #   An IAM role that gives Amazon Kendra permissions to access thesaurus
@@ -1774,12 +2226,12 @@ module Aws::Kendra
     #   resources.
     #
     # @option params [required, Types::S3Path] :source_s3_path
-    #   The thesaurus file Amazon S3 source path.
+    #   The path to the thesaurus file in S3.
     #
     # @option params [String] :client_token
     #   A token that you provide to identify the request to create a
-    #   thesaurus. Multiple calls to the `CreateThesaurus` operation with the
-    #   same client token will create only one thesaurus.
+    #   thesaurus. Multiple calls to the `CreateThesaurus` API with the same
+    #   client token will create only one thesaurus.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1821,21 +2273,51 @@ module Aws::Kendra
       req.send_request(options)
     end
 
+    # Deletes an access control configuration that you created for your
+    # documents in an index. This includes user and group access information
+    # for your documents. This is useful for user context filtering, where
+    # search results are filtered based on the user or their group access to
+    # documents.
+    #
+    # @option params [required, String] :index_id
+    #   The identifier of the index for an access control configuration.
+    #
+    # @option params [required, String] :id
+    #   The identifier of the access control configuration you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_access_control_configuration({
+    #     index_id: "IndexId", # required
+    #     id: "AccessControlConfigurationId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DeleteAccessControlConfiguration AWS API Documentation
+    #
+    # @overload delete_access_control_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_access_control_configuration(params = {}, options = {})
+      req = build_request(:delete_access_control_configuration, params)
+      req.send_request(options)
+    end
+
     # Deletes an Amazon Kendra data source. An exception is not thrown if
     # the data source is already being deleted. While the data source is
     # being deleted, the `Status` field returned by a call to the
-    # `DescribeDataSource` operation is set to `DELETING`. For more
-    # information, see [Deleting Data Sources][1].
+    # `DescribeDataSource` API is set to `DELETING`. For more information,
+    # see [Deleting Data Sources][1].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/kendra/latest/dg/delete-data-source.html
     #
     # @option params [required, String] :id
-    #   The unique identifier of the data source to delete.
+    #   The identifier of the data source you want to delete.
     #
     # @option params [required, String] :index_id
-    #   The unique identifier of the index associated with the data source.
+    #   The identifier of the index used with the data source.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1867,8 +2349,7 @@ module Aws::Kendra
     #   The identifier of your Amazon Kendra experience you want to delete.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index for your Amazon Kendra experience you want
-    #   to delete.
+    #   The identifier of the index for your Amazon Kendra experience.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1891,10 +2372,10 @@ module Aws::Kendra
     # Removes an FAQ from an index.
     #
     # @option params [required, String] :id
-    #   The identifier of the FAQ to remove.
+    #   The identifier of the FAQ you want to remove.
     #
     # @option params [required, String] :index_id
-    #   The index to remove the FAQ from.
+    #   The identifier of the index for the FAQ.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1916,11 +2397,11 @@ module Aws::Kendra
 
     # Deletes an existing Amazon Kendra index. An exception is not thrown if
     # the index is already being deleted. While the index is being deleted,
-    # the `Status` field returned by a call to the `DescribeIndex` operation
-    # is set to `DELETING`.
+    # the `Status` field returned by a call to the `DescribeIndex` API is
+    # set to `DELETING`.
     #
     # @option params [required, String] :id
-    #   The identifier of the index to delete.
+    #   The identifier of the index you want to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1963,15 +2444,14 @@ module Aws::Kendra
     # @option params [String] :data_source_id
     #   The identifier of the data source you want to delete a group from.
     #
-    #   This is useful if a group is tied to multiple data sources and you
-    #   want to delete a group from accessing documents in a certain data
-    #   source. For example, the groups "Research", "Engineering", and
-    #   "Sales and Marketing" are all tied to the company's documents
-    #   stored in the data sources Confluence and Salesforce. You want to
-    #   delete "Research" and "Engineering" groups from Salesforce, so
-    #   that these groups cannot access customer-related documents stored in
-    #   Salesforce. Only "Sales and Marketing" should access documents in
-    #   the Salesforce data source.
+    #   A group can be tied to multiple data sources. You can delete a group
+    #   from accessing documents in a certain data source. For example, the
+    #   groups "Research", "Engineering", and "Sales and Marketing" are
+    #   all tied to the company's documents stored in the data sources
+    #   Confluence and Salesforce. You want to delete "Research" and
+    #   "Engineering" groups from Salesforce, so that these groups cannot
+    #   access customer-related documents stored in Salesforce. Only "Sales
+    #   and Marketing" should access documents in the Salesforce data source.
     #
     # @option params [required, String] :group_id
     #   The identifier of the group you want to delete.
@@ -2024,10 +2504,10 @@ module Aws::Kendra
     # Amazon Web Services GovCloud (US-West) region.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the you want to delete a block list from.
+    #   The identifier of the index for the block list.
     #
     # @option params [required, String] :id
-    #   The unique identifier of the block list that needs to be deleted.
+    #   The identifier of the block list you want to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2050,10 +2530,10 @@ module Aws::Kendra
     # Deletes an existing Amazon Kendra thesaurus.
     #
     # @option params [required, String] :id
-    #   The identifier of the thesaurus to delete.
+    #   The identifier of the thesaurus you want to delete.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index associated with the thesaurus to delete.
+    #   The identifier of the index for the thesaurus.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2073,13 +2553,67 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Gets information about a Amazon Kendra data source.
-    #
-    # @option params [required, String] :id
-    #   The unique identifier of the data source to describe.
+    # Gets information about an access control configuration that you
+    # created for your documents in an index. This includes user and group
+    # access information for your documents. This is useful for user context
+    # filtering, where search results are filtered based on the user or
+    # their group access to documents.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index that contains the data source.
+    #   The identifier of the index for an access control configuration.
+    #
+    # @option params [required, String] :id
+    #   The identifier of the access control configuration you want to get
+    #   information on.
+    #
+    # @return [Types::DescribeAccessControlConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAccessControlConfigurationResponse#name #name} => String
+    #   * {Types::DescribeAccessControlConfigurationResponse#description #description} => String
+    #   * {Types::DescribeAccessControlConfigurationResponse#error_message #error_message} => String
+    #   * {Types::DescribeAccessControlConfigurationResponse#access_control_list #access_control_list} => Array&lt;Types::Principal&gt;
+    #   * {Types::DescribeAccessControlConfigurationResponse#hierarchical_access_control_list #hierarchical_access_control_list} => Array&lt;Types::HierarchicalPrincipal&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_access_control_configuration({
+    #     index_id: "IndexId", # required
+    #     id: "AccessControlConfigurationId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.error_message #=> String
+    #   resp.access_control_list #=> Array
+    #   resp.access_control_list[0].name #=> String
+    #   resp.access_control_list[0].type #=> String, one of "USER", "GROUP"
+    #   resp.access_control_list[0].access #=> String, one of "ALLOW", "DENY"
+    #   resp.access_control_list[0].data_source_id #=> String
+    #   resp.hierarchical_access_control_list #=> Array
+    #   resp.hierarchical_access_control_list[0].principal_list #=> Array
+    #   resp.hierarchical_access_control_list[0].principal_list[0].name #=> String
+    #   resp.hierarchical_access_control_list[0].principal_list[0].type #=> String, one of "USER", "GROUP"
+    #   resp.hierarchical_access_control_list[0].principal_list[0].access #=> String, one of "ALLOW", "DENY"
+    #   resp.hierarchical_access_control_list[0].principal_list[0].data_source_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeAccessControlConfiguration AWS API Documentation
+    #
+    # @overload describe_access_control_configuration(params = {})
+    # @param [Hash] params ({})
+    def describe_access_control_configuration(params = {}, options = {})
+      req = build_request(:describe_access_control_configuration, params)
+      req.send_request(options)
+    end
+
+    # Gets information about an Amazon Kendra data source.
+    #
+    # @option params [required, String] :id
+    #   The identifier of the data source.
+    #
+    # @option params [required, String] :index_id
+    #   The identifier of the index used with the data source.
     #
     # @return [Types::DescribeDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2110,7 +2644,7 @@ module Aws::Kendra
     #   resp.id #=> String
     #   resp.index_id #=> String
     #   resp.name #=> String
-    #   resp.type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE", "WEBCRAWLER", "WORKDOCS"
+    #   resp.type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE", "WEBCRAWLER", "WORKDOCS", "FSX", "SLACK", "BOX", "QUIP", "JIRA", "GITHUB", "ALFRESCO"
     #   resp.configuration.s3_configuration.bucket_name #=> String
     #   resp.configuration.s3_configuration.inclusion_prefixes #=> Array
     #   resp.configuration.s3_configuration.inclusion_prefixes[0] #=> String
@@ -2142,6 +2676,7 @@ module Aws::Kendra
     #   resp.configuration.share_point_configuration.disable_local_groups #=> Boolean
     #   resp.configuration.share_point_configuration.ssl_certificate_s3_path.bucket #=> String
     #   resp.configuration.share_point_configuration.ssl_certificate_s3_path.key #=> String
+    #   resp.configuration.share_point_configuration.authentication_type #=> String, one of "HTTP_BASIC", "OAUTH2"
     #   resp.configuration.database_configuration.database_engine_type #=> String, one of "RDS_AURORA_MYSQL", "RDS_AURORA_POSTGRESQL", "RDS_MYSQL", "RDS_POSTGRESQL"
     #   resp.configuration.database_configuration.connection_configuration.database_host #=> String
     #   resp.configuration.database_configuration.connection_configuration.database_port #=> Integer
@@ -2329,6 +2864,237 @@ module Aws::Kendra
     #   resp.configuration.work_docs_configuration.field_mappings[0].data_source_field_name #=> String
     #   resp.configuration.work_docs_configuration.field_mappings[0].date_field_format #=> String
     #   resp.configuration.work_docs_configuration.field_mappings[0].index_field_name #=> String
+    #   resp.configuration.fsx_configuration.file_system_id #=> String
+    #   resp.configuration.fsx_configuration.file_system_type #=> String, one of "WINDOWS"
+    #   resp.configuration.fsx_configuration.vpc_configuration.subnet_ids #=> Array
+    #   resp.configuration.fsx_configuration.vpc_configuration.subnet_ids[0] #=> String
+    #   resp.configuration.fsx_configuration.vpc_configuration.security_group_ids #=> Array
+    #   resp.configuration.fsx_configuration.vpc_configuration.security_group_ids[0] #=> String
+    #   resp.configuration.fsx_configuration.secret_arn #=> String
+    #   resp.configuration.fsx_configuration.inclusion_patterns #=> Array
+    #   resp.configuration.fsx_configuration.inclusion_patterns[0] #=> String
+    #   resp.configuration.fsx_configuration.exclusion_patterns #=> Array
+    #   resp.configuration.fsx_configuration.exclusion_patterns[0] #=> String
+    #   resp.configuration.fsx_configuration.field_mappings #=> Array
+    #   resp.configuration.fsx_configuration.field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.fsx_configuration.field_mappings[0].date_field_format #=> String
+    #   resp.configuration.fsx_configuration.field_mappings[0].index_field_name #=> String
+    #   resp.configuration.slack_configuration.team_id #=> String
+    #   resp.configuration.slack_configuration.secret_arn #=> String
+    #   resp.configuration.slack_configuration.vpc_configuration.subnet_ids #=> Array
+    #   resp.configuration.slack_configuration.vpc_configuration.subnet_ids[0] #=> String
+    #   resp.configuration.slack_configuration.vpc_configuration.security_group_ids #=> Array
+    #   resp.configuration.slack_configuration.vpc_configuration.security_group_ids[0] #=> String
+    #   resp.configuration.slack_configuration.slack_entity_list #=> Array
+    #   resp.configuration.slack_configuration.slack_entity_list[0] #=> String, one of "PUBLIC_CHANNEL", "PRIVATE_CHANNEL", "GROUP_MESSAGE", "DIRECT_MESSAGE"
+    #   resp.configuration.slack_configuration.use_change_log #=> Boolean
+    #   resp.configuration.slack_configuration.crawl_bot_message #=> Boolean
+    #   resp.configuration.slack_configuration.exclude_archived #=> Boolean
+    #   resp.configuration.slack_configuration.since_crawl_date #=> String
+    #   resp.configuration.slack_configuration.look_back_period #=> Integer
+    #   resp.configuration.slack_configuration.private_channel_filter #=> Array
+    #   resp.configuration.slack_configuration.private_channel_filter[0] #=> String
+    #   resp.configuration.slack_configuration.public_channel_filter #=> Array
+    #   resp.configuration.slack_configuration.public_channel_filter[0] #=> String
+    #   resp.configuration.slack_configuration.inclusion_patterns #=> Array
+    #   resp.configuration.slack_configuration.inclusion_patterns[0] #=> String
+    #   resp.configuration.slack_configuration.exclusion_patterns #=> Array
+    #   resp.configuration.slack_configuration.exclusion_patterns[0] #=> String
+    #   resp.configuration.slack_configuration.field_mappings #=> Array
+    #   resp.configuration.slack_configuration.field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.slack_configuration.field_mappings[0].date_field_format #=> String
+    #   resp.configuration.slack_configuration.field_mappings[0].index_field_name #=> String
+    #   resp.configuration.box_configuration.enterprise_id #=> String
+    #   resp.configuration.box_configuration.secret_arn #=> String
+    #   resp.configuration.box_configuration.use_change_log #=> Boolean
+    #   resp.configuration.box_configuration.crawl_comments #=> Boolean
+    #   resp.configuration.box_configuration.crawl_tasks #=> Boolean
+    #   resp.configuration.box_configuration.crawl_web_links #=> Boolean
+    #   resp.configuration.box_configuration.file_field_mappings #=> Array
+    #   resp.configuration.box_configuration.file_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.box_configuration.file_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.box_configuration.file_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.box_configuration.task_field_mappings #=> Array
+    #   resp.configuration.box_configuration.task_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.box_configuration.task_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.box_configuration.task_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.box_configuration.comment_field_mappings #=> Array
+    #   resp.configuration.box_configuration.comment_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.box_configuration.comment_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.box_configuration.comment_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.box_configuration.web_link_field_mappings #=> Array
+    #   resp.configuration.box_configuration.web_link_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.box_configuration.web_link_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.box_configuration.web_link_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.box_configuration.inclusion_patterns #=> Array
+    #   resp.configuration.box_configuration.inclusion_patterns[0] #=> String
+    #   resp.configuration.box_configuration.exclusion_patterns #=> Array
+    #   resp.configuration.box_configuration.exclusion_patterns[0] #=> String
+    #   resp.configuration.box_configuration.vpc_configuration.subnet_ids #=> Array
+    #   resp.configuration.box_configuration.vpc_configuration.subnet_ids[0] #=> String
+    #   resp.configuration.box_configuration.vpc_configuration.security_group_ids #=> Array
+    #   resp.configuration.box_configuration.vpc_configuration.security_group_ids[0] #=> String
+    #   resp.configuration.quip_configuration.domain #=> String
+    #   resp.configuration.quip_configuration.secret_arn #=> String
+    #   resp.configuration.quip_configuration.crawl_file_comments #=> Boolean
+    #   resp.configuration.quip_configuration.crawl_chat_rooms #=> Boolean
+    #   resp.configuration.quip_configuration.crawl_attachments #=> Boolean
+    #   resp.configuration.quip_configuration.folder_ids #=> Array
+    #   resp.configuration.quip_configuration.folder_ids[0] #=> String
+    #   resp.configuration.quip_configuration.thread_field_mappings #=> Array
+    #   resp.configuration.quip_configuration.thread_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.quip_configuration.thread_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.quip_configuration.thread_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.quip_configuration.message_field_mappings #=> Array
+    #   resp.configuration.quip_configuration.message_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.quip_configuration.message_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.quip_configuration.message_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.quip_configuration.attachment_field_mappings #=> Array
+    #   resp.configuration.quip_configuration.attachment_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.quip_configuration.attachment_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.quip_configuration.attachment_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.quip_configuration.inclusion_patterns #=> Array
+    #   resp.configuration.quip_configuration.inclusion_patterns[0] #=> String
+    #   resp.configuration.quip_configuration.exclusion_patterns #=> Array
+    #   resp.configuration.quip_configuration.exclusion_patterns[0] #=> String
+    #   resp.configuration.quip_configuration.vpc_configuration.subnet_ids #=> Array
+    #   resp.configuration.quip_configuration.vpc_configuration.subnet_ids[0] #=> String
+    #   resp.configuration.quip_configuration.vpc_configuration.security_group_ids #=> Array
+    #   resp.configuration.quip_configuration.vpc_configuration.security_group_ids[0] #=> String
+    #   resp.configuration.jira_configuration.jira_account_url #=> String
+    #   resp.configuration.jira_configuration.secret_arn #=> String
+    #   resp.configuration.jira_configuration.use_change_log #=> Boolean
+    #   resp.configuration.jira_configuration.project #=> Array
+    #   resp.configuration.jira_configuration.project[0] #=> String
+    #   resp.configuration.jira_configuration.issue_type #=> Array
+    #   resp.configuration.jira_configuration.issue_type[0] #=> String
+    #   resp.configuration.jira_configuration.status #=> Array
+    #   resp.configuration.jira_configuration.status[0] #=> String
+    #   resp.configuration.jira_configuration.issue_sub_entity_filter #=> Array
+    #   resp.configuration.jira_configuration.issue_sub_entity_filter[0] #=> String, one of "COMMENTS", "ATTACHMENTS", "WORKLOGS"
+    #   resp.configuration.jira_configuration.attachment_field_mappings #=> Array
+    #   resp.configuration.jira_configuration.attachment_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.jira_configuration.attachment_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.jira_configuration.attachment_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.jira_configuration.comment_field_mappings #=> Array
+    #   resp.configuration.jira_configuration.comment_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.jira_configuration.comment_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.jira_configuration.comment_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.jira_configuration.issue_field_mappings #=> Array
+    #   resp.configuration.jira_configuration.issue_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.jira_configuration.issue_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.jira_configuration.issue_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.jira_configuration.project_field_mappings #=> Array
+    #   resp.configuration.jira_configuration.project_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.jira_configuration.project_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.jira_configuration.project_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.jira_configuration.work_log_field_mappings #=> Array
+    #   resp.configuration.jira_configuration.work_log_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.jira_configuration.work_log_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.jira_configuration.work_log_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.jira_configuration.inclusion_patterns #=> Array
+    #   resp.configuration.jira_configuration.inclusion_patterns[0] #=> String
+    #   resp.configuration.jira_configuration.exclusion_patterns #=> Array
+    #   resp.configuration.jira_configuration.exclusion_patterns[0] #=> String
+    #   resp.configuration.jira_configuration.vpc_configuration.subnet_ids #=> Array
+    #   resp.configuration.jira_configuration.vpc_configuration.subnet_ids[0] #=> String
+    #   resp.configuration.jira_configuration.vpc_configuration.security_group_ids #=> Array
+    #   resp.configuration.jira_configuration.vpc_configuration.security_group_ids[0] #=> String
+    #   resp.configuration.git_hub_configuration.saa_s_configuration.organization_name #=> String
+    #   resp.configuration.git_hub_configuration.saa_s_configuration.host_url #=> String
+    #   resp.configuration.git_hub_configuration.on_premise_configuration.host_url #=> String
+    #   resp.configuration.git_hub_configuration.on_premise_configuration.organization_name #=> String
+    #   resp.configuration.git_hub_configuration.on_premise_configuration.ssl_certificate_s3_path.bucket #=> String
+    #   resp.configuration.git_hub_configuration.on_premise_configuration.ssl_certificate_s3_path.key #=> String
+    #   resp.configuration.git_hub_configuration.type #=> String, one of "SAAS", "ON_PREMISE"
+    #   resp.configuration.git_hub_configuration.secret_arn #=> String
+    #   resp.configuration.git_hub_configuration.use_change_log #=> Boolean
+    #   resp.configuration.git_hub_configuration.git_hub_document_crawl_properties.crawl_repository_documents #=> Boolean
+    #   resp.configuration.git_hub_configuration.git_hub_document_crawl_properties.crawl_issue #=> Boolean
+    #   resp.configuration.git_hub_configuration.git_hub_document_crawl_properties.crawl_issue_comment #=> Boolean
+    #   resp.configuration.git_hub_configuration.git_hub_document_crawl_properties.crawl_issue_comment_attachment #=> Boolean
+    #   resp.configuration.git_hub_configuration.git_hub_document_crawl_properties.crawl_pull_request #=> Boolean
+    #   resp.configuration.git_hub_configuration.git_hub_document_crawl_properties.crawl_pull_request_comment #=> Boolean
+    #   resp.configuration.git_hub_configuration.git_hub_document_crawl_properties.crawl_pull_request_comment_attachment #=> Boolean
+    #   resp.configuration.git_hub_configuration.repository_filter #=> Array
+    #   resp.configuration.git_hub_configuration.repository_filter[0] #=> String
+    #   resp.configuration.git_hub_configuration.inclusion_folder_name_patterns #=> Array
+    #   resp.configuration.git_hub_configuration.inclusion_folder_name_patterns[0] #=> String
+    #   resp.configuration.git_hub_configuration.inclusion_file_type_patterns #=> Array
+    #   resp.configuration.git_hub_configuration.inclusion_file_type_patterns[0] #=> String
+    #   resp.configuration.git_hub_configuration.inclusion_file_name_patterns #=> Array
+    #   resp.configuration.git_hub_configuration.inclusion_file_name_patterns[0] #=> String
+    #   resp.configuration.git_hub_configuration.exclusion_folder_name_patterns #=> Array
+    #   resp.configuration.git_hub_configuration.exclusion_folder_name_patterns[0] #=> String
+    #   resp.configuration.git_hub_configuration.exclusion_file_type_patterns #=> Array
+    #   resp.configuration.git_hub_configuration.exclusion_file_type_patterns[0] #=> String
+    #   resp.configuration.git_hub_configuration.exclusion_file_name_patterns #=> Array
+    #   resp.configuration.git_hub_configuration.exclusion_file_name_patterns[0] #=> String
+    #   resp.configuration.git_hub_configuration.vpc_configuration.subnet_ids #=> Array
+    #   resp.configuration.git_hub_configuration.vpc_configuration.subnet_ids[0] #=> String
+    #   resp.configuration.git_hub_configuration.vpc_configuration.security_group_ids #=> Array
+    #   resp.configuration.git_hub_configuration.vpc_configuration.security_group_ids[0] #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_repository_configuration_field_mappings #=> Array
+    #   resp.configuration.git_hub_configuration.git_hub_repository_configuration_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_repository_configuration_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_repository_configuration_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_commit_configuration_field_mappings #=> Array
+    #   resp.configuration.git_hub_configuration.git_hub_commit_configuration_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_commit_configuration_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_commit_configuration_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_issue_document_configuration_field_mappings #=> Array
+    #   resp.configuration.git_hub_configuration.git_hub_issue_document_configuration_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_issue_document_configuration_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_issue_document_configuration_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_issue_comment_configuration_field_mappings #=> Array
+    #   resp.configuration.git_hub_configuration.git_hub_issue_comment_configuration_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_issue_comment_configuration_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_issue_comment_configuration_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_issue_attachment_configuration_field_mappings #=> Array
+    #   resp.configuration.git_hub_configuration.git_hub_issue_attachment_configuration_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_issue_attachment_configuration_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_issue_attachment_configuration_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_pull_request_comment_configuration_field_mappings #=> Array
+    #   resp.configuration.git_hub_configuration.git_hub_pull_request_comment_configuration_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_pull_request_comment_configuration_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_pull_request_comment_configuration_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_pull_request_document_configuration_field_mappings #=> Array
+    #   resp.configuration.git_hub_configuration.git_hub_pull_request_document_configuration_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_pull_request_document_configuration_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_pull_request_document_configuration_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_pull_request_document_attachment_configuration_field_mappings #=> Array
+    #   resp.configuration.git_hub_configuration.git_hub_pull_request_document_attachment_configuration_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_pull_request_document_attachment_configuration_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_pull_request_document_attachment_configuration_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.alfresco_configuration.site_url #=> String
+    #   resp.configuration.alfresco_configuration.site_id #=> String
+    #   resp.configuration.alfresco_configuration.secret_arn #=> String
+    #   resp.configuration.alfresco_configuration.ssl_certificate_s3_path.bucket #=> String
+    #   resp.configuration.alfresco_configuration.ssl_certificate_s3_path.key #=> String
+    #   resp.configuration.alfresco_configuration.crawl_system_folders #=> Boolean
+    #   resp.configuration.alfresco_configuration.crawl_comments #=> Boolean
+    #   resp.configuration.alfresco_configuration.entity_filter #=> Array
+    #   resp.configuration.alfresco_configuration.entity_filter[0] #=> String, one of "wiki", "blog", "documentLibrary"
+    #   resp.configuration.alfresco_configuration.document_library_field_mappings #=> Array
+    #   resp.configuration.alfresco_configuration.document_library_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.alfresco_configuration.document_library_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.alfresco_configuration.document_library_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.alfresco_configuration.blog_field_mappings #=> Array
+    #   resp.configuration.alfresco_configuration.blog_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.alfresco_configuration.blog_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.alfresco_configuration.blog_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.alfresco_configuration.wiki_field_mappings #=> Array
+    #   resp.configuration.alfresco_configuration.wiki_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.alfresco_configuration.wiki_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.alfresco_configuration.wiki_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.alfresco_configuration.inclusion_patterns #=> Array
+    #   resp.configuration.alfresco_configuration.inclusion_patterns[0] #=> String
+    #   resp.configuration.alfresco_configuration.exclusion_patterns #=> Array
+    #   resp.configuration.alfresco_configuration.exclusion_patterns[0] #=> String
+    #   resp.configuration.alfresco_configuration.vpc_configuration.subnet_ids #=> Array
+    #   resp.configuration.alfresco_configuration.vpc_configuration.subnet_ids[0] #=> String
+    #   resp.configuration.alfresco_configuration.vpc_configuration.security_group_ids #=> Array
+    #   resp.configuration.alfresco_configuration.vpc_configuration.security_group_ids[0] #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.description #=> String
@@ -2395,8 +3161,7 @@ module Aws::Kendra
     #   information on.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index for your Amazon Kendra experience you want
-    #   to get information on.
+    #   The identifier of the index for your Amazon Kendra experience.
     #
     # @return [Types::DescribeExperienceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2452,10 +3217,10 @@ module Aws::Kendra
     # Gets information about an FAQ list.
     #
     # @option params [required, String] :id
-    #   The unique identifier of the FAQ.
+    #   The identifier of the FAQ you want to get information on.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index that contains the FAQ.
+    #   The identifier of the index for the FAQ.
     #
     # @return [Types::DescribeFaqResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2504,10 +3269,10 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Describes an existing Amazon Kendra index
+    # Gets information about an existing Amazon Kendra index.
     #
     # @option params [required, String] :id
-    #   The name of the index to describe.
+    #   The identifier of the index you want to get information on.
     #
     # @return [Types::DescribeIndexResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2644,7 +3409,8 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Describes a block list used for query suggestions for an index.
+    # Gets information about a block list used for query suggestions for an
+    # index.
     #
     # This is used to check the current settings that are applied to a block
     # list.
@@ -2656,7 +3422,7 @@ module Aws::Kendra
     #   The identifier of the index for the block list.
     #
     # @option params [required, String] :id
-    #   The unique identifier of the block list.
+    #   The identifier of the block list you want to get information on.
     #
     # @return [Types::DescribeQuerySuggestionsBlockListResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2705,7 +3471,7 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Describes the settings of query suggestions for an index.
+    # Gets information on the settings of query suggestions for an index.
     #
     # This is used to check the current settings applied to query
     # suggestions.
@@ -2714,8 +3480,8 @@ module Aws::Kendra
     # Amazon Web Services GovCloud (US-West) region.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index you want to describe query suggestions
-    #   settings for.
+    #   The identifier of the index with query suggestions that you want to
+    #   get information on.
     #
     # @return [Types::DescribeQuerySuggestionsConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2756,13 +3522,13 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Describes an existing Amazon Kendra thesaurus.
+    # Gets information about an existing Amazon Kendra thesaurus.
     #
     # @option params [required, String] :id
-    #   The identifier of the thesaurus to describe.
+    #   The identifier of the thesaurus you want to get information on.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index associated with the thesaurus to describe.
+    #   The identifier of the index for the thesaurus.
     #
     # @return [Types::DescribeThesaurusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3056,13 +3822,60 @@ module Aws::Kendra
       req.send_request(options)
     end
 
+    # Lists one or more access control configurations for an index. This
+    # includes user and group access information for your documents. This is
+    # useful for user context filtering, where search results are filtered
+    # based on the user or their group access to documents.
+    #
+    # @option params [required, String] :index_id
+    #   The identifier of the index for the access control configuration.
+    #
+    # @option params [String] :next_token
+    #   If the previous response was incomplete (because there's more data to
+    #   retrieve), Amazon Kendra returns a pagination token in the response.
+    #   You can use this pagination token to retrieve the next set of access
+    #   control configurations.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of access control configurations to return.
+    #
+    # @return [Types::ListAccessControlConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAccessControlConfigurationsResponse#next_token #next_token} => String
+    #   * {Types::ListAccessControlConfigurationsResponse#access_control_configurations #access_control_configurations} => Array&lt;Types::AccessControlConfigurationSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_access_control_configurations({
+    #     index_id: "IndexId", # required
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.access_control_configurations #=> Array
+    #   resp.access_control_configurations[0].id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListAccessControlConfigurations AWS API Documentation
+    #
+    # @overload list_access_control_configurations(params = {})
+    # @param [Hash] params ({})
+    def list_access_control_configurations(params = {}, options = {})
+      req = build_request(:list_access_control_configurations, params)
+      req.send_request(options)
+    end
+
     # Gets statistics about synchronizing Amazon Kendra with a data source.
     #
     # @option params [required, String] :id
     #   The identifier of the data source.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index that contains the data source.
+    #   The identifier of the index used with the data source.
     #
     # @option params [String] :next_token
     #   If the previous response was incomplete (because there is more data to
@@ -3132,7 +3945,7 @@ module Aws::Kendra
     # Lists the data sources that you have created.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index that contains the data source.
+    #   The identifier of the index used with one or more data sources.
     #
     # @option params [String] :next_token
     #   If the previous response was incomplete (because there is more data to
@@ -3163,7 +3976,7 @@ module Aws::Kendra
     #   resp.summary_items #=> Array
     #   resp.summary_items[0].name #=> String
     #   resp.summary_items[0].id #=> String
-    #   resp.summary_items[0].type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE", "WEBCRAWLER", "WORKDOCS"
+    #   resp.summary_items[0].type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE", "WEBCRAWLER", "WORKDOCS", "FSX", "SLACK", "BOX", "QUIP", "JIRA", "GITHUB", "ALFRESCO"
     #   resp.summary_items[0].created_at #=> Time
     #   resp.summary_items[0].updated_at #=> Time
     #   resp.summary_items[0].status #=> String, one of "CREATING", "DELETING", "FAILED", "UPDATING", "ACTIVE"
@@ -3366,6 +4179,8 @@ module Aws::Kendra
     #   * {Types::ListFaqsResponse#next_token #next_token} => String
     #   * {Types::ListFaqsResponse#faq_summary_items #faq_summary_items} => Array&lt;Types::FaqSummary&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_faqs({
@@ -3429,6 +4244,8 @@ module Aws::Kendra
     #   * {Types::ListGroupsOlderThanOrderingIdResponse#groups_summaries #groups_summaries} => Array&lt;Types::GroupSummary&gt;
     #   * {Types::ListGroupsOlderThanOrderingIdResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_groups_older_than_ordering_id({
@@ -3455,7 +4272,7 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Lists the Amazon Kendra indexes that you have created.
+    # Lists the Amazon Kendra indexes that you created.
     #
     # @option params [String] :next_token
     #   If the previous response was incomplete (because there is more data to
@@ -3537,6 +4354,8 @@ module Aws::Kendra
     #   * {Types::ListQuerySuggestionsBlockListsResponse#block_list_summary_items #block_list_summary_items} => Array&lt;Types::QuerySuggestionsBlockListSummary&gt;
     #   * {Types::ListQuerySuggestionsBlockListsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_query_suggestions_block_lists({
@@ -3597,10 +4416,10 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Lists the Amazon Kendra thesauri associated with an index.
+    # Lists the thesauri for an index.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index associated with the thesaurus to list.
+    #   The identifier of the index with one or more thesauri.
     #
     # @option params [String] :next_token
     #   If the previous response was incomplete (because there is more data to
@@ -3615,6 +4434,8 @@ module Aws::Kendra
     #
     #   * {Types::ListThesauriResponse#next_token #next_token} => String
     #   * {Types::ListThesauriResponse#thesaurus_summary_items #thesaurus_summary_items} => Array&lt;Types::ThesaurusSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3654,10 +4475,9 @@ module Aws::Kendra
     # property group, can see top-secret company documents in their search
     # results.
     #
-    # You map users to their groups when you want to filter search results
-    # for different users based on their group’s access to documents. For
-    # more information on filtering search results for different users, see
-    # [Filtering on user context][1].
+    # This is useful for user context filtering, where search results are
+    # filtered based on the user or their group access to documents. For
+    # more information, see [Filtering on user context][1].
     #
     # If more than five `PUT` actions for a group are currently processing,
     # a validation exception is thrown.
@@ -3767,8 +4587,8 @@ module Aws::Kendra
     end
 
     # Searches an active index. Use this API to search your documents using
-    # query. The `Query` operation enables to do faceted search and to
-    # filter results based on document attributes.
+    # query. The `Query` API enables to do faceted search and to filter
+    # results based on document attributes.
     #
     # It also enables you to provide user context that Amazon Kendra uses to
     # enforce document access control in the search results.
@@ -3790,7 +4610,7 @@ module Aws::Kendra
     #
     # @option params [required, String] :index_id
     #   The unique identifier of the index to search. The identifier is
-    #   returned in the response from the `CreateIndex` operation.
+    #   returned in the response from the `CreateIndex` API.
     #
     # @option params [String] :query_text
     #   The text to search for.
@@ -3807,13 +4627,13 @@ module Aws::Kendra
     #
     # @option params [Array<Types::Facet>] :facets
     #   An array of documents attributes. Amazon Kendra returns a count for
-    #   each attribute key specified. You can use this information to help
-    #   narrow the search for your user.
+    #   each attribute key specified. This helps your users narrow their
+    #   search.
     #
     # @option params [Array<String>] :requested_document_attributes
-    #   An array of document attributes to include in the response. No other
-    #   document attributes are included in the response. By default all
-    #   document attributes are included in the response.
+    #   An array of document attributes to include in the response. You can
+    #   limit the response to include certain document attributes. By default
+    #   all document attributes are included in the response.
     #
     # @option params [String] :query_result_type_filter
     #   Sets the type of query. Only results for the specified query type are
@@ -3865,6 +4685,9 @@ module Aws::Kendra
     #   identifiable information, such as the user's email address, as the
     #   `VisitorId`.
     #
+    # @option params [Types::SpellCorrectionConfiguration] :spell_correction_configuration
+    #   Enables suggested spell corrections for queries.
+    #
     # @return [Types::QueryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::QueryResult#query_id #query_id} => String
@@ -3872,6 +4695,7 @@ module Aws::Kendra
     #   * {Types::QueryResult#facet_results #facet_results} => Array&lt;Types::FacetResult&gt;
     #   * {Types::QueryResult#total_number_of_results #total_number_of_results} => Integer
     #   * {Types::QueryResult#warnings #warnings} => Array&lt;Types::Warning&gt;
+    #   * {Types::QueryResult#spell_corrected_queries #spell_corrected_queries} => Array&lt;Types::SpellCorrectedQuery&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -3959,6 +4783,10 @@ module Aws::Kendra
     #     facets: [
     #       {
     #         document_attribute_key: "DocumentAttributeKey",
+    #         facets: {
+    #           # recursive FacetList
+    #         },
+    #         max_results: 1,
     #       },
     #     ],
     #     requested_document_attributes: ["DocumentAttributeKey"],
@@ -3995,6 +4823,9 @@ module Aws::Kendra
     #       ],
     #     },
     #     visitor_id: "VisitorId",
+    #     spell_correction_configuration: {
+    #       include_query_spell_check_suggestions: false, # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -4045,10 +4876,18 @@ module Aws::Kendra
     #   resp.facet_results[0].document_attribute_value_count_pairs[0].document_attribute_value.long_value #=> Integer
     #   resp.facet_results[0].document_attribute_value_count_pairs[0].document_attribute_value.date_value #=> Time
     #   resp.facet_results[0].document_attribute_value_count_pairs[0].count #=> Integer
+    #   resp.facet_results[0].document_attribute_value_count_pairs[0].facet_results #=> Types::FacetResultList
     #   resp.total_number_of_results #=> Integer
     #   resp.warnings #=> Array
     #   resp.warnings[0].message #=> String
     #   resp.warnings[0].code #=> String, one of "QUERY_LANGUAGE_INVALID_SYNTAX"
+    #   resp.spell_corrected_queries #=> Array
+    #   resp.spell_corrected_queries[0].suggested_query_text #=> String
+    #   resp.spell_corrected_queries[0].corrections #=> Array
+    #   resp.spell_corrected_queries[0].corrections[0].begin_offset #=> Integer
+    #   resp.spell_corrected_queries[0].corrections[0].end_offset #=> Integer
+    #   resp.spell_corrected_queries[0].corrections[0].term #=> String
+    #   resp.spell_corrected_queries[0].corrections[0].corrected_term #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/Query AWS API Documentation
     #
@@ -4093,8 +4932,8 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Stops a running synchronization job. You can't stop a scheduled
-    # synchronization job.
+    # Stops a synchronization job that is currently running. You can't stop
+    # a scheduled synchronization job.
     #
     # @option params [required, String] :id
     #   The identifier of the data source for which to stop the
@@ -4132,8 +4971,7 @@ module Aws::Kendra
     #
     # @option params [required, String] :query_id
     #   The identifier of the specific query for which you are submitting
-    #   feedback. The query ID is returned in the response to the `Query`
-    #   operation.
+    #   feedback. The query ID is returned in the response to the `Query` API.
     #
     # @option params [Array<Types::ClickFeedback>] :click_feedback_items
     #   Tells Amazon Kendra that a particular search result link was chosen by
@@ -4236,45 +5074,147 @@ module Aws::Kendra
       req.send_request(options)
     end
 
+    # Updates an access control configuration for your documents in an
+    # index. This includes user and group access information for your
+    # documents. This is useful for user context filtering, where search
+    # results are filtered based on the user or their group access to
+    # documents.
+    #
+    # You can update an access control configuration you created without
+    # indexing all of your documents again. For example, your index contains
+    # top-secret company documents that only certain employees or users
+    # should access. You created an 'allow' access control configuration
+    # for one user who recently joined the 'top-secret' team, switching
+    # from a team with 'deny' access to top-secret documents. However, the
+    # user suddenly returns to their previous team and should no longer have
+    # access to top secret documents. You can update the access control
+    # configuration to re-configure access control for your documents as
+    # circumstances change.
+    #
+    # You call the [BatchPutDocument][1] API to apply the updated access
+    # control configuration, with the `AccessControlConfigurationId`
+    # included in the [Document][2] object. If you use an S3 bucket as a
+    # data source, you synchronize your data source to apply the
+    # `AccessControlConfigurationId` in the `.metadata.json` file. Amazon
+    # Kendra currently only supports access control configuration for S3
+    # data sources and documents indexed using the `BatchPutDocument` API.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_BatchPutDocument.html
+    # [2]: https://docs.aws.amazon.com/kendra/latest/dg/API_Document.html
+    #
+    # @option params [required, String] :index_id
+    #   The identifier of the index for an access control configuration.
+    #
+    # @option params [required, String] :id
+    #   The identifier of the access control configuration you want to update.
+    #
+    # @option params [String] :name
+    #   A new name for the access control configuration.
+    #
+    # @option params [String] :description
+    #   A new description for the access control configuration.
+    #
+    # @option params [Array<Types::Principal>] :access_control_list
+    #   Information you want to update on principals (users and/or groups) and
+    #   which documents they should have access to. This is useful for user
+    #   context filtering, where search results are filtered based on the user
+    #   or their group access to documents.
+    #
+    # @option params [Array<Types::HierarchicalPrincipal>] :hierarchical_access_control_list
+    #   The updated list of [principal][1] lists that define the hierarchy for
+    #   which documents users should have access to.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_Principal.html
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_access_control_configuration({
+    #     index_id: "IndexId", # required
+    #     id: "AccessControlConfigurationId", # required
+    #     name: "AccessControlConfigurationName",
+    #     description: "Description",
+    #     access_control_list: [
+    #       {
+    #         name: "PrincipalName", # required
+    #         type: "USER", # required, accepts USER, GROUP
+    #         access: "ALLOW", # required, accepts ALLOW, DENY
+    #         data_source_id: "DataSourceId",
+    #       },
+    #     ],
+    #     hierarchical_access_control_list: [
+    #       {
+    #         principal_list: [ # required
+    #           {
+    #             name: "PrincipalName", # required
+    #             type: "USER", # required, accepts USER, GROUP
+    #             access: "ALLOW", # required, accepts ALLOW, DENY
+    #             data_source_id: "DataSourceId",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UpdateAccessControlConfiguration AWS API Documentation
+    #
+    # @overload update_access_control_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_access_control_configuration(params = {}, options = {})
+      req = build_request(:update_access_control_configuration, params)
+      req.send_request(options)
+    end
+
     # Updates an existing Amazon Kendra data source.
     #
     # @option params [required, String] :id
-    #   The unique identifier of the data source to update.
+    #   The identifier of the data source you want to update.
     #
     # @option params [String] :name
-    #   The name of the data source to update. The name of the data source
-    #   can't be updated. To rename a data source you must delete the data
-    #   source and re-create it.
+    #   A new name for the data source connector. You must first delete the
+    #   data source and re-create it to change the name of the data source.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index that contains the data source to update.
+    #   The identifier of the index used with the data source connector.
     #
     # @option params [Types::DataSourceConfiguration] :configuration
-    #   Configuration information for an Amazon Kendra data source.
+    #   Configuration information you want to update for the data source
+    #   connector.
     #
     # @option params [String] :description
-    #   The new description for the data source.
+    #   A new description for the data source connector.
     #
     # @option params [String] :schedule
-    #   The new update schedule for the data source.
+    #   The sync schedule you want to update for the data source connector.
     #
     # @option params [String] :role_arn
-    #   The Amazon Resource Name (ARN) of the new role to use when the data
-    #   source is accessing resources on your behalf.
+    #   The Amazon Resource Name (ARN) of a role with permission to access the
+    #   data source. For more information, see [IAM Roles for Amazon
+    #   Kendra][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html
     #
     # @option params [String] :language_code
-    #   The code for a language. This allows you to support a language for all
-    #   documents when updating the data source. English is supported by
-    #   default. For more information on supported languages, including their
-    #   codes, see [Adding documents in languages other than English][1].
+    #   The code for a language you want to update for the data source
+    #   connector. This allows you to support a language for all documents
+    #   when updating the data source. English is supported by default. For
+    #   more information on supported languages, including their codes, see
+    #   [Adding documents in languages other than English][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html
     #
     # @option params [Types::CustomDocumentEnrichmentConfiguration] :custom_document_enrichment_configuration
-    #   Configuration information for altering document metadata and content
-    #   during the document ingestion process when you update a data source.
+    #   Configuration information you want to update for altering document
+    #   metadata and content during the document ingestion process.
     #
     #   For more information on how to create, modify and delete document
     #   metadata, or make other content alterations when you ingest documents
@@ -4331,6 +5271,7 @@ module Aws::Kendra
     #           bucket: "S3BucketName", # required
     #           key: "S3ObjectKey", # required
     #         },
+    #         authentication_type: "HTTP_BASIC", # accepts HTTP_BASIC, OAUTH2
     #       },
     #       database_configuration: {
     #         database_engine_type: "RDS_AURORA_MYSQL", # required, accepts RDS_AURORA_MYSQL, RDS_AURORA_POSTGRESQL, RDS_MYSQL, RDS_POSTGRESQL
@@ -4604,6 +5545,308 @@ module Aws::Kendra
     #           },
     #         ],
     #       },
+    #       fsx_configuration: {
+    #         file_system_id: "FileSystemId", # required
+    #         file_system_type: "WINDOWS", # required, accepts WINDOWS
+    #         vpc_configuration: { # required
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #         secret_arn: "SecretArn",
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #       },
+    #       slack_configuration: {
+    #         team_id: "TeamId", # required
+    #         secret_arn: "SecretArn", # required
+    #         vpc_configuration: {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #         slack_entity_list: ["PUBLIC_CHANNEL"], # required, accepts PUBLIC_CHANNEL, PRIVATE_CHANNEL, GROUP_MESSAGE, DIRECT_MESSAGE
+    #         use_change_log: false,
+    #         crawl_bot_message: false,
+    #         exclude_archived: false,
+    #         since_crawl_date: "SinceCrawlDate", # required
+    #         look_back_period: 1,
+    #         private_channel_filter: ["String"],
+    #         public_channel_filter: ["String"],
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #       },
+    #       box_configuration: {
+    #         enterprise_id: "EnterpriseId", # required
+    #         secret_arn: "SecretArn", # required
+    #         use_change_log: false,
+    #         crawl_comments: false,
+    #         crawl_tasks: false,
+    #         crawl_web_links: false,
+    #         file_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         task_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         comment_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         web_link_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         vpc_configuration: {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #       },
+    #       quip_configuration: {
+    #         domain: "Domain", # required
+    #         secret_arn: "SecretArn", # required
+    #         crawl_file_comments: false,
+    #         crawl_chat_rooms: false,
+    #         crawl_attachments: false,
+    #         folder_ids: ["FolderId"],
+    #         thread_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         message_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         attachment_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         vpc_configuration: {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #       },
+    #       jira_configuration: {
+    #         jira_account_url: "JiraAccountUrl", # required
+    #         secret_arn: "SecretArn", # required
+    #         use_change_log: false,
+    #         project: ["String"],
+    #         issue_type: ["String"],
+    #         status: ["String"],
+    #         issue_sub_entity_filter: ["COMMENTS"], # accepts COMMENTS, ATTACHMENTS, WORKLOGS
+    #         attachment_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         comment_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         issue_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         project_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         work_log_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         vpc_configuration: {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #       },
+    #       git_hub_configuration: {
+    #         saa_s_configuration: {
+    #           organization_name: "OrganizationName", # required
+    #           host_url: "Url", # required
+    #         },
+    #         on_premise_configuration: {
+    #           host_url: "Url", # required
+    #           organization_name: "OrganizationName", # required
+    #           ssl_certificate_s3_path: { # required
+    #             bucket: "S3BucketName", # required
+    #             key: "S3ObjectKey", # required
+    #           },
+    #         },
+    #         type: "SAAS", # accepts SAAS, ON_PREMISE
+    #         secret_arn: "SecretArn", # required
+    #         use_change_log: false,
+    #         git_hub_document_crawl_properties: {
+    #           crawl_repository_documents: false,
+    #           crawl_issue: false,
+    #           crawl_issue_comment: false,
+    #           crawl_issue_comment_attachment: false,
+    #           crawl_pull_request: false,
+    #           crawl_pull_request_comment: false,
+    #           crawl_pull_request_comment_attachment: false,
+    #         },
+    #         repository_filter: ["RepositoryName"],
+    #         inclusion_folder_name_patterns: ["String"],
+    #         inclusion_file_type_patterns: ["String"],
+    #         inclusion_file_name_patterns: ["String"],
+    #         exclusion_folder_name_patterns: ["String"],
+    #         exclusion_file_type_patterns: ["String"],
+    #         exclusion_file_name_patterns: ["String"],
+    #         vpc_configuration: {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #         git_hub_repository_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         git_hub_commit_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         git_hub_issue_document_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         git_hub_issue_comment_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         git_hub_issue_attachment_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         git_hub_pull_request_comment_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         git_hub_pull_request_document_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         git_hub_pull_request_document_attachment_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #       },
+    #       alfresco_configuration: {
+    #         site_url: "SiteUrl", # required
+    #         site_id: "SiteId", # required
+    #         secret_arn: "SecretArn", # required
+    #         ssl_certificate_s3_path: { # required
+    #           bucket: "S3BucketName", # required
+    #           key: "S3ObjectKey", # required
+    #         },
+    #         crawl_system_folders: false,
+    #         crawl_comments: false,
+    #         entity_filter: ["wiki"], # accepts wiki, blog, documentLibrary
+    #         document_library_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         blog_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         wiki_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         vpc_configuration: {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #       },
     #     },
     #     description: "Description",
     #     schedule: "ScanSchedule",
@@ -4688,30 +5931,27 @@ module Aws::Kendra
     #   The identifier of your Amazon Kendra experience you want to update.
     #
     # @option params [String] :name
-    #   The name of your Amazon Kendra experience you want to update.
+    #   A new name for your Amazon Kendra experience.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index for your Amazon Kendra experience you want
-    #   to update.
+    #   The identifier of the index for your Amazon Kendra experience.
     #
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of a role with permission to access
-    #   `Query` operations, `QuerySuggestions` operations, `SubmitFeedback`
-    #   operations, and Amazon Web Services SSO that stores your user and
-    #   group information. For more information, see [IAM roles for Amazon
-    #   Kendra][1].
+    #   `Query` API, `QuerySuggestions` API, `SubmitFeedback` API, and Amazon
+    #   Web Services SSO that stores your user and group information. For more
+    #   information, see [IAM roles for Amazon Kendra][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html
     #
     # @option params [Types::ExperienceConfiguration] :configuration
-    #   Provides the user configuration information. This includes the Amazon
-    #   Web Services SSO field name that contains the identifiers of your
-    #   users, such as their emails.
+    #   Configuration information you want to update for your Amazon Kendra
+    #   experience.
     #
     # @option params [String] :description
-    #   The description of your Amazon Kendra experience you want to update.
+    #   A new description for your Amazon Kendra experience.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4747,28 +5987,32 @@ module Aws::Kendra
     # Updates an existing Amazon Kendra index.
     #
     # @option params [required, String] :id
-    #   The identifier of the index to update.
+    #   The identifier of the index you want to update.
     #
     # @option params [String] :name
-    #   The name of the index to update.
+    #   The name of the index you want to update.
     #
     # @option params [String] :role_arn
-    #   A new IAM role that gives Amazon Kendra permission to access your
-    #   Amazon CloudWatch logs.
+    #   An Identity and Access Management (IAM) role that gives Amazon Kendra
+    #   permission to access Amazon CloudWatch logs and metrics.
     #
     # @option params [String] :description
     #   A new description for the index.
     #
     # @option params [Array<Types::DocumentMetadataConfiguration>] :document_metadata_configuration_updates
-    #   The document metadata to update.
+    #   The document metadata configuration you want to update for the index.
+    #   Document metadata are fields or attributes associated with your
+    #   documents. For example, the company department name associated with
+    #   each document.
     #
     # @option params [Types::CapacityUnitsConfiguration] :capacity_units
-    #   Sets the number of additional storage and query capacity units that
-    #   should be used by the index. You can change the capacity of the index
-    #   up to 5 times per day.
+    #   Sets the number of additional document storage and query capacity
+    #   units that should be used by the index. You can change the capacity of
+    #   the index up to 5 times per day, or make 5 API calls.
     #
     #   If you are using extra storage units, you can't reduce the storage
-    #   capacity below that required to meet the storage needs for your index.
+    #   capacity below what is required to meet the storage needs for your
+    #   index.
     #
     # @option params [Array<Types::UserTokenConfiguration>] :user_token_configurations
     #   The user token configuration.
@@ -4868,16 +6112,16 @@ module Aws::Kendra
     # Amazon Web Services GovCloud (US-West) region.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index for a block list.
+    #   The identifier of the index for the block list.
     #
     # @option params [required, String] :id
-    #   The unique identifier of a block list.
+    #   The identifier of the block list you want to update.
     #
     # @option params [String] :name
-    #   The name of a block list.
+    #   A new name for the block list.
     #
     # @option params [String] :description
-    #   The description for a block list.
+    #   A new description for the block list.
     #
     # @option params [Types::S3Path] :source_s3_path
     #   The S3 path where your block list text file sits in S3.
@@ -4939,8 +6183,7 @@ module Aws::Kendra
     # Amazon Web Services GovCloud (US-West) region.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index you want to update query suggestions
-    #   settings for.
+    #   The identifier of the index with query suggestions you want to update.
     #
     # @option params [String] :mode
     #   Set the mode to `ENABLED` or `LEARN_ONLY`.
@@ -5018,22 +6261,23 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Updates a thesaurus file associated with an index.
+    # Updates a thesaurus for an index.
     #
     # @option params [required, String] :id
-    #   The identifier of the thesaurus to update.
+    #   The identifier of the thesaurus you want to update.
     #
     # @option params [String] :name
-    #   The updated name of the thesaurus.
+    #   A new name for the thesaurus.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index associated with the thesaurus to update.
+    #   The identifier of the index for the thesaurus.
     #
     # @option params [String] :description
-    #   The updated description of the thesaurus.
+    #   A new description for the thesaurus.
     #
     # @option params [String] :role_arn
-    #   The updated role ARN of the thesaurus.
+    #   An IAM role that gives Amazon Kendra permissions to access thesaurus
+    #   file specified in `SourceS3Path`.
     #
     # @option params [Types::S3Path] :source_s3_path
     #   Information required to find a specific file in an Amazon S3 bucket.
@@ -5076,7 +6320,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

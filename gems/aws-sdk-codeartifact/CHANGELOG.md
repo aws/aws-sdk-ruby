@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2022-07-14)
+------------------
+
+* Feature - This release introduces Package Origin Controls, a mechanism used to counteract Dependency Confusion attacks. Adds two new APIs, PutPackageOriginConfiguration and DescribePackage, and updates the ListPackage, DescribePackageVersion and ListPackageVersion APIs in support of the feature.
+
+1.20.0 (2022-06-02)
+------------------
+
+* Feature - Documentation updates for CodeArtifact
+
+1.19.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.18.0 (2022-02-03)
 ------------------
 

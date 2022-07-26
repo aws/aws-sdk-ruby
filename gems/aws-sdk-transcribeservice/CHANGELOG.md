@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2022-07-22)
+------------------
+
+* Feature - Remove unsupported language codes for StartTranscriptionJob and update VocabularyFileUri for UpdateMedicalVocabulary
+
+1.75.0 (2022-05-31)
+------------------
+
+* Feature - Amazon Transcribe now supports automatic language identification for multi-lingual audio in batch mode.
+
+1.74.0 (2022-03-24)
+------------------
+
+* Feature - This release adds an additional parameter for subtitling with Amazon Transcribe batch jobs: outputStartIndex.
+
+1.73.0 (2022-03-10)
+------------------
+
+* Feature - Documentation fix for API `StartMedicalTranscriptionJobRequest`, now showing min sample rate as 16khz
+
+1.72.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.71.0 (2022-02-03)
 ------------------
 

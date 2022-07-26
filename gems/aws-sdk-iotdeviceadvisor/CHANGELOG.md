@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2022-07-22)
+------------------
+
+* Feature - Added new service feature (Early access only) - Long Duration Test, where customers can test the IoT device to observe how it behaves when the device is in operation for longer period.
+
+1.14.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.13.0 (2022-02-03)
 ------------------
 

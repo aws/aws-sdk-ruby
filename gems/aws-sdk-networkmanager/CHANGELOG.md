@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2022-07-12)
+------------------
+
+* Feature - This release adds general availability API support for AWS Cloud WAN.
+
+1.23.0 (2022-05-24)
+------------------
+
+* Feature - This release adds Multi Account API support for a TGW Global Network, to enable and disable AWSServiceAccess with AwsOrganizations for Network Manager service and dependency CloudFormation StackSets service.
+
+1.22.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.21.0 (2022-02-03)
 ------------------
 

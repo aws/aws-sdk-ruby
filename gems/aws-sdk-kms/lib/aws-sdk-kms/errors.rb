@@ -52,6 +52,7 @@ module Aws::KMS
   # * {InvalidKeyUsageException}
   # * {InvalidMarkerException}
   # * {KMSInternalException}
+  # * {KMSInvalidMacException}
   # * {KMSInvalidSignatureException}
   # * {KMSInvalidStateException}
   # * {KeyUnavailableException}
@@ -432,6 +433,21 @@ module Aws::KMS
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::KMS::Types::KMSInternalException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class KMSInvalidMacException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::KMS::Types::KMSInvalidMacException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

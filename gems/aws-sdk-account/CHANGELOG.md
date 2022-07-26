@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2022-07-22)
+------------------
+
+* Feature - This release enables customers to manage the primary contact information for their AWS accounts. For more information, see https://docs.aws.amazon.com/accounts/latest/reference/API_Operations.html
+
+1.6.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.5.0 (2022-02-03)
 ------------------
 

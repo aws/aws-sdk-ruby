@@ -98,6 +98,8 @@ module Aws::VoiceID
     S3Uri = Shapes::StringShape.new(name: 'S3Uri')
     Score = Shapes::IntegerShape.new(name: 'Score')
     ServerSideEncryptionConfiguration = Shapes::StructureShape.new(name: 'ServerSideEncryptionConfiguration')
+    ServerSideEncryptionUpdateDetails = Shapes::StructureShape.new(name: 'ServerSideEncryptionUpdateDetails')
+    ServerSideEncryptionUpdateStatus = Shapes::StringShape.new(name: 'ServerSideEncryptionUpdateStatus')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SessionId = Shapes::StringShape.new(name: 'SessionId')
     SessionName = Shapes::StringShape.new(name: 'SessionName')
@@ -215,6 +217,7 @@ module Aws::VoiceID
     Domain.add_member(:domain_status, Shapes::ShapeRef.new(shape: DomainStatus, location_name: "DomainStatus"))
     Domain.add_member(:name, Shapes::ShapeRef.new(shape: DomainName, location_name: "Name"))
     Domain.add_member(:server_side_encryption_configuration, Shapes::ShapeRef.new(shape: ServerSideEncryptionConfiguration, location_name: "ServerSideEncryptionConfiguration"))
+    Domain.add_member(:server_side_encryption_update_details, Shapes::ShapeRef.new(shape: ServerSideEncryptionUpdateDetails, location_name: "ServerSideEncryptionUpdateDetails"))
     Domain.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
     Domain.struct_class = Types::Domain
 
@@ -227,6 +230,7 @@ module Aws::VoiceID
     DomainSummary.add_member(:domain_status, Shapes::ShapeRef.new(shape: DomainStatus, location_name: "DomainStatus"))
     DomainSummary.add_member(:name, Shapes::ShapeRef.new(shape: DomainName, location_name: "Name"))
     DomainSummary.add_member(:server_side_encryption_configuration, Shapes::ShapeRef.new(shape: ServerSideEncryptionConfiguration, location_name: "ServerSideEncryptionConfiguration"))
+    DomainSummary.add_member(:server_side_encryption_update_details, Shapes::ShapeRef.new(shape: ServerSideEncryptionUpdateDetails, location_name: "ServerSideEncryptionUpdateDetails"))
     DomainSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
     DomainSummary.struct_class = Types::DomainSummary
 
@@ -380,6 +384,11 @@ module Aws::VoiceID
     ServerSideEncryptionConfiguration.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, required: true, location_name: "KmsKeyId"))
     ServerSideEncryptionConfiguration.struct_class = Types::ServerSideEncryptionConfiguration
 
+    ServerSideEncryptionUpdateDetails.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ServerSideEncryptionUpdateDetails.add_member(:old_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "OldKmsKeyId"))
+    ServerSideEncryptionUpdateDetails.add_member(:update_status, Shapes::ShapeRef.new(shape: ServerSideEncryptionUpdateStatus, location_name: "UpdateStatus"))
+    ServerSideEncryptionUpdateDetails.struct_class = Types::ServerSideEncryptionUpdateDetails
+
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
@@ -387,6 +396,7 @@ module Aws::VoiceID
     Speaker.add_member(:customer_speaker_id, Shapes::ShapeRef.new(shape: CustomerSpeakerId, location_name: "CustomerSpeakerId"))
     Speaker.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId"))
     Speaker.add_member(:generated_speaker_id, Shapes::ShapeRef.new(shape: GeneratedSpeakerId, location_name: "GeneratedSpeakerId"))
+    Speaker.add_member(:last_accessed_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastAccessedAt"))
     Speaker.add_member(:status, Shapes::ShapeRef.new(shape: SpeakerStatus, location_name: "Status"))
     Speaker.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
     Speaker.struct_class = Types::Speaker
@@ -423,6 +433,7 @@ module Aws::VoiceID
     SpeakerSummary.add_member(:customer_speaker_id, Shapes::ShapeRef.new(shape: CustomerSpeakerId, location_name: "CustomerSpeakerId"))
     SpeakerSummary.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId"))
     SpeakerSummary.add_member(:generated_speaker_id, Shapes::ShapeRef.new(shape: GeneratedSpeakerId, location_name: "GeneratedSpeakerId"))
+    SpeakerSummary.add_member(:last_accessed_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastAccessedAt"))
     SpeakerSummary.add_member(:status, Shapes::ShapeRef.new(shape: SpeakerStatus, location_name: "Status"))
     SpeakerSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
     SpeakerSummary.struct_class = Types::SpeakerSummary
@@ -542,6 +553,7 @@ module Aws::VoiceID
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -634,6 +646,7 @@ module Aws::VoiceID
         o.output = Shapes::ShapeRef.new(shape: EvaluateSessionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)

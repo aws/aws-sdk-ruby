@@ -997,6 +997,9 @@ module Aws::Appflow
     #             o_auth_2_properties: {
     #               token_url: "TokenUrl", # required
     #               o_auth_2_grant_type: "CLIENT_CREDENTIALS", # required, accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
+    #               token_url_custom_properties: {
+    #                 "CustomPropertyKey" => "CustomPropertyValue",
+    #               },
     #             },
     #           },
     #         },
@@ -1482,6 +1485,9 @@ module Aws::Appflow
     #           o_auth_2_properties: {
     #             token_url: "TokenUrl", # required
     #             o_auth_2_grant_type: "CLIENT_CREDENTIALS", # required, accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
+    #             token_url_custom_properties: {
+    #               "CustomPropertyKey" => "CustomPropertyValue",
+    #             },
     #           },
     #         },
     #       }
@@ -1752,6 +1758,9 @@ module Aws::Appflow
     #               o_auth_2_properties: {
     #                 token_url: "TokenUrl", # required
     #                 o_auth_2_grant_type: "CLIENT_CREDENTIALS", # required, accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
+    #                 token_url_custom_properties: {
+    #                   "CustomPropertyKey" => "CustomPropertyValue",
+    #                 },
     #               },
     #             },
     #           },
@@ -1973,6 +1982,7 @@ module Aws::Appflow
     #               timezone: "Timezone",
     #               schedule_offset: 1,
     #               first_execution_from: Time.now,
+    #               flow_error_deactivation_threshold: 1,
     #             },
     #           },
     #         },
@@ -2075,6 +2085,7 @@ module Aws::Appflow
     #                   aggregation_config: {
     #                     aggregation_type: "None", # accepts None, SingleFile
     #                   },
+    #                   preserve_source_data_typing: false,
     #                 },
     #               },
     #               salesforce: {
@@ -2143,6 +2154,14 @@ module Aws::Appflow
     #                 },
     #                 write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
     #               },
+    #               marketo: {
+    #                 object: "Object", # required
+    #                 error_handling_config: {
+    #                   fail_on_first_destination_error: false,
+    #                   bucket_prefix: "BucketPrefix",
+    #                   bucket_name: "BucketName",
+    #                 },
+    #               },
     #               custom_connector: {
     #                 entity_name: "EntityName", # required
     #                 error_handling_config: {
@@ -2155,6 +2174,20 @@ module Aws::Appflow
     #                 custom_properties: {
     #                   "CustomPropertyKey" => "CustomPropertyValue",
     #                 },
+    #               },
+    #               sapo_data: {
+    #                 object_path: "Object", # required
+    #                 success_response_handling_config: {
+    #                   bucket_prefix: "BucketPrefix",
+    #                   bucket_name: "BucketName",
+    #                 },
+    #                 id_field_names: ["Name"],
+    #                 error_handling_config: {
+    #                   fail_on_first_destination_error: false,
+    #                   bucket_prefix: "BucketPrefix",
+    #                   bucket_name: "BucketName",
+    #                 },
+    #                 write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
     #               },
     #             },
     #           },
@@ -2181,7 +2214,7 @@ module Aws::Appflow
     #               custom_connector: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, CONTAINS, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
     #             },
     #             destination_field: "DestinationField",
-    #             task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Map_all, Mask, Merge, Truncate, Validate
+    #             task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Map_all, Mask, Merge, Passthrough, Truncate, Validate
     #             task_properties: {
     #               "VALUE" => "Property",
     #             },
@@ -2452,6 +2485,9 @@ module Aws::Appflow
     #         o_auth_2_properties: {
     #           token_url: "TokenUrl", # required
     #           o_auth_2_grant_type: "CLIENT_CREDENTIALS", # required, accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
+    #           token_url_custom_properties: {
+    #             "CustomPropertyKey" => "CustomPropertyValue",
+    #           },
     #         },
     #       }
     #
@@ -3095,6 +3131,7 @@ module Aws::Appflow
     #             aggregation_config: {
     #               aggregation_type: "None", # accepts None, SingleFile
     #             },
+    #             preserve_source_data_typing: false,
     #           },
     #         },
     #         salesforce: {
@@ -3163,6 +3200,14 @@ module Aws::Appflow
     #           },
     #           write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
     #         },
+    #         marketo: {
+    #           object: "Object", # required
+    #           error_handling_config: {
+    #             fail_on_first_destination_error: false,
+    #             bucket_prefix: "BucketPrefix",
+    #             bucket_name: "BucketName",
+    #           },
+    #         },
     #         custom_connector: {
     #           entity_name: "EntityName", # required
     #           error_handling_config: {
@@ -3175,6 +3220,20 @@ module Aws::Appflow
     #           custom_properties: {
     #             "CustomPropertyKey" => "CustomPropertyValue",
     #           },
+    #         },
+    #         sapo_data: {
+    #           object_path: "Object", # required
+    #           success_response_handling_config: {
+    #             bucket_prefix: "BucketPrefix",
+    #             bucket_name: "BucketName",
+    #           },
+    #           id_field_names: ["Name"],
+    #           error_handling_config: {
+    #             fail_on_first_destination_error: false,
+    #             bucket_prefix: "BucketPrefix",
+    #             bucket_name: "BucketName",
+    #           },
+    #           write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
     #         },
     #       }
     #
@@ -3218,9 +3277,17 @@ module Aws::Appflow
     #   The properties required to query Zendesk.
     #   @return [Types::ZendeskDestinationProperties]
     #
+    # @!attribute [rw] marketo
+    #   The properties required to query Marketo.
+    #   @return [Types::MarketoDestinationProperties]
+    #
     # @!attribute [rw] custom_connector
     #   The properties that are required to query the custom Connector.
     #   @return [Types::CustomConnectorDestinationProperties]
+    #
+    # @!attribute [rw] sapo_data
+    #   The properties required to query SAPOData.
+    #   @return [Types::SAPODataDestinationProperties]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/DestinationConnectorProperties AWS API Documentation
     #
@@ -3235,7 +3302,9 @@ module Aws::Appflow
       :honeycode,
       :customer_profiles,
       :zendesk,
-      :custom_connector)
+      :marketo,
+      :custom_connector,
+      :sapo_data)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3320,6 +3389,7 @@ module Aws::Appflow
     #               aggregation_config: {
     #                 aggregation_type: "None", # accepts None, SingleFile
     #               },
+    #               preserve_source_data_typing: false,
     #             },
     #           },
     #           salesforce: {
@@ -3388,6 +3458,14 @@ module Aws::Appflow
     #             },
     #             write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
     #           },
+    #           marketo: {
+    #             object: "Object", # required
+    #             error_handling_config: {
+    #               fail_on_first_destination_error: false,
+    #               bucket_prefix: "BucketPrefix",
+    #               bucket_name: "BucketName",
+    #             },
+    #           },
     #           custom_connector: {
     #             entity_name: "EntityName", # required
     #             error_handling_config: {
@@ -3400,6 +3478,20 @@ module Aws::Appflow
     #             custom_properties: {
     #               "CustomPropertyKey" => "CustomPropertyValue",
     #             },
+    #           },
+    #           sapo_data: {
+    #             object_path: "Object", # required
+    #             success_response_handling_config: {
+    #               bucket_prefix: "BucketPrefix",
+    #               bucket_name: "BucketName",
+    #             },
+    #             id_field_names: ["Name"],
+    #             error_handling_config: {
+    #               fail_on_first_destination_error: false,
+    #               bucket_prefix: "BucketPrefix",
+    #               bucket_name: "BucketName",
+    #             },
+    #             write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
     #           },
     #         },
     #       }
@@ -4439,6 +4531,43 @@ module Aws::Appflow
       include Aws::Structure
     end
 
+    # The properties that Amazon AppFlow applies when you use Marketo as a
+    # flow destination.
+    #
+    # @note When making an API call, you may pass MarketoDestinationProperties
+    #   data as a hash:
+    #
+    #       {
+    #         object: "Object", # required
+    #         error_handling_config: {
+    #           fail_on_first_destination_error: false,
+    #           bucket_prefix: "BucketPrefix",
+    #           bucket_name: "BucketName",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] object
+    #   The object specified in the Marketo flow destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_handling_config
+    #   The settings that determine how Amazon AppFlow handles an error when
+    #   placing data in the destination. For example, this setting would
+    #   determine if the flow should fail after one insertion error, or
+    #   continue and attempt to insert every record regardless of the
+    #   initial failure. `ErrorHandlingConfig` is a part of the destination
+    #   connector details.
+    #   @return [Types::ErrorHandlingConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/MarketoDestinationProperties AWS API Documentation
+    #
+    class MarketoDestinationProperties < Struct.new(
+      :object,
+      :error_handling_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The connector metadata specific to Marketo.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/MarketoMetadata AWS API Documentation
@@ -4517,6 +4646,55 @@ module Aws::Appflow
       include Aws::Structure
     end
 
+    # Custom parameter required for OAuth 2.0 authentication.
+    #
+    # @!attribute [rw] key
+    #   The key of the custom parameter required for OAuth 2.0
+    #   authentication.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_required
+    #   Indicates whether the custom parameter for OAuth 2.0 authentication
+    #   is required.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] label
+    #   The label of the custom parameter used for OAuth 2.0 authentication.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description about the custom parameter used for OAuth 2.0
+    #   authentication.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_sensitive_field
+    #   Indicates whether this authentication custom parameter is a
+    #   sensitive field.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] connector_supplied_values
+    #   Contains default values for this authentication parameter that are
+    #   supplied by the connector.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] type
+    #   Indicates whether custom parameter is used with TokenUrl or AuthUrl.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/OAuth2CustomParameter AWS API Documentation
+    #
+    class OAuth2CustomParameter < Struct.new(
+      :key,
+      :is_required,
+      :label,
+      :description,
+      :is_sensitive_field,
+      :connector_supplied_values,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the default values required for OAuth 2.0 authentication.
     #
     # @!attribute [rw] oauth_scopes
@@ -4535,13 +4713,18 @@ module Aws::Appflow
     #   OAuth 2.0 grant types supported by the connector.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] oauth2_custom_properties
+    #   List of custom parameters required for OAuth 2.0 authentication.
+    #   @return [Array<Types::OAuth2CustomParameter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/OAuth2Defaults AWS API Documentation
     #
     class OAuth2Defaults < Struct.new(
       :oauth_scopes,
       :token_urls,
       :auth_code_urls,
-      :oauth2_grant_types_supported)
+      :oauth2_grant_types_supported,
+      :oauth2_custom_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4554,6 +4737,9 @@ module Aws::Appflow
     #       {
     #         token_url: "TokenUrl", # required
     #         o_auth_2_grant_type: "CLIENT_CREDENTIALS", # required, accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
+    #         token_url_custom_properties: {
+    #           "CustomPropertyKey" => "CustomPropertyValue",
+    #         },
     #       }
     #
     # @!attribute [rw] token_url
@@ -4565,11 +4751,18 @@ module Aws::Appflow
     #   authentication.
     #   @return [String]
     #
+    # @!attribute [rw] token_url_custom_properties
+    #   Associates your token URL with a map of properties that you define.
+    #   Use this parameter to provide any additional details that the
+    #   connector requires to authenticate your request.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/OAuth2Properties AWS API Documentation
     #
     class OAuth2Properties < Struct.new(
       :token_url,
-      :o_auth_2_grant_type)
+      :o_auth_2_grant_type,
+      :token_url_custom_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4946,6 +5139,7 @@ module Aws::Appflow
     #           aggregation_config: {
     #             aggregation_type: "None", # accepts None, SingleFile
     #           },
+    #           preserve_source_data_typing: false,
     #         },
     #       }
     #
@@ -5017,6 +5211,7 @@ module Aws::Appflow
     #         aggregation_config: {
     #           aggregation_type: "None", # accepts None, SingleFile
     #         },
+    #         preserve_source_data_typing: false,
     #       }
     #
     # @!attribute [rw] file_type
@@ -5035,12 +5230,27 @@ module Aws::Appflow
     #   format of your flow data.
     #   @return [Types::AggregationConfig]
     #
+    # @!attribute [rw] preserve_source_data_typing
+    #   If your file output format is Parquet, use this parameter to set
+    #   whether Amazon AppFlow preserves the data types in your source data
+    #   when it writes the output to Amazon S3.
+    #
+    #   * `true`\: Amazon AppFlow preserves the data types when it writes to
+    #     Amazon S3. For example, an integer or `1` in your source data is
+    #     still an integer in your output.
+    #
+    #   * `false`\: Amazon AppFlow converts all of the source data into
+    #     strings when it writes to Amazon S3. For example, an integer of
+    #     `1` in your source data becomes the string `"1"` in the output.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/S3OutputFormatConfig AWS API Documentation
     #
     class S3OutputFormatConfig < Struct.new(
       :file_type,
       :prefix_config,
-      :aggregation_config)
+      :aggregation_config,
+      :preserve_source_data_typing)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5183,6 +5393,71 @@ module Aws::Appflow
       :logon_language,
       :private_link_service_name,
       :o_auth_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The properties that are applied when using SAPOData as a flow
+    # destination
+    #
+    # @note When making an API call, you may pass SAPODataDestinationProperties
+    #   data as a hash:
+    #
+    #       {
+    #         object_path: "Object", # required
+    #         success_response_handling_config: {
+    #           bucket_prefix: "BucketPrefix",
+    #           bucket_name: "BucketName",
+    #         },
+    #         id_field_names: ["Name"],
+    #         error_handling_config: {
+    #           fail_on_first_destination_error: false,
+    #           bucket_prefix: "BucketPrefix",
+    #           bucket_name: "BucketName",
+    #         },
+    #         write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
+    #       }
+    #
+    # @!attribute [rw] object_path
+    #   The object path specified in the SAPOData flow destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] success_response_handling_config
+    #   Determines how Amazon AppFlow handles the success response that it
+    #   gets from the connector after placing data.
+    #
+    #   For example, this setting would determine where to write the
+    #   response from a destination connector upon a successful insert
+    #   operation.
+    #   @return [Types::SuccessResponseHandlingConfig]
+    #
+    # @!attribute [rw] id_field_names
+    #   A list of field names that can be used as an ID field when
+    #   performing a write operation.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] error_handling_config
+    #   The settings that determine how Amazon AppFlow handles an error when
+    #   placing data in the destination. For example, this setting would
+    #   determine if the flow should fail after one insertion error, or
+    #   continue and attempt to insert every record regardless of the
+    #   initial failure. `ErrorHandlingConfig` is a part of the destination
+    #   connector details.
+    #   @return [Types::ErrorHandlingConfig]
+    #
+    # @!attribute [rw] write_operation_type
+    #   The possible write operations in the destination connector. When
+    #   this value is not provided, this defaults to the `INSERT` operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/SAPODataDestinationProperties AWS API Documentation
+    #
+    class SAPODataDestinationProperties < Struct.new(
+      :object_path,
+      :success_response_handling_config,
+      :id_field_names,
+      :error_handling_config,
+      :write_operation_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5405,6 +5680,7 @@ module Aws::Appflow
     #         timezone: "Timezone",
     #         schedule_offset: 1,
     #         first_execution_from: Time.now,
+    #         flow_error_deactivation_threshold: 1,
     #       }
     #
     # @!attribute [rw] schedule_expression
@@ -5418,16 +5694,27 @@ module Aws::Appflow
     #   @return [String]
     #
     # @!attribute [rw] schedule_start_time
-    #   Specifies the scheduled start time for a schedule-triggered flow.
+    #   The time at which the scheduled flow starts. The time is formatted
+    #   as a timestamp that follows the ISO 8601 standard, such as
+    #   `2022-04-26T13:00:00-07:00`.
     #   @return [Time]
     #
     # @!attribute [rw] schedule_end_time
-    #   Specifies the scheduled end time for a schedule-triggered flow.
+    #   The time at which the scheduled flow ends. The time is formatted as
+    #   a timestamp that follows the ISO 8601 standard, such as
+    #   `2022-04-27T13:00:00-07:00`.
     #   @return [Time]
     #
     # @!attribute [rw] timezone
-    #   Specifies the time zone used when referring to the date and time of
-    #   a scheduled-triggered flow, such as `America/New_York`.
+    #   Specifies the time zone used when referring to the dates and times
+    #   of a scheduled flow, such as `America/New_York`. This time zone is
+    #   only a descriptive label. It doesn't affect how Amazon AppFlow
+    #   interprets the timestamps that you specify to schedule the flow.
+    #
+    #   If you want to schedule a flow by using times in a particular time
+    #   zone, indicate the time zone as a UTC offset in your timestamps. For
+    #   example, the UTC offsets for the `America/New_York` timezone are
+    #   `-04:00` EDT and `-05:00 EST`.
     #   @return [String]
     #
     # @!attribute [rw] schedule_offset
@@ -5440,6 +5727,11 @@ module Aws::Appflow
     #   connector in the first flow run.
     #   @return [Time]
     #
+    # @!attribute [rw] flow_error_deactivation_threshold
+    #   Defines how many times a scheduled flow fails consecutively before
+    #   Amazon AppFlow deactivates it.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ScheduledTriggerProperties AWS API Documentation
     #
     class ScheduledTriggerProperties < Struct.new(
@@ -5449,7 +5741,8 @@ module Aws::Appflow
       :schedule_end_time,
       :timezone,
       :schedule_offset,
-      :first_execution_from)
+      :first_execution_from,
+      :flow_error_deactivation_threshold)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6245,6 +6538,37 @@ module Aws::Appflow
       include Aws::Structure
     end
 
+    # Determines how Amazon AppFlow handles the success response that it
+    # gets from the connector after placing data.
+    #
+    # For example, this setting would determine where to write the response
+    # from the destination connector upon a successful insert operation.
+    #
+    # @note When making an API call, you may pass SuccessResponseHandlingConfig
+    #   data as a hash:
+    #
+    #       {
+    #         bucket_prefix: "BucketPrefix",
+    #         bucket_name: "BucketName",
+    #       }
+    #
+    # @!attribute [rw] bucket_prefix
+    #   The Amazon S3 bucket prefix.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket_name
+    #   The name of the Amazon S3 bucket.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/SuccessResponseHandlingConfig AWS API Documentation
+    #
+    class SuccessResponseHandlingConfig < Struct.new(
+      :bucket_prefix,
+      :bucket_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains details regarding all the supported `FieldTypes` and their
     # corresponding `filterOperators` and `supportedValues`.
     #
@@ -6319,7 +6643,7 @@ module Aws::Appflow
     #           custom_connector: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, CONTAINS, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
     #         },
     #         destination_field: "DestinationField",
-    #         task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Map_all, Mask, Merge, Truncate, Validate
+    #         task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Map_all, Mask, Merge, Passthrough, Truncate, Validate
     #         task_properties: {
     #           "VALUE" => "Property",
     #         },
@@ -6450,6 +6774,7 @@ module Aws::Appflow
     #             timezone: "Timezone",
     #             schedule_offset: 1,
     #             first_execution_from: Time.now,
+    #             flow_error_deactivation_threshold: 1,
     #           },
     #         },
     #       }
@@ -6490,6 +6815,7 @@ module Aws::Appflow
     #           timezone: "Timezone",
     #           schedule_offset: 1,
     #           first_execution_from: Time.now,
+    #           flow_error_deactivation_threshold: 1,
     #         },
     #       }
     #
@@ -6662,6 +6988,9 @@ module Aws::Appflow
     #               o_auth_2_properties: {
     #                 token_url: "TokenUrl", # required
     #                 o_auth_2_grant_type: "CLIENT_CREDENTIALS", # required, accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
+    #                 token_url_custom_properties: {
+    #                   "CustomPropertyKey" => "CustomPropertyValue",
+    #                 },
     #               },
     #             },
     #           },
@@ -6859,6 +7188,7 @@ module Aws::Appflow
     #               timezone: "Timezone",
     #               schedule_offset: 1,
     #               first_execution_from: Time.now,
+    #               flow_error_deactivation_threshold: 1,
     #             },
     #           },
     #         },
@@ -6961,6 +7291,7 @@ module Aws::Appflow
     #                   aggregation_config: {
     #                     aggregation_type: "None", # accepts None, SingleFile
     #                   },
+    #                   preserve_source_data_typing: false,
     #                 },
     #               },
     #               salesforce: {
@@ -7029,6 +7360,14 @@ module Aws::Appflow
     #                 },
     #                 write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
     #               },
+    #               marketo: {
+    #                 object: "Object", # required
+    #                 error_handling_config: {
+    #                   fail_on_first_destination_error: false,
+    #                   bucket_prefix: "BucketPrefix",
+    #                   bucket_name: "BucketName",
+    #                 },
+    #               },
     #               custom_connector: {
     #                 entity_name: "EntityName", # required
     #                 error_handling_config: {
@@ -7041,6 +7380,20 @@ module Aws::Appflow
     #                 custom_properties: {
     #                   "CustomPropertyKey" => "CustomPropertyValue",
     #                 },
+    #               },
+    #               sapo_data: {
+    #                 object_path: "Object", # required
+    #                 success_response_handling_config: {
+    #                   bucket_prefix: "BucketPrefix",
+    #                   bucket_name: "BucketName",
+    #                 },
+    #                 id_field_names: ["Name"],
+    #                 error_handling_config: {
+    #                   fail_on_first_destination_error: false,
+    #                   bucket_prefix: "BucketPrefix",
+    #                   bucket_name: "BucketName",
+    #                 },
+    #                 write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
     #               },
     #             },
     #           },
@@ -7067,7 +7420,7 @@ module Aws::Appflow
     #               custom_connector: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, CONTAINS, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
     #             },
     #             destination_field: "DestinationField",
-    #             task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Map_all, Mask, Merge, Truncate, Validate
+    #             task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Map_all, Mask, Merge, Passthrough, Truncate, Validate
     #             task_properties: {
     #               "VALUE" => "Property",
     #             },

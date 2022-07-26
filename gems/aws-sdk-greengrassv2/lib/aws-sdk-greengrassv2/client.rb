@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::GreengrassV2
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -557,11 +559,17 @@ module Aws::GreengrassV2
     #
     #   * Python 3.8 – `python3.8`
     #
+    #   * Python 3.9 – `python3.9`
+    #
     #   * Java 8 – `java8`
+    #
+    #   * Java 11 – `java11`
     #
     #   * Node.js 10 – `nodejs10.x`
     #
     #   * Node.js 12 – `nodejs12.x`
+    #
+    #   * Node.js 14 – `nodejs14.x`
     #
     #   To create a component from a Lambda function, specify
     #   `lambdaFunction` when you call this operation.
@@ -697,6 +705,8 @@ module Aws::GreengrassV2
     #   resp.status.message #=> String
     #   resp.status.errors #=> Hash
     #   resp.status.errors["NonEmptyString"] #=> String
+    #   resp.status.vendor_guidance #=> String, one of "ACTIVE", "DISCONTINUED", "DELETED"
+    #   resp.status.vendor_guidance_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/CreateComponentVersion AWS API Documentation
     #
@@ -719,8 +729,7 @@ module Aws::GreengrassV2
     #
     # Every deployment has a revision number that indicates how many
     # deployment revisions you define for a target. Use this operation to
-    # create a new revision of an existing deployment. This operation
-    # returns the revision number of the new deployment when you create it.
+    # create a new revision of an existing deployment.
     #
     # For more information, see the [Create deployments][1] in the *IoT
     # Greengrass V2 Developer Guide*.
@@ -924,6 +933,38 @@ module Aws::GreengrassV2
       req.send_request(options)
     end
 
+    # Deletes a deployment. To delete an active deployment, you must first
+    # cancel it. For more information, see [CancelDeployment][1].
+    #
+    # Deleting a deployment doesn't affect core devices that run that
+    # deployment, because core devices store the deployment's configuration
+    # on the device. Additionally, core devices can roll back to a previous
+    # deployment that has been deleted.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot/latest/apireference/API_CancelDeployment.html
+    #
+    # @option params [required, String] :deployment_id
+    #   The ID of the deployment.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_deployment({
+    #     deployment_id: "NonEmptyString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/DeleteDeployment AWS API Documentation
+    #
+    # @overload delete_deployment(params = {})
+    # @param [Hash] params ({})
+    def delete_deployment(params = {}, options = {})
+      req = build_request(:delete_deployment, params)
+      req.send_request(options)
+    end
+
     # Retrieves metadata for a version of a component.
     #
     # @option params [required, String] :arn
@@ -963,6 +1004,8 @@ module Aws::GreengrassV2
     #   resp.status.message #=> String
     #   resp.status.errors #=> Hash
     #   resp.status.errors["NonEmptyString"] #=> String
+    #   resp.status.vendor_guidance #=> String, one of "ACTIVE", "DISCONTINUED", "DELETED"
+    #   resp.status.vendor_guidance_message #=> String
     #   resp.platforms #=> Array
     #   resp.platforms[0].name #=> String
     #   resp.platforms[0].attributes #=> Hash
@@ -1050,13 +1093,13 @@ module Aws::GreengrassV2
       req.send_request(options)
     end
 
-    # Gets the pre-signed URL to download a public component artifact. Core
-    # devices call this operation to identify the URL that they can use to
-    # download an artifact to install.
+    # Gets the pre-signed URL to download a public or a Lambda component
+    # artifact. Core devices call this operation to identify the URL that
+    # they can use to download an artifact to install.
     #
     # @option params [required, String] :arn
-    #   The [ARN][1] of the component version. Specify the ARN of a public
-    #   component version.
+    #   The [ARN][1] of the component version. Specify the ARN of a public or
+    #   a Lambda component version.
     #
     #
     #
@@ -1103,11 +1146,11 @@ module Aws::GreengrassV2
     #
     # Connectivity information includes endpoints and ports where client
     # devices can connect to an MQTT broker on the core device. When a
-    # client device calls the [Greengrass discovery API][1], IoT Greengrass
-    # returns connectivity information for all of the core devices where the
-    # client device can connect. For more information, see [Connect client
-    # devices to core devices][2] in the *IoT Greengrass Version 2 Developer
-    # Guide*.
+    # client device calls the [IoT Greengrass discovery API][1], IoT
+    # Greengrass returns connectivity information for all of the core
+    # devices where the client device can connect. For more information, see
+    # [Connect client devices to core devices][2] in the *IoT Greengrass
+    # Version 2 Developer Guide*.
     #
     #
     #
@@ -1147,6 +1190,31 @@ module Aws::GreengrassV2
     end
 
     # Retrieves metadata for a Greengrass core device.
+    #
+    # <note markdown="1"> IoT Greengrass relies on individual devices to send status updates to
+    # the Amazon Web Services Cloud. If the IoT Greengrass Core software
+    # isn't running on the device, or if device isn't connected to the
+    # Amazon Web Services Cloud, then the reported status of that device
+    # might not reflect its current status. The status timestamp indicates
+    # when the device status was last updated.
+    #
+    #  Core devices send status updates at the following times:
+    #
+    #  * When the IoT Greengrass Core software starts
+    #
+    # * When the core device receives a deployment from the Amazon Web
+    #   Services Cloud
+    #
+    # * When the status of any component on the core device becomes `BROKEN`
+    #
+    # * At a [regular interval that you can configure][1], which defaults to
+    #   24 hours
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html#greengrass-nucleus-component-configuration-fss
     #
     # @option params [required, String] :core_device_thing_name
     #   The name of the core device. This is also the name of the IoT thing.
@@ -1339,7 +1407,7 @@ module Aws::GreengrassV2
     # versions are listed first.
     #
     # @option params [required, String] :arn
-    #   The [ARN][1] of the component version.
+    #   The [ARN][1] of the component.
     #
     #
     #
@@ -1439,10 +1507,37 @@ module Aws::GreengrassV2
 
     # Retrieves a paginated list of Greengrass core devices.
     #
+    # <note markdown="1"> IoT Greengrass relies on individual devices to send status updates to
+    # the Amazon Web Services Cloud. If the IoT Greengrass Core software
+    # isn't running on the device, or if device isn't connected to the
+    # Amazon Web Services Cloud, then the reported status of that device
+    # might not reflect its current status. The status timestamp indicates
+    # when the device status was last updated.
+    #
+    #  Core devices send status updates at the following times:
+    #
+    #  * When the IoT Greengrass Core software starts
+    #
+    # * When the core device receives a deployment from the Amazon Web
+    #   Services Cloud
+    #
+    # * When the status of any component on the core device becomes `BROKEN`
+    #
+    # * At a [regular interval that you can configure][1], which defaults to
+    #   24 hours
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html#greengrass-nucleus-component-configuration-fss
+    #
     # @option params [String] :thing_group_arn
     #   The [ARN][1] of the IoT thing group by which to filter. If you specify
-    #   this parameter, the list includes only core devices that are members
-    #   of this thing group.
+    #   this parameter, the list includes only core devices that have
+    #   successfully deployed a deployment that targets the thing group. When
+    #   you remove a core device from a thing group, the list continues to
+    #   include that core device.
     #
     #
     #
@@ -1613,7 +1708,34 @@ module Aws::GreengrassV2
     end
 
     # Retrieves a paginated list of the components that a Greengrass core
-    # device runs.
+    # device runs. This list doesn't include components that are deployed
+    # from local deployments or components that are deployed as dependencies
+    # of other components.
+    #
+    # <note markdown="1"> IoT Greengrass relies on individual devices to send status updates to
+    # the Amazon Web Services Cloud. If the IoT Greengrass Core software
+    # isn't running on the device, or if device isn't connected to the
+    # Amazon Web Services Cloud, then the reported status of that device
+    # might not reflect its current status. The status timestamp indicates
+    # when the device status was last updated.
+    #
+    #  Core devices send status updates at the following times:
+    #
+    #  * When the IoT Greengrass Core software starts
+    #
+    # * When the core device receives a deployment from the Amazon Web
+    #   Services Cloud
+    #
+    # * When the status of any component on the core device becomes `BROKEN`
+    #
+    # * At a [regular interval that you can configure][1], which defaults to
+    #   24 hours
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html#greengrass-nucleus-component-configuration-fss
     #
     # @option params [required, String] :core_device_thing_name
     #   The name of the core device. This is also the name of the IoT thing.
@@ -1716,10 +1838,10 @@ module Aws::GreengrassV2
     #
     # [1]: https://docs.aws.amazon.com/general/latest/gr/greengrass.html
     #
-    # @option params [required, Types::ComponentPlatform] :platform
+    # @option params [Types::ComponentPlatform] :platform
     #   The platform to use to resolve compatible components.
     #
-    # @option params [required, Array<Types::ComponentCandidate>] :component_candidates
+    # @option params [Array<Types::ComponentCandidate>] :component_candidates
     #   The list of components to resolve.
     #
     # @return [Types::ResolveComponentCandidatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1729,13 +1851,13 @@ module Aws::GreengrassV2
     # @example Request syntax with placeholder values
     #
     #   resp = client.resolve_component_candidates({
-    #     platform: { # required
+    #     platform: {
     #       name: "NonEmptyString",
     #       attributes: {
     #         "NonEmptyString" => "NonEmptyString",
     #       },
     #     },
-    #     component_candidates: [ # required
+    #     component_candidates: [
     #       {
     #         component_name: "ComponentNameString",
     #         component_version: "ComponentVersionString",
@@ -1753,6 +1875,8 @@ module Aws::GreengrassV2
     #   resp.resolved_component_versions[0].component_name #=> String
     #   resp.resolved_component_versions[0].component_version #=> String
     #   resp.resolved_component_versions[0].recipe #=> String
+    #   resp.resolved_component_versions[0].vendor_guidance #=> String, one of "ACTIVE", "DISCONTINUED", "DELETED"
+    #   resp.resolved_component_versions[0].message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ResolveComponentCandidates AWS API Documentation
     #
@@ -1836,11 +1960,11 @@ module Aws::GreengrassV2
     #
     # Connectivity information includes endpoints and ports where client
     # devices can connect to an MQTT broker on the core device. When a
-    # client device calls the [Greengrass discovery API][1], IoT Greengrass
-    # returns connectivity information for all of the core devices where the
-    # client device can connect. For more information, see [Connect client
-    # devices to core devices][2] in the *IoT Greengrass Version 2 Developer
-    # Guide*.
+    # client device calls the [IoT Greengrass discovery API][1], IoT
+    # Greengrass returns connectivity information for all of the core
+    # devices where the client device can connect. For more information, see
+    # [Connect client devices to core devices][2] in the *IoT Greengrass
+    # Version 2 Developer Guide*.
     #
     #
     #
@@ -1899,7 +2023,7 @@ module Aws::GreengrassV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-greengrassv2'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

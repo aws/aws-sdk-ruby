@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::CloudWatch
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -807,6 +809,12 @@ module Aws::CloudWatch
     #   resp.composite_alarms[0].state_reason_data #=> String
     #   resp.composite_alarms[0].state_updated_timestamp #=> Time
     #   resp.composite_alarms[0].state_value #=> String, one of "OK", "ALARM", "INSUFFICIENT_DATA"
+    #   resp.composite_alarms[0].state_transitioned_timestamp #=> Time
+    #   resp.composite_alarms[0].actions_suppressed_by #=> String, one of "WaitPeriod", "ExtensionPeriod", "Alarm"
+    #   resp.composite_alarms[0].actions_suppressed_reason #=> String
+    #   resp.composite_alarms[0].actions_suppressor #=> String
+    #   resp.composite_alarms[0].actions_suppressor_wait_period #=> Integer
+    #   resp.composite_alarms[0].actions_suppressor_extension_period #=> Integer
     #   resp.metric_alarms #=> Array
     #   resp.metric_alarms[0].alarm_name #=> String
     #   resp.metric_alarms[0].alarm_arn #=> String
@@ -1442,19 +1450,30 @@ module Aws::CloudWatch
       req.send_request(options)
     end
 
-    # You can use the `GetMetricData` API to retrieve as many as 500
-    # different metrics in a single request, with a total of as many as
-    # 100,800 data points. You can also optionally perform math expressions
-    # on the values of the returned statistics, to create new time series
-    # that represent new insights into your data. For example, using Lambda
-    # metrics, you could divide the Errors metric by the Invocations metric
-    # to get an error rate time series. For more information about metric
-    # math expressions, see [Metric Math Syntax and Functions][1] in the
-    # *Amazon CloudWatch User Guide*.
+    # You can use the `GetMetricData` API to retrieve CloudWatch metric
+    # values. The operation can also include a CloudWatch Metrics Insights
+    # query, and one or more metric math functions.
+    #
+    # A `GetMetricData` operation that does not include a query can retrieve
+    # as many as 500 different metrics in a single request, with a total of
+    # as many as 100,800 data points. You can also optionally perform metric
+    # math expressions on the values of the returned statistics, to create
+    # new time series that represent new insights into your data. For
+    # example, using Lambda metrics, you could divide the Errors metric by
+    # the Invocations metric to get an error rate time series. For more
+    # information about metric math expressions, see [Metric Math Syntax and
+    # Functions][1] in the *Amazon CloudWatch User Guide*.
+    #
+    # If you include a Metrics Insights query, each `GetMetricData`
+    # operation can include only one query. But the same `GetMetricData`
+    # operation can also retrieve other metrics. Metrics Insights queries
+    # can query only the most recent three hours of metric data. For more
+    # information about Metrics Insights, see [Query your metrics with
+    # CloudWatch Metrics Insights][2].
     #
     # Calls to the `GetMetricData` API have a different pricing structure
     # than calls to `GetMetricStatistics`. For more information about
-    # pricing, see [Amazon CloudWatch Pricing][2].
+    # pricing, see [Amazon CloudWatch Pricing][3].
     #
     # Amazon CloudWatch retains metric data as follows:
     #
@@ -1488,16 +1507,29 @@ module Aws::CloudWatch
     # collected, the results of the operation are null. CloudWatch does not
     # perform unit conversions.
     #
+    # **Using Metrics Insights queries with metric math**
+    #
+    # You can't mix a Metric Insights query and metric math syntax in the
+    # same expression, but you can reference results from a Metrics Insights
+    # query within other Metric math expressions. A Metrics Insights query
+    # without a **GROUP BY** clause returns a single time-series (TS), and
+    # can be used as input for a metric math expression that expects a
+    # single time series. A Metrics Insights query with a **GROUP BY**
+    # clause returns an array of time-series (TS\[\]), and can be used as
+    # input for a metric math expression that expects an array of time
+    # series.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax
-    # [2]: https://aws.amazon.com/cloudwatch/pricing/
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/query_with_cloudwatch-metrics-insights.html
+    # [3]: https://aws.amazon.com/cloudwatch/pricing/
     #
     # @option params [required, Array<Types::MetricDataQuery>] :metric_data_queries
     #   The metric queries to be returned. A single `GetMetricData` call can
     #   include as many as 500 `MetricDataQuery` structures. Each of these
-    #   structures can specify either a metric to retrieve, or a math
-    #   expression to perform on retrieved data.
+    #   structures can specify either a metric to retrieve, a Metrics Insights
+    #   query, or a math expression to perform on retrieved data.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :start_time
     #   The time stamp indicating the earliest data to be returned.
@@ -1870,6 +1902,7 @@ module Aws::CloudWatch
     #   * {Types::GetMetricStreamOutput#creation_date #creation_date} => Time
     #   * {Types::GetMetricStreamOutput#last_update_date #last_update_date} => Time
     #   * {Types::GetMetricStreamOutput#output_format #output_format} => String
+    #   * {Types::GetMetricStreamOutput#statistics_configurations #statistics_configurations} => Array&lt;Types::MetricStreamStatisticsConfiguration&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1891,6 +1924,12 @@ module Aws::CloudWatch
     #   resp.creation_date #=> Time
     #   resp.last_update_date #=> Time
     #   resp.output_format #=> String, one of "json", "opentelemetry0.7"
+    #   resp.statistics_configurations #=> Array
+    #   resp.statistics_configurations[0].include_metrics #=> Array
+    #   resp.statistics_configurations[0].include_metrics[0].namespace #=> String
+    #   resp.statistics_configurations[0].include_metrics[0].metric_name #=> String
+    #   resp.statistics_configurations[0].additional_statistics #=> Array
+    #   resp.statistics_configurations[0].additional_statistics[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetMetricStream AWS API Documentation
     #
@@ -2368,7 +2407,10 @@ module Aws::CloudWatch
     # rule are met.
     #
     # The alarms specified in a composite alarm's rule expression can
-    # include metric alarms and other composite alarms.
+    # include metric alarms and other composite alarms. The rule expression
+    # of a composite alarm can include as many as 100 underlying alarms. Any
+    # single alarm can be included in the rule expressions of as many as 150
+    # composite alarms.
     #
     # Using composite alarms can reduce alarm noise. You can create multiple
     # metric alarms, and also create a composite alarm and set up alerts
@@ -2514,6 +2556,26 @@ module Aws::CloudWatch
     #   use them to scope user permissions, by granting a user permission to
     #   access or change only resources with certain tag values.
     #
+    # @option params [String] :actions_suppressor
+    #   Actions will be suppressed if the suppressor alarm is in the `ALARM`
+    #   state. `ActionsSuppressor` can be an AlarmName or an Amazon Resource
+    #   Name (ARN) from an existing alarm.
+    #
+    # @option params [Integer] :actions_suppressor_wait_period
+    #   The maximum time in seconds that the composite alarm waits for the
+    #   suppressor alarm to go into the `ALARM` state. After this time, the
+    #   composite alarm performs its actions.
+    #
+    #   `WaitPeriod` is required only when `ActionsSuppressor` is specified.
+    #
+    # @option params [Integer] :actions_suppressor_extension_period
+    #   The maximum time in seconds that the composite alarm waits after
+    #   suppressor alarm goes out of the `ALARM` state. After this time, the
+    #   composite alarm performs its actions.
+    #
+    #   `ExtensionPeriod` is required only when `ActionsSuppressor` is
+    #   specified.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -2532,6 +2594,9 @@ module Aws::CloudWatch
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     actions_suppressor: "AlarmArn",
+    #     actions_suppressor_wait_period: 1,
+    #     actions_suppressor_extension_period: 1,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutCompositeAlarm AWS API Documentation
@@ -2934,6 +2999,13 @@ module Aws::CloudWatch
     #
     #   Valid Values: `breaching | notBreaching | ignore | missing`
     #
+    #   <note markdown="1"> Alarms that evaluate metrics in the `AWS/DynamoDB` namespace always
+    #   `ignore` missing data even if you choose a different option for
+    #   `TreatMissingData`. When an `AWS/DynamoDB` metric has missing data,
+    #   alarms that evaluate that metric remain in their current state.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data
@@ -3205,6 +3277,13 @@ module Aws::CloudWatch
     # * Stream metrics from only the metric namespaces that you list in
     #   `IncludeFilters`.
     #
+    # By default, a metric stream always sends the `MAX`, `MIN`, `SUM`, and
+    # `SAMPLECOUNT` statistics for each metric that is streamed. You can use
+    # the `StatisticsConfigurations` parameter to have the metric stream
+    # also send additional statistics in the stream. Streaming additional
+    # statistics incurs additional costs. For more information, see [Amazon
+    # CloudWatch Pricing][2].
+    #
     # When you use `PutMetricStream` to create a new metric stream, the
     # stream is created in the `running` state. If you use it to update an
     # existing stream, the state of the stream is not changed.
@@ -3212,6 +3291,7 @@ module Aws::CloudWatch
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Streams.html
+    # [2]: https://aws.amazon.com/cloudwatch/pricing/
     #
     # @option params [required, String] :name
     #   If you are creating a new metric stream, this is the name for the new
@@ -3280,6 +3360,25 @@ module Aws::CloudWatch
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html
     #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UntagResource.html
     #
+    # @option params [Array<Types::MetricStreamStatisticsConfiguration>] :statistics_configurations
+    #   By default, a metric stream always sends the `MAX`, `MIN`, `SUM`, and
+    #   `SAMPLECOUNT` statistics for each metric that is streamed. You can use
+    #   this parameter to have the metric stream also send additional
+    #   statistics in the stream. This array can have up to 100 members.
+    #
+    #   For each entry in this array, you specify one or more metrics and the
+    #   list of additional statistics to stream for those metrics. The
+    #   additional statistics that you can stream depend on the stream's
+    #   `OutputFormat`. If the `OutputFormat` is `json`, you can stream any
+    #   additional statistic that is supported by CloudWatch, listed in [
+    #   CloudWatch statistics definitions][1]. If the `OutputFormat` is
+    #   `opentelemetry0.7`, you can stream percentile statistics such as p95,
+    #   p99.9 and so on.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html
+    #
     # @return [Types::PutMetricStreamOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutMetricStreamOutput#arn #arn} => String
@@ -3305,6 +3404,17 @@ module Aws::CloudWatch
     #       {
     #         key: "TagKey", # required
     #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     statistics_configurations: [
+    #       {
+    #         include_metrics: [ # required
+    #           {
+    #             namespace: "Namespace", # required
+    #             metric_name: "MetricName", # required
+    #           },
+    #         ],
+    #         additional_statistics: ["MetricStreamStatistic"], # required
     #       },
     #     ],
     #   })
@@ -3552,7 +3662,7 @@ module Aws::CloudWatch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

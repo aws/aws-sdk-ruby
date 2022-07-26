@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.51.1 (2022-05-02)
+------------------
+
+* Issue - Parse the region from the `queue_url` param only if the component is exactly `sqs`.
+
+1.51.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.50.0 (2022-02-03)
 ------------------
 

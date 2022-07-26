@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2022-07-15)
+------------------
+
+* Feature - Documentation updates for AWS DataSync regarding configuring Amazon FSx for ONTAP location security groups and SMB user permissions.
+
+1.48.0 (2022-06-28)
+------------------
+
+* Feature - AWS DataSync now supports Amazon FSx for NetApp ONTAP locations.
+
+1.47.0 (2022-05-27)
+------------------
+
+* Feature - AWS DataSync now supports TLS encryption in transit, file system policies and access points for EFS locations.
+
+1.46.0 (2022-05-05)
+------------------
+
+* Feature - AWS DataSync now supports a new ObjectTags Task API option that can be used to control whether Object Tags are transferred.
+
+1.45.0 (2022-04-05)
+------------------
+
+* Feature - AWS DataSync now supports Amazon FSx for OpenZFS locations.
+
+1.44.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.43.0 (2022-02-03)
 ------------------
 

@@ -124,7 +124,7 @@ module Aws::TimestreamQuery
     #                 {
     #                   source_column: "SchemaName", # required
     #                   target_multi_measure_attribute_name: "SchemaName",
-    #                   measure_value_type: "BIGINT", # required, accepts BIGINT, BOOLEAN, DOUBLE, VARCHAR
+    #                   measure_value_type: "BIGINT", # required, accepts BIGINT, BOOLEAN, DOUBLE, VARCHAR, TIMESTAMP
     #                 },
     #               ],
     #             },
@@ -138,7 +138,7 @@ module Aws::TimestreamQuery
     #                   {
     #                     source_column: "SchemaName", # required
     #                     target_multi_measure_attribute_name: "SchemaName",
-    #                     measure_value_type: "BIGINT", # required, accepts BIGINT, BOOLEAN, DOUBLE, VARCHAR
+    #                     measure_value_type: "BIGINT", # required, accepts BIGINT, BOOLEAN, DOUBLE, VARCHAR, TIMESTAMP
     #                   },
     #                 ],
     #               },
@@ -670,7 +670,7 @@ module Aws::TimestreamQuery
     #           {
     #             source_column: "SchemaName", # required
     #             target_multi_measure_attribute_name: "SchemaName",
-    #             measure_value_type: "BIGINT", # required, accepts BIGINT, BOOLEAN, DOUBLE, VARCHAR
+    #             measure_value_type: "BIGINT", # required, accepts BIGINT, BOOLEAN, DOUBLE, VARCHAR, TIMESTAMP
     #           },
     #         ],
     #       }
@@ -721,7 +721,7 @@ module Aws::TimestreamQuery
     #       {
     #         source_column: "SchemaName", # required
     #         target_multi_measure_attribute_name: "SchemaName",
-    #         measure_value_type: "BIGINT", # required, accepts BIGINT, BOOLEAN, DOUBLE, VARCHAR
+    #         measure_value_type: "BIGINT", # required, accepts BIGINT, BOOLEAN, DOUBLE, VARCHAR, TIMESTAMP
     #       }
     #
     # @!attribute [rw] source_column
@@ -760,7 +760,7 @@ module Aws::TimestreamQuery
     #           {
     #             source_column: "SchemaName", # required
     #             target_multi_measure_attribute_name: "SchemaName",
-    #             measure_value_type: "BIGINT", # required, accepts BIGINT, BOOLEAN, DOUBLE, VARCHAR
+    #             measure_value_type: "BIGINT", # required, accepts BIGINT, BOOLEAN, DOUBLE, VARCHAR, TIMESTAMP
     #           },
     #         ],
     #       }
@@ -1520,7 +1520,7 @@ module Aws::TimestreamQuery
     #               {
     #                 source_column: "SchemaName", # required
     #                 target_multi_measure_attribute_name: "SchemaName",
-    #                 measure_value_type: "BIGINT", # required, accepts BIGINT, BOOLEAN, DOUBLE, VARCHAR
+    #                 measure_value_type: "BIGINT", # required, accepts BIGINT, BOOLEAN, DOUBLE, VARCHAR, TIMESTAMP
     #               },
     #             ],
     #           },
@@ -1534,7 +1534,7 @@ module Aws::TimestreamQuery
     #                 {
     #                   source_column: "SchemaName", # required
     #                   target_multi_measure_attribute_name: "SchemaName",
-    #                   measure_value_type: "BIGINT", # required, accepts BIGINT, BOOLEAN, DOUBLE, VARCHAR
+    #                   measure_value_type: "BIGINT", # required, accepts BIGINT, BOOLEAN, DOUBLE, VARCHAR, TIMESTAMP
     #                 },
     #               ],
     #             },
@@ -1630,7 +1630,7 @@ module Aws::TimestreamQuery
     #             {
     #               source_column: "SchemaName", # required
     #               target_multi_measure_attribute_name: "SchemaName",
-    #               measure_value_type: "BIGINT", # required, accepts BIGINT, BOOLEAN, DOUBLE, VARCHAR
+    #               measure_value_type: "BIGINT", # required, accepts BIGINT, BOOLEAN, DOUBLE, VARCHAR, TIMESTAMP
     #             },
     #           ],
     #         },
@@ -1644,7 +1644,7 @@ module Aws::TimestreamQuery
     #               {
     #                 source_column: "SchemaName", # required
     #                 target_multi_measure_attribute_name: "SchemaName",
-    #                 measure_value_type: "BIGINT", # required, accepts BIGINT, BOOLEAN, DOUBLE, VARCHAR
+    #                 measure_value_type: "BIGINT", # required, accepts BIGINT, BOOLEAN, DOUBLE, VARCHAR, TIMESTAMP
     #               },
     #             ],
     #           },

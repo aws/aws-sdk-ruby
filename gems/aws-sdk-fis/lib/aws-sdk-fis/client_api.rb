@@ -27,9 +27,11 @@ module Aws::FIS
     ActionTargetMap = Shapes::MapShape.new(name: 'ActionTargetMap')
     ActionTargetName = Shapes::StringShape.new(name: 'ActionTargetName')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
+    CloudWatchLogGroupArn = Shapes::StringShape.new(name: 'CloudWatchLogGroupArn')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateExperimentTemplateActionInput = Shapes::StructureShape.new(name: 'CreateExperimentTemplateActionInput')
     CreateExperimentTemplateActionInputMap = Shapes::MapShape.new(name: 'CreateExperimentTemplateActionInputMap')
+    CreateExperimentTemplateLogConfigurationInput = Shapes::StructureShape.new(name: 'CreateExperimentTemplateLogConfigurationInput')
     CreateExperimentTemplateRequest = Shapes::StructureShape.new(name: 'CreateExperimentTemplateRequest')
     CreateExperimentTemplateResponse = Shapes::StructureShape.new(name: 'CreateExperimentTemplateResponse')
     CreateExperimentTemplateStopConditionInput = Shapes::StructureShape.new(name: 'CreateExperimentTemplateStopConditionInput')
@@ -57,8 +59,11 @@ module Aws::FIS
     ExperimentActionStatusReason = Shapes::StringShape.new(name: 'ExperimentActionStatusReason')
     ExperimentActionTargetMap = Shapes::MapShape.new(name: 'ExperimentActionTargetMap')
     ExperimentActionTargetName = Shapes::StringShape.new(name: 'ExperimentActionTargetName')
+    ExperimentCloudWatchLogsLogConfiguration = Shapes::StructureShape.new(name: 'ExperimentCloudWatchLogsLogConfiguration')
     ExperimentEndTime = Shapes::TimestampShape.new(name: 'ExperimentEndTime')
     ExperimentId = Shapes::StringShape.new(name: 'ExperimentId')
+    ExperimentLogConfiguration = Shapes::StructureShape.new(name: 'ExperimentLogConfiguration')
+    ExperimentS3LogConfiguration = Shapes::StructureShape.new(name: 'ExperimentS3LogConfiguration')
     ExperimentStartTime = Shapes::TimestampShape.new(name: 'ExperimentStartTime')
     ExperimentState = Shapes::StructureShape.new(name: 'ExperimentState')
     ExperimentStatus = Shapes::StringShape.new(name: 'ExperimentStatus')
@@ -91,8 +96,13 @@ module Aws::FIS
     ExperimentTemplateActionStartAfterList = Shapes::ListShape.new(name: 'ExperimentTemplateActionStartAfterList')
     ExperimentTemplateActionTargetMap = Shapes::MapShape.new(name: 'ExperimentTemplateActionTargetMap')
     ExperimentTemplateActionTargetName = Shapes::StringShape.new(name: 'ExperimentTemplateActionTargetName')
+    ExperimentTemplateCloudWatchLogsLogConfiguration = Shapes::StructureShape.new(name: 'ExperimentTemplateCloudWatchLogsLogConfiguration')
+    ExperimentTemplateCloudWatchLogsLogConfigurationInput = Shapes::StructureShape.new(name: 'ExperimentTemplateCloudWatchLogsLogConfigurationInput')
     ExperimentTemplateDescription = Shapes::StringShape.new(name: 'ExperimentTemplateDescription')
     ExperimentTemplateId = Shapes::StringShape.new(name: 'ExperimentTemplateId')
+    ExperimentTemplateLogConfiguration = Shapes::StructureShape.new(name: 'ExperimentTemplateLogConfiguration')
+    ExperimentTemplateS3LogConfiguration = Shapes::StructureShape.new(name: 'ExperimentTemplateS3LogConfiguration')
+    ExperimentTemplateS3LogConfigurationInput = Shapes::StructureShape.new(name: 'ExperimentTemplateS3LogConfigurationInput')
     ExperimentTemplateStopCondition = Shapes::StructureShape.new(name: 'ExperimentTemplateStopCondition')
     ExperimentTemplateStopConditionList = Shapes::ListShape.new(name: 'ExperimentTemplateStopConditionList')
     ExperimentTemplateSummary = Shapes::StructureShape.new(name: 'ExperimentTemplateSummary')
@@ -134,11 +144,14 @@ module Aws::FIS
     ListTargetResourceTypesMaxResults = Shapes::IntegerShape.new(name: 'ListTargetResourceTypesMaxResults')
     ListTargetResourceTypesRequest = Shapes::StructureShape.new(name: 'ListTargetResourceTypesRequest')
     ListTargetResourceTypesResponse = Shapes::StructureShape.new(name: 'ListTargetResourceTypesResponse')
+    LogSchemaVersion = Shapes::IntegerShape.new(name: 'LogSchemaVersion')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceArnList = Shapes::ListShape.new(name: 'ResourceArnList')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
+    S3BucketName = Shapes::StringShape.new(name: 'S3BucketName')
+    S3ObjectKey = Shapes::StringShape.new(name: 'S3ObjectKey')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     StartExperimentRequest = Shapes::StructureShape.new(name: 'StartExperimentRequest')
     StartExperimentResponse = Shapes::StructureShape.new(name: 'StartExperimentResponse')
@@ -166,6 +179,7 @@ module Aws::FIS
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateExperimentTemplateActionInputItem = Shapes::StructureShape.new(name: 'UpdateExperimentTemplateActionInputItem')
     UpdateExperimentTemplateActionInputMap = Shapes::MapShape.new(name: 'UpdateExperimentTemplateActionInputMap')
+    UpdateExperimentTemplateLogConfigurationInput = Shapes::StructureShape.new(name: 'UpdateExperimentTemplateLogConfigurationInput')
     UpdateExperimentTemplateRequest = Shapes::StructureShape.new(name: 'UpdateExperimentTemplateRequest')
     UpdateExperimentTemplateResponse = Shapes::StructureShape.new(name: 'UpdateExperimentTemplateResponse')
     UpdateExperimentTemplateStopConditionInput = Shapes::StructureShape.new(name: 'UpdateExperimentTemplateStopConditionInput')
@@ -215,6 +229,11 @@ module Aws::FIS
     CreateExperimentTemplateActionInputMap.key = Shapes::ShapeRef.new(shape: ExperimentTemplateActionName)
     CreateExperimentTemplateActionInputMap.value = Shapes::ShapeRef.new(shape: CreateExperimentTemplateActionInput)
 
+    CreateExperimentTemplateLogConfigurationInput.add_member(:cloud_watch_logs_configuration, Shapes::ShapeRef.new(shape: ExperimentTemplateCloudWatchLogsLogConfigurationInput, location_name: "cloudWatchLogsConfiguration"))
+    CreateExperimentTemplateLogConfigurationInput.add_member(:s3_configuration, Shapes::ShapeRef.new(shape: ExperimentTemplateS3LogConfigurationInput, location_name: "s3Configuration"))
+    CreateExperimentTemplateLogConfigurationInput.add_member(:log_schema_version, Shapes::ShapeRef.new(shape: LogSchemaVersion, required: true, location_name: "logSchemaVersion"))
+    CreateExperimentTemplateLogConfigurationInput.struct_class = Types::CreateExperimentTemplateLogConfigurationInput
+
     CreateExperimentTemplateRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateExperimentTemplateRequest.add_member(:description, Shapes::ShapeRef.new(shape: ExperimentTemplateDescription, required: true, location_name: "description"))
     CreateExperimentTemplateRequest.add_member(:stop_conditions, Shapes::ShapeRef.new(shape: CreateExperimentTemplateStopConditionInputList, required: true, location_name: "stopConditions"))
@@ -222,6 +241,7 @@ module Aws::FIS
     CreateExperimentTemplateRequest.add_member(:actions, Shapes::ShapeRef.new(shape: CreateExperimentTemplateActionInputMap, required: true, location_name: "actions"))
     CreateExperimentTemplateRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
     CreateExperimentTemplateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateExperimentTemplateRequest.add_member(:log_configuration, Shapes::ShapeRef.new(shape: CreateExperimentTemplateLogConfigurationInput, location_name: "logConfiguration"))
     CreateExperimentTemplateRequest.struct_class = Types::CreateExperimentTemplateRequest
 
     CreateExperimentTemplateResponse.add_member(:experiment_template, Shapes::ShapeRef.new(shape: ExperimentTemplate, location_name: "experimentTemplate"))
@@ -261,6 +281,7 @@ module Aws::FIS
     Experiment.add_member(:start_time, Shapes::ShapeRef.new(shape: ExperimentStartTime, location_name: "startTime"))
     Experiment.add_member(:end_time, Shapes::ShapeRef.new(shape: ExperimentEndTime, location_name: "endTime"))
     Experiment.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    Experiment.add_member(:log_configuration, Shapes::ShapeRef.new(shape: ExperimentLogConfiguration, location_name: "logConfiguration"))
     Experiment.struct_class = Types::Experiment
 
     ExperimentAction.add_member(:action_id, Shapes::ShapeRef.new(shape: ActionId, location_name: "actionId"))
@@ -287,6 +308,18 @@ module Aws::FIS
 
     ExperimentActionTargetMap.key = Shapes::ShapeRef.new(shape: ExperimentActionTargetName)
     ExperimentActionTargetMap.value = Shapes::ShapeRef.new(shape: ExperimentTargetName)
+
+    ExperimentCloudWatchLogsLogConfiguration.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: CloudWatchLogGroupArn, location_name: "logGroupArn"))
+    ExperimentCloudWatchLogsLogConfiguration.struct_class = Types::ExperimentCloudWatchLogsLogConfiguration
+
+    ExperimentLogConfiguration.add_member(:cloud_watch_logs_configuration, Shapes::ShapeRef.new(shape: ExperimentCloudWatchLogsLogConfiguration, location_name: "cloudWatchLogsConfiguration"))
+    ExperimentLogConfiguration.add_member(:s3_configuration, Shapes::ShapeRef.new(shape: ExperimentS3LogConfiguration, location_name: "s3Configuration"))
+    ExperimentLogConfiguration.add_member(:log_schema_version, Shapes::ShapeRef.new(shape: LogSchemaVersion, location_name: "logSchemaVersion"))
+    ExperimentLogConfiguration.struct_class = Types::ExperimentLogConfiguration
+
+    ExperimentS3LogConfiguration.add_member(:bucket_name, Shapes::ShapeRef.new(shape: S3BucketName, location_name: "bucketName"))
+    ExperimentS3LogConfiguration.add_member(:prefix, Shapes::ShapeRef.new(shape: S3ObjectKey, location_name: "prefix"))
+    ExperimentS3LogConfiguration.struct_class = Types::ExperimentS3LogConfiguration
 
     ExperimentState.add_member(:status, Shapes::ShapeRef.new(shape: ExperimentStatus, location_name: "status"))
     ExperimentState.add_member(:reason, Shapes::ShapeRef.new(shape: ExperimentStatusReason, location_name: "reason"))
@@ -338,6 +371,7 @@ module Aws::FIS
     ExperimentTemplate.add_member(:last_update_time, Shapes::ShapeRef.new(shape: LastUpdateTime, location_name: "lastUpdateTime"))
     ExperimentTemplate.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
     ExperimentTemplate.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    ExperimentTemplate.add_member(:log_configuration, Shapes::ShapeRef.new(shape: ExperimentTemplateLogConfiguration, location_name: "logConfiguration"))
     ExperimentTemplate.struct_class = Types::ExperimentTemplate
 
     ExperimentTemplateAction.add_member(:action_id, Shapes::ShapeRef.new(shape: ActionId, location_name: "actionId"))
@@ -357,6 +391,25 @@ module Aws::FIS
 
     ExperimentTemplateActionTargetMap.key = Shapes::ShapeRef.new(shape: ExperimentTemplateActionTargetName)
     ExperimentTemplateActionTargetMap.value = Shapes::ShapeRef.new(shape: ExperimentTemplateTargetName)
+
+    ExperimentTemplateCloudWatchLogsLogConfiguration.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: CloudWatchLogGroupArn, location_name: "logGroupArn"))
+    ExperimentTemplateCloudWatchLogsLogConfiguration.struct_class = Types::ExperimentTemplateCloudWatchLogsLogConfiguration
+
+    ExperimentTemplateCloudWatchLogsLogConfigurationInput.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: CloudWatchLogGroupArn, required: true, location_name: "logGroupArn"))
+    ExperimentTemplateCloudWatchLogsLogConfigurationInput.struct_class = Types::ExperimentTemplateCloudWatchLogsLogConfigurationInput
+
+    ExperimentTemplateLogConfiguration.add_member(:cloud_watch_logs_configuration, Shapes::ShapeRef.new(shape: ExperimentTemplateCloudWatchLogsLogConfiguration, location_name: "cloudWatchLogsConfiguration"))
+    ExperimentTemplateLogConfiguration.add_member(:s3_configuration, Shapes::ShapeRef.new(shape: ExperimentTemplateS3LogConfiguration, location_name: "s3Configuration"))
+    ExperimentTemplateLogConfiguration.add_member(:log_schema_version, Shapes::ShapeRef.new(shape: LogSchemaVersion, location_name: "logSchemaVersion"))
+    ExperimentTemplateLogConfiguration.struct_class = Types::ExperimentTemplateLogConfiguration
+
+    ExperimentTemplateS3LogConfiguration.add_member(:bucket_name, Shapes::ShapeRef.new(shape: S3BucketName, location_name: "bucketName"))
+    ExperimentTemplateS3LogConfiguration.add_member(:prefix, Shapes::ShapeRef.new(shape: S3ObjectKey, location_name: "prefix"))
+    ExperimentTemplateS3LogConfiguration.struct_class = Types::ExperimentTemplateS3LogConfiguration
+
+    ExperimentTemplateS3LogConfigurationInput.add_member(:bucket_name, Shapes::ShapeRef.new(shape: S3BucketName, required: true, location_name: "bucketName"))
+    ExperimentTemplateS3LogConfigurationInput.add_member(:prefix, Shapes::ShapeRef.new(shape: S3ObjectKey, location_name: "prefix"))
+    ExperimentTemplateS3LogConfigurationInput.struct_class = Types::ExperimentTemplateS3LogConfigurationInput
 
     ExperimentTemplateStopCondition.add_member(:source, Shapes::ShapeRef.new(shape: StopConditionSource, location_name: "source"))
     ExperimentTemplateStopCondition.add_member(:value, Shapes::ShapeRef.new(shape: StopConditionValue, location_name: "value"))
@@ -530,12 +583,18 @@ module Aws::FIS
     UpdateExperimentTemplateActionInputMap.key = Shapes::ShapeRef.new(shape: ExperimentTemplateActionName)
     UpdateExperimentTemplateActionInputMap.value = Shapes::ShapeRef.new(shape: UpdateExperimentTemplateActionInputItem)
 
+    UpdateExperimentTemplateLogConfigurationInput.add_member(:cloud_watch_logs_configuration, Shapes::ShapeRef.new(shape: ExperimentTemplateCloudWatchLogsLogConfigurationInput, location_name: "cloudWatchLogsConfiguration"))
+    UpdateExperimentTemplateLogConfigurationInput.add_member(:s3_configuration, Shapes::ShapeRef.new(shape: ExperimentTemplateS3LogConfigurationInput, location_name: "s3Configuration"))
+    UpdateExperimentTemplateLogConfigurationInput.add_member(:log_schema_version, Shapes::ShapeRef.new(shape: LogSchemaVersion, location_name: "logSchemaVersion"))
+    UpdateExperimentTemplateLogConfigurationInput.struct_class = Types::UpdateExperimentTemplateLogConfigurationInput
+
     UpdateExperimentTemplateRequest.add_member(:id, Shapes::ShapeRef.new(shape: ExperimentTemplateId, required: true, location: "uri", location_name: "id"))
     UpdateExperimentTemplateRequest.add_member(:description, Shapes::ShapeRef.new(shape: ExperimentTemplateDescription, location_name: "description"))
     UpdateExperimentTemplateRequest.add_member(:stop_conditions, Shapes::ShapeRef.new(shape: UpdateExperimentTemplateStopConditionInputList, location_name: "stopConditions"))
     UpdateExperimentTemplateRequest.add_member(:targets, Shapes::ShapeRef.new(shape: UpdateExperimentTemplateTargetInputMap, location_name: "targets"))
     UpdateExperimentTemplateRequest.add_member(:actions, Shapes::ShapeRef.new(shape: UpdateExperimentTemplateActionInputMap, location_name: "actions"))
     UpdateExperimentTemplateRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
+    UpdateExperimentTemplateRequest.add_member(:log_configuration, Shapes::ShapeRef.new(shape: UpdateExperimentTemplateLogConfigurationInput, location_name: "logConfiguration"))
     UpdateExperimentTemplateRequest.struct_class = Types::UpdateExperimentTemplateRequest
 
     UpdateExperimentTemplateResponse.add_member(:experiment_template, Shapes::ShapeRef.new(shape: ExperimentTemplate, location_name: "experimentTemplate"))

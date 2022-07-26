@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::Redshift
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -463,6 +465,11 @@ module Aws::Redshift
     #   The Amazon Resource Name (ARN) of the consumer that is associated with
     #   the datashare.
     #
+    # @option params [String] :consumer_region
+    #   From a datashare consumer account, associates a datashare with all
+    #   existing and future namespaces in the specified Amazon Web Services
+    #   Region.
+    #
     # @return [Types::DataShare] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DataShare#data_share_arn #data_share_arn} => String
@@ -477,6 +484,7 @@ module Aws::Redshift
     #     data_share_arn: "String", # required
     #     associate_entire_account: false,
     #     consumer_arn: "String",
+    #     consumer_region: "String",
     #   })
     #
     # @example Response structure
@@ -487,6 +495,7 @@ module Aws::Redshift
     #   resp.data_share_associations #=> Array
     #   resp.data_share_associations[0].consumer_identifier #=> String
     #   resp.data_share_associations[0].status #=> String, one of "ACTIVE", "PENDING_AUTHORIZATION", "AUTHORIZED", "DEAUTHORIZED", "REJECTED", "AVAILABLE"
+    #   resp.data_share_associations[0].consumer_region #=> String
     #   resp.data_share_associations[0].created_date #=> Time
     #   resp.data_share_associations[0].status_change_date #=> Time
     #   resp.managed_by #=> String
@@ -589,7 +598,7 @@ module Aws::Redshift
     # From a data producer account, authorizes the sharing of a datashare
     # with one or more consumer accounts or managing entities. To authorize
     # a datashare for a data consumer, the producer account must have the
-    # correct access privileges.
+    # correct access permissions.
     #
     # @option params [required, String] :data_share_arn
     #   The Amazon Resource Name (ARN) of the datashare that producers are to
@@ -623,6 +632,7 @@ module Aws::Redshift
     #   resp.data_share_associations #=> Array
     #   resp.data_share_associations[0].consumer_identifier #=> String
     #   resp.data_share_associations[0].status #=> String, one of "ACTIVE", "PENDING_AUTHORIZATION", "AUTHORIZED", "DEAUTHORIZED", "REJECTED", "AVAILABLE"
+    #   resp.data_share_associations[0].consumer_region #=> String
     #   resp.data_share_associations[0].created_date #=> Time
     #   resp.data_share_associations[0].status_change_date #=> Time
     #   resp.managed_by #=> String
@@ -700,8 +710,11 @@ module Aws::Redshift
     #
     # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html
     #
-    # @option params [required, String] :snapshot_identifier
+    # @option params [String] :snapshot_identifier
     #   The identifier of the snapshot the account is authorized to restore.
+    #
+    # @option params [String] :snapshot_arn
+    #   The Amazon Resource Name (ARN) of the snapshot to authorize access to.
     #
     # @option params [String] :snapshot_cluster_identifier
     #   The identifier of the cluster the snapshot was created from. This
@@ -723,7 +736,8 @@ module Aws::Redshift
     # @example Request syntax with placeholder values
     #
     #   resp = client.authorize_snapshot_access({
-    #     snapshot_identifier: "String", # required
+    #     snapshot_identifier: "String",
+    #     snapshot_arn: "String",
     #     snapshot_cluster_identifier: "String",
     #     account_with_restore_access: "String", # required
     #   })
@@ -1213,8 +1227,8 @@ module Aws::Redshift
     #
     #   * Must contain one number.
     #
-    #   * Can be any printable ASCII character (ASCII code 33 to 126) except
-    #     ' (single quote), " (double quote), \\, /, @, or space.
+    #   * Can be any printable ASCII character (ASCII code 33-126) except `'`
+    #     (single quote), `"` (double quote), ``, `/`, or `@`.
     #
     # @option params [Array<String>] :cluster_security_groups
     #   A list of security groups to be associated with this cluster.
@@ -1378,7 +1392,9 @@ module Aws::Redshift
     #   keys in an HSM.
     #
     # @option params [String] :elastic_ip
-    #   The Elastic IP (EIP) address for the cluster.
+    #   The Elastic IP (EIP) address for the cluster. You don't have to
+    #   specify the EIP for a publicly accessible cluster with
+    #   AvailabilityZoneRelocation turned on.
     #
     #   Constraints: The cluster must be provisioned in EC2-VPC and
     #   publicly-accessible through an Internet gateway. For more information
@@ -1418,10 +1434,15 @@ module Aws::Redshift
     # @option params [Array<String>] :iam_roles
     #   A list of Identity and Access Management (IAM) roles that can be used
     #   by the cluster to access other Amazon Web Services services. You must
-    #   supply the IAM roles in their Amazon Resource Name (ARN) format. You
-    #   can supply up to 10 IAM roles in a single request.
+    #   supply the IAM roles in their Amazon Resource Name (ARN) format.
     #
-    #   A cluster can have up to 10 IAM roles associated with it at any time.
+    #   The maximum number of IAM roles that you can associate is subject to a
+    #   quota. For more information, go to [Quotas and limits][1] in the
+    #   *Amazon Redshift Cluster Management Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html
     #
     # @option params [String] :maintenance_track_name
     #   An optional parameter for the name of the maintenance track for the
@@ -1450,6 +1471,10 @@ module Aws::Redshift
     # @option params [String] :default_iam_role_arn
     #   The Amazon Resource Name (ARN) for the IAM role that was set as
     #   default for the cluster when the cluster was created.
+    #
+    # @option params [String] :load_sample_data
+    #   A flag that specifies whether to load sample data once the cluster is
+    #   created.
     #
     # @return [Types::CreateClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1496,6 +1521,7 @@ module Aws::Redshift
     #     availability_zone_relocation: false,
     #     aqua_configuration_status: "enabled", # accepts enabled, disabled, auto
     #     default_iam_role_arn: "String",
+    #     load_sample_data: "String",
     #   })
     #
     # @example Response structure
@@ -2445,8 +2471,8 @@ module Aws::Redshift
       req.send_request(options)
     end
 
-    # Creates a snapshot copy grant that permits Amazon Redshift to use a
-    # customer master key (CMK) from Key Management Service (KMS) to encrypt
+    # Creates a snapshot copy grant that permits Amazon Redshift to use an
+    # encrypted symmetric key from Key Management Service (KMS) to encrypt
     # copied snapshots in a destination region.
     #
     # For more information about managing snapshot copy grants, go to
@@ -2475,9 +2501,9 @@ module Aws::Redshift
     #     account.
     #
     # @option params [String] :kms_key_id
-    #   The unique identifier of the customer master key (CMK) to which to
-    #   grant Amazon Redshift permission. If no key is specified, the default
-    #   key is used.
+    #   The unique identifier of the encrypted symmetric key to which to grant
+    #   Amazon Redshift permission. If no key is specified, the default key is
+    #   used.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tag instances.
@@ -2647,7 +2673,9 @@ module Aws::Redshift
     #   The type of limit. Depending on the feature type, this can be based on
     #   a time duration or data size. If `FeatureType` is `spectrum`, then
     #   `LimitType` must be `data-scanned`. If `FeatureType` is
-    #   `concurrency-scaling`, then `LimitType` must be `time`.
+    #   `concurrency-scaling`, then `LimitType` must be `time`. If
+    #   `FeatureType` is `cross-region-datasharing`, then `LimitType` must be
+    #   `data-scanned`.
     #
     # @option params [required, Integer] :amount
     #   The limit amount. If time-based, this amount is in minutes. If
@@ -2681,7 +2709,7 @@ module Aws::Redshift
     #
     #   resp = client.create_usage_limit({
     #     cluster_identifier: "String", # required
-    #     feature_type: "spectrum", # required, accepts spectrum, concurrency-scaling
+    #     feature_type: "spectrum", # required, accepts spectrum, concurrency-scaling, cross-region-datasharing
     #     limit_type: "time", # required, accepts time, data-scanned
     #     amount: 1, # required
     #     period: "daily", # accepts daily, weekly, monthly
@@ -2698,7 +2726,7 @@ module Aws::Redshift
     #
     #   resp.usage_limit_id #=> String
     #   resp.cluster_identifier #=> String
-    #   resp.feature_type #=> String, one of "spectrum", "concurrency-scaling"
+    #   resp.feature_type #=> String, one of "spectrum", "concurrency-scaling", "cross-region-datasharing"
     #   resp.limit_type #=> String, one of "time", "data-scanned"
     #   resp.amount #=> Integer
     #   resp.period #=> String, one of "daily", "weekly", "monthly"
@@ -2716,8 +2744,8 @@ module Aws::Redshift
       req.send_request(options)
     end
 
-    # From the producer account, removes authorization from the specified
-    # datashare.
+    # From a datashare producer account, removes authorization from the
+    # specified datashare.
     #
     # @option params [required, String] :data_share_arn
     #   The Amazon Resource Name (ARN) of the datashare to remove
@@ -2751,6 +2779,7 @@ module Aws::Redshift
     #   resp.data_share_associations #=> Array
     #   resp.data_share_associations[0].consumer_identifier #=> String
     #   resp.data_share_associations[0].status #=> String, one of "ACTIVE", "PENDING_AUTHORIZATION", "AUTHORIZED", "DEAUTHORIZED", "REJECTED", "AVAILABLE"
+    #   resp.data_share_associations[0].consumer_region #=> String
     #   resp.data_share_associations[0].created_date #=> Time
     #   resp.data_share_associations[0].status_change_date #=> Time
     #   resp.managed_by #=> String
@@ -3934,6 +3963,10 @@ module Aws::Redshift
     #   The snapshot identifier of the snapshot about which to return
     #   information.
     #
+    # @option params [String] :snapshot_arn
+    #   The Amazon Resource Name (ARN) of the snapshot associated with the
+    #   message to describe cluster snapshots.
+    #
     # @option params [String] :snapshot_type
     #   The type of snapshots for which you are requesting information. By
     #   default, snapshots of all types are returned.
@@ -4041,6 +4074,7 @@ module Aws::Redshift
     #   resp = client.describe_cluster_snapshots({
     #     cluster_identifier: "String",
     #     snapshot_identifier: "String",
+    #     snapshot_arn: "String",
     #     snapshot_type: "String",
     #     start_time: Time.now,
     #     end_time: Time.now,
@@ -4619,6 +4653,7 @@ module Aws::Redshift
     #   resp.data_shares[0].data_share_associations #=> Array
     #   resp.data_shares[0].data_share_associations[0].consumer_identifier #=> String
     #   resp.data_shares[0].data_share_associations[0].status #=> String, one of "ACTIVE", "PENDING_AUTHORIZATION", "AUTHORIZED", "DEAUTHORIZED", "REJECTED", "AVAILABLE"
+    #   resp.data_shares[0].data_share_associations[0].consumer_region #=> String
     #   resp.data_shares[0].data_share_associations[0].created_date #=> Time
     #   resp.data_shares[0].data_share_associations[0].status_change_date #=> Time
     #   resp.data_shares[0].managed_by #=> String
@@ -4686,6 +4721,7 @@ module Aws::Redshift
     #   resp.data_shares[0].data_share_associations #=> Array
     #   resp.data_shares[0].data_share_associations[0].consumer_identifier #=> String
     #   resp.data_shares[0].data_share_associations[0].status #=> String, one of "ACTIVE", "PENDING_AUTHORIZATION", "AUTHORIZED", "DEAUTHORIZED", "REJECTED", "AVAILABLE"
+    #   resp.data_shares[0].data_share_associations[0].consumer_region #=> String
     #   resp.data_shares[0].data_share_associations[0].created_date #=> Time
     #   resp.data_shares[0].data_share_associations[0].status_change_date #=> Time
     #   resp.data_shares[0].managed_by #=> String
@@ -4753,6 +4789,7 @@ module Aws::Redshift
     #   resp.data_shares[0].data_share_associations #=> Array
     #   resp.data_shares[0].data_share_associations[0].consumer_identifier #=> String
     #   resp.data_shares[0].data_share_associations[0].status #=> String, one of "ACTIVE", "PENDING_AUTHORIZATION", "AUTHORIZED", "DEAUTHORIZED", "REJECTED", "AVAILABLE"
+    #   resp.data_shares[0].data_share_associations[0].consumer_region #=> String
     #   resp.data_shares[0].data_share_associations[0].created_date #=> Time
     #   resp.data_shares[0].data_share_associations[0].status_change_date #=> Time
     #   resp.data_shares[0].managed_by #=> String
@@ -5475,6 +5512,8 @@ module Aws::Redshift
     #   * {Types::LoggingStatus#last_successful_delivery_time #last_successful_delivery_time} => Time
     #   * {Types::LoggingStatus#last_failure_time #last_failure_time} => Time
     #   * {Types::LoggingStatus#last_failure_message #last_failure_message} => String
+    #   * {Types::LoggingStatus#log_destination_type #log_destination_type} => String
+    #   * {Types::LoggingStatus#log_exports #log_exports} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -5490,6 +5529,9 @@ module Aws::Redshift
     #   resp.last_successful_delivery_time #=> Time
     #   resp.last_failure_time #=> Time
     #   resp.last_failure_message #=> String
+    #   resp.log_destination_type #=> String, one of "s3", "cloudwatch"
+    #   resp.log_exports #=> Array
+    #   resp.log_exports[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeLoggingStatus AWS API Documentation
     #
@@ -5518,6 +5560,10 @@ module Aws::Redshift
     # @option params [String] :snapshot_identifier
     #   The identifier of the snapshot to evaluate for possible node
     #   configurations.
+    #
+    # @option params [String] :snapshot_arn
+    #   The Amazon Resource Name (ARN) of the snapshot associated with the
+    #   message to describe node configuration.
     #
     # @option params [String] :owner_account
     #   The Amazon Web Services account used to create or copy the snapshot.
@@ -5560,6 +5606,7 @@ module Aws::Redshift
     #     action_type: "restore-cluster", # required, accepts restore-cluster, recommend-node-config, resize-cluster
     #     cluster_identifier: "String",
     #     snapshot_identifier: "String",
+    #     snapshot_arn: "String",
     #     owner_account: "String",
     #     filters: [
     #       {
@@ -6578,7 +6625,7 @@ module Aws::Redshift
     #   resp = client.describe_usage_limits({
     #     usage_limit_id: "String",
     #     cluster_identifier: "String",
-    #     feature_type: "spectrum", # accepts spectrum, concurrency-scaling
+    #     feature_type: "spectrum", # accepts spectrum, concurrency-scaling, cross-region-datasharing
     #     max_records: 1,
     #     marker: "String",
     #     tag_keys: ["String"],
@@ -6590,7 +6637,7 @@ module Aws::Redshift
     #   resp.usage_limits #=> Array
     #   resp.usage_limits[0].usage_limit_id #=> String
     #   resp.usage_limits[0].cluster_identifier #=> String
-    #   resp.usage_limits[0].feature_type #=> String, one of "spectrum", "concurrency-scaling"
+    #   resp.usage_limits[0].feature_type #=> String, one of "spectrum", "concurrency-scaling", "cross-region-datasharing"
     #   resp.usage_limits[0].limit_type #=> String, one of "time", "data-scanned"
     #   resp.usage_limits[0].amount #=> Integer
     #   resp.usage_limits[0].period #=> String, one of "daily", "weekly", "monthly"
@@ -6625,6 +6672,8 @@ module Aws::Redshift
     #   * {Types::LoggingStatus#last_successful_delivery_time #last_successful_delivery_time} => Time
     #   * {Types::LoggingStatus#last_failure_time #last_failure_time} => Time
     #   * {Types::LoggingStatus#last_failure_message #last_failure_message} => String
+    #   * {Types::LoggingStatus#log_destination_type #log_destination_type} => String
+    #   * {Types::LoggingStatus#log_exports #log_exports} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -6640,6 +6689,9 @@ module Aws::Redshift
     #   resp.last_successful_delivery_time #=> Time
     #   resp.last_failure_time #=> Time
     #   resp.last_failure_message #=> String
+    #   resp.log_destination_type #=> String, one of "s3", "cloudwatch"
+    #   resp.log_exports #=> Array
+    #   resp.log_exports[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisableLogging AWS API Documentation
     #
@@ -6653,10 +6705,10 @@ module Aws::Redshift
     # Disables the automatic copying of snapshots from one region to another
     # region for a specified cluster.
     #
-    # If your cluster and its snapshots are encrypted using a customer
-    # master key (CMK) from Key Management Service, use
-    # DeleteSnapshotCopyGrant to delete the grant that grants Amazon
-    # Redshift permission to the CMK in the destination region.
+    # If your cluster and its snapshots are encrypted using an encrypted
+    # symmetric key from Key Management Service, use DeleteSnapshotCopyGrant
+    # to delete the grant that grants Amazon Redshift permission to the key
+    # in the destination region.
     #
     # @option params [required, String] :cluster_identifier
     #   The unique identifier of the source cluster that you want to disable
@@ -6805,8 +6857,8 @@ module Aws::Redshift
       req.send_request(options)
     end
 
-    # From a consumer account, remove association for the specified
-    # datashare.
+    # From a datashare consumer account, remove association for the
+    # specified datashare.
     #
     # @option params [required, String] :data_share_arn
     #   The Amazon Resource Name (ARN) of the datashare to remove association
@@ -6819,6 +6871,11 @@ module Aws::Redshift
     # @option params [String] :consumer_arn
     #   The Amazon Resource Name (ARN) of the consumer that association for
     #   the datashare is removed from.
+    #
+    # @option params [String] :consumer_region
+    #   From a datashare consumer account, removes association of a datashare
+    #   from all the existing and future namespaces in the specified Amazon
+    #   Web Services Region.
     #
     # @return [Types::DataShare] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6834,6 +6891,7 @@ module Aws::Redshift
     #     data_share_arn: "String", # required
     #     disassociate_entire_account: false,
     #     consumer_arn: "String",
+    #     consumer_region: "String",
     #   })
     #
     # @example Response structure
@@ -6844,6 +6902,7 @@ module Aws::Redshift
     #   resp.data_share_associations #=> Array
     #   resp.data_share_associations[0].consumer_identifier #=> String
     #   resp.data_share_associations[0].status #=> String, one of "ACTIVE", "PENDING_AUTHORIZATION", "AUTHORIZED", "DEAUTHORIZED", "REJECTED", "AVAILABLE"
+    #   resp.data_share_associations[0].consumer_region #=> String
     #   resp.data_share_associations[0].created_date #=> Time
     #   resp.data_share_associations[0].status_change_date #=> Time
     #   resp.managed_by #=> String
@@ -6865,7 +6924,7 @@ module Aws::Redshift
     #
     #   Example: `examplecluster`
     #
-    # @option params [required, String] :bucket_name
+    # @option params [String] :bucket_name
     #   The name of an existing S3 bucket where the log files are to be
     #   stored.
     #
@@ -6896,6 +6955,14 @@ module Aws::Redshift
     #
     #     * x7f or larger
     #
+    # @option params [String] :log_destination_type
+    #   The log destination type. An enum with possible values of `s3` and
+    #   `cloudwatch`.
+    #
+    # @option params [Array<String>] :log_exports
+    #   The collection of exported log types. Log types include the connection
+    #   log, user log and user activity log.
+    #
     # @return [Types::LoggingStatus] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::LoggingStatus#logging_enabled #logging_enabled} => Boolean
@@ -6904,13 +6971,17 @@ module Aws::Redshift
     #   * {Types::LoggingStatus#last_successful_delivery_time #last_successful_delivery_time} => Time
     #   * {Types::LoggingStatus#last_failure_time #last_failure_time} => Time
     #   * {Types::LoggingStatus#last_failure_message #last_failure_message} => String
+    #   * {Types::LoggingStatus#log_destination_type #log_destination_type} => String
+    #   * {Types::LoggingStatus#log_exports #log_exports} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.enable_logging({
     #     cluster_identifier: "String", # required
-    #     bucket_name: "String", # required
+    #     bucket_name: "String",
     #     s3_key_prefix: "String",
+    #     log_destination_type: "s3", # accepts s3, cloudwatch
+    #     log_exports: ["String"],
     #   })
     #
     # @example Response structure
@@ -6921,6 +6992,9 @@ module Aws::Redshift
     #   resp.last_successful_delivery_time #=> Time
     #   resp.last_failure_time #=> Time
     #   resp.last_failure_message #=> String
+    #   resp.log_destination_type #=> String, one of "s3", "cloudwatch"
+    #   resp.log_exports #=> Array
+    #   resp.log_exports[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EnableLogging AWS API Documentation
     #
@@ -7139,7 +7213,7 @@ module Aws::Redshift
     # the `redshift:JoinGroup` action with access to the listed `dbgroups`.
     #
     # In addition, if the `AutoCreate` parameter is set to `True`, then the
-    # policy must include the `redshift:CreateClusterUser` privilege.
+    # policy must include the `redshift:CreateClusterUser` permission.
     #
     # If the `DbName` parameter is specified, the IAM policy must allow
     # access to the resource `dbname` for the specified database name.
@@ -7207,7 +7281,7 @@ module Aws::Redshift
     #
     # @option params [required, String] :cluster_identifier
     #   The unique identifier of the cluster that contains the database for
-    #   which your are requesting credentials. This parameter is case
+    #   which you are requesting credentials. This parameter is case
     #   sensitive.
     #
     # @option params [Integer] :duration_seconds
@@ -7274,6 +7348,70 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def get_cluster_credentials(params = {}, options = {})
       req = build_request(:get_cluster_credentials, params)
+      req.send_request(options)
+    end
+
+    # Returns a database user name and temporary password with temporary
+    # authorization to log in to an Amazon Redshift database. The database
+    # user is mapped 1:1 to the source Identity and Access Management (IAM)
+    # identity. For more information about IAM identities, see [IAM
+    # Identities (users, user groups, and roles)][1] in the Amazon Web
+    # Services Identity and Access Management User Guide.
+    #
+    # The Identity and Access Management (IAM) identity that runs this
+    # operation must have an IAM policy attached that allows access to all
+    # necessary actions and resources. For more information about
+    # permissions, see [Using identity-based policies (IAM policies)][2] in
+    # the Amazon Redshift Cluster Management Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html
+    # [2]: https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html
+    #
+    # @option params [String] :db_name
+    #   The name of the database for which you are requesting credentials. If
+    #   the database name is specified, the IAM policy must allow access to
+    #   the resource `dbname` for the specified database name. If the database
+    #   name is not specified, access to all databases is allowed.
+    #
+    # @option params [required, String] :cluster_identifier
+    #   The unique identifier of the cluster that contains the database for
+    #   which you are requesting credentials.
+    #
+    # @option params [Integer] :duration_seconds
+    #   The number of seconds until the returned temporary password expires.
+    #
+    #   Range: 900-3600. Default: 900.
+    #
+    # @return [Types::ClusterExtendedCredentials] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ClusterExtendedCredentials#db_user #db_user} => String
+    #   * {Types::ClusterExtendedCredentials#db_password #db_password} => String
+    #   * {Types::ClusterExtendedCredentials#expiration #expiration} => Time
+    #   * {Types::ClusterExtendedCredentials#next_refresh_time #next_refresh_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_cluster_credentials_with_iam({
+    #     db_name: "String",
+    #     cluster_identifier: "String", # required
+    #     duration_seconds: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_user #=> String
+    #   resp.db_password #=> String
+    #   resp.expiration #=> Time
+    #   resp.next_refresh_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/GetClusterCredentialsWithIAM AWS API Documentation
+    #
+    # @overload get_cluster_credentials_with_iam(params = {})
+    # @param [Hash] params ({})
+    def get_cluster_credentials_with_iam(params = {}, options = {})
+      req = build_request(:get_cluster_credentials_with_iam, params)
       req.send_request(options)
     end
 
@@ -7611,8 +7749,8 @@ module Aws::Redshift
     #
     #   * Must contain one number.
     #
-    #   * Can be any printable ASCII character (ASCII code 33 to 126) except
-    #     ' (single quote), " (double quote), \\, /, @, or space.
+    #   * Can be any printable ASCII character (ASCII code 33-126) except `'`
+    #     (single quote), `"` (double quote), ``, `/`, or `@`.
     #
     # @option params [String] :cluster_parameter_group_name
     #   The name of the cluster parameter group to apply to this cluster. This
@@ -8104,7 +8242,13 @@ module Aws::Redshift
     # can be used by the cluster to access other Amazon Web Services
     # services.
     #
-    # A cluster can have up to 10 IAM roles associated at any time.
+    # The maximum number of IAM roles that you can associate is subject to a
+    # quota. For more information, go to [Quotas and limits][1] in the
+    # *Amazon Redshift Cluster Management Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html
     #
     # @option params [required, String] :cluster_identifier
     #   The unique identifier of the cluster for which you want to associate
@@ -8112,13 +8256,10 @@ module Aws::Redshift
     #
     # @option params [Array<String>] :add_iam_roles
     #   Zero or more IAM roles to associate with the cluster. The roles must
-    #   be in their Amazon Resource Name (ARN) format. You can associate up to
-    #   10 IAM roles with a single cluster in a single request.
+    #   be in their Amazon Resource Name (ARN) format.
     #
     # @option params [Array<String>] :remove_iam_roles
     #   Zero or more IAM roles in ARN format to disassociate from the cluster.
-    #   You can disassociate up to 10 IAM roles from a single cluster in a
-    #   single request.
     #
     # @option params [String] :default_iam_role_arn
     #   The Amazon Resource Name (ARN) for the IAM role that was set as
@@ -9201,7 +9342,7 @@ module Aws::Redshift
     #
     #   resp.usage_limit_id #=> String
     #   resp.cluster_identifier #=> String
-    #   resp.feature_type #=> String, one of "spectrum", "concurrency-scaling"
+    #   resp.feature_type #=> String, one of "spectrum", "concurrency-scaling", "cross-region-datasharing"
     #   resp.limit_type #=> String, one of "time", "data-scanned"
     #   resp.amount #=> Integer
     #   resp.period #=> String, one of "daily", "weekly", "monthly"
@@ -9580,7 +9721,7 @@ module Aws::Redshift
       req.send_request(options)
     end
 
-    # From the consumer account, rejects the specified datashare.
+    # From a datashare consumer account, rejects the specified datashare.
     #
     # @option params [required, String] :data_share_arn
     #   The Amazon Resource Name (ARN) of the datashare to reject.
@@ -9607,6 +9748,7 @@ module Aws::Redshift
     #   resp.data_share_associations #=> Array
     #   resp.data_share_associations[0].consumer_identifier #=> String
     #   resp.data_share_associations[0].status #=> String, one of "ACTIVE", "PENDING_AUTHORIZATION", "AUTHORIZED", "DEAUTHORIZED", "REJECTED", "AVAILABLE"
+    #   resp.data_share_associations[0].consumer_region #=> String
     #   resp.data_share_associations[0].created_date #=> Time
     #   resp.data_share_associations[0].status_change_date #=> Time
     #   resp.managed_by #=> String
@@ -9921,11 +10063,15 @@ module Aws::Redshift
     #   * Must be unique for all clusters within an Amazon Web Services
     #     account.
     #
-    # @option params [required, String] :snapshot_identifier
+    # @option params [String] :snapshot_identifier
     #   The name of the snapshot from which to create the new cluster. This
     #   parameter isn't case sensitive.
     #
     #   Example: `my-snapshot-id`
+    #
+    # @option params [String] :snapshot_arn
+    #   The Amazon Resource Name (ARN) of the snapshot associated with the
+    #   message to restore from a cluster.
     #
     # @option params [String] :snapshot_cluster_identifier
     #   The name of the cluster the source snapshot was created from. This
@@ -9979,7 +10125,9 @@ module Aws::Redshift
     #   keys in an HSM.
     #
     # @option params [String] :elastic_ip
-    #   The elastic IP (EIP) address for the cluster.
+    #   The elastic IP (EIP) address for the cluster. You don't have to
+    #   specify the EIP for a publicly accessible cluster with
+    #   AvailabilityZoneRelocation turned on.
     #
     # @option params [String] :cluster_parameter_group_name
     #   The name of the parameter group to be associated with this cluster.
@@ -10057,9 +10205,13 @@ module Aws::Redshift
     #   The value must be either -1 or an integer between 1 and 3,653.
     #
     # @option params [String] :kms_key_id
-    #   The Key Management Service (KMS) key ID of the encryption key that you
-    #   want to use to encrypt data in the cluster that you restore from a
-    #   shared snapshot.
+    #   The Key Management Service (KMS) key ID of the encryption key that
+    #   encrypts data in the cluster restored from a shared snapshot. You can
+    #   also provide the key ID when you restore from an unencrypted snapshot
+    #   to an encrypted cluster in the same account. Additionally, you can
+    #   specify a new KMS key ID when you restore from an encrypted snapshot
+    #   in the same account in order to change it. In that case, the restored
+    #   cluster is encrypted with the new KMS key ID.
     #
     # @option params [String] :node_type
     #   The node type that the restored cluster will be provisioned with.
@@ -10102,10 +10254,15 @@ module Aws::Redshift
     # @option params [Array<String>] :iam_roles
     #   A list of Identity and Access Management (IAM) roles that can be used
     #   by the cluster to access other Amazon Web Services services. You must
-    #   supply the IAM roles in their Amazon Resource Name (ARN) format. You
-    #   can supply up to 10 IAM roles in a single request.
+    #   supply the IAM roles in their Amazon Resource Name (ARN) format.
     #
-    #   A cluster can have up to 10 IAM roles associated at any time.
+    #   The maximum number of IAM roles that you can associate is subject to a
+    #   quota. For more information, go to [Quotas and limits][1] in the
+    #   *Amazon Redshift Cluster Management Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html
     #
     # @option params [String] :maintenance_track_name
     #   The name of the maintenance track for the restored cluster. When you
@@ -10149,6 +10306,11 @@ module Aws::Redshift
     # @option params [String] :target_reserved_node_offering_id
     #   The identifier of the target reserved node offering.
     #
+    # @option params [Boolean] :encrypted
+    #   Enables support for restoring an unencrypted snapshot to a cluster
+    #   encrypted with Key Management Service (KMS) and a customer managed
+    #   key.
+    #
     # @return [Types::RestoreFromClusterSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreFromClusterSnapshotResult#cluster #cluster} => Types::Cluster
@@ -10157,7 +10319,8 @@ module Aws::Redshift
     #
     #   resp = client.restore_from_cluster_snapshot({
     #     cluster_identifier: "String", # required
-    #     snapshot_identifier: "String", # required
+    #     snapshot_identifier: "String",
+    #     snapshot_arn: "String",
     #     snapshot_cluster_identifier: "String",
     #     port: 1,
     #     availability_zone: "String",
@@ -10187,6 +10350,7 @@ module Aws::Redshift
     #     default_iam_role_arn: "String",
     #     reserved_node_id: "String",
     #     target_reserved_node_offering_id: "String",
+    #     encrypted: false,
     #   })
     #
     # @example Response structure
@@ -10706,8 +10870,12 @@ module Aws::Redshift
     #
     # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html
     #
-    # @option params [required, String] :snapshot_identifier
+    # @option params [String] :snapshot_identifier
     #   The identifier of the snapshot that the account can no longer access.
+    #
+    # @option params [String] :snapshot_arn
+    #   The Amazon Resource Name (ARN) of the snapshot associated with the
+    #   message to revoke access.
     #
     # @option params [String] :snapshot_cluster_identifier
     #   The identifier of the cluster the snapshot was created from. This
@@ -10726,7 +10894,8 @@ module Aws::Redshift
     # @example Request syntax with placeholder values
     #
     #   resp = client.revoke_snapshot_access({
-    #     snapshot_identifier: "String", # required
+    #     snapshot_identifier: "String",
+    #     snapshot_arn: "String",
     #     snapshot_cluster_identifier: "String",
     #     account_with_restore_access: "String", # required
     #   })
@@ -10996,7 +11165,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.77.0'
+      context[:gem_version] = '1.84.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -852,7 +852,7 @@ module Aws::LookoutforVision
     #   data as a hash:
     #
     #       {
-    #         compiler_options: "CompilerOptions", # required
+    #         compiler_options: "CompilerOptions",
     #         target_device: "jetson_xavier", # accepts jetson_xavier
     #         target_platform: {
     #           os: "LINUX", # required, accepts LINUX
@@ -876,7 +876,9 @@ module Aws::LookoutforVision
     #
     # @!attribute [rw] compiler_options
     #   Additional compiler options for the Greengrass component. Currently,
-    #   only NVIDIA Graphics Processing Units (GPU) are supported.
+    #   only NVIDIA Graphics Processing Units (GPU) are supported. If you
+    #   specify `TargetPlatform`, you must specify `CompilerOptions`. If you
+    #   specify `TargetDevice`, don't specify `CompilerOptions`.
     #
     #   For more information, see *Compiler options* in the Amazon Lookout
     #   for Vision Developer Guide.
@@ -1378,6 +1380,16 @@ module Aws::LookoutforVision
     #   was used to encrypt the model during training.
     #   @return [String]
     #
+    # @!attribute [rw] min_inference_units
+    #   The minimum number of inference units used by the model. For more
+    #   information, see StartModel
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_inference_units
+    #   The maximum number of inference units Amazon Lookout for Vision uses
+    #   to auto-scale the model. For more information, see StartModel.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/ModelDescription AWS API Documentation
     #
     class ModelDescription < Struct.new(
@@ -1392,7 +1404,9 @@ module Aws::LookoutforVision
       :evaluation_manifest,
       :evaluation_result,
       :evaluation_end_timestamp,
-      :kms_key_id)
+      :kms_key_id,
+      :min_inference_units,
+      :max_inference_units)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1450,7 +1464,7 @@ module Aws::LookoutforVision
     #
     #       {
     #         greengrass: { # required
-    #           compiler_options: "CompilerOptions", # required
+    #           compiler_options: "CompilerOptions",
     #           target_device: "jetson_xavier", # accepts jetson_xavier
     #           target_platform: {
     #             os: "LINUX", # required, accepts LINUX
@@ -1853,7 +1867,7 @@ module Aws::LookoutforVision
     #         job_name: "ModelPackagingJobName",
     #         configuration: { # required
     #           greengrass: { # required
-    #             compiler_options: "CompilerOptions", # required
+    #             compiler_options: "CompilerOptions",
     #             target_device: "jetson_xavier", # accepts jetson_xavier
     #             target_platform: {
     #               os: "LINUX", # required, accepts LINUX
@@ -1959,6 +1973,7 @@ module Aws::LookoutforVision
     #         model_version: "ModelVersion", # required
     #         min_inference_units: 1, # required
     #         client_token: "ClientToken",
+    #         max_inference_units: 1,
     #       }
     #
     # @!attribute [rw] project_name
@@ -1998,13 +2013,20 @@ module Aws::LookoutforVision
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] max_inference_units
+    #   The maximum number of inference units to use for auto-scaling the
+    #   model. If you don't specify a value, Amazon Lookout for Vision
+    #   doesn't auto-scale the model.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/StartModelRequest AWS API Documentation
     #
     class StartModelRequest < Struct.new(
       :project_name,
       :model_version,
       :min_inference_units,
-      :client_token)
+      :client_token,
+      :max_inference_units)
       SENSITIVE = []
       include Aws::Structure
     end

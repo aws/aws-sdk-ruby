@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::AppRunner
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -428,15 +430,17 @@ module Aws::AppRunner
     end
 
     # Create an App Runner automatic scaling configuration resource. App
-    # Runner requires this resource when you create App Runner services that
-    # require non-default auto scaling settings. You can share an auto
-    # scaling configuration across multiple services.
+    # Runner requires this resource when you create or update App Runner
+    # services and you require non-default auto scaling settings. You can
+    # share an auto scaling configuration across multiple services.
     #
-    # Create multiple revisions of a configuration by using the same
-    # `AutoScalingConfigurationName` and different
-    # `AutoScalingConfigurationRevision` values. When you create a service,
-    # you can set it to use the latest active revision of an auto scaling
-    # configuration or a specific revision.
+    # Create multiple revisions of a configuration by calling this action
+    # multiple times using the same `AutoScalingConfigurationName`. The call
+    # returns incremental `AutoScalingConfigurationRevision` values. When
+    # you create a service and configure an auto scaling configuration
+    # resource, the service uses the latest active revision of the auto
+    # scaling configuration by default. You can optionally configure the
+    # service to use a specific revision.
     #
     # Configure a higher `MinSize` to increase the spread of your App Runner
     # service over more Availability Zones in the Amazon Web Services
@@ -451,6 +455,17 @@ module Aws::AppRunner
     #   revision number `1` of this name. When you use the same name in
     #   subsequent calls, App Runner creates incremental revisions of the
     #   configuration.
+    #
+    #   <note markdown="1"> The name `DefaultConfiguration` is reserved (it's the configuration
+    #   that App Runner uses if you don't provide a custome one). You can't
+    #   use it to create a new auto scaling configuration, and you can't
+    #   create a revision of it.
+    #
+    #    When you want to use your own auto scaling configuration for your App
+    #   Runner service, *create a configuration with a different name*, and
+    #   then provide it when you create or update your service.
+    #
+    #    </note>
     #
     # @option params [Integer] :max_concurrency
     #   The maximum number of concurrent requests that you want an instance to
@@ -580,6 +595,90 @@ module Aws::AppRunner
       req.send_request(options)
     end
 
+    # Create an App Runner observability configuration resource. App Runner
+    # requires this resource when you create or update App Runner services
+    # and you want to enable non-default observability features. You can
+    # share an observability configuration across multiple services.
+    #
+    # Create multiple revisions of a configuration by calling this action
+    # multiple times using the same `ObservabilityConfigurationName`. The
+    # call returns incremental `ObservabilityConfigurationRevision` values.
+    # When you create a service and configure an observability configuration
+    # resource, the service uses the latest active revision of the
+    # observability configuration by default. You can optionally configure
+    # the service to use a specific revision.
+    #
+    # The observability configuration resource is designed to configure
+    # multiple features (currently one feature, tracing). This action takes
+    # optional parameters that describe the configuration of these features
+    # (currently one parameter, `TraceConfiguration`). If you don't specify
+    # a feature parameter, App Runner doesn't enable the feature.
+    #
+    # @option params [required, String] :observability_configuration_name
+    #   A name for the observability configuration. When you use it for the
+    #   first time in an Amazon Web Services Region, App Runner creates
+    #   revision number `1` of this name. When you use the same name in
+    #   subsequent calls, App Runner creates incremental revisions of the
+    #   configuration.
+    #
+    #   <note markdown="1"> The name `DefaultConfiguration` is reserved. You can't use it to
+    #   create a new observability configuration, and you can't create a
+    #   revision of it.
+    #
+    #    When you want to use your own observability configuration for your App
+    #   Runner service, *create a configuration with a different name*, and
+    #   then provide it when you create or update your service.
+    #
+    #    </note>
+    #
+    # @option params [Types::TraceConfiguration] :trace_configuration
+    #   The configuration of the tracing feature within this observability
+    #   configuration. If you don't specify it, App Runner doesn't enable
+    #   tracing.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of metadata items that you can associate with your
+    #   observability configuration resource. A tag is a key-value pair.
+    #
+    # @return [Types::CreateObservabilityConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateObservabilityConfigurationResponse#observability_configuration #observability_configuration} => Types::ObservabilityConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_observability_configuration({
+    #     observability_configuration_name: "ObservabilityConfigurationName", # required
+    #     trace_configuration: {
+    #       vendor: "AWSXRAY", # required, accepts AWSXRAY
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.observability_configuration.observability_configuration_arn #=> String
+    #   resp.observability_configuration.observability_configuration_name #=> String
+    #   resp.observability_configuration.trace_configuration.vendor #=> String, one of "AWSXRAY"
+    #   resp.observability_configuration.observability_configuration_revision #=> Integer
+    #   resp.observability_configuration.latest #=> Boolean
+    #   resp.observability_configuration.status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.observability_configuration.created_at #=> Time
+    #   resp.observability_configuration.deleted_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/CreateObservabilityConfiguration AWS API Documentation
+    #
+    # @overload create_observability_configuration(params = {})
+    # @param [Hash] params ({})
+    def create_observability_configuration(params = {}, options = {})
+      req = build_request(:create_observability_configuration, params)
+      req.send_request(options)
+    end
+
     # Create an App Runner service. After the service is created, the action
     # also automatically starts a deployment.
     #
@@ -592,36 +691,50 @@ module Aws::AppRunner
     # [1]: https://docs.aws.amazon.com/apprunner/latest/api/API_ListOperations.html
     #
     # @option params [required, String] :service_name
-    #   A name for the new service. It must be unique across all the running
-    #   App Runner services in your Amazon Web Services account in the Amazon
-    #   Web Services Region.
+    #   A name for the App Runner service. It must be unique across all the
+    #   running App Runner services in your Amazon Web Services account in the
+    #   Amazon Web Services Region.
     #
     # @option params [required, Types::SourceConfiguration] :source_configuration
     #   The source to deploy to the App Runner service. It can be a code or an
     #   image repository.
     #
     # @option params [Types::InstanceConfiguration] :instance_configuration
-    #   The runtime configuration of instances (scaling units) of the App
-    #   Runner service.
+    #   The runtime configuration of instances (scaling units) of your
+    #   service.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   An optional list of metadata items that you can associate with your
-    #   service resource. A tag is a key-value pair.
+    #   An optional list of metadata items that you can associate with the App
+    #   Runner service resource. A tag is a key-value pair.
     #
     # @option params [Types::EncryptionConfiguration] :encryption_configuration
     #   An optional custom encryption key that App Runner uses to encrypt the
     #   copy of your source repository that it maintains and your service
-    #   logs. By default, App Runner uses an Amazon Web Services managed CMK.
+    #   logs. By default, App Runner uses an Amazon Web Services managed key.
     #
     # @option params [Types::HealthCheckConfiguration] :health_check_configuration
     #   The settings for the health check that App Runner performs to monitor
-    #   the health of your service.
+    #   the health of the App Runner service.
     #
     # @option params [String] :auto_scaling_configuration_arn
     #   The Amazon Resource Name (ARN) of an App Runner automatic scaling
     #   configuration resource that you want to associate with your service.
     #   If not provided, App Runner associates the latest revision of a
     #   default auto scaling configuration.
+    #
+    #   Specify an ARN with a name and a revision number to associate that
+    #   revision. For example:
+    #   `arn:aws:apprunner:us-east-1:123456789012:autoscalingconfiguration/high-availability/3`
+    #
+    #   Specify just the name to associate the latest revision. For example:
+    #   `arn:aws:apprunner:us-east-1:123456789012:autoscalingconfiguration/high-availability`
+    #
+    # @option params [Types::NetworkConfiguration] :network_configuration
+    #   Configuration settings related to network traffic of the web
+    #   application that the App Runner service runs.
+    #
+    # @option params [Types::ServiceObservabilityConfiguration] :observability_configuration
+    #   The observability configuration of your service.
     #
     # @return [Types::CreateServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -642,7 +755,7 @@ module Aws::AppRunner
     #         code_configuration: {
     #           configuration_source: "REPOSITORY", # required, accepts REPOSITORY, API
     #           code_configuration_values: {
-    #             runtime: "PYTHON_3", # required, accepts PYTHON_3, NODEJS_12
+    #             runtime: "PYTHON_3", # required, accepts PYTHON_3, NODEJS_12, NODEJS_14, CORRETTO_8, CORRETTO_11
     #             build_command: "BuildCommand",
     #             start_command: "StartCommand",
     #             port: "String",
@@ -658,7 +771,7 @@ module Aws::AppRunner
     #           runtime_environment_variables: {
     #             "RuntimeEnvironmentVariablesKey" => "RuntimeEnvironmentVariablesValue",
     #           },
-    #           start_command: "String",
+    #           start_command: "StartCommand",
     #           port: "String",
     #         },
     #         image_repository_type: "ECR", # required, accepts ECR, ECR_PUBLIC
@@ -692,6 +805,16 @@ module Aws::AppRunner
     #       unhealthy_threshold: 1,
     #     },
     #     auto_scaling_configuration_arn: "AppRunnerResourceArn",
+    #     network_configuration: {
+    #       egress_configuration: {
+    #         egress_type: "DEFAULT", # accepts DEFAULT, VPC
+    #         vpc_connector_arn: "AppRunnerResourceArn",
+    #       },
+    #     },
+    #     observability_configuration: {
+    #       observability_enabled: false, # required
+    #       observability_configuration_arn: "AppRunnerResourceArn",
+    #     },
     #   })
     #
     # @example Response structure
@@ -708,7 +831,7 @@ module Aws::AppRunner
     #   resp.service.source_configuration.code_repository.source_code_version.type #=> String, one of "BRANCH"
     #   resp.service.source_configuration.code_repository.source_code_version.value #=> String
     #   resp.service.source_configuration.code_repository.code_configuration.configuration_source #=> String, one of "REPOSITORY", "API"
-    #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime #=> String, one of "PYTHON_3", "NODEJS_12"
+    #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime #=> String, one of "PYTHON_3", "NODEJS_12", "NODEJS_14", "CORRETTO_8", "CORRETTO_11"
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.build_command #=> String
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.start_command #=> String
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.port #=> String
@@ -736,6 +859,10 @@ module Aws::AppRunner
     #   resp.service.auto_scaling_configuration_summary.auto_scaling_configuration_arn #=> String
     #   resp.service.auto_scaling_configuration_summary.auto_scaling_configuration_name #=> String
     #   resp.service.auto_scaling_configuration_summary.auto_scaling_configuration_revision #=> Integer
+    #   resp.service.network_configuration.egress_configuration.egress_type #=> String, one of "DEFAULT", "VPC"
+    #   resp.service.network_configuration.egress_configuration.vpc_connector_arn #=> String
+    #   resp.service.observability_configuration.observability_enabled #=> Boolean
+    #   resp.service.observability_configuration.observability_configuration_arn #=> String
     #   resp.operation_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/CreateService AWS API Documentation
@@ -744,6 +871,73 @@ module Aws::AppRunner
     # @param [Hash] params ({})
     def create_service(params = {}, options = {})
       req = build_request(:create_service, params)
+      req.send_request(options)
+    end
+
+    # Create an App Runner VPC connector resource. App Runner requires this
+    # resource when you want to associate your App Runner service to a
+    # custom Amazon Virtual Private Cloud (Amazon VPC).
+    #
+    # @option params [required, String] :vpc_connector_name
+    #   A name for the VPC connector.
+    #
+    # @option params [required, Array<String>] :subnets
+    #   A list of IDs of subnets that App Runner should use when it associates
+    #   your service with a custom Amazon VPC. Specify IDs of subnets of a
+    #   single Amazon VPC. App Runner determines the Amazon VPC from the
+    #   subnets you specify.
+    #
+    #   <note markdown="1"> App Runner currently only provides support for IPv4.
+    #
+    #    </note>
+    #
+    # @option params [Array<String>] :security_groups
+    #   A list of IDs of security groups that App Runner should use for access
+    #   to Amazon Web Services resources under the specified subnets. If not
+    #   specified, App Runner uses the default security group of the Amazon
+    #   VPC. The default security group allows all outbound traffic.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of metadata items that you can associate with your VPC
+    #   connector resource. A tag is a key-value pair.
+    #
+    # @return [Types::CreateVpcConnectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateVpcConnectorResponse#vpc_connector #vpc_connector} => Types::VpcConnector
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_vpc_connector({
+    #     vpc_connector_name: "VpcConnectorName", # required
+    #     subnets: ["String"], # required
+    #     security_groups: ["String"],
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpc_connector.vpc_connector_name #=> String
+    #   resp.vpc_connector.vpc_connector_arn #=> String
+    #   resp.vpc_connector.vpc_connector_revision #=> Integer
+    #   resp.vpc_connector.subnets #=> Array
+    #   resp.vpc_connector.subnets[0] #=> String
+    #   resp.vpc_connector.security_groups #=> Array
+    #   resp.vpc_connector.security_groups[0] #=> String
+    #   resp.vpc_connector.status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.vpc_connector.created_at #=> Time
+    #   resp.vpc_connector.deleted_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/CreateVpcConnector AWS API Documentation
+    #
+    # @overload create_vpc_connector(params = {})
+    # @param [Hash] params ({})
+    def create_vpc_connector(params = {}, options = {})
+      req = build_request(:create_vpc_connector, params)
       req.send_request(options)
     end
 
@@ -827,6 +1021,49 @@ module Aws::AppRunner
       req.send_request(options)
     end
 
+    # Delete an App Runner observability configuration resource. You can
+    # delete a specific revision or the latest active revision. You can't
+    # delete a configuration that's used by one or more App Runner
+    # services.
+    #
+    # @option params [required, String] :observability_configuration_arn
+    #   The Amazon Resource Name (ARN) of the App Runner observability
+    #   configuration that you want to delete.
+    #
+    #   The ARN can be a full observability configuration ARN, or a partial
+    #   ARN ending with either `.../name ` or `.../name/revision `. If a
+    #   revision isn't specified, the latest active revision is deleted.
+    #
+    # @return [Types::DeleteObservabilityConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteObservabilityConfigurationResponse#observability_configuration #observability_configuration} => Types::ObservabilityConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_observability_configuration({
+    #     observability_configuration_arn: "AppRunnerResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.observability_configuration.observability_configuration_arn #=> String
+    #   resp.observability_configuration.observability_configuration_name #=> String
+    #   resp.observability_configuration.trace_configuration.vendor #=> String, one of "AWSXRAY"
+    #   resp.observability_configuration.observability_configuration_revision #=> Integer
+    #   resp.observability_configuration.latest #=> Boolean
+    #   resp.observability_configuration.status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.observability_configuration.created_at #=> Time
+    #   resp.observability_configuration.deleted_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/DeleteObservabilityConfiguration AWS API Documentation
+    #
+    # @overload delete_observability_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_observability_configuration(params = {}, options = {})
+      req = build_request(:delete_observability_configuration, params)
+      req.send_request(options)
+    end
+
     # Delete an App Runner service.
     #
     # This is an asynchronous operation. On a successful call, you can use
@@ -862,7 +1099,7 @@ module Aws::AppRunner
     #   resp.service.source_configuration.code_repository.source_code_version.type #=> String, one of "BRANCH"
     #   resp.service.source_configuration.code_repository.source_code_version.value #=> String
     #   resp.service.source_configuration.code_repository.code_configuration.configuration_source #=> String, one of "REPOSITORY", "API"
-    #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime #=> String, one of "PYTHON_3", "NODEJS_12"
+    #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime #=> String, one of "PYTHON_3", "NODEJS_12", "NODEJS_14", "CORRETTO_8", "CORRETTO_11"
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.build_command #=> String
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.start_command #=> String
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.port #=> String
@@ -890,6 +1127,10 @@ module Aws::AppRunner
     #   resp.service.auto_scaling_configuration_summary.auto_scaling_configuration_arn #=> String
     #   resp.service.auto_scaling_configuration_summary.auto_scaling_configuration_name #=> String
     #   resp.service.auto_scaling_configuration_summary.auto_scaling_configuration_revision #=> Integer
+    #   resp.service.network_configuration.egress_configuration.egress_type #=> String, one of "DEFAULT", "VPC"
+    #   resp.service.network_configuration.egress_configuration.vpc_connector_arn #=> String
+    #   resp.service.observability_configuration.observability_enabled #=> Boolean
+    #   resp.service.observability_configuration.observability_configuration_arn #=> String
     #   resp.operation_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/DeleteService AWS API Documentation
@@ -898,6 +1139,47 @@ module Aws::AppRunner
     # @param [Hash] params ({})
     def delete_service(params = {}, options = {})
       req = build_request(:delete_service, params)
+      req.send_request(options)
+    end
+
+    # Delete an App Runner VPC connector resource. You can't delete a
+    # connector that's used by one or more App Runner services.
+    #
+    # @option params [required, String] :vpc_connector_arn
+    #   The Amazon Resource Name (ARN) of the App Runner VPC connector that
+    #   you want to delete.
+    #
+    #   The ARN must be a full VPC connector ARN.
+    #
+    # @return [Types::DeleteVpcConnectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteVpcConnectorResponse#vpc_connector #vpc_connector} => Types::VpcConnector
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_vpc_connector({
+    #     vpc_connector_arn: "AppRunnerResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpc_connector.vpc_connector_name #=> String
+    #   resp.vpc_connector.vpc_connector_arn #=> String
+    #   resp.vpc_connector.vpc_connector_revision #=> Integer
+    #   resp.vpc_connector.subnets #=> Array
+    #   resp.vpc_connector.subnets[0] #=> String
+    #   resp.vpc_connector.security_groups #=> Array
+    #   resp.vpc_connector.security_groups[0] #=> String
+    #   resp.vpc_connector.status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.vpc_connector.created_at #=> Time
+    #   resp.vpc_connector.deleted_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/DeleteVpcConnector AWS API Documentation
+    #
+    # @overload delete_vpc_connector(params = {})
+    # @param [Hash] params ({})
+    def delete_vpc_connector(params = {}, options = {})
+      req = build_request(:delete_vpc_connector, params)
       req.send_request(options)
     end
 
@@ -1008,6 +1290,47 @@ module Aws::AppRunner
       req.send_request(options)
     end
 
+    # Return a full description of an App Runner observability configuration
+    # resource.
+    #
+    # @option params [required, String] :observability_configuration_arn
+    #   The Amazon Resource Name (ARN) of the App Runner observability
+    #   configuration that you want a description for.
+    #
+    #   The ARN can be a full observability configuration ARN, or a partial
+    #   ARN ending with either `.../name ` or `.../name/revision `. If a
+    #   revision isn't specified, the latest active revision is described.
+    #
+    # @return [Types::DescribeObservabilityConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeObservabilityConfigurationResponse#observability_configuration #observability_configuration} => Types::ObservabilityConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_observability_configuration({
+    #     observability_configuration_arn: "AppRunnerResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.observability_configuration.observability_configuration_arn #=> String
+    #   resp.observability_configuration.observability_configuration_name #=> String
+    #   resp.observability_configuration.trace_configuration.vendor #=> String, one of "AWSXRAY"
+    #   resp.observability_configuration.observability_configuration_revision #=> Integer
+    #   resp.observability_configuration.latest #=> Boolean
+    #   resp.observability_configuration.status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.observability_configuration.created_at #=> Time
+    #   resp.observability_configuration.deleted_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/DescribeObservabilityConfiguration AWS API Documentation
+    #
+    # @overload describe_observability_configuration(params = {})
+    # @param [Hash] params ({})
+    def describe_observability_configuration(params = {}, options = {})
+      req = build_request(:describe_observability_configuration, params)
+      req.send_request(options)
+    end
+
     # Return a full description of an App Runner service.
     #
     # @option params [required, String] :service_arn
@@ -1038,7 +1361,7 @@ module Aws::AppRunner
     #   resp.service.source_configuration.code_repository.source_code_version.type #=> String, one of "BRANCH"
     #   resp.service.source_configuration.code_repository.source_code_version.value #=> String
     #   resp.service.source_configuration.code_repository.code_configuration.configuration_source #=> String, one of "REPOSITORY", "API"
-    #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime #=> String, one of "PYTHON_3", "NODEJS_12"
+    #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime #=> String, one of "PYTHON_3", "NODEJS_12", "NODEJS_14", "CORRETTO_8", "CORRETTO_11"
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.build_command #=> String
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.start_command #=> String
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.port #=> String
@@ -1066,6 +1389,10 @@ module Aws::AppRunner
     #   resp.service.auto_scaling_configuration_summary.auto_scaling_configuration_arn #=> String
     #   resp.service.auto_scaling_configuration_summary.auto_scaling_configuration_name #=> String
     #   resp.service.auto_scaling_configuration_summary.auto_scaling_configuration_revision #=> Integer
+    #   resp.service.network_configuration.egress_configuration.egress_type #=> String, one of "DEFAULT", "VPC"
+    #   resp.service.network_configuration.egress_configuration.vpc_connector_arn #=> String
+    #   resp.service.observability_configuration.observability_enabled #=> Boolean
+    #   resp.service.observability_configuration.observability_configuration_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/DescribeService AWS API Documentation
     #
@@ -1073,6 +1400,46 @@ module Aws::AppRunner
     # @param [Hash] params ({})
     def describe_service(params = {}, options = {})
       req = build_request(:describe_service, params)
+      req.send_request(options)
+    end
+
+    # Return a description of an App Runner VPC connector resource.
+    #
+    # @option params [required, String] :vpc_connector_arn
+    #   The Amazon Resource Name (ARN) of the App Runner VPC connector that
+    #   you want a description for.
+    #
+    #   The ARN must be a full VPC connector ARN.
+    #
+    # @return [Types::DescribeVpcConnectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeVpcConnectorResponse#vpc_connector #vpc_connector} => Types::VpcConnector
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_vpc_connector({
+    #     vpc_connector_arn: "AppRunnerResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpc_connector.vpc_connector_name #=> String
+    #   resp.vpc_connector.vpc_connector_arn #=> String
+    #   resp.vpc_connector.vpc_connector_revision #=> Integer
+    #   resp.vpc_connector.subnets #=> Array
+    #   resp.vpc_connector.subnets[0] #=> String
+    #   resp.vpc_connector.security_groups #=> Array
+    #   resp.vpc_connector.security_groups[0] #=> String
+    #   resp.vpc_connector.status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.vpc_connector.created_at #=> Time
+    #   resp.vpc_connector.deleted_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/DescribeVpcConnector AWS API Documentation
+    #
+    # @overload describe_vpc_connector(params = {})
+    # @param [Hash] params ({})
+    def describe_vpc_connector(params = {}, options = {})
+      req = build_request(:describe_vpc_connector, params)
       req.send_request(options)
     end
 
@@ -1131,25 +1498,30 @@ module Aws::AppRunner
       req.send_request(options)
     end
 
-    # Returns a list of App Runner automatic scaling configurations in your
-    # Amazon Web Services account. You can query the revisions for a
-    # specific configuration name or the revisions for all configurations in
-    # your account. You can optionally query only the latest revision of
-    # each requested name.
+    # Returns a list of active App Runner automatic scaling configurations
+    # in your Amazon Web Services account. You can query the revisions for a
+    # specific configuration name or the revisions for all active
+    # configurations in your account. You can optionally query only the
+    # latest revision of each requested name.
+    #
+    # To retrieve a full description of a particular configuration revision,
+    # call and provide one of the ARNs returned by
+    # `ListAutoScalingConfigurations`.
     #
     # @option params [String] :auto_scaling_configuration_name
     #   The name of the App Runner auto scaling configuration that you want to
     #   list. If specified, App Runner lists revisions that share this name.
-    #   If not specified, App Runner returns revisions of all configurations.
+    #   If not specified, App Runner returns revisions of all active
+    #   configurations.
     #
     # @option params [Boolean] :latest_only
     #   Set to `true` to list only the latest revision for each requested
     #   configuration name.
     #
-    #   Keep as `false` to list all revisions for each requested configuration
+    #   Set to `false` to list all revisions for each requested configuration
     #   name.
     #
-    #   Default: `false`
+    #   Default: `true`
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to include in each response (result
@@ -1253,6 +1625,80 @@ module Aws::AppRunner
     # @param [Hash] params ({})
     def list_connections(params = {}, options = {})
       req = build_request(:list_connections, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of active App Runner observability configurations in
+    # your Amazon Web Services account. You can query the revisions for a
+    # specific configuration name or the revisions for all active
+    # configurations in your account. You can optionally query only the
+    # latest revision of each requested name.
+    #
+    # To retrieve a full description of a particular configuration revision,
+    # call and provide one of the ARNs returned by
+    # `ListObservabilityConfigurations`.
+    #
+    # @option params [String] :observability_configuration_name
+    #   The name of the App Runner observability configuration that you want
+    #   to list. If specified, App Runner lists revisions that share this
+    #   name. If not specified, App Runner returns revisions of all active
+    #   configurations.
+    #
+    # @option params [Boolean] :latest_only
+    #   Set to `true` to list only the latest revision for each requested
+    #   configuration name.
+    #
+    #   Set to `false` to list all revisions for each requested configuration
+    #   name.
+    #
+    #   Default: `true`
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to include in each response (result
+    #   page). It's used for a paginated request.
+    #
+    #   If you don't specify `MaxResults`, the request retrieves all
+    #   available results in a single response.
+    #
+    # @option params [String] :next_token
+    #   A token from a previous result page. It's used for a paginated
+    #   request. The request retrieves the next result page. All other
+    #   parameter values must be identical to the ones that are specified in
+    #   the initial request.
+    #
+    #   If you don't specify `NextToken`, the request retrieves the first
+    #   result page.
+    #
+    # @return [Types::ListObservabilityConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListObservabilityConfigurationsResponse#observability_configuration_summary_list #observability_configuration_summary_list} => Array&lt;Types::ObservabilityConfigurationSummary&gt;
+    #   * {Types::ListObservabilityConfigurationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_observability_configurations({
+    #     observability_configuration_name: "ObservabilityConfigurationName",
+    #     latest_only: false,
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.observability_configuration_summary_list #=> Array
+    #   resp.observability_configuration_summary_list[0].observability_configuration_arn #=> String
+    #   resp.observability_configuration_summary_list[0].observability_configuration_name #=> String
+    #   resp.observability_configuration_summary_list[0].observability_configuration_revision #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/ListObservabilityConfigurations AWS API Documentation
+    #
+    # @overload list_observability_configurations(params = {})
+    # @param [Hash] params ({})
+    def list_observability_configurations(params = {}, options = {})
+      req = build_request(:list_observability_configurations, params)
       req.send_request(options)
     end
 
@@ -1405,6 +1851,63 @@ module Aws::AppRunner
       req.send_request(options)
     end
 
+    # Returns a list of App Runner VPC connectors in your Amazon Web
+    # Services account.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to include in each response (result
+    #   page). It's used for a paginated request.
+    #
+    #   If you don't specify `MaxResults`, the request retrieves all
+    #   available results in a single response.
+    #
+    # @option params [String] :next_token
+    #   A token from a previous result page. It's used for a paginated
+    #   request. The request retrieves the next result page. All other
+    #   parameter values must be identical to the ones that are specified in
+    #   the initial request.
+    #
+    #   If you don't specify `NextToken`, the request retrieves the first
+    #   result page.
+    #
+    # @return [Types::ListVpcConnectorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListVpcConnectorsResponse#vpc_connectors #vpc_connectors} => Array&lt;Types::VpcConnector&gt;
+    #   * {Types::ListVpcConnectorsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_vpc_connectors({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpc_connectors #=> Array
+    #   resp.vpc_connectors[0].vpc_connector_name #=> String
+    #   resp.vpc_connectors[0].vpc_connector_arn #=> String
+    #   resp.vpc_connectors[0].vpc_connector_revision #=> Integer
+    #   resp.vpc_connectors[0].subnets #=> Array
+    #   resp.vpc_connectors[0].subnets[0] #=> String
+    #   resp.vpc_connectors[0].security_groups #=> Array
+    #   resp.vpc_connectors[0].security_groups[0] #=> String
+    #   resp.vpc_connectors[0].status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.vpc_connectors[0].created_at #=> Time
+    #   resp.vpc_connectors[0].deleted_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/ListVpcConnectors AWS API Documentation
+    #
+    # @overload list_vpc_connectors(params = {})
+    # @param [Hash] params ({})
+    def list_vpc_connectors(params = {}, options = {})
+      req = build_request(:list_vpc_connectors, params)
+      req.send_request(options)
+    end
+
     # Pause an active App Runner service. App Runner reduces compute
     # capacity for the service to zero and loses state (for example,
     # ephemeral storage is removed).
@@ -1442,7 +1945,7 @@ module Aws::AppRunner
     #   resp.service.source_configuration.code_repository.source_code_version.type #=> String, one of "BRANCH"
     #   resp.service.source_configuration.code_repository.source_code_version.value #=> String
     #   resp.service.source_configuration.code_repository.code_configuration.configuration_source #=> String, one of "REPOSITORY", "API"
-    #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime #=> String, one of "PYTHON_3", "NODEJS_12"
+    #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime #=> String, one of "PYTHON_3", "NODEJS_12", "NODEJS_14", "CORRETTO_8", "CORRETTO_11"
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.build_command #=> String
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.start_command #=> String
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.port #=> String
@@ -1470,6 +1973,10 @@ module Aws::AppRunner
     #   resp.service.auto_scaling_configuration_summary.auto_scaling_configuration_arn #=> String
     #   resp.service.auto_scaling_configuration_summary.auto_scaling_configuration_name #=> String
     #   resp.service.auto_scaling_configuration_summary.auto_scaling_configuration_revision #=> Integer
+    #   resp.service.network_configuration.egress_configuration.egress_type #=> String, one of "DEFAULT", "VPC"
+    #   resp.service.network_configuration.egress_configuration.vpc_connector_arn #=> String
+    #   resp.service.observability_configuration.observability_enabled #=> Boolean
+    #   resp.service.observability_configuration.observability_configuration_arn #=> String
     #   resp.operation_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/PauseService AWS API Documentation
@@ -1517,7 +2024,7 @@ module Aws::AppRunner
     #   resp.service.source_configuration.code_repository.source_code_version.type #=> String, one of "BRANCH"
     #   resp.service.source_configuration.code_repository.source_code_version.value #=> String
     #   resp.service.source_configuration.code_repository.code_configuration.configuration_source #=> String, one of "REPOSITORY", "API"
-    #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime #=> String, one of "PYTHON_3", "NODEJS_12"
+    #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime #=> String, one of "PYTHON_3", "NODEJS_12", "NODEJS_14", "CORRETTO_8", "CORRETTO_11"
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.build_command #=> String
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.start_command #=> String
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.port #=> String
@@ -1545,6 +2052,10 @@ module Aws::AppRunner
     #   resp.service.auto_scaling_configuration_summary.auto_scaling_configuration_arn #=> String
     #   resp.service.auto_scaling_configuration_summary.auto_scaling_configuration_name #=> String
     #   resp.service.auto_scaling_configuration_summary.auto_scaling_configuration_revision #=> Integer
+    #   resp.service.network_configuration.egress_configuration.egress_type #=> String, one of "DEFAULT", "VPC"
+    #   resp.service.network_configuration.egress_configuration.vpc_connector_arn #=> String
+    #   resp.service.observability_configuration.observability_enabled #=> Boolean
+    #   resp.service.observability_configuration.observability_configuration_arn #=> String
     #   resp.operation_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/ResumeService AWS API Documentation
@@ -1694,16 +2205,24 @@ module Aws::AppRunner
     #   include.
     #
     # @option params [Types::InstanceConfiguration] :instance_configuration
-    #   The runtime configuration to apply to instances (scaling units) of the
-    #   App Runner service.
+    #   The runtime configuration to apply to instances (scaling units) of
+    #   your service.
     #
     # @option params [String] :auto_scaling_configuration_arn
     #   The Amazon Resource Name (ARN) of an App Runner automatic scaling
-    #   configuration resource that you want to associate with your service.
+    #   configuration resource that you want to associate with the App Runner
+    #   service.
     #
     # @option params [Types::HealthCheckConfiguration] :health_check_configuration
     #   The settings for the health check that App Runner performs to monitor
-    #   the health of your service.
+    #   the health of the App Runner service.
+    #
+    # @option params [Types::NetworkConfiguration] :network_configuration
+    #   Configuration settings related to network traffic of the web
+    #   application that the App Runner service runs.
+    #
+    # @option params [Types::ServiceObservabilityConfiguration] :observability_configuration
+    #   The observability configuration of your service.
     #
     # @return [Types::UpdateServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1724,7 +2243,7 @@ module Aws::AppRunner
     #         code_configuration: {
     #           configuration_source: "REPOSITORY", # required, accepts REPOSITORY, API
     #           code_configuration_values: {
-    #             runtime: "PYTHON_3", # required, accepts PYTHON_3, NODEJS_12
+    #             runtime: "PYTHON_3", # required, accepts PYTHON_3, NODEJS_12, NODEJS_14, CORRETTO_8, CORRETTO_11
     #             build_command: "BuildCommand",
     #             start_command: "StartCommand",
     #             port: "String",
@@ -1740,7 +2259,7 @@ module Aws::AppRunner
     #           runtime_environment_variables: {
     #             "RuntimeEnvironmentVariablesKey" => "RuntimeEnvironmentVariablesValue",
     #           },
-    #           start_command: "String",
+    #           start_command: "StartCommand",
     #           port: "String",
     #         },
     #         image_repository_type: "ECR", # required, accepts ECR, ECR_PUBLIC
@@ -1765,6 +2284,16 @@ module Aws::AppRunner
     #       healthy_threshold: 1,
     #       unhealthy_threshold: 1,
     #     },
+    #     network_configuration: {
+    #       egress_configuration: {
+    #         egress_type: "DEFAULT", # accepts DEFAULT, VPC
+    #         vpc_connector_arn: "AppRunnerResourceArn",
+    #       },
+    #     },
+    #     observability_configuration: {
+    #       observability_enabled: false, # required
+    #       observability_configuration_arn: "AppRunnerResourceArn",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1781,7 +2310,7 @@ module Aws::AppRunner
     #   resp.service.source_configuration.code_repository.source_code_version.type #=> String, one of "BRANCH"
     #   resp.service.source_configuration.code_repository.source_code_version.value #=> String
     #   resp.service.source_configuration.code_repository.code_configuration.configuration_source #=> String, one of "REPOSITORY", "API"
-    #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime #=> String, one of "PYTHON_3", "NODEJS_12"
+    #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime #=> String, one of "PYTHON_3", "NODEJS_12", "NODEJS_14", "CORRETTO_8", "CORRETTO_11"
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.build_command #=> String
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.start_command #=> String
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.port #=> String
@@ -1809,6 +2338,10 @@ module Aws::AppRunner
     #   resp.service.auto_scaling_configuration_summary.auto_scaling_configuration_arn #=> String
     #   resp.service.auto_scaling_configuration_summary.auto_scaling_configuration_name #=> String
     #   resp.service.auto_scaling_configuration_summary.auto_scaling_configuration_revision #=> Integer
+    #   resp.service.network_configuration.egress_configuration.egress_type #=> String, one of "DEFAULT", "VPC"
+    #   resp.service.network_configuration.egress_configuration.vpc_connector_arn #=> String
+    #   resp.service.observability_configuration.observability_enabled #=> Boolean
+    #   resp.service.observability_configuration.observability_configuration_arn #=> String
     #   resp.operation_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/UpdateService AWS API Documentation
@@ -1833,7 +2366,7 @@ module Aws::AppRunner
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apprunner'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

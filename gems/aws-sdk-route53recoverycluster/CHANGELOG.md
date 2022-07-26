@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2022-03-31)
+------------------
+
+* Feature - This release adds a new API "ListRoutingControls" to list routing control states using the highly reliable Route 53 ARC data plane endpoints.
+
+1.10.0 (2022-02-28)
+------------------
+
+* Feature - This release adds a new API option to enable overriding safety rules to allow routing control state updates.
+
+1.9.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.8.0 (2022-02-03)
 ------------------
 

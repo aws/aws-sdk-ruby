@@ -180,8 +180,17 @@ module Aws::CloudWatch
       data[:comparison_operator]
     end
 
-    # Sets how this alarm is to handle missing data points. If this
-    # parameter is omitted, the default behavior of `missing` is used.
+    # Sets how this alarm is to handle missing data points. The valid values
+    # are `breaching`, `notBreaching`, `ignore`, and `missing`. For more
+    # information, see [Configuring how CloudWatch alarms treat missing
+    # data][1].
+    #
+    # If this parameter is omitted, the default behavior of `missing` is
+    # used.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data
     # @return [String]
     def treat_missing_data
       data[:treat_missing_data]

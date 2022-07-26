@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2022-07-18)
+------------------
+
+* Feature - This release adds "IncludeIframeOnlyStream" for Dash endpoints and increases the number of supported video and audio encryption presets for Speke v2
+
+1.53.0 (2022-05-06)
+------------------
+
+* Feature - This release adds Dvb Dash 2014 as an available profile option for Dash Origin Endpoints.
+
+1.52.0 (2022-03-01)
+------------------
+
+* Feature - This release adds Hybridcast as an available profile option for Dash Origin Endpoints.
+
+1.51.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.50.0 (2022-02-03)
 ------------------
 

@@ -583,6 +583,19 @@
       "min":1
     },
     "ActionsEnabled":{"type":"boolean"},
+    "ActionsSuppressedBy":{
+      "type":"string",
+      "enum":[
+        "WaitPeriod",
+        "ExtensionPeriod",
+        "Alarm"
+      ]
+    },
+    "ActionsSuppressedReason":{
+      "type":"string",
+      "max":1024,
+      "min":0
+    },
     "AlarmArn":{
       "type":"string",
       "max":1600,
@@ -750,7 +763,13 @@
         "StateReason":{"shape":"StateReason"},
         "StateReasonData":{"shape":"StateReasonData"},
         "StateUpdatedTimestamp":{"shape":"Timestamp"},
-        "StateValue":{"shape":"StateValue"}
+        "StateValue":{"shape":"StateValue"},
+        "StateTransitionedTimestamp":{"shape":"Timestamp"},
+        "ActionsSuppressedBy":{"shape":"ActionsSuppressedBy"},
+        "ActionsSuppressedReason":{"shape":"ActionsSuppressedReason"},
+        "ActionsSuppressor":{"shape":"AlarmArn"},
+        "ActionsSuppressorWaitPeriod":{"shape":"SuppressorPeriod"},
+        "ActionsSuppressorExtensionPeriod":{"shape":"SuppressorPeriod"}
       },
       "xmlOrder":[
         "ActionsEnabled",
@@ -765,7 +784,13 @@
         "StateReason",
         "StateReasonData",
         "StateUpdatedTimestamp",
-        "StateValue"
+        "StateValue",
+        "StateTransitionedTimestamp",
+        "ActionsSuppressedBy",
+        "ActionsSuppressedReason",
+        "ActionsSuppressor",
+        "ActionsSuppressorWaitPeriod",
+        "ActionsSuppressorExtensionPeriod"
       ]
     },
     "CompositeAlarms":{
@@ -1289,7 +1314,8 @@
         "State":{"shape":"MetricStreamState"},
         "CreationDate":{"shape":"Timestamp"},
         "LastUpdateDate":{"shape":"Timestamp"},
-        "OutputFormat":{"shape":"MetricStreamOutputFormat"}
+        "OutputFormat":{"shape":"MetricStreamOutputFormat"},
+        "StatisticsConfigurations":{"shape":"MetricStreamStatisticsConfigurations"}
       }
     },
     "GetMetricWidgetImageInput":{
@@ -1843,6 +1869,41 @@
       "min":1
     },
     "MetricStreamState":{"type":"string"},
+    "MetricStreamStatistic":{"type":"string"},
+    "MetricStreamStatisticsAdditionalStatistics":{
+      "type":"list",
+      "member":{"shape":"MetricStreamStatistic"}
+    },
+    "MetricStreamStatisticsConfiguration":{
+      "type":"structure",
+      "required":[
+        "IncludeMetrics",
+        "AdditionalStatistics"
+      ],
+      "members":{
+        "IncludeMetrics":{"shape":"MetricStreamStatisticsIncludeMetrics"},
+        "AdditionalStatistics":{"shape":"MetricStreamStatisticsAdditionalStatistics"}
+      }
+    },
+    "MetricStreamStatisticsConfigurations":{
+      "type":"list",
+      "member":{"shape":"MetricStreamStatisticsConfiguration"}
+    },
+    "MetricStreamStatisticsIncludeMetrics":{
+      "type":"list",
+      "member":{"shape":"MetricStreamStatisticsMetric"}
+    },
+    "MetricStreamStatisticsMetric":{
+      "type":"structure",
+      "required":[
+        "Namespace",
+        "MetricName"
+      ],
+      "members":{
+        "Namespace":{"shape":"Namespace"},
+        "MetricName":{"shape":"MetricName"}
+      }
+    },
     "MetricWidget":{"type":"string"},
     "MetricWidgetImage":{"type":"blob"},
     "Metrics":{
@@ -1930,7 +1991,10 @@
         "AlarmRule":{"shape":"AlarmRule"},
         "InsufficientDataActions":{"shape":"ResourceList"},
         "OKActions":{"shape":"ResourceList"},
-        "Tags":{"shape":"TagList"}
+        "Tags":{"shape":"TagList"},
+        "ActionsSuppressor":{"shape":"AlarmArn"},
+        "ActionsSuppressorWaitPeriod":{"shape":"SuppressorPeriod"},
+        "ActionsSuppressorExtensionPeriod":{"shape":"SuppressorPeriod"}
       }
     },
     "PutDashboardInput":{
@@ -2026,7 +2090,8 @@
         "FirehoseArn":{"shape":"AmazonResourceName"},
         "RoleArn":{"shape":"AmazonResourceName"},
         "OutputFormat":{"shape":"MetricStreamOutputFormat"},
-        "Tags":{"shape":"TagList"}
+        "Tags":{"shape":"TagList"},
+        "StatisticsConfigurations":{"shape":"MetricStreamStatisticsConfigurations"}
       }
     },
     "PutMetricStreamOutput":{
@@ -2241,6 +2306,7 @@
       "type":"integer",
       "min":1
     },
+    "SuppressorPeriod":{"type":"integer"},
     "Tag":{
       "type":"structure",
       "required":[

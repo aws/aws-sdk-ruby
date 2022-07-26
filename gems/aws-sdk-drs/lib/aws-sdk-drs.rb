@@ -28,7 +28,7 @@ require_relative 'aws-sdk-drs/customizations'
 # structure.
 #
 #     drs = Aws::Drs::Client.new
-#     resp = drs.create_replication_configuration_template(params)
+#     resp = drs.create_extended_source_server(params)
 #
 # See {Client} for more information.
 #
@@ -48,6 +48,6 @@ require_relative 'aws-sdk-drs/customizations'
 # @!group service
 module Aws::Drs
 
-  GEM_VERSION = '1.3.0'
+  GEM_VERSION = '1.6.0'
 
 end

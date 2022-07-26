@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.67.0 (2022-05-31)
+------------------
+
+* Feature - Amazon Cognito now supports IP Address propagation for all unauthenticated APIs (e.g. SignUp, ForgotPassword).
+
+1.66.0 (2022-05-24)
+------------------
+
+* Feature - Amazon Cognito now supports requiring attribute verification (ex. email and phone number) before update.
+
+1.65.0 (2022-03-15)
+------------------
+
+* Feature - Updated EmailConfigurationType and SmsConfigurationType to reflect that you can now choose Amazon SES and Amazon SNS resources in the same Region.
+
+1.64.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.63.0 (2022-02-03)
 ------------------
 

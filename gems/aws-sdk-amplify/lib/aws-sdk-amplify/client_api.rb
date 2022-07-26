@@ -165,6 +165,7 @@ module Aws::Amplify
     ProductionBranch = Shapes::StructureShape.new(name: 'ProductionBranch')
     PullRequestEnvironmentName = Shapes::StringShape.new(name: 'PullRequestEnvironmentName')
     Repository = Shapes::StringShape.new(name: 'Repository')
+    RepositoryCloneMethod = Shapes::StringShape.new(name: 'RepositoryCloneMethod')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     Screenshots = Shapes::MapShape.new(name: 'Screenshots')
@@ -245,6 +246,7 @@ module Aws::Amplify
     App.add_member(:enable_auto_branch_creation, Shapes::ShapeRef.new(shape: EnableAutoBranchCreation, location_name: "enableAutoBranchCreation"))
     App.add_member(:auto_branch_creation_patterns, Shapes::ShapeRef.new(shape: AutoBranchCreationPatterns, location_name: "autoBranchCreationPatterns"))
     App.add_member(:auto_branch_creation_config, Shapes::ShapeRef.new(shape: AutoBranchCreationConfig, location_name: "autoBranchCreationConfig"))
+    App.add_member(:repository_clone_method, Shapes::ShapeRef.new(shape: RepositoryCloneMethod, location_name: "repositoryCloneMethod"))
     App.struct_class = Types::App
 
     Apps.member = Shapes::ShapeRef.new(shape: App)
@@ -773,7 +775,7 @@ module Aws::Amplify
     UpdateDomainAssociationRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: AppId, required: true, location: "uri", location_name: "appId"))
     UpdateDomainAssociationRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "domainName"))
     UpdateDomainAssociationRequest.add_member(:enable_auto_sub_domain, Shapes::ShapeRef.new(shape: EnableAutoSubDomain, location_name: "enableAutoSubDomain"))
-    UpdateDomainAssociationRequest.add_member(:sub_domain_settings, Shapes::ShapeRef.new(shape: SubDomainSettings, required: true, location_name: "subDomainSettings"))
+    UpdateDomainAssociationRequest.add_member(:sub_domain_settings, Shapes::ShapeRef.new(shape: SubDomainSettings, location_name: "subDomainSettings"))
     UpdateDomainAssociationRequest.add_member(:auto_sub_domain_creation_patterns, Shapes::ShapeRef.new(shape: AutoSubDomainCreationPatterns, location_name: "autoSubDomainCreationPatterns"))
     UpdateDomainAssociationRequest.add_member(:auto_sub_domain_iam_role, Shapes::ShapeRef.new(shape: AutoSubDomainIAMRole, location_name: "autoSubDomainIAMRole"))
     UpdateDomainAssociationRequest.struct_class = Types::UpdateDomainAssociationRequest

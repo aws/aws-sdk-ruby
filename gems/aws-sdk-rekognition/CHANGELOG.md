@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2022-07-26)
+------------------
+
+* Feature - This release introduces support for the automatic scaling of inference units used by Amazon Rekognition Custom Labels models.
+
+1.68.0 (2022-05-16)
+------------------
+
+* Feature - Documentation updates for Amazon Rekognition.
+
+1.67.0 (2022-04-27)
+------------------
+
+* Feature - This release adds support to configure stream-processor resources for label detections on streaming-videos. UpateStreamProcessor API is also launched with this release, which could be used to update an existing stream-processor.
+
+1.66.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.65.0 (2022-02-03)
 ------------------
 

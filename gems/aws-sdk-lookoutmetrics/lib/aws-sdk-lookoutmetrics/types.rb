@@ -33,6 +33,7 @@ module Aws::LookoutMetrics
     #         sns_configuration: {
     #           role_arn: "Arn", # required
     #           sns_topic_arn: "Arn", # required
+    #           sns_format: "LONG_TEXT", # accepts LONG_TEXT, SHORT_TEXT, JSON
     #         },
     #         lambda_configuration: {
     #           role_arn: "Arn", # required
@@ -122,6 +123,11 @@ module Aws::LookoutMetrics
     #   The time at which the alert was created.
     #   @return [Time]
     #
+    # @!attribute [rw] alert_filters
+    #   The configuration of the alert filters, containing MetricList and
+    #   DimensionFilter.
+    #   @return [Types::AlertFilters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/Alert AWS API Documentation
     #
     class Alert < Struct.new(
@@ -134,7 +140,41 @@ module Aws::LookoutMetrics
       :alert_type,
       :alert_status,
       :last_modification_time,
-      :creation_time)
+      :creation_time,
+      :alert_filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration of the alert filters.
+    #
+    # @note When making an API call, you may pass AlertFilters
+    #   data as a hash:
+    #
+    #       {
+    #         metric_list: ["MetricName"],
+    #         dimension_filter_list: [
+    #           {
+    #             dimension_name: "ColumnName",
+    #             dimension_value_list: ["DimensionValue"],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] metric_list
+    #   The list of measures that you want to get alerts for.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dimension_filter_list
+    #   The list of DimensionFilter objects that are used for
+    #   dimension-based filtering.
+    #   @return [Array<Types::DimensionFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/AlertFilters AWS API Documentation
+    #
+    class AlertFilters < Struct.new(
+      :metric_list,
+      :dimension_filter_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -465,6 +505,156 @@ module Aws::LookoutMetrics
       include Aws::Structure
     end
 
+    # Details about an Amazon Athena datasource.
+    #
+    # @note When making an API call, you may pass AthenaSourceConfig
+    #   data as a hash:
+    #
+    #       {
+    #         role_arn: "Arn",
+    #         database_name: "AthenaDatabaseName",
+    #         data_catalog: "AthenaDataCatalog",
+    #         table_name: "AthenaTableName",
+    #         work_group_name: "AthenaWorkGroupName",
+    #         s3_results_path: "AthenaS3ResultsPath",
+    #         back_test_configuration: {
+    #           run_back_test_mode: false, # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] role_arn
+    #   An IAM role that gives Amazon Lookout for Metrics permission to
+    #   access the data.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The database's name.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_catalog
+    #   The database's data catalog.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The database's table name.
+    #   @return [String]
+    #
+    # @!attribute [rw] work_group_name
+    #   The database's work group name.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_results_path
+    #   The database's results path.
+    #   @return [String]
+    #
+    # @!attribute [rw] back_test_configuration
+    #   Settings for backtest mode.
+    #   @return [Types::BackTestConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/AthenaSourceConfig AWS API Documentation
+    #
+    class AthenaSourceConfig < Struct.new(
+      :role_arn,
+      :database_name,
+      :data_catalog,
+      :table_name,
+      :work_group_name,
+      :s3_results_path,
+      :back_test_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An attribute value.
+    #
+    # @!attribute [rw] s
+    #   A string.
+    #   @return [String]
+    #
+    # @!attribute [rw] n
+    #   A number.
+    #   @return [String]
+    #
+    # @!attribute [rw] b
+    #   A binary value.
+    #   @return [String]
+    #
+    # @!attribute [rw] ss
+    #   A list of strings.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ns
+    #   A list of numbers.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] bs
+    #   A list of binary values.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/AttributeValue AWS API Documentation
+    #
+    class AttributeValue < Struct.new(
+      :s,
+      :n,
+      :b,
+      :ss,
+      :ns,
+      :bs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An auto detection metric source.
+    #
+    # @note When making an API call, you may pass AutoDetectionMetricSource
+    #   data as a hash:
+    #
+    #       {
+    #         s3_source_config: {
+    #           templated_path_list: ["TemplatedPath"],
+    #           historical_data_path_list: ["HistoricalDataPath"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] s3_source_config
+    #   The source's source config.
+    #   @return [Types::AutoDetectionS3SourceConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/AutoDetectionMetricSource AWS API Documentation
+    #
+    class AutoDetectionMetricSource < Struct.new(
+      :s3_source_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An auto detection source config.
+    #
+    # @note When making an API call, you may pass AutoDetectionS3SourceConfig
+    #   data as a hash:
+    #
+    #       {
+    #         templated_path_list: ["TemplatedPath"],
+    #         historical_data_path_list: ["HistoricalDataPath"],
+    #       }
+    #
+    # @!attribute [rw] templated_path_list
+    #   The config's templated path list.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] historical_data_path_list
+    #   The config's historical data path list.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/AutoDetectionS3SourceConfig AWS API Documentation
+    #
+    class AutoDetectionS3SourceConfig < Struct.new(
+      :templated_path_list,
+      :historical_data_path_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass BackTestAnomalyDetectorRequest
     #   data as a hash:
     #
@@ -488,6 +678,27 @@ module Aws::LookoutMetrics
     #
     class BackTestAnomalyDetectorResponse < Aws::EmptyStructure; end
 
+    # Settings for backtest mode.
+    #
+    # @note When making an API call, you may pass BackTestConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         run_back_test_mode: false, # required
+    #       }
+    #
+    # @!attribute [rw] run_back_test_mode
+    #   Run a backtest instead of monitoring new data.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/BackTestConfiguration AWS API Documentation
+    #
+    class BackTestConfiguration < Struct.new(
+      :run_back_test_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about an Amazon CloudWatch datasource.
     #
     # @note When making an API call, you may pass CloudWatchConfig
@@ -495,6 +706,9 @@ module Aws::LookoutMetrics
     #
     #       {
     #         role_arn: "Arn",
+    #         back_test_configuration: {
+    #           run_back_test_mode: false, # required
+    #         },
     #       }
     #
     # @!attribute [rw] role_arn
@@ -502,10 +716,15 @@ module Aws::LookoutMetrics
     #   access data in Amazon CloudWatch.
     #   @return [String]
     #
+    # @!attribute [rw] back_test_configuration
+    #   Settings for backtest mode.
+    #   @return [Types::BackTestConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/CloudWatchConfig AWS API Documentation
     #
     class CloudWatchConfig < Struct.new(
-      :role_arn)
+      :role_arn,
+      :back_test_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -552,13 +771,14 @@ module Aws::LookoutMetrics
     #
     #       {
     #         alert_name: "AlertName", # required
-    #         alert_sensitivity_threshold: 1, # required
+    #         alert_sensitivity_threshold: 1,
     #         alert_description: "AlertDescription",
     #         anomaly_detector_arn: "Arn", # required
     #         action: { # required
     #           sns_configuration: {
     #             role_arn: "Arn", # required
     #             sns_topic_arn: "Arn", # required
+    #             sns_format: "LONG_TEXT", # accepts LONG_TEXT, SHORT_TEXT, JSON
     #           },
     #           lambda_configuration: {
     #             role_arn: "Arn", # required
@@ -567,6 +787,15 @@ module Aws::LookoutMetrics
     #         },
     #         tags: {
     #           "TagKey" => "TagValue",
+    #         },
+    #         alert_filters: {
+    #           metric_list: ["MetricName"],
+    #           dimension_filter_list: [
+    #             {
+    #               dimension_name: "ColumnName",
+    #               dimension_value_list: ["DimensionValue"],
+    #             },
+    #           ],
     #         },
     #       }
     #
@@ -598,6 +827,11 @@ module Aws::LookoutMetrics
     #   [1]: https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] alert_filters
+    #   The configuration of the alert filters, containing MetricList and
+    #   DimensionFilterList.
+    #   @return [Types::AlertFilters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/CreateAlertRequest AWS API Documentation
     #
     class CreateAlertRequest < Struct.new(
@@ -606,7 +840,8 @@ module Aws::LookoutMetrics
       :alert_description,
       :anomaly_detector_arn,
       :action,
-      :tags)
+      :tags,
+      :alert_filters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -734,6 +969,9 @@ module Aws::LookoutMetrics
     #           },
     #           cloud_watch_config: {
     #             role_arn: "Arn",
+    #             back_test_configuration: {
+    #               run_back_test_mode: false, # required
+    #             },
     #           },
     #           rds_source_config: {
     #             db_instance_identifier: "RDSDatabaseIdentifier",
@@ -759,6 +997,17 @@ module Aws::LookoutMetrics
     #             vpc_configuration: {
     #               subnet_id_list: ["SubnetId"], # required
     #               security_group_id_list: ["SecurityGroupId"], # required
+    #             },
+    #           },
+    #           athena_source_config: {
+    #             role_arn: "Arn",
+    #             database_name: "AthenaDatabaseName",
+    #             data_catalog: "AthenaDataCatalog",
+    #             table_name: "AthenaTableName",
+    #             work_group_name: "AthenaWorkGroupName",
+    #             s3_results_path: "AthenaS3ResultsPath",
+    #             back_test_configuration: {
+    #               run_back_test_mode: false, # required
     #             },
     #           },
     #         },
@@ -1227,6 +1476,201 @@ module Aws::LookoutMetrics
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DetectMetricSetConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         anomaly_detector_arn: "Arn", # required
+    #         auto_detection_metric_source: { # required
+    #           s3_source_config: {
+    #             templated_path_list: ["TemplatedPath"],
+    #             historical_data_path_list: ["HistoricalDataPath"],
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] anomaly_detector_arn
+    #   An anomaly detector ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_detection_metric_source
+    #   A data source.
+    #   @return [Types::AutoDetectionMetricSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/DetectMetricSetConfigRequest AWS API Documentation
+    #
+    class DetectMetricSetConfigRequest < Struct.new(
+      :anomaly_detector_arn,
+      :auto_detection_metric_source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] detected_metric_set_config
+    #   The inferred dataset configuration for the datasource.
+    #   @return [Types::DetectedMetricSetConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/DetectMetricSetConfigResponse AWS API Documentation
+    #
+    class DetectMetricSetConfigResponse < Struct.new(
+      :detected_metric_set_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Properties of an inferred CSV format.
+    #
+    # @!attribute [rw] file_compression
+    #   The format's file compression.
+    #   @return [Types::DetectedField]
+    #
+    # @!attribute [rw] charset
+    #   The format's charset.
+    #   @return [Types::DetectedField]
+    #
+    # @!attribute [rw] contains_header
+    #   Whether the format includes a header.
+    #   @return [Types::DetectedField]
+    #
+    # @!attribute [rw] delimiter
+    #   The format's delimiter.
+    #   @return [Types::DetectedField]
+    #
+    # @!attribute [rw] header_list
+    #   The format's header list.
+    #   @return [Types::DetectedField]
+    #
+    # @!attribute [rw] quote_symbol
+    #   The format's quote symbol.
+    #   @return [Types::DetectedField]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/DetectedCsvFormatDescriptor AWS API Documentation
+    #
+    class DetectedCsvFormatDescriptor < Struct.new(
+      :file_compression,
+      :charset,
+      :contains_header,
+      :delimiter,
+      :header_list,
+      :quote_symbol)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An inferred field.
+    #
+    # @!attribute [rw] value
+    #   The field's value.
+    #   @return [Types::AttributeValue]
+    #
+    # @!attribute [rw] confidence
+    #   The field's confidence.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The field's message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/DetectedField AWS API Documentation
+    #
+    class DetectedField < Struct.new(
+      :value,
+      :confidence,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Properties of an inferred data format.
+    #
+    # @!attribute [rw] csv_format_descriptor
+    #   Details about a CSV format.
+    #   @return [Types::DetectedCsvFormatDescriptor]
+    #
+    # @!attribute [rw] json_format_descriptor
+    #   Details about a JSON format.
+    #   @return [Types::DetectedJsonFormatDescriptor]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/DetectedFileFormatDescriptor AWS API Documentation
+    #
+    class DetectedFileFormatDescriptor < Struct.new(
+      :csv_format_descriptor,
+      :json_format_descriptor)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A detected JSON format descriptor.
+    #
+    # @!attribute [rw] file_compression
+    #   The format's file compression.
+    #   @return [Types::DetectedField]
+    #
+    # @!attribute [rw] charset
+    #   The format's character set.
+    #   @return [Types::DetectedField]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/DetectedJsonFormatDescriptor AWS API Documentation
+    #
+    class DetectedJsonFormatDescriptor < Struct.new(
+      :file_compression,
+      :charset)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An inferred dataset configuration.
+    #
+    # @!attribute [rw] offset
+    #   The dataset's offset.
+    #   @return [Types::DetectedField]
+    #
+    # @!attribute [rw] metric_set_frequency
+    #   The dataset's interval.
+    #   @return [Types::DetectedField]
+    #
+    # @!attribute [rw] metric_source
+    #   The dataset's data source.
+    #   @return [Types::DetectedMetricSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/DetectedMetricSetConfig AWS API Documentation
+    #
+    class DetectedMetricSetConfig < Struct.new(
+      :offset,
+      :metric_set_frequency,
+      :metric_source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An inferred data source.
+    #
+    # @!attribute [rw] s3_source_config
+    #   The data source's source configuration.
+    #   @return [Types::DetectedS3SourceConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/DetectedMetricSource AWS API Documentation
+    #
+    class DetectedMetricSource < Struct.new(
+      :s3_source_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An inferred source configuration.
+    #
+    # @!attribute [rw] file_format_descriptor
+    #   The source's file format descriptor.
+    #   @return [Types::DetectedFileFormatDescriptor]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/DetectedS3SourceConfig AWS API Documentation
+    #
+    class DetectedS3SourceConfig < Struct.new(
+      :file_format_descriptor)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about a dimension that contributed to an anomaly.
     #
     # @!attribute [rw] dimension_name
@@ -1242,6 +1686,34 @@ module Aws::LookoutMetrics
     class DimensionContribution < Struct.new(
       :dimension_name,
       :dimension_value_contribution_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The dimension filter, containing DimensionName and DimensionValueList.
+    #
+    # @note When making an API call, you may pass DimensionFilter
+    #   data as a hash:
+    #
+    #       {
+    #         dimension_name: "ColumnName",
+    #         dimension_value_list: ["DimensionValue"],
+    #       }
+    #
+    # @!attribute [rw] dimension_name
+    #   The name of the dimension to filter on.
+    #   @return [String]
+    #
+    # @!attribute [rw] dimension_value_list
+    #   The list of values for the dimension specified in DimensionName that
+    #   you want to filter on.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/DimensionFilter AWS API Documentation
+    #
+    class DimensionFilter < Struct.new(
+      :dimension_name,
+      :dimension_value_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2105,7 +2577,7 @@ module Aws::LookoutMetrics
       include Aws::Structure
     end
 
-    # Contains information about source data used to generate a metric.
+    # Contains information about source data used to generate metrics.
     #
     # @note When making an API call, you may pass MetricSource
     #   data as a hash:
@@ -2136,6 +2608,9 @@ module Aws::LookoutMetrics
     #         },
     #         cloud_watch_config: {
     #           role_arn: "Arn",
+    #           back_test_configuration: {
+    #             run_back_test_mode: false, # required
+    #           },
     #         },
     #         rds_source_config: {
     #           db_instance_identifier: "RDSDatabaseIdentifier",
@@ -2163,6 +2638,17 @@ module Aws::LookoutMetrics
     #             security_group_id_list: ["SecurityGroupId"], # required
     #           },
     #         },
+    #         athena_source_config: {
+    #           role_arn: "Arn",
+    #           database_name: "AthenaDatabaseName",
+    #           data_catalog: "AthenaDataCatalog",
+    #           table_name: "AthenaTableName",
+    #           work_group_name: "AthenaWorkGroupName",
+    #           s3_results_path: "AthenaS3ResultsPath",
+    #           back_test_configuration: {
+    #             run_back_test_mode: false, # required
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] s3_source_config
@@ -2171,23 +2657,25 @@ module Aws::LookoutMetrics
     #   @return [Types::S3SourceConfig]
     #
     # @!attribute [rw] app_flow_config
-    #   An object containing information about the AppFlow configuration.
+    #   Details about an AppFlow datasource.
     #   @return [Types::AppFlowConfig]
     #
     # @!attribute [rw] cloud_watch_config
-    #   An object containing information about the Amazon CloudWatch
-    #   monitoring configuration.
+    #   Details about an Amazon CloudWatch monitoring datasource.
     #   @return [Types::CloudWatchConfig]
     #
     # @!attribute [rw] rds_source_config
-    #   An object containing information about the Amazon Relational
-    #   Database Service (RDS) configuration.
+    #   Details about an Amazon Relational Database Service (RDS)
+    #   datasource.
     #   @return [Types::RDSSourceConfig]
     #
     # @!attribute [rw] redshift_source_config
-    #   An object containing information about the Amazon Redshift database
-    #   configuration.
+    #   Details about an Amazon Redshift database datasource.
     #   @return [Types::RedshiftSourceConfig]
+    #
+    # @!attribute [rw] athena_source_config
+    #   Details about an Amazon Athena datasource.
+    #   @return [Types::AthenaSourceConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/MetricSource AWS API Documentation
     #
@@ -2196,7 +2684,8 @@ module Aws::LookoutMetrics
       :app_flow_config,
       :cloud_watch_config,
       :rds_source_config,
-      :redshift_source_config)
+      :redshift_source_config,
+      :athena_source_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2457,6 +2946,7 @@ module Aws::LookoutMetrics
     #       {
     #         role_arn: "Arn", # required
     #         sns_topic_arn: "Arn", # required
+    #         sns_format: "LONG_TEXT", # accepts LONG_TEXT, SHORT_TEXT, JSON
     #       }
     #
     # @!attribute [rw] role_arn
@@ -2467,11 +2957,26 @@ module Aws::LookoutMetrics
     #   The ARN of the target SNS topic.
     #   @return [String]
     #
+    # @!attribute [rw] sns_format
+    #   The format of the SNS topic.
+    #
+    #   * `JSON` – Send JSON alerts with an anomaly ID and a link to the
+    #     anomaly detail page. This is the default.
+    #
+    #   * `LONG_TEXT` – Send human-readable alerts with information about
+    #     the impacted timeseries and a link to the anomaly detail page. We
+    #     recommend this for email.
+    #
+    #   * `SHORT_TEXT` – Send human-readable alerts with a link to the
+    #     anomaly detail page. We recommend this for SMS.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/SNSConfiguration AWS API Documentation
     #
     class SNSConfiguration < Struct.new(
       :role_arn,
-      :sns_topic_arn)
+      :sns_topic_arn,
+      :sns_format)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2710,6 +3215,80 @@ module Aws::LookoutMetrics
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass UpdateAlertRequest
+    #   data as a hash:
+    #
+    #       {
+    #         alert_arn: "Arn", # required
+    #         alert_description: "AlertDescription",
+    #         alert_sensitivity_threshold: 1,
+    #         action: {
+    #           sns_configuration: {
+    #             role_arn: "Arn", # required
+    #             sns_topic_arn: "Arn", # required
+    #             sns_format: "LONG_TEXT", # accepts LONG_TEXT, SHORT_TEXT, JSON
+    #           },
+    #           lambda_configuration: {
+    #             role_arn: "Arn", # required
+    #             lambda_arn: "Arn", # required
+    #           },
+    #         },
+    #         alert_filters: {
+    #           metric_list: ["MetricName"],
+    #           dimension_filter_list: [
+    #             {
+    #               dimension_name: "ColumnName",
+    #               dimension_value_list: ["DimensionValue"],
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] alert_arn
+    #   The ARN of the alert to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] alert_description
+    #   A description of the alert.
+    #   @return [String]
+    #
+    # @!attribute [rw] alert_sensitivity_threshold
+    #   An integer from 0 to 100 specifying the alert sensitivity threshold.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] action
+    #   Action that will be triggered when there is an alert.
+    #   @return [Types::Action]
+    #
+    # @!attribute [rw] alert_filters
+    #   The configuration of the alert filters, containing MetricList and
+    #   DimensionFilterList.
+    #   @return [Types::AlertFilters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/UpdateAlertRequest AWS API Documentation
+    #
+    class UpdateAlertRequest < Struct.new(
+      :alert_arn,
+      :alert_description,
+      :alert_sensitivity_threshold,
+      :action,
+      :alert_filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] alert_arn
+    #   The ARN of the updated alert.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/UpdateAlertResponse AWS API Documentation
+    #
+    class UpdateAlertResponse < Struct.new(
+      :alert_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateAnomalyDetectorRequest
     #   data as a hash:
     #
@@ -2808,6 +3387,9 @@ module Aws::LookoutMetrics
     #           },
     #           cloud_watch_config: {
     #             role_arn: "Arn",
+    #             back_test_configuration: {
+    #               run_back_test_mode: false, # required
+    #             },
     #           },
     #           rds_source_config: {
     #             db_instance_identifier: "RDSDatabaseIdentifier",
@@ -2833,6 +3415,17 @@ module Aws::LookoutMetrics
     #             vpc_configuration: {
     #               subnet_id_list: ["SubnetId"], # required
     #               security_group_id_list: ["SecurityGroupId"], # required
+    #             },
+    #           },
+    #           athena_source_config: {
+    #             role_arn: "Arn",
+    #             database_name: "AthenaDatabaseName",
+    #             data_catalog: "AthenaDataCatalog",
+    #             table_name: "AthenaTableName",
+    #             work_group_name: "AthenaWorkGroupName",
+    #             s3_results_path: "AthenaS3ResultsPath",
+    #             back_test_configuration: {
+    #               run_back_test_mode: false, # required
     #             },
     #           },
     #         },
@@ -2869,7 +3462,7 @@ module Aws::LookoutMetrics
     #   @return [String]
     #
     # @!attribute [rw] metric_source
-    #   Contains information about source data used to generate a metric.
+    #   Contains information about source data used to generate metrics.
     #   @return [Types::MetricSource]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/UpdateMetricSetRequest AWS API Documentation

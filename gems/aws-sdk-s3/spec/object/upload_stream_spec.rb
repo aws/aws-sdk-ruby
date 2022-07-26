@@ -71,34 +71,34 @@ module Aws
         it 'uploads the correct parts' do
           client.stub_responses(:create_multipart_upload, upload_id: 'id')
           client.stub_responses(:complete_multipart_upload)
-          expect(client).to receive(:upload_part).with(
+          expect(client).to receive(:upload_part).with({
             bucket: 'bucket',
             key: 'key',
             upload_id: 'id',
             body: instance_of(StringIO),
             part_number: 1
-          ).once.and_return(double(:upload_part, etag: 'etag'))
-          expect(client).to receive(:upload_part).with(
+          }).once.and_return(double(:upload_part, etag: 'etag'))
+          expect(client).to receive(:upload_part).with({
             bucket: 'bucket',
             key: 'key',
             upload_id: 'id',
             body: instance_of(StringIO),
             part_number: 2
-          ).once.and_return(double(:upload_part, etag: 'etag'))
-          expect(client).to receive(:upload_part).with(
+          }).once.and_return(double(:upload_part, etag: 'etag'))
+          expect(client).to receive(:upload_part).with({
             bucket: 'bucket',
             key: 'key',
             upload_id: 'id',
             body: instance_of(StringIO),
             part_number: 3
-          ).once.and_return(double(:upload_part, etag: 'etag'))
-          expect(client).to receive(:upload_part).with(
+          }).once.and_return(double(:upload_part, etag: 'etag'))
+          expect(client).to receive(:upload_part).with({
             bucket: 'bucket',
             key: 'key',
             upload_id: 'id',
             body: instance_of(StringIO),
             part_number: 4
-          ).once.and_return(double(:upload_part, etag: 'etag'))
+          }).once.and_return(double(:upload_part, etag: 'etag'))
           object.upload_stream do |write_stream|
             write_stream << seventeen_mb
           end
@@ -107,34 +107,34 @@ module Aws
         it 'uploads the correct parts when input is chunked' do
           client.stub_responses(:create_multipart_upload, upload_id: 'id')
           client.stub_responses(:complete_multipart_upload)
-          expect(client).to receive(:upload_part).with(
+          expect(client).to receive(:upload_part).with({
             bucket: 'bucket',
             key: 'key',
             upload_id: 'id',
             body: instance_of(StringIO),
             part_number: 1
-          ).once.and_return(double(:upload_part, etag: 'etag'))
-          expect(client).to receive(:upload_part).with(
+          }).once.and_return(double(:upload_part, etag: 'etag'))
+          expect(client).to receive(:upload_part).with({
             bucket: 'bucket',
             key: 'key',
             upload_id: 'id',
             body: instance_of(StringIO),
             part_number: 2
-          ).once.and_return(double(:upload_part, etag: 'etag'))
-          expect(client).to receive(:upload_part).with(
+          }).once.and_return(double(:upload_part, etag: 'etag'))
+          expect(client).to receive(:upload_part).with({
             bucket: 'bucket',
             key: 'key',
             upload_id: 'id',
             body: instance_of(StringIO),
             part_number: 3
-          ).once.and_return(double(:upload_part, etag: 'etag'))
-          expect(client).to receive(:upload_part).with(
+          }).once.and_return(double(:upload_part, etag: 'etag'))
+          expect(client).to receive(:upload_part).with({
             bucket: 'bucket',
             key: 'key',
             upload_id: 'id',
             body: instance_of(StringIO),
             part_number: 4
-          ).once.and_return(double(:upload_part, etag: 'etag'))
+          }).once.and_return(double(:upload_part, etag: 'etag'))
           object.upload_stream do |write_stream|
             17.times { write_stream << one_mb }
           end
@@ -143,27 +143,27 @@ module Aws
         it 'uploads correct parts when chunked with custom part_size' do
           client.stub_responses(:create_multipart_upload, upload_id: 'id')
           client.stub_responses(:complete_multipart_upload)
-          expect(client).to receive(:upload_part).with(
+          expect(client).to receive(:upload_part).with({
             bucket: 'bucket',
             key: 'key',
             upload_id: 'id',
             body: instance_of(StringIO),
             part_number: 1
-          ).once.and_return(double(:upload_part, etag: 'etag'))
-          expect(client).to receive(:upload_part).with(
+          }).once.and_return(double(:upload_part, etag: 'etag'))
+          expect(client).to receive(:upload_part).with({
             bucket: 'bucket',
             key: 'key',
             upload_id: 'id',
             body: instance_of(StringIO),
             part_number: 2
-          ).once.and_return(double(:upload_part, etag: 'etag'))
-          expect(client).to receive(:upload_part).with(
+          }).once.and_return(double(:upload_part, etag: 'etag'))
+          expect(client).to receive(:upload_part).with({
             bucket: 'bucket',
             key: 'key',
             upload_id: 'id',
             body: instance_of(StringIO),
             part_number: 3
-          ).once.and_return(double(:upload_part, etag: 'etag'))
+          }).once.and_return(double(:upload_part, etag: 'etag'))
           object.upload_stream(part_size: 7 * 1024 * 1024) do |write_stream|
             17.times { write_stream << one_mb }
           end
@@ -302,34 +302,34 @@ module Aws
           it 'uploads the correct parts' do
             client.stub_responses(:create_multipart_upload, upload_id: 'id')
             client.stub_responses(:complete_multipart_upload)
-            expect(client).to receive(:upload_part).with(
+            expect(client).to receive(:upload_part).with({
               bucket: 'bucket',
               key: 'key',
               upload_id: 'id',
               body: instance_of(Tempfile),
               part_number: 1
-            ).once.and_return(double(:upload_part, etag: 'etag'))
-            expect(client).to receive(:upload_part).with(
+            }).once.and_return(double(:upload_part, etag: 'etag'))
+            expect(client).to receive(:upload_part).with({
               bucket: 'bucket',
               key: 'key',
               upload_id: 'id',
               body: instance_of(Tempfile),
               part_number: 2
-            ).once.and_return(double(:upload_part, etag: 'etag'))
-            expect(client).to receive(:upload_part).with(
+            }).once.and_return(double(:upload_part, etag: 'etag'))
+            expect(client).to receive(:upload_part).with({
               bucket: 'bucket',
               key: 'key',
               upload_id: 'id',
               body: instance_of(Tempfile),
               part_number: 3
-            ).once.and_return(double(:upload_part, etag: 'etag'))
-            expect(client).to receive(:upload_part).with(
+            }).once.and_return(double(:upload_part, etag: 'etag'))
+            expect(client).to receive(:upload_part).with({
               bucket: 'bucket',
               key: 'key',
               upload_id: 'id',
               body: instance_of(Tempfile),
               part_number: 4
-            ).once.and_return(double(:upload_part, etag: 'etag'))
+            }).once.and_return(double(:upload_part, etag: 'etag'))
             object.upload_stream(tempfile: true) do |write_stream|
               write_stream << seventeen_mb
             end
@@ -338,34 +338,34 @@ module Aws
           it 'uploads the correct parts when input is chunked' do
             client.stub_responses(:create_multipart_upload, upload_id: 'id')
             client.stub_responses(:complete_multipart_upload)
-            expect(client).to receive(:upload_part).with(
+            expect(client).to receive(:upload_part).with({
               bucket: 'bucket',
               key: 'key',
               upload_id: 'id',
               body: instance_of(Tempfile),
               part_number: 1
-            ).once.and_return(double(:upload_part, etag: 'etag'))
-            expect(client).to receive(:upload_part).with(
+            }).once.and_return(double(:upload_part, etag: 'etag'))
+            expect(client).to receive(:upload_part).with({
               bucket: 'bucket',
               key: 'key',
               upload_id: 'id',
               body: instance_of(Tempfile),
               part_number: 2
-            ).once.and_return(double(:upload_part, etag: 'etag'))
-            expect(client).to receive(:upload_part).with(
+            }).once.and_return(double(:upload_part, etag: 'etag'))
+            expect(client).to receive(:upload_part).with({
               bucket: 'bucket',
               key: 'key',
               upload_id: 'id',
               body: instance_of(Tempfile),
               part_number: 3
-            ).once.and_return(double(:upload_part, etag: 'etag'))
-            expect(client).to receive(:upload_part).with(
+            }).once.and_return(double(:upload_part, etag: 'etag'))
+            expect(client).to receive(:upload_part).with({
               bucket: 'bucket',
               key: 'key',
               upload_id: 'id',
               body: instance_of(Tempfile),
               part_number: 4
-            ).once.and_return(double(:upload_part, etag: 'etag'))
+            }).once.and_return(double(:upload_part, etag: 'etag'))
             object.upload_stream(tempfile: true) do |write_stream|
               17.times { write_stream << one_mb }
             end

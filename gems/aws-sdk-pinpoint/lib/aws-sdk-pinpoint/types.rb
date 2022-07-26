@@ -1930,13 +1930,18 @@ module Aws::Pinpoint
     #   required tag key and an associated tag value.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] creation_date
+    #   The date and time when the Application was created.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ApplicationResponse AWS API Documentation
     #
     class ApplicationResponse < Struct.new(
       :arn,
       :id,
       :name,
-      :tags)
+      :tags,
+      :creation_date)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2022-05-13)
+------------------
+
+* Feature - This release adds APIs for creating and deleting API keys in an Amazon Managed Grafana workspace.
+
+1.7.0 (2022-03-31)
+------------------
+
+* Feature - This release adds tagging support to the Managed Grafana service. New APIs: TagResource, UntagResource and ListTagsForResource. Updates: add optional field tags to support tagging while calling CreateWorkspace.
+
+1.6.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.5.0 (2022-02-03)
 ------------------
 

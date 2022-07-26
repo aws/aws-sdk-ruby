@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2022-07-18)
+------------------
+
+* Feature - Added support for the SM2 KeySpec in China Partition Regions
+
+1.57.0 (2022-05-17)
+------------------
+
+* Feature - Add HMAC best practice tip, annual rotation of AWS managed keys.
+
+1.56.0 (2022-04-19)
+------------------
+
+* Feature - Adds support for KMS keys and APIs that generate and verify HMAC codes
+
+1.55.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.54.0 (2022-02-03)
 ------------------
 

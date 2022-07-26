@@ -826,6 +826,156 @@ module Aws::KinesisVideoArchivedMedia
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetImagesInput
+    #   data as a hash:
+    #
+    #       {
+    #         stream_name: "StreamName",
+    #         stream_arn: "ResourceARN",
+    #         image_selector_type: "PRODUCER_TIMESTAMP", # required, accepts PRODUCER_TIMESTAMP, SERVER_TIMESTAMP
+    #         start_timestamp: Time.now, # required
+    #         end_timestamp: Time.now, # required
+    #         sampling_interval: 1, # required
+    #         format: "JPEG", # required, accepts JPEG, PNG
+    #         format_config: {
+    #           "JPEGQuality" => "FormatConfigValue",
+    #         },
+    #         width_pixels: 1,
+    #         height_pixels: 1,
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] stream_name
+    #   The name of the stream from which to retrieve the images. You must
+    #   specify either the `StreamName` or the `StreamARN`.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_arn
+    #   The Amazon Resource Name (ARN) of the stream from which to retrieve
+    #   the images. You must specify either the `StreamName` or the
+    #   `StreamARN`.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_selector_type
+    #   The origin of the Server or Producer timestamps to use to generate
+    #   the images.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_timestamp
+    #   The starting point from which the images should be generated. This
+    #   `StartTimestamp` must be within an inclusive range of timestamps for
+    #   an image to be returned.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_timestamp
+    #   The end timestamp for the range of images to be generated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] sampling_interval
+    #   The time interval in milliseconds (ms) at which the images need to
+    #   be generated from the stream. The minimum value that can be provided
+    #   is 3000 ms. If the timestamp range is less than the sampling
+    #   interval, the Image from the `startTimestamp` will be returned if
+    #   available.
+    #
+    #   <note markdown="1"> The minimum value of 3000 ms is a soft limit. If needed, a lower
+    #   sampling frequency can be requested.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
+    # @!attribute [rw] format
+    #   The format that will be used to encode the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] format_config
+    #   The list of a key-value pair structure that contains extra
+    #   parameters that can be applied when the image is generated. The
+    #   `FormatConfig` key is the `JPEGQuality`, which indicates the JPEG
+    #   quality key to be used to generate the image. The `FormatConfig`
+    #   value accepts ints from 1 to 100. If the value is 1, the image will
+    #   be generated with less quality and the best compression. If the
+    #   value is 100, the image will be generated with the best quality and
+    #   less compression. If no value is provided, the default value of the
+    #   `JPEGQuality` key will be set to 80.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] width_pixels
+    #   The width of the output image that is used in conjunction with the
+    #   `HeightPixels` parameter. When both `WidthPixels` and `HeightPixels`
+    #   parameters are provided, the image will be stretched to fit the
+    #   specified aspect ratio. If only the `WidthPixels` parameter is
+    #   provided or if only the `HeightPixels` is provided, a
+    #   `ValidationException` will be thrown. If neither parameter is
+    #   provided, the original image size from the stream will be returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] height_pixels
+    #   The height of the output image that is used in conjunction with the
+    #   `WidthPixels` parameter. When both `HeightPixels` and `WidthPixels`
+    #   parameters are provided, the image will be stretched to fit the
+    #   specified aspect ratio. If only the `HeightPixels` parameter is
+    #   provided, its original aspect ratio will be used to calculate the
+    #   `WidthPixels` ratio. If neither parameter is provided, the original
+    #   image size will be returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of images to be returned by the API.
+    #
+    #   <note markdown="1"> The default limit is 100 images per API response. The additional
+    #   results will be paginated.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token that specifies where to start paginating the next set of
+    #   Images. This is the `GetImages:NextToken` from a previously
+    #   truncated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/GetImagesInput AWS API Documentation
+    #
+    class GetImagesInput < Struct.new(
+      :stream_name,
+      :stream_arn,
+      :image_selector_type,
+      :start_timestamp,
+      :end_timestamp,
+      :sampling_interval,
+      :format,
+      :format_config,
+      :width_pixels,
+      :height_pixels,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] images
+    #   The list of images generated from the video stream. If there is no
+    #   media available for the given timestamp, the `NO_MEDIA` error will
+    #   be listed in the output. If an error occurs while the image is being
+    #   generated, the `MEDIA_ERROR` will be listed in the output as the
+    #   cause of the missing image.
+    #   @return [Array<Types::Image>]
+    #
+    # @!attribute [rw] next_token
+    #   The encrypted token that was used in the request to get more images.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/GetImagesOutput AWS API Documentation
+    #
+    class GetImagesOutput < Struct.new(
+      :images,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetMediaForFragmentListInput
     #   data as a hash:
     #
@@ -1018,6 +1168,46 @@ module Aws::KinesisVideoArchivedMedia
     class HLSTimestampRange < Struct.new(
       :start_timestamp,
       :end_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that contains the `Timestamp`, `Error`, and
+    # `ImageContent`.
+    #
+    # @!attribute [rw] time_stamp
+    #   An attribute of the `Image` object that is used to extract an image
+    #   from the video stream. This field is used to manage gaps on images
+    #   or to better understand the pagination window.
+    #   @return [Time]
+    #
+    # @!attribute [rw] error
+    #   The error message shown when the image for the provided timestamp
+    #   was not extracted due to a non-tryable error. An error will be
+    #   returned if:
+    #
+    #   * There is no media that exists for the specified `Timestamp`.
+    #
+    #   ^
+    #   ^
+    #
+    #   * The media for the specified time does not allow an image to be
+    #     extracted. In this case the media is audio only, or the incorrect
+    #     media has been ingested.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] image_content
+    #   An attribute of the `Image` object that is Base64 encoded.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/Image AWS API Documentation
+    #
+    class Image < Struct.new(
+      :time_stamp,
+      :error,
+      :image_content)
       SENSITIVE = []
       include Aws::Structure
     end

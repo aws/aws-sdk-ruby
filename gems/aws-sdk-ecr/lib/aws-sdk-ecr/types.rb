@@ -1954,6 +1954,21 @@ module Aws::ECR
     #   The artifact media type of the image.
     #   @return [String]
     #
+    # @!attribute [rw] last_recorded_pull_time
+    #   The date and time, expressed in standard JavaScript date format,
+    #   when Amazon ECR recorded the last image pull.
+    #
+    #   <note markdown="1"> Amazon ECR refreshes the last image pull timestamp at least once
+    #   every 24 hours. For example, if you pull an image once a day then
+    #   the `lastRecordedPullTime` timestamp will indicate the exact time
+    #   that the image was last pulled. However, if you pull an image once
+    #   an hour, because Amazon ECR refreshes the `lastRecordedPullTime`
+    #   timestamp at least once every 24 hours, the result may not be the
+    #   exact time that the image was last pulled.
+    #
+    #    </note>
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ImageDetail AWS API Documentation
     #
     class ImageDetail < Struct.new(
@@ -1966,7 +1981,8 @@ module Aws::ECR
       :image_scan_status,
       :image_scan_findings_summary,
       :image_manifest_media_type,
-      :artifact_media_type)
+      :artifact_media_type,
+      :last_recorded_pull_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3208,14 +3224,17 @@ module Aws::ECR
     # @!attribute [rw] scan_type
     #   The scanning type to set for the registry.
     #
-    #   By default, the `BASIC` scan type is used. When basic scanning is
-    #   set, you may specify filters to determine which individual
-    #   repositories, or all repositories, are scanned when new images are
-    #   pushed. Alternatively, you can do manual scans of images with basic
-    #   scanning.
+    #   When a registry scanning configuration is not defined, by default
+    #   the `BASIC` scan type is used. When basic scanning is used, you may
+    #   specify filters to determine which individual repositories, or all
+    #   repositories, are scanned when new images are pushed to those
+    #   repositories. Alternatively, you can do manual scans of images with
+    #   basic scanning.
     #
     #   When the `ENHANCED` scan type is set, Amazon Inspector provides
-    #   automated, continuous scanning of all repositories in your registry.
+    #   automated vulnerability scanning. You may choose between continuous
+    #   scanning or scan on push and you may specify filters to determine
+    #   which individual repositories, or all repositories, are scanned.
     #   @return [String]
     #
     # @!attribute [rw] rules
@@ -3375,6 +3394,10 @@ module Aws::ECR
     #
     # @!attribute [rw] scan_frequency
     #   The frequency that scans are performed at for a private registry.
+    #   When the `ENHANCED` scan type is specified, the supported scan
+    #   frequencies are `CONTINUOUS_SCAN` and `SCAN_ON_PUSH`. When the
+    #   `BASIC` scan type is specified, the `SCAN_ON_PUSH` and `MANUAL` scan
+    #   frequencies are supported.
     #   @return [String]
     #
     # @!attribute [rw] repository_filters
@@ -3786,7 +3809,13 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # The details of a scanning repository filter.
+    # The details of a scanning repository filter. For more information on
+    # how to use filters, see [Using filters][1] in the *Amazon Elastic
+    # Container Registry User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html#image-scanning-filters
     #
     # @note When making an API call, you may pass ScanningRepositoryFilter
     #   data as a hash:
@@ -4038,10 +4067,10 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # The metadata that you apply to a resource to help you categorize and
-    # organize them. Each tag consists of a key and an optional value, both
-    # of which you define. Tag keys can have a maximum character length of
-    # 128 characters, and tag values can have a maximum length of 256
+    # The metadata to apply to a resource to help you categorize and
+    # organize them. Each tag consists of a key and a value, both of which
+    # you define. Tag keys can have a maximum character length of 128
+    # characters, and tag values can have a maximum length of 256
     # characters.
     #
     # @note When making an API call, you may pass Tag
@@ -4059,8 +4088,7 @@ module Aws::ECR
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The optional part of a key-value pair that make up a tag. A `value`
-    #   acts as a descriptor within a tag category (key).
+    #   A `value` acts as a descriptor within a tag category (key).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/Tag AWS API Documentation

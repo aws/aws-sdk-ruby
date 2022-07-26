@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::Glue
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -813,6 +815,42 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Retrieves the details for the custom patterns specified by a list of
+    # names.
+    #
+    # @option params [required, Array<String>] :names
+    #   A list of names of the custom patterns that you want to retrieve.
+    #
+    # @return [Types::BatchGetCustomEntityTypesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetCustomEntityTypesResponse#custom_entity_types #custom_entity_types} => Array&lt;Types::CustomEntityType&gt;
+    #   * {Types::BatchGetCustomEntityTypesResponse#custom_entity_types_not_found #custom_entity_types_not_found} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_custom_entity_types({
+    #     names: ["NameString"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.custom_entity_types #=> Array
+    #   resp.custom_entity_types[0].name #=> String
+    #   resp.custom_entity_types[0].regex_string #=> String
+    #   resp.custom_entity_types[0].context_words #=> Array
+    #   resp.custom_entity_types[0].context_words[0] #=> String
+    #   resp.custom_entity_types_not_found #=> Array
+    #   resp.custom_entity_types_not_found[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetCustomEntityTypes AWS API Documentation
+    #
+    # @overload batch_get_custom_entity_types(params = {})
+    # @param [Hash] params ({})
+    def batch_get_custom_entity_types(params = {}, options = {})
+      req = build_request(:batch_get_custom_entity_types, params)
+      req.send_request(options)
+    end
+
     # Returns a list of resource metadata for a given list of development
     # endpoint names. After calling the `ListDevEndpoints` operation, you
     # can call this operation to access the data to which you have been
@@ -847,7 +885,7 @@ module Aws::Glue
     #   resp.dev_endpoints[0].zeppelin_remote_spark_interpreter_port #=> Integer
     #   resp.dev_endpoints[0].public_address #=> String
     #   resp.dev_endpoints[0].status #=> String
-    #   resp.dev_endpoints[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.dev_endpoints[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
     #   resp.dev_endpoints[0].glue_version #=> String
     #   resp.dev_endpoints[0].number_of_workers #=> Integer
     #   resp.dev_endpoints[0].number_of_nodes #=> Integer
@@ -921,11 +959,491 @@ module Aws::Glue
     #   resp.jobs[0].allocated_capacity #=> Integer
     #   resp.jobs[0].timeout #=> Integer
     #   resp.jobs[0].max_capacity #=> Float
-    #   resp.jobs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.jobs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
     #   resp.jobs[0].number_of_workers #=> Integer
     #   resp.jobs[0].security_configuration #=> String
     #   resp.jobs[0].notification_property.notify_delay_after #=> Integer
     #   resp.jobs[0].glue_version #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].athena_connector_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].athena_connector_source.connection_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].athena_connector_source.connector_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].athena_connector_source.connection_type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].athena_connector_source.connection_table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].athena_connector_source.schema_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].athena_connector_source.output_schemas #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].athena_connector_source.output_schemas[0].columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].athena_connector_source.output_schemas[0].columns[0].name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].athena_connector_source.output_schemas[0].columns[0].type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_source.connection_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_source.connector_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_source.connection_type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_source.additional_options.filter_predicate #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_source.additional_options.partition_column #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_source.additional_options.lower_bound #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_source.additional_options.upper_bound #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_source.additional_options.num_partitions #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_source.additional_options.job_bookmark_keys #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_source.additional_options.job_bookmark_keys[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_source.additional_options.job_bookmark_keys_sort_order #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_source.additional_options.data_type_mapping #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_source.additional_options.data_type_mapping["JDBCDataType"] #=> String, one of "DATE", "STRING", "TIMESTAMP", "INT", "FLOAT", "LONG", "BIGDECIMAL", "BYTE", "SHORT", "DOUBLE"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_source.connection_table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_source.query #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_source.output_schemas #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_source.output_schemas[0].columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_source.output_schemas[0].columns[0].name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_source.output_schemas[0].columns[0].type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_connector_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_connector_source.connection_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_connector_source.connector_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_connector_source.connection_type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_connector_source.additional_options #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_connector_source.additional_options["EnclosedInStringProperty"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_connector_source.output_schemas #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_connector_source.output_schemas[0].columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_connector_source.output_schemas[0].columns[0].name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_connector_source.output_schemas[0].columns[0].type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_source.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_source.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].redshift_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].redshift_source.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].redshift_source.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].redshift_source.redshift_tmp_dir #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].redshift_source.tmp_dir_iam_role #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_source.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_source.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_source.partition_predicate #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_source.additional_options.bounded_size #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_source.additional_options.bounded_files #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.paths #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.paths[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.compression_type #=> String, one of "gzip", "bzip2"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.exclusions #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.exclusions[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.group_size #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.group_files #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.recurse #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.max_band #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.max_files_in_band #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.additional_options.bounded_size #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.additional_options.bounded_files #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.additional_options.enable_sample_path #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.additional_options.sample_path #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.separator #=> String, one of "comma", "ctrla", "pipe", "semicolon", "tab"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.escaper #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.quote_char #=> String, one of "quote", "quillemet", "single_quote", "disabled"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.multiline #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.with_header #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.write_header #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.skip_first #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.optimize_performance #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.output_schemas #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.output_schemas[0].columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.output_schemas[0].columns[0].name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.output_schemas[0].columns[0].type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.paths #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.paths[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.compression_type #=> String, one of "gzip", "bzip2"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.exclusions #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.exclusions[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.group_size #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.group_files #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.recurse #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.max_band #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.max_files_in_band #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.additional_options.bounded_size #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.additional_options.bounded_files #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.additional_options.enable_sample_path #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.additional_options.sample_path #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.json_path #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.multiline #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.output_schemas #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.output_schemas[0].columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.output_schemas[0].columns[0].name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.output_schemas[0].columns[0].type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.paths #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.paths[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.compression_type #=> String, one of "snappy", "lzo", "gzip", "uncompressed", "none"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.exclusions #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.exclusions[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.group_size #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.group_files #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.recurse #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.max_band #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.max_files_in_band #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.additional_options.bounded_size #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.additional_options.bounded_files #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.additional_options.enable_sample_path #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.additional_options.sample_path #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.output_schemas #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.output_schemas[0].columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.output_schemas[0].columns[0].name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.output_schemas[0].columns[0].type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].relational_catalog_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].relational_catalog_source.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].relational_catalog_source.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamo_db_catalog_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamo_db_catalog_source.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamo_db_catalog_source.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_target.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_target.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_target.connection_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_target.connection_table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_target.connector_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_target.connection_type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_target.additional_options #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_target.additional_options["EnclosedInStringProperty"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_target.output_schemas #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_target.output_schemas[0].columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_target.output_schemas[0].columns[0].name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_target.output_schemas[0].columns[0].type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_connector_target.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_connector_target.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_connector_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_connector_target.connection_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_connector_target.connector_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_connector_target.connection_type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_connector_target.additional_options #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_connector_target.additional_options["EnclosedInStringProperty"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_connector_target.output_schemas #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_connector_target.output_schemas[0].columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_connector_target.output_schemas[0].columns[0].name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_connector_target.output_schemas[0].columns[0].type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_target.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_target.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_target.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_target.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].redshift_target.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].redshift_target.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].redshift_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].redshift_target.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].redshift_target.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].redshift_target.redshift_tmp_dir #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].redshift_target.tmp_dir_iam_role #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].redshift_target.upsert_redshift_options.table_location #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].redshift_target.upsert_redshift_options.connection_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].redshift_target.upsert_redshift_options.upsert_keys #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].redshift_target.upsert_redshift_options.upsert_keys[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_target.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_target.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_target.partition_keys #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_target.partition_keys[0] #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_target.partition_keys[0][0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_target.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_target.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_target.schema_change_policy.enable_update_catalog #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.partition_keys #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.partition_keys[0] #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.partition_keys[0][0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.path #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.compression #=> String, one of "snappy", "lzo", "gzip", "uncompressed", "none"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.schema_change_policy.enable_update_catalog #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.schema_change_policy.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.schema_change_policy.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.partition_keys #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.partition_keys[0] #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.partition_keys[0][0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.path #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.compression #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.schema_change_policy.enable_update_catalog #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.schema_change_policy.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.schema_change_policy.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].apply_mapping.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].apply_mapping.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].apply_mapping.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].apply_mapping.mapping #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].apply_mapping.mapping[0].to_key #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].apply_mapping.mapping[0].from_path #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].apply_mapping.mapping[0].from_path[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].apply_mapping.mapping[0].from_type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].apply_mapping.mapping[0].to_type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].apply_mapping.mapping[0].dropped #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].apply_mapping.mapping[0].children #=> Types::Mappings
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].select_fields.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].select_fields.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].select_fields.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].select_fields.paths #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].select_fields.paths[0] #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].select_fields.paths[0][0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_fields.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_fields.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_fields.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_fields.paths #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_fields.paths[0] #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_fields.paths[0][0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].rename_field.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].rename_field.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].rename_field.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].rename_field.source_path #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].rename_field.source_path[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].rename_field.target_path #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].rename_field.target_path[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spigot.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spigot.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spigot.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spigot.path #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spigot.topk #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spigot.prob #=> Float
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].join.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].join.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].join.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].join.join_type #=> String, one of "equijoin", "left", "right", "outer", "leftsemi", "leftanti"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].join.columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].join.columns[0].from #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].join.columns[0].keys #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].join.columns[0].keys[0] #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].join.columns[0].keys[0][0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].split_fields.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].split_fields.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].split_fields.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].split_fields.paths #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].split_fields.paths[0] #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].split_fields.paths[0][0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].select_from_collection.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].select_from_collection.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].select_from_collection.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].select_from_collection.index #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].fill_missing_values.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].fill_missing_values.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].fill_missing_values.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].fill_missing_values.imputed_path #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].fill_missing_values.filled_path #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].filter.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].filter.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].filter.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].filter.logical_operator #=> String, one of "AND", "OR"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].filter.filters #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].filter.filters[0].operation #=> String, one of "EQ", "LT", "GT", "LTE", "GTE", "REGEX", "ISNULL"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].filter.filters[0].negated #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].filter.filters[0].values #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].filter.filters[0].values[0].type #=> String, one of "COLUMNEXTRACTED", "CONSTANT"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].filter.filters[0].values[0].value #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].filter.filters[0].values[0].value[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].custom_code.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].custom_code.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].custom_code.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].custom_code.code #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].custom_code.class_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].custom_code.output_schemas #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].custom_code.output_schemas[0].columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].custom_code.output_schemas[0].columns[0].name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].custom_code.output_schemas[0].columns[0].type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_sql.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_sql.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_sql.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_sql.sql_query #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_sql.sql_aliases #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_sql.sql_aliases[0].from #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_sql.sql_aliases[0].alias #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_sql.output_schemas #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_sql.output_schemas[0].columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_sql.output_schemas[0].columns[0].name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_sql.output_schemas[0].columns[0].type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.window_size #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.detect_schema #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.endpoint_url #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.stream_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.classification #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.delimiter #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.starting_position #=> String, one of "latest", "trim_horizon", "earliest"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.max_fetch_time_in_ms #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.max_fetch_records_per_shard #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.max_record_per_read #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.add_idle_time_between_reads #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.idle_time_between_reads_in_ms #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.describe_shard_interval #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.num_retries #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.retry_interval_ms #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.max_retry_interval_ms #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.avoid_empty_batches #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.stream_arn #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.role_arn #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.role_session_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.data_preview_options.polling_time #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.data_preview_options.record_polling_limit #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.bootstrap_servers #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.security_protocol #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.connection_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.topic_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.assign #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.subscribe_pattern #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.classification #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.delimiter #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.starting_offsets #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.ending_offsets #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.poll_timeout_ms #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.num_retries #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.retry_interval_ms #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.max_offsets_per_trigger #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.min_partitions #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.window_size #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.detect_schema #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.data_preview_options.polling_time #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.data_preview_options.record_polling_limit #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.window_size #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.detect_schema #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.endpoint_url #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.stream_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.classification #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.delimiter #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.starting_position #=> String, one of "latest", "trim_horizon", "earliest"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.max_fetch_time_in_ms #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.max_fetch_records_per_shard #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.max_record_per_read #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.add_idle_time_between_reads #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.idle_time_between_reads_in_ms #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.describe_shard_interval #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.num_retries #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.retry_interval_ms #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.max_retry_interval_ms #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.avoid_empty_batches #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.stream_arn #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.role_arn #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.role_session_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.data_preview_options.polling_time #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.data_preview_options.record_polling_limit #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.window_size #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.detect_schema #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.bootstrap_servers #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.security_protocol #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.connection_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.topic_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.assign #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.subscribe_pattern #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.classification #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.delimiter #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.starting_offsets #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.ending_offsets #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.poll_timeout_ms #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.num_retries #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.retry_interval_ms #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.max_offsets_per_trigger #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.min_partitions #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.data_preview_options.polling_time #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.data_preview_options.record_polling_limit #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_null_fields.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_null_fields.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_null_fields.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_null_fields.null_check_box_list.is_empty #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_null_fields.null_check_box_list.is_null_string #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_null_fields.null_check_box_list.is_neg_one #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_null_fields.null_text_list #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_null_fields.null_text_list[0].value #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_null_fields.null_text_list[0].datatype.id #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_null_fields.null_text_list[0].datatype.label #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].merge.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].merge.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].merge.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].merge.source #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].merge.primary_keys #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].merge.primary_keys[0] #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].merge.primary_keys[0][0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].union.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].union.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].union.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].union.union_type #=> String, one of "ALL", "DISTINCT"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].pii_detection.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].pii_detection.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].pii_detection.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].pii_detection.pii_type #=> String, one of "RowAudit", "RowMasking", "ColumnAudit", "ColumnMasking"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].pii_detection.entity_types_to_detect #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].pii_detection.entity_types_to_detect[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].pii_detection.output_column_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].pii_detection.sample_fraction #=> Float
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].pii_detection.threshold_fraction #=> Float
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].pii_detection.mask_value #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].aggregate.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].aggregate.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].aggregate.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].aggregate.groups #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].aggregate.groups[0] #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].aggregate.groups[0][0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].aggregate.aggs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].aggregate.aggs[0].column #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].aggregate.aggs[0].column[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].aggregate.aggs[0].agg_func #=> String, one of "avg", "countDistinct", "count", "first", "last", "kurtosis", "max", "min", "skewness", "stddev_samp", "stddev_pop", "sum", "sumDistinct", "var_samp", "var_pop"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_duplicates.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_duplicates.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_duplicates.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_duplicates.columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_duplicates.columns[0] #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_duplicates.columns[0][0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].governed_catalog_target.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].governed_catalog_target.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].governed_catalog_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].governed_catalog_target.partition_keys #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].governed_catalog_target.partition_keys[0] #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].governed_catalog_target.partition_keys[0][0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].governed_catalog_target.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].governed_catalog_target.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].governed_catalog_target.schema_change_policy.enable_update_catalog #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].governed_catalog_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].governed_catalog_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].governed_catalog_source.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].governed_catalog_source.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].governed_catalog_source.partition_predicate #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].governed_catalog_source.additional_options.bounded_size #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].governed_catalog_source.additional_options.bounded_files #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].microsoft_sql_server_catalog_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].microsoft_sql_server_catalog_source.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].microsoft_sql_server_catalog_source.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].my_sql_catalog_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].my_sql_catalog_source.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].my_sql_catalog_source.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].oracle_sql_catalog_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].oracle_sql_catalog_source.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].oracle_sql_catalog_source.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_source.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_source.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].microsoft_sql_server_catalog_target.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].microsoft_sql_server_catalog_target.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].microsoft_sql_server_catalog_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].microsoft_sql_server_catalog_target.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].microsoft_sql_server_catalog_target.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].my_sql_catalog_target.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].my_sql_catalog_target.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].my_sql_catalog_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].my_sql_catalog_target.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].my_sql_catalog_target.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].oracle_sql_catalog_target.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].oracle_sql_catalog_target.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].oracle_sql_catalog_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].oracle_sql_catalog_target.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].oracle_sql_catalog_target.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_target.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_target.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_target.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_target.table #=> String
     #   resp.jobs_not_found #=> Array
     #   resp.jobs_not_found[0] #=> String
     #
@@ -1192,12 +1710,13 @@ module Aws::Glue
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].execution_time #=> Integer
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].timeout #=> Integer
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].max_capacity #=> Float
-    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].number_of_workers #=> Integer
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].security_configuration #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].notification_property.notify_delay_after #=> Integer
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].glue_version #=> String
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].dpu_seconds #=> Float
     #   resp.workflows[0].last_run.graph.nodes[0].crawler_details.crawls #=> Array
     #   resp.workflows[0].last_run.graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
     #   resp.workflows[0].last_run.graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
@@ -1258,12 +1777,13 @@ module Aws::Glue
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].execution_time #=> Integer
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].timeout #=> Integer
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].max_capacity #=> Float
-    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].number_of_workers #=> Integer
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].security_configuration #=> String
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].notification_property.notify_delay_after #=> Integer
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].glue_version #=> String
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].dpu_seconds #=> Float
     #   resp.workflows[0].graph.nodes[0].crawler_details.crawls #=> Array
     #   resp.workflows[0].graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
     #   resp.workflows[0].graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
@@ -1479,6 +1999,36 @@ module Aws::Glue
     # @param [Hash] params ({})
     def cancel_ml_task_run(params = {}, options = {})
       req = build_request(:cancel_ml_task_run, params)
+      req.send_request(options)
+    end
+
+    # Cancels the statement.
+    #
+    # @option params [required, String] :session_id
+    #   The Session ID of the statement to be cancelled.
+    #
+    # @option params [required, Integer] :id
+    #   The ID of the statement to be cancelled.
+    #
+    # @option params [String] :request_origin
+    #   The origin of the request to cancel the statement.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_statement({
+    #     session_id: "NameString", # required
+    #     id: 1, # required
+    #     request_origin: "OrchestrationNameString",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CancelStatement AWS API Documentation
+    #
+    # @overload cancel_statement(params = {})
+    # @param [Hash] params ({})
+    def cancel_statement(params = {}, options = {})
+      req = build_request(:cancel_statement, params)
       req.send_request(options)
     end
 
@@ -1715,6 +2265,7 @@ module Aws::Glue
     #   Specifies data lineage configuration settings for the crawler.
     #
     # @option params [Types::LakeFormationConfiguration] :lake_formation_configuration
+    #   Specifies Lake Formation configuration settings for the crawler.
     #
     # @option params [String] :configuration
     #   Crawler configuration information. This versioned JSON string allows
@@ -1827,6 +2378,54 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Creates a custom pattern that is used to detect sensitive data across
+    # the columns and rows of your structured data.
+    #
+    # Each custom pattern you create specifies a regular expression and an
+    # optional list of context words. If no context words are passed only a
+    # regular expression is checked.
+    #
+    # @option params [required, String] :name
+    #   A name for the custom pattern that allows it to be retrieved or
+    #   deleted later. This name must be unique per Amazon Web Services
+    #   account.
+    #
+    # @option params [required, String] :regex_string
+    #   A regular expression string that is used for detecting sensitive data
+    #   in a custom pattern.
+    #
+    # @option params [Array<String>] :context_words
+    #   A list of context words. If none of these context words are found
+    #   within the vicinity of the regular expression the data will not be
+    #   detected as sensitive data.
+    #
+    #   If no context words are passed only a regular expression is checked.
+    #
+    # @return [Types::CreateCustomEntityTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCustomEntityTypeResponse#name #name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_custom_entity_type({
+    #     name: "NameString", # required
+    #     regex_string: "NameString", # required
+    #     context_words: ["NameString"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateCustomEntityType AWS API Documentation
+    #
+    # @overload create_custom_entity_type(params = {})
+    # @param [Hash] params ({})
+    def create_custom_entity_type(params = {}, options = {})
+      req = build_request(:create_custom_entity_type, params)
+      req.send_request(options)
+    end
+
     # Creates a new database in a Data Catalog.
     #
     # @option params [String] :catalog_id
@@ -1835,6 +2434,9 @@ module Aws::Glue
     #
     # @option params [required, Types::DatabaseInput] :database_input
     #   The metadata for the database.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags you assign to the database.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1861,6 +2463,9 @@ module Aws::Glue
     #         catalog_id: "CatalogIdString",
     #         database_name: "NameString",
     #       },
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
     #     },
     #   })
     #
@@ -2025,7 +2630,7 @@ module Aws::Glue
     #     public_key: "GenericString",
     #     public_keys: ["GenericString"],
     #     number_of_nodes: 1,
-    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X
+    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X
     #     glue_version: "GlueVersionString",
     #     number_of_workers: 1,
     #     extra_python_libs_s3_path: "GenericString",
@@ -2050,7 +2655,7 @@ module Aws::Glue
     #   resp.yarn_endpoint_address #=> String
     #   resp.zeppelin_remote_spark_interpreter_port #=> Integer
     #   resp.number_of_nodes #=> Integer
-    #   resp.worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
     #   resp.glue_version #=> String
     #   resp.number_of_workers #=> Integer
     #   resp.availability_zone #=> String
@@ -2101,6 +2706,11 @@ module Aws::Glue
     #   You can specify arguments here that your own job-execution script
     #   consumes, as well as arguments that Glue itself consumes.
     #
+    #   Job arguments may be logged. Do not pass plaintext secrets as
+    #   arguments. Retrieve secrets from a Glue Connection, Secrets Manager or
+    #   other secret management mechanism if you intend to keep them within
+    #   the Job.
+    #
     #   For information about how to specify and consume your own Job
     #   arguments, see the [Calling Glue APIs in Python][1] topic in the
     #   developer guide.
@@ -2127,7 +2737,7 @@ module Aws::Glue
     #   This parameter is deprecated. Use `MaxCapacity` instead.
     #
     #   The number of Glue data processing units (DPUs) to allocate to this
-    #   Job. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is
+    #   Job. You can allocate a minimum of 2 DPUs; the default is 10. A DPU is
     #   a relative measure of processing power that consists of 4 vCPUs of
     #   compute capacity and 16 GB of memory. For more information, see the
     #   [Glue pricing page][1].
@@ -2159,8 +2769,8 @@ module Aws::Glue
     #
     #   * When you specify an Apache Spark ETL job
     #     (`JobCommand.Name`="glueetl") or Apache Spark streaming ETL job
-    #     (`JobCommand.Name`="gluestreaming"), you can allocate from 2 to
-    #     100 DPUs. The default is 10 DPUs. This job type cannot have a
+    #     (`JobCommand.Name`="gluestreaming"), you can allocate a minimum of
+    #     2 DPUs. The default is 10 DPUs. This job type cannot have a
     #     fractional DPU allocation.
     #
     #   For Glue version 2.0 jobs, you cannot instead specify a `Maximum
@@ -2207,12 +2817,9 @@ module Aws::Glue
     #   The number of workers of a defined `workerType` that are allocated
     #   when a job runs.
     #
-    #   The maximum number of workers you can define are 299 for `G.1X`, and
-    #   149 for `G.2X`.
-    #
     # @option params [String] :worker_type
     #   The type of predefined worker that is allocated when a job runs.
-    #   Accepts a value of Standard, G.1X, or G.2X.
+    #   Accepts a value of Standard, G.1X, G.2X, or G.025X.
     #
     #   * For the `Standard` worker type, each worker provides 4 vCPU, 16 GB
     #     of memory and a 50GB disk, and 2 executors per worker.
@@ -2224,6 +2831,15 @@ module Aws::Glue
     #   * For the `G.2X` worker type, each worker maps to 2 DPU (8 vCPU, 32 GB
     #     of memory, 128 GB disk), and provides 1 executor per worker. We
     #     recommend this worker type for memory-intensive jobs.
+    #
+    #   * For the `G.025X` worker type, each worker maps to 0.25 DPU (2 vCPU,
+    #     4 GB of memory, 64 GB disk), and provides 1 executor per worker. We
+    #     recommend this worker type for low volume streaming jobs. This
+    #     worker type is only available for Glue version 3.0 streaming jobs.
+    #
+    # @option params [Hash<String,Types::CodeGenConfigurationNode>] :code_gen_configuration_nodes
+    #   The representation of a directed acyclic graph on which both the Glue
+    #   Studio visual component and Glue Studio code generation is based.
     #
     # @return [Types::CreateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2266,7 +2882,675 @@ module Aws::Glue
     #     },
     #     glue_version: "GlueVersionString",
     #     number_of_workers: 1,
-    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X
+    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X
+    #     code_gen_configuration_nodes: {
+    #       "NodeId" => {
+    #         athena_connector_source: {
+    #           name: "NodeName", # required
+    #           connection_name: "EnclosedInStringProperty", # required
+    #           connector_name: "EnclosedInStringProperty", # required
+    #           connection_type: "EnclosedInStringProperty", # required
+    #           connection_table: "EnclosedInStringPropertyWithQuote",
+    #           schema_name: "EnclosedInStringProperty", # required
+    #           output_schemas: [
+    #             {
+    #               columns: [
+    #                 {
+    #                   name: "GlueStudioColumnNameString", # required
+    #                   type: "ColumnTypeString",
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         jdbc_connector_source: {
+    #           name: "NodeName", # required
+    #           connection_name: "EnclosedInStringProperty", # required
+    #           connector_name: "EnclosedInStringProperty", # required
+    #           connection_type: "EnclosedInStringProperty", # required
+    #           additional_options: {
+    #             filter_predicate: "EnclosedInStringProperty",
+    #             partition_column: "EnclosedInStringProperty",
+    #             lower_bound: 1,
+    #             upper_bound: 1,
+    #             num_partitions: 1,
+    #             job_bookmark_keys: ["EnclosedInStringProperty"],
+    #             job_bookmark_keys_sort_order: "EnclosedInStringProperty",
+    #             data_type_mapping: {
+    #               "ARRAY" => "DATE", # accepts DATE, STRING, TIMESTAMP, INT, FLOAT, LONG, BIGDECIMAL, BYTE, SHORT, DOUBLE
+    #             },
+    #           },
+    #           connection_table: "EnclosedInStringPropertyWithQuote",
+    #           query: "SqlQuery",
+    #           output_schemas: [
+    #             {
+    #               columns: [
+    #                 {
+    #                   name: "GlueStudioColumnNameString", # required
+    #                   type: "ColumnTypeString",
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         spark_connector_source: {
+    #           name: "NodeName", # required
+    #           connection_name: "EnclosedInStringProperty", # required
+    #           connector_name: "EnclosedInStringProperty", # required
+    #           connection_type: "EnclosedInStringProperty", # required
+    #           additional_options: {
+    #             "EnclosedInStringProperty" => "EnclosedInStringProperty",
+    #           },
+    #           output_schemas: [
+    #             {
+    #               columns: [
+    #                 {
+    #                   name: "GlueStudioColumnNameString", # required
+    #                   type: "ColumnTypeString",
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         catalog_source: {
+    #           name: "NodeName", # required
+    #           database: "EnclosedInStringProperty", # required
+    #           table: "EnclosedInStringProperty", # required
+    #         },
+    #         redshift_source: {
+    #           name: "NodeName", # required
+    #           database: "EnclosedInStringProperty", # required
+    #           table: "EnclosedInStringProperty", # required
+    #           redshift_tmp_dir: "EnclosedInStringProperty",
+    #           tmp_dir_iam_role: "EnclosedInStringProperty",
+    #         },
+    #         s3_catalog_source: {
+    #           name: "NodeName", # required
+    #           database: "EnclosedInStringProperty", # required
+    #           table: "EnclosedInStringProperty", # required
+    #           partition_predicate: "EnclosedInStringProperty",
+    #           additional_options: {
+    #             bounded_size: 1,
+    #             bounded_files: 1,
+    #           },
+    #         },
+    #         s3_csv_source: {
+    #           name: "NodeName", # required
+    #           paths: ["EnclosedInStringProperty"], # required
+    #           compression_type: "gzip", # accepts gzip, bzip2
+    #           exclusions: ["EnclosedInStringProperty"],
+    #           group_size: "EnclosedInStringProperty",
+    #           group_files: "EnclosedInStringProperty",
+    #           recurse: false,
+    #           max_band: 1,
+    #           max_files_in_band: 1,
+    #           additional_options: {
+    #             bounded_size: 1,
+    #             bounded_files: 1,
+    #             enable_sample_path: false,
+    #             sample_path: "EnclosedInStringProperty",
+    #           },
+    #           separator: "comma", # required, accepts comma, ctrla, pipe, semicolon, tab
+    #           escaper: "EnclosedInStringPropertyWithQuote",
+    #           quote_char: "quote", # required, accepts quote, quillemet, single_quote, disabled
+    #           multiline: false,
+    #           with_header: false,
+    #           write_header: false,
+    #           skip_first: false,
+    #           optimize_performance: false,
+    #           output_schemas: [
+    #             {
+    #               columns: [
+    #                 {
+    #                   name: "GlueStudioColumnNameString", # required
+    #                   type: "ColumnTypeString",
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         s3_json_source: {
+    #           name: "NodeName", # required
+    #           paths: ["EnclosedInStringProperty"], # required
+    #           compression_type: "gzip", # accepts gzip, bzip2
+    #           exclusions: ["EnclosedInStringProperty"],
+    #           group_size: "EnclosedInStringProperty",
+    #           group_files: "EnclosedInStringProperty",
+    #           recurse: false,
+    #           max_band: 1,
+    #           max_files_in_band: 1,
+    #           additional_options: {
+    #             bounded_size: 1,
+    #             bounded_files: 1,
+    #             enable_sample_path: false,
+    #             sample_path: "EnclosedInStringProperty",
+    #           },
+    #           json_path: "EnclosedInStringProperty",
+    #           multiline: false,
+    #           output_schemas: [
+    #             {
+    #               columns: [
+    #                 {
+    #                   name: "GlueStudioColumnNameString", # required
+    #                   type: "ColumnTypeString",
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         s3_parquet_source: {
+    #           name: "NodeName", # required
+    #           paths: ["EnclosedInStringProperty"], # required
+    #           compression_type: "snappy", # accepts snappy, lzo, gzip, uncompressed, none
+    #           exclusions: ["EnclosedInStringProperty"],
+    #           group_size: "EnclosedInStringProperty",
+    #           group_files: "EnclosedInStringProperty",
+    #           recurse: false,
+    #           max_band: 1,
+    #           max_files_in_band: 1,
+    #           additional_options: {
+    #             bounded_size: 1,
+    #             bounded_files: 1,
+    #             enable_sample_path: false,
+    #             sample_path: "EnclosedInStringProperty",
+    #           },
+    #           output_schemas: [
+    #             {
+    #               columns: [
+    #                 {
+    #                   name: "GlueStudioColumnNameString", # required
+    #                   type: "ColumnTypeString",
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         relational_catalog_source: {
+    #           name: "NodeName", # required
+    #           database: "EnclosedInStringProperty", # required
+    #           table: "EnclosedInStringProperty", # required
+    #         },
+    #         dynamo_db_catalog_source: {
+    #           name: "NodeName", # required
+    #           database: "EnclosedInStringProperty", # required
+    #           table: "EnclosedInStringProperty", # required
+    #         },
+    #         jdbc_connector_target: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           connection_name: "EnclosedInStringProperty", # required
+    #           connection_table: "EnclosedInStringPropertyWithQuote", # required
+    #           connector_name: "EnclosedInStringProperty", # required
+    #           connection_type: "EnclosedInStringProperty", # required
+    #           additional_options: {
+    #             "EnclosedInStringProperty" => "EnclosedInStringProperty",
+    #           },
+    #           output_schemas: [
+    #             {
+    #               columns: [
+    #                 {
+    #                   name: "GlueStudioColumnNameString", # required
+    #                   type: "ColumnTypeString",
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         spark_connector_target: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           connection_name: "EnclosedInStringProperty", # required
+    #           connector_name: "EnclosedInStringProperty", # required
+    #           connection_type: "EnclosedInStringProperty", # required
+    #           additional_options: {
+    #             "EnclosedInStringProperty" => "EnclosedInStringProperty",
+    #           },
+    #           output_schemas: [
+    #             {
+    #               columns: [
+    #                 {
+    #                   name: "GlueStudioColumnNameString", # required
+    #                   type: "ColumnTypeString",
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         catalog_target: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           database: "EnclosedInStringProperty", # required
+    #           table: "EnclosedInStringProperty", # required
+    #         },
+    #         redshift_target: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           database: "EnclosedInStringProperty", # required
+    #           table: "EnclosedInStringProperty", # required
+    #           redshift_tmp_dir: "EnclosedInStringProperty",
+    #           tmp_dir_iam_role: "EnclosedInStringProperty",
+    #           upsert_redshift_options: {
+    #             table_location: "EnclosedInStringProperty",
+    #             connection_name: "EnclosedInStringProperty",
+    #             upsert_keys: ["EnclosedInStringProperty"],
+    #           },
+    #         },
+    #         s3_catalog_target: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           partition_keys: [
+    #             ["EnclosedInStringProperty"],
+    #           ],
+    #           table: "EnclosedInStringProperty", # required
+    #           database: "EnclosedInStringProperty", # required
+    #           schema_change_policy: {
+    #             enable_update_catalog: false,
+    #             update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
+    #           },
+    #         },
+    #         s3_glue_parquet_target: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           partition_keys: [
+    #             ["EnclosedInStringProperty"],
+    #           ],
+    #           path: "EnclosedInStringProperty", # required
+    #           compression: "snappy", # accepts snappy, lzo, gzip, uncompressed, none
+    #           schema_change_policy: {
+    #             enable_update_catalog: false,
+    #             update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
+    #             table: "EnclosedInStringProperty",
+    #             database: "EnclosedInStringProperty",
+    #           },
+    #         },
+    #         s3_direct_target: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           partition_keys: [
+    #             ["EnclosedInStringProperty"],
+    #           ],
+    #           path: "EnclosedInStringProperty", # required
+    #           compression: "EnclosedInStringProperty",
+    #           format: "json", # required, accepts json, csv, avro, orc, parquet
+    #           schema_change_policy: {
+    #             enable_update_catalog: false,
+    #             update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
+    #             table: "EnclosedInStringProperty",
+    #             database: "EnclosedInStringProperty",
+    #           },
+    #         },
+    #         apply_mapping: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           mapping: [ # required
+    #             {
+    #               to_key: "EnclosedInStringProperty",
+    #               from_path: ["EnclosedInStringProperty"],
+    #               from_type: "EnclosedInStringProperty",
+    #               to_type: "EnclosedInStringProperty",
+    #               dropped: false,
+    #               children: {
+    #                 # recursive Mappings
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         select_fields: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           paths: [ # required
+    #             ["EnclosedInStringProperty"],
+    #           ],
+    #         },
+    #         drop_fields: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           paths: [ # required
+    #             ["EnclosedInStringProperty"],
+    #           ],
+    #         },
+    #         rename_field: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           source_path: ["EnclosedInStringProperty"], # required
+    #           target_path: ["EnclosedInStringProperty"], # required
+    #         },
+    #         spigot: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           path: "EnclosedInStringProperty", # required
+    #           topk: 1,
+    #           prob: 1.0,
+    #         },
+    #         join: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           join_type: "equijoin", # required, accepts equijoin, left, right, outer, leftsemi, leftanti
+    #           columns: [ # required
+    #             {
+    #               from: "EnclosedInStringProperty", # required
+    #               keys: [ # required
+    #                 ["EnclosedInStringProperty"],
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         split_fields: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           paths: [ # required
+    #             ["EnclosedInStringProperty"],
+    #           ],
+    #         },
+    #         select_from_collection: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           index: 1, # required
+    #         },
+    #         fill_missing_values: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           imputed_path: "EnclosedInStringProperty", # required
+    #           filled_path: "EnclosedInStringProperty",
+    #         },
+    #         filter: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           logical_operator: "AND", # required, accepts AND, OR
+    #           filters: [ # required
+    #             {
+    #               operation: "EQ", # required, accepts EQ, LT, GT, LTE, GTE, REGEX, ISNULL
+    #               negated: false,
+    #               values: [ # required
+    #                 {
+    #                   type: "COLUMNEXTRACTED", # required, accepts COLUMNEXTRACTED, CONSTANT
+    #                   value: ["EnclosedInStringProperty"], # required
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         custom_code: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           code: "ExtendedString", # required
+    #           class_name: "EnclosedInStringProperty", # required
+    #           output_schemas: [
+    #             {
+    #               columns: [
+    #                 {
+    #                   name: "GlueStudioColumnNameString", # required
+    #                   type: "ColumnTypeString",
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         spark_sql: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           sql_query: "SqlQuery", # required
+    #           sql_aliases: [ # required
+    #             {
+    #               from: "NodeId", # required
+    #               alias: "EnclosedInStringPropertyWithQuote", # required
+    #             },
+    #           ],
+    #           output_schemas: [
+    #             {
+    #               columns: [
+    #                 {
+    #                   name: "GlueStudioColumnNameString", # required
+    #                   type: "ColumnTypeString",
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         direct_kinesis_source: {
+    #           name: "NodeName", # required
+    #           window_size: 1,
+    #           detect_schema: false,
+    #           streaming_options: {
+    #             endpoint_url: "EnclosedInStringProperty",
+    #             stream_name: "EnclosedInStringProperty",
+    #             classification: "EnclosedInStringProperty",
+    #             delimiter: "EnclosedInStringProperty",
+    #             starting_position: "latest", # accepts latest, trim_horizon, earliest
+    #             max_fetch_time_in_ms: 1,
+    #             max_fetch_records_per_shard: 1,
+    #             max_record_per_read: 1,
+    #             add_idle_time_between_reads: false,
+    #             idle_time_between_reads_in_ms: 1,
+    #             describe_shard_interval: 1,
+    #             num_retries: 1,
+    #             retry_interval_ms: 1,
+    #             max_retry_interval_ms: 1,
+    #             avoid_empty_batches: false,
+    #             stream_arn: "EnclosedInStringProperty",
+    #             role_arn: "EnclosedInStringProperty",
+    #             role_session_name: "EnclosedInStringProperty",
+    #           },
+    #           data_preview_options: {
+    #             polling_time: 1,
+    #             record_polling_limit: 1,
+    #           },
+    #         },
+    #         direct_kafka_source: {
+    #           name: "NodeName", # required
+    #           streaming_options: {
+    #             bootstrap_servers: "EnclosedInStringProperty",
+    #             security_protocol: "EnclosedInStringProperty",
+    #             connection_name: "EnclosedInStringProperty",
+    #             topic_name: "EnclosedInStringProperty",
+    #             assign: "EnclosedInStringProperty",
+    #             subscribe_pattern: "EnclosedInStringProperty",
+    #             classification: "EnclosedInStringProperty",
+    #             delimiter: "EnclosedInStringProperty",
+    #             starting_offsets: "EnclosedInStringProperty",
+    #             ending_offsets: "EnclosedInStringProperty",
+    #             poll_timeout_ms: 1,
+    #             num_retries: 1,
+    #             retry_interval_ms: 1,
+    #             max_offsets_per_trigger: 1,
+    #             min_partitions: 1,
+    #           },
+    #           window_size: 1,
+    #           detect_schema: false,
+    #           data_preview_options: {
+    #             polling_time: 1,
+    #             record_polling_limit: 1,
+    #           },
+    #         },
+    #         catalog_kinesis_source: {
+    #           name: "NodeName", # required
+    #           window_size: 1,
+    #           detect_schema: false,
+    #           table: "EnclosedInStringProperty", # required
+    #           database: "EnclosedInStringProperty", # required
+    #           streaming_options: {
+    #             endpoint_url: "EnclosedInStringProperty",
+    #             stream_name: "EnclosedInStringProperty",
+    #             classification: "EnclosedInStringProperty",
+    #             delimiter: "EnclosedInStringProperty",
+    #             starting_position: "latest", # accepts latest, trim_horizon, earliest
+    #             max_fetch_time_in_ms: 1,
+    #             max_fetch_records_per_shard: 1,
+    #             max_record_per_read: 1,
+    #             add_idle_time_between_reads: false,
+    #             idle_time_between_reads_in_ms: 1,
+    #             describe_shard_interval: 1,
+    #             num_retries: 1,
+    #             retry_interval_ms: 1,
+    #             max_retry_interval_ms: 1,
+    #             avoid_empty_batches: false,
+    #             stream_arn: "EnclosedInStringProperty",
+    #             role_arn: "EnclosedInStringProperty",
+    #             role_session_name: "EnclosedInStringProperty",
+    #           },
+    #           data_preview_options: {
+    #             polling_time: 1,
+    #             record_polling_limit: 1,
+    #           },
+    #         },
+    #         catalog_kafka_source: {
+    #           name: "NodeName", # required
+    #           window_size: 1,
+    #           detect_schema: false,
+    #           table: "EnclosedInStringProperty", # required
+    #           database: "EnclosedInStringProperty", # required
+    #           streaming_options: {
+    #             bootstrap_servers: "EnclosedInStringProperty",
+    #             security_protocol: "EnclosedInStringProperty",
+    #             connection_name: "EnclosedInStringProperty",
+    #             topic_name: "EnclosedInStringProperty",
+    #             assign: "EnclosedInStringProperty",
+    #             subscribe_pattern: "EnclosedInStringProperty",
+    #             classification: "EnclosedInStringProperty",
+    #             delimiter: "EnclosedInStringProperty",
+    #             starting_offsets: "EnclosedInStringProperty",
+    #             ending_offsets: "EnclosedInStringProperty",
+    #             poll_timeout_ms: 1,
+    #             num_retries: 1,
+    #             retry_interval_ms: 1,
+    #             max_offsets_per_trigger: 1,
+    #             min_partitions: 1,
+    #           },
+    #           data_preview_options: {
+    #             polling_time: 1,
+    #             record_polling_limit: 1,
+    #           },
+    #         },
+    #         drop_null_fields: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           null_check_box_list: {
+    #             is_empty: false,
+    #             is_null_string: false,
+    #             is_neg_one: false,
+    #           },
+    #           null_text_list: [
+    #             {
+    #               value: "EnclosedInStringProperty", # required
+    #               datatype: { # required
+    #                 id: "GenericLimitedString", # required
+    #                 label: "GenericLimitedString", # required
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         merge: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           source: "NodeId", # required
+    #           primary_keys: [ # required
+    #             ["EnclosedInStringProperty"],
+    #           ],
+    #         },
+    #         union: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           union_type: "ALL", # required, accepts ALL, DISTINCT
+    #         },
+    #         pii_detection: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           pii_type: "RowAudit", # required, accepts RowAudit, RowMasking, ColumnAudit, ColumnMasking
+    #           entity_types_to_detect: ["EnclosedInStringProperty"], # required
+    #           output_column_name: "EnclosedInStringProperty",
+    #           sample_fraction: 1.0,
+    #           threshold_fraction: 1.0,
+    #           mask_value: "MaskValue",
+    #         },
+    #         aggregate: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           groups: [ # required
+    #             ["EnclosedInStringProperty"],
+    #           ],
+    #           aggs: [ # required
+    #             {
+    #               column: ["EnclosedInStringProperty"], # required
+    #               agg_func: "avg", # required, accepts avg, countDistinct, count, first, last, kurtosis, max, min, skewness, stddev_samp, stddev_pop, sum, sumDistinct, var_samp, var_pop
+    #             },
+    #           ],
+    #         },
+    #         drop_duplicates: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           columns: [
+    #             ["GenericLimitedString"],
+    #           ],
+    #         },
+    #         governed_catalog_target: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           partition_keys: [
+    #             ["EnclosedInStringProperty"],
+    #           ],
+    #           table: "EnclosedInStringProperty", # required
+    #           database: "EnclosedInStringProperty", # required
+    #           schema_change_policy: {
+    #             enable_update_catalog: false,
+    #             update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
+    #           },
+    #         },
+    #         governed_catalog_source: {
+    #           name: "NodeName", # required
+    #           database: "EnclosedInStringProperty", # required
+    #           table: "EnclosedInStringProperty", # required
+    #           partition_predicate: "EnclosedInStringProperty",
+    #           additional_options: {
+    #             bounded_size: 1,
+    #             bounded_files: 1,
+    #           },
+    #         },
+    #         microsoft_sql_server_catalog_source: {
+    #           name: "NodeName", # required
+    #           database: "EnclosedInStringProperty", # required
+    #           table: "EnclosedInStringProperty", # required
+    #         },
+    #         my_sql_catalog_source: {
+    #           name: "NodeName", # required
+    #           database: "EnclosedInStringProperty", # required
+    #           table: "EnclosedInStringProperty", # required
+    #         },
+    #         oracle_sql_catalog_source: {
+    #           name: "NodeName", # required
+    #           database: "EnclosedInStringProperty", # required
+    #           table: "EnclosedInStringProperty", # required
+    #         },
+    #         postgre_sql_catalog_source: {
+    #           name: "NodeName", # required
+    #           database: "EnclosedInStringProperty", # required
+    #           table: "EnclosedInStringProperty", # required
+    #         },
+    #         microsoft_sql_server_catalog_target: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           database: "EnclosedInStringProperty", # required
+    #           table: "EnclosedInStringProperty", # required
+    #         },
+    #         my_sql_catalog_target: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           database: "EnclosedInStringProperty", # required
+    #           table: "EnclosedInStringProperty", # required
+    #         },
+    #         oracle_sql_catalog_target: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           database: "EnclosedInStringProperty", # required
+    #           table: "EnclosedInStringProperty", # required
+    #         },
+    #         postgre_sql_catalog_target: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           database: "EnclosedInStringProperty", # required
+    #           table: "EnclosedInStringProperty", # required
+    #         },
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -2462,7 +3746,7 @@ module Aws::Glue
     #     role: "RoleString", # required
     #     glue_version: "GlueVersionString",
     #     max_capacity: 1.0,
-    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X
+    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X
     #     number_of_workers: 1,
     #     timeout: 1,
     #     max_retries: 1,
@@ -2937,6 +4221,136 @@ module Aws::Glue
     # @param [Hash] params ({})
     def create_security_configuration(params = {}, options = {})
       req = build_request(:create_security_configuration, params)
+      req.send_request(options)
+    end
+
+    # Creates a new session.
+    #
+    # @option params [required, String] :id
+    #   The ID of the session request.
+    #
+    # @option params [String] :description
+    #   The description of the session.
+    #
+    # @option params [required, String] :role
+    #   The IAM Role ARN
+    #
+    # @option params [required, Types::SessionCommand] :command
+    #   The `SessionCommand` that runs the job.
+    #
+    # @option params [Integer] :timeout
+    #   The number of seconds before request times out.
+    #
+    # @option params [Integer] :idle_timeout
+    #   The number of seconds when idle before request times out.
+    #
+    # @option params [Hash<String,String>] :default_arguments
+    #   A map array of key-value pairs. Max is 75 pairs.
+    #
+    # @option params [Types::ConnectionsList] :connections
+    #   The number of connections to use for the session.
+    #
+    # @option params [Float] :max_capacity
+    #   The number of Glue data processing units (DPUs) that can be allocated
+    #   when the job runs. A DPU is a relative measure of processing power
+    #   that consists of 4 vCPUs of compute capacity and 16 GB memory.
+    #
+    # @option params [Integer] :number_of_workers
+    #   The number of workers of a defined `WorkerType` to use for the
+    #   session.
+    #
+    # @option params [String] :worker_type
+    #   The type of predefined worker that is allocated to use for the
+    #   session. Accepts a value of Standard, G.1X, G.2X, or G.025X.
+    #
+    #   * For the `Standard` worker type, each worker provides 4 vCPU, 16 GB
+    #     of memory and a 50GB disk, and 2 executors per worker.
+    #
+    #   * For the `G.1X` worker type, each worker maps to 1 DPU (4 vCPU, 16 GB
+    #     of memory, 64 GB disk), and provides 1 executor per worker. We
+    #     recommend this worker type for memory-intensive jobs.
+    #
+    #   * For the `G.2X` worker type, each worker maps to 2 DPU (8 vCPU, 32 GB
+    #     of memory, 128 GB disk), and provides 1 executor per worker. We
+    #     recommend this worker type for memory-intensive jobs.
+    #
+    #   * For the `G.025X` worker type, each worker maps to 0.25 DPU (2 vCPU,
+    #     4 GB of memory, 64 GB disk), and provides 1 executor per worker. We
+    #     recommend this worker type for low volume streaming jobs. This
+    #     worker type is only available for Glue version 3.0 streaming jobs.
+    #
+    # @option params [String] :security_configuration
+    #   The name of the SecurityConfiguration structure to be used with the
+    #   session
+    #
+    # @option params [String] :glue_version
+    #   The Glue version determines the versions of Apache Spark and Python
+    #   that Glue supports. The GlueVersion must be greater than 2.0.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The map of key value pairs (tags) belonging to the session.
+    #
+    # @option params [String] :request_origin
+    #   The origin of the request.
+    #
+    # @return [Types::CreateSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSessionResponse#session #session} => Types::Session
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_session({
+    #     id: "NameString", # required
+    #     description: "DescriptionString",
+    #     role: "OrchestrationRoleArn", # required
+    #     command: { # required
+    #       name: "NameString",
+    #       python_version: "PythonVersionString",
+    #     },
+    #     timeout: 1,
+    #     idle_timeout: 1,
+    #     default_arguments: {
+    #       "OrchestrationNameString" => "OrchestrationArgumentsValue",
+    #     },
+    #     connections: {
+    #       connections: ["GenericString"],
+    #     },
+    #     max_capacity: 1.0,
+    #     number_of_workers: 1,
+    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X
+    #     security_configuration: "NameString",
+    #     glue_version: "GlueVersionString",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     request_origin: "OrchestrationNameString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.session.id #=> String
+    #   resp.session.created_on #=> Time
+    #   resp.session.status #=> String, one of "PROVISIONING", "READY", "FAILED", "TIMEOUT", "STOPPING", "STOPPED"
+    #   resp.session.error_message #=> String
+    #   resp.session.description #=> String
+    #   resp.session.role #=> String
+    #   resp.session.command.name #=> String
+    #   resp.session.command.python_version #=> String
+    #   resp.session.default_arguments #=> Hash
+    #   resp.session.default_arguments["OrchestrationNameString"] #=> String
+    #   resp.session.connections.connections #=> Array
+    #   resp.session.connections.connections[0] #=> String
+    #   resp.session.progress #=> Float
+    #   resp.session.max_capacity #=> Float
+    #   resp.session.security_configuration #=> String
+    #   resp.session.glue_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateSession AWS API Documentation
+    #
+    # @overload create_session(params = {})
+    # @param [Hash] params ({})
+    def create_session(params = {}, options = {})
+      req = build_request(:create_session, params)
       req.send_request(options)
     end
 
@@ -3457,6 +4871,34 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Deletes a custom pattern by specifying its name.
+    #
+    # @option params [required, String] :name
+    #   The name of the custom pattern that you want to delete.
+    #
+    # @return [Types::DeleteCustomEntityTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteCustomEntityTypeResponse#name #name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_custom_entity_type({
+    #     name: "NameString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteCustomEntityType AWS API Documentation
+    #
+    # @overload delete_custom_entity_type(params = {})
+    # @param [Hash] params ({})
+    def delete_custom_entity_type(params = {}, options = {})
+      req = build_request(:delete_custom_entity_type, params)
+      req.send_request(options)
+    end
+
     # Removes a specified database from a Data Catalog.
     #
     # <note markdown="1"> After completing this operation, you no longer have access to the
@@ -3847,6 +5289,38 @@ module Aws::Glue
     # @param [Hash] params ({})
     def delete_security_configuration(params = {}, options = {})
       req = build_request(:delete_security_configuration, params)
+      req.send_request(options)
+    end
+
+    # Deletes the session.
+    #
+    # @option params [required, String] :id
+    #   The ID of the session to be deleted.
+    #
+    # @option params [String] :request_origin
+    #   The name of the origin of the delete session request.
+    #
+    # @return [Types::DeleteSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteSessionResponse#id #id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_session({
+    #     id: "NameString", # required
+    #     request_origin: "OrchestrationNameString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteSession AWS API Documentation
+    #
+    # @overload delete_session(params = {})
+    # @param [Hash] params ({})
+    def delete_session(params = {}, options = {})
+      req = build_request(:delete_session, params)
       req.send_request(options)
     end
 
@@ -4498,11 +5972,11 @@ module Aws::Glue
     #
     # @option params [Boolean] :hide_password
     #   Allows you to retrieve the connection metadata without returning the
-    #   password. For instance, the AWS Glue console uses this flag to
-    #   retrieve the connection, and does not display the password. Set this
-    #   parameter when the caller might not have permission to use the KMS key
-    #   to decrypt the password, but it does have permission to access the
-    #   rest of the connection properties.
+    #   password. For instance, the Glue console uses this flag to retrieve
+    #   the connection, and does not display the password. Set this parameter
+    #   when the caller might not have permission to use the KMS key to
+    #   decrypt the password, but it does have permission to access the rest
+    #   of the connection properties.
     #
     # @return [Types::GetConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4553,11 +6027,11 @@ module Aws::Glue
     #
     # @option params [Boolean] :hide_password
     #   Allows you to retrieve the connection metadata without returning the
-    #   password. For instance, the AWS Glue console uses this flag to
-    #   retrieve the connection, and does not display the password. Set this
-    #   parameter when the caller might not have permission to use the KMS key
-    #   to decrypt the password, but it does have permission to access the
-    #   rest of the connection properties.
+    #   password. For instance, the Glue console uses this flag to retrieve
+    #   the connection, and does not display the password. Set this parameter
+    #   when the caller might not have permission to use the KMS key to
+    #   decrypt the password, but it does have permission to access the rest
+    #   of the connection properties.
     #
     # @option params [String] :next_token
     #   A continuation token, if this is a continuation call.
@@ -4842,6 +6316,39 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Retrieves the details of a custom pattern by specifying its name.
+    #
+    # @option params [required, String] :name
+    #   The name of the custom pattern that you want to retrieve.
+    #
+    # @return [Types::GetCustomEntityTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCustomEntityTypeResponse#name #name} => String
+    #   * {Types::GetCustomEntityTypeResponse#regex_string #regex_string} => String
+    #   * {Types::GetCustomEntityTypeResponse#context_words #context_words} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_custom_entity_type({
+    #     name: "NameString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.regex_string #=> String
+    #   resp.context_words #=> Array
+    #   resp.context_words[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetCustomEntityType AWS API Documentation
+    #
+    # @overload get_custom_entity_type(params = {})
+    # @param [Hash] params ({})
+    def get_custom_entity_type(params = {}, options = {})
+      req = build_request(:get_custom_entity_type, params)
+      req.send_request(options)
+    end
+
     # Retrieves the security configuration for a specified catalog.
     #
     # @option params [String] :catalog_id
@@ -5060,7 +6567,7 @@ module Aws::Glue
     #   resp.dev_endpoint.zeppelin_remote_spark_interpreter_port #=> Integer
     #   resp.dev_endpoint.public_address #=> String
     #   resp.dev_endpoint.status #=> String
-    #   resp.dev_endpoint.worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.dev_endpoint.worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
     #   resp.dev_endpoint.glue_version #=> String
     #   resp.dev_endpoint.number_of_workers #=> Integer
     #   resp.dev_endpoint.number_of_nodes #=> Integer
@@ -5130,7 +6637,7 @@ module Aws::Glue
     #   resp.dev_endpoints[0].zeppelin_remote_spark_interpreter_port #=> Integer
     #   resp.dev_endpoints[0].public_address #=> String
     #   resp.dev_endpoints[0].status #=> String
-    #   resp.dev_endpoints[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.dev_endpoints[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
     #   resp.dev_endpoints[0].glue_version #=> String
     #   resp.dev_endpoints[0].number_of_workers #=> Integer
     #   resp.dev_endpoints[0].number_of_nodes #=> Integer
@@ -5196,11 +6703,491 @@ module Aws::Glue
     #   resp.job.allocated_capacity #=> Integer
     #   resp.job.timeout #=> Integer
     #   resp.job.max_capacity #=> Float
-    #   resp.job.worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.job.worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
     #   resp.job.number_of_workers #=> Integer
     #   resp.job.security_configuration #=> String
     #   resp.job.notification_property.notify_delay_after #=> Integer
     #   resp.job.glue_version #=> String
+    #   resp.job.code_gen_configuration_nodes #=> Hash
+    #   resp.job.code_gen_configuration_nodes["NodeId"].athena_connector_source.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].athena_connector_source.connection_name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].athena_connector_source.connector_name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].athena_connector_source.connection_type #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].athena_connector_source.connection_table #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].athena_connector_source.schema_name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].athena_connector_source.output_schemas #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].athena_connector_source.output_schemas[0].columns #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].athena_connector_source.output_schemas[0].columns[0].name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].athena_connector_source.output_schemas[0].columns[0].type #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].jdbc_connector_source.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].jdbc_connector_source.connection_name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].jdbc_connector_source.connector_name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].jdbc_connector_source.connection_type #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].jdbc_connector_source.additional_options.filter_predicate #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].jdbc_connector_source.additional_options.partition_column #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].jdbc_connector_source.additional_options.lower_bound #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].jdbc_connector_source.additional_options.upper_bound #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].jdbc_connector_source.additional_options.num_partitions #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].jdbc_connector_source.additional_options.job_bookmark_keys #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].jdbc_connector_source.additional_options.job_bookmark_keys[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].jdbc_connector_source.additional_options.job_bookmark_keys_sort_order #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].jdbc_connector_source.additional_options.data_type_mapping #=> Hash
+    #   resp.job.code_gen_configuration_nodes["NodeId"].jdbc_connector_source.additional_options.data_type_mapping["JDBCDataType"] #=> String, one of "DATE", "STRING", "TIMESTAMP", "INT", "FLOAT", "LONG", "BIGDECIMAL", "BYTE", "SHORT", "DOUBLE"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].jdbc_connector_source.connection_table #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].jdbc_connector_source.query #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].jdbc_connector_source.output_schemas #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].jdbc_connector_source.output_schemas[0].columns #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].jdbc_connector_source.output_schemas[0].columns[0].name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].jdbc_connector_source.output_schemas[0].columns[0].type #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].spark_connector_source.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].spark_connector_source.connection_name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].spark_connector_source.connector_name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].spark_connector_source.connection_type #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].spark_connector_source.additional_options #=> Hash
+    #   resp.job.code_gen_configuration_nodes["NodeId"].spark_connector_source.additional_options["EnclosedInStringProperty"] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].spark_connector_source.output_schemas #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].spark_connector_source.output_schemas[0].columns #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].spark_connector_source.output_schemas[0].columns[0].name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].spark_connector_source.output_schemas[0].columns[0].type #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_source.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_source.database #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_source.table #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].redshift_source.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].redshift_source.database #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].redshift_source.table #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].redshift_source.redshift_tmp_dir #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].redshift_source.tmp_dir_iam_role #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_catalog_source.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_catalog_source.database #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_catalog_source.table #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_catalog_source.partition_predicate #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_catalog_source.additional_options.bounded_size #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_catalog_source.additional_options.bounded_files #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_csv_source.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_csv_source.paths #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_csv_source.paths[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_csv_source.compression_type #=> String, one of "gzip", "bzip2"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_csv_source.exclusions #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_csv_source.exclusions[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_csv_source.group_size #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_csv_source.group_files #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_csv_source.recurse #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_csv_source.max_band #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_csv_source.max_files_in_band #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_csv_source.additional_options.bounded_size #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_csv_source.additional_options.bounded_files #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_csv_source.additional_options.enable_sample_path #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_csv_source.additional_options.sample_path #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_csv_source.separator #=> String, one of "comma", "ctrla", "pipe", "semicolon", "tab"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_csv_source.escaper #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_csv_source.quote_char #=> String, one of "quote", "quillemet", "single_quote", "disabled"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_csv_source.multiline #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_csv_source.with_header #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_csv_source.write_header #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_csv_source.skip_first #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_csv_source.optimize_performance #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_csv_source.output_schemas #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_csv_source.output_schemas[0].columns #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_csv_source.output_schemas[0].columns[0].name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_csv_source.output_schemas[0].columns[0].type #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_json_source.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_json_source.paths #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_json_source.paths[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_json_source.compression_type #=> String, one of "gzip", "bzip2"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_json_source.exclusions #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_json_source.exclusions[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_json_source.group_size #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_json_source.group_files #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_json_source.recurse #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_json_source.max_band #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_json_source.max_files_in_band #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_json_source.additional_options.bounded_size #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_json_source.additional_options.bounded_files #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_json_source.additional_options.enable_sample_path #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_json_source.additional_options.sample_path #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_json_source.json_path #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_json_source.multiline #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_json_source.output_schemas #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_json_source.output_schemas[0].columns #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_json_source.output_schemas[0].columns[0].name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_json_source.output_schemas[0].columns[0].type #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_parquet_source.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_parquet_source.paths #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_parquet_source.paths[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_parquet_source.compression_type #=> String, one of "snappy", "lzo", "gzip", "uncompressed", "none"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_parquet_source.exclusions #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_parquet_source.exclusions[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_parquet_source.group_size #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_parquet_source.group_files #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_parquet_source.recurse #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_parquet_source.max_band #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_parquet_source.max_files_in_band #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_parquet_source.additional_options.bounded_size #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_parquet_source.additional_options.bounded_files #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_parquet_source.additional_options.enable_sample_path #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_parquet_source.additional_options.sample_path #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_parquet_source.output_schemas #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_parquet_source.output_schemas[0].columns #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_parquet_source.output_schemas[0].columns[0].name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_parquet_source.output_schemas[0].columns[0].type #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].relational_catalog_source.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].relational_catalog_source.database #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].relational_catalog_source.table #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].dynamo_db_catalog_source.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].dynamo_db_catalog_source.database #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].dynamo_db_catalog_source.table #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].jdbc_connector_target.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].jdbc_connector_target.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].jdbc_connector_target.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].jdbc_connector_target.connection_name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].jdbc_connector_target.connection_table #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].jdbc_connector_target.connector_name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].jdbc_connector_target.connection_type #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].jdbc_connector_target.additional_options #=> Hash
+    #   resp.job.code_gen_configuration_nodes["NodeId"].jdbc_connector_target.additional_options["EnclosedInStringProperty"] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].jdbc_connector_target.output_schemas #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].jdbc_connector_target.output_schemas[0].columns #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].jdbc_connector_target.output_schemas[0].columns[0].name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].jdbc_connector_target.output_schemas[0].columns[0].type #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].spark_connector_target.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].spark_connector_target.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].spark_connector_target.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].spark_connector_target.connection_name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].spark_connector_target.connector_name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].spark_connector_target.connection_type #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].spark_connector_target.additional_options #=> Hash
+    #   resp.job.code_gen_configuration_nodes["NodeId"].spark_connector_target.additional_options["EnclosedInStringProperty"] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].spark_connector_target.output_schemas #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].spark_connector_target.output_schemas[0].columns #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].spark_connector_target.output_schemas[0].columns[0].name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].spark_connector_target.output_schemas[0].columns[0].type #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_target.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_target.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_target.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_target.database #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_target.table #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].redshift_target.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].redshift_target.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].redshift_target.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].redshift_target.database #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].redshift_target.table #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].redshift_target.redshift_tmp_dir #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].redshift_target.tmp_dir_iam_role #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].redshift_target.upsert_redshift_options.table_location #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].redshift_target.upsert_redshift_options.connection_name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].redshift_target.upsert_redshift_options.upsert_keys #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].redshift_target.upsert_redshift_options.upsert_keys[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_catalog_target.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_catalog_target.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_catalog_target.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_catalog_target.partition_keys #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_catalog_target.partition_keys[0] #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_catalog_target.partition_keys[0][0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_catalog_target.table #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_catalog_target.database #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_catalog_target.schema_change_policy.enable_update_catalog #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_catalog_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.partition_keys #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.partition_keys[0] #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.partition_keys[0][0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.path #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.compression #=> String, one of "snappy", "lzo", "gzip", "uncompressed", "none"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.schema_change_policy.enable_update_catalog #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.schema_change_policy.table #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.schema_change_policy.database #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_direct_target.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_direct_target.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_direct_target.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_direct_target.partition_keys #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_direct_target.partition_keys[0] #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_direct_target.partition_keys[0][0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_direct_target.path #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_direct_target.compression #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_direct_target.schema_change_policy.enable_update_catalog #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_direct_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_direct_target.schema_change_policy.table #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_direct_target.schema_change_policy.database #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].apply_mapping.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].apply_mapping.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].apply_mapping.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].apply_mapping.mapping #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].apply_mapping.mapping[0].to_key #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].apply_mapping.mapping[0].from_path #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].apply_mapping.mapping[0].from_path[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].apply_mapping.mapping[0].from_type #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].apply_mapping.mapping[0].to_type #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].apply_mapping.mapping[0].dropped #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].apply_mapping.mapping[0].children #=> Types::Mappings
+    #   resp.job.code_gen_configuration_nodes["NodeId"].select_fields.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].select_fields.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].select_fields.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].select_fields.paths #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].select_fields.paths[0] #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].select_fields.paths[0][0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].drop_fields.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].drop_fields.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].drop_fields.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].drop_fields.paths #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].drop_fields.paths[0] #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].drop_fields.paths[0][0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].rename_field.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].rename_field.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].rename_field.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].rename_field.source_path #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].rename_field.source_path[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].rename_field.target_path #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].rename_field.target_path[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].spigot.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].spigot.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].spigot.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].spigot.path #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].spigot.topk #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].spigot.prob #=> Float
+    #   resp.job.code_gen_configuration_nodes["NodeId"].join.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].join.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].join.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].join.join_type #=> String, one of "equijoin", "left", "right", "outer", "leftsemi", "leftanti"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].join.columns #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].join.columns[0].from #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].join.columns[0].keys #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].join.columns[0].keys[0] #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].join.columns[0].keys[0][0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].split_fields.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].split_fields.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].split_fields.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].split_fields.paths #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].split_fields.paths[0] #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].split_fields.paths[0][0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].select_from_collection.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].select_from_collection.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].select_from_collection.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].select_from_collection.index #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].fill_missing_values.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].fill_missing_values.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].fill_missing_values.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].fill_missing_values.imputed_path #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].fill_missing_values.filled_path #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].filter.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].filter.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].filter.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].filter.logical_operator #=> String, one of "AND", "OR"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].filter.filters #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].filter.filters[0].operation #=> String, one of "EQ", "LT", "GT", "LTE", "GTE", "REGEX", "ISNULL"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].filter.filters[0].negated #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].filter.filters[0].values #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].filter.filters[0].values[0].type #=> String, one of "COLUMNEXTRACTED", "CONSTANT"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].filter.filters[0].values[0].value #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].filter.filters[0].values[0].value[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].custom_code.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].custom_code.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].custom_code.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].custom_code.code #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].custom_code.class_name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].custom_code.output_schemas #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].custom_code.output_schemas[0].columns #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].custom_code.output_schemas[0].columns[0].name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].custom_code.output_schemas[0].columns[0].type #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].spark_sql.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].spark_sql.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].spark_sql.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].spark_sql.sql_query #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].spark_sql.sql_aliases #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].spark_sql.sql_aliases[0].from #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].spark_sql.sql_aliases[0].alias #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].spark_sql.output_schemas #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].spark_sql.output_schemas[0].columns #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].spark_sql.output_schemas[0].columns[0].name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].spark_sql.output_schemas[0].columns[0].type #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.window_size #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.detect_schema #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.endpoint_url #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.stream_name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.classification #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.delimiter #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.starting_position #=> String, one of "latest", "trim_horizon", "earliest"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.max_fetch_time_in_ms #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.max_fetch_records_per_shard #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.max_record_per_read #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.add_idle_time_between_reads #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.idle_time_between_reads_in_ms #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.describe_shard_interval #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.num_retries #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.retry_interval_ms #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.max_retry_interval_ms #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.avoid_empty_batches #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.stream_arn #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.role_arn #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.role_session_name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.data_preview_options.polling_time #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.data_preview_options.record_polling_limit #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kafka_source.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.bootstrap_servers #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.security_protocol #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.connection_name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.topic_name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.assign #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.subscribe_pattern #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.classification #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.delimiter #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.starting_offsets #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.ending_offsets #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.poll_timeout_ms #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.num_retries #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.retry_interval_ms #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.max_offsets_per_trigger #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.min_partitions #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kafka_source.window_size #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kafka_source.detect_schema #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kafka_source.data_preview_options.polling_time #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kafka_source.data_preview_options.record_polling_limit #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.window_size #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.detect_schema #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.table #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.database #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.endpoint_url #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.stream_name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.classification #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.delimiter #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.starting_position #=> String, one of "latest", "trim_horizon", "earliest"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.max_fetch_time_in_ms #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.max_fetch_records_per_shard #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.max_record_per_read #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.add_idle_time_between_reads #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.idle_time_between_reads_in_ms #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.describe_shard_interval #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.num_retries #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.retry_interval_ms #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.max_retry_interval_ms #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.avoid_empty_batches #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.stream_arn #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.role_arn #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.role_session_name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.data_preview_options.polling_time #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.data_preview_options.record_polling_limit #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kafka_source.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kafka_source.window_size #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kafka_source.detect_schema #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kafka_source.table #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kafka_source.database #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.bootstrap_servers #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.security_protocol #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.connection_name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.topic_name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.assign #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.subscribe_pattern #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.classification #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.delimiter #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.starting_offsets #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.ending_offsets #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.poll_timeout_ms #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.num_retries #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.retry_interval_ms #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.max_offsets_per_trigger #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.min_partitions #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kafka_source.data_preview_options.polling_time #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kafka_source.data_preview_options.record_polling_limit #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].drop_null_fields.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].drop_null_fields.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].drop_null_fields.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].drop_null_fields.null_check_box_list.is_empty #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].drop_null_fields.null_check_box_list.is_null_string #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].drop_null_fields.null_check_box_list.is_neg_one #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].drop_null_fields.null_text_list #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].drop_null_fields.null_text_list[0].value #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].drop_null_fields.null_text_list[0].datatype.id #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].drop_null_fields.null_text_list[0].datatype.label #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].merge.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].merge.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].merge.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].merge.source #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].merge.primary_keys #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].merge.primary_keys[0] #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].merge.primary_keys[0][0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].union.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].union.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].union.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].union.union_type #=> String, one of "ALL", "DISTINCT"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].pii_detection.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].pii_detection.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].pii_detection.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].pii_detection.pii_type #=> String, one of "RowAudit", "RowMasking", "ColumnAudit", "ColumnMasking"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].pii_detection.entity_types_to_detect #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].pii_detection.entity_types_to_detect[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].pii_detection.output_column_name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].pii_detection.sample_fraction #=> Float
+    #   resp.job.code_gen_configuration_nodes["NodeId"].pii_detection.threshold_fraction #=> Float
+    #   resp.job.code_gen_configuration_nodes["NodeId"].pii_detection.mask_value #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].aggregate.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].aggregate.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].aggregate.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].aggregate.groups #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].aggregate.groups[0] #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].aggregate.groups[0][0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].aggregate.aggs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].aggregate.aggs[0].column #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].aggregate.aggs[0].column[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].aggregate.aggs[0].agg_func #=> String, one of "avg", "countDistinct", "count", "first", "last", "kurtosis", "max", "min", "skewness", "stddev_samp", "stddev_pop", "sum", "sumDistinct", "var_samp", "var_pop"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].drop_duplicates.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].drop_duplicates.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].drop_duplicates.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].drop_duplicates.columns #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].drop_duplicates.columns[0] #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].drop_duplicates.columns[0][0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].governed_catalog_target.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].governed_catalog_target.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].governed_catalog_target.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].governed_catalog_target.partition_keys #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].governed_catalog_target.partition_keys[0] #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].governed_catalog_target.partition_keys[0][0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].governed_catalog_target.table #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].governed_catalog_target.database #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].governed_catalog_target.schema_change_policy.enable_update_catalog #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].governed_catalog_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].governed_catalog_source.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].governed_catalog_source.database #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].governed_catalog_source.table #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].governed_catalog_source.partition_predicate #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].governed_catalog_source.additional_options.bounded_size #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].governed_catalog_source.additional_options.bounded_files #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].microsoft_sql_server_catalog_source.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].microsoft_sql_server_catalog_source.database #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].microsoft_sql_server_catalog_source.table #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].my_sql_catalog_source.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].my_sql_catalog_source.database #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].my_sql_catalog_source.table #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].oracle_sql_catalog_source.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].oracle_sql_catalog_source.database #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].oracle_sql_catalog_source.table #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_source.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_source.database #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_source.table #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].microsoft_sql_server_catalog_target.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].microsoft_sql_server_catalog_target.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].microsoft_sql_server_catalog_target.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].microsoft_sql_server_catalog_target.database #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].microsoft_sql_server_catalog_target.table #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].my_sql_catalog_target.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].my_sql_catalog_target.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].my_sql_catalog_target.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].my_sql_catalog_target.database #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].my_sql_catalog_target.table #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].oracle_sql_catalog_target.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].oracle_sql_catalog_target.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].oracle_sql_catalog_target.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].oracle_sql_catalog_target.database #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].oracle_sql_catalog_target.table #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_target.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_target.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_target.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_target.database #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_target.table #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJob AWS API Documentation
     #
@@ -5293,12 +7280,13 @@ module Aws::Glue
     #   resp.job_run.execution_time #=> Integer
     #   resp.job_run.timeout #=> Integer
     #   resp.job_run.max_capacity #=> Float
-    #   resp.job_run.worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.job_run.worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
     #   resp.job_run.number_of_workers #=> Integer
     #   resp.job_run.security_configuration #=> String
     #   resp.job_run.log_group_name #=> String
     #   resp.job_run.notification_property.notify_delay_after #=> Integer
     #   resp.job_run.glue_version #=> String
+    #   resp.job_run.dpu_seconds #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobRun AWS API Documentation
     #
@@ -5357,12 +7345,13 @@ module Aws::Glue
     #   resp.job_runs[0].execution_time #=> Integer
     #   resp.job_runs[0].timeout #=> Integer
     #   resp.job_runs[0].max_capacity #=> Float
-    #   resp.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
     #   resp.job_runs[0].number_of_workers #=> Integer
     #   resp.job_runs[0].security_configuration #=> String
     #   resp.job_runs[0].log_group_name #=> String
     #   resp.job_runs[0].notification_property.notify_delay_after #=> Integer
     #   resp.job_runs[0].glue_version #=> String
+    #   resp.job_runs[0].dpu_seconds #=> Float
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobRuns AWS API Documentation
@@ -5419,11 +7408,491 @@ module Aws::Glue
     #   resp.jobs[0].allocated_capacity #=> Integer
     #   resp.jobs[0].timeout #=> Integer
     #   resp.jobs[0].max_capacity #=> Float
-    #   resp.jobs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.jobs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
     #   resp.jobs[0].number_of_workers #=> Integer
     #   resp.jobs[0].security_configuration #=> String
     #   resp.jobs[0].notification_property.notify_delay_after #=> Integer
     #   resp.jobs[0].glue_version #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].athena_connector_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].athena_connector_source.connection_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].athena_connector_source.connector_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].athena_connector_source.connection_type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].athena_connector_source.connection_table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].athena_connector_source.schema_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].athena_connector_source.output_schemas #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].athena_connector_source.output_schemas[0].columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].athena_connector_source.output_schemas[0].columns[0].name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].athena_connector_source.output_schemas[0].columns[0].type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_source.connection_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_source.connector_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_source.connection_type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_source.additional_options.filter_predicate #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_source.additional_options.partition_column #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_source.additional_options.lower_bound #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_source.additional_options.upper_bound #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_source.additional_options.num_partitions #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_source.additional_options.job_bookmark_keys #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_source.additional_options.job_bookmark_keys[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_source.additional_options.job_bookmark_keys_sort_order #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_source.additional_options.data_type_mapping #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_source.additional_options.data_type_mapping["JDBCDataType"] #=> String, one of "DATE", "STRING", "TIMESTAMP", "INT", "FLOAT", "LONG", "BIGDECIMAL", "BYTE", "SHORT", "DOUBLE"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_source.connection_table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_source.query #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_source.output_schemas #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_source.output_schemas[0].columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_source.output_schemas[0].columns[0].name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_source.output_schemas[0].columns[0].type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_connector_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_connector_source.connection_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_connector_source.connector_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_connector_source.connection_type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_connector_source.additional_options #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_connector_source.additional_options["EnclosedInStringProperty"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_connector_source.output_schemas #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_connector_source.output_schemas[0].columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_connector_source.output_schemas[0].columns[0].name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_connector_source.output_schemas[0].columns[0].type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_source.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_source.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].redshift_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].redshift_source.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].redshift_source.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].redshift_source.redshift_tmp_dir #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].redshift_source.tmp_dir_iam_role #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_source.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_source.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_source.partition_predicate #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_source.additional_options.bounded_size #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_source.additional_options.bounded_files #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.paths #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.paths[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.compression_type #=> String, one of "gzip", "bzip2"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.exclusions #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.exclusions[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.group_size #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.group_files #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.recurse #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.max_band #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.max_files_in_band #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.additional_options.bounded_size #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.additional_options.bounded_files #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.additional_options.enable_sample_path #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.additional_options.sample_path #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.separator #=> String, one of "comma", "ctrla", "pipe", "semicolon", "tab"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.escaper #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.quote_char #=> String, one of "quote", "quillemet", "single_quote", "disabled"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.multiline #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.with_header #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.write_header #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.skip_first #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.optimize_performance #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.output_schemas #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.output_schemas[0].columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.output_schemas[0].columns[0].name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.output_schemas[0].columns[0].type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.paths #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.paths[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.compression_type #=> String, one of "gzip", "bzip2"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.exclusions #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.exclusions[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.group_size #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.group_files #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.recurse #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.max_band #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.max_files_in_band #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.additional_options.bounded_size #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.additional_options.bounded_files #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.additional_options.enable_sample_path #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.additional_options.sample_path #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.json_path #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.multiline #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.output_schemas #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.output_schemas[0].columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.output_schemas[0].columns[0].name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.output_schemas[0].columns[0].type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.paths #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.paths[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.compression_type #=> String, one of "snappy", "lzo", "gzip", "uncompressed", "none"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.exclusions #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.exclusions[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.group_size #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.group_files #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.recurse #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.max_band #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.max_files_in_band #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.additional_options.bounded_size #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.additional_options.bounded_files #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.additional_options.enable_sample_path #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.additional_options.sample_path #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.output_schemas #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.output_schemas[0].columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.output_schemas[0].columns[0].name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.output_schemas[0].columns[0].type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].relational_catalog_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].relational_catalog_source.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].relational_catalog_source.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamo_db_catalog_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamo_db_catalog_source.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamo_db_catalog_source.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_target.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_target.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_target.connection_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_target.connection_table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_target.connector_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_target.connection_type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_target.additional_options #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_target.additional_options["EnclosedInStringProperty"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_target.output_schemas #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_target.output_schemas[0].columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_target.output_schemas[0].columns[0].name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].jdbc_connector_target.output_schemas[0].columns[0].type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_connector_target.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_connector_target.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_connector_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_connector_target.connection_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_connector_target.connector_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_connector_target.connection_type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_connector_target.additional_options #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_connector_target.additional_options["EnclosedInStringProperty"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_connector_target.output_schemas #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_connector_target.output_schemas[0].columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_connector_target.output_schemas[0].columns[0].name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_connector_target.output_schemas[0].columns[0].type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_target.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_target.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_target.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_target.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].redshift_target.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].redshift_target.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].redshift_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].redshift_target.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].redshift_target.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].redshift_target.redshift_tmp_dir #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].redshift_target.tmp_dir_iam_role #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].redshift_target.upsert_redshift_options.table_location #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].redshift_target.upsert_redshift_options.connection_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].redshift_target.upsert_redshift_options.upsert_keys #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].redshift_target.upsert_redshift_options.upsert_keys[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_target.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_target.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_target.partition_keys #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_target.partition_keys[0] #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_target.partition_keys[0][0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_target.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_target.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_target.schema_change_policy.enable_update_catalog #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.partition_keys #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.partition_keys[0] #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.partition_keys[0][0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.path #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.compression #=> String, one of "snappy", "lzo", "gzip", "uncompressed", "none"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.schema_change_policy.enable_update_catalog #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.schema_change_policy.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.schema_change_policy.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.partition_keys #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.partition_keys[0] #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.partition_keys[0][0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.path #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.compression #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.schema_change_policy.enable_update_catalog #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.schema_change_policy.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.schema_change_policy.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].apply_mapping.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].apply_mapping.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].apply_mapping.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].apply_mapping.mapping #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].apply_mapping.mapping[0].to_key #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].apply_mapping.mapping[0].from_path #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].apply_mapping.mapping[0].from_path[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].apply_mapping.mapping[0].from_type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].apply_mapping.mapping[0].to_type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].apply_mapping.mapping[0].dropped #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].apply_mapping.mapping[0].children #=> Types::Mappings
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].select_fields.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].select_fields.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].select_fields.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].select_fields.paths #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].select_fields.paths[0] #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].select_fields.paths[0][0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_fields.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_fields.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_fields.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_fields.paths #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_fields.paths[0] #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_fields.paths[0][0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].rename_field.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].rename_field.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].rename_field.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].rename_field.source_path #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].rename_field.source_path[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].rename_field.target_path #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].rename_field.target_path[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spigot.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spigot.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spigot.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spigot.path #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spigot.topk #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spigot.prob #=> Float
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].join.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].join.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].join.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].join.join_type #=> String, one of "equijoin", "left", "right", "outer", "leftsemi", "leftanti"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].join.columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].join.columns[0].from #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].join.columns[0].keys #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].join.columns[0].keys[0] #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].join.columns[0].keys[0][0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].split_fields.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].split_fields.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].split_fields.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].split_fields.paths #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].split_fields.paths[0] #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].split_fields.paths[0][0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].select_from_collection.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].select_from_collection.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].select_from_collection.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].select_from_collection.index #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].fill_missing_values.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].fill_missing_values.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].fill_missing_values.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].fill_missing_values.imputed_path #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].fill_missing_values.filled_path #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].filter.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].filter.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].filter.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].filter.logical_operator #=> String, one of "AND", "OR"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].filter.filters #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].filter.filters[0].operation #=> String, one of "EQ", "LT", "GT", "LTE", "GTE", "REGEX", "ISNULL"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].filter.filters[0].negated #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].filter.filters[0].values #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].filter.filters[0].values[0].type #=> String, one of "COLUMNEXTRACTED", "CONSTANT"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].filter.filters[0].values[0].value #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].filter.filters[0].values[0].value[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].custom_code.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].custom_code.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].custom_code.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].custom_code.code #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].custom_code.class_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].custom_code.output_schemas #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].custom_code.output_schemas[0].columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].custom_code.output_schemas[0].columns[0].name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].custom_code.output_schemas[0].columns[0].type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_sql.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_sql.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_sql.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_sql.sql_query #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_sql.sql_aliases #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_sql.sql_aliases[0].from #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_sql.sql_aliases[0].alias #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_sql.output_schemas #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_sql.output_schemas[0].columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_sql.output_schemas[0].columns[0].name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].spark_sql.output_schemas[0].columns[0].type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.window_size #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.detect_schema #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.endpoint_url #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.stream_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.classification #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.delimiter #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.starting_position #=> String, one of "latest", "trim_horizon", "earliest"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.max_fetch_time_in_ms #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.max_fetch_records_per_shard #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.max_record_per_read #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.add_idle_time_between_reads #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.idle_time_between_reads_in_ms #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.describe_shard_interval #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.num_retries #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.retry_interval_ms #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.max_retry_interval_ms #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.avoid_empty_batches #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.stream_arn #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.role_arn #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.role_session_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.data_preview_options.polling_time #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.data_preview_options.record_polling_limit #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.bootstrap_servers #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.security_protocol #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.connection_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.topic_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.assign #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.subscribe_pattern #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.classification #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.delimiter #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.starting_offsets #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.ending_offsets #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.poll_timeout_ms #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.num_retries #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.retry_interval_ms #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.max_offsets_per_trigger #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.min_partitions #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.window_size #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.detect_schema #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.data_preview_options.polling_time #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.data_preview_options.record_polling_limit #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.window_size #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.detect_schema #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.endpoint_url #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.stream_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.classification #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.delimiter #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.starting_position #=> String, one of "latest", "trim_horizon", "earliest"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.max_fetch_time_in_ms #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.max_fetch_records_per_shard #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.max_record_per_read #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.add_idle_time_between_reads #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.idle_time_between_reads_in_ms #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.describe_shard_interval #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.num_retries #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.retry_interval_ms #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.max_retry_interval_ms #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.avoid_empty_batches #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.stream_arn #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.role_arn #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.role_session_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.data_preview_options.polling_time #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.data_preview_options.record_polling_limit #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.window_size #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.detect_schema #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.bootstrap_servers #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.security_protocol #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.connection_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.topic_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.assign #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.subscribe_pattern #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.classification #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.delimiter #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.starting_offsets #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.ending_offsets #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.poll_timeout_ms #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.num_retries #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.retry_interval_ms #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.max_offsets_per_trigger #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.min_partitions #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.data_preview_options.polling_time #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.data_preview_options.record_polling_limit #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_null_fields.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_null_fields.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_null_fields.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_null_fields.null_check_box_list.is_empty #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_null_fields.null_check_box_list.is_null_string #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_null_fields.null_check_box_list.is_neg_one #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_null_fields.null_text_list #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_null_fields.null_text_list[0].value #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_null_fields.null_text_list[0].datatype.id #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_null_fields.null_text_list[0].datatype.label #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].merge.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].merge.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].merge.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].merge.source #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].merge.primary_keys #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].merge.primary_keys[0] #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].merge.primary_keys[0][0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].union.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].union.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].union.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].union.union_type #=> String, one of "ALL", "DISTINCT"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].pii_detection.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].pii_detection.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].pii_detection.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].pii_detection.pii_type #=> String, one of "RowAudit", "RowMasking", "ColumnAudit", "ColumnMasking"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].pii_detection.entity_types_to_detect #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].pii_detection.entity_types_to_detect[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].pii_detection.output_column_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].pii_detection.sample_fraction #=> Float
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].pii_detection.threshold_fraction #=> Float
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].pii_detection.mask_value #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].aggregate.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].aggregate.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].aggregate.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].aggregate.groups #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].aggregate.groups[0] #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].aggregate.groups[0][0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].aggregate.aggs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].aggregate.aggs[0].column #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].aggregate.aggs[0].column[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].aggregate.aggs[0].agg_func #=> String, one of "avg", "countDistinct", "count", "first", "last", "kurtosis", "max", "min", "skewness", "stddev_samp", "stddev_pop", "sum", "sumDistinct", "var_samp", "var_pop"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_duplicates.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_duplicates.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_duplicates.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_duplicates.columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_duplicates.columns[0] #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_duplicates.columns[0][0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].governed_catalog_target.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].governed_catalog_target.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].governed_catalog_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].governed_catalog_target.partition_keys #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].governed_catalog_target.partition_keys[0] #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].governed_catalog_target.partition_keys[0][0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].governed_catalog_target.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].governed_catalog_target.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].governed_catalog_target.schema_change_policy.enable_update_catalog #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].governed_catalog_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].governed_catalog_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].governed_catalog_source.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].governed_catalog_source.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].governed_catalog_source.partition_predicate #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].governed_catalog_source.additional_options.bounded_size #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].governed_catalog_source.additional_options.bounded_files #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].microsoft_sql_server_catalog_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].microsoft_sql_server_catalog_source.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].microsoft_sql_server_catalog_source.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].my_sql_catalog_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].my_sql_catalog_source.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].my_sql_catalog_source.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].oracle_sql_catalog_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].oracle_sql_catalog_source.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].oracle_sql_catalog_source.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_source.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_source.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].microsoft_sql_server_catalog_target.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].microsoft_sql_server_catalog_target.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].microsoft_sql_server_catalog_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].microsoft_sql_server_catalog_target.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].microsoft_sql_server_catalog_target.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].my_sql_catalog_target.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].my_sql_catalog_target.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].my_sql_catalog_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].my_sql_catalog_target.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].my_sql_catalog_target.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].oracle_sql_catalog_target.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].oracle_sql_catalog_target.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].oracle_sql_catalog_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].oracle_sql_catalog_target.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].oracle_sql_catalog_target.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_target.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_target.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_target.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_target.table #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobs AWS API Documentation
@@ -5654,7 +8123,7 @@ module Aws::Glue
     #   resp.role #=> String
     #   resp.glue_version #=> String
     #   resp.max_capacity #=> Float
-    #   resp.worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
     #   resp.number_of_workers #=> Integer
     #   resp.timeout #=> Integer
     #   resp.max_retries #=> Integer
@@ -5762,7 +8231,7 @@ module Aws::Glue
     #   resp.transforms[0].role #=> String
     #   resp.transforms[0].glue_version #=> String
     #   resp.transforms[0].max_capacity #=> Float
-    #   resp.transforms[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.transforms[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
     #   resp.transforms[0].number_of_workers #=> Integer
     #   resp.transforms[0].timeout #=> Integer
     #   resp.transforms[0].max_retries #=> Integer
@@ -6767,6 +9236,101 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Retrieves the session.
+    #
+    # @option params [required, String] :id
+    #   The ID of the session.
+    #
+    # @option params [String] :request_origin
+    #   The origin of the request.
+    #
+    # @return [Types::GetSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSessionResponse#session #session} => Types::Session
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_session({
+    #     id: "NameString", # required
+    #     request_origin: "OrchestrationNameString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.session.id #=> String
+    #   resp.session.created_on #=> Time
+    #   resp.session.status #=> String, one of "PROVISIONING", "READY", "FAILED", "TIMEOUT", "STOPPING", "STOPPED"
+    #   resp.session.error_message #=> String
+    #   resp.session.description #=> String
+    #   resp.session.role #=> String
+    #   resp.session.command.name #=> String
+    #   resp.session.command.python_version #=> String
+    #   resp.session.default_arguments #=> Hash
+    #   resp.session.default_arguments["OrchestrationNameString"] #=> String
+    #   resp.session.connections.connections #=> Array
+    #   resp.session.connections.connections[0] #=> String
+    #   resp.session.progress #=> Float
+    #   resp.session.max_capacity #=> Float
+    #   resp.session.security_configuration #=> String
+    #   resp.session.glue_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetSession AWS API Documentation
+    #
+    # @overload get_session(params = {})
+    # @param [Hash] params ({})
+    def get_session(params = {}, options = {})
+      req = build_request(:get_session, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the statement.
+    #
+    # @option params [required, String] :session_id
+    #   The Session ID of the statement.
+    #
+    # @option params [required, Integer] :id
+    #   The Id of the statement.
+    #
+    # @option params [String] :request_origin
+    #   The origin of the request.
+    #
+    # @return [Types::GetStatementResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetStatementResponse#statement #statement} => Types::Statement
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_statement({
+    #     session_id: "NameString", # required
+    #     id: 1, # required
+    #     request_origin: "OrchestrationNameString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.statement.id #=> Integer
+    #   resp.statement.code #=> String
+    #   resp.statement.state #=> String, one of "WAITING", "RUNNING", "AVAILABLE", "CANCELLING", "CANCELLED", "ERROR"
+    #   resp.statement.output.data.text_plain #=> String
+    #   resp.statement.output.execution_count #=> Integer
+    #   resp.statement.output.status #=> String, one of "WAITING", "RUNNING", "AVAILABLE", "CANCELLING", "CANCELLED", "ERROR"
+    #   resp.statement.output.error_name #=> String
+    #   resp.statement.output.error_value #=> String
+    #   resp.statement.output.traceback #=> Array
+    #   resp.statement.output.traceback[0] #=> String
+    #   resp.statement.progress #=> Float
+    #   resp.statement.started_on #=> Integer
+    #   resp.statement.completed_on #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetStatement AWS API Documentation
+    #
+    # @overload get_statement(params = {})
+    # @param [Hash] params ({})
+    def get_statement(params = {}, options = {})
+      req = build_request(:get_statement, params)
+      req.send_request(options)
+    end
+
     # Retrieves the `Table` definition in a Data Catalog for a specified
     # table.
     #
@@ -6868,6 +9432,7 @@ module Aws::Glue
     #   resp.table.target_table.database_name #=> String
     #   resp.table.target_table.name #=> String
     #   resp.table.catalog_id #=> String
+    #   resp.table.version_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTable AWS API Documentation
     #
@@ -6973,6 +9538,7 @@ module Aws::Glue
     #   resp.table_version.table.target_table.database_name #=> String
     #   resp.table_version.table.target_table.name #=> String
     #   resp.table_version.table.catalog_id #=> String
+    #   resp.table_version.table.version_id #=> String
     #   resp.table_version.version_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTableVersion AWS API Documentation
@@ -7087,6 +9653,7 @@ module Aws::Glue
     #   resp.table_versions[0].table.target_table.database_name #=> String
     #   resp.table_versions[0].table.target_table.name #=> String
     #   resp.table_versions[0].table.catalog_id #=> String
+    #   resp.table_versions[0].table.version_id #=> String
     #   resp.table_versions[0].version_id #=> String
     #   resp.next_token #=> String
     #
@@ -7212,6 +9779,7 @@ module Aws::Glue
     #   resp.table_list[0].target_table.database_name #=> String
     #   resp.table_list[0].target_table.name #=> String
     #   resp.table_list[0].catalog_id #=> String
+    #   resp.table_list[0].version_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTables AWS API Documentation
@@ -7379,6 +9947,7 @@ module Aws::Glue
     # @option params [required, Array<String>] :partition_values
     #
     # @option params [Types::AuditContext] :audit_context
+    #   A structure containing information for audit.
     #
     # @option params [required, Array<String>] :supported_permission_types
     #
@@ -7397,6 +9966,8 @@ module Aws::Glue
     #     partition_values: ["ValueString"], # required
     #     audit_context: {
     #       additional_audit_context: "AuditContextString",
+    #       requested_columns: ["ColumnNameString"],
+    #       all_columns_requested: false,
     #     },
     #     supported_permission_types: ["COLUMN_PERMISSION"], # required, accepts COLUMN_PERMISSION, CELL_FILTER_PERMISSION
     #   })
@@ -7471,6 +10042,7 @@ module Aws::Glue
     # @option params [String] :expression
     #
     # @option params [Types::AuditContext] :audit_context
+    #   A structure containing information for audit.
     #
     # @option params [required, Array<String>] :supported_permission_types
     #
@@ -7498,6 +10070,8 @@ module Aws::Glue
     #     expression: "PredicateString",
     #     audit_context: {
     #       additional_audit_context: "AuditContextString",
+    #       requested_columns: ["ColumnNameString"],
+    #       all_columns_requested: false,
     #     },
     #     supported_permission_types: ["COLUMN_PERMISSION"], # required, accepts COLUMN_PERMISSION, CELL_FILTER_PERMISSION
     #     next_token: "Token",
@@ -7578,6 +10152,7 @@ module Aws::Glue
     # @option params [required, String] :name
     #
     # @option params [Types::AuditContext] :audit_context
+    #   A structure containing information for audit.
     #
     # @option params [required, Array<String>] :supported_permission_types
     #
@@ -7596,6 +10171,8 @@ module Aws::Glue
     #     name: "NameString", # required
     #     audit_context: {
     #       additional_audit_context: "AuditContextString",
+    #       requested_columns: ["ColumnNameString"],
+    #       all_columns_requested: false,
     #     },
     #     supported_permission_types: ["COLUMN_PERMISSION"], # required, accepts COLUMN_PERMISSION, CELL_FILTER_PERMISSION
     #   })
@@ -7664,6 +10241,7 @@ module Aws::Glue
     #   resp.table.target_table.database_name #=> String
     #   resp.table.target_table.name #=> String
     #   resp.table.catalog_id #=> String
+    #   resp.table.version_id #=> String
     #   resp.authorized_columns #=> Array
     #   resp.authorized_columns[0] #=> String
     #   resp.is_registered_with_lake_formation #=> Boolean
@@ -7881,12 +10459,13 @@ module Aws::Glue
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].execution_time #=> Integer
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].timeout #=> Integer
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].max_capacity #=> Float
-    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].number_of_workers #=> Integer
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].security_configuration #=> String
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].notification_property.notify_delay_after #=> Integer
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].glue_version #=> String
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].dpu_seconds #=> Float
     #   resp.workflow.last_run.graph.nodes[0].crawler_details.crawls #=> Array
     #   resp.workflow.last_run.graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
     #   resp.workflow.last_run.graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
@@ -7947,12 +10526,13 @@ module Aws::Glue
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].execution_time #=> Integer
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].timeout #=> Integer
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].max_capacity #=> Float
-    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].number_of_workers #=> Integer
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].security_configuration #=> String
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].notification_property.notify_delay_after #=> Integer
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].glue_version #=> String
+    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].dpu_seconds #=> Float
     #   resp.workflow.graph.nodes[0].crawler_details.crawls #=> Array
     #   resp.workflow.graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
     #   resp.workflow.graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
@@ -8064,12 +10644,13 @@ module Aws::Glue
     #   resp.run.graph.nodes[0].job_details.job_runs[0].execution_time #=> Integer
     #   resp.run.graph.nodes[0].job_details.job_runs[0].timeout #=> Integer
     #   resp.run.graph.nodes[0].job_details.job_runs[0].max_capacity #=> Float
-    #   resp.run.graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.run.graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
     #   resp.run.graph.nodes[0].job_details.job_runs[0].number_of_workers #=> Integer
     #   resp.run.graph.nodes[0].job_details.job_runs[0].security_configuration #=> String
     #   resp.run.graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
     #   resp.run.graph.nodes[0].job_details.job_runs[0].notification_property.notify_delay_after #=> Integer
     #   resp.run.graph.nodes[0].job_details.job_runs[0].glue_version #=> String
+    #   resp.run.graph.nodes[0].job_details.job_runs[0].dpu_seconds #=> Float
     #   resp.run.graph.nodes[0].crawler_details.crawls #=> Array
     #   resp.run.graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
     #   resp.run.graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
@@ -8221,12 +10802,13 @@ module Aws::Glue
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].execution_time #=> Integer
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].timeout #=> Integer
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].max_capacity #=> Float
-    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].number_of_workers #=> Integer
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].security_configuration #=> String
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].notification_property.notify_delay_after #=> Integer
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].glue_version #=> String
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].dpu_seconds #=> Float
     #   resp.runs[0].graph.nodes[0].crawler_details.crawls #=> Array
     #   resp.runs[0].graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
     #   resp.runs[0].graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
@@ -8364,6 +10946,122 @@ module Aws::Glue
     # @param [Hash] params ({})
     def list_crawlers(params = {}, options = {})
       req = build_request(:list_crawlers, params)
+      req.send_request(options)
+    end
+
+    # Returns all the crawls of a specified crawler. Returns only the crawls
+    # that have occurred since the launch date of the crawler history
+    # feature, and only retains up to 12 months of crawls. Older crawls will
+    # not be returned.
+    #
+    # You may use this API to:
+    #
+    # * Retrive all the crawls of a specified crawler.
+    #
+    # * Retrieve all the crawls of a specified crawler within a limited
+    #   count.
+    #
+    # * Retrieve all the crawls of a specified crawler in a specific time
+    #   range.
+    #
+    # * Retrieve all the crawls of a specified crawler with a particular
+    #   state, crawl ID, or DPU hour value.
+    #
+    # @option params [required, String] :crawler_name
+    #   The name of the crawler whose runs you want to retrieve.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return. The default is 20, and
+    #   maximum is 100.
+    #
+    # @option params [Array<Types::CrawlsFilter>] :filters
+    #   Filters the crawls by the criteria you specify in a list of
+    #   `CrawlsFilter` objects.
+    #
+    # @option params [String] :next_token
+    #   A continuation token, if this is a continuation call.
+    #
+    # @return [Types::ListCrawlsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCrawlsResponse#crawls #crawls} => Array&lt;Types::CrawlerHistory&gt;
+    #   * {Types::ListCrawlsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_crawls({
+    #     crawler_name: "NameString", # required
+    #     max_results: 1,
+    #     filters: [
+    #       {
+    #         field_name: "CRAWL_ID", # accepts CRAWL_ID, STATE, START_TIME, END_TIME, DPU_HOUR
+    #         filter_operator: "GT", # accepts GT, GE, LT, LE, EQ, NE
+    #         field_value: "GenericString",
+    #       },
+    #     ],
+    #     next_token: "Token",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.crawls #=> Array
+    #   resp.crawls[0].crawl_id #=> String
+    #   resp.crawls[0].state #=> String, one of "RUNNING", "COMPLETED", "FAILED", "STOPPED"
+    #   resp.crawls[0].start_time #=> Time
+    #   resp.crawls[0].end_time #=> Time
+    #   resp.crawls[0].summary #=> String
+    #   resp.crawls[0].error_message #=> String
+    #   resp.crawls[0].log_group #=> String
+    #   resp.crawls[0].log_stream #=> String
+    #   resp.crawls[0].message_prefix #=> String
+    #   resp.crawls[0].dpu_hour #=> Float
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListCrawls AWS API Documentation
+    #
+    # @overload list_crawls(params = {})
+    # @param [Hash] params ({})
+    def list_crawls(params = {}, options = {})
+      req = build_request(:list_crawls, params)
+      req.send_request(options)
+    end
+
+    # Lists all the custom patterns that have been created.
+    #
+    # @option params [String] :next_token
+    #   A paginated token to offset the results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @return [Types::ListCustomEntityTypesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCustomEntityTypesResponse#custom_entity_types #custom_entity_types} => Array&lt;Types::CustomEntityType&gt;
+    #   * {Types::ListCustomEntityTypesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_custom_entity_types({
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.custom_entity_types #=> Array
+    #   resp.custom_entity_types[0].name #=> String
+    #   resp.custom_entity_types[0].regex_string #=> String
+    #   resp.custom_entity_types[0].context_words #=> Array
+    #   resp.custom_entity_types[0].context_words[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListCustomEntityTypes AWS API Documentation
+    #
+    # @overload list_custom_entity_types(params = {})
+    # @param [Hash] params ({})
+    def list_custom_entity_types(params = {}, options = {})
+      req = build_request(:list_custom_entity_types, params)
       req.send_request(options)
     end
 
@@ -8706,6 +11404,123 @@ module Aws::Glue
     # @param [Hash] params ({})
     def list_schemas(params = {}, options = {})
       req = build_request(:list_schemas, params)
+      req.send_request(options)
+    end
+
+    # Retrieve a list of sessions.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results, or null if there are no more
+    #   result.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Tags belonging to the session.
+    #
+    # @option params [String] :request_origin
+    #   The origin of the request.
+    #
+    # @return [Types::ListSessionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSessionsResponse#ids #ids} => Array&lt;String&gt;
+    #   * {Types::ListSessionsResponse#sessions #sessions} => Array&lt;Types::Session&gt;
+    #   * {Types::ListSessionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_sessions({
+    #     next_token: "OrchestrationToken",
+    #     max_results: 1,
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     request_origin: "OrchestrationNameString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ids #=> Array
+    #   resp.ids[0] #=> String
+    #   resp.sessions #=> Array
+    #   resp.sessions[0].id #=> String
+    #   resp.sessions[0].created_on #=> Time
+    #   resp.sessions[0].status #=> String, one of "PROVISIONING", "READY", "FAILED", "TIMEOUT", "STOPPING", "STOPPED"
+    #   resp.sessions[0].error_message #=> String
+    #   resp.sessions[0].description #=> String
+    #   resp.sessions[0].role #=> String
+    #   resp.sessions[0].command.name #=> String
+    #   resp.sessions[0].command.python_version #=> String
+    #   resp.sessions[0].default_arguments #=> Hash
+    #   resp.sessions[0].default_arguments["OrchestrationNameString"] #=> String
+    #   resp.sessions[0].connections.connections #=> Array
+    #   resp.sessions[0].connections.connections[0] #=> String
+    #   resp.sessions[0].progress #=> Float
+    #   resp.sessions[0].max_capacity #=> Float
+    #   resp.sessions[0].security_configuration #=> String
+    #   resp.sessions[0].glue_version #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListSessions AWS API Documentation
+    #
+    # @overload list_sessions(params = {})
+    # @param [Hash] params ({})
+    def list_sessions(params = {}, options = {})
+      req = build_request(:list_sessions, params)
+      req.send_request(options)
+    end
+
+    # Lists statements for the session.
+    #
+    # @option params [required, String] :session_id
+    #   The Session ID of the statements.
+    #
+    # @option params [String] :request_origin
+    #   The origin of the request to list statements.
+    #
+    # @option params [String] :next_token
+    #   A continuation token, if this is a continuation call.
+    #
+    # @return [Types::ListStatementsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListStatementsResponse#statements #statements} => Array&lt;Types::Statement&gt;
+    #   * {Types::ListStatementsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_statements({
+    #     session_id: "NameString", # required
+    #     request_origin: "OrchestrationNameString",
+    #     next_token: "OrchestrationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.statements #=> Array
+    #   resp.statements[0].id #=> Integer
+    #   resp.statements[0].code #=> String
+    #   resp.statements[0].state #=> String, one of "WAITING", "RUNNING", "AVAILABLE", "CANCELLING", "CANCELLED", "ERROR"
+    #   resp.statements[0].output.data.text_plain #=> String
+    #   resp.statements[0].output.execution_count #=> Integer
+    #   resp.statements[0].output.status #=> String, one of "WAITING", "RUNNING", "AVAILABLE", "CANCELLING", "CANCELLED", "ERROR"
+    #   resp.statements[0].output.error_name #=> String
+    #   resp.statements[0].output.error_value #=> String
+    #   resp.statements[0].output.traceback #=> Array
+    #   resp.statements[0].output.traceback[0] #=> String
+    #   resp.statements[0].progress #=> Float
+    #   resp.statements[0].started_on #=> Integer
+    #   resp.statements[0].completed_on #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListStatements AWS API Documentation
+    #
+    # @overload list_statements(params = {})
+    # @param [Hash] params ({})
+    def list_statements(params = {}, options = {})
+      req = build_request(:list_statements, params)
       req.send_request(options)
     end
 
@@ -9285,6 +12100,42 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Executes the statement.
+    #
+    # @option params [required, String] :session_id
+    #   The Session Id of the statement to be run.
+    #
+    # @option params [required, String] :code
+    #   The statement code to be run.
+    #
+    # @option params [String] :request_origin
+    #   The origin of the request.
+    #
+    # @return [Types::RunStatementResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RunStatementResponse#id #id} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.run_statement({
+    #     session_id: "NameString", # required
+    #     code: "OrchestrationStatementCodeString", # required
+    #     request_origin: "OrchestrationNameString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/RunStatement AWS API Documentation
+    #
+    # @overload run_statement(params = {})
+    # @param [Hash] params ({})
+    def run_statement(params = {}, options = {})
+      req = build_request(:run_statement, params)
+      req.send_request(options)
+    end
+
     # Searches a set of tables based on properties in the table metadata as
     # well as on the parent database. You can search against text or filter
     # conditions.
@@ -9437,6 +12288,7 @@ module Aws::Glue
     #   resp.table_list[0].target_table.database_name #=> String
     #   resp.table_list[0].target_table.name #=> String
     #   resp.table_list[0].catalog_id #=> String
+    #   resp.table_list[0].version_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SearchTables AWS API Documentation
     #
@@ -9657,6 +12509,11 @@ module Aws::Glue
     #   You can specify arguments here that your own job-execution script
     #   consumes, as well as arguments that Glue itself consumes.
     #
+    #   Job arguments may be logged. Do not pass plaintext secrets as
+    #   arguments. Retrieve secrets from a Glue Connection, Secrets Manager or
+    #   other secret management mechanism if you intend to keep them within
+    #   the Job.
+    #
     #   For information about how to specify and consume your own Job
     #   arguments, see the [Calling Glue APIs in Python][1] topic in the
     #   developer guide.
@@ -9674,7 +12531,7 @@ module Aws::Glue
     #   This field is deprecated. Use `MaxCapacity` instead.
     #
     #   The number of Glue data processing units (DPUs) to allocate to this
-    #   JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU
+    #   JobRun. You can allocate a minimum of 2 DPUs; the default is 10. A DPU
     #   is a relative measure of processing power that consists of 4 vCPUs of
     #   compute capacity and 16 GB of memory. For more information, see the
     #   [Glue pricing page][1].
@@ -9686,8 +12543,10 @@ module Aws::Glue
     # @option params [Integer] :timeout
     #   The `JobRun` timeout in minutes. This is the maximum time that a job
     #   run can consume resources before it is terminated and enters `TIMEOUT`
-    #   status. The default is 2,880 minutes (48 hours). This overrides the
-    #   timeout value set in the parent job.
+    #   status. This value overrides the timeout value set in the parent job.
+    #
+    #   Streaming jobs do not have a timeout. The default for non-streaming
+    #   jobs is 2,880 minutes (48 hours).
     #
     # @option params [Float] :max_capacity
     #   The number of Glue data processing units (DPUs) that can be allocated
@@ -9705,7 +12564,7 @@ module Aws::Glue
     #     or 1 DPU. The default is 0.0625 DPU.
     #
     #   * When you specify an Apache Spark ETL job
-    #     (`JobCommand.Name`="glueetl"), you can allocate from 2 to 100
+    #     (`JobCommand.Name`="glueetl"), you can allocate a minimum of 2
     #     DPUs. The default is 10 DPUs. This job type cannot have a fractional
     #     DPU allocation.
     #
@@ -9722,7 +12581,7 @@ module Aws::Glue
     #
     # @option params [String] :worker_type
     #   The type of predefined worker that is allocated when a job runs.
-    #   Accepts a value of Standard, G.1X, or G.2X.
+    #   Accepts a value of Standard, G.1X, G.2X, or G.025X.
     #
     #   * For the `Standard` worker type, each worker provides 4 vCPU, 16 GB
     #     of memory and a 50GB disk, and 2 executors per worker.
@@ -9733,12 +12592,14 @@ module Aws::Glue
     #   * For the `G.2X` worker type, each worker provides 8 vCPU, 32 GB of
     #     memory and a 128GB disk, and 1 executor per worker.
     #
+    #   * For the `G.025X` worker type, each worker maps to 0.25 DPU (2 vCPU,
+    #     4 GB of memory, 64 GB disk), and provides 1 executor per worker. We
+    #     recommend this worker type for low volume streaming jobs. This
+    #     worker type is only available for Glue version 3.0 streaming jobs.
+    #
     # @option params [Integer] :number_of_workers
     #   The number of workers of a defined `workerType` that are allocated
     #   when a job runs.
-    #
-    #   The maximum number of workers you can define are 299 for `G.1X`, and
-    #   149 for `G.2X`.
     #
     # @return [Types::StartJobRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9759,7 +12620,7 @@ module Aws::Glue
     #     notification_property: {
     #       notify_delay_after: 1,
     #     },
-    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X
+    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X
     #     number_of_workers: 1,
     #   })
     #
@@ -9969,6 +12830,38 @@ module Aws::Glue
     # @param [Hash] params ({})
     def stop_crawler_schedule(params = {}, options = {})
       req = build_request(:stop_crawler_schedule, params)
+      req.send_request(options)
+    end
+
+    # Stops the session.
+    #
+    # @option params [required, String] :id
+    #   The ID of the session to be stopped.
+    #
+    # @option params [String] :request_origin
+    #   The origin of the request.
+    #
+    # @return [Types::StopSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopSessionResponse#id #id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_session({
+    #     id: "NameString", # required
+    #     request_origin: "OrchestrationNameString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopSession AWS API Documentation
+    #
+    # @overload stop_session(params = {})
+    # @param [Hash] params ({})
+    def stop_session(params = {}, options = {})
+      req = build_request(:stop_session, params)
       req.send_request(options)
     end
 
@@ -10551,6 +13444,7 @@ module Aws::Glue
     #   Specifies data lineage configuration settings for the crawler.
     #
     # @option params [Types::LakeFormationConfiguration] :lake_formation_configuration
+    #   Specifies Lake Formation configuration settings for the crawler.
     #
     # @option params [String] :configuration
     #   Crawler configuration information. This versioned JSON string allows
@@ -10806,13 +13700,15 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Updates an existing job definition.
+    # Updates an existing job definition. The previous job definition is
+    # completely overwritten by this information.
     #
     # @option params [required, String] :job_name
     #   The name of the job definition to update.
     #
     # @option params [required, Types::JobUpdate] :job_update
     #   Specifies the values with which to update the job definition.
+    #   Unspecified configuration is removed or reset to default values.
     #
     # @return [Types::UpdateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -10847,13 +13743,681 @@ module Aws::Glue
     #       allocated_capacity: 1,
     #       timeout: 1,
     #       max_capacity: 1.0,
-    #       worker_type: "Standard", # accepts Standard, G.1X, G.2X
+    #       worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X
     #       number_of_workers: 1,
     #       security_configuration: "NameString",
     #       notification_property: {
     #         notify_delay_after: 1,
     #       },
     #       glue_version: "GlueVersionString",
+    #       code_gen_configuration_nodes: {
+    #         "NodeId" => {
+    #           athena_connector_source: {
+    #             name: "NodeName", # required
+    #             connection_name: "EnclosedInStringProperty", # required
+    #             connector_name: "EnclosedInStringProperty", # required
+    #             connection_type: "EnclosedInStringProperty", # required
+    #             connection_table: "EnclosedInStringPropertyWithQuote",
+    #             schema_name: "EnclosedInStringProperty", # required
+    #             output_schemas: [
+    #               {
+    #                 columns: [
+    #                   {
+    #                     name: "GlueStudioColumnNameString", # required
+    #                     type: "ColumnTypeString",
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
+    #           jdbc_connector_source: {
+    #             name: "NodeName", # required
+    #             connection_name: "EnclosedInStringProperty", # required
+    #             connector_name: "EnclosedInStringProperty", # required
+    #             connection_type: "EnclosedInStringProperty", # required
+    #             additional_options: {
+    #               filter_predicate: "EnclosedInStringProperty",
+    #               partition_column: "EnclosedInStringProperty",
+    #               lower_bound: 1,
+    #               upper_bound: 1,
+    #               num_partitions: 1,
+    #               job_bookmark_keys: ["EnclosedInStringProperty"],
+    #               job_bookmark_keys_sort_order: "EnclosedInStringProperty",
+    #               data_type_mapping: {
+    #                 "ARRAY" => "DATE", # accepts DATE, STRING, TIMESTAMP, INT, FLOAT, LONG, BIGDECIMAL, BYTE, SHORT, DOUBLE
+    #               },
+    #             },
+    #             connection_table: "EnclosedInStringPropertyWithQuote",
+    #             query: "SqlQuery",
+    #             output_schemas: [
+    #               {
+    #                 columns: [
+    #                   {
+    #                     name: "GlueStudioColumnNameString", # required
+    #                     type: "ColumnTypeString",
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
+    #           spark_connector_source: {
+    #             name: "NodeName", # required
+    #             connection_name: "EnclosedInStringProperty", # required
+    #             connector_name: "EnclosedInStringProperty", # required
+    #             connection_type: "EnclosedInStringProperty", # required
+    #             additional_options: {
+    #               "EnclosedInStringProperty" => "EnclosedInStringProperty",
+    #             },
+    #             output_schemas: [
+    #               {
+    #                 columns: [
+    #                   {
+    #                     name: "GlueStudioColumnNameString", # required
+    #                     type: "ColumnTypeString",
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
+    #           catalog_source: {
+    #             name: "NodeName", # required
+    #             database: "EnclosedInStringProperty", # required
+    #             table: "EnclosedInStringProperty", # required
+    #           },
+    #           redshift_source: {
+    #             name: "NodeName", # required
+    #             database: "EnclosedInStringProperty", # required
+    #             table: "EnclosedInStringProperty", # required
+    #             redshift_tmp_dir: "EnclosedInStringProperty",
+    #             tmp_dir_iam_role: "EnclosedInStringProperty",
+    #           },
+    #           s3_catalog_source: {
+    #             name: "NodeName", # required
+    #             database: "EnclosedInStringProperty", # required
+    #             table: "EnclosedInStringProperty", # required
+    #             partition_predicate: "EnclosedInStringProperty",
+    #             additional_options: {
+    #               bounded_size: 1,
+    #               bounded_files: 1,
+    #             },
+    #           },
+    #           s3_csv_source: {
+    #             name: "NodeName", # required
+    #             paths: ["EnclosedInStringProperty"], # required
+    #             compression_type: "gzip", # accepts gzip, bzip2
+    #             exclusions: ["EnclosedInStringProperty"],
+    #             group_size: "EnclosedInStringProperty",
+    #             group_files: "EnclosedInStringProperty",
+    #             recurse: false,
+    #             max_band: 1,
+    #             max_files_in_band: 1,
+    #             additional_options: {
+    #               bounded_size: 1,
+    #               bounded_files: 1,
+    #               enable_sample_path: false,
+    #               sample_path: "EnclosedInStringProperty",
+    #             },
+    #             separator: "comma", # required, accepts comma, ctrla, pipe, semicolon, tab
+    #             escaper: "EnclosedInStringPropertyWithQuote",
+    #             quote_char: "quote", # required, accepts quote, quillemet, single_quote, disabled
+    #             multiline: false,
+    #             with_header: false,
+    #             write_header: false,
+    #             skip_first: false,
+    #             optimize_performance: false,
+    #             output_schemas: [
+    #               {
+    #                 columns: [
+    #                   {
+    #                     name: "GlueStudioColumnNameString", # required
+    #                     type: "ColumnTypeString",
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
+    #           s3_json_source: {
+    #             name: "NodeName", # required
+    #             paths: ["EnclosedInStringProperty"], # required
+    #             compression_type: "gzip", # accepts gzip, bzip2
+    #             exclusions: ["EnclosedInStringProperty"],
+    #             group_size: "EnclosedInStringProperty",
+    #             group_files: "EnclosedInStringProperty",
+    #             recurse: false,
+    #             max_band: 1,
+    #             max_files_in_band: 1,
+    #             additional_options: {
+    #               bounded_size: 1,
+    #               bounded_files: 1,
+    #               enable_sample_path: false,
+    #               sample_path: "EnclosedInStringProperty",
+    #             },
+    #             json_path: "EnclosedInStringProperty",
+    #             multiline: false,
+    #             output_schemas: [
+    #               {
+    #                 columns: [
+    #                   {
+    #                     name: "GlueStudioColumnNameString", # required
+    #                     type: "ColumnTypeString",
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
+    #           s3_parquet_source: {
+    #             name: "NodeName", # required
+    #             paths: ["EnclosedInStringProperty"], # required
+    #             compression_type: "snappy", # accepts snappy, lzo, gzip, uncompressed, none
+    #             exclusions: ["EnclosedInStringProperty"],
+    #             group_size: "EnclosedInStringProperty",
+    #             group_files: "EnclosedInStringProperty",
+    #             recurse: false,
+    #             max_band: 1,
+    #             max_files_in_band: 1,
+    #             additional_options: {
+    #               bounded_size: 1,
+    #               bounded_files: 1,
+    #               enable_sample_path: false,
+    #               sample_path: "EnclosedInStringProperty",
+    #             },
+    #             output_schemas: [
+    #               {
+    #                 columns: [
+    #                   {
+    #                     name: "GlueStudioColumnNameString", # required
+    #                     type: "ColumnTypeString",
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
+    #           relational_catalog_source: {
+    #             name: "NodeName", # required
+    #             database: "EnclosedInStringProperty", # required
+    #             table: "EnclosedInStringProperty", # required
+    #           },
+    #           dynamo_db_catalog_source: {
+    #             name: "NodeName", # required
+    #             database: "EnclosedInStringProperty", # required
+    #             table: "EnclosedInStringProperty", # required
+    #           },
+    #           jdbc_connector_target: {
+    #             name: "NodeName", # required
+    #             inputs: ["NodeId"], # required
+    #             connection_name: "EnclosedInStringProperty", # required
+    #             connection_table: "EnclosedInStringPropertyWithQuote", # required
+    #             connector_name: "EnclosedInStringProperty", # required
+    #             connection_type: "EnclosedInStringProperty", # required
+    #             additional_options: {
+    #               "EnclosedInStringProperty" => "EnclosedInStringProperty",
+    #             },
+    #             output_schemas: [
+    #               {
+    #                 columns: [
+    #                   {
+    #                     name: "GlueStudioColumnNameString", # required
+    #                     type: "ColumnTypeString",
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
+    #           spark_connector_target: {
+    #             name: "NodeName", # required
+    #             inputs: ["NodeId"], # required
+    #             connection_name: "EnclosedInStringProperty", # required
+    #             connector_name: "EnclosedInStringProperty", # required
+    #             connection_type: "EnclosedInStringProperty", # required
+    #             additional_options: {
+    #               "EnclosedInStringProperty" => "EnclosedInStringProperty",
+    #             },
+    #             output_schemas: [
+    #               {
+    #                 columns: [
+    #                   {
+    #                     name: "GlueStudioColumnNameString", # required
+    #                     type: "ColumnTypeString",
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
+    #           catalog_target: {
+    #             name: "NodeName", # required
+    #             inputs: ["NodeId"], # required
+    #             database: "EnclosedInStringProperty", # required
+    #             table: "EnclosedInStringProperty", # required
+    #           },
+    #           redshift_target: {
+    #             name: "NodeName", # required
+    #             inputs: ["NodeId"], # required
+    #             database: "EnclosedInStringProperty", # required
+    #             table: "EnclosedInStringProperty", # required
+    #             redshift_tmp_dir: "EnclosedInStringProperty",
+    #             tmp_dir_iam_role: "EnclosedInStringProperty",
+    #             upsert_redshift_options: {
+    #               table_location: "EnclosedInStringProperty",
+    #               connection_name: "EnclosedInStringProperty",
+    #               upsert_keys: ["EnclosedInStringProperty"],
+    #             },
+    #           },
+    #           s3_catalog_target: {
+    #             name: "NodeName", # required
+    #             inputs: ["NodeId"], # required
+    #             partition_keys: [
+    #               ["EnclosedInStringProperty"],
+    #             ],
+    #             table: "EnclosedInStringProperty", # required
+    #             database: "EnclosedInStringProperty", # required
+    #             schema_change_policy: {
+    #               enable_update_catalog: false,
+    #               update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
+    #             },
+    #           },
+    #           s3_glue_parquet_target: {
+    #             name: "NodeName", # required
+    #             inputs: ["NodeId"], # required
+    #             partition_keys: [
+    #               ["EnclosedInStringProperty"],
+    #             ],
+    #             path: "EnclosedInStringProperty", # required
+    #             compression: "snappy", # accepts snappy, lzo, gzip, uncompressed, none
+    #             schema_change_policy: {
+    #               enable_update_catalog: false,
+    #               update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
+    #               table: "EnclosedInStringProperty",
+    #               database: "EnclosedInStringProperty",
+    #             },
+    #           },
+    #           s3_direct_target: {
+    #             name: "NodeName", # required
+    #             inputs: ["NodeId"], # required
+    #             partition_keys: [
+    #               ["EnclosedInStringProperty"],
+    #             ],
+    #             path: "EnclosedInStringProperty", # required
+    #             compression: "EnclosedInStringProperty",
+    #             format: "json", # required, accepts json, csv, avro, orc, parquet
+    #             schema_change_policy: {
+    #               enable_update_catalog: false,
+    #               update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
+    #               table: "EnclosedInStringProperty",
+    #               database: "EnclosedInStringProperty",
+    #             },
+    #           },
+    #           apply_mapping: {
+    #             name: "NodeName", # required
+    #             inputs: ["NodeId"], # required
+    #             mapping: [ # required
+    #               {
+    #                 to_key: "EnclosedInStringProperty",
+    #                 from_path: ["EnclosedInStringProperty"],
+    #                 from_type: "EnclosedInStringProperty",
+    #                 to_type: "EnclosedInStringProperty",
+    #                 dropped: false,
+    #                 children: {
+    #                   # recursive Mappings
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #           select_fields: {
+    #             name: "NodeName", # required
+    #             inputs: ["NodeId"], # required
+    #             paths: [ # required
+    #               ["EnclosedInStringProperty"],
+    #             ],
+    #           },
+    #           drop_fields: {
+    #             name: "NodeName", # required
+    #             inputs: ["NodeId"], # required
+    #             paths: [ # required
+    #               ["EnclosedInStringProperty"],
+    #             ],
+    #           },
+    #           rename_field: {
+    #             name: "NodeName", # required
+    #             inputs: ["NodeId"], # required
+    #             source_path: ["EnclosedInStringProperty"], # required
+    #             target_path: ["EnclosedInStringProperty"], # required
+    #           },
+    #           spigot: {
+    #             name: "NodeName", # required
+    #             inputs: ["NodeId"], # required
+    #             path: "EnclosedInStringProperty", # required
+    #             topk: 1,
+    #             prob: 1.0,
+    #           },
+    #           join: {
+    #             name: "NodeName", # required
+    #             inputs: ["NodeId"], # required
+    #             join_type: "equijoin", # required, accepts equijoin, left, right, outer, leftsemi, leftanti
+    #             columns: [ # required
+    #               {
+    #                 from: "EnclosedInStringProperty", # required
+    #                 keys: [ # required
+    #                   ["EnclosedInStringProperty"],
+    #                 ],
+    #               },
+    #             ],
+    #           },
+    #           split_fields: {
+    #             name: "NodeName", # required
+    #             inputs: ["NodeId"], # required
+    #             paths: [ # required
+    #               ["EnclosedInStringProperty"],
+    #             ],
+    #           },
+    #           select_from_collection: {
+    #             name: "NodeName", # required
+    #             inputs: ["NodeId"], # required
+    #             index: 1, # required
+    #           },
+    #           fill_missing_values: {
+    #             name: "NodeName", # required
+    #             inputs: ["NodeId"], # required
+    #             imputed_path: "EnclosedInStringProperty", # required
+    #             filled_path: "EnclosedInStringProperty",
+    #           },
+    #           filter: {
+    #             name: "NodeName", # required
+    #             inputs: ["NodeId"], # required
+    #             logical_operator: "AND", # required, accepts AND, OR
+    #             filters: [ # required
+    #               {
+    #                 operation: "EQ", # required, accepts EQ, LT, GT, LTE, GTE, REGEX, ISNULL
+    #                 negated: false,
+    #                 values: [ # required
+    #                   {
+    #                     type: "COLUMNEXTRACTED", # required, accepts COLUMNEXTRACTED, CONSTANT
+    #                     value: ["EnclosedInStringProperty"], # required
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
+    #           custom_code: {
+    #             name: "NodeName", # required
+    #             inputs: ["NodeId"], # required
+    #             code: "ExtendedString", # required
+    #             class_name: "EnclosedInStringProperty", # required
+    #             output_schemas: [
+    #               {
+    #                 columns: [
+    #                   {
+    #                     name: "GlueStudioColumnNameString", # required
+    #                     type: "ColumnTypeString",
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
+    #           spark_sql: {
+    #             name: "NodeName", # required
+    #             inputs: ["NodeId"], # required
+    #             sql_query: "SqlQuery", # required
+    #             sql_aliases: [ # required
+    #               {
+    #                 from: "NodeId", # required
+    #                 alias: "EnclosedInStringPropertyWithQuote", # required
+    #               },
+    #             ],
+    #             output_schemas: [
+    #               {
+    #                 columns: [
+    #                   {
+    #                     name: "GlueStudioColumnNameString", # required
+    #                     type: "ColumnTypeString",
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
+    #           direct_kinesis_source: {
+    #             name: "NodeName", # required
+    #             window_size: 1,
+    #             detect_schema: false,
+    #             streaming_options: {
+    #               endpoint_url: "EnclosedInStringProperty",
+    #               stream_name: "EnclosedInStringProperty",
+    #               classification: "EnclosedInStringProperty",
+    #               delimiter: "EnclosedInStringProperty",
+    #               starting_position: "latest", # accepts latest, trim_horizon, earliest
+    #               max_fetch_time_in_ms: 1,
+    #               max_fetch_records_per_shard: 1,
+    #               max_record_per_read: 1,
+    #               add_idle_time_between_reads: false,
+    #               idle_time_between_reads_in_ms: 1,
+    #               describe_shard_interval: 1,
+    #               num_retries: 1,
+    #               retry_interval_ms: 1,
+    #               max_retry_interval_ms: 1,
+    #               avoid_empty_batches: false,
+    #               stream_arn: "EnclosedInStringProperty",
+    #               role_arn: "EnclosedInStringProperty",
+    #               role_session_name: "EnclosedInStringProperty",
+    #             },
+    #             data_preview_options: {
+    #               polling_time: 1,
+    #               record_polling_limit: 1,
+    #             },
+    #           },
+    #           direct_kafka_source: {
+    #             name: "NodeName", # required
+    #             streaming_options: {
+    #               bootstrap_servers: "EnclosedInStringProperty",
+    #               security_protocol: "EnclosedInStringProperty",
+    #               connection_name: "EnclosedInStringProperty",
+    #               topic_name: "EnclosedInStringProperty",
+    #               assign: "EnclosedInStringProperty",
+    #               subscribe_pattern: "EnclosedInStringProperty",
+    #               classification: "EnclosedInStringProperty",
+    #               delimiter: "EnclosedInStringProperty",
+    #               starting_offsets: "EnclosedInStringProperty",
+    #               ending_offsets: "EnclosedInStringProperty",
+    #               poll_timeout_ms: 1,
+    #               num_retries: 1,
+    #               retry_interval_ms: 1,
+    #               max_offsets_per_trigger: 1,
+    #               min_partitions: 1,
+    #             },
+    #             window_size: 1,
+    #             detect_schema: false,
+    #             data_preview_options: {
+    #               polling_time: 1,
+    #               record_polling_limit: 1,
+    #             },
+    #           },
+    #           catalog_kinesis_source: {
+    #             name: "NodeName", # required
+    #             window_size: 1,
+    #             detect_schema: false,
+    #             table: "EnclosedInStringProperty", # required
+    #             database: "EnclosedInStringProperty", # required
+    #             streaming_options: {
+    #               endpoint_url: "EnclosedInStringProperty",
+    #               stream_name: "EnclosedInStringProperty",
+    #               classification: "EnclosedInStringProperty",
+    #               delimiter: "EnclosedInStringProperty",
+    #               starting_position: "latest", # accepts latest, trim_horizon, earliest
+    #               max_fetch_time_in_ms: 1,
+    #               max_fetch_records_per_shard: 1,
+    #               max_record_per_read: 1,
+    #               add_idle_time_between_reads: false,
+    #               idle_time_between_reads_in_ms: 1,
+    #               describe_shard_interval: 1,
+    #               num_retries: 1,
+    #               retry_interval_ms: 1,
+    #               max_retry_interval_ms: 1,
+    #               avoid_empty_batches: false,
+    #               stream_arn: "EnclosedInStringProperty",
+    #               role_arn: "EnclosedInStringProperty",
+    #               role_session_name: "EnclosedInStringProperty",
+    #             },
+    #             data_preview_options: {
+    #               polling_time: 1,
+    #               record_polling_limit: 1,
+    #             },
+    #           },
+    #           catalog_kafka_source: {
+    #             name: "NodeName", # required
+    #             window_size: 1,
+    #             detect_schema: false,
+    #             table: "EnclosedInStringProperty", # required
+    #             database: "EnclosedInStringProperty", # required
+    #             streaming_options: {
+    #               bootstrap_servers: "EnclosedInStringProperty",
+    #               security_protocol: "EnclosedInStringProperty",
+    #               connection_name: "EnclosedInStringProperty",
+    #               topic_name: "EnclosedInStringProperty",
+    #               assign: "EnclosedInStringProperty",
+    #               subscribe_pattern: "EnclosedInStringProperty",
+    #               classification: "EnclosedInStringProperty",
+    #               delimiter: "EnclosedInStringProperty",
+    #               starting_offsets: "EnclosedInStringProperty",
+    #               ending_offsets: "EnclosedInStringProperty",
+    #               poll_timeout_ms: 1,
+    #               num_retries: 1,
+    #               retry_interval_ms: 1,
+    #               max_offsets_per_trigger: 1,
+    #               min_partitions: 1,
+    #             },
+    #             data_preview_options: {
+    #               polling_time: 1,
+    #               record_polling_limit: 1,
+    #             },
+    #           },
+    #           drop_null_fields: {
+    #             name: "NodeName", # required
+    #             inputs: ["NodeId"], # required
+    #             null_check_box_list: {
+    #               is_empty: false,
+    #               is_null_string: false,
+    #               is_neg_one: false,
+    #             },
+    #             null_text_list: [
+    #               {
+    #                 value: "EnclosedInStringProperty", # required
+    #                 datatype: { # required
+    #                   id: "GenericLimitedString", # required
+    #                   label: "GenericLimitedString", # required
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #           merge: {
+    #             name: "NodeName", # required
+    #             inputs: ["NodeId"], # required
+    #             source: "NodeId", # required
+    #             primary_keys: [ # required
+    #               ["EnclosedInStringProperty"],
+    #             ],
+    #           },
+    #           union: {
+    #             name: "NodeName", # required
+    #             inputs: ["NodeId"], # required
+    #             union_type: "ALL", # required, accepts ALL, DISTINCT
+    #           },
+    #           pii_detection: {
+    #             name: "NodeName", # required
+    #             inputs: ["NodeId"], # required
+    #             pii_type: "RowAudit", # required, accepts RowAudit, RowMasking, ColumnAudit, ColumnMasking
+    #             entity_types_to_detect: ["EnclosedInStringProperty"], # required
+    #             output_column_name: "EnclosedInStringProperty",
+    #             sample_fraction: 1.0,
+    #             threshold_fraction: 1.0,
+    #             mask_value: "MaskValue",
+    #           },
+    #           aggregate: {
+    #             name: "NodeName", # required
+    #             inputs: ["NodeId"], # required
+    #             groups: [ # required
+    #               ["EnclosedInStringProperty"],
+    #             ],
+    #             aggs: [ # required
+    #               {
+    #                 column: ["EnclosedInStringProperty"], # required
+    #                 agg_func: "avg", # required, accepts avg, countDistinct, count, first, last, kurtosis, max, min, skewness, stddev_samp, stddev_pop, sum, sumDistinct, var_samp, var_pop
+    #               },
+    #             ],
+    #           },
+    #           drop_duplicates: {
+    #             name: "NodeName", # required
+    #             inputs: ["NodeId"], # required
+    #             columns: [
+    #               ["GenericLimitedString"],
+    #             ],
+    #           },
+    #           governed_catalog_target: {
+    #             name: "NodeName", # required
+    #             inputs: ["NodeId"], # required
+    #             partition_keys: [
+    #               ["EnclosedInStringProperty"],
+    #             ],
+    #             table: "EnclosedInStringProperty", # required
+    #             database: "EnclosedInStringProperty", # required
+    #             schema_change_policy: {
+    #               enable_update_catalog: false,
+    #               update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
+    #             },
+    #           },
+    #           governed_catalog_source: {
+    #             name: "NodeName", # required
+    #             database: "EnclosedInStringProperty", # required
+    #             table: "EnclosedInStringProperty", # required
+    #             partition_predicate: "EnclosedInStringProperty",
+    #             additional_options: {
+    #               bounded_size: 1,
+    #               bounded_files: 1,
+    #             },
+    #           },
+    #           microsoft_sql_server_catalog_source: {
+    #             name: "NodeName", # required
+    #             database: "EnclosedInStringProperty", # required
+    #             table: "EnclosedInStringProperty", # required
+    #           },
+    #           my_sql_catalog_source: {
+    #             name: "NodeName", # required
+    #             database: "EnclosedInStringProperty", # required
+    #             table: "EnclosedInStringProperty", # required
+    #           },
+    #           oracle_sql_catalog_source: {
+    #             name: "NodeName", # required
+    #             database: "EnclosedInStringProperty", # required
+    #             table: "EnclosedInStringProperty", # required
+    #           },
+    #           postgre_sql_catalog_source: {
+    #             name: "NodeName", # required
+    #             database: "EnclosedInStringProperty", # required
+    #             table: "EnclosedInStringProperty", # required
+    #           },
+    #           microsoft_sql_server_catalog_target: {
+    #             name: "NodeName", # required
+    #             inputs: ["NodeId"], # required
+    #             database: "EnclosedInStringProperty", # required
+    #             table: "EnclosedInStringProperty", # required
+    #           },
+    #           my_sql_catalog_target: {
+    #             name: "NodeName", # required
+    #             inputs: ["NodeId"], # required
+    #             database: "EnclosedInStringProperty", # required
+    #             table: "EnclosedInStringProperty", # required
+    #           },
+    #           oracle_sql_catalog_target: {
+    #             name: "NodeName", # required
+    #             inputs: ["NodeId"], # required
+    #             database: "EnclosedInStringProperty", # required
+    #             table: "EnclosedInStringProperty", # required
+    #           },
+    #           postgre_sql_catalog_target: {
+    #             name: "NodeName", # required
+    #             inputs: ["NodeId"], # required
+    #             database: "EnclosedInStringProperty", # required
+    #             table: "EnclosedInStringProperty", # required
+    #           },
+    #         },
+    #       },
     #     },
     #   })
     #
@@ -10969,7 +14533,7 @@ module Aws::Glue
     #     role: "RoleString",
     #     glue_version: "GlueVersionString",
     #     max_capacity: 1.0,
-    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X
+    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X
     #     number_of_workers: 1,
     #     timeout: 1,
     #     max_retries: 1,
@@ -11227,6 +14791,9 @@ module Aws::Glue
     # @option params [String] :transaction_id
     #   The transaction ID at which to update the table contents.
     #
+    # @option params [String] :version_id
+    #   The version ID at which to update the table contents.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -11317,6 +14884,7 @@ module Aws::Glue
     #     },
     #     skip_archive: false,
     #     transaction_id: "TransactionIdString",
+    #     version_id: "VersionString",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateTable AWS API Documentation
@@ -11526,7 +15094,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.105.0'
+      context[:gem_version] = '1.116.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

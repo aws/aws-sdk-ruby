@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::FMS
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -395,6 +397,37 @@ module Aws::FMS
       req.send_request(options)
     end
 
+    # Sets the Firewall Manager policy administrator as a tenant
+    # administrator of a third-party firewall service. A tenant is an
+    # instance of the third-party firewall service that's associated with
+    # your Amazon Web Services customer account.
+    #
+    # @option params [required, String] :third_party_firewall
+    #   The name of the third-party firewall vendor.
+    #
+    # @return [Types::AssociateThirdPartyFirewallResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateThirdPartyFirewallResponse#third_party_firewall_status #third_party_firewall_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_third_party_firewall({
+    #     third_party_firewall: "PALO_ALTO_NETWORKS_CLOUD_NGFW", # required, accepts PALO_ALTO_NETWORKS_CLOUD_NGFW
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.third_party_firewall_status #=> String, one of "ONBOARDING", "ONBOARD_COMPLETE", "OFFBOARDING", "OFFBOARD_COMPLETE", "NOT_EXIST"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/AssociateThirdPartyFirewall AWS API Documentation
+    #
+    # @overload associate_third_party_firewall(params = {})
+    # @param [Hash] params ({})
+    def associate_third_party_firewall(params = {}, options = {})
+      req = build_request(:associate_third_party_firewall, params)
+      req.send_request(options)
+    end
+
     # Permanently deletes an Firewall Manager applications list.
     #
     # @option params [required, String] :list_id
@@ -526,6 +559,37 @@ module Aws::FMS
       req.send_request(options)
     end
 
+    # Disassociates a Firewall Manager policy administrator from a
+    # third-party firewall tenant. When you call
+    # `DisassociateThirdPartyFirewall`, the third-party firewall vendor
+    # deletes all of the firewalls that are associated with the account.
+    #
+    # @option params [required, String] :third_party_firewall
+    #   The name of the third-party firewall vendor.
+    #
+    # @return [Types::DisassociateThirdPartyFirewallResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisassociateThirdPartyFirewallResponse#third_party_firewall_status #third_party_firewall_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_third_party_firewall({
+    #     third_party_firewall: "PALO_ALTO_NETWORKS_CLOUD_NGFW", # required, accepts PALO_ALTO_NETWORKS_CLOUD_NGFW
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.third_party_firewall_status #=> String, one of "ONBOARDING", "ONBOARD_COMPLETE", "OFFBOARDING", "OFFBOARD_COMPLETE", "NOT_EXIST"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/DisassociateThirdPartyFirewall AWS API Documentation
+    #
+    # @overload disassociate_third_party_firewall(params = {})
+    # @param [Hash] params ({})
+    def disassociate_third_party_firewall(params = {}, options = {})
+      req = build_request(:disassociate_third_party_firewall, params)
+      req.send_request(options)
+    end
+
     # Returns the Organizations account that is associated with Firewall
     # Manager as the Firewall Manager administrator.
     #
@@ -646,8 +710,10 @@ module Aws::FMS
     #   resp.policy_compliance_detail.member_account #=> String
     #   resp.policy_compliance_detail.violators #=> Array
     #   resp.policy_compliance_detail.violators[0].resource_id #=> String
-    #   resp.policy_compliance_detail.violators[0].violation_reason #=> String, one of "WEB_ACL_MISSING_RULE_GROUP", "RESOURCE_MISSING_WEB_ACL", "RESOURCE_INCORRECT_WEB_ACL", "RESOURCE_MISSING_SHIELD_PROTECTION", "RESOURCE_MISSING_WEB_ACL_OR_SHIELD_PROTECTION", "RESOURCE_MISSING_SECURITY_GROUP", "RESOURCE_VIOLATES_AUDIT_SECURITY_GROUP", "SECURITY_GROUP_UNUSED", "SECURITY_GROUP_REDUNDANT", "FMS_CREATED_SECURITY_GROUP_EDITED", "MISSING_FIREWALL", "MISSING_FIREWALL_SUBNET_IN_AZ", "MISSING_EXPECTED_ROUTE_TABLE", "NETWORK_FIREWALL_POLICY_MODIFIED", "INTERNET_GATEWAY_MISSING_EXPECTED_ROUTE", "FIREWALL_SUBNET_MISSING_EXPECTED_ROUTE", "UNEXPECTED_FIREWALL_ROUTES", "UNEXPECTED_TARGET_GATEWAY_ROUTES", "TRAFFIC_INSPECTION_CROSSES_AZ_BOUNDARY", "INVALID_ROUTE_CONFIGURATION", "MISSING_TARGET_GATEWAY", "INTERNET_TRAFFIC_NOT_INSPECTED", "BLACK_HOLE_ROUTE_DETECTED", "BLACK_HOLE_ROUTE_DETECTED_IN_FIREWALL_SUBNET", "RESOURCE_MISSING_DNS_FIREWALL"
+    #   resp.policy_compliance_detail.violators[0].violation_reason #=> String, one of "WEB_ACL_MISSING_RULE_GROUP", "RESOURCE_MISSING_WEB_ACL", "RESOURCE_INCORRECT_WEB_ACL", "RESOURCE_MISSING_SHIELD_PROTECTION", "RESOURCE_MISSING_WEB_ACL_OR_SHIELD_PROTECTION", "RESOURCE_MISSING_SECURITY_GROUP", "RESOURCE_VIOLATES_AUDIT_SECURITY_GROUP", "SECURITY_GROUP_UNUSED", "SECURITY_GROUP_REDUNDANT", "FMS_CREATED_SECURITY_GROUP_EDITED", "MISSING_FIREWALL", "MISSING_FIREWALL_SUBNET_IN_AZ", "MISSING_EXPECTED_ROUTE_TABLE", "NETWORK_FIREWALL_POLICY_MODIFIED", "FIREWALL_SUBNET_IS_OUT_OF_SCOPE", "INTERNET_GATEWAY_MISSING_EXPECTED_ROUTE", "FIREWALL_SUBNET_MISSING_EXPECTED_ROUTE", "UNEXPECTED_FIREWALL_ROUTES", "UNEXPECTED_TARGET_GATEWAY_ROUTES", "TRAFFIC_INSPECTION_CROSSES_AZ_BOUNDARY", "INVALID_ROUTE_CONFIGURATION", "MISSING_TARGET_GATEWAY", "INTERNET_TRAFFIC_NOT_INSPECTED", "BLACK_HOLE_ROUTE_DETECTED", "BLACK_HOLE_ROUTE_DETECTED_IN_FIREWALL_SUBNET", "RESOURCE_MISSING_DNS_FIREWALL", "ROUTE_HAS_OUT_OF_SCOPE_ENDPOINT", "FIREWALL_SUBNET_MISSING_VPCE_ENDPOINT"
     #   resp.policy_compliance_detail.violators[0].resource_type #=> String
+    #   resp.policy_compliance_detail.violators[0].metadata #=> Hash
+    #   resp.policy_compliance_detail.violators[0].metadata["LengthBoundedString"] #=> String
     #   resp.policy_compliance_detail.evaluation_limit_exceeded #=> Boolean
     #   resp.policy_compliance_detail.expired_at #=> Time
     #   resp.policy_compliance_detail.issue_info_map #=> Hash
@@ -705,8 +771,10 @@ module Aws::FMS
     #   resp.policy.policy_id #=> String
     #   resp.policy.policy_name #=> String
     #   resp.policy.policy_update_token #=> String
-    #   resp.policy.security_service_policy_data.type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT", "NETWORK_FIREWALL", "DNS_FIREWALL"
+    #   resp.policy.security_service_policy_data.type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT", "NETWORK_FIREWALL", "DNS_FIREWALL", "THIRD_PARTY_FIREWALL"
     #   resp.policy.security_service_policy_data.managed_service_data #=> String
+    #   resp.policy.security_service_policy_data.policy_option.network_firewall_policy.firewall_deployment_model #=> String, one of "CENTRALIZED", "DISTRIBUTED"
+    #   resp.policy.security_service_policy_data.policy_option.third_party_firewall_policy.firewall_deployment_model #=> String, one of "CENTRALIZED", "DISTRIBUTED"
     #   resp.policy.resource_type #=> String
     #   resp.policy.resource_type_list #=> Array
     #   resp.policy.resource_type_list[0] #=> String
@@ -792,7 +860,7 @@ module Aws::FMS
     # @example Response structure
     #
     #   resp.admin_account_id #=> String
-    #   resp.service_type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT", "NETWORK_FIREWALL", "DNS_FIREWALL"
+    #   resp.service_type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT", "NETWORK_FIREWALL", "DNS_FIREWALL", "THIRD_PARTY_FIREWALL"
     #   resp.data #=> String
     #   resp.next_token #=> String
     #
@@ -848,6 +916,37 @@ module Aws::FMS
     # @param [Hash] params ({})
     def get_protocols_list(params = {}, options = {})
       req = build_request(:get_protocols_list, params)
+      req.send_request(options)
+    end
+
+    # The onboarding status of a Firewall Manager admin account to
+    # third-party firewall vendor tenant.
+    #
+    # @option params [required, String] :third_party_firewall
+    #   The name of the third-party firewall vendor.
+    #
+    # @return [Types::GetThirdPartyFirewallAssociationStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetThirdPartyFirewallAssociationStatusResponse#third_party_firewall_status #third_party_firewall_status} => String
+    #   * {Types::GetThirdPartyFirewallAssociationStatusResponse#marketplace_onboarding_status #marketplace_onboarding_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_third_party_firewall_association_status({
+    #     third_party_firewall: "PALO_ALTO_NETWORKS_CLOUD_NGFW", # required, accepts PALO_ALTO_NETWORKS_CLOUD_NGFW
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.third_party_firewall_status #=> String, one of "ONBOARDING", "ONBOARD_COMPLETE", "OFFBOARDING", "OFFBOARD_COMPLETE", "NOT_EXIST"
+    #   resp.marketplace_onboarding_status #=> String, one of "NO_SUBSCRIPTION", "NOT_COMPLETE", "COMPLETE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetThirdPartyFirewallAssociationStatus AWS API Documentation
+    #
+    # @overload get_third_party_firewall_association_status(params = {})
+    # @param [Hash] params ({})
+    def get_third_party_firewall_association_status(params = {}, options = {})
+      req = build_request(:get_third_party_firewall_association_status, params)
       req.send_request(options)
     end
 
@@ -946,6 +1045,10 @@ module Aws::FMS
     #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.current_policy_description.stateful_rule_groups #=> Array
     #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.current_policy_description.stateful_rule_groups[0].rule_group_name #=> String
     #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.current_policy_description.stateful_rule_groups[0].resource_id #=> String
+    #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.current_policy_description.stateful_rule_groups[0].priority #=> Integer
+    #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.current_policy_description.stateful_default_actions #=> Array
+    #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.current_policy_description.stateful_default_actions[0] #=> String
+    #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.current_policy_description.stateful_engine_options.rule_order #=> String, one of "STRICT_ORDER", "DEFAULT_ACTION_ORDER"
     #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.expected_policy_description.stateless_rule_groups #=> Array
     #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.expected_policy_description.stateless_rule_groups[0].rule_group_name #=> String
     #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.expected_policy_description.stateless_rule_groups[0].resource_id #=> String
@@ -959,6 +1062,10 @@ module Aws::FMS
     #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.expected_policy_description.stateful_rule_groups #=> Array
     #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.expected_policy_description.stateful_rule_groups[0].rule_group_name #=> String
     #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.expected_policy_description.stateful_rule_groups[0].resource_id #=> String
+    #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.expected_policy_description.stateful_rule_groups[0].priority #=> Integer
+    #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.expected_policy_description.stateful_default_actions #=> Array
+    #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.expected_policy_description.stateful_default_actions[0] #=> String
+    #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.expected_policy_description.stateful_engine_options.rule_order #=> String, one of "STRICT_ORDER", "DEFAULT_ACTION_ORDER"
     #   resp.violation_detail.resource_violations[0].network_firewall_internet_traffic_not_inspected_violation.subnet_id #=> String
     #   resp.violation_detail.resource_violations[0].network_firewall_internet_traffic_not_inspected_violation.subnet_availability_zone #=> String
     #   resp.violation_detail.resource_violations[0].network_firewall_internet_traffic_not_inspected_violation.route_table_id #=> String
@@ -1142,8 +1249,56 @@ module Aws::FMS
     #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.ec2_create_route_table_action.description #=> String
     #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.ec2_create_route_table_action.vpc_id.resource_id #=> String
     #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.ec2_create_route_table_action.vpc_id.description #=> String
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.fms_policy_update_firewall_creation_config_action.description #=> String
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.fms_policy_update_firewall_creation_config_action.firewall_creation_config #=> String
     #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].order #=> Integer
     #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].is_default_action #=> Boolean
+    #   resp.violation_detail.resource_violations[0].firewall_subnet_is_out_of_scope_violation.firewall_subnet_id #=> String
+    #   resp.violation_detail.resource_violations[0].firewall_subnet_is_out_of_scope_violation.vpc_id #=> String
+    #   resp.violation_detail.resource_violations[0].firewall_subnet_is_out_of_scope_violation.subnet_availability_zone #=> String
+    #   resp.violation_detail.resource_violations[0].firewall_subnet_is_out_of_scope_violation.subnet_availability_zone_id #=> String
+    #   resp.violation_detail.resource_violations[0].firewall_subnet_is_out_of_scope_violation.vpc_endpoint_id #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.subnet_id #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.vpc_id #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.route_table_id #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.violating_routes #=> Array
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.violating_routes[0].destination_type #=> String, one of "IPV4", "IPV6", "PREFIX_LIST"
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.violating_routes[0].target_type #=> String, one of "GATEWAY", "CARRIER_GATEWAY", "INSTANCE", "LOCAL_GATEWAY", "NAT_GATEWAY", "NETWORK_INTERFACE", "VPC_ENDPOINT", "VPC_PEERING_CONNECTION", "EGRESS_ONLY_INTERNET_GATEWAY", "TRANSIT_GATEWAY"
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.violating_routes[0].destination #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.violating_routes[0].target #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.subnet_availability_zone #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.subnet_availability_zone_id #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.current_firewall_subnet_route_table #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.firewall_subnet_id #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.firewall_subnet_routes #=> Array
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.firewall_subnet_routes[0].destination_type #=> String, one of "IPV4", "IPV6", "PREFIX_LIST"
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.firewall_subnet_routes[0].target_type #=> String, one of "GATEWAY", "CARRIER_GATEWAY", "INSTANCE", "LOCAL_GATEWAY", "NAT_GATEWAY", "NETWORK_INTERFACE", "VPC_ENDPOINT", "VPC_PEERING_CONNECTION", "EGRESS_ONLY_INTERNET_GATEWAY", "TRANSIT_GATEWAY"
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.firewall_subnet_routes[0].destination #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.firewall_subnet_routes[0].target #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.internet_gateway_id #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.current_internet_gateway_route_table #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.internet_gateway_routes #=> Array
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.internet_gateway_routes[0].destination_type #=> String, one of "IPV4", "IPV6", "PREFIX_LIST"
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.internet_gateway_routes[0].target_type #=> String, one of "GATEWAY", "CARRIER_GATEWAY", "INSTANCE", "LOCAL_GATEWAY", "NAT_GATEWAY", "NETWORK_INTERFACE", "VPC_ENDPOINT", "VPC_PEERING_CONNECTION", "EGRESS_ONLY_INTERNET_GATEWAY", "TRANSIT_GATEWAY"
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.internet_gateway_routes[0].destination #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.internet_gateway_routes[0].target #=> String
+    #   resp.violation_detail.resource_violations[0].third_party_firewall_missing_firewall_violation.violation_target #=> String
+    #   resp.violation_detail.resource_violations[0].third_party_firewall_missing_firewall_violation.vpc #=> String
+    #   resp.violation_detail.resource_violations[0].third_party_firewall_missing_firewall_violation.availability_zone #=> String
+    #   resp.violation_detail.resource_violations[0].third_party_firewall_missing_firewall_violation.target_violation_reason #=> String
+    #   resp.violation_detail.resource_violations[0].third_party_firewall_missing_subnet_violation.violation_target #=> String
+    #   resp.violation_detail.resource_violations[0].third_party_firewall_missing_subnet_violation.vpc #=> String
+    #   resp.violation_detail.resource_violations[0].third_party_firewall_missing_subnet_violation.availability_zone #=> String
+    #   resp.violation_detail.resource_violations[0].third_party_firewall_missing_subnet_violation.target_violation_reason #=> String
+    #   resp.violation_detail.resource_violations[0].third_party_firewall_missing_expected_route_table_violation.violation_target #=> String
+    #   resp.violation_detail.resource_violations[0].third_party_firewall_missing_expected_route_table_violation.vpc #=> String
+    #   resp.violation_detail.resource_violations[0].third_party_firewall_missing_expected_route_table_violation.availability_zone #=> String
+    #   resp.violation_detail.resource_violations[0].third_party_firewall_missing_expected_route_table_violation.current_route_table #=> String
+    #   resp.violation_detail.resource_violations[0].third_party_firewall_missing_expected_route_table_violation.expected_route_table #=> String
+    #   resp.violation_detail.resource_violations[0].firewall_subnet_missing_vpc_endpoint_violation.firewall_subnet_id #=> String
+    #   resp.violation_detail.resource_violations[0].firewall_subnet_missing_vpc_endpoint_violation.vpc_id #=> String
+    #   resp.violation_detail.resource_violations[0].firewall_subnet_missing_vpc_endpoint_violation.subnet_availability_zone #=> String
+    #   resp.violation_detail.resource_violations[0].firewall_subnet_missing_vpc_endpoint_violation.subnet_availability_zone_id #=> String
     #   resp.violation_detail.resource_tags #=> Array
     #   resp.violation_detail.resource_tags[0].key #=> String
     #   resp.violation_detail.resource_tags[0].value #=> String
@@ -1370,7 +1525,7 @@ module Aws::FMS
     #   resp.policy_list[0].policy_id #=> String
     #   resp.policy_list[0].policy_name #=> String
     #   resp.policy_list[0].resource_type #=> String
-    #   resp.policy_list[0].security_service_type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT", "NETWORK_FIREWALL", "DNS_FIREWALL"
+    #   resp.policy_list[0].security_service_type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT", "NETWORK_FIREWALL", "DNS_FIREWALL", "THIRD_PARTY_FIREWALL"
     #   resp.policy_list[0].remediation_enabled #=> Boolean
     #   resp.policy_list[0].delete_unused_fm_managed_resources #=> Boolean
     #   resp.next_token #=> String
@@ -1470,6 +1625,63 @@ module Aws::FMS
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of all of the third-party firewall policies that are
+    # associated with the third-party firewall administrator's account.
+    #
+    # @option params [required, String] :third_party_firewall
+    #   The name of the third-party firewall vendor.
+    #
+    # @option params [String] :next_token
+    #   If the previous response included a `NextToken` element, the specified
+    #   third-party firewall vendor is associated with more third-party
+    #   firewall policies. To get more third-party firewall policies, submit
+    #   another `ListThirdPartyFirewallFirewallPoliciesRequest` request.
+    #
+    #   For the value of `NextToken`, specify the value of `NextToken` from
+    #   the previous response. If the previous response didn't include a
+    #   `NextToken` element, there are no more third-party firewall policies
+    #   to get.
+    #
+    # @option params [required, Integer] :max_results
+    #   The maximum number of third-party firewall policies that you want
+    #   Firewall Manager to return. If the specified third-party firewall
+    #   vendor is associated with more than `MaxResults` firewall policies,
+    #   the response includes a `NextToken` element. `NextToken` contains an
+    #   encrypted token that identifies the first third-party firewall
+    #   policies that Firewall Manager will return if you submit another
+    #   request.
+    #
+    # @return [Types::ListThirdPartyFirewallFirewallPoliciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListThirdPartyFirewallFirewallPoliciesResponse#third_party_firewall_firewall_policies #third_party_firewall_firewall_policies} => Array&lt;Types::ThirdPartyFirewallFirewallPolicy&gt;
+    #   * {Types::ListThirdPartyFirewallFirewallPoliciesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_third_party_firewall_firewall_policies({
+    #     third_party_firewall: "PALO_ALTO_NETWORKS_CLOUD_NGFW", # required, accepts PALO_ALTO_NETWORKS_CLOUD_NGFW
+    #     next_token: "PaginationToken",
+    #     max_results: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.third_party_firewall_firewall_policies #=> Array
+    #   resp.third_party_firewall_firewall_policies[0].firewall_policy_id #=> String
+    #   resp.third_party_firewall_firewall_policies[0].firewall_policy_name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ListThirdPartyFirewallFirewallPolicies AWS API Documentation
+    #
+    # @overload list_third_party_firewall_firewall_policies(params = {})
+    # @param [Hash] params ({})
+    def list_third_party_firewall_firewall_policies(params = {}, options = {})
+      req = build_request(:list_third_party_firewall_firewall_policies, params)
       req.send_request(options)
     end
 
@@ -1639,8 +1851,16 @@ module Aws::FMS
     #       policy_name: "ResourceName", # required
     #       policy_update_token: "PolicyUpdateToken",
     #       security_service_policy_data: { # required
-    #         type: "WAF", # required, accepts WAF, WAFV2, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT, NETWORK_FIREWALL, DNS_FIREWALL
+    #         type: "WAF", # required, accepts WAF, WAFV2, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT, NETWORK_FIREWALL, DNS_FIREWALL, THIRD_PARTY_FIREWALL
     #         managed_service_data: "ManagedServiceData",
+    #         policy_option: {
+    #           network_firewall_policy: {
+    #             firewall_deployment_model: "CENTRALIZED", # accepts CENTRALIZED, DISTRIBUTED
+    #           },
+    #           third_party_firewall_policy: {
+    #             firewall_deployment_model: "CENTRALIZED", # accepts CENTRALIZED, DISTRIBUTED
+    #           },
+    #         },
     #       },
     #       resource_type: "ResourceType", # required
     #       resource_type_list: ["ResourceType"],
@@ -1673,8 +1893,10 @@ module Aws::FMS
     #   resp.policy.policy_id #=> String
     #   resp.policy.policy_name #=> String
     #   resp.policy.policy_update_token #=> String
-    #   resp.policy.security_service_policy_data.type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT", "NETWORK_FIREWALL", "DNS_FIREWALL"
+    #   resp.policy.security_service_policy_data.type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT", "NETWORK_FIREWALL", "DNS_FIREWALL", "THIRD_PARTY_FIREWALL"
     #   resp.policy.security_service_policy_data.managed_service_data #=> String
+    #   resp.policy.security_service_policy_data.policy_option.network_firewall_policy.firewall_deployment_model #=> String, one of "CENTRALIZED", "DISTRIBUTED"
+    #   resp.policy.security_service_policy_data.policy_option.third_party_firewall_policy.firewall_deployment_model #=> String, one of "CENTRALIZED", "DISTRIBUTED"
     #   resp.policy.resource_type #=> String
     #   resp.policy.resource_type_list #=> Array
     #   resp.policy.resource_type_list[0] #=> String
@@ -1833,7 +2055,7 @@ module Aws::FMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fms'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

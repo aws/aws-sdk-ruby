@@ -999,7 +999,7 @@ module Aws::RoboMaker
     ListWorldsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListWorldsResponse.struct_class = Types::ListWorldsResponse
 
-    LoggingConfig.add_member(:record_all_ros_topics, Shapes::ShapeRef.new(shape: BoxedBoolean, required: true, location_name: "recordAllRosTopics"))
+    LoggingConfig.add_member(:record_all_ros_topics, Shapes::ShapeRef.new(shape: BoxedBoolean, deprecated: true, location_name: "recordAllRosTopics", metadata: {"deprecatedMessage"=>"AWS RoboMaker is ending support for ROS software suite. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/software-support-policy.html."}))
     LoggingConfig.struct_class = Types::LoggingConfig
 
     NetworkInterface.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: GenericString, location_name: "networkInterfaceId"))
@@ -1065,9 +1065,9 @@ module Aws::RoboMaker
     RobotApplicationConfig.add_member(:application_version, Shapes::ShapeRef.new(shape: Version, location_name: "applicationVersion"))
     RobotApplicationConfig.add_member(:launch_config, Shapes::ShapeRef.new(shape: LaunchConfig, required: true, location_name: "launchConfig"))
     RobotApplicationConfig.add_member(:upload_configurations, Shapes::ShapeRef.new(shape: UploadConfigurations, location_name: "uploadConfigurations"))
-    RobotApplicationConfig.add_member(:use_default_upload_configurations, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "useDefaultUploadConfigurations"))
+    RobotApplicationConfig.add_member(:use_default_upload_configurations, Shapes::ShapeRef.new(shape: BoxedBoolean, deprecated: true, location_name: "useDefaultUploadConfigurations", metadata: {"deprecatedMessage"=>"AWS RoboMaker is ending support for ROS software suite. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/software-support-policy.html."}))
     RobotApplicationConfig.add_member(:tools, Shapes::ShapeRef.new(shape: Tools, location_name: "tools"))
-    RobotApplicationConfig.add_member(:use_default_tools, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "useDefaultTools"))
+    RobotApplicationConfig.add_member(:use_default_tools, Shapes::ShapeRef.new(shape: BoxedBoolean, deprecated: true, location_name: "useDefaultTools", metadata: {"deprecatedMessage"=>"AWS RoboMaker is ending support for ROS software suite. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/software-support-policy.html."}))
     RobotApplicationConfig.struct_class = Types::RobotApplicationConfig
 
     RobotApplicationConfigs.member = Shapes::ShapeRef.new(shape: RobotApplicationConfig)
@@ -1125,9 +1125,9 @@ module Aws::RoboMaker
     SimulationApplicationConfig.add_member(:launch_config, Shapes::ShapeRef.new(shape: LaunchConfig, required: true, location_name: "launchConfig"))
     SimulationApplicationConfig.add_member(:upload_configurations, Shapes::ShapeRef.new(shape: UploadConfigurations, location_name: "uploadConfigurations"))
     SimulationApplicationConfig.add_member(:world_configs, Shapes::ShapeRef.new(shape: WorldConfigs, location_name: "worldConfigs"))
-    SimulationApplicationConfig.add_member(:use_default_upload_configurations, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "useDefaultUploadConfigurations"))
+    SimulationApplicationConfig.add_member(:use_default_upload_configurations, Shapes::ShapeRef.new(shape: BoxedBoolean, deprecated: true, location_name: "useDefaultUploadConfigurations", metadata: {"deprecatedMessage"=>"AWS RoboMaker is ending support for ROS software suite. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/software-support-policy.html."}))
     SimulationApplicationConfig.add_member(:tools, Shapes::ShapeRef.new(shape: Tools, location_name: "tools"))
-    SimulationApplicationConfig.add_member(:use_default_tools, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "useDefaultTools"))
+    SimulationApplicationConfig.add_member(:use_default_tools, Shapes::ShapeRef.new(shape: BoxedBoolean, deprecated: true, location_name: "useDefaultTools", metadata: {"deprecatedMessage"=>"AWS RoboMaker is ending support for ROS software suite. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/software-support-policy.html."}))
     SimulationApplicationConfig.struct_class = Types::SimulationApplicationConfig
 
     SimulationApplicationConfigs.member = Shapes::ShapeRef.new(shape: SimulationApplicationConfig)
@@ -1385,6 +1385,7 @@ module Aws::RoboMaker
     WorldExportJobSummary.add_member(:status, Shapes::ShapeRef.new(shape: WorldExportJobStatus, location_name: "status"))
     WorldExportJobSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
     WorldExportJobSummary.add_member(:worlds, Shapes::ShapeRef.new(shape: Arns, location_name: "worlds"))
+    WorldExportJobSummary.add_member(:output_location, Shapes::ShapeRef.new(shape: OutputLocation, location_name: "outputLocation"))
     WorldExportJobSummary.struct_class = Types::WorldExportJobSummary
 
     WorldFailure.add_member(:failure_code, Shapes::ShapeRef.new(shape: WorldGenerationJobErrorCode, location_name: "failureCode"))

@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2022-06-28)
+------------------
+
+* Feature - Release new API GetExternalDataViewAccessDetails
+
+1.16.0 (2022-06-15)
+------------------
+
+* Feature - This release adds a new set of APIs, GetPermissionGroup, DisassociateUserFromPermissionGroup, AssociateUserToPermissionGroup, ListPermissionGroupsByUser, ListUsersByPermissionGroup.
+
+1.15.0 (2022-05-12)
+------------------
+
+* Feature - We've now deprecated CreateSnapshot permission for creating a data view, instead use CreateDataView permission.
+
+1.14.0 (2022-02-28)
+------------------
+
+* Feature - Add new APIs for managing Users and Permission Groups.
+
+1.13.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.12.0 (2022-02-03)
 ------------------
 

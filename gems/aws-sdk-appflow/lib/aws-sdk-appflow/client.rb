@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::Appflow
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -353,7 +355,9 @@ module Aws::Appflow
     # Services account. There is a soft quota of 100 connector profiles per
     # Amazon Web Services account. If you need more connector profiles than
     # this quota allows, you can submit a request to the Amazon AppFlow team
-    # through the Amazon AppFlow support channel.
+    # through the Amazon AppFlow support channel. In each connector profile
+    # that you create, you can provide the credentials and properties for
+    # only one connector.
     #
     # @option params [required, String] :connector_profile_name
     #   The name of the connector profile. The name is unique for each
@@ -469,6 +473,9 @@ module Aws::Appflow
     #           o_auth_2_properties: {
     #             token_url: "TokenUrl", # required
     #             o_auth_2_grant_type: "CLIENT_CREDENTIALS", # required, accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
+    #             token_url_custom_properties: {
+    #               "CustomPropertyKey" => "CustomPropertyValue",
+    #             },
     #           },
     #         },
     #       },
@@ -686,6 +693,7 @@ module Aws::Appflow
     #           timezone: "Timezone",
     #           schedule_offset: 1,
     #           first_execution_from: Time.now,
+    #           flow_error_deactivation_threshold: 1,
     #         },
     #       },
     #     },
@@ -788,6 +796,7 @@ module Aws::Appflow
     #               aggregation_config: {
     #                 aggregation_type: "None", # accepts None, SingleFile
     #               },
+    #               preserve_source_data_typing: false,
     #             },
     #           },
     #           salesforce: {
@@ -856,6 +865,14 @@ module Aws::Appflow
     #             },
     #             write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
     #           },
+    #           marketo: {
+    #             object: "Object", # required
+    #             error_handling_config: {
+    #               fail_on_first_destination_error: false,
+    #               bucket_prefix: "BucketPrefix",
+    #               bucket_name: "BucketName",
+    #             },
+    #           },
     #           custom_connector: {
     #             entity_name: "EntityName", # required
     #             error_handling_config: {
@@ -868,6 +885,20 @@ module Aws::Appflow
     #             custom_properties: {
     #               "CustomPropertyKey" => "CustomPropertyValue",
     #             },
+    #           },
+    #           sapo_data: {
+    #             object_path: "Object", # required
+    #             success_response_handling_config: {
+    #               bucket_prefix: "BucketPrefix",
+    #               bucket_name: "BucketName",
+    #             },
+    #             id_field_names: ["Name"],
+    #             error_handling_config: {
+    #               fail_on_first_destination_error: false,
+    #               bucket_prefix: "BucketPrefix",
+    #               bucket_name: "BucketName",
+    #             },
+    #             write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
     #           },
     #         },
     #       },
@@ -894,7 +925,7 @@ module Aws::Appflow
     #           custom_connector: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, CONTAINS, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
     #         },
     #         destination_field: "DestinationField",
-    #         task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Map_all, Mask, Merge, Truncate, Validate
+    #         task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Map_all, Mask, Merge, Passthrough, Truncate, Validate
     #         task_properties: {
     #           "VALUE" => "Property",
     #         },
@@ -1046,6 +1077,15 @@ module Aws::Appflow
     #   resp.connector_configuration.authentication_config.o_auth_2_defaults.auth_code_urls[0] #=> String
     #   resp.connector_configuration.authentication_config.o_auth_2_defaults.oauth2_grant_types_supported #=> Array
     #   resp.connector_configuration.authentication_config.o_auth_2_defaults.oauth2_grant_types_supported[0] #=> String, one of "CLIENT_CREDENTIALS", "AUTHORIZATION_CODE"
+    #   resp.connector_configuration.authentication_config.o_auth_2_defaults.oauth2_custom_properties #=> Array
+    #   resp.connector_configuration.authentication_config.o_auth_2_defaults.oauth2_custom_properties[0].key #=> String
+    #   resp.connector_configuration.authentication_config.o_auth_2_defaults.oauth2_custom_properties[0].is_required #=> Boolean
+    #   resp.connector_configuration.authentication_config.o_auth_2_defaults.oauth2_custom_properties[0].label #=> String
+    #   resp.connector_configuration.authentication_config.o_auth_2_defaults.oauth2_custom_properties[0].description #=> String
+    #   resp.connector_configuration.authentication_config.o_auth_2_defaults.oauth2_custom_properties[0].is_sensitive_field #=> Boolean
+    #   resp.connector_configuration.authentication_config.o_auth_2_defaults.oauth2_custom_properties[0].connector_supplied_values #=> Array
+    #   resp.connector_configuration.authentication_config.o_auth_2_defaults.oauth2_custom_properties[0].connector_supplied_values[0] #=> String
+    #   resp.connector_configuration.authentication_config.o_auth_2_defaults.oauth2_custom_properties[0].type #=> String, one of "TOKEN_URL", "AUTH_URL"
     #   resp.connector_configuration.authentication_config.custom_auth_configs #=> Array
     #   resp.connector_configuration.authentication_config.custom_auth_configs[0].custom_authentication_type #=> String
     #   resp.connector_configuration.authentication_config.custom_auth_configs[0].auth_parameters #=> Array
@@ -1087,7 +1127,7 @@ module Aws::Appflow
     end
 
     # Provides details regarding the entity used with the connector, with a
-    # description of the data model for each entity.
+    # description of the data model for each field in that entity.
     #
     # @option params [required, String] :connector_entity_name
     #   The entity name for that connector.
@@ -1248,6 +1288,8 @@ module Aws::Appflow
     #   resp.connector_profile_details[0].connector_profile_properties.custom_connector.profile_properties["ProfilePropertyKey"] #=> String
     #   resp.connector_profile_details[0].connector_profile_properties.custom_connector.o_auth_2_properties.token_url #=> String
     #   resp.connector_profile_details[0].connector_profile_properties.custom_connector.o_auth_2_properties.o_auth_2_grant_type #=> String, one of "CLIENT_CREDENTIALS", "AUTHORIZATION_CODE"
+    #   resp.connector_profile_details[0].connector_profile_properties.custom_connector.o_auth_2_properties.token_url_custom_properties #=> Hash
+    #   resp.connector_profile_details[0].connector_profile_properties.custom_connector.o_auth_2_properties.token_url_custom_properties["CustomPropertyKey"] #=> String
     #   resp.connector_profile_details[0].created_at #=> Time
     #   resp.connector_profile_details[0].last_updated_at #=> Time
     #   resp.connector_profile_details[0].private_connection_provisioning_state.status #=> String, one of "FAILED", "PENDING", "CREATED"
@@ -1344,6 +1386,15 @@ module Aws::Appflow
     #   resp.connector_configurations["ConnectorType"].authentication_config.o_auth_2_defaults.auth_code_urls[0] #=> String
     #   resp.connector_configurations["ConnectorType"].authentication_config.o_auth_2_defaults.oauth2_grant_types_supported #=> Array
     #   resp.connector_configurations["ConnectorType"].authentication_config.o_auth_2_defaults.oauth2_grant_types_supported[0] #=> String, one of "CLIENT_CREDENTIALS", "AUTHORIZATION_CODE"
+    #   resp.connector_configurations["ConnectorType"].authentication_config.o_auth_2_defaults.oauth2_custom_properties #=> Array
+    #   resp.connector_configurations["ConnectorType"].authentication_config.o_auth_2_defaults.oauth2_custom_properties[0].key #=> String
+    #   resp.connector_configurations["ConnectorType"].authentication_config.o_auth_2_defaults.oauth2_custom_properties[0].is_required #=> Boolean
+    #   resp.connector_configurations["ConnectorType"].authentication_config.o_auth_2_defaults.oauth2_custom_properties[0].label #=> String
+    #   resp.connector_configurations["ConnectorType"].authentication_config.o_auth_2_defaults.oauth2_custom_properties[0].description #=> String
+    #   resp.connector_configurations["ConnectorType"].authentication_config.o_auth_2_defaults.oauth2_custom_properties[0].is_sensitive_field #=> Boolean
+    #   resp.connector_configurations["ConnectorType"].authentication_config.o_auth_2_defaults.oauth2_custom_properties[0].connector_supplied_values #=> Array
+    #   resp.connector_configurations["ConnectorType"].authentication_config.o_auth_2_defaults.oauth2_custom_properties[0].connector_supplied_values[0] #=> String
+    #   resp.connector_configurations["ConnectorType"].authentication_config.o_auth_2_defaults.oauth2_custom_properties[0].type #=> String, one of "TOKEN_URL", "AUTH_URL"
     #   resp.connector_configurations["ConnectorType"].authentication_config.custom_auth_configs #=> Array
     #   resp.connector_configurations["ConnectorType"].authentication_config.custom_auth_configs[0].custom_authentication_type #=> String
     #   resp.connector_configurations["ConnectorType"].authentication_config.custom_auth_configs[0].auth_parameters #=> Array
@@ -1483,6 +1534,7 @@ module Aws::Appflow
     #   resp.destination_flow_config_list[0].destination_connector_properties.s3.s3_output_format_config.prefix_config.prefix_type #=> String, one of "FILENAME", "PATH", "PATH_AND_FILENAME"
     #   resp.destination_flow_config_list[0].destination_connector_properties.s3.s3_output_format_config.prefix_config.prefix_format #=> String, one of "YEAR", "MONTH", "DAY", "HOUR", "MINUTE"
     #   resp.destination_flow_config_list[0].destination_connector_properties.s3.s3_output_format_config.aggregation_config.aggregation_type #=> String, one of "None", "SingleFile"
+    #   resp.destination_flow_config_list[0].destination_connector_properties.s3.s3_output_format_config.preserve_source_data_typing #=> Boolean
     #   resp.destination_flow_config_list[0].destination_connector_properties.salesforce.object #=> String
     #   resp.destination_flow_config_list[0].destination_connector_properties.salesforce.id_field_names #=> Array
     #   resp.destination_flow_config_list[0].destination_connector_properties.salesforce.id_field_names[0] #=> String
@@ -1519,6 +1571,10 @@ module Aws::Appflow
     #   resp.destination_flow_config_list[0].destination_connector_properties.zendesk.error_handling_config.bucket_prefix #=> String
     #   resp.destination_flow_config_list[0].destination_connector_properties.zendesk.error_handling_config.bucket_name #=> String
     #   resp.destination_flow_config_list[0].destination_connector_properties.zendesk.write_operation_type #=> String, one of "INSERT", "UPSERT", "UPDATE", "DELETE"
+    #   resp.destination_flow_config_list[0].destination_connector_properties.marketo.object #=> String
+    #   resp.destination_flow_config_list[0].destination_connector_properties.marketo.error_handling_config.fail_on_first_destination_error #=> Boolean
+    #   resp.destination_flow_config_list[0].destination_connector_properties.marketo.error_handling_config.bucket_prefix #=> String
+    #   resp.destination_flow_config_list[0].destination_connector_properties.marketo.error_handling_config.bucket_name #=> String
     #   resp.destination_flow_config_list[0].destination_connector_properties.custom_connector.entity_name #=> String
     #   resp.destination_flow_config_list[0].destination_connector_properties.custom_connector.error_handling_config.fail_on_first_destination_error #=> Boolean
     #   resp.destination_flow_config_list[0].destination_connector_properties.custom_connector.error_handling_config.bucket_prefix #=> String
@@ -1528,6 +1584,15 @@ module Aws::Appflow
     #   resp.destination_flow_config_list[0].destination_connector_properties.custom_connector.id_field_names[0] #=> String
     #   resp.destination_flow_config_list[0].destination_connector_properties.custom_connector.custom_properties #=> Hash
     #   resp.destination_flow_config_list[0].destination_connector_properties.custom_connector.custom_properties["CustomPropertyKey"] #=> String
+    #   resp.destination_flow_config_list[0].destination_connector_properties.sapo_data.object_path #=> String
+    #   resp.destination_flow_config_list[0].destination_connector_properties.sapo_data.success_response_handling_config.bucket_prefix #=> String
+    #   resp.destination_flow_config_list[0].destination_connector_properties.sapo_data.success_response_handling_config.bucket_name #=> String
+    #   resp.destination_flow_config_list[0].destination_connector_properties.sapo_data.id_field_names #=> Array
+    #   resp.destination_flow_config_list[0].destination_connector_properties.sapo_data.id_field_names[0] #=> String
+    #   resp.destination_flow_config_list[0].destination_connector_properties.sapo_data.error_handling_config.fail_on_first_destination_error #=> Boolean
+    #   resp.destination_flow_config_list[0].destination_connector_properties.sapo_data.error_handling_config.bucket_prefix #=> String
+    #   resp.destination_flow_config_list[0].destination_connector_properties.sapo_data.error_handling_config.bucket_name #=> String
+    #   resp.destination_flow_config_list[0].destination_connector_properties.sapo_data.write_operation_type #=> String, one of "INSERT", "UPSERT", "UPDATE", "DELETE"
     #   resp.last_run_execution_details.most_recent_execution_message #=> String
     #   resp.last_run_execution_details.most_recent_execution_time #=> Time
     #   resp.last_run_execution_details.most_recent_execution_status #=> String, one of "InProgress", "Successful", "Error"
@@ -1539,6 +1604,7 @@ module Aws::Appflow
     #   resp.trigger_config.trigger_properties.scheduled.timezone #=> String
     #   resp.trigger_config.trigger_properties.scheduled.schedule_offset #=> Integer
     #   resp.trigger_config.trigger_properties.scheduled.first_execution_from #=> Time
+    #   resp.trigger_config.trigger_properties.scheduled.flow_error_deactivation_threshold #=> Integer
     #   resp.tasks #=> Array
     #   resp.tasks[0].source_fields #=> Array
     #   resp.tasks[0].source_fields[0] #=> String
@@ -1559,7 +1625,7 @@ module Aws::Appflow
     #   resp.tasks[0].connector_operator.sapo_data #=> String, one of "PROJECTION", "LESS_THAN", "CONTAINS", "GREATER_THAN", "BETWEEN", "LESS_THAN_OR_EQUAL_TO", "GREATER_THAN_OR_EQUAL_TO", "EQUAL_TO", "NOT_EQUAL_TO", "ADDITION", "MULTIPLICATION", "DIVISION", "SUBTRACTION", "MASK_ALL", "MASK_FIRST_N", "MASK_LAST_N", "VALIDATE_NON_NULL", "VALIDATE_NON_ZERO", "VALIDATE_NON_NEGATIVE", "VALIDATE_NUMERIC", "NO_OP"
     #   resp.tasks[0].connector_operator.custom_connector #=> String, one of "PROJECTION", "LESS_THAN", "GREATER_THAN", "CONTAINS", "BETWEEN", "LESS_THAN_OR_EQUAL_TO", "GREATER_THAN_OR_EQUAL_TO", "EQUAL_TO", "NOT_EQUAL_TO", "ADDITION", "MULTIPLICATION", "DIVISION", "SUBTRACTION", "MASK_ALL", "MASK_FIRST_N", "MASK_LAST_N", "VALIDATE_NON_NULL", "VALIDATE_NON_ZERO", "VALIDATE_NON_NEGATIVE", "VALIDATE_NUMERIC", "NO_OP"
     #   resp.tasks[0].destination_field #=> String
-    #   resp.tasks[0].task_type #=> String, one of "Arithmetic", "Filter", "Map", "Map_all", "Mask", "Merge", "Truncate", "Validate"
+    #   resp.tasks[0].task_type #=> String, one of "Arithmetic", "Filter", "Map", "Map_all", "Mask", "Merge", "Passthrough", "Truncate", "Validate"
     #   resp.tasks[0].task_properties #=> Hash
     #   resp.tasks[0].task_properties["OperatorPropertiesKeys"] #=> String
     #   resp.created_at #=> Time
@@ -2120,6 +2186,9 @@ module Aws::Appflow
     #           o_auth_2_properties: {
     #             token_url: "TokenUrl", # required
     #             o_auth_2_grant_type: "CLIENT_CREDENTIALS", # required, accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
+    #             token_url_custom_properties: {
+    #               "CustomPropertyKey" => "CustomPropertyValue",
+    #             },
     #           },
     #         },
     #       },
@@ -2321,6 +2390,7 @@ module Aws::Appflow
     #           timezone: "Timezone",
     #           schedule_offset: 1,
     #           first_execution_from: Time.now,
+    #           flow_error_deactivation_threshold: 1,
     #         },
     #       },
     #     },
@@ -2423,6 +2493,7 @@ module Aws::Appflow
     #               aggregation_config: {
     #                 aggregation_type: "None", # accepts None, SingleFile
     #               },
+    #               preserve_source_data_typing: false,
     #             },
     #           },
     #           salesforce: {
@@ -2491,6 +2562,14 @@ module Aws::Appflow
     #             },
     #             write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
     #           },
+    #           marketo: {
+    #             object: "Object", # required
+    #             error_handling_config: {
+    #               fail_on_first_destination_error: false,
+    #               bucket_prefix: "BucketPrefix",
+    #               bucket_name: "BucketName",
+    #             },
+    #           },
     #           custom_connector: {
     #             entity_name: "EntityName", # required
     #             error_handling_config: {
@@ -2503,6 +2582,20 @@ module Aws::Appflow
     #             custom_properties: {
     #               "CustomPropertyKey" => "CustomPropertyValue",
     #             },
+    #           },
+    #           sapo_data: {
+    #             object_path: "Object", # required
+    #             success_response_handling_config: {
+    #               bucket_prefix: "BucketPrefix",
+    #               bucket_name: "BucketName",
+    #             },
+    #             id_field_names: ["Name"],
+    #             error_handling_config: {
+    #               fail_on_first_destination_error: false,
+    #               bucket_prefix: "BucketPrefix",
+    #               bucket_name: "BucketName",
+    #             },
+    #             write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
     #           },
     #         },
     #       },
@@ -2529,7 +2622,7 @@ module Aws::Appflow
     #           custom_connector: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, CONTAINS, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
     #         },
     #         destination_field: "DestinationField",
-    #         task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Map_all, Mask, Merge, Truncate, Validate
+    #         task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Map_all, Mask, Merge, Passthrough, Truncate, Validate
     #         task_properties: {
     #           "VALUE" => "Property",
     #         },
@@ -2563,7 +2656,7 @@ module Aws::Appflow
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appflow'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

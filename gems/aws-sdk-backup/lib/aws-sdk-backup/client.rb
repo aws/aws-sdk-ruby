@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::Backup
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -454,7 +456,7 @@ module Aws::Backup
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/assigning-resources.html#assigning-resources-json
+    # [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/assigning-resources.html#assigning-resources-json
     #
     # @option params [required, String] :backup_plan_id
     #   Uniquely identifies the backup plan to be associated with the
@@ -1899,7 +1901,7 @@ module Aws::Backup
     #   resp.backup_vault_arn #=> String
     #   resp.sns_topic_arn #=> String
     #   resp.backup_vault_events #=> Array
-    #   resp.backup_vault_events[0] #=> String, one of "BACKUP_JOB_STARTED", "BACKUP_JOB_COMPLETED", "BACKUP_JOB_SUCCESSFUL", "BACKUP_JOB_FAILED", "BACKUP_JOB_EXPIRED", "RESTORE_JOB_STARTED", "RESTORE_JOB_COMPLETED", "RESTORE_JOB_SUCCESSFUL", "RESTORE_JOB_FAILED", "COPY_JOB_STARTED", "COPY_JOB_SUCCESSFUL", "COPY_JOB_FAILED", "RECOVERY_POINT_MODIFIED", "BACKUP_PLAN_CREATED", "BACKUP_PLAN_MODIFIED"
+    #   resp.backup_vault_events[0] #=> String, one of "BACKUP_JOB_STARTED", "BACKUP_JOB_COMPLETED", "BACKUP_JOB_SUCCESSFUL", "BACKUP_JOB_FAILED", "BACKUP_JOB_EXPIRED", "RESTORE_JOB_STARTED", "RESTORE_JOB_COMPLETED", "RESTORE_JOB_SUCCESSFUL", "RESTORE_JOB_FAILED", "COPY_JOB_STARTED", "COPY_JOB_SUCCESSFUL", "COPY_JOB_FAILED", "RECOVERY_POINT_MODIFIED", "BACKUP_PLAN_CREATED", "BACKUP_PLAN_MODIFIED", "S3_BACKUP_OBJECT_FAILED", "S3_RESTORE_OBJECT_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/GetBackupVaultNotifications AWS API Documentation
     #
@@ -2013,6 +2015,10 @@ module Aws::Backup
     # @option params [String] :by_resource_type
     #   Returns only backup jobs for the specified resources:
     #
+    #   * `Aurora` for Amazon Aurora
+    #
+    #   * `DocumentDB` for Amazon DocumentDB (with MongoDB compatibility)
+    #
     #   * `DynamoDB` for Amazon DynamoDB
     #
     #   * `EBS` for Amazon Elastic Block Store
@@ -2021,11 +2027,17 @@ module Aws::Backup
     #
     #   * `EFS` for Amazon Elastic File System
     #
+    #   * `FSx` for Amazon FSx
+    #
+    #   * `Neptune` for Amazon Neptune
+    #
     #   * `RDS` for Amazon Relational Database Service
     #
-    #   * `Aurora` for Amazon Aurora
-    #
     #   * `Storage Gateway` for Storage Gateway
+    #
+    #   * `S3` for Amazon S3
+    #
+    #   * `VirtualMachine` for virtual machines
     #
     # @option params [String] :by_account_id
     #   The account ID to list the jobs from. Returns only backup jobs
@@ -2033,6 +2045,14 @@ module Aws::Backup
     #
     #   If used from an Organizations management account, passing `*` returns
     #   all jobs across the organization.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :by_complete_after
+    #   Returns only backup jobs completed after a date expressed in Unix
+    #   format and Coordinated Universal Time (UTC).
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :by_complete_before
+    #   Returns only backup jobs completed before a date expressed in Unix
+    #   format and Coordinated Universal Time (UTC).
     #
     # @return [Types::ListBackupJobsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2053,6 +2073,8 @@ module Aws::Backup
     #     by_created_after: Time.now,
     #     by_resource_type: "ResourceType",
     #     by_account_id: "AccountId",
+    #     by_complete_after: Time.now,
+    #     by_complete_before: Time.now,
     #   })
     #
     # @example Response structure
@@ -2378,6 +2400,10 @@ module Aws::Backup
     # @option params [String] :by_resource_type
     #   Returns only backup jobs for the specified resources:
     #
+    #   * `Aurora` for Amazon Aurora
+    #
+    #   * `DocumentDB` for Amazon DocumentDB (with MongoDB compatibility)
+    #
     #   * `DynamoDB` for Amazon DynamoDB
     #
     #   * `EBS` for Amazon Elastic Block Store
@@ -2386,11 +2412,17 @@ module Aws::Backup
     #
     #   * `EFS` for Amazon Elastic File System
     #
+    #   * `FSx` for Amazon FSx
+    #
+    #   * `Neptune` for Amazon Neptune
+    #
     #   * `RDS` for Amazon Relational Database Service
     #
-    #   * `Aurora` for Amazon Aurora
-    #
     #   * `Storage Gateway` for Storage Gateway
+    #
+    #   * `S3` for Amazon S3
+    #
+    #   * `VirtualMachine` for virtual machines
     #
     # @option params [String] :by_destination_vault_arn
     #   An Amazon Resource Name (ARN) that uniquely identifies a source backup
@@ -2400,6 +2432,14 @@ module Aws::Backup
     # @option params [String] :by_account_id
     #   The account ID to list the jobs from. Returns only copy jobs
     #   associated with the specified account ID.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :by_complete_before
+    #   Returns only copy jobs completed before a date expressed in Unix
+    #   format and Coordinated Universal Time (UTC).
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :by_complete_after
+    #   Returns only copy jobs completed after a date expressed in Unix format
+    #   and Coordinated Universal Time (UTC).
     #
     # @return [Types::ListCopyJobsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2420,6 +2460,8 @@ module Aws::Backup
     #     by_resource_type: "ResourceType",
     #     by_destination_vault_arn: "string",
     #     by_account_id: "AccountId",
+    #     by_complete_before: Time.now,
+    #     by_complete_after: Time.now,
     #   })
     #
     # @example Response structure
@@ -2857,6 +2899,14 @@ module Aws::Backup
     # @option params [String] :by_status
     #   Returns only restore jobs associated with the specified job status.
     #
+    # @option params [Time,DateTime,Date,Integer,String] :by_complete_before
+    #   Returns only copy jobs completed before a date expressed in Unix
+    #   format and Coordinated Universal Time (UTC).
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :by_complete_after
+    #   Returns only copy jobs completed after a date expressed in Unix format
+    #   and Coordinated Universal Time (UTC).
+    #
     # @return [Types::ListRestoreJobsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListRestoreJobsOutput#restore_jobs #restore_jobs} => Array&lt;Types::RestoreJobsListMember&gt;
@@ -2873,6 +2923,8 @@ module Aws::Backup
     #     by_created_before: Time.now,
     #     by_created_after: Time.now,
     #     by_status: "PENDING", # accepts PENDING, RUNNING, COMPLETED, ABORTED, FAILED
+    #     by_complete_before: Time.now,
+    #     by_complete_after: Time.now,
     #   })
     #
     # @example Response structure
@@ -2905,9 +2957,14 @@ module Aws::Backup
     # Returns a list of key-value pairs assigned to a target recovery point,
     # backup plan, or backup vault.
     #
-    # <note markdown="1"> `ListTags` are currently only supported with Amazon EFS backups.
+    # `ListTags` only works for resource types that support full Backup
+    # management of their backups. Those resource types are listed in the
+    # "Full Backup management" section of the [ Feature availability by
+    # resource][1] table.
     #
-    #  </note>
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource
     #
     # @option params [required, String] :resource_arn
     #   An Amazon Resource Name (ARN) that uniquely identifies a resource. The
@@ -3016,7 +3073,8 @@ module Aws::Backup
     #   longer than the minimum retention period. If the job's retention
     #   period is shorter than that minimum retention period, then the vault
     #   fails that backup or copy job, and you should either modify your
-    #   lifecycle settings or use a different vault. Recovery points already
+    #   lifecycle settings or use a different vault. The shortest minimum
+    #   retention period you can specify is 1 day. Recovery points already
     #   saved in the vault prior to Vault Lock are not affected.
     #
     # @option params [Integer] :max_retention_days
@@ -3036,8 +3094,10 @@ module Aws::Backup
     #   shorter than the maximum retention period. If the job's retention
     #   period is longer than that maximum retention period, then the vault
     #   fails the backup or copy job, and you should either modify your
-    #   lifecycle settings or use a different vault. Recovery points already
-    #   saved in the vault prior to Vault Lock are not affected.
+    #   lifecycle settings or use a different vault. The longest maximum
+    #   retention period you can specify is 36500 days (approximately 100
+    #   years). Recovery points already saved in the vault prior to Vault Lock
+    #   are not affected.
     #
     # @option params [Integer] :changeable_for_days
     #   The Backup Vault Lock configuration that specifies the number of days
@@ -3110,6 +3170,8 @@ module Aws::Backup
     #   * `RESTORE_JOB_STARTED` \| `RESTORE_JOB_COMPLETED` \|
     #     `RECOVERY_POINT_MODIFIED`
     #
+    #   * `S3_BACKUP_OBJECT_FAILED` \| `S3_RESTORE_OBJECT_FAILED`
+    #
     #   <note markdown="1"> Ignore the list below because it includes deprecated events. Refer to
     #   the list above.
     #
@@ -3126,7 +3188,7 @@ module Aws::Backup
     #   resp = client.put_backup_vault_notifications({
     #     backup_vault_name: "BackupVaultName", # required
     #     sns_topic_arn: "ARN", # required
-    #     backup_vault_events: ["BACKUP_JOB_STARTED"], # required, accepts BACKUP_JOB_STARTED, BACKUP_JOB_COMPLETED, BACKUP_JOB_SUCCESSFUL, BACKUP_JOB_FAILED, BACKUP_JOB_EXPIRED, RESTORE_JOB_STARTED, RESTORE_JOB_COMPLETED, RESTORE_JOB_SUCCESSFUL, RESTORE_JOB_FAILED, COPY_JOB_STARTED, COPY_JOB_SUCCESSFUL, COPY_JOB_FAILED, RECOVERY_POINT_MODIFIED, BACKUP_PLAN_CREATED, BACKUP_PLAN_MODIFIED
+    #     backup_vault_events: ["BACKUP_JOB_STARTED"], # required, accepts BACKUP_JOB_STARTED, BACKUP_JOB_COMPLETED, BACKUP_JOB_SUCCESSFUL, BACKUP_JOB_FAILED, BACKUP_JOB_EXPIRED, RESTORE_JOB_STARTED, RESTORE_JOB_COMPLETED, RESTORE_JOB_SUCCESSFUL, RESTORE_JOB_FAILED, COPY_JOB_STARTED, COPY_JOB_SUCCESSFUL, COPY_JOB_FAILED, RECOVERY_POINT_MODIFIED, BACKUP_PLAN_CREATED, BACKUP_PLAN_MODIFIED, S3_BACKUP_OBJECT_FAILED, S3_RESTORE_OBJECT_FAILED
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/PutBackupVaultNotifications AWS API Documentation
@@ -3167,10 +3229,10 @@ module Aws::Backup
     #
     # @option params [Integer] :complete_window_minutes
     #   A value in minutes during which a successfully started backup must
-    #   complete, or else AWS Backup will cancel the job. This value is
-    #   optional. This value begins counting down from when the backup was
-    #   scheduled. It does not add additional time for `StartWindowMinutes`,
-    #   or if the backup started later than scheduled.
+    #   complete, or else Backup will cancel the job. This value is optional.
+    #   This value begins counting down from when the backup was scheduled. It
+    #   does not add additional time for `StartWindowMinutes`, or if the
+    #   backup started later than scheduled.
     #
     # @option params [Types::Lifecycle] :lifecycle
     #   The lifecycle defines when a protected resource is transitioned to
@@ -3178,13 +3240,19 @@ module Aws::Backup
     #   backups automatically according to the lifecycle that you define.
     #
     #   Backups transitioned to cold storage must be stored in cold storage
-    #   for a minimum of 90 days. Therefore, the “expire after days” setting
-    #   must be 90 days greater than the “transition to cold after days”
-    #   setting. The “transition to cold after days” setting cannot be changed
-    #   after a backup has been transitioned to cold.
+    #   for a minimum of 90 days. Therefore, the “retention” setting must be
+    #   90 days greater than the “transition to cold after days” setting. The
+    #   “transition to cold after days” setting cannot be changed after a
+    #   backup has been transitioned to cold.
     #
-    #   Only Amazon EFS file system backups can be transitioned to cold
-    #   storage.
+    #   Resource types that are able to be transitioned to cold storage are
+    #   listed in the "Lifecycle to cold storage" section of the [ Feature
+    #   availability by resource][1] table. Backup ignores this expression for
+    #   other resource types.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource
     #
     # @option params [Hash<String,String>] :recovery_point_tags
     #   To help organize your resources, you can assign your own metadata to
@@ -3277,13 +3345,19 @@ module Aws::Backup
     #   before a recovery point transitions to cold storage or is deleted.
     #
     #   Backups transitioned to cold storage must be stored in cold storage
-    #   for a minimum of 90 days. Therefore, on the console, the “expire after
-    #   days” setting must be 90 days greater than the “transition to cold
-    #   after days” setting. The “transition to cold after days” setting
-    #   cannot be changed after a backup has been transitioned to cold.
+    #   for a minimum of 90 days. Therefore, on the console, the “retention”
+    #   setting must be 90 days greater than the “transition to cold after
+    #   days” setting. The “transition to cold after days” setting cannot be
+    #   changed after a backup has been transitioned to cold.
     #
-    #   Only Amazon EFS file system backups can be transitioned to cold
-    #   storage.
+    #   Resource types that are able to be transitioned to cold storage are
+    #   listed in the "Lifecycle to cold storage" section of the [ Feature
+    #   availability by resource][1] table. Backup ignores this expression for
+    #   other resource types.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource
     #
     # @return [Types::StartCopyJobOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3403,7 +3477,7 @@ module Aws::Backup
     #     directories rather than the entire file system. This parameter is
     #     optional. For example, `"itemsToRestore":"["/my.test"]"`.
     #
-    # @option params [required, String] :iam_role_arn
+    # @option params [String] :iam_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that Backup uses to
     #   create the target recovery point; for example,
     #   `arn:aws:iam::123456789012:role/S3Access`.
@@ -3418,6 +3492,10 @@ module Aws::Backup
     #   Starts a job to restore a recovery point for one of the following
     #   resources:
     #
+    #   * `Aurora` for Amazon Aurora
+    #
+    #   * `DocumentDB` for Amazon DocumentDB (with MongoDB compatibility)
+    #
     #   * `DynamoDB` for Amazon DynamoDB
     #
     #   * `EBS` for Amazon Elastic Block Store
@@ -3426,11 +3504,17 @@ module Aws::Backup
     #
     #   * `EFS` for Amazon Elastic File System
     #
+    #   * `FSx` for Amazon FSx
+    #
+    #   * `Neptune` for Amazon Neptune
+    #
     #   * `RDS` for Amazon Relational Database Service
     #
-    #   * `Aurora` for Amazon Aurora
-    #
     #   * `Storage Gateway` for Storage Gateway
+    #
+    #   * `S3` for Amazon S3
+    #
+    #   * `VirtualMachine` for virtual machines
     #
     # @return [Types::StartRestoreJobOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3443,7 +3527,7 @@ module Aws::Backup
     #     metadata: { # required
     #       "MetadataKey" => "MetadataValue",
     #     },
-    #     iam_role_arn: "IAMRoleArn", # required
+    #     iam_role_arn: "IAMRoleArn",
     #     idempotency_token: "string",
     #     resource_type: "ResourceType",
     #   })
@@ -3735,15 +3819,21 @@ module Aws::Backup
     # backups automatically according to the lifecycle that you define.
     #
     # Backups transitioned to cold storage must be stored in cold storage
-    # for a minimum of 90 days. Therefore, the “expire after days” setting
-    # must be 90 days greater than the “transition to cold after days”
-    # setting. The “transition to cold after days” setting cannot be changed
-    # after a backup has been transitioned to cold.
+    # for a minimum of 90 days. Therefore, the “retention” setting must be
+    # 90 days greater than the “transition to cold after days” setting. The
+    # “transition to cold after days” setting cannot be changed after a
+    # backup has been transitioned to cold.
     #
-    # Only Amazon EFS file system backups can be transitioned to cold
-    # storage.
+    # Resource types that are able to be transitioned to cold storage are
+    # listed in the "Lifecycle to cold storage" section of the [ Feature
+    # availability by resource][1] table. Backup ignores this expression for
+    # other resource types.
     #
-    # Does not support continuous backups.
+    # This operation does not support continuous backups.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource
     #
     # @option params [required, String] :backup_vault_name
     #   The name of a logical container where backups are stored. Backup
@@ -3762,10 +3852,10 @@ module Aws::Backup
     #   backups automatically according to the lifecycle that you define.
     #
     #   Backups transitioned to cold storage must be stored in cold storage
-    #   for a minimum of 90 days. Therefore, the “expire after days” setting
-    #   must be 90 days greater than the “transition to cold after days”
-    #   setting. The “transition to cold after days” setting cannot be changed
-    #   after a backup has been transitioned to cold.
+    #   for a minimum of 90 days. Therefore, the “retention” setting must be
+    #   90 days greater than the “transition to cold after days” setting. The
+    #   “transition to cold after days” setting cannot be changed after a
+    #   backup has been transitioned to cold.
     #
     # @return [Types::UpdateRecoveryPointLifecycleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3816,12 +3906,15 @@ module Aws::Backup
     #   Region.
     #
     # @option params [Hash<String,Boolean>] :resource_type_management_preference
-    #   Enables or disables [ Backup's advanced DynamoDB backup features][1]
-    #   for the Region.
+    #   Enables or disables full Backup management of backups for a resource
+    #   type. To enable full Backup management for DynamoDB along with [
+    #   Backup's advanced DynamoDB backup features][1], follow the procedure
+    #   to [ enable advanced DynamoDB backup programmatically][2].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/advanced-ddb-backup.html
+    #   [2]: https://docs.aws.amazon.com/aws-backup/latest/devguide/advanced-ddb-backup.html#advanced-ddb-backup-enable-cli
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3934,7 +4027,7 @@ module Aws::Backup
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-backup'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

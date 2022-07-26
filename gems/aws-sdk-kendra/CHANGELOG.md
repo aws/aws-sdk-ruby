@@ -1,6 +1,66 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2022-07-21)
+------------------
+
+* Feature - Amazon Kendra now provides Oauth2 support for SharePoint Online. For more information, see https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html
+
+1.54.0 (2022-07-14)
+------------------
+
+* Feature - This release adds AccessControlConfigurations which allow you to redefine your document level access control without the need for content re-indexing.
+
+1.53.0 (2022-06-30)
+------------------
+
+* Feature - Amazon Kendra now provides a data source connector for alfresco
+
+1.52.0 (2022-06-02)
+------------------
+
+* Feature - Amazon Kendra now provides a data source connector for GitHub. For more information, see https://docs.aws.amazon.com/kendra/latest/dg/data-source-github.html
+
+1.51.0 (2022-05-12)
+------------------
+
+* Feature - Amazon Kendra now provides a data source connector for Jira. For more information, see https://docs.aws.amazon.com/kendra/latest/dg/data-source-jira.html
+
+1.50.0 (2022-05-05)
+------------------
+
+* Feature - AWS Kendra now supports hierarchical facets for a query. For more information, see https://docs.aws.amazon.com/kendra/latest/dg/filtering.html
+
+1.49.0 (2022-04-19)
+------------------
+
+* Feature - Amazon Kendra now provides a data source connector for Quip. For more information, see https://docs.aws.amazon.com/kendra/latest/dg/data-source-quip.html
+
+1.48.0 (2022-04-06)
+------------------
+
+* Feature - Amazon Kendra now provides a data source connector for Box. For more information, see https://docs.aws.amazon.com/kendra/latest/dg/data-source-box.html
+
+1.47.0 (2022-03-14)
+------------------
+
+* Feature - Amazon Kendra now provides a data source connector for Slack. For more information, see https://docs.aws.amazon.com/kendra/latest/dg/data-source-slack.html
+
+1.46.0 (2022-03-03)
+------------------
+
+* Feature - Amazon Kendra now suggests spell corrections for a query. For more information, see https://docs.aws.amazon.com/kendra/latest/dg/query-spell-check.html
+
+1.45.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.44.0 (2022-02-08)
+------------------
+
+* Feature - Amazon Kendra now provides a data source connector for Amazon FSx. For more information, see https://docs.aws.amazon.com/kendra/latest/dg/data-source-fsx.html
+
 1.43.0 (2022-02-03)
 ------------------
 

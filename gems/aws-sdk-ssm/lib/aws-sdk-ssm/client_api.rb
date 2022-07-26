@@ -527,6 +527,7 @@ module Aws::SSM
     InvalidRole = Shapes::StructureShape.new(name: 'InvalidRole')
     InvalidSchedule = Shapes::StructureShape.new(name: 'InvalidSchedule')
     InvalidTarget = Shapes::StructureShape.new(name: 'InvalidTarget')
+    InvalidTargetMaps = Shapes::StructureShape.new(name: 'InvalidTargetMaps')
     InvalidTypeNameException = Shapes::StructureShape.new(name: 'InvalidTypeNameException')
     InvalidUpdate = Shapes::StructureShape.new(name: 'InvalidUpdate')
     InventoryAggregator = Shapes::StructureShape.new(name: 'InventoryAggregator')
@@ -1029,6 +1030,7 @@ module Aws::SSM
     S3OutputUrl = Shapes::StructureShape.new(name: 'S3OutputUrl')
     S3Region = Shapes::StringShape.new(name: 'S3Region')
     ScheduleExpression = Shapes::StringShape.new(name: 'ScheduleExpression')
+    ScheduleOffset = Shapes::IntegerShape.new(name: 'ScheduleOffset')
     ScheduledWindowExecution = Shapes::StructureShape.new(name: 'ScheduledWindowExecution')
     ScheduledWindowExecutionList = Shapes::ListShape.new(name: 'ScheduledWindowExecutionList')
     SendAutomationSignalRequest = Shapes::StructureShape.new(name: 'SendAutomationSignalRequest')
@@ -1225,6 +1227,8 @@ module Aws::SSM
     Association.add_member(:overview, Shapes::ShapeRef.new(shape: AssociationOverview, location_name: "Overview"))
     Association.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: ScheduleExpression, location_name: "ScheduleExpression"))
     Association.add_member(:association_name, Shapes::ShapeRef.new(shape: AssociationName, location_name: "AssociationName"))
+    Association.add_member(:schedule_offset, Shapes::ShapeRef.new(shape: ScheduleOffset, location_name: "ScheduleOffset", metadata: {"box"=>true}))
+    Association.add_member(:target_maps, Shapes::ShapeRef.new(shape: TargetMaps, location_name: "TargetMaps", metadata: {"box"=>true}))
     Association.struct_class = Types::Association
 
     AssociationAlreadyExists.struct_class = Types::AssociationAlreadyExists
@@ -1253,6 +1257,8 @@ module Aws::SSM
     AssociationDescription.add_member(:apply_only_at_cron_interval, Shapes::ShapeRef.new(shape: ApplyOnlyAtCronInterval, location_name: "ApplyOnlyAtCronInterval"))
     AssociationDescription.add_member(:calendar_names, Shapes::ShapeRef.new(shape: CalendarNameOrARNList, location_name: "CalendarNames"))
     AssociationDescription.add_member(:target_locations, Shapes::ShapeRef.new(shape: TargetLocations, location_name: "TargetLocations"))
+    AssociationDescription.add_member(:schedule_offset, Shapes::ShapeRef.new(shape: ScheduleOffset, location_name: "ScheduleOffset", metadata: {"box"=>true}))
+    AssociationDescription.add_member(:target_maps, Shapes::ShapeRef.new(shape: TargetMaps, location_name: "TargetMaps", metadata: {"box"=>true}))
     AssociationDescription.struct_class = Types::AssociationDescription
 
     AssociationDescriptionList.member = Shapes::ShapeRef.new(shape: AssociationDescription)
@@ -1344,6 +1350,8 @@ module Aws::SSM
     AssociationVersionInfo.add_member(:apply_only_at_cron_interval, Shapes::ShapeRef.new(shape: ApplyOnlyAtCronInterval, location_name: "ApplyOnlyAtCronInterval"))
     AssociationVersionInfo.add_member(:calendar_names, Shapes::ShapeRef.new(shape: CalendarNameOrARNList, location_name: "CalendarNames"))
     AssociationVersionInfo.add_member(:target_locations, Shapes::ShapeRef.new(shape: TargetLocations, location_name: "TargetLocations"))
+    AssociationVersionInfo.add_member(:schedule_offset, Shapes::ShapeRef.new(shape: ScheduleOffset, location_name: "ScheduleOffset", metadata: {"box"=>true}))
+    AssociationVersionInfo.add_member(:target_maps, Shapes::ShapeRef.new(shape: TargetMaps, location_name: "TargetMaps", metadata: {"box"=>true}))
     AssociationVersionInfo.struct_class = Types::AssociationVersionInfo
 
     AssociationVersionLimitExceeded.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -1664,6 +1672,8 @@ module Aws::SSM
     CreateAssociationBatchRequestEntry.add_member(:apply_only_at_cron_interval, Shapes::ShapeRef.new(shape: ApplyOnlyAtCronInterval, location_name: "ApplyOnlyAtCronInterval"))
     CreateAssociationBatchRequestEntry.add_member(:calendar_names, Shapes::ShapeRef.new(shape: CalendarNameOrARNList, location_name: "CalendarNames"))
     CreateAssociationBatchRequestEntry.add_member(:target_locations, Shapes::ShapeRef.new(shape: TargetLocations, location_name: "TargetLocations"))
+    CreateAssociationBatchRequestEntry.add_member(:schedule_offset, Shapes::ShapeRef.new(shape: ScheduleOffset, location_name: "ScheduleOffset", metadata: {"box"=>true}))
+    CreateAssociationBatchRequestEntry.add_member(:target_maps, Shapes::ShapeRef.new(shape: TargetMaps, location_name: "TargetMaps", metadata: {"box"=>true}))
     CreateAssociationBatchRequestEntry.struct_class = Types::CreateAssociationBatchRequestEntry
 
     CreateAssociationBatchResult.add_member(:successful, Shapes::ShapeRef.new(shape: AssociationDescriptionList, location_name: "Successful"))
@@ -1686,6 +1696,8 @@ module Aws::SSM
     CreateAssociationRequest.add_member(:apply_only_at_cron_interval, Shapes::ShapeRef.new(shape: ApplyOnlyAtCronInterval, location_name: "ApplyOnlyAtCronInterval"))
     CreateAssociationRequest.add_member(:calendar_names, Shapes::ShapeRef.new(shape: CalendarNameOrARNList, location_name: "CalendarNames"))
     CreateAssociationRequest.add_member(:target_locations, Shapes::ShapeRef.new(shape: TargetLocations, location_name: "TargetLocations"))
+    CreateAssociationRequest.add_member(:schedule_offset, Shapes::ShapeRef.new(shape: ScheduleOffset, location_name: "ScheduleOffset", metadata: {"box"=>true}))
+    CreateAssociationRequest.add_member(:target_maps, Shapes::ShapeRef.new(shape: TargetMaps, location_name: "TargetMaps", metadata: {"box"=>true}))
     CreateAssociationRequest.struct_class = Types::CreateAssociationRequest
 
     CreateAssociationResult.add_member(:association_description, Shapes::ShapeRef.new(shape: AssociationDescription, location_name: "AssociationDescription"))
@@ -2927,6 +2939,9 @@ module Aws::SSM
     InvalidTarget.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InvalidTarget.struct_class = Types::InvalidTarget
 
+    InvalidTargetMaps.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidTargetMaps.struct_class = Types::InvalidTargetMaps
+
     InvalidTypeNameException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InvalidTypeNameException.struct_class = Types::InvalidTypeNameException
 
@@ -4058,6 +4073,7 @@ module Aws::SSM
     Runbook.add_member(:parameters, Shapes::ShapeRef.new(shape: AutomationParameterMap, location_name: "Parameters"))
     Runbook.add_member(:target_parameter_name, Shapes::ShapeRef.new(shape: AutomationParameterKey, location_name: "TargetParameterName"))
     Runbook.add_member(:targets, Shapes::ShapeRef.new(shape: Targets, location_name: "Targets"))
+    Runbook.add_member(:target_maps, Shapes::ShapeRef.new(shape: TargetMaps, location_name: "TargetMaps"))
     Runbook.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: MaxConcurrency, location_name: "MaxConcurrency"))
     Runbook.add_member(:max_errors, Shapes::ShapeRef.new(shape: MaxErrors, location_name: "MaxErrors"))
     Runbook.add_member(:target_locations, Shapes::ShapeRef.new(shape: TargetLocations, location_name: "TargetLocations", metadata: {"box"=>true}))
@@ -4354,6 +4370,8 @@ module Aws::SSM
     UpdateAssociationRequest.add_member(:apply_only_at_cron_interval, Shapes::ShapeRef.new(shape: ApplyOnlyAtCronInterval, location_name: "ApplyOnlyAtCronInterval"))
     UpdateAssociationRequest.add_member(:calendar_names, Shapes::ShapeRef.new(shape: CalendarNameOrARNList, location_name: "CalendarNames"))
     UpdateAssociationRequest.add_member(:target_locations, Shapes::ShapeRef.new(shape: TargetLocations, location_name: "TargetLocations"))
+    UpdateAssociationRequest.add_member(:schedule_offset, Shapes::ShapeRef.new(shape: ScheduleOffset, location_name: "ScheduleOffset", metadata: {"box"=>true}))
+    UpdateAssociationRequest.add_member(:target_maps, Shapes::ShapeRef.new(shape: TargetMaps, location_name: "TargetMaps", metadata: {"box"=>true}))
     UpdateAssociationRequest.struct_class = Types::UpdateAssociationRequest
 
     UpdateAssociationResult.add_member(:association_description, Shapes::ShapeRef.new(shape: AssociationDescription, location_name: "AssociationDescription"))
@@ -4645,6 +4663,7 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameters)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTarget)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSchedule)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTargetMaps)
       end)
 
       api.add_operation(:create_association_batch, Seahorse::Model::Operation.new.tap do |o|
@@ -4664,6 +4683,7 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InvalidOutputLocation)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTarget)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSchedule)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTargetMaps)
       end)
 
       api.add_operation(:create_document, Seahorse::Model::Operation.new.tap do |o|
@@ -6233,7 +6253,6 @@ module Aws::SSM
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: TerminateSessionRequest)
         o.output = Shapes::ShapeRef.new(shape: TerminateSessionResponse)
-        o.errors << Shapes::ShapeRef.new(shape: DoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
@@ -6267,6 +6286,7 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InvalidTarget)
         o.errors << Shapes::ShapeRef.new(shape: InvalidAssociationVersion)
         o.errors << Shapes::ShapeRef.new(shape: AssociationVersionLimitExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTargetMaps)
       end)
 
       api.add_operation(:update_association_status, Seahorse::Model::Operation.new.tap do |o|

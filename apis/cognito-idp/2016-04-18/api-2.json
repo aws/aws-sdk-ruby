@@ -1053,7 +1053,6 @@
         {"shape":"InvalidEmailRoleAccessPolicyException"},
         {"shape":"CodeDeliveryFailureException"},
         {"shape":"UserNotFoundException"},
-        {"shape":"UserNotConfirmedException"},
         {"shape":"InternalErrorException"}
       ],
       "authtype":"none"
@@ -1901,7 +1900,8 @@
         {"shape":"PasswordResetRequiredException"},
         {"shape":"UserNotFoundException"},
         {"shape":"UserNotConfirmedException"},
-        {"shape":"InternalErrorException"}
+        {"shape":"InternalErrorException"},
+        {"shape":"AliasExistsException"}
       ],
       "authtype":"none"
     }
@@ -2574,6 +2574,10 @@
       "max":2048,
       "sensitive":true
     },
+    "AttributesRequireVerificationBeforeUpdateType":{
+      "type":"list",
+      "member":{"shape":"VerifiedAttributeType"}
+    },
     "AuthEventType":{
       "type":"structure",
       "members":{
@@ -2623,7 +2627,7 @@
     "BlockedIPRangeListType":{
       "type":"list",
       "member":{"shape":"StringType"},
-      "max":20
+      "max":200
     },
     "BooleanType":{"type":"boolean"},
     "CSSType":{"type":"string"},
@@ -2995,7 +2999,8 @@
         "AllowedOAuthFlowsUserPoolClient":{"shape":"BooleanType"},
         "AnalyticsConfiguration":{"shape":"AnalyticsConfigurationType"},
         "PreventUserExistenceErrors":{"shape":"PreventUserExistenceErrorTypes"},
-        "EnableTokenRevocation":{"shape":"WrappedBooleanType"}
+        "EnableTokenRevocation":{"shape":"WrappedBooleanType"},
+        "EnablePropagateAdditionalUserContextData":{"shape":"WrappedBooleanType"}
       }
     },
     "CreateUserPoolClientResponse":{
@@ -3038,6 +3043,7 @@
         "VerificationMessageTemplate":{"shape":"VerificationMessageTemplateType"},
         "SmsAuthenticationMessage":{"shape":"SmsVerificationMessageType"},
         "MfaConfiguration":{"shape":"UserPoolMfaType"},
+        "UserAttributeUpdateSettings":{"shape":"UserAttributeUpdateSettingsType"},
         "DeviceConfiguration":{"shape":"DeviceConfigurationType"},
         "EmailConfiguration":{"shape":"EmailConfigurationType"},
         "SmsConfiguration":{"shape":"SmsConfigurationType"},
@@ -4277,7 +4283,6 @@
     "PasswordType":{
       "type":"string",
       "max":256,
-      "min":6,
       "pattern":"[\\S]+",
       "sensitive":true
     },
@@ -4337,7 +4342,7 @@
     "ProviderNameTypeV1":{
       "type":"string",
       "max":32,
-      "min":1,
+      "min":3,
       "pattern":"[^_][\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}][^_]+"
     },
     "ProviderUserIdentifierType":{
@@ -4399,6 +4404,11 @@
       "type":"integer",
       "max":315360000,
       "min":0
+    },
+    "RegionCodeType":{
+      "type":"string",
+      "max":32,
+      "min":5
     },
     "ResendConfirmationCodeRequest":{
       "type":"structure",
@@ -4764,14 +4774,15 @@
     "SkippedIPRangeListType":{
       "type":"list",
       "member":{"shape":"StringType"},
-      "max":20
+      "max":200
     },
     "SmsConfigurationType":{
       "type":"structure",
       "required":["SnsCallerArn"],
       "members":{
         "SnsCallerArn":{"shape":"ArnType"},
-        "ExternalId":{"shape":"StringType"}
+        "ExternalId":{"shape":"StringType"},
+        "SnsRegion":{"shape":"RegionCodeType"}
       }
     },
     "SmsMfaConfigType":{
@@ -5148,7 +5159,8 @@
         "AllowedOAuthFlowsUserPoolClient":{"shape":"BooleanType"},
         "AnalyticsConfiguration":{"shape":"AnalyticsConfigurationType"},
         "PreventUserExistenceErrors":{"shape":"PreventUserExistenceErrorTypes"},
-        "EnableTokenRevocation":{"shape":"WrappedBooleanType"}
+        "EnableTokenRevocation":{"shape":"WrappedBooleanType"},
+        "EnablePropagateAdditionalUserContextData":{"shape":"WrappedBooleanType"}
       }
     },
     "UpdateUserPoolClientResponse":{
@@ -5189,6 +5201,7 @@
         "EmailVerificationSubject":{"shape":"EmailVerificationSubjectType"},
         "VerificationMessageTemplate":{"shape":"VerificationMessageTemplateType"},
         "SmsAuthenticationMessage":{"shape":"SmsVerificationMessageType"},
+        "UserAttributeUpdateSettings":{"shape":"UserAttributeUpdateSettingsType"},
         "MfaConfiguration":{"shape":"UserPoolMfaType"},
         "DeviceConfiguration":{"shape":"DeviceConfigurationType"},
         "EmailConfiguration":{"shape":"EmailConfigurationType"},
@@ -5204,9 +5217,16 @@
       "members":{
       }
     },
+    "UserAttributeUpdateSettingsType":{
+      "type":"structure",
+      "members":{
+        "AttributesRequireVerificationBeforeUpdate":{"shape":"AttributesRequireVerificationBeforeUpdateType"}
+      }
+    },
     "UserContextDataType":{
       "type":"structure",
       "members":{
+        "IpAddress":{"shape":"StringType"},
         "EncodedData":{"shape":"StringType"}
       }
     },
@@ -5349,7 +5369,8 @@
         },
         "AnalyticsConfiguration":{"shape":"AnalyticsConfigurationType"},
         "PreventUserExistenceErrors":{"shape":"PreventUserExistenceErrorTypes"},
-        "EnableTokenRevocation":{"shape":"WrappedBooleanType"}
+        "EnableTokenRevocation":{"shape":"WrappedBooleanType"},
+        "EnablePropagateAdditionalUserContextData":{"shape":"WrappedBooleanType"}
       }
     },
     "UserPoolDescriptionType":{
@@ -5428,6 +5449,7 @@
         "EmailVerificationSubject":{"shape":"EmailVerificationSubjectType"},
         "VerificationMessageTemplate":{"shape":"VerificationMessageTemplateType"},
         "SmsAuthenticationMessage":{"shape":"SmsVerificationMessageType"},
+        "UserAttributeUpdateSettings":{"shape":"UserAttributeUpdateSettingsType"},
         "MfaConfiguration":{"shape":"UserPoolMfaType"},
         "DeviceConfiguration":{"shape":"DeviceConfigurationType"},
         "EstimatedNumberOfUsers":{"shape":"IntegerType"},

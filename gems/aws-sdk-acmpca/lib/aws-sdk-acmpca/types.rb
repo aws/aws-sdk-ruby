@@ -35,6 +35,12 @@ module Aws::ACMPCA
     #         initials: "String5",
     #         pseudonym: "String128",
     #         generation_qualifier: "String3",
+    #         custom_attributes: [
+    #           {
+    #             object_identifier: "CustomObjectIdentifier", # required
+    #             value: "String1To256", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] country
@@ -110,6 +116,22 @@ module Aws::ACMPCA
     #   Examples include Jr. for junior, Sr. for senior, and III for third.
     #   @return [String]
     #
+    # @!attribute [rw] custom_attributes
+    #   Contains a sequence of one or more X.500 relative distinguished
+    #   names (RDNs), each of which consists of an object identifier (OID)
+    #   and a value. For more information, see NIST’s definition of [Object
+    #   Identifier (OID)][1].
+    #
+    #   <note markdown="1"> Custom attributes cannot be used in combination with standard
+    #   attributes.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://csrc.nist.gov/glossary/term/Object_Identifier
+    #   @return [Array<Types::CustomAttribute>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/ASN1Subject AWS API Documentation
     #
     class ASN1Subject < Struct.new(
@@ -126,7 +148,8 @@ module Aws::ACMPCA
       :given_name,
       :initials,
       :pseudonym,
-      :generation_qualifier)
+      :generation_qualifier,
+      :custom_attributes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -136,7 +159,7 @@ module Aws::ACMPCA
     #
     #
     #
-    # [1]: https://tools.ietf.org/html/rfc5280
+    # [1]: https://datatracker.ietf.org/doc/html/rfc5280
     #
     # @note When making an API call, you may pass AccessDescription
     #   data as a hash:
@@ -168,6 +191,12 @@ module Aws::ACMPCA
     #             initials: "String5",
     #             pseudonym: "String128",
     #             generation_qualifier: "String3",
+    #             custom_attributes: [
+    #               {
+    #                 object_identifier: "CustomObjectIdentifier", # required
+    #                 value: "String1To256", # required
+    #               },
+    #             ],
     #           },
     #           edi_party_name: {
     #             party_name: "String256", # required
@@ -301,6 +330,12 @@ module Aws::ACMPCA
     #                 initials: "String5",
     #                 pseudonym: "String128",
     #                 generation_qualifier: "String3",
+    #                 custom_attributes: [
+    #                   {
+    #                     object_identifier: "CustomObjectIdentifier", # required
+    #                     value: "String1To256", # required
+    #                   },
+    #                 ],
     #               },
     #               edi_party_name: {
     #                 party_name: "String256", # required
@@ -309,6 +344,13 @@ module Aws::ACMPCA
     #               uniform_resource_identifier: "String253",
     #               ip_address: "String39",
     #               registered_id: "CustomObjectIdentifier",
+    #             },
+    #           ],
+    #           custom_extensions: [
+    #             {
+    #               object_identifier: "CustomObjectIdentifier", # required
+    #               value: "Base64String1To4096", # required
+    #               critical: false,
     #             },
     #           ],
     #         },
@@ -327,6 +369,12 @@ module Aws::ACMPCA
     #           initials: "String5",
     #           pseudonym: "String128",
     #           generation_qualifier: "String3",
+    #           custom_attributes: [
+    #             {
+    #               object_identifier: "CustomObjectIdentifier", # required
+    #               value: "String1To256", # required
+    #             },
+    #           ],
     #         },
     #       }
     #
@@ -363,7 +411,7 @@ module Aws::ACMPCA
     # retrieve a private CA certificate signing request (CSR). Sign the CSR
     # with your ACM Private CA-hosted or on-premises root or subordinate CA
     # certificate. Call the [ImportCertificateAuthorityCertificate][3]
-    # action to import the signed certificate into AWS Certificate Manager
+    # action to import the signed certificate into Certificate Manager
     # (ACM).
     #
     #
@@ -378,7 +426,8 @@ module Aws::ACMPCA
     #   @return [String]
     #
     # @!attribute [rw] owner_account
-    #   The AWS account ID that owns the certificate authority.
+    #   The Amazon Web Services account ID that owns the certificate
+    #   authority.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -439,7 +488,7 @@ module Aws::ACMPCA
     #
     #   Default: FIPS\_140\_2\_LEVEL\_3\_OR\_HIGHER
     #
-    #   Note: AWS Region ap-northeast-3 supports only
+    #   Note: Amazon Web Services Region ap-northeast-3 supports only
     #   FIPS\_140\_2\_LEVEL\_2\_OR\_HIGHER. You must explicitly specify this
     #   parameter and value when creating a CA in that Region. Specifying a
     #   different value (or no value) results in an `InvalidArgsException`
@@ -501,6 +550,12 @@ module Aws::ACMPCA
     #           initials: "String5",
     #           pseudonym: "String128",
     #           generation_qualifier: "String3",
+    #           custom_attributes: [
+    #             {
+    #               object_identifier: "CustomObjectIdentifier", # required
+    #               value: "String1To256", # required
+    #             },
+    #           ],
     #         },
     #         csr_extensions: {
     #           key_usage: {
@@ -542,6 +597,12 @@ module Aws::ACMPCA
     #                   initials: "String5",
     #                   pseudonym: "String128",
     #                   generation_qualifier: "String3",
+    #                   custom_attributes: [
+    #                     {
+    #                       object_identifier: "CustomObjectIdentifier", # required
+    #                       value: "String1To256", # required
+    #                     },
+    #                   ],
     #                 },
     #                 edi_party_name: {
     #                   party_name: "String256", # required
@@ -695,6 +756,12 @@ module Aws::ACMPCA
     #             initials: "String5",
     #             pseudonym: "String128",
     #             generation_qualifier: "String3",
+    #             custom_attributes: [
+    #               {
+    #                 object_identifier: "CustomObjectIdentifier", # required
+    #                 value: "String1To256", # required
+    #               },
+    #             ],
     #           },
     #           csr_extensions: {
     #             key_usage: {
@@ -736,6 +803,12 @@ module Aws::ACMPCA
     #                     initials: "String5",
     #                     pseudonym: "String128",
     #                     generation_qualifier: "String3",
+    #                     custom_attributes: [
+    #                       {
+    #                         object_identifier: "CustomObjectIdentifier", # required
+    #                         value: "String1To256", # required
+    #                       },
+    #                     ],
     #                   },
     #                   edi_party_name: {
     #                     party_name: "String256", # required
@@ -814,9 +887,15 @@ module Aws::ACMPCA
     #
     #   Default: FIPS\_140\_2\_LEVEL\_3\_OR\_HIGHER
     #
-    #   Note: `FIPS_140_2_LEVEL_3_OR_HIGHER` is not supported in Region
-    #   ap-northeast-3. When creating a CA in the ap-northeast-3, you must
-    #   provide `FIPS_140_2_LEVEL_2_OR_HIGHER` as the argument for
+    #   *Note:* `FIPS_140_2_LEVEL_3_OR_HIGHER` is not supported in the
+    #   following Regions:
+    #
+    #   * ap-northeast-3
+    #
+    #   * ap-southeast-3
+    #
+    #   When creating a CA in these Regions, you must provide
+    #   `FIPS_140_2_LEVEL_2_OR_HIGHER` as the argument for
     #   `KeyStorageSecurityStandard`. Failure to do this results in an
     #   `InvalidArgsException` with the message, "A certificate authority
     #   cannot be created in this region with the specified security
@@ -888,8 +967,9 @@ module Aws::ACMPCA
     #   @return [String]
     #
     # @!attribute [rw] principal
-    #   The AWS service or identity that receives the permission. At this
-    #   time, the only valid principal is `acm.amazonaws.com`.
+    #   The Amazon Web Services service or identity that receives the
+    #   permission. At this time, the only valid principal is
+    #   `acm.amazonaws.com`.
     #   @return [String]
     #
     # @!attribute [rw] source_account
@@ -897,8 +977,9 @@ module Aws::ACMPCA
     #   @return [String]
     #
     # @!attribute [rw] actions
-    #   The actions that the specified AWS service principal can use. These
-    #   include `IssueCertificate`, `GetCertificate`, and `ListPermissions`.
+    #   The actions that the specified Amazon Web Services service principal
+    #   can use. These include `IssueCertificate`, `GetCertificate`, and
+    #   `ListPermissions`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/CreatePermissionRequest AWS API Documentation
@@ -928,10 +1009,10 @@ module Aws::ACMPCA
     #
     # Your private CA uses the value in the **ExpirationInDays** parameter
     # to calculate the **nextUpdate** field in the CRL. The CRL is refreshed
-    # at 1/2 the age of next update or when a certificate is revoked. When a
-    # certificate is revoked, it is recorded in the next CRL that is
-    # generated and in the next audit report. Only time valid certificates
-    # are listed in the CRL. Expired certificates are not included.
+    # prior to a certificate's expiration date or when a certificate is
+    # revoked. When a certificate is revoked, it appears in the CRL until
+    # the certificate expires, and then in one additional CRL after
+    # expiration, and it always appears in the audit report.
     #
     # A CRL is typically updated approximately 30 minutes after a
     # certificate is revoked. If for any reason a CRL update fails, ACM
@@ -985,8 +1066,8 @@ module Aws::ACMPCA
     # `openssl crl -inform DER -text -in crl_path -noout`
     #
     # For more information, see [Planning a certificate revocation list
-    # (CRL)][2] in the *AWS Certificate Manager Private Certificate
-    # Authority (PCA) User Guide*
+    # (CRL)][2] in the *Certificate Manager Private Certificate Authority
+    # (PCA) User Guide*
     #
     #
     #
@@ -1127,6 +1208,12 @@ module Aws::ACMPCA
     #                 initials: "String5",
     #                 pseudonym: "String128",
     #                 generation_qualifier: "String3",
+    #                 custom_attributes: [
+    #                   {
+    #                     object_identifier: "CustomObjectIdentifier", # required
+    #                     value: "String1To256", # required
+    #                   },
+    #                 ],
     #               },
     #               edi_party_name: {
     #                 party_name: "String256", # required
@@ -1152,7 +1239,7 @@ module Aws::ACMPCA
     #
     #
     #
-    #   [1]: https://tools.ietf.org/html/rfc5280#section-4.2.2.2
+    #   [1]: https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.2.2
     #   @return [Array<Types::AccessDescription>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/CsrExtensions AWS API Documentation
@@ -1160,6 +1247,79 @@ module Aws::ACMPCA
     class CsrExtensions < Struct.new(
       :key_usage,
       :subject_information_access)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the X.500 relative distinguished name (RDN).
+    #
+    # @note When making an API call, you may pass CustomAttribute
+    #   data as a hash:
+    #
+    #       {
+    #         object_identifier: "CustomObjectIdentifier", # required
+    #         value: "String1To256", # required
+    #       }
+    #
+    # @!attribute [rw] object_identifier
+    #   Specifies the object identifier (OID) of the attribute type of the
+    #   relative distinguished name (RDN).
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   Specifies the attribute value of relative distinguished name (RDN).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/CustomAttribute AWS API Documentation
+    #
+    class CustomAttribute < Struct.new(
+      :object_identifier,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the X.509 extension information for a certificate.
+    #
+    # Extensions present in `CustomExtensions` follow the `ApiPassthrough`
+    # [template rules][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/acm-pca/latest/userguide/UsingTemplates.html#template-order-of-operations
+    #
+    # @note When making an API call, you may pass CustomExtension
+    #   data as a hash:
+    #
+    #       {
+    #         object_identifier: "CustomObjectIdentifier", # required
+    #         value: "Base64String1To4096", # required
+    #         critical: false,
+    #       }
+    #
+    # @!attribute [rw] object_identifier
+    #   Specifies the object identifier (OID) of the X.509 extension. For
+    #   more information, see the [Global OID reference database.][1]
+    #
+    #
+    #
+    #   [1]: https://oidref.com/2.5.29
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   Specifies the base64-encoded value of the X.509 extension.
+    #   @return [String]
+    #
+    # @!attribute [rw] critical
+    #   Specifies the critical flag of the X.509 extension.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/CustomExtension AWS API Documentation
+    #
+    class CustomExtension < Struct.new(
+      :object_identifier,
+      :value,
+      :critical)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1223,13 +1383,13 @@ module Aws::ACMPCA
     #   @return [String]
     #
     # @!attribute [rw] principal
-    #   The AWS service or identity that will have its CA permissions
-    #   revoked. At this time, the only valid service principal is
-    #   `acm.amazonaws.com`
+    #   The Amazon Web Services service or identity that will have its CA
+    #   permissions revoked. At this time, the only valid service principal
+    #   is `acm.amazonaws.com`
     #   @return [String]
     #
     # @!attribute [rw] source_account
-    #   The AWS account that calls this action.
+    #   The Amazon Web Services account that calls this action.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/DeletePermissionRequest AWS API Documentation
@@ -1381,7 +1541,7 @@ module Aws::ACMPCA
     #
     #
     #
-    # [1]: https://tools.ietf.org/html/rfc5280
+    # [1]: https://datatracker.ietf.org/doc/html/rfc5280
     #
     # @note When making an API call, you may pass EdiPartyName
     #   data as a hash:
@@ -1426,7 +1586,7 @@ module Aws::ACMPCA
     #
     #
     #
-    #   [1]: https://tools.ietf.org/html/rfc5280#section-4.2.1.12
+    #   [1]: https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12
     #   @return [String]
     #
     # @!attribute [rw] extended_key_usage_object_identifier
@@ -1502,6 +1662,12 @@ module Aws::ACMPCA
     #               initials: "String5",
     #               pseudonym: "String128",
     #               generation_qualifier: "String3",
+    #               custom_attributes: [
+    #                 {
+    #                   object_identifier: "CustomObjectIdentifier", # required
+    #                   value: "String1To256", # required
+    #                 },
+    #               ],
     #             },
     #             edi_party_name: {
     #               party_name: "String256", # required
@@ -1510,6 +1676,13 @@ module Aws::ACMPCA
     #             uniform_resource_identifier: "String253",
     #             ip_address: "String39",
     #             registered_id: "CustomObjectIdentifier",
+    #           },
+    #         ],
+    #         custom_extensions: [
+    #           {
+    #             object_identifier: "CustomObjectIdentifier", # required
+    #             value: "Base64String1To4096", # required
+    #             critical: false,
     #           },
     #         ],
     #       }
@@ -1548,13 +1721,25 @@ module Aws::ACMPCA
     #   the certificate.
     #   @return [Array<Types::GeneralName>]
     #
+    # @!attribute [rw] custom_extensions
+    #   Contains a sequence of one or more X.509 extensions, each of which
+    #   consists of an object identifier (OID), a base64-encoded value, and
+    #   the critical flag. For more information, see the [Global OID
+    #   reference database.][1]
+    #
+    #
+    #
+    #   [1]: https://oidref.com/2.5.29
+    #   @return [Array<Types::CustomExtension>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/Extensions AWS API Documentation
     #
     class Extensions < Struct.new(
       :certificate_policies,
       :extended_key_usage,
       :key_usage,
-      :subject_alternative_names)
+      :subject_alternative_names,
+      :custom_extensions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1565,7 +1750,7 @@ module Aws::ACMPCA
     #
     #
     #
-    # [1]: https://tools.ietf.org/html/rfc5280
+    # [1]: https://datatracker.ietf.org/doc/html/rfc5280
     #
     # @note When making an API call, you may pass GeneralName
     #   data as a hash:
@@ -1592,6 +1777,12 @@ module Aws::ACMPCA
     #           initials: "String5",
     #           pseudonym: "String128",
     #           generation_qualifier: "String3",
+    #           custom_attributes: [
+    #             {
+    #               object_identifier: "CustomObjectIdentifier", # required
+    #               value: "String1To256", # required
+    #             },
+    #           ],
     #         },
     #         edi_party_name: {
     #           party_name: "String256", # required
@@ -1611,7 +1802,7 @@ module Aws::ACMPCA
     #
     #
     #
-    #   [1]: https://tools.ietf.org/html/rfc822
+    #   [1]: https://datatracker.ietf.org/doc/html/rfc822
     #   @return [String]
     #
     # @!attribute [rw] dns_name
@@ -2043,6 +2234,12 @@ module Aws::ACMPCA
     #                   initials: "String5",
     #                   pseudonym: "String128",
     #                   generation_qualifier: "String3",
+    #                   custom_attributes: [
+    #                     {
+    #                       object_identifier: "CustomObjectIdentifier", # required
+    #                       value: "String1To256", # required
+    #                     },
+    #                   ],
     #                 },
     #                 edi_party_name: {
     #                   party_name: "String256", # required
@@ -2051,6 +2248,13 @@ module Aws::ACMPCA
     #                 uniform_resource_identifier: "String253",
     #                 ip_address: "String39",
     #                 registered_id: "CustomObjectIdentifier",
+    #               },
+    #             ],
+    #             custom_extensions: [
+    #               {
+    #                 object_identifier: "CustomObjectIdentifier", # required
+    #                 value: "Base64String1To4096", # required
+    #                 critical: false,
     #               },
     #             ],
     #           },
@@ -2069,6 +2273,12 @@ module Aws::ACMPCA
     #             initials: "String5",
     #             pseudonym: "String128",
     #             generation_qualifier: "String3",
+    #             custom_attributes: [
+    #               {
+    #                 object_identifier: "CustomObjectIdentifier", # required
+    #                 value: "String1To256", # required
+    #               },
+    #             ],
     #           },
     #         },
     #         certificate_authority_arn: "Arn", # required
@@ -2128,7 +2338,7 @@ module Aws::ACMPCA
     #   contains your X509 version 3 extensions.
     #
     #   `openssl req -new -config openssl_rsa.cnf -extensions usr_cert
-    #   -newkey rsa:2048 -days -365 -keyout private/test_cert_priv_key.pem
+    #   -newkey rsa:2048 -days 365 -keyout private/test_cert_priv_key.pem
     #   -out csr/test_cert_.csr`
     #
     #   Note: A CSR must provide either a *subject name* or a *subject
@@ -2142,6 +2352,11 @@ module Aws::ACMPCA
     #   This parameter should not be confused with the `SigningAlgorithm`
     #   parameter used to sign a CSR in the `CreateCertificateAuthority`
     #   action.
+    #
+    #   <note markdown="1"> The specified signing algorithm family (RSA or ECDSA) much match the
+    #   algorithm family of the CA's secret key.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] template_arn
@@ -2185,7 +2400,7 @@ module Aws::ACMPCA
     #
     #
     #
-    #   [1]: https://tools.ietf.org/html/rfc5280#section-4.1.2.5
+    #   [1]: https://datatracker.ietf.org/doc/html/rfc5280#section-4.1.2.5
     #   @return [Types::Validity]
     #
     # @!attribute [rw] validity_not_before
@@ -2210,7 +2425,7 @@ module Aws::ACMPCA
     #
     #
     #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_Validity.html
-    #   [2]: https://tools.ietf.org/html/rfc5280#section-4.1.2.5
+    #   [2]: https://datatracker.ietf.org/doc/html/rfc5280#section-4.1.2.5
     #   @return [Types::Validity]
     #
     # @!attribute [rw] idempotency_token
@@ -2588,17 +2803,17 @@ module Aws::ACMPCA
     #   @return [Boolean]
     #
     # @!attribute [rw] ocsp_custom_cname
-    #   By default, ACM Private CA injects an AWS domain into certificates
-    #   being validated by the Online Certificate Status Protocol (OCSP). A
-    #   customer can alternatively use this object to define a CNAME
-    #   specifying a customized OCSP domain.
+    #   By default, ACM Private CA injects an Amazon Web Services domain
+    #   into certificates being validated by the Online Certificate Status
+    #   Protocol (OCSP). A customer can alternatively use this object to
+    #   define a CNAME specifying a customized OCSP domain.
     #
     #   Note: The value of the CNAME must not include a protocol prefix such
     #   as "http://" or "https://".
     #
     #   For more information, see [Customizing Online Certificate Status
-    #   Protocol (OCSP) ][1] in the *AWS Certificate Manager Private
-    #   Certificate Authority (PCA) User Guide*.
+    #   Protocol (OCSP) ][1] in the *Certificate Manager Private Certificate
+    #   Authority (PCA) User Guide*.
     #
     #
     #
@@ -2649,12 +2864,13 @@ module Aws::ACMPCA
     end
 
     # Permissions designate which private CA actions can be performed by an
-    # AWS service or entity. In order for ACM to automatically renew private
-    # certificates, you must give the ACM service principal all available
-    # permissions (`IssueCertificate`, `GetCertificate`, and
-    # `ListPermissions`). Permissions can be assigned with the
-    # [CreatePermission][1] action, removed with the [DeletePermission][2]
-    # action, and listed with the [ListPermissions][3] action.
+    # Amazon Web Services service or entity. In order for ACM to
+    # automatically renew private certificates, you must give the ACM
+    # service principal all available permissions (`IssueCertificate`,
+    # `GetCertificate`, and `ListPermissions`). Permissions can be assigned
+    # with the [CreatePermission][1] action, removed with the
+    # [DeletePermission][2] action, and listed with the [ListPermissions][3]
+    # action.
     #
     #
     #
@@ -2672,8 +2888,8 @@ module Aws::ACMPCA
     #   @return [Time]
     #
     # @!attribute [rw] principal
-    #   The AWS service or entity that holds the permission. At this time,
-    #   the only valid principal is `acm.amazonaws.com`.
+    #   The Amazon Web Services service or entity that holds the permission.
+    #   At this time, the only valid principal is `acm.amazonaws.com`.
     #   @return [String]
     #
     # @!attribute [rw] source_account
@@ -2681,8 +2897,8 @@ module Aws::ACMPCA
     #   @return [String]
     #
     # @!attribute [rw] actions
-    #   The private CA actions that can be performed by the designated AWS
-    #   service.
+    #   The private CA actions that can be performed by the designated
+    #   Amazon Web Services service.
     #   @return [Array<String>]
     #
     # @!attribute [rw] policy
@@ -2836,7 +3052,7 @@ module Aws::ACMPCA
     #
     #
     #
-    # [1]: https://tools.ietf.org/html/rfc5280#section-4.2.1.4
+    # [1]: https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.4
     #
     # @note When making an API call, you may pass Qualifier
     #   data as a hash:
@@ -2946,8 +3162,8 @@ module Aws::ACMPCA
     # about certificates as requested by clients, and a CRL contains an
     # updated list of certificates revoked by your CA. For more information,
     # see [RevokeCertificate][3] and [Setting up a certificate revocation
-    # method][4] in the *AWS Certificate Manager Private Certificate
-    # Authority (PCA) User Guide*.
+    # method][4] in the *Certificate Manager Private Certificate Authority
+    # (PCA) User Guide*.
     #
     #
     #
@@ -3026,7 +3242,7 @@ module Aws::ACMPCA
     #   `openssl x509 -in file_path -text -noout`
     #
     #   You can also copy the serial number from the console or use the
-    #   [DescribeCertificate][2] action in the *AWS Certificate Manager API
+    #   [DescribeCertificate][2] action in the *Certificate Manager API
     #   Reference*.
     #
     #
@@ -3247,7 +3463,7 @@ module Aws::ACMPCA
     #
     #
     #
-    # [1]: https://tools.ietf.org/html/rfc5280#section-4.1.2.5
+    # [1]: https://datatracker.ietf.org/doc/html/rfc5280#section-4.1.2.5
     #
     # @note When making an API call, you may pass Validity
     #   data as a hash:

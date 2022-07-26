@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::Batch
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -427,13 +429,15 @@ module Aws::Batch
     # [Launching an Amazon ECS container instance][3] in the *Amazon Elastic
     # Container Service Developer Guide*.
     #
-    # <note markdown="1"> Batch doesn't upgrade the AMIs in a compute environment after the
-    # environment is created. For example, it doesn't update the AMIs when
-    # a newer version of the Amazon ECS optimized AMI is available.
-    # Therefore, you're responsible for managing the guest operating system
-    # (including its updates and security patches) and any additional
-    # application software or utilities that you install on the compute
-    # resources. To use a new AMI for your Batch jobs, complete these steps:
+    # <note markdown="1"> Batch doesn't automatically upgrade the AMIs in a compute environment
+    # after it's created. For example, it also doesn't update the AMIs in
+    # your compute environment when a newer version of the Amazon ECS
+    # optimized AMI is available. You're responsible for the management of
+    # the guest operating system. This includes any updates and security
+    # patches. You're also responsible for any additional application
+    # software or utilities that you install on the compute resources. There
+    # are two ways to use a new AMI for your Batch jobs. The original method
+    # is to complete these steps:
     #
     #  1.  Create a new compute environment with the new AMI.
     #
@@ -443,6 +447,43 @@ module Aws::Batch
     #
     # 4.  Delete the earlier compute environment.
     #
+    #  In April 2022, Batch added enhanced support for updating compute
+    # environments. For more information, see [Updating compute
+    # environments][4]. To use the enhanced updating of compute environments
+    # to update AMIs, follow these rules:
+    #
+    #  * Either do not set the service role (`serviceRole`) parameter or set
+    #   it to the **AWSBatchServiceRole** service-linked role.
+    #
+    # * Set the allocation strategy (`allocationStrategy`) parameter to
+    #   `BEST_FIT_PROGRESSIVE` or `SPOT_CAPACITY_OPTIMIZED`.
+    #
+    # * Set the update to latest image version
+    #   (`updateToLatestImageVersion`) parameter to `true`.
+    #
+    # * Do not specify an AMI ID in `imageId`, `imageIdOverride` (in [
+    #   `ec2Configuration` ][5]), or in the launch template
+    #   (`launchTemplate`). In that case Batch will select the latest Amazon
+    #   ECS optimized AMI supported by Batch at the time the infrastructure
+    #   update is initiated. Alternatively you can specify the AMI ID in the
+    #   `imageId` or `imageIdOverride` parameters, or the launch template
+    #   identified by the `LaunchTemplate` properties. Changing any of these
+    #   properties will trigger an infrastructure update. If the AMI ID is
+    #   specified in the launch template, it can not be replaced by
+    #   specifying an AMI ID in either the `imageId` or `imageIdOverride`
+    #   parameters. It can only be replaced by specifying a different launch
+    #   template, or if the launch template version is set to `$Default` or
+    #   `$Latest`, by setting either a new default version for the launch
+    #   template (if `$Default`)or by adding a new version to the launch
+    #   template (if `$Latest`).
+    #
+    #  If these rules are followed, any update that triggers an
+    # infrastructure update will cause the AMI ID to be re-selected. If the
+    # `version` setting in the launch template (`launchTemplate`) is set to
+    # `$Latest` or `$Default`, the latest or default version of the launch
+    # template will be evaluated up at the time of the infrastructure
+    # update, even if the `launchTemplate` was not updated.
+    #
     #  </note>
     #
     #
@@ -450,6 +491,8 @@ module Aws::Batch
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html
     # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container_instance_AMIs.html
     # [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_container_instance.html
+    # [4]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
+    # [5]: https://docs.aws.amazon.com/batch/latest/APIReference/API_Ec2Configuration.html
     #
     # @option params [required, String] :compute_environment_name
     #   The name for your compute environment. It can be up to 128 letters
@@ -489,7 +532,7 @@ module Aws::Batch
     #   for a fair share job queue, no vCPU capacity is reserved.
     #
     #   <note markdown="1"> This parameter is only supported when the `type` parameter is set to
-    #   `UNMANAGED`/
+    #   `UNMANAGED`.
     #
     #    </note>
     #
@@ -747,7 +790,7 @@ module Aws::Batch
     # @option params [required, Array<Types::ComputeEnvironmentOrder>] :compute_environment_order
     #   The set of compute environments mapped to a job queue and their order
     #   relative to each other. The job scheduler uses this parameter to
-    #   determine which compute environment should run a specific job. Compute
+    #   determine which compute environment runs a specific job. Compute
     #   environments must be in the `VALID` state before you can associate
     #   them with a job queue. You can associate up to three compute
     #   environments with a job queue. All of the compute environments must be
@@ -1071,8 +1114,8 @@ module Aws::Batch
     #
     # If you're using an unmanaged compute environment, you can use the
     # `DescribeComputeEnvironment` operation to determine the
-    # `ecsClusterArn` that you should launch your Amazon ECS container
-    # instances into.
+    # `ecsClusterArn` that you launch your Amazon ECS container instances
+    # into.
     #
     # @option params [Array<String>] :compute_environments
     #   A list of up to 100 compute environment names or full Amazon Resource
@@ -1205,6 +1248,8 @@ module Aws::Batch
     #   resp.compute_environments[0].compute_resources.ec2_configuration[0].image_type #=> String
     #   resp.compute_environments[0].compute_resources.ec2_configuration[0].image_id_override #=> String
     #   resp.compute_environments[0].service_role #=> String
+    #   resp.compute_environments[0].update_policy.terminate_jobs_on_update #=> Boolean
+    #   resp.compute_environments[0].update_policy.job_execution_timeout_minutes #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeComputeEnvironments AWS API Documentation
@@ -2621,7 +2666,7 @@ module Aws::Batch
     # `resourceRequirements` objects in the job definition are the
     # exception. They can't be overridden this way using the `memory` and
     # `vcpus` parameters. Rather, you must specify updates to job definition
-    # parameters in a `ResourceRequirements` object that's included in the
+    # parameters in a `resourceRequirements` object that's included in the
     # `containerOverrides` parameter.
     #
     # <note markdown="1"> Job queues with a scheduling policy are limited to 500 active fair
@@ -2643,7 +2688,10 @@ module Aws::Batch
     #   name or the Amazon Resource Name (ARN) of the queue.
     #
     # @option params [String] :share_identifier
-    #   The share identifier for the job.
+    #   The share identifier for the job. If the job queue does not have a
+    #   scheduling policy, then this parameter must not be specified. If the
+    #   job queue has a scheduling policy, then this parameter must be
+    #   specified.
     #
     # @option params [Integer] :scheduling_priority_override
     #   The scheduling priority for the job. This will only affect jobs in job
@@ -2690,8 +2738,8 @@ module Aws::Batch
     # @option params [Types::ContainerOverrides] :container_overrides
     #   A list of container overrides in the JSON format that specify the name
     #   of a container in the specified job definition and the overrides it
-    #   should receive. You can override the default command for a container,
-    #   which is specified in the job definition or the Docker image, with a
+    #   receives. You can override the default command for a container, which
+    #   is specified in the job definition or the Docker image, with a
     #   `command` override. You can also override existing environment
     #   variables on a container or add new environment variables to it with
     #   an `environment` override.
@@ -3043,11 +3091,11 @@ module Aws::Batch
     #
     # @option params [Integer] :unmanagedv_cpus
     #   The maximum number of vCPUs expected to be used for an unmanaged
-    #   compute environment. This parameter should not be specified for a
-    #   managed compute environment. This parameter is only used for fair
-    #   share scheduling to reserve vCPU capacity for new share identifiers.
-    #   If this parameter is not provided for a fair share job queue, no vCPU
-    #   capacity will be reserved.
+    #   compute environment. Do not specify this parameter for a managed
+    #   compute environment. This parameter is only used for fair share
+    #   scheduling to reserve vCPU capacity for new share identifiers. If this
+    #   parameter is not provided for a fair share job queue, no vCPU capacity
+    #   will be reserved.
     #
     # @option params [Types::ComputeResourceUpdate] :compute_resources
     #   Details of the compute resources managed by the compute environment.
@@ -3067,11 +3115,15 @@ module Aws::Batch
     #   If the compute environment has a service-linked role, it can't be
     #   changed to use a regular IAM role. Likewise, if the compute
     #   environment has a regular IAM role, it can't be changed to use a
-    #   service-linked role.
+    #   service-linked role. To update the parameters for the compute
+    #   environment that require an infrastructure update to change, the
+    #   **AWSServiceRoleForBatch** service-linked role must be used. For more
+    #   information, see [Updating compute environments][2] in the *Batch User
+    #   Guide*.
     #
     #   If your specified role has a path other than `/`, then you must either
-    #   specify the full role ARN (this is recommended) or prefix the role
-    #   name with the path.
+    #   specify the full role ARN (recommended) or prefix the role name with
+    #   the path.
     #
     #   <note markdown="1"> Depending on how you created your Batch service role, its ARN might
     #   contain the `service-role` path prefix. When you only specify the name
@@ -3085,6 +3137,16 @@ module Aws::Batch
     #
     #
     #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/service_IAM_role.html
+    #   [2]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
+    #
+    # @option params [Types::UpdatePolicy] :update_policy
+    #   Specifies the updated infrastructure update policy for the compute
+    #   environment. For more information about infrastructure updates, see
+    #   [Updating compute environments][1] in the *Batch User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
     #
     # @return [Types::UpdateComputeEnvironmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3119,8 +3181,35 @@ module Aws::Batch
     #       desiredv_cpus: 1,
     #       subnets: ["String"],
     #       security_group_ids: ["String"],
+    #       allocation_strategy: "BEST_FIT_PROGRESSIVE", # accepts BEST_FIT_PROGRESSIVE, SPOT_CAPACITY_OPTIMIZED
+    #       instance_types: ["String"],
+    #       ec2_key_pair: "String",
+    #       instance_role: "String",
+    #       tags: {
+    #         "String" => "String",
+    #       },
+    #       placement_group: "String",
+    #       bid_percentage: 1,
+    #       launch_template: {
+    #         launch_template_id: "String",
+    #         launch_template_name: "String",
+    #         version: "String",
+    #       },
+    #       ec2_configuration: [
+    #         {
+    #           image_type: "ImageType", # required
+    #           image_id_override: "ImageIdOverride",
+    #         },
+    #       ],
+    #       update_to_latest_image_version: false,
+    #       type: "EC2", # accepts EC2, SPOT, FARGATE, FARGATE_SPOT
+    #       image_id: "String",
     #     },
     #     service_role: "String",
+    #     update_policy: {
+    #       terminate_jobs_on_update: false,
+    #       job_execution_timeout_minutes: 1,
+    #     },
     #   })
     #
     # @example Response structure
@@ -3160,7 +3249,7 @@ module Aws::Batch
     #   The priority of the job queue. Job queues with a higher priority (or a
     #   higher integer value for the `priority` parameter) are evaluated first
     #   when associated with the same compute environment. Priority is
-    #   determined in descending order, for example, a job queue with a
+    #   determined in descending order. For example, a job queue with a
     #   priority value of `10` is given scheduling preference over a job queue
     #   with a priority value of `1`. All of the compute environments must be
     #   either EC2 (`EC2` or `SPOT`) or Fargate (`FARGATE` or `FARGATE_SPOT`).
@@ -3169,8 +3258,8 @@ module Aws::Batch
     # @option params [Array<Types::ComputeEnvironmentOrder>] :compute_environment_order
     #   Details the set of compute environments mapped to a job queue and
     #   their order relative to each other. This is one of the parameters used
-    #   by the job scheduler to determine which compute environment should run
-    #   a given job. Compute environments must be in the `VALID` state before
+    #   by the job scheduler to determine which compute environment runs a
+    #   given job. Compute environments must be in the `VALID` state before
     #   you can associate them with a job queue. All of the compute
     #   environments must be either EC2 (`EC2` or `SPOT`) or Fargate
     #   (`FARGATE` or `FARGATE_SPOT`). EC2 and Fargate compute environments
@@ -3280,7 +3369,7 @@ module Aws::Batch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

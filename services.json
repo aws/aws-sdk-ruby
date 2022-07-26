@@ -99,6 +99,9 @@
   "Batch": {
     "models": "batch/2016-08-10"
   },
+  "BillingConductor": {
+    "models": "billingconductor/2021-07-30"
+  },
   "Braket": {
     "models": "braket/2019-09-01"
   },
@@ -110,6 +113,9 @@
   },
   "ChimeSDKIdentity": {
     "models": "chime-sdk-identity/2021-04-20"
+  },
+  "ChimeSDKMediaPipelines": {
+    "models": "chime-sdk-media-pipelines/2021-07-15"
   },
   "ChimeSDKMeetings": {
     "models": "chime-sdk-meetings/2021-07-15"
@@ -226,6 +232,9 @@
   "Connect": {
     "models": "connect/2017-08-08"
   },
+  "ConnectCampaignService": {
+    "models": "connectcampaigns/2021-01-30"
+  },
   "ConnectContactLens": {
     "models": "connect-contact-lens/2020-08-21"
   },
@@ -337,6 +346,9 @@
   "EMRContainers": {
     "models": "emr-containers/2020-10-01"
   },
+  "EMRServerless": {
+    "models": "emr-serverless/2021-07-13"
+  },
   "ElastiCache": {
     "models": "elasticache/2015-02-02"
   },
@@ -359,7 +371,10 @@
     "models": "es/2015-01-01"
   },
   "EventBridge": {
-    "models": "eventbridge/2015-10-07"
+    "models": "eventbridge/2015-10-07",
+    "addPlugins": [
+      "Aws::EventBridge::Plugins::MultiRegionEndpoint"
+    ]
   },
   "FIS": {
     "models": "fis/2020-12-01"
@@ -396,6 +411,9 @@
   },
   "GameLift": {
     "models": "gamelift/2015-10-01"
+  },
+  "GameSparks": {
+    "models": "gamesparks/2021-08-17"
   },
   "Glacier": {
     "models": "glacier/2012-06-01",
@@ -502,6 +520,9 @@
   "IoTWireless": {
     "models": "iotwireless/2020-11-22"
   },
+  "Ivschat": {
+    "models": "ivschat/2020-07-14"
+  },
   "KMS": {
     "models": "kms/2014-11-01"
   },
@@ -513,6 +534,9 @@
   },
   "Kendra": {
     "models": "kendra/2019-02-03"
+  },
+  "Keyspaces": {
+    "models": "keyspaces/2022-02-10"
   },
   "Kinesis": {
     "models": "kinesis/2013-12-02"
@@ -594,6 +618,9 @@
   },
   "Macie2": {
     "models": "macie2/2020-01-01"
+  },
+  "MainframeModernization": {
+    "models": "m2/2021-04-28"
   },
   "ManagedBlockchain": {
     "models": "managedblockchain/2018-09-24"
@@ -712,6 +739,9 @@
   "PinpointSMSVoice": {
     "models": "sms-voice/2018-09-05"
   },
+  "PinpointSMSVoiceV2": {
+    "models": "pinpoint-sms-voice-v2/2022-03-31"
+  },
   "Polly": {
     "models": "polly/2016-06-10"
   },
@@ -757,6 +787,9 @@
   "RedshiftDataAPIService": {
     "models": "redshift-data/2019-12-20"
   },
+  "RedshiftServerless": {
+    "models": "redshift-serverless/2021-04-21"
+  },
   "Rekognition": {
     "models": "rekognition/2016-06-27"
   },
@@ -771,6 +804,9 @@
   },
   "RoboMaker": {
     "models": "robomaker/2018-06-29"
+  },
+  "RolesAnywhere": {
+    "models": "rolesanywhere/2018-05-10"
   },
   "Route53": {
     "models": "route53/2013-04-01",
@@ -820,7 +856,8 @@
       "Aws::S3::Plugins::S3Signer",
       "Aws::S3::Plugins::SseCpk",
       "Aws::S3::Plugins::StreamingRetry",
-      "Aws::S3::Plugins::UrlEncodedKeys"
+      "Aws::S3::Plugins::UrlEncodedKeys",
+      "Aws::S3::Plugins::SkipWholeMultipartGetChecksums"
     ]
   },
   "S3Control": {

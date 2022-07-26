@@ -21,6 +21,8 @@ module Aws::Lightsail
     AccessReceiverList = Shapes::ListShape.new(name: 'AccessReceiverList')
     AccessRules = Shapes::StructureShape.new(name: 'AccessRules')
     AccessType = Shapes::StringShape.new(name: 'AccessType')
+    AccountLevelBpaSync = Shapes::StructureShape.new(name: 'AccountLevelBpaSync')
+    AccountLevelBpaSyncStatus = Shapes::StringShape.new(name: 'AccountLevelBpaSyncStatus')
     AccountSetupInProgressException = Shapes::StructureShape.new(name: 'AccountSetupInProgressException')
     AddOn = Shapes::StructureShape.new(name: 'AddOn')
     AddOnList = Shapes::ListShape.new(name: 'AddOnList')
@@ -52,6 +54,7 @@ module Aws::Lightsail
     AutoSnapshotStatus = Shapes::StringShape.new(name: 'AutoSnapshotStatus')
     AvailabilityZone = Shapes::StructureShape.new(name: 'AvailabilityZone')
     AvailabilityZoneList = Shapes::ListShape.new(name: 'AvailabilityZoneList')
+    BPAStatusMessage = Shapes::StringShape.new(name: 'BPAStatusMessage')
     Base64 = Shapes::StringShape.new(name: 'Base64')
     BehaviorEnum = Shapes::StringShape.new(name: 'BehaviorEnum')
     Blueprint = Shapes::StructureShape.new(name: 'Blueprint')
@@ -103,6 +106,8 @@ module Aws::Lightsail
     ContainerServiceDeploymentList = Shapes::ListShape.new(name: 'ContainerServiceDeploymentList')
     ContainerServiceDeploymentRequest = Shapes::StructureShape.new(name: 'ContainerServiceDeploymentRequest')
     ContainerServiceDeploymentState = Shapes::StringShape.new(name: 'ContainerServiceDeploymentState')
+    ContainerServiceECRImagePullerRole = Shapes::StructureShape.new(name: 'ContainerServiceECRImagePullerRole')
+    ContainerServiceECRImagePullerRoleRequest = Shapes::StructureShape.new(name: 'ContainerServiceECRImagePullerRoleRequest')
     ContainerServiceEndpoint = Shapes::StructureShape.new(name: 'ContainerServiceEndpoint')
     ContainerServiceHealthCheckConfig = Shapes::StructureShape.new(name: 'ContainerServiceHealthCheckConfig')
     ContainerServiceList = Shapes::ListShape.new(name: 'ContainerServiceList')
@@ -351,6 +356,8 @@ module Aws::Lightsail
     GetLoadBalancerResult = Shapes::StructureShape.new(name: 'GetLoadBalancerResult')
     GetLoadBalancerTlsCertificatesRequest = Shapes::StructureShape.new(name: 'GetLoadBalancerTlsCertificatesRequest')
     GetLoadBalancerTlsCertificatesResult = Shapes::StructureShape.new(name: 'GetLoadBalancerTlsCertificatesResult')
+    GetLoadBalancerTlsPoliciesRequest = Shapes::StructureShape.new(name: 'GetLoadBalancerTlsPoliciesRequest')
+    GetLoadBalancerTlsPoliciesResult = Shapes::StructureShape.new(name: 'GetLoadBalancerTlsPoliciesResult')
     GetLoadBalancersRequest = Shapes::StructureShape.new(name: 'GetLoadBalancersRequest')
     GetLoadBalancersResult = Shapes::StructureShape.new(name: 'GetLoadBalancersResult')
     GetOperationRequest = Shapes::StructureShape.new(name: 'GetOperationRequest')
@@ -458,6 +465,8 @@ module Aws::Lightsail
     LoadBalancerTlsCertificateStatus = Shapes::StringShape.new(name: 'LoadBalancerTlsCertificateStatus')
     LoadBalancerTlsCertificateSummary = Shapes::StructureShape.new(name: 'LoadBalancerTlsCertificateSummary')
     LoadBalancerTlsCertificateSummaryList = Shapes::ListShape.new(name: 'LoadBalancerTlsCertificateSummaryList')
+    LoadBalancerTlsPolicy = Shapes::StructureShape.new(name: 'LoadBalancerTlsPolicy')
+    LoadBalancerTlsPolicyList = Shapes::ListShape.new(name: 'LoadBalancerTlsPolicyList')
     LogEvent = Shapes::StructureShape.new(name: 'LogEvent')
     LogEventList = Shapes::ListShape.new(name: 'LogEventList')
     MetricDatapoint = Shapes::StructureShape.new(name: 'MetricDatapoint')
@@ -497,6 +506,8 @@ module Aws::Lightsail
     PortList = Shapes::ListShape.new(name: 'PortList')
     PortMap = Shapes::MapShape.new(name: 'PortMap')
     PortState = Shapes::StringShape.new(name: 'PortState')
+    PrivateRegistryAccess = Shapes::StructureShape.new(name: 'PrivateRegistryAccess')
+    PrivateRegistryAccessRequest = Shapes::StructureShape.new(name: 'PrivateRegistryAccessRequest')
     PutAlarmRequest = Shapes::StructureShape.new(name: 'PutAlarmRequest')
     PutAlarmResult = Shapes::StructureShape.new(name: 'PutAlarmResult')
     PutInstancePublicPortsRequest = Shapes::StructureShape.new(name: 'PutInstancePublicPortsRequest')
@@ -636,6 +647,12 @@ module Aws::Lightsail
     AccessRules.add_member(:get_object, Shapes::ShapeRef.new(shape: AccessType, location_name: "getObject"))
     AccessRules.add_member(:allow_public_overrides, Shapes::ShapeRef.new(shape: boolean, location_name: "allowPublicOverrides"))
     AccessRules.struct_class = Types::AccessRules
+
+    AccountLevelBpaSync.add_member(:status, Shapes::ShapeRef.new(shape: AccountLevelBpaSyncStatus, location_name: "status"))
+    AccountLevelBpaSync.add_member(:last_synced_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "lastSyncedAt"))
+    AccountLevelBpaSync.add_member(:message, Shapes::ShapeRef.new(shape: BPAStatusMessage, location_name: "message"))
+    AccountLevelBpaSync.add_member(:bpa_impacts_lightsail, Shapes::ShapeRef.new(shape: boolean, location_name: "bpaImpactsLightsail"))
+    AccountLevelBpaSync.struct_class = Types::AccountLevelBpaSync
 
     AccountSetupInProgressException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "code"))
     AccountSetupInProgressException.add_member(:docs, Shapes::ShapeRef.new(shape: string, location_name: "docs"))
@@ -947,6 +964,7 @@ module Aws::Lightsail
     ContainerService.add_member(:private_domain_name, Shapes::ShapeRef.new(shape: string, location_name: "privateDomainName"))
     ContainerService.add_member(:public_domain_names, Shapes::ShapeRef.new(shape: ContainerServicePublicDomains, location_name: "publicDomainNames"))
     ContainerService.add_member(:url, Shapes::ShapeRef.new(shape: string, location_name: "url"))
+    ContainerService.add_member(:private_registry_access, Shapes::ShapeRef.new(shape: PrivateRegistryAccess, location_name: "privateRegistryAccess"))
     ContainerService.struct_class = Types::ContainerService
 
     ContainerServiceDeployment.add_member(:version, Shapes::ShapeRef.new(shape: integer, location_name: "version"))
@@ -961,6 +979,13 @@ module Aws::Lightsail
     ContainerServiceDeploymentRequest.add_member(:containers, Shapes::ShapeRef.new(shape: ContainerMap, location_name: "containers"))
     ContainerServiceDeploymentRequest.add_member(:public_endpoint, Shapes::ShapeRef.new(shape: EndpointRequest, location_name: "publicEndpoint"))
     ContainerServiceDeploymentRequest.struct_class = Types::ContainerServiceDeploymentRequest
+
+    ContainerServiceECRImagePullerRole.add_member(:is_active, Shapes::ShapeRef.new(shape: boolean, location_name: "isActive"))
+    ContainerServiceECRImagePullerRole.add_member(:principal_arn, Shapes::ShapeRef.new(shape: string, location_name: "principalArn"))
+    ContainerServiceECRImagePullerRole.struct_class = Types::ContainerServiceECRImagePullerRole
+
+    ContainerServiceECRImagePullerRoleRequest.add_member(:is_active, Shapes::ShapeRef.new(shape: boolean, location_name: "isActive"))
+    ContainerServiceECRImagePullerRoleRequest.struct_class = Types::ContainerServiceECRImagePullerRoleRequest
 
     ContainerServiceEndpoint.add_member(:container_name, Shapes::ShapeRef.new(shape: string, location_name: "containerName"))
     ContainerServiceEndpoint.add_member(:container_port, Shapes::ShapeRef.new(shape: integer, location_name: "containerPort"))
@@ -1090,6 +1115,7 @@ module Aws::Lightsail
     CreateContainerServiceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateContainerServiceRequest.add_member(:public_domain_names, Shapes::ShapeRef.new(shape: ContainerServicePublicDomains, location_name: "publicDomainNames"))
     CreateContainerServiceRequest.add_member(:deployment, Shapes::ShapeRef.new(shape: ContainerServiceDeploymentRequest, location_name: "deployment"))
+    CreateContainerServiceRequest.add_member(:private_registry_access, Shapes::ShapeRef.new(shape: PrivateRegistryAccessRequest, location_name: "privateRegistryAccess"))
     CreateContainerServiceRequest.struct_class = Types::CreateContainerServiceRequest
 
     CreateContainerServiceResult.add_member(:container_service, Shapes::ShapeRef.new(shape: ContainerService, location_name: "containerService"))
@@ -1215,6 +1241,7 @@ module Aws::Lightsail
     CreateLoadBalancerRequest.add_member(:certificate_alternative_names, Shapes::ShapeRef.new(shape: DomainNameList, location_name: "certificateAlternativeNames"))
     CreateLoadBalancerRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateLoadBalancerRequest.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "ipAddressType"))
+    CreateLoadBalancerRequest.add_member(:tls_policy_name, Shapes::ShapeRef.new(shape: string, location_name: "tlsPolicyName"))
     CreateLoadBalancerRequest.struct_class = Types::CreateLoadBalancerRequest
 
     CreateLoadBalancerResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
@@ -1364,6 +1391,7 @@ module Aws::Lightsail
     DeleteInstanceSnapshotResult.struct_class = Types::DeleteInstanceSnapshotResult
 
     DeleteKeyPairRequest.add_member(:key_pair_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "keyPairName"))
+    DeleteKeyPairRequest.add_member(:expected_fingerprint, Shapes::ShapeRef.new(shape: string, location_name: "expectedFingerprint"))
     DeleteKeyPairRequest.struct_class = Types::DeleteKeyPairRequest
 
     DeleteKeyPairResult.add_member(:operation, Shapes::ShapeRef.new(shape: Operation, location_name: "operation"))
@@ -1544,6 +1572,7 @@ module Aws::Lightsail
 
     DownloadDefaultKeyPairResult.add_member(:public_key_base_64, Shapes::ShapeRef.new(shape: Base64, location_name: "publicKeyBase64"))
     DownloadDefaultKeyPairResult.add_member(:private_key_base_64, Shapes::ShapeRef.new(shape: Base64, location_name: "privateKeyBase64"))
+    DownloadDefaultKeyPairResult.add_member(:created_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "createdAt"))
     DownloadDefaultKeyPairResult.struct_class = Types::DownloadDefaultKeyPairResult
 
     EnableAddOnRequest.add_member(:resource_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "resourceName"))
@@ -1653,6 +1682,7 @@ module Aws::Lightsail
 
     GetBucketsResult.add_member(:buckets, Shapes::ShapeRef.new(shape: BucketList, location_name: "buckets"))
     GetBucketsResult.add_member(:next_page_token, Shapes::ShapeRef.new(shape: string, location_name: "nextPageToken"))
+    GetBucketsResult.add_member(:account_level_bpa_sync, Shapes::ShapeRef.new(shape: AccountLevelBpaSync, location_name: "accountLevelBpaSync"))
     GetBucketsResult.struct_class = Types::GetBucketsResult
 
     GetBundlesRequest.add_member(:include_inactive, Shapes::ShapeRef.new(shape: boolean, location_name: "includeInactive"))
@@ -1877,6 +1907,7 @@ module Aws::Lightsail
     GetKeyPairResult.struct_class = Types::GetKeyPairResult
 
     GetKeyPairsRequest.add_member(:page_token, Shapes::ShapeRef.new(shape: string, location_name: "pageToken"))
+    GetKeyPairsRequest.add_member(:include_default_key_pair, Shapes::ShapeRef.new(shape: boolean, location_name: "includeDefaultKeyPair"))
     GetKeyPairsRequest.struct_class = Types::GetKeyPairsRequest
 
     GetKeyPairsResult.add_member(:key_pairs, Shapes::ShapeRef.new(shape: KeyPairList, location_name: "keyPairs"))
@@ -1907,6 +1938,13 @@ module Aws::Lightsail
 
     GetLoadBalancerTlsCertificatesResult.add_member(:tls_certificates, Shapes::ShapeRef.new(shape: LoadBalancerTlsCertificateList, location_name: "tlsCertificates"))
     GetLoadBalancerTlsCertificatesResult.struct_class = Types::GetLoadBalancerTlsCertificatesResult
+
+    GetLoadBalancerTlsPoliciesRequest.add_member(:page_token, Shapes::ShapeRef.new(shape: string, location_name: "pageToken"))
+    GetLoadBalancerTlsPoliciesRequest.struct_class = Types::GetLoadBalancerTlsPoliciesRequest
+
+    GetLoadBalancerTlsPoliciesResult.add_member(:tls_policies, Shapes::ShapeRef.new(shape: LoadBalancerTlsPolicyList, location_name: "tlsPolicies"))
+    GetLoadBalancerTlsPoliciesResult.add_member(:next_page_token, Shapes::ShapeRef.new(shape: string, location_name: "nextPageToken"))
+    GetLoadBalancerTlsPoliciesResult.struct_class = Types::GetLoadBalancerTlsPoliciesResult
 
     GetLoadBalancersRequest.add_member(:page_token, Shapes::ShapeRef.new(shape: string, location_name: "pageToken"))
     GetLoadBalancersRequest.struct_class = Types::GetLoadBalancersRequest
@@ -1952,6 +1990,7 @@ module Aws::Lightsail
     GetRelationalDatabaseBlueprintsResult.struct_class = Types::GetRelationalDatabaseBlueprintsResult
 
     GetRelationalDatabaseBundlesRequest.add_member(:page_token, Shapes::ShapeRef.new(shape: string, location_name: "pageToken"))
+    GetRelationalDatabaseBundlesRequest.add_member(:include_inactive, Shapes::ShapeRef.new(shape: boolean, location_name: "includeInactive"))
     GetRelationalDatabaseBundlesRequest.struct_class = Types::GetRelationalDatabaseBundlesRequest
 
     GetRelationalDatabaseBundlesResult.add_member(:bundles, Shapes::ShapeRef.new(shape: RelationalDatabaseBundleList, location_name: "bundles"))
@@ -2265,6 +2304,8 @@ module Aws::Lightsail
     LoadBalancer.add_member(:tls_certificate_summaries, Shapes::ShapeRef.new(shape: LoadBalancerTlsCertificateSummaryList, location_name: "tlsCertificateSummaries"))
     LoadBalancer.add_member(:configuration_options, Shapes::ShapeRef.new(shape: LoadBalancerConfigurationOptions, location_name: "configurationOptions"))
     LoadBalancer.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "ipAddressType"))
+    LoadBalancer.add_member(:https_redirection_enabled, Shapes::ShapeRef.new(shape: boolean, location_name: "httpsRedirectionEnabled"))
+    LoadBalancer.add_member(:tls_policy_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "tlsPolicyName"))
     LoadBalancer.struct_class = Types::LoadBalancer
 
     LoadBalancerConfigurationOptions.key = Shapes::ShapeRef.new(shape: LoadBalancerAttributeName)
@@ -2325,6 +2366,15 @@ module Aws::Lightsail
     LoadBalancerTlsCertificateSummary.struct_class = Types::LoadBalancerTlsCertificateSummary
 
     LoadBalancerTlsCertificateSummaryList.member = Shapes::ShapeRef.new(shape: LoadBalancerTlsCertificateSummary)
+
+    LoadBalancerTlsPolicy.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
+    LoadBalancerTlsPolicy.add_member(:is_default, Shapes::ShapeRef.new(shape: boolean, location_name: "isDefault"))
+    LoadBalancerTlsPolicy.add_member(:description, Shapes::ShapeRef.new(shape: string, location_name: "description"))
+    LoadBalancerTlsPolicy.add_member(:protocols, Shapes::ShapeRef.new(shape: StringList, location_name: "protocols"))
+    LoadBalancerTlsPolicy.add_member(:ciphers, Shapes::ShapeRef.new(shape: StringList, location_name: "ciphers"))
+    LoadBalancerTlsPolicy.struct_class = Types::LoadBalancerTlsPolicy
+
+    LoadBalancerTlsPolicyList.member = Shapes::ShapeRef.new(shape: LoadBalancerTlsPolicy)
 
     LogEvent.add_member(:created_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "createdAt"))
     LogEvent.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
@@ -2433,6 +2483,12 @@ module Aws::Lightsail
 
     PortMap.key = Shapes::ShapeRef.new(shape: string)
     PortMap.value = Shapes::ShapeRef.new(shape: ContainerServiceProtocol)
+
+    PrivateRegistryAccess.add_member(:ecr_image_puller_role, Shapes::ShapeRef.new(shape: ContainerServiceECRImagePullerRole, location_name: "ecrImagePullerRole"))
+    PrivateRegistryAccess.struct_class = Types::PrivateRegistryAccess
+
+    PrivateRegistryAccessRequest.add_member(:ecr_image_puller_role, Shapes::ShapeRef.new(shape: ContainerServiceECRImagePullerRoleRequest, location_name: "ecrImagePullerRole"))
+    PrivateRegistryAccessRequest.struct_class = Types::PrivateRegistryAccessRequest
 
     PutAlarmRequest.add_member(:alarm_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "alarmName"))
     PutAlarmRequest.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "metricName"))
@@ -2763,6 +2819,7 @@ module Aws::Lightsail
     UpdateContainerServiceRequest.add_member(:scale, Shapes::ShapeRef.new(shape: ContainerServiceScale, location_name: "scale"))
     UpdateContainerServiceRequest.add_member(:is_disabled, Shapes::ShapeRef.new(shape: boolean, location_name: "isDisabled"))
     UpdateContainerServiceRequest.add_member(:public_domain_names, Shapes::ShapeRef.new(shape: ContainerServicePublicDomains, location_name: "publicDomainNames"))
+    UpdateContainerServiceRequest.add_member(:private_registry_access, Shapes::ShapeRef.new(shape: PrivateRegistryAccessRequest, location_name: "privateRegistryAccess"))
     UpdateContainerServiceRequest.struct_class = Types::UpdateContainerServiceRequest
 
     UpdateContainerServiceResult.add_member(:container_service, Shapes::ShapeRef.new(shape: ContainerService, location_name: "containerService"))
@@ -4317,6 +4374,19 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:get_load_balancer_tls_policies, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetLoadBalancerTlsPolicies"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetLoadBalancerTlsPoliciesRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetLoadBalancerTlsPoliciesResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
       end)
 
       api.add_operation(:get_load_balancers, Seahorse::Model::Operation.new.tap do |o|

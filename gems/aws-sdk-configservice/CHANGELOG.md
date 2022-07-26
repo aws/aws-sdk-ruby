@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.79.0 (2022-07-14)
+------------------
+
+* Feature - Update ResourceType enum with values for Route53Resolver, Batch, DMS, Workspaces, Stepfunctions, SageMaker, ElasticLoadBalancingV2, MSK types
+
+1.78.0 (2022-07-05)
+------------------
+
+* Feature - Updating documentation service limits
+
+1.77.0 (2022-04-06)
+------------------
+
+* Feature - Add resourceType enums for AWS::EMR::SecurityConfiguration and AWS::SageMaker::CodeRepository
+
+1.76.0 (2022-03-24)
+------------------
+
+* Feature - Added new APIs GetCustomRulePolicy and GetOrganizationCustomRulePolicy, and updated existing APIs PutConfigRule, DescribeConfigRule, DescribeConfigRuleEvaluationStatus, PutOrganizationConfigRule, DescribeConfigRule to support a new feature for building AWS Config rules with AWS CloudFormation Guard
+
+1.75.0 (2022-03-14)
+------------------
+
+* Feature - Add resourceType enums for AWS::ECR::PublicRepository and AWS::EC2::LaunchTemplate
+
+1.74.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.73.0 (2022-02-03)
 ------------------
 

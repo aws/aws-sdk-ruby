@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::Synthetics
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -349,6 +351,38 @@ module Aws::Synthetics
 
     # @!group API Operations
 
+    # Associates a canary with a group. Using groups can help you with
+    # managing and automating your canaries, and you can also view
+    # aggregated run results and statistics for all canaries in a group.
+    #
+    # You must run this operation in the Region where the canary exists.
+    #
+    # @option params [required, String] :group_identifier
+    #   Specifies the group. You can specify the group name, the ARN, or the
+    #   group ID as the `GroupIdentifier`.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the canary that you want to associate with the specified
+    #   group.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_resource({
+    #     group_identifier: "GroupIdentifier", # required
+    #     resource_arn: "CanaryArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/AssociateResource AWS API Documentation
+    #
+    # @overload associate_resource(params = {})
+    # @param [Hash] params ({})
+    def associate_resource(params = {}, options = {})
+      req = build_request(:associate_resource, params)
+      req.send_request(options)
+    end
+
     # Creates a canary. Canaries are scripts that monitor your endpoints and
     # APIs from the outside-in. Canaries help you check the availability and
     # latency of your web services and troubleshoot anomalies by
@@ -360,7 +394,7 @@ module Aws::Synthetics
     #
     # To create canaries, you must have the `CloudWatchSyntheticsFullAccess`
     # policy. If you are creating a new IAM role for the canary, you also
-    # need the the `iam:CreateRole`, `iam:CreatePolicy` and
+    # need the `iam:CreateRole`, `iam:CreatePolicy` and
     # `iam:AttachRolePolicy` permissions. For more information, see
     # [Necessary Roles and Permissions][2].
     #
@@ -425,7 +459,10 @@ module Aws::Synthetics
     #
     # @option params [Types::CanaryRunConfigInput] :run_config
     #   A structure that contains the configuration for individual canary
-    #   runs, such as timeout value.
+    #   runs, such as timeout value and environment variables.
+    #
+    #   The environment variables keys and values are not encrypted. Do not
+    #   store sensitive information in this field.
     #
     # @option params [Integer] :success_retention_period_in_days
     #   The number of days to retain data about successful runs of this
@@ -481,7 +518,7 @@ module Aws::Synthetics
     #       s3_key: "String",
     #       s3_version: "String",
     #       zip_file: "data",
-    #       handler: "String", # required
+    #       handler: "CodeHandler", # required
     #     },
     #     artifact_s3_location: "String", # required
     #     execution_role_arn: "RoleArn", # required
@@ -531,7 +568,7 @@ module Aws::Synthetics
     #   resp.canary.failure_retention_period_in_days #=> Integer
     #   resp.canary.status.state #=> String, one of "CREATING", "READY", "STARTING", "RUNNING", "UPDATING", "STOPPING", "STOPPED", "ERROR", "DELETING"
     #   resp.canary.status.state_reason #=> String
-    #   resp.canary.status.state_reason_code #=> String, one of "INVALID_PERMISSIONS"
+    #   resp.canary.status.state_reason_code #=> String, one of "INVALID_PERMISSIONS", "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_FAILED", "UPDATE_PENDING", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "ROLLBACK_COMPLETE", "ROLLBACK_FAILED", "DELETE_IN_PROGRESS", "DELETE_FAILED", "SYNC_DELETE_IN_PROGRESS"
     #   resp.canary.timeline.created #=> Time
     #   resp.canary.timeline.last_modified #=> Time
     #   resp.canary.timeline.last_started #=> Time
@@ -563,14 +600,85 @@ module Aws::Synthetics
       req.send_request(options)
     end
 
+    # Creates a group which you can use to associate canaries with each
+    # other, including cross-Region canaries. Using groups can help you with
+    # managing and automating your canaries, and you can also view
+    # aggregated run results and statistics for all canaries in a group.
+    #
+    # Groups are global resources. When you create a group, it is replicated
+    # across Amazon Web Services Regions, and you can view it and add
+    # canaries to it from any Region. Although the group ARN format reflects
+    # the Region name where it was created, a group is not constrained to
+    # any Region. This means that you can put canaries from multiple Regions
+    # into the same group, and then use that group to view and manage all of
+    # those canaries in a single view.
+    #
+    # Groups are supported in all Regions except the Regions that are
+    # disabled by default. For more information about these Regions, see
+    # [Enabling a Region][1].
+    #
+    # Each group can contain as many as 10 canaries. You can have as many as
+    # 20 groups in your account. Any single canary can be a member of up to
+    # 10 groups.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable
+    #
+    # @option params [required, String] :name
+    #   The name for the group. It can include any Unicode characters.
+    #
+    #   The names for all groups in your account, across all Regions, must be
+    #   unique.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A list of key-value pairs to associate with the group. You can
+    #   associate as many as 50 tags with a group.
+    #
+    #   Tags can help you organize and categorize your resources. You can also
+    #   use them to scope user permissions, by granting a user permission to
+    #   access or change only the resources that have certain tag values.
+    #
+    # @return [Types::CreateGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateGroupResponse#group #group} => Types::Group
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_group({
+    #     name: "GroupName", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.group.id #=> String
+    #   resp.group.name #=> String
+    #   resp.group.arn #=> String
+    #   resp.group.tags #=> Hash
+    #   resp.group.tags["TagKey"] #=> String
+    #   resp.group.created_time #=> Time
+    #   resp.group.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/CreateGroup AWS API Documentation
+    #
+    # @overload create_group(params = {})
+    # @param [Hash] params ({})
+    def create_group(params = {}, options = {})
+      req = build_request(:create_group, params)
+      req.send_request(options)
+    end
+
     # Permanently deletes the specified canary.
     #
-    # When you delete a canary, resources used and created by the canary are
-    # not automatically deleted. After you delete a canary that you do not
-    # intend to use again, you should also delete the following:
+    # If you specify `DeleteLambda` to `true`, CloudWatch Synthetics also
+    # deletes the Lambda functions and layers that are used by the canary.
     #
-    # * The Lambda functions and layers used by this canary. These have the
-    #   prefix `cwsyn-MyCanaryName `.
+    # Other resources used and created by the canary are not automatically
+    # deleted. After you delete a canary that you do not intend to use
+    # again, you should also delete the following:
     #
     # * The CloudWatch alarms created for this canary. These alarms have a
     #   name of `Synthetics-SharpDrop-Alarm-MyCanaryName `.
@@ -598,12 +706,19 @@ module Aws::Synthetics
     #
     #   [1]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html
     #
+    # @option params [Boolean] :delete_lambda
+    #   Specifies whether to also delete the Lambda functions and layers used
+    #   by this canary. The default is false.
+    #
+    #   Type: Boolean
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_canary({
     #     name: "CanaryName", # required
+    #     delete_lambda: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/DeleteCanary AWS API Documentation
@@ -615,13 +730,53 @@ module Aws::Synthetics
       req.send_request(options)
     end
 
+    # Deletes a group. The group doesn't need to be empty to be deleted. If
+    # there are canaries in the group, they are not deleted when you delete
+    # the group.
+    #
+    # Groups are a global resource that appear in all Regions, but the
+    # request to delete a group must be made from its home Region. You can
+    # find the home Region of a group within its ARN.
+    #
+    # @option params [required, String] :group_identifier
+    #   Specifies which group to delete. You can specify the group name, the
+    #   ARN, or the group ID as the `GroupIdentifier`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_group({
+    #     group_identifier: "GroupIdentifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/DeleteGroup AWS API Documentation
+    #
+    # @overload delete_group(params = {})
+    # @param [Hash] params ({})
+    def delete_group(params = {}, options = {})
+      req = build_request(:delete_group, params)
+      req.send_request(options)
+    end
+
     # This operation returns a list of the canaries in your account, along
     # with full details about each canary.
     #
-    # This operation does not have resource-level authorization, so if a
-    # user is able to use `DescribeCanaries`, the user can see all of the
-    # canaries in the account. A deny policy can only be used to restrict
-    # access to all canaries. It cannot be used on specific resources.
+    # This operation supports resource-level authorization using an IAM
+    # policy and the `Names` parameter. If you specify the `Names`
+    # parameter, the operation is successful only if you have authorization
+    # to view all the canaries that you specify in your request. If you do
+    # not have permission to view any of the canaries, the request fails
+    # with a 403 response.
+    #
+    # You are required to use the `Names` parameter if you are logged on to
+    # a user or role that has an IAM policy that restricts which canaries
+    # that you are allowed to view. For more information, see [ Limiting a
+    # user to viewing specific canaries][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Restricted.html
     #
     # @option params [String] :next_token
     #   A token that indicates that there is more data available. You can use
@@ -632,6 +787,24 @@ module Aws::Synthetics
     #   Specify this parameter to limit how many canaries are returned each
     #   time you use the `DescribeCanaries` operation. If you omit this
     #   parameter, the default of 100 is used.
+    #
+    # @option params [Array<String>] :names
+    #   Use this parameter to return only canaries that match the names that
+    #   you specify here. You can specify as many as five canary names.
+    #
+    #   If you specify this parameter, the operation is successful only if you
+    #   have authorization to view all the canaries that you specify in your
+    #   request. If you do not have permission to view any of the canaries,
+    #   the request fails with a 403 response.
+    #
+    #   You are required to use this parameter if you are logged on to a user
+    #   or role that has an IAM policy that restricts which canaries that you
+    #   are allowed to view. For more information, see [ Limiting a user to
+    #   viewing specific canaries][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Restricted.html
     #
     # @return [Types::DescribeCanariesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -645,6 +818,7 @@ module Aws::Synthetics
     #   resp = client.describe_canaries({
     #     next_token: "Token",
     #     max_results: 1,
+    #     names: ["CanaryName"],
     #   })
     #
     # @example Response structure
@@ -664,7 +838,7 @@ module Aws::Synthetics
     #   resp.canaries[0].failure_retention_period_in_days #=> Integer
     #   resp.canaries[0].status.state #=> String, one of "CREATING", "READY", "STARTING", "RUNNING", "UPDATING", "STOPPING", "STOPPED", "ERROR", "DELETING"
     #   resp.canaries[0].status.state_reason #=> String
-    #   resp.canaries[0].status.state_reason_code #=> String, one of "INVALID_PERMISSIONS"
+    #   resp.canaries[0].status.state_reason_code #=> String, one of "INVALID_PERMISSIONS", "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_FAILED", "UPDATE_PENDING", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "ROLLBACK_COMPLETE", "ROLLBACK_FAILED", "DELETE_IN_PROGRESS", "DELETE_FAILED", "SYNC_DELETE_IN_PROGRESS"
     #   resp.canaries[0].timeline.created #=> Time
     #   resp.canaries[0].timeline.last_modified #=> Time
     #   resp.canaries[0].timeline.last_started #=> Time
@@ -700,15 +874,49 @@ module Aws::Synthetics
     # Use this operation to see information from the most recent run of each
     # canary that you have created.
     #
+    # This operation supports resource-level authorization using an IAM
+    # policy and the `Names` parameter. If you specify the `Names`
+    # parameter, the operation is successful only if you have authorization
+    # to view all the canaries that you specify in your request. If you do
+    # not have permission to view any of the canaries, the request fails
+    # with a 403 response.
+    #
+    # You are required to use the `Names` parameter if you are logged on to
+    # a user or role that has an IAM policy that restricts which canaries
+    # that you are allowed to view. For more information, see [ Limiting a
+    # user to viewing specific canaries][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Restricted.html
+    #
     # @option params [String] :next_token
     #   A token that indicates that there is more data available. You can use
-    #   this token in a subsequent `DescribeCanaries` operation to retrieve
-    #   the next set of results.
+    #   this token in a subsequent `DescribeCanariesLastRun` operation to
+    #   retrieve the next set of results.
     #
     # @option params [Integer] :max_results
     #   Specify this parameter to limit how many runs are returned each time
     #   you use the `DescribeLastRun` operation. If you omit this parameter,
     #   the default of 100 is used.
+    #
+    # @option params [Array<String>] :names
+    #   Use this parameter to return only canaries that match the names that
+    #   you specify here. You can specify as many as five canary names.
+    #
+    #   If you specify this parameter, the operation is successful only if you
+    #   have authorization to view all the canaries that you specify in your
+    #   request. If you do not have permission to view any of the canaries,
+    #   the request fails with a 403 response.
+    #
+    #   You are required to use the `Names` parameter if you are logged on to
+    #   a user or role that has an IAM policy that restricts which canaries
+    #   that you are allowed to view. For more information, see [ Limiting a
+    #   user to viewing specific canaries][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Restricted.html
     #
     # @return [Types::DescribeCanariesLastRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -722,6 +930,7 @@ module Aws::Synthetics
     #   resp = client.describe_canaries_last_run({
     #     next_token: "Token",
     #     max_results: 1,
+    #     names: ["CanaryName"],
     #   })
     #
     # @example Response structure
@@ -796,6 +1005,35 @@ module Aws::Synthetics
       req.send_request(options)
     end
 
+    # Removes a canary from a group. You must run this operation in the
+    # Region where the canary exists.
+    #
+    # @option params [required, String] :group_identifier
+    #   Specifies the group. You can specify the group name, the ARN, or the
+    #   group ID as the `GroupIdentifier`.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the canary that you want to remove from the specified
+    #   group.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_resource({
+    #     group_identifier: "GroupIdentifier", # required
+    #     resource_arn: "CanaryArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/DisassociateResource AWS API Documentation
+    #
+    # @overload disassociate_resource(params = {})
+    # @param [Hash] params ({})
+    def disassociate_resource(params = {}, options = {})
+      req = build_request(:disassociate_resource, params)
+      req.send_request(options)
+    end
+
     # Retrieves complete information about one canary. You must specify the
     # name of the canary that you want. To get a list of canaries and their
     # names, use [DescribeCanaries][1].
@@ -833,7 +1071,7 @@ module Aws::Synthetics
     #   resp.canary.failure_retention_period_in_days #=> Integer
     #   resp.canary.status.state #=> String, one of "CREATING", "READY", "STARTING", "RUNNING", "UPDATING", "STOPPING", "STOPPED", "ERROR", "DELETING"
     #   resp.canary.status.state_reason #=> String
-    #   resp.canary.status.state_reason_code #=> String, one of "INVALID_PERMISSIONS"
+    #   resp.canary.status.state_reason_code #=> String, one of "INVALID_PERMISSIONS", "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_FAILED", "UPDATE_PENDING", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "ROLLBACK_COMPLETE", "ROLLBACK_FAILED", "DELETE_IN_PROGRESS", "DELETE_FAILED", "SYNC_DELETE_IN_PROGRESS"
     #   resp.canary.timeline.created #=> Time
     #   resp.canary.timeline.last_modified #=> Time
     #   resp.canary.timeline.last_started #=> Time
@@ -917,13 +1155,191 @@ module Aws::Synthetics
       req.send_request(options)
     end
 
-    # Displays the tags associated with a canary.
+    # Returns information about one group. Groups are a global resource, so
+    # you can use this operation from any Region.
+    #
+    # @option params [required, String] :group_identifier
+    #   Specifies the group to return information for. You can specify the
+    #   group name, the ARN, or the group ID as the `GroupIdentifier`.
+    #
+    # @return [Types::GetGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetGroupResponse#group #group} => Types::Group
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_group({
+    #     group_identifier: "GroupIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.group.id #=> String
+    #   resp.group.name #=> String
+    #   resp.group.arn #=> String
+    #   resp.group.tags #=> Hash
+    #   resp.group.tags["TagKey"] #=> String
+    #   resp.group.created_time #=> Time
+    #   resp.group.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/GetGroup AWS API Documentation
+    #
+    # @overload get_group(params = {})
+    # @param [Hash] params ({})
+    def get_group(params = {}, options = {})
+      req = build_request(:get_group, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of the groups that the specified canary is associated
+    # with. The canary that you specify must be in the current Region.
+    #
+    # @option params [String] :next_token
+    #   A token that indicates that there is more data available. You can use
+    #   this token in a subsequent operation to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   Specify this parameter to limit how many groups are returned each time
+    #   you use the `ListAssociatedGroups` operation. If you omit this
+    #   parameter, the default of 20 is used.
     #
     # @option params [required, String] :resource_arn
-    #   The ARN of the canary that you want to view tags for.
+    #   The ARN of the canary that you want to view groups for.
+    #
+    # @return [Types::ListAssociatedGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAssociatedGroupsResponse#groups #groups} => Array&lt;Types::GroupSummary&gt;
+    #   * {Types::ListAssociatedGroupsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_associated_groups({
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #     resource_arn: "CanaryArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.groups #=> Array
+    #   resp.groups[0].id #=> String
+    #   resp.groups[0].name #=> String
+    #   resp.groups[0].arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/ListAssociatedGroups AWS API Documentation
+    #
+    # @overload list_associated_groups(params = {})
+    # @param [Hash] params ({})
+    def list_associated_groups(params = {}, options = {})
+      req = build_request(:list_associated_groups, params)
+      req.send_request(options)
+    end
+
+    # This operation returns a list of the ARNs of the canaries that are
+    # associated with the specified group.
+    #
+    # @option params [String] :next_token
+    #   A token that indicates that there is more data available. You can use
+    #   this token in a subsequent operation to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   Specify this parameter to limit how many canary ARNs are returned each
+    #   time you use the `ListGroupResources` operation. If you omit this
+    #   parameter, the default of 20 is used.
+    #
+    # @option params [required, String] :group_identifier
+    #   Specifies the group to return information for. You can specify the
+    #   group name, the ARN, or the group ID as the `GroupIdentifier`.
+    #
+    # @return [Types::ListGroupResourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListGroupResourcesResponse#resources #resources} => Array&lt;String&gt;
+    #   * {Types::ListGroupResourcesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_group_resources({
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #     group_identifier: "GroupIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resources #=> Array
+    #   resp.resources[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/ListGroupResources AWS API Documentation
+    #
+    # @overload list_group_resources(params = {})
+    # @param [Hash] params ({})
+    def list_group_resources(params = {}, options = {})
+      req = build_request(:list_group_resources, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of all groups in the account, displaying their names,
+    # unique IDs, and ARNs. The groups from all Regions are returned.
+    #
+    # @option params [String] :next_token
+    #   A token that indicates that there is more data available. You can use
+    #   this token in a subsequent operation to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   Specify this parameter to limit how many groups are returned each time
+    #   you use the `ListGroups` operation. If you omit this parameter, the
+    #   default of 20 is used.
+    #
+    # @return [Types::ListGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListGroupsResponse#groups #groups} => Array&lt;Types::GroupSummary&gt;
+    #   * {Types::ListGroupsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_groups({
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.groups #=> Array
+    #   resp.groups[0].id #=> String
+    #   resp.groups[0].name #=> String
+    #   resp.groups[0].arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/ListGroups AWS API Documentation
+    #
+    # @overload list_groups(params = {})
+    # @param [Hash] params ({})
+    def list_groups(params = {}, options = {})
+      req = build_request(:list_groups, params)
+      req.send_request(options)
+    end
+
+    # Displays the tags associated with a canary or group.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the canary or group that you want to view tags for.
     #
     #   The ARN format of a canary is
     #   `arn:aws:synthetics:Region:account-id:canary:canary-name `.
+    #
+    #   The ARN format of a group is
+    #   `arn:aws:synthetics:Region:account-id:group:group-name `
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -932,7 +1348,7 @@ module Aws::Synthetics
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_tags_for_resource({
-    #     resource_arn: "CanaryArn", # required
+    #     resource_arn: "ResourceArn", # required
     #   })
     #
     # @example Response structure
@@ -983,17 +1399,16 @@ module Aws::Synthetics
     end
 
     # Stops the canary to prevent all future runs. If the canary is
-    # currently running, Synthetics stops waiting for the current run of the
-    # specified canary to complete. The run that is in progress completes on
-    # its own, publishes metrics, and uploads artifacts, but it is not
-    # recorded in Synthetics as a completed run.
+    # currently running,the run that is in progress completes on its own,
+    # publishes metrics, and uploads artifacts, but it is not recorded in
+    # Synthetics as a completed run.
     #
     # You can use `StartCanary` to start it running again with the canary’s
     # current schedule at any point in the future.
     #
     # @option params [required, String] :name
     #   The name of the canary that you want to stop. To find the names of
-    #   your canaries, use [DescribeCanaries][1].
+    #   your canaries, use [ListCanaries][1].
     #
     #
     #
@@ -1016,7 +1431,8 @@ module Aws::Synthetics
       req.send_request(options)
     end
 
-    # Assigns one or more tags (key-value pairs) to the specified canary.
+    # Assigns one or more tags (key-value pairs) to the specified canary or
+    # group.
     #
     # Tags can help you organize and categorize your resources. You can also
     # use them to scope user permissions, by granting a user permission to
@@ -1025,29 +1441,33 @@ module Aws::Synthetics
     # Tags don't have any semantic meaning to Amazon Web Services and are
     # interpreted strictly as strings of characters.
     #
-    # You can use the `TagResource` action with a canary that already has
-    # tags. If you specify a new tag key for the alarm, this tag is appended
-    # to the list of tags associated with the alarm. If you specify a tag
-    # key that is already associated with the alarm, the new tag value that
-    # you specify replaces the previous value for that tag.
+    # You can use the `TagResource` action with a resource that already has
+    # tags. If you specify a new tag key for the resource, this tag is
+    # appended to the list of tags associated with the resource. If you
+    # specify a tag key that is already associated with the resource, the
+    # new tag value that you specify replaces the previous value for that
+    # tag.
     #
-    # You can associate as many as 50 tags with a canary.
+    # You can associate as many as 50 tags with a canary or group.
     #
     # @option params [required, String] :resource_arn
-    #   The ARN of the canary that you're adding tags to.
+    #   The ARN of the canary or group that you're adding tags to.
     #
     #   The ARN format of a canary is
     #   `arn:aws:synthetics:Region:account-id:canary:canary-name `.
     #
+    #   The ARN format of a group is
+    #   `arn:aws:synthetics:Region:account-id:group:group-name `
+    #
     # @option params [required, Hash<String,String>] :tags
-    #   The list of key-value pairs to associate with the canary.
+    #   The list of key-value pairs to associate with the resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.tag_resource({
-    #     resource_arn: "CanaryArn", # required
+    #     resource_arn: "ResourceArn", # required
     #     tags: { # required
     #       "TagKey" => "TagValue",
     #     },
@@ -1062,13 +1482,16 @@ module Aws::Synthetics
       req.send_request(options)
     end
 
-    # Removes one or more tags from the specified canary.
+    # Removes one or more tags from the specified resource.
     #
     # @option params [required, String] :resource_arn
-    #   The ARN of the canary that you're removing tags from.
+    #   The ARN of the canary or group that you're removing tags from.
     #
     #   The ARN format of a canary is
     #   `arn:aws:synthetics:Region:account-id:canary:canary-name `.
+    #
+    #   The ARN format of a group is
+    #   `arn:aws:synthetics:Region:account-id:group:group-name `
     #
     # @option params [required, Array<String>] :tag_keys
     #   The list of tag keys to remove from the resource.
@@ -1078,7 +1501,7 @@ module Aws::Synthetics
     # @example Request syntax with placeholder values
     #
     #   resp = client.untag_resource({
-    #     resource_arn: "CanaryArn", # required
+    #     resource_arn: "ResourceArn", # required
     #     tag_keys: ["TagKey"], # required
     #   })
     #
@@ -1091,8 +1514,7 @@ module Aws::Synthetics
       req.send_request(options)
     end
 
-    # Use this operation to change the settings of a canary that has already
-    # been created.
+    # Updates the configuration of a canary that has already been created.
     #
     # You can't use this operation to update the tags of an existing
     # canary. To change the tags of an existing canary, use
@@ -1154,6 +1576,9 @@ module Aws::Synthetics
     #   A structure that contains the timeout value that is used for each
     #   individual run of the canary.
     #
+    #   The environment variables keys and values are not encrypted. Do not
+    #   store sensitive information in this field.
+    #
     # @option params [Integer] :success_retention_period_in_days
     #   The number of days to retain data about successful runs of this
     #   canary.
@@ -1206,7 +1631,7 @@ module Aws::Synthetics
     #       s3_key: "String",
     #       s3_version: "String",
     #       zip_file: "data",
-    #       handler: "String", # required
+    #       handler: "CodeHandler", # required
     #     },
     #     execution_role_arn: "RoleArn",
     #     runtime_version: "String",
@@ -1268,7 +1693,7 @@ module Aws::Synthetics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-synthetics'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

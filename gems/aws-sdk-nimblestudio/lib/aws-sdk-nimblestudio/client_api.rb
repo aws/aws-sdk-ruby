@@ -147,10 +147,12 @@ module Aws::NimbleStudio
     PutStudioMembersResponse = Shapes::StructureShape.new(name: 'PutStudioMembersResponse')
     Region = Shapes::StringShape.new(name: 'Region')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     ScriptParameterKey = Shapes::StringShape.new(name: 'ScriptParameterKey')
     ScriptParameterKeyValue = Shapes::StructureShape.new(name: 'ScriptParameterKeyValue')
     ScriptParameterValue = Shapes::StringShape.new(name: 'ScriptParameterValue')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
+    SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SharedFileSystemConfiguration = Shapes::StructureShape.new(name: 'SharedFileSystemConfiguration')
     StartStreamingSessionRequest = Shapes::StructureShape.new(name: 'StartStreamingSessionRequest')
@@ -166,12 +168,14 @@ module Aws::NimbleStudio
     StreamConfigurationSessionStorage = Shapes::StructureShape.new(name: 'StreamConfigurationSessionStorage')
     StreamingClipboardMode = Shapes::StringShape.new(name: 'StreamingClipboardMode')
     StreamingImage = Shapes::StructureShape.new(name: 'StreamingImage')
+    StreamingImageDescription = Shapes::StringShape.new(name: 'StreamingImageDescription')
     StreamingImageEncryptionConfiguration = Shapes::StructureShape.new(name: 'StreamingImageEncryptionConfiguration')
     StreamingImageEncryptionConfigurationKeyArn = Shapes::StringShape.new(name: 'StreamingImageEncryptionConfigurationKeyArn')
     StreamingImageEncryptionConfigurationKeyType = Shapes::StringShape.new(name: 'StreamingImageEncryptionConfigurationKeyType')
     StreamingImageId = Shapes::StringShape.new(name: 'StreamingImageId')
     StreamingImageIdList = Shapes::ListShape.new(name: 'StreamingImageIdList')
     StreamingImageList = Shapes::ListShape.new(name: 'StreamingImageList')
+    StreamingImageName = Shapes::StringShape.new(name: 'StreamingImageName')
     StreamingImageOwner = Shapes::StringShape.new(name: 'StreamingImageOwner')
     StreamingImagePlatform = Shapes::StringShape.new(name: 'StreamingImagePlatform')
     StreamingImageState = Shapes::StringShape.new(name: 'StreamingImageState')
@@ -215,6 +219,7 @@ module Aws::NimbleStudio
     StudioComponentSummaryList = Shapes::ListShape.new(name: 'StudioComponentSummaryList')
     StudioComponentType = Shapes::StringShape.new(name: 'StudioComponentType')
     StudioComponentTypeList = Shapes::ListShape.new(name: 'StudioComponentTypeList')
+    StudioDisplayName = Shapes::StringShape.new(name: 'StudioDisplayName')
     StudioEncryptionConfiguration = Shapes::StructureShape.new(name: 'StudioEncryptionConfiguration')
     StudioEncryptionConfigurationKeyArn = Shapes::StringShape.new(name: 'StudioEncryptionConfigurationKeyArn')
     StudioEncryptionConfigurationKeyType = Shapes::StringShape.new(name: 'StudioEncryptionConfigurationKeyType')
@@ -225,19 +230,6 @@ module Aws::NimbleStudio
     StudioPersona = Shapes::StringShape.new(name: 'StudioPersona')
     StudioState = Shapes::StringShape.new(name: 'StudioState')
     StudioStatusCode = Shapes::StringShape.new(name: 'StudioStatusCode')
-    SyntheticComputeFarmConfigurationString = Shapes::StringShape.new(name: 'SyntheticComputeFarmConfigurationString')
-    SyntheticCreateStreamingImageRequestStreamingImageDescription = Shapes::StringShape.new(name: 'SyntheticCreateStreamingImageRequestStreamingImageDescription')
-    SyntheticCreateStreamingImageRequestStreamingImageName = Shapes::StringShape.new(name: 'SyntheticCreateStreamingImageRequestStreamingImageName')
-    SyntheticCreateStudioRequestStudioDisplayName = Shapes::StringShape.new(name: 'SyntheticCreateStudioRequestStudioDisplayName')
-    SyntheticLicenseServiceConfigurationString = Shapes::StringShape.new(name: 'SyntheticLicenseServiceConfigurationString')
-    SyntheticSharedFileSystemConfigurationString = Shapes::StringShape.new(name: 'SyntheticSharedFileSystemConfigurationString')
-    SyntheticStreamingImageStreamingImageDescription = Shapes::StringShape.new(name: 'SyntheticStreamingImageStreamingImageDescription')
-    SyntheticStreamingImageStreamingImageName = Shapes::StringShape.new(name: 'SyntheticStreamingImageStreamingImageName')
-    SyntheticStreamingSessionStreamString = Shapes::StringShape.new(name: 'SyntheticStreamingSessionStreamString')
-    SyntheticStudioStudioDisplayName = Shapes::StringShape.new(name: 'SyntheticStudioStudioDisplayName')
-    SyntheticUpdateStreamingImageRequestStreamingImageDescription = Shapes::StringShape.new(name: 'SyntheticUpdateStreamingImageRequestStreamingImageDescription')
-    SyntheticUpdateStreamingImageRequestStreamingImageName = Shapes::StringShape.new(name: 'SyntheticUpdateStreamingImageRequestStreamingImageName')
-    SyntheticUpdateStudioRequestStudioDisplayName = Shapes::StringShape.new(name: 'SyntheticUpdateStudioRequestStudioDisplayName')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     Tags = Shapes::MapShape.new(name: 'Tags')
@@ -287,7 +279,7 @@ module Aws::NimbleStudio
     ActiveDirectoryDnsIpAddressList.member = Shapes::ShapeRef.new(shape: ActiveDirectoryDnsIpAddress)
 
     ComputeFarmConfiguration.add_member(:active_directory_user, Shapes::ShapeRef.new(shape: String, location_name: "activeDirectoryUser"))
-    ComputeFarmConfiguration.add_member(:endpoint, Shapes::ShapeRef.new(shape: SyntheticComputeFarmConfigurationString, location_name: "endpoint"))
+    ComputeFarmConfiguration.add_member(:endpoint, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "endpoint"))
     ComputeFarmConfiguration.struct_class = Types::ComputeFarmConfiguration
 
     ConflictException.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "code"))
@@ -310,9 +302,9 @@ module Aws::NimbleStudio
     CreateLaunchProfileResponse.struct_class = Types::CreateLaunchProfileResponse
 
     CreateStreamingImageRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken"=>true}))
-    CreateStreamingImageRequest.add_member(:description, Shapes::ShapeRef.new(shape: SyntheticCreateStreamingImageRequestStreamingImageDescription, location_name: "description"))
+    CreateStreamingImageRequest.add_member(:description, Shapes::ShapeRef.new(shape: StreamingImageDescription, location_name: "description"))
     CreateStreamingImageRequest.add_member(:ec2_image_id, Shapes::ShapeRef.new(shape: EC2ImageId, required: true, location_name: "ec2ImageId"))
-    CreateStreamingImageRequest.add_member(:name, Shapes::ShapeRef.new(shape: SyntheticCreateStreamingImageRequestStreamingImageName, required: true, location_name: "name"))
+    CreateStreamingImageRequest.add_member(:name, Shapes::ShapeRef.new(shape: StreamingImageName, required: true, location_name: "name"))
     CreateStreamingImageRequest.add_member(:studio_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "studioId"))
     CreateStreamingImageRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateStreamingImageRequest.struct_class = Types::CreateStreamingImageRequest
@@ -347,7 +339,9 @@ module Aws::NimbleStudio
     CreateStudioComponentRequest.add_member(:ec2_security_group_ids, Shapes::ShapeRef.new(shape: StudioComponentSecurityGroupIdList, location_name: "ec2SecurityGroupIds"))
     CreateStudioComponentRequest.add_member(:initialization_scripts, Shapes::ShapeRef.new(shape: StudioComponentInitializationScriptList, location_name: "initializationScripts"))
     CreateStudioComponentRequest.add_member(:name, Shapes::ShapeRef.new(shape: StudioComponentName, required: true, location_name: "name"))
+    CreateStudioComponentRequest.add_member(:runtime_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "runtimeRoleArn"))
     CreateStudioComponentRequest.add_member(:script_parameters, Shapes::ShapeRef.new(shape: StudioComponentScriptParameterKeyValueList, location_name: "scriptParameters"))
+    CreateStudioComponentRequest.add_member(:secure_initialization_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "secureInitializationRoleArn"))
     CreateStudioComponentRequest.add_member(:studio_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "studioId"))
     CreateStudioComponentRequest.add_member(:subtype, Shapes::ShapeRef.new(shape: StudioComponentSubtype, location_name: "subtype"))
     CreateStudioComponentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
@@ -357,13 +351,13 @@ module Aws::NimbleStudio
     CreateStudioComponentResponse.add_member(:studio_component, Shapes::ShapeRef.new(shape: StudioComponent, location_name: "studioComponent"))
     CreateStudioComponentResponse.struct_class = Types::CreateStudioComponentResponse
 
-    CreateStudioRequest.add_member(:admin_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "adminRoleArn"))
+    CreateStudioRequest.add_member(:admin_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "adminRoleArn"))
     CreateStudioRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken"=>true}))
-    CreateStudioRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: SyntheticCreateStudioRequestStudioDisplayName, required: true, location_name: "displayName"))
+    CreateStudioRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: StudioDisplayName, required: true, location_name: "displayName"))
     CreateStudioRequest.add_member(:studio_encryption_configuration, Shapes::ShapeRef.new(shape: StudioEncryptionConfiguration, location_name: "studioEncryptionConfiguration"))
     CreateStudioRequest.add_member(:studio_name, Shapes::ShapeRef.new(shape: StudioName, required: true, location_name: "studioName"))
     CreateStudioRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
-    CreateStudioRequest.add_member(:user_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "userRoleArn"))
+    CreateStudioRequest.add_member(:user_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "userRoleArn"))
     CreateStudioRequest.struct_class = Types::CreateStudioRequest
 
     CreateStudioResponse.add_member(:studio, Shapes::ShapeRef.new(shape: Studio, location_name: "studio"))
@@ -574,7 +568,9 @@ module Aws::NimbleStudio
     LaunchProfileInitializationActiveDirectory.add_member(:studio_component_name, Shapes::ShapeRef.new(shape: StudioComponentName, location_name: "studioComponentName"))
     LaunchProfileInitializationActiveDirectory.struct_class = Types::LaunchProfileInitializationActiveDirectory
 
+    LaunchProfileInitializationScript.add_member(:runtime_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "runtimeRoleArn"))
     LaunchProfileInitializationScript.add_member(:script, Shapes::ShapeRef.new(shape: StudioComponentInitializationScriptContent, location_name: "script"))
+    LaunchProfileInitializationScript.add_member(:secure_initialization_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "secureInitializationRoleArn"))
     LaunchProfileInitializationScript.add_member(:studio_component_id, Shapes::ShapeRef.new(shape: StudioComponentId, location_name: "studioComponentId"))
     LaunchProfileInitializationScript.add_member(:studio_component_name, Shapes::ShapeRef.new(shape: StudioComponentName, location_name: "studioComponentName"))
     LaunchProfileInitializationScript.struct_class = Types::LaunchProfileInitializationScript
@@ -599,7 +595,7 @@ module Aws::NimbleStudio
 
     LaunchProfileStudioComponentIdList.member = Shapes::ShapeRef.new(shape: String)
 
-    LicenseServiceConfiguration.add_member(:endpoint, Shapes::ShapeRef.new(shape: SyntheticLicenseServiceConfigurationString, location_name: "endpoint"))
+    LicenseServiceConfiguration.add_member(:endpoint, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "endpoint"))
     LicenseServiceConfiguration.struct_class = Types::LicenseServiceConfiguration
 
     ListEulaAcceptancesRequest.add_member(:eula_ids, Shapes::ShapeRef.new(shape: StringList, location: "querystring", location_name: "eulaIds"))
@@ -736,10 +732,10 @@ module Aws::NimbleStudio
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
-    SharedFileSystemConfiguration.add_member(:endpoint, Shapes::ShapeRef.new(shape: SyntheticSharedFileSystemConfigurationString, location_name: "endpoint"))
+    SharedFileSystemConfiguration.add_member(:endpoint, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "endpoint"))
     SharedFileSystemConfiguration.add_member(:file_system_id, Shapes::ShapeRef.new(shape: String, location_name: "fileSystemId"))
     SharedFileSystemConfiguration.add_member(:linux_mount_point, Shapes::ShapeRef.new(shape: LinuxMountPoint, location_name: "linuxMountPoint"))
-    SharedFileSystemConfiguration.add_member(:share_name, Shapes::ShapeRef.new(shape: SyntheticSharedFileSystemConfigurationString, location_name: "shareName"))
+    SharedFileSystemConfiguration.add_member(:share_name, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "shareName"))
     SharedFileSystemConfiguration.add_member(:windows_mount_drive, Shapes::ShapeRef.new(shape: WindowsMountDrive, location_name: "windowsMountDrive"))
     SharedFileSystemConfiguration.struct_class = Types::SharedFileSystemConfiguration
 
@@ -787,11 +783,11 @@ module Aws::NimbleStudio
     StreamConfigurationSessionStorage.struct_class = Types::StreamConfigurationSessionStorage
 
     StreamingImage.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
-    StreamingImage.add_member(:description, Shapes::ShapeRef.new(shape: SyntheticStreamingImageStreamingImageDescription, location_name: "description"))
+    StreamingImage.add_member(:description, Shapes::ShapeRef.new(shape: StreamingImageDescription, location_name: "description"))
     StreamingImage.add_member(:ec2_image_id, Shapes::ShapeRef.new(shape: EC2ImageId, location_name: "ec2ImageId"))
     StreamingImage.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: StreamingImageEncryptionConfiguration, location_name: "encryptionConfiguration"))
     StreamingImage.add_member(:eula_ids, Shapes::ShapeRef.new(shape: EulaIdList, location_name: "eulaIds"))
-    StreamingImage.add_member(:name, Shapes::ShapeRef.new(shape: SyntheticStreamingImageStreamingImageName, location_name: "name"))
+    StreamingImage.add_member(:name, Shapes::ShapeRef.new(shape: StreamingImageName, location_name: "name"))
     StreamingImage.add_member(:owner, Shapes::ShapeRef.new(shape: StreamingImageOwner, location_name: "owner"))
     StreamingImage.add_member(:platform, Shapes::ShapeRef.new(shape: StreamingImagePlatform, location_name: "platform"))
     StreamingImage.add_member(:state, Shapes::ShapeRef.new(shape: StreamingImageState, location_name: "state"))
@@ -848,15 +844,15 @@ module Aws::NimbleStudio
     StreamingSessionStream.add_member(:state, Shapes::ShapeRef.new(shape: StreamingSessionStreamState, location_name: "state"))
     StreamingSessionStream.add_member(:status_code, Shapes::ShapeRef.new(shape: StreamingSessionStreamStatusCode, location_name: "statusCode"))
     StreamingSessionStream.add_member(:stream_id, Shapes::ShapeRef.new(shape: String, location_name: "streamId"))
-    StreamingSessionStream.add_member(:url, Shapes::ShapeRef.new(shape: SyntheticStreamingSessionStreamString, location_name: "url"))
+    StreamingSessionStream.add_member(:url, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "url"))
     StreamingSessionStream.struct_class = Types::StreamingSessionStream
 
     StringList.member = Shapes::ShapeRef.new(shape: String)
 
-    Studio.add_member(:admin_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "adminRoleArn"))
+    Studio.add_member(:admin_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "adminRoleArn"))
     Studio.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
     Studio.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
-    Studio.add_member(:display_name, Shapes::ShapeRef.new(shape: SyntheticStudioStudioDisplayName, location_name: "displayName"))
+    Studio.add_member(:display_name, Shapes::ShapeRef.new(shape: StudioDisplayName, location_name: "displayName"))
     Studio.add_member(:home_region, Shapes::ShapeRef.new(shape: Region, location_name: "homeRegion"))
     Studio.add_member(:sso_client_id, Shapes::ShapeRef.new(shape: String, location_name: "ssoClientId"))
     Studio.add_member(:state, Shapes::ShapeRef.new(shape: StudioState, location_name: "state"))
@@ -868,7 +864,7 @@ module Aws::NimbleStudio
     Studio.add_member(:studio_url, Shapes::ShapeRef.new(shape: String, location_name: "studioUrl"))
     Studio.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     Studio.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
-    Studio.add_member(:user_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "userRoleArn"))
+    Studio.add_member(:user_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "userRoleArn"))
     Studio.struct_class = Types::Studio
 
     StudioComponent.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
@@ -879,7 +875,9 @@ module Aws::NimbleStudio
     StudioComponent.add_member(:ec2_security_group_ids, Shapes::ShapeRef.new(shape: StudioComponentSecurityGroupIdList, location_name: "ec2SecurityGroupIds"))
     StudioComponent.add_member(:initialization_scripts, Shapes::ShapeRef.new(shape: StudioComponentInitializationScriptList, location_name: "initializationScripts"))
     StudioComponent.add_member(:name, Shapes::ShapeRef.new(shape: StudioComponentName, location_name: "name"))
+    StudioComponent.add_member(:runtime_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "runtimeRoleArn"))
     StudioComponent.add_member(:script_parameters, Shapes::ShapeRef.new(shape: StudioComponentScriptParameterKeyValueList, location_name: "scriptParameters"))
+    StudioComponent.add_member(:secure_initialization_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "secureInitializationRoleArn"))
     StudioComponent.add_member(:state, Shapes::ShapeRef.new(shape: StudioComponentState, location_name: "state"))
     StudioComponent.add_member(:status_code, Shapes::ShapeRef.new(shape: StudioComponentStatusCode, location_name: "statusCode"))
     StudioComponent.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
@@ -992,8 +990,8 @@ module Aws::NimbleStudio
     UpdateLaunchProfileResponse.struct_class = Types::UpdateLaunchProfileResponse
 
     UpdateStreamingImageRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken"=>true}))
-    UpdateStreamingImageRequest.add_member(:description, Shapes::ShapeRef.new(shape: SyntheticUpdateStreamingImageRequestStreamingImageDescription, location_name: "description"))
-    UpdateStreamingImageRequest.add_member(:name, Shapes::ShapeRef.new(shape: SyntheticUpdateStreamingImageRequestStreamingImageName, location_name: "name"))
+    UpdateStreamingImageRequest.add_member(:description, Shapes::ShapeRef.new(shape: StreamingImageDescription, location_name: "description"))
+    UpdateStreamingImageRequest.add_member(:name, Shapes::ShapeRef.new(shape: StreamingImageName, location_name: "name"))
     UpdateStreamingImageRequest.add_member(:streaming_image_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "streamingImageId"))
     UpdateStreamingImageRequest.add_member(:studio_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "studioId"))
     UpdateStreamingImageRequest.struct_class = Types::UpdateStreamingImageRequest
@@ -1007,7 +1005,9 @@ module Aws::NimbleStudio
     UpdateStudioComponentRequest.add_member(:ec2_security_group_ids, Shapes::ShapeRef.new(shape: StudioComponentSecurityGroupIdList, location_name: "ec2SecurityGroupIds"))
     UpdateStudioComponentRequest.add_member(:initialization_scripts, Shapes::ShapeRef.new(shape: StudioComponentInitializationScriptList, location_name: "initializationScripts"))
     UpdateStudioComponentRequest.add_member(:name, Shapes::ShapeRef.new(shape: StudioComponentName, location_name: "name"))
+    UpdateStudioComponentRequest.add_member(:runtime_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "runtimeRoleArn"))
     UpdateStudioComponentRequest.add_member(:script_parameters, Shapes::ShapeRef.new(shape: StudioComponentScriptParameterKeyValueList, location_name: "scriptParameters"))
+    UpdateStudioComponentRequest.add_member(:secure_initialization_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "secureInitializationRoleArn"))
     UpdateStudioComponentRequest.add_member(:studio_component_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "studioComponentId"))
     UpdateStudioComponentRequest.add_member(:studio_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "studioId"))
     UpdateStudioComponentRequest.add_member(:subtype, Shapes::ShapeRef.new(shape: StudioComponentSubtype, location_name: "subtype"))
@@ -1017,11 +1017,11 @@ module Aws::NimbleStudio
     UpdateStudioComponentResponse.add_member(:studio_component, Shapes::ShapeRef.new(shape: StudioComponent, location_name: "studioComponent"))
     UpdateStudioComponentResponse.struct_class = Types::UpdateStudioComponentResponse
 
-    UpdateStudioRequest.add_member(:admin_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "adminRoleArn"))
+    UpdateStudioRequest.add_member(:admin_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "adminRoleArn"))
     UpdateStudioRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken"=>true}))
-    UpdateStudioRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: SyntheticUpdateStudioRequestStudioDisplayName, location_name: "displayName"))
+    UpdateStudioRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: StudioDisplayName, location_name: "displayName"))
     UpdateStudioRequest.add_member(:studio_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "studioId"))
-    UpdateStudioRequest.add_member(:user_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "userRoleArn"))
+    UpdateStudioRequest.add_member(:user_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "userRoleArn"))
     UpdateStudioRequest.struct_class = Types::UpdateStudioRequest
 
     UpdateStudioResponse.add_member(:studio, Shapes::ShapeRef.new(shape: Studio, required: true, location_name: "studio"))

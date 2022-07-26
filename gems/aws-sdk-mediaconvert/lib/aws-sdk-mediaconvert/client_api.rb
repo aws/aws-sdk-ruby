@@ -34,6 +34,7 @@ module Aws::MediaConvert
     AccelerationStatus = Shapes::StringShape.new(name: 'AccelerationStatus')
     AfdSignaling = Shapes::StringShape.new(name: 'AfdSignaling')
     AiffSettings = Shapes::StructureShape.new(name: 'AiffSettings')
+    AllowedRenditionSize = Shapes::StructureShape.new(name: 'AllowedRenditionSize')
     AlphaBehavior = Shapes::StringShape.new(name: 'AlphaBehavior')
     AncillaryConvert608To708 = Shapes::StringShape.new(name: 'AncillaryConvert608To708')
     AncillarySourceSettings = Shapes::StructureShape.new(name: 'AncillarySourceSettings')
@@ -47,6 +48,7 @@ module Aws::MediaConvert
     AudioCodecSettings = Shapes::StructureShape.new(name: 'AudioCodecSettings')
     AudioDefaultSelection = Shapes::StringShape.new(name: 'AudioDefaultSelection')
     AudioDescription = Shapes::StructureShape.new(name: 'AudioDescription')
+    AudioDurationCorrection = Shapes::StringShape.new(name: 'AudioDurationCorrection')
     AudioLanguageCodeControl = Shapes::StringShape.new(name: 'AudioLanguageCodeControl')
     AudioNormalizationAlgorithm = Shapes::StringShape.new(name: 'AudioNormalizationAlgorithm')
     AudioNormalizationAlgorithmControl = Shapes::StringShape.new(name: 'AudioNormalizationAlgorithmControl')
@@ -57,6 +59,7 @@ module Aws::MediaConvert
     AudioSelectorGroup = Shapes::StructureShape.new(name: 'AudioSelectorGroup')
     AudioSelectorType = Shapes::StringShape.new(name: 'AudioSelectorType')
     AudioTypeControl = Shapes::StringShape.new(name: 'AudioTypeControl')
+    AutomatedAbrRule = Shapes::StructureShape.new(name: 'AutomatedAbrRule')
     AutomatedAbrSettings = Shapes::StructureShape.new(name: 'AutomatedAbrSettings')
     AutomatedEncodingSettings = Shapes::StructureShape.new(name: 'AutomatedEncodingSettings')
     Av1AdaptiveQuantization = Shapes::StringShape.new(name: 'Av1AdaptiveQuantization')
@@ -127,6 +130,7 @@ module Aws::MediaConvert
     CmfcAudioTrackType = Shapes::StringShape.new(name: 'CmfcAudioTrackType')
     CmfcDescriptiveVideoServiceFlag = Shapes::StringShape.new(name: 'CmfcDescriptiveVideoServiceFlag')
     CmfcIFrameOnlyManifest = Shapes::StringShape.new(name: 'CmfcIFrameOnlyManifest')
+    CmfcKlvMetadata = Shapes::StringShape.new(name: 'CmfcKlvMetadata')
     CmfcScte35Esam = Shapes::StringShape.new(name: 'CmfcScte35Esam')
     CmfcScte35Source = Shapes::StringShape.new(name: 'CmfcScte35Source')
     CmfcSettings = Shapes::StructureShape.new(name: 'CmfcSettings')
@@ -185,6 +189,7 @@ module Aws::MediaConvert
     DolbyVision = Shapes::StructureShape.new(name: 'DolbyVision')
     DolbyVisionLevel6Metadata = Shapes::StructureShape.new(name: 'DolbyVisionLevel6Metadata')
     DolbyVisionLevel6Mode = Shapes::StringShape.new(name: 'DolbyVisionLevel6Mode')
+    DolbyVisionMapping = Shapes::StringShape.new(name: 'DolbyVisionMapping')
     DolbyVisionProfile = Shapes::StringShape.new(name: 'DolbyVisionProfile')
     DropFrameTimecode = Shapes::StringShape.new(name: 'DropFrameTimecode')
     DvbNitSettings = Shapes::StructureShape.new(name: 'DvbNitSettings')
@@ -233,6 +238,7 @@ module Aws::MediaConvert
     EmbeddedDestinationSettings = Shapes::StructureShape.new(name: 'EmbeddedDestinationSettings')
     EmbeddedSourceSettings = Shapes::StructureShape.new(name: 'EmbeddedSourceSettings')
     EmbeddedTerminateCaptions = Shapes::StringShape.new(name: 'EmbeddedTerminateCaptions')
+    EmbeddedTimecodeOverride = Shapes::StringShape.new(name: 'EmbeddedTimecodeOverride')
     Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
     EsamManifestConfirmConditionNotification = Shapes::StructureShape.new(name: 'EsamManifestConfirmConditionNotification')
     EsamSettings = Shapes::StructureShape.new(name: 'EsamSettings')
@@ -247,6 +253,7 @@ module Aws::MediaConvert
     FileSourceTimeDeltaUnits = Shapes::StringShape.new(name: 'FileSourceTimeDeltaUnits')
     FontScript = Shapes::StringShape.new(name: 'FontScript')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
+    ForceIncludeRenditionSize = Shapes::StructureShape.new(name: 'ForceIncludeRenditionSize')
     FrameCaptureSettings = Shapes::StructureShape.new(name: 'FrameCaptureSettings')
     GetJobRequest = Shapes::StructureShape.new(name: 'GetJobRequest')
     GetJobResponse = Shapes::StructureShape.new(name: 'GetJobResponse')
@@ -320,6 +327,7 @@ module Aws::MediaConvert
     HlsAudioTrackType = Shapes::StringShape.new(name: 'HlsAudioTrackType')
     HlsCaptionLanguageMapping = Shapes::StructureShape.new(name: 'HlsCaptionLanguageMapping')
     HlsCaptionLanguageSetting = Shapes::StringShape.new(name: 'HlsCaptionLanguageSetting')
+    HlsCaptionSegmentLengthControl = Shapes::StringShape.new(name: 'HlsCaptionSegmentLengthControl')
     HlsClientCache = Shapes::StringShape.new(name: 'HlsClientCache')
     HlsCodecSpecification = Shapes::StringShape.new(name: 'HlsCodecSpecification')
     HlsDescriptiveVideoServiceFlag = Shapes::StringShape.new(name: 'HlsDescriptiveVideoServiceFlag')
@@ -364,6 +372,7 @@ module Aws::MediaConvert
     InputScanType = Shapes::StringShape.new(name: 'InputScanType')
     InputTemplate = Shapes::StructureShape.new(name: 'InputTemplate')
     InputTimecodeSource = Shapes::StringShape.new(name: 'InputTimecodeSource')
+    InputVideoGenerator = Shapes::StructureShape.new(name: 'InputVideoGenerator')
     InsertableImage = Shapes::StructureShape.new(name: 'InsertableImage')
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
     Job = Shapes::StructureShape.new(name: 'Job')
@@ -394,6 +403,7 @@ module Aws::MediaConvert
     M2tsEbpPlacement = Shapes::StringShape.new(name: 'M2tsEbpPlacement')
     M2tsEsRateInPes = Shapes::StringShape.new(name: 'M2tsEsRateInPes')
     M2tsForceTsVideoEbpOrder = Shapes::StringShape.new(name: 'M2tsForceTsVideoEbpOrder')
+    M2tsKlvMetadata = Shapes::StringShape.new(name: 'M2tsKlvMetadata')
     M2tsNielsenId3 = Shapes::StringShape.new(name: 'M2tsNielsenId3')
     M2tsPcrControl = Shapes::StringShape.new(name: 'M2tsPcrControl')
     M2tsRateMode = Shapes::StringShape.new(name: 'M2tsRateMode')
@@ -408,6 +418,8 @@ module Aws::MediaConvert
     M3u8PcrControl = Shapes::StringShape.new(name: 'M3u8PcrControl')
     M3u8Scte35Source = Shapes::StringShape.new(name: 'M3u8Scte35Source')
     M3u8Settings = Shapes::StructureShape.new(name: 'M3u8Settings')
+    MinBottomRenditionSize = Shapes::StructureShape.new(name: 'MinBottomRenditionSize')
+    MinTopRenditionSize = Shapes::StructureShape.new(name: 'MinTopRenditionSize')
     MotionImageInserter = Shapes::StructureShape.new(name: 'MotionImageInserter')
     MotionImageInsertionFramerate = Shapes::StructureShape.new(name: 'MotionImageInsertionFramerate')
     MotionImageInsertionMode = Shapes::StringShape.new(name: 'MotionImageInsertionMode')
@@ -429,6 +441,7 @@ module Aws::MediaConvert
     MpdAccessibilityCaptionHints = Shapes::StringShape.new(name: 'MpdAccessibilityCaptionHints')
     MpdAudioDuration = Shapes::StringShape.new(name: 'MpdAudioDuration')
     MpdCaptionContainerType = Shapes::StringShape.new(name: 'MpdCaptionContainerType')
+    MpdKlvMetadata = Shapes::StringShape.new(name: 'MpdKlvMetadata')
     MpdScte35Esam = Shapes::StringShape.new(name: 'MpdScte35Esam')
     MpdScte35Source = Shapes::StringShape.new(name: 'MpdScte35Source')
     MpdSettings = Shapes::StructureShape.new(name: 'MpdSettings')
@@ -489,6 +502,7 @@ module Aws::MediaConvert
     OutputGroupType = Shapes::StringShape.new(name: 'OutputGroupType')
     OutputSdt = Shapes::StringShape.new(name: 'OutputSdt')
     OutputSettings = Shapes::StructureShape.new(name: 'OutputSettings')
+    PadVideo = Shapes::StringShape.new(name: 'PadVideo')
     PartnerWatermarking = Shapes::StructureShape.new(name: 'PartnerWatermarking')
     Policy = Shapes::StructureShape.new(name: 'Policy')
     Preset = Shapes::StructureShape.new(name: 'Preset')
@@ -514,11 +528,13 @@ module Aws::MediaConvert
     Rectangle = Shapes::StructureShape.new(name: 'Rectangle')
     RemixSettings = Shapes::StructureShape.new(name: 'RemixSettings')
     RenewalType = Shapes::StringShape.new(name: 'RenewalType')
+    RequiredFlag = Shapes::StringShape.new(name: 'RequiredFlag')
     ReservationPlan = Shapes::StructureShape.new(name: 'ReservationPlan')
     ReservationPlanSettings = Shapes::StructureShape.new(name: 'ReservationPlanSettings')
     ReservationPlanStatus = Shapes::StringShape.new(name: 'ReservationPlanStatus')
     ResourceTags = Shapes::StructureShape.new(name: 'ResourceTags')
     RespondToAfd = Shapes::StringShape.new(name: 'RespondToAfd')
+    RuleType = Shapes::StringShape.new(name: 'RuleType')
     S3DestinationAccessControl = Shapes::StructureShape.new(name: 'S3DestinationAccessControl')
     S3DestinationSettings = Shapes::StructureShape.new(name: 'S3DestinationSettings')
     S3EncryptionSettings = Shapes::StructureShape.new(name: 'S3EncryptionSettings')
@@ -708,6 +724,7 @@ module Aws::MediaConvert
     __integerMin3Max15 = Shapes::IntegerShape.new(name: '__integerMin3Max15')
     __integerMin48000Max48000 = Shapes::IntegerShape.new(name: '__integerMin48000Max48000')
     __integerMin4Max12 = Shapes::IntegerShape.new(name: '__integerMin4Max12')
+    __integerMin50Max86400000 = Shapes::IntegerShape.new(name: '__integerMin50Max86400000')
     __integerMin6000Max1024000 = Shapes::IntegerShape.new(name: '__integerMin6000Max1024000')
     __integerMin64000Max640000 = Shapes::IntegerShape.new(name: '__integerMin64000Max640000')
     __integerMin8000Max192000 = Shapes::IntegerShape.new(name: '__integerMin8000Max192000')
@@ -725,12 +742,15 @@ module Aws::MediaConvert
     __integerMinNegative5Max5 = Shapes::IntegerShape.new(name: '__integerMinNegative5Max5')
     __integerMinNegative60Max6 = Shapes::IntegerShape.new(name: '__integerMinNegative60Max6')
     __integerMinNegative70Max0 = Shapes::IntegerShape.new(name: '__integerMinNegative70Max0')
+    __listOfAllowedRenditionSize = Shapes::ListShape.new(name: '__listOfAllowedRenditionSize')
     __listOfAudioDescription = Shapes::ListShape.new(name: '__listOfAudioDescription')
+    __listOfAutomatedAbrRule = Shapes::ListShape.new(name: '__listOfAutomatedAbrRule')
     __listOfCaptionDescription = Shapes::ListShape.new(name: '__listOfCaptionDescription')
     __listOfCaptionDescriptionPreset = Shapes::ListShape.new(name: '__listOfCaptionDescriptionPreset')
     __listOfCmafAdditionalManifest = Shapes::ListShape.new(name: '__listOfCmafAdditionalManifest')
     __listOfDashAdditionalManifest = Shapes::ListShape.new(name: '__listOfDashAdditionalManifest')
     __listOfEndpoint = Shapes::ListShape.new(name: '__listOfEndpoint')
+    __listOfForceIncludeRenditionSize = Shapes::ListShape.new(name: '__listOfForceIncludeRenditionSize')
     __listOfHlsAdMarkers = Shapes::ListShape.new(name: '__listOfHlsAdMarkers')
     __listOfHlsAdditionalManifest = Shapes::ListShape.new(name: '__listOfHlsAdditionalManifest')
     __listOfHlsCaptionLanguageMapping = Shapes::ListShape.new(name: '__listOfHlsCaptionLanguageMapping')
@@ -845,6 +865,11 @@ module Aws::MediaConvert
     AiffSettings.add_member(:sample_rate, Shapes::ShapeRef.new(shape: __integerMin8000Max192000, location_name: "sampleRate"))
     AiffSettings.struct_class = Types::AiffSettings
 
+    AllowedRenditionSize.add_member(:height, Shapes::ShapeRef.new(shape: __integerMin32Max8192, location_name: "height"))
+    AllowedRenditionSize.add_member(:required, Shapes::ShapeRef.new(shape: RequiredFlag, location_name: "required"))
+    AllowedRenditionSize.add_member(:width, Shapes::ShapeRef.new(shape: __integerMin32Max8192, location_name: "width"))
+    AllowedRenditionSize.struct_class = Types::AllowedRenditionSize
+
     AncillarySourceSettings.add_member(:convert_608_to_708, Shapes::ShapeRef.new(shape: AncillaryConvert608To708, location_name: "convert608To708"))
     AncillarySourceSettings.add_member(:source_ancillary_channel_number, Shapes::ShapeRef.new(shape: __integerMin1Max4, location_name: "sourceAncillaryChannelNumber"))
     AncillarySourceSettings.add_member(:terminate_captions, Shapes::ShapeRef.new(shape: AncillaryTerminateCaptions, location_name: "terminateCaptions"))
@@ -892,6 +917,7 @@ module Aws::MediaConvert
     AudioNormalizationSettings.add_member(:target_lkfs, Shapes::ShapeRef.new(shape: __doubleMinNegative59Max0, location_name: "targetLkfs"))
     AudioNormalizationSettings.struct_class = Types::AudioNormalizationSettings
 
+    AudioSelector.add_member(:audio_duration_correction, Shapes::ShapeRef.new(shape: AudioDurationCorrection, location_name: "audioDurationCorrection"))
     AudioSelector.add_member(:custom_language_code, Shapes::ShapeRef.new(shape: __stringMin3Max3PatternAZaZ3, location_name: "customLanguageCode"))
     AudioSelector.add_member(:default_selection, Shapes::ShapeRef.new(shape: AudioDefaultSelection, location_name: "defaultSelection"))
     AudioSelector.add_member(:external_audio_file_input, Shapes::ShapeRef.new(shape: __stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSOOGGGGaAHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSOOGGGGaA, location_name: "externalAudioFileInput"))
@@ -908,9 +934,17 @@ module Aws::MediaConvert
     AudioSelectorGroup.add_member(:audio_selector_names, Shapes::ShapeRef.new(shape: __listOf__stringMin1, location_name: "audioSelectorNames"))
     AudioSelectorGroup.struct_class = Types::AudioSelectorGroup
 
+    AutomatedAbrRule.add_member(:allowed_renditions, Shapes::ShapeRef.new(shape: __listOfAllowedRenditionSize, location_name: "allowedRenditions"))
+    AutomatedAbrRule.add_member(:force_include_renditions, Shapes::ShapeRef.new(shape: __listOfForceIncludeRenditionSize, location_name: "forceIncludeRenditions"))
+    AutomatedAbrRule.add_member(:min_bottom_rendition_size, Shapes::ShapeRef.new(shape: MinBottomRenditionSize, location_name: "minBottomRenditionSize"))
+    AutomatedAbrRule.add_member(:min_top_rendition_size, Shapes::ShapeRef.new(shape: MinTopRenditionSize, location_name: "minTopRenditionSize"))
+    AutomatedAbrRule.add_member(:type, Shapes::ShapeRef.new(shape: RuleType, location_name: "type"))
+    AutomatedAbrRule.struct_class = Types::AutomatedAbrRule
+
     AutomatedAbrSettings.add_member(:max_abr_bitrate, Shapes::ShapeRef.new(shape: __integerMin100000Max100000000, location_name: "maxAbrBitrate"))
     AutomatedAbrSettings.add_member(:max_renditions, Shapes::ShapeRef.new(shape: __integerMin3Max15, location_name: "maxRenditions"))
     AutomatedAbrSettings.add_member(:min_abr_bitrate, Shapes::ShapeRef.new(shape: __integerMin100000Max100000000, location_name: "minAbrBitrate"))
+    AutomatedAbrSettings.add_member(:rules, Shapes::ShapeRef.new(shape: __listOfAutomatedAbrRule, location_name: "rules"))
     AutomatedAbrSettings.struct_class = Types::AutomatedAbrSettings
 
     AutomatedEncodingSettings.add_member(:abr_settings, Shapes::ShapeRef.new(shape: AutomatedAbrSettings, location_name: "abrSettings"))
@@ -1083,6 +1117,7 @@ module Aws::MediaConvert
     CmfcSettings.add_member(:audio_track_type, Shapes::ShapeRef.new(shape: CmfcAudioTrackType, location_name: "audioTrackType"))
     CmfcSettings.add_member(:descriptive_video_service_flag, Shapes::ShapeRef.new(shape: CmfcDescriptiveVideoServiceFlag, location_name: "descriptiveVideoServiceFlag"))
     CmfcSettings.add_member(:i_frame_only_manifest, Shapes::ShapeRef.new(shape: CmfcIFrameOnlyManifest, location_name: "iFrameOnlyManifest"))
+    CmfcSettings.add_member(:klv_metadata, Shapes::ShapeRef.new(shape: CmfcKlvMetadata, location_name: "klvMetadata"))
     CmfcSettings.add_member(:scte_35_esam, Shapes::ShapeRef.new(shape: CmfcScte35Esam, location_name: "scte35Esam"))
     CmfcSettings.add_member(:scte_35_source, Shapes::ShapeRef.new(shape: CmfcScte35Source, location_name: "scte35Source"))
     CmfcSettings.add_member(:timed_metadata, Shapes::ShapeRef.new(shape: CmfcTimedMetadata, location_name: "timedMetadata"))
@@ -1244,6 +1279,7 @@ module Aws::MediaConvert
 
     DolbyVision.add_member(:l6_metadata, Shapes::ShapeRef.new(shape: DolbyVisionLevel6Metadata, location_name: "l6Metadata"))
     DolbyVision.add_member(:l6_mode, Shapes::ShapeRef.new(shape: DolbyVisionLevel6Mode, location_name: "l6Mode"))
+    DolbyVision.add_member(:mapping, Shapes::ShapeRef.new(shape: DolbyVisionMapping, location_name: "mapping"))
     DolbyVision.add_member(:profile, Shapes::ShapeRef.new(shape: DolbyVisionProfile, location_name: "profile"))
     DolbyVision.struct_class = Types::DolbyVision
 
@@ -1386,6 +1422,10 @@ module Aws::MediaConvert
 
     ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     ForbiddenException.struct_class = Types::ForbiddenException
+
+    ForceIncludeRenditionSize.add_member(:height, Shapes::ShapeRef.new(shape: __integerMin32Max8192, location_name: "height"))
+    ForceIncludeRenditionSize.add_member(:width, Shapes::ShapeRef.new(shape: __integerMin32Max8192, location_name: "width"))
+    ForceIncludeRenditionSize.struct_class = Types::ForceIncludeRenditionSize
 
     FrameCaptureSettings.add_member(:framerate_denominator, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, location_name: "framerateDenominator"))
     FrameCaptureSettings.add_member(:framerate_numerator, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, location_name: "framerateNumerator"))
@@ -1559,6 +1599,7 @@ module Aws::MediaConvert
     HlsGroupSettings.add_member(:base_url, Shapes::ShapeRef.new(shape: __string, location_name: "baseUrl"))
     HlsGroupSettings.add_member(:caption_language_mappings, Shapes::ShapeRef.new(shape: __listOfHlsCaptionLanguageMapping, location_name: "captionLanguageMappings"))
     HlsGroupSettings.add_member(:caption_language_setting, Shapes::ShapeRef.new(shape: HlsCaptionLanguageSetting, location_name: "captionLanguageSetting"))
+    HlsGroupSettings.add_member(:caption_segment_length_control, Shapes::ShapeRef.new(shape: HlsCaptionSegmentLengthControl, location_name: "captionSegmentLengthControl"))
     HlsGroupSettings.add_member(:client_cache, Shapes::ShapeRef.new(shape: HlsClientCache, location_name: "clientCache"))
     HlsGroupSettings.add_member(:codec_specification, Shapes::ShapeRef.new(shape: HlsCodecSpecification, location_name: "codecSpecification"))
     HlsGroupSettings.add_member(:destination, Shapes::ShapeRef.new(shape: __stringPatternS3, location_name: "destination"))
@@ -1643,6 +1684,7 @@ module Aws::MediaConvert
     Input.add_member(:supplemental_imps, Shapes::ShapeRef.new(shape: __listOf__stringPatternS3ASSETMAPXml, location_name: "supplementalImps"))
     Input.add_member(:timecode_source, Shapes::ShapeRef.new(shape: InputTimecodeSource, location_name: "timecodeSource"))
     Input.add_member(:timecode_start, Shapes::ShapeRef.new(shape: __stringMin11Max11Pattern01D20305D205D, location_name: "timecodeStart"))
+    Input.add_member(:video_generator, Shapes::ShapeRef.new(shape: InputVideoGenerator, location_name: "videoGenerator"))
     Input.add_member(:video_selector, Shapes::ShapeRef.new(shape: VideoSelector, location_name: "videoSelector"))
     Input.struct_class = Types::Input
 
@@ -1675,6 +1717,9 @@ module Aws::MediaConvert
     InputTemplate.add_member(:timecode_start, Shapes::ShapeRef.new(shape: __stringMin11Max11Pattern01D20305D205D, location_name: "timecodeStart"))
     InputTemplate.add_member(:video_selector, Shapes::ShapeRef.new(shape: VideoSelector, location_name: "videoSelector"))
     InputTemplate.struct_class = Types::InputTemplate
+
+    InputVideoGenerator.add_member(:duration, Shapes::ShapeRef.new(shape: __integerMin50Max86400000, location_name: "duration"))
+    InputVideoGenerator.struct_class = Types::InputVideoGenerator
 
     InsertableImage.add_member(:duration, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "duration"))
     InsertableImage.add_member(:fade_in, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "fadeIn"))
@@ -1850,6 +1895,7 @@ module Aws::MediaConvert
     M2tsSettings.add_member(:es_rate_in_pes, Shapes::ShapeRef.new(shape: M2tsEsRateInPes, location_name: "esRateInPes"))
     M2tsSettings.add_member(:force_ts_video_ebp_order, Shapes::ShapeRef.new(shape: M2tsForceTsVideoEbpOrder, location_name: "forceTsVideoEbpOrder"))
     M2tsSettings.add_member(:fragment_time, Shapes::ShapeRef.new(shape: __doubleMin0, location_name: "fragmentTime"))
+    M2tsSettings.add_member(:klv_metadata, Shapes::ShapeRef.new(shape: M2tsKlvMetadata, location_name: "klvMetadata"))
     M2tsSettings.add_member(:max_pcr_interval, Shapes::ShapeRef.new(shape: __integerMin0Max500, location_name: "maxPcrInterval"))
     M2tsSettings.add_member(:min_ebp_interval, Shapes::ShapeRef.new(shape: __integerMin0Max10000, location_name: "minEbpInterval"))
     M2tsSettings.add_member(:nielsen_id_3, Shapes::ShapeRef.new(shape: M2tsNielsenId3, location_name: "nielsenId3"))
@@ -1893,6 +1939,14 @@ module Aws::MediaConvert
     M3u8Settings.add_member(:transport_stream_id, Shapes::ShapeRef.new(shape: __integerMin0Max65535, location_name: "transportStreamId"))
     M3u8Settings.add_member(:video_pid, Shapes::ShapeRef.new(shape: __integerMin32Max8182, location_name: "videoPid"))
     M3u8Settings.struct_class = Types::M3u8Settings
+
+    MinBottomRenditionSize.add_member(:height, Shapes::ShapeRef.new(shape: __integerMin32Max8192, location_name: "height"))
+    MinBottomRenditionSize.add_member(:width, Shapes::ShapeRef.new(shape: __integerMin32Max8192, location_name: "width"))
+    MinBottomRenditionSize.struct_class = Types::MinBottomRenditionSize
+
+    MinTopRenditionSize.add_member(:height, Shapes::ShapeRef.new(shape: __integerMin32Max8192, location_name: "height"))
+    MinTopRenditionSize.add_member(:width, Shapes::ShapeRef.new(shape: __integerMin32Max8192, location_name: "width"))
+    MinTopRenditionSize.struct_class = Types::MinTopRenditionSize
 
     MotionImageInserter.add_member(:framerate, Shapes::ShapeRef.new(shape: MotionImageInsertionFramerate, location_name: "framerate"))
     MotionImageInserter.add_member(:input, Shapes::ShapeRef.new(shape: __stringMin14PatternS3Mov09PngHttpsMov09Png, location_name: "input"))
@@ -1940,6 +1994,7 @@ module Aws::MediaConvert
     MpdSettings.add_member(:accessibility_caption_hints, Shapes::ShapeRef.new(shape: MpdAccessibilityCaptionHints, location_name: "accessibilityCaptionHints"))
     MpdSettings.add_member(:audio_duration, Shapes::ShapeRef.new(shape: MpdAudioDuration, location_name: "audioDuration"))
     MpdSettings.add_member(:caption_container_type, Shapes::ShapeRef.new(shape: MpdCaptionContainerType, location_name: "captionContainerType"))
+    MpdSettings.add_member(:klv_metadata, Shapes::ShapeRef.new(shape: MpdKlvMetadata, location_name: "klvMetadata"))
     MpdSettings.add_member(:scte_35_esam, Shapes::ShapeRef.new(shape: MpdScte35Esam, location_name: "scte35Esam"))
     MpdSettings.add_member(:scte_35_source, Shapes::ShapeRef.new(shape: MpdScte35Source, location_name: "scte35Source"))
     MpdSettings.add_member(:timed_metadata, Shapes::ShapeRef.new(shape: MpdTimedMetadata, location_name: "timedMetadata"))
@@ -2362,7 +2417,9 @@ module Aws::MediaConvert
     VideoSelector.add_member(:alpha_behavior, Shapes::ShapeRef.new(shape: AlphaBehavior, location_name: "alphaBehavior"))
     VideoSelector.add_member(:color_space, Shapes::ShapeRef.new(shape: ColorSpace, location_name: "colorSpace"))
     VideoSelector.add_member(:color_space_usage, Shapes::ShapeRef.new(shape: ColorSpaceUsage, location_name: "colorSpaceUsage"))
+    VideoSelector.add_member(:embedded_timecode_override, Shapes::ShapeRef.new(shape: EmbeddedTimecodeOverride, location_name: "embeddedTimecodeOverride"))
     VideoSelector.add_member(:hdr_10_metadata, Shapes::ShapeRef.new(shape: Hdr10Metadata, location_name: "hdr10Metadata"))
+    VideoSelector.add_member(:pad_video, Shapes::ShapeRef.new(shape: PadVideo, location_name: "padVideo"))
     VideoSelector.add_member(:pid, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, location_name: "pid"))
     VideoSelector.add_member(:program_number, Shapes::ShapeRef.new(shape: __integerMinNegative2147483648Max2147483647, location_name: "programNumber"))
     VideoSelector.add_member(:rotate, Shapes::ShapeRef.new(shape: InputRotate, location_name: "rotate"))
@@ -2467,7 +2524,11 @@ module Aws::MediaConvert
     XavcSettings.add_member(:xavc_hd_profile_settings, Shapes::ShapeRef.new(shape: XavcHdProfileSettings, location_name: "xavcHdProfileSettings"))
     XavcSettings.struct_class = Types::XavcSettings
 
+    __listOfAllowedRenditionSize.member = Shapes::ShapeRef.new(shape: AllowedRenditionSize)
+
     __listOfAudioDescription.member = Shapes::ShapeRef.new(shape: AudioDescription)
+
+    __listOfAutomatedAbrRule.member = Shapes::ShapeRef.new(shape: AutomatedAbrRule)
 
     __listOfCaptionDescription.member = Shapes::ShapeRef.new(shape: CaptionDescription)
 
@@ -2478,6 +2539,8 @@ module Aws::MediaConvert
     __listOfDashAdditionalManifest.member = Shapes::ShapeRef.new(shape: DashAdditionalManifest)
 
     __listOfEndpoint.member = Shapes::ShapeRef.new(shape: Endpoint)
+
+    __listOfForceIncludeRenditionSize.member = Shapes::ShapeRef.new(shape: ForceIncludeRenditionSize)
 
     __listOfHlsAdMarkers.member = Shapes::ShapeRef.new(shape: HlsAdMarkers)
 

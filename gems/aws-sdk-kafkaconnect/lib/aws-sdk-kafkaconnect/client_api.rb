@@ -44,6 +44,8 @@ module Aws::KafkaConnect
     CustomPluginSummary = Shapes::StructureShape.new(name: 'CustomPluginSummary')
     DeleteConnectorRequest = Shapes::StructureShape.new(name: 'DeleteConnectorRequest')
     DeleteConnectorResponse = Shapes::StructureShape.new(name: 'DeleteConnectorResponse')
+    DeleteCustomPluginRequest = Shapes::StructureShape.new(name: 'DeleteCustomPluginRequest')
+    DeleteCustomPluginResponse = Shapes::StructureShape.new(name: 'DeleteCustomPluginResponse')
     DescribeConnectorRequest = Shapes::StructureShape.new(name: 'DescribeConnectorRequest')
     DescribeConnectorResponse = Shapes::StructureShape.new(name: 'DescribeConnectorResponse')
     DescribeCustomPluginRequest = Shapes::StructureShape.new(name: 'DescribeCustomPluginRequest')
@@ -88,6 +90,11 @@ module Aws::KafkaConnect
     ScaleOutPolicyDescription = Shapes::StructureShape.new(name: 'ScaleOutPolicyDescription')
     ScaleOutPolicyUpdate = Shapes::StructureShape.new(name: 'ScaleOutPolicyUpdate')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
+    StateDescription = Shapes::StructureShape.new(name: 'StateDescription')
+    SyntheticCreateConnectorRequest__mapOf__string = Shapes::MapShape.new(name: 'SyntheticCreateConnectorRequest__mapOf__string')
+    SyntheticCreateWorkerConfigurationRequest__string = Shapes::StringShape.new(name: 'SyntheticCreateWorkerConfigurationRequest__string')
+    SyntheticDescribeConnectorResponse__mapOf__string = Shapes::MapShape.new(name: 'SyntheticDescribeConnectorResponse__mapOf__string')
+    SyntheticWorkerConfigurationRevisionDescription__string = Shapes::StringShape.new(name: 'SyntheticWorkerConfigurationRevisionDescription__string')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     UnauthorizedException = Shapes::StructureShape.new(name: 'UnauthorizedException')
     UpdateConnectorRequest = Shapes::StructureShape.new(name: 'UpdateConnectorRequest')
@@ -114,7 +121,6 @@ module Aws::KafkaConnect
     __listOf__string = Shapes::ListShape.new(name: '__listOf__string')
     __long = Shapes::IntegerShape.new(name: '__long')
     __longMin1 = Shapes::IntegerShape.new(name: '__longMin1')
-    __mapOf__string = Shapes::MapShape.new(name: '__mapOf__string')
     __string = Shapes::StringShape.new(name: '__string')
     __stringMax1024 = Shapes::StringShape.new(name: '__stringMax1024')
     __stringMin1Max128 = Shapes::StringShape.new(name: '__stringMin1Max128')
@@ -193,7 +199,7 @@ module Aws::KafkaConnect
     ConnectorSummary.struct_class = Types::ConnectorSummary
 
     CreateConnectorRequest.add_member(:capacity, Shapes::ShapeRef.new(shape: Capacity, required: true, location_name: "capacity"))
-    CreateConnectorRequest.add_member(:connector_configuration, Shapes::ShapeRef.new(shape: __mapOf__string, required: true, location_name: "connectorConfiguration"))
+    CreateConnectorRequest.add_member(:connector_configuration, Shapes::ShapeRef.new(shape: SyntheticCreateConnectorRequest__mapOf__string, required: true, location_name: "connectorConfiguration"))
     CreateConnectorRequest.add_member(:connector_description, Shapes::ShapeRef.new(shape: __stringMax1024, location_name: "connectorDescription"))
     CreateConnectorRequest.add_member(:connector_name, Shapes::ShapeRef.new(shape: __stringMin1Max128, required: true, location_name: "connectorName"))
     CreateConnectorRequest.add_member(:kafka_cluster, Shapes::ShapeRef.new(shape: KafkaCluster, required: true, location_name: "kafkaCluster"))
@@ -225,7 +231,7 @@ module Aws::KafkaConnect
 
     CreateWorkerConfigurationRequest.add_member(:description, Shapes::ShapeRef.new(shape: __stringMax1024, location_name: "description"))
     CreateWorkerConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max128, required: true, location_name: "name"))
-    CreateWorkerConfigurationRequest.add_member(:properties_file_content, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "propertiesFileContent"))
+    CreateWorkerConfigurationRequest.add_member(:properties_file_content, Shapes::ShapeRef.new(shape: SyntheticCreateWorkerConfigurationRequest__string, required: true, location_name: "propertiesFileContent"))
     CreateWorkerConfigurationRequest.struct_class = Types::CreateWorkerConfigurationRequest
 
     CreateWorkerConfigurationResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "creationTime"))
@@ -276,12 +282,19 @@ module Aws::KafkaConnect
     DeleteConnectorResponse.add_member(:connector_state, Shapes::ShapeRef.new(shape: ConnectorState, location_name: "connectorState"))
     DeleteConnectorResponse.struct_class = Types::DeleteConnectorResponse
 
+    DeleteCustomPluginRequest.add_member(:custom_plugin_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "customPluginArn"))
+    DeleteCustomPluginRequest.struct_class = Types::DeleteCustomPluginRequest
+
+    DeleteCustomPluginResponse.add_member(:custom_plugin_arn, Shapes::ShapeRef.new(shape: __string, location_name: "customPluginArn"))
+    DeleteCustomPluginResponse.add_member(:custom_plugin_state, Shapes::ShapeRef.new(shape: CustomPluginState, location_name: "customPluginState"))
+    DeleteCustomPluginResponse.struct_class = Types::DeleteCustomPluginResponse
+
     DescribeConnectorRequest.add_member(:connector_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "connectorArn"))
     DescribeConnectorRequest.struct_class = Types::DescribeConnectorRequest
 
     DescribeConnectorResponse.add_member(:capacity, Shapes::ShapeRef.new(shape: CapacityDescription, location_name: "capacity"))
     DescribeConnectorResponse.add_member(:connector_arn, Shapes::ShapeRef.new(shape: __string, location_name: "connectorArn"))
-    DescribeConnectorResponse.add_member(:connector_configuration, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "connectorConfiguration"))
+    DescribeConnectorResponse.add_member(:connector_configuration, Shapes::ShapeRef.new(shape: SyntheticDescribeConnectorResponse__mapOf__string, location_name: "connectorConfiguration"))
     DescribeConnectorResponse.add_member(:connector_description, Shapes::ShapeRef.new(shape: __string, location_name: "connectorDescription"))
     DescribeConnectorResponse.add_member(:connector_name, Shapes::ShapeRef.new(shape: __string, location_name: "connectorName"))
     DescribeConnectorResponse.add_member(:connector_state, Shapes::ShapeRef.new(shape: ConnectorState, location_name: "connectorState"))
@@ -294,6 +307,7 @@ module Aws::KafkaConnect
     DescribeConnectorResponse.add_member(:log_delivery, Shapes::ShapeRef.new(shape: LogDeliveryDescription, location_name: "logDelivery"))
     DescribeConnectorResponse.add_member(:plugins, Shapes::ShapeRef.new(shape: __listOfPluginDescription, location_name: "plugins"))
     DescribeConnectorResponse.add_member(:service_execution_role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "serviceExecutionRoleArn"))
+    DescribeConnectorResponse.add_member(:state_description, Shapes::ShapeRef.new(shape: StateDescription, location_name: "stateDescription"))
     DescribeConnectorResponse.add_member(:worker_configuration, Shapes::ShapeRef.new(shape: WorkerConfigurationDescription, location_name: "workerConfiguration"))
     DescribeConnectorResponse.struct_class = Types::DescribeConnectorResponse
 
@@ -306,6 +320,7 @@ module Aws::KafkaConnect
     DescribeCustomPluginResponse.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     DescribeCustomPluginResponse.add_member(:latest_revision, Shapes::ShapeRef.new(shape: CustomPluginRevisionSummary, location_name: "latestRevision"))
     DescribeCustomPluginResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    DescribeCustomPluginResponse.add_member(:state_description, Shapes::ShapeRef.new(shape: StateDescription, location_name: "stateDescription"))
     DescribeCustomPluginResponse.struct_class = Types::DescribeCustomPluginResponse
 
     DescribeWorkerConfigurationRequest.add_member(:worker_configuration_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "workerConfigurationArn"))
@@ -443,6 +458,16 @@ module Aws::KafkaConnect
     ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
 
+    StateDescription.add_member(:code, Shapes::ShapeRef.new(shape: __string, location_name: "code"))
+    StateDescription.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    StateDescription.struct_class = Types::StateDescription
+
+    SyntheticCreateConnectorRequest__mapOf__string.key = Shapes::ShapeRef.new(shape: __string)
+    SyntheticCreateConnectorRequest__mapOf__string.value = Shapes::ShapeRef.new(shape: __string)
+
+    SyntheticDescribeConnectorResponse__mapOf__string.key = Shapes::ShapeRef.new(shape: __string)
+    SyntheticDescribeConnectorResponse__mapOf__string.value = Shapes::ShapeRef.new(shape: __string)
+
     TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     TooManyRequestsException.struct_class = Types::TooManyRequestsException
 
@@ -476,7 +501,7 @@ module Aws::KafkaConnect
 
     WorkerConfigurationRevisionDescription.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "creationTime"))
     WorkerConfigurationRevisionDescription.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
-    WorkerConfigurationRevisionDescription.add_member(:properties_file_content, Shapes::ShapeRef.new(shape: __string, location_name: "propertiesFileContent"))
+    WorkerConfigurationRevisionDescription.add_member(:properties_file_content, Shapes::ShapeRef.new(shape: SyntheticWorkerConfigurationRevisionDescription__string, location_name: "propertiesFileContent"))
     WorkerConfigurationRevisionDescription.add_member(:revision, Shapes::ShapeRef.new(shape: __long, location_name: "revision"))
     WorkerConfigurationRevisionDescription.struct_class = Types::WorkerConfigurationRevisionDescription
 
@@ -513,9 +538,6 @@ module Aws::KafkaConnect
     __listOfWorkerConfigurationSummary.member = Shapes::ShapeRef.new(shape: WorkerConfigurationSummary)
 
     __listOf__string.member = Shapes::ShapeRef.new(shape: __string)
-
-    __mapOf__string.key = Shapes::ShapeRef.new(shape: __string)
-    __mapOf__string.value = Shapes::ShapeRef.new(shape: __string)
 
 
     # @api private
@@ -590,6 +612,21 @@ module Aws::KafkaConnect
         o.http_request_uri = "/v1/connectors/{connectorArn}"
         o.input = Shapes::ShapeRef.new(shape: DeleteConnectorRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteConnectorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
+      api.add_operation(:delete_custom_plugin, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteCustomPlugin"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/custom-plugins/{customPluginArn}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteCustomPluginRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteCustomPluginResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)

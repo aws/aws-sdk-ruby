@@ -101,25 +101,80 @@ module Aws::Mgn
     # @!attribute [rw] code
     #   @return [String]
     #
+    # @!attribute [rw] errors
+    #   Conflict Exception specific errors.
+    #   @return [Array<Types::ErrorDetails>]
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   A conflict occured when prompting for the Resource ID.
+    #   A conflict occurred when prompting for the Resource ID.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   A conflict occured when prompting for resource type.
+    #   A conflict occurred when prompting for resource type.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ConflictException AWS API Documentation
     #
     class ConflictException < Struct.new(
       :code,
+      :errors,
       :message,
       :resource_id,
       :resource_type)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateLaunchConfigurationTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         post_launch_actions: {
+    #           cloud_watch_log_group_name: "CloudWatchLogGroupName",
+    #           deployment: "TEST_AND_CUTOVER", # accepts TEST_AND_CUTOVER, CUTOVER_ONLY
+    #           s3_log_bucket: "S3LogBucketName",
+    #           s3_output_key_prefix: "BoundedString",
+    #           ssm_documents: [
+    #             {
+    #               action_name: "BoundedString", # required
+    #               must_succeed_for_cutover: false,
+    #               parameters: {
+    #                 "SsmDocumentParameterName" => [
+    #                   {
+    #                     parameter_name: "SsmParameterStoreParameterName", # required
+    #                     parameter_type: "STRING", # required, accepts STRING
+    #                   },
+    #                 ],
+    #               },
+    #               ssm_document_name: "SsmDocumentName", # required
+    #               timeout_seconds: 1,
+    #             },
+    #           ],
+    #         },
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] post_launch_actions
+    #   Request to associate the default Application Migration Service
+    #   Security group with the Replication Settings template.
+    #   @return [Types::PostLaunchActions]
+    #
+    # @!attribute [rw] tags
+    #   Request to associate the default Application Migration Service
+    #   Security group with the Replication Settings template.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/CreateLaunchConfigurationTemplateRequest AWS API Documentation
+    #
+    class CreateLaunchConfigurationTemplateRequest < Struct.new(
+      :post_launch_actions,
+      :tags)
+      SENSITIVE = [:tags]
       include Aws::Structure
     end
 
@@ -131,7 +186,7 @@ module Aws::Mgn
     #         bandwidth_throttling: 1, # required
     #         create_public_ip: false, # required
     #         data_plane_routing: "PRIVATE_IP", # required, accepts PRIVATE_IP, PUBLIC_IP
-    #         default_large_staging_disk_type: "GP2", # required, accepts GP2, ST1
+    #         default_large_staging_disk_type: "GP2", # required, accepts GP2, ST1, GP3
     #         ebs_encryption: "DEFAULT", # required, accepts DEFAULT, CUSTOM
     #         ebs_encryption_key_arn: "ARN",
     #         replication_server_instance_type: "EC2InstanceType", # required
@@ -167,17 +222,17 @@ module Aws::Mgn
     #   @return [String]
     #
     # @!attribute [rw] default_large_staging_disk_type
-    #   Request to configure the Staging Disk EBS volume type to "gp2"
+    #   Request to configure the default large staging disk EBS volume type
     #   during Replication Settings template creation.
     #   @return [String]
     #
     # @!attribute [rw] ebs_encryption
-    #   Request to configure EBS enryption during Replication Settings
+    #   Request to configure EBS encryption during Replication Settings
     #   template creation.
     #   @return [String]
     #
     # @!attribute [rw] ebs_encryption_key_arn
-    #   Request to configure an EBS enryption key during Replication
+    #   Request to configure an EBS encryption key during Replication
     #   Settings template creation.
     #   @return [String]
     #
@@ -187,8 +242,8 @@ module Aws::Mgn
     #   @return [String]
     #
     # @!attribute [rw] replication_servers_security_groups_i_ds
-    #   Request to configure the Replication Server Secuirity group ID
-    #   during Replication Settings template creation.
+    #   Request to configure the Replication Server Security group ID during
+    #   Replication Settings template creation.
     #   @return [Array<String>]
     #
     # @!attribute [rw] staging_area_subnet_id
@@ -197,7 +252,7 @@ module Aws::Mgn
     #   @return [String]
     #
     # @!attribute [rw] staging_area_tags
-    #   Request to configure Staiging Area tags during Replication Settings
+    #   Request to configure Staging Area tags during Replication Settings
     #   template creation.
     #   @return [Hash<String,String>]
     #
@@ -269,7 +324,7 @@ module Aws::Mgn
     #   @return [String]
     #
     # @!attribute [rw] lag_duration
-    #   Request to query data replication lag durating.
+    #   Request to query data replication lag duration.
     #   @return [String]
     #
     # @!attribute [rw] last_snapshot_date_time
@@ -352,7 +407,7 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # Data replication intiation step.
+    # Data replication initiation step.
     #
     # @!attribute [rw] name
     #   Request to query data initiation step name.
@@ -393,6 +448,29 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DeleteJobResponse AWS API Documentation
     #
     class DeleteJobResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteLaunchConfigurationTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         launch_configuration_template_id: "LaunchConfigurationTemplateID", # required
+    #       }
+    #
+    # @!attribute [rw] launch_configuration_template_id
+    #   ID of resource to be deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DeleteLaunchConfigurationTemplateRequest AWS API Documentation
+    #
+    class DeleteLaunchConfigurationTemplateRequest < Struct.new(
+      :launch_configuration_template_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DeleteLaunchConfigurationTemplateResponse AWS API Documentation
+    #
+    class DeleteLaunchConfigurationTemplateResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteReplicationConfigurationTemplateRequest
     #   data as a hash:
@@ -512,7 +590,7 @@ module Aws::Mgn
     #   data as a hash:
     #
     #       {
-    #         filters: { # required
+    #         filters: {
     #           from_date: "ISO8601DatetimeString",
     #           job_i_ds: ["JobID"],
     #           to_date: "ISO8601DatetimeString",
@@ -526,11 +604,11 @@ module Aws::Mgn
     #   @return [Types::DescribeJobsRequestFilters]
     #
     # @!attribute [rw] max_results
-    #   Request to describe Job log by max results.
+    #   Request to describe job log items by max results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Request to describe Job logby next token.
+    #   Request to describe job log items by next token.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DescribeJobsRequest AWS API Documentation
@@ -563,7 +641,7 @@ module Aws::Mgn
     #   @return [Array<String>]
     #
     # @!attribute [rw] to_date
-    #   Request to describe Job log by last date.
+    #   Request to describe job log items by last date.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DescribeJobsRequestFilters AWS API Documentation
@@ -593,13 +671,61 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeLaunchConfigurationTemplatesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         launch_configuration_template_i_ds: ["LaunchConfigurationTemplateID"],
+    #         max_results: 1,
+    #         next_token: "PaginationToken",
+    #       }
+    #
+    # @!attribute [rw] launch_configuration_template_i_ds
+    #   Request to disconnect Source Server from service by Server ID.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   Request to disconnect Source Server from service by Server ID.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Request to disconnect Source Server from service by Server ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DescribeLaunchConfigurationTemplatesRequest AWS API Documentation
+    #
+    class DescribeLaunchConfigurationTemplatesRequest < Struct.new(
+      :launch_configuration_template_i_ds,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   Request to disconnect Source Server from service by Server ID.
+    #   @return [Array<Types::LaunchConfigurationTemplate>]
+    #
+    # @!attribute [rw] next_token
+    #   Request to disconnect Source Server from service by Server ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DescribeLaunchConfigurationTemplatesResponse AWS API Documentation
+    #
+    class DescribeLaunchConfigurationTemplatesResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeReplicationConfigurationTemplatesRequest
     #   data as a hash:
     #
     #       {
     #         max_results: 1,
     #         next_token: "PaginationToken",
-    #         replication_configuration_template_i_ds: ["ReplicationConfigurationTemplateID"], # required
+    #         replication_configuration_template_i_ds: ["ReplicationConfigurationTemplateID"],
     #       }
     #
     # @!attribute [rw] max_results
@@ -649,7 +775,7 @@ module Aws::Mgn
     #   data as a hash:
     #
     #       {
-    #         filters: { # required
+    #         filters: {
     #           is_archived: false,
     #           life_cycle_states: ["STOPPED"], # accepts STOPPED, NOT_READY, READY_FOR_TEST, TESTING, READY_FOR_CUTOVER, CUTTING_OVER, CUTOVER, DISCONNECTED, DISCOVERED
     #           replication_types: ["AGENT_BASED"], # accepts AGENT_BASED, SNAPSHOT_SHIPPING
@@ -817,6 +943,35 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # Error details.
+    #
+    # @!attribute [rw] code
+    #   Error details code.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Error details message.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   Error details resourceId.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   Error details resourceType.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ErrorDetails AWS API Documentation
+    #
+    class ErrorDetails < Struct.new(
+      :code,
+      :message,
+      :resource_id,
+      :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass FinalizeCutoverRequest
     #   data as a hash:
     #
@@ -825,7 +980,7 @@ module Aws::Mgn
     #       }
     #
     # @!attribute [rw] source_server_id
-    #   Request to finalize Cutover by Soure Server ID.
+    #   Request to finalize Cutover by Source Server ID.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/FinalizeCutoverRequest AWS API Documentation
@@ -863,7 +1018,7 @@ module Aws::Mgn
     #       }
     #
     # @!attribute [rw] source_server_id
-    #   Request to get Replication Configuaration by Source Server ID.
+    #   Request to get Replication Configuration by Source Server ID.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/GetReplicationConfigurationRequest AWS API Documentation
@@ -970,7 +1125,7 @@ module Aws::Mgn
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Tags associated with spcific Job.
+    #   Tags associated with specific Job.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] type
@@ -1046,6 +1201,44 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # Job type.
+    #
+    # @!attribute [rw] execution_id
+    #   Job type.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_status
+    #   Job type.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   Job type.
+    #   @return [String]
+    #
+    # @!attribute [rw] ssm_document
+    #   Job type.
+    #   @return [Types::SsmDocument]
+    #
+    # @!attribute [rw] ssm_document_type
+    #   Job type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/JobPostLaunchActionsLaunchStatus AWS API Documentation
+    #
+    class JobPostLaunchActionsLaunchStatus < Struct.new(
+      :execution_id,
+      :execution_status,
+      :failure_reason,
+      :ssm_document,
+      :ssm_document_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] boot_mode
+    #   Launch configuration boot mode.
+    #   @return [String]
+    #
     # @!attribute [rw] copy_private_ip
     #   Copy Private IP during Launch Configuration.
     #   @return [Boolean]
@@ -1055,57 +1248,89 @@ module Aws::Mgn
     #   @return [Boolean]
     #
     # @!attribute [rw] ec2_launch_template_id
-    #   Configure EC2 lauch configuration template ID.
+    #   Launch configuration EC2 Launch template ID.
     #   @return [String]
     #
     # @!attribute [rw] launch_disposition
-    #   Configure launch dispostion for launch configuration.
+    #   Launch disposition for launch configuration.
     #   @return [String]
     #
     # @!attribute [rw] licensing
-    #   Configure launch configuration OS licensing.
+    #   Launch configuration OS licensing.
     #   @return [Types::Licensing]
     #
     # @!attribute [rw] name
-    #   Configure launch configuration name.
+    #   Launch configuration name.
     #   @return [String]
     #
+    # @!attribute [rw] post_launch_actions
+    #   Server participating in Job.
+    #   @return [Types::PostLaunchActions]
+    #
     # @!attribute [rw] source_server_id
-    #   Configure launch configuration Source Server ID.
+    #   Launch configuration Source Server ID.
     #   @return [String]
     #
     # @!attribute [rw] target_instance_type_right_sizing_method
-    #   Configure launch configuration Target instance type right sizing
-    #   method.
+    #   Launch configuration Target instance type right sizing method.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/LaunchConfiguration AWS API Documentation
     #
     class LaunchConfiguration < Struct.new(
+      :boot_mode,
       :copy_private_ip,
       :copy_tags,
       :ec2_launch_template_id,
       :launch_disposition,
       :licensing,
       :name,
+      :post_launch_actions,
       :source_server_id,
       :target_instance_type_right_sizing_method)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Configure launced instance.
+    # @!attribute [rw] arn
+    #   Copy Private IP during Launch Configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_configuration_template_id
+    #   Copy Private IP during Launch Configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] post_launch_actions
+    #   Copy Private IP during Launch Configuration.
+    #   @return [Types::PostLaunchActions]
+    #
+    # @!attribute [rw] tags
+    #   Copy Private IP during Launch Configuration.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/LaunchConfigurationTemplate AWS API Documentation
+    #
+    class LaunchConfigurationTemplate < Struct.new(
+      :arn,
+      :launch_configuration_template_id,
+      :post_launch_actions,
+      :tags)
+      SENSITIVE = [:tags]
+      include Aws::Structure
+    end
+
+    # Launched instance.
     #
     # @!attribute [rw] ec2_instance_id
-    #   Configure launced instance EC2 ID.
+    #   Launched instance EC2 ID.
     #   @return [String]
     #
     # @!attribute [rw] first_boot
-    #   Configure launced instance first boot.
+    #   Launched instance first boot.
     #   @return [String]
     #
     # @!attribute [rw] job_id
-    #   Configure launced instance Job ID.
+    #   Launched instance Job ID.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/LaunchedInstance AWS API Documentation
@@ -1256,7 +1481,7 @@ module Aws::Mgn
     # Lifecycle last Test.
     #
     # @!attribute [rw] finalized
-    #   Lifecycle last Test finlized.
+    #   Lifecycle last Test finalized.
     #   @return [Types::LifeCycleLastTestFinalized]
     #
     # @!attribute [rw] initiated
@@ -1277,7 +1502,7 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # Lifecycle last Test finlized.
+    # Lifecycle last Test finalized.
     #
     # @!attribute [rw] api_call_date_time
     #   Lifecycle Test failed API call date and time.
@@ -1418,6 +1643,14 @@ module Aws::Mgn
     #   Participating server launch status.
     #   @return [String]
     #
+    # @!attribute [rw] launched_ec2_instance_id
+    #   Participating server Source Server ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] post_launch_actions_status
+    #   Participating server Source Server ID.
+    #   @return [Types::PostLaunchActionsStatus]
+    #
     # @!attribute [rw] source_server_id
     #   Participating server Source Server ID.
     #   @return [String]
@@ -1426,7 +1659,88 @@ module Aws::Mgn
     #
     class ParticipatingServer < Struct.new(
       :launch_status,
+      :launched_ec2_instance_id,
+      :post_launch_actions_status,
       :source_server_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Server participating in Job.
+    #
+    # @note When making an API call, you may pass PostLaunchActions
+    #   data as a hash:
+    #
+    #       {
+    #         cloud_watch_log_group_name: "CloudWatchLogGroupName",
+    #         deployment: "TEST_AND_CUTOVER", # accepts TEST_AND_CUTOVER, CUTOVER_ONLY
+    #         s3_log_bucket: "S3LogBucketName",
+    #         s3_output_key_prefix: "BoundedString",
+    #         ssm_documents: [
+    #           {
+    #             action_name: "BoundedString", # required
+    #             must_succeed_for_cutover: false,
+    #             parameters: {
+    #               "SsmDocumentParameterName" => [
+    #                 {
+    #                   parameter_name: "SsmParameterStoreParameterName", # required
+    #                   parameter_type: "STRING", # required, accepts STRING
+    #                 },
+    #               ],
+    #             },
+    #             ssm_document_name: "SsmDocumentName", # required
+    #             timeout_seconds: 1,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] cloud_watch_log_group_name
+    #   Server participating in Job.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment
+    #   Server participating in Job.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_log_bucket
+    #   Server participating in Job.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_output_key_prefix
+    #   Server participating in Job.
+    #   @return [String]
+    #
+    # @!attribute [rw] ssm_documents
+    #   Server participating in Job.
+    #   @return [Array<Types::SsmDocument>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/PostLaunchActions AWS API Documentation
+    #
+    class PostLaunchActions < Struct.new(
+      :cloud_watch_log_group_name,
+      :deployment,
+      :s3_log_bucket,
+      :s3_output_key_prefix,
+      :ssm_documents)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Server participating in Job.
+    #
+    # @!attribute [rw] post_launch_actions_launch_status_list
+    #   Server participating in Job.
+    #   @return [Array<Types::JobPostLaunchActionsLaunchStatus>]
+    #
+    # @!attribute [rw] ssm_agent_discovery_datetime
+    #   Server participating in Job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/PostLaunchActionsStatus AWS API Documentation
+    #
+    class PostLaunchActionsStatus < Struct.new(
+      :post_launch_actions_launch_status_list,
+      :ssm_agent_discovery_datetime)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1523,7 +1837,8 @@ module Aws::Mgn
     #         device_name: "BoundedString",
     #         iops: 1,
     #         is_boot_disk: false,
-    #         staging_disk_type: "AUTO", # accepts AUTO, GP2, IO1, SC1, ST1, STANDARD
+    #         staging_disk_type: "AUTO", # accepts AUTO, GP2, IO1, SC1, ST1, STANDARD, GP3, IO2
+    #         throughput: 1,
     #       }
     #
     # @!attribute [rw] device_name
@@ -1542,13 +1857,18 @@ module Aws::Mgn
     #   Replication Configuration replicated disk staging disk type.
     #   @return [String]
     #
+    # @!attribute [rw] throughput
+    #   Replication Configuration replicated disk throughput.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ReplicationConfigurationReplicatedDisk AWS API Documentation
     #
     class ReplicationConfigurationReplicatedDisk < Struct.new(
       :device_name,
       :iops,
       :is_boot_disk,
-      :staging_disk_type)
+      :staging_disk_type,
+      :throughput)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1563,7 +1883,7 @@ module Aws::Mgn
     #   @return [Boolean]
     #
     # @!attribute [rw] bandwidth_throttling
-    #   Replication Configuration template bandwidth throtting.
+    #   Replication Configuration template bandwidth throttling.
     #   @return [Integer]
     #
     # @!attribute [rw] create_public_ip
@@ -1575,7 +1895,7 @@ module Aws::Mgn
     #   @return [String]
     #
     # @!attribute [rw] default_large_staging_disk_type
-    #   Replication Configuration template use dedault large Staging Disk
+    #   Replication Configuration template use default large Staging Disk
     #   type.
     #   @return [String]
     #
@@ -1588,7 +1908,7 @@ module Aws::Mgn
     #   @return [String]
     #
     # @!attribute [rw] replication_configuration_template_id
-    #   Replication Configuration template template ID.
+    #   Replication Configuration template ID.
     #   @return [String]
     #
     # @!attribute [rw] replication_server_instance_type
@@ -1696,8 +2016,12 @@ module Aws::Mgn
     #   Exceeded the service quota code.
     #   @return [String]
     #
+    # @!attribute [rw] quota_value
+    #   Exceeded the service quota value.
+    #   @return [Integer]
+    #
     # @!attribute [rw] resource_id
-    #   Exceeded the service quota resource Id.
+    #   Exceeded the service quota resource ID.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
@@ -1714,6 +2038,7 @@ module Aws::Mgn
       :code,
       :message,
       :quota_code,
+      :quota_value,
       :resource_id,
       :resource_type,
       :service_code)
@@ -1824,6 +2149,85 @@ module Aws::Mgn
       :tags,
       :vcenter_client_id)
       SENSITIVE = [:tags]
+      include Aws::Structure
+    end
+
+    # Source server replication type.
+    #
+    # @note When making an API call, you may pass SsmDocument
+    #   data as a hash:
+    #
+    #       {
+    #         action_name: "BoundedString", # required
+    #         must_succeed_for_cutover: false,
+    #         parameters: {
+    #           "SsmDocumentParameterName" => [
+    #             {
+    #               parameter_name: "SsmParameterStoreParameterName", # required
+    #               parameter_type: "STRING", # required, accepts STRING
+    #             },
+    #           ],
+    #         },
+    #         ssm_document_name: "SsmDocumentName", # required
+    #         timeout_seconds: 1,
+    #       }
+    #
+    # @!attribute [rw] action_name
+    #   Source server replication type.
+    #   @return [String]
+    #
+    # @!attribute [rw] must_succeed_for_cutover
+    #   Source server replication type.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] parameters
+    #   Source server replication type.
+    #   @return [Hash<String,Array<Types::SsmParameterStoreParameter>>]
+    #
+    # @!attribute [rw] ssm_document_name
+    #   Source server replication type.
+    #   @return [String]
+    #
+    # @!attribute [rw] timeout_seconds
+    #   Source server replication type.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/SsmDocument AWS API Documentation
+    #
+    class SsmDocument < Struct.new(
+      :action_name,
+      :must_succeed_for_cutover,
+      :parameters,
+      :ssm_document_name,
+      :timeout_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Source server replication type.
+    #
+    # @note When making an API call, you may pass SsmParameterStoreParameter
+    #   data as a hash:
+    #
+    #       {
+    #         parameter_name: "SsmParameterStoreParameterName", # required
+    #         parameter_type: "STRING", # required, accepts STRING
+    #       }
+    #
+    # @!attribute [rw] parameter_name
+    #   Source server replication type.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameter_type
+    #   Source server replication type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/SsmParameterStoreParameter AWS API Documentation
+    #
+    class SsmParameterStoreParameter < Struct.new(
+      :parameter_name,
+      :parameter_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2018,7 +2422,7 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # Unitialized account exception.
+    # Uninitialized account exception.
     #
     # @!attribute [rw] code
     #   @return [String]
@@ -2064,6 +2468,7 @@ module Aws::Mgn
     #   data as a hash:
     #
     #       {
+    #         boot_mode: "LEGACY_BIOS", # accepts LEGACY_BIOS, UEFI
     #         copy_private_ip: false,
     #         copy_tags: false,
     #         launch_disposition: "STOPPED", # accepts STOPPED, STARTED
@@ -2071,9 +2476,35 @@ module Aws::Mgn
     #           os_byol: false,
     #         },
     #         name: "SmallBoundedString",
+    #         post_launch_actions: {
+    #           cloud_watch_log_group_name: "CloudWatchLogGroupName",
+    #           deployment: "TEST_AND_CUTOVER", # accepts TEST_AND_CUTOVER, CUTOVER_ONLY
+    #           s3_log_bucket: "S3LogBucketName",
+    #           s3_output_key_prefix: "BoundedString",
+    #           ssm_documents: [
+    #             {
+    #               action_name: "BoundedString", # required
+    #               must_succeed_for_cutover: false,
+    #               parameters: {
+    #                 "SsmDocumentParameterName" => [
+    #                   {
+    #                     parameter_name: "SsmParameterStoreParameterName", # required
+    #                     parameter_type: "STRING", # required, accepts STRING
+    #                   },
+    #                 ],
+    #               },
+    #               ssm_document_name: "SsmDocumentName", # required
+    #               timeout_seconds: 1,
+    #             },
+    #           ],
+    #         },
     #         source_server_id: "SourceServerID", # required
     #         target_instance_type_right_sizing_method: "NONE", # accepts NONE, BASIC
     #       }
+    #
+    # @!attribute [rw] boot_mode
+    #   Update Launch configuration boot mode request.
+    #   @return [String]
     #
     # @!attribute [rw] copy_private_ip
     #   Update Launch configuration copy Private IP request.
@@ -2095,6 +2526,10 @@ module Aws::Mgn
     #   Update Launch configuration name request.
     #   @return [String]
     #
+    # @!attribute [rw] post_launch_actions
+    #   Server participating in Job.
+    #   @return [Types::PostLaunchActions]
+    #
     # @!attribute [rw] source_server_id
     #   Update Launch configuration by Source Server ID request.
     #   @return [String]
@@ -2106,13 +2541,61 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateLaunchConfigurationRequest AWS API Documentation
     #
     class UpdateLaunchConfigurationRequest < Struct.new(
+      :boot_mode,
       :copy_private_ip,
       :copy_tags,
       :launch_disposition,
       :licensing,
       :name,
+      :post_launch_actions,
       :source_server_id,
       :target_instance_type_right_sizing_method)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateLaunchConfigurationTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         launch_configuration_template_id: "LaunchConfigurationTemplateID", # required
+    #         post_launch_actions: {
+    #           cloud_watch_log_group_name: "CloudWatchLogGroupName",
+    #           deployment: "TEST_AND_CUTOVER", # accepts TEST_AND_CUTOVER, CUTOVER_ONLY
+    #           s3_log_bucket: "S3LogBucketName",
+    #           s3_output_key_prefix: "BoundedString",
+    #           ssm_documents: [
+    #             {
+    #               action_name: "BoundedString", # required
+    #               must_succeed_for_cutover: false,
+    #               parameters: {
+    #                 "SsmDocumentParameterName" => [
+    #                   {
+    #                     parameter_name: "SsmParameterStoreParameterName", # required
+    #                     parameter_type: "STRING", # required, accepts STRING
+    #                   },
+    #                 ],
+    #               },
+    #               ssm_document_name: "SsmDocumentName", # required
+    #               timeout_seconds: 1,
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] launch_configuration_template_id
+    #   Update Launch configuration Target instance right sizing request.
+    #   @return [String]
+    #
+    # @!attribute [rw] post_launch_actions
+    #   Update Launch configuration Target instance right sizing request.
+    #   @return [Types::PostLaunchActions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateLaunchConfigurationTemplateRequest AWS API Documentation
+    #
+    class UpdateLaunchConfigurationTemplateRequest < Struct.new(
+      :launch_configuration_template_id,
+      :post_launch_actions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2125,7 +2608,7 @@ module Aws::Mgn
     #         bandwidth_throttling: 1,
     #         create_public_ip: false,
     #         data_plane_routing: "PRIVATE_IP", # accepts PRIVATE_IP, PUBLIC_IP
-    #         default_large_staging_disk_type: "GP2", # accepts GP2, ST1
+    #         default_large_staging_disk_type: "GP2", # accepts GP2, ST1, GP3
     #         ebs_encryption: "DEFAULT", # accepts DEFAULT, CUSTOM
     #         ebs_encryption_key_arn: "ARN",
     #         name: "SmallBoundedString",
@@ -2134,7 +2617,8 @@ module Aws::Mgn
     #             device_name: "BoundedString",
     #             iops: 1,
     #             is_boot_disk: false,
-    #             staging_disk_type: "AUTO", # accepts AUTO, GP2, IO1, SC1, ST1, STANDARD
+    #             staging_disk_type: "AUTO", # accepts AUTO, GP2, IO1, SC1, ST1, STANDARD, GP3, IO2
+    #             throughput: 1,
     #           },
     #         ],
     #         replication_server_instance_type: "EC2InstanceType",
@@ -2243,7 +2727,7 @@ module Aws::Mgn
     #         bandwidth_throttling: 1,
     #         create_public_ip: false,
     #         data_plane_routing: "PRIVATE_IP", # accepts PRIVATE_IP, PUBLIC_IP
-    #         default_large_staging_disk_type: "GP2", # accepts GP2, ST1
+    #         default_large_staging_disk_type: "GP2", # accepts GP2, ST1, GP3
     #         ebs_encryption: "DEFAULT", # accepts DEFAULT, CUSTOM
     #         ebs_encryption_key_arn: "ARN",
     #         replication_configuration_template_id: "ReplicationConfigurationTemplateID", # required

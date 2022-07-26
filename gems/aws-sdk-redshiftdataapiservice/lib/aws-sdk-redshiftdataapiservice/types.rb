@@ -52,6 +52,7 @@ module Aws::RedshiftDataAPIService
     #         sqls: ["StatementString"], # required
     #         statement_name: "StatementNameString",
     #         with_event: false,
+    #         workgroup_name: "WorkgroupNameString",
     #       }
     #
     # @!attribute [rw] cluster_identifier
@@ -91,6 +92,12 @@ module Aws::RedshiftDataAPIService
     #   EventBridge event bus after the SQL statements run.
     #   @return [Boolean]
     #
+    # @!attribute [rw] workgroup_name
+    #   The serverless workgroup name. This parameter is required when
+    #   connecting to a serverless workgroup and authenticating using either
+    #   Secrets Manager or temporary credentials.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/BatchExecuteStatementInput AWS API Documentation
     #
     class BatchExecuteStatementInput < Struct.new(
@@ -100,14 +107,15 @@ module Aws::RedshiftDataAPIService
       :secret_arn,
       :sqls,
       :statement_name,
-      :with_event)
+      :with_event,
+      :workgroup_name)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] cluster_identifier
-    #   The cluster identifier. This parameter is not returned when
-    #   connecting to a serverless endpoint.
+    #   The cluster identifier. This element is not returned when connecting
+    #   to a serverless workgroup.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -133,6 +141,11 @@ module Aws::RedshiftDataAPIService
     #   The name or ARN of the secret that enables access to the database.
     #   @return [String]
     #
+    # @!attribute [rw] workgroup_name
+    #   The serverless workgroup name. This element is not returned when
+    #   connecting to a provisioned cluster.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/BatchExecuteStatementOutput AWS API Documentation
     #
     class BatchExecuteStatementOutput < Struct.new(
@@ -141,7 +154,8 @@ module Aws::RedshiftDataAPIService
       :database,
       :db_user,
       :id,
-      :secret_arn)
+      :secret_arn,
+      :workgroup_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -396,6 +410,10 @@ module Aws::RedshiftDataAPIService
     #   last updated. An example is the time the status last changed.
     #   @return [Time]
     #
+    # @!attribute [rw] workgroup_name
+    #   The serverless workgroup name.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/DescribeStatementResponse AWS API Documentation
     #
     class DescribeStatementResponse < Struct.new(
@@ -416,7 +434,8 @@ module Aws::RedshiftDataAPIService
       :secret_arn,
       :status,
       :sub_statements,
-      :updated_at)
+      :updated_at,
+      :workgroup_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -434,6 +453,7 @@ module Aws::RedshiftDataAPIService
     #         schema: "String",
     #         secret_arn: "SecretArn",
     #         table: "String",
+    #         workgroup_name: "WorkgroupNameString",
     #       }
     #
     # @!attribute [rw] cluster_identifier
@@ -491,6 +511,12 @@ module Aws::RedshiftDataAPIService
     #   returned
     #   @return [String]
     #
+    # @!attribute [rw] workgroup_name
+    #   The serverless workgroup name. This parameter is required when
+    #   connecting to a serverless workgroup and authenticating using either
+    #   Secrets Manager or temporary credentials.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/DescribeTableRequest AWS API Documentation
     #
     class DescribeTableRequest < Struct.new(
@@ -502,7 +528,8 @@ module Aws::RedshiftDataAPIService
       :next_token,
       :schema,
       :secret_arn,
-      :table)
+      :table,
+      :workgroup_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -570,6 +597,7 @@ module Aws::RedshiftDataAPIService
     #         sql: "StatementString", # required
     #         statement_name: "StatementNameString",
     #         with_event: false,
+    #         workgroup_name: "WorkgroupNameString",
     #       }
     #
     # @!attribute [rw] cluster_identifier
@@ -613,6 +641,12 @@ module Aws::RedshiftDataAPIService
     #   EventBridge event bus after the SQL statement runs.
     #   @return [Boolean]
     #
+    # @!attribute [rw] workgroup_name
+    #   The serverless workgroup name. This parameter is required when
+    #   connecting to a serverless workgroup and authenticating using either
+    #   Secrets Manager or temporary credentials.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/ExecuteStatementInput AWS API Documentation
     #
     class ExecuteStatementInput < Struct.new(
@@ -623,14 +657,15 @@ module Aws::RedshiftDataAPIService
       :secret_arn,
       :sql,
       :statement_name,
-      :with_event)
+      :with_event,
+      :workgroup_name)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] cluster_identifier
-    #   The cluster identifier. This parameter is not returned when
-    #   connecting to a serverless endpoint.
+    #   The cluster identifier. This element is not returned when connecting
+    #   to a serverless workgroup.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -655,6 +690,11 @@ module Aws::RedshiftDataAPIService
     #   The name or ARN of the secret that enables access to the database.
     #   @return [String]
     #
+    # @!attribute [rw] workgroup_name
+    #   The serverless workgroup name. This element is not returned when
+    #   connecting to a provisioned cluster.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/ExecuteStatementOutput AWS API Documentation
     #
     class ExecuteStatementOutput < Struct.new(
@@ -663,7 +703,8 @@ module Aws::RedshiftDataAPIService
       :database,
       :db_user,
       :id,
-      :secret_arn)
+      :secret_arn,
+      :workgroup_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -813,6 +854,7 @@ module Aws::RedshiftDataAPIService
     #         max_results: 1,
     #         next_token: "String",
     #         secret_arn: "SecretArn",
+    #         workgroup_name: "WorkgroupNameString",
     #       }
     #
     # @!attribute [rw] cluster_identifier
@@ -853,6 +895,12 @@ module Aws::RedshiftDataAPIService
     #   Manager.
     #   @return [String]
     #
+    # @!attribute [rw] workgroup_name
+    #   The serverless workgroup name. This parameter is required when
+    #   connecting to a serverless workgroup and authenticating using either
+    #   Secrets Manager or temporary credentials.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/ListDatabasesRequest AWS API Documentation
     #
     class ListDatabasesRequest < Struct.new(
@@ -861,7 +909,8 @@ module Aws::RedshiftDataAPIService
       :db_user,
       :max_results,
       :next_token,
-      :secret_arn)
+      :secret_arn,
+      :workgroup_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -900,6 +949,7 @@ module Aws::RedshiftDataAPIService
     #         next_token: "String",
     #         schema_pattern: "String",
     #         secret_arn: "SecretArn",
+    #         workgroup_name: "WorkgroupNameString",
     #       }
     #
     # @!attribute [rw] cluster_identifier
@@ -952,6 +1002,12 @@ module Aws::RedshiftDataAPIService
     #   Manager.
     #   @return [String]
     #
+    # @!attribute [rw] workgroup_name
+    #   The serverless workgroup name. This parameter is required when
+    #   connecting to a serverless workgroup and authenticating using either
+    #   Secrets Manager or temporary credentials.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/ListSchemasRequest AWS API Documentation
     #
     class ListSchemasRequest < Struct.new(
@@ -962,7 +1018,8 @@ module Aws::RedshiftDataAPIService
       :max_results,
       :next_token,
       :schema_pattern,
-      :secret_arn)
+      :secret_arn,
+      :workgroup_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1099,6 +1156,7 @@ module Aws::RedshiftDataAPIService
     #         schema_pattern: "String",
     #         secret_arn: "SecretArn",
     #         table_pattern: "String",
+    #         workgroup_name: "WorkgroupNameString",
     #       }
     #
     # @!attribute [rw] cluster_identifier
@@ -1164,6 +1222,12 @@ module Aws::RedshiftDataAPIService
     #   returned.
     #   @return [String]
     #
+    # @!attribute [rw] workgroup_name
+    #   The serverless workgroup name. This parameter is required when
+    #   connecting to a serverless workgroup and authenticating using either
+    #   Secrets Manager or temporary credentials.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/ListTablesRequest AWS API Documentation
     #
     class ListTablesRequest < Struct.new(
@@ -1175,7 +1239,8 @@ module Aws::RedshiftDataAPIService
       :next_token,
       :schema_pattern,
       :secret_arn,
-      :table_pattern)
+      :table_pattern,
+      :workgroup_name)
       SENSITIVE = []
       include Aws::Structure
     end

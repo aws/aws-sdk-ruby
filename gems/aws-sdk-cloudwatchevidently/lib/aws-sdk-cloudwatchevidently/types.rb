@@ -141,11 +141,11 @@ module Aws::CloudWatchEvidently
     #           {
     #             desired_change: "INCREASE", # accepts INCREASE, DECREASE
     #             metric_definition: { # required
-    #               entity_id_key: "JsonPath",
+    #               entity_id_key: "JsonPath", # required
     #               event_pattern: "MetricDefinitionConfigEventPatternString",
-    #               name: "CwDimensionSafeName",
+    #               name: "CwDimensionSafeName", # required
     #               unit_label: "MetricUnitLabel",
-    #               value_key: "JsonPath",
+    #               value_key: "JsonPath", # required
     #             },
     #           },
     #         ],
@@ -159,6 +159,7 @@ module Aws::CloudWatchEvidently
     #         project: "ProjectRef", # required
     #         randomization_salt: "RandomizationSalt",
     #         sampling_rate: 1,
+    #         segment: "SegmentRef",
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
@@ -216,6 +217,12 @@ module Aws::CloudWatchEvidently
     #   specify 10,000 to allocate 10% of the available audience.
     #   @return [Integer]
     #
+    # @!attribute [rw] segment
+    #   Specifies an audience *segment* to use in the experiment. When a
+    #   segment is used in an experiment, only user sessions that match the
+    #   segment pattern are used in the experiment.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   Assigns one or more tags (key-value pairs) to the experiment.
     #
@@ -245,6 +252,7 @@ module Aws::CloudWatchEvidently
       :project,
       :randomization_salt,
       :sampling_rate,
+      :segment,
       :tags,
       :treatments)
       SENSITIVE = []
@@ -391,11 +399,11 @@ module Aws::CloudWatchEvidently
     #         metric_monitors: [
     #           {
     #             metric_definition: { # required
-    #               entity_id_key: "JsonPath",
+    #               entity_id_key: "JsonPath", # required
     #               event_pattern: "MetricDefinitionConfigEventPatternString",
-    #               name: "CwDimensionSafeName",
+    #               name: "CwDimensionSafeName", # required
     #               unit_label: "MetricUnitLabel",
-    #               value_key: "JsonPath",
+    #               value_key: "JsonPath", # required
     #             },
     #           },
     #         ],
@@ -408,6 +416,15 @@ module Aws::CloudWatchEvidently
     #               group_weights: { # required
     #                 "GroupName" => 1,
     #               },
+    #               segment_overrides: [
+    #                 {
+    #                   evaluation_order: 1, # required
+    #                   segment: "SegmentRef", # required
+    #                   weights: { # required
+    #                     "GroupName" => 1,
+    #                   },
+    #                 },
+    #               ],
     #               start_time: Time.now, # required
     #             },
     #           ],
@@ -445,7 +462,7 @@ module Aws::CloudWatchEvidently
     #   must use a randomization ID to determine which variation the user
     #   session is served. This randomization ID is a combination of the
     #   entity ID and `randomizationSalt`. If you omit `randomizationSalt`,
-    #   Evidently uses the launch name as the `randomizationsSalt`.
+    #   Evidently uses the launch name as the `randomizationSalt`.
     #   @return [String]
     #
     # @!attribute [rw] scheduled_splits_config
@@ -569,6 +586,73 @@ module Aws::CloudWatchEvidently
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateSegmentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         description: "Description",
+    #         name: "SegmentName", # required
+    #         pattern: "SegmentPattern", # required
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] description
+    #   An optional description for this segment.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A name for the segment.
+    #   @return [String]
+    #
+    # @!attribute [rw] pattern
+    #   The pattern to use for the segment. For more information about
+    #   pattern syntax, see [ Segment rule pattern syntax][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments-syntax.html
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Assigns one or more tags (key-value pairs) to the segment.
+    #
+    #   Tags can help you organize and categorize your resources. You can
+    #   also use them to scope user permissions by granting a user
+    #   permission to access or change only resources with certain tag
+    #   values.
+    #
+    #   Tags don't have any semantic meaning to Amazon Web Services and are
+    #   interpreted strictly as strings of characters.
+    #
+    #        <p>You can associate as many as 50 tags with a segment.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a>.</p>
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/evidently-2021-02-01/CreateSegmentRequest AWS API Documentation
+    #
+    class CreateSegmentRequest < Struct.new(
+      :description,
+      :name,
+      :pattern,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] segment
+    #   A structure that contains the complete information about the segment
+    #   that was just created.
+    #   @return [Types::Segment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/evidently-2021-02-01/CreateSegmentResponse AWS API Documentation
+    #
+    class CreateSegmentResponse < Struct.new(
+      :segment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteExperimentRequest
     #   data as a hash:
     #
@@ -680,6 +764,29 @@ module Aws::CloudWatchEvidently
     #
     class DeleteProjectResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteSegmentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         segment: "SegmentRef", # required
+    #       }
+    #
+    # @!attribute [rw] segment
+    #   Specifies the segment to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/evidently-2021-02-01/DeleteSegmentRequest AWS API Documentation
+    #
+    class DeleteSegmentRequest < Struct.new(
+      :segment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/evidently-2021-02-01/DeleteSegmentResponse AWS API Documentation
+    #
+    class DeleteSegmentResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass EvaluateFeatureRequest
     #   data as a hash:
     #
@@ -697,9 +804,17 @@ module Aws::CloudWatchEvidently
     #   @return [String]
     #
     # @!attribute [rw] evaluation_context
-    #   A JSON block of attributes that you can optionally pass in. This
-    #   JSON block is included in the evaluation events sent to Evidently
-    #   from the user session.
+    #   A JSON object of attributes that you can optionally pass in as part
+    #   of the evaluation event sent to Evidently from the user session.
+    #   Evidently can use this value to match user sessions with defined
+    #   audience segments. For more information, see [Use segments to focus
+    #   your audience][1].
+    #
+    #        <p>If you include this parameter, the value must be a JSON object. A JSON array is not supported.</p>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments.html
     #   @return [String]
     #
     # @!attribute [rw] feature
@@ -973,6 +1088,11 @@ module Aws::CloudWatchEvidently
     #   the analysis of the experiment.
     #   @return [Types::ExperimentSchedule]
     #
+    # @!attribute [rw] segment
+    #   The audience segment being used for the experiment, if a segment is
+    #   being used.
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   The current state of the experiment.
     #   @return [String]
@@ -1012,6 +1132,7 @@ module Aws::CloudWatchEvidently
       :randomization_salt,
       :sampling_rate,
       :schedule,
+      :segment,
       :status,
       :status_reason,
       :tags,
@@ -1351,6 +1472,7 @@ module Aws::CloudWatchEvidently
     #
     # @!attribute [rw] end_time
     #   The date and time that the experiment ended, if it is completed.
+    #   This must be no longer than 30 days after the experiment start time.
     #   @return [Time]
     #
     # @!attribute [rw] experiment
@@ -1429,6 +1551,13 @@ module Aws::CloudWatchEvidently
       include Aws::Structure
     end
 
+    # @!attribute [rw] details
+    #   If the experiment doesn't yet have enough events to provide valid
+    #   results, this field is returned with the message `Not enough events
+    #   to generate results`. If there are enough events to provide valid
+    #   results, this field is not returned.
+    #   @return [String]
+    #
     # @!attribute [rw] reports
     #   An array of structures that include the reports that you requested.
     #   @return [Array<Types::ExperimentReport>]
@@ -1445,6 +1574,7 @@ module Aws::CloudWatchEvidently
     # @see http://docs.aws.amazon.com/goto/WebAPI/evidently-2021-02-01/GetExperimentResultsResponse AWS API Documentation
     #
     class GetExperimentResultsResponse < Struct.new(
+      :details,
       :reports,
       :results_data,
       :timestamps)
@@ -1553,6 +1683,38 @@ module Aws::CloudWatchEvidently
     #
     class GetProjectResponse < Struct.new(
       :project)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetSegmentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         segment: "SegmentRef", # required
+    #       }
+    #
+    # @!attribute [rw] segment
+    #   The ARN of the segment to return information for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/evidently-2021-02-01/GetSegmentRequest AWS API Documentation
+    #
+    class GetSegmentRequest < Struct.new(
+      :segment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] segment
+    #   A structure that contains the complete information about the
+    #   segment.
+    #   @return [Types::Segment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/evidently-2021-02-01/GetSegmentResponse AWS API Documentation
+    #
+    class GetSegmentResponse < Struct.new(
+      :segment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1757,6 +1919,7 @@ module Aws::CloudWatchEvidently
     #         max_results: 1,
     #         next_token: "NextToken",
     #         project: "ProjectRef", # required
+    #         status: "CREATED", # accepts CREATED, UPDATING, RUNNING, COMPLETED, CANCELLED
     #       }
     #
     # @!attribute [rw] max_results
@@ -1772,12 +1935,18 @@ module Aws::CloudWatchEvidently
     #   The name or ARN of the project to return the experiment list from.
     #   @return [String]
     #
+    # @!attribute [rw] status
+    #   Use this optional parameter to limit the returned results to only
+    #   the experiments with the status that you specify here.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/evidently-2021-02-01/ListExperimentsRequest AWS API Documentation
     #
     class ListExperimentsRequest < Struct.new(
       :max_results,
       :next_token,
-      :project)
+      :project,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1859,6 +2028,7 @@ module Aws::CloudWatchEvidently
     #         max_results: 1,
     #         next_token: "NextToken",
     #         project: "ProjectRef", # required
+    #         status: "CREATED", # accepts CREATED, UPDATING, RUNNING, COMPLETED, CANCELLED
     #       }
     #
     # @!attribute [rw] max_results
@@ -1874,12 +2044,18 @@ module Aws::CloudWatchEvidently
     #   The name or ARN of the project to return the launch list from.
     #   @return [String]
     #
+    # @!attribute [rw] status
+    #   Use this optional parameter to limit the returned results to only
+    #   the launches with the status that you specify here.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/evidently-2021-02-01/ListLaunchesRequest AWS API Documentation
     #
     class ListLaunchesRequest < Struct.new(
       :max_results,
       :next_token,
-      :project)
+      :project,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1944,6 +2120,112 @@ module Aws::CloudWatchEvidently
     class ListProjectsResponse < Struct.new(
       :next_token,
       :projects)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListSegmentReferencesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #         segment: "SegmentRef", # required
+    #         type: "EXPERIMENT", # required, accepts EXPERIMENT, LAUNCH
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to include in the response. If you
+    #   omit this, the default of 50 is used.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use when requesting the next set of results. You
+    #   received this token from a previous `ListSegmentReferences`
+    #   operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment
+    #   The ARN of the segment that you want to view information for.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Specifies whether to return information about launches or
+    #   experiments that use this segment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/evidently-2021-02-01/ListSegmentReferencesRequest AWS API Documentation
+    #
+    class ListSegmentReferencesRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :segment,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token to use in a subsequent `ListSegmentReferences` operation
+    #   to return the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] referenced_by
+    #   An array of structures, where each structure contains information
+    #   about one experiment or launch that uses this segment.
+    #   @return [Array<Types::RefResource>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/evidently-2021-02-01/ListSegmentReferencesResponse AWS API Documentation
+    #
+    class ListSegmentReferencesResponse < Struct.new(
+      :next_token,
+      :referenced_by)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListSegmentsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to include in the response. If you
+    #   omit this, the default of 50 is used.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use when requesting the next set of results. You
+    #   received this token from a previous `ListSegments` operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/evidently-2021-02-01/ListSegmentsRequest AWS API Documentation
+    #
+    class ListSegmentsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token to use in a subsequent `ListSegments` operation to return
+    #   the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] segments
+    #   An array of structures that contain information about the segments
+    #   in this Region.
+    #   @return [Array<Types::Segment>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/evidently-2021-02-01/ListSegmentsResponse AWS API Documentation
+    #
+    class ListSegmentsResponse < Struct.new(
+      :next_token,
+      :segments)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2031,11 +2313,11 @@ module Aws::CloudWatchEvidently
     #   data as a hash:
     #
     #       {
-    #         entity_id_key: "JsonPath",
+    #         entity_id_key: "JsonPath", # required
     #         event_pattern: "MetricDefinitionConfigEventPatternString",
-    #         name: "CwDimensionSafeName",
+    #         name: "CwDimensionSafeName", # required
     #         unit_label: "MetricUnitLabel",
-    #         value_key: "JsonPath",
+    #         value_key: "JsonPath", # required
     #       }
     #
     # @!attribute [rw] entity_id_key
@@ -2113,11 +2395,11 @@ module Aws::CloudWatchEvidently
     #       {
     #         desired_change: "INCREASE", # accepts INCREASE, DECREASE
     #         metric_definition: { # required
-    #           entity_id_key: "JsonPath",
+    #           entity_id_key: "JsonPath", # required
     #           event_pattern: "MetricDefinitionConfigEventPatternString",
-    #           name: "CwDimensionSafeName",
+    #           name: "CwDimensionSafeName", # required
     #           unit_label: "MetricUnitLabel",
-    #           value_key: "JsonPath",
+    #           value_key: "JsonPath", # required
     #         },
     #       }
     #
@@ -2165,11 +2447,11 @@ module Aws::CloudWatchEvidently
     #
     #       {
     #         metric_definition: { # required
-    #           entity_id_key: "JsonPath",
+    #           entity_id_key: "JsonPath", # required
     #           event_pattern: "MetricDefinitionConfigEventPatternString",
-    #           name: "CwDimensionSafeName",
+    #           name: "CwDimensionSafeName", # required
     #           unit_label: "MetricUnitLabel",
-    #           value_key: "JsonPath",
+    #           value_key: "JsonPath", # required
     #         },
     #       }
     #
@@ -2536,6 +2818,53 @@ module Aws::CloudWatchEvidently
       include Aws::Structure
     end
 
+    # A structure that contains information about one experiment or launch
+    # that uses the specified segment.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the experiment or launch.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_time
+    #   The day and time that this experiment or launch ended.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_on
+    #   The day and time that this experiment or launch was most recently
+    #   updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the experiment or launch.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The day and time that this experiment or launch started.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the experiment or launch.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Specifies whether the resource that this structure contains
+    #   information about is an experiment or a launch.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/evidently-2021-02-01/RefResource AWS API Documentation
+    #
+    class RefResource < Struct.new(
+      :arn,
+      :end_time,
+      :last_updated_on,
+      :name,
+      :start_time,
+      :status,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request references a resource that does not exist.
     #
     # @!attribute [rw] message
@@ -2616,7 +2945,29 @@ module Aws::CloudWatchEvidently
     #   during one step of a launch. This is a set of key-value pairs. The
     #   keys are variation names. The values represent the percentage of
     #   traffic to allocate to that variation during this step.
+    #
+    #   The values is expressed in thousandths of a percent, so assigning a
+    #   weight of 50000 assigns 50% of traffic to that variation.
+    #
+    #   If the sum of the weights for all the variations in a segment
+    #   override does not add up to 100,000, then the remaining traffic that
+    #   matches this segment is not assigned by this segment override, and
+    #   instead moves on to the next segment override or the default traffic
+    #   split.
     #   @return [Hash<String,Integer>]
+    #
+    # @!attribute [rw] segment_overrides
+    #   Use this parameter to specify different traffic splits for one or
+    #   more audience *segments*. A segment is a portion of your audience
+    #   that share one or more characteristics. Examples could be Chrome
+    #   browser users, users in Europe, or Firefox browser users in Europe
+    #   who also fit other criteria that your application collects, such as
+    #   age.
+    #
+    #   This parameter is an array of up to six segment override objects.
+    #   Each of these objects specifies a segment that you have already
+    #   created, and defines the traffic split for that segment.
+    #   @return [Array<Types::SegmentOverride>]
     #
     # @!attribute [rw] start_time
     #   The date and time that this step of the launch starts.
@@ -2626,6 +2977,7 @@ module Aws::CloudWatchEvidently
     #
     class ScheduledSplit < Struct.new(
       :group_weights,
+      :segment_overrides,
       :start_time)
       SENSITIVE = []
       include Aws::Structure
@@ -2642,6 +2994,15 @@ module Aws::CloudWatchEvidently
     #         group_weights: { # required
     #           "GroupName" => 1,
     #         },
+    #         segment_overrides: [
+    #           {
+    #             evaluation_order: 1, # required
+    #             segment: "SegmentRef", # required
+    #             weights: { # required
+    #               "GroupName" => 1,
+    #             },
+    #           },
+    #         ],
     #         start_time: Time.now, # required
     #       }
     #
@@ -2650,7 +3011,22 @@ module Aws::CloudWatchEvidently
     #   during one step of a launch. This is a set of key-value pairs. The
     #   keys are variation names. The values represent the percentage of
     #   traffic to allocate to that variation during this step.
+    #
+    #        <p>The values is expressed in thousandths of a percent, so assigning a weight of 50000 assigns 50% of traffic to that variation.</p> <p>If the sum of the weights for all the variations in a segment override does not add up to 100,000, then the remaining traffic that matches this segment is not assigned by this segment override, and instead moves on to the next segment override or the default traffic split.</p>
     #   @return [Hash<String,Integer>]
+    #
+    # @!attribute [rw] segment_overrides
+    #   Use this parameter to specify different traffic splits for one or
+    #   more audience *segments*. A segment is a portion of your audience
+    #   that share one or more characteristics. Examples could be Chrome
+    #   browser users, users in Europe, or Firefox browser users in Europe
+    #   who also fit other criteria that your application collects, such as
+    #   age.
+    #
+    #   This parameter is an array of up to six segment override objects.
+    #   Each of these objects specifies a segment that you have already
+    #   created, and defines the traffic split for that segment.
+    #   @return [Array<Types::SegmentOverride>]
     #
     # @!attribute [rw] start_time
     #   The date and time that this step of the launch starts.
@@ -2660,6 +3036,7 @@ module Aws::CloudWatchEvidently
     #
     class ScheduledSplitConfig < Struct.new(
       :group_weights,
+      :segment_overrides,
       :start_time)
       SENSITIVE = []
       include Aws::Structure
@@ -2678,6 +3055,15 @@ module Aws::CloudWatchEvidently
     #             group_weights: { # required
     #               "GroupName" => 1,
     #             },
+    #             segment_overrides: [
+    #               {
+    #                 evaluation_order: 1, # required
+    #                 segment: "SegmentRef", # required
+    #                 weights: { # required
+    #                   "GroupName" => 1,
+    #                 },
+    #               },
+    #             ],
     #             start_time: Time.now, # required
     #           },
     #         ],
@@ -2711,6 +3097,109 @@ module Aws::CloudWatchEvidently
     #
     class ScheduledSplitsLaunchDefinition < Struct.new(
       :steps)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This structure contains information about one audience *segment*. You
+    # can use segments in your experiments and launches to narrow the user
+    # sessions used for experiment or launch to only the user sessions that
+    # match one or more criteria.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the segment.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The date and time that this segment was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The customer-created description for this segment.
+    #   @return [String]
+    #
+    # @!attribute [rw] experiment_count
+    #   The number of experiments that this segment is used in. This count
+    #   includes all current experiments, not just those that are currently
+    #   running.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The date and time that this segment was most recently updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] launch_count
+    #   The number of launches that this segment is used in. This count
+    #   includes all current launches, not just those that are currently
+    #   running.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] name
+    #   The name of the segment.
+    #   @return [String]
+    #
+    # @!attribute [rw] pattern
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The list of tag keys and values associated with this launch.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/evidently-2021-02-01/Segment AWS API Documentation
+    #
+    class Segment < Struct.new(
+      :arn,
+      :created_time,
+      :description,
+      :experiment_count,
+      :last_updated_time,
+      :launch_count,
+      :name,
+      :pattern,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This structure specifies a segment that you have already created, and
+    # defines the traffic split for that segment to be used in a launch.
+    #
+    # @note When making an API call, you may pass SegmentOverride
+    #   data as a hash:
+    #
+    #       {
+    #         evaluation_order: 1, # required
+    #         segment: "SegmentRef", # required
+    #         weights: { # required
+    #           "GroupName" => 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] evaluation_order
+    #   A number indicating the order to use to evaluate segment overrides,
+    #   if there are more than one. Segment overrides with lower numbers are
+    #   evaluated first.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] segment
+    #   The ARN of the segment to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] weights
+    #   The traffic allocation percentages among the feature variations to
+    #   assign to this segment. This is a set of key-value pairs. The keys
+    #   are variation names. The values represent the amount of traffic to
+    #   allocate to that variation for this segment. This is expressed in
+    #   thousandths of a percent, so a weight of 50000 represents 50% of
+    #   traffic.
+    #   @return [Hash<String,Integer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/evidently-2021-02-01/SegmentOverride AWS API Documentation
+    #
+    class SegmentOverride < Struct.new(
+      :evaluation_order,
+      :segment,
+      :weights)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2771,7 +3260,8 @@ module Aws::CloudWatchEvidently
     #       }
     #
     # @!attribute [rw] analysis_complete_time
-    #   The date and time to end the experiment.
+    #   The date and time to end the experiment. This must be no more than
+    #   30 days after the experiment starts.
     #   @return [Time]
     #
     # @!attribute [rw] experiment
@@ -2976,6 +3466,44 @@ module Aws::CloudWatchEvidently
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass TestSegmentPatternRequest
+    #   data as a hash:
+    #
+    #       {
+    #         pattern: "SegmentPattern", # required
+    #         payload: "JsonValue", # required
+    #       }
+    #
+    # @!attribute [rw] pattern
+    #   The pattern to test.
+    #   @return [String]
+    #
+    # @!attribute [rw] payload
+    #   A sample `evaluationContext` JSON block to test against the
+    #   specified pattern.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/evidently-2021-02-01/TestSegmentPatternRequest AWS API Documentation
+    #
+    class TestSegmentPatternRequest < Struct.new(
+      :pattern,
+      :payload)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] match
+    #   Returns `true` if the pattern matches the payload.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/evidently-2021-02-01/TestSegmentPatternResponse AWS API Documentation
+    #
+    class TestSegmentPatternResponse < Struct.new(
+      :match)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request was denied because of request throttling. Retry the
     # request.
     #
@@ -3110,11 +3638,11 @@ module Aws::CloudWatchEvidently
     #           {
     #             desired_change: "INCREASE", # accepts INCREASE, DECREASE
     #             metric_definition: { # required
-    #               entity_id_key: "JsonPath",
+    #               entity_id_key: "JsonPath", # required
     #               event_pattern: "MetricDefinitionConfigEventPatternString",
-    #               name: "CwDimensionSafeName",
+    #               name: "CwDimensionSafeName", # required
     #               unit_label: "MetricUnitLabel",
-    #               value_key: "JsonPath",
+    #               value_key: "JsonPath", # required
     #             },
     #           },
     #         ],
@@ -3126,7 +3654,9 @@ module Aws::CloudWatchEvidently
     #         },
     #         project: "ProjectRef", # required
     #         randomization_salt: "RandomizationSalt",
+    #         remove_segment: false,
     #         sampling_rate: 1,
+    #         segment: "SegmentRef",
     #         treatments: [
     #           {
     #             description: "Description",
@@ -3171,6 +3701,11 @@ module Aws::CloudWatchEvidently
     #   Evidently uses the experiment name as the `randomizationSalt`.
     #   @return [String]
     #
+    # @!attribute [rw] remove_segment
+    #   Removes a segment from being used in an experiment. You can't use
+    #   this parameter if the experiment is currently running.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] sampling_rate
     #   The portion of the available audience that you want to allocate to
     #   this experiment, in thousandths of a percent. The available audience
@@ -3180,6 +3715,13 @@ module Aws::CloudWatchEvidently
     #   This is represented in thousandths of a percent. For example,
     #   specify 20,000 to allocate 20% of the available audience.
     #   @return [Integer]
+    #
+    # @!attribute [rw] segment
+    #   Adds an audience *segment* to an experiment. When a segment is used
+    #   in an experiment, only user sessions that match the segment pattern
+    #   are used in the experiment. You can't use this parameter if the
+    #   experiment is currently running.
+    #   @return [String]
     #
     # @!attribute [rw] treatments
     #   An array of structures that define the variations being tested in
@@ -3195,7 +3737,9 @@ module Aws::CloudWatchEvidently
       :online_ab_config,
       :project,
       :randomization_salt,
+      :remove_segment,
       :sampling_rate,
+      :segment,
       :treatments)
       SENSITIVE = []
       include Aws::Structure
@@ -3334,11 +3878,11 @@ module Aws::CloudWatchEvidently
     #         metric_monitors: [
     #           {
     #             metric_definition: { # required
-    #               entity_id_key: "JsonPath",
+    #               entity_id_key: "JsonPath", # required
     #               event_pattern: "MetricDefinitionConfigEventPatternString",
-    #               name: "CwDimensionSafeName",
+    #               name: "CwDimensionSafeName", # required
     #               unit_label: "MetricUnitLabel",
-    #               value_key: "JsonPath",
+    #               value_key: "JsonPath", # required
     #             },
     #           },
     #         ],
@@ -3350,6 +3894,15 @@ module Aws::CloudWatchEvidently
     #               group_weights: { # required
     #                 "GroupName" => 1,
     #               },
+    #               segment_overrides: [
+    #                 {
+    #                   evaluation_order: 1, # required
+    #                   segment: "SegmentRef", # required
+    #                   weights: { # required
+    #                     "GroupName" => 1,
+    #                   },
+    #                 },
+    #               ],
     #               start_time: Time.now, # required
     #             },
     #           ],

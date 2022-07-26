@@ -877,6 +877,10 @@ module Aws::AppStream
     #         platform: "WINDOWS", # accepts WINDOWS, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, AMAZON_LINUX2
     #         max_concurrent_sessions: 1,
     #         usb_device_filter_strings: ["UsbDeviceFilterString"],
+    #         session_script_s3_location: {
+    #           s3_bucket: "S3Bucket", # required
+    #           s3_key: "S3Key", # required
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -1130,6 +1134,11 @@ module Aws::AppStream
     #   native client. This is allowed but not required for Elastic fleets.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] session_script_s3_location
+    #   The S3 location of the session scripts configuration zip file. This
+    #   only applies to Elastic fleets.
+    #   @return [Types::S3Location]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateFleetRequest AWS API Documentation
     #
     class CreateFleetRequest < Struct.new(
@@ -1152,7 +1161,8 @@ module Aws::AppStream
       :stream_view,
       :platform,
       :max_concurrent_sessions,
-      :usb_device_filter_strings)
+      :usb_device_filter_strings,
+      :session_script_s3_location)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1468,6 +1478,9 @@ module Aws::AppStream
     #           },
     #         ],
     #         embed_host_domains: ["EmbedHostDomain"],
+    #         streaming_experience_settings: {
+    #           preferred_protocol: "TCP", # accepts TCP, UDP
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -1541,6 +1554,12 @@ module Aws::AppStream
     #   embedded AppStream 2.0 streaming sessions.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] streaming_experience_settings
+    #   The streaming protocol you want your stack to prefer. This can be
+    #   UDP or TCP. Currently, UDP is only supported in the Windows native
+    #   client.
+    #   @return [Types::StreamingExperienceSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStackRequest AWS API Documentation
     #
     class CreateStackRequest < Struct.new(
@@ -1554,7 +1573,8 @@ module Aws::AppStream
       :application_settings,
       :tags,
       :access_endpoints,
-      :embed_host_domains)
+      :embed_host_domains,
+      :streaming_experience_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3497,6 +3517,11 @@ module Aws::AppStream
     #   The USB device filter strings associated with the fleet.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] session_script_s3_location
+    #   The S3 location of the session scripts configuration zip file. This
+    #   only applies to Elastic fleets.
+    #   @return [Types::S3Location]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Fleet AWS API Documentation
     #
     class Fleet < Struct.new(
@@ -3522,7 +3547,8 @@ module Aws::AppStream
       :stream_view,
       :platform,
       :max_concurrent_sessions,
-      :usb_device_filter_strings)
+      :usb_device_filter_strings,
+      :session_script_s3_location)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4550,6 +4576,12 @@ module Aws::AppStream
     #   embedded AppStream 2.0 streaming sessions.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] streaming_experience_settings
+    #   The streaming protocol you want your stack to prefer. This can be
+    #   UDP or TCP. Currently, UDP is only supported in the Windows native
+    #   client.
+    #   @return [Types::StreamingExperienceSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Stack AWS API Documentation
     #
     class Stack < Struct.new(
@@ -4565,7 +4597,8 @@ module Aws::AppStream
       :user_settings,
       :application_settings,
       :access_endpoints,
-      :embed_host_domains)
+      :embed_host_domains,
+      :streaming_experience_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4734,6 +4767,29 @@ module Aws::AppStream
       :connector_type,
       :resource_identifier,
       :domains)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The streaming protocol you want your stack to prefer. This can be UDP
+    # or TCP. Currently, UDP is only supported in the Windows native client.
+    #
+    # @note When making an API call, you may pass StreamingExperienceSettings
+    #   data as a hash:
+    #
+    #       {
+    #         preferred_protocol: "TCP", # accepts TCP, UDP
+    #       }
+    #
+    # @!attribute [rw] preferred_protocol
+    #   The preferred protocol that you want to use while streaming your
+    #   application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StreamingExperienceSettings AWS API Documentation
+    #
+    class StreamingExperienceSettings < Struct.new(
+      :preferred_protocol)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5025,12 +5081,16 @@ module Aws::AppStream
     #           organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #         },
     #         idle_disconnect_timeout_in_seconds: 1,
-    #         attributes_to_delete: ["VPC_CONFIGURATION"], # accepts VPC_CONFIGURATION, VPC_CONFIGURATION_SECURITY_GROUP_IDS, DOMAIN_JOIN_INFO, IAM_ROLE_ARN, USB_DEVICE_FILTER_STRINGS
+    #         attributes_to_delete: ["VPC_CONFIGURATION"], # accepts VPC_CONFIGURATION, VPC_CONFIGURATION_SECURITY_GROUP_IDS, DOMAIN_JOIN_INFO, IAM_ROLE_ARN, USB_DEVICE_FILTER_STRINGS, SESSION_SCRIPT_S3_LOCATION
     #         iam_role_arn: "Arn",
     #         stream_view: "APP", # accepts APP, DESKTOP
     #         platform: "WINDOWS", # accepts WINDOWS, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, AMAZON_LINUX2
     #         max_concurrent_sessions: 1,
     #         usb_device_filter_strings: ["UsbDeviceFilterString"],
+    #         session_script_s3_location: {
+    #           s3_bucket: "S3Bucket", # required
+    #           s3_key: "S3Key", # required
+    #         },
     #       }
     #
     # @!attribute [rw] image_name
@@ -5253,6 +5313,11 @@ module Aws::AppStream
     #   native client. This is allowed but not required for Elastic fleets.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] session_script_s3_location
+    #   The S3 location of the session scripts configuration zip file. This
+    #   only applies to Elastic fleets.
+    #   @return [Types::S3Location]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateFleetRequest AWS API Documentation
     #
     class UpdateFleetRequest < Struct.new(
@@ -5275,7 +5340,8 @@ module Aws::AppStream
       :stream_view,
       :platform,
       :max_concurrent_sessions,
-      :usb_device_filter_strings)
+      :usb_device_filter_strings,
+      :session_script_s3_location)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5348,7 +5414,7 @@ module Aws::AppStream
     #         delete_storage_connectors: false,
     #         redirect_url: "RedirectURL",
     #         feedback_url: "FeedbackURL",
-    #         attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, STORAGE_CONNECTOR_HOMEFOLDERS, STORAGE_CONNECTOR_GOOGLE_DRIVE, STORAGE_CONNECTOR_ONE_DRIVE, REDIRECT_URL, FEEDBACK_URL, THEME_NAME, USER_SETTINGS, EMBED_HOST_DOMAINS, IAM_ROLE_ARN, ACCESS_ENDPOINTS
+    #         attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, STORAGE_CONNECTOR_HOMEFOLDERS, STORAGE_CONNECTOR_GOOGLE_DRIVE, STORAGE_CONNECTOR_ONE_DRIVE, REDIRECT_URL, FEEDBACK_URL, THEME_NAME, USER_SETTINGS, EMBED_HOST_DOMAINS, IAM_ROLE_ARN, ACCESS_ENDPOINTS, STREAMING_EXPERIENCE_SETTINGS
     #         user_settings: [
     #           {
     #             action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE, DOMAIN_PASSWORD_SIGNIN, DOMAIN_SMART_CARD_SIGNIN
@@ -5366,6 +5432,9 @@ module Aws::AppStream
     #           },
     #         ],
     #         embed_host_domains: ["EmbedHostDomain"],
+    #         streaming_experience_settings: {
+    #           preferred_protocol: "TCP", # accepts TCP, UDP
+    #         },
     #       }
     #
     # @!attribute [rw] display_name
@@ -5427,6 +5496,12 @@ module Aws::AppStream
     #   embedded AppStream 2.0 streaming sessions.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] streaming_experience_settings
+    #   The streaming protocol you want your stack to prefer. This can be
+    #   UDP or TCP. Currently, UDP is only supported in the Windows native
+    #   client.
+    #   @return [Types::StreamingExperienceSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateStackRequest AWS API Documentation
     #
     class UpdateStackRequest < Struct.new(
@@ -5441,7 +5516,8 @@ module Aws::AppStream
       :user_settings,
       :application_settings,
       :access_endpoints,
-      :embed_host_domains)
+      :embed_host_domains,
+      :streaming_experience_settings)
       SENSITIVE = []
       include Aws::Structure
     end

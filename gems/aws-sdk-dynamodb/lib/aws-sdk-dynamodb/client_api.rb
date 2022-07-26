@@ -835,11 +835,13 @@ module Aws::DynamoDB
     ExecuteStatementInput.add_member(:consistent_read, Shapes::ShapeRef.new(shape: ConsistentRead, location_name: "ConsistentRead"))
     ExecuteStatementInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PartiQLNextToken, location_name: "NextToken"))
     ExecuteStatementInput.add_member(:return_consumed_capacity, Shapes::ShapeRef.new(shape: ReturnConsumedCapacity, location_name: "ReturnConsumedCapacity"))
+    ExecuteStatementInput.add_member(:limit, Shapes::ShapeRef.new(shape: PositiveIntegerObject, location_name: "Limit"))
     ExecuteStatementInput.struct_class = Types::ExecuteStatementInput
 
     ExecuteStatementOutput.add_member(:items, Shapes::ShapeRef.new(shape: ItemList, location_name: "Items"))
     ExecuteStatementOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PartiQLNextToken, location_name: "NextToken"))
     ExecuteStatementOutput.add_member(:consumed_capacity, Shapes::ShapeRef.new(shape: ConsumedCapacity, location_name: "ConsumedCapacity"))
+    ExecuteStatementOutput.add_member(:last_evaluated_key, Shapes::ShapeRef.new(shape: Key, location_name: "LastEvaluatedKey"))
     ExecuteStatementOutput.struct_class = Types::ExecuteStatementOutput
 
     ExecuteTransactionInput.add_member(:transact_statements, Shapes::ShapeRef.new(shape: ParameterizedStatements, required: true, location_name: "TransactStatements"))

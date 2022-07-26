@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::MediaPackageVod
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -528,6 +530,7 @@ module Aws::MediaPackageVod
     #           manifest_name: "__string",
     #           min_buffer_time_seconds: 1,
     #           profile: "NONE", # accepts NONE, HBBTV_1_5
+    #           scte_markers_source: "SEGMENTS", # accepts SEGMENTS, MANIFEST
     #           stream_selection: {
     #             max_video_bits_per_second: 1,
     #             min_video_bits_per_second: 1,
@@ -626,6 +629,7 @@ module Aws::MediaPackageVod
     #   resp.dash_package.dash_manifests[0].manifest_name #=> String
     #   resp.dash_package.dash_manifests[0].min_buffer_time_seconds #=> Integer
     #   resp.dash_package.dash_manifests[0].profile #=> String, one of "NONE", "HBBTV_1_5"
+    #   resp.dash_package.dash_manifests[0].scte_markers_source #=> String, one of "SEGMENTS", "MANIFEST"
     #   resp.dash_package.dash_manifests[0].stream_selection.max_video_bits_per_second #=> Integer
     #   resp.dash_package.dash_manifests[0].stream_selection.min_video_bits_per_second #=> Integer
     #   resp.dash_package.dash_manifests[0].stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
@@ -894,6 +898,7 @@ module Aws::MediaPackageVod
     #   resp.dash_package.dash_manifests[0].manifest_name #=> String
     #   resp.dash_package.dash_manifests[0].min_buffer_time_seconds #=> Integer
     #   resp.dash_package.dash_manifests[0].profile #=> String, one of "NONE", "HBBTV_1_5"
+    #   resp.dash_package.dash_manifests[0].scte_markers_source #=> String, one of "SEGMENTS", "MANIFEST"
     #   resp.dash_package.dash_manifests[0].stream_selection.max_video_bits_per_second #=> Integer
     #   resp.dash_package.dash_manifests[0].stream_selection.min_video_bits_per_second #=> Integer
     #   resp.dash_package.dash_manifests[0].stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
@@ -1083,6 +1088,7 @@ module Aws::MediaPackageVod
     #   resp.packaging_configurations[0].dash_package.dash_manifests[0].manifest_name #=> String
     #   resp.packaging_configurations[0].dash_package.dash_manifests[0].min_buffer_time_seconds #=> Integer
     #   resp.packaging_configurations[0].dash_package.dash_manifests[0].profile #=> String, one of "NONE", "HBBTV_1_5"
+    #   resp.packaging_configurations[0].dash_package.dash_manifests[0].scte_markers_source #=> String, one of "SEGMENTS", "MANIFEST"
     #   resp.packaging_configurations[0].dash_package.dash_manifests[0].stream_selection.max_video_bits_per_second #=> Integer
     #   resp.packaging_configurations[0].dash_package.dash_manifests[0].stream_selection.min_video_bits_per_second #=> Integer
     #   resp.packaging_configurations[0].dash_package.dash_manifests[0].stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
@@ -1319,7 +1325,7 @@ module Aws::MediaPackageVod
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediapackagevod'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

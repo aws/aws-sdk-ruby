@@ -28,6 +28,7 @@ module Aws::Batch
     CEType = Shapes::StringShape.new(name: 'CEType')
     CRAllocationStrategy = Shapes::StringShape.new(name: 'CRAllocationStrategy')
     CRType = Shapes::StringShape.new(name: 'CRType')
+    CRUpdateAllocationStrategy = Shapes::StringShape.new(name: 'CRUpdateAllocationStrategy')
     CancelJobRequest = Shapes::StructureShape.new(name: 'CancelJobRequest')
     CancelJobResponse = Shapes::StructureShape.new(name: 'CancelJobResponse')
     ClientException = Shapes::StructureShape.new(name: 'ClientException')
@@ -94,6 +95,7 @@ module Aws::Batch
     JobDependencyList = Shapes::ListShape.new(name: 'JobDependencyList')
     JobDetail = Shapes::StructureShape.new(name: 'JobDetail')
     JobDetailList = Shapes::ListShape.new(name: 'JobDetailList')
+    JobExecutionTimeoutMinutes = Shapes::IntegerShape.new(name: 'JobExecutionTimeoutMinutes')
     JobQueueDetail = Shapes::StructureShape.new(name: 'JobQueueDetail')
     JobQueueDetailList = Shapes::ListShape.new(name: 'JobQueueDetailList')
     JobStatus = Shapes::StringShape.new(name: 'JobStatus')
@@ -170,6 +172,7 @@ module Aws::Batch
     UpdateComputeEnvironmentResponse = Shapes::StructureShape.new(name: 'UpdateComputeEnvironmentResponse')
     UpdateJobQueueRequest = Shapes::StructureShape.new(name: 'UpdateJobQueueRequest')
     UpdateJobQueueResponse = Shapes::StructureShape.new(name: 'UpdateJobQueueResponse')
+    UpdatePolicy = Shapes::StructureShape.new(name: 'UpdatePolicy')
     UpdateSchedulingPolicyRequest = Shapes::StructureShape.new(name: 'UpdateSchedulingPolicyRequest')
     UpdateSchedulingPolicyResponse = Shapes::StructureShape.new(name: 'UpdateSchedulingPolicyResponse')
     Volume = Shapes::StructureShape.new(name: 'Volume')
@@ -218,7 +221,7 @@ module Aws::Batch
     ComputeEnvironmentDetail.add_member(:compute_environment_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "computeEnvironmentName"))
     ComputeEnvironmentDetail.add_member(:compute_environment_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "computeEnvironmentArn"))
     ComputeEnvironmentDetail.add_member(:unmanagedv_cpus, Shapes::ShapeRef.new(shape: Integer, location_name: "unmanagedvCpus"))
-    ComputeEnvironmentDetail.add_member(:ecs_cluster_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ecsClusterArn"))
+    ComputeEnvironmentDetail.add_member(:ecs_cluster_arn, Shapes::ShapeRef.new(shape: String, location_name: "ecsClusterArn"))
     ComputeEnvironmentDetail.add_member(:tags, Shapes::ShapeRef.new(shape: TagrisTagsMap, location_name: "tags"))
     ComputeEnvironmentDetail.add_member(:type, Shapes::ShapeRef.new(shape: CEType, location_name: "type"))
     ComputeEnvironmentDetail.add_member(:state, Shapes::ShapeRef.new(shape: CEState, location_name: "state"))
@@ -226,6 +229,7 @@ module Aws::Batch
     ComputeEnvironmentDetail.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     ComputeEnvironmentDetail.add_member(:compute_resources, Shapes::ShapeRef.new(shape: ComputeResource, location_name: "computeResources"))
     ComputeEnvironmentDetail.add_member(:service_role, Shapes::ShapeRef.new(shape: String, location_name: "serviceRole"))
+    ComputeEnvironmentDetail.add_member(:update_policy, Shapes::ShapeRef.new(shape: UpdatePolicy, location_name: "updatePolicy"))
     ComputeEnvironmentDetail.struct_class = Types::ComputeEnvironmentDetail
 
     ComputeEnvironmentDetailList.member = Shapes::ShapeRef.new(shape: ComputeEnvironmentDetail)
@@ -260,6 +264,18 @@ module Aws::Batch
     ComputeResourceUpdate.add_member(:desiredv_cpus, Shapes::ShapeRef.new(shape: Integer, location_name: "desiredvCpus"))
     ComputeResourceUpdate.add_member(:subnets, Shapes::ShapeRef.new(shape: StringList, location_name: "subnets"))
     ComputeResourceUpdate.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "securityGroupIds"))
+    ComputeResourceUpdate.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: CRUpdateAllocationStrategy, location_name: "allocationStrategy"))
+    ComputeResourceUpdate.add_member(:instance_types, Shapes::ShapeRef.new(shape: StringList, location_name: "instanceTypes"))
+    ComputeResourceUpdate.add_member(:ec2_key_pair, Shapes::ShapeRef.new(shape: String, location_name: "ec2KeyPair"))
+    ComputeResourceUpdate.add_member(:instance_role, Shapes::ShapeRef.new(shape: String, location_name: "instanceRole"))
+    ComputeResourceUpdate.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    ComputeResourceUpdate.add_member(:placement_group, Shapes::ShapeRef.new(shape: String, location_name: "placementGroup"))
+    ComputeResourceUpdate.add_member(:bid_percentage, Shapes::ShapeRef.new(shape: Integer, location_name: "bidPercentage"))
+    ComputeResourceUpdate.add_member(:launch_template, Shapes::ShapeRef.new(shape: LaunchTemplateSpecification, location_name: "launchTemplate"))
+    ComputeResourceUpdate.add_member(:ec2_configuration, Shapes::ShapeRef.new(shape: Ec2ConfigurationList, location_name: "ec2Configuration"))
+    ComputeResourceUpdate.add_member(:update_to_latest_image_version, Shapes::ShapeRef.new(shape: Boolean, location_name: "updateToLatestImageVersion"))
+    ComputeResourceUpdate.add_member(:type, Shapes::ShapeRef.new(shape: CRType, location_name: "type"))
+    ComputeResourceUpdate.add_member(:image_id, Shapes::ShapeRef.new(shape: String, location_name: "imageId"))
     ComputeResourceUpdate.struct_class = Types::ComputeResourceUpdate
 
     ContainerDetail.add_member(:image, Shapes::ShapeRef.new(shape: String, location_name: "image"))
@@ -784,6 +800,7 @@ module Aws::Batch
     UpdateComputeEnvironmentRequest.add_member(:unmanagedv_cpus, Shapes::ShapeRef.new(shape: Integer, location_name: "unmanagedvCpus"))
     UpdateComputeEnvironmentRequest.add_member(:compute_resources, Shapes::ShapeRef.new(shape: ComputeResourceUpdate, location_name: "computeResources"))
     UpdateComputeEnvironmentRequest.add_member(:service_role, Shapes::ShapeRef.new(shape: String, location_name: "serviceRole"))
+    UpdateComputeEnvironmentRequest.add_member(:update_policy, Shapes::ShapeRef.new(shape: UpdatePolicy, location_name: "updatePolicy"))
     UpdateComputeEnvironmentRequest.struct_class = Types::UpdateComputeEnvironmentRequest
 
     UpdateComputeEnvironmentResponse.add_member(:compute_environment_name, Shapes::ShapeRef.new(shape: String, location_name: "computeEnvironmentName"))
@@ -800,6 +817,10 @@ module Aws::Batch
     UpdateJobQueueResponse.add_member(:job_queue_name, Shapes::ShapeRef.new(shape: String, location_name: "jobQueueName"))
     UpdateJobQueueResponse.add_member(:job_queue_arn, Shapes::ShapeRef.new(shape: String, location_name: "jobQueueArn"))
     UpdateJobQueueResponse.struct_class = Types::UpdateJobQueueResponse
+
+    UpdatePolicy.add_member(:terminate_jobs_on_update, Shapes::ShapeRef.new(shape: Boolean, location_name: "terminateJobsOnUpdate"))
+    UpdatePolicy.add_member(:job_execution_timeout_minutes, Shapes::ShapeRef.new(shape: JobExecutionTimeoutMinutes, location_name: "jobExecutionTimeoutMinutes"))
+    UpdatePolicy.struct_class = Types::UpdatePolicy
 
     UpdateSchedulingPolicyRequest.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "arn"))
     UpdateSchedulingPolicyRequest.add_member(:fairshare_policy, Shapes::ShapeRef.new(shape: FairsharePolicy, location_name: "fairsharePolicy"))

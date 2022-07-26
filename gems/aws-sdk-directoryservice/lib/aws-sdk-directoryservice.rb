@@ -48,6 +48,6 @@ require_relative 'aws-sdk-directoryservice/customizations'
 # @!group service
 module Aws::DirectoryService
 
-  GEM_VERSION = '1.48.0'
+  GEM_VERSION = '1.50.0'
 
 end

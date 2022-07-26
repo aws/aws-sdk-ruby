@@ -47,6 +47,26 @@
         {"shape":"ResourceUnavailableException"}
       ]
     },
+    "CreateAccountSubscription":{
+      "name":"CreateAccountSubscription",
+      "http":{
+        "method":"POST",
+        "requestUri":"/account/{AwsAccountId}"
+      },
+      "input":{"shape":"CreateAccountSubscriptionRequest"},
+      "output":{"shape":"CreateAccountSubscriptionResponse"},
+      "errors":[
+        {"shape":"AccessDeniedException"},
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"ResourceExistsException"},
+        {"shape":"PreconditionNotMetException"},
+        {"shape":"ConflictException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ResourceUnavailableException"}
+      ]
+    },
     "CreateAnalysis":{
       "name":"CreateAnalysis",
       "http":{
@@ -664,6 +684,23 @@
         {"shape":"ResourceUnavailableException"}
       ]
     },
+    "DescribeAccountSubscription":{
+      "name":"DescribeAccountSubscription",
+      "http":{
+        "method":"GET",
+        "requestUri":"/account/{AwsAccountId}"
+      },
+      "input":{"shape":"DescribeAccountSubscriptionRequest"},
+      "output":{"shape":"DescribeAccountSubscriptionResponse"},
+      "errors":[
+        {"shape":"AccessDeniedException"},
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ResourceUnavailableException"}
+      ]
+    },
     "DescribeAnalysis":{
       "name":"DescribeAnalysis",
       "http":{
@@ -853,6 +890,24 @@
       },
       "input":{"shape":"DescribeGroupRequest"},
       "output":{"shape":"DescribeGroupResponse"},
+      "errors":[
+        {"shape":"AccessDeniedException"},
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"PreconditionNotMetException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ResourceUnavailableException"}
+      ]
+    },
+    "DescribeGroupMembership":{
+      "name":"DescribeGroupMembership",
+      "http":{
+        "method":"GET",
+        "requestUri":"/accounts/{AwsAccountId}/namespaces/{Namespace}/groups/{GroupName}/members/{MemberName}"
+      },
+      "input":{"shape":"DescribeGroupMembershipRequest"},
+      "output":{"shape":"DescribeGroupMembershipResponse"},
       "errors":[
         {"shape":"AccessDeniedException"},
         {"shape":"InvalidParameterValueException"},
@@ -1604,6 +1659,25 @@
         {"shape":"InternalFailureException"}
       ]
     },
+    "SearchGroups":{
+      "name":"SearchGroups",
+      "http":{
+        "method":"POST",
+        "requestUri":"/accounts/{AwsAccountId}/namespaces/{Namespace}/groups-search"
+      },
+      "input":{"shape":"SearchGroupsRequest"},
+      "output":{"shape":"SearchGroupsResponse"},
+      "errors":[
+        {"shape":"AccessDeniedException"},
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InvalidNextTokenException"},
+        {"shape":"PreconditionNotMetException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ResourceUnavailableException"}
+      ]
+    },
     "TagResource":{
       "name":"TagResource",
       "http":{
@@ -1919,6 +1993,23 @@
         {"shape":"InternalFailureException"}
       ]
     },
+    "UpdatePublicSharingSettings":{
+      "name":"UpdatePublicSharingSettings",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/accounts/{AwsAccountId}/public-sharing-settings"
+      },
+      "input":{"shape":"UpdatePublicSharingSettingsRequest"},
+      "output":{"shape":"UpdatePublicSharingSettingsResponse"},
+      "errors":[
+        {"shape":"AccessDeniedException"},
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnsupportedPricingPlanException"},
+        {"shape":"InternalFailureException"}
+      ]
+    },
     "UpdateTemplate":{
       "name":"UpdateTemplate",
       "http":{
@@ -2062,13 +2153,24 @@
         "DefaultEmailCustomizationTemplate":{"shape":"Arn"}
       }
     },
+    "AccountInfo":{
+      "type":"structure",
+      "members":{
+        "AccountName":{"shape":"String"},
+        "Edition":{"shape":"Edition"},
+        "NotificationEmail":{"shape":"String"},
+        "AuthenticationType":{"shape":"String"},
+        "AccountSubscriptionStatus":{"shape":"String"}
+      }
+    },
     "AccountSettings":{
       "type":"structure",
       "members":{
         "AccountName":{"shape":"String"},
         "Edition":{"shape":"Edition"},
         "DefaultNamespace":{"shape":"Namespace"},
-        "NotificationEmail":{"shape":"String"}
+        "NotificationEmail":{"shape":"String"},
+        "PublicSharingEnabled":{"shape":"Boolean"}
       }
     },
     "ActionList":{
@@ -2275,6 +2377,14 @@
         "Port":{"shape":"Port"},
         "Database":{"shape":"Database"}
       }
+    },
+    "AuthenticationMethodOption":{
+      "type":"string",
+      "enum":[
+        "IAM_AND_QUICKSIGHT",
+        "IAM_ONLY",
+        "ACTIVE_DIRECTORY"
+      ]
     },
     "AwsAccountId":{
       "type":"string",
@@ -2574,6 +2684,48 @@
           "shape":"StatusCode",
           "location":"statusCode"
         }
+      }
+    },
+    "CreateAccountSubscriptionRequest":{
+      "type":"structure",
+      "required":[
+        "Edition",
+        "AuthenticationMethod",
+        "AwsAccountId",
+        "AccountName",
+        "NotificationEmail"
+      ],
+      "members":{
+        "Edition":{"shape":"Edition"},
+        "AuthenticationMethod":{"shape":"AuthenticationMethodOption"},
+        "AwsAccountId":{
+          "shape":"AwsAccountId",
+          "location":"uri",
+          "locationName":"AwsAccountId"
+        },
+        "AccountName":{"shape":"String"},
+        "NotificationEmail":{"shape":"String"},
+        "ActiveDirectoryName":{"shape":"String"},
+        "Realm":{"shape":"String"},
+        "DirectoryId":{"shape":"String"},
+        "AdminGroup":{"shape":"GroupsList"},
+        "AuthorGroup":{"shape":"GroupsList"},
+        "ReaderGroup":{"shape":"GroupsList"},
+        "FirstName":{"shape":"String"},
+        "LastName":{"shape":"String"},
+        "EmailAddress":{"shape":"String"},
+        "ContactNumber":{"shape":"String"}
+      }
+    },
+    "CreateAccountSubscriptionResponse":{
+      "type":"structure",
+      "members":{
+        "SignupResponse":{"shape":"SignupResponse"},
+        "Status":{
+          "shape":"StatusCode",
+          "location":"statusCode"
+        },
+        "RequestId":{"shape":"String"}
       }
     },
     "CreateAnalysisRequest":{
@@ -4259,6 +4411,28 @@
         }
       }
     },
+    "DescribeAccountSubscriptionRequest":{
+      "type":"structure",
+      "required":["AwsAccountId"],
+      "members":{
+        "AwsAccountId":{
+          "shape":"AwsAccountId",
+          "location":"uri",
+          "locationName":"AwsAccountId"
+        }
+      }
+    },
+    "DescribeAccountSubscriptionResponse":{
+      "type":"structure",
+      "members":{
+        "AccountInfo":{"shape":"AccountInfo"},
+        "Status":{
+          "shape":"StatusCode",
+          "location":"statusCode"
+        },
+        "RequestId":{"shape":"String"}
+      }
+    },
     "DescribeAnalysisPermissionsRequest":{
       "type":"structure",
       "required":[
@@ -4610,6 +4784,48 @@
         },
         "Folder":{"shape":"Folder"},
         "RequestId":{"shape":"String"}
+      }
+    },
+    "DescribeGroupMembershipRequest":{
+      "type":"structure",
+      "required":[
+        "MemberName",
+        "GroupName",
+        "AwsAccountId",
+        "Namespace"
+      ],
+      "members":{
+        "MemberName":{
+          "shape":"GroupMemberName",
+          "location":"uri",
+          "locationName":"MemberName"
+        },
+        "GroupName":{
+          "shape":"GroupName",
+          "location":"uri",
+          "locationName":"GroupName"
+        },
+        "AwsAccountId":{
+          "shape":"AwsAccountId",
+          "location":"uri",
+          "locationName":"AwsAccountId"
+        },
+        "Namespace":{
+          "shape":"Namespace",
+          "location":"uri",
+          "locationName":"Namespace"
+        }
+      }
+    },
+    "DescribeGroupMembershipResponse":{
+      "type":"structure",
+      "members":{
+        "GroupMember":{"shape":"GroupMember"},
+        "RequestId":{"shape":"String"},
+        "Status":{
+          "shape":"StatusCode",
+          "location":"statusCode"
+        }
       }
     },
     "DescribeGroupRequest":{
@@ -5049,7 +5265,8 @@
       "type":"string",
       "enum":[
         "STANDARD",
-        "ENTERPRISE"
+        "ENTERPRISE",
+        "ENTERPRISE_AND_Q"
       ]
     },
     "EmbeddingIdentityType":{
@@ -5249,7 +5466,8 @@
         "Namespace":{"shape":"Namespace"},
         "SessionTags":{"shape":"SessionTagList"},
         "AuthorizedResourceArns":{"shape":"ArnList"},
-        "ExperienceConfiguration":{"shape":"AnonymousUserEmbeddingExperienceConfiguration"}
+        "ExperienceConfiguration":{"shape":"AnonymousUserEmbeddingExperienceConfiguration"},
+        "AllowedDomains":{"shape":"StringList"}
       }
     },
     "GenerateEmbedUrlForAnonymousUserResponse":{
@@ -5283,7 +5501,8 @@
         },
         "SessionLifetimeInMinutes":{"shape":"SessionLifetimeInMinutes"},
         "UserArn":{"shape":"Arn"},
-        "ExperienceConfiguration":{"shape":"RegisteredUserEmbeddingExperienceConfiguration"}
+        "ExperienceConfiguration":{"shape":"RegisteredUserEmbeddingExperienceConfiguration"},
+        "AllowedDomains":{"shape":"StringList"}
       }
     },
     "GenerateEmbedUrlForRegisteredUserResponse":{
@@ -5453,6 +5672,14 @@
       "max":512,
       "min":1
     },
+    "GroupFilterAttribute":{
+      "type":"string",
+      "enum":["GROUP_NAME"]
+    },
+    "GroupFilterOperator":{
+      "type":"string",
+      "enum":["StartsWith"]
+    },
     "GroupList":{
       "type":"list",
       "member":{"shape":"Group"}
@@ -5478,6 +5705,29 @@
       "type":"string",
       "min":1,
       "pattern":"[\\u0020-\\u00FF]+"
+    },
+    "GroupSearchFilter":{
+      "type":"structure",
+      "required":[
+        "Operator",
+        "Name",
+        "Value"
+      ],
+      "members":{
+        "Operator":{"shape":"GroupFilterOperator"},
+        "Name":{"shape":"GroupFilterAttribute"},
+        "Value":{"shape":"String"}
+      }
+    },
+    "GroupSearchFilterList":{
+      "type":"list",
+      "member":{"shape":"GroupSearchFilter"},
+      "max":1,
+      "min":1
+    },
+    "GroupsList":{
+      "type":"list",
+      "member":{"shape":"String"}
     },
     "GutterStyle":{
       "type":"structure",
@@ -7471,6 +7721,50 @@
         "RequestId":{"shape":"String"}
       }
     },
+    "SearchGroupsRequest":{
+      "type":"structure",
+      "required":[
+        "AwsAccountId",
+        "Namespace",
+        "Filters"
+      ],
+      "members":{
+        "AwsAccountId":{
+          "shape":"AwsAccountId",
+          "location":"uri",
+          "locationName":"AwsAccountId"
+        },
+        "NextToken":{
+          "shape":"String",
+          "location":"querystring",
+          "locationName":"next-token"
+        },
+        "MaxResults":{
+          "shape":"MaxResults",
+          "box":true,
+          "location":"querystring",
+          "locationName":"max-results"
+        },
+        "Namespace":{
+          "shape":"Namespace",
+          "location":"uri",
+          "locationName":"Namespace"
+        },
+        "Filters":{"shape":"GroupSearchFilterList"}
+      }
+    },
+    "SearchGroupsResponse":{
+      "type":"structure",
+      "members":{
+        "GroupList":{"shape":"GroupList"},
+        "NextToken":{"shape":"String"},
+        "RequestId":{"shape":"String"},
+        "Status":{
+          "shape":"StatusCode",
+          "location":"statusCode"
+        }
+      }
+    },
     "ServiceNowParameters":{
       "type":"structure",
       "required":["SiteBaseUrl"],
@@ -7543,6 +7837,15 @@
       "members":{
         "Tile":{"shape":"TileStyle"},
         "TileLayout":{"shape":"TileLayoutStyle"}
+      }
+    },
+    "SignupResponse":{
+      "type":"structure",
+      "members":{
+        "IAMUser":{"shape":"Boolean"},
+        "userLoginName":{"shape":"String"},
+        "accountName":{"shape":"String"},
+        "directoryType":{"shape":"String"}
       }
     },
     "SiteBaseUrl":{
@@ -8647,6 +8950,28 @@
       "type":"list",
       "member":{"shape":"ResourcePermission"},
       "max":2
+    },
+    "UpdatePublicSharingSettingsRequest":{
+      "type":"structure",
+      "required":["AwsAccountId"],
+      "members":{
+        "AwsAccountId":{
+          "shape":"AwsAccountId",
+          "location":"uri",
+          "locationName":"AwsAccountId"
+        },
+        "PublicSharingEnabled":{"shape":"Boolean"}
+      }
+    },
+    "UpdatePublicSharingSettingsResponse":{
+      "type":"structure",
+      "members":{
+        "RequestId":{"shape":"String"},
+        "Status":{
+          "shape":"StatusCode",
+          "location":"statusCode"
+        }
+      }
     },
     "UpdateResourcePermissionList":{
       "type":"list",

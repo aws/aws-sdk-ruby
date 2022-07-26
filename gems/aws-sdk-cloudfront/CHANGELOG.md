@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2022-05-16)
+------------------
+
+* Feature - Introduced a new error (TooLongCSPInResponseHeadersPolicy) that is returned when the value of the Content-Security-Policy header in a response headers policy exceeds the maximum allowed length.
+
+1.64.0 (2022-04-26)
+------------------
+
+* Feature - CloudFront now supports the Server-Timing header in HTTP responses sent from CloudFront. You can use this header to view metrics that help you gain insights about the behavior and performance of CloudFront. To use this header, enable it in a response headers policy.
+
+1.63.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.62.0 (2022-02-03)
 ------------------
 

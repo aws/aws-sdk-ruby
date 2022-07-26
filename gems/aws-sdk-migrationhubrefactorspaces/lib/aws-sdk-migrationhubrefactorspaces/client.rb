@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::MigrationHubRefactorSpaces
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -352,9 +354,9 @@ module Aws::MigrationHubRefactorSpaces
     # Creates an Amazon Web Services Migration Hub Refactor Spaces
     # application. The account that owns the environment also owns the
     # applications created inside the environment, regardless of the account
-    # that creates the application. Refactor Spaces provisions the Amazon
-    # API Gateway and Network Load Balancer for the application proxy inside
-    # your account.
+    # that creates the application. Refactor Spaces provisions an Amazon API
+    # Gateway, API Gateway VPC link, and Network Load Balancer for the
+    # application proxy inside your account.
     #
     # @option params [Types::ApiGatewayProxyInput] :api_gateway_proxy
     #   A wrapper object holding the API Gateway endpoint type and stage name
@@ -445,12 +447,13 @@ module Aws::MigrationHubRefactorSpaces
     end
 
     # Creates an Amazon Web Services Migration Hub Refactor Spaces
-    # environment. The caller owns the environment resource, and they are
-    # referred to as the *environment owner*. The environment owner has
-    # cross-account visibility and control of Refactor Spaces resources that
-    # are added to the environment by other accounts that the environment is
-    # shared with. When creating an environment, Refactor Spaces provisions
-    # a transit gateway in your account.
+    # environment. The caller owns the environment resource, and all
+    # Refactor Spaces applications, services, and routes created within the
+    # environment. They are referred to as the *environment owner*. The
+    # environment owner has cross-account visibility and control of Refactor
+    # Spaces resources that are added to the environment by other accounts
+    # that the environment is shared with. When creating an environment,
+    # Refactor Spaces provisions a transit gateway in your account.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -528,6 +531,12 @@ module Aws::MigrationHubRefactorSpaces
     # routes, then the first route must be created as a `DEFAULT`
     # `RouteType`.
     #
+    # When created, the default route defaults to an active state so state
+    # is not a required input. However, like all other state values the
+    # state of the default route can be updated after creation, but only
+    # when all other routes are also inactive. Conversely, no route can be
+    # active without the default route also being active.
+    #
     # When you create a route, Refactor Spaces configures the Amazon API
     # Gateway to send traffic to the target service as follows:
     #
@@ -540,11 +549,15 @@ module Aws::MigrationHubRefactorSpaces
     #   internet.
     #
     # * If the service has an Lambda function endpoint, then Refactor Spaces
-    #   uses the API Gateway Lambda integration.
+    #   configures the Lambda function's resource policy to allow the
+    #   application's API Gateway to invoke the function.
     #
-    # A health check is performed on the service when the route is created.
-    # If the health check fails, the route transitions to `FAILED`, and no
-    # traffic is sent to the service.
+    # A one-time health check is performed on the service when either the
+    # route is updated from inactive to active, or when it is created with
+    # an active state. If the health check fails, the route transitions the
+    # route state to `FAILED`, an error code of
+    # `SERVICE_ENDPOINT_HEALTH_CHECK_FAILURE` is provided, and no traffic is
+    # sent to the service.
     #
     # For Lambda functions, the Lambda function state is checked. If the
     # function is not active, the function configuration is updated so that
@@ -553,16 +566,24 @@ module Aws::MigrationHubRefactorSpaces
     # [GetFunctionConfiguration's State response parameter][1] in the
     # *Lambda Developer Guide*.
     #
-    # For public URLs, a connection is opened to the public endpoint. If the
-    # URL is not reachable, the health check fails. For private URLs, a
-    # target group is created and the target group health check is run.
+    # For Lambda endpoints, a check is performed to determine that a Lambda
+    # function with the specified ARN exists. If it does not exist, the
+    # health check fails. For public URLs, a connection is opened to the
+    # public endpoint. If the URL is not reachable, the health check fails.
     #
-    # The `HealthCheckProtocol`, `HealthCheckPort`, and `HealthCheckPath`
-    # are the same protocol, port, and path specified in the URL or health
-    # URL, if used. All other settings use the default values, as described
-    # in [Health checks for your target groups][2]. The health check is
+    # For private URLS, a target group is created on the Elastic Load
+    # Balancing and the target group health check is run. The
+    # `HealthCheckProtocol`, `HealthCheckPort`, and `HealthCheckPath` are
+    # the same protocol, port, and path specified in the URL or health URL,
+    # if used. All other settings use the default values, as described in
+    # [Health checks for your target groups][2]. The health check is
     # considered successful if at least one target within the target group
     # transitions to a healthy state.
+    #
+    # Services can have HTTP or HTTPS URL endpoints. For HTTPS URLs,
+    # publicly-signed certificates are supported. Private Certificate
+    # Authorities (CAs) are permitted only if the CA's domain is also
+    # publicly resolvable.
     #
     #
     #
@@ -578,6 +599,9 @@ module Aws::MigrationHubRefactorSpaces
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    # @option params [Types::DefaultRouteInput] :default_route
+    #   Configuration for the default route type.
     #
     # @option params [required, String] :environment_identifier
     #   The ID of the environment in which the route is created.
@@ -620,6 +644,9 @@ module Aws::MigrationHubRefactorSpaces
     #   resp = client.create_route({
     #     application_identifier: "ApplicationId", # required
     #     client_token: "ClientToken",
+    #     default_route: {
+    #       activation_state: "ACTIVE", # accepts ACTIVE, INACTIVE
+    #     },
     #     environment_identifier: "EnvironmentId", # required
     #     route_type: "DEFAULT", # required, accepts DEFAULT, URI_PATH
     #     service_identifier: "ServiceId", # required
@@ -627,7 +654,7 @@ module Aws::MigrationHubRefactorSpaces
     #       "TagMapKeyString" => "TagMapValueString",
     #     },
     #     uri_path_route: {
-    #       activation_state: "ACTIVE", # required, accepts ACTIVE
+    #       activation_state: "ACTIVE", # required, accepts ACTIVE, INACTIVE
     #       include_child_paths: false,
     #       methods: ["DELETE"], # accepts DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT
     #       source_path: "UriPath", # required
@@ -648,7 +675,7 @@ module Aws::MigrationHubRefactorSpaces
     #   resp.state #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED", "UPDATING", "INACTIVE"
     #   resp.tags #=> Hash
     #   resp.tags["TagMapKeyString"] #=> String
-    #   resp.uri_path_route.activation_state #=> String, one of "ACTIVE"
+    #   resp.uri_path_route.activation_state #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.uri_path_route.include_child_paths #=> Boolean
     #   resp.uri_path_route.methods #=> Array
     #   resp.uri_path_route.methods[0] #=> String, one of "DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"
@@ -669,7 +696,7 @@ module Aws::MigrationHubRefactorSpaces
     # Services have either a URL endpoint in a virtual private cloud (VPC),
     # or a Lambda function endpoint.
     #
-    # If an Amazon Web Services resourceis launched in a service VPC, and
+    # If an Amazon Web Services resource is launched in a service VPC, and
     # you want it to be accessible to all of an environment’s services with
     # VPCs and routes, apply the `RefactorSpacesSecurityGroup` to the
     # resource. Alternatively, to add more cross-account constraints, apply
@@ -1368,8 +1395,8 @@ module Aws::MigrationHubRefactorSpaces
       req.send_request(options)
     end
 
-    # Lists all the virtual private clouds (VPCs) that are part of an Amazon
-    # Web Services Migration Hub Refactor Spaces environment.
+    # Lists all Amazon Web Services Migration Hub Refactor Spaces service
+    # virtual private clouds (VPCs) that are part of the environment.
     #
     # @option params [required, String] :environment_identifier
     #   The ID of the environment.
@@ -1698,7 +1725,7 @@ module Aws::MigrationHubRefactorSpaces
     #  </note>
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the resource
+    #   The Amazon Resource Name (ARN) of the resource.
     #
     # @option params [required, Hash<String,String>] :tags
     #   The new or modified tags for the resource.
@@ -1752,6 +1779,57 @@ module Aws::MigrationHubRefactorSpaces
       req.send_request(options)
     end
 
+    # Updates an Amazon Web Services Migration Hub Refactor Spaces route.
+    #
+    # @option params [required, String] :activation_state
+    #   If set to `ACTIVE`, traffic is forwarded to this route’s service after
+    #   the route is updated.
+    #
+    # @option params [required, String] :application_identifier
+    #   The ID of the application within which the route is being updated.
+    #
+    # @option params [required, String] :environment_identifier
+    #   The ID of the environment in which the route is being updated.
+    #
+    # @option params [required, String] :route_identifier
+    #   The unique identifier of the route to update.
+    #
+    # @return [Types::UpdateRouteResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateRouteResponse#application_id #application_id} => String
+    #   * {Types::UpdateRouteResponse#arn #arn} => String
+    #   * {Types::UpdateRouteResponse#last_updated_time #last_updated_time} => Time
+    #   * {Types::UpdateRouteResponse#route_id #route_id} => String
+    #   * {Types::UpdateRouteResponse#service_id #service_id} => String
+    #   * {Types::UpdateRouteResponse#state #state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_route({
+    #     activation_state: "ACTIVE", # required, accepts ACTIVE, INACTIVE
+    #     application_identifier: "ApplicationId", # required
+    #     environment_identifier: "EnvironmentId", # required
+    #     route_identifier: "RouteId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application_id #=> String
+    #   resp.arn #=> String
+    #   resp.last_updated_time #=> Time
+    #   resp.route_id #=> String
+    #   resp.service_id #=> String
+    #   resp.state #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED", "UPDATING", "INACTIVE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migration-hub-refactor-spaces-2021-10-26/UpdateRoute AWS API Documentation
+    #
+    # @overload update_route(params = {})
+    # @param [Hash] params ({})
+    def update_route(params = {}, options = {})
+      req = build_request(:update_route, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1765,7 +1843,7 @@ module Aws::MigrationHubRefactorSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-migrationhubrefactorspaces'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

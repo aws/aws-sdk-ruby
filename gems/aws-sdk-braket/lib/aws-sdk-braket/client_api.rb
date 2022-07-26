@@ -55,6 +55,7 @@ module Aws::Braket
     InputFileConfig = Shapes::StructureShape.new(name: 'InputFileConfig')
     InputFileConfigChannelNameString = Shapes::StringShape.new(name: 'InputFileConfigChannelNameString')
     InstanceConfig = Shapes::StructureShape.new(name: 'InstanceConfig')
+    InstanceConfigInstanceCountInteger = Shapes::IntegerShape.new(name: 'InstanceConfigInstanceCountInteger')
     InstanceConfigVolumeSizeInGbInteger = Shapes::IntegerShape.new(name: 'InstanceConfigVolumeSizeInGbInteger')
     InstanceType = Shapes::StringShape.new(name: 'InstanceType')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
@@ -268,6 +269,7 @@ module Aws::Braket
     InputFileConfig.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, required: true, location_name: "dataSource"))
     InputFileConfig.struct_class = Types::InputFileConfig
 
+    InstanceConfig.add_member(:instance_count, Shapes::ShapeRef.new(shape: InstanceConfigInstanceCountInteger, location_name: "instanceCount"))
     InstanceConfig.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, required: true, location_name: "instanceType"))
     InstanceConfig.add_member(:volume_size_in_gb, Shapes::ShapeRef.new(shape: InstanceConfigVolumeSizeInGbInteger, required: true, location_name: "volumeSizeInGb"))
     InstanceConfig.struct_class = Types::InstanceConfig

@@ -1,6 +1,136 @@
 Unreleased Changes
 ------------------
 
+1.324.0 (2022-07-22)
+------------------
+
+* Feature - Added support for EC2 M1 Mac instances. For more information, please visit aws.amazon.com/mac.
+
+1.323.0 (2022-07-18)
+------------------
+
+* Feature - Documentation updates for Amazon EC2.
+
+1.322.0 (2022-07-14)
+------------------
+
+* Feature - This release adds flow logs for Transit Gateway to  allow customers to gain deeper visibility and insights into network traffic through their Transit Gateways.
+
+1.321.0 (2022-07-11)
+------------------
+
+* Feature - Build, manage, and monitor a unified global network that connects resources running across your cloud and on-premises environments using the AWS Cloud WAN APIs.
+
+1.320.0 (2022-06-28)
+------------------
+
+* Feature - This release adds a new spread placement group to EC2 Placement Groups: host level spread, which spread instances between physical hosts, available to Outpost customers only. CreatePlacementGroup and DescribePlacementGroups APIs were updated with a new parameter: SpreadLevel to support this feature.
+
+1.319.0 (2022-06-21)
+------------------
+
+* Feature - This release adds support for Private IP VPNs, a new feature allowing S2S VPN connections to use private ip addresses as the tunnel outside ip address over Direct Connect as transport.
+
+1.318.0 (2022-06-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.317.0 (2022-05-26)
+------------------
+
+* Feature - C7g instances, powered by the latest generation AWS Graviton3 processors, provide the best price performance in Amazon EC2 for compute-intensive workloads.
+
+1.316.0 (2022-05-24)
+------------------
+
+* Feature - Stop Protection feature enables customers to protect their instances from accidental stop actions.
+
+1.315.0 (2022-05-12)
+------------------
+
+* Feature - This release introduces a target type Gateway Load Balancer Endpoint for mirrored traffic. Customers can now specify GatewayLoadBalancerEndpoint option during the creation of a traffic mirror target.
+
+1.314.0 (2022-05-11)
+------------------
+
+* Feature - This release updates AWS PrivateLink APIs to support IPv6 for PrivateLink Services and Endpoints of type 'Interface'.
+
+1.313.0 (2022-05-10)
+------------------
+
+* Feature - Added support for using NitroTPM and UEFI Secure Boot on EC2 instances.
+
+1.312.0 (2022-05-06)
+------------------
+
+* Feature - Add new state values for IPAMs, IPAM Scopes, and IPAM Pools.
+
+1.311.0 (2022-05-05)
+------------------
+
+* Feature - Amazon EC2 I4i instances are powered by 3rd generation Intel Xeon Scalable processors and feature up to 30 TB of local AWS Nitro SSD storage
+
+1.310.0 (2022-05-03)
+------------------
+
+* Feature - Adds support for allocating Dedicated Hosts on AWS  Outposts. The AllocateHosts API now accepts an OutpostArn request  parameter, and the DescribeHosts API now includes an OutpostArn response parameter.
+
+1.309.0 (2022-04-28)
+------------------
+
+* Feature - This release adds support to query the public key and creation date of EC2 Key Pairs. Additionally, the format (pem or ppk) of a key pair can be specified when creating a new key pair.
+
+1.308.0 (2022-04-22)
+------------------
+
+* Feature - Adds support for waiters that automatically poll for a deleted NAT Gateway until it reaches the deleted state.
+
+1.307.0 (2022-04-14)
+------------------
+
+* Feature - Documentation updates for Amazon EC2.
+
+1.306.0 (2022-04-12)
+------------------
+
+* Feature - X2idn and X2iedn instances are powered by 3rd generation Intel Xeon Scalable processors with an all-core turbo frequency up to 3.5 GHzAmazon EC2. C6a instances are powered by 3rd generation AMD EPYC processors.
+
+1.305.0 (2022-03-30)
+------------------
+
+* Feature - This release simplifies the auto-recovery configuration process enabling customers to set the recovery behavior to disabled or default
+
+1.304.0 (2022-03-25)
+------------------
+
+* Feature - This is release adds support for Amazon VPC Reachability Analyzer to analyze path through a Transit Gateway.
+
+1.303.0 (2022-03-15)
+------------------
+
+* Feature - Adds the Cascade parameter to the DeleteIpam API. Customers can use this parameter to automatically delete their IPAM, including non-default scopes, pools, cidrs, and allocations. There mustn't be any pools provisioned in the default public scope to use this parameter.
+
+1.302.0 (2022-03-04)
+------------------
+
+* Feature - Documentation updates for Amazon EC2.
+
+1.301.0 (2022-02-28)
+------------------
+
+* Feature - This release adds support for new AMI property 'lastLaunchedTime'
+
+1.300.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.299.0 (2022-02-16)
+------------------
+
+* Feature - Documentation updates for EC2.
+
 1.298.0 (2022-02-03)
 ------------------
 

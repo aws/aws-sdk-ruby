@@ -86,6 +86,7 @@ module Aws::EC2
   # | internet_gateway_exists         | {Client#describe_internet_gateways}       | 5        | 6             |
   # | key_pair_exists                 | {Client#describe_key_pairs}               | 5        | 6             |
   # | nat_gateway_available           | {Client#describe_nat_gateways}            | 15       | 40            |
+  # | nat_gateway_deleted             | {Client#describe_nat_gateways}            | 15       | 40            |
   # | network_interface_available     | {Client#describe_network_interfaces}      | 20       | 10            |
   # | password_data_available         | {Client#get_password_data}                | 15       | 40            |
   # | security_group_exists           | {Client#describe_security_groups}         | 5        | 6             |
@@ -855,6 +856,49 @@ module Aws::EC2
               },
               {
                 "state" => "retry",
+                "matcher" => "error",
+                "expected" => "NatGatewayNotFound"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_nat_gateways)
+      # @return (see Client#describe_nat_gateways)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    class NatGatewayDeleted
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (40)
+      # @option options [Integer] :delay (15)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 40,
+          delay: 15,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_nat_gateways,
+            acceptors: [
+              {
+                "state" => "success",
+                "matcher" => "pathAll",
+                "argument" => "nat_gateways[].state",
+                "expected" => "deleted"
+              },
+              {
+                "state" => "success",
                 "matcher" => "error",
                 "expected" => "NatGatewayNotFound"
               }

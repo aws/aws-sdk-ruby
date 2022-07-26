@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2022-07-21)
+------------------
+
+* Feature - Enable copy-on-write restore type
+
+1.42.0 (2022-04-07)
+------------------
+
+* Feature - Added support to enable/disable performance insights when creating or modifying db instances
+
+1.41.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.40.0 (2022-02-03)
 ------------------
 

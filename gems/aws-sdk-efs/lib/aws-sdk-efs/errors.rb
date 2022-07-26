@@ -52,6 +52,7 @@ module Aws::EFS
   # * {SecurityGroupLimitExceeded}
   # * {SecurityGroupNotFound}
   # * {SubnetNotFound}
+  # * {ThrottlingException}
   # * {ThroughputLimitExceeded}
   # * {TooManyRequests}
   # * {UnsupportedAvailabilityZone}
@@ -558,6 +559,26 @@ module Aws::EFS
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::EFS::Types::SubnetNotFound] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def error_code
+        @data[:error_code]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ThrottlingException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::EFS::Types::ThrottlingException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

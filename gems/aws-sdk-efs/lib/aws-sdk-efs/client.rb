@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::EFS
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -356,8 +358,8 @@ module Aws::EFS
     # user and group override any identity information provided by the NFS
     # client. The file system path is exposed as the access point's root
     # directory. Applications using the access point can only access data in
-    # its own directory and below. To learn more, see [Mounting a file
-    # system using EFS access points][1].
+    # the application's own directory and any subdirectories. To learn
+    # more, see [Mounting a file system using EFS access points][1].
     #
     # This operation requires permissions for the
     # `elasticfilesystem:CreateAccessPoint` action.
@@ -398,7 +400,7 @@ module Aws::EFS
     #   access the root directory and below. If the `RootDirectory` &gt;
     #   `Path` specified does not exist, EFS creates it and applies the
     #   `CreationInfo` settings when a client connects to an access point.
-    #   When specifying a `RootDirectory`, you need to provide the `Path`, and
+    #   When specifying a `RootDirectory`, you must provide the `Path`, and
     #   the `CreationInfo`.
     #
     #   Amazon EFS creates a root directory only if you have provided the
@@ -573,7 +575,7 @@ module Aws::EFS
     #
     # @option params [String] :kms_key_id
     #   The ID of the KMS key that you want to use to protect the encrypted
-    #   file system. This parameter is only required if you want to use a
+    #   file system. This parameter is required only if you want to use a
     #   non-default KMS key. If this parameter is not specified, the default
     #   KMS key for Amazon EFS is used. You can specify a KMS key ID using the
     #   following formats:
@@ -997,61 +999,67 @@ module Aws::EFS
 
     # Creates a replication configuration that replicates an existing EFS
     # file system to a new, read-only file system. For more information, see
-    # [Amazon EFS replication][1]. The replication configuration specifies
-    # the following:
+    # [Amazon EFS replication][1] in the *Amazon EFS User Guide*. The
+    # replication configuration specifies the following:
     #
-    # * **Source file system** - an existing EFS file system that you want
+    # * **Source file system** - An existing EFS file system that you want
     #   replicated. The source file system cannot be a destination file
     #   system in an existing replication configuration.
     #
-    # * **Destination file system configuration** - the configuration of the
+    # * **Destination file system configuration** - The configuration of the
     #   destination file system to which the source file system will be
     #   replicated. There can only be one destination file system in a
-    #   replication configuration.
+    #   replication configuration. The destination file system configuration
+    #   consists of the following properties:
     #
     #   * **Amazon Web Services Region** - The Amazon Web Services Region in
-    #     which the destination file system is created. EFS Replication is
-    #     available in all Amazon Web Services Region that Amazon EFS is
-    #     available in, except the following regions: Asia Pacific (Hong
-    #     Kong) Europe (Milan), Middle East (Bahrain), Africa (Cape Town),
-    #     and Asia Pacific (Jakarta).
+    #     which the destination file system is created. Amazon EFS
+    #     replication is available in all Amazon Web Services Regions that
+    #     Amazon EFS is available in, except Africa (Cape Town), Asia
+    #     Pacific (Hong Kong), Asia Pacific (Jakarta), Europe (Milan), and
+    #     Middle East (Bahrain).
     #
-    #   * **Availability zone** - If you want the destination file system to
-    #     use One Zone availability and durability, you must specify the
+    #   * **Availability Zone** - If you want the destination file system to
+    #     use EFS One Zone availability and durability, you must specify the
     #     Availability Zone to create the file system in. For more
     #     information about EFS storage classes, see [ Amazon EFS storage
     #     classes][2] in the *Amazon EFS User Guide*.
     #
     #   * **Encryption** - All destination file systems are created with
-    #     encryption at rest enabled. You can specify the KMS key that is
-    #     used to encrypt the destination file system. Your service-managed
-    #     KMS key for Amazon EFS is used if you don't specify a KMS key.
-    #     You cannot change this after the file system is created.
+    #     encryption at rest enabled. You can specify the Key Management
+    #     Service (KMS) key that is used to encrypt the destination file
+    #     system. If you don't specify a KMS key, your service-managed KMS
+    #     key for Amazon EFS is used.
+    #
+    #     <note markdown="1"> After the file system is created, you cannot change the KMS key.
+    #
+    #      </note>
     #
     # The following properties are set by default:
     #
     # * **Performance mode** - The destination file system's performance
-    #   mode will match that of the source file system, unless the
-    #   destination file system uses One Zone storage. In that case, the
-    #   *General Purpose* performance mode is used. The Performance mode
-    #   cannot be changed.
+    #   mode matches that of the source file system, unless the destination
+    #   file system uses EFS One Zone storage. In that case, the General
+    #   Purpose performance mode is used. The performance mode cannot be
+    #   changed.
     #
-    # * **Throughput mode** - The destination file system use the Bursting
-    #   throughput mode by default. You can modify the throughput mode once
-    #   the file system is created.
+    # * **Throughput mode** - The destination file system uses the Bursting
+    #   Throughput mode by default. After the file system is created, you
+    #   can modify the throughput mode.
     #
     # The following properties are turned off by default:
     #
-    # * **Lifecycle management** - EFS lifecycle management and intelligent
-    #   tiering are not enabled on the destination file system. You can
-    #   enable EFS lifecycle management and intelligent tiering after the
-    #   destination file system is created.
+    # * **Lifecycle management** - EFS lifecycle management and EFS
+    #   Intelligent-Tiering are not enabled on the destination file system.
+    #   After the destination file system is created, you can enable EFS
+    #   lifecycle management and EFS Intelligent-Tiering.
     #
     # * **Automatic backups** - Automatic daily backups not enabled on the
-    #   destination file system. You can change this setting after the file
-    #   system is created.
+    #   destination file system. After the file system is created, you can
+    #   change this setting.
     #
-    # For more information, see [Amazon EFS replication][1].
+    # For more information, see [Amazon EFS replication][1] in the *Amazon
+    # EFS User Guide*.
     #
     #
     #
@@ -1111,8 +1119,8 @@ module Aws::EFS
       req.send_request(options)
     end
 
-    # <note markdown="1"> DEPRECATED - CreateTags is deprecated and not maintained. Please use
-    # the API action to create tags for EFS resources.
+    # <note markdown="1"> DEPRECATED - `CreateTags` is deprecated and not maintained. To create
+    # tags for EFS resources, use the API action.
     #
     #  </note>
     #
@@ -1203,6 +1211,16 @@ module Aws::EFS
     # Deletes a file system, permanently severing access to its contents.
     # Upon return, the file system no longer exists and you can't access
     # any contents of the deleted file system.
+    #
+    # You need to manually delete mount targets attached to a file system
+    # before you can delete an EFS file system. This step is performed for
+    # you when you use the Amazon Web Services console to delete a file
+    # system.
+    #
+    # <note markdown="1"> You cannot delete a file system that is part of an EFS Replication
+    # configuration. You need to delete the replication configuration first.
+    #
+    #  </note>
     #
     # You can't delete a file system that is in use. That is, if the file
     # system has any mount targets, you must first delete them. For more
@@ -1347,8 +1365,10 @@ module Aws::EFS
     # Deletes an existing replication configuration. To delete a replication
     # configuration, you must make the request from the Amazon Web Services
     # Region in which the destination file system is located. Deleting a
-    # replication configuration ends the replication process. You can write
-    # to the destination file system once it's status becomes `Writeable`.
+    # replication configuration ends the replication process. After a
+    # replication configuration is deleted, the destination file system is
+    # no longer read-only. You can write to the destination file system
+    # after its status becomes `Writeable`.
     #
     # @option params [required, String] :source_file_system_id
     #   The ID of the source file system in the replication configuration.
@@ -1370,8 +1390,8 @@ module Aws::EFS
       req.send_request(options)
     end
 
-    # <note markdown="1"> DEPRECATED - DeleteTags is deprecated and not maintained. Please use
-    # the API action to remove tags from EFS resources.
+    # <note markdown="1"> DEPRECATED - `DeleteTags` is deprecated and not maintained. To remove
+    # tags from EFS resources, use the API action.
     #
     #  </note>
     #
@@ -1745,7 +1765,7 @@ module Aws::EFS
     # `LifecycleConfiguration` object, the call returns an empty array in
     # the response.
     #
-    # When EFS Intelligent Tiering is enabled,
+    # When EFS Intelligent-Tiering is enabled,
     # `TransitionToPrimaryStorageClass` has a value of `AFTER_1_ACCESS`.
     #
     # This operation requires permissions for the
@@ -1958,22 +1978,22 @@ module Aws::EFS
       req.send_request(options)
     end
 
-    # Retrieves the replication configurations for either a specific file
-    # system, or all configurations for the Amazon Web Services account in
-    # an Amazon Web Services Region if a file system is not specified.
+    # Retrieves the replication configuration for a specific file system. If
+    # a file system is not specified, all of the replication configurations
+    # for the Amazon Web Services account in an Amazon Web Services Region
+    # are retrieved.
     #
     # @option params [String] :file_system_id
-    #   You can retrieve replication configurations for a specific file system
-    #   by providing a file system ID.
+    #   You can retrieve the replication configuration for a specific file
+    #   system by providing its file system ID.
     #
     # @option params [String] :next_token
     #   `NextToken` is present if the response is paginated. You can use
-    #   `NextMarker` in a subsequent request to fetch the next page of output.
+    #   `NextToken` in a subsequent request to fetch the next page of output.
     #
     # @option params [Integer] :max_results
-    #   (Optional) You can optionally specify the `MaxItems` parameter to
-    #   limit the number of objects returned in a response. The default value
-    #   is 100.
+    #   (Optional) To limit the number of objects returned in a response, you
+    #   can specify the `MaxItems` parameter. The default value is 100.
     #
     # @return [Types::DescribeReplicationConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2012,8 +2032,9 @@ module Aws::EFS
       req.send_request(options)
     end
 
-    # <note markdown="1"> DEPRECATED - The DeleteTags action is deprecated and not maintained.
-    # Please use the API action to remove tags from EFS resources.
+    # <note markdown="1"> DEPRECATED - The `DescribeTags` action is deprecated and not
+    # maintained. To view tags associated with EFS resources, use the
+    # `ListTagsForResource` API action.
     #
     #  </note>
     #
@@ -2207,7 +2228,7 @@ module Aws::EFS
     # <note markdown="1"> Starting in October, 2021, you will receive an error if you try to set
     # the account preference to use the short 8 character format resource
     # ID. Contact Amazon Web Services support if you receive an error and
-    # need to use short IDs for file system and mount target resources.
+    # must use short IDs for file system and mount target resources.
     #
     #  </note>
     #
@@ -2222,7 +2243,7 @@ module Aws::EFS
     #
     #   <note markdown="1"> Starting in October, 2021, you will receive an error when setting the
     #   account preference to `SHORT_ID`. Contact Amazon Web Services support
-    #   if you receive an error and need to use short IDs for file system and
+    #   if you receive an error and must use short IDs for file system and
     #   mount target resources.
     #
     #    </note>
@@ -2322,15 +2343,15 @@ module Aws::EFS
     #   [1]: https://docs.aws.amazon.com/efs/latest/ug/access-control-overview.html#access-control-manage-access-intro-resource-policies
     #
     # @option params [Boolean] :bypass_policy_lockout_safety_check
-    #   (Optional) A flag to indicate whether to bypass the `FileSystemPolicy`
-    #   lockout safety check. The policy lockout safety check determines
-    #   whether the policy in the request will prevent the principal making
-    #   the request will be locked out from making future
-    #   `PutFileSystemPolicy` requests on the file system. Set
+    #   (Optional) A boolean that specifies whether or not to bypass the
+    #   `FileSystemPolicy` lockout safety check. The lockout safety check
+    #   determines whether the policy in the request will lock out, or
+    #   prevent, the IAM principal that is making the request from making
+    #   future `PutFileSystemPolicy` requests on this file system. Set
     #   `BypassPolicyLockoutSafetyCheck` to `True` only when you intend to
-    #   prevent the principal that is making the request from making a
-    #   subsequent `PutFileSystemPolicy` request on the file system. The
-    #   default value is False.
+    #   prevent the IAM principal that is making the request from making
+    #   subsequent `PutFileSystemPolicy` requests on this file system. The
+    #   default value is `False`.
     #
     # @return [Types::FileSystemPolicyDescription] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2359,13 +2380,25 @@ module Aws::EFS
       req.send_request(options)
     end
 
-    # Enables lifecycle management by creating a new
-    # `LifecycleConfiguration` object. A `LifecycleConfiguration` object
-    # defines when files in an Amazon EFS file system are automatically
-    # transitioned to the lower-cost EFS Infrequent Access (IA) storage
-    # class. To enable EFS Intelligent Tiering, set the value of
-    # `TransitionToPrimaryStorageClass` to `AFTER_1_ACCESS`. For more
-    # information, see [EFS Lifecycle Management][1].
+    # Use this action to manage EFS lifecycle management and intelligent
+    # tiering. A `LifecycleConfiguration` consists of one or more
+    # `LifecyclePolicy` objects that define the following:
+    #
+    # * **EFS Lifecycle management** - When Amazon EFS automatically
+    #   transitions files in a file system into the lower-cost Infrequent
+    #   Access (IA) storage class.
+    #
+    #   To enable EFS Lifecycle management, set the value of
+    #   `TransitionToIA` to one of the available options.
+    #
+    # * **EFS Intelligent tiering** - When Amazon EFS automatically
+    #   transitions files from IA back into the file system's primary
+    #   storage class (Standard or One Zone Standard.
+    #
+    #   To enable EFS Intelligent Tiering, set the value of
+    #   `TransitionToPrimaryStorageClass` to `AFTER_1_ACCESS`.
+    #
+    # For more information, see [EFS Lifecycle Management][1].
     #
     # Each Amazon EFS file system supports one lifecycle configuration,
     # which applies to all files in the file system. If a
@@ -2373,20 +2406,24 @@ module Aws::EFS
     # system, a `PutLifecycleConfiguration` call modifies the existing
     # configuration. A `PutLifecycleConfiguration` call with an empty
     # `LifecyclePolicies` array in the request body deletes any existing
-    # `LifecycleConfiguration` and turns off lifecycle management for the
-    # file system.
+    # `LifecycleConfiguration` and turns off lifecycle management and
+    # intelligent tiering for the file system.
     #
     # In the request, specify the following:
     #
     # * The ID for the file system for which you are enabling, disabling, or
-    #   modifying lifecycle management.
+    #   modifying lifecycle management and intelligent tiering.
     #
     # * A `LifecyclePolicies` array of `LifecyclePolicy` objects that define
-    #   when files are moved to the IA storage class. Amazon EFS requires
-    #   that each `LifecyclePolicy` object have only have a single
-    #   transition, so the `LifecyclePolicies` array needs to be structured
-    #   with separate `LifecyclePolicy` objects. See the example requests in
-    #   the following section for more information.
+    #   when files are moved into IA storage, and when they are moved back
+    #   to Standard storage.
+    #
+    #   <note markdown="1"> Amazon EFS requires that each `LifecyclePolicy` object have only
+    #   have a single transition, so the `LifecyclePolicies` array needs to
+    #   be structured with separate `LifecyclePolicy` objects. See the
+    #   example requests in the following section for more information.
+    #
+    #    </note>
     #
     # This operation requires permissions for the
     # `elasticfilesystem:PutLifecycleConfiguration` operation.
@@ -2406,7 +2443,7 @@ module Aws::EFS
     # @option params [required, Array<Types::LifecyclePolicy>] :lifecycle_policies
     #   An array of `LifecyclePolicy` objects that define the file system's
     #   `LifecycleConfiguration` object. A `LifecycleConfiguration` object
-    #   informs EFS lifecycle management and intelligent tiering of the
+    #   informs EFS lifecycle management and EFS Intelligent-Tiering of the
     #   following:
     #
     #   * When to move files in the file system from primary storage to the IA
@@ -2417,8 +2454,8 @@ module Aws::EFS
     #   <note markdown="1"> When using the `put-lifecycle-configuration` CLI command or the
     #   `PutLifecycleConfiguration` API action, Amazon EFS requires that each
     #   `LifecyclePolicy` object have only a single transition. This means
-    #   that in a request body, `LifecyclePolicies` needs to be structured as
-    #   an array of `LifecyclePolicy` objects, one object for each transition,
+    #   that in a request body, `LifecyclePolicies` must be structured as an
+    #   array of `LifecyclePolicy` objects, one object for each transition,
     #   `TransitionToIA`, `TransitionToPrimaryStorageClass`. See the example
     #   requests in the following section for more information.
     #
@@ -2642,7 +2679,7 @@ module Aws::EFS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-efs'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -31,8 +31,9 @@ module AwsSdkCodeGenerator
         'xmlNamespace' => true,
         'streaming' => true, # transfer-encoding
         'requiresLength' => true, # transfer-encoding
-        'union' => false,
+        'union' => false, # should remain false
         'document' => true,
+        'jsonvalue' => true,
         # event stream modeling
         'event' => false,
         'eventstream' => false,
@@ -83,7 +84,9 @@ module AwsSdkCodeGenerator
         'checksumFormat' => true,
         'globalEndpoint' => true,
         'serviceAbbreviation' => true,
-        'uid' => true
+        'uid' => true,
+        # ignore
+        'ripServiceName' => true
       }
 
       # @option options [required, Service] :service
@@ -197,6 +200,15 @@ module AwsSdkCodeGenerator
             o.http_method = operation['http']['method']
             o.http_request_uri = operation['http']['requestUri']
             o.http_checksum_required = true if operation['httpChecksumRequired']
+            if operation.key?('httpChecksum')
+              operation['httpChecksum']['requestAlgorithmMember'] = underscore(operation['httpChecksum']['requestAlgorithmMember']) if operation['httpChecksum']['requestAlgorithmMember']
+              operation['httpChecksum']['requestValidationModeMember'] = underscore(operation['httpChecksum']['requestValidationModeMember']) if operation['httpChecksum']['requestValidationModeMember']
+
+              o.http_checksum = operation['httpChecksum'].inject([]) do |a, (k, v)|
+                a << { key: k.inspect, value: v.inspect }
+                a
+              end
+            end
             %w(input output).each do |key|
               if operation[key]
                 o.shape_references << "o.#{key} = #{operation_ref(operation[key])}"
@@ -534,6 +546,9 @@ module AwsSdkCodeGenerator
 
         # @return [Boolean]
         attr_accessor :http_checksum_required
+
+        # @return [Hash]
+        attr_accessor :http_checksum
 
         # @return [Array<String>]
         attr_accessor :shape_references

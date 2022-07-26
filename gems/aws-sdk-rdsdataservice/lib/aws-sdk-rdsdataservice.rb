@@ -48,6 +48,6 @@ require_relative 'aws-sdk-rdsdataservice/customizations'
 # @!group service
 module Aws::RDSDataService
 
-  GEM_VERSION = '1.33.0'
+  GEM_VERSION = '1.36.0'
 
 end

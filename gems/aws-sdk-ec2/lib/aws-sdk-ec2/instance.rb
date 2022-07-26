@@ -389,6 +389,25 @@ module Aws::EC2
       data[:ipv_6_address]
     end
 
+    # If the instance is configured for NitroTPM support, the value is
+    # `v2.0`. For more information, see [NitroTPM][1] in the *Amazon EC2
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitrotpm.html
+    # @return [String]
+    def tpm_support
+      data[:tpm_support]
+    end
+
+    # Provides information on the recovery and maintenance options of your
+    # instance.
+    # @return [Types::InstanceMaintenanceOptions]
+    def maintenance_options
+      data[:maintenance_options]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -709,7 +728,7 @@ module Aws::EC2
     #     no_reboot: false,
     #     tag_specifications: [
     #       {
-    #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-endpoint, vpc-endpoint-service, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-service, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -738,13 +757,19 @@ module Aws::EC2
     #   brackets (\[\]), spaces ( ), periods (.), slashes (/), dashes (-),
     #   single quotes ('), at-signs (@), or underscores(\_)
     # @option options [Boolean] :no_reboot
-    #   By default, Amazon EC2 attempts to shut down and reboot the instance
-    #   before creating the image. If the `No Reboot` option is set, Amazon
-    #   EC2 doesn't shut down the instance before creating the image. Without
-    #   a reboot, the AMI will be crash consistent (all the volumes are
-    #   snapshotted at the same time), but not application consistent (all the
-    #   operating system buffers are not flushed to disk before the snapshots
-    #   are created).
+    #   By default, when Amazon EC2 creates the new AMI, it reboots the
+    #   instance so that it can take snapshots of the attached volumes while
+    #   data is at rest, in order to ensure a consistent state. You can set
+    #   the `NoReboot` parameter to `true` in the API request, or use the
+    #   `--no-reboot` option in the CLI to prevent Amazon EC2 from shutting
+    #   down and rebooting the instance.
+    #
+    #   If you choose to bypass the shutdown and reboot process by setting the
+    #   `NoReboot` parameter to `true` in the API request, or by using the
+    #   `--no-reboot` option in the CLI, we can't guarantee the file system
+    #   integrity of the created image.
+    #
+    #   Default: `false` (follow standard reboot process)
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the AMI and snapshots on creation. You can tag
     #   the AMI, the snapshots, or both.
@@ -859,7 +884,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   instance.describe_attribute({
-    #     attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport, enclaveOptions
+    #     attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport, enclaveOptions, disableApiStop
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -940,7 +965,7 @@ module Aws::EC2
     #     source_dest_check: {
     #       value: false,
     #     },
-    #     attribute: "instanceType", # accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport, enclaveOptions
+    #     attribute: "instanceType", # accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport, enclaveOptions, disableApiStop
     #     block_device_mappings: [
     #       {
     #         device_name: "String",
@@ -972,6 +997,9 @@ module Aws::EC2
     #       value: "data",
     #     },
     #     value: "String",
+    #     disable_api_stop: {
+    #       value: false,
+    #     },
     #   })
     # @param [Hash] options ({})
     # @option options [Types::AttributeBooleanValue] :source_dest_check
@@ -1069,6 +1097,15 @@ module Aws::EC2
     #   A new value for the attribute. Use only with the `kernel`, `ramdisk`,
     #   `userData`, `disableApiTermination`, or
     #   `instanceInitiatedShutdownBehavior` attribute.
+    # @option options [Types::AttributeBooleanValue] :disable_api_stop
+    #   Indicates whether an instance is enabled for stop protection. For more
+    #   information, see [Stop Protection][1].
+    #
+    #
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html#Using_StopProtection
     # @return [EmptyStructure]
     def modify_attribute(options = {})
       options = options.merge(instance_id: @id)
@@ -1191,7 +1228,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   instance.reset_attribute({
-    #     attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport, enclaveOptions
+    #     attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport, enclaveOptions, disableApiStop
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -1199,8 +1236,7 @@ module Aws::EC2
     #   The attribute to reset.
     #
     #   You can only reset the following attributes: `kernel` \| `ramdisk` \|
-    #   `sourceDestCheck`. To change an instance attribute, use
-    #   ModifyInstanceAttribute.
+    #   `sourceDestCheck`.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

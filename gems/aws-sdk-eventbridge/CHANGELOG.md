@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2022-04-07)
+------------------
+
+* Feature - Adds new EventBridge Endpoint resources for disaster recovery, multi-region failover, and cross-region replication capabilities to help you build resilient event-driven applications.
+
+1.37.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.36.0 (2022-02-07)
+------------------
+
+* Feature - Documentation updates for EventBridge
+
 1.35.0 (2022-02-03)
 ------------------
 

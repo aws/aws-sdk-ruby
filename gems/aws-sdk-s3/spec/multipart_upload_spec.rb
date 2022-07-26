@@ -13,7 +13,7 @@ module Aws
         end
 
         it 'calls complete with the given part list' do
-          expect(client).to receive(:complete_multipart_upload).with(
+          expect(client).to receive(:complete_multipart_upload).with({
             bucket: 'bucket',
             key: 'key',
             upload_id: 'id',
@@ -24,7 +24,7 @@ module Aws
                 { part_number: 3, etag: 'etag-3' }
               ]
             }
-          )
+          })
 
           obj = upload.complete(
             multipart_upload: {
@@ -52,7 +52,7 @@ module Aws
             ]
           )
 
-          expect(client).to receive(:complete_multipart_upload).with(
+          expect(client).to receive(:complete_multipart_upload).with({
             bucket: 'bucket',
             key: 'key',
             upload_id: 'id',
@@ -63,7 +63,7 @@ module Aws
                 { part_number: 3, etag: 'etag-3' }
               ]
             }
-          ).and_call_original
+          }).and_call_original
 
           obj = upload.complete(compute_parts: true)
           expect(obj).to be_kind_of(S3::Object)

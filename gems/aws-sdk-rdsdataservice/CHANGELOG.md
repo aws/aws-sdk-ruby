@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2022-06-24)
+------------------
+
+* Feature - Documentation updates for RDS Data API
+
+1.35.0 (2022-04-25)
+------------------
+
+* Feature - Support to receive SQL query results in the form of a simplified JSON string. This enables developers using the new JSON string format to more easily convert it to an object using popular JSON string parsing libraries.
+
+1.34.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.33.0 (2022-02-03)
 ------------------
 

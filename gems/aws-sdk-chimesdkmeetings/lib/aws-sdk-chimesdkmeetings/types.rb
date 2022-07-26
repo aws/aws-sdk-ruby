@@ -33,13 +33,124 @@ module Aws::ChimeSDKMeetings
     #   The join token used by the Amazon Chime SDK attendee.
     #   @return [String]
     #
+    # @!attribute [rw] capabilities
+    #   The capabilities assigned to an attendee: audio, video, or content.
+    #
+    #   <note markdown="1"> You use the capabilities with a set of values that control what the
+    #   capabilities can do, such as `SendReceive` data. For more
+    #   information about those values, see .
+    #
+    #    </note>
+    #
+    #   When using capabilities, be aware of these corner cases:
+    #
+    #   * You can't set `content` capabilities to `SendReceive` or
+    #     `Receive` unless you also set `video` capabilities to
+    #     `SendReceive` or `Receive`. If you don't set the `video`
+    #     capability to receive, the response will contain an HTTP 400 Bad
+    #     Request status code. However, you can set your `video` capability
+    #     to receive and you set your `content` capability to not receive.
+    #
+    #   * When you change an `audio` capability from `None` or `Receive` to
+    #     `Send` or `SendReceive` , and if the attendee left their
+    #     microphone unmuted, audio will flow from the attendee to the other
+    #     meeting participants.
+    #
+    #   * When you change a `video` or `content` capability from `None` or
+    #     `Receive` to `Send` or `SendReceive` , and if the attendee turned
+    #     on their video or content streams, remote attendess can receive
+    #     those streams, but only after media renegotiation between the
+    #     client and the Amazon Chime back-end server.
+    #   @return [Types::AttendeeCapabilities]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/Attendee AWS API Documentation
     #
     class Attendee < Struct.new(
       :external_user_id,
       :attendee_id,
-      :join_token)
+      :join_token,
+      :capabilities)
       SENSITIVE = [:external_user_id, :join_token]
+      include Aws::Structure
+    end
+
+    # The media capabilities of an attendee: audio, video, or content.
+    #
+    # <note markdown="1"> You use the capabilities with a set of values that control what the
+    # capabilities can do, such as `SendReceive` data. For more information
+    # about those values, see .
+    #
+    #  </note>
+    #
+    # When using capabilities, be aware of these corner cases:
+    #
+    # * You can't set `content` capabilities to `SendReceive` or `Receive`
+    #   unless you also set `video` capabilities to `SendReceive` or
+    #   `Receive`. If you don't set the `video` capability to receive, the
+    #   response will contain an HTTP 400 Bad Request status code. However,
+    #   you can set your `video` capability to receive and you set your
+    #   `content` capability to not receive.
+    #
+    # * When you change an `audio` capability from `None` or `Receive` to
+    #   `Send` or `SendReceive` , and if the attendee left their microphone
+    #   unmuted, audio will flow from the attendee to the other meeting
+    #   participants.
+    #
+    # * When you change a `video` or `content` capability from `None` or
+    #   `Receive` to `Send` or `SendReceive` , and if the attendee turned on
+    #   their video or content streams, remote attendess can receive those
+    #   streams, but only after media renegotiation between the client and
+    #   the Amazon Chime back-end server.
+    #
+    # @note When making an API call, you may pass AttendeeCapabilities
+    #   data as a hash:
+    #
+    #       {
+    #         audio: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #         video: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #         content: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #       }
+    #
+    # @!attribute [rw] audio
+    #   The audio capability assigned to an attendee.
+    #   @return [String]
+    #
+    # @!attribute [rw] video
+    #   The video capability assigned to an attendee.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The content capability assigned to an attendee.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/AttendeeCapabilities AWS API Documentation
+    #
+    class AttendeeCapabilities < Struct.new(
+      :audio,
+      :video,
+      :content)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that contains one or more attendee IDs.
+    #
+    # @note When making an API call, you may pass AttendeeIdItem
+    #   data as a hash:
+    #
+    #       {
+    #         attendee_id: "GuidString", # required
+    #       }
+    #
+    # @!attribute [rw] attendee_id
+    #   A list of one or more attendee IDs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/AttendeeIdItem AWS API Documentation
+    #
+    class AttendeeIdItem < Struct.new(
+      :attendee_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -97,6 +208,11 @@ module Aws::ChimeSDKMeetings
     #         attendees: [ # required
     #           {
     #             external_user_id: "ExternalUserId", # required
+    #             capabilities: {
+    #               audio: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #               video: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #               content: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #             },
     #           },
     #         ],
     #       }
@@ -138,6 +254,68 @@ module Aws::ChimeSDKMeetings
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass BatchUpdateAttendeeCapabilitiesExceptRequest
+    #   data as a hash:
+    #
+    #       {
+    #         meeting_id: "GuidString", # required
+    #         excluded_attendee_ids: [ # required
+    #           {
+    #             attendee_id: "GuidString", # required
+    #           },
+    #         ],
+    #         capabilities: { # required
+    #           audio: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #           video: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #           content: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #         },
+    #       }
+    #
+    # @!attribute [rw] meeting_id
+    #   The ID of the meeting associated with the update request.
+    #   @return [String]
+    #
+    # @!attribute [rw] excluded_attendee_ids
+    #   The `AttendeeIDs` that you want to exclude from one or more
+    #   capabilities.
+    #   @return [Array<Types::AttendeeIdItem>]
+    #
+    # @!attribute [rw] capabilities
+    #   The capabilities (`audio`, `video`, or `content`) that you want to
+    #   update.
+    #   @return [Types::AttendeeCapabilities]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/BatchUpdateAttendeeCapabilitiesExceptRequest AWS API Documentation
+    #
+    class BatchUpdateAttendeeCapabilitiesExceptRequest < Struct.new(
+      :meeting_id,
+      :excluded_attendee_ids,
+      :capabilities)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Multiple instances of the same request have been made simultaneously.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :code,
+      :message,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The list of errors returned when errors are encountered during the
     # BatchCreateAttendee and CreateAttendee actions. This includes external
     # user IDs, error codes, and error messages.
@@ -171,6 +349,11 @@ module Aws::ChimeSDKMeetings
     #       {
     #         meeting_id: "GuidString", # required
     #         external_user_id: "ExternalUserId", # required
+    #         capabilities: {
+    #           audio: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #           video: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #           content: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #         },
     #       }
     #
     # @!attribute [rw] meeting_id
@@ -182,11 +365,44 @@ module Aws::ChimeSDKMeetings
     #   the attendee to an identity managed by a builder application.
     #   @return [String]
     #
+    # @!attribute [rw] capabilities
+    #   The capabilities (`audio`, `video`, or `content`) that you want to
+    #   grant an attendee. If you don't specify capabilities, all users
+    #   have send and receive capabilities on all media channels by default.
+    #
+    #   <note markdown="1"> You use the capabilities with a set of values that control what the
+    #   capabilities can do, such as `SendReceive` data. For more
+    #   information about those values, see .
+    #
+    #    </note>
+    #
+    #   When using capabilities, be aware of these corner cases:
+    #
+    #   * You can't set `content` capabilities to `SendReceive` or
+    #     `Receive` unless you also set `video` capabilities to
+    #     `SendReceive` or `Receive`. If you don't set the `video`
+    #     capability to receive, the response will contain an HTTP 400 Bad
+    #     Request status code. However, you can set your `video` capability
+    #     to receive and you set your `content` capability to not receive.
+    #
+    #   * When you change an `audio` capability from `None` or `Receive` to
+    #     `Send` or `SendReceive` , and if the attendee left their
+    #     microphone unmuted, audio will flow from the attendee to the other
+    #     meeting participants.
+    #
+    #   * When you change a `video` or `content` capability from `None` or
+    #     `Receive` to `Send` or `SendReceive` , and if the attendee turned
+    #     on their video or content streams, remote attendess can receive
+    #     those streams, but only after media renegotiation between the
+    #     client and the Amazon Chime back-end server.
+    #   @return [Types::AttendeeCapabilities]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/CreateAttendeeRequest AWS API Documentation
     #
     class CreateAttendeeRequest < Struct.new(
       :meeting_id,
-      :external_user_id)
+      :external_user_id,
+      :capabilities)
       SENSITIVE = [:external_user_id]
       include Aws::Structure
     end
@@ -199,6 +415,11 @@ module Aws::ChimeSDKMeetings
     #
     #       {
     #         external_user_id: "ExternalUserId", # required
+    #         capabilities: {
+    #           audio: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #           video: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #           content: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #         },
     #       }
     #
     # @!attribute [rw] external_user_id
@@ -206,10 +427,15 @@ module Aws::ChimeSDKMeetings
     #   the attendee to an identity managed by a builder application.
     #   @return [String]
     #
+    # @!attribute [rw] capabilities
+    #   A list of one or more capabilities.
+    #   @return [Types::AttendeeCapabilities]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/CreateAttendeeRequestItem AWS API Documentation
     #
     class CreateAttendeeRequestItem < Struct.new(
-      :external_user_id)
+      :external_user_id,
+      :capabilities)
       SENSITIVE = [:external_user_id]
       include Aws::Structure
     end
@@ -244,6 +470,8 @@ module Aws::ChimeSDKMeetings
     #             echo_reduction: "AVAILABLE", # accepts AVAILABLE, UNAVAILABLE
     #           },
     #         },
+    #         primary_meeting_id: "PrimaryMeetingId",
+    #         tenant_ids: ["TenantId"],
     #       }
     #
     # @!attribute [rw] client_request_token
@@ -257,11 +485,14 @@ module Aws::ChimeSDKMeetings
     # @!attribute [rw] media_region
     #   The Region in which to create the meeting.
     #
-    #   Available values: `af-south-1` , `ap-northeast-1` , `ap-northeast-2`
-    #   , `ap-south-1` , `ap-southeast-1` , `ap-southeast-2` ,
-    #   `ca-central-1` , `eu-central-1` , `eu-north-1` , `eu-south-1` ,
-    #   `eu-west-1` , `eu-west-2` , `eu-west-3` , `sa-east-1` , `us-east-1`
-    #   , `us-east-2` , `us-west-1` , `us-west-2` .
+    #   Available values: `af-south-1`, `ap-northeast-1`, `ap-northeast-2`,
+    #   `ap-south-1`, `ap-southeast-1`, `ap-southeast-2`, `ca-central-1`,
+    #   `eu-central-1`, `eu-north-1`, `eu-south-1`, `eu-west-1`,
+    #   `eu-west-2`, `eu-west-3`, `sa-east-1`, `us-east-1`, `us-east-2`,
+    #   `us-west-1`, `us-west-2`.
+    #
+    #   Available values in AWS GovCloud (US) Regions: `us-gov-east-1`,
+    #   `us-gov-west-1`.
     #   @return [String]
     #
     # @!attribute [rw] meeting_host_id
@@ -282,6 +513,16 @@ module Aws::ChimeSDKMeetings
     #   echo reduction.
     #   @return [Types::MeetingFeaturesConfiguration]
     #
+    # @!attribute [rw] primary_meeting_id
+    #   When specified, replicates the media from the primary meeting to the
+    #   new meeting.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenant_ids
+    #   A consistent and opaque identifier, created and maintained by the
+    #   builder to represent a segment of their users.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/CreateMeetingRequest AWS API Documentation
     #
     class CreateMeetingRequest < Struct.new(
@@ -290,7 +531,9 @@ module Aws::ChimeSDKMeetings
       :meeting_host_id,
       :external_meeting_id,
       :notifications_configuration,
-      :meeting_features)
+      :meeting_features,
+      :primary_meeting_id,
+      :tenant_ids)
       SENSITIVE = [:client_request_token, :meeting_host_id, :external_meeting_id]
       include Aws::Structure
     end
@@ -329,8 +572,15 @@ module Aws::ChimeSDKMeetings
     #         attendees: [ # required
     #           {
     #             external_user_id: "ExternalUserId", # required
+    #             capabilities: {
+    #               audio: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #               video: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #               content: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #             },
     #           },
     #         ],
+    #         primary_meeting_id: "PrimaryMeetingId",
+    #         tenant_ids: ["TenantId"],
     #       }
     #
     # @!attribute [rw] client_request_token
@@ -343,6 +593,15 @@ module Aws::ChimeSDKMeetings
     #
     # @!attribute [rw] media_region
     #   The Region in which to create the meeting.
+    #
+    #   Available values: `af-south-1`, `ap-northeast-1`, `ap-northeast-2`,
+    #   `ap-south-1`, `ap-southeast-1`, `ap-southeast-2`, `ca-central-1`,
+    #   `eu-central-1`, `eu-north-1`, `eu-south-1`, `eu-west-1`,
+    #   `eu-west-2`, `eu-west-3`, `sa-east-1`, `us-east-1`, `us-east-2`,
+    #   `us-west-1`, `us-west-2`.
+    #
+    #   Available values in AWS GovCloud (US) Regions: `us-gov-east-1`,
+    #   `us-gov-west-1`.
     #   @return [String]
     #
     # @!attribute [rw] meeting_host_id
@@ -367,6 +626,16 @@ module Aws::ChimeSDKMeetings
     #   The attendee information, including attendees' IDs and join tokens.
     #   @return [Array<Types::CreateAttendeeRequestItem>]
     #
+    # @!attribute [rw] primary_meeting_id
+    #   When specified, replicates the media from the primary meeting to the
+    #   new meeting.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenant_ids
+    #   A consistent and opaque identifier, created and maintained by the
+    #   builder to represent a segment of their users.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/CreateMeetingWithAttendeesRequest AWS API Documentation
     #
     class CreateMeetingWithAttendeesRequest < Struct.new(
@@ -376,7 +645,9 @@ module Aws::ChimeSDKMeetings
       :external_meeting_id,
       :meeting_features,
       :notifications_configuration,
-      :attendees)
+      :attendees,
+      :primary_meeting_id,
+      :tenant_ids)
       SENSITIVE = [:client_request_token, :meeting_host_id, :external_meeting_id]
       include Aws::Structure
     end
@@ -510,17 +781,20 @@ module Aws::ChimeSDKMeetings
     #   data as a hash:
     #
     #       {
-    #         language_code: "en-US", # required, accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
+    #         language_code: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
     #         vocabulary_filter_method: "remove", # accepts remove, mask, tag
     #         vocabulary_filter_name: "String",
     #         vocabulary_name: "String",
-    #         region: "us-east-2", # accepts us-east-2, us-east-1, us-west-2, ap-northeast-2, ap-southeast-2, ap-northeast-1, ca-central-1, eu-central-1, eu-west-1, eu-west-2, sa-east-1, auto
+    #         region: "us-east-2", # accepts us-east-2, us-east-1, us-west-2, ap-northeast-2, ap-southeast-2, ap-northeast-1, ca-central-1, eu-central-1, eu-west-1, eu-west-2, sa-east-1, auto, us-gov-west-1
     #         enable_partial_results_stabilization: false,
     #         partial_results_stability: "low", # accepts low, medium, high
     #         content_identification_type: "PII", # accepts PII
     #         content_redaction_type: "PII", # accepts PII
     #         pii_entity_types: "TranscribePiiEntityTypes",
     #         language_model_name: "TranscribeLanguageModelName",
+    #         identify_language: false,
+    #         language_options: "TranscribeLanguageOptions",
+    #         preferred_language: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
     #       }
     #
     # @!attribute [rw] language_code
@@ -576,7 +850,7 @@ module Aws::ChimeSDKMeetings
     #   specify entity types, you must enable `ContentIdentificationType` or
     #   `ContentRedactionType`.
     #
-    #   PIIEntityTypes must be comma-separated. The available values are:
+    #   `PIIEntityTypes` must be comma-separated. The available values are:
     #   `BANK_ACCOUNT_NUMBER`, `BANK_ROUTING, CREDIT_DEBIT_NUMBER`,
     #   `CREDIT_DEBIT_CVV`, `CREDIT_DEBIT_EXPIRY`, `PIN`, `EMAIL`,
     #   `ADDRESS`, `NAME`, `PHONE`, `SSN`, and `ALL`.
@@ -587,6 +861,19 @@ module Aws::ChimeSDKMeetings
     #
     # @!attribute [rw] language_model_name
     #   The name of the language model used during transcription.
+    #   @return [String]
+    #
+    # @!attribute [rw] identify_language
+    #   Automatically identifies the language spoken in media files.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] language_options
+    #   Language codes for the languages that you want to identify. You must
+    #   provide at least 2 codes.
+    #   @return [String]
+    #
+    # @!attribute [rw] preferred_language
+    #   Language code for the preferred language.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/EngineTranscribeSettings AWS API Documentation
@@ -602,7 +889,10 @@ module Aws::ChimeSDKMeetings
       :content_identification_type,
       :content_redaction_type,
       :pii_entity_types,
-      :language_model_name)
+      :language_model_name,
+      :identify_language,
+      :language_options,
+      :preferred_language)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -839,6 +1129,9 @@ module Aws::ChimeSDKMeetings
     #   `ap-southeast-1`, `ap-southeast-2`, `ca-central-1`, `eu-central-1`,
     #   `eu-north-1`, `eu-south-1`, `eu-west-1`, `eu-west-2`, `eu-west-3`,
     #   `sa-east-1`, `us-east-1`, `us-east-2`, `us-west-1`, `us-west-2`.
+    #
+    #   Available values in AWS GovCloud (US) Regions: `us-gov-east-1`,
+    #   `us-gov-west-1`.
     #   @return [String]
     #
     # @!attribute [rw] media_placement
@@ -849,6 +1142,15 @@ module Aws::ChimeSDKMeetings
     #   The features available to a meeting, such as Amazon Voice Focus.
     #   @return [Types::MeetingFeaturesConfiguration]
     #
+    # @!attribute [rw] primary_meeting_id
+    #   When specified, replicates the media from the primary meeting to
+    #   this meeting.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenant_ids
+    #   Array of strings.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/Meeting AWS API Documentation
     #
     class Meeting < Struct.new(
@@ -857,12 +1159,14 @@ module Aws::ChimeSDKMeetings
       :external_meeting_id,
       :media_region,
       :media_placement,
-      :meeting_features)
+      :meeting_features,
+      :primary_meeting_id,
+      :tenant_ids)
       SENSITIVE = [:meeting_host_id, :external_meeting_id]
       include Aws::Structure
     end
 
-    # The configuration settings of the features available to a meeting.
+    # The configuration settings of the features available to a meeting.&gt;
     #
     # @note When making an API call, you may pass MeetingFeaturesConfiguration
     #   data as a hash:
@@ -896,7 +1200,7 @@ module Aws::ChimeSDKMeetings
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The request id associated with the call responsible for the
+    #   The request ID associated with the call responsible for the
     #   exception.
     #   @return [String]
     #
@@ -945,6 +1249,27 @@ module Aws::ChimeSDKMeetings
       include Aws::Structure
     end
 
+    # The service encountered an unexpected error.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/ServiceFailureException AWS API Documentation
+    #
+    class ServiceFailureException < Struct.new(
+      :code,
+      :message,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The service is currently unavailable.
     #
     # @!attribute [rw] code
@@ -980,17 +1305,20 @@ module Aws::ChimeSDKMeetings
     #         meeting_id: "GuidString", # required
     #         transcription_configuration: { # required
     #           engine_transcribe_settings: {
-    #             language_code: "en-US", # required, accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
+    #             language_code: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
     #             vocabulary_filter_method: "remove", # accepts remove, mask, tag
     #             vocabulary_filter_name: "String",
     #             vocabulary_name: "String",
-    #             region: "us-east-2", # accepts us-east-2, us-east-1, us-west-2, ap-northeast-2, ap-southeast-2, ap-northeast-1, ca-central-1, eu-central-1, eu-west-1, eu-west-2, sa-east-1, auto
+    #             region: "us-east-2", # accepts us-east-2, us-east-1, us-west-2, ap-northeast-2, ap-southeast-2, ap-northeast-1, ca-central-1, eu-central-1, eu-west-1, eu-west-2, sa-east-1, auto, us-gov-west-1
     #             enable_partial_results_stabilization: false,
     #             partial_results_stability: "low", # accepts low, medium, high
     #             content_identification_type: "PII", # accepts PII
     #             content_redaction_type: "PII", # accepts PII
     #             pii_entity_types: "TranscribePiiEntityTypes",
     #             language_model_name: "TranscribeLanguageModelName",
+    #             identify_language: false,
+    #             language_options: "TranscribeLanguageOptions",
+    #             preferred_language: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
     #           },
     #           engine_transcribe_medical_settings: {
     #             language_code: "en-US", # required, accepts en-US
@@ -1041,6 +1369,27 @@ module Aws::ChimeSDKMeetings
       include Aws::Structure
     end
 
+    # The number of customer requests exceeds the request rate limit.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Struct.new(
+      :code,
+      :message,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration for the current transcription operation. Must
     # contain `EngineTranscribeSettings` or
     # `EngineTranscribeMedicalSettings`.
@@ -1050,17 +1399,20 @@ module Aws::ChimeSDKMeetings
     #
     #       {
     #         engine_transcribe_settings: {
-    #           language_code: "en-US", # required, accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
+    #           language_code: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
     #           vocabulary_filter_method: "remove", # accepts remove, mask, tag
     #           vocabulary_filter_name: "String",
     #           vocabulary_name: "String",
-    #           region: "us-east-2", # accepts us-east-2, us-east-1, us-west-2, ap-northeast-2, ap-southeast-2, ap-northeast-1, ca-central-1, eu-central-1, eu-west-1, eu-west-2, sa-east-1, auto
+    #           region: "us-east-2", # accepts us-east-2, us-east-1, us-west-2, ap-northeast-2, ap-southeast-2, ap-northeast-1, ca-central-1, eu-central-1, eu-west-1, eu-west-2, sa-east-1, auto, us-gov-west-1
     #           enable_partial_results_stabilization: false,
     #           partial_results_stability: "low", # accepts low, medium, high
     #           content_identification_type: "PII", # accepts PII
     #           content_redaction_type: "PII", # accepts PII
     #           pii_entity_types: "TranscribePiiEntityTypes",
     #           language_model_name: "TranscribeLanguageModelName",
+    #           identify_language: false,
+    #           language_options: "TranscribeLanguageOptions",
+    #           preferred_language: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
     #         },
     #         engine_transcribe_medical_settings: {
     #           language_code: "en-US", # required, accepts en-US
@@ -1134,6 +1486,53 @@ module Aws::ChimeSDKMeetings
       :code,
       :message,
       :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateAttendeeCapabilitiesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         meeting_id: "GuidString", # required
+    #         attendee_id: "GuidString", # required
+    #         capabilities: { # required
+    #           audio: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #           video: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #           content: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #         },
+    #       }
+    #
+    # @!attribute [rw] meeting_id
+    #   The ID of the meeting associated with the update request.
+    #   @return [String]
+    #
+    # @!attribute [rw] attendee_id
+    #   The ID of the attendee associated with the update request.
+    #   @return [String]
+    #
+    # @!attribute [rw] capabilities
+    #   The capabilties that you want to update.
+    #   @return [Types::AttendeeCapabilities]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/UpdateAttendeeCapabilitiesRequest AWS API Documentation
+    #
+    class UpdateAttendeeCapabilitiesRequest < Struct.new(
+      :meeting_id,
+      :attendee_id,
+      :capabilities)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attendee
+    #   The updated attendee data.
+    #   @return [Types::Attendee]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/UpdateAttendeeCapabilitiesResponse AWS API Documentation
+    #
+    class UpdateAttendeeCapabilitiesResponse < Struct.new(
+      :attendee)
       SENSITIVE = []
       include Aws::Structure
     end

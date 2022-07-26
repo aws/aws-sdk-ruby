@@ -30,6 +30,23 @@
         {"shape":"EndpointTemporarilyUnavailableException"}
       ]
     },
+    "ListRoutingControls":{
+      "name":"ListRoutingControls",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListRoutingControlsRequest"},
+      "output":{"shape":"ListRoutingControlsResponse"},
+      "errors":[
+        {"shape":"AccessDeniedException"},
+        {"shape":"InternalServerException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ValidationException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"EndpointTemporarilyUnavailableException"}
+      ]
+    },
     "UpdateRoutingControlState":{
       "name":"UpdateRoutingControlState",
       "http":{
@@ -63,7 +80,8 @@
         {"shape":"ValidationException"},
         {"shape":"ThrottlingException"},
         {"shape":"EndpointTemporarilyUnavailableException"},
-        {"shape":"ConflictException"}
+        {"shape":"ConflictException"},
+        {"shape":"ServiceLimitExceededException"}
       ]
     }
   },
@@ -80,7 +98,11 @@
       "type":"string",
       "max":255,
       "min":1,
-      "pattern":"^[A-Za-z0-9:\\/_-]*$"
+      "pattern":"^[A-Za-z0-9:.\\/_-]*$"
+    },
+    "Arns":{
+      "type":"list",
+      "member":{"shape":"Arn"}
     },
     "ConflictException":{
       "type":"structure",
@@ -95,6 +117,12 @@
         "resourceType":{"shape":"String"}
       },
       "exception":true
+    },
+    "ControlPanelName":{
+      "type":"string",
+      "max":64,
+      "min":1,
+      "pattern":"^\\S+$"
     },
     "EndpointTemporarilyUnavailableException":{
       "type":"structure",
@@ -119,7 +147,8 @@
       ],
       "members":{
         "RoutingControlArn":{"shape":"Arn"},
-        "RoutingControlState":{"shape":"RoutingControlState"}
+        "RoutingControlState":{"shape":"RoutingControlState"},
+        "RoutingControlName":{"shape":"RoutingControlName"}
       }
     },
     "InternalServerException":{
@@ -131,6 +160,35 @@
       },
       "exception":true,
       "fault":true
+    },
+    "ListRoutingControlsRequest":{
+      "type":"structure",
+      "members":{
+        "ControlPanelArn":{"shape":"Arn"},
+        "NextToken":{"shape":"PageToken"},
+        "MaxResults":{
+          "shape":"MaxResults",
+          "box":true
+        }
+      }
+    },
+    "ListRoutingControlsResponse":{
+      "type":"structure",
+      "required":["RoutingControls"],
+      "members":{
+        "RoutingControls":{"shape":"RoutingControls"},
+        "NextToken":{"shape":"PageToken"}
+      }
+    },
+    "MaxResults":{
+      "type":"integer",
+      "min":1
+    },
+    "PageToken":{
+      "type":"string",
+      "max":8096,
+      "min":1,
+      "pattern":"[\\S]*"
     },
     "ResourceNotFoundException":{
       "type":"structure",
@@ -147,12 +205,48 @@
       "exception":true
     },
     "RetryAfterSeconds":{"type":"integer"},
+    "RoutingControl":{
+      "type":"structure",
+      "members":{
+        "ControlPanelArn":{"shape":"Arn"},
+        "ControlPanelName":{"shape":"ControlPanelName"},
+        "RoutingControlArn":{"shape":"Arn"},
+        "RoutingControlName":{"shape":"RoutingControlName"},
+        "RoutingControlState":{"shape":"RoutingControlState"}
+      }
+    },
+    "RoutingControlName":{
+      "type":"string",
+      "max":64,
+      "min":1,
+      "pattern":"^\\S+$"
+    },
     "RoutingControlState":{
       "type":"string",
       "enum":[
         "On",
         "Off"
       ]
+    },
+    "RoutingControls":{
+      "type":"list",
+      "member":{"shape":"RoutingControl"}
+    },
+    "ServiceLimitExceededException":{
+      "type":"structure",
+      "required":[
+        "message",
+        "limitCode",
+        "serviceCode"
+      ],
+      "members":{
+        "message":{"shape":"String"},
+        "resourceId":{"shape":"String"},
+        "resourceType":{"shape":"String"},
+        "limitCode":{"shape":"String"},
+        "serviceCode":{"shape":"String"}
+      },
+      "exception":true
     },
     "String":{"type":"string"},
     "ThrottlingException":{
@@ -187,7 +281,8 @@
       ],
       "members":{
         "RoutingControlArn":{"shape":"Arn"},
-        "RoutingControlState":{"shape":"RoutingControlState"}
+        "RoutingControlState":{"shape":"RoutingControlState"},
+        "SafetyRulesToOverride":{"shape":"Arns"}
       }
     },
     "UpdateRoutingControlStateResponse":{
@@ -199,7 +294,8 @@
       "type":"structure",
       "required":["UpdateRoutingControlStateEntries"],
       "members":{
-        "UpdateRoutingControlStateEntries":{"shape":"UpdateRoutingControlStateEntries"}
+        "UpdateRoutingControlStateEntries":{"shape":"UpdateRoutingControlStateEntries"},
+        "SafetyRulesToOverride":{"shape":"Arns"}
       }
     },
     "UpdateRoutingControlStatesResponse":{

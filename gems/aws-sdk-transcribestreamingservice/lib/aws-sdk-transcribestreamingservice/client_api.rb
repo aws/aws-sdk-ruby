@@ -72,7 +72,9 @@ module Aws::TranscribeStreamingService
     Type = Shapes::StringShape.new(name: 'Type')
     VocabularyFilterMethod = Shapes::StringShape.new(name: 'VocabularyFilterMethod')
     VocabularyFilterName = Shapes::StringShape.new(name: 'VocabularyFilterName')
+    VocabularyFilterNames = Shapes::StringShape.new(name: 'VocabularyFilterNames')
     VocabularyName = Shapes::StringShape.new(name: 'VocabularyName')
+    VocabularyNames = Shapes::StringShape.new(name: 'VocabularyNames')
 
     Alternative.add_member(:transcript, Shapes::ShapeRef.new(shape: String, location_name: "Transcript"))
     Alternative.add_member(:items, Shapes::ShapeRef.new(shape: ItemList, location_name: "Items"))
@@ -245,6 +247,8 @@ module Aws::TranscribeStreamingService
     StartStreamTranscriptionRequest.add_member(:identify_language, Shapes::ShapeRef.new(shape: Boolean, location: "header", location_name: "x-amzn-transcribe-identify-language"))
     StartStreamTranscriptionRequest.add_member(:language_options, Shapes::ShapeRef.new(shape: LanguageOptions, location: "header", location_name: "x-amzn-transcribe-language-options"))
     StartStreamTranscriptionRequest.add_member(:preferred_language, Shapes::ShapeRef.new(shape: LanguageCode, location: "header", location_name: "x-amzn-transcribe-preferred-language"))
+    StartStreamTranscriptionRequest.add_member(:vocabulary_names, Shapes::ShapeRef.new(shape: VocabularyNames, location: "header", location_name: "x-amzn-transcribe-vocabulary-names"))
+    StartStreamTranscriptionRequest.add_member(:vocabulary_filter_names, Shapes::ShapeRef.new(shape: VocabularyFilterNames, location: "header", location_name: "x-amzn-transcribe-vocabulary-filter-names"))
     StartStreamTranscriptionRequest.struct_class = Types::StartStreamTranscriptionRequest
     StartStreamTranscriptionRequest[:payload] = :audio_stream
     StartStreamTranscriptionRequest[:payload_member] = StartStreamTranscriptionRequest.member(:audio_stream)
@@ -270,6 +274,8 @@ module Aws::TranscribeStreamingService
     StartStreamTranscriptionResponse.add_member(:identify_language, Shapes::ShapeRef.new(shape: Boolean, location: "header", location_name: "x-amzn-transcribe-identify-language"))
     StartStreamTranscriptionResponse.add_member(:language_options, Shapes::ShapeRef.new(shape: LanguageOptions, location: "header", location_name: "x-amzn-transcribe-language-options"))
     StartStreamTranscriptionResponse.add_member(:preferred_language, Shapes::ShapeRef.new(shape: LanguageCode, location: "header", location_name: "x-amzn-transcribe-preferred-language"))
+    StartStreamTranscriptionResponse.add_member(:vocabulary_names, Shapes::ShapeRef.new(shape: VocabularyNames, location: "header", location_name: "x-amzn-transcribe-vocabulary-names"))
+    StartStreamTranscriptionResponse.add_member(:vocabulary_filter_names, Shapes::ShapeRef.new(shape: VocabularyFilterNames, location: "header", location_name: "x-amzn-transcribe-vocabulary-filter-names"))
     StartStreamTranscriptionResponse.struct_class = Types::StartStreamTranscriptionResponse
     StartStreamTranscriptionResponse[:payload] = :transcript_result_stream
     StartStreamTranscriptionResponse[:payload_member] = StartStreamTranscriptionResponse.member(:transcript_result_stream)

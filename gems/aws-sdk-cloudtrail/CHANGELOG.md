@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2022-04-27)
+------------------
+
+* Feature - Increases the retention period maximum to 2557 days. Deprecates unused fields of the ListEventDataStores API response. Updates documentation.
+
+1.48.0 (2022-03-02)
+------------------
+
+* Feature - Add bytesScanned field into responses of DescribeQuery and GetQueryResults.
+
+1.47.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.46.0 (2022-02-03)
 ------------------
 

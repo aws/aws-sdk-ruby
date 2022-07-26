@@ -1,6 +1,71 @@
 Unreleased Changes
 ------------------
 
+1.151.0 (2022-07-26)
+------------------
+
+* Feature - Adds support for using RDS Proxies with RDS for MariaDB databases.
+
+1.150.0 (2022-07-22)
+------------------
+
+* Feature - This release adds the "ModifyActivityStream" API with support for audit policy state locking and unlocking.
+
+1.149.0 (2022-07-21)
+------------------
+
+* Feature - Adds support for creating an RDS Proxy for an RDS for MariaDB database.
+
+1.148.0 (2022-07-05)
+------------------
+
+* Feature - Adds waiters support for DBCluster.
+
+1.147.0 (2022-07-01)
+------------------
+
+* Feature - Adds support for additional retention periods to Performance Insights.
+
+1.146.0 (2022-05-06)
+------------------
+
+* Feature - Various documentation improvements.
+
+1.145.0 (2022-04-29)
+------------------
+
+* Feature - Feature - Adds support for Internet Protocol Version 6 (IPv6) on RDS database instances.
+
+1.144.0 (2022-04-20)
+------------------
+
+* Feature - Added a new cluster-level attribute to set the capacity range for Aurora Serverless v2 instances.
+
+1.143.0 (2022-04-15)
+------------------
+
+* Feature - Removes Amazon RDS on VMware with the deletion of APIs related to Custom Availability Zones and Media installation
+
+1.142.0 (2022-03-15)
+------------------
+
+* Feature - Various documentation improvements
+
+1.141.0 (2022-03-01)
+------------------
+
+* Feature - Documentation updates for Multi-AZ DB clusters.
+
+1.140.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.139.0 (2022-02-14)
+------------------
+
+* Feature - Adds support for determining which Aurora PostgreSQL versions support Babelfish.
+
 1.138.0 (2022-02-04)
 ------------------
 

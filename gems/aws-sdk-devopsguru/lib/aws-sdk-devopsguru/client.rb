@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::DevOpsGuru
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -356,8 +358,15 @@ module Aws::DevOpsGuru
     # If you use an Amazon SNS topic in another account, you must attach a
     # policy to it that grants DevOps Guru permission to it notifications.
     # DevOps Guru adds the required policy on your behalf to send
+    # notifications using Amazon SNS in your account. DevOps Guru only
+    # supports standard SNS topics. For more information, see [Permissions
+    # for cross account Amazon SNS topics][1].
+    #
+    # If you use an Amazon SNS topic in another account, you must attach a
+    # policy to it that grants DevOps Guru permission to it notifications.
+    # DevOps Guru adds the required policy on your behalf to send
     # notifications using Amazon SNS in your account. For more information,
-    # see [Permissions for cross account Amazon SNS topics][1].
+    # see Permissions for cross account Amazon SNS topics.
     #
     # If you use an Amazon SNS topic that is encrypted by an Amazon Web
     # Services Key Management Service customer-managed key (CMK), then you
@@ -399,6 +408,29 @@ module Aws::DevOpsGuru
     # @param [Hash] params ({})
     def add_notification_channel(params = {}, options = {})
       req = build_request(:add_notification_channel, params)
+      req.send_request(options)
+    end
+
+    # Deletes the insight along with the associated anomalies, events and
+    # recommendations.
+    #
+    # @option params [required, String] :id
+    #   The ID of the insight.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_insight({
+    #     id: "InsightId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DeleteInsight AWS API Documentation
+    #
+    # @overload delete_insight(params = {})
+    # @param [Hash] params ({})
+    def delete_insight(params = {}, options = {})
+      req = build_request(:delete_insight, params)
       req.send_request(options)
     end
 
@@ -553,6 +585,12 @@ module Aws::DevOpsGuru
     #   resp.proactive_anomaly.resource_collection.tags[0].tag_values #=> Array
     #   resp.proactive_anomaly.resource_collection.tags[0].tag_values[0] #=> String
     #   resp.proactive_anomaly.limit #=> Float
+    #   resp.proactive_anomaly.source_metadata.source #=> String
+    #   resp.proactive_anomaly.source_metadata.source_resource_name #=> String
+    #   resp.proactive_anomaly.source_metadata.source_resource_type #=> String
+    #   resp.proactive_anomaly.anomaly_resources #=> Array
+    #   resp.proactive_anomaly.anomaly_resources[0].name #=> String
+    #   resp.proactive_anomaly.anomaly_resources[0].type #=> String
     #   resp.reactive_anomaly.id #=> String
     #   resp.reactive_anomaly.severity #=> String, one of "LOW", "MEDIUM", "HIGH"
     #   resp.reactive_anomaly.status #=> String, one of "ONGOING", "CLOSED"
@@ -623,6 +661,29 @@ module Aws::DevOpsGuru
       req.send_request(options)
     end
 
+    # Returns the integration status of services that are integrated with
+    # DevOps Guru as Consumer via EventBridge. The one service that can be
+    # integrated with DevOps Guru is Amazon CodeGuru Profiler, which can
+    # produce proactive recommendations which can be stored and viewed in
+    # DevOps Guru.
+    #
+    # @return [Types::DescribeEventSourcesConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeEventSourcesConfigResponse#event_sources #event_sources} => Types::EventSourcesConfig
+    #
+    # @example Response structure
+    #
+    #   resp.event_sources.amazon_code_guru_profiler.status #=> String, one of "ENABLED", "DISABLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeEventSourcesConfig AWS API Documentation
+    #
+    # @overload describe_event_sources_config(params = {})
+    # @param [Hash] params ({})
+    def describe_event_sources_config(params = {}, options = {})
+      req = build_request(:describe_event_sources_config, params)
+      req.send_request(options)
+    end
+
     # Returns the most recent feedback submitted in the current Amazon Web
     # Services account and Region.
     #
@@ -690,6 +751,7 @@ module Aws::DevOpsGuru
     #   resp.proactive_insight.resource_collection.tags[0].tag_values #=> Array
     #   resp.proactive_insight.resource_collection.tags[0].tag_values[0] #=> String
     #   resp.proactive_insight.ssm_ops_item_id #=> String
+    #   resp.proactive_insight.description #=> String
     #   resp.reactive_insight.id #=> String
     #   resp.reactive_insight.name #=> String
     #   resp.reactive_insight.severity #=> String, one of "LOW", "MEDIUM", "HIGH"
@@ -703,6 +765,7 @@ module Aws::DevOpsGuru
     #   resp.reactive_insight.resource_collection.tags[0].tag_values #=> Array
     #   resp.reactive_insight.resource_collection.tags[0].tag_values[0] #=> String
     #   resp.reactive_insight.ssm_ops_item_id #=> String
+    #   resp.reactive_insight.description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeInsight AWS API Documentation
     #
@@ -963,6 +1026,7 @@ module Aws::DevOpsGuru
     # @example Response structure
     #
     #   resp.service_integration.ops_center.opt_in_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.service_integration.logs_anomaly_detection.opt_in_status #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeServiceIntegration AWS API Documentation
     #
@@ -1187,6 +1251,12 @@ module Aws::DevOpsGuru
     #   resp.proactive_anomalies[0].resource_collection.tags[0].tag_values #=> Array
     #   resp.proactive_anomalies[0].resource_collection.tags[0].tag_values[0] #=> String
     #   resp.proactive_anomalies[0].limit #=> Float
+    #   resp.proactive_anomalies[0].source_metadata.source #=> String
+    #   resp.proactive_anomalies[0].source_metadata.source_resource_name #=> String
+    #   resp.proactive_anomalies[0].source_metadata.source_resource_type #=> String
+    #   resp.proactive_anomalies[0].anomaly_resources #=> Array
+    #   resp.proactive_anomalies[0].anomaly_resources[0].name #=> String
+    #   resp.proactive_anomalies[0].anomaly_resources[0].type #=> String
     #   resp.reactive_anomalies #=> Array
     #   resp.reactive_anomalies[0].id #=> String
     #   resp.reactive_anomalies[0].severity #=> String, one of "LOW", "MEDIUM", "HIGH"
@@ -1256,6 +1326,64 @@ module Aws::DevOpsGuru
     # @param [Hash] params ({})
     def list_anomalies_for_insight(params = {}, options = {})
       req = build_request(:list_anomalies_for_insight, params)
+      req.send_request(options)
+    end
+
+    # Returns the list of log groups that contain log anomalies.
+    #
+    # @option params [required, String] :insight_id
+    #   The ID of the insight containing the log groups.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @option params [String] :next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If this value is null, it retrieves the first page.
+    #
+    # @return [Types::ListAnomalousLogGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAnomalousLogGroupsResponse#insight_id #insight_id} => String
+    #   * {Types::ListAnomalousLogGroupsResponse#anomalous_log_groups #anomalous_log_groups} => Array&lt;Types::AnomalousLogGroup&gt;
+    #   * {Types::ListAnomalousLogGroupsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_anomalous_log_groups({
+    #     insight_id: "InsightId", # required
+    #     max_results: 1,
+    #     next_token: "UuidNextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.insight_id #=> String
+    #   resp.anomalous_log_groups #=> Array
+    #   resp.anomalous_log_groups[0].log_group_name #=> String
+    #   resp.anomalous_log_groups[0].impact_start_time #=> Time
+    #   resp.anomalous_log_groups[0].impact_end_time #=> Time
+    #   resp.anomalous_log_groups[0].number_of_log_lines_scanned #=> Integer
+    #   resp.anomalous_log_groups[0].log_anomaly_showcases #=> Array
+    #   resp.anomalous_log_groups[0].log_anomaly_showcases[0].log_anomaly_classes #=> Array
+    #   resp.anomalous_log_groups[0].log_anomaly_showcases[0].log_anomaly_classes[0].log_stream_name #=> String
+    #   resp.anomalous_log_groups[0].log_anomaly_showcases[0].log_anomaly_classes[0].log_anomaly_type #=> String, one of "KEYWORD", "KEYWORD_TOKEN", "FORMAT", "HTTP_CODE", "BLOCK_FORMAT", "NUMERICAL_POINT", "NUMERICAL_NAN", "NEW_FIELD_NAME"
+    #   resp.anomalous_log_groups[0].log_anomaly_showcases[0].log_anomaly_classes[0].log_anomaly_token #=> String
+    #   resp.anomalous_log_groups[0].log_anomaly_showcases[0].log_anomaly_classes[0].log_event_id #=> String
+    #   resp.anomalous_log_groups[0].log_anomaly_showcases[0].log_anomaly_classes[0].explanation #=> String
+    #   resp.anomalous_log_groups[0].log_anomaly_showcases[0].log_anomaly_classes[0].number_of_log_lines_occurrences #=> Integer
+    #   resp.anomalous_log_groups[0].log_anomaly_showcases[0].log_anomaly_classes[0].log_event_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ListAnomalousLogGroups AWS API Documentation
+    #
+    # @overload list_anomalous_log_groups(params = {})
+    # @param [Hash] params ({})
+    def list_anomalous_log_groups(params = {}, options = {})
+      req = build_request(:list_anomalous_log_groups, params)
       req.send_request(options)
     end
 
@@ -1441,6 +1569,57 @@ module Aws::DevOpsGuru
     # @param [Hash] params ({})
     def list_insights(params = {}, options = {})
       req = build_request(:list_insights, params)
+      req.send_request(options)
+    end
+
+    # Returns the list of all log groups that are being monitored and tagged
+    # by DevOps Guru.
+    #
+    # @option params [required, Types::ListMonitoredResourcesFilters] :filters
+    #   Filters to determine which monitored resources you want to retrieve.
+    #   You can filter by resource type or resource permission status.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @option params [String] :next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If this value is null, it retrieves the first page.
+    #
+    # @return [Types::ListMonitoredResourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMonitoredResourcesResponse#monitored_resource_identifiers #monitored_resource_identifiers} => Array&lt;Types::MonitoredResourceIdentifier&gt;
+    #   * {Types::ListMonitoredResourcesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_monitored_resources({
+    #     filters: { # required
+    #       resource_permission: "FULL_PERMISSION", # required, accepts FULL_PERMISSION, MISSING_PERMISSION
+    #       resource_type_filters: ["LOG_GROUPS"], # required, accepts LOG_GROUPS
+    #     },
+    #     max_results: 1,
+    #     next_token: "UuidNextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.monitored_resource_identifiers #=> Array
+    #   resp.monitored_resource_identifiers[0].monitored_resource_name #=> String
+    #   resp.monitored_resource_identifiers[0].type #=> String
+    #   resp.monitored_resource_identifiers[0].resource_permission #=> String, one of "FULL_PERMISSION", "MISSING_PERMISSION"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ListMonitoredResources AWS API Documentation
+    #
+    # @overload list_monitored_resources(params = {})
+    # @param [Hash] params ({})
+    def list_monitored_resources(params = {}, options = {})
+      req = build_request(:list_monitored_resources, params)
       req.send_request(options)
     end
 
@@ -1642,6 +1821,7 @@ module Aws::DevOpsGuru
     #   resp.recommendations[0].related_anomalies[0].source_details[0].cloud_watch_metrics[0].metric_name #=> String
     #   resp.recommendations[0].related_anomalies[0].source_details[0].cloud_watch_metrics[0].namespace #=> String
     #   resp.recommendations[0].related_anomalies[0].anomaly_id #=> String
+    #   resp.recommendations[0].category #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ListRecommendations AWS API Documentation
@@ -1983,6 +2163,36 @@ module Aws::DevOpsGuru
       req.send_request(options)
     end
 
+    # Enables or disables integration with a service that can be integrated
+    # with DevOps Guru. The one service that can be integrated with DevOps
+    # Guru is Amazon CodeGuru Profiler, which can produce proactive
+    # recommendations which can be stored and viewed in DevOps Guru.
+    #
+    # @option params [Types::EventSourcesConfig] :event_sources
+    #   Configuration information about the integration of DevOps Guru as the
+    #   Consumer via EventBridge with another AWS Service.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_event_sources_config({
+    #     event_sources: {
+    #       amazon_code_guru_profiler: {
+    #         status: "ENABLED", # accepts ENABLED, DISABLED
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/UpdateEventSourcesConfig AWS API Documentation
+    #
+    # @overload update_event_sources_config(params = {})
+    # @param [Hash] params ({})
+    def update_event_sources_config(params = {}, options = {})
+      req = build_request(:update_event_sources_config, params)
+      req.send_request(options)
+    end
+
     # Updates the collection of resources that DevOps Guru analyzes. The two
     # types of Amazon Web Services resource collections supported are Amazon
     # Web Services CloudFormation stacks and Amazon Web Services resources
@@ -2047,6 +2257,9 @@ module Aws::DevOpsGuru
     #       ops_center: {
     #         opt_in_status: "ENABLED", # accepts ENABLED, DISABLED
     #       },
+    #       logs_anomaly_detection: {
+    #         opt_in_status: "ENABLED", # accepts ENABLED, DISABLED
+    #       },
     #     },
     #   })
     #
@@ -2072,7 +2285,7 @@ module Aws::DevOpsGuru
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-devopsguru'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

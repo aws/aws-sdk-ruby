@@ -78,7 +78,7 @@ module Aws::Pricing
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The pagination token for the next set of retreivable results.
+    #   The pagination token for the next set of retrievable results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pricing-2017-10-15/DescribeServicesResponse AWS API Documentation
@@ -219,7 +219,7 @@ module Aws::Pricing
     #   data as a hash:
     #
     #       {
-    #         service_code: "String",
+    #         service_code: "String", # required
     #         filters: [
     #           {
     #             type: "TERM_MATCH", # required, accepts TERM_MATCH

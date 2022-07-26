@@ -10,7 +10,7 @@
 module Aws::Drs
   module Types
 
-    # TYou do not have sufficient access to perform this action.
+    # You do not have sufficient access to perform this action.
     #
     # @!attribute [rw] code
     #   @return [String]
@@ -23,6 +23,20 @@ module Aws::Drs
     class AccessDeniedException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # AWS account.
+    #
+    # @!attribute [rw] account_id
+    #   Account ID of AWS account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/Account AWS API Documentation
+    #
+    class Account < Struct.new(
+      :account_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -74,6 +88,81 @@ module Aws::Drs
       include Aws::Structure
     end
 
+    # Properties of a conversion job
+    #
+    # @!attribute [rw] data_timestamp
+    #   The timestamp of when the snapshot being converted was taken
+    #   @return [String]
+    #
+    # @!attribute [rw] force_uefi
+    #   Whether the volume being converted uses UEFI or not
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] root_volume_name
+    #   The root volume name of a conversion job
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_to_conversion_map
+    #   A mapping between the volumes being converted and the converted
+    #   snapshot ids
+    #   @return [Hash<String,Hash<String,String>>]
+    #
+    # @!attribute [rw] volume_to_volume_size
+    #   A mapping between the volumes and their sizes
+    #   @return [Hash<String,Integer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ConversionProperties AWS API Documentation
+    #
+    class ConversionProperties < Struct.new(
+      :data_timestamp,
+      :force_uefi,
+      :root_volume_name,
+      :volume_to_conversion_map,
+      :volume_to_volume_size)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateExtendedSourceServerRequest
+    #   data as a hash:
+    #
+    #       {
+    #         source_server_arn: "SourceServerARN", # required
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] source_server_arn
+    #   This defines the ARN of the source server in staging Account based
+    #   on which you want to create an extended source server.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags associated with the extended source server.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/CreateExtendedSourceServerRequest AWS API Documentation
+    #
+    class CreateExtendedSourceServerRequest < Struct.new(
+      :source_server_arn,
+      :tags)
+      SENSITIVE = [:tags]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] source_server
+    #   Created extended source server.
+    #   @return [Types::SourceServer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/CreateExtendedSourceServerResponse AWS API Documentation
+    #
+    class CreateExtendedSourceServerResponse < Struct.new(
+      :source_server)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateReplicationConfigurationTemplateRequest
     #   data as a hash:
     #
@@ -82,7 +171,7 @@ module Aws::Drs
     #         bandwidth_throttling: 1, # required
     #         create_public_ip: false, # required
     #         data_plane_routing: "PRIVATE_IP", # required, accepts PRIVATE_IP, PUBLIC_IP
-    #         default_large_staging_disk_type: "GP2", # required, accepts GP2, GP3, ST1
+    #         default_large_staging_disk_type: "GP2", # required, accepts GP2, GP3, ST1, AUTO
     #         ebs_encryption: "DEFAULT", # required, accepts DEFAULT, CUSTOM
     #         ebs_encryption_key_arn: "ARN",
     #         pit_policy: [ # required
@@ -357,7 +446,7 @@ module Aws::Drs
     #       }
     #
     # @!attribute [rw] recovery_instance_id
-    #   RThe ID of the Recovery Instance to be deleted.
+    #   The ID of the Recovery Instance to be deleted.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/DeleteRecoveryInstanceRequest AWS API Documentation
@@ -466,7 +555,7 @@ module Aws::Drs
     #   data as a hash:
     #
     #       {
-    #         filters: { # required
+    #         filters: {
     #           from_date: "ISO8601DatetimeString",
     #           job_i_ds: ["JobID"],
     #           to_date: "ISO8601DatetimeString",
@@ -552,7 +641,7 @@ module Aws::Drs
     #   data as a hash:
     #
     #       {
-    #         filters: { # required
+    #         filters: {
     #           recovery_instance_i_ds: ["RecoveryInstanceID"],
     #           source_server_i_ds: ["SourceServerID"],
     #         },
@@ -724,7 +813,7 @@ module Aws::Drs
     #       {
     #         max_results: 1,
     #         next_token: "PaginationToken",
-    #         replication_configuration_template_i_ds: ["ReplicationConfigurationTemplateID"], # required
+    #         replication_configuration_template_i_ds: ["ReplicationConfigurationTemplateID"],
     #       }
     #
     # @!attribute [rw] max_results
@@ -773,9 +862,10 @@ module Aws::Drs
     #   data as a hash:
     #
     #       {
-    #         filters: { # required
+    #         filters: {
     #           hardware_id: "BoundedString",
     #           source_server_i_ds: ["SourceServerID"],
+    #           staging_account_i_ds: ["AccountID"],
     #         },
     #         max_results: 1,
     #         next_token: "PaginationToken",
@@ -811,6 +901,7 @@ module Aws::Drs
     #       {
     #         hardware_id: "BoundedString",
     #         source_server_i_ds: ["SourceServerID"],
+    #         staging_account_i_ds: ["AccountID"],
     #       }
     #
     # @!attribute [rw] hardware_id
@@ -823,11 +914,17 @@ module Aws::Drs
     #   array means all Source Servers.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] staging_account_i_ds
+    #   An array of staging account IDs that extended source servers belong
+    #   to. An empty array means all source servers will be shown.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/DescribeSourceServersRequestFilters AWS API Documentation
     #
     class DescribeSourceServersRequestFilters < Struct.new(
       :hardware_id,
-      :source_server_i_ds)
+      :source_server_i_ds,
+      :staging_account_i_ds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1133,6 +1230,10 @@ module Aws::Drs
 
     # Metadata associated with a Job log.
     #
+    # @!attribute [rw] conversion_properties
+    #   Properties of a conversion job
+    #   @return [Types::ConversionProperties]
+    #
     # @!attribute [rw] conversion_server_id
     #   The ID of a conversion server.
     #   @return [String]
@@ -1152,6 +1253,7 @@ module Aws::Drs
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/JobLogEventData AWS API Documentation
     #
     class JobLogEventData < Struct.new(
+      :conversion_properties,
       :conversion_server_id,
       :raw_error,
       :source_server_id,
@@ -1308,6 +1410,97 @@ module Aws::Drs
       :api_call_date_time,
       :job_id,
       :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListExtensibleSourceServersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "PaginationToken",
+    #         staging_account_id: "AccountID", # required
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of extensible source servers to retrieve.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token of the next extensible source server to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] staging_account_id
+    #   The Id of the staging Account to retrieve extensible source servers
+    #   from.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ListExtensibleSourceServersRequest AWS API Documentation
+    #
+    class ListExtensibleSourceServersRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :staging_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   A list of source servers on a staging Account that are extensible.
+    #   @return [Array<Types::StagingSourceServer>]
+    #
+    # @!attribute [rw] next_token
+    #   The token of the next extensible source server to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ListExtensibleSourceServersResponse AWS API Documentation
+    #
+    class ListExtensibleSourceServersResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListStagingAccountsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "PaginationToken",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of staging Accounts to retrieve.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token of the next staging Account to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ListStagingAccountsRequest AWS API Documentation
+    #
+    class ListStagingAccountsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] accounts
+    #   An array of staging AWS Accounts.
+    #   @return [Array<Types::Account>]
+    #
+    # @!attribute [rw] next_token
+    #   The token of the next staging Account to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ListStagingAccountsResponse AWS API Documentation
+    #
+    class ListStagingAccountsResponse < Struct.new(
+      :accounts,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1923,6 +2116,7 @@ module Aws::Drs
     #         device_name: "BoundedString",
     #         iops: 1,
     #         is_boot_disk: false,
+    #         optimized_staging_disk_type: "AUTO", # accepts AUTO, GP2, GP3, IO1, SC1, ST1, STANDARD
     #         staging_disk_type: "AUTO", # accepts AUTO, GP2, GP3, IO1, SC1, ST1, STANDARD
     #         throughput: 1,
     #       }
@@ -1939,6 +2133,11 @@ module Aws::Drs
     #   Whether to boot from this disk or not.
     #   @return [Boolean]
     #
+    # @!attribute [rw] optimized_staging_disk_type
+    #   The Staging Disk EBS volume type to be used during replication when
+    #   `stagingDiskType` is set to Auto. This is a read-only field.
+    #   @return [String]
+    #
     # @!attribute [rw] staging_disk_type
     #   The Staging Disk EBS volume type to be used during replication.
     #   @return [String]
@@ -1954,6 +2153,7 @@ module Aws::Drs
       :device_name,
       :iops,
       :is_boot_disk,
+      :optimized_staging_disk_type,
       :staging_disk_type,
       :throughput)
       SENSITIVE = []
@@ -2217,6 +2417,10 @@ module Aws::Drs
     #   The ID of the Source Server.
     #   @return [String]
     #
+    # @!attribute [rw] staging_area
+    #   The staging area of the source server.
+    #   @return [Types::StagingArea]
+    #
     # @!attribute [rw] tags
     #   The tags associated with the Source Server.
     #   @return [Hash<String,String>]
@@ -2231,6 +2435,72 @@ module Aws::Drs
       :recovery_instance_id,
       :source_properties,
       :source_server_id,
+      :staging_area,
+      :tags)
+      SENSITIVE = [:tags]
+      include Aws::Structure
+    end
+
+    # Staging information related to source server.
+    #
+    # @!attribute [rw] error_message
+    #   Shows an error message that occurred when DRS tried to access the
+    #   staging source server. In this case StagingArea$status will have
+    #   value EXTENSION\_ERROR
+    #   @return [String]
+    #
+    # @!attribute [rw] staging_account_id
+    #   Account ID of the account to which source server belongs. If this
+    #   source server is extended - shows Account ID of staging source
+    #   server.
+    #   @return [String]
+    #
+    # @!attribute [rw] staging_source_server_arn
+    #   Arn of the staging source server if this source server is extended
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Status of Source server extension. Possible values: (a)
+    #   NOT\_EXTENDED - This is a source server that is replicating in the
+    #   current account. (b) EXTENDED - Source server is extended from a
+    #   staging source server. In this case, the value of
+    #   stagingSourceServerArn is pointing to the Arn of the source server
+    #   in the staging account. (c) EXTENSION\_ERROR - Some issue occurred
+    #   when accessing staging source server. In this case, errorMessage
+    #   field will contain an error message that explains what happened.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/StagingArea AWS API Documentation
+    #
+    class StagingArea < Struct.new(
+      :error_message,
+      :staging_account_id,
+      :staging_source_server_arn,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Source server in staging account that extended source server connected
+    # to.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the source server.
+    #   @return [String]
+    #
+    # @!attribute [rw] hostname
+    #   Hostname of staging source server.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags associated with the staging source server.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/StagingSourceServer AWS API Documentation
+    #
+    class StagingSourceServer < Struct.new(
+      :arn,
+      :hostname,
       :tags)
       SENSITIVE = [:tags]
       include Aws::Structure
@@ -2614,7 +2884,7 @@ module Aws::Drs
     #         bandwidth_throttling: 1,
     #         create_public_ip: false,
     #         data_plane_routing: "PRIVATE_IP", # accepts PRIVATE_IP, PUBLIC_IP
-    #         default_large_staging_disk_type: "GP2", # accepts GP2, GP3, ST1
+    #         default_large_staging_disk_type: "GP2", # accepts GP2, GP3, ST1, AUTO
     #         ebs_encryption: "DEFAULT", # accepts DEFAULT, CUSTOM
     #         ebs_encryption_key_arn: "ARN",
     #         name: "SmallBoundedString",
@@ -2632,6 +2902,7 @@ module Aws::Drs
     #             device_name: "BoundedString",
     #             iops: 1,
     #             is_boot_disk: false,
+    #             optimized_staging_disk_type: "AUTO", # accepts AUTO, GP2, GP3, IO1, SC1, ST1, STANDARD
     #             staging_disk_type: "AUTO", # accepts AUTO, GP2, GP3, IO1, SC1, ST1, STANDARD
     #             throughput: 1,
     #           },
@@ -2749,7 +3020,7 @@ module Aws::Drs
     #         bandwidth_throttling: 1,
     #         create_public_ip: false,
     #         data_plane_routing: "PRIVATE_IP", # accepts PRIVATE_IP, PUBLIC_IP
-    #         default_large_staging_disk_type: "GP2", # accepts GP2, GP3, ST1
+    #         default_large_staging_disk_type: "GP2", # accepts GP2, GP3, ST1, AUTO
     #         ebs_encryption: "DEFAULT", # accepts DEFAULT, CUSTOM
     #         ebs_encryption_key_arn: "ARN",
     #         pit_policy: [

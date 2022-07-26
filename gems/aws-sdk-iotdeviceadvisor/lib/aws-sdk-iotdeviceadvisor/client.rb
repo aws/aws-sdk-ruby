@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::IoTDeviceAdvisor
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -383,8 +385,10 @@ module Aws::IoTDeviceAdvisor
     #         },
     #       ],
     #       intended_for_qualification: false,
+    #       is_long_duration_test: false,
     #       root_group: "RootGroup",
     #       device_permission_role_arn: "AmazonResourceName",
+    #       protocol: "MqttV3_1_1", # accepts MqttV3_1_1, MqttV5
     #     },
     #     tags: {
     #       "String128" => "String256",
@@ -504,8 +508,10 @@ module Aws::IoTDeviceAdvisor
     #   resp.suite_definition_configuration.devices[0].thing_arn #=> String
     #   resp.suite_definition_configuration.devices[0].certificate_arn #=> String
     #   resp.suite_definition_configuration.intended_for_qualification #=> Boolean
+    #   resp.suite_definition_configuration.is_long_duration_test #=> Boolean
     #   resp.suite_definition_configuration.root_group #=> String
     #   resp.suite_definition_configuration.device_permission_role_arn #=> String
+    #   resp.suite_definition_configuration.protocol #=> String, one of "MqttV3_1_1", "MqttV5"
     #   resp.created_at #=> Time
     #   resp.last_modified_at #=> Time
     #   resp.tags #=> Hash
@@ -577,6 +583,12 @@ module Aws::IoTDeviceAdvisor
     #   resp.test_result.groups[0].tests[0].log_url #=> String
     #   resp.test_result.groups[0].tests[0].warnings #=> String
     #   resp.test_result.groups[0].tests[0].failure #=> String
+    #   resp.test_result.groups[0].tests[0].test_scenarios #=> Array
+    #   resp.test_result.groups[0].tests[0].test_scenarios[0].test_case_scenario_id #=> String
+    #   resp.test_result.groups[0].tests[0].test_scenarios[0].test_case_scenario_type #=> String, one of "Advanced", "Basic"
+    #   resp.test_result.groups[0].tests[0].test_scenarios[0].status #=> String, one of "PASS", "FAIL", "CANCELED", "PENDING", "RUNNING", "STOPPING", "STOPPED", "PASS_WITH_WARNINGS", "ERROR"
+    #   resp.test_result.groups[0].tests[0].test_scenarios[0].failure #=> String
+    #   resp.test_result.groups[0].tests[0].test_scenarios[0].system_message #=> String
     #   resp.start_time #=> Time
     #   resp.end_time #=> Time
     #   resp.status #=> String, one of "PASS", "FAIL", "CANCELED", "PENDING", "RUNNING", "STOPPING", "STOPPED", "PASS_WITH_WARNINGS", "ERROR"
@@ -665,6 +677,8 @@ module Aws::IoTDeviceAdvisor
     #   resp.suite_definition_information_list[0].default_devices[0].thing_arn #=> String
     #   resp.suite_definition_information_list[0].default_devices[0].certificate_arn #=> String
     #   resp.suite_definition_information_list[0].intended_for_qualification #=> Boolean
+    #   resp.suite_definition_information_list[0].is_long_duration_test #=> Boolean
+    #   resp.suite_definition_information_list[0].protocol #=> String, one of "MqttV3_1_1", "MqttV5"
     #   resp.suite_definition_information_list[0].created_at #=> Time
     #   resp.next_token #=> String
     #
@@ -956,8 +970,10 @@ module Aws::IoTDeviceAdvisor
     #         },
     #       ],
     #       intended_for_qualification: false,
+    #       is_long_duration_test: false,
     #       root_group: "RootGroup",
     #       device_permission_role_arn: "AmazonResourceName",
+    #       protocol: "MqttV3_1_1", # accepts MqttV3_1_1, MqttV5
     #     },
     #   })
     #
@@ -990,7 +1006,7 @@ module Aws::IoTDeviceAdvisor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotdeviceadvisor'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

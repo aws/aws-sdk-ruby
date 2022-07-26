@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2022-05-16)
+------------------
+
+* Feature - Documentation updates for AWS Security Token Service.
+
+1.6.0 (2022-03-04)
+------------------
+
+* Feature - Documentation updates for AWS Security Token Service.
+
 1.5.0 (2021-11-23)
 ------------------
 

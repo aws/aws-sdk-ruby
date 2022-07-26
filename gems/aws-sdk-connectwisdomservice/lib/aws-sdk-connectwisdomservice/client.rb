@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::ConnectWisdomService
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -491,8 +493,8 @@ module Aws::ConnectWisdomService
     #   not need to pass this option.**
     #
     # @option params [required, String] :knowledge_base_id
-    #   The the identifier of the knowledge base. Can be either the ID or the
-    #   ARN. URLs cannot contain the ARN.
+    #   The identifier of the knowledge base. Can be either the ID or the ARN.
+    #   URLs cannot contain the ARN.
     #
     # @option params [Hash<String,String>] :metadata
     #   A key/value map to store attributes without affecting tagging or
@@ -792,8 +794,8 @@ module Aws::ConnectWisdomService
     #   cannot contain the ARN.
     #
     # @option params [required, String] :knowledge_base_id
-    #   The the identifier of the knowledge base. Can be either the ID or the
-    #   ARN. URLs cannot contain the ARN.
+    #   The identifier of the knowledge base. Can be either the ID or the ARN.
+    #   URLs cannot contain the ARN.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -938,8 +940,8 @@ module Aws::ConnectWisdomService
     #   cannot contain the ARN.
     #
     # @option params [required, String] :knowledge_base_id
-    #   The the identifier of the knowledge base. Can be either the ID or the
-    #   ARN. URLs cannot contain the ARN.
+    #   The identifier of the knowledge base. Can be either the ID or the ARN.
+    #   URLs cannot contain the ARN.
     #
     # @return [Types::GetContentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -987,8 +989,8 @@ module Aws::ConnectWisdomService
     #   cannot contain the ARN.
     #
     # @option params [required, String] :knowledge_base_id
-    #   The the identifier of the knowledge base. Can be either the ID or the
-    #   ARN. URLs cannot contain the ARN.
+    #   The identifier of the knowledge base. Can be either the ID or the ARN.
+    #   URLs cannot contain the ARN.
     #
     # @return [Types::GetContentSummaryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1029,8 +1031,8 @@ module Aws::ConnectWisdomService
     # Retrieves information about the knowledge base.
     #
     # @option params [required, String] :knowledge_base_id
-    #   The the identifier of the knowledge base. Can be either the ID or the
-    #   ARN. URLs cannot contain the ARN.
+    #   The identifier of the knowledge base. Can be either the ID or the ARN.
+    #   URLs cannot contain the ARN.
     #
     # @return [Types::GetKnowledgeBaseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1102,6 +1104,7 @@ module Aws::ConnectWisdomService
     # @return [Types::GetRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetRecommendationsResponse#recommendations #recommendations} => Array&lt;Types::RecommendationData&gt;
+    #   * {Types::GetRecommendationsResponse#triggers #triggers} => Array&lt;Types::RecommendationTrigger&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1130,6 +1133,14 @@ module Aws::ConnectWisdomService
     #   resp.recommendations[0].recommendation_id #=> String
     #   resp.recommendations[0].relevance_level #=> String, one of "HIGH", "MEDIUM", "LOW"
     #   resp.recommendations[0].relevance_score #=> Float
+    #   resp.recommendations[0].type #=> String, one of "KNOWLEDGE_CONTENT"
+    #   resp.triggers #=> Array
+    #   resp.triggers[0].data.query.text #=> String
+    #   resp.triggers[0].id #=> String
+    #   resp.triggers[0].recommendation_ids #=> Array
+    #   resp.triggers[0].recommendation_ids[0] #=> String
+    #   resp.triggers[0].source #=> String, one of "ISSUE_DETECTION", "RULE_EVALUATION", "OTHER"
+    #   resp.triggers[0].type #=> String, one of "QUERY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/GetRecommendations AWS API Documentation
     #
@@ -1281,8 +1292,8 @@ module Aws::ConnectWisdomService
     # Lists the content.
     #
     # @option params [required, String] :knowledge_base_id
-    #   The the identifier of the knowledge base. Can be either the ID or the
-    #   ARN. URLs cannot contain the ARN.
+    #   The identifier of the knowledge base. Can be either the ID or the ARN.
+    #   URLs cannot contain the ARN.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return per page.
@@ -1533,8 +1544,8 @@ module Aws::ConnectWisdomService
     # Removes a URI template from a knowledge base.
     #
     # @option params [required, String] :knowledge_base_id
-    #   The the identifier of the knowledge base. Can be either the ID or the
-    #   ARN. URLs cannot contain the ARN.
+    #   The identifier of the knowledge base. Can be either the ID or the ARN.
+    #   URLs cannot contain the ARN.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1557,8 +1568,8 @@ module Aws::ConnectWisdomService
     # a specific content resource by its name.
     #
     # @option params [required, String] :knowledge_base_id
-    #   The the identifier of the knowledge base. Can be either the ID or the
-    #   ARN. URLs cannot contain the ARN.
+    #   The identifier of the knowledge base. Can be either the ID or the ARN.
+    #   URLs cannot contain the ARN.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return per page.
@@ -1697,8 +1708,8 @@ module Aws::ConnectWisdomService
     #   The type of content to upload.
     #
     # @option params [required, String] :knowledge_base_id
-    #   The the identifier of the knowledge base. Can be either the ID or the
-    #   ARN. URLs cannot contain the ARN.
+    #   The identifier of the knowledge base. Can be either the ID or the ARN.
+    #   URLs cannot contain the ARN.
     #
     # @return [Types::StartContentUploadResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1792,8 +1803,7 @@ module Aws::ConnectWisdomService
     #   cannot contain the ARN.
     #
     # @option params [required, String] :knowledge_base_id
-    #   The the identifier of the knowledge base. Can be either the ID or the
-    #   ARN
+    #   The identifier of the knowledge base. Can be either the ID or the ARN
     #
     # @option params [Hash<String,String>] :metadata
     #   A key/value map to store attributes without affecting tagging or
@@ -1883,8 +1893,8 @@ module Aws::ConnectWisdomService
     # `https://myInstanceName.lightning.force.com/lightning/r/Knowledge__kav/*$\{Id\}*/view`.
     #
     # @option params [required, String] :knowledge_base_id
-    #   The the identifier of the knowledge base. Can be either the ID or the
-    #   ARN. URLs cannot contain the ARN.
+    #   The identifier of the knowledge base. Can be either the ID or the ARN.
+    #   URLs cannot contain the ARN.
     #
     # @option params [required, String] :template_uri
     #   The template URI to update.
@@ -1939,7 +1949,7 @@ module Aws::ConnectWisdomService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connectwisdomservice'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

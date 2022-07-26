@@ -10,6 +10,43 @@
 module Aws::GuardDuty
   module Types
 
+    # @note When making an API call, you may pass AcceptAdministratorInvitationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         detector_id: "DetectorId", # required
+    #         administrator_id: "String", # required
+    #         invitation_id: "String", # required
+    #       }
+    #
+    # @!attribute [rw] detector_id
+    #   The unique ID of the detector of the GuardDuty member account.
+    #   @return [String]
+    #
+    # @!attribute [rw] administrator_id
+    #   The account ID of the GuardDuty administrator account whose
+    #   invitation you're accepting.
+    #   @return [String]
+    #
+    # @!attribute [rw] invitation_id
+    #   The value that is used to validate the administrator account to the
+    #   member account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AcceptAdministratorInvitationRequest AWS API Documentation
+    #
+    class AcceptAdministratorInvitationRequest < Struct.new(
+      :detector_id,
+      :administrator_id,
+      :invitation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AcceptAdministratorInvitationResponse AWS API Documentation
+    #
+    class AcceptAdministratorInvitationResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass AcceptInvitationRequest
     #   data as a hash:
     #
@@ -125,6 +162,26 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Provides details of the GuardDuty member account that uses a free
+    # trial service.
+    #
+    # @!attribute [rw] account_id
+    #   The account identifier of the GuardDuty member account.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_sources
+    #   Describes the data source enabled for the GuardDuty member account.
+    #   @return [Types::DataSourcesFreeTrial]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AccountFreeTrialInfo AWS API Documentation
+    #
+    class AccountFreeTrialInfo < Struct.new(
+      :account_id,
+      :data_sources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the account level permissions on the S3
     # bucket.
     #
@@ -204,6 +261,37 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the administrator account and invitation.
+    #
+    # @!attribute [rw] account_id
+    #   The ID of the account used as the administrator account.
+    #   @return [String]
+    #
+    # @!attribute [rw] invitation_id
+    #   The value that is used to validate the administrator account to the
+    #   member account.
+    #   @return [String]
+    #
+    # @!attribute [rw] relationship_status
+    #   The status of the relationship between the administrator and member
+    #   accounts.
+    #   @return [String]
+    #
+    # @!attribute [rw] invited_at
+    #   The timestamp when the invitation was sent.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Administrator AWS API Documentation
+    #
+    class Administrator < Struct.new(
+      :account_id,
+      :invitation_id,
+      :relationship_status,
+      :invited_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ArchiveFindingsRequest
     #   data as a hash:
     #
@@ -253,6 +341,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] user_agent
+    #   The agent through which the API request was made.
     #   @return [String]
     #
     # @!attribute [rw] remote_ip_details
@@ -270,6 +359,12 @@ module Aws::GuardDuty
     #   account.
     #   @return [Types::RemoteAccountDetails]
     #
+    # @!attribute [rw] affected_resources
+    #   The details of the Amazon Web Services account that made the API
+    #   call. This field identifies the resources that were affected by this
+    #   API call.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AwsApiCallAction AWS API Documentation
     #
     class AwsApiCallAction < Struct.new(
@@ -280,7 +375,8 @@ module Aws::GuardDuty
       :user_agent,
       :remote_ip_details,
       :service_name,
-      :remote_account_details)
+      :remote_account_details,
+      :affected_resources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -601,6 +697,11 @@ module Aws::GuardDuty
     #               enable: false, # required
     #             },
     #           },
+    #           malware_protection: {
+    #             scan_ec2_instance_with_findings: {
+    #               ebs_volumes: false,
+    #             },
+    #           },
     #         },
     #         tags: {
     #           "TagKey" => "TagValue",
@@ -773,6 +874,8 @@ module Aws::GuardDuty
     #   * service.action.awsApiCallAction.callerType
     #
     #   * service.action.awsApiCallAction.errorCode
+    #
+    #   * service.action.awsApiCallAction.userAgent
     #
     #   * service.action.awsApiCallAction.remoteIpDetails.city.cityName
     #
@@ -1193,6 +1296,11 @@ module Aws::GuardDuty
     #             enable: false, # required
     #           },
     #         },
+    #         malware_protection: {
+    #           scan_ec2_instance_with_findings: {
+    #             ebs_volumes: false,
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] s3_logs
@@ -1203,11 +1311,16 @@ module Aws::GuardDuty
     #   Describes whether any Kubernetes logs are enabled as data sources.
     #   @return [Types::KubernetesConfiguration]
     #
+    # @!attribute [rw] malware_protection
+    #   Describes whether Malware Protection is enabled as a data source.
+    #   @return [Types::MalwareProtectionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DataSourceConfigurations AWS API Documentation
     #
     class DataSourceConfigurations < Struct.new(
       :s3_logs,
-      :kubernetes)
+      :kubernetes,
+      :malware_protection)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1239,6 +1352,10 @@ module Aws::GuardDuty
     #   data sources.
     #   @return [Types::KubernetesConfigurationResult]
     #
+    # @!attribute [rw] malware_protection
+    #   Describes the configuration of Malware Protection data sources.
+    #   @return [Types::MalwareProtectionConfigurationResult]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DataSourceConfigurationsResult AWS API Documentation
     #
     class DataSourceConfigurationsResult < Struct.new(
@@ -1246,7 +1363,66 @@ module Aws::GuardDuty
       :dns_logs,
       :flow_logs,
       :s3_logs,
-      :kubernetes)
+      :kubernetes,
+      :malware_protection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about which data sources are enabled for the
+    # GuardDuty member account.
+    #
+    # @!attribute [rw] free_trial_days_remaining
+    #   A value that specifies the number of days left to use each enabled
+    #   data source.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DataSourceFreeTrial AWS API Documentation
+    #
+    class DataSourceFreeTrial < Struct.new(
+      :free_trial_days_remaining)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about which data sources are enabled for the
+    # GuardDuty member account.
+    #
+    # @!attribute [rw] cloud_trail
+    #   Describes whether any AWS CloudTrail management event logs are
+    #   enabled as data sources.
+    #   @return [Types::DataSourceFreeTrial]
+    #
+    # @!attribute [rw] dns_logs
+    #   Describes whether any DNS logs are enabled as data sources.
+    #   @return [Types::DataSourceFreeTrial]
+    #
+    # @!attribute [rw] flow_logs
+    #   Describes whether any VPC Flow logs are enabled as data sources.
+    #   @return [Types::DataSourceFreeTrial]
+    #
+    # @!attribute [rw] s3_logs
+    #   Describes whether any S3 data event logs are enabled as data
+    #   sources.
+    #   @return [Types::DataSourceFreeTrial]
+    #
+    # @!attribute [rw] kubernetes
+    #   Describes whether any Kubernetes logs are enabled as data sources.
+    #   @return [Types::KubernetesDataSourceFreeTrial]
+    #
+    # @!attribute [rw] malware_protection
+    #   Describes whether Malware Protection is enabled as a data source.
+    #   @return [Types::MalwareProtectionDataSourceFreeTrial]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DataSourcesFreeTrial AWS API Documentation
+    #
+    class DataSourcesFreeTrial < Struct.new(
+      :cloud_trail,
+      :dns_logs,
+      :flow_logs,
+      :s3_logs,
+      :kubernetes,
+      :malware_protection)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1524,6 +1700,88 @@ module Aws::GuardDuty
     #
     class DeleteThreatIntelSetResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DescribeMalwareScansRequest
+    #   data as a hash:
+    #
+    #       {
+    #         detector_id: "DetectorId", # required
+    #         next_token: "String",
+    #         max_results: 1,
+    #         filter_criteria: {
+    #           filter_criterion: [
+    #             {
+    #               criterion_key: "EC2_INSTANCE_ARN", # accepts EC2_INSTANCE_ARN, SCAN_ID, ACCOUNT_ID, GUARDDUTY_FINDING_ID, SCAN_START_TIME, SCAN_STATUS
+    #               filter_condition: {
+    #                 equals_value: "NonEmptyString",
+    #                 greater_than: 1,
+    #                 less_than: 1,
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         sort_criteria: {
+    #           attribute_name: "String",
+    #           order_by: "ASC", # accepts ASC, DESC
+    #         },
+    #       }
+    #
+    # @!attribute [rw] detector_id
+    #   The unique ID of the detector that the request is associated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   You can use this parameter when paginating results. Set the value of
+    #   this parameter to null on your first call to the list action. For
+    #   subsequent calls to the action, fill nextToken in the request with
+    #   the value of NextToken from the previous response to continue
+    #   listing data.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   You can use this parameter to indicate the maximum number of items
+    #   that you want in the response. The default value is 50. The maximum
+    #   value is 50.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filter_criteria
+    #   Represents the criteria to be used in the filter for describing scan
+    #   entries.
+    #   @return [Types::FilterCriteria]
+    #
+    # @!attribute [rw] sort_criteria
+    #   Represents the criteria used for sorting scan entries.
+    #   @return [Types::SortCriteria]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DescribeMalwareScansRequest AWS API Documentation
+    #
+    class DescribeMalwareScansRequest < Struct.new(
+      :detector_id,
+      :next_token,
+      :max_results,
+      :filter_criteria,
+      :sort_criteria)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scans
+    #   Contains information about malware scans.
+    #   @return [Array<Types::Scan>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination parameter to be used on the next list operation to
+    #   retrieve more items.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DescribeMalwareScansResponse AWS API Documentation
+    #
+    class DescribeMalwareScansResponse < Struct.new(
+      :scans,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeOrganizationConfigurationRequest
     #   data as a hash:
     #
@@ -1713,6 +1971,29 @@ module Aws::GuardDuty
     #
     class DisableOrganizationAdminAccountResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DisassociateFromAdministratorAccountRequest
+    #   data as a hash:
+    #
+    #       {
+    #         detector_id: "DetectorId", # required
+    #       }
+    #
+    # @!attribute [rw] detector_id
+    #   The unique ID of the detector of the GuardDuty member account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DisassociateFromAdministratorAccountRequest AWS API Documentation
+    #
+    class DisassociateFromAdministratorAccountRequest < Struct.new(
+      :detector_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DisassociateFromAdministratorAccountResponse AWS API Documentation
+    #
+    class DisassociateFromAdministratorAccountResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DisassociateFromMasterAccountRequest
     #   data as a hash:
     #
@@ -1783,10 +2064,21 @@ module Aws::GuardDuty
     #   The domain information for the API request.
     #   @return [String]
     #
+    # @!attribute [rw] protocol
+    #   The network connection protocol observed in the activity that
+    #   prompted GuardDuty to generate the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] blocked
+    #   Indicates whether the targeted port is blocked.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DnsRequestAction AWS API Documentation
     #
     class DnsRequestAction < Struct.new(
-      :domain)
+      :domain,
+      :protocol,
+      :blocked)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1801,6 +2093,187 @@ module Aws::GuardDuty
     #
     class DomainDetails < Struct.new(
       :domain)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains list of scanned and skipped EBS volumes with details.
+    #
+    # @!attribute [rw] scanned_volume_details
+    #   List of EBS volumes that were scanned.
+    #   @return [Array<Types::VolumeDetail>]
+    #
+    # @!attribute [rw] skipped_volume_details
+    #   List of EBS volumes that were skipped from the malware scan.
+    #   @return [Array<Types::VolumeDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/EbsVolumeDetails AWS API Documentation
+    #
+    class EbsVolumeDetails < Struct.new(
+      :scanned_volume_details,
+      :skipped_volume_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details from the malware scan that created a finding.
+    #
+    # @!attribute [rw] scan_id
+    #   Unique Id of the malware scan that generated the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_started_at
+    #   Returns the start date and time of the malware scan.
+    #   @return [Time]
+    #
+    # @!attribute [rw] scan_completed_at
+    #   Returns the completion date and time of the malware scan.
+    #   @return [Time]
+    #
+    # @!attribute [rw] trigger_finding_id
+    #   GuardDuty finding ID that triggered a malware scan.
+    #   @return [String]
+    #
+    # @!attribute [rw] sources
+    #   Contains list of threat intelligence sources used to detect threats.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] scan_detections
+    #   Contains a complete view providing malware scan result details.
+    #   @return [Types::ScanDetections]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/EbsVolumeScanDetails AWS API Documentation
+    #
+    class EbsVolumeScanDetails < Struct.new(
+      :scan_id,
+      :scan_started_at,
+      :scan_completed_at,
+      :trigger_finding_id,
+      :sources,
+      :scan_detections)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the configuration of scanning EBS volumes as a data source.
+    #
+    # @!attribute [rw] status
+    #   Describes whether scanning EBS volumes is enabled as a data source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/EbsVolumesResult AWS API Documentation
+    #
+    class EbsVolumesResult < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the details of the ECS Cluster.
+    #
+    # @!attribute [rw] name
+    #   The name of the ECS Cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) that identifies the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the ECS cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] active_services_count
+    #   The number of services that are running on the cluster in an ACTIVE
+    #   state.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] registered_container_instances_count
+    #   The number of container instances registered into the cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] running_tasks_count
+    #   The number of tasks in the cluster that are in the RUNNING state.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tags
+    #   The tags of the ECS Cluster.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] task_details
+    #   Contains information about the details of the ECS Task.
+    #   @return [Types::EcsTaskDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/EcsClusterDetails AWS API Documentation
+    #
+    class EcsClusterDetails < Struct.new(
+      :name,
+      :arn,
+      :status,
+      :active_services_count,
+      :registered_container_instances_count,
+      :running_tasks_count,
+      :tags,
+      :task_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the task in an ECS cluster.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] definition_arn
+    #   The ARN of the task definition that creates the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version counter for the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_created_at
+    #   The Unix timestamp for the time when the task was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] started_at
+    #   The Unix timestamp for the time when the task started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] started_by
+    #   Contains the tag specified when a task is started.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags of the ECS Task.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] volumes
+    #   The list of data volume definitions for the task.
+    #   @return [Array<Types::Volume>]
+    #
+    # @!attribute [rw] containers
+    #   The containers that's associated with the task.
+    #   @return [Array<Types::Container>]
+    #
+    # @!attribute [rw] group
+    #   The name of the task group that's associated with the task.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/EcsTaskDetails AWS API Documentation
+    #
+    class EcsTaskDetails < Struct.new(
+      :arn,
+      :definition_arn,
+      :version,
+      :task_created_at,
+      :started_at,
+      :started_by,
+      :tags,
+      :volumes,
+      :containers,
+      :group)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1878,6 +2351,107 @@ module Aws::GuardDuty
     #
     class Evidence < Struct.new(
       :threat_intelligence_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the condition.
+    #
+    # @note When making an API call, you may pass FilterCondition
+    #   data as a hash:
+    #
+    #       {
+    #         equals_value: "NonEmptyString",
+    #         greater_than: 1,
+    #         less_than: 1,
+    #       }
+    #
+    # @!attribute [rw] equals_value
+    #   Represents an *equal* **** condition to be applied to a single field
+    #   when querying for scan entries.
+    #   @return [String]
+    #
+    # @!attribute [rw] greater_than
+    #   Represents a *greater than* condition to be applied to a single
+    #   field when querying for scan entries.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] less_than
+    #   Represents a *less than* condition to be applied to a single field
+    #   when querying for scan entries.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/FilterCondition AWS API Documentation
+    #
+    class FilterCondition < Struct.new(
+      :equals_value,
+      :greater_than,
+      :less_than)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the criteria to be used in the filter for describing scan
+    # entries.
+    #
+    # @note When making an API call, you may pass FilterCriteria
+    #   data as a hash:
+    #
+    #       {
+    #         filter_criterion: [
+    #           {
+    #             criterion_key: "EC2_INSTANCE_ARN", # accepts EC2_INSTANCE_ARN, SCAN_ID, ACCOUNT_ID, GUARDDUTY_FINDING_ID, SCAN_START_TIME, SCAN_STATUS
+    #             filter_condition: {
+    #               equals_value: "NonEmptyString",
+    #               greater_than: 1,
+    #               less_than: 1,
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] filter_criterion
+    #   Represents a condition that when matched will be added to the
+    #   response of the operation.
+    #   @return [Array<Types::FilterCriterion>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/FilterCriteria AWS API Documentation
+    #
+    class FilterCriteria < Struct.new(
+      :filter_criterion)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a condition that when matched will be added to the response
+    # of the operation.
+    #
+    # @note When making an API call, you may pass FilterCriterion
+    #   data as a hash:
+    #
+    #       {
+    #         criterion_key: "EC2_INSTANCE_ARN", # accepts EC2_INSTANCE_ARN, SCAN_ID, ACCOUNT_ID, GUARDDUTY_FINDING_ID, SCAN_START_TIME, SCAN_STATUS
+    #         filter_condition: {
+    #           equals_value: "NonEmptyString",
+    #           greater_than: 1,
+    #           less_than: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] criterion_key
+    #   An enum value representing possible scan properties to match with
+    #   given scan entries.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_condition
+    #   Contains information about the condition.
+    #   @return [Types::FilterCondition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/FilterCriterion AWS API Documentation
+    #
+    class FilterCriterion < Struct.new(
+      :criterion_key,
+      :filter_condition)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2050,6 +2624,37 @@ module Aws::GuardDuty
     class GeoLocation < Struct.new(
       :lat,
       :lon)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetAdministratorAccountRequest
+    #   data as a hash:
+    #
+    #       {
+    #         detector_id: "DetectorId", # required
+    #       }
+    #
+    # @!attribute [rw] detector_id
+    #   The unique ID of the detector of the GuardDuty member account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetAdministratorAccountRequest AWS API Documentation
+    #
+    class GetAdministratorAccountRequest < Struct.new(
+      :detector_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] administrator
+    #   The administrator account details.
+    #   @return [Types::Administrator]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetAdministratorAccountResponse AWS API Documentation
+    #
+    class GetAdministratorAccountResponse < Struct.new(
+      :administrator)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2364,6 +2969,44 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetMalwareScanSettingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         detector_id: "DetectorId", # required
+    #       }
+    #
+    # @!attribute [rw] detector_id
+    #   The unique ID of the detector that the scan setting is associated
+    #   with.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMalwareScanSettingsRequest AWS API Documentation
+    #
+    class GetMalwareScanSettingsRequest < Struct.new(
+      :detector_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scan_resource_criteria
+    #   Represents the criteria to be used in the filter for scanning
+    #   resources.
+    #   @return [Types::ScanResourceCriteria]
+    #
+    # @!attribute [rw] ebs_snapshot_preservation
+    #   An enum value representing possible snapshot preservations.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMalwareScanSettingsResponse AWS API Documentation
+    #
+    class GetMalwareScanSettingsResponse < Struct.new(
+      :scan_resource_criteria,
+      :ebs_snapshot_preservation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetMasterAccountRequest
     #   data as a hash:
     #
@@ -2484,6 +3127,50 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetRemainingFreeTrialDaysRequest
+    #   data as a hash:
+    #
+    #       {
+    #         detector_id: "DetectorId", # required
+    #         account_ids: ["AccountId"],
+    #       }
+    #
+    # @!attribute [rw] detector_id
+    #   The unique ID of the detector of the GuardDuty member account.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_ids
+    #   A list of account identifiers of the GuardDuty member account.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetRemainingFreeTrialDaysRequest AWS API Documentation
+    #
+    class GetRemainingFreeTrialDaysRequest < Struct.new(
+      :detector_id,
+      :account_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] accounts
+    #   The member accounts which were included in a request and were
+    #   processed successfully.
+    #   @return [Array<Types::AccountFreeTrialInfo>]
+    #
+    # @!attribute [rw] unprocessed_accounts
+    #   The member account that was included in a request but for which the
+    #   request could not be processed.
+    #   @return [Array<Types::UnprocessedAccount>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetRemainingFreeTrialDaysResponse AWS API Documentation
+    #
+    class GetRemainingFreeTrialDaysResponse < Struct.new(
+      :accounts,
+      :unprocessed_accounts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetThreatIntelSetRequest
     #   data as a hash:
     #
@@ -2552,7 +3239,7 @@ module Aws::GuardDuty
     #         usage_statistic_type: "SUM_BY_ACCOUNT", # required, accepts SUM_BY_ACCOUNT, SUM_BY_DATA_SOURCE, SUM_BY_RESOURCE, TOP_RESOURCES
     #         usage_criteria: { # required
     #           account_ids: ["AccountId"],
-    #           data_sources: ["FLOW_LOGS"], # required, accepts FLOW_LOGS, CLOUD_TRAIL, DNS_LOGS, S3_LOGS, KUBERNETES_AUDIT_LOGS
+    #           data_sources: ["FLOW_LOGS"], # required, accepts FLOW_LOGS, CLOUD_TRAIL, DNS_LOGS, S3_LOGS, KUBERNETES_AUDIT_LOGS, EC2_MALWARE_SCAN
     #           resources: ["String"],
     #         },
     #         unit: "String",
@@ -2618,6 +3305,33 @@ module Aws::GuardDuty
     class GetUsageStatisticsResponse < Struct.new(
       :usage_statistics,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details of the highest severity threat detected during scan
+    # and number of infected files.
+    #
+    # @!attribute [rw] severity
+    #   Severity level of the highest severity threat detected.
+    #   @return [String]
+    #
+    # @!attribute [rw] threat_name
+    #   Threat name of the highest severity threat detected as part of the
+    #   malware scan.
+    #   @return [String]
+    #
+    # @!attribute [rw] count
+    #   Total number of infected files with the highest severity threat
+    #   detected.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/HighestSeverityThreatDetails AWS API Documentation
+    #
+    class HighestSeverityThreatDetails < Struct.new(
+      :severity,
+      :threat_name,
+      :count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2952,6 +3666,22 @@ module Aws::GuardDuty
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/KubernetesConfigurationResult AWS API Documentation
     #
     class KubernetesConfigurationResult < Struct.new(
+      :audit_logs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about the Kubernetes resources when it is enabled as
+    # a data source.
+    #
+    # @!attribute [rw] audit_logs
+    #   Describes whether Kubernetes audit logs are enabled as a data
+    #   source.
+    #   @return [Types::DataSourceFreeTrial]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/KubernetesDataSourceFreeTrial AWS API Documentation
+    #
+    class KubernetesDataSourceFreeTrial < Struct.new(
       :audit_logs)
       SENSITIVE = []
       include Aws::Structure
@@ -3735,6 +4465,67 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Describes whether Malware Protection will be enabled as a data source.
+    #
+    # @note When making an API call, you may pass MalwareProtectionConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         scan_ec2_instance_with_findings: {
+    #           ebs_volumes: false,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] scan_ec2_instance_with_findings
+    #   Describes the configuration of Malware Protection for EC2 instances
+    #   with findings.
+    #   @return [Types::ScanEc2InstanceWithFindings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/MalwareProtectionConfiguration AWS API Documentation
+    #
+    class MalwareProtectionConfiguration < Struct.new(
+      :scan_ec2_instance_with_findings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains information on the status of all Malware
+    # Protection data sources.
+    #
+    # @!attribute [rw] scan_ec2_instance_with_findings
+    #   Describes the configuration of Malware Protection for EC2 instances
+    #   with findings.
+    #   @return [Types::ScanEc2InstanceWithFindingsResult]
+    #
+    # @!attribute [rw] service_role
+    #   The GuardDuty Malware Protection service role.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/MalwareProtectionConfigurationResult AWS API Documentation
+    #
+    class MalwareProtectionConfigurationResult < Struct.new(
+      :scan_ec2_instance_with_findings,
+      :service_role)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about Malware Protection when it is enabled as a data
+    # source.
+    #
+    # @!attribute [rw] scan_ec2_instance_with_findings
+    #   Describes whether Malware Protection for EC2 instances with findings
+    #   is enabled as a data source.
+    #   @return [Types::DataSourceFreeTrial]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/MalwareProtectionDataSourceFreeTrial AWS API Documentation
+    #
+    class MalwareProtectionDataSourceFreeTrial < Struct.new(
+      :scan_ec2_instance_with_findings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the administrator account and invitation.
     #
     # @!attribute [rw] account_id
@@ -3797,6 +4588,10 @@ module Aws::GuardDuty
     #   The last-updated timestamp of the member.
     #   @return [String]
     #
+    # @!attribute [rw] administrator_id
+    #   The administrator account ID.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Member AWS API Documentation
     #
     class Member < Struct.new(
@@ -3806,7 +4601,8 @@ module Aws::GuardDuty
       :email,
       :relationship_status,
       :invited_at,
-      :updated_at)
+      :updated_at,
+      :administrator_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3984,6 +4780,13 @@ module Aws::GuardDuty
     #             auto_enable: false, # required
     #           },
     #         },
+    #         malware_protection: {
+    #           scan_ec2_instance_with_findings: {
+    #             ebs_volumes: {
+    #               auto_enable: false,
+    #             },
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] s3_logs
@@ -3996,11 +4799,17 @@ module Aws::GuardDuty
     #   members of the organization.
     #   @return [Types::OrganizationKubernetesConfiguration]
     #
+    # @!attribute [rw] malware_protection
+    #   Describes the configuration of Malware Protection for new members of
+    #   the organization.
+    #   @return [Types::OrganizationMalwareProtectionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/OrganizationDataSourceConfigurations AWS API Documentation
     #
     class OrganizationDataSourceConfigurations < Struct.new(
       :s3_logs,
-      :kubernetes)
+      :kubernetes,
+      :malware_protection)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4016,11 +4825,55 @@ module Aws::GuardDuty
     #   Describes the configuration of Kubernetes data sources.
     #   @return [Types::OrganizationKubernetesConfigurationResult]
     #
+    # @!attribute [rw] malware_protection
+    #   Describes the configuration of Malware Protection data source for an
+    #   organization.
+    #   @return [Types::OrganizationMalwareProtectionConfigurationResult]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/OrganizationDataSourceConfigurationsResult AWS API Documentation
     #
     class OrganizationDataSourceConfigurationsResult < Struct.new(
       :s3_logs,
-      :kubernetes)
+      :kubernetes,
+      :malware_protection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Organization-wide EBS volumes scan configuration.
+    #
+    # @note When making an API call, you may pass OrganizationEbsVolumes
+    #   data as a hash:
+    #
+    #       {
+    #         auto_enable: false,
+    #       }
+    #
+    # @!attribute [rw] auto_enable
+    #   Whether scanning EBS volumes should be auto-enabled for new members
+    #   joining the organization.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/OrganizationEbsVolumes AWS API Documentation
+    #
+    class OrganizationEbsVolumes < Struct.new(
+      :auto_enable)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains information on the status of whether EBS
+    # volumes scanning will be enabled as a data source for an organization.
+    #
+    # @!attribute [rw] auto_enable
+    #   An object that contains the status of whether scanning EBS volumes
+    #   should be auto-enabled for new members joining the organization.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/OrganizationEbsVolumesResult AWS API Documentation
+    #
+    class OrganizationEbsVolumesResult < Struct.new(
+      :auto_enable)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4104,6 +4957,48 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Organization-wide Malware Protection configurations.
+    #
+    # @note When making an API call, you may pass OrganizationMalwareProtectionConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         scan_ec2_instance_with_findings: {
+    #           ebs_volumes: {
+    #             auto_enable: false,
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] scan_ec2_instance_with_findings
+    #   Whether Malware Protection for EC2 instances with findings should be
+    #   auto-enabled for new members joining the organization.
+    #   @return [Types::OrganizationScanEc2InstanceWithFindings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/OrganizationMalwareProtectionConfiguration AWS API Documentation
+    #
+    class OrganizationMalwareProtectionConfiguration < Struct.new(
+      :scan_ec2_instance_with_findings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains information on the status of all Malware
+    # Protection data source for an organization.
+    #
+    # @!attribute [rw] scan_ec2_instance_with_findings
+    #   Describes the configuration for scanning EC2 instances with findings
+    #   for an organization.
+    #   @return [Types::OrganizationScanEc2InstanceWithFindingsResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/OrganizationMalwareProtectionConfigurationResult AWS API Documentation
+    #
+    class OrganizationMalwareProtectionConfigurationResult < Struct.new(
+      :scan_ec2_instance_with_findings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes whether S3 data event logs will be automatically enabled for
     # new members of the organization.
     #
@@ -4139,6 +5034,46 @@ module Aws::GuardDuty
     #
     class OrganizationS3LogsConfigurationResult < Struct.new(
       :auto_enable)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Organization-wide EC2 instances with findings scan configuration.
+    #
+    # @note When making an API call, you may pass OrganizationScanEc2InstanceWithFindings
+    #   data as a hash:
+    #
+    #       {
+    #         ebs_volumes: {
+    #           auto_enable: false,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] ebs_volumes
+    #   Whether scanning EBS volumes should be auto-enabled for new members
+    #   joining the organization.
+    #   @return [Types::OrganizationEbsVolumes]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/OrganizationScanEc2InstanceWithFindings AWS API Documentation
+    #
+    class OrganizationScanEc2InstanceWithFindings < Struct.new(
+      :ebs_volumes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains information on the status of scanning EC2
+    # instances with findings for an organization.
+    #
+    # @!attribute [rw] ebs_volumes
+    #   Describes the configuration for scanning EBS volumes for an
+    #   organization.
+    #   @return [Types::OrganizationEbsVolumesResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/OrganizationScanEc2InstanceWithFindingsResult AWS API Documentation
+    #
+    class OrganizationScanEc2InstanceWithFindingsResult < Struct.new(
+      :ebs_volumes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4396,6 +5331,18 @@ module Aws::GuardDuty
     #   The type of Amazon Web Services resource.
     #   @return [String]
     #
+    # @!attribute [rw] ebs_volume_details
+    #   Contains list of scanned and skipped EBS volumes with details.
+    #   @return [Types::EbsVolumeDetails]
+    #
+    # @!attribute [rw] ecs_cluster_details
+    #   Contains information about the details of the ECS Cluster.
+    #   @return [Types::EcsClusterDetails]
+    #
+    # @!attribute [rw] container_details
+    #   Details of a container.
+    #   @return [Types::Container]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Resource AWS API Documentation
     #
     class Resource < Struct.new(
@@ -4404,7 +5351,24 @@ module Aws::GuardDuty
       :instance_details,
       :eks_cluster_details,
       :kubernetes_details,
-      :resource_type)
+      :resource_type,
+      :ebs_volume_details,
+      :ecs_cluster_details,
+      :container_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the resources that were scanned in the scan entry.
+    #
+    # @!attribute [rw] instance_arn
+    #   InstanceArn that was scanned in the scan entry.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ResourceDetails AWS API Documentation
+    #
+    class ResourceDetails < Struct.new(
+      :instance_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4494,6 +5458,358 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about a malware scan.
+    #
+    # @!attribute [rw] detector_id
+    #   The unique ID of the detector that the request is associated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] admin_detector_id
+    #   The unique detector ID of the administrator account that the request
+    #   is associated with. Note that this value will be the same as the one
+    #   used for `DetectorId` if the account is an administrator.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_id
+    #   The unique scan ID associated with a scan entry.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_status
+    #   An enum value representing possible scan statuses.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   Represents the reason for FAILED scan status.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_start_time
+    #   The timestamp of when the scan was triggered.
+    #   @return [Time]
+    #
+    # @!attribute [rw] scan_end_time
+    #   The timestamp of when the scan was finished.
+    #   @return [Time]
+    #
+    # @!attribute [rw] trigger_details
+    #   Represents the reason the scan was triggered.
+    #   @return [Types::TriggerDetails]
+    #
+    # @!attribute [rw] resource_details
+    #   Represents the resources that were scanned in the scan entry.
+    #   @return [Types::ResourceDetails]
+    #
+    # @!attribute [rw] scan_result_details
+    #   Represents the result of the scan.
+    #   @return [Types::ScanResultDetails]
+    #
+    # @!attribute [rw] account_id
+    #   The ID for the account that belongs to the scan.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_bytes
+    #   Represents total bytes that were scanned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] file_count
+    #   Represents the number of files that were scanned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] attached_volumes
+    #   List of volumes that were attached to the original instance to be
+    #   scanned.
+    #   @return [Array<Types::VolumeDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Scan AWS API Documentation
+    #
+    class Scan < Struct.new(
+      :detector_id,
+      :admin_detector_id,
+      :scan_id,
+      :scan_status,
+      :failure_reason,
+      :scan_start_time,
+      :scan_end_time,
+      :trigger_details,
+      :resource_details,
+      :scan_result_details,
+      :account_id,
+      :total_bytes,
+      :file_count,
+      :attached_volumes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the condition.
+    #
+    # @note When making an API call, you may pass ScanCondition
+    #   data as a hash:
+    #
+    #       {
+    #         map_equals: [ # required
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] map_equals
+    #   Represents an *mapEqual* **** condition to be applied to a single
+    #   field when triggering for malware scan.
+    #   @return [Array<Types::ScanConditionPair>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ScanCondition AWS API Documentation
+    #
+    class ScanCondition < Struct.new(
+      :map_equals)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents key, value pair to be matched against given resource
+    # property.
+    #
+    # @note When making an API call, you may pass ScanConditionPair
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       }
+    #
+    # @!attribute [rw] key
+    #   Represents *key* **** in the map condition.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   Represents optional *value* **** in the map condition. If not
+    #   specified, only *key* **** will be matched.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ScanConditionPair AWS API Documentation
+    #
+    class ScanConditionPair < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains a complete view providing malware scan result details.
+    #
+    # @!attribute [rw] scanned_item_count
+    #   Total number of scanned files.
+    #   @return [Types::ScannedItemCount]
+    #
+    # @!attribute [rw] threats_detected_item_count
+    #   Total number of infected files.
+    #   @return [Types::ThreatsDetectedItemCount]
+    #
+    # @!attribute [rw] highest_severity_threat_details
+    #   Details of the highest severity threat detected during malware scan
+    #   and number of infected files.
+    #   @return [Types::HighestSeverityThreatDetails]
+    #
+    # @!attribute [rw] threat_detected_by_name
+    #   Contains details about identified threats organized by threat name.
+    #   @return [Types::ThreatDetectedByName]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ScanDetections AWS API Documentation
+    #
+    class ScanDetections < Struct.new(
+      :scanned_item_count,
+      :threats_detected_item_count,
+      :highest_severity_threat_details,
+      :threat_detected_by_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes whether Malware Protection for EC2 instances with findings
+    # will be enabled as a data source.
+    #
+    # @note When making an API call, you may pass ScanEc2InstanceWithFindings
+    #   data as a hash:
+    #
+    #       {
+    #         ebs_volumes: false,
+    #       }
+    #
+    # @!attribute [rw] ebs_volumes
+    #   Describes the configuration for scanning EBS volumes as data source.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ScanEc2InstanceWithFindings AWS API Documentation
+    #
+    class ScanEc2InstanceWithFindings < Struct.new(
+      :ebs_volumes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains information on the status of whether Malware
+    # Protection for EC2 instances with findings will be enabled as a data
+    # source.
+    #
+    # @!attribute [rw] ebs_volumes
+    #   Describes the configuration of scanning EBS volumes as a data
+    #   source.
+    #   @return [Types::EbsVolumesResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ScanEc2InstanceWithFindingsResult AWS API Documentation
+    #
+    class ScanEc2InstanceWithFindingsResult < Struct.new(
+      :ebs_volumes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details of infected file including name, file path and hash.
+    #
+    # @!attribute [rw] file_path
+    #   The file path of the infected file.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_arn
+    #   EBS volume Arn details of the infected file.
+    #   @return [String]
+    #
+    # @!attribute [rw] hash
+    #   The hash value of the infected file.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_name
+    #   File name of the infected file.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ScanFilePath AWS API Documentation
+    #
+    class ScanFilePath < Struct.new(
+      :file_path,
+      :volume_arn,
+      :hash,
+      :file_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about criteria used to filter resources before
+    # triggering malware scan.
+    #
+    # @note When making an API call, you may pass ScanResourceCriteria
+    #   data as a hash:
+    #
+    #       {
+    #         include: {
+    #           "EC2_INSTANCE_TAG" => {
+    #             map_equals: [ # required
+    #               {
+    #                 key: "TagKey", # required
+    #                 value: "TagValue",
+    #               },
+    #             ],
+    #           },
+    #         },
+    #         exclude: {
+    #           "EC2_INSTANCE_TAG" => {
+    #             map_equals: [ # required
+    #               {
+    #                 key: "TagKey", # required
+    #                 value: "TagValue",
+    #               },
+    #             ],
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] include
+    #   Represents condition that when matched will allow a malware scan for
+    #   a certain resource.
+    #   @return [Hash<String,Types::ScanCondition>]
+    #
+    # @!attribute [rw] exclude
+    #   Represents condition that when matched will prevent a malware scan
+    #   for a certain resource.
+    #   @return [Hash<String,Types::ScanCondition>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ScanResourceCriteria AWS API Documentation
+    #
+    class ScanResourceCriteria < Struct.new(
+      :include,
+      :exclude)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the result of the scan.
+    #
+    # @!attribute [rw] scan_result
+    #   An enum value representing possible scan results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ScanResultDetails AWS API Documentation
+    #
+    class ScanResultDetails < Struct.new(
+      :scan_result)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains files infected with the given threat providing details of
+    # malware name and severity.
+    #
+    # @!attribute [rw] name
+    #   The name of the identified threat.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity
+    #   Severity of threat identified as part of the malware scan.
+    #   @return [String]
+    #
+    # @!attribute [rw] item_count
+    #   Total number of files infected with given threat.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] file_paths
+    #   List of infected files in EBS volume with details.
+    #   @return [Array<Types::ScanFilePath>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ScanThreatName AWS API Documentation
+    #
+    class ScanThreatName < Struct.new(
+      :name,
+      :severity,
+      :item_count,
+      :file_paths)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Total number of scanned files.
+    #
+    # @!attribute [rw] total_gb
+    #   Total GB of files scanned for malware.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] files
+    #   Number of files scanned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] volumes
+    #   Total number of scanned volumes.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ScannedItemCount AWS API Documentation
+    #
+    class ScannedItemCount < Struct.new(
+      :total_gb,
+      :files,
+      :volumes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Container security context.
     #
     # @!attribute [rw] privileged
@@ -4573,6 +5889,18 @@ module Aws::GuardDuty
     #   Feedback that was submitted about the finding.
     #   @return [String]
     #
+    # @!attribute [rw] additional_info
+    #   Contains additional information about the generated finding.
+    #   @return [Types::ServiceAdditionalInfo]
+    #
+    # @!attribute [rw] feature_name
+    #   The name of the feature that generated a finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] ebs_volume_scan_details
+    #   Returns details from the malware scan that created a finding.
+    #   @return [Types::EbsVolumeScanDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Service AWS API Documentation
     #
     class Service < Struct.new(
@@ -4585,7 +5913,29 @@ module Aws::GuardDuty
       :event_last_seen,
       :resource_role,
       :service_name,
-      :user_feedback)
+      :user_feedback,
+      :additional_info,
+      :feature_name,
+      :ebs_volume_scan_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Additional information about the generated finding.
+    #
+    # @!attribute [rw] value
+    #   This field specifies the value of the additional information.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Describes the type of the additional information.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ServiceAdditionalInfo AWS API Documentation
+    #
+    class ServiceAdditionalInfo < Struct.new(
+      :value,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4749,6 +6099,37 @@ module Aws::GuardDuty
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
+    # Contains details about identified threats organized by threat name.
+    #
+    # @!attribute [rw] item_count
+    #   Total number of infected files identified.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] unique_threat_name_count
+    #   Total number of unique threats by name identified, as part of the
+    #   malware scan.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] shortened
+    #   Flag to determine if the finding contains every single infected
+    #   file-path and/or every threat.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] threat_names
+    #   List of identified threats with details, organized by threat name.
+    #   @return [Array<Types::ScanThreatName>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ThreatDetectedByName AWS API Documentation
+    #
+    class ThreatDetectedByName < Struct.new(
+      :item_count,
+      :unique_threat_name_count,
+      :shortened,
+      :threat_names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An instance of a threat intelligence detail that constitutes evidence
     # for the finding.
     #
@@ -4770,6 +6151,20 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains total number of infected files.
+    #
+    # @!attribute [rw] files
+    #   Total number of infected files.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ThreatsDetectedItemCount AWS API Documentation
+    #
+    class ThreatsDetectedItemCount < Struct.new(
+      :files)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the total usage with the corresponding currency unit for that
     # value.
     #
@@ -4786,6 +6181,25 @@ module Aws::GuardDuty
     class Total < Struct.new(
       :amount,
       :unit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the reason the scan was triggered.
+    #
+    # @!attribute [rw] guard_duty_finding_id
+    #   The ID of the GuardDuty finding that triggered the BirdDog scan.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the scan trigger.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/TriggerDetails AWS API Documentation
+    #
+    class TriggerDetails < Struct.new(
+      :guard_duty_finding_id,
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4881,6 +6295,11 @@ module Aws::GuardDuty
     #           kubernetes: {
     #             audit_logs: { # required
     #               enable: false, # required
+    #             },
+    #           },
+    #           malware_protection: {
+    #             scan_ec2_instance_with_findings: {
+    #               ebs_volumes: false,
     #             },
     #           },
     #         },
@@ -5093,6 +6512,64 @@ module Aws::GuardDuty
     #
     class UpdateIPSetResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass UpdateMalwareScanSettingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         detector_id: "DetectorId", # required
+    #         scan_resource_criteria: {
+    #           include: {
+    #             "EC2_INSTANCE_TAG" => {
+    #               map_equals: [ # required
+    #                 {
+    #                   key: "TagKey", # required
+    #                   value: "TagValue",
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #           exclude: {
+    #             "EC2_INSTANCE_TAG" => {
+    #               map_equals: [ # required
+    #                 {
+    #                   key: "TagKey", # required
+    #                   value: "TagValue",
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #         },
+    #         ebs_snapshot_preservation: "NO_RETENTION", # accepts NO_RETENTION, RETENTION_WITH_FINDING
+    #       }
+    #
+    # @!attribute [rw] detector_id
+    #   The unique ID of the detector that specifies the GuardDuty service
+    #   where you want to update scan settings.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_resource_criteria
+    #   Represents the criteria to be used in the filter for selecting
+    #   resources to scan.
+    #   @return [Types::ScanResourceCriteria]
+    #
+    # @!attribute [rw] ebs_snapshot_preservation
+    #   An enum value representing possible snapshot preservations.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateMalwareScanSettingsRequest AWS API Documentation
+    #
+    class UpdateMalwareScanSettingsRequest < Struct.new(
+      :detector_id,
+      :scan_resource_criteria,
+      :ebs_snapshot_preservation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateMalwareScanSettingsResponse AWS API Documentation
+    #
+    class UpdateMalwareScanSettingsResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass UpdateMemberDetectorsRequest
     #   data as a hash:
     #
@@ -5106,6 +6583,11 @@ module Aws::GuardDuty
     #           kubernetes: {
     #             audit_logs: { # required
     #               enable: false, # required
+    #             },
+    #           },
+    #           malware_protection: {
+    #             scan_ec2_instance_with_findings: {
+    #               ebs_volumes: false,
     #             },
     #           },
     #         },
@@ -5159,6 +6641,13 @@ module Aws::GuardDuty
     #           kubernetes: {
     #             audit_logs: { # required
     #               auto_enable: false, # required
+    #             },
+    #           },
+    #           malware_protection: {
+    #             scan_ec2_instance_with_findings: {
+    #               ebs_volumes: {
+    #                 auto_enable: false,
+    #               },
     #             },
     #           },
     #         },
@@ -5309,7 +6798,7 @@ module Aws::GuardDuty
     #
     #       {
     #         account_ids: ["AccountId"],
-    #         data_sources: ["FLOW_LOGS"], # required, accepts FLOW_LOGS, CLOUD_TRAIL, DNS_LOGS, S3_LOGS, KUBERNETES_AUDIT_LOGS
+    #         data_sources: ["FLOW_LOGS"], # required, accepts FLOW_LOGS, CLOUD_TRAIL, DNS_LOGS, S3_LOGS, KUBERNETES_AUDIT_LOGS, EC2_MALWARE_SCAN
     #         resources: ["String"],
     #       }
     #
@@ -5422,6 +6911,50 @@ module Aws::GuardDuty
     class Volume < Struct.new(
       :name,
       :host_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains EBS volume details.
+    #
+    # @!attribute [rw] volume_arn
+    #   EBS volume Arn information.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_type
+    #   The EBS volume type.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_name
+    #   The device name for the EBS volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_size_in_gb
+    #   EBS volume size in GB.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] encryption_type
+    #   EBS volume encryption type.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_arn
+    #   Snapshot Arn of the EBS volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   KMS key Arn used to encrypt the EBS volume.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/VolumeDetail AWS API Documentation
+    #
+    class VolumeDetail < Struct.new(
+      :volume_arn,
+      :volume_type,
+      :device_name,
+      :volume_size_in_gb,
+      :encryption_type,
+      :snapshot_arn,
+      :kms_key_arn)
       SENSITIVE = []
       include Aws::Structure
     end

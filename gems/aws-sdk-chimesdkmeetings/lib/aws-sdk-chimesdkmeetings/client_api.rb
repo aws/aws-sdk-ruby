@@ -15,14 +15,19 @@ module Aws::ChimeSDKMeetings
 
     Arn = Shapes::StringShape.new(name: 'Arn')
     Attendee = Shapes::StructureShape.new(name: 'Attendee')
+    AttendeeCapabilities = Shapes::StructureShape.new(name: 'AttendeeCapabilities')
+    AttendeeIdItem = Shapes::StructureShape.new(name: 'AttendeeIdItem')
+    AttendeeIdsList = Shapes::ListShape.new(name: 'AttendeeIdsList')
     AttendeeList = Shapes::ListShape.new(name: 'AttendeeList')
     AudioFeatures = Shapes::StructureShape.new(name: 'AudioFeatures')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     BatchCreateAttendeeErrorList = Shapes::ListShape.new(name: 'BatchCreateAttendeeErrorList')
     BatchCreateAttendeeRequest = Shapes::StructureShape.new(name: 'BatchCreateAttendeeRequest')
     BatchCreateAttendeeResponse = Shapes::StructureShape.new(name: 'BatchCreateAttendeeResponse')
+    BatchUpdateAttendeeCapabilitiesExceptRequest = Shapes::StructureShape.new(name: 'BatchUpdateAttendeeCapabilitiesExceptRequest')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
+    ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateAttendeeError = Shapes::StructureShape.new(name: 'CreateAttendeeError')
     CreateAttendeeRequest = Shapes::StructureShape.new(name: 'CreateAttendeeRequest')
     CreateAttendeeRequestItem = Shapes::StructureShape.new(name: 'CreateAttendeeRequestItem')
@@ -49,6 +54,7 @@ module Aws::ChimeSDKMeetings
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListAttendeesRequest = Shapes::StructureShape.new(name: 'ListAttendeesRequest')
     ListAttendeesResponse = Shapes::StructureShape.new(name: 'ListAttendeesResponse')
+    MediaCapabilities = Shapes::StringShape.new(name: 'MediaCapabilities')
     MediaPlacement = Shapes::StructureShape.new(name: 'MediaPlacement')
     MediaRegion = Shapes::StringShape.new(name: 'MediaRegion')
     Meeting = Shapes::StructureShape.new(name: 'Meeting')
@@ -56,16 +62,22 @@ module Aws::ChimeSDKMeetings
     MeetingFeaturesConfiguration = Shapes::StructureShape.new(name: 'MeetingFeaturesConfiguration')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     NotificationsConfiguration = Shapes::StructureShape.new(name: 'NotificationsConfiguration')
+    PrimaryMeetingId = Shapes::StringShape.new(name: 'PrimaryMeetingId')
     ResultMax = Shapes::IntegerShape.new(name: 'ResultMax')
     RetryAfterSeconds = Shapes::StringShape.new(name: 'RetryAfterSeconds')
+    ServiceFailureException = Shapes::StructureShape.new(name: 'ServiceFailureException')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     StartMeetingTranscriptionRequest = Shapes::StructureShape.new(name: 'StartMeetingTranscriptionRequest')
     StopMeetingTranscriptionRequest = Shapes::StructureShape.new(name: 'StopMeetingTranscriptionRequest')
     String = Shapes::StringShape.new(name: 'String')
+    TenantId = Shapes::StringShape.new(name: 'TenantId')
+    TenantIdList = Shapes::ListShape.new(name: 'TenantIdList')
+    ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TranscribeContentIdentificationType = Shapes::StringShape.new(name: 'TranscribeContentIdentificationType')
     TranscribeContentRedactionType = Shapes::StringShape.new(name: 'TranscribeContentRedactionType')
     TranscribeLanguageCode = Shapes::StringShape.new(name: 'TranscribeLanguageCode')
     TranscribeLanguageModelName = Shapes::StringShape.new(name: 'TranscribeLanguageModelName')
+    TranscribeLanguageOptions = Shapes::StringShape.new(name: 'TranscribeLanguageOptions')
     TranscribeMedicalContentIdentificationType = Shapes::StringShape.new(name: 'TranscribeMedicalContentIdentificationType')
     TranscribeMedicalLanguageCode = Shapes::StringShape.new(name: 'TranscribeMedicalLanguageCode')
     TranscribeMedicalRegion = Shapes::StringShape.new(name: 'TranscribeMedicalRegion')
@@ -78,11 +90,24 @@ module Aws::ChimeSDKMeetings
     TranscriptionConfiguration = Shapes::StructureShape.new(name: 'TranscriptionConfiguration')
     UnauthorizedException = Shapes::StructureShape.new(name: 'UnauthorizedException')
     UnprocessableEntityException = Shapes::StructureShape.new(name: 'UnprocessableEntityException')
+    UpdateAttendeeCapabilitiesRequest = Shapes::StructureShape.new(name: 'UpdateAttendeeCapabilitiesRequest')
+    UpdateAttendeeCapabilitiesResponse = Shapes::StructureShape.new(name: 'UpdateAttendeeCapabilitiesResponse')
 
     Attendee.add_member(:external_user_id, Shapes::ShapeRef.new(shape: ExternalUserId, location_name: "ExternalUserId"))
     Attendee.add_member(:attendee_id, Shapes::ShapeRef.new(shape: GuidString, location_name: "AttendeeId"))
     Attendee.add_member(:join_token, Shapes::ShapeRef.new(shape: JoinTokenString, location_name: "JoinToken"))
+    Attendee.add_member(:capabilities, Shapes::ShapeRef.new(shape: AttendeeCapabilities, location_name: "Capabilities"))
     Attendee.struct_class = Types::Attendee
+
+    AttendeeCapabilities.add_member(:audio, Shapes::ShapeRef.new(shape: MediaCapabilities, required: true, location_name: "Audio"))
+    AttendeeCapabilities.add_member(:video, Shapes::ShapeRef.new(shape: MediaCapabilities, required: true, location_name: "Video"))
+    AttendeeCapabilities.add_member(:content, Shapes::ShapeRef.new(shape: MediaCapabilities, required: true, location_name: "Content"))
+    AttendeeCapabilities.struct_class = Types::AttendeeCapabilities
+
+    AttendeeIdItem.add_member(:attendee_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location_name: "AttendeeId"))
+    AttendeeIdItem.struct_class = Types::AttendeeIdItem
+
+    AttendeeIdsList.member = Shapes::ShapeRef.new(shape: AttendeeIdItem)
 
     AttendeeList.member = Shapes::ShapeRef.new(shape: Attendee)
 
@@ -104,6 +129,16 @@ module Aws::ChimeSDKMeetings
     BatchCreateAttendeeResponse.add_member(:errors, Shapes::ShapeRef.new(shape: BatchCreateAttendeeErrorList, location_name: "Errors"))
     BatchCreateAttendeeResponse.struct_class = Types::BatchCreateAttendeeResponse
 
+    BatchUpdateAttendeeCapabilitiesExceptRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "MeetingId"))
+    BatchUpdateAttendeeCapabilitiesExceptRequest.add_member(:excluded_attendee_ids, Shapes::ShapeRef.new(shape: AttendeeIdsList, required: true, location_name: "ExcludedAttendeeIds"))
+    BatchUpdateAttendeeCapabilitiesExceptRequest.add_member(:capabilities, Shapes::ShapeRef.new(shape: AttendeeCapabilities, required: true, location_name: "Capabilities"))
+    BatchUpdateAttendeeCapabilitiesExceptRequest.struct_class = Types::BatchUpdateAttendeeCapabilitiesExceptRequest
+
+    ConflictException.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "Code"))
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ConflictException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    ConflictException.struct_class = Types::ConflictException
+
     CreateAttendeeError.add_member(:external_user_id, Shapes::ShapeRef.new(shape: ExternalUserId, location_name: "ExternalUserId"))
     CreateAttendeeError.add_member(:error_code, Shapes::ShapeRef.new(shape: String, location_name: "ErrorCode"))
     CreateAttendeeError.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
@@ -111,9 +146,11 @@ module Aws::ChimeSDKMeetings
 
     CreateAttendeeRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "MeetingId"))
     CreateAttendeeRequest.add_member(:external_user_id, Shapes::ShapeRef.new(shape: ExternalUserId, required: true, location_name: "ExternalUserId"))
+    CreateAttendeeRequest.add_member(:capabilities, Shapes::ShapeRef.new(shape: AttendeeCapabilities, location_name: "Capabilities"))
     CreateAttendeeRequest.struct_class = Types::CreateAttendeeRequest
 
     CreateAttendeeRequestItem.add_member(:external_user_id, Shapes::ShapeRef.new(shape: ExternalUserId, required: true, location_name: "ExternalUserId"))
+    CreateAttendeeRequestItem.add_member(:capabilities, Shapes::ShapeRef.new(shape: AttendeeCapabilities, location_name: "Capabilities"))
     CreateAttendeeRequestItem.struct_class = Types::CreateAttendeeRequestItem
 
     CreateAttendeeRequestItemList.member = Shapes::ShapeRef.new(shape: CreateAttendeeRequestItem)
@@ -127,6 +164,8 @@ module Aws::ChimeSDKMeetings
     CreateMeetingRequest.add_member(:external_meeting_id, Shapes::ShapeRef.new(shape: ExternalMeetingId, required: true, location_name: "ExternalMeetingId"))
     CreateMeetingRequest.add_member(:notifications_configuration, Shapes::ShapeRef.new(shape: NotificationsConfiguration, location_name: "NotificationsConfiguration"))
     CreateMeetingRequest.add_member(:meeting_features, Shapes::ShapeRef.new(shape: MeetingFeaturesConfiguration, location_name: "MeetingFeatures"))
+    CreateMeetingRequest.add_member(:primary_meeting_id, Shapes::ShapeRef.new(shape: PrimaryMeetingId, location_name: "PrimaryMeetingId"))
+    CreateMeetingRequest.add_member(:tenant_ids, Shapes::ShapeRef.new(shape: TenantIdList, location_name: "TenantIds"))
     CreateMeetingRequest.struct_class = Types::CreateMeetingRequest
 
     CreateMeetingResponse.add_member(:meeting, Shapes::ShapeRef.new(shape: Meeting, location_name: "Meeting"))
@@ -139,6 +178,8 @@ module Aws::ChimeSDKMeetings
     CreateMeetingWithAttendeesRequest.add_member(:meeting_features, Shapes::ShapeRef.new(shape: MeetingFeaturesConfiguration, location_name: "MeetingFeatures"))
     CreateMeetingWithAttendeesRequest.add_member(:notifications_configuration, Shapes::ShapeRef.new(shape: NotificationsConfiguration, location_name: "NotificationsConfiguration"))
     CreateMeetingWithAttendeesRequest.add_member(:attendees, Shapes::ShapeRef.new(shape: CreateMeetingWithAttendeesRequestItemList, required: true, location_name: "Attendees"))
+    CreateMeetingWithAttendeesRequest.add_member(:primary_meeting_id, Shapes::ShapeRef.new(shape: PrimaryMeetingId, location_name: "PrimaryMeetingId"))
+    CreateMeetingWithAttendeesRequest.add_member(:tenant_ids, Shapes::ShapeRef.new(shape: TenantIdList, location_name: "TenantIds"))
     CreateMeetingWithAttendeesRequest.struct_class = Types::CreateMeetingWithAttendeesRequest
 
     CreateMeetingWithAttendeesRequestItemList.member = Shapes::ShapeRef.new(shape: CreateAttendeeRequestItem)
@@ -163,7 +204,7 @@ module Aws::ChimeSDKMeetings
     EngineTranscribeMedicalSettings.add_member(:content_identification_type, Shapes::ShapeRef.new(shape: TranscribeMedicalContentIdentificationType, location_name: "ContentIdentificationType"))
     EngineTranscribeMedicalSettings.struct_class = Types::EngineTranscribeMedicalSettings
 
-    EngineTranscribeSettings.add_member(:language_code, Shapes::ShapeRef.new(shape: TranscribeLanguageCode, required: true, location_name: "LanguageCode"))
+    EngineTranscribeSettings.add_member(:language_code, Shapes::ShapeRef.new(shape: TranscribeLanguageCode, location_name: "LanguageCode"))
     EngineTranscribeSettings.add_member(:vocabulary_filter_method, Shapes::ShapeRef.new(shape: TranscribeVocabularyFilterMethod, location_name: "VocabularyFilterMethod"))
     EngineTranscribeSettings.add_member(:vocabulary_filter_name, Shapes::ShapeRef.new(shape: String, location_name: "VocabularyFilterName"))
     EngineTranscribeSettings.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: String, location_name: "VocabularyName"))
@@ -174,6 +215,9 @@ module Aws::ChimeSDKMeetings
     EngineTranscribeSettings.add_member(:content_redaction_type, Shapes::ShapeRef.new(shape: TranscribeContentRedactionType, location_name: "ContentRedactionType"))
     EngineTranscribeSettings.add_member(:pii_entity_types, Shapes::ShapeRef.new(shape: TranscribePiiEntityTypes, location_name: "PiiEntityTypes"))
     EngineTranscribeSettings.add_member(:language_model_name, Shapes::ShapeRef.new(shape: TranscribeLanguageModelName, location_name: "LanguageModelName"))
+    EngineTranscribeSettings.add_member(:identify_language, Shapes::ShapeRef.new(shape: Boolean, location_name: "IdentifyLanguage"))
+    EngineTranscribeSettings.add_member(:language_options, Shapes::ShapeRef.new(shape: TranscribeLanguageOptions, location_name: "LanguageOptions"))
+    EngineTranscribeSettings.add_member(:preferred_language, Shapes::ShapeRef.new(shape: TranscribeLanguageCode, location_name: "PreferredLanguage"))
     EngineTranscribeSettings.struct_class = Types::EngineTranscribeSettings
 
     ForbiddenException.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "Code"))
@@ -224,6 +268,8 @@ module Aws::ChimeSDKMeetings
     Meeting.add_member(:media_region, Shapes::ShapeRef.new(shape: MediaRegion, location_name: "MediaRegion"))
     Meeting.add_member(:media_placement, Shapes::ShapeRef.new(shape: MediaPlacement, location_name: "MediaPlacement"))
     Meeting.add_member(:meeting_features, Shapes::ShapeRef.new(shape: MeetingFeaturesConfiguration, location_name: "MeetingFeatures"))
+    Meeting.add_member(:primary_meeting_id, Shapes::ShapeRef.new(shape: PrimaryMeetingId, location_name: "PrimaryMeetingId"))
+    Meeting.add_member(:tenant_ids, Shapes::ShapeRef.new(shape: TenantIdList, location_name: "TenantIds"))
     Meeting.struct_class = Types::Meeting
 
     MeetingFeaturesConfiguration.add_member(:audio, Shapes::ShapeRef.new(shape: AudioFeatures, location_name: "Audio"))
@@ -239,6 +285,11 @@ module Aws::ChimeSDKMeetings
     NotificationsConfiguration.add_member(:sqs_queue_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SqsQueueArn"))
     NotificationsConfiguration.struct_class = Types::NotificationsConfiguration
 
+    ServiceFailureException.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "Code"))
+    ServiceFailureException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ServiceFailureException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    ServiceFailureException.struct_class = Types::ServiceFailureException
+
     ServiceUnavailableException.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "Code"))
     ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ServiceUnavailableException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
@@ -251,6 +302,13 @@ module Aws::ChimeSDKMeetings
 
     StopMeetingTranscriptionRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "MeetingId"))
     StopMeetingTranscriptionRequest.struct_class = Types::StopMeetingTranscriptionRequest
+
+    TenantIdList.member = Shapes::ShapeRef.new(shape: TenantId)
+
+    ThrottlingException.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "Code"))
+    ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ThrottlingException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    ThrottlingException.struct_class = Types::ThrottlingException
 
     TranscriptionConfiguration.add_member(:engine_transcribe_settings, Shapes::ShapeRef.new(shape: EngineTranscribeSettings, location_name: "EngineTranscribeSettings"))
     TranscriptionConfiguration.add_member(:engine_transcribe_medical_settings, Shapes::ShapeRef.new(shape: EngineTranscribeMedicalSettings, location_name: "EngineTranscribeMedicalSettings"))
@@ -265,6 +323,14 @@ module Aws::ChimeSDKMeetings
     UnprocessableEntityException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     UnprocessableEntityException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     UnprocessableEntityException.struct_class = Types::UnprocessableEntityException
+
+    UpdateAttendeeCapabilitiesRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "MeetingId"))
+    UpdateAttendeeCapabilitiesRequest.add_member(:attendee_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "AttendeeId"))
+    UpdateAttendeeCapabilitiesRequest.add_member(:capabilities, Shapes::ShapeRef.new(shape: AttendeeCapabilities, required: true, location_name: "Capabilities"))
+    UpdateAttendeeCapabilitiesRequest.struct_class = Types::UpdateAttendeeCapabilitiesRequest
+
+    UpdateAttendeeCapabilitiesResponse.add_member(:attendee, Shapes::ShapeRef.new(shape: Attendee, location_name: "Attendee"))
+    UpdateAttendeeCapabilitiesResponse.struct_class = Types::UpdateAttendeeCapabilitiesResponse
 
 
     # @api private
@@ -290,11 +356,28 @@ module Aws::ChimeSDKMeetings
         o.input = Shapes::ShapeRef.new(shape: BatchCreateAttendeeRequest)
         o.output = Shapes::ShapeRef.new(shape: BatchCreateAttendeeResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:batch_update_attendee_capabilities_except, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchUpdateAttendeeCapabilitiesExcept"
+        o.http_method = "PUT"
+        o.http_request_uri = "/meetings/{MeetingId}/attendees/capabilities?operation=batch-update-except"
+        o.input = Shapes::ShapeRef.new(shape: BatchUpdateAttendeeCapabilitiesExceptRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:create_attendee, Seahorse::Model::Operation.new.tap do |o|
@@ -305,11 +388,13 @@ module Aws::ChimeSDKMeetings
         o.output = Shapes::ShapeRef.new(shape: CreateAttendeeResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:create_meeting, Seahorse::Model::Operation.new.tap do |o|
@@ -319,8 +404,11 @@ module Aws::ChimeSDKMeetings
         o.input = Shapes::ShapeRef.new(shape: CreateMeetingRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateMeetingResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
@@ -331,8 +419,11 @@ module Aws::ChimeSDKMeetings
         o.input = Shapes::ShapeRef.new(shape: CreateMeetingWithAttendeesRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateMeetingWithAttendeesResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
@@ -342,8 +433,13 @@ module Aws::ChimeSDKMeetings
         o.http_request_uri = "/meetings/{MeetingId}/attendees/{AttendeeId}"
         o.input = Shapes::ShapeRef.new(shape: DeleteAttendeeRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:delete_meeting, Seahorse::Model::Operation.new.tap do |o|
@@ -354,6 +450,11 @@ module Aws::ChimeSDKMeetings
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:get_attendee, Seahorse::Model::Operation.new.tap do |o|
@@ -363,8 +464,12 @@ module Aws::ChimeSDKMeetings
         o.input = Shapes::ShapeRef.new(shape: GetAttendeeRequest)
         o.output = Shapes::ShapeRef.new(shape: GetAttendeeResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:get_meeting, Seahorse::Model::Operation.new.tap do |o|
@@ -376,6 +481,10 @@ module Aws::ChimeSDKMeetings
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:list_attendees, Seahorse::Model::Operation.new.tap do |o|
@@ -385,8 +494,12 @@ module Aws::ChimeSDKMeetings
         o.input = Shapes::ShapeRef.new(shape: ListAttendeesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListAttendeesResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -407,7 +520,9 @@ module Aws::ChimeSDKMeetings
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
       api.add_operation(:stop_meeting_transcription, Seahorse::Model::Operation.new.tap do |o|
@@ -421,6 +536,22 @@ module Aws::ChimeSDKMeetings
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:update_attendee_capabilities, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAttendeeCapabilities"
+        o.http_method = "PUT"
+        o.http_request_uri = "/meetings/{MeetingId}/attendees/{AttendeeId}/capabilities"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAttendeeCapabilitiesRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAttendeeCapabilitiesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
     end

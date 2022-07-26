@@ -192,7 +192,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] tags
-    #   A list of tags associated with the Amazon SageMaker resource.
+    #   A list of tags associated with the SageMaker resource.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AddTagsOutput AWS API Documentation
@@ -232,7 +232,7 @@ module Aws::SageMaker
     #           },
     #         ],
     #         supported_transform_instance_types: ["ml.m4.xlarge"], # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
-    #         supported_realtime_inference_instance_types: ["ml.t2.medium"], # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge
+    #         supported_realtime_inference_instance_types: ["ml.t2.medium"], # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge, ml.c6i.large, ml.c6i.xlarge, ml.c6i.2xlarge, ml.c6i.4xlarge, ml.c6i.8xlarge, ml.c6i.12xlarge, ml.c6i.16xlarge, ml.c6i.24xlarge, ml.c6i.32xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.12xlarge, ml.g5.16xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.p4d.24xlarge
     #         supported_content_types: ["ContentType"],
     #         supported_response_mime_types: ["ResponseMIMEType"],
     #       }
@@ -328,9 +328,9 @@ module Aws::SageMaker
     # Specifies the training algorithm to use in a CreateTrainingJob
     # request.
     #
-    # For more information about algorithms provided by Amazon SageMaker,
-    # see [Algorithms][1]. For information about using your own algorithms,
-    # see [Using Your Own Algorithms with Amazon SageMaker][2].
+    # For more information about algorithms provided by SageMaker, see
+    # [Algorithms][1]. For information about using your own algorithms, see
+    # [Using Your Own Algorithms with Amazon SageMaker][2].
     #
     #
     #
@@ -355,12 +355,21 @@ module Aws::SageMaker
     #
     # @!attribute [rw] training_image
     #   The registry path of the Docker image that contains the training
-    #   algorithm. For information about docker registry paths for built-in
-    #   algorithms, see [Algorithms Provided by Amazon SageMaker: Common
-    #   Parameters][1]. Amazon SageMaker supports both
+    #   algorithm. For information about docker registry paths for SageMaker
+    #   built-in algorithms, see [Docker Registry Paths and Example Code][1]
+    #   in the *Amazon SageMaker developer guide*. SageMaker supports both
     #   `registry/repository[:tag]` and `registry/repository[@digest]` image
-    #   path formats. For more information, see [Using Your Own Algorithms
-    #   with Amazon SageMaker][2].
+    #   path formats. For more information about using your custom training
+    #   container, see [Using Your Own Algorithms with Amazon SageMaker][2].
+    #
+    #   <note markdown="1"> You must specify either the algorithm name to the `AlgorithmName`
+    #   parameter or the image URI of the algorithm container to the
+    #   `TrainingImage` parameter.
+    #
+    #    For more information, see the note in the `AlgorithmName` parameter
+    #   description.
+    #
+    #    </note>
     #
     #
     #
@@ -371,8 +380,22 @@ module Aws::SageMaker
     # @!attribute [rw] algorithm_name
     #   The name of the algorithm resource to use for the training job. This
     #   must be an algorithm resource that you created or subscribe to on
-    #   Amazon Web Services Marketplace. If you specify a value for this
-    #   parameter, you can't specify a value for `TrainingImage`.
+    #   Amazon Web Services Marketplace.
+    #
+    #   <note markdown="1"> You must specify either the algorithm name to the `AlgorithmName`
+    #   parameter or the image URI of the algorithm container to the
+    #   `TrainingImage` parameter.
+    #
+    #    Note that the `AlgorithmName` parameter is mutually exclusive with
+    #   the `TrainingImage` parameter. If you specify a value for the
+    #   `AlgorithmName` parameter, you can't specify a value for
+    #   `TrainingImage`, and vice versa.
+    #
+    #    If you specify values for both parameters, the training job might
+    #   break; if you don't specify any value for both parameters, the
+    #   training job might raise a `null` error.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] training_input_mode
@@ -424,7 +447,7 @@ module Aws::SageMaker
     # @!attribute [rw] metric_definitions
     #   A list of metric definition objects. Each object specifies the
     #   metric name and regular expressions used to parse algorithm logs.
-    #   Amazon SageMaker publishes each metric to Amazon CloudWatch.
+    #   SageMaker publishes each metric to Amazon CloudWatch.
     #   @return [Array<Types::MetricDefinition>]
     #
     # @!attribute [rw] enable_sage_maker_metrics_time_series
@@ -432,9 +455,9 @@ module Aws::SageMaker
     #   `true`. The default is `false` and time-series metrics aren't
     #   generated except in the following cases:
     #
-    #   * You use one of the Amazon SageMaker built-in algorithms
+    #   * You use one of the SageMaker built-in algorithms
     #
-    #   * You use one of the following [Prebuilt Amazon SageMaker Docker
+    #   * You use one of the following [Prebuilt SageMaker Docker
     #     Images][1]\:
     #
     #     * Tensorflow (version &gt;= 1.15)
@@ -540,8 +563,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Defines a training job and a batch transform job that Amazon SageMaker
-    # runs to validate your algorithm.
+    # Defines a training job and a batch transform job that SageMaker runs
+    # to validate your algorithm.
     #
     # The data provided in the validation profile is made available to your
     # buyers on Amazon Web Services Marketplace.
@@ -565,6 +588,7 @@ module Aws::SageMaker
     #                   s3_uri: "S3Uri", # required
     #                   s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
     #                   attribute_names: ["AttributeName"],
+    #                   instance_group_names: ["InstanceGroupName"],
     #                 },
     #                 file_system_data_source: {
     #                   file_system_id: "FileSystemId", # required
@@ -587,10 +611,17 @@ module Aws::SageMaker
     #             s3_output_path: "S3Uri", # required
     #           },
     #           resource_config: { # required
-    #             instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #             instance_count: 1, # required
+    #             instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #             instance_count: 1,
     #             volume_size_in_gb: 1, # required
     #             volume_kms_key_id: "KmsKeyId",
+    #             instance_groups: [
+    #               {
+    #                 instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #                 instance_count: 1, # required
+    #                 instance_group_name: "InstanceGroupName", # required
+    #               },
+    #             ],
     #           },
     #           stopping_condition: { # required
     #             max_runtime_in_seconds: 1,
@@ -636,12 +667,12 @@ module Aws::SageMaker
     #
     # @!attribute [rw] training_job_definition
     #   The `TrainingJobDefinition` object that describes the training job
-    #   that Amazon SageMaker runs to validate your algorithm.
+    #   that SageMaker runs to validate your algorithm.
     #   @return [Types::TrainingJobDefinition]
     #
     # @!attribute [rw] transform_job_definition
     #   The `TransformJobDefinition` object that describes the transform job
-    #   that Amazon SageMaker runs to validate your algorithm.
+    #   that SageMaker runs to validate your algorithm.
     #   @return [Types::TransformJobDefinition]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AlgorithmValidationProfile AWS API Documentation
@@ -654,8 +685,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Specifies configurations for one or more training jobs that Amazon
-    # SageMaker runs to test the algorithm.
+    # Specifies configurations for one or more training jobs that SageMaker
+    # runs to test the algorithm.
     #
     # @note When making an API call, you may pass AlgorithmValidationSpecification
     #   data as a hash:
@@ -679,6 +710,7 @@ module Aws::SageMaker
     #                       s3_uri: "S3Uri", # required
     #                       s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
     #                       attribute_names: ["AttributeName"],
+    #                       instance_group_names: ["InstanceGroupName"],
     #                     },
     #                     file_system_data_source: {
     #                       file_system_id: "FileSystemId", # required
@@ -701,10 +733,17 @@ module Aws::SageMaker
     #                 s3_output_path: "S3Uri", # required
     #               },
     #               resource_config: { # required
-    #                 instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #                 instance_count: 1, # required
+    #                 instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #                 instance_count: 1,
     #                 volume_size_in_gb: 1, # required
     #                 volume_kms_key_id: "KmsKeyId",
+    #                 instance_groups: [
+    #                   {
+    #                     instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #                     instance_count: 1, # required
+    #                     instance_group_name: "InstanceGroupName", # required
+    #                   },
+    #                 ],
     #               },
     #               stopping_condition: { # required
     #                 max_runtime_in_seconds: 1,
@@ -746,13 +785,13 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] validation_role
-    #   The IAM roles that Amazon SageMaker uses to run the training jobs.
+    #   The IAM roles that SageMaker uses to run the training jobs.
     #   @return [String]
     #
     # @!attribute [rw] validation_profiles
     #   An array of `AlgorithmValidationProfile` objects, each of which
-    #   specifies a training job and batch transform job that Amazon
-    #   SageMaker runs to validate your algorithm.
+    #   specifies a training job and batch transform job that SageMaker runs
+    #   to validate your algorithm.
     #   @return [Array<Types::AlgorithmValidationProfile>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AlgorithmValidationSpecification AWS API Documentation
@@ -1742,8 +1781,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Configures the behavior of the client used by Amazon SageMaker to
-    # interact with the model container during asynchronous inference.
+    # Configures the behavior of the client used by SageMaker to interact
+    # with the model container during asynchronous inference.
     #
     # @note When making an API call, you may pass AsyncInferenceClientConfig
     #   data as a hash:
@@ -1754,8 +1793,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] max_concurrent_invocations_per_instance
     #   The maximum number of concurrent requests sent by the SageMaker
-    #   client to the model container. If no value is provided, Amazon
-    #   SageMaker will choose an optimal value for you.
+    #   client to the model container. If no value is provided, SageMaker
+    #   chooses an optimal value.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AsyncInferenceClientConfig AWS API Documentation
@@ -1787,8 +1826,8 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] client_config
-    #   Configures the behavior of the client used by Amazon SageMaker to
-    #   interact with the model container during asynchronous inference.
+    #   Configures the behavior of the client used by SageMaker to interact
+    #   with the model container during asynchronous inference.
     #   @return [Types::AsyncInferenceClientConfig]
     #
     # @!attribute [rw] output_config
@@ -1853,8 +1892,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] kms_key_id
     #   The Amazon Web Services Key Management Service (Amazon Web Services
-    #   KMS) key that Amazon SageMaker uses to encrypt the asynchronous
-    #   inference output in Amazon S3.
+    #   KMS) key that SageMaker uses to encrypt the asynchronous inference
+    #   output in Amazon S3.
     #   @return [String]
     #
     # @!attribute [rw] s3_output_path
@@ -2007,6 +2046,38 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Stores the config information for how a candidate is generated
+    # (optional).
+    #
+    # @note When making an API call, you may pass AutoMLCandidateGenerationConfig
+    #   data as a hash:
+    #
+    #       {
+    #         feature_specification_s3_uri: "S3Uri",
+    #       }
+    #
+    # @!attribute [rw] feature_specification_s3_uri
+    #   A URL to the Amazon S3 data source containing selected features from
+    #   the input data source to run an Autopilot job (optional). This file
+    #   should be in json format as shown below:
+    #
+    #   `\{ "FeatureAttributeNames":["col1", "col2", ...] \}`.
+    #
+    #   The key name `FeatureAttributeNames` is fixed. The values listed in
+    #   `["col1", "col2", ...]` is case sensitive and should be a list of
+    #   strings containing unique values that are a subset of the column
+    #   names in the input data. The list of columns provided must not
+    #   include the target column.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLCandidateGenerationConfig AWS API Documentation
+    #
+    class AutoMLCandidateGenerationConfig < Struct.new(
+      :feature_specification_s3_uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the steps for a candidate and what step it is
     # working on.
     #
@@ -2034,7 +2105,14 @@ module Aws::SageMaker
     end
 
     # A channel is a named input source that training algorithms can
-    # consume. For more information, see .
+    # consume. The validation dataset size is limited to less than 2 GB. The
+    # training dataset size must be less than 100 GB. For more information,
+    # see .
+    #
+    # <note markdown="1"> A validation dataset must contain the same headers as the training
+    # dataset.
+    #
+    #  </note>
     #
     # @note When making an API call, you may pass AutoMLChannel
     #   data as a hash:
@@ -2049,6 +2127,7 @@ module Aws::SageMaker
     #         compression_type: "None", # accepts None, Gzip
     #         target_attribute_name: "TargetAttributeName", # required
     #         content_type: "ContentType",
+    #         channel_type: "training", # accepts training, validation
     #       }
     #
     # @!attribute [rw] data_source
@@ -2070,13 +2149,26 @@ module Aws::SageMaker
     #   default value is `text/csv;header=present`.
     #   @return [String]
     #
+    # @!attribute [rw] channel_type
+    #   The channel type (optional) is an `enum` string. The default value
+    #   is `training`. Channels for training and validation must share the
+    #   same `ContentType` and `TargetAttributeName`. For information on
+    #   specifying training and validation channel types, see [ `How to
+    #   specify training and validation datasets` ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-datasets-problem-types.html#autopilot-data-sources-training-or-validation
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLChannel AWS API Documentation
     #
     class AutoMLChannel < Struct.new(
       :data_source,
       :compression_type,
       :target_attribute_name,
-      :content_type)
+      :content_type,
+      :channel_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2122,16 +2214,39 @@ module Aws::SageMaker
     #
     # @!attribute [rw] s3_data_source
     #   The Amazon S3 location of the input data.
-    #
-    #   <note markdown="1"> The input data must be in CSV format and contain at least 500 rows.
-    #
-    #    </note>
     #   @return [Types::AutoMLS3DataSource]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLDataSource AWS API Documentation
     #
     class AutoMLDataSource < Struct.new(
       :s3_data_source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This structure specifies how to split the data into train and
+    # validation datasets. The validation and training datasets must contain
+    # the same headers. The validation dataset must be less than 2 GB in
+    # size.
+    #
+    # @note When making an API call, you may pass AutoMLDataSplitConfig
+    #   data as a hash:
+    #
+    #       {
+    #         validation_fraction: 1.0,
+    #       }
+    #
+    # @!attribute [rw] validation_fraction
+    #   The validation fraction (optional) is a float that specifies the
+    #   portion of the training dataset to be used for validation. The
+    #   default value is 0.2, and values must be greater than 0 and less
+    #   than 1. We recommend setting this value to be less than 0.5.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLDataSplitConfig AWS API Documentation
+    #
+    class AutoMLDataSplitConfig < Struct.new(
+      :validation_fraction)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2217,6 +2332,12 @@ module Aws::SageMaker
     #             subnets: ["SubnetId"], # required
     #           },
     #         },
+    #         data_split_config: {
+    #           validation_fraction: 1.0,
+    #         },
+    #         candidate_generation_config: {
+    #           feature_specification_s3_uri: "S3Uri",
+    #         },
     #       }
     #
     # @!attribute [rw] completion_criteria
@@ -2229,11 +2350,24 @@ module Aws::SageMaker
     #   settings.
     #   @return [Types::AutoMLSecurityConfig]
     #
+    # @!attribute [rw] data_split_config
+    #   The configuration for splitting the input training dataset.
+    #
+    #   Type: AutoMLDataSplitConfig
+    #   @return [Types::AutoMLDataSplitConfig]
+    #
+    # @!attribute [rw] candidate_generation_config
+    #   The configuration for generating a candidate for an AutoML job
+    #   (optional).
+    #   @return [Types::AutoMLCandidateGenerationConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLJobConfig AWS API Documentation
     #
     class AutoMLJobConfig < Struct.new(
       :completion_criteria,
-      :security_config)
+      :security_config,
+      :data_split_config,
+      :candidate_generation_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2442,6 +2576,22 @@ module Aws::SageMaker
     #
     # @!attribute [rw] s3_data_type
     #   The data type.
+    #
+    #   A ManifestFile should have the format shown below:
+    #
+    #   `[ \{"prefix":
+    #   "s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER/DOC-EXAMPLE-PREFIX/"\},
+    #   `
+    #
+    #   `"DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-1",`
+    #
+    #   `"DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-2",`
+    #
+    #   `... "DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-N" ]`
+    #
+    #   An S3Prefix should have the following format:
+    #
+    #   `s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER-OR-FILE`
     #   @return [String]
     #
     # @!attribute [rw] s3_uri
@@ -2653,9 +2803,11 @@ module Aws::SageMaker
     #   @return [Types::MetricsSource]
     #
     # @!attribute [rw] pre_training_report
+    #   The pre-training bias report for a model.
     #   @return [Types::MetricsSource]
     #
     # @!attribute [rw] post_training_report
+    #   The post-training bias report for a model.
     #   @return [Types::MetricsSource]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Bias AWS API Documentation
@@ -2769,10 +2921,16 @@ module Aws::SageMaker
     #   the AutoML candidate.
     #   @return [String]
     #
+    # @!attribute [rw] model_insights
+    #   The Amazon S3 prefix to the model insight artifacts generated for
+    #   the AutoML candidate.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CandidateArtifactLocations AWS API Documentation
     #
     class CandidateArtifactLocations < Struct.new(
-      :explainability)
+      :explainability,
+      :model_insights)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2831,6 +2989,10 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Configuration specifying how to treat different headers. If no headers
+    # are specified SageMaker will by default base64 encode when capturing
+    # the data.
+    #
     # @note When making an API call, you may pass CaptureContentTypeHeader
     #   data as a hash:
     #
@@ -2840,9 +3002,13 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] csv_content_types
+    #   The list of all content type headers that SageMaker will treat as
+    #   CSV and capture accordingly.
     #   @return [Array<String>]
     #
     # @!attribute [rw] json_content_types
+    #   The list of all content type headers that SageMaker will treat as
+    #   JSON and capture accordingly.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CaptureContentTypeHeader AWS API Documentation
@@ -2854,6 +3020,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Specifies data Model Monitor will capture.
+    #
     # @note When making an API call, you may pass CaptureOption
     #   data as a hash:
     #
@@ -2862,6 +3030,7 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] capture_mode
+    #   Specify the boundary of data to capture.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CaptureOption AWS API Documentation
@@ -2961,6 +3130,7 @@ module Aws::SageMaker
     #             s3_uri: "S3Uri", # required
     #             s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
     #             attribute_names: ["AttributeName"],
+    #             instance_group_names: ["InstanceGroupName"],
     #           },
     #           file_system_data_source: {
     #             file_system_id: "FileSystemId", # required
@@ -2999,10 +3169,10 @@ module Aws::SageMaker
     # @!attribute [rw] record_wrapper_type
     #   Specify RecordIO as the value when input data is in raw format but
     #   the training algorithm requires the RecordIO format. In this case,
-    #   Amazon SageMaker wraps each individual S3 object in a RecordIO
-    #   record. If the input data is already in RecordIO format, you don't
-    #   need to set this attribute. For more information, see [Create a
-    #   Dataset Using RecordIO][1].
+    #   SageMaker wraps each individual S3 object in a RecordIO record. If
+    #   the input data is already in RecordIO format, you don't need to set
+    #   this attribute. For more information, see [Create a Dataset Using
+    #   RecordIO][1].
     #
     #   In File mode, leave this field unset or set it to None.
     #
@@ -3013,15 +3183,15 @@ module Aws::SageMaker
     #
     # @!attribute [rw] input_mode
     #   (Optional) The input mode to use for the data channel in a training
-    #   job. If you don't set a value for `InputMode`, Amazon SageMaker
-    #   uses the value set for `TrainingInputMode`. Use this parameter to
-    #   override the `TrainingInputMode` setting in a AlgorithmSpecification
-    #   request when you have a channel that needs a different input mode
-    #   from the training job's general setting. To download the data from
-    #   Amazon Simple Storage Service (Amazon S3) to the provisioned ML
-    #   storage volume, and mount the directory to a Docker volume, use
-    #   `File` input mode. To stream data directly from Amazon S3 to the
-    #   container, choose `Pipe` input mode.
+    #   job. If you don't set a value for `InputMode`, SageMaker uses the
+    #   value set for `TrainingInputMode`. Use this parameter to override
+    #   the `TrainingInputMode` setting in a AlgorithmSpecification request
+    #   when you have a channel that needs a different input mode from the
+    #   training job's general setting. To download the data from Amazon
+    #   Simple Storage Service (Amazon S3) to the provisioned ML storage
+    #   volume, and mount the directory to a Docker volume, use `File` input
+    #   mode. To stream data directly from Amazon S3 to the container,
+    #   choose `Pipe` input mode.
     #
     #   To use a model for incremental training, choose `File` input model.
     #   @return [String]
@@ -3131,7 +3301,7 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] s3_uri
-    #   Identifies the S3 path where you want Amazon SageMaker to store
+    #   Identifies the S3 path where you want SageMaker to store
     #   checkpoints. For example, `s3://bucket-name/key-name-prefix`.
     #   @return [String]
     #
@@ -3508,11 +3678,11 @@ module Aws::SageMaker
     #   Amazon EC2 Container Registry or in a Docker registry that is
     #   accessible from the same VPC that you configure for your endpoint.
     #   If you are using your own custom algorithm instead of an algorithm
-    #   provided by Amazon SageMaker, the inference code must meet Amazon
-    #   SageMaker requirements. Amazon SageMaker supports both
-    #   `registry/repository[:tag]` and `registry/repository[@digest]` image
-    #   path formats. For more information, see [Using Your Own Algorithms
-    #   with Amazon SageMaker][1]
+    #   provided by SageMaker, the inference code must meet SageMaker
+    #   requirements. SageMaker supports both `registry/repository[:tag]`
+    #   and `registry/repository[@digest]` image path formats. For more
+    #   information, see [Using Your Own Algorithms with Amazon
+    #   SageMaker][1]
     #
     #
     #
@@ -3539,7 +3709,7 @@ module Aws::SageMaker
     #   The S3 path where the model artifacts, which result from model
     #   training, are stored. This path must point to a single gzip
     #   compressed tar archive (.tar.gz suffix). The S3 path is required for
-    #   Amazon SageMaker built-in algorithms, but not if you use your own
+    #   SageMaker built-in algorithms, but not if you use your own
     #   algorithms. For more information on built-in algorithms, see [Common
     #   Parameters][1].
     #
@@ -3548,17 +3718,17 @@ module Aws::SageMaker
     #
     #    </note>
     #
-    #   If you provide a value for this parameter, Amazon SageMaker uses
-    #   Amazon Web Services Security Token Service to download model
-    #   artifacts from the S3 path you provide. Amazon Web Services STS is
-    #   activated in your IAM user account by default. If you previously
-    #   deactivated Amazon Web Services STS for a region, you need to
-    #   reactivate Amazon Web Services STS for that region. For more
-    #   information, see [Activating and Deactivating Amazon Web Services
-    #   STS in an Amazon Web Services Region][2] in the *Amazon Web Services
-    #   Identity and Access Management User Guide*.
+    #   If you provide a value for this parameter, SageMaker uses Amazon Web
+    #   Services Security Token Service to download model artifacts from the
+    #   S3 path you provide. Amazon Web Services STS is activated in your
+    #   IAM user account by default. If you previously deactivated Amazon
+    #   Web Services STS for a region, you need to reactivate Amazon Web
+    #   Services STS for that region. For more information, see [Activating
+    #   and Deactivating Amazon Web Services STS in an Amazon Web Services
+    #   Region][2] in the *Amazon Web Services Identity and Access
+    #   Management User Guide*.
     #
-    #   If you use a built-in algorithm to create a model, Amazon SageMaker
+    #   If you use a built-in algorithm to create a model, SageMaker
     #   requires that you provide a S3 path to the model artifacts in
     #   `ModelDataUrl`.
     #
@@ -3711,8 +3881,8 @@ module Aws::SageMaker
     #
     #   Auto
     #
-    #   : Amazon SageMaker hyperparameter tuning chooses the best scale for
-    #     the hyperparameter.
+    #   : SageMaker hyperparameter tuning chooses the best scale for the
+    #     hyperparameter.
     #
     #   Linear
     #
@@ -3946,7 +4116,7 @@ module Aws::SageMaker
     #             },
     #           ],
     #           supported_transform_instance_types: ["ml.m4.xlarge"], # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
-    #           supported_realtime_inference_instance_types: ["ml.t2.medium"], # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge
+    #           supported_realtime_inference_instance_types: ["ml.t2.medium"], # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge, ml.c6i.large, ml.c6i.xlarge, ml.c6i.2xlarge, ml.c6i.4xlarge, ml.c6i.8xlarge, ml.c6i.12xlarge, ml.c6i.16xlarge, ml.c6i.24xlarge, ml.c6i.32xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.12xlarge, ml.g5.16xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.p4d.24xlarge
     #           supported_content_types: ["ContentType"], # required
     #           supported_response_mime_types: ["ResponseMIMEType"], # required
     #         },
@@ -3969,6 +4139,7 @@ module Aws::SageMaker
     #                         s3_uri: "S3Uri", # required
     #                         s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
     #                         attribute_names: ["AttributeName"],
+    #                         instance_group_names: ["InstanceGroupName"],
     #                       },
     #                       file_system_data_source: {
     #                         file_system_id: "FileSystemId", # required
@@ -3991,10 +4162,17 @@ module Aws::SageMaker
     #                   s3_output_path: "S3Uri", # required
     #                 },
     #                 resource_config: { # required
-    #                   instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #                   instance_count: 1, # required
+    #                   instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #                   instance_count: 1,
     #                   volume_size_in_gb: 1, # required
     #                   volume_kms_key_id: "KmsKeyId",
+    #                   instance_groups: [
+    #                     {
+    #                       instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #                       instance_count: 1, # required
+    #                       instance_group_name: "InstanceGroupName", # required
+    #                     },
+    #                   ],
     #                 },
     #                 stopping_condition: { # required
     #                   max_runtime_in_seconds: 1,
@@ -4090,9 +4268,9 @@ module Aws::SageMaker
     #
     # @!attribute [rw] validation_specification
     #   Specifies configurations for one or more training jobs and that
-    #   Amazon SageMaker runs to test the algorithm's training code and,
-    #   optionally, one or more batch transform jobs that Amazon SageMaker
-    #   runs to test the algorithm's inference code.
+    #   SageMaker runs to test the algorithm's training code and,
+    #   optionally, one or more batch transform jobs that SageMaker runs to
+    #   test the algorithm's inference code.
     #   @return [Types::AlgorithmValidationSpecification]
     #
     # @!attribute [rw] certify_for_marketplace
@@ -4214,7 +4392,7 @@ module Aws::SageMaker
     #         resource_spec: {
     #           sage_maker_image_arn: "ImageArn",
     #           sage_maker_image_version_arn: "ImageVersionArn",
-    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
     #           lifecycle_config_arn: "StudioLifecycleConfigArn",
     #         },
     #       }
@@ -4244,6 +4422,15 @@ module Aws::SageMaker
     # @!attribute [rw] resource_spec
     #   The instance type and the Amazon Resource Name (ARN) of the
     #   SageMaker image created on the instance.
+    #
+    #   <note markdown="1"> The value of `InstanceType` passed as part of the `ResourceSpec` in
+    #   the `CreateApp` call overrides the value passed as part of the
+    #   `ResourceSpec` configured for the user profile or the domain. If
+    #   `InstanceType` is not specified in any of those three `ResourceSpec`
+    #   values for a `KernelGateway` app, the `CreateApp` call fails with a
+    #   request validation error.
+    #
+    #    </note>
     #   @return [Types::ResourceSpec]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateAppRequest AWS API Documentation
@@ -4370,6 +4557,7 @@ module Aws::SageMaker
     #             compression_type: "None", # accepts None, Gzip
     #             target_attribute_name: "TargetAttributeName", # required
     #             content_type: "ContentType",
+    #             channel_type: "training", # accepts training, validation
     #           },
     #         ],
     #         output_data_config: { # required
@@ -4394,6 +4582,12 @@ module Aws::SageMaker
     #               subnets: ["SubnetId"], # required
     #             },
     #           },
+    #           data_split_config: {
+    #             validation_fraction: 1.0,
+    #           },
+    #           candidate_generation_config: {
+    #             feature_specification_s3_uri: "S3Uri",
+    #           },
     #         },
     #         role_arn: "RoleArn", # required
     #         generate_candidate_definitions_only: false,
@@ -4417,8 +4611,9 @@ module Aws::SageMaker
     # @!attribute [rw] input_data_config
     #   An array of channel objects that describes the input data and its
     #   location. Each channel is a named input source. Similar to
-    #   `InputDataConfig` supported by . Format(s) supported: CSV. Minimum
-    #   of 500 rows.
+    #   `InputDataConfig` supported by . Format(s) supported: CSV, Parquet.
+    #   A minimum of 500 rows is required for the training dataset. There is
+    #   not a minimum number of rows required for the validation dataset.
     #   @return [Array<Types::AutoMLChannel>]
     #
     # @!attribute [rw] output_data_config
@@ -4429,10 +4624,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] problem_type
     #   Defines the type of supervised learning available for the
-    #   candidates. Options include: `BinaryClassification`,
-    #   `MulticlassClassification`, and `Regression`. For more information,
-    #   see [ Amazon SageMaker Autopilot problem types and algorithm
-    #   support][1].
+    #   candidates. For more information, see [ Amazon SageMaker Autopilot
+    #   problem types and algorithm support][1].
     #
     #
     #
@@ -4446,8 +4639,7 @@ module Aws::SageMaker
     #   @return [Types::AutoMLJobObjective]
     #
     # @!attribute [rw] auto_ml_job_config
-    #   Contains `CompletionCriteria` and `SecurityConfig` settings for the
-    #   AutoML job.
+    #   A collection of settings used to configure an AutoML job.
     #   @return [Types::AutoMLJobConfig]
     #
     # @!attribute [rw] role_arn
@@ -5024,7 +5216,7 @@ module Aws::SageMaker
     #             default_resource_spec: {
     #               sage_maker_image_arn: "ImageArn",
     #               sage_maker_image_version_arn: "ImageVersionArn",
-    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
     #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
     #             lifecycle_config_arns: ["StudioLifecycleConfigArn"],
@@ -5033,7 +5225,7 @@ module Aws::SageMaker
     #             default_resource_spec: {
     #               sage_maker_image_arn: "ImageArn",
     #               sage_maker_image_version_arn: "ImageVersionArn",
-    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
     #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
     #             custom_images: [
@@ -5049,7 +5241,7 @@ module Aws::SageMaker
     #             default_resource_spec: {
     #               sage_maker_image_arn: "ImageArn",
     #               sage_maker_image_version_arn: "ImageVersionArn",
-    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
     #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
     #           },
@@ -5058,6 +5250,19 @@ module Aws::SageMaker
     #             user_group: "R_STUDIO_ADMIN", # accepts R_STUDIO_ADMIN, R_STUDIO_USER
     #           },
     #           r_session_app_settings: {
+    #             default_resource_spec: {
+    #               sage_maker_image_arn: "ImageArn",
+    #               sage_maker_image_version_arn: "ImageVersionArn",
+    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
+    #             },
+    #             custom_images: [
+    #               {
+    #                 image_name: "ImageName", # required
+    #                 image_version_number: 1,
+    #                 app_image_config_name: "AppImageConfigName", # required
+    #               },
+    #             ],
     #           },
     #         },
     #         subnet_ids: ["SubnetId"], # required
@@ -5081,7 +5286,7 @@ module Aws::SageMaker
     #             default_resource_spec: {
     #               sage_maker_image_arn: "ImageArn",
     #               sage_maker_image_version_arn: "ImageVersionArn",
-    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
     #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
     #           },
@@ -5193,6 +5398,123 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateEdgeDeploymentPlanRequest
+    #   data as a hash:
+    #
+    #       {
+    #         edge_deployment_plan_name: "EntityName", # required
+    #         model_configs: [ # required
+    #           {
+    #             model_handle: "EntityName", # required
+    #             edge_packaging_job_name: "EntityName", # required
+    #           },
+    #         ],
+    #         device_fleet_name: "EntityName", # required
+    #         stages: [
+    #           {
+    #             stage_name: "EntityName", # required
+    #             device_selection_config: { # required
+    #               device_subset_type: "PERCENTAGE", # required, accepts PERCENTAGE, SELECTION, NAMECONTAINS
+    #               percentage: 1,
+    #               device_names: ["DeviceName"],
+    #               device_name_contains: "DeviceName",
+    #             },
+    #             deployment_config: {
+    #               failure_handling_policy: "ROLLBACK_ON_FAILURE", # required, accepts ROLLBACK_ON_FAILURE, DO_NOTHING
+    #             },
+    #           },
+    #         ],
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] edge_deployment_plan_name
+    #   The name of the edge deployment plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_configs
+    #   List of models associated with the edge deployment plan.
+    #   @return [Array<Types::EdgeDeploymentModelConfig>]
+    #
+    # @!attribute [rw] device_fleet_name
+    #   The device fleet used for this edge deployment plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] stages
+    #   List of stages of the edge deployment plan. The number of stages is
+    #   limited to 10 per deployment.
+    #   @return [Array<Types::DeploymentStage>]
+    #
+    # @!attribute [rw] tags
+    #   List of tags with which to tag the edge deployment plan.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateEdgeDeploymentPlanRequest AWS API Documentation
+    #
+    class CreateEdgeDeploymentPlanRequest < Struct.new(
+      :edge_deployment_plan_name,
+      :model_configs,
+      :device_fleet_name,
+      :stages,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] edge_deployment_plan_arn
+    #   The ARN of the edge deployment plan.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateEdgeDeploymentPlanResponse AWS API Documentation
+    #
+    class CreateEdgeDeploymentPlanResponse < Struct.new(
+      :edge_deployment_plan_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateEdgeDeploymentStageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         edge_deployment_plan_name: "EntityName", # required
+    #         stages: [ # required
+    #           {
+    #             stage_name: "EntityName", # required
+    #             device_selection_config: { # required
+    #               device_subset_type: "PERCENTAGE", # required, accepts PERCENTAGE, SELECTION, NAMECONTAINS
+    #               percentage: 1,
+    #               device_names: ["DeviceName"],
+    #               device_name_contains: "DeviceName",
+    #             },
+    #             deployment_config: {
+    #               failure_handling_policy: "ROLLBACK_ON_FAILURE", # required, accepts ROLLBACK_ON_FAILURE, DO_NOTHING
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] edge_deployment_plan_name
+    #   The name of the edge deployment plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] stages
+    #   List of stages to be added to the edge deployment plan.
+    #   @return [Array<Types::DeploymentStage>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateEdgeDeploymentStageRequest AWS API Documentation
+    #
+    class CreateEdgeDeploymentStageRequest < Struct.new(
+      :edge_deployment_plan_name,
+      :stages)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateEdgePackagingJobRequest
     #   data as a hash:
     #
@@ -5279,7 +5601,7 @@ module Aws::SageMaker
     #             variant_name: "VariantName", # required
     #             model_name: "ModelName", # required
     #             initial_instance_count: 1,
-    #             instance_type: "ml.t2.medium", # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge
+    #             instance_type: "ml.t2.medium", # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge, ml.c6i.large, ml.c6i.xlarge, ml.c6i.2xlarge, ml.c6i.4xlarge, ml.c6i.8xlarge, ml.c6i.12xlarge, ml.c6i.16xlarge, ml.c6i.24xlarge, ml.c6i.32xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.12xlarge, ml.g5.16xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.p4d.24xlarge
     #             initial_variant_weight: 1.0,
     #             accelerator_type: "ml.eia1.medium", # accepts ml.eia1.medium, ml.eia1.large, ml.eia1.xlarge, ml.eia2.medium, ml.eia2.large, ml.eia2.xlarge
     #             core_dump_config: {
@@ -5340,6 +5662,7 @@ module Aws::SageMaker
     #   @return [Array<Types::ProductionVariant>]
     #
     # @!attribute [rw] data_capture_config
+    #   Configuration to control how SageMaker captures inference data.
     #   @return [Types::DataCaptureConfig]
     #
     # @!attribute [rw] tags
@@ -5355,9 +5678,9 @@ module Aws::SageMaker
     #
     # @!attribute [rw] kms_key_id
     #   The Amazon Resource Name (ARN) of a Amazon Web Services Key
-    #   Management Service key that Amazon SageMaker uses to encrypt data on
-    #   the storage volume attached to the ML compute instance that hosts
-    #   the endpoint.
+    #   Management Service key that SageMaker uses to encrypt data on the
+    #   storage volume attached to the ML compute instance that hosts the
+    #   endpoint.
     #
     #   The KmsKeyId can be any of the following formats:
     #
@@ -6023,6 +6346,7 @@ module Aws::SageMaker
     #                   s3_uri: "S3Uri", # required
     #                   s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
     #                   attribute_names: ["AttributeName"],
+    #                   instance_group_names: ["InstanceGroupName"],
     #                 },
     #                 file_system_data_source: {
     #                   file_system_id: "FileSystemId", # required
@@ -6049,10 +6373,17 @@ module Aws::SageMaker
     #             s3_output_path: "S3Uri", # required
     #           },
     #           resource_config: { # required
-    #             instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #             instance_count: 1, # required
+    #             instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #             instance_count: 1,
     #             volume_size_in_gb: 1, # required
     #             volume_kms_key_id: "KmsKeyId",
+    #             instance_groups: [
+    #               {
+    #                 instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #                 instance_count: 1, # required
+    #                 instance_group_name: "InstanceGroupName", # required
+    #               },
+    #             ],
     #           },
     #           stopping_condition: { # required
     #             max_runtime_in_seconds: 1,
@@ -6124,6 +6455,7 @@ module Aws::SageMaker
     #                     s3_uri: "S3Uri", # required
     #                     s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
     #                     attribute_names: ["AttributeName"],
+    #                     instance_group_names: ["InstanceGroupName"],
     #                   },
     #                   file_system_data_source: {
     #                     file_system_id: "FileSystemId", # required
@@ -6150,10 +6482,17 @@ module Aws::SageMaker
     #               s3_output_path: "S3Uri", # required
     #             },
     #             resource_config: { # required
-    #               instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #               instance_count: 1, # required
+    #               instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #               instance_count: 1,
     #               volume_size_in_gb: 1, # required
     #               volume_kms_key_id: "KmsKeyId",
+    #               instance_groups: [
+    #                 {
+    #                   instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #                   instance_count: 1, # required
+    #                   instance_group_name: "InstanceGroupName", # required
+    #                 },
+    #               ],
     #             },
     #             stopping_condition: { # required
     #               max_runtime_in_seconds: 1,
@@ -6271,8 +6610,8 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] hyper_parameter_tuning_job_arn
-    #   The Amazon Resource Name (ARN) of the tuning job. Amazon SageMaker
-    #   assigns an ARN to a hyperparameter tuning job when you create it.
+    #   The Amazon Resource Name (ARN) of the tuning job. SageMaker assigns
+    #   an ARN to a hyperparameter tuning job when you create it.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateHyperParameterTuningJobResponse AWS API Documentation
@@ -6356,8 +6695,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] base_image
     #   The registry path of the container image to use as the starting
-    #   point for this version. The path is an Amazon Container Registry
-    #   (ECR) URI in the following format:
+    #   point for this version. The path is an Amazon Elastic Container
+    #   Registry (ECR) URI in the following format:
     #
     #   `<acct-id>.dkr.ecr.<region>.amazonaws.com/<repo-name[:tag] or
     #   [@digest]>`
@@ -6424,7 +6763,7 @@ module Aws::SageMaker
     #           },
     #           endpoint_configurations: [
     #             {
-    #               instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge
+    #               instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge, ml.c6i.large, ml.c6i.xlarge, ml.c6i.2xlarge, ml.c6i.4xlarge, ml.c6i.8xlarge, ml.c6i.12xlarge, ml.c6i.16xlarge, ml.c6i.24xlarge, ml.c6i.32xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.12xlarge, ml.g5.16xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.p4d.24xlarge
     #               inference_specification_name: "InferenceSpecificationName",
     #               environment_parameter_ranges: {
     #                 categorical_parameter_ranges: [
@@ -6436,6 +6775,7 @@ module Aws::SageMaker
     #               },
     #             },
     #           ],
+    #           volume_kms_key_id: "KmsKeyId",
     #         },
     #         job_description: "RecommendationJobDescription",
     #         stopping_conditions: {
@@ -6446,6 +6786,12 @@ module Aws::SageMaker
     #               value_in_milliseconds: 1,
     #             },
     #           ],
+    #         },
+    #         output_config: {
+    #           kms_key_id: "KmsKeyId",
+    #           compiled_output_config: {
+    #             s3_output_uri: "S3Uri",
+    #           },
     #         },
     #         tags: [
     #           {
@@ -6488,6 +6834,11 @@ module Aws::SageMaker
     #   conditions are met, the job is automatically stopped.
     #   @return [Types::RecommendationJobStoppingConditions]
     #
+    # @!attribute [rw] output_config
+    #   Provides information about the output artifacts and the KMS key to
+    #   use for Amazon S3 server-side encryption.
+    #   @return [Types::RecommendationJobOutputConfig]
+    #
     # @!attribute [rw] tags
     #   The metadata that you apply to Amazon Web Services resources to help
     #   you categorize and organize them. Each tag consists of a key and a
@@ -6509,6 +6860,7 @@ module Aws::SageMaker
       :input_config,
       :job_description,
       :stopping_conditions,
+      :output_config,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -6561,6 +6913,10 @@ module Aws::SageMaker
     #           initial_active_learning_model_arn: "ModelArn",
     #           labeling_job_resource_config: {
     #             volume_kms_key_id: "KmsKeyId",
+    #             vpc_config: {
+    #               security_group_ids: ["SecurityGroupId"], # required
+    #               subnets: ["SubnetId"], # required
+    #             },
     #           },
     #         },
     #         human_task_config: { # required
@@ -7197,14 +7553,14 @@ module Aws::SageMaker
     #   @return [Types::InferenceExecutionConfig]
     #
     # @!attribute [rw] execution_role_arn
-    #   The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker
-    #   can assume to access model artifacts and docker image for deployment
-    #   on ML compute instances or for batch transform jobs. Deploying on ML
+    #   The Amazon Resource Name (ARN) of the IAM role that SageMaker can
+    #   assume to access model artifacts and docker image for deployment on
+    #   ML compute instances or for batch transform jobs. Deploying on ML
     #   compute instances is part of model hosting. For more information,
-    #   see [Amazon SageMaker Roles][1].
+    #   see [SageMaker Roles][1].
     #
-    #   <note markdown="1"> To be able to pass this role to Amazon SageMaker, the caller of this
-    #   API must have the `iam:PassRole` permission.
+    #   <note markdown="1"> To be able to pass this role to SageMaker, the caller of this API
+    #   must have the `iam:PassRole` permission.
     #
     #    </note>
     #
@@ -7259,7 +7615,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] model_arn
-    #   The ARN of the model created in Amazon SageMaker.
+    #   The ARN of the model created in SageMaker.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModelOutput AWS API Documentation
@@ -7351,7 +7707,7 @@ module Aws::SageMaker
     #             },
     #           ],
     #           supported_transform_instance_types: ["ml.m4.xlarge"], # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
-    #           supported_realtime_inference_instance_types: ["ml.t2.medium"], # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge
+    #           supported_realtime_inference_instance_types: ["ml.t2.medium"], # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge, ml.c6i.large, ml.c6i.xlarge, ml.c6i.2xlarge, ml.c6i.4xlarge, ml.c6i.8xlarge, ml.c6i.12xlarge, ml.c6i.16xlarge, ml.c6i.24xlarge, ml.c6i.32xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.12xlarge, ml.g5.16xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.p4d.24xlarge
     #           supported_content_types: ["ContentType"], # required
     #           supported_response_mime_types: ["ResponseMIMEType"], # required
     #         },
@@ -7550,7 +7906,7 @@ module Aws::SageMaker
     #               },
     #             ],
     #             supported_transform_instance_types: ["ml.m4.xlarge"], # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
-    #             supported_realtime_inference_instance_types: ["ml.t2.medium"], # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge
+    #             supported_realtime_inference_instance_types: ["ml.t2.medium"], # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge, ml.c6i.large, ml.c6i.xlarge, ml.c6i.2xlarge, ml.c6i.4xlarge, ml.c6i.8xlarge, ml.c6i.12xlarge, ml.c6i.16xlarge, ml.c6i.24xlarge, ml.c6i.32xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.12xlarge, ml.g5.16xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.p4d.24xlarge
     #             supported_content_types: ["ContentType"],
     #             supported_response_mime_types: ["ResponseMIMEType"],
     #           },
@@ -7592,7 +7948,7 @@ module Aws::SageMaker
     #   @return [Types::InferenceSpecification]
     #
     # @!attribute [rw] validation_specification
-    #   Specifies configurations for one or more transform jobs that Amazon
+    #   Specifies configurations for one or more transform jobs that
     #   SageMaker runs to test the model package.
     #   @return [Types::ModelPackageValidationSpecification]
     #
@@ -7670,7 +8026,12 @@ module Aws::SageMaker
     # @!attribute [rw] task
     #   The machine learning task your model package accomplishes. Common
     #   machine learning tasks include object detection and image
-    #   classification.
+    #   classification. The following tasks are supported by Inference
+    #   Recommender: `"IMAGE_CLASSIFICATION"` \| `"OBJECT_DETECTION"` \|
+    #   `"TEXT_GENERATION"` \|`"IMAGE_SEGMENTATION"` \| `"FILL_MASK"` \|
+    #   `"CLASSIFICATION"` \| `"REGRESSION"` \| `"OTHER"`.
+    #
+    #   Specify "OTHER" if none of the tasks listed fit your use case.
     #   @return [String]
     #
     # @!attribute [rw] sample_payload_url
@@ -8013,7 +8374,7 @@ module Aws::SageMaker
     #
     #       {
     #         notebook_instance_name: "NotebookInstanceName", # required
-    #         instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #         instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
     #         subnet_id: "SubnetId",
     #         security_group_ids: ["SecurityGroupId"],
     #         role_arn: "RoleArn", # required
@@ -8032,6 +8393,9 @@ module Aws::SageMaker
     #         additional_code_repositories: ["CodeRepositoryNameOrUrl"],
     #         root_access: "Enabled", # accepts Enabled, Disabled
     #         platform_identifier: "PlatformIdentifier",
+    #         instance_metadata_service_configuration: {
+    #           minimum_instance_metadata_service_version: "MinimumInstanceMetadataServiceVersion", # required
+    #         },
     #       }
     #
     # @!attribute [rw] notebook_instance_name
@@ -8054,15 +8418,14 @@ module Aws::SageMaker
     #
     # @!attribute [rw] role_arn
     #   When you send any requests to Amazon Web Services resources from the
-    #   notebook instance, Amazon SageMaker assumes this role to perform
-    #   tasks on your behalf. You must grant this role necessary permissions
-    #   so Amazon SageMaker can perform these tasks. The policy must allow
-    #   the Amazon SageMaker service principal (sagemaker.amazonaws.com)
-    #   permissions to assume this role. For more information, see [Amazon
-    #   SageMaker Roles][1].
+    #   notebook instance, SageMaker assumes this role to perform tasks on
+    #   your behalf. You must grant this role necessary permissions so
+    #   SageMaker can perform these tasks. The policy must allow the
+    #   SageMaker service principal (sagemaker.amazonaws.com) permissions to
+    #   assume this role. For more information, see [SageMaker Roles][1].
     #
-    #   <note markdown="1"> To be able to pass this role to Amazon SageMaker, the caller of this
-    #   API must have the `iam:PassRole` permission.
+    #   <note markdown="1"> To be able to pass this role to SageMaker, the caller of this API
+    #   must have the `iam:PassRole` permission.
     #
     #    </note>
     #
@@ -8073,9 +8436,9 @@ module Aws::SageMaker
     #
     # @!attribute [rw] kms_key_id
     #   The Amazon Resource Name (ARN) of a Amazon Web Services Key
-    #   Management Service key that Amazon SageMaker uses to encrypt data on
-    #   the storage volume attached to your notebook instance. The KMS key
-    #   you provide must be enabled. For information, see [Enabling and
+    #   Management Service key that SageMaker uses to encrypt data on the
+    #   storage volume attached to your notebook instance. The KMS key you
+    #   provide must be enabled. For information, see [Enabling and
     #   Disabling Keys][1] in the *Amazon Web Services Key Management
     #   Service Developer Guide*.
     #
@@ -8106,11 +8469,11 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] direct_internet_access
-    #   Sets whether Amazon SageMaker provides internet access to the
-    #   notebook instance. If you set this to `Disabled` this notebook
-    #   instance is able to access resources only in your VPC, and is not be
-    #   able to connect to Amazon SageMaker training and endpoint services
-    #   unless you configure a NAT Gateway in your VPC.
+    #   Sets whether SageMaker provides internet access to the notebook
+    #   instance. If you set this to `Disabled` this notebook instance is
+    #   able to access resources only in your VPC, and is not be able to
+    #   connect to SageMaker training and endpoint services unless you
+    #   configure a NAT Gateway in your VPC.
     #
     #   For more information, see [Notebook Instances Are Internet-Enabled
     #   by Default][1]. You can set the value of this parameter to
@@ -8144,8 +8507,7 @@ module Aws::SageMaker
     #   repository in [Amazon Web Services CodeCommit][1] or in any other
     #   Git repository. When you open a notebook instance, it opens in the
     #   directory that contains this repository. For more information, see
-    #   [Associating Git Repositories with Amazon SageMaker Notebook
-    #   Instances][2].
+    #   [Associating Git Repositories with SageMaker Notebook Instances][2].
     #
     #
     #
@@ -8160,7 +8522,7 @@ module Aws::SageMaker
     #   in [Amazon Web Services CodeCommit][1] or in any other Git
     #   repository. These repositories are cloned at the same level as the
     #   default repository of your notebook instance. For more information,
-    #   see [Associating Git Repositories with Amazon SageMaker Notebook
+    #   see [Associating Git Repositories with SageMaker Notebook
     #   Instances][2].
     #
     #
@@ -8186,6 +8548,10 @@ module Aws::SageMaker
     #   environment.
     #   @return [String]
     #
+    # @!attribute [rw] instance_metadata_service_configuration
+    #   Information on the IMDS configuration of the notebook instance
+    #   @return [Types::InstanceMetadataServiceConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateNotebookInstanceInput AWS API Documentation
     #
     class CreateNotebookInstanceInput < Struct.new(
@@ -8203,7 +8569,8 @@ module Aws::SageMaker
       :default_code_repository,
       :additional_code_repositories,
       :root_access,
-      :platform_identifier)
+      :platform_identifier,
+      :instance_metadata_service_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8833,6 +9200,7 @@ module Aws::SageMaker
     #                 s3_uri: "S3Uri", # required
     #                 s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
     #                 attribute_names: ["AttributeName"],
+    #                 instance_group_names: ["InstanceGroupName"],
     #               },
     #               file_system_data_source: {
     #                 file_system_id: "FileSystemId", # required
@@ -8855,10 +9223,17 @@ module Aws::SageMaker
     #           s3_output_path: "S3Uri", # required
     #         },
     #         resource_config: { # required
-    #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #           instance_count: 1, # required
+    #           instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #           instance_count: 1,
     #           volume_size_in_gb: 1, # required
     #           volume_kms_key_id: "KmsKeyId",
+    #           instance_groups: [
+    #             {
+    #               instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #               instance_count: 1, # required
+    #               instance_group_name: "InstanceGroupName", # required
+    #             },
+    #           ],
     #         },
     #         vpc_config: {
     #           security_group_ids: ["SecurityGroupId"], # required
@@ -8955,7 +9330,7 @@ module Aws::SageMaker
     #   Algorithm-specific parameters that influence the quality of the
     #   model. You set hyperparameters before you start the learning
     #   process. For a list of hyperparameters for each training algorithm
-    #   provided by Amazon SageMaker, see [Algorithms][1].
+    #   provided by SageMaker, see [Algorithms][1].
     #
     #   You can specify a maximum of 100 hyperparameters. Each
     #   hyperparameter is a key-value pair. Each key and value is limited to
@@ -8969,8 +9344,8 @@ module Aws::SageMaker
     # @!attribute [rw] algorithm_specification
     #   The registry path of the Docker image that contains the training
     #   algorithm and algorithm-specific metadata, including the input mode.
-    #   For more information about algorithms provided by Amazon SageMaker,
-    #   see [Algorithms][1]. For information about providing your own
+    #   For more information about algorithms provided by SageMaker, see
+    #   [Algorithms][1]. For information about providing your own
     #   algorithms, see [Using Your Own Algorithms with Amazon
     #   SageMaker][2].
     #
@@ -8981,18 +9356,18 @@ module Aws::SageMaker
     #   @return [Types::AlgorithmSpecification]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker
-    #   can assume to perform tasks on your behalf.
+    #   The Amazon Resource Name (ARN) of an IAM role that SageMaker can
+    #   assume to perform tasks on your behalf.
     #
-    #   During model training, Amazon SageMaker needs your permission to
-    #   read input data from an S3 bucket, download a Docker image that
-    #   contains training code, write model artifacts to an S3 bucket, write
-    #   logs to Amazon CloudWatch Logs, and publish metrics to Amazon
-    #   CloudWatch. You grant permissions for all of these tasks to an IAM
-    #   role. For more information, see [Amazon SageMaker Roles][1].
+    #   During model training, SageMaker needs your permission to read input
+    #   data from an S3 bucket, download a Docker image that contains
+    #   training code, write model artifacts to an S3 bucket, write logs to
+    #   Amazon CloudWatch Logs, and publish metrics to Amazon CloudWatch.
+    #   You grant permissions for all of these tasks to an IAM role. For
+    #   more information, see [SageMaker Roles][1].
     #
-    #   <note markdown="1"> To be able to pass this role to Amazon SageMaker, the caller of this
-    #   API must have the `iam:PassRole` permission.
+    #   <note markdown="1"> To be able to pass this role to SageMaker, the caller of this API
+    #   must have the `iam:PassRole` permission.
     #
     #    </note>
     #
@@ -9013,17 +9388,17 @@ module Aws::SageMaker
     #   MIME type, compression method, and whether the data is wrapped in
     #   RecordIO format.
     #
-    #   Depending on the input mode that the algorithm supports, Amazon
-    #   SageMaker either copies input data files from an S3 bucket to a
-    #   local directory in the Docker container, or makes it available as
-    #   input streams. For example, if you specify an EFS location, input
-    #   data files will be made available as input streams. They do not need
-    #   to be downloaded.
+    #   Depending on the input mode that the algorithm supports, SageMaker
+    #   either copies input data files from an S3 bucket to a local
+    #   directory in the Docker container, or makes it available as input
+    #   streams. For example, if you specify an EFS location, input data
+    #   files are available as input streams. They do not need to be
+    #   downloaded.
     #   @return [Array<Types::Channel>]
     #
     # @!attribute [rw] output_data_config
     #   Specifies the path to the S3 location where you want to store model
-    #   artifacts. Amazon SageMaker creates subfolders for the artifacts.
+    #   artifacts. SageMaker creates subfolders for the artifacts.
     #   @return [Types::OutputDataConfig]
     #
     # @!attribute [rw] resource_config
@@ -9032,9 +9407,9 @@ module Aws::SageMaker
     #
     #   ML storage volumes store model artifacts and incremental states.
     #   Training algorithms might also use ML storage volumes for scratch
-    #   space. If you want Amazon SageMaker to use the ML storage volume to
-    #   store the training data, choose `File` as the `TrainingInputMode` in
-    #   the algorithm specification. For distributed training algorithms,
+    #   space. If you want SageMaker to use the ML storage volume to store
+    #   the training data, choose `File` as the `TrainingInputMode` in the
+    #   algorithm specification. For distributed training algorithms,
     #   specify an instance count greater than 1.
     #   @return [Types::ResourceConfig]
     #
@@ -9052,13 +9427,13 @@ module Aws::SageMaker
     # @!attribute [rw] stopping_condition
     #   Specifies a limit to how long a model training job can run. It also
     #   specifies how long a managed Spot training job has to complete. When
-    #   the job reaches the time limit, Amazon SageMaker ends the training
-    #   job. Use this API to cap model training costs.
+    #   the job reaches the time limit, SageMaker ends the training job. Use
+    #   this API to cap model training costs.
     #
-    #   To stop a job, Amazon SageMaker sends the algorithm the `SIGTERM`
-    #   signal, which delays job termination for 120 seconds. Algorithms can
-    #   use this 120-second window to save the model artifacts, so the
-    #   results of training are not lost.
+    #   To stop a job, SageMaker sends the algorithm the `SIGTERM` signal,
+    #   which delays job termination for 120 seconds. Algorithms can use
+    #   this 120-second window to save the model artifacts, so the results
+    #   of training are not lost.
     #   @return [Types::StoppingCondition]
     #
     # @!attribute [rw] tags
@@ -9076,7 +9451,7 @@ module Aws::SageMaker
     #   Isolates the training container. No inbound or outbound network
     #   calls can be made, except for calls between peers within a training
     #   cluster for distributed training. If you enable network isolation
-    #   for training jobs that are configured to use a VPC, Amazon SageMaker
+    #   for training jobs that are configured to use a VPC, SageMaker
     #   downloads and uploads customer data and model artifacts through the
     #   specified VPC, but the training container does not have network
     #   access.
@@ -9305,6 +9680,11 @@ module Aws::SageMaker
     #   size of your dataset by the number of records. To ensure that the
     #   records fit within the maximum payload size, we recommend using a
     #   slightly larger value. The default value is `6` MB.
+    #
+    #   The value of `MaxPayloadInMB` cannot be greater than 100 MB. If you
+    #   specify the `MaxConcurrentTransforms` parameter, the value of
+    #   `(MaxConcurrentTransforms * MaxPayloadInMB)` also cannot exceed 100
+    #   MB.
     #
     #   For cases where the payload might be arbitrarily large and is
     #   transmitted using HTTP chunked encoding, set the value to `0`. This
@@ -9639,7 +10019,7 @@ module Aws::SageMaker
     #             default_resource_spec: {
     #               sage_maker_image_arn: "ImageArn",
     #               sage_maker_image_version_arn: "ImageVersionArn",
-    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
     #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
     #             lifecycle_config_arns: ["StudioLifecycleConfigArn"],
@@ -9648,7 +10028,7 @@ module Aws::SageMaker
     #             default_resource_spec: {
     #               sage_maker_image_arn: "ImageArn",
     #               sage_maker_image_version_arn: "ImageVersionArn",
-    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
     #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
     #             custom_images: [
@@ -9664,7 +10044,7 @@ module Aws::SageMaker
     #             default_resource_spec: {
     #               sage_maker_image_arn: "ImageArn",
     #               sage_maker_image_version_arn: "ImageVersionArn",
-    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
     #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
     #           },
@@ -9673,6 +10053,19 @@ module Aws::SageMaker
     #             user_group: "R_STUDIO_ADMIN", # accepts R_STUDIO_ADMIN, R_STUDIO_USER
     #           },
     #           r_session_app_settings: {
+    #             default_resource_spec: {
+    #               sage_maker_image_arn: "ImageArn",
+    #               sage_maker_image_version_arn: "ImageVersionArn",
+    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
+    #             },
+    #             custom_images: [
+    #               {
+    #                 image_name: "ImageName", # required
+    #                 image_version_number: 1,
+    #                 app_image_config_name: "AppImageConfigName", # required
+    #               },
+    #             ],
     #           },
     #         },
     #       }
@@ -9766,6 +10159,11 @@ module Aws::SageMaker
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         workforce_vpc_config: {
+    #           vpc_id: "WorkforceVpcId",
+    #           security_group_ids: ["WorkforceSecurityGroupId"],
+    #           subnets: ["WorkforceSubnetId"],
+    #         },
     #       }
     #
     # @!attribute [rw] cognito_config
@@ -9809,6 +10207,10 @@ module Aws::SageMaker
     #   and a value, both of which you define.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] workforce_vpc_config
+    #   Use this parameter to configure a workforce using VPC.
+    #   @return [Types::WorkforceVpcConfigRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateWorkforceRequest AWS API Documentation
     #
     class CreateWorkforceRequest < Struct.new(
@@ -9816,7 +10218,8 @@ module Aws::SageMaker
       :oidc_config,
       :source_ip_config,
       :workforce_name,
-      :tags)
+      :tags,
+      :workforce_vpc_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9984,6 +10387,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Configuration to control how SageMaker captures inference data.
+    #
     # @note When making an API call, you may pass DataCaptureConfig
     #   data as a hash:
     #
@@ -10004,21 +10409,47 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] enable_capture
+    #   Whether data capture should be enabled or disabled (defaults to
+    #   enabled).
     #   @return [Boolean]
     #
     # @!attribute [rw] initial_sampling_percentage
+    #   The percentage of requests SageMaker will capture. A lower value is
+    #   recommended for Endpoints with high traffic.
     #   @return [Integer]
     #
     # @!attribute [rw] destination_s3_uri
+    #   The Amazon S3 location used to capture the data.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
+    #   The Amazon Resource Name (ARN) of a Amazon Web Services Key
+    #   Management Service key that SageMaker uses to encrypt data on the
+    #   storage volume attached to the ML compute instance that hosts the
+    #   endpoint.
+    #
+    #   The KmsKeyId can be any of the following formats:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Alias name: `alias/ExampleAlias`
+    #
+    #   * Alias name ARN:
+    #     `arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias`
     #   @return [String]
     #
     # @!attribute [rw] capture_options
+    #   Specifies data Model Monitor will capture. You can configure whether
+    #   to collect only input, only output, or both
     #   @return [Array<Types::CaptureOption>]
     #
     # @!attribute [rw] capture_content_type_header
+    #   Configuration specifying how to treat different headers. If no
+    #   headers are specified SageMaker will by default base64 encode when
+    #   capturing the data.
     #   @return [Types::CaptureContentTypeHeader]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DataCaptureConfig AWS API Documentation
@@ -10034,19 +10465,26 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The currently active data capture configuration used by your Endpoint.
+    #
     # @!attribute [rw] enable_capture
+    #   Whether data capture is enabled or disabled.
     #   @return [Boolean]
     #
     # @!attribute [rw] capture_status
+    #   Whether data capture is currently functional.
     #   @return [String]
     #
     # @!attribute [rw] current_sampling_percentage
+    #   The percentage of requests being captured by your Endpoint.
     #   @return [Integer]
     #
     # @!attribute [rw] destination_s3_uri
+    #   The Amazon S3 location being used to capture the data.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
+    #   The KMS key being used to encrypt the data in Amazon S3.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DataCaptureConfigSummary AWS API Documentation
@@ -10121,8 +10559,8 @@ module Aws::SageMaker
     #   A [JSONPath][1] expression used to select a portion of the input
     #   data to pass to the algorithm. Use the `InputFilter` parameter to
     #   exclude fields, such as an ID column, from the input. If you want
-    #   Amazon SageMaker to pass the entire input dataset to the algorithm,
-    #   accept the default value `$`.
+    #   SageMaker to pass the entire input dataset to the algorithm, accept
+    #   the default value `$`.
     #
     #   Examples: `"$"`, `"$[1:]"`, `"$.features"`
     #
@@ -10134,10 +10572,9 @@ module Aws::SageMaker
     # @!attribute [rw] output_filter
     #   A [JSONPath][1] expression used to select a portion of the joined
     #   dataset to save in the output file for a batch transform job. If you
-    #   want Amazon SageMaker to store the entire input dataset in the
-    #   output file, leave the default value, `$`. If you specify indexes
-    #   that aren't within the dimension size of the joined dataset, you
-    #   get an error.
+    #   want SageMaker to store the entire input dataset in the output file,
+    #   leave the default value, `$`. If you specify indexes that aren't
+    #   within the dimension size of the joined dataset, you get an error.
     #
     #   Examples: `"$"`, `"$[0,5:]"`, `"$['id','SageMakerOutput']"`
     #
@@ -10331,6 +10768,7 @@ module Aws::SageMaker
     #           s3_uri: "S3Uri", # required
     #           s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
     #           attribute_names: ["AttributeName"],
+    #           instance_group_names: ["InstanceGroupName"],
     #         },
     #         file_system_data_source: {
     #           file_system_id: "FileSystemId", # required
@@ -10912,6 +11350,51 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteEdgeDeploymentPlanRequest
+    #   data as a hash:
+    #
+    #       {
+    #         edge_deployment_plan_name: "EntityName", # required
+    #       }
+    #
+    # @!attribute [rw] edge_deployment_plan_name
+    #   The name of the edge deployment plan to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteEdgeDeploymentPlanRequest AWS API Documentation
+    #
+    class DeleteEdgeDeploymentPlanRequest < Struct.new(
+      :edge_deployment_plan_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteEdgeDeploymentStageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         edge_deployment_plan_name: "EntityName", # required
+    #         stage_name: "EntityName", # required
+    #       }
+    #
+    # @!attribute [rw] edge_deployment_plan_name
+    #   The name of the edge deployment plan from which the stage will be
+    #   deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] stage_name
+    #   The name of the stage.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteEdgeDeploymentStageRequest AWS API Documentation
+    #
+    class DeleteEdgeDeploymentStageRequest < Struct.new(
+      :edge_deployment_plan_name,
+      :stage_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteEndpointConfigInput
     #   data as a hash:
     #
@@ -11266,7 +11749,7 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] notebook_instance_name
-    #   The name of the Amazon SageMaker notebook instance to delete.
+    #   The name of the SageMaker notebook instance to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteNotebookInstanceInput AWS API Documentation
@@ -11643,6 +12126,75 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Contains information about a stage in an edge deployment plan.
+    #
+    # @note When making an API call, you may pass DeploymentStage
+    #   data as a hash:
+    #
+    #       {
+    #         stage_name: "EntityName", # required
+    #         device_selection_config: { # required
+    #           device_subset_type: "PERCENTAGE", # required, accepts PERCENTAGE, SELECTION, NAMECONTAINS
+    #           percentage: 1,
+    #           device_names: ["DeviceName"],
+    #           device_name_contains: "DeviceName",
+    #         },
+    #         deployment_config: {
+    #           failure_handling_policy: "ROLLBACK_ON_FAILURE", # required, accepts ROLLBACK_ON_FAILURE, DO_NOTHING
+    #         },
+    #       }
+    #
+    # @!attribute [rw] stage_name
+    #   The name of the stage.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_selection_config
+    #   Configuration of the devices in the stage.
+    #   @return [Types::DeviceSelectionConfig]
+    #
+    # @!attribute [rw] deployment_config
+    #   Configuration of the deployment details.
+    #   @return [Types::EdgeDeploymentConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeploymentStage AWS API Documentation
+    #
+    class DeploymentStage < Struct.new(
+      :stage_name,
+      :device_selection_config,
+      :deployment_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information summarizing the deployment stage results.
+    #
+    # @!attribute [rw] stage_name
+    #   The name of the stage.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_selection_config
+    #   Configuration of the devices in the stage.
+    #   @return [Types::DeviceSelectionConfig]
+    #
+    # @!attribute [rw] deployment_config
+    #   Configuration of the deployment details.
+    #   @return [Types::EdgeDeploymentConfig]
+    #
+    # @!attribute [rw] deployment_status
+    #   General status of the current state.
+    #   @return [Types::EdgeDeploymentStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeploymentStageStatusSummary AWS API Documentation
+    #
+    class DeploymentStageStatusSummary < Struct.new(
+      :stage_name,
+      :device_selection_config,
+      :deployment_config,
+      :deployment_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeregisterDevicesRequest
     #   data as a hash:
     #
@@ -11807,7 +12359,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] validation_specification
     #   Details about configurations for one or more training jobs that
-    #   Amazon SageMaker runs to test the algorithm.
+    #   SageMaker runs to test the algorithm.
     #   @return [Types::AlgorithmValidationSpecification]
     #
     # @!attribute [rw] algorithm_status
@@ -12893,6 +13445,102 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeEdgeDeploymentPlanRequest
+    #   data as a hash:
+    #
+    #       {
+    #         edge_deployment_plan_name: "EntityName", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] edge_deployment_plan_name
+    #   The name of the deployment plan to describe.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the edge deployment plan has enough stages to require tokening,
+    #   then this is the response from the last list of stages returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to select (50 by default).
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEdgeDeploymentPlanRequest AWS API Documentation
+    #
+    class DescribeEdgeDeploymentPlanRequest < Struct.new(
+      :edge_deployment_plan_name,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] edge_deployment_plan_arn
+    #   The ARN of edge deployment plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] edge_deployment_plan_name
+    #   The name of the edge deployment plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_configs
+    #   List of models associated with the edge deployment plan.
+    #   @return [Array<Types::EdgeDeploymentModelConfig>]
+    #
+    # @!attribute [rw] device_fleet_name
+    #   The device fleet used for this edge deployment plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] edge_deployment_success
+    #   The number of edge devices with the successful deployment.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] edge_deployment_pending
+    #   The number of edge devices yet to pick up deployment, or in
+    #   progress.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] edge_deployment_failed
+    #   The number of edge devices that failed the deployment.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stages
+    #   List of stages in the edge deployment plan.
+    #   @return [Array<Types::DeploymentStageStatusSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Token to use when calling the next set of stages in the edge
+    #   deployment plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time when the edge deployment plan was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The time when the edge deployment plan was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEdgeDeploymentPlanResponse AWS API Documentation
+    #
+    class DescribeEdgeDeploymentPlanResponse < Struct.new(
+      :edge_deployment_plan_arn,
+      :edge_deployment_plan_name,
+      :model_configs,
+      :device_fleet_name,
+      :edge_deployment_success,
+      :edge_deployment_pending,
+      :edge_deployment_failed,
+      :stages,
+      :next_token,
+      :creation_time,
+      :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeEdgePackagingJobRequest
     #   data as a hash:
     #
@@ -13018,7 +13666,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] endpoint_config_name
-    #   Name of the Amazon SageMaker endpoint configuration.
+    #   Name of the SageMaker endpoint configuration.
     #   @return [String]
     #
     # @!attribute [rw] endpoint_config_arn
@@ -13031,6 +13679,7 @@ module Aws::SageMaker
     #   @return [Array<Types::ProductionVariant>]
     #
     # @!attribute [rw] data_capture_config
+    #   Configuration to control how SageMaker captures inference data.
     #   @return [Types::DataCaptureConfig]
     #
     # @!attribute [rw] kms_key_id
@@ -13103,6 +13752,8 @@ module Aws::SageMaker
     #   @return [Array<Types::ProductionVariantSummary>]
     #
     # @!attribute [rw] data_capture_config
+    #   The currently active data capture configuration used by your
+    #   Endpoint.
     #   @return [Types::DataCaptureConfigSummary]
     #
     # @!attribute [rw] endpoint_status
@@ -13321,6 +13972,10 @@ module Aws::SageMaker
     #   A timestamp indicating when SageMaker created the `FeatureGroup`.
     #   @return [Time]
     #
+    # @!attribute [rw] last_modified_time
+    #   A timestamp indicating when the feature group was last updated.
+    #   @return [Time]
+    #
     # @!attribute [rw] online_store_config
     #   The configuration for the `OnlineStore`.
     #   @return [Types::OnlineStoreConfig]
@@ -13347,6 +14002,11 @@ module Aws::SageMaker
     #   `Blocked`
     #   @return [Types::OfflineStoreStatus]
     #
+    # @!attribute [rw] last_update_status
+    #   A value indicating whether the update made to the feature group was
+    #   successful.
+    #   @return [Types::LastUpdateStatus]
+    #
     # @!attribute [rw] failure_reason
     #   The reason that the `FeatureGroup` failed to be replicated in the
     #   `OfflineStore`. This is failure can occur because:
@@ -13365,6 +14025,10 @@ module Aws::SageMaker
     #   (`FeatureDefinitions`).
     #   @return [String]
     #
+    # @!attribute [rw] online_store_total_size_bytes
+    #   The size of the `OnlineStore` in bytes.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeFeatureGroupResponse AWS API Documentation
     #
     class DescribeFeatureGroupResponse < Struct.new(
@@ -13374,14 +14038,92 @@ module Aws::SageMaker
       :event_time_feature_name,
       :feature_definitions,
       :creation_time,
+      :last_modified_time,
       :online_store_config,
       :offline_store_config,
       :role_arn,
       :feature_group_status,
       :offline_store_status,
+      :last_update_status,
       :failure_reason,
       :description,
-      :next_token)
+      :next_token,
+      :online_store_total_size_bytes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeFeatureMetadataRequest
+    #   data as a hash:
+    #
+    #       {
+    #         feature_group_name: "FeatureGroupName", # required
+    #         feature_name: "FeatureName", # required
+    #       }
+    #
+    # @!attribute [rw] feature_group_name
+    #   The name of the feature group containing the feature.
+    #   @return [String]
+    #
+    # @!attribute [rw] feature_name
+    #   The name of the feature.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeFeatureMetadataRequest AWS API Documentation
+    #
+    class DescribeFeatureMetadataRequest < Struct.new(
+      :feature_group_name,
+      :feature_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] feature_group_arn
+    #   The Amazon Resource Number (ARN) of the feature group that contains
+    #   the feature.
+    #   @return [String]
+    #
+    # @!attribute [rw] feature_group_name
+    #   The name of the feature group that you've specified.
+    #   @return [String]
+    #
+    # @!attribute [rw] feature_name
+    #   The name of the feature that you've specified.
+    #   @return [String]
+    #
+    # @!attribute [rw] feature_type
+    #   The data type of the feature.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   A timestamp indicating when the feature was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   A timestamp indicating when the metadata for the feature group was
+    #   modified. For example, if you add a parameter describing the
+    #   feature, the timestamp changes to reflect the last time you
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description you added to describe the feature.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The key-value pairs that you added to describe the feature.
+    #   @return [Array<Types::FeatureParameter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeFeatureMetadataResponse AWS API Documentation
+    #
+    class DescribeFeatureMetadataResponse < Struct.new(
+      :feature_group_arn,
+      :feature_group_name,
+      :feature_name,
+      :feature_type,
+      :creation_time,
+      :last_modified_time,
+      :description,
+      :parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13960,8 +14702,8 @@ module Aws::SageMaker
     #   @return [Types::LabelingJobOutputConfig]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) that Amazon SageMaker assumes to
-    #   perform tasks on your behalf during data labeling.
+    #   The Amazon Resource Name (ARN) that SageMaker assumes to perform
+    #   tasks on your behalf during data labeling.
     #   @return [String]
     #
     # @!attribute [rw] label_category_config_s3_uri
@@ -14327,7 +15069,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] model_name
-    #   Name of the Amazon SageMaker model.
+    #   Name of the SageMaker model.
     #   @return [String]
     #
     # @!attribute [rw] primary_container
@@ -14397,7 +15139,7 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] model_package_group_name
-    #   The name of the model group to describe.
+    #   The name of gthe model group to describe.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelPackageGroupInput AWS API Documentation
@@ -14541,7 +15283,7 @@ module Aws::SageMaker
     #   @return [Types::ModelMetrics]
     #
     # @!attribute [rw] last_modified_time
-    #   The last time the model package was modified.
+    #   The last time that the model package was modified.
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_by
@@ -14885,7 +15627,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] notebook_instance_name
-    #   The name of the Amazon SageMaker notebook instance.
+    #   The name of the SageMaker notebook instance.
     #   @return [String]
     #
     # @!attribute [rw] notebook_instance_status
@@ -14919,14 +15661,13 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The Amazon Web Services KMS key ID Amazon SageMaker uses to encrypt
-    #   data when storing it on the ML storage volume attached to the
-    #   instance.
+    #   The Amazon Web Services KMS key ID SageMaker uses to encrypt data
+    #   when storing it on the ML storage volume attached to the instance.
     #   @return [String]
     #
     # @!attribute [rw] network_interface_id
-    #   The network interface IDs that Amazon SageMaker created at the time
-    #   of creating the instance.
+    #   The network interface IDs that SageMaker created at the time of
+    #   creating the instance.
     #   @return [String]
     #
     # @!attribute [rw] last_modified_time
@@ -14951,10 +15692,10 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] direct_internet_access
-    #   Describes whether Amazon SageMaker provides internet access to the
-    #   notebook instance. If this value is set to *Disabled*, the notebook
-    #   instance does not have internet access, and cannot connect to Amazon
-    #   SageMaker training and endpoint services.
+    #   Describes whether SageMaker provides internet access to the notebook
+    #   instance. If this value is set to *Disabled*, the notebook instance
+    #   does not have internet access, and cannot connect to SageMaker
+    #   training and endpoint services.
     #
     #   For more information, see [Notebook Instances Are Internet-Enabled
     #   by Default][1].
@@ -14987,8 +15728,7 @@ module Aws::SageMaker
     #   repository in [Amazon Web Services CodeCommit][1] or in any other
     #   Git repository. When you open a notebook instance, it opens in the
     #   directory that contains this repository. For more information, see
-    #   [Associating Git Repositories with Amazon SageMaker Notebook
-    #   Instances][2].
+    #   [Associating Git Repositories with SageMaker Notebook Instances][2].
     #
     #
     #
@@ -15003,7 +15743,7 @@ module Aws::SageMaker
     #   in [Amazon Web Services CodeCommit][1] or in any other Git
     #   repository. These repositories are cloned at the same level as the
     #   default repository of your notebook instance. For more information,
-    #   see [Associating Git Repositories with Amazon SageMaker Notebook
+    #   see [Associating Git Repositories with SageMaker Notebook
     #   Instances][2].
     #
     #
@@ -15029,6 +15769,10 @@ module Aws::SageMaker
     #   environment.
     #   @return [String]
     #
+    # @!attribute [rw] instance_metadata_service_configuration
+    #   Information on the IMDS configuration of the notebook instance
+    #   @return [Types::InstanceMetadataServiceConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeNotebookInstanceOutput AWS API Documentation
     #
     class DescribeNotebookInstanceOutput < Struct.new(
@@ -15052,7 +15796,8 @@ module Aws::SageMaker
       :default_code_repository,
       :additional_code_repositories,
       :root_access,
-      :platform_identifier)
+      :platform_identifier,
+      :instance_metadata_service_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15625,7 +16370,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] labeling_job_arn
-    #   The Amazon Resource Name (ARN) of the Amazon SageMaker Ground Truth
+    #   The Amazon Resource Name (ARN) of the SageMaker Ground Truth
     #   labeling job that created the transform or training job.
     #   @return [String]
     #
@@ -15641,7 +16386,7 @@ module Aws::SageMaker
     # @!attribute [rw] training_job_status
     #   The status of the training job.
     #
-    #   Amazon SageMaker provides the following training job statuses:
+    #   SageMaker provides the following training job statuses:
     #
     #   * `InProgress` - The training is in progress.
     #
@@ -15663,8 +16408,8 @@ module Aws::SageMaker
     #   For detailed information on the secondary status of the training
     #   job, see `StatusMessage` under SecondaryStatusTransition.
     #
-    #   Amazon SageMaker provides primary statuses and secondary statuses
-    #   that apply to each of them:
+    #   SageMaker provides primary statuses and secondary statuses that
+    #   apply to each of them:
     #
     #   InProgress
     #   : * `Starting` - Starting the training job.
@@ -15743,7 +16488,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] output_data_config
     #   The S3 path where model artifacts that you configured when creating
-    #   the job are stored. Amazon SageMaker creates subfolders for model
+    #   the job are stored. SageMaker creates subfolders for model
     #   artifacts.
     #   @return [Types::OutputDataConfig]
     #
@@ -15765,13 +16510,13 @@ module Aws::SageMaker
     # @!attribute [rw] stopping_condition
     #   Specifies a limit to how long a model training job can run. It also
     #   specifies how long a managed Spot training job has to complete. When
-    #   the job reaches the time limit, Amazon SageMaker ends the training
-    #   job. Use this API to cap model training costs.
+    #   the job reaches the time limit, SageMaker ends the training job. Use
+    #   this API to cap model training costs.
     #
-    #   To stop a job, Amazon SageMaker sends the algorithm the `SIGTERM`
-    #   signal, which delays job termination for 120 seconds. Algorithms can
-    #   use this 120-second window to save the model artifacts, so the
-    #   results of training are not lost.
+    #   To stop a job, SageMaker sends the algorithm the `SIGTERM` signal,
+    #   which delays job termination for 120 seconds. Algorithms can use
+    #   this 120-second window to save the model artifacts, so the results
+    #   of training are not lost.
     #   @return [Types::StoppingCondition]
     #
     # @!attribute [rw] creation_time
@@ -15792,8 +16537,7 @@ module Aws::SageMaker
     #   You are billed for the time interval between the value of
     #   `TrainingStartTime` and this time. For successful jobs and stopped
     #   jobs, this is the time after model artifacts are uploaded. For
-    #   failed jobs, this is the time when Amazon SageMaker detects a job
-    #   failure.
+    #   failed jobs, this is the time when SageMaker detects a job failure.
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_time
@@ -15816,10 +16560,9 @@ module Aws::SageMaker
     #   If you want to allow inbound or outbound network calls, except for
     #   calls between peers within a training cluster for distributed
     #   training, choose `True`. If you enable network isolation for
-    #   training jobs that are configured to use a VPC, Amazon SageMaker
-    #   downloads and uploads customer data and model artifacts through the
-    #   specified VPC, but the training container does not have network
-    #   access.
+    #   training jobs that are configured to use a VPC, SageMaker downloads
+    #   and uploads customer data and model artifacts through the specified
+    #   VPC, but the training container does not have network access.
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_inter_container_traffic_encryption
@@ -15851,7 +16594,7 @@ module Aws::SageMaker
     #
     #   Multiply `BillableTimeInSeconds` by the number of instances
     #   (`InstanceCount`) in your training cluster to get the total compute
-    #   time SageMaker will bill you if you run distributed training. The
+    #   time SageMaker bills you if you run distributed training. The
     #   formula is as follows: `BillableTimeInSeconds * InstanceCount` .
     #
     #   You can calculate the savings from using managed spot training using
@@ -16567,6 +17310,70 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Contains information summarizing device details and deployment status.
+    #
+    # @!attribute [rw] edge_deployment_plan_arn
+    #   The ARN of the edge deployment plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] edge_deployment_plan_name
+    #   The name of the edge deployment plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] stage_name
+    #   The name of the stage in the edge deployment plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployed_stage_name
+    #   The name of the deployed stage.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_fleet_name
+    #   The name of the fleet to which the device belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_name
+    #   The name of the device.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_arn
+    #   The ARN of the device.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_deployment_status
+    #   The deployment status of the device.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_deployment_status_message
+    #   The detailed error message for the deployoment status result.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the device.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_start_time
+    #   The time when the deployment on the device started.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeviceDeploymentSummary AWS API Documentation
+    #
+    class DeviceDeploymentSummary < Struct.new(
+      :edge_deployment_plan_arn,
+      :edge_deployment_plan_name,
+      :stage_name,
+      :deployed_stage_name,
+      :device_fleet_name,
+      :device_name,
+      :device_arn,
+      :device_deployment_status,
+      :device_deployment_status_message,
+      :description,
+      :deployment_start_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Summary of the device fleet.
     #
     # @!attribute [rw] device_fleet_arn
@@ -16592,6 +17399,45 @@ module Aws::SageMaker
       :device_fleet_name,
       :creation_time,
       :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the configurations of selected devices.
+    #
+    # @note When making an API call, you may pass DeviceSelectionConfig
+    #   data as a hash:
+    #
+    #       {
+    #         device_subset_type: "PERCENTAGE", # required, accepts PERCENTAGE, SELECTION, NAMECONTAINS
+    #         percentage: 1,
+    #         device_names: ["DeviceName"],
+    #         device_name_contains: "DeviceName",
+    #       }
+    #
+    # @!attribute [rw] device_subset_type
+    #   Type of device subsets to deploy to the current stage.
+    #   @return [String]
+    #
+    # @!attribute [rw] percentage
+    #   Percentage of devices in the fleet to deploy to the current stage.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] device_names
+    #   List of devices chosen to deploy.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] device_name_contains
+    #   A filter to select devices with names containing this name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeviceSelectionConfig AWS API Documentation
+    #
+    class DeviceSelectionConfig < Struct.new(
+      :device_subset_type,
+      :percentage,
+      :device_names,
+      :device_name_contains)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16781,7 +17627,7 @@ module Aws::SageMaker
     #           default_resource_spec: {
     #             sage_maker_image_arn: "ImageArn",
     #             sage_maker_image_version_arn: "ImageVersionArn",
-    #             instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #             instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
     #             lifecycle_config_arn: "StudioLifecycleConfigArn",
     #           },
     #         },
@@ -16818,7 +17664,7 @@ module Aws::SageMaker
     #           default_resource_spec: {
     #             sage_maker_image_arn: "ImageArn",
     #             sage_maker_image_version_arn: "ImageVersionArn",
-    #             instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #             instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
     #             lifecycle_config_arn: "StudioLifecycleConfigArn",
     #           },
     #         },
@@ -16959,9 +17805,11 @@ module Aws::SageMaker
     #   @return [Types::FileSource]
     #
     # @!attribute [rw] pre_training_constraints
+    #   The pre-training constraints.
     #   @return [Types::MetricsSource]
     #
     # @!attribute [rw] post_training_constraints
+    #   The post-training constraints.
     #   @return [Types::MetricsSource]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DriftCheckBias AWS API Documentation
@@ -16994,6 +17842,7 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] constraints
+    #   The drift check explainability constraints.
     #   @return [Types::MetricsSource]
     #
     # @!attribute [rw] config_file
@@ -17029,9 +17878,11 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] statistics
+    #   The drift check model data quality statistics.
     #   @return [Types::MetricsSource]
     #
     # @!attribute [rw] constraints
+    #   The drift check model data quality constraints.
     #   @return [Types::MetricsSource]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DriftCheckModelDataQuality AWS API Documentation
@@ -17063,9 +17914,11 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] statistics
+    #   The drift check model quality statistics.
     #   @return [Types::MetricsSource]
     #
     # @!attribute [rw] constraints
+    #   The drift check model quality constraints.
     #   @return [Types::MetricsSource]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DriftCheckModelQuality AWS API Documentation
@@ -17131,6 +17984,149 @@ module Aws::SageMaker
       :source_arn,
       :destination_arn,
       :association_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the configuration of a deployment.
+    #
+    # @note When making an API call, you may pass EdgeDeploymentConfig
+    #   data as a hash:
+    #
+    #       {
+    #         failure_handling_policy: "ROLLBACK_ON_FAILURE", # required, accepts ROLLBACK_ON_FAILURE, DO_NOTHING
+    #       }
+    #
+    # @!attribute [rw] failure_handling_policy
+    #   Toggle that determines whether to rollback to previous configuration
+    #   if the current deployment fails. By default this is turned on. You
+    #   may turn this off if you want to investigate the errors yourself.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EdgeDeploymentConfig AWS API Documentation
+    #
+    class EdgeDeploymentConfig < Struct.new(
+      :failure_handling_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the configuration of a model in a
+    # deployment.
+    #
+    # @note When making an API call, you may pass EdgeDeploymentModelConfig
+    #   data as a hash:
+    #
+    #       {
+    #         model_handle: "EntityName", # required
+    #         edge_packaging_job_name: "EntityName", # required
+    #       }
+    #
+    # @!attribute [rw] model_handle
+    #   The name the device application uses to reference this model.
+    #   @return [String]
+    #
+    # @!attribute [rw] edge_packaging_job_name
+    #   The edge packaging job associated with this deployment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EdgeDeploymentModelConfig AWS API Documentation
+    #
+    class EdgeDeploymentModelConfig < Struct.new(
+      :model_handle,
+      :edge_packaging_job_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information summarizing an edge deployment plan.
+    #
+    # @!attribute [rw] edge_deployment_plan_arn
+    #   The ARN of the edge deployment plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] edge_deployment_plan_name
+    #   The name of the edge deployment plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_fleet_name
+    #   The name of the device fleet used for the deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] edge_deployment_success
+    #   The number of edge devices with the successful deployment.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] edge_deployment_pending
+    #   The number of edge devices yet to pick up the deployment, or in
+    #   progress.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] edge_deployment_failed
+    #   The number of edge devices that failed the deployment.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] creation_time
+    #   The time when the edge deployment plan was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The time when the edge deployment plan was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EdgeDeploymentPlanSummary AWS API Documentation
+    #
+    class EdgeDeploymentPlanSummary < Struct.new(
+      :edge_deployment_plan_arn,
+      :edge_deployment_plan_name,
+      :device_fleet_name,
+      :edge_deployment_success,
+      :edge_deployment_pending,
+      :edge_deployment_failed,
+      :creation_time,
+      :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information summarizing the deployment stage results.
+    #
+    # @!attribute [rw] stage_status
+    #   The general status of the current stage.
+    #   @return [String]
+    #
+    # @!attribute [rw] edge_deployment_success_in_stage
+    #   The number of edge devices with the successful deployment in the
+    #   current stage.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] edge_deployment_pending_in_stage
+    #   The number of edge devices yet to pick up the deployment in current
+    #   stage, or in progress.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] edge_deployment_failed_in_stage
+    #   The number of edge devices that failed the deployment in current
+    #   stage.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] edge_deployment_status_message
+    #   A detailed message about deployment status in current stage.
+    #   @return [String]
+    #
+    # @!attribute [rw] edge_deployment_stage_start_time
+    #   The time when the deployment API started.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EdgeDeploymentStatus AWS API Documentation
+    #
+    class EdgeDeploymentStatus < Struct.new(
+      :stage_status,
+      :edge_deployment_success_in_stage,
+      :edge_deployment_pending_in_stage,
+      :edge_deployment_failed_in_stage,
+      :edge_deployment_status_message,
+      :edge_deployment_stage_start_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17416,6 +18412,8 @@ module Aws::SageMaker
     #   @return [Array<Types::ProductionVariantSummary>]
     #
     # @!attribute [rw] data_capture_config
+    #   The currently active data capture configuration used by your
+    #   Endpoint.
     #   @return [Types::DataCaptureConfigSummary]
     #
     # @!attribute [rw] endpoint_status
@@ -17597,7 +18595,7 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge
+    #         instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge, ml.c6i.large, ml.c6i.xlarge, ml.c6i.2xlarge, ml.c6i.4xlarge, ml.c6i.8xlarge, ml.c6i.12xlarge, ml.c6i.16xlarge, ml.c6i.24xlarge, ml.c6i.32xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.12xlarge, ml.g5.16xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.p4d.24xlarge
     #         inference_specification_name: "InferenceSpecificationName",
     #         environment_parameter_ranges: {
     #           categorical_parameter_ranges: [
@@ -18068,6 +19066,10 @@ module Aws::SageMaker
     #   The time a `FeatureGroup` was created.
     #   @return [Time]
     #
+    # @!attribute [rw] last_modified_time
+    #   A timestamp indicating the last time you updated the feature group.
+    #   @return [Time]
+    #
     # @!attribute [rw] online_store_config
     #   Use this to specify the Amazon Web Services Key Management Service
     #   (KMS) Key ID, or `KMSKeyId`, for at rest data encryption. You can
@@ -18099,6 +19101,11 @@ module Aws::SageMaker
     #   The status of `OfflineStore`.
     #   @return [Types::OfflineStoreStatus]
     #
+    # @!attribute [rw] last_update_status
+    #   A value that indicates whether the feature group was updated
+    #   successfully.
+    #   @return [Types::LastUpdateStatus]
+    #
     # @!attribute [rw] failure_reason
     #   The reason that the `FeatureGroup` failed to be replicated in the
     #   `OfflineStore`. This is failure may be due to a failure to create a
@@ -18123,11 +19130,13 @@ module Aws::SageMaker
       :event_time_feature_name,
       :feature_definitions,
       :creation_time,
+      :last_modified_time,
       :online_store_config,
       :offline_store_config,
       :role_arn,
       :feature_group_status,
       :offline_store_status,
+      :last_update_status,
       :failure_reason,
       :description,
       :tags)
@@ -18171,6 +19180,85 @@ module Aws::SageMaker
       :creation_time,
       :feature_group_status,
       :offline_store_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The metadata for a feature. It can either be metadata that you
+    # specify, or metadata that is updated automatically.
+    #
+    # @!attribute [rw] feature_group_arn
+    #   The Amazon Resource Number (ARN) of the feature group.
+    #   @return [String]
+    #
+    # @!attribute [rw] feature_group_name
+    #   The name of the feature group containing the feature.
+    #   @return [String]
+    #
+    # @!attribute [rw] feature_name
+    #   The name of feature.
+    #   @return [String]
+    #
+    # @!attribute [rw] feature_type
+    #   The data type of the feature.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   A timestamp indicating when the feature was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   A timestamp indicating when the feature was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   An optional description that you specify to better describe the
+    #   feature.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   Optional key-value pairs that you specify to better describe the
+    #   feature.
+    #   @return [Array<Types::FeatureParameter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/FeatureMetadata AWS API Documentation
+    #
+    class FeatureMetadata < Struct.new(
+      :feature_group_arn,
+      :feature_group_name,
+      :feature_name,
+      :feature_type,
+      :creation_time,
+      :last_modified_time,
+      :description,
+      :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A key-value pair that you specify to describe the feature.
+    #
+    # @note When making an API call, you may pass FeatureParameter
+    #   data as a hash:
+    #
+    #       {
+    #         key: "FeatureParameterKey",
+    #         value: "FeatureParameterValue",
+    #       }
+    #
+    # @!attribute [rw] key
+    #   A key that must contain a value to describe the feature.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value that belongs to a key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/FeatureParameter AWS API Documentation
+    #
+    class FeatureParameter < Struct.new(
+      :key,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18733,7 +19821,7 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup, Project
+    #         resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup, Project, FeatureMetadata
     #         suggestion_query: {
     #           property_name_query: {
     #             property_name_hint: "PropertyNameHint", # required
@@ -20059,10 +21147,10 @@ module Aws::SageMaker
     #   The registry path of the Docker image that contains the training
     #   algorithm. For information about Docker registry paths for built-in
     #   algorithms, see [Algorithms Provided by Amazon SageMaker: Common
-    #   Parameters][1]. Amazon SageMaker supports both
-    #   `registry/repository[:tag]` and `registry/repository[@digest]` image
-    #   path formats. For more information, see [Using Your Own Algorithms
-    #   with Amazon SageMaker][2].
+    #   Parameters][1]. SageMaker supports both `registry/repository[:tag]`
+    #   and `registry/repository[@digest]` image path formats. For more
+    #   information, see [Using Your Own Algorithms with Amazon
+    #   SageMaker][2].
     #
     #
     #
@@ -20269,6 +21357,7 @@ module Aws::SageMaker
     #                 s3_uri: "S3Uri", # required
     #                 s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
     #                 attribute_names: ["AttributeName"],
+    #                 instance_group_names: ["InstanceGroupName"],
     #               },
     #               file_system_data_source: {
     #                 file_system_id: "FileSystemId", # required
@@ -20295,10 +21384,17 @@ module Aws::SageMaker
     #           s3_output_path: "S3Uri", # required
     #         },
     #         resource_config: { # required
-    #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #           instance_count: 1, # required
+    #           instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #           instance_count: 1,
     #           volume_size_in_gb: 1, # required
     #           volume_kms_key_id: "KmsKeyId",
+    #           instance_groups: [
+    #             {
+    #               instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #               instance_count: 1, # required
+    #               instance_group_name: "InstanceGroupName", # required
+    #             },
+    #           ],
     #         },
     #         stopping_condition: { # required
     #           max_runtime_in_seconds: 1,
@@ -20336,9 +21432,11 @@ module Aws::SageMaker
     #   result in the training job with the best performance as measured by
     #   the objective metric of the hyperparameter tuning job.
     #
-    #   <note markdown="1"> You can specify a maximum of 20 hyperparameters that a
-    #   hyperparameter tuning job can search over. Every possible value of a
-    #   categorical parameter range counts against this limit.
+    #   <note markdown="1"> The maximum number of items specified for `Array Members` refers to
+    #   the maximum number of hyperparameters for each range and also the
+    #   maximum for the hyperparameter tuning job itself. That is, the sum
+    #   of the number of hyperparameters for all the ranges can't exceed
+    #   the maximum number specified.
     #
     #    </note>
     #   @return [Types::ParameterRanges]
@@ -20387,27 +21485,26 @@ module Aws::SageMaker
     #
     #   Storage volumes store model artifacts and incremental states.
     #   Training algorithms might also use storage volumes for scratch
-    #   space. If you want Amazon SageMaker to use the storage volume to
-    #   store the training data, choose `File` as the `TrainingInputMode` in
-    #   the algorithm specification. For distributed training algorithms,
+    #   space. If you want SageMaker to use the storage volume to store the
+    #   training data, choose `File` as the `TrainingInputMode` in the
+    #   algorithm specification. For distributed training algorithms,
     #   specify an instance count greater than 1.
     #   @return [Types::ResourceConfig]
     #
     # @!attribute [rw] stopping_condition
     #   Specifies a limit to how long a model hyperparameter training job
     #   can run. It also specifies how long a managed spot training job has
-    #   to complete. When the job reaches the time limit, Amazon SageMaker
-    #   ends the training job. Use this API to cap model training costs.
+    #   to complete. When the job reaches the time limit, SageMaker ends the
+    #   training job. Use this API to cap model training costs.
     #   @return [Types::StoppingCondition]
     #
     # @!attribute [rw] enable_network_isolation
     #   Isolates the training container. No inbound or outbound network
     #   calls can be made, except for calls between peers within a training
     #   cluster for distributed training. If network isolation is used for
-    #   training jobs that are configured to use a VPC, Amazon SageMaker
-    #   downloads and uploads customer data and model artifacts through the
-    #   specified VPC, but the training container does not have network
-    #   access.
+    #   training jobs that are configured to use a VPC, SageMaker downloads
+    #   and uploads customer data and model artifacts through the specified
+    #   VPC, but the training container does not have network access.
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_inter_container_traffic_encryption
@@ -20457,7 +21554,7 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Specifies summary information about a training job.
+    # The container for the summary information about a training job.
     #
     # @!attribute [rw] training_job_definition_name
     #   The training job definition name.
@@ -20488,8 +21585,7 @@ module Aws::SageMaker
     #   You are billed for the time interval between the value of
     #   `TrainingStartTime` and this time. For successful jobs and stopped
     #   jobs, this is the time after model artifacts are uploaded. For
-    #   failed jobs, this is the time when Amazon SageMaker detects a job
-    #   failure.
+    #   failed jobs, this is the time when SageMaker detects a job failure.
     #   @return [Time]
     #
     # @!attribute [rw] training_job_status
@@ -20638,9 +21734,9 @@ module Aws::SageMaker
     #
     #   AUTO
     #
-    #   : Amazon SageMaker stops training jobs launched by the
-    #     hyperparameter tuning job when they are unlikely to perform better
-    #     than previously completed training jobs. For more information, see
+    #   : SageMaker stops training jobs launched by the hyperparameter
+    #     tuning job when they are unlikely to perform better than
+    #     previously completed training jobs. For more information, see
     #     [Stop Training Jobs Early][1].
     #
     #
@@ -21122,7 +22218,7 @@ module Aws::SageMaker
     #           },
     #         ],
     #         supported_transform_instance_types: ["ml.m4.xlarge"], # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
-    #         supported_realtime_inference_instance_types: ["ml.t2.medium"], # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge
+    #         supported_realtime_inference_instance_types: ["ml.t2.medium"], # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge, ml.c6i.large, ml.c6i.xlarge, ml.c6i.2xlarge, ml.c6i.4xlarge, ml.c6i.8xlarge, ml.c6i.12xlarge, ml.c6i.16xlarge, ml.c6i.24xlarge, ml.c6i.32xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.12xlarge, ml.g5.16xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.p4d.24xlarge
     #         supported_content_types: ["ContentType"], # required
     #         supported_response_mime_types: ["ResponseMIMEType"], # required
     #       }
@@ -21408,6 +22504,70 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Defines an instance group for heterogeneous cluster training. When
+    # requesting a training job using the [CreateTrainingJob][1] API, you
+    # can configure multiple instance groups .
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html
+    #
+    # @note When making an API call, you may pass InstanceGroup
+    #   data as a hash:
+    #
+    #       {
+    #         instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #         instance_count: 1, # required
+    #         instance_group_name: "InstanceGroupName", # required
+    #       }
+    #
+    # @!attribute [rw] instance_type
+    #   Specifies the instance type of the instance group.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_count
+    #   Specifies the number of instances of the instance group.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] instance_group_name
+    #   Specifies the name of the instance group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InstanceGroup AWS API Documentation
+    #
+    class InstanceGroup < Struct.new(
+      :instance_type,
+      :instance_count,
+      :instance_group_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information on the IMDS configuration of the notebook instance
+    #
+    # @note When making an API call, you may pass InstanceMetadataServiceConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         minimum_instance_metadata_service_version: "MinimumInstanceMetadataServiceVersion", # required
+    #       }
+    #
+    # @!attribute [rw] minimum_instance_metadata_service_version
+    #   Indicates the minimum IMDS version that the notebook instance
+    #   supports. When passed as part of `CreateNotebookInstance`, if no
+    #   value is selected, then it defaults to IMDSv1. This means that both
+    #   IMDSv1 and IMDSv2 are supported. If passed as part of
+    #   `UpdateNotebookInstance`, there is no default.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InstanceMetadataServiceConfiguration AWS API Documentation
+    #
+    class InstanceMetadataServiceConfiguration < Struct.new(
+      :minimum_instance_metadata_service_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # For a hyperparameter of the integer type, specifies the range that a
     # hyperparameter tuning job searches.
     #
@@ -21441,8 +22601,8 @@ module Aws::SageMaker
     #
     #   Auto
     #
-    #   : Amazon SageMaker hyperparameter tuning chooses the best scale for
-    #     the hyperparameter.
+    #   : SageMaker hyperparameter tuning chooses the best scale for the
+    #     hyperparameter.
     #
     #   Linear
     #
@@ -21509,7 +22669,7 @@ module Aws::SageMaker
     #         default_resource_spec: {
     #           sage_maker_image_arn: "ImageArn",
     #           sage_maker_image_version_arn: "ImageVersionArn",
-    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
     #           lifecycle_config_arn: "StudioLifecycleConfigArn",
     #         },
     #         lifecycle_config_arns: ["StudioLifecycleConfigArn"],
@@ -21517,12 +22677,20 @@ module Aws::SageMaker
     #
     # @!attribute [rw] default_resource_spec
     #   The default instance type and the Amazon Resource Name (ARN) of the
-    #   default SageMaker image used by the JupyterServer app.
+    #   default SageMaker image used by the JupyterServer app. If you use
+    #   the `LifecycleConfigArns` parameter, then this parameter is also
+    #   required.
     #   @return [Types::ResourceSpec]
     #
     # @!attribute [rw] lifecycle_config_arns
     #   The Amazon Resource Name (ARN) of the Lifecycle Configurations
-    #   attached to the JupyterServerApp.
+    #   attached to the JupyterServerApp. If you use this parameter, the
+    #   `DefaultResourceSpec` parameter is also required.
+    #
+    #   <note markdown="1"> To remove a Lifecycle Config, you must set `LifecycleConfigArns` to
+    #   an empty list.
+    #
+    #    </note>
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/JupyterServerAppSettings AWS API Documentation
@@ -21543,7 +22711,7 @@ module Aws::SageMaker
     #         default_resource_spec: {
     #           sage_maker_image_arn: "ImageArn",
     #           sage_maker_image_version_arn: "ImageVersionArn",
-    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
     #           lifecycle_config_arn: "StudioLifecycleConfigArn",
     #         },
     #         custom_images: [
@@ -21559,6 +22727,14 @@ module Aws::SageMaker
     # @!attribute [rw] default_resource_spec
     #   The default instance type and the Amazon Resource Name (ARN) of the
     #   default SageMaker image used by the KernelGateway app.
+    #
+    #   <note markdown="1"> The Amazon SageMaker Studio UI does not use the default instance
+    #   type value set here. The default instance type set here is used when
+    #   Apps are created using the Amazon Web Services Command Line
+    #   Interface or Amazon Web Services CloudFormation and the instance
+    #   type parameter value is not passed.
+    #
+    #    </note>
     #   @return [Types::ResourceSpec]
     #
     # @!attribute [rw] custom_images
@@ -21569,6 +22745,11 @@ module Aws::SageMaker
     # @!attribute [rw] lifecycle_config_arns
     #   The Amazon Resource Name (ARN) of the Lifecycle Configurations
     #   attached to the the user profile or domain.
+    #
+    #   <note markdown="1"> To remove a Lifecycle Config, you must set `LifecycleConfigArns` to
+    #   an empty list.
+    #
+    #    </note>
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/KernelGatewayAppSettings AWS API Documentation
@@ -21719,6 +22900,10 @@ module Aws::SageMaker
     #         initial_active_learning_model_arn: "ModelArn",
     #         labeling_job_resource_config: {
     #           volume_kms_key_id: "KmsKeyId",
+    #           vpc_config: {
+    #             security_group_ids: ["SecurityGroupId"], # required
+    #             subnets: ["SubnetId"], # required
+    #           },
     #         },
     #       }
     #
@@ -21776,8 +22961,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] content_classifiers
     #   Declares that your content is free of personally identifiable
-    #   information or adult content. Amazon SageMaker may restrict the
-    #   Amazon Mechanical Turk workers that can view your task based on this
+    #   information or adult content. SageMaker may restrict the Amazon
+    #   Mechanical Turk workers that can view your task based on this
     #   information.
     #   @return [Array<String>]
     #
@@ -21921,8 +23106,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] final_active_learning_model_arn
-    #   The Amazon Resource Name (ARN) for the most recent Amazon SageMaker
-    #   model trained as part of automated data labeling.
+    #   The Amazon Resource Name (ARN) for the most recent SageMaker model
+    #   trained as part of automated data labeling.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobOutput AWS API Documentation
@@ -22010,6 +23195,10 @@ module Aws::SageMaker
     #
     #       {
     #         volume_kms_key_id: "KmsKeyId",
+    #         vpc_config: {
+    #           security_group_ids: ["SecurityGroupId"], # required
+    #           subnets: ["SubnetId"], # required
+    #         },
     #       }
     #
     # @!attribute [rw] volume_kms_key_id
@@ -22041,10 +23230,24 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-security.html
     #   @return [String]
     #
+    # @!attribute [rw] vpc_config
+    #   Specifies a VPC that your training jobs and hosted models have
+    #   access to. Control access to and from your training and model
+    #   containers by configuring the VPC. For more information, see
+    #   [Protect Endpoints by Using an Amazon Virtual Private Cloud][1] and
+    #   [Protect Training Jobs by Using an Amazon Virtual Private Cloud][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html
+    #   @return [Types::VpcConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobResourceConfig AWS API Documentation
     #
     class LabelingJobResourceConfig < Struct.new(
-      :volume_kms_key_id)
+      :volume_kms_key_id,
+      :vpc_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22246,6 +23449,26 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # A value that indicates whether the update was successful.
+    #
+    # @!attribute [rw] status
+    #   A value that indicates whether the update was made successful.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   If the update wasn't successful, indicates the reason why it
+    #   failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LastUpdateStatus AWS API Documentation
+    #
+    class LastUpdateStatus < Struct.new(
+      :status,
+      :failure_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Lists a summary of the properties of a lineage group. A lineage group
     # provides a group of shareable lineage entity resources.
     #
@@ -22432,8 +23655,8 @@ module Aws::SageMaker
     #   @return [Array<Types::AlgorithmSummary>]
     #
     # @!attribute [rw] next_token
-    #   If the response is truncated, Amazon SageMaker returns this token.
-    #   To retrieve the next set of algorithms, use it in the subsequent
+    #   If the response is truncated, SageMaker returns this token. To
+    #   retrieve the next set of algorithms, use it in the subsequent
     #   request.
     #   @return [String]
     #
@@ -23544,6 +24767,101 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListEdgeDeploymentPlansRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         creation_time_after: Time.now,
+    #         creation_time_before: Time.now,
+    #         last_modified_time_after: Time.now,
+    #         last_modified_time_before: Time.now,
+    #         name_contains: "NameContains",
+    #         device_fleet_name_contains: "NameContains",
+    #         sort_by: "NAME", # accepts NAME, DEVICE_FLEET_NAME, CREATION_TIME, LAST_MODIFIED_TIME
+    #         sort_order: "Ascending", # accepts Ascending, Descending
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   The response from the last list when returning a list large enough
+    #   to need tokening.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to select (50 by default).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] creation_time_after
+    #   Selects edge deployment plans created after this time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time_before
+    #   Selects edge deployment plans created before this time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time_after
+    #   Selects edge deployment plans that were last updated after this
+    #   time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time_before
+    #   Selects edge deployment plans that were last updated before this
+    #   time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] name_contains
+    #   Selects edge deployment plans with names containing this name.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_fleet_name_contains
+    #   Selects edge deployment plans with a device fleet name containing
+    #   this name.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   The column by which to sort the edge deployment plans. Can be one of
+    #   `NAME`, `DEVICEFLEETNAME`, `CREATIONTIME`, `LASTMODIFIEDTIME`.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The direction of the sorting (ascending or descending).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListEdgeDeploymentPlansRequest AWS API Documentation
+    #
+    class ListEdgeDeploymentPlansRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :creation_time_after,
+      :creation_time_before,
+      :last_modified_time_after,
+      :last_modified_time_before,
+      :name_contains,
+      :device_fleet_name_contains,
+      :sort_by,
+      :sort_order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] edge_deployment_plan_summaries
+    #   List of summaries of edge deployment plans.
+    #   @return [Array<Types::EdgeDeploymentPlanSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use when calling the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListEdgeDeploymentPlansResponse AWS API Documentation
+    #
+    class ListEdgeDeploymentPlansResponse < Struct.new(
+      :edge_deployment_plan_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListEdgePackagingJobsRequest
     #   data as a hash:
     #
@@ -23707,8 +25025,8 @@ module Aws::SageMaker
     #   @return [Array<Types::EndpointConfigSummary>]
     #
     # @!attribute [rw] next_token
-    #   If the response is truncated, Amazon SageMaker returns this token.
-    #   To retrieve the next set of endpoint configurations, use it in the
+    #   If the response is truncated, SageMaker returns this token. To
+    #   retrieve the next set of endpoint configurations, use it in the
     #   subsequent request
     #   @return [String]
     #
@@ -23807,8 +25125,8 @@ module Aws::SageMaker
     #   @return [Array<Types::EndpointSummary>]
     #
     # @!attribute [rw] next_token
-    #   If the response is truncated, Amazon SageMaker returns this token.
-    #   To retrieve the next set of training jobs, use it in the subsequent
+    #   If the response is truncated, SageMaker returns this token. To
+    #   retrieve the next set of training jobs, use it in the subsequent
     #   request.
     #   @return [String]
     #
@@ -24573,8 +25891,8 @@ module Aws::SageMaker
     #   @return [Array<Types::LabelingJobForWorkteamSummary>]
     #
     # @!attribute [rw] next_token
-    #   If the response is truncated, Amazon SageMaker returns this token.
-    #   To retrieve the next set of labeling jobs, use it in the subsequent
+    #   If the response is truncated, SageMaker returns this token. To
+    #   retrieve the next set of labeling jobs, use it in the subsequent
     #   request.
     #   @return [String]
     #
@@ -24674,8 +25992,8 @@ module Aws::SageMaker
     #   @return [Array<Types::LabelingJobSummary>]
     #
     # @!attribute [rw] next_token
-    #   If the response is truncated, Amazon SageMaker returns this token.
-    #   To retrieve the next set of labeling jobs, use it in the subsequent
+    #   If the response is truncated, SageMaker returns this token. To
+    #   retrieve the next set of labeling jobs, use it in the subsequent
     #   request.
     #   @return [String]
     #
@@ -25172,8 +26490,8 @@ module Aws::SageMaker
     #   @return [Array<Types::ModelPackageSummary>]
     #
     # @!attribute [rw] next_token
-    #   If the response is truncated, Amazon SageMaker returns this token.
-    #   To retrieve the next set of model packages, use it in the subsequent
+    #   If the response is truncated, SageMaker returns this token. To
+    #   retrieve the next set of model packages, use it in the subsequent
     #   request.
     #   @return [String]
     #
@@ -25340,9 +26658,8 @@ module Aws::SageMaker
     #   @return [Array<Types::ModelSummary>]
     #
     # @!attribute [rw] next_token
-    #   If the response is truncated, Amazon SageMaker returns this token.
-    #   To retrieve the next set of models, use it in the subsequent
-    #   request.
+    #   If the response is truncated, SageMaker returns this token. To
+    #   retrieve the next set of models, use it in the subsequent request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListModelsOutput AWS API Documentation
@@ -25681,8 +26998,8 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] next_token
-    #   If the response is truncated, Amazon SageMaker returns this token.
-    #   To get the next set of lifecycle configurations, use it in the next
+    #   If the response is truncated, SageMaker returns this token. To get
+    #   the next set of lifecycle configurations, use it in the next
     #   request.
     #   @return [String]
     #
@@ -25815,8 +27132,8 @@ module Aws::SageMaker
 
     # @!attribute [rw] next_token
     #   If the response to the previous `ListNotebookInstances` request was
-    #   truncated, Amazon SageMaker returns this token. To retrieve the next
-    #   set of notebook instances, use the token in the next request.
+    #   truncated, SageMaker returns this token. To retrieve the next set of
+    #   notebook instances, use the token in the next request.
     #   @return [String]
     #
     # @!attribute [rw] notebook_instances
@@ -26293,6 +27610,67 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListStageDevicesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         edge_deployment_plan_name: "EntityName", # required
+    #         exclude_devices_deployed_in_other_stage: false,
+    #         stage_name: "EntityName", # required
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   The response from the last list when returning a list large enough
+    #   to neeed tokening.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of requests to select.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] edge_deployment_plan_name
+    #   The name of the edge deployment plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] exclude_devices_deployed_in_other_stage
+    #   Toggle for excluding devices deployed in other stages.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] stage_name
+    #   The name of the stage in the deployment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListStageDevicesRequest AWS API Documentation
+    #
+    class ListStageDevicesRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :edge_deployment_plan_name,
+      :exclude_devices_deployed_in_other_stage,
+      :stage_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] device_deployment_summaries
+    #   List of summaries of devices allocated to the stage.
+    #   @return [Array<Types::DeviceDeploymentSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use when calling the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListStageDevicesResponse AWS API Documentation
+    #
+    class ListStageDevicesResponse < Struct.new(
+      :device_deployment_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListStudioLifecycleConfigsRequest
     #   data as a hash:
     #
@@ -26464,8 +27842,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] next_token
     #   If the response to the previous `ListTags` request is truncated,
-    #   Amazon SageMaker returns this token. To retrieve the next set of
-    #   tags, use it in the subsequent request.
+    #   SageMaker returns this token. To retrieve the next set of tags, use
+    #   it in the subsequent request.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -26487,7 +27865,7 @@ module Aws::SageMaker
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] next_token
-    #   If response is truncated, Amazon SageMaker includes a token in the
+    #   If response is truncated, SageMaker includes a token in the
     #   response. You can use this token in your subsequent request to fetch
     #   next set of tokens.
     #   @return [String]
@@ -26666,8 +28044,8 @@ module Aws::SageMaker
     #   @return [Array<Types::TrainingJobSummary>]
     #
     # @!attribute [rw] next_token
-    #   If the response is truncated, Amazon SageMaker returns this token.
-    #   To retrieve the next set of training jobs, use it in the subsequent
+    #   If the response is truncated, SageMaker returns this token. To
+    #   retrieve the next set of training jobs, use it in the subsequent
     #   request.
     #   @return [String]
     #
@@ -27273,20 +28651,34 @@ module Aws::SageMaker
     #   The dataset split from which the AutoML job produced the metric.
     #   @return [String]
     #
+    # @!attribute [rw] standard_metric_name
+    #   The name of the standard metric.
+    #
+    #   <note markdown="1"> For definitions of the standard metrics, see [ `Autopilot candidate
+    #   metrics` ][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-metrics
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MetricDatum AWS API Documentation
     #
     class MetricDatum < Struct.new(
       :metric_name,
       :value,
-      :set)
+      :set,
+      :standard_metric_name)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Specifies a metric that the training algorithm writes to `stderr` or
-    # `stdout`. Amazon SageMakerhyperparameter tuning captures all defined
-    # metrics. You specify one metric that a hyperparameter tuning job uses
-    # as its objective metric to choose the best training job.
+    # `stdout`. SageMakerhyperparameter tuning captures all defined metrics.
+    # You specify one metric that a hyperparameter tuning job uses as its
+    # objective metric to choose the best training job.
     #
     # @note When making an API call, you may pass MetricDefinition
     #   data as a hash:
@@ -27320,6 +28712,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Details about the metrics source.
+    #
     # @note When making an API call, you may pass MetricsSource
     #   data as a hash:
     #
@@ -27330,12 +28724,15 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] content_type
+    #   The metric source content type.
     #   @return [String]
     #
     # @!attribute [rw] content_digest
+    #   The hash key used for the metrics source.
     #   @return [String]
     #
     # @!attribute [rw] s3_uri
+    #   The S3 URI for the metrics source.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MetricsSource AWS API Documentation
@@ -27392,7 +28789,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/json-bias-parameter-config.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-config-json-monitor-bias-parameters.html
     #   @return [String]
     #
     # @!attribute [rw] environment
@@ -27490,11 +28887,13 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] invocations_timeout_in_seconds
-    #   The timeout value in seconds for an invocation request.
+    #   The timeout value in seconds for an invocation request. The default
+    #   value is 600.
     #   @return [Integer]
     #
     # @!attribute [rw] invocations_max_retries
     #   The maximum number of retries when invocation requests are failing.
+    #   The default value is 3.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelClientConfig AWS API Documentation
@@ -27663,7 +29062,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/json-model-explainability-parameter-config.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-config-json-monitor-model-explainability-parameters.html
     #   @return [String]
     #
     # @!attribute [rw] environment
@@ -27998,8 +29397,8 @@ module Aws::SageMaker
     #   @return [Types::SourceAlgorithmSpecification]
     #
     # @!attribute [rw] validation_specification
-    #   Specifies batch transform jobs that Amazon SageMaker runs to
-    #   validate your model package.
+    #   Specifies batch transform jobs that SageMaker runs to validate your
+    #   model package.
     #   @return [Types::ModelPackageValidationSpecification]
     #
     # @!attribute [rw] model_package_status
@@ -28178,11 +29577,11 @@ module Aws::SageMaker
     #   code is stored.
     #
     #   If you are using your own custom algorithm instead of an algorithm
-    #   provided by Amazon SageMaker, the inference code must meet Amazon
-    #   SageMaker requirements. Amazon SageMaker supports both
-    #   `registry/repository[:tag]` and `registry/repository[@digest]` image
-    #   path formats. For more information, see [Using Your Own Algorithms
-    #   with Amazon SageMaker][1].
+    #   provided by SageMaker, the inference code must meet SageMaker
+    #   requirements. SageMaker supports both `registry/repository[:tag]`
+    #   and `registry/repository[@digest]` image path formats. For more
+    #   information, see [Using Your Own Algorithms with Amazon
+    #   SageMaker][1].
     #
     #
     #
@@ -28514,8 +29913,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Specifies batch transform jobs that Amazon SageMaker runs to validate
-    # your model package.
+    # Specifies batch transform jobs that SageMaker runs to validate your
+    # model package.
     #
     # @note When making an API call, you may pass ModelPackageValidationSpecification
     #   data as a hash:
@@ -28565,8 +29964,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] validation_profiles
     #   An array of `ModelPackageValidationProfile` objects, each of which
-    #   specifies a batch transform job that Amazon SageMaker runs to
-    #   validate your model package.
+    #   specifies a batch transform job that SageMaker runs to validate your
+    #   model package.
     #   @return [Array<Types::ModelPackageValidationProfile>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelPackageValidationSpecification AWS API Documentation
@@ -29939,8 +31338,7 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Provides summary information for an Amazon SageMaker notebook
-    # instance.
+    # Provides summary information for an SageMaker notebook instance.
     #
     # @!attribute [rw] notebook_instance_name
     #   The name of the notebook instance that you want a summary for.
@@ -29955,7 +31353,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] url
-    #   The URL that you use to connect to the Jupyter instance running in
+    #   The URL that you use to connect to the Jupyter notebook running in
     #   your notebook instance.
     #   @return [String]
     #
@@ -29991,8 +31389,7 @@ module Aws::SageMaker
     #   repository in [Amazon Web Services CodeCommit][1] or in any other
     #   Git repository. When you open a notebook instance, it opens in the
     #   directory that contains this repository. For more information, see
-    #   [Associating Git Repositories with Amazon SageMaker Notebook
-    #   Instances][2].
+    #   [Associating Git Repositories with SageMaker Notebook Instances][2].
     #
     #
     #
@@ -30007,7 +31404,7 @@ module Aws::SageMaker
     #   in [Amazon Web Services CodeCommit][1] or in any other Git
     #   repository. These repositories are cloned at the same level as the
     #   default repository of your notebook instance. For more information,
-    #   see [Associating Git Repositories with Amazon SageMaker Notebook
+    #   see [Associating Git Repositories with SageMaker Notebook
     #   Instances][2].
     #
     #
@@ -30633,9 +32030,9 @@ module Aws::SageMaker
     #
     # @!attribute [rw] kms_key_id
     #   The Amazon Web Services Key Management Service (Amazon Web Services
-    #   KMS) key that Amazon SageMaker uses to encrypt the model artifacts
-    #   at rest using Amazon S3 server-side encryption. The `KmsKeyId` can
-    #   be any of the following formats:
+    #   KMS) key that SageMaker uses to encrypt the model artifacts at rest
+    #   using Amazon S3 server-side encryption. The `KmsKeyId` can be any of
+    #   the following formats:
     #
     #   * // KMS Key ID
     #
@@ -30653,14 +32050,13 @@ module Aws::SageMaker
     #
     #     `"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"`
     #
-    #   If you use a KMS key ID or an alias of your KMS key, the Amazon
-    #   SageMaker execution role must include permissions to call
-    #   `kms:Encrypt`. If you don't provide a KMS key ID, Amazon SageMaker
-    #   uses the default KMS key for Amazon S3 for your role's account.
-    #   Amazon SageMaker uses server-side encryption with KMS-managed keys
-    #   for `OutputDataConfig`. If you use a bucket policy with an
-    #   `s3:PutObject` permission that only allows objects with server-side
-    #   encryption, set the condition key of
+    #   If you use a KMS key ID or an alias of your KMS key, the SageMaker
+    #   execution role must include permissions to call `kms:Encrypt`. If
+    #   you don't provide a KMS key ID, SageMaker uses the default KMS key
+    #   for Amazon S3 for your role's account. SageMaker uses server-side
+    #   encryption with KMS-managed keys for `OutputDataConfig`. If you use
+    #   a bucket policy with an `s3:PutObject` permission that only allows
+    #   objects with server-side encryption, set the condition key of
     #   `s3:x-amz-server-side-encryption` to `"aws:kms"`. For more
     #   information, see [KMS-Managed Encryption Keys][1] in the *Amazon
     #   Simple Storage Service Developer Guide.*
@@ -30678,8 +32074,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] s3_output_path
-    #   Identifies the S3 path where you want Amazon SageMaker to store the
-    #   model artifacts. For example, `s3://bucket-name/key-name-prefix`.
+    #   Identifies the S3 path where you want SageMaker to store the model
+    #   artifacts. For example, `s3://bucket-name/key-name-prefix`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OutputDataConfig AWS API Documentation
@@ -30821,9 +32217,11 @@ module Aws::SageMaker
     # result in the training job with the best performance as measured by
     # the objective metric of the hyperparameter tuning job.
     #
-    # <note markdown="1"> You can specify a maximum of 20 hyperparameters that a hyperparameter
-    # tuning job can search over. Every possible value of a categorical
-    # parameter range counts against this limit.
+    # <note markdown="1"> The maximum number of items specified for `Array Members` refers to
+    # the maximum number of hyperparameters for each range and also the
+    # maximum for the hyperparameter tuning job itself. That is, the sum of
+    # the number of hyperparameters for all the ranges can't exceed the
+    # maximum number specified.
     #
     #  </note>
     #
@@ -31008,23 +32406,11 @@ module Aws::SageMaker
     #
     # @!attribute [rw] current_serverless_config
     #   The serverless configuration for the endpoint.
-    #
-    #   <note markdown="1"> Serverless Inference is in preview release for Amazon SageMaker and
-    #   is subject to change. We do not recommend using this feature in
-    #   production environments.
-    #
-    #    </note>
     #   @return [Types::ProductionVariantServerlessConfig]
     #
     # @!attribute [rw] desired_serverless_config
     #   The serverless configuration requested for this deployment, as
     #   specified in the endpoint configuration for the endpoint.
-    #
-    #   <note markdown="1"> Serverless Inference is in preview release for Amazon SageMaker and
-    #   is subject to change. We do not recommend using this feature in
-    #   production environments.
-    #
-    #    </note>
     #   @return [Types::ProductionVariantServerlessConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PendingProductionVariantSummary AWS API Documentation
@@ -32226,8 +33612,8 @@ module Aws::SageMaker
 
     # Identifies a model that you want to host and the resources chosen to
     # deploy for hosting it. If you are deploying multiple models, tell
-    # Amazon SageMaker how to distribute traffic among the models by
-    # specifying variant weights.
+    # SageMaker how to distribute traffic among the models by specifying
+    # variant weights.
     #
     # @note When making an API call, you may pass ProductionVariant
     #   data as a hash:
@@ -32236,7 +33622,7 @@ module Aws::SageMaker
     #         variant_name: "VariantName", # required
     #         model_name: "ModelName", # required
     #         initial_instance_count: 1,
-    #         instance_type: "ml.t2.medium", # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge
+    #         instance_type: "ml.t2.medium", # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge, ml.c6i.large, ml.c6i.xlarge, ml.c6i.2xlarge, ml.c6i.4xlarge, ml.c6i.8xlarge, ml.c6i.12xlarge, ml.c6i.16xlarge, ml.c6i.24xlarge, ml.c6i.32xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.12xlarge, ml.g5.16xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.p4d.24xlarge
     #         initial_variant_weight: 1.0,
     #         accelerator_type: "ml.eia1.medium", # accepts ml.eia1.medium, ml.eia1.large, ml.eia1.xlarge, ml.eia2.medium, ml.eia2.large, ml.eia2.xlarge
     #         core_dump_config: {
@@ -32294,12 +33680,6 @@ module Aws::SageMaker
     #   The serverless configuration for an endpoint. Specifies a serverless
     #   endpoint configuration instead of an instance-based endpoint
     #   configuration.
-    #
-    #   <note markdown="1"> Serverless Inference is in preview release for Amazon SageMaker and
-    #   is subject to change. We do not recommend using this feature in
-    #   production environments.
-    #
-    #    </note>
     #   @return [Types::ProductionVariantServerlessConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProductionVariant AWS API Documentation
@@ -32334,9 +33714,9 @@ module Aws::SageMaker
     #
     # @!attribute [rw] kms_key_id
     #   The Amazon Web Services Key Management Service (Amazon Web Services
-    #   KMS) key that Amazon SageMaker uses to encrypt the core dump data at
-    #   rest using Amazon S3 server-side encryption. The `KmsKeyId` can be
-    #   any of the following formats:
+    #   KMS) key that SageMaker uses to encrypt the core dump data at rest
+    #   using Amazon S3 server-side encryption. The `KmsKeyId` can be any of
+    #   the following formats:
     #
     #   * // KMS Key ID
     #
@@ -32354,14 +33734,13 @@ module Aws::SageMaker
     #
     #     `"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"`
     #
-    #   If you use a KMS key ID or an alias of your KMS key, the Amazon
-    #   SageMaker execution role must include permissions to call
-    #   `kms:Encrypt`. If you don't provide a KMS key ID, Amazon SageMaker
-    #   uses the default KMS key for Amazon S3 for your role's account.
-    #   Amazon SageMaker uses server-side encryption with KMS-managed keys
-    #   for `OutputDataConfig`. If you use a bucket policy with an
-    #   `s3:PutObject` permission that only allows objects with server-side
-    #   encryption, set the condition key of
+    #   If you use a KMS key ID or an alias of your KMS key, the SageMaker
+    #   execution role must include permissions to call `kms:Encrypt`. If
+    #   you don't provide a KMS key ID, SageMaker uses the default KMS key
+    #   for Amazon S3 for your role's account. SageMaker uses server-side
+    #   encryption with KMS-managed keys for `OutputDataConfig`. If you use
+    #   a bucket policy with an `s3:PutObject` permission that only allows
+    #   objects with server-side encryption, set the condition key of
     #   `s3:x-amz-server-side-encryption` to `"aws:kms"`. For more
     #   information, see [KMS-Managed Encryption Keys][1] in the *Amazon
     #   Simple Storage Service Developer Guide.*
@@ -32387,10 +33766,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Serverless Inference is in preview release for Amazon SageMaker and is
-    # subject to change. We do not recommend using this feature in
-    # production environments.
-    #
     # Specifies the serverless configuration for an endpoint variant.
     #
     # @note When making an API call, you may pass ProductionVariantServerlessConfig
@@ -32500,22 +33875,10 @@ module Aws::SageMaker
     #
     # @!attribute [rw] current_serverless_config
     #   The serverless configuration for the endpoint.
-    #
-    #   <note markdown="1"> Serverless Inference is in preview release for Amazon SageMaker and
-    #   is subject to change. We do not recommend using this feature in
-    #   production environments.
-    #
-    #    </note>
     #   @return [Types::ProductionVariantServerlessConfig]
     #
     # @!attribute [rw] desired_serverless_config
     #   The serverless configuration requested for the endpoint update.
-    #
-    #   <note markdown="1"> Serverless Inference is in preview release for Amazon SageMaker and
-    #   is subject to change. We do not recommend using this feature in
-    #   production environments.
-    #
-    #    </note>
     #   @return [Types::ProductionVariantServerlessConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProductionVariantSummary AWS API Documentation
@@ -33332,8 +34695,8 @@ module Aws::SageMaker
     # @!attribute [rw] properties
     #   Filter the lineage entities connected to the `StartArn`(s) by a set
     #   if property key value pairs. If multiple pairs are provided, an
-    #   entity will be included in the results if it matches any of the
-    #   provided pairs.
+    #   entity is included in the results if it matches any of the provided
+    #   pairs.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/QueryFilters AWS API Documentation
@@ -33354,7 +34717,7 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         start_arns: ["AssociationEntityArn"], # required
+    #         start_arns: ["AssociationEntityArn"],
     #         direction: "Both", # accepts Both, Ascendants, Descendants
     #         include_edges: false,
     #         filters: {
@@ -33379,12 +34742,13 @@ module Aws::SageMaker
     #   @return [Array<String>]
     #
     # @!attribute [rw] direction
-    #   Associations between lineage entities are directed. This parameter
-    #   determines the direction from the StartArn(s) the query will look.
+    #   Associations between lineage entities have a direction. This
+    #   parameter determines the direction from the StartArn(s) that the
+    #   query traverses.
     #   @return [String]
     #
     # @!attribute [rw] include_edges
-    #   Setting this value to `True` will retrieve not only the entities of
+    #   Setting this value to `True` retrieves not only the entities of
     #   interest but also the [Associations][1] and lineage entities on the
     #   path. Set to `False` to only return lineage entities that match your
     #   query.
@@ -33413,8 +34777,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] max_depth
     #   The maximum depth in lineage relationships from the `StartArns` that
-    #   will be traversed. Depth is a measure of the number of
-    #   `Associations` from the `StartArn` entity to the matched results.
+    #   are traversed. Depth is a measure of the number of `Associations`
+    #   from the `StartArn` entity to the matched results.
     #   @return [Integer]
     #
     # @!attribute [rw] max_results
@@ -33467,11 +34831,43 @@ module Aws::SageMaker
 
     # A collection of settings that apply to an `RSessionGateway` app.
     #
-    # @api private
+    # @note When making an API call, you may pass RSessionAppSettings
+    #   data as a hash:
+    #
+    #       {
+    #         default_resource_spec: {
+    #           sage_maker_image_arn: "ImageArn",
+    #           sage_maker_image_version_arn: "ImageVersionArn",
+    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #           lifecycle_config_arn: "StudioLifecycleConfigArn",
+    #         },
+    #         custom_images: [
+    #           {
+    #             image_name: "ImageName", # required
+    #             image_version_number: 1,
+    #             app_image_config_name: "AppImageConfigName", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] default_resource_spec
+    #   Specifies the ARN's of a SageMaker image and SageMaker image
+    #   version, and the instance type that the version runs on.
+    #   @return [Types::ResourceSpec]
+    #
+    # @!attribute [rw] custom_images
+    #   A list of custom SageMaker images that are configured to run as a
+    #   RSession app.
+    #   @return [Array<Types::CustomImage>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RSessionAppSettings AWS API Documentation
     #
-    class RSessionAppSettings < Aws::EmptyStructure; end
+    class RSessionAppSettings < Struct.new(
+      :default_resource_spec,
+      :custom_images)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # A collection of settings that configure user interaction with the
     # `RStudioServerPro` app. `RStudioServerProAppSettings` cannot be
@@ -33520,7 +34916,7 @@ module Aws::SageMaker
     #         default_resource_spec: {
     #           sage_maker_image_arn: "ImageArn",
     #           sage_maker_image_version_arn: "ImageVersionArn",
-    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
     #           lifecycle_config_arn: "StudioLifecycleConfigArn",
     #         },
     #       }
@@ -33565,7 +34961,7 @@ module Aws::SageMaker
     #         default_resource_spec: {
     #           sage_maker_image_arn: "ImageArn",
     #           sage_maker_image_version_arn: "ImageVersionArn",
-    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
     #           lifecycle_config_arn: "StudioLifecycleConfigArn",
     #         },
     #       }
@@ -33584,6 +34980,29 @@ module Aws::SageMaker
     class RStudioServerProDomainSettingsForUpdate < Struct.new(
       :domain_execution_role_arn,
       :default_resource_spec)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about the output configuration for the compiled
+    # model.
+    #
+    # @note When making an API call, you may pass RecommendationJobCompiledOutputConfig
+    #   data as a hash:
+    #
+    #       {
+    #         s3_output_uri: "S3Uri",
+    #       }
+    #
+    # @!attribute [rw] s3_output_uri
+    #   Identifies the Amazon S3 bucket where you want SageMaker to store
+    #   the compiled model artifacts.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RecommendationJobCompiledOutputConfig AWS API Documentation
+    #
+    class RecommendationJobCompiledOutputConfig < Struct.new(
+      :s3_output_uri)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -33612,7 +35031,7 @@ module Aws::SageMaker
     #         },
     #         endpoint_configurations: [
     #           {
-    #             instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge
+    #             instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge, ml.c6i.large, ml.c6i.xlarge, ml.c6i.2xlarge, ml.c6i.4xlarge, ml.c6i.8xlarge, ml.c6i.12xlarge, ml.c6i.16xlarge, ml.c6i.24xlarge, ml.c6i.32xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.12xlarge, ml.g5.16xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.p4d.24xlarge
     #             inference_specification_name: "InferenceSpecificationName",
     #             environment_parameter_ranges: {
     #               categorical_parameter_ranges: [
@@ -33624,6 +35043,7 @@ module Aws::SageMaker
     #             },
     #           },
     #         ],
+    #         volume_kms_key_id: "KmsKeyId",
     #       }
     #
     # @!attribute [rw] model_package_version_arn
@@ -33646,6 +35066,46 @@ module Aws::SageMaker
     #   Specifies the endpoint configuration to use for a job.
     #   @return [Array<Types::EndpointInputConfiguration>]
     #
+    # @!attribute [rw] volume_kms_key_id
+    #   The Amazon Resource Name (ARN) of a Amazon Web Services Key
+    #   Management Service (Amazon Web Services KMS) key that Amazon
+    #   SageMaker uses to encrypt data on the storage volume attached to the
+    #   ML compute instance that hosts the endpoint. This key will be passed
+    #   to SageMaker Hosting for endpoint creation.
+    #
+    #   The SageMaker execution role must have `kms:CreateGrant` permission
+    #   in order to encrypt data on the storage volume of the endpoints
+    #   created for inference recommendation. The inference recommendation
+    #   job will fail asynchronously during endpoint configuration creation
+    #   if the role passed does not have `kms:CreateGrant` permission.
+    #
+    #   The `KmsKeyId` can be any of the following formats:
+    #
+    #   * // KMS Key ID
+    #
+    #     `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * // Amazon Resource Name (ARN) of a KMS Key
+    #
+    #     `"arn:aws:kms:<region>:<account>:key/<key-id-12ab-34cd-56ef-1234567890ab>"`
+    #
+    #   * // KMS Key Alias
+    #
+    #     `"alias/ExampleAlias"`
+    #
+    #   * // Amazon Resource Name (ARN) of a KMS Key Alias
+    #
+    #     `"arn:aws:kms:<region>:<account>:alias/<ExampleAlias>"`
+    #
+    #   For more information about key identifiers, see [Key identifiers
+    #   (KeyID)][1] in the Amazon Web Services Key Management Service
+    #   (Amazon Web Services KMS) documentation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RecommendationJobInputConfig AWS API Documentation
     #
     class RecommendationJobInputConfig < Struct.new(
@@ -33653,7 +35113,69 @@ module Aws::SageMaker
       :job_duration_in_seconds,
       :traffic_pattern,
       :resource_limit,
-      :endpoint_configurations)
+      :endpoint_configurations,
+      :volume_kms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about the output configuration for the compiled
+    # model.
+    #
+    # @note When making an API call, you may pass RecommendationJobOutputConfig
+    #   data as a hash:
+    #
+    #       {
+    #         kms_key_id: "KmsKeyId",
+    #         compiled_output_config: {
+    #           s3_output_uri: "S3Uri",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] kms_key_id
+    #   The Amazon Resource Name (ARN) of a Amazon Web Services Key
+    #   Management Service (Amazon Web Services KMS) key that Amazon
+    #   SageMaker uses to encrypt your output artifacts with Amazon S3
+    #   server-side encryption. The SageMaker execution role must have
+    #   `kms:GenerateDataKey` permission.
+    #
+    #   The `KmsKeyId` can be any of the following formats:
+    #
+    #   * // KMS Key ID
+    #
+    #     `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * // Amazon Resource Name (ARN) of a KMS Key
+    #
+    #     `"arn:aws:kms:<region>:<account>:key/<key-id-12ab-34cd-56ef-1234567890ab>"`
+    #
+    #   * // KMS Key Alias
+    #
+    #     `"alias/ExampleAlias"`
+    #
+    #   * // Amazon Resource Name (ARN) of a KMS Key Alias
+    #
+    #     `"arn:aws:kms:<region>:<account>:alias/<ExampleAlias>"`
+    #
+    #   For more information about key identifiers, see [Key identifiers
+    #   (KeyID)][1] in the Amazon Web Services Key Management Service
+    #   (Amazon Web Services KMS) documentation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id
+    #   @return [String]
+    #
+    # @!attribute [rw] compiled_output_config
+    #   Provides information about the output configuration for the compiled
+    #   model.
+    #   @return [Types::RecommendationJobCompiledOutputConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RecommendationJobOutputConfig AWS API Documentation
+    #
+    class RecommendationJobOutputConfig < Struct.new(
+      :kms_key_id,
+      :compiled_output_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -34061,10 +35583,17 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #         instance_count: 1, # required
+    #         instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #         instance_count: 1,
     #         volume_size_in_gb: 1, # required
     #         volume_kms_key_id: "KmsKeyId",
+    #         instance_groups: [
+    #           {
+    #             instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #             instance_count: 1, # required
+    #             instance_group_name: "InstanceGroupName", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] instance_type
@@ -34087,15 +35616,15 @@ module Aws::SageMaker
     #
     #   You must specify sufficient ML storage for your scenario.
     #
-    #   <note markdown="1"> Amazon SageMaker supports only the General Purpose SSD (gp2) ML
-    #   storage volume type.
+    #   <note markdown="1"> SageMaker supports only the General Purpose SSD (gp2) ML storage
+    #   volume type.
     #
     #    </note>
     #
     #   <note markdown="1"> Certain Nitro-based instances include local storage with a fixed
     #   total size, dependent on the instance type. When using these
-    #   instances for training, Amazon SageMaker mounts the local instance
-    #   storage instead of Amazon EBS gp2 storage. You can't request a
+    #   instances for training, SageMaker mounts the local instance storage
+    #   instead of Amazon EBS gp2 storage. You can't request a
     #   `VolumeSizeInGB` greater than the total size of the local instance
     #   storage.
     #
@@ -34111,9 +35640,9 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] volume_kms_key_id
-    #   The Amazon Web Services KMS key that Amazon SageMaker uses to
-    #   encrypt data on the storage volume attached to the ML compute
-    #   instance(s) that run the training job.
+    #   The Amazon Web Services KMS key that SageMaker uses to encrypt data
+    #   on the storage volume attached to the ML compute instance(s) that
+    #   run the training job.
     #
     #   <note markdown="1"> Certain Nitro-based instances include local storage, dependent on
     #   the instance type. Local storage volumes are encrypted using a
@@ -34144,13 +35673,18 @@ module Aws::SageMaker
     #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html
     #   @return [String]
     #
+    # @!attribute [rw] instance_groups
+    #   The configuration of a heterogeneous cluster in JSON format.
+    #   @return [Array<Types::InstanceGroup>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ResourceConfig AWS API Documentation
     #
     class ResourceConfig < Struct.new(
       :instance_type,
       :instance_count,
       :volume_size_in_gb,
-      :volume_kms_key_id)
+      :volume_kms_key_id,
+      :instance_groups)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -34168,8 +35702,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # You have exceeded an Amazon SageMaker resource limit. For example, you
-    # might have too many training jobs created.
+    # You have exceeded an SageMaker resource limit. For example, you might
+    # have too many training jobs created.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -34234,7 +35768,7 @@ module Aws::SageMaker
     #       {
     #         sage_maker_image_arn: "ImageArn",
     #         sage_maker_image_version_arn: "ImageVersionArn",
-    #         instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #         instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
     #         lifecycle_config_arn: "StudioLifecycleConfigArn",
     #       }
     #
@@ -34248,6 +35782,14 @@ module Aws::SageMaker
     #
     # @!attribute [rw] instance_type
     #   The instance type that the image version runs on.
+    #
+    #   <note markdown="1"> **JupyterServer apps** only support the `system` value.
+    #
+    #    For **KernelGateway apps**, the `system` value is translated to
+    #   `ml.t3.medium`. KernelGateway apps also support all other values for
+    #   available instance types.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] lifecycle_config_arn
@@ -34378,15 +35920,16 @@ module Aws::SageMaker
     #         s3_uri: "S3Uri", # required
     #         s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
     #         attribute_names: ["AttributeName"],
+    #         instance_group_names: ["InstanceGroupName"],
     #       }
     #
     # @!attribute [rw] s3_data_type
     #   If you choose `S3Prefix`, `S3Uri` identifies a key name prefix.
-    #   Amazon SageMaker uses all objects that match the specified key name
-    #   prefix for model training.
+    #   SageMaker uses all objects that match the specified key name prefix
+    #   for model training.
     #
     #   If you choose `ManifestFile`, `S3Uri` identifies an object that is a
-    #   manifest file containing a list of object keys that you want Amazon
+    #   manifest file containing a list of object keys that you want
     #   SageMaker to use for model training.
     #
     #   If you choose `AugmentedManifestFile`, S3Uri identifies an object
@@ -34440,17 +35983,17 @@ module Aws::SageMaker
     #
     #     The complete set of `S3Uri` in this manifest is the input data for
     #     the channel for this data source. The object that each `S3Uri`
-    #     points to must be readable by the IAM role that Amazon SageMaker
-    #     uses to perform tasks on your behalf.
+    #     points to must be readable by the IAM role that SageMaker uses to
+    #     perform tasks on your behalf.
     #   @return [String]
     #
     # @!attribute [rw] s3_data_distribution_type
-    #   If you want Amazon SageMaker to replicate the entire dataset on each
-    #   ML compute instance that is launched for model training, specify
+    #   If you want SageMaker to replicate the entire dataset on each ML
+    #   compute instance that is launched for model training, specify
     #   `FullyReplicated`.
     #
-    #   If you want Amazon SageMaker to replicate a subset of data on each
-    #   ML compute instance that is launched for model training, specify
+    #   If you want SageMaker to replicate a subset of data on each ML
+    #   compute instance that is launched for model training, specify
     #   `ShardedByS3Key`. If there are *n* ML compute instances launched for
     #   a training job, each instance gets approximately 1/*n* of the number
     #   of S3 objects. In this case, model training on each machine uses
@@ -34474,13 +36017,19 @@ module Aws::SageMaker
     #   specified augmented manifest file.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] instance_group_names
+    #   A list of names of instance groups that get data from the S3 data
+    #   source.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/S3DataSource AWS API Documentation
     #
     class S3DataSource < Struct.new(
       :s3_data_type,
       :s3_uri,
       :s3_data_distribution_type,
-      :attribute_names)
+      :attribute_names,
+      :instance_group_names)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -34747,6 +36296,10 @@ module Aws::SageMaker
     #   The properties of a project.
     #   @return [Types::Project]
     #
+    # @!attribute [rw] feature_metadata
+    #   The feature metadata used to search through the features.
+    #   @return [Types::FeatureMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SearchRecord AWS API Documentation
     #
     class SearchRecord < Struct.new(
@@ -34760,7 +36313,8 @@ module Aws::SageMaker
       :pipeline,
       :pipeline_execution,
       :feature_group,
-      :project)
+      :project,
+      :feature_metadata)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -34769,7 +36323,7 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup, Project
+    #         resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup, Project, FeatureMetadata
     #         search_expression: {
     #           filters: [
     #             {
@@ -34874,9 +36428,9 @@ module Aws::SageMaker
     # transitioned through. A training job can be in one of several states,
     # for example, starting, downloading, training, or uploading. Within
     # each state, there are a number of intermediate states. For example,
-    # within the starting state, Amazon SageMaker could be starting the
-    # training job or launching the ML instances. These transitional states
-    # are referred to as the job's secondary status.
+    # within the starting state, SageMaker could be starting the training
+    # job or launching the ML instances. These transitional states are
+    # referred to as the job's secondary status.
     #
     # @!attribute [rw] status
     #   Contains a secondary status information from a training job.
@@ -34941,8 +36495,8 @@ module Aws::SageMaker
     # @!attribute [rw] status_message
     #   A detailed description of the progress within a secondary status.
     #
-    #   Amazon SageMaker provides secondary statuses and status messages
-    #   that apply to each of them:
+    #   SageMaker provides secondary statuses and status messages that apply
+    #   to each of them:
     #
     #   Starting
     #   : * Starting the training job.
@@ -35307,9 +36861,9 @@ module Aws::SageMaker
     end
 
     # Specifies an algorithm that was used to create the model package. The
-    # algorithm must be either an algorithm resource in your Amazon
-    # SageMaker account or an algorithm in Amazon Web Services Marketplace
-    # that you are subscribed to.
+    # algorithm must be either an algorithm resource in your SageMaker
+    # account or an algorithm in Amazon Web Services Marketplace that you
+    # are subscribed to.
     #
     # @note When making an API call, you may pass SourceAlgorithm
     #   data as a hash:
@@ -35332,9 +36886,9 @@ module Aws::SageMaker
     #
     # @!attribute [rw] algorithm_name
     #   The name of an algorithm that was used to create the model package.
-    #   The algorithm must be either an algorithm resource in your Amazon
-    #   SageMaker account or an algorithm in Amazon Web Services Marketplace
-    #   that you are subscribed to.
+    #   The algorithm must be either an algorithm resource in your SageMaker
+    #   account or an algorithm in Amazon Web Services Marketplace that you
+    #   are subscribed to.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SourceAlgorithm AWS API Documentation
@@ -35408,6 +36962,31 @@ module Aws::SageMaker
     #
     class SourceIpConfig < Struct.new(
       :cidrs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartEdgeDeploymentStageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         edge_deployment_plan_name: "EntityName", # required
+    #         stage_name: "EntityName", # required
+    #       }
+    #
+    # @!attribute [rw] edge_deployment_plan_name
+    #   The name of the edge deployment plan to start.
+    #   @return [String]
+    #
+    # @!attribute [rw] stage_name
+    #   The name of the stage to start.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StartEdgeDeploymentStageRequest AWS API Documentation
+    #
+    class StartEdgeDeploymentStageRequest < Struct.new(
+      :edge_deployment_plan_name,
+      :stage_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -35558,6 +37137,31 @@ module Aws::SageMaker
     #
     class StopCompilationJobRequest < Struct.new(
       :compilation_job_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StopEdgeDeploymentStageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         edge_deployment_plan_name: "EntityName", # required
+    #         stage_name: "EntityName", # required
+    #       }
+    #
+    # @!attribute [rw] edge_deployment_plan_name
+    #   The name of the edge deployment plan to stop.
+    #   @return [String]
+    #
+    # @!attribute [rw] stage_name
+    #   The name of the stage to stop.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopEdgeDeploymentStageRequest AWS API Documentation
+    #
+    class StopEdgeDeploymentStageRequest < Struct.new(
+      :edge_deployment_plan_name,
+      :stage_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -35778,21 +37382,21 @@ module Aws::SageMaker
     # Specifies a limit to how long a model training job or model
     # compilation job can run. It also specifies how long a managed spot
     # training job has to complete. When the job reaches the time limit,
-    # Amazon SageMaker ends the training or compilation job. Use this API to
-    # cap model training costs.
+    # SageMaker ends the training or compilation job. Use this API to cap
+    # model training costs.
     #
-    # To stop a training job, Amazon SageMaker sends the algorithm the
-    # `SIGTERM` signal, which delays job termination for 120 seconds.
-    # Algorithms can use this 120-second window to save the model artifacts,
-    # so the results of training are not lost.
+    # To stop a training job, SageMaker sends the algorithm the `SIGTERM`
+    # signal, which delays job termination for 120 seconds. Algorithms can
+    # use this 120-second window to save the model artifacts, so the results
+    # of training are not lost.
     #
-    # The training algorithms provided by Amazon SageMaker automatically
-    # save the intermediate results of a model training job when possible.
-    # This attempt to save artifacts is only a best effort case as model
-    # might not be in a state from which it can be saved. For example, if
-    # training has just started, the model might not be ready to save. When
-    # saved, this intermediate data is a valid model artifact. You can use
-    # it to create a model with `CreateModel`.
+    # The training algorithms provided by SageMaker automatically save the
+    # intermediate results of a model training job when possible. This
+    # attempt to save artifacts is only a best effort case as model might
+    # not be in a state from which it can be saved. For example, if training
+    # has just started, the model might not be ready to save. When saved,
+    # this intermediate data is a valid model artifact. You can use it to
+    # create a model with `CreateModel`.
     #
     # <note markdown="1"> The Neural Topic Model (NTM) currently does not support saving
     # intermediate model artifacts. When training NTMs, make sure that the
@@ -35813,14 +37417,14 @@ module Aws::SageMaker
     #   compilation job can run.
     #
     #   For compilation jobs, if the job does not complete during this time,
-    #   you will receive a `TimeOut` error. We recommend starting with 900
-    #   seconds and increase as necessary based on your model.
+    #   a `TimeOut` error is generated. We recommend starting with 900
+    #   seconds and increasing as necessary based on your model.
     #
     #   For all other jobs, if the job does not complete during this time,
-    #   Amazon SageMaker ends the job. When `RetryStrategy` is specified in
-    #   the job request, `MaxRuntimeInSeconds` specifies the maximum time
-    #   for all of the attempts in total, not each individual attempt. The
-    #   default value is 1 day. The maximum value is 28 days.
+    #   SageMaker ends the job. When `RetryStrategy` is specified in the job
+    #   request, `MaxRuntimeInSeconds` specifies the maximum time for all of
+    #   the attempts in total, not each individual attempt. The default
+    #   value is 1 day. The maximum value is 28 days.
     #   @return [Integer]
     #
     # @!attribute [rw] max_wait_time_in_seconds
@@ -35828,7 +37432,7 @@ module Aws::SageMaker
     #   job has to complete. It is the amount of time spent waiting for Spot
     #   capacity plus the amount of time the job can run. It must be equal
     #   to or greater than `MaxRuntimeInSeconds`. If the job does not
-    #   complete during this time, Amazon SageMaker ends the job.
+    #   complete during this time, SageMaker ends the job.
     #
     #   When `RetryStrategy` is specified in the job request,
     #   `MaxWaitTimeInSeconds` specifies the maximum time for all of the
@@ -36053,7 +37657,7 @@ module Aws::SageMaker
     #         default_resource_spec: {
     #           sage_maker_image_arn: "ImageArn",
     #           sage_maker_image_version_arn: "ImageVersionArn",
-    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
     #           lifecycle_config_arn: "StudioLifecycleConfigArn",
     #         },
     #       }
@@ -36248,8 +37852,8 @@ module Aws::SageMaker
     #   For detailed information about the secondary status of the training
     #   job, see `StatusMessage` under SecondaryStatusTransition.
     #
-    #   Amazon SageMaker provides primary statuses and secondary statuses
-    #   that apply to each of them:
+    #   SageMaker provides primary statuses and secondary statuses that
+    #   apply to each of them:
     #
     #   InProgress
     #   : * `Starting` - Starting the training job.
@@ -36322,7 +37926,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] output_data_config
     #   The S3 path where model artifacts that you configured when creating
-    #   the job are stored. Amazon SageMaker creates subfolders for model
+    #   the job are stored. SageMaker creates subfolders for model
     #   artifacts.
     #   @return [Types::OutputDataConfig]
     #
@@ -36344,13 +37948,13 @@ module Aws::SageMaker
     # @!attribute [rw] stopping_condition
     #   Specifies a limit to how long a model training job can run. It also
     #   specifies how long a managed Spot training job has to complete. When
-    #   the job reaches the time limit, Amazon SageMaker ends the training
-    #   job. Use this API to cap model training costs.
+    #   the job reaches the time limit, SageMaker ends the training job. Use
+    #   this API to cap model training costs.
     #
-    #   To stop a job, Amazon SageMaker sends the algorithm the `SIGTERM`
-    #   signal, which delays job termination for 120 seconds. Algorithms can
-    #   use this 120-second window to save the model artifacts, so the
-    #   results of training are not lost.
+    #   To stop a job, SageMaker sends the algorithm the `SIGTERM` signal,
+    #   which delays job termination for 120 seconds. Algorithms can use
+    #   this 120-second window to save the model artifacts, so the results
+    #   of training are not lost.
     #   @return [Types::StoppingCondition]
     #
     # @!attribute [rw] creation_time
@@ -36371,8 +37975,7 @@ module Aws::SageMaker
     #   You are billed for the time interval between the value of
     #   `TrainingStartTime` and this time. For successful jobs and stopped
     #   jobs, this is the time after model artifacts are uploaded. For
-    #   failed jobs, this is the time when Amazon SageMaker detects a job
-    #   failure.
+    #   failed jobs, this is the time when SageMaker detects a job failure.
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_time
@@ -36549,6 +38152,7 @@ module Aws::SageMaker
     #                 s3_uri: "S3Uri", # required
     #                 s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
     #                 attribute_names: ["AttributeName"],
+    #                 instance_group_names: ["InstanceGroupName"],
     #               },
     #               file_system_data_source: {
     #                 file_system_id: "FileSystemId", # required
@@ -36571,10 +38175,17 @@ module Aws::SageMaker
     #           s3_output_path: "S3Uri", # required
     #         },
     #         resource_config: { # required
-    #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #           instance_count: 1, # required
+    #           instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #           instance_count: 1,
     #           volume_size_in_gb: 1, # required
     #           volume_kms_key_id: "KmsKeyId",
+    #           instance_groups: [
+    #             {
+    #               instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #               instance_count: 1, # required
+    #               instance_group_name: "InstanceGroupName", # required
+    #             },
+    #           ],
     #         },
     #         stopping_condition: { # required
     #           max_runtime_in_seconds: 1,
@@ -36639,7 +38250,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] output_data_config
     #   the path to the S3 bucket where you want to store model artifacts.
-    #   Amazon SageMaker creates subfolders for the artifacts.
+    #   SageMaker creates subfolders for the artifacts.
     #   @return [Types::OutputDataConfig]
     #
     # @!attribute [rw] resource_config
@@ -36650,12 +38261,12 @@ module Aws::SageMaker
     # @!attribute [rw] stopping_condition
     #   Specifies a limit to how long a model training job can run. It also
     #   specifies how long a managed Spot training job has to complete. When
-    #   the job reaches the time limit, Amazon SageMaker ends the training
-    #   job. Use this API to cap model training costs.
+    #   the job reaches the time limit, SageMaker ends the training job. Use
+    #   this API to cap model training costs.
     #
-    #   To stop a job, Amazon SageMaker sends the algorithm the SIGTERM
-    #   signal, which delays job termination for 120 seconds. Algorithms can
-    #   use this 120-second window to save the model artifacts.
+    #   To stop a job, SageMaker sends the algorithm the SIGTERM signal,
+    #   which delays job termination for 120 seconds. Algorithms can use
+    #   this 120-second window to save the model artifacts.
     #   @return [Types::StoppingCondition]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrainingJobDefinition AWS API Documentation
@@ -37400,14 +39011,15 @@ module Aws::SageMaker
     #   Simple Storage Service Developer Guide.*
     #
     #   The KMS key policy must grant permission to the IAM role that you
-    #   specify in your CreateModel request. For more information, see
-    #   [Using Key Policies in Amazon Web Services KMS][2] in the *Amazon
+    #   specify in your [CreateModel][2] request. For more information, see
+    #   [Using Key Policies in Amazon Web Services KMS][3] in the *Amazon
     #   Web Services Key Management Service Developer Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
-    #   [2]: http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateModel.html
+    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TransformOutput AWS API Documentation
@@ -38693,7 +40305,7 @@ module Aws::SageMaker
     #             default_resource_spec: {
     #               sage_maker_image_arn: "ImageArn",
     #               sage_maker_image_version_arn: "ImageVersionArn",
-    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
     #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
     #             lifecycle_config_arns: ["StudioLifecycleConfigArn"],
@@ -38702,7 +40314,7 @@ module Aws::SageMaker
     #             default_resource_spec: {
     #               sage_maker_image_arn: "ImageArn",
     #               sage_maker_image_version_arn: "ImageVersionArn",
-    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
     #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
     #             custom_images: [
@@ -38718,7 +40330,7 @@ module Aws::SageMaker
     #             default_resource_spec: {
     #               sage_maker_image_arn: "ImageArn",
     #               sage_maker_image_version_arn: "ImageVersionArn",
-    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
     #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
     #           },
@@ -38727,6 +40339,19 @@ module Aws::SageMaker
     #             user_group: "R_STUDIO_ADMIN", # accepts R_STUDIO_ADMIN, R_STUDIO_USER
     #           },
     #           r_session_app_settings: {
+    #             default_resource_spec: {
+    #               sage_maker_image_arn: "ImageArn",
+    #               sage_maker_image_version_arn: "ImageVersionArn",
+    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
+    #             },
+    #             custom_images: [
+    #               {
+    #                 image_name: "ImageName", # required
+    #                 image_version_number: 1,
+    #                 app_image_config_name: "AppImageConfigName", # required
+    #               },
+    #             ],
     #           },
     #         },
     #         domain_settings_for_update: {
@@ -38735,7 +40360,7 @@ module Aws::SageMaker
     #             default_resource_spec: {
     #               sage_maker_image_arn: "ImageArn",
     #               sage_maker_image_version_arn: "ImageVersionArn",
-    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
     #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
     #           },
@@ -38897,7 +40522,7 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] endpoint_name
-    #   The name of an existing Amazon SageMaker endpoint.
+    #   The name of an existing SageMaker endpoint.
     #   @return [String]
     #
     # @!attribute [rw] desired_weights_and_capacities
@@ -38967,6 +40592,100 @@ module Aws::SageMaker
     #
     class UpdateExperimentResponse < Struct.new(
       :experiment_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateFeatureGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         feature_group_name: "FeatureGroupName", # required
+    #         feature_additions: [
+    #           {
+    #             feature_name: "FeatureName",
+    #             feature_type: "Integral", # accepts Integral, Fractional, String
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] feature_group_name
+    #   The name of the feature group that you're updating.
+    #   @return [String]
+    #
+    # @!attribute [rw] feature_additions
+    #   A list of the features that you're adding to the feature group.
+    #   @return [Array<Types::FeatureDefinition>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateFeatureGroupRequest AWS API Documentation
+    #
+    class UpdateFeatureGroupRequest < Struct.new(
+      :feature_group_name,
+      :feature_additions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] feature_group_arn
+    #   The Amazon Resource Number (ARN) of the feature group that you're
+    #   updating.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateFeatureGroupResponse AWS API Documentation
+    #
+    class UpdateFeatureGroupResponse < Struct.new(
+      :feature_group_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateFeatureMetadataRequest
+    #   data as a hash:
+    #
+    #       {
+    #         feature_group_name: "FeatureGroupName", # required
+    #         feature_name: "FeatureName", # required
+    #         description: "FeatureDescription",
+    #         parameter_additions: [
+    #           {
+    #             key: "FeatureParameterKey",
+    #             value: "FeatureParameterValue",
+    #           },
+    #         ],
+    #         parameter_removals: ["FeatureParameterKey"],
+    #       }
+    #
+    # @!attribute [rw] feature_group_name
+    #   The name of the feature group containing the feature that you're
+    #   updating.
+    #   @return [String]
+    #
+    # @!attribute [rw] feature_name
+    #   The name of the feature that you're updating.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description that you can write to better describe the feature.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameter_additions
+    #   A list of key-value pairs that you can add to better describe the
+    #   feature.
+    #   @return [Array<Types::FeatureParameter>]
+    #
+    # @!attribute [rw] parameter_removals
+    #   A list of parameter keys that you can specify to remove parameters
+    #   that describe your feature.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateFeatureMetadataRequest AWS API Documentation
+    #
+    class UpdateFeatureMetadataRequest < Struct.new(
+      :feature_group_name,
+      :feature_name,
+      :description,
+      :parameter_additions,
+      :parameter_removals)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -39062,7 +40781,7 @@ module Aws::SageMaker
     #               },
     #             ],
     #             supported_transform_instance_types: ["ml.m4.xlarge"], # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
-    #             supported_realtime_inference_instance_types: ["ml.t2.medium"], # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge
+    #             supported_realtime_inference_instance_types: ["ml.t2.medium"], # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge, ml.c6i.large, ml.c6i.xlarge, ml.c6i.2xlarge, ml.c6i.4xlarge, ml.c6i.8xlarge, ml.c6i.12xlarge, ml.c6i.16xlarge, ml.c6i.24xlarge, ml.c6i.32xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.12xlarge, ml.g5.16xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.p4d.24xlarge
     #             supported_content_types: ["ContentType"],
     #             supported_response_mime_types: ["ResponseMIMEType"],
     #           },
@@ -39243,7 +40962,7 @@ module Aws::SageMaker
     #
     #       {
     #         notebook_instance_name: "NotebookInstanceName", # required
-    #         instance_type: "ml.t2.medium", # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #         instance_type: "ml.t2.medium", # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
     #         role_arn: "RoleArn",
     #         lifecycle_config_name: "NotebookInstanceLifecycleConfigName",
     #         disassociate_lifecycle_config: false,
@@ -39255,6 +40974,9 @@ module Aws::SageMaker
     #         disassociate_default_code_repository: false,
     #         disassociate_additional_code_repositories: false,
     #         root_access: "Enabled", # accepts Enabled, Disabled
+    #         instance_metadata_service_configuration: {
+    #           minimum_instance_metadata_service_version: "MinimumInstanceMetadataServiceVersion", # required
+    #         },
     #       }
     #
     # @!attribute [rw] notebook_instance_name
@@ -39266,12 +40988,12 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker
-    #   can assume to access the notebook instance. For more information,
-    #   see [Amazon SageMaker Roles][1].
+    #   The Amazon Resource Name (ARN) of the IAM role that SageMaker can
+    #   assume to access the notebook instance. For more information, see
+    #   [SageMaker Roles][1].
     #
-    #   <note markdown="1"> To be able to pass this role to Amazon SageMaker, the caller of this
-    #   API must have the `iam:PassRole` permission.
+    #   <note markdown="1"> To be able to pass this role to SageMaker, the caller of this API
+    #   must have the `iam:PassRole` permission.
     #
     #    </note>
     #
@@ -39301,12 +41023,12 @@ module Aws::SageMaker
     # @!attribute [rw] volume_size_in_gb
     #   The size, in GB, of the ML storage volume to attach to the notebook
     #   instance. The default value is 5 GB. ML storage volumes are
-    #   encrypted, so Amazon SageMaker can't determine the amount of
-    #   available free space on the volume. Because of this, you can
-    #   increase the volume size when you update a notebook instance, but
-    #   you can't decrease the volume size. If you want to decrease the
-    #   size of the ML storage volume in use, create a new notebook instance
-    #   with the desired size.
+    #   encrypted, so SageMaker can't determine the amount of available
+    #   free space on the volume. Because of this, you can increase the
+    #   volume size when you update a notebook instance, but you can't
+    #   decrease the volume size. If you want to decrease the size of the ML
+    #   storage volume in use, create a new notebook instance with the
+    #   desired size.
     #   @return [Integer]
     #
     # @!attribute [rw] default_code_repository
@@ -39316,8 +41038,7 @@ module Aws::SageMaker
     #   repository in [Amazon Web Services CodeCommit][1] or in any other
     #   Git repository. When you open a notebook instance, it opens in the
     #   directory that contains this repository. For more information, see
-    #   [Associating Git Repositories with Amazon SageMaker Notebook
-    #   Instances][2].
+    #   [Associating Git Repositories with SageMaker Notebook Instances][2].
     #
     #
     #
@@ -39332,7 +41053,7 @@ module Aws::SageMaker
     #   in [Amazon Web Services CodeCommit][1] or in any other Git
     #   repository. These repositories are cloned at the same level as the
     #   default repository of your notebook instance. For more information,
-    #   see [Associating Git Repositories with Amazon SageMaker Notebook
+    #   see [Associating Git Repositories with SageMaker Notebook
     #   Instances][2].
     #
     #
@@ -39384,6 +41105,10 @@ module Aws::SageMaker
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] instance_metadata_service_configuration
+    #   Information on the IMDS configuration of the notebook instance
+    #   @return [Types::InstanceMetadataServiceConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateNotebookInstanceInput AWS API Documentation
     #
     class UpdateNotebookInstanceInput < Struct.new(
@@ -39399,7 +41124,8 @@ module Aws::SageMaker
       :disassociate_accelerator_types,
       :disassociate_default_code_repository,
       :disassociate_additional_code_repositories,
-      :root_access)
+      :root_access,
+      :instance_metadata_service_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -39894,7 +41620,7 @@ module Aws::SageMaker
     #             default_resource_spec: {
     #               sage_maker_image_arn: "ImageArn",
     #               sage_maker_image_version_arn: "ImageVersionArn",
-    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
     #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
     #             lifecycle_config_arns: ["StudioLifecycleConfigArn"],
@@ -39903,7 +41629,7 @@ module Aws::SageMaker
     #             default_resource_spec: {
     #               sage_maker_image_arn: "ImageArn",
     #               sage_maker_image_version_arn: "ImageVersionArn",
-    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
     #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
     #             custom_images: [
@@ -39919,7 +41645,7 @@ module Aws::SageMaker
     #             default_resource_spec: {
     #               sage_maker_image_arn: "ImageArn",
     #               sage_maker_image_version_arn: "ImageVersionArn",
-    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
     #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
     #           },
@@ -39928,6 +41654,19 @@ module Aws::SageMaker
     #             user_group: "R_STUDIO_ADMIN", # accepts R_STUDIO_ADMIN, R_STUDIO_USER
     #           },
     #           r_session_app_settings: {
+    #             default_resource_spec: {
+    #               sage_maker_image_arn: "ImageArn",
+    #               sage_maker_image_version_arn: "ImageVersionArn",
+    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
+    #             },
+    #             custom_images: [
+    #               {
+    #                 image_name: "ImageName", # required
+    #                 image_version_number: 1,
+    #                 app_image_config_name: "AppImageConfigName", # required
+    #               },
+    #             ],
     #           },
     #         },
     #       }
@@ -39984,6 +41723,11 @@ module Aws::SageMaker
     #           logout_endpoint: "OidcEndpoint", # required
     #           jwks_uri: "OidcEndpoint", # required
     #         },
+    #         workforce_vpc_config: {
+    #           vpc_id: "WorkforceVpcId",
+    #           security_group_ids: ["WorkforceSecurityGroupId"],
+    #           subnets: ["WorkforceSubnetId"],
+    #         },
     #       }
     #
     # @!attribute [rw] workforce_name
@@ -40007,12 +41751,17 @@ module Aws::SageMaker
     #   configuration for a workforce made using your own IdP.
     #   @return [Types::OidcConfig]
     #
+    # @!attribute [rw] workforce_vpc_config
+    #   Use this parameter to update your VPC configuration for a workforce.
+    #   @return [Types::WorkforceVpcConfigRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateWorkforceRequest AWS API Documentation
     #
     class UpdateWorkforceRequest < Struct.new(
       :workforce_name,
       :source_ip_config,
-      :oidc_config)
+      :oidc_config,
+      :workforce_vpc_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -40212,7 +41961,7 @@ module Aws::SageMaker
     #           default_resource_spec: {
     #             sage_maker_image_arn: "ImageArn",
     #             sage_maker_image_version_arn: "ImageVersionArn",
-    #             instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #             instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
     #             lifecycle_config_arn: "StudioLifecycleConfigArn",
     #           },
     #           lifecycle_config_arns: ["StudioLifecycleConfigArn"],
@@ -40221,7 +41970,7 @@ module Aws::SageMaker
     #           default_resource_spec: {
     #             sage_maker_image_arn: "ImageArn",
     #             sage_maker_image_version_arn: "ImageVersionArn",
-    #             instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #             instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
     #             lifecycle_config_arn: "StudioLifecycleConfigArn",
     #           },
     #           custom_images: [
@@ -40237,7 +41986,7 @@ module Aws::SageMaker
     #           default_resource_spec: {
     #             sage_maker_image_arn: "ImageArn",
     #             sage_maker_image_version_arn: "ImageVersionArn",
-    #             instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #             instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
     #             lifecycle_config_arn: "StudioLifecycleConfigArn",
     #           },
     #         },
@@ -40246,6 +41995,19 @@ module Aws::SageMaker
     #           user_group: "R_STUDIO_ADMIN", # accepts R_STUDIO_ADMIN, R_STUDIO_USER
     #         },
     #         r_session_app_settings: {
+    #           default_resource_spec: {
+    #             sage_maker_image_arn: "ImageArn",
+    #             sage_maker_image_version_arn: "ImageVersionArn",
+    #             instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #             lifecycle_config_arn: "StudioLifecycleConfigArn",
+    #           },
+    #           custom_images: [
+    #             {
+    #               image_name: "ImageName", # required
+    #               image_version_number: 1,
+    #               app_image_config_name: "AppImageConfigName", # required
+    #             },
+    #           ],
     #         },
     #       }
     #
@@ -40476,6 +42238,18 @@ module Aws::SageMaker
     #   The date that the workforce is created.
     #   @return [Time]
     #
+    # @!attribute [rw] workforce_vpc_config
+    #   The configuration of a VPC workforce.
+    #   @return [Types::WorkforceVpcConfigResponse]
+    #
+    # @!attribute [rw] status
+    #   The status of your workforce.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reason your workforce failed.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Workforce AWS API Documentation
     #
     class Workforce < Struct.new(
@@ -40486,7 +42260,76 @@ module Aws::SageMaker
       :sub_domain,
       :cognito_config,
       :oidc_config,
-      :create_date)
+      :create_date,
+      :workforce_vpc_config,
+      :status,
+      :failure_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The VPC object you use to create or update a workforce.
+    #
+    # @note When making an API call, you may pass WorkforceVpcConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vpc_id: "WorkforceVpcId",
+    #         security_group_ids: ["WorkforceSecurityGroupId"],
+    #         subnets: ["WorkforceSubnetId"],
+    #       }
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC that the workforce uses for communication.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_ids
+    #   The VPC security group IDs, in the form sg-xxxxxxxx. The security
+    #   groups must be for the same VPC as specified in the subnet.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnets
+    #   The ID of the subnets in the VPC that you want to connect.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/WorkforceVpcConfigRequest AWS API Documentation
+    #
+    class WorkforceVpcConfigRequest < Struct.new(
+      :vpc_id,
+      :security_group_ids,
+      :subnets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A VpcConfig object that specifies the VPC that you want your workforce
+    # to connect to.
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC that the workforce uses for communication.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_ids
+    #   The VPC security group IDs, in the form sg-xxxxxxxx. The security
+    #   groups must be for the same VPC as specified in the subnet.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnets
+    #   The ID of the subnets in the VPC that you want to connect.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_endpoint_id
+    #   The IDs for the VPC service endpoints of your VPC workforce when it
+    #   is created and updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/WorkforceVpcConfigResponse AWS API Documentation
+    #
+    class WorkforceVpcConfigResponse < Struct.new(
+      :vpc_id,
+      :security_group_ids,
+      :subnets,
+      :vpc_endpoint_id)
       SENSITIVE = []
       include Aws::Structure
     end

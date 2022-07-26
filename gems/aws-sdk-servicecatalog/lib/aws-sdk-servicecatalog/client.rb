@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::ServiceCatalog
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -2572,6 +2574,7 @@ module Aws::ServiceCatalog
     #   * {Types::DescribeProvisioningParametersOutput#tag_options #tag_options} => Array&lt;Types::TagOptionSummary&gt;
     #   * {Types::DescribeProvisioningParametersOutput#provisioning_artifact_preferences #provisioning_artifact_preferences} => Types::ProvisioningArtifactPreferences
     #   * {Types::DescribeProvisioningParametersOutput#provisioning_artifact_outputs #provisioning_artifact_outputs} => Array&lt;Types::ProvisioningArtifactOutput&gt;
+    #   * {Types::DescribeProvisioningParametersOutput#provisioning_artifact_output_keys #provisioning_artifact_output_keys} => Array&lt;Types::ProvisioningArtifactOutput&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2618,6 +2621,9 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifact_outputs #=> Array
     #   resp.provisioning_artifact_outputs[0].key #=> String
     #   resp.provisioning_artifact_outputs[0].description #=> String
+    #   resp.provisioning_artifact_output_keys #=> Array
+    #   resp.provisioning_artifact_output_keys[0].key #=> String
+    #   resp.provisioning_artifact_output_keys[0].description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisioningParameters AWS API Documentation
     #
@@ -3381,7 +3387,10 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Lists all portfolios for which sharing was accepted by this account.
+    # Lists all imported portfolios for which account-to-account shares were
+    # accepted by this account. By specifying the `PortfolioShareType`, you
+    # can list portfolios for which organizational shares were accepted by
+    # this account.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -3403,12 +3412,14 @@ module Aws::ServiceCatalog
     #   The type of shared portfolios to list. The default is to list imported
     #   portfolios.
     #
-    #   * `AWS_ORGANIZATIONS` - List portfolios shared by the management
-    #     account of your organization
+    #   * `AWS_ORGANIZATIONS` - List portfolios accepted and shared via
+    #     organizational sharing by the management account or delegated
+    #     administrator of your organization.
     #
-    #   * `AWS_SERVICECATALOG` - List default portfolios
+    #   * `AWS_SERVICECATALOG` - Deprecated type.
     #
-    #   * `IMPORTED` - List imported portfolios
+    #   * `IMPORTED` - List imported portfolios that have been accepted and
+    #     shared through account-to-account sharing.
     #
     # @return [Types::ListAcceptedPortfolioSharesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5850,7 +5861,7 @@ module Aws::ServiceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicecatalog'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.71.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

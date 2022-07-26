@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/invocation_id.rb'
@@ -54,6 +55,7 @@ module Aws::TranscribeStreamingService
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::InvocationId)
@@ -261,7 +263,9 @@ module Aws::TranscribeStreamingService
     #   Amazon Transcribe Medical, this is US English (en-US).
     #
     # @option params [required, Integer] :media_sample_rate_hertz
-    #   The sample rate of the input audio in Hertz.
+    #   The sample rate of the input audio (in Hertz). Amazon Transcribe
+    #   medical supports a range from 16,000 Hz to 48,000 Hz. Note that the
+    #   sample rate you specify must match that of your audio.
     #
     # @option params [required, String] :media_encoding
     #   The encoding used for the input audio.
@@ -545,16 +549,22 @@ module Aws::TranscribeStreamingService
     #   The language code of the input audio stream.
     #
     # @option params [required, Integer] :media_sample_rate_hertz
-    #   The sample rate, in Hertz (Hz), of the input audio. We suggest that
-    #   you use 8,000 Hz for low quality audio and 16,000 Hz or higher for
-    #   high quality audio.
+    #   The sample rate of the input audio (in Hertz). Low-quality audio, such
+    #   as telephone audio, is typically around 8,000 Hz. High-quality audio
+    #   typically ranges from 16,000 Hz to 48,000 Hz. Note that the sample
+    #   rate you specify must match that of your audio.
     #
     # @option params [required, String] :media_encoding
     #   The encoding used for the input audio.
     #
     # @option params [String] :vocabulary_name
-    #   The name of the vocabulary to use when processing the transcription
-    #   job.
+    #   The name of the custom vocabulary you want to use with your
+    #   transcription.
+    #
+    #   This operation is not intended for use in conjunction with the
+    #   `IdentifyLanguage` operation. If you're using `IdentifyLanguage` in
+    #   your request and want to use one or more custom vocabularies with your
+    #   transcription, use the `VocabularyNames` operation instead.
     #
     # @option params [String] :session_id
     #   A identifier for the transcription session. Use this parameter when
@@ -563,9 +573,13 @@ module Aws::TranscribeStreamingService
     #   response.
     #
     # @option params [String] :vocabulary_filter_name
-    #   The name of the vocabulary filter you've created that is unique to
-    #   your account. Provide the name in this field to successfully use it in
-    #   a stream.
+    #   The name of the vocabulary filter you want to use with your
+    #   transcription.
+    #
+    #   This operation is not intended for use in conjunction with the
+    #   `IdentifyLanguage` operation. If you're using `IdentifyLanguage` in
+    #   your request and want to use one or more vocabulary filters with your
+    #   transcription, use the `VocabularyFilterNames` operation instead.
     #
     # @option params [String] :vocabulary_filter_method
     #   The manner in which you use your vocabulary filter to filter words in
@@ -585,10 +599,6 @@ module Aws::TranscribeStreamingService
     #
     #   Amazon Transcribe also produces a transcription of each item. An item
     #   includes the start time, end time, and any alternative transcriptions.
-    #
-    #   You can't set both `ShowSpeakerLabel` and
-    #   `EnableChannelIdentification` in the same request. If you set both,
-    #   your request returns a `BadRequestException`.
     #
     # @option params [Integer] :number_of_channels
     #   The number of channels that are in your audio stream.
@@ -665,6 +675,30 @@ module Aws::TranscribeStreamingService
     #   You can only use this parameter if you've set `IdentifyLanguage` to
     #   `true`in your request.
     #
+    # @option params [String] :vocabulary_names
+    #   The names of the custom vocabularies you want to use with your
+    #   transcription.
+    #
+    #   Note that if the custom vocabularies you specify are in languages that
+    #   don't match the language identified in your media, your job fails.
+    #
+    #   This operation is only intended for use in conjunction with the
+    #   `IdentifyLanguage` operation. If you're not using `IdentifyLanguage`
+    #   in your request and want to use a custom vocabulary with your
+    #   transcription, use the `VocabularyName` operation instead.
+    #
+    # @option params [String] :vocabulary_filter_names
+    #   The names of the vocabulary filters you want to use with your
+    #   transcription.
+    #
+    #   Note that if the vocabulary filters you specify are in languages that
+    #   don't match the language identified in your media, your job fails.
+    #
+    #   This operation is only intended for use in conjunction with the
+    #   `IdentifyLanguage` operation. If you're not using `IdentifyLanguage`
+    #   in your request and want to use a vocabulary filter with your
+    #   transcription, use the `VocabularyFilterName` operation instead.
+    #
     # @return [Types::StartStreamTranscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartStreamTranscriptionResponse#request_id #request_id} => String
@@ -688,6 +722,8 @@ module Aws::TranscribeStreamingService
     #   * {Types::StartStreamTranscriptionResponse#identify_language #identify_language} => Boolean
     #   * {Types::StartStreamTranscriptionResponse#language_options #language_options} => String
     #   * {Types::StartStreamTranscriptionResponse#preferred_language #preferred_language} => String
+    #   * {Types::StartStreamTranscriptionResponse#vocabulary_names #vocabulary_names} => String
+    #   * {Types::StartStreamTranscriptionResponse#vocabulary_filter_names #vocabulary_filter_names} => String
     #
     # @example Bi-directional EventStream Operation Example
     #
@@ -804,6 +840,8 @@ module Aws::TranscribeStreamingService
     #     identify_language: false,
     #     language_options: "LanguageOptions",
     #     preferred_language: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
+    #     vocabulary_names: "VocabularyNames",
+    #     vocabulary_filter_names: "VocabularyFilterNames",
     #   })
     #   # => Seahorse::Client::AsyncResponse
     #   async_resp.wait
@@ -881,6 +919,8 @@ module Aws::TranscribeStreamingService
     #   resp.identify_language #=> Boolean
     #   resp.language_options #=> String
     #   resp.preferred_language #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN"
+    #   resp.vocabulary_names #=> String
+    #   resp.vocabulary_filter_names #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/StartStreamTranscription AWS API Documentation
     #
@@ -925,7 +965,7 @@ module Aws::TranscribeStreamingService
         http_response: Seahorse::Client::Http::AsyncResponse.new,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribestreamingservice'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::TimestreamQuery
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -368,7 +370,7 @@ module Aws::TimestreamQuery
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/Timestream/latest/developerguide/code-samples.cancel-query.html
+    # [1]: https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.cancel-query.html
     #
     # @option params [required, String] :query_id
     #   The ID of the query that needs to be cancelled. `QueryID` is returned
@@ -500,7 +502,7 @@ module Aws::TimestreamQuery
     #             {
     #               source_column: "SchemaName", # required
     #               target_multi_measure_attribute_name: "SchemaName",
-    #               measure_value_type: "BIGINT", # required, accepts BIGINT, BOOLEAN, DOUBLE, VARCHAR
+    #               measure_value_type: "BIGINT", # required, accepts BIGINT, BOOLEAN, DOUBLE, VARCHAR, TIMESTAMP
     #             },
     #           ],
     #         },
@@ -514,7 +516,7 @@ module Aws::TimestreamQuery
     #               {
     #                 source_column: "SchemaName", # required
     #                 target_multi_measure_attribute_name: "SchemaName",
-    #                 measure_value_type: "BIGINT", # required, accepts BIGINT, BOOLEAN, DOUBLE, VARCHAR
+    #                 measure_value_type: "BIGINT", # required, accepts BIGINT, BOOLEAN, DOUBLE, VARCHAR, TIMESTAMP
     #               },
     #             ],
     #           },
@@ -597,8 +599,8 @@ module Aws::TimestreamQuery
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/Timestream/latest/developerguide/VPCEndpoints
-    # [2]: https://docs.aws.amazon.com/Timestream/latest/developerguide/Using.API.html#Using-API.endpoint-discovery
+    # [1]: https://docs.aws.amazon.com/timestream/latest/developerguide/VPCEndpoints
+    # [2]: https://docs.aws.amazon.com/timestream/latest/developerguide/Using.API.html#Using-API.endpoint-discovery
     #
     # @return [Types::DescribeEndpointsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -655,7 +657,7 @@ module Aws::TimestreamQuery
     #   resp.scheduled_query.target_configuration.timestream_configuration.multi_measure_mappings.multi_measure_attribute_mappings #=> Array
     #   resp.scheduled_query.target_configuration.timestream_configuration.multi_measure_mappings.multi_measure_attribute_mappings[0].source_column #=> String
     #   resp.scheduled_query.target_configuration.timestream_configuration.multi_measure_mappings.multi_measure_attribute_mappings[0].target_multi_measure_attribute_name #=> String
-    #   resp.scheduled_query.target_configuration.timestream_configuration.multi_measure_mappings.multi_measure_attribute_mappings[0].measure_value_type #=> String, one of "BIGINT", "BOOLEAN", "DOUBLE", "VARCHAR"
+    #   resp.scheduled_query.target_configuration.timestream_configuration.multi_measure_mappings.multi_measure_attribute_mappings[0].measure_value_type #=> String, one of "BIGINT", "BOOLEAN", "DOUBLE", "VARCHAR", "TIMESTAMP"
     #   resp.scheduled_query.target_configuration.timestream_configuration.mixed_measure_mappings #=> Array
     #   resp.scheduled_query.target_configuration.timestream_configuration.mixed_measure_mappings[0].measure_name #=> String
     #   resp.scheduled_query.target_configuration.timestream_configuration.mixed_measure_mappings[0].source_column #=> String
@@ -664,7 +666,7 @@ module Aws::TimestreamQuery
     #   resp.scheduled_query.target_configuration.timestream_configuration.mixed_measure_mappings[0].multi_measure_attribute_mappings #=> Array
     #   resp.scheduled_query.target_configuration.timestream_configuration.mixed_measure_mappings[0].multi_measure_attribute_mappings[0].source_column #=> String
     #   resp.scheduled_query.target_configuration.timestream_configuration.mixed_measure_mappings[0].multi_measure_attribute_mappings[0].target_multi_measure_attribute_name #=> String
-    #   resp.scheduled_query.target_configuration.timestream_configuration.mixed_measure_mappings[0].multi_measure_attribute_mappings[0].measure_value_type #=> String, one of "BIGINT", "BOOLEAN", "DOUBLE", "VARCHAR"
+    #   resp.scheduled_query.target_configuration.timestream_configuration.mixed_measure_mappings[0].multi_measure_attribute_mappings[0].measure_value_type #=> String, one of "BIGINT", "BOOLEAN", "DOUBLE", "VARCHAR", "TIMESTAMP"
     #   resp.scheduled_query.target_configuration.timestream_configuration.measure_name_column #=> String
     #   resp.scheduled_query.scheduled_query_execution_role_arn #=> String
     #   resp.scheduled_query.kms_key_id #=> String
@@ -924,7 +926,7 @@ module Aws::TimestreamQuery
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/Timestream/latest/developerguide/code-samples.run-query.html
+    # [1]: https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.run-query.html
     #
     # @option params [required, String] :query_string
     #   The query to be run by Timestream.
@@ -1159,7 +1161,7 @@ module Aws::TimestreamQuery
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-timestreamquery'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

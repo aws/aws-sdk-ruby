@@ -1503,7 +1503,7 @@ module Aws::DirectoryService
     #
     #       {
     #         directory_id: "DirectoryId", # required
-    #         type: "SmartCard", # accepts SmartCard
+    #         type: "SmartCard", # accepts SmartCard, SmartCardOrPassword
     #         next_token: "NextToken",
     #         limit: 1,
     #       }
@@ -1888,6 +1888,68 @@ module Aws::DirectoryService
     #
     class DescribeRegionsResult < Struct.new(
       :regions_description,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeSettingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId", # required
+    #         status: "Requested", # accepts Requested, Updating, Updated, Failed, Default
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   The identifier of the directory for which to retrieve information.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the directory settings for which to retrieve
+    #   information.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The `DescribeSettingsResult.NextToken` value from a previous call to
+    #   DescribeSettings. Pass null if this is the first call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeSettingsRequest AWS API Documentation
+    #
+    class DescribeSettingsRequest < Struct.new(
+      :directory_id,
+      :status,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] directory_id
+    #   The identifier of the directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] setting_entries
+    #   The list of SettingEntry objects that were retrieved.
+    #
+    #   It is possible that this list contains less than the number of items
+    #   specified in the `Limit` member of the request. This occurs if there
+    #   are less than the requested number of items left to retrieve, or if
+    #   the limitations of the operation have been exceeded.
+    #   @return [Array<Types::SettingEntry>]
+    #
+    # @!attribute [rw] next_token
+    #   If not null, token that indicates that more results are available.
+    #   Pass this value for the `NextToken` parameter in a subsequent call
+    #   to `DescribeSettings` to retrieve the next set of items.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeSettingsResult AWS API Documentation
+    #
+    class DescribeSettingsResult < Struct.new(
+      :directory_id,
+      :setting_entries,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -2584,7 +2646,7 @@ module Aws::DirectoryService
     #
     #       {
     #         directory_id: "DirectoryId", # required
-    #         type: "SmartCard", # required, accepts SmartCard
+    #         type: "SmartCard", # required, accepts SmartCard, SmartCardOrPassword
     #       }
     #
     # @!attribute [rw] directory_id
@@ -2802,7 +2864,7 @@ module Aws::DirectoryService
     #
     #       {
     #         directory_id: "DirectoryId", # required
-    #         type: "SmartCard", # required, accepts SmartCard
+    #         type: "SmartCard", # required, accepts SmartCard, SmartCardOrPassword
     #       }
     #
     # @!attribute [rw] directory_id
@@ -3082,6 +3144,25 @@ module Aws::DirectoryService
     #
     class GetSnapshotLimitsResult < Struct.new(
       :snapshot_limits)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specified directory setting is not compatible with other settings.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/IncompatibleSettingsException AWS API Documentation
+    #
+    class IncompatibleSettingsException < Struct.new(
+      :message,
+      :request_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4230,6 +4311,106 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
+    # Contains information about the configurable settings for a directory.
+    #
+    # @note When making an API call, you may pass Setting
+    #   data as a hash:
+    #
+    #       {
+    #         name: "DirectoryConfigurationSettingName", # required
+    #         value: "DirectoryConfigurationSettingValue", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the directory setting. For example:
+    #
+    #   `TLS_1_0`
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the directory setting for which to retrieve
+    #   information. For example, for `TLS_1_0`, the valid values are:
+    #   `Enable` and `Disable`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/Setting AWS API Documentation
+    #
+    class Setting < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the specified configurable setting for a
+    # directory.
+    #
+    # @!attribute [rw] type
+    #   The type of directory setting. For example, `Protocol` or `Cipher`.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the directory setting. For example:
+    #
+    #   `TLS_1_0`
+    #   @return [String]
+    #
+    # @!attribute [rw] allowed_values
+    #   The valid range of values for the directory setting.
+    #   @return [String]
+    #
+    # @!attribute [rw] applied_value
+    #   The value of the directory setting that is applied to the directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] requested_value
+    #   The value that was last requested for the directory setting.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_status
+    #   The overall status of the request to update the directory setting
+    #   request. If the directory setting is deployed in more than one
+    #   region, and the request fails in any region, the overall status is
+    #   `Failed`.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_detailed_status
+    #   Details about the status of the request to update the directory
+    #   setting. If the directory setting is deployed in more than one
+    #   region, status is returned for the request in each region where the
+    #   setting is deployed.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] request_status_message
+    #   The last status message for the directory status request.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_date_time
+    #   The date and time when the directory setting was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_requested_date_time
+    #   The date and time when the request to update a directory setting was
+    #   last submitted.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/SettingEntry AWS API Documentation
+    #
+    class SettingEntry < Struct.new(
+      :type,
+      :name,
+      :allowed_values,
+      :applied_value,
+      :requested_value,
+      :request_status,
+      :request_detailed_status,
+      :request_status_message,
+      :last_updated_date_time,
+      :last_requested_date_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ShareDirectoryRequest
     #   data as a hash:
     #
@@ -4755,6 +4936,25 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
+    # The specified directory setting is not supported.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UnsupportedSettingsException AWS API Documentation
+    #
+    class UnsupportedSettingsException < Struct.new(
+      :message,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Updates a conditional forwarder.
     #
     # @note When making an API call, you may pass UpdateConditionalForwarderRequest
@@ -4870,6 +5070,48 @@ module Aws::DirectoryService
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateRadiusResult AWS API Documentation
     #
     class UpdateRadiusResult < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateSettingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId", # required
+    #         settings: [ # required
+    #           {
+    #             name: "DirectoryConfigurationSettingName", # required
+    #             value: "DirectoryConfigurationSettingValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   The identifier of the directory for which to update settings.
+    #   @return [String]
+    #
+    # @!attribute [rw] settings
+    #   The list of Setting objects.
+    #   @return [Array<Types::Setting>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateSettingsRequest AWS API Documentation
+    #
+    class UpdateSettingsRequest < Struct.new(
+      :directory_id,
+      :settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] directory_id
+    #   The identifier of the directory.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateSettingsResult AWS API Documentation
+    #
+    class UpdateSettingsResult < Struct.new(
+      :directory_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass UpdateTrustRequest
     #   data as a hash:

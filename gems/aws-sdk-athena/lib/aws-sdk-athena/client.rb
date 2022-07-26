@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::Athena
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -407,6 +409,53 @@ module Aws::Athena
       req.send_request(options)
     end
 
+    # Returns the details of a single prepared statement or a list of up to
+    # 256 prepared statements for the array of prepared statement names that
+    # you provide. Requires you to have access to the workgroup to which the
+    # prepared statements belong. If a prepared statement cannot be
+    # retrieved for the name specified, the statement is listed in
+    # `UnprocessedPreparedStatementNames`.
+    #
+    # @option params [required, Array<String>] :prepared_statement_names
+    #   A list of prepared statement names to return.
+    #
+    # @option params [required, String] :work_group
+    #   The name of the workgroup to which the prepared statements belong.
+    #
+    # @return [Types::BatchGetPreparedStatementOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetPreparedStatementOutput#prepared_statements #prepared_statements} => Array&lt;Types::PreparedStatement&gt;
+    #   * {Types::BatchGetPreparedStatementOutput#unprocessed_prepared_statement_names #unprocessed_prepared_statement_names} => Array&lt;Types::UnprocessedPreparedStatementName&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_prepared_statement({
+    #     prepared_statement_names: ["StatementName"], # required
+    #     work_group: "WorkGroupName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.prepared_statements #=> Array
+    #   resp.prepared_statements[0].statement_name #=> String
+    #   resp.prepared_statements[0].query_statement #=> String
+    #   resp.prepared_statements[0].work_group_name #=> String
+    #   resp.prepared_statements[0].description #=> String
+    #   resp.prepared_statements[0].last_modified_time #=> Time
+    #   resp.unprocessed_prepared_statement_names #=> Array
+    #   resp.unprocessed_prepared_statement_names[0].statement_name #=> String
+    #   resp.unprocessed_prepared_statement_names[0].error_code #=> String
+    #   resp.unprocessed_prepared_statement_names[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/BatchGetPreparedStatement AWS API Documentation
+    #
+    # @overload batch_get_prepared_statement(params = {})
+    # @param [Hash] params ({})
+    def batch_get_prepared_statement(params = {}, options = {})
+      req = build_request(:batch_get_prepared_statement, params)
+      req.send_request(options)
+    end
+
     # Returns the details of a single query execution or a list of up to 50
     # query executions, which you provide as an array of query execution ID
     # strings. Requires you to have access to the workgroup in which the
@@ -439,6 +488,7 @@ module Aws::Athena
     #   resp.query_executions[0].result_configuration.encryption_configuration.encryption_option #=> String, one of "SSE_S3", "SSE_KMS", "CSE_KMS"
     #   resp.query_executions[0].result_configuration.encryption_configuration.kms_key #=> String
     #   resp.query_executions[0].result_configuration.expected_bucket_owner #=> String
+    #   resp.query_executions[0].result_configuration.acl_configuration.s3_acl_option #=> String, one of "BUCKET_OWNER_FULL_CONTROL"
     #   resp.query_executions[0].query_execution_context.database #=> String
     #   resp.query_executions[0].query_execution_context.catalog #=> String
     #   resp.query_executions[0].status.state #=> String, one of "QUEUED", "RUNNING", "SUCCEEDED", "FAILED", "CANCELLED"
@@ -446,6 +496,9 @@ module Aws::Athena
     #   resp.query_executions[0].status.submission_date_time #=> Time
     #   resp.query_executions[0].status.completion_date_time #=> Time
     #   resp.query_executions[0].status.athena_error.error_category #=> Integer
+    #   resp.query_executions[0].status.athena_error.error_type #=> Integer
+    #   resp.query_executions[0].status.athena_error.retryable #=> Boolean
+    #   resp.query_executions[0].status.athena_error.error_message #=> String
     #   resp.query_executions[0].statistics.engine_execution_time_in_millis #=> Integer
     #   resp.query_executions[0].statistics.data_scanned_in_bytes #=> Integer
     #   resp.query_executions[0].statistics.data_manifest_location #=> String
@@ -456,6 +509,8 @@ module Aws::Athena
     #   resp.query_executions[0].work_group #=> String
     #   resp.query_executions[0].engine_version.selected_engine_version #=> String
     #   resp.query_executions[0].engine_version.effective_engine_version #=> String
+    #   resp.query_executions[0].execution_parameters #=> Array
+    #   resp.query_executions[0].execution_parameters[0] #=> String
     #   resp.unprocessed_query_execution_ids #=> Array
     #   resp.unprocessed_query_execution_ids[0].query_execution_id #=> String
     #   resp.unprocessed_query_execution_ids[0].error_code #=> String
@@ -699,12 +754,15 @@ module Aws::Athena
     #     name: "WorkGroupName", # required
     #     configuration: {
     #       result_configuration: {
-    #         output_location: "String",
+    #         output_location: "ResultOutputLocation",
     #         encryption_configuration: {
     #           encryption_option: "SSE_S3", # required, accepts SSE_S3, SSE_KMS, CSE_KMS
     #           kms_key: "String",
     #         },
-    #         expected_bucket_owner: "String",
+    #         expected_bucket_owner: "AwsAccountId",
+    #         acl_configuration: {
+    #           s3_acl_option: "BUCKET_OWNER_FULL_CONTROL", # required, accepts BUCKET_OWNER_FULL_CONTROL
+    #         },
     #       },
     #       enforce_work_group_configuration: false,
     #       publish_cloud_watch_metrics_enabled: false,
@@ -1008,6 +1066,7 @@ module Aws::Athena
     #   resp.query_execution.result_configuration.encryption_configuration.encryption_option #=> String, one of "SSE_S3", "SSE_KMS", "CSE_KMS"
     #   resp.query_execution.result_configuration.encryption_configuration.kms_key #=> String
     #   resp.query_execution.result_configuration.expected_bucket_owner #=> String
+    #   resp.query_execution.result_configuration.acl_configuration.s3_acl_option #=> String, one of "BUCKET_OWNER_FULL_CONTROL"
     #   resp.query_execution.query_execution_context.database #=> String
     #   resp.query_execution.query_execution_context.catalog #=> String
     #   resp.query_execution.status.state #=> String, one of "QUEUED", "RUNNING", "SUCCEEDED", "FAILED", "CANCELLED"
@@ -1015,6 +1074,9 @@ module Aws::Athena
     #   resp.query_execution.status.submission_date_time #=> Time
     #   resp.query_execution.status.completion_date_time #=> Time
     #   resp.query_execution.status.athena_error.error_category #=> Integer
+    #   resp.query_execution.status.athena_error.error_type #=> Integer
+    #   resp.query_execution.status.athena_error.retryable #=> Boolean
+    #   resp.query_execution.status.athena_error.error_message #=> String
     #   resp.query_execution.statistics.engine_execution_time_in_millis #=> Integer
     #   resp.query_execution.statistics.data_scanned_in_bytes #=> Integer
     #   resp.query_execution.statistics.data_manifest_location #=> String
@@ -1025,6 +1087,8 @@ module Aws::Athena
     #   resp.query_execution.work_group #=> String
     #   resp.query_execution.engine_version.selected_engine_version #=> String
     #   resp.query_execution.engine_version.effective_engine_version #=> String
+    #   resp.query_execution.execution_parameters #=> Array
+    #   resp.query_execution.execution_parameters[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetQueryExecution AWS API Documentation
     #
@@ -1040,14 +1104,6 @@ module Aws::Athena
     # S3. For more information, see [Query Results][1] in the *Amazon Athena
     # User Guide*. This request does not execute the query but returns
     # results. Use StartQueryExecution to run a query.
-    #
-    # If the original query execution ran using an
-    # ResultConfiguration$ExpectedBucketOwner setting, the setting also
-    # applies to Amazon S3 read operations when `GetQueryResults` is called.
-    # If an expected bucket owner has been specified and the query results
-    # are in an Amazon S3 bucket whose owner account ID is different from
-    # the expected bucket owner, the `GetQueryResults` call fails with an
-    # Amazon S3 permissions error.
     #
     # To stream query results successfully, the IAM principal with
     # permission to call `GetQueryResults` also must have permissions to the
@@ -1116,6 +1172,60 @@ module Aws::Athena
     # @param [Hash] params ({})
     def get_query_results(params = {}, options = {})
       req = build_request(:get_query_results, params)
+      req.send_request(options)
+    end
+
+    # Returns query execution runtime statistics related to a single
+    # execution of a query if you have access to the workgroup in which the
+    # query ran. The query execution runtime statistics is returned only
+    # when QueryExecutionStatus$State is in a SUCCEEDED or FAILED state.
+    #
+    # @option params [required, String] :query_execution_id
+    #   The unique ID of the query execution.
+    #
+    # @return [Types::GetQueryRuntimeStatisticsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetQueryRuntimeStatisticsOutput#query_runtime_statistics #query_runtime_statistics} => Types::QueryRuntimeStatistics
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_query_runtime_statistics({
+    #     query_execution_id: "QueryExecutionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.query_runtime_statistics.timeline.query_queue_time_in_millis #=> Integer
+    #   resp.query_runtime_statistics.timeline.query_planning_time_in_millis #=> Integer
+    #   resp.query_runtime_statistics.timeline.engine_execution_time_in_millis #=> Integer
+    #   resp.query_runtime_statistics.timeline.service_processing_time_in_millis #=> Integer
+    #   resp.query_runtime_statistics.timeline.total_execution_time_in_millis #=> Integer
+    #   resp.query_runtime_statistics.rows.input_rows #=> Integer
+    #   resp.query_runtime_statistics.rows.input_bytes #=> Integer
+    #   resp.query_runtime_statistics.rows.output_bytes #=> Integer
+    #   resp.query_runtime_statistics.rows.output_rows #=> Integer
+    #   resp.query_runtime_statistics.output_stage.stage_id #=> Integer
+    #   resp.query_runtime_statistics.output_stage.state #=> String
+    #   resp.query_runtime_statistics.output_stage.output_bytes #=> Integer
+    #   resp.query_runtime_statistics.output_stage.output_rows #=> Integer
+    #   resp.query_runtime_statistics.output_stage.input_bytes #=> Integer
+    #   resp.query_runtime_statistics.output_stage.input_rows #=> Integer
+    #   resp.query_runtime_statistics.output_stage.execution_time #=> Integer
+    #   resp.query_runtime_statistics.output_stage.query_stage_plan.name #=> String
+    #   resp.query_runtime_statistics.output_stage.query_stage_plan.identifier #=> String
+    #   resp.query_runtime_statistics.output_stage.query_stage_plan.children #=> Array
+    #   resp.query_runtime_statistics.output_stage.query_stage_plan.children[0] #=> Types::QueryStagePlanNode
+    #   resp.query_runtime_statistics.output_stage.query_stage_plan.remote_sources #=> Array
+    #   resp.query_runtime_statistics.output_stage.query_stage_plan.remote_sources[0] #=> String
+    #   resp.query_runtime_statistics.output_stage.sub_stages #=> Array
+    #   resp.query_runtime_statistics.output_stage.sub_stages[0] #=> Types::QueryStage
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetQueryRuntimeStatistics AWS API Documentation
+    #
+    # @overload get_query_runtime_statistics(params = {})
+    # @param [Hash] params ({})
+    def get_query_runtime_statistics(params = {}, options = {})
+      req = build_request(:get_query_runtime_statistics, params)
       req.send_request(options)
     end
 
@@ -1192,6 +1302,7 @@ module Aws::Athena
     #   resp.work_group.configuration.result_configuration.encryption_configuration.encryption_option #=> String, one of "SSE_S3", "SSE_KMS", "CSE_KMS"
     #   resp.work_group.configuration.result_configuration.encryption_configuration.kms_key #=> String
     #   resp.work_group.configuration.result_configuration.expected_bucket_owner #=> String
+    #   resp.work_group.configuration.result_configuration.acl_configuration.s3_acl_option #=> String, one of "BUCKET_OWNER_FULL_CONTROL"
     #   resp.work_group.configuration.enforce_work_group_configuration #=> Boolean
     #   resp.work_group.configuration.publish_cloud_watch_metrics_enabled #=> Boolean
     #   resp.work_group.configuration.bytes_scanned_cutoff_per_query #=> Integer
@@ -1315,6 +1426,8 @@ module Aws::Athena
     #   * {Types::ListEngineVersionsOutput#engine_versions #engine_versions} => Array&lt;Types::EngineVersion&gt;
     #   * {Types::ListEngineVersionsOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_engine_versions({
@@ -1394,7 +1507,7 @@ module Aws::Athena
       req.send_request(options)
     end
 
-    # Lists the prepared statements in the specfied workgroup.
+    # Lists the prepared statements in the specified workgroup.
     #
     # @option params [required, String] :work_group
     #   The workgroup to list the prepared statements for.
@@ -1699,6 +1812,11 @@ module Aws::Athena
     # @option params [String] :work_group
     #   The name of the workgroup in which the query is being started.
     #
+    # @option params [Array<String>] :execution_parameters
+    #   A list of values for the parameters in a query. The values are applied
+    #   sequentially to the parameters in the query in the order in which the
+    #   parameters occur.
+    #
     # @return [Types::StartQueryExecutionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartQueryExecutionOutput#query_execution_id #query_execution_id} => String
@@ -1713,14 +1831,18 @@ module Aws::Athena
     #       catalog: "CatalogNameString",
     #     },
     #     result_configuration: {
-    #       output_location: "String",
+    #       output_location: "ResultOutputLocation",
     #       encryption_configuration: {
     #         encryption_option: "SSE_S3", # required, accepts SSE_S3, SSE_KMS, CSE_KMS
     #         kms_key: "String",
     #       },
-    #       expected_bucket_owner: "String",
+    #       expected_bucket_owner: "AwsAccountId",
+    #       acl_configuration: {
+    #         s3_acl_option: "BUCKET_OWNER_FULL_CONTROL", # required, accepts BUCKET_OWNER_FULL_CONTROL
+    #       },
     #     },
     #     work_group: "WorkGroupName",
+    #     execution_parameters: ["ExecutionParameter"],
     #   })
     #
     # @example Response structure
@@ -1911,6 +2033,41 @@ module Aws::Athena
       req.send_request(options)
     end
 
+    # Updates a NamedQuery object. The database or workgroup cannot be
+    # updated.
+    #
+    # @option params [required, String] :named_query_id
+    #   The unique identifier (UUID) of the query.
+    #
+    # @option params [required, String] :name
+    #   The name of the query.
+    #
+    # @option params [String] :description
+    #   The query description.
+    #
+    # @option params [required, String] :query_string
+    #   The contents of the query with all query statements.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_named_query({
+    #     named_query_id: "NamedQueryId", # required
+    #     name: "NameString", # required
+    #     description: "NamedQueryDescriptionString",
+    #     query_string: "QueryString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/UpdateNamedQuery AWS API Documentation
+    #
+    # @overload update_named_query(params = {})
+    # @param [Hash] params ({})
+    def update_named_query(params = {}, options = {})
+      req = build_request(:update_named_query, params)
+      req.send_request(options)
+    end
+
     # Updates a prepared statement.
     #
     # @option params [required, String] :statement_name
@@ -1971,15 +2128,19 @@ module Aws::Athena
     #     configuration_updates: {
     #       enforce_work_group_configuration: false,
     #       result_configuration_updates: {
-    #         output_location: "String",
+    #         output_location: "ResultOutputLocation",
     #         remove_output_location: false,
     #         encryption_configuration: {
     #           encryption_option: "SSE_S3", # required, accepts SSE_S3, SSE_KMS, CSE_KMS
     #           kms_key: "String",
     #         },
     #         remove_encryption_configuration: false,
-    #         expected_bucket_owner: "String",
+    #         expected_bucket_owner: "AwsAccountId",
     #         remove_expected_bucket_owner: false,
+    #         acl_configuration: {
+    #           s3_acl_option: "BUCKET_OWNER_FULL_CONTROL", # required, accepts BUCKET_OWNER_FULL_CONTROL
+    #         },
+    #         remove_acl_configuration: false,
     #       },
     #       publish_cloud_watch_metrics_enabled: false,
     #       bytes_scanned_cutoff_per_query: 1,
@@ -2015,7 +2176,7 @@ module Aws::Athena
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-athena'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

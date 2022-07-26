@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2022-07-14)
+------------------
+
+* Feature - This release adds support for Inspector V2 scan configurations through the get and update configuration APIs. Currently this allows configuring ECR automated re-scan duration to lifetime or 180 days or 30 days.
+
+1.4.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.3.0 (2022-02-03)
 ------------------
 

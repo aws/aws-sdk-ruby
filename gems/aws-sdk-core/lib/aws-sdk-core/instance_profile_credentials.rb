@@ -4,6 +4,11 @@ require 'time'
 require 'net/http'
 
 module Aws
+  # An auto-refreshing credential provider that loads credentials from
+  # EC2 instances.
+  #
+  #     instance_credentials = Aws::InstanceProfileCredentials.new
+  #     ec2 = Aws::EC2::Client.new(credentials: instance_credentials)
   class InstanceProfileCredentials
     include CredentialProvider
     include RefreshingCredentials
@@ -63,6 +68,10 @@ module Aws
     # @option options [Integer] :token_ttl Time-to-Live in seconds for EC2
     #   Metadata Token used for fetching Metadata Profile Credentials, defaults
     #   to 21600 seconds
+    # @option options [Callable] before_refresh Proc called before
+    #   credentials are refreshed. `before_refresh` is called
+    #   with an instance of this object when
+    #   AWS credentials are required and need to be refreshed.
     def initialize(options = {})
       @retries = options[:retries] || 1
       endpoint_mode = resolve_endpoint_mode(options)
@@ -74,6 +83,8 @@ module Aws
       @backoff = backoff(options[:backoff])
       @token_ttl = options[:token_ttl] || 21_600
       @token = nil
+      @no_refresh_until = nil
+      @async_refresh = false
       super
     end
 
@@ -121,18 +132,48 @@ module Aws
     end
 
     def refresh
+      if @no_refresh_until && @no_refresh_until > Time.now
+        warn_expired_credentials
+        return
+      end
+
       # Retry loading credentials up to 3 times is the instance metadata
       # service is responding but is returning invalid JSON documents
       # in response to the GET profile credentials call.
       begin
         retry_errors([Aws::Json::ParseError, StandardError], max_retries: 3) do
           c = Aws::Json.load(get_credentials.to_s)
-          @credentials = Credentials.new(
-            c['AccessKeyId'],
-            c['SecretAccessKey'],
-            c['Token']
-          )
-          @expiration = c['Expiration'] ? Time.iso8601(c['Expiration']) : nil
+          if empty_credentials?(@credentials)
+            @credentials = Credentials.new(
+              c['AccessKeyId'],
+              c['SecretAccessKey'],
+              c['Token']
+            )
+            @expiration = c['Expiration'] ? Time.iso8601(c['Expiration']) : nil
+            if @expiration && @expiration < Time.now
+              @no_refresh_until = Time.now + refresh_offset
+              warn_expired_credentials
+            end
+          else
+            #  credentials are already set, update them only if the new ones are not empty
+            if !c['AccessKeyId'] || c['AccessKeyId'].empty?
+              # error getting new credentials
+              @no_refresh_until = Time.now + refresh_offset
+              warn_expired_credentials
+            else
+              @credentials = Credentials.new(
+                c['AccessKeyId'],
+                c['SecretAccessKey'],
+                c['Token']
+              )
+              @expiration = c['Expiration'] ? Time.iso8601(c['Expiration']) : nil
+              if @expiration && @expiration < Time.now
+                @no_refresh_until = Time.now + refresh_offset
+                warn_expired_credentials
+              end
+            end
+          end
+
         end
       rescue Aws::Json::ParseError
         raise Aws::Errors::MetadataParserError
@@ -153,10 +194,11 @@ module Aws
               begin
                 retry_errors(NETWORK_ERRORS, max_retries: @retries) do
                   unless token_set?
+                    created_time = Time.now
                     token_value, ttl = http_put(
                       conn, METADATA_TOKEN_PATH, @token_ttl
                     )
-                    @token = Token.new(token_value, ttl) if token_value && ttl
+                    @token = Token.new(token_value, ttl, created_time) if token_value && ttl
                   end
                 end
               rescue *NETWORK_ERRORS
@@ -166,9 +208,17 @@ module Aws
               end
 
               token = @token.value if token_set?
-              metadata = http_get(conn, METADATA_PATH_BASE, token)
-              profile_name = metadata.lines.first.strip
-              http_get(conn, METADATA_PATH_BASE + profile_name, token)
+
+              begin
+                metadata = http_get(conn, METADATA_PATH_BASE, token)
+                profile_name = metadata.lines.first.strip
+                http_get(conn, METADATA_PATH_BASE + profile_name, token)
+              rescue TokenExpiredError
+                # Token has expired, reset it
+                # The next retry should fetch it
+                @token = nil
+                raise Non200Response
+              end
             end
           end
         rescue
@@ -200,9 +250,15 @@ module Aws
       headers = { 'User-Agent' => "aws-sdk-ruby3/#{CORE_GEM_VERSION}" }
       headers['x-aws-ec2-metadata-token'] = token if token
       response = connection.request(Net::HTTP::Get.new(path, headers))
-      raise Non200Response unless response.code.to_i == 200
 
-      response.body
+      case response.code.to_i
+      when 200
+        response.body
+      when 401
+        raise TokenExpiredError
+      else
+        raise Non200Response
+      end
     end
 
     # PUT request fetch token with ttl
@@ -241,13 +297,28 @@ module Aws
       end
     end
 
+    def warn_expired_credentials
+      warn("Attempting credential expiration extension due to a credential "\
+        "service availability issue. A refresh of these credentials "\
+        "will be attempted again in 5 minutes.")
+    end
+
+    def empty_credentials?(creds)
+      !creds || !creds.access_key_id || creds.access_key_id.empty?
+    end
+
+    # Compute an offset for refresh with jitter
+    def refresh_offset
+      300 + rand(0..60)
+    end
+
     # @api private
     # Token used to fetch IMDS profile and credentials
     class Token
-      def initialize(value, ttl)
+      def initialize(value, ttl, created_time = Time.now)
         @ttl = ttl
         @value = value
-        @created_time = Time.now
+        @created_time = created_time
       end
 
       # [String] token value

@@ -61,6 +61,56 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # A structure that contains the following account information elements:
+    #
+    # * Your Amazon QuickSight account name.
+    #
+    # * The edition of Amazon QuickSight that your account is using.
+    #
+    # * The notification email address that is associated with the Amazon
+    #   QuickSight account.
+    #
+    # * The authentication type of the Amazon QuickSight account.
+    #
+    # * The status of the Amazon QuickSight account's subscription.
+    #
+    # @!attribute [rw] account_name
+    #   The account name that you provided for the Amazon QuickSight
+    #   subscription in your Amazon Web Services account. You create this
+    #   name when you sign up for Amazon QuickSight. It's unique over all
+    #   of Amazon Web Services, and it appears only when users sign in.
+    #   @return [String]
+    #
+    # @!attribute [rw] edition
+    #   The edition of your Amazon QuickSight account.
+    #   @return [String]
+    #
+    # @!attribute [rw] notification_email
+    #   The email address that will be used for Amazon QuickSight to send
+    #   notifications regarding your Amazon Web Services account or Amazon
+    #   QuickSight subscription.
+    #   @return [String]
+    #
+    # @!attribute [rw] authentication_type
+    #   The way that your Amazon QuickSight account is authenticated.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_subscription_status
+    #   The status of your account subscription.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AccountInfo AWS API Documentation
+    #
+    class AccountInfo < Struct.new(
+      :account_name,
+      :edition,
+      :notification_email,
+      :authentication_type,
+      :account_subscription_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The Amazon QuickSight settings associated with your Amazon Web
     # Services account.
     #
@@ -85,13 +135,24 @@ module Aws::QuickSight
     #   The main notification email for your Amazon QuickSight subscription.
     #   @return [String]
     #
+    # @!attribute [rw] public_sharing_enabled
+    #   A Boolean value that indicates whether public sharing is turned on
+    #   for an Amazon QuickSight account. For more information about turning
+    #   on public sharing, see [UpdatePublicSharingSettings][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdatePublicSharingSettings.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AccountSettings AWS API Documentation
     #
     class AccountSettings < Struct.new(
       :account_name,
       :edition,
       :default_namespace,
-      :notification_email)
+      :notification_email,
+      :public_sharing_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -115,7 +176,7 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # Ad hoc (one-time) filtering option.
+    # An ad hoc (one-time) filtering option.
     #
     # @note When making an API call, you may pass AdHocFilteringOption
     #   data as a hash:
@@ -1005,6 +1066,196 @@ module Aws::QuickSight
       :account_customization,
       :request_id,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateAccountSubscriptionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         edition: "STANDARD", # required, accepts STANDARD, ENTERPRISE, ENTERPRISE_AND_Q
+    #         authentication_method: "IAM_AND_QUICKSIGHT", # required, accepts IAM_AND_QUICKSIGHT, IAM_ONLY, ACTIVE_DIRECTORY
+    #         aws_account_id: "AwsAccountId", # required
+    #         account_name: "String", # required
+    #         notification_email: "String", # required
+    #         active_directory_name: "String",
+    #         realm: "String",
+    #         directory_id: "String",
+    #         admin_group: ["String"],
+    #         author_group: ["String"],
+    #         reader_group: ["String"],
+    #         first_name: "String",
+    #         last_name: "String",
+    #         email_address: "String",
+    #         contact_number: "String",
+    #       }
+    #
+    # @!attribute [rw] edition
+    #   The edition of Amazon QuickSight that you want your account to have.
+    #   Currently, you can choose from `ENTERPRISE` or `ENTERPRISE_AND_Q`.
+    #
+    #   If you choose `ENTERPRISE_AND_Q`, the following parameters are
+    #   required:
+    #
+    #   * `FirstName`
+    #
+    #   * `LastName`
+    #
+    #   * `EmailAddress`
+    #
+    #   * `ContactNumber`
+    #   @return [String]
+    #
+    # @!attribute [rw] authentication_method
+    #   The method that you want to use to authenticate your Amazon
+    #   QuickSight account. Currently, the valid values for this parameter
+    #   are `IAM_AND_QUICKSIGHT`, `IAM_ONLY`, and `ACTIVE_DIRECTORY`.
+    #
+    #   If you choose `ACTIVE_DIRECTORY`, provide an `ActiveDirectoryName`
+    #   and an `AdminGroup` associated with your Active Directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_account_id
+    #   The Amazon Web Services account ID of the account that you're using
+    #   to create your Amazon QuickSight account.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_name
+    #   The name of your Amazon QuickSight account. This name is unique over
+    #   all of Amazon Web Services, and it appears only when users sign in.
+    #   You can't change `AccountName` value after the Amazon QuickSight
+    #   account is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] notification_email
+    #   The email address that you want Amazon QuickSight to send
+    #   notifications to regarding your Amazon QuickSight account or Amazon
+    #   QuickSight subscription.
+    #   @return [String]
+    #
+    # @!attribute [rw] active_directory_name
+    #   The name of your Active Directory. This field is required if
+    #   `ACTIVE_DIRECTORY` is the selected authentication method of the new
+    #   Amazon QuickSight account.
+    #   @return [String]
+    #
+    # @!attribute [rw] realm
+    #   The realm of the Active Directory that is associated with your
+    #   Amazon QuickSight account. This field is required if
+    #   `ACTIVE_DIRECTORY` is the selected authentication method of the new
+    #   Amazon QuickSight account.
+    #   @return [String]
+    #
+    # @!attribute [rw] directory_id
+    #   The ID of the Active Directory that is associated with your Amazon
+    #   QuickSight account.
+    #   @return [String]
+    #
+    # @!attribute [rw] admin_group
+    #   The admin group associated with your Active Directory. This field is
+    #   required if `ACTIVE_DIRECTORY` is the selected authentication method
+    #   of the new Amazon QuickSight account. For more information about
+    #   using Active Directory in Amazon QuickSight, see [Using Active
+    #   Directory with Amazon QuickSight Enterprise Edition][1] in the
+    #   Amazon QuickSight User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] author_group
+    #   The author group associated with your Active Directory. For more
+    #   information about using Active Directory in Amazon QuickSight, see
+    #   [Using Active Directory with Amazon QuickSight Enterprise
+    #   Edition][1] in the Amazon QuickSight User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] reader_group
+    #   The reader group associated with your Active Direcrtory. For more
+    #   information about using Active Directory in Amazon QuickSight, see
+    #   [Using Active Directory with Amazon QuickSight Enterprise
+    #   Edition][1] in the *Amazon QuickSight User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] first_name
+    #   The first name of the author of the Amazon QuickSight account to use
+    #   for future communications. This field is required if
+    #   `ENTERPPRISE_AND_Q` is the selected edition of the new Amazon
+    #   QuickSight account.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_name
+    #   The last name of the author of the Amazon QuickSight account to use
+    #   for future communications. This field is required if
+    #   `ENTERPPRISE_AND_Q` is the selected edition of the new Amazon
+    #   QuickSight account.
+    #   @return [String]
+    #
+    # @!attribute [rw] email_address
+    #   The email address of the author of the Amazon QuickSight account to
+    #   use for future communications. This field is required if
+    #   `ENTERPPRISE_AND_Q` is the selected edition of the new Amazon
+    #   QuickSight account.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_number
+    #   A 10-digit phone number for the author of the Amazon QuickSight
+    #   account to use for future communications. This field is required if
+    #   `ENTERPPRISE_AND_Q` is the selected edition of the new Amazon
+    #   QuickSight account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateAccountSubscriptionRequest AWS API Documentation
+    #
+    class CreateAccountSubscriptionRequest < Struct.new(
+      :edition,
+      :authentication_method,
+      :aws_account_id,
+      :account_name,
+      :notification_email,
+      :active_directory_name,
+      :realm,
+      :directory_id,
+      :admin_group,
+      :author_group,
+      :reader_group,
+      :first_name,
+      :last_name,
+      :email_address,
+      :contact_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] signup_response
+    #   A `SignupResponse` object that returns information about a newly
+    #   created Amazon QuickSight account.
+    #   @return [Types::SignupResponse]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateAccountSubscriptionResponse AWS API Documentation
+    #
+    class CreateAccountSubscriptionResponse < Struct.new(
+      :signup_response,
+      :status,
+      :request_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2211,7 +2462,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace. Currently, you should set this to `default`.
+    #   The namespace that you want the user to be a part of.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateGroupMembershipRequest AWS API Documentation
@@ -2274,7 +2525,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace. Currently, you should set this to `default`.
+    #   The namespace that you want the group to be a part of.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateGroupRequest AWS API Documentation
@@ -4768,7 +5019,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace. Currently, you should set this to `default`.
+    #   The namespace of the group that you want to remove a user from.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteGroupMembershipRequest AWS API Documentation
@@ -4819,7 +5070,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace. Currently, you should set this to `default`.
+    #   The namespace of the group that you want to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteGroupRequest AWS API Documentation
@@ -5402,13 +5653,14 @@ module Aws::QuickSight
     #   The Amazon QuickSight settings for this Amazon Web Services account.
     #   This information includes the edition of Amazon Amazon QuickSight
     #   that you subscribed to (Standard or Enterprise) and the notification
-    #   email for the Amazon QuickSight subscription. In the QuickSight
-    #   console, the Amazon QuickSight subscription is sometimes referred to
-    #   as a QuickSight "account" even though it's technically not an
-    #   account by itself. Instead, it's a subscription to the Amazon
-    #   QuickSight service for your Amazon Web Services account. The edition
-    #   that you subscribe to applies to Amazon QuickSight in every Amazon
-    #   Web Services Region where you use it.
+    #   email for the Amazon QuickSight subscription.
+    #
+    #   In the QuickSight console, the Amazon QuickSight subscription is
+    #   sometimes referred to as a QuickSight "account" even though it's
+    #   technically not an account by itself. Instead, it's a subscription
+    #   to the Amazon QuickSight service for your Amazon Web Services
+    #   account. The edition that you subscribe to applies to Amazon
+    #   QuickSight in every Amazon Web Services Region where you use it.
     #   @return [Types::AccountSettings]
     #
     # @!attribute [rw] request_id
@@ -5425,6 +5677,59 @@ module Aws::QuickSight
       :account_settings,
       :request_id,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeAccountSubscriptionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The Amazon Web Services account ID associated with your Amazon
+    #   QuickSight account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeAccountSubscriptionRequest AWS API Documentation
+    #
+    class DescribeAccountSubscriptionRequest < Struct.new(
+      :aws_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_info
+    #   A structure that contains the following elements:
+    #
+    #   * Your Amazon QuickSight account name.
+    #
+    #   * The edition of Amazon QuickSight that your account is using.
+    #
+    #   * The notification email address that is associated with the Amazon
+    #     QuickSight account.
+    #
+    #   * The authentication type of the Amazon QuickSight account.
+    #
+    #   * The status of the Amazon QuickSight account's subscription.
+    #   @return [Types::AccountInfo]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeAccountSubscriptionResponse AWS API Documentation
+    #
+    class DescribeAccountSubscriptionResponse < Struct.new(
+      :account_info,
+      :status,
+      :request_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6049,6 +6354,68 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeGroupMembershipRequest
+    #   data as a hash:
+    #
+    #       {
+    #         member_name: "GroupMemberName", # required
+    #         group_name: "GroupName", # required
+    #         aws_account_id: "AwsAccountId", # required
+    #         namespace: "Namespace", # required
+    #       }
+    #
+    # @!attribute [rw] member_name
+    #   The user name of the user that you want to search for.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_name
+    #   The name of the group that you want to search.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID for the Amazon Web Services account that the group is in.
+    #   Currently, you use the ID for the Amazon Web Services account that
+    #   contains your Amazon QuickSight account.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace that includes the group you are searching within.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeGroupMembershipRequest AWS API Documentation
+    #
+    class DescribeGroupMembershipRequest < Struct.new(
+      :member_name,
+      :group_name,
+      :aws_account_id,
+      :namespace)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] group_member
+    #   A member of an Amazon QuickSight group. Currently, group members
+    #   must be users. Groups can't be members of another group. .
+    #   @return [Types::GroupMember]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeGroupMembershipResponse AWS API Documentation
+    #
+    class DescribeGroupMembershipResponse < Struct.new(
+      :group_member,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeGroupRequest
     #   data as a hash:
     #
@@ -6069,7 +6436,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace. Currently, you should set this to `default`.
+    #   The namespace of the group that you want described.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeGroupRequest AWS API Documentation
@@ -7028,6 +7395,7 @@ module Aws::QuickSight
     #             initial_dashboard_id: "RestrictiveResourceId", # required
     #           },
     #         },
+    #         allowed_domains: ["String"],
     #       }
     #
     # @!attribute [rw] aws_account_id
@@ -7054,7 +7422,7 @@ module Aws::QuickSight
     #
     #   These are not the tags used for the Amazon Web Services resource
     #   tagging feature. For more information, see [Using Row-Level Security
-    #   (RLS) with Tags][1].
+    #   (RLS) with Tags][1]in the *Amazon QuickSight User Guide*.
     #
     #
     #
@@ -7062,16 +7430,31 @@ module Aws::QuickSight
     #   @return [Array<Types::SessionTag>]
     #
     # @!attribute [rw] authorized_resource_arns
-    #   The Amazon Resource Names for the Amazon QuickSight resources that
-    #   the user is authorized to access during the lifetime of the session.
-    #   If you choose `Dashboard` embedding experience, pass the list of
-    #   dashboard ARNs in the account that you want the user to be able to
-    #   view.
+    #   The Amazon Resource Names (ARNs) for the Amazon QuickSight resources
+    #   that the user is authorized to access during the lifetime of the
+    #   session. If you choose `Dashboard` embedding experience, pass the
+    #   list of dashboard ARNs in the account that you want the user to be
+    #   able to view. Currently, you can pass up to 25 dashboard ARNs in
+    #   each API call.
     #   @return [Array<String>]
     #
     # @!attribute [rw] experience_configuration
-    #   The configuration of the experience you are embedding.
+    #   The configuration of the experience that you are embedding.
     #   @return [Types::AnonymousUserEmbeddingExperienceConfiguration]
+    #
+    # @!attribute [rw] allowed_domains
+    #   The domains that you want to add to the allow list for access to the
+    #   generated URL that is then embedded. This optional parameter
+    #   overrides the static domains that are configured in the Manage
+    #   QuickSight menu in the Amazon QuickSight console and instead allows
+    #   only the domains that you include in this parameter. You can list up
+    #   to three domains or subdomains in each API call.
+    #
+    #   To include a subdomain, use `*` to include all subdomains under a
+    #   specific domain to the allow list. For example,
+    #   `https://*.sapp.amazon.com,` includes all subdomains under
+    #   `https://sapp.amazon.com`.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GenerateEmbedUrlForAnonymousUserRequest AWS API Documentation
     #
@@ -7081,7 +7464,8 @@ module Aws::QuickSight
       :namespace,
       :session_tags,
       :authorized_resource_arns,
-      :experience_configuration)
+      :experience_configuration,
+      :allowed_domains)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7126,6 +7510,7 @@ module Aws::QuickSight
     #             initial_topic_id: "RestrictiveResourceId",
     #           },
     #         },
+    #         allowed_domains: ["String"],
     #       }
     #
     # @!attribute [rw] aws_account_id
@@ -7148,13 +7533,28 @@ module Aws::QuickSight
     #   console.
     #   @return [Types::RegisteredUserEmbeddingExperienceConfiguration]
     #
+    # @!attribute [rw] allowed_domains
+    #   The domains that you want to add to the allow list for access to the
+    #   generated URL that is then embedded. This optional parameter
+    #   overrides the static domains that are configured in the Manage
+    #   QuickSight menu in the Amazon QuickSight console and instead allows
+    #   only the domains that you include in this parameter. You can list up
+    #   to three domains or subdomains in each API call.
+    #
+    #   To include a subdomain, use `*` to include all subdomains under a
+    #   specific domain to the allow list. For example,
+    #   `https://*.sapp.amazon.com,` includes all subdomains under
+    #   `https://sapp.amazon.com`.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GenerateEmbedUrlForRegisteredUserRequest AWS API Documentation
     #
     class GenerateEmbedUrlForRegisteredUserRequest < Struct.new(
       :aws_account_id,
       :session_lifetime_in_minutes,
       :user_arn,
-      :experience_configuration)
+      :experience_configuration,
+      :allowed_domains)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7295,13 +7695,13 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] additional_dashboard_ids
-    #   A list of one or more dashboard IDs that you want to add to a
-    #   session that includes anonymous users. The `IdentityType` parameter
-    #   must be set to `ANONYMOUS` for this to work, because other identity
-    #   types authenticate as Amazon QuickSight or IAM users. For example,
-    #   if you set "`--dashboard-id dash_id1 --dashboard-id dash_id2
-    #   dash_id3 identity-type ANONYMOUS`", the session can access all
-    #   three dashboards.
+    #   A list of one or more dashboard IDs that you want anonymous users to
+    #   have tempporary access to. Currently, the `IdentityType` parameter
+    #   must be set to `ANONYMOUS` because other identity types authenticate
+    #   as Amazon QuickSight or IAM users. For example, if you set
+    #   "`--dashboard-id dash_id1 --dashboard-id dash_id2 dash_id3
+    #   identity-type ANONYMOUS`", the session can access all three
+    #   dashboards.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GetDashboardEmbedUrlRequest AWS API Documentation
@@ -7489,6 +7889,44 @@ module Aws::QuickSight
     class GroupMember < Struct.new(
       :arn,
       :member_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A `GroupSearchFilter` object that you want to apply to your search.
+    #
+    # @note When making an API call, you may pass GroupSearchFilter
+    #   data as a hash:
+    #
+    #       {
+    #         operator: "StartsWith", # required, accepts StartsWith
+    #         name: "GROUP_NAME", # required, accepts GROUP_NAME
+    #         value: "String", # required
+    #       }
+    #
+    # @!attribute [rw] operator
+    #   The comparison operator that you want to use as a filter, for
+    #   example `"Operator": "StartsWith"`. Currently, the only supported
+    #   operator is `StartsWith`.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the value that you want to use as a filter, for example
+    #   `"Name": "GROUP_NAME"`. Currently, the only supported name is
+    #   `GROUP_NAME`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the named item, in this case `GROUP_NAME`, that you
+    #   want to use as a filter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GroupSearchFilter AWS API Documentation
+    #
+    class GroupSearchFilter < Struct.new(
+      :operator,
+      :name,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8371,7 +8809,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace. Currently, you should set this to `default`.
+    #   The namespace of the group that you want a list of users from.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListGroupMembershipsRequest AWS API Documentation
@@ -8438,7 +8876,7 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] namespace
-    #   The namespace. Currently, you should set this to `default`.
+    #   The namespace that you want a list of groups from.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListGroupsRequest AWS API Documentation
@@ -10187,7 +10625,7 @@ module Aws::QuickSight
     #   restrictions. Currently, you need to create the profile names for
     #   custom permission sets by using the Amazon QuickSight console. Then,
     #   you use the `RegisterUser` API operation to assign the named set of
-    #   permissions to a QuickSight user.
+    #   permissions to a Amazon QuickSight user.
     #
     #   Amazon QuickSight custom permissions are applied through IAM
     #   policies. Therefore, they override the permissions typically granted
@@ -10370,7 +10808,7 @@ module Aws::QuickSight
     #   The configuration details for embedding the Q search bar.
     #
     #   For more information about embedding the Q search bar, see
-    #   [Embedding Overview][1].
+    #   [Embedding Overview][1] in the *Amazon QuickSight User Guide*.
     #
     #
     #
@@ -11165,6 +11603,86 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass SearchGroupsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         next_token: "String",
+    #         max_results: 1,
+    #         namespace: "Namespace", # required
+    #         filters: [ # required
+    #           {
+    #             operator: "StartsWith", # required, accepts StartsWith
+    #             name: "GROUP_NAME", # required, accepts GROUP_NAME
+    #             value: "String", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID for the Amazon Web Services account that the group is in.
+    #   Currently, you use the ID for the Amazon Web Services account that
+    #   contains your Amazon QuickSight account.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token that can be used in a subsequent request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return from this request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace that you want to search.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   The structure for the search filters that you want to apply to your
+    #   search.
+    #   @return [Array<Types::GroupSearchFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SearchGroupsRequest AWS API Documentation
+    #
+    class SearchGroupsRequest < Struct.new(
+      :aws_account_id,
+      :next_token,
+      :max_results,
+      :namespace,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] group_list
+    #   A list of groups in a specified namespace that match the filters you
+    #   set in your `SearchGroups` request.
+    #   @return [Array<Types::Group>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token that can be used in a subsequent request.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SearchGroupsResponse AWS API Documentation
+    #
+    class SearchGroupsResponse < Struct.new(
+      :group_list,
+      :next_token,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The parameters for ServiceNow.
     #
     # @note When making an API call, you may pass ServiceNowParameters
@@ -11312,6 +11830,39 @@ module Aws::QuickSight
     class SheetStyle < Struct.new(
       :tile,
       :tile_layout)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A `SignupResponse` object that contains a summary of a newly created
+    # account.
+    #
+    # @!attribute [rw] iam_user
+    #   A Boolean that is `TRUE` if the Amazon QuickSight uses IAM as an
+    #   authentication method.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] user_login_name
+    #   The user login name for your Amazon QuickSight account.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_name
+    #   The name of your Amazon QuickSight account.
+    #   @return [String]
+    #
+    # @!attribute [rw] directory_type
+    #   The type of Active Directory that is being used to authenticate the
+    #   Amazon QuickSight account. Valid values are `SIMPLE_AD`,
+    #   `AD_CONNECTOR`, and `MICROSOFT_AD`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SignupResponse AWS API Documentation
+    #
+    class SignupResponse < Struct.new(
+      :iam_user,
+      :user_login_name,
+      :account_name,
+      :directory_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12748,7 +13299,8 @@ module Aws::QuickSight
     #   The default namespace for this Amazon Web Services account.
     #   Currently, the default is `default`. Identity and Access Management
     #   (IAM) users that register for the first time with Amazon QuickSight
-    #   provide an email that becomes associated with the default namespace.
+    #   provide an email address that becomes associated with the default
+    #   namespace.
     #   @return [String]
     #
     # @!attribute [rw] notification_email
@@ -14235,7 +14787,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace. Currently, you should set this to `default`.
+    #   The namespace of the group that you want to update.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateGroupRequest AWS API Documentation
@@ -14440,6 +14992,50 @@ module Aws::QuickSight
     #
     class UpdateIpRestrictionResponse < Struct.new(
       :aws_account_id,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdatePublicSharingSettingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         public_sharing_enabled: false,
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The Amazon Web Services account ID associated with your Amazon
+    #   QuickSight subscription.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_sharing_enabled
+    #   A Boolean value that indicates whether public sharing is turned on
+    #   for an Amazon QuickSight account.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdatePublicSharingSettingsRequest AWS API Documentation
+    #
+    class UpdatePublicSharingSettingsRequest < Struct.new(
+      :aws_account_id,
+      :public_sharing_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdatePublicSharingSettingsResponse AWS API Documentation
+    #
+    class UpdatePublicSharingSettingsResponse < Struct.new(
       :request_id,
       :status)
       SENSITIVE = []
@@ -15039,7 +15635,7 @@ module Aws::QuickSight
     #   restrictions. Currently, you need to create the profile names for
     #   custom permission sets by using the Amazon QuickSight console. Then,
     #   you use the `RegisterUser` API operation to assign the named set of
-    #   permissions to a QuickSight user.
+    #   permissions to a Amazon QuickSight user.
     #
     #   Amazon QuickSight custom permissions are applied through IAM
     #   policies. Therefore, they override the permissions typically granted

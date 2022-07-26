@@ -1093,7 +1093,7 @@ module Aws::RoboMaker
     #           s3_prefix: "S3Key",
     #         },
     #         logging_config: {
-    #           record_all_ros_topics: false, # required
+    #           record_all_ros_topics: false,
     #         },
     #         max_job_duration_in_seconds: 1, # required
     #         iam_role: "IamRole", # required
@@ -4666,11 +4666,13 @@ module Aws::RoboMaker
     #   data as a hash:
     #
     #       {
-    #         record_all_ros_topics: false, # required
+    #         record_all_ros_topics: false,
     #       }
     #
     # @!attribute [rw] record_all_ros_topics
     #   A boolean indicating whether to record all ROS topics.
+    #
+    #   This API is no longer supported and will throw an error if used.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/LoggingConfig AWS API Documentation
@@ -5093,6 +5095,8 @@ module Aws::RoboMaker
     #   application terminates and all ROS topics will be recorded.
     #
     #   If you set this value, you must specify an `outputLocation`.
+    #
+    #   This API is no longer supported and will throw an error if used.
     #   @return [Boolean]
     #
     # @!attribute [rw] tools
@@ -5103,6 +5107,8 @@ module Aws::RoboMaker
     #   A Boolean indicating whether to use default robot application tools.
     #   The default tools are rviz, rqt, terminal and rosbag record. The
     #   default is `False`.
+    #
+    #   This API is no longer supported and will throw an error if used.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/RobotApplicationConfig AWS API Documentation
@@ -5370,6 +5376,8 @@ module Aws::RoboMaker
     #   application terminates and all ROS topics will be recorded.
     #
     #   If you set this value, you must specify an `outputLocation`.
+    #
+    #   This API is no longer supported and will throw an error if used.
     #   @return [Boolean]
     #
     # @!attribute [rw] tools
@@ -5380,6 +5388,8 @@ module Aws::RoboMaker
     #   A Boolean indicating whether to use default simulation application
     #   tools. The default tools are rviz, rqt, terminal and rosbag record.
     #   The default is `False`.
+    #
+    #   This API is no longer supported and will throw an error if used.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/SimulationApplicationConfig AWS API Documentation
@@ -5672,7 +5682,7 @@ module Aws::RoboMaker
     #           s3_prefix: "S3Key",
     #         },
     #         logging_config: {
-    #           record_all_ros_topics: false, # required
+    #           record_all_ros_topics: false,
     #         },
     #         max_job_duration_in_seconds: 1, # required
     #         iam_role: "IamRole",
@@ -6039,7 +6049,7 @@ module Aws::RoboMaker
     #               s3_prefix: "S3Key",
     #             },
     #             logging_config: {
-    #               record_all_ros_topics: false, # required
+    #               record_all_ros_topics: false,
     #             },
     #             max_job_duration_in_seconds: 1, # required
     #             iam_role: "IamRole",
@@ -7181,13 +7191,18 @@ module Aws::RoboMaker
     #   A list of worlds.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] output_location
+    #   The output location.
+    #   @return [Types::OutputLocation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/WorldExportJobSummary AWS API Documentation
     #
     class WorldExportJobSummary < Struct.new(
       :arn,
       :status,
       :created_at,
-      :worlds)
+      :worlds,
+      :output_location)
       SENSITIVE = []
       include Aws::Structure
     end

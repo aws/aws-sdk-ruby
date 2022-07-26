@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::SSM
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -360,13 +362,14 @@ module Aws::SSM
     # @!group API Operations
 
     # Adds or overwrites one or more tags for the specified resource. Tags
-    # are metadata that you can assign to your documents, managed nodes,
-    # maintenance windows, Parameter Store parameters, and patch baselines.
-    # Tags enable you to categorize your resources in different ways, for
-    # example, by purpose, owner, or environment. Each tag consists of a key
-    # and an optional value, both of which you define. For example, you
-    # could define a set of tags for your account's managed nodes that
-    # helps you track each node's owner and stack level. For example:
+    # are metadata that you can assign to your automations, documents,
+    # managed nodes, maintenance windows, Parameter Store parameters, and
+    # patch baselines. Tags enable you to categorize your resources in
+    # different ways, for example, by purpose, owner, or environment. Each
+    # tag consists of a key and an optional value, both of which you define.
+    # For example, you could define a set of tags for your account's
+    # managed nodes that helps you track each node's owner and stack level.
+    # For example:
     #
     # * `Key=Owner,Value=DbAdmin`
     #
@@ -380,7 +383,8 @@ module Aws::SSM
     #
     # * `Key=Stack,Value=Test`
     #
-    # Each resource can have a maximum of 50 tags.
+    # Most resources can have a maximum of 50 tags. Automations can have a
+    # maximum of 5 tags.
     #
     # We recommend that you devise a set of tag keys that meets your needs
     # for each resource type. Using a consistent set of tag keys makes it
@@ -414,6 +418,8 @@ module Aws::SSM
     #
     #   `PatchBaseline`\: `pb-012345abcde`
     #
+    #   `Automation`\: `example-c160-4567-8519-012345abcde`
+    #
     #   `OpsMetadata` object: `ResourceID` for tagging is created from the
     #   Amazon Resource Name (ARN) for the object. Specifically, `ResourceID`
     #   is created from the strings that come after the word `opsmetadata` in
@@ -444,7 +450,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.add_tags_to_resource({
-    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata
+    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata, Automation
     #     resource_id: "ResourceId", # required
     #     tags: [ # required
     #       {
@@ -869,6 +875,29 @@ module Aws::SSM
     #   action to create an association in multiple Regions and multiple
     #   accounts.
     #
+    # @option params [Integer] :schedule_offset
+    #   Number of days to wait after the scheduled day to run an association.
+    #   For example, if you specified a cron schedule of `cron(0 0 ? * THU#2
+    #   *)`, you could specify an offset of 3 to run the association each
+    #   Sunday after the second Thursday of the month. For more information
+    #   about cron schedules for associations, see [Reference: Cron and rate
+    #   expressions for Systems Manager][1] in the *Amazon Web Services
+    #   Systems Manager User Guide*.
+    #
+    #   <note markdown="1"> To use offsets, you must specify the `ApplyOnlyAtCronInterval`
+    #   parameter. This option tells the system not to run an association
+    #   immediately after you create it.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/reference-cron-and-rate-expressions.html
+    #
+    # @option params [Array<Hash>] :target_maps
+    #   A key-value mapping of document parameters to target resources. Both
+    #   Targets and TargetMaps can't be specified together.
+    #
     # @return [Types::CreateAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAssociationResult#association_description #association_description} => Types::AssociationDescription
@@ -911,6 +940,12 @@ module Aws::SSM
     #         target_location_max_concurrency: "MaxConcurrency",
     #         target_location_max_errors: "MaxErrors",
     #         execution_role_name: "ExecutionRoleName",
+    #       },
+    #     ],
+    #     schedule_offset: 1,
+    #     target_maps: [
+    #       {
+    #         "TargetMapKey" => ["TargetMapValue"],
     #       },
     #     ],
     #   })
@@ -962,6 +997,11 @@ module Aws::SSM
     #   resp.association_description.target_locations[0].target_location_max_concurrency #=> String
     #   resp.association_description.target_locations[0].target_location_max_errors #=> String
     #   resp.association_description.target_locations[0].execution_role_name #=> String
+    #   resp.association_description.schedule_offset #=> Integer
+    #   resp.association_description.target_maps #=> Array
+    #   resp.association_description.target_maps[0] #=> Hash
+    #   resp.association_description.target_maps[0]["TargetMapKey"] #=> Array
+    #   resp.association_description.target_maps[0]["TargetMapKey"][0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociation AWS API Documentation
     #
@@ -1034,6 +1074,12 @@ module Aws::SSM
     #             execution_role_name: "ExecutionRoleName",
     #           },
     #         ],
+    #         schedule_offset: 1,
+    #         target_maps: [
+    #           {
+    #             "TargetMapKey" => ["TargetMapValue"],
+    #           },
+    #         ],
     #       },
     #     ],
     #   })
@@ -1086,6 +1132,11 @@ module Aws::SSM
     #   resp.successful[0].target_locations[0].target_location_max_concurrency #=> String
     #   resp.successful[0].target_locations[0].target_location_max_errors #=> String
     #   resp.successful[0].target_locations[0].execution_role_name #=> String
+    #   resp.successful[0].schedule_offset #=> Integer
+    #   resp.successful[0].target_maps #=> Array
+    #   resp.successful[0].target_maps[0] #=> Hash
+    #   resp.successful[0].target_maps[0]["TargetMapKey"] #=> Array
+    #   resp.successful[0].target_maps[0]["TargetMapKey"][0] #=> String
     #   resp.failed #=> Array
     #   resp.failed[0].entry.name #=> String
     #   resp.failed[0].entry.instance_id #=> String
@@ -1118,6 +1169,11 @@ module Aws::SSM
     #   resp.failed[0].entry.target_locations[0].target_location_max_concurrency #=> String
     #   resp.failed[0].entry.target_locations[0].target_location_max_errors #=> String
     #   resp.failed[0].entry.target_locations[0].execution_role_name #=> String
+    #   resp.failed[0].entry.schedule_offset #=> Integer
+    #   resp.failed[0].entry.target_maps #=> Array
+    #   resp.failed[0].entry.target_maps[0] #=> Hash
+    #   resp.failed[0].entry.target_maps[0]["TargetMapKey"] #=> Array
+    #   resp.failed[0].entry.target_maps[0]["TargetMapKey"][0] #=> String
     #   resp.failed[0].message #=> String
     #   resp.failed[0].fault #=> String, one of "Client", "Server", "Unknown"
     #
@@ -1204,6 +1260,11 @@ module Aws::SSM
     #
     # @option params [String] :document_type
     #   The type of document to create.
+    #
+    #   <note markdown="1"> The `DeploymentStrategy` document type is an internal-use-only
+    #   document type reserved for AppConfig.
+    #
+    #    </note>
     #
     # @option params [String] :document_format
     #   Specify the document format for the request. The document format can
@@ -1810,7 +1871,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_patch_baseline({
-    #     operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN
+    #     operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN, ROCKY_LINUX
     #     name: "BaselineName", # required
     #     global_filters: {
     #       patch_filters: [ # required
@@ -2605,6 +2666,11 @@ module Aws::SSM
     #   resp.association_description.target_locations[0].target_location_max_concurrency #=> String
     #   resp.association_description.target_locations[0].target_location_max_errors #=> String
     #   resp.association_description.target_locations[0].execution_role_name #=> String
+    #   resp.association_description.schedule_offset #=> Integer
+    #   resp.association_description.target_maps #=> Array
+    #   resp.association_description.target_maps[0] #=> Hash
+    #   resp.association_description.target_maps[0]["TargetMapKey"] #=> Array
+    #   resp.association_description.target_maps[0]["TargetMapKey"][0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAssociation AWS API Documentation
     #
@@ -2842,6 +2908,10 @@ module Aws::SSM
     #   resp.automation_execution_metadata_list[0].runbooks[0].targets[0].key #=> String
     #   resp.automation_execution_metadata_list[0].runbooks[0].targets[0].values #=> Array
     #   resp.automation_execution_metadata_list[0].runbooks[0].targets[0].values[0] #=> String
+    #   resp.automation_execution_metadata_list[0].runbooks[0].target_maps #=> Array
+    #   resp.automation_execution_metadata_list[0].runbooks[0].target_maps[0] #=> Hash
+    #   resp.automation_execution_metadata_list[0].runbooks[0].target_maps[0]["TargetMapKey"] #=> Array
+    #   resp.automation_execution_metadata_list[0].runbooks[0].target_maps[0]["TargetMapKey"][0] #=> String
     #   resp.automation_execution_metadata_list[0].runbooks[0].max_concurrency #=> String
     #   resp.automation_execution_metadata_list[0].runbooks[0].max_errors #=> String
     #   resp.automation_execution_metadata_list[0].runbooks[0].target_locations #=> Array
@@ -4650,7 +4720,7 @@ module Aws::SSM
     #   resp.baseline_identities #=> Array
     #   resp.baseline_identities[0].baseline_id #=> String
     #   resp.baseline_identities[0].baseline_name #=> String
-    #   resp.baseline_identities[0].operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "AMAZON_LINUX_2", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS", "ORACLE_LINUX", "DEBIAN", "MACOS", "RASPBIAN"
+    #   resp.baseline_identities[0].operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "AMAZON_LINUX_2", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS", "ORACLE_LINUX", "DEBIAN", "MACOS", "RASPBIAN", "ROCKY_LINUX"
     #   resp.baseline_identities[0].baseline_description #=> String
     #   resp.baseline_identities[0].default_baseline #=> Boolean
     #   resp.next_token #=> String
@@ -4763,7 +4833,7 @@ module Aws::SSM
     #   resp.mappings[0].patch_group #=> String
     #   resp.mappings[0].baseline_identity.baseline_id #=> String
     #   resp.mappings[0].baseline_identity.baseline_name #=> String
-    #   resp.mappings[0].baseline_identity.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "AMAZON_LINUX_2", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS", "ORACLE_LINUX", "DEBIAN", "MACOS", "RASPBIAN"
+    #   resp.mappings[0].baseline_identity.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "AMAZON_LINUX_2", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS", "ORACLE_LINUX", "DEBIAN", "MACOS", "RASPBIAN", "ROCKY_LINUX"
     #   resp.mappings[0].baseline_identity.baseline_description #=> String
     #   resp.mappings[0].baseline_identity.default_baseline #=> Boolean
     #   resp.next_token #=> String
@@ -4858,7 +4928,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_patch_properties({
-    #     operating_system: "WINDOWS", # required, accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN
+    #     operating_system: "WINDOWS", # required, accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN, ROCKY_LINUX
     #     property: "PRODUCT", # required, accepts PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY, PRIORITY, SEVERITY
     #     patch_set: "OS", # accepts OS, APPLICATION
     #     max_results: 1,
@@ -5100,6 +5170,10 @@ module Aws::SSM
     #   resp.automation_execution.runbooks[0].targets[0].key #=> String
     #   resp.automation_execution.runbooks[0].targets[0].values #=> Array
     #   resp.automation_execution.runbooks[0].targets[0].values[0] #=> String
+    #   resp.automation_execution.runbooks[0].target_maps #=> Array
+    #   resp.automation_execution.runbooks[0].target_maps[0] #=> Hash
+    #   resp.automation_execution.runbooks[0].target_maps[0]["TargetMapKey"] #=> Array
+    #   resp.automation_execution.runbooks[0].target_maps[0]["TargetMapKey"][0] #=> String
     #   resp.automation_execution.runbooks[0].max_concurrency #=> String
     #   resp.automation_execution.runbooks[0].max_errors #=> String
     #   resp.automation_execution.runbooks[0].target_locations #=> Array
@@ -5206,20 +5280,18 @@ module Aws::SSM
     #   Manager.
     #
     # @option params [String] :plugin_name
-    #   The name of the plugin for which you want detailed results. If the
-    #   document contains only one plugin, you can omit the name and details
-    #   for that plugin. If the document contains more than one plugin, you
-    #   must specify the name of the plugin for which you want to view
-    #   details.
-    #
-    #   Plugin names are also referred to as *step names* in Systems Manager
-    #   documents (SSM documents). For example, `aws:RunShellScript` is a
-    #   plugin.
+    #   The name of the step for which you want detailed results. If the
+    #   document contains only one step, you can omit the name and details for
+    #   that step. If the document contains more than one step, you must
+    #   specify the name of the step for which you want to view details. Be
+    #   sure to specify the name of the step, not the name of a plugin like
+    #   `aws:RunShellScript`.
     #
     #   To find the `PluginName`, check the document content and find the name
-    #   of the plugin. Alternatively, use ListCommandInvocations with the
-    #   `CommandId` and `Details` parameters. The `PluginName` is the `Name`
-    #   attribute of the `CommandPlugin` object in the `CommandPlugins` list.
+    #   of the step you want details for. Alternatively, use
+    #   ListCommandInvocations with the `CommandId` and `Details` parameters.
+    #   The `PluginName` is the `Name` attribute of the `CommandPlugin` object
+    #   in the `CommandPlugins` list.
     #
     # @return [Types::GetCommandInvocationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5335,13 +5407,13 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_default_patch_baseline({
-    #     operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN
+    #     operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN, ROCKY_LINUX
     #   })
     #
     # @example Response structure
     #
     #   resp.baseline_id #=> String
-    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "AMAZON_LINUX_2", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS", "ORACLE_LINUX", "DEBIAN", "MACOS", "RASPBIAN"
+    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "AMAZON_LINUX_2", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS", "ORACLE_LINUX", "DEBIAN", "MACOS", "RASPBIAN", "ROCKY_LINUX"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetDefaultPatchBaseline AWS API Documentation
     #
@@ -5392,7 +5464,7 @@ module Aws::SSM
     #     instance_id: "InstanceId", # required
     #     snapshot_id: "SnapshotId", # required
     #     baseline_override: {
-    #       operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN
+    #       operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN, ROCKY_LINUX
     #       global_filters: {
     #         patch_filters: [ # required
     #           {
@@ -5899,7 +5971,7 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Lists the tasks in a maintenance window.
+    # Retrieves the details of a maintenance window task.
     #
     # <note markdown="1"> For maintenance window tasks without a specified target, you can't
     # supply values for `--max-errors` and `--max-concurrency`. Instead, the
@@ -5908,6 +5980,9 @@ module Aws::SSM
     # of your task and can be ignored.
     #
     #  </note>
+    #
+    # To retrieve a list of tasks in a maintenance window, instead use the
+    # DescribeMaintenanceWindowTasks command.
     #
     # @option params [required, String] :window_id
     #   The maintenance window ID that includes the task to retrieve.
@@ -6396,8 +6471,8 @@ module Aws::SSM
     #
     # @option params [required, String] :path
     #   The hierarchy for the parameter. Hierarchies start with a forward
-    #   slash (/). The hierachy is the parameter name except the last part of
-    #   the parameter. For the API call to succeeed, the last part of the
+    #   slash (/). The hierarchy is the parameter name except the last part of
+    #   the parameter. For the API call to succeed, the last part of the
     #   parameter name can't be in the path. A parameter name hierarchy can
     #   have a maximum of 15 levels. Here is an example of a hierarchy:
     #   `/Finance/Prod/IAD/WinServ2016/license33 `
@@ -6524,7 +6599,7 @@ module Aws::SSM
     #
     #   resp.baseline_id #=> String
     #   resp.name #=> String
-    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "AMAZON_LINUX_2", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS", "ORACLE_LINUX", "DEBIAN", "MACOS", "RASPBIAN"
+    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "AMAZON_LINUX_2", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS", "ORACLE_LINUX", "DEBIAN", "MACOS", "RASPBIAN", "ROCKY_LINUX"
     #   resp.global_filters.patch_filters #=> Array
     #   resp.global_filters.patch_filters[0].key #=> String, one of "ARCH", "ADVISORY_ID", "BUGZILLA_ID", "PATCH_SET", "PRODUCT", "PRODUCT_FAMILY", "CLASSIFICATION", "CVE_ID", "EPOCH", "MSRC_SEVERITY", "NAME", "PATCH_ID", "SECTION", "PRIORITY", "REPOSITORY", "RELEASE", "SEVERITY", "SECURITY", "VERSION"
     #   resp.global_filters.patch_filters[0].values #=> Array
@@ -6572,7 +6647,7 @@ module Aws::SSM
     #   The name of the patch group whose patch baseline should be retrieved.
     #
     # @option params [String] :operating_system
-    #   Returns he operating system rule specified for patch groups using the
+    #   Returns the operating system rule specified for patch groups using the
     #   patch baseline.
     #
     # @return [Types::GetPatchBaselineForPatchGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -6585,14 +6660,14 @@ module Aws::SSM
     #
     #   resp = client.get_patch_baseline_for_patch_group({
     #     patch_group: "PatchGroup", # required
-    #     operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN
+    #     operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN, ROCKY_LINUX
     #   })
     #
     # @example Response structure
     #
     #   resp.baseline_id #=> String
     #   resp.patch_group #=> String
-    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "AMAZON_LINUX_2", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS", "ORACLE_LINUX", "DEBIAN", "MACOS", "RASPBIAN"
+    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "AMAZON_LINUX_2", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS", "ORACLE_LINUX", "DEBIAN", "MACOS", "RASPBIAN", "ROCKY_LINUX"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetPatchBaselineForPatchGroup AWS API Documentation
     #
@@ -6803,6 +6878,11 @@ module Aws::SSM
     #   resp.association_versions[0].target_locations[0].target_location_max_concurrency #=> String
     #   resp.association_versions[0].target_locations[0].target_location_max_errors #=> String
     #   resp.association_versions[0].target_locations[0].execution_role_name #=> String
+    #   resp.association_versions[0].schedule_offset #=> Integer
+    #   resp.association_versions[0].target_maps #=> Array
+    #   resp.association_versions[0].target_maps[0] #=> Hash
+    #   resp.association_versions[0].target_maps[0]["TargetMapKey"] #=> Array
+    #   resp.association_versions[0].target_maps[0]["TargetMapKey"][0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListAssociationVersions AWS API Documentation
@@ -6879,6 +6959,11 @@ module Aws::SSM
     #   resp.associations[0].overview.association_status_aggregated_count["StatusName"] #=> Integer
     #   resp.associations[0].schedule_expression #=> String
     #   resp.associations[0].association_name #=> String
+    #   resp.associations[0].schedule_offset #=> Integer
+    #   resp.associations[0].target_maps #=> Array
+    #   resp.associations[0].target_maps[0] #=> Hash
+    #   resp.associations[0].target_maps[0]["TargetMapKey"] #=> Array
+    #   resp.associations[0].target_maps[0]["TargetMapKey"][0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListAssociations AWS API Documentation
@@ -7860,7 +7945,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_tags_for_resource({
-    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata
+    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata, Automation
     #     resource_id: "ResourceId", # required
     #   })
     #
@@ -8138,13 +8223,12 @@ module Aws::SSM
     #   [Creating Systems Manager parameters][1] in the *Amazon Web Services
     #   Systems Manager User Guide*.
     #
-    #   <note markdown="1"> The maximum length constraint listed below includes capacity for
-    #   additional system attributes that aren't part of the name. The
-    #   maximum length for a parameter name, including the full length of the
-    #   parameter ARN, is 1011 characters. For example, the length of the
-    #   following parameter name is 65 characters, not 20 characters:
-    #
-    #    `arn:aws:ssm:us-east-2:111122223333:parameter/ExampleParameterName`
+    #   <note markdown="1"> The maximum length constraint of 2048 characters listed below includes
+    #   1037 characters reserved for internal use by Systems Manager. The
+    #   maximum length for a parameter name that you create is 1011
+    #   characters. This includes the characters in the ARN that precede the
+    #   name you specify, such as
+    #   `arn:aws:ssm:us-east-2:111122223333:parameter/`.
     #
     #    </note>
     #
@@ -8344,6 +8428,8 @@ module Aws::SSM
     #   * `text`
     #
     #   * `aws:ec2:image`
+    #
+    #   * `aws:ssm:integration`
     #
     #   When you create a `String` parameter and specify `aws:ec2:image`,
     #   Amazon Web Services Systems Manager validates the parameter value is
@@ -8655,25 +8741,41 @@ module Aws::SSM
     #   scheduled in parallel.
     #
     # @option params [String] :max_concurrency
-    #   The maximum number of targets this task can be run for in parallel.
+    #   The maximum number of targets this task can be run for, in parallel.
     #
-    #   <note markdown="1"> For maintenance window tasks without a target specified, you can't
+    #   <note markdown="1"> Although this element is listed as "Required: No", a value can be
+    #   omitted only when you are registering or updating a [targetless
+    #   task][1] You must provide a value in all other cases.
+    #
+    #    For maintenance window tasks without a target specified, you can't
     #   supply a value for this option. Instead, the system inserts a
     #   placeholder value of `1`. This value doesn't affect the running of
     #   your task.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html
     #
     # @option params [String] :max_errors
     #   The maximum number of errors allowed before this task stops being
     #   scheduled.
     #
-    #   <note markdown="1"> For maintenance window tasks without a target specified, you can't
+    #   <note markdown="1"> Although this element is listed as "Required: No", a value can be
+    #   omitted only when you are registering or updating a [targetless
+    #   task][1] You must provide a value in all other cases.
+    #
+    #    For maintenance window tasks without a target specified, you can't
     #   supply a value for this option. Instead, the system inserts a
     #   placeholder value of `1`. This value doesn't affect the running of
     #   your task.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html
     #
     # @option params [Types::LoggingInfo] :logging_info
     #   A structure containing information about an Amazon Simple Storage
@@ -8829,6 +8931,8 @@ module Aws::SSM
     #
     #   MaintenanceWindow: mw-012345abcde
     #
+    #   `Automation`\: `example-c160-4567-8519-012345abcde`
+    #
     #   PatchBaseline: pb-012345abcde
     #
     #   OpsMetadata object: `ResourceID` for tagging is created from the
@@ -8855,7 +8959,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.remove_tags_from_resource({
-    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata
+    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata, Automation
     #     resource_id: "ResourceId", # required
     #     tag_keys: ["TagKey"], # required
     #   })
@@ -9369,7 +9473,7 @@ module Aws::SSM
     #
     #   * `Key=OS,Value=Windows`
     #
-    #   <note markdown="1"> To add tags to an existing patch baseline, use the AddTagsToResource
+    #   <note markdown="1"> To add tags to an existing automation, use the AddTagsToResource
     #   operation.
     #
     #    </note>
@@ -9544,6 +9648,11 @@ module Aws::SSM
     #             values: ["TargetValue"],
     #           },
     #         ],
+    #         target_maps: [
+    #           {
+    #             "TargetMapKey" => ["TargetMapValue"],
+    #           },
+    #         ],
     #         max_concurrency: "MaxConcurrency",
     #         max_errors: "MaxErrors",
     #         target_locations: [
@@ -9616,7 +9725,8 @@ module Aws::SSM
     #   start the session.
     #
     # @option params [Hash<String,Array>] :parameters
-    #   Reserved for future use.
+    #   The values you want to specify for the parameters defined in the
+    #   Session document.
     #
     # @return [Types::StartSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9679,7 +9789,7 @@ module Aws::SSM
 
     # Permanently ends a session and closes the data connection between the
     # Session Manager client and SSM Agent on the managed node. A terminated
-    # session isn't be resumed.
+    # session can't be resumed.
     #
     # @option params [required, String] :session_id
     #   The ID of the session to terminate.
@@ -9752,7 +9862,7 @@ module Aws::SSM
     # Updates an association. You can update the association name and
     # version, the document version, schedule, parameters, and Amazon Simple
     # Storage Service (Amazon S3) output. When you call `UpdateAssociation`,
-    # the system drops all optional parameters from the request and
+    # the system removes all optional parameters from the request and
     # overwrites the association with null values for those parameters. This
     # is by design. You must specify all optional parameters in the call,
     # even if you are not changing the parameters. This includes the `Name`
@@ -9896,8 +10006,18 @@ module Aws::SSM
     #   run immediately after you update it. This parameter isn't supported
     #   for rate expressions.
     #
-    #   Also, if you specified this option when you created the association,
-    #   you can reset it. To do so, specify the
+    #   If you chose this option when you created an association and later you
+    #   edit that association or you make changes to the SSM document on which
+    #   that association is based (by using the Documents page in the
+    #   console), State Manager applies the association at the next specified
+    #   cron interval. For example, if you chose the `Latest` version of an
+    #   SSM document when you created an association and you edit the
+    #   association by choosing a different document version on the Documents
+    #   page, State Manager applies the association at the next specified cron
+    #   interval if you previously selected this option. If this option
+    #   wasn't selected, State Manager immediately runs the association.
+    #
+    #   You can reset this option. To do so, specify the
     #   `no-apply-only-at-cron-interval` parameter when you update the
     #   association from the command line. This parameter forces the
     #   association to run immediately after updating it and according to the
@@ -9918,6 +10038,29 @@ module Aws::SSM
     #   Web Services accounts where you want to run the association. Use this
     #   action to update an association in multiple Regions and multiple
     #   accounts.
+    #
+    # @option params [Integer] :schedule_offset
+    #   Number of days to wait after the scheduled day to run an association.
+    #   For example, if you specified a cron schedule of `cron(0 0 ? * THU#2
+    #   *)`, you could specify an offset of 3 to run the association each
+    #   Sunday after the second Thursday of the month. For more information
+    #   about cron schedules for associations, see [Reference: Cron and rate
+    #   expressions for Systems Manager][1] in the *Amazon Web Services
+    #   Systems Manager User Guide*.
+    #
+    #   <note markdown="1"> To use offsets, you must specify the `ApplyOnlyAtCronInterval`
+    #   parameter. This option tells the system not to run an association
+    #   immediately after you create it.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/reference-cron-and-rate-expressions.html
+    #
+    # @option params [Array<Hash>] :target_maps
+    #   A key-value mapping of document parameters to target resources. Both
+    #   Targets and TargetMaps can't be specified together.
     #
     # @return [Types::UpdateAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9962,6 +10105,12 @@ module Aws::SSM
     #         target_location_max_concurrency: "MaxConcurrency",
     #         target_location_max_errors: "MaxErrors",
     #         execution_role_name: "ExecutionRoleName",
+    #       },
+    #     ],
+    #     schedule_offset: 1,
+    #     target_maps: [
+    #       {
+    #         "TargetMapKey" => ["TargetMapValue"],
     #       },
     #     ],
     #   })
@@ -10013,6 +10162,11 @@ module Aws::SSM
     #   resp.association_description.target_locations[0].target_location_max_concurrency #=> String
     #   resp.association_description.target_locations[0].target_location_max_errors #=> String
     #   resp.association_description.target_locations[0].execution_role_name #=> String
+    #   resp.association_description.schedule_offset #=> Integer
+    #   resp.association_description.target_maps #=> Array
+    #   resp.association_description.target_maps[0] #=> Hash
+    #   resp.association_description.target_maps[0]["TargetMapKey"] #=> Array
+    #   resp.association_description.target_maps[0]["TargetMapKey"][0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociation AWS API Documentation
     #
@@ -10104,6 +10258,11 @@ module Aws::SSM
     #   resp.association_description.target_locations[0].target_location_max_concurrency #=> String
     #   resp.association_description.target_locations[0].target_location_max_errors #=> String
     #   resp.association_description.target_locations[0].execution_role_name #=> String
+    #   resp.association_description.schedule_offset #=> Integer
+    #   resp.association_description.target_maps #=> Array
+    #   resp.association_description.target_maps[0] #=> Hash
+    #   resp.association_description.target_maps[0]["TargetMapKey"] #=> Array
+    #   resp.association_description.target_maps[0]["TargetMapKey"][0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociationStatus AWS API Documentation
     #
@@ -10143,6 +10302,12 @@ module Aws::SSM
     #   Systems Manager supports updating only the latest version of the
     #   document. You can specify the version number of the latest version or
     #   use the `$LATEST` variable.
+    #
+    #   <note markdown="1"> If you change a document version for a State Manager association,
+    #   Systems Manager immediately runs the association unless you previously
+    #   specifed the `apply-only-at-cron-interval` parameter.
+    #
+    #    </note>
     #
     # @option params [String] :document_format
     #   Specify the document format for the new document version. Systems
@@ -10232,6 +10397,12 @@ module Aws::SSM
     end
 
     # Set the default version of a document.
+    #
+    # <note markdown="1"> If you change a document version for a State Manager association,
+    # Systems Manager immediately runs the association unless you previously
+    # specifed the `apply-only-at-cron-interval` parameter.
+    #
+    #  </note>
     #
     # @option params [required, String] :name
     #   The name of a custom document that you want to set as the default
@@ -10330,14 +10501,9 @@ module Aws::SSM
     #   An optional description for the update request.
     #
     # @option params [String] :start_date
-    #   The time zone that the scheduled maintenance window executions are
-    #   based on, in Internet Assigned Numbers Authority (IANA) format. For
-    #   example: "America/Los\_Angeles", "UTC", or "Asia/Seoul". For
-    #   more information, see the [Time Zone Database][1] on the IANA website.
-    #
-    #
-    #
-    #   [1]: https://www.iana.org/time-zones
+    #   The date and time, in ISO-8601 Extended format, for when you want the
+    #   maintenance window to become active. `StartDate` allows you to delay
+    #   activation of the maintenance window until the specified future date.
     #
     # @option params [String] :end_date
     #   The date and time, in ISO-8601 Extended format, for when you want the
@@ -10675,29 +10841,43 @@ module Aws::SSM
     #
     # @option params [String] :max_concurrency
     #   The new `MaxConcurrency` value you want to specify. `MaxConcurrency`
-    #   is the number of targets that are allowed to run this task in
+    #   is the number of targets that are allowed to run this task, in
     #   parallel.
     #
-    #   <note markdown="1"> For maintenance window tasks without a target specified, you can't
+    #   <note markdown="1"> Although this element is listed as "Required: No", a value can be
+    #   omitted only when you are registering or updating a [targetless
+    #   task][1] You must provide a value in all other cases.
+    #
+    #    For maintenance window tasks without a target specified, you can't
     #   supply a value for this option. Instead, the system inserts a
-    #   placeholder value of `1`, which may be reported in the response to
-    #   this command. This value doesn't affect the running of your task and
-    #   can be ignored.
+    #   placeholder value of `1`. This value doesn't affect the running of
+    #   your task.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html
     #
     # @option params [String] :max_errors
     #   The new `MaxErrors` value to specify. `MaxErrors` is the maximum
     #   number of errors that are allowed before the task stops being
     #   scheduled.
     #
-    #   <note markdown="1"> For maintenance window tasks without a target specified, you can't
+    #   <note markdown="1"> Although this element is listed as "Required: No", a value can be
+    #   omitted only when you are registering or updating a [targetless
+    #   task][1] You must provide a value in all other cases.
+    #
+    #    For maintenance window tasks without a target specified, you can't
     #   supply a value for this option. Instead, the system inserts a
-    #   placeholder value of `1`, which may be reported in the response to
-    #   this command. This value doesn't affect the running of your task and
-    #   can be ignored.
+    #   placeholder value of `1`. This value doesn't affect the running of
+    #   your task.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html
     #
     # @option params [Types::LoggingInfo] :logging_info
     #   The new logging location in Amazon S3 to specify.
@@ -11077,7 +11257,7 @@ module Aws::SSM
     # edit OpsMetadata in Application Manager.
     #
     # @option params [required, String] :ops_metadata_arn
-    #   The Amazon Resoure Name (ARN) of the OpsMetadata Object to update.
+    #   The Amazon Resource Name (ARN) of the OpsMetadata Object to update.
     #
     # @option params [Hash<String,Types::MetadataValue>] :metadata_to_update
     #   Metadata to add to an OpsMetadata object.
@@ -11264,7 +11444,7 @@ module Aws::SSM
     #
     #   resp.baseline_id #=> String
     #   resp.name #=> String
-    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "AMAZON_LINUX_2", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS", "ORACLE_LINUX", "DEBIAN", "MACOS", "RASPBIAN"
+    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "AMAZON_LINUX_2", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS", "ORACLE_LINUX", "DEBIAN", "MACOS", "RASPBIAN", "ROCKY_LINUX"
     #   resp.global_filters.patch_filters #=> Array
     #   resp.global_filters.patch_filters[0].key #=> String, one of "ARCH", "ADVISORY_ID", "BUGZILLA_ID", "PATCH_SET", "PRODUCT", "PRODUCT_FAMILY", "CLASSIFICATION", "CVE_ID", "EPOCH", "MSRC_SEVERITY", "NAME", "PATCH_ID", "SECTION", "PRIORITY", "REPOSITORY", "RELEASE", "SEVERITY", "SECURITY", "VERSION"
     #   resp.global_filters.patch_filters[0].values #=> Array
@@ -11447,7 +11627,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.129.0'
+      context[:gem_version] = '1.137.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

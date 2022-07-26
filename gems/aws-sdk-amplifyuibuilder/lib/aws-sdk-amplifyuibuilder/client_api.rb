@@ -13,6 +13,7 @@ module Aws::AmplifyUIBuilder
 
     include Seahorse::Model
 
+    ActionParameters = Shapes::StructureShape.new(name: 'ActionParameters')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     Component = Shapes::StructureShape.new(name: 'Component')
     ComponentBindingProperties = Shapes::MapShape.new(name: 'ComponentBindingProperties')
@@ -23,6 +24,8 @@ module Aws::AmplifyUIBuilder
     ComponentCollectionProperties = Shapes::MapShape.new(name: 'ComponentCollectionProperties')
     ComponentConditionProperty = Shapes::StructureShape.new(name: 'ComponentConditionProperty')
     ComponentDataConfiguration = Shapes::StructureShape.new(name: 'ComponentDataConfiguration')
+    ComponentEvent = Shapes::StructureShape.new(name: 'ComponentEvent')
+    ComponentEvents = Shapes::MapShape.new(name: 'ComponentEvents')
     ComponentList = Shapes::ListShape.new(name: 'ComponentList')
     ComponentName = Shapes::StringShape.new(name: 'ComponentName')
     ComponentOverrides = Shapes::MapShape.new(name: 'ComponentOverrides')
@@ -68,6 +71,7 @@ module Aws::AmplifyUIBuilder
     ListThemesLimit = Shapes::IntegerShape.new(name: 'ListThemesLimit')
     ListThemesRequest = Shapes::StructureShape.new(name: 'ListThemesRequest')
     ListThemesResponse = Shapes::StructureShape.new(name: 'ListThemesResponse')
+    MutationActionSetStateParameter = Shapes::StructureShape.new(name: 'MutationActionSetStateParameter')
     Predicate = Shapes::StructureShape.new(name: 'Predicate')
     PredicateList = Shapes::ListShape.new(name: 'PredicateList')
     RefreshTokenRequest = Shapes::StructureShape.new(name: 'RefreshTokenRequest')
@@ -75,15 +79,12 @@ module Aws::AmplifyUIBuilder
     RefreshTokenResponse = Shapes::StructureShape.new(name: 'RefreshTokenResponse')
     ResourceConflictException = Shapes::StructureShape.new(name: 'ResourceConflictException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SortDirection = Shapes::StringShape.new(name: 'SortDirection')
     SortProperty = Shapes::StructureShape.new(name: 'SortProperty')
     SortPropertyList = Shapes::ListShape.new(name: 'SortPropertyList')
     String = Shapes::StringShape.new(name: 'String')
-    SyntheticExchangeCodeForTokenRequestBodyString = Shapes::StringShape.new(name: 'SyntheticExchangeCodeForTokenRequestBodyString')
-    SyntheticExchangeCodeForTokenResponseString = Shapes::StringShape.new(name: 'SyntheticExchangeCodeForTokenResponseString')
-    SyntheticRefreshTokenRequestBodyString = Shapes::StringShape.new(name: 'SyntheticRefreshTokenRequestBodyString')
-    SyntheticRefreshTokenResponseString = Shapes::StringShape.new(name: 'SyntheticRefreshTokenResponseString')
     SyntheticTimestamp_date_time = Shapes::TimestampShape.new(name: 'SyntheticTimestamp_date_time', timestampFormat: "iso8601")
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
@@ -105,6 +106,17 @@ module Aws::AmplifyUIBuilder
     UpdateThemeResponse = Shapes::StructureShape.new(name: 'UpdateThemeResponse')
     Uuid = Shapes::StringShape.new(name: 'Uuid')
 
+    ActionParameters.add_member(:anchor, Shapes::ShapeRef.new(shape: ComponentProperty, location_name: "anchor"))
+    ActionParameters.add_member(:fields, Shapes::ShapeRef.new(shape: ComponentProperties, location_name: "fields"))
+    ActionParameters.add_member(:global, Shapes::ShapeRef.new(shape: ComponentProperty, location_name: "global"))
+    ActionParameters.add_member(:id, Shapes::ShapeRef.new(shape: ComponentProperty, location_name: "id"))
+    ActionParameters.add_member(:model, Shapes::ShapeRef.new(shape: String, location_name: "model"))
+    ActionParameters.add_member(:state, Shapes::ShapeRef.new(shape: MutationActionSetStateParameter, location_name: "state"))
+    ActionParameters.add_member(:target, Shapes::ShapeRef.new(shape: ComponentProperty, location_name: "target"))
+    ActionParameters.add_member(:type, Shapes::ShapeRef.new(shape: ComponentProperty, location_name: "type"))
+    ActionParameters.add_member(:url, Shapes::ShapeRef.new(shape: ComponentProperty, location_name: "url"))
+    ActionParameters.struct_class = Types::ActionParameters
+
     Component.add_member(:app_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "appId"))
     Component.add_member(:binding_properties, Shapes::ShapeRef.new(shape: ComponentBindingProperties, required: true, location_name: "bindingProperties"))
     Component.add_member(:children, Shapes::ShapeRef.new(shape: ComponentChildList, location_name: "children"))
@@ -112,11 +124,13 @@ module Aws::AmplifyUIBuilder
     Component.add_member(:component_type, Shapes::ShapeRef.new(shape: ComponentType, required: true, location_name: "componentType"))
     Component.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdAt"))
     Component.add_member(:environment_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "environmentName"))
+    Component.add_member(:events, Shapes::ShapeRef.new(shape: ComponentEvents, location_name: "events"))
     Component.add_member(:id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "id"))
     Component.add_member(:modified_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "modifiedAt"))
     Component.add_member(:name, Shapes::ShapeRef.new(shape: ComponentName, required: true, location_name: "name"))
     Component.add_member(:overrides, Shapes::ShapeRef.new(shape: ComponentOverrides, required: true, location_name: "overrides"))
     Component.add_member(:properties, Shapes::ShapeRef.new(shape: ComponentProperties, required: true, location_name: "properties"))
+    Component.add_member(:schema_version, Shapes::ShapeRef.new(shape: String, location_name: "schemaVersion"))
     Component.add_member(:source_id, Shapes::ShapeRef.new(shape: String, location_name: "sourceId"))
     Component.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     Component.add_member(:variants, Shapes::ShapeRef.new(shape: ComponentVariants, required: true, location_name: "variants"))
@@ -141,8 +155,10 @@ module Aws::AmplifyUIBuilder
 
     ComponentChild.add_member(:children, Shapes::ShapeRef.new(shape: ComponentChildList, location_name: "children"))
     ComponentChild.add_member(:component_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "componentType"))
+    ComponentChild.add_member(:events, Shapes::ShapeRef.new(shape: ComponentEvents, location_name: "events"))
     ComponentChild.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
     ComponentChild.add_member(:properties, Shapes::ShapeRef.new(shape: ComponentProperties, required: true, location_name: "properties"))
+    ComponentChild.add_member(:source_id, Shapes::ShapeRef.new(shape: String, location_name: "sourceId"))
     ComponentChild.struct_class = Types::ComponentChild
 
     ComponentChildList.member = Shapes::ShapeRef.new(shape: ComponentChild)
@@ -153,6 +169,7 @@ module Aws::AmplifyUIBuilder
     ComponentConditionProperty.add_member(:else, Shapes::ShapeRef.new(shape: ComponentProperty, location_name: "else"))
     ComponentConditionProperty.add_member(:field, Shapes::ShapeRef.new(shape: String, location_name: "field"))
     ComponentConditionProperty.add_member(:operand, Shapes::ShapeRef.new(shape: String, location_name: "operand"))
+    ComponentConditionProperty.add_member(:operand_type, Shapes::ShapeRef.new(shape: String, location_name: "operandType"))
     ComponentConditionProperty.add_member(:operator, Shapes::ShapeRef.new(shape: String, location_name: "operator"))
     ComponentConditionProperty.add_member(:property, Shapes::ShapeRef.new(shape: String, location_name: "property"))
     ComponentConditionProperty.add_member(:then, Shapes::ShapeRef.new(shape: ComponentProperty, location_name: "then"))
@@ -163,6 +180,14 @@ module Aws::AmplifyUIBuilder
     ComponentDataConfiguration.add_member(:predicate, Shapes::ShapeRef.new(shape: Predicate, location_name: "predicate"))
     ComponentDataConfiguration.add_member(:sort, Shapes::ShapeRef.new(shape: SortPropertyList, location_name: "sort"))
     ComponentDataConfiguration.struct_class = Types::ComponentDataConfiguration
+
+    ComponentEvent.add_member(:action, Shapes::ShapeRef.new(shape: String, location_name: "action"))
+    ComponentEvent.add_member(:binding_event, Shapes::ShapeRef.new(shape: String, location_name: "bindingEvent"))
+    ComponentEvent.add_member(:parameters, Shapes::ShapeRef.new(shape: ActionParameters, location_name: "parameters"))
+    ComponentEvent.struct_class = Types::ComponentEvent
+
+    ComponentEvents.key = Shapes::ShapeRef.new(shape: String)
+    ComponentEvents.value = Shapes::ShapeRef.new(shape: ComponentEvent)
 
     ComponentList.member = Shapes::ShapeRef.new(shape: Component)
 
@@ -178,6 +203,7 @@ module Aws::AmplifyUIBuilder
     ComponentProperty.add_member(:binding_properties, Shapes::ShapeRef.new(shape: ComponentPropertyBindingProperties, location_name: "bindingProperties"))
     ComponentProperty.add_member(:bindings, Shapes::ShapeRef.new(shape: FormBindings, location_name: "bindings"))
     ComponentProperty.add_member(:collection_binding_properties, Shapes::ShapeRef.new(shape: ComponentPropertyBindingProperties, location_name: "collectionBindingProperties"))
+    ComponentProperty.add_member(:component_name, Shapes::ShapeRef.new(shape: String, location_name: "componentName"))
     ComponentProperty.add_member(:concat, Shapes::ShapeRef.new(shape: ComponentPropertyList, location_name: "concat"))
     ComponentProperty.add_member(:condition, Shapes::ShapeRef.new(shape: ComponentConditionProperty, location_name: "condition"))
     ComponentProperty.add_member(:configured, Shapes::ShapeRef.new(shape: Boolean, location_name: "configured"))
@@ -185,6 +211,7 @@ module Aws::AmplifyUIBuilder
     ComponentProperty.add_member(:event, Shapes::ShapeRef.new(shape: String, location_name: "event"))
     ComponentProperty.add_member(:imported_value, Shapes::ShapeRef.new(shape: String, location_name: "importedValue"))
     ComponentProperty.add_member(:model, Shapes::ShapeRef.new(shape: String, location_name: "model"))
+    ComponentProperty.add_member(:property, Shapes::ShapeRef.new(shape: String, location_name: "property"))
     ComponentProperty.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "type"))
     ComponentProperty.add_member(:user_attribute, Shapes::ShapeRef.new(shape: String, location_name: "userAttribute"))
     ComponentProperty.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
@@ -218,9 +245,11 @@ module Aws::AmplifyUIBuilder
     CreateComponentData.add_member(:children, Shapes::ShapeRef.new(shape: ComponentChildList, location_name: "children"))
     CreateComponentData.add_member(:collection_properties, Shapes::ShapeRef.new(shape: ComponentCollectionProperties, location_name: "collectionProperties"))
     CreateComponentData.add_member(:component_type, Shapes::ShapeRef.new(shape: ComponentType, required: true, location_name: "componentType"))
+    CreateComponentData.add_member(:events, Shapes::ShapeRef.new(shape: ComponentEvents, location_name: "events"))
     CreateComponentData.add_member(:name, Shapes::ShapeRef.new(shape: ComponentName, required: true, location_name: "name"))
     CreateComponentData.add_member(:overrides, Shapes::ShapeRef.new(shape: ComponentOverrides, required: true, location_name: "overrides"))
     CreateComponentData.add_member(:properties, Shapes::ShapeRef.new(shape: ComponentProperties, required: true, location_name: "properties"))
+    CreateComponentData.add_member(:schema_version, Shapes::ShapeRef.new(shape: String, location_name: "schemaVersion"))
     CreateComponentData.add_member(:source_id, Shapes::ShapeRef.new(shape: String, location_name: "sourceId"))
     CreateComponentData.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateComponentData.add_member(:variants, Shapes::ShapeRef.new(shape: ComponentVariants, required: true, location_name: "variants"))
@@ -274,27 +303,31 @@ module Aws::AmplifyUIBuilder
     ExchangeCodeForTokenRequest[:payload] = :request
     ExchangeCodeForTokenRequest[:payload_member] = ExchangeCodeForTokenRequest.member(:request)
 
-    ExchangeCodeForTokenRequestBody.add_member(:code, Shapes::ShapeRef.new(shape: SyntheticExchangeCodeForTokenRequestBodyString, required: true, location_name: "code"))
+    ExchangeCodeForTokenRequestBody.add_member(:code, Shapes::ShapeRef.new(shape: SensitiveString, required: true, location_name: "code"))
     ExchangeCodeForTokenRequestBody.add_member(:redirect_uri, Shapes::ShapeRef.new(shape: String, required: true, location_name: "redirectUri"))
     ExchangeCodeForTokenRequestBody.struct_class = Types::ExchangeCodeForTokenRequestBody
 
-    ExchangeCodeForTokenResponse.add_member(:access_token, Shapes::ShapeRef.new(shape: SyntheticExchangeCodeForTokenResponseString, required: true, location_name: "accessToken"))
+    ExchangeCodeForTokenResponse.add_member(:access_token, Shapes::ShapeRef.new(shape: SensitiveString, required: true, location_name: "accessToken"))
     ExchangeCodeForTokenResponse.add_member(:expires_in, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "expiresIn"))
-    ExchangeCodeForTokenResponse.add_member(:refresh_token, Shapes::ShapeRef.new(shape: SyntheticExchangeCodeForTokenResponseString, required: true, location_name: "refreshToken"))
+    ExchangeCodeForTokenResponse.add_member(:refresh_token, Shapes::ShapeRef.new(shape: SensitiveString, required: true, location_name: "refreshToken"))
     ExchangeCodeForTokenResponse.struct_class = Types::ExchangeCodeForTokenResponse
 
     ExportComponentsRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "appId"))
     ExportComponentsRequest.add_member(:environment_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "environmentName"))
+    ExportComponentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
     ExportComponentsRequest.struct_class = Types::ExportComponentsRequest
 
     ExportComponentsResponse.add_member(:entities, Shapes::ShapeRef.new(shape: ComponentList, required: true, location_name: "entities"))
+    ExportComponentsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ExportComponentsResponse.struct_class = Types::ExportComponentsResponse
 
     ExportThemesRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "appId"))
     ExportThemesRequest.add_member(:environment_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "environmentName"))
+    ExportThemesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
     ExportThemesRequest.struct_class = Types::ExportThemesRequest
 
     ExportThemesResponse.add_member(:entities, Shapes::ShapeRef.new(shape: ThemeList, required: true, location_name: "entities"))
+    ExportThemesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ExportThemesResponse.struct_class = Types::ExportThemesResponse
 
     FormBindingElement.add_member(:element, Shapes::ShapeRef.new(shape: String, required: true, location_name: "element"))
@@ -352,6 +385,11 @@ module Aws::AmplifyUIBuilder
     ListThemesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListThemesResponse.struct_class = Types::ListThemesResponse
 
+    MutationActionSetStateParameter.add_member(:component_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "componentName"))
+    MutationActionSetStateParameter.add_member(:property, Shapes::ShapeRef.new(shape: String, required: true, location_name: "property"))
+    MutationActionSetStateParameter.add_member(:set, Shapes::ShapeRef.new(shape: ComponentProperty, required: true, location_name: "set"))
+    MutationActionSetStateParameter.struct_class = Types::MutationActionSetStateParameter
+
     Predicate.add_member(:and, Shapes::ShapeRef.new(shape: PredicateList, location_name: "and"))
     Predicate.add_member(:field, Shapes::ShapeRef.new(shape: String, location_name: "field"))
     Predicate.add_member(:operand, Shapes::ShapeRef.new(shape: String, location_name: "operand"))
@@ -367,10 +405,10 @@ module Aws::AmplifyUIBuilder
     RefreshTokenRequest[:payload] = :refresh_token_body
     RefreshTokenRequest[:payload_member] = RefreshTokenRequest.member(:refresh_token_body)
 
-    RefreshTokenRequestBody.add_member(:token, Shapes::ShapeRef.new(shape: SyntheticRefreshTokenRequestBodyString, required: true, location_name: "token"))
+    RefreshTokenRequestBody.add_member(:token, Shapes::ShapeRef.new(shape: SensitiveString, required: true, location_name: "token"))
     RefreshTokenRequestBody.struct_class = Types::RefreshTokenRequestBody
 
-    RefreshTokenResponse.add_member(:access_token, Shapes::ShapeRef.new(shape: SyntheticRefreshTokenResponseString, required: true, location_name: "accessToken"))
+    RefreshTokenResponse.add_member(:access_token, Shapes::ShapeRef.new(shape: SensitiveString, required: true, location_name: "accessToken"))
     RefreshTokenResponse.add_member(:expires_in, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "expiresIn"))
     RefreshTokenResponse.struct_class = Types::RefreshTokenResponse
 
@@ -427,10 +465,12 @@ module Aws::AmplifyUIBuilder
     UpdateComponentData.add_member(:children, Shapes::ShapeRef.new(shape: ComponentChildList, location_name: "children"))
     UpdateComponentData.add_member(:collection_properties, Shapes::ShapeRef.new(shape: ComponentCollectionProperties, location_name: "collectionProperties"))
     UpdateComponentData.add_member(:component_type, Shapes::ShapeRef.new(shape: ComponentType, location_name: "componentType"))
+    UpdateComponentData.add_member(:events, Shapes::ShapeRef.new(shape: ComponentEvents, location_name: "events"))
     UpdateComponentData.add_member(:id, Shapes::ShapeRef.new(shape: Uuid, location_name: "id"))
     UpdateComponentData.add_member(:name, Shapes::ShapeRef.new(shape: ComponentName, location_name: "name"))
     UpdateComponentData.add_member(:overrides, Shapes::ShapeRef.new(shape: ComponentOverrides, location_name: "overrides"))
     UpdateComponentData.add_member(:properties, Shapes::ShapeRef.new(shape: ComponentProperties, location_name: "properties"))
+    UpdateComponentData.add_member(:schema_version, Shapes::ShapeRef.new(shape: String, location_name: "schemaVersion"))
     UpdateComponentData.add_member(:source_id, Shapes::ShapeRef.new(shape: String, location_name: "sourceId"))
     UpdateComponentData.add_member(:variants, Shapes::ShapeRef.new(shape: ComponentVariants, location_name: "variants"))
     UpdateComponentData.struct_class = Types::UpdateComponentData
@@ -550,6 +590,11 @@ module Aws::AmplifyUIBuilder
         o.output = Shapes::ShapeRef.new(shape: ExportComponentsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:export_themes, Seahorse::Model::Operation.new.tap do |o|
@@ -560,6 +605,11 @@ module Aws::AmplifyUIBuilder
         o.output = Shapes::ShapeRef.new(shape: ExportThemesResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_component, Seahorse::Model::Operation.new.tap do |o|

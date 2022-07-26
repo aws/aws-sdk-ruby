@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2022-07-14)
+------------------
+
+* Feature - Amazon Nimble Studio adds support for IAM-based access to AWS resources for Nimble Studio components and custom studio components. Studio Component scripts use these roles on Nimble Studio workstation to mount filesystems, access S3 buckets, or other configured resources in the Studio's AWS account
+
+1.13.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.12.0 (2022-02-03)
 ------------------
 

@@ -67,6 +67,20 @@ module Aws::EC2InstanceConnect
       include Aws::Structure
     end
 
+    # The instance is currently unavailable. Wait a few minutes and try
+    # again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-instance-connect-2018-04-02/EC2InstanceUnavailableException AWS API Documentation
+    #
+    class EC2InstanceUnavailableException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # One of the parameters is not valid.
     #
     # @!attribute [rw] message

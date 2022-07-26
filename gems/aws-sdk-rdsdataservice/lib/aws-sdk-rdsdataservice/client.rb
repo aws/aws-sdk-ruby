@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::RDSDataService
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -360,6 +362,18 @@ module Aws::RDSDataService
     # `transactionID` parameter, changes that result from the call are
     # committed automatically.
     #
+    #  There isn't a fixed upper limit on the number of parameter sets.
+    # However, the maximum size of the HTTP request submitted through the
+    # Data API is 4 MiB. If the request exceeds this limit, the Data API
+    # returns an error and doesn't process the request. This 4-MiB limit
+    # includes the size of the HTTP headers and the JSON notation in the
+    # request. Thus, the number of parameter sets that you can include
+    # depends on a combination of factors, such as the size of the SQL
+    # statement and the size of each parameter set.
+    #
+    #  The response size limit is 1 MiB. If the call returns more than 1 MiB
+    # of response data, the call is terminated.
+    #
     # @option params [String] :database
     #   The name of the database.
     #
@@ -386,10 +400,19 @@ module Aws::RDSDataService
     #   The name of the database schema.
     #
     # @option params [required, String] :secret_arn
-    #   The name or ARN of the secret that enables access to the DB cluster.
+    #   The ARN of the secret that enables access to the DB cluster. Enter the
+    #   database user name and password for the credentials in the secret.
+    #
+    #   For information about creating the secret, see [Create a database
+    #   secret][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html
     #
     # @option params [required, String] :sql
-    #   The SQL statement to run.
+    #   The SQL statement to run. Don't include a semicolon (;) at the end of
+    #   the SQL statement.
     #
     # @option params [String] :transaction_id
     #   The identifier of a transaction that was started by using the
@@ -557,7 +580,15 @@ module Aws::RDSDataService
     #
     # @option params [required, String] :aws_secret_store_arn
     #   The Amazon Resource Name (ARN) of the secret that enables access to
-    #   the DB cluster.
+    #   the DB cluster. Enter the database user name and password for the
+    #   credentials in the secret.
+    #
+    #   For information about creating the secret, see [Create a database
+    #   secret][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html
     #
     # @option params [String] :database
     #   The name of the database.
@@ -639,8 +670,8 @@ module Aws::RDSDataService
     # `transactionID` parameter, changes that result from the call are
     # committed automatically.
     #
-    # The response size limit is 1 MB. If the call returns more than 1 MB of
-    # response data, the call is terminated.
+    #  If the binary response data from the database is more than 1 MB, the
+    # call is terminated.
     #
     # @option params [Boolean] :continue_after_timeout
     #   A value that indicates whether to continue running the statement after
@@ -654,6 +685,20 @@ module Aws::RDSDataService
     #
     # @option params [String] :database
     #   The name of the database.
+    #
+    # @option params [String] :format_records_as
+    #   A value that indicates whether to format the result set as a single
+    #   JSON string. This parameter only applies to `SELECT` statements and is
+    #   ignored for other types of statements. Allowed values are `NONE` and
+    #   `JSON`. The default value is `NONE`. The result is returned in the
+    #   `formattedRecords` field.
+    #
+    #   For usage information about the JSON format for result sets, see
+    #   [Using the Data API][1] in the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html
     #
     # @option params [Boolean] :include_result_metadata
     #   A value that indicates whether to include metadata in the results.
@@ -679,7 +724,15 @@ module Aws::RDSDataService
     #    </note>
     #
     # @option params [required, String] :secret_arn
-    #   The name or ARN of the secret that enables access to the DB cluster.
+    #   The ARN of the secret that enables access to the DB cluster. Enter the
+    #   database user name and password for the credentials in the secret.
+    #
+    #   For information about creating the secret, see [Create a database
+    #   secret][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html
     #
     # @option params [required, String] :sql
     #   The SQL statement to run.
@@ -695,6 +748,7 @@ module Aws::RDSDataService
     # @return [Types::ExecuteStatementResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ExecuteStatementResponse#column_metadata #column_metadata} => Array&lt;Types::ColumnMetadata&gt;
+    #   * {Types::ExecuteStatementResponse#formatted_records #formatted_records} => String
     #   * {Types::ExecuteStatementResponse#generated_fields #generated_fields} => Array&lt;Types::Field&gt;
     #   * {Types::ExecuteStatementResponse#number_of_records_updated #number_of_records_updated} => Integer
     #   * {Types::ExecuteStatementResponse#records #records} => Array&lt;Array&lt;Types::Field&gt;&gt;
@@ -704,6 +758,7 @@ module Aws::RDSDataService
     #   resp = client.execute_statement({
     #     continue_after_timeout: false,
     #     database: "DbName",
+    #     format_records_as: "NONE", # accepts NONE, JSON
     #     include_result_metadata: false,
     #     parameters: [
     #       {
@@ -733,6 +788,7 @@ module Aws::RDSDataService
     #     resource_arn: "Arn", # required
     #     result_set_options: {
     #       decimal_return_type: "STRING", # accepts STRING, DOUBLE_OR_LONG
+    #       long_return_type: "STRING", # accepts STRING, LONG
     #     },
     #     schema: "DbName",
     #     secret_arn: "Arn", # required
@@ -757,6 +813,7 @@ module Aws::RDSDataService
     #   resp.column_metadata[0].table_name #=> String
     #   resp.column_metadata[0].type #=> Integer
     #   resp.column_metadata[0].type_name #=> String
+    #   resp.formatted_records #=> String
     #   resp.generated_fields #=> Array
     #   resp.generated_fields[0].array_value.array_values #=> Array
     #   resp.generated_fields[0].array_value.array_values[0] #=> Types::ArrayValue
@@ -853,7 +910,7 @@ module Aws::RDSDataService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rdsdataservice'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

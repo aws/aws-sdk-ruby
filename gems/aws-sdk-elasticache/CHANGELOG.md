@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.79.0 (2022-07-18)
+------------------
+
+* Feature - Adding AutoMinorVersionUpgrade in the DescribeReplicationGroups API
+
+1.78.0 (2022-05-23)
+------------------
+
+* Feature - Added support for encryption in transit for Memcached clusters. Customers can now launch Memcached cluster with encryption in transit enabled when using Memcached version 1.6.12 or later.
+
+1.77.0 (2022-04-21)
+------------------
+
+* Feature - Doc only update for ElastiCache
+
+1.76.0 (2022-03-23)
+------------------
+
+* Feature - Doc only update for ElastiCache
+
+1.75.0 (2022-03-14)
+------------------
+
+* Feature - Doc only update for ElastiCache
+
+1.74.0 (2022-02-25)
+------------------
+
+* Feature - Doc only update for ElastiCache
+
+1.73.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.72.0 (2022-02-03)
 ------------------
 

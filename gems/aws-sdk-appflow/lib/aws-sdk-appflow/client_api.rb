@@ -171,6 +171,7 @@ module Aws::Appflow
     FlowArn = Shapes::StringShape.new(name: 'FlowArn')
     FlowDefinition = Shapes::StructureShape.new(name: 'FlowDefinition')
     FlowDescription = Shapes::StringShape.new(name: 'FlowDescription')
+    FlowErrorDeactivationThreshold = Shapes::IntegerShape.new(name: 'FlowErrorDeactivationThreshold')
     FlowExecutionList = Shapes::ListShape.new(name: 'FlowExecutionList')
     FlowList = Shapes::ListShape.new(name: 'FlowList')
     FlowName = Shapes::StringShape.new(name: 'FlowName')
@@ -196,6 +197,7 @@ module Aws::Appflow
     InforNexusSourceProperties = Shapes::StructureShape.new(name: 'InforNexusSourceProperties')
     InstanceUrl = Shapes::StringShape.new(name: 'InstanceUrl')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    JavaBoolean = Shapes::BooleanShape.new(name: 'JavaBoolean')
     KMSArn = Shapes::StringShape.new(name: 'KMSArn')
     Key = Shapes::StringShape.new(name: 'Key')
     Label = Shapes::StringShape.new(name: 'Label')
@@ -215,6 +217,7 @@ module Aws::Appflow
     MarketoConnectorOperator = Shapes::StringShape.new(name: 'MarketoConnectorOperator')
     MarketoConnectorProfileCredentials = Shapes::StructureShape.new(name: 'MarketoConnectorProfileCredentials')
     MarketoConnectorProfileProperties = Shapes::StructureShape.new(name: 'MarketoConnectorProfileProperties')
+    MarketoDestinationProperties = Shapes::StructureShape.new(name: 'MarketoDestinationProperties')
     MarketoMetadata = Shapes::StructureShape.new(name: 'MarketoMetadata')
     MarketoSourceProperties = Shapes::StructureShape.new(name: 'MarketoSourceProperties')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
@@ -222,6 +225,9 @@ module Aws::Appflow
     Name = Shapes::StringShape.new(name: 'Name')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     OAuth2Credentials = Shapes::StructureShape.new(name: 'OAuth2Credentials')
+    OAuth2CustomParameter = Shapes::StructureShape.new(name: 'OAuth2CustomParameter')
+    OAuth2CustomPropType = Shapes::StringShape.new(name: 'OAuth2CustomPropType')
+    OAuth2CustomPropertiesList = Shapes::ListShape.new(name: 'OAuth2CustomPropertiesList')
     OAuth2Defaults = Shapes::StructureShape.new(name: 'OAuth2Defaults')
     OAuth2GrantType = Shapes::StringShape.new(name: 'OAuth2GrantType')
     OAuth2GrantTypeSupportedList = Shapes::ListShape.new(name: 'OAuth2GrantTypeSupportedList')
@@ -273,6 +279,7 @@ module Aws::Appflow
     SAPODataConnectorOperator = Shapes::StringShape.new(name: 'SAPODataConnectorOperator')
     SAPODataConnectorProfileCredentials = Shapes::StructureShape.new(name: 'SAPODataConnectorProfileCredentials')
     SAPODataConnectorProfileProperties = Shapes::StructureShape.new(name: 'SAPODataConnectorProfileProperties')
+    SAPODataDestinationProperties = Shapes::StructureShape.new(name: 'SAPODataDestinationProperties')
     SAPODataMetadata = Shapes::StructureShape.new(name: 'SAPODataMetadata')
     SAPODataSourceProperties = Shapes::StructureShape.new(name: 'SAPODataSourceProperties')
     SalesforceConnectorOperator = Shapes::StringShape.new(name: 'SalesforceConnectorOperator')
@@ -317,6 +324,7 @@ module Aws::Appflow
     StopFlowRequest = Shapes::StructureShape.new(name: 'StopFlowRequest')
     StopFlowResponse = Shapes::StructureShape.new(name: 'StopFlowResponse')
     String = Shapes::StringShape.new(name: 'String')
+    SuccessResponseHandlingConfig = Shapes::StructureShape.new(name: 'SuccessResponseHandlingConfig')
     SupportedApiVersion = Shapes::StringShape.new(name: 'SupportedApiVersion')
     SupportedApiVersionList = Shapes::ListShape.new(name: 'SupportedApiVersionList')
     SupportedFieldTypeDetails = Shapes::StructureShape.new(name: 'SupportedFieldTypeDetails')
@@ -336,6 +344,7 @@ module Aws::Appflow
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timezone = Shapes::StringShape.new(name: 'Timezone')
     TokenUrl = Shapes::StringShape.new(name: 'TokenUrl')
+    TokenUrlCustomProperties = Shapes::MapShape.new(name: 'TokenUrlCustomProperties')
     TokenUrlList = Shapes::ListShape.new(name: 'TokenUrlList')
     TrendmicroConnectorOperator = Shapes::StringShape.new(name: 'TrendmicroConnectorOperator')
     TrendmicroConnectorProfileCredentials = Shapes::StructureShape.new(name: 'TrendmicroConnectorProfileCredentials')
@@ -799,7 +808,9 @@ module Aws::Appflow
     DestinationConnectorProperties.add_member(:honeycode, Shapes::ShapeRef.new(shape: HoneycodeDestinationProperties, location_name: "Honeycode"))
     DestinationConnectorProperties.add_member(:customer_profiles, Shapes::ShapeRef.new(shape: CustomerProfilesDestinationProperties, location_name: "CustomerProfiles"))
     DestinationConnectorProperties.add_member(:zendesk, Shapes::ShapeRef.new(shape: ZendeskDestinationProperties, location_name: "Zendesk"))
+    DestinationConnectorProperties.add_member(:marketo, Shapes::ShapeRef.new(shape: MarketoDestinationProperties, location_name: "Marketo"))
     DestinationConnectorProperties.add_member(:custom_connector, Shapes::ShapeRef.new(shape: CustomConnectorDestinationProperties, location_name: "CustomConnector"))
+    DestinationConnectorProperties.add_member(:sapo_data, Shapes::ShapeRef.new(shape: SAPODataDestinationProperties, location_name: "SAPOData"))
     DestinationConnectorProperties.struct_class = Types::DestinationConnectorProperties
 
     DestinationFieldProperties.add_member(:is_creatable, Shapes::ShapeRef.new(shape: Boolean, location_name: "isCreatable"))
@@ -992,6 +1003,10 @@ module Aws::Appflow
     MarketoConnectorProfileProperties.add_member(:instance_url, Shapes::ShapeRef.new(shape: InstanceUrl, required: true, location_name: "instanceUrl"))
     MarketoConnectorProfileProperties.struct_class = Types::MarketoConnectorProfileProperties
 
+    MarketoDestinationProperties.add_member(:object, Shapes::ShapeRef.new(shape: Object, required: true, location_name: "object"))
+    MarketoDestinationProperties.add_member(:error_handling_config, Shapes::ShapeRef.new(shape: ErrorHandlingConfig, location_name: "errorHandlingConfig"))
+    MarketoDestinationProperties.struct_class = Types::MarketoDestinationProperties
+
     MarketoMetadata.struct_class = Types::MarketoMetadata
 
     MarketoSourceProperties.add_member(:object, Shapes::ShapeRef.new(shape: Object, required: true, location_name: "object"))
@@ -1004,16 +1019,29 @@ module Aws::Appflow
     OAuth2Credentials.add_member(:o_auth_request, Shapes::ShapeRef.new(shape: ConnectorOAuthRequest, location_name: "oAuthRequest"))
     OAuth2Credentials.struct_class = Types::OAuth2Credentials
 
+    OAuth2CustomParameter.add_member(:key, Shapes::ShapeRef.new(shape: Key, location_name: "key"))
+    OAuth2CustomParameter.add_member(:is_required, Shapes::ShapeRef.new(shape: Boolean, location_name: "isRequired"))
+    OAuth2CustomParameter.add_member(:label, Shapes::ShapeRef.new(shape: Label, location_name: "label"))
+    OAuth2CustomParameter.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    OAuth2CustomParameter.add_member(:is_sensitive_field, Shapes::ShapeRef.new(shape: Boolean, location_name: "isSensitiveField"))
+    OAuth2CustomParameter.add_member(:connector_supplied_values, Shapes::ShapeRef.new(shape: ConnectorSuppliedValueList, location_name: "connectorSuppliedValues"))
+    OAuth2CustomParameter.add_member(:type, Shapes::ShapeRef.new(shape: OAuth2CustomPropType, location_name: "type"))
+    OAuth2CustomParameter.struct_class = Types::OAuth2CustomParameter
+
+    OAuth2CustomPropertiesList.member = Shapes::ShapeRef.new(shape: OAuth2CustomParameter)
+
     OAuth2Defaults.add_member(:oauth_scopes, Shapes::ShapeRef.new(shape: OAuthScopeList, location_name: "oauthScopes"))
     OAuth2Defaults.add_member(:token_urls, Shapes::ShapeRef.new(shape: TokenUrlList, location_name: "tokenUrls"))
     OAuth2Defaults.add_member(:auth_code_urls, Shapes::ShapeRef.new(shape: AuthCodeUrlList, location_name: "authCodeUrls"))
     OAuth2Defaults.add_member(:oauth2_grant_types_supported, Shapes::ShapeRef.new(shape: OAuth2GrantTypeSupportedList, location_name: "oauth2GrantTypesSupported"))
+    OAuth2Defaults.add_member(:oauth2_custom_properties, Shapes::ShapeRef.new(shape: OAuth2CustomPropertiesList, location_name: "oauth2CustomProperties"))
     OAuth2Defaults.struct_class = Types::OAuth2Defaults
 
     OAuth2GrantTypeSupportedList.member = Shapes::ShapeRef.new(shape: OAuth2GrantType)
 
     OAuth2Properties.add_member(:token_url, Shapes::ShapeRef.new(shape: TokenUrl, required: true, location_name: "tokenUrl"))
     OAuth2Properties.add_member(:o_auth_2_grant_type, Shapes::ShapeRef.new(shape: OAuth2GrantType, required: true, location_name: "oAuth2GrantType"))
+    OAuth2Properties.add_member(:token_url_custom_properties, Shapes::ShapeRef.new(shape: TokenUrlCustomProperties, location_name: "tokenUrlCustomProperties"))
     OAuth2Properties.struct_class = Types::OAuth2Properties
 
     OAuthCredentials.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientId, required: true, location_name: "clientId"))
@@ -1091,6 +1119,7 @@ module Aws::Appflow
     S3OutputFormatConfig.add_member(:file_type, Shapes::ShapeRef.new(shape: FileType, location_name: "fileType"))
     S3OutputFormatConfig.add_member(:prefix_config, Shapes::ShapeRef.new(shape: PrefixConfig, location_name: "prefixConfig"))
     S3OutputFormatConfig.add_member(:aggregation_config, Shapes::ShapeRef.new(shape: AggregationConfig, location_name: "aggregationConfig"))
+    S3OutputFormatConfig.add_member(:preserve_source_data_typing, Shapes::ShapeRef.new(shape: JavaBoolean, location_name: "preserveSourceDataTyping"))
     S3OutputFormatConfig.struct_class = Types::S3OutputFormatConfig
 
     S3SourceProperties.add_member(:bucket_name, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "bucketName"))
@@ -1110,6 +1139,13 @@ module Aws::Appflow
     SAPODataConnectorProfileProperties.add_member(:private_link_service_name, Shapes::ShapeRef.new(shape: PrivateLinkServiceName, location_name: "privateLinkServiceName"))
     SAPODataConnectorProfileProperties.add_member(:o_auth_properties, Shapes::ShapeRef.new(shape: OAuthProperties, location_name: "oAuthProperties"))
     SAPODataConnectorProfileProperties.struct_class = Types::SAPODataConnectorProfileProperties
+
+    SAPODataDestinationProperties.add_member(:object_path, Shapes::ShapeRef.new(shape: Object, required: true, location_name: "objectPath"))
+    SAPODataDestinationProperties.add_member(:success_response_handling_config, Shapes::ShapeRef.new(shape: SuccessResponseHandlingConfig, location_name: "successResponseHandlingConfig"))
+    SAPODataDestinationProperties.add_member(:id_field_names, Shapes::ShapeRef.new(shape: IdFieldNameList, location_name: "idFieldNames"))
+    SAPODataDestinationProperties.add_member(:error_handling_config, Shapes::ShapeRef.new(shape: ErrorHandlingConfig, location_name: "errorHandlingConfig"))
+    SAPODataDestinationProperties.add_member(:write_operation_type, Shapes::ShapeRef.new(shape: WriteOperationType, location_name: "writeOperationType"))
+    SAPODataDestinationProperties.struct_class = Types::SAPODataDestinationProperties
 
     SAPODataMetadata.struct_class = Types::SAPODataMetadata
 
@@ -1147,6 +1183,7 @@ module Aws::Appflow
     ScheduledTriggerProperties.add_member(:timezone, Shapes::ShapeRef.new(shape: Timezone, location_name: "timezone"))
     ScheduledTriggerProperties.add_member(:schedule_offset, Shapes::ShapeRef.new(shape: ScheduleOffset, location_name: "scheduleOffset", metadata: {"box"=>true}))
     ScheduledTriggerProperties.add_member(:first_execution_from, Shapes::ShapeRef.new(shape: Date, location_name: "firstExecutionFrom"))
+    ScheduledTriggerProperties.add_member(:flow_error_deactivation_threshold, Shapes::ShapeRef.new(shape: FlowErrorDeactivationThreshold, location_name: "flowErrorDeactivationThreshold", metadata: {"box"=>true}))
     ScheduledTriggerProperties.struct_class = Types::ScheduledTriggerProperties
 
     SchedulingFrequencyTypeList.member = Shapes::ShapeRef.new(shape: ScheduleFrequencyType)
@@ -1260,6 +1297,10 @@ module Aws::Appflow
     StopFlowResponse.add_member(:flow_status, Shapes::ShapeRef.new(shape: FlowStatus, location_name: "flowStatus"))
     StopFlowResponse.struct_class = Types::StopFlowResponse
 
+    SuccessResponseHandlingConfig.add_member(:bucket_prefix, Shapes::ShapeRef.new(shape: BucketPrefix, location_name: "bucketPrefix"))
+    SuccessResponseHandlingConfig.add_member(:bucket_name, Shapes::ShapeRef.new(shape: BucketName, location_name: "bucketName"))
+    SuccessResponseHandlingConfig.struct_class = Types::SuccessResponseHandlingConfig
+
     SupportedApiVersionList.member = Shapes::ShapeRef.new(shape: SupportedApiVersion)
 
     SupportedFieldTypeDetails.add_member(:v1, Shapes::ShapeRef.new(shape: FieldTypeDetails, required: true, location_name: "v1"))
@@ -1296,6 +1337,9 @@ module Aws::Appflow
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException
+
+    TokenUrlCustomProperties.key = Shapes::ShapeRef.new(shape: CustomPropertyKey)
+    TokenUrlCustomProperties.value = Shapes::ShapeRef.new(shape: CustomPropertyValue)
 
     TokenUrlList.member = Shapes::ShapeRef.new(shape: TokenUrl)
 

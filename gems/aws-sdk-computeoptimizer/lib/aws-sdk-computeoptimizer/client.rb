@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::ComputeOptimizer
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -376,6 +378,11 @@ module Aws::ComputeOptimizer
     #   instances that are part of Auto Scaling groups. The `AutoScalingGroup`
     #   option encompasses only instances that are part of an Auto Scaling
     #   group.
+    #
+    #   <note markdown="1"> The valid values for this parameter are `Ec2Instance` and
+    #   `AutoScalingGroup`.
+    #
+    #    </note>
     #
     # @option params [Types::Scope] :scope
     #   An object that describes the scope of the recommendation preference to
@@ -1713,6 +1720,11 @@ module Aws::ComputeOptimizer
     #   option encompasses only instances that are part of an Auto Scaling
     #   group.
     #
+    #   <note markdown="1"> The valid values for this parameter are `Ec2Instance` and
+    #   `AutoScalingGroup`.
+    #
+    #    </note>
+    #
     # @option params [Types::Scope] :scope
     #   An object that describes the scope of the recommendation preference to
     #   return.
@@ -1868,6 +1880,11 @@ module Aws::ComputeOptimizer
     #   instances that are part of Auto Scaling groups. The `AutoScalingGroup`
     #   option encompasses only instances that are part of an Auto Scaling
     #   group.
+    #
+    #   <note markdown="1"> The valid values for this parameter are `Ec2Instance` and
+    #   `AutoScalingGroup`.
+    #
+    #    </note>
     #
     # @option params [Types::Scope] :scope
     #   An object that describes the scope of the recommendation preference to
@@ -2040,7 +2057,7 @@ module Aws::ComputeOptimizer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-computeoptimizer'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

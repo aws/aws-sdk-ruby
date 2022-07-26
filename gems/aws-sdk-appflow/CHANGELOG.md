@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2022-05-27)
+------------------
+
+* Feature - Adding the following features/changes: Parquet output that preserves typing from the source connector, Failed executions threshold before deactivation for scheduled flows, increasing max size of access and refresh token from 2048 to 4096
+
+1.26.0 (2022-04-14)
+------------------
+
+* Feature - Enables users to pass custom token URL parameters for Oauth2 authentication during create connector profile
+
+1.25.0 (2022-03-03)
+------------------
+
+* Feature - Launching Amazon AppFlow Marketo as a destination connector SDK.
+
+1.24.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.23.0 (2022-02-14)
+------------------
+
+* Feature - Launching Amazon AppFlow SAP as a destination connector SDK.
+
 1.22.0 (2022-02-03)
 ------------------
 

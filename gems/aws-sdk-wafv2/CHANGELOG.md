@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2022-07-15)
+------------------
+
+* Feature - This SDK release provide customers ability to add sensitivity level for WAF SQLI Match Statements.
+
+1.39.0 (2022-04-29)
+------------------
+
+* Feature - You can now inspect all request headers and all cookies. You can now specify how to handle oversize body contents in your rules that inspect the body.
+
+1.38.0 (2022-04-08)
+------------------
+
+* Feature - Add a new CurrentDefaultVersion field to ListAvailableManagedRuleGroupVersions API response; add a new VersioningSupported boolean to each ManagedRuleGroup returned from ListAvailableManagedRuleGroups API response.
+
+1.37.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.36.0 (2022-02-22)
+------------------
+
+* Feature - Updated descriptions for logging configuration.
+
+1.35.0 (2022-02-10)
+------------------
+
+* Feature - Adds support for AWS WAF Fraud Control account takeover prevention (ATP), with configuration options for the new managed rule group AWSManagedRulesATPRuleSet and support for application integration SDKs for Android and iOS mobile apps.
+
 1.34.0 (2022-02-03)
 ------------------
 

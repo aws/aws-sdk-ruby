@@ -1202,7 +1202,10 @@
         "AutoMinorVersionUpgrade":{"shape":"BooleanOptional"},
         "Tags":{"shape":"TagList"},
         "DBClusterIdentifier":{"shape":"String"},
-        "PromotionTier":{"shape":"IntegerOptional"}
+        "CopyTagsToSnapshot":{"shape":"BooleanOptional"},
+        "PromotionTier":{"shape":"IntegerOptional"},
+        "EnablePerformanceInsights":{"shape":"BooleanOptional"},
+        "PerformanceInsightsKMSKeyId":{"shape":"String"}
       }
     },
     "CreateDBInstanceResult":{
@@ -1303,6 +1306,7 @@
         "DbClusterResourceId":{"shape":"String"},
         "DBClusterArn":{"shape":"String"},
         "AssociatedRoles":{"shape":"DBClusterRoles"},
+        "CloneGroupId":{"shape":"String"},
         "ClusterCreateTime":{"shape":"TStamp"},
         "EnabledCloudwatchLogsExports":{"shape":"LogTypeList"},
         "DeletionProtection":{"shape":"Boolean"}
@@ -1569,6 +1573,7 @@
         "KmsKeyId":{"shape":"String"},
         "DbiResourceId":{"shape":"String"},
         "CACertificateIdentifier":{"shape":"String"},
+        "CopyTagsToSnapshot":{"shape":"BooleanOptional"},
         "PromotionTier":{"shape":"IntegerOptional"},
         "DBInstanceArn":{"shape":"String"},
         "EnabledCloudwatchLogsExports":{"shape":"LogTypeList"}
@@ -2556,7 +2561,10 @@
         "AutoMinorVersionUpgrade":{"shape":"BooleanOptional"},
         "NewDBInstanceIdentifier":{"shape":"String"},
         "CACertificateIdentifier":{"shape":"String"},
-        "PromotionTier":{"shape":"IntegerOptional"}
+        "CopyTagsToSnapshot":{"shape":"BooleanOptional"},
+        "PromotionTier":{"shape":"IntegerOptional"},
+        "EnablePerformanceInsights":{"shape":"BooleanOptional"},
+        "PerformanceInsightsKMSKeyId":{"shape":"String"}
       }
     },
     "ModifyDBInstanceResult":{
@@ -2855,6 +2863,7 @@
       ],
       "members":{
         "DBClusterIdentifier":{"shape":"String"},
+        "RestoreType":{"shape":"String"},
         "SourceDBClusterIdentifier":{"shape":"String"},
         "RestoreToTime":{"shape":"TStamp"},
         "UseLatestRestorableTime":{"shape":"Boolean"},

@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2022-07-26)
+------------------
+
+* Feature - Documentation updates for AWS Security Hub
+
+1.67.0 (2022-06-16)
+------------------
+
+* Feature - Added Threats field for security findings. Added new resource details for ECS Container, ECS Task, RDS SecurityGroup, Kinesis Stream, EC2 TransitGateway, EFS AccessPoint, CloudFormation Stack, CloudWatch Alarm, VPC Peering Connection and WAF Rules
+
+1.66.0 (2022-06-16)
+------------------
+
+* Feature - Added Threats field for security findings. Added new resource details for ECS Container, ECS Task, RDS SecurityGroup, Kinesis Stream, EC2 TransitGateway, EFS AccessPoint, CloudFormation Stack, CloudWatch Alarm, VPC Peering Connection and WAF Rules
+
+1.65.0 (2022-05-06)
+------------------
+
+* Feature - Documentation updates for Security Hub API reference
+
+1.64.0 (2022-04-25)
+------------------
+
+* Feature - Security Hub now lets you opt-out of auto-enabling the defaults standards (CIS and FSBP) in accounts that are auto-enabled with Security Hub via Security Hub's integration with AWS Organizations.
+
+1.63.0 (2022-04-05)
+------------------
+
+* Feature - Added additional ASFF details for RdsSecurityGroup AutoScalingGroup, ElbLoadBalancer, CodeBuildProject and RedshiftCluster.
+
+1.62.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.61.0 (2022-02-03)
 ------------------
 

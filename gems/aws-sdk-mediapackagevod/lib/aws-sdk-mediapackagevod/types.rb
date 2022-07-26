@@ -503,6 +503,7 @@ module Aws::MediaPackageVod
     #               manifest_name: "__string",
     #               min_buffer_time_seconds: 1,
     #               profile: "NONE", # accepts NONE, HBBTV_1_5
+    #               scte_markers_source: "SEGMENTS", # accepts SEGMENTS, MANIFEST
     #               stream_selection: {
     #                 max_video_bits_per_second: 1,
     #                 min_video_bits_per_second: 1,
@@ -778,6 +779,7 @@ module Aws::MediaPackageVod
     #         manifest_name: "__string",
     #         min_buffer_time_seconds: 1,
     #         profile: "NONE", # accepts NONE, HBBTV_1_5
+    #         scte_markers_source: "SEGMENTS", # accepts SEGMENTS, MANIFEST
     #         stream_selection: {
     #           max_video_bits_per_second: 1,
     #           min_video_bits_per_second: 1,
@@ -807,6 +809,13 @@ module Aws::MediaPackageVod
     #   set to "HBBTV\_1\_5", HbbTV 1.5 compliant output is enabled.
     #   @return [String]
     #
+    # @!attribute [rw] scte_markers_source
+    #   The source of scte markers used. When set to SEGMENTS, the scte
+    #   markers are sourced from the segments of the ingested content. When
+    #   set to MANIFEST, the scte markers are sourced from the manifest of
+    #   the ingested content.
+    #   @return [String]
+    #
     # @!attribute [rw] stream_selection
     #   A StreamSelection configuration.
     #   @return [Types::StreamSelection]
@@ -818,6 +827,7 @@ module Aws::MediaPackageVod
       :manifest_name,
       :min_buffer_time_seconds,
       :profile,
+      :scte_markers_source,
       :stream_selection)
       SENSITIVE = []
       include Aws::Structure
@@ -835,6 +845,7 @@ module Aws::MediaPackageVod
     #             manifest_name: "__string",
     #             min_buffer_time_seconds: 1,
     #             profile: "NONE", # accepts NONE, HBBTV_1_5
+    #             scte_markers_source: "SEGMENTS", # accepts SEGMENTS, MANIFEST
     #             stream_selection: {
     #               max_video_bits_per_second: 1,
     #               min_video_bits_per_second: 1,

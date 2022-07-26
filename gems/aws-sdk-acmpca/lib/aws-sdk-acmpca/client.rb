@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::ACMPCA
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -380,14 +382,14 @@ module Aws::ACMPCA
     # <note markdown="1"> Both PCA and the IAM principal must have permission to write to the S3
     # bucket that you specify. If the IAM principal making the call does not
     # have permission to write to the bucket, then an exception is thrown.
-    # For more information, see [Configure Access to ACM Private CA][2].
+    # For more information, see [Access policies for CRLs in Amazon S3][2].
     #
     #  </note>
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCreateCa.html#crl-encryption
-    # [2]: https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaAuthAccess.html
+    # [2]: https://docs.aws.amazon.com/acm-pca/latest/userguide/crl-planning.html#s3-policies
     #
     # @option params [required, Types::CertificateAuthorityConfiguration] :certificate_authority_configuration
     #   Name and bit size of the private key algorithm, the name of the
@@ -424,9 +426,15 @@ module Aws::ACMPCA
     #
     #   Default: FIPS\_140\_2\_LEVEL\_3\_OR\_HIGHER
     #
-    #   Note: `FIPS_140_2_LEVEL_3_OR_HIGHER` is not supported in Region
-    #   ap-northeast-3. When creating a CA in the ap-northeast-3, you must
-    #   provide `FIPS_140_2_LEVEL_2_OR_HIGHER` as the argument for
+    #   *Note:* `FIPS_140_2_LEVEL_3_OR_HIGHER` is not supported in the
+    #   following Regions:
+    #
+    #   * ap-northeast-3
+    #
+    #   * ap-southeast-3
+    #
+    #   When creating a CA in these Regions, you must provide
+    #   `FIPS_140_2_LEVEL_2_OR_HIGHER` as the argument for
     #   `KeyStorageSecurityStandard`. Failure to do this results in an
     #   `InvalidArgsException` with the message, "A certificate authority
     #   cannot be created in this region with the specified security
@@ -467,6 +475,12 @@ module Aws::ACMPCA
     #         initials: "String5",
     #         pseudonym: "String128",
     #         generation_qualifier: "String3",
+    #         custom_attributes: [
+    #           {
+    #             object_identifier: "CustomObjectIdentifier", # required
+    #             value: "String1To256", # required
+    #           },
+    #         ],
     #       },
     #       csr_extensions: {
     #         key_usage: {
@@ -508,6 +522,12 @@ module Aws::ACMPCA
     #                 initials: "String5",
     #                 pseudonym: "String128",
     #                 generation_qualifier: "String3",
+    #                 custom_attributes: [
+    #                   {
+    #                     object_identifier: "CustomObjectIdentifier", # required
+    #                     value: "String1To256", # required
+    #                   },
+    #                 ],
     #               },
     #               edi_party_name: {
     #                 party_name: "String256", # required
@@ -566,7 +586,7 @@ module Aws::ACMPCA
     # <note markdown="1"> Both PCA and the IAM principal must have permission to write to the S3
     # bucket that you specify. If the IAM principal making the call does not
     # have permission to write to the bucket, then an exception is thrown.
-    # For more information, see [Configure Access to ACM Private CA][3].
+    # For more information, see [Access policies for CRLs in Amazon S3][3].
     #
     #  </note>
     #
@@ -574,11 +594,15 @@ module Aws::ACMPCA
     # with encryption. For more information, see [Encrypting Your Audit
     # Reports][4].
     #
+    # <note markdown="1"> You can generate a maximum of one report every 30 minutes.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_IssueCertificate.html
     # [2]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RevokeCertificate.html
-    # [3]: https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaAuthAccess.html
+    # [3]: https://docs.aws.amazon.com/acm-pca/latest/userguide/crl-planning.html#s3-policies
     # [4]: https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaAuditReport.html#audit-report-encryption
     #
     # @option params [required, String] :certificate_authority_arn
@@ -622,10 +646,10 @@ module Aws::ACMPCA
       req.send_request(options)
     end
 
-    # Grants one or more permissions on a private CA to the AWS Certificate
+    # Grants one or more permissions on a private CA to the Certificate
     # Manager (ACM) service principal (`acm.amazonaws.com`). These
     # permissions allow ACM to issue and renew ACM certificates that reside
-    # in the same AWS account as the CA.
+    # in the same Amazon Web Services account as the CA.
     #
     # You can list current permissions with the [ListPermissions][1] action
     # and revoke them with the [DeletePermission][2] action.
@@ -666,15 +690,17 @@ module Aws::ACMPCA
     #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListCertificateAuthorities.html
     #
     # @option params [required, String] :principal
-    #   The AWS service or identity that receives the permission. At this
-    #   time, the only valid principal is `acm.amazonaws.com`.
+    #   The Amazon Web Services service or identity that receives the
+    #   permission. At this time, the only valid principal is
+    #   `acm.amazonaws.com`.
     #
     # @option params [String] :source_account
     #   The ID of the calling account.
     #
     # @option params [required, Array<String>] :actions
-    #   The actions that the specified AWS service principal can use. These
-    #   include `IssueCertificate`, `GetCertificate`, and `ListPermissions`.
+    #   The actions that the specified Amazon Web Services service principal
+    #   can use. These include `IssueCertificate`, `GetCertificate`, and
+    #   `ListPermissions`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -768,13 +794,13 @@ module Aws::ACMPCA
       req.send_request(options)
     end
 
-    # Revokes permissions on a private CA granted to the AWS Certificate
-    # Manager (ACM) service principal (acm.amazonaws.com).
+    # Revokes permissions on a private CA granted to the Certificate Manager
+    # (ACM) service principal (acm.amazonaws.com).
     #
     # These permissions allow ACM to issue and renew ACM certificates that
-    # reside in the same AWS account as the CA. If you revoke these
-    # permissions, ACM will no longer renew the affected certificates
-    # automatically.
+    # reside in the same Amazon Web Services account as the CA. If you
+    # revoke these permissions, ACM will no longer renew the affected
+    # certificates automatically.
     #
     # Permissions can be granted with the [CreatePermission][1] action and
     # listed with the [ListPermissions][2] action.
@@ -816,11 +842,12 @@ module Aws::ACMPCA
     #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListCertificateAuthorities.html
     #
     # @option params [required, String] :principal
-    #   The AWS service or identity that will have its CA permissions revoked.
-    #   At this time, the only valid service principal is `acm.amazonaws.com`
+    #   The Amazon Web Services service or identity that will have its CA
+    #   permissions revoked. At this time, the only valid service principal is
+    #   `acm.amazonaws.com`
     #
     # @option params [String] :source_account
-    #   The AWS account that calls this action.
+    #   The Amazon Web Services account that calls this action.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -845,25 +872,26 @@ module Aws::ACMPCA
     # will remove any access that the policy has granted. If there is no
     # policy attached to the private CA, this action will return successful.
     #
-    # If you delete a policy that was applied through AWS Resource Access
-    # Manager (RAM), the CA will be removed from all shares in which it was
-    # included.
+    # If you delete a policy that was applied through Amazon Web Services
+    # Resource Access Manager (RAM), the CA will be removed from all shares
+    # in which it was included.
     #
-    # The AWS Certificate Manager Service Linked Role that the policy
-    # supports is not affected when you delete the policy.
+    # The Certificate Manager Service Linked Role that the policy supports
+    # is not affected when you delete the policy.
     #
     # The current policy can be shown with [GetPolicy][1] and updated with
     # [PutPolicy][2].
     #
     # **About Policies**
     #
-    # * A policy grants access on a private CA to an AWS customer account,
-    #   to AWS Organizations, or to an AWS Organizations unit. Policies are
-    #   under the control of a CA administrator. For more information, see
-    #   [Using a Resource Based Policy with ACM Private CA][3].
+    # * A policy grants access on a private CA to an Amazon Web Services
+    #   customer account, to Amazon Web Services Organizations, or to an
+    #   Amazon Web Services Organizations unit. Policies are under the
+    #   control of a CA administrator. For more information, see [Using a
+    #   Resource Based Policy with ACM Private CA][3].
     #
-    # * A policy permits a user of AWS Certificate Manager (ACM) to issue
-    #   ACM certificates signed by a CA in another account.
+    # * A policy permits a user of Certificate Manager (ACM) to issue ACM
+    #   certificates signed by a CA in another account.
     #
     # * For ACM to manage automatic renewal of these certificates, the ACM
     #   user must configure a Service Linked Role (SLR). The SLR allows the
@@ -871,9 +899,9 @@ module Aws::ACMPCA
     #   confirmation against the ACM Private CA policy. For more
     #   information, see [Using a Service Linked Role with ACM][4].
     #
-    # * Updates made in AWS Resource Manager (RAM) are reflected in
-    #   policies. For more information, see [Attach a Policy for
-    #   Cross-Account Access][5].
+    # * Updates made in Amazon Web Services Resource Manager (RAM) are
+    #   reflected in policies. For more information, see [Attach a Policy
+    #   for Cross-Account Access][5].
     #
     #
     #
@@ -930,9 +958,9 @@ module Aws::ACMPCA
     # * `EXPIRED` - Your private CA certificate has expired.
     #
     # * `FAILED` - Your private CA has failed. Your CA can fail because of
-    #   problems such a network outage or back-end AWS failure or other
-    #   errors. A failed CA can never return to the pending state. You must
-    #   create a new CA.
+    #   problems such a network outage or back-end Amazon Web Services
+    #   failure or other errors. A failed CA can never return to the pending
+    #   state. You must create a new CA.
     #
     # * `DELETED` - Your private CA is within the restoration period, after
     #   which it is permanently deleted. The length of time remaining in the
@@ -987,6 +1015,9 @@ module Aws::ACMPCA
     #   resp.certificate_authority.certificate_authority_configuration.subject.initials #=> String
     #   resp.certificate_authority.certificate_authority_configuration.subject.pseudonym #=> String
     #   resp.certificate_authority.certificate_authority_configuration.subject.generation_qualifier #=> String
+    #   resp.certificate_authority.certificate_authority_configuration.subject.custom_attributes #=> Array
+    #   resp.certificate_authority.certificate_authority_configuration.subject.custom_attributes[0].object_identifier #=> String
+    #   resp.certificate_authority.certificate_authority_configuration.subject.custom_attributes[0].value #=> String
     #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.key_usage.digital_signature #=> Boolean
     #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.key_usage.non_repudiation #=> Boolean
     #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.key_usage.key_encipherment #=> Boolean
@@ -1017,6 +1048,9 @@ module Aws::ACMPCA
     #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.directory_name.initials #=> String
     #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.directory_name.pseudonym #=> String
     #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.directory_name.generation_qualifier #=> String
+    #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.directory_name.custom_attributes #=> Array
+    #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.directory_name.custom_attributes[0].object_identifier #=> String
+    #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.directory_name.custom_attributes[0].value #=> String
     #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.edi_party_name.party_name #=> String
     #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.edi_party_name.name_assigner #=> String
     #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.uniform_resource_identifier #=> String
@@ -1266,13 +1300,14 @@ module Aws::ACMPCA
     #
     # **About Policies**
     #
-    # * A policy grants access on a private CA to an AWS customer account,
-    #   to AWS Organizations, or to an AWS Organizations unit. Policies are
-    #   under the control of a CA administrator. For more information, see
-    #   [Using a Resource Based Policy with ACM Private CA][3].
+    # * A policy grants access on a private CA to an Amazon Web Services
+    #   customer account, to Amazon Web Services Organizations, or to an
+    #   Amazon Web Services Organizations unit. Policies are under the
+    #   control of a CA administrator. For more information, see [Using a
+    #   Resource Based Policy with ACM Private CA][3].
     #
-    # * A policy permits a user of AWS Certificate Manager (ACM) to issue
-    #   ACM certificates signed by a CA in another account.
+    # * A policy permits a user of Certificate Manager (ACM) to issue ACM
+    #   certificates signed by a CA in another account.
     #
     # * For ACM to manage automatic renewal of these certificates, the ACM
     #   user must configure a Service Linked Role (SLR). The SLR allows the
@@ -1280,9 +1315,9 @@ module Aws::ACMPCA
     #   confirmation against the ACM Private CA policy. For more
     #   information, see [Using a Service Linked Role with ACM][4].
     #
-    # * Updates made in AWS Resource Manager (RAM) are reflected in
-    #   policies. For more information, see [Attach a Policy for
-    #   Cross-Account Access][5].
+    # * Updates made in Amazon Web Services Resource Manager (RAM) are
+    #   reflected in policies. For more information, see [Attach a Policy
+    #   for Cross-Account Access][5].
     #
     #
     #
@@ -1519,7 +1554,7 @@ module Aws::ACMPCA
     #   contains your X509 version 3 extensions.
     #
     #   `openssl req -new -config openssl_rsa.cnf -extensions usr_cert -newkey
-    #   rsa:2048 -days -365 -keyout private/test_cert_priv_key.pem -out
+    #   rsa:2048 -days 365 -keyout private/test_cert_priv_key.pem -out
     #   csr/test_cert_.csr`
     #
     #   Note: A CSR must provide either a *subject name* or a *subject
@@ -1532,6 +1567,11 @@ module Aws::ACMPCA
     #   This parameter should not be confused with the `SigningAlgorithm`
     #   parameter used to sign a CSR in the `CreateCertificateAuthority`
     #   action.
+    #
+    #   <note markdown="1"> The specified signing algorithm family (RSA or ECDSA) much match the
+    #   algorithm family of the CA's secret key.
+    #
+    #    </note>
     #
     # @option params [String] :template_arn
     #   Specifies a custom configuration template to use when issuing a
@@ -1573,7 +1613,7 @@ module Aws::ACMPCA
     #
     #
     #
-    #   [1]: https://tools.ietf.org/html/rfc5280#section-4.1.2.5
+    #   [1]: https://datatracker.ietf.org/doc/html/rfc5280#section-4.1.2.5
     #
     # @option params [Types::Validity] :validity_not_before
     #   Information describing the start of the validity period of the
@@ -1597,7 +1637,7 @@ module Aws::ACMPCA
     #
     #
     #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_Validity.html
-    #   [2]: https://tools.ietf.org/html/rfc5280#section-4.1.2.5
+    #   [2]: https://datatracker.ietf.org/doc/html/rfc5280#section-4.1.2.5
     #
     # @option params [String] :idempotency_token
     #   Alphanumeric string that can be used to distinguish between calls to
@@ -1671,6 +1711,12 @@ module Aws::ACMPCA
     #               initials: "String5",
     #               pseudonym: "String128",
     #               generation_qualifier: "String3",
+    #               custom_attributes: [
+    #                 {
+    #                   object_identifier: "CustomObjectIdentifier", # required
+    #                   value: "String1To256", # required
+    #                 },
+    #               ],
     #             },
     #             edi_party_name: {
     #               party_name: "String256", # required
@@ -1679,6 +1725,13 @@ module Aws::ACMPCA
     #             uniform_resource_identifier: "String253",
     #             ip_address: "String39",
     #             registered_id: "CustomObjectIdentifier",
+    #           },
+    #         ],
+    #         custom_extensions: [
+    #           {
+    #             object_identifier: "CustomObjectIdentifier", # required
+    #             value: "Base64String1To4096", # required
+    #             critical: false,
     #           },
     #         ],
     #       },
@@ -1697,6 +1750,12 @@ module Aws::ACMPCA
     #         initials: "String5",
     #         pseudonym: "String128",
     #         generation_qualifier: "String3",
+    #         custom_attributes: [
+    #           {
+    #             object_identifier: "CustomObjectIdentifier", # required
+    #             value: "String1To256", # required
+    #           },
+    #         ],
     #       },
     #     },
     #     certificate_authority_arn: "Arn", # required
@@ -1795,6 +1854,9 @@ module Aws::ACMPCA
     #   resp.certificate_authorities[0].certificate_authority_configuration.subject.initials #=> String
     #   resp.certificate_authorities[0].certificate_authority_configuration.subject.pseudonym #=> String
     #   resp.certificate_authorities[0].certificate_authority_configuration.subject.generation_qualifier #=> String
+    #   resp.certificate_authorities[0].certificate_authority_configuration.subject.custom_attributes #=> Array
+    #   resp.certificate_authorities[0].certificate_authority_configuration.subject.custom_attributes[0].object_identifier #=> String
+    #   resp.certificate_authorities[0].certificate_authority_configuration.subject.custom_attributes[0].value #=> String
     #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.key_usage.digital_signature #=> Boolean
     #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.key_usage.non_repudiation #=> Boolean
     #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.key_usage.key_encipherment #=> Boolean
@@ -1825,6 +1887,9 @@ module Aws::ACMPCA
     #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.directory_name.initials #=> String
     #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.directory_name.pseudonym #=> String
     #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.directory_name.generation_qualifier #=> String
+    #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.directory_name.custom_attributes #=> Array
+    #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.directory_name.custom_attributes[0].object_identifier #=> String
+    #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.directory_name.custom_attributes[0].value #=> String
     #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.edi_party_name.party_name #=> String
     #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.edi_party_name.name_assigner #=> String
     #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.uniform_resource_identifier #=> String
@@ -1850,11 +1915,11 @@ module Aws::ACMPCA
       req.send_request(options)
     end
 
-    # List all permissions on a private CA, if any, granted to the AWS
+    # List all permissions on a private CA, if any, granted to the
     # Certificate Manager (ACM) service principal (acm.amazonaws.com).
     #
     # These permissions allow ACM to issue and renew ACM certificates that
-    # reside in the same AWS account as the CA.
+    # reside in the same Amazon Web Services account as the CA.
     #
     # Permissions can be granted with the [CreatePermission][1] action and
     # revoked with the [DeletePermission][2] action.
@@ -2010,22 +2075,23 @@ module Aws::ACMPCA
 
     # Attaches a resource-based policy to a private CA.
     #
-    # A policy can also be applied by sharing a private CA through AWS
-    # Resource Access Manager (RAM). For more information, see [Attach a
-    # Policy for Cross-Account Access][1].
+    # A policy can also be applied by sharing a private CA through Amazon
+    # Web Services Resource Access Manager (RAM). For more information, see
+    # [Attach a Policy for Cross-Account Access][1].
     #
     # The policy can be displayed with [GetPolicy][2] and removed with
     # [DeletePolicy][3].
     #
     # **About Policies**
     #
-    # * A policy grants access on a private CA to an AWS customer account,
-    #   to AWS Organizations, or to an AWS Organizations unit. Policies are
-    #   under the control of a CA administrator. For more information, see
-    #   [Using a Resource Based Policy with ACM Private CA][4].
+    # * A policy grants access on a private CA to an Amazon Web Services
+    #   customer account, to Amazon Web Services Organizations, or to an
+    #   Amazon Web Services Organizations unit. Policies are under the
+    #   control of a CA administrator. For more information, see [Using a
+    #   Resource Based Policy with ACM Private CA][4].
     #
-    # * A policy permits a user of AWS Certificate Manager (ACM) to issue
-    #   ACM certificates signed by a CA in another account.
+    # * A policy permits a user of Certificate Manager (ACM) to issue ACM
+    #   certificates signed by a CA in another account.
     #
     # * For ACM to manage automatic renewal of these certificates, the ACM
     #   user must configure a Service Linked Role (SLR). The SLR allows the
@@ -2033,9 +2099,9 @@ module Aws::ACMPCA
     #   confirmation against the ACM Private CA policy. For more
     #   information, see [Using a Service Linked Role with ACM][5].
     #
-    # * Updates made in AWS Resource Manager (RAM) are reflected in
-    #   policies. For more information, see [Attach a Policy for
-    #   Cross-Account Access][1].
+    # * Updates made in Amazon Web Services Resource Manager (RAM) are
+    #   reflected in policies. For more information, see [Attach a Policy
+    #   for Cross-Account Access][1].
     #
     #
     #
@@ -2154,7 +2220,7 @@ module Aws::ACMPCA
     # <note markdown="1"> Both PCA and the IAM principal must have permission to write to the S3
     # bucket that you specify. If the IAM principal making the call does not
     # have permission to write to the bucket, then an exception is thrown.
-    # For more information, see [Configure Access to ACM Private CA][2].
+    # For more information, see [Access policies for CRLs in Amazon S3][2].
     #
     #  </note>
     #
@@ -2168,7 +2234,7 @@ module Aws::ACMPCA
     #
     #
     # [1]: https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCloudWatch.html
-    # [2]: https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaAuthAccess.html
+    # [2]: https://docs.aws.amazon.com/acm-pca/latest/userguide/crl-planning.html#s3-policies
     # [3]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html
     #
     # @option params [required, String] :certificate_authority_arn
@@ -2190,7 +2256,7 @@ module Aws::ACMPCA
     #   `openssl x509 -in file_path -text -noout`
     #
     #   You can also copy the serial number from the console or use the
-    #   [DescribeCertificate][2] action in the *AWS Certificate Manager API
+    #   [DescribeCertificate][2] action in the *Certificate Manager API
     #   Reference*.
     #
     #
@@ -2221,15 +2287,15 @@ module Aws::ACMPCA
     end
 
     # Adds one or more tags to your private CA. Tags are labels that you can
-    # use to identify and organize your AWS resources. Each tag consists of
-    # a key and an optional value. You specify the private CA on input by
-    # its Amazon Resource Name (ARN). You specify the tag by using a
-    # key-value pair. You can apply a tag to just one private CA if you want
-    # to identify a specific characteristic of that CA, or you can apply the
-    # same tag to multiple private CAs if you want to filter for a common
-    # relationship among those CAs. To remove one or more tags, use the
-    # [UntagCertificateAuthority][1] action. Call the [ListTags][2] action
-    # to see what tags are associated with your CA.
+    # use to identify and organize your Amazon Web Services resources. Each
+    # tag consists of a key and an optional value. You specify the private
+    # CA on input by its Amazon Resource Name (ARN). You specify the tag by
+    # using a key-value pair. You can apply a tag to just one private CA if
+    # you want to identify a specific characteristic of that CA, or you can
+    # apply the same tag to multiple private CAs if you want to filter for a
+    # common relationship among those CAs. To remove one or more tags, use
+    # the [UntagCertificateAuthority][1] action. Call the [ListTags][2]
+    # action to see what tags are associated with your CA.
     #
     #
     #
@@ -2332,13 +2398,13 @@ module Aws::ACMPCA
     # <note markdown="1"> Both PCA and the IAM principal must have permission to write to the S3
     # bucket that you specify. If the IAM principal making the call does not
     # have permission to write to the bucket, then an exception is thrown.
-    # For more information, see [Configure Access to ACM Private CA][1].
+    # For more information, see [Access policies for CRLs in Amazon S3][1].
     #
     #  </note>
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaAuthAccess.html
+    # [1]: https://docs.aws.amazon.com/acm-pca/latest/userguide/crl-planning.html#s3-policies
     #
     # @option params [required, String] :certificate_authority_arn
     #   Amazon Resource Name (ARN) of the private CA that issued the
@@ -2406,7 +2472,7 @@ module Aws::ACMPCA
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-acmpca'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

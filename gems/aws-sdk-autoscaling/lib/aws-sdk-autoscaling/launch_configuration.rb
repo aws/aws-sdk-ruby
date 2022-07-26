@@ -42,7 +42,7 @@ module Aws::AutoScaling
     end
 
     # The ID of the Amazon Machine Image (AMI) to use to launch your EC2
-    # instances. For more information, see [Finding an AMI][1] in the
+    # instances. For more information, see [Find a Linux AMI][1] in the
     # *Amazon EC2 User Guide for Linux Instances*.
     #
     #
@@ -78,31 +78,21 @@ module Aws::AutoScaling
       data[:security_groups]
     end
 
+    # *EC2-Classic retires on August 15, 2022. This property is not
+    # supported after that date.*
+    #
     # The ID of a ClassicLink-enabled VPC to link your EC2-Classic instances
-    # to. For more information, see [ClassicLink][1] in the *Amazon EC2 User
-    # Guide for Linux Instances* and [Linking EC2-Classic instances to a
-    # VPC][2] in the *Amazon EC2 Auto Scaling User Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html
-    # [2]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-ClassicLink
+    # to.
     # @return [String]
     def classic_link_vpc_id
       data[:classic_link_vpc_id]
     end
 
+    # *EC2-Classic retires on August 15, 2022. This property is not
+    # supported after that date.*
+    #
     # The IDs of one or more security groups for the VPC specified in
     # `ClassicLinkVPCId`.
-    #
-    # For more information, see [ClassicLink][1] in the *Amazon EC2 User
-    # Guide for Linux Instances* and [Linking EC2-Classic instances to a
-    # VPC][2] in the *Amazon EC2 Auto Scaling User Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html
-    # [2]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-ClassicLink
     # @return [Array<String>]
     def classic_link_vpc_security_groups
       data[:classic_link_vpc_security_groups]
@@ -124,10 +114,9 @@ module Aws::AutoScaling
       data[:user_data]
     end
 
-    # The instance type for the instances.
-    #
-    # For information about available instance types, see [Available
-    # Instance Types][1] in the *Amazon EC2 User Guide for Linux Instances*.
+    # The instance type for the instances. For information about available
+    # instance types, see [Available instance types][1] in the *Amazon EC2
+    # User Guide for Linux Instances*.
     #
     #
     #
@@ -149,9 +138,11 @@ module Aws::AutoScaling
       data[:ramdisk_id]
     end
 
-    # A block device mapping, which specifies the block devices for the
-    # instance. For more information, see [Block Device Mapping][1] in the
-    # *Amazon EC2 User Guide for Linux Instances*.
+    # The block device mapping entries that define the block devices to
+    # attach to the instances at launch. By default, the block devices
+    # specified in the block device mapping for the AMI are used. For more
+    # information, see [Block Device Mapping][1] in the *Amazon EC2 User
+    # Guide for Linux Instances*.
     #
     #
     #
@@ -222,10 +213,15 @@ module Aws::AutoScaling
       data[:ebs_optimized]
     end
 
-    # For Auto Scaling groups that are running in a VPC, specifies whether
-    # to assign a public IP address to the group's instances. For more
-    # information, see [Launching Auto Scaling instances in a VPC][1] in the
-    # *Amazon EC2 Auto Scaling User Guide*.
+    # Specifies whether to assign a public IPv4 address to the group's
+    # instances. If the instance is launched into a default subnet, the
+    # default is to assign a public IPv4 address, unless you disabled the
+    # option to assign a public IPv4 address on the subnet. If the instance
+    # is launched into a nondefault subnet, the default is not to assign a
+    # public IPv4 address, unless you enabled the option to assign a public
+    # IPv4 address on the subnet. For more information, see [Launching Auto
+    # Scaling instances in a VPC][1] in the *Amazon EC2 Auto Scaling User
+    # Guide*.
     #
     #
     #

@@ -239,7 +239,7 @@ module Aws::Batch
     #
     # @!attribute [rw] type
     #   The type of the compute environment: `MANAGED` or `UNMANAGED`. For
-    #   more information, see [Compute Environments][1] in the *Batch User
+    #   more information, see [Compute environments][1] in the *Batch User
     #   Guide*.
     #
     #
@@ -276,7 +276,7 @@ module Aws::Batch
     #
     # @!attribute [rw] compute_resources
     #   The compute resources defined for the compute environment. For more
-    #   information, see [Compute Environments][1] in the *Batch User
+    #   information, see [Compute environments][1] in the *Batch User
     #   Guide*.
     #
     #
@@ -295,6 +295,16 @@ module Aws::Batch
     #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/service_IAM_role.html
     #   @return [String]
     #
+    # @!attribute [rw] update_policy
+    #   Specifies the infrastructure update policy for the compute
+    #   environment. For more information about infrastructure updates, see
+    #   [Updating compute environments][1] in the *Batch User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
+    #   @return [Types::UpdatePolicy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ComputeEnvironmentDetail AWS API Documentation
     #
     class ComputeEnvironmentDetail < Struct.new(
@@ -308,7 +318,8 @@ module Aws::Batch
       :status,
       :status_reason,
       :compute_resources,
-      :service_role)
+      :service_role,
+      :update_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -358,7 +369,7 @@ module Aws::Batch
     end
 
     # An object representing an Batch compute resource. For more
-    # information, see [Compute Environments][1] in the *Batch User Guide*.
+    # information, see [Compute environments][1] in the *Batch User Guide*.
     #
     #
     #
@@ -400,12 +411,12 @@ module Aws::Batch
     #
     # @!attribute [rw] type
     #   The type of compute environment: `EC2`, `SPOT`, `FARGATE`, or
-    #   `FARGATE_SPOT`. For more information, see [Compute Environments][1]
+    #   `FARGATE_SPOT`. For more information, see [Compute environments][1]
     #   in the *Batch User Guide*.
     #
     #   If you choose `SPOT`, you must also specify an Amazon EC2 Spot Fleet
     #   role with the `spotIamFleetRole` parameter. For more information,
-    #   see [Amazon EC2 Spot Fleet role][2] in the *Batch User Guide*.
+    #   see [Amazon EC2 spot fleet role][2] in the *Batch User Guide*.
     #
     #
     #
@@ -418,7 +429,7 @@ module Aws::Batch
     #   enough instances of the best fitting instance type can be allocated.
     #   This might be because of availability of the instance type in the
     #   Region or [Amazon EC2 service limits][1]. For more information, see
-    #   [Allocation Strategies][2] in the *Batch User Guide*.
+    #   [Allocation strategies][2] in the *Batch User Guide*.
     #
     #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
     #   resources, and shouldn't be specified.
@@ -436,7 +447,10 @@ module Aws::Batch
     #     jobs aren't run until the currently running jobs have completed.
     #     This allocation strategy keeps costs lower but can limit scaling.
     #     If you are using Spot Fleets with `BEST_FIT` then the Spot Fleet
-    #     IAM Role must be specified.
+    #     IAM Role must be specified. Compute resources that use a
+    #     `BEST_FIT` allocation strategy don't support infrastructure
+    #     updates and can't update some parameters. For more information,
+    #     see [Updating compute environments][3] in the *Batch User Guide*.
     #
     #   BEST\_FIT\_PROGRESSIVE
     #
@@ -463,6 +477,7 @@ module Aws::Batch
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html
     #   [2]: https://docs.aws.amazon.com/batch/latest/userguide/allocation-strategies.html
+    #   [3]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
     #   @return [String]
     #
     # @!attribute [rw] minv_cpus
@@ -558,7 +573,7 @@ module Aws::Batch
     #   The VPC subnets where the compute resources are launched. These
     #   subnets must be within the same VPC. Fargate compute resources can
     #   contain up to 16 subnets. For more information, see [VPCs and
-    #   Subnets][1] in the *Amazon VPC User Guide*.
+    #   subnets][1] in the *Amazon VPC User Guide*.
     #
     #
     #
@@ -593,7 +608,7 @@ module Aws::Batch
     #   Resource Name (ARN) of an instance profile. For example, `
     #   ecsInstanceRole ` or
     #   `arn:aws:iam::<aws_account_id>:instance-profile/ecsInstanceRole `.
-    #   For more information, see [Amazon ECS Instance Role][1] in the
+    #   For more information, see [Amazon ECS instance role][1] in the
     #   *Batch User Guide*.
     #
     #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
@@ -612,16 +627,20 @@ module Aws::Batch
     #   "String1": "String2", where String1 is the tag key and String2
     #   is the tag value−for example, `\{ "Name": "Batch Instance -
     #   C4OnDemand" \}`. This is helpful for recognizing your Batch
-    #   instances in the Amazon EC2 console. These tags can't be updated or
-    #   removed after the compute environment is created. Any changes to
-    #   these tags require that you create a new compute environment and
-    #   remove the old compute environment. These tags aren't seen when
-    #   using the Batch `ListTagsForResource` API operation.
+    #   instances in the Amazon EC2 console. Updating these tags requires an
+    #   infrastructure update to the compute environment. For more
+    #   information, see [Updating compute environments][1] in the *Batch
+    #   User Guide*. These tags aren't seen when using the Batch
+    #   `ListTagsForResource` API operation.
     #
     #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
     #   resources, and shouldn't be specified.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] placement_group
@@ -631,7 +650,7 @@ module Aws::Batch
     #   placement group and associate it with your compute resources. This
     #   keeps your multi-node parallel job on a logical grouping of
     #   instances within a single Availability Zone with high network flow
-    #   potential. For more information, see [Placement Groups][1] in the
+    #   potential. For more information, see [Placement groups][1] in the
     #   *Amazon EC2 User Guide for Linux Instances*.
     #
     #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
@@ -665,7 +684,7 @@ module Aws::Batch
     #   applied to a `SPOT` compute environment. This role is required if
     #   the allocation strategy set to `BEST_FIT` or if the allocation
     #   strategy isn't specified. For more information, see [Amazon EC2
-    #   Spot Fleet Role][1] in the *Batch User Guide*.
+    #   spot fleet role][1] in the *Batch User Guide*.
     #
     #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
     #   resources, and shouldn't be specified.
@@ -677,7 +696,7 @@ module Aws::Batch
     #   managed policy. The previously recommended
     #   **AmazonEC2SpotFleetRole** managed policy doesn't have the required
     #   permissions to tag Spot Instances. For more information, see [Spot
-    #   Instances not tagged on creation][2] in the *Batch User Guide*.
+    #   instances not tagged on creation][2] in the *Batch User Guide*.
     #
     #
     #
@@ -691,7 +710,7 @@ module Aws::Batch
     #   CreateComputeEnvironment API operation override the same parameters
     #   in the launch template. You must specify either the launch template
     #   ID or launch template name in the request, but not both. For more
-    #   information, see [Launch Template Support][1] in the *Batch User
+    #   information, see [Launch template support][1] in the *Batch User
     #   Guide*.
     #
     #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
@@ -742,12 +761,12 @@ module Aws::Batch
     end
 
     # An object representing the attributes of a compute environment that
-    # can be updated. For more information, see [Compute Environments][1] in
-    # the *Batch User Guide*.
+    # can be updated. For more information, see [Updating compute
+    # environments][1] in the *Batch User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html
+    # [1]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
     #
     # @note When making an API call, you may pass ComputeResourceUpdate
     #   data as a hash:
@@ -758,11 +777,34 @@ module Aws::Batch
     #         desiredv_cpus: 1,
     #         subnets: ["String"],
     #         security_group_ids: ["String"],
+    #         allocation_strategy: "BEST_FIT_PROGRESSIVE", # accepts BEST_FIT_PROGRESSIVE, SPOT_CAPACITY_OPTIMIZED
+    #         instance_types: ["String"],
+    #         ec2_key_pair: "String",
+    #         instance_role: "String",
+    #         tags: {
+    #           "String" => "String",
+    #         },
+    #         placement_group: "String",
+    #         bid_percentage: 1,
+    #         launch_template: {
+    #           launch_template_id: "String",
+    #           launch_template_name: "String",
+    #           version: "String",
+    #         },
+    #         ec2_configuration: [
+    #           {
+    #             image_type: "ImageType", # required
+    #             image_id_override: "ImageIdOverride",
+    #           },
+    #         ],
+    #         update_to_latest_image_version: false,
+    #         type: "EC2", # accepts EC2, SPOT, FARGATE, FARGATE_SPOT
+    #         image_id: "String",
     #       }
     #
     # @!attribute [rw] minv_cpus
     #   The minimum number of Amazon EC2 vCPUs that an environment should
-    #   maintain.
+    #   maintain (even if the compute environment is `DISABLED`).
     #
     #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
     #   resources, and shouldn't be specified.
@@ -786,6 +828,8 @@ module Aws::Batch
     #
     # @!attribute [rw] desiredv_cpus
     #   The desired number of Amazon EC2 vCPUS in the compute environment.
+    #   Batch modifies this value between the minimum and maximum values
+    #   based on job queue demand.
     #
     #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
     #   resources, and shouldn't be specified.
@@ -795,25 +839,375 @@ module Aws::Batch
     #
     # @!attribute [rw] subnets
     #   The VPC subnets where the compute resources are launched. Fargate
-    #   compute resources can contain up to 16 subnets. Providing an empty
-    #   list will be handled as if this parameter wasn't specified and no
-    #   change is made. This can't be specified for EC2 compute resources.
-    #   For more information, see [VPCs and Subnets][1] in the *Amazon VPC
-    #   User Guide*.
+    #   compute resources can contain up to 16 subnets. For Fargate compute
+    #   resources, providing an empty list will be handled as if this
+    #   parameter wasn't specified and no change is made. For EC2 compute
+    #   resources, providing an empty list removes the VPC subnets from the
+    #   compute resource. For more information, see [VPCs and subnets][1] in
+    #   the *Amazon VPC User Guide*.
+    #
+    #   When updating a compute environment, changing the VPC subnets
+    #   requires an infrastructure update of the compute environment. For
+    #   more information, see [Updating compute environments][2] in the
+    #   *Batch User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html
+    #   [2]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_group_ids
     #   The Amazon EC2 security groups associated with instances launched in
     #   the compute environment. This parameter is required for Fargate
-    #   compute resources, where it can contain up to 5 security groups.
-    #   This can't be specified for EC2 compute resources. Providing an
-    #   empty list is handled as if this parameter wasn't specified and no
-    #   change is made.
+    #   compute resources, where it can contain up to 5 security groups. For
+    #   Fargate compute resources, providing an empty list is handled as if
+    #   this parameter wasn't specified and no change is made. For EC2
+    #   compute resources, providing an empty list removes the security
+    #   groups from the compute resource.
+    #
+    #   When updating a compute environment, changing the EC2 security
+    #   groups requires an infrastructure update of the compute environment.
+    #   For more information, see [Updating compute environments][1] in the
+    #   *Batch User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] allocation_strategy
+    #   The allocation strategy to use for the compute resource if not
+    #   enough instances of the best fitting instance type can be allocated.
+    #   This might be because of availability of the instance type in the
+    #   Region or [Amazon EC2 service limits][1]. For more information, see
+    #   [Allocation strategies][2] in the *Batch User Guide*.
+    #
+    #   When updating a compute environment, changing the allocation
+    #   strategy requires an infrastructure update of the compute
+    #   environment. For more information, see [Updating compute
+    #   environments][3] in the *Batch User Guide*. `BEST_FIT` isn't
+    #   supported when updating a compute environment.
+    #
+    #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
+    #   resources, and shouldn't be specified.
+    #
+    #    </note>
+    #
+    #   BEST\_FIT\_PROGRESSIVE
+    #
+    #   : Batch will select additional instance types that are large enough
+    #     to meet the requirements of the jobs in the queue, with a
+    #     preference for instance types with a lower cost per unit vCPU. If
+    #     additional instances of the previously selected instance types
+    #     aren't available, Batch will select new instance types.
+    #
+    #   SPOT\_CAPACITY\_OPTIMIZED
+    #
+    #   : Batch will select one or more instance types that are large enough
+    #     to meet the requirements of the jobs in the queue, with a
+    #     preference for instance types that are less likely to be
+    #     interrupted. This allocation strategy is only available for Spot
+    #     Instance compute resources.
+    #
+    #   With both `BEST_FIT_PROGRESSIVE` and `SPOT_CAPACITY_OPTIMIZED`
+    #   strategies, Batch might need to go above `maxvCpus` to meet your
+    #   capacity requirements. In this event, Batch never exceeds `maxvCpus`
+    #   by more than a single instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html
+    #   [2]: https://docs.aws.amazon.com/batch/latest/userguide/allocation-strategies.html
+    #   [3]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_types
+    #   The instances types that can be launched. You can specify instance
+    #   families to launch any instance type within those families (for
+    #   example, `c5` or `p3`), or you can specify specific sizes within a
+    #   family (such as `c5.8xlarge`). You can also choose `optimal` to
+    #   select instance types (from the C4, M4, and R4 instance families)
+    #   that match the demand of your job queues.
+    #
+    #   When updating a compute environment, changing this setting requires
+    #   an infrastructure update of the compute environment. For more
+    #   information, see [Updating compute environments][1] in the *Batch
+    #   User Guide*.
+    #
+    #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
+    #   resources, and shouldn't be specified.
+    #
+    #    </note>
+    #
+    #   <note markdown="1"> When you create a compute environment, the instance types that you
+    #   select for the compute environment must share the same architecture.
+    #   For example, you can't mix x86 and ARM instances in the same
+    #   compute environment.
+    #
+    #    </note>
+    #
+    #   <note markdown="1"> Currently, `optimal` uses instance types from the C4, M4, and R4
+    #   instance families. In Regions that don't have instance types from
+    #   those instance families, instance types from the C5, M5. and R5
+    #   instance families are used.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ec2_key_pair
+    #   The Amazon EC2 key pair that's used for instances launched in the
+    #   compute environment. You can use this key pair to log in to your
+    #   instances with SSH. To remove the Amazon EC2 key pair, set this
+    #   value to an empty string.
+    #
+    #   When updating a compute environment, changing the EC2 key pair
+    #   requires an infrastructure update of the compute environment. For
+    #   more information, see [Updating compute environments][1] in the
+    #   *Batch User Guide*.
+    #
+    #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
+    #   resources, and shouldn't be specified.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_role
+    #   The Amazon ECS instance profile applied to Amazon EC2 instances in a
+    #   compute environment. You can specify the short name or full Amazon
+    #   Resource Name (ARN) of an instance profile. For example, `
+    #   ecsInstanceRole ` or
+    #   `arn:aws:iam::<aws_account_id>:instance-profile/ecsInstanceRole `.
+    #   For more information, see [Amazon ECS instance role][1] in the
+    #   *Batch User Guide*.
+    #
+    #   When updating a compute environment, changing this setting requires
+    #   an infrastructure update of the compute environment. For more
+    #   information, see [Updating compute environments][2] in the *Batch
+    #   User Guide*.
+    #
+    #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
+    #   resources, and shouldn't be specified.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/instance_IAM_role.html
+    #   [2]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Key-value pair tags to be applied to EC2 resources that are launched
+    #   in the compute environment. For Batch, these take the form of
+    #   "String1": "String2", where String1 is the tag key and String2
+    #   is the tag value−for example, `\{ "Name": "Batch Instance -
+    #   C4OnDemand" \}`. This is helpful for recognizing your Batch
+    #   instances in the Amazon EC2 console. These tags aren't seen when
+    #   using the Batch `ListTagsForResource` API operation.
+    #
+    #   When updating a compute environment, changing this setting requires
+    #   an infrastructure update of the compute environment. For more
+    #   information, see [Updating compute environments][1] in the *Batch
+    #   User Guide*.
+    #
+    #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
+    #   resources, and shouldn't be specified.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] placement_group
+    #   The Amazon EC2 placement group to associate with your compute
+    #   resources. If you intend to submit multi-node parallel jobs to your
+    #   compute environment, you should consider creating a cluster
+    #   placement group and associate it with your compute resources. This
+    #   keeps your multi-node parallel job on a logical grouping of
+    #   instances within a single Availability Zone with high network flow
+    #   potential. For more information, see [Placement groups][1] in the
+    #   *Amazon EC2 User Guide for Linux Instances*.
+    #
+    #   When updating a compute environment, changing the placement group
+    #   requires an infrastructure update of the compute environment. For
+    #   more information, see [Updating compute environments][2] in the
+    #   *Batch User Guide*.
+    #
+    #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
+    #   resources, and shouldn't be specified.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html
+    #   [2]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
+    #   @return [String]
+    #
+    # @!attribute [rw] bid_percentage
+    #   The maximum percentage that a Spot Instance price can be when
+    #   compared with the On-Demand price for that instance type before
+    #   instances are launched. For example, if your maximum percentage is
+    #   20%, then the Spot price must be less than 20% of the current
+    #   On-Demand price for that Amazon EC2 instance. You always pay the
+    #   lowest (market) price and never more than your maximum percentage.
+    #
+    #   When updating a compute environment, changing the bid percentage
+    #   requires an infrastructure update of the compute environment. For
+    #   more information, see [Updating compute environments][1] in the
+    #   *Batch User Guide*.
+    #
+    #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
+    #   resources, and shouldn't be specified.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] launch_template
+    #   The updated launch template to use for your compute resources. You
+    #   must specify either the launch template ID or launch template name
+    #   in the request, but not both. For more information, see [Launch
+    #   template support][1] in the *Batch User Guide*. To remove the custom
+    #   launch template and use the default launch template, set
+    #   `launchTemplateId` or `launchTemplateName` member of the launch
+    #   template specification to an empty string. Removing the launch
+    #   template from a compute environment will not remove the AMI
+    #   specified in the launch template. In order to update the AMI
+    #   specified in a launch template, the `updateToLatestImageVersion`
+    #   parameter must be set to `true`.
+    #
+    #   When updating a compute environment, changing the launch template
+    #   requires an infrastructure update of the compute environment. For
+    #   more information, see [Updating compute environments][2] in the
+    #   *Batch User Guide*.
+    #
+    #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
+    #   resources, and shouldn't be specified.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/launch-templates.html
+    #   [2]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
+    #   @return [Types::LaunchTemplateSpecification]
+    #
+    # @!attribute [rw] ec2_configuration
+    #   Provides information used to select Amazon Machine Images (AMIs) for
+    #   EC2 instances in the compute environment. If `Ec2Configuration`
+    #   isn't specified, the default is `ECS_AL2`.
+    #
+    #   When updating a compute environment, changing this setting requires
+    #   an infrastructure update of the compute environment. For more
+    #   information, see [Updating compute environments][1] in the *Batch
+    #   User Guide*. To remove the EC2 configuration and any custom AMI ID
+    #   specified in `imageIdOverride`, set this value to an empty string.
+    #
+    #   One or two values can be provided.
+    #
+    #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
+    #   resources, and shouldn't be specified.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
+    #   @return [Array<Types::Ec2Configuration>]
+    #
+    # @!attribute [rw] update_to_latest_image_version
+    #   Specifies whether the AMI ID is updated to the latest one that's
+    #   supported by Batch when the compute environment has an
+    #   infrastructure update. The default value is `false`.
+    #
+    #   <note markdown="1"> If an AMI ID is specified in the `imageId` or `imageIdOverride`
+    #   parameters or by the launch template specified in the
+    #   `launchTemplate` parameter, this parameter is ignored. For more
+    #   information on updating AMI IDs during an infrastructure update, see
+    #   [Updating the AMI ID][1] in the *Batch User Guide*.
+    #
+    #    </note>
+    #
+    #   When updating a compute environment, changing this setting requires
+    #   an infrastructure update of the compute environment. For more
+    #   information, see [Updating compute environments][2] in the *Batch
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html#updating-compute-environments-ami
+    #   [2]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] type
+    #   The type of compute environment: `EC2`, `SPOT`, `FARGATE`, or
+    #   `FARGATE_SPOT`. For more information, see [Compute environments][1]
+    #   in the *Batch User Guide*.
+    #
+    #   If you choose `SPOT`, you must also specify an Amazon EC2 Spot Fleet
+    #   role with the `spotIamFleetRole` parameter. For more information,
+    #   see [Amazon EC2 spot fleet role][2] in the *Batch User Guide*.
+    #
+    #   When updating a compute environment, changing the type of a compute
+    #   environment requires an infrastructure update of the compute
+    #   environment. For more information, see [Updating compute
+    #   environments][3] in the *Batch User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html
+    #   [2]: https://docs.aws.amazon.com/batch/latest/userguide/spot_fleet_IAM_role.html
+    #   [3]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
+    #   @return [String]
+    #
+    # @!attribute [rw] image_id
+    #   The Amazon Machine Image (AMI) ID used for instances launched in the
+    #   compute environment. This parameter is overridden by the
+    #   `imageIdOverride` member of the `Ec2Configuration` structure. To
+    #   remove the custom AMI ID and use the default AMI ID, set this value
+    #   to an empty string.
+    #
+    #   When updating a compute environment, changing the AMI ID requires an
+    #   infrastructure update of the compute environment. For more
+    #   information, see [Updating compute environments][1] in the *Batch
+    #   User Guide*.
+    #
+    #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
+    #   resources, and shouldn't be specified.
+    #
+    #    </note>
+    #
+    #   <note markdown="1"> The AMI that you choose for a compute environment must match the
+    #   architecture of the instance types that you intend to use for that
+    #   compute environment. For example, if your compute environment uses
+    #   A1 instance types, the compute resource AMI that you choose must
+    #   support ARM instances. Amazon ECS vends both x86 and ARM versions of
+    #   the Amazon ECS-optimized Amazon Linux 2 AMI. For more information,
+    #   see [Amazon ECS-optimized Amazon Linux 2 AMI][2] in the *Amazon
+    #   Elastic Container Service Developer Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#ecs-optimized-ami-linux-variants.html
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ComputeResourceUpdate AWS API Documentation
     #
@@ -822,7 +1216,19 @@ module Aws::Batch
       :maxv_cpus,
       :desiredv_cpus,
       :subnets,
-      :security_group_ids)
+      :security_group_ids,
+      :allocation_strategy,
+      :instance_types,
+      :ec2_key_pair,
+      :instance_role,
+      :tags,
+      :placement_group,
+      :bid_percentage,
+      :launch_template,
+      :ec2_configuration,
+      :update_to_latest_image_version,
+      :type,
+      :image_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -860,7 +1266,7 @@ module Aws::Batch
     #   @return [Integer]
     #
     # @!attribute [rw] memory
-    #   For jobs run on EC2 resources that didn't specify memory
+    #   For jobs running on EC2 resources that didn't specify memory
     #   requirements using `resourceRequirements`, the number of MiB of
     #   memory reserved for the job. For other jobs, including all run on
     #   Fargate resources, see `resourceRequirements`.
@@ -1040,8 +1446,8 @@ module Aws::Batch
     #   register the logging drivers available on that instance with the
     #   `ECS_AVAILABLE_LOGGING_DRIVERS` environment variable before
     #   containers placed on that instance can use these log configuration
-    #   options. For more information, see [Amazon ECS Container Agent
-    #   Configuration][5] in the *Amazon Elastic Container Service Developer
+    #   options. For more information, see [Amazon ECS container agent
+    #   configuration][5] in the *Amazon Elastic Container Service Developer
     #   Guide*.
     #
     #    </note>
@@ -1136,7 +1542,7 @@ module Aws::Batch
     # @!attribute [rw] vcpus
     #   This parameter is deprecated, use `resourceRequirements` to override
     #   the `vcpus` parameter that's set in the job definition. It's not
-    #   supported for jobs that run on Fargate resources. For jobs run on
+    #   supported for jobs running on Fargate resources. For jobs running on
     #   EC2 resources, it overrides the `vcpus` parameter set in the job
     #   definition, but doesn't override any vCPU requirement specified in
     #   the `resourceRequirements` structure in the job definition. To
@@ -1155,7 +1561,7 @@ module Aws::Batch
     # @!attribute [rw] memory
     #   This parameter is deprecated, use `resourceRequirements` to override
     #   the memory requirements specified in the job definition. It's not
-    #   supported for jobs that run on Fargate resources. For jobs run on
+    #   supported for jobs running on Fargate resources. For jobs running on
     #   EC2 resources, it overrides the `memory` parameter set in the job
     #   definition, but doesn't override any memory requirement specified
     #   in the `resourceRequirements` structure in the job definition. To
@@ -1340,6 +1746,11 @@ module Aws::Batch
     #
     #    </note>
     #
+    #   * Images in Amazon ECR Public repositories use the full
+    #     `registry/repository[:tag]` or `registry/repository[@digest]`
+    #     naming conventions. For example,
+    #     `public.ecr.aws/registry_alias/my-web-app:latest `.
+    #
     #   * Images in Amazon ECR repositories use the full registry and
     #     repository URI (for example,
     #     `012345678910.dkr.ecr.<region-name>.amazonaws.com/<repository-name>`).
@@ -1363,7 +1774,7 @@ module Aws::Batch
     # @!attribute [rw] vcpus
     #   This parameter is deprecated, use `resourceRequirements` to specify
     #   the vCPU requirements for the job definition. It's not supported
-    #   for jobs that run on Fargate resources. For jobs run on EC2
+    #   for jobs running on Fargate resources. For jobs running on EC2
     #   resources, it specifies the number of vCPUs reserved for the job.
     #
     #   Each vCPU is equivalent to 1,024 CPU shares. This parameter maps to
@@ -1382,7 +1793,7 @@ module Aws::Batch
     # @!attribute [rw] memory
     #   This parameter is deprecated, use `resourceRequirements` to specify
     #   the memory requirements for the job definition. It's not supported
-    #   for jobs that run on Fargate resources. For jobs run on EC2
+    #   for jobs running on Fargate resources. For jobs running on EC2
     #   resources, it specifies the memory hard limit (in MiB) for a
     #   container. If your container attempts to exceed the specified
     #   number, it's terminated. You must specify at least 4 MiB of memory
@@ -1409,7 +1820,7 @@ module Aws::Batch
     # @!attribute [rw] job_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that the container
     #   can assume for Amazon Web Services permissions. For more
-    #   information, see [IAM Roles for Tasks][1] in the *Amazon Elastic
+    #   information, see [IAM roles for tasks][1] in the *Amazon Elastic
     #   Container Service Developer Guide*.
     #
     #
@@ -1576,8 +1987,8 @@ module Aws::Batch
     #   register the logging drivers available on that instance with the
     #   `ECS_AVAILABLE_LOGGING_DRIVERS` environment variable before
     #   containers placed on that instance can use these log configuration
-    #   options. For more information, see [Amazon ECS Container Agent
-    #   Configuration][5] in the *Amazon Elastic Container Service Developer
+    #   options. For more information, see [Amazon ECS container agent
+    #   configuration][5] in the *Amazon Elastic Container Service Developer
     #   Guide*.
     #
     #    </note>
@@ -1746,7 +2157,7 @@ module Aws::Batch
     #   provided for a fair share job queue, no vCPU capacity is reserved.
     #
     #   <note markdown="1"> This parameter is only supported when the `type` parameter is set to
-    #   `UNMANAGED`/
+    #   `UNMANAGED`.
     #
     #    </note>
     #   @return [Integer]
@@ -1908,13 +2319,13 @@ module Aws::Batch
     # @!attribute [rw] compute_environment_order
     #   The set of compute environments mapped to a job queue and their
     #   order relative to each other. The job scheduler uses this parameter
-    #   to determine which compute environment should run a specific job.
-    #   Compute environments must be in the `VALID` state before you can
-    #   associate them with a job queue. You can associate up to three
-    #   compute environments with a job queue. All of the compute
-    #   environments must be either EC2 (`EC2` or `SPOT`) or Fargate
-    #   (`FARGATE` or `FARGATE_SPOT`); EC2 and Fargate compute environments
-    #   can't be mixed.
+    #   to determine which compute environment runs a specific job. Compute
+    #   environments must be in the `VALID` state before you can associate
+    #   them with a job queue. You can associate up to three compute
+    #   environments with a job queue. All of the compute environments must
+    #   be either EC2 (`EC2` or `SPOT`) or Fargate (`FARGATE` or
+    #   `FARGATE_SPOT`); EC2 and Fargate compute environments can't be
+    #   mixed.
     #
     #   <note markdown="1"> All compute environments that are associated with a job queue must
     #   share the same architecture. Batch doesn't support mixing compute
@@ -1964,6 +2375,8 @@ module Aws::Batch
       include Aws::Structure
     end
 
+    # Contains the parameters for `CreateSchedulingPolicy`.
+    #
     # @note When making an API call, you may pass CreateSchedulingPolicyRequest
     #   data as a hash:
     #
@@ -2092,6 +2505,8 @@ module Aws::Batch
     #
     class DeleteJobQueueResponse < Aws::EmptyStructure; end
 
+    # Contains the parameters for `DeleteSchedulingPolicy`.
+    #
     # @note When making an API call, you may pass DeleteSchedulingPolicyRequest
     #   data as a hash:
     #
@@ -2409,6 +2824,8 @@ module Aws::Batch
       include Aws::Structure
     end
 
+    # Contains the parameters for `DescribeSchedulingPolicies`.
+    #
     # @note When making an API call, you may pass DescribeSchedulingPoliciesRequest
     #   data as a hash:
     #
@@ -2500,7 +2917,7 @@ module Aws::Batch
     #   will enforce the path set on the EFS access point. If an access
     #   point is used, transit encryption must be enabled in the
     #   `EFSVolumeConfiguration`. For more information, see [Working with
-    #   Amazon EFS Access Points][1] in the *Amazon Elastic File System User
+    #   Amazon EFS access points][1] in the *Amazon Elastic File System User
     #   Guide*.
     #
     #
@@ -2513,7 +2930,7 @@ module Aws::Batch
     #   definition when mounting the Amazon EFS file system. If enabled,
     #   transit encryption must be enabled in the `EFSVolumeConfiguration`.
     #   If this parameter is omitted, the default value of `DISABLED` is
-    #   used. For more information, see [Using Amazon EFS Access Points][1]
+    #   used. For more information, see [Using Amazon EFS access points][1]
     #   in the *Batch User Guide*. EFS IAM authorization requires that
     #   `TransitEncryption` be `ENABLED` and that a `JobRoleArn` is
     #   specified.
@@ -2588,7 +3005,7 @@ module Aws::Batch
     #   host and the Amazon EFS server. If you don't specify a transit
     #   encryption port, it uses the port selection strategy that the Amazon
     #   EFS mount helper uses. The value must be between 0 and 65,535. For
-    #   more information, see [EFS Mount Helper][1] in the *Amazon Elastic
+    #   more information, see [EFS mount helper][1] in the *Amazon Elastic
     #   File System User Guide*.
     #
     #
@@ -2637,7 +3054,11 @@ module Aws::Batch
     # @!attribute [rw] image_type
     #   The image type to match with the instance type to select an AMI. If
     #   the `imageIdOverride` parameter isn't specified, then a recent
-    #   [Amazon ECS-optimized Amazon Linux 2 AMI][1] (`ECS_AL2`) is used.
+    #   [Amazon ECS-optimized Amazon Linux 2 AMI][1] (`ECS_AL2`) is used. If
+    #   a new image type is specified in an update, but neither an `imageId`
+    #   nor a `imageIdOverride` parameter is specified, then the latest
+    #   Amazon ECS optimized AMI for that image type that's supported by
+    #   Batch is used.
     #
     #   ECS\_AL2
     #
@@ -2666,6 +3087,21 @@ module Aws::Batch
     #   The AMI ID used for instances launched in the compute environment
     #   that match the image type. This setting overrides the `imageId` set
     #   in the `computeResource` object.
+    #
+    #   <note markdown="1"> The AMI that you choose for a compute environment must match the
+    #   architecture of the instance types that you intend to use for that
+    #   compute environment. For example, if your compute environment uses
+    #   A1 instance types, the compute resource AMI that you choose must
+    #   support ARM instances. Amazon ECS vends both x86 and ARM versions of
+    #   the Amazon ECS-optimized Amazon Linux 2 AMI. For more information,
+    #   see [Amazon ECS-optimized Amazon Linux 2 AMI][1] in the *Amazon
+    #   Elastic Container Service Developer Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#ecs-optimized-ami-linux-variants.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/Ec2Configuration AWS API Documentation
@@ -2911,8 +3347,8 @@ module Aws::Batch
     #   set in the job definition. Parameters are specified as a key-value
     #   pair mapping. Parameters in a `SubmitJob` request override any
     #   corresponding parameter defaults from the job definition. For more
-    #   information about specifying parameters, see [Job Definition
-    #   Parameters][1] in the *Batch User Guide*.
+    #   information about specifying parameters, see [Job definition
+    #   parameters][1] in the *Batch User Guide*.
     #
     #
     #
@@ -3034,8 +3470,8 @@ module Aws::Batch
     # @!attribute [rw] status
     #   The current status for the job.
     #
-    #   <note markdown="1"> If your jobs don't progress to `STARTING`, see [Jobs Stuck in
-    #   RUNNABLE Status][1] in the troubleshooting section of the *Batch
+    #   <note markdown="1"> If your jobs don't progress to `STARTING`, see [Jobs stuck in
+    #   RUNNABLE status][1] in the troubleshooting section of the *Batch
     #   User Guide*.
     #
     #    </note>
@@ -3095,7 +3531,8 @@ module Aws::Batch
     #   @return [Array<Types::JobDependency>]
     #
     # @!attribute [rw] job_definition
-    #   The job definition that's used by this job.
+    #   The Amazon Resource Name (ARN) of the job definition that's used by
+    #   this job.
     #   @return [String]
     #
     # @!attribute [rw] parameters
@@ -3461,15 +3898,24 @@ module Aws::Batch
     #   is used. If the value is `$Default`, the default version of the
     #   launch template is used.
     #
-    #   After the compute environment is created, the launch template
-    #   version that's used isn't changed, even if the `$Default` or
-    #   `$Latest` version for the launch template is updated. To use a new
-    #   launch template version, create a new compute environment, add the
-    #   new compute environment to the existing job queue, remove the old
-    #   compute environment from the job queue, and delete the old compute
-    #   environment.
+    #   If the AMI ID that's used in a compute environment is from the
+    #   launch template, the AMI isn't changed when the compute environment
+    #   is updated. It's only changed if the `updateToLatestImageVersion`
+    #   parameter for the compute environment is set to `true`. During an
+    #   infrastructure update, if either `$Latest` or `$Default` is
+    #   specified, Batch re-evaluates the launch template version, and it
+    #   might use a different version of the launch template. This is the
+    #   case even if the launch template isn't specified in the update.
+    #   When updating a compute environment, changing the launch template
+    #   requires an infrastructure update of the compute environment. For
+    #   more information, see [Updating compute environments][1] in the
+    #   *Batch User Guide*.
     #
     #   Default: `$Default`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/LaunchTemplateSpecification AWS API Documentation
@@ -3614,7 +4060,7 @@ module Aws::Batch
     #
     #     <note markdown="1"> The Amazon ECS optimized AMIs don't have swap enabled by default.
     #     You must enable swap on the instance to use this feature. For more
-    #     information, see [Instance Store Swap Volumes][2] in the *Amazon
+    #     information, see [Instance store swap volumes][2] in the *Amazon
     #     EC2 User Guide for Linux Instances* or [How do I allocate memory
     #     to work as swap space in an Amazon EC2 instance by using a swap
     #     file?][3]
@@ -3806,6 +4252,8 @@ module Aws::Batch
       include Aws::Structure
     end
 
+    # Contains the parameters for `ListSchedulingPolicies`.
+    #
     # @note When making an API call, you may pass ListSchedulingPoliciesRequest
     #   data as a hash:
     #
@@ -3871,6 +4319,8 @@ module Aws::Batch
       include Aws::Structure
     end
 
+    # Contains the parameters for `ListTagsForResource`.
+    #
     # @note When making an API call, you may pass ListTagsForResourceRequest
     #   data as a hash:
     #
@@ -3941,7 +4391,7 @@ module Aws::Batch
     #   awslogs
     #
     #   : Specifies the Amazon CloudWatch Logs logging driver. For more
-    #     information, see [Using the awslogs Log Driver][1] in the *Batch
+    #     information, see [Using the awslogs log driver][1] in the *Batch
     #     User Guide* and [Amazon CloudWatch Logs logging driver][2] in the
     #     Docker documentation.
     #
@@ -4020,7 +4470,7 @@ module Aws::Batch
     #
     # @!attribute [rw] secret_options
     #   The secrets to pass to the log configuration. For more information,
-    #   see [Specifying Sensitive Data][1] in the *Batch User Guide*.
+    #   see [Specifying sensitive data][1] in the *Batch User Guide*.
     #
     #
     #
@@ -5018,7 +5468,7 @@ module Aws::Batch
     #
     #     <note markdown="1"> If you're trying to maximize your resource utilization by
     #     providing your jobs as much memory as possible for a particular
-    #     instance type, see [Memory Management][4] in the *Batch User
+    #     instance type, see [Memory management][4] in the *Batch User
     #     Guide*.
     #
     #      </note>
@@ -5189,7 +5639,7 @@ module Aws::Batch
     #   The tags that you apply to the scheduling policy to categorize and
     #   organize your resources. Each tag consists of a key and an optional
     #   value. For more information, see [Tagging Amazon Web Services
-    #   Resources][1] in *Amazon Web Services General Reference*.
+    #   resources][1] in *Amazon Web Services General Reference*.
     #
     #
     #
@@ -5433,7 +5883,10 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] share_identifier
-    #   The share identifier for the job.
+    #   The share identifier for the job. If the job queue does not have a
+    #   scheduling policy, then this parameter must not be specified. If the
+    #   job queue has a scheduling policy, then this parameter must be
+    #   specified.
     #   @return [String]
     #
     # @!attribute [rw] scheduling_priority_override
@@ -5486,10 +5939,10 @@ module Aws::Batch
     # @!attribute [rw] container_overrides
     #   A list of container overrides in the JSON format that specify the
     #   name of a container in the specified job definition and the
-    #   overrides it should receive. You can override the default command
-    #   for a container, which is specified in the job definition or the
-    #   Docker image, with a `command` override. You can also override
-    #   existing environment variables on a container or add new environment
+    #   overrides it receives. You can override the default command for a
+    #   container, which is specified in the job definition or the Docker
+    #   image, with a `command` override. You can also override existing
+    #   environment variables on a container or add new environment
     #   variables to it with an `environment` override.
     #   @return [Types::ContainerOverrides]
     #
@@ -5590,6 +6043,8 @@ module Aws::Batch
       include Aws::Structure
     end
 
+    # Contains the parameters for `TagResource`.
+    #
     # @note When making an API call, you may pass TagResourceRequest
     #   data as a hash:
     #
@@ -5754,6 +6209,8 @@ module Aws::Batch
       include Aws::Structure
     end
 
+    # Contains the parameters for `UntagResource`.
+    #
     # @note When making an API call, you may pass UntagResourceRequest
     #   data as a hash:
     #
@@ -5802,8 +6259,35 @@ module Aws::Batch
     #           desiredv_cpus: 1,
     #           subnets: ["String"],
     #           security_group_ids: ["String"],
+    #           allocation_strategy: "BEST_FIT_PROGRESSIVE", # accepts BEST_FIT_PROGRESSIVE, SPOT_CAPACITY_OPTIMIZED
+    #           instance_types: ["String"],
+    #           ec2_key_pair: "String",
+    #           instance_role: "String",
+    #           tags: {
+    #             "String" => "String",
+    #           },
+    #           placement_group: "String",
+    #           bid_percentage: 1,
+    #           launch_template: {
+    #             launch_template_id: "String",
+    #             launch_template_name: "String",
+    #             version: "String",
+    #           },
+    #           ec2_configuration: [
+    #             {
+    #               image_type: "ImageType", # required
+    #               image_id_override: "ImageIdOverride",
+    #             },
+    #           ],
+    #           update_to_latest_image_version: false,
+    #           type: "EC2", # accepts EC2, SPOT, FARGATE, FARGATE_SPOT
+    #           image_id: "String",
     #         },
     #         service_role: "String",
+    #         update_policy: {
+    #           terminate_jobs_on_update: false,
+    #           job_execution_timeout_minutes: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] compute_environment
@@ -5831,11 +6315,11 @@ module Aws::Batch
     #
     # @!attribute [rw] unmanagedv_cpus
     #   The maximum number of vCPUs expected to be used for an unmanaged
-    #   compute environment. This parameter should not be specified for a
-    #   managed compute environment. This parameter is only used for fair
-    #   share scheduling to reserve vCPU capacity for new share identifiers.
-    #   If this parameter is not provided for a fair share job queue, no
-    #   vCPU capacity will be reserved.
+    #   compute environment. Do not specify this parameter for a managed
+    #   compute environment. This parameter is only used for fair share
+    #   scheduling to reserve vCPU capacity for new share identifiers. If
+    #   this parameter is not provided for a fair share job queue, no vCPU
+    #   capacity will be reserved.
     #   @return [Integer]
     #
     # @!attribute [rw] compute_resources
@@ -5857,11 +6341,15 @@ module Aws::Batch
     #   If the compute environment has a service-linked role, it can't be
     #   changed to use a regular IAM role. Likewise, if the compute
     #   environment has a regular IAM role, it can't be changed to use a
-    #   service-linked role.
+    #   service-linked role. To update the parameters for the compute
+    #   environment that require an infrastructure update to change, the
+    #   **AWSServiceRoleForBatch** service-linked role must be used. For
+    #   more information, see [Updating compute environments][2] in the
+    #   *Batch User Guide*.
     #
     #   If your specified role has a path other than `/`, then you must
-    #   either specify the full role ARN (this is recommended) or prefix the
-    #   role name with the path.
+    #   either specify the full role ARN (recommended) or prefix the role
+    #   name with the path.
     #
     #   <note markdown="1"> Depending on how you created your Batch service role, its ARN might
     #   contain the `service-role` path prefix. When you only specify the
@@ -5875,7 +6363,18 @@ module Aws::Batch
     #
     #
     #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/service_IAM_role.html
+    #   [2]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
     #   @return [String]
+    #
+    # @!attribute [rw] update_policy
+    #   Specifies the updated infrastructure update policy for the compute
+    #   environment. For more information about infrastructure updates, see
+    #   [Updating compute environments][1] in the *Batch User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
+    #   @return [Types::UpdatePolicy]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UpdateComputeEnvironmentRequest AWS API Documentation
     #
@@ -5884,7 +6383,8 @@ module Aws::Batch
       :state,
       :unmanagedv_cpus,
       :compute_resources,
-      :service_role)
+      :service_role,
+      :update_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5950,7 +6450,7 @@ module Aws::Batch
     #   The priority of the job queue. Job queues with a higher priority (or
     #   a higher integer value for the `priority` parameter) are evaluated
     #   first when associated with the same compute environment. Priority is
-    #   determined in descending order, for example, a job queue with a
+    #   determined in descending order. For example, a job queue with a
     #   priority value of `10` is given scheduling preference over a job
     #   queue with a priority value of `1`. All of the compute environments
     #   must be either EC2 (`EC2` or `SPOT`) or Fargate (`FARGATE` or
@@ -5962,9 +6462,9 @@ module Aws::Batch
     #   Details the set of compute environments mapped to a job queue and
     #   their order relative to each other. This is one of the parameters
     #   used by the job scheduler to determine which compute environment
-    #   should run a given job. Compute environments must be in the `VALID`
-    #   state before you can associate them with a job queue. All of the
-    #   compute environments must be either EC2 (`EC2` or `SPOT`) or Fargate
+    #   runs a given job. Compute environments must be in the `VALID` state
+    #   before you can associate them with a job queue. All of the compute
+    #   environments must be either EC2 (`EC2` or `SPOT`) or Fargate
     #   (`FARGATE` or `FARGATE_SPOT`). EC2 and Fargate compute environments
     #   can't be mixed.
     #
@@ -6004,6 +6504,44 @@ module Aws::Batch
       include Aws::Structure
     end
 
+    # Specifies the infrastructure update policy for the compute
+    # environment. For more information about infrastructure updates, see
+    # [Infrastructure updates][1] in the *Batch User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/batch/latest/userguide/infrastructure-updates.html
+    #
+    # @note When making an API call, you may pass UpdatePolicy
+    #   data as a hash:
+    #
+    #       {
+    #         terminate_jobs_on_update: false,
+    #         job_execution_timeout_minutes: 1,
+    #       }
+    #
+    # @!attribute [rw] terminate_jobs_on_update
+    #   Specifies whether jobs are automatically terminated when the
+    #   computer environment infrastructure is updated. The default value is
+    #   `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] job_execution_timeout_minutes
+    #   Specifies the job timeout, in minutes, when the compute environment
+    #   infrastructure is updated. The default value is 30.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UpdatePolicy AWS API Documentation
+    #
+    class UpdatePolicy < Struct.new(
+      :terminate_jobs_on_update,
+      :job_execution_timeout_minutes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the parameters for `UpdateSchedulingPolicy`.
+    #
     # @note When making an API call, you may pass UpdateSchedulingPolicyRequest
     #   data as a hash:
     #

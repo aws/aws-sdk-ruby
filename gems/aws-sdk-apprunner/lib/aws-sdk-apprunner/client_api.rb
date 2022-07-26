@@ -44,8 +44,12 @@ module Aws::AppRunner
     CreateAutoScalingConfigurationResponse = Shapes::StructureShape.new(name: 'CreateAutoScalingConfigurationResponse')
     CreateConnectionRequest = Shapes::StructureShape.new(name: 'CreateConnectionRequest')
     CreateConnectionResponse = Shapes::StructureShape.new(name: 'CreateConnectionResponse')
+    CreateObservabilityConfigurationRequest = Shapes::StructureShape.new(name: 'CreateObservabilityConfigurationRequest')
+    CreateObservabilityConfigurationResponse = Shapes::StructureShape.new(name: 'CreateObservabilityConfigurationResponse')
     CreateServiceRequest = Shapes::StructureShape.new(name: 'CreateServiceRequest')
     CreateServiceResponse = Shapes::StructureShape.new(name: 'CreateServiceResponse')
+    CreateVpcConnectorRequest = Shapes::StructureShape.new(name: 'CreateVpcConnectorRequest')
+    CreateVpcConnectorResponse = Shapes::StructureShape.new(name: 'CreateVpcConnectorResponse')
     CustomDomain = Shapes::StructureShape.new(name: 'CustomDomain')
     CustomDomainAssociationStatus = Shapes::StringShape.new(name: 'CustomDomainAssociationStatus')
     CustomDomainList = Shapes::ListShape.new(name: 'CustomDomainList')
@@ -53,18 +57,28 @@ module Aws::AppRunner
     DeleteAutoScalingConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteAutoScalingConfigurationResponse')
     DeleteConnectionRequest = Shapes::StructureShape.new(name: 'DeleteConnectionRequest')
     DeleteConnectionResponse = Shapes::StructureShape.new(name: 'DeleteConnectionResponse')
+    DeleteObservabilityConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteObservabilityConfigurationRequest')
+    DeleteObservabilityConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteObservabilityConfigurationResponse')
     DeleteServiceRequest = Shapes::StructureShape.new(name: 'DeleteServiceRequest')
     DeleteServiceResponse = Shapes::StructureShape.new(name: 'DeleteServiceResponse')
+    DeleteVpcConnectorRequest = Shapes::StructureShape.new(name: 'DeleteVpcConnectorRequest')
+    DeleteVpcConnectorResponse = Shapes::StructureShape.new(name: 'DeleteVpcConnectorResponse')
     DescribeAutoScalingConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeAutoScalingConfigurationRequest')
     DescribeAutoScalingConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeAutoScalingConfigurationResponse')
     DescribeCustomDomainsMaxResults = Shapes::IntegerShape.new(name: 'DescribeCustomDomainsMaxResults')
     DescribeCustomDomainsRequest = Shapes::StructureShape.new(name: 'DescribeCustomDomainsRequest')
     DescribeCustomDomainsResponse = Shapes::StructureShape.new(name: 'DescribeCustomDomainsResponse')
+    DescribeObservabilityConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeObservabilityConfigurationRequest')
+    DescribeObservabilityConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeObservabilityConfigurationResponse')
     DescribeServiceRequest = Shapes::StructureShape.new(name: 'DescribeServiceRequest')
     DescribeServiceResponse = Shapes::StructureShape.new(name: 'DescribeServiceResponse')
+    DescribeVpcConnectorRequest = Shapes::StructureShape.new(name: 'DescribeVpcConnectorRequest')
+    DescribeVpcConnectorResponse = Shapes::StructureShape.new(name: 'DescribeVpcConnectorResponse')
     DisassociateCustomDomainRequest = Shapes::StructureShape.new(name: 'DisassociateCustomDomainRequest')
     DisassociateCustomDomainResponse = Shapes::StructureShape.new(name: 'DisassociateCustomDomainResponse')
     DomainName = Shapes::StringShape.new(name: 'DomainName')
+    EgressConfiguration = Shapes::StructureShape.new(name: 'EgressConfiguration')
+    EgressType = Shapes::StringShape.new(name: 'EgressType')
     EncryptionConfiguration = Shapes::StructureShape.new(name: 'EncryptionConfiguration')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     HealthCheckConfiguration = Shapes::StructureShape.new(name: 'HealthCheckConfiguration')
@@ -88,6 +102,8 @@ module Aws::AppRunner
     ListAutoScalingConfigurationsResponse = Shapes::StructureShape.new(name: 'ListAutoScalingConfigurationsResponse')
     ListConnectionsRequest = Shapes::StructureShape.new(name: 'ListConnectionsRequest')
     ListConnectionsResponse = Shapes::StructureShape.new(name: 'ListConnectionsResponse')
+    ListObservabilityConfigurationsRequest = Shapes::StructureShape.new(name: 'ListObservabilityConfigurationsRequest')
+    ListObservabilityConfigurationsResponse = Shapes::StructureShape.new(name: 'ListObservabilityConfigurationsResponse')
     ListOperationsMaxResults = Shapes::IntegerShape.new(name: 'ListOperationsMaxResults')
     ListOperationsRequest = Shapes::StructureShape.new(name: 'ListOperationsRequest')
     ListOperationsResponse = Shapes::StructureShape.new(name: 'ListOperationsResponse')
@@ -95,10 +111,18 @@ module Aws::AppRunner
     ListServicesResponse = Shapes::StructureShape.new(name: 'ListServicesResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    ListVpcConnectorsRequest = Shapes::StructureShape.new(name: 'ListVpcConnectorsRequest')
+    ListVpcConnectorsResponse = Shapes::StructureShape.new(name: 'ListVpcConnectorsResponse')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Memory = Shapes::StringShape.new(name: 'Memory')
+    NetworkConfiguration = Shapes::StructureShape.new(name: 'NetworkConfiguration')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
+    ObservabilityConfiguration = Shapes::StructureShape.new(name: 'ObservabilityConfiguration')
+    ObservabilityConfigurationName = Shapes::StringShape.new(name: 'ObservabilityConfigurationName')
+    ObservabilityConfigurationStatus = Shapes::StringShape.new(name: 'ObservabilityConfigurationStatus')
+    ObservabilityConfigurationSummary = Shapes::StructureShape.new(name: 'ObservabilityConfigurationSummary')
+    ObservabilityConfigurationSummaryList = Shapes::ListShape.new(name: 'ObservabilityConfigurationSummaryList')
     OperationStatus = Shapes::StringShape.new(name: 'OperationStatus')
     OperationSummary = Shapes::StructureShape.new(name: 'OperationSummary')
     OperationSummaryList = Shapes::ListShape.new(name: 'OperationSummaryList')
@@ -118,6 +142,7 @@ module Aws::AppRunner
     ServiceId = Shapes::StringShape.new(name: 'ServiceId')
     ServiceMaxResults = Shapes::IntegerShape.new(name: 'ServiceMaxResults')
     ServiceName = Shapes::StringShape.new(name: 'ServiceName')
+    ServiceObservabilityConfiguration = Shapes::StructureShape.new(name: 'ServiceObservabilityConfiguration')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     ServiceStatus = Shapes::StringShape.new(name: 'ServiceStatus')
     ServiceSummary = Shapes::StructureShape.new(name: 'ServiceSummary')
@@ -129,6 +154,7 @@ module Aws::AppRunner
     StartDeploymentRequest = Shapes::StructureShape.new(name: 'StartDeploymentRequest')
     StartDeploymentResponse = Shapes::StructureShape.new(name: 'StartDeploymentResponse')
     String = Shapes::StringShape.new(name: 'String')
+    StringList = Shapes::ListShape.new(name: 'StringList')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -137,11 +163,17 @@ module Aws::AppRunner
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    TraceConfiguration = Shapes::StructureShape.new(name: 'TraceConfiguration')
+    TracingVendor = Shapes::StringShape.new(name: 'TracingVendor')
     UUID = Shapes::StringShape.new(name: 'UUID')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateServiceRequest = Shapes::StructureShape.new(name: 'UpdateServiceRequest')
     UpdateServiceResponse = Shapes::StructureShape.new(name: 'UpdateServiceResponse')
+    VpcConnector = Shapes::StructureShape.new(name: 'VpcConnector')
+    VpcConnectorName = Shapes::StringShape.new(name: 'VpcConnectorName')
+    VpcConnectorStatus = Shapes::StringShape.new(name: 'VpcConnectorStatus')
+    VpcConnectors = Shapes::ListShape.new(name: 'VpcConnectors')
 
     AssociateCustomDomainRequest.add_member(:service_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, required: true, location_name: "ServiceArn"))
     AssociateCustomDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
@@ -234,6 +266,14 @@ module Aws::AppRunner
     CreateConnectionResponse.add_member(:connection, Shapes::ShapeRef.new(shape: Connection, required: true, location_name: "Connection"))
     CreateConnectionResponse.struct_class = Types::CreateConnectionResponse
 
+    CreateObservabilityConfigurationRequest.add_member(:observability_configuration_name, Shapes::ShapeRef.new(shape: ObservabilityConfigurationName, required: true, location_name: "ObservabilityConfigurationName"))
+    CreateObservabilityConfigurationRequest.add_member(:trace_configuration, Shapes::ShapeRef.new(shape: TraceConfiguration, location_name: "TraceConfiguration"))
+    CreateObservabilityConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateObservabilityConfigurationRequest.struct_class = Types::CreateObservabilityConfigurationRequest
+
+    CreateObservabilityConfigurationResponse.add_member(:observability_configuration, Shapes::ShapeRef.new(shape: ObservabilityConfiguration, required: true, location_name: "ObservabilityConfiguration"))
+    CreateObservabilityConfigurationResponse.struct_class = Types::CreateObservabilityConfigurationResponse
+
     CreateServiceRequest.add_member(:service_name, Shapes::ShapeRef.new(shape: ServiceName, required: true, location_name: "ServiceName"))
     CreateServiceRequest.add_member(:source_configuration, Shapes::ShapeRef.new(shape: SourceConfiguration, required: true, location_name: "SourceConfiguration"))
     CreateServiceRequest.add_member(:instance_configuration, Shapes::ShapeRef.new(shape: InstanceConfiguration, location_name: "InstanceConfiguration"))
@@ -241,11 +281,22 @@ module Aws::AppRunner
     CreateServiceRequest.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
     CreateServiceRequest.add_member(:health_check_configuration, Shapes::ShapeRef.new(shape: HealthCheckConfiguration, location_name: "HealthCheckConfiguration"))
     CreateServiceRequest.add_member(:auto_scaling_configuration_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, location_name: "AutoScalingConfigurationArn"))
+    CreateServiceRequest.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "NetworkConfiguration"))
+    CreateServiceRequest.add_member(:observability_configuration, Shapes::ShapeRef.new(shape: ServiceObservabilityConfiguration, location_name: "ObservabilityConfiguration"))
     CreateServiceRequest.struct_class = Types::CreateServiceRequest
 
     CreateServiceResponse.add_member(:service, Shapes::ShapeRef.new(shape: Service, required: true, location_name: "Service"))
     CreateServiceResponse.add_member(:operation_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "OperationId"))
     CreateServiceResponse.struct_class = Types::CreateServiceResponse
+
+    CreateVpcConnectorRequest.add_member(:vpc_connector_name, Shapes::ShapeRef.new(shape: VpcConnectorName, required: true, location_name: "VpcConnectorName"))
+    CreateVpcConnectorRequest.add_member(:subnets, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "Subnets"))
+    CreateVpcConnectorRequest.add_member(:security_groups, Shapes::ShapeRef.new(shape: StringList, location_name: "SecurityGroups"))
+    CreateVpcConnectorRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateVpcConnectorRequest.struct_class = Types::CreateVpcConnectorRequest
+
+    CreateVpcConnectorResponse.add_member(:vpc_connector, Shapes::ShapeRef.new(shape: VpcConnector, required: true, location_name: "VpcConnector"))
+    CreateVpcConnectorResponse.struct_class = Types::CreateVpcConnectorResponse
 
     CustomDomain.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
     CustomDomain.add_member(:enable_www_subdomain, Shapes::ShapeRef.new(shape: NullableBoolean, required: true, location_name: "EnableWWWSubdomain"))
@@ -267,12 +318,24 @@ module Aws::AppRunner
     DeleteConnectionResponse.add_member(:connection, Shapes::ShapeRef.new(shape: Connection, location_name: "Connection"))
     DeleteConnectionResponse.struct_class = Types::DeleteConnectionResponse
 
+    DeleteObservabilityConfigurationRequest.add_member(:observability_configuration_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, required: true, location_name: "ObservabilityConfigurationArn"))
+    DeleteObservabilityConfigurationRequest.struct_class = Types::DeleteObservabilityConfigurationRequest
+
+    DeleteObservabilityConfigurationResponse.add_member(:observability_configuration, Shapes::ShapeRef.new(shape: ObservabilityConfiguration, required: true, location_name: "ObservabilityConfiguration"))
+    DeleteObservabilityConfigurationResponse.struct_class = Types::DeleteObservabilityConfigurationResponse
+
     DeleteServiceRequest.add_member(:service_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, required: true, location_name: "ServiceArn"))
     DeleteServiceRequest.struct_class = Types::DeleteServiceRequest
 
     DeleteServiceResponse.add_member(:service, Shapes::ShapeRef.new(shape: Service, required: true, location_name: "Service"))
     DeleteServiceResponse.add_member(:operation_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "OperationId"))
     DeleteServiceResponse.struct_class = Types::DeleteServiceResponse
+
+    DeleteVpcConnectorRequest.add_member(:vpc_connector_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, required: true, location_name: "VpcConnectorArn"))
+    DeleteVpcConnectorRequest.struct_class = Types::DeleteVpcConnectorRequest
+
+    DeleteVpcConnectorResponse.add_member(:vpc_connector, Shapes::ShapeRef.new(shape: VpcConnector, required: true, location_name: "VpcConnector"))
+    DeleteVpcConnectorResponse.struct_class = Types::DeleteVpcConnectorResponse
 
     DescribeAutoScalingConfigurationRequest.add_member(:auto_scaling_configuration_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, required: true, location_name: "AutoScalingConfigurationArn"))
     DescribeAutoScalingConfigurationRequest.struct_class = Types::DescribeAutoScalingConfigurationRequest
@@ -291,11 +354,23 @@ module Aws::AppRunner
     DescribeCustomDomainsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     DescribeCustomDomainsResponse.struct_class = Types::DescribeCustomDomainsResponse
 
+    DescribeObservabilityConfigurationRequest.add_member(:observability_configuration_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, required: true, location_name: "ObservabilityConfigurationArn"))
+    DescribeObservabilityConfigurationRequest.struct_class = Types::DescribeObservabilityConfigurationRequest
+
+    DescribeObservabilityConfigurationResponse.add_member(:observability_configuration, Shapes::ShapeRef.new(shape: ObservabilityConfiguration, required: true, location_name: "ObservabilityConfiguration"))
+    DescribeObservabilityConfigurationResponse.struct_class = Types::DescribeObservabilityConfigurationResponse
+
     DescribeServiceRequest.add_member(:service_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, required: true, location_name: "ServiceArn"))
     DescribeServiceRequest.struct_class = Types::DescribeServiceRequest
 
     DescribeServiceResponse.add_member(:service, Shapes::ShapeRef.new(shape: Service, required: true, location_name: "Service"))
     DescribeServiceResponse.struct_class = Types::DescribeServiceResponse
+
+    DescribeVpcConnectorRequest.add_member(:vpc_connector_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, required: true, location_name: "VpcConnectorArn"))
+    DescribeVpcConnectorRequest.struct_class = Types::DescribeVpcConnectorRequest
+
+    DescribeVpcConnectorResponse.add_member(:vpc_connector, Shapes::ShapeRef.new(shape: VpcConnector, required: true, location_name: "VpcConnector"))
+    DescribeVpcConnectorResponse.struct_class = Types::DescribeVpcConnectorResponse
 
     DisassociateCustomDomainRequest.add_member(:service_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, required: true, location_name: "ServiceArn"))
     DisassociateCustomDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
@@ -305,6 +380,10 @@ module Aws::AppRunner
     DisassociateCustomDomainResponse.add_member(:service_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, required: true, location_name: "ServiceArn"))
     DisassociateCustomDomainResponse.add_member(:custom_domain, Shapes::ShapeRef.new(shape: CustomDomain, required: true, location_name: "CustomDomain"))
     DisassociateCustomDomainResponse.struct_class = Types::DisassociateCustomDomainResponse
+
+    EgressConfiguration.add_member(:egress_type, Shapes::ShapeRef.new(shape: EgressType, location_name: "EgressType"))
+    EgressConfiguration.add_member(:vpc_connector_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, location_name: "VpcConnectorArn"))
+    EgressConfiguration.struct_class = Types::EgressConfiguration
 
     EncryptionConfiguration.add_member(:kms_key, Shapes::ShapeRef.new(shape: KmsKeyArn, required: true, location_name: "KmsKey"))
     EncryptionConfiguration.struct_class = Types::EncryptionConfiguration
@@ -318,7 +397,7 @@ module Aws::AppRunner
     HealthCheckConfiguration.struct_class = Types::HealthCheckConfiguration
 
     ImageConfiguration.add_member(:runtime_environment_variables, Shapes::ShapeRef.new(shape: RuntimeEnvironmentVariables, location_name: "RuntimeEnvironmentVariables"))
-    ImageConfiguration.add_member(:start_command, Shapes::ShapeRef.new(shape: String, location_name: "StartCommand"))
+    ImageConfiguration.add_member(:start_command, Shapes::ShapeRef.new(shape: StartCommand, location_name: "StartCommand"))
     ImageConfiguration.add_member(:port, Shapes::ShapeRef.new(shape: String, location_name: "Port"))
     ImageConfiguration.struct_class = Types::ImageConfiguration
 
@@ -360,6 +439,16 @@ module Aws::AppRunner
     ListConnectionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListConnectionsResponse.struct_class = Types::ListConnectionsResponse
 
+    ListObservabilityConfigurationsRequest.add_member(:observability_configuration_name, Shapes::ShapeRef.new(shape: ObservabilityConfigurationName, location_name: "ObservabilityConfigurationName"))
+    ListObservabilityConfigurationsRequest.add_member(:latest_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "LatestOnly"))
+    ListObservabilityConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListObservabilityConfigurationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListObservabilityConfigurationsRequest.struct_class = Types::ListObservabilityConfigurationsRequest
+
+    ListObservabilityConfigurationsResponse.add_member(:observability_configuration_summary_list, Shapes::ShapeRef.new(shape: ObservabilityConfigurationSummaryList, required: true, location_name: "ObservabilityConfigurationSummaryList"))
+    ListObservabilityConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListObservabilityConfigurationsResponse.struct_class = Types::ListObservabilityConfigurationsResponse
+
     ListOperationsRequest.add_member(:service_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, required: true, location_name: "ServiceArn"))
     ListOperationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListOperationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListOperationsMaxResults, location_name: "MaxResults"))
@@ -382,6 +471,34 @@ module Aws::AppRunner
 
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    ListVpcConnectorsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListVpcConnectorsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListVpcConnectorsRequest.struct_class = Types::ListVpcConnectorsRequest
+
+    ListVpcConnectorsResponse.add_member(:vpc_connectors, Shapes::ShapeRef.new(shape: VpcConnectors, required: true, location_name: "VpcConnectors"))
+    ListVpcConnectorsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListVpcConnectorsResponse.struct_class = Types::ListVpcConnectorsResponse
+
+    NetworkConfiguration.add_member(:egress_configuration, Shapes::ShapeRef.new(shape: EgressConfiguration, location_name: "EgressConfiguration"))
+    NetworkConfiguration.struct_class = Types::NetworkConfiguration
+
+    ObservabilityConfiguration.add_member(:observability_configuration_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, location_name: "ObservabilityConfigurationArn"))
+    ObservabilityConfiguration.add_member(:observability_configuration_name, Shapes::ShapeRef.new(shape: ObservabilityConfigurationName, location_name: "ObservabilityConfigurationName"))
+    ObservabilityConfiguration.add_member(:trace_configuration, Shapes::ShapeRef.new(shape: TraceConfiguration, location_name: "TraceConfiguration"))
+    ObservabilityConfiguration.add_member(:observability_configuration_revision, Shapes::ShapeRef.new(shape: Integer, location_name: "ObservabilityConfigurationRevision"))
+    ObservabilityConfiguration.add_member(:latest, Shapes::ShapeRef.new(shape: Boolean, location_name: "Latest"))
+    ObservabilityConfiguration.add_member(:status, Shapes::ShapeRef.new(shape: ObservabilityConfigurationStatus, location_name: "Status"))
+    ObservabilityConfiguration.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    ObservabilityConfiguration.add_member(:deleted_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DeletedAt"))
+    ObservabilityConfiguration.struct_class = Types::ObservabilityConfiguration
+
+    ObservabilityConfigurationSummary.add_member(:observability_configuration_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, location_name: "ObservabilityConfigurationArn"))
+    ObservabilityConfigurationSummary.add_member(:observability_configuration_name, Shapes::ShapeRef.new(shape: ObservabilityConfigurationName, location_name: "ObservabilityConfigurationName"))
+    ObservabilityConfigurationSummary.add_member(:observability_configuration_revision, Shapes::ShapeRef.new(shape: Integer, location_name: "ObservabilityConfigurationRevision"))
+    ObservabilityConfigurationSummary.struct_class = Types::ObservabilityConfigurationSummary
+
+    ObservabilityConfigurationSummaryList.member = Shapes::ShapeRef.new(shape: ObservabilityConfigurationSummary)
 
     OperationSummary.add_member(:id, Shapes::ShapeRef.new(shape: UUID, location_name: "Id"))
     OperationSummary.add_member(:type, Shapes::ShapeRef.new(shape: OperationType, location_name: "Type"))
@@ -427,7 +544,13 @@ module Aws::AppRunner
     Service.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
     Service.add_member(:health_check_configuration, Shapes::ShapeRef.new(shape: HealthCheckConfiguration, location_name: "HealthCheckConfiguration"))
     Service.add_member(:auto_scaling_configuration_summary, Shapes::ShapeRef.new(shape: AutoScalingConfigurationSummary, required: true, location_name: "AutoScalingConfigurationSummary"))
+    Service.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, required: true, location_name: "NetworkConfiguration"))
+    Service.add_member(:observability_configuration, Shapes::ShapeRef.new(shape: ServiceObservabilityConfiguration, location_name: "ObservabilityConfiguration"))
     Service.struct_class = Types::Service
+
+    ServiceObservabilityConfiguration.add_member(:observability_enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "ObservabilityEnabled"))
+    ServiceObservabilityConfiguration.add_member(:observability_configuration_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, location_name: "ObservabilityConfigurationArn"))
+    ServiceObservabilityConfiguration.struct_class = Types::ServiceObservabilityConfiguration
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
@@ -459,6 +582,8 @@ module Aws::AppRunner
     StartDeploymentResponse.add_member(:operation_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "OperationId"))
     StartDeploymentResponse.struct_class = Types::StartDeploymentResponse
 
+    StringList.member = Shapes::ShapeRef.new(shape: String)
+
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
     Tag.struct_class = Types::Tag
@@ -473,6 +598,9 @@ module Aws::AppRunner
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
+    TraceConfiguration.add_member(:vendor, Shapes::ShapeRef.new(shape: TracingVendor, required: true, location_name: "Vendor"))
+    TraceConfiguration.struct_class = Types::TraceConfiguration
+
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, required: true, location_name: "ResourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
@@ -484,11 +612,25 @@ module Aws::AppRunner
     UpdateServiceRequest.add_member(:instance_configuration, Shapes::ShapeRef.new(shape: InstanceConfiguration, location_name: "InstanceConfiguration"))
     UpdateServiceRequest.add_member(:auto_scaling_configuration_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, location_name: "AutoScalingConfigurationArn"))
     UpdateServiceRequest.add_member(:health_check_configuration, Shapes::ShapeRef.new(shape: HealthCheckConfiguration, location_name: "HealthCheckConfiguration"))
+    UpdateServiceRequest.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "NetworkConfiguration"))
+    UpdateServiceRequest.add_member(:observability_configuration, Shapes::ShapeRef.new(shape: ServiceObservabilityConfiguration, location_name: "ObservabilityConfiguration"))
     UpdateServiceRequest.struct_class = Types::UpdateServiceRequest
 
     UpdateServiceResponse.add_member(:service, Shapes::ShapeRef.new(shape: Service, required: true, location_name: "Service"))
     UpdateServiceResponse.add_member(:operation_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "OperationId"))
     UpdateServiceResponse.struct_class = Types::UpdateServiceResponse
+
+    VpcConnector.add_member(:vpc_connector_name, Shapes::ShapeRef.new(shape: VpcConnectorName, location_name: "VpcConnectorName"))
+    VpcConnector.add_member(:vpc_connector_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, location_name: "VpcConnectorArn"))
+    VpcConnector.add_member(:vpc_connector_revision, Shapes::ShapeRef.new(shape: Integer, location_name: "VpcConnectorRevision"))
+    VpcConnector.add_member(:subnets, Shapes::ShapeRef.new(shape: StringList, location_name: "Subnets"))
+    VpcConnector.add_member(:security_groups, Shapes::ShapeRef.new(shape: StringList, location_name: "SecurityGroups"))
+    VpcConnector.add_member(:status, Shapes::ShapeRef.new(shape: VpcConnectorStatus, location_name: "Status"))
+    VpcConnector.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    VpcConnector.add_member(:deleted_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DeletedAt"))
+    VpcConnector.struct_class = Types::VpcConnector
+
+    VpcConnectors.member = Shapes::ShapeRef.new(shape: VpcConnector)
 
 
     # @api private
@@ -542,12 +684,34 @@ module Aws::AppRunner
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
+      api.add_operation(:create_observability_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateObservabilityConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateObservabilityConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateObservabilityConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
       api.add_operation(:create_service, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateService"
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateServiceRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateServiceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
+      api.add_operation(:create_vpc_connector, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateVpcConnector"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateVpcConnectorRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateVpcConnectorResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
@@ -575,6 +739,17 @@ module Aws::AppRunner
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
       end)
 
+      api.add_operation(:delete_observability_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteObservabilityConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteObservabilityConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteObservabilityConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:delete_service, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteService"
         o.http_method = "POST"
@@ -585,6 +760,17 @@ module Aws::AppRunner
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+      end)
+
+      api.add_operation(:delete_vpc_connector, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteVpcConnector"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteVpcConnectorRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteVpcConnectorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:describe_auto_scaling_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -615,6 +801,17 @@ module Aws::AppRunner
         )
       end)
 
+      api.add_operation(:describe_observability_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeObservabilityConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeObservabilityConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeObservabilityConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:describe_service, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeService"
         o.http_method = "POST"
@@ -624,6 +821,17 @@ module Aws::AppRunner
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+      end)
+
+      api.add_operation(:describe_vpc_connector, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeVpcConnector"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeVpcConnectorRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeVpcConnectorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:disassociate_custom_domain, Seahorse::Model::Operation.new.tap do |o|
@@ -660,6 +868,22 @@ module Aws::AppRunner
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListConnectionsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListConnectionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_observability_configurations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListObservabilityConfigurations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListObservabilityConfigurationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListObservabilityConfigurationsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o[:pager] = Aws::Pager.new(
@@ -713,6 +937,22 @@ module Aws::AppRunner
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
+      end)
+
+      api.add_operation(:list_vpc_connectors, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListVpcConnectors"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListVpcConnectorsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListVpcConnectorsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:pause_service, Seahorse::Model::Operation.new.tap do |o|

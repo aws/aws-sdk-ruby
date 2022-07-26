@@ -175,10 +175,10 @@ module Aws::VoiceID
     #   @return [String]
     #
     # @!attribute [rw] server_side_encryption_configuration
-    #   The configuration, containing the KMS Key Identifier, to be used by
+    #   The configuration, containing the KMS key identifier, to be used by
     #   Voice ID for the server-side encryption of your data. Refer to [
-    #   Amazon Connect VoiceID encryption at rest][1] for more details on
-    #   how the KMS Key is used.
+    #   Amazon Connect Voice ID encryption at rest][1] for more details on
+    #   how the KMS key is used.
     #
     #
     #
@@ -490,9 +490,17 @@ module Aws::VoiceID
     #   @return [String]
     #
     # @!attribute [rw] server_side_encryption_configuration
-    #   The server-side encryption configuration containing the KMS Key
-    #   Identifier you want Voice ID to use to encrypt your data.
+    #   The server-side encryption configuration containing the KMS key
+    #   identifier you want Voice ID to use to encrypt your data.
     #   @return [Types::ServerSideEncryptionConfiguration]
+    #
+    # @!attribute [rw] server_side_encryption_update_details
+    #   Details about the most recent server-side encryption configuration
+    #   update. When the server-side encryption configuration is changed,
+    #   dependency on the old KMS key is removed through an asynchronous
+    #   process. When this update is complete, the domain's data can only
+    #   be accessed using the new KMS key.
+    #   @return [Types::ServerSideEncryptionUpdateDetails]
     #
     # @!attribute [rw] updated_at
     #   The timestamp showing the domain's last update.
@@ -508,6 +516,7 @@ module Aws::VoiceID
       :domain_status,
       :name,
       :server_side_encryption_configuration,
+      :server_side_encryption_update_details,
       :updated_at)
       SENSITIVE = [:description, :name]
       include Aws::Structure
@@ -540,9 +549,17 @@ module Aws::VoiceID
     #   @return [String]
     #
     # @!attribute [rw] server_side_encryption_configuration
-    #   The server-side encryption configuration containing the KMS Key
-    #   Identifier you want Voice ID to use to encrypt your data..
+    #   The server-side encryption configuration containing the KMS key
+    #   identifier you want Voice ID to use to encrypt your data.
     #   @return [Types::ServerSideEncryptionConfiguration]
+    #
+    # @!attribute [rw] server_side_encryption_update_details
+    #   Details about the most recent server-side encryption configuration
+    #   update. When the server-side encryption configuration is changed,
+    #   dependency on the old KMS key is removed through an asynchronous
+    #   process. When this update is complete, the domain’s data can only be
+    #   accessed using the new KMS key.
+    #   @return [Types::ServerSideEncryptionUpdateDetails]
     #
     # @!attribute [rw] updated_at
     #   The timestamp showing the domain's last update.
@@ -558,6 +575,7 @@ module Aws::VoiceID
       :domain_status,
       :name,
       :server_side_encryption_configuration,
+      :server_side_encryption_update_details,
       :updated_at)
       SENSITIVE = [:description, :name]
       include Aws::Structure
@@ -690,7 +708,7 @@ module Aws::VoiceID
     #   Detection results are empty or the decision is `NOT_ENOUGH_SPEECH`.
     #   In this situation, if the `StreamingStatus` is
     #   `ONGOING/PENDING_CONFIGURATION`, it can mean that the client should
-    #   call the API again later, once Voice ID has enough audio to produce
+    #   call the API again later, after Voice ID has enough audio to produce
     #   a result. If the decision remains `NOT_ENOUGH_SPEECH` even after
     #   `StreamingStatus` is `ENDED`, it means that the previously streamed
     #   session did not have enough speech to perform evaluation, and a new
@@ -882,7 +900,7 @@ module Aws::VoiceID
     #   @return [String]
     #
     # @!attribute [rw] job_name
-    #   The client-provied name for the fraudster registration job.
+    #   The client-provided name for the fraudster registration job.
     #   @return [String]
     #
     # @!attribute [rw] job_progress
@@ -897,7 +915,7 @@ module Aws::VoiceID
     # @!attribute [rw] output_data_config
     #   The output data config containing the S3 location where you want
     #   Voice ID to write your job output file; you must also include a KMS
-    #   Key ID in order to encrypt the file.
+    #   key iD in order to encrypt the file.
     #   @return [Types::OutputDataConfig]
     #
     # @!attribute [rw] registration_config
@@ -1382,9 +1400,9 @@ module Aws::VoiceID
     #   @return [String]
     #
     # @!attribute [rw] s3_uri
-    #   The S3 path of the folder to which Voice ID writes the job output
-    #   file, which has a `*.out` extension. For example, if the input file
-    #   name is `input-file.json` and the output folder path is
+    #   The S3 path of the folder where Voice ID writes the job output file.
+    #   It has a `*.out` extension. For example, if the input file name is
+    #   `input-file.json` and the output folder path is
     #   `s3://output-bucket/output-folder`, the full output file path is
     #   `s3://output-bucket/output-folder/job-Id/input-file.json.out`.
     #   @return [String]
@@ -1398,7 +1416,7 @@ module Aws::VoiceID
       include Aws::Structure
     end
 
-    # The configuration definining the action to take when a duplicate
+    # The configuration defining the action to take when a duplicate
     # fraudster is detected, and the similarity threshold to use for
     # detecting a duplicate fraudster during a batch fraudster registration
     # job.
@@ -1453,8 +1471,8 @@ module Aws::VoiceID
       include Aws::Structure
     end
 
-    # The configuration containing information about the customer-managed
-    # KMS Key used for encrypting customer data.
+    # The configuration containing information about the customer managed
+    # key used for encrypting customer data.
     #
     # @note When making an API call, you may pass ServerSideEncryptionConfiguration
     #   data as a hash:
@@ -1464,7 +1482,7 @@ module Aws::VoiceID
     #       }
     #
     # @!attribute [rw] kms_key_id
-    #   The identifier of the KMS Key you want Voice ID to use to encrypt
+    #   The identifier of the KMS key you want Voice ID to use to encrypt
     #   your data.
     #   @return [String]
     #
@@ -1472,6 +1490,41 @@ module Aws::VoiceID
     #
     class ServerSideEncryptionConfiguration < Struct.new(
       :kms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the most recent server-side encryption configuration
+    # update. When the server-side encryption configuration is changed,
+    # dependency on the old KMS key is removed through an asynchronous
+    # process. When this update is complete, the domain’s data can only be
+    # accessed using the new KMS key.
+    #
+    # @!attribute [rw] message
+    #   Message explaining the current UpdateStatus. When the UpdateStatus
+    #   is FAILED, this message explains the cause of the failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] old_kms_key_id
+    #   The previous KMS key ID the domain was encrypted with, before
+    #   ServerSideEncryptionConfiguration was updated to a new KMS key ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_status
+    #   Status of the server-side encryption update. During an update, if
+    #   there is an issue with the domain's current or old KMS key ID, such
+    #   as an inaccessible or disabled key, then the status is FAILED. In
+    #   order to resolve this, the key needs to be made accessible, and then
+    #   an UpdateDomain call with the existing server-side encryption
+    #   configuration will re-attempt this update process.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/ServerSideEncryptionUpdateDetails AWS API Documentation
+    #
+    class ServerSideEncryptionUpdateDetails < Struct.new(
+      :message,
+      :old_kms_key_id,
+      :update_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1512,6 +1565,12 @@ module Aws::VoiceID
     #   The service-generated identifier for the speaker.
     #   @return [String]
     #
+    # @!attribute [rw] last_accessed_at
+    #   The timestamp when the speaker was last accessed for enrollment,
+    #   re-enrollment or a successful authentication. This timestamp is
+    #   accurate to one hour.
+    #   @return [Time]
+    #
     # @!attribute [rw] status
     #   The current status of the speaker.
     #   @return [String]
@@ -1527,6 +1586,7 @@ module Aws::VoiceID
       :customer_speaker_id,
       :domain_id,
       :generated_speaker_id,
+      :last_accessed_at,
       :status,
       :updated_at)
       SENSITIVE = [:customer_speaker_id]
@@ -1592,7 +1652,7 @@ module Aws::VoiceID
     #
     # @!attribute [rw] output_data_config
     #   The output data config containing the S3 location where Voice ID
-    #   writes the job output file; you must also include a KMS Key ID to
+    #   writes the job output file; you must also include a KMS key ID to
     #   encrypt the file.
     #   @return [Types::OutputDataConfig]
     #
@@ -1689,6 +1749,12 @@ module Aws::VoiceID
     #   The service-generated identifier for the speaker.
     #   @return [String]
     #
+    # @!attribute [rw] last_accessed_at
+    #   The timestamp when the speaker was last accessed for enrollment,
+    #   re-enrollment or a successful authentication. This timestamp is
+    #   accurate to one hour.
+    #   @return [Time]
+    #
     # @!attribute [rw] status
     #   The current status of the speaker.
     #   @return [String]
@@ -1704,6 +1770,7 @@ module Aws::VoiceID
       :customer_speaker_id,
       :domain_id,
       :generated_speaker_id,
+      :last_accessed_at,
       :status,
       :updated_at)
       SENSITIVE = [:customer_speaker_id]
@@ -1767,7 +1834,7 @@ module Aws::VoiceID
     #
     # @!attribute [rw] output_data_config
     #   The output data config containing the S3 location where Voice ID
-    #   writes the job output file; you must also include a KMS Key ID to
+    #   writes the job output file; you must also include a KMS key ID to
     #   encrypt the file.
     #   @return [Types::OutputDataConfig]
     #
@@ -1854,8 +1921,8 @@ module Aws::VoiceID
     #
     # @!attribute [rw] enrollment_config
     #   The enrollment config that contains details such as the action to
-    #   take when a speaker is already enrolled in the Voice ID system or
-    #   when a speaker is identified as a fraudster.
+    #   take when a speaker is already enrolled in Voice ID or when a
+    #   speaker is identified as a fraudster.
     #   @return [Types::EnrollmentConfig]
     #
     # @!attribute [rw] input_data_config
@@ -1869,7 +1936,7 @@ module Aws::VoiceID
     #
     # @!attribute [rw] output_data_config
     #   The output data config containing the S3 location where Voice ID
-    #   writes the job output file; you must also include a KMS Key ID to
+    #   writes the job output file; you must also include a KMS key ID to
     #   encrypt the file.
     #   @return [Types::OutputDataConfig]
     #
@@ -2039,7 +2106,7 @@ module Aws::VoiceID
     #   @return [String]
     #
     # @!attribute [rw] server_side_encryption_configuration
-    #   The configuration, containing the KMS Key Identifier, to be used by
+    #   The configuration, containing the KMS key identifier, to be used by
     #   Voice ID for the server-side encryption of your data. Note that all
     #   the existing data in the domain are still encrypted using the
     #   existing key, only the data added to domain after updating the key

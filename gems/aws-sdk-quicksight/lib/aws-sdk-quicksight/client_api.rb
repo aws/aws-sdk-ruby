@@ -15,6 +15,7 @@ module Aws::QuickSight
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccountCustomization = Shapes::StructureShape.new(name: 'AccountCustomization')
+    AccountInfo = Shapes::StructureShape.new(name: 'AccountInfo')
     AccountSettings = Shapes::StructureShape.new(name: 'AccountSettings')
     ActionList = Shapes::ListShape.new(name: 'ActionList')
     ActiveIAMPolicyAssignment = Shapes::StructureShape.new(name: 'ActiveIAMPolicyAssignment')
@@ -44,6 +45,7 @@ module Aws::QuickSight
     AthenaParameters = Shapes::StructureShape.new(name: 'AthenaParameters')
     AuroraParameters = Shapes::StructureShape.new(name: 'AuroraParameters')
     AuroraPostgreSqlParameters = Shapes::StructureShape.new(name: 'AuroraPostgreSqlParameters')
+    AuthenticationMethodOption = Shapes::StringShape.new(name: 'AuthenticationMethodOption')
     AwsAccountId = Shapes::StringShape.new(name: 'AwsAccountId')
     AwsAndAccountId = Shapes::StringShape.new(name: 'AwsAndAccountId')
     AwsIotAnalyticsParameters = Shapes::StructureShape.new(name: 'AwsIotAnalyticsParameters')
@@ -85,6 +87,8 @@ module Aws::QuickSight
     CopySourceArn = Shapes::StringShape.new(name: 'CopySourceArn')
     CreateAccountCustomizationRequest = Shapes::StructureShape.new(name: 'CreateAccountCustomizationRequest')
     CreateAccountCustomizationResponse = Shapes::StructureShape.new(name: 'CreateAccountCustomizationResponse')
+    CreateAccountSubscriptionRequest = Shapes::StructureShape.new(name: 'CreateAccountSubscriptionRequest')
+    CreateAccountSubscriptionResponse = Shapes::StructureShape.new(name: 'CreateAccountSubscriptionResponse')
     CreateAnalysisRequest = Shapes::StructureShape.new(name: 'CreateAnalysisRequest')
     CreateAnalysisResponse = Shapes::StructureShape.new(name: 'CreateAnalysisResponse')
     CreateColumnsOperation = Shapes::StructureShape.new(name: 'CreateColumnsOperation')
@@ -202,6 +206,8 @@ module Aws::QuickSight
     DescribeAccountCustomizationResponse = Shapes::StructureShape.new(name: 'DescribeAccountCustomizationResponse')
     DescribeAccountSettingsRequest = Shapes::StructureShape.new(name: 'DescribeAccountSettingsRequest')
     DescribeAccountSettingsResponse = Shapes::StructureShape.new(name: 'DescribeAccountSettingsResponse')
+    DescribeAccountSubscriptionRequest = Shapes::StructureShape.new(name: 'DescribeAccountSubscriptionRequest')
+    DescribeAccountSubscriptionResponse = Shapes::StructureShape.new(name: 'DescribeAccountSubscriptionResponse')
     DescribeAnalysisPermissionsRequest = Shapes::StructureShape.new(name: 'DescribeAnalysisPermissionsRequest')
     DescribeAnalysisPermissionsResponse = Shapes::StructureShape.new(name: 'DescribeAnalysisPermissionsResponse')
     DescribeAnalysisRequest = Shapes::StructureShape.new(name: 'DescribeAnalysisRequest')
@@ -224,6 +230,8 @@ module Aws::QuickSight
     DescribeFolderResolvedPermissionsRequest = Shapes::StructureShape.new(name: 'DescribeFolderResolvedPermissionsRequest')
     DescribeFolderResolvedPermissionsResponse = Shapes::StructureShape.new(name: 'DescribeFolderResolvedPermissionsResponse')
     DescribeFolderResponse = Shapes::StructureShape.new(name: 'DescribeFolderResponse')
+    DescribeGroupMembershipRequest = Shapes::StructureShape.new(name: 'DescribeGroupMembershipRequest')
+    DescribeGroupMembershipResponse = Shapes::StructureShape.new(name: 'DescribeGroupMembershipResponse')
     DescribeGroupRequest = Shapes::StructureShape.new(name: 'DescribeGroupRequest')
     DescribeGroupResponse = Shapes::StructureShape.new(name: 'DescribeGroupResponse')
     DescribeIAMPolicyAssignmentRequest = Shapes::StructureShape.new(name: 'DescribeIAMPolicyAssignmentRequest')
@@ -293,11 +301,16 @@ module Aws::QuickSight
     GetSessionEmbedUrlResponse = Shapes::StructureShape.new(name: 'GetSessionEmbedUrlResponse')
     Group = Shapes::StructureShape.new(name: 'Group')
     GroupDescription = Shapes::StringShape.new(name: 'GroupDescription')
+    GroupFilterAttribute = Shapes::StringShape.new(name: 'GroupFilterAttribute')
+    GroupFilterOperator = Shapes::StringShape.new(name: 'GroupFilterOperator')
     GroupList = Shapes::ListShape.new(name: 'GroupList')
     GroupMember = Shapes::StructureShape.new(name: 'GroupMember')
     GroupMemberList = Shapes::ListShape.new(name: 'GroupMemberList')
     GroupMemberName = Shapes::StringShape.new(name: 'GroupMemberName')
     GroupName = Shapes::StringShape.new(name: 'GroupName')
+    GroupSearchFilter = Shapes::StructureShape.new(name: 'GroupSearchFilter')
+    GroupSearchFilterList = Shapes::ListShape.new(name: 'GroupSearchFilterList')
+    GroupsList = Shapes::ListShape.new(name: 'GroupsList')
     GutterStyle = Shapes::StructureShape.new(name: 'GutterStyle')
     HexColor = Shapes::StringShape.new(name: 'HexColor')
     Host = Shapes::StringShape.new(name: 'Host')
@@ -471,6 +484,8 @@ module Aws::QuickSight
     SearchDashboardsResponse = Shapes::StructureShape.new(name: 'SearchDashboardsResponse')
     SearchFoldersRequest = Shapes::StructureShape.new(name: 'SearchFoldersRequest')
     SearchFoldersResponse = Shapes::StructureShape.new(name: 'SearchFoldersResponse')
+    SearchGroupsRequest = Shapes::StructureShape.new(name: 'SearchGroupsRequest')
+    SearchGroupsResponse = Shapes::StructureShape.new(name: 'SearchGroupsResponse')
     ServiceNowParameters = Shapes::StructureShape.new(name: 'ServiceNowParameters')
     SessionLifetimeInMinutes = Shapes::IntegerShape.new(name: 'SessionLifetimeInMinutes')
     SessionLifetimeInMinutesInvalidException = Shapes::StructureShape.new(name: 'SessionLifetimeInMinutesInvalidException')
@@ -482,6 +497,7 @@ module Aws::QuickSight
     SheetControlsOption = Shapes::StructureShape.new(name: 'SheetControlsOption')
     SheetList = Shapes::ListShape.new(name: 'SheetList')
     SheetStyle = Shapes::StructureShape.new(name: 'SheetStyle')
+    SignupResponse = Shapes::StructureShape.new(name: 'SignupResponse')
     SiteBaseUrl = Shapes::StringShape.new(name: 'SiteBaseUrl')
     SnowflakeParameters = Shapes::StructureShape.new(name: 'SnowflakeParameters')
     SparkParameters = Shapes::StructureShape.new(name: 'SparkParameters')
@@ -581,6 +597,8 @@ module Aws::QuickSight
     UpdateIpRestrictionRequest = Shapes::StructureShape.new(name: 'UpdateIpRestrictionRequest')
     UpdateIpRestrictionResponse = Shapes::StructureShape.new(name: 'UpdateIpRestrictionResponse')
     UpdateLinkPermissionList = Shapes::ListShape.new(name: 'UpdateLinkPermissionList')
+    UpdatePublicSharingSettingsRequest = Shapes::StructureShape.new(name: 'UpdatePublicSharingSettingsRequest')
+    UpdatePublicSharingSettingsResponse = Shapes::StructureShape.new(name: 'UpdatePublicSharingSettingsResponse')
     UpdateResourcePermissionList = Shapes::ListShape.new(name: 'UpdateResourcePermissionList')
     UpdateTemplateAliasRequest = Shapes::StructureShape.new(name: 'UpdateTemplateAliasRequest')
     UpdateTemplateAliasResponse = Shapes::StructureShape.new(name: 'UpdateTemplateAliasResponse')
@@ -617,10 +635,18 @@ module Aws::QuickSight
     AccountCustomization.add_member(:default_email_customization_template, Shapes::ShapeRef.new(shape: Arn, location_name: "DefaultEmailCustomizationTemplate"))
     AccountCustomization.struct_class = Types::AccountCustomization
 
+    AccountInfo.add_member(:account_name, Shapes::ShapeRef.new(shape: String, location_name: "AccountName"))
+    AccountInfo.add_member(:edition, Shapes::ShapeRef.new(shape: Edition, location_name: "Edition"))
+    AccountInfo.add_member(:notification_email, Shapes::ShapeRef.new(shape: String, location_name: "NotificationEmail"))
+    AccountInfo.add_member(:authentication_type, Shapes::ShapeRef.new(shape: String, location_name: "AuthenticationType"))
+    AccountInfo.add_member(:account_subscription_status, Shapes::ShapeRef.new(shape: String, location_name: "AccountSubscriptionStatus"))
+    AccountInfo.struct_class = Types::AccountInfo
+
     AccountSettings.add_member(:account_name, Shapes::ShapeRef.new(shape: String, location_name: "AccountName"))
     AccountSettings.add_member(:edition, Shapes::ShapeRef.new(shape: Edition, location_name: "Edition"))
     AccountSettings.add_member(:default_namespace, Shapes::ShapeRef.new(shape: Namespace, location_name: "DefaultNamespace"))
     AccountSettings.add_member(:notification_email, Shapes::ShapeRef.new(shape: String, location_name: "NotificationEmail"))
+    AccountSettings.add_member(:public_sharing_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "PublicSharingEnabled"))
     AccountSettings.struct_class = Types::AccountSettings
 
     ActionList.member = Shapes::ShapeRef.new(shape: String)
@@ -801,6 +827,28 @@ module Aws::QuickSight
     CreateAccountCustomizationResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     CreateAccountCustomizationResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     CreateAccountCustomizationResponse.struct_class = Types::CreateAccountCustomizationResponse
+
+    CreateAccountSubscriptionRequest.add_member(:edition, Shapes::ShapeRef.new(shape: Edition, required: true, location_name: "Edition"))
+    CreateAccountSubscriptionRequest.add_member(:authentication_method, Shapes::ShapeRef.new(shape: AuthenticationMethodOption, required: true, location_name: "AuthenticationMethod"))
+    CreateAccountSubscriptionRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    CreateAccountSubscriptionRequest.add_member(:account_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "AccountName"))
+    CreateAccountSubscriptionRequest.add_member(:notification_email, Shapes::ShapeRef.new(shape: String, required: true, location_name: "NotificationEmail"))
+    CreateAccountSubscriptionRequest.add_member(:active_directory_name, Shapes::ShapeRef.new(shape: String, location_name: "ActiveDirectoryName"))
+    CreateAccountSubscriptionRequest.add_member(:realm, Shapes::ShapeRef.new(shape: String, location_name: "Realm"))
+    CreateAccountSubscriptionRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: String, location_name: "DirectoryId"))
+    CreateAccountSubscriptionRequest.add_member(:admin_group, Shapes::ShapeRef.new(shape: GroupsList, location_name: "AdminGroup"))
+    CreateAccountSubscriptionRequest.add_member(:author_group, Shapes::ShapeRef.new(shape: GroupsList, location_name: "AuthorGroup"))
+    CreateAccountSubscriptionRequest.add_member(:reader_group, Shapes::ShapeRef.new(shape: GroupsList, location_name: "ReaderGroup"))
+    CreateAccountSubscriptionRequest.add_member(:first_name, Shapes::ShapeRef.new(shape: String, location_name: "FirstName"))
+    CreateAccountSubscriptionRequest.add_member(:last_name, Shapes::ShapeRef.new(shape: String, location_name: "LastName"))
+    CreateAccountSubscriptionRequest.add_member(:email_address, Shapes::ShapeRef.new(shape: String, location_name: "EmailAddress"))
+    CreateAccountSubscriptionRequest.add_member(:contact_number, Shapes::ShapeRef.new(shape: String, location_name: "ContactNumber"))
+    CreateAccountSubscriptionRequest.struct_class = Types::CreateAccountSubscriptionRequest
+
+    CreateAccountSubscriptionResponse.add_member(:signup_response, Shapes::ShapeRef.new(shape: SignupResponse, location_name: "SignupResponse"))
+    CreateAccountSubscriptionResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    CreateAccountSubscriptionResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    CreateAccountSubscriptionResponse.struct_class = Types::CreateAccountSubscriptionResponse
 
     CreateAnalysisRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     CreateAnalysisRequest.add_member(:analysis_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "AnalysisId"))
@@ -1427,6 +1475,14 @@ module Aws::QuickSight
     DescribeAccountSettingsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     DescribeAccountSettingsResponse.struct_class = Types::DescribeAccountSettingsResponse
 
+    DescribeAccountSubscriptionRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DescribeAccountSubscriptionRequest.struct_class = Types::DescribeAccountSubscriptionRequest
+
+    DescribeAccountSubscriptionResponse.add_member(:account_info, Shapes::ShapeRef.new(shape: AccountInfo, location_name: "AccountInfo"))
+    DescribeAccountSubscriptionResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    DescribeAccountSubscriptionResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DescribeAccountSubscriptionResponse.struct_class = Types::DescribeAccountSubscriptionResponse
+
     DescribeAnalysisPermissionsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     DescribeAnalysisPermissionsRequest.add_member(:analysis_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "AnalysisId"))
     DescribeAnalysisPermissionsRequest.struct_class = Types::DescribeAnalysisPermissionsRequest
@@ -1540,6 +1596,17 @@ module Aws::QuickSight
     DescribeFolderResponse.add_member(:folder, Shapes::ShapeRef.new(shape: Folder, location_name: "Folder"))
     DescribeFolderResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     DescribeFolderResponse.struct_class = Types::DescribeFolderResponse
+
+    DescribeGroupMembershipRequest.add_member(:member_name, Shapes::ShapeRef.new(shape: GroupMemberName, required: true, location: "uri", location_name: "MemberName"))
+    DescribeGroupMembershipRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, required: true, location: "uri", location_name: "GroupName"))
+    DescribeGroupMembershipRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DescribeGroupMembershipRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location: "uri", location_name: "Namespace"))
+    DescribeGroupMembershipRequest.struct_class = Types::DescribeGroupMembershipRequest
+
+    DescribeGroupMembershipResponse.add_member(:group_member, Shapes::ShapeRef.new(shape: GroupMember, location_name: "GroupMember"))
+    DescribeGroupMembershipResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DescribeGroupMembershipResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    DescribeGroupMembershipResponse.struct_class = Types::DescribeGroupMembershipResponse
 
     DescribeGroupRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, required: true, location: "uri", location_name: "GroupName"))
     DescribeGroupRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
@@ -1731,6 +1798,7 @@ module Aws::QuickSight
     GenerateEmbedUrlForAnonymousUserRequest.add_member(:session_tags, Shapes::ShapeRef.new(shape: SessionTagList, location_name: "SessionTags"))
     GenerateEmbedUrlForAnonymousUserRequest.add_member(:authorized_resource_arns, Shapes::ShapeRef.new(shape: ArnList, required: true, location_name: "AuthorizedResourceArns"))
     GenerateEmbedUrlForAnonymousUserRequest.add_member(:experience_configuration, Shapes::ShapeRef.new(shape: AnonymousUserEmbeddingExperienceConfiguration, required: true, location_name: "ExperienceConfiguration"))
+    GenerateEmbedUrlForAnonymousUserRequest.add_member(:allowed_domains, Shapes::ShapeRef.new(shape: StringList, location_name: "AllowedDomains"))
     GenerateEmbedUrlForAnonymousUserRequest.struct_class = Types::GenerateEmbedUrlForAnonymousUserRequest
 
     GenerateEmbedUrlForAnonymousUserResponse.add_member(:embed_url, Shapes::ShapeRef.new(shape: EmbeddingUrl, required: true, location_name: "EmbedUrl"))
@@ -1742,6 +1810,7 @@ module Aws::QuickSight
     GenerateEmbedUrlForRegisteredUserRequest.add_member(:session_lifetime_in_minutes, Shapes::ShapeRef.new(shape: SessionLifetimeInMinutes, location_name: "SessionLifetimeInMinutes"))
     GenerateEmbedUrlForRegisteredUserRequest.add_member(:user_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "UserArn"))
     GenerateEmbedUrlForRegisteredUserRequest.add_member(:experience_configuration, Shapes::ShapeRef.new(shape: RegisteredUserEmbeddingExperienceConfiguration, required: true, location_name: "ExperienceConfiguration"))
+    GenerateEmbedUrlForRegisteredUserRequest.add_member(:allowed_domains, Shapes::ShapeRef.new(shape: StringList, location_name: "AllowedDomains"))
     GenerateEmbedUrlForRegisteredUserRequest.struct_class = Types::GenerateEmbedUrlForRegisteredUserRequest
 
     GenerateEmbedUrlForRegisteredUserResponse.add_member(:embed_url, Shapes::ShapeRef.new(shape: EmbeddingUrl, required: true, location_name: "EmbedUrl"))
@@ -1795,6 +1864,15 @@ module Aws::QuickSight
     GroupMember.struct_class = Types::GroupMember
 
     GroupMemberList.member = Shapes::ShapeRef.new(shape: GroupMember)
+
+    GroupSearchFilter.add_member(:operator, Shapes::ShapeRef.new(shape: GroupFilterOperator, required: true, location_name: "Operator"))
+    GroupSearchFilter.add_member(:name, Shapes::ShapeRef.new(shape: GroupFilterAttribute, required: true, location_name: "Name"))
+    GroupSearchFilter.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Value"))
+    GroupSearchFilter.struct_class = Types::GroupSearchFilter
+
+    GroupSearchFilterList.member = Shapes::ShapeRef.new(shape: GroupSearchFilter)
+
+    GroupsList.member = Shapes::ShapeRef.new(shape: String)
 
     GutterStyle.add_member(:show, Shapes::ShapeRef.new(shape: boolean, location_name: "Show", metadata: {"box"=>true}))
     GutterStyle.struct_class = Types::GutterStyle
@@ -2404,6 +2482,19 @@ module Aws::QuickSight
     SearchFoldersResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     SearchFoldersResponse.struct_class = Types::SearchFoldersResponse
 
+    SearchGroupsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    SearchGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
+    SearchGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
+    SearchGroupsRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location: "uri", location_name: "Namespace"))
+    SearchGroupsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: GroupSearchFilterList, required: true, location_name: "Filters"))
+    SearchGroupsRequest.struct_class = Types::SearchGroupsRequest
+
+    SearchGroupsResponse.add_member(:group_list, Shapes::ShapeRef.new(shape: GroupList, location_name: "GroupList"))
+    SearchGroupsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    SearchGroupsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    SearchGroupsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    SearchGroupsResponse.struct_class = Types::SearchGroupsResponse
+
     ServiceNowParameters.add_member(:site_base_url, Shapes::ShapeRef.new(shape: SiteBaseUrl, required: true, location_name: "SiteBaseUrl"))
     ServiceNowParameters.struct_class = Types::ServiceNowParameters
 
@@ -2429,6 +2520,12 @@ module Aws::QuickSight
     SheetStyle.add_member(:tile, Shapes::ShapeRef.new(shape: TileStyle, location_name: "Tile"))
     SheetStyle.add_member(:tile_layout, Shapes::ShapeRef.new(shape: TileLayoutStyle, location_name: "TileLayout"))
     SheetStyle.struct_class = Types::SheetStyle
+
+    SignupResponse.add_member(:iam_user, Shapes::ShapeRef.new(shape: Boolean, location_name: "IAMUser"))
+    SignupResponse.add_member(:user_login_name, Shapes::ShapeRef.new(shape: String, location_name: "userLoginName"))
+    SignupResponse.add_member(:account_name, Shapes::ShapeRef.new(shape: String, location_name: "accountName"))
+    SignupResponse.add_member(:directory_type, Shapes::ShapeRef.new(shape: String, location_name: "directoryType"))
+    SignupResponse.struct_class = Types::SignupResponse
 
     SnowflakeParameters.add_member(:host, Shapes::ShapeRef.new(shape: Host, required: true, location_name: "Host"))
     SnowflakeParameters.add_member(:database, Shapes::ShapeRef.new(shape: Database, required: true, location_name: "Database"))
@@ -2885,6 +2982,14 @@ module Aws::QuickSight
 
     UpdateLinkPermissionList.member = Shapes::ShapeRef.new(shape: ResourcePermission)
 
+    UpdatePublicSharingSettingsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    UpdatePublicSharingSettingsRequest.add_member(:public_sharing_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "PublicSharingEnabled"))
+    UpdatePublicSharingSettingsRequest.struct_class = Types::UpdatePublicSharingSettingsRequest
+
+    UpdatePublicSharingSettingsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    UpdatePublicSharingSettingsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    UpdatePublicSharingSettingsResponse.struct_class = Types::UpdatePublicSharingSettingsResponse
+
     UpdateResourcePermissionList.member = Shapes::ShapeRef.new(shape: ResourcePermission)
 
     UpdateTemplateAliasRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
@@ -3051,6 +3156,23 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+      end)
+
+      api.add_operation(:create_account_subscription, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAccountSubscription"
+        o.http_method = "POST"
+        o.http_request_uri = "/account/{AwsAccountId}"
+        o.input = Shapes::ShapeRef.new(shape: CreateAccountSubscriptionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAccountSubscriptionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
       end)
@@ -3570,6 +3692,20 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
       end)
 
+      api.add_operation(:describe_account_subscription, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAccountSubscription"
+        o.http_method = "GET"
+        o.http_request_uri = "/account/{AwsAccountId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAccountSubscriptionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAccountSubscriptionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+      end)
+
       api.add_operation(:describe_analysis, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeAnalysis"
         o.http_method = "GET"
@@ -3724,6 +3860,21 @@ module Aws::QuickSight
         o.http_request_uri = "/accounts/{AwsAccountId}/namespaces/{Namespace}/groups/{GroupName}"
         o.input = Shapes::ShapeRef.new(shape: DescribeGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+      end)
+
+      api.add_operation(:describe_group_membership, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeGroupMembership"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/namespaces/{Namespace}/groups/{GroupName}/members/{MemberName}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeGroupMembershipRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeGroupMembershipResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -4432,6 +4583,22 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
+      api.add_operation(:search_groups, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SearchGroups"
+        o.http_method = "POST"
+        o.http_request_uri = "/accounts/{AwsAccountId}/namespaces/{Namespace}/groups-search"
+        o.input = Shapes::ShapeRef.new(shape: SearchGroupsRequest)
+        o.output = Shapes::ShapeRef.new(shape: SearchGroupsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+      end)
+
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "TagResource"
         o.http_method = "POST"
@@ -4690,6 +4857,20 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:update_public_sharing_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdatePublicSharingSettings"
+        o.http_method = "PUT"
+        o.http_request_uri = "/accounts/{AwsAccountId}/public-sharing-settings"
+        o.input = Shapes::ShapeRef.new(shape: UpdatePublicSharingSettingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdatePublicSharingSettingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedPricingPlanException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 

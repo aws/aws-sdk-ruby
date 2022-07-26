@@ -24,6 +24,7 @@ module Aws::Macie2
     AllowsUnencryptedObjectUploads = Shapes::StringShape.new(name: 'AllowsUnencryptedObjectUploads')
     ApiCallDetails = Shapes::StructureShape.new(name: 'ApiCallDetails')
     AssumedRole = Shapes::StructureShape.new(name: 'AssumedRole')
+    AvailabilityCode = Shapes::StringShape.new(name: 'AvailabilityCode')
     AwsAccount = Shapes::StructureShape.new(name: 'AwsAccount')
     AwsService = Shapes::StructureShape.new(name: 'AwsService')
     BatchGetCustomDataIdentifierSummary = Shapes::StructureShape.new(name: 'BatchGetCustomDataIdentifierSummary')
@@ -93,6 +94,7 @@ module Aws::Macie2
     DescribeClassificationJobResponse = Shapes::StructureShape.new(name: 'DescribeClassificationJobResponse')
     DescribeOrganizationConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeOrganizationConfigurationRequest')
     DescribeOrganizationConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeOrganizationConfigurationResponse')
+    DetectedDataDetails = Shapes::StructureShape.new(name: 'DetectedDataDetails')
     DisableMacieRequest = Shapes::StructureShape.new(name: 'DisableMacieRequest')
     DisableMacieResponse = Shapes::StructureShape.new(name: 'DisableMacieResponse')
     DisableOrganizationAdminAccountRequest = Shapes::StructureShape.new(name: 'DisableOrganizationAdminAccountRequest')
@@ -149,6 +151,12 @@ module Aws::Macie2
     GetMasterAccountResponse = Shapes::StructureShape.new(name: 'GetMasterAccountResponse')
     GetMemberRequest = Shapes::StructureShape.new(name: 'GetMemberRequest')
     GetMemberResponse = Shapes::StructureShape.new(name: 'GetMemberResponse')
+    GetRevealConfigurationRequest = Shapes::StructureShape.new(name: 'GetRevealConfigurationRequest')
+    GetRevealConfigurationResponse = Shapes::StructureShape.new(name: 'GetRevealConfigurationResponse')
+    GetSensitiveDataOccurrencesAvailabilityRequest = Shapes::StructureShape.new(name: 'GetSensitiveDataOccurrencesAvailabilityRequest')
+    GetSensitiveDataOccurrencesAvailabilityResponse = Shapes::StructureShape.new(name: 'GetSensitiveDataOccurrencesAvailabilityResponse')
+    GetSensitiveDataOccurrencesRequest = Shapes::StructureShape.new(name: 'GetSensitiveDataOccurrencesRequest')
+    GetSensitiveDataOccurrencesResponse = Shapes::StructureShape.new(name: 'GetSensitiveDataOccurrencesResponse')
     GetUsageStatisticsRequest = Shapes::StructureShape.new(name: 'GetUsageStatisticsRequest')
     GetUsageStatisticsResponse = Shapes::StructureShape.new(name: 'GetUsageStatisticsResponse')
     GetUsageTotalsRequest = Shapes::StructureShape.new(name: 'GetUsageTotalsRequest')
@@ -212,6 +220,7 @@ module Aws::Macie2
     ObjectLevelStatistics = Shapes::StructureShape.new(name: 'ObjectLevelStatistics')
     Occurrences = Shapes::StructureShape.new(name: 'Occurrences')
     OrderBy = Shapes::StringShape.new(name: 'OrderBy')
+    OriginType = Shapes::StringShape.new(name: 'OriginType')
     Page = Shapes::StructureShape.new(name: 'Page')
     Pages = Shapes::ListShape.new(name: 'Pages')
     PolicyDetails = Shapes::StructureShape.new(name: 'PolicyDetails')
@@ -227,6 +236,9 @@ module Aws::Macie2
     ReplicationDetails = Shapes::StructureShape.new(name: 'ReplicationDetails')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourcesAffected = Shapes::StructureShape.new(name: 'ResourcesAffected')
+    RevealConfiguration = Shapes::StructureShape.new(name: 'RevealConfiguration')
+    RevealRequestStatus = Shapes::StringShape.new(name: 'RevealRequestStatus')
+    RevealStatus = Shapes::StringShape.new(name: 'RevealStatus')
     S3Bucket = Shapes::StructureShape.new(name: 'S3Bucket')
     S3BucketCriteriaForJob = Shapes::StructureShape.new(name: 'S3BucketCriteriaForJob')
     S3BucketDefinitionForJob = Shapes::StructureShape.new(name: 'S3BucketDefinitionForJob')
@@ -252,6 +264,7 @@ module Aws::Macie2
     SensitiveData = Shapes::ListShape.new(name: 'SensitiveData')
     SensitiveDataItem = Shapes::StructureShape.new(name: 'SensitiveDataItem')
     SensitiveDataItemCategory = Shapes::StringShape.new(name: 'SensitiveDataItemCategory')
+    SensitiveDataOccurrences = Shapes::MapShape.new(name: 'SensitiveDataOccurrences')
     ServerSideEncryption = Shapes::StructureShape.new(name: 'ServerSideEncryption')
     ServiceLimit = Shapes::StructureShape.new(name: 'ServiceLimit')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
@@ -282,7 +295,9 @@ module Aws::Macie2
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TimeRange = Shapes::StringShape.new(name: 'TimeRange')
     Type = Shapes::StringShape.new(name: 'Type')
+    UnavailabilityReasonCode = Shapes::StringShape.new(name: 'UnavailabilityReasonCode')
     Unit = Shapes::StringShape.new(name: 'Unit')
+    UnprocessableEntityException = Shapes::StructureShape.new(name: 'UnprocessableEntityException')
     UnprocessedAccount = Shapes::StructureShape.new(name: 'UnprocessedAccount')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
@@ -296,6 +311,8 @@ module Aws::Macie2
     UpdateMemberSessionResponse = Shapes::StructureShape.new(name: 'UpdateMemberSessionResponse')
     UpdateOrganizationConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateOrganizationConfigurationRequest')
     UpdateOrganizationConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateOrganizationConfigurationResponse')
+    UpdateRevealConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateRevealConfigurationRequest')
+    UpdateRevealConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateRevealConfigurationResponse')
     UsageByAccount = Shapes::StructureShape.new(name: 'UsageByAccount')
     UsageRecord = Shapes::StructureShape.new(name: 'UsageRecord')
     UsageStatisticsFilter = Shapes::StructureShape.new(name: 'UsageStatisticsFilter')
@@ -319,6 +336,7 @@ module Aws::Macie2
     __listOfBucketMetadata = Shapes::ListShape.new(name: '__listOfBucketMetadata')
     __listOfCriteriaForJob = Shapes::ListShape.new(name: '__listOfCriteriaForJob')
     __listOfCustomDataIdentifierSummary = Shapes::ListShape.new(name: '__listOfCustomDataIdentifierSummary')
+    __listOfDetectedDataDetails = Shapes::ListShape.new(name: '__listOfDetectedDataDetails')
     __listOfFinding = Shapes::ListShape.new(name: '__listOfFinding')
     __listOfFindingType = Shapes::ListShape.new(name: '__listOfFindingType')
     __listOfFindingsFilterListItem = Shapes::ListShape.new(name: '__listOfFindingsFilterListItem')
@@ -336,6 +354,7 @@ module Aws::Macie2
     __listOfSearchResourcesTagCriterionPair = Shapes::ListShape.new(name: '__listOfSearchResourcesTagCriterionPair')
     __listOfTagCriterionPairForJob = Shapes::ListShape.new(name: '__listOfTagCriterionPairForJob')
     __listOfTagValuePair = Shapes::ListShape.new(name: '__listOfTagValuePair')
+    __listOfUnavailabilityReasonCode = Shapes::ListShape.new(name: '__listOfUnavailabilityReasonCode')
     __listOfUnprocessedAccount = Shapes::ListShape.new(name: '__listOfUnprocessedAccount')
     __listOfUsageByAccount = Shapes::ListShape.new(name: '__listOfUsageByAccount')
     __listOfUsageRecord = Shapes::ListShape.new(name: '__listOfUsageRecord')
@@ -344,6 +363,8 @@ module Aws::Macie2
     __listOf__string = Shapes::ListShape.new(name: '__listOf__string')
     __long = Shapes::IntegerShape.new(name: '__long')
     __string = Shapes::StringShape.new(name: '__string')
+    __stringMin1Max128 = Shapes::StringShape.new(name: '__stringMin1Max128')
+    __stringMin1Max2048 = Shapes::StringShape.new(name: '__stringMin1Max2048')
     __timestampIso8601 = Shapes::TimestampShape.new(name: '__timestampIso8601', timestampFormat: "iso8601")
     __timestampUnix = Shapes::TimestampShape.new(name: '__timestampUnix', timestampFormat: "unixTimestamp")
 
@@ -510,6 +531,7 @@ module Aws::Macie2
     ClassificationDetails.add_member(:detailed_results_location, Shapes::ShapeRef.new(shape: __string, location_name: "detailedResultsLocation"))
     ClassificationDetails.add_member(:job_arn, Shapes::ShapeRef.new(shape: __string, location_name: "jobArn"))
     ClassificationDetails.add_member(:job_id, Shapes::ShapeRef.new(shape: __string, location_name: "jobId"))
+    ClassificationDetails.add_member(:origin_type, Shapes::ShapeRef.new(shape: OriginType, location_name: "originType"))
     ClassificationDetails.add_member(:result, Shapes::ShapeRef.new(shape: ClassificationResult, location_name: "result"))
     ClassificationDetails.struct_class = Types::ClassificationDetails
 
@@ -710,6 +732,9 @@ module Aws::Macie2
     DescribeOrganizationConfigurationResponse.add_member(:auto_enable, Shapes::ShapeRef.new(shape: __boolean, location_name: "autoEnable"))
     DescribeOrganizationConfigurationResponse.add_member(:max_account_limit_reached, Shapes::ShapeRef.new(shape: __boolean, location_name: "maxAccountLimitReached"))
     DescribeOrganizationConfigurationResponse.struct_class = Types::DescribeOrganizationConfigurationResponse
+
+    DetectedDataDetails.add_member(:value, Shapes::ShapeRef.new(shape: __stringMin1Max128, required: true, location_name: "value"))
+    DetectedDataDetails.struct_class = Types::DetectedDataDetails
 
     DisableMacieRequest.struct_class = Types::DisableMacieRequest
 
@@ -912,6 +937,26 @@ module Aws::Macie2
     GetMemberResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     GetMemberResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "updatedAt"))
     GetMemberResponse.struct_class = Types::GetMemberResponse
+
+    GetRevealConfigurationRequest.struct_class = Types::GetRevealConfigurationRequest
+
+    GetRevealConfigurationResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: RevealConfiguration, location_name: "configuration"))
+    GetRevealConfigurationResponse.struct_class = Types::GetRevealConfigurationResponse
+
+    GetSensitiveDataOccurrencesAvailabilityRequest.add_member(:finding_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "findingId"))
+    GetSensitiveDataOccurrencesAvailabilityRequest.struct_class = Types::GetSensitiveDataOccurrencesAvailabilityRequest
+
+    GetSensitiveDataOccurrencesAvailabilityResponse.add_member(:code, Shapes::ShapeRef.new(shape: AvailabilityCode, location_name: "code"))
+    GetSensitiveDataOccurrencesAvailabilityResponse.add_member(:reasons, Shapes::ShapeRef.new(shape: __listOfUnavailabilityReasonCode, location_name: "reasons"))
+    GetSensitiveDataOccurrencesAvailabilityResponse.struct_class = Types::GetSensitiveDataOccurrencesAvailabilityResponse
+
+    GetSensitiveDataOccurrencesRequest.add_member(:finding_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "findingId"))
+    GetSensitiveDataOccurrencesRequest.struct_class = Types::GetSensitiveDataOccurrencesRequest
+
+    GetSensitiveDataOccurrencesResponse.add_member(:error, Shapes::ShapeRef.new(shape: __string, location_name: "error"))
+    GetSensitiveDataOccurrencesResponse.add_member(:sensitive_data_occurrences, Shapes::ShapeRef.new(shape: SensitiveDataOccurrences, location_name: "sensitiveDataOccurrences"))
+    GetSensitiveDataOccurrencesResponse.add_member(:status, Shapes::ShapeRef.new(shape: RevealRequestStatus, location_name: "status"))
+    GetSensitiveDataOccurrencesResponse.struct_class = Types::GetSensitiveDataOccurrencesResponse
 
     GetUsageStatisticsRequest.add_member(:filter_by, Shapes::ShapeRef.new(shape: __listOfUsageStatisticsFilter, location_name: "filterBy"))
     GetUsageStatisticsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: __integer, location_name: "maxResults"))
@@ -1203,6 +1248,10 @@ module Aws::Macie2
     ResourcesAffected.add_member(:s3_object, Shapes::ShapeRef.new(shape: S3Object, location_name: "s3Object"))
     ResourcesAffected.struct_class = Types::ResourcesAffected
 
+    RevealConfiguration.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: __stringMin1Max2048, location_name: "kmsKeyId"))
+    RevealConfiguration.add_member(:status, Shapes::ShapeRef.new(shape: RevealStatus, required: true, location_name: "status"))
+    RevealConfiguration.struct_class = Types::RevealConfiguration
+
     S3Bucket.add_member(:allows_unencrypted_object_uploads, Shapes::ShapeRef.new(shape: AllowsUnencryptedObjectUploads, location_name: "allowsUnencryptedObjectUploads"))
     S3Bucket.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     S3Bucket.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "createdAt"))
@@ -1302,6 +1351,9 @@ module Aws::Macie2
     SensitiveDataItem.add_member(:total_count, Shapes::ShapeRef.new(shape: __long, location_name: "totalCount"))
     SensitiveDataItem.struct_class = Types::SensitiveDataItem
 
+    SensitiveDataOccurrences.key = Shapes::ShapeRef.new(shape: __string)
+    SensitiveDataOccurrences.value = Shapes::ShapeRef.new(shape: __listOfDetectedDataDetails)
+
     ServerSideEncryption.add_member(:encryption_type, Shapes::ShapeRef.new(shape: EncryptionType, location_name: "encryptionType"))
     ServerSideEncryption.add_member(:kms_master_key_id, Shapes::ShapeRef.new(shape: __string, location_name: "kmsMasterKeyId"))
     ServerSideEncryption.struct_class = Types::ServerSideEncryption
@@ -1397,6 +1449,9 @@ module Aws::Macie2
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
+    UnprocessableEntityException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "message"))
+    UnprocessableEntityException.struct_class = Types::UnprocessableEntityException
+
     UnprocessedAccount.add_member(:account_id, Shapes::ShapeRef.new(shape: __string, location_name: "accountId"))
     UnprocessedAccount.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "errorCode"))
     UnprocessedAccount.add_member(:error_message, Shapes::ShapeRef.new(shape: __string, location_name: "errorMessage"))
@@ -1443,6 +1498,12 @@ module Aws::Macie2
     UpdateOrganizationConfigurationRequest.struct_class = Types::UpdateOrganizationConfigurationRequest
 
     UpdateOrganizationConfigurationResponse.struct_class = Types::UpdateOrganizationConfigurationResponse
+
+    UpdateRevealConfigurationRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: RevealConfiguration, required: true, location_name: "configuration"))
+    UpdateRevealConfigurationRequest.struct_class = Types::UpdateRevealConfigurationRequest
+
+    UpdateRevealConfigurationResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: RevealConfiguration, location_name: "configuration"))
+    UpdateRevealConfigurationResponse.struct_class = Types::UpdateRevealConfigurationResponse
 
     UsageByAccount.add_member(:currency, Shapes::ShapeRef.new(shape: Currency, location_name: "currency"))
     UsageByAccount.add_member(:estimated_cost, Shapes::ShapeRef.new(shape: __string, location_name: "estimatedCost"))
@@ -1504,6 +1565,8 @@ module Aws::Macie2
 
     __listOfCustomDataIdentifierSummary.member = Shapes::ShapeRef.new(shape: CustomDataIdentifierSummary)
 
+    __listOfDetectedDataDetails.member = Shapes::ShapeRef.new(shape: DetectedDataDetails)
+
     __listOfFinding.member = Shapes::ShapeRef.new(shape: Finding)
 
     __listOfFindingType.member = Shapes::ShapeRef.new(shape: FindingType)
@@ -1537,6 +1600,8 @@ module Aws::Macie2
     __listOfTagCriterionPairForJob.member = Shapes::ShapeRef.new(shape: TagCriterionPairForJob)
 
     __listOfTagValuePair.member = Shapes::ShapeRef.new(shape: TagValuePair)
+
+    __listOfUnavailabilityReasonCode.member = Shapes::ShapeRef.new(shape: UnavailabilityReasonCode)
 
     __listOfUnprocessedAccount.member = Shapes::ShapeRef.new(shape: UnprocessedAccount)
 
@@ -2099,6 +2164,44 @@ module Aws::Macie2
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:get_reveal_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRevealConfiguration"
+        o.http_method = "GET"
+        o.http_request_uri = "/reveal-configuration"
+        o.input = Shapes::ShapeRef.new(shape: GetRevealConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRevealConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:get_sensitive_data_occurrences, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSensitiveDataOccurrences"
+        o.http_method = "GET"
+        o.http_request_uri = "/findings/{findingId}/reveal"
+        o.input = Shapes::ShapeRef.new(shape: GetSensitiveDataOccurrencesRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSensitiveDataOccurrencesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_sensitive_data_occurrences_availability, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSensitiveDataOccurrencesAvailability"
+        o.http_method = "GET"
+        o.http_request_uri = "/findings/{findingId}/reveal/availability"
+        o.input = Shapes::ShapeRef.new(shape: GetSensitiveDataOccurrencesAvailabilityRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSensitiveDataOccurrencesAvailabilityResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:get_usage_statistics, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetUsageStatistics"
         o.http_method = "POST"
@@ -2453,6 +2556,18 @@ module Aws::Macie2
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:update_reveal_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateRevealConfiguration"
+        o.http_method = "PUT"
+        o.http_request_uri = "/reveal-configuration"
+        o.input = Shapes::ShapeRef.new(shape: UpdateRevealConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateRevealConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
     end
 
