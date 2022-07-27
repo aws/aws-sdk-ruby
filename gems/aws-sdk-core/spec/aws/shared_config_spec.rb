@@ -34,14 +34,14 @@ module Aws
 
       it 'defaults credentials_path to Dir.home/.aws/credentials' do
         config = SharedConfig.new
-        expect(config.credentials_path).to eq(
+        expect(config.credentials_path).to include(
           File.join('HOME', '.aws', 'credentials')
         )
       end
 
       it 'defaults config_path to Dir.home/.aws/config' do
         config = SharedConfig.new(config_enabled: true)
-        expect(config.config_path).to eq(
+        expect(config.config_path).to include(
           File.join('HOME', '.aws', 'config')
         )
       end
