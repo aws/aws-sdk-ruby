@@ -881,6 +881,67 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # Creates a new WorkSpace image from an existing WorkSpace.
+    #
+    # @option params [required, String] :name
+    #   The name of the new WorkSpace image.
+    #
+    # @option params [required, String] :description
+    #   The description of the new WorkSpace image.
+    #
+    # @option params [required, String] :workspace_id
+    #   The identifier of the source WorkSpace
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags that you want to add to the new WorkSpace image. To add tags
+    #   when you're creating the image, you must create an IAM policy that
+    #   grants your IAM user permission to use `workspaces:CreateTags`.
+    #
+    # @return [Types::CreateWorkspaceImageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateWorkspaceImageResult#image_id #image_id} => String
+    #   * {Types::CreateWorkspaceImageResult#name #name} => String
+    #   * {Types::CreateWorkspaceImageResult#description #description} => String
+    #   * {Types::CreateWorkspaceImageResult#operating_system #operating_system} => Types::OperatingSystem
+    #   * {Types::CreateWorkspaceImageResult#state #state} => String
+    #   * {Types::CreateWorkspaceImageResult#required_tenancy #required_tenancy} => String
+    #   * {Types::CreateWorkspaceImageResult#created #created} => Time
+    #   * {Types::CreateWorkspaceImageResult#owner_account_id #owner_account_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_workspace_image({
+    #     name: "WorkspaceImageName", # required
+    #     description: "WorkspaceImageDescription", # required
+    #     workspace_id: "WorkspaceId", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.image_id #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.operating_system.type #=> String, one of "WINDOWS", "LINUX"
+    #   resp.state #=> String, one of "AVAILABLE", "PENDING", "ERROR"
+    #   resp.required_tenancy #=> String, one of "DEFAULT", "DEDICATED"
+    #   resp.created #=> Time
+    #   resp.owner_account_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateWorkspaceImage AWS API Documentation
+    #
+    # @overload create_workspace_image(params = {})
+    # @param [Hash] params ({})
+    def create_workspace_image(params = {}, options = {})
+      req = build_request(:create_workspace_image, params)
+      req.send_request(options)
+    end
+
     # Creates one or more WorkSpaces.
     #
     # This operation is asynchronous and returns before the WorkSpaces are
@@ -3296,7 +3357,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.71.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

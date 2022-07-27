@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2022-07-27)
+------------------
+
+* Feature - Added CreateWorkspaceImage API to create a new WorkSpace image from an existing WorkSpace.
+
 1.70.0 (2022-07-19)
 ------------------
 

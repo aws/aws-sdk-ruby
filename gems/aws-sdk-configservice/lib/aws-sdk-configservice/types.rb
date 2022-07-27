@@ -1626,6 +1626,60 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # A compliance score is the percentage of the number of compliant
+    # rule-resource combinations in a conformance pack compared to the
+    # number of total possible rule-resource combinations in the conformance
+    # pack. This metric provides you with a high-level view of the
+    # compliance state of your conformance packs, and can be used to
+    # identify, investigate, and understand compliance deviations in your
+    # conformance packs.
+    #
+    # @!attribute [rw] score
+    #   Compliance score for the conformance pack.
+    #   @return [String]
+    #
+    # @!attribute [rw] conformance_pack_name
+    #   The name of the conformance pack.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The time that the conformance pack compliance score was last
+    #   updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConformancePackComplianceScore AWS API Documentation
+    #
+    class ConformancePackComplianceScore < Struct.new(
+      :score,
+      :conformance_pack_name,
+      :last_updated_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of filters to apply to the conformance pack compliance score
+    # result set.
+    #
+    # @note When making an API call, you may pass ConformancePackComplianceScoresFilters
+    #   data as a hash:
+    #
+    #       {
+    #         conformance_pack_names: ["ConformancePackName"], # required
+    #       }
+    #
+    # @!attribute [rw] conformance_pack_names
+    #   The name of a conformance pack whose score should be included in the
+    #   compliance score result.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConformancePackComplianceScoresFilters AWS API Documentation
+    #
+    class ConformancePackComplianceScoresFilters < Struct.new(
+      :conformance_pack_names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Summary includes the name and status of the conformance pack.
     #
     # @!attribute [rw] conformance_pack_name
@@ -5367,6 +5421,75 @@ module Aws::ConfigService
     class ListAggregateDiscoveredResourcesResponse < Struct.new(
       :resource_identifiers,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListConformancePackComplianceScoresRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filters: {
+    #           conformance_pack_names: ["ConformancePackName"], # required
+    #         },
+    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #         sort_by: "SCORE", # accepts SCORE
+    #         limit: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] filters
+    #   Filters the results based on the
+    #   `ConformancePackComplianceScoresFilters`.
+    #   @return [Types::ConformancePackComplianceScoresFilters]
+    #
+    # @!attribute [rw] sort_order
+    #   Determines the order in which conformance pack compliance scores are
+    #   sorted. Either in ascending or descending order.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   Sorts your conformance pack compliance scores in either ascending or
+    #   descending order, depending on `SortOrder`.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of conformance pack compliance scores returned on
+    #   each page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string in a prior request that you can use to get
+    #   the paginated response for next set of conformance pack compliance
+    #   scores.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ListConformancePackComplianceScoresRequest AWS API Documentation
+    #
+    class ListConformancePackComplianceScoresRequest < Struct.new(
+      :filters,
+      :sort_order,
+      :sort_by,
+      :limit,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The `nextToken` string that you can use to get the next page of
+    #   results in a paginated response.
+    #   @return [String]
+    #
+    # @!attribute [rw] conformance_pack_compliance_scores
+    #   A list of `ConformancePackComplianceScore` objects
+    #   @return [Array<Types::ConformancePackComplianceScore>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ListConformancePackComplianceScoresResponse AWS API Documentation
+    #
+    class ListConformancePackComplianceScoresResponse < Struct.new(
+      :next_token,
+      :conformance_pack_compliance_scores)
       SENSITIVE = []
       include Aws::Structure
     end

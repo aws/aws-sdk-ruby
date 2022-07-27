@@ -130,6 +130,66 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # A validated address.
+    #
+    # @!attribute [rw] street_name
+    #   The address street, such as `8th Avenue`.
+    #   @return [String]
+    #
+    # @!attribute [rw] street_suffix
+    #   The address suffix, such as the `N` in `8th Avenue N`.
+    #   @return [String]
+    #
+    # @!attribute [rw] post_directional
+    #   An address suffix location, such as the `S. Unit A` in `Central Park
+    #   S. Unit A`.
+    #   @return [String]
+    #
+    # @!attribute [rw] pre_directional
+    #   An address prefix location, such as the `N` in `N. Third St.`.
+    #   @return [String]
+    #
+    # @!attribute [rw] street_number
+    #   The numeric portion of an address.
+    #   @return [String]
+    #
+    # @!attribute [rw] city
+    #   The city of an address.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of an address.
+    #   @return [String]
+    #
+    # @!attribute [rw] postal_code
+    #   The postal code of an address.
+    #   @return [String]
+    #
+    # @!attribute [rw] postal_code_plus_4
+    #   The Zip + 4 or postal code + 4 of an address.
+    #   @return [String]
+    #
+    # @!attribute [rw] country
+    #   The country of an address.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/Address AWS API Documentation
+    #
+    class Address < Struct.new(
+      :street_name,
+      :street_suffix,
+      :post_directional,
+      :pre_directional,
+      :street_number,
+      :city,
+      :state,
+      :postal_code,
+      :postal_code_plus_4,
+      :country)
+      SENSITIVE = [:street_name, :street_suffix, :post_directional, :pre_directional, :street_number, :city, :state, :postal_code, :postal_code_plus_4, :country]
+      include Aws::Structure
+    end
+
     # The Alexa for Business metadata associated with an Amazon Chime user,
     # used to integrate Alexa for Business with a device.
     #
@@ -1153,6 +1213,50 @@ module Aws::Chime
     class BusinessCallingSettings < Struct.new(
       :cdr_bucket)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A suggested address.
+    #
+    # @!attribute [rw] street_info
+    #   The street information of a candidate address
+    #   @return [String]
+    #
+    # @!attribute [rw] street_number
+    #   The numeric portion of a candidate address.
+    #   @return [String]
+    #
+    # @!attribute [rw] city
+    #   The city of a candidate address.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of a candidate address.
+    #   @return [String]
+    #
+    # @!attribute [rw] postal_code
+    #   The postal code of a candidate address.
+    #   @return [String]
+    #
+    # @!attribute [rw] postal_code_plus_4
+    #   The Zip + 4 or postal code + 4 of a candidate address.
+    #   @return [String]
+    #
+    # @!attribute [rw] country
+    #   The country of a candidate address.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CandidateAddress AWS API Documentation
+    #
+    class CandidateAddress < Struct.new(
+      :street_info,
+      :street_number,
+      :city,
+      :state,
+      :postal_code,
+      :postal_code_plus_4,
+      :country)
+      SENSITIVE = [:street_info, :street_number, :city, :state, :postal_code, :postal_code_plus_4, :country]
       include Aws::Structure
     end
 
@@ -7196,12 +7300,13 @@ module Aws::Chime
     #       }
     #
     # @!attribute [rw] enable_sip_logs
-    #   Boolean that enables SIP message logs to CloudWatch logs.
+    #   When true, enables SIP message logs for sending to Amazon CloudWatch
+    #   Logs.
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_media_metric_logs
-    #   Boolean that enables logging of detailed media metrics for Voice
-    #   Connectors to CloudWatch logs.
+    #   Boolean that enables the logging of Voice Connector metrics to
+    #   Cloudwatch.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/LoggingConfiguration AWS API Documentation
@@ -11052,6 +11157,91 @@ module Aws::Chime
     #
     class UserSettings < Struct.new(
       :telephony)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ValidateE911AddressRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "NonEmptyString", # required
+    #         street_number: "SensitiveNonEmptyString", # required
+    #         street_info: "SensitiveNonEmptyString", # required
+    #         city: "SensitiveNonEmptyString", # required
+    #         state: "SensitiveNonEmptyString", # required
+    #         country: "SensitiveNonEmptyString", # required
+    #         postal_code: "SensitiveNonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The AWS account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] street_number
+    #   The address street number, such as `200` or `2121`.
+    #   @return [String]
+    #
+    # @!attribute [rw] street_info
+    #   The address street information, such as `8th Avenue`.
+    #   @return [String]
+    #
+    # @!attribute [rw] city
+    #   The address city, such as `Portland`.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The address state, such as `ME`.
+    #   @return [String]
+    #
+    # @!attribute [rw] country
+    #   The address country, such as `US`.
+    #   @return [String]
+    #
+    # @!attribute [rw] postal_code
+    #   The address postal code, such as `04352`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ValidateE911AddressRequest AWS API Documentation
+    #
+    class ValidateE911AddressRequest < Struct.new(
+      :aws_account_id,
+      :street_number,
+      :street_info,
+      :city,
+      :state,
+      :country,
+      :postal_code)
+      SENSITIVE = [:street_number, :street_info, :city, :state, :country, :postal_code]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] validation_result
+    #   Number indicating the result of address validation. `0` means the
+    #   address was perfect as is and successfully validated. `1` means the
+    #   address was corrected. `2` means the address sent was not close
+    #   enough and was not validated.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] address_external_id
+    #   The ID that represents the address.
+    #   @return [String]
+    #
+    # @!attribute [rw] address
+    #   The validated address.
+    #   @return [Types::Address]
+    #
+    # @!attribute [rw] candidate_address_list
+    #   The list of address suggestions.
+    #   @return [Array<Types::CandidateAddress>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ValidateE911AddressResponse AWS API Documentation
+    #
+    class ValidateE911AddressResponse < Struct.new(
+      :validation_result,
+      :address_external_id,
+      :address,
+      :candidate_address_list)
       SENSITIVE = []
       include Aws::Structure
     end

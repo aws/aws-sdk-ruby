@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.131.4 (2022-07-27)
+------------------
+
 * Issue - Fix `to_json` usage on pageable responses when using Rails (#2733).
 * Issue - Use `expand_path` on credential/config paths in SharedConfig (#2735).
 
