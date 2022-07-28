@@ -146,8 +146,8 @@ module Aws
         data.to_h
       end
 
-      def to_json(options = {})
-        to_h.to_json(options)
+      def as_json(options = {})
+        to_h.as_json(options)
       end
     end
 

@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix `to_json` usage on pageable responses in custom objects (#2733).
+
 3.131.4 (2022-07-27)
 ------------------
 
