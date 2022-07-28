@@ -9,10 +9,10 @@ module Aws
       class Handler < Seahorse::Client::Handler
         def call(context)
 
-          unless context.http_request.headers.key?('x-amz-trace-id')
+          unless context.http_request.headers.key?('x-amzn-trace-id')
             if ENV['AWS_LAMBDA_FUNCTION_NAME'] &&
-              (trace_id = ENV['_X_AMZ_TRACE_ID'])
-              context.http_request.headers['x-amz-trace-id'] = trace_id
+              (trace_id = ENV['_X_AMZN_TRACE_ID'])
+              context.http_request.headers['x-amzn-trace-id'] = trace_id
             end
           end
           @handler.call(context)
