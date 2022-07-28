@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.131.5 (2022-07-28)
+------------------
+
 * Issue - Fix `to_json` usage in nested hashes by defining `as_json` (#2733).
 
 3.131.4 (2022-07-27)

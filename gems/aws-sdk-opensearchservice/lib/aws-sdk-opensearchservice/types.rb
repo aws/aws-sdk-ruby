@@ -1052,9 +1052,10 @@ module Aws::OpenSearchService
     #         },
     #         ebs_options: {
     #           ebs_enabled: false,
-    #           volume_type: "standard", # accepts standard, gp2, io1
+    #           volume_type: "standard", # accepts standard, gp2, io1, gp3
     #           volume_size: 1,
     #           iops: 1,
+    #           throughput: 1,
     #         },
     #         access_policies: "PolicyDocument",
     #         snapshot_options: {
@@ -2743,9 +2744,10 @@ module Aws::OpenSearchService
     #
     #       {
     #         ebs_enabled: false,
-    #         volume_type: "standard", # accepts standard, gp2, io1
+    #         volume_type: "standard", # accepts standard, gp2, io1, gp3
     #         volume_size: 1,
     #         iops: 1,
+    #         throughput: 1,
     #       }
     #
     # @!attribute [rw] ebs_enabled
@@ -2761,7 +2763,11 @@ module Aws::OpenSearchService
     #   @return [Integer]
     #
     # @!attribute [rw] iops
-    #   The IOPD for a Provisioned IOPS EBS volume (SSD).
+    #   The IOPS for Provisioned IOPS And GP3 EBS volume (SSD).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] throughput
+    #   The Throughput for GP3 EBS volume (SSD).
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/EBSOptions AWS API Documentation
@@ -2770,7 +2776,8 @@ module Aws::OpenSearchService
       :ebs_enabled,
       :volume_type,
       :volume_size,
-      :iops)
+      :iops,
+      :throughput)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4551,7 +4558,8 @@ module Aws::OpenSearchService
     #   options: "instance" storageType has no storageSubType. "ebs"
     #   storageType has the following valid storageSubTypes: 1.  standard
     #   2.  gp2
-    #   3.  io1
+    #   3.  gp3
+    #   4.  io1
     #
     #    See ` VolumeType ` for more information regarding each EBS storage
     #   option.
@@ -4580,6 +4588,8 @@ module Aws::OpenSearchService
     #   2.  MaximumVolumeSize
     #   3.  MaximumIops
     #   4.  MinimumIops
+    #   5.  MaximumThroughput
+    #   6.  MinimumThroughput
     #   @return [String]
     #
     # @!attribute [rw] limit_values
@@ -4653,9 +4663,10 @@ module Aws::OpenSearchService
     #         },
     #         ebs_options: {
     #           ebs_enabled: false,
-    #           volume_type: "standard", # accepts standard, gp2, io1
+    #           volume_type: "standard", # accepts standard, gp2, io1, gp3
     #           volume_size: 1,
     #           iops: 1,
+    #           throughput: 1,
     #         },
     #         snapshot_options: {
     #           automated_snapshot_start_hour: 1,

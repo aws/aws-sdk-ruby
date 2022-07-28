@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.325.0 (2022-07-28)
+------------------
+
+* Feature - Documentation updates for VM Import/Export.
+
 1.324.0 (2022-07-22)
 ------------------
 

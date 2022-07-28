@@ -33488,9 +33488,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] s3_export_location
-    #   Information about the destination Amazon S3 bucket. The bucket must
-    #   exist and grant WRITE and READ\_ACP permissions to the Amazon Web
-    #   Services account vm-import-export@amazon.com.
+    #   The Amazon S3 bucket for the destination image. The destination
+    #   bucket must exist.
     #   @return [Types::ExportTaskS3LocationRequest]
     #
     # @!attribute [rw] role_name
@@ -33730,8 +33729,14 @@ module Aws::EC2
     #
     # @!attribute [rw] s3_bucket
     #   The Amazon S3 bucket for the destination image. The destination
-    #   bucket must exist and grant WRITE and READ\_ACP permissions to the
-    #   Amazon Web Services account `vm-import-export@amazon.com`.
+    #   bucket must exist and have an access control list (ACL) attached
+    #   that specifies the Region-specific canonical account ID for the
+    #   `Grantee`. For more information about the ACL to your S3 bucket, see
+    #   [Prerequisites][1] in the VM Import/Export User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vm-import/latest/userguide/vmexport.html#vmexport-prerequisites
     #   @return [String]
     #
     # @!attribute [rw] s3_key
@@ -33772,8 +33777,14 @@ module Aws::EC2
     #
     # @!attribute [rw] s3_bucket
     #   The Amazon S3 bucket for the destination image. The destination
-    #   bucket must exist and grant WRITE and READ\_ACP permissions to the
-    #   Amazon Web Services account `vm-import-export@amazon.com`.
+    #   bucket must exist and have an access control list (ACL) attached
+    #   that specifies the Region-specific canonical account ID for the
+    #   `Grantee`. For more information about the ACL to your S3 bucket, see
+    #   [Prerequisites][1] in the VM Import/Export User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vm-import/latest/userguide/vmexport.html#vmexport-prerequisites
     #   @return [String]
     #
     # @!attribute [rw] s3_prefix
@@ -38845,8 +38856,9 @@ module Aws::EC2
     #
     # @!attribute [rw] last_launched_time
     #   The date and time, in [ISO 8601 date-time format][1], when the AMI
-    #   was last used to launch an EC2 instance. When the AMI is used, there
-    #   is a 24-hour delay before that usage is reported.
+    #   was last used to launch an EC2 instance. When the AMI is used to
+    #   launch an instance, there is a 24-hour delay before that usage is
+    #   reported.
     #
     #   <note markdown="1"> `lastLaunchedTime` data is available starting April 2017.
     #
@@ -40712,8 +40724,9 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] cpu_credits
-    #   The credit option for CPU usage of the instance. Valid values are
-    #   `standard` and `unlimited`.
+    #   The credit option for CPU usage of the instance.
+    #
+    #   Valid values: `standard` \| `unlimited`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceCreditSpecification AWS API Documentation
@@ -40741,8 +40754,9 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] cpu_credits
-    #   The credit option for CPU usage of the instance. Valid values are
-    #   `standard` and `unlimited`.
+    #   The credit option for CPU usage of the instance.
+    #
+    #   Valid values: `standard` \| `unlimited`
     #
     #   T3 instances with `host` tenancy do not support the `unlimited` CPU
     #   credit option.
@@ -41685,8 +41699,12 @@ module Aws::EC2
     #
     #   You can only assign a carrier IP address to a network interface that
     #   is in a subnet in a Wavelength Zone. For more information about
-    #   carrier IP addresses, see Carrier IP addresses in the Amazon Web
-    #   Services Wavelength Developer Guide.
+    #   carrier IP addresses, see [Carrier IP address][1] in the *Amazon Web
+    #   Services Wavelength Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/wavelength/latest/developerguide/how-wavelengths-work.html#provider-owned-ip
     #   @return [Boolean]
     #
     # @!attribute [rw] interface_type
@@ -57373,10 +57391,9 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_groups
-    #   \[EC2-Classic, default VPC\] One or more security group names. For a
-    #   nondefault VPC, you must use security group IDs instead. You cannot
-    #   specify both a security group ID and security name in the same
-    #   request.
+    #   One or more security group names. For a nondefault VPC, you must use
+    #   security group IDs instead. You cannot specify both a security group
+    #   ID and security name in the same request.
     #   @return [Array<String>]
     #
     # @!attribute [rw] instance_market_options
@@ -60842,7 +60859,8 @@ module Aws::EC2
     #   ModifyInstanceCreditSpecification][1]. For more information, see
     #   [Burstable performance instances][2] in the *Amazon EC2 User Guide*.
     #
-    #   Default: `standard` (T2 instances) or `unlimited` (T3/T3a instances)
+    #   Default: `standard` (T2 instances) or `unlimited` (T3/T3a/T4g
+    #   instances)
     #
     #   For T3 instances with `host` tenancy, only `standard` is supported.
     #
@@ -68947,6 +68965,17 @@ module Aws::EC2
     end
 
     # Describes a security group and Amazon Web Services account ID pair.
+    #
+    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
+    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
+    # from EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud
+    # User Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
     #
     # @note When making an API call, you may pass UserIdGroupPair
     #   data as a hash:

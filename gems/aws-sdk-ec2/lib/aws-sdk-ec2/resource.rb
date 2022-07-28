@@ -521,7 +521,8 @@ module Aws::EC2
     #   information, see [Burstable performance instances][2] in the *Amazon
     #   EC2 User Guide*.
     #
-    #   Default: `standard` (T2 instances) or `unlimited` (T3/T3a instances)
+    #   Default: `standard` (T2 instances) or `unlimited` (T3/T3a/T4g
+    #   instances)
     #
     #   For T3 instances with `host` tenancy, only `standard` is supported.
     #

@@ -625,9 +625,10 @@ module Aws::OpenSearchService
     #     },
     #     ebs_options: {
     #       ebs_enabled: false,
-    #       volume_type: "standard", # accepts standard, gp2, io1
+    #       volume_type: "standard", # accepts standard, gp2, io1, gp3
     #       volume_size: 1,
     #       iops: 1,
+    #       throughput: 1,
     #     },
     #     access_policies: "PolicyDocument",
     #     snapshot_options: {
@@ -734,9 +735,10 @@ module Aws::OpenSearchService
     #   resp.domain_status.cluster_config.warm_count #=> Integer
     #   resp.domain_status.cluster_config.cold_storage_options.enabled #=> Boolean
     #   resp.domain_status.ebs_options.ebs_enabled #=> Boolean
-    #   resp.domain_status.ebs_options.volume_type #=> String, one of "standard", "gp2", "io1"
+    #   resp.domain_status.ebs_options.volume_type #=> String, one of "standard", "gp2", "io1", "gp3"
     #   resp.domain_status.ebs_options.volume_size #=> Integer
     #   resp.domain_status.ebs_options.iops #=> Integer
+    #   resp.domain_status.ebs_options.throughput #=> Integer
     #   resp.domain_status.access_policies #=> String
     #   resp.domain_status.snapshot_options.automated_snapshot_start_hour #=> Integer
     #   resp.domain_status.vpc_options.vpc_id #=> String
@@ -951,9 +953,10 @@ module Aws::OpenSearchService
     #   resp.domain_status.cluster_config.warm_count #=> Integer
     #   resp.domain_status.cluster_config.cold_storage_options.enabled #=> Boolean
     #   resp.domain_status.ebs_options.ebs_enabled #=> Boolean
-    #   resp.domain_status.ebs_options.volume_type #=> String, one of "standard", "gp2", "io1"
+    #   resp.domain_status.ebs_options.volume_type #=> String, one of "standard", "gp2", "io1", "gp3"
     #   resp.domain_status.ebs_options.volume_size #=> Integer
     #   resp.domain_status.ebs_options.iops #=> Integer
+    #   resp.domain_status.ebs_options.throughput #=> Integer
     #   resp.domain_status.access_policies #=> String
     #   resp.domain_status.snapshot_options.automated_snapshot_start_hour #=> Integer
     #   resp.domain_status.vpc_options.vpc_id #=> String
@@ -1166,9 +1169,10 @@ module Aws::OpenSearchService
     #   resp.domain_status.cluster_config.warm_count #=> Integer
     #   resp.domain_status.cluster_config.cold_storage_options.enabled #=> Boolean
     #   resp.domain_status.ebs_options.ebs_enabled #=> Boolean
-    #   resp.domain_status.ebs_options.volume_type #=> String, one of "standard", "gp2", "io1"
+    #   resp.domain_status.ebs_options.volume_type #=> String, one of "standard", "gp2", "io1", "gp3"
     #   resp.domain_status.ebs_options.volume_size #=> Integer
     #   resp.domain_status.ebs_options.iops #=> Integer
+    #   resp.domain_status.ebs_options.throughput #=> Integer
     #   resp.domain_status.access_policies #=> String
     #   resp.domain_status.snapshot_options.automated_snapshot_start_hour #=> Integer
     #   resp.domain_status.vpc_options.vpc_id #=> String
@@ -1364,9 +1368,10 @@ module Aws::OpenSearchService
     #   resp.domain_config.cluster_config.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
     #   resp.domain_config.cluster_config.status.pending_deletion #=> Boolean
     #   resp.domain_config.ebs_options.options.ebs_enabled #=> Boolean
-    #   resp.domain_config.ebs_options.options.volume_type #=> String, one of "standard", "gp2", "io1"
+    #   resp.domain_config.ebs_options.options.volume_type #=> String, one of "standard", "gp2", "io1", "gp3"
     #   resp.domain_config.ebs_options.options.volume_size #=> Integer
     #   resp.domain_config.ebs_options.options.iops #=> Integer
+    #   resp.domain_config.ebs_options.options.throughput #=> Integer
     #   resp.domain_config.ebs_options.status.creation_date #=> Time
     #   resp.domain_config.ebs_options.status.update_date #=> Time
     #   resp.domain_config.ebs_options.status.update_version #=> Integer
@@ -1525,9 +1530,10 @@ module Aws::OpenSearchService
     #   resp.domain_status_list[0].cluster_config.warm_count #=> Integer
     #   resp.domain_status_list[0].cluster_config.cold_storage_options.enabled #=> Boolean
     #   resp.domain_status_list[0].ebs_options.ebs_enabled #=> Boolean
-    #   resp.domain_status_list[0].ebs_options.volume_type #=> String, one of "standard", "gp2", "io1"
+    #   resp.domain_status_list[0].ebs_options.volume_type #=> String, one of "standard", "gp2", "io1", "gp3"
     #   resp.domain_status_list[0].ebs_options.volume_size #=> Integer
     #   resp.domain_status_list[0].ebs_options.iops #=> Integer
+    #   resp.domain_status_list[0].ebs_options.throughput #=> Integer
     #   resp.domain_status_list[0].access_policies #=> String
     #   resp.domain_status_list[0].snapshot_options.automated_snapshot_start_hour #=> Integer
     #   resp.domain_status_list[0].vpc_options.vpc_id #=> String
@@ -2657,9 +2663,10 @@ module Aws::OpenSearchService
     #     },
     #     ebs_options: {
     #       ebs_enabled: false,
-    #       volume_type: "standard", # accepts standard, gp2, io1
+    #       volume_type: "standard", # accepts standard, gp2, io1, gp3
     #       volume_size: 1,
     #       iops: 1,
+    #       throughput: 1,
     #     },
     #     snapshot_options: {
     #       automated_snapshot_start_hour: 1,
@@ -2762,9 +2769,10 @@ module Aws::OpenSearchService
     #   resp.domain_config.cluster_config.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
     #   resp.domain_config.cluster_config.status.pending_deletion #=> Boolean
     #   resp.domain_config.ebs_options.options.ebs_enabled #=> Boolean
-    #   resp.domain_config.ebs_options.options.volume_type #=> String, one of "standard", "gp2", "io1"
+    #   resp.domain_config.ebs_options.options.volume_type #=> String, one of "standard", "gp2", "io1", "gp3"
     #   resp.domain_config.ebs_options.options.volume_size #=> Integer
     #   resp.domain_config.ebs_options.options.iops #=> Integer
+    #   resp.domain_config.ebs_options.options.throughput #=> Integer
     #   resp.domain_config.ebs_options.status.creation_date #=> Time
     #   resp.domain_config.ebs_options.status.update_date #=> Time
     #   resp.domain_config.ebs_options.status.update_version #=> Integer
@@ -3025,7 +3033,7 @@ module Aws::OpenSearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-opensearchservice'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

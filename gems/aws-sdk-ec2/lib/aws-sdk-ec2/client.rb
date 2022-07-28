@@ -2744,7 +2744,9 @@ module Aws::EC2
     #
     # An outbound rule permits instances to send traffic to the specified
     # IPv4 or IPv6 CIDR address ranges, or to the instances that are
-    # associated with the specified source security groups.
+    # associated with the specified source security groups. When specifying
+    # an outbound rule for your security group in a VPC, the `IpPermissions`
+    # must include a destination for the traffic.
     #
     # You specify a protocol for each rule (for example, TCP). For the TCP
     # and UDP protocols, you must also specify the destination port or port
@@ -2950,7 +2952,9 @@ module Aws::EC2
     #
     # An inbound rule permits instances to receive traffic from the
     # specified IPv4 or IPv6 CIDR address range, or from the instances that
-    # are associated with the specified destination security groups.
+    # are associated with the specified destination security groups. When
+    # specifying an inbound rule for your security group in a VPC, the
+    # `IpPermissions` must include a source for the traffic.
     #
     # You specify a protocol for each rule (for example, TCP). For TCP and
     # UDP, you must also specify the destination port or port range. For
@@ -2963,9 +2967,17 @@ module Aws::EC2
     # For more information about VPC security group quotas, see [Amazon VPC
     # quotas][1].
     #
+    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
+    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
+    # from EC2-Classic to a VPC][2] in the *Amazon Elastic Compute Cloud
+    # User Guide*.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
     #
     # @option params [String] :cidr_ip
     #   The IPv4 address range, in CIDR format. You can't specify this
@@ -9998,11 +10010,19 @@ module Aws::EC2
     # For more information about VPC security group limits, see [Amazon VPC
     # Limits][3].
     #
+    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
+    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
+    # from EC2-Classic to a VPC][4] in the *Amazon Elastic Compute Cloud
+    # User Guide*.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html
     # [2]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html
     # [3]: https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html
+    # [4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
     #
     # @option params [required, String] :description
     #   A description for the security group. This is informational only.
@@ -15130,6 +15150,17 @@ module Aws::EC2
     # fails with `InvalidGroup.InUse` in EC2-Classic or
     # `DependencyViolation` in EC2-VPC.
     #
+    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
+    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
+    # from EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud
+    # User Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
+    #
     # @option params [String] :group_id
     #   The ID of the security group. Required for a nondefault VPC.
     #
@@ -16824,9 +16855,16 @@ module Aws::EC2
     # * `vpc-max-elastic-ips`\: The maximum number of Elastic IP addresses
     #   that you can allocate for use with EC2-VPC.
     #
+    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
+    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
+    # from EC2-Classic to a VPC][2] in the *Amazon EC2 User Guide*.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-on-demand-instances.html#ec2-on-demand-instances-limits
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
     #
     # @option params [Array<String>] :attribute_names
     #   The account attribute names.
@@ -27513,10 +27551,18 @@ module Aws::EC2
     # and [Security groups for your VPC][2] in the *Amazon Virtual Private
     # Cloud User Guide*.
     #
+    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
+    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
+    # from EC2-Classic to a VPC][3] in the *Amazon Elastic Compute Cloud
+    # User Guide*.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html
     # [2]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html
+    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
     #
     # @option params [Array<Types::Filter>] :filters
     #   The filters. If using multiple filters for rules, the results include
@@ -34957,9 +35003,8 @@ module Aws::EC2
     #   The ID of the image.
     #
     # @option params [required, Types::ExportTaskS3LocationRequest] :s3_export_location
-    #   Information about the destination Amazon S3 bucket. The bucket must
-    #   exist and grant WRITE and READ\_ACP permissions to the Amazon Web
-    #   Services account vm-import-export@amazon.com.
+    #   The Amazon S3 bucket for the destination image. The destination bucket
+    #   must exist.
     #
     # @option params [String] :role_name
     #   The name of the role that grants VM Import/Export permission to export
@@ -47607,6 +47652,17 @@ module Aws::EC2
     # Rule changes are propagated to instances within the security group as
     # quickly as possible. However, a small delay might occur.
     #
+    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
+    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
+    # from EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud
+    # User Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
+    #
     # @option params [String] :cidr_ip
     #   The CIDR IP address range. You can't specify this parameter when
     #   specifying a source security group.
@@ -48119,7 +48175,8 @@ module Aws::EC2
     #   information, see [Burstable performance instances][2] in the *Amazon
     #   EC2 User Guide*.
     #
-    #   Default: `standard` (T2 instances) or `unlimited` (T3/T3a instances)
+    #   Default: `standard` (T2 instances) or `unlimited` (T3/T3a/T4g
+    #   instances)
     #
     #   For T3 instances with `host` tenancy, only `standard` is supported.
     #
@@ -50477,7 +50534,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.324.0'
+      context[:gem_version] = '1.325.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
