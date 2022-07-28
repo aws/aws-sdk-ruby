@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix typo in `RecursionDetection`, change amz to amzn in header and env name.
+
 3.131.5 (2022-07-28)
 ------------------
 
