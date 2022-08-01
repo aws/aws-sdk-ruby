@@ -1,11 +1,13 @@
 module Aws
   module Endpoints
+    # @api private
     class Provider
       def initialize(rule_set)
         @rule_set = rule_set
       end
 
       def resolve_endpoint(parameters)
+        obj = @rule_set.rules.find { |rules| rules.match?(parameters) }
       end
 
       # def initialize(options = {})

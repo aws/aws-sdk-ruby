@@ -14,6 +14,11 @@ module Aws
       attr_reader :argv
       attr_reader :assign
 
+      def match?(parameters)
+        # TODO -- call function / de-reference
+        false
+      end
+
       private
 
       def build_argv(argv_json)

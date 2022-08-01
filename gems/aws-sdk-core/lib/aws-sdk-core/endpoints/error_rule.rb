@@ -16,6 +16,10 @@ module Aws
       attr_reader :error
       attr_reader :documentation
 
+      def match?(parameters)
+        conditions.all? { |condition| condition.match?(parameters) }
+      end
+
       private
 
       def build_conditions(conditions_json)
