@@ -51,12 +51,10 @@ module Aws
       @config_enabled = options[:config_enabled]
       @credentials_path = options[:credentials_path] ||
                           determine_credentials_path
-      @credentials_path = File.expand_path(@credentials_path) if @credentials_path
       @parsed_credentials = {}
       load_credentials_file if loadable?(@credentials_path)
       if @config_enabled
         @config_path = options[:config_path] || determine_config_path
-        @config_path = File.expand_path(@config_path) if @config_path
         load_config_file if loadable?(@config_path)
       end
     end

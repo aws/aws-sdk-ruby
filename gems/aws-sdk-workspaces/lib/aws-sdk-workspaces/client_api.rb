@@ -77,8 +77,6 @@ module Aws::WorkSpaces
     CreateUpdatedWorkspaceImageResult = Shapes::StructureShape.new(name: 'CreateUpdatedWorkspaceImageResult')
     CreateWorkspaceBundleRequest = Shapes::StructureShape.new(name: 'CreateWorkspaceBundleRequest')
     CreateWorkspaceBundleResult = Shapes::StructureShape.new(name: 'CreateWorkspaceBundleResult')
-    CreateWorkspaceImageRequest = Shapes::StructureShape.new(name: 'CreateWorkspaceImageRequest')
-    CreateWorkspaceImageResult = Shapes::StructureShape.new(name: 'CreateWorkspaceImageResult')
     CreateWorkspacesRequest = Shapes::StructureShape.new(name: 'CreateWorkspacesRequest')
     CreateWorkspacesResult = Shapes::StructureShape.new(name: 'CreateWorkspacesResult')
     DedicatedTenancyCidrRangeList = Shapes::ListShape.new(name: 'DedicatedTenancyCidrRangeList')
@@ -467,22 +465,6 @@ module Aws::WorkSpaces
 
     CreateWorkspaceBundleResult.add_member(:workspace_bundle, Shapes::ShapeRef.new(shape: WorkspaceBundle, location_name: "WorkspaceBundle"))
     CreateWorkspaceBundleResult.struct_class = Types::CreateWorkspaceBundleResult
-
-    CreateWorkspaceImageRequest.add_member(:name, Shapes::ShapeRef.new(shape: WorkspaceImageName, required: true, location_name: "Name"))
-    CreateWorkspaceImageRequest.add_member(:description, Shapes::ShapeRef.new(shape: WorkspaceImageDescription, required: true, location_name: "Description"))
-    CreateWorkspaceImageRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location_name: "WorkspaceId"))
-    CreateWorkspaceImageRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateWorkspaceImageRequest.struct_class = Types::CreateWorkspaceImageRequest
-
-    CreateWorkspaceImageResult.add_member(:image_id, Shapes::ShapeRef.new(shape: WorkspaceImageId, location_name: "ImageId"))
-    CreateWorkspaceImageResult.add_member(:name, Shapes::ShapeRef.new(shape: WorkspaceImageName, location_name: "Name"))
-    CreateWorkspaceImageResult.add_member(:description, Shapes::ShapeRef.new(shape: WorkspaceImageDescription, location_name: "Description"))
-    CreateWorkspaceImageResult.add_member(:operating_system, Shapes::ShapeRef.new(shape: OperatingSystem, location_name: "OperatingSystem"))
-    CreateWorkspaceImageResult.add_member(:state, Shapes::ShapeRef.new(shape: WorkspaceImageState, location_name: "State"))
-    CreateWorkspaceImageResult.add_member(:required_tenancy, Shapes::ShapeRef.new(shape: WorkspaceImageRequiredTenancy, location_name: "RequiredTenancy"))
-    CreateWorkspaceImageResult.add_member(:created, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Created"))
-    CreateWorkspaceImageResult.add_member(:owner_account_id, Shapes::ShapeRef.new(shape: AwsAccount, location_name: "OwnerAccountId"))
-    CreateWorkspaceImageResult.struct_class = Types::CreateWorkspaceImageResult
 
     CreateWorkspacesRequest.add_member(:workspaces, Shapes::ShapeRef.new(shape: WorkspaceRequestList, required: true, location_name: "Workspaces"))
     CreateWorkspacesRequest.struct_class = Types::CreateWorkspacesRequest
@@ -1326,21 +1308,6 @@ module Aws::WorkSpaces
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-      end)
-
-      api.add_operation(:create_workspace_image, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "CreateWorkspaceImage"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: CreateWorkspaceImageRequest)
-        o.output = Shapes::ShapeRef.new(shape: CreateWorkspaceImageResult)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
       end)
 
       api.add_operation(:create_workspaces, Seahorse::Model::Operation.new.tap do |o|

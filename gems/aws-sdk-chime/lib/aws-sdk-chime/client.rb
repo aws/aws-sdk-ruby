@@ -6776,7 +6776,7 @@ module Aws::Chime
 
     # Adds a streaming configuration for the specified Amazon Chime Voice
     # Connector. The streaming configuration specifies whether media
-    # streaming is enabled for sending to Kinesis. It also sets the
+    # streaming is enabled for sending to Indonesians. It also sets the
     # retention period, in hours, for the Amazon Kinesis data.
     #
     # @option params [required, String] :voice_connector_id
@@ -8492,84 +8492,6 @@ module Aws::Chime
       req.send_request(options)
     end
 
-    # Validates an address to be used for 911 calls made with Amazon Chime
-    # Voice Connectors. You can use validated addresses in a Presence
-    # Information Data Format Location Object file that you include in SIP
-    # requests. That helps ensure that addresses are routed to the
-    # appropriate Public Safety Answering Point.
-    #
-    # @option params [required, String] :aws_account_id
-    #   The AWS account ID.
-    #
-    # @option params [required, String] :street_number
-    #   The address street number, such as `200` or `2121`.
-    #
-    # @option params [required, String] :street_info
-    #   The address street information, such as `8th Avenue`.
-    #
-    # @option params [required, String] :city
-    #   The address city, such as `Portland`.
-    #
-    # @option params [required, String] :state
-    #   The address state, such as `ME`.
-    #
-    # @option params [required, String] :country
-    #   The address country, such as `US`.
-    #
-    # @option params [required, String] :postal_code
-    #   The address postal code, such as `04352`.
-    #
-    # @return [Types::ValidateE911AddressResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::ValidateE911AddressResponse#validation_result #validation_result} => Integer
-    #   * {Types::ValidateE911AddressResponse#address_external_id #address_external_id} => String
-    #   * {Types::ValidateE911AddressResponse#address #address} => Types::Address
-    #   * {Types::ValidateE911AddressResponse#candidate_address_list #candidate_address_list} => Array&lt;Types::CandidateAddress&gt;
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.validate_e911_address({
-    #     aws_account_id: "NonEmptyString", # required
-    #     street_number: "SensitiveNonEmptyString", # required
-    #     street_info: "SensitiveNonEmptyString", # required
-    #     city: "SensitiveNonEmptyString", # required
-    #     state: "SensitiveNonEmptyString", # required
-    #     country: "SensitiveNonEmptyString", # required
-    #     postal_code: "SensitiveNonEmptyString", # required
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.validation_result #=> Integer
-    #   resp.address_external_id #=> String
-    #   resp.address.street_name #=> String
-    #   resp.address.street_suffix #=> String
-    #   resp.address.post_directional #=> String
-    #   resp.address.pre_directional #=> String
-    #   resp.address.street_number #=> String
-    #   resp.address.city #=> String
-    #   resp.address.state #=> String
-    #   resp.address.postal_code #=> String
-    #   resp.address.postal_code_plus_4 #=> String
-    #   resp.address.country #=> String
-    #   resp.candidate_address_list #=> Array
-    #   resp.candidate_address_list[0].street_info #=> String
-    #   resp.candidate_address_list[0].street_number #=> String
-    #   resp.candidate_address_list[0].city #=> String
-    #   resp.candidate_address_list[0].state #=> String
-    #   resp.candidate_address_list[0].postal_code #=> String
-    #   resp.candidate_address_list[0].postal_code_plus_4 #=> String
-    #   resp.candidate_address_list[0].country #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ValidateE911Address AWS API Documentation
-    #
-    # @overload validate_e911_address(params = {})
-    # @param [Hash] params ({})
-    def validate_e911_address(params = {}, options = {})
-      req = build_request(:validate_e911_address, params)
-      req.send_request(options)
-    end
-
     # @!endgroup
 
     # @param params ({})
@@ -8583,7 +8505,7 @@ module Aws::Chime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chime'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

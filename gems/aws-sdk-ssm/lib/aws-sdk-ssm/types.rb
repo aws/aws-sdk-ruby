@@ -1841,16 +1841,9 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] expires_after
-    #   If a command expires, it changes status to `DeliveryTimedOut` for
-    #   all invocations that have the status `InProgress`, `Pending`, or
-    #   `Delayed`. `ExpiresAfter` is calculated based on the total timeout
-    #   for the overall command. For more information, see [Understanding
-    #   command timeout values][1] in the *Amazon Web Services Systems
-    #   Manager User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html?icmpid=docs_ec2_console#monitor-about-status-timeouts
+    #   If this time is reached and the command hasn't already started
+    #   running, it won't run. Calculated based on the `ExpiresAfter` user
+    #   input provided as part of the `SendCommand` API operation.
     #   @return [Time]
     #
     # @!attribute [rw] parameters
@@ -1916,9 +1909,6 @@ module Aws::SSM
     #     exceeded the account limit for pending invocations. The system has
     #     canceled the command before running it on any managed node. This
     #     is a terminal state.
-    #
-    #   * Delayed: The system attempted to send the command to the managed
-    #     node but wasn't successful. The system retries again.
     #
     #
     #
@@ -2247,9 +2237,6 @@ module Aws::SSM
     #   * Terminated: The parent command exceeded its MaxErrors limit and
     #     subsequent command invocations were canceled by the system. This
     #     is a terminal state.
-    #
-    #   * Delayed: The system attempted to send the command to the managed
-    #     node but wasn't successful. The system retries again.
     #
     #
     #
@@ -3550,8 +3537,9 @@ module Aws::SSM
     #
     # @!attribute [rw] version_name
     #   An optional field specifying the version of the artifact you are
-    #   creating with the document. For example, `Release12.1`. This value
-    #   is unique across all versions of a document, and can't be changed.
+    #   creating with the document. For example, "Release 12, Update 6".
+    #   This value is unique across all versions of a document, and can't
+    #   be changed.
     #   @return [String]
     #
     # @!attribute [rw] document_type
@@ -10073,13 +10061,11 @@ module Aws::SSM
     #
     #   * `/ssm/documents/console/public-sharing-permission`
     #
-    #   * `/ssm/managed-instance/activation-tier`
-    #
-    #   * `/ssm/opsinsights/opscenter`
-    #
     #   * `/ssm/parameter-store/default-parameter-tier`
     #
     #   * `/ssm/parameter-store/high-throughput-enabled`
+    #
+    #   * `/ssm/managed-instance/activation-tier`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetServiceSettingRequest AWS API Documentation
@@ -17368,13 +17354,11 @@ module Aws::SSM
     #
     #   * `/ssm/documents/console/public-sharing-permission`
     #
-    #   * `/ssm/managed-instance/activation-tier`
-    #
-    #   * `/ssm/opsinsights/opscenter`
-    #
     #   * `/ssm/parameter-store/default-parameter-tier`
     #
     #   * `/ssm/parameter-store/high-throughput-enabled`
+    #
+    #   * `/ssm/managed-instance/activation-tier`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResetServiceSettingRequest AWS API Documentation
@@ -18751,7 +18735,7 @@ module Aws::SSM
     #
     # @!attribute [rw] critical_count
     #   The total number of resources or compliance items that have a
-    #   severity level of `Critical`. Critical severity is determined by the
+    #   severity level of critical. Critical severity is determined by the
     #   organization that published the compliance items.
     #   @return [Integer]
     #
@@ -19190,17 +19174,11 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] document_name
-    #   The name of the SSM document you want to use to define the type of
-    #   session, input parameters, or preferences for the session. For
-    #   example, `SSM-SessionManagerRunShell`. You can call the GetDocument
-    #   API to verify the document exists before attempting to start a
-    #   session. If no document name is provided, a shell to the managed
-    #   node is launched by default. For more information, see [Start a
-    #   session][1] in the *Amazon Web Services Systems Manager User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-sessions-start.html
+    #   The name of the SSM document to define the parameters and plugin
+    #   settings for the session. For example, `SSM-SessionManagerRunShell`.
+    #   You can call the GetDocument API to verify the document exists
+    #   before attempting to start a session. If no document name is
+    #   provided, a shell to the managed node is launched by default.
     #   @return [String]
     #
     # @!attribute [rw] reason
@@ -21688,18 +21666,23 @@ module Aws::SSM
     #
     #   * `/ssm/documents/console/public-sharing-permission`
     #
-    #   * `/ssm/managed-instance/activation-tier`
-    #
-    #   * `/ssm/opsinsights/opscenter`
-    #
     #   * `/ssm/parameter-store/default-parameter-tier`
     #
     #   * `/ssm/parameter-store/high-throughput-enabled`
+    #
+    #   * `/ssm/managed-instance/activation-tier`
     #   @return [String]
     #
     # @!attribute [rw] setting_value
     #   The new value to specify for the service setting. The following list
     #   specifies the available values for each setting.
+    #
+    #   * `/ssm/parameter-store/default-parameter-tier`\: `Standard`,
+    #     `Advanced`, `Intelligent-Tiering`
+    #
+    #   * `/ssm/parameter-store/high-throughput-enabled`\: `true` or `false`
+    #
+    #   * `/ssm/managed-instance/activation-tier`\: `true` or `false`
     #
     #   * `/ssm/automation/customer-script-log-destination`\: `CloudWatch`
     #
@@ -21710,13 +21693,6 @@ module Aws::SSM
     #     `Disable`
     #
     #   * `/ssm/managed-instance/activation-tier`\: `standard` or `advanced`
-    #
-    #   * `/ssm/opsinsights/opscenter`\: `Enabled` or `Disabled`
-    #
-    #   * `/ssm/parameter-store/default-parameter-tier`\: `Standard`,
-    #     `Advanced`, `Intelligent-Tiering`
-    #
-    #   * `/ssm/parameter-store/high-throughput-enabled`\: `true` or `false`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateServiceSettingRequest AWS API Documentation

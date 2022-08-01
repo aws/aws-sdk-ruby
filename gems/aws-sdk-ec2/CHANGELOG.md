@@ -1,16 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.326.0 (2022-07-29)
-------------------
-
-* Feature - Documentation updates for Amazon EC2.
-
-1.325.0 (2022-07-28)
-------------------
-
-* Feature - Documentation updates for VM Import/Export.
-
 1.324.0 (2022-07-22)
 ------------------
 

@@ -675,7 +675,6 @@ module Aws::ElasticsearchService
     EBSOptions.add_member(:volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "VolumeType"))
     EBSOptions.add_member(:volume_size, Shapes::ShapeRef.new(shape: IntegerClass, location_name: "VolumeSize"))
     EBSOptions.add_member(:iops, Shapes::ShapeRef.new(shape: IntegerClass, location_name: "Iops"))
-    EBSOptions.add_member(:throughput, Shapes::ShapeRef.new(shape: IntegerClass, location_name: "Throughput"))
     EBSOptions.struct_class = Types::EBSOptions
 
     EBSOptionsStatus.add_member(:options, Shapes::ShapeRef.new(shape: EBSOptions, required: true, location_name: "Options"))

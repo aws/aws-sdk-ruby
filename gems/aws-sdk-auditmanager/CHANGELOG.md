@@ -1,11 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.26.0 (2022-07-27)
-------------------
-
-* Feature - This release adds an exceeded quota exception to several APIs. We added a ServiceQuotaExceededException for the following operations: CreateAssessment, CreateControl, CreateAssessmentFramework, and UpdateAssessmentStatus.
-
 1.25.0 (2022-06-07)
 ------------------
 

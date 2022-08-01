@@ -636,7 +636,7 @@ module Aws::Shield
     #   * For an Amazon CloudFront distribution:
     #     `arn:aws:cloudfront::account-id:distribution/distribution-id `
     #
-    #   * For an Global Accelerator standard accelerator:
+    #   * For an Global Accelerator accelerator:
     #     `arn:aws:globalaccelerator::account-id:accelerator/accelerator-id
     #     `
     #
@@ -763,7 +763,7 @@ module Aws::Shield
     end
 
     # @!attribute [rw] attack
-    #   The attack that you requested.
+    #   The attack that is described.
     #   @return [Types::AttackDetail]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeAttackResponse AWS API Documentation
@@ -781,7 +781,7 @@ module Aws::Shield
     class DescribeAttackStatisticsRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] time_range
-    #   The time range of the attack.
+    #   The time range.
     #   @return [Types::TimeRange]
     #
     # @!attribute [rw] data_items
@@ -886,15 +886,17 @@ module Aws::Shield
     #       }
     #
     # @!attribute [rw] protection_id
-    #   The unique identifier (ID) for the Protection object to describe.
-    #   You must provide either the `ResourceArn` of the protected resource
-    #   or the `ProtectionID` of the protection, but not both.
+    #   The unique identifier (ID) for the Protection object that is
+    #   described. When submitting the `DescribeProtection` request you must
+    #   provide either the `ResourceArn` or the `ProtectionID`, but not
+    #   both.
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
-    #   The ARN (Amazon Resource Name) of the protected Amazon Web Services
-    #   resource. You must provide either the `ResourceArn` of the protected
-    #   resource or the `ProtectionID` of the protection, but not both.
+    #   The ARN (Amazon Resource Name) of the Amazon Web Services resource
+    #   for the Protection object that is described. When submitting the
+    #   `DescribeProtection` request you must provide either the
+    #   `ResourceArn` or the `ProtectionID`, but not both.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeProtectionRequest AWS API Documentation
@@ -907,7 +909,7 @@ module Aws::Shield
     end
 
     # @!attribute [rw] protection
-    #   The Protection that you requested.
+    #   The Protection object that is described.
     #   @return [Types::Protection]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeProtectionResponse AWS API Documentation
@@ -944,7 +946,7 @@ module Aws::Shield
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The ARN (Amazon Resource Name) of the protected resource.
+    #   The ARN (Amazon Resource Name) of the resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DisableApplicationLayerAutomaticResponseRequest AWS API Documentation
@@ -1082,7 +1084,7 @@ module Aws::Shield
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The ARN (Amazon Resource Name) of the protected resource.
+    #   The ARN (Amazon Resource Name) of the resource.
     #   @return [String]
     #
     # @!attribute [rw] action
@@ -1133,95 +1135,6 @@ module Aws::Shield
     #
     class GetSubscriptionStateResponse < Struct.new(
       :subscription_state)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Narrows the set of protections that the call retrieves. You can
-    # retrieve a single protection by providing its name or the ARN (Amazon
-    # Resource Name) of its protected resource. You can also retrieve all
-    # protections for a specific resource type. You can provide up to one
-    # criteria per filter type. Shield Advanced returns protections that
-    # exactly match all of the filter criteria that you provide.
-    #
-    # @note When making an API call, you may pass InclusionProtectionFilters
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arns: ["ResourceArn"],
-    #         protection_names: ["ProtectionName"],
-    #         resource_types: ["CLOUDFRONT_DISTRIBUTION"], # accepts CLOUDFRONT_DISTRIBUTION, ROUTE_53_HOSTED_ZONE, ELASTIC_IP_ALLOCATION, CLASSIC_LOAD_BALANCER, APPLICATION_LOAD_BALANCER, GLOBAL_ACCELERATOR
-    #       }
-    #
-    # @!attribute [rw] resource_arns
-    #   The ARN (Amazon Resource Name) of the resource whose protection you
-    #   want to retrieve.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] protection_names
-    #   The name of the protection that you want to retrieve.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] resource_types
-    #   The type of protected resource whose protections you want to
-    #   retrieve.
-    #   @return [Array<String>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/InclusionProtectionFilters AWS API Documentation
-    #
-    class InclusionProtectionFilters < Struct.new(
-      :resource_arns,
-      :protection_names,
-      :resource_types)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Narrows the set of protection groups that the call retrieves. You can
-    # retrieve a single protection group by its name and you can retrieve
-    # all protection groups that are configured with a specific pattern,
-    # aggregation, or resource type. You can provide up to one criteria per
-    # filter type. Shield Advanced returns the protection groups that
-    # exactly match all of the search criteria that you provide.
-    #
-    # @note When making an API call, you may pass InclusionProtectionGroupFilters
-    #   data as a hash:
-    #
-    #       {
-    #         protection_group_ids: ["ProtectionGroupId"],
-    #         patterns: ["ALL"], # accepts ALL, ARBITRARY, BY_RESOURCE_TYPE
-    #         resource_types: ["CLOUDFRONT_DISTRIBUTION"], # accepts CLOUDFRONT_DISTRIBUTION, ROUTE_53_HOSTED_ZONE, ELASTIC_IP_ALLOCATION, CLASSIC_LOAD_BALANCER, APPLICATION_LOAD_BALANCER, GLOBAL_ACCELERATOR
-    #         aggregations: ["SUM"], # accepts SUM, MEAN, MAX
-    #       }
-    #
-    # @!attribute [rw] protection_group_ids
-    #   The ID of the protection group that you want to retrieve.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] patterns
-    #   The pattern specification of the protection groups that you want to
-    #   retrieve.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] resource_types
-    #   The resource type configuration of the protection groups that you
-    #   want to retrieve. In the protection group configuration, you specify
-    #   the resource type when you set the group's `Pattern` to
-    #   `BY_RESOURCE_TYPE`.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] aggregations
-    #   The aggregation setting of the protection groups that you want to
-    #   retrieve.
-    #   @return [Array<String>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/InclusionProtectionGroupFilters AWS API Documentation
-    #
-    class InclusionProtectionGroupFilters < Struct.new(
-      :protection_group_ids,
-      :patterns,
-      :resource_types,
-      :aggregations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1473,12 +1386,6 @@ module Aws::Shield
     #       {
     #         next_token: "Token",
     #         max_results: 1,
-    #         inclusion_filters: {
-    #           protection_group_ids: ["ProtectionGroupId"],
-    #           patterns: ["ALL"], # accepts ALL, ARBITRARY, BY_RESOURCE_TYPE
-    #           resource_types: ["CLOUDFRONT_DISTRIBUTION"], # accepts CLOUDFRONT_DISTRIBUTION, ROUTE_53_HOSTED_ZONE, ELASTIC_IP_ALLOCATION, CLASSIC_LOAD_BALANCER, APPLICATION_LOAD_BALANCER, GLOBAL_ACCELERATOR
-    #           aggregations: ["SUM"], # accepts SUM, MEAN, MAX
-    #         },
     #       }
     #
     # @!attribute [rw] next_token
@@ -1510,21 +1417,11 @@ module Aws::Shield
     #   The default setting is 20.
     #   @return [Integer]
     #
-    # @!attribute [rw] inclusion_filters
-    #   Narrows the set of protection groups that the call retrieves. You
-    #   can retrieve a single protection group by its name and you can
-    #   retrieve all protection groups that are configured with specific
-    #   pattern or aggregation settings. You can provide up to one criteria
-    #   per filter type. Shield Advanced returns the protection groups that
-    #   exactly match all of the search criteria that you provide.
-    #   @return [Types::InclusionProtectionGroupFilters]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListProtectionGroupsRequest AWS API Documentation
     #
     class ListProtectionGroupsRequest < Struct.new(
       :next_token,
-      :max_results,
-      :inclusion_filters)
+      :max_results)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1564,11 +1461,6 @@ module Aws::Shield
     #       {
     #         next_token: "Token",
     #         max_results: 1,
-    #         inclusion_filters: {
-    #           resource_arns: ["ResourceArn"],
-    #           protection_names: ["ProtectionName"],
-    #           resource_types: ["CLOUDFRONT_DISTRIBUTION"], # accepts CLOUDFRONT_DISTRIBUTION, ROUTE_53_HOSTED_ZONE, ELASTIC_IP_ALLOCATION, CLASSIC_LOAD_BALANCER, APPLICATION_LOAD_BALANCER, GLOBAL_ACCELERATOR
-    #         },
     #       }
     #
     # @!attribute [rw] next_token
@@ -1600,22 +1492,11 @@ module Aws::Shield
     #   The default setting is 20.
     #   @return [Integer]
     #
-    # @!attribute [rw] inclusion_filters
-    #   Narrows the set of protections that the call retrieves. You can
-    #   retrieve a single protection by providing its name or the ARN
-    #   (Amazon Resource Name) of its protected resource. You can also
-    #   retrieve all protections for a specific resource type. You can
-    #   provide up to one criteria per filter type. Shield Advanced returns
-    #   protections that exactly match all of the filter criteria that you
-    #   provide.
-    #   @return [Types::InclusionProtectionFilters]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListProtectionsRequest AWS API Documentation
     #
     class ListProtectionsRequest < Struct.new(
       :next_token,
-      :max_results,
-      :inclusion_filters)
+      :max_results)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1797,7 +1678,7 @@ module Aws::Shield
       include Aws::Structure
     end
 
-    # The ARN of the role that you specified does not exist.
+    # The ARN of the role that you specifed does not exist.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1902,7 +1783,7 @@ module Aws::Shield
     # @!attribute [rw] pattern
     #   The criteria to use to choose the protected resources for inclusion
     #   in the group. You can include all resources that have protections,
-    #   provide a list of resource ARNs (Amazon Resource Names), or include
+    #   provide a list of resource Amazon Resource Names (ARNs), or include
     #   all resources of a specified resource type.
     #   @return [String]
     #
@@ -1914,7 +1795,7 @@ module Aws::Shield
     #   @return [String]
     #
     # @!attribute [rw] members
-    #   The ARNs (Amazon Resource Names) of the resources to include in the
+    #   The Amazon Resource Names (ARNs) of the resources to include in the
     #   protection group. You must set this when you set `Pattern` to
     #   `ARBITRARY` and you must not set it for any other `Pattern` setting.
     #   @return [Array<String>]

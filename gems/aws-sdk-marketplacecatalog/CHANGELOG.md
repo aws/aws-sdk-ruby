@@ -1,11 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.22.0 (2022-07-27)
-------------------
-
-* Feature - The SDK for the StartChangeSet API will now automatically set and use an idempotency token in the ClientRequestToken request parameter if the customer does not provide it.
-
 1.21.0 (2022-02-24)
 ------------------
 

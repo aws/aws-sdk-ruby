@@ -1,11 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.49.0 (2022-07-29)
-------------------
-
-* Feature - AWS Shield Advanced now supports filtering for ListProtections and ListProtectionGroups.
-
 1.48.0 (2022-02-24)
 ------------------
 

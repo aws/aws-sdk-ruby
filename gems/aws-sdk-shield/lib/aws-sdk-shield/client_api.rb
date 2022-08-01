@@ -95,8 +95,6 @@ module Aws::Shield
     HealthCheckArn = Shapes::StringShape.new(name: 'HealthCheckArn')
     HealthCheckId = Shapes::StringShape.new(name: 'HealthCheckId')
     HealthCheckIds = Shapes::ListShape.new(name: 'HealthCheckIds')
-    InclusionProtectionFilters = Shapes::StructureShape.new(name: 'InclusionProtectionFilters')
-    InclusionProtectionGroupFilters = Shapes::StructureShape.new(name: 'InclusionProtectionGroupFilters')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalErrorException = Shapes::StructureShape.new(name: 'InternalErrorException')
     InvalidOperationException = Shapes::StructureShape.new(name: 'InvalidOperationException')
@@ -130,29 +128,23 @@ module Aws::Shield
     PhoneNumber = Shapes::StringShape.new(name: 'PhoneNumber')
     ProactiveEngagementStatus = Shapes::StringShape.new(name: 'ProactiveEngagementStatus')
     ProtectedResourceType = Shapes::StringShape.new(name: 'ProtectedResourceType')
-    ProtectedResourceTypeFilters = Shapes::ListShape.new(name: 'ProtectedResourceTypeFilters')
     Protection = Shapes::StructureShape.new(name: 'Protection')
     ProtectionGroup = Shapes::StructureShape.new(name: 'ProtectionGroup')
     ProtectionGroupAggregation = Shapes::StringShape.new(name: 'ProtectionGroupAggregation')
-    ProtectionGroupAggregationFilters = Shapes::ListShape.new(name: 'ProtectionGroupAggregationFilters')
     ProtectionGroupArbitraryPatternLimits = Shapes::StructureShape.new(name: 'ProtectionGroupArbitraryPatternLimits')
     ProtectionGroupId = Shapes::StringShape.new(name: 'ProtectionGroupId')
-    ProtectionGroupIdFilters = Shapes::ListShape.new(name: 'ProtectionGroupIdFilters')
     ProtectionGroupLimits = Shapes::StructureShape.new(name: 'ProtectionGroupLimits')
     ProtectionGroupMembers = Shapes::ListShape.new(name: 'ProtectionGroupMembers')
     ProtectionGroupPattern = Shapes::StringShape.new(name: 'ProtectionGroupPattern')
-    ProtectionGroupPatternFilters = Shapes::ListShape.new(name: 'ProtectionGroupPatternFilters')
     ProtectionGroupPatternTypeLimits = Shapes::StructureShape.new(name: 'ProtectionGroupPatternTypeLimits')
     ProtectionGroups = Shapes::ListShape.new(name: 'ProtectionGroups')
     ProtectionId = Shapes::StringShape.new(name: 'ProtectionId')
     ProtectionLimits = Shapes::StructureShape.new(name: 'ProtectionLimits')
     ProtectionName = Shapes::StringShape.new(name: 'ProtectionName')
-    ProtectionNameFilters = Shapes::ListShape.new(name: 'ProtectionNameFilters')
     Protections = Shapes::ListShape.new(name: 'Protections')
     ResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsException')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceArnFilterList = Shapes::ListShape.new(name: 'ResourceArnFilterList')
-    ResourceArnFilters = Shapes::ListShape.new(name: 'ResourceArnFilters')
     ResourceArnList = Shapes::ListShape.new(name: 'ResourceArnList')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResponseAction = Shapes::StructureShape.new(name: 'ResponseAction')
@@ -406,17 +398,6 @@ module Aws::Shield
 
     HealthCheckIds.member = Shapes::ShapeRef.new(shape: HealthCheckId)
 
-    InclusionProtectionFilters.add_member(:resource_arns, Shapes::ShapeRef.new(shape: ResourceArnFilters, location_name: "ResourceArns"))
-    InclusionProtectionFilters.add_member(:protection_names, Shapes::ShapeRef.new(shape: ProtectionNameFilters, location_name: "ProtectionNames"))
-    InclusionProtectionFilters.add_member(:resource_types, Shapes::ShapeRef.new(shape: ProtectedResourceTypeFilters, location_name: "ResourceTypes"))
-    InclusionProtectionFilters.struct_class = Types::InclusionProtectionFilters
-
-    InclusionProtectionGroupFilters.add_member(:protection_group_ids, Shapes::ShapeRef.new(shape: ProtectionGroupIdFilters, location_name: "ProtectionGroupIds"))
-    InclusionProtectionGroupFilters.add_member(:patterns, Shapes::ShapeRef.new(shape: ProtectionGroupPatternFilters, location_name: "Patterns"))
-    InclusionProtectionGroupFilters.add_member(:resource_types, Shapes::ShapeRef.new(shape: ProtectedResourceTypeFilters, location_name: "ResourceTypes"))
-    InclusionProtectionGroupFilters.add_member(:aggregations, Shapes::ShapeRef.new(shape: ProtectionGroupAggregationFilters, location_name: "Aggregations"))
-    InclusionProtectionGroupFilters.struct_class = Types::InclusionProtectionGroupFilters
-
     InternalErrorException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     InternalErrorException.struct_class = Types::InternalErrorException
 
@@ -458,7 +439,6 @@ module Aws::Shield
 
     ListProtectionGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListProtectionGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    ListProtectionGroupsRequest.add_member(:inclusion_filters, Shapes::ShapeRef.new(shape: InclusionProtectionGroupFilters, location_name: "InclusionFilters"))
     ListProtectionGroupsRequest.struct_class = Types::ListProtectionGroupsRequest
 
     ListProtectionGroupsResponse.add_member(:protection_groups, Shapes::ShapeRef.new(shape: ProtectionGroups, required: true, location_name: "ProtectionGroups"))
@@ -467,7 +447,6 @@ module Aws::Shield
 
     ListProtectionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListProtectionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    ListProtectionsRequest.add_member(:inclusion_filters, Shapes::ShapeRef.new(shape: InclusionProtectionFilters, location_name: "InclusionFilters"))
     ListProtectionsRequest.struct_class = Types::ListProtectionsRequest
 
     ListProtectionsResponse.add_member(:protections, Shapes::ShapeRef.new(shape: Protections, location_name: "Protections"))
@@ -505,8 +484,6 @@ module Aws::Shield
     OptimisticLockException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     OptimisticLockException.struct_class = Types::OptimisticLockException
 
-    ProtectedResourceTypeFilters.member = Shapes::ShapeRef.new(shape: ProtectedResourceType)
-
     Protection.add_member(:id, Shapes::ShapeRef.new(shape: ProtectionId, location_name: "Id"))
     Protection.add_member(:name, Shapes::ShapeRef.new(shape: ProtectionName, location_name: "Name"))
     Protection.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ResourceArn"))
@@ -523,20 +500,14 @@ module Aws::Shield
     ProtectionGroup.add_member(:protection_group_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ProtectionGroupArn"))
     ProtectionGroup.struct_class = Types::ProtectionGroup
 
-    ProtectionGroupAggregationFilters.member = Shapes::ShapeRef.new(shape: ProtectionGroupAggregation)
-
     ProtectionGroupArbitraryPatternLimits.add_member(:max_members, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "MaxMembers"))
     ProtectionGroupArbitraryPatternLimits.struct_class = Types::ProtectionGroupArbitraryPatternLimits
-
-    ProtectionGroupIdFilters.member = Shapes::ShapeRef.new(shape: ProtectionGroupId)
 
     ProtectionGroupLimits.add_member(:max_protection_groups, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "MaxProtectionGroups"))
     ProtectionGroupLimits.add_member(:pattern_type_limits, Shapes::ShapeRef.new(shape: ProtectionGroupPatternTypeLimits, required: true, location_name: "PatternTypeLimits"))
     ProtectionGroupLimits.struct_class = Types::ProtectionGroupLimits
 
     ProtectionGroupMembers.member = Shapes::ShapeRef.new(shape: ResourceArn)
-
-    ProtectionGroupPatternFilters.member = Shapes::ShapeRef.new(shape: ProtectionGroupPattern)
 
     ProtectionGroupPatternTypeLimits.add_member(:arbitrary_pattern_limits, Shapes::ShapeRef.new(shape: ProtectionGroupArbitraryPatternLimits, required: true, location_name: "ArbitraryPatternLimits"))
     ProtectionGroupPatternTypeLimits.struct_class = Types::ProtectionGroupPatternTypeLimits
@@ -546,8 +517,6 @@ module Aws::Shield
     ProtectionLimits.add_member(:protected_resource_type_limits, Shapes::ShapeRef.new(shape: Limits, required: true, location_name: "ProtectedResourceTypeLimits"))
     ProtectionLimits.struct_class = Types::ProtectionLimits
 
-    ProtectionNameFilters.member = Shapes::ShapeRef.new(shape: ProtectionName)
-
     Protections.member = Shapes::ShapeRef.new(shape: Protection)
 
     ResourceAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
@@ -555,8 +524,6 @@ module Aws::Shield
     ResourceAlreadyExistsException.struct_class = Types::ResourceAlreadyExistsException
 
     ResourceArnFilterList.member = Shapes::ShapeRef.new(shape: ResourceArn)
-
-    ResourceArnFilters.member = Shapes::ShapeRef.new(shape: ResourceArn)
 
     ResourceArnList.member = Shapes::ShapeRef.new(shape: ResourceArn)
 

@@ -66,7 +66,6 @@ module Aws::ConfigService
     ComplianceByResources = Shapes::ListShape.new(name: 'ComplianceByResources')
     ComplianceContributorCount = Shapes::StructureShape.new(name: 'ComplianceContributorCount')
     ComplianceResourceTypes = Shapes::ListShape.new(name: 'ComplianceResourceTypes')
-    ComplianceScore = Shapes::StringShape.new(name: 'ComplianceScore')
     ComplianceSummariesByResourceType = Shapes::ListShape.new(name: 'ComplianceSummariesByResourceType')
     ComplianceSummary = Shapes::StructureShape.new(name: 'ComplianceSummary')
     ComplianceSummaryByResourceType = Shapes::StructureShape.new(name: 'ComplianceSummaryByResourceType')
@@ -105,9 +104,6 @@ module Aws::ConfigService
     ConformancePackArn = Shapes::StringShape.new(name: 'ConformancePackArn')
     ConformancePackComplianceFilters = Shapes::StructureShape.new(name: 'ConformancePackComplianceFilters')
     ConformancePackComplianceResourceIds = Shapes::ListShape.new(name: 'ConformancePackComplianceResourceIds')
-    ConformancePackComplianceScore = Shapes::StructureShape.new(name: 'ConformancePackComplianceScore')
-    ConformancePackComplianceScores = Shapes::ListShape.new(name: 'ConformancePackComplianceScores')
-    ConformancePackComplianceScoresFilters = Shapes::StructureShape.new(name: 'ConformancePackComplianceScoresFilters')
     ConformancePackComplianceSummary = Shapes::StructureShape.new(name: 'ConformancePackComplianceSummary')
     ConformancePackComplianceSummaryList = Shapes::ListShape.new(name: 'ConformancePackComplianceSummaryList')
     ConformancePackComplianceType = Shapes::StringShape.new(name: 'ConformancePackComplianceType')
@@ -120,7 +116,6 @@ module Aws::ConfigService
     ConformancePackInputParameter = Shapes::StructureShape.new(name: 'ConformancePackInputParameter')
     ConformancePackInputParameters = Shapes::ListShape.new(name: 'ConformancePackInputParameters')
     ConformancePackName = Shapes::StringShape.new(name: 'ConformancePackName')
-    ConformancePackNameFilter = Shapes::ListShape.new(name: 'ConformancePackNameFilter')
     ConformancePackNamesList = Shapes::ListShape.new(name: 'ConformancePackNamesList')
     ConformancePackNamesToSummarizeList = Shapes::ListShape.new(name: 'ConformancePackNamesToSummarizeList')
     ConformancePackRuleCompliance = Shapes::StructureShape.new(name: 'ConformancePackRuleCompliance')
@@ -298,14 +293,11 @@ module Aws::ConfigService
     InvalidSNSTopicARNException = Shapes::StructureShape.new(name: 'InvalidSNSTopicARNException')
     InvalidTimeRangeException = Shapes::StructureShape.new(name: 'InvalidTimeRangeException')
     LastDeliveryChannelDeleteFailedException = Shapes::StructureShape.new(name: 'LastDeliveryChannelDeleteFailedException')
-    LastUpdatedTime = Shapes::TimestampShape.new(name: 'LastUpdatedTime')
     LaterTime = Shapes::TimestampShape.new(name: 'LaterTime')
     Limit = Shapes::IntegerShape.new(name: 'Limit')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListAggregateDiscoveredResourcesRequest = Shapes::StructureShape.new(name: 'ListAggregateDiscoveredResourcesRequest')
     ListAggregateDiscoveredResourcesResponse = Shapes::StructureShape.new(name: 'ListAggregateDiscoveredResourcesResponse')
-    ListConformancePackComplianceScoresRequest = Shapes::StructureShape.new(name: 'ListConformancePackComplianceScoresRequest')
-    ListConformancePackComplianceScoresResponse = Shapes::StructureShape.new(name: 'ListConformancePackComplianceScoresResponse')
     ListDiscoveredResourcesRequest = Shapes::StructureShape.new(name: 'ListDiscoveredResourcesRequest')
     ListDiscoveredResourcesResponse = Shapes::StructureShape.new(name: 'ListDiscoveredResourcesResponse')
     ListStoredQueriesRequest = Shapes::StructureShape.new(name: 'ListStoredQueriesRequest')
@@ -481,8 +473,6 @@ module Aws::ConfigService
     SelectAggregateResourceConfigResponse = Shapes::StructureShape.new(name: 'SelectAggregateResourceConfigResponse')
     SelectResourceConfigRequest = Shapes::StructureShape.new(name: 'SelectResourceConfigRequest')
     SelectResourceConfigResponse = Shapes::StructureShape.new(name: 'SelectResourceConfigResponse')
-    SortBy = Shapes::StringShape.new(name: 'SortBy')
-    SortOrder = Shapes::StringShape.new(name: 'SortOrder')
     Source = Shapes::StructureShape.new(name: 'Source')
     SourceDetail = Shapes::StructureShape.new(name: 'SourceDetail')
     SourceDetails = Shapes::ListShape.new(name: 'SourceDetails')
@@ -819,16 +809,6 @@ module Aws::ConfigService
 
     ConformancePackComplianceResourceIds.member = Shapes::ShapeRef.new(shape: StringWithCharLimit256)
 
-    ConformancePackComplianceScore.add_member(:score, Shapes::ShapeRef.new(shape: ComplianceScore, location_name: "Score"))
-    ConformancePackComplianceScore.add_member(:conformance_pack_name, Shapes::ShapeRef.new(shape: ConformancePackName, location_name: "ConformancePackName"))
-    ConformancePackComplianceScore.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: LastUpdatedTime, location_name: "LastUpdatedTime"))
-    ConformancePackComplianceScore.struct_class = Types::ConformancePackComplianceScore
-
-    ConformancePackComplianceScores.member = Shapes::ShapeRef.new(shape: ConformancePackComplianceScore)
-
-    ConformancePackComplianceScoresFilters.add_member(:conformance_pack_names, Shapes::ShapeRef.new(shape: ConformancePackNameFilter, required: true, location_name: "ConformancePackNames"))
-    ConformancePackComplianceScoresFilters.struct_class = Types::ConformancePackComplianceScoresFilters
-
     ConformancePackComplianceSummary.add_member(:conformance_pack_name, Shapes::ShapeRef.new(shape: ConformancePackName, required: true, location_name: "ConformancePackName"))
     ConformancePackComplianceSummary.add_member(:conformance_pack_compliance_status, Shapes::ShapeRef.new(shape: ConformancePackComplianceType, required: true, location_name: "ConformancePackComplianceStatus"))
     ConformancePackComplianceSummary.struct_class = Types::ConformancePackComplianceSummary
@@ -867,8 +847,6 @@ module Aws::ConfigService
     ConformancePackInputParameter.struct_class = Types::ConformancePackInputParameter
 
     ConformancePackInputParameters.member = Shapes::ShapeRef.new(shape: ConformancePackInputParameter)
-
-    ConformancePackNameFilter.member = Shapes::ShapeRef.new(shape: ConformancePackName)
 
     ConformancePackNamesList.member = Shapes::ShapeRef.new(shape: ConformancePackName)
 
@@ -1488,17 +1466,6 @@ module Aws::ConfigService
     ListAggregateDiscoveredResourcesResponse.add_member(:resource_identifiers, Shapes::ShapeRef.new(shape: DiscoveredResourceIdentifierList, location_name: "ResourceIdentifiers"))
     ListAggregateDiscoveredResourcesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListAggregateDiscoveredResourcesResponse.struct_class = Types::ListAggregateDiscoveredResourcesResponse
-
-    ListConformancePackComplianceScoresRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ConformancePackComplianceScoresFilters, location_name: "Filters"))
-    ListConformancePackComplianceScoresRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
-    ListConformancePackComplianceScoresRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortBy, location_name: "SortBy"))
-    ListConformancePackComplianceScoresRequest.add_member(:limit, Shapes::ShapeRef.new(shape: PageSizeLimit, location_name: "Limit"))
-    ListConformancePackComplianceScoresRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListConformancePackComplianceScoresRequest.struct_class = Types::ListConformancePackComplianceScoresRequest
-
-    ListConformancePackComplianceScoresResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListConformancePackComplianceScoresResponse.add_member(:conformance_pack_compliance_scores, Shapes::ShapeRef.new(shape: ConformancePackComplianceScores, required: true, location_name: "ConformancePackComplianceScores"))
-    ListConformancePackComplianceScoresResponse.struct_class = Types::ListConformancePackComplianceScoresResponse
 
     ListDiscoveredResourcesRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "resourceType"))
     ListDiscoveredResourcesRequest.add_member(:resource_ids, Shapes::ShapeRef.new(shape: ResourceIdList, location_name: "resourceIds"))
@@ -2951,23 +2918,6 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
-        o[:pager] = Aws::Pager.new(
-          limit_key: "limit",
-          tokens: {
-            "next_token" => "next_token"
-          }
-        )
-      end)
-
-      api.add_operation(:list_conformance_pack_compliance_scores, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ListConformancePackComplianceScores"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: ListConformancePackComplianceScoresRequest)
-        o.output = Shapes::ShapeRef.new(shape: ListConformancePackComplianceScoresResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o[:pager] = Aws::Pager.new(
           limit_key: "limit",
           tokens: {

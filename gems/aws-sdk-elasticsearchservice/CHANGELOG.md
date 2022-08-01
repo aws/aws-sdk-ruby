@@ -1,11 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.66.0 (2022-07-28)
-------------------
-
-* Feature - This release adds support for gp3 EBS (Elastic Block Store) storage.
-
 1.65.0 (2022-02-24)
 ------------------
 

@@ -770,104 +770,6 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateWorkspaceImageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "WorkspaceImageName", # required
-    #         description: "WorkspaceImageDescription", # required
-    #         workspace_id: "WorkspaceId", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
-    # @!attribute [rw] name
-    #   The name of the new WorkSpace image.
-    #   @return [String]
-    #
-    # @!attribute [rw] description
-    #   The description of the new WorkSpace image.
-    #   @return [String]
-    #
-    # @!attribute [rw] workspace_id
-    #   The identifier of the source WorkSpace
-    #   @return [String]
-    #
-    # @!attribute [rw] tags
-    #   The tags that you want to add to the new WorkSpace image. To add
-    #   tags when you're creating the image, you must create an IAM policy
-    #   that grants your IAM user permission to use `workspaces:CreateTags`.
-    #   @return [Array<Types::Tag>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateWorkspaceImageRequest AWS API Documentation
-    #
-    class CreateWorkspaceImageRequest < Struct.new(
-      :name,
-      :description,
-      :workspace_id,
-      :tags)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] image_id
-    #   The identifier of the new WorkSpace image.
-    #   @return [String]
-    #
-    # @!attribute [rw] name
-    #   The name of the image.
-    #   @return [String]
-    #
-    # @!attribute [rw] description
-    #   The description of the image.
-    #   @return [String]
-    #
-    # @!attribute [rw] operating_system
-    #   The operating system that the image is running.
-    #   @return [Types::OperatingSystem]
-    #
-    # @!attribute [rw] state
-    #   The availability status of the image.
-    #   @return [String]
-    #
-    # @!attribute [rw] required_tenancy
-    #   Specifies whether the image is running on dedicated hardware. When
-    #   Bring Your Own License (BYOL) is enabled, this value is set to
-    #   DEDICATED. For more information, see [ Bring Your Own Windows
-    #   Desktop Images.][1]
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.htm
-    #   @return [String]
-    #
-    # @!attribute [rw] created
-    #   The date when the image was created.
-    #   @return [Time]
-    #
-    # @!attribute [rw] owner_account_id
-    #   The identifier of the AWS account that owns the image.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateWorkspaceImageResult AWS API Documentation
-    #
-    class CreateWorkspaceImageResult < Struct.new(
-      :image_id,
-      :name,
-      :description,
-      :operating_system,
-      :state,
-      :required_tenancy,
-      :created,
-      :owner_account_id)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # @note When making an API call, you may pass CreateWorkspacesRequest
     #   data as a hash:
     #
@@ -938,7 +840,7 @@ module Aws::WorkSpaces
     # include sensitive information.
     #
     # @!attribute [rw] logo_url
-    #   The logo. The only image format accepted is a binary data object
+    #   The logo URL. The only image format accepted is a binary data object
     #   that is converted from a `.png` file.
     #   @return [String]
     #
@@ -975,10 +877,7 @@ module Aws::WorkSpaces
     # @!attribute [rw] login_message
     #   The login message. Specified as a key value pair, in which the key
     #   is a locale and the value is the localized message for that locale.
-    #   The only key supported is `en_US`. The HTML tags supported include
-    #   the following: `a, b, blockquote, br, cite, code, dd, dl, dt, div,
-    #   em, i, li, ol, p, pre, q, small, span, strike, strong, sub, sup, u,
-    #   ul`.
+    #   The only key supported is `en_US`.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DefaultClientBrandingAttributes AWS API Documentation
@@ -1050,10 +949,7 @@ module Aws::WorkSpaces
     # @!attribute [rw] login_message
     #   The login message. Specified as a key value pair, in which the key
     #   is a locale and the value is the localized message for that locale.
-    #   The only key supported is `en_US`. The HTML tags supported include
-    #   the following: `a, b, blockquote, br, cite, code, dd, dl, dt, div,
-    #   em, i, li, ol, p, pre, q, small, span, strike, strong, sub, sup, u,
-    #   ul`.
+    #   The only key supported is `en_US`.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DefaultImportClientBrandingAttributes AWS API Documentation
@@ -2594,10 +2490,7 @@ module Aws::WorkSpaces
     # @!attribute [rw] login_message
     #   The login message. Specified as a key value pair, in which the key
     #   is a locale and the value is the localized message for that locale.
-    #   The only key supported is `en_US`. The HTML tags supported include
-    #   the following: `a, b, blockquote, br, cite, code, dd, dl, dt, div,
-    #   em, i, li, ol, p, pre, q, small, span, strike, strong, sub, sup, u,
-    #   ul`.
+    #   The only key supported is `en_US`.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/IosClientBrandingAttributes AWS API Documentation
@@ -2707,10 +2600,7 @@ module Aws::WorkSpaces
     # @!attribute [rw] login_message
     #   The login message. Specified as a key value pair, in which the key
     #   is a locale and the value is the localized message for that locale.
-    #   The only key supported is `en_US`. The HTML tags supported include
-    #   the following: `a, b, blockquote, br, cite, code, dd, dl, dt, div,
-    #   em, i, li, ol, p, pre, q, small, span, strike, strong, sub, sup, u,
-    #   ul`.
+    #   The only key supported is `en_US`.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/IosImportClientBrandingAttributes AWS API Documentation

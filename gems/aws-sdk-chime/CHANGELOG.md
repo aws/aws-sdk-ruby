@@ -1,11 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.68.0 (2022-07-27)
-------------------
-
-* Feature - Chime VoiceConnector will now support ValidateE911Address which will allow customers to prevalidate their addresses included in their SIP invites for emergency calling
-
 1.67.0 (2022-03-11)
 ------------------
 

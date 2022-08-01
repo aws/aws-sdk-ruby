@@ -3588,6 +3588,7 @@
       "members":{
         "Bucket":{
           "shape":"BucketName",
+          "contextParam":{"name":"Bucket"},
           "location":"uri",
           "locationName":"Bucket"
         },

@@ -667,9 +667,6 @@ module Aws::MarketplaceCatalog
     # @option params [String] :client_request_token
     #   A unique token to identify the request to ensure idempotency.
     #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.**
-    #
     # @return [Types::StartChangeSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartChangeSetResponse#change_set_id #change_set_id} => String
@@ -721,7 +718,7 @@ module Aws::MarketplaceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-marketplacecatalog'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

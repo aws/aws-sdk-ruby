@@ -1546,8 +1546,7 @@
         "EBSEnabled":{"shape":"Boolean"},
         "VolumeType":{"shape":"VolumeType"},
         "VolumeSize":{"shape":"IntegerClass"},
-        "Iops":{"shape":"IntegerClass"},
-        "Throughput":{"shape":"IntegerClass"}
+        "Iops":{"shape":"IntegerClass"}
       }
     },
     "EBSOptionsStatus":{
@@ -2860,8 +2859,7 @@
       "enum":[
         "standard",
         "gp2",
-        "io1",
-        "gp3"
+        "io1"
       ]
     },
     "ZoneAwarenessConfig":{

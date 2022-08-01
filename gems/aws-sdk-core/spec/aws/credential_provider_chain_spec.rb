@@ -11,8 +11,7 @@ module Aws
     end
 
     def with_shared_credentials(profile_name = SecureRandom.hex, credentials_file = nil)
-      path = File.expand_path(
-        File.join('HOME', '.aws', 'credentials'))
+      path = File.join('HOME', '.aws', 'credentials')
       creds = random_creds
       credentials_file ||= <<-CREDS
 [#{profile_name}]
@@ -20,9 +19,9 @@ aws_access_key_id = #{creds[:access_key_id]}
 aws_secret_access_key = #{creds[:secret_access_key]}
 aws_session_token = #{creds[:session_token]}
 CREDS
-      allow(Dir).to receive(:home).and_return('HOME')
       allow(File).to receive(:exist?).with(path).and_return(true)
       allow(File).to receive(:readable?).with(path).and_return(true)
+      allow(Dir).to receive(:home).and_return('HOME')
       allow(File).to receive(:read).with(path).and_return(credentials_file)
       creds.merge(profile_name: profile_name)
     end

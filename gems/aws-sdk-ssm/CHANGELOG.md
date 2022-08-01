@@ -1,11 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.138.0 (2022-07-27)
-------------------
-
-* Feature - Adding doc updates for OpsCenter support in Service Setting actions.
-
 1.137.0 (2022-05-04)
 ------------------
 

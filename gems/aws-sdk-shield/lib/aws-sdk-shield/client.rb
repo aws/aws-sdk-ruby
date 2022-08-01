@@ -372,8 +372,8 @@ module Aws::Shield
     #
     #
     #
-    # [1]: http://aws.amazon.com/premiumsupport/business-support/
-    # [2]: http://aws.amazon.com/premiumsupport/enterprise-support/
+    # [1]: https://docs.aws.amazon.com/premiumsupport/business-support/
+    # [2]: https://docs.aws.amazon.com/premiumsupport/enterprise-support/
     #
     # @option params [required, String] :log_bucket
     #   The Amazon S3 bucket that contains the logs that you want to share.
@@ -433,8 +433,8 @@ module Aws::Shield
     # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html
     # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html
     # [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html
-    # [5]: http://aws.amazon.com/premiumsupport/business-support/
-    # [6]: http://aws.amazon.com/premiumsupport/enterprise-support/
+    # [5]: https://docs.aws.amazon.com/premiumsupport/business-support/
+    # [6]: https://docs.aws.amazon.com/premiumsupport/enterprise-support/
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of the role the SRT will use to access
@@ -563,11 +563,9 @@ module Aws::Shield
     end
 
     # Enables Shield Advanced for a specific Amazon Web Services resource.
-    # The resource can be an Amazon CloudFront distribution, Amazon Route 53
-    # hosted zone, Global Accelerator standard accelerator, Elastic IP
-    # Address, Application Load Balancer, or a Classic Load Balancer. You
-    # can protect Amazon EC2 instances and Network Load Balancers by
-    # association with protected Amazon EC2 Elastic IP addresses.
+    # The resource can be an Amazon CloudFront distribution, Elastic Load
+    # Balancing load balancer, Global Accelerator accelerator, Elastic IP
+    # Address, or an Amazon Route 53 hosted zone.
     #
     # You can add protection to only a single resource with each
     # `CreateProtection` request. You can add protection to multiple
@@ -601,7 +599,7 @@ module Aws::Shield
     #   * For an Amazon CloudFront distribution:
     #     `arn:aws:cloudfront::account-id:distribution/distribution-id `
     #
-    #   * For an Global Accelerator standard accelerator:
+    #   * For an Global Accelerator accelerator:
     #     `arn:aws:globalaccelerator::account-id:accelerator/accelerator-id `
     #
     #   * For Amazon Route 53: `arn:aws:route53:::hostedzone/hosted-zone-id `
@@ -719,13 +717,7 @@ module Aws::Shield
 
     # Activates Shield Advanced for an account.
     #
-    # <note markdown="1"> For accounts that are members of an Organizations organization, Shield
-    # Advanced subscriptions are billed against the organization's payer
-    # account, regardless of whether the payer account itself is subscribed.
-    #
-    #  </note>
-    #
-    # When you initially create a subscription, your subscription is set to
+    # When you initally create a subscription, your subscription is set to
     # be automatically renewed at the end of the existing subscription
     # period. You can change this by submitting an `UpdateSubscription`
     # request.
@@ -960,14 +952,15 @@ module Aws::Shield
     # Lists the details of a Protection object.
     #
     # @option params [String] :protection_id
-    #   The unique identifier (ID) for the Protection object to describe. You
-    #   must provide either the `ResourceArn` of the protected resource or the
-    #   `ProtectionID` of the protection, but not both.
+    #   The unique identifier (ID) for the Protection object that is
+    #   described. When submitting the `DescribeProtection` request you must
+    #   provide either the `ResourceArn` or the `ProtectionID`, but not both.
     #
     # @option params [String] :resource_arn
-    #   The ARN (Amazon Resource Name) of the protected Amazon Web Services
-    #   resource. You must provide either the `ResourceArn` of the protected
-    #   resource or the `ProtectionID` of the protection, but not both.
+    #   The ARN (Amazon Resource Name) of the Amazon Web Services resource for
+    #   the Protection object that is described. When submitting the
+    #   `DescribeProtection` request you must provide either the `ResourceArn`
+    #   or the `ProtectionID`, but not both.
     #
     # @return [Types::DescribeProtectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1069,12 +1062,12 @@ module Aws::Shield
     end
 
     # Disable the Shield Advanced automatic application layer DDoS
-    # mitigation feature for the protected resource. This stops Shield
-    # Advanced from creating, verifying, and applying WAF rules for attacks
-    # that it detects for the resource.
+    # mitigation feature for the resource. This stops Shield Advanced from
+    # creating, verifying, and applying WAF rules for attacks that it
+    # detects for the resource.
     #
     # @option params [required, String] :resource_arn
-    #   The ARN (Amazon Resource Name) of the protected resource.
+    #   The ARN (Amazon Resource Name) of the resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1186,10 +1179,9 @@ module Aws::Shield
     end
 
     # Enable the Shield Advanced automatic application layer DDoS mitigation
-    # for the protected resource.
+    # for the resource.
     #
-    # <note markdown="1"> This feature is available for Amazon CloudFront distributions and
-    # Application Load Balancers only.
+    # <note markdown="1"> This feature is available for Amazon CloudFront distributions only.
     #
     #  </note>
     #
@@ -1200,21 +1192,19 @@ module Aws::Shield
     # mitigation works and the requirements for using it, see [Shield
     # Advanced automatic application layer DDoS mitigation][1].
     #
-    # <note markdown="1"> Don't use this action to make changes to automatic mitigation
+    # Don't use this action to make changes to automatic mitigation
     # settings when it's already enabled for a resource. Instead, use
     # UpdateApplicationLayerAutomaticResponse.
-    #
-    #  </note>
     #
     # To use this feature, you must associate a web ACL with the protected
     # resource. The web ACL must be created using the latest version of WAF
     # (v2). You can associate the web ACL through the Shield Advanced
     # console at [https://console.aws.amazon.com/wafv2/shieldv2#/][2]. For
-    # more information, see [Getting Started with Shield Advanced][3]. You
-    # can also associate the web ACL to the resource through the WAF console
-    # or the WAF API, but you must manage Shield Advanced automatic
-    # mitigation through Shield Advanced. For information about WAF, see
-    # [WAF Developer Guide][4].
+    # more information, see [Getting Started with Shield Advanced][3].
+    #
+    # You can also do this through the WAF console or the WAF API, but you
+    # must manage Shield Advanced automatic mitigation through Shield
+    # Advanced. For information about WAF, see [WAF Developer Guide][4].
     #
     #
     #
@@ -1224,7 +1214,7 @@ module Aws::Shield
     # [4]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :resource_arn
-    #   The ARN (Amazon Resource Name) of the protected resource.
+    #   The ARN (Amazon Resource Name) of the resource.
     #
     # @option params [required, Types::ResponseAction] :action
     #   Specifies the action setting that Shield Advanced should use in the
@@ -1390,9 +1380,7 @@ module Aws::Shield
       req.send_request(options)
     end
 
-    # Retrieves ProtectionGroup objects for the account. You can retrieve
-    # all protection groups or you can provide filtering criteria and
-    # retrieve just the subset of protection groups that match the criteria.
+    # Retrieves the ProtectionGroup objects for the account.
     #
     # @option params [String] :next_token
     #   When you request a list of objects from Shield Advanced, if the
@@ -1421,14 +1409,6 @@ module Aws::Shield
     #
     #   The default setting is 20.
     #
-    # @option params [Types::InclusionProtectionGroupFilters] :inclusion_filters
-    #   Narrows the set of protection groups that the call retrieves. You can
-    #   retrieve a single protection group by its name and you can retrieve
-    #   all protection groups that are configured with specific pattern or
-    #   aggregation settings. You can provide up to one criteria per filter
-    #   type. Shield Advanced returns the protection groups that exactly match
-    #   all of the search criteria that you provide.
-    #
     # @return [Types::ListProtectionGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListProtectionGroupsResponse#protection_groups #protection_groups} => Array&lt;Types::ProtectionGroup&gt;
@@ -1441,12 +1421,6 @@ module Aws::Shield
     #   resp = client.list_protection_groups({
     #     next_token: "Token",
     #     max_results: 1,
-    #     inclusion_filters: {
-    #       protection_group_ids: ["ProtectionGroupId"],
-    #       patterns: ["ALL"], # accepts ALL, ARBITRARY, BY_RESOURCE_TYPE
-    #       resource_types: ["CLOUDFRONT_DISTRIBUTION"], # accepts CLOUDFRONT_DISTRIBUTION, ROUTE_53_HOSTED_ZONE, ELASTIC_IP_ALLOCATION, CLASSIC_LOAD_BALANCER, APPLICATION_LOAD_BALANCER, GLOBAL_ACCELERATOR
-    #       aggregations: ["SUM"], # accepts SUM, MEAN, MAX
-    #     },
     #   })
     #
     # @example Response structure
@@ -1470,9 +1444,7 @@ module Aws::Shield
       req.send_request(options)
     end
 
-    # Retrieves Protection objects for the account. You can retrieve all
-    # protections or you can provide filtering criteria and retrieve just
-    # the subset of protections that match the criteria.
+    # Lists all Protection objects for the account.
     #
     # @option params [String] :next_token
     #   When you request a list of objects from Shield Advanced, if the
@@ -1501,14 +1473,6 @@ module Aws::Shield
     #
     #   The default setting is 20.
     #
-    # @option params [Types::InclusionProtectionFilters] :inclusion_filters
-    #   Narrows the set of protections that the call retrieves. You can
-    #   retrieve a single protection by providing its name or the ARN (Amazon
-    #   Resource Name) of its protected resource. You can also retrieve all
-    #   protections for a specific resource type. You can provide up to one
-    #   criteria per filter type. Shield Advanced returns protections that
-    #   exactly match all of the filter criteria that you provide.
-    #
     # @return [Types::ListProtectionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListProtectionsResponse#protections #protections} => Array&lt;Types::Protection&gt;
@@ -1521,11 +1485,6 @@ module Aws::Shield
     #   resp = client.list_protections({
     #     next_token: "Token",
     #     max_results: 1,
-    #     inclusion_filters: {
-    #       resource_arns: ["ResourceArn"],
-    #       protection_names: ["ProtectionName"],
-    #       resource_types: ["CLOUDFRONT_DISTRIBUTION"], # accepts CLOUDFRONT_DISTRIBUTION, ROUTE_53_HOSTED_ZONE, ELASTIC_IP_ALLOCATION, CLASSIC_LOAD_BALANCER, APPLICATION_LOAD_BALANCER, GLOBAL_ACCELERATOR
-    #     },
     #   })
     #
     # @example Response structure
@@ -1847,12 +1806,6 @@ module Aws::Shield
     # Updates the details of an existing subscription. Only enter values for
     # parameters you want to change. Empty parameters are not updated.
     #
-    # <note markdown="1"> For accounts that are members of an Organizations organization, Shield
-    # Advanced subscriptions are billed against the organization's payer
-    # account, regardless of whether the payer account itself is subscribed.
-    #
-    #  </note>
-    #
     # @option params [String] :auto_renew
     #   When you initally create a subscription, `AutoRenew` is set to
     #   `ENABLED`. If `ENABLED`, the subscription will be automatically
@@ -1891,7 +1844,7 @@ module Aws::Shield
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-shield'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

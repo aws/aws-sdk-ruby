@@ -28,20 +28,18 @@ module Aws
     # in stdlib Struct.
     #
     # @return [Hash]
-    def to_h(obj = self, options = {})
+    def to_h(obj = self)
       case obj
       when Struct
         obj.each_pair.with_object({}) do |(member, value), hash|
-          member = member.to_s if options[:as_json]
-          hash[member] = to_hash(value, options) unless value.nil?
+          hash[member] = to_hash(value) unless value.nil?
         end
       when Hash
         obj.each.with_object({}) do |(key, value), hash|
-          key = key.to_s if options[:as_json]
-          hash[key] = to_hash(value, options)
+          hash[key] = to_hash(value)
         end
       when Array
-        obj.collect { |value| to_hash(value, options) }
+        obj.collect { |value| to_hash(value) }
       else
         obj
       end

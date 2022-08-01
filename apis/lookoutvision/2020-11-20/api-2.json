@@ -408,33 +408,11 @@
       "error":{"httpStatusCode":403},
       "exception":true
     },
-    "Anomaly":{
-      "type":"structure",
-      "members":{
-        "Name":{"shape":"AnomalyName"},
-        "PixelAnomaly":{"shape":"PixelAnomaly"}
-      }
-    },
     "AnomalyClassFilter":{
       "type":"string",
       "max":10,
       "min":1,
       "pattern":"(normal|anomaly)"
-    },
-    "AnomalyList":{
-      "type":"list",
-      "member":{"shape":"Anomaly"}
-    },
-    "AnomalyMask":{
-      "type":"blob",
-      "max":5242880,
-      "min":1
-    },
-    "AnomalyName":{
-      "type":"string",
-      "max":256,
-      "min":1,
-      "pattern":"[a-zA-Z0-9]*"
     },
     "Boolean":{"type":"boolean"},
     "ClientToken":{
@@ -442,12 +420,6 @@
       "max":64,
       "min":1,
       "pattern":"^[a-zA-Z0-9-]+$"
-    },
-    "Color":{
-      "type":"string",
-      "max":7,
-      "min":7,
-      "pattern":"\\#[a-zA-Z0-9]{6}"
     },
     "CompilerOptions":{
       "type":"string",
@@ -874,9 +846,7 @@
       "members":{
         "Source":{"shape":"ImageSource"},
         "IsAnomalous":{"shape":"Boolean"},
-        "Confidence":{"shape":"Float"},
-        "Anomalies":{"shape":"AnomalyList"},
-        "AnomalyMask":{"shape":"AnomalyMask"}
+        "Confidence":{"shape":"Float"}
       }
     },
     "ExceptionString":{"type":"string"},
@@ -1301,13 +1271,6 @@
       "max":2048,
       "pattern":"^[a-zA-Z0-9\\/\\+\\=]{0,2048}$"
     },
-    "PixelAnomaly":{
-      "type":"structure",
-      "members":{
-        "TotalPercentageArea":{"shape":"Float"},
-        "Color":{"shape":"Color"}
-      }
-    },
     "ProjectArn":{"type":"string"},
     "ProjectDescription":{
       "type":"structure",
@@ -1585,7 +1548,8 @@
       "type":"structure",
       "required":[
         "Os",
-        "Arch"
+        "Arch",
+        "Accelerator"
       ],
       "members":{
         "Os":{"shape":"TargetPlatformOs"},

@@ -15,8 +15,6 @@ module Aws::GlobalAccelerator
 
     Accelerator = Shapes::StructureShape.new(name: 'Accelerator')
     AcceleratorAttributes = Shapes::StructureShape.new(name: 'AcceleratorAttributes')
-    AcceleratorEvent = Shapes::StructureShape.new(name: 'AcceleratorEvent')
-    AcceleratorEvents = Shapes::ListShape.new(name: 'AcceleratorEvents')
     AcceleratorNotDisabledException = Shapes::StructureShape.new(name: 'AcceleratorNotDisabledException')
     AcceleratorNotFoundException = Shapes::StructureShape.new(name: 'AcceleratorNotFoundException')
     AcceleratorStatus = Shapes::StringShape.new(name: 'AcceleratorStatus')
@@ -125,7 +123,6 @@ module Aws::GlobalAccelerator
     InvalidNextTokenException = Shapes::StructureShape.new(name: 'InvalidNextTokenException')
     InvalidPortRangeException = Shapes::StructureShape.new(name: 'InvalidPortRangeException')
     IpAddress = Shapes::StringShape.new(name: 'IpAddress')
-    IpAddressFamily = Shapes::StringShape.new(name: 'IpAddressFamily')
     IpAddressType = Shapes::StringShape.new(name: 'IpAddressType')
     IpAddresses = Shapes::ListShape.new(name: 'IpAddresses')
     IpSet = Shapes::StructureShape.new(name: 'IpSet')
@@ -209,20 +206,12 @@ module Aws::GlobalAccelerator
     Accelerator.add_member(:status, Shapes::ShapeRef.new(shape: AcceleratorStatus, location_name: "Status"))
     Accelerator.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
     Accelerator.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
-    Accelerator.add_member(:dual_stack_dns_name, Shapes::ShapeRef.new(shape: GenericString, location_name: "DualStackDnsName"))
-    Accelerator.add_member(:events, Shapes::ShapeRef.new(shape: AcceleratorEvents, location_name: "Events"))
     Accelerator.struct_class = Types::Accelerator
 
     AcceleratorAttributes.add_member(:flow_logs_enabled, Shapes::ShapeRef.new(shape: GenericBoolean, location_name: "FlowLogsEnabled"))
     AcceleratorAttributes.add_member(:flow_logs_s3_bucket, Shapes::ShapeRef.new(shape: GenericString, location_name: "FlowLogsS3Bucket"))
     AcceleratorAttributes.add_member(:flow_logs_s3_prefix, Shapes::ShapeRef.new(shape: GenericString, location_name: "FlowLogsS3Prefix"))
     AcceleratorAttributes.struct_class = Types::AcceleratorAttributes
-
-    AcceleratorEvent.add_member(:message, Shapes::ShapeRef.new(shape: GenericString, location_name: "Message"))
-    AcceleratorEvent.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
-    AcceleratorEvent.struct_class = Types::AcceleratorEvent
-
-    AcceleratorEvents.member = Shapes::ShapeRef.new(shape: AcceleratorEvent)
 
     AcceleratorNotDisabledException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     AcceleratorNotDisabledException.struct_class = Types::AcceleratorNotDisabledException
@@ -564,9 +553,8 @@ module Aws::GlobalAccelerator
 
     IpAddresses.member = Shapes::ShapeRef.new(shape: IpAddress)
 
-    IpSet.add_member(:ip_family, Shapes::ShapeRef.new(shape: GenericString, deprecated: true, location_name: "IpFamily", metadata: {"deprecatedMessage"=>"IpFamily has been replaced by IpAddressFamily"}))
+    IpSet.add_member(:ip_family, Shapes::ShapeRef.new(shape: GenericString, location_name: "IpFamily"))
     IpSet.add_member(:ip_addresses, Shapes::ShapeRef.new(shape: IpAddresses, location_name: "IpAddresses"))
-    IpSet.add_member(:ip_address_family, Shapes::ShapeRef.new(shape: IpAddressFamily, location_name: "IpAddressFamily"))
     IpSet.struct_class = Types::IpSet
 
     IpSets.member = Shapes::ShapeRef.new(shape: IpSet)
@@ -857,7 +845,6 @@ module Aws::GlobalAccelerator
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: AllowCustomRoutingTrafficRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: EndpointGroupNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
       end)
@@ -1020,7 +1007,6 @@ module Aws::GlobalAccelerator
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DenyCustomRoutingTrafficRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: EndpointGroupNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
       end)
@@ -1354,7 +1340,6 @@ module Aws::GlobalAccelerator
         o.input = Shapes::ShapeRef.new(shape: UpdateAcceleratorRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateAcceleratorResponse)
         o.errors << Shapes::ShapeRef.new(shape: AcceleratorNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
       end)

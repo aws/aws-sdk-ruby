@@ -333,7 +333,7 @@ module Aws::MarketplaceCatalog
     #   @return [String]
     #
     # @!attribute [rw] entity_arn
-    #   The ARN associated to the unique identifier for the entity
+    #   The ARN associated to the unique identifier for the change set
     #   referenced in this request.
     #   @return [String]
     #
@@ -789,9 +789,6 @@ module Aws::MarketplaceCatalog
     #
     # @!attribute [rw] client_request_token
     #   A unique token to identify the request to ensure idempotency.
-    #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/StartChangeSetRequest AWS API Documentation
