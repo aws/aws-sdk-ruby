@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.81.0 (2022-08-01)
+------------------
+
+* Feature - Documentation update for PutConfigRule and PutOrganizationConfigRule
+
 1.80.0 (2022-07-27)
 ------------------
 

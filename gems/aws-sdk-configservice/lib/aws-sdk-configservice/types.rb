@@ -877,13 +877,25 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # An Config rule represents an Lambda function that you create for a
-    # custom rule or a predefined function for an Config managed rule. The
-    # function evaluates configuration items to assess whether your Amazon
-    # Web Services resources comply with your desired configurations. This
-    # function can run when Config detects a configuration change to an
-    # Amazon Web Services resource and at a periodic frequency that you
-    # choose (for example, every 24 hours).
+    # Config rules evaluate the configuration settings of your Amazon Web
+    # Services resources. A rule can run when Config detects a configuration
+    # change to an Amazon Web Services resource or at a periodic frequency
+    # that you choose (for example, every 24 hours). There are two types of
+    # rules: Config Managed Rules and Config Custom Rules. Managed rules are
+    # predefined, customizable rules created by Config. For a list of
+    # managed rules, see [List of Config Managed Rules][1].
+    #
+    # Custom rules are rules that you can create using either Guard or
+    # Lambda functions. Guard ([Guard GitHub Repository][2]) is a
+    # policy-as-code language that allows you to write policies that are
+    # enforced by Config Custom Policy rules. Lambda uses custom code that
+    # you upload to evaluate a custom rule. It is invoked by events that are
+    # published to it by an event source, which Config invokes when the
+    # custom rule is initiated.
+    #
+    # For more information about developing and using Config rules, see
+    # [Evaluating Amazon Web Services resource Configurations with
+    # Config][3] in the *Config Developer Guide*.
     #
     # <note markdown="1"> You can use the Amazon Web Services CLI and Amazon Web Services SDKs
     # if you want to create a rule that triggers evaluations for your
@@ -892,13 +904,11 @@ module Aws::ConfigService
     #
     #  </note>
     #
-    # For more information about developing and using Config rules, see
-    # [Evaluating Amazon Web Services resource Configurations with
-    # Config][1] in the *Config Developer Guide*.
     #
     #
-    #
-    # [1]: https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html
+    # [1]: https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html
+    # [2]: https://github.com/aws-cloudformation/cloudformation-guard
+    # [3]: https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html
     #
     # @note When making an API call, you may pass ConfigRule
     #   data as a hash:
@@ -968,9 +978,11 @@ module Aws::ConfigService
     #   @return [Types::Scope]
     #
     # @!attribute [rw] source
-    #   Provides the rule owner (Amazon Web Services or customer), the rule
-    #   identifier, and the notifications that cause the function to
-    #   evaluate your Amazon Web Services resources.
+    #   Provides the rule owner (`Amazon Web Services` for managed rules,
+    #   `CUSTOM_POLICY` for Custom Policy rules, and `CUSTOM_LAMBDA` for
+    #   Custom Lambda rules), the rule identifier, and the notifications
+    #   that cause the function to evaluate your Amazon Web Services
+    #   resources.
     #   @return [Types::Source]
     #
     # @!attribute [rw] input_parameters
@@ -1018,7 +1030,7 @@ module Aws::ConfigService
     # @!attribute [rw] created_by
     #   Service principal name of the service that created the rule.
     #
-    #   <note markdown="1"> The field is populated only if the service linked rule is created by
+    #   <note markdown="1"> The field is populated only if the service-linked rule is created by
     #   a service. The field is empty if you create your own rule.
     #
     #    </note>
@@ -1631,11 +1643,13 @@ module Aws::ConfigService
     # number of total possible rule-resource combinations in the conformance
     # pack. This metric provides you with a high-level view of the
     # compliance state of your conformance packs, and can be used to
-    # identify, investigate, and understand compliance deviations in your
+    # identify, investigate, and understand the level of compliance in your
     # conformance packs.
     #
     # @!attribute [rw] score
-    #   Compliance score for the conformance pack.
+    #   Compliance score for the conformance pack. Conformance packs with no
+    #   evaluation results will have a compliance score of
+    #   `INSUFFICIENT_DATA`.
     #   @return [String]
     #
     # @!attribute [rw] conformance_pack_name
@@ -1668,8 +1682,11 @@ module Aws::ConfigService
     #       }
     #
     # @!attribute [rw] conformance_pack_names
-    #   The name of a conformance pack whose score should be included in the
-    #   compliance score result.
+    #   The names of the conformance packs whose compliance scores you want
+    #   to include in the conformance pack compliance score result set. You
+    #   can include up to 25 conformance packs in the `ConformancePackNames`
+    #   array of strings, each with a character limit of 256 characters for
+    #   the conformance pack name.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConformancePackComplianceScoresFilters AWS API Documentation
@@ -2456,7 +2473,7 @@ module Aws::ConfigService
     #   If you specify a bucket that belongs to another Amazon Web Services
     #   account, that bucket must have policies that grant access
     #   permissions to Config. For more information, see [Permissions for
-    #   the Amazon S3 Bucket][1] in the Config Developer Guide.
+    #   the Amazon S3 Bucket][1] in the *Config Developer Guide*.
     #
     #
     #
@@ -2480,7 +2497,7 @@ module Aws::ConfigService
     #   If you choose a topic from another account, the topic must have
     #   policies that grant access permissions to Config. For more
     #   information, see [Permissions for the Amazon SNS Topic][1] in the
-    #   Config Developer Guide.
+    #   *Config Developer Guide*.
     #
     #
     #
@@ -5240,13 +5257,13 @@ module Aws::ConfigService
     #
     # * For PutOrganizationConfigRule, organization Config rule cannot be
     #   created because you do not have permissions to call IAM `GetRole`
-    #   action or create a service linked role.
+    #   action or create a service-linked role.
     #
     # * For PutConformancePack and PutOrganizationConformancePack, a
     #   conformance pack cannot be created because you do not have
     #   permissions:
     #
-    #   * To call IAM `GetRole` action or create a service linked role.
+    #   * To call IAM `GetRole` action or create a service-linked role.
     #
     #   * To read Amazon S3 bucket.
     #
@@ -5446,11 +5463,20 @@ module Aws::ConfigService
     # @!attribute [rw] sort_order
     #   Determines the order in which conformance pack compliance scores are
     #   sorted. Either in ascending or descending order.
+    #
+    #   Conformance packs with a compliance score of `INSUFFICIENT_DATA`
+    #   will be first when sorting by ascending order and last when sorting
+    #   by descending order.
     #   @return [String]
     #
     # @!attribute [rw] sort_by
     #   Sorts your conformance pack compliance scores in either ascending or
     #   descending order, depending on `SortOrder`.
+    #
+    #   By default, conformance pack compliance scores are sorted in
+    #   ascending order by compliance score and alphabetically by name of
+    #   the conformance pack if there is more than one conformance pack with
+    #   the same compliance score.
     #   @return [String]
     #
     # @!attribute [rw] limit
@@ -5482,7 +5508,7 @@ module Aws::ConfigService
     #   @return [String]
     #
     # @!attribute [rw] conformance_pack_compliance_scores
-    #   A list of `ConformancePackComplianceScore` objects
+    #   A list of `ConformancePackComplianceScore` objects.
     #   @return [Array<Types::ConformancePackComplianceScore>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ListConformancePackComplianceScoresResponse AWS API Documentation
@@ -7283,11 +7309,21 @@ module Aws::ConfigService
     #   @return [String]
     #
     # @!attribute [rw] organization_managed_rule_metadata
-    #   An `OrganizationManagedRuleMetadata` object.
+    #   An `OrganizationManagedRuleMetadata` object. This object specifies
+    #   organization managed rule metadata such as resource type and ID of
+    #   Amazon Web Services resource along with the rule identifier. It also
+    #   provides the frequency with which you want Config to run evaluations
+    #   for the rule if the trigger type is periodic.
     #   @return [Types::OrganizationManagedRuleMetadata]
     #
     # @!attribute [rw] organization_custom_rule_metadata
-    #   An `OrganizationCustomRuleMetadata` object.
+    #   An `OrganizationCustomRuleMetadata` object. This object specifies
+    #   organization custom rule metadata such as resource type, resource ID
+    #   of Amazon Web Services resource, Lambda function ARN, and
+    #   organization trigger types that trigger Config to evaluate your
+    #   Amazon Web Services resources against a rule. It also provides the
+    #   frequency with which you want Config to run evaluations for the rule
+    #   if the trigger type is periodic.
     #   @return [Types::OrganizationCustomRuleMetadata]
     #
     # @!attribute [rw] excluded_accounts
@@ -7296,12 +7332,13 @@ module Aws::ConfigService
     #   @return [Array<String>]
     #
     # @!attribute [rw] organization_custom_policy_rule_metadata
-    #   An object that specifies metadata for your organization's Config
-    #   Custom Policy rule. The metadata includes the runtime system in use,
-    #   which accounts have debug logging enabled, and other custom rule
-    #   metadata, such as resource type, resource ID of Amazon Web Services
-    #   resource, and organization trigger types that initiate Config to
-    #   evaluate Amazon Web Services resources against a rule.
+    #   An `OrganizationCustomPolicyRuleMetadata` object. This object
+    #   specifies metadata for your organization's Config Custom Policy
+    #   rule. The metadata includes the runtime system in use, which
+    #   accounts have debug logging enabled, and other custom rule metadata,
+    #   such as resource type, resource ID of Amazon Web Services resource,
+    #   and organization trigger types that initiate Config to evaluate
+    #   Amazon Web Services resources against a rule.
     #   @return [Types::OrganizationCustomPolicyRuleMetadata]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutOrganizationConfigRuleRequest AWS API Documentation
@@ -7951,7 +7988,7 @@ module Aws::ConfigService
     #   @return [String]
     #
     # @!attribute [rw] created_by_service
-    #   Name of the service that owns the service linked rule, if
+    #   Name of the service that owns the service-linked rule, if
     #   applicable.
     #   @return [String]
     #
@@ -8578,9 +8615,11 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # Provides the CustomPolicyDetails, the rule owner (Amazon Web Services
-    # or customer), the rule identifier, and the events that cause the
-    # evaluation of your Amazon Web Services resources.
+    # Provides the CustomPolicyDetails, the rule owner (`Amazon Web
+    # Services` for managed rules, `CUSTOM_POLICY` for Custom Policy rules,
+    # and `CUSTOM_LAMBDA` for Custom Lambda rules), the rule identifier, and
+    # the events that cause the evaluation of your Amazon Web Services
+    # resources.
     #
     # @note When making an API call, you may pass Source
     #   data as a hash:
@@ -8608,11 +8647,11 @@ module Aws::ConfigService
     #
     #   Config Managed Rules are predefined rules owned by Amazon Web
     #   Services. For more information, see [Config Managed Rules][1] in the
-    #   Config developer guide.
+    #   *Config developer guide*.
     #
     #   Config Custom Rules are rules that you can develop either with Guard
     #   (`CUSTOM_POLICY`) or Lambda (`CUSTOM_LAMBDA`). For more information,
-    #   see [Config Custom Rules ][2] in the Config developer guide.
+    #   see [Config Custom Rules ][2] in the *Config developer guide*.
     #
     #
     #

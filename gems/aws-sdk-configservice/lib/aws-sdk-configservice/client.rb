@@ -3636,7 +3636,12 @@ module Aws::ConfigService
     # possible rule-resource combinations in the conformance pack. This
     # metric provides you with a high-level view of the compliance state of
     # your conformance packs, and can be used to identify, investigate, and
-    # understand compliance deviations in your conformance packs.
+    # understand the level of compliance in your conformance packs.
+    #
+    # <note markdown="1"> Conformance packs with no evaluation results will have a compliance
+    # score of `INSUFFICIENT_DATA`.
+    #
+    #  </note>
     #
     # @option params [Types::ConformancePackComplianceScoresFilters] :filters
     #   Filters the results based on the
@@ -3646,9 +3651,18 @@ module Aws::ConfigService
     #   Determines the order in which conformance pack compliance scores are
     #   sorted. Either in ascending or descending order.
     #
+    #   Conformance packs with a compliance score of `INSUFFICIENT_DATA` will
+    #   be first when sorting by ascending order and last when sorting by
+    #   descending order.
+    #
     # @option params [String] :sort_by
     #   Sorts your conformance pack compliance scores in either ascending or
     #   descending order, depending on `SortOrder`.
+    #
+    #   By default, conformance pack compliance scores are sorted in ascending
+    #   order by compliance score and alphabetically by name of the
+    #   conformance pack if there is more than one conformance pack with the
+    #   same compliance score.
     #
     # @option params [Integer] :limit
     #   The maximum number of conformance pack compliance scores returned on
@@ -3909,24 +3923,31 @@ module Aws::ConfigService
       req.send_request(options)
     end
 
-    # Adds or updates an Config rule for evaluating whether your Amazon Web
-    # Services resources comply with your desired configurations.
+    # Adds or updates an Config rule to evaluate if your Amazon Web Services
+    # resources comply with your desired configurations. For information on
+    # how many Config rules you can have per account, see [ **Service
+    # Limits** ][1] in the *Config Developer Guide*.
     #
-    # You can use this action for Config custom rules and Config managed
-    # rules. A Config custom rule is a rule that you develop and maintain.
-    # An Config managed rule is a customizable, predefined rule that Config
-    # provides.
+    # There are two types of rules: Config Custom Rules and Config Managed
+    # Rules. You can use `PutConfigRule` to create both Config custom rules
+    # and Config managed rules.
     #
-    # If you are adding a new Config custom rule, you must first create the
-    # Lambda function that the rule invokes to evaluate your resources. When
-    # you use the `PutConfigRule` action to add the rule to Config, you must
-    # specify the Amazon Resource Name (ARN) that Lambda assigns to the
-    # function. Specify the ARN for the `SourceIdentifier` key. This key is
-    # part of the `Source` object, which is part of the `ConfigRule` object.
+    # Custom rules are rules that you can create using either Guard or
+    # Lambda functions. Guard ([Guard GitHub Repository][2]) is a
+    # policy-as-code language that allows you to write policies that are
+    # enforced by Config Custom Policy rules. Lambda uses custom code that
+    # you upload to evaluate a custom rule. If you are adding a new Custom
+    # Lambda rule, you first need to create an Lambda function that the rule
+    # invokes to evaluate your resources. When you use `PutConfigRule` to
+    # add a Custom Lambda rule to Config, you must specify the Amazon
+    # Resource Name (ARN) that Lambda assigns to the function. You specify
+    # the ARN in the `SourceIdentifier` key. This key is part of the
+    # `Source` object, which is part of the `ConfigRule` object.
     #
-    # If you are adding an Config managed rule, specify the rule's
-    # identifier for the `SourceIdentifier` key. To reference Config managed
-    # rule identifiers, see [About Config managed rules][1].
+    # Managed rules are predefined, customizable rules created by Config.
+    # For a list of managed rules, see [List of Config Managed Rules][3]. If
+    # you are adding an Config managed rule, you must specify the rule's
+    # identifier for the `SourceIdentifier` key.
     #
     # For any new rule that you add, specify the `ConfigRuleName` in the
     # `ConfigRule` object. Do not specify the `ConfigRuleArn` or the
@@ -3936,18 +3957,16 @@ module Aws::ConfigService
     # the rule by `ConfigRuleName`, `ConfigRuleId`, or `ConfigRuleArn` in
     # the `ConfigRule` data type that you use in this request.
     #
-    # For information on how many Config rules you can have per account, see
-    # [ **Service Limits** ][2] in the Config Developer Guide.
-    #
     # For more information about developing and using Config rules, see
     # [Evaluating Amazon Web Services resource Configurations with
-    # Config][3] in the *Config Developer Guide*.
+    # Config][4] in the *Config Developer Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html
-    # [2]: https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html
-    # [3]: https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html
+    # [1]: https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html
+    # [2]: https://github.com/aws-cloudformation/cloudformation-guard
+    # [3]: https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html
+    # [4]: https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html
     #
     # @option params [required, Types::ConfigRule] :config_rule
     #   The rule that you want to add to your account.
@@ -4031,7 +4050,7 @@ module Aws::ConfigService
     # valid delegated administrator.
     #
     #  To register a delegated administrator, see [Register a Delegated
-    # Administrator][1] in the Config developer guide.
+    # Administrator][1] in the *Config developer guide*.
     #
     #  </note>
     #
@@ -4157,8 +4176,8 @@ module Aws::ConfigService
     # information on how many conformance packs you can have per account,
     # see [ **Service Limits** ][1] in the Config Developer Guide.
     #
-    # This API creates a service linked role
-    # `AWSServiceRoleForConfigConforms` in your account. The service linked
+    # This API creates a service-linked role
+    # `AWSServiceRoleForConfigConforms` in your account. The service-linked
     # role is created only when the role does not exist in your account.
     #
     # <note markdown="1"> You must specify either the `TemplateS3Uri` or the `TemplateBody`
@@ -4390,11 +4409,11 @@ module Aws::ConfigService
       req.send_request(options)
     end
 
-    # Adds or updates organization Config rule for your entire organization
-    # evaluating whether your Amazon Web Services resources comply with your
+    # Adds or updates an Config rule for your entire organization to
+    # evaluate if your Amazon Web Services resources comply with your
     # desired configurations. For information on how many organization
     # Config rules you can have per account, see [ **Service Limits** ][1]
-    # in the Config Developer Guide.
+    # in the *Config Developer Guide*.
     #
     # Only a master account and a delegated administrator can create or
     # update an organization Config rule. When calling this API with a
@@ -4403,9 +4422,9 @@ module Aws::ConfigService
     # can have up to 3 delegated administrators.
     #
     # This API enables organization service access through the
-    # `EnableAWSServiceAccess` action and creates a service linked role
+    # `EnableAWSServiceAccess` action and creates a service-linked role
     # `AWSServiceRoleForConfigMultiAccountSetup` in the master or delegated
-    # administrator account of your organization. The service linked role is
+    # administrator account of your organization. The service-linked role is
     # created only when the role does not exist in the caller account.
     # Config verifies the existence of role with `GetRole` action.
     #
@@ -4414,49 +4433,75 @@ module Aws::ConfigService
     # `register-delegated-administrator` for
     # `config-multiaccountsetup.amazonaws.com`.
     #
-    # You can use this action to create both Config custom rules and Config
-    # managed rules. If you are adding a new Config custom rule, you must
-    # first create Lambda function in the master account or a delegated
-    # administrator that the rule invokes to evaluate your resources. You
-    # also need to create an IAM role in the managed-account that can be
-    # assumed by the Lambda function. When you use the
-    # `PutOrganizationConfigRule` action to add the rule to Config, you must
-    # specify the Amazon Resource Name (ARN) that Lambda assigns to the
-    # function. If you are adding an Config managed rule, specify the
-    # rule's identifier for the `RuleIdentifier` key.
+    # There are two types of rules: Config Custom Rules and Config Managed
+    # Rules. You can use `PutOrganizationConfigRule` to create both Config
+    # custom rules and Config managed rules.
+    #
+    # Custom rules are rules that you can create using either Guard or
+    # Lambda functions. Guard ([Guard GitHub Repository][2]) is a
+    # policy-as-code language that allows you to write policies that are
+    # enforced by Config Custom Policy rules. Lambda uses custom code that
+    # you upload to evaluate a custom rule. If you are adding a new Custom
+    # Lambda rule, you first need to create an Lambda function in the master
+    # account or a delegated administrator that the rule invokes to evaluate
+    # your resources. You also need to create an IAM role in the managed
+    # account that can be assumed by the Lambda function. When you use
+    # `PutOrganizationConfigRule` to add a Custom Lambda rule to Config, you
+    # must specify the Amazon Resource Name (ARN) that Lambda assigns to the
+    # function.
+    #
+    # Managed rules are predefined, customizable rules created by Config.
+    # For a list of managed rules, see [List of Config Managed Rules][3]. If
+    # you are adding an Config managed rule, you must specify the rule's
+    # identifier for the `RuleIdentifier` key.
     #
     # <note markdown="1"> Prerequisite: Ensure you call `EnableAllFeatures` API to enable all
     # features in an organization.
     #
-    #  Specify either `OrganizationCustomRuleMetadata` or
-    # `OrganizationManagedRuleMetadata`.
+    #  Make sure to specify one of either
+    # `OrganizationCustomPolicyRuleMetadata` for Custom Policy rules,
+    # `OrganizationCustomRuleMetadata` for Custom Lambda rules, or
+    # `OrganizationManagedRuleMetadata` for managed rules.
     #
     #  </note>
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html
+    # [2]: https://github.com/aws-cloudformation/cloudformation-guard
+    # [3]: https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html
     #
     # @option params [required, String] :organization_config_rule_name
     #   The name that you assign to an organization Config rule.
     #
     # @option params [Types::OrganizationManagedRuleMetadata] :organization_managed_rule_metadata
-    #   An `OrganizationManagedRuleMetadata` object.
+    #   An `OrganizationManagedRuleMetadata` object. This object specifies
+    #   organization managed rule metadata such as resource type and ID of
+    #   Amazon Web Services resource along with the rule identifier. It also
+    #   provides the frequency with which you want Config to run evaluations
+    #   for the rule if the trigger type is periodic.
     #
     # @option params [Types::OrganizationCustomRuleMetadata] :organization_custom_rule_metadata
-    #   An `OrganizationCustomRuleMetadata` object.
+    #   An `OrganizationCustomRuleMetadata` object. This object specifies
+    #   organization custom rule metadata such as resource type, resource ID
+    #   of Amazon Web Services resource, Lambda function ARN, and organization
+    #   trigger types that trigger Config to evaluate your Amazon Web Services
+    #   resources against a rule. It also provides the frequency with which
+    #   you want Config to run evaluations for the rule if the trigger type is
+    #   periodic.
     #
     # @option params [Array<String>] :excluded_accounts
     #   A comma-separated list of accounts that you want to exclude from an
     #   organization Config rule.
     #
     # @option params [Types::OrganizationCustomPolicyRuleMetadata] :organization_custom_policy_rule_metadata
-    #   An object that specifies metadata for your organization's Config
-    #   Custom Policy rule. The metadata includes the runtime system in use,
-    #   which accounts have debug logging enabled, and other custom rule
-    #   metadata, such as resource type, resource ID of Amazon Web Services
-    #   resource, and organization trigger types that initiate Config to
-    #   evaluate Amazon Web Services resources against a rule.
+    #   An `OrganizationCustomPolicyRuleMetadata` object. This object
+    #   specifies metadata for your organization's Config Custom Policy rule.
+    #   The metadata includes the runtime system in use, which accounts have
+    #   debug logging enabled, and other custom rule metadata, such as
+    #   resource type, resource ID of Amazon Web Services resource, and
+    #   organization trigger types that initiate Config to evaluate Amazon Web
+    #   Services resources against a rule.
     #
     # @return [Types::PutOrganizationConfigRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4528,9 +4573,9 @@ module Aws::ConfigService
     #
     # This API enables organization service access for
     # `config-multiaccountsetup.amazonaws.com` through the
-    # `EnableAWSServiceAccess` action and creates a service linked role
+    # `EnableAWSServiceAccess` action and creates a service-linked role
     # `AWSServiceRoleForConfigMultiAccountSetup` in the master or delegated
-    # administrator account of your organization. The service linked role is
+    # administrator account of your organization. The service-linked role is
     # created only when the role does not exist in the caller account. To
     # use this API with delegated administrator, register a delegated
     # administrator by calling Amazon Web Services Organization
@@ -5054,7 +5099,7 @@ module Aws::ConfigService
     # the properties.
     #
     # For more information about query components, see the [ **Query
-    # Components** ][1] section in the Config Developer Guide.
+    # Components** ][1] section in the *Config Developer Guide*.
     #
     #
     #
@@ -5340,7 +5385,7 @@ module Aws::ConfigService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-configservice'
-      context[:gem_version] = '1.80.0'
+      context[:gem_version] = '1.81.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
