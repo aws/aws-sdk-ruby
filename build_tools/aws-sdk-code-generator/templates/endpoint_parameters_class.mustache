@@ -1,0 +1,25 @@
+# frozen_string_literal: true
+
+{{#generated_src_warning}}
+{{generated_src_warning}}
+{{/generated_src_warning}}
+module {{module_name}}
+
+  # TODO - better documentation
+  # Structure generated with all Endpoint Parameters.
+  #
+  {{#parameters}}
+  {{documentation}}
+  {{/parameters}}
+  EndpointParameters = Struct.new(
+    {{#parameters}}
+    :{{underscore_name}},
+    {{/parameters}}
+  ) do
+    PARAM_MAP = {
+      {{#parameters}}
+      '{{name}}' => :{{underscore_name}},
+      {{/parameters}}
+    }.freeze
+  end
+end

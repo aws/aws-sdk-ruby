@@ -64,6 +64,8 @@ module BuildTools
         resources: model_path('resources-1.json', config['models']),
         examples: load_examples(svc_name, config['models']),
         smoke_tests: model_path('smoke.json', config['models']),
+        endpoint_rules: model_path('endpoint-rule-set.json', config['models']),
+        endpoint_tests: model_path('endpoint-tests.json', config['models']),
         gem_dependencies: gem_dependencies(api, config['dependencies'] || {}),
         add_plugins: add_plugins(api, config['addPlugins'] || []),
         remove_plugins: config['removePlugins'] || []

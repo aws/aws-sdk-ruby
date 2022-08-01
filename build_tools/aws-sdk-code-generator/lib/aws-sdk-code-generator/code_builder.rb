@@ -31,6 +31,8 @@ module AwsSdkCodeGenerator
       @waiters = @service.waiters
       @resources = @service.resources
       @examples = @service.examples
+      @endpoint_rules = @service.endpoint_rules
+      @endpoint_tests = @service.endpoint_tests
     end
 
     # Generates the source for a library as a single string.
@@ -74,6 +76,7 @@ module AwsSdkCodeGenerator
         y.yield("#{prefix}/errors.rb", errors_module)
         y.yield("#{prefix}/waiters.rb", waiters_module) if @waiters
         y.yield("#{prefix}/resource.rb", root_resource_class)
+        y.yield("#{prefix}/endpoint_parameters.rb", endpoint_parameters)
         if @resources
           @resources['resources'].keys.sort.each do |name|
             path = "#{prefix}/#{Underscore.underscore(name)}.rb"
@@ -199,6 +202,11 @@ module AwsSdkCodeGenerator
         module_name: @service.module_name
       ).render
     end
+
+    def endpoint_parameters
+      Views::EndpointParametersClass.new(service: @service).render
+    end
+
 
     private
 
