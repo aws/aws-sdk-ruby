@@ -21,7 +21,11 @@ module AwsSdkCodeGenerator
       @documentation += "\n  #\n  #  @return [#{@type}]\n  #\n"
     end
 
-    attr_reader :name, :documentation
+    attr_reader :name, :documentation, :required, :default
+
+    def has_default
+      !@default.nil?
+    end
 
     def underscore_name
       Underscore.underscore(name)
