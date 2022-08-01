@@ -38,7 +38,7 @@ module Aws
           url: endpoint_json['url'],
           # TODO: unwrap these and convert to reference/function object
           properties: endpoint_json['properties'],
-          headeres: endpoint_json['headers']
+          headers: endpoint_json['headers']
         )
       end
     end

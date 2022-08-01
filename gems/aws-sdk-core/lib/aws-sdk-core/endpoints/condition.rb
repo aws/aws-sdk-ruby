@@ -19,13 +19,13 @@ module Aws
       def build_argv(argv_json)
         argv = []
         argv_json.each do |arg|
-          arg << if arg.is_a?(Hash) && arg['ref']
-                   Reference.new(ref: arg['ref'])
-                 elsif arg.is_a?(Hash) && arg['fn']
-                   Function.new(fn: arg['fn'], argv: arg['argv'])
-                 else
-                   arg
-                 end
+          argv << if arg.is_a?(Hash) && arg['ref']
+                    Reference.new(ref: arg['ref'])
+                  elsif arg.is_a?(Hash) && arg['fn']
+                    Function.new(fn: arg['fn'], argv: arg['argv'])
+                  else
+                    arg
+                  end
         end
         argv
       end

@@ -33,19 +33,19 @@ module Aws
       def build_rules(rules_json)
         rules = []
         rules_json.each do |rule|
-          if rule['type'] == 'endpoint'
+          if rule['type'] == 'endpoint' || rule['endpoint']
             rules << EndpointRule.new(
               conditions: rule['conditions'],
               endpoint: rule['endpoint'],
               documentation: rule['documentation']
             )
-          elsif rule['type'] == 'error'
+          elsif rule['type'] == 'error' || rule['error']
             rules << ErrorRule.new(
               conditions: rule['conditions'],
               error: rule['error'],
               documentation: rule['documentation']
             )
-          elsif rule['type'] == 'tree'
+          elsif rule['type'] == 'tree' || rule['rules']
             rules << TreeRule.new(
               conditions: rule['conditions'],
               rules: rule['rules'],

@@ -55,21 +55,48 @@
                     }
                   ],
                   "assign": "bucketArn"
-                },
-                {
-                  "fn": "getAttr",
-                  "argv": [
-                    {
-                      "ref": "bucketArn"
-                    },
-                    "resourceId[1]"
-                  ],
-                  "assign": "outpostId"
                 }
               ],
-              "endpoint": {
-                "url": "https://{outpostId}-{bucketArn#accountId}.{bucketArn#region}.{partitionResult#dnsSuffix}"
-              }
+              "rules": [
+                {
+                  "conditions": [
+                    {
+                      "fn": "getAttr",
+                      "argv": [
+                        {
+                          "ref": "bucketArn"
+                        },
+                        "resourceId[1]"
+                      ],
+                      "assign": "outpostId"
+                    }
+                  ],
+                  "rules": [
+                    {
+                      "conditions": [
+                        {
+                          "fn": "stringEquals",
+                          "argv": [
+                            "{outpostId}",
+                            ""
+                          ]
+                        }
+                      ],
+                      "error": "OutpostId was empty"
+                    },
+                    {
+                      "conditions": [],
+                      "endpoint": {
+                        "url": "https://{outpostId}-{bucketArn#accountId}.{bucketArn#region}.{partitionResult#dnsSuffix}"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "conditions": [],
+                  "error": "Invalid ARN: outpostId was not set"
+                }
+              ]
             },
             {
               "documentation": "bucket can be used as a host label",

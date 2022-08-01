@@ -12,6 +12,36 @@
       }
     },
     {
+      "documentation": "arn, unset outpost id",
+      "params": {
+        "Bucket": "arn:aws:s3:us-east-2:012345678:outpost",
+        "Region": "us-east-2"
+      },
+      "expect": {
+        "error": "Invalid ARN: outpostId was not set"
+      }
+    },
+    {
+      "documentation": "arn, empty outpost id (tests that empty strings are handled properly during matching)",
+      "params": {
+        "Bucket": "arn:aws:s3:us-east-2:012345678:outpost::",
+        "Region": "us-east-2"
+      },
+      "expect": {
+        "error": "OutpostId was empty"
+      }
+    },
+    {
+      "documentation": "arn, empty outpost id (tests that ARN parsing considers a trailing colon)",
+      "params": {
+        "Bucket": "arn:aws:s3:us-east-2:012345678:outpost:",
+        "Region": "us-east-2"
+      },
+      "expect": {
+        "error": "OutpostId was empty"
+      }
+    },
+    {
       "documentation": "valid hostlabel + region resolution",
       "params": {
         "Bucket": "mybucket",

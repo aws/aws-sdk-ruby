@@ -34,11 +34,12 @@
               "ref": "bucketArn"
             },
             "resourceId[2]"
-          ]
+          ],
+          "assign": "outpostId"
         }
       ],
       "endpoint": {
-        "url": "https://{bucketArn#accountId}.{bucketArn#resourceId[2]}.{bucketArn#region}"
+        "url": "https://{bucketArn#accountId}.{outpostId}.{bucketArn#region}"
       }
     }
   ]
