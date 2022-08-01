@@ -1,0 +1,45 @@
+{
+  "version": "1.1",
+  "serviceId": "get-attr-type-inference",
+  "parameters": {
+    "Bucket": {
+      "type": "string"
+    }
+  },
+  "rules": [
+    {
+      "documentation": "bucket is set, handle bucket specific endpoints",
+      "conditions": [
+        {
+          "fn": "isSet",
+          "argv": [
+            {
+              "ref": "Bucket"
+            }
+          ]
+        },
+        {
+          "fn": "parseArn",
+          "argv": [
+            {
+              "ref": "Bucket"
+            }
+          ],
+          "assign": "bucketArn"
+        },
+        {
+          "fn": "getAttr",
+          "argv": [
+            {
+              "ref": "bucketArn"
+            },
+            "resourceId[2]"
+          ]
+        }
+      ],
+      "endpoint": {
+        "url": "https://{bucketArn#accountId}.{bucketArn#resourceId[2]}.{bucketArn#region}"
+      }
+    }
+  ]
+}

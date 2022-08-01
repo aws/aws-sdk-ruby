@@ -1,0 +1,82 @@
+{
+  "serviceId": "valid-ruleset",
+  "parameters": {
+    "Region": {
+      "type": "string",
+      "builtIn": "AWS::Region",
+      "required": true
+    },
+    "PropertyOne": {
+      "type": "boolean"
+    },
+    "PropertyTwo": {
+      "type": "string"
+    },
+    "PropertyThree": {
+      "type": "boolean"
+    }
+  },
+  "rules": [
+    {
+      "documentation": "base rule",
+      "conditions": [
+        {
+          "fn": "partition",
+          "argv": [
+            {
+              "ref": "Region"
+            }
+          ],
+          "assign": "PartResult"
+        }
+      ],
+      "rules": [
+        {
+          "conditions": [
+            {
+              "fn": "stringEquals",
+              "argv": [
+                "aws",
+                {
+                  "fn": "getAttr",
+                  "argv": [
+                    {
+                      "ref": "PartResult"
+                    },
+                    "name"
+                  ]
+                }
+              ]
+            },
+            {
+              "fn": "isSet",
+              "argv": [
+                {
+                  "ref": "PropertyTwo"
+                }
+              ],
+              "assign": "PropertyTwo"
+            }
+          ],
+          "endpoint": {
+            "url": "https://{PropertyTwo}.special.service.{Region}.amazonaws.com",
+            "properties": {
+              "authSchemes": [
+                {
+                  "name": "v4",
+                  "signingName": "serviceName",
+                  "signingScope": "{PropertyTwo}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "conditions": [],
+          "error": "error description"
+        }
+      ]
+    }
+  ],
+  "version": "1.1"
+}

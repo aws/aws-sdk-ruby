@@ -1,0 +1,24 @@
+{
+  "service": "region-override",
+  "testCases": [
+    {
+      "documentation": "local region override",
+      "params": {
+        "Region": "local"
+      },
+      "expect": {
+        "url": "http://localhost:8080"
+      }
+    },
+    {
+      "documentation": "standard region templated",
+      "params": {
+        "Region": "us-east-2"
+      },
+      "expect": {
+        "url": "https://us-east-2.someservice.amazonaws.com"
+      }
+    }
+  ],
+  "version": "1.1"
+}

@@ -1,0 +1,24 @@
+{
+  "service": "valid-hostlabel",
+  "testCases": [
+    {
+      "documentation": "standard region is a valid hostlabel",
+      "params": {
+        "Region": "us-east-1"
+      },
+      "expect": {
+        "url": "https://us-east-1.amazonaws.com"
+      }
+    },
+    {
+      "documentation": "starting with a number is a valid hostlabel",
+      "params": {
+        "Region": "3aws4"
+      },
+      "expect": {
+        "url": "https://3aws4.amazonaws.com"
+      }
+    }
+  ],
+  "version": "1.1"
+}

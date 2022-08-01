@@ -1,0 +1,32 @@
+{
+  "service": "default-values",
+  "testCases": [
+    {
+      "documentation": "default endpoint",
+      "params": {
+      },
+      "expect": {
+        "url": "https://us-west-5.amazonaws.com"
+      }
+    },
+    {
+      "documentation": "test case where region is unset",
+      "params": {
+        "UseFallback": true
+      },
+      "expect": {
+        "error": "UseFallback = true"
+      }
+    },
+    {
+      "documentation": "defaults can be overridden",
+      "params": {
+        "Region": "us-east-1"
+      },
+      "expect": {
+        "url": "https://us-east-1.amazonaws.com"
+      }
+    }
+  ],
+  "version": "1.1"
+}

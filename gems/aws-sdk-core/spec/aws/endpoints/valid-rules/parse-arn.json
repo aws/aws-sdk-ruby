@@ -1,0 +1,113 @@
+{
+  "version": "1.1",
+  "serviceId": "parse-arn",
+  "parameters": {
+    "Region": {
+      "type": "string",
+      "builtIn": "AWS::Region"
+    },
+    "Bucket": {
+      "type": "string"
+    }
+  },
+  "rules": [
+    {
+      "documentation": "region is set",
+      "conditions": [
+        {
+          "fn": "isSet",
+          "argv": [
+            {
+              "ref": "Region"
+            }
+          ]
+        },
+        {
+          "fn": "partition",
+          "argv": [
+            "{Region}"
+          ],
+          "assign": "partitionResult"
+        }
+      ],
+      "rules": [
+        {
+          "documentation": "bucket is set, handle bucket specific endpoints",
+          "conditions": [
+            {
+              "fn": "isSet",
+              "argv": [
+                {
+                  "ref": "Bucket"
+                }
+              ]
+            }
+          ],
+          "rules": [
+            {
+              "documentation": "bucket is set and is an arn",
+              "conditions": [
+                {
+                  "fn": "parseArn",
+                  "argv": [
+                    {
+                      "ref": "Bucket"
+                    }
+                  ],
+                  "assign": "bucketArn"
+                },
+                {
+                  "fn": "getAttr",
+                  "argv": [
+                    {
+                      "ref": "bucketArn"
+                    },
+                    "resourceId[1]"
+                  ],
+                  "assign": "outpostId"
+                }
+              ],
+              "endpoint": {
+                "url": "https://{outpostId}-{bucketArn#accountId}.{bucketArn#region}.{partitionResult#dnsSuffix}"
+              }
+            },
+            {
+              "documentation": "bucket can be used as a host label",
+              "conditions": [
+                {
+                  "fn": "isValidHostLabel",
+                  "argv": [
+                    "{Bucket}",
+                    false
+                  ]
+                }
+              ],
+              "endpoint": {
+                "url": "https://{Bucket}.{Region}.amazonaws.com"
+              }
+            },
+            {
+              "conditions": [],
+              "documentation": "fallback: use bucket in the path",
+              "endpoint": {
+                "url": "https://{Region}.amazonaws.com/{Bucket}"
+              }
+            }
+          ]
+        },
+        {
+          "documentation": "region is set, bucket is not",
+          "conditions": [],
+          "endpoint": {
+            "url": "https://{Region}.{partitionResult#dnsSuffix}"
+          }
+        }
+      ]
+    },
+    {
+      "documentation": "fallback when region is unset",
+      "conditions": [],
+      "error": "Region must be set to resolve a valid endpoint"
+    }
+  ]
+}

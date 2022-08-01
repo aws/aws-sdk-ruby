@@ -1,0 +1,43 @@
+{
+  "serviceId": "default-values",
+  "parameters": {
+    "Region": {
+      "type": "string",
+      "builtIn": "AWS::Region",
+      "documentation": "The region to dispatch this request, eg. `us-east-1`.",
+      "default": "us-west-5",
+      "required": true
+    },
+    "UseFallback": {
+      "type": "boolean",
+      "builtIn": "AWS::FallbackEndpoint",
+      "default": false,
+      "required": true
+    }
+  },
+  "rules": [
+    {
+      "documentation": "Template the region into the URI when region is set",
+      "conditions": [
+        {
+          "fn": "booleanEquals",
+          "argv": [
+            {
+              "ref": "UseFallback"
+            },
+            false
+          ]
+        }
+      ],
+      "endpoint": {
+        "url": "https://{Region}.amazonaws.com"
+      }
+    },
+    {
+      "documentation": "fallback when region is unset",
+      "conditions": [],
+      "error": "UseFallback = true"
+    }
+  ],
+  "version": "1.1"
+}

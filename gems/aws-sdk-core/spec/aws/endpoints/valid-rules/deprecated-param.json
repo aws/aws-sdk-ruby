@@ -1,0 +1,41 @@
+{
+  "serviceId": "deprecated-param",
+  "parameters": {
+    "Region": {
+      "type": "string",
+      "builtIn": "AWS::Region",
+      "required": false,
+      "deprecated": {
+        "message": "use blahdeblah region instead"
+      }
+    }
+  },
+  "rules": [
+    {
+      "documentation": "base rule",
+      "conditions": [
+        {
+          "fn": "isSet",
+          "argv": [
+            {
+              "ref": "Region"
+            }
+          ]
+        }
+      ],
+      "endpoint": {
+        "url": "https://{Region}.amazonaws.com",
+        "properties": {
+          "authSchemes": [
+            {
+              "name": "v4",
+              "signingName": "serviceName",
+              "signingScope": "{Region}"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "version": "1.1"
+}

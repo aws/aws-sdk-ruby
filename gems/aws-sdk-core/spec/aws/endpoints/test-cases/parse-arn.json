@@ -1,0 +1,45 @@
+{
+  "service": "parse-arn",
+  "testCases": [
+    {
+      "documentation": "arn + region resolution",
+      "params": {
+        "Bucket": "arn:aws:s3:us-east-2:012345678:outpost:op-1234",
+        "Region": "us-east-2"
+      },
+      "expect": {
+        "url": "https://op-1234-012345678.us-east-2.amazonaws.com"
+      }
+    },
+    {
+      "documentation": "valid hostlabel + region resolution",
+      "params": {
+        "Bucket": "mybucket",
+        "Region": "us-east-2"
+      },
+      "expect": {
+        "url": "https://mybucket.us-east-2.amazonaws.com"
+      }
+    },
+    {
+      "documentation": "not a valid hostlabel + region resolution",
+      "params": {
+        "Bucket": "99_a",
+        "Region": "us-east-2"
+      },
+      "expect": {
+        "url": "https://us-east-2.amazonaws.com/99_a"
+      }
+    },
+    {
+      "documentation": "no bucket",
+      "params": {
+        "Region": "us-east-2"
+      },
+      "expect": {
+        "url": "https://us-east-2.amazonaws.com"
+      }
+    }
+  ],
+  "version": "1.1"
+}

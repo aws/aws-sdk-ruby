@@ -428,9 +428,9 @@ module Aws::S3Control
     CreateAccessPointForObjectLambdaResult.add_member(:object_lambda_access_point_arn, Shapes::ShapeRef.new(shape: ObjectLambdaAccessPointArn, location_name: "ObjectLambdaAccessPointArn"))
     CreateAccessPointForObjectLambdaResult.struct_class = Types::CreateAccessPointForObjectLambdaResult
 
-    CreateAccessPointRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id"))
+    CreateAccessPointRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     CreateAccessPointRequest.add_member(:name, Shapes::ShapeRef.new(shape: AccessPointName, required: true, location: "uri", location_name: "name"))
-    CreateAccessPointRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "Bucket", metadata: {"endpointOption"=>"BucketName"}))
+    CreateAccessPointRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "Bucket"))
     CreateAccessPointRequest.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: VpcConfiguration, location_name: "VpcConfiguration"))
     CreateAccessPointRequest.add_member(:public_access_block_configuration, Shapes::ShapeRef.new(shape: PublicAccessBlockConfiguration, location_name: "PublicAccessBlockConfiguration"))
     CreateAccessPointRequest.struct_class = Types::CreateAccessPointRequest
@@ -451,7 +451,7 @@ module Aws::S3Control
     CreateBucketRequest.add_member(:grant_write, Shapes::ShapeRef.new(shape: GrantWrite, location: "header", location_name: "x-amz-grant-write"))
     CreateBucketRequest.add_member(:grant_write_acp, Shapes::ShapeRef.new(shape: GrantWriteACP, location: "header", location_name: "x-amz-grant-write-acp"))
     CreateBucketRequest.add_member(:object_lock_enabled_for_bucket, Shapes::ShapeRef.new(shape: ObjectLockEnabledForBucket, location: "header", location_name: "x-amz-bucket-object-lock-enabled"))
-    CreateBucketRequest.add_member(:outpost_id, Shapes::ShapeRef.new(shape: NonEmptyMaxLength64String, location: "header", location_name: "x-amz-outpost-id", metadata: {"endpointOption"=>"OutpostId"}))
+    CreateBucketRequest.add_member(:outpost_id, Shapes::ShapeRef.new(shape: NonEmptyMaxLength64String, location: "header", location_name: "x-amz-outpost-id"))
     CreateBucketRequest.struct_class = Types::CreateBucketRequest
     CreateBucketRequest[:payload] = :create_bucket_configuration
     CreateBucketRequest[:payload_member] = CreateBucketRequest.member(:create_bucket_configuration)
@@ -623,8 +623,8 @@ module Aws::S3Control
     GetAccessPointPolicyStatusResult.add_member(:policy_status, Shapes::ShapeRef.new(shape: PolicyStatus, location_name: "PolicyStatus"))
     GetAccessPointPolicyStatusResult.struct_class = Types::GetAccessPointPolicyStatusResult
 
-    GetAccessPointRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"endpointOption"=>"AccountId"}))
-    GetAccessPointRequest.add_member(:name, Shapes::ShapeRef.new(shape: AccessPointName, required: true, location: "uri", location_name: "name", metadata: {"endpointOption"=>"AccessPointName"}))
+    GetAccessPointRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    GetAccessPointRequest.add_member(:name, Shapes::ShapeRef.new(shape: AccessPointName, required: true, location: "uri", location_name: "name"))
     GetAccessPointRequest.struct_class = Types::GetAccessPointRequest
 
     GetAccessPointResult.add_member(:name, Shapes::ShapeRef.new(shape: AccessPointName, location_name: "Name"))
@@ -652,8 +652,8 @@ module Aws::S3Control
     GetBucketPolicyResult.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, location_name: "Policy"))
     GetBucketPolicyResult.struct_class = Types::GetBucketPolicyResult
 
-    GetBucketRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"endpointOption"=>"AccountId"}))
-    GetBucketRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "name", metadata: {"endpointOption"=>"BucketName"}))
+    GetBucketRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    GetBucketRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "name"))
     GetBucketRequest.struct_class = Types::GetBucketRequest
 
     GetBucketResult.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket"))
@@ -904,10 +904,10 @@ module Aws::S3Control
     ListMultiRegionAccessPointsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String, location_name: "NextToken"))
     ListMultiRegionAccessPointsResult.struct_class = Types::ListMultiRegionAccessPointsResult
 
-    ListRegionalBucketsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"endpointOption"=>"AccountId"}))
+    ListRegionalBucketsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     ListRegionalBucketsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String, location: "querystring", location_name: "nextToken"))
     ListRegionalBucketsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
-    ListRegionalBucketsRequest.add_member(:outpost_id, Shapes::ShapeRef.new(shape: NonEmptyMaxLength64String, location: "header", location_name: "x-amz-outpost-id", metadata: {"endpointOption"=>"OutpostId"}))
+    ListRegionalBucketsRequest.add_member(:outpost_id, Shapes::ShapeRef.new(shape: NonEmptyMaxLength64String, location: "header", location_name: "x-amz-outpost-id"))
     ListRegionalBucketsRequest.struct_class = Types::ListRegionalBucketsRequest
 
     ListRegionalBucketsResult.add_member(:regional_bucket_list, Shapes::ShapeRef.new(shape: RegionalBucketList, location_name: "RegionalBucketList"))
@@ -1333,6 +1333,9 @@ module Aws::S3Control
         o.name = "CreateAccessPoint"
         o.http_method = "PUT"
         o.http_request_uri = "/v20180820/accesspoint/{name}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "{AccountId}.",
+        }
         o.input = Shapes::ShapeRef.new(shape: CreateAccessPointRequest,
           location_name: "CreateAccessPointRequest",
           metadata: {
@@ -1589,6 +1592,9 @@ module Aws::S3Control
         o.name = "GetAccessPoint"
         o.http_method = "GET"
         o.http_request_uri = "/v20180820/accesspoint/{name}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "{AccountId}.",
+        }
         o.input = Shapes::ShapeRef.new(shape: GetAccessPointRequest)
         o.output = Shapes::ShapeRef.new(shape: GetAccessPointResult)
       end)
@@ -1663,6 +1669,9 @@ module Aws::S3Control
         o.name = "GetBucket"
         o.http_method = "GET"
         o.http_request_uri = "/v20180820/bucket/{name}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "{AccountId}.",
+        }
         o.input = Shapes::ShapeRef.new(shape: GetBucketRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBucketResult)
       end)
@@ -1860,6 +1869,9 @@ module Aws::S3Control
         o.name = "ListRegionalBuckets"
         o.http_method = "GET"
         o.http_request_uri = "/v20180820/bucket"
+        o.endpoint_pattern = {
+          "hostPrefix" => "{AccountId}.",
+        }
         o.input = Shapes::ShapeRef.new(shape: ListRegionalBucketsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListRegionalBucketsResult)
         o[:pager] = Aws::Pager.new(

@@ -1,0 +1,303 @@
+{
+  "version": "1.1",
+  "serviceId": "com.amazonaws#EventBridge",
+  "parameters": {
+    "region": {
+      "type": "string",
+      "builtIn": "AWS::Region",
+      "required": true
+    },
+    "useDualStackEndpoint": {
+      "type": "boolean",
+      "builtIn": "AWS::UseDualStackEndpoint"
+    },
+    "useFIPSEndpoint": {
+      "type": "boolean",
+      "builtIn": "AWS::UseFIPSEndpoint"
+    },
+    "endpointId": {
+      "type": "string"
+    }
+  },
+  "rules": [
+    {
+      "conditions": [
+        {
+          "fn": "partition",
+          "argv": [
+            {
+              "ref": "region"
+            }
+          ],
+          "assign": "partitionResult"
+        }
+      ],
+      "rules": [
+        {
+          "conditions": [
+            {
+              "fn": "isSet",
+              "argv": [
+                {
+                  "ref": "endpointId"
+                }
+              ]
+            }
+          ],
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "fn": "isSet",
+                  "argv": [
+                    {
+                      "ref": "useFIPSEndpoint"
+                    }
+                  ]
+                },
+                {
+                  "fn": "booleanEquals",
+                  "argv": [
+                    {
+                      "ref": "useFIPSEndpoint"
+                    },
+                    true
+                  ]
+                }
+              ],
+              "error": "FIPS endpoints not supported with multi-region endpoints"
+            },
+            {
+              "conditions": [
+                {
+                  "fn": "not",
+                  "argv": [
+                    {
+                      "fn": "isSet",
+                      "argv": [
+                        {
+                          "ref": "useFIPSEndpoint"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "fn": "isSet",
+                  "argv": [
+                    {
+                      "ref": "useDualStackEndpoint"
+                    }
+                  ]
+                },
+                {
+                  "fn": "booleanEquals",
+                  "argv": [
+                    {
+                      "ref": "useDualStackEndpoint"
+                    },
+                    true
+                  ]
+                }
+              ],
+              "endpoint": {
+                "url": "https://{endpointId}.endpoint.events.{partitionResult#dualStackDnsSuffix}",
+                "properties": {
+                  "authSchemes": [
+                    {
+                      "name": "v4a",
+                      "signingScope": "events",
+                      "signingRegions": "*"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "conditions": [],
+              "endpoint": {
+                "url": "https://{endpointId}.endpoint.events.{partitionResult#dnsSuffix}",
+                "properties": {
+                  "authSchemes": [
+                    {
+                      "name": "v4a",
+                      "signingScope": "events",
+                      "signingRegions": "*"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "conditions": [
+            {
+              "fn": "isValidHostLabel",
+              "argv": [
+                {
+                  "ref": "region"
+                },
+                false
+              ]
+            }
+          ],
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "fn": "isSet",
+                  "argv": [
+                    {
+                      "ref": "useFIPSEndpoint"
+                    }
+                  ]
+                },
+                {
+                  "fn": "booleanEquals",
+                  "argv": [
+                    {
+                      "ref": "useFIPSEndpoint"
+                    },
+                    true
+                  ]
+                },
+                {
+                  "fn": "not",
+                  "argv": [
+                    {
+                      "fn": "isSet",
+                      "argv": [
+                        {
+                          "ref": "useDualStackEndpoint"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "endpoint": {
+                "url": "https://events-fips.{region}.{partitionResult#dnsSuffix}",
+                "properties": {
+                  "authSchemes": [
+                    {
+                      "name": "v4a",
+                      "signingScope": "events",
+                      "signingRegions": "*"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "conditions": [
+                {
+                  "fn": "isSet",
+                  "argv": [
+                    {
+                      "ref": "useDualStackEndpoint"
+                    }
+                  ]
+                },
+                {
+                  "fn": "booleanEquals",
+                  "argv": [
+                    {
+                      "ref": "useDualStackEndpoint"
+                    },
+                    true
+                  ]
+                },
+                {
+                  "fn": "not",
+                  "argv": [
+                    {
+                      "fn": "isSet",
+                      "argv": [
+                        {
+                          "ref": "useFIPSEndpoint"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "endpoint": {
+                "url": "https://events.{region}.{partitionResult#dualStackDnsSuffix}",
+                "properties": {
+                  "authSchemes": [
+                    {
+                      "name": "v4a",
+                      "signingScope": "events",
+                      "signingRegions": "*"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "conditions": [
+                {
+                  "fn": "isSet",
+                  "argv": [
+                    {
+                      "ref": "useDualStackEndpoint"
+                    }
+                  ]
+                },
+                {
+                  "fn": "isSet",
+                  "argv": [
+                    {
+                      "ref": "useFIPSEndpoint"
+                    }
+                  ]
+                },
+                {
+                  "fn": "booleanEquals",
+                  "argv": [
+                    {
+                      "ref": "useDualStackEndpoint"
+                    },
+                    true
+                  ]
+                },
+                {
+                  "fn": "booleanEquals",
+                  "argv": [
+                    {
+                      "ref": "useFIPSEndpoint"
+                    },
+                    true
+                  ]
+                }
+              ],
+              "endpoint": {
+                "url": "https://events-fips.{region}.{partitionResult#dualStackDnsSuffix}",
+                "properties": {
+                  "authSchemes": [
+                    {
+                      "name": "v4a",
+                      "signingScope": "events",
+                      "signingRegions": "*"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "conditions": [],
+              "endpoint": {
+                "url": "https://events.{region}.{partitionResult#dnsSuffix}"
+              }
+            }
+          ]
+        },
+        {
+          "conditions": [],
+          "error": "{region} is not a valid HTTP host-label"
+        }
+      ]
+    }
+  ]
+}

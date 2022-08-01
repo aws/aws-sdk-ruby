@@ -1,0 +1,31 @@
+{
+  "service": "aws-region",
+  "testCases": [
+    {
+      "documentation": "basic region templating",
+      "params": {
+        "Region": "us-east-1"
+      },
+      "expect": {
+        "url": "https://us-east-1.amazonaws.com",
+        "properties": {
+          "authSchemes": [
+            {
+              "name": "v4",
+              "signingScope": "us-east-1",
+              "signingName": "serviceName"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "documentation": "test case where region is unset",
+      "params": {},
+      "expect": {
+        "error": "Region must be set to resolve a valid endpoint"
+      }
+    }
+  ],
+  "version": "1.1"
+}
