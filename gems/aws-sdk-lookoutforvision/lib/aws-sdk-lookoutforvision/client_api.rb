@@ -14,9 +14,14 @@ module Aws::LookoutforVision
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    Anomaly = Shapes::StructureShape.new(name: 'Anomaly')
     AnomalyClassFilter = Shapes::StringShape.new(name: 'AnomalyClassFilter')
+    AnomalyList = Shapes::ListShape.new(name: 'AnomalyList')
+    AnomalyMask = Shapes::BlobShape.new(name: 'AnomalyMask')
+    AnomalyName = Shapes::StringShape.new(name: 'AnomalyName')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
+    Color = Shapes::StringShape.new(name: 'Color')
     CompilerOptions = Shapes::StringShape.new(name: 'CompilerOptions')
     ComponentDescription = Shapes::StringShape.new(name: 'ComponentDescription')
     ComponentName = Shapes::StringShape.new(name: 'ComponentName')
@@ -107,6 +112,7 @@ module Aws::LookoutforVision
     OutputS3Object = Shapes::StructureShape.new(name: 'OutputS3Object')
     PageSize = Shapes::IntegerShape.new(name: 'PageSize')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
+    PixelAnomaly = Shapes::StructureShape.new(name: 'PixelAnomaly')
     ProjectArn = Shapes::StringShape.new(name: 'ProjectArn')
     ProjectDescription = Shapes::StructureShape.new(name: 'ProjectDescription')
     ProjectMetadata = Shapes::StructureShape.new(name: 'ProjectMetadata')
@@ -151,6 +157,12 @@ module Aws::LookoutforVision
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionString, required: true, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    Anomaly.add_member(:name, Shapes::ShapeRef.new(shape: AnomalyName, location_name: "Name"))
+    Anomaly.add_member(:pixel_anomaly, Shapes::ShapeRef.new(shape: PixelAnomaly, location_name: "PixelAnomaly"))
+    Anomaly.struct_class = Types::Anomaly
+
+    AnomalyList.member = Shapes::ShapeRef.new(shape: Anomaly)
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionString, required: true, location_name: "Message"))
     ConflictException.add_member(:resource_id, Shapes::ShapeRef.new(shape: ExceptionString, required: true, location_name: "ResourceId"))
@@ -278,6 +290,8 @@ module Aws::LookoutforVision
     DetectAnomalyResult.add_member(:source, Shapes::ShapeRef.new(shape: ImageSource, location_name: "Source"))
     DetectAnomalyResult.add_member(:is_anomalous, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsAnomalous"))
     DetectAnomalyResult.add_member(:confidence, Shapes::ShapeRef.new(shape: Float, location_name: "Confidence"))
+    DetectAnomalyResult.add_member(:anomalies, Shapes::ShapeRef.new(shape: AnomalyList, location_name: "Anomalies"))
+    DetectAnomalyResult.add_member(:anomaly_mask, Shapes::ShapeRef.new(shape: AnomalyMask, location_name: "AnomalyMask"))
     DetectAnomalyResult.struct_class = Types::DetectAnomalyResult
 
     GreengrassConfiguration.add_member(:compiler_options, Shapes::ShapeRef.new(shape: CompilerOptions, location_name: "CompilerOptions"))
@@ -425,6 +439,10 @@ module Aws::LookoutforVision
     OutputS3Object.add_member(:key, Shapes::ShapeRef.new(shape: S3ObjectKey, required: true, location_name: "Key"))
     OutputS3Object.struct_class = Types::OutputS3Object
 
+    PixelAnomaly.add_member(:total_percentage_area, Shapes::ShapeRef.new(shape: Float, location_name: "TotalPercentageArea"))
+    PixelAnomaly.add_member(:color, Shapes::ShapeRef.new(shape: Color, location_name: "Color"))
+    PixelAnomaly.struct_class = Types::PixelAnomaly
+
     ProjectDescription.add_member(:project_arn, Shapes::ShapeRef.new(shape: ProjectArn, location_name: "ProjectArn"))
     ProjectDescription.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectName, location_name: "ProjectName"))
     ProjectDescription.add_member(:creation_timestamp, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreationTimestamp"))
@@ -499,7 +517,7 @@ module Aws::LookoutforVision
 
     TargetPlatform.add_member(:os, Shapes::ShapeRef.new(shape: TargetPlatformOs, required: true, location_name: "Os"))
     TargetPlatform.add_member(:arch, Shapes::ShapeRef.new(shape: TargetPlatformArch, required: true, location_name: "Arch"))
-    TargetPlatform.add_member(:accelerator, Shapes::ShapeRef.new(shape: TargetPlatformAccelerator, required: true, location_name: "Accelerator"))
+    TargetPlatform.add_member(:accelerator, Shapes::ShapeRef.new(shape: TargetPlatformAccelerator, location_name: "Accelerator"))
     TargetPlatform.struct_class = Types::TargetPlatform
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionString, required: true, location_name: "Message"))

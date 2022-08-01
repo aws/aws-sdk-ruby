@@ -258,6 +258,7 @@ module Aws::AuditManager
     Scope = Shapes::StructureShape.new(name: 'Scope')
     ServiceMetadata = Shapes::StructureShape.new(name: 'ServiceMetadata')
     ServiceMetadataList = Shapes::ListShape.new(name: 'ServiceMetadataList')
+    ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SettingAttribute = Shapes::StringShape.new(name: 'SettingAttribute')
     Settings = Shapes::StructureShape.new(name: 'Settings')
     ShareRequestAction = Shapes::StringShape.new(name: 'ShareRequestAction')
@@ -1154,6 +1155,9 @@ module Aws::AuditManager
 
     ServiceMetadataList.member = Shapes::ShapeRef.new(shape: ServiceMetadata)
 
+    ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
     Settings.add_member(:is_aws_org_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "isAwsOrgEnabled"))
     Settings.add_member(:sns_topic, Shapes::ShapeRef.new(shape: SNSTopic, location_name: "snsTopic"))
     Settings.add_member(:default_assessment_reports_destination, Shapes::ShapeRef.new(shape: AssessmentReportsDestination, location_name: "defaultAssessmentReportsDestination"))
@@ -1404,6 +1408,7 @@ module Aws::AuditManager
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:create_assessment_framework, Seahorse::Model::Operation.new.tap do |o|
@@ -1416,6 +1421,7 @@ module Aws::AuditManager
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:create_assessment_report, Seahorse::Model::Operation.new.tap do |o|
@@ -1440,6 +1446,7 @@ module Aws::AuditManager
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:delete_assessment, Seahorse::Model::Operation.new.tap do |o|
@@ -2094,6 +2101,7 @@ module Aws::AuditManager
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:update_control, Seahorse::Model::Operation.new.tap do |o|

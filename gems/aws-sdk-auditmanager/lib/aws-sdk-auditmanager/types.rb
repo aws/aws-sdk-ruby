@@ -1462,6 +1462,25 @@ module Aws::AuditManager
     # @!attribute [rw] source_keyword
     #   The keyword to search for in CloudTrail logs, Config rules, Security
     #   Hub checks, and Amazon Web Services API names.
+    #
+    #   To learn more about the supported keywords that you can use when
+    #   mapping a control data source, see the following pages in the *Audit
+    #   Manager User Guide*\:
+    #
+    #   * [Config rules supported by Audit Manager][1]
+    #
+    #   * [Security Hub controls supported by Audit Manager][2]
+    #
+    #   * [API calls supported by Audit Manager][3]
+    #
+    #   * [CloudTrail event names supported by Audit Manager][4]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-ash.html
+    #   [2]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-config.html
+    #   [3]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-api.html
+    #   [4]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-cloudtrail.html
     #   @return [Types::SourceKeyword]
     #
     # @!attribute [rw] source_frequency
@@ -1857,6 +1876,25 @@ module Aws::AuditManager
     # @!attribute [rw] source_keyword
     #   The keyword to search for in CloudTrail logs, Config rules, Security
     #   Hub checks, and Amazon Web Services API names.
+    #
+    #   To learn more about the supported keywords that you can use when
+    #   mapping a control data source, see the following pages in the *Audit
+    #   Manager User Guide*\:
+    #
+    #   * [Config rules supported by Audit Manager][1]
+    #
+    #   * [Security Hub controls supported by Audit Manager][2]
+    #
+    #   * [API calls supported by Audit Manager][3]
+    #
+    #   * [CloudTrail event names supported by Audit Manager][4]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-ash.html
+    #   [2]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-config.html
+    #   [3]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-api.html
+    #   [4]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-cloudtrail.html
     #   @return [Types::SourceKeyword]
     #
     # @!attribute [rw] source_frequency
@@ -4273,6 +4311,28 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
+    # You've reached your account quota for this resource type. To perform
+    # the requested action, delete some existing resources or [request a
+    # quota increase][1] from the Service Quotas console. For a list of
+    # Audit Manager service quotas, see [Quotas and restrictions for Audit
+    # Manager][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html
+    # [2]: https://docs.aws.amazon.com/audit-manager/latest/userguide/service-quotas.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/ServiceQuotaExceededException AWS API Documentation
+    #
+    class ServiceQuotaExceededException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The settings object that holds all supported Audit Manager settings.
     #
     # @!attribute [rw] is_aws_org_enabled
@@ -4310,6 +4370,25 @@ module Aws::AuditManager
 
     # The keyword to search for in CloudTrail logs, Config rules, Security
     # Hub checks, and Amazon Web Services API names.
+    #
+    # To learn more about the supported keywords that you can use when
+    # mapping a control data source, see the following pages in the *Audit
+    # Manager User Guide*\:
+    #
+    # * [Config rules supported by Audit Manager][1]
+    #
+    # * [Security Hub controls supported by Audit Manager][2]
+    #
+    # * [API calls supported by Audit Manager][3]
+    #
+    # * [CloudTrail event names supported by Audit Manager][4]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-ash.html
+    # [2]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-config.html
+    # [3]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-api.html
+    # [4]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-cloudtrail.html
     #
     # @note When making an API call, you may pass SourceKeyword
     #   data as a hash:

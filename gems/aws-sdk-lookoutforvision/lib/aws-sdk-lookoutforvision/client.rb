@@ -1002,7 +1002,9 @@ module Aws::LookoutforVision
     #
     # The response from `DetectAnomalies` includes a boolean prediction that
     # the image contains one or more anomalies and a confidence value for
-    # the prediction.
+    # the prediction. If the model is an image segmentation model, the
+    # response also includes segmentation information for each type of
+    # anomaly found in the image.
     #
     # <note markdown="1"> Before calling `DetectAnomalies`, you must first start your model with
     # the StartModel operation. You are charged for the amount of time, in
@@ -1011,6 +1013,9 @@ module Aws::LookoutforVision
     # StopModel operation to stop your model.
     #
     #  </note>
+    #
+    # For more information, see *Detecting anomalies in an image* in the
+    # Amazon Lookout for Vision developer guide.
     #
     # This operation requires permissions to perform the
     # `lookoutvision:DetectAnomalies` operation.
@@ -1047,6 +1052,11 @@ module Aws::LookoutforVision
     #   resp.detect_anomaly_result.source.type #=> String
     #   resp.detect_anomaly_result.is_anomalous #=> Boolean
     #   resp.detect_anomaly_result.confidence #=> Float
+    #   resp.detect_anomaly_result.anomalies #=> Array
+    #   resp.detect_anomaly_result.anomalies[0].name #=> String
+    #   resp.detect_anomaly_result.anomalies[0].pixel_anomaly.total_percentage_area #=> Float
+    #   resp.detect_anomaly_result.anomalies[0].pixel_anomaly.color #=> String
+    #   resp.detect_anomaly_result.anomaly_mask #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/DetectAnomalies AWS API Documentation
     #
@@ -1529,7 +1539,7 @@ module Aws::LookoutforVision
     #         target_platform: {
     #           os: "LINUX", # required, accepts LINUX
     #           arch: "ARM64", # required, accepts ARM64, X86_64
-    #           accelerator: "NVIDIA", # required, accepts NVIDIA
+    #           accelerator: "NVIDIA", # accepts NVIDIA
     #         },
     #         s3_output_location: { # required
     #           bucket: "S3BucketName", # required
@@ -1786,7 +1796,7 @@ module Aws::LookoutforVision
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lookoutforvision'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

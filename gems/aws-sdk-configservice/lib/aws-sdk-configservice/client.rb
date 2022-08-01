@@ -3630,6 +3630,70 @@ module Aws::ConfigService
       req.send_request(options)
     end
 
+    # Returns a list of conformance pack compliance scores. A compliance
+    # score is the percentage of the number of compliant rule-resource
+    # combinations in a conformance pack compared to the number of total
+    # possible rule-resource combinations in the conformance pack. This
+    # metric provides you with a high-level view of the compliance state of
+    # your conformance packs, and can be used to identify, investigate, and
+    # understand compliance deviations in your conformance packs.
+    #
+    # @option params [Types::ConformancePackComplianceScoresFilters] :filters
+    #   Filters the results based on the
+    #   `ConformancePackComplianceScoresFilters`.
+    #
+    # @option params [String] :sort_order
+    #   Determines the order in which conformance pack compliance scores are
+    #   sorted. Either in ascending or descending order.
+    #
+    # @option params [String] :sort_by
+    #   Sorts your conformance pack compliance scores in either ascending or
+    #   descending order, depending on `SortOrder`.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of conformance pack compliance scores returned on
+    #   each page.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` string in a prior request that you can use to get the
+    #   paginated response for next set of conformance pack compliance scores.
+    #
+    # @return [Types::ListConformancePackComplianceScoresResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListConformancePackComplianceScoresResponse#next_token #next_token} => String
+    #   * {Types::ListConformancePackComplianceScoresResponse#conformance_pack_compliance_scores #conformance_pack_compliance_scores} => Array&lt;Types::ConformancePackComplianceScore&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_conformance_pack_compliance_scores({
+    #     filters: {
+    #       conformance_pack_names: ["ConformancePackName"], # required
+    #     },
+    #     sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #     sort_by: "SCORE", # accepts SCORE
+    #     limit: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.conformance_pack_compliance_scores #=> Array
+    #   resp.conformance_pack_compliance_scores[0].score #=> String
+    #   resp.conformance_pack_compliance_scores[0].conformance_pack_name #=> String
+    #   resp.conformance_pack_compliance_scores[0].last_updated_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ListConformancePackComplianceScores AWS API Documentation
+    #
+    # @overload list_conformance_pack_compliance_scores(params = {})
+    # @param [Hash] params ({})
+    def list_conformance_pack_compliance_scores(params = {}, options = {})
+      req = build_request(:list_conformance_pack_compliance_scores, params)
+      req.send_request(options)
+    end
+
     # Accepts a resource type and returns a list of resource identifiers for
     # the resources of that type. A resource identifier includes the
     # resource type, ID, and (if available) the custom resource name. The
@@ -5276,7 +5340,7 @@ module Aws::ConfigService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-configservice'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.80.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

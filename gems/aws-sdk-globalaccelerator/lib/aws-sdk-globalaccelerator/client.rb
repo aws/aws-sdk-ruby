@@ -422,15 +422,16 @@ module Aws::GlobalAccelerator
     end
 
     # Advertises an IPv4 address range that is provisioned for use with your
-    # AWS resources through bring your own IP addresses (BYOIP). It can take
-    # a few minutes before traffic to the specified addresses starts routing
-    # to AWS because of propagation delays.
+    # Amazon Web Services resources through bring your own IP addresses
+    # (BYOIP). It can take a few minutes before traffic to the specified
+    # addresses starts routing to Amazon Web Services because of propagation
+    # delays.
     #
     # To stop advertising the BYOIP address range, use [
     # WithdrawByoipCidr][1].
     #
-    # For more information, see [Bring Your Own IP Addresses (BYOIP)][2] in
-    # the *AWS Global Accelerator Developer Guide*.
+    # For more information, see [Bring your own IP addresses (BYOIP)][2] in
+    # the *Global Accelerator Developer Guide*.
     #
     #
     #
@@ -545,35 +546,44 @@ module Aws::GlobalAccelerator
     # Load Balancers.
     #
     # Global Accelerator is a global service that supports endpoints in
-    # multiple AWS Regions but you must specify the US West (Oregon) Region
-    # to create or update accelerators.
+    # multiple Amazon Web Services Regions but you must specify the US West
+    # (Oregon) Region to create, update, or otherwise work with
+    # accelerators. That is, for example, specify `--region us-west-2` on
+    # AWS CLI commands.
     #
     # @option params [required, String] :name
-    #   The name of an accelerator. The name can have a maximum of 32
-    #   characters, must contain only alphanumeric characters or hyphens (-),
-    #   and must not begin or end with a hyphen.
+    #   The name of the accelerator. The name can have a maximum of 64
+    #   characters, must contain only alphanumeric characters, periods (.), or
+    #   hyphens (-), and must not begin or end with a hyphen or period.
     #
     # @option params [String] :ip_address_type
-    #   The value for the address type must be IPv4.
+    #   The IP address type that an accelerator supports. For a standard
+    #   accelerator, the value can be IPV4 or DUAL\_STACK.
     #
     # @option params [Array<String>] :ip_addresses
     #   Optionally, if you've added your own IP address pool to Global
-    #   Accelerator (BYOIP), you can choose IP addresses from your own pool to
-    #   use for the accelerator's static IP addresses when you create an
-    #   accelerator. You can specify one or two addresses, separated by a
-    #   space. Do not include the /32 suffix.
+    #   Accelerator (BYOIP), you can choose an IPv4 address from your own pool
+    #   to use for the accelerator's static IPv4 address when you create an
+    #   accelerator.
     #
-    #   Only one IP address from each of your IP address ranges can be used
-    #   for each accelerator. If you specify only one IP address from your IP
-    #   address range, Global Accelerator assigns a second static IP address
-    #   for the accelerator from the AWS IP address pool.
+    #   After you bring an address range to Amazon Web Services, it appears in
+    #   your account as an address pool. When you create an accelerator, you
+    #   can assign one IPv4 address from your range to it. Global Accelerator
+    #   assigns you a second static IPv4 address from an Amazon IP address
+    #   range. If you bring two IPv4 address ranges to Amazon Web Services,
+    #   you can assign one IPv4 address from each range to your accelerator.
+    #   This restriction is because Global Accelerator assigns each address
+    #   range to a different network zone, for high availability.
+    #
+    #   You can specify one or two addresses, separated by a space. Do not
+    #   include the /32 suffix.
     #
     #   Note that you can't update IP addresses for an existing accelerator.
     #   To change them, you must create a new accelerator with the new
     #   addresses.
     #
-    #   For more information, see [Bring Your Own IP Addresses (BYOIP)][1] in
-    #   the *AWS Global Accelerator Developer Guide*.
+    #   For more information, see [Bring your own IP addresses (BYOIP)][1] in
+    #   the *Global Accelerator Developer Guide*.
     #
     #
     #
@@ -596,8 +606,8 @@ module Aws::GlobalAccelerator
     # @option params [Array<Types::Tag>] :tags
     #   Create tags for an accelerator.
     #
-    #   For more information, see [Tagging in AWS Global Accelerator][1] in
-    #   the *AWS Global Accelerator Developer Guide*.
+    #   For more information, see [Tagging in Global Accelerator][1] in the
+    #   *Global Accelerator Developer Guide*.
     #
     #
     #
@@ -611,7 +621,7 @@ module Aws::GlobalAccelerator
     #
     #   resp = client.create_accelerator({
     #     name: "GenericString", # required
-    #     ip_address_type: "IPV4", # accepts IPV4
+    #     ip_address_type: "IPV4", # accepts IPV4, DUAL_STACK
     #     ip_addresses: ["IpAddress"],
     #     enabled: false,
     #     idempotency_token: "IdempotencyToken", # required
@@ -627,16 +637,21 @@ module Aws::GlobalAccelerator
     #
     #   resp.accelerator.accelerator_arn #=> String
     #   resp.accelerator.name #=> String
-    #   resp.accelerator.ip_address_type #=> String, one of "IPV4"
+    #   resp.accelerator.ip_address_type #=> String, one of "IPV4", "DUAL_STACK"
     #   resp.accelerator.enabled #=> Boolean
     #   resp.accelerator.ip_sets #=> Array
     #   resp.accelerator.ip_sets[0].ip_family #=> String
     #   resp.accelerator.ip_sets[0].ip_addresses #=> Array
     #   resp.accelerator.ip_sets[0].ip_addresses[0] #=> String
+    #   resp.accelerator.ip_sets[0].ip_address_family #=> String, one of "IPv4", "IPv6"
     #   resp.accelerator.dns_name #=> String
     #   resp.accelerator.status #=> String, one of "DEPLOYED", "IN_PROGRESS"
     #   resp.accelerator.created_time #=> Time
     #   resp.accelerator.last_modified_time #=> Time
+    #   resp.accelerator.dual_stack_dns_name #=> String
+    #   resp.accelerator.events #=> Array
+    #   resp.accelerator.events[0].message #=> String
+    #   resp.accelerator.events[0].timestamp #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/CreateAccelerator AWS API Documentation
     #
@@ -658,8 +673,10 @@ module Aws::GlobalAccelerator
     # receive traffic, see the [ AllowCustomRoutingTraffic][1] operation.
     #
     # Global Accelerator is a global service that supports endpoints in
-    # multiple AWS Regions but you must specify the US West (Oregon) Region
-    # to create or update accelerators.
+    # multiple Amazon Web Services Regions but you must specify the US West
+    # (Oregon) Region to create, update, or otherwise work with
+    # accelerators. That is, for example, specify `--region us-west-2` on
+    # AWS CLI commands.
     #
     #
     #
@@ -671,26 +688,33 @@ module Aws::GlobalAccelerator
     #   (-), and must not begin or end with a hyphen.
     #
     # @option params [String] :ip_address_type
-    #   The value for the address type must be IPv4.
+    #   The IP address type that an accelerator supports. For a custom routing
+    #   accelerator, the value must be IPV4.
     #
     # @option params [Array<String>] :ip_addresses
     #   Optionally, if you've added your own IP address pool to Global
-    #   Accelerator (BYOIP), you can choose IP addresses from your own pool to
-    #   use for the accelerator's static IP addresses when you create an
-    #   accelerator. You can specify one or two addresses, separated by a
-    #   space. Do not include the /32 suffix.
+    #   Accelerator (BYOIP), you can choose an IPv4 address from your own pool
+    #   to use for the accelerator's static IPv4 address when you create an
+    #   accelerator.
     #
-    #   Only one IP address from each of your IP address ranges can be used
-    #   for each accelerator. If you specify only one IP address from your IP
-    #   address range, Global Accelerator assigns a second static IP address
-    #   for the accelerator from the AWS IP address pool.
+    #   After you bring an address range to Amazon Web Services, it appears in
+    #   your account as an address pool. When you create an accelerator, you
+    #   can assign one IPv4 address from your range to it. Global Accelerator
+    #   assigns you a second static IPv4 address from an Amazon IP address
+    #   range. If you bring two IPv4 address ranges to Amazon Web Services,
+    #   you can assign one IPv4 address from each range to your accelerator.
+    #   This restriction is because Global Accelerator assigns each address
+    #   range to a different network zone, for high availability.
+    #
+    #   You can specify one or two addresses, separated by a space. Do not
+    #   include the /32 suffix.
     #
     #   Note that you can't update IP addresses for an existing accelerator.
     #   To change them, you must create a new accelerator with the new
     #   addresses.
     #
     #   For more information, see [Bring your own IP addresses (BYOIP)][1] in
-    #   the *AWS Global Accelerator Developer Guide*.
+    #   the *Global Accelerator Developer Guide*.
     #
     #
     #
@@ -713,8 +737,8 @@ module Aws::GlobalAccelerator
     # @option params [Array<Types::Tag>] :tags
     #   Create tags for an accelerator.
     #
-    #   For more information, see [Tagging in AWS Global Accelerator][1] in
-    #   the *AWS Global Accelerator Developer Guide*.
+    #   For more information, see [Tagging in Global Accelerator][1] in the
+    #   *Global Accelerator Developer Guide*.
     #
     #
     #
@@ -728,7 +752,7 @@ module Aws::GlobalAccelerator
     #
     #   resp = client.create_custom_routing_accelerator({
     #     name: "GenericString", # required
-    #     ip_address_type: "IPV4", # accepts IPV4
+    #     ip_address_type: "IPV4", # accepts IPV4, DUAL_STACK
     #     ip_addresses: ["IpAddress"],
     #     enabled: false,
     #     idempotency_token: "IdempotencyToken", # required
@@ -744,12 +768,13 @@ module Aws::GlobalAccelerator
     #
     #   resp.accelerator.accelerator_arn #=> String
     #   resp.accelerator.name #=> String
-    #   resp.accelerator.ip_address_type #=> String, one of "IPV4"
+    #   resp.accelerator.ip_address_type #=> String, one of "IPV4", "DUAL_STACK"
     #   resp.accelerator.enabled #=> Boolean
     #   resp.accelerator.ip_sets #=> Array
     #   resp.accelerator.ip_sets[0].ip_family #=> String
     #   resp.accelerator.ip_sets[0].ip_addresses #=> Array
     #   resp.accelerator.ip_sets[0].ip_addresses[0] #=> String
+    #   resp.accelerator.ip_sets[0].ip_address_family #=> String, one of "IPv4", "IPv6"
     #   resp.accelerator.dns_name #=> String
     #   resp.accelerator.status #=> String, one of "DEPLOYED", "IN_PROGRESS"
     #   resp.accelerator.created_time #=> Time
@@ -766,15 +791,15 @@ module Aws::GlobalAccelerator
 
     # Create an endpoint group for the specified listener for a custom
     # routing accelerator. An endpoint group is a collection of endpoints in
-    # one AWS Region.
+    # one Amazon Web Services Region.
     #
     # @option params [required, String] :listener_arn
     #   The Amazon Resource Name (ARN) of the listener for a custom routing
     #   endpoint.
     #
     # @option params [required, String] :endpoint_group_region
-    #   The AWS Region where the endpoint group is located. A listener can
-    #   have only one endpoint group in a specific Region.
+    #   The Amazon Web Services Region where the endpoint group is located. A
+    #   listener can have only one endpoint group in a specific Region.
     #
     # @option params [required, Array<Types::CustomRoutingDestinationConfiguration>] :destination_configurations
     #   Sets the port range and protocol for all endpoints (virtual private
@@ -888,22 +913,23 @@ module Aws::GlobalAccelerator
     end
 
     # Create an endpoint group for the specified listener. An endpoint group
-    # is a collection of endpoints in one AWS Region. A resource must be
-    # valid and active when you add it as an endpoint.
+    # is a collection of endpoints in one Amazon Web Services Region. A
+    # resource must be valid and active when you add it as an endpoint.
     #
     # @option params [required, String] :listener_arn
     #   The Amazon Resource Name (ARN) of the listener.
     #
     # @option params [required, String] :endpoint_group_region
-    #   The AWS Region where the endpoint group is located. A listener can
-    #   have only one endpoint group in a specific Region.
+    #   The Amazon Web Services Region where the endpoint group is located. A
+    #   listener can have only one endpoint group in a specific Region.
     #
     # @option params [Array<Types::EndpointConfiguration>] :endpoint_configurations
     #   The list of endpoint objects.
     #
     # @option params [Float] :traffic_dial_percentage
-    #   The percentage of traffic to send to an AWS Region. Additional traffic
-    #   is distributed to other endpoint groups for this listener.
+    #   The percentage of traffic to send to an Amazon Web Services Region.
+    #   Additional traffic is distributed to other endpoint groups for this
+    #   listener.
     #
     #   Use this action to increase (dial up) or decrease (dial down) traffic
     #   to a specific Region. The percentage is applied to the traffic that
@@ -913,14 +939,13 @@ module Aws::GlobalAccelerator
     #   The default value is 100.
     #
     # @option params [Integer] :health_check_port
-    #   The port that AWS Global Accelerator uses to check the health of
-    #   endpoints that are part of this endpoint group. The default port is
-    #   the listener port that this endpoint group is associated with. If
-    #   listener port is a list of ports, Global Accelerator uses the first
-    #   port in the list.
+    #   The port that Global Accelerator uses to check the health of endpoints
+    #   that are part of this endpoint group. The default port is the listener
+    #   port that this endpoint group is associated with. If listener port is
+    #   a list of ports, Global Accelerator uses the first port in the list.
     #
     # @option params [String] :health_check_protocol
-    #   The protocol that AWS Global Accelerator uses to check the health of
+    #   The protocol that Global Accelerator uses to check the health of
     #   endpoints that are part of this endpoint group. The default value is
     #   TCP.
     #
@@ -951,8 +976,8 @@ module Aws::GlobalAccelerator
     #   and 443, but your accelerator routes that traffic to ports 1080 and
     #   1443, respectively, on the endpoints.
     #
-    #   For more information, see [ Port overrides][1] in the *AWS Global
-    #   Accelerator Developer Guide*.
+    #   For more information, see [ Overriding listener ports][1] in the
+    #   *Global Accelerator Developer Guide*.
     #
     #
     #
@@ -1039,15 +1064,14 @@ module Aws::GlobalAccelerator
     #   over whether to always route each client to the same specific
     #   endpoint.
     #
-    #   AWS Global Accelerator uses a consistent-flow hashing algorithm to
-    #   choose the optimal endpoint for a connection. If client affinity is
-    #   `NONE`, Global Accelerator uses the "five-tuple" (5-tuple)
-    #   properties—source IP address, source port, destination IP address,
-    #   destination port, and protocol—to select the hash value, and then
-    #   chooses the best endpoint. However, with this setting, if someone uses
-    #   different ports to connect to Global Accelerator, their connections
-    #   might not be always routed to the same endpoint because the hash value
-    #   changes.
+    #   Global Accelerator uses a consistent-flow hashing algorithm to choose
+    #   the optimal endpoint for a connection. If client affinity is `NONE`,
+    #   Global Accelerator uses the "five-tuple" (5-tuple) properties—source
+    #   IP address, source port, destination IP address, destination port, and
+    #   protocol—to select the hash value, and then chooses the best endpoint.
+    #   However, with this setting, if someone uses different ports to connect
+    #   to Global Accelerator, their connections might not be always routed to
+    #   the same endpoint because the hash value changes.
     #
     #   If you want a given client to always be routed to the same endpoint,
     #   set client affinity to `SOURCE_IP` instead. When you use the
@@ -1119,8 +1143,8 @@ module Aws::GlobalAccelerator
     # that you have permissions in place to avoid inadvertently deleting
     # accelerators. You can use IAM policies with Global Accelerator to
     # limit the users who have permissions to delete an accelerator. For
-    # more information, see [Authentication and Access Control][1] in the
-    # *AWS Global Accelerator Developer Guide*.
+    # more information, see [Identity and access management][1] in the
+    # *Global Accelerator Developer Guide*.
     #
     #
     #
@@ -1162,8 +1186,8 @@ module Aws::GlobalAccelerator
     # that you have permissions in place to avoid inadvertently deleting
     # accelerators. You can use IAM policies with Global Accelerator to
     # limit the users who have permissions to delete an accelerator. For
-    # more information, see [Authentication and Access Control][1] in the
-    # *AWS Global Accelerator Developer Guide*.
+    # more information, see [Identity and access management][1] in the
+    # *Global Accelerator Developer Guide*.
     #
     #
     #
@@ -1346,15 +1370,15 @@ module Aws::GlobalAccelerator
     end
 
     # Releases the specified address range that you provisioned to use with
-    # your AWS resources through bring your own IP addresses (BYOIP) and
-    # deletes the corresponding address pool.
+    # your Amazon Web Services resources through bring your own IP addresses
+    # (BYOIP) and deletes the corresponding address pool.
     #
     # Before you can release an address range, you must stop advertising it
     # by using [WithdrawByoipCidr][1] and you must not have any accelerators
     # that are using static IP addresses allocated from its address range.
     #
-    # For more information, see [Bring Your Own IP Addresses (BYOIP)][2] in
-    # the *AWS Global Accelerator Developer Guide*.
+    # For more information, see [Bring your own IP addresses (BYOIP)][2] in
+    # the *Global Accelerator Developer Guide*.
     #
     #
     #
@@ -1411,16 +1435,21 @@ module Aws::GlobalAccelerator
     #
     #   resp.accelerator.accelerator_arn #=> String
     #   resp.accelerator.name #=> String
-    #   resp.accelerator.ip_address_type #=> String, one of "IPV4"
+    #   resp.accelerator.ip_address_type #=> String, one of "IPV4", "DUAL_STACK"
     #   resp.accelerator.enabled #=> Boolean
     #   resp.accelerator.ip_sets #=> Array
     #   resp.accelerator.ip_sets[0].ip_family #=> String
     #   resp.accelerator.ip_sets[0].ip_addresses #=> Array
     #   resp.accelerator.ip_sets[0].ip_addresses[0] #=> String
+    #   resp.accelerator.ip_sets[0].ip_address_family #=> String, one of "IPv4", "IPv6"
     #   resp.accelerator.dns_name #=> String
     #   resp.accelerator.status #=> String, one of "DEPLOYED", "IN_PROGRESS"
     #   resp.accelerator.created_time #=> Time
     #   resp.accelerator.last_modified_time #=> Time
+    #   resp.accelerator.dual_stack_dns_name #=> String
+    #   resp.accelerator.events #=> Array
+    #   resp.accelerator.events[0].message #=> String
+    #   resp.accelerator.events[0].timestamp #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/DescribeAccelerator AWS API Documentation
     #
@@ -1481,12 +1510,13 @@ module Aws::GlobalAccelerator
     #
     #   resp.accelerator.accelerator_arn #=> String
     #   resp.accelerator.name #=> String
-    #   resp.accelerator.ip_address_type #=> String, one of "IPV4"
+    #   resp.accelerator.ip_address_type #=> String, one of "IPV4", "DUAL_STACK"
     #   resp.accelerator.enabled #=> Boolean
     #   resp.accelerator.ip_sets #=> Array
     #   resp.accelerator.ip_sets[0].ip_family #=> String
     #   resp.accelerator.ip_sets[0].ip_addresses #=> Array
     #   resp.accelerator.ip_sets[0].ip_addresses[0] #=> String
+    #   resp.accelerator.ip_sets[0].ip_address_family #=> String, one of "IPv4", "IPv6"
     #   resp.accelerator.dns_name #=> String
     #   resp.accelerator.status #=> String, one of "DEPLOYED", "IN_PROGRESS"
     #   resp.accelerator.created_time #=> Time
@@ -1676,7 +1706,7 @@ module Aws::GlobalAccelerator
       req.send_request(options)
     end
 
-    # List the accelerators for an AWS account.
+    # List the accelerators for an Amazon Web Services account.
     #
     # @option params [Integer] :max_results
     #   The number of Global Accelerator objects that you want to return with
@@ -1705,16 +1735,21 @@ module Aws::GlobalAccelerator
     #   resp.accelerators #=> Array
     #   resp.accelerators[0].accelerator_arn #=> String
     #   resp.accelerators[0].name #=> String
-    #   resp.accelerators[0].ip_address_type #=> String, one of "IPV4"
+    #   resp.accelerators[0].ip_address_type #=> String, one of "IPV4", "DUAL_STACK"
     #   resp.accelerators[0].enabled #=> Boolean
     #   resp.accelerators[0].ip_sets #=> Array
     #   resp.accelerators[0].ip_sets[0].ip_family #=> String
     #   resp.accelerators[0].ip_sets[0].ip_addresses #=> Array
     #   resp.accelerators[0].ip_sets[0].ip_addresses[0] #=> String
+    #   resp.accelerators[0].ip_sets[0].ip_address_family #=> String, one of "IPv4", "IPv6"
     #   resp.accelerators[0].dns_name #=> String
     #   resp.accelerators[0].status #=> String, one of "DEPLOYED", "IN_PROGRESS"
     #   resp.accelerators[0].created_time #=> Time
     #   resp.accelerators[0].last_modified_time #=> Time
+    #   resp.accelerators[0].dual_stack_dns_name #=> String
+    #   resp.accelerators[0].events #=> Array
+    #   resp.accelerators[0].events[0].message #=> String
+    #   resp.accelerators[0].events[0].timestamp #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ListAccelerators AWS API Documentation
@@ -1775,7 +1810,8 @@ module Aws::GlobalAccelerator
       req.send_request(options)
     end
 
-    # List the custom routing accelerators for an AWS account.
+    # List the custom routing accelerators for an Amazon Web Services
+    # account.
     #
     # @option params [Integer] :max_results
     #   The number of custom routing Global Accelerator objects that you want
@@ -1804,12 +1840,13 @@ module Aws::GlobalAccelerator
     #   resp.accelerators #=> Array
     #   resp.accelerators[0].accelerator_arn #=> String
     #   resp.accelerators[0].name #=> String
-    #   resp.accelerators[0].ip_address_type #=> String, one of "IPV4"
+    #   resp.accelerators[0].ip_address_type #=> String, one of "IPV4", "DUAL_STACK"
     #   resp.accelerators[0].enabled #=> Boolean
     #   resp.accelerators[0].ip_sets #=> Array
     #   resp.accelerators[0].ip_sets[0].ip_family #=> String
     #   resp.accelerators[0].ip_sets[0].ip_addresses #=> Array
     #   resp.accelerators[0].ip_sets[0].ip_addresses[0] #=> String
+    #   resp.accelerators[0].ip_sets[0].ip_address_family #=> String, one of "IPv4", "IPv6"
     #   resp.accelerators[0].dns_name #=> String
     #   resp.accelerators[0].status #=> String, one of "DEPLOYED", "IN_PROGRESS"
     #   resp.accelerators[0].created_time #=> Time
@@ -2047,7 +2084,7 @@ module Aws::GlobalAccelerator
     #   resp.destination_port_mappings[0].endpoint_group_region #=> String
     #   resp.destination_port_mappings[0].destination_socket_address.ip_address #=> String
     #   resp.destination_port_mappings[0].destination_socket_address.port #=> Integer
-    #   resp.destination_port_mappings[0].ip_address_type #=> String, one of "IPV4"
+    #   resp.destination_port_mappings[0].ip_address_type #=> String, one of "IPV4", "DUAL_STACK"
     #   resp.destination_port_mappings[0].destination_traffic_state #=> String, one of "ALLOW", "DENY"
     #   resp.next_token #=> String
     #
@@ -2170,8 +2207,8 @@ module Aws::GlobalAccelerator
 
     # List all tags for an accelerator.
     #
-    # For more information, see [Tagging in AWS Global Accelerator][1] in
-    # the *AWS Global Accelerator Developer Guide*.
+    # For more information, see [Tagging in Global Accelerator][1] in the
+    # *Global Accelerator Developer Guide*.
     #
     #
     #
@@ -2206,13 +2243,13 @@ module Aws::GlobalAccelerator
       req.send_request(options)
     end
 
-    # Provisions an IP address range to use with your AWS resources through
-    # bring your own IP addresses (BYOIP) and creates a corresponding
-    # address pool. After the address range is provisioned, it is ready to
-    # be advertised using [ AdvertiseByoipCidr][1].
+    # Provisions an IP address range to use with your Amazon Web Services
+    # resources through bring your own IP addresses (BYOIP) and creates a
+    # corresponding address pool. After the address range is provisioned, it
+    # is ready to be advertised using [ AdvertiseByoipCidr][1].
     #
-    # For more information, see [Bring Your Own IP Addresses (BYOIP)][2] in
-    # the *AWS Global Accelerator Developer Guide*.
+    # For more information, see [Bring your own IP addresses (BYOIP)][2] in
+    # the *Global Accelerator Developer Guide*.
     #
     #
     #
@@ -2290,8 +2327,8 @@ module Aws::GlobalAccelerator
 
     # Add tags to an accelerator resource.
     #
-    # For more information, see [Tagging in AWS Global Accelerator][1] in
-    # the *AWS Global Accelerator Developer Guide*.
+    # For more information, see [Tagging in Global Accelerator][1] in the
+    # *Global Accelerator Developer Guide*.
     #
     #
     #
@@ -2333,8 +2370,8 @@ module Aws::GlobalAccelerator
     # operation succeeds even if you attempt to remove tags from an
     # accelerator that was already removed.
     #
-    # For more information, see [Tagging in AWS Global Accelerator][1] in
-    # the *AWS Global Accelerator Developer Guide*.
+    # For more information, see [Tagging in Global Accelerator][1] in the
+    # *Global Accelerator Developer Guide*.
     #
     #
     #
@@ -2369,19 +2406,22 @@ module Aws::GlobalAccelerator
     # Update an accelerator.
     #
     # Global Accelerator is a global service that supports endpoints in
-    # multiple AWS Regions but you must specify the US West (Oregon) Region
-    # to create or update accelerators.
+    # multiple Amazon Web Services Regions but you must specify the US West
+    # (Oregon) Region to create, update, or otherwise work with
+    # accelerators. That is, for example, specify `--region us-west-2` on
+    # AWS CLI commands.
     #
     # @option params [required, String] :accelerator_arn
     #   The Amazon Resource Name (ARN) of the accelerator to update.
     #
     # @option params [String] :name
-    #   The name of the accelerator. The name can have a maximum of 32
-    #   characters, must contain only alphanumeric characters or hyphens (-),
-    #   and must not begin or end with a hyphen.
+    #   The name of the accelerator. The name can have a maximum of 64
+    #   characters, must contain only alphanumeric characters, periods (.), or
+    #   hyphens (-), and must not begin or end with a hyphen or period.
     #
     # @option params [String] :ip_address_type
-    #   The IP address type, which must be IPv4.
+    #   The IP address type that an accelerator supports. For a standard
+    #   accelerator, the value can be IPV4 or DUAL\_STACK.
     #
     # @option params [Boolean] :enabled
     #   Indicates whether an accelerator is enabled. The value is true or
@@ -2399,7 +2439,7 @@ module Aws::GlobalAccelerator
     #   resp = client.update_accelerator({
     #     accelerator_arn: "GenericString", # required
     #     name: "GenericString",
-    #     ip_address_type: "IPV4", # accepts IPV4
+    #     ip_address_type: "IPV4", # accepts IPV4, DUAL_STACK
     #     enabled: false,
     #   })
     #
@@ -2407,16 +2447,21 @@ module Aws::GlobalAccelerator
     #
     #   resp.accelerator.accelerator_arn #=> String
     #   resp.accelerator.name #=> String
-    #   resp.accelerator.ip_address_type #=> String, one of "IPV4"
+    #   resp.accelerator.ip_address_type #=> String, one of "IPV4", "DUAL_STACK"
     #   resp.accelerator.enabled #=> Boolean
     #   resp.accelerator.ip_sets #=> Array
     #   resp.accelerator.ip_sets[0].ip_family #=> String
     #   resp.accelerator.ip_sets[0].ip_addresses #=> Array
     #   resp.accelerator.ip_sets[0].ip_addresses[0] #=> String
+    #   resp.accelerator.ip_sets[0].ip_address_family #=> String, one of "IPv4", "IPv6"
     #   resp.accelerator.dns_name #=> String
     #   resp.accelerator.status #=> String, one of "DEPLOYED", "IN_PROGRESS"
     #   resp.accelerator.created_time #=> Time
     #   resp.accelerator.last_modified_time #=> Time
+    #   resp.accelerator.dual_stack_dns_name #=> String
+    #   resp.accelerator.events #=> Array
+    #   resp.accelerator.events[0].message #=> String
+    #   resp.accelerator.events[0].timestamp #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/UpdateAccelerator AWS API Documentation
     #
@@ -2438,8 +2483,8 @@ module Aws::GlobalAccelerator
     #   the value is true, `FlowLogsS3Bucket` and `FlowLogsS3Prefix` must be
     #   specified.
     #
-    #   For more information, see [Flow Logs][1] in the *AWS Global
-    #   Accelerator Developer Guide*.
+    #   For more information, see [Flow Logs][1] in the *Global Accelerator
+    #   Developer Guide*.
     #
     #
     #
@@ -2448,17 +2493,15 @@ module Aws::GlobalAccelerator
     # @option params [String] :flow_logs_s3_bucket
     #   The name of the Amazon S3 bucket for the flow logs. Attribute is
     #   required if `FlowLogsEnabled` is `true`. The bucket must exist and
-    #   have a bucket policy that grants AWS Global Accelerator permission to
+    #   have a bucket policy that grants Global Accelerator permission to
     #   write to the bucket.
     #
     # @option params [String] :flow_logs_s3_prefix
     #   Update the prefix for the location in the Amazon S3 bucket for the
     #   flow logs. Attribute is required if `FlowLogsEnabled` is `true`.
     #
-    #   If you don’t specify a prefix, the flow logs are stored in the root of
-    #   the bucket. If you specify slash (/) for the S3 bucket prefix, the log
-    #   file bucket folder structure will include a double slash (//), like
-    #   the following:
+    #   If you specify slash (/) for the S3 bucket prefix, the log file bucket
+    #   folder structure will include a double slash (//), like the following:
     #
     #   s3-bucket\_name//AWSLogs/aws\_account\_id
     #
@@ -2496,12 +2539,13 @@ module Aws::GlobalAccelerator
     #   The Amazon Resource Name (ARN) of the accelerator to update.
     #
     # @option params [String] :name
-    #   The name of the accelerator. The name can have a maximum of 32
-    #   characters, must contain only alphanumeric characters or hyphens (-),
-    #   and must not begin or end with a hyphen.
+    #   The name of the accelerator. The name can have a maximum of 64
+    #   characters, must contain only alphanumeric characters, periods (.), or
+    #   hyphens (-), and must not begin or end with a hyphen or period.
     #
     # @option params [String] :ip_address_type
-    #   The value for the address type must be IPv4.
+    #   The IP address type that an accelerator supports. For a custom routing
+    #   accelerator, the value must be IPV4.
     #
     # @option params [Boolean] :enabled
     #   Indicates whether an accelerator is enabled. The value is true or
@@ -2519,7 +2563,7 @@ module Aws::GlobalAccelerator
     #   resp = client.update_custom_routing_accelerator({
     #     accelerator_arn: "GenericString", # required
     #     name: "GenericString",
-    #     ip_address_type: "IPV4", # accepts IPV4
+    #     ip_address_type: "IPV4", # accepts IPV4, DUAL_STACK
     #     enabled: false,
     #   })
     #
@@ -2527,12 +2571,13 @@ module Aws::GlobalAccelerator
     #
     #   resp.accelerator.accelerator_arn #=> String
     #   resp.accelerator.name #=> String
-    #   resp.accelerator.ip_address_type #=> String, one of "IPV4"
+    #   resp.accelerator.ip_address_type #=> String, one of "IPV4", "DUAL_STACK"
     #   resp.accelerator.enabled #=> Boolean
     #   resp.accelerator.ip_sets #=> Array
     #   resp.accelerator.ip_sets[0].ip_family #=> String
     #   resp.accelerator.ip_sets[0].ip_addresses #=> Array
     #   resp.accelerator.ip_sets[0].ip_addresses[0] #=> String
+    #   resp.accelerator.ip_sets[0].ip_address_family #=> String, one of "IPv4", "IPv6"
     #   resp.accelerator.dns_name #=> String
     #   resp.accelerator.status #=> String, one of "DEPLOYED", "IN_PROGRESS"
     #   resp.accelerator.created_time #=> Time
@@ -2558,8 +2603,8 @@ module Aws::GlobalAccelerator
     #   the value is true, `FlowLogsS3Bucket` and `FlowLogsS3Prefix` must be
     #   specified.
     #
-    #   For more information, see [Flow Logs][1] in the *AWS Global
-    #   Accelerator Developer Guide*.
+    #   For more information, see [Flow logs][1] in the *Global Accelerator
+    #   Developer Guide*.
     #
     #
     #
@@ -2568,7 +2613,7 @@ module Aws::GlobalAccelerator
     # @option params [String] :flow_logs_s3_bucket
     #   The name of the Amazon S3 bucket for the flow logs. Attribute is
     #   required if `FlowLogsEnabled` is `true`. The bucket must exist and
-    #   have a bucket policy that grants AWS Global Accelerator permission to
+    #   have a bucket policy that grants Global Accelerator permission to
     #   write to the bucket.
     #
     # @option params [String] :flow_logs_s3_prefix
@@ -2670,8 +2715,9 @@ module Aws::GlobalAccelerator
     #   you add it as an endpoint.
     #
     # @option params [Float] :traffic_dial_percentage
-    #   The percentage of traffic to send to an AWS Region. Additional traffic
-    #   is distributed to other endpoint groups for this listener.
+    #   The percentage of traffic to send to an Amazon Web Services Region.
+    #   Additional traffic is distributed to other endpoint groups for this
+    #   listener.
     #
     #   Use this action to increase (dial up) or decrease (dial down) traffic
     #   to a specific Region. The percentage is applied to the traffic that
@@ -2681,14 +2727,14 @@ module Aws::GlobalAccelerator
     #   The default value is 100.
     #
     # @option params [Integer] :health_check_port
-    #   The port that AWS Global Accelerator uses to check the health of
-    #   endpoints that are part of this endpoint group. The default port is
-    #   the listener port that this endpoint group is associated with. If the
-    #   listener port is a list of ports, Global Accelerator uses the first
-    #   port in the list.
+    #   The port that Global Accelerator uses to check the health of endpoints
+    #   that are part of this endpoint group. The default port is the listener
+    #   port that this endpoint group is associated with. If the listener port
+    #   is a list of ports, Global Accelerator uses the first port in the
+    #   list.
     #
     # @option params [String] :health_check_protocol
-    #   The protocol that AWS Global Accelerator uses to check the health of
+    #   The protocol that Global Accelerator uses to check the health of
     #   endpoints that are part of this endpoint group. The default value is
     #   TCP.
     #
@@ -2712,8 +2758,8 @@ module Aws::GlobalAccelerator
     #   and 443, but your accelerator routes that traffic to ports 1080 and
     #   1443, respectively, on the endpoints.
     #
-    #   For more information, see [ Port overrides][1] in the *AWS Global
-    #   Accelerator Developer Guide*.
+    #   For more information, see [ Overriding listener ports][1] in the
+    #   *Global Accelerator Developer Guide*.
     #
     #
     #
@@ -2797,15 +2843,14 @@ module Aws::GlobalAccelerator
     #   over whether to always route each client to the same specific
     #   endpoint.
     #
-    #   AWS Global Accelerator uses a consistent-flow hashing algorithm to
-    #   choose the optimal endpoint for a connection. If client affinity is
-    #   `NONE`, Global Accelerator uses the "five-tuple" (5-tuple)
-    #   properties—source IP address, source port, destination IP address,
-    #   destination port, and protocol—to select the hash value, and then
-    #   chooses the best endpoint. However, with this setting, if someone uses
-    #   different ports to connect to Global Accelerator, their connections
-    #   might not be always routed to the same endpoint because the hash value
-    #   changes.
+    #   Global Accelerator uses a consistent-flow hashing algorithm to choose
+    #   the optimal endpoint for a connection. If client affinity is `NONE`,
+    #   Global Accelerator uses the "five-tuple" (5-tuple) properties—source
+    #   IP address, source port, destination IP address, destination port, and
+    #   protocol—to select the hash value, and then chooses the best endpoint.
+    #   However, with this setting, if someone uses different ports to connect
+    #   to Global Accelerator, their connections might not be always routed to
+    #   the same endpoint because the hash value changes.
     #
     #   If you want a given client to always be routed to the same endpoint,
     #   set client affinity to `SOURCE_IP` instead. When you use the
@@ -2856,10 +2901,10 @@ module Aws::GlobalAccelerator
     # even if you specify different address ranges each time.
     #
     # It can take a few minutes before traffic to the specified addresses
-    # stops routing to AWS because of propagation delays.
+    # stops routing to Amazon Web Services because of propagation delays.
     #
-    # For more information, see [Bring Your Own IP Addresses (BYOIP)][1] in
-    # the *AWS Global Accelerator Developer Guide*.
+    # For more information, see [Bring your own IP addresses (BYOIP)][1] in
+    # the *Global Accelerator Developer Guide*.
     #
     #
     #
@@ -2908,7 +2953,7 @@ module Aws::GlobalAccelerator
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-globalaccelerator'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

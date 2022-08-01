@@ -1608,13 +1608,21 @@ module Aws::FSx
     #   Specifies the type of data repository task to create.
     #
     # @option params [Array<String>] :paths
-    #   (Optional) The path or paths on the Amazon FSx file system to use when
-    #   the data repository task is processed. The default path is the file
-    #   system root directory. The paths you provide need to be relative to
-    #   the mount point of the file system. If the mount point is `/mnt/fsx`
-    #   and `/mnt/fsx/path1` is a directory or file on the file system you
-    #   want to export, then the path to provide is `path1`. If a path that
-    #   you provide isn't valid, the task fails.
+    #   A list of paths for the data repository task to use when the task is
+    #   processed. If a path that you provide isn't valid, the task fails.
+    #
+    #   * For export tasks, the list contains paths on the Amazon FSx file
+    #     system from which the files are exported to the Amazon S3 bucket.
+    #     The default path is the file system root directory. The paths you
+    #     provide need to be relative to the mount point of the file system.
+    #     If the mount point is `/mnt/fsx` and `/mnt/fsx/path1` is a directory
+    #     or file on the file system you want to export, then the path to
+    #     provide is `path1`.
+    #
+    #   * For import tasks, the list contains paths in the Amazon S3 bucket
+    #     from which POSIX metadata changes are imported to the Amazon FSx
+    #     file system. The path can be an S3 bucket or prefix in the format
+    #     `s3://myBucket/myPrefix` (where `myPrefix` is optional).
     #
     # @option params [required, String] :file_system_id
     #   The globally unique ID of the file system, assigned by Amazon FSx.
@@ -5534,8 +5542,7 @@ module Aws::FSx
       req.send_request(options)
     end
 
-    # Lists tags for an Amazon FSx file systems and backups in the case of
-    # Amazon FSx for Windows File Server.
+    # Lists tags for Amazon FSx resources.
     #
     # When retrieving all tags, you can optionally specify the `MaxResults`
     # parameter to limit the number of tags in a response. If more tags
@@ -6988,7 +6995,7 @@ module Aws::FSx
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

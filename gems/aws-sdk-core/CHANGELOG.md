@@ -1,10 +1,21 @@
 Unreleased Changes
 ------------------
 
+3.131.5 (2022-07-28)
+------------------
+
+* Issue - Fix `to_json` usage in nested hashes by defining `as_json` (#2733).
+
+3.131.4 (2022-07-27)
+------------------
+
+* Issue - Fix `to_json` usage on pageable responses when using Rails (#2733).
+* Issue - Use `expand_path` on credential/config paths in SharedConfig (#2735).
+
 3.131.3 (2022-07-18)
 ------------------
 
-* Issue - Add support for serializing shapes on the body with `jsonvalue` members. 
+* Issue - Add support for serializing shapes on the body with `jsonvalue` members.
 
 3.131.2 (2022-06-20)
 ------------------
