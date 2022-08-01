@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2022-07-27)
+------------------
+
+* Feature - Global Accelerator now supports dual-stack accelerators, enabling support for IPv4 and IPv6 traffic.
+
 1.39.0 (2022-02-24)
 ------------------
 

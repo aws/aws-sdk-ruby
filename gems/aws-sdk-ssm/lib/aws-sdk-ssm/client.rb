@@ -361,7 +361,7 @@ module Aws::SSM
 
     # @!group API Operations
 
-    # Adds or overwrites one or more tags for the specified resource. Tags
+    # Adds or overwrites one or more tags for the specified resource. *Tags*
     # are metadata that you can assign to your automations, documents,
     # managed nodes, maintenance windows, Parameter Store parameters, and
     # patch baselines. Tags enable you to categorize your resources in
@@ -1254,9 +1254,8 @@ module Aws::SSM
     #
     # @option params [String] :version_name
     #   An optional field specifying the version of the artifact you are
-    #   creating with the document. For example, "Release 12, Update 6".
-    #   This value is unique across all versions of a document, and can't be
-    #   changed.
+    #   creating with the document. For example, `Release12.1`. This value is
+    #   unique across all versions of a document, and can't be changed.
     #
     # @option params [String] :document_type
     #   The type of document to create.
@@ -6708,11 +6707,13 @@ module Aws::SSM
     #
     #   * `/ssm/documents/console/public-sharing-permission`
     #
+    #   * `/ssm/managed-instance/activation-tier`
+    #
+    #   * `/ssm/opsinsights/opscenter`
+    #
     #   * `/ssm/parameter-store/default-parameter-tier`
     #
     #   * `/ssm/parameter-store/high-throughput-enabled`
-    #
-    #   * `/ssm/managed-instance/activation-tier`
     #
     # @return [Types::GetServiceSettingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8037,7 +8038,7 @@ module Aws::SSM
     # * Status: The status of the compliance item. For example, `approved`
     #   for patches, or `Failed` for associations.
     #
-    # * Severity: A patch severity. For example, `critical`.
+    # * Severity: A patch severity. For example, `Critical`.
     #
     # * DocumentName: An SSM document name. For example,
     #   `AWS-RunPatchBaseline`.
@@ -9003,11 +9004,13 @@ module Aws::SSM
     #
     #   * `/ssm/documents/console/public-sharing-permission`
     #
+    #   * `/ssm/managed-instance/activation-tier`
+    #
+    #   * `/ssm/opsinsights/opscenter`
+    #
     #   * `/ssm/parameter-store/default-parameter-tier`
     #
     #   * `/ssm/parameter-store/high-throughput-enabled`
-    #
-    #   * `/ssm/managed-instance/activation-tier`
     #
     # @return [Types::ResetServiceSettingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9713,11 +9716,17 @@ module Aws::SSM
     #   The managed node to connect to for the session.
     #
     # @option params [String] :document_name
-    #   The name of the SSM document to define the parameters and plugin
-    #   settings for the session. For example, `SSM-SessionManagerRunShell`.
-    #   You can call the GetDocument API to verify the document exists before
-    #   attempting to start a session. If no document name is provided, a
-    #   shell to the managed node is launched by default.
+    #   The name of the SSM document you want to use to define the type of
+    #   session, input parameters, or preferences for the session. For
+    #   example, `SSM-SessionManagerRunShell`. You can call the GetDocument
+    #   API to verify the document exists before attempting to start a
+    #   session. If no document name is provided, a shell to the managed node
+    #   is launched by default. For more information, see [Start a session][1]
+    #   in the *Amazon Web Services Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-sessions-start.html
     #
     # @option params [String] :reason
     #   The reason for connecting to the instance. This value is included in
@@ -11569,22 +11578,17 @@ module Aws::SSM
     #
     #   * `/ssm/documents/console/public-sharing-permission`
     #
+    #   * `/ssm/managed-instance/activation-tier`
+    #
+    #   * `/ssm/opsinsights/opscenter`
+    #
     #   * `/ssm/parameter-store/default-parameter-tier`
     #
     #   * `/ssm/parameter-store/high-throughput-enabled`
     #
-    #   * `/ssm/managed-instance/activation-tier`
-    #
     # @option params [required, String] :setting_value
     #   The new value to specify for the service setting. The following list
     #   specifies the available values for each setting.
-    #
-    #   * `/ssm/parameter-store/default-parameter-tier`\: `Standard`,
-    #     `Advanced`, `Intelligent-Tiering`
-    #
-    #   * `/ssm/parameter-store/high-throughput-enabled`\: `true` or `false`
-    #
-    #   * `/ssm/managed-instance/activation-tier`\: `true` or `false`
     #
     #   * `/ssm/automation/customer-script-log-destination`\: `CloudWatch`
     #
@@ -11595,6 +11599,13 @@ module Aws::SSM
     #     `Disable`
     #
     #   * `/ssm/managed-instance/activation-tier`\: `standard` or `advanced`
+    #
+    #   * `/ssm/opsinsights/opscenter`\: `Enabled` or `Disabled`
+    #
+    #   * `/ssm/parameter-store/default-parameter-tier`\: `Standard`,
+    #     `Advanced`, `Intelligent-Tiering`
+    #
+    #   * `/ssm/parameter-store/high-throughput-enabled`\: `true` or `false`
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -11627,7 +11638,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.137.0'
+      context[:gem_version] = '1.138.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
