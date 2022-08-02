@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.137.0 (2022-08-02)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-licensemanagerusersubscriptions` gem.
+
 3.136.0 (2022-07-05)
 ------------------
 

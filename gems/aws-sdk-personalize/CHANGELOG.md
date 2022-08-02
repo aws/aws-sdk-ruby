@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2022-08-02)
+------------------
+
+* Feature - This release adds support for incremental bulk ingestion for the Personalize CreateDatasetImportJob API.
+
 1.42.0 (2022-05-23)
 ------------------
 

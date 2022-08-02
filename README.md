@@ -402,6 +402,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Lambda                                            | Aws::Lambda                              | aws-sdk-lambda                              | 2015-03-31  |
 | AWS Lambda                                            | Aws::LambdaPreview                       | aws-sdk-lambdapreview                       | 2014-11-11  |
 | AWS License Manager                                   | Aws::LicenseManager                      | aws-sdk-licensemanager                      | 2018-08-01  |
+| AWS License Manager User Subscriptions                | Aws::LicenseManagerUserSubscriptions     | aws-sdk-licensemanagerusersubscriptions     | 2018-05-10  |
 | AWS Marketplace Catalog Service                       | Aws::MarketplaceCatalog                  | aws-sdk-marketplacecatalog                  | 2018-09-17  |
 | AWS Marketplace Commerce Analytics                    | Aws::MarketplaceCommerceAnalytics        | aws-sdk-marketplacecommerceanalytics        | 2015-07-01  |
 | AWS Marketplace Entitlement Service                   | Aws::MarketplaceEntitlementService       | aws-sdk-marketplaceentitlementservice       | 2017-01-11  |

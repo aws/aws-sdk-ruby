@@ -583,6 +583,9 @@
   "LicenseManager": {
     "models": "license-manager/2018-08-01"
   },
+  "LicenseManagerUserSubscriptions": {
+    "models": "license-manager-user-subscriptions/2018-05-10"
+  },
   "Lightsail": {
     "models": "lightsail/2016-11-28"
   },

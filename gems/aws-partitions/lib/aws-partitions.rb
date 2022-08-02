@@ -401,6 +401,7 @@ module Aws
             'LexModelsV2' => 'models-v2-lex',
             'LexRuntimeV2' => 'runtime-v2-lex',
             'LicenseManager' => 'license-manager',
+            'LicenseManagerUserSubscriptions' => 'license-manager-user-subscriptions',
             'Lightsail' => 'lightsail',
             'LocationService' => 'geo',
             'LookoutEquipment' => 'lookoutequipment',

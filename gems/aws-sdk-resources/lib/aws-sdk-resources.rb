@@ -184,6 +184,7 @@ module Aws
   autoload :LexModelsV2, 'aws-sdk-lexmodelsv2'
   autoload :LexRuntimeV2, 'aws-sdk-lexruntimev2'
   autoload :LicenseManager, 'aws-sdk-licensemanager'
+  autoload :LicenseManagerUserSubscriptions, 'aws-sdk-licensemanagerusersubscriptions'
   autoload :Lightsail, 'aws-sdk-lightsail'
   autoload :LocationService, 'aws-sdk-locationservice'
   autoload :LookoutEquipment, 'aws-sdk-lookoutequipment'
