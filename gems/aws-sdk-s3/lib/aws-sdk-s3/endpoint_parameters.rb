@@ -8,55 +8,44 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::S3
-
-  # TODO - better documentation
-  # Structure generated with all Endpoint Parameters.
+  # Endpoint parameters used to influence endpoints per request.
   #
   # @!attribute bucket
   #
   #   @return [String]
   #
-
   # @!attribute region
   #
   #   @return [String]
   #
-
   # @!attribute use_fips
   #
   #   @return [Boolean]
   #
-
   # @!attribute use_dual_stack
   #
   #   @return [Boolean]
   #
-
   # @!attribute endpoint
   #
   #   @return [String]
   #
-
   # @!attribute force_path_style
   #
   #   @return [Boolean]
   #
-
   # @!attribute accelerate
   #
   #   @return [Boolean]
   #
-
   # @!attribute disable_access_points
   #
   #   @return [Boolean]
   #
-
   # @!attribute disable_mrap
   #
   #   @return [Boolean]
   #
-
   EndpointParameters = Struct.new(
     :bucket,
     :region,
@@ -70,35 +59,8 @@ module Aws::S3
   ) do
     include Aws::Structure
 
-    def initialize(options = {})
-        self[:bucket] = options[:bucket]
-        self[:region] = options[:region]
-        self[:use_fips] = options[:use_fips] || false
-        if self[:use_fips].nil?
-          raise ArgumentError, "Missing required EndpointParameter: :use_fips"
-        end
-        self[:use_dual_stack] = options[:use_dual_stack] || false
-        if self[:use_dual_stack].nil?
-          raise ArgumentError, "Missing required EndpointParameter: :use_dual_stack"
-        end
-        self[:endpoint] = options[:endpoint]
-        self[:force_path_style] = options[:force_path_style]
-        self[:accelerate] = options[:accelerate] || false
-        if self[:accelerate].nil?
-          raise ArgumentError, "Missing required EndpointParameter: :accelerate"
-        end
-        self[:disable_access_points] = options[:disable_access_points]
-        self[:disable_mrap] = options[:disable_mrap]
-    end
-
     # @api private
-    def reference(name)
-        self[PARAM_MAP.fetch(name)]
-    end
-
-    private
-
-    PARAM_MAP = {
+    self::PARAM_MAP = {
       'Bucket' => :bucket,
       'Region' => :region,
       'UseFIPS' => :use_fips,
@@ -109,5 +71,26 @@ module Aws::S3
       'DisableAccessPoints' => :disable_access_points,
       'DisableMRAP' => :disable_mrap,
     }.freeze
+
+    def initialize(options = {})
+      self[:bucket] = options[:bucket]
+      self[:region] = options[:region]
+      self[:use_fips] = options[:use_fips] || false
+      if self[:use_fips].nil?
+        raise ArgumentError, "Missing required EndpointParameter: :use_fips"
+      end
+      self[:use_dual_stack] = options[:use_dual_stack] || false
+      if self[:use_dual_stack].nil?
+        raise ArgumentError, "Missing required EndpointParameter: :use_dual_stack"
+      end
+      self[:endpoint] = options[:endpoint]
+      self[:force_path_style] = options[:force_path_style]
+      self[:accelerate] = options[:accelerate] || false
+      if self[:accelerate].nil?
+        raise ArgumentError, "Missing required EndpointParameter: :accelerate"
+      end
+      self[:disable_access_points] = options[:disable_access_points]
+      self[:disable_mrap] = options[:disable_mrap]
+    end
   end
 end

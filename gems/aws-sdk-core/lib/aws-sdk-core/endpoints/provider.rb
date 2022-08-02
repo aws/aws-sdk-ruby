@@ -8,6 +8,8 @@ module Aws
 
       def resolve_endpoint(parameters)
         obj = @rule_set.rules.find { |rules| rules.match?(parameters) }
+        # TODO - do substitutions here?
+        obj
       end
 
       # def initialize(options = {})

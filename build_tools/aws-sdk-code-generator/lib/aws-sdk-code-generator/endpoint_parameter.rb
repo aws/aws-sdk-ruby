@@ -22,7 +22,7 @@ module AwsSdkCodeGenerator
           @documentation += "  #     Since: #{deprecated['since']}\n"
         end
       end
-      @documentation += "  #\n  #   @return [#{@type}]\n  #\n"
+      @documentation += "  #\n  #   @return [#{@type}]\n  #"
     end
 
     attr_reader :name, :documentation, :required, :default

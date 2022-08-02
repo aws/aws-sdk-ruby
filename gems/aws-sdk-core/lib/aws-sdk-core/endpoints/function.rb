@@ -12,28 +12,47 @@ module Aws
       attr_reader :fn
       attr_reader :argv
 
-      def call
+      def call(parameters, assigns)
+        args = []
+        @argv.each do |arg|
+          if arg.is_a?(Reference)
+            if parameters.class::PARAM_MAP.key?(arg.ref)
+              member_name = parameters.class::PARAM_MAP[arg.ref]
+              args << parameters[member_name]
+            elsif assigns.key?(arg.ref)
+              args << assigns[arg.ref]
+            else
+              raise ArgumentError,
+                    "Reference #{arg.ref} is not a param or an assigned value."
+            end
+          elsif arg.is_a?(Function)
+            args << arg.call(parameters)
+          else
+            args << arg
+          end
+        end
+
         case @fn
         when 'isSet'
-          Matchers.set?(*@argv)
+          Matchers.set?(*args)
         when 'not'
-          Matchers.not(*@argv)
+          Matchers.not(*args)
         when 'getAttr'
-          Matchers.attr(*@argv)
+          Matchers.attr(*args)
         when 'aws.partition'
-          Matchers.aws_partition(*@argv)
+          Matchers.aws_partition(*args)
         when 'aws.parseArn'
-          Matchers.aws_parse_arn(*@argv)
+          Matchers.aws_parse_arn(*args)
         when 'stringEquals'
-          Matchers.string_equals(*@argv)
+          Matchers.string_equals(*args)
         when 'isValidHostLabel'
-          Matchers.valid_host_label?(*@argv)
+          Matchers.valid_host_label?(*args)
         when 'uriEncode'
-          Matchers.uri_encode(*@argv)
+          Matchers.uri_encode(*args)
         when 'parseUrl'
-          Matchers.parse_url(*@argv)
+          Matchers.parse_url(*args)
         when 'booleanEquals'
-          Matchers.boolean_equals(*@argv)
+          Matchers.boolean_equals(*args)
         end
       end
 

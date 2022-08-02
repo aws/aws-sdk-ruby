@@ -14,10 +14,7 @@ module Aws
         # If similarly named file doesn't exist in test-case, just skip
         next unless File.exist?(test_cases_path)
 
-        test_cases = Aws::Json.load_file(test_cases_path)
-
         rule_set_json = Aws::Json.load_file(path)
-
         sample_module = ApiHelper.sample_service(endpoint_rules: rule_set_json)
 
         rule_set = Aws::Endpoints::RuleSet.new(
@@ -28,11 +25,17 @@ module Aws
         )
         subject { Provider.new(rule_set) }
 
+        test_cases = Aws::Json.load_file(test_cases_path)
         test_cases['testCases'].each do |test_case|
           it "passes: '#{test_case['documentation']}' from #{file_name}" do
+            params_class = sample_module.const_get(:EndpointParameters)
+            params_hash = test_case['params'].map do |k, v|
+              [AwsSdkCodeGenerator::Underscore.underscore(k), v]
+            end.to_h
+            params = params_class.new(params_hash)
+
             expect = test_case['expect']
             if (url = expect['url'])
-              params = sample_module.const_get(:EndpointParameters).new(test_case['params'])
               endpoint = subject.resolve_endpoint(params)
               expect(endpoint.url).to eq(url)
               # expect(endpoint.auth_schemes).to eq(ok['authSchemes'])
@@ -40,7 +43,7 @@ module Aws
               # expect(endpoint.headers).to eq(ok['headers'])
             elsif (error = expect['error'])
               expect do
-                subject.resolve_endpoint(test_case['params'])
+                subject.resolve_endpoint(params)
               end.to raise_error(ArgumentError, error)
             end
           end

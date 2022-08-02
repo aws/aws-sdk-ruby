@@ -4,9 +4,7 @@
 {{generated_src_warning}}
 {{/generated_src_warning}}
 module {{module_name}}
-
-  # TODO - better documentation
-  # Structure generated with all Endpoint Parameters.
+  # Endpoint parameters used to influence endpoints per request.
   #
   {{#parameters}}
   {{documentation}}
@@ -21,33 +19,27 @@ module {{module_name}}
   ) do
     include Aws::Structure
 
-    def initialize(options = {})
-        {{#parameters}}
-        {{#has_default}}
-        self[:{{underscore_name}}] = options[:{{underscore_name}}] || {{default}}
-        {{/has_default}}
-        {{^has_default}}
-        self[:{{underscore_name}}] = options[:{{underscore_name}}]
-        {{/has_default}}
-        {{#required}}
-        if self[:{{underscore_name}}].nil?
-          raise ArgumentError, "Missing required EndpointParameter: :{{underscore_name}}"
-        end
-        {{/required}}
-        {{/parameters}}
-    end
-
     # @api private
-    def reference(name)
-        self[PARAM_MAP.fetch(name)]
-    end
-
-    private
-
-    PARAM_MAP = {
+    self::PARAM_MAP = {
       {{#parameters}}
       '{{name}}' => :{{underscore_name}},
       {{/parameters}}
     }.freeze
+
+    def initialize(options = {})
+      {{#parameters}}
+      {{#has_default}}
+      self[:{{underscore_name}}] = options[:{{underscore_name}}] || {{default}}
+      {{/has_default}}
+      {{^has_default}}
+      self[:{{underscore_name}}] = options[:{{underscore_name}}]
+      {{/has_default}}
+      {{#required}}
+      if self[:{{underscore_name}}].nil?
+        raise ArgumentError, "Missing required EndpointParameter: :{{underscore_name}}"
+      end
+      {{/required}}
+      {{/parameters}}
+    end
   end
 end

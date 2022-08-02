@@ -17,8 +17,12 @@ module Aws
       attr_reader :endpoint
       attr_reader :documentation
 
-      def match?(parameters)
-        conditions.all? { |condition| condition.match?(parameters) }
+      def match?(parameters, assigned = {})
+        assigns = assigned.dup
+        conditions.all? do |condition|
+          condition.match?(parameters, assigns)
+          assigns = assigns.merge(condition.assigned) if condition.assign
+        end
       end
 
       private
