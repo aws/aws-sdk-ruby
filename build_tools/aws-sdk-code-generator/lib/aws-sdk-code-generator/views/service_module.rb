@@ -69,6 +69,9 @@ module AwsSdkCodeGenerator
         paths << "#{@prefix}/waiters" if @service.waiters
         paths << "#{@prefix}/resource"
         paths << "#{@prefix}/endpoints"
+        paths << "#{@prefix}/endpoint_parameters"
+        paths << "#{@prefix}/endpoint_provider"
+
 
         if @service.resources && @service.resources['resources']
           @service.resources['resources'].keys.each do |resource_name|

@@ -143,6 +143,8 @@ module ApiHelper
           paginators: options[:paginators],
           waiters: options[:waiters],
           resources: options[:resources],
+          endpoint_rules: options[:endpoint_rules],
+          endpoint_tests: options[:endpoint_tests],
           gem_dependencies: { 'aws-sdk-core' => '3' },
           gem_version: '1.0.0',
         )

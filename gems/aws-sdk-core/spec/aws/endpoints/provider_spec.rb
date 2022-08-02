@@ -17,6 +17,9 @@ module Aws
         test_cases = Aws::Json.load_file(test_cases_path)
 
         rule_set_json = Aws::Json.load_file(path)
+
+        sample_module = ApiHelper.sample_service(endpoint_rules: rule_set_json)
+
         rule_set = Aws::Endpoints::RuleSet.new(
           version: rule_set_json['version'],
           service_id: rule_set_json['serviceId'],
@@ -29,7 +32,8 @@ module Aws
           it "passes: '#{test_case['documentation']}' from #{file_name}" do
             expect = test_case['expect']
             if (url = expect['url'])
-              endpoint = subject.resolve_endpoint(test_case['params'])
+              params = sample_module.const_get(:EndpointParameters).new(test_case['params'])
+              endpoint = subject.resolve_endpoint(params)
               expect(endpoint.url).to eq(url)
               # expect(endpoint.auth_schemes).to eq(ok['authSchemes'])
               # expect(endpoint.auth_params).to eq(ok['authParams'])
