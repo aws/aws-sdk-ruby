@@ -76,6 +76,9 @@ module AwsSdkCodeGenerator
         y.yield("#{prefix}/waiters.rb", waiters_module) if @waiters
         y.yield("#{prefix}/resource.rb", root_resource_class)
         y.yield("#{prefix}/endpoint_parameters.rb", endpoint_parameters)
+        y.yield("#{prefix}/endpoint_provider.rb", endpoint_provider)
+        y.yield("#{prefix}/endpoints.rb", endpoints_module)
+
         if @resources
           @resources['resources'].keys.sort.each do |name|
             path = "#{prefix}/#{Underscore.underscore(name)}.rb"
@@ -206,6 +209,13 @@ module AwsSdkCodeGenerator
       Views::EndpointParametersClass.new(service: @service).render
     end
 
+    def endpoint_provider
+      Views::EndpointProviderClass.new(service: @service).render
+    end
+
+    def endpoints_module
+      Views::EndpointsModule.new(service: @service).render
+    end
 
     private
 

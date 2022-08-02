@@ -20,12 +20,6 @@ module {{module_name}}
     {{/parameters}}
   ) do
     include Aws::Structure
-    # @api private
-    PARAM_MAP = {
-      {{#parameters}}
-      '{{name}}' => :{{underscore_name}},
-      {{/parameters}}
-    }.freeze
 
     def initialize(options = {})
         {{#parameters}}
@@ -42,5 +36,18 @@ module {{module_name}}
         {{/required}}
         {{/parameters}}
     end
+
+    # @api private
+    def reference(name)
+        self[PARAM_MAP.fetch(name)]
+    end
+
+    private
+
+    PARAM_MAP = {
+      {{#parameters}}
+      '{{name}}' => :{{underscore_name}},
+      {{/parameters}}
+    }.freeze
   end
 end

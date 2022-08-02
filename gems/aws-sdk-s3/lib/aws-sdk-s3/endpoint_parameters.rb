@@ -69,18 +69,6 @@ module Aws::S3
     :disable_mrap,
   ) do
     include Aws::Structure
-    # @api private
-    PARAM_MAP = {
-      'Bucket' => :bucket,
-      'Region' => :region,
-      'UseFIPS' => :use_fips,
-      'UseDualStack' => :use_dual_stack,
-      'Endpoint' => :endpoint,
-      'ForcePathStyle' => :force_path_style,
-      'Accelerate' => :accelerate,
-      'DisableAccessPoints' => :disable_access_points,
-      'DisableMRAP' => :disable_mrap,
-    }.freeze
 
     def initialize(options = {})
         self[:bucket] = options[:bucket]
@@ -102,5 +90,24 @@ module Aws::S3
         self[:disable_access_points] = options[:disable_access_points]
         self[:disable_mrap] = options[:disable_mrap]
     end
+
+    # @api private
+    def reference(name)
+        self[PARAM_MAP.fetch(name)]
+    end
+
+    private
+
+    PARAM_MAP = {
+      'Bucket' => :bucket,
+      'Region' => :region,
+      'UseFIPS' => :use_fips,
+      'UseDualStack' => :use_dual_stack,
+      'Endpoint' => :endpoint,
+      'ForcePathStyle' => :force_path_style,
+      'Accelerate' => :accelerate,
+      'DisableAccessPoints' => :disable_access_points,
+      'DisableMRAP' => :disable_mrap,
+    }.freeze
   end
 end
