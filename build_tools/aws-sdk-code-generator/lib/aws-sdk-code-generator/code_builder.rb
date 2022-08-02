@@ -32,7 +32,6 @@ module AwsSdkCodeGenerator
       @resources = @service.resources
       @examples = @service.examples
       @endpoint_rules = @service.endpoint_rules
-      @endpoint_tests = @service.endpoint_tests
     end
 
     # Generates the source for a library as a single string.

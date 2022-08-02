@@ -69,6 +69,7 @@ module Aws::S3
     :disable_mrap,
   ) do
     include Aws::Structure
+    # @api private
     PARAM_MAP = {
       'Bucket' => :bucket,
       'Region' => :region,
