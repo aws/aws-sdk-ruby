@@ -20,6 +20,7 @@ module {{module_name}}
     {{/parameters}}
   ) do
     include Aws::Structure
+    # @api private
     PARAM_MAP = {
       {{#parameters}}
       '{{name}}' => :{{underscore_name}},

@@ -9,16 +9,20 @@ module AwsSdkCodeGenerator
       @built_in = definition['builtIn']
       @default = definition['default']
       @required = definition['required']
-      if deprecated = definition['deprecated']
-        @deprecated = DeprecatedObject.new(
-          message: deprecated['message'],
-          since: deprecated['since'])
-      end
-      @documentation = "#  @!attribute #{underscore_name}"
+      @documentation = "# @!attribute #{underscore_name}\n"
       if (definition['documentation'])
-        @documentation += Docstring.block_comment(definition["documentation"], gap: "  ")
+        @documentation += "  #   #{definition["documentation"]}\n"
       end
-      @documentation += "\n  #\n  #  @return [#{@type}]\n  #\n"
+      if deprecated = definition['deprecated']
+        @documentation += "  #\n  #   @deprecated\n"
+        if deprecated['message']
+          @documentation += "  #     #{deprecated['message']}\n"
+        end
+        if deprecated['since']
+          @documentation += "  #     Since: #{deprecated['since']}\n"
+        end
+      end
+      @documentation += "  #\n  #   @return [#{@type}]\n  #\n"
     end
 
     attr_reader :name, :documentation, :required, :default
@@ -31,6 +35,4 @@ module AwsSdkCodeGenerator
       Underscore.underscore(name)
     end
   end
-
-  DeprecatedObject = Struct.new(:message, :since, keyword_init: true)
 end

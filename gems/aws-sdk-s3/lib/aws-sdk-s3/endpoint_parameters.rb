@@ -12,49 +12,49 @@ module Aws::S3
   # TODO - better documentation
   # Structure generated with all Endpoint Parameters.
   #
-  #  @!attribute bucket
+  # @!attribute bucket
   #
-  #  @return [String]
-  #
-
-  #  @!attribute region
-  #
-  #  @return [String]
+  #   @return [String]
   #
 
-  #  @!attribute use_fips
+  # @!attribute region
   #
-  #  @return [Boolean]
-  #
-
-  #  @!attribute use_dual_stack
-  #
-  #  @return [Boolean]
+  #   @return [String]
   #
 
-  #  @!attribute endpoint
+  # @!attribute use_fips
   #
-  #  @return [String]
-  #
-
-  #  @!attribute force_path_style
-  #
-  #  @return [Boolean]
+  #   @return [Boolean]
   #
 
-  #  @!attribute accelerate
+  # @!attribute use_dual_stack
   #
-  #  @return [Boolean]
-  #
-
-  #  @!attribute disable_access_points
-  #
-  #  @return [Boolean]
+  #   @return [Boolean]
   #
 
-  #  @!attribute disable_mrap
+  # @!attribute endpoint
   #
-  #  @return [Boolean]
+  #   @return [String]
+  #
+
+  # @!attribute force_path_style
+  #
+  #   @return [Boolean]
+  #
+
+  # @!attribute accelerate
+  #
+  #   @return [Boolean]
+  #
+
+  # @!attribute disable_access_points
+  #
+  #   @return [Boolean]
+  #
+
+  # @!attribute disable_mrap
+  #
+  #   @return [Boolean]
   #
 
   EndpointParameters = Struct.new(
