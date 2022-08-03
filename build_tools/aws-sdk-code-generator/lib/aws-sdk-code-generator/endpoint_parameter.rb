@@ -27,8 +27,12 @@ module AwsSdkCodeGenerator
 
     attr_reader :name, :documentation, :required, :default
 
-    def has_default
+    def default?
       !@default.nil?
+    end
+
+    def boolean_default?
+      default? && (@default == true || @default == false)
     end
 
     def underscore_name

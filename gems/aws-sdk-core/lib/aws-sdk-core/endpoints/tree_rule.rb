@@ -16,11 +16,12 @@ module Aws
       attr_reader :error
       attr_reader :documentation
 
-      def match?(parameters, assigned = {})
+      def match(parameters, assigned = {})
         assigns = assigned.dup
         matched = conditions.all? do |condition|
-          condition.match?(parameters, assigns)
+          output = condition.match?(parameters, assigns)
           assigns = assigns.merge(condition.assigned) if condition.assign
+          output
         end
         if matched
           @rules.find { |rule| rule.match?(parameters, assigns) }

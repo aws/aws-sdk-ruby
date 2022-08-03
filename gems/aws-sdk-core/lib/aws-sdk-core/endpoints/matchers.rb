@@ -5,6 +5,9 @@ module Aws
     # generic matcher functions for service endpoints
     # @api private
     module Matchers
+      # Regex that extracts anything in square brackets
+      BRACKET_REGEX = /\[(.*?)\]/.freeze
+
       # CORE
 
       # isSet(value: Option<T>) bool
@@ -19,7 +22,20 @@ module Aws
 
       # getAttr(value: Object | Array, path: string) Document
       def self.attr(value, path)
-        # TODO
+        parts = path.split('.')
+
+        val = if (index = parts.first[BRACKET_REGEX, 1])
+                # remove brackets and index from part before indexing
+                value[parts.first.gsub(BRACKET_REGEX, '')][index.to_i]
+              else
+                value[parts.first]
+              end
+
+        if parts.size == 1
+          val
+        else
+          attr(val, parts.slice(1..-1).join('.'))
+        end
       end
 
       # AWS

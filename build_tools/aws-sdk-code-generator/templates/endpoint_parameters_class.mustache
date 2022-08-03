@@ -28,12 +28,17 @@ module {{module_name}}
 
     def initialize(options = {})
       {{#parameters}}
-      {{#has_default}}
+      {{#default?}}
+      {{#boolean_default?}}
       self[:{{underscore_name}}] = options[:{{underscore_name}}] || {{default}}
-      {{/has_default}}
-      {{^has_default}}
+      {{/boolean_default?}}
+      {{^boolean_default?}}
+      self[:{{underscore_name}}] = options[:{{underscore_name}}] || '{{default}}'
+      {{/boolean_default?}}
+      {{/default?}}
+      {{^default?}}
       self[:{{underscore_name}}] = options[:{{underscore_name}}]
-      {{/has_default}}
+      {{/default?}}
       {{#required}}
       if self[:{{underscore_name}}].nil?
         raise ArgumentError, "Missing required EndpointParameter: :{{underscore_name}}"

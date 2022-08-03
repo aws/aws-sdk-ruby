@@ -7,9 +7,27 @@ module Aws
       end
 
       def resolve_endpoint(parameters)
-        obj = @rule_set.rules.find { |rules| rules.match?(parameters) }
-        # TODO - do substitutions here?
-        obj
+        obj = resolve_rules(parameters)
+        puts "found object was #{obj}"
+        if obj.is_a?(Endpoint)
+          obj
+        elsif obj.is_a?(RuntimeError)
+          raise obj
+        else
+          raise "Something went wrong"
+        end
+      end
+
+      private
+
+      def resolve_rules(parameters)
+        @rule_set.rules.each do |rule|
+          puts "evaluating rule: #{rule}"
+          output = rule.match(parameters)
+          puts "output of match rule: #{output}"
+          return output if output
+        end
+        nil
       end
 
       # def initialize(options = {})

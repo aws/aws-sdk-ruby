@@ -7,6 +7,10 @@ module Aws
     describe Provider do
       Dir.glob(File.expand_path('../valid-rules/*.json', __FILE__)).each do |path|
         file_name = File.basename(path)
+
+        # temporary
+        next unless file_name == 'aws-region.json'
+
         test_cases_path = File.join(
           File.expand_path(File.join(path, '../../test-cases')),
           file_name
@@ -23,16 +27,20 @@ module Aws
           parameters: rule_set_json['parameters'],
           rules: rule_set_json['rules']
         )
+        # TODO: should this be the service specific one?
         subject { Provider.new(rule_set) }
+
+        params_class = sample_module.const_get(:EndpointParameters)
 
         test_cases = Aws::Json.load_file(test_cases_path)
         test_cases['testCases'].each do |test_case|
           it "passes: '#{test_case['documentation']}' from #{file_name}" do
-            params_class = sample_module.const_get(:EndpointParameters)
+            # convert params to symbol keys and values
             params_hash = test_case['params'].map do |k, v|
-              [AwsSdkCodeGenerator::Underscore.underscore(k), v]
+              [AwsSdkCodeGenerator::Underscore.underscore(k).to_sym, v]
             end.to_h
-            params = params_class.new(params_hash)
+            # create Endpoint Parameters struct
+            params = params_class.new(**params_hash)
 
             expect = test_case['expect']
             if (url = expect['url'])
@@ -44,7 +52,7 @@ module Aws
             elsif (error = expect['error'])
               expect do
                 subject.resolve_endpoint(params)
-              end.to raise_error(ArgumentError, error)
+              end.to raise_error(RuntimeError, error)
             end
           end
         end

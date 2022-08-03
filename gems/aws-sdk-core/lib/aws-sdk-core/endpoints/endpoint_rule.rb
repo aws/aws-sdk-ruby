@@ -8,7 +8,7 @@ module Aws
                      documentation: nil)
         @type = type
         @conditions = build_conditions(conditions)
-        @endpoint = build_endpoint(endpoint)
+        @endpoint = endpoint
         @documentation = documentation
       end
 
@@ -17,12 +17,22 @@ module Aws
       attr_reader :endpoint
       attr_reader :documentation
 
-      def match?(parameters, assigned = {})
+      def match(parameters, assigned = {})
         assigns = assigned.dup
-        conditions.all? do |condition|
-          condition.match?(parameters, assigns)
+        matched = conditions.all? do |condition|
+          output = condition.match?(parameters, assigns)
           assigns = assigns.merge(condition.assigned) if condition.assign
+          output
         end
+        resolved_endpoint(parameters, assigns) if matched
+      end
+
+      def resolved_endpoint(parameters, assigns)
+        Endpoint.new(
+          url: Templater.resolve(@endpoint['url'], parameters, assigns),
+          properties: @endpoint['properties'],
+          headers: @endpoint['headers']
+        )
       end
 
       private
@@ -37,17 +47,6 @@ module Aws
           )
         end
         conditions
-      end
-
-      def build_endpoint(endpoint_json)
-        return unless endpoint_json
-
-        Endpoint.new(
-          url: endpoint_json['url'],
-          # TODO: unwrap these and convert to reference/function object
-          properties: endpoint_json['properties'],
-          headers: endpoint_json['headers']
-        )
       end
     end
   end

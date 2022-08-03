@@ -2,7 +2,6 @@
 
 module Aws
   module Endpoints
-    # @api private
     class Endpoint
       def initialize(url:, properties: {}, headers: {})
         @url = url
@@ -13,8 +12,6 @@ module Aws
       attr_reader :url
       attr_reader :properties
       attr_reader :headers
-
-      # TODO: do string templating here maybe?
     end
   end
 end
