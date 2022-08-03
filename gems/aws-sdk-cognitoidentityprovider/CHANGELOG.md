@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2022-08-03)
+------------------
+
+* Feature - Add a new exception type, ForbiddenException, that is returned when request is not allowed
+
 1.67.0 (2022-05-31)
 ------------------
 

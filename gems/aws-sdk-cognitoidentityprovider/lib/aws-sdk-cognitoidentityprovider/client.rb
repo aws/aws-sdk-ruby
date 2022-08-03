@@ -2286,12 +2286,12 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
-    # Begins setup of time-based one-time password multi-factor
-    # authentication (TOTP MFA) for a user, with a unique private key that
-    # Amazon Cognito generates and returns in the API response. You can
-    # authorize an `AssociateSoftwareToken` request with either the user's
-    # access token, or a session string from a challenge response that you
-    # received from Amazon Cognito.
+    # Begins setup of time-based one-time password (TOTP) multi-factor
+    # authentication (MFA) for a user, with a unique private key that Amazon
+    # Cognito generates and returns in the API response. You can authorize
+    # an `AssociateSoftwareToken` request with either the user's access
+    # token, or a session string from a challenge response that you received
+    # from Amazon Cognito.
     #
     # <note markdown="1"> Amazon Cognito disassociates an existing software token when you
     # verify the new token in a [ VerifySoftwareToken][1] API request. If
@@ -2439,16 +2439,15 @@ module Aws::CognitoIdentityProvider
     #   retrieve a forgotten password.
     #
     # @option params [required, String] :confirmation_code
-    #   The confirmation code sent by a user's request to retrieve a
-    #   forgotten password. For more information, see [ForgotPassword][1].
+    #   The confirmation code from your user's request to reset their
+    #   password. For more information, see [ForgotPassword][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_ForgotPassword.html
     #
     # @option params [required, String] :password
-    #   The password sent by a user's request to retrieve a forgotten
-    #   password.
+    #   The new password that your user wants to set.
     #
     # @option params [Types::AnalyticsMetadataType] :analytics_metadata
     #   The Amazon Pinpoint analytics metadata for collecting metrics for
@@ -3010,7 +3009,7 @@ module Aws::CognitoIdentityProvider
     #
     # @option params [String] :email_verification_message
     #   A string representing the email verification message.
-    #   EmailVerificationMessage is allowed only if [EmailSendingAccount][1]
+    #   `EmailVerificationMessage` is allowed only if [EmailSendingAccount][1]
     #   is DEVELOPER.
     #
     #
@@ -3019,7 +3018,7 @@ module Aws::CognitoIdentityProvider
     #
     # @option params [String] :email_verification_subject
     #   A string representing the email verification subject.
-    #   EmailVerificationSubject is allowed only if [EmailSendingAccount][1]
+    #   `EmailVerificationSubject` is allowed only if [EmailSendingAccount][1]
     #   is DEVELOPER.
     #
     #
@@ -3041,7 +3040,7 @@ module Aws::CognitoIdentityProvider
     #   the property `AttributesRequireVerificationBeforeUpdate`, a user-pool
     #   setting that tells Amazon Cognito how to handle changes to the value
     #   of your users' email address and phone number attributes. For more
-    #   information, see [ Verifying updates to to email addresses and phone
+    #   information, see [ Verifying updates to email addresses and phone
     #   numbers][1].
     #
     #
@@ -3049,7 +3048,14 @@ module Aws::CognitoIdentityProvider
     #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-email-phone-verification.html#user-pool-settings-verifications-verify-attribute-updates
     #
     # @option params [Types::DeviceConfigurationType] :device_configuration
-    #   The device configuration.
+    #   The device-remembering configuration for a user pool. A null value
+    #   indicates that you have deactivated device remembering in your user
+    #   pool.
+    #
+    #   <note markdown="1"> When you provide a value for any `DeviceConfiguration` field, you
+    #   activate the Amazon Cognito device-remembering feature.
+    #
+    #    </note>
     #
     # @option params [Types::EmailConfigurationType] :email_configuration
     #   The email configuration of your user pool. The email configuration
@@ -3412,31 +3418,41 @@ module Aws::CognitoIdentityProvider
     #
     #   Valid values include:
     #
-    #   * `ALLOW_ADMIN_USER_PASSWORD_AUTH`\: Enable admin based user password
-    #     authentication flow `ADMIN_USER_PASSWORD_AUTH`. This setting
-    #     replaces the `ADMIN_NO_SRP_AUTH` setting. With this authentication
-    #     flow, Amazon Cognito receives the password in the request instead of
-    #     using the Secure Remote Password (SRP) protocol to verify passwords.
+    #   ALLOW\_ADMIN\_USER\_PASSWORD\_AUTH
     #
-    #   * `ALLOW_CUSTOM_AUTH`\: Enable Lambda trigger based authentication.
+    #   : Enable admin based user password authentication flow
+    #     `ADMIN_USER_PASSWORD_AUTH`. This setting replaces the
+    #     `ADMIN_NO_SRP_AUTH` setting. With this authentication flow, Amazon
+    #     Cognito receives the password in the request instead of using the
+    #     Secure Remote Password (SRP) protocol to verify passwords.
     #
-    #   * `ALLOW_USER_PASSWORD_AUTH`\: Enable user password-based
-    #     authentication. In this flow, Amazon Cognito receives the password
-    #     in the request instead of using the SRP protocol to verify
-    #     passwords.
+    #   ALLOW\_CUSTOM\_AUTH
     #
-    #   * `ALLOW_USER_SRP_AUTH`\: Enable SRP-based authentication.
+    #   : Enable Lambda trigger based authentication.
     #
-    #   * `ALLOW_REFRESH_TOKEN_AUTH`\: Enable authflow to refresh tokens.
+    #   ALLOW\_USER\_PASSWORD\_AUTH
     #
-    #   If you don't specify a value for `ExplicitAuthFlows`, your app client
-    #   activates the `ALLOW_USER_SRP_AUTH` and `ALLOW_CUSTOM_AUTH`
-    #   authentication flows.
+    #   : Enable user password-based authentication. In this flow, Amazon
+    #     Cognito receives the password in the request instead of using the
+    #     SRP protocol to verify passwords.
+    #
+    #   ALLOW\_USER\_SRP\_AUTH
+    #
+    #   : Enable SRP-based authentication.
+    #
+    #   ALLOW\_REFRESH\_TOKEN\_AUTH
+    #
+    #   : Enable the authflow that refreshes tokens.
+    #
+    #   If you don't specify a value for `ExplicitAuthFlows`, your user
+    #   client supports `ALLOW_USER_SRP_AUTH` and `ALLOW_CUSTOM_AUTH`.
     #
     # @option params [Array<String>] :supported_identity_providers
-    #   A list of provider names for the IdPs that this client supports. The
-    #   following are supported: `COGNITO`, `Facebook`, `Google`
-    #   `LoginWithAmazon`, and the names of your own SAML and OIDC providers.
+    #   A list of provider names for the identity providers (IdPs) that are
+    #   supported on this client. The following are supported: `COGNITO`,
+    #   `Facebook`, `Google`, `SignInWithApple`, and `LoginWithAmazon`. You
+    #   can also specify the names that you configured for the SAML and OIDC
+    #   IdPs in your user pool, for example `MySAMLIdP` or `MyOIDCIdP`.
     #
     # @option params [Array<String>] :callback_urls
     #   A list of allowed redirect (callback) URLs for the IdPs.
@@ -6255,7 +6271,7 @@ module Aws::CognitoIdentityProvider
     #   The SMS text message multi-factor authentication (MFA) settings.
     #
     # @option params [Types::SoftwareTokenMfaSettingsType] :software_token_mfa_settings
-    #   The time-based one-time password software token MFA settings.
+    #   The time-based one-time password (TOTP) software token MFA settings.
     #
     # @option params [required, String] :access_token
     #   A valid access token that Amazon Cognito issued to the user whose MFA
@@ -7163,7 +7179,7 @@ module Aws::CognitoIdentityProvider
     #   the property `AttributesRequireVerificationBeforeUpdate`, a user-pool
     #   setting that tells Amazon Cognito how to handle changes to the value
     #   of your users' email address and phone number attributes. For more
-    #   information, see [ Verifying updates to to email addresses and phone
+    #   information, see [ Verifying updates to email addresses and phone
     #   numbers][1].
     #
     #
@@ -7189,7 +7205,14 @@ module Aws::CognitoIdentityProvider
     #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_SetUserPoolMfaConfig.html
     #
     # @option params [Types::DeviceConfigurationType] :device_configuration
-    #   Device configuration.
+    #   The device-remembering configuration for a user pool. A null value
+    #   indicates that you have deactivated device remembering in your user
+    #   pool.
+    #
+    #   <note markdown="1"> When you provide a value for any `DeviceConfiguration` field, you
+    #   activate the Amazon Cognito device-remembering feature.
+    #
+    #    </note>
     #
     # @option params [Types::EmailConfigurationType] :email_configuration
     #   The email configuration of your user pool. The email configuration
@@ -7437,8 +7460,9 @@ module Aws::CognitoIdentityProvider
     #
     # @option params [Array<String>] :supported_identity_providers
     #   A list of provider names for the IdPs that this client supports. The
-    #   following are supported: `COGNITO`, `Facebook`, `Google`
-    #   `LoginWithAmazon`, and the names of your own SAML and OIDC providers.
+    #   following are supported: `COGNITO`, `Facebook`, `Google`,
+    #   `SignInWithApple`, `LoginWithAmazon`, and the names of your own SAML
+    #   and OIDC providers.
     #
     # @option params [Array<String>] :callback_urls
     #   A list of allowed redirect (callback) URLs for the IdPs.
@@ -7843,7 +7867,7 @@ module Aws::CognitoIdentityProvider
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

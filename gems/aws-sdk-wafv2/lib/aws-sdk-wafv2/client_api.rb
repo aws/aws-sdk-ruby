@@ -1402,6 +1402,7 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFUnavailableEntityException)
         o.errors << Shapes::ShapeRef.new(shape: WAFSubscriptionNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: WAFExpiredManagedRuleGroupVersionException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
       end)
 
       api.add_operation(:create_ip_set, Seahorse::Model::Operation.new.tap do |o|
