@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.82.0 (2022-08-04)
+------------------
+
+* Feature - Add resourceType enums for Athena, GlobalAccelerator, Detective and EC2 types
+
 1.81.0 (2022-08-01)
 ------------------
 

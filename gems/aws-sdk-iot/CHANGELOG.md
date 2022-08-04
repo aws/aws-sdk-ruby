@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.94.0 (2022-08-04)
+------------------
+
+* Feature - The release is to support attach a provisioning template to CACert for JITP function,  Customer now doesn't have to hardcode a roleArn and templateBody during register a CACert to enable JITP.
+
 1.93.0 (2022-07-20)
 ------------------
 

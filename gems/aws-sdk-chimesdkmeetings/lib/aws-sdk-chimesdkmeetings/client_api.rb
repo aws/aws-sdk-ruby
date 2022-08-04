@@ -13,6 +13,7 @@ module Aws::ChimeSDKMeetings
 
     include Seahorse::Model
 
+    AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     Arn = Shapes::StringShape.new(name: 'Arn')
     Attendee = Shapes::StructureShape.new(name: 'Attendee')
     AttendeeCapabilities = Shapes::StructureShape.new(name: 'AttendeeCapabilities')
@@ -54,6 +55,8 @@ module Aws::ChimeSDKMeetings
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListAttendeesRequest = Shapes::StructureShape.new(name: 'ListAttendeesRequest')
     ListAttendeesResponse = Shapes::StructureShape.new(name: 'ListAttendeesResponse')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MediaCapabilities = Shapes::StringShape.new(name: 'MediaCapabilities')
     MediaPlacement = Shapes::StructureShape.new(name: 'MediaPlacement')
     MediaRegion = Shapes::StringShape.new(name: 'MediaRegion')
@@ -63,6 +66,7 @@ module Aws::ChimeSDKMeetings
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     NotificationsConfiguration = Shapes::StructureShape.new(name: 'NotificationsConfiguration')
     PrimaryMeetingId = Shapes::StringShape.new(name: 'PrimaryMeetingId')
+    ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResultMax = Shapes::IntegerShape.new(name: 'ResultMax')
     RetryAfterSeconds = Shapes::StringShape.new(name: 'RetryAfterSeconds')
     ServiceFailureException = Shapes::StructureShape.new(name: 'ServiceFailureException')
@@ -70,9 +74,17 @@ module Aws::ChimeSDKMeetings
     StartMeetingTranscriptionRequest = Shapes::StructureShape.new(name: 'StartMeetingTranscriptionRequest')
     StopMeetingTranscriptionRequest = Shapes::StructureShape.new(name: 'StopMeetingTranscriptionRequest')
     String = Shapes::StringShape.new(name: 'String')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagList = Shapes::ListShape.new(name: 'TagList')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     TenantId = Shapes::StringShape.new(name: 'TenantId')
     TenantIdList = Shapes::ListShape.new(name: 'TenantIdList')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     TranscribeContentIdentificationType = Shapes::StringShape.new(name: 'TranscribeContentIdentificationType')
     TranscribeContentRedactionType = Shapes::StringShape.new(name: 'TranscribeContentRedactionType')
     TranscribeLanguageCode = Shapes::StringShape.new(name: 'TranscribeLanguageCode')
@@ -90,6 +102,8 @@ module Aws::ChimeSDKMeetings
     TranscriptionConfiguration = Shapes::StructureShape.new(name: 'TranscriptionConfiguration')
     UnauthorizedException = Shapes::StructureShape.new(name: 'UnauthorizedException')
     UnprocessableEntityException = Shapes::StructureShape.new(name: 'UnprocessableEntityException')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateAttendeeCapabilitiesRequest = Shapes::StructureShape.new(name: 'UpdateAttendeeCapabilitiesRequest')
     UpdateAttendeeCapabilitiesResponse = Shapes::StructureShape.new(name: 'UpdateAttendeeCapabilitiesResponse')
 
@@ -166,6 +180,7 @@ module Aws::ChimeSDKMeetings
     CreateMeetingRequest.add_member(:meeting_features, Shapes::ShapeRef.new(shape: MeetingFeaturesConfiguration, location_name: "MeetingFeatures"))
     CreateMeetingRequest.add_member(:primary_meeting_id, Shapes::ShapeRef.new(shape: PrimaryMeetingId, location_name: "PrimaryMeetingId"))
     CreateMeetingRequest.add_member(:tenant_ids, Shapes::ShapeRef.new(shape: TenantIdList, location_name: "TenantIds"))
+    CreateMeetingRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateMeetingRequest.struct_class = Types::CreateMeetingRequest
 
     CreateMeetingResponse.add_member(:meeting, Shapes::ShapeRef.new(shape: Meeting, location_name: "Meeting"))
@@ -180,6 +195,7 @@ module Aws::ChimeSDKMeetings
     CreateMeetingWithAttendeesRequest.add_member(:attendees, Shapes::ShapeRef.new(shape: CreateMeetingWithAttendeesRequestItemList, required: true, location_name: "Attendees"))
     CreateMeetingWithAttendeesRequest.add_member(:primary_meeting_id, Shapes::ShapeRef.new(shape: PrimaryMeetingId, location_name: "PrimaryMeetingId"))
     CreateMeetingWithAttendeesRequest.add_member(:tenant_ids, Shapes::ShapeRef.new(shape: TenantIdList, location_name: "TenantIds"))
+    CreateMeetingWithAttendeesRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateMeetingWithAttendeesRequest.struct_class = Types::CreateMeetingWithAttendeesRequest
 
     CreateMeetingWithAttendeesRequestItemList.member = Shapes::ShapeRef.new(shape: CreateAttendeeRequestItem)
@@ -252,6 +268,12 @@ module Aws::ChimeSDKMeetings
     ListAttendeesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListAttendeesResponse.struct_class = Types::ListAttendeesResponse
 
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location: "querystring", location_name: "arn"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
     MediaPlacement.add_member(:audio_host_url, Shapes::ShapeRef.new(shape: String, location_name: "AudioHostUrl"))
     MediaPlacement.add_member(:audio_fallback_url, Shapes::ShapeRef.new(shape: String, location_name: "AudioFallbackUrl"))
     MediaPlacement.add_member(:signaling_url, Shapes::ShapeRef.new(shape: String, location_name: "SignalingUrl"))
@@ -270,6 +292,7 @@ module Aws::ChimeSDKMeetings
     Meeting.add_member(:meeting_features, Shapes::ShapeRef.new(shape: MeetingFeaturesConfiguration, location_name: "MeetingFeatures"))
     Meeting.add_member(:primary_meeting_id, Shapes::ShapeRef.new(shape: PrimaryMeetingId, location_name: "PrimaryMeetingId"))
     Meeting.add_member(:tenant_ids, Shapes::ShapeRef.new(shape: TenantIdList, location_name: "TenantIds"))
+    Meeting.add_member(:meeting_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "MeetingArn"))
     Meeting.struct_class = Types::Meeting
 
     MeetingFeaturesConfiguration.add_member(:audio, Shapes::ShapeRef.new(shape: AudioFeatures, location_name: "Audio"))
@@ -284,6 +307,12 @@ module Aws::ChimeSDKMeetings
     NotificationsConfiguration.add_member(:sns_topic_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SnsTopicArn"))
     NotificationsConfiguration.add_member(:sqs_queue_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SqsQueueArn"))
     NotificationsConfiguration.struct_class = Types::NotificationsConfiguration
+
+    ResourceNotFoundException.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "Code"))
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ResourceNotFoundException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    ResourceNotFoundException.add_member(:resource_name, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceName"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     ServiceFailureException.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "Code"))
     ServiceFailureException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -303,12 +332,32 @@ module Aws::ChimeSDKMeetings
     StopMeetingTranscriptionRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "MeetingId"))
     StopMeetingTranscriptionRequest.struct_class = Types::StopMeetingTranscriptionRequest
 
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
+    Tag.struct_class = Types::Tag
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
     TenantIdList.member = Shapes::ShapeRef.new(shape: TenantId)
 
     ThrottlingException.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "Code"))
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ThrottlingException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     ThrottlingException.struct_class = Types::ThrottlingException
+
+    TooManyTagsException.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "Code"))
+    TooManyTagsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    TooManyTagsException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    TooManyTagsException.add_member(:resource_name, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceName"))
+    TooManyTagsException.struct_class = Types::TooManyTagsException
 
     TranscriptionConfiguration.add_member(:engine_transcribe_settings, Shapes::ShapeRef.new(shape: EngineTranscribeSettings, location_name: "EngineTranscribeSettings"))
     TranscriptionConfiguration.add_member(:engine_transcribe_medical_settings, Shapes::ShapeRef.new(shape: EngineTranscribeMedicalSettings, location_name: "EngineTranscribeMedicalSettings"))
@@ -323,6 +372,12 @@ module Aws::ChimeSDKMeetings
     UnprocessableEntityException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     UnprocessableEntityException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     UnprocessableEntityException.struct_class = Types::UnprocessableEntityException
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateAttendeeCapabilitiesRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "MeetingId"))
     UpdateAttendeeCapabilitiesRequest.add_member(:attendee_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "AttendeeId"))
@@ -508,6 +563,15 @@ module Aws::ChimeSDKMeetings
         )
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "GET"
+        o.http_request_uri = "/tags"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:start_meeting_transcription, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartMeetingTranscription"
         o.http_method = "POST"
@@ -539,6 +603,27 @@ module Aws::ChimeSDKMeetings
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/tags?operation=tag-resource"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/tags?operation=untag-resource"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:update_attendee_capabilities, Seahorse::Model::Operation.new.tap do |o|

@@ -4426,27 +4426,28 @@ module Aws::IoT
     #             value: "TagValue",
     #           },
     #         ],
+    #         type: "FLEET_PROVISIONING", # accepts FLEET_PROVISIONING, JITP
     #       }
     #
     # @!attribute [rw] template_name
-    #   The name of the fleet provisioning template.
+    #   The name of the provisioning template.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the fleet provisioning template.
+    #   The description of the provisioning template.
     #   @return [String]
     #
     # @!attribute [rw] template_body
-    #   The JSON formatted contents of the fleet provisioning template.
+    #   The JSON formatted contents of the provisioning template.
     #   @return [String]
     #
     # @!attribute [rw] enabled
-    #   True to enable the fleet provisioning template, otherwise false.
+    #   True to enable the provisioning template, otherwise false.
     #   @return [Boolean]
     #
     # @!attribute [rw] provisioning_role_arn
-    #   The role ARN for the role associated with the fleet provisioning
-    #   template. This IoT role grants permission to provision a device.
+    #   The role ARN for the role associated with the provisioning template.
+    #   This IoT role grants permission to provision a device.
     #   @return [String]
     #
     # @!attribute [rw] pre_provisioning_hook
@@ -4454,8 +4455,7 @@ module Aws::IoT
     #   @return [Types::ProvisioningHook]
     #
     # @!attribute [rw] tags
-    #   Metadata which can be used to manage the fleet provisioning
-    #   template.
+    #   Metadata which can be used to manage the provisioning template.
     #
     #   <note markdown="1"> For URI Request parameters use format:
     #   ...key1=value1&amp;key2=value2...
@@ -4469,6 +4469,18 @@ module Aws::IoT
     #    </note>
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] type
+    #   The type you define in a provisioning template. You can create a
+    #   template with only one type. You can't change the template type
+    #   after its creation. The default value is `FLEET_PROVISIONING`. For
+    #   more information about provisioning template, see: [Provisioning
+    #   template][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/provision-template.html
+    #   @return [String]
+    #
     class CreateProvisioningTemplateRequest < Struct.new(
       :template_name,
       :description,
@@ -4476,7 +4488,8 @@ module Aws::IoT
       :enabled,
       :provisioning_role_arn,
       :pre_provisioning_hook,
-      :tags)
+      :tags,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4486,11 +4499,11 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] template_name
-    #   The name of the fleet provisioning template.
+    #   The name of the provisioning template.
     #   @return [String]
     #
     # @!attribute [rw] default_version_id
-    #   The default version of the fleet provisioning template.
+    #   The default version of the provisioning template.
     #   @return [Integer]
     #
     class CreateProvisioningTemplateResponse < Struct.new(
@@ -4511,11 +4524,11 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] template_name
-    #   The name of the fleet provisioning template.
+    #   The name of the provisioning template.
     #   @return [String]
     #
     # @!attribute [rw] template_body
-    #   The JSON formatted contents of the fleet provisioning template.
+    #   The JSON formatted contents of the provisioning template.
     #   @return [String]
     #
     # @!attribute [rw] set_as_default
@@ -4535,16 +4548,16 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] template_name
-    #   The name of the fleet provisioning template.
+    #   The name of the provisioning template.
     #   @return [String]
     #
     # @!attribute [rw] version_id
-    #   The version of the fleet provisioning template.
+    #   The version of the provisioning template.
     #   @return [Integer]
     #
     # @!attribute [rw] is_default_version
-    #   True if the fleet provisioning template version is the default
-    #   version, otherwise false.
+    #   True if the provisioning template version is the default version,
+    #   otherwise false.
     #   @return [Boolean]
     #
     class CreateProvisioningTemplateVersionResponse < Struct.new(
@@ -6144,11 +6157,11 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] template_name
-    #   The name of the fleet provisioning template version to delete.
+    #   The name of the provisioning template version to delete.
     #   @return [String]
     #
     # @!attribute [rw] version_id
-    #   The fleet provisioning template version ID to delete.
+    #   The provisioning template version ID to delete.
     #   @return [Integer]
     #
     class DeleteProvisioningTemplateVersionRequest < Struct.new(
@@ -7594,7 +7607,7 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] template_name
-    #   The name of the fleet provisioning template.
+    #   The name of the provisioning template.
     #   @return [String]
     #
     class DescribeProvisioningTemplateRequest < Struct.new(
@@ -7604,23 +7617,23 @@ module Aws::IoT
     end
 
     # @!attribute [rw] template_arn
-    #   The ARN of the fleet provisioning template.
+    #   The ARN of the provisioning template.
     #   @return [String]
     #
     # @!attribute [rw] template_name
-    #   The name of the fleet provisioning template.
+    #   The name of the provisioning template.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the fleet provisioning template.
+    #   The description of the provisioning template.
     #   @return [String]
     #
     # @!attribute [rw] creation_date
-    #   The date when the fleet provisioning template was created.
+    #   The date when the provisioning template was created.
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_date
-    #   The date when the fleet provisioning template was last modified.
+    #   The date when the provisioning template was last modified.
     #   @return [Time]
     #
     # @!attribute [rw] default_version_id
@@ -7628,11 +7641,11 @@ module Aws::IoT
     #   @return [Integer]
     #
     # @!attribute [rw] template_body
-    #   The JSON formatted contents of the fleet provisioning template.
+    #   The JSON formatted contents of the provisioning template.
     #   @return [String]
     #
     # @!attribute [rw] enabled
-    #   True if the fleet provisioning template is enabled, otherwise false.
+    #   True if the provisioning template is enabled, otherwise false.
     #   @return [Boolean]
     #
     # @!attribute [rw] provisioning_role_arn
@@ -7644,6 +7657,18 @@ module Aws::IoT
     #   Gets information about a pre-provisioned hook.
     #   @return [Types::ProvisioningHook]
     #
+    # @!attribute [rw] type
+    #   The type you define in a provisioning template. You can create a
+    #   template with only one type. You can't change the template type
+    #   after its creation. The default value is `FLEET_PROVISIONING`. For
+    #   more information about provisioning template, see: [Provisioning
+    #   template][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/provision-template.html
+    #   @return [String]
+    #
     class DescribeProvisioningTemplateResponse < Struct.new(
       :template_arn,
       :template_name,
@@ -7654,7 +7679,8 @@ module Aws::IoT
       :template_body,
       :enabled,
       :provisioning_role_arn,
-      :pre_provisioning_hook)
+      :pre_provisioning_hook,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7672,7 +7698,7 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] version_id
-    #   The fleet provisioning template version ID.
+    #   The provisioning template version ID.
     #   @return [Integer]
     #
     class DescribeProvisioningTemplateVersionRequest < Struct.new(
@@ -7683,21 +7709,19 @@ module Aws::IoT
     end
 
     # @!attribute [rw] version_id
-    #   The fleet provisioning template version ID.
+    #   The provisioning template version ID.
     #   @return [Integer]
     #
     # @!attribute [rw] creation_date
-    #   The date when the fleet provisioning template version was created.
+    #   The date when the provisioning template version was created.
     #   @return [Time]
     #
     # @!attribute [rw] template_body
-    #   The JSON formatted contents of the fleet provisioning template
-    #   version.
+    #   The JSON formatted contents of the provisioning template version.
     #   @return [String]
     #
     # @!attribute [rw] is_default_version
-    #   True if the fleet provisioning template version is the default
-    #   version.
+    #   True if the provisioning template version is the default version.
     #   @return [Boolean]
     #
     class DescribeProvisioningTemplateVersionResponse < Struct.new(
@@ -11464,6 +11488,7 @@ module Aws::IoT
     #         page_size: 1,
     #         marker: "Marker",
     #         ascending_order: false,
+    #         template_name: "TemplateName",
     #       }
     #
     # @!attribute [rw] page_size
@@ -11478,10 +11503,15 @@ module Aws::IoT
     #   Determines the order of the results.
     #   @return [Boolean]
     #
+    # @!attribute [rw] template_name
+    #   The name of the provisioning template.
+    #   @return [String]
+    #
     class ListCACertificatesRequest < Struct.new(
       :page_size,
       :marker,
-      :ascending_order)
+      :ascending_order,
+      :template_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12725,7 +12755,7 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] template_name
-    #   The name of the fleet provisioning template.
+    #   The name of the provisioning template.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -12745,7 +12775,7 @@ module Aws::IoT
     end
 
     # @!attribute [rw] versions
-    #   The list of fleet provisioning template versions.
+    #   The list of provisioning template versions.
     #   @return [Array<Types::ProvisioningTemplateVersionSummary>]
     #
     # @!attribute [rw] next_token
@@ -12783,7 +12813,7 @@ module Aws::IoT
     end
 
     # @!attribute [rw] templates
-    #   A list of fleet provisioning templates
+    #   A list of provisioning templates
     #   @return [Array<Types::ProvisioningTemplateSummary>]
     #
     # @!attribute [rw] next_token
@@ -14767,32 +14797,43 @@ module Aws::IoT
       include Aws::Structure
     end
 
-    # A summary of information about a fleet provisioning template.
+    # A summary of information about a provisioning template.
     #
     # @!attribute [rw] template_arn
-    #   The ARN of the fleet provisioning template.
+    #   The ARN of the provisioning template.
     #   @return [String]
     #
     # @!attribute [rw] template_name
-    #   The name of the fleet provisioning template.
+    #   The name of the provisioning template.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the fleet provisioning template.
+    #   The description of the provisioning template.
     #   @return [String]
     #
     # @!attribute [rw] creation_date
-    #   The date when the fleet provisioning template summary was created.
+    #   The date when the provisioning template summary was created.
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_date
-    #   The date when the fleet provisioning template summary was last
-    #   modified.
+    #   The date when the provisioning template summary was last modified.
     #   @return [Time]
     #
     # @!attribute [rw] enabled
     #   True if the fleet provision template is enabled, otherwise false.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] type
+    #   The type you define in a provisioning template. You can create a
+    #   template with only one type. You can't change the template type
+    #   after its creation. The default value is `FLEET_PROVISIONING`. For
+    #   more information about provisioning template, see: [Provisioning
+    #   template][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/provision-template.html
+    #   @return [String]
     #
     class ProvisioningTemplateSummary < Struct.new(
       :template_arn,
@@ -14800,7 +14841,8 @@ module Aws::IoT
       :description,
       :creation_date,
       :last_modified_date,
-      :enabled)
+      :enabled,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14812,12 +14854,12 @@ module Aws::IoT
     #   @return [Integer]
     #
     # @!attribute [rw] creation_date
-    #   The date when the fleet provisioning template version was created
+    #   The date when the provisioning template version was created
     #   @return [Time]
     #
     # @!attribute [rw] is_default_version
-    #   True if the fleet provisioning template version is the default
-    #   version, otherwise false.
+    #   True if the provisioning template version is the default version,
+    #   otherwise false.
     #   @return [Boolean]
     #
     class ProvisioningTemplateVersionSummary < Struct.new(
@@ -15008,6 +15050,7 @@ module Aws::IoT
     #         registration_config: {
     #           template_body: "TemplateBody",
     #           role_arn: "RoleArn",
+    #           template_name: "TemplateName",
     #         },
     #         tags: [
     #           {
@@ -15272,6 +15315,7 @@ module Aws::IoT
     #       {
     #         template_body: "TemplateBody",
     #         role_arn: "RoleArn",
+    #         template_name: "TemplateName",
     #       }
     #
     # @!attribute [rw] template_body
@@ -15282,9 +15326,14 @@ module Aws::IoT
     #   The ARN of the role.
     #   @return [String]
     #
+    # @!attribute [rw] template_name
+    #   The name of the provisioning template.
+    #   @return [String]
+    #
     class RegistrationConfig < Struct.new(
       :template_body,
-      :role_arn)
+      :role_arn,
+      :template_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19185,6 +19234,7 @@ module Aws::IoT
     #         registration_config: {
     #           template_body: "TemplateBody",
     #           role_arn: "RoleArn",
+    #           template_name: "TemplateName",
     #         },
     #         remove_auto_registration: false,
     #       }
@@ -19886,15 +19936,15 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] template_name
-    #   The name of the fleet provisioning template.
+    #   The name of the provisioning template.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the fleet provisioning template.
+    #   The description of the provisioning template.
     #   @return [String]
     #
     # @!attribute [rw] enabled
-    #   True to enable the fleet provisioning template, otherwise false.
+    #   True to enable the provisioning template, otherwise false.
     #   @return [Boolean]
     #
     # @!attribute [rw] default_version_id

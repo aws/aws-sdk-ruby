@@ -32,9 +32,11 @@ module Aws::ChimeSDKMeetings
   # * {ForbiddenException}
   # * {LimitExceededException}
   # * {NotFoundException}
+  # * {ResourceNotFoundException}
   # * {ServiceFailureException}
   # * {ServiceUnavailableException}
   # * {ThrottlingException}
+  # * {TooManyTagsException}
   # * {UnauthorizedException}
   # * {UnprocessableEntityException}
   #
@@ -169,6 +171,36 @@ module Aws::ChimeSDKMeetings
       end
     end
 
+    class ResourceNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ChimeSDKMeetings::Types::ResourceNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def code
+        @code || @data[:code]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def request_id
+        @data[:request_id]
+      end
+
+      # @return [String]
+      def resource_name
+        @data[:resource_name]
+      end
+    end
+
     class ServiceFailureException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -246,6 +278,36 @@ module Aws::ChimeSDKMeetings
       # @return [String]
       def request_id
         @data[:request_id]
+      end
+    end
+
+    class TooManyTagsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ChimeSDKMeetings::Types::TooManyTagsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def code
+        @code || @data[:code]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def request_id
+        @data[:request_id]
+      end
+
+      # @return [String]
+      def resource_name
+        @data[:resource_name]
       end
     end
 

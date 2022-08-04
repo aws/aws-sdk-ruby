@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2022-08-04)
+------------------
+
+* Feature - Adds support for Tags on Amazon Chime SDK WebRTC sessions
+
 1.13.0 (2022-07-07)
 ------------------
 
