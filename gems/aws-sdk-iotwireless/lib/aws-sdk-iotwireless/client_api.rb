@@ -18,6 +18,7 @@ module Aws::IoTWireless
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccountLinked = Shapes::BooleanShape.new(name: 'AccountLinked')
     Accuracy = Shapes::StructureShape.new(name: 'Accuracy')
+    AckModeRetryDurationSecs = Shapes::IntegerShape.new(name: 'AckModeRetryDurationSecs')
     AddGwMetadata = Shapes::BooleanShape.new(name: 'AddGwMetadata')
     AmazonId = Shapes::StringShape.new(name: 'AmazonId')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
@@ -139,7 +140,9 @@ module Aws::IoTWireless
     DownlinkQueueMessage = Shapes::StructureShape.new(name: 'DownlinkQueueMessage')
     DownlinkQueueMessagesList = Shapes::ListShape.new(name: 'DownlinkQueueMessagesList')
     DrMax = Shapes::IntegerShape.new(name: 'DrMax')
+    DrMaxBox = Shapes::IntegerShape.new(name: 'DrMaxBox')
     DrMin = Shapes::IntegerShape.new(name: 'DrMin')
+    DrMinBox = Shapes::IntegerShape.new(name: 'DrMinBox')
     EndPoint = Shapes::StringShape.new(name: 'EndPoint')
     Event = Shapes::StringShape.new(name: 'Event')
     EventConfigurationItem = Shapes::StructureShape.new(name: 'EventConfigurationItem')
@@ -289,6 +292,8 @@ module Aws::IoTWireless
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     McGroupId = Shapes::IntegerShape.new(name: 'McGroupId')
     Message = Shapes::StringShape.new(name: 'Message')
+    MessageDeliveryStatusEventConfiguration = Shapes::StructureShape.new(name: 'MessageDeliveryStatusEventConfiguration')
+    MessageDeliveryStatusResourceTypeEventConfiguration = Shapes::StructureShape.new(name: 'MessageDeliveryStatusResourceTypeEventConfiguration')
     MessageId = Shapes::StringShape.new(name: 'MessageId')
     MessageType = Shapes::StringShape.new(name: 'MessageType')
     MinGwDiversity = Shapes::IntegerShape.new(name: 'MinGwDiversity')
@@ -843,6 +848,7 @@ module Aws::IoTWireless
     EventNotificationItemConfigurations.add_member(:proximity, Shapes::ShapeRef.new(shape: ProximityEventConfiguration, location_name: "Proximity"))
     EventNotificationItemConfigurations.add_member(:join, Shapes::ShapeRef.new(shape: JoinEventConfiguration, location_name: "Join"))
     EventNotificationItemConfigurations.add_member(:connection_status, Shapes::ShapeRef.new(shape: ConnectionStatusEventConfiguration, location_name: "ConnectionStatus"))
+    EventNotificationItemConfigurations.add_member(:message_delivery_status, Shapes::ShapeRef.new(shape: MessageDeliveryStatusEventConfiguration, location_name: "MessageDeliveryStatus"))
     EventNotificationItemConfigurations.struct_class = Types::EventNotificationItemConfigurations
 
     FPorts.add_member(:fuota, Shapes::ShapeRef.new(shape: FPort, location_name: "Fuota"))
@@ -886,6 +892,7 @@ module Aws::IoTWireless
     GetEventConfigurationByResourceTypesResponse.add_member(:proximity, Shapes::ShapeRef.new(shape: ProximityResourceTypeEventConfiguration, location_name: "Proximity"))
     GetEventConfigurationByResourceTypesResponse.add_member(:join, Shapes::ShapeRef.new(shape: JoinResourceTypeEventConfiguration, location_name: "Join"))
     GetEventConfigurationByResourceTypesResponse.add_member(:connection_status, Shapes::ShapeRef.new(shape: ConnectionStatusResourceTypeEventConfiguration, location_name: "ConnectionStatus"))
+    GetEventConfigurationByResourceTypesResponse.add_member(:message_delivery_status, Shapes::ShapeRef.new(shape: MessageDeliveryStatusResourceTypeEventConfiguration, location_name: "MessageDeliveryStatus"))
     GetEventConfigurationByResourceTypesResponse.struct_class = Types::GetEventConfigurationByResourceTypesResponse
 
     GetFuotaTaskRequest.add_member(:id, Shapes::ShapeRef.new(shape: FuotaTaskId, required: true, location: "uri", location_name: "Id"))
@@ -975,6 +982,7 @@ module Aws::IoTWireless
     GetResourceEventConfigurationResponse.add_member(:proximity, Shapes::ShapeRef.new(shape: ProximityEventConfiguration, location_name: "Proximity"))
     GetResourceEventConfigurationResponse.add_member(:join, Shapes::ShapeRef.new(shape: JoinEventConfiguration, location_name: "Join"))
     GetResourceEventConfigurationResponse.add_member(:connection_status, Shapes::ShapeRef.new(shape: ConnectionStatusEventConfiguration, location_name: "ConnectionStatus"))
+    GetResourceEventConfigurationResponse.add_member(:message_delivery_status, Shapes::ShapeRef.new(shape: MessageDeliveryStatusEventConfiguration, location_name: "MessageDeliveryStatus"))
     GetResourceEventConfigurationResponse.struct_class = Types::GetResourceEventConfigurationResponse
 
     GetResourceLogLevelRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location: "uri", location_name: "ResourceIdentifier"))
@@ -1350,6 +1358,8 @@ module Aws::IoTWireless
     LoRaWANSendDataToDevice.struct_class = Types::LoRaWANSendDataToDevice
 
     LoRaWANServiceProfile.add_member(:add_gw_metadata, Shapes::ShapeRef.new(shape: AddGwMetadata, location_name: "AddGwMetadata"))
+    LoRaWANServiceProfile.add_member(:dr_min, Shapes::ShapeRef.new(shape: DrMinBox, location_name: "DrMin"))
+    LoRaWANServiceProfile.add_member(:dr_max, Shapes::ShapeRef.new(shape: DrMaxBox, location_name: "DrMax"))
     LoRaWANServiceProfile.struct_class = Types::LoRaWANServiceProfile
 
     LoRaWANStartFuotaTask.add_member(:start_time, Shapes::ShapeRef.new(shape: StartTime, location_name: "StartTime"))
@@ -1371,6 +1381,13 @@ module Aws::IoTWireless
     LoRaWANUpdateGatewayTaskEntry.add_member(:current_version, Shapes::ShapeRef.new(shape: LoRaWANGatewayVersion, location_name: "CurrentVersion"))
     LoRaWANUpdateGatewayTaskEntry.add_member(:update_version, Shapes::ShapeRef.new(shape: LoRaWANGatewayVersion, location_name: "UpdateVersion"))
     LoRaWANUpdateGatewayTaskEntry.struct_class = Types::LoRaWANUpdateGatewayTaskEntry
+
+    MessageDeliveryStatusEventConfiguration.add_member(:sidewalk, Shapes::ShapeRef.new(shape: SidewalkEventNotificationConfigurations, location_name: "Sidewalk"))
+    MessageDeliveryStatusEventConfiguration.add_member(:wireless_device_id_event_topic, Shapes::ShapeRef.new(shape: EventNotificationTopicStatus, location_name: "WirelessDeviceIdEventTopic"))
+    MessageDeliveryStatusEventConfiguration.struct_class = Types::MessageDeliveryStatusEventConfiguration
+
+    MessageDeliveryStatusResourceTypeEventConfiguration.add_member(:sidewalk, Shapes::ShapeRef.new(shape: SidewalkResourceTypeEventConfiguration, location_name: "Sidewalk"))
+    MessageDeliveryStatusResourceTypeEventConfiguration.struct_class = Types::MessageDeliveryStatusResourceTypeEventConfiguration
 
     MulticastGroup.add_member(:id, Shapes::ShapeRef.new(shape: MulticastGroupId, location_name: "Id"))
     MulticastGroup.add_member(:arn, Shapes::ShapeRef.new(shape: MulticastGroupArn, location_name: "Arn"))
@@ -1544,6 +1561,7 @@ module Aws::IoTWireless
 
     SidewalkSendDataToDevice.add_member(:seq, Shapes::ShapeRef.new(shape: Seq, location_name: "Seq"))
     SidewalkSendDataToDevice.add_member(:message_type, Shapes::ShapeRef.new(shape: MessageType, location_name: "MessageType"))
+    SidewalkSendDataToDevice.add_member(:ack_mode_retry_duration_secs, Shapes::ShapeRef.new(shape: AckModeRetryDurationSecs, location_name: "AckModeRetryDurationSecs"))
     SidewalkSendDataToDevice.struct_class = Types::SidewalkSendDataToDevice
 
     SidewalkUpdateAccount.add_member(:app_server_private_key, Shapes::ShapeRef.new(shape: AppServerPrivateKey, location_name: "AppServerPrivateKey"))
@@ -1633,6 +1651,7 @@ module Aws::IoTWireless
     UpdateEventConfigurationByResourceTypesRequest.add_member(:proximity, Shapes::ShapeRef.new(shape: ProximityResourceTypeEventConfiguration, location_name: "Proximity"))
     UpdateEventConfigurationByResourceTypesRequest.add_member(:join, Shapes::ShapeRef.new(shape: JoinResourceTypeEventConfiguration, location_name: "Join"))
     UpdateEventConfigurationByResourceTypesRequest.add_member(:connection_status, Shapes::ShapeRef.new(shape: ConnectionStatusResourceTypeEventConfiguration, location_name: "ConnectionStatus"))
+    UpdateEventConfigurationByResourceTypesRequest.add_member(:message_delivery_status, Shapes::ShapeRef.new(shape: MessageDeliveryStatusResourceTypeEventConfiguration, location_name: "MessageDeliveryStatus"))
     UpdateEventConfigurationByResourceTypesRequest.struct_class = Types::UpdateEventConfigurationByResourceTypesRequest
 
     UpdateEventConfigurationByResourceTypesResponse.struct_class = Types::UpdateEventConfigurationByResourceTypesResponse
@@ -1697,6 +1716,7 @@ module Aws::IoTWireless
     UpdateResourceEventConfigurationRequest.add_member(:proximity, Shapes::ShapeRef.new(shape: ProximityEventConfiguration, location_name: "Proximity"))
     UpdateResourceEventConfigurationRequest.add_member(:join, Shapes::ShapeRef.new(shape: JoinEventConfiguration, location_name: "Join"))
     UpdateResourceEventConfigurationRequest.add_member(:connection_status, Shapes::ShapeRef.new(shape: ConnectionStatusEventConfiguration, location_name: "ConnectionStatus"))
+    UpdateResourceEventConfigurationRequest.add_member(:message_delivery_status, Shapes::ShapeRef.new(shape: MessageDeliveryStatusEventConfiguration, location_name: "MessageDeliveryStatus"))
     UpdateResourceEventConfigurationRequest.struct_class = Types::UpdateResourceEventConfigurationRequest
 
     UpdateResourceEventConfigurationResponse.struct_class = Types::UpdateResourceEventConfigurationResponse

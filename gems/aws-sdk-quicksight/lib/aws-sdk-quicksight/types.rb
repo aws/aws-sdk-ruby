@@ -7446,14 +7446,13 @@ module Aws::QuickSight
     #   The domains that you want to add to the allow list for access to the
     #   generated URL that is then embedded. This optional parameter
     #   overrides the static domains that are configured in the Manage
-    #   QuickSight menu in the Amazon QuickSight console and instead allows
+    #   QuickSight menu in the Amazon QuickSight console. Instead, it allows
     #   only the domains that you include in this parameter. You can list up
     #   to three domains or subdomains in each API call.
     #
-    #   To include a subdomain, use `*` to include all subdomains under a
-    #   specific domain to the allow list. For example,
-    #   `https://*.sapp.amazon.com,` includes all subdomains under
-    #   `https://sapp.amazon.com`.
+    #   To include all subdomains under a specific domain to the allow list,
+    #   use `*`. For example, `https://*.sapp.amazon.com` includes all
+    #   subdomains under `https://sapp.amazon.com`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GenerateEmbedUrlForAnonymousUserRequest AWS API Documentation
@@ -7537,14 +7536,13 @@ module Aws::QuickSight
     #   The domains that you want to add to the allow list for access to the
     #   generated URL that is then embedded. This optional parameter
     #   overrides the static domains that are configured in the Manage
-    #   QuickSight menu in the Amazon QuickSight console and instead allows
+    #   QuickSight menu in the Amazon QuickSight console. Instead, it allows
     #   only the domains that you include in this parameter. You can list up
     #   to three domains or subdomains in each API call.
     #
-    #   To include a subdomain, use `*` to include all subdomains under a
-    #   specific domain to the allow list. For example,
-    #   `https://*.sapp.amazon.com,` includes all subdomains under
-    #   `https://sapp.amazon.com`.
+    #   To include all subdomains under a specific domain to the allow list,
+    #   use `*`. For example, `https://*.sapp.amazon.com` includes all
+    #   subdomains under `https://sapp.amazon.com`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GenerateEmbedUrlForRegisteredUserRequest AWS API Documentation
@@ -9144,7 +9142,14 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   A pagination token that can be used in a subsequent request.
+    #   A unique pagination token that can be used in a subsequent request.
+    #   You will receive a pagination token in the response body of a
+    #   previous `ListNameSpaces` API call if there is more data that can be
+    #   returned. To receive the data, make another `ListNamespaces` API
+    #   call with the returned token to retrieve the next page of data. Each
+    #   token is valid for 24 hours. If you try to make a `ListNamespaces`
+    #   API call with an expired token, you will receive a `HTTP 400
+    #   InvalidNextTokenException` error.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -9169,7 +9174,13 @@ module Aws::QuickSight
     #   @return [Array<Types::NamespaceInfoV2>]
     #
     # @!attribute [rw] next_token
-    #   A pagination token that can be used in a subsequent request.
+    #   A unique pagination token that can be used in a subsequent request.
+    #   Receiving `NextToken` in your response inticates that there is more
+    #   data that can be returned. To receive the data, make another
+    #   `ListNamespaces` API call with the returned token to retrieve the
+    #   next page of data. Each token is valid for 24 hours. If you try to
+    #   make a `ListNamespaces` API call with an expired token, you will
+    #   receive a `HTTP 400 InvalidNextTokenException` error.
     #   @return [String]
     #
     # @!attribute [rw] request_id

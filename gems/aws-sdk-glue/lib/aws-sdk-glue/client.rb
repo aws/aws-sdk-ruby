@@ -1444,6 +1444,7 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_target.inputs[0] #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_target.database #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_target.table #=> String
+    #   resp.jobs[0].execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.jobs_not_found #=> Array
     #   resp.jobs_not_found[0] #=> String
     #
@@ -1595,9 +1596,9 @@ module Aws::Glue
     #   resp.triggers[0].predicate.conditions #=> Array
     #   resp.triggers[0].predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
     #   resp.triggers[0].predicate.conditions[0].job_name #=> String
-    #   resp.triggers[0].predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
+    #   resp.triggers[0].predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING"
     #   resp.triggers[0].predicate.conditions[0].crawler_name #=> String
-    #   resp.triggers[0].predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
+    #   resp.triggers[0].predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.triggers[0].event_batching_condition.batch_size #=> Integer
     #   resp.triggers[0].event_batching_condition.batch_window #=> Integer
     #   resp.triggers_not_found #=> Array
@@ -1662,6 +1663,8 @@ module Aws::Glue
     #   resp.workflows[0].last_run.statistics.stopped_actions #=> Integer
     #   resp.workflows[0].last_run.statistics.succeeded_actions #=> Integer
     #   resp.workflows[0].last_run.statistics.running_actions #=> Integer
+    #   resp.workflows[0].last_run.statistics.errored_actions #=> Integer
+    #   resp.workflows[0].last_run.statistics.waiting_actions #=> Integer
     #   resp.workflows[0].last_run.graph.nodes #=> Array
     #   resp.workflows[0].last_run.graph.nodes[0].type #=> String, one of "CRAWLER", "JOB", "TRIGGER"
     #   resp.workflows[0].last_run.graph.nodes[0].name #=> String
@@ -1685,9 +1688,9 @@ module Aws::Glue
     #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions #=> Array
     #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
     #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].job_name #=> String
-    #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
+    #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING"
     #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawler_name #=> String
-    #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
+    #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_size #=> Integer
     #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_window #=> Integer
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs #=> Array
@@ -1699,7 +1702,7 @@ module Aws::Glue
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].started_on #=> Time
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].last_modified_on #=> Time
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].completed_on #=> Time
-    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].job_run_state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].job_run_state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING"
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].arguments #=> Hash
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].arguments["GenericString"] #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].error_message #=> String
@@ -1717,8 +1720,9 @@ module Aws::Glue
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].notification_property.notify_delay_after #=> Integer
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].glue_version #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].dpu_seconds #=> Float
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.workflows[0].last_run.graph.nodes[0].crawler_details.crawls #=> Array
-    #   resp.workflows[0].last_run.graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
+    #   resp.workflows[0].last_run.graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.workflows[0].last_run.graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
     #   resp.workflows[0].last_run.graph.nodes[0].crawler_details.crawls[0].completed_on #=> Time
     #   resp.workflows[0].last_run.graph.nodes[0].crawler_details.crawls[0].error_message #=> String
@@ -1752,9 +1756,9 @@ module Aws::Glue
     #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.predicate.conditions #=> Array
     #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
     #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].job_name #=> String
-    #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
+    #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING"
     #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawler_name #=> String
-    #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
+    #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_size #=> Integer
     #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_window #=> Integer
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs #=> Array
@@ -1766,7 +1770,7 @@ module Aws::Glue
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].started_on #=> Time
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].last_modified_on #=> Time
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].completed_on #=> Time
-    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].job_run_state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].job_run_state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING"
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].arguments #=> Hash
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].arguments["GenericString"] #=> String
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].error_message #=> String
@@ -1784,8 +1788,9 @@ module Aws::Glue
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].notification_property.notify_delay_after #=> Integer
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].glue_version #=> String
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].dpu_seconds #=> Float
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.workflows[0].graph.nodes[0].crawler_details.crawls #=> Array
-    #   resp.workflows[0].graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
+    #   resp.workflows[0].graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.workflows[0].graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
     #   resp.workflows[0].graph.nodes[0].crawler_details.crawls[0].completed_on #=> Time
     #   resp.workflows[0].graph.nodes[0].crawler_details.crawls[0].error_message #=> String
@@ -2841,6 +2846,18 @@ module Aws::Glue
     #   The representation of a directed acyclic graph on which both the Glue
     #   Studio visual component and Glue Studio code generation is based.
     #
+    # @option params [String] :execution_class
+    #   Indicates whether the job is run with a standard or flexible execution
+    #   class. The standard execution-class is ideal for time-sensitive
+    #   workloads that require fast job startup and dedicated resources.
+    #
+    #   The flexible execution class is appropriate for time-insensitive jobs
+    #   whose start and completion times may vary.
+    #
+    #   Only jobs with Glue version 3.0 and above and command type `glueetl`
+    #   will be allowed to set `ExecutionClass` to `FLEX`. The flexible
+    #   execution class is available for Spark jobs.
+    #
     # @return [Types::CreateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateJobResponse#name #name} => String
@@ -3551,6 +3568,7 @@ module Aws::Glue
     #         },
     #       },
     #     },
+    #     execution_class: "FLEX", # accepts FLEX, STANDARD
     #   })
     #
     # @example Response structure
@@ -4548,9 +4566,9 @@ module Aws::Glue
     #         {
     #           logical_operator: "EQUALS", # accepts EQUALS
     #           job_name: "NameString",
-    #           state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED, TIMEOUT
+    #           state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED, TIMEOUT, ERROR, WAITING
     #           crawler_name: "NameString",
-    #           crawl_state: "RUNNING", # accepts RUNNING, CANCELLING, CANCELLED, SUCCEEDED, FAILED
+    #           crawl_state: "RUNNING", # accepts RUNNING, CANCELLING, CANCELLED, SUCCEEDED, FAILED, ERROR
     #         },
     #       ],
     #     },
@@ -7188,6 +7206,7 @@ module Aws::Glue
     #   resp.job.code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_target.inputs[0] #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_target.database #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_target.table #=> String
+    #   resp.job.execution_class #=> String, one of "FLEX", "STANDARD"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJob AWS API Documentation
     #
@@ -7269,7 +7288,7 @@ module Aws::Glue
     #   resp.job_run.started_on #=> Time
     #   resp.job_run.last_modified_on #=> Time
     #   resp.job_run.completed_on #=> Time
-    #   resp.job_run.job_run_state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
+    #   resp.job_run.job_run_state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING"
     #   resp.job_run.arguments #=> Hash
     #   resp.job_run.arguments["GenericString"] #=> String
     #   resp.job_run.error_message #=> String
@@ -7287,6 +7306,7 @@ module Aws::Glue
     #   resp.job_run.notification_property.notify_delay_after #=> Integer
     #   resp.job_run.glue_version #=> String
     #   resp.job_run.dpu_seconds #=> Float
+    #   resp.job_run.execution_class #=> String, one of "FLEX", "STANDARD"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobRun AWS API Documentation
     #
@@ -7334,7 +7354,7 @@ module Aws::Glue
     #   resp.job_runs[0].started_on #=> Time
     #   resp.job_runs[0].last_modified_on #=> Time
     #   resp.job_runs[0].completed_on #=> Time
-    #   resp.job_runs[0].job_run_state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
+    #   resp.job_runs[0].job_run_state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING"
     #   resp.job_runs[0].arguments #=> Hash
     #   resp.job_runs[0].arguments["GenericString"] #=> String
     #   resp.job_runs[0].error_message #=> String
@@ -7352,6 +7372,7 @@ module Aws::Glue
     #   resp.job_runs[0].notification_property.notify_delay_after #=> Integer
     #   resp.job_runs[0].glue_version #=> String
     #   resp.job_runs[0].dpu_seconds #=> Float
+    #   resp.job_runs[0].execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobRuns AWS API Documentation
@@ -7893,6 +7914,7 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_target.inputs[0] #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_target.database #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_target.table #=> String
+    #   resp.jobs[0].execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobs AWS API Documentation
@@ -9857,9 +9879,9 @@ module Aws::Glue
     #   resp.trigger.predicate.conditions #=> Array
     #   resp.trigger.predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
     #   resp.trigger.predicate.conditions[0].job_name #=> String
-    #   resp.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
+    #   resp.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING"
     #   resp.trigger.predicate.conditions[0].crawler_name #=> String
-    #   resp.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
+    #   resp.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.trigger.event_batching_condition.batch_size #=> Integer
     #   resp.trigger.event_batching_condition.batch_window #=> Integer
     #
@@ -9922,9 +9944,9 @@ module Aws::Glue
     #   resp.triggers[0].predicate.conditions #=> Array
     #   resp.triggers[0].predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
     #   resp.triggers[0].predicate.conditions[0].job_name #=> String
-    #   resp.triggers[0].predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
+    #   resp.triggers[0].predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING"
     #   resp.triggers[0].predicate.conditions[0].crawler_name #=> String
-    #   resp.triggers[0].predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
+    #   resp.triggers[0].predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.triggers[0].event_batching_condition.batch_size #=> Integer
     #   resp.triggers[0].event_batching_condition.batch_window #=> Integer
     #   resp.next_token #=> String
@@ -10411,6 +10433,8 @@ module Aws::Glue
     #   resp.workflow.last_run.statistics.stopped_actions #=> Integer
     #   resp.workflow.last_run.statistics.succeeded_actions #=> Integer
     #   resp.workflow.last_run.statistics.running_actions #=> Integer
+    #   resp.workflow.last_run.statistics.errored_actions #=> Integer
+    #   resp.workflow.last_run.statistics.waiting_actions #=> Integer
     #   resp.workflow.last_run.graph.nodes #=> Array
     #   resp.workflow.last_run.graph.nodes[0].type #=> String, one of "CRAWLER", "JOB", "TRIGGER"
     #   resp.workflow.last_run.graph.nodes[0].name #=> String
@@ -10434,9 +10458,9 @@ module Aws::Glue
     #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions #=> Array
     #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
     #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].job_name #=> String
-    #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
+    #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING"
     #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawler_name #=> String
-    #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
+    #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_size #=> Integer
     #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_window #=> Integer
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs #=> Array
@@ -10448,7 +10472,7 @@ module Aws::Glue
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].started_on #=> Time
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].last_modified_on #=> Time
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].completed_on #=> Time
-    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].job_run_state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].job_run_state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING"
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].arguments #=> Hash
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].arguments["GenericString"] #=> String
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].error_message #=> String
@@ -10466,8 +10490,9 @@ module Aws::Glue
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].notification_property.notify_delay_after #=> Integer
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].glue_version #=> String
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].dpu_seconds #=> Float
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.workflow.last_run.graph.nodes[0].crawler_details.crawls #=> Array
-    #   resp.workflow.last_run.graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
+    #   resp.workflow.last_run.graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.workflow.last_run.graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
     #   resp.workflow.last_run.graph.nodes[0].crawler_details.crawls[0].completed_on #=> Time
     #   resp.workflow.last_run.graph.nodes[0].crawler_details.crawls[0].error_message #=> String
@@ -10501,9 +10526,9 @@ module Aws::Glue
     #   resp.workflow.graph.nodes[0].trigger_details.trigger.predicate.conditions #=> Array
     #   resp.workflow.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
     #   resp.workflow.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].job_name #=> String
-    #   resp.workflow.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
+    #   resp.workflow.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING"
     #   resp.workflow.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawler_name #=> String
-    #   resp.workflow.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
+    #   resp.workflow.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.workflow.graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_size #=> Integer
     #   resp.workflow.graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_window #=> Integer
     #   resp.workflow.graph.nodes[0].job_details.job_runs #=> Array
@@ -10515,7 +10540,7 @@ module Aws::Glue
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].started_on #=> Time
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].last_modified_on #=> Time
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].completed_on #=> Time
-    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].job_run_state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
+    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].job_run_state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING"
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].arguments #=> Hash
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].arguments["GenericString"] #=> String
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].error_message #=> String
@@ -10533,8 +10558,9 @@ module Aws::Glue
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].notification_property.notify_delay_after #=> Integer
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].glue_version #=> String
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].dpu_seconds #=> Float
+    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.workflow.graph.nodes[0].crawler_details.crawls #=> Array
-    #   resp.workflow.graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
+    #   resp.workflow.graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.workflow.graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
     #   resp.workflow.graph.nodes[0].crawler_details.crawls[0].completed_on #=> Time
     #   resp.workflow.graph.nodes[0].crawler_details.crawls[0].error_message #=> String
@@ -10596,6 +10622,8 @@ module Aws::Glue
     #   resp.run.statistics.stopped_actions #=> Integer
     #   resp.run.statistics.succeeded_actions #=> Integer
     #   resp.run.statistics.running_actions #=> Integer
+    #   resp.run.statistics.errored_actions #=> Integer
+    #   resp.run.statistics.waiting_actions #=> Integer
     #   resp.run.graph.nodes #=> Array
     #   resp.run.graph.nodes[0].type #=> String, one of "CRAWLER", "JOB", "TRIGGER"
     #   resp.run.graph.nodes[0].name #=> String
@@ -10619,9 +10647,9 @@ module Aws::Glue
     #   resp.run.graph.nodes[0].trigger_details.trigger.predicate.conditions #=> Array
     #   resp.run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
     #   resp.run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].job_name #=> String
-    #   resp.run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
+    #   resp.run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING"
     #   resp.run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawler_name #=> String
-    #   resp.run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
+    #   resp.run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.run.graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_size #=> Integer
     #   resp.run.graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_window #=> Integer
     #   resp.run.graph.nodes[0].job_details.job_runs #=> Array
@@ -10633,7 +10661,7 @@ module Aws::Glue
     #   resp.run.graph.nodes[0].job_details.job_runs[0].started_on #=> Time
     #   resp.run.graph.nodes[0].job_details.job_runs[0].last_modified_on #=> Time
     #   resp.run.graph.nodes[0].job_details.job_runs[0].completed_on #=> Time
-    #   resp.run.graph.nodes[0].job_details.job_runs[0].job_run_state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
+    #   resp.run.graph.nodes[0].job_details.job_runs[0].job_run_state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING"
     #   resp.run.graph.nodes[0].job_details.job_runs[0].arguments #=> Hash
     #   resp.run.graph.nodes[0].job_details.job_runs[0].arguments["GenericString"] #=> String
     #   resp.run.graph.nodes[0].job_details.job_runs[0].error_message #=> String
@@ -10651,8 +10679,9 @@ module Aws::Glue
     #   resp.run.graph.nodes[0].job_details.job_runs[0].notification_property.notify_delay_after #=> Integer
     #   resp.run.graph.nodes[0].job_details.job_runs[0].glue_version #=> String
     #   resp.run.graph.nodes[0].job_details.job_runs[0].dpu_seconds #=> Float
+    #   resp.run.graph.nodes[0].job_details.job_runs[0].execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.run.graph.nodes[0].crawler_details.crawls #=> Array
-    #   resp.run.graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
+    #   resp.run.graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.run.graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
     #   resp.run.graph.nodes[0].crawler_details.crawls[0].completed_on #=> Time
     #   resp.run.graph.nodes[0].crawler_details.crawls[0].error_message #=> String
@@ -10754,6 +10783,8 @@ module Aws::Glue
     #   resp.runs[0].statistics.stopped_actions #=> Integer
     #   resp.runs[0].statistics.succeeded_actions #=> Integer
     #   resp.runs[0].statistics.running_actions #=> Integer
+    #   resp.runs[0].statistics.errored_actions #=> Integer
+    #   resp.runs[0].statistics.waiting_actions #=> Integer
     #   resp.runs[0].graph.nodes #=> Array
     #   resp.runs[0].graph.nodes[0].type #=> String, one of "CRAWLER", "JOB", "TRIGGER"
     #   resp.runs[0].graph.nodes[0].name #=> String
@@ -10777,9 +10808,9 @@ module Aws::Glue
     #   resp.runs[0].graph.nodes[0].trigger_details.trigger.predicate.conditions #=> Array
     #   resp.runs[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
     #   resp.runs[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].job_name #=> String
-    #   resp.runs[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
+    #   resp.runs[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING"
     #   resp.runs[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawler_name #=> String
-    #   resp.runs[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
+    #   resp.runs[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.runs[0].graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_size #=> Integer
     #   resp.runs[0].graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_window #=> Integer
     #   resp.runs[0].graph.nodes[0].job_details.job_runs #=> Array
@@ -10791,7 +10822,7 @@ module Aws::Glue
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].started_on #=> Time
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].last_modified_on #=> Time
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].completed_on #=> Time
-    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].job_run_state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].job_run_state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING"
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].arguments #=> Hash
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].arguments["GenericString"] #=> String
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].error_message #=> String
@@ -10809,8 +10840,9 @@ module Aws::Glue
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].notification_property.notify_delay_after #=> Integer
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].glue_version #=> String
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].dpu_seconds #=> Float
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.runs[0].graph.nodes[0].crawler_details.crawls #=> Array
-    #   resp.runs[0].graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
+    #   resp.runs[0].graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.runs[0].graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
     #   resp.runs[0].graph.nodes[0].crawler_details.crawls[0].completed_on #=> Time
     #   resp.runs[0].graph.nodes[0].crawler_details.crawls[0].error_message #=> String
@@ -12601,6 +12633,18 @@ module Aws::Glue
     #   The number of workers of a defined `workerType` that are allocated
     #   when a job runs.
     #
+    # @option params [String] :execution_class
+    #   Indicates whether the job is run with a standard or flexible execution
+    #   class. The standard execution-class is ideal for time-sensitive
+    #   workloads that require fast job startup and dedicated resources.
+    #
+    #   The flexible execution class is appropriate for time-insensitive jobs
+    #   whose start and completion times may vary.
+    #
+    #   Only jobs with Glue version 3.0 and above and command type `glueetl`
+    #   will be allowed to set `ExecutionClass` to `FLEX`. The flexible
+    #   execution class is available for Spark jobs.
+    #
     # @return [Types::StartJobRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartJobRunResponse#job_run_id #job_run_id} => String
@@ -12622,6 +12666,7 @@ module Aws::Glue
     #     },
     #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X
     #     number_of_workers: 1,
+    #     execution_class: "FLEX", # accepts FLEX, STANDARD
     #   })
     #
     # @example Response structure
@@ -14418,6 +14463,7 @@ module Aws::Glue
     #           },
     #         },
     #       },
+    #       execution_class: "FLEX", # accepts FLEX, STANDARD
     #     },
     #   })
     #
@@ -14936,9 +14982,9 @@ module Aws::Glue
     #           {
     #             logical_operator: "EQUALS", # accepts EQUALS
     #             job_name: "NameString",
-    #             state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED, TIMEOUT
+    #             state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED, TIMEOUT, ERROR, WAITING
     #             crawler_name: "NameString",
-    #             crawl_state: "RUNNING", # accepts RUNNING, CANCELLING, CANCELLED, SUCCEEDED, FAILED
+    #             crawl_state: "RUNNING", # accepts RUNNING, CANCELLING, CANCELLED, SUCCEEDED, FAILED, ERROR
     #           },
     #         ],
     #       },
@@ -14970,9 +15016,9 @@ module Aws::Glue
     #   resp.trigger.predicate.conditions #=> Array
     #   resp.trigger.predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
     #   resp.trigger.predicate.conditions[0].job_name #=> String
-    #   resp.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
+    #   resp.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING"
     #   resp.trigger.predicate.conditions[0].crawler_name #=> String
-    #   resp.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
+    #   resp.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.trigger.event_batching_condition.batch_size #=> Integer
     #   resp.trigger.event_batching_condition.batch_window #=> Integer
     #
@@ -15094,7 +15140,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.116.0'
+      context[:gem_version] = '1.117.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

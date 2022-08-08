@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2022-08-08)
+------------------
+
+* Feature - AWS IoT Wireless release support for sidewalk data reliability.
+
 1.24.0 (2022-07-07)
 ------------------
 

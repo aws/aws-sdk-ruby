@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.117.0 (2022-08-08)
+------------------
+
+* Feature - Add an option to run non-urgent or non-time sensitive Glue Jobs on spare capacity
+
 1.116.0 (2022-07-19)
 ------------------
 

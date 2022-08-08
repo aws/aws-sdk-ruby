@@ -851,6 +851,8 @@ module Aws::IoTWireless
     #         name: "ServiceProfileName",
     #         lo_ra_wan: {
     #           add_gw_metadata: false,
+    #           dr_min: 1,
+    #           dr_max: 1,
     #         },
     #         tags: [
     #           {
@@ -1807,11 +1809,17 @@ module Aws::IoTWireless
     #   item.
     #   @return [Types::ConnectionStatusEventConfiguration]
     #
+    # @!attribute [rw] message_delivery_status
+    #   Message delivery status event configuration for an event
+    #   configuration item.
+    #   @return [Types::MessageDeliveryStatusEventConfiguration]
+    #
     class EventNotificationItemConfigurations < Struct.new(
       :device_registration_state,
       :proximity,
       :join,
-      :connection_status)
+      :connection_status,
+      :message_delivery_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1996,11 +2004,17 @@ module Aws::IoTWireless
     #   Resource type event configuration for the connection status event.
     #   @return [Types::ConnectionStatusResourceTypeEventConfiguration]
     #
+    # @!attribute [rw] message_delivery_status
+    #   Resource type event configuration object for the message delivery
+    #   status event.
+    #   @return [Types::MessageDeliveryStatusResourceTypeEventConfiguration]
+    #
     class GetEventConfigurationByResourceTypesResponse < Struct.new(
       :device_registration_state,
       :proximity,
       :join,
-      :connection_status)
+      :connection_status,
+      :message_delivery_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2428,11 +2442,16 @@ module Aws::IoTWireless
     #   Event configuration for the connection status event.
     #   @return [Types::ConnectionStatusEventConfiguration]
     #
+    # @!attribute [rw] message_delivery_status
+    #   Event configuration for the message delivery status event.
+    #   @return [Types::MessageDeliveryStatusEventConfiguration]
+    #
     class GetResourceEventConfigurationResponse < Struct.new(
       :device_registration_state,
       :proximity,
       :join,
-      :connection_status)
+      :connection_status,
+      :message_delivery_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4421,14 +4440,26 @@ module Aws::IoTWireless
     #
     #       {
     #         add_gw_metadata: false,
+    #         dr_min: 1,
+    #         dr_max: 1,
     #       }
     #
     # @!attribute [rw] add_gw_metadata
     #   The AddGWMetaData value.
     #   @return [Boolean]
     #
+    # @!attribute [rw] dr_min
+    #   The DrMin value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] dr_max
+    #   The DrMax value.
+    #   @return [Integer]
+    #
     class LoRaWANServiceProfile < Struct.new(
-      :add_gw_metadata)
+      :add_gw_metadata,
+      :dr_min,
+      :dr_max)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4563,6 +4594,59 @@ module Aws::IoTWireless
     class LoRaWANUpdateGatewayTaskEntry < Struct.new(
       :current_version,
       :update_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Message delivery status event configuration object for enabling and
+    # disabling relevant topics.
+    #
+    # @note When making an API call, you may pass MessageDeliveryStatusEventConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         sidewalk: {
+    #           amazon_id_event_topic: "Enabled", # accepts Enabled, Disabled
+    #         },
+    #         wireless_device_id_event_topic: "Enabled", # accepts Enabled, Disabled
+    #       }
+    #
+    # @!attribute [rw] sidewalk
+    #   `SidewalkEventNotificationConfigurations` object, which is the event
+    #   configuration object for Sidewalk-related event topics.
+    #   @return [Types::SidewalkEventNotificationConfigurations]
+    #
+    # @!attribute [rw] wireless_device_id_event_topic
+    #   Enum to denote whether the wireless device id device registration
+    #   state event topic is enabled or disabled.
+    #   @return [String]
+    #
+    class MessageDeliveryStatusEventConfiguration < Struct.new(
+      :sidewalk,
+      :wireless_device_id_event_topic)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Message delivery status resource type event configuration object for
+    # enabling or disabling relevant topic.
+    #
+    # @note When making an API call, you may pass MessageDeliveryStatusResourceTypeEventConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         sidewalk: {
+    #           wireless_device_event_topic: "Enabled", # accepts Enabled, Disabled
+    #         },
+    #       }
+    #
+    # @!attribute [rw] sidewalk
+    #   Sidewalk resource type event configuration object for enabling or
+    #   disabling topic.
+    #   @return [Types::SidewalkResourceTypeEventConfiguration]
+    #
+    class MessageDeliveryStatusResourceTypeEventConfiguration < Struct.new(
+      :sidewalk)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5095,6 +5179,7 @@ module Aws::IoTWireless
     #           sidewalk: {
     #             seq: 1,
     #             message_type: "CUSTOM_COMMAND_ID_NOTIFY", # accepts CUSTOM_COMMAND_ID_NOTIFY, CUSTOM_COMMAND_ID_GET, CUSTOM_COMMAND_ID_SET, CUSTOM_COMMAND_ID_RESP
+    #             ack_mode_retry_duration_secs: 1,
     #           },
     #         },
     #       }
@@ -5397,6 +5482,7 @@ module Aws::IoTWireless
     #       {
     #         seq: 1,
     #         message_type: "CUSTOM_COMMAND_ID_NOTIFY", # accepts CUSTOM_COMMAND_ID_NOTIFY, CUSTOM_COMMAND_ID_GET, CUSTOM_COMMAND_ID_SET, CUSTOM_COMMAND_ID_RESP
+    #         ack_mode_retry_duration_secs: 1,
     #       }
     #
     # @!attribute [rw] seq
@@ -5408,9 +5494,15 @@ module Aws::IoTWireless
     #   `CUSTOM_COMMAND_ID_NOTIFY`.
     #   @return [String]
     #
+    # @!attribute [rw] ack_mode_retry_duration_secs
+    #   The duration of time in seconds for which you want to retry sending
+    #   the ACK.
+    #   @return [Integer]
+    #
     class SidewalkSendDataToDevice < Struct.new(
       :seq,
-      :message_type)
+      :message_type,
+      :ack_mode_retry_duration_secs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5837,6 +5929,11 @@ module Aws::IoTWireless
     #             wireless_gateway_event_topic: "Enabled", # accepts Enabled, Disabled
     #           },
     #         },
+    #         message_delivery_status: {
+    #           sidewalk: {
+    #             wireless_device_event_topic: "Enabled", # accepts Enabled, Disabled
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] device_registration_state
@@ -5859,11 +5956,17 @@ module Aws::IoTWireless
     #   enabling and disabling wireless gateway topic.
     #   @return [Types::ConnectionStatusResourceTypeEventConfiguration]
     #
+    # @!attribute [rw] message_delivery_status
+    #   Message delivery status resource type event configuration object for
+    #   enabling and disabling wireless device topic.
+    #   @return [Types::MessageDeliveryStatusResourceTypeEventConfiguration]
+    #
     class UpdateEventConfigurationByResourceTypesRequest < Struct.new(
       :device_registration_state,
       :proximity,
       :join,
-      :connection_status)
+      :connection_status,
+      :message_delivery_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6202,6 +6305,12 @@ module Aws::IoTWireless
     #           },
     #           wireless_gateway_id_event_topic: "Enabled", # accepts Enabled, Disabled
     #         },
+    #         message_delivery_status: {
+    #           sidewalk: {
+    #             amazon_id_event_topic: "Enabled", # accepts Enabled, Disabled
+    #           },
+    #           wireless_device_id_event_topic: "Enabled", # accepts Enabled, Disabled
+    #         },
     #       }
     #
     # @!attribute [rw] identifier
@@ -6234,6 +6343,10 @@ module Aws::IoTWireless
     #   Event configuration for the connection status event.
     #   @return [Types::ConnectionStatusEventConfiguration]
     #
+    # @!attribute [rw] message_delivery_status
+    #   Event configuration for the message delivery status event.
+    #   @return [Types::MessageDeliveryStatusEventConfiguration]
+    #
     class UpdateResourceEventConfigurationRequest < Struct.new(
       :identifier,
       :identifier_type,
@@ -6241,7 +6354,8 @@ module Aws::IoTWireless
       :device_registration_state,
       :proximity,
       :join,
-      :connection_status)
+      :connection_status,
+      :message_delivery_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6685,6 +6799,7 @@ module Aws::IoTWireless
     #         sidewalk: {
     #           seq: 1,
     #           message_type: "CUSTOM_COMMAND_ID_NOTIFY", # accepts CUSTOM_COMMAND_ID_NOTIFY, CUSTOM_COMMAND_ID_GET, CUSTOM_COMMAND_ID_SET, CUSTOM_COMMAND_ID_RESP
+    #           ack_mode_retry_duration_secs: 1,
     #         },
     #       }
     #

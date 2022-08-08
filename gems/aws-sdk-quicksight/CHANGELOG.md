@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.67.0 (2022-08-08)
+------------------
+
+* Feature - A series of documentation updates to the QuickSight API reference.
+
 1.66.0 (2022-07-05)
 ------------------
 

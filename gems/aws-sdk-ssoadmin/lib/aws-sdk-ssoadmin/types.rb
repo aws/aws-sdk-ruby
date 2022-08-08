@@ -50,7 +50,7 @@ module Aws::SSOAdmin
 
     # The value used for mapping a specified attribute to an identity
     # source. For more information, see [Attribute mappings][1] in the
-    # Amazon Web Services Single Sign-On User Guide.
+    # *Amazon Web Services SSO User Guide*.
     #
     #
     #
@@ -236,8 +236,8 @@ module Aws::SSOAdmin
     #       }
     #
     # @!attribute [rw] instance_arn
-    #   The ARN of the SSO instance under which the operation will be
-    #   executed.
+    #   The ARN of the Amazon Web Services SSO instance under which the
+    #   operation will be executed.
     #   @return [String]
     #
     # @!attribute [rw] permission_set_arn
@@ -245,10 +245,9 @@ module Aws::SSOAdmin
     #   @return [String]
     #
     # @!attribute [rw] customer_managed_policy_reference
-    #   Specifies the name and path of the IAM customer managed policy. You
-    #   must have an IAM policy that matches the name and path in each
-    #   Amazon Web Services account where you want to deploy your permission
-    #   set.
+    #   Specifies the name and path of a customer managed policy. You must
+    #   have an IAM policy that matches the name and path in each Amazon Web
+    #   Services account where you want to deploy your permission set.
     #   @return [Types::CustomerManagedPolicyReference]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/AttachCustomerManagedPolicyReferenceToPermissionSetRequest AWS API Documentation
@@ -275,9 +274,9 @@ module Aws::SSOAdmin
     #       }
     #
     # @!attribute [rw] instance_arn
-    #   The ARN of the SSO instance under which the operation will be
-    #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   The ARN of the Amazon Web Services SSO instance under which the
+    #   operation will be executed. For more information about ARNs, see
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
     #   *Amazon Web Services General Reference*.
     #   @return [String]
@@ -307,14 +306,14 @@ module Aws::SSOAdmin
     class AttachManagedPolicyToPermissionSetResponse < Aws::EmptyStructure; end
 
     # A structure that stores the details of the Amazon Web Services managed
-    # IAM policy.
+    # policy.
     #
     # @!attribute [rw] name
-    #   The name of the Amazon Web Services managed IAM policy.
+    #   The name of the Amazon Web Services managed policy.
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The ARN of the Amazon Web Services managed IAM policy. For more
+    #   The ARN of the Amazon Web Services managed policy. For more
     #   information about ARNs, see [Amazon Resource Names (ARNs) and Amazon
     #   Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
@@ -360,9 +359,9 @@ module Aws::SSOAdmin
     #       }
     #
     # @!attribute [rw] instance_arn
-    #   The ARN of the SSO instance under which the operation will be
-    #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   The ARN of the Amazon Web Services SSO instance under which the
+    #   operation will be executed. For more information about ARNs, see
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
     #   *Amazon Web Services General Reference*.
     #   @return [String]
@@ -437,8 +436,8 @@ module Aws::SSOAdmin
     #       }
     #
     # @!attribute [rw] instance_arn
-    #   The ARN of the SSO instance under which the operation will be
-    #   executed.
+    #   The ARN of the Amazon Web Services SSO instance under which the
+    #   operation will be executed.
     #   @return [String]
     #
     # @!attribute [rw] instance_access_control_attribute_configuration
@@ -491,9 +490,9 @@ module Aws::SSOAdmin
     #   @return [String]
     #
     # @!attribute [rw] instance_arn
-    #   The ARN of the SSO instance under which the operation will be
-    #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   The ARN of the Amazon Web Services SSO instance under which the
+    #   operation will be executed. For more information about ARNs, see
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
     #   *Amazon Web Services General Reference*.
     #   @return [String]
@@ -537,9 +536,9 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
-    # Specifies the name and path of the IAM customer managed policy. You
-    # must have an IAM policy that matches the name and path in each Amazon
-    # Web Services account where you want to deploy your permission set.
+    # Specifies the name and path of a customer managed policy. You must
+    # have an IAM policy that matches the name and path in each Amazon Web
+    # Services account where you want to deploy your permission set.
     #
     # @note When making an API call, you may pass CustomerManagedPolicyReference
     #   data as a hash:
@@ -550,13 +549,15 @@ module Aws::SSOAdmin
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the policy document.
+    #   The name of the IAM policy that you have configured in each account
+    #   where you want to deploy your permission set.
     #   @return [String]
     #
     # @!attribute [rw] path
-    #   The path for the policy. The default is `/`. For more information,
-    #   see [Friendly names and paths][1] in the Identity and Access
-    #   Management user guide.
+    #   The path to the IAM policy that you have configured in each account
+    #   where you want to deploy your permission set. The default is `/`.
+    #   For more information, see [Friendly names and paths][1] in the
+    #   *Identity and Access Management User Guide*.
     #
     #
     #
@@ -585,9 +586,9 @@ module Aws::SSOAdmin
     #       }
     #
     # @!attribute [rw] instance_arn
-    #   The ARN of the SSO instance under which the operation will be
-    #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   The ARN of the Amazon Web Services SSO instance under which the
+    #   operation will be executed. For more information about ARNs, see
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
     #   *Amazon Web Services General Reference*.
     #   @return [String]
@@ -652,9 +653,9 @@ module Aws::SSOAdmin
     #       }
     #
     # @!attribute [rw] instance_arn
-    #   The ARN of the SSO instance under which the operation will be
-    #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   The ARN of the Amazon Web Services SSO instance under which the
+    #   operation will be executed. For more information about ARNs, see
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
     #   *Amazon Web Services General Reference*.
     #   @return [String]
@@ -684,8 +685,8 @@ module Aws::SSOAdmin
     #       }
     #
     # @!attribute [rw] instance_arn
-    #   The ARN of the SSO instance under which the operation will be
-    #   executed.
+    #   The ARN of the Amazon Web Services SSO instance under which the
+    #   operation will be executed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DeleteInstanceAccessControlAttributeConfigurationRequest AWS API Documentation
@@ -709,9 +710,9 @@ module Aws::SSOAdmin
     #       }
     #
     # @!attribute [rw] instance_arn
-    #   The ARN of the SSO instance under which the operation will be
-    #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   The ARN of the Amazon Web Services SSO instance under which the
+    #   operation will be executed. For more information about ARNs, see
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
     #   *Amazon Web Services General Reference*.
     #   @return [String]
@@ -742,8 +743,8 @@ module Aws::SSOAdmin
     #       }
     #
     # @!attribute [rw] instance_arn
-    #   The ARN of the SSO instance under which the operation will be
-    #   executed.
+    #   The ARN of the Amazon Web Services SSO instance under which the
+    #   operation will be executed.
     #   @return [String]
     #
     # @!attribute [rw] permission_set_arn
@@ -772,9 +773,9 @@ module Aws::SSOAdmin
     #       }
     #
     # @!attribute [rw] instance_arn
-    #   The ARN of the SSO instance under which the operation will be
-    #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   The ARN of the Amazon Web Services SSO instance under which the
+    #   operation will be executed. For more information about ARNs, see
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
     #   *Amazon Web Services General Reference*.
     #   @return [String]
@@ -813,9 +814,9 @@ module Aws::SSOAdmin
     #       }
     #
     # @!attribute [rw] instance_arn
-    #   The ARN of the SSO instance under which the operation will be
-    #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   The ARN of the Amazon Web Services SSO instance under which the
+    #   operation will be executed. For more information about ARNs, see
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
     #   *Amazon Web Services General Reference*.
     #   @return [String]
@@ -853,8 +854,8 @@ module Aws::SSOAdmin
     #       }
     #
     # @!attribute [rw] instance_arn
-    #   The ARN of the SSO instance under which the operation will be
-    #   executed.
+    #   The ARN of the Amazon Web Services SSO instance under which the
+    #   operation will be executed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DescribeInstanceAccessControlAttributeConfigurationRequest AWS API Documentation
@@ -898,9 +899,9 @@ module Aws::SSOAdmin
     #       }
     #
     # @!attribute [rw] instance_arn
-    #   The ARN of the SSO instance under which the operation will be
-    #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   The ARN of the Amazon Web Services SSO instance under which the
+    #   operation will be executed. For more information about ARNs, see
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
     #   *Amazon Web Services General Reference*.
     #   @return [String]
@@ -940,9 +941,9 @@ module Aws::SSOAdmin
     #       }
     #
     # @!attribute [rw] instance_arn
-    #   The ARN of the SSO instance under which the operation will be
-    #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   The ARN of the Amazon Web Services SSO instance under which the
+    #   operation will be executed. For more information about ARNs, see
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
     #   *Amazon Web Services General Reference*.
     #   @return [String]
@@ -985,8 +986,8 @@ module Aws::SSOAdmin
     #       }
     #
     # @!attribute [rw] instance_arn
-    #   The ARN of the SSO instance under which the operation will be
-    #   executed.
+    #   The ARN of the Amazon Web Services SSO instance under which the
+    #   operation will be executed.
     #   @return [String]
     #
     # @!attribute [rw] permission_set_arn
@@ -994,10 +995,9 @@ module Aws::SSOAdmin
     #   @return [String]
     #
     # @!attribute [rw] customer_managed_policy_reference
-    #   Specifies the name and path of the IAM customer managed policy. You
-    #   must have an IAM policy that matches the name and path in each
-    #   Amazon Web Services account where you want to deploy your permission
-    #   set.
+    #   Specifies the name and path of a customer managed policy. You must
+    #   have an IAM policy that matches the name and path in each Amazon Web
+    #   Services account where you want to deploy your permission set.
     #   @return [Types::CustomerManagedPolicyReference]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DetachCustomerManagedPolicyReferenceFromPermissionSetRequest AWS API Documentation
@@ -1024,9 +1024,9 @@ module Aws::SSOAdmin
     #       }
     #
     # @!attribute [rw] instance_arn
-    #   The ARN of the SSO instance under which the operation will be
-    #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   The ARN of the Amazon Web Services SSO instance under which the
+    #   operation will be executed. For more information about ARNs, see
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
     #   *Amazon Web Services General Reference*.
     #   @return [String]
@@ -1064,9 +1064,9 @@ module Aws::SSOAdmin
     #       }
     #
     # @!attribute [rw] instance_arn
-    #   The ARN of the SSO instance under which the operation will be
-    #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   The ARN of the Amazon Web Services SSO instance under which the
+    #   operation will be executed. For more information about ARNs, see
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
     #   *Amazon Web Services General Reference*.
     #   @return [String]
@@ -1085,7 +1085,7 @@ module Aws::SSOAdmin
     end
 
     # @!attribute [rw] inline_policy
-    #   The IAM inline policy that is attached to the permission set.
+    #   The inline policy that is attached to the permission set.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/GetInlinePolicyForPermissionSetResponse AWS API Documentation
@@ -1105,8 +1105,8 @@ module Aws::SSOAdmin
     #       }
     #
     # @!attribute [rw] instance_arn
-    #   The ARN of the SSO instance under which the operation will be
-    #   executed.
+    #   The ARN of the Amazon Web Services SSO instance under which the
+    #   operation will be executed.
     #   @return [String]
     #
     # @!attribute [rw] permission_set_arn
@@ -1164,19 +1164,19 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
-    # Provides information about the SSO instance.
+    # Provides information about the Amazon Web Services SSO instance.
     #
     # @!attribute [rw] instance_arn
-    #   The ARN of the SSO instance under which the operation will be
-    #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   The ARN of the Amazon Web Services SSO instance under which the
+    #   operation will be executed. For more information about ARNs, see
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
     #   *Amazon Web Services General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] identity_store_id
-    #   The identifier of the identity store that is connected to the SSO
-    #   instance.
+    #   The identifier of the identity store that is connected to the Amazon
+    #   Web Services SSO instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/InstanceMetadata AWS API Documentation
@@ -1215,9 +1215,9 @@ module Aws::SSOAdmin
     #       }
     #
     # @!attribute [rw] instance_arn
-    #   The ARN of the SSO instance under which the operation will be
-    #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   The ARN of the Amazon Web Services SSO instance under which the
+    #   operation will be executed. For more information about ARNs, see
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
     #   *Amazon Web Services General Reference*.
     #   @return [String]
@@ -1277,9 +1277,9 @@ module Aws::SSOAdmin
     #       }
     #
     # @!attribute [rw] instance_arn
-    #   The ARN of the SSO instance under which the operation will be
-    #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   The ARN of the Amazon Web Services SSO instance under which the
+    #   operation will be executed. For more information about ARNs, see
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
     #   *Amazon Web Services General Reference*.
     #   @return [String]
@@ -1338,9 +1338,9 @@ module Aws::SSOAdmin
     #       }
     #
     # @!attribute [rw] instance_arn
-    #   The ARN of the SSO instance under which the operation will be
-    #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   The ARN of the Amazon Web Services SSO instance under which the
+    #   operation will be executed. For more information about ARNs, see
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
     #   *Amazon Web Services General Reference*.
     #   @return [String]
@@ -1406,9 +1406,9 @@ module Aws::SSOAdmin
     #       }
     #
     # @!attribute [rw] instance_arn
-    #   The ARN of the SSO instance under which the operation will be
-    #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   The ARN of the Amazon Web Services SSO instance under which the
+    #   operation will be executed. For more information about ARNs, see
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
     #   *Amazon Web Services General Reference*.
     #   @return [String]
@@ -1473,8 +1473,8 @@ module Aws::SSOAdmin
     #       }
     #
     # @!attribute [rw] instance_arn
-    #   The ARN of the SSO instance under which the operation will be
-    #   executed.
+    #   The ARN of the Amazon Web Services SSO instance under which the
+    #   operation will be executed.
     #   @return [String]
     #
     # @!attribute [rw] permission_set_arn
@@ -1502,8 +1502,8 @@ module Aws::SSOAdmin
     end
 
     # @!attribute [rw] customer_managed_policy_references
-    #   Specifies the names and paths of the IAM customer managed policies
-    #   that you have attached to your permission set.
+    #   Specifies the names and paths of the customer managed policies that
+    #   you have attached to your permission set.
     #   @return [Array<Types::CustomerManagedPolicyReference>]
     #
     # @!attribute [rw] next_token
@@ -1547,7 +1547,8 @@ module Aws::SSOAdmin
     end
 
     # @!attribute [rw] instances
-    #   Lists the SSO instances that the caller has access to.
+    #   Lists the Amazon Web Services SSO instances that the caller has
+    #   access to.
     #   @return [Array<Types::InstanceMetadata>]
     #
     # @!attribute [rw] next_token
@@ -1575,9 +1576,9 @@ module Aws::SSOAdmin
     #       }
     #
     # @!attribute [rw] instance_arn
-    #   The ARN of the SSO instance under which the operation will be
-    #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   The ARN of the Amazon Web Services SSO instance under which the
+    #   operation will be executed. For more information about ARNs, see
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
     #   *Amazon Web Services General Reference*.
     #   @return [String]
@@ -1607,7 +1608,7 @@ module Aws::SSOAdmin
     end
 
     # @!attribute [rw] attached_managed_policies
-    #   The array of the AttachedManagedPolicy data type object.
+    #   An array of the AttachedManagedPolicy data type object.
     #   @return [Array<Types::AttachedManagedPolicy>]
     #
     # @!attribute [rw] next_token
@@ -1637,9 +1638,9 @@ module Aws::SSOAdmin
     #       }
     #
     # @!attribute [rw] instance_arn
-    #   The ARN of the SSO instance under which the operation will be
-    #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   The ARN of the Amazon Web Services SSO instance under which the
+    #   operation will be executed. For more information about ARNs, see
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
     #   *Amazon Web Services General Reference*.
     #   @return [String]
@@ -1698,9 +1699,9 @@ module Aws::SSOAdmin
     #       }
     #
     # @!attribute [rw] instance_arn
-    #   The ARN of the SSO instance under which the operation will be
-    #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   The ARN of the Amazon Web Services SSO instance under which the
+    #   operation will be executed. For more information about ARNs, see
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
     #   *Amazon Web Services General Reference*.
     #   @return [String]
@@ -1763,9 +1764,9 @@ module Aws::SSOAdmin
     #       }
     #
     # @!attribute [rw] instance_arn
-    #   The ARN of the SSO instance under which the operation will be
-    #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   The ARN of the Amazon Web Services SSO instance under which the
+    #   operation will be executed. For more information about ARNs, see
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
     #   *Amazon Web Services General Reference*.
     #   @return [String]
@@ -1817,9 +1818,9 @@ module Aws::SSOAdmin
     #       }
     #
     # @!attribute [rw] instance_arn
-    #   The ARN of the SSO instance under which the operation will be
-    #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   The ARN of the Amazon Web Services SSO instance under which the
+    #   operation will be executed. For more information about ARNs, see
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
     #   *Amazon Web Services General Reference*.
     #   @return [String]
@@ -2002,13 +2003,12 @@ module Aws::SSOAdmin
     # customer managed policy that you want to set as a permissions
     # boundary. Specify either `CustomerManagedPolicyReference` to use the
     # name and path of a customer managed policy, or `ManagedPolicyArn` to
-    # use the ARN of an Amazon Web Services managed IAM policy. A
-    # permissions boundary represents the maximum permissions that any
-    # policy can grant your role. For more information, see [Permissions
-    # boundaries for IAM entities][1] in the *Identity and Access Management
-    # User Guide*.
+    # use the ARN of an Amazon Web Services managed policy. A permissions
+    # boundary represents the maximum permissions that any policy can grant
+    # your role. For more information, see [Permissions boundaries for IAM
+    # entities][1] in the *Identity and Access Management User Guide*.
     #
-    # Policies used as permissions boundaries do not provide permissions.
+    # Policies used as permissions boundaries don't provide permissions.
     # You must also attach an IAM policy to the role. To learn how the
     # effective permissions for a role are evaluated, see [IAM JSON policy
     # evaluation logic][2] in the *Identity and Access Management User
@@ -2031,10 +2031,9 @@ module Aws::SSOAdmin
     #       }
     #
     # @!attribute [rw] customer_managed_policy_reference
-    #   Specifies the name and path of the IAM customer managed policy. You
-    #   must have an IAM policy that matches the name and path in each
-    #   Amazon Web Services account where you want to deploy your permission
-    #   set.
+    #   Specifies the name and path of a customer managed policy. You must
+    #   have an IAM policy that matches the name and path in each Amazon Web
+    #   Services account where you want to deploy your permission set.
     #   @return [Types::CustomerManagedPolicyReference]
     #
     # @!attribute [rw] managed_policy_arn
@@ -2062,9 +2061,9 @@ module Aws::SSOAdmin
     #       }
     #
     # @!attribute [rw] instance_arn
-    #   The ARN of the SSO instance under which the operation will be
-    #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   The ARN of the Amazon Web Services SSO instance under which the
+    #   operation will be executed. For more information about ARNs, see
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
     #   *Amazon Web Services General Reference*.
     #   @return [String]
@@ -2115,9 +2114,9 @@ module Aws::SSOAdmin
     #       }
     #
     # @!attribute [rw] instance_arn
-    #   The ARN of the SSO instance under which the operation will be
-    #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   The ARN of the Amazon Web Services SSO instance under which the
+    #   operation will be executed. For more information about ARNs, see
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
     #   *Amazon Web Services General Reference*.
     #   @return [String]
@@ -2127,7 +2126,7 @@ module Aws::SSOAdmin
     #   @return [String]
     #
     # @!attribute [rw] inline_policy
-    #   The IAM inline policy to attach to a PermissionSet.
+    #   The inline policy to attach to a PermissionSet.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/PutInlinePolicyToPermissionSetRequest AWS API Documentation
@@ -2160,8 +2159,8 @@ module Aws::SSOAdmin
     #       }
     #
     # @!attribute [rw] instance_arn
-    #   The ARN of the SSO instance under which the operation will be
-    #   executed.
+    #   The ARN of the Amazon Web Services SSO instance under which the
+    #   operation will be executed.
     #   @return [String]
     #
     # @!attribute [rw] permission_set_arn
@@ -2259,9 +2258,9 @@ module Aws::SSOAdmin
     #       }
     #
     # @!attribute [rw] instance_arn
-    #   The ARN of the SSO instance under which the operation will be
-    #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   The ARN of the Amazon Web Services SSO instance under which the
+    #   operation will be executed. For more information about ARNs, see
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
     #   *Amazon Web Services General Reference*.
     #   @return [String]
@@ -2312,9 +2311,9 @@ module Aws::SSOAdmin
     #       }
     #
     # @!attribute [rw] instance_arn
-    #   The ARN of the SSO instance under which the operation will be
-    #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   The ARN of the Amazon Web Services SSO instance under which the
+    #   operation will be executed. For more information about ARNs, see
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
     #   *Amazon Web Services General Reference*.
     #   @return [String]
@@ -2359,8 +2358,8 @@ module Aws::SSOAdmin
     #       }
     #
     # @!attribute [rw] instance_arn
-    #   The ARN of the SSO instance under which the operation will be
-    #   executed.
+    #   The ARN of the Amazon Web Services SSO instance under which the
+    #   operation will be executed.
     #   @return [String]
     #
     # @!attribute [rw] instance_access_control_attribute_configuration
@@ -2392,9 +2391,9 @@ module Aws::SSOAdmin
     #       }
     #
     # @!attribute [rw] instance_arn
-    #   The ARN of the SSO instance under which the operation will be
-    #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   The ARN of the Amazon Web Services SSO instance under which the
+    #   operation will be executed. For more information about ARNs, see
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
     #   *Amazon Web Services General Reference*.
     #   @return [String]
