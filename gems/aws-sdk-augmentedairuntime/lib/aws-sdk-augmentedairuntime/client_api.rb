@@ -45,7 +45,7 @@ module Aws::AugmentedAIRuntime
     StopHumanLoopResponse = Shapes::StructureShape.new(name: 'StopHumanLoopResponse')
     String = Shapes::StringShape.new(name: 'String')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
-    Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    Timestamp = Shapes::TimestampShape.new(name: 'Timestamp', timestampFormat: "iso8601")
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: FailureReason, location_name: "Message"))
@@ -139,7 +139,6 @@ module Aws::AugmentedAIRuntime
       api.metadata = {
         "apiVersion" => "2019-11-07",
         "endpointPrefix" => "a2i-runtime.sagemaker",
-        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
         "serviceFullName" => "Amazon Augmented AI Runtime",
         "serviceId" => "SageMaker A2I Runtime",

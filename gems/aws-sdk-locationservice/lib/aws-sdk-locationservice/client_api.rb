@@ -74,6 +74,7 @@ module Aws::LocationService
     CalculateRouteSummaryDistanceDouble = Shapes::FloatShape.new(name: 'CalculateRouteSummaryDistanceDouble')
     CalculateRouteSummaryDurationSecondsDouble = Shapes::FloatShape.new(name: 'CalculateRouteSummaryDurationSecondsDouble')
     CalculateRouteTruckModeOptions = Shapes::StructureShape.new(name: 'CalculateRouteTruckModeOptions')
+    Circle = Shapes::StructureShape.new(name: 'Circle')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CountryCode = Shapes::StringShape.new(name: 'CountryCode')
     CountryCodeList = Shapes::ListShape.new(name: 'CountryCodeList')
@@ -469,6 +470,10 @@ module Aws::LocationService
     CalculateRouteTruckModeOptions.add_member(:weight, Shapes::ShapeRef.new(shape: TruckWeight, location_name: "Weight"))
     CalculateRouteTruckModeOptions.struct_class = Types::CalculateRouteTruckModeOptions
 
+    Circle.add_member(:center, Shapes::ShapeRef.new(shape: Position, required: true, location_name: "Center"))
+    Circle.add_member(:radius, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "Radius"))
+    Circle.struct_class = Types::Circle
+
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
 
@@ -659,6 +664,7 @@ module Aws::LocationService
 
     DisassociateTrackerConsumerResponse.struct_class = Types::DisassociateTrackerConsumerResponse
 
+    GeofenceGeometry.add_member(:circle, Shapes::ShapeRef.new(shape: Circle, location_name: "Circle"))
     GeofenceGeometry.add_member(:polygon, Shapes::ShapeRef.new(shape: LinearRings, location_name: "Polygon"))
     GeofenceGeometry.struct_class = Types::GeofenceGeometry
 

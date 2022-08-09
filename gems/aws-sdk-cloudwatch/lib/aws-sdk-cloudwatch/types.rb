@@ -1090,7 +1090,7 @@ module Aws::CloudWatch
     # many Amazon EC2 metrics publish `InstanceId` as a dimension name, and
     # the actual instance ID as the value for that dimension.
     #
-    # You can assign up to 10 dimensions to a metric.
+    # You can assign up to 30 dimensions to a metric.
     #
     # @note When making an API call, you may pass Dimension
     #   data as a hash:
@@ -3011,7 +3011,7 @@ module Aws::CloudWatch
     #   period. Each unique value is listed just once in this array, and the
     #   corresponding number in the `Counts` array specifies the number of
     #   times that value occurred during the period. You can include up to
-    #   150 unique values in each `PutMetricData` action that specifies a
+    #   500 unique values in each `PutMetricData` action that specifies a
     #   `Values` array.
     #
     #   Although the `Values` array accepts numbers of type `Double`,
@@ -4082,7 +4082,7 @@ module Aws::CloudWatch
     #
     #   However, if the metric is published with multiple types of units and
     #   you don't specify a unit, the alarm's behavior is not defined and
-    #   it behaves predictably.
+    #   it behaves unpredictably.
     #
     #   We recommend omitting `Unit` so that you don't inadvertently
     #   specify an incorrect unit that is not published for this metric.
@@ -4288,7 +4288,7 @@ module Aws::CloudWatch
     #   @return [String]
     #
     # @!attribute [rw] metric_data
-    #   The data for the metric. The array can include no more than 20
+    #   The data for the metric. The array can include no more than 1000
     #   metrics per call.
     #   @return [Array<Types::MetricDatum>]
     #

@@ -740,6 +740,9 @@ module Aws::SageMaker
     HyperParameterTrainingJobDefinitions = Shapes::ListShape.new(name: 'HyperParameterTrainingJobDefinitions')
     HyperParameterTrainingJobSummaries = Shapes::ListShape.new(name: 'HyperParameterTrainingJobSummaries')
     HyperParameterTrainingJobSummary = Shapes::StructureShape.new(name: 'HyperParameterTrainingJobSummary')
+    HyperParameterTuningAllocationStrategy = Shapes::StringShape.new(name: 'HyperParameterTuningAllocationStrategy')
+    HyperParameterTuningInstanceConfig = Shapes::StructureShape.new(name: 'HyperParameterTuningInstanceConfig')
+    HyperParameterTuningInstanceConfigs = Shapes::ListShape.new(name: 'HyperParameterTuningInstanceConfigs')
     HyperParameterTuningJobArn = Shapes::StringShape.new(name: 'HyperParameterTuningJobArn')
     HyperParameterTuningJobConfig = Shapes::StructureShape.new(name: 'HyperParameterTuningJobConfig')
     HyperParameterTuningJobName = Shapes::StringShape.new(name: 'HyperParameterTuningJobName')
@@ -753,6 +756,7 @@ module Aws::SageMaker
     HyperParameterTuningJobSummary = Shapes::StructureShape.new(name: 'HyperParameterTuningJobSummary')
     HyperParameterTuningJobWarmStartConfig = Shapes::StructureShape.new(name: 'HyperParameterTuningJobWarmStartConfig')
     HyperParameterTuningJobWarmStartType = Shapes::StringShape.new(name: 'HyperParameterTuningJobWarmStartType')
+    HyperParameterTuningResourceConfig = Shapes::StructureShape.new(name: 'HyperParameterTuningResourceConfig')
     HyperParameterValue = Shapes::StringShape.new(name: 'HyperParameterValue')
     HyperParameters = Shapes::MapShape.new(name: 'HyperParameters')
     IdempotencyToken = Shapes::StringShape.new(name: 'IdempotencyToken')
@@ -4468,13 +4472,14 @@ module Aws::SageMaker
     HyperParameterTrainingJobDefinition.add_member(:input_data_config, Shapes::ShapeRef.new(shape: InputDataConfig, location_name: "InputDataConfig"))
     HyperParameterTrainingJobDefinition.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
     HyperParameterTrainingJobDefinition.add_member(:output_data_config, Shapes::ShapeRef.new(shape: OutputDataConfig, required: true, location_name: "OutputDataConfig"))
-    HyperParameterTrainingJobDefinition.add_member(:resource_config, Shapes::ShapeRef.new(shape: ResourceConfig, required: true, location_name: "ResourceConfig"))
+    HyperParameterTrainingJobDefinition.add_member(:resource_config, Shapes::ShapeRef.new(shape: ResourceConfig, location_name: "ResourceConfig"))
     HyperParameterTrainingJobDefinition.add_member(:stopping_condition, Shapes::ShapeRef.new(shape: StoppingCondition, required: true, location_name: "StoppingCondition"))
     HyperParameterTrainingJobDefinition.add_member(:enable_network_isolation, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableNetworkIsolation"))
     HyperParameterTrainingJobDefinition.add_member(:enable_inter_container_traffic_encryption, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableInterContainerTrafficEncryption"))
     HyperParameterTrainingJobDefinition.add_member(:enable_managed_spot_training, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableManagedSpotTraining"))
     HyperParameterTrainingJobDefinition.add_member(:checkpoint_config, Shapes::ShapeRef.new(shape: CheckpointConfig, location_name: "CheckpointConfig"))
     HyperParameterTrainingJobDefinition.add_member(:retry_strategy, Shapes::ShapeRef.new(shape: RetryStrategy, location_name: "RetryStrategy"))
+    HyperParameterTrainingJobDefinition.add_member(:hyper_parameter_tuning_resource_config, Shapes::ShapeRef.new(shape: HyperParameterTuningResourceConfig, location_name: "HyperParameterTuningResourceConfig"))
     HyperParameterTrainingJobDefinition.struct_class = Types::HyperParameterTrainingJobDefinition
 
     HyperParameterTrainingJobDefinitions.member = Shapes::ShapeRef.new(shape: HyperParameterTrainingJobDefinition)
@@ -4494,6 +4499,13 @@ module Aws::SageMaker
     HyperParameterTrainingJobSummary.add_member(:final_hyper_parameter_tuning_job_objective_metric, Shapes::ShapeRef.new(shape: FinalHyperParameterTuningJobObjectiveMetric, location_name: "FinalHyperParameterTuningJobObjectiveMetric"))
     HyperParameterTrainingJobSummary.add_member(:objective_status, Shapes::ShapeRef.new(shape: ObjectiveStatus, location_name: "ObjectiveStatus"))
     HyperParameterTrainingJobSummary.struct_class = Types::HyperParameterTrainingJobSummary
+
+    HyperParameterTuningInstanceConfig.add_member(:instance_type, Shapes::ShapeRef.new(shape: TrainingInstanceType, required: true, location_name: "InstanceType"))
+    HyperParameterTuningInstanceConfig.add_member(:instance_count, Shapes::ShapeRef.new(shape: TrainingInstanceCount, required: true, location_name: "InstanceCount"))
+    HyperParameterTuningInstanceConfig.add_member(:volume_size_in_gb, Shapes::ShapeRef.new(shape: VolumeSizeInGB, required: true, location_name: "VolumeSizeInGB"))
+    HyperParameterTuningInstanceConfig.struct_class = Types::HyperParameterTuningInstanceConfig
+
+    HyperParameterTuningInstanceConfigs.member = Shapes::ShapeRef.new(shape: HyperParameterTuningInstanceConfig)
 
     HyperParameterTuningJobConfig.add_member(:strategy, Shapes::ShapeRef.new(shape: HyperParameterTuningJobStrategyType, required: true, location_name: "Strategy"))
     HyperParameterTuningJobConfig.add_member(:hyper_parameter_tuning_job_objective, Shapes::ShapeRef.new(shape: HyperParameterTuningJobObjective, location_name: "HyperParameterTuningJobObjective"))
@@ -4526,6 +4538,14 @@ module Aws::SageMaker
     HyperParameterTuningJobWarmStartConfig.add_member(:parent_hyper_parameter_tuning_jobs, Shapes::ShapeRef.new(shape: ParentHyperParameterTuningJobs, required: true, location_name: "ParentHyperParameterTuningJobs"))
     HyperParameterTuningJobWarmStartConfig.add_member(:warm_start_type, Shapes::ShapeRef.new(shape: HyperParameterTuningJobWarmStartType, required: true, location_name: "WarmStartType"))
     HyperParameterTuningJobWarmStartConfig.struct_class = Types::HyperParameterTuningJobWarmStartConfig
+
+    HyperParameterTuningResourceConfig.add_member(:instance_type, Shapes::ShapeRef.new(shape: TrainingInstanceType, location_name: "InstanceType"))
+    HyperParameterTuningResourceConfig.add_member(:instance_count, Shapes::ShapeRef.new(shape: TrainingInstanceCount, location_name: "InstanceCount"))
+    HyperParameterTuningResourceConfig.add_member(:volume_size_in_gb, Shapes::ShapeRef.new(shape: OptionalVolumeSizeInGB, location_name: "VolumeSizeInGB"))
+    HyperParameterTuningResourceConfig.add_member(:volume_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
+    HyperParameterTuningResourceConfig.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: HyperParameterTuningAllocationStrategy, location_name: "AllocationStrategy"))
+    HyperParameterTuningResourceConfig.add_member(:instance_configs, Shapes::ShapeRef.new(shape: HyperParameterTuningInstanceConfigs, location_name: "InstanceConfigs"))
+    HyperParameterTuningResourceConfig.struct_class = Types::HyperParameterTuningResourceConfig
 
     HyperParameters.key = Shapes::ShapeRef.new(shape: HyperParameterKey)
     HyperParameters.value = Shapes::ShapeRef.new(shape: HyperParameterValue)

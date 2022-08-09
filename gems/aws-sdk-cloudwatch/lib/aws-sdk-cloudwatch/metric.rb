@@ -486,7 +486,7 @@ module Aws::CloudWatch
     #
     #   However, if the metric is published with multiple types of units and
     #   you don't specify a unit, the alarm's behavior is not defined and it
-    #   behaves predictably.
+    #   behaves unpredictably.
     #
     #   We recommend omitting `Unit` so that you don't inadvertently specify
     #   an incorrect unit that is not published for this metric. Doing so
@@ -645,8 +645,8 @@ module Aws::CloudWatch
     #   })
     # @param [Hash] options ({})
     # @option options [required, Array<Types::MetricDatum>] :metric_data
-    #   The data for the metric. The array can include no more than 20 metrics
-    #   per call.
+    #   The data for the metric. The array can include no more than 1000
+    #   metrics per call.
     # @return [EmptyStructure]
     def put_data(options = {})
       options = Aws::Util.deep_merge(options,

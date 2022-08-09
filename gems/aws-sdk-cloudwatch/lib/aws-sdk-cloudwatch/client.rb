@@ -397,7 +397,14 @@ module Aws::CloudWatch
       req.send_request(options)
     end
 
-    # Deletes the specified anomaly detection model from your account.
+    # Deletes the specified anomaly detection model from your account. For
+    # more information about how to delete an anomaly detection model, see
+    # [Deleting an anomaly detection model][1] in the *CloudWatch User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Create_Anomaly_Detection_Alarm.html#Delete_Anomaly_Detection_Model
     #
     # @option params [String] :namespace
     #   The namespace associated with the anomaly detection model to delete.
@@ -2949,7 +2956,7 @@ module Aws::CloudWatch
     #
     #   However, if the metric is published with multiple types of units and
     #   you don't specify a unit, the alarm's behavior is not defined and it
-    #   behaves predictably.
+    #   behaves unpredictably.
     #
     #   We recommend omitting `Unit` so that you don't inadvertently specify
     #   an incorrect unit that is not published for this metric. Doing so
@@ -3162,16 +3169,16 @@ module Aws::CloudWatch
     # `PutMetricData` request, and supports retrieving percentile statistics
     # on this data.
     #
-    # Each `PutMetricData` request is limited to 40 KB in size for HTTP POST
+    # Each `PutMetricData` request is limited to 1 MB in size for HTTP POST
     # requests. You can send a payload compressed by gzip. Each request is
-    # also limited to no more than 20 different metrics.
+    # also limited to no more than 1000 different metrics.
     #
     # Although the `Value` parameter accepts numbers of type `Double`,
     # CloudWatch rejects values that are either too small or too large.
     # Values must be in the range of -2^360 to 2^360. In addition, special
     # values (for example, NaN, +Infinity, -Infinity) are not supported.
     #
-    # You can use up to 10 dimensions per metric to further clarify what
+    # You can use up to 30 dimensions per metric to further clarify what
     # data the metric collects. Each dimension consists of a Name and Value
     # pair. For more information about specifying dimensions, see
     # [Publishing Metrics][2] in the *Amazon CloudWatch User Guide*.
@@ -3212,8 +3219,8 @@ module Aws::CloudWatch
     #   should not specify a namespace that begins with `AWS/`
     #
     # @option params [required, Array<Types::MetricDatum>] :metric_data
-    #   The data for the metric. The array can include no more than 20 metrics
-    #   per call.
+    #   The data for the metric. The array can include no more than 1000
+    #   metrics per call.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3662,7 +3669,7 @@ module Aws::CloudWatch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.66.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.66.0 (2022-08-09)
+------------------
+
+* Feature - Various quota increases related to dimensions and custom metrics
+
 1.65.0 (2022-07-21)
 ------------------
 

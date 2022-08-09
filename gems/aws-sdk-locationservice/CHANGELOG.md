@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2022-08-09)
+------------------
+
+* Feature - Amazon Location Service now allows circular geofences in BatchPutGeofence, PutGeofence, and GetGeofence  APIs.
+
 1.22.0 (2022-05-06)
 ------------------
 

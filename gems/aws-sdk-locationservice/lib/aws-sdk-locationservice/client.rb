@@ -626,6 +626,10 @@ module Aws::LocationService
     #       {
     #         geofence_id: "Id", # required
     #         geometry: { # required
+    #           circle: {
+    #             center: [1.0], # required
+    #             radius: 1.0, # required
+    #           },
     #           polygon: [
     #             [
     #               [1.0],
@@ -755,6 +759,11 @@ module Aws::LocationService
     #   specify additional route preferences in `CarModeOptions` if
     #   traveling by `Car`, or `TruckModeOptions` if traveling by `Truck`.
     #
+    #   <note markdown="1"> If you specify `walking` for the travel mode and your data provider
+    #   is Esri, the start and destination must be within 40km.
+    #
+    #    </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html
@@ -857,7 +866,8 @@ module Aws::LocationService
     #
     # @option params [String] :travel_mode
     #   Specifies the mode of transport when calculating a route. Used in
-    #   estimating the speed of travel and road compatibility.
+    #   estimating the speed of travel and road compatibility. You can choose
+    #   `Car`, `Truck`, or `Walking` as options for the `TravelMode`.
     #
     #   The `TravelMode` you specify also determines how you specify route
     #   preferences:
@@ -2347,6 +2357,9 @@ module Aws::LocationService
     #
     #   resp.create_time #=> Time
     #   resp.geofence_id #=> String
+    #   resp.geometry.circle.center #=> Array
+    #   resp.geometry.circle.center[0] #=> Float
+    #   resp.geometry.circle.radius #=> Float
     #   resp.geometry.polygon #=> Array
     #   resp.geometry.polygon[0] #=> Array
     #   resp.geometry.polygon[0][0] #=> Array
@@ -2389,7 +2402,7 @@ module Aws::LocationService
     #
     #   Valid font stacks for [HERE Technologies][2] styles:
     #
-    #   * VectorHereBerlin – `Fira GO Regular` \| `Fira GO Bold`
+    #   * VectorHereContrast – `Fira GO Regular` \| `Fira GO Bold`
     #
     #   * VectorHereExplore, VectorHereExploreTruck – `Firo GO Italic` \|
     #     `Fira GO Map` \| `Fira GO Map Bold` \| `Noto Sans CJK JP Bold` \|
@@ -2705,6 +2718,9 @@ module Aws::LocationService
     #   resp.data.entries #=> Array
     #   resp.data.entries[0].create_time #=> Time
     #   resp.data.entries[0].geofence_id #=> String
+    #   resp.data.entries[0].geometry.circle.center #=> Array
+    #   resp.data.entries[0].geometry.circle.center[0] #=> Float
+    #   resp.data.entries[0].geometry.circle.radius #=> Float
     #   resp.data.entries[0].geometry.polygon #=> Array
     #   resp.data.entries[0].geometry.polygon[0] #=> Array
     #   resp.data.entries[0].geometry.polygon[0][0] #=> Array
@@ -3009,9 +3025,11 @@ module Aws::LocationService
     #   An identifier for the geofence. For example, `ExampleGeofence-1`.
     #
     # @option params [required, Types::GeofenceGeometry] :geometry
-    #   Contains the polygon details to specify the position of the geofence.
+    #   Contains the details to specify the position of the geofence. Can be
+    #   either a polygon or a circle. Including both will return a validation
+    #   error.
     #
-    #   <note markdown="1"> Each [geofence polygon][1] can have a maximum of 1,000 vertices.
+    #   <note markdown="1"> Each [ geofence polygon][1] can have a maximum of 1,000 vertices.
     #
     #    </note>
     #
@@ -3031,6 +3049,10 @@ module Aws::LocationService
     #     collection_name: "ResourceName", # required
     #     geofence_id: "Id", # required
     #     geometry: { # required
+    #       circle: {
+    #         center: [1.0], # required
+    #         radius: 1.0, # required
+    #       },
     #       polygon: [
     #         [
     #           [1.0],
@@ -3799,7 +3821,7 @@ module Aws::LocationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-locationservice'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
