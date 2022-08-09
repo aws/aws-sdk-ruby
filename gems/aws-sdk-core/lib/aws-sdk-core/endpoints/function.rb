@@ -16,15 +16,7 @@ module Aws
         args = []
         @argv.each do |arg|
           if arg.is_a?(Reference)
-            if parameters.class::PARAM_MAP.key?(arg.ref)
-              member_name = parameters.class::PARAM_MAP[arg.ref]
-              args << parameters[member_name]
-            elsif assigns.key?(arg.ref)
-              args << assigns[arg.ref]
-            else
-              raise ArgumentError,
-                    "Reference #{arg.ref} is not a param or an assigned value."
-            end
+            args << arg.resolve(parameters, assigns)
           elsif arg.is_a?(Function)
             args << arg.call(parameters, assigns)
           else

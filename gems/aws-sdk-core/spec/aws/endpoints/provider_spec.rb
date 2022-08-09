@@ -44,8 +44,8 @@ module Aws
             if expect['url']
               endpoint = subject.resolve_endpoint(params)
               expect(endpoint.url).to eq(expect['url'])
-              #expect(endpoint.headers).to eq(expect['headers'])
-              #expect(endpoint.properties).to eq(expect['properties'])
+              expect(endpoint.headers).to eq(expect['headers'])
+              expect(endpoint.properties).to eq(expect['properties'])
             elsif expect['error']
               expect do
                 subject.resolve_endpoint(params)
