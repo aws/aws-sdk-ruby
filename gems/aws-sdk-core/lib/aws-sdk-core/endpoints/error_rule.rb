@@ -23,6 +23,7 @@ module Aws
           assigns = assigns.merge(condition.assigned) if condition.assign
           output
         end
+        # TODO: @error can contain template, reference, or function?
         RuntimeError.new(@error) if matched
       end
 

@@ -26,8 +26,11 @@ module Aws
                     "Reference #{arg.ref} is not a param or an assigned value."
             end
           elsif arg.is_a?(Function)
-            args << arg.call(parameters)
+            args << arg.call(parameters, assigns)
           else
+            if arg.is_a?(String)
+              arg = Templater.resolve(arg, parameters, assigns)
+            end
             args << arg
           end
         end
@@ -39,20 +42,22 @@ module Aws
           Matchers.not(*args)
         when 'getAttr'
           Matchers.attr(*args)
-        when 'aws.partition'
+        when 'aws.partition', 'partition'
           Matchers.aws_partition(*args)
-        when 'aws.parseArn'
+        when 'aws.parseArn', 'parseArn'
           Matchers.aws_parse_arn(*args)
         when 'stringEquals'
-          Matchers.string_equals(*args)
+          Matchers.string_equals?(*args)
         when 'isValidHostLabel'
           Matchers.valid_host_label?(*args)
         when 'uriEncode'
           Matchers.uri_encode(*args)
-        when 'parseUrl'
+        when 'parseURL'
           Matchers.parse_url(*args)
         when 'booleanEquals'
-          Matchers.boolean_equals(*args)
+          Matchers.boolean_equals?(*args)
+        else
+          raise "Function not found: #{@fn}"
         end
       end
 

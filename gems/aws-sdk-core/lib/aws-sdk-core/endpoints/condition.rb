@@ -17,10 +17,8 @@ module Aws
       attr_reader :assigned
 
       def match?(parameters, assigns)
-        puts "calling #{@fn} with #{parameters} and #{assigns}"
         output = @fn.call(parameters, assigns)
-        puts "output is #{output}"
-        @assigned.merge({ @assign.to_sym => output }) if @assign
+        @assigned = @assigned.merge({ @assign => output }) if @assign
         output
       end
     end

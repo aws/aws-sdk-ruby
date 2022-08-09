@@ -27,6 +27,7 @@ module Aws
         resolved_endpoint(parameters, assigns) if matched
       end
 
+      # TODO: headers can contain template, reference, or function?
       def resolved_endpoint(parameters, assigns)
         Endpoint.new(
           url: Templater.resolve(@endpoint['url'], parameters, assigns),

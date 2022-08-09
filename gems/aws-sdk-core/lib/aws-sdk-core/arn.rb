@@ -88,5 +88,15 @@ module Aws
         resource: @resource
       }
     end
+
+    def as_json(_options = nil)
+      {
+        'partition' => @partition,
+        'service' => @service,
+        'region' => @region,
+        'accountId' => @account_id,
+        'resource' => @resource
+      }
+    end
   end
 end

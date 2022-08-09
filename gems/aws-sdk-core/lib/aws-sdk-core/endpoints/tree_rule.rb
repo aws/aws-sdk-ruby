@@ -23,11 +23,7 @@ module Aws
           assigns = assigns.merge(condition.assigned) if condition.assign
           output
         end
-        if matched
-          @rules.find { |rule| rule.match?(parameters, assigns) }
-        else
-          false
-        end
+        resolve_rules(parameters, assigns) if matched
       end
 
       private
@@ -71,6 +67,14 @@ module Aws
           end
         end
         rules
+      end
+
+      def resolve_rules(parameters, assigns)
+        @rules.each do |rule|
+          output = rule.match(parameters, assigns)
+          return output if output
+        end
+        nil
       end
     end
   end

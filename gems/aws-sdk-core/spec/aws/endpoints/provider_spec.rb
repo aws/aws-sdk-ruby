@@ -5,20 +5,17 @@ require_relative '../../spec_helper'
 module Aws
   module Endpoints
     describe Provider do
-      Dir.glob(File.expand_path('../valid-rules/*.json', __FILE__)).each do |path|
+      Dir.glob(File.expand_path('../test-cases/*.json', __FILE__)).each do |path|
         file_name = File.basename(path)
 
-        # temporary
-        next unless file_name == 'aws-region.json'
-
-        test_cases_path = File.join(
-          File.expand_path(File.join(path, '../../test-cases')),
+        valid_rules_path = File.join(
+          File.expand_path(File.join(path, '../../valid-rules')),
           file_name
         )
-        # If similarly named file doesn't exist in test-case, just skip
-        next unless File.exist?(test_cases_path)
+        # If similarly named file doesn't exist in valid-rules, just skip
+        next unless File.exist?(valid_rules_path)
 
-        rule_set_json = Aws::Json.load_file(path)
+        rule_set_json = Aws::Json.load_file(valid_rules_path)
         sample_module = ApiHelper.sample_service(endpoint_rules: rule_set_json)
 
         rule_set = Aws::Endpoints::RuleSet.new(
@@ -27,12 +24,13 @@ module Aws
           parameters: rule_set_json['parameters'],
           rules: rule_set_json['rules']
         )
+
         # TODO: should this be the service specific one?
-        subject { Provider.new(rule_set) }
+        subject = Provider.new(rule_set)
 
         params_class = sample_module.const_get(:EndpointParameters)
 
-        test_cases = Aws::Json.load_file(test_cases_path)
+        test_cases = Aws::Json.load_file(path)
         test_cases['testCases'].each do |test_case|
           it "passes: '#{test_case['documentation']}' from #{file_name}" do
             # convert params to symbol keys and values
@@ -43,16 +41,15 @@ module Aws
             params = params_class.new(**params_hash)
 
             expect = test_case['expect']
-            if (url = expect['url'])
+            if expect['url']
               endpoint = subject.resolve_endpoint(params)
-              expect(endpoint.url).to eq(url)
-              # expect(endpoint.auth_schemes).to eq(ok['authSchemes'])
-              # expect(endpoint.auth_params).to eq(ok['authParams'])
-              # expect(endpoint.headers).to eq(ok['headers'])
-            elsif (error = expect['error'])
+              expect(endpoint.url).to eq(expect['url'])
+              #expect(endpoint.headers).to eq(expect['headers'])
+              #expect(endpoint.properties).to eq(expect['properties'])
+            elsif expect['error']
               expect do
                 subject.resolve_endpoint(params)
-              end.to raise_error(RuntimeError, error)
+              end.to raise_error(RuntimeError, expect['error'])
             end
           end
         end
