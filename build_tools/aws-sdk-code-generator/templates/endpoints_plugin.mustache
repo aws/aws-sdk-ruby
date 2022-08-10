@@ -1,0 +1,46 @@
+# frozen_string_literal: true
+
+{{#generated_src_warning}}
+{{generated_src_warning}}
+{{/generated_src_warning}}
+
+module {{module_name}}
+  module Plugins
+    class Endpoints < Seahorse::Client::Plugin
+      option(
+        :endpoint_provider,
+        doc_type: '{{module_name}}::EndpointProvider',
+        docstring: 'The endpoint provider used to resolve endpoints. Any '\
+                   'object that responds to `#resolve_endpoint(parameters)` '\
+                   'where `parameters` is a Struct similar to '\
+                   '`{{module_name}}::EndpointParameters`'
+      ) do
+        rule_set = Aws::Json.load_file(
+          File.expand_path('../../../../endpoint-rule-set.json', __FILE__)
+        )
+        {{module_name}}::EndpointProvider.new(rule_set)
+      end
+
+      # @api private
+      class Handler < Seahorse::Client::Handler
+        def call(context)
+          params = parameters_for_operation(context.operation_name)
+          endpoint = context.config.endpoint_provider.resolve_endpoint(params)
+          context[:endpoint] = endpoint
+          @handler.call(context)
+        end
+
+        private
+
+        def parameters_for_operation(operation)
+          {{endpoint_parameters_switch_case}}
+        end
+      end
+
+
+      def add_handlers(handlers, config)
+        handlers.add(Handler, step: :build, priority: 40)
+      end
+    end
+  end
+end

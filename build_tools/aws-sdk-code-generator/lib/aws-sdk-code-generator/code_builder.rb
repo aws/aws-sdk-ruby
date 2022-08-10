@@ -68,6 +68,7 @@ module AwsSdkCodeGenerator
           y.yield("#{prefix}/event_streams.rb", event_streams_module)
         end
         y.yield("#{prefix}/client_api.rb", client_api_module)
+        y.yield("#{prefix}/plugins/endpoints.rb", endpoints_plugin)
         y.yield("#{prefix}/client.rb", client_class)
         if @service.protocol_settings['h2'] == 'eventstream'
           y.yield("#{prefix}/async_client.rb", async_client_class)
@@ -215,6 +216,10 @@ module AwsSdkCodeGenerator
 
     def endpoints_module
       Views::EndpointsModule.new(service: @service).render
+    end
+
+    def endpoints_plugin
+      Views::EndpointsPlugin.new(service: @service).render
     end
 
     private
