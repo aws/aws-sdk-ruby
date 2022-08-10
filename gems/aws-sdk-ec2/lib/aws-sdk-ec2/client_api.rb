@@ -8795,6 +8795,7 @@ module Aws::EC2
 
     InstanceSpecification.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
     InstanceSpecification.add_member(:exclude_boot_volume, Shapes::ShapeRef.new(shape: Boolean, location_name: "ExcludeBootVolume"))
+    InstanceSpecification.add_member(:exclude_data_volume_ids, Shapes::ShapeRef.new(shape: VolumeIdStringList, location_name: "ExcludeDataVolumeId"))
     InstanceSpecification.struct_class = Types::InstanceSpecification
 
     InstanceState.add_member(:code, Shapes::ShapeRef.new(shape: Integer, location_name: "code"))

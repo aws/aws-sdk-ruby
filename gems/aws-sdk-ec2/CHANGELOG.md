@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.327.0 (2022-08-10)
+------------------
+
+* Feature - This release adds support for excluding specific data (non-root) volumes from multi-volume snapshot sets created from instances.
+
 1.326.0 (2022-07-29)
 ------------------
 

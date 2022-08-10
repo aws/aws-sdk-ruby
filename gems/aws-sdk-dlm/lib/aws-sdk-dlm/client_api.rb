@@ -46,6 +46,7 @@ module Aws::DLM
     EventSourceValues = Shapes::StringShape.new(name: 'EventSourceValues')
     EventTypeValues = Shapes::StringShape.new(name: 'EventTypeValues')
     ExcludeBootVolume = Shapes::BooleanShape.new(name: 'ExcludeBootVolume')
+    ExcludeDataVolumeTagList = Shapes::ListShape.new(name: 'ExcludeDataVolumeTagList')
     ExecutionRoleArn = Shapes::StringShape.new(name: 'ExecutionRoleArn')
     FastRestoreRule = Shapes::StructureShape.new(name: 'FastRestoreRule')
     GetLifecyclePoliciesRequest = Shapes::StructureShape.new(name: 'GetLifecyclePoliciesRequest')
@@ -188,6 +189,8 @@ module Aws::DLM
     EventSource.add_member(:parameters, Shapes::ShapeRef.new(shape: EventParameters, location_name: "Parameters"))
     EventSource.struct_class = Types::EventSource
 
+    ExcludeDataVolumeTagList.member = Shapes::ShapeRef.new(shape: Tag)
+
     FastRestoreRule.add_member(:count, Shapes::ShapeRef.new(shape: Count, location_name: "Count"))
     FastRestoreRule.add_member(:interval, Shapes::ShapeRef.new(shape: Interval, location_name: "Interval"))
     FastRestoreRule.add_member(:interval_unit, Shapes::ShapeRef.new(shape: RetentionIntervalUnitValues, location_name: "IntervalUnit"))
@@ -256,6 +259,7 @@ module Aws::DLM
 
     Parameters.add_member(:exclude_boot_volume, Shapes::ShapeRef.new(shape: ExcludeBootVolume, location_name: "ExcludeBootVolume"))
     Parameters.add_member(:no_reboot, Shapes::ShapeRef.new(shape: NoReboot, location_name: "NoReboot"))
+    Parameters.add_member(:exclude_data_volume_tags, Shapes::ShapeRef.new(shape: ExcludeDataVolumeTagList, location_name: "ExcludeDataVolumeTags"))
     Parameters.struct_class = Types::Parameters
 
     PolicyDetails.add_member(:policy_type, Shapes::ShapeRef.new(shape: PolicyTypeValues, location_name: "PolicyType"))

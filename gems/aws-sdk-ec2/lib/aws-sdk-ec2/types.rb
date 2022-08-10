@@ -11471,6 +11471,7 @@ module Aws::EC2
     #         instance_specification: { # required
     #           instance_id: "InstanceId",
     #           exclude_boot_volume: false,
+    #           exclude_data_volume_ids: ["VolumeId"],
     #         },
     #         outpost_arn: "String",
     #         tag_specifications: [
@@ -42717,6 +42718,7 @@ module Aws::EC2
     #       {
     #         instance_id: "InstanceId",
     #         exclude_boot_volume: false,
+    #         exclude_data_volume_ids: ["VolumeId"],
     #       }
     #
     # @!attribute [rw] instance_id
@@ -42727,11 +42729,15 @@ module Aws::EC2
     #   Excludes the root volume from being snapshotted.
     #   @return [Boolean]
     #
+    # @!attribute [rw] exclude_data_volume_ids
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceSpecification AWS API Documentation
     #
     class InstanceSpecification < Struct.new(
       :instance_id,
-      :exclude_boot_volume)
+      :exclude_boot_volume,
+      :exclude_data_volume_ids)
       SENSITIVE = []
       include Aws::Structure
     end
