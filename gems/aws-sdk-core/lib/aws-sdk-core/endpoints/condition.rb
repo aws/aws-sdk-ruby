@@ -21,6 +21,16 @@ module Aws
         @assigned = @assigned.merge({ @assign => output }) if @assign
         output
       end
+
+      def self.from_json(conditions_json)
+        conditions_json.each.with_object([]) do |condition, conditions|
+          conditions << new(
+            fn: condition['fn'],
+            argv: condition['argv'],
+            assign: condition['assign']
+          )
+        end
+      end
     end
   end
 end

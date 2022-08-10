@@ -8,7 +8,7 @@ module Aws
         @version = version
         @service_id = service_id
         @parameters = parameters
-        @rules = build_rules(rules)
+        @rules = RuleSet.rules_from_json(rules)
       end
 
       attr_reader :version
@@ -16,11 +16,8 @@ module Aws
       attr_reader :parameters
       attr_reader :rules
 
-      private
-
-      def build_rules(rules_json)
-        rules = []
-        rules_json.each do |rule|
+      def self.rules_from_json(rules_json)
+        rules_json.each.with_object([]) do |rule, rules|
           if rule['type'] == 'endpoint' || rule['endpoint']
             rules << EndpointRule.new(
               conditions: rule['conditions'],
@@ -41,10 +38,9 @@ module Aws
             )
           else
             # should not happen
-            raise 'unknown rule type'
+            raise "Unknown endpoint rule type: #{rule}"
           end
         end
-        rules
       end
     end
   end

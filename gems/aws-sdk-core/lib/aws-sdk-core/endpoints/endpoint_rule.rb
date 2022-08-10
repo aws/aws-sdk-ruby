@@ -7,7 +7,7 @@ module Aws
       def initialize(type: 'endpoint', conditions:, endpoint: nil,
                      documentation: nil)
         @type = type
-        @conditions = build_conditions(conditions)
+        @conditions = Condition.from_json(conditions)
         @endpoint = endpoint
         @documentation = documentation
       end
@@ -44,21 +44,8 @@ module Aws
 
       private
 
-      def build_conditions(conditions_json)
-        conditions = []
-        conditions_json.each do |condition|
-          conditions << Condition.new(
-            fn: condition['fn'],
-            argv: condition['argv'],
-            assign: condition['assign']
-          )
-        end
-        conditions
-      end
-
       def resolve_headers(parameters, assigns)
-        headers = {}
-        @endpoint['headers'].each do |key, arr|
+        @endpoint['headers'].each.with_object({}) do |(key, arr), headers|
           headers[key] = []
           arr.each do |value|
             val = if value.is_a?(Hash) && value['fn']
@@ -72,7 +59,6 @@ module Aws
             headers[key] << val
           end
         end
-        headers
       end
 
       def resolve_properties(obj, parameters, assigns)

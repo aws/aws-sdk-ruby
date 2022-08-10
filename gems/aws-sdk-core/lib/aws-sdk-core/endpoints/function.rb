@@ -56,8 +56,7 @@ module Aws
       private
 
       def build_argv(argv_json)
-        argv = []
-        argv_json.each do |arg|
+        argv_json.each.with_object([]) do |arg, argv|
           argv << if arg.is_a?(Hash) && arg['ref']
                     Reference.new(ref: arg['ref'])
                   elsif arg.is_a?(Hash) && arg['fn']
@@ -66,7 +65,6 @@ module Aws
                     arg
                   end
         end
-        argv
       end
     end
   end

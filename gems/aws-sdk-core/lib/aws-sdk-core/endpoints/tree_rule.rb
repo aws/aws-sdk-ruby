@@ -6,8 +6,8 @@ module Aws
     class TreeRule
       def initialize(type: 'tree', conditions:, rules:, documentation: nil)
         @type = type
-        @conditions = build_conditions(conditions)
-        @rules = build_rules(rules)
+        @conditions = Condition.from_json(conditions)
+        @rules = RuleSet.rules_from_json(rules)
         @documentation = documentation
       end
 
@@ -27,47 +27,6 @@ module Aws
       end
 
       private
-
-      def build_conditions(conditions_json)
-        conditions = []
-        conditions_json.each do |condition|
-          conditions << Condition.new(
-            fn: condition['fn'],
-            argv: condition['argv'],
-            assign: condition['assign']
-          )
-        end
-        conditions
-      end
-
-      def build_rules(rules_json)
-        rules = []
-        rules_json.each do |rule|
-          if rule['type'] == 'endpoint' || rule['endpoint']
-            rules << EndpointRule.new(
-              conditions: rule['conditions'],
-              endpoint: rule['endpoint'],
-              documentation: rule['documentation']
-            )
-          elsif rule['type'] == 'error' || rule['error']
-            rules << ErrorRule.new(
-              conditions: rule['conditions'],
-              error: rule['error'],
-              documentation: rule['documentation']
-            )
-          elsif rule['type'] == 'tree' || rule['rules']
-            rules << TreeRule.new(
-              conditions: rule['conditions'],
-              rules: rule['rules'],
-              documentation: rule['documentation']
-            )
-          else
-            # should not happen
-            raise 'unknown rule type'
-          end
-        end
-        rules
-      end
 
       def resolve_rules(parameters, assigns)
         @rules.each do |rule|

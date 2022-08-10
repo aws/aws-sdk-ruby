@@ -6,7 +6,7 @@ module Aws
     class ErrorRule
       def initialize(type: 'error', conditions:, error: nil, documentation: nil)
         @type = type
-        @conditions = build_conditions(conditions)
+        @conditions = Condition.from_json(conditions)
         @error = error
         @documentation = documentation
       end
@@ -25,20 +25,6 @@ module Aws
         end
         # TODO: @error can contain template, reference, or function?
         RuntimeError.new(@error) if matched
-      end
-
-      private
-
-      def build_conditions(conditions_json)
-        conditions = []
-        conditions_json.each do |condition|
-          conditions << Condition.new(
-            fn: condition['fn'],
-            argv: condition['argv'],
-            assign: condition['assign']
-          )
-        end
-        conditions
       end
     end
   end
