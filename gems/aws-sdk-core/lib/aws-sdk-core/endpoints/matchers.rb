@@ -44,14 +44,16 @@ module Aws
 
       # aws.partition(value: string) Option<Partition>
       def self.aws_partition(value)
-        # TODO: do not use endpoints.json but do this for now, hardcoded
-        # partitition = Aws::Partitions.find { |p| p.region?(value) }
+        partition = Aws::Partitions.find { |p| p.region?(value) }
+        return nil unless partition
+
+        metadata = partition.metadata
         {
-          "name" => 'aws',
-          "dnsSuffix" => 'amazonaws.com',
-          "dnsDualStackSuffix" => 'api.aws',
-          "supportsFIPS" => true,
-          "supportsDualStack" => true
+          'name' => metadata.name,
+          'dnsSuffix' => metadata.dns_suffix,
+          'dnsDualStackSuffix' => metadata.dns_dualstack_suffix,
+          'supportsFIPS' => metadata.supports_fips,
+          'supportsDualStack' => metadata.supports_dualstack
         }
       end
 

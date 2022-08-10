@@ -11,10 +11,14 @@ module Aws
         @name = options[:name]
         @regions = options[:regions]
         @services = options[:services]
+        @metadata = options[:metadata]
       end
 
       # @return [String] The partition name, e.g. "aws", "aws-cn", "aws-us-gov".
       attr_reader :name
+
+      # @return [Metadata] The metadata for the partition.
+      attr_reader :metadata
 
       # @param [String] region_name The name of the region, e.g. "us-east-1".
       # @return [Region]
@@ -70,7 +74,8 @@ module Aws
           Partition.new(
             name: partition['partition'],
             regions: build_regions(partition),
-            services: build_services(partition)
+            services: build_services(partition),
+            metadata: build_metadata(partition)
           )
         end
 
@@ -101,6 +106,33 @@ module Aws
               service_name, service_data, partition
             )
           end
+        end
+
+        # @param [Hash] partition
+        # @return [Hash<String,Object>]
+        def build_metadata(partition)
+          supports_fips = false
+          supports_dualstack = false
+          dns_dualstack_suffix = nil
+
+          variants = partition['defaults']['variants']
+          variants.each do |variant|
+            if variant['tags'] == ['fips']
+              supports_fips = true
+            end
+            if variant['tags'] == ['dualstack']
+              supports_dualstack = true
+              dns_dualstack_suffix = variant['dnsSuffix']
+            end
+          end
+
+          Metadata.new(
+            name: partition['partition'],
+            dns_suffix: partition['dnsSuffix'],
+            dns_dualstack_suffix: dns_dualstack_suffix,
+            supports_fips: supports_fips,
+            supports_dualstack: supports_dualstack
+          )
         end
       end
     end

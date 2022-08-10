@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'aws-partitions/endpoint_provider'
+require_relative 'aws-partitions/metadata'
 require_relative 'aws-partitions/partition'
 require_relative 'aws-partitions/partition_list'
 require_relative 'aws-partitions/region'
@@ -211,7 +212,7 @@ module Aws
       # @api private
       def defaults
         @defaults ||= begin
-          path = File.expand_path('../../endpoints.json', __FILE__)
+          path = File.expand_path('../../partitions.json', __FILE__)
           defaults = JSON.parse(File.read(path), freeze: true)
           defaults.merge('partitions' => defaults['partitions'].dup)
         end
