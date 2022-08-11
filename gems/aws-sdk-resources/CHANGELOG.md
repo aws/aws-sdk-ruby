@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.138.0 (2022-08-11)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-privatenetworks` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-backupstorage` gem.
+
 3.137.0 (2022-08-02)
 ------------------
 

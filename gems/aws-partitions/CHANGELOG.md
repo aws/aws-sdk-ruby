@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+1.617.0 (2022-08-11)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::PrivateNetworks`.
+
+* Feature - Added support for enumerating regions for `Aws::BackupStorage`.
+
 1.616.0 (2022-08-08)
 ------------------
 

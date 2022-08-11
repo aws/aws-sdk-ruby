@@ -96,6 +96,9 @@
   "BackupGateway": {
     "models": "backup-gateway/2021-01-01"
   },
+  "BackupStorage": {
+    "models": "backupstorage/2018-04-10"
+  },
   "Batch": {
     "models": "batch/2016-08-10"
   },
@@ -750,6 +753,9 @@
   },
   "Pricing": {
     "models": "pricing/2017-10-15"
+  },
+  "PrivateNetworks": {
+    "models": "privatenetworks/2021-12-03"
   },
   "PrometheusService": {
     "models": "amp/2020-08-01"

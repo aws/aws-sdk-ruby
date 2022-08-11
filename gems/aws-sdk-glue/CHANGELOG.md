@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.118.0 (2022-08-11)
+------------------
+
+* Feature - Add support for Python 3.9 AWS Glue Python Shell jobs
+
 1.117.0 (2022-08-08)
 ------------------
 
