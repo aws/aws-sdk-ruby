@@ -1,6 +1,5 @@
 {
-  "version": "1.1",
-  "serviceId": "parse-arn",
+  "version": "1.3",
   "parameters": {
     "Region": {
       "type": "string",
@@ -23,7 +22,7 @@
           ]
         },
         {
-          "fn": "partition",
+          "fn": "aws.partition",
           "argv": [
             "{Region}"
           ],
@@ -48,7 +47,7 @@
               "documentation": "bucket is set and is an arn",
               "conditions": [
                 {
-                  "fn": "parseArn",
+                  "fn": "aws.parseArn",
                   "argv": [
                     {
                       "ref": "Bucket"
@@ -82,21 +81,26 @@
                           ]
                         }
                       ],
-                      "error": "OutpostId was empty"
+                      "error": "OutpostId was empty",
+                      "type": "error"
                     },
                     {
                       "conditions": [],
                       "endpoint": {
                         "url": "https://{outpostId}-{bucketArn#accountId}.{bucketArn#region}.{partitionResult#dnsSuffix}"
-                      }
+                      },
+                      "type": "endpoint"
                     }
-                  ]
+                  ],
+                  "type": "tree"
                 },
                 {
                   "conditions": [],
-                  "error": "Invalid ARN: outpostId was not set"
+                  "error": "Invalid ARN: outpostId was not set",
+                  "type": "error"
                 }
-              ]
+              ],
+              "type": "tree"
             },
             {
               "documentation": "bucket can be used as a host label",
@@ -111,30 +115,36 @@
               ],
               "endpoint": {
                 "url": "https://{Bucket}.{Region}.amazonaws.com"
-              }
+              },
+              "type": "endpoint"
             },
             {
               "conditions": [],
               "documentation": "fallback: use bucket in the path",
               "endpoint": {
                 "url": "https://{Region}.amazonaws.com/{Bucket}"
-              }
+              },
+              "type": "endpoint"
             }
-          ]
+          ],
+          "type": "tree"
         },
         {
           "documentation": "region is set, bucket is not",
           "conditions": [],
           "endpoint": {
             "url": "https://{Region}.{partitionResult#dnsSuffix}"
-          }
+          },
+          "type": "endpoint"
         }
-      ]
+      ],
+      "type": "tree"
     },
     {
       "documentation": "fallback when region is unset",
       "conditions": [],
-      "error": "Region must be set to resolve a valid endpoint"
+      "error": "Region must be set to resolve a valid endpoint",
+      "type": "error"
     }
   ]
 }

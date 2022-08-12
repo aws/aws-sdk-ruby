@@ -1,6 +1,5 @@
 {
-  "version": "1.1",
-  "serviceId": "get-attr-type-inference",
+  "version": "1.3",
   "parameters": {
     "Bucket": {
       "type": "string"
@@ -19,7 +18,7 @@
           ]
         },
         {
-          "fn": "parseArn",
+          "fn": "aws.parseArn",
           "argv": [
             {
               "ref": "Bucket"
@@ -40,7 +39,8 @@
       ],
       "endpoint": {
         "url": "https://{bucketArn#accountId}.{outpostId}.{bucketArn#region}"
-      }
+      },
+      "type": "endpoint"
     }
   ]
 }

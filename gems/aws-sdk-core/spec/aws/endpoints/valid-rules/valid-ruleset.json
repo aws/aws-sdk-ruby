@@ -1,5 +1,4 @@
 {
-  "serviceId": "valid-ruleset",
   "parameters": {
     "Region": {
       "type": "string",
@@ -21,7 +20,7 @@
       "documentation": "base rule",
       "conditions": [
         {
-          "fn": "partition",
+          "fn": "aws.partition",
           "argv": [
             {
               "ref": "Region"
@@ -69,14 +68,17 @@
                 }
               ]
             }
-          }
+          },
+          "type": "endpoint"
         },
         {
           "conditions": [],
-          "error": "error description"
+          "error": "error description",
+          "type": "error"
         }
-      ]
+      ],
+      "type": "tree"
     }
   ],
-  "version": "1.1"
+  "version": "1.3"
 }

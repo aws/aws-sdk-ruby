@@ -40,6 +40,16 @@ module Aws
         end
       end
 
+      def self.substring(input, start, stop, reverse)
+        return nil if start >= stop || input.size < stop
+
+        return input[start...stop] unless reverse
+
+        r_start = input.size - stop
+        r_stop = input.size - start
+        input[r_start...r_stop]
+      end
+
       # AWS
 
       # aws.partition(value: string) Option<Partition>
@@ -87,7 +97,7 @@ module Aws
 
       # uriEncode(value: string) string
       def self.uri_encode(value)
-        CGI.escape(value)
+        CGI.escape(value.encode('UTF-8')).gsub('+', '%20').gsub('%7E', '~')
       end
 
       # parseUrl(value: string) Option<URL>

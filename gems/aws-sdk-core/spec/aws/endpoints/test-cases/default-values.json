@@ -6,16 +6,25 @@
       "params": {
       },
       "expect": {
-        "url": "https://us-west-5.amazonaws.com"
+        "url": "https://fips.us-west-5.amazonaws.com"
       }
     },
     {
-      "documentation": "test case where region is unset",
+      "documentation": "test case where FIPS is disabled",
       "params": {
-        "UseFallback": true
+        "UseFips": false
       },
       "expect": {
-        "error": "UseFallback = true"
+        "error": "UseFips = false"
+      }
+    },
+    {
+      "documentation": "test case where FIPS is enabled explicitly",
+      "params": {
+        "UseFips": true
+      },
+      "expect": {
+        "url": "https://fips.us-west-5.amazonaws.com"
       }
     },
     {
@@ -24,7 +33,7 @@
         "Region": "us-east-1"
       },
       "expect": {
-        "url": "https://us-east-1.amazonaws.com"
+        "url": "https://fips.us-east-1.amazonaws.com"
       }
     }
   ],

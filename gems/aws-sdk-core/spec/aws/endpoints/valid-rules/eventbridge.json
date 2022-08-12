@@ -1,6 +1,5 @@
 {
-  "version": "1.1",
-  "serviceId": "com.amazonaws#EventBridge",
+  "version": "1.3",
   "parameters": {
     "region": {
       "type": "string",
@@ -9,11 +8,11 @@
     },
     "useDualStackEndpoint": {
       "type": "boolean",
-      "builtIn": "AWS::UseDualStackEndpoint"
+      "builtIn": "AWS::UseDualStack"
     },
     "useFIPSEndpoint": {
       "type": "boolean",
-      "builtIn": "AWS::UseFIPSEndpoint"
+      "builtIn": "AWS::UseFIPS"
     },
     "endpointId": {
       "type": "string"
@@ -23,7 +22,7 @@
     {
       "conditions": [
         {
-          "fn": "partition",
+          "fn": "aws.partition",
           "argv": [
             {
               "ref": "region"
@@ -65,7 +64,8 @@
                   ]
                 }
               ],
-              "error": "FIPS endpoints not supported with multi-region endpoints"
+              "error": "FIPS endpoints not supported with multi-region endpoints",
+              "type": "error"
             },
             {
               "conditions": [
@@ -111,7 +111,8 @@
                     }
                   ]
                 }
-              }
+              },
+              "type": "endpoint"
             },
             {
               "conditions": [],
@@ -126,9 +127,11 @@
                     }
                   ]
                 }
-              }
+              },
+              "type": "endpoint"
             }
-          ]
+          ],
+          "type": "tree"
         },
         {
           "conditions": [
@@ -187,7 +190,8 @@
                     }
                   ]
                 }
-              }
+              },
+              "type": "endpoint"
             },
             {
               "conditions": [
@@ -233,7 +237,8 @@
                     }
                   ]
                 }
-              }
+              },
+              "type": "endpoint"
             },
             {
               "conditions": [
@@ -283,21 +288,26 @@
                     }
                   ]
                 }
-              }
+              },
+              "type": "endpoint"
             },
             {
               "conditions": [],
               "endpoint": {
                 "url": "https://events.{region}.{partitionResult#dnsSuffix}"
-              }
+              },
+              "type": "endpoint"
             }
-          ]
+          ],
+          "type": "tree"
         },
         {
           "conditions": [],
-          "error": "{region} is not a valid HTTP host-label"
+          "error": "{region} is not a valid HTTP host-label",
+          "type": "error"
         }
-      ]
+      ],
+      "type": "tree"
     }
   ]
 }

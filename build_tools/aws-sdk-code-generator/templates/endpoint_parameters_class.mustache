@@ -28,16 +28,14 @@ module {{module_name}}
 
     def initialize(options = {})
       {{#parameters}}
+      self[:{{underscore_name}}] = options[:{{underscore_name}}]
       {{#default?}}
       {{#boolean_default?}}
-      self[:{{underscore_name}}] = options[:{{underscore_name}}] || {{default}}
+      self[:{{underscore_name}}] = {{default}} if self[:{{underscore_name}}].nil?
       {{/boolean_default?}}
       {{^boolean_default?}}
-      self[:{{underscore_name}}] = options[:{{underscore_name}}] || '{{default}}'
+      self[:{{underscore_name}}] ||= '{{default}}' if self[:{{underscore_name}}].nil?
       {{/boolean_default?}}
-      {{/default?}}
-      {{^default?}}
-      self[:{{underscore_name}}] = options[:{{underscore_name}}]
       {{/default?}}
       {{#required}}
       if self[:{{underscore_name}}].nil?

@@ -34,6 +34,8 @@ module Aws
           Matchers.not(*args)
         when 'getAttr'
           Matchers.attr(*args)
+        when 'substring'
+          Matchers.substring(*args)
         when 'aws.partition', 'partition'
           Matchers.aws_partition(*args)
         when 'aws.parseArn', 'parseArn'

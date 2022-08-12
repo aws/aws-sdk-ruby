@@ -6,3 +6,6 @@ parse-url.json
 default-values.json
 headers.json
 valid-hostlabel.json
+substring.json
+uri-encode.json
+fns.json

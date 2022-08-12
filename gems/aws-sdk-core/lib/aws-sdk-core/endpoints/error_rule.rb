@@ -23,8 +23,21 @@ module Aws
           assigns = assigns.merge(condition.assigned) if condition.assign
           output
         end
-        # TODO: @error can contain template, reference, or function?
-        RuntimeError.new(@error) if matched
+        resolved_error(parameters, assigns) if matched
+      end
+
+      private
+
+      def resolved_error(parameters, assigns)
+        error = if @error.is_a?(Hash) && @error['fn']
+                  Function.new(fn: @error['fn'], argv: @error['argv'])
+                          .call(parameters, assigns)
+                elsif @error.is_a?(Hash) && @error['ref']
+                  Reference.new(ref: @error['ref']).resolve(parameters, assigns)
+                else
+                  Templater.resolve(@error, parameters, assigns)
+                end
+        RuntimeError.new(error)
       end
     end
   end

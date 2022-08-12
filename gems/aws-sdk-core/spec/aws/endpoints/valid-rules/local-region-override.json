@@ -1,5 +1,4 @@
 {
-  "serviceId": "region-override",
   "parameters": {
     "Region": {
       "type": "string",
@@ -21,15 +20,17 @@
       ],
       "endpoint": {
         "url": "http://localhost:8080"
-      }
+      },
+      "type": "endpoint"
     },
     {
       "documentation": "base rule",
       "conditions": [],
       "endpoint": {
         "url": "https://{Region}.someservice.amazonaws.com"
-      }
+      },
+      "type": "endpoint"
     }
   ],
-  "version": "1.1"
+  "version": "1.3"
 }

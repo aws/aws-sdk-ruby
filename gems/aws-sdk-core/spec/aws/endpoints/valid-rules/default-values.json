@@ -1,5 +1,4 @@
 {
-  "serviceId": "default-values",
   "parameters": {
     "Region": {
       "type": "string",
@@ -8,36 +7,38 @@
       "default": "us-west-5",
       "required": true
     },
-    "UseFallback": {
+    "UseFips": {
       "type": "boolean",
-      "builtIn": "AWS::FallbackEndpoint",
-      "default": false,
+      "builtIn": "AWS::UseFIPS",
+      "default": true,
       "required": true
     }
   },
   "rules": [
     {
-      "documentation": "Template the region into the URI when region is set",
+      "documentation": "Template the region into the URI when FIPS is enabled",
       "conditions": [
         {
           "fn": "booleanEquals",
           "argv": [
             {
-              "ref": "UseFallback"
+              "ref": "UseFips"
             },
-            false
+            true
           ]
         }
       ],
       "endpoint": {
-        "url": "https://{Region}.amazonaws.com"
-      }
+        "url": "https://fips.{Region}.amazonaws.com"
+      },
+      "type": "endpoint"
     },
     {
-      "documentation": "fallback when region is unset",
+      "documentation": "error when fips is disabled",
       "conditions": [],
-      "error": "UseFallback = true"
+      "error": "UseFips = false",
+      "type": "error"
     }
   ],
-  "version": "1.1"
+  "version": "1.3"
 }

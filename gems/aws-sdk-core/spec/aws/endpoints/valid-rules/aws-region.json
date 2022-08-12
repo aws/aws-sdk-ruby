@@ -1,5 +1,4 @@
 {
-  "serviceId": "aws-region",
   "parameters": {
     "Region": {
       "type": "string",
@@ -31,13 +30,15 @@
             }
           ]
         }
-      }
+      },
+      "type": "endpoint"
     },
     {
       "documentation": "fallback when region is unset",
       "conditions": [],
-      "error": "Region must be set to resolve a valid endpoint"
+      "error": "Region must be set to resolve a valid endpoint",
+      "type": "error"
     }
   ],
-  "version": "1.1"
+  "version": "1.3"
 }

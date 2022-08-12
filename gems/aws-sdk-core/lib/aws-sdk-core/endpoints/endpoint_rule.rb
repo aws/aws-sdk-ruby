@@ -36,13 +36,26 @@ module Aws
         end
 
         Endpoint.new(
-          url: Templater.resolve(@endpoint['url'], parameters, assigns),
+          url: resolve_endpoint(parameters, assigns),
           properties: properties,
           headers: headers
         )
       end
 
       private
+
+      def resolve_endpoint(parameters, assigns)
+        value = @endpoint['url']
+        if value.is_a?(Hash) && value['fn']
+          Function.new(fn: value['fn'], argv: value['argv'])
+                  .call(parameters, assigns)
+        elsif value.is_a?(Hash) && value['ref']
+          Reference.new(ref: value['ref'])
+                   .resolve(parameters, assigns)
+        else
+          Templater.resolve(value, parameters, assigns)
+        end
+      end
 
       def resolve_headers(parameters, assigns)
         @endpoint['headers'].each.with_object({}) do |(key, arr), headers|
@@ -52,7 +65,8 @@ module Aws
                     Function.new(fn: value['fn'], argv: value['argv'])
                             .call(parameters, assigns)
                   elsif value.is_a?(Hash) && value['ref']
-                    Reference.new(value['ref']).resolve(parameters, assigns)
+                    Reference.new(ref: value['ref'])
+                             .resolve(parameters, assigns)
                   else
                     Templater.resolve(value, parameters, assigns)
                   end
