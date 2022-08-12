@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2022-08-12)
+------------------
+
+* Feature - Updates various list api MaxResults ranges
+
 1.20.0 (2022-02-24)
 ------------------
 

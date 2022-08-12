@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2022-08-12)
+------------------
+
+* Feature - The Amazon Chime SDK now supports channels with up to one million participants with elastic channels.
+
 1.11.0 (2022-06-06)
 ------------------
 

@@ -393,6 +393,48 @@ module Aws::PrometheusService
       req.send_request(options)
     end
 
+    # Create logging configuration.
+    #
+    # @option params [String] :client_token
+    #   Optional, unique, case-sensitive, user-provided identifier to ensure
+    #   the idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :log_group_arn
+    #   The ARN of the CW log group to which the vended log data will be
+    #   published.
+    #
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace to vend logs to.
+    #
+    # @return [Types::CreateLoggingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateLoggingConfigurationResponse#status #status} => Types::LoggingConfigurationStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_logging_configuration({
+    #     client_token: "IdempotencyToken",
+    #     log_group_arn: "LogGroupArn", # required
+    #     workspace_id: "WorkspaceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status.status_code #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATION_FAILED", "UPDATE_FAILED"
+    #   resp.status.status_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/CreateLoggingConfiguration AWS API Documentation
+    #
+    # @overload create_logging_configuration(params = {})
+    # @param [Hash] params ({})
+    def create_logging_configuration(params = {}, options = {})
+      req = build_request(:create_logging_configuration, params)
+      req.send_request(options)
+    end
+
     # Create a rule group namespace.
     #
     # @option params [String] :client_token
@@ -532,6 +574,36 @@ module Aws::PrometheusService
       req.send_request(options)
     end
 
+    # Delete logging configuration.
+    #
+    # @option params [String] :client_token
+    #   Optional, unique, case-sensitive, user-provided identifier to ensure
+    #   the idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace to vend logs to.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_logging_configuration({
+    #     client_token: "IdempotencyToken",
+    #     workspace_id: "WorkspaceId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DeleteLoggingConfiguration AWS API Documentation
+    #
+    # @overload delete_logging_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_logging_configuration(params = {}, options = {})
+      req = build_request(:delete_logging_configuration, params)
+      req.send_request(options)
+    end
+
     # Delete a rule groups namespace.
     #
     # @option params [String] :client_token
@@ -625,6 +697,39 @@ module Aws::PrometheusService
     # @param [Hash] params ({})
     def describe_alert_manager_definition(params = {}, options = {})
       req = build_request(:describe_alert_manager_definition, params)
+      req.send_request(options)
+    end
+
+    # Describes logging configuration.
+    #
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace to vend logs to.
+    #
+    # @return [Types::DescribeLoggingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeLoggingConfigurationResponse#logging_configuration #logging_configuration} => Types::LoggingConfigurationMetadata
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_logging_configuration({
+    #     workspace_id: "WorkspaceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.logging_configuration.created_at #=> Time
+    #   resp.logging_configuration.log_group_arn #=> String
+    #   resp.logging_configuration.modified_at #=> Time
+    #   resp.logging_configuration.status.status_code #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATION_FAILED", "UPDATE_FAILED"
+    #   resp.logging_configuration.status.status_reason #=> String
+    #   resp.logging_configuration.workspace #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DescribeLoggingConfiguration AWS API Documentation
+    #
+    # @overload describe_logging_configuration(params = {})
+    # @param [Hash] params ({})
+    def describe_logging_configuration(params = {}, options = {})
+      req = build_request(:describe_logging_configuration, params)
       req.send_request(options)
     end
 
@@ -992,6 +1097,48 @@ module Aws::PrometheusService
       req.send_request(options)
     end
 
+    # Update logging configuration.
+    #
+    # @option params [String] :client_token
+    #   Optional, unique, case-sensitive, user-provided identifier to ensure
+    #   the idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :log_group_arn
+    #   The ARN of the CW log group to which the vended log data will be
+    #   published.
+    #
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace to vend logs to.
+    #
+    # @return [Types::UpdateLoggingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateLoggingConfigurationResponse#status #status} => Types::LoggingConfigurationStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_logging_configuration({
+    #     client_token: "IdempotencyToken",
+    #     log_group_arn: "LogGroupArn", # required
+    #     workspace_id: "WorkspaceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status.status_code #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATION_FAILED", "UPDATE_FAILED"
+    #   resp.status.status_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/UpdateLoggingConfiguration AWS API Documentation
+    #
+    # @overload update_logging_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_logging_configuration(params = {}, options = {})
+      req = build_request(:update_logging_configuration, params)
+      req.send_request(options)
+    end
+
     # Updates an AMP workspace alias.
     #
     # @option params [String] :alias
@@ -1039,7 +1186,7 @@ module Aws::PrometheusService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-prometheusservice'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

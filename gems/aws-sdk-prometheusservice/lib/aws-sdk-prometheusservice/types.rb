@@ -148,6 +148,58 @@ module Aws::PrometheusService
       include Aws::Structure
     end
 
+    # Represents the input of a CreateLoggingConfiguration operation.
+    #
+    # @note When making an API call, you may pass CreateLoggingConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_token: "IdempotencyToken",
+    #         log_group_arn: "LogGroupArn", # required
+    #         workspace_id: "WorkspaceId", # required
+    #       }
+    #
+    # @!attribute [rw] client_token
+    #   Optional, unique, case-sensitive, user-provided identifier to ensure
+    #   the idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_group_arn
+    #   The ARN of the CW log group to which the vended log data will be
+    #   published.
+    #   @return [String]
+    #
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace to vend logs to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/CreateLoggingConfigurationRequest AWS API Documentation
+    #
+    class CreateLoggingConfigurationRequest < Struct.new(
+      :client_token,
+      :log_group_arn,
+      :workspace_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the output of a CreateLoggingConfiguration operation.
+    #
+    # @!attribute [rw] status
+    #   The status of the logging configuration.
+    #   @return [Types::LoggingConfigurationStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/CreateLoggingConfigurationResponse AWS API Documentation
+    #
+    class CreateLoggingConfigurationResponse < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the input of a CreateRuleGroupsNamespace operation.
     #
     # @note When making an API call, you may pass CreateRuleGroupsNamespaceRequest
@@ -330,6 +382,37 @@ module Aws::PrometheusService
       include Aws::Structure
     end
 
+    # Represents the input of a DeleteLoggingConfiguration operation.
+    #
+    # @note When making an API call, you may pass DeleteLoggingConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_token: "IdempotencyToken",
+    #         workspace_id: "WorkspaceId", # required
+    #       }
+    #
+    # @!attribute [rw] client_token
+    #   Optional, unique, case-sensitive, user-provided identifier to ensure
+    #   the idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace to vend logs to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DeleteLoggingConfigurationRequest AWS API Documentation
+    #
+    class DeleteLoggingConfigurationRequest < Struct.new(
+      :client_token,
+      :workspace_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the input of a DeleteRuleGroupsNamespace operation.
     #
     # @note When making an API call, you may pass DeleteRuleGroupsNamespaceRequest
@@ -430,6 +513,42 @@ module Aws::PrometheusService
     #
     class DescribeAlertManagerDefinitionResponse < Struct.new(
       :alert_manager_definition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the input of a DescribeLoggingConfiguration operation.
+    #
+    # @note When making an API call, you may pass DescribeLoggingConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         workspace_id: "WorkspaceId", # required
+    #       }
+    #
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace to vend logs to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DescribeLoggingConfigurationRequest AWS API Documentation
+    #
+    class DescribeLoggingConfigurationRequest < Struct.new(
+      :workspace_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the output of a DescribeLoggingConfiguration operation.
+    #
+    # @!attribute [rw] logging_configuration
+    #   Metadata object containing information about the logging
+    #   configuration of a workspace.
+    #   @return [Types::LoggingConfigurationMetadata]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DescribeLoggingConfigurationResponse AWS API Documentation
+    #
+    class DescribeLoggingConfigurationResponse < Struct.new(
+      :logging_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -673,6 +792,60 @@ module Aws::PrometheusService
     class ListWorkspacesResponse < Struct.new(
       :next_token,
       :workspaces)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the properties of a logging configuration metadata.
+    #
+    # @!attribute [rw] created_at
+    #   The time when the logging configuration was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] log_group_arn
+    #   The ARN of the CW log group to which the vended log data will be
+    #   published.
+    #   @return [String]
+    #
+    # @!attribute [rw] modified_at
+    #   The time when the logging configuration was modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of the logging configuration.
+    #   @return [Types::LoggingConfigurationStatus]
+    #
+    # @!attribute [rw] workspace
+    #   The workspace where the logging configuration exists.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/LoggingConfigurationMetadata AWS API Documentation
+    #
+    class LoggingConfigurationMetadata < Struct.new(
+      :created_at,
+      :log_group_arn,
+      :modified_at,
+      :status,
+      :workspace)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the status of a logging configuration.
+    #
+    # @!attribute [rw] status_code
+    #   Status code of the logging configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason for failure if any.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/LoggingConfigurationStatus AWS API Documentation
+    #
+    class LoggingConfigurationStatus < Struct.new(
+      :status_code,
+      :status_reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1049,6 +1222,58 @@ module Aws::PrometheusService
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # Represents the input of an UpdateLoggingConfiguration operation.
+    #
+    # @note When making an API call, you may pass UpdateLoggingConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_token: "IdempotencyToken",
+    #         log_group_arn: "LogGroupArn", # required
+    #         workspace_id: "WorkspaceId", # required
+    #       }
+    #
+    # @!attribute [rw] client_token
+    #   Optional, unique, case-sensitive, user-provided identifier to ensure
+    #   the idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_group_arn
+    #   The ARN of the CW log group to which the vended log data will be
+    #   published.
+    #   @return [String]
+    #
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace to vend logs to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/UpdateLoggingConfigurationRequest AWS API Documentation
+    #
+    class UpdateLoggingConfigurationRequest < Struct.new(
+      :client_token,
+      :log_group_arn,
+      :workspace_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the output of an UpdateLoggingConfiguration operation.
+    #
+    # @!attribute [rw] status
+    #   The status of the logging configuration.
+    #   @return [Types::LoggingConfigurationStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/UpdateLoggingConfigurationResponse AWS API Documentation
+    #
+    class UpdateLoggingConfigurationResponse < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Represents the input of an UpdateWorkspaceAlias operation.
     #
