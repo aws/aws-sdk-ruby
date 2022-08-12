@@ -75,17 +75,20 @@ module Aws::S3
     def initialize(options = {})
       self[:bucket] = options[:bucket]
       self[:region] = options[:region]
-      self[:use_fips] = options[:use_fips] || false
+      self[:use_fips] = options[:use_fips]
+      self[:use_fips] = false if self[:use_fips].nil?
       if self[:use_fips].nil?
         raise ArgumentError, "Missing required EndpointParameter: :use_fips"
       end
-      self[:use_dual_stack] = options[:use_dual_stack] || false
+      self[:use_dual_stack] = options[:use_dual_stack]
+      self[:use_dual_stack] = false if self[:use_dual_stack].nil?
       if self[:use_dual_stack].nil?
         raise ArgumentError, "Missing required EndpointParameter: :use_dual_stack"
       end
       self[:endpoint] = options[:endpoint]
       self[:force_path_style] = options[:force_path_style]
-      self[:accelerate] = options[:accelerate] || false
+      self[:accelerate] = options[:accelerate]
+      self[:accelerate] = false if self[:accelerate].nil?
       if self[:accelerate].nil?
         raise ArgumentError, "Missing required EndpointParameter: :accelerate"
       end

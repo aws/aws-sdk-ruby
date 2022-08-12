@@ -11,6 +11,7 @@ module AwsSdkCodeGenerator
       def initialize(options)
         @service = options.fetch(:service)
         @prefix = options.fetch(:prefix)
+        @codegenerated_plugins = options.fetch(:codegenerated_plugins)
       end
 
       # @return [String|nil]
@@ -64,6 +65,12 @@ module AwsSdkCodeGenerator
         paths = Set.new
         paths << "#{@prefix}/types"
         paths << "#{@prefix}/client_api"
+
+        # these must be required before the client
+        if @codegenerated_plugins
+          paths += @codegenerated_plugins.map { | p| p.path }
+        end
+
         paths << "#{@prefix}/client"
         paths << "#{@prefix}/errors"
         paths << "#{@prefix}/waiters" if @service.waiters

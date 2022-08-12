@@ -14,6 +14,7 @@ require 'aws-sdk-core'
 
 require_relative 'aws-sdk-s3/types'
 require_relative 'aws-sdk-s3/client_api'
+require_relative 'aws-sdk-s3/plugins/endpoints.rb'
 require_relative 'aws-sdk-s3/client'
 require_relative 'aws-sdk-s3/errors'
 require_relative 'aws-sdk-s3/waiters'

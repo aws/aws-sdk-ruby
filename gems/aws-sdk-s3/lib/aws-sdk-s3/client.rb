@@ -31,7 +31,6 @@ require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/protocols/rest_xml.rb'
-require 'aws-sdk-s3/plugins/endpoints.rb'
 require 'aws-sdk-s3/plugins/accelerate.rb'
 require 'aws-sdk-s3/plugins/arn.rb'
 require 'aws-sdk-s3/plugins/bucket_dns.rb'
@@ -100,7 +99,6 @@ module Aws::S3
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::Protocols::RestXml)
-    add_plugin(Aws::S3::Plugins::Endpoints)
     add_plugin(Aws::S3::Plugins::Accelerate)
     add_plugin(Aws::S3::Plugins::ARN)
     add_plugin(Aws::S3::Plugins::BucketDns)
@@ -121,6 +119,7 @@ module Aws::S3
     add_plugin(Aws::S3::Plugins::UrlEncodedKeys)
     add_plugin(Aws::S3::Plugins::SkipWholeMultipartGetChecksums)
     add_plugin(Aws::Plugins::EventStreamConfiguration)
+    add_plugin(Aws::S3::Plugins::Endpoints)
 
     # @overload initialize(options)
     #   @param [Hash] options
@@ -256,9 +255,6 @@ module Aws::S3
     #   @option options [Boolean] :endpoint_discovery (false)
     #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
-    #   @option options [Aws::S3::EndpointProvider] :endpoint_provider
-    #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::S3::EndpointParameters`
-    #
     #   @option options [Proc] :event_stream_handler
     #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
     #
@@ -390,6 +386,9 @@ module Aws::S3
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
+    #
+    #   @option options [Aws::S3::EndpointProvider] :endpoint_provider
+    #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::S3::EndpointParameters`
     #
     #   @option options [URI::HTTP,String] :http_proxy A proxy to send
     #     requests through.  Formatted like 'http://proxy.com:123'.

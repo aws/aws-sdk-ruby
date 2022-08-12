@@ -19,10 +19,7 @@ module Aws::S3
                    'where `parameters` is a Struct similar to '\
                    '`Aws::S3::EndpointParameters`'
       ) do
-        rule_set = Aws::Json.load_file(
-          File.expand_path('../../../../endpoint-rule-set.json', __FILE__)
-        )
-        Aws::S3::EndpointProvider.new(rule_set)
+        Aws::S3::EndpointProvider.new
       end
 
       # @api private

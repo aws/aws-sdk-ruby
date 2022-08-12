@@ -2,6 +2,7 @@
 
 require_relative 'aws-sdk-code-generator/api'
 require_relative 'aws-sdk-code-generator/apply_docs'
+require_relative 'aws-sdk-code-generator/codegenerated_plugin'
 require_relative 'aws-sdk-code-generator/client_constructor'
 require_relative 'aws-sdk-code-generator/client_operation_documentation'
 require_relative 'aws-sdk-code-generator/client_operation_list'

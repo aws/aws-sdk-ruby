@@ -8,7 +8,7 @@ module Aws
         @version = version
         @service_id = service_id
         @parameters = parameters
-        @rules = RuleSet.rules_from_json(rules)
+        @rules = RuleSet.rules_from_json(rules || [])
       end
 
       attr_reader :version

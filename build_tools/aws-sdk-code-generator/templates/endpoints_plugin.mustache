@@ -15,10 +15,7 @@ module {{module_name}}
                    'where `parameters` is a Struct similar to '\
                    '`{{module_name}}::EndpointParameters`'
       ) do
-        rule_set = Aws::Json.load_file(
-          File.expand_path('../../../../endpoint-rule-set.json', __FILE__)
-        )
-        {{module_name}}::EndpointProvider.new(rule_set)
+        {{module_name}}::EndpointProvider.new
       end
 
       # @api private

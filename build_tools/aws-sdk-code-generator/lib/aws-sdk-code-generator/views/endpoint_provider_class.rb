@@ -7,6 +7,7 @@ module AwsSdkCodeGenerator
       # @option options [required, Service] :service
       def initialize(options)
         @service = options.fetch(:service)
+        @endpoint_rules = options.fetch(:endpoint_rules)
       end
 
       # @return [String|nil]
@@ -19,6 +20,9 @@ module AwsSdkCodeGenerator
         @service.module_name
       end
 
+      def endpoint_rules_encoded
+        Base64.encode64(JSON.dump(@endpoint_rules))
+      end
     end
   end
 end
