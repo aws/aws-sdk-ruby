@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2022-08-15)
+------------------
+
+* Feature - Documentation updates to reflect service rename - AWS IAM Identity Center (successor to AWS Single Sign-On)
+
 1.16.0 (2022-08-08)
 ------------------
 

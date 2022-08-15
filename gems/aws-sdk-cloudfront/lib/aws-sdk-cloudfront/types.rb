@@ -2168,7 +2168,7 @@ module Aws::CloudFront
     #             },
     #           },
     #           web_acl_id: "string",
-    #           http_version: "http1.1", # accepts http1.1, http2
+    #           http_version: "http1.1", # accepts http1.1, http2, http3, http2and3
     #           is_ipv6_enabled: false,
     #         },
     #       }
@@ -2466,7 +2466,7 @@ module Aws::CloudFront
     #               },
     #             },
     #             web_acl_id: "string",
-    #             http_version: "http1.1", # accepts http1.1, http2
+    #             http_version: "http1.1", # accepts http1.1, http2, http3, http2and3
     #             is_ipv6_enabled: false,
     #           },
     #           tags: { # required
@@ -4766,7 +4766,7 @@ module Aws::CloudFront
     #           },
     #         },
     #         web_acl_id: "string",
-    #         http_version: "http1.1", # accepts http1.1, http2
+    #         http_version: "http1.1", # accepts http1.1, http2, http3, http2and3
     #         is_ipv6_enabled: false,
     #       }
     #
@@ -4936,18 +4936,26 @@ module Aws::CloudFront
     #   @return [String]
     #
     # @!attribute [rw] http_version
-    #   (Optional) Specify the maximum HTTP version that you want viewers to
-    #   use to communicate with CloudFront. The default value for new web
-    #   distributions is http2. Viewers that don't support HTTP/2
+    #   (Optional) Specify the maximum HTTP version(s) that you want viewers
+    #   to use to communicate with CloudFront. The default value for new web
+    #   distributions is `http2`. Viewers that don't support HTTP/2
     #   automatically use an earlier HTTP version.
     #
-    #   For viewers and CloudFront to use HTTP/2, viewers must support TLS
-    #   1.2 or later, and must support Server Name Identification (SNI).
+    #   For viewers and CloudFront to use HTTP/2, viewers must support
+    #   TLSv1.2 or later, and must support Server Name Indication (SNI).
     #
-    #   In general, configuring CloudFront to communicate with viewers using
-    #   HTTP/2 reduces latency. You can improve performance by optimizing
-    #   for HTTP/2. For more information, do an Internet search for "http/2
-    #   optimization."
+    #   For viewers and CloudFront to use HTTP/3, viewers must support
+    #   TLSv1.3 and Server Name Indication (SNI). CloudFront supports HTTP/3
+    #   connection migration to allow the viewer to switch networks without
+    #   losing connection. For more information about connection migration,
+    #   see [Connection Migration][1] at RFC 9000. For more information
+    #   about supported TLSv1.3 ciphers, see [Supported protocols and
+    #   ciphers between viewers and CloudFront][2].
+    #
+    #
+    #
+    #   [1]: https://www.rfc-editor.org/rfc/rfc9000.html#name-connection-migration
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/secure-connections-supported-viewer-protocols-ciphers.html
     #   @return [String]
     #
     # @!attribute [rw] is_ipv6_enabled
@@ -5274,7 +5282,7 @@ module Aws::CloudFront
     #             },
     #           },
     #           web_acl_id: "string",
-    #           http_version: "http1.1", # accepts http1.1, http2
+    #           http_version: "http1.1", # accepts http1.1, http2, http3, http2and3
     #           is_ipv6_enabled: false,
     #         },
     #         tags: { # required
@@ -14672,7 +14680,7 @@ module Aws::CloudFront
     #             },
     #           },
     #           web_acl_id: "string",
-    #           http_version: "http1.1", # accepts http1.1, http2
+    #           http_version: "http1.1", # accepts http1.1, http2, http3, http2and3
     #           is_ipv6_enabled: false,
     #         },
     #         id: "string", # required

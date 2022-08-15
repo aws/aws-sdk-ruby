@@ -1044,6 +1044,27 @@ module Aws::ConnectWisdomService
       include Aws::Structure
     end
 
+    # The feedback to submit to Wisdom.
+    #
+    # @note When making an API call, you may pass FeedbackData
+    #   data as a hash:
+    #
+    #       {
+    #         relevance: "HELPFUL", # required, accepts HELPFUL, NOT_HELPFUL
+    #       }
+    #
+    # @!attribute [rw] relevance
+    #   The relevance of the target this feedback is for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/FeedbackData AWS API Documentation
+    #
+    class FeedbackData < Struct.new(
+      :relevance)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A search filter.
     #
     # @note When making an API call, you may pass Filter
@@ -1829,6 +1850,80 @@ module Aws::ConnectWisdomService
     #
     class PreconditionFailedException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutFeedbackRequest
+    #   data as a hash:
+    #
+    #       {
+    #         assistant_id: "UuidOrArn", # required
+    #         feedback: { # required
+    #           relevance: "HELPFUL", # required, accepts HELPFUL, NOT_HELPFUL
+    #         },
+    #         target_id: "String", # required
+    #         target_type: "RECOMMENDATION", # required, accepts RECOMMENDATION, RESULT
+    #       }
+    #
+    # @!attribute [rw] assistant_id
+    #   The identifier of the Wisdom assistant. Can be either the ID or the
+    #   ARN. URLs cannot contain the ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] feedback
+    #   The feedback.
+    #   @return [Types::FeedbackData]
+    #
+    # @!attribute [rw] target_id
+    #   The identifier of a recommendation. or The identifier of the result
+    #   data.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_type
+    #   The type of the targetId for which The feedback. is targeted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/PutFeedbackRequest AWS API Documentation
+    #
+    class PutFeedbackRequest < Struct.new(
+      :assistant_id,
+      :feedback,
+      :target_id,
+      :target_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] assistant_arn
+    #   The Amazon Resource Name (ARN) of the Wisdom assistant.
+    #   @return [String]
+    #
+    # @!attribute [rw] assistant_id
+    #   The identifier of the Wisdom assistant.
+    #   @return [String]
+    #
+    # @!attribute [rw] feedback
+    #   The feedback.
+    #   @return [Types::FeedbackData]
+    #
+    # @!attribute [rw] target_id
+    #   The identifier of a recommendation. or The identifier of the result
+    #   data.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_type
+    #   The type of the targetId for which The feedback. is targeted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/PutFeedbackResponse AWS API Documentation
+    #
+    class PutFeedbackResponse < Struct.new(
+      :assistant_arn,
+      :assistant_id,
+      :feedback,
+      :target_id,
+      :target_type)
       SENSITIVE = []
       include Aws::Structure
     end

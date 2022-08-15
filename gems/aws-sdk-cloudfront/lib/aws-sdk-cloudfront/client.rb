@@ -832,7 +832,7 @@ module Aws::CloudFront
     #         },
     #       },
     #       web_acl_id: "string",
-    #       http_version: "http1.1", # accepts http1.1, http2
+    #       http_version: "http1.1", # accepts http1.1, http2, http3, http2and3
     #       is_ipv6_enabled: false,
     #     },
     #   })
@@ -1015,7 +1015,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.restrictions.geo_restriction.items #=> Array
     #   resp.distribution.distribution_config.restrictions.geo_restriction.items[0] #=> String
     #   resp.distribution.distribution_config.web_acl_id #=> String
-    #   resp.distribution.distribution_config.http_version #=> String, one of "http1.1", "http2"
+    #   resp.distribution.distribution_config.http_version #=> String, one of "http1.1", "http2", "http3", "http2and3"
     #   resp.distribution.distribution_config.is_ipv6_enabled #=> Boolean
     #   resp.distribution.alias_icp_recordals #=> Array
     #   resp.distribution.alias_icp_recordals[0].cname #=> String
@@ -1296,7 +1296,7 @@ module Aws::CloudFront
     #           },
     #         },
     #         web_acl_id: "string",
-    #         http_version: "http1.1", # accepts http1.1, http2
+    #         http_version: "http1.1", # accepts http1.1, http2, http3, http2and3
     #         is_ipv6_enabled: false,
     #       },
     #       tags: { # required
@@ -1488,7 +1488,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.restrictions.geo_restriction.items #=> Array
     #   resp.distribution.distribution_config.restrictions.geo_restriction.items[0] #=> String
     #   resp.distribution.distribution_config.web_acl_id #=> String
-    #   resp.distribution.distribution_config.http_version #=> String, one of "http1.1", "http2"
+    #   resp.distribution.distribution_config.http_version #=> String, one of "http1.1", "http2", "http3", "http2and3"
     #   resp.distribution.distribution_config.is_ipv6_enabled #=> Boolean
     #   resp.distribution.alias_icp_recordals #=> Array
     #   resp.distribution.alias_icp_recordals[0].cname #=> String
@@ -3306,7 +3306,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.restrictions.geo_restriction.items #=> Array
     #   resp.distribution.distribution_config.restrictions.geo_restriction.items[0] #=> String
     #   resp.distribution.distribution_config.web_acl_id #=> String
-    #   resp.distribution.distribution_config.http_version #=> String, one of "http1.1", "http2"
+    #   resp.distribution.distribution_config.http_version #=> String, one of "http1.1", "http2", "http3", "http2and3"
     #   resp.distribution.distribution_config.is_ipv6_enabled #=> Boolean
     #   resp.distribution.alias_icp_recordals #=> Array
     #   resp.distribution.alias_icp_recordals[0].cname #=> String
@@ -3502,7 +3502,7 @@ module Aws::CloudFront
     #   resp.distribution_config.restrictions.geo_restriction.items #=> Array
     #   resp.distribution_config.restrictions.geo_restriction.items[0] #=> String
     #   resp.distribution_config.web_acl_id #=> String
-    #   resp.distribution_config.http_version #=> String, one of "http1.1", "http2"
+    #   resp.distribution_config.http_version #=> String, one of "http1.1", "http2", "http3", "http2and3"
     #   resp.distribution_config.is_ipv6_enabled #=> Boolean
     #   resp.etag #=> String
     #
@@ -4789,7 +4789,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].restrictions.geo_restriction.items #=> Array
     #   resp.distribution_list.items[0].restrictions.geo_restriction.items[0] #=> String
     #   resp.distribution_list.items[0].web_acl_id #=> String
-    #   resp.distribution_list.items[0].http_version #=> String, one of "http1.1", "http2"
+    #   resp.distribution_list.items[0].http_version #=> String, one of "http1.1", "http2", "http3", "http2and3"
     #   resp.distribution_list.items[0].is_ipv6_enabled #=> Boolean
     #   resp.distribution_list.items[0].alias_icp_recordals #=> Array
     #   resp.distribution_list.items[0].alias_icp_recordals[0].cname #=> String
@@ -5178,7 +5178,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].restrictions.geo_restriction.items #=> Array
     #   resp.distribution_list.items[0].restrictions.geo_restriction.items[0] #=> String
     #   resp.distribution_list.items[0].web_acl_id #=> String
-    #   resp.distribution_list.items[0].http_version #=> String, one of "http1.1", "http2"
+    #   resp.distribution_list.items[0].http_version #=> String, one of "http1.1", "http2", "http3", "http2and3"
     #   resp.distribution_list.items[0].is_ipv6_enabled #=> Boolean
     #   resp.distribution_list.items[0].alias_icp_recordals #=> Array
     #   resp.distribution_list.items[0].alias_icp_recordals[0].cname #=> String
@@ -5444,7 +5444,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].restrictions.geo_restriction.items #=> Array
     #   resp.distribution_list.items[0].restrictions.geo_restriction.items[0] #=> String
     #   resp.distribution_list.items[0].web_acl_id #=> String
-    #   resp.distribution_list.items[0].http_version #=> String, one of "http1.1", "http2"
+    #   resp.distribution_list.items[0].http_version #=> String, one of "http1.1", "http2", "http3", "http2and3"
     #   resp.distribution_list.items[0].is_ipv6_enabled #=> Boolean
     #   resp.distribution_list.items[0].alias_icp_recordals #=> Array
     #   resp.distribution_list.items[0].alias_icp_recordals[0].cname #=> String
@@ -6792,7 +6792,7 @@ module Aws::CloudFront
     #         },
     #       },
     #       web_acl_id: "string",
-    #       http_version: "http1.1", # accepts http1.1, http2
+    #       http_version: "http1.1", # accepts http1.1, http2, http3, http2and3
     #       is_ipv6_enabled: false,
     #     },
     #     id: "string", # required
@@ -6977,7 +6977,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.restrictions.geo_restriction.items #=> Array
     #   resp.distribution.distribution_config.restrictions.geo_restriction.items[0] #=> String
     #   resp.distribution.distribution_config.web_acl_id #=> String
-    #   resp.distribution.distribution_config.http_version #=> String, one of "http1.1", "http2"
+    #   resp.distribution.distribution_config.http_version #=> String, one of "http1.1", "http2", "http3", "http2and3"
     #   resp.distribution.distribution_config.is_ipv6_enabled #=> Boolean
     #   resp.distribution.alias_icp_recordals #=> Array
     #   resp.distribution.alias_icp_recordals[0].cname #=> String
@@ -7768,7 +7768,7 @@ module Aws::CloudFront
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.66.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
