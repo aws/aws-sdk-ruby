@@ -18,6 +18,11 @@ module AwsSdkCodeGenerator
     #   * `:name` - The name of the example
     #   * `:code` - The Ruby example code
     #
+    # @option options [Boolean] (false) :in_memory
+    #   If true, code will be generated to be used in memory only.
+    #   This is useful for testing or for migrating functionality from
+    #   V2 of the SDK.
+    #
     def initialize(options)
       @service = options.fetch(:service)
       @aws_sdk_core_lib_path = options.fetch(:aws_sdk_core_lib_path)
@@ -32,6 +37,7 @@ module AwsSdkCodeGenerator
       @resources = @service.resources
       @examples = @service.examples
       @endpoint_rules = @service.endpoint_rules
+      @in_memory = options.fetch(:in_memory, false)
     end
 
     # Generates the source for a library as a single string.
@@ -220,7 +226,9 @@ module AwsSdkCodeGenerator
 
     def endpoint_provider
       Views::EndpointProviderClass.new(
-        service: @service, endpoint_rules: @endpoint_rules).render
+        service: @service,
+        endpoint_rules: @endpoint_rules,
+        in_memory: @in_memory).render
     end
 
     def endpoints_module

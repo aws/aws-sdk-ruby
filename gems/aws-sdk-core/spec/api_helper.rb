@@ -136,6 +136,7 @@ module ApiHelper
       module_name = next_sample_module_name
       code = AwsSdkCodeGenerator::CodeBuilder.new(
         aws_sdk_core_lib_path: File.expand_path('../../lib/', __FILE__),
+        in_memory: true,
         service: AwsSdkCodeGenerator::Service.new(
           name: module_name,
           module_name: module_name,
@@ -146,7 +147,7 @@ module ApiHelper
           endpoint_rules: options[:endpoint_rules],
           endpoint_tests: options[:endpoint_tests],
           gem_dependencies: { 'aws-sdk-core' => '3' },
-          gem_version: '1.0.0',
+          gem_version: '1.0.0'
         )
       )
       begin
