@@ -35,8 +35,10 @@ module Aws::Rekognition
   # * {InvalidImageFormatException}
   # * {InvalidPaginationTokenException}
   # * {InvalidParameterException}
+  # * {InvalidPolicyRevisionIdException}
   # * {InvalidS3ObjectException}
   # * {LimitExceededException}
+  # * {MalformedPolicyDocumentException}
   # * {ProvisionedThroughputExceededException}
   # * {ResourceAlreadyExistsException}
   # * {ResourceInUseException}
@@ -147,6 +149,16 @@ module Aws::Rekognition
       end
     end
 
+    class InvalidPolicyRevisionIdException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Rekognition::Types::InvalidPolicyRevisionIdException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
     class InvalidS3ObjectException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -162,6 +174,16 @@ module Aws::Rekognition
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Rekognition::Types::LimitExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class MalformedPolicyDocumentException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Rekognition::Types::MalformedPolicyDocumentException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

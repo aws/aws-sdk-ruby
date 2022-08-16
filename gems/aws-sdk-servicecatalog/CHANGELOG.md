@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.72.0 (2022-08-16)
+------------------
+
+* Feature - Documentation updates for Service Catalog
+
 1.71.0 (2022-05-16)
 ------------------
 

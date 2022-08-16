@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2022-08-16)
+------------------
+
+* Feature - This release adds APIs which support copying an Amazon Rekognition Custom Labels model and managing project policies across AWS account.
+
 1.69.0 (2022-07-26)
 ------------------
 

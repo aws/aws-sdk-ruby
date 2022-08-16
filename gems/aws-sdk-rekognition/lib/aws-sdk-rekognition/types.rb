@@ -643,6 +643,96 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CopyProjectVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         source_project_arn: "ProjectArn", # required
+    #         source_project_version_arn: "ProjectVersionArn", # required
+    #         destination_project_arn: "ProjectArn", # required
+    #         version_name: "VersionName", # required
+    #         output_config: { # required
+    #           s3_bucket: "S3Bucket",
+    #           s3_key_prefix: "S3KeyPrefix",
+    #         },
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #         kms_key_id: "KmsKeyId",
+    #       }
+    #
+    # @!attribute [rw] source_project_arn
+    #   The ARN of the source project in the trusting AWS account.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_project_version_arn
+    #   The ARN of the model version in the source project that you want to
+    #   copy to a destination project.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_project_arn
+    #   The ARN of the project in the trusted AWS account that you want to
+    #   copy the model version to.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_name
+    #   A name for the version of the model that's copied to the
+    #   destination project.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_config
+    #   The S3 bucket and folder location where the training output for the
+    #   source model version is placed.
+    #   @return [Types::OutputConfig]
+    #
+    # @!attribute [rw] tags
+    #   The key-value tags to assign to the model version.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The identifier for your AWS Key Management Service key (AWS KMS
+    #   key). You can supply the Amazon Resource Name (ARN) of your KMS key,
+    #   the ID of your KMS key, an alias for your KMS key, or an alias ARN.
+    #   The key is used to encrypt training results and manifest files
+    #   written to the output Amazon S3 bucket (`OutputConfig`).
+    #
+    #   If you choose to use your own KMS key, you need the following
+    #   permissions on the KMS key.
+    #
+    #   * kms:CreateGrant
+    #
+    #   * kms:DescribeKey
+    #
+    #   * kms:GenerateDataKey
+    #
+    #   * kms:Decrypt
+    #
+    #   If you don't specify a value for `KmsKeyId`, images copied into the
+    #   service are encrypted using a key that AWS owns and manages.
+    #   @return [String]
+    #
+    class CopyProjectVersionRequest < Struct.new(
+      :source_project_arn,
+      :source_project_version_arn,
+      :destination_project_arn,
+      :version_name,
+      :output_config,
+      :tags,
+      :kms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] project_version_arn
+    #   The ARN of the copied model version in the destination project.
+    #   @return [String]
+    #
+    class CopyProjectVersionResponse < Struct.new(
+      :project_version_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about an item of Personal Protective Equipment covering a
     # corresponding body part. For more information, see
     # DetectProtectiveEquipment.
@@ -1420,6 +1510,38 @@ module Aws::Rekognition
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DeleteProjectPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         project_arn: "ProjectArn", # required
+    #         policy_name: "ProjectPolicyName", # required
+    #         policy_revision_id: "ProjectPolicyRevisionId",
+    #       }
+    #
+    # @!attribute [rw] project_arn
+    #   The Amazon Resource Name (ARN) of the project that the project
+    #   policy you want to delete is attached to.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_name
+    #   The name of the policy that you want to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_revision_id
+    #   The ID of the project policy revision that you want to delete.
+    #   @return [String]
+    #
+    class DeleteProjectPolicyRequest < Struct.new(
+      :project_arn,
+      :policy_name,
+      :policy_revision_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class DeleteProjectPolicyResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteProjectRequest
     #   data as a hash:
@@ -3954,6 +4076,10 @@ module Aws::Rekognition
     #
     class InvalidParameterException < Aws::EmptyStructure; end
 
+    # The supplied revision id for the project policy is invalid.
+    #
+    class InvalidPolicyRevisionIdException < Aws::EmptyStructure; end
+
     # Amazon Rekognition is unable to access the S3 object specified in the
     # request.
     #
@@ -4382,6 +4508,58 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListProjectPoliciesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         project_arn: "ProjectArn", # required
+    #         next_token: "ExtendedPaginationToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] project_arn
+    #   The ARN of the project for which you want to list the project
+    #   policies.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was incomplete (because there is more
+    #   results to retrieve), Amazon Rekognition Custom Labels returns a
+    #   pagination token in the response. You can use this pagination token
+    #   to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per paginated call. The
+    #   largest value you can specify is 5. If you specify a value greater
+    #   than 5, a ValidationException error occurs. The default value is 5.
+    #   @return [Integer]
+    #
+    class ListProjectPoliciesRequest < Struct.new(
+      :project_arn,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] project_policies
+    #   A list of project policies attached to the project.
+    #   @return [Array<Types::ProjectPolicy>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, Amazon Rekognition returns this token
+    #   that you can use in the subsequent request to retrieve the next set
+    #   of project policies.
+    #   @return [String]
+    #
+    class ListProjectPoliciesResponse < Struct.new(
+      :project_policies,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListStreamProcessorsRequest
     #   data as a hash:
     #
@@ -4453,6 +4631,11 @@ module Aws::Rekognition
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # The format of the project policy document that you supplied to
+    # `PutProjectPolicy` is incorrect.
+    #
+    class MalformedPolicyDocumentException < Aws::EmptyStructure; end
 
     # Provides information about a single type of inappropriate, unwanted,
     # or offensive content found in an image or video. Each type of
@@ -4762,6 +4945,44 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # Describes a project policy in the response from ListProjectPolicies.
+    #
+    # @!attribute [rw] project_arn
+    #   The Amazon Resource Name (ARN) of the project to which the project
+    #   policy is attached.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_name
+    #   The name of the project policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_revision_id
+    #   The revision ID of the project policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_document
+    #   The JSON document for the project policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_timestamp
+    #   The Unix datetime for the creation of the project policy.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_timestamp
+    #   The Unix datetime for when the project policy was last updated.
+    #   @return [Time]
+    #
+    class ProjectPolicy < Struct.new(
+      :project_arn,
+      :policy_name,
+      :policy_revision_id,
+      :policy_document,
+      :creation_timestamp,
+      :last_updated_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A description of a version of an Amazon Rekognition Custom Labels
     # model.
     #
@@ -4830,6 +5051,12 @@ module Aws::Rekognition
     #   StartProjectVersion.
     #   @return [Integer]
     #
+    # @!attribute [rw] source_project_version_arn
+    #   If the model version was copied from a different project,
+    #   `SourceProjectVersionArn` contains the ARN of the source model
+    #   version.
+    #   @return [String]
+    #
     class ProjectVersionDescription < Struct.new(
       :project_version_arn,
       :creation_timestamp,
@@ -4844,7 +5071,8 @@ module Aws::Rekognition
       :evaluation_result,
       :manifest_summary,
       :kms_key_id,
-      :max_inference_units)
+      :max_inference_units,
+      :source_project_version_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5003,6 +5231,63 @@ module Aws::Rekognition
     # increase this limit, contact Amazon Rekognition.
     #
     class ProvisionedThroughputExceededException < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass PutProjectPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         project_arn: "ProjectArn", # required
+    #         policy_name: "ProjectPolicyName", # required
+    #         policy_revision_id: "ProjectPolicyRevisionId",
+    #         policy_document: "ProjectPolicyDocument", # required
+    #       }
+    #
+    # @!attribute [rw] project_arn
+    #   The Amazon Resource Name (ARN) of the project that the project
+    #   policy is attached to.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_name
+    #   A name for the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_revision_id
+    #   The revision ID for the Project Policy. Each time you modify a
+    #   policy, Amazon Rekognition Custom Labels generates and assigns a new
+    #   `PolicyRevisionId` and then deletes the previous version of the
+    #   policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_document
+    #   A resource policy to add to the model. The policy is a JSON
+    #   structure that contains one or more statements that define the
+    #   policy. The policy must follow the IAM syntax. For more information
+    #   about the contents of a JSON policy document, see [IAM JSON policy
+    #   reference][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html
+    #   @return [String]
+    #
+    class PutProjectPolicyRequest < Struct.new(
+      :project_arn,
+      :policy_name,
+      :policy_revision_id,
+      :policy_document)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_revision_id
+    #   The ID of the project policy.
+    #   @return [String]
+    #
+    class PutProjectPolicyResponse < Struct.new(
+      :policy_revision_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass RecognizeCelebritiesRequest
     #   data as a hash:

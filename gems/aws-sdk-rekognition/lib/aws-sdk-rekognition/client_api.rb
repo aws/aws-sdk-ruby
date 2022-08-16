@@ -55,6 +55,8 @@ module Aws::Rekognition
     ContentModerationDetection = Shapes::StructureShape.new(name: 'ContentModerationDetection')
     ContentModerationDetections = Shapes::ListShape.new(name: 'ContentModerationDetections')
     ContentModerationSortBy = Shapes::StringShape.new(name: 'ContentModerationSortBy')
+    CopyProjectVersionRequest = Shapes::StructureShape.new(name: 'CopyProjectVersionRequest')
+    CopyProjectVersionResponse = Shapes::StructureShape.new(name: 'CopyProjectVersionResponse')
     CoversBodyPart = Shapes::StructureShape.new(name: 'CoversBodyPart')
     CreateCollectionRequest = Shapes::StructureShape.new(name: 'CreateCollectionRequest')
     CreateCollectionResponse = Shapes::StructureShape.new(name: 'CreateCollectionResponse')
@@ -93,6 +95,8 @@ module Aws::Rekognition
     DeleteDatasetResponse = Shapes::StructureShape.new(name: 'DeleteDatasetResponse')
     DeleteFacesRequest = Shapes::StructureShape.new(name: 'DeleteFacesRequest')
     DeleteFacesResponse = Shapes::StructureShape.new(name: 'DeleteFacesResponse')
+    DeleteProjectPolicyRequest = Shapes::StructureShape.new(name: 'DeleteProjectPolicyRequest')
+    DeleteProjectPolicyResponse = Shapes::StructureShape.new(name: 'DeleteProjectPolicyResponse')
     DeleteProjectRequest = Shapes::StructureShape.new(name: 'DeleteProjectRequest')
     DeleteProjectResponse = Shapes::StructureShape.new(name: 'DeleteProjectResponse')
     DeleteProjectVersionRequest = Shapes::StructureShape.new(name: 'DeleteProjectVersionRequest')
@@ -204,6 +208,7 @@ module Aws::Rekognition
     InvalidImageFormatException = Shapes::StructureShape.new(name: 'InvalidImageFormatException')
     InvalidPaginationTokenException = Shapes::StructureShape.new(name: 'InvalidPaginationTokenException')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
+    InvalidPolicyRevisionIdException = Shapes::StructureShape.new(name: 'InvalidPolicyRevisionIdException')
     InvalidS3ObjectException = Shapes::StructureShape.new(name: 'InvalidS3ObjectException')
     IsLabeled = Shapes::BooleanShape.new(name: 'IsLabeled')
     JobId = Shapes::StringShape.new(name: 'JobId')
@@ -236,10 +241,14 @@ module Aws::Rekognition
     ListDatasetLabelsResponse = Shapes::StructureShape.new(name: 'ListDatasetLabelsResponse')
     ListFacesRequest = Shapes::StructureShape.new(name: 'ListFacesRequest')
     ListFacesResponse = Shapes::StructureShape.new(name: 'ListFacesResponse')
+    ListProjectPoliciesPageSize = Shapes::IntegerShape.new(name: 'ListProjectPoliciesPageSize')
+    ListProjectPoliciesRequest = Shapes::StructureShape.new(name: 'ListProjectPoliciesRequest')
+    ListProjectPoliciesResponse = Shapes::StructureShape.new(name: 'ListProjectPoliciesResponse')
     ListStreamProcessorsRequest = Shapes::StructureShape.new(name: 'ListStreamProcessorsRequest')
     ListStreamProcessorsResponse = Shapes::StructureShape.new(name: 'ListStreamProcessorsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    MalformedPolicyDocumentException = Shapes::StructureShape.new(name: 'MalformedPolicyDocumentException')
     MaxDurationInSecondsULong = Shapes::IntegerShape.new(name: 'MaxDurationInSecondsULong')
     MaxFaces = Shapes::IntegerShape.new(name: 'MaxFaces')
     MaxFacesToIndex = Shapes::IntegerShape.new(name: 'MaxFacesToIndex')
@@ -273,6 +282,11 @@ module Aws::Rekognition
     ProjectDescriptions = Shapes::ListShape.new(name: 'ProjectDescriptions')
     ProjectName = Shapes::StringShape.new(name: 'ProjectName')
     ProjectNames = Shapes::ListShape.new(name: 'ProjectNames')
+    ProjectPolicies = Shapes::ListShape.new(name: 'ProjectPolicies')
+    ProjectPolicy = Shapes::StructureShape.new(name: 'ProjectPolicy')
+    ProjectPolicyDocument = Shapes::StringShape.new(name: 'ProjectPolicyDocument')
+    ProjectPolicyName = Shapes::StringShape.new(name: 'ProjectPolicyName')
+    ProjectPolicyRevisionId = Shapes::StringShape.new(name: 'ProjectPolicyRevisionId')
     ProjectStatus = Shapes::StringShape.new(name: 'ProjectStatus')
     ProjectVersionArn = Shapes::StringShape.new(name: 'ProjectVersionArn')
     ProjectVersionDescription = Shapes::StructureShape.new(name: 'ProjectVersionDescription')
@@ -289,6 +303,8 @@ module Aws::Rekognition
     ProtectiveEquipmentType = Shapes::StringShape.new(name: 'ProtectiveEquipmentType')
     ProtectiveEquipmentTypes = Shapes::ListShape.new(name: 'ProtectiveEquipmentTypes')
     ProvisionedThroughputExceededException = Shapes::StructureShape.new(name: 'ProvisionedThroughputExceededException')
+    PutProjectPolicyRequest = Shapes::StructureShape.new(name: 'PutProjectPolicyRequest')
+    PutProjectPolicyResponse = Shapes::StructureShape.new(name: 'PutProjectPolicyResponse')
     QualityFilter = Shapes::StringShape.new(name: 'QualityFilter')
     QueryString = Shapes::StringShape.new(name: 'QueryString')
     Reason = Shapes::StringShape.new(name: 'Reason')
@@ -533,6 +549,18 @@ module Aws::Rekognition
 
     ContentModerationDetections.member = Shapes::ShapeRef.new(shape: ContentModerationDetection)
 
+    CopyProjectVersionRequest.add_member(:source_project_arn, Shapes::ShapeRef.new(shape: ProjectArn, required: true, location_name: "SourceProjectArn"))
+    CopyProjectVersionRequest.add_member(:source_project_version_arn, Shapes::ShapeRef.new(shape: ProjectVersionArn, required: true, location_name: "SourceProjectVersionArn"))
+    CopyProjectVersionRequest.add_member(:destination_project_arn, Shapes::ShapeRef.new(shape: ProjectArn, required: true, location_name: "DestinationProjectArn"))
+    CopyProjectVersionRequest.add_member(:version_name, Shapes::ShapeRef.new(shape: VersionName, required: true, location_name: "VersionName"))
+    CopyProjectVersionRequest.add_member(:output_config, Shapes::ShapeRef.new(shape: OutputConfig, required: true, location_name: "OutputConfig"))
+    CopyProjectVersionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CopyProjectVersionRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
+    CopyProjectVersionRequest.struct_class = Types::CopyProjectVersionRequest
+
+    CopyProjectVersionResponse.add_member(:project_version_arn, Shapes::ShapeRef.new(shape: ProjectVersionArn, location_name: "ProjectVersionArn"))
+    CopyProjectVersionResponse.struct_class = Types::CopyProjectVersionResponse
+
     CoversBodyPart.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
     CoversBodyPart.add_member(:value, Shapes::ShapeRef.new(shape: Boolean, location_name: "Value"))
     CoversBodyPart.struct_class = Types::CoversBodyPart
@@ -656,6 +684,13 @@ module Aws::Rekognition
 
     DeleteFacesResponse.add_member(:deleted_faces, Shapes::ShapeRef.new(shape: FaceIdList, location_name: "DeletedFaces"))
     DeleteFacesResponse.struct_class = Types::DeleteFacesResponse
+
+    DeleteProjectPolicyRequest.add_member(:project_arn, Shapes::ShapeRef.new(shape: ProjectArn, required: true, location_name: "ProjectArn"))
+    DeleteProjectPolicyRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: ProjectPolicyName, required: true, location_name: "PolicyName"))
+    DeleteProjectPolicyRequest.add_member(:policy_revision_id, Shapes::ShapeRef.new(shape: ProjectPolicyRevisionId, location_name: "PolicyRevisionId"))
+    DeleteProjectPolicyRequest.struct_class = Types::DeleteProjectPolicyRequest
+
+    DeleteProjectPolicyResponse.struct_class = Types::DeleteProjectPolicyResponse
 
     DeleteProjectRequest.add_member(:project_arn, Shapes::ShapeRef.new(shape: ProjectArn, required: true, location_name: "ProjectArn"))
     DeleteProjectRequest.struct_class = Types::DeleteProjectRequest
@@ -1066,6 +1101,8 @@ module Aws::Rekognition
 
     InvalidParameterException.struct_class = Types::InvalidParameterException
 
+    InvalidPolicyRevisionIdException.struct_class = Types::InvalidPolicyRevisionIdException
+
     InvalidS3ObjectException.struct_class = Types::InvalidS3ObjectException
 
     KinesisDataStream.add_member(:arn, Shapes::ShapeRef.new(shape: KinesisDataArn, location_name: "Arn"))
@@ -1145,6 +1182,15 @@ module Aws::Rekognition
     ListFacesResponse.add_member(:face_model_version, Shapes::ShapeRef.new(shape: String, location_name: "FaceModelVersion"))
     ListFacesResponse.struct_class = Types::ListFacesResponse
 
+    ListProjectPoliciesRequest.add_member(:project_arn, Shapes::ShapeRef.new(shape: ProjectArn, required: true, location_name: "ProjectArn"))
+    ListProjectPoliciesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ExtendedPaginationToken, location_name: "NextToken"))
+    ListProjectPoliciesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListProjectPoliciesPageSize, location_name: "MaxResults"))
+    ListProjectPoliciesRequest.struct_class = Types::ListProjectPoliciesRequest
+
+    ListProjectPoliciesResponse.add_member(:project_policies, Shapes::ShapeRef.new(shape: ProjectPolicies, location_name: "ProjectPolicies"))
+    ListProjectPoliciesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: ExtendedPaginationToken, location_name: "NextToken"))
+    ListProjectPoliciesResponse.struct_class = Types::ListProjectPoliciesResponse
+
     ListStreamProcessorsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListStreamProcessorsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListStreamProcessorsRequest.struct_class = Types::ListStreamProcessorsRequest
@@ -1158,6 +1204,8 @@ module Aws::Rekognition
 
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    MalformedPolicyDocumentException.struct_class = Types::MalformedPolicyDocumentException
 
     ModerationLabel.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
     ModerationLabel.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
@@ -1226,6 +1274,16 @@ module Aws::Rekognition
 
     ProjectNames.member = Shapes::ShapeRef.new(shape: ProjectName)
 
+    ProjectPolicies.member = Shapes::ShapeRef.new(shape: ProjectPolicy)
+
+    ProjectPolicy.add_member(:project_arn, Shapes::ShapeRef.new(shape: ProjectArn, location_name: "ProjectArn"))
+    ProjectPolicy.add_member(:policy_name, Shapes::ShapeRef.new(shape: ProjectPolicyName, location_name: "PolicyName"))
+    ProjectPolicy.add_member(:policy_revision_id, Shapes::ShapeRef.new(shape: ProjectPolicyRevisionId, location_name: "PolicyRevisionId"))
+    ProjectPolicy.add_member(:policy_document, Shapes::ShapeRef.new(shape: ProjectPolicyDocument, location_name: "PolicyDocument"))
+    ProjectPolicy.add_member(:creation_timestamp, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreationTimestamp"))
+    ProjectPolicy.add_member(:last_updated_timestamp, Shapes::ShapeRef.new(shape: DateTime, location_name: "LastUpdatedTimestamp"))
+    ProjectPolicy.struct_class = Types::ProjectPolicy
+
     ProjectVersionDescription.add_member(:project_version_arn, Shapes::ShapeRef.new(shape: ProjectVersionArn, location_name: "ProjectVersionArn"))
     ProjectVersionDescription.add_member(:creation_timestamp, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreationTimestamp"))
     ProjectVersionDescription.add_member(:min_inference_units, Shapes::ShapeRef.new(shape: InferenceUnits, location_name: "MinInferenceUnits"))
@@ -1240,6 +1298,7 @@ module Aws::Rekognition
     ProjectVersionDescription.add_member(:manifest_summary, Shapes::ShapeRef.new(shape: GroundTruthManifest, location_name: "ManifestSummary"))
     ProjectVersionDescription.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     ProjectVersionDescription.add_member(:max_inference_units, Shapes::ShapeRef.new(shape: InferenceUnits, location_name: "MaxInferenceUnits"))
+    ProjectVersionDescription.add_member(:source_project_version_arn, Shapes::ShapeRef.new(shape: ProjectVersionArn, location_name: "SourceProjectVersionArn"))
     ProjectVersionDescription.struct_class = Types::ProjectVersionDescription
 
     ProjectVersionDescriptions.member = Shapes::ShapeRef.new(shape: ProjectVersionDescription)
@@ -1271,6 +1330,15 @@ module Aws::Rekognition
     ProtectiveEquipmentTypes.member = Shapes::ShapeRef.new(shape: ProtectiveEquipmentType)
 
     ProvisionedThroughputExceededException.struct_class = Types::ProvisionedThroughputExceededException
+
+    PutProjectPolicyRequest.add_member(:project_arn, Shapes::ShapeRef.new(shape: ProjectArn, required: true, location_name: "ProjectArn"))
+    PutProjectPolicyRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: ProjectPolicyName, required: true, location_name: "PolicyName"))
+    PutProjectPolicyRequest.add_member(:policy_revision_id, Shapes::ShapeRef.new(shape: ProjectPolicyRevisionId, location_name: "PolicyRevisionId"))
+    PutProjectPolicyRequest.add_member(:policy_document, Shapes::ShapeRef.new(shape: ProjectPolicyDocument, required: true, location_name: "PolicyDocument"))
+    PutProjectPolicyRequest.struct_class = Types::PutProjectPolicyRequest
+
+    PutProjectPolicyResponse.add_member(:policy_revision_id, Shapes::ShapeRef.new(shape: ProjectPolicyRevisionId, location_name: "PolicyRevisionId"))
+    PutProjectPolicyResponse.struct_class = Types::PutProjectPolicyResponse
 
     Reasons.member = Shapes::ShapeRef.new(shape: Reason)
 
@@ -1660,6 +1728,23 @@ module Aws::Rekognition
         o.errors << Shapes::ShapeRef.new(shape: InvalidImageFormatException)
       end)
 
+      api.add_operation(:copy_project_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CopyProjectVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CopyProjectVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CopyProjectVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+      end)
+
       api.add_operation(:create_collection, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateCollection"
         o.http_method = "POST"
@@ -1797,6 +1882,21 @@ module Aws::Rekognition
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+      end)
+
+      api.add_operation(:delete_project_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteProjectPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteProjectPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteProjectPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPolicyRevisionIdException)
       end)
 
       api.add_operation(:delete_project_version, Seahorse::Model::Operation.new.tap do |o|
@@ -2315,6 +2415,27 @@ module Aws::Rekognition
         )
       end)
 
+      api.add_operation(:list_project_policies, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListProjectPolicies"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListProjectPoliciesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListProjectPoliciesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_stream_processors, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListStreamProcessors"
         o.http_method = "POST"
@@ -2347,6 +2468,25 @@ module Aws::Rekognition
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+      end)
+
+      api.add_operation(:put_project_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutProjectPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutProjectPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutProjectPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPolicyRevisionIdException)
+        o.errors << Shapes::ShapeRef.new(shape: MalformedPolicyDocumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
       api.add_operation(:recognize_celebrities, Seahorse::Model::Operation.new.tap do |o|
