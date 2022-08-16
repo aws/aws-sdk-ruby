@@ -25,8 +25,8 @@ module Aws
           rules: rule_set_json['rules']
         )
 
-        # TODO: should this be the service specific one?
-        subject = Provider.new(rule_set)
+        provider_class = sample_module.const_get(:EndpointProvider)
+        subject = provider_class.new(rule_set)
 
         params_class = sample_module.const_get(:EndpointParameters)
 

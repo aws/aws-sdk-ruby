@@ -6,5 +6,22 @@
 
 module {{module_name}}
   module Endpoints
+
+    {{#endpoint_classes}}
+    class {{name}}
+      def self.build(context)
+        # TODO: remove this hack
+        unless config.regional_endpoint
+          endpoint = config.endpoint.host
+        end
+        {{module_name}}::EndpointParameters.new(
+          {{#parameters}}
+          {{key}}: {{value}},
+          {{/parameters}}
+        )
+      end
+    end
+
+    {{/endpoint_classes}}
   end
 end

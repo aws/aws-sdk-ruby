@@ -18,10 +18,17 @@ module {{module_name}}
         {{module_name}}::EndpointProvider.new
       end
 
+      {{#endpoint_options}}
+      option(
+        :{{name}},
+        doc_type: '{{doc_type}}',
+        docstring: "{{docstring}}")
+
+      {{/endpoint_options}}
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          params = parameters_for_operation(context.operation_name)
+          params = parameters_for_operation(context)
           endpoint = context.config.endpoint_provider.resolve_endpoint(params)
           context[:endpoint] = endpoint
           @handler.call(context)
@@ -29,13 +36,17 @@ module {{module_name}}
 
         private
 
-        def parameters_for_operation(operation)
-          {{endpoint_parameters_switch_case}}
+        def parameters_for_operation(context)
+          case context.operation_name
+          {{#endpoint_classes}}
+          when :{{operation_name}}
+            {{module_name}}::Endpoints::{{class_name}}.build(context)
+          {{/endpoint_classes}}
+          end
         end
       end
 
-
-      def add_handlers(handlers, config)
+      def add_handlers(handlers, _config)
         handlers.add(Handler, step: :build, priority: 40)
       end
     end

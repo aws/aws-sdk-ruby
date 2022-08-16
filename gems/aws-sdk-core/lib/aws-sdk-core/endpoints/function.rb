@@ -36,9 +36,9 @@ module Aws
           Matchers.attr(*args)
         when 'substring'
           Matchers.substring(*args)
-        when 'aws.partition', 'partition'
+        when 'aws.partition'
           Matchers.aws_partition(*args)
-        when 'aws.parseArn', 'parseArn'
+        when 'aws.parseArn'
           Matchers.aws_parse_arn(*args)
         when 'stringEquals'
           Matchers.string_equals?(*args)

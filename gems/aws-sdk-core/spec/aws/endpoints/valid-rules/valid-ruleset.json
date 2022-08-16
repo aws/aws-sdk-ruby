@@ -53,8 +53,7 @@
                 {
                   "ref": "PropertyTwo"
                 }
-              ],
-              "assign": "PropertyTwo"
+              ]
             }
           ],
           "endpoint": {

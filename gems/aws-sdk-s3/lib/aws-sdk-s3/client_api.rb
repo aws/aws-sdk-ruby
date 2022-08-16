@@ -1274,7 +1274,7 @@ module Aws::S3
     GetObjectAttributesParts.add_member(:parts, Shapes::ShapeRef.new(shape: PartsList, location_name: "Part"))
     GetObjectAttributesParts.struct_class = Types::GetObjectAttributesParts
 
-    GetObjectAttributesRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
+    GetObjectAttributesRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket", metadata: {"contextParam"=>{"name"=>"Bucket"}}))
     GetObjectAttributesRequest.add_member(:key, Shapes::ShapeRef.new(shape: ObjectKey, required: true, location: "uri", location_name: "Key"))
     GetObjectAttributesRequest.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location: "querystring", location_name: "versionId"))
     GetObjectAttributesRequest.add_member(:max_parts, Shapes::ShapeRef.new(shape: MaxParts, location: "header", location_name: "x-amz-max-parts"))

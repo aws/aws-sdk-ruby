@@ -22,9 +22,6 @@ module AwsSdkCodeGenerator
       plugins.update(options[:async_client] ? default_async_plugins : default_plugins)
       plugins.update(signature_plugins(options.fetch(:signature_version)))
       plugins.update(protocol_plugins(options.fetch(:protocol)))
-      # plugins.update(
-      #   endpoints_plugin(options.fetch(:module_name), options.fetch(:gem_name))
-      # )
       plugins.update(options.fetch(:add_plugins))
       options.fetch(:remove_plugins).each do |plugin_name|
         plugins.delete(plugin_name)
@@ -108,13 +105,6 @@ module AwsSdkCodeGenerator
       else
         {}
       end
-    end
-
-    def endpoints_plugin(module_name, gem_name)
-      {
-        "#{module_name}::Plugins::Endpoints" =>
-          "gems/#{gem_name}/lib/#{gem_name}/plugins/endpoints.rb"
-      }
     end
 
     def core_plugins

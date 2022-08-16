@@ -18,19 +18,19 @@ module Aws
 
       def self.rules_from_json(rules_json)
         rules_json.each.with_object([]) do |rule, rules|
-          if rule['type'] == 'endpoint' || rule['endpoint']
+          if rule['type'] == 'endpoint'
             rules << EndpointRule.new(
               conditions: rule['conditions'],
               endpoint: rule['endpoint'],
               documentation: rule['documentation']
             )
-          elsif rule['type'] == 'error' || rule['error']
+          elsif rule['type'] == 'error'
             rules << ErrorRule.new(
               conditions: rule['conditions'],
               error: rule['error'],
               documentation: rule['documentation']
             )
-          elsif rule['type'] == 'tree' || rule['rules']
+          elsif rule['type'] == 'tree'
             rules << TreeRule.new(
               conditions: rule['conditions'],
               rules: rule['rules'],

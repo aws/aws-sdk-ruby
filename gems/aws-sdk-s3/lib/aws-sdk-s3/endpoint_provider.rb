@@ -11,10 +11,10 @@ module Aws::S3
   class EndpointProvider
     def initialize(rule_set = nil)
       rule_set ||= Aws::Endpoints::RuleSet.new(
-        version: @@default_rules['version'],
-        service_id: @@default_rules['serviceId'],
-        parameters: @@default_rules['parameters'],
-        rules: @@default_rules['rules']
+        version: @default_rules['version'],
+        service_id: @default_rules['serviceId'],
+        parameters: @default_rules['parameters'],
+        rules: @default_rules['rules']
       )
       @provider = Aws::Endpoints::Provider.new(rule_set)
     end
@@ -23,9 +23,8 @@ module Aws::S3
       @provider.resolve_endpoint(parameters)
     end
 
-    @@default_rules = Aws::Json.load_file(
-      File.expand_path('../../../endpoint-rule-set.json', __FILE__)
+    @default_rules = Aws::Json.load_file(
+      File.expand_path('../../endpoint-rule-set.json', __dir__)
     )
-
   end
 end
