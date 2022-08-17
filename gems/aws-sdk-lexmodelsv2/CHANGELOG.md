@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2022-08-17)
+------------------
+
+* Feature - This release introduces support for enhanced conversation design with the ability to define custom conversation flows with conditional branching and new bot responses.
+
 1.24.0 (2022-07-05)
 ------------------
 

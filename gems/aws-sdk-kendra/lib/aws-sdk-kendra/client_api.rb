@@ -490,6 +490,8 @@ module Aws::Kendra
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TeamId = Shapes::StringShape.new(name: 'TeamId')
+    Template = Shapes::DocumentShape.new(name: 'Template', document: true)
+    TemplateConfiguration = Shapes::StructureShape.new(name: 'TemplateConfiguration')
     TenantDomain = Shapes::StringShape.new(name: 'TenantDomain')
     TextDocumentStatistics = Shapes::StructureShape.new(name: 'TextDocumentStatistics')
     TextWithHighlights = Shapes::StructureShape.new(name: 'TextWithHighlights')
@@ -740,6 +742,7 @@ module Aws::Kendra
     ConfluenceConfiguration.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: DataSourceVpcConfiguration, location_name: "VpcConfiguration"))
     ConfluenceConfiguration.add_member(:inclusion_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "InclusionPatterns"))
     ConfluenceConfiguration.add_member(:exclusion_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "ExclusionPatterns"))
+    ConfluenceConfiguration.add_member(:proxy_configuration, Shapes::ShapeRef.new(shape: ProxyConfiguration, location_name: "ProxyConfiguration"))
     ConfluenceConfiguration.struct_class = Types::ConfluenceConfiguration
 
     ConfluencePageConfiguration.add_member(:page_field_mappings, Shapes::ShapeRef.new(shape: ConfluencePageFieldMappingsList, location_name: "PageFieldMappings"))
@@ -803,6 +806,7 @@ module Aws::Kendra
     CreateDataSourceRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
     CreateDataSourceRequest.add_member(:type, Shapes::ShapeRef.new(shape: DataSourceType, required: true, location_name: "Type"))
     CreateDataSourceRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: DataSourceConfiguration, location_name: "Configuration"))
+    CreateDataSourceRequest.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: DataSourceVpcConfiguration, location_name: "VpcConfiguration"))
     CreateDataSourceRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateDataSourceRequest.add_member(:schedule, Shapes::ShapeRef.new(shape: ScanSchedule, location_name: "Schedule"))
     CreateDataSourceRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
@@ -902,6 +906,7 @@ module Aws::Kendra
     DataSourceConfiguration.add_member(:jira_configuration, Shapes::ShapeRef.new(shape: JiraConfiguration, location_name: "JiraConfiguration"))
     DataSourceConfiguration.add_member(:git_hub_configuration, Shapes::ShapeRef.new(shape: GitHubConfiguration, location_name: "GitHubConfiguration"))
     DataSourceConfiguration.add_member(:alfresco_configuration, Shapes::ShapeRef.new(shape: AlfrescoConfiguration, location_name: "AlfrescoConfiguration"))
+    DataSourceConfiguration.add_member(:template_configuration, Shapes::ShapeRef.new(shape: TemplateConfiguration, location_name: "TemplateConfiguration"))
     DataSourceConfiguration.struct_class = Types::DataSourceConfiguration
 
     DataSourceGroup.add_member(:group_id, Shapes::ShapeRef.new(shape: PrincipalName, required: true, location_name: "GroupId"))
@@ -1024,6 +1029,7 @@ module Aws::Kendra
     DescribeDataSourceResponse.add_member(:name, Shapes::ShapeRef.new(shape: DataSourceName, location_name: "Name"))
     DescribeDataSourceResponse.add_member(:type, Shapes::ShapeRef.new(shape: DataSourceType, location_name: "Type"))
     DescribeDataSourceResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: DataSourceConfiguration, location_name: "Configuration"))
+    DescribeDataSourceResponse.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: DataSourceVpcConfiguration, location_name: "VpcConfiguration"))
     DescribeDataSourceResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
     DescribeDataSourceResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
     DescribeDataSourceResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
@@ -1903,6 +1909,7 @@ module Aws::Kendra
     SharePointConfiguration.add_member(:disable_local_groups, Shapes::ShapeRef.new(shape: Boolean, location_name: "DisableLocalGroups"))
     SharePointConfiguration.add_member(:ssl_certificate_s3_path, Shapes::ShapeRef.new(shape: S3Path, location_name: "SslCertificateS3Path"))
     SharePointConfiguration.add_member(:authentication_type, Shapes::ShapeRef.new(shape: SharePointOnlineAuthenticationType, location_name: "AuthenticationType"))
+    SharePointConfiguration.add_member(:proxy_configuration, Shapes::ShapeRef.new(shape: ProxyConfiguration, location_name: "ProxyConfiguration"))
     SharePointConfiguration.struct_class = Types::SharePointConfiguration
 
     SharePointUrlList.member = Shapes::ShapeRef.new(shape: Url)
@@ -2012,6 +2019,9 @@ module Aws::Kendra
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
+    TemplateConfiguration.add_member(:template, Shapes::ShapeRef.new(shape: Template, location_name: "Template"))
+    TemplateConfiguration.struct_class = Types::TemplateConfiguration
+
     TextDocumentStatistics.add_member(:indexed_text_documents_count, Shapes::ShapeRef.new(shape: IndexedTextDocumentsCount, required: true, location_name: "IndexedTextDocumentsCount"))
     TextDocumentStatistics.add_member(:indexed_text_bytes, Shapes::ShapeRef.new(shape: IndexedTextBytes, required: true, location_name: "IndexedTextBytes"))
     TextDocumentStatistics.struct_class = Types::TextDocumentStatistics
@@ -2056,6 +2066,7 @@ module Aws::Kendra
     UpdateDataSourceRequest.add_member(:name, Shapes::ShapeRef.new(shape: DataSourceName, location_name: "Name"))
     UpdateDataSourceRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
     UpdateDataSourceRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: DataSourceConfiguration, location_name: "Configuration"))
+    UpdateDataSourceRequest.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: DataSourceVpcConfiguration, location_name: "VpcConfiguration"))
     UpdateDataSourceRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     UpdateDataSourceRequest.add_member(:schedule, Shapes::ShapeRef.new(shape: ScanSchedule, location_name: "Schedule"))
     UpdateDataSourceRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))

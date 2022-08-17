@@ -1283,6 +1283,357 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # Provides an expression that evaluates to true or false.
+    #
+    # @note When making an API call, you may pass Condition
+    #   data as a hash:
+    #
+    #       {
+    #         expression_string: "ConditionExpression", # required
+    #       }
+    #
+    # @!attribute [rw] expression_string
+    #   The expression string that is evaluated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/Condition AWS API Documentation
+    #
+    class Condition < Struct.new(
+      :expression_string)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A set of actions that Amazon Lex should run if the condition is
+    # matched.
+    #
+    # @note When making an API call, you may pass ConditionalBranch
+    #   data as a hash:
+    #
+    #       {
+    #         name: "Name", # required
+    #         condition: { # required
+    #           expression_string: "ConditionExpression", # required
+    #         },
+    #         next_step: { # required
+    #           dialog_action: {
+    #             type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #             slot_to_elicit: "Name",
+    #             suppress_next_message: false,
+    #           },
+    #           intent: {
+    #             name: "Name",
+    #             slots: {
+    #               "Name" => {
+    #                 shape: "Scalar", # accepts Scalar, List
+    #                 value: {
+    #                   interpreted_value: "NonEmptyString",
+    #                 },
+    #                 values: [
+    #                   {
+    #                     # recursive SlotValueOverride
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           },
+    #           session_attributes: {
+    #             "NonEmptyString" => "String",
+    #           },
+    #         },
+    #         response: {
+    #           message_groups: [ # required
+    #             {
+    #               message: { # required
+    #                 plain_text_message: {
+    #                   value: "PlainTextMessageValue", # required
+    #                 },
+    #                 custom_payload: {
+    #                   value: "CustomPayloadValue", # required
+    #                 },
+    #                 ssml_message: {
+    #                   value: "SSMLMessageValue", # required
+    #                 },
+    #                 image_response_card: {
+    #                   title: "AttachmentTitle", # required
+    #                   subtitle: "AttachmentTitle",
+    #                   image_url: "AttachmentUrl",
+    #                   buttons: [
+    #                     {
+    #                       text: "ButtonText", # required
+    #                       value: "ButtonValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #               variations: [
+    #                 {
+    #                   plain_text_message: {
+    #                     value: "PlainTextMessageValue", # required
+    #                   },
+    #                   custom_payload: {
+    #                     value: "CustomPayloadValue", # required
+    #                   },
+    #                   ssml_message: {
+    #                     value: "SSMLMessageValue", # required
+    #                   },
+    #                   image_response_card: {
+    #                     title: "AttachmentTitle", # required
+    #                     subtitle: "AttachmentTitle",
+    #                     image_url: "AttachmentUrl",
+    #                     buttons: [
+    #                       {
+    #                         text: "ButtonText", # required
+    #                         value: "ButtonValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #           allow_interrupt: false,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the branch.
+    #   @return [String]
+    #
+    # @!attribute [rw] condition
+    #   Contains the expression to evaluate. If the condition is true, the
+    #   branch's actions are taken.
+    #   @return [Types::Condition]
+    #
+    # @!attribute [rw] next_step
+    #   The next step in the conversation.
+    #   @return [Types::DialogState]
+    #
+    # @!attribute [rw] response
+    #   Specifies a list of message groups that Amazon Lex uses to respond
+    #   the user input.
+    #   @return [Types::ResponseSpecification]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ConditionalBranch AWS API Documentation
+    #
+    class ConditionalBranch < Struct.new(
+      :name,
+      :condition,
+      :next_step,
+      :response)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides a list of conditional branches. Branches are evaluated in the
+    # order that they are entered in the list. The first branch with a
+    # condition that evaluates to true is executed. The last branch in the
+    # list is the default branch. The default branch should not have any
+    # condition expression. The default branch is executed if no other
+    # branch has a matching condition.
+    #
+    # @note When making an API call, you may pass ConditionalSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         active: false, # required
+    #         conditional_branches: [ # required
+    #           {
+    #             name: "Name", # required
+    #             condition: { # required
+    #               expression_string: "ConditionExpression", # required
+    #             },
+    #             next_step: { # required
+    #               dialog_action: {
+    #                 type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                 slot_to_elicit: "Name",
+    #                 suppress_next_message: false,
+    #               },
+    #               intent: {
+    #                 name: "Name",
+    #                 slots: {
+    #                   "Name" => {
+    #                     shape: "Scalar", # accepts Scalar, List
+    #                     value: {
+    #                       interpreted_value: "NonEmptyString",
+    #                     },
+    #                     values: [
+    #                       {
+    #                         # recursive SlotValueOverride
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               },
+    #               session_attributes: {
+    #                 "NonEmptyString" => "String",
+    #               },
+    #             },
+    #             response: {
+    #               message_groups: [ # required
+    #                 {
+    #                   message: { # required
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   variations: [
+    #                     {
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #               allow_interrupt: false,
+    #             },
+    #           },
+    #         ],
+    #         default_branch: { # required
+    #           next_step: {
+    #             dialog_action: {
+    #               type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #               slot_to_elicit: "Name",
+    #               suppress_next_message: false,
+    #             },
+    #             intent: {
+    #               name: "Name",
+    #               slots: {
+    #                 "Name" => {
+    #                   shape: "Scalar", # accepts Scalar, List
+    #                   value: {
+    #                     interpreted_value: "NonEmptyString",
+    #                   },
+    #                   values: [
+    #                     {
+    #                       # recursive SlotValueOverride
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             },
+    #             session_attributes: {
+    #               "NonEmptyString" => "String",
+    #             },
+    #           },
+    #           response: {
+    #             message_groups: [ # required
+    #               {
+    #                 message: { # required
+    #                   plain_text_message: {
+    #                     value: "PlainTextMessageValue", # required
+    #                   },
+    #                   custom_payload: {
+    #                     value: "CustomPayloadValue", # required
+    #                   },
+    #                   ssml_message: {
+    #                     value: "SSMLMessageValue", # required
+    #                   },
+    #                   image_response_card: {
+    #                     title: "AttachmentTitle", # required
+    #                     subtitle: "AttachmentTitle",
+    #                     image_url: "AttachmentUrl",
+    #                     buttons: [
+    #                       {
+    #                         text: "ButtonText", # required
+    #                         value: "ButtonValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #                 variations: [
+    #                   {
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #             allow_interrupt: false,
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] active
+    #   Determines whether a conditional branch is active. When `active` is
+    #   false, the conditions are not evaluated.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] conditional_branches
+    #   A list of conditional branches. A conditional branch is made up of a
+    #   condition, a response and a next step. The response and next step
+    #   are executed when the condition is true.
+    #   @return [Array<Types::ConditionalBranch>]
+    #
+    # @!attribute [rw] default_branch
+    #   The conditional branch that should be followed when the conditions
+    #   for other branches are not satisfied. A conditional branch is made
+    #   up of a condition, a response and a next step.
+    #   @return [Types::DefaultConditionalBranch]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ConditionalSpecification AWS API Documentation
+    #
+    class ConditionalSpecification < Struct.new(
+      :active,
+      :conditional_branches,
+      :default_branch)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The action that you tried to perform couldn't be completed because
     # the resource is in a conflicting state. For example, deleting a bot
     # that is in the CREATING state. Try your request again.
@@ -2158,6 +2509,597 @@ module Aws::LexModelsV2
     #               ],
     #               allow_interrupt: false,
     #             },
+    #             success_next_step: {
+    #               dialog_action: {
+    #                 type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                 slot_to_elicit: "Name",
+    #                 suppress_next_message: false,
+    #               },
+    #               intent: {
+    #                 name: "Name",
+    #                 slots: {
+    #                   "Name" => {
+    #                     shape: "Scalar", # accepts Scalar, List
+    #                     value: {
+    #                       interpreted_value: "NonEmptyString",
+    #                     },
+    #                     values: [
+    #                       {
+    #                         # recursive SlotValueOverride
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               },
+    #               session_attributes: {
+    #                 "NonEmptyString" => "String",
+    #               },
+    #             },
+    #             success_conditional: {
+    #               active: false, # required
+    #               conditional_branches: [ # required
+    #                 {
+    #                   name: "Name", # required
+    #                   condition: { # required
+    #                     expression_string: "ConditionExpression", # required
+    #                   },
+    #                   next_step: { # required
+    #                     dialog_action: {
+    #                       type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                       slot_to_elicit: "Name",
+    #                       suppress_next_message: false,
+    #                     },
+    #                     intent: {
+    #                       name: "Name",
+    #                       slots: {
+    #                         "Name" => {
+    #                           shape: "Scalar", # accepts Scalar, List
+    #                           value: {
+    #                             interpreted_value: "NonEmptyString",
+    #                           },
+    #                           values: [
+    #                             {
+    #                               # recursive SlotValueOverride
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
+    #                     session_attributes: {
+    #                       "NonEmptyString" => "String",
+    #                     },
+    #                   },
+    #                   response: {
+    #                     message_groups: [ # required
+    #                       {
+    #                         message: { # required
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                         variations: [
+    #                           {
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                         ],
+    #                       },
+    #                     ],
+    #                     allow_interrupt: false,
+    #                   },
+    #                 },
+    #               ],
+    #               default_branch: { # required
+    #                 next_step: {
+    #                   dialog_action: {
+    #                     type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                     slot_to_elicit: "Name",
+    #                     suppress_next_message: false,
+    #                   },
+    #                   intent: {
+    #                     name: "Name",
+    #                     slots: {
+    #                       "Name" => {
+    #                         shape: "Scalar", # accepts Scalar, List
+    #                         value: {
+    #                           interpreted_value: "NonEmptyString",
+    #                         },
+    #                         values: [
+    #                           {
+    #                             # recursive SlotValueOverride
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                   session_attributes: {
+    #                     "NonEmptyString" => "String",
+    #                   },
+    #                 },
+    #                 response: {
+    #                   message_groups: [ # required
+    #                     {
+    #                       message: { # required
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       variations: [
+    #                         {
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                   allow_interrupt: false,
+    #                 },
+    #               },
+    #             },
+    #             failure_next_step: {
+    #               dialog_action: {
+    #                 type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                 slot_to_elicit: "Name",
+    #                 suppress_next_message: false,
+    #               },
+    #               intent: {
+    #                 name: "Name",
+    #                 slots: {
+    #                   "Name" => {
+    #                     shape: "Scalar", # accepts Scalar, List
+    #                     value: {
+    #                       interpreted_value: "NonEmptyString",
+    #                     },
+    #                     values: [
+    #                       {
+    #                         # recursive SlotValueOverride
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               },
+    #               session_attributes: {
+    #                 "NonEmptyString" => "String",
+    #               },
+    #             },
+    #             failure_conditional: {
+    #               active: false, # required
+    #               conditional_branches: [ # required
+    #                 {
+    #                   name: "Name", # required
+    #                   condition: { # required
+    #                     expression_string: "ConditionExpression", # required
+    #                   },
+    #                   next_step: { # required
+    #                     dialog_action: {
+    #                       type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                       slot_to_elicit: "Name",
+    #                       suppress_next_message: false,
+    #                     },
+    #                     intent: {
+    #                       name: "Name",
+    #                       slots: {
+    #                         "Name" => {
+    #                           shape: "Scalar", # accepts Scalar, List
+    #                           value: {
+    #                             interpreted_value: "NonEmptyString",
+    #                           },
+    #                           values: [
+    #                             {
+    #                               # recursive SlotValueOverride
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
+    #                     session_attributes: {
+    #                       "NonEmptyString" => "String",
+    #                     },
+    #                   },
+    #                   response: {
+    #                     message_groups: [ # required
+    #                       {
+    #                         message: { # required
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                         variations: [
+    #                           {
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                         ],
+    #                       },
+    #                     ],
+    #                     allow_interrupt: false,
+    #                   },
+    #                 },
+    #               ],
+    #               default_branch: { # required
+    #                 next_step: {
+    #                   dialog_action: {
+    #                     type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                     slot_to_elicit: "Name",
+    #                     suppress_next_message: false,
+    #                   },
+    #                   intent: {
+    #                     name: "Name",
+    #                     slots: {
+    #                       "Name" => {
+    #                         shape: "Scalar", # accepts Scalar, List
+    #                         value: {
+    #                           interpreted_value: "NonEmptyString",
+    #                         },
+    #                         values: [
+    #                           {
+    #                             # recursive SlotValueOverride
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                   session_attributes: {
+    #                     "NonEmptyString" => "String",
+    #                   },
+    #                 },
+    #                 response: {
+    #                   message_groups: [ # required
+    #                     {
+    #                       message: { # required
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       variations: [
+    #                         {
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                   allow_interrupt: false,
+    #                 },
+    #               },
+    #             },
+    #             timeout_next_step: {
+    #               dialog_action: {
+    #                 type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                 slot_to_elicit: "Name",
+    #                 suppress_next_message: false,
+    #               },
+    #               intent: {
+    #                 name: "Name",
+    #                 slots: {
+    #                   "Name" => {
+    #                     shape: "Scalar", # accepts Scalar, List
+    #                     value: {
+    #                       interpreted_value: "NonEmptyString",
+    #                     },
+    #                     values: [
+    #                       {
+    #                         # recursive SlotValueOverride
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               },
+    #               session_attributes: {
+    #                 "NonEmptyString" => "String",
+    #               },
+    #             },
+    #             timeout_conditional: {
+    #               active: false, # required
+    #               conditional_branches: [ # required
+    #                 {
+    #                   name: "Name", # required
+    #                   condition: { # required
+    #                     expression_string: "ConditionExpression", # required
+    #                   },
+    #                   next_step: { # required
+    #                     dialog_action: {
+    #                       type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                       slot_to_elicit: "Name",
+    #                       suppress_next_message: false,
+    #                     },
+    #                     intent: {
+    #                       name: "Name",
+    #                       slots: {
+    #                         "Name" => {
+    #                           shape: "Scalar", # accepts Scalar, List
+    #                           value: {
+    #                             interpreted_value: "NonEmptyString",
+    #                           },
+    #                           values: [
+    #                             {
+    #                               # recursive SlotValueOverride
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
+    #                     session_attributes: {
+    #                       "NonEmptyString" => "String",
+    #                     },
+    #                   },
+    #                   response: {
+    #                     message_groups: [ # required
+    #                       {
+    #                         message: { # required
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                         variations: [
+    #                           {
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                         ],
+    #                       },
+    #                     ],
+    #                     allow_interrupt: false,
+    #                   },
+    #                 },
+    #               ],
+    #               default_branch: { # required
+    #                 next_step: {
+    #                   dialog_action: {
+    #                     type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                     slot_to_elicit: "Name",
+    #                     suppress_next_message: false,
+    #                   },
+    #                   intent: {
+    #                     name: "Name",
+    #                     slots: {
+    #                       "Name" => {
+    #                         shape: "Scalar", # accepts Scalar, List
+    #                         value: {
+    #                           interpreted_value: "NonEmptyString",
+    #                         },
+    #                         values: [
+    #                           {
+    #                             # recursive SlotValueOverride
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                   session_attributes: {
+    #                     "NonEmptyString" => "String",
+    #                   },
+    #                 },
+    #                 response: {
+    #                   message_groups: [ # required
+    #                     {
+    #                       message: { # required
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       variations: [
+    #                         {
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                   allow_interrupt: false,
+    #                 },
+    #               },
+    #             },
     #           },
     #           fulfillment_updates_specification: {
     #             active: false, # required
@@ -2271,6 +3213,7 @@ module Aws::LexModelsV2
     #             },
     #             timeout_in_seconds: 1,
     #           },
+    #           active: false,
     #         },
     #         intent_confirmation_setting: {
     #           prompt_specification: { # required
@@ -2328,7 +3271,7 @@ module Aws::LexModelsV2
     #             allow_interrupt: false,
     #             message_selection_strategy: "Random", # accepts Random, Ordered
     #           },
-    #           declination_response: { # required
+    #           declination_response: {
     #             message_groups: [ # required
     #               {
     #                 message: { # required
@@ -2382,9 +3325,1467 @@ module Aws::LexModelsV2
     #             allow_interrupt: false,
     #           },
     #           active: false,
+    #           confirmation_response: {
+    #             message_groups: [ # required
+    #               {
+    #                 message: { # required
+    #                   plain_text_message: {
+    #                     value: "PlainTextMessageValue", # required
+    #                   },
+    #                   custom_payload: {
+    #                     value: "CustomPayloadValue", # required
+    #                   },
+    #                   ssml_message: {
+    #                     value: "SSMLMessageValue", # required
+    #                   },
+    #                   image_response_card: {
+    #                     title: "AttachmentTitle", # required
+    #                     subtitle: "AttachmentTitle",
+    #                     image_url: "AttachmentUrl",
+    #                     buttons: [
+    #                       {
+    #                         text: "ButtonText", # required
+    #                         value: "ButtonValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #                 variations: [
+    #                   {
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #             allow_interrupt: false,
+    #           },
+    #           confirmation_next_step: {
+    #             dialog_action: {
+    #               type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #               slot_to_elicit: "Name",
+    #               suppress_next_message: false,
+    #             },
+    #             intent: {
+    #               name: "Name",
+    #               slots: {
+    #                 "Name" => {
+    #                   shape: "Scalar", # accepts Scalar, List
+    #                   value: {
+    #                     interpreted_value: "NonEmptyString",
+    #                   },
+    #                   values: [
+    #                     {
+    #                       # recursive SlotValueOverride
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             },
+    #             session_attributes: {
+    #               "NonEmptyString" => "String",
+    #             },
+    #           },
+    #           confirmation_conditional: {
+    #             active: false, # required
+    #             conditional_branches: [ # required
+    #               {
+    #                 name: "Name", # required
+    #                 condition: { # required
+    #                   expression_string: "ConditionExpression", # required
+    #                 },
+    #                 next_step: { # required
+    #                   dialog_action: {
+    #                     type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                     slot_to_elicit: "Name",
+    #                     suppress_next_message: false,
+    #                   },
+    #                   intent: {
+    #                     name: "Name",
+    #                     slots: {
+    #                       "Name" => {
+    #                         shape: "Scalar", # accepts Scalar, List
+    #                         value: {
+    #                           interpreted_value: "NonEmptyString",
+    #                         },
+    #                         values: [
+    #                           {
+    #                             # recursive SlotValueOverride
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                   session_attributes: {
+    #                     "NonEmptyString" => "String",
+    #                   },
+    #                 },
+    #                 response: {
+    #                   message_groups: [ # required
+    #                     {
+    #                       message: { # required
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       variations: [
+    #                         {
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                   allow_interrupt: false,
+    #                 },
+    #               },
+    #             ],
+    #             default_branch: { # required
+    #               next_step: {
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #             },
+    #           },
+    #           declination_next_step: {
+    #             dialog_action: {
+    #               type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #               slot_to_elicit: "Name",
+    #               suppress_next_message: false,
+    #             },
+    #             intent: {
+    #               name: "Name",
+    #               slots: {
+    #                 "Name" => {
+    #                   shape: "Scalar", # accepts Scalar, List
+    #                   value: {
+    #                     interpreted_value: "NonEmptyString",
+    #                   },
+    #                   values: [
+    #                     {
+    #                       # recursive SlotValueOverride
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             },
+    #             session_attributes: {
+    #               "NonEmptyString" => "String",
+    #             },
+    #           },
+    #           declination_conditional: {
+    #             active: false, # required
+    #             conditional_branches: [ # required
+    #               {
+    #                 name: "Name", # required
+    #                 condition: { # required
+    #                   expression_string: "ConditionExpression", # required
+    #                 },
+    #                 next_step: { # required
+    #                   dialog_action: {
+    #                     type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                     slot_to_elicit: "Name",
+    #                     suppress_next_message: false,
+    #                   },
+    #                   intent: {
+    #                     name: "Name",
+    #                     slots: {
+    #                       "Name" => {
+    #                         shape: "Scalar", # accepts Scalar, List
+    #                         value: {
+    #                           interpreted_value: "NonEmptyString",
+    #                         },
+    #                         values: [
+    #                           {
+    #                             # recursive SlotValueOverride
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                   session_attributes: {
+    #                     "NonEmptyString" => "String",
+    #                   },
+    #                 },
+    #                 response: {
+    #                   message_groups: [ # required
+    #                     {
+    #                       message: { # required
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       variations: [
+    #                         {
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                   allow_interrupt: false,
+    #                 },
+    #               },
+    #             ],
+    #             default_branch: { # required
+    #               next_step: {
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #             },
+    #           },
+    #           failure_response: {
+    #             message_groups: [ # required
+    #               {
+    #                 message: { # required
+    #                   plain_text_message: {
+    #                     value: "PlainTextMessageValue", # required
+    #                   },
+    #                   custom_payload: {
+    #                     value: "CustomPayloadValue", # required
+    #                   },
+    #                   ssml_message: {
+    #                     value: "SSMLMessageValue", # required
+    #                   },
+    #                   image_response_card: {
+    #                     title: "AttachmentTitle", # required
+    #                     subtitle: "AttachmentTitle",
+    #                     image_url: "AttachmentUrl",
+    #                     buttons: [
+    #                       {
+    #                         text: "ButtonText", # required
+    #                         value: "ButtonValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #                 variations: [
+    #                   {
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #             allow_interrupt: false,
+    #           },
+    #           failure_next_step: {
+    #             dialog_action: {
+    #               type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #               slot_to_elicit: "Name",
+    #               suppress_next_message: false,
+    #             },
+    #             intent: {
+    #               name: "Name",
+    #               slots: {
+    #                 "Name" => {
+    #                   shape: "Scalar", # accepts Scalar, List
+    #                   value: {
+    #                     interpreted_value: "NonEmptyString",
+    #                   },
+    #                   values: [
+    #                     {
+    #                       # recursive SlotValueOverride
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             },
+    #             session_attributes: {
+    #               "NonEmptyString" => "String",
+    #             },
+    #           },
+    #           failure_conditional: {
+    #             active: false, # required
+    #             conditional_branches: [ # required
+    #               {
+    #                 name: "Name", # required
+    #                 condition: { # required
+    #                   expression_string: "ConditionExpression", # required
+    #                 },
+    #                 next_step: { # required
+    #                   dialog_action: {
+    #                     type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                     slot_to_elicit: "Name",
+    #                     suppress_next_message: false,
+    #                   },
+    #                   intent: {
+    #                     name: "Name",
+    #                     slots: {
+    #                       "Name" => {
+    #                         shape: "Scalar", # accepts Scalar, List
+    #                         value: {
+    #                           interpreted_value: "NonEmptyString",
+    #                         },
+    #                         values: [
+    #                           {
+    #                             # recursive SlotValueOverride
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                   session_attributes: {
+    #                     "NonEmptyString" => "String",
+    #                   },
+    #                 },
+    #                 response: {
+    #                   message_groups: [ # required
+    #                     {
+    #                       message: { # required
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       variations: [
+    #                         {
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                   allow_interrupt: false,
+    #                 },
+    #               },
+    #             ],
+    #             default_branch: { # required
+    #               next_step: {
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #             },
+    #           },
+    #           code_hook: {
+    #             enable_code_hook_invocation: false, # required
+    #             active: false, # required
+    #             invocation_label: "Name",
+    #             post_code_hook_specification: { # required
+    #               success_response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #               success_next_step: {
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               success_conditional: {
+    #                 active: false, # required
+    #                 conditional_branches: [ # required
+    #                   {
+    #                     name: "Name", # required
+    #                     condition: { # required
+    #                       expression_string: "ConditionExpression", # required
+    #                     },
+    #                     next_step: { # required
+    #                       dialog_action: {
+    #                         type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                         slot_to_elicit: "Name",
+    #                         suppress_next_message: false,
+    #                       },
+    #                       intent: {
+    #                         name: "Name",
+    #                         slots: {
+    #                           "Name" => {
+    #                             shape: "Scalar", # accepts Scalar, List
+    #                             value: {
+    #                               interpreted_value: "NonEmptyString",
+    #                             },
+    #                             values: [
+    #                               {
+    #                                 # recursive SlotValueOverride
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       },
+    #                       session_attributes: {
+    #                         "NonEmptyString" => "String",
+    #                       },
+    #                     },
+    #                     response: {
+    #                       message_groups: [ # required
+    #                         {
+    #                           message: { # required
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                           variations: [
+    #                             {
+    #                               plain_text_message: {
+    #                                 value: "PlainTextMessageValue", # required
+    #                               },
+    #                               custom_payload: {
+    #                                 value: "CustomPayloadValue", # required
+    #                               },
+    #                               ssml_message: {
+    #                                 value: "SSMLMessageValue", # required
+    #                               },
+    #                               image_response_card: {
+    #                                 title: "AttachmentTitle", # required
+    #                                 subtitle: "AttachmentTitle",
+    #                                 image_url: "AttachmentUrl",
+    #                                 buttons: [
+    #                                   {
+    #                                     text: "ButtonText", # required
+    #                                     value: "ButtonValue", # required
+    #                                   },
+    #                                 ],
+    #                               },
+    #                             },
+    #                           ],
+    #                         },
+    #                       ],
+    #                       allow_interrupt: false,
+    #                     },
+    #                   },
+    #                 ],
+    #                 default_branch: { # required
+    #                   next_step: {
+    #                     dialog_action: {
+    #                       type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                       slot_to_elicit: "Name",
+    #                       suppress_next_message: false,
+    #                     },
+    #                     intent: {
+    #                       name: "Name",
+    #                       slots: {
+    #                         "Name" => {
+    #                           shape: "Scalar", # accepts Scalar, List
+    #                           value: {
+    #                             interpreted_value: "NonEmptyString",
+    #                           },
+    #                           values: [
+    #                             {
+    #                               # recursive SlotValueOverride
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
+    #                     session_attributes: {
+    #                       "NonEmptyString" => "String",
+    #                     },
+    #                   },
+    #                   response: {
+    #                     message_groups: [ # required
+    #                       {
+    #                         message: { # required
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                         variations: [
+    #                           {
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                         ],
+    #                       },
+    #                     ],
+    #                     allow_interrupt: false,
+    #                   },
+    #                 },
+    #               },
+    #               failure_response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #               failure_next_step: {
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               failure_conditional: {
+    #                 active: false, # required
+    #                 conditional_branches: [ # required
+    #                   {
+    #                     name: "Name", # required
+    #                     condition: { # required
+    #                       expression_string: "ConditionExpression", # required
+    #                     },
+    #                     next_step: { # required
+    #                       dialog_action: {
+    #                         type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                         slot_to_elicit: "Name",
+    #                         suppress_next_message: false,
+    #                       },
+    #                       intent: {
+    #                         name: "Name",
+    #                         slots: {
+    #                           "Name" => {
+    #                             shape: "Scalar", # accepts Scalar, List
+    #                             value: {
+    #                               interpreted_value: "NonEmptyString",
+    #                             },
+    #                             values: [
+    #                               {
+    #                                 # recursive SlotValueOverride
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       },
+    #                       session_attributes: {
+    #                         "NonEmptyString" => "String",
+    #                       },
+    #                     },
+    #                     response: {
+    #                       message_groups: [ # required
+    #                         {
+    #                           message: { # required
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                           variations: [
+    #                             {
+    #                               plain_text_message: {
+    #                                 value: "PlainTextMessageValue", # required
+    #                               },
+    #                               custom_payload: {
+    #                                 value: "CustomPayloadValue", # required
+    #                               },
+    #                               ssml_message: {
+    #                                 value: "SSMLMessageValue", # required
+    #                               },
+    #                               image_response_card: {
+    #                                 title: "AttachmentTitle", # required
+    #                                 subtitle: "AttachmentTitle",
+    #                                 image_url: "AttachmentUrl",
+    #                                 buttons: [
+    #                                   {
+    #                                     text: "ButtonText", # required
+    #                                     value: "ButtonValue", # required
+    #                                   },
+    #                                 ],
+    #                               },
+    #                             },
+    #                           ],
+    #                         },
+    #                       ],
+    #                       allow_interrupt: false,
+    #                     },
+    #                   },
+    #                 ],
+    #                 default_branch: { # required
+    #                   next_step: {
+    #                     dialog_action: {
+    #                       type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                       slot_to_elicit: "Name",
+    #                       suppress_next_message: false,
+    #                     },
+    #                     intent: {
+    #                       name: "Name",
+    #                       slots: {
+    #                         "Name" => {
+    #                           shape: "Scalar", # accepts Scalar, List
+    #                           value: {
+    #                             interpreted_value: "NonEmptyString",
+    #                           },
+    #                           values: [
+    #                             {
+    #                               # recursive SlotValueOverride
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
+    #                     session_attributes: {
+    #                       "NonEmptyString" => "String",
+    #                     },
+    #                   },
+    #                   response: {
+    #                     message_groups: [ # required
+    #                       {
+    #                         message: { # required
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                         variations: [
+    #                           {
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                         ],
+    #                       },
+    #                     ],
+    #                     allow_interrupt: false,
+    #                   },
+    #                 },
+    #               },
+    #               timeout_response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #               timeout_next_step: {
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               timeout_conditional: {
+    #                 active: false, # required
+    #                 conditional_branches: [ # required
+    #                   {
+    #                     name: "Name", # required
+    #                     condition: { # required
+    #                       expression_string: "ConditionExpression", # required
+    #                     },
+    #                     next_step: { # required
+    #                       dialog_action: {
+    #                         type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                         slot_to_elicit: "Name",
+    #                         suppress_next_message: false,
+    #                       },
+    #                       intent: {
+    #                         name: "Name",
+    #                         slots: {
+    #                           "Name" => {
+    #                             shape: "Scalar", # accepts Scalar, List
+    #                             value: {
+    #                               interpreted_value: "NonEmptyString",
+    #                             },
+    #                             values: [
+    #                               {
+    #                                 # recursive SlotValueOverride
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       },
+    #                       session_attributes: {
+    #                         "NonEmptyString" => "String",
+    #                       },
+    #                     },
+    #                     response: {
+    #                       message_groups: [ # required
+    #                         {
+    #                           message: { # required
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                           variations: [
+    #                             {
+    #                               plain_text_message: {
+    #                                 value: "PlainTextMessageValue", # required
+    #                               },
+    #                               custom_payload: {
+    #                                 value: "CustomPayloadValue", # required
+    #                               },
+    #                               ssml_message: {
+    #                                 value: "SSMLMessageValue", # required
+    #                               },
+    #                               image_response_card: {
+    #                                 title: "AttachmentTitle", # required
+    #                                 subtitle: "AttachmentTitle",
+    #                                 image_url: "AttachmentUrl",
+    #                                 buttons: [
+    #                                   {
+    #                                     text: "ButtonText", # required
+    #                                     value: "ButtonValue", # required
+    #                                   },
+    #                                 ],
+    #                               },
+    #                             },
+    #                           ],
+    #                         },
+    #                       ],
+    #                       allow_interrupt: false,
+    #                     },
+    #                   },
+    #                 ],
+    #                 default_branch: { # required
+    #                   next_step: {
+    #                     dialog_action: {
+    #                       type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                       slot_to_elicit: "Name",
+    #                       suppress_next_message: false,
+    #                     },
+    #                     intent: {
+    #                       name: "Name",
+    #                       slots: {
+    #                         "Name" => {
+    #                           shape: "Scalar", # accepts Scalar, List
+    #                           value: {
+    #                             interpreted_value: "NonEmptyString",
+    #                           },
+    #                           values: [
+    #                             {
+    #                               # recursive SlotValueOverride
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
+    #                     session_attributes: {
+    #                       "NonEmptyString" => "String",
+    #                     },
+    #                   },
+    #                   response: {
+    #                     message_groups: [ # required
+    #                       {
+    #                         message: { # required
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                         variations: [
+    #                           {
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                         ],
+    #                       },
+    #                     ],
+    #                     allow_interrupt: false,
+    #                   },
+    #                 },
+    #               },
+    #             },
+    #           },
+    #           elicitation_code_hook: {
+    #             enable_code_hook_invocation: false, # required
+    #             invocation_label: "Name",
+    #           },
     #         },
     #         intent_closing_setting: {
-    #           closing_response: { # required
+    #           closing_response: {
     #             message_groups: [ # required
     #               {
     #                 message: { # required
@@ -2438,6 +4839,203 @@ module Aws::LexModelsV2
     #             allow_interrupt: false,
     #           },
     #           active: false,
+    #           next_step: {
+    #             dialog_action: {
+    #               type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #               slot_to_elicit: "Name",
+    #               suppress_next_message: false,
+    #             },
+    #             intent: {
+    #               name: "Name",
+    #               slots: {
+    #                 "Name" => {
+    #                   shape: "Scalar", # accepts Scalar, List
+    #                   value: {
+    #                     interpreted_value: "NonEmptyString",
+    #                   },
+    #                   values: [
+    #                     {
+    #                       # recursive SlotValueOverride
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             },
+    #             session_attributes: {
+    #               "NonEmptyString" => "String",
+    #             },
+    #           },
+    #           conditional: {
+    #             active: false, # required
+    #             conditional_branches: [ # required
+    #               {
+    #                 name: "Name", # required
+    #                 condition: { # required
+    #                   expression_string: "ConditionExpression", # required
+    #                 },
+    #                 next_step: { # required
+    #                   dialog_action: {
+    #                     type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                     slot_to_elicit: "Name",
+    #                     suppress_next_message: false,
+    #                   },
+    #                   intent: {
+    #                     name: "Name",
+    #                     slots: {
+    #                       "Name" => {
+    #                         shape: "Scalar", # accepts Scalar, List
+    #                         value: {
+    #                           interpreted_value: "NonEmptyString",
+    #                         },
+    #                         values: [
+    #                           {
+    #                             # recursive SlotValueOverride
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                   session_attributes: {
+    #                     "NonEmptyString" => "String",
+    #                   },
+    #                 },
+    #                 response: {
+    #                   message_groups: [ # required
+    #                     {
+    #                       message: { # required
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       variations: [
+    #                         {
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                   allow_interrupt: false,
+    #                 },
+    #               },
+    #             ],
+    #             default_branch: { # required
+    #               next_step: {
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #             },
+    #           },
     #         },
     #         input_contexts: [
     #           {
@@ -2459,6 +5057,1015 @@ module Aws::LexModelsV2
     #         bot_id: "Id", # required
     #         bot_version: "DraftBotVersion", # required
     #         locale_id: "LocaleId", # required
+    #         initial_response_setting: {
+    #           initial_response: {
+    #             message_groups: [ # required
+    #               {
+    #                 message: { # required
+    #                   plain_text_message: {
+    #                     value: "PlainTextMessageValue", # required
+    #                   },
+    #                   custom_payload: {
+    #                     value: "CustomPayloadValue", # required
+    #                   },
+    #                   ssml_message: {
+    #                     value: "SSMLMessageValue", # required
+    #                   },
+    #                   image_response_card: {
+    #                     title: "AttachmentTitle", # required
+    #                     subtitle: "AttachmentTitle",
+    #                     image_url: "AttachmentUrl",
+    #                     buttons: [
+    #                       {
+    #                         text: "ButtonText", # required
+    #                         value: "ButtonValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #                 variations: [
+    #                   {
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #             allow_interrupt: false,
+    #           },
+    #           next_step: {
+    #             dialog_action: {
+    #               type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #               slot_to_elicit: "Name",
+    #               suppress_next_message: false,
+    #             },
+    #             intent: {
+    #               name: "Name",
+    #               slots: {
+    #                 "Name" => {
+    #                   shape: "Scalar", # accepts Scalar, List
+    #                   value: {
+    #                     interpreted_value: "NonEmptyString",
+    #                   },
+    #                   values: [
+    #                     {
+    #                       # recursive SlotValueOverride
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             },
+    #             session_attributes: {
+    #               "NonEmptyString" => "String",
+    #             },
+    #           },
+    #           conditional: {
+    #             active: false, # required
+    #             conditional_branches: [ # required
+    #               {
+    #                 name: "Name", # required
+    #                 condition: { # required
+    #                   expression_string: "ConditionExpression", # required
+    #                 },
+    #                 next_step: { # required
+    #                   dialog_action: {
+    #                     type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                     slot_to_elicit: "Name",
+    #                     suppress_next_message: false,
+    #                   },
+    #                   intent: {
+    #                     name: "Name",
+    #                     slots: {
+    #                       "Name" => {
+    #                         shape: "Scalar", # accepts Scalar, List
+    #                         value: {
+    #                           interpreted_value: "NonEmptyString",
+    #                         },
+    #                         values: [
+    #                           {
+    #                             # recursive SlotValueOverride
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                   session_attributes: {
+    #                     "NonEmptyString" => "String",
+    #                   },
+    #                 },
+    #                 response: {
+    #                   message_groups: [ # required
+    #                     {
+    #                       message: { # required
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       variations: [
+    #                         {
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                   allow_interrupt: false,
+    #                 },
+    #               },
+    #             ],
+    #             default_branch: { # required
+    #               next_step: {
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #             },
+    #           },
+    #           code_hook: {
+    #             enable_code_hook_invocation: false, # required
+    #             active: false, # required
+    #             invocation_label: "Name",
+    #             post_code_hook_specification: { # required
+    #               success_response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #               success_next_step: {
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               success_conditional: {
+    #                 active: false, # required
+    #                 conditional_branches: [ # required
+    #                   {
+    #                     name: "Name", # required
+    #                     condition: { # required
+    #                       expression_string: "ConditionExpression", # required
+    #                     },
+    #                     next_step: { # required
+    #                       dialog_action: {
+    #                         type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                         slot_to_elicit: "Name",
+    #                         suppress_next_message: false,
+    #                       },
+    #                       intent: {
+    #                         name: "Name",
+    #                         slots: {
+    #                           "Name" => {
+    #                             shape: "Scalar", # accepts Scalar, List
+    #                             value: {
+    #                               interpreted_value: "NonEmptyString",
+    #                             },
+    #                             values: [
+    #                               {
+    #                                 # recursive SlotValueOverride
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       },
+    #                       session_attributes: {
+    #                         "NonEmptyString" => "String",
+    #                       },
+    #                     },
+    #                     response: {
+    #                       message_groups: [ # required
+    #                         {
+    #                           message: { # required
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                           variations: [
+    #                             {
+    #                               plain_text_message: {
+    #                                 value: "PlainTextMessageValue", # required
+    #                               },
+    #                               custom_payload: {
+    #                                 value: "CustomPayloadValue", # required
+    #                               },
+    #                               ssml_message: {
+    #                                 value: "SSMLMessageValue", # required
+    #                               },
+    #                               image_response_card: {
+    #                                 title: "AttachmentTitle", # required
+    #                                 subtitle: "AttachmentTitle",
+    #                                 image_url: "AttachmentUrl",
+    #                                 buttons: [
+    #                                   {
+    #                                     text: "ButtonText", # required
+    #                                     value: "ButtonValue", # required
+    #                                   },
+    #                                 ],
+    #                               },
+    #                             },
+    #                           ],
+    #                         },
+    #                       ],
+    #                       allow_interrupt: false,
+    #                     },
+    #                   },
+    #                 ],
+    #                 default_branch: { # required
+    #                   next_step: {
+    #                     dialog_action: {
+    #                       type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                       slot_to_elicit: "Name",
+    #                       suppress_next_message: false,
+    #                     },
+    #                     intent: {
+    #                       name: "Name",
+    #                       slots: {
+    #                         "Name" => {
+    #                           shape: "Scalar", # accepts Scalar, List
+    #                           value: {
+    #                             interpreted_value: "NonEmptyString",
+    #                           },
+    #                           values: [
+    #                             {
+    #                               # recursive SlotValueOverride
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
+    #                     session_attributes: {
+    #                       "NonEmptyString" => "String",
+    #                     },
+    #                   },
+    #                   response: {
+    #                     message_groups: [ # required
+    #                       {
+    #                         message: { # required
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                         variations: [
+    #                           {
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                         ],
+    #                       },
+    #                     ],
+    #                     allow_interrupt: false,
+    #                   },
+    #                 },
+    #               },
+    #               failure_response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #               failure_next_step: {
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               failure_conditional: {
+    #                 active: false, # required
+    #                 conditional_branches: [ # required
+    #                   {
+    #                     name: "Name", # required
+    #                     condition: { # required
+    #                       expression_string: "ConditionExpression", # required
+    #                     },
+    #                     next_step: { # required
+    #                       dialog_action: {
+    #                         type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                         slot_to_elicit: "Name",
+    #                         suppress_next_message: false,
+    #                       },
+    #                       intent: {
+    #                         name: "Name",
+    #                         slots: {
+    #                           "Name" => {
+    #                             shape: "Scalar", # accepts Scalar, List
+    #                             value: {
+    #                               interpreted_value: "NonEmptyString",
+    #                             },
+    #                             values: [
+    #                               {
+    #                                 # recursive SlotValueOverride
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       },
+    #                       session_attributes: {
+    #                         "NonEmptyString" => "String",
+    #                       },
+    #                     },
+    #                     response: {
+    #                       message_groups: [ # required
+    #                         {
+    #                           message: { # required
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                           variations: [
+    #                             {
+    #                               plain_text_message: {
+    #                                 value: "PlainTextMessageValue", # required
+    #                               },
+    #                               custom_payload: {
+    #                                 value: "CustomPayloadValue", # required
+    #                               },
+    #                               ssml_message: {
+    #                                 value: "SSMLMessageValue", # required
+    #                               },
+    #                               image_response_card: {
+    #                                 title: "AttachmentTitle", # required
+    #                                 subtitle: "AttachmentTitle",
+    #                                 image_url: "AttachmentUrl",
+    #                                 buttons: [
+    #                                   {
+    #                                     text: "ButtonText", # required
+    #                                     value: "ButtonValue", # required
+    #                                   },
+    #                                 ],
+    #                               },
+    #                             },
+    #                           ],
+    #                         },
+    #                       ],
+    #                       allow_interrupt: false,
+    #                     },
+    #                   },
+    #                 ],
+    #                 default_branch: { # required
+    #                   next_step: {
+    #                     dialog_action: {
+    #                       type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                       slot_to_elicit: "Name",
+    #                       suppress_next_message: false,
+    #                     },
+    #                     intent: {
+    #                       name: "Name",
+    #                       slots: {
+    #                         "Name" => {
+    #                           shape: "Scalar", # accepts Scalar, List
+    #                           value: {
+    #                             interpreted_value: "NonEmptyString",
+    #                           },
+    #                           values: [
+    #                             {
+    #                               # recursive SlotValueOverride
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
+    #                     session_attributes: {
+    #                       "NonEmptyString" => "String",
+    #                     },
+    #                   },
+    #                   response: {
+    #                     message_groups: [ # required
+    #                       {
+    #                         message: { # required
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                         variations: [
+    #                           {
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                         ],
+    #                       },
+    #                     ],
+    #                     allow_interrupt: false,
+    #                   },
+    #                 },
+    #               },
+    #               timeout_response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #               timeout_next_step: {
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               timeout_conditional: {
+    #                 active: false, # required
+    #                 conditional_branches: [ # required
+    #                   {
+    #                     name: "Name", # required
+    #                     condition: { # required
+    #                       expression_string: "ConditionExpression", # required
+    #                     },
+    #                     next_step: { # required
+    #                       dialog_action: {
+    #                         type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                         slot_to_elicit: "Name",
+    #                         suppress_next_message: false,
+    #                       },
+    #                       intent: {
+    #                         name: "Name",
+    #                         slots: {
+    #                           "Name" => {
+    #                             shape: "Scalar", # accepts Scalar, List
+    #                             value: {
+    #                               interpreted_value: "NonEmptyString",
+    #                             },
+    #                             values: [
+    #                               {
+    #                                 # recursive SlotValueOverride
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       },
+    #                       session_attributes: {
+    #                         "NonEmptyString" => "String",
+    #                       },
+    #                     },
+    #                     response: {
+    #                       message_groups: [ # required
+    #                         {
+    #                           message: { # required
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                           variations: [
+    #                             {
+    #                               plain_text_message: {
+    #                                 value: "PlainTextMessageValue", # required
+    #                               },
+    #                               custom_payload: {
+    #                                 value: "CustomPayloadValue", # required
+    #                               },
+    #                               ssml_message: {
+    #                                 value: "SSMLMessageValue", # required
+    #                               },
+    #                               image_response_card: {
+    #                                 title: "AttachmentTitle", # required
+    #                                 subtitle: "AttachmentTitle",
+    #                                 image_url: "AttachmentUrl",
+    #                                 buttons: [
+    #                                   {
+    #                                     text: "ButtonText", # required
+    #                                     value: "ButtonValue", # required
+    #                                   },
+    #                                 ],
+    #                               },
+    #                             },
+    #                           ],
+    #                         },
+    #                       ],
+    #                       allow_interrupt: false,
+    #                     },
+    #                   },
+    #                 ],
+    #                 default_branch: { # required
+    #                   next_step: {
+    #                     dialog_action: {
+    #                       type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                       slot_to_elicit: "Name",
+    #                       suppress_next_message: false,
+    #                     },
+    #                     intent: {
+    #                       name: "Name",
+    #                       slots: {
+    #                         "Name" => {
+    #                           shape: "Scalar", # accepts Scalar, List
+    #                           value: {
+    #                             interpreted_value: "NonEmptyString",
+    #                           },
+    #                           values: [
+    #                             {
+    #                               # recursive SlotValueOverride
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
+    #                     session_attributes: {
+    #                       "NonEmptyString" => "String",
+    #                     },
+    #                   },
+    #                   response: {
+    #                     message_groups: [ # required
+    #                       {
+    #                         message: { # required
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                         variations: [
+    #                           {
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                         ],
+    #                       },
+    #                     ],
+    #                     allow_interrupt: false,
+    #                   },
+    #                 },
+    #               },
+    #             },
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] intent_name
@@ -2582,6 +6189,11 @@ module Aws::LexModelsV2
     #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #   @return [String]
     #
+    # @!attribute [rw] initial_response_setting
+    #   Configuration settings for the response that is sent to the user at
+    #   the beginning of a conversation, before eliciting slot values.
+    #   @return [Types::InitialResponseSetting]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateIntentRequest AWS API Documentation
     #
     class CreateIntentRequest < Struct.new(
@@ -2598,7 +6210,8 @@ module Aws::LexModelsV2
       :kendra_configuration,
       :bot_id,
       :bot_version,
-      :locale_id)
+      :locale_id,
+      :initial_response_setting)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2668,6 +6281,11 @@ module Aws::LexModelsV2
     #   A timestamp of the date and time that the intent was created.
     #   @return [Time]
     #
+    # @!attribute [rw] initial_response_setting
+    #   Configuration settings for the response that is sent to the user at
+    #   the beginning of a conversation, before eliciting slot values.
+    #   @return [Types::InitialResponseSetting]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateIntentResponse AWS API Documentation
     #
     class CreateIntentResponse < Struct.new(
@@ -2686,7 +6304,8 @@ module Aws::LexModelsV2
       :bot_id,
       :bot_version,
       :locale_id,
-      :creation_date_time)
+      :creation_date_time,
+      :initial_response_setting)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3108,6 +6727,1269 @@ module Aws::LexModelsV2
     #               allow_interrupt: false,
     #             },
     #             active: false,
+    #           },
+    #           slot_capture_setting: {
+    #             capture_response: {
+    #               message_groups: [ # required
+    #                 {
+    #                   message: { # required
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   variations: [
+    #                     {
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #               allow_interrupt: false,
+    #             },
+    #             capture_next_step: {
+    #               dialog_action: {
+    #                 type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                 slot_to_elicit: "Name",
+    #                 suppress_next_message: false,
+    #               },
+    #               intent: {
+    #                 name: "Name",
+    #                 slots: {
+    #                   "Name" => {
+    #                     shape: "Scalar", # accepts Scalar, List
+    #                     value: {
+    #                       interpreted_value: "NonEmptyString",
+    #                     },
+    #                     values: [
+    #                       {
+    #                         # recursive SlotValueOverride
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               },
+    #               session_attributes: {
+    #                 "NonEmptyString" => "String",
+    #               },
+    #             },
+    #             capture_conditional: {
+    #               active: false, # required
+    #               conditional_branches: [ # required
+    #                 {
+    #                   name: "Name", # required
+    #                   condition: { # required
+    #                     expression_string: "ConditionExpression", # required
+    #                   },
+    #                   next_step: { # required
+    #                     dialog_action: {
+    #                       type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                       slot_to_elicit: "Name",
+    #                       suppress_next_message: false,
+    #                     },
+    #                     intent: {
+    #                       name: "Name",
+    #                       slots: {
+    #                         "Name" => {
+    #                           shape: "Scalar", # accepts Scalar, List
+    #                           value: {
+    #                             interpreted_value: "NonEmptyString",
+    #                           },
+    #                           values: [
+    #                             {
+    #                               # recursive SlotValueOverride
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
+    #                     session_attributes: {
+    #                       "NonEmptyString" => "String",
+    #                     },
+    #                   },
+    #                   response: {
+    #                     message_groups: [ # required
+    #                       {
+    #                         message: { # required
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                         variations: [
+    #                           {
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                         ],
+    #                       },
+    #                     ],
+    #                     allow_interrupt: false,
+    #                   },
+    #                 },
+    #               ],
+    #               default_branch: { # required
+    #                 next_step: {
+    #                   dialog_action: {
+    #                     type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                     slot_to_elicit: "Name",
+    #                     suppress_next_message: false,
+    #                   },
+    #                   intent: {
+    #                     name: "Name",
+    #                     slots: {
+    #                       "Name" => {
+    #                         shape: "Scalar", # accepts Scalar, List
+    #                         value: {
+    #                           interpreted_value: "NonEmptyString",
+    #                         },
+    #                         values: [
+    #                           {
+    #                             # recursive SlotValueOverride
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                   session_attributes: {
+    #                     "NonEmptyString" => "String",
+    #                   },
+    #                 },
+    #                 response: {
+    #                   message_groups: [ # required
+    #                     {
+    #                       message: { # required
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       variations: [
+    #                         {
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                   allow_interrupt: false,
+    #                 },
+    #               },
+    #             },
+    #             failure_response: {
+    #               message_groups: [ # required
+    #                 {
+    #                   message: { # required
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   variations: [
+    #                     {
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #               allow_interrupt: false,
+    #             },
+    #             failure_next_step: {
+    #               dialog_action: {
+    #                 type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                 slot_to_elicit: "Name",
+    #                 suppress_next_message: false,
+    #               },
+    #               intent: {
+    #                 name: "Name",
+    #                 slots: {
+    #                   "Name" => {
+    #                     shape: "Scalar", # accepts Scalar, List
+    #                     value: {
+    #                       interpreted_value: "NonEmptyString",
+    #                     },
+    #                     values: [
+    #                       {
+    #                         # recursive SlotValueOverride
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               },
+    #               session_attributes: {
+    #                 "NonEmptyString" => "String",
+    #               },
+    #             },
+    #             failure_conditional: {
+    #               active: false, # required
+    #               conditional_branches: [ # required
+    #                 {
+    #                   name: "Name", # required
+    #                   condition: { # required
+    #                     expression_string: "ConditionExpression", # required
+    #                   },
+    #                   next_step: { # required
+    #                     dialog_action: {
+    #                       type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                       slot_to_elicit: "Name",
+    #                       suppress_next_message: false,
+    #                     },
+    #                     intent: {
+    #                       name: "Name",
+    #                       slots: {
+    #                         "Name" => {
+    #                           shape: "Scalar", # accepts Scalar, List
+    #                           value: {
+    #                             interpreted_value: "NonEmptyString",
+    #                           },
+    #                           values: [
+    #                             {
+    #                               # recursive SlotValueOverride
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
+    #                     session_attributes: {
+    #                       "NonEmptyString" => "String",
+    #                     },
+    #                   },
+    #                   response: {
+    #                     message_groups: [ # required
+    #                       {
+    #                         message: { # required
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                         variations: [
+    #                           {
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                         ],
+    #                       },
+    #                     ],
+    #                     allow_interrupt: false,
+    #                   },
+    #                 },
+    #               ],
+    #               default_branch: { # required
+    #                 next_step: {
+    #                   dialog_action: {
+    #                     type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                     slot_to_elicit: "Name",
+    #                     suppress_next_message: false,
+    #                   },
+    #                   intent: {
+    #                     name: "Name",
+    #                     slots: {
+    #                       "Name" => {
+    #                         shape: "Scalar", # accepts Scalar, List
+    #                         value: {
+    #                           interpreted_value: "NonEmptyString",
+    #                         },
+    #                         values: [
+    #                           {
+    #                             # recursive SlotValueOverride
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                   session_attributes: {
+    #                     "NonEmptyString" => "String",
+    #                   },
+    #                 },
+    #                 response: {
+    #                   message_groups: [ # required
+    #                     {
+    #                       message: { # required
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       variations: [
+    #                         {
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                   allow_interrupt: false,
+    #                 },
+    #               },
+    #             },
+    #             code_hook: {
+    #               enable_code_hook_invocation: false, # required
+    #               active: false, # required
+    #               invocation_label: "Name",
+    #               post_code_hook_specification: { # required
+    #                 success_response: {
+    #                   message_groups: [ # required
+    #                     {
+    #                       message: { # required
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       variations: [
+    #                         {
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                   allow_interrupt: false,
+    #                 },
+    #                 success_next_step: {
+    #                   dialog_action: {
+    #                     type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                     slot_to_elicit: "Name",
+    #                     suppress_next_message: false,
+    #                   },
+    #                   intent: {
+    #                     name: "Name",
+    #                     slots: {
+    #                       "Name" => {
+    #                         shape: "Scalar", # accepts Scalar, List
+    #                         value: {
+    #                           interpreted_value: "NonEmptyString",
+    #                         },
+    #                         values: [
+    #                           {
+    #                             # recursive SlotValueOverride
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                   session_attributes: {
+    #                     "NonEmptyString" => "String",
+    #                   },
+    #                 },
+    #                 success_conditional: {
+    #                   active: false, # required
+    #                   conditional_branches: [ # required
+    #                     {
+    #                       name: "Name", # required
+    #                       condition: { # required
+    #                         expression_string: "ConditionExpression", # required
+    #                       },
+    #                       next_step: { # required
+    #                         dialog_action: {
+    #                           type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                           slot_to_elicit: "Name",
+    #                           suppress_next_message: false,
+    #                         },
+    #                         intent: {
+    #                           name: "Name",
+    #                           slots: {
+    #                             "Name" => {
+    #                               shape: "Scalar", # accepts Scalar, List
+    #                               value: {
+    #                                 interpreted_value: "NonEmptyString",
+    #                               },
+    #                               values: [
+    #                                 {
+    #                                   # recursive SlotValueOverride
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                         },
+    #                         session_attributes: {
+    #                           "NonEmptyString" => "String",
+    #                         },
+    #                       },
+    #                       response: {
+    #                         message_groups: [ # required
+    #                           {
+    #                             message: { # required
+    #                               plain_text_message: {
+    #                                 value: "PlainTextMessageValue", # required
+    #                               },
+    #                               custom_payload: {
+    #                                 value: "CustomPayloadValue", # required
+    #                               },
+    #                               ssml_message: {
+    #                                 value: "SSMLMessageValue", # required
+    #                               },
+    #                               image_response_card: {
+    #                                 title: "AttachmentTitle", # required
+    #                                 subtitle: "AttachmentTitle",
+    #                                 image_url: "AttachmentUrl",
+    #                                 buttons: [
+    #                                   {
+    #                                     text: "ButtonText", # required
+    #                                     value: "ButtonValue", # required
+    #                                   },
+    #                                 ],
+    #                               },
+    #                             },
+    #                             variations: [
+    #                               {
+    #                                 plain_text_message: {
+    #                                   value: "PlainTextMessageValue", # required
+    #                                 },
+    #                                 custom_payload: {
+    #                                   value: "CustomPayloadValue", # required
+    #                                 },
+    #                                 ssml_message: {
+    #                                   value: "SSMLMessageValue", # required
+    #                                 },
+    #                                 image_response_card: {
+    #                                   title: "AttachmentTitle", # required
+    #                                   subtitle: "AttachmentTitle",
+    #                                   image_url: "AttachmentUrl",
+    #                                   buttons: [
+    #                                     {
+    #                                       text: "ButtonText", # required
+    #                                       value: "ButtonValue", # required
+    #                                     },
+    #                                   ],
+    #                                 },
+    #                               },
+    #                             ],
+    #                           },
+    #                         ],
+    #                         allow_interrupt: false,
+    #                       },
+    #                     },
+    #                   ],
+    #                   default_branch: { # required
+    #                     next_step: {
+    #                       dialog_action: {
+    #                         type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                         slot_to_elicit: "Name",
+    #                         suppress_next_message: false,
+    #                       },
+    #                       intent: {
+    #                         name: "Name",
+    #                         slots: {
+    #                           "Name" => {
+    #                             shape: "Scalar", # accepts Scalar, List
+    #                             value: {
+    #                               interpreted_value: "NonEmptyString",
+    #                             },
+    #                             values: [
+    #                               {
+    #                                 # recursive SlotValueOverride
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       },
+    #                       session_attributes: {
+    #                         "NonEmptyString" => "String",
+    #                       },
+    #                     },
+    #                     response: {
+    #                       message_groups: [ # required
+    #                         {
+    #                           message: { # required
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                           variations: [
+    #                             {
+    #                               plain_text_message: {
+    #                                 value: "PlainTextMessageValue", # required
+    #                               },
+    #                               custom_payload: {
+    #                                 value: "CustomPayloadValue", # required
+    #                               },
+    #                               ssml_message: {
+    #                                 value: "SSMLMessageValue", # required
+    #                               },
+    #                               image_response_card: {
+    #                                 title: "AttachmentTitle", # required
+    #                                 subtitle: "AttachmentTitle",
+    #                                 image_url: "AttachmentUrl",
+    #                                 buttons: [
+    #                                   {
+    #                                     text: "ButtonText", # required
+    #                                     value: "ButtonValue", # required
+    #                                   },
+    #                                 ],
+    #                               },
+    #                             },
+    #                           ],
+    #                         },
+    #                       ],
+    #                       allow_interrupt: false,
+    #                     },
+    #                   },
+    #                 },
+    #                 failure_response: {
+    #                   message_groups: [ # required
+    #                     {
+    #                       message: { # required
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       variations: [
+    #                         {
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                   allow_interrupt: false,
+    #                 },
+    #                 failure_next_step: {
+    #                   dialog_action: {
+    #                     type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                     slot_to_elicit: "Name",
+    #                     suppress_next_message: false,
+    #                   },
+    #                   intent: {
+    #                     name: "Name",
+    #                     slots: {
+    #                       "Name" => {
+    #                         shape: "Scalar", # accepts Scalar, List
+    #                         value: {
+    #                           interpreted_value: "NonEmptyString",
+    #                         },
+    #                         values: [
+    #                           {
+    #                             # recursive SlotValueOverride
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                   session_attributes: {
+    #                     "NonEmptyString" => "String",
+    #                   },
+    #                 },
+    #                 failure_conditional: {
+    #                   active: false, # required
+    #                   conditional_branches: [ # required
+    #                     {
+    #                       name: "Name", # required
+    #                       condition: { # required
+    #                         expression_string: "ConditionExpression", # required
+    #                       },
+    #                       next_step: { # required
+    #                         dialog_action: {
+    #                           type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                           slot_to_elicit: "Name",
+    #                           suppress_next_message: false,
+    #                         },
+    #                         intent: {
+    #                           name: "Name",
+    #                           slots: {
+    #                             "Name" => {
+    #                               shape: "Scalar", # accepts Scalar, List
+    #                               value: {
+    #                                 interpreted_value: "NonEmptyString",
+    #                               },
+    #                               values: [
+    #                                 {
+    #                                   # recursive SlotValueOverride
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                         },
+    #                         session_attributes: {
+    #                           "NonEmptyString" => "String",
+    #                         },
+    #                       },
+    #                       response: {
+    #                         message_groups: [ # required
+    #                           {
+    #                             message: { # required
+    #                               plain_text_message: {
+    #                                 value: "PlainTextMessageValue", # required
+    #                               },
+    #                               custom_payload: {
+    #                                 value: "CustomPayloadValue", # required
+    #                               },
+    #                               ssml_message: {
+    #                                 value: "SSMLMessageValue", # required
+    #                               },
+    #                               image_response_card: {
+    #                                 title: "AttachmentTitle", # required
+    #                                 subtitle: "AttachmentTitle",
+    #                                 image_url: "AttachmentUrl",
+    #                                 buttons: [
+    #                                   {
+    #                                     text: "ButtonText", # required
+    #                                     value: "ButtonValue", # required
+    #                                   },
+    #                                 ],
+    #                               },
+    #                             },
+    #                             variations: [
+    #                               {
+    #                                 plain_text_message: {
+    #                                   value: "PlainTextMessageValue", # required
+    #                                 },
+    #                                 custom_payload: {
+    #                                   value: "CustomPayloadValue", # required
+    #                                 },
+    #                                 ssml_message: {
+    #                                   value: "SSMLMessageValue", # required
+    #                                 },
+    #                                 image_response_card: {
+    #                                   title: "AttachmentTitle", # required
+    #                                   subtitle: "AttachmentTitle",
+    #                                   image_url: "AttachmentUrl",
+    #                                   buttons: [
+    #                                     {
+    #                                       text: "ButtonText", # required
+    #                                       value: "ButtonValue", # required
+    #                                     },
+    #                                   ],
+    #                                 },
+    #                               },
+    #                             ],
+    #                           },
+    #                         ],
+    #                         allow_interrupt: false,
+    #                       },
+    #                     },
+    #                   ],
+    #                   default_branch: { # required
+    #                     next_step: {
+    #                       dialog_action: {
+    #                         type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                         slot_to_elicit: "Name",
+    #                         suppress_next_message: false,
+    #                       },
+    #                       intent: {
+    #                         name: "Name",
+    #                         slots: {
+    #                           "Name" => {
+    #                             shape: "Scalar", # accepts Scalar, List
+    #                             value: {
+    #                               interpreted_value: "NonEmptyString",
+    #                             },
+    #                             values: [
+    #                               {
+    #                                 # recursive SlotValueOverride
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       },
+    #                       session_attributes: {
+    #                         "NonEmptyString" => "String",
+    #                       },
+    #                     },
+    #                     response: {
+    #                       message_groups: [ # required
+    #                         {
+    #                           message: { # required
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                           variations: [
+    #                             {
+    #                               plain_text_message: {
+    #                                 value: "PlainTextMessageValue", # required
+    #                               },
+    #                               custom_payload: {
+    #                                 value: "CustomPayloadValue", # required
+    #                               },
+    #                               ssml_message: {
+    #                                 value: "SSMLMessageValue", # required
+    #                               },
+    #                               image_response_card: {
+    #                                 title: "AttachmentTitle", # required
+    #                                 subtitle: "AttachmentTitle",
+    #                                 image_url: "AttachmentUrl",
+    #                                 buttons: [
+    #                                   {
+    #                                     text: "ButtonText", # required
+    #                                     value: "ButtonValue", # required
+    #                                   },
+    #                                 ],
+    #                               },
+    #                             },
+    #                           ],
+    #                         },
+    #                       ],
+    #                       allow_interrupt: false,
+    #                     },
+    #                   },
+    #                 },
+    #                 timeout_response: {
+    #                   message_groups: [ # required
+    #                     {
+    #                       message: { # required
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       variations: [
+    #                         {
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                   allow_interrupt: false,
+    #                 },
+    #                 timeout_next_step: {
+    #                   dialog_action: {
+    #                     type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                     slot_to_elicit: "Name",
+    #                     suppress_next_message: false,
+    #                   },
+    #                   intent: {
+    #                     name: "Name",
+    #                     slots: {
+    #                       "Name" => {
+    #                         shape: "Scalar", # accepts Scalar, List
+    #                         value: {
+    #                           interpreted_value: "NonEmptyString",
+    #                         },
+    #                         values: [
+    #                           {
+    #                             # recursive SlotValueOverride
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                   session_attributes: {
+    #                     "NonEmptyString" => "String",
+    #                   },
+    #                 },
+    #                 timeout_conditional: {
+    #                   active: false, # required
+    #                   conditional_branches: [ # required
+    #                     {
+    #                       name: "Name", # required
+    #                       condition: { # required
+    #                         expression_string: "ConditionExpression", # required
+    #                       },
+    #                       next_step: { # required
+    #                         dialog_action: {
+    #                           type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                           slot_to_elicit: "Name",
+    #                           suppress_next_message: false,
+    #                         },
+    #                         intent: {
+    #                           name: "Name",
+    #                           slots: {
+    #                             "Name" => {
+    #                               shape: "Scalar", # accepts Scalar, List
+    #                               value: {
+    #                                 interpreted_value: "NonEmptyString",
+    #                               },
+    #                               values: [
+    #                                 {
+    #                                   # recursive SlotValueOverride
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                         },
+    #                         session_attributes: {
+    #                           "NonEmptyString" => "String",
+    #                         },
+    #                       },
+    #                       response: {
+    #                         message_groups: [ # required
+    #                           {
+    #                             message: { # required
+    #                               plain_text_message: {
+    #                                 value: "PlainTextMessageValue", # required
+    #                               },
+    #                               custom_payload: {
+    #                                 value: "CustomPayloadValue", # required
+    #                               },
+    #                               ssml_message: {
+    #                                 value: "SSMLMessageValue", # required
+    #                               },
+    #                               image_response_card: {
+    #                                 title: "AttachmentTitle", # required
+    #                                 subtitle: "AttachmentTitle",
+    #                                 image_url: "AttachmentUrl",
+    #                                 buttons: [
+    #                                   {
+    #                                     text: "ButtonText", # required
+    #                                     value: "ButtonValue", # required
+    #                                   },
+    #                                 ],
+    #                               },
+    #                             },
+    #                             variations: [
+    #                               {
+    #                                 plain_text_message: {
+    #                                   value: "PlainTextMessageValue", # required
+    #                                 },
+    #                                 custom_payload: {
+    #                                   value: "CustomPayloadValue", # required
+    #                                 },
+    #                                 ssml_message: {
+    #                                   value: "SSMLMessageValue", # required
+    #                                 },
+    #                                 image_response_card: {
+    #                                   title: "AttachmentTitle", # required
+    #                                   subtitle: "AttachmentTitle",
+    #                                   image_url: "AttachmentUrl",
+    #                                   buttons: [
+    #                                     {
+    #                                       text: "ButtonText", # required
+    #                                       value: "ButtonValue", # required
+    #                                     },
+    #                                   ],
+    #                                 },
+    #                               },
+    #                             ],
+    #                           },
+    #                         ],
+    #                         allow_interrupt: false,
+    #                       },
+    #                     },
+    #                   ],
+    #                   default_branch: { # required
+    #                     next_step: {
+    #                       dialog_action: {
+    #                         type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                         slot_to_elicit: "Name",
+    #                         suppress_next_message: false,
+    #                       },
+    #                       intent: {
+    #                         name: "Name",
+    #                         slots: {
+    #                           "Name" => {
+    #                             shape: "Scalar", # accepts Scalar, List
+    #                             value: {
+    #                               interpreted_value: "NonEmptyString",
+    #                             },
+    #                             values: [
+    #                               {
+    #                                 # recursive SlotValueOverride
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       },
+    #                       session_attributes: {
+    #                         "NonEmptyString" => "String",
+    #                       },
+    #                     },
+    #                     response: {
+    #                       message_groups: [ # required
+    #                         {
+    #                           message: { # required
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                           variations: [
+    #                             {
+    #                               plain_text_message: {
+    #                                 value: "PlainTextMessageValue", # required
+    #                               },
+    #                               custom_payload: {
+    #                                 value: "CustomPayloadValue", # required
+    #                               },
+    #                               ssml_message: {
+    #                                 value: "SSMLMessageValue", # required
+    #                               },
+    #                               image_response_card: {
+    #                                 title: "AttachmentTitle", # required
+    #                                 subtitle: "AttachmentTitle",
+    #                                 image_url: "AttachmentUrl",
+    #                                 buttons: [
+    #                                   {
+    #                                     text: "ButtonText", # required
+    #                                     value: "ButtonValue", # required
+    #                                   },
+    #                                 ],
+    #                               },
+    #                             },
+    #                           ],
+    #                         },
+    #                       ],
+    #                       allow_interrupt: false,
+    #                     },
+    #                   },
+    #                 },
+    #               },
+    #             },
+    #             elicitation_code_hook: {
+    #               enable_code_hook_invocation: false, # required
+    #               invocation_label: "Name",
+    #             },
     #           },
     #         },
     #         obfuscation_setting: {
@@ -3654,6 +8536,112 @@ module Aws::LexModelsV2
     class DateRangeFilter < Struct.new(
       :start_date_time,
       :end_date_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A set of actions that Amazon Lex should run if none of the other
+    # conditions are met.
+    #
+    # @note When making an API call, you may pass DefaultConditionalBranch
+    #   data as a hash:
+    #
+    #       {
+    #         next_step: {
+    #           dialog_action: {
+    #             type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #             slot_to_elicit: "Name",
+    #             suppress_next_message: false,
+    #           },
+    #           intent: {
+    #             name: "Name",
+    #             slots: {
+    #               "Name" => {
+    #                 shape: "Scalar", # accepts Scalar, List
+    #                 value: {
+    #                   interpreted_value: "NonEmptyString",
+    #                 },
+    #                 values: [
+    #                   {
+    #                     # recursive SlotValueOverride
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           },
+    #           session_attributes: {
+    #             "NonEmptyString" => "String",
+    #           },
+    #         },
+    #         response: {
+    #           message_groups: [ # required
+    #             {
+    #               message: { # required
+    #                 plain_text_message: {
+    #                   value: "PlainTextMessageValue", # required
+    #                 },
+    #                 custom_payload: {
+    #                   value: "CustomPayloadValue", # required
+    #                 },
+    #                 ssml_message: {
+    #                   value: "SSMLMessageValue", # required
+    #                 },
+    #                 image_response_card: {
+    #                   title: "AttachmentTitle", # required
+    #                   subtitle: "AttachmentTitle",
+    #                   image_url: "AttachmentUrl",
+    #                   buttons: [
+    #                     {
+    #                       text: "ButtonText", # required
+    #                       value: "ButtonValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #               variations: [
+    #                 {
+    #                   plain_text_message: {
+    #                     value: "PlainTextMessageValue", # required
+    #                   },
+    #                   custom_payload: {
+    #                     value: "CustomPayloadValue", # required
+    #                   },
+    #                   ssml_message: {
+    #                     value: "SSMLMessageValue", # required
+    #                   },
+    #                   image_response_card: {
+    #                     title: "AttachmentTitle", # required
+    #                     subtitle: "AttachmentTitle",
+    #                     image_url: "AttachmentUrl",
+    #                     buttons: [
+    #                       {
+    #                         text: "ButtonText", # required
+    #                         value: "ButtonValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #           allow_interrupt: false,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] next_step
+    #   The next step in the conversation.
+    #   @return [Types::DialogState]
+    #
+    # @!attribute [rw] response
+    #   Specifies a list of message groups that Amazon Lex uses to respond
+    #   the user input.
+    #   @return [Types::ResponseSpecification]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DefaultConditionalBranch AWS API Documentation
+    #
+    class DefaultConditionalBranch < Struct.new(
+      :next_step,
+      :response)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5179,6 +10167,9 @@ module Aws::LexModelsV2
     #   A timestamp of the date and time that the intent was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] initial_response_setting
+    #   @return [Types::InitialResponseSetting]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeIntentResponse AWS API Documentation
     #
     class DescribeIntentResponse < Struct.new(
@@ -5199,7 +10190,8 @@ module Aws::LexModelsV2
       :bot_version,
       :locale_id,
       :creation_date_time,
-      :last_updated_date_time)
+      :last_updated_date_time,
+      :initial_response_setting)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5497,6 +10489,836 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # Defines the action that the bot executes at runtime when the
+    # conversation reaches this step.
+    #
+    # @note When making an API call, you may pass DialogAction
+    #   data as a hash:
+    #
+    #       {
+    #         type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #         slot_to_elicit: "Name",
+    #         suppress_next_message: false,
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The action that the bot should execute.
+    #   @return [String]
+    #
+    # @!attribute [rw] slot_to_elicit
+    #   If the dialog action is `ElicitSlot`, defines the slot to elicit
+    #   from the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] suppress_next_message
+    #   When true the next message for the intent is not used.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DialogAction AWS API Documentation
+    #
+    class DialogAction < Struct.new(
+      :type,
+      :slot_to_elicit,
+      :suppress_next_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Settings that specify the dialog code hook that is called by Amazon
+    # Lex at a step of the conversation.
+    #
+    # @note When making an API call, you may pass DialogCodeHookInvocationSetting
+    #   data as a hash:
+    #
+    #       {
+    #         enable_code_hook_invocation: false, # required
+    #         active: false, # required
+    #         invocation_label: "Name",
+    #         post_code_hook_specification: { # required
+    #           success_response: {
+    #             message_groups: [ # required
+    #               {
+    #                 message: { # required
+    #                   plain_text_message: {
+    #                     value: "PlainTextMessageValue", # required
+    #                   },
+    #                   custom_payload: {
+    #                     value: "CustomPayloadValue", # required
+    #                   },
+    #                   ssml_message: {
+    #                     value: "SSMLMessageValue", # required
+    #                   },
+    #                   image_response_card: {
+    #                     title: "AttachmentTitle", # required
+    #                     subtitle: "AttachmentTitle",
+    #                     image_url: "AttachmentUrl",
+    #                     buttons: [
+    #                       {
+    #                         text: "ButtonText", # required
+    #                         value: "ButtonValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #                 variations: [
+    #                   {
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #             allow_interrupt: false,
+    #           },
+    #           success_next_step: {
+    #             dialog_action: {
+    #               type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #               slot_to_elicit: "Name",
+    #               suppress_next_message: false,
+    #             },
+    #             intent: {
+    #               name: "Name",
+    #               slots: {
+    #                 "Name" => {
+    #                   shape: "Scalar", # accepts Scalar, List
+    #                   value: {
+    #                     interpreted_value: "NonEmptyString",
+    #                   },
+    #                   values: [
+    #                     {
+    #                       # recursive SlotValueOverride
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             },
+    #             session_attributes: {
+    #               "NonEmptyString" => "String",
+    #             },
+    #           },
+    #           success_conditional: {
+    #             active: false, # required
+    #             conditional_branches: [ # required
+    #               {
+    #                 name: "Name", # required
+    #                 condition: { # required
+    #                   expression_string: "ConditionExpression", # required
+    #                 },
+    #                 next_step: { # required
+    #                   dialog_action: {
+    #                     type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                     slot_to_elicit: "Name",
+    #                     suppress_next_message: false,
+    #                   },
+    #                   intent: {
+    #                     name: "Name",
+    #                     slots: {
+    #                       "Name" => {
+    #                         shape: "Scalar", # accepts Scalar, List
+    #                         value: {
+    #                           interpreted_value: "NonEmptyString",
+    #                         },
+    #                         values: [
+    #                           {
+    #                             # recursive SlotValueOverride
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                   session_attributes: {
+    #                     "NonEmptyString" => "String",
+    #                   },
+    #                 },
+    #                 response: {
+    #                   message_groups: [ # required
+    #                     {
+    #                       message: { # required
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       variations: [
+    #                         {
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                   allow_interrupt: false,
+    #                 },
+    #               },
+    #             ],
+    #             default_branch: { # required
+    #               next_step: {
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #             },
+    #           },
+    #           failure_response: {
+    #             message_groups: [ # required
+    #               {
+    #                 message: { # required
+    #                   plain_text_message: {
+    #                     value: "PlainTextMessageValue", # required
+    #                   },
+    #                   custom_payload: {
+    #                     value: "CustomPayloadValue", # required
+    #                   },
+    #                   ssml_message: {
+    #                     value: "SSMLMessageValue", # required
+    #                   },
+    #                   image_response_card: {
+    #                     title: "AttachmentTitle", # required
+    #                     subtitle: "AttachmentTitle",
+    #                     image_url: "AttachmentUrl",
+    #                     buttons: [
+    #                       {
+    #                         text: "ButtonText", # required
+    #                         value: "ButtonValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #                 variations: [
+    #                   {
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #             allow_interrupt: false,
+    #           },
+    #           failure_next_step: {
+    #             dialog_action: {
+    #               type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #               slot_to_elicit: "Name",
+    #               suppress_next_message: false,
+    #             },
+    #             intent: {
+    #               name: "Name",
+    #               slots: {
+    #                 "Name" => {
+    #                   shape: "Scalar", # accepts Scalar, List
+    #                   value: {
+    #                     interpreted_value: "NonEmptyString",
+    #                   },
+    #                   values: [
+    #                     {
+    #                       # recursive SlotValueOverride
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             },
+    #             session_attributes: {
+    #               "NonEmptyString" => "String",
+    #             },
+    #           },
+    #           failure_conditional: {
+    #             active: false, # required
+    #             conditional_branches: [ # required
+    #               {
+    #                 name: "Name", # required
+    #                 condition: { # required
+    #                   expression_string: "ConditionExpression", # required
+    #                 },
+    #                 next_step: { # required
+    #                   dialog_action: {
+    #                     type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                     slot_to_elicit: "Name",
+    #                     suppress_next_message: false,
+    #                   },
+    #                   intent: {
+    #                     name: "Name",
+    #                     slots: {
+    #                       "Name" => {
+    #                         shape: "Scalar", # accepts Scalar, List
+    #                         value: {
+    #                           interpreted_value: "NonEmptyString",
+    #                         },
+    #                         values: [
+    #                           {
+    #                             # recursive SlotValueOverride
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                   session_attributes: {
+    #                     "NonEmptyString" => "String",
+    #                   },
+    #                 },
+    #                 response: {
+    #                   message_groups: [ # required
+    #                     {
+    #                       message: { # required
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       variations: [
+    #                         {
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                   allow_interrupt: false,
+    #                 },
+    #               },
+    #             ],
+    #             default_branch: { # required
+    #               next_step: {
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #             },
+    #           },
+    #           timeout_response: {
+    #             message_groups: [ # required
+    #               {
+    #                 message: { # required
+    #                   plain_text_message: {
+    #                     value: "PlainTextMessageValue", # required
+    #                   },
+    #                   custom_payload: {
+    #                     value: "CustomPayloadValue", # required
+    #                   },
+    #                   ssml_message: {
+    #                     value: "SSMLMessageValue", # required
+    #                   },
+    #                   image_response_card: {
+    #                     title: "AttachmentTitle", # required
+    #                     subtitle: "AttachmentTitle",
+    #                     image_url: "AttachmentUrl",
+    #                     buttons: [
+    #                       {
+    #                         text: "ButtonText", # required
+    #                         value: "ButtonValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #                 variations: [
+    #                   {
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #             allow_interrupt: false,
+    #           },
+    #           timeout_next_step: {
+    #             dialog_action: {
+    #               type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #               slot_to_elicit: "Name",
+    #               suppress_next_message: false,
+    #             },
+    #             intent: {
+    #               name: "Name",
+    #               slots: {
+    #                 "Name" => {
+    #                   shape: "Scalar", # accepts Scalar, List
+    #                   value: {
+    #                     interpreted_value: "NonEmptyString",
+    #                   },
+    #                   values: [
+    #                     {
+    #                       # recursive SlotValueOverride
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             },
+    #             session_attributes: {
+    #               "NonEmptyString" => "String",
+    #             },
+    #           },
+    #           timeout_conditional: {
+    #             active: false, # required
+    #             conditional_branches: [ # required
+    #               {
+    #                 name: "Name", # required
+    #                 condition: { # required
+    #                   expression_string: "ConditionExpression", # required
+    #                 },
+    #                 next_step: { # required
+    #                   dialog_action: {
+    #                     type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                     slot_to_elicit: "Name",
+    #                     suppress_next_message: false,
+    #                   },
+    #                   intent: {
+    #                     name: "Name",
+    #                     slots: {
+    #                       "Name" => {
+    #                         shape: "Scalar", # accepts Scalar, List
+    #                         value: {
+    #                           interpreted_value: "NonEmptyString",
+    #                         },
+    #                         values: [
+    #                           {
+    #                             # recursive SlotValueOverride
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                   session_attributes: {
+    #                     "NonEmptyString" => "String",
+    #                   },
+    #                 },
+    #                 response: {
+    #                   message_groups: [ # required
+    #                     {
+    #                       message: { # required
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       variations: [
+    #                         {
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                   allow_interrupt: false,
+    #                 },
+    #               },
+    #             ],
+    #             default_branch: { # required
+    #               next_step: {
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] enable_code_hook_invocation
+    #   Indicates whether a Lambda function should be invoked for the
+    #   dialog.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] active
+    #   Determines whether a dialog code hook is used when the intent is
+    #   activated.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] invocation_label
+    #   A label that indicates the dialog step from which the dialog code
+    #   hook is happening.
+    #   @return [String]
+    #
+    # @!attribute [rw] post_code_hook_specification
+    #   Contains the responses and actions that Amazon Lex takes after the
+    #   Lambda function is complete.
+    #   @return [Types::PostDialogCodeHookInvocationSpecification]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DialogCodeHookInvocationSetting AWS API Documentation
+    #
+    class DialogCodeHookInvocationSetting < Struct.new(
+      :enable_code_hook_invocation,
+      :active,
+      :invocation_label,
+      :post_code_hook_specification)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Settings that determine the Lambda function that Amazon Lex uses for
     # processing user responses.
     #
@@ -5515,6 +11337,93 @@ module Aws::LexModelsV2
     #
     class DialogCodeHookSettings < Struct.new(
       :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The current state of the conversation with the user.
+    #
+    # @note When making an API call, you may pass DialogState
+    #   data as a hash:
+    #
+    #       {
+    #         dialog_action: {
+    #           type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #           slot_to_elicit: "Name",
+    #           suppress_next_message: false,
+    #         },
+    #         intent: {
+    #           name: "Name",
+    #           slots: {
+    #             "Name" => {
+    #               shape: "Scalar", # accepts Scalar, List
+    #               value: {
+    #                 interpreted_value: "NonEmptyString",
+    #               },
+    #               values: [
+    #                 {
+    #                   # recursive SlotValueOverride
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #         },
+    #         session_attributes: {
+    #           "NonEmptyString" => "String",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] dialog_action
+    #   Defines the action that the bot executes at runtime when the
+    #   conversation reaches this step.
+    #   @return [Types::DialogAction]
+    #
+    # @!attribute [rw] intent
+    #   Override settings to configure the intent state.
+    #   @return [Types::IntentOverride]
+    #
+    # @!attribute [rw] session_attributes
+    #   Map of key/value pairs representing session-specific context
+    #   information. It contains application information passed between
+    #   Amazon Lex and a client application.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DialogState AWS API Documentation
+    #
+    class DialogState < Struct.new(
+      :dialog_action,
+      :intent,
+      :session_attributes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Settings that specify the dialog code hook that is called by Amazon
+    # Lex between eliciting slot values.
+    #
+    # @note When making an API call, you may pass ElicitationCodeHookInvocationSetting
+    #   data as a hash:
+    #
+    #       {
+    #         enable_code_hook_invocation: false, # required
+    #         invocation_label: "Name",
+    #       }
+    #
+    # @!attribute [rw] enable_code_hook_invocation
+    #   Indicates whether a Lambda function should be invoked for the
+    #   dialog.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] invocation_label
+    #   A label that indicates the dialog step from which the dialog code
+    #   hook is happening.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ElicitationCodeHookInvocationSetting AWS API Documentation
+    #
+    class ElicitationCodeHookInvocationSetting < Struct.new(
+      :enable_code_hook_invocation,
+      :invocation_label)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5907,6 +11816,597 @@ module Aws::LexModelsV2
     #             ],
     #             allow_interrupt: false,
     #           },
+    #           success_next_step: {
+    #             dialog_action: {
+    #               type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #               slot_to_elicit: "Name",
+    #               suppress_next_message: false,
+    #             },
+    #             intent: {
+    #               name: "Name",
+    #               slots: {
+    #                 "Name" => {
+    #                   shape: "Scalar", # accepts Scalar, List
+    #                   value: {
+    #                     interpreted_value: "NonEmptyString",
+    #                   },
+    #                   values: [
+    #                     {
+    #                       # recursive SlotValueOverride
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             },
+    #             session_attributes: {
+    #               "NonEmptyString" => "String",
+    #             },
+    #           },
+    #           success_conditional: {
+    #             active: false, # required
+    #             conditional_branches: [ # required
+    #               {
+    #                 name: "Name", # required
+    #                 condition: { # required
+    #                   expression_string: "ConditionExpression", # required
+    #                 },
+    #                 next_step: { # required
+    #                   dialog_action: {
+    #                     type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                     slot_to_elicit: "Name",
+    #                     suppress_next_message: false,
+    #                   },
+    #                   intent: {
+    #                     name: "Name",
+    #                     slots: {
+    #                       "Name" => {
+    #                         shape: "Scalar", # accepts Scalar, List
+    #                         value: {
+    #                           interpreted_value: "NonEmptyString",
+    #                         },
+    #                         values: [
+    #                           {
+    #                             # recursive SlotValueOverride
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                   session_attributes: {
+    #                     "NonEmptyString" => "String",
+    #                   },
+    #                 },
+    #                 response: {
+    #                   message_groups: [ # required
+    #                     {
+    #                       message: { # required
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       variations: [
+    #                         {
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                   allow_interrupt: false,
+    #                 },
+    #               },
+    #             ],
+    #             default_branch: { # required
+    #               next_step: {
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #             },
+    #           },
+    #           failure_next_step: {
+    #             dialog_action: {
+    #               type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #               slot_to_elicit: "Name",
+    #               suppress_next_message: false,
+    #             },
+    #             intent: {
+    #               name: "Name",
+    #               slots: {
+    #                 "Name" => {
+    #                   shape: "Scalar", # accepts Scalar, List
+    #                   value: {
+    #                     interpreted_value: "NonEmptyString",
+    #                   },
+    #                   values: [
+    #                     {
+    #                       # recursive SlotValueOverride
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             },
+    #             session_attributes: {
+    #               "NonEmptyString" => "String",
+    #             },
+    #           },
+    #           failure_conditional: {
+    #             active: false, # required
+    #             conditional_branches: [ # required
+    #               {
+    #                 name: "Name", # required
+    #                 condition: { # required
+    #                   expression_string: "ConditionExpression", # required
+    #                 },
+    #                 next_step: { # required
+    #                   dialog_action: {
+    #                     type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                     slot_to_elicit: "Name",
+    #                     suppress_next_message: false,
+    #                   },
+    #                   intent: {
+    #                     name: "Name",
+    #                     slots: {
+    #                       "Name" => {
+    #                         shape: "Scalar", # accepts Scalar, List
+    #                         value: {
+    #                           interpreted_value: "NonEmptyString",
+    #                         },
+    #                         values: [
+    #                           {
+    #                             # recursive SlotValueOverride
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                   session_attributes: {
+    #                     "NonEmptyString" => "String",
+    #                   },
+    #                 },
+    #                 response: {
+    #                   message_groups: [ # required
+    #                     {
+    #                       message: { # required
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       variations: [
+    #                         {
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                   allow_interrupt: false,
+    #                 },
+    #               },
+    #             ],
+    #             default_branch: { # required
+    #               next_step: {
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #             },
+    #           },
+    #           timeout_next_step: {
+    #             dialog_action: {
+    #               type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #               slot_to_elicit: "Name",
+    #               suppress_next_message: false,
+    #             },
+    #             intent: {
+    #               name: "Name",
+    #               slots: {
+    #                 "Name" => {
+    #                   shape: "Scalar", # accepts Scalar, List
+    #                   value: {
+    #                     interpreted_value: "NonEmptyString",
+    #                   },
+    #                   values: [
+    #                     {
+    #                       # recursive SlotValueOverride
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             },
+    #             session_attributes: {
+    #               "NonEmptyString" => "String",
+    #             },
+    #           },
+    #           timeout_conditional: {
+    #             active: false, # required
+    #             conditional_branches: [ # required
+    #               {
+    #                 name: "Name", # required
+    #                 condition: { # required
+    #                   expression_string: "ConditionExpression", # required
+    #                 },
+    #                 next_step: { # required
+    #                   dialog_action: {
+    #                     type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                     slot_to_elicit: "Name",
+    #                     suppress_next_message: false,
+    #                   },
+    #                   intent: {
+    #                     name: "Name",
+    #                     slots: {
+    #                       "Name" => {
+    #                         shape: "Scalar", # accepts Scalar, List
+    #                         value: {
+    #                           interpreted_value: "NonEmptyString",
+    #                         },
+    #                         values: [
+    #                           {
+    #                             # recursive SlotValueOverride
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                   session_attributes: {
+    #                     "NonEmptyString" => "String",
+    #                   },
+    #                 },
+    #                 response: {
+    #                   message_groups: [ # required
+    #                     {
+    #                       message: { # required
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       variations: [
+    #                         {
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                   allow_interrupt: false,
+    #                 },
+    #               },
+    #             ],
+    #             default_branch: { # required
+    #               next_step: {
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #             },
+    #           },
     #         },
     #         fulfillment_updates_specification: {
     #           active: false, # required
@@ -6020,6 +12520,7 @@ module Aws::LexModelsV2
     #           },
     #           timeout_in_seconds: 1,
     #         },
+    #         active: false,
     #       }
     #
     # @!attribute [rw] enabled
@@ -6039,12 +12540,18 @@ module Aws::LexModelsV2
     #   be used only with streaming conversations.
     #   @return [Types::FulfillmentUpdatesSpecification]
     #
+    # @!attribute [rw] active
+    #   Determines whether the fulfillment code hook is used. When `active`
+    #   is false, the code hook doesn't run.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/FulfillmentCodeHookSettings AWS API Documentation
     #
     class FulfillmentCodeHookSettings < Struct.new(
       :enabled,
       :post_fulfillment_status_specification,
-      :fulfillment_updates_specification)
+      :fulfillment_updates_specification,
+      :active)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6672,6 +13179,1056 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # Configuration setting for a response sent to the user before Amazon
+    # Lex starts eliciting slots.
+    #
+    # @note When making an API call, you may pass InitialResponseSetting
+    #   data as a hash:
+    #
+    #       {
+    #         initial_response: {
+    #           message_groups: [ # required
+    #             {
+    #               message: { # required
+    #                 plain_text_message: {
+    #                   value: "PlainTextMessageValue", # required
+    #                 },
+    #                 custom_payload: {
+    #                   value: "CustomPayloadValue", # required
+    #                 },
+    #                 ssml_message: {
+    #                   value: "SSMLMessageValue", # required
+    #                 },
+    #                 image_response_card: {
+    #                   title: "AttachmentTitle", # required
+    #                   subtitle: "AttachmentTitle",
+    #                   image_url: "AttachmentUrl",
+    #                   buttons: [
+    #                     {
+    #                       text: "ButtonText", # required
+    #                       value: "ButtonValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #               variations: [
+    #                 {
+    #                   plain_text_message: {
+    #                     value: "PlainTextMessageValue", # required
+    #                   },
+    #                   custom_payload: {
+    #                     value: "CustomPayloadValue", # required
+    #                   },
+    #                   ssml_message: {
+    #                     value: "SSMLMessageValue", # required
+    #                   },
+    #                   image_response_card: {
+    #                     title: "AttachmentTitle", # required
+    #                     subtitle: "AttachmentTitle",
+    #                     image_url: "AttachmentUrl",
+    #                     buttons: [
+    #                       {
+    #                         text: "ButtonText", # required
+    #                         value: "ButtonValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #           allow_interrupt: false,
+    #         },
+    #         next_step: {
+    #           dialog_action: {
+    #             type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #             slot_to_elicit: "Name",
+    #             suppress_next_message: false,
+    #           },
+    #           intent: {
+    #             name: "Name",
+    #             slots: {
+    #               "Name" => {
+    #                 shape: "Scalar", # accepts Scalar, List
+    #                 value: {
+    #                   interpreted_value: "NonEmptyString",
+    #                 },
+    #                 values: [
+    #                   {
+    #                     # recursive SlotValueOverride
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           },
+    #           session_attributes: {
+    #             "NonEmptyString" => "String",
+    #           },
+    #         },
+    #         conditional: {
+    #           active: false, # required
+    #           conditional_branches: [ # required
+    #             {
+    #               name: "Name", # required
+    #               condition: { # required
+    #                 expression_string: "ConditionExpression", # required
+    #               },
+    #               next_step: { # required
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #             },
+    #           ],
+    #           default_branch: { # required
+    #             next_step: {
+    #               dialog_action: {
+    #                 type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                 slot_to_elicit: "Name",
+    #                 suppress_next_message: false,
+    #               },
+    #               intent: {
+    #                 name: "Name",
+    #                 slots: {
+    #                   "Name" => {
+    #                     shape: "Scalar", # accepts Scalar, List
+    #                     value: {
+    #                       interpreted_value: "NonEmptyString",
+    #                     },
+    #                     values: [
+    #                       {
+    #                         # recursive SlotValueOverride
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               },
+    #               session_attributes: {
+    #                 "NonEmptyString" => "String",
+    #               },
+    #             },
+    #             response: {
+    #               message_groups: [ # required
+    #                 {
+    #                   message: { # required
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   variations: [
+    #                     {
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #               allow_interrupt: false,
+    #             },
+    #           },
+    #         },
+    #         code_hook: {
+    #           enable_code_hook_invocation: false, # required
+    #           active: false, # required
+    #           invocation_label: "Name",
+    #           post_code_hook_specification: { # required
+    #             success_response: {
+    #               message_groups: [ # required
+    #                 {
+    #                   message: { # required
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   variations: [
+    #                     {
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #               allow_interrupt: false,
+    #             },
+    #             success_next_step: {
+    #               dialog_action: {
+    #                 type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                 slot_to_elicit: "Name",
+    #                 suppress_next_message: false,
+    #               },
+    #               intent: {
+    #                 name: "Name",
+    #                 slots: {
+    #                   "Name" => {
+    #                     shape: "Scalar", # accepts Scalar, List
+    #                     value: {
+    #                       interpreted_value: "NonEmptyString",
+    #                     },
+    #                     values: [
+    #                       {
+    #                         # recursive SlotValueOverride
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               },
+    #               session_attributes: {
+    #                 "NonEmptyString" => "String",
+    #               },
+    #             },
+    #             success_conditional: {
+    #               active: false, # required
+    #               conditional_branches: [ # required
+    #                 {
+    #                   name: "Name", # required
+    #                   condition: { # required
+    #                     expression_string: "ConditionExpression", # required
+    #                   },
+    #                   next_step: { # required
+    #                     dialog_action: {
+    #                       type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                       slot_to_elicit: "Name",
+    #                       suppress_next_message: false,
+    #                     },
+    #                     intent: {
+    #                       name: "Name",
+    #                       slots: {
+    #                         "Name" => {
+    #                           shape: "Scalar", # accepts Scalar, List
+    #                           value: {
+    #                             interpreted_value: "NonEmptyString",
+    #                           },
+    #                           values: [
+    #                             {
+    #                               # recursive SlotValueOverride
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
+    #                     session_attributes: {
+    #                       "NonEmptyString" => "String",
+    #                     },
+    #                   },
+    #                   response: {
+    #                     message_groups: [ # required
+    #                       {
+    #                         message: { # required
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                         variations: [
+    #                           {
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                         ],
+    #                       },
+    #                     ],
+    #                     allow_interrupt: false,
+    #                   },
+    #                 },
+    #               ],
+    #               default_branch: { # required
+    #                 next_step: {
+    #                   dialog_action: {
+    #                     type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                     slot_to_elicit: "Name",
+    #                     suppress_next_message: false,
+    #                   },
+    #                   intent: {
+    #                     name: "Name",
+    #                     slots: {
+    #                       "Name" => {
+    #                         shape: "Scalar", # accepts Scalar, List
+    #                         value: {
+    #                           interpreted_value: "NonEmptyString",
+    #                         },
+    #                         values: [
+    #                           {
+    #                             # recursive SlotValueOverride
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                   session_attributes: {
+    #                     "NonEmptyString" => "String",
+    #                   },
+    #                 },
+    #                 response: {
+    #                   message_groups: [ # required
+    #                     {
+    #                       message: { # required
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       variations: [
+    #                         {
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                   allow_interrupt: false,
+    #                 },
+    #               },
+    #             },
+    #             failure_response: {
+    #               message_groups: [ # required
+    #                 {
+    #                   message: { # required
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   variations: [
+    #                     {
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #               allow_interrupt: false,
+    #             },
+    #             failure_next_step: {
+    #               dialog_action: {
+    #                 type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                 slot_to_elicit: "Name",
+    #                 suppress_next_message: false,
+    #               },
+    #               intent: {
+    #                 name: "Name",
+    #                 slots: {
+    #                   "Name" => {
+    #                     shape: "Scalar", # accepts Scalar, List
+    #                     value: {
+    #                       interpreted_value: "NonEmptyString",
+    #                     },
+    #                     values: [
+    #                       {
+    #                         # recursive SlotValueOverride
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               },
+    #               session_attributes: {
+    #                 "NonEmptyString" => "String",
+    #               },
+    #             },
+    #             failure_conditional: {
+    #               active: false, # required
+    #               conditional_branches: [ # required
+    #                 {
+    #                   name: "Name", # required
+    #                   condition: { # required
+    #                     expression_string: "ConditionExpression", # required
+    #                   },
+    #                   next_step: { # required
+    #                     dialog_action: {
+    #                       type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                       slot_to_elicit: "Name",
+    #                       suppress_next_message: false,
+    #                     },
+    #                     intent: {
+    #                       name: "Name",
+    #                       slots: {
+    #                         "Name" => {
+    #                           shape: "Scalar", # accepts Scalar, List
+    #                           value: {
+    #                             interpreted_value: "NonEmptyString",
+    #                           },
+    #                           values: [
+    #                             {
+    #                               # recursive SlotValueOverride
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
+    #                     session_attributes: {
+    #                       "NonEmptyString" => "String",
+    #                     },
+    #                   },
+    #                   response: {
+    #                     message_groups: [ # required
+    #                       {
+    #                         message: { # required
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                         variations: [
+    #                           {
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                         ],
+    #                       },
+    #                     ],
+    #                     allow_interrupt: false,
+    #                   },
+    #                 },
+    #               ],
+    #               default_branch: { # required
+    #                 next_step: {
+    #                   dialog_action: {
+    #                     type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                     slot_to_elicit: "Name",
+    #                     suppress_next_message: false,
+    #                   },
+    #                   intent: {
+    #                     name: "Name",
+    #                     slots: {
+    #                       "Name" => {
+    #                         shape: "Scalar", # accepts Scalar, List
+    #                         value: {
+    #                           interpreted_value: "NonEmptyString",
+    #                         },
+    #                         values: [
+    #                           {
+    #                             # recursive SlotValueOverride
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                   session_attributes: {
+    #                     "NonEmptyString" => "String",
+    #                   },
+    #                 },
+    #                 response: {
+    #                   message_groups: [ # required
+    #                     {
+    #                       message: { # required
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       variations: [
+    #                         {
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                   allow_interrupt: false,
+    #                 },
+    #               },
+    #             },
+    #             timeout_response: {
+    #               message_groups: [ # required
+    #                 {
+    #                   message: { # required
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   variations: [
+    #                     {
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #               allow_interrupt: false,
+    #             },
+    #             timeout_next_step: {
+    #               dialog_action: {
+    #                 type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                 slot_to_elicit: "Name",
+    #                 suppress_next_message: false,
+    #               },
+    #               intent: {
+    #                 name: "Name",
+    #                 slots: {
+    #                   "Name" => {
+    #                     shape: "Scalar", # accepts Scalar, List
+    #                     value: {
+    #                       interpreted_value: "NonEmptyString",
+    #                     },
+    #                     values: [
+    #                       {
+    #                         # recursive SlotValueOverride
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               },
+    #               session_attributes: {
+    #                 "NonEmptyString" => "String",
+    #               },
+    #             },
+    #             timeout_conditional: {
+    #               active: false, # required
+    #               conditional_branches: [ # required
+    #                 {
+    #                   name: "Name", # required
+    #                   condition: { # required
+    #                     expression_string: "ConditionExpression", # required
+    #                   },
+    #                   next_step: { # required
+    #                     dialog_action: {
+    #                       type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                       slot_to_elicit: "Name",
+    #                       suppress_next_message: false,
+    #                     },
+    #                     intent: {
+    #                       name: "Name",
+    #                       slots: {
+    #                         "Name" => {
+    #                           shape: "Scalar", # accepts Scalar, List
+    #                           value: {
+    #                             interpreted_value: "NonEmptyString",
+    #                           },
+    #                           values: [
+    #                             {
+    #                               # recursive SlotValueOverride
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
+    #                     session_attributes: {
+    #                       "NonEmptyString" => "String",
+    #                     },
+    #                   },
+    #                   response: {
+    #                     message_groups: [ # required
+    #                       {
+    #                         message: { # required
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                         variations: [
+    #                           {
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                         ],
+    #                       },
+    #                     ],
+    #                     allow_interrupt: false,
+    #                   },
+    #                 },
+    #               ],
+    #               default_branch: { # required
+    #                 next_step: {
+    #                   dialog_action: {
+    #                     type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                     slot_to_elicit: "Name",
+    #                     suppress_next_message: false,
+    #                   },
+    #                   intent: {
+    #                     name: "Name",
+    #                     slots: {
+    #                       "Name" => {
+    #                         shape: "Scalar", # accepts Scalar, List
+    #                         value: {
+    #                           interpreted_value: "NonEmptyString",
+    #                         },
+    #                         values: [
+    #                           {
+    #                             # recursive SlotValueOverride
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                   session_attributes: {
+    #                     "NonEmptyString" => "String",
+    #                   },
+    #                 },
+    #                 response: {
+    #                   message_groups: [ # required
+    #                     {
+    #                       message: { # required
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       variations: [
+    #                         {
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                   allow_interrupt: false,
+    #                 },
+    #               },
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] initial_response
+    #   Specifies a list of message groups that Amazon Lex uses to respond
+    #   the user input.
+    #   @return [Types::ResponseSpecification]
+    #
+    # @!attribute [rw] next_step
+    #   The next step in the conversation.
+    #   @return [Types::DialogState]
+    #
+    # @!attribute [rw] conditional
+    #   Provides a list of conditional branches. Branches are evaluated in
+    #   the order that they are entered in the list. The first branch with a
+    #   condition that evaluates to true is executed. The last branch in the
+    #   list is the default branch. The default branch should not have any
+    #   condition expression. The default branch is executed if no other
+    #   branch has a matching condition.
+    #   @return [Types::ConditionalSpecification]
+    #
+    # @!attribute [rw] code_hook
+    #   Settings that specify the dialog code hook that is called by Amazon
+    #   Lex at a step of the conversation.
+    #   @return [Types::DialogCodeHookInvocationSetting]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/InitialResponseSetting AWS API Documentation
+    #
+    class InitialResponseSetting < Struct.new(
+      :initial_response,
+      :next_step,
+      :conditional,
+      :code_hook)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The name of a context that must be active for an intent to be selected
     # by Amazon Lex.
     #
@@ -6701,7 +14258,7 @@ module Aws::LexModelsV2
     #   data as a hash:
     #
     #       {
-    #         closing_response: { # required
+    #         closing_response: {
     #           message_groups: [ # required
     #             {
     #               message: { # required
@@ -6755,6 +14312,203 @@ module Aws::LexModelsV2
     #           allow_interrupt: false,
     #         },
     #         active: false,
+    #         next_step: {
+    #           dialog_action: {
+    #             type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #             slot_to_elicit: "Name",
+    #             suppress_next_message: false,
+    #           },
+    #           intent: {
+    #             name: "Name",
+    #             slots: {
+    #               "Name" => {
+    #                 shape: "Scalar", # accepts Scalar, List
+    #                 value: {
+    #                   interpreted_value: "NonEmptyString",
+    #                 },
+    #                 values: [
+    #                   {
+    #                     # recursive SlotValueOverride
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           },
+    #           session_attributes: {
+    #             "NonEmptyString" => "String",
+    #           },
+    #         },
+    #         conditional: {
+    #           active: false, # required
+    #           conditional_branches: [ # required
+    #             {
+    #               name: "Name", # required
+    #               condition: { # required
+    #                 expression_string: "ConditionExpression", # required
+    #               },
+    #               next_step: { # required
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #             },
+    #           ],
+    #           default_branch: { # required
+    #             next_step: {
+    #               dialog_action: {
+    #                 type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                 slot_to_elicit: "Name",
+    #                 suppress_next_message: false,
+    #               },
+    #               intent: {
+    #                 name: "Name",
+    #                 slots: {
+    #                   "Name" => {
+    #                     shape: "Scalar", # accepts Scalar, List
+    #                     value: {
+    #                       interpreted_value: "NonEmptyString",
+    #                     },
+    #                     values: [
+    #                       {
+    #                         # recursive SlotValueOverride
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               },
+    #               session_attributes: {
+    #                 "NonEmptyString" => "String",
+    #               },
+    #             },
+    #             response: {
+    #               message_groups: [ # required
+    #                 {
+    #                   message: { # required
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   variations: [
+    #                     {
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #               allow_interrupt: false,
+    #             },
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] closing_response
@@ -6768,11 +14522,24 @@ module Aws::LexModelsV2
     #   `active` field isn't specified, the default is true.
     #   @return [Boolean]
     #
+    # @!attribute [rw] next_step
+    #   Specifies the next step that the bot executes after playing the
+    #   intent's closing response.
+    #   @return [Types::DialogState]
+    #
+    # @!attribute [rw] conditional
+    #   A list of conditional branches associated with the intent's closing
+    #   response. These branches are executed when the `nextStep` attribute
+    #   is set to `EvalutateConditional`.
+    #   @return [Types::ConditionalSpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/IntentClosingSetting AWS API Documentation
     #
     class IntentClosingSetting < Struct.new(
       :closing_response,
-      :active)
+      :active,
+      :next_step,
+      :conditional)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6839,7 +14606,7 @@ module Aws::LexModelsV2
     #           allow_interrupt: false,
     #           message_selection_strategy: "Random", # accepts Random, Ordered
     #         },
-    #         declination_response: { # required
+    #         declination_response: {
     #           message_groups: [ # required
     #             {
     #               message: { # required
@@ -6893,6 +14660,1464 @@ module Aws::LexModelsV2
     #           allow_interrupt: false,
     #         },
     #         active: false,
+    #         confirmation_response: {
+    #           message_groups: [ # required
+    #             {
+    #               message: { # required
+    #                 plain_text_message: {
+    #                   value: "PlainTextMessageValue", # required
+    #                 },
+    #                 custom_payload: {
+    #                   value: "CustomPayloadValue", # required
+    #                 },
+    #                 ssml_message: {
+    #                   value: "SSMLMessageValue", # required
+    #                 },
+    #                 image_response_card: {
+    #                   title: "AttachmentTitle", # required
+    #                   subtitle: "AttachmentTitle",
+    #                   image_url: "AttachmentUrl",
+    #                   buttons: [
+    #                     {
+    #                       text: "ButtonText", # required
+    #                       value: "ButtonValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #               variations: [
+    #                 {
+    #                   plain_text_message: {
+    #                     value: "PlainTextMessageValue", # required
+    #                   },
+    #                   custom_payload: {
+    #                     value: "CustomPayloadValue", # required
+    #                   },
+    #                   ssml_message: {
+    #                     value: "SSMLMessageValue", # required
+    #                   },
+    #                   image_response_card: {
+    #                     title: "AttachmentTitle", # required
+    #                     subtitle: "AttachmentTitle",
+    #                     image_url: "AttachmentUrl",
+    #                     buttons: [
+    #                       {
+    #                         text: "ButtonText", # required
+    #                         value: "ButtonValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #           allow_interrupt: false,
+    #         },
+    #         confirmation_next_step: {
+    #           dialog_action: {
+    #             type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #             slot_to_elicit: "Name",
+    #             suppress_next_message: false,
+    #           },
+    #           intent: {
+    #             name: "Name",
+    #             slots: {
+    #               "Name" => {
+    #                 shape: "Scalar", # accepts Scalar, List
+    #                 value: {
+    #                   interpreted_value: "NonEmptyString",
+    #                 },
+    #                 values: [
+    #                   {
+    #                     # recursive SlotValueOverride
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           },
+    #           session_attributes: {
+    #             "NonEmptyString" => "String",
+    #           },
+    #         },
+    #         confirmation_conditional: {
+    #           active: false, # required
+    #           conditional_branches: [ # required
+    #             {
+    #               name: "Name", # required
+    #               condition: { # required
+    #                 expression_string: "ConditionExpression", # required
+    #               },
+    #               next_step: { # required
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #             },
+    #           ],
+    #           default_branch: { # required
+    #             next_step: {
+    #               dialog_action: {
+    #                 type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                 slot_to_elicit: "Name",
+    #                 suppress_next_message: false,
+    #               },
+    #               intent: {
+    #                 name: "Name",
+    #                 slots: {
+    #                   "Name" => {
+    #                     shape: "Scalar", # accepts Scalar, List
+    #                     value: {
+    #                       interpreted_value: "NonEmptyString",
+    #                     },
+    #                     values: [
+    #                       {
+    #                         # recursive SlotValueOverride
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               },
+    #               session_attributes: {
+    #                 "NonEmptyString" => "String",
+    #               },
+    #             },
+    #             response: {
+    #               message_groups: [ # required
+    #                 {
+    #                   message: { # required
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   variations: [
+    #                     {
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #               allow_interrupt: false,
+    #             },
+    #           },
+    #         },
+    #         declination_next_step: {
+    #           dialog_action: {
+    #             type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #             slot_to_elicit: "Name",
+    #             suppress_next_message: false,
+    #           },
+    #           intent: {
+    #             name: "Name",
+    #             slots: {
+    #               "Name" => {
+    #                 shape: "Scalar", # accepts Scalar, List
+    #                 value: {
+    #                   interpreted_value: "NonEmptyString",
+    #                 },
+    #                 values: [
+    #                   {
+    #                     # recursive SlotValueOverride
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           },
+    #           session_attributes: {
+    #             "NonEmptyString" => "String",
+    #           },
+    #         },
+    #         declination_conditional: {
+    #           active: false, # required
+    #           conditional_branches: [ # required
+    #             {
+    #               name: "Name", # required
+    #               condition: { # required
+    #                 expression_string: "ConditionExpression", # required
+    #               },
+    #               next_step: { # required
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #             },
+    #           ],
+    #           default_branch: { # required
+    #             next_step: {
+    #               dialog_action: {
+    #                 type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                 slot_to_elicit: "Name",
+    #                 suppress_next_message: false,
+    #               },
+    #               intent: {
+    #                 name: "Name",
+    #                 slots: {
+    #                   "Name" => {
+    #                     shape: "Scalar", # accepts Scalar, List
+    #                     value: {
+    #                       interpreted_value: "NonEmptyString",
+    #                     },
+    #                     values: [
+    #                       {
+    #                         # recursive SlotValueOverride
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               },
+    #               session_attributes: {
+    #                 "NonEmptyString" => "String",
+    #               },
+    #             },
+    #             response: {
+    #               message_groups: [ # required
+    #                 {
+    #                   message: { # required
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   variations: [
+    #                     {
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #               allow_interrupt: false,
+    #             },
+    #           },
+    #         },
+    #         failure_response: {
+    #           message_groups: [ # required
+    #             {
+    #               message: { # required
+    #                 plain_text_message: {
+    #                   value: "PlainTextMessageValue", # required
+    #                 },
+    #                 custom_payload: {
+    #                   value: "CustomPayloadValue", # required
+    #                 },
+    #                 ssml_message: {
+    #                   value: "SSMLMessageValue", # required
+    #                 },
+    #                 image_response_card: {
+    #                   title: "AttachmentTitle", # required
+    #                   subtitle: "AttachmentTitle",
+    #                   image_url: "AttachmentUrl",
+    #                   buttons: [
+    #                     {
+    #                       text: "ButtonText", # required
+    #                       value: "ButtonValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #               variations: [
+    #                 {
+    #                   plain_text_message: {
+    #                     value: "PlainTextMessageValue", # required
+    #                   },
+    #                   custom_payload: {
+    #                     value: "CustomPayloadValue", # required
+    #                   },
+    #                   ssml_message: {
+    #                     value: "SSMLMessageValue", # required
+    #                   },
+    #                   image_response_card: {
+    #                     title: "AttachmentTitle", # required
+    #                     subtitle: "AttachmentTitle",
+    #                     image_url: "AttachmentUrl",
+    #                     buttons: [
+    #                       {
+    #                         text: "ButtonText", # required
+    #                         value: "ButtonValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #           allow_interrupt: false,
+    #         },
+    #         failure_next_step: {
+    #           dialog_action: {
+    #             type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #             slot_to_elicit: "Name",
+    #             suppress_next_message: false,
+    #           },
+    #           intent: {
+    #             name: "Name",
+    #             slots: {
+    #               "Name" => {
+    #                 shape: "Scalar", # accepts Scalar, List
+    #                 value: {
+    #                   interpreted_value: "NonEmptyString",
+    #                 },
+    #                 values: [
+    #                   {
+    #                     # recursive SlotValueOverride
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           },
+    #           session_attributes: {
+    #             "NonEmptyString" => "String",
+    #           },
+    #         },
+    #         failure_conditional: {
+    #           active: false, # required
+    #           conditional_branches: [ # required
+    #             {
+    #               name: "Name", # required
+    #               condition: { # required
+    #                 expression_string: "ConditionExpression", # required
+    #               },
+    #               next_step: { # required
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #             },
+    #           ],
+    #           default_branch: { # required
+    #             next_step: {
+    #               dialog_action: {
+    #                 type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                 slot_to_elicit: "Name",
+    #                 suppress_next_message: false,
+    #               },
+    #               intent: {
+    #                 name: "Name",
+    #                 slots: {
+    #                   "Name" => {
+    #                     shape: "Scalar", # accepts Scalar, List
+    #                     value: {
+    #                       interpreted_value: "NonEmptyString",
+    #                     },
+    #                     values: [
+    #                       {
+    #                         # recursive SlotValueOverride
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               },
+    #               session_attributes: {
+    #                 "NonEmptyString" => "String",
+    #               },
+    #             },
+    #             response: {
+    #               message_groups: [ # required
+    #                 {
+    #                   message: { # required
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   variations: [
+    #                     {
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #               allow_interrupt: false,
+    #             },
+    #           },
+    #         },
+    #         code_hook: {
+    #           enable_code_hook_invocation: false, # required
+    #           active: false, # required
+    #           invocation_label: "Name",
+    #           post_code_hook_specification: { # required
+    #             success_response: {
+    #               message_groups: [ # required
+    #                 {
+    #                   message: { # required
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   variations: [
+    #                     {
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #               allow_interrupt: false,
+    #             },
+    #             success_next_step: {
+    #               dialog_action: {
+    #                 type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                 slot_to_elicit: "Name",
+    #                 suppress_next_message: false,
+    #               },
+    #               intent: {
+    #                 name: "Name",
+    #                 slots: {
+    #                   "Name" => {
+    #                     shape: "Scalar", # accepts Scalar, List
+    #                     value: {
+    #                       interpreted_value: "NonEmptyString",
+    #                     },
+    #                     values: [
+    #                       {
+    #                         # recursive SlotValueOverride
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               },
+    #               session_attributes: {
+    #                 "NonEmptyString" => "String",
+    #               },
+    #             },
+    #             success_conditional: {
+    #               active: false, # required
+    #               conditional_branches: [ # required
+    #                 {
+    #                   name: "Name", # required
+    #                   condition: { # required
+    #                     expression_string: "ConditionExpression", # required
+    #                   },
+    #                   next_step: { # required
+    #                     dialog_action: {
+    #                       type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                       slot_to_elicit: "Name",
+    #                       suppress_next_message: false,
+    #                     },
+    #                     intent: {
+    #                       name: "Name",
+    #                       slots: {
+    #                         "Name" => {
+    #                           shape: "Scalar", # accepts Scalar, List
+    #                           value: {
+    #                             interpreted_value: "NonEmptyString",
+    #                           },
+    #                           values: [
+    #                             {
+    #                               # recursive SlotValueOverride
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
+    #                     session_attributes: {
+    #                       "NonEmptyString" => "String",
+    #                     },
+    #                   },
+    #                   response: {
+    #                     message_groups: [ # required
+    #                       {
+    #                         message: { # required
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                         variations: [
+    #                           {
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                         ],
+    #                       },
+    #                     ],
+    #                     allow_interrupt: false,
+    #                   },
+    #                 },
+    #               ],
+    #               default_branch: { # required
+    #                 next_step: {
+    #                   dialog_action: {
+    #                     type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                     slot_to_elicit: "Name",
+    #                     suppress_next_message: false,
+    #                   },
+    #                   intent: {
+    #                     name: "Name",
+    #                     slots: {
+    #                       "Name" => {
+    #                         shape: "Scalar", # accepts Scalar, List
+    #                         value: {
+    #                           interpreted_value: "NonEmptyString",
+    #                         },
+    #                         values: [
+    #                           {
+    #                             # recursive SlotValueOverride
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                   session_attributes: {
+    #                     "NonEmptyString" => "String",
+    #                   },
+    #                 },
+    #                 response: {
+    #                   message_groups: [ # required
+    #                     {
+    #                       message: { # required
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       variations: [
+    #                         {
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                   allow_interrupt: false,
+    #                 },
+    #               },
+    #             },
+    #             failure_response: {
+    #               message_groups: [ # required
+    #                 {
+    #                   message: { # required
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   variations: [
+    #                     {
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #               allow_interrupt: false,
+    #             },
+    #             failure_next_step: {
+    #               dialog_action: {
+    #                 type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                 slot_to_elicit: "Name",
+    #                 suppress_next_message: false,
+    #               },
+    #               intent: {
+    #                 name: "Name",
+    #                 slots: {
+    #                   "Name" => {
+    #                     shape: "Scalar", # accepts Scalar, List
+    #                     value: {
+    #                       interpreted_value: "NonEmptyString",
+    #                     },
+    #                     values: [
+    #                       {
+    #                         # recursive SlotValueOverride
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               },
+    #               session_attributes: {
+    #                 "NonEmptyString" => "String",
+    #               },
+    #             },
+    #             failure_conditional: {
+    #               active: false, # required
+    #               conditional_branches: [ # required
+    #                 {
+    #                   name: "Name", # required
+    #                   condition: { # required
+    #                     expression_string: "ConditionExpression", # required
+    #                   },
+    #                   next_step: { # required
+    #                     dialog_action: {
+    #                       type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                       slot_to_elicit: "Name",
+    #                       suppress_next_message: false,
+    #                     },
+    #                     intent: {
+    #                       name: "Name",
+    #                       slots: {
+    #                         "Name" => {
+    #                           shape: "Scalar", # accepts Scalar, List
+    #                           value: {
+    #                             interpreted_value: "NonEmptyString",
+    #                           },
+    #                           values: [
+    #                             {
+    #                               # recursive SlotValueOverride
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
+    #                     session_attributes: {
+    #                       "NonEmptyString" => "String",
+    #                     },
+    #                   },
+    #                   response: {
+    #                     message_groups: [ # required
+    #                       {
+    #                         message: { # required
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                         variations: [
+    #                           {
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                         ],
+    #                       },
+    #                     ],
+    #                     allow_interrupt: false,
+    #                   },
+    #                 },
+    #               ],
+    #               default_branch: { # required
+    #                 next_step: {
+    #                   dialog_action: {
+    #                     type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                     slot_to_elicit: "Name",
+    #                     suppress_next_message: false,
+    #                   },
+    #                   intent: {
+    #                     name: "Name",
+    #                     slots: {
+    #                       "Name" => {
+    #                         shape: "Scalar", # accepts Scalar, List
+    #                         value: {
+    #                           interpreted_value: "NonEmptyString",
+    #                         },
+    #                         values: [
+    #                           {
+    #                             # recursive SlotValueOverride
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                   session_attributes: {
+    #                     "NonEmptyString" => "String",
+    #                   },
+    #                 },
+    #                 response: {
+    #                   message_groups: [ # required
+    #                     {
+    #                       message: { # required
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       variations: [
+    #                         {
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                   allow_interrupt: false,
+    #                 },
+    #               },
+    #             },
+    #             timeout_response: {
+    #               message_groups: [ # required
+    #                 {
+    #                   message: { # required
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   variations: [
+    #                     {
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #               allow_interrupt: false,
+    #             },
+    #             timeout_next_step: {
+    #               dialog_action: {
+    #                 type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                 slot_to_elicit: "Name",
+    #                 suppress_next_message: false,
+    #               },
+    #               intent: {
+    #                 name: "Name",
+    #                 slots: {
+    #                   "Name" => {
+    #                     shape: "Scalar", # accepts Scalar, List
+    #                     value: {
+    #                       interpreted_value: "NonEmptyString",
+    #                     },
+    #                     values: [
+    #                       {
+    #                         # recursive SlotValueOverride
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               },
+    #               session_attributes: {
+    #                 "NonEmptyString" => "String",
+    #               },
+    #             },
+    #             timeout_conditional: {
+    #               active: false, # required
+    #               conditional_branches: [ # required
+    #                 {
+    #                   name: "Name", # required
+    #                   condition: { # required
+    #                     expression_string: "ConditionExpression", # required
+    #                   },
+    #                   next_step: { # required
+    #                     dialog_action: {
+    #                       type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                       slot_to_elicit: "Name",
+    #                       suppress_next_message: false,
+    #                     },
+    #                     intent: {
+    #                       name: "Name",
+    #                       slots: {
+    #                         "Name" => {
+    #                           shape: "Scalar", # accepts Scalar, List
+    #                           value: {
+    #                             interpreted_value: "NonEmptyString",
+    #                           },
+    #                           values: [
+    #                             {
+    #                               # recursive SlotValueOverride
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
+    #                     session_attributes: {
+    #                       "NonEmptyString" => "String",
+    #                     },
+    #                   },
+    #                   response: {
+    #                     message_groups: [ # required
+    #                       {
+    #                         message: { # required
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                         variations: [
+    #                           {
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                         ],
+    #                       },
+    #                     ],
+    #                     allow_interrupt: false,
+    #                   },
+    #                 },
+    #               ],
+    #               default_branch: { # required
+    #                 next_step: {
+    #                   dialog_action: {
+    #                     type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                     slot_to_elicit: "Name",
+    #                     suppress_next_message: false,
+    #                   },
+    #                   intent: {
+    #                     name: "Name",
+    #                     slots: {
+    #                       "Name" => {
+    #                         shape: "Scalar", # accepts Scalar, List
+    #                         value: {
+    #                           interpreted_value: "NonEmptyString",
+    #                         },
+    #                         values: [
+    #                           {
+    #                             # recursive SlotValueOverride
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                   session_attributes: {
+    #                     "NonEmptyString" => "String",
+    #                   },
+    #                 },
+    #                 response: {
+    #                   message_groups: [ # required
+    #                     {
+    #                       message: { # required
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       variations: [
+    #                         {
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                   allow_interrupt: false,
+    #                 },
+    #               },
+    #             },
+    #           },
+    #         },
+    #         elicitation_code_hook: {
+    #           enable_code_hook_invocation: false, # required
+    #           invocation_label: "Name",
+    #         },
     #       }
     #
     # @!attribute [rw] prompt_specification
@@ -6920,12 +16145,79 @@ module Aws::LexModelsV2
     #   true.
     #   @return [Boolean]
     #
+    # @!attribute [rw] confirmation_response
+    #   Specifies a list of message groups that Amazon Lex uses to respond
+    #   the user input.
+    #   @return [Types::ResponseSpecification]
+    #
+    # @!attribute [rw] confirmation_next_step
+    #   Specifies the next step that the bot executes when the customer
+    #   confirms the intent.
+    #   @return [Types::DialogState]
+    #
+    # @!attribute [rw] confirmation_conditional
+    #   A list of conditional branches to evaluate after the intent is
+    #   closed.
+    #   @return [Types::ConditionalSpecification]
+    #
+    # @!attribute [rw] declination_next_step
+    #   Specifies the next step that the bot executes when the customer
+    #   declines the intent.
+    #   @return [Types::DialogState]
+    #
+    # @!attribute [rw] declination_conditional
+    #   A list of conditional branches to evaluate after the intent is
+    #   declined.
+    #   @return [Types::ConditionalSpecification]
+    #
+    # @!attribute [rw] failure_response
+    #   Specifies a list of message groups that Amazon Lex uses to respond
+    #   the user input.
+    #   @return [Types::ResponseSpecification]
+    #
+    # @!attribute [rw] failure_next_step
+    #   The next step to take in the conversation if the confirmation step
+    #   fails.
+    #   @return [Types::DialogState]
+    #
+    # @!attribute [rw] failure_conditional
+    #   Provides a list of conditional branches. Branches are evaluated in
+    #   the order that they are entered in the list. The first branch with a
+    #   condition that evaluates to true is executed. The last branch in the
+    #   list is the default branch. The default branch should not have any
+    #   condition expression. The default branch is executed if no other
+    #   branch has a matching condition.
+    #   @return [Types::ConditionalSpecification]
+    #
+    # @!attribute [rw] code_hook
+    #   The `DialogCodeHookInvocationSetting` object associated with
+    #   intent's confirmation step. The dialog code hook is triggered based
+    #   on these invocation settings when the confirmation next step or
+    #   declination next step or failure next step is
+    #   `InvokeDialogCodeHook`.
+    #   @return [Types::DialogCodeHookInvocationSetting]
+    #
+    # @!attribute [rw] elicitation_code_hook
+    #   The `DialogCodeHookInvocationSetting` used when the code hook is
+    #   invoked during confirmation prompt retries.
+    #   @return [Types::ElicitationCodeHookInvocationSetting]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/IntentConfirmationSetting AWS API Documentation
     #
     class IntentConfirmationSetting < Struct.new(
       :prompt_specification,
       :declination_response,
-      :active)
+      :active,
+      :confirmation_response,
+      :confirmation_next_step,
+      :confirmation_conditional,
+      :declination_next_step,
+      :declination_conditional,
+      :failure_response,
+      :failure_next_step,
+      :failure_conditional,
+      :code_hook,
+      :elicitation_code_hook)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6962,6 +16254,48 @@ module Aws::LexModelsV2
       :name,
       :values,
       :operator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Override settings to configure the intent state.
+    #
+    # @note When making an API call, you may pass IntentOverride
+    #   data as a hash:
+    #
+    #       {
+    #         name: "Name",
+    #         slots: {
+    #           "Name" => {
+    #             shape: "Scalar", # accepts Scalar, List
+    #             value: {
+    #               interpreted_value: "NonEmptyString",
+    #             },
+    #             values: [
+    #               {
+    #                 # recursive SlotValueOverride
+    #               },
+    #             ],
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the intent. Only required when you're switching
+    #   intents.
+    #   @return [String]
+    #
+    # @!attribute [rw] slots
+    #   A map of all of the slot value overrides for the intent. The name of
+    #   the slot maps to the value of the slot. Slots that are not included
+    #   in the map aren't overridden.,
+    #   @return [Hash<String,Types::SlotValueOverride>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/IntentOverride AWS API Documentation
+    #
+    class IntentOverride < Struct.new(
+      :name,
+      :slots)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8947,6 +18281,827 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # Specifies next steps to run after the dialog code hook finishes.
+    #
+    # @note When making an API call, you may pass PostDialogCodeHookInvocationSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         success_response: {
+    #           message_groups: [ # required
+    #             {
+    #               message: { # required
+    #                 plain_text_message: {
+    #                   value: "PlainTextMessageValue", # required
+    #                 },
+    #                 custom_payload: {
+    #                   value: "CustomPayloadValue", # required
+    #                 },
+    #                 ssml_message: {
+    #                   value: "SSMLMessageValue", # required
+    #                 },
+    #                 image_response_card: {
+    #                   title: "AttachmentTitle", # required
+    #                   subtitle: "AttachmentTitle",
+    #                   image_url: "AttachmentUrl",
+    #                   buttons: [
+    #                     {
+    #                       text: "ButtonText", # required
+    #                       value: "ButtonValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #               variations: [
+    #                 {
+    #                   plain_text_message: {
+    #                     value: "PlainTextMessageValue", # required
+    #                   },
+    #                   custom_payload: {
+    #                     value: "CustomPayloadValue", # required
+    #                   },
+    #                   ssml_message: {
+    #                     value: "SSMLMessageValue", # required
+    #                   },
+    #                   image_response_card: {
+    #                     title: "AttachmentTitle", # required
+    #                     subtitle: "AttachmentTitle",
+    #                     image_url: "AttachmentUrl",
+    #                     buttons: [
+    #                       {
+    #                         text: "ButtonText", # required
+    #                         value: "ButtonValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #           allow_interrupt: false,
+    #         },
+    #         success_next_step: {
+    #           dialog_action: {
+    #             type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #             slot_to_elicit: "Name",
+    #             suppress_next_message: false,
+    #           },
+    #           intent: {
+    #             name: "Name",
+    #             slots: {
+    #               "Name" => {
+    #                 shape: "Scalar", # accepts Scalar, List
+    #                 value: {
+    #                   interpreted_value: "NonEmptyString",
+    #                 },
+    #                 values: [
+    #                   {
+    #                     # recursive SlotValueOverride
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           },
+    #           session_attributes: {
+    #             "NonEmptyString" => "String",
+    #           },
+    #         },
+    #         success_conditional: {
+    #           active: false, # required
+    #           conditional_branches: [ # required
+    #             {
+    #               name: "Name", # required
+    #               condition: { # required
+    #                 expression_string: "ConditionExpression", # required
+    #               },
+    #               next_step: { # required
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #             },
+    #           ],
+    #           default_branch: { # required
+    #             next_step: {
+    #               dialog_action: {
+    #                 type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                 slot_to_elicit: "Name",
+    #                 suppress_next_message: false,
+    #               },
+    #               intent: {
+    #                 name: "Name",
+    #                 slots: {
+    #                   "Name" => {
+    #                     shape: "Scalar", # accepts Scalar, List
+    #                     value: {
+    #                       interpreted_value: "NonEmptyString",
+    #                     },
+    #                     values: [
+    #                       {
+    #                         # recursive SlotValueOverride
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               },
+    #               session_attributes: {
+    #                 "NonEmptyString" => "String",
+    #               },
+    #             },
+    #             response: {
+    #               message_groups: [ # required
+    #                 {
+    #                   message: { # required
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   variations: [
+    #                     {
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #               allow_interrupt: false,
+    #             },
+    #           },
+    #         },
+    #         failure_response: {
+    #           message_groups: [ # required
+    #             {
+    #               message: { # required
+    #                 plain_text_message: {
+    #                   value: "PlainTextMessageValue", # required
+    #                 },
+    #                 custom_payload: {
+    #                   value: "CustomPayloadValue", # required
+    #                 },
+    #                 ssml_message: {
+    #                   value: "SSMLMessageValue", # required
+    #                 },
+    #                 image_response_card: {
+    #                   title: "AttachmentTitle", # required
+    #                   subtitle: "AttachmentTitle",
+    #                   image_url: "AttachmentUrl",
+    #                   buttons: [
+    #                     {
+    #                       text: "ButtonText", # required
+    #                       value: "ButtonValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #               variations: [
+    #                 {
+    #                   plain_text_message: {
+    #                     value: "PlainTextMessageValue", # required
+    #                   },
+    #                   custom_payload: {
+    #                     value: "CustomPayloadValue", # required
+    #                   },
+    #                   ssml_message: {
+    #                     value: "SSMLMessageValue", # required
+    #                   },
+    #                   image_response_card: {
+    #                     title: "AttachmentTitle", # required
+    #                     subtitle: "AttachmentTitle",
+    #                     image_url: "AttachmentUrl",
+    #                     buttons: [
+    #                       {
+    #                         text: "ButtonText", # required
+    #                         value: "ButtonValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #           allow_interrupt: false,
+    #         },
+    #         failure_next_step: {
+    #           dialog_action: {
+    #             type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #             slot_to_elicit: "Name",
+    #             suppress_next_message: false,
+    #           },
+    #           intent: {
+    #             name: "Name",
+    #             slots: {
+    #               "Name" => {
+    #                 shape: "Scalar", # accepts Scalar, List
+    #                 value: {
+    #                   interpreted_value: "NonEmptyString",
+    #                 },
+    #                 values: [
+    #                   {
+    #                     # recursive SlotValueOverride
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           },
+    #           session_attributes: {
+    #             "NonEmptyString" => "String",
+    #           },
+    #         },
+    #         failure_conditional: {
+    #           active: false, # required
+    #           conditional_branches: [ # required
+    #             {
+    #               name: "Name", # required
+    #               condition: { # required
+    #                 expression_string: "ConditionExpression", # required
+    #               },
+    #               next_step: { # required
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #             },
+    #           ],
+    #           default_branch: { # required
+    #             next_step: {
+    #               dialog_action: {
+    #                 type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                 slot_to_elicit: "Name",
+    #                 suppress_next_message: false,
+    #               },
+    #               intent: {
+    #                 name: "Name",
+    #                 slots: {
+    #                   "Name" => {
+    #                     shape: "Scalar", # accepts Scalar, List
+    #                     value: {
+    #                       interpreted_value: "NonEmptyString",
+    #                     },
+    #                     values: [
+    #                       {
+    #                         # recursive SlotValueOverride
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               },
+    #               session_attributes: {
+    #                 "NonEmptyString" => "String",
+    #               },
+    #             },
+    #             response: {
+    #               message_groups: [ # required
+    #                 {
+    #                   message: { # required
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   variations: [
+    #                     {
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #               allow_interrupt: false,
+    #             },
+    #           },
+    #         },
+    #         timeout_response: {
+    #           message_groups: [ # required
+    #             {
+    #               message: { # required
+    #                 plain_text_message: {
+    #                   value: "PlainTextMessageValue", # required
+    #                 },
+    #                 custom_payload: {
+    #                   value: "CustomPayloadValue", # required
+    #                 },
+    #                 ssml_message: {
+    #                   value: "SSMLMessageValue", # required
+    #                 },
+    #                 image_response_card: {
+    #                   title: "AttachmentTitle", # required
+    #                   subtitle: "AttachmentTitle",
+    #                   image_url: "AttachmentUrl",
+    #                   buttons: [
+    #                     {
+    #                       text: "ButtonText", # required
+    #                       value: "ButtonValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #               variations: [
+    #                 {
+    #                   plain_text_message: {
+    #                     value: "PlainTextMessageValue", # required
+    #                   },
+    #                   custom_payload: {
+    #                     value: "CustomPayloadValue", # required
+    #                   },
+    #                   ssml_message: {
+    #                     value: "SSMLMessageValue", # required
+    #                   },
+    #                   image_response_card: {
+    #                     title: "AttachmentTitle", # required
+    #                     subtitle: "AttachmentTitle",
+    #                     image_url: "AttachmentUrl",
+    #                     buttons: [
+    #                       {
+    #                         text: "ButtonText", # required
+    #                         value: "ButtonValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #           allow_interrupt: false,
+    #         },
+    #         timeout_next_step: {
+    #           dialog_action: {
+    #             type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #             slot_to_elicit: "Name",
+    #             suppress_next_message: false,
+    #           },
+    #           intent: {
+    #             name: "Name",
+    #             slots: {
+    #               "Name" => {
+    #                 shape: "Scalar", # accepts Scalar, List
+    #                 value: {
+    #                   interpreted_value: "NonEmptyString",
+    #                 },
+    #                 values: [
+    #                   {
+    #                     # recursive SlotValueOverride
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           },
+    #           session_attributes: {
+    #             "NonEmptyString" => "String",
+    #           },
+    #         },
+    #         timeout_conditional: {
+    #           active: false, # required
+    #           conditional_branches: [ # required
+    #             {
+    #               name: "Name", # required
+    #               condition: { # required
+    #                 expression_string: "ConditionExpression", # required
+    #               },
+    #               next_step: { # required
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #             },
+    #           ],
+    #           default_branch: { # required
+    #             next_step: {
+    #               dialog_action: {
+    #                 type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                 slot_to_elicit: "Name",
+    #                 suppress_next_message: false,
+    #               },
+    #               intent: {
+    #                 name: "Name",
+    #                 slots: {
+    #                   "Name" => {
+    #                     shape: "Scalar", # accepts Scalar, List
+    #                     value: {
+    #                       interpreted_value: "NonEmptyString",
+    #                     },
+    #                     values: [
+    #                       {
+    #                         # recursive SlotValueOverride
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               },
+    #               session_attributes: {
+    #                 "NonEmptyString" => "String",
+    #               },
+    #             },
+    #             response: {
+    #               message_groups: [ # required
+    #                 {
+    #                   message: { # required
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   variations: [
+    #                     {
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #               allow_interrupt: false,
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] success_response
+    #   Specifies a list of message groups that Amazon Lex uses to respond
+    #   the user input.
+    #   @return [Types::ResponseSpecification]
+    #
+    # @!attribute [rw] success_next_step
+    #   Specifics the next step the bot runs after the dialog code hook
+    #   finishes successfully.
+    #   @return [Types::DialogState]
+    #
+    # @!attribute [rw] success_conditional
+    #   A list of conditional branches to evaluate after the dialog code
+    #   hook finishes successfully.
+    #   @return [Types::ConditionalSpecification]
+    #
+    # @!attribute [rw] failure_response
+    #   Specifies a list of message groups that Amazon Lex uses to respond
+    #   the user input.
+    #   @return [Types::ResponseSpecification]
+    #
+    # @!attribute [rw] failure_next_step
+    #   Specifies the next step the bot runs after the dialog code hook
+    #   throws an exception or returns with the `State` field of the
+    #   `Intent` object set to `Failed`.
+    #   @return [Types::DialogState]
+    #
+    # @!attribute [rw] failure_conditional
+    #   A list of conditional branches to evaluate after the dialog code
+    #   hook throws an exception or returns with the `State` field of the
+    #   `Intent` object set to `Failed`.
+    #   @return [Types::ConditionalSpecification]
+    #
+    # @!attribute [rw] timeout_response
+    #   Specifies a list of message groups that Amazon Lex uses to respond
+    #   the user input.
+    #   @return [Types::ResponseSpecification]
+    #
+    # @!attribute [rw] timeout_next_step
+    #   Specifies the next step that the bot runs when the code hook times
+    #   out.
+    #   @return [Types::DialogState]
+    #
+    # @!attribute [rw] timeout_conditional
+    #   A list of conditional branches to evaluate if the code hook times
+    #   out.
+    #   @return [Types::ConditionalSpecification]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/PostDialogCodeHookInvocationSpecification AWS API Documentation
+    #
+    class PostDialogCodeHookInvocationSpecification < Struct.new(
+      :success_response,
+      :success_next_step,
+      :success_conditional,
+      :failure_response,
+      :failure_next_step,
+      :failure_conditional,
+      :timeout_response,
+      :timeout_next_step,
+      :timeout_conditional)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides a setting that determines whether the post-fulfillment
     # response is sent to the user. For more information, see
     # [https://docs.aws.amazon.com/lexv2/latest/dg/streaming-progress.html#progress-complete][1]
@@ -9118,6 +19273,597 @@ module Aws::LexModelsV2
     #           ],
     #           allow_interrupt: false,
     #         },
+    #         success_next_step: {
+    #           dialog_action: {
+    #             type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #             slot_to_elicit: "Name",
+    #             suppress_next_message: false,
+    #           },
+    #           intent: {
+    #             name: "Name",
+    #             slots: {
+    #               "Name" => {
+    #                 shape: "Scalar", # accepts Scalar, List
+    #                 value: {
+    #                   interpreted_value: "NonEmptyString",
+    #                 },
+    #                 values: [
+    #                   {
+    #                     # recursive SlotValueOverride
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           },
+    #           session_attributes: {
+    #             "NonEmptyString" => "String",
+    #           },
+    #         },
+    #         success_conditional: {
+    #           active: false, # required
+    #           conditional_branches: [ # required
+    #             {
+    #               name: "Name", # required
+    #               condition: { # required
+    #                 expression_string: "ConditionExpression", # required
+    #               },
+    #               next_step: { # required
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #             },
+    #           ],
+    #           default_branch: { # required
+    #             next_step: {
+    #               dialog_action: {
+    #                 type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                 slot_to_elicit: "Name",
+    #                 suppress_next_message: false,
+    #               },
+    #               intent: {
+    #                 name: "Name",
+    #                 slots: {
+    #                   "Name" => {
+    #                     shape: "Scalar", # accepts Scalar, List
+    #                     value: {
+    #                       interpreted_value: "NonEmptyString",
+    #                     },
+    #                     values: [
+    #                       {
+    #                         # recursive SlotValueOverride
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               },
+    #               session_attributes: {
+    #                 "NonEmptyString" => "String",
+    #               },
+    #             },
+    #             response: {
+    #               message_groups: [ # required
+    #                 {
+    #                   message: { # required
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   variations: [
+    #                     {
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #               allow_interrupt: false,
+    #             },
+    #           },
+    #         },
+    #         failure_next_step: {
+    #           dialog_action: {
+    #             type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #             slot_to_elicit: "Name",
+    #             suppress_next_message: false,
+    #           },
+    #           intent: {
+    #             name: "Name",
+    #             slots: {
+    #               "Name" => {
+    #                 shape: "Scalar", # accepts Scalar, List
+    #                 value: {
+    #                   interpreted_value: "NonEmptyString",
+    #                 },
+    #                 values: [
+    #                   {
+    #                     # recursive SlotValueOverride
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           },
+    #           session_attributes: {
+    #             "NonEmptyString" => "String",
+    #           },
+    #         },
+    #         failure_conditional: {
+    #           active: false, # required
+    #           conditional_branches: [ # required
+    #             {
+    #               name: "Name", # required
+    #               condition: { # required
+    #                 expression_string: "ConditionExpression", # required
+    #               },
+    #               next_step: { # required
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #             },
+    #           ],
+    #           default_branch: { # required
+    #             next_step: {
+    #               dialog_action: {
+    #                 type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                 slot_to_elicit: "Name",
+    #                 suppress_next_message: false,
+    #               },
+    #               intent: {
+    #                 name: "Name",
+    #                 slots: {
+    #                   "Name" => {
+    #                     shape: "Scalar", # accepts Scalar, List
+    #                     value: {
+    #                       interpreted_value: "NonEmptyString",
+    #                     },
+    #                     values: [
+    #                       {
+    #                         # recursive SlotValueOverride
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               },
+    #               session_attributes: {
+    #                 "NonEmptyString" => "String",
+    #               },
+    #             },
+    #             response: {
+    #               message_groups: [ # required
+    #                 {
+    #                   message: { # required
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   variations: [
+    #                     {
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #               allow_interrupt: false,
+    #             },
+    #           },
+    #         },
+    #         timeout_next_step: {
+    #           dialog_action: {
+    #             type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #             slot_to_elicit: "Name",
+    #             suppress_next_message: false,
+    #           },
+    #           intent: {
+    #             name: "Name",
+    #             slots: {
+    #               "Name" => {
+    #                 shape: "Scalar", # accepts Scalar, List
+    #                 value: {
+    #                   interpreted_value: "NonEmptyString",
+    #                 },
+    #                 values: [
+    #                   {
+    #                     # recursive SlotValueOverride
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           },
+    #           session_attributes: {
+    #             "NonEmptyString" => "String",
+    #           },
+    #         },
+    #         timeout_conditional: {
+    #           active: false, # required
+    #           conditional_branches: [ # required
+    #             {
+    #               name: "Name", # required
+    #               condition: { # required
+    #                 expression_string: "ConditionExpression", # required
+    #               },
+    #               next_step: { # required
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #             },
+    #           ],
+    #           default_branch: { # required
+    #             next_step: {
+    #               dialog_action: {
+    #                 type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                 slot_to_elicit: "Name",
+    #                 suppress_next_message: false,
+    #               },
+    #               intent: {
+    #                 name: "Name",
+    #                 slots: {
+    #                   "Name" => {
+    #                     shape: "Scalar", # accepts Scalar, List
+    #                     value: {
+    #                       interpreted_value: "NonEmptyString",
+    #                     },
+    #                     values: [
+    #                       {
+    #                         # recursive SlotValueOverride
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               },
+    #               session_attributes: {
+    #                 "NonEmptyString" => "String",
+    #               },
+    #             },
+    #             response: {
+    #               message_groups: [ # required
+    #                 {
+    #                   message: { # required
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   variations: [
+    #                     {
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #               allow_interrupt: false,
+    #             },
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] success_response
@@ -9135,12 +19881,50 @@ module Aws::LexModelsV2
     #   the user input.
     #   @return [Types::ResponseSpecification]
     #
+    # @!attribute [rw] success_next_step
+    #   Specifies the next step in the conversation that Amazon Lex invokes
+    #   when the fulfillment code hook completes successfully.
+    #   @return [Types::DialogState]
+    #
+    # @!attribute [rw] success_conditional
+    #   A list of conditional branches to evaluate after the fulfillment
+    #   code hook finishes successfully.
+    #   @return [Types::ConditionalSpecification]
+    #
+    # @!attribute [rw] failure_next_step
+    #   Specifies the next step the bot runs after the fulfillment code hook
+    #   throws an exception or returns with the `State` field of the
+    #   `Intent` object set to `Failed`.
+    #   @return [Types::DialogState]
+    #
+    # @!attribute [rw] failure_conditional
+    #   A list of conditional branches to evaluate after the fulfillment
+    #   code hook throws an exception or returns with the `State` field of
+    #   the `Intent` object set to `Failed`.
+    #   @return [Types::ConditionalSpecification]
+    #
+    # @!attribute [rw] timeout_next_step
+    #   Specifies the next step that the bot runs when the fulfillment code
+    #   hook times out.
+    #   @return [Types::DialogState]
+    #
+    # @!attribute [rw] timeout_conditional
+    #   A list of conditional branches to evaluate if the fulfillment code
+    #   hook times out.
+    #   @return [Types::ConditionalSpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/PostFulfillmentStatusSpecification AWS API Documentation
     #
     class PostFulfillmentStatusSpecification < Struct.new(
       :success_response,
       :failure_response,
-      :timeout_response)
+      :timeout_response,
+      :success_next_step,
+      :success_conditional,
+      :failure_next_step,
+      :failure_conditional,
+      :timeout_next_step,
+      :timeout_conditional)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9797,6 +20581,1330 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # Settings used when Amazon Lex successfully captures a slot value from
+    # a user.
+    #
+    # @note When making an API call, you may pass SlotCaptureSetting
+    #   data as a hash:
+    #
+    #       {
+    #         capture_response: {
+    #           message_groups: [ # required
+    #             {
+    #               message: { # required
+    #                 plain_text_message: {
+    #                   value: "PlainTextMessageValue", # required
+    #                 },
+    #                 custom_payload: {
+    #                   value: "CustomPayloadValue", # required
+    #                 },
+    #                 ssml_message: {
+    #                   value: "SSMLMessageValue", # required
+    #                 },
+    #                 image_response_card: {
+    #                   title: "AttachmentTitle", # required
+    #                   subtitle: "AttachmentTitle",
+    #                   image_url: "AttachmentUrl",
+    #                   buttons: [
+    #                     {
+    #                       text: "ButtonText", # required
+    #                       value: "ButtonValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #               variations: [
+    #                 {
+    #                   plain_text_message: {
+    #                     value: "PlainTextMessageValue", # required
+    #                   },
+    #                   custom_payload: {
+    #                     value: "CustomPayloadValue", # required
+    #                   },
+    #                   ssml_message: {
+    #                     value: "SSMLMessageValue", # required
+    #                   },
+    #                   image_response_card: {
+    #                     title: "AttachmentTitle", # required
+    #                     subtitle: "AttachmentTitle",
+    #                     image_url: "AttachmentUrl",
+    #                     buttons: [
+    #                       {
+    #                         text: "ButtonText", # required
+    #                         value: "ButtonValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #           allow_interrupt: false,
+    #         },
+    #         capture_next_step: {
+    #           dialog_action: {
+    #             type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #             slot_to_elicit: "Name",
+    #             suppress_next_message: false,
+    #           },
+    #           intent: {
+    #             name: "Name",
+    #             slots: {
+    #               "Name" => {
+    #                 shape: "Scalar", # accepts Scalar, List
+    #                 value: {
+    #                   interpreted_value: "NonEmptyString",
+    #                 },
+    #                 values: [
+    #                   {
+    #                     # recursive SlotValueOverride
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           },
+    #           session_attributes: {
+    #             "NonEmptyString" => "String",
+    #           },
+    #         },
+    #         capture_conditional: {
+    #           active: false, # required
+    #           conditional_branches: [ # required
+    #             {
+    #               name: "Name", # required
+    #               condition: { # required
+    #                 expression_string: "ConditionExpression", # required
+    #               },
+    #               next_step: { # required
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #             },
+    #           ],
+    #           default_branch: { # required
+    #             next_step: {
+    #               dialog_action: {
+    #                 type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                 slot_to_elicit: "Name",
+    #                 suppress_next_message: false,
+    #               },
+    #               intent: {
+    #                 name: "Name",
+    #                 slots: {
+    #                   "Name" => {
+    #                     shape: "Scalar", # accepts Scalar, List
+    #                     value: {
+    #                       interpreted_value: "NonEmptyString",
+    #                     },
+    #                     values: [
+    #                       {
+    #                         # recursive SlotValueOverride
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               },
+    #               session_attributes: {
+    #                 "NonEmptyString" => "String",
+    #               },
+    #             },
+    #             response: {
+    #               message_groups: [ # required
+    #                 {
+    #                   message: { # required
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   variations: [
+    #                     {
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #               allow_interrupt: false,
+    #             },
+    #           },
+    #         },
+    #         failure_response: {
+    #           message_groups: [ # required
+    #             {
+    #               message: { # required
+    #                 plain_text_message: {
+    #                   value: "PlainTextMessageValue", # required
+    #                 },
+    #                 custom_payload: {
+    #                   value: "CustomPayloadValue", # required
+    #                 },
+    #                 ssml_message: {
+    #                   value: "SSMLMessageValue", # required
+    #                 },
+    #                 image_response_card: {
+    #                   title: "AttachmentTitle", # required
+    #                   subtitle: "AttachmentTitle",
+    #                   image_url: "AttachmentUrl",
+    #                   buttons: [
+    #                     {
+    #                       text: "ButtonText", # required
+    #                       value: "ButtonValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #               variations: [
+    #                 {
+    #                   plain_text_message: {
+    #                     value: "PlainTextMessageValue", # required
+    #                   },
+    #                   custom_payload: {
+    #                     value: "CustomPayloadValue", # required
+    #                   },
+    #                   ssml_message: {
+    #                     value: "SSMLMessageValue", # required
+    #                   },
+    #                   image_response_card: {
+    #                     title: "AttachmentTitle", # required
+    #                     subtitle: "AttachmentTitle",
+    #                     image_url: "AttachmentUrl",
+    #                     buttons: [
+    #                       {
+    #                         text: "ButtonText", # required
+    #                         value: "ButtonValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #           allow_interrupt: false,
+    #         },
+    #         failure_next_step: {
+    #           dialog_action: {
+    #             type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #             slot_to_elicit: "Name",
+    #             suppress_next_message: false,
+    #           },
+    #           intent: {
+    #             name: "Name",
+    #             slots: {
+    #               "Name" => {
+    #                 shape: "Scalar", # accepts Scalar, List
+    #                 value: {
+    #                   interpreted_value: "NonEmptyString",
+    #                 },
+    #                 values: [
+    #                   {
+    #                     # recursive SlotValueOverride
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           },
+    #           session_attributes: {
+    #             "NonEmptyString" => "String",
+    #           },
+    #         },
+    #         failure_conditional: {
+    #           active: false, # required
+    #           conditional_branches: [ # required
+    #             {
+    #               name: "Name", # required
+    #               condition: { # required
+    #                 expression_string: "ConditionExpression", # required
+    #               },
+    #               next_step: { # required
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #             },
+    #           ],
+    #           default_branch: { # required
+    #             next_step: {
+    #               dialog_action: {
+    #                 type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                 slot_to_elicit: "Name",
+    #                 suppress_next_message: false,
+    #               },
+    #               intent: {
+    #                 name: "Name",
+    #                 slots: {
+    #                   "Name" => {
+    #                     shape: "Scalar", # accepts Scalar, List
+    #                     value: {
+    #                       interpreted_value: "NonEmptyString",
+    #                     },
+    #                     values: [
+    #                       {
+    #                         # recursive SlotValueOverride
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               },
+    #               session_attributes: {
+    #                 "NonEmptyString" => "String",
+    #               },
+    #             },
+    #             response: {
+    #               message_groups: [ # required
+    #                 {
+    #                   message: { # required
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   variations: [
+    #                     {
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #               allow_interrupt: false,
+    #             },
+    #           },
+    #         },
+    #         code_hook: {
+    #           enable_code_hook_invocation: false, # required
+    #           active: false, # required
+    #           invocation_label: "Name",
+    #           post_code_hook_specification: { # required
+    #             success_response: {
+    #               message_groups: [ # required
+    #                 {
+    #                   message: { # required
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   variations: [
+    #                     {
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #               allow_interrupt: false,
+    #             },
+    #             success_next_step: {
+    #               dialog_action: {
+    #                 type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                 slot_to_elicit: "Name",
+    #                 suppress_next_message: false,
+    #               },
+    #               intent: {
+    #                 name: "Name",
+    #                 slots: {
+    #                   "Name" => {
+    #                     shape: "Scalar", # accepts Scalar, List
+    #                     value: {
+    #                       interpreted_value: "NonEmptyString",
+    #                     },
+    #                     values: [
+    #                       {
+    #                         # recursive SlotValueOverride
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               },
+    #               session_attributes: {
+    #                 "NonEmptyString" => "String",
+    #               },
+    #             },
+    #             success_conditional: {
+    #               active: false, # required
+    #               conditional_branches: [ # required
+    #                 {
+    #                   name: "Name", # required
+    #                   condition: { # required
+    #                     expression_string: "ConditionExpression", # required
+    #                   },
+    #                   next_step: { # required
+    #                     dialog_action: {
+    #                       type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                       slot_to_elicit: "Name",
+    #                       suppress_next_message: false,
+    #                     },
+    #                     intent: {
+    #                       name: "Name",
+    #                       slots: {
+    #                         "Name" => {
+    #                           shape: "Scalar", # accepts Scalar, List
+    #                           value: {
+    #                             interpreted_value: "NonEmptyString",
+    #                           },
+    #                           values: [
+    #                             {
+    #                               # recursive SlotValueOverride
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
+    #                     session_attributes: {
+    #                       "NonEmptyString" => "String",
+    #                     },
+    #                   },
+    #                   response: {
+    #                     message_groups: [ # required
+    #                       {
+    #                         message: { # required
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                         variations: [
+    #                           {
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                         ],
+    #                       },
+    #                     ],
+    #                     allow_interrupt: false,
+    #                   },
+    #                 },
+    #               ],
+    #               default_branch: { # required
+    #                 next_step: {
+    #                   dialog_action: {
+    #                     type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                     slot_to_elicit: "Name",
+    #                     suppress_next_message: false,
+    #                   },
+    #                   intent: {
+    #                     name: "Name",
+    #                     slots: {
+    #                       "Name" => {
+    #                         shape: "Scalar", # accepts Scalar, List
+    #                         value: {
+    #                           interpreted_value: "NonEmptyString",
+    #                         },
+    #                         values: [
+    #                           {
+    #                             # recursive SlotValueOverride
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                   session_attributes: {
+    #                     "NonEmptyString" => "String",
+    #                   },
+    #                 },
+    #                 response: {
+    #                   message_groups: [ # required
+    #                     {
+    #                       message: { # required
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       variations: [
+    #                         {
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                   allow_interrupt: false,
+    #                 },
+    #               },
+    #             },
+    #             failure_response: {
+    #               message_groups: [ # required
+    #                 {
+    #                   message: { # required
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   variations: [
+    #                     {
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #               allow_interrupt: false,
+    #             },
+    #             failure_next_step: {
+    #               dialog_action: {
+    #                 type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                 slot_to_elicit: "Name",
+    #                 suppress_next_message: false,
+    #               },
+    #               intent: {
+    #                 name: "Name",
+    #                 slots: {
+    #                   "Name" => {
+    #                     shape: "Scalar", # accepts Scalar, List
+    #                     value: {
+    #                       interpreted_value: "NonEmptyString",
+    #                     },
+    #                     values: [
+    #                       {
+    #                         # recursive SlotValueOverride
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               },
+    #               session_attributes: {
+    #                 "NonEmptyString" => "String",
+    #               },
+    #             },
+    #             failure_conditional: {
+    #               active: false, # required
+    #               conditional_branches: [ # required
+    #                 {
+    #                   name: "Name", # required
+    #                   condition: { # required
+    #                     expression_string: "ConditionExpression", # required
+    #                   },
+    #                   next_step: { # required
+    #                     dialog_action: {
+    #                       type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                       slot_to_elicit: "Name",
+    #                       suppress_next_message: false,
+    #                     },
+    #                     intent: {
+    #                       name: "Name",
+    #                       slots: {
+    #                         "Name" => {
+    #                           shape: "Scalar", # accepts Scalar, List
+    #                           value: {
+    #                             interpreted_value: "NonEmptyString",
+    #                           },
+    #                           values: [
+    #                             {
+    #                               # recursive SlotValueOverride
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
+    #                     session_attributes: {
+    #                       "NonEmptyString" => "String",
+    #                     },
+    #                   },
+    #                   response: {
+    #                     message_groups: [ # required
+    #                       {
+    #                         message: { # required
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                         variations: [
+    #                           {
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                         ],
+    #                       },
+    #                     ],
+    #                     allow_interrupt: false,
+    #                   },
+    #                 },
+    #               ],
+    #               default_branch: { # required
+    #                 next_step: {
+    #                   dialog_action: {
+    #                     type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                     slot_to_elicit: "Name",
+    #                     suppress_next_message: false,
+    #                   },
+    #                   intent: {
+    #                     name: "Name",
+    #                     slots: {
+    #                       "Name" => {
+    #                         shape: "Scalar", # accepts Scalar, List
+    #                         value: {
+    #                           interpreted_value: "NonEmptyString",
+    #                         },
+    #                         values: [
+    #                           {
+    #                             # recursive SlotValueOverride
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                   session_attributes: {
+    #                     "NonEmptyString" => "String",
+    #                   },
+    #                 },
+    #                 response: {
+    #                   message_groups: [ # required
+    #                     {
+    #                       message: { # required
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       variations: [
+    #                         {
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                   allow_interrupt: false,
+    #                 },
+    #               },
+    #             },
+    #             timeout_response: {
+    #               message_groups: [ # required
+    #                 {
+    #                   message: { # required
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   variations: [
+    #                     {
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #               allow_interrupt: false,
+    #             },
+    #             timeout_next_step: {
+    #               dialog_action: {
+    #                 type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                 slot_to_elicit: "Name",
+    #                 suppress_next_message: false,
+    #               },
+    #               intent: {
+    #                 name: "Name",
+    #                 slots: {
+    #                   "Name" => {
+    #                     shape: "Scalar", # accepts Scalar, List
+    #                     value: {
+    #                       interpreted_value: "NonEmptyString",
+    #                     },
+    #                     values: [
+    #                       {
+    #                         # recursive SlotValueOverride
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               },
+    #               session_attributes: {
+    #                 "NonEmptyString" => "String",
+    #               },
+    #             },
+    #             timeout_conditional: {
+    #               active: false, # required
+    #               conditional_branches: [ # required
+    #                 {
+    #                   name: "Name", # required
+    #                   condition: { # required
+    #                     expression_string: "ConditionExpression", # required
+    #                   },
+    #                   next_step: { # required
+    #                     dialog_action: {
+    #                       type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                       slot_to_elicit: "Name",
+    #                       suppress_next_message: false,
+    #                     },
+    #                     intent: {
+    #                       name: "Name",
+    #                       slots: {
+    #                         "Name" => {
+    #                           shape: "Scalar", # accepts Scalar, List
+    #                           value: {
+    #                             interpreted_value: "NonEmptyString",
+    #                           },
+    #                           values: [
+    #                             {
+    #                               # recursive SlotValueOverride
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
+    #                     session_attributes: {
+    #                       "NonEmptyString" => "String",
+    #                     },
+    #                   },
+    #                   response: {
+    #                     message_groups: [ # required
+    #                       {
+    #                         message: { # required
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                         variations: [
+    #                           {
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                         ],
+    #                       },
+    #                     ],
+    #                     allow_interrupt: false,
+    #                   },
+    #                 },
+    #               ],
+    #               default_branch: { # required
+    #                 next_step: {
+    #                   dialog_action: {
+    #                     type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                     slot_to_elicit: "Name",
+    #                     suppress_next_message: false,
+    #                   },
+    #                   intent: {
+    #                     name: "Name",
+    #                     slots: {
+    #                       "Name" => {
+    #                         shape: "Scalar", # accepts Scalar, List
+    #                         value: {
+    #                           interpreted_value: "NonEmptyString",
+    #                         },
+    #                         values: [
+    #                           {
+    #                             # recursive SlotValueOverride
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                   session_attributes: {
+    #                     "NonEmptyString" => "String",
+    #                   },
+    #                 },
+    #                 response: {
+    #                   message_groups: [ # required
+    #                     {
+    #                       message: { # required
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       variations: [
+    #                         {
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                   allow_interrupt: false,
+    #                 },
+    #               },
+    #             },
+    #           },
+    #         },
+    #         elicitation_code_hook: {
+    #           enable_code_hook_invocation: false, # required
+    #           invocation_label: "Name",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] capture_response
+    #   Specifies a list of message groups that Amazon Lex uses to respond
+    #   the user input.
+    #   @return [Types::ResponseSpecification]
+    #
+    # @!attribute [rw] capture_next_step
+    #   Specifies the next step that the bot runs when the slot value is
+    #   captured before the code hook times out.
+    #   @return [Types::DialogState]
+    #
+    # @!attribute [rw] capture_conditional
+    #   A list of conditional branches to evaluate after the slot value is
+    #   captured.
+    #   @return [Types::ConditionalSpecification]
+    #
+    # @!attribute [rw] failure_response
+    #   Specifies a list of message groups that Amazon Lex uses to respond
+    #   the user input.
+    #   @return [Types::ResponseSpecification]
+    #
+    # @!attribute [rw] failure_next_step
+    #   Specifies the next step that the bot runs when the slot value code
+    #   is not recognized.
+    #   @return [Types::DialogState]
+    #
+    # @!attribute [rw] failure_conditional
+    #   A list of conditional branches to evaluate when the slot value
+    #   isn't captured.
+    #   @return [Types::ConditionalSpecification]
+    #
+    # @!attribute [rw] code_hook
+    #   Code hook called after Amazon Lex successfully captures a slot
+    #   value.
+    #   @return [Types::DialogCodeHookInvocationSetting]
+    #
+    # @!attribute [rw] elicitation_code_hook
+    #   Code hook called when Amazon Lex doesn't capture a slot value.
+    #   @return [Types::ElicitationCodeHookInvocationSetting]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/SlotCaptureSetting AWS API Documentation
+    #
+    class SlotCaptureSetting < Struct.new(
+      :capture_response,
+      :capture_next_step,
+      :capture_conditional,
+      :failure_response,
+      :failure_next_step,
+      :failure_conditional,
+      :code_hook,
+      :elicitation_code_hook)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the default value to use when a user doesn't provide a
     # value for a slot.
     #
@@ -10156,6 +22264,30 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # The value to set in a slot.
+    #
+    # @note When making an API call, you may pass SlotValue
+    #   data as a hash:
+    #
+    #       {
+    #         interpreted_value: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] interpreted_value
+    #   The value that Amazon Lex determines for the slot. The actual value
+    #   depends on the setting of the value selection strategy for the bot.
+    #   You can choose to use the value entered by the user, or you can have
+    #   Amazon Lex choose the first value in the `resolvedValues` list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/SlotValue AWS API Documentation
+    #
+    class SlotValue < Struct.new(
+      :interpreted_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Settings that you can use for eliciting a slot value.
     #
     # @note When making an API call, you may pass SlotValueElicitationSetting
@@ -10394,6 +22526,1269 @@ module Aws::LexModelsV2
     #           },
     #           active: false,
     #         },
+    #         slot_capture_setting: {
+    #           capture_response: {
+    #             message_groups: [ # required
+    #               {
+    #                 message: { # required
+    #                   plain_text_message: {
+    #                     value: "PlainTextMessageValue", # required
+    #                   },
+    #                   custom_payload: {
+    #                     value: "CustomPayloadValue", # required
+    #                   },
+    #                   ssml_message: {
+    #                     value: "SSMLMessageValue", # required
+    #                   },
+    #                   image_response_card: {
+    #                     title: "AttachmentTitle", # required
+    #                     subtitle: "AttachmentTitle",
+    #                     image_url: "AttachmentUrl",
+    #                     buttons: [
+    #                       {
+    #                         text: "ButtonText", # required
+    #                         value: "ButtonValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #                 variations: [
+    #                   {
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #             allow_interrupt: false,
+    #           },
+    #           capture_next_step: {
+    #             dialog_action: {
+    #               type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #               slot_to_elicit: "Name",
+    #               suppress_next_message: false,
+    #             },
+    #             intent: {
+    #               name: "Name",
+    #               slots: {
+    #                 "Name" => {
+    #                   shape: "Scalar", # accepts Scalar, List
+    #                   value: {
+    #                     interpreted_value: "NonEmptyString",
+    #                   },
+    #                   values: [
+    #                     {
+    #                       # recursive SlotValueOverride
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             },
+    #             session_attributes: {
+    #               "NonEmptyString" => "String",
+    #             },
+    #           },
+    #           capture_conditional: {
+    #             active: false, # required
+    #             conditional_branches: [ # required
+    #               {
+    #                 name: "Name", # required
+    #                 condition: { # required
+    #                   expression_string: "ConditionExpression", # required
+    #                 },
+    #                 next_step: { # required
+    #                   dialog_action: {
+    #                     type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                     slot_to_elicit: "Name",
+    #                     suppress_next_message: false,
+    #                   },
+    #                   intent: {
+    #                     name: "Name",
+    #                     slots: {
+    #                       "Name" => {
+    #                         shape: "Scalar", # accepts Scalar, List
+    #                         value: {
+    #                           interpreted_value: "NonEmptyString",
+    #                         },
+    #                         values: [
+    #                           {
+    #                             # recursive SlotValueOverride
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                   session_attributes: {
+    #                     "NonEmptyString" => "String",
+    #                   },
+    #                 },
+    #                 response: {
+    #                   message_groups: [ # required
+    #                     {
+    #                       message: { # required
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       variations: [
+    #                         {
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                   allow_interrupt: false,
+    #                 },
+    #               },
+    #             ],
+    #             default_branch: { # required
+    #               next_step: {
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #             },
+    #           },
+    #           failure_response: {
+    #             message_groups: [ # required
+    #               {
+    #                 message: { # required
+    #                   plain_text_message: {
+    #                     value: "PlainTextMessageValue", # required
+    #                   },
+    #                   custom_payload: {
+    #                     value: "CustomPayloadValue", # required
+    #                   },
+    #                   ssml_message: {
+    #                     value: "SSMLMessageValue", # required
+    #                   },
+    #                   image_response_card: {
+    #                     title: "AttachmentTitle", # required
+    #                     subtitle: "AttachmentTitle",
+    #                     image_url: "AttachmentUrl",
+    #                     buttons: [
+    #                       {
+    #                         text: "ButtonText", # required
+    #                         value: "ButtonValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #                 variations: [
+    #                   {
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #             allow_interrupt: false,
+    #           },
+    #           failure_next_step: {
+    #             dialog_action: {
+    #               type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #               slot_to_elicit: "Name",
+    #               suppress_next_message: false,
+    #             },
+    #             intent: {
+    #               name: "Name",
+    #               slots: {
+    #                 "Name" => {
+    #                   shape: "Scalar", # accepts Scalar, List
+    #                   value: {
+    #                     interpreted_value: "NonEmptyString",
+    #                   },
+    #                   values: [
+    #                     {
+    #                       # recursive SlotValueOverride
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             },
+    #             session_attributes: {
+    #               "NonEmptyString" => "String",
+    #             },
+    #           },
+    #           failure_conditional: {
+    #             active: false, # required
+    #             conditional_branches: [ # required
+    #               {
+    #                 name: "Name", # required
+    #                 condition: { # required
+    #                   expression_string: "ConditionExpression", # required
+    #                 },
+    #                 next_step: { # required
+    #                   dialog_action: {
+    #                     type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                     slot_to_elicit: "Name",
+    #                     suppress_next_message: false,
+    #                   },
+    #                   intent: {
+    #                     name: "Name",
+    #                     slots: {
+    #                       "Name" => {
+    #                         shape: "Scalar", # accepts Scalar, List
+    #                         value: {
+    #                           interpreted_value: "NonEmptyString",
+    #                         },
+    #                         values: [
+    #                           {
+    #                             # recursive SlotValueOverride
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                   session_attributes: {
+    #                     "NonEmptyString" => "String",
+    #                   },
+    #                 },
+    #                 response: {
+    #                   message_groups: [ # required
+    #                     {
+    #                       message: { # required
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       variations: [
+    #                         {
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                   allow_interrupt: false,
+    #                 },
+    #               },
+    #             ],
+    #             default_branch: { # required
+    #               next_step: {
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #             },
+    #           },
+    #           code_hook: {
+    #             enable_code_hook_invocation: false, # required
+    #             active: false, # required
+    #             invocation_label: "Name",
+    #             post_code_hook_specification: { # required
+    #               success_response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #               success_next_step: {
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               success_conditional: {
+    #                 active: false, # required
+    #                 conditional_branches: [ # required
+    #                   {
+    #                     name: "Name", # required
+    #                     condition: { # required
+    #                       expression_string: "ConditionExpression", # required
+    #                     },
+    #                     next_step: { # required
+    #                       dialog_action: {
+    #                         type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                         slot_to_elicit: "Name",
+    #                         suppress_next_message: false,
+    #                       },
+    #                       intent: {
+    #                         name: "Name",
+    #                         slots: {
+    #                           "Name" => {
+    #                             shape: "Scalar", # accepts Scalar, List
+    #                             value: {
+    #                               interpreted_value: "NonEmptyString",
+    #                             },
+    #                             values: [
+    #                               {
+    #                                 # recursive SlotValueOverride
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       },
+    #                       session_attributes: {
+    #                         "NonEmptyString" => "String",
+    #                       },
+    #                     },
+    #                     response: {
+    #                       message_groups: [ # required
+    #                         {
+    #                           message: { # required
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                           variations: [
+    #                             {
+    #                               plain_text_message: {
+    #                                 value: "PlainTextMessageValue", # required
+    #                               },
+    #                               custom_payload: {
+    #                                 value: "CustomPayloadValue", # required
+    #                               },
+    #                               ssml_message: {
+    #                                 value: "SSMLMessageValue", # required
+    #                               },
+    #                               image_response_card: {
+    #                                 title: "AttachmentTitle", # required
+    #                                 subtitle: "AttachmentTitle",
+    #                                 image_url: "AttachmentUrl",
+    #                                 buttons: [
+    #                                   {
+    #                                     text: "ButtonText", # required
+    #                                     value: "ButtonValue", # required
+    #                                   },
+    #                                 ],
+    #                               },
+    #                             },
+    #                           ],
+    #                         },
+    #                       ],
+    #                       allow_interrupt: false,
+    #                     },
+    #                   },
+    #                 ],
+    #                 default_branch: { # required
+    #                   next_step: {
+    #                     dialog_action: {
+    #                       type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                       slot_to_elicit: "Name",
+    #                       suppress_next_message: false,
+    #                     },
+    #                     intent: {
+    #                       name: "Name",
+    #                       slots: {
+    #                         "Name" => {
+    #                           shape: "Scalar", # accepts Scalar, List
+    #                           value: {
+    #                             interpreted_value: "NonEmptyString",
+    #                           },
+    #                           values: [
+    #                             {
+    #                               # recursive SlotValueOverride
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
+    #                     session_attributes: {
+    #                       "NonEmptyString" => "String",
+    #                     },
+    #                   },
+    #                   response: {
+    #                     message_groups: [ # required
+    #                       {
+    #                         message: { # required
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                         variations: [
+    #                           {
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                         ],
+    #                       },
+    #                     ],
+    #                     allow_interrupt: false,
+    #                   },
+    #                 },
+    #               },
+    #               failure_response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #               failure_next_step: {
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               failure_conditional: {
+    #                 active: false, # required
+    #                 conditional_branches: [ # required
+    #                   {
+    #                     name: "Name", # required
+    #                     condition: { # required
+    #                       expression_string: "ConditionExpression", # required
+    #                     },
+    #                     next_step: { # required
+    #                       dialog_action: {
+    #                         type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                         slot_to_elicit: "Name",
+    #                         suppress_next_message: false,
+    #                       },
+    #                       intent: {
+    #                         name: "Name",
+    #                         slots: {
+    #                           "Name" => {
+    #                             shape: "Scalar", # accepts Scalar, List
+    #                             value: {
+    #                               interpreted_value: "NonEmptyString",
+    #                             },
+    #                             values: [
+    #                               {
+    #                                 # recursive SlotValueOverride
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       },
+    #                       session_attributes: {
+    #                         "NonEmptyString" => "String",
+    #                       },
+    #                     },
+    #                     response: {
+    #                       message_groups: [ # required
+    #                         {
+    #                           message: { # required
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                           variations: [
+    #                             {
+    #                               plain_text_message: {
+    #                                 value: "PlainTextMessageValue", # required
+    #                               },
+    #                               custom_payload: {
+    #                                 value: "CustomPayloadValue", # required
+    #                               },
+    #                               ssml_message: {
+    #                                 value: "SSMLMessageValue", # required
+    #                               },
+    #                               image_response_card: {
+    #                                 title: "AttachmentTitle", # required
+    #                                 subtitle: "AttachmentTitle",
+    #                                 image_url: "AttachmentUrl",
+    #                                 buttons: [
+    #                                   {
+    #                                     text: "ButtonText", # required
+    #                                     value: "ButtonValue", # required
+    #                                   },
+    #                                 ],
+    #                               },
+    #                             },
+    #                           ],
+    #                         },
+    #                       ],
+    #                       allow_interrupt: false,
+    #                     },
+    #                   },
+    #                 ],
+    #                 default_branch: { # required
+    #                   next_step: {
+    #                     dialog_action: {
+    #                       type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                       slot_to_elicit: "Name",
+    #                       suppress_next_message: false,
+    #                     },
+    #                     intent: {
+    #                       name: "Name",
+    #                       slots: {
+    #                         "Name" => {
+    #                           shape: "Scalar", # accepts Scalar, List
+    #                           value: {
+    #                             interpreted_value: "NonEmptyString",
+    #                           },
+    #                           values: [
+    #                             {
+    #                               # recursive SlotValueOverride
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
+    #                     session_attributes: {
+    #                       "NonEmptyString" => "String",
+    #                     },
+    #                   },
+    #                   response: {
+    #                     message_groups: [ # required
+    #                       {
+    #                         message: { # required
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                         variations: [
+    #                           {
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                         ],
+    #                       },
+    #                     ],
+    #                     allow_interrupt: false,
+    #                   },
+    #                 },
+    #               },
+    #               timeout_response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #               timeout_next_step: {
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               timeout_conditional: {
+    #                 active: false, # required
+    #                 conditional_branches: [ # required
+    #                   {
+    #                     name: "Name", # required
+    #                     condition: { # required
+    #                       expression_string: "ConditionExpression", # required
+    #                     },
+    #                     next_step: { # required
+    #                       dialog_action: {
+    #                         type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                         slot_to_elicit: "Name",
+    #                         suppress_next_message: false,
+    #                       },
+    #                       intent: {
+    #                         name: "Name",
+    #                         slots: {
+    #                           "Name" => {
+    #                             shape: "Scalar", # accepts Scalar, List
+    #                             value: {
+    #                               interpreted_value: "NonEmptyString",
+    #                             },
+    #                             values: [
+    #                               {
+    #                                 # recursive SlotValueOverride
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       },
+    #                       session_attributes: {
+    #                         "NonEmptyString" => "String",
+    #                       },
+    #                     },
+    #                     response: {
+    #                       message_groups: [ # required
+    #                         {
+    #                           message: { # required
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                           variations: [
+    #                             {
+    #                               plain_text_message: {
+    #                                 value: "PlainTextMessageValue", # required
+    #                               },
+    #                               custom_payload: {
+    #                                 value: "CustomPayloadValue", # required
+    #                               },
+    #                               ssml_message: {
+    #                                 value: "SSMLMessageValue", # required
+    #                               },
+    #                               image_response_card: {
+    #                                 title: "AttachmentTitle", # required
+    #                                 subtitle: "AttachmentTitle",
+    #                                 image_url: "AttachmentUrl",
+    #                                 buttons: [
+    #                                   {
+    #                                     text: "ButtonText", # required
+    #                                     value: "ButtonValue", # required
+    #                                   },
+    #                                 ],
+    #                               },
+    #                             },
+    #                           ],
+    #                         },
+    #                       ],
+    #                       allow_interrupt: false,
+    #                     },
+    #                   },
+    #                 ],
+    #                 default_branch: { # required
+    #                   next_step: {
+    #                     dialog_action: {
+    #                       type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                       slot_to_elicit: "Name",
+    #                       suppress_next_message: false,
+    #                     },
+    #                     intent: {
+    #                       name: "Name",
+    #                       slots: {
+    #                         "Name" => {
+    #                           shape: "Scalar", # accepts Scalar, List
+    #                           value: {
+    #                             interpreted_value: "NonEmptyString",
+    #                           },
+    #                           values: [
+    #                             {
+    #                               # recursive SlotValueOverride
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
+    #                     session_attributes: {
+    #                       "NonEmptyString" => "String",
+    #                     },
+    #                   },
+    #                   response: {
+    #                     message_groups: [ # required
+    #                       {
+    #                         message: { # required
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                         variations: [
+    #                           {
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                         ],
+    #                       },
+    #                     ],
+    #                     allow_interrupt: false,
+    #                   },
+    #                 },
+    #               },
+    #             },
+    #           },
+    #           elicitation_code_hook: {
+    #             enable_code_hook_invocation: false, # required
+    #             invocation_label: "Name",
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] default_value_specification
@@ -10424,6 +23819,11 @@ module Aws::LexModelsV2
     #   for customer input.
     #   @return [Types::WaitAndContinueSpecification]
     #
+    # @!attribute [rw] slot_capture_setting
+    #   Specifies the settings that Amazon Lex uses when a slot value is
+    #   successfully entered by a user.
+    #   @return [Types::SlotCaptureSetting]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/SlotValueElicitationSetting AWS API Documentation
     #
     class SlotValueElicitationSetting < Struct.new(
@@ -10431,7 +23831,58 @@ module Aws::LexModelsV2
       :slot_constraint,
       :prompt_specification,
       :sample_utterances,
-      :wait_and_continue_specification)
+      :wait_and_continue_specification,
+      :slot_capture_setting)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The slot values that Amazon Lex uses when it sets slot values in a
+    # dialog step.
+    #
+    # @note When making an API call, you may pass SlotValueOverride
+    #   data as a hash:
+    #
+    #       {
+    #         shape: "Scalar", # accepts Scalar, List
+    #         value: {
+    #           interpreted_value: "NonEmptyString",
+    #         },
+    #         values: [
+    #           {
+    #             shape: "Scalar", # accepts Scalar, List
+    #             value: {
+    #               interpreted_value: "NonEmptyString",
+    #             },
+    #             values: {
+    #               # recursive SlotValues
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] shape
+    #   When the shape value is `List`, it indicates that the `values` field
+    #   contains a list of slot values. When the value is `Scalar`, it
+    #   indicates that the `value` field contains a single value.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The current value of the slot.
+    #   @return [Types::SlotValue]
+    #
+    # @!attribute [rw] values
+    #   A list of one or more values that the user provided for the slot.
+    #   For example, for a slot that elicits pizza toppings, the values
+    #   might be "pepperoni" and "pineapple."
+    #   @return [Array<Types::SlotValueOverride>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/SlotValueOverride AWS API Documentation
+    #
+    class SlotValueOverride < Struct.new(
+      :shape,
+      :value,
+      :values)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11861,6 +25312,597 @@ module Aws::LexModelsV2
     #               ],
     #               allow_interrupt: false,
     #             },
+    #             success_next_step: {
+    #               dialog_action: {
+    #                 type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                 slot_to_elicit: "Name",
+    #                 suppress_next_message: false,
+    #               },
+    #               intent: {
+    #                 name: "Name",
+    #                 slots: {
+    #                   "Name" => {
+    #                     shape: "Scalar", # accepts Scalar, List
+    #                     value: {
+    #                       interpreted_value: "NonEmptyString",
+    #                     },
+    #                     values: [
+    #                       {
+    #                         # recursive SlotValueOverride
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               },
+    #               session_attributes: {
+    #                 "NonEmptyString" => "String",
+    #               },
+    #             },
+    #             success_conditional: {
+    #               active: false, # required
+    #               conditional_branches: [ # required
+    #                 {
+    #                   name: "Name", # required
+    #                   condition: { # required
+    #                     expression_string: "ConditionExpression", # required
+    #                   },
+    #                   next_step: { # required
+    #                     dialog_action: {
+    #                       type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                       slot_to_elicit: "Name",
+    #                       suppress_next_message: false,
+    #                     },
+    #                     intent: {
+    #                       name: "Name",
+    #                       slots: {
+    #                         "Name" => {
+    #                           shape: "Scalar", # accepts Scalar, List
+    #                           value: {
+    #                             interpreted_value: "NonEmptyString",
+    #                           },
+    #                           values: [
+    #                             {
+    #                               # recursive SlotValueOverride
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
+    #                     session_attributes: {
+    #                       "NonEmptyString" => "String",
+    #                     },
+    #                   },
+    #                   response: {
+    #                     message_groups: [ # required
+    #                       {
+    #                         message: { # required
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                         variations: [
+    #                           {
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                         ],
+    #                       },
+    #                     ],
+    #                     allow_interrupt: false,
+    #                   },
+    #                 },
+    #               ],
+    #               default_branch: { # required
+    #                 next_step: {
+    #                   dialog_action: {
+    #                     type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                     slot_to_elicit: "Name",
+    #                     suppress_next_message: false,
+    #                   },
+    #                   intent: {
+    #                     name: "Name",
+    #                     slots: {
+    #                       "Name" => {
+    #                         shape: "Scalar", # accepts Scalar, List
+    #                         value: {
+    #                           interpreted_value: "NonEmptyString",
+    #                         },
+    #                         values: [
+    #                           {
+    #                             # recursive SlotValueOverride
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                   session_attributes: {
+    #                     "NonEmptyString" => "String",
+    #                   },
+    #                 },
+    #                 response: {
+    #                   message_groups: [ # required
+    #                     {
+    #                       message: { # required
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       variations: [
+    #                         {
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                   allow_interrupt: false,
+    #                 },
+    #               },
+    #             },
+    #             failure_next_step: {
+    #               dialog_action: {
+    #                 type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                 slot_to_elicit: "Name",
+    #                 suppress_next_message: false,
+    #               },
+    #               intent: {
+    #                 name: "Name",
+    #                 slots: {
+    #                   "Name" => {
+    #                     shape: "Scalar", # accepts Scalar, List
+    #                     value: {
+    #                       interpreted_value: "NonEmptyString",
+    #                     },
+    #                     values: [
+    #                       {
+    #                         # recursive SlotValueOverride
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               },
+    #               session_attributes: {
+    #                 "NonEmptyString" => "String",
+    #               },
+    #             },
+    #             failure_conditional: {
+    #               active: false, # required
+    #               conditional_branches: [ # required
+    #                 {
+    #                   name: "Name", # required
+    #                   condition: { # required
+    #                     expression_string: "ConditionExpression", # required
+    #                   },
+    #                   next_step: { # required
+    #                     dialog_action: {
+    #                       type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                       slot_to_elicit: "Name",
+    #                       suppress_next_message: false,
+    #                     },
+    #                     intent: {
+    #                       name: "Name",
+    #                       slots: {
+    #                         "Name" => {
+    #                           shape: "Scalar", # accepts Scalar, List
+    #                           value: {
+    #                             interpreted_value: "NonEmptyString",
+    #                           },
+    #                           values: [
+    #                             {
+    #                               # recursive SlotValueOverride
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
+    #                     session_attributes: {
+    #                       "NonEmptyString" => "String",
+    #                     },
+    #                   },
+    #                   response: {
+    #                     message_groups: [ # required
+    #                       {
+    #                         message: { # required
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                         variations: [
+    #                           {
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                         ],
+    #                       },
+    #                     ],
+    #                     allow_interrupt: false,
+    #                   },
+    #                 },
+    #               ],
+    #               default_branch: { # required
+    #                 next_step: {
+    #                   dialog_action: {
+    #                     type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                     slot_to_elicit: "Name",
+    #                     suppress_next_message: false,
+    #                   },
+    #                   intent: {
+    #                     name: "Name",
+    #                     slots: {
+    #                       "Name" => {
+    #                         shape: "Scalar", # accepts Scalar, List
+    #                         value: {
+    #                           interpreted_value: "NonEmptyString",
+    #                         },
+    #                         values: [
+    #                           {
+    #                             # recursive SlotValueOverride
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                   session_attributes: {
+    #                     "NonEmptyString" => "String",
+    #                   },
+    #                 },
+    #                 response: {
+    #                   message_groups: [ # required
+    #                     {
+    #                       message: { # required
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       variations: [
+    #                         {
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                   allow_interrupt: false,
+    #                 },
+    #               },
+    #             },
+    #             timeout_next_step: {
+    #               dialog_action: {
+    #                 type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                 slot_to_elicit: "Name",
+    #                 suppress_next_message: false,
+    #               },
+    #               intent: {
+    #                 name: "Name",
+    #                 slots: {
+    #                   "Name" => {
+    #                     shape: "Scalar", # accepts Scalar, List
+    #                     value: {
+    #                       interpreted_value: "NonEmptyString",
+    #                     },
+    #                     values: [
+    #                       {
+    #                         # recursive SlotValueOverride
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               },
+    #               session_attributes: {
+    #                 "NonEmptyString" => "String",
+    #               },
+    #             },
+    #             timeout_conditional: {
+    #               active: false, # required
+    #               conditional_branches: [ # required
+    #                 {
+    #                   name: "Name", # required
+    #                   condition: { # required
+    #                     expression_string: "ConditionExpression", # required
+    #                   },
+    #                   next_step: { # required
+    #                     dialog_action: {
+    #                       type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                       slot_to_elicit: "Name",
+    #                       suppress_next_message: false,
+    #                     },
+    #                     intent: {
+    #                       name: "Name",
+    #                       slots: {
+    #                         "Name" => {
+    #                           shape: "Scalar", # accepts Scalar, List
+    #                           value: {
+    #                             interpreted_value: "NonEmptyString",
+    #                           },
+    #                           values: [
+    #                             {
+    #                               # recursive SlotValueOverride
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
+    #                     session_attributes: {
+    #                       "NonEmptyString" => "String",
+    #                     },
+    #                   },
+    #                   response: {
+    #                     message_groups: [ # required
+    #                       {
+    #                         message: { # required
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                         variations: [
+    #                           {
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                         ],
+    #                       },
+    #                     ],
+    #                     allow_interrupt: false,
+    #                   },
+    #                 },
+    #               ],
+    #               default_branch: { # required
+    #                 next_step: {
+    #                   dialog_action: {
+    #                     type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                     slot_to_elicit: "Name",
+    #                     suppress_next_message: false,
+    #                   },
+    #                   intent: {
+    #                     name: "Name",
+    #                     slots: {
+    #                       "Name" => {
+    #                         shape: "Scalar", # accepts Scalar, List
+    #                         value: {
+    #                           interpreted_value: "NonEmptyString",
+    #                         },
+    #                         values: [
+    #                           {
+    #                             # recursive SlotValueOverride
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                   session_attributes: {
+    #                     "NonEmptyString" => "String",
+    #                   },
+    #                 },
+    #                 response: {
+    #                   message_groups: [ # required
+    #                     {
+    #                       message: { # required
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       variations: [
+    #                         {
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                   allow_interrupt: false,
+    #                 },
+    #               },
+    #             },
     #           },
     #           fulfillment_updates_specification: {
     #             active: false, # required
@@ -11974,6 +26016,7 @@ module Aws::LexModelsV2
     #             },
     #             timeout_in_seconds: 1,
     #           },
+    #           active: false,
     #         },
     #         slot_priorities: [
     #           {
@@ -12037,7 +26080,7 @@ module Aws::LexModelsV2
     #             allow_interrupt: false,
     #             message_selection_strategy: "Random", # accepts Random, Ordered
     #           },
-    #           declination_response: { # required
+    #           declination_response: {
     #             message_groups: [ # required
     #               {
     #                 message: { # required
@@ -12091,9 +26134,1467 @@ module Aws::LexModelsV2
     #             allow_interrupt: false,
     #           },
     #           active: false,
+    #           confirmation_response: {
+    #             message_groups: [ # required
+    #               {
+    #                 message: { # required
+    #                   plain_text_message: {
+    #                     value: "PlainTextMessageValue", # required
+    #                   },
+    #                   custom_payload: {
+    #                     value: "CustomPayloadValue", # required
+    #                   },
+    #                   ssml_message: {
+    #                     value: "SSMLMessageValue", # required
+    #                   },
+    #                   image_response_card: {
+    #                     title: "AttachmentTitle", # required
+    #                     subtitle: "AttachmentTitle",
+    #                     image_url: "AttachmentUrl",
+    #                     buttons: [
+    #                       {
+    #                         text: "ButtonText", # required
+    #                         value: "ButtonValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #                 variations: [
+    #                   {
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #             allow_interrupt: false,
+    #           },
+    #           confirmation_next_step: {
+    #             dialog_action: {
+    #               type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #               slot_to_elicit: "Name",
+    #               suppress_next_message: false,
+    #             },
+    #             intent: {
+    #               name: "Name",
+    #               slots: {
+    #                 "Name" => {
+    #                   shape: "Scalar", # accepts Scalar, List
+    #                   value: {
+    #                     interpreted_value: "NonEmptyString",
+    #                   },
+    #                   values: [
+    #                     {
+    #                       # recursive SlotValueOverride
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             },
+    #             session_attributes: {
+    #               "NonEmptyString" => "String",
+    #             },
+    #           },
+    #           confirmation_conditional: {
+    #             active: false, # required
+    #             conditional_branches: [ # required
+    #               {
+    #                 name: "Name", # required
+    #                 condition: { # required
+    #                   expression_string: "ConditionExpression", # required
+    #                 },
+    #                 next_step: { # required
+    #                   dialog_action: {
+    #                     type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                     slot_to_elicit: "Name",
+    #                     suppress_next_message: false,
+    #                   },
+    #                   intent: {
+    #                     name: "Name",
+    #                     slots: {
+    #                       "Name" => {
+    #                         shape: "Scalar", # accepts Scalar, List
+    #                         value: {
+    #                           interpreted_value: "NonEmptyString",
+    #                         },
+    #                         values: [
+    #                           {
+    #                             # recursive SlotValueOverride
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                   session_attributes: {
+    #                     "NonEmptyString" => "String",
+    #                   },
+    #                 },
+    #                 response: {
+    #                   message_groups: [ # required
+    #                     {
+    #                       message: { # required
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       variations: [
+    #                         {
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                   allow_interrupt: false,
+    #                 },
+    #               },
+    #             ],
+    #             default_branch: { # required
+    #               next_step: {
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #             },
+    #           },
+    #           declination_next_step: {
+    #             dialog_action: {
+    #               type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #               slot_to_elicit: "Name",
+    #               suppress_next_message: false,
+    #             },
+    #             intent: {
+    #               name: "Name",
+    #               slots: {
+    #                 "Name" => {
+    #                   shape: "Scalar", # accepts Scalar, List
+    #                   value: {
+    #                     interpreted_value: "NonEmptyString",
+    #                   },
+    #                   values: [
+    #                     {
+    #                       # recursive SlotValueOverride
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             },
+    #             session_attributes: {
+    #               "NonEmptyString" => "String",
+    #             },
+    #           },
+    #           declination_conditional: {
+    #             active: false, # required
+    #             conditional_branches: [ # required
+    #               {
+    #                 name: "Name", # required
+    #                 condition: { # required
+    #                   expression_string: "ConditionExpression", # required
+    #                 },
+    #                 next_step: { # required
+    #                   dialog_action: {
+    #                     type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                     slot_to_elicit: "Name",
+    #                     suppress_next_message: false,
+    #                   },
+    #                   intent: {
+    #                     name: "Name",
+    #                     slots: {
+    #                       "Name" => {
+    #                         shape: "Scalar", # accepts Scalar, List
+    #                         value: {
+    #                           interpreted_value: "NonEmptyString",
+    #                         },
+    #                         values: [
+    #                           {
+    #                             # recursive SlotValueOverride
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                   session_attributes: {
+    #                     "NonEmptyString" => "String",
+    #                   },
+    #                 },
+    #                 response: {
+    #                   message_groups: [ # required
+    #                     {
+    #                       message: { # required
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       variations: [
+    #                         {
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                   allow_interrupt: false,
+    #                 },
+    #               },
+    #             ],
+    #             default_branch: { # required
+    #               next_step: {
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #             },
+    #           },
+    #           failure_response: {
+    #             message_groups: [ # required
+    #               {
+    #                 message: { # required
+    #                   plain_text_message: {
+    #                     value: "PlainTextMessageValue", # required
+    #                   },
+    #                   custom_payload: {
+    #                     value: "CustomPayloadValue", # required
+    #                   },
+    #                   ssml_message: {
+    #                     value: "SSMLMessageValue", # required
+    #                   },
+    #                   image_response_card: {
+    #                     title: "AttachmentTitle", # required
+    #                     subtitle: "AttachmentTitle",
+    #                     image_url: "AttachmentUrl",
+    #                     buttons: [
+    #                       {
+    #                         text: "ButtonText", # required
+    #                         value: "ButtonValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #                 variations: [
+    #                   {
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #             allow_interrupt: false,
+    #           },
+    #           failure_next_step: {
+    #             dialog_action: {
+    #               type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #               slot_to_elicit: "Name",
+    #               suppress_next_message: false,
+    #             },
+    #             intent: {
+    #               name: "Name",
+    #               slots: {
+    #                 "Name" => {
+    #                   shape: "Scalar", # accepts Scalar, List
+    #                   value: {
+    #                     interpreted_value: "NonEmptyString",
+    #                   },
+    #                   values: [
+    #                     {
+    #                       # recursive SlotValueOverride
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             },
+    #             session_attributes: {
+    #               "NonEmptyString" => "String",
+    #             },
+    #           },
+    #           failure_conditional: {
+    #             active: false, # required
+    #             conditional_branches: [ # required
+    #               {
+    #                 name: "Name", # required
+    #                 condition: { # required
+    #                   expression_string: "ConditionExpression", # required
+    #                 },
+    #                 next_step: { # required
+    #                   dialog_action: {
+    #                     type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                     slot_to_elicit: "Name",
+    #                     suppress_next_message: false,
+    #                   },
+    #                   intent: {
+    #                     name: "Name",
+    #                     slots: {
+    #                       "Name" => {
+    #                         shape: "Scalar", # accepts Scalar, List
+    #                         value: {
+    #                           interpreted_value: "NonEmptyString",
+    #                         },
+    #                         values: [
+    #                           {
+    #                             # recursive SlotValueOverride
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                   session_attributes: {
+    #                     "NonEmptyString" => "String",
+    #                   },
+    #                 },
+    #                 response: {
+    #                   message_groups: [ # required
+    #                     {
+    #                       message: { # required
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       variations: [
+    #                         {
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                   allow_interrupt: false,
+    #                 },
+    #               },
+    #             ],
+    #             default_branch: { # required
+    #               next_step: {
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #             },
+    #           },
+    #           code_hook: {
+    #             enable_code_hook_invocation: false, # required
+    #             active: false, # required
+    #             invocation_label: "Name",
+    #             post_code_hook_specification: { # required
+    #               success_response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #               success_next_step: {
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               success_conditional: {
+    #                 active: false, # required
+    #                 conditional_branches: [ # required
+    #                   {
+    #                     name: "Name", # required
+    #                     condition: { # required
+    #                       expression_string: "ConditionExpression", # required
+    #                     },
+    #                     next_step: { # required
+    #                       dialog_action: {
+    #                         type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                         slot_to_elicit: "Name",
+    #                         suppress_next_message: false,
+    #                       },
+    #                       intent: {
+    #                         name: "Name",
+    #                         slots: {
+    #                           "Name" => {
+    #                             shape: "Scalar", # accepts Scalar, List
+    #                             value: {
+    #                               interpreted_value: "NonEmptyString",
+    #                             },
+    #                             values: [
+    #                               {
+    #                                 # recursive SlotValueOverride
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       },
+    #                       session_attributes: {
+    #                         "NonEmptyString" => "String",
+    #                       },
+    #                     },
+    #                     response: {
+    #                       message_groups: [ # required
+    #                         {
+    #                           message: { # required
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                           variations: [
+    #                             {
+    #                               plain_text_message: {
+    #                                 value: "PlainTextMessageValue", # required
+    #                               },
+    #                               custom_payload: {
+    #                                 value: "CustomPayloadValue", # required
+    #                               },
+    #                               ssml_message: {
+    #                                 value: "SSMLMessageValue", # required
+    #                               },
+    #                               image_response_card: {
+    #                                 title: "AttachmentTitle", # required
+    #                                 subtitle: "AttachmentTitle",
+    #                                 image_url: "AttachmentUrl",
+    #                                 buttons: [
+    #                                   {
+    #                                     text: "ButtonText", # required
+    #                                     value: "ButtonValue", # required
+    #                                   },
+    #                                 ],
+    #                               },
+    #                             },
+    #                           ],
+    #                         },
+    #                       ],
+    #                       allow_interrupt: false,
+    #                     },
+    #                   },
+    #                 ],
+    #                 default_branch: { # required
+    #                   next_step: {
+    #                     dialog_action: {
+    #                       type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                       slot_to_elicit: "Name",
+    #                       suppress_next_message: false,
+    #                     },
+    #                     intent: {
+    #                       name: "Name",
+    #                       slots: {
+    #                         "Name" => {
+    #                           shape: "Scalar", # accepts Scalar, List
+    #                           value: {
+    #                             interpreted_value: "NonEmptyString",
+    #                           },
+    #                           values: [
+    #                             {
+    #                               # recursive SlotValueOverride
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
+    #                     session_attributes: {
+    #                       "NonEmptyString" => "String",
+    #                     },
+    #                   },
+    #                   response: {
+    #                     message_groups: [ # required
+    #                       {
+    #                         message: { # required
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                         variations: [
+    #                           {
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                         ],
+    #                       },
+    #                     ],
+    #                     allow_interrupt: false,
+    #                   },
+    #                 },
+    #               },
+    #               failure_response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #               failure_next_step: {
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               failure_conditional: {
+    #                 active: false, # required
+    #                 conditional_branches: [ # required
+    #                   {
+    #                     name: "Name", # required
+    #                     condition: { # required
+    #                       expression_string: "ConditionExpression", # required
+    #                     },
+    #                     next_step: { # required
+    #                       dialog_action: {
+    #                         type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                         slot_to_elicit: "Name",
+    #                         suppress_next_message: false,
+    #                       },
+    #                       intent: {
+    #                         name: "Name",
+    #                         slots: {
+    #                           "Name" => {
+    #                             shape: "Scalar", # accepts Scalar, List
+    #                             value: {
+    #                               interpreted_value: "NonEmptyString",
+    #                             },
+    #                             values: [
+    #                               {
+    #                                 # recursive SlotValueOverride
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       },
+    #                       session_attributes: {
+    #                         "NonEmptyString" => "String",
+    #                       },
+    #                     },
+    #                     response: {
+    #                       message_groups: [ # required
+    #                         {
+    #                           message: { # required
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                           variations: [
+    #                             {
+    #                               plain_text_message: {
+    #                                 value: "PlainTextMessageValue", # required
+    #                               },
+    #                               custom_payload: {
+    #                                 value: "CustomPayloadValue", # required
+    #                               },
+    #                               ssml_message: {
+    #                                 value: "SSMLMessageValue", # required
+    #                               },
+    #                               image_response_card: {
+    #                                 title: "AttachmentTitle", # required
+    #                                 subtitle: "AttachmentTitle",
+    #                                 image_url: "AttachmentUrl",
+    #                                 buttons: [
+    #                                   {
+    #                                     text: "ButtonText", # required
+    #                                     value: "ButtonValue", # required
+    #                                   },
+    #                                 ],
+    #                               },
+    #                             },
+    #                           ],
+    #                         },
+    #                       ],
+    #                       allow_interrupt: false,
+    #                     },
+    #                   },
+    #                 ],
+    #                 default_branch: { # required
+    #                   next_step: {
+    #                     dialog_action: {
+    #                       type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                       slot_to_elicit: "Name",
+    #                       suppress_next_message: false,
+    #                     },
+    #                     intent: {
+    #                       name: "Name",
+    #                       slots: {
+    #                         "Name" => {
+    #                           shape: "Scalar", # accepts Scalar, List
+    #                           value: {
+    #                             interpreted_value: "NonEmptyString",
+    #                           },
+    #                           values: [
+    #                             {
+    #                               # recursive SlotValueOverride
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
+    #                     session_attributes: {
+    #                       "NonEmptyString" => "String",
+    #                     },
+    #                   },
+    #                   response: {
+    #                     message_groups: [ # required
+    #                       {
+    #                         message: { # required
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                         variations: [
+    #                           {
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                         ],
+    #                       },
+    #                     ],
+    #                     allow_interrupt: false,
+    #                   },
+    #                 },
+    #               },
+    #               timeout_response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #               timeout_next_step: {
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               timeout_conditional: {
+    #                 active: false, # required
+    #                 conditional_branches: [ # required
+    #                   {
+    #                     name: "Name", # required
+    #                     condition: { # required
+    #                       expression_string: "ConditionExpression", # required
+    #                     },
+    #                     next_step: { # required
+    #                       dialog_action: {
+    #                         type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                         slot_to_elicit: "Name",
+    #                         suppress_next_message: false,
+    #                       },
+    #                       intent: {
+    #                         name: "Name",
+    #                         slots: {
+    #                           "Name" => {
+    #                             shape: "Scalar", # accepts Scalar, List
+    #                             value: {
+    #                               interpreted_value: "NonEmptyString",
+    #                             },
+    #                             values: [
+    #                               {
+    #                                 # recursive SlotValueOverride
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       },
+    #                       session_attributes: {
+    #                         "NonEmptyString" => "String",
+    #                       },
+    #                     },
+    #                     response: {
+    #                       message_groups: [ # required
+    #                         {
+    #                           message: { # required
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                           variations: [
+    #                             {
+    #                               plain_text_message: {
+    #                                 value: "PlainTextMessageValue", # required
+    #                               },
+    #                               custom_payload: {
+    #                                 value: "CustomPayloadValue", # required
+    #                               },
+    #                               ssml_message: {
+    #                                 value: "SSMLMessageValue", # required
+    #                               },
+    #                               image_response_card: {
+    #                                 title: "AttachmentTitle", # required
+    #                                 subtitle: "AttachmentTitle",
+    #                                 image_url: "AttachmentUrl",
+    #                                 buttons: [
+    #                                   {
+    #                                     text: "ButtonText", # required
+    #                                     value: "ButtonValue", # required
+    #                                   },
+    #                                 ],
+    #                               },
+    #                             },
+    #                           ],
+    #                         },
+    #                       ],
+    #                       allow_interrupt: false,
+    #                     },
+    #                   },
+    #                 ],
+    #                 default_branch: { # required
+    #                   next_step: {
+    #                     dialog_action: {
+    #                       type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                       slot_to_elicit: "Name",
+    #                       suppress_next_message: false,
+    #                     },
+    #                     intent: {
+    #                       name: "Name",
+    #                       slots: {
+    #                         "Name" => {
+    #                           shape: "Scalar", # accepts Scalar, List
+    #                           value: {
+    #                             interpreted_value: "NonEmptyString",
+    #                           },
+    #                           values: [
+    #                             {
+    #                               # recursive SlotValueOverride
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
+    #                     session_attributes: {
+    #                       "NonEmptyString" => "String",
+    #                     },
+    #                   },
+    #                   response: {
+    #                     message_groups: [ # required
+    #                       {
+    #                         message: { # required
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                         variations: [
+    #                           {
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                         ],
+    #                       },
+    #                     ],
+    #                     allow_interrupt: false,
+    #                   },
+    #                 },
+    #               },
+    #             },
+    #           },
+    #           elicitation_code_hook: {
+    #             enable_code_hook_invocation: false, # required
+    #             invocation_label: "Name",
+    #           },
     #         },
     #         intent_closing_setting: {
-    #           closing_response: { # required
+    #           closing_response: {
     #             message_groups: [ # required
     #               {
     #                 message: { # required
@@ -12147,6 +27648,203 @@ module Aws::LexModelsV2
     #             allow_interrupt: false,
     #           },
     #           active: false,
+    #           next_step: {
+    #             dialog_action: {
+    #               type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #               slot_to_elicit: "Name",
+    #               suppress_next_message: false,
+    #             },
+    #             intent: {
+    #               name: "Name",
+    #               slots: {
+    #                 "Name" => {
+    #                   shape: "Scalar", # accepts Scalar, List
+    #                   value: {
+    #                     interpreted_value: "NonEmptyString",
+    #                   },
+    #                   values: [
+    #                     {
+    #                       # recursive SlotValueOverride
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             },
+    #             session_attributes: {
+    #               "NonEmptyString" => "String",
+    #             },
+    #           },
+    #           conditional: {
+    #             active: false, # required
+    #             conditional_branches: [ # required
+    #               {
+    #                 name: "Name", # required
+    #                 condition: { # required
+    #                   expression_string: "ConditionExpression", # required
+    #                 },
+    #                 next_step: { # required
+    #                   dialog_action: {
+    #                     type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                     slot_to_elicit: "Name",
+    #                     suppress_next_message: false,
+    #                   },
+    #                   intent: {
+    #                     name: "Name",
+    #                     slots: {
+    #                       "Name" => {
+    #                         shape: "Scalar", # accepts Scalar, List
+    #                         value: {
+    #                           interpreted_value: "NonEmptyString",
+    #                         },
+    #                         values: [
+    #                           {
+    #                             # recursive SlotValueOverride
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                   session_attributes: {
+    #                     "NonEmptyString" => "String",
+    #                   },
+    #                 },
+    #                 response: {
+    #                   message_groups: [ # required
+    #                     {
+    #                       message: { # required
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       variations: [
+    #                         {
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                   allow_interrupt: false,
+    #                 },
+    #               },
+    #             ],
+    #             default_branch: { # required
+    #               next_step: {
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #             },
+    #           },
     #         },
     #         input_contexts: [
     #           {
@@ -12168,6 +27866,1015 @@ module Aws::LexModelsV2
     #         bot_id: "Id", # required
     #         bot_version: "DraftBotVersion", # required
     #         locale_id: "LocaleId", # required
+    #         initial_response_setting: {
+    #           initial_response: {
+    #             message_groups: [ # required
+    #               {
+    #                 message: { # required
+    #                   plain_text_message: {
+    #                     value: "PlainTextMessageValue", # required
+    #                   },
+    #                   custom_payload: {
+    #                     value: "CustomPayloadValue", # required
+    #                   },
+    #                   ssml_message: {
+    #                     value: "SSMLMessageValue", # required
+    #                   },
+    #                   image_response_card: {
+    #                     title: "AttachmentTitle", # required
+    #                     subtitle: "AttachmentTitle",
+    #                     image_url: "AttachmentUrl",
+    #                     buttons: [
+    #                       {
+    #                         text: "ButtonText", # required
+    #                         value: "ButtonValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #                 variations: [
+    #                   {
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #             allow_interrupt: false,
+    #           },
+    #           next_step: {
+    #             dialog_action: {
+    #               type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #               slot_to_elicit: "Name",
+    #               suppress_next_message: false,
+    #             },
+    #             intent: {
+    #               name: "Name",
+    #               slots: {
+    #                 "Name" => {
+    #                   shape: "Scalar", # accepts Scalar, List
+    #                   value: {
+    #                     interpreted_value: "NonEmptyString",
+    #                   },
+    #                   values: [
+    #                     {
+    #                       # recursive SlotValueOverride
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             },
+    #             session_attributes: {
+    #               "NonEmptyString" => "String",
+    #             },
+    #           },
+    #           conditional: {
+    #             active: false, # required
+    #             conditional_branches: [ # required
+    #               {
+    #                 name: "Name", # required
+    #                 condition: { # required
+    #                   expression_string: "ConditionExpression", # required
+    #                 },
+    #                 next_step: { # required
+    #                   dialog_action: {
+    #                     type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                     slot_to_elicit: "Name",
+    #                     suppress_next_message: false,
+    #                   },
+    #                   intent: {
+    #                     name: "Name",
+    #                     slots: {
+    #                       "Name" => {
+    #                         shape: "Scalar", # accepts Scalar, List
+    #                         value: {
+    #                           interpreted_value: "NonEmptyString",
+    #                         },
+    #                         values: [
+    #                           {
+    #                             # recursive SlotValueOverride
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                   session_attributes: {
+    #                     "NonEmptyString" => "String",
+    #                   },
+    #                 },
+    #                 response: {
+    #                   message_groups: [ # required
+    #                     {
+    #                       message: { # required
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       variations: [
+    #                         {
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                   allow_interrupt: false,
+    #                 },
+    #               },
+    #             ],
+    #             default_branch: { # required
+    #               next_step: {
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #             },
+    #           },
+    #           code_hook: {
+    #             enable_code_hook_invocation: false, # required
+    #             active: false, # required
+    #             invocation_label: "Name",
+    #             post_code_hook_specification: { # required
+    #               success_response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #               success_next_step: {
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               success_conditional: {
+    #                 active: false, # required
+    #                 conditional_branches: [ # required
+    #                   {
+    #                     name: "Name", # required
+    #                     condition: { # required
+    #                       expression_string: "ConditionExpression", # required
+    #                     },
+    #                     next_step: { # required
+    #                       dialog_action: {
+    #                         type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                         slot_to_elicit: "Name",
+    #                         suppress_next_message: false,
+    #                       },
+    #                       intent: {
+    #                         name: "Name",
+    #                         slots: {
+    #                           "Name" => {
+    #                             shape: "Scalar", # accepts Scalar, List
+    #                             value: {
+    #                               interpreted_value: "NonEmptyString",
+    #                             },
+    #                             values: [
+    #                               {
+    #                                 # recursive SlotValueOverride
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       },
+    #                       session_attributes: {
+    #                         "NonEmptyString" => "String",
+    #                       },
+    #                     },
+    #                     response: {
+    #                       message_groups: [ # required
+    #                         {
+    #                           message: { # required
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                           variations: [
+    #                             {
+    #                               plain_text_message: {
+    #                                 value: "PlainTextMessageValue", # required
+    #                               },
+    #                               custom_payload: {
+    #                                 value: "CustomPayloadValue", # required
+    #                               },
+    #                               ssml_message: {
+    #                                 value: "SSMLMessageValue", # required
+    #                               },
+    #                               image_response_card: {
+    #                                 title: "AttachmentTitle", # required
+    #                                 subtitle: "AttachmentTitle",
+    #                                 image_url: "AttachmentUrl",
+    #                                 buttons: [
+    #                                   {
+    #                                     text: "ButtonText", # required
+    #                                     value: "ButtonValue", # required
+    #                                   },
+    #                                 ],
+    #                               },
+    #                             },
+    #                           ],
+    #                         },
+    #                       ],
+    #                       allow_interrupt: false,
+    #                     },
+    #                   },
+    #                 ],
+    #                 default_branch: { # required
+    #                   next_step: {
+    #                     dialog_action: {
+    #                       type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                       slot_to_elicit: "Name",
+    #                       suppress_next_message: false,
+    #                     },
+    #                     intent: {
+    #                       name: "Name",
+    #                       slots: {
+    #                         "Name" => {
+    #                           shape: "Scalar", # accepts Scalar, List
+    #                           value: {
+    #                             interpreted_value: "NonEmptyString",
+    #                           },
+    #                           values: [
+    #                             {
+    #                               # recursive SlotValueOverride
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
+    #                     session_attributes: {
+    #                       "NonEmptyString" => "String",
+    #                     },
+    #                   },
+    #                   response: {
+    #                     message_groups: [ # required
+    #                       {
+    #                         message: { # required
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                         variations: [
+    #                           {
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                         ],
+    #                       },
+    #                     ],
+    #                     allow_interrupt: false,
+    #                   },
+    #                 },
+    #               },
+    #               failure_response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #               failure_next_step: {
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               failure_conditional: {
+    #                 active: false, # required
+    #                 conditional_branches: [ # required
+    #                   {
+    #                     name: "Name", # required
+    #                     condition: { # required
+    #                       expression_string: "ConditionExpression", # required
+    #                     },
+    #                     next_step: { # required
+    #                       dialog_action: {
+    #                         type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                         slot_to_elicit: "Name",
+    #                         suppress_next_message: false,
+    #                       },
+    #                       intent: {
+    #                         name: "Name",
+    #                         slots: {
+    #                           "Name" => {
+    #                             shape: "Scalar", # accepts Scalar, List
+    #                             value: {
+    #                               interpreted_value: "NonEmptyString",
+    #                             },
+    #                             values: [
+    #                               {
+    #                                 # recursive SlotValueOverride
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       },
+    #                       session_attributes: {
+    #                         "NonEmptyString" => "String",
+    #                       },
+    #                     },
+    #                     response: {
+    #                       message_groups: [ # required
+    #                         {
+    #                           message: { # required
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                           variations: [
+    #                             {
+    #                               plain_text_message: {
+    #                                 value: "PlainTextMessageValue", # required
+    #                               },
+    #                               custom_payload: {
+    #                                 value: "CustomPayloadValue", # required
+    #                               },
+    #                               ssml_message: {
+    #                                 value: "SSMLMessageValue", # required
+    #                               },
+    #                               image_response_card: {
+    #                                 title: "AttachmentTitle", # required
+    #                                 subtitle: "AttachmentTitle",
+    #                                 image_url: "AttachmentUrl",
+    #                                 buttons: [
+    #                                   {
+    #                                     text: "ButtonText", # required
+    #                                     value: "ButtonValue", # required
+    #                                   },
+    #                                 ],
+    #                               },
+    #                             },
+    #                           ],
+    #                         },
+    #                       ],
+    #                       allow_interrupt: false,
+    #                     },
+    #                   },
+    #                 ],
+    #                 default_branch: { # required
+    #                   next_step: {
+    #                     dialog_action: {
+    #                       type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                       slot_to_elicit: "Name",
+    #                       suppress_next_message: false,
+    #                     },
+    #                     intent: {
+    #                       name: "Name",
+    #                       slots: {
+    #                         "Name" => {
+    #                           shape: "Scalar", # accepts Scalar, List
+    #                           value: {
+    #                             interpreted_value: "NonEmptyString",
+    #                           },
+    #                           values: [
+    #                             {
+    #                               # recursive SlotValueOverride
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
+    #                     session_attributes: {
+    #                       "NonEmptyString" => "String",
+    #                     },
+    #                   },
+    #                   response: {
+    #                     message_groups: [ # required
+    #                       {
+    #                         message: { # required
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                         variations: [
+    #                           {
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                         ],
+    #                       },
+    #                     ],
+    #                     allow_interrupt: false,
+    #                   },
+    #                 },
+    #               },
+    #               timeout_response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #               timeout_next_step: {
+    #                 dialog_action: {
+    #                   type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                   slot_to_elicit: "Name",
+    #                   suppress_next_message: false,
+    #                 },
+    #                 intent: {
+    #                   name: "Name",
+    #                   slots: {
+    #                     "Name" => {
+    #                       shape: "Scalar", # accepts Scalar, List
+    #                       value: {
+    #                         interpreted_value: "NonEmptyString",
+    #                       },
+    #                       values: [
+    #                         {
+    #                           # recursive SlotValueOverride
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 session_attributes: {
+    #                   "NonEmptyString" => "String",
+    #                 },
+    #               },
+    #               timeout_conditional: {
+    #                 active: false, # required
+    #                 conditional_branches: [ # required
+    #                   {
+    #                     name: "Name", # required
+    #                     condition: { # required
+    #                       expression_string: "ConditionExpression", # required
+    #                     },
+    #                     next_step: { # required
+    #                       dialog_action: {
+    #                         type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                         slot_to_elicit: "Name",
+    #                         suppress_next_message: false,
+    #                       },
+    #                       intent: {
+    #                         name: "Name",
+    #                         slots: {
+    #                           "Name" => {
+    #                             shape: "Scalar", # accepts Scalar, List
+    #                             value: {
+    #                               interpreted_value: "NonEmptyString",
+    #                             },
+    #                             values: [
+    #                               {
+    #                                 # recursive SlotValueOverride
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       },
+    #                       session_attributes: {
+    #                         "NonEmptyString" => "String",
+    #                       },
+    #                     },
+    #                     response: {
+    #                       message_groups: [ # required
+    #                         {
+    #                           message: { # required
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                           variations: [
+    #                             {
+    #                               plain_text_message: {
+    #                                 value: "PlainTextMessageValue", # required
+    #                               },
+    #                               custom_payload: {
+    #                                 value: "CustomPayloadValue", # required
+    #                               },
+    #                               ssml_message: {
+    #                                 value: "SSMLMessageValue", # required
+    #                               },
+    #                               image_response_card: {
+    #                                 title: "AttachmentTitle", # required
+    #                                 subtitle: "AttachmentTitle",
+    #                                 image_url: "AttachmentUrl",
+    #                                 buttons: [
+    #                                   {
+    #                                     text: "ButtonText", # required
+    #                                     value: "ButtonValue", # required
+    #                                   },
+    #                                 ],
+    #                               },
+    #                             },
+    #                           ],
+    #                         },
+    #                       ],
+    #                       allow_interrupt: false,
+    #                     },
+    #                   },
+    #                 ],
+    #                 default_branch: { # required
+    #                   next_step: {
+    #                     dialog_action: {
+    #                       type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                       slot_to_elicit: "Name",
+    #                       suppress_next_message: false,
+    #                     },
+    #                     intent: {
+    #                       name: "Name",
+    #                       slots: {
+    #                         "Name" => {
+    #                           shape: "Scalar", # accepts Scalar, List
+    #                           value: {
+    #                             interpreted_value: "NonEmptyString",
+    #                           },
+    #                           values: [
+    #                             {
+    #                               # recursive SlotValueOverride
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
+    #                     session_attributes: {
+    #                       "NonEmptyString" => "String",
+    #                     },
+    #                   },
+    #                   response: {
+    #                     message_groups: [ # required
+    #                       {
+    #                         message: { # required
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                         variations: [
+    #                           {
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                         ],
+    #                       },
+    #                     ],
+    #                     allow_interrupt: false,
+    #                   },
+    #                 },
+    #               },
+    #             },
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] intent_id
@@ -12248,6 +28955,9 @@ module Aws::LexModelsV2
     #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #   @return [String]
     #
+    # @!attribute [rw] initial_response_setting
+    #   @return [Types::InitialResponseSetting]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateIntentRequest AWS API Documentation
     #
     class UpdateIntentRequest < Struct.new(
@@ -12266,7 +28976,8 @@ module Aws::LexModelsV2
       :kendra_configuration,
       :bot_id,
       :bot_version,
-      :locale_id)
+      :locale_id,
+      :initial_response_setting)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12352,6 +29063,9 @@ module Aws::LexModelsV2
     #   A timestamp of the last time that the intent was modified.
     #   @return [Time]
     #
+    # @!attribute [rw] initial_response_setting
+    #   @return [Types::InitialResponseSetting]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateIntentResponse AWS API Documentation
     #
     class UpdateIntentResponse < Struct.new(
@@ -12372,7 +29086,8 @@ module Aws::LexModelsV2
       :bot_version,
       :locale_id,
       :creation_date_time,
-      :last_updated_date_time)
+      :last_updated_date_time,
+      :initial_response_setting)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12686,6 +29401,1269 @@ module Aws::LexModelsV2
     #               allow_interrupt: false,
     #             },
     #             active: false,
+    #           },
+    #           slot_capture_setting: {
+    #             capture_response: {
+    #               message_groups: [ # required
+    #                 {
+    #                   message: { # required
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   variations: [
+    #                     {
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #               allow_interrupt: false,
+    #             },
+    #             capture_next_step: {
+    #               dialog_action: {
+    #                 type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                 slot_to_elicit: "Name",
+    #                 suppress_next_message: false,
+    #               },
+    #               intent: {
+    #                 name: "Name",
+    #                 slots: {
+    #                   "Name" => {
+    #                     shape: "Scalar", # accepts Scalar, List
+    #                     value: {
+    #                       interpreted_value: "NonEmptyString",
+    #                     },
+    #                     values: [
+    #                       {
+    #                         # recursive SlotValueOverride
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               },
+    #               session_attributes: {
+    #                 "NonEmptyString" => "String",
+    #               },
+    #             },
+    #             capture_conditional: {
+    #               active: false, # required
+    #               conditional_branches: [ # required
+    #                 {
+    #                   name: "Name", # required
+    #                   condition: { # required
+    #                     expression_string: "ConditionExpression", # required
+    #                   },
+    #                   next_step: { # required
+    #                     dialog_action: {
+    #                       type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                       slot_to_elicit: "Name",
+    #                       suppress_next_message: false,
+    #                     },
+    #                     intent: {
+    #                       name: "Name",
+    #                       slots: {
+    #                         "Name" => {
+    #                           shape: "Scalar", # accepts Scalar, List
+    #                           value: {
+    #                             interpreted_value: "NonEmptyString",
+    #                           },
+    #                           values: [
+    #                             {
+    #                               # recursive SlotValueOverride
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
+    #                     session_attributes: {
+    #                       "NonEmptyString" => "String",
+    #                     },
+    #                   },
+    #                   response: {
+    #                     message_groups: [ # required
+    #                       {
+    #                         message: { # required
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                         variations: [
+    #                           {
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                         ],
+    #                       },
+    #                     ],
+    #                     allow_interrupt: false,
+    #                   },
+    #                 },
+    #               ],
+    #               default_branch: { # required
+    #                 next_step: {
+    #                   dialog_action: {
+    #                     type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                     slot_to_elicit: "Name",
+    #                     suppress_next_message: false,
+    #                   },
+    #                   intent: {
+    #                     name: "Name",
+    #                     slots: {
+    #                       "Name" => {
+    #                         shape: "Scalar", # accepts Scalar, List
+    #                         value: {
+    #                           interpreted_value: "NonEmptyString",
+    #                         },
+    #                         values: [
+    #                           {
+    #                             # recursive SlotValueOverride
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                   session_attributes: {
+    #                     "NonEmptyString" => "String",
+    #                   },
+    #                 },
+    #                 response: {
+    #                   message_groups: [ # required
+    #                     {
+    #                       message: { # required
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       variations: [
+    #                         {
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                   allow_interrupt: false,
+    #                 },
+    #               },
+    #             },
+    #             failure_response: {
+    #               message_groups: [ # required
+    #                 {
+    #                   message: { # required
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   variations: [
+    #                     {
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #               allow_interrupt: false,
+    #             },
+    #             failure_next_step: {
+    #               dialog_action: {
+    #                 type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                 slot_to_elicit: "Name",
+    #                 suppress_next_message: false,
+    #               },
+    #               intent: {
+    #                 name: "Name",
+    #                 slots: {
+    #                   "Name" => {
+    #                     shape: "Scalar", # accepts Scalar, List
+    #                     value: {
+    #                       interpreted_value: "NonEmptyString",
+    #                     },
+    #                     values: [
+    #                       {
+    #                         # recursive SlotValueOverride
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               },
+    #               session_attributes: {
+    #                 "NonEmptyString" => "String",
+    #               },
+    #             },
+    #             failure_conditional: {
+    #               active: false, # required
+    #               conditional_branches: [ # required
+    #                 {
+    #                   name: "Name", # required
+    #                   condition: { # required
+    #                     expression_string: "ConditionExpression", # required
+    #                   },
+    #                   next_step: { # required
+    #                     dialog_action: {
+    #                       type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                       slot_to_elicit: "Name",
+    #                       suppress_next_message: false,
+    #                     },
+    #                     intent: {
+    #                       name: "Name",
+    #                       slots: {
+    #                         "Name" => {
+    #                           shape: "Scalar", # accepts Scalar, List
+    #                           value: {
+    #                             interpreted_value: "NonEmptyString",
+    #                           },
+    #                           values: [
+    #                             {
+    #                               # recursive SlotValueOverride
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
+    #                     session_attributes: {
+    #                       "NonEmptyString" => "String",
+    #                     },
+    #                   },
+    #                   response: {
+    #                     message_groups: [ # required
+    #                       {
+    #                         message: { # required
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                         variations: [
+    #                           {
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                         ],
+    #                       },
+    #                     ],
+    #                     allow_interrupt: false,
+    #                   },
+    #                 },
+    #               ],
+    #               default_branch: { # required
+    #                 next_step: {
+    #                   dialog_action: {
+    #                     type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                     slot_to_elicit: "Name",
+    #                     suppress_next_message: false,
+    #                   },
+    #                   intent: {
+    #                     name: "Name",
+    #                     slots: {
+    #                       "Name" => {
+    #                         shape: "Scalar", # accepts Scalar, List
+    #                         value: {
+    #                           interpreted_value: "NonEmptyString",
+    #                         },
+    #                         values: [
+    #                           {
+    #                             # recursive SlotValueOverride
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                   session_attributes: {
+    #                     "NonEmptyString" => "String",
+    #                   },
+    #                 },
+    #                 response: {
+    #                   message_groups: [ # required
+    #                     {
+    #                       message: { # required
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       variations: [
+    #                         {
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                   allow_interrupt: false,
+    #                 },
+    #               },
+    #             },
+    #             code_hook: {
+    #               enable_code_hook_invocation: false, # required
+    #               active: false, # required
+    #               invocation_label: "Name",
+    #               post_code_hook_specification: { # required
+    #                 success_response: {
+    #                   message_groups: [ # required
+    #                     {
+    #                       message: { # required
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       variations: [
+    #                         {
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                   allow_interrupt: false,
+    #                 },
+    #                 success_next_step: {
+    #                   dialog_action: {
+    #                     type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                     slot_to_elicit: "Name",
+    #                     suppress_next_message: false,
+    #                   },
+    #                   intent: {
+    #                     name: "Name",
+    #                     slots: {
+    #                       "Name" => {
+    #                         shape: "Scalar", # accepts Scalar, List
+    #                         value: {
+    #                           interpreted_value: "NonEmptyString",
+    #                         },
+    #                         values: [
+    #                           {
+    #                             # recursive SlotValueOverride
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                   session_attributes: {
+    #                     "NonEmptyString" => "String",
+    #                   },
+    #                 },
+    #                 success_conditional: {
+    #                   active: false, # required
+    #                   conditional_branches: [ # required
+    #                     {
+    #                       name: "Name", # required
+    #                       condition: { # required
+    #                         expression_string: "ConditionExpression", # required
+    #                       },
+    #                       next_step: { # required
+    #                         dialog_action: {
+    #                           type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                           slot_to_elicit: "Name",
+    #                           suppress_next_message: false,
+    #                         },
+    #                         intent: {
+    #                           name: "Name",
+    #                           slots: {
+    #                             "Name" => {
+    #                               shape: "Scalar", # accepts Scalar, List
+    #                               value: {
+    #                                 interpreted_value: "NonEmptyString",
+    #                               },
+    #                               values: [
+    #                                 {
+    #                                   # recursive SlotValueOverride
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                         },
+    #                         session_attributes: {
+    #                           "NonEmptyString" => "String",
+    #                         },
+    #                       },
+    #                       response: {
+    #                         message_groups: [ # required
+    #                           {
+    #                             message: { # required
+    #                               plain_text_message: {
+    #                                 value: "PlainTextMessageValue", # required
+    #                               },
+    #                               custom_payload: {
+    #                                 value: "CustomPayloadValue", # required
+    #                               },
+    #                               ssml_message: {
+    #                                 value: "SSMLMessageValue", # required
+    #                               },
+    #                               image_response_card: {
+    #                                 title: "AttachmentTitle", # required
+    #                                 subtitle: "AttachmentTitle",
+    #                                 image_url: "AttachmentUrl",
+    #                                 buttons: [
+    #                                   {
+    #                                     text: "ButtonText", # required
+    #                                     value: "ButtonValue", # required
+    #                                   },
+    #                                 ],
+    #                               },
+    #                             },
+    #                             variations: [
+    #                               {
+    #                                 plain_text_message: {
+    #                                   value: "PlainTextMessageValue", # required
+    #                                 },
+    #                                 custom_payload: {
+    #                                   value: "CustomPayloadValue", # required
+    #                                 },
+    #                                 ssml_message: {
+    #                                   value: "SSMLMessageValue", # required
+    #                                 },
+    #                                 image_response_card: {
+    #                                   title: "AttachmentTitle", # required
+    #                                   subtitle: "AttachmentTitle",
+    #                                   image_url: "AttachmentUrl",
+    #                                   buttons: [
+    #                                     {
+    #                                       text: "ButtonText", # required
+    #                                       value: "ButtonValue", # required
+    #                                     },
+    #                                   ],
+    #                                 },
+    #                               },
+    #                             ],
+    #                           },
+    #                         ],
+    #                         allow_interrupt: false,
+    #                       },
+    #                     },
+    #                   ],
+    #                   default_branch: { # required
+    #                     next_step: {
+    #                       dialog_action: {
+    #                         type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                         slot_to_elicit: "Name",
+    #                         suppress_next_message: false,
+    #                       },
+    #                       intent: {
+    #                         name: "Name",
+    #                         slots: {
+    #                           "Name" => {
+    #                             shape: "Scalar", # accepts Scalar, List
+    #                             value: {
+    #                               interpreted_value: "NonEmptyString",
+    #                             },
+    #                             values: [
+    #                               {
+    #                                 # recursive SlotValueOverride
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       },
+    #                       session_attributes: {
+    #                         "NonEmptyString" => "String",
+    #                       },
+    #                     },
+    #                     response: {
+    #                       message_groups: [ # required
+    #                         {
+    #                           message: { # required
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                           variations: [
+    #                             {
+    #                               plain_text_message: {
+    #                                 value: "PlainTextMessageValue", # required
+    #                               },
+    #                               custom_payload: {
+    #                                 value: "CustomPayloadValue", # required
+    #                               },
+    #                               ssml_message: {
+    #                                 value: "SSMLMessageValue", # required
+    #                               },
+    #                               image_response_card: {
+    #                                 title: "AttachmentTitle", # required
+    #                                 subtitle: "AttachmentTitle",
+    #                                 image_url: "AttachmentUrl",
+    #                                 buttons: [
+    #                                   {
+    #                                     text: "ButtonText", # required
+    #                                     value: "ButtonValue", # required
+    #                                   },
+    #                                 ],
+    #                               },
+    #                             },
+    #                           ],
+    #                         },
+    #                       ],
+    #                       allow_interrupt: false,
+    #                     },
+    #                   },
+    #                 },
+    #                 failure_response: {
+    #                   message_groups: [ # required
+    #                     {
+    #                       message: { # required
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       variations: [
+    #                         {
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                   allow_interrupt: false,
+    #                 },
+    #                 failure_next_step: {
+    #                   dialog_action: {
+    #                     type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                     slot_to_elicit: "Name",
+    #                     suppress_next_message: false,
+    #                   },
+    #                   intent: {
+    #                     name: "Name",
+    #                     slots: {
+    #                       "Name" => {
+    #                         shape: "Scalar", # accepts Scalar, List
+    #                         value: {
+    #                           interpreted_value: "NonEmptyString",
+    #                         },
+    #                         values: [
+    #                           {
+    #                             # recursive SlotValueOverride
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                   session_attributes: {
+    #                     "NonEmptyString" => "String",
+    #                   },
+    #                 },
+    #                 failure_conditional: {
+    #                   active: false, # required
+    #                   conditional_branches: [ # required
+    #                     {
+    #                       name: "Name", # required
+    #                       condition: { # required
+    #                         expression_string: "ConditionExpression", # required
+    #                       },
+    #                       next_step: { # required
+    #                         dialog_action: {
+    #                           type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                           slot_to_elicit: "Name",
+    #                           suppress_next_message: false,
+    #                         },
+    #                         intent: {
+    #                           name: "Name",
+    #                           slots: {
+    #                             "Name" => {
+    #                               shape: "Scalar", # accepts Scalar, List
+    #                               value: {
+    #                                 interpreted_value: "NonEmptyString",
+    #                               },
+    #                               values: [
+    #                                 {
+    #                                   # recursive SlotValueOverride
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                         },
+    #                         session_attributes: {
+    #                           "NonEmptyString" => "String",
+    #                         },
+    #                       },
+    #                       response: {
+    #                         message_groups: [ # required
+    #                           {
+    #                             message: { # required
+    #                               plain_text_message: {
+    #                                 value: "PlainTextMessageValue", # required
+    #                               },
+    #                               custom_payload: {
+    #                                 value: "CustomPayloadValue", # required
+    #                               },
+    #                               ssml_message: {
+    #                                 value: "SSMLMessageValue", # required
+    #                               },
+    #                               image_response_card: {
+    #                                 title: "AttachmentTitle", # required
+    #                                 subtitle: "AttachmentTitle",
+    #                                 image_url: "AttachmentUrl",
+    #                                 buttons: [
+    #                                   {
+    #                                     text: "ButtonText", # required
+    #                                     value: "ButtonValue", # required
+    #                                   },
+    #                                 ],
+    #                               },
+    #                             },
+    #                             variations: [
+    #                               {
+    #                                 plain_text_message: {
+    #                                   value: "PlainTextMessageValue", # required
+    #                                 },
+    #                                 custom_payload: {
+    #                                   value: "CustomPayloadValue", # required
+    #                                 },
+    #                                 ssml_message: {
+    #                                   value: "SSMLMessageValue", # required
+    #                                 },
+    #                                 image_response_card: {
+    #                                   title: "AttachmentTitle", # required
+    #                                   subtitle: "AttachmentTitle",
+    #                                   image_url: "AttachmentUrl",
+    #                                   buttons: [
+    #                                     {
+    #                                       text: "ButtonText", # required
+    #                                       value: "ButtonValue", # required
+    #                                     },
+    #                                   ],
+    #                                 },
+    #                               },
+    #                             ],
+    #                           },
+    #                         ],
+    #                         allow_interrupt: false,
+    #                       },
+    #                     },
+    #                   ],
+    #                   default_branch: { # required
+    #                     next_step: {
+    #                       dialog_action: {
+    #                         type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                         slot_to_elicit: "Name",
+    #                         suppress_next_message: false,
+    #                       },
+    #                       intent: {
+    #                         name: "Name",
+    #                         slots: {
+    #                           "Name" => {
+    #                             shape: "Scalar", # accepts Scalar, List
+    #                             value: {
+    #                               interpreted_value: "NonEmptyString",
+    #                             },
+    #                             values: [
+    #                               {
+    #                                 # recursive SlotValueOverride
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       },
+    #                       session_attributes: {
+    #                         "NonEmptyString" => "String",
+    #                       },
+    #                     },
+    #                     response: {
+    #                       message_groups: [ # required
+    #                         {
+    #                           message: { # required
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                           variations: [
+    #                             {
+    #                               plain_text_message: {
+    #                                 value: "PlainTextMessageValue", # required
+    #                               },
+    #                               custom_payload: {
+    #                                 value: "CustomPayloadValue", # required
+    #                               },
+    #                               ssml_message: {
+    #                                 value: "SSMLMessageValue", # required
+    #                               },
+    #                               image_response_card: {
+    #                                 title: "AttachmentTitle", # required
+    #                                 subtitle: "AttachmentTitle",
+    #                                 image_url: "AttachmentUrl",
+    #                                 buttons: [
+    #                                   {
+    #                                     text: "ButtonText", # required
+    #                                     value: "ButtonValue", # required
+    #                                   },
+    #                                 ],
+    #                               },
+    #                             },
+    #                           ],
+    #                         },
+    #                       ],
+    #                       allow_interrupt: false,
+    #                     },
+    #                   },
+    #                 },
+    #                 timeout_response: {
+    #                   message_groups: [ # required
+    #                     {
+    #                       message: { # required
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       variations: [
+    #                         {
+    #                           plain_text_message: {
+    #                             value: "PlainTextMessageValue", # required
+    #                           },
+    #                           custom_payload: {
+    #                             value: "CustomPayloadValue", # required
+    #                           },
+    #                           ssml_message: {
+    #                             value: "SSMLMessageValue", # required
+    #                           },
+    #                           image_response_card: {
+    #                             title: "AttachmentTitle", # required
+    #                             subtitle: "AttachmentTitle",
+    #                             image_url: "AttachmentUrl",
+    #                             buttons: [
+    #                               {
+    #                                 text: "ButtonText", # required
+    #                                 value: "ButtonValue", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                   allow_interrupt: false,
+    #                 },
+    #                 timeout_next_step: {
+    #                   dialog_action: {
+    #                     type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                     slot_to_elicit: "Name",
+    #                     suppress_next_message: false,
+    #                   },
+    #                   intent: {
+    #                     name: "Name",
+    #                     slots: {
+    #                       "Name" => {
+    #                         shape: "Scalar", # accepts Scalar, List
+    #                         value: {
+    #                           interpreted_value: "NonEmptyString",
+    #                         },
+    #                         values: [
+    #                           {
+    #                             # recursive SlotValueOverride
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                   session_attributes: {
+    #                     "NonEmptyString" => "String",
+    #                   },
+    #                 },
+    #                 timeout_conditional: {
+    #                   active: false, # required
+    #                   conditional_branches: [ # required
+    #                     {
+    #                       name: "Name", # required
+    #                       condition: { # required
+    #                         expression_string: "ConditionExpression", # required
+    #                       },
+    #                       next_step: { # required
+    #                         dialog_action: {
+    #                           type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                           slot_to_elicit: "Name",
+    #                           suppress_next_message: false,
+    #                         },
+    #                         intent: {
+    #                           name: "Name",
+    #                           slots: {
+    #                             "Name" => {
+    #                               shape: "Scalar", # accepts Scalar, List
+    #                               value: {
+    #                                 interpreted_value: "NonEmptyString",
+    #                               },
+    #                               values: [
+    #                                 {
+    #                                   # recursive SlotValueOverride
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                         },
+    #                         session_attributes: {
+    #                           "NonEmptyString" => "String",
+    #                         },
+    #                       },
+    #                       response: {
+    #                         message_groups: [ # required
+    #                           {
+    #                             message: { # required
+    #                               plain_text_message: {
+    #                                 value: "PlainTextMessageValue", # required
+    #                               },
+    #                               custom_payload: {
+    #                                 value: "CustomPayloadValue", # required
+    #                               },
+    #                               ssml_message: {
+    #                                 value: "SSMLMessageValue", # required
+    #                               },
+    #                               image_response_card: {
+    #                                 title: "AttachmentTitle", # required
+    #                                 subtitle: "AttachmentTitle",
+    #                                 image_url: "AttachmentUrl",
+    #                                 buttons: [
+    #                                   {
+    #                                     text: "ButtonText", # required
+    #                                     value: "ButtonValue", # required
+    #                                   },
+    #                                 ],
+    #                               },
+    #                             },
+    #                             variations: [
+    #                               {
+    #                                 plain_text_message: {
+    #                                   value: "PlainTextMessageValue", # required
+    #                                 },
+    #                                 custom_payload: {
+    #                                   value: "CustomPayloadValue", # required
+    #                                 },
+    #                                 ssml_message: {
+    #                                   value: "SSMLMessageValue", # required
+    #                                 },
+    #                                 image_response_card: {
+    #                                   title: "AttachmentTitle", # required
+    #                                   subtitle: "AttachmentTitle",
+    #                                   image_url: "AttachmentUrl",
+    #                                   buttons: [
+    #                                     {
+    #                                       text: "ButtonText", # required
+    #                                       value: "ButtonValue", # required
+    #                                     },
+    #                                   ],
+    #                                 },
+    #                               },
+    #                             ],
+    #                           },
+    #                         ],
+    #                         allow_interrupt: false,
+    #                       },
+    #                     },
+    #                   ],
+    #                   default_branch: { # required
+    #                     next_step: {
+    #                       dialog_action: {
+    #                         type: "ElicitIntent", # required, accepts ElicitIntent, StartIntent, ElicitSlot, EvaluateConditional, InvokeDialogCodeHook, ConfirmIntent, FulfillIntent, CloseIntent, EndConversation
+    #                         slot_to_elicit: "Name",
+    #                         suppress_next_message: false,
+    #                       },
+    #                       intent: {
+    #                         name: "Name",
+    #                         slots: {
+    #                           "Name" => {
+    #                             shape: "Scalar", # accepts Scalar, List
+    #                             value: {
+    #                               interpreted_value: "NonEmptyString",
+    #                             },
+    #                             values: [
+    #                               {
+    #                                 # recursive SlotValueOverride
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       },
+    #                       session_attributes: {
+    #                         "NonEmptyString" => "String",
+    #                       },
+    #                     },
+    #                     response: {
+    #                       message_groups: [ # required
+    #                         {
+    #                           message: { # required
+    #                             plain_text_message: {
+    #                               value: "PlainTextMessageValue", # required
+    #                             },
+    #                             custom_payload: {
+    #                               value: "CustomPayloadValue", # required
+    #                             },
+    #                             ssml_message: {
+    #                               value: "SSMLMessageValue", # required
+    #                             },
+    #                             image_response_card: {
+    #                               title: "AttachmentTitle", # required
+    #                               subtitle: "AttachmentTitle",
+    #                               image_url: "AttachmentUrl",
+    #                               buttons: [
+    #                                 {
+    #                                   text: "ButtonText", # required
+    #                                   value: "ButtonValue", # required
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                           variations: [
+    #                             {
+    #                               plain_text_message: {
+    #                                 value: "PlainTextMessageValue", # required
+    #                               },
+    #                               custom_payload: {
+    #                                 value: "CustomPayloadValue", # required
+    #                               },
+    #                               ssml_message: {
+    #                                 value: "SSMLMessageValue", # required
+    #                               },
+    #                               image_response_card: {
+    #                                 title: "AttachmentTitle", # required
+    #                                 subtitle: "AttachmentTitle",
+    #                                 image_url: "AttachmentUrl",
+    #                                 buttons: [
+    #                                   {
+    #                                     text: "ButtonText", # required
+    #                                     value: "ButtonValue", # required
+    #                                   },
+    #                                 ],
+    #                               },
+    #                             },
+    #                           ],
+    #                         },
+    #                       ],
+    #                       allow_interrupt: false,
+    #                     },
+    #                   },
+    #                 },
+    #               },
+    #             },
+    #             elicitation_code_hook: {
+    #               enable_code_hook_invocation: false, # required
+    #               invocation_label: "Name",
+    #             },
     #           },
     #         },
     #         obfuscation_setting: {

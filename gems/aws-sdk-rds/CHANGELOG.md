@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.153.0 (2022-08-17)
+------------------
+
+* Feature - Adds support for Internet Protocol Version 6 (IPv6) for RDS Aurora database clusters.
+
 1.152.0 (2022-08-12)
 ------------------
 

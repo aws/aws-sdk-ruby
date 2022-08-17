@@ -30,6 +30,7 @@ module Aws::Lambda
     AllowMethodsList = Shapes::ListShape.new(name: 'AllowMethodsList')
     AllowOriginsList = Shapes::ListShape.new(name: 'AllowOriginsList')
     AllowedPublishers = Shapes::StructureShape.new(name: 'AllowedPublishers')
+    AmazonManagedKafkaEventSourceConfig = Shapes::StructureShape.new(name: 'AmazonManagedKafkaEventSourceConfig')
     Architecture = Shapes::StringShape.new(name: 'Architecture')
     ArchitecturesList = Shapes::ListShape.new(name: 'ArchitecturesList')
     Arn = Shapes::StringShape.new(name: 'Arn')
@@ -281,6 +282,7 @@ module Aws::Lambda
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
     SelfManagedEventSource = Shapes::StructureShape.new(name: 'SelfManagedEventSource')
+    SelfManagedKafkaEventSourceConfig = Shapes::StructureShape.new(name: 'SelfManagedKafkaEventSourceConfig')
     SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
     ServiceException = Shapes::StructureShape.new(name: 'ServiceException')
     SigningProfileVersionArns = Shapes::ListShape.new(name: 'SigningProfileVersionArns')
@@ -395,6 +397,9 @@ module Aws::Lambda
     AllowedPublishers.add_member(:signing_profile_version_arns, Shapes::ShapeRef.new(shape: SigningProfileVersionArns, required: true, location_name: "SigningProfileVersionArns"))
     AllowedPublishers.struct_class = Types::AllowedPublishers
 
+    AmazonManagedKafkaEventSourceConfig.add_member(:consumer_group_id, Shapes::ShapeRef.new(shape: URI, location_name: "ConsumerGroupId"))
+    AmazonManagedKafkaEventSourceConfig.struct_class = Types::AmazonManagedKafkaEventSourceConfig
+
     ArchitecturesList.member = Shapes::ShapeRef.new(shape: Architecture)
 
     CodeSigningConfig.add_member(:code_signing_config_id, Shapes::ShapeRef.new(shape: CodeSigningConfigId, required: true, location_name: "CodeSigningConfigId"))
@@ -471,6 +476,8 @@ module Aws::Lambda
     CreateEventSourceMappingRequest.add_member(:source_access_configurations, Shapes::ShapeRef.new(shape: SourceAccessConfigurations, location_name: "SourceAccessConfigurations"))
     CreateEventSourceMappingRequest.add_member(:self_managed_event_source, Shapes::ShapeRef.new(shape: SelfManagedEventSource, location_name: "SelfManagedEventSource"))
     CreateEventSourceMappingRequest.add_member(:function_response_types, Shapes::ShapeRef.new(shape: FunctionResponseTypeList, location_name: "FunctionResponseTypes"))
+    CreateEventSourceMappingRequest.add_member(:amazon_managed_kafka_event_source_config, Shapes::ShapeRef.new(shape: AmazonManagedKafkaEventSourceConfig, location_name: "AmazonManagedKafkaEventSourceConfig"))
+    CreateEventSourceMappingRequest.add_member(:self_managed_kafka_event_source_config, Shapes::ShapeRef.new(shape: SelfManagedKafkaEventSourceConfig, location_name: "SelfManagedKafkaEventSourceConfig"))
     CreateEventSourceMappingRequest.struct_class = Types::CreateEventSourceMappingRequest
 
     CreateFunctionRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location_name: "FunctionName"))
@@ -633,6 +640,8 @@ module Aws::Lambda
     EventSourceMappingConfiguration.add_member(:maximum_retry_attempts, Shapes::ShapeRef.new(shape: MaximumRetryAttemptsEventSourceMapping, location_name: "MaximumRetryAttempts"))
     EventSourceMappingConfiguration.add_member(:tumbling_window_in_seconds, Shapes::ShapeRef.new(shape: TumblingWindowInSeconds, location_name: "TumblingWindowInSeconds"))
     EventSourceMappingConfiguration.add_member(:function_response_types, Shapes::ShapeRef.new(shape: FunctionResponseTypeList, location_name: "FunctionResponseTypes"))
+    EventSourceMappingConfiguration.add_member(:amazon_managed_kafka_event_source_config, Shapes::ShapeRef.new(shape: AmazonManagedKafkaEventSourceConfig, location_name: "AmazonManagedKafkaEventSourceConfig"))
+    EventSourceMappingConfiguration.add_member(:self_managed_kafka_event_source_config, Shapes::ShapeRef.new(shape: SelfManagedKafkaEventSourceConfig, location_name: "SelfManagedKafkaEventSourceConfig"))
     EventSourceMappingConfiguration.struct_class = Types::EventSourceMappingConfiguration
 
     EventSourceMappingsList.member = Shapes::ShapeRef.new(shape: EventSourceMappingConfiguration)
@@ -1194,6 +1203,9 @@ module Aws::Lambda
 
     SelfManagedEventSource.add_member(:endpoints, Shapes::ShapeRef.new(shape: Endpoints, location_name: "Endpoints"))
     SelfManagedEventSource.struct_class = Types::SelfManagedEventSource
+
+    SelfManagedKafkaEventSourceConfig.add_member(:consumer_group_id, Shapes::ShapeRef.new(shape: URI, location_name: "ConsumerGroupId"))
+    SelfManagedKafkaEventSourceConfig.struct_class = Types::SelfManagedKafkaEventSourceConfig
 
     ServiceException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
     ServiceException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))

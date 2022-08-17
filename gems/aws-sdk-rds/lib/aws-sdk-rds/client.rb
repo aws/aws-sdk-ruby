@@ -665,18 +665,28 @@ module Aws::RDS
     # EC2SecurityGroupId for VPC, or (EC2SecurityGroupOwnerId and either
     # EC2SecurityGroupName or EC2SecurityGroupId for non-VPC).
     #
-    # <note markdown="1"> You can't authorize ingress from an EC2 security group in one Amazon
+    # You can't authorize ingress from an EC2 security group in one Amazon
     # Web Services Region to an Amazon RDS DB instance in another. You
     # can't authorize ingress from a VPC security group in one VPC to an
     # Amazon RDS DB instance in another.
     #
-    #  </note>
-    #
     # For an overview of CIDR ranges, go to the [Wikipedia Tutorial][1].
+    #
+    # <note markdown="1"> EC2-Classic was retired on August 15, 2022. If you haven't migrated
+    # from EC2-Classic to a VPC, we recommend that you migrate as soon as
+    # possible. For more information, see [Migrate from EC2-Classic to a
+    # VPC][2] in the *Amazon EC2 User Guide*, the blog [EC2-Classic
+    # Networking is Retiring – Here’s How to Prepare][3], and [Moving a DB
+    # instance not in a VPC into a VPC][4] in the *Amazon RDS User Guide*.
+    #
+    #  </note>
     #
     #
     #
     # [1]: http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
+    # [3]: http://aws.amazon.com/blogs/aws/ec2-classic-is-retiring-heres-how-to-prepare/
+    # [4]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.Non-VPC2VPC.html
     #
     # @option params [required, String] :db_security_group_name
     #   The name of the DB security group to add authorization to.
@@ -2762,6 +2772,28 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
     #
+    # @option params [String] :network_type
+    #   The network type of the DB cluster.
+    #
+    #   Valid values:
+    #
+    #   * `IPV4`
+    #
+    #   * `DUAL`
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the DB cluster. A `DBSubnetGroup` can support only the IPv4 protocol
+    #   or the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [ Working with a DB instance in a VPC][1] in
+    #   the *Amazon Aurora User Guide.*
+    #
+    #   Valid for: Aurora DB clusters only
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -2860,6 +2892,7 @@ module Aws::RDS
     #       min_capacity: 1.0,
     #       max_capacity: 1.0,
     #     },
+    #     network_type: "String",
     #     source_region: "String",
     #   })
     #
@@ -2967,6 +3000,7 @@ module Aws::RDS
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBCluster AWS API Documentation
     #
@@ -5852,10 +5886,23 @@ module Aws::RDS
     # Creates a new DB security group. DB security groups control access to
     # a DB instance.
     #
-    # <note markdown="1"> A DB security group controls access to EC2-Classic DB instances that
+    # A DB security group controls access to EC2-Classic DB instances that
     # are not in a VPC.
     #
+    # <note markdown="1"> EC2-Classic was retired on August 15, 2022. If you haven't migrated
+    # from EC2-Classic to a VPC, we recommend that you migrate as soon as
+    # possible. For more information, see [Migrate from EC2-Classic to a
+    # VPC][1] in the *Amazon EC2 User Guide*, the blog [EC2-Classic
+    # Networking is Retiring – Here’s How to Prepare][2], and [Moving a DB
+    # instance not in a VPC into a VPC][3] in the *Amazon RDS User Guide*.
+    #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
+    # [2]: http://aws.amazon.com/blogs/aws/ec2-classic-is-retiring-heres-how-to-prepare/
+    # [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.Non-VPC2VPC.html
     #
     # @option params [required, String] :db_security_group_name
     #   The name for the DB security group. This value is stored as a
@@ -6165,11 +6212,18 @@ module Aws::RDS
     # `SourceIds`, you are notified of events generated from all RDS sources
     # belonging to your customer account.
     #
-    # <note markdown="1"> RDS event notification is only available for unencrypted SNS topics.
-    # If you specify an encrypted SNS topic, event notifications aren't
-    # sent for the topic.
+    # For more information about subscribing to an event for RDS DB engines,
+    # see [ Subscribing to Amazon RDS event notification][1] in the *Amazon
+    # RDS User Guide*.
     #
-    #  </note>
+    # For more information about subscribing to an event for Aurora DB
+    # engines, see [ Subscribing to Amazon RDS event notification][2] in the
+    # *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.Subscribing.html
+    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Events.Subscribing.html
     #
     # @option params [required, String] :subscription_name
     #   The name of the subscription.
@@ -6861,6 +6915,7 @@ module Aws::RDS
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBCluster AWS API Documentation
     #
@@ -7539,10 +7594,23 @@ module Aws::RDS
 
     # Deletes a DB security group.
     #
-    # <note markdown="1"> The specified DB security group must not be associated with any DB
+    # The specified DB security group must not be associated with any DB
     # instances.
     #
+    # <note markdown="1"> EC2-Classic was retired on August 15, 2022. If you haven't migrated
+    # from EC2-Classic to a VPC, we recommend that you migrate as soon as
+    # possible. For more information, see [Migrate from EC2-Classic to a
+    # VPC][1] in the *Amazon EC2 User Guide*, the blog [EC2-Classic
+    # Networking is Retiring – Here’s How to Prepare][2], and [Moving a DB
+    # instance not in a VPC into a VPC][3] in the *Amazon RDS User Guide*.
+    #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
+    # [2]: http://aws.amazon.com/blogs/aws/ec2-classic-is-retiring-heres-how-to-prepare/
+    # [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.Non-VPC2VPC.html
     #
     # @option params [required, String] :db_security_group_name
     #   The name of the DB security group to delete.
@@ -8922,6 +8990,7 @@ module Aws::RDS
     #   resp.db_clusters[0].performance_insights_retention_period #=> Integer
     #   resp.db_clusters[0].serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_clusters[0].serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_clusters[0].network_type #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -10160,6 +10229,21 @@ module Aws::RDS
     # Returns a list of `DBSecurityGroup` descriptions. If a
     # `DBSecurityGroupName` is specified, the list will contain only the
     # descriptions of the specified DB security group.
+    #
+    # <note markdown="1"> EC2-Classic was retired on August 15, 2022. If you haven't migrated
+    # from EC2-Classic to a VPC, we recommend that you migrate as soon as
+    # possible. For more information, see [Migrate from EC2-Classic to a
+    # VPC][1] in the *Amazon EC2 User Guide*, the blog [EC2-Classic
+    # Networking is Retiring – Here’s How to Prepare][2], and [Moving a DB
+    # instance not in a VPC into a VPC][3] in the *Amazon RDS User Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
+    # [2]: http://aws.amazon.com/blogs/aws/ec2-classic-is-retiring-heres-how-to-prepare/
+    # [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.Non-VPC2VPC.html
     #
     # @option params [String] :db_security_group_name
     #   The name of the DB security group to return details for.
@@ -12683,6 +12767,7 @@ module Aws::RDS
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverDBCluster AWS API Documentation
     #
@@ -13757,6 +13842,28 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
     #
+    # @option params [String] :network_type
+    #   The network type of the DB cluster.
+    #
+    #   Valid values:
+    #
+    #   * `IPV4`
+    #
+    #   * `DUAL`
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the DB cluster. A `DBSubnetGroup` can support only the IPv4 protocol
+    #   or the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [ Working with a DB instance in a VPC][1] in
+    #   the *Amazon Aurora User Guide.*
+    #
+    #   Valid for: Aurora DB clusters only
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    #
     # @return [Types::ModifyDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
@@ -13832,6 +13939,7 @@ module Aws::RDS
     #       min_capacity: 1.0,
     #       max_capacity: 1.0,
     #     },
+    #     network_type: "String",
     #   })
     #
     # @example Response structure
@@ -13938,6 +14046,7 @@ module Aws::RDS
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBCluster AWS API Documentation
     #
@@ -16677,6 +16786,7 @@ module Aws::RDS
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplicaDBCluster AWS API Documentation
     #
@@ -16919,6 +17029,7 @@ module Aws::RDS
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBCluster AWS API Documentation
     #
@@ -17981,6 +18092,26 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
     #
+    # @option params [String] :network_type
+    #   The network type of the DB cluster.
+    #
+    #   Valid values:
+    #
+    #   * `IPV4`
+    #
+    #   * `DUAL`
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the DB cluster. A `DBSubnetGroup` can support only the IPv4 protocol
+    #   or the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [ Working with a DB instance in a VPC][1] in
+    #   the *Amazon Aurora User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    #
     # @return [Types::RestoreDBClusterFromS3Result] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterFromS3Result#db_cluster #db_cluster} => Types::DBCluster
@@ -18028,6 +18159,7 @@ module Aws::RDS
     #       min_capacity: 1.0,
     #       max_capacity: 1.0,
     #     },
+    #     network_type: "String",
     #   })
     #
     # @example Response structure
@@ -18134,6 +18266,7 @@ module Aws::RDS
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3 AWS API Documentation
     #
@@ -18573,6 +18706,28 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
     #
+    # @option params [String] :network_type
+    #   The network type of the DB cluster.
+    #
+    #   Valid values:
+    #
+    #   * `IPV4`
+    #
+    #   * `DUAL`
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the DB cluster. A `DBSubnetGroup` can support only the IPv4 protocol
+    #   or the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [ Working with a DB instance in a VPC][1] in
+    #   the *Amazon Aurora User Guide.*
+    #
+    #   Valid for: Aurora DB clusters only
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    #
     # @return [Types::RestoreDBClusterFromSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterFromSnapshotResult#db_cluster #db_cluster} => Types::DBCluster
@@ -18639,6 +18794,7 @@ module Aws::RDS
     #       min_capacity: 1.0,
     #       max_capacity: 1.0,
     #     },
+    #     network_type: "String",
     #   })
     #
     # @example Response structure
@@ -18745,6 +18901,7 @@ module Aws::RDS
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshot AWS API Documentation
     #
@@ -19154,6 +19311,28 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
     #
+    # @option params [String] :network_type
+    #   The network type of the DB cluster.
+    #
+    #   Valid values:
+    #
+    #   * `IPV4`
+    #
+    #   * `DUAL`
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the DB cluster. A `DBSubnetGroup` can support only the IPv4 protocol
+    #   or the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [ Working with a DB instance in a VPC][1] in
+    #   the *Amazon Aurora User Guide.*
+    #
+    #   Valid for: Aurora DB clusters only
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    #
     # @return [Types::RestoreDBClusterToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterToPointInTimeResult#db_cluster #db_cluster} => Types::DBCluster
@@ -19219,6 +19398,7 @@ module Aws::RDS
     #       min_capacity: 1.0,
     #       max_capacity: 1.0,
     #     },
+    #     network_type: "String",
     #   })
     #
     # @example Response structure
@@ -19325,6 +19505,7 @@ module Aws::RDS
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTime AWS API Documentation
     #
@@ -21448,6 +21629,21 @@ module Aws::RDS
     # (EC2SecurityGroupOwnerId and either EC2SecurityGroupName or
     # EC2SecurityGroupId).
     #
+    # <note markdown="1"> EC2-Classic was retired on August 15, 2022. If you haven't migrated
+    # from EC2-Classic to a VPC, we recommend that you migrate as soon as
+    # possible. For more information, see [Migrate from EC2-Classic to a
+    # VPC][1] in the *Amazon EC2 User Guide*, the blog [EC2-Classic
+    # Networking is Retiring – Here’s How to Prepare][2], and [Moving a DB
+    # instance not in a VPC into a VPC][3] in the *Amazon RDS User Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
+    # [2]: http://aws.amazon.com/blogs/aws/ec2-classic-is-retiring-heres-how-to-prepare/
+    # [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.Non-VPC2VPC.html
+    #
     # @option params [required, String] :db_security_group_name
     #   The name of the DB security group to revoke ingress from.
     #
@@ -21735,6 +21931,7 @@ module Aws::RDS
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBCluster AWS API Documentation
     #
@@ -22353,6 +22550,7 @@ module Aws::RDS
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBCluster AWS API Documentation
     #
@@ -22632,7 +22830,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.152.0'
+      context[:gem_version] = '1.153.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

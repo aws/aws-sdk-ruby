@@ -40,8 +40,7 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] key_path
-    #   Path to the Amazon Web Services S3 bucket that contains the ACL
-    #   files.
+    #   Path to the Amazon S3 bucket that contains the ACL files.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/AccessControlListConfiguration AWS API Documentation
@@ -1876,6 +1875,11 @@ module Aws::Kendra
     #         },
     #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         proxy_configuration: {
+    #           host: "Host", # required
+    #           port: 1, # required
+    #           credentials: "SecretArn",
+    #         },
     #       }
     #
     # @!attribute [rw] server_url
@@ -1947,6 +1951,28 @@ module Aws::Kendra
     #   index.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] proxy_configuration
+    #   Configuration information to connect to your Confluence URL instance
+    #   via a web proxy. You can use this option for Confluence Server.
+    #
+    #   You must provide the website host name and port number. For example,
+    #   the host name of *https://a.example.com/page1.html* is
+    #   "a.example.com" and the port is 443, the standard port for HTTPS.
+    #
+    #   Web proxy credentials are optional and you can use them to connect
+    #   to a web proxy server that requires basic authentication of user
+    #   name and password. To store web proxy credentials, you use a secret
+    #   in Secrets Manager.
+    #
+    #   It is recommended that you follow best security practices when
+    #   configuring your web proxy. This includes setting up throttling,
+    #   setting up logging and monitoring, and applying security patches on
+    #   a regular basis. If you use your web proxy with multiple data
+    #   sources, sync jobs that occur at the same time could strain the load
+    #   on your proxy. It is recommended you prepare your proxy beforehand
+    #   for any security and load requirements.
+    #   @return [Types::ProxyConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ConfluenceConfiguration AWS API Documentation
     #
     class ConfluenceConfiguration < Struct.new(
@@ -1959,7 +1985,8 @@ module Aws::Kendra
       :attachment_configuration,
       :vpc_configuration,
       :inclusion_patterns,
-      :exclusion_patterns)
+      :exclusion_patterns,
+      :proxy_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2400,7 +2427,7 @@ module Aws::Kendra
     #       {
     #         name: "DataSourceName", # required
     #         index_id: "IndexId", # required
-    #         type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE, WEBCRAWLER, WORKDOCS, FSX, SLACK, BOX, QUIP, JIRA, GITHUB, ALFRESCO
+    #         type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE, WEBCRAWLER, WORKDOCS, FSX, SLACK, BOX, QUIP, JIRA, GITHUB, ALFRESCO, TEMPLATE
     #         configuration: {
     #           s3_configuration: {
     #             bucket_name: "S3BucketName", # required
@@ -2440,6 +2467,11 @@ module Aws::Kendra
     #               key: "S3ObjectKey", # required
     #             },
     #             authentication_type: "HTTP_BASIC", # accepts HTTP_BASIC, OAUTH2
+    #             proxy_configuration: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               credentials: "SecretArn",
+    #             },
     #           },
     #           database_configuration: {
     #             database_engine_type: "RDS_AURORA_MYSQL", # required, accepts RDS_AURORA_MYSQL, RDS_AURORA_POSTGRESQL, RDS_MYSQL, RDS_POSTGRESQL
@@ -2652,6 +2684,11 @@ module Aws::Kendra
     #             },
     #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             proxy_configuration: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               credentials: "SecretArn",
+    #             },
     #           },
     #           google_drive_configuration: {
     #             secret_arn: "SecretArn", # required
@@ -3015,6 +3052,14 @@ module Aws::Kendra
     #               security_group_ids: ["VpcSecurityGroupId"], # required
     #             },
     #           },
+    #           template_configuration: {
+    #             template: {
+    #             },
+    #           },
+    #         },
+    #         vpc_configuration: {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
     #         },
     #         description: "Description",
     #         schedule: "ScanSchedule",
@@ -3086,9 +3131,7 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] name
-    #   A unique name for the data source connector. A data source name
-    #   can't be changed without deleting and recreating the data source
-    #   connector.
+    #   A name for the data source connector.
     #   @return [String]
     #
     # @!attribute [rw] index_id
@@ -3110,6 +3153,16 @@ module Aws::Kendra
     #   The `Configuration` parameter is required for all other data
     #   sources.
     #   @return [Types::DataSourceConfiguration]
+    #
+    # @!attribute [rw] vpc_configuration
+    #   Configuration information for an Amazon Virtual Private Cloud to
+    #   connect to your data source. For more information, see [Configuring
+    #   a VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html
+    #   @return [Types::DataSourceVpcConfiguration]
     #
     # @!attribute [rw] description
     #   A description for the data source connector.
@@ -3190,6 +3243,7 @@ module Aws::Kendra
       :index_id,
       :type,
       :configuration,
+      :vpc_configuration,
       :description,
       :schedule,
       :role_arn,
@@ -3929,6 +3983,11 @@ module Aws::Kendra
     #             key: "S3ObjectKey", # required
     #           },
     #           authentication_type: "HTTP_BASIC", # accepts HTTP_BASIC, OAUTH2
+    #           proxy_configuration: {
+    #             host: "Host", # required
+    #             port: 1, # required
+    #             credentials: "SecretArn",
+    #           },
     #         },
     #         database_configuration: {
     #           database_engine_type: "RDS_AURORA_MYSQL", # required, accepts RDS_AURORA_MYSQL, RDS_AURORA_POSTGRESQL, RDS_MYSQL, RDS_POSTGRESQL
@@ -4141,6 +4200,11 @@ module Aws::Kendra
     #           },
     #           inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #           exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           proxy_configuration: {
+    #             host: "Host", # required
+    #             port: 1, # required
+    #             credentials: "SecretArn",
+    #           },
     #         },
     #         google_drive_configuration: {
     #           secret_arn: "SecretArn", # required
@@ -4504,6 +4568,10 @@ module Aws::Kendra
     #             security_group_ids: ["VpcSecurityGroupId"], # required
     #           },
     #         },
+    #         template_configuration: {
+    #           template: {
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] s3_configuration
@@ -4591,6 +4659,11 @@ module Aws::Kendra
     #   your data source.
     #   @return [Types::AlfrescoConfiguration]
     #
+    # @!attribute [rw] template_configuration
+    #   Provides a template for the configuration information to connect to
+    #   your data source.
+    #   @return [Types::TemplateConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DataSourceConfiguration AWS API Documentation
     #
     class DataSourceConfiguration < Struct.new(
@@ -4610,7 +4683,8 @@ module Aws::Kendra
       :quip_configuration,
       :jira_configuration,
       :git_hub_configuration,
-      :alfresco_configuration)
+      :alfresco_configuration,
+      :template_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5320,7 +5394,7 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name that you gave the data source when it was created.
+    #   The name for the data source.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -5332,6 +5406,16 @@ module Aws::Kendra
     #   source is configured. The configuration options for a data source
     #   depend on the data source provider.
     #   @return [Types::DataSourceConfiguration]
+    #
+    # @!attribute [rw] vpc_configuration
+    #   Configuration information for an Amazon Virtual Private Cloud to
+    #   connect to your data source. For more information, see [Configuring
+    #   a VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html
+    #   @return [Types::DataSourceVpcConfiguration]
     #
     # @!attribute [rw] created_at
     #   The Unix timestamp of when the data source was created.
@@ -5401,6 +5485,7 @@ module Aws::Kendra
       :name,
       :type,
       :configuration,
+      :vpc_configuration,
       :created_at,
       :updated_at,
       :description,
@@ -10401,7 +10486,9 @@ module Aws::Kendra
     #   @return [Boolean]
     #
     # @!attribute [rw] folder_ids
-    #   The identifiers of the Quip folders you want to index.
+    #   The identifiers of the Quip folders you want to index. You can find
+    #   in your browser URL when you access your folder in Quip. For
+    #   example, *https://quip-company.com/zlLuOVNSarTL/folder-name*.
     #   @return [Array<String>]
     #
     # @!attribute [rw] thread_field_mappings
@@ -11766,6 +11853,11 @@ module Aws::Kendra
     #           key: "S3ObjectKey", # required
     #         },
     #         authentication_type: "HTTP_BASIC", # accepts HTTP_BASIC, OAUTH2
+    #         proxy_configuration: {
+    #           host: "Host", # required
+    #           port: 1, # required
+    #           credentials: "SecretArn",
+    #         },
     #       }
     #
     # @!attribute [rw] share_point_version
@@ -11871,6 +11963,29 @@ module Aws::Kendra
     #   authentication for SharePoint Online.
     #   @return [String]
     #
+    # @!attribute [rw] proxy_configuration
+    #   Configuration information to connect to your Microsoft SharePoint
+    #   site URLs via instance via a web proxy. You can use this option for
+    #   SharePoint Server.
+    #
+    #   You must provide the website host name and port number. For example,
+    #   the host name of *https://a.example.com/page1.html* is
+    #   "a.example.com" and the port is 443, the standard port for HTTPS.
+    #
+    #   Web proxy credentials are optional and you can use them to connect
+    #   to a web proxy server that requires basic authentication of user
+    #   name and password. To store web proxy credentials, you use a secret
+    #   in Secrets Manager.
+    #
+    #   It is recommended that you follow best security practices when
+    #   configuring your web proxy. This includes setting up throttling,
+    #   setting up logging and monitoring, and applying security patches on
+    #   a regular basis. If you use your web proxy with multiple data
+    #   sources, sync jobs that occur at the same time could strain the load
+    #   on your proxy. It is recommended you prepare your proxy beforehand
+    #   for any security and load requirements.
+    #   @return [Types::ProxyConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/SharePointConfiguration AWS API Documentation
     #
     class SharePointConfiguration < Struct.new(
@@ -11886,7 +12001,8 @@ module Aws::Kendra
       :document_title_field_name,
       :disable_local_groups,
       :ssl_certificate_s3_path,
-      :authentication_type)
+      :authentication_type,
+      :proxy_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12540,6 +12656,40 @@ module Aws::Kendra
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
+    # Provides a template for the configuration information to connect to
+    # your data source.
+    #
+    # @note When making an API call, you may pass TemplateConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         template: {
+    #         },
+    #       }
+    #
+    # @!attribute [rw] template
+    #   The template schema used for the data source.
+    #
+    #   The following links to the template schema for data sources where
+    #   templates are supported:
+    #
+    #   * [Zendesk template schema][1]
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-zendesk.html#zendesk-template-schema
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/TemplateConfiguration AWS API Documentation
+    #
+    class TemplateConfiguration < Struct.new(
+      :template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information about text documents indexed in an index.
     #
     # @!attribute [rw] indexed_text_documents_count
@@ -12807,6 +12957,11 @@ module Aws::Kendra
     #               key: "S3ObjectKey", # required
     #             },
     #             authentication_type: "HTTP_BASIC", # accepts HTTP_BASIC, OAUTH2
+    #             proxy_configuration: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               credentials: "SecretArn",
+    #             },
     #           },
     #           database_configuration: {
     #             database_engine_type: "RDS_AURORA_MYSQL", # required, accepts RDS_AURORA_MYSQL, RDS_AURORA_POSTGRESQL, RDS_MYSQL, RDS_POSTGRESQL
@@ -13019,6 +13174,11 @@ module Aws::Kendra
     #             },
     #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             proxy_configuration: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               credentials: "SecretArn",
+    #             },
     #           },
     #           google_drive_configuration: {
     #             secret_arn: "SecretArn", # required
@@ -13382,6 +13542,14 @@ module Aws::Kendra
     #               security_group_ids: ["VpcSecurityGroupId"], # required
     #             },
     #           },
+    #           template_configuration: {
+    #             template: {
+    #             },
+    #           },
+    #         },
+    #         vpc_configuration: {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
     #         },
     #         description: "Description",
     #         schedule: "ScanSchedule",
@@ -13450,8 +13618,7 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   A new name for the data source connector. You must first delete the
-    #   data source and re-create it to change the name of the data source.
+    #   A new name for the data source connector.
     #   @return [String]
     #
     # @!attribute [rw] index_id
@@ -13462,6 +13629,16 @@ module Aws::Kendra
     #   Configuration information you want to update for the data source
     #   connector.
     #   @return [Types::DataSourceConfiguration]
+    #
+    # @!attribute [rw] vpc_configuration
+    #   Configuration information for an Amazon Virtual Private Cloud to
+    #   connect to your data source. For more information, see [Configuring
+    #   a VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html
+    #   @return [Types::DataSourceVpcConfiguration]
     #
     # @!attribute [rw] description
     #   A new description for the data source connector.
@@ -13514,6 +13691,7 @@ module Aws::Kendra
       :name,
       :index_id,
       :configuration,
+      :vpc_configuration,
       :description,
       :schedule,
       :role_arn,

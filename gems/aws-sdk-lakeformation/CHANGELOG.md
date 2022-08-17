@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2022-08-17)
+------------------
+
+* Feature - This release adds a new API support "AssumeDecoratedRoleWithSAML" and also release updates the corresponding documentation.
+
 1.26.0 (2022-03-22)
 ------------------
 

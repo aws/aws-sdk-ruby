@@ -1873,6 +1873,7 @@ module Aws::RDS
     #           min_capacity: 1.0,
     #           max_capacity: 1.0,
     #         },
+    #         network_type: "String",
     #         source_region: "String",
     #       }
     #
@@ -2672,6 +2673,29 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
     #   @return [Types::ServerlessV2ScalingConfiguration]
     #
+    # @!attribute [rw] network_type
+    #   The network type of the DB cluster.
+    #
+    #   Valid values:
+    #
+    #   * `IPV4`
+    #
+    #   * `DUAL`
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the DB cluster. A `DBSubnetGroup` can support only the IPv4 protocol
+    #   or the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [ Working with a DB instance in a VPC][1]
+    #   in the *Amazon Aurora User Guide.*
+    #
+    #   Valid for: Aurora DB clusters only
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    #   @return [String]
+    #
     # @!attribute [rw] source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -2725,6 +2749,7 @@ module Aws::RDS
       :performance_insights_kms_key_id,
       :performance_insights_retention_period,
       :serverless_v2_scaling_configuration,
+      :network_type,
       :source_region)
       SENSITIVE = []
       include Aws::Structure
@@ -6294,6 +6319,29 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
     #   @return [Types::ServerlessV2ScalingConfigurationInfo]
     #
+    # @!attribute [rw] network_type
+    #   The network type of the DB instance.
+    #
+    #   Valid values:
+    #
+    #   * `IPV4`
+    #
+    #   * `DUAL`
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the DB cluster. A `DBSubnetGroup` can support only the IPv4 protocol
+    #   or the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [ Working with a DB instance in a VPC][1]
+    #   in the *Amazon Aurora User Guide.*
+    #
+    #   This setting is only for Aurora DB clusters.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBCluster AWS API Documentation
     #
     class DBCluster < Struct.new(
@@ -6364,7 +6412,8 @@ module Aws::RDS
       :performance_insights_enabled,
       :performance_insights_kms_key_id,
       :performance_insights_retention_period,
-      :serverless_v2_scaling_configuration)
+      :serverless_v2_scaling_configuration,
+      :network_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14812,6 +14861,7 @@ module Aws::RDS
     #           min_capacity: 1.0,
     #           max_capacity: 1.0,
     #         },
+    #         network_type: "String",
     #       }
     #
     # @!attribute [rw] db_cluster_identifier
@@ -15356,6 +15406,29 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
     #   @return [Types::ServerlessV2ScalingConfiguration]
     #
+    # @!attribute [rw] network_type
+    #   The network type of the DB cluster.
+    #
+    #   Valid values:
+    #
+    #   * `IPV4`
+    #
+    #   * `DUAL`
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the DB cluster. A `DBSubnetGroup` can support only the IPv4 protocol
+    #   or the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [ Working with a DB instance in a VPC][1]
+    #   in the *Amazon Aurora User Guide.*
+    #
+    #   Valid for: Aurora DB clusters only
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterMessage AWS API Documentation
     #
     class ModifyDBClusterMessage < Struct.new(
@@ -15393,7 +15466,8 @@ module Aws::RDS
       :enable_performance_insights,
       :performance_insights_kms_key_id,
       :performance_insights_retention_period,
-      :serverless_v2_scaling_configuration)
+      :serverless_v2_scaling_configuration,
+      :network_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19549,6 +19623,7 @@ module Aws::RDS
     #           min_capacity: 1.0,
     #           max_capacity: 1.0,
     #         },
+    #         network_type: "String",
     #       }
     #
     # @!attribute [rw] availability_zones
@@ -19890,6 +19965,27 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
     #   @return [Types::ServerlessV2ScalingConfiguration]
     #
+    # @!attribute [rw] network_type
+    #   The network type of the DB cluster.
+    #
+    #   Valid values:
+    #
+    #   * `IPV4`
+    #
+    #   * `DUAL`
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the DB cluster. A `DBSubnetGroup` can support only the IPv4 protocol
+    #   or the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [ Working with a DB instance in a VPC][1]
+    #   in the *Amazon Aurora User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3Message AWS API Documentation
     #
     class RestoreDBClusterFromS3Message < Struct.new(
@@ -19924,7 +20020,8 @@ module Aws::RDS
       :copy_tags_to_snapshot,
       :domain,
       :domain_iam_role_name,
-      :serverless_v2_scaling_configuration)
+      :serverless_v2_scaling_configuration,
+      :network_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20014,6 +20111,7 @@ module Aws::RDS
     #           min_capacity: 1.0,
     #           max_capacity: 1.0,
     #         },
+    #         network_type: "String",
     #       }
     #
     # @!attribute [rw] availability_zones
@@ -20451,6 +20549,29 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
     #   @return [Types::ServerlessV2ScalingConfiguration]
     #
+    # @!attribute [rw] network_type
+    #   The network type of the DB cluster.
+    #
+    #   Valid values:
+    #
+    #   * `IPV4`
+    #
+    #   * `DUAL`
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the DB cluster. A `DBSubnetGroup` can support only the IPv4 protocol
+    #   or the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [ Working with a DB instance in a VPC][1]
+    #   in the *Amazon Aurora User Guide.*
+    #
+    #   Valid for: Aurora DB clusters only
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshotMessage AWS API Documentation
     #
     class RestoreDBClusterFromSnapshotMessage < Struct.new(
@@ -20480,7 +20601,8 @@ module Aws::RDS
       :storage_type,
       :iops,
       :publicly_accessible,
-      :serverless_v2_scaling_configuration)
+      :serverless_v2_scaling_configuration,
+      :network_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20569,6 +20691,7 @@ module Aws::RDS
     #           min_capacity: 1.0,
     #           max_capacity: 1.0,
     #         },
+    #         network_type: "String",
     #       }
     #
     # @!attribute [rw] db_cluster_identifier
@@ -20969,6 +21092,29 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
     #   @return [Types::ServerlessV2ScalingConfiguration]
     #
+    # @!attribute [rw] network_type
+    #   The network type of the DB cluster.
+    #
+    #   Valid values:
+    #
+    #   * `IPV4`
+    #
+    #   * `DUAL`
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the DB cluster. A `DBSubnetGroup` can support only the IPv4 protocol
+    #   or the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [ Working with a DB instance in a VPC][1]
+    #   in the *Amazon Aurora User Guide.*
+    #
+    #   Valid for: Aurora DB clusters only
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTimeMessage AWS API Documentation
     #
     class RestoreDBClusterToPointInTimeMessage < Struct.new(
@@ -20997,7 +21143,8 @@ module Aws::RDS
       :storage_type,
       :publicly_accessible,
       :iops,
-      :serverless_v2_scaling_configuration)
+      :serverless_v2_scaling_configuration,
+      :network_type)
       SENSITIVE = []
       include Aws::Structure
     end
