@@ -9,13 +9,11 @@ module AwsSdkCodeGenerator
         if (client_options = @service.api['clientContextParams'])
           @endpoint_options = client_options.each.with_object([]) do
             |(name, data), array|
-            if data['usages'].include?('endpoint')
-              array << EndpointOption.new(
-                name: Underscore.underscore(name),
-                docstring: data['documentation'],
-                doc_type: data['type'].capitalize
-              )
-            end
+            array << EndpointOption.new(
+              name: Underscore.underscore(name),
+              docstring: data['documentation'],
+              doc_type: data['type'].capitalize
+            )
           end
         end
         @endpoint_classes = @service.api['operations'].each.with_object([]) do

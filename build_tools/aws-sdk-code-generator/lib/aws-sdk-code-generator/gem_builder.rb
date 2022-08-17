@@ -24,6 +24,7 @@ module AwsSdkCodeGenerator
         y.yield('features/env.rb', features_env_file)
         y.yield('features/step_definitions.rb', features_step_definitions_file)
         y.yield('spec/spec_helper.rb', spec_helper_file)
+        y.yield('spec/endpoint_provider_spec.rb', endpoint_provider_spec_file)
         if @service.smoke_tests
           y.yield('features/smoke.feature', smoke_file)
           y.yield('features/smoke_step_definitions.rb', smoke_step_definitions_file)
@@ -66,6 +67,10 @@ module AwsSdkCodeGenerator
 
     def spec_helper_file
       Views::Spec::SpecHelper.new(options).render
+    end
+
+    def endpoint_provider_spec_file
+      Views::Spec::EndpointProviderSpec.new(options).render
     end
 
     def version_file

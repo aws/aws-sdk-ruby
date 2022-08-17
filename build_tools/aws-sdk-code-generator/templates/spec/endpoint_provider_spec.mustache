@@ -1,0 +1,34 @@
+# frozen_string_literal: true
+
+{{#generated_src_warning}}
+{{generated_src_warning}}
+{{/generated_src_warning}}
+
+require_relative 'spec_helper'
+
+module {{module_name}}
+  describe EndpointProvider do
+    subject { {{module_name}}::EndpointProvider.new }
+
+    # TODO: operation inputs
+
+    {{#endpoint_tests}}
+    it '{{documentation}}' do
+      expect = {{{expect}}}
+      params = EndpointParameters.new(**{{{params}}})
+      {{#expect_error?}}
+      expect do
+        subject.resolve_endpoint(params)
+      end.to raise_error(RuntimeError, expect['error'])
+      {{/expect_error?}}
+      {{^expect_error?}}
+      endpoint = subject.resolve_endpoint(params)
+      expect(endpoint.url).to eq(expect['url'])
+      expect(endpoint.headers).to eq(expect['headers'])
+      expect(endpoint.properties).to eq(expect['properties'])
+      {{/expect_error?}}
+    end
+
+    {{/endpoint_tests}}
+  end
+end

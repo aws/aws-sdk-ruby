@@ -1311,7 +1311,6 @@
         "ap-south-1",
         "ap-southeast-1",
         "ap-southeast-2",
-        "ap-southeast-3",
         "ca-central-1",
         "cn-north-1",
         "cn-northwest-1",
@@ -8537,5 +8536,19 @@
       "payload":"Body"
     },
     "Years":{"type":"integer"}
+  },
+  "clientContextParams":{
+    "Accelerate":{
+      "documentation":"Enables the usage of the S3 Transfer Acceleration endpoints.",
+      "type":"boolean"
+    },
+    "ForcePathStyle":{
+      "documentation":"Allows you to enable the S3 client to use path-style addressing for buckets.",
+      "type":"boolean"
+    },
+    "SnowEndpointUrl":{
+      "documentation":"Allows you to configure the S3 Snowball endpoint.",
+      "type":"string"
+    }
   }
 }

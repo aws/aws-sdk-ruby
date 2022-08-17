@@ -38,11 +38,19 @@ module Aws::S3
   #
   #   @return [Boolean]
   #
+  # @!attribute snow_endpoint_url
+  #
+  #   @return [String]
+  #
   # @!attribute disable_access_points
   #
   #   @return [Boolean]
   #
   # @!attribute disable_mrap
+  #
+  #   @return [Boolean]
+  #
+  # @!attribute use_arn_region
   #
   #   @return [Boolean]
   #
@@ -54,8 +62,10 @@ module Aws::S3
     :endpoint,
     :force_path_style,
     :accelerate,
+    :snow_endpoint_url,
     :disable_access_points,
     :disable_mrap,
+    :use_arn_region,
   ) do
     include Aws::Structure
 
@@ -68,8 +78,10 @@ module Aws::S3
       'Endpoint' => :endpoint,
       'ForcePathStyle' => :force_path_style,
       'Accelerate' => :accelerate,
+      'SnowEndpointUrl' => :snow_endpoint_url,
       'DisableAccessPoints' => :disable_access_points,
       'DisableMRAP' => :disable_mrap,
+      'UseArnRegion' => :use_arn_region,
     }.freeze
 
     def initialize(options = {})
@@ -92,8 +104,10 @@ module Aws::S3
       if self[:accelerate].nil?
         raise ArgumentError, "Missing required EndpointParameter: :accelerate"
       end
+      self[:snow_endpoint_url] = options[:snow_endpoint_url]
       self[:disable_access_points] = options[:disable_access_points]
       self[:disable_mrap] = options[:disable_mrap]
+      self[:use_arn_region] = options[:use_arn_region]
     end
   end
 end

@@ -1,1 +1,2765 @@
-{"service":"s3","testCases":[{"documentation":"region is not a valid DNS-suffix","params":{"Region":"a b","Accelerate":false,"UseFIPS":false,"UseDualStack":false},"expect":{"error":"A valid partition could not be determined"}},{"documentation":"Invalid access point ARN: Not S3","params":{"Region":"us-east-1","Accelerate":false,"Bucket":"arn:aws:not-s3:us-west-2:123456789012:accesspoint:myendpoint","UseFIPS":false,"UseDualStack":false},"expect":{"error":"Invalid ARN: The ARN was not for the S3 service, found: not-s3"}},{"documentation":"Invalid access point ARN: invalid resource","params":{"Region":"us-east-1","Accelerate":false,"Bucket":"arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint:more-data","UseFIPS":false,"UseDualStack":false},"expect":{"error":"Invalid ARN: The ARN may only contain a single resource component after `accesspoint`."}},{"documentation":"Invalid access point ARN: invalid no ap name","params":{"Region":"us-east-1","Accelerate":false,"Bucket":"arn:aws:s3:us-west-2:123456789012:accesspoint:","UseFIPS":false,"UseDualStack":false},"expect":{"error":"Invalid ARN: Expected a resource of the format `accesspoint:<accesspoint name>` but no name was provided"}},{"documentation":"Invalid access point ARN: AccountId is invalid","params":{"Region":"us-east-1","Accelerate":false,"Bucket":"arn:aws:s3:us-west-2:123456_789012:accesspoint:apname","UseFIPS":false,"UseDualStack":false},"expect":{"error":"Invalid ARN: The account id may only contain a-z, A-Z, 0-9 and `-`. Found: 123456_789012"}},{"documentation":"Invalid access point ARN: access point name is invalid","params":{"Region":"us-east-1","Accelerate":false,"Bucket":"arn:aws:s3:us-west-2:123456789012:accesspoint:ap_name","UseFIPS":false,"UseDualStack":false},"expect":{"error":"Invalid ARN: The access point name may only contain a-z, A-Z, 0-9 and `-`. Found: ap_name"}},{"documentation":"Access points (disable access points explicitly false)","params":{"Region":"us-east-1","Accelerate":false,"DisableAccessPoints":false,"Bucket":"arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint","UseFIPS":false,"UseDualStack":false},"expect":{"url":"https://myendpoint-123456789012.s3-accesspoint.us-west-2.amazonaws.com","properties":{"authSchemes":[{"signingScope":"us-west-2","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"Access points: partition does not support FIPS","params":{"Region":"cn-north-1","Accelerate":false,"Bucket":"arn:aws:s3:cn-north-1:123456789012:accesspoint:myendpoint","UseFIPS":true,"UseDualStack":false},"expect":{"error":"Partition does not support FIPS"}},{"documentation":"Bucket region is invalid","params":{"Region":"us-east-1","Accelerate":false,"DisableAccessPoints":false,"Bucket":"arn:aws:s3:us-west -2:123456789012:accesspoint:myendpoint","UseFIPS":false,"UseDualStack":false},"expect":{"error":"Could not load partition for ARN region `us-west -2`"}},{"documentation":"Access points when Access points explicitly disabled (used for CreateBucket)","params":{"Region":"us-east-1","Accelerate":false,"DisableAccessPoints":true,"Bucket":"arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint","UseFIPS":false,"UseDualStack":false},"expect":{"error":"Access points are not supported for this operation"}},{"documentation":"S3 outposts vanilla test","params":{"Region":"us-west-2","Accelerate":false,"Bucket":"arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/reports","UseFIPS":false,"UseDualStack":false},"expect":{"url":"https://reports-123456789012.op-01234567890123456.s3-outposts.us-west-2.amazonaws.com","properties":{"authSchemes":[{"signingScope":"us-west-2","signingName":"s3-outposts","name":"v4"}]},"headers":{}}},{"documentation":"S3 outposts vanilla test (disable access points explicitly set)","params":{"Region":"us-west-2","Accelerate":false,"Bucket":"arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/reports","UseFIPS":false,"UseDualStack":false},"expect":{"url":"https://reports-123456789012.op-01234567890123456.s3-outposts.us-west-2.amazonaws.com","properties":{"authSchemes":[{"signingScope":"us-west-2","signingName":"s3-outposts","name":"v4"}]},"headers":{}}},{"documentation":"S3 outposts does not support dualstack","params":{"Region":"us-east-1","Accelerate":false,"Bucket":"arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/reports","UseFIPS":false,"UseDualStack":true},"expect":{"error":"S3 Outposts does not support Dual-stack"}},{"documentation":"S3 outposts does not support fips","params":{"Region":"us-east-1","Accelerate":false,"Bucket":"arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/reports","UseFIPS":true,"UseDualStack":false},"expect":{"error":"S3 Outposts does not support FIPS"}},{"documentation":"S3 outposts does not support accelerate","params":{"Region":"us-east-1","Accelerate":true,"Bucket":"arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/reports","UseFIPS":false,"UseDualStack":false},"expect":{"error":"S3 Outposts does not support S3 Accelerate"}},{"documentation":"missing arn type","params":{"Region":"us-east-1","Accelerate":false,"DisableAccessPoints":true,"Bucket":"arn:aws:s3:us-west-2:123456789012:","UseFIPS":false,"UseDualStack":false},"expect":{"error":"Invalid ARN: No ARN type specified"}},{"documentation":"SDK::Host + access point + Dualstack is an error","params":{"Endpoint":"https://beta.example.com","Region":"cn-north-1","RequiresAccountId":true,"Accelerate":false,"ForcePathStyle":false,"Bucket":"arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint","UseFIPS":false,"UseDualStack":true},"expect":{"error":"DualStack cannot be combined with a Host override (PrivateLink)"}},{"documentation":"Access point ARN with FIPS & Dualstack","params":{"Region":"us-east-1","Accelerate":false,"DisableAccessPoints":false,"Bucket":"arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint","UseFIPS":true,"UseDualStack":true},"expect":{"url":"https://myendpoint-123456789012.s3-accesspoint-fips.dualstack.us-west-2.amazonaws.com","properties":{"authSchemes":[{"signingScope":"us-west-2","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"Access point ARN with Dualstack","params":{"Region":"us-east-1","Accelerate":false,"DisableAccessPoints":false,"Bucket":"arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint","UseFIPS":false,"UseDualStack":true},"expect":{"url":"https://myendpoint-123456789012.s3-accesspoint.dualstack.us-west-2.amazonaws.com","properties":{"authSchemes":[{"signingScope":"us-west-2","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"vanilla MRAP","params":{"Region":"us-east-1","Accelerate":false,"DisableMRAP":false,"Bucket":"arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap","UseFIPS":false,"UseDualStack":false},"expect":{"url":"https://mfzwi23gnjvgw.mrap.accesspoint.s3-global.amazonaws.com","properties":{"authSchemes":[{"signingScope":"*","name":"v4a"}]},"headers":{"x-amz-region-set":["*"]}}},{"documentation":"MRAP does not support FIPS","params":{"Region":"us-east-1","Accelerate":false,"DisableMRAP":false,"Bucket":"arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap","UseFIPS":true,"UseDualStack":false},"expect":{"error":"S3 MRAP does not support FIPS"}},{"documentation":"MRAP does not support DualStack","params":{"Region":"us-east-1","Accelerate":false,"DisableMRAP":false,"Bucket":"arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap","UseFIPS":false,"UseDualStack":true},"expect":{"error":"S3 MRAP does not support dual-stack"}},{"documentation":"MRAP does not support S3 Accelerate","params":{"Region":"us-east-1","Accelerate":true,"DisableMRAP":false,"Bucket":"arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap","UseFIPS":false,"UseDualStack":false},"expect":{"error":"S3 MRAP does not support S3 Accelerate"}},{"documentation":"MRAP explicitly disabled","params":{"Region":"us-east-1","Accelerate":false,"DisableMRAP":true,"Bucket":"arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap","UseFIPS":false,"UseDualStack":false},"expect":{"error":"Invalid configuration: Multi-Region Access Point ARNs are disabled."}},{"documentation":"Dual-stack endpoint with path-style forced","params":{"Region":"us-west-2","ForcePathStyle":true,"Accelerate":false,"Bucket":"bucketname","UseFIPS":false,"UseDualStack":true},"expect":{"url":"https://s3.dualstack.us-west-2.amazonaws.com/bucketname","properties":{"authSchemes":[{"signingScope":"us-west-2","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"Dual-stack endpoint + SDK::Host is error","params":{"Endpoint":"https://abc.com","Region":"us-west-2","ForcePathStyle":true,"Accelerate":false,"Bucket":"bucketname","UseFIPS":false,"UseDualStack":true},"expect":{"error":"Cannot set dual-stack in combination with a custom endpoint."}},{"documentation":"path style + ARN bucket","params":{"Region":"us-west-2","Accelerate":false,"ForcePathStyle":true,"Bucket":"arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap","UseFIPS":false,"UseDualStack":false},"expect":{"error":"Path-style addressing cannot be used with ARN buckets"}},{"documentation":"implicit path style bucket + dualstack","params":{"Region":"us-west-2","Accelerate":false,"Bucket":"99_ab","UseFIPS":false,"UseDualStack":true},"expect":{"url":"https://s3.dualstack.us-west-2.amazonaws.com/99_ab","properties":{"authSchemes":[{"signingScope":"us-west-2","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"implicit path style bucket + dualstack","params":{"Endpoint":"http://abc.com","Region":"us-west-2","Accelerate":false,"Bucket":"99_ab","UseFIPS":false,"UseDualStack":true},"expect":{"error":"Cannot set dual-stack in combination with a custom endpoint."}},{"documentation":"don't allow URL injections in the bucket","params":{"Region":"us-west-2","Accelerate":false,"Bucket":"example.com#","UseFIPS":false,"UseDualStack":false},"expect":{"url":"https://s3.us-west-2.amazonaws.com/example.com#","properties":{"authSchemes":[{"signingScope":"us-west-2","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"scheme is respected","params":{"Endpoint":"http://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com","Region":"af-south-1","Accelerate":false,"Bucket":"99_ab","UseFIPS":false,"UseDualStack":false},"expect":{"url":"http://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com/99_ab","properties":{"authSchemes":[{"signingScope":"af-south-1","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"scheme is respected (virtual addressing)","params":{"Endpoint":"http://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com/foo","Region":"af-south-1","Accelerate":false,"Bucket":"bucketname","UseFIPS":false,"UseDualStack":false},"expect":{"url":"http://bucketname.control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com/foo","properties":{"authSchemes":[{"signingScope":"af-south-1","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"path style + implicit private link","params":{"Endpoint":"https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com","Region":"af-south-1","Accelerate":false,"Bucket":"99_ab","UseFIPS":false,"UseDualStack":false},"expect":{"url":"https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com/99_ab","properties":{"authSchemes":[{"signingScope":"af-south-1","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"invalid Endpoint override","params":{"Endpoint":"abcde://nota#url","Region":"af-south-1","Accelerate":false,"Bucket":"bucketname","UseFIPS":false,"UseDualStack":false},"expect":{"error":"Custom endpoint `abcde://nota#url` was not a valid URI"}},{"documentation":"using an IPv4 address forces path style","params":{"Endpoint":"https://123.123.0.1","Region":"af-south-1","Accelerate":false,"Bucket":"bucketname","UseFIPS":false,"UseDualStack":false},"expect":{"url":"https://123.123.0.1/bucketname","properties":{"authSchemes":[{"signingScope":"af-south-1","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"vanilla virtual addressing@us-west-2","params":{"Region":"us-west-2","Accelerate":false,"ForcePathStyle":false,"___key":"key","Bucket":"bucket-name","UseFIPS":false,"UseDualStack":false},"expect":{"url":"https://bucket-name.s3.us-west-2.amazonaws.com","properties":{"authSchemes":[{"signingScope":"us-west-2","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"virtual addressing + dualstack@us-west-2","params":{"Region":"us-west-2","Accelerate":false,"ForcePathStyle":false,"___key":"key","Bucket":"bucket-name","UseFIPS":false,"UseDualStack":true},"expect":{"url":"https://bucket-name.s3.dualstack.us-west-2.amazonaws.com","properties":{"authSchemes":[{"signingScope":"us-west-2","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"accelerate + dualstack@us-west-2","params":{"Region":"us-west-2","Accelerate":true,"ForcePathStyle":false,"___key":"key","Bucket":"bucket-name","UseFIPS":false,"UseDualStack":true},"expect":{"url":"https://bucket-name.s3-accelerate.dualstack.amazonaws.com","properties":{"authSchemes":[{"signingScope":"us-west-2","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"accelerate (dualstack=false)@us-west-2","params":{"Region":"us-west-2","Accelerate":true,"ForcePathStyle":false,"___key":"key","Bucket":"bucket-name","UseFIPS":false,"UseDualStack":false},"expect":{"url":"https://bucket-name.s3-accelerate.amazonaws.com","properties":{"authSchemes":[{"signingScope":"us-west-2","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"virtual addressing + fips@us-west-2","params":{"Region":"us-west-2","Accelerate":false,"ForcePathStyle":false,"___key":"key","Bucket":"bucket-name","UseFIPS":true,"UseDualStack":false},"expect":{"url":"https://bucket-name.s3-fips.us-west-2.amazonaws.com","properties":{"authSchemes":[{"signingScope":"us-west-2","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"virtual addressing + dualstack + fips@us-west-2","params":{"Region":"us-west-2","Accelerate":false,"ForcePathStyle":false,"___key":"key","Bucket":"bucket-name","UseFIPS":true,"UseDualStack":true},"expect":{"url":"https://bucket-name.s3-fips.dualstack.us-west-2.amazonaws.com","properties":{"authSchemes":[{"signingScope":"us-west-2","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"accelerate + fips = error@us-west-2","params":{"Region":"us-west-2","Accelerate":true,"ForcePathStyle":false,"___key":"key","Bucket":"bucket-name","UseFIPS":true,"UseDualStack":false},"expect":{"error":"Accelerate cannot be used with FIPS"}},{"documentation":"vanilla virtual addressing@cn-north-1","params":{"Region":"cn-north-1","Accelerate":false,"ForcePathStyle":false,"___key":"key","Bucket":"bucket-name","UseFIPS":false,"UseDualStack":false},"expect":{"url":"https://bucket-name.s3.cn-north-1.amazonaws.com.cn","properties":{"authSchemes":[{"signingScope":"cn-north-1","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"virtual addressing + dualstack@cn-north-1","params":{"Region":"cn-north-1","Accelerate":false,"ForcePathStyle":false,"___key":"key","Bucket":"bucket-name","UseFIPS":false,"UseDualStack":true},"expect":{"url":"https://bucket-name.s3.dualstack.cn-north-1.amazonaws.com.cn","properties":{"authSchemes":[{"signingScope":"cn-north-1","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"accelerate (dualstack=false)@cn-north-1","params":{"Region":"cn-north-1","Accelerate":true,"ForcePathStyle":false,"Bucket":"bucket-name","UseFIPS":false,"UseDualStack":false},"expect":{"error":"S3 Accelerate cannot be used in this region"}},{"documentation":"virtual addressing + fips@cn-north-1","params":{"Region":"cn-north-1","Accelerate":false,"ForcePathStyle":false,"Bucket":"bucket-name","UseFIPS":true,"UseDualStack":false},"expect":{"error":"Partition does not support FIPS"}},{"documentation":"vanilla virtual addressing@af-south-1","params":{"Region":"af-south-1","Accelerate":false,"ForcePathStyle":false,"___key":"key","Bucket":"bucket-name","UseFIPS":false,"UseDualStack":false},"expect":{"url":"https://bucket-name.s3.af-south-1.amazonaws.com","properties":{"authSchemes":[{"signingScope":"af-south-1","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"virtual addressing + dualstack@af-south-1","params":{"Region":"af-south-1","Accelerate":false,"ForcePathStyle":false,"___key":"key","Bucket":"bucket-name","UseFIPS":false,"UseDualStack":true},"expect":{"url":"https://bucket-name.s3.dualstack.af-south-1.amazonaws.com","properties":{"authSchemes":[{"signingScope":"af-south-1","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"accelerate + dualstack@af-south-1","params":{"Region":"af-south-1","Accelerate":true,"ForcePathStyle":false,"___key":"key","Bucket":"bucket-name","UseFIPS":false,"UseDualStack":true},"expect":{"url":"https://bucket-name.s3-accelerate.dualstack.amazonaws.com","properties":{"authSchemes":[{"signingScope":"af-south-1","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"accelerate (dualstack=false)@af-south-1","params":{"Region":"af-south-1","Accelerate":true,"ForcePathStyle":false,"___key":"key","Bucket":"bucket-name","UseFIPS":false,"UseDualStack":false},"expect":{"url":"https://bucket-name.s3-accelerate.amazonaws.com","properties":{"authSchemes":[{"signingScope":"af-south-1","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"virtual addressing + fips@af-south-1","params":{"Region":"af-south-1","Accelerate":false,"ForcePathStyle":false,"___key":"key","Bucket":"bucket-name","UseFIPS":true,"UseDualStack":false},"expect":{"url":"https://bucket-name.s3-fips.af-south-1.amazonaws.com","properties":{"authSchemes":[{"signingScope":"af-south-1","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"virtual addressing + dualstack + fips@af-south-1","params":{"Region":"af-south-1","Accelerate":false,"ForcePathStyle":false,"___key":"key","Bucket":"bucket-name","UseFIPS":true,"UseDualStack":true},"expect":{"url":"https://bucket-name.s3-fips.dualstack.af-south-1.amazonaws.com","properties":{"authSchemes":[{"signingScope":"af-south-1","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"accelerate + fips = error@af-south-1","params":{"Region":"af-south-1","Accelerate":true,"ForcePathStyle":false,"___key":"key","Bucket":"bucket-name","UseFIPS":true,"UseDualStack":false},"expect":{"error":"Accelerate cannot be used with FIPS"}},{"documentation":"vanilla path style@us-west-2","params":{"Region":"us-west-2","Accelerate":false,"ForcePathStyle":true,"___key":"key","Bucket":"bucket-name","UseFIPS":false,"UseDualStack":false},"expect":{"url":"https://s3.us-west-2.amazonaws.com/bucket-name","properties":{"authSchemes":[{"signingScope":"us-west-2","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"path style + fips@us-west-2","params":{"Region":"us-west-2","Accelerate":false,"ForcePathStyle":true,"___key":"key","Bucket":"bucket-name","UseFIPS":true,"UseDualStack":false},"expect":{"error":"Path-style addressing cannot be used with FIPS"}},{"documentation":"path style + accelerate = error@us-west-2","params":{"Region":"us-west-2","Accelerate":true,"ForcePathStyle":true,"___key":"key","Bucket":"bucket-name","UseFIPS":false,"UseDualStack":false},"expect":{"error":"Path-style addressing cannot be used with S3 Accelerate"}},{"documentation":"path style + dualstack@us-west-2","params":{"Region":"us-west-2","Accelerate":false,"ForcePathStyle":true,"___key":"key","Bucket":"bucket-name","UseFIPS":false,"UseDualStack":true},"expect":{"url":"https://s3.dualstack.us-west-2.amazonaws.com/bucket-name","properties":{"authSchemes":[{"signingScope":"us-west-2","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"path style + arn is error@us-west-2","params":{"Region":"us-west-2","RequiresAccountId":true,"Accelerate":false,"ForcePathStyle":true,"___key":"key","Bucket":"arn:PARTITION:s3-outposts:REGION:123456789012:outpost:op-01234567890123456:bucket:mybucket","UseFIPS":false,"UseDualStack":false},"expect":{"error":"Path-style addressing cannot be used with ARN buckets"}},{"documentation":"path style + invalid host label@us-west-2","params":{"Region":"us-west-2","Accelerate":false,"ForcePathStyle":true,"___key":"key","Bucket":"99a_b","UseFIPS":false,"UseDualStack":false},"expect":{"url":"https://s3.us-west-2.amazonaws.com/99a_b","properties":{"authSchemes":[{"signingScope":"us-west-2","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"no path style + invalid host label@us-west-2","params":{"Region":"us-west-2","Accelerate":false,"___key":"key","Bucket":"99a_b","UseFIPS":false,"UseDualStack":false},"expect":{"url":"https://s3.us-west-2.amazonaws.com/99a_b","properties":{"authSchemes":[{"signingScope":"us-west-2","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"vanilla path style@cn-north-1","params":{"Region":"cn-north-1","Accelerate":false,"ForcePathStyle":true,"___key":"key","Bucket":"bucket-name","UseFIPS":false,"UseDualStack":false},"expect":{"url":"https://s3.cn-north-1.amazonaws.com.cn/bucket-name","properties":{"authSchemes":[{"signingScope":"cn-north-1","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"path style + fips@cn-north-1","params":{"Region":"cn-north-1","Accelerate":false,"ForcePathStyle":true,"___key":"key","Bucket":"bucket-name","UseFIPS":true,"UseDualStack":false},"expect":{"error":"Path-style addressing cannot be used with FIPS"}},{"documentation":"path style + accelerate = error@cn-north-1","params":{"Region":"cn-north-1","Accelerate":true,"ForcePathStyle":true,"___key":"key","Bucket":"bucket-name","UseFIPS":false,"UseDualStack":false},"expect":{"error":"Path-style addressing cannot be used with S3 Accelerate"}},{"documentation":"path style + dualstack@cn-north-1","params":{"Region":"cn-north-1","Accelerate":false,"ForcePathStyle":true,"___key":"key","Bucket":"bucket-name","UseFIPS":false,"UseDualStack":true},"expect":{"url":"https://s3.dualstack.cn-north-1.amazonaws.com.cn/bucket-name","properties":{"authSchemes":[{"signingScope":"cn-north-1","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"path style + arn is error@cn-north-1","params":{"Region":"cn-north-1","RequiresAccountId":true,"Accelerate":false,"ForcePathStyle":true,"___key":"key","Bucket":"arn:PARTITION:s3-outposts:REGION:123456789012:outpost:op-01234567890123456:bucket:mybucket","UseFIPS":false,"UseDualStack":false},"expect":{"error":"Path-style addressing cannot be used with ARN buckets"}},{"documentation":"path style + invalid host label@cn-north-1","params":{"Region":"cn-north-1","Accelerate":false,"ForcePathStyle":true,"___key":"key","Bucket":"99a_b","UseFIPS":false,"UseDualStack":false},"expect":{"url":"https://s3.cn-north-1.amazonaws.com.cn/99a_b","properties":{"authSchemes":[{"signingScope":"cn-north-1","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"no path style + invalid host label@cn-north-1","params":{"Region":"cn-north-1","Accelerate":false,"___key":"key","Bucket":"99a_b","UseFIPS":false,"UseDualStack":false},"expect":{"url":"https://s3.cn-north-1.amazonaws.com.cn/99a_b","properties":{"authSchemes":[{"signingScope":"cn-north-1","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"vanilla path style@af-south-1","params":{"Region":"af-south-1","Accelerate":false,"ForcePathStyle":true,"___key":"key","Bucket":"bucket-name","UseFIPS":false,"UseDualStack":false},"expect":{"url":"https://s3.af-south-1.amazonaws.com/bucket-name","properties":{"authSchemes":[{"signingScope":"af-south-1","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"path style + fips@af-south-1","params":{"Region":"af-south-1","Accelerate":false,"ForcePathStyle":true,"___key":"key","Bucket":"bucket-name","UseFIPS":true,"UseDualStack":false},"expect":{"error":"Path-style addressing cannot be used with FIPS"}},{"documentation":"path style + accelerate = error@af-south-1","params":{"Region":"af-south-1","Accelerate":true,"ForcePathStyle":true,"___key":"key","Bucket":"bucket-name","UseFIPS":false,"UseDualStack":false},"expect":{"error":"Path-style addressing cannot be used with S3 Accelerate"}},{"documentation":"path style + dualstack@af-south-1","params":{"Region":"af-south-1","Accelerate":false,"ForcePathStyle":true,"___key":"key","Bucket":"bucket-name","UseFIPS":false,"UseDualStack":true},"expect":{"url":"https://s3.dualstack.af-south-1.amazonaws.com/bucket-name","properties":{"authSchemes":[{"signingScope":"af-south-1","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"path style + arn is error@af-south-1","params":{"Region":"af-south-1","RequiresAccountId":true,"Accelerate":false,"ForcePathStyle":true,"___key":"key","Bucket":"arn:PARTITION:s3-outposts:REGION:123456789012:outpost:op-01234567890123456:bucket:mybucket","UseFIPS":false,"UseDualStack":false},"expect":{"error":"Path-style addressing cannot be used with ARN buckets"}},{"documentation":"path style + invalid host label@af-south-1","params":{"Region":"af-south-1","Accelerate":false,"ForcePathStyle":true,"___key":"key","Bucket":"99a_b","UseFIPS":false,"UseDualStack":false},"expect":{"url":"https://s3.af-south-1.amazonaws.com/99a_b","properties":{"authSchemes":[{"signingScope":"af-south-1","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"no path style + invalid host label@af-south-1","params":{"Region":"af-south-1","Accelerate":false,"___key":"key","Bucket":"99a_b","UseFIPS":false,"UseDualStack":false},"expect":{"url":"https://s3.af-south-1.amazonaws.com/99a_b","properties":{"authSchemes":[{"signingScope":"af-south-1","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"virtual addressing + private link@us-west-2","params":{"Endpoint":"http://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com","Region":"us-west-2","Accelerate":false,"ForcePathStyle":false,"___key":"key","Bucket":"bucket-name","UseFIPS":false,"UseDualStack":false},"expect":{"url":"http://bucket-name.control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com","properties":{"authSchemes":[{"signingScope":"us-west-2","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"path style + private link@us-west-2","params":{"Endpoint":"https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com","Region":"us-west-2","Accelerate":false,"ForcePathStyle":true,"___key":"key","Bucket":"bucket-name","UseFIPS":false,"UseDualStack":false},"expect":{"url":"https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com/bucket-name","properties":{"authSchemes":[{"signingScope":"us-west-2","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"SDK::Host + FIPS@us-west-2","params":{"Endpoint":"https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com","Region":"us-west-2","Accelerate":false,"ForcePathStyle":false,"___key":"key","Bucket":"bucket-name","UseFIPS":true,"UseDualStack":false},"expect":{"error":"Host override cannot be combined with Dualstack, FIPS, or S3 Accelerate"}},{"documentation":"SDK::Host + DualStack@us-west-2","params":{"Endpoint":"https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com","Region":"us-west-2","Accelerate":false,"ForcePathStyle":false,"___key":"key","Bucket":"bucket-name","UseFIPS":false,"UseDualStack":true},"expect":{"error":"Host override cannot be combined with Dualstack, FIPS, or S3 Accelerate"}},{"documentation":"SDK::HOST + accelerate@us-west-2","params":{"Endpoint":"http://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com","Region":"us-west-2","Accelerate":true,"ForcePathStyle":false,"___key":"key","Bucket":"bucket-name","UseFIPS":false,"UseDualStack":false},"expect":{"error":"Host override cannot be combined with Dualstack, FIPS, or S3 Accelerate"}},{"documentation":"SDK::Host + access point ARN@us-west-2","params":{"Endpoint":"https://beta.example.com","Region":"us-west-2","RequiresAccountId":true,"Accelerate":false,"ForcePathStyle":false,"___key":"key","Bucket":"arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint","UseFIPS":false,"UseDualStack":false},"expect":{"url":"https://myendpoint-123456789012.beta.example.com","properties":{"authSchemes":[{"signingScope":"us-west-2","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"virtual addressing + private link@cn-north-1","params":{"Endpoint":"https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com","Region":"cn-north-1","Accelerate":false,"ForcePathStyle":false,"___key":"key","Bucket":"bucket-name","UseFIPS":false,"UseDualStack":false},"expect":{"url":"https://bucket-name.control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com","properties":{"authSchemes":[{"signingScope":"cn-north-1","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"path style + private link@cn-north-1","params":{"Endpoint":"https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com","Region":"cn-north-1","Accelerate":false,"ForcePathStyle":true,"___key":"key","Bucket":"bucket-name","UseFIPS":false,"UseDualStack":false},"expect":{"url":"https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com/bucket-name","properties":{"authSchemes":[{"signingScope":"cn-north-1","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"SDK::Host + FIPS@cn-north-1","params":{"Endpoint":"https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com","Region":"cn-north-1","Accelerate":false,"ForcePathStyle":false,"Bucket":"bucket-name","UseFIPS":true,"UseDualStack":false},"expect":{"error":"Partition does not support FIPS"}},{"documentation":"SDK::Host + DualStack@cn-north-1","params":{"Endpoint":"https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com","Region":"cn-north-1","Accelerate":false,"ForcePathStyle":false,"___key":"key","Bucket":"bucket-name","UseFIPS":false,"UseDualStack":true},"expect":{"error":"Host override cannot be combined with Dualstack, FIPS, or S3 Accelerate"}},{"documentation":"SDK::HOST + accelerate@cn-north-1","params":{"Endpoint":"https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com","Region":"cn-north-1","Accelerate":true,"ForcePathStyle":false,"Bucket":"bucket-name","UseFIPS":false,"UseDualStack":false},"expect":{"error":"S3 Accelerate cannot be used in this region"}},{"documentation":"SDK::Host + access point ARN@cn-north-1","params":{"Endpoint":"https://beta.example.com","Region":"cn-north-1","RequiresAccountId":true,"Accelerate":false,"ForcePathStyle":false,"___key":"key","Bucket":"arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint","UseFIPS":false,"UseDualStack":false},"expect":{"url":"https://myendpoint-123456789012.beta.example.com","properties":{"authSchemes":[{"signingScope":"cn-north-1","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"virtual addressing + private link@af-south-1","params":{"Endpoint":"https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com","Region":"af-south-1","Accelerate":false,"ForcePathStyle":false,"___key":"key","Bucket":"bucket-name","UseFIPS":false,"UseDualStack":false},"expect":{"url":"https://bucket-name.control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com","properties":{"authSchemes":[{"signingScope":"af-south-1","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"path style + private link@af-south-1","params":{"Endpoint":"https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com","Region":"af-south-1","Accelerate":false,"ForcePathStyle":true,"___key":"key","Bucket":"bucket-name","UseFIPS":false,"UseDualStack":false},"expect":{"url":"https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com/bucket-name","properties":{"authSchemes":[{"signingScope":"af-south-1","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"SDK::Host + FIPS@af-south-1","params":{"Endpoint":"https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com","Region":"af-south-1","Accelerate":false,"ForcePathStyle":false,"___key":"key","Bucket":"bucket-name","UseFIPS":true,"UseDualStack":false},"expect":{"error":"Host override cannot be combined with Dualstack, FIPS, or S3 Accelerate"}},{"documentation":"SDK::Host + DualStack@af-south-1","params":{"Endpoint":"https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com","Region":"af-south-1","Accelerate":false,"ForcePathStyle":false,"___key":"key","Bucket":"bucket-name","UseFIPS":false,"UseDualStack":true},"expect":{"error":"Host override cannot be combined with Dualstack, FIPS, or S3 Accelerate"}},{"documentation":"SDK::HOST + accelerate@af-south-1","params":{"Endpoint":"https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com","Region":"af-south-1","Accelerate":true,"ForcePathStyle":false,"___key":"key","Bucket":"bucket-name","UseFIPS":false,"UseDualStack":false},"expect":{"error":"Host override cannot be combined with Dualstack, FIPS, or S3 Accelerate"}},{"documentation":"SDK::Host + access point ARN@af-south-1","params":{"Endpoint":"https://beta.example.com","Region":"af-south-1","RequiresAccountId":true,"Accelerate":false,"ForcePathStyle":false,"___key":"key","Bucket":"arn:aws:s3:af-south-1:123456789012:accesspoint:myendpoint","UseFIPS":false,"UseDualStack":false},"expect":{"url":"https://myendpoint-123456789012.beta.example.com","properties":{"authSchemes":[{"signingScope":"af-south-1","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"vanilla access point arn@us-west-2","params":{"Region":"us-west-2","RequiresAccountId":true,"Accelerate":false,"ForcePathStyle":false,"___key":"key","Bucket":"arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint","UseFIPS":false,"UseDualStack":false},"expect":{"url":"https://myendpoint-123456789012.s3-accesspoint.us-west-2.amazonaws.com","properties":{"authSchemes":[{"signingScope":"us-west-2","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"access point arn + FIPS@us-west-2","params":{"Region":"us-west-2","RequiresAccountId":true,"Accelerate":false,"ForcePathStyle":false,"___key":"key","Bucket":"arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint","UseFIPS":true,"UseDualStack":false},"expect":{"url":"https://myendpoint-123456789012.s3-accesspoint-fips.us-west-2.amazonaws.com","properties":{"authSchemes":[{"signingScope":"us-west-2","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"access point arn + accelerate = error@us-west-2","params":{"Region":"us-west-2","RequiresAccountId":true,"Accelerate":true,"ForcePathStyle":false,"___key":"key","Bucket":"arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint","UseFIPS":false,"UseDualStack":false},"expect":{"error":"Access Points do not support S3 Accelerate"}},{"documentation":"access point arn + FIPS + DualStack@us-west-2","params":{"Region":"us-west-2","RequiresAccountId":true,"Accelerate":false,"ForcePathStyle":false,"___key":"key","Bucket":"arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint","UseFIPS":true,"UseDualStack":true},"expect":{"url":"https://myendpoint-123456789012.s3-accesspoint-fips.dualstack.us-west-2.amazonaws.com","properties":{"authSchemes":[{"signingScope":"us-west-2","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"vanilla access point arn@cn-north-1","params":{"Region":"cn-north-1","RequiresAccountId":true,"Accelerate":false,"ForcePathStyle":false,"___key":"key","Bucket":"arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint","UseFIPS":false,"UseDualStack":false},"expect":{"url":"https://myendpoint-123456789012.s3-accesspoint.cn-north-1.amazonaws.com.cn","properties":{"authSchemes":[{"signingScope":"cn-north-1","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"access point arn + FIPS@cn-north-1","params":{"Region":"cn-north-1","RequiresAccountId":true,"Accelerate":false,"ForcePathStyle":false,"Bucket":"arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint","UseFIPS":true,"UseDualStack":false},"expect":{"error":"Partition does not support FIPS"}},{"documentation":"access point arn + accelerate = error@cn-north-1","params":{"Region":"cn-north-1","RequiresAccountId":true,"Accelerate":true,"ForcePathStyle":false,"___key":"key","Bucket":"arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint","UseFIPS":false,"UseDualStack":false},"expect":{"error":"Access Points do not support S3 Accelerate"}},{"documentation":"access point arn + FIPS + DualStack@cn-north-1","params":{"Region":"cn-north-1","RequiresAccountId":true,"Accelerate":false,"ForcePathStyle":false,"Bucket":"arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint","UseFIPS":true,"UseDualStack":true},"expect":{"error":"Partition does not support FIPS"}},{"documentation":"vanilla access point arn@af-south-1","params":{"Region":"af-south-1","RequiresAccountId":true,"Accelerate":false,"ForcePathStyle":false,"___key":"key","Bucket":"arn:aws:s3:af-south-1:123456789012:accesspoint:myendpoint","UseFIPS":false,"UseDualStack":false},"expect":{"url":"https://myendpoint-123456789012.s3-accesspoint.af-south-1.amazonaws.com","properties":{"authSchemes":[{"signingScope":"af-south-1","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"access point arn + FIPS@af-south-1","params":{"Region":"af-south-1","RequiresAccountId":true,"Accelerate":false,"ForcePathStyle":false,"___key":"key","Bucket":"arn:aws:s3:af-south-1:123456789012:accesspoint:myendpoint","UseFIPS":true,"UseDualStack":false},"expect":{"url":"https://myendpoint-123456789012.s3-accesspoint-fips.af-south-1.amazonaws.com","properties":{"authSchemes":[{"signingScope":"af-south-1","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"access point arn + accelerate = error@af-south-1","params":{"Region":"af-south-1","RequiresAccountId":true,"Accelerate":true,"ForcePathStyle":false,"___key":"key","Bucket":"arn:aws:s3:af-south-1:123456789012:accesspoint:myendpoint","UseFIPS":false,"UseDualStack":false},"expect":{"error":"Access Points do not support S3 Accelerate"}},{"documentation":"access point arn + FIPS + DualStack@af-south-1","params":{"Region":"af-south-1","RequiresAccountId":true,"Accelerate":false,"ForcePathStyle":false,"___key":"key","Bucket":"arn:aws:s3:af-south-1:123456789012:accesspoint:myendpoint","UseFIPS":true,"UseDualStack":true},"expect":{"url":"https://myendpoint-123456789012.s3-accesspoint-fips.dualstack.af-south-1.amazonaws.com","properties":{"authSchemes":[{"signingScope":"af-south-1","signingName":"s3","name":"v4"}]},"headers":{}}},{"documentation":"S3 Outposts Abba Real Outpost Prod us-west-1","params":{"Region":"us-west-1","Accelerate":false,"Bucket":"test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3","UseFIPS":false,"UseDualStack":false},"expect":{"url":"https://test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3.op-0b1d075431d83bebd.s3-outposts.us-west-1.amazonaws.com","properties":{"authSchemes":[{"signingScope":"us-west-1","signingName":"s3-outposts","name":"v4"}]},"headers":{}}},{"documentation":"S3 Outposts Abba Real Outpost Prod ap-east-1","params":{"Region":"ap-east-1","Accelerate":false,"Bucket":"test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3","UseFIPS":false,"UseDualStack":false},"expect":{"url":"https://test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3.op-0b1d075431d83bebd.s3-outposts.ap-east-1.amazonaws.com","properties":{"authSchemes":[{"signingScope":"ap-east-1","signingName":"s3-outposts","name":"v4"}]},"headers":{}}},{"documentation":"S3 Outposts Abba Ec2 Outpost Prod us-east-1","params":{"Region":"us-east-1","Accelerate":false,"Bucket":"test-accessp-e0000075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3","UseFIPS":false,"UseDualStack":false},"expect":{"url":"https://test-accessp-e0000075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3.ec2.s3-outposts.us-east-1.amazonaws.com","properties":{"authSchemes":[{"signingScope":"us-east-1","signingName":"s3-outposts","name":"v4"}]},"headers":{}}},{"documentation":"S3 Outposts Abba Ec2 Outpost Prod me-south-1","params":{"Region":"me-south-1","Accelerate":false,"Bucket":"test-accessp-e0000075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3","UseFIPS":false,"UseDualStack":false},"expect":{"url":"https://test-accessp-e0000075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3.ec2.s3-outposts.me-south-1.amazonaws.com","properties":{"authSchemes":[{"signingScope":"me-south-1","signingName":"s3-outposts","name":"v4"}]},"headers":{}}},{"documentation":"S3 Outposts Abba Real Outpost Beta","params":{"Endpoint":"https://beta.us-east-1.seaport.aws.a2z.com","Region":"us-east-1","Accelerate":false,"Bucket":"test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kbeta0--op-s3","UseFIPS":false,"UseDualStack":false},"expect":{"url":"https://test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kbeta0--op-s3.op-0b1d075431d83bebd.beta.us-east-1.seaport.aws.a2z.com","properties":{"authSchemes":[{"signingScope":"us-east-1","signingName":"s3-outposts","name":"v4"}]},"headers":{}}},{"documentation":"S3 Outposts Abba Ec2 Outpost Beta","params":{"Endpoint":"https://beta.us-east-1.seaport.aws.a2z.com","Region":"us-east-1","Accelerate":false,"Bucket":"161743052723-e00000136899934034jeahy1t8gpzpbwjj8kb7beta0--op-s3","UseFIPS":false,"UseDualStack":false},"expect":{"url":"https://161743052723-e00000136899934034jeahy1t8gpzpbwjj8kb7beta0--op-s3.ec2.beta.us-east-1.seaport.aws.a2z.com","properties":{"authSchemes":[{"signingScope":"us-east-1","signingName":"s3-outposts","name":"v4"}]},"headers":{}}},{"documentation":"S3 Outposts Abba - No endpoint set for beta","params":{"Region":"us-east-1","Accelerate":false,"Bucket":"test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kbeta0--op-s3","UseFIPS":false,"UseDualStack":false},"expect":{"error":"Expected a endpoint to be specified but no endpoint was found"}},{"documentation":"S3 Outposts Abba Invalid hardware type","params":{"Region":"us-east-1","Accelerate":false,"Bucket":"test-accessp-h0000075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3","UseFIPS":false,"UseDualStack":false},"expect":{"error":"Unrecognized hardware type: \"Expected hardware type o or e but got h\""}},{"documentation":"S3 Outposts Abba Special character in Outpost Arn","params":{"Region":"us-east-1","Accelerate":false,"Bucket":"test-accessp-o00000754%1d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3","UseFIPS":false,"UseDualStack":false},"expect":{"error":"Invalid ARN: The outpost Id must only contain a-z, A-Z, 0-9 and `-`."}}]}
+{
+    "testCases": [
+        {
+            "documentation": "region is not a valid DNS-suffix",
+            "params": {
+                "Region": "a b",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Accelerate": false
+            },
+            "expect": {
+                "error": "A valid partition could not be determined"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "Invalid access point ARN: Not S3",
+            "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Bucket": "arn:aws:not-s3:us-west-2:123456789012:accesspoint:myendpoint",
+                "Accelerate": false
+            },
+            "expect": {
+                "error": "Invalid ARN: The ARN was not for the S3 service, found: not-s3"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "Invalid access point ARN: invalid resource",
+            "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint:more-data",
+                "Accelerate": false
+            },
+            "expect": {
+                "error": "Invalid ARN: The ARN may only contain a single resource component after `accesspoint`."
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "Invalid access point ARN: invalid no ap name",
+            "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:",
+                "Accelerate": false
+            },
+            "expect": {
+                "error": "Invalid ARN: Expected a resource of the format `accesspoint:<accesspoint name>` but no name was provided"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "Invalid access point ARN: AccountId is invalid",
+            "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Bucket": "arn:aws:s3:us-west-2:123456_789012:accesspoint:apname",
+                "Accelerate": false
+            },
+            "expect": {
+                "error": "Invalid ARN: The account id may only contain a-z, A-Z, 0-9 and `-`. Found: 123456_789012"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "Invalid access point ARN: access point name is invalid",
+            "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:ap_name",
+                "Accelerate": false
+            },
+            "expect": {
+                "error": "Invalid ARN: The access point name may only contain a-z, A-Z, 0-9 and `-`. Found: ap_name"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "Access points (disable access points explicitly false)",
+            "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
+                "Accelerate": false,
+                "DisableAccessPoints": false
+            },
+            "expect": {
+                "url": "https://myendpoint-123456789012.s3-accesspoint.us-west-2.amazonaws.com",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "us-west-2",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "Access points: partition does not support FIPS",
+            "params": {
+                "Region": "cn-north-1",
+                "UseFIPS": true,
+                "UseDualStack": false,
+                "Bucket": "arn:aws:s3:cn-north-1:123456789012:accesspoint:myendpoint",
+                "Accelerate": false
+            },
+            "expect": {
+                "error": "Partition does not support FIPS"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "Bucket region is invalid",
+            "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Bucket": "arn:aws:s3:us-west -2:123456789012:accesspoint:myendpoint",
+                "Accelerate": false,
+                "DisableAccessPoints": false
+            },
+            "expect": {
+                "error": "Could not load partition for ARN region `us-west -2`"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "Access points when Access points explicitly disabled (used for CreateBucket)",
+            "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
+                "Accelerate": false,
+                "DisableAccessPoints": true
+            },
+            "expect": {
+                "error": "Access points are not supported for this operation"
+            },
+            "operationInputs": [
+                {
+                    "operationName": "CreateBucket",
+                    "clientParams": {},
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint"
+                    },
+                    "builtinParams": {
+                        "AWS::Region": "us-east-1"
+                    }
+                }
+            ]
+        },
+        {
+            "documentation": "S3 outposts vanilla test",
+            "params": {
+                "Region": "us-west-2",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Bucket": "arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/reports",
+                "Accelerate": false
+            },
+            "expect": {
+                "url": "https://reports-123456789012.op-01234567890123456.s3-outposts.us-west-2.amazonaws.com",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "us-west-2",
+                            "signingName": "s3-outposts",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "S3 outposts vanilla test (disable access points explicitly set)",
+            "params": {
+                "Region": "us-west-2",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Bucket": "arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/reports",
+                "Accelerate": false
+            },
+            "expect": {
+                "url": "https://reports-123456789012.op-01234567890123456.s3-outposts.us-west-2.amazonaws.com",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "us-west-2",
+                            "signingName": "s3-outposts",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "S3 outposts does not support dualstack",
+            "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": true,
+                "Bucket": "arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/reports",
+                "Accelerate": false
+            },
+            "expect": {
+                "error": "S3 Outposts does not support Dual-stack"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "S3 outposts does not support fips",
+            "params": {
+                "Region": "us-east-1",
+                "UseFIPS": true,
+                "UseDualStack": false,
+                "Bucket": "arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/reports",
+                "Accelerate": false
+            },
+            "expect": {
+                "error": "S3 Outposts does not support FIPS"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "S3 outposts does not support accelerate",
+            "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Bucket": "arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/reports",
+                "Accelerate": true
+            },
+            "expect": {
+                "error": "S3 Outposts does not support S3 Accelerate"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "missing arn type",
+            "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Bucket": "arn:aws:s3:us-west-2:123456789012:",
+                "Accelerate": false,
+                "DisableAccessPoints": true
+            },
+            "expect": {
+                "error": "Invalid ARN: No ARN type specified"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "SDK::Host + access point + Dualstack is an error",
+            "params": {
+                "Endpoint": "https://beta.example.com",
+                "Region": "cn-north-1",
+                "UseFIPS": false,
+                "UseDualStack": true,
+                "Bucket": "arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint",
+                "RequiresAccountId": true,
+                "Accelerate": false,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "error": "DualStack cannot be combined with a Host override (PrivateLink)"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "Access point ARN with FIPS & Dualstack",
+            "params": {
+                "Region": "us-east-1",
+                "UseFIPS": true,
+                "UseDualStack": true,
+                "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
+                "Accelerate": false,
+                "DisableAccessPoints": false
+            },
+            "expect": {
+                "url": "https://myendpoint-123456789012.s3-accesspoint-fips.dualstack.us-west-2.amazonaws.com",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "us-west-2",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "Access point ARN with Dualstack",
+            "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": true,
+                "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
+                "Accelerate": false,
+                "DisableAccessPoints": false
+            },
+            "expect": {
+                "url": "https://myendpoint-123456789012.s3-accesspoint.dualstack.us-west-2.amazonaws.com",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "us-west-2",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "vanilla MRAP",
+            "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "DisableMRAP": false,
+                "UseDualStack": false,
+                "Bucket": "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
+                "Accelerate": false
+            },
+            "expect": {
+                "url": "https://mfzwi23gnjvgw.mrap.accesspoint.s3-global.amazonaws.com",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "*",
+                            "name": "v4a"
+                        }
+                    ]
+                },
+                "headers": {
+                    "x-amz-region-set": [
+                        "*"
+                    ]
+                }
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "MRAP does not support FIPS",
+            "params": {
+                "Region": "us-east-1",
+                "UseFIPS": true,
+                "DisableMRAP": false,
+                "UseDualStack": false,
+                "Bucket": "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
+                "Accelerate": false
+            },
+            "expect": {
+                "error": "S3 MRAP does not support FIPS"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "MRAP does not support DualStack",
+            "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "DisableMRAP": false,
+                "UseDualStack": true,
+                "Bucket": "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
+                "Accelerate": false
+            },
+            "expect": {
+                "error": "S3 MRAP does not support dual-stack"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "MRAP does not support S3 Accelerate",
+            "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "DisableMRAP": false,
+                "UseDualStack": false,
+                "Bucket": "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
+                "Accelerate": true
+            },
+            "expect": {
+                "error": "S3 MRAP does not support S3 Accelerate"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "MRAP explicitly disabled",
+            "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "DisableMRAP": true,
+                "UseDualStack": false,
+                "Bucket": "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
+                "Accelerate": false
+            },
+            "expect": {
+                "error": "Invalid configuration: Multi-Region Access Point ARNs are disabled."
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "Dual-stack endpoint with path-style forced",
+            "params": {
+                "Region": "us-west-2",
+                "UseFIPS": false,
+                "UseDualStack": true,
+                "Bucket": "bucketname",
+                "ForcePathStyle": true,
+                "Accelerate": false
+            },
+            "expect": {
+                "url": "https://s3.dualstack.us-west-2.amazonaws.com/bucketname",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "us-west-2",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "Dual-stack endpoint + SDK::Host is error",
+            "params": {
+                "Endpoint": "https://abc.com",
+                "Region": "us-west-2",
+                "UseFIPS": false,
+                "UseDualStack": true,
+                "Bucket": "bucketname",
+                "ForcePathStyle": true,
+                "Accelerate": false
+            },
+            "expect": {
+                "error": "Cannot set dual-stack in combination with a custom endpoint."
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "path style + ARN bucket",
+            "params": {
+                "Region": "us-west-2",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Bucket": "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
+                "Accelerate": false,
+                "ForcePathStyle": true
+            },
+            "expect": {
+                "error": "Path-style addressing cannot be used with ARN buckets"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "implicit path style bucket + dualstack",
+            "params": {
+                "Region": "us-west-2",
+                "UseFIPS": false,
+                "UseDualStack": true,
+                "Bucket": "99_ab",
+                "Accelerate": false
+            },
+            "expect": {
+                "url": "https://s3.dualstack.us-west-2.amazonaws.com/99_ab",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "us-west-2",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "implicit path style bucket + dualstack",
+            "params": {
+                "Endpoint": "http://abc.com",
+                "Region": "us-west-2",
+                "UseFIPS": false,
+                "UseDualStack": true,
+                "Bucket": "99_ab",
+                "Accelerate": false
+            },
+            "expect": {
+                "error": "Cannot set dual-stack in combination with a custom endpoint."
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "don't allow URL injections in the bucket",
+            "params": {
+                "Region": "us-west-2",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Bucket": "example.com#",
+                "Accelerate": false
+            },
+            "expect": {
+                "url": "https://s3.us-west-2.amazonaws.com/example.com#",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "us-west-2",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "scheme is respected",
+            "params": {
+                "Endpoint": "http://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com",
+                "Region": "af-south-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Bucket": "99_ab",
+                "Accelerate": false
+            },
+            "expect": {
+                "url": "http://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com/99_ab",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "af-south-1",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "scheme is respected (virtual addressing)",
+            "params": {
+                "Endpoint": "http://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com/foo",
+                "Region": "af-south-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Bucket": "bucketname",
+                "Accelerate": false
+            },
+            "expect": {
+                "url": "http://bucketname.control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com/foo",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "af-south-1",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "path style + implicit private link",
+            "params": {
+                "Endpoint": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com",
+                "Region": "af-south-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Bucket": "99_ab",
+                "Accelerate": false
+            },
+            "expect": {
+                "url": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com/99_ab",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "af-south-1",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "invalid Endpoint override",
+            "params": {
+                "Endpoint": "abcde://nota#url",
+                "Region": "af-south-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Bucket": "bucketname",
+                "Accelerate": false
+            },
+            "expect": {
+                "error": "Custom endpoint `abcde://nota#url` was not a valid URI"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "using an IPv4 address forces path style",
+            "params": {
+                "Endpoint": "https://123.123.0.1",
+                "Region": "af-south-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Bucket": "bucketname",
+                "Accelerate": false
+            },
+            "expect": {
+                "url": "https://123.123.0.1/bucketname",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "af-south-1",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "vanilla access point arn with region mismatch and UseArnRegion=false",
+            "params": {
+                "Region": "us-west-2",
+                "UseFIPS": false,
+                "UseArnRegion": false,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint",
+                "RequiresAccountId": true,
+                "Accelerate": false,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "error": "Invalid configuration: region from ARN `us-east-1` does not match client region `us-west-2` and UseArnRegion is `false`"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "vanilla access point arn with region mismatch and UseArnRegion unset",
+            "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
+                "RequiresAccountId": true,
+                "Accelerate": false,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "url": "https://myendpoint-123456789012.s3-accesspoint.us-west-2.amazonaws.com",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "us-west-2",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "vanilla access point arn with region mismatch and UseArnRegion=true",
+            "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseArnRegion": true,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
+                "RequiresAccountId": true,
+                "Accelerate": false,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "url": "https://myendpoint-123456789012.s3-accesspoint.us-west-2.amazonaws.com",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "us-west-2",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "outposts arn with region mismatch and UseArnRegion=false",
+            "params": {
+                "Region": "us-west-2",
+                "UseFIPS": false,
+                "UseArnRegion": false,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                "RequiresAccountId": true,
+                "Accelerate": false,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "error": "Invalid configuration: region from ARN `us-east-1` does not match client region `us-west-2` and UseArnRegion is `false`"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "outposts arn with region mismatch, custom region and UseArnRegion=false",
+            "params": {
+                "Endpoint": "https://example.com",
+                "Region": "us-west-2",
+                "UseFIPS": false,
+                "UseArnRegion": false,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                "RequiresAccountId": true,
+                "Accelerate": false,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "error": "Invalid configuration: region from ARN `us-east-1` does not match client region `us-west-2` and UseArnRegion is `false`"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "outposts arn with region mismatch and UseArnRegion=true",
+            "params": {
+                "Region": "us-west-2",
+                "UseFIPS": false,
+                "UseArnRegion": true,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                "RequiresAccountId": true,
+                "Accelerate": false,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "url": "https://myaccesspoint-123456789012.op-01234567890123456.s3-outposts.us-east-1.amazonaws.com",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "us-east-1",
+                            "signingName": "s3-outposts",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "outposts arn with region mismatch and UseArnRegion unset",
+            "params": {
+                "Region": "us-west-2",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                "RequiresAccountId": true,
+                "Accelerate": false,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "url": "https://myaccesspoint-123456789012.op-01234567890123456.s3-outposts.us-east-1.amazonaws.com",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "us-east-1",
+                            "signingName": "s3-outposts",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "outposts arn with partition mismatch and UseArnRegion=true",
+            "params": {
+                "Region": "us-west-2",
+                "UseFIPS": false,
+                "UseArnRegion": true,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "arn:aws:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                "RequiresAccountId": true,
+                "Accelerate": false,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "url": "https://myaccesspoint-123456789012.op-01234567890123456.s3-outposts.cn-north-1.amazonaws.com.cn",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "cn-north-1",
+                            "signingName": "s3-outposts",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "vanilla virtual addressing@us-west-2",
+            "params": {
+                "Region": "us-west-2",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "bucket-name",
+                "Accelerate": false,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "url": "https://bucket-name.s3.us-west-2.amazonaws.com",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "us-west-2",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "virtual addressing + dualstack@us-west-2",
+            "params": {
+                "Region": "us-west-2",
+                "UseFIPS": false,
+                "UseDualStack": true,
+                "___key": "key",
+                "Bucket": "bucket-name",
+                "Accelerate": false,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "url": "https://bucket-name.s3.dualstack.us-west-2.amazonaws.com",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "us-west-2",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "accelerate + dualstack@us-west-2",
+            "params": {
+                "Region": "us-west-2",
+                "UseFIPS": false,
+                "UseDualStack": true,
+                "___key": "key",
+                "Bucket": "bucket-name",
+                "Accelerate": true,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "url": "https://bucket-name.s3-accelerate.dualstack.amazonaws.com",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "us-west-2",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "accelerate (dualstack=false)@us-west-2",
+            "params": {
+                "Region": "us-west-2",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "bucket-name",
+                "Accelerate": true,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "url": "https://bucket-name.s3-accelerate.amazonaws.com",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "us-west-2",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "virtual addressing + fips@us-west-2",
+            "params": {
+                "Region": "us-west-2",
+                "UseFIPS": true,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "bucket-name",
+                "Accelerate": false,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "url": "https://bucket-name.s3-fips.us-west-2.amazonaws.com",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "us-west-2",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "virtual addressing + dualstack + fips@us-west-2",
+            "params": {
+                "Region": "us-west-2",
+                "UseFIPS": true,
+                "UseDualStack": true,
+                "___key": "key",
+                "Bucket": "bucket-name",
+                "Accelerate": false,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "url": "https://bucket-name.s3-fips.dualstack.us-west-2.amazonaws.com",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "us-west-2",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "accelerate + fips = error@us-west-2",
+            "params": {
+                "Region": "us-west-2",
+                "UseFIPS": true,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "bucket-name",
+                "Accelerate": true,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "error": "Accelerate cannot be used with FIPS"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "vanilla virtual addressing@cn-north-1",
+            "params": {
+                "Region": "cn-north-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "bucket-name",
+                "Accelerate": false,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "url": "https://bucket-name.s3.cn-north-1.amazonaws.com.cn",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "cn-north-1",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "virtual addressing + dualstack@cn-north-1",
+            "params": {
+                "Region": "cn-north-1",
+                "UseFIPS": false,
+                "UseDualStack": true,
+                "___key": "key",
+                "Bucket": "bucket-name",
+                "Accelerate": false,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "url": "https://bucket-name.s3.dualstack.cn-north-1.amazonaws.com.cn",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "cn-north-1",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "accelerate (dualstack=false)@cn-north-1",
+            "params": {
+                "Region": "cn-north-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Bucket": "bucket-name",
+                "Accelerate": true,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "error": "S3 Accelerate cannot be used in this region"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "virtual addressing + fips@cn-north-1",
+            "params": {
+                "Region": "cn-north-1",
+                "UseFIPS": true,
+                "UseDualStack": false,
+                "Bucket": "bucket-name",
+                "Accelerate": false,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "error": "Partition does not support FIPS"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "vanilla virtual addressing@af-south-1",
+            "params": {
+                "Region": "af-south-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "bucket-name",
+                "Accelerate": false,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "url": "https://bucket-name.s3.af-south-1.amazonaws.com",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "af-south-1",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "virtual addressing + dualstack@af-south-1",
+            "params": {
+                "Region": "af-south-1",
+                "UseFIPS": false,
+                "UseDualStack": true,
+                "___key": "key",
+                "Bucket": "bucket-name",
+                "Accelerate": false,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "url": "https://bucket-name.s3.dualstack.af-south-1.amazonaws.com",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "af-south-1",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "accelerate + dualstack@af-south-1",
+            "params": {
+                "Region": "af-south-1",
+                "UseFIPS": false,
+                "UseDualStack": true,
+                "___key": "key",
+                "Bucket": "bucket-name",
+                "Accelerate": true,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "url": "https://bucket-name.s3-accelerate.dualstack.amazonaws.com",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "af-south-1",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "accelerate (dualstack=false)@af-south-1",
+            "params": {
+                "Region": "af-south-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "bucket-name",
+                "Accelerate": true,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "url": "https://bucket-name.s3-accelerate.amazonaws.com",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "af-south-1",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "virtual addressing + fips@af-south-1",
+            "params": {
+                "Region": "af-south-1",
+                "UseFIPS": true,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "bucket-name",
+                "Accelerate": false,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "url": "https://bucket-name.s3-fips.af-south-1.amazonaws.com",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "af-south-1",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "virtual addressing + dualstack + fips@af-south-1",
+            "params": {
+                "Region": "af-south-1",
+                "UseFIPS": true,
+                "UseDualStack": true,
+                "___key": "key",
+                "Bucket": "bucket-name",
+                "Accelerate": false,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "url": "https://bucket-name.s3-fips.dualstack.af-south-1.amazonaws.com",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "af-south-1",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "accelerate + fips = error@af-south-1",
+            "params": {
+                "Region": "af-south-1",
+                "UseFIPS": true,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "bucket-name",
+                "Accelerate": true,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "error": "Accelerate cannot be used with FIPS"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "vanilla path style@us-west-2",
+            "params": {
+                "Region": "us-west-2",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "bucket-name",
+                "Accelerate": false,
+                "ForcePathStyle": true
+            },
+            "expect": {
+                "url": "https://s3.us-west-2.amazonaws.com/bucket-name",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "us-west-2",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "path style + fips@us-west-2",
+            "params": {
+                "Region": "us-west-2",
+                "UseFIPS": true,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "bucket-name",
+                "Accelerate": false,
+                "ForcePathStyle": true
+            },
+            "expect": {
+                "error": "Path-style addressing cannot be used with FIPS"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "path style + accelerate = error@us-west-2",
+            "params": {
+                "Region": "us-west-2",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "bucket-name",
+                "Accelerate": true,
+                "ForcePathStyle": true
+            },
+            "expect": {
+                "error": "Path-style addressing cannot be used with S3 Accelerate"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "path style + dualstack@us-west-2",
+            "params": {
+                "Region": "us-west-2",
+                "UseFIPS": false,
+                "UseDualStack": true,
+                "___key": "key",
+                "Bucket": "bucket-name",
+                "Accelerate": false,
+                "ForcePathStyle": true
+            },
+            "expect": {
+                "url": "https://s3.dualstack.us-west-2.amazonaws.com/bucket-name",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "us-west-2",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "path style + arn is error@us-west-2",
+            "params": {
+                "Region": "us-west-2",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "arn:PARTITION:s3-outposts:REGION:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+                "RequiresAccountId": true,
+                "Accelerate": false,
+                "ForcePathStyle": true
+            },
+            "expect": {
+                "error": "Path-style addressing cannot be used with ARN buckets"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "path style + invalid host label@us-west-2",
+            "params": {
+                "Region": "us-west-2",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "99a_b",
+                "Accelerate": false,
+                "ForcePathStyle": true
+            },
+            "expect": {
+                "url": "https://s3.us-west-2.amazonaws.com/99a_b",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "us-west-2",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "no path style + invalid host label@us-west-2",
+            "params": {
+                "Region": "us-west-2",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "99a_b",
+                "Accelerate": false
+            },
+            "expect": {
+                "url": "https://s3.us-west-2.amazonaws.com/99a_b",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "us-west-2",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "vanilla path style@cn-north-1",
+            "params": {
+                "Region": "cn-north-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "bucket-name",
+                "Accelerate": false,
+                "ForcePathStyle": true
+            },
+            "expect": {
+                "url": "https://s3.cn-north-1.amazonaws.com.cn/bucket-name",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "cn-north-1",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "path style + fips@cn-north-1",
+            "params": {
+                "Region": "cn-north-1",
+                "UseFIPS": true,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "bucket-name",
+                "Accelerate": false,
+                "ForcePathStyle": true
+            },
+            "expect": {
+                "error": "Path-style addressing cannot be used with FIPS"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "path style + accelerate = error@cn-north-1",
+            "params": {
+                "Region": "cn-north-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "bucket-name",
+                "Accelerate": true,
+                "ForcePathStyle": true
+            },
+            "expect": {
+                "error": "Path-style addressing cannot be used with S3 Accelerate"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "path style + dualstack@cn-north-1",
+            "params": {
+                "Region": "cn-north-1",
+                "UseFIPS": false,
+                "UseDualStack": true,
+                "___key": "key",
+                "Bucket": "bucket-name",
+                "Accelerate": false,
+                "ForcePathStyle": true
+            },
+            "expect": {
+                "url": "https://s3.dualstack.cn-north-1.amazonaws.com.cn/bucket-name",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "cn-north-1",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "path style + arn is error@cn-north-1",
+            "params": {
+                "Region": "cn-north-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "arn:PARTITION:s3-outposts:REGION:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+                "RequiresAccountId": true,
+                "Accelerate": false,
+                "ForcePathStyle": true
+            },
+            "expect": {
+                "error": "Path-style addressing cannot be used with ARN buckets"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "path style + invalid host label@cn-north-1",
+            "params": {
+                "Region": "cn-north-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "99a_b",
+                "Accelerate": false,
+                "ForcePathStyle": true
+            },
+            "expect": {
+                "url": "https://s3.cn-north-1.amazonaws.com.cn/99a_b",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "cn-north-1",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "no path style + invalid host label@cn-north-1",
+            "params": {
+                "Region": "cn-north-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "99a_b",
+                "Accelerate": false
+            },
+            "expect": {
+                "url": "https://s3.cn-north-1.amazonaws.com.cn/99a_b",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "cn-north-1",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "vanilla path style@af-south-1",
+            "params": {
+                "Region": "af-south-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "bucket-name",
+                "Accelerate": false,
+                "ForcePathStyle": true
+            },
+            "expect": {
+                "url": "https://s3.af-south-1.amazonaws.com/bucket-name",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "af-south-1",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "path style + fips@af-south-1",
+            "params": {
+                "Region": "af-south-1",
+                "UseFIPS": true,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "bucket-name",
+                "Accelerate": false,
+                "ForcePathStyle": true
+            },
+            "expect": {
+                "error": "Path-style addressing cannot be used with FIPS"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "path style + accelerate = error@af-south-1",
+            "params": {
+                "Region": "af-south-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "bucket-name",
+                "Accelerate": true,
+                "ForcePathStyle": true
+            },
+            "expect": {
+                "error": "Path-style addressing cannot be used with S3 Accelerate"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "path style + dualstack@af-south-1",
+            "params": {
+                "Region": "af-south-1",
+                "UseFIPS": false,
+                "UseDualStack": true,
+                "___key": "key",
+                "Bucket": "bucket-name",
+                "Accelerate": false,
+                "ForcePathStyle": true
+            },
+            "expect": {
+                "url": "https://s3.dualstack.af-south-1.amazonaws.com/bucket-name",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "af-south-1",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "path style + arn is error@af-south-1",
+            "params": {
+                "Region": "af-south-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "arn:PARTITION:s3-outposts:REGION:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+                "RequiresAccountId": true,
+                "Accelerate": false,
+                "ForcePathStyle": true
+            },
+            "expect": {
+                "error": "Path-style addressing cannot be used with ARN buckets"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "path style + invalid host label@af-south-1",
+            "params": {
+                "Region": "af-south-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "99a_b",
+                "Accelerate": false,
+                "ForcePathStyle": true
+            },
+            "expect": {
+                "url": "https://s3.af-south-1.amazonaws.com/99a_b",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "af-south-1",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "no path style + invalid host label@af-south-1",
+            "params": {
+                "Region": "af-south-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "99a_b",
+                "Accelerate": false
+            },
+            "expect": {
+                "url": "https://s3.af-south-1.amazonaws.com/99a_b",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "af-south-1",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "virtual addressing + private link@us-west-2",
+            "params": {
+                "Endpoint": "http://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com",
+                "Region": "us-west-2",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "bucket-name",
+                "Accelerate": false,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "url": "http://bucket-name.control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "us-west-2",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "path style + private link@us-west-2",
+            "params": {
+                "Endpoint": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com",
+                "Region": "us-west-2",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "bucket-name",
+                "Accelerate": false,
+                "ForcePathStyle": true
+            },
+            "expect": {
+                "url": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com/bucket-name",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "us-west-2",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "SDK::Host + FIPS@us-west-2",
+            "params": {
+                "Endpoint": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com",
+                "Region": "us-west-2",
+                "UseFIPS": true,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "bucket-name",
+                "Accelerate": false,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "error": "Host override cannot be combined with Dualstack, FIPS, or S3 Accelerate"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "SDK::Host + DualStack@us-west-2",
+            "params": {
+                "Endpoint": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com",
+                "Region": "us-west-2",
+                "UseFIPS": false,
+                "UseDualStack": true,
+                "___key": "key",
+                "Bucket": "bucket-name",
+                "Accelerate": false,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "error": "Host override cannot be combined with Dualstack, FIPS, or S3 Accelerate"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "SDK::HOST + accelerate@us-west-2",
+            "params": {
+                "Endpoint": "http://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com",
+                "Region": "us-west-2",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "bucket-name",
+                "Accelerate": true,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "error": "Host override cannot be combined with Dualstack, FIPS, or S3 Accelerate"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "SDK::Host + access point ARN@us-west-2",
+            "params": {
+                "Endpoint": "https://beta.example.com",
+                "Region": "us-west-2",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
+                "RequiresAccountId": true,
+                "Accelerate": false,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "url": "https://myendpoint-123456789012.beta.example.com",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "us-west-2",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "virtual addressing + private link@cn-north-1",
+            "params": {
+                "Endpoint": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com",
+                "Region": "cn-north-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "bucket-name",
+                "Accelerate": false,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "url": "https://bucket-name.control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "cn-north-1",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "path style + private link@cn-north-1",
+            "params": {
+                "Endpoint": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com",
+                "Region": "cn-north-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "bucket-name",
+                "Accelerate": false,
+                "ForcePathStyle": true
+            },
+            "expect": {
+                "url": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com/bucket-name",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "cn-north-1",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "SDK::Host + FIPS@cn-north-1",
+            "params": {
+                "Endpoint": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com",
+                "Region": "cn-north-1",
+                "UseFIPS": true,
+                "UseDualStack": false,
+                "Bucket": "bucket-name",
+                "Accelerate": false,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "error": "Partition does not support FIPS"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "SDK::Host + DualStack@cn-north-1",
+            "params": {
+                "Endpoint": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com",
+                "Region": "cn-north-1",
+                "UseFIPS": false,
+                "UseDualStack": true,
+                "___key": "key",
+                "Bucket": "bucket-name",
+                "Accelerate": false,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "error": "Host override cannot be combined with Dualstack, FIPS, or S3 Accelerate"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "SDK::HOST + accelerate@cn-north-1",
+            "params": {
+                "Endpoint": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com",
+                "Region": "cn-north-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Bucket": "bucket-name",
+                "Accelerate": true,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "error": "S3 Accelerate cannot be used in this region"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "SDK::Host + access point ARN@cn-north-1",
+            "params": {
+                "Endpoint": "https://beta.example.com",
+                "Region": "cn-north-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint",
+                "RequiresAccountId": true,
+                "Accelerate": false,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "url": "https://myendpoint-123456789012.beta.example.com",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "cn-north-1",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "virtual addressing + private link@af-south-1",
+            "params": {
+                "Endpoint": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com",
+                "Region": "af-south-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "bucket-name",
+                "Accelerate": false,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "url": "https://bucket-name.control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "af-south-1",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "path style + private link@af-south-1",
+            "params": {
+                "Endpoint": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com",
+                "Region": "af-south-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "bucket-name",
+                "Accelerate": false,
+                "ForcePathStyle": true
+            },
+            "expect": {
+                "url": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com/bucket-name",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "af-south-1",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "SDK::Host + FIPS@af-south-1",
+            "params": {
+                "Endpoint": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com",
+                "Region": "af-south-1",
+                "UseFIPS": true,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "bucket-name",
+                "Accelerate": false,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "error": "Host override cannot be combined with Dualstack, FIPS, or S3 Accelerate"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "SDK::Host + DualStack@af-south-1",
+            "params": {
+                "Endpoint": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com",
+                "Region": "af-south-1",
+                "UseFIPS": false,
+                "UseDualStack": true,
+                "___key": "key",
+                "Bucket": "bucket-name",
+                "Accelerate": false,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "error": "Host override cannot be combined with Dualstack, FIPS, or S3 Accelerate"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "SDK::HOST + accelerate@af-south-1",
+            "params": {
+                "Endpoint": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com",
+                "Region": "af-south-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "bucket-name",
+                "Accelerate": true,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "error": "Host override cannot be combined with Dualstack, FIPS, or S3 Accelerate"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "SDK::Host + access point ARN@af-south-1",
+            "params": {
+                "Endpoint": "https://beta.example.com",
+                "Region": "af-south-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "arn:aws:s3:af-south-1:123456789012:accesspoint:myendpoint",
+                "RequiresAccountId": true,
+                "Accelerate": false,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "url": "https://myendpoint-123456789012.beta.example.com",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "af-south-1",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "vanilla access point arn@us-west-2",
+            "params": {
+                "Region": "us-west-2",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
+                "RequiresAccountId": true,
+                "Accelerate": false,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "url": "https://myendpoint-123456789012.s3-accesspoint.us-west-2.amazonaws.com",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "us-west-2",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "access point arn + FIPS@us-west-2",
+            "params": {
+                "Region": "us-west-2",
+                "UseFIPS": true,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
+                "RequiresAccountId": true,
+                "Accelerate": false,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "url": "https://myendpoint-123456789012.s3-accesspoint-fips.us-west-2.amazonaws.com",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "us-west-2",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "access point arn + accelerate = error@us-west-2",
+            "params": {
+                "Region": "us-west-2",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
+                "RequiresAccountId": true,
+                "Accelerate": true,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "error": "Access Points do not support S3 Accelerate"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "access point arn + FIPS + DualStack@us-west-2",
+            "params": {
+                "Region": "us-west-2",
+                "UseFIPS": true,
+                "UseDualStack": true,
+                "___key": "key",
+                "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
+                "RequiresAccountId": true,
+                "Accelerate": false,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "url": "https://myendpoint-123456789012.s3-accesspoint-fips.dualstack.us-west-2.amazonaws.com",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "us-west-2",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "vanilla access point arn@cn-north-1",
+            "params": {
+                "Region": "cn-north-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint",
+                "RequiresAccountId": true,
+                "Accelerate": false,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "url": "https://myendpoint-123456789012.s3-accesspoint.cn-north-1.amazonaws.com.cn",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "cn-north-1",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "access point arn + FIPS@cn-north-1",
+            "params": {
+                "Region": "cn-north-1",
+                "UseFIPS": true,
+                "UseDualStack": false,
+                "Bucket": "arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint",
+                "RequiresAccountId": true,
+                "Accelerate": false,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "error": "Partition does not support FIPS"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "access point arn + accelerate = error@cn-north-1",
+            "params": {
+                "Region": "cn-north-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint",
+                "RequiresAccountId": true,
+                "Accelerate": true,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "error": "Access Points do not support S3 Accelerate"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "access point arn + FIPS + DualStack@cn-north-1",
+            "params": {
+                "Region": "cn-north-1",
+                "UseFIPS": true,
+                "UseDualStack": true,
+                "Bucket": "arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint",
+                "RequiresAccountId": true,
+                "Accelerate": false,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "error": "Partition does not support FIPS"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "vanilla access point arn@af-south-1",
+            "params": {
+                "Region": "af-south-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "arn:aws:s3:af-south-1:123456789012:accesspoint:myendpoint",
+                "RequiresAccountId": true,
+                "Accelerate": false,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "url": "https://myendpoint-123456789012.s3-accesspoint.af-south-1.amazonaws.com",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "af-south-1",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "access point arn + FIPS@af-south-1",
+            "params": {
+                "Region": "af-south-1",
+                "UseFIPS": true,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "arn:aws:s3:af-south-1:123456789012:accesspoint:myendpoint",
+                "RequiresAccountId": true,
+                "Accelerate": false,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "url": "https://myendpoint-123456789012.s3-accesspoint-fips.af-south-1.amazonaws.com",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "af-south-1",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "access point arn + accelerate = error@af-south-1",
+            "params": {
+                "Region": "af-south-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "___key": "key",
+                "Bucket": "arn:aws:s3:af-south-1:123456789012:accesspoint:myendpoint",
+                "RequiresAccountId": true,
+                "Accelerate": true,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "error": "Access Points do not support S3 Accelerate"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "access point arn + FIPS + DualStack@af-south-1",
+            "params": {
+                "Region": "af-south-1",
+                "UseFIPS": true,
+                "UseDualStack": true,
+                "___key": "key",
+                "Bucket": "arn:aws:s3:af-south-1:123456789012:accesspoint:myendpoint",
+                "RequiresAccountId": true,
+                "Accelerate": false,
+                "ForcePathStyle": false
+            },
+            "expect": {
+                "url": "https://myendpoint-123456789012.s3-accesspoint-fips.dualstack.af-south-1.amazonaws.com",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "af-south-1",
+                            "signingName": "s3",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "S3 Outposts Abba Real Outpost Prod us-west-1",
+            "params": {
+                "Region": "us-west-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Bucket": "test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3",
+                "Accelerate": false
+            },
+            "expect": {
+                "url": "https://test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3.op-0b1d075431d83bebd.s3-outposts.us-west-1.amazonaws.com",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "us-west-1",
+                            "signingName": "s3-outposts",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "S3 Outposts Abba Real Outpost Prod ap-east-1",
+            "params": {
+                "Region": "ap-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Bucket": "test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3",
+                "Accelerate": false
+            },
+            "expect": {
+                "url": "https://test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3.op-0b1d075431d83bebd.s3-outposts.ap-east-1.amazonaws.com",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "ap-east-1",
+                            "signingName": "s3-outposts",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "S3 Outposts Abba Ec2 Outpost Prod us-east-1",
+            "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Bucket": "test-accessp-e0000075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3",
+                "Accelerate": false
+            },
+            "expect": {
+                "url": "https://test-accessp-e0000075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3.ec2.s3-outposts.us-east-1.amazonaws.com",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "us-east-1",
+                            "signingName": "s3-outposts",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "S3 Outposts Abba Ec2 Outpost Prod me-south-1",
+            "params": {
+                "Region": "me-south-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Bucket": "test-accessp-e0000075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3",
+                "Accelerate": false
+            },
+            "expect": {
+                "url": "https://test-accessp-e0000075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3.ec2.s3-outposts.me-south-1.amazonaws.com",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "me-south-1",
+                            "signingName": "s3-outposts",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "S3 Outposts Abba Real Outpost Beta",
+            "params": {
+                "Endpoint": "https://beta.us-east-1.seaport.aws.a2z.com",
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Bucket": "test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kbeta0--op-s3",
+                "Accelerate": false
+            },
+            "expect": {
+                "url": "https://test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kbeta0--op-s3.op-0b1d075431d83bebd.beta.us-east-1.seaport.aws.a2z.com",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "us-east-1",
+                            "signingName": "s3-outposts",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "S3 Outposts Abba Ec2 Outpost Beta",
+            "params": {
+                "Endpoint": "https://beta.us-east-1.seaport.aws.a2z.com",
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Bucket": "161743052723-e00000136899934034jeahy1t8gpzpbwjj8kb7beta0--op-s3",
+                "Accelerate": false
+            },
+            "expect": {
+                "url": "https://161743052723-e00000136899934034jeahy1t8gpzpbwjj8kb7beta0--op-s3.ec2.beta.us-east-1.seaport.aws.a2z.com",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "us-east-1",
+                            "signingName": "s3-outposts",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "S3 Outposts Abba - No endpoint set for beta",
+            "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Bucket": "test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kbeta0--op-s3",
+                "Accelerate": false
+            },
+            "expect": {
+                "error": "Expected a endpoint to be specified but no endpoint was found"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "S3 Outposts Abba Invalid hardware type",
+            "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Bucket": "test-accessp-h0000075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3",
+                "Accelerate": false
+            },
+            "expect": {
+                "error": "Unrecognized hardware type: \"Expected hardware type o or e but got h\""
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "S3 Outposts Abba Special character in Outpost Arn",
+            "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Bucket": "test-accessp-o00000754%1d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3",
+                "Accelerate": false
+            },
+            "expect": {
+                "error": "Invalid ARN: The outpost Id must only contain a-z, A-Z, 0-9 and `-`."
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "S3 Outposts Snow with bucket",
+            "params": {
+                "Region": "snow",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Bucket": "bucketName",
+                "SnowEndpointUrl": "http://10.0.1.12:433",
+                "Accelerate": false
+            },
+            "expect": {
+                "url": "http://10.0.1.12:433/bucketName",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "snow",
+                            "signingName": "s3-snow",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "S3 Outposts Snow without bucket",
+            "params": {
+                "Region": "snow",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "SnowEndpointUrl": "https://10.0.1.12:433",
+                "Accelerate": false
+            },
+            "expect": {
+                "url": "https://10.0.1.12:433",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "snow",
+                            "signingName": "s3-snow",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "S3 Outposts Snow no port",
+            "params": {
+                "Region": "snow",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Bucket": "bucketName",
+                "SnowEndpointUrl": "http://10.0.1.12",
+                "Accelerate": false
+            },
+            "expect": {
+                "url": "http://10.0.1.12/bucketName",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "snow",
+                            "signingName": "s3-snow",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "S3 Outposts Snow dns endpoint",
+            "params": {
+                "Region": "snow",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Bucket": "bucketName",
+                "SnowEndpointUrl": "https://amazonaws.com",
+                "Accelerate": false
+            },
+            "expect": {
+                "url": "https://amazonaws.com/bucketName",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "signingScope": "snow",
+                            "signingName": "s3-snow",
+                            "name": "v4"
+                        }
+                    ]
+                },
+                "headers": {}
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "S3 Outposts Snow invalid url",
+            "params": {
+                "Region": "snow",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "SnowEndpointUrl": "invalid.url",
+                "Accelerate": false
+            },
+            "expect": {
+                "error": "Snow endpoint url was not a valid url"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "S3 Outposts Snow no snow endpoint",
+            "params": {
+                "Region": "snow",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Bucket": "bucketName",
+                "Accelerate": false
+            },
+            "expect": {
+                "error": "Expected snow endpoint url to be set but no url was found"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "S3 Outposts Snow FIPS enabled",
+            "params": {
+                "Region": "snow",
+                "UseFIPS": true,
+                "UseDualStack": false,
+                "Bucket": "bucketName",
+                "SnowEndpointUrl": "https://10.0.1.12:433",
+                "Accelerate": false
+            },
+            "expect": {
+                "error": "S3 Snow does not support FIPS"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "S3 Outposts Snow Dual-stack enabled",
+            "params": {
+                "Region": "snow",
+                "UseFIPS": false,
+                "UseDualStack": true,
+                "Bucket": "bucketName",
+                "SnowEndpointUrl": "https://10.0.1.12:433",
+                "Accelerate": false
+            },
+            "expect": {
+                "error": "S3 Snow does not support Dual-stack"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "S3 Outposts Snow Accelerate enabled",
+            "params": {
+                "Region": "snow",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Bucket": "bucketName",
+                "SnowEndpointUrl": "https://10.0.1.12:433",
+                "Accelerate": true
+            },
+            "expect": {
+                "error": "S3 Snow does not support S3 Accelerate"
+            },
+            "operationInputs": []
+        }
+    ]
+}

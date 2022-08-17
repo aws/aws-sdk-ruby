@@ -89,6 +89,9 @@ module Aws
       }
     end
 
+    # Return the ARN as JSON
+    #
+    # @return [Hash]
     def as_json(_options = nil)
       {
         'partition' => @partition,

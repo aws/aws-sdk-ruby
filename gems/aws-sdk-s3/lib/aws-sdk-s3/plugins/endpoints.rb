@@ -22,6 +22,21 @@ module Aws::S3
         Aws::S3::EndpointProvider.new
       end
 
+      option(
+        :accelerate,
+        doc_type: 'Boolean',
+        docstring: "Enables the usage of the S3 Transfer Acceleration endpoints.")
+
+      option(
+        :force_path_style,
+        doc_type: 'Boolean',
+        docstring: "Allows you to enable the S3 client to use path-style addressing for buckets.")
+
+      option(
+        :snow_endpoint_url,
+        doc_type: 'String',
+        docstring: "Allows you to configure the S3 Snowball endpoint.")
+
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
