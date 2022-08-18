@@ -65,11 +65,15 @@ module Aws
       def authenticate!(message_body)
         msg = Json.load(message_body)
         msg = convert_lambda_msg(msg) if is_from_lambda(msg)
-        if public_key(msg).verify(sha1, signature(msg), canonical_string(msg))
-          true
+
+        case msg['SignatureVersion']
+        when '1'
+          verify!(msg, sha1)
+        when '2'
+          verify!(msg, sha256)
         else
-          msg = 'the authenticity of the message cannot be verified'
-          raise VerificationError, msg
+          error_msg = 'Invalid SignatureVersion'
+          raise VerificationError, error_msg
         end
       end
 
@@ -88,8 +92,21 @@ module Aws
         message
       end
 
+      def verify!(msg, hash_alg)
+        if public_key(msg).verify(hash_alg, signature(msg), canonical_string(msg))
+          true
+        else
+          msg = 'the authenticity of the message cannot be verified'
+          raise VerificationError, msg
+        end
+      end
+
       def sha1
         OpenSSL::Digest::SHA1.new
+      end
+
+      def sha256
+        OpenSSL::Digest::SHA256.new
       end
 
       def signature(message)
