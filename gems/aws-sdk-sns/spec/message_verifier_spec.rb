@@ -97,56 +97,59 @@ HqOUdKigPDHYLRo=
 
       describe '#authenticate!' do
 
-        it 'returns true for a valid message' do
-          [message_SHA1, message_SHA256, lambda_message].each do |message|
-            expect(verifier.authenticate!(message)).to be(true)
-          end
-        end
+        [:message_sha1, :message_sha256, :lambda_message].each do |message_type|
+          let(:message) { send(message_type) }
+          let(:cert_url_key) { message_type == :lambda_message ? 'SigningCertUrl' : 'SigningCertURL' }
 
-        it 'raises when SignatureVersion is not a valid value' do
-          msg = Json.load(message_SHA1)
-          msg['SignatureVersion'] = '3'
-          msg = Json.dump(msg)
-          expect {
-            verifier.authenticate!(msg)
-          }.to raise_error(MessageVerifier::VerificationError, /Invalid SignatureVersion/)
-        end
+          context "message type is #{message_type}" do
+            it 'returns true for a valid message' do
+              expect(verifier.authenticate!(message)).to be(true)
+            end
 
-        it 'raises when the SigningCertURL is not https' do
-          msg = Json.load(message_SHA1)
-          msg['SigningCertURL'] = msg['SigningCertURL'].sub(/https/, 'http')
-          msg = Json.dump(msg)
-          expect {
-            verifier.authenticate!(msg)
-          }.to raise_error(MessageVerifier::VerificationError, /must be https/)
-        end
+            it 'raises when the message signature fails validation' do
+              msg = Json.load(message)
+              msg['Signature'] = 'bad'
+              msg = Json.dump(msg)
+              expect {
+                verifier.authenticate!(msg)
+              }.to raise_error(MessageVerifier::VerificationError, /cannot be verified/)
+            end
 
-        it 'raises when the SigningCertURL is not AWS hosted' do
-          msg = Json.load(message_SHA1)
-          msg['SigningCertURL'] = 'https://internetbadguys.com/cert.pem'
-          msg = Json.dump(msg)
-          expect {
-            verifier.authenticate!(msg)
-          }.to raise_error(MessageVerifier::VerificationError, /hosted by AWS/)
-        end
+            it 'raises when SignatureVersion is not a valid value' do
+              msg = Json.load(message)
+              msg['SignatureVersion'] = '3'
+              msg = Json.dump(msg)
+              expect {
+                verifier.authenticate!(msg)
+              }.to raise_error(MessageVerifier::VerificationError, /Invalid SignatureVersion/)
+            end
 
-        it 'raises when the SigningCertURL is not a pem file' do
-          msg = Json.load(message_SHA1)
-          msg['SigningCertURL'] = msg['SigningCertURL'].sub(/pem$/, 'key')
-          msg = Json.dump(msg)
-          expect {
-            verifier.authenticate!(msg)
-          }.to raise_error(MessageVerifier::VerificationError, /a \.pem file/)
-        end
+            it 'raises when the SigningCertURL is not https' do
+              msg = Json.load(message)
+              msg[cert_url_key] = msg[cert_url_key].sub(/https/, 'http')
+              msg = Json.dump(msg)
+              expect {
+                verifier.authenticate!(msg)
+              }.to raise_error(MessageVerifier::VerificationError, /must be https/)
+            end
 
-        it 'raises when the message signature fails validation' do
-          [message_SHA1, message_SHA256, lambda_message].each do |message|
-            msg = Json.load(message)
-            msg['Signature'] = 'bad'
-            msg = Json.dump(msg)
-            expect {
-              verifier.authenticate!(msg)
-            }.to raise_error(MessageVerifier::VerificationError, /cannot be verified/)
+            it 'raises when the SigningCertURL is not AWS hosted' do
+              msg = Json.load(message)
+              msg[cert_url_key] = 'https://internetbadguys.com/cert.pem'
+              msg = Json.dump(msg)
+              expect {
+                verifier.authenticate!(msg)
+              }.to raise_error(MessageVerifier::VerificationError, /hosted by AWS/)
+            end
+
+            it 'raises when the SigningCertURL is not a pem file' do
+              msg = Json.load(message)
+              msg[cert_url_key] = msg[cert_url_key].sub(/pem$/, 'key')
+              msg = Json.dump(msg)
+              expect {
+                verifier.authenticate!(msg)
+              }.to raise_error(MessageVerifier::VerificationError, /a \.pem file/)
+            end
           end
         end
 
@@ -199,18 +202,20 @@ HqOUdKigPDHYLRo=
 
       describe '#authentic?' do
 
-        it 'returns true if the message can be authenticated' do
-          [message_SHA1, message_SHA256, lambda_message].each do |message|
-            expect(verifier.authentic?(message)).to be(true)
-          end
-        end
+        [:message_sha1, :message_sha256, :lambda_message].each do |message_type|
+          let(:message) { send(message_type) }
 
-        it 'returns false if the message can not be authenticated' do
-          [message_SHA1, message_SHA256, lambda_message].each do |message|
-            msg = Json.load(message)
-            msg['Signature'] = 'bad'
-            msg = Json.dump(msg)
-            expect(verifier.authentic?(msg)).to be(false)
+          context "message type is #{message_type}" do
+            it 'returns true if the message can be authenticated' do
+              expect(verifier.authentic?(message)).to be(true)
+            end
+
+            it 'returns false if the message can not be authenticated' do
+              msg = Json.load(message)
+              msg['Signature'] = 'bad'
+              msg = Json.dump(msg)
+              expect(verifier.authentic?(msg)).to be(false)
+            end
           end
         end
 
