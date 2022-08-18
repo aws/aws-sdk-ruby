@@ -1525,9 +1525,9 @@ module Aws::CognitoIdentityProvider
     #
     #   resp.auth_events #=> Array
     #   resp.auth_events[0].event_id #=> String
-    #   resp.auth_events[0].event_type #=> String, one of "SignIn", "SignUp", "ForgotPassword"
+    #   resp.auth_events[0].event_type #=> String, one of "SignIn", "SignUp", "ForgotPassword", "PasswordChange", "ResendCode"
     #   resp.auth_events[0].creation_date #=> Time
-    #   resp.auth_events[0].event_response #=> String, one of "Success", "Failure"
+    #   resp.auth_events[0].event_response #=> String, one of "Pass", "Fail", "InProgress"
     #   resp.auth_events[0].event_risk.risk_decision #=> String, one of "NoRisk", "AccountTakeover", "Block"
     #   resp.auth_events[0].event_risk.risk_level #=> String, one of "Low", "Medium", "High"
     #   resp.auth_events[0].event_risk.compromised_credentials_detected #=> Boolean
@@ -7867,7 +7867,7 @@ module Aws::CognitoIdentityProvider
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

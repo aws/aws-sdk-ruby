@@ -305,6 +305,9 @@ module Aws::EC2
     ClientVpnRouteStatus = Shapes::StructureShape.new(name: 'ClientVpnRouteStatus')
     ClientVpnRouteStatusCode = Shapes::StringShape.new(name: 'ClientVpnRouteStatusCode')
     ClientVpnSecurityGroupIdSet = Shapes::ListShape.new(name: 'ClientVpnSecurityGroupIdSet')
+    CloudWatchLogGroupArn = Shapes::StringShape.new(name: 'CloudWatchLogGroupArn')
+    CloudWatchLogOptions = Shapes::StructureShape.new(name: 'CloudWatchLogOptions')
+    CloudWatchLogOptionsSpecification = Shapes::StructureShape.new(name: 'CloudWatchLogOptionsSpecification')
     CoipAddressUsage = Shapes::StructureShape.new(name: 'CoipAddressUsage')
     CoipAddressUsageSet = Shapes::ListShape.new(name: 'CoipAddressUsageSet')
     CoipPool = Shapes::StructureShape.new(name: 'CoipPool')
@@ -2723,6 +2726,8 @@ module Aws::EC2
     VpnStaticRoute = Shapes::StructureShape.new(name: 'VpnStaticRoute')
     VpnStaticRouteList = Shapes::ListShape.new(name: 'VpnStaticRouteList')
     VpnStaticRouteSource = Shapes::StringShape.new(name: 'VpnStaticRouteSource')
+    VpnTunnelLogOptions = Shapes::StructureShape.new(name: 'VpnTunnelLogOptions')
+    VpnTunnelLogOptionsSpecification = Shapes::StructureShape.new(name: 'VpnTunnelLogOptionsSpecification')
     VpnTunnelOptionsSpecification = Shapes::StructureShape.new(name: 'VpnTunnelOptionsSpecification')
     VpnTunnelOptionsSpecificationsList = Shapes::ListShape.new(name: 'VpnTunnelOptionsSpecificationsList')
     WeekDay = Shapes::StringShape.new(name: 'WeekDay')
@@ -3732,6 +3737,16 @@ module Aws::EC2
     ClientVpnRouteStatus.struct_class = Types::ClientVpnRouteStatus
 
     ClientVpnSecurityGroupIdSet.member = Shapes::ShapeRef.new(shape: SecurityGroupId, location_name: "item")
+
+    CloudWatchLogOptions.add_member(:log_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "logEnabled"))
+    CloudWatchLogOptions.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: String, location_name: "logGroupArn"))
+    CloudWatchLogOptions.add_member(:log_output_format, Shapes::ShapeRef.new(shape: String, location_name: "logOutputFormat"))
+    CloudWatchLogOptions.struct_class = Types::CloudWatchLogOptions
+
+    CloudWatchLogOptionsSpecification.add_member(:log_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "LogEnabled"))
+    CloudWatchLogOptionsSpecification.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: CloudWatchLogGroupArn, location_name: "LogGroupArn"))
+    CloudWatchLogOptionsSpecification.add_member(:log_output_format, Shapes::ShapeRef.new(shape: String, location_name: "LogOutputFormat"))
+    CloudWatchLogOptionsSpecification.struct_class = Types::CloudWatchLogOptionsSpecification
 
     CoipAddressUsage.add_member(:allocation_id, Shapes::ShapeRef.new(shape: String, location_name: "allocationId"))
     CoipAddressUsage.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: String, location_name: "awsAccountId"))
@@ -10254,6 +10269,7 @@ module Aws::EC2
     ModifyVpnTunnelOptionsSpecification.add_member(:phase_2_dh_group_numbers, Shapes::ShapeRef.new(shape: Phase2DHGroupNumbersRequestList, location_name: "Phase2DHGroupNumber"))
     ModifyVpnTunnelOptionsSpecification.add_member(:ike_versions, Shapes::ShapeRef.new(shape: IKEVersionsRequestList, location_name: "IKEVersion"))
     ModifyVpnTunnelOptionsSpecification.add_member(:startup_action, Shapes::ShapeRef.new(shape: String, location_name: "StartupAction"))
+    ModifyVpnTunnelOptionsSpecification.add_member(:log_options, Shapes::ShapeRef.new(shape: VpnTunnelLogOptionsSpecification, location_name: "LogOptions"))
     ModifyVpnTunnelOptionsSpecification.struct_class = Types::ModifyVpnTunnelOptionsSpecification
 
     MonitorInstancesRequest.add_member(:instance_ids, Shapes::ShapeRef.new(shape: InstanceIdStringList, required: true, location_name: "InstanceId"))
@@ -13004,6 +13020,7 @@ module Aws::EC2
     TunnelOption.add_member(:phase_2_dh_group_numbers, Shapes::ShapeRef.new(shape: Phase2DHGroupNumbersList, location_name: "phase2DHGroupNumberSet"))
     TunnelOption.add_member(:ike_versions, Shapes::ShapeRef.new(shape: IKEVersionsList, location_name: "ikeVersionSet"))
     TunnelOption.add_member(:startup_action, Shapes::ShapeRef.new(shape: String, location_name: "startupAction"))
+    TunnelOption.add_member(:log_options, Shapes::ShapeRef.new(shape: VpnTunnelLogOptions, location_name: "logOptions"))
     TunnelOption.struct_class = Types::TunnelOption
 
     TunnelOptionsList.member = Shapes::ShapeRef.new(shape: TunnelOption, location_name: "item")
@@ -13442,6 +13459,12 @@ module Aws::EC2
 
     VpnStaticRouteList.member = Shapes::ShapeRef.new(shape: VpnStaticRoute, location_name: "item")
 
+    VpnTunnelLogOptions.add_member(:cloud_watch_log_options, Shapes::ShapeRef.new(shape: CloudWatchLogOptions, location_name: "cloudWatchLogOptions"))
+    VpnTunnelLogOptions.struct_class = Types::VpnTunnelLogOptions
+
+    VpnTunnelLogOptionsSpecification.add_member(:cloud_watch_log_options, Shapes::ShapeRef.new(shape: CloudWatchLogOptionsSpecification, location_name: "CloudWatchLogOptions"))
+    VpnTunnelLogOptionsSpecification.struct_class = Types::VpnTunnelLogOptionsSpecification
+
     VpnTunnelOptionsSpecification.add_member(:tunnel_inside_cidr, Shapes::ShapeRef.new(shape: String, location_name: "TunnelInsideCidr"))
     VpnTunnelOptionsSpecification.add_member(:tunnel_inside_ipv_6_cidr, Shapes::ShapeRef.new(shape: String, location_name: "TunnelInsideIpv6Cidr"))
     VpnTunnelOptionsSpecification.add_member(:pre_shared_key, Shapes::ShapeRef.new(shape: String, location_name: "PreSharedKey"))
@@ -13460,6 +13483,7 @@ module Aws::EC2
     VpnTunnelOptionsSpecification.add_member(:phase_2_dh_group_numbers, Shapes::ShapeRef.new(shape: Phase2DHGroupNumbersRequestList, location_name: "Phase2DHGroupNumber"))
     VpnTunnelOptionsSpecification.add_member(:ike_versions, Shapes::ShapeRef.new(shape: IKEVersionsRequestList, location_name: "IKEVersion"))
     VpnTunnelOptionsSpecification.add_member(:startup_action, Shapes::ShapeRef.new(shape: String, location_name: "StartupAction"))
+    VpnTunnelOptionsSpecification.add_member(:log_options, Shapes::ShapeRef.new(shape: VpnTunnelLogOptionsSpecification, location_name: "LogOptions"))
     VpnTunnelOptionsSpecification.struct_class = Types::VpnTunnelOptionsSpecification
 
     VpnTunnelOptionsSpecificationsList.member = Shapes::ShapeRef.new(shape: VpnTunnelOptionsSpecification)

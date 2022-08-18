@@ -1342,6 +1342,7 @@ module Aws::NetworkManager
     #   resp.transit_gateway_peering.peering.tags[0].value #=> String
     #   resp.transit_gateway_peering.peering.created_at #=> Time
     #   resp.transit_gateway_peering.transit_gateway_arn #=> String
+    #   resp.transit_gateway_peering.transit_gateway_peering_attachment_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CreateTransitGatewayPeering AWS API Documentation
     #
@@ -3699,6 +3700,7 @@ module Aws::NetworkManager
     #   resp.transit_gateway_peering.peering.tags[0].value #=> String
     #   resp.transit_gateway_peering.peering.created_at #=> Time
     #   resp.transit_gateway_peering.transit_gateway_arn #=> String
+    #   resp.transit_gateway_peering.transit_gateway_peering_attachment_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetTransitGatewayPeering AWS API Documentation
     #
@@ -5121,7 +5123,7 @@ module Aws::NetworkManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-networkmanager'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

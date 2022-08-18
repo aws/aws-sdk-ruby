@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.67.0 (2022-08-18)
+------------------
+
+* Feature - Add support for managed Contributor Insights Rules
+
 1.66.0 (2022-08-09)
 ------------------
 

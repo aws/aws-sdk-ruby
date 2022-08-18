@@ -5832,6 +5832,74 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Options for sending VPN tunnel logs to CloudWatch.
+    #
+    # @!attribute [rw] log_enabled
+    #   Status of VPN tunnel logging feature. Default value is `False`.
+    #
+    #   Valid values: `True` \| `False`
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] log_group_arn
+    #   The Amazon Resource Name (ARN) of the CloudWatch log group to send
+    #   logs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_output_format
+    #   Configured log format. Default format is `json`.
+    #
+    #   Valid values: `json` \| `text`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CloudWatchLogOptions AWS API Documentation
+    #
+    class CloudWatchLogOptions < Struct.new(
+      :log_enabled,
+      :log_group_arn,
+      :log_output_format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Options for sending VPN tunnel logs to CloudWatch.
+    #
+    # @note When making an API call, you may pass CloudWatchLogOptionsSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         log_enabled: false,
+    #         log_group_arn: "CloudWatchLogGroupArn",
+    #         log_output_format: "String",
+    #       }
+    #
+    # @!attribute [rw] log_enabled
+    #   Enable or disable VPN tunnel logging feature. Default value is
+    #   `False`.
+    #
+    #   Valid values: `True` \| `False`
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] log_group_arn
+    #   The Amazon Resource Name (ARN) of the CloudWatch log group to send
+    #   logs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_output_format
+    #   Set log format. Default format is `json`.
+    #
+    #   Valid values: `json` \| `text`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CloudWatchLogOptionsSpecification AWS API Documentation
+    #
+    class CloudWatchLogOptionsSpecification < Struct.new(
+      :log_enabled,
+      :log_group_arn,
+      :log_output_format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes address usage for a customer-owned address pool.
     #
     # @!attribute [rw] allocation_id
@@ -14185,6 +14253,13 @@ module Aws::EC2
     #                 },
     #               ],
     #               startup_action: "String",
+    #               log_options: {
+    #                 cloud_watch_log_options: {
+    #                   log_enabled: false,
+    #                   log_group_arn: "CloudWatchLogGroupArn",
+    #                   log_output_format: "String",
+    #                 },
+    #               },
     #             },
     #           ],
     #           local_ipv_4_network_cidr: "String",
@@ -51841,6 +51916,13 @@ module Aws::EC2
     #             },
     #           ],
     #           startup_action: "String",
+    #           log_options: {
+    #             cloud_watch_log_options: {
+    #               log_enabled: false,
+    #               log_group_arn: "CloudWatchLogGroupArn",
+    #               log_output_format: "String",
+    #             },
+    #           },
     #         },
     #         dry_run: false,
     #       }
@@ -51939,6 +52021,13 @@ module Aws::EC2
     #           },
     #         ],
     #         startup_action: "String",
+    #         log_options: {
+    #           cloud_watch_log_options: {
+    #             log_enabled: false,
+    #             log_group_arn: "CloudWatchLogGroupArn",
+    #             log_output_format: "String",
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] tunnel_inside_cidr
@@ -52107,6 +52196,10 @@ module Aws::EC2
     #   Default: `add`
     #   @return [String]
     #
+    # @!attribute [rw] log_options
+    #   Options for logging VPN tunnel activity.
+    #   @return [Types::VpnTunnelLogOptionsSpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpnTunnelOptionsSpecification AWS API Documentation
     #
     class ModifyVpnTunnelOptionsSpecification < Struct.new(
@@ -52127,7 +52220,8 @@ module Aws::EC2
       :phase_1_dh_group_numbers,
       :phase_2_dh_group_numbers,
       :ike_versions,
-      :startup_action)
+      :startup_action,
+      :log_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -68563,6 +68657,10 @@ module Aws::EC2
     #   connection.
     #   @return [String]
     #
+    # @!attribute [rw] log_options
+    #   Options for logging VPN tunnel activity.
+    #   @return [Types::VpnTunnelLogOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TunnelOption AWS API Documentation
     #
     class TunnelOption < Struct.new(
@@ -68584,7 +68682,8 @@ module Aws::EC2
       :phase_1_dh_group_numbers,
       :phase_2_dh_group_numbers,
       :ike_versions,
-      :startup_action)
+      :startup_action,
+      :log_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -70521,6 +70620,13 @@ module Aws::EC2
     #               },
     #             ],
     #             startup_action: "String",
+    #             log_options: {
+    #               cloud_watch_log_options: {
+    #                 log_enabled: false,
+    #                 log_group_arn: "CloudWatchLogGroupArn",
+    #                 log_output_format: "String",
+    #               },
+    #             },
     #           },
     #         ],
     #         local_ipv_4_network_cidr: "String",
@@ -70685,6 +70791,45 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Options for logging VPN tunnel activity.
+    #
+    # @!attribute [rw] cloud_watch_log_options
+    #   Options for sending VPN tunnel logs to CloudWatch.
+    #   @return [Types::CloudWatchLogOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpnTunnelLogOptions AWS API Documentation
+    #
+    class VpnTunnelLogOptions < Struct.new(
+      :cloud_watch_log_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Options for logging VPN tunnel activity.
+    #
+    # @note When making an API call, you may pass VpnTunnelLogOptionsSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         cloud_watch_log_options: {
+    #           log_enabled: false,
+    #           log_group_arn: "CloudWatchLogGroupArn",
+    #           log_output_format: "String",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] cloud_watch_log_options
+    #   Options for sending VPN tunnel logs to CloudWatch.
+    #   @return [Types::CloudWatchLogOptionsSpecification]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpnTunnelLogOptionsSpecification AWS API Documentation
+    #
+    class VpnTunnelLogOptionsSpecification < Struct.new(
+      :cloud_watch_log_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The tunnel options for a single VPN tunnel.
     #
     # @note When making an API call, you may pass VpnTunnelOptionsSpecification
@@ -70737,6 +70882,13 @@ module Aws::EC2
     #           },
     #         ],
     #         startup_action: "String",
+    #         log_options: {
+    #           cloud_watch_log_options: {
+    #             log_enabled: false,
+    #             log_group_arn: "CloudWatchLogGroupArn",
+    #             log_output_format: "String",
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] tunnel_inside_cidr
@@ -70905,6 +71057,10 @@ module Aws::EC2
     #   Default: `add`
     #   @return [String]
     #
+    # @!attribute [rw] log_options
+    #   Options for logging VPN tunnel activity.
+    #   @return [Types::VpnTunnelLogOptionsSpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpnTunnelOptionsSpecification AWS API Documentation
     #
     class VpnTunnelOptionsSpecification < Struct.new(
@@ -70925,7 +71081,8 @@ module Aws::EC2
       :phase_1_dh_group_numbers,
       :phase_2_dh_group_numbers,
       :ike_versions,
-      :startup_action)
+      :startup_action,
+      :log_options)
       SENSITIVE = []
       include Aws::Structure
     end

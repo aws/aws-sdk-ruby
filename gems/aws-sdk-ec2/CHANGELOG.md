@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.328.0 (2022-08-18)
+------------------
+
+* Feature - This release adds support for VPN log options , a new feature allowing S2S VPN connections to send IKE activity logs to CloudWatch Logs
+
 1.327.0 (2022-08-10)
 ------------------
 

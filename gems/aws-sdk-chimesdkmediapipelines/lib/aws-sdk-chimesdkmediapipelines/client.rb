@@ -351,7 +351,7 @@ module Aws::ChimeSDKMediaPipelines
 
     # @!group API Operations
 
-    # Creates a media capture pipeline.
+    # Creates a media pipeline.
     #
     # @option params [required, String] :source_type
     #   Source type from which the media artifacts are captured. A Chime SDK
@@ -368,17 +368,19 @@ module Aws::ChimeSDKMediaPipelines
     #   The ARN of the sink type.
     #
     # @option params [String] :client_request_token
-    #   The token assigned to the client making the pipeline request.
+    #   The unique identifier for the client request. The token makes the API
+    #   request idempotent. Use a unique token for each media pipeline
+    #   request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     # @option params [Types::ChimeSdkMeetingConfiguration] :chime_sdk_meeting_configuration
-    #   The configuration for a specified media capture pipeline. `SourceType`
-    #   must be `ChimeSdkMeeting`.
+    #   The configuration for a specified media pipeline. `SourceType` must be
+    #   `ChimeSdkMeeting`.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   The list of tags.
+    #   The tag key-value pairs.
     #
     # @return [Types::CreateMediaCapturePipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -401,7 +403,7 @@ module Aws::ChimeSDKMediaPipelines
     #       },
     #       artifacts_configuration: {
     #         audio: { # required
-    #           mux_type: "AudioOnly", # required, accepts AudioOnly, AudioWithActiveSpeakerVideo
+    #           mux_type: "AudioOnly", # required, accepts AudioOnly, AudioWithActiveSpeakerVideo, AudioWithCompositedVideo
     #         },
     #         video: { # required
     #           state: "Enabled", # required, accepts Enabled, Disabled
@@ -410,6 +412,16 @@ module Aws::ChimeSDKMediaPipelines
     #         content: { # required
     #           state: "Enabled", # required, accepts Enabled, Disabled
     #           mux_type: "ContentOnly", # accepts ContentOnly
+    #         },
+    #         composited_video: {
+    #           layout: "GridView", # accepts GridView
+    #           resolution: "HD", # accepts HD, FHD
+    #           grid_view_configuration: { # required
+    #             content_share_layout: "PresenterOnly", # required, accepts PresenterOnly, Horizontal, Vertical
+    #             presenter_only_configuration: {
+    #               presenter_position: "TopLeft", # accepts TopLeft, TopRight, BottomLeft, BottomRight
+    #             },
+    #           },
     #         },
     #       },
     #     },
@@ -436,11 +448,15 @@ module Aws::ChimeSDKMediaPipelines
     #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.source_configuration.selected_video_streams.attendee_ids[0] #=> String
     #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.source_configuration.selected_video_streams.external_user_ids #=> Array
     #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.source_configuration.selected_video_streams.external_user_ids[0] #=> String
-    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.audio.mux_type #=> String, one of "AudioOnly", "AudioWithActiveSpeakerVideo"
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.audio.mux_type #=> String, one of "AudioOnly", "AudioWithActiveSpeakerVideo", "AudioWithCompositedVideo"
     #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.video.state #=> String, one of "Enabled", "Disabled"
     #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.video.mux_type #=> String, one of "VideoOnly"
     #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.content.state #=> String, one of "Enabled", "Disabled"
     #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.content.mux_type #=> String, one of "ContentOnly"
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.layout #=> String, one of "GridView"
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.resolution #=> String, one of "HD", "FHD"
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.content_share_layout #=> String, one of "PresenterOnly", "Horizontal", "Vertical"
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.presenter_only_configuration.presenter_position #=> String, one of "TopLeft", "TopRight", "BottomLeft", "BottomRight"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/CreateMediaCapturePipeline AWS API Documentation
     #
@@ -451,10 +467,220 @@ module Aws::ChimeSDKMediaPipelines
       req.send_request(options)
     end
 
-    # Deletes the media capture pipeline.
+    # Creates a media concatenation pipeline.
+    #
+    # @option params [required, Array<Types::ConcatenationSource>] :sources
+    #   An object that specifies the sources for the media concatenation
+    #   pipeline.
+    #
+    # @option params [required, Array<Types::ConcatenationSink>] :sinks
+    #   An object that specifies the data sinks for the media concatenation
+    #   pipeline.
+    #
+    # @option params [String] :client_request_token
+    #   The unique identifier for the client request. The token makes the API
+    #   request idempotent. Use a unique token for each media concatenation
+    #   pipeline request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags associated with the media concatenation pipeline.
+    #
+    # @return [Types::CreateMediaConcatenationPipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateMediaConcatenationPipelineResponse#media_concatenation_pipeline #media_concatenation_pipeline} => Types::MediaConcatenationPipeline
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_media_concatenation_pipeline({
+    #     sources: [ # required
+    #       {
+    #         type: "MediaCapturePipeline", # required, accepts MediaCapturePipeline
+    #         media_capture_pipeline_source_configuration: { # required
+    #           media_pipeline_arn: "Arn", # required
+    #           chime_sdk_meeting_configuration: { # required
+    #             artifacts_configuration: { # required
+    #               audio: { # required
+    #                 state: "Enabled", # required, accepts Enabled
+    #               },
+    #               video: { # required
+    #                 state: "Enabled", # required, accepts Enabled, Disabled
+    #               },
+    #               content: { # required
+    #                 state: "Enabled", # required, accepts Enabled, Disabled
+    #               },
+    #               data_channel: { # required
+    #                 state: "Enabled", # required, accepts Enabled, Disabled
+    #               },
+    #               transcription_messages: { # required
+    #                 state: "Enabled", # required, accepts Enabled, Disabled
+    #               },
+    #               meeting_events: { # required
+    #                 state: "Enabled", # required, accepts Enabled, Disabled
+    #               },
+    #               composited_video: { # required
+    #                 state: "Enabled", # required, accepts Enabled, Disabled
+    #               },
+    #             },
+    #           },
+    #         },
+    #       },
+    #     ],
+    #     sinks: [ # required
+    #       {
+    #         type: "S3Bucket", # required, accepts S3Bucket
+    #         s3_bucket_sink_configuration: { # required
+    #           destination: "Arn", # required
+    #         },
+    #       },
+    #     ],
+    #     client_request_token: "ClientRequestToken",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.media_concatenation_pipeline.media_pipeline_id #=> String
+    #   resp.media_concatenation_pipeline.media_pipeline_arn #=> String
+    #   resp.media_concatenation_pipeline.sources #=> Array
+    #   resp.media_concatenation_pipeline.sources[0].type #=> String, one of "MediaCapturePipeline"
+    #   resp.media_concatenation_pipeline.sources[0].media_capture_pipeline_source_configuration.media_pipeline_arn #=> String
+    #   resp.media_concatenation_pipeline.sources[0].media_capture_pipeline_source_configuration.chime_sdk_meeting_configuration.artifacts_configuration.audio.state #=> String, one of "Enabled"
+    #   resp.media_concatenation_pipeline.sources[0].media_capture_pipeline_source_configuration.chime_sdk_meeting_configuration.artifacts_configuration.video.state #=> String, one of "Enabled", "Disabled"
+    #   resp.media_concatenation_pipeline.sources[0].media_capture_pipeline_source_configuration.chime_sdk_meeting_configuration.artifacts_configuration.content.state #=> String, one of "Enabled", "Disabled"
+    #   resp.media_concatenation_pipeline.sources[0].media_capture_pipeline_source_configuration.chime_sdk_meeting_configuration.artifacts_configuration.data_channel.state #=> String, one of "Enabled", "Disabled"
+    #   resp.media_concatenation_pipeline.sources[0].media_capture_pipeline_source_configuration.chime_sdk_meeting_configuration.artifacts_configuration.transcription_messages.state #=> String, one of "Enabled", "Disabled"
+    #   resp.media_concatenation_pipeline.sources[0].media_capture_pipeline_source_configuration.chime_sdk_meeting_configuration.artifacts_configuration.meeting_events.state #=> String, one of "Enabled", "Disabled"
+    #   resp.media_concatenation_pipeline.sources[0].media_capture_pipeline_source_configuration.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.state #=> String, one of "Enabled", "Disabled"
+    #   resp.media_concatenation_pipeline.sinks #=> Array
+    #   resp.media_concatenation_pipeline.sinks[0].type #=> String, one of "S3Bucket"
+    #   resp.media_concatenation_pipeline.sinks[0].s3_bucket_sink_configuration.destination #=> String
+    #   resp.media_concatenation_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped"
+    #   resp.media_concatenation_pipeline.created_timestamp #=> Time
+    #   resp.media_concatenation_pipeline.updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/CreateMediaConcatenationPipeline AWS API Documentation
+    #
+    # @overload create_media_concatenation_pipeline(params = {})
+    # @param [Hash] params ({})
+    def create_media_concatenation_pipeline(params = {}, options = {})
+      req = build_request(:create_media_concatenation_pipeline, params)
+      req.send_request(options)
+    end
+
+    # Creates a streaming media pipeline in an Amazon Chime SDK meeting.
+    #
+    # @option params [required, Array<Types::LiveConnectorSourceConfiguration>] :sources
+    #   The media pipeline's data sources.
+    #
+    # @option params [required, Array<Types::LiveConnectorSinkConfiguration>] :sinks
+    #   The media pipeline's data sinks.
+    #
+    # @option params [String] :client_request_token
+    #   The token assigned to the client making the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags associated with the media pipeline.
+    #
+    # @return [Types::CreateMediaLiveConnectorPipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateMediaLiveConnectorPipelineResponse#media_live_connector_pipeline #media_live_connector_pipeline} => Types::MediaLiveConnectorPipeline
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_media_live_connector_pipeline({
+    #     sources: [ # required
+    #       {
+    #         source_type: "ChimeSdkMeeting", # required, accepts ChimeSdkMeeting
+    #         chime_sdk_meeting_live_connector_configuration: { # required
+    #           arn: "Arn", # required
+    #           mux_type: "AudioWithCompositedVideo", # required, accepts AudioWithCompositedVideo, AudioWithActiveSpeakerVideo
+    #           composited_video: {
+    #             layout: "GridView", # accepts GridView
+    #             resolution: "HD", # accepts HD, FHD
+    #             grid_view_configuration: { # required
+    #               content_share_layout: "PresenterOnly", # required, accepts PresenterOnly, Horizontal, Vertical
+    #               presenter_only_configuration: {
+    #                 presenter_position: "TopLeft", # accepts TopLeft, TopRight, BottomLeft, BottomRight
+    #               },
+    #             },
+    #           },
+    #           source_configuration: {
+    #             selected_video_streams: {
+    #               attendee_ids: ["GuidString"],
+    #               external_user_ids: ["ExternalUserIdType"],
+    #             },
+    #           },
+    #         },
+    #       },
+    #     ],
+    #     sinks: [ # required
+    #       {
+    #         sink_type: "RTMP", # required, accepts RTMP
+    #         rtmp_configuration: { # required
+    #           url: "SensitiveString", # required
+    #           audio_channels: "Stereo", # accepts Stereo, Mono
+    #           audio_sample_rate: "AudioSampleRateOption",
+    #         },
+    #       },
+    #     ],
+    #     client_request_token: "ClientRequestToken",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.media_live_connector_pipeline.sources #=> Array
+    #   resp.media_live_connector_pipeline.sources[0].source_type #=> String, one of "ChimeSdkMeeting"
+    #   resp.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.arn #=> String
+    #   resp.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.mux_type #=> String, one of "AudioWithCompositedVideo", "AudioWithActiveSpeakerVideo"
+    #   resp.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.layout #=> String, one of "GridView"
+    #   resp.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.resolution #=> String, one of "HD", "FHD"
+    #   resp.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.grid_view_configuration.content_share_layout #=> String, one of "PresenterOnly", "Horizontal", "Vertical"
+    #   resp.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.grid_view_configuration.presenter_only_configuration.presenter_position #=> String, one of "TopLeft", "TopRight", "BottomLeft", "BottomRight"
+    #   resp.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.source_configuration.selected_video_streams.attendee_ids #=> Array
+    #   resp.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.source_configuration.selected_video_streams.attendee_ids[0] #=> String
+    #   resp.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.source_configuration.selected_video_streams.external_user_ids #=> Array
+    #   resp.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.source_configuration.selected_video_streams.external_user_ids[0] #=> String
+    #   resp.media_live_connector_pipeline.sinks #=> Array
+    #   resp.media_live_connector_pipeline.sinks[0].sink_type #=> String, one of "RTMP"
+    #   resp.media_live_connector_pipeline.sinks[0].rtmp_configuration.url #=> String
+    #   resp.media_live_connector_pipeline.sinks[0].rtmp_configuration.audio_channels #=> String, one of "Stereo", "Mono"
+    #   resp.media_live_connector_pipeline.sinks[0].rtmp_configuration.audio_sample_rate #=> String
+    #   resp.media_live_connector_pipeline.media_pipeline_id #=> String
+    #   resp.media_live_connector_pipeline.media_pipeline_arn #=> String
+    #   resp.media_live_connector_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped"
+    #   resp.media_live_connector_pipeline.created_timestamp #=> Time
+    #   resp.media_live_connector_pipeline.updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/CreateMediaLiveConnectorPipeline AWS API Documentation
+    #
+    # @overload create_media_live_connector_pipeline(params = {})
+    # @param [Hash] params ({})
+    def create_media_live_connector_pipeline(params = {}, options = {})
+      req = build_request(:create_media_live_connector_pipeline, params)
+      req.send_request(options)
+    end
+
+    # Deletes the media pipeline.
     #
     # @option params [required, String] :media_pipeline_id
-    #   The ID of the media capture pipeline being deleted.
+    #   The ID of the media pipeline being deleted.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -473,7 +699,29 @@ module Aws::ChimeSDKMediaPipelines
       req.send_request(options)
     end
 
-    # Gets an existing media capture pipeline.
+    # Deletes the media pipeline.
+    #
+    # @option params [required, String] :media_pipeline_id
+    #   The ID of the media pipeline to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_media_pipeline({
+    #     media_pipeline_id: "GuidString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/DeleteMediaPipeline AWS API Documentation
+    #
+    # @overload delete_media_pipeline(params = {})
+    # @param [Hash] params ({})
+    def delete_media_pipeline(params = {}, options = {})
+      req = build_request(:delete_media_pipeline, params)
+      req.send_request(options)
+    end
+
+    # Gets an existing media pipeline.
     #
     # @option params [required, String] :media_pipeline_id
     #   The ID of the pipeline that you want to get.
@@ -503,11 +751,15 @@ module Aws::ChimeSDKMediaPipelines
     #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.source_configuration.selected_video_streams.attendee_ids[0] #=> String
     #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.source_configuration.selected_video_streams.external_user_ids #=> Array
     #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.source_configuration.selected_video_streams.external_user_ids[0] #=> String
-    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.audio.mux_type #=> String, one of "AudioOnly", "AudioWithActiveSpeakerVideo"
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.audio.mux_type #=> String, one of "AudioOnly", "AudioWithActiveSpeakerVideo", "AudioWithCompositedVideo"
     #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.video.state #=> String, one of "Enabled", "Disabled"
     #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.video.mux_type #=> String, one of "VideoOnly"
     #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.content.state #=> String, one of "Enabled", "Disabled"
     #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.content.mux_type #=> String, one of "ContentOnly"
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.layout #=> String, one of "GridView"
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.resolution #=> String, one of "HD", "FHD"
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.content_share_layout #=> String, one of "PresenterOnly", "Horizontal", "Vertical"
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.presenter_only_configuration.presenter_position #=> String, one of "TopLeft", "TopRight", "BottomLeft", "BottomRight"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/GetMediaCapturePipeline AWS API Documentation
     #
@@ -518,7 +770,96 @@ module Aws::ChimeSDKMediaPipelines
       req.send_request(options)
     end
 
-    # Returns a list of media capture pipelines.
+    # Gets an existing media pipeline.
+    #
+    # @option params [required, String] :media_pipeline_id
+    #   The ID of the pipeline that you want to get.
+    #
+    # @return [Types::GetMediaPipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMediaPipelineResponse#media_pipeline #media_pipeline} => Types::MediaPipeline
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_media_pipeline({
+    #     media_pipeline_id: "GuidString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.media_pipeline.media_capture_pipeline.media_pipeline_id #=> String
+    #   resp.media_pipeline.media_capture_pipeline.media_pipeline_arn #=> String
+    #   resp.media_pipeline.media_capture_pipeline.source_type #=> String, one of "ChimeSdkMeeting"
+    #   resp.media_pipeline.media_capture_pipeline.source_arn #=> String
+    #   resp.media_pipeline.media_capture_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped"
+    #   resp.media_pipeline.media_capture_pipeline.sink_type #=> String, one of "S3Bucket"
+    #   resp.media_pipeline.media_capture_pipeline.sink_arn #=> String
+    #   resp.media_pipeline.media_capture_pipeline.created_timestamp #=> Time
+    #   resp.media_pipeline.media_capture_pipeline.updated_timestamp #=> Time
+    #   resp.media_pipeline.media_capture_pipeline.chime_sdk_meeting_configuration.source_configuration.selected_video_streams.attendee_ids #=> Array
+    #   resp.media_pipeline.media_capture_pipeline.chime_sdk_meeting_configuration.source_configuration.selected_video_streams.attendee_ids[0] #=> String
+    #   resp.media_pipeline.media_capture_pipeline.chime_sdk_meeting_configuration.source_configuration.selected_video_streams.external_user_ids #=> Array
+    #   resp.media_pipeline.media_capture_pipeline.chime_sdk_meeting_configuration.source_configuration.selected_video_streams.external_user_ids[0] #=> String
+    #   resp.media_pipeline.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.audio.mux_type #=> String, one of "AudioOnly", "AudioWithActiveSpeakerVideo", "AudioWithCompositedVideo"
+    #   resp.media_pipeline.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.video.state #=> String, one of "Enabled", "Disabled"
+    #   resp.media_pipeline.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.video.mux_type #=> String, one of "VideoOnly"
+    #   resp.media_pipeline.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.content.state #=> String, one of "Enabled", "Disabled"
+    #   resp.media_pipeline.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.content.mux_type #=> String, one of "ContentOnly"
+    #   resp.media_pipeline.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.layout #=> String, one of "GridView"
+    #   resp.media_pipeline.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.resolution #=> String, one of "HD", "FHD"
+    #   resp.media_pipeline.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.content_share_layout #=> String, one of "PresenterOnly", "Horizontal", "Vertical"
+    #   resp.media_pipeline.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.presenter_only_configuration.presenter_position #=> String, one of "TopLeft", "TopRight", "BottomLeft", "BottomRight"
+    #   resp.media_pipeline.media_live_connector_pipeline.sources #=> Array
+    #   resp.media_pipeline.media_live_connector_pipeline.sources[0].source_type #=> String, one of "ChimeSdkMeeting"
+    #   resp.media_pipeline.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.arn #=> String
+    #   resp.media_pipeline.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.mux_type #=> String, one of "AudioWithCompositedVideo", "AudioWithActiveSpeakerVideo"
+    #   resp.media_pipeline.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.layout #=> String, one of "GridView"
+    #   resp.media_pipeline.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.resolution #=> String, one of "HD", "FHD"
+    #   resp.media_pipeline.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.grid_view_configuration.content_share_layout #=> String, one of "PresenterOnly", "Horizontal", "Vertical"
+    #   resp.media_pipeline.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.grid_view_configuration.presenter_only_configuration.presenter_position #=> String, one of "TopLeft", "TopRight", "BottomLeft", "BottomRight"
+    #   resp.media_pipeline.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.source_configuration.selected_video_streams.attendee_ids #=> Array
+    #   resp.media_pipeline.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.source_configuration.selected_video_streams.attendee_ids[0] #=> String
+    #   resp.media_pipeline.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.source_configuration.selected_video_streams.external_user_ids #=> Array
+    #   resp.media_pipeline.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.source_configuration.selected_video_streams.external_user_ids[0] #=> String
+    #   resp.media_pipeline.media_live_connector_pipeline.sinks #=> Array
+    #   resp.media_pipeline.media_live_connector_pipeline.sinks[0].sink_type #=> String, one of "RTMP"
+    #   resp.media_pipeline.media_live_connector_pipeline.sinks[0].rtmp_configuration.url #=> String
+    #   resp.media_pipeline.media_live_connector_pipeline.sinks[0].rtmp_configuration.audio_channels #=> String, one of "Stereo", "Mono"
+    #   resp.media_pipeline.media_live_connector_pipeline.sinks[0].rtmp_configuration.audio_sample_rate #=> String
+    #   resp.media_pipeline.media_live_connector_pipeline.media_pipeline_id #=> String
+    #   resp.media_pipeline.media_live_connector_pipeline.media_pipeline_arn #=> String
+    #   resp.media_pipeline.media_live_connector_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped"
+    #   resp.media_pipeline.media_live_connector_pipeline.created_timestamp #=> Time
+    #   resp.media_pipeline.media_live_connector_pipeline.updated_timestamp #=> Time
+    #   resp.media_pipeline.media_concatenation_pipeline.media_pipeline_id #=> String
+    #   resp.media_pipeline.media_concatenation_pipeline.media_pipeline_arn #=> String
+    #   resp.media_pipeline.media_concatenation_pipeline.sources #=> Array
+    #   resp.media_pipeline.media_concatenation_pipeline.sources[0].type #=> String, one of "MediaCapturePipeline"
+    #   resp.media_pipeline.media_concatenation_pipeline.sources[0].media_capture_pipeline_source_configuration.media_pipeline_arn #=> String
+    #   resp.media_pipeline.media_concatenation_pipeline.sources[0].media_capture_pipeline_source_configuration.chime_sdk_meeting_configuration.artifacts_configuration.audio.state #=> String, one of "Enabled"
+    #   resp.media_pipeline.media_concatenation_pipeline.sources[0].media_capture_pipeline_source_configuration.chime_sdk_meeting_configuration.artifacts_configuration.video.state #=> String, one of "Enabled", "Disabled"
+    #   resp.media_pipeline.media_concatenation_pipeline.sources[0].media_capture_pipeline_source_configuration.chime_sdk_meeting_configuration.artifacts_configuration.content.state #=> String, one of "Enabled", "Disabled"
+    #   resp.media_pipeline.media_concatenation_pipeline.sources[0].media_capture_pipeline_source_configuration.chime_sdk_meeting_configuration.artifacts_configuration.data_channel.state #=> String, one of "Enabled", "Disabled"
+    #   resp.media_pipeline.media_concatenation_pipeline.sources[0].media_capture_pipeline_source_configuration.chime_sdk_meeting_configuration.artifacts_configuration.transcription_messages.state #=> String, one of "Enabled", "Disabled"
+    #   resp.media_pipeline.media_concatenation_pipeline.sources[0].media_capture_pipeline_source_configuration.chime_sdk_meeting_configuration.artifacts_configuration.meeting_events.state #=> String, one of "Enabled", "Disabled"
+    #   resp.media_pipeline.media_concatenation_pipeline.sources[0].media_capture_pipeline_source_configuration.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.state #=> String, one of "Enabled", "Disabled"
+    #   resp.media_pipeline.media_concatenation_pipeline.sinks #=> Array
+    #   resp.media_pipeline.media_concatenation_pipeline.sinks[0].type #=> String, one of "S3Bucket"
+    #   resp.media_pipeline.media_concatenation_pipeline.sinks[0].s3_bucket_sink_configuration.destination #=> String
+    #   resp.media_pipeline.media_concatenation_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped"
+    #   resp.media_pipeline.media_concatenation_pipeline.created_timestamp #=> Time
+    #   resp.media_pipeline.media_concatenation_pipeline.updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/GetMediaPipeline AWS API Documentation
+    #
+    # @overload get_media_pipeline(params = {})
+    # @param [Hash] params ({})
+    def get_media_pipeline(params = {}, options = {})
+      req = build_request(:get_media_pipeline, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of media pipelines.
     #
     # @option params [String] :next_token
     #   The token used to retrieve the next page of results.
@@ -557,10 +898,50 @@ module Aws::ChimeSDKMediaPipelines
       req.send_request(options)
     end
 
-    # Lists the tags applied to an Amazon Chime SDK media capture pipeline.
+    # Returns a list of media pipelines.
+    #
+    # @option params [String] :next_token
+    #   The token used to retrieve the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. Valid Range:
+    #   1 - 99.
+    #
+    # @return [Types::ListMediaPipelinesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMediaPipelinesResponse#media_pipelines #media_pipelines} => Array&lt;Types::MediaPipelineSummary&gt;
+    #   * {Types::ListMediaPipelinesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_media_pipelines({
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.media_pipelines #=> Array
+    #   resp.media_pipelines[0].media_pipeline_id #=> String
+    #   resp.media_pipelines[0].media_pipeline_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/ListMediaPipelines AWS API Documentation
+    #
+    # @overload list_media_pipelines(params = {})
+    # @param [Hash] params ({})
+    def list_media_pipelines(params = {}, options = {})
+      req = build_request(:list_media_pipelines, params)
+      req.send_request(options)
+    end
+
+    # Lists the tags available for a media pipeline.
     #
     # @option params [required, String] :resource_arn
-    #   The resource ARN.
+    #   The ARN of the media pipeline associated with any tags. The ARN
+    #   consists of the pipeline's region, resource ID, and pipeline ID.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -587,14 +968,16 @@ module Aws::ChimeSDKMediaPipelines
       req.send_request(options)
     end
 
-    # Applies the specified tags to the specified Amazon Chime SDK media
-    # capture pipeline.
+    # The ARN of the media pipeline that you want to tag. Consists of he
+    # pipeline's endpoint region, resource ID, and pipeline ID.
     #
     # @option params [required, String] :resource_arn
-    #   The resource ARN.
+    #   The ARN of the media pipeline associated with any tags. The ARN
+    #   consists of the pipeline's endpoint region, resource ID, and pipeline
+    #   ID.
     #
     # @option params [required, Array<Types::Tag>] :tags
-    #   The tag key-value pairs.
+    #   The tags associated with the specified media pipeline.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -619,14 +1002,13 @@ module Aws::ChimeSDKMediaPipelines
       req.send_request(options)
     end
 
-    # Removes the specified tags from the specified Amazon Chime SDK media
-    # capture pipeline.
+    # Removes any tags from a media pipeline.
     #
     # @option params [required, String] :resource_arn
-    #   The resource ARN.
+    #   The ARN of the pipeline that you want to untag.
     #
     # @option params [required, Array<String>] :tag_keys
-    #   The tag keys.
+    #   The key/value pairs in the tag that you want to remove.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -659,7 +1041,7 @@ module Aws::ChimeSDKMediaPipelines
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chimesdkmediapipelines'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

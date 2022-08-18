@@ -37,6 +37,8 @@ module Aws::DynamoDB
   # * {GlobalTableAlreadyExistsException}
   # * {GlobalTableNotFoundException}
   # * {IdempotentParameterMismatchException}
+  # * {ImportConflictException}
+  # * {ImportNotFoundException}
   # * {IndexNotFoundException}
   # * {InternalServerError}
   # * {InvalidExportTimeException}
@@ -203,6 +205,36 @@ module Aws::DynamoDB
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::DynamoDB::Types::IdempotentParameterMismatchException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ImportConflictException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DynamoDB::Types::ImportConflictException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ImportNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DynamoDB::Types::ImportNotFoundException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

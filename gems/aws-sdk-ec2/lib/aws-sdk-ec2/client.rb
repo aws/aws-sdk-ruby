@@ -13330,6 +13330,13 @@ module Aws::EC2
     #             },
     #           ],
     #           startup_action: "String",
+    #           log_options: {
+    #             cloud_watch_log_options: {
+    #               log_enabled: false,
+    #               log_group_arn: "CloudWatchLogGroupArn",
+    #               log_output_format: "String",
+    #             },
+    #           },
     #         },
     #       ],
     #       local_ipv_4_network_cidr: "String",
@@ -13401,6 +13408,9 @@ module Aws::EC2
     #   resp.vpn_connection.options.tunnel_options[0].ike_versions #=> Array
     #   resp.vpn_connection.options.tunnel_options[0].ike_versions[0].value #=> String
     #   resp.vpn_connection.options.tunnel_options[0].startup_action #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].log_options.cloud_watch_log_options.log_enabled #=> Boolean
+    #   resp.vpn_connection.options.tunnel_options[0].log_options.cloud_watch_log_options.log_group_arn #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].log_options.cloud_watch_log_options.log_output_format #=> String
     #   resp.vpn_connection.routes #=> Array
     #   resp.vpn_connection.routes[0].destination_cidr_block #=> String
     #   resp.vpn_connection.routes[0].source #=> String, one of "Static"
@@ -32959,6 +32969,9 @@ module Aws::EC2
     #   resp.vpn_connections[0].options.tunnel_options[0].ike_versions #=> Array
     #   resp.vpn_connections[0].options.tunnel_options[0].ike_versions[0].value #=> String
     #   resp.vpn_connections[0].options.tunnel_options[0].startup_action #=> String
+    #   resp.vpn_connections[0].options.tunnel_options[0].log_options.cloud_watch_log_options.log_enabled #=> Boolean
+    #   resp.vpn_connections[0].options.tunnel_options[0].log_options.cloud_watch_log_options.log_group_arn #=> String
+    #   resp.vpn_connections[0].options.tunnel_options[0].log_options.cloud_watch_log_options.log_output_format #=> String
     #   resp.vpn_connections[0].routes #=> Array
     #   resp.vpn_connections[0].routes[0].destination_cidr_block #=> String
     #   resp.vpn_connections[0].routes[0].source #=> String, one of "Static"
@@ -43644,6 +43657,9 @@ module Aws::EC2
     #   resp.vpn_connection.options.tunnel_options[0].ike_versions #=> Array
     #   resp.vpn_connection.options.tunnel_options[0].ike_versions[0].value #=> String
     #   resp.vpn_connection.options.tunnel_options[0].startup_action #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].log_options.cloud_watch_log_options.log_enabled #=> Boolean
+    #   resp.vpn_connection.options.tunnel_options[0].log_options.cloud_watch_log_options.log_group_arn #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].log_options.cloud_watch_log_options.log_output_format #=> String
     #   resp.vpn_connection.routes #=> Array
     #   resp.vpn_connection.routes[0].destination_cidr_block #=> String
     #   resp.vpn_connection.routes[0].source #=> String, one of "Static"
@@ -43770,6 +43786,9 @@ module Aws::EC2
     #   resp.vpn_connection.options.tunnel_options[0].ike_versions #=> Array
     #   resp.vpn_connection.options.tunnel_options[0].ike_versions[0].value #=> String
     #   resp.vpn_connection.options.tunnel_options[0].startup_action #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].log_options.cloud_watch_log_options.log_enabled #=> Boolean
+    #   resp.vpn_connection.options.tunnel_options[0].log_options.cloud_watch_log_options.log_group_arn #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].log_options.cloud_watch_log_options.log_output_format #=> String
     #   resp.vpn_connection.routes #=> Array
     #   resp.vpn_connection.routes[0].destination_cidr_block #=> String
     #   resp.vpn_connection.routes[0].source #=> String, one of "Static"
@@ -43869,6 +43888,9 @@ module Aws::EC2
     #   resp.vpn_connection.options.tunnel_options[0].ike_versions #=> Array
     #   resp.vpn_connection.options.tunnel_options[0].ike_versions[0].value #=> String
     #   resp.vpn_connection.options.tunnel_options[0].startup_action #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].log_options.cloud_watch_log_options.log_enabled #=> Boolean
+    #   resp.vpn_connection.options.tunnel_options[0].log_options.cloud_watch_log_options.log_group_arn #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].log_options.cloud_watch_log_options.log_output_format #=> String
     #   resp.vpn_connection.routes #=> Array
     #   resp.vpn_connection.routes[0].destination_cidr_block #=> String
     #   resp.vpn_connection.routes[0].source #=> String, one of "Static"
@@ -43975,6 +43997,13 @@ module Aws::EC2
     #         },
     #       ],
     #       startup_action: "String",
+    #       log_options: {
+    #         cloud_watch_log_options: {
+    #           log_enabled: false,
+    #           log_group_arn: "CloudWatchLogGroupArn",
+    #           log_output_format: "String",
+    #         },
+    #       },
     #     },
     #     dry_run: false,
     #   })
@@ -44028,6 +44057,9 @@ module Aws::EC2
     #   resp.vpn_connection.options.tunnel_options[0].ike_versions #=> Array
     #   resp.vpn_connection.options.tunnel_options[0].ike_versions[0].value #=> String
     #   resp.vpn_connection.options.tunnel_options[0].startup_action #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].log_options.cloud_watch_log_options.log_enabled #=> Boolean
+    #   resp.vpn_connection.options.tunnel_options[0].log_options.cloud_watch_log_options.log_group_arn #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].log_options.cloud_watch_log_options.log_output_format #=> String
     #   resp.vpn_connection.routes #=> Array
     #   resp.vpn_connection.routes[0].destination_cidr_block #=> String
     #   resp.vpn_connection.routes[0].source #=> String, one of "Static"
@@ -50782,7 +50814,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.327.0'
+      context[:gem_version] = '1.328.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

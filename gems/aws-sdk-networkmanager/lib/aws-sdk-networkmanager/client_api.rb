@@ -353,6 +353,7 @@ module Aws::NetworkManager
     TransitGatewayConnectPeerAssociationList = Shapes::ListShape.new(name: 'TransitGatewayConnectPeerAssociationList')
     TransitGatewayConnectPeerAssociationState = Shapes::StringShape.new(name: 'TransitGatewayConnectPeerAssociationState')
     TransitGatewayPeering = Shapes::StructureShape.new(name: 'TransitGatewayPeering')
+    TransitGatewayPeeringAttachmentId = Shapes::StringShape.new(name: 'TransitGatewayPeeringAttachmentId')
     TransitGatewayRegistration = Shapes::StructureShape.new(name: 'TransitGatewayRegistration')
     TransitGatewayRegistrationList = Shapes::ListShape.new(name: 'TransitGatewayRegistrationList')
     TransitGatewayRegistrationState = Shapes::StringShape.new(name: 'TransitGatewayRegistrationState')
@@ -1571,6 +1572,7 @@ module Aws::NetworkManager
 
     TransitGatewayPeering.add_member(:peering, Shapes::ShapeRef.new(shape: Peering, location_name: "Peering"))
     TransitGatewayPeering.add_member(:transit_gateway_arn, Shapes::ShapeRef.new(shape: TransitGatewayArn, location_name: "TransitGatewayArn"))
+    TransitGatewayPeering.add_member(:transit_gateway_peering_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayPeeringAttachmentId, location_name: "TransitGatewayPeeringAttachmentId"))
     TransitGatewayPeering.struct_class = Types::TransitGatewayPeering
 
     TransitGatewayRegistration.add_member(:global_network_id, Shapes::ShapeRef.new(shape: GlobalNetworkId, location_name: "GlobalNetworkId"))
