@@ -48,6 +48,6 @@ require_relative 'aws-sdk-lookoutmetrics/customizations'
 # @!group service
 module Aws::LookoutMetrics
 
-  GEM_VERSION = '1.20.0'
+  GEM_VERSION = '1.21.0'
 
 end

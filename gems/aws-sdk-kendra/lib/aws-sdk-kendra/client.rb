@@ -932,8 +932,8 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Creates a data source that you want to use with an Amazon Kendra
-    # index.
+    # Creates a data source connector that you want to use with an Amazon
+    # Kendra index.
     #
     # You specify a name, data source connector type and description for
     # your data source. You also specify configuration information for the
@@ -1000,8 +1000,8 @@ module Aws::Kendra
     #
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of a role with permission to access the
-    #   data source connector. For more information, see [IAM Roles for Amazon
-    #   Kendra][1].
+    #   data source and required resources. For more information, see [IAM
+    #   roles for Amazon Kendra][1].
     #
     #   You can't specify the `RoleArn` parameter when the `Type` parameter
     #   is set to `CUSTOM`. If you do, you receive a `ValidationException`
@@ -1321,6 +1321,7 @@ module Aws::Kendra
     #           port: 1, # required
     #           credentials: "SecretArn",
     #         },
+    #         authentication_type: "HTTP_BASIC", # accepts HTTP_BASIC, PAT
     #       },
     #       google_drive_configuration: {
     #         secret_arn: "SecretArn", # required
@@ -2329,9 +2330,9 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Deletes an Amazon Kendra data source. An exception is not thrown if
-    # the data source is already being deleted. While the data source is
-    # being deleted, the `Status` field returned by a call to the
+    # Deletes an Amazon Kendra data source connector. An exception is not
+    # thrown if the data source is already being deleted. While the data
+    # source is being deleted, the `Status` field returned by a call to the
     # `DescribeDataSource` API is set to `DELETING`. For more information,
     # see [Deleting Data Sources][1].
     #
@@ -2340,10 +2341,10 @@ module Aws::Kendra
     # [1]: https://docs.aws.amazon.com/kendra/latest/dg/delete-data-source.html
     #
     # @option params [required, String] :id
-    #   The identifier of the data source you want to delete.
+    #   The identifier of the data source connector you want to delete.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index used with the data source.
+    #   The identifier of the index used with the data source connector.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2633,13 +2634,13 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Gets information about an Amazon Kendra data source.
+    # Gets information about an Amazon Kendra data source connector.
     #
     # @option params [required, String] :id
-    #   The identifier of the data source.
+    #   The identifier of the data source connector.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index used with the data source.
+    #   The identifier of the index used with the data source connector.
     #
     # @return [Types::DescribeDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2851,6 +2852,7 @@ module Aws::Kendra
     #   resp.configuration.confluence_configuration.proxy_configuration.host #=> String
     #   resp.configuration.confluence_configuration.proxy_configuration.port #=> Integer
     #   resp.configuration.confluence_configuration.proxy_configuration.credentials #=> String
+    #   resp.configuration.confluence_configuration.authentication_type #=> String, one of "HTTP_BASIC", "PAT"
     #   resp.configuration.google_drive_configuration.secret_arn #=> String
     #   resp.configuration.google_drive_configuration.inclusion_patterns #=> Array
     #   resp.configuration.google_drive_configuration.inclusion_patterns[0] #=> String
@@ -3906,13 +3908,13 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Gets statistics about synchronizing Amazon Kendra with a data source.
+    # Gets statistics about synchronizing a data source connector.
     #
     # @option params [required, String] :id
-    #   The identifier of the data source.
+    #   The identifier of the data source connector.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index used with the data source.
+    #   The identifier of the index used with the data source connector.
     #
     # @option params [String] :next_token
     #   If the previous response was incomplete (because there is more data to
@@ -3929,8 +3931,8 @@ module Aws::Kendra
     #   limited to jobs between the specified dates.
     #
     # @option params [String] :status_filter
-    #   When specified, only returns synchronization jobs with the `Status`
-    #   field equal to the specified status.
+    #   Only returns synchronization jobs with the `Status` field equal to the
+    #   specified status.
     #
     # @return [Types::ListDataSourceSyncJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3979,19 +3981,20 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Lists the data sources that you have created.
+    # Lists the data source connectors that you have created.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index used with one or more data sources.
+    #   The identifier of the index used with one or more data source
+    #   connectors.
     #
     # @option params [String] :next_token
     #   If the previous response was incomplete (because there is more data to
     #   retrieve), Amazon Kendra returns a pagination token in the response.
     #   You can use this pagination token to retrieve the next set of data
-    #   sources (`DataSourceSummaryItems`).
+    #   source connectors (`DataSourceSummaryItems`).
     #
     # @option params [Integer] :max_results
-    #   The maximum number of data sources to return.
+    #   The maximum number of data source connectors to return.
     #
     # @return [Types::ListDataSourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4935,15 +4938,15 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Starts a synchronization job for a data source. If a synchronization
-    # job is already in progress, Amazon Kendra returns a
+    # Starts a synchronization job for a data source connector. If a
+    # synchronization job is already in progress, Amazon Kendra returns a
     # `ResourceInUseException` exception.
     #
     # @option params [required, String] :id
-    #   The identifier of the data source to synchronize.
+    #   The identifier of the data source connector to synchronize.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index that contains the data source.
+    #   The identifier of the index used with the data source connector.
     #
     # @return [Types::StartDataSourceSyncJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4973,11 +4976,11 @@ module Aws::Kendra
     # a scheduled synchronization job.
     #
     # @option params [required, String] :id
-    #   The identifier of the data source for which to stop the
+    #   The identifier of the data source connector for which to stop the
     #   synchronization jobs.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index that contains the data source.
+    #   The identifier of the index used with the data source connector.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5207,10 +5210,10 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Updates an existing Amazon Kendra data source.
+    # Updates an existing Amazon Kendra data source connector.
     #
     # @option params [required, String] :id
-    #   The identifier of the data source you want to update.
+    #   The identifier of the data source connector you want to update.
     #
     # @option params [String] :name
     #   A new name for the data source connector.
@@ -5239,8 +5242,8 @@ module Aws::Kendra
     #
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of a role with permission to access the
-    #   data source. For more information, see [IAM Roles for Amazon
-    #   Kendra][1].
+    #   data source and required resources. For more information, see [IAM
+    #   roles for Amazon Kendra][1].
     #
     #
     #
@@ -5539,6 +5542,7 @@ module Aws::Kendra
     #           port: 1, # required
     #           credentials: "SecretArn",
     #         },
+    #         authentication_type: "HTTP_BASIC", # accepts HTTP_BASIC, PAT
     #       },
     #       google_drive_configuration: {
     #         secret_arn: "SecretArn", # required
@@ -6383,7 +6387,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

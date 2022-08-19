@@ -272,6 +272,27 @@ module Aws::LookoutMetrics
       include Aws::Structure
     end
 
+    # Aggregated details about the data quality metrics collected for the
+    # `AnomalyDetectorArn` provided in the GetDataQualityMetrics object.
+    #
+    # @!attribute [rw] start_timestamp
+    #   The start time for the data quality metrics collection.
+    #   @return [Time]
+    #
+    # @!attribute [rw] metric_set_data_quality_metric_list
+    #   An array of `DataQualityMetricList` objects. Each object in the
+    #   array contains information about a data quality metric.
+    #   @return [Array<Types::MetricSetDataQualityMetric>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/AnomalyDetectorDataQualityMetric AWS API Documentation
+    #
+    class AnomalyDetectorDataQualityMetric < Struct.new(
+      :start_timestamp,
+      :metric_set_data_quality_metric_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about an an anomaly detector.
     #
     # @!attribute [rw] anomaly_detector_arn
@@ -1035,8 +1056,8 @@ module Aws::LookoutMetrics
     #
     # @!attribute [rw] offset
     #   After an interval ends, the amount of seconds that the detector
-    #   waits before importing data. Offset is only supported for S3 and
-    #   Redshift datasources.
+    #   waits before importing data. Offset is only supported for S3,
+    #   Redshift, Athena and datasources.
     #   @return [Integer]
     #
     # @!attribute [rw] timestamp_column
@@ -1148,6 +1169,37 @@ module Aws::LookoutMetrics
       :delimiter,
       :header_list,
       :quote_symbol)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An array that describes a data quality metric. Each
+    # `DataQualityMetric` object contains the data quality metric name, its
+    # value, a description of the metric, and the affected column.
+    #
+    # @!attribute [rw] metric_type
+    #   The name of the data quality metric.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_description
+    #   A description of the data quality metric.
+    #   @return [String]
+    #
+    # @!attribute [rw] related_column_name
+    #   The column that is being monitored.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_value
+    #   The value of the data quality metric.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/DataQualityMetric AWS API Documentation
+    #
+    class DataQualityMetric < Struct.new(
+      :metric_type,
+      :metric_description,
+      :related_column_name,
+      :metric_value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1427,8 +1479,9 @@ module Aws::LookoutMetrics
     #   @return [Time]
     #
     # @!attribute [rw] offset
-    #   The offset in seconds. Only supported for S3 and Redshift
-    #   datasources.
+    #   After an interval ends, the amount of seconds that the detector
+    #   waits before importing data. Offset is only supported for S3,
+    #   Redshift, Athena and datasources.
     #   @return [Integer]
     #
     # @!attribute [rw] metric_list
@@ -1852,6 +1905,46 @@ module Aws::LookoutMetrics
     #
     class GetAnomalyGroupResponse < Struct.new(
       :anomaly_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetDataQualityMetricsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         anomaly_detector_arn: "Arn", # required
+    #         metric_set_arn: "Arn",
+    #       }
+    #
+    # @!attribute [rw] anomaly_detector_arn
+    #   The Amazon Resource Name (ARN) of the anomaly detector that you want
+    #   to investigate.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_set_arn
+    #   The Amazon Resource Name (ARN) of a specific data quality metric
+    #   set.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/GetDataQualityMetricsRequest AWS API Documentation
+    #
+    class GetDataQualityMetricsRequest < Struct.new(
+      :anomaly_detector_arn,
+      :metric_set_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] anomaly_detector_data_quality_metric_list
+    #   A list of the data quality metrics for the `AnomalyDetectorArn` that
+    #   you requested.
+    #   @return [Array<Types::AnomalyDetectorDataQualityMetric>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/GetDataQualityMetricsResponse AWS API Documentation
+    #
+    class GetDataQualityMetricsResponse < Struct.new(
+      :anomaly_detector_data_quality_metric_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2525,6 +2618,27 @@ module Aws::LookoutMetrics
       :metric_name,
       :num_time_series,
       :contribution_matrix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An array of `DataQualityMetric` objects that describes one or more
+    # data quality metrics.
+    #
+    # @!attribute [rw] metric_set_arn
+    #   The Amazon Resource Name (ARN) of the data quality metric array.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_quality_metric_list
+    #   The array of data quality metrics contained in the data quality
+    #   metric set.
+    #   @return [Array<Types::DataQualityMetric>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/MetricSetDataQualityMetric AWS API Documentation
+    #
+    class MetricSetDataQualityMetric < Struct.new(
+      :metric_set_arn,
+      :data_quality_metric_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3445,8 +3559,8 @@ module Aws::LookoutMetrics
     #
     # @!attribute [rw] offset
     #   After an interval ends, the amount of seconds that the detector
-    #   waits before importing data. Offset is only supported for S3 and
-    #   Redshift datasources.
+    #   waits before importing data. Offset is only supported for S3,
+    #   Redshift, Athena and datasources.
     #   @return [Integer]
     #
     # @!attribute [rw] timestamp_column

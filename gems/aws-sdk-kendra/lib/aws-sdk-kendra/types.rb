@@ -203,7 +203,16 @@ module Aws::Kendra
     #
     # @!attribute [rw] ssl_certificate_s3_path
     #   The path to the SSL certificate stored in an Amazon S3 bucket. You
-    #   use this to connect to Alfresco.
+    #   use this to connect to Alfresco if you require a secure SSL
+    #   connection.
+    #
+    #   You can simply generate a self-signed X509 certificate on any
+    #   computer using OpenSSL. For an example of using OpenSSL to create an
+    #   X509 certificate, see [Create and sign an X509 certificate][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/configuring-https-ssl.html
     #   @return [Types::S3Path]
     #
     # @!attribute [rw] crawl_system_folders
@@ -1880,6 +1889,7 @@ module Aws::Kendra
     #           port: 1, # required
     #           credentials: "SecretArn",
     #         },
+    #         authentication_type: "HTTP_BASIC", # accepts HTTP_BASIC, PAT
     #       }
     #
     # @!attribute [rw] server_url
@@ -1891,13 +1901,18 @@ module Aws::Kendra
     # @!attribute [rw] secret_arn
     #   The Amazon Resource Name (ARN) of an Secrets Manager secret that
     #   contains the user name and password required to connect to the
-    #   Confluence instance. If you use Confluence cloud, you use a
+    #   Confluence instance. If you use Confluence Cloud, you use a
     #   generated API token as the password. For more information, see
     #   [Using a Confluence data source][1].
+    #
+    #   You can also provide authentication credentials in the form of a
+    #   personal access token. For more information, see [Authentication for
+    #   a Confluence data source][2].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-confluence.html
+    #   [2]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-confluence.html#confluence-authentication
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -1973,6 +1988,12 @@ module Aws::Kendra
     #   for any security and load requirements.
     #   @return [Types::ProxyConfiguration]
     #
+    # @!attribute [rw] authentication_type
+    #   Whether you want to connect to Confluence using basic authentication
+    #   of user name and password, or a personal access token. You can use a
+    #   personal access token for Confluence Server.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ConfluenceConfiguration AWS API Documentation
     #
     class ConfluenceConfiguration < Struct.new(
@@ -1986,7 +2007,8 @@ module Aws::Kendra
       :vpc_configuration,
       :inclusion_patterns,
       :exclusion_patterns,
-      :proxy_configuration)
+      :proxy_configuration,
+      :authentication_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2689,6 +2711,7 @@ module Aws::Kendra
     #               port: 1, # required
     #               credentials: "SecretArn",
     #             },
+    #             authentication_type: "HTTP_BASIC", # accepts HTTP_BASIC, PAT
     #           },
     #           google_drive_configuration: {
     #             secret_arn: "SecretArn", # required
@@ -3181,8 +3204,8 @@ module Aws::Kendra
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of a role with permission to access
-    #   the data source connector. For more information, see [IAM Roles for
-    #   Amazon Kendra][1].
+    #   the data source and required resources. For more information, see
+    #   [IAM roles for Amazon Kendra][1].
     #
     #   You can't specify the `RoleArn` parameter when the `Type` parameter
     #   is set to `CUSTOM`. If you do, you receive a `ValidationException`
@@ -4205,6 +4228,7 @@ module Aws::Kendra
     #             port: 1, # required
     #             credentials: "SecretArn",
     #           },
+    #           authentication_type: "HTTP_BASIC", # accepts HTTP_BASIC, PAT
     #         },
     #         google_drive_configuration: {
     #           secret_arn: "SecretArn", # required
@@ -5092,11 +5116,11 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] id
-    #   The identifier of the data source you want to delete.
+    #   The identifier of the data source connector you want to delete.
     #   @return [String]
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index used with the data source.
+    #   The identifier of the index used with the data source connector.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DeleteDataSourceRequest AWS API Documentation
@@ -5369,11 +5393,11 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] id
-    #   The identifier of the data source.
+    #   The identifier of the data source connector.
     #   @return [String]
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index used with the data source.
+    #   The identifier of the index used with the data source connector.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeDataSourceRequest AWS API Documentation
@@ -5386,25 +5410,25 @@ module Aws::Kendra
     end
 
     # @!attribute [rw] id
-    #   The identifier of the data source.
+    #   The identifier of the data source connector.
     #   @return [String]
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index that contains the data source.
+    #   The identifier of the index used with the data source connector.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name for the data source.
+    #   The name for the data source connector.
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of the data source.
+    #   The type of the data source. For example, `SHAREPOINT`.
     #   @return [String]
     #
     # @!attribute [rw] configuration
-    #   Configuration details for the data source. This shows how the data
-    #   source is configured. The configuration options for a data source
-    #   depend on the data source provider.
+    #   Configuration details for the data source connector. This shows how
+    #   the data source is configured. The configuration options for a data
+    #   source depend on the data source provider.
     #   @return [Types::DataSourceConfiguration]
     #
     # @!attribute [rw] vpc_configuration
@@ -5418,22 +5442,23 @@ module Aws::Kendra
     #   @return [Types::DataSourceVpcConfiguration]
     #
     # @!attribute [rw] created_at
-    #   The Unix timestamp of when the data source was created.
+    #   The Unix timestamp of when the data source connector was created.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
-    #   The Unix timestamp of when the data source was last updated.
+    #   The Unix timestamp of when the data source connector was last
+    #   updated.
     #   @return [Time]
     #
     # @!attribute [rw] description
-    #   The description for the data source.
+    #   The description for the data source connector.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The current status of the data source. When the status is `ACTIVE`
-    #   the data source is ready to use. When the status is `FAILED`, the
-    #   `ErrorMessage` field contains the reason that the data source
-    #   failed.
+    #   The current status of the data source connector. When the status is
+    #   `ACTIVE` the data source is ready to use. When the status is
+    #   `FAILED`, the `ErrorMessage` field contains the reason that the data
+    #   source failed.
     #   @return [String]
     #
     # @!attribute [rw] schedule
@@ -5441,8 +5466,8 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the role that enables the data
-    #   source to access its resources.
+    #   The Amazon Resource Name (ARN) of the role with permission to access
+    #   the data source and required resources.
     #   @return [String]
     #
     # @!attribute [rw] error_message
@@ -8892,11 +8917,11 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] id
-    #   The identifier of the data source.
+    #   The identifier of the data source connector.
     #   @return [String]
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index used with the data source.
+    #   The identifier of the index used with the data source connector.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -8918,8 +8943,8 @@ module Aws::Kendra
     #   @return [Types::TimeRange]
     #
     # @!attribute [rw] status_filter
-    #   When specified, only returns synchronization jobs with the `Status`
-    #   field equal to the specified status.
+    #   Only returns synchronization jobs with the `Status` field equal to
+    #   the specified status.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListDataSourceSyncJobsRequest AWS API Documentation
@@ -8936,7 +8961,7 @@ module Aws::Kendra
     end
 
     # @!attribute [rw] history
-    #   A history of synchronization jobs for the data source.
+    #   A history of synchronization jobs for the data source connector.
     #   @return [Array<Types::DataSourceSyncJob>]
     #
     # @!attribute [rw] next_token
@@ -8964,18 +8989,19 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index used with one or more data sources.
+    #   The identifier of the index used with one or more data source
+    #   connectors.
     #   @return [String]
     #
     # @!attribute [rw] next_token
     #   If the previous response was incomplete (because there is more data
     #   to retrieve), Amazon Kendra returns a pagination token in the
     #   response. You can use this pagination token to retrieve the next set
-    #   of data sources (`DataSourceSummaryItems`).
+    #   of data source connectors (`DataSourceSummaryItems`).
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of data sources to return.
+    #   The maximum number of data source connectors to return.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListDataSourcesRequest AWS API Documentation
@@ -8989,13 +9015,14 @@ module Aws::Kendra
     end
 
     # @!attribute [rw] summary_items
-    #   An array of summary information for one or more data sources.
+    #   An array of summary information for one or more data source
+    #   connector.
     #   @return [Array<Types::DataSourceSummary>]
     #
     # @!attribute [rw] next_token
     #   If the response is truncated, Amazon Kendra returns this token that
     #   you can use in the subsequent request to retrieve the next set of
-    #   data sources.
+    #   data source connectors.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListDataSourcesResponse AWS API Documentation
@@ -9584,7 +9611,16 @@ module Aws::Kendra
     #
     # @!attribute [rw] ssl_certificate_s3_path
     #   The path to the SSL certificate stored in an Amazon S3 bucket. You
-    #   use this to connect to GitHub.
+    #   use this to connect to GitHub if you require a secure SSL
+    #   connection.
+    #
+    #   You can simply generate a self-signed X509 certificate on any
+    #   computer using OpenSSL. For an example of using OpenSSL to create an
+    #   X509 certificate, see [Create and sign an X509 certificate][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/configuring-https-ssl.html
     #   @return [Types::S3Path]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/OnPremiseConfiguration AWS API Documentation
@@ -10454,7 +10490,9 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] domain
-    #   The Quip site domain.
+    #   The Quip site domain. For example,
+    #   *https://quip-company.quipdomain.com/browse*. The domain in this
+    #   example is "quipdomain".
     #   @return [String]
     #
     # @!attribute [rw] secret_arn
@@ -10487,8 +10525,10 @@ module Aws::Kendra
     #
     # @!attribute [rw] folder_ids
     #   The identifiers of the Quip folders you want to index. You can find
-    #   in your browser URL when you access your folder in Quip. For
-    #   example, *https://quip-company.com/zlLuOVNSarTL/folder-name*.
+    #   the folder ID in your browser URL when you access your folder in
+    #   Quip. For example,
+    #   *https://quip-company.quipdomain.com/zlLuOVNSarTL/folder-name*. The
+    #   folder ID in this example is "zlLuOVNSarTL".
     #   @return [Array<String>]
     #
     # @!attribute [rw] thread_field_mappings
@@ -11866,7 +11906,7 @@ module Aws::Kendra
     #
     # @!attribute [rw] urls
     #   The Microsoft SharePoint site URLs for the documents you want to
-    #   indext.
+    #   index.
     #   @return [Array<String>]
     #
     # @!attribute [rw] secret_arn
@@ -11953,7 +11993,16 @@ module Aws::Kendra
     #
     # @!attribute [rw] ssl_certificate_s3_path
     #   The path to the SSL certificate stored in an Amazon S3 bucket. You
-    #   use this to connect to SharePoint.
+    #   use this to connect to SharePoint Server if you require a secure SSL
+    #   connection.
+    #
+    #   You can simply generate a self-signed X509 certificate on any
+    #   computer using OpenSSL. For an example of using OpenSSL to create an
+    #   X509 certificate, see [Create and sign an X509 certificate][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/configuring-https-ssl.html
     #   @return [Types::S3Path]
     #
     # @!attribute [rw] authentication_type
@@ -12368,11 +12417,11 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] id
-    #   The identifier of the data source to synchronize.
+    #   The identifier of the data source connector to synchronize.
     #   @return [String]
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index that contains the data source.
+    #   The identifier of the index used with the data source connector.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/StartDataSourceSyncJobRequest AWS API Documentation
@@ -12440,12 +12489,12 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] id
-    #   The identifier of the data source for which to stop the
+    #   The identifier of the data source connector for which to stop the
     #   synchronization jobs.
     #   @return [String]
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index that contains the data source.
+    #   The identifier of the index used with the data source connector.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/StopDataSourceSyncJobRequest AWS API Documentation
@@ -13179,6 +13228,7 @@ module Aws::Kendra
     #               port: 1, # required
     #               credentials: "SecretArn",
     #             },
+    #             authentication_type: "HTTP_BASIC", # accepts HTTP_BASIC, PAT
     #           },
     #           google_drive_configuration: {
     #             secret_arn: "SecretArn", # required
@@ -13614,7 +13664,7 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] id
-    #   The identifier of the data source you want to update.
+    #   The identifier of the data source connector you want to update.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -13650,8 +13700,8 @@ module Aws::Kendra
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of a role with permission to access
-    #   the data source. For more information, see [IAM Roles for Amazon
-    #   Kendra][1].
+    #   the data source and required resources. For more information, see
+    #   [IAM roles for Amazon Kendra][1].
     #
     #
     #

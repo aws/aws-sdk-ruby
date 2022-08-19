@@ -489,6 +489,8 @@ module Aws::Connect
     S3Config = Shapes::StructureShape.new(name: 'S3Config')
     SearchAvailablePhoneNumbersRequest = Shapes::StructureShape.new(name: 'SearchAvailablePhoneNumbersRequest')
     SearchAvailablePhoneNumbersResponse = Shapes::StructureShape.new(name: 'SearchAvailablePhoneNumbersResponse')
+    SearchSecurityProfilesRequest = Shapes::StructureShape.new(name: 'SearchSecurityProfilesRequest')
+    SearchSecurityProfilesResponse = Shapes::StructureShape.new(name: 'SearchSecurityProfilesResponse')
     SearchUsersRequest = Shapes::StructureShape.new(name: 'SearchUsersRequest')
     SearchUsersResponse = Shapes::StructureShape.new(name: 'SearchUsersResponse')
     SearchVocabulariesRequest = Shapes::StructureShape.new(name: 'SearchVocabulariesRequest')
@@ -501,8 +503,13 @@ module Aws::Connect
     SecurityProfileIds = Shapes::ListShape.new(name: 'SecurityProfileIds')
     SecurityProfileName = Shapes::StringShape.new(name: 'SecurityProfileName')
     SecurityProfilePermission = Shapes::StringShape.new(name: 'SecurityProfilePermission')
+    SecurityProfileSearchConditionList = Shapes::ListShape.new(name: 'SecurityProfileSearchConditionList')
+    SecurityProfileSearchCriteria = Shapes::StructureShape.new(name: 'SecurityProfileSearchCriteria')
+    SecurityProfileSearchSummary = Shapes::StructureShape.new(name: 'SecurityProfileSearchSummary')
     SecurityProfileSummary = Shapes::StructureShape.new(name: 'SecurityProfileSummary')
     SecurityProfileSummaryList = Shapes::ListShape.new(name: 'SecurityProfileSummaryList')
+    SecurityProfilesSearchFilter = Shapes::StructureShape.new(name: 'SecurityProfilesSearchFilter')
+    SecurityProfilesSearchSummaryList = Shapes::ListShape.new(name: 'SecurityProfilesSearchSummaryList')
     SecurityToken = Shapes::StringShape.new(name: 'SecurityToken')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SingleSelectOptions = Shapes::ListShape.new(name: 'SingleSelectOptions')
@@ -2176,6 +2183,18 @@ module Aws::Connect
     SearchAvailablePhoneNumbersResponse.add_member(:available_numbers_list, Shapes::ShapeRef.new(shape: AvailableNumbersList, location_name: "AvailableNumbersList"))
     SearchAvailablePhoneNumbersResponse.struct_class = Types::SearchAvailablePhoneNumbersResponse
 
+    SearchSecurityProfilesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    SearchSecurityProfilesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
+    SearchSecurityProfilesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location_name: "MaxResults", metadata: {"box"=>true}))
+    SearchSecurityProfilesRequest.add_member(:search_criteria, Shapes::ShapeRef.new(shape: SecurityProfileSearchCriteria, location_name: "SearchCriteria"))
+    SearchSecurityProfilesRequest.add_member(:search_filter, Shapes::ShapeRef.new(shape: SecurityProfilesSearchFilter, location_name: "SearchFilter"))
+    SearchSecurityProfilesRequest.struct_class = Types::SearchSecurityProfilesRequest
+
+    SearchSecurityProfilesResponse.add_member(:security_profiles, Shapes::ShapeRef.new(shape: SecurityProfilesSearchSummaryList, location_name: "SecurityProfiles"))
+    SearchSecurityProfilesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
+    SearchSecurityProfilesResponse.add_member(:approximate_total_count, Shapes::ShapeRef.new(shape: ApproximateTotalCount, location_name: "ApproximateTotalCount"))
+    SearchSecurityProfilesResponse.struct_class = Types::SearchSecurityProfilesResponse
+
     SearchUsersRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
     SearchUsersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
     SearchUsersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location_name: "MaxResults", metadata: {"box"=>true}))
@@ -2217,12 +2236,32 @@ module Aws::Connect
 
     SecurityProfileIds.member = Shapes::ShapeRef.new(shape: SecurityProfileId)
 
+    SecurityProfileSearchConditionList.member = Shapes::ShapeRef.new(shape: SecurityProfileSearchCriteria)
+
+    SecurityProfileSearchCriteria.add_member(:or_conditions, Shapes::ShapeRef.new(shape: SecurityProfileSearchConditionList, location_name: "OrConditions"))
+    SecurityProfileSearchCriteria.add_member(:and_conditions, Shapes::ShapeRef.new(shape: SecurityProfileSearchConditionList, location_name: "AndConditions"))
+    SecurityProfileSearchCriteria.add_member(:string_condition, Shapes::ShapeRef.new(shape: StringCondition, location_name: "StringCondition"))
+    SecurityProfileSearchCriteria.struct_class = Types::SecurityProfileSearchCriteria
+
+    SecurityProfileSearchSummary.add_member(:id, Shapes::ShapeRef.new(shape: SecurityProfileId, location_name: "Id"))
+    SecurityProfileSearchSummary.add_member(:organization_resource_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "OrganizationResourceId"))
+    SecurityProfileSearchSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
+    SecurityProfileSearchSummary.add_member(:security_profile_name, Shapes::ShapeRef.new(shape: SecurityProfileName, location_name: "SecurityProfileName"))
+    SecurityProfileSearchSummary.add_member(:description, Shapes::ShapeRef.new(shape: SecurityProfileDescription, location_name: "Description"))
+    SecurityProfileSearchSummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    SecurityProfileSearchSummary.struct_class = Types::SecurityProfileSearchSummary
+
     SecurityProfileSummary.add_member(:id, Shapes::ShapeRef.new(shape: SecurityProfileId, location_name: "Id"))
     SecurityProfileSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
     SecurityProfileSummary.add_member(:name, Shapes::ShapeRef.new(shape: SecurityProfileName, location_name: "Name"))
     SecurityProfileSummary.struct_class = Types::SecurityProfileSummary
 
     SecurityProfileSummaryList.member = Shapes::ShapeRef.new(shape: SecurityProfileSummary)
+
+    SecurityProfilesSearchFilter.add_member(:tag_filter, Shapes::ShapeRef.new(shape: ControlPlaneTagFilter, location_name: "TagFilter"))
+    SecurityProfilesSearchFilter.struct_class = Types::SecurityProfilesSearchFilter
+
+    SecurityProfilesSearchSummaryList.member = Shapes::ShapeRef.new(shape: SecurityProfileSearchSummary)
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
@@ -4339,6 +4378,25 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:search_security_profiles, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SearchSecurityProfiles"
+        o.http_method = "POST"
+        o.http_request_uri = "/search-security-profiles"
+        o.input = Shapes::ShapeRef.new(shape: SearchSecurityProfilesRequest)
+        o.output = Shapes::ShapeRef.new(shape: SearchSecurityProfilesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

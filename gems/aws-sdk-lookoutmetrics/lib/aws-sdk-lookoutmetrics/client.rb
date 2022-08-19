@@ -540,8 +540,8 @@ module Aws::LookoutMetrics
     #
     # @option params [Integer] :offset
     #   After an interval ends, the amount of seconds that the detector waits
-    #   before importing data. Offset is only supported for S3 and Redshift
-    #   datasources.
+    #   before importing data. Offset is only supported for S3, Redshift,
+    #   Athena and datasources.
     #
     # @option params [Types::TimestampColumn] :timestamp_column
     #   Contains information about the column used for tracking time in your
@@ -1113,6 +1113,47 @@ module Aws::LookoutMetrics
     # @param [Hash] params ({})
     def get_anomaly_group(params = {}, options = {})
       req = build_request(:get_anomaly_group, params)
+      req.send_request(options)
+    end
+
+    # Returns details about the requested data quality metrics.
+    #
+    # @option params [required, String] :anomaly_detector_arn
+    #   The Amazon Resource Name (ARN) of the anomaly detector that you want
+    #   to investigate.
+    #
+    # @option params [String] :metric_set_arn
+    #   The Amazon Resource Name (ARN) of a specific data quality metric set.
+    #
+    # @return [Types::GetDataQualityMetricsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDataQualityMetricsResponse#anomaly_detector_data_quality_metric_list #anomaly_detector_data_quality_metric_list} => Array&lt;Types::AnomalyDetectorDataQualityMetric&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_data_quality_metrics({
+    #     anomaly_detector_arn: "Arn", # required
+    #     metric_set_arn: "Arn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.anomaly_detector_data_quality_metric_list #=> Array
+    #   resp.anomaly_detector_data_quality_metric_list[0].start_timestamp #=> Time
+    #   resp.anomaly_detector_data_quality_metric_list[0].metric_set_data_quality_metric_list #=> Array
+    #   resp.anomaly_detector_data_quality_metric_list[0].metric_set_data_quality_metric_list[0].metric_set_arn #=> String
+    #   resp.anomaly_detector_data_quality_metric_list[0].metric_set_data_quality_metric_list[0].data_quality_metric_list #=> Array
+    #   resp.anomaly_detector_data_quality_metric_list[0].metric_set_data_quality_metric_list[0].data_quality_metric_list[0].metric_type #=> String, one of "COLUMN_COMPLETENESS", "DIMENSION_UNIQUENESS", "TIME_SERIES_COUNT", "ROWS_PROCESSED", "ROWS_PARTIAL_COMPLIANCE", "INVALID_ROWS_COMPLIANCE", "BACKTEST_TRAINING_DATA_START_TIME_STAMP", "BACKTEST_TRAINING_DATA_END_TIME_STAMP", "BACKTEST_INFERENCE_DATA_START_TIME_STAMP", "BACKTEST_INFERENCE_DATA_END_TIME_STAMP"
+    #   resp.anomaly_detector_data_quality_metric_list[0].metric_set_data_quality_metric_list[0].data_quality_metric_list[0].metric_description #=> String
+    #   resp.anomaly_detector_data_quality_metric_list[0].metric_set_data_quality_metric_list[0].data_quality_metric_list[0].related_column_name #=> String
+    #   resp.anomaly_detector_data_quality_metric_list[0].metric_set_data_quality_metric_list[0].data_quality_metric_list[0].metric_value #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/GetDataQualityMetrics AWS API Documentation
+    #
+    # @overload get_data_quality_metrics(params = {})
+    # @param [Hash] params ({})
+    def get_data_quality_metrics(params = {}, options = {})
+      req = build_request(:get_data_quality_metrics, params)
       req.send_request(options)
     end
 
@@ -1800,8 +1841,8 @@ module Aws::LookoutMetrics
     #
     # @option params [Integer] :offset
     #   After an interval ends, the amount of seconds that the detector waits
-    #   before importing data. Offset is only supported for S3 and Redshift
-    #   datasources.
+    #   before importing data. Offset is only supported for S3, Redshift,
+    #   Athena and datasources.
     #
     # @option params [Types::TimestampColumn] :timestamp_column
     #   The timestamp column.
@@ -1934,7 +1975,7 @@ module Aws::LookoutMetrics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lookoutmetrics'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

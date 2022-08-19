@@ -127,7 +127,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource.
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AgentStatus AWS API Documentation
@@ -473,7 +474,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] contact_flow_id
-    #   The identifier of the contact flow.
+    #   The identifier of the flow.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociatePhoneNumberContactFlowRequest AWS API Documentation
@@ -747,7 +748,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource.
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] client_token
@@ -822,7 +824,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource.
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] phone_number_status
@@ -964,24 +967,23 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # Contains information about a contact flow.
+    # Contains information about a flow.
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the contact flow.
+    #   The Amazon Resource Name (ARN) of the flow.
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The identifier of the contact flow.
+    #   The identifier of the flow.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the contact flow.
+    #   The name of the flow.
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of the contact flow. For descriptions of the available
-    #   types, see [Choose a Contact Flow Type][1] in the *Amazon Connect
-    #   Administrator Guide*.
+    #   The type of the flow. For descriptions of the available types, see
+    #   [Choose a flow type][1] in the *Amazon Connect Administrator Guide*.
     #
     #
     #
@@ -989,19 +991,21 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The type of contact flow.
+    #   The type of flow.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the contact flow.
+    #   The description of the flow.
     #   @return [String]
     #
     # @!attribute [rw] content
-    #   The content of the contact flow.
+    #   The content of the flow.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactFlow AWS API Documentation
@@ -1019,39 +1023,40 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # Contains information about a contact flow module.
+    # Contains information about a flow module.
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN).
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The identifier of the contact flow module.
+    #   The identifier of the flow module.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the contact flow module.
+    #   The name of the flow module.
     #   @return [String]
     #
     # @!attribute [rw] content
-    #   The content of the contact flow module.
+    #   The content of the flow module.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the contact flow module.
+    #   The description of the flow module.
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The type of contact flow module.
+    #   The type of flow module.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the contact flow module.
+    #   The status of the flow module.
     #   @return [String]
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource.
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactFlowModule AWS API Documentation
@@ -1069,22 +1074,22 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # Contains summary information about a contact flow.
+    # Contains summary information about a flow.
     #
     # @!attribute [rw] id
-    #   The identifier of the contact flow module.
+    #   The identifier of the flow module.
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the contact flow module.
+    #   The Amazon Resource Name (ARN) of the flow module.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the contact flow module.
+    #   The name of the flow module.
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The type of contact flow module.
+    #   The type of flow module.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactFlowModuleSummary AWS API Documentation
@@ -1098,7 +1103,7 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # The contact flow has not been published.
+    # The flow has not been published.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1111,33 +1116,33 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # Contains summary information about a contact flow.
+    # Contains summary information about a flow.
     #
-    # You can also create and update contact flows using the [Amazon Connect
-    # Flow language][1].
+    # You can also create and update flows using the [Amazon Connect Flow
+    # language][1].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html
     #
     # @!attribute [rw] id
-    #   The identifier of the contact flow.
+    #   The identifier of the flow.
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the contact flow.
+    #   The Amazon Resource Name (ARN) of the flow.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the contact flow.
+    #   The name of the flow.
     #   @return [String]
     #
     # @!attribute [rw] contact_flow_type
-    #   The type of contact flow.
+    #   The type of flow.
     #   @return [String]
     #
     # @!attribute [rw] contact_flow_state
-    #   The type of contact flow.
+    #   The type of flow.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactFlowSummary AWS API Documentation
@@ -1261,7 +1266,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource.
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateAgentStatusRequest AWS API Documentation
@@ -1314,20 +1320,21 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the contact flow module.
+    #   The name of the flow module.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the contact flow module.
+    #   The description of the flow module.
     #   @return [String]
     #
     # @!attribute [rw] content
-    #   The content of the contact flow module.
+    #   The content of the flow module.
     #   @return [String]
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource.
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] client_token
@@ -1352,11 +1359,11 @@ module Aws::Connect
     end
 
     # @!attribute [rw] id
-    #   The identifier of the contact flow module.
+    #   The identifier of the flow module.
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the contact flow module.
+    #   The Amazon Resource Name (ARN) of the flow module.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateContactFlowModuleResponse AWS API Documentation
@@ -1387,13 +1394,12 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the contact flow.
+    #   The name of the flow.
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of the contact flow. For descriptions of the available
-    #   types, see [Choose a Contact Flow Type][1] in the *Amazon Connect
-    #   Administrator Guide*.
+    #   The type of the flow. For descriptions of the available types, see
+    #   [Choose a flow type][1] in the *Amazon Connect Administrator Guide*.
     #
     #
     #
@@ -1401,15 +1407,17 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the contact flow.
+    #   The description of the flow.
     #   @return [String]
     #
     # @!attribute [rw] content
-    #   The content of the contact flow.
+    #   The content of the flow.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateContactFlowRequest AWS API Documentation
@@ -1426,11 +1434,11 @@ module Aws::Connect
     end
 
     # @!attribute [rw] contact_flow_id
-    #   The identifier of the contact flow.
+    #   The identifier of the flow.
     #   @return [String]
     #
     # @!attribute [rw] contact_flow_arn
-    #   The Amazon Resource Name (ARN) of the contact flow.
+    #   The Amazon Resource Name (ARN) of the flow.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateContactFlowResponse AWS API Documentation
@@ -1492,7 +1500,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource.
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateHoursOfOperationRequest AWS API Documentation
@@ -1617,6 +1626,11 @@ module Aws::Connect
     #
     # @!attribute [rw] integration_arn
     #   The Amazon Resource Name (ARN) of the integration.
+    #
+    #   <note markdown="1"> When integrating with Amazon Pinpoint, the Amazon Connect and Amazon
+    #   Pinpoint instances must be in the same account.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] source_application_url
@@ -1636,7 +1650,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource.
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateIntegrationAssociationRequest AWS API Documentation
@@ -1722,7 +1737,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource.
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateQueueRequest AWS API Documentation
@@ -1802,7 +1818,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource.
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateQuickConnectRequest AWS API Documentation
@@ -1893,7 +1910,9 @@ module Aws::Connect
     #   @return [Array<Types::MediaConcurrency>]
     #
     # @!attribute [rw] tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateRoutingProfileRequest AWS API Documentation
@@ -1959,7 +1978,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource.
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateSecurityProfileRequest AWS API Documentation
@@ -2154,7 +2174,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource.
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateUseCaseRequest AWS API Documentation
@@ -2214,7 +2235,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource.
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateUserHierarchyGroupRequest AWS API Documentation
@@ -2326,7 +2348,9 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateUserRequest AWS API Documentation
@@ -2421,7 +2445,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource.
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateVocabularyRequest AWS API Documentation
@@ -2632,7 +2657,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] contact_flow_module_id
-    #   The identifier of the contact flow module.
+    #   The identifier of the flow module.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteContactFlowModuleRequest AWS API Documentation
@@ -2662,7 +2687,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] contact_flow_id
-    #   The identifier of the contact flow.
+    #   The identifier of the flow.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteContactFlowRequest AWS API Documentation
@@ -3012,7 +3037,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] contact_flow_module_id
-    #   The identifier of the contact flow module.
+    #   The identifier of the flow module.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeContactFlowModuleRequest AWS API Documentation
@@ -3025,7 +3050,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] contact_flow_module
-    #   Information about the contact flow module.
+    #   Information about the flow module.
     #   @return [Types::ContactFlowModule]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeContactFlowModuleResponse AWS API Documentation
@@ -3049,7 +3074,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] contact_flow_id
-    #   The identifier of the contact flow.
+    #   The identifier of the flow.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeContactFlowRequest AWS API Documentation
@@ -3062,7 +3087,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] contact_flow
-    #   Information about the contact flow.
+    #   Information about the flow.
     #   @return [Types::ContactFlow]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeContactFlowResponse AWS API Documentation
@@ -4734,7 +4759,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource.
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetTaskTemplateResponse AWS API Documentation
@@ -4781,7 +4807,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource.
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HierarchyGroup AWS API Documentation
@@ -5185,7 +5212,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource.
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HoursOfOperation AWS API Documentation
@@ -5569,10 +5597,10 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # The contact flow is not valid.
+    # The flow is not valid.
     #
     # @!attribute [rw] problems
-    #   The problems with the contact flow. Please fix before trying again.
+    #   The problems with the flow. Please fix before trying again.
     #   @return [Array<Types::ProblemDetail>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/InvalidContactFlowException AWS API Documentation
@@ -6006,7 +6034,7 @@ module Aws::Connect
     #   @return [Integer]
     #
     # @!attribute [rw] contact_flow_module_state
-    #   The state of the contact flow module.
+    #   The state of the flow module.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListContactFlowModulesRequest AWS API Documentation
@@ -6021,7 +6049,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] contact_flow_modules_summary_list
-    #   Information about the contact flow module.
+    #   Information about the flow module.
     #   @return [Array<Types::ContactFlowModuleSummary>]
     #
     # @!attribute [rw] next_token
@@ -6054,7 +6082,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] contact_flow_types
-    #   The type of contact flow.
+    #   The type of flow.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -6064,7 +6092,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return per page.
+    #   The maximum number of results to return per page. The default
+    #   MaxResult size is 100.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListContactFlowsRequest AWS API Documentation
@@ -6079,7 +6108,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] contact_flow_summary_list
-    #   Information about the contact flows.
+    #   Information about the flows.
     #   @return [Array<Types::ContactFlowSummary>]
     #
     # @!attribute [rw] next_token
@@ -6140,7 +6169,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] reference_summary_list
-    #   Information about the contact flows.
+    #   Information about the flows.
     #   @return [Array<Types::ReferenceSummary>]
     #
     # @!attribute [rw] next_token
@@ -6244,7 +6273,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return per page.
+    #   The maximum number of results to return per page. The default
+    #   MaxResult size is 100.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListHoursOfOperationsRequest AWS API Documentation
@@ -6625,7 +6655,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return per page.
+    #   The maximum number of results to return per page. The default
+    #   MaxResult size is 100.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListPhoneNumbersRequest AWS API Documentation
@@ -6794,7 +6825,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return per page.
+    #   The maximum number of results to return per page. The default
+    #   MaxResult size is 100.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListPromptsRequest AWS API Documentation
@@ -6851,7 +6883,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return per page.
+    #   The maximum number of results to return per page. The default
+    #   MaxResult size is 100.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListQueueQuickConnectsRequest AWS API Documentation
@@ -6909,7 +6942,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return per page.
+    #   The maximum number of results to return per page. The default
+    #   MaxResult size is 100.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListQueuesRequest AWS API Documentation
@@ -6963,7 +6997,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return per page.
+    #   The maximum number of results to return per page. The default
+    #   MaxResult size is 100.
     #   @return [Integer]
     #
     # @!attribute [rw] quick_connect_types
@@ -7028,7 +7063,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return per page.
+    #   The maximum number of results to return per page. The default
+    #   MaxResult size is 100.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListRoutingProfileQueuesRequest AWS API Documentation
@@ -7081,7 +7117,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return per page.
+    #   The maximum number of results to return per page. The default
+    #   MaxResult size is 100.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListRoutingProfilesRequest AWS API Documentation
@@ -7243,7 +7280,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return per page.
+    #   The maximum number of results to return per page. The default
+    #   MaxResult size is 100.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListSecurityProfilesRequest AWS API Documentation
@@ -7462,7 +7500,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return per page.
+    #   The maximum number of results to return per page. The default
+    #   MaxResult size is 100.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListUserHierarchyGroupsRequest AWS API Documentation
@@ -7514,7 +7553,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return per page.
+    #   The maximum number of results to return per page. The default
+    #   MaxResult size is 100.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListUsersRequest AWS API Documentation
@@ -7782,6 +7822,8 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # The property is not valid.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -7894,7 +7936,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource.
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Queue AWS API Documentation
@@ -7932,8 +7975,8 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # Contains information about a queue for a quick connect. The contact
-    # flow must be of type Transfer to Queue.
+    # Contains information about a queue for a quick connect. The flow must
+    # be of type Transfer to Queue.
     #
     # @note When making an API call, you may pass QueueQuickConnectConfig
     #   data as a hash:
@@ -7948,7 +7991,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] contact_flow_id
-    #   The identifier of the contact flow.
+    #   The identifier of the flow.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/QueueQuickConnectConfig AWS API Documentation
@@ -8033,7 +8076,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource.
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/QuickConnect AWS API Documentation
@@ -8420,7 +8464,9 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RoutingProfile AWS API Documentation
@@ -8717,6 +8763,113 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass SearchSecurityProfilesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         next_token: "NextToken2500",
+    #         max_results: 1,
+    #         search_criteria: {
+    #           or_conditions: [
+    #             {
+    #               # recursive SecurityProfileSearchCriteria
+    #             },
+    #           ],
+    #           and_conditions: [
+    #             {
+    #               # recursive SecurityProfileSearchCriteria
+    #             },
+    #           ],
+    #           string_condition: {
+    #             field_name: "String",
+    #             value: "String",
+    #             comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
+    #           },
+    #         },
+    #         search_filter: {
+    #           tag_filter: {
+    #             or_conditions: [
+    #               [
+    #                 {
+    #                   tag_key: "String",
+    #                   tag_value: "String",
+    #                 },
+    #               ],
+    #             ],
+    #             and_conditions: [
+    #               {
+    #                 tag_key: "String",
+    #                 tag_value: "String",
+    #               },
+    #             ],
+    #             tag_condition: {
+    #               tag_key: "String",
+    #               tag_value: "String",
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] search_criteria
+    #   The search criteria to be used to return security profiles.
+    #   @return [Types::SecurityProfileSearchCriteria]
+    #
+    # @!attribute [rw] search_filter
+    #   Filters to be applied to search results.
+    #   @return [Types::SecurityProfilesSearchFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchSecurityProfilesRequest AWS API Documentation
+    #
+    class SearchSecurityProfilesRequest < Struct.new(
+      :instance_id,
+      :next_token,
+      :max_results,
+      :search_criteria,
+      :search_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] security_profiles
+    #   Information about the security profiles.
+    #   @return [Array<Types::SecurityProfileSearchSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] approximate_total_count
+    #   The total number of security profiles which matched your search
+    #   query.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchSecurityProfilesResponse AWS API Documentation
+    #
+    class SearchSecurityProfilesResponse < Struct.new(
+      :security_profiles,
+      :next_token,
+      :approximate_total_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass SearchUsersRequest
     #   data as a hash:
     #
@@ -8952,12 +9105,122 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource.
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SecurityProfile AWS API Documentation
     #
     class SecurityProfile < Struct.new(
+      :id,
+      :organization_resource_id,
+      :arn,
+      :security_profile_name,
+      :description,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The search criteria to be used to return security profiles.
+    #
+    # @note When making an API call, you may pass SecurityProfileSearchCriteria
+    #   data as a hash:
+    #
+    #       {
+    #         or_conditions: [
+    #           {
+    #             or_conditions: {
+    #               # recursive SecurityProfileSearchConditionList
+    #             },
+    #             and_conditions: {
+    #               # recursive SecurityProfileSearchConditionList
+    #             },
+    #             string_condition: {
+    #               field_name: "String",
+    #               value: "String",
+    #               comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
+    #             },
+    #           },
+    #         ],
+    #         and_conditions: [
+    #           {
+    #             or_conditions: {
+    #               # recursive SecurityProfileSearchConditionList
+    #             },
+    #             and_conditions: {
+    #               # recursive SecurityProfileSearchConditionList
+    #             },
+    #             string_condition: {
+    #               field_name: "String",
+    #               value: "String",
+    #               comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
+    #             },
+    #           },
+    #         ],
+    #         string_condition: {
+    #           field_name: "String",
+    #           value: "String",
+    #           comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
+    #         },
+    #       }
+    #
+    # @!attribute [rw] or_conditions
+    #   A list of conditions which would be applied together with an OR
+    #   condition.
+    #   @return [Array<Types::SecurityProfileSearchCriteria>]
+    #
+    # @!attribute [rw] and_conditions
+    #   A list of conditions which would be applied together with an AND
+    #   condition.
+    #   @return [Array<Types::SecurityProfileSearchCriteria>]
+    #
+    # @!attribute [rw] string_condition
+    #   A leaf node condition which can be used to specify a string
+    #   condition, for example, `username = 'abc'`.
+    #   @return [Types::StringCondition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SecurityProfileSearchCriteria AWS API Documentation
+    #
+    class SecurityProfileSearchCriteria < Struct.new(
+      :or_conditions,
+      :and_conditions,
+      :string_condition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the returned security profiles.
+    #
+    # @!attribute [rw] id
+    #   The identifier of the security profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_resource_id
+    #   The organization resource identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the security profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_profile_name
+    #   The name of the security profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the security profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SecurityProfileSearchSummary AWS API Documentation
+    #
+    class SecurityProfileSearchSummary < Struct.new(
       :id,
       :organization_resource_id,
       :arn,
@@ -8988,6 +9251,54 @@ module Aws::Connect
       :id,
       :arn,
       :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters to be applied to search results.
+    #
+    # @note When making an API call, you may pass SecurityProfilesSearchFilter
+    #   data as a hash:
+    #
+    #       {
+    #         tag_filter: {
+    #           or_conditions: [
+    #             [
+    #               {
+    #                 tag_key: "String",
+    #                 tag_value: "String",
+    #               },
+    #             ],
+    #           ],
+    #           and_conditions: [
+    #             {
+    #               tag_key: "String",
+    #               tag_value: "String",
+    #             },
+    #           ],
+    #           tag_condition: {
+    #             tag_key: "String",
+    #             tag_value: "String",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] tag_filter
+    #   An object that can be used to specify Tag conditions inside the
+    #   `SearchFilter`. This accepts an `OR` of `AND` (List of List) input
+    #   where:
+    #
+    #   * Top level list specifies conditions that need to be applied with
+    #     `OR` operator
+    #
+    #   * Inner list specifies conditions that need to be applied with `AND`
+    #     operator.
+    #   @return [Types::ControlPlaneTagFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SecurityProfilesSearchFilter AWS API Documentation
+    #
+    class SecurityProfilesSearchFilter < Struct.new(
+      :tag_filter)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9032,20 +9343,20 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] contact_flow_id
-    #   The identifier of the contact flow for initiating the chat. To see
-    #   the ContactFlowId in the Amazon Connect console user interface, on
-    #   the navigation menu go to **Routing**, **Contact Flows**. Choose the
-    #   contact flow. On the contact flow page, under the name of the
-    #   contact flow, choose **Show additional flow information**. The
-    #   ContactFlowId is the last part of the ARN, shown here in bold:
+    #   The identifier of the flow for initiating the chat. To see the
+    #   ContactFlowId in the Amazon Connect console user interface, on the
+    #   navigation menu go to **Routing**, **Contact Flows**. Choose the
+    #   flow. On the flow page, under the name of the flow, choose **Show
+    #   additional flow information**. The ContactFlowId is the last part of
+    #   the ARN, shown here in bold:
     #
     #   arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/**846ec553-a005-41c0-8341-xxxxxxxxxxxx**
     #   @return [String]
     #
     # @!attribute [rw] attributes
     #   A custom key-value pair using an attribute map. The attributes are
-    #   standard Amazon Connect attributes. They can be accessed in contact
-    #   flows just like any other contact attributes.
+    #   standard Amazon Connect attributes. They can be accessed in flows
+    #   just like any other contact attributes.
     #
     #   There can be up to 32,768 UTF-8 bytes across all key-value pairs per
     #   contact. Attribute keys can include only alphanumeric, dash, and
@@ -9253,12 +9564,12 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] contact_flow_id
-    #   The identifier of the contact flow for the outbound call. To see the
+    #   The identifier of the flow for the outbound call. To see the
     #   ContactFlowId in the Amazon Connect console user interface, on the
     #   navigation menu go to **Routing**, **Contact Flows**. Choose the
-    #   contact flow. On the contact flow page, under the name of the
-    #   contact flow, choose **Show additional flow information**. The
-    #   ContactFlowId is the last part of the ARN, shown here in bold:
+    #   flow. On the flow page, under the name of the flow, choose **Show
+    #   additional flow information**. The ContactFlowId is the last part of
+    #   the ARN, shown here in bold:
     #
     #   arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/**846ec553-a005-41c0-8341-xxxxxxxxxxxx**
     #   @return [String]
@@ -9287,15 +9598,14 @@ module Aws::Connect
     # @!attribute [rw] queue_id
     #   The queue for the call. If you specify a queue, the phone displayed
     #   for caller ID is the phone number specified in the queue. If you do
-    #   not specify a queue, the queue defined in the contact flow is used.
-    #   If you do not specify a queue, you must specify a source phone
-    #   number.
+    #   not specify a queue, the queue defined in the flow is used. If you
+    #   do not specify a queue, you must specify a source phone number.
     #   @return [String]
     #
     # @!attribute [rw] attributes
     #   A custom key-value pair using an attribute map. The attributes are
-    #   standard Amazon Connect attributes, and can be accessed in contact
-    #   flows just like any other contact attributes.
+    #   standard Amazon Connect attributes, and can be accessed in flows
+    #   just like any other contact attributes.
     #
     #   There can be up to 32,768 UTF-8 bytes across all key-value pairs per
     #   contact. Attribute keys can include only alphanumeric, dash, and
@@ -9381,20 +9691,20 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] contact_flow_id
-    #   The identifier of the contact flow for initiating the tasks. To see
-    #   the ContactFlowId in the Amazon Connect console user interface, on
-    #   the navigation menu go to **Routing**, **Contact Flows**. Choose the
-    #   contact flow. On the contact flow page, under the name of the
-    #   contact flow, choose **Show additional flow information**. The
-    #   ContactFlowId is the last part of the ARN, shown here in bold:
+    #   The identifier of the flow for initiating the tasks. To see the
+    #   ContactFlowId in the Amazon Connect console user interface, on the
+    #   navigation menu go to **Routing**, **Contact Flows**. Choose the
+    #   flow. On the flow page, under the name of the flow, choose **Show
+    #   additional flow information**. The ContactFlowId is the last part of
+    #   the ARN, shown here in bold:
     #
     #   arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/**846ec553-a005-41c0-8341-xxxxxxxxxxxx**
     #   @return [String]
     #
     # @!attribute [rw] attributes
     #   A custom key-value pair using an attribute map. The attributes are
-    #   standard Amazon Connect attributes, and can be accessed in contact
-    #   flows just like any other contact attributes.
+    #   standard Amazon Connect attributes, and can be accessed in flows
+    #   just like any other contact attributes.
     #
     #   There can be up to 32,768 UTF-8 bytes across all key-value pairs per
     #   contact. Attribute keys can include only alphanumeric, dash, and
@@ -9426,8 +9736,8 @@ module Aws::Connect
     #
     # @!attribute [rw] scheduled_time
     #   The timestamp, in Unix Epoch seconds format, at which to start
-    #   running the inbound contact flow. The scheduled time cannot be in
-    #   the past. It must be within up to 6 days in future.
+    #   running the inbound flow. The scheduled time cannot be in the past.
+    #   It must be within up to 6 days in future.
     #   @return [Time]
     #
     # @!attribute [rw] task_template_id
@@ -9708,8 +10018,9 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   One or more tags. For example, \\\{ "tags":
-    #   \\\{"key1":"value1", "key2":"value2"\\} \\}.
+    #   The tags used to organize, track, or control access for this
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/TagResourceRequest AWS API Documentation
@@ -10009,7 +10320,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] contact_flow_id
-    #   The identifier of the contact flow.
+    #   The identifier of the flow.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -10154,7 +10465,7 @@ module Aws::Connect
     #
     # @!attribute [rw] attributes
     #   The Amazon Connect attributes. These attributes can be accessed in
-    #   contact flows just like any other contact attributes.
+    #   flows just like any other contact attributes.
     #
     #   You can have up to 32,768 UTF-8 bytes across all attributes for a
     #   contact. Attribute keys can include only alphanumeric, dash, and
@@ -10189,13 +10500,13 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] contact_flow_id
-    #   The identifier of the contact flow.
+    #   The identifier of the flow.
     #   @return [String]
     #
     # @!attribute [rw] content
-    #   The JSON string that represents contact flow’s content. For an
-    #   example, see [Example contact flow in Amazon Connect Flow
-    #   language][1] in the *Amazon Connect Administrator Guide*.
+    #   The JSON string that represents flow's content. For an example, see
+    #   [Example contact flow in Amazon Connect Flow language][1] in the
+    #   *Amazon Connect Administrator Guide*.
     #
     #
     #
@@ -10229,19 +10540,19 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] contact_flow_id
-    #   The identifier of the contact flow.
+    #   The identifier of the flow.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   TThe name of the contact flow.
+    #   TThe name of the flow.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the contact flow.
+    #   The description of the flow.
     #   @return [String]
     #
     # @!attribute [rw] contact_flow_state
-    #   The state of contact flow.
+    #   The state of flow.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactFlowMetadataRequest AWS API Documentation
@@ -10271,11 +10582,11 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] contact_flow_module_id
-    #   The identifier of the contact flow module.
+    #   The identifier of the flow module.
     #   @return [String]
     #
     # @!attribute [rw] content
-    #   The content of the contact flow module.
+    #   The content of the flow module.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactFlowModuleContentRequest AWS API Documentation
@@ -10309,19 +10620,19 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] contact_flow_module_id
-    #   The identifier of the contact flow module.
+    #   The identifier of the flow module.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the contact flow module.
+    #   The name of the flow module.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the contact flow module.
+    #   The description of the flow module.
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The state of contact flow module.
+    #   The state of flow module.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactFlowModuleMetadataRequest AWS API Documentation
@@ -10355,15 +10666,15 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] contact_flow_id
-    #   The identifier of the contact flow.
+    #   The identifier of the flow.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the contact flow.
+    #   The name of the flow.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the contact flow.
+    #   The description of the flow.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactFlowNameRequest AWS API Documentation
@@ -10452,8 +10763,8 @@ module Aws::Connect
     #
     # @!attribute [rw] scheduled_time
     #   The timestamp, in Unix Epoch seconds format, at which to start
-    #   running the inbound contact flow. The scheduled time cannot be in
-    #   the past. It must be within up to 6 days in future.
+    #   running the inbound flow. The scheduled time cannot be in the past.
+    #   It must be within up to 6 days in future.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactScheduleRequest AWS API Documentation
@@ -11886,7 +12197,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] contact_flow_id
-    #   The identifier of the contact flow.
+    #   The identifier of the flow.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UserQuickConnectConfig AWS API Documentation
@@ -12088,7 +12399,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource.
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] username
@@ -12186,7 +12498,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource.
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Vocabulary AWS API Documentation

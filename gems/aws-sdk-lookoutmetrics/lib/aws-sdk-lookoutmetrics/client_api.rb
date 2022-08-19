@@ -30,6 +30,8 @@ module Aws::LookoutMetrics
     AnomalyDetectionTaskStatusMessage = Shapes::StringShape.new(name: 'AnomalyDetectionTaskStatusMessage')
     AnomalyDetectorConfig = Shapes::StructureShape.new(name: 'AnomalyDetectorConfig')
     AnomalyDetectorConfigSummary = Shapes::StructureShape.new(name: 'AnomalyDetectorConfigSummary')
+    AnomalyDetectorDataQualityMetric = Shapes::StructureShape.new(name: 'AnomalyDetectorDataQualityMetric')
+    AnomalyDetectorDataQualityMetricList = Shapes::ListShape.new(name: 'AnomalyDetectorDataQualityMetricList')
     AnomalyDetectorDescription = Shapes::StringShape.new(name: 'AnomalyDetectorDescription')
     AnomalyDetectorFailureType = Shapes::StringShape.new(name: 'AnomalyDetectorFailureType')
     AnomalyDetectorName = Shapes::StringShape.new(name: 'AnomalyDetectorName')
@@ -74,6 +76,10 @@ module Aws::LookoutMetrics
     CreateMetricSetResponse = Shapes::StructureShape.new(name: 'CreateMetricSetResponse')
     CsvFormatDescriptor = Shapes::StructureShape.new(name: 'CsvFormatDescriptor')
     DataItem = Shapes::StringShape.new(name: 'DataItem')
+    DataQualityMetric = Shapes::StructureShape.new(name: 'DataQualityMetric')
+    DataQualityMetricDescription = Shapes::StringShape.new(name: 'DataQualityMetricDescription')
+    DataQualityMetricList = Shapes::ListShape.new(name: 'DataQualityMetricList')
+    DataQualityMetricType = Shapes::StringShape.new(name: 'DataQualityMetricType')
     DatabaseHost = Shapes::StringShape.new(name: 'DatabaseHost')
     DatabasePort = Shapes::IntegerShape.new(name: 'DatabasePort')
     DateTimeFormat = Shapes::StringShape.new(name: 'DateTimeFormat')
@@ -112,6 +118,7 @@ module Aws::LookoutMetrics
     DimensionValueContribution = Shapes::StructureShape.new(name: 'DimensionValueContribution')
     DimensionValueContributionList = Shapes::ListShape.new(name: 'DimensionValueContributionList')
     DimensionValueList = Shapes::ListShape.new(name: 'DimensionValueList')
+    Double = Shapes::FloatShape.new(name: 'Double')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExecutionList = Shapes::ListShape.new(name: 'ExecutionList')
     ExecutionStatus = Shapes::StructureShape.new(name: 'ExecutionStatus')
@@ -121,6 +128,8 @@ module Aws::LookoutMetrics
     Frequency = Shapes::StringShape.new(name: 'Frequency')
     GetAnomalyGroupRequest = Shapes::StructureShape.new(name: 'GetAnomalyGroupRequest')
     GetAnomalyGroupResponse = Shapes::StructureShape.new(name: 'GetAnomalyGroupResponse')
+    GetDataQualityMetricsRequest = Shapes::StructureShape.new(name: 'GetDataQualityMetricsRequest')
+    GetDataQualityMetricsResponse = Shapes::StructureShape.new(name: 'GetDataQualityMetricsResponse')
     GetFeedbackRequest = Shapes::StructureShape.new(name: 'GetFeedbackRequest')
     GetFeedbackResponse = Shapes::StructureShape.new(name: 'GetFeedbackResponse')
     GetSampleDataRequest = Shapes::StructureShape.new(name: 'GetSampleDataRequest')
@@ -163,6 +172,8 @@ module Aws::LookoutMetrics
     MetricList = Shapes::ListShape.new(name: 'MetricList')
     MetricName = Shapes::StringShape.new(name: 'MetricName')
     MetricNameList = Shapes::ListShape.new(name: 'MetricNameList')
+    MetricSetDataQualityMetric = Shapes::StructureShape.new(name: 'MetricSetDataQualityMetric')
+    MetricSetDataQualityMetricList = Shapes::ListShape.new(name: 'MetricSetDataQualityMetricList')
     MetricSetDescription = Shapes::StringShape.new(name: 'MetricSetDescription')
     MetricSetName = Shapes::StringShape.new(name: 'MetricSetName')
     MetricSetSummary = Shapes::StructureShape.new(name: 'MetricSetSummary')
@@ -186,6 +197,7 @@ module Aws::LookoutMetrics
     RedshiftClusterIdentifier = Shapes::StringShape.new(name: 'RedshiftClusterIdentifier')
     RedshiftDatabaseName = Shapes::StringShape.new(name: 'RedshiftDatabaseName')
     RedshiftSourceConfig = Shapes::StructureShape.new(name: 'RedshiftSourceConfig')
+    RelatedColumnName = Shapes::StringShape.new(name: 'RelatedColumnName')
     RelationshipType = Shapes::StringShape.new(name: 'RelationshipType')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -288,6 +300,12 @@ module Aws::LookoutMetrics
 
     AnomalyDetectorConfigSummary.add_member(:anomaly_detector_frequency, Shapes::ShapeRef.new(shape: Frequency, location_name: "AnomalyDetectorFrequency"))
     AnomalyDetectorConfigSummary.struct_class = Types::AnomalyDetectorConfigSummary
+
+    AnomalyDetectorDataQualityMetric.add_member(:start_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTimestamp"))
+    AnomalyDetectorDataQualityMetric.add_member(:metric_set_data_quality_metric_list, Shapes::ShapeRef.new(shape: MetricSetDataQualityMetricList, location_name: "MetricSetDataQualityMetricList"))
+    AnomalyDetectorDataQualityMetric.struct_class = Types::AnomalyDetectorDataQualityMetric
+
+    AnomalyDetectorDataQualityMetricList.member = Shapes::ShapeRef.new(shape: AnomalyDetectorDataQualityMetric)
 
     AnomalyDetectorSummary.add_member(:anomaly_detector_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AnomalyDetectorArn"))
     AnomalyDetectorSummary.add_member(:anomaly_detector_name, Shapes::ShapeRef.new(shape: AnomalyDetectorName, location_name: "AnomalyDetectorName"))
@@ -426,6 +444,14 @@ module Aws::LookoutMetrics
     CsvFormatDescriptor.add_member(:header_list, Shapes::ShapeRef.new(shape: HeaderList, location_name: "HeaderList"))
     CsvFormatDescriptor.add_member(:quote_symbol, Shapes::ShapeRef.new(shape: QuoteSymbol, location_name: "QuoteSymbol"))
     CsvFormatDescriptor.struct_class = Types::CsvFormatDescriptor
+
+    DataQualityMetric.add_member(:metric_type, Shapes::ShapeRef.new(shape: DataQualityMetricType, location_name: "MetricType"))
+    DataQualityMetric.add_member(:metric_description, Shapes::ShapeRef.new(shape: DataQualityMetricDescription, location_name: "MetricDescription"))
+    DataQualityMetric.add_member(:related_column_name, Shapes::ShapeRef.new(shape: RelatedColumnName, location_name: "RelatedColumnName"))
+    DataQualityMetric.add_member(:metric_value, Shapes::ShapeRef.new(shape: Double, location_name: "MetricValue"))
+    DataQualityMetric.struct_class = Types::DataQualityMetric
+
+    DataQualityMetricList.member = Shapes::ShapeRef.new(shape: DataQualityMetric)
 
     DeactivateAnomalyDetectorRequest.add_member(:anomaly_detector_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "AnomalyDetectorArn"))
     DeactivateAnomalyDetectorRequest.struct_class = Types::DeactivateAnomalyDetectorRequest
@@ -576,6 +602,13 @@ module Aws::LookoutMetrics
     GetAnomalyGroupResponse.add_member(:anomaly_group, Shapes::ShapeRef.new(shape: AnomalyGroup, location_name: "AnomalyGroup"))
     GetAnomalyGroupResponse.struct_class = Types::GetAnomalyGroupResponse
 
+    GetDataQualityMetricsRequest.add_member(:anomaly_detector_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "AnomalyDetectorArn"))
+    GetDataQualityMetricsRequest.add_member(:metric_set_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "MetricSetArn"))
+    GetDataQualityMetricsRequest.struct_class = Types::GetDataQualityMetricsRequest
+
+    GetDataQualityMetricsResponse.add_member(:anomaly_detector_data_quality_metric_list, Shapes::ShapeRef.new(shape: AnomalyDetectorDataQualityMetricList, location_name: "AnomalyDetectorDataQualityMetricList"))
+    GetDataQualityMetricsResponse.struct_class = Types::GetDataQualityMetricsResponse
+
     GetFeedbackRequest.add_member(:anomaly_detector_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "AnomalyDetectorArn"))
     GetFeedbackRequest.add_member(:anomaly_group_time_series_feedback, Shapes::ShapeRef.new(shape: AnomalyGroupTimeSeries, required: true, location_name: "AnomalyGroupTimeSeriesFeedback"))
     GetFeedbackRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
@@ -707,6 +740,12 @@ module Aws::LookoutMetrics
     MetricList.member = Shapes::ShapeRef.new(shape: Metric)
 
     MetricNameList.member = Shapes::ShapeRef.new(shape: MetricName)
+
+    MetricSetDataQualityMetric.add_member(:metric_set_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "MetricSetArn"))
+    MetricSetDataQualityMetric.add_member(:data_quality_metric_list, Shapes::ShapeRef.new(shape: DataQualityMetricList, location_name: "DataQualityMetricList"))
+    MetricSetDataQualityMetric.struct_class = Types::MetricSetDataQualityMetric
+
+    MetricSetDataQualityMetricList.member = Shapes::ShapeRef.new(shape: MetricSetDataQualityMetric)
 
     MetricSetSummary.add_member(:metric_set_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "MetricSetArn"))
     MetricSetSummary.add_member(:anomaly_detector_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AnomalyDetectorArn"))
@@ -1098,6 +1137,19 @@ module Aws::LookoutMetrics
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:get_data_quality_metrics, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDataQualityMetrics"
+        o.http_method = "POST"
+        o.http_request_uri = "/GetDataQualityMetrics"
+        o.input = Shapes::ShapeRef.new(shape: GetDataQualityMetricsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDataQualityMetricsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:get_feedback, Seahorse::Model::Operation.new.tap do |o|

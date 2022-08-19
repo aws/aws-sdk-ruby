@@ -68,6 +68,7 @@ module Aws::Kendra
     ConfluenceAttachmentFieldMappingsList = Shapes::ListShape.new(name: 'ConfluenceAttachmentFieldMappingsList')
     ConfluenceAttachmentFieldName = Shapes::StringShape.new(name: 'ConfluenceAttachmentFieldName')
     ConfluenceAttachmentToIndexFieldMapping = Shapes::StructureShape.new(name: 'ConfluenceAttachmentToIndexFieldMapping')
+    ConfluenceAuthenticationType = Shapes::StringShape.new(name: 'ConfluenceAuthenticationType')
     ConfluenceBlogConfiguration = Shapes::StructureShape.new(name: 'ConfluenceBlogConfiguration')
     ConfluenceBlogFieldMappingsList = Shapes::ListShape.new(name: 'ConfluenceBlogFieldMappingsList')
     ConfluenceBlogFieldName = Shapes::StringShape.new(name: 'ConfluenceBlogFieldName')
@@ -743,6 +744,7 @@ module Aws::Kendra
     ConfluenceConfiguration.add_member(:inclusion_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "InclusionPatterns"))
     ConfluenceConfiguration.add_member(:exclusion_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "ExclusionPatterns"))
     ConfluenceConfiguration.add_member(:proxy_configuration, Shapes::ShapeRef.new(shape: ProxyConfiguration, location_name: "ProxyConfiguration"))
+    ConfluenceConfiguration.add_member(:authentication_type, Shapes::ShapeRef.new(shape: ConfluenceAuthenticationType, location_name: "AuthenticationType"))
     ConfluenceConfiguration.struct_class = Types::ConfluenceConfiguration
 
     ConfluencePageConfiguration.add_member(:page_field_mappings, Shapes::ShapeRef.new(shape: ConfluencePageFieldMappingsList, location_name: "PageFieldMappings"))

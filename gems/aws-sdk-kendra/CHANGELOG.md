@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2022-08-19)
+------------------
+
+* Feature - This release adds support for a new authentication type - Personal Access Token (PAT) for confluence server.
+
 1.56.0 (2022-08-17)
 ------------------
 

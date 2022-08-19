@@ -433,7 +433,14 @@ module Aws::Ivschat
     #
     # @option params [Hash<String,String>] :tags
     #   Tags to attach to the resource. Array of maps, each of the form
-    #   `string:string (key:value)`.
+    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
+    #   details, including restrictions that apply to tags and "Tag naming
+    #   limits and requirements"; Amazon IVS Chat has no constraints beyond
+    #   what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #
     # @return [Types::CreateRoomResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -775,7 +782,14 @@ module Aws::Ivschat
     #   The ARN of the resource to be tagged. The ARN must be URL-encoded.
     #
     # @option params [required, Hash<String,String>] :tags
-    #   Array of tags to be added or updated.
+    #   Array of tags to be added or updated. See [Tagging AWS Resources][1]
+    #   for details, including restrictions that apply to tags and "Tag
+    #   naming limits and requirements"; Amazon IVS Chat has no constraints
+    #   beyond what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -803,7 +817,14 @@ module Aws::Ivschat
     #   The ARN of the resource to be untagged. The ARN must be URL-encoded.
     #
     # @option params [required, Array<String>] :tag_keys
-    #   Array of tags to be removed.
+    #   Array of tags to be removed. See [Tagging AWS Resources][1] for
+    #   details, including restrictions that apply to tags and "Tag naming
+    #   limits and requirements"; Amazon IVS Chat has no constraints beyond
+    #   what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -906,7 +927,7 @@ module Aws::Ivschat
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ivschat'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
