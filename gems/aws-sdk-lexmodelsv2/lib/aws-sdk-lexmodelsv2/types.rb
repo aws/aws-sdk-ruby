@@ -24315,6 +24315,92 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StopBotRecommendationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bot_id: "Id", # required
+    #         bot_version: "DraftBotVersion", # required
+    #         locale_id: "LocaleId", # required
+    #         bot_recommendation_id: "Id", # required
+    #       }
+    #
+    # @!attribute [rw] bot_id
+    #   The unique identifier of the bot containing the bot recommendation
+    #   to be stopped.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The version of the bot containing the bot recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The identifier of the language and locale of the bot recommendation
+    #   to stop. The string must match one of the supported locales. For
+    #   more information, see [Supported languages][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_recommendation_id
+    #   The unique identifier of the bot recommendation to be stopped.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/StopBotRecommendationRequest AWS API Documentation
+    #
+    class StopBotRecommendationRequest < Struct.new(
+      :bot_id,
+      :bot_version,
+      :locale_id,
+      :bot_recommendation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The unique identifier of the bot containing the bot recommendation
+    #   that is being stopped.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The version of the bot containing the recommendation that is being
+    #   stopped.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The identifier of the language and locale of the bot response to
+    #   stop. The string must match one of the supported locales. For more
+    #   information, see [Supported languages][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_recommendation_status
+    #   The status of the bot recommendation. If the status is Failed, then
+    #   the reasons for the failure are listed in the failureReasons field.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_recommendation_id
+    #   The unique identifier of the bot recommendation that is being
+    #   stopped.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/StopBotRecommendationResponse AWS API Documentation
+    #
+    class StopBotRecommendationResponse < Struct.new(
+      :bot_id,
+      :bot_version,
+      :locale_id,
+      :bot_recommendation_status,
+      :bot_recommendation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass TagResourceRequest
     #   data as a hash:
     #

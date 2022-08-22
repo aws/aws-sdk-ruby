@@ -517,6 +517,7 @@ module Aws
             'States' => 'states',
             'StorageGateway' => 'storagegateway',
             'Support' => 'support',
+            'SupportApp' => 'supportapp',
             'Synthetics' => 'synthetics',
             'Textract' => 'textract',
             'TimestreamQuery' => 'query.timestream',

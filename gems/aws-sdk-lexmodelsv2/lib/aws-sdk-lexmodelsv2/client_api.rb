@@ -419,6 +419,8 @@ module Aws::LexModelsV2
     StillWaitingResponseFrequency = Shapes::IntegerShape.new(name: 'StillWaitingResponseFrequency')
     StillWaitingResponseSpecification = Shapes::StructureShape.new(name: 'StillWaitingResponseSpecification')
     StillWaitingResponseTimeout = Shapes::IntegerShape.new(name: 'StillWaitingResponseTimeout')
+    StopBotRecommendationRequest = Shapes::StructureShape.new(name: 'StopBotRecommendationRequest')
+    StopBotRecommendationResponse = Shapes::StructureShape.new(name: 'StopBotRecommendationResponse')
     String = Shapes::StringShape.new(name: 'String')
     StringMap = Shapes::MapShape.new(name: 'StringMap')
     SynonymList = Shapes::ListShape.new(name: 'SynonymList')
@@ -1951,6 +1953,19 @@ module Aws::LexModelsV2
     StillWaitingResponseSpecification.add_member(:allow_interrupt, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "allowInterrupt"))
     StillWaitingResponseSpecification.struct_class = Types::StillWaitingResponseSpecification
 
+    StopBotRecommendationRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
+    StopBotRecommendationRequest.add_member(:bot_version, Shapes::ShapeRef.new(shape: DraftBotVersion, required: true, location: "uri", location_name: "botVersion"))
+    StopBotRecommendationRequest.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, required: true, location: "uri", location_name: "localeId"))
+    StopBotRecommendationRequest.add_member(:bot_recommendation_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botRecommendationId"))
+    StopBotRecommendationRequest.struct_class = Types::StopBotRecommendationRequest
+
+    StopBotRecommendationResponse.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, location_name: "botId"))
+    StopBotRecommendationResponse.add_member(:bot_version, Shapes::ShapeRef.new(shape: DraftBotVersion, location_name: "botVersion"))
+    StopBotRecommendationResponse.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, location_name: "localeId"))
+    StopBotRecommendationResponse.add_member(:bot_recommendation_status, Shapes::ShapeRef.new(shape: BotRecommendationStatus, location_name: "botRecommendationStatus"))
+    StopBotRecommendationResponse.add_member(:bot_recommendation_id, Shapes::ShapeRef.new(shape: Id, location_name: "botRecommendationId"))
+    StopBotRecommendationResponse.struct_class = Types::StopBotRecommendationResponse
+
     StringMap.key = Shapes::ShapeRef.new(shape: NonEmptyString)
     StringMap.value = Shapes::ShapeRef.new(shape: String)
 
@@ -3018,6 +3033,22 @@ module Aws::LexModelsV2
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:stop_bot_recommendation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopBotRecommendation"
+        o.http_method = "PUT"
+        o.http_request_uri = "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/botrecommendations/{botRecommendationId}/stopbotrecommendation"
+        o.input = Shapes::ShapeRef.new(shape: StopBotRecommendationRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopBotRecommendationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)

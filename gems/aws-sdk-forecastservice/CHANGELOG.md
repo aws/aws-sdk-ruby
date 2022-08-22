@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2022-08-22)
+------------------
+
+* Feature - releasing What-If Analysis APIs and update ARN regex pattern to be more strict in accordance with security recommendation
+
 1.36.0 (2022-06-01)
 ------------------
 

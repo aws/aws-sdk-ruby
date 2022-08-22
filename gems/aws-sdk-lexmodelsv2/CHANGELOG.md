@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2022-08-22)
+------------------
+
+* Feature - This release introduces a new feature to stop a running BotRecommendation Job for Automated Chatbot Designer.
+
 1.25.0 (2022-08-17)
 ------------------
 

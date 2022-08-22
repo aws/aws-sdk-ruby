@@ -9658,7 +9658,7 @@ module Aws::LexModelsV2
     #   resp.bot_id #=> String
     #   resp.bot_version #=> String
     #   resp.locale_id #=> String
-    #   resp.bot_recommendation_status #=> String, one of "Processing", "Deleting", "Deleted", "Downloading", "Updating", "Available", "Failed"
+    #   resp.bot_recommendation_status #=> String, one of "Processing", "Deleting", "Deleted", "Downloading", "Updating", "Available", "Failed", "Stopping", "Stopped"
     #   resp.bot_recommendation_id #=> String
     #   resp.failure_reasons #=> Array
     #   resp.failure_reasons[0] #=> String
@@ -12584,7 +12584,7 @@ module Aws::LexModelsV2
     #   resp.bot_version #=> String
     #   resp.locale_id #=> String
     #   resp.bot_recommendation_summaries #=> Array
-    #   resp.bot_recommendation_summaries[0].bot_recommendation_status #=> String, one of "Processing", "Deleting", "Deleted", "Downloading", "Updating", "Available", "Failed"
+    #   resp.bot_recommendation_summaries[0].bot_recommendation_status #=> String, one of "Processing", "Deleting", "Deleted", "Downloading", "Updating", "Available", "Failed", "Stopping", "Stopped"
     #   resp.bot_recommendation_summaries[0].bot_recommendation_id #=> String
     #   resp.bot_recommendation_summaries[0].creation_date_time #=> Time
     #   resp.bot_recommendation_summaries[0].last_updated_date_time #=> Time
@@ -13651,7 +13651,7 @@ module Aws::LexModelsV2
     #   resp.bot_id #=> String
     #   resp.bot_version #=> String
     #   resp.locale_id #=> String
-    #   resp.bot_recommendation_status #=> String, one of "Processing", "Deleting", "Deleted", "Downloading", "Updating", "Available", "Failed"
+    #   resp.bot_recommendation_status #=> String, one of "Processing", "Deleting", "Deleted", "Downloading", "Updating", "Available", "Failed", "Stopping", "Stopped"
     #   resp.bot_recommendation_id #=> String
     #   resp.creation_date_time #=> Time
     #   resp.transcript_source_setting.s3_bucket_transcript_source.s3_bucket_name #=> String
@@ -13776,6 +13776,61 @@ module Aws::LexModelsV2
     # @param [Hash] params ({})
     def start_import(params = {}, options = {})
       req = build_request(:start_import, params)
+      req.send_request(options)
+    end
+
+    # Stop an already running Bot Recommendation request.
+    #
+    # @option params [required, String] :bot_id
+    #   The unique identifier of the bot containing the bot recommendation to
+    #   be stopped.
+    #
+    # @option params [required, String] :bot_version
+    #   The version of the bot containing the bot recommendation.
+    #
+    # @option params [required, String] :locale_id
+    #   The identifier of the language and locale of the bot recommendation to
+    #   stop. The string must match one of the supported locales. For more
+    #   information, see [Supported languages][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
+    #
+    # @option params [required, String] :bot_recommendation_id
+    #   The unique identifier of the bot recommendation to be stopped.
+    #
+    # @return [Types::StopBotRecommendationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopBotRecommendationResponse#bot_id #bot_id} => String
+    #   * {Types::StopBotRecommendationResponse#bot_version #bot_version} => String
+    #   * {Types::StopBotRecommendationResponse#locale_id #locale_id} => String
+    #   * {Types::StopBotRecommendationResponse#bot_recommendation_status #bot_recommendation_status} => String
+    #   * {Types::StopBotRecommendationResponse#bot_recommendation_id #bot_recommendation_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_bot_recommendation({
+    #     bot_id: "Id", # required
+    #     bot_version: "DraftBotVersion", # required
+    #     locale_id: "LocaleId", # required
+    #     bot_recommendation_id: "Id", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot_id #=> String
+    #   resp.bot_version #=> String
+    #   resp.locale_id #=> String
+    #   resp.bot_recommendation_status #=> String, one of "Processing", "Deleting", "Deleted", "Downloading", "Updating", "Available", "Failed", "Stopping", "Stopped"
+    #   resp.bot_recommendation_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/StopBotRecommendation AWS API Documentation
+    #
+    # @overload stop_bot_recommendation(params = {})
+    # @param [Hash] params ({})
+    def stop_bot_recommendation(params = {}, options = {})
+      req = build_request(:stop_bot_recommendation, params)
       req.send_request(options)
     end
 
@@ -14188,7 +14243,7 @@ module Aws::LexModelsV2
     #   resp.bot_id #=> String
     #   resp.bot_version #=> String
     #   resp.locale_id #=> String
-    #   resp.bot_recommendation_status #=> String, one of "Processing", "Deleting", "Deleted", "Downloading", "Updating", "Available", "Failed"
+    #   resp.bot_recommendation_status #=> String, one of "Processing", "Deleting", "Deleted", "Downloading", "Updating", "Available", "Failed", "Stopping", "Stopped"
     #   resp.bot_recommendation_id #=> String
     #   resp.creation_date_time #=> Time
     #   resp.last_updated_date_time #=> Time
@@ -22021,7 +22076,7 @@ module Aws::LexModelsV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelsv2'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

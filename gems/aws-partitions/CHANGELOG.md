@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.621.0 (2022-08-22)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::SupportApp`.
+
 1.620.0 (2022-08-19)
 ------------------
 

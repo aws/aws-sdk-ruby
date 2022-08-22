@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2022-08-22)
+------------------
+
+* Feature - releasing What-If Analysis APIs
+
 1.21.0 (2022-02-24)
 ------------------
 

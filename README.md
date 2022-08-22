@@ -434,7 +434,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Route53 Recovery Readiness                        | Aws::Route53RecoveryReadiness            | aws-sdk-route53recoveryreadiness            | 2019-12-02  |
 | AWS S3 Control                                        | Aws::S3Control                           | aws-sdk-s3control                           | 2018-08-20  |
 | AWS SSO Identity Store                                | Aws::IdentityStore                       | aws-sdk-identitystore                       | 2020-06-15  |
-| AWS SSO OIDC                                          | Aws::SSOOIDC                             | aws-sdk-ssooidc                             | 2019-06-10  |
+| AWS SSO OIDC                                          | Aws::SSOOIDC                             | aws-sdk-core                                | 2019-06-10  |
 | AWS Savings Plans                                     | Aws::SavingsPlans                        | aws-sdk-savingsplans                        | 2019-06-28  |
 | AWS Secrets Manager                                   | Aws::SecretsManager                      | aws-sdk-secretsmanager                      | 2017-10-17  |
 | AWS Security Token Service                            | Aws::STS                                 | aws-sdk-core                                | 2011-06-15  |
@@ -450,6 +450,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Step Functions                                    | Aws::States                              | aws-sdk-states                              | 2016-11-23  |
 | AWS Storage Gateway                                   | Aws::StorageGateway                      | aws-sdk-storagegateway                      | 2013-06-30  |
 | AWS Support                                           | Aws::Support                             | aws-sdk-support                             | 2013-04-15  |
+| AWS Support App                                       | Aws::SupportApp                          | aws-sdk-supportapp                          | 2021-08-20  |
 | AWS Systems Manager Incident Manager                  | Aws::SSMIncidents                        | aws-sdk-ssmincidents                        | 2018-05-10  |
 | AWS Systems Manager Incident Manager Contacts         | Aws::SSMContacts                         | aws-sdk-ssmcontacts                         | 2021-05-03  |
 | AWS Transfer Family                                   | Aws::Transfer                            | aws-sdk-transfer                            | 2018-11-05  |

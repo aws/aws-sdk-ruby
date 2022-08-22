@@ -999,6 +999,9 @@
   "Support": {
     "models": "support/2013-04-15"
   },
+  "SupportApp": {
+    "models": "support-app/2021-08-20"
+  },
   "Synthetics": {
     "models": "synthetics/2017-10-11"
   },

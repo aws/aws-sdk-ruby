@@ -3630,6 +3630,88 @@ module Aws::SecurityHub
     #                   },
     #                 ],
     #               },
+    #               aws_backup_backup_vault: {
+    #                 backup_vault_arn: "NonEmptyString",
+    #                 backup_vault_name: "NonEmptyString",
+    #                 encryption_key_arn: "NonEmptyString",
+    #                 notifications: {
+    #                   backup_vault_events: ["NonEmptyString"],
+    #                   sns_topic_arn: "NonEmptyString",
+    #                 },
+    #                 access_policy: "NonEmptyString",
+    #               },
+    #               aws_backup_backup_plan: {
+    #                 backup_plan: {
+    #                   backup_plan_name: "NonEmptyString",
+    #                   advanced_backup_settings: [
+    #                     {
+    #                       backup_options: {
+    #                         "NonEmptyString" => "NonEmptyString",
+    #                       },
+    #                       resource_type: "NonEmptyString",
+    #                     },
+    #                   ],
+    #                   backup_plan_rule: [
+    #                     {
+    #                       target_backup_vault: "NonEmptyString",
+    #                       start_window_minutes: 1,
+    #                       schedule_expression: "NonEmptyString",
+    #                       rule_name: "NonEmptyString",
+    #                       rule_id: "NonEmptyString",
+    #                       enable_continuous_backup: false,
+    #                       completion_window_minutes: 1,
+    #                       copy_actions: [
+    #                         {
+    #                           destination_backup_vault_arn: "NonEmptyString",
+    #                           lifecycle: {
+    #                             delete_after_days: 1,
+    #                             move_to_cold_storage_after_days: 1,
+    #                           },
+    #                         },
+    #                       ],
+    #                       lifecycle: {
+    #                         delete_after_days: 1,
+    #                         move_to_cold_storage_after_days: 1,
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #                 backup_plan_arn: "NonEmptyString",
+    #                 backup_plan_id: "NonEmptyString",
+    #                 version_id: "NonEmptyString",
+    #               },
+    #               aws_backup_recovery_point: {
+    #                 backup_size_in_bytes: 1,
+    #                 backup_vault_arn: "NonEmptyString",
+    #                 backup_vault_name: "NonEmptyString",
+    #                 calculated_lifecycle: {
+    #                   delete_at: "NonEmptyString",
+    #                   move_to_cold_storage_at: "NonEmptyString",
+    #                 },
+    #                 completion_date: "NonEmptyString",
+    #                 created_by: {
+    #                   backup_plan_arn: "NonEmptyString",
+    #                   backup_plan_id: "NonEmptyString",
+    #                   backup_plan_version: "NonEmptyString",
+    #                   backup_rule_id: "NonEmptyString",
+    #                 },
+    #                 creation_date: "NonEmptyString",
+    #                 encryption_key_arn: "NonEmptyString",
+    #                 iam_role_arn: "NonEmptyString",
+    #                 is_encrypted: false,
+    #                 last_restore_time: "NonEmptyString",
+    #                 lifecycle: {
+    #                   delete_after_days: 1,
+    #                   move_to_cold_storage_after_days: 1,
+    #                 },
+    #                 recovery_point_arn: "NonEmptyString",
+    #                 resource_arn: "NonEmptyString",
+    #                 resource_type: "NonEmptyString",
+    #                 source_backup_vault_arn: "NonEmptyString",
+    #                 status: "NonEmptyString",
+    #                 status_message: "NonEmptyString",
+    #                 storage_class: "NonEmptyString",
+    #               },
     #             },
     #           },
     #         ],
@@ -3672,6 +3754,8 @@ module Aws::SecurityHub
     #                 architecture: "NonEmptyString",
     #                 package_manager: "NonEmptyString",
     #                 file_path: "NonEmptyString",
+    #                 fixed_in_version: "NonEmptyString",
+    #                 remediation: "NonEmptyString",
     #               },
     #             ],
     #             cvss: [
@@ -3697,6 +3781,7 @@ module Aws::SecurityHub
     #               vendor_updated_at: "NonEmptyString",
     #             },
     #             reference_urls: ["NonEmptyString"],
+    #             fix_available: "YES", # accepts YES, NO, PARTIAL
     #           },
     #         ],
     #         patch_summary: {
@@ -8429,6 +8514,59 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_ecs_task.containers[0].mount_points[0].source_volume #=> String
     #   resp.findings[0].resources[0].details.aws_ecs_task.containers[0].mount_points[0].container_path #=> String
     #   resp.findings[0].resources[0].details.aws_ecs_task.containers[0].privileged #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_backup_backup_vault.backup_vault_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_backup_backup_vault.backup_vault_name #=> String
+    #   resp.findings[0].resources[0].details.aws_backup_backup_vault.encryption_key_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_backup_backup_vault.notifications.backup_vault_events #=> Array
+    #   resp.findings[0].resources[0].details.aws_backup_backup_vault.notifications.backup_vault_events[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_backup_backup_vault.notifications.sns_topic_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_backup_backup_vault.access_policy #=> String
+    #   resp.findings[0].resources[0].details.aws_backup_backup_plan.backup_plan.backup_plan_name #=> String
+    #   resp.findings[0].resources[0].details.aws_backup_backup_plan.backup_plan.advanced_backup_settings #=> Array
+    #   resp.findings[0].resources[0].details.aws_backup_backup_plan.backup_plan.advanced_backup_settings[0].backup_options #=> Hash
+    #   resp.findings[0].resources[0].details.aws_backup_backup_plan.backup_plan.advanced_backup_settings[0].backup_options["NonEmptyString"] #=> String
+    #   resp.findings[0].resources[0].details.aws_backup_backup_plan.backup_plan.advanced_backup_settings[0].resource_type #=> String
+    #   resp.findings[0].resources[0].details.aws_backup_backup_plan.backup_plan.backup_plan_rule #=> Array
+    #   resp.findings[0].resources[0].details.aws_backup_backup_plan.backup_plan.backup_plan_rule[0].target_backup_vault #=> String
+    #   resp.findings[0].resources[0].details.aws_backup_backup_plan.backup_plan.backup_plan_rule[0].start_window_minutes #=> Integer
+    #   resp.findings[0].resources[0].details.aws_backup_backup_plan.backup_plan.backup_plan_rule[0].schedule_expression #=> String
+    #   resp.findings[0].resources[0].details.aws_backup_backup_plan.backup_plan.backup_plan_rule[0].rule_name #=> String
+    #   resp.findings[0].resources[0].details.aws_backup_backup_plan.backup_plan.backup_plan_rule[0].rule_id #=> String
+    #   resp.findings[0].resources[0].details.aws_backup_backup_plan.backup_plan.backup_plan_rule[0].enable_continuous_backup #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_backup_backup_plan.backup_plan.backup_plan_rule[0].completion_window_minutes #=> Integer
+    #   resp.findings[0].resources[0].details.aws_backup_backup_plan.backup_plan.backup_plan_rule[0].copy_actions #=> Array
+    #   resp.findings[0].resources[0].details.aws_backup_backup_plan.backup_plan.backup_plan_rule[0].copy_actions[0].destination_backup_vault_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_backup_backup_plan.backup_plan.backup_plan_rule[0].copy_actions[0].lifecycle.delete_after_days #=> Integer
+    #   resp.findings[0].resources[0].details.aws_backup_backup_plan.backup_plan.backup_plan_rule[0].copy_actions[0].lifecycle.move_to_cold_storage_after_days #=> Integer
+    #   resp.findings[0].resources[0].details.aws_backup_backup_plan.backup_plan.backup_plan_rule[0].lifecycle.delete_after_days #=> Integer
+    #   resp.findings[0].resources[0].details.aws_backup_backup_plan.backup_plan.backup_plan_rule[0].lifecycle.move_to_cold_storage_after_days #=> Integer
+    #   resp.findings[0].resources[0].details.aws_backup_backup_plan.backup_plan_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_backup_backup_plan.backup_plan_id #=> String
+    #   resp.findings[0].resources[0].details.aws_backup_backup_plan.version_id #=> String
+    #   resp.findings[0].resources[0].details.aws_backup_recovery_point.backup_size_in_bytes #=> Integer
+    #   resp.findings[0].resources[0].details.aws_backup_recovery_point.backup_vault_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_backup_recovery_point.backup_vault_name #=> String
+    #   resp.findings[0].resources[0].details.aws_backup_recovery_point.calculated_lifecycle.delete_at #=> String
+    #   resp.findings[0].resources[0].details.aws_backup_recovery_point.calculated_lifecycle.move_to_cold_storage_at #=> String
+    #   resp.findings[0].resources[0].details.aws_backup_recovery_point.completion_date #=> String
+    #   resp.findings[0].resources[0].details.aws_backup_recovery_point.created_by.backup_plan_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_backup_recovery_point.created_by.backup_plan_id #=> String
+    #   resp.findings[0].resources[0].details.aws_backup_recovery_point.created_by.backup_plan_version #=> String
+    #   resp.findings[0].resources[0].details.aws_backup_recovery_point.created_by.backup_rule_id #=> String
+    #   resp.findings[0].resources[0].details.aws_backup_recovery_point.creation_date #=> String
+    #   resp.findings[0].resources[0].details.aws_backup_recovery_point.encryption_key_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_backup_recovery_point.iam_role_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_backup_recovery_point.is_encrypted #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_backup_recovery_point.last_restore_time #=> String
+    #   resp.findings[0].resources[0].details.aws_backup_recovery_point.lifecycle.delete_after_days #=> Integer
+    #   resp.findings[0].resources[0].details.aws_backup_recovery_point.lifecycle.move_to_cold_storage_after_days #=> Integer
+    #   resp.findings[0].resources[0].details.aws_backup_recovery_point.recovery_point_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_backup_recovery_point.resource_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_backup_recovery_point.resource_type #=> String
+    #   resp.findings[0].resources[0].details.aws_backup_recovery_point.source_backup_vault_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_backup_recovery_point.status #=> String
+    #   resp.findings[0].resources[0].details.aws_backup_recovery_point.status_message #=> String
+    #   resp.findings[0].resources[0].details.aws_backup_recovery_point.storage_class #=> String
     #   resp.findings[0].compliance.status #=> String, one of "PASSED", "WARNING", "FAILED", "NOT_AVAILABLE"
     #   resp.findings[0].compliance.related_requirements #=> Array
     #   resp.findings[0].compliance.related_requirements[0] #=> String
@@ -8455,6 +8593,8 @@ module Aws::SecurityHub
     #   resp.findings[0].vulnerabilities[0].vulnerable_packages[0].architecture #=> String
     #   resp.findings[0].vulnerabilities[0].vulnerable_packages[0].package_manager #=> String
     #   resp.findings[0].vulnerabilities[0].vulnerable_packages[0].file_path #=> String
+    #   resp.findings[0].vulnerabilities[0].vulnerable_packages[0].fixed_in_version #=> String
+    #   resp.findings[0].vulnerabilities[0].vulnerable_packages[0].remediation #=> String
     #   resp.findings[0].vulnerabilities[0].cvss #=> Array
     #   resp.findings[0].vulnerabilities[0].cvss[0].version #=> String
     #   resp.findings[0].vulnerabilities[0].cvss[0].base_score #=> Float
@@ -8472,6 +8612,7 @@ module Aws::SecurityHub
     #   resp.findings[0].vulnerabilities[0].vendor.vendor_updated_at #=> String
     #   resp.findings[0].vulnerabilities[0].reference_urls #=> Array
     #   resp.findings[0].vulnerabilities[0].reference_urls[0] #=> String
+    #   resp.findings[0].vulnerabilities[0].fix_available #=> String, one of "YES", "NO", "PARTIAL"
     #   resp.findings[0].patch_summary.id #=> String
     #   resp.findings[0].patch_summary.installed_count #=> Integer
     #   resp.findings[0].patch_summary.missing_count #=> Integer
@@ -10975,7 +11116,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

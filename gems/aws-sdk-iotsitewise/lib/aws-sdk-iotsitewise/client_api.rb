@@ -1747,6 +1747,7 @@ module Aws::IoTSiteWise
         o.input = Shapes::ShapeRef.new(shape: AssociateAssetsRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)

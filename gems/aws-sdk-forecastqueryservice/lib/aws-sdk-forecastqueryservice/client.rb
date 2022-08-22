@@ -448,6 +448,72 @@ module Aws::ForecastQueryService
       req.send_request(options)
     end
 
+    # Retrieves a what-if forecast.
+    #
+    # @option params [required, String] :what_if_forecast_arn
+    #   The Amazon Resource Name (ARN) of the what-if forecast to query.
+    #
+    # @option params [String] :start_date
+    #   The start date for the what-if forecast. Specify the date using this
+    #   format: yyyy-MM-dd'T'HH:mm:ss (ISO 8601 format). For example,
+    #   2015-01-01T08:00:00.
+    #
+    # @option params [String] :end_date
+    #   The end date for the what-if forecast. Specify the date using this
+    #   format: yyyy-MM-dd'T'HH:mm:ss (ISO 8601 format). For example,
+    #   2015-01-01T20:00:00.
+    #
+    # @option params [required, Hash<String,String>] :filters
+    #   The filtering criteria to apply when retrieving the forecast. For
+    #   example, to get the forecast for `client_21` in the electricity usage
+    #   dataset, specify the following:
+    #
+    #   `\{"item_id" : "client_21"\}`
+    #
+    #   To get the full what-if forecast, use the [CreateForecastExportJob][1]
+    #   operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/en_us/forecast/latest/dg/API_CreateWhatIfForecastExport.html
+    #
+    # @option params [String] :next_token
+    #   If the result of the previous request was truncated, the response
+    #   includes a `NextToken`. To retrieve the next set of results, use the
+    #   token in the next request. Tokens expire after 24 hours.
+    #
+    # @return [Types::QueryWhatIfForecastResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::QueryWhatIfForecastResponse#forecast #forecast} => Types::Forecast
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.query_what_if_forecast({
+    #     what_if_forecast_arn: "LongArn", # required
+    #     start_date: "DateTime",
+    #     end_date: "DateTime",
+    #     filters: { # required
+    #       "AttributeName" => "AttributeValue",
+    #     },
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.forecast.predictions #=> Hash
+    #   resp.forecast.predictions["Statistic"] #=> Array
+    #   resp.forecast.predictions["Statistic"][0].timestamp #=> String
+    #   resp.forecast.predictions["Statistic"][0].value #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecastquery-2018-06-26/QueryWhatIfForecast AWS API Documentation
+    #
+    # @overload query_what_if_forecast(params = {})
+    # @param [Hash] params ({})
+    def query_what_if_forecast(params = {}, options = {})
+      req = build_request(:query_what_if_forecast, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -461,7 +527,7 @@ module Aws::ForecastQueryService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-forecastqueryservice'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
