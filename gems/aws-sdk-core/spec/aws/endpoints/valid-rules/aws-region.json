@@ -24,9 +24,9 @@
         "properties": {
           "authSchemes": [
             {
-              "name": "v4",
+              "name": "sigv4",
               "signingName": "serviceName",
-              "signingScope": "{Region}"
+              "signingRegion": "{Region}"
             }
           ]
         }

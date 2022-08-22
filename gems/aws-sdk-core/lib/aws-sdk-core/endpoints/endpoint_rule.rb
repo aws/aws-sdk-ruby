@@ -84,7 +84,11 @@ module Aws
         when Array
           obj.collect { |value| resolve_properties(value, parameters, assigns) }
         else
-          Templater.resolve(obj, parameters, assigns)
+          if obj.is_a?(String)
+            Templater.resolve(obj, parameters, assigns)
+          else
+            obj
+          end
         end
       end
     end

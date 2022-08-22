@@ -7,15 +7,17 @@
         "Region": "us-east-1"
       },
       "expect": {
-        "url": "https://us-east-1.amazonaws.com",
-        "properties": {
-          "authSchemes": [
-            {
-              "name": "v4",
-              "signingScope": "us-east-1",
-              "signingName": "serviceName"
-            }
-          ]
+        "endpoint": {
+          "url": "https://us-east-1.amazonaws.com",
+          "properties": {
+            "authSchemes": [
+              {
+                "name": "sigv4",
+                "signingRegion": "us-east-1",
+                "signingName": "serviceName"
+              }
+            ]
+          }
         }
       }
     },
@@ -27,5 +29,5 @@
       }
     }
   ],
-  "version": "1.1"
+  "version": "1.4"
 }

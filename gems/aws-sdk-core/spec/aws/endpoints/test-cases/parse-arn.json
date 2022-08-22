@@ -8,7 +8,9 @@
         "Region": "us-east-2"
       },
       "expect": {
-        "url": "https://op-1234-012345678.us-east-2.amazonaws.com"
+        "endpoint": {
+          "url": "https://op-1234-012345678.us-east-2.amazonaws.com"
+        }
       }
     },
     {
@@ -48,7 +50,9 @@
         "Region": "us-east-2"
       },
       "expect": {
-        "url": "https://mybucket.us-east-2.amazonaws.com"
+        "endpoint": {
+          "url": "https://mybucket.us-east-2.amazonaws.com"
+        }
       }
     },
     {
@@ -58,7 +62,9 @@
         "Region": "us-east-2"
       },
       "expect": {
-        "url": "https://us-east-2.amazonaws.com/99_a"
+        "endpoint": {
+          "url": "https://us-east-2.amazonaws.com/99_a"
+        }
       }
     },
     {
@@ -67,9 +73,81 @@
         "Region": "us-east-2"
       },
       "expect": {
-        "url": "https://us-east-2.amazonaws.com"
+        "endpoint": {
+          "url": "https://us-east-2.amazonaws.com"
+        }
+      }
+    },
+    {
+      "documentation": "a string that is not a 6-part ARN",
+      "params": {
+        "TestCaseId": "invalid-arn",
+        "Bucket": "asdf"
+      },
+      "expect": {
+        "error": "Test case passed: `asdf` is not a valid ARN."
+      }
+    },
+    {
+      "documentation": "resource id MUST not be null",
+      "params": {
+        "TestCaseId": "invalid-arn",
+        "Bucket": "arn:aws:s3:us-west-2:123456789012:"
+      },
+      "expect": {
+        "error": "Test case passed: `arn:aws:s3:us-west-2:123456789012:` is not a valid ARN."
+      }
+    },
+    {
+      "documentation": "service MUST not be null",
+      "params": {
+        "TestCaseId": "invalid-arn",
+        "Bucket": "arn:aws::us-west-2:123456789012:resource-id"
+      },
+      "expect": {
+        "error": "Test case passed: `arn:aws::us-west-2:123456789012:resource-id` is not a valid ARN."
+      }
+    },
+    {
+      "documentation": "partition MUST not be null",
+      "params": {
+        "TestCaseId": "invalid-arn",
+        "Bucket": "arn::s3:us-west-2:123456789012:resource-id"
+      },
+      "expect": {
+        "error": "Test case passed: `arn::s3:us-west-2:123456789012:resource-id` is not a valid ARN."
+      }
+    },
+    {
+      "documentation": "region MAY be null",
+      "params": {
+        "TestCaseId": "valid-arn",
+        "Bucket": "arn:aws:s3::123456789012:resource-id"
+      },
+      "expect": {
+        "error": "Test case passed: A valid ARN was parsed: service: `s3`, partition: `aws, region: ``, accountId: `123456789012`, resource: `resource-id`"
+      }
+    },
+    {
+      "documentation": "accountId MAY be null",
+      "params": {
+        "TestCaseId": "valid-arn",
+        "Bucket": "arn:aws:s3:us-east-1::resource-id"
+      },
+      "expect": {
+        "error": "Test case passed: A valid ARN was parsed: service: `s3`, partition: `aws, region: `us-east-1`, accountId: ``, resource: `resource-id`"
+      }
+    },
+    {
+      "documentation": "accountId MAY be non-numeric",
+      "params": {
+        "TestCaseId": "valid-arn",
+        "Bucket": "arn:aws:s3:us-east-1:abcd:resource-id"
+      },
+      "expect": {
+        "error": "Test case passed: A valid ARN was parsed: service: `s3`, partition: `aws, region: `us-east-1`, accountId: `abcd`, resource: `resource-id`"
       }
     }
   ],
-  "version": "1.1"
+  "version": "1.4"
 }

@@ -45,7 +45,7 @@
       "documentation": "substring on wide characters (ensure that unicode code points are properly counted)",
       "params": {
         "TestCaseId": "1",
-        "Input": "﷽"
+        "Input": "\ufdfd"
       },
       "expect": {
         "error": "No tests matched"
@@ -95,7 +95,7 @@
       "documentation": "substring on wide characters (ensure that unicode code points are properly counted)",
       "params": {
         "TestCaseId": "2",
-        "Input": "﷽"
+        "Input": "\ufdfd"
       },
       "expect": {
         "error": "No tests matched"
@@ -145,12 +145,12 @@
       "documentation": "substring on wide characters (ensure that unicode code points are properly counted)",
       "params": {
         "TestCaseId": "3",
-        "Input": "﷽"
+        "Input": "\ufdfd"
       },
       "expect": {
         "error": "No tests matched"
       }
     }
   ],
-  "version": "1.2"
+  "version": "1.4"
 }

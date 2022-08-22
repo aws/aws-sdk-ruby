@@ -7,7 +7,9 @@
         "Region": "local"
       },
       "expect": {
-        "url": "http://localhost:8080"
+        "endpoint": {
+          "url": "http://localhost:8080"
+        }
       }
     },
     {
@@ -16,9 +18,11 @@
         "Region": "us-east-2"
       },
       "expect": {
-        "url": "https://us-east-2.someservice.amazonaws.com"
+        "endpoint": {
+          "url": "https://us-east-2.someservice.amazonaws.com"
+        }
       }
     }
   ],
-  "version": "1.1"
+  "version": "1.4"
 }

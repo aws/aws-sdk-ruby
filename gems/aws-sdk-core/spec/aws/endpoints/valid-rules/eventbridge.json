@@ -105,9 +105,11 @@
                 "properties": {
                   "authSchemes": [
                     {
-                      "name": "v4a",
-                      "signingScope": "events",
-                      "signingRegions": "*"
+                      "name": "sigv4a",
+                      "signingName": "events",
+                      "signingRegionSet": [
+                        "*"
+                      ]
                     }
                   ]
                 }
@@ -121,9 +123,11 @@
                 "properties": {
                   "authSchemes": [
                     {
-                      "name": "v4a",
-                      "signingScope": "events",
-                      "signingRegions": "*"
+                      "name": "sigv4a",
+                      "signingName": "events",
+                      "signingRegionSet": [
+                        "*"
+                      ]
                     }
                   ]
                 }
@@ -184,9 +188,11 @@
                 "properties": {
                   "authSchemes": [
                     {
-                      "name": "v4a",
-                      "signingScope": "events",
-                      "signingRegions": "*"
+                      "name": "sigv4a",
+                      "signingName": "events",
+                      "signingRegionSet": [
+                        "*"
+                      ]
                     }
                   ]
                 }
@@ -231,9 +237,11 @@
                 "properties": {
                   "authSchemes": [
                     {
-                      "name": "v4a",
-                      "signingScope": "events",
-                      "signingRegions": "*"
+                      "name": "sigv4a",
+                      "signingName": "events",
+                      "signingRegionSet": [
+                        "*"
+                      ]
                     }
                   ]
                 }
@@ -282,9 +290,11 @@
                 "properties": {
                   "authSchemes": [
                     {
-                      "name": "v4a",
-                      "signingScope": "events",
-                      "signingRegions": "*"
+                      "name": "sigv4a",
+                      "signingName": "events",
+                      "signingRegionSet": [
+                        "*"
+                      ]
                     }
                   ]
                 }

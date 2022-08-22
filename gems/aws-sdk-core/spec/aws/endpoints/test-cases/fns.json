@@ -7,14 +7,16 @@
         "Arn": "arn:aws:s3:us-east-2:012345678:outpost:op-1234"
       },
       "expect": {
-        "url": "https://www.example.com",
-        "headers": {
-          "x-uri": [
-            "https://www.example.com"
-          ],
-          "x-arn-region": [
-            "us-east-2"
-          ]
+        "endpoint": {
+          "url": "https://www.example.com",
+          "headers": {
+            "x-uri": [
+              "https://www.example.com"
+            ],
+            "x-arn-region": [
+              "us-east-2"
+            ]
+          }
         }
       }
     },
@@ -44,5 +46,5 @@
       }
     }
   ],
-  "version": "1.3"
+  "version": "1.4"
 }

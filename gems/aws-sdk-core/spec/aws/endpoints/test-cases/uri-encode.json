@@ -45,7 +45,7 @@
       "documentation": "uriEncode encodes unicode characters",
       "params": {
         "TestCaseId": "1",
-        "Input": "😹"
+        "Input": "\ud83d\ude39"
       },
       "expect": {
         "error": "The value is: `%F0%9F%98%B9`"
@@ -72,5 +72,5 @@
       }
     }
   ],
-  "version": "1.2"
+  "version": "1.4"
 }

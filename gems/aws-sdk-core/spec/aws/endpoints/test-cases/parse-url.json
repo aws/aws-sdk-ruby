@@ -1,6 +1,6 @@
 {
   "service": "parse-url",
-  "version": "1.1",
+  "version": "1.4",
   "testCases": [
     {
       "documentation": "simple URL parsing",
@@ -8,7 +8,9 @@
         "Endpoint": "https://authority.com/custom-path"
       },
       "expect": {
-        "url": "https://https-authority.com.example.com/path-is/custom-path"
+        "endpoint": {
+          "url": "https://https-authority.com.example.com/path-is/custom-path"
+        }
       }
     },
     {
@@ -17,7 +19,9 @@
         "Endpoint": "https://authority.com"
       },
       "expect": {
-        "url": "https://https-authority.com-nopath.example.com"
+        "endpoint": {
+          "url": "https://https-authority.com-nopath.example.com"
+        }
       }
     },
     {
@@ -26,7 +30,9 @@
         "Endpoint": "https://authority.com/"
       },
       "expect": {
-        "url": "https://https-authority.com-nopath.example.com"
+        "endpoint": {
+          "url": "https://https-authority.com-nopath.example.com"
+        }
       }
     },
     {
@@ -35,7 +41,9 @@
         "Endpoint": "https://authority.com:8000/port"
       },
       "expect": {
-        "url": "https://authority.com:8000/uri-with-port"
+        "endpoint": {
+          "url": "https://authority.com:8000/uri-with-port"
+        }
       }
     },
     {
@@ -44,7 +52,9 @@
         "Endpoint": "http://authority.com:8000/port"
       },
       "expect": {
-        "url": "http://authority.com:8000/uri-with-port"
+        "endpoint": {
+          "url": "http://authority.com:8000/uri-with-port"
+        }
       }
     },
     {
@@ -62,7 +72,9 @@
         "Endpoint": "http://99_ab.com"
       },
       "expect": {
-        "url": "https://http-99_ab.com-nopath.example.com"
+        "endpoint": {
+          "url": "https://http-99_ab.com-nopath.example.com"
+        }
       }
     },
     {
@@ -71,7 +83,9 @@
         "Endpoint": "http://99_ab-.com"
       },
       "expect": {
-        "url": "https://http-99_ab-.com-nopath.example.com"
+        "endpoint": {
+          "url": "https://http-99_ab-.com-nopath.example.com"
+        }
       }
     },
     {
@@ -89,7 +103,9 @@
         "Endpoint": "http://192.168.1.1/foo/"
       },
       "expect": {
-        "url": "http://192.168.1.1/foo/is-ip-addr"
+        "endpoint": {
+          "url": "http://192.168.1.1/foo/is-ip-addr"
+        }
       }
     },
     {
@@ -98,7 +114,9 @@
         "Endpoint": "http://192.168.1.1:1234/foo/"
       },
       "expect": {
-        "url": "http://192.168.1.1:1234/foo/is-ip-addr"
+        "endpoint": {
+          "url": "http://192.168.1.1:1234/foo/is-ip-addr"
+        }
       }
     },
     {
@@ -107,7 +125,9 @@
         "Endpoint": "https://[2001:db8:85a3:8d3:1319:8a2e:370:7348]:443"
       },
       "expect": {
-        "url": "https://[2001:db8:85a3:8d3:1319:8a2e:370:7348]:443/is-ip-addr"
+        "endpoint": {
+          "url": "https://[2001:db8:85a3:8d3:1319:8a2e:370:7348]:443/is-ip-addr"
+        }
       }
     },
     {
@@ -116,7 +136,9 @@
         "Endpoint": "https://999.999.abc.blah"
       },
       "expect": {
-        "url": "https://https-999.999.abc.blah-nopath.example.com"
+        "endpoint": {
+          "url": "https://https-999.999.abc.blah-nopath.example.com"
+        }
       }
     },
     {

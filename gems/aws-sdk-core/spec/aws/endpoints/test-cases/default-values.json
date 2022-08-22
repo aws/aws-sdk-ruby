@@ -3,10 +3,11 @@
   "testCases": [
     {
       "documentation": "default endpoint",
-      "params": {
-      },
+      "params": {},
       "expect": {
-        "url": "https://fips.us-west-5.amazonaws.com"
+        "endpoint": {
+          "url": "https://fips.us-west-5.amazonaws.com"
+        }
       }
     },
     {
@@ -24,7 +25,9 @@
         "UseFips": true
       },
       "expect": {
-        "url": "https://fips.us-west-5.amazonaws.com"
+        "endpoint": {
+          "url": "https://fips.us-west-5.amazonaws.com"
+        }
       }
     },
     {
@@ -33,9 +36,11 @@
         "Region": "us-east-1"
       },
       "expect": {
-        "url": "https://fips.us-east-1.amazonaws.com"
+        "endpoint": {
+          "url": "https://fips.us-east-1.amazonaws.com"
+        }
       }
     }
   ],
-  "version": "1.1"
+  "version": "1.4"
 }

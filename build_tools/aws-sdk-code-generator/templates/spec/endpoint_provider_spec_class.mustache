@@ -23,9 +23,9 @@ module {{module_name}}
       {{/expect_error?}}
       {{^expect_error?}}
       endpoint = subject.resolve_endpoint(params)
-      expect(endpoint.url).to eq(expect['url'])
-      expect(endpoint.headers).to eq(expect['headers'])
-      expect(endpoint.properties).to eq(expect['properties'])
+      expect(endpoint.url).to eq(expect['endpoint']['url'])
+      expect(endpoint.headers).to eq(expect['endpoint']['headers'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
       {{/expect_error?}}
     end
 

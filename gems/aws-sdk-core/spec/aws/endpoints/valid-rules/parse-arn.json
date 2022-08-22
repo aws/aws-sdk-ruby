@@ -7,9 +7,110 @@
     },
     "Bucket": {
       "type": "string"
+    },
+    "TestCaseId": {
+      "type": "string"
     }
   },
   "rules": [
+    {
+      "documentation": "tests of invalid arns",
+      "conditions": [
+        {
+          "fn": "isSet",
+          "argv": [
+            {
+              "ref": "TestCaseId"
+            }
+          ]
+        },
+        {
+          "fn": "isSet",
+          "argv": [
+            {
+              "ref": "Bucket"
+            }
+          ]
+        },
+        {
+          "fn": "stringEquals",
+          "argv": [
+            "{TestCaseId}",
+            "invalid-arn"
+          ]
+        }
+      ],
+      "type": "tree",
+      "rules": [
+        {
+          "conditions": [
+            {
+              "fn": "aws.parseArn",
+              "argv": ["{Bucket}"]
+            }
+          ],
+          "type": "error",
+          "error": "A valid ARN was parsed but `{Bucket}` is not a valid ARN"
+        },
+        {
+          "conditions": [],
+          "type": "error",
+          "error": "Test case passed: `{Bucket}` is not a valid ARN."
+        }
+      ]
+    },
+    {
+      "documentation": "tests of valid arns",
+      "conditions": [
+        {
+          "fn": "isSet",
+          "argv": [
+            {
+              "ref": "TestCaseId"
+            }
+          ]
+        },
+        {
+          "fn": "isSet",
+          "argv": [
+            {
+              "ref": "Bucket"
+            }
+          ]
+        },
+        {
+          "fn": "stringEquals",
+          "argv": [
+            "{TestCaseId}",
+            "valid-arn"
+          ]
+        }
+      ],
+      "type": "tree",
+      "rules": [
+        {
+          "conditions": [
+            {
+              "fn": "aws.parseArn",
+              "argv": ["{Bucket}"],
+              "assign": "arn"
+            },
+            {
+              "fn": "getAttr",
+              "argv": [{"ref": "arn"}, "resourceId[0]"],
+              "assign": "resource"
+            }
+          ],
+          "type": "error",
+          "error": "Test case passed: A valid ARN was parsed: service: `{arn#service}`, partition: `{arn#partition}, region: `{arn#region}`, accountId: `{arn#accountId}`, resource: `{resource}`"
+        },
+        {
+          "conditions": [],
+          "type": "error",
+          "error": "Test case failed: `{Bucket}` is a valid ARN but parseArn failed to parse it."
+        }
+      ]
+    },
     {
       "documentation": "region is set",
       "conditions": [
