@@ -4,13 +4,13 @@ require 'thread'
 
 module Aws
 
-  # Base class used token provider classes that can be refreshed. This
+  # Module/mixin used by token provider classes that can be refreshed. This
   # provides basic refresh logic in a thread-safe manner. Classes mixing in
   # this module are expected to implement a #refresh method that populates
-  # the following instance variables:
+  # the following instance variable:
   #
-  # * `@token`
-  # * `@expiration`
+  # * `@token` [Token] - {Aws::Token} object with the `expiration` and `token`
+  #       fields set.
   #
   # @api private
   module RefreshingToken
@@ -40,7 +40,6 @@ module Aws
     def refresh!
       @mutex.synchronize do
         @before_refresh.call(self) if @before_refresh
-
         refresh
       end
     end
@@ -54,7 +53,6 @@ module Aws
         @mutex.synchronize do
           if near_expiration?
             @before_refresh.call(self) if @before_refresh
-
             refresh
           end
         end
@@ -62,13 +60,12 @@ module Aws
     end
 
     def near_expiration?
-      if @expiration
+      if @token && @token.expiration
         # are we within 5 minutes of expiration?
-        (Time.now.to_i + 5 * 60) > @expiration.to_i
+        (Time.now.to_i + 5 * 60) > @token.expiration.to_i
       else
         true
       end
     end
-
   end
 end

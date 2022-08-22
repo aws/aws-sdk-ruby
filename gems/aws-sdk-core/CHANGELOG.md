@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add support for Bearer Token Authentication and TokenProviders.
+
 3.133.0 (2022-08-22)
 ------------------
 

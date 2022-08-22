@@ -2,9 +2,6 @@
 
 require_relative '../spec_helper'
 
-# TODO: Determine strategy for depending on the ssooidc gem.
-require_relative '../../../aws-sdk-ssooidc/lib/aws-sdk-ssooidc'
-
 module Aws
   describe SSOTokenProvider do
 
@@ -172,8 +169,8 @@ module Aws
         it 'returns the token' do
           mock_token_file(sso_session, cached_token)
           provider = SSOTokenProvider.new(sso_opts)
-          expect(provider.token).to eq('cachedtoken')
-          expect(provider.expiration).to eq(Time.parse('2021-12-25T21:30:00Z'))
+          expect(provider.token.token).to eq('cachedtoken')
+          expect(provider.token.expiration).to eq(Time.parse('2021-12-25T21:30:00Z'))
         end
       end
 
@@ -190,8 +187,8 @@ module Aws
         it 'returns the token' do
           mock_token_file(sso_session, cached_token)
           provider = SSOTokenProvider.new(sso_opts)
-          expect(provider.token).to eq('cachedtoken')
-          expect(provider.expiration).to eq(Time.parse('2021-12-25T21:30:00Z'))
+          expect(provider.token.token).to eq('cachedtoken')
+          expect(provider.token.expiration).to eq(Time.parse('2021-12-25T21:30:00Z'))
         end
       end
 
@@ -296,8 +293,8 @@ module Aws
 
           provider = SSOTokenProvider.new(sso_opts)
 
-          expect(provider.token).to eq('newtoken')
-          expect(provider.expiration).to eq(Time.parse('2021-12-25T21:30:00Z'))
+          expect(provider.token.token).to eq('newtoken')
+          expect(provider.token.expiration).to eq(Time.parse('2021-12-25T21:30:00Z'))
         end
       end
 
@@ -345,8 +342,8 @@ module Aws
 
           provider = SSOTokenProvider.new(sso_opts)
 
-          expect(provider.token).to eq('newtoken')
-          expect(provider.expiration).to eq(Time.parse('2021-12-25T21:30:00Z'))
+          expect(provider.token.token).to eq('newtoken')
+          expect(provider.token.expiration).to eq(Time.parse('2021-12-25T21:30:00Z'))
         end
       end
 

@@ -51,14 +51,13 @@ module Aws
 
     def refresh
       # token is valid and not in refresh window - do not refresh it.
-      return if @token && @expiration && !near_expiration?
+      return if @token && @token.expiration && !near_expiration?
 
       # token may not exist or is out of the expiration window
       # attempt to refresh from disk first (another process/application may have refreshed already)
       token_json = read_cached_token
-      @token = token_json['accessToken']
-      @expiration = token_json['expiresAt']
-      return if @token && @expiration && !near_expiration?
+      @token = Token.new(token_json['accessToken'], token_json['expiresAt'])
+      return if @token && @token.expiration && !near_expiration?
 
       # The token is expired and needs to be refreshed
       if can_refresh_token?(token_json)
@@ -70,8 +69,10 @@ module Aws
             client_secret: token_json['client_secret'],
             refresh_token: token_json['refreshToken']
           )
-          @token = token_json['accessToken'] = resp.access_token
-          @expiration = token_json['expiresAt'] = current_time + resp.expires_in
+          token_json['accessToken'] = resp.access_token
+          token_json['expiresAt'] = current_time + resp.expires_in
+          @token = Token.new(token_json['accessToken'], token_json['expiresAt'])
+
           if resp.refresh_token
             token_json['refreshToken'] = resp.refresh_token
           else
@@ -84,7 +85,7 @@ module Aws
         end
       end
 
-      if !@expiration || @expiration < Time.now
+      if !@token.expiration || @token.expiration < Time.now
         # Token is hard expired, raise an exception
         raise Errors::InvalidSSOToken, 'Token is invalid and failed to refresh.'
       end

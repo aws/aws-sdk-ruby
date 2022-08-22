@@ -10,7 +10,7 @@ module Aws
              required: false,
              doc_type: 'Aws::TokenProvider',
              docstring: <<-DOCS
-Your Bearer Token Provider. This can be an instance of any one of the
+A Bearer Token Provider. This can be an instance of any one of the
 following classes:
 
 * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
