@@ -4,6 +4,9 @@ module Aws
   # @api private
   class SharedConfig
     SSO_PROFILE_KEYS = %w[sso_start_url sso_region sso_account_id sso_role_name].freeze
+    SSO_TOKEN_PROFILE_KEYS = %w[sso_session].freeze
+    SSO_SESSION_KEYS = %w[sso_region]
+
 
     # @return [String]
     attr_reader :credentials_path
@@ -149,6 +152,18 @@ module Aws
         credentials ||= sso_credentials_from_profile(@parsed_config, p)
       end
       credentials
+    end
+
+    # Attempts to load from shared config or shared credentials file.
+    # Will always attempt first to load from the shared credentials
+    # file, if present.
+    def sso_token_from_config(opts = {})
+      p = opts[:profile] || @profile_name
+      token = sso_token_from_profile(@parsed_credentials, p)
+      if @parsed_config
+        token ||= sso_token_from_profile(@parsed_config, p)
+      end
+      token
     end
 
     # Add an accessor method (similar to attr_reader) to return a configuration value
@@ -323,6 +338,32 @@ module Aws
           sso_region: prof_config['sso_region'],
           sso_account_id: prof_config['sso_account_id'],
           sso_role_name: prof_config['sso_role_name']
+        )
+      end
+    end
+
+    # If the required sso_ profile values are present, attempt to construct
+    # SSOTokenProvider
+    def sso_token_from_profile(cfg, profile)
+      if @parsed_config &&
+        (prof_config = cfg[profile]) &&
+        !(prof_config.keys & SSO_TOKEN_PROFILE_KEYS).empty?
+
+        sso_session_name = prof_config['sso_session']
+        sso_session = cfg["sso-session #{sso_session_name}"]
+        unless sso_session
+          raise ArgumentError,
+                "sso-session #{sso_session_name} must be defined in the config file." /
+                  "Referenced by profile #{profile}"
+        end
+
+        unless sso_session['sso_region']
+          raise ArgumentError, "sso-session #{sso_session_name} missing required parameter: sso_region"
+        end
+
+        SSOTokenProvider.new(
+          sso_session: sso_session_name,
+          sso_region: sso_session['sso_region']
         )
       end
     end

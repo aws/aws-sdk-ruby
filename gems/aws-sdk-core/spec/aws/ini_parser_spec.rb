@@ -26,6 +26,9 @@ s3 =
 
 [profile third]
 region = sa-east-1
+
+[sso-session dev]
+sso_region = us-east-1
       FILE
     }
 
@@ -46,5 +49,8 @@ region = sa-east-1
       expect(parsed['other']['s3']['region']).to eq("ap-southeast-1")
     end
 
+    it 'can parse sso-session sections' do
+      parsed = IniParser.ini_parse(mock_config)
+      expect(parsed['sso-session dev']['sso_region']).to eq('us-east-1')    end
   end
 end

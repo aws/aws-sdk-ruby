@@ -20,6 +20,15 @@ require_relative 'aws-sdk-core/shared_credentials'
 require_relative 'aws-sdk-core/process_credentials'
 require_relative 'aws-sdk-core/sso_credentials'
 
+# tokens and token providers
+require_relative 'aws-sdk-core/token'
+require_relative 'aws-sdk-core/token_provider'
+require_relative 'aws-sdk-core/static_token_provider'
+require_relative 'aws-sdk-core/refreshing_token'
+require_relative 'aws-sdk-core/sso_token_provider'
+require_relative 'aws-sdk-core/token_provider_chain'
+require_relative 'aws-sdk-core/plugins/bearer_authorization'
+
 # client modules
 
 require_relative 'aws-sdk-core/client_stubs'
