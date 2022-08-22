@@ -3,8 +3,8 @@ Unreleased Changes
 
 1.21.0 (2022-08-22)
 ------------------
-* Feature - `aws-sdk-ssooidc` has been moved into `aws-sdk-core`.
 
+* Feature - Move the `aws-sdk-ssooidc` gem into `aws-sdk-core`.
 
 1.20.0 (2022-08-08)
 ------------------
