@@ -31,7 +31,7 @@ request URI and never moved to the host as a sub-domain.
         class Handler < Seahorse::Client::Handler
 
           def call(context)
-            move_dns_compat_bucket_to_subdomain(context)
+            # move_dns_compat_bucket_to_subdomain(context)
             @handler.call(context)
           end
 

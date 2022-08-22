@@ -23,7 +23,7 @@ module Aws::S3
       end
 
       option(
-        :accelerate,
+        :use_accelerate_endpoint,
         doc_type: 'Boolean',
         docstring: "Enables the usage of the S3 Transfer Acceleration endpoints.")
 
@@ -42,7 +42,13 @@ module Aws::S3
         def call(context)
           params = parameters_for_operation(context)
           endpoint = context.config.endpoint_provider.resolve_endpoint(params)
-          context[:endpoint] = endpoint
+
+          context.http_request.endpoint = endpoint.url
+          endpoint.headers.each do |key, val|
+            context.http_request.headers[key] = val.join(',')
+          end
+          context[:auth_schemes] = endpoint.properties['authSchemes']
+
           @handler.call(context)
         end
 

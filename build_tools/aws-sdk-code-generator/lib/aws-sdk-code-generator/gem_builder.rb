@@ -70,7 +70,7 @@ module AwsSdkCodeGenerator
     end
 
     def endpoint_provider_spec_file
-      Views::Spec::EndpointProviderSpec.new(options).render
+      Views::Spec::EndpointProviderSpecClass.new(options).render
     end
 
     def version_file

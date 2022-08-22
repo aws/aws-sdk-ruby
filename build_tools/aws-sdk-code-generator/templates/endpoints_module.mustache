@@ -12,7 +12,7 @@ module {{module_name}}
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         {{module_name}}::EndpointParameters.new(
           {{#parameters}}

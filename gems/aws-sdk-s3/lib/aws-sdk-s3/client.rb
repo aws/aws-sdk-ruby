@@ -368,10 +368,8 @@ module Aws::S3
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
     #
-    #   @option options [Boolean] :use_accelerate_endpoint (false)
-    #     When set to `true`, accelerated bucket endpoints will be used
-    #     for all object operations. You must first enable accelerate for
-    #     each bucket. [Go here for more information](http://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html).
+    #   @option options [Boolean] :use_accelerate_endpoint
+    #     Enables the usage of the S3 Transfer Acceleration endpoints.
     #
     #   @option options [Boolean] :use_dualstack_endpoint
     #     When set to `true`, dualstack enabled endpoints (with `.aws` TLD)
@@ -385,9 +383,6 @@ module Aws::S3
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
-    #
-    #   @option options [Boolean] :accelerate
-    #     Enables the usage of the S3 Transfer Acceleration endpoints.
     #
     #   @option options [Aws::S3::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::S3::EndpointParameters`

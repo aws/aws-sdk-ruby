@@ -13,7 +13,7 @@ module AwsSdkCodeGenerator
           |(name, op), array|
           array << EndpointClass.new(
             name: name,
-            parameters: endpoint_parameters_for_operation_v2(op)
+            parameters: endpoint_parameters_for_operation(op)
           )
         end
       end
@@ -60,7 +60,7 @@ module AwsSdkCodeGenerator
 
       private
 
-      def endpoint_parameters_for_operation_v2(operation)
+      def endpoint_parameters_for_operation(operation)
         @parameters.each.with_object([]) do
           |(param_name, param_data), endpoint_parameters|
           endpoint_parameters << EndpointParameter.new(
@@ -90,11 +90,21 @@ module AwsSdkCodeGenerator
         when 'AWS::UseFIPS'
           'context.config.use_fips_endpoint'
         when 'AWS::UseDualStack'
-          'context.config.use_dualstack_endpoint'
+          if @service.name == 'S3' || @service.name == 'S3Control'
+            'context[:use_dualstack_endpoint]'
+          else
+            'context.config.use_dualstack_endpoint'
+          end
         when 'AWS::STS::UseGlobalEndpoint'
           "context.config.sts_regional_endpoints == 'legacy'"
         when 'AWS::S3::UseGlobalEndpoint'
           "context.config.s3_us_east_1_regional_endpoint == 'legacy'"
+        when 'AWS::S3::Accelerate'
+          if @service.name == 'S3' || @service.name == 'S3Control'
+            'context[:use_accelerate_endpoint]'
+          else
+            'context.config.use_accelerate_endpoint'
+          end
         when 'AWS::S3::ForcePathStyle'
           'context.config.force_path_style'
         when 'AWS::S3::UseArnRegion'

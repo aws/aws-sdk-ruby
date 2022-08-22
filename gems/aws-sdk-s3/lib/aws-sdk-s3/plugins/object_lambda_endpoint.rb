@@ -18,7 +18,7 @@ module Aws
           end
         end
 
-        handler(Handler, operations: [:write_get_object_response])
+        # handler(Handler, operations: [:write_get_object_response])
       end
     end
   end

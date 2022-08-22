@@ -156,6 +156,17 @@ module BuildTools
 
     api('S3') do |api|
       api['metadata'].delete('signatureVersion')
+
+      # handled by endpoints 2.0
+      api['operations'].each do |_key, operation|
+        if operation['http'] && operation['http']['requestUri']
+          operation['http']['requestUri'].gsub!('/{Bucket}', '')
+          if operation['http']['requestUri'].empty?
+            operation['http']['requestUri'] = '/'
+          end
+        end
+      end
+
       api['shapes']['ExpiresString'] = { 'type' => 'string' }
       %w(HeadObjectOutput GetObjectOutput).each do |shape|
         members = api['shapes'][shape]['members']
@@ -170,6 +181,18 @@ module BuildTools
             }
           end
           h
+        end
+      end
+    end
+
+    api('S3Control') do |api|
+      # handled by endpoints 2.0
+      api['operations'].each do |_key, operation|
+        if operation['http'] && operation['http']['requestUri']
+          operation['http']['requestUri'].gsub!('/{Bucket}', '')
+          if operation['http']['requestUri'].empty?
+            operation['http']['requestUri'] = '/'
+          end
         end
       end
     end

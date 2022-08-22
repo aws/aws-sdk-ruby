@@ -3,7 +3,7 @@
 module AwsSdkCodeGenerator
   module Views
     module Spec
-      class EndpointProviderSpec < View
+      class EndpointProviderSpecClass < View
 
         # @param [Hash] options
         # @option options [required, Service] :service
@@ -69,19 +69,3 @@ module AwsSdkCodeGenerator
     end
   end
 end
-
-# {
-#     "documentation": "S3 Outposts Snow Accelerate enabled",
-#     "params": {
-#         "Region": "snow",
-#         "UseFIPS": false,
-#         "UseDualStack": false,
-#         "Bucket": "bucketName",
-#         "SnowEndpointUrl": "https://10.0.1.12:433",
-#         "Accelerate": true
-#     },
-#     "expect": {
-#         "error": "S3 Snow does not support S3 Accelerate"
-#     },
-#     "operationInputs": []
-# },

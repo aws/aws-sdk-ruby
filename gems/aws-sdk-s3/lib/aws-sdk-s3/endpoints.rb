@@ -15,16 +15,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -37,16 +37,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -59,16 +59,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -81,16 +81,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: true,
           disable_mrap: nil,
@@ -103,16 +103,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -125,16 +125,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -147,16 +147,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -169,16 +169,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -191,16 +191,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -213,16 +213,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -235,16 +235,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -257,16 +257,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -279,16 +279,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -301,16 +301,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -323,16 +323,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -345,16 +345,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -367,16 +367,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -389,16 +389,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -411,16 +411,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -433,16 +433,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -455,16 +455,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -477,16 +477,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -499,16 +499,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -521,16 +521,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -543,16 +543,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -565,16 +565,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -587,16 +587,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -609,16 +609,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -631,16 +631,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -653,16 +653,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -675,16 +675,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -697,16 +697,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -719,16 +719,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -741,16 +741,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -763,16 +763,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -785,16 +785,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -807,16 +807,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -829,16 +829,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -851,16 +851,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -873,16 +873,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -895,16 +895,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -917,16 +917,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -939,16 +939,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -961,16 +961,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -983,16 +983,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1005,16 +1005,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1027,16 +1027,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1049,16 +1049,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1071,16 +1071,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1093,16 +1093,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1115,16 +1115,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1137,16 +1137,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1159,16 +1159,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1181,16 +1181,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1203,16 +1203,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1225,16 +1225,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1247,16 +1247,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1269,16 +1269,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: nil,
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1291,16 +1291,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1313,16 +1313,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: nil,
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1335,16 +1335,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1357,16 +1357,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1379,16 +1379,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1401,16 +1401,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1423,16 +1423,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1445,16 +1445,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1467,16 +1467,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1489,16 +1489,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: nil,
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1511,16 +1511,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1533,16 +1533,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1555,16 +1555,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1577,16 +1577,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1599,16 +1599,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1621,16 +1621,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1643,16 +1643,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1665,16 +1665,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1687,16 +1687,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1709,16 +1709,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1731,16 +1731,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1753,16 +1753,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1775,16 +1775,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1797,16 +1797,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1819,16 +1819,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1841,16 +1841,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1863,16 +1863,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1885,16 +1885,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1907,16 +1907,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1929,16 +1929,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1951,16 +1951,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1973,16 +1973,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -1995,16 +1995,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -2017,16 +2017,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -2039,16 +2039,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -2061,16 +2061,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -2083,16 +2083,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -2105,16 +2105,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,
@@ -2127,16 +2127,16 @@ module Aws::S3
       def self.build(context)
         # TODO: remove this hack
         unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.host
+          endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
           bucket: nil,
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           force_path_style: context.config.force_path_style,
-          accelerate: nil,
+          accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
           disable_access_points: nil,
           disable_mrap: nil,

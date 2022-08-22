@@ -7,10 +7,14 @@ module AwsSdkCodeGenerator
       def initialize(options)
         @service = options.fetch(:service)
         if (client_options = @service.api['clientContextParams'])
+          endpoint_parameters = @service.endpoint_rules.fetch('parameters', {})
+
           @endpoint_options = client_options.each.with_object([]) do
             |(name, data), array|
+            param_data = endpoint_parameters[name]
+
             array << EndpointOption.new(
-              name: Underscore.underscore(name),
+              name: endpoint_parameter_config_name(name, param_data),
               docstring: data['documentation'],
               doc_type: data['type'].capitalize
             )
@@ -39,6 +43,32 @@ module AwsSdkCodeGenerator
 
       def module_name
         @service.module_name
+      end
+
+      # Preserve existing configuration names
+      def endpoint_parameter_config_name(name, param_data)
+        case param_data['builtIn']
+        when 'AWS::Region'
+          'region'
+        when 'AWS::UseFIPS'
+          'use_fips_endpoint'
+        when 'AWS::UseDualStack'
+          'use_dualstack_endpoint'
+        when 'AWS::STS::UseGlobalEndpoint'
+          'sts_regional_endpoints'
+        when 'AWS::S3::UseGlobalEndpoint'
+          's3_us_east_1_regional_endpoint'
+        when 'AWS::S3::Accelerate'
+          'use_accelerate_endpoint'
+        when 'AWS::S3::ForcePathStyle'
+          'force_path_style'
+        when 'AWS::S3::UseArnRegion'
+          's3_use_arn_region'
+        when 'SDK::Endpoint'
+          'endpoint'
+        else
+          Underscore.underscore(name)
+        end
       end
 
       class EndpointClass

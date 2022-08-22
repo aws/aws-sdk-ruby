@@ -19,7 +19,7 @@ Defaults to `legacy` mode which uses the global endpoint.
         def add_handlers(handlers, config)
           # only modify non-custom endpoints
           if config.regional_endpoint && config.region == 'us-east-1'
-            handlers.add(Handler)
+            # handlers.add(Handler)
           end
         end
 
