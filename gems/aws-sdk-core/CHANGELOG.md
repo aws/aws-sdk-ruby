@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Validate that `_X_AMZN_TRACE_ID` ENV value contains only valid, non-control characters.
+
 3.133.0 (2022-08-22)
 ------------------
 

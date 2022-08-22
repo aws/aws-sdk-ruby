@@ -87,6 +87,16 @@ module Aws
           resp = client.operation_with_trace_id(trace_id: user_trace_id)
           expect(resp.context.http_request.headers['x-amzn-trace-id']).to eq(user_trace_id)
         end
+
+        context 'X_AMX_TRACE_ID with invalid characters' do
+          let(:env_trace_id) { "invalid header" + 31.chr }
+
+          it 'validates the trace-id and raises an error' do
+            expect do
+              client.operation_with_trace_id
+            end.to raise_error(ArgumentError)
+          end
+        end
       end
     end
   end
