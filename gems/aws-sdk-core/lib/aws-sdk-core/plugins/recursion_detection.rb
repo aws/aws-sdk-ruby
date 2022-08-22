@@ -24,6 +24,7 @@ module Aws
             raise ArgumentError, 'Invalid _X_AMZN_TRACE_ID value: '\
               'contains ASCII control characters'
           end
+          header_value
         end
       end
 
