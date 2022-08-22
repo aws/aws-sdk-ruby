@@ -21,7 +21,7 @@ require_relative 'aws-sdk-ssooidc/resource'
 require_relative 'aws-sdk-ssooidc/customizations'
 
 # This module provides support for AWS SSO OIDC. This module is available in the
-# `aws-sdk-ssooidc` gem.
+# `aws-sdk-core` gem.
 #
 # # Client
 #
@@ -50,6 +50,6 @@ require_relative 'aws-sdk-ssooidc/customizations'
 # @!group service
 module Aws::SSOOIDC
 
-  GEM_VERSION = '1.20.0'
+  GEM_VERSION = '3.132.0'
 
 end
